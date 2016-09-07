@@ -31,7 +31,8 @@ from table2freq import table2freq
 """ An example/template  of settings for a lab and a model"""
 cnrm_lab_and_model_settings={
     'institution_id': "CNRM",
-    'institution'   : "Centre National de Recherches Meteorologiques", # should be read in CMIP6_CV, once updated
+    # TBD : institution should be read in CMIP6_CV, once updated
+    'institution'   : "Centre National de Recherches Meteorologiques", 
     'model_id'      : "CNRM-CM6", 
     'model'         : "CNRM CM6",#Should be read in CMIP6_CV, form model_id (once updated)
     'source_type'   : 'AOGCM', # This should be udpated at the simulation dict level 
@@ -58,9 +59,10 @@ cnrm_lab_and_model_settings={
     "excluded_vars":[],
     
     # Each XIOS  context does adress a number of realms
-    'realms_per_context' : { 'nemo': ['seaIce', 'ocean', 'ocean seaIce', 'ocnBgchem', 'seaIce ocean'] ,
-                          'arpsfx' : ['atmos', 'atmos atmosChem', 'aerosol', 'atmos land', 'land',
-                                     'landIce land',  'aerosol land','land landIce',  'landIce', ],
+    'realms_per_context' : { 
+        'nemo': ['seaIce', 'ocean', 'ocean seaIce', 'ocnBgchem', 'seaIce ocean'] ,
+        'arpsfx' : ['atmos', 'atmos atmosChem', 'aerosol', 'atmos land', 'land',
+                    'landIce land',  'aerosol land','land landIce',  'landIce', ],
                           }, 
     # Some variables, while belonging to a realm, may fall in another XIOS context than the 
     # context which hanldes that realm
@@ -90,17 +92,22 @@ historical_simulation_settings={
     #'source_type'    : "ESM" # If source_type is special only for this experiment (e.g. : AMIP)
                       #(i.e. not the same as in lan_and_model settings), you may tell that here
 
-    # MIP specifying the experiment. For historical, it is CMIP6 itself
-    # In a few cases it may be appropriate to include multiple activities in the activity_id 
-    # (with multiple activities allowed, separated by single spaces).  
-    # An example of this is 'LUMIP AerChemMIP' for one of the land-use change experiments.
+    # MIP specifying the experiment. For historical, it is CMIP6
+    # itself In a few cases it may be appropriate to include multiple
+    # activities in the activity_id (with multiple activities allowed,
+    # separated by single spaces).  An example of this is 'LUMIP
+    # AerChemMIP' for one of the land-use change experiments.
     "activity"             : "CMIP6", # examples : "PMIP", 'LS3MIP LUMIP'; defaults to "CMIP6"
     
-    # It is recommended that some description be included to help identify major differences among variants, 
-    # but care should be taken to record correct information.  Prudence dictates that this attribute includes 
-    # a warning along the following lines:  'Information provided by this attribute may in some cases be flawed.#
-    # Users can find more comprehensive and up-to-date documentation via the further_info_url global attribute.'
-    "variant_info"      : "Start date chosen so that variant r1i1p1f1 has the better fit with Krakatoa impact on tos",
+    # It is recommended that some description be included to help
+    # identify major differences among variants, but care should be
+    # taken to record correct information.  Prudence dictates that
+    # this attribute includes a warning along the following lines:
+    # 'Information provided by this attribute may in some cases be
+    # flawed.# Users can find more comprehensive and up-to-date
+    # documentation via the further_info_url global attribute.'
+    "variant_info"      : "Start date chosen so that variant r1i1p1f1 has "+\
+                          "the better fit with Krakatoa impact on tos",
     #
     "realization_index"    : 1, # Value may be omitted if = 1
     "initialization_index" : 1, # Value may be omitted if = 1
@@ -108,22 +115,25 @@ historical_simulation_settings={
     "forcing_index"        : 1, # Value may be omitted if = 1
     #
     # All about the parent experiment and branching scheme
-    "parent_experiment_id" : "piControl", # omit this setting (or set to 'no parent') if not applicable
+    "parent_experiment_id" : "piControl", # omit or set to 'no parent' if not applicable
                                           # (remaining parent attributes will be disregarded)
-    "branch_method"        : "standard", # default value='standard', meaning ~ "select a start date" 
+    "branch_method"        : "standard", # default value='standard' meaning 
+                                         #~ "select a start date" 
     "branch_time_in_parent": "365.0D0", # a double precision value, in parent time units, 
     "branch_time_in_child" : "0.0D0", # a double precision value, in child time units, 
     #'parent_time_units'    : "" #in case it is not the same as child time units
     #'parent_variant_label' :""  #Default to 'same as child'. Other cases should be expceptional
     #'parent_sub_experiment_id' : "" # In case it is not the same as child
-    #"parent_mip_era"       : 'CMIP5'   # only in special cases (e.g. PMIP warm start from CMIP5/PMIP3 experiment)
+    #"parent_mip_era"       : 'CMIP5'   # only in special cases (as e.g. PMIP warm 
+                                        #start from CMIP5/PMIP3 experiment)
     #'parent_activity   '   : 'CMIP'    # only in special cases, defaults to CMIP
-    #'parent_source_id'     : 'CNRM-CM5.1' #only in special cases, where parent model is not the same model
+    #'parent_source_id'     : 'CNRM-CM5.1' # only in special cases, where parent model 
+                                           # is not the same model
     #
     "sub_experiment_id"    : "none", # Optional, default is 'none'; example : s1960. 
     "sub_experiment"       : "none", # Optional, default in 'none'
     #'parent_subexperiment_id': '' # unusual
-    "history"              : "", #Used when a simulation is re-run, an output file is modified ....
+    "history"              : "", #Used when a simulation is re-run, an output file is modified ...
     # A per-variable dict of comments which are specific to this simulation. It will replace  
     # the all-simulation comment
     'comments'     : {
@@ -181,14 +191,17 @@ def RequestItem_applies_for_exp_and_year(dq,ri,experiment,year,debug=False):
 
 def select_CMORvars_for_lab(dq,lset, experiment_id=None, year=None, printout=False):
     """
-    A function to list CMOR variables relevant for a lab (and also, optionnally for an experiment and a year)
+    A function to list CMOR variables relevant for a lab (and also, optionnally for 
+    an experiment and a year)
     
     Args:
       dq : dreqQuery object
       lset (dict): laboratory settings; used to provide the list of MIPS, the max 
                    Tier, and a list of excluded variable names
-      experiment_id (string,optional): if willing to filter on a given experiment - not used if year is None
-      year (int,optional) : simulation year - used to filter the request for an experiment and a year
+      experiment_id (string,optional): if willing to filter on a given experiment - not 
+                   used if year is None
+      year (int,optional) : simulation year - used to filter the request for an 
+                   experiment and a year
     
     Returns:
       A list of CMOR variables DR uids
@@ -200,7 +213,8 @@ def select_CMORvars_for_lab(dq,lset, experiment_id=None, year=None, printout=Fal
     sc = dreqQuery(dq=dq, tierMax=lset['tierMax'])
     rls_for_mips=sc.getRequestLinkByMip(lset['mips'])
     if printout :
-        print "\nNumber of Request Links which apply to MIPS", lset['mips']," is: ",len(rls_for_mips)
+        print "\nNumber of Request Links which apply to MIPS", lset['mips']," is: ",\
+            len(rls_for_mips)
         
     if (year) :
         filtered_rls=[]
@@ -215,7 +229,8 @@ def select_CMORvars_for_lab(dq,lset, experiment_id=None, year=None, printout=Fal
                     filtered_rls.append(rl)
         rls=filtered_rls
         if printout :
-            print "\nNumber of Request Links which apply to experiment ", experiment_id,"and experiment",\
+            print "\nNumber of Request Links which apply to experiment ", \
+                experiment_id,"and experiment",\
         lset['mips'] ," is: ",len(rls)
     else :
         rls=rls_for_mips
@@ -279,7 +294,8 @@ def write_xios_file_def(dq,cmvs,table, lset,sset, out,cvspath) :
     activity=sset['activity'] 
     freq=table2freq[table] 
     split_freq="10y" #TBD : compute file-level split_freq
-    out.write(' freq_output="%s" append="true" split_freq="%s" timeseries="exclusive" >\n'%(freq[0],split_freq))
+    out.write(' freq_output="%s" append="true" split_freq="%s" timeseries="exclusive" >\n'%\
+              (freq[0],split_freq))
     out.write('  <variable name="project_id" type="string" > %s/%s </variable>\n'%(
                    sset.get('project',"CMIP6"),activity))
     #
@@ -344,15 +360,19 @@ def write_xios_file_def(dq,cmvs,table, lset,sset, out,cvspath) :
     wr("initialization_index",initialization_index)
     wr("institution_id",institution_id)
     wr("institution",lset)
-    license="CMIP6 model data produced by %s is licensed under a Creative Commons Attribution"%lset['institution']+\
-        "'Share Alike' 4.0 International License (http://creativecommons.org/licenses/by/4.0/). "+\
-        "Use of the data should be acknowledged following guidelines found at https://pcmdi.llnl.gov/home/CMIP6/citation.html."+\
-        "Further information about this data, including some limitations, can be found via the further_info_url"+\
-        "(recorded as a global attribute in data files)[ and at %s].  "%lset["info_url"]+\
-        "The data producers and data providers make no warranty, either express or implied, including, "+\
-        "but not limited to, warranties of merchantability and fitness for a particular purpose. "+\
-        "All liabilities arising from the supply of the information (including any liability arising in negligence) "+\
-        "are excluded to the fullest extent permitted by law."
+    license="CMIP6 model data produced by %s is licensed under a Creative Commons Attribution"\
+        %lset['institution']+\
+     "'Share Alike' 4.0 International License (http://creativecommons.org/licenses/by/4.0/). "+\
+      "Use of the data should be acknowledged following guidelines found at "+\
+      "https://pcmdi.llnl.gov/home/CMIP6/citation.html."+\
+      "Further information about this data, including some limitations, can be found "+\
+      "via the further_info_url"+\
+      "(recorded as a global attribute in data files)[ and at %s].  "%lset["info_url"]+\
+      "The data producers and data providers make no warranty, either express or implied,, "+\
+      " including but not limited to, warranties of merchantability and fitness for a "+\
+      "particular purpose. All liabilities arising"+\
+     " from the supply of the information (including any liability arising in negligence) "+\
+     "are excluded to the fullest extent permitted by law."
     wr("license",license)
     wr('mip_era',mip_era)
     parent_experiment_id=sset.get('parent_experiment_id',None)
@@ -366,7 +386,8 @@ def write_xios_file_def(dq,cmvs,table, lset,sset, out,cvspath) :
         parent_source_id=sset.get('parent_source_id',source_id) ; 
         wr('parent_source_id',parent_source_id)
         wr("parent_sub_experiment_id",sset, False); 
-        parent_time_units=sset.get('parent_time_units',"TBX") # TBX : syntaxe XIOS pour designer le time units de la simu courante
+        # TBX : syntaxe XIOS pour designer le time units de la simu courante
+        parent_time_units=sset.get('parent_time_units',"TBX") 
         wr("parent_time_units",parent_time_units)
         parent_variant_label=sset.get('parent_variant_label',variant_label) 
         wr('parent_variant_label',parent_variant_label)
@@ -378,7 +399,8 @@ def write_xios_file_def(dq,cmvs,table, lset,sset, out,cvspath) :
     wr("realization_index",realization_index) 
     #wr('realm',"TBD") # decline par variable
     wr('references',lset) 
-    wr('source',lset['model']) # TBD - should be taken from CMIP6_CV once it is updated for CNRM and IPSL models
+    # TBD - should be taken from CMIP6_CV once it is updated for CNRM and IPSL models
+    wr('source',lset['model']) 
     wr('source_id',source_id)
     source_type=sset.get('source_type',lset.get('source_type')) 
     if type(source_type)==type([]) :
@@ -406,7 +428,8 @@ def write_xios_field_ref_in_file_def(dq,cmv,out,lset,sset) :
     Writes a CMOR variable entry (provided as a DR uid) as a field reference in out, 
     with prefix 'CMIP_' for the variable name
     """
-    # TBD : identify the cell_method wrt to time and translate it to XIOS time_operation. + same for space
+    # TBD : identify the cell_method wrt to time and translate it to XIOS time_operation. 
+    # + same for space
     # TBD : logic for computing ts_split_frequency from rank and time-space ops
     
     #
@@ -479,7 +502,8 @@ def generate_file_defs(dq,lset,sset,year,context,printout=False,
     """
     #
     # Extract CMOR variables for the experiment and year and lab settings
-    miprl_vars_list=select_CMORvars_for_lab(dq,lset, sset['experiment_id'], year,printout=printout)
+    miprl_vars_list=select_CMORvars_for_lab(dq,lset, sset['experiment_id'], \
+                                            year,printout=printout)
     #
     # Group CMOR vars per realm
     cmvs_per_realm=dict()
