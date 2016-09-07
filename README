@@ -1,0 +1,6 @@
+A package for translating a CMIP Data Request to XIOS file_defs
+
+See prologue of dr2xml.py for pre-requisites
+See DR2xml.ipynb for a Notebook example on how to use
+See product example in output_sample/
+
