@@ -1,0 +1,20 @@
+--------------------------------------------------------------------------------------------------------------------------------------
+TYPE;    VARNAME;         REALM;     FREQUENCY;     TABLE;      TEMPORAL_SHP;         SPATIAL_SHP;       EXPNAME;                  MIP
+-------------------------------------------------------------------------------------------------------------------------------------
+perso;   hmv1;            seaIce;    mon;           SImon;      time-mean;            XY-na;             ANY;                ANY  
+perso;   hmv2;            atmos;     day;           day;        time-mean;            XY-na;             Coupled;            HighResMIP
+perso;   hmv3;            ocean;     mon;           Omon;       time-point;           XY-na;             ANY;                DCPP
+perso;   hmv4;            atmos;     6hr;           6hrPlevpt;  time-point;           XY-na;             Forced-Atmos-Land;  HighResMIP
+perso;   hmv5;            landIce;   mon;           LImon;      time-mean;            XY-na;             ANY;                ANY
+perso;   hmv6;            ocean;     day;           day;        time-mean;            XY-na;             DCPP-C13;           DCPP
+cmor;    tos;             ocean;     day;           day;        time-mean;            XY-na;             Coupled;            HighResMIP
+cmor;    zos;             ocean;     mon;           Omon;       time-point;           XY-na;             ANY;                DCPP
+cmor;    tas;             atmos;     6hr;           6hrPlevpt;  time-point;           XY-na;             ANY;                HighResMIP
+cmor;    mlotst;          ocean;     mon;           Omon;       time-mean;            XY-na;             DCPP-C13;           DCPP
+cmor;    hfls;            atmos;     mon;           Amon;       time-mean;            XY-na;             ANY;                ANY
+perso;   hmv7;            ocean;     mon;           Omon;       time-mean;            XY-na;             ANY;                HighResMIP
+cmor;    sic;             seaIce;    day;           day;        time-mean;            XY-na;             ANY;                HighResMIP
+cmor;    sithick;         seaIce;    day;           SIday;      time-mean;            XY-na;             Coupled;            HighResMIP
+cmor;    siconc;          seaIce;    day;           SIday;      time-mean;            XY-na;             Coupled;            HighResMIP
+cmor;    omldamax;        ocean;     day;           day;        time-mean;            XY-na;             Coupled;            HighResMIP
+perso;   sst;             ocean;     3hr;           3hr;        time-mean;            XY-na;              ANY;                HighResMIP

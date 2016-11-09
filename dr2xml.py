@@ -11,25 +11,32 @@ Version 0.8 : S.Senesi - 2016/09/07
 
 """
 
+
 from datetime import datetime
 import json
 from uuid import uuid4
+import sys
 
 # Next package retrieved using
 #    svn co http://proj.badc.rl.ac.uk/svn/exarch/CMIP6dreq/tags/01.beta.34
 # (and must include 01.beta.34/dreqPy in PYTHONPATH)
 from scope import dreqQuery
+#mpmoine_modif# en definissant dq ici et non dans le Notebook on evite le passage de dq par argument
+from dreqPy import dreq
+dq = dreq.loadDreq()
+print dq.version
 
 # Where is the local copy of CMIP6 Controled vocabulary (available from 
 # https://github.com/WCRP-CMIP/CMIP6_CVs
-my_cvs_path="/cnrm/aster/data3/aster/senesi/public/CMIP6/data_request/CMIP6_CVs/"
+#mpmoine# Depend de l utilisateur -> Pas de valeur par defaut
+#cvspath="/cnrm/aster/data3/aster/senesi/public/CMIP6/data_request/CMIP6_CVs/"
 
 # A local auxilliary table
 from table2freq import table2freq
 
 
 """ An example/template  of settings for a lab and a model"""
-cnrm_lab_and_model_settings={
+lab_and_model_settings={
     'institution_id': "CNRM",
     # TBD : institution should be read in CMIP6_CV, once updated
     'institution'   : "Centre National de Recherches Meteorologiques", 
@@ -57,6 +64,9 @@ cnrm_lab_and_model_settings={
     # oragnized by realms
     # excluded_vars_file="../../cnrm/non_published_variables"
     "excluded_vars":[],
+
+    # We account for a list of variables which the lab want absolutely to produce
+    "listof_home_vars":"../../cnrm/listof_home_vars.txt",
     
     # Each XIOS  context does adress a number of realms
     'realms_per_context' : { 
@@ -79,7 +89,7 @@ cnrm_lab_and_model_settings={
 
 """ An example/template of settings for a simulation """
 
-historical_simulation_settings={    
+simulation_settings={    
     # Dictionnary describing the necessary attributes for a given simulation
 
     # Warning : some lines are commented out in this example but should be 
@@ -141,7 +151,143 @@ historical_simulation_settings={
         }
     }
 
-def RequestItem_applies_for_exp_and_year(dq,ri,experiment,year,debug=False):
+#mpmoine_new: classe necessaire a la fonctionnalite "liste maison"
+class simple_CMORvar(object):
+    def __init__(self):
+        self.type           = None # Only useful for HOMEvar.
+        self.modeling_realm = None # Useful for both HOMEvar and CMORvar.
+        self.mipTable       = None # Useful for both HOMEvar and CMORvar.
+        self.label          = None # Useful for both HOMEvar and CMORvar.
+        self.frequency      = None # Useful for both HOMEvar and CMORvar.
+        self.mipTable       = None # Useful for both HOMEvar and CMORvar.
+        self.positive       = None # Useful for CMORvar and updated HOMEvar.
+        self.description    = None # Useful for CMORvar and updated HOMEvar.
+        self.stdname        = None # Useful for CMORvar and updated HOMEvar.
+        self.long_name      = None # Useful for CMORvar and updated HOMEvar.
+        #self.cell_methods   = None
+        #self.cell_measures  = None
+        self.spatial_shp    = None # Only useful for HOMEvar.
+        self.temporal_shp   = None # Only useful for HOMEvar.
+        self.experiment     = None # Only useful for HOMEvar.
+        self.mip            = None # Only useful for HOMEvar.
+
+#mpmoine_new: dictionnaire necessaire a la fonctionnalite "liste maison"
+
+spid2label={}
+nobjs=len(dq.coll['spatialShape'].items)
+for i in range(nobjs-1):
+    obj=dq.coll['spatialShape'].items[i]
+    spid2label.update({obj.uid:obj.label}) 
+
+#mpmoine_new: dictionnaire necessaire a la fonctionnalite "liste maison"
+tmid2label={}
+nobjs=len(dq.coll['temporalShape'].items)
+for i in range(nobjs-1):
+    obj=dq.coll['temporalShape'].items[i]
+    tmid2label.update({obj.uid:obj.label}) 
+
+#mpmoine_new: fonction necessaire a la fonctionnalite "liste maison"
+def read_homeVars_list(hmv_file,expid,mips):
+    # File structure: name of attributes to read, number of header line 
+    home_attrs=['type','label','modeling_realm','frequency','mipTable','temporal_shp','spatial_shp','experiment','mip']
+    skip=3
+    # Read file
+    with open(hmv_file,"r") as fp:
+        data=fp.readlines()
+    # Build list of home variables
+    homevars=[]
+    nhv=0
+    for line in data[skip:]:  
+        line_split=line.split(';')
+        nhv+=1
+        home_var=simple_CMORvar()
+        cc=-1
+        for col in line_split:
+            ccol=col.lstrip(' ').rstrip('\n\t ')
+            if ccol!='': 
+                cc+=1
+                setattr(home_var,home_attrs[cc],ccol)
+        if home_var.mip!="ANY":
+            if home_var.mip in mips:
+                if home_var.experiment!="ANY":
+                     if home_var.experiment==expid: homevars.append(home_var)
+                else: 
+                    homevars.append(home_var)
+        else:
+            if home_var.experiment!="ANY":
+                if home_var.experiment==expid: homevars.append(home_var)
+            else: 
+                homevars.append(home_var)
+    return homevars
+
+#mpmoine_new: fonction necessaire a la fonctionnalite "liste maison"
+def get_SpatialAndTemporal_Shapes(cmvar):
+    try:
+        for struct in dq.coll['structure'].items:
+            if struct.uid==cmvar.stid: 
+                spatial_shape=spid2label[struct.spid]
+                temporal_shape=tmid2label[struct.tmid]
+                return [spatial_shape,temporal_shape]
+    except:
+        print "Error:",[cmvar.label, cmvar.mipTable],"CMORvar: Structure of CMORvar NOT found!"
+        return [False,False]
+
+#mpmoine_new: fonction necessaire a la fonctionnalite "liste maison"
+def get_corresp_CMORvar(hmvar):
+    collect=dq.coll['CMORvar']
+    found=False
+    count=0
+    cmvar_found=[]
+    for cmvar in collect.items:
+        # Consider case where no modeling_realm associated to the current CMORvar as matching anymay. 
+        #mpmoine# A mieux gerer avec les orphan_variables ?
+        match_label=(cmvar.label==hmvar.label)
+        match_freq=(cmvar.frequency==hmvar.frequency)
+        match_table=(cmvar.mipTable==hmvar.mipTable)
+        match_realm=(hmvar.modeling_realm in cmvar.modeling_realm.split(' '))
+        empty_realm=(cmvar.modeling_realm=='') 
+        matching=( match_label and match_freq and match_table and (match_realm or empty_realm) )
+        if matching: 
+            same_shapes=(get_SpatialAndTemporal_Shapes(cmvar)==[hmvar.spatial_shp,hmvar.temporal_shp])
+            if same_shapes:
+                found=True
+                count+=1
+                cmvar_found.append(cmvar)
+            else: 
+                print "Error: ",[hmvar.label,hmvar.mipTable]," HOMEVar: Spatial and Temporal Shapes specified DO NOT match CMORvar ones." \
+                      " -> Provided:",[hmvar.spatial_shp,hmvar.temporal_shp],'Expected:',get_SpatialAndTemporal_Shapes(cmvar)
+
+    if found:
+        if count==1: 
+            # Collect complementary attributes from CMORvar and glue them to HOMEvar
+            hmvar.positive=cmvar_found[0].positive
+            hmvar.long_name=cmvar_found[0].title
+            mipvar = dq.inx.uid[cmvar_found[0].vid]
+            #hmvar.long_name=mipvar.title
+            stdname = dq.inx.uid[mipvar.sn]
+            if stdname:
+                if stdname._h.label == 'standardname':
+                    hmvar.stdname = stdname.label
+                    hmvar.description = stdname.description
+                else:
+                    print "Issue: stdname is remark in DR for",mipvar.label
+            else:
+                print "Issue: accessing sn for",cmvar_found[0].label
+            return hmvar
+        else:
+            return False
+    else:
+        return False
+
+#mpmoine_new: fonction necessaire a la fonctionnalite "liste maison"
+def hasCMORVarName(hmvar):
+    collect=dq.coll['CMORvar']
+    match_label=False
+    for cmvar in collect.items:
+        if (cmvar.label==hmvar.label): match_label=True
+    return match_label
+                
+def RequestItem_applies_for_exp_and_year(ri,experiment,year,debug=False):
     """ 
     Returns True if requestItem 'ri' in data request 'dq' is relevant for a 
     given 'experiment' and 'year'. Toggle 'debug' allow some printouts 
@@ -161,7 +307,8 @@ def RequestItem_applies_for_exp_and_year(dq,ri,experiment,year,debug=False):
         if (debug)  : print "%20s"%"Expt Group case ",item_exp.label,
         group_id=ri.esid
         for e in exps :
-            if 'gid' in dir(e) and e.gid == group_id and e.label==experiment : 
+            #mpmoine_modif# 'e.egid' au lieu de 'e.gid'
+            if 'egid' in dir(e) and e.egid == group_id and e.label==experiment : 
                 if (debug) :  print " OK for experiment based on group"+group_id.label,
                 relevant=True
     elif item_exp._h.label== 'mip' :
@@ -186,10 +333,10 @@ def RequestItem_applies_for_exp_and_year(dq,ri,experiment,year,debug=False):
             if (debug)  : print "tslice not set -> OK for the year"
             return True
     if (debug)  : print "NOK"
-    return False
+    #mpmoine_modif# return 'relevant' au lieu 'False'
+    return relevant
 
-
-def select_CMORvars_for_lab(dq,lset, experiment_id=None, year=None, printout=False):
+def select_CMORvars_for_lab(lset, experiment_id=None, year=None, printout=False):
     """
     A function to list CMOR variables relevant for a lab (and also, optionnally for 
     an experiment and a year)
@@ -224,7 +371,7 @@ def select_CMORvars_for_lab(dq,lset, experiment_id=None, year=None, printout=Fal
             for ri_id in ri_ids :
                 ri=dq.inx.uid[ri_id]
                 #print "Checking requestItem ",ri.label
-                if RequestItem_applies_for_exp_and_year(dq,ri,experiment_id, year,False) :
+                if RequestItem_applies_for_exp_and_year(ri,experiment_id, year,False) :
                     #print "% 25s"%ri.label," applies "
                     filtered_rls.append(rl)
         rls=filtered_rls
@@ -249,12 +396,46 @@ def select_CMORvars_for_lab(dq,lset, experiment_id=None, year=None, printout=Fal
     for v in filtered_vars : varlabels.add(dq.inx.uid[v].label)
     if printout :
         print '\nNumber of variables with distinct labels is :',len(varlabels)
+
+    #mpmoine_new# on alimente un objet de type cimple_CMORvar. Necessaire a la "liste maison"
+    # Build a list of simplified CMORvar objects
+    simplified_vars = []
+    for v in filtered_vars :
+        svar = simple_CMORvar()
+        cmvar = dq.inx.uid[v]
+        svar.label = cmvar.label
+        svar.frequency = cmvar.frequency
+        svar.mipTable = cmvar.mipTable
+        svar.modeling_realm = cmvar.modeling_realm
+        svar.mipTable = cmvar.mipTable
+        svar.positive = cmvar.positive
+        mipvar = dq.inx.uid[cmvar.vid]
+        svar.long_name = mipvar.title
+        [svar.spatial_shp,svar.temporal_shp]=get_SpatialAndTemporal_Shapes(cmvar)
+
+        #mpmoine_modif# deplacement dans 'select_CMORvars_for_lab' de tout ce qui concerne les MAJ d'attributs (stdname, units, cell_methods,...)
+        #mpmoine_modif# anciennement dans 'write_xios_field_ref_in_file_def' pour centraliser le renseignement es attributs 'svar'
+        try :
+            stdname = dq.inx.uid[mipvar.sn]
+            #units=mipvar.units
+            if stdname._h.label == 'standardname':
+                svar.stdname = stdname.label
+                #svar.units = stdname.units
+                svar.description = stdname.description
+            else :
+                print "Issue : stdname is remark in DR for %s!"%mipvar.label
+        except:
+            print "Issue accessing sn for %s !"%cmvar.label
+        # TBD : translate cell_method in XIOS operations
+        #struct=dq.inx.uid[cmvar.stid]
+        #svar.cell_methods = struct.cell_methods
+        #svar.cell_measures = struct.cell_methods
+        simplified_vars.append(svar)
     
-    return filtered_vars
+     #mpmoine_modif# return 'simplified_vars' au lieu de 'filtered_vars'
+    return simplified_vars
 
-
-
-def write_xios_file_def(dq,cmvs,table, lset,sset, out,cvspath) :
+def write_xios_file_def(cmvs,table, lset,sset, out,cvspath) :
     """ 
     Generate an XIOS file_def entry in out for :
       - a dict for laboratory settings 
@@ -288,14 +469,16 @@ def write_xios_file_def(dq,cmvs,table, lset,sset, out,cvspath) :
     time_range="%start_date%_%end_date%" # XIOS syntax
     filename="%s_%s_%s_%s_%s_%s"%\
                (table, experiment_id,lset['model_id'], member_id,grid_label,time_range)
-    out.write('<file name="%s"\n'%filename)
-    
+    #mpmoine_modif# out.write('<file name="%s"\n'%filename)
+
     # WIP Draft 14 july 2016
     activity=sset['activity'] 
     freq=table2freq[table] 
     split_freq="10y" #TBD : compute file-level split_freq
-    out.write(' freq_output="%s" append="true" split_freq="%s" timeseries="exclusive" >\n'%\
-              (freq[0],split_freq))
+    #mpmoine_modif# deplacement de l'ecriture du debut de banniere '<file name=' ici pour s approcher
+    #mpmoine_modif# d'un xml valide
+    out.write('<file name="%s" freq_output="%s" append="true" split_freq="%s" timeseries="exclusive" >\n'%\
+              (filename,freq[0],split_freq))
     out.write('  <variable name="project_id" type="string" > %s/%s </variable>\n'%(
                    sset.get('project',"CMIP6"),activity))
     #
@@ -334,10 +517,15 @@ def write_xios_file_def(dq,cmvs,table, lset,sset, out,cvspath) :
     data_specs_version="TBD" # TBD, but not yet available in CMIP6_CVs ...
     wr('data_specs_version',data_specs_version)
     #
-    with open(cvspath+"CMIP6_experiment_id.json","r") as json_fp :
-        CMIP6_experiments=json.loads(json_fp.read())['experiment_id']
-    exp_entry=CMIP6_experiments[sset['experiment_id']]
-    experiment=exp_entry['experiment']
+    #mpmoine_modif# ajout d une gestion d exception dans la correspondance entre experiment_id (DRQ) et experiment (CMIP6-CVs)
+    #mpmoine_modif# car le CV de la DataRequest n est pas encore totalement coherent avec le CMIP6-CVs
+    with open(cvspath+"CMIP6_experiment_id.json") as json_fp :
+        json_data=json.loads(json_fp.read())
+    try:
+        CMIP6_experiments=json_data[experiment_id]
+        experiment=CMIP6_experiments['experiment']
+    except:
+        experiment="Issue"
     wr('experiment',experiment)
     wr('experiment_id',experiment_id)
     # 
@@ -419,11 +607,11 @@ def write_xios_file_def(dq,cmvs,table, lset,sset, out,cvspath) :
     #
 
     for cmv in cmvs : 
-        write_xios_field_ref_in_file_def(dq,cmv,out,lset,sset)
-    out.write('<file/>\n\n')
+        write_xios_field_ref_in_file_def(cmv,out,lset,sset)
+    #mpmoine# correction de la banniere de cloture
+    out.write('</file>\n\n')
 
-
-def write_xios_field_ref_in_file_def(dq,cmv,out,lset,sset) :
+def write_xios_field_ref_in_file_def(cmv,out,lset,sset) :
     """
     Writes a CMOR variable entry (provided as a DR uid) as a field reference in out, 
     with prefix 'CMIP_' for the variable name
@@ -437,60 +625,39 @@ def write_xios_field_ref_in_file_def(dq,cmv,out,lset,sset) :
     # Such references muts be fulfilled using a dedicated filed_def section implementing 
     # the match between legacy model field names and such names
     #
-    mipvar=dq.inx.uid[cmv.vid]
-    alias="CMIP_"+mipvar.label
-    split_freq="10y" #TBD - Should be computed
-    operation="average" #TBD - Not systematically - to improve
-    out.write('  <field field_ref="%s" name="%s" operation="%s" ts_enabled="true" ts_split_freq="%s">\n'%(
-                        alias,mipvar.label,operation,split_freq))
 
-    #
     def wrv(name, value):
         # Write a 'variable' entry
         out.write('     <variable name="%s" type="string" > %s </variable>\n'%(name,value))
     #
+    alias="CMIP_"+cmv.label
+    split_freq="10y" #TBD - Should be computed
+    operation="average" #TBD - Not systematically - to improve
+
+    out.write('  <field field_ref="%s" name="%s" operation="%s" ts_enabled="true" ts_split_freq="%s">\n'%(
+                        alias,cmv.label,operation,split_freq))
     comment=None
-    if mipvar.label in sset['comments'] :
-        comment=sset['comments'][mipvarlabel]
+    if cmv.stdname in sset['comments'] :
+        comment=sset['comments'][mipvarlabel] #A_VERIFIER: mipvarlabel
     else: 
-        if mipvar.label in sset['comments'] :
-            comment=sset['comments'][mipvarlabel]
+        if cmv.stdname in sset['comments'] : #A_VERIFIER: meme condition repetee
+            comment=sset['comments'][mipvarlabel] #A_VERIFIER: mipvarlabel
     if comment : wrv('comment',comment) #TBI 
     #
     wrv('realm',cmv.modeling_realm) 
-    wrv('variable_id',mipvar.label)
-    #
-    slabel="Issue"
-    desc="Issue"
-    try :
-       stdname=dq.inx.uid[mipvar.sn]
-       #units=mipvar.units
-       if stdname._h.label == 'standardname':
-            slabel=stdname.label
-            #sunits=stdname.units
-            desc=stdname.description
-       else :
-            print "Issue : stdname is remark in DR for %s!"%mipvar.label
-    except:
-        print "Issue accessing sn for %s !"%cmv.label
-    wrv("standard_name",slabel)
-    wrv("description",desc)
-    wrv("long_name",mipvar.title)
-    if cmv.positive != "None" and cmv.positive != "" : wrv("positive",cmv.positive)
-    #
-    # TBD : translate cell_method in XIOS operations
-    #
-    #structure=dq.inx.uid[cmv.stid]
-    #wrv("cell_methods",structure.cell_methods)
-    #wrv("cell_measures",structure.cell_measures)
+    wrv('variable_id',cmv.label)
+    wrv("standard_name",cmv.stdname)
+    wrv("description",cmv.description)
+    wrv("long_name",cmv.long_name)
+    if cmv.positive != "None" and cmv.positive != "" : wrv("positive",cmv.positive) 
+
+    #mpmoine_modif# deplacement dans 'select_CMORvars_for_lab' de tout ce qui concerne les MAJ d'attributs (stdname, units, cell_methods,...)
+    #mpmoine_modif# anciennement dans 'write_xios_field_ref_in_file_def' pour centraliser le renseignement es attributs 'svar'
+
     #
     out.write('     </field>\n')
 
-    
-
-
-def generate_file_defs(dq,lset,sset,year,context,printout=False,
-                       cvs_path=my_cvs_path) :
+def generate_file_defs(lset,sset,year,context,cvs_path,printout=False) :
     """
     Using DR objetc dq, a dict of lab settings and a dict of simulation settings, 
     generate an XIOS file_def file for a given XIOS 'context', which content matches 
@@ -502,27 +669,83 @@ def generate_file_defs(dq,lset,sset,year,context,printout=False,
     """
     #
     # Extract CMOR variables for the experiment and year and lab settings
-    miprl_vars_list=select_CMORvars_for_lab(dq,lset, sset['experiment_id'], \
+    mip_vars_list=select_CMORvars_for_lab(lset, sset['experiment_id'], \
                                             year,printout=printout)
-    #
+    if lset['listof_home_vars']:
+        # Read HOME variables
+        home_vars_list=read_homeVars_list(lset['listof_home_vars'],sset['experiment_id'],lset['mips'])
+        for hv in home_vars_list: 
+            hv_info={"varname":hv.label,"realm":hv.modeling_realm,"freq":hv.frequency,"table":hv.mipTable}
+            print hv_info
+            if hv.type=='cmor':
+                # Update each HOME variable with complementary attributes get from the corresponding CMOR variable (if exist)
+                updated_hv=get_corresp_CMORvar(hv)
+                if(updated_hv):
+                    already_in_dr=False
+                    for cmv in mip_vars_list:
+                        matching=(  cmv.label==updated_hv.label and \
+                                    cmv.modeling_realm==updated_hv.modeling_realm and \
+                                    cmv.frequency==updated_hv.frequency and \
+                                    cmv.mipTable==updated_hv.mipTable and \
+                                    cmv.temporal_shp==updated_hv.temporal_shp and \
+                                    cmv.spatial_shp==updated_hv.spatial_shp  )
+                        if matching: already_in_dr=True
+
+                    # Corresponding CMOR Variable fond for the current HOME variable 
+                    if not already_in_dr:
+                        # Append HOME variable only if not already selected with the DataRequest
+                        if printout: print "Info:",hv_info,"HOMEVar is not in the DataRequest." \
+                                         " => Taken into account."
+                        mip_vars_list.append(updated_hv)
+                    else:
+                        if printout: print "Info:",hv_info,"HOMEVar is already in the DataRequest." \
+                                           " => Not taken into account."
+                else:
+                    if printout: print "Error:",hv_info,"HOMEVar is anounced as cmor but no corresponding CMORVar was found." \
+                                       " => Not taken into account."
+                    sys.exit("Abort: HOMEVar is cmor but no corresponding CMORVar found.")
+            elif hv.type=='perso':
+                # Check if HOME variable anounced as 'perso' is in fact 'cmor'
+                is_cmor=get_corresp_CMORvar(hv)
+                if not is_cmor:
+                    # Check if  HOME variable differs from CMOR one only by shapes
+                    has_cmor_varname=hasCMORVarName(hv)
+                    if has_cmor_varname:
+                        if printout: print "Warning:",hv_info,"HOMEVar is anounced as perso, is not a CMORVar, but has a cmor name." \
+                                            " => Not taken into account."
+                        sys.exit("Abort: HOMEVar is anounced as perso, is not a CMORVar, but has a cmor name.")
+                    else:
+                        # This HOME variable is purely personnal (does not exist in the CMOR language)
+                        if printout: print "Info:",hv_info,"HOMEVar is purely personnal." \
+                                           " => Taken into account."
+                        mip_vars_list.append(hv)
+                else:
+                    if printout: print "Error:",hv_info,"HOMEVar is anounced as perso, but in reality is cmor." \
+                                       " => Not taken into account."
+                    sys.exit("Abort: HOMEVar is anounced as perso but should be cmor.")
+            else:
+                if printout: print "Error:",hv_info,"HOMEVar type",hv.type,"does not correspond to any known keyword."\
+                                   " => Not taken into account."
+                sys.exit("Abort: unknown type keyword is provided for HOMEVar.")
+    else:
+        print "Info: No HOMEvars list provided."
     # Group CMOR vars per realm
     cmvs_per_realm=dict()
-    for cmv_uid in miprl_vars_list :
-        cmv=dq.inx.uid[cmv_uid]
-        if cmv.modeling_realm not in cmvs_per_realm :
+    #mpmoine_modif# changement de noms des variables ('cmv_uuid'->'cmv'; 'miprl_vars_list'->'mip_vars_list') car avec
+    #mpmoine_modif# les  elements des listes de variables CMOR ne sont plus des RequestLinks mais des Simple_CMORVars maintenant
+    for cmv in mip_vars_list :
+        if cmv.modeling_realm not in cmvs_per_realm.keys() :
             cmvs_per_realm[cmv.modeling_realm]=[]
-        cmvs_per_realm[cmv.modeling_realm].append(cmv_uid)
+        cmvs_per_realm[cmv.modeling_realm].append(cmv)
     if printout :
         print "\nRealms for these CMORvars :",cmvs_per_realm.keys()
     #
     # Select on context realms, grouping by table
     cmvs_pertable=dict()
     context_realms=lset['realms_per_context'][context]
-    for realm in context_realms :
-        if realm in cmvs_per_realm:
-            for cmv_uid in cmvs_per_realm[realm] :
-                cmv=dq.inx.uid[cmv_uid]
-                #print cmv.label,
+    for realm in context_realms : 
+        if realm in cmvs_per_realm.keys():
+            for cmv in cmvs_per_realm[realm] :
                 if cmv.mipTable not in cmvs_pertable : 
                     cmvs_pertable[cmv.mipTable]=[]
                 if cmv.label not in lset['excluded_vars'] : 
@@ -530,10 +753,10 @@ def generate_file_defs(dq,lset,sset,year,context,printout=False,
     #
     # Add cmvars belonging to the orphan list
     orphans=lset['orphan_variables'][context]
-    for cmv_uid in miprl_vars_list :
-        cmv=dq.inx.uid[cmv_uid]
+    for cmv in mip_vars_list :
         if cmv.label in orphans:
-            if cmv.mipTable not in realm_cmvs_pertable : 
+            #mpmoine_rmq# ligne suivante: realm_cmvs_pertable n est pas defini
+            if cmv.mipTable not in realm_cmvs_pertable :
                 cmvs_pertable[cmv.mipTable]=[]
             if cmv.label not in excluded_vars : 
                 cmvs_pertable[cmv.mipTable].append(cmv)
@@ -550,11 +773,12 @@ def generate_file_defs(dq,lset,sset,year,context,printout=False,
                 print cmv.label,
         if printout :
             print
+    #
     # Write XIOS file_def
     filename="%s.xml"%context
     with open(filename,"w") as out :
         #for table in ['day'] :    
-        for table in cmvs_pertable :    
-            write_xios_file_def(dq,cmvs_pertable[table],table, lset,sset,out,cvs_path)
+        for table in cmvs_pertable :  
+            write_xios_file_def(cmvs_pertable[table],table, lset,sset,out,cvs_path)
     if printout :
         print "\nfile_def written as %s"%filename
