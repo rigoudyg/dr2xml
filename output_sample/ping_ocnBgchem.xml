@@ -1,0 +1,27 @@
+<field_definition>
+<!-- for variables which realm equals one of _ocnBgchem-->
+   <field id="CMIP6_chl"           field_ref="field_atm"      /> <!-- (kg m-3) mass_concentration_of_phytoplankton_expressed_as_chlorophyll_in_sea_water : Sum of chlorophyll from all phytoplankton group concentrations.  In most models this is equal to chldiat+chlmisc, that is the sum of Diatom Chlorophyll Mass Concentration and Other Phytoplankton Chlorophyll Mass Concentration -->
+   <field id="CMIP6_dfe"           field_ref="field_atm"      /> <!-- (mol m-3) mole_concentration_of_dissolved_iron_in_sea_water : Dissolved iron in sea water,  including both Fe2+ and Fe3+ ions (but not particulate detrital iron) -->
+   <field id="CMIP6_dissi14cabio"  field_ref="field_atm"      /> <!-- (mol m-3) dissi14cabio : Abiotic Dissolved inorganic 14carbon (CO3+HCO3+H2CO3) concentration -->
+   <field id="CMIP6_dissic"        field_ref="field_atm"      /> <!-- (mol m-3) mole_concentration_of_dissolved_inorganic_carbon_in_sea_water : Dissolved inorganic carbon (CO3+HCO3+H2CO3) concentration -->
+   <field id="CMIP6_dissicabio"    field_ref="field_atm"      /> <!-- (mol m-3) dissicabio : Abiotic Dissolved inorganic carbon (CO3+HCO3+H2CO3) concentration -->
+   <field id="CMIP6_dissicnat"     field_ref="field_atm"      /> <!-- (mol m-3) dissicnat : Dissolved inorganic carbon (CO3+HCO3+H2CO3) concentration at preindustrial atmospheric xCO2 -->
+   <field id="CMIP6_exparag100"    field_ref="field_atm"      /> <!-- (mol m-2 s-1) sinking_mole_flux_of_aragonite_expressed_as_carbon_in_sea_water : Downward flux of Aragonite at 100m -->
+   <field id="CMIP6_expc"          field_ref="field_atm"      /> <!-- (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_matter_expressed_as_carbon_in_sea_water : Downward flux of particulate organic carbon -->
+   <field id="CMIP6_expc100"       field_ref="field_atm"      /> <!-- (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_matter_expressed_as_carbon_in_sea_water : Downward flux of particulate organic carbon at 100m -->
+   <field id="CMIP6_expcalc"       field_ref="field_atm"      /> <!-- (mol m-2 s-1) sinking_mole_flux_of_calcite_expressed_as_carbon_in_sea_water : Downward flux of Calcite -->
+   <field id="CMIP6_expcalc100"    field_ref="field_atm"      /> <!-- (mol m-2 s-1) sinking_mole_flux_of_calcite_expressed_as_carbon_in_sea_water : Downward flux of Calcite at 100m -->
+   <field id="CMIP6_expsi"         field_ref="field_atm"      /> <!-- (mol m-2 s-1) sinking_mole_flux_of_particulate_silicon_in_sea_water : Sinking Particulate Silica Flux -->
+   <field id="CMIP6_fgco2"         field_ref="field_atm"      /> <!-- (kg m-2 s-1) surface_downward_mass_flux_of_carbon_dioxide_expressed_as_carbon : Gas exchange flux of CO2 (positive into ocean) -->
+   <field id="CMIP6_fgo2"          field_ref="field_atm"      /> <!-- (mol m-2 s-1) surface_downward_mole_flux_of_molecular_oxygen : Gas exchange flux of O2 (positive into ocean) -->
+   <field id="CMIP6_intpp"         field_ref="field_atm"      /> <!-- (mol m-2 s-1) intpp : Vertically integrated total primary (organic carbon) production by phytoplankton.  This should equal the sum of intpdiat+intpphymisc, but those individual components may be unavailable in some models. -->
+   <field id="CMIP6_mrroLi"        field_ref="field_atm"      /> <!-- (kg m-2 s-1) mrroLi : Runoff flux over land ice is the difference between any available liquid water in the snowpack less any refreezing. Computed as the sum of rainfall and melt of snow or ice less any refreezing or water retained in the snowpack -->
+   <field id="CMIP6_no3"           field_ref="field_atm"      /> <!-- (mol m-3) mole_concentration_of_nitrate_in_sea_water : Dissolved Nitrate Concentration -->
+   <field id="CMIP6_o2"            field_ref="field_atm"      /> <!-- (mol m-3) o2 : Dissolved Oxygen Concentration -->
+   <field id="CMIP6_ph"            field_ref="field_atm"      /> <!-- (1.0) sea_water_ph_reported_on_total_scale : negative log of hydrogen ion concentration with the concentration expressed as mol H kg-1. -->
+   <field id="CMIP6_po4"           field_ref="field_atm"      /> <!-- (mol m-3) mole_concentration_of_phosphate_in_sea_water : Dissolved Phosphate Concentration -->
+   <field id="CMIP6_si"            field_ref="field_atm"      /> <!-- (mol m-3) mole_concentration_of_silicate_in_sea_water : Dissolved Silicate Concentration -->
+   <field id="CMIP6_spco2"         field_ref="field_atm"      /> <!-- (Pa) surface_partial_pressure_of_carbon_dioxide_in_sea_water : Surface Aqueous Partial Pressure of CO2 -->
+   <field id="CMIP6_talk"          field_ref="field_atm"      /> <!-- (mol m-3) sea_water_alkalinity_expressed_as_mole_equivalent : total alkalinity equivalent concentration (including carbonate, nitrogen, silicate, and borate components) -->
+   <field id="CMIP6_talknat"       field_ref="field_atm"      /> <!-- (mol m-3) talknat : total alkalinity equivalent concentration (including carbonate, borate, phosphorus, silicon, and nitrogen components) at preindustrial atmospheric xCO2 -->
+</field_definition>

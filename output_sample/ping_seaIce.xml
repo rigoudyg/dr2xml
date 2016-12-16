@@ -1,0 +1,48 @@
+<field_definition>
+<!-- for variables which realm equals one of _seaIce-->
+   <field id="CMIP6_fsitherm"      field_ref="field_atm"      /> <!-- (kg m-2 s-1) water_flux_into_sea_water_due_to_sea_ice_thermodynamics : computed as the sea ice thermodynamic water flux into the ocean divided by the area of the ocean portion of the grid cell. -->
+   <field id="CMIP6_hfsifrazil"    field_ref="field_atm"      /> <!-- (W m-2) heat_flux_into_sea_water_due_to_freezing_of_frazil_ice : Heat Flux into Sea Water due to Frazil Ice Formation -->
+   <field id="CMIP6_mrroLi"        field_ref="field_atm"      /> <!-- (kg m-2 s-1) mrroLi : Runoff flux over land ice is the difference between any available liquid water in the snowpack less any refreezing. Computed as the sum of rainfall and melt of snow or ice less any refreezing or water retained in the snowpack -->
+   <field id="CMIP6_sfdsi"         field_ref="field_atm"      /> <!-- (kg m-2 s-1) downward_sea_ice_basal_salt_flux : This field is physical, and it arises since sea ice has a nonzero salt content, so it exchanges salt with the liquid ocean upon melting and freezing. -->
+   <field id="CMIP6_siage"         field_ref="field_atm"      /> <!-- (s) age_of_sea_ice : Age of sea ice -->
+   <field id="CMIP6_sialb"         field_ref="field_atm"      /> <!-- (1.0) sea_ice_albedo : Mean surface albedo of entire ice-covered part of grid cell -->
+   <field id="CMIP6_sic"           field_ref="field_atm"      /> <!-- (1.0) sea_ice_area_fraction : fraction of grid cell covered by sea ice. -->
+   <field id="CMIP6_sicompstren"   field_ref="field_atm"      /> <!-- (N m-1) compressive_strength_of_sea_ice : Computed strength of the ice pack, defined as the energy (J m-2) dissipated per unit area removed from the ice pack under compression, and assumed proportional to the change in potential energy caused by ridging. For Hibler-type models, this is P (= P*hexp(-C(1-A))) -->
+   <field id="CMIP6_siconc"        field_ref="field_atm"      /> <!-- (1.0) sea_ice_area_fraction : Area fraction of grid cell covered by sea ice -->
+   <field id="CMIP6_sidivvel"      field_ref="field_atm"      /> <!-- (s-1) divergence_of_sea_ice_velocity : Divergence of sea-ice velocity field (first shear strain invariant) -->
+   <field id="CMIP6_sidmassevapsubl" field_ref="field_atm"      /> <!-- (kg m-2 s-1) water_evaporation_flux : The rate of change of sea-ice mass change through evaporation and sublimation divided by grid-cell area -->
+   <field id="CMIP6_sidmassgrowthbot" field_ref="field_atm"      /> <!-- (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_congelation_ice_accumulation : The rate of change of sea ice mass due to vertical growth of existing sea ice at its base divided by grid-cell area.  -->
+   <field id="CMIP6_sidmassgrowthwat" field_ref="field_atm"      /> <!-- (kg m-2 s-1) sidmassgrowthwat : The rate of change of sea ice mass due to sea ice formation in supercooled water (often through frazil formation) divided by grid-cell area. Together, sidmassgrowthwat and sidmassgrowthbot should give total ice growth  -->
+   <field id="CMIP6_sidmassmeltbot" field_ref="field_atm"      /> <!-- (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_basal_melting : The rate of change of sea ice mass through melting at the ice bottom divided by grid-cell area -->
+   <field id="CMIP6_sidmassmelttop" field_ref="field_atm"      /> <!-- (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_surface_melting : The rate of change of sea ice mass through melting at the ice surface divided by grid-cell area -->
+   <field id="CMIP6_sidmasssi"     field_ref="field_atm"      /> <!-- (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_snow_conversion : The rate of change of sea ice mass due to transformation of snow to sea ice divided by grid-cell area -->
+   <field id="CMIP6_sidmasstranx"  field_ref="field_atm"      /> <!-- (kg s-1) sea_ice_x_transport : Includes transport of both sea ice and snow by advection -->
+   <field id="CMIP6_sidmasstrany"  field_ref="field_atm"      /> <!-- (kg s-1) sea_ice_y_transport : Includes transport of both sea ice and snow by advection -->
+   <field id="CMIP6_sifllatstop"   field_ref="field_atm"      /> <!-- (W m-2) surface_upward_latent_heat_flux : the net latent heat flux over sea ice -->
+   <field id="CMIP6_sifllwdtop"    field_ref="field_atm"      /> <!-- (W m-2) surface_downwelling_longwave_flux_in_air : the downwelling longwave flux over sea ice (always positive) -->
+   <field id="CMIP6_sifllwutop"    field_ref="field_atm"      /> <!-- (W m-2) surface_upwelling_longwave_flux_in_air : the upward longwave flux over sea ice (always negative) -->
+   <field id="CMIP6_siflsenstop"   field_ref="field_atm"      /> <!-- (W m-2) surface_upward_sensible_heat_flux : the net sensible heat flux over sea ice -->
+   <field id="CMIP6_siflswdtop"    field_ref="field_atm"      /> <!-- (W m-2) surface_downwelling_shortwave_flux_in_air : the downwelling shortwave flux over sea ice (always positive by sign convention) -->
+   <field id="CMIP6_siflswutop"    field_ref="field_atm"      /> <!-- (W m-2) surface_upwelling_shortwave_flux_in_air : the upward shortwave flux over sea ice (always negative) -->
+   <field id="CMIP6_sihc"          field_ref="field_atm"      /> <!-- (J m-2) integral_of_sea_ice_temperature_wrt_depth_expressed_as_heat_content : Heat content of all ice in grid cell divided by total grid-cell area. Water at 0 Celsius is assumed to have a heat content of 0 J.  Does not include heat content of snow, but does include heat content of brine. Heat content is always negative, since both the sensible and the latent heat content of ice are less than that of water -->
+   <field id="CMIP6_simass"        field_ref="field_atm"      /> <!-- (kg m-2) sea_ice_amount : Total mass of sea ice divided by grid-cell area -->
+   <field id="CMIP6_simassacrossline" field_ref="field_atm"      /> <!-- (kg s-1) simassacrossline : net (sum of transport in all directions) sea ice area transport through the following four passages, positive into the Arctic Ocean 1. Fram Strait = (11.5W,81.3N to (10.5E,79.6N) 2. Canadian Archipelego = (128.2W,70.6N) to (59.3W,82.1N) 3. Barents opening = (16.8E,76.5N) to (19.2E,70.2N) 4. Bering Strait = (171W,66.2N) to (166W,65N) -->
+   <field id="CMIP6_sipr"          field_ref="field_atm"      /> <!-- (kg m-2 s-1) rainfall_flux : mass of liquid precipitation falling onto sea ice divided by grid-cell area -->
+   <field id="CMIP6_sisnconc"      field_ref="field_atm"      /> <!-- (1.0) surface_snow_area_fraction : Fraction of sea ice, by area, which is covered by snow, giving equal weight to every square metre of sea ice . Exclude snow that lies on land or land ice. -->
+   <field id="CMIP6_sisnmass"      field_ref="field_atm"      /> <!-- (kg m-2) liquid_water_content_of_surface_snow : Total mass of snow on sea ice divided by grid-cell area -->
+   <field id="CMIP6_sisnthick_sosi" field_ref="field_atm"      /> <!-- (m) surface_snow_thickness : Actual thickness of snow (snow volume divided by snow-covered area) -->
+   <field id="CMIP6_sispeed"       field_ref="field_atm"      /> <!-- (m s-1) sea_ice_speed : Speed of ice (i.e. mean absolute velocity) to account for back-and-forth movement of the ice -->
+   <field id="CMIP6_sistrxubot"    field_ref="field_atm"      /> <!-- (N m-2) sistrxubot : X-component of ocean stress on sea ice  -->
+   <field id="CMIP6_sistryubot"    field_ref="field_atm"      /> <!-- (N m-2) downward_y_stress_at_sea_ice_base : Y-component of ocean stress on sea ice  -->
+   <field id="CMIP6_sitempsnic"    field_ref="field_atm"      /> <!-- (K) sea_ice_surface_temperature : Report surface temperature of ice where snow thickness is zero -->
+   <field id="CMIP6_sitemptop"     field_ref="field_atm"      /> <!-- (K) sea_ice_surface_temperature : Surface temperature of sea-ice (surface temperature of snow cover on the sea ice if applicable). -->
+   <field id="CMIP6_sithick"       field_ref="field_atm"      /> <!-- (m) sea_ice_thickness : Actual (floe) thickness of sea ice (NOT volume divided by grid area as was done in CMIP5) -->
+   <field id="CMIP6_sitimefrac"    field_ref="field_atm"      /> <!-- (1.0) sitimefrac : Fraction of time steps of the averaging period during which sea ice is present (siconc >0 ) in a grid cell  -->
+   <field id="CMIP6_siu"           field_ref="field_atm"      /> <!-- (m s-1) sea_ice_x_velocity : The x-velocity of ice on native model grid -->
+   <field id="CMIP6_siv"           field_ref="field_atm"      /> <!-- (m s-1) sea_ice_y_velocity : The y-velocity of ice on native model grid -->
+   <field id="CMIP6_sivol"         field_ref="field_atm"      /> <!-- (m) sea_ice_thickness : Total volume of sea ice divided by grid-cell area (this used to be called ice thickness in CMIP5) -->
+   <field id="CMIP6_sndmassmelt"   field_ref="field_atm"      /> <!-- (kg m-2 s-1) surface_snow_melt_flux : the rate of change of snow mass through melt divided by grid-cell area -->
+   <field id="CMIP6_sndmasssnf"    field_ref="field_atm"      /> <!-- (kg m-2 s-1) snowfall_flux : mass of solid precipitation falling onto sea ice divided by grid-cell area -->
+   <field id="CMIP6_usi"           field_ref="field_atm"      /> <!-- (m s-1) sea_ice_x_velocity : "Reported as ""missing"" in regions free of sea ice." -->
+   <field id="CMIP6_vsi"           field_ref="field_atm"      /> <!-- (m s-1) sea_ice_y_velocity : "Reported as ""missing"" in regions free of sea ice." -->
+</field_definition>

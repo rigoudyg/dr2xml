@@ -5,14 +5,14 @@ A few functions for processing
   - a CMIP Data request and 
   - a set of settings related to a laboratory, and a model 
   - a set of settings related to an experiment (i.e. a set of numerical simulations), 
-to a set of xml-syntax files used by XIOS (see https://forge.ipsl.jussieu.fr/ioserver/) for 
-outputing geophysical variable fields 
+to generate a set of xml-syntax files used by XIOS (see https://forge.ipsl.jussieu.fr/ioserver/) 
+for outputing geophysical variable fields 
 
 First version (0.8) : S.Senesi (CNRM) - sept 2016
 
 Changes :
   oct 2016 - Marie-Pierre Moine (CERFACS) - handle 'home' Data Request in addition
-  nov 2016 - S.Senesi (CNRM) - improve robustness
+  dec 2016 - S.Senesi (CNRM) - improve robustness
 
 """
 ####################################
@@ -43,19 +43,26 @@ from table2freq import table2freq
 dq = dreq.loadDreq()
 print dq.version
 
+def build_axis_definitions():
+    """ 
+    Build a dict of axis definitions 
+    """
+    for g in dq.coll['grids'].items :
+        pass
+
 """ An example/template  of settings for a lab and a model"""
-lab_and_model_settings={
-    'institution_id': "CNRM",
-    # TBD : institution should be read in CMIP6_CV, once updated
-    'institution'   : "Centre National de Recherches Meteorologiques", 
-    'model_id'      : "CNRM-CM6", 
-    'model'         : "CNRM CM6",#Should be read in CMIP6_CV, form model_id (once updated)
-    'source_type'   : 'AOGCM', # This should be udpated at the simulation dict level 
+example_lab_and_model_settings={
+    'institution_id': "CNRM-CERFACS", # institution should be read in CMIP6_CV, if up-to-date
+    'source_id'      : "CNRM-CM6-1", 
+    # The description of lab models, in CMIP6 CV wording
+    'source_types' : { "CNRM-CM6-1" : "AOGCM", "CNRM-CM6-1-HR" : "AOGCM", 
+                       "CNRM-ESM2-1": "ESM"  , "CNRM-ESM2-1-HR": "ESM" },
+    'source'         : "CNRM-CM6-1", # Useful only if CMIP6_CV is not up to date
     'references'    :  "A character string containing a list of published or web-based "+\
         "references that describe the data or the methods used to produce it."+\
         "Typically, the user should provide references describing the model"+\
         "formulation here",
-    'info_url'      : "http://www.cnrm-game-meteo.fr/cmip6/",
+    'info_url'      : "http://www.umr-cnrm.fr/cmip6/",
     'contact'       : 'contact.cmip@meteo.fr',
     
     # We account for the list of MIPS in which the lab takes part.
@@ -68,8 +75,12 @@ lab_and_model_settings={
     'max_priority' : 1,
     'tierMax'      : 1,
 
+    # The ping file defines variable names, which are constructed using CMIP6 "MIPvarnames" 
+    # and a prefix which must be set here, and can be the empty string :
+    "ping_variables_prefix" : "CMIP6_",
+
     # We account for a list of variables which the lab does not want to produce , 
-    # oragnized by realms
+    # Names must match DR MIPvarnames (and **NOT** CF standard_names)
     # excluded_vars_file="../../cnrm/non_published_variables"
     "excluded_vars":[],
 
@@ -97,7 +108,7 @@ lab_and_model_settings={
 
 """ An example/template of settings for a simulation """
 
-simulation_settings={    
+example_simulation_settings={    
     # Dictionnary describing the necessary attributes for a given simulation
 
     # Warning : some lines are commented out in this example but should be 
@@ -107,15 +118,14 @@ simulation_settings={
     #"contact"        : "", set it only if it is specific to the simualtion
     #"project"        : "CMIP6",  #CMIP6 is the default
 
-    #'source_type'    : "ESM" # If source_type is special only for this experiment (e.g. : AMIP)
-                      #(i.e. not the same as in lan_and_model settings), you may tell that here
+    #'source_type'    : "ESM" # If source_type deduced from model name is not relevant for this 
+                   #experiment (e.g. : AMIP), you may tell that here
 
-    # MIP specifying the experiment. For historical, it is CMIP6
+    # MIPs specifying the experiment. For historical, it is CMIP
     # itself In a few cases it may be appropriate to include multiple
-    # activities in the activity_id (with multiple activities allowed,
-    # separated by single spaces).  An example of this is 'LUMIP
-    # AerChemMIP' for one of the land-use change experiments.
-    "activity"             : "CMIP6", # examples : "PMIP", 'LS3MIP LUMIP'; defaults to "CMIP6"
+    # activities in the activity_id (separated by single spaces).  
+    # An example of this is 'LUMIP AerChemMIP' for one of the land-use change experiments.
+    "activity_id"      : "CMIP", # examples : "PMIP", 'LS3MIP LUMIP'; defaults to "CMIP"
     
     # It is recommended that some description be included to help
     # identify major differences among variants, but care should be
@@ -140,39 +150,40 @@ simulation_settings={
     "branch_time_in_parent": "365.0D0", # a double precision value, in parent time units, 
     "branch_time_in_child" : "0.0D0", # a double precision value, in child time units, 
     #'parent_time_units'    : "" #in case it is not the same as child time units
-    #'parent_variant_label' :""  #Default to 'same as child'. Other cases should be expceptional
-    #'parent_sub_experiment_id' : "" # In case it is not the same as child
+    #'parent_variant_label' :""  #Default to 'same as child'. Other cases should be exceptional
     #"parent_mip_era"       : 'CMIP5'   # only in special cases (as e.g. PMIP warm 
                                         #start from CMIP5/PMIP3 experiment)
-    #'parent_activity   '   : 'CMIP'    # only in special cases, defaults to CMIP
+    #'parent_activity_id'   : 'CMIP'    # only in special cases, defaults to CMIP
     #'parent_source_id'     : 'CNRM-CM5.1' # only in special cases, where parent model 
                                            # is not the same model
     #
     "sub_experiment_id"    : "none", # Optional, default is 'none'; example : s1960. 
     "sub_experiment"       : "none", # Optional, default in 'none'
-    #'parent_subexperiment_id': '' # unusual
-    "history"              : "", #Used when a simulation is re-run, an output file is modified ...
+    "history"              : "no_history", #Used when a simulation is re-run, an output file is modified ...
     # A per-variable dict of comments which are specific to this simulation. It will replace  
     # the all-simulation comment
     'comments'     : {
-        'tas' : 'tas diagnostic uses a special scheme in this simulation',
+        'tas' : 'tas diagnostic uses a special scheme in this simulation : .....',
         }
     }
 
-#class needed for processing home variables
+#A class for unifying CMOR vars and home variables
 class simple_CMORvar(object):
     def __init__(self):
-        self.type           = None # Only useful for HOMEvar.
+        self.type           = 'perso' # Default case is HOMEvar.
         self.modeling_realm = None # Useful for both HOMEvar and CMORvar.
         self.mipTable       = None # Useful for both HOMEvar and CMORvar.
         self.label          = None # Useful for both HOMEvar and CMORvar.
+        self.label_with_area= None # Useful for both HOMEvar and CMORvar.
         self.frequency      = None # Useful for both HOMEvar and CMORvar.
         self.mipTable       = None # Useful for both HOMEvar and CMORvar.
         self.positive       = None # Useful for CMORvar and updated HOMEvar.
         self.description    = None # Useful for CMORvar and updated HOMEvar.
         self.stdname        = None # Useful for CMORvar and updated HOMEvar.
+        self.stdunits       = None # Useful for CMORvar and updated HOMEvar.
         self.long_name      = None # Useful for CMORvar and updated HOMEvar.
-        #self.cell_methods   = None
+        self.struct         = None
+        self.cell_methods   = None
         #self.cell_measures  = None
         self.spatial_shp    = None # Only useful for HOMEvar.
         self.temporal_shp   = None # Only useful for HOMEvar.
@@ -208,6 +219,7 @@ def read_homeVars_list(hmv_file,expid,mips):
             if ccol!='': 
                 cc+=1
                 setattr(home_var,home_attrs[cc],ccol)
+        home_var.label_with_area=home_var.label
         if home_var.mip!="ANY":
             if home_var.mip in mips:
                 if home_var.experiment!="ANY":
@@ -235,9 +247,7 @@ def get_SpatialAndTemporal_Shapes(cmvar):
 
 def get_corresp_CMORvar(hmvar):
     collect=dq.coll['CMORvar']
-    found=False
     count=0
-    cmvar_found=[]
     for cmvar in collect.items:
         # Consider case where no modeling_realm associated to the current CMORvar as matching anymay. 
         #mpmoine# A mieux gerer avec les orphan_variables ?
@@ -250,42 +260,21 @@ def get_corresp_CMORvar(hmvar):
         if matching: 
             same_shapes=(get_SpatialAndTemporal_Shapes(cmvar)==[hmvar.spatial_shp,hmvar.temporal_shp])
             if same_shapes:
-                found=True
                 count+=1
-                cmvar_found.append(cmvar)
+                cmvar_found=cmvar
             else: 
-                print "Error: ",[hmvar.label,hmvar.mipTable]," HOMEVar: Spatial and Temporal Shapes specified DO NOT match CMORvar ones." \
-                      " -> Provided:",[hmvar.spatial_shp,hmvar.temporal_shp],'Expected:',get_SpatialAndTemporal_Shapes(cmvar)
+                print "Error: ",[hmvar.label,hmvar.mipTable],\
+                    " HOMEVar: Spatial and Temporal Shapes specified DO NOT match CMORvar ones." \
+                    " -> Provided:",[hmvar.spatial_shp,hmvar.temporal_shp],\
+                    'Expected:',get_SpatialAndTemporal_Shapes(cmvar)
+    if count==1: 
+        complement_svar_using_cmorvar(hmvar,cmvar_found)
+        return hmvar
+    return False
 
-    if found:
-        if count==1: 
-            # Collect complementary attributes from CMORvar and glue them to HOMEvar
-            hmvar.positive=cmvar_found[0].positive
-            hmvar.long_name=cmvar_found[0].title
-            mipvar = dq.inx.uid[cmvar_found[0].vid]
-            #hmvar.long_name=mipvar.title
-            stdname = dq.inx.uid[mipvar.sn]
-            if stdname:
-                if stdname._h.label == 'standardname':
-                    hmvar.stdname = stdname.label
-                    hmvar.description = stdname.description
-                else:
-                    #print "Issue: stdname is remark in DR for",mipvar.label
-                    pass
-            else:
-                print "Issue: accessing sn for",cmvar_found[0].label
-            return hmvar
-        else:
-            return False
-    else:
-        return False
-
-def hasCMORVarName(hmvar):
-    collect=dq.coll['CMORvar']
-    match_label=False
-    for cmvar in collect.items:
-        if (cmvar.label==hmvar.label): match_label=True
-    return match_label
+#def hasCMORVarName(hmvar):
+#    for cmvar in dq.coll['CMORvar'].items:
+#        if (cmvar.label==hmvar.label): return True
                 
 def RequestItem_applies_for_exp_and_year(ri,experiment,year,debug=False):
     """ 
@@ -323,20 +312,23 @@ def RequestItem_applies_for_exp_and_year(ri,experiment,year,debug=False):
         # TBD !! : understand what is happening in that case 
         if (debug)  : print "%20s"%'Other case , label=%s|'%item_exp._h.label,
     if relevant :
-        if 'tslice' in ri.__dict__ and ri.tslice != '__unset__' :
-            timeslice=dq.inx.uid[ri.tslice]
-            if (debug) : print "OK for the year"
-            try :
-                rep=year >= timeslice.start and year<=timeslice.end
-            except :
-                rep=True
-                print "Assuming timeslice "+timeslice.label+" "+timeslice.uid+" applies for RequestItem "+ri.title
-            return rep
+        if 'tslice' in ri.__dict__ :
+            if ri.tslice == '__unset__' :
+                print "tslice is unset for reqlink %s "%ri.title
+                relevant=True
+            else:
+                timeslice=dq.inx.uid[ri.tslice]
+                if (debug) : print "OK for the year"
+                try :
+                    relevant=year >= timeslice.start and year<=timeslice.end
+                except :
+                    relevant=True
+                    print "tslice not well set for "+timeslice.label+" "+timeslice.uid+\
+                        ". Assuming it applies for RequestItem "+ri.title
         else :
-            # TBD : !! test once timeSlices will be set in DR
             if (debug)  : print "tslice not set -> OK for the year"
-            return True
-    if (debug)  : print "NOK"
+            #print "No tslice for %s"%ri.title
+            relevant=True
     return relevant
 
 def select_CMORvars_for_lab(lset, experiment_id=None, year=None, printout=False):
@@ -389,55 +381,86 @@ def select_CMORvars_for_lab(lset, experiment_id=None, year=None, printout=False)
     miprl_vars=sc.varsByRql(miprl_ids, pmax=lset['max_priority'])
     if printout :
         print '\nNumber of CMOR variables for these requestLinks is :',len(miprl_vars)
-    filtered_vars=[ v for v in miprl_vars if dq.inx.uid[v].label not in lset['excluded_vars'] ]
+    # 
+    filtered_vars=[]
+    for v in miprl_vars : 
+        cmvar=dq.inx.uid[v]
+        mipvar=dq.inx.uid[cmvar.vid]
+        if mipvar.label not in lset['excluded_vars'] : 
+            filtered_vars.append(v)
     if printout :
-        print '\nNumber of CMOR variables once filtered by excluded vars is :',len(miprl_vars)
-    
-    # Just for printout : Count distinct var labels
-    varlabels=set()
-    for v in filtered_vars : varlabels.add(dq.inx.uid[v].label)
+        print '\nNumber of CMOR variables once filtered by excluded vars is :',len(filtered_vars)
+    #
+    # Print a count of distinct var labels
     if printout :
+        varlabels=set()
+        for v in filtered_vars : varlabels.add(dq.inx.uid[v].label)
         print '\nNumber of variables with distinct labels is :',len(varlabels)
 
-    # Build a list of simplified CMORvar objects
+    # Translate CMORvars to a list of simplified CMORvar objects
     simplified_vars = []
     for v in filtered_vars :
         svar = simple_CMORvar()
         cmvar = dq.inx.uid[v]
-        svar.label = cmvar.label
-        svar.frequency = cmvar.frequency
-        svar.mipTable = cmvar.mipTable
         svar.modeling_realm = cmvar.modeling_realm
-        svar.mipTable = cmvar.mipTable
-        svar.positive = cmvar.positive
-        mipvar = dq.inx.uid[cmvar.vid]
-        svar.long_name = mipvar.title
-        [svar.spatial_shp,svar.temporal_shp]=get_SpatialAndTemporal_Shapes(cmvar)
-
-        #mpmoine_modif# deplacement dans 'select_CMORvars_for_lab' de tout ce qui concerne les MAJ d'attributs (stdname, units, cell_methods,...)
-        #mpmoine_modif# anciennement dans 'write_xios_field_ref_in_file_def' pour centraliser le renseignement es attributs 'svar'
-        try :
-            stdname = dq.inx.uid[mipvar.sn]
-            #units=mipvar.units
-            if stdname._h.label == 'standardname':
-                svar.stdname = stdname.label
-                #svar.units = stdname.units
-                svar.description = stdname.description
-            else :
-                #print "Issue : stdname is remark in DR for %s!"%mipvar.label
-                pass
-        except:
-            print "Issue accessing sn for %s !"%cmvar.label
-        # TBD : translate cell_method in XIOS operations
-        #struct=dq.inx.uid[cmvar.stid]
-        #svar.cell_methods = struct.cell_methods
-        #svar.cell_measures = struct.cell_methods
+        complement_svar_using_cmorvar(svar,cmvar)
         simplified_vars.append(svar)
-    
-     #mpmoine_modif# return 'simplified_vars' au lieu de 'filtered_vars'
+    print '\nNumber of simplified vars is :',len(simplified_vars)
     return simplified_vars
 
-def write_xios_file_def(cmvs,table, lset,sset, out,cvspath) :
+def complement_svar_using_cmorvar(svar,cmvar):
+    """ 
+    The label for SVAR will be suffixed by an area name it the 
+    MIPvarname is ambiguous for that
+
+    Used by get_corresp_CMORvar and by select_CMORvars_for_lab
+    """
+    svar.frequency = cmvar.frequency
+    svar.mipTable = cmvar.mipTable
+    svar.positive = cmvar.positive
+    [svar.spatial_shp,svar.temporal_shp]=get_SpatialAndTemporal_Shapes(cmvar)
+    mipvar = dq.inx.uid[cmvar.vid]
+    svar.label = mipvar.label
+    svar.long_name = mipvar.title
+    if mipvar.description :
+        svar.description = mipvar.description
+    else:
+        svar.description = mipvar.title
+    svar.stdunits = mipvar.units
+    try :
+        svar.cell_methods=dq.inx.uid[dq.inx.uid[cmvar.stid].cmid].cell_methods
+    except:
+        #print "Issue with cell_method for "+`cmvar`
+        svar.cell_methods=None
+    area=cellmethod2area(svar.cell_methods) 
+    if area : 
+        svar.label_with_area=svar.label+"_"+area
+        if mipvar.label in ambiguous_mipvarnames :
+            svar.label=svar.label_with_area
+    else:
+        svar.label_with_area=svar.label
+
+    svar.type='cmor'
+    stdname=None
+    #
+    try :
+        stdname = dq.inx.uid[mipvar.sn]
+    except:
+        pass
+        #print "Issue accessing sn for %s %s!"%(cmvar.label,cmvar.mipTable)
+    #units=mipvar.units
+    #
+    svar.struct=dq.inx.uid[cmvar.stid]
+    if stdname and stdname._h.label == 'standardname':
+            svar.stdname = stdname.uid
+            #svar.stdunits = stdname.units
+            #svar.description = stdname.description
+    else :
+        # If CF standard name is NOK, let us use MIP variables attributes
+        svar.stdname = mipvar.label
+
+
+def write_xios_file_def(cmvs,table, lset,sset, out,cvspath,field_defs,axis_defs,domain_defs,pingvars) :
     """ 
     Generate an XIOS file_def entry in out for :
       - a dict for laboratory settings 
@@ -470,20 +493,20 @@ def write_xios_file_def(cmvs,table, lset,sset, out,cvspath) :
     grid_label="TBD" #TBD
     time_range="%start_date%_%end_date%" # XIOS syntax
     filename="%s_%s_%s_%s_%s_%s"%\
-               (table, experiment_id,lset['model_id'], member_id,grid_label,time_range)
+               (table, experiment_id,lset['source_id'], member_id,grid_label,time_range)
 
     # WIP Draft 14 july 2016
-    activity=sset['activity'] 
+    activity_id=sset.get('activity_id','CMIP')
     try :
         freq=table2freq[table] 
     except:
         print "Issue with table2freq[%s]"%table
         freq="TBD_freq_of_"+table
-    split_freq="10y" #TBD : compute file-level split_freq
-    out.write('<file name="%s" freq_output="%s" append="true" split_freq="%s" timeseries="exclusive" >\n'%\
+    split_freq="TBD" # compute file-level split_freq
+    out.write('<file name="%s" output_freq="%s" append="true" split_freq="%s" timeseries="exclusive" >\n'%\
               (filename,freq[0],split_freq))
     out.write('  <variable name="project_id" type="string" > %s/%s </variable>\n'%(
-                   sset.get('project',"CMIP6"),activity))
+                   sset.get('project',"CMIP6"),activity_id))
     #
     def wr(key,dic_or_val=None,default=None) :
         """
@@ -504,20 +527,20 @@ def write_xios_file_def(cmvs,table, lset,sset, out,cvspath) :
                 else :                 
                     print 'error : %s not in dic and default is None'%key
         else : 
-            if dic_or_val  : val=dic_or_val
+            if dic_or_val is not None : val=dic_or_val
             else :
-                print 'error in wr,  no value provided for '%key
+                print 'error in wr,  no value provided for %s'%key
         if val :
             out.write('  <variable name="%s"  type="string" > %s </variable>\n'%(key,val))
 
-    wr('activity',activity)
+    wr('activity_id',activity_id)
     contact=sset.get('contact',lset.get('contact',None))
     if contact and contact is not "" : wr('contact',contact) 
     conventions="CF-1.7 CMIP-6.0" ;     wr('conventions',conventions) 
     # YYYY-MM-DDTHH:MM:SSZ
     creation_date=datetime.utcnow().isoformat()[0:-7]+"Z" ; wr('creation_date',creation_date) 
-    data_specs_version="TBD" # TBD, but not yet available in CMIP6_CVs ...
-    wr('data_specs_version',data_specs_version)
+    # TBC : assume data_specs_version attributes is equal to dq.version
+    wr('data_specs_version',dq.version)
     #
     with open(cvspath+"CMIP6_experiment_id.json","r") as json_fp :
         CMIP6_experiments=json.loads(json_fp.read())['experiment_id']
@@ -530,27 +553,47 @@ def write_xios_file_def(cmvs,table, lset,sset, out,cvspath) :
     wr('experiment',experiment)
     wr('experiment_id',experiment_id)
     # 
-    external_variables= "TBD" 
+    # TBC - external_variables must be consistent with table_id (which make
+    # sense) and variable_id (which could be an issue for a file
+    # global attribute which is defined, using XIOS and its
+    # 'timeseries' fetaure, for multiple variables ; but let us hope
+    # that all tables but those with an 'O' as first letter require
+    # areacella, and the others require areacello
+    external_variables= "areacella" 
+    if table[0]=='O' or table[0:1]=='SI' : external_variables= "areacello" 
+    if 'fx' in table : external_variables= "" 
+    wr('external_variables',external_variables)
+    #
     wr('forcing_index',forcing_index) 
     wr('frequency',freq[1])
     # URL
     mip_era="CMIP6"
     institution_id=lset['institution_id']
-    source_id=lset['model_id']
+    source_id=lset['source_id']
     sub_experiment_id=sset.get('sub_experiment_id','none')
     further_info_url="http://furtherinfo.es-doc.org/%s.%s.%s.%s.%s.%s"%(
         mip_era,institution_id,source_id,experiment_id,sub_experiment_id,variant_label)
     wr('further_info_url',further_info_url)
     #
-    wr('grid','TBD') #TBD - depend du model et du realm, donc de la variabble
+    wr('grid','TBD') #TBD - depend du model et du realm, donc de la variable
     wr('grid_label','TBD') #TBD - -d - gn pour Nemo, gr pour Arpege
     wr('grid_resolution','TBD') #TBD - id
     wr('history',sset) 
     wr("initialization_index",initialization_index)
     wr("institution_id",institution_id)
-    wr("institution",lset)
+    if "institution" in lset :
+        inst=lset['institution']
+    else:
+        with open(cvspath+"CMIP6_institution_id.json","r") as json_fp :
+            try:
+                inst=json.loads(json_fp.read())['institution_id'][institution_id]
+            except :
+                print "Institution_id for %s not found in CMIP6_CV at %s"%(institution,cvspath)
+                sys.exit()
+    wr("institution",inst)
+    #
     license="CMIP6 model data produced by %s is licensed under a Creative Commons Attribution"\
-        %lset['institution']+\
+        %inst+\
      "'Share Alike' 4.0 International License (http://creativecommons.org/licenses/by/4.0/). "+\
       "Use of the data should be acknowledged following guidelines found at "+\
       "https://pcmdi.llnl.gov/home/CMIP6/citation.html."+\
@@ -566,7 +609,7 @@ def write_xios_file_def(cmvs,table, lset,sset, out,cvspath) :
     wr('mip_era',mip_era)
     parent_experiment_id=sset.get('parent_experiment_id',None)
     if parent_experiment_id and parent_experiment_id != 'no_parent' :
-        parent_activity_id=sset.get('parent_activity','CMIP')
+        parent_activity_id=sset.get('parent_activity_id','CMIP')
         wr('parent_activity_id',parent_activity_id)
         wr("parent_experiment_id",sset); 
         parent_mip_era=sset.get('parent_mip_era',"CMIP6") ; 
@@ -574,9 +617,8 @@ def write_xios_file_def(cmvs,table, lset,sset, out,cvspath) :
         wr('parent_mip_era',parent_mip_era) 
         parent_source_id=sset.get('parent_source_id',source_id) ; 
         wr('parent_source_id',parent_source_id)
-        wr("parent_sub_experiment_id",sset, False); 
         # TBX : syntaxe XIOS pour designer le time units de la simu courante
-        parent_time_units=sset.get('parent_time_units',"TBX") 
+        parent_time_units=sset.get('parent_time_units',"TBD") 
         wr("parent_time_units",parent_time_units)
         parent_variant_label=sset.get('parent_variant_label',variant_label) 
         wr('parent_variant_label',parent_variant_label)
@@ -588,17 +630,38 @@ def write_xios_file_def(cmvs,table, lset,sset, out,cvspath) :
     wr("realization_index",realization_index) 
     #wr('realm',"TBD") # decline par variable
     wr('references',lset) 
-    # TBD - should be taken from CMIP6_CV once it is updated for CNRM and IPSL models
-    wr('source',lset['model']) 
+    #
+    with open(cvspath+"CMIP6_source_id.json","r") as json_fp :
+        try:
+            source=json.loads(json_fp.read())['source_id'][source_id]
+        except :
+            if "source" in lset : 
+                #print "source for %s not found in CMIP6_CV at %s, use lset"%(source_id,cvspath)
+                source=lset['source']
+            else:
+                print "source for %s not found in CMIP6_CV at %s, nor in lset"%(source_id,cvspath)
+    wr('source',source) 
     wr('source_id',source_id)
-    source_type=sset.get('source_type',lset.get('source_type')) 
+    if 'source_type' in sset :
+        source_type=sset['source_type']
+    else:
+        if 'source_type' in lset :
+            source_type=lset['source_type']
+        else:
+            if 'source_types' in lset :
+                source_type=lset['source_types'][source_id] 
+            else:
+                print "No source-type found !!"
+                source_type='TBD' 
     if type(source_type)==type([]) :
         source_type=reduce(lambda x,y : x+" "+y, source_type)
     wr('source_type',source_type)
+    #
     wr('sub_experiment_id',sub_experiment_id) 
+    wr('sub_experiment',sset,'none') 
     wr("table_id",table)
     wr("title","%s model output prepared for %s / %s %s"%(\
-        source_id,sset.get('project',"CMIP6"),activity,experiment_id))
+        source_id,sset.get('project',"CMIP6"),activity_id,experiment_id))
     wr("tracking_id","hdl:21.14100/"+uuid4().get_urn().split(":")[2]) 
     #variable_id # decline par variable
     wr("variant_info",sset,"")
@@ -608,54 +671,129 @@ def write_xios_file_def(cmvs,table, lset,sset, out,cvspath) :
     #
 
     for cmv in cmvs : 
-        write_xios_field_ref_in_file_def(cmv,out,lset,sset)
+        write_xios_field_ref_in_file_def(cmv,out,lset,sset,field_defs,axis_defs,domain_defs,pingvars)
     out.write('</file>\n\n')
 
-def write_xios_field_ref_in_file_def(cmv,out,lset,sset) :
+def write_xios_field_ref_in_file_def(sv,out,lset,sset,
+             field_defs,axis_defs,domain_defs,pingvars) :
     """
-    Writes a CMOR variable entry (provided as a DR uid) as a field reference in out, 
-    with prefix 'CMIP_' for the variable name
+    Writes a simplified variable object sv as a field reference in out, 
+    with lab prefix for the variable name
+    Add field definitions for intermediate variables in dic field_defs
+    Add axis  definitions for interpolations in dic axis_defs
+    Use pingvars for identifying some intermediate or specific variables provided by the model
     """
-    # TBD : identify the cell_method wrt to time and translate it to XIOS time_operation. 
-    # + same for space
     # TBD : logic for computing ts_split_frequency from rank and time-space ops
-    
     #
     # By convention, field references are built as CMIP_<MIP_varable_name>
-    # Such references muts be fulfilled using a dedicated filed_def section implementing 
-    # the match between legacy model field names and such names
+    # Such references must be fulfilled using a dedicated filed_def section implementing 
+    # the match between legacy model field names and such names, called 'ping section'
     #
+    # Identify which 'ping' variable ultimatley matches the requested MIP variable,
+    # based on shapes. This may involve building intermediate variables,
+    # in order to  apply corresponding operations
 
+    # The preferred order of operation is : vertical interp (which is time-dependant), 
+    # time-averaging, horizontal operations (using expr=@this)
+
+    # We use a simple convention for variable names in ping files : 
+    #if lset["use_area_suffix"] : varname=sv.label
+    #else: varname=sv.label
+    varname=sv.label
+    if sv.type=='perso' : alias=varname
+    else:                 alias=lset["ping_variables_prefix"]+varname
+    # nextvar is the field name provided as output of the last operation currently defined
+    nextvar=alias 
+
+    # First check if the ping file vars includes that variable
+    if pingvars and not nextvar in pingvars :
+        print "Skipping variable %s, which is not listed in ping file"
+        return
+
+    detect_missing="false"
+    operation="instant"
+    if False: #TBD : complete code for handling spatial shape
+        # Proceed with vertical interpolation if needed
+        ssh=sv.spatial_shp
+        if ssh[0:4] in ['XY-H','XY-P'] or ssh[0:3] == 'Y-P' :
+            dimids=dq.inx.uid[sv.struct.spid].dimids
+            for dimid in dimids :
+                d=dq.inx.uid[dimid]
+                if isVertInterpolationDim(d) :
+                    #ex: alt40
+                    furthervar=nextvar+"_"+d.label
+                    if not furthervar in pingvars :
+                        # Construct an axis for interpolating to this dimension
+                        axis_defs[d.label]=create_axis_def(d)
+                        # Construct a field def for the interpolated variable
+                        field_defs[furthervar]='<field id="%s" axis_ref="%s" field_ref="%s"/>'\
+                            %(furthervar,d.label,nextvar)
+                    nextvar=furthervar
+                    #TBD what to do for singleton dimension ?
+
+        # Time operation - because all basic fields are assumed to be declared as 'instant' 
+        # field, we must declare a derived (e.g. 'averaged') field when applicable
+        operation,detect_missing = analyze_cell_time_method(sv.cell_methods,sv.label)
+        if operation is not None :
+            suffix={"instant":"", "average":"_avg", "minimum":"_min", "maximum":"_max"}
+            furthervar=nextvar+suffix[operation]
+            if not furthervar in pingvars :
+                op='<field id="%s" field_ref="%s" operation="%s"'%(furthervar,nextvar)
+                if detect_missing : op+=' detect_missing_value="True"'
+                op+="/>"
+                field_defs[furthervar]=op
+            nextvar=furthervar
+
+        # Horizontal operations
+        # Compute domain name, define it if needed
+        domain_ref=None
+        if ssh[0:2] == 'Y-' : #zonal mean and atm zonal mean on pressure levels
+            domain_ref="zonal_mean"
+            if domain_ref not in domain_defs :
+                domain_defs[domain_ref]="TBD - cf tests Martine"
+        elif ssh[0:2] == 'S-' : #COSP sites; cas S-na, S-A, S-AH
+            domain_ref="COSP_sites"
+            if domain_ref not in domain_defs :
+                domain_defs[domain_ref]="TBD - grille COSP"
+        elif ssh[0:2] == 'L-' :
+            domain_ref="COSP_curtain"
+            if domain_ref not in domain_defs :
+                domain_defs[domain_ref]="TBD - curtain COSP"
+        elif sshape == 'TR-na' or sshape == 'TRS-na' : #transects,   oce or SI
+            pass
+        elif sshape[0:3] == 'XY-'  : # includes 'XY-AH' : model half-levels
+            pass
+        elif sshape[0:3] == 'YB-'  : #basin zonal mean or section
+            pass
+        elif sshape      == 'na-na'  :
+            pass # TBD : global mean
+        else :
+            print "Issue with un-managed spatial shape %s"%sshape
+    #
+    split_freq="10y" #TBD - Should be computed
+    out.write('  <field field_ref="%s" name="%s" ts_enabled="true" ts_split_freq="%s" operation="%s" detect_missing="%s">\n'%(
+                        nextvar,sv.label,split_freq,operation,detect_missing))
+    #
     def wrv(name, value):
         # Write a 'variable' entry
         out.write('     <variable name="%s" type="string" > %s </variable>\n'%(name,value))
     #
-    alias="CMIP_"+cmv.label
-    split_freq="10y" #TBD - Should be computed
-    operation="average" #TBD - Not systematically - to improve
-
-    out.write('  <field field_ref="%s" name="%s" operation="%s" ts_enabled="true" ts_split_freq="%s">\n'%(
-                        alias,cmv.label,operation,split_freq))
     comment=None
     # Process experiment-specific comment for the variable
-    if cmv.stdname in sset['comments'] :
-        comment=sset['comments'][cmv.stdname] 
+    if sv.label in sset['comments'] :
+        comment=sset['comments'][sv.label] 
     else: # Process lab-specific comment for the variable
-        if cmv.stdname in lset['comments'] : 
-            comment=sset['comments'][cmv.stdname] 
+        if sv.label in lset['comments'] : 
+            comment=sset['comments'][sv.label] 
     if comment : wrv('comment',comment) #TBI 
     #
-    wrv('realm',cmv.modeling_realm) 
-    wrv('variable_id',cmv.label)
-    wrv("standard_name",cmv.stdname)
-    wrv("description",cmv.description)
-    wrv("long_name",cmv.long_name)
-    if cmv.positive != "None" and cmv.positive != "" : wrv("positive",cmv.positive) 
-
-    #mpmoine_modif# deplacement dans 'select_CMORvars_for_lab' de tout ce qui concerne les MAJ d'attributs (stdname, units, cell_methods,...)
-    #mpmoine_modif# anciennement dans 'write_xios_field_ref_in_file_def' pour centraliser le renseignement es attributs 'svar'
-
-    #
+    wrv('realm',sv.modeling_realm) 
+    wrv('variable_id',sv.label)
+    wrv("standard_name",sv.stdname)
+    wrv("description",sv.description)
+    wrv("long_name",sv.long_name)
+    if sv.positive != "None" and sv.positive != "" : wrv("positive",sv.positive) 
+    wrv('history','none')
     out.write('     </field>\n')
 
 def generate_file_defs(lset,sset,year,context,cvs_path,printout=False) :
@@ -679,7 +817,8 @@ def generate_file_defs(lset,sset,year,context,cvs_path,printout=False) :
             hv_info={"varname":hv.label,"realm":hv.modeling_realm,"freq":hv.frequency,"table":hv.mipTable}
             #if printout : print hv_info
             if hv.type=='cmor':
-                # Update each HOME variable with complementary attributes get from the corresponding CMOR variable (if exist)
+                # Update each HOME variable with complementary attributes got from 
+                # the corresponding CMOR variable (if exist)
                 updated_hv=get_corresp_CMORvar(hv)
                 if(updated_hv):
                     already_in_dr=False
@@ -710,7 +849,8 @@ def generate_file_defs(lset,sset,year,context,cvs_path,printout=False) :
                 is_cmor=get_corresp_CMORvar(hv)
                 if not is_cmor:
                     # Check if  HOME variable differs from CMOR one only by shapes
-                    has_cmor_varname=hasCMORVarName(hv)
+                    has_cmor_varname=any([ cmvar.label==hv.label for cmvar in dq.coll['CMORvar'].items])
+                    #hasCMORVarName(hv)
                     if has_cmor_varname:
                         if printout: print "Warning:",hv_info,"HOMEVar is anounced as perso, is not a CMORVar, but has a cmor name." \
                                             " => Not taken into account."
@@ -777,8 +917,257 @@ def generate_file_defs(lset,sset,year,context,cvs_path,printout=False) :
     # Write XIOS file_def
     filename="%s.xml"%context
     with open(filename,"w") as out :
+        field_defs=dict()
+        axis_defs=dict()
+        domain_defs=dict()
+        pingvars=[] # TBD : init pingvars
         #for table in ['day'] :    
+        out.write('<file_definition> \n')
         for table in cmvs_pertable :  
-            write_xios_file_def(cmvs_pertable[table],table, lset,sset,out,cvs_path)
+            write_xios_file_def(cmvs_pertable[table],table, lset,sset,out,cvs_path,
+                                field_defs,axis_defs,domain_defs,pingvars)
+        out.write('</file_definition> \n')
     if printout :
         print "\nfile_def written as %s"%filename
+
+
+
+def cellmethod2area(method) :
+    """
+    Analyze METHOD to identify if its part related to area includes some key words which describe given area types
+    """
+    if method is None                 : return None
+    if "where floating_ice_shelf"     in method : return "fisf"
+    if "where grounded_ice_shelf"     in method : return "gisf"
+    if "where snow over sea_ice area" in method : return "sosi"
+    if "where ice_free_sea over sea " in method : return "ifs"
+    if "where land"         in method : return "land"
+    if "where sea_ice"      in method : return "si"
+    if "where sea"          in method : return "sea"
+    if "where snow"         in method : return "snow"
+    if "where cloud"        in method : return "cloud"
+    if "where landuse"      in method : return "lu"
+    if "where ice_shelf"    in method : return "isf"
+
+def create_axis_def(dim_name_or_obj):
+    """ 
+    From a dim DR object or a dim name, returns an Xios axis definition 
+    """
+    dim=None
+    if type(dim_name_or_obj)==type(""):
+        for g in dq.coll['grids'].items : 
+            if g.label==dim_name_or_obj : dim=g
+    else: dim=dim_name_or_obj
+    if dim is None : return None
+    rep='<axis id="%s" '%dim.label
+    if not dim.positive in [ None, "" ] :
+        rep+='positive="%s" '%dim.positive
+    if dim.requested != "" :
+        # Case of a non-degenerated dimension (not a singleton)
+        n_glo=len(dim.requested.split(" "))
+        rep+='n_glo=%g '%n_glo
+        rep+='value=(0,%g) [%s]">'%(n_glo - 1,dim.requested)
+    elif dim.value != "":
+        # Singleton case
+        rep+='n_glo=%g '%1
+        rep+='value=(0,0)[%s]">'%dim.value
+    else :
+        pass
+    coordname=dq.inx.uid[dim.standardName].uid
+    if coordname=="air_pressure" : coordname="pa"
+    if coordname=="altitude"     : coordname="zg"
+    rep+='\n\t<interpolate_axis type="polynomial" order="1" coordinate="%s"/>\n</axis>'%coordname
+    return rep
+
+def isVertInterpolationDim(dim):
+    """
+    Returns True if dim represents a dimension for which we want an Xios interpolation 
+    TBD - For now, a very simple logics for interpolated vertical dimension identification:
+    """
+    return not dim.label in [ 'latitude', 'longitude' ] 
+
+def analyze_cell_time_method(cm,label):
+    """
+    Depending on cell method string CM, tells which time operation
+    should be done, if missing value detection should be set
+    """
+    operation=None
+    detect_missing=False
+    if cm is None : 
+        pass
+    elif "time: mean (with samples weighted by snow mass)" in cm : 
+        #[amnla-tmnsn]: Snow Mass Weighted (LImon : agesnow, tsnLi)
+        print "TBD Cannot yet handle time: mean (with samples weighted by snow mass"
+    elif "time: mean where cloud"  in cm : 
+        #[amncl-twm]: Weighted Time Mean on Cloud (2 variables ISSCP 
+        # albisccp et pctisccp, en emDay et emMon)
+        print " TBD Cannot yet handle time: mean where cloud" 
+    elif "time: mean where sea"  in cm :#[amnesi-tmn]: 
+        #Area Mean of Ext. Prop. on Sea Ice : pas utilisee
+        print "time: mean where sea is not supposed to be used" 
+    elif "time: mean where sea_ice" in cm :
+        #[amnsi-twm]: Weighted Time Mean on Sea-ice (presque que des 
+        #variables en SImon, sauf sispeed et sithick en SIday)
+        detect_missing=True
+    elif "time: minimum" in cm :    
+        #[tmin]: Temporal Minimum : utilisee seulement dans table daily
+        operation="minimum"
+    elif "time: maximum" in cm :   
+        #[tmax]: Time Maximum  : utilisee seulement dans table daily
+        operation="maximum"
+    elif "time: maximum within days time: mean over days" in cm :
+        #[dmax]: Daily Maximum : tasmax Amon seulement
+        if label != 'tasmax' : 
+            print "Issue with variable %s and cell method "%label+\
+                "time: maximum within days time: mean over days"
+        operation="average"
+    elif "time: minimum within days time: mean over days" in cm :
+        #[dmin]: Daily Minimum : tasmin Amon seulement
+        if label != 'tasmin' : 
+            print "Issue with variable %s and cell method "%label+\
+                "time: minimum within days time: mean over days"
+        operation="average"
+    elif "time: mean within years time: mean over years" in cm: 
+        #[aclim]: Annual Climatology
+        print "TBD Cannot yet compute annual climatology for %s"%label 
+        # Could transform in monthly fields to be post-processed
+    elif "time: mean within days time: mean over days"  in cm: 
+        #[amn-tdnl]: Mean Diurnal Cycle
+        print "TBD Cannot yet compute diurnal cycle for %s"%label
+        # Could output a time average of 24 hourly fields at 01 UTC, 2UTC ...
+    elif "time: sum"  in cm :
+        # [tsum]: Temporal Sum  : pas utilisee !
+        print "time: sum is not supposed to be used" 
+    elif "time: mean" in cm :  #    [tmean]: Time Mean  
+        operation="average"
+    elif "time: point" in cm:
+        operation="instant"
+    else :
+        print "Issue when analyzing cell_time_method %s"%cm
+    return (operation, detect_missing)
+
+    #
+
+def pingFileForRealmsList(lrealms,svars,dummy="field_atm",exact=False,comments=False,prefix="CV_",filename=None):
+    """
+    Based on a list of realms LREALMS and a list of simplified vars SVARS, create the ping 
+    file which name is ~ ping_<realms_list>.xml, which defines fields for all vars in SVARS, 
+    with a field_ref which is either 'dummy' or '?<varname>' (depending on logical DUMMY)
+    
+    If EXACT is True, the match between variable realm string and one of the realm string 
+    in the list must be exact. Otherwise, the variable realm must be included in (or include) 
+    of the realm list strings
+
+    COMMENTS, if not False nor "", will drive the writing of variable description and units 
+    as an xml comment. If it is a string, it will be printed before this comment string (and  
+    this allows for a line break)
+
+    DUMMY, if not false, shoudl be a string used as the name of all field_refs. If False, 
+    the field_refs look like ?<variable name>. 
+
+    Field ids do include the provided PREFIX
+
+    The ping file includes a <field_definition> construct
+
+    TBD - Limitation : variable labels such as zg500 should be withdrawn from the 
+    pingfile if they describe a variable that can be derived automatically by XIOS 
+    through vertical interpolation (provided the DR duly describes that it is a  
+    singleton dimension)
+
+    TBD - Limitation2 : should handle synonyms (various MIP variable names for actually a 
+    single field)
+
+    TBD - Limitation3 :  dummy field_ref names shouldn't be the same depending on the 
+    relevant field rank
+
+    """
+    name="" ; 
+    for r in lrealms : name+="_"+r.replace(" ","%")
+    lvars=[]
+    for v in svars : 
+        if exact :
+            if any([ v.modeling_realm == r for r in lrealms]) : 
+                lvars.append(v)
+        else:
+            if any([ v.modeling_realm in r or r in v.modeling_realm for r in lrealms]) : 
+                lvars.append(v)
+    #if lset["use_area_suffix"] :
+    #    lvars.sort(key=lambda x:x.label_with_area)
+    #else:
+    lvars.sort(key=lambda x:x.label)
+    # Remove duplicates
+    uniques=[] ; last_label=""
+    for v in lvars : 
+        if v.label != last_label : 
+            uniques.append(v)
+            last_label=v.label
+    lvars=uniques
+    #
+    if filename is None : filename="ping"+name+".xml"
+    if filename[-4:] != ".xml" : filneme +=".xml"
+    #
+    with open(filename,"w") as fp:
+        fp.write("<field_definition>\n")
+        if exact : 
+            fp.write("<!-- for variables which realm intersects any of "+name+"-->\n")
+        else:
+            fp.write("<!-- for variables which realm equals one of "+name+"-->\n")
+        for v in lvars :
+            #if lset["use_area_suffix"] : 
+            #    label=v.label_with_area
+            #else: 
+            label=v.label
+            fp.write('   <field id="%-20s'%(prefix+label+'"')+' field_ref="')
+            if dummy : 
+                if dummy is True : dummy="dummy"
+                fp.write('%-16s/>'%(dummy+'"'))
+            else : fp.write('?%-16s'%(label+'"')+' />')
+            if comments :
+                # Add units, stdname and long_name as a comment string
+                if type(comments)==type("") : fp.write(comments)
+                fp.write("<!-- (%s) %s : %s -->"%(v.stdunits, v.stdname, v.description)) 
+            fp.write("\n")
+        fp.write("</field_definition>\n")
+    print "%3d variables written for %s"%(len(lvars),filename)
+
+
+def analyze_ambiguous_MIPvarnames():
+    """
+    """
+    # Compute a dict which keys are MIP varnames and values = list 
+    # of CMORvars items for the varname
+    d=dict()
+    for v in dq.coll['var'].items :
+        if v.label not in d : d[v.label]=[]
+        refs=dq.inx.iref_by_sect[v.uid].a['CMORvar']
+        for r in refs :
+            d[v.label].append(dq.inx.uid[r])
+
+    # Replace dic values by list of cell_methods
+    for vlabel in d:
+        if len(d[vlabel]) > 1 :
+            cvl=d[vlabel]
+            d[vlabel]=[]
+            for cv in cvl: 
+                st=dq.inx.uid[cv.stid]
+                try :
+                    cm=dq.inx.uid[st.cmid].cell_methods
+                    if cm not in d[vlabel] :
+                        d[vlabel].append(cm)
+                except : 
+                    pass
+                    #print "No cell method for %s %s"%(st.label,cv.label)
+        else : d[vlabel]=None
+
+    # Analyze ambiguous cases regarding area part of the cell_method
+    ambiguous=[]
+    for vlabel in d:
+        if d[vlabel] and len(d[vlabel])>1 and any([ "area" in cm for cm in d[vlabel]]):
+            ambiguous.append(vlabel)
+            #ambiguous.append((vlabel,d[vlabel]))
+    #ambiguous.sort(key=itemgetter(0))
+    #for a in ambiguous :
+    #    print "%-15s %s"%(a[0],`a[1]`)
+    return ambiguous
+
+ambiguous_mipvarnames=analyze_ambiguous_MIPvarnames()
