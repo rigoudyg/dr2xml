@@ -1723,16 +1723,20 @@ In&nbsp;[1]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[2]:
+In&nbsp;[14]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
 <div class="highlight"><pre><span class="c"># This dictionnary should be the same as the one used for creating file_defs.</span>
 <span class="c"># Here , we quoted only those entries useful for creating ping files</span>
 <span class="n">settings</span><span class="o">=</span><span class="p">{</span>
-    <span class="s">&#39;mips&#39;</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;AerChemMIP&#39;</span><span class="p">,</span><span class="s">&#39;C4MIP&#39;</span><span class="p">,</span><span class="s">&#39;CFMIP&#39;</span><span class="p">,</span><span class="s">&#39;DAMIP&#39;</span><span class="p">,</span> <span class="s">&#39;FAFMIP&#39;</span> <span class="p">,</span> <span class="s">&#39;GeoMIP&#39;</span><span class="p">,</span><span class="s">&#39;GMMIP&#39;</span><span class="p">,</span><span class="s">&#39;ISMIP6&#39;</span><span class="p">,</span>\
+    <span class="s">&#39;mips_CNRM&#39;</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;AerChemMIP&#39;</span><span class="p">,</span><span class="s">&#39;C4MIP&#39;</span><span class="p">,</span><span class="s">&#39;CFMIP&#39;</span><span class="p">,</span><span class="s">&#39;DAMIP&#39;</span><span class="p">,</span> <span class="s">&#39;FAFMIP&#39;</span> <span class="p">,</span> <span class="s">&#39;GeoMIP&#39;</span><span class="p">,</span><span class="s">&#39;GMMIP&#39;</span><span class="p">,</span><span class="s">&#39;ISMIP6&#39;</span><span class="p">,</span>\
                       <span class="s">&#39;LS3MIP&#39;</span><span class="p">,</span><span class="s">&#39;LUMIP&#39;</span><span class="p">,</span><span class="s">&#39;OMIP&#39;</span><span class="p">,</span><span class="s">&#39;PMIP&#39;</span><span class="p">,</span><span class="s">&#39;RFMIP&#39;</span><span class="p">,</span><span class="s">&#39;ScenarioMIP&#39;</span><span class="p">,</span><span class="s">&#39;CORDEX&#39;</span><span class="p">,</span><span class="s">&#39;SIMIP&#39;</span><span class="p">},</span>
-    <span class="s">&#39;max_priority&#39;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s">&#39;mips&#39;</span> <span class="p">:</span> <span class="p">{</span><span class="s">&quot;CMIP6&quot;</span><span class="p">,</span> <span class="s">&quot;AerChemMIP&quot;</span><span class="p">,</span> <span class="s">&quot;C4MIP&quot;</span><span class="p">,</span> <span class="s">&quot;CFMIP&quot;</span><span class="p">,</span> <span class="s">&quot;DAMIP&quot;</span><span class="p">,</span> <span class="s">&quot;DCPP&quot;</span><span class="p">,</span> <span class="s">&quot;FAFMIP&quot;</span><span class="p">,</span> <span class="s">&quot;GeoMIP&quot;</span><span class="p">,</span> <span class="s">&quot;GMMIP&quot;</span><span class="p">,</span> 
+              <span class="s">&quot;HighResMIP&quot;</span><span class="p">,</span> <span class="s">&quot;ISMIP6&quot;</span><span class="p">,</span> <span class="s">&quot;LS3MIP&quot;</span><span class="p">,</span> <span class="s">&quot;LUMIP&quot;</span><span class="p">,</span> <span class="s">&quot;OMIP&quot;</span><span class="p">,</span> <span class="s">&quot;PDRMIP&quot;</span><span class="p">,</span> <span class="s">&quot;PMIP&quot;</span><span class="p">,</span> <span class="s">&quot;RFMIP&quot;</span><span class="p">,</span> <span class="s">&quot;ScenarioMIP&quot;</span><span class="p">,</span> 
+              <span class="s">&quot;SolarMIP&quot;</span><span class="p">,</span> <span class="s">&quot;VolMIP&quot;</span><span class="p">,</span> <span class="s">&quot;CORDEX&quot;</span><span class="p">,</span> <span class="s">&quot;DynVar&quot;</span><span class="p">,</span> <span class="s">&quot;SIMIP&quot;</span><span class="p">,</span> <span class="s">&quot;VIACSAB&quot;</span><span class="p">,</span> <span class="s">&quot;SPECS&quot;</span><span class="p">,</span> <span class="s">&quot;CCMI&quot;</span><span class="p">,</span> <span class="s">&quot;CMIP5&quot;</span><span class="p">,</span> 
+              <span class="s">&quot;CMIP&quot;</span><span class="p">,</span> <span class="s">&quot;DECK&quot;</span><span class="p">},</span>
+    <span class="s">&#39;max_priority&#39;</span> <span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
     <span class="s">&#39;tierMax&#39;</span>      <span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
     <span class="s">&quot;ping_variables_prefix&quot;</span> <span class="p">:</span> <span class="s">&quot;CMIP6_&quot;</span><span class="p">,</span>
     <span class="c"># We account for a file listing the variables which the lab does not want to produce </span>
@@ -1747,6 +1751,18 @@ In&nbsp;[2]:
 </div>
 
 </div>
+                
+                
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="List-of-sets-of-realms-for-which-ping-files-must-be-generated">List of sets of realms for which ping files must be generated<a class="anchor-link" href="#List-of-sets-of-realms-for-which-ping-files-must-be-generated">&#182;</a></h2>
+</div>
+</div>
+</div>
+
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -1760,7 +1776,7 @@ In&nbsp;[2]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[3]:
+In&nbsp;[15]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
@@ -1781,10 +1797,35 @@ In&nbsp;[3]:
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="For-getting-a-comprehensive-ping-file,-reset-the-excluded_var-list-to-None">For getting a comprehensive ping file, reset the excluded_var list to None<a class="anchor-link" href="#For-getting-a-comprehensive-ping-file,-reset-the-excluded_var-list-to-None">&#182;</a></h2>
+</div>
+</div>
+</div>
+
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[4]:
+In&nbsp;[16]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">settings</span><span class="p">[</span><span class="s">&quot;excluded_vars&quot;</span><span class="p">]</span><span class="o">=</span><span class="p">[]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[17]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
@@ -1792,22 +1833,6 @@ In&nbsp;[4]:
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-01.beta.45
-
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -1825,7 +1850,7 @@ In&nbsp;[4]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[5]:
+In&nbsp;[18]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
@@ -1844,15 +1869,15 @@ In&nbsp;[5]:
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>
 
-Number of Request Links which apply to MIPS set([&apos;C4MIP&apos;, &apos;CORDEX&apos;, &apos;ISMIP6&apos;, &apos;GMMIP&apos;, &apos;LUMIP&apos;, &apos;PMIP&apos;, &apos;RFMIP&apos;, &apos;DAMIP&apos;, &apos;AerChemMIP&apos;, &apos;SIMIP&apos;, &apos;FAFMIP&apos;, &apos;CFMIP&apos;, &apos;ScenarioMIP&apos;, &apos;LS3MIP&apos;, &apos;OMIP&apos;, &apos;GeoMIP&apos;])  is:  175
+Number of Request Links which apply to MIPS set([&apos;CORDEX&apos;, &apos;GMMIP&apos;, &apos;RFMIP&apos;, &apos;VolMIP&apos;, &apos;CMIP6&apos;, &apos;ScenarioMIP&apos;, &apos;GeoMIP&apos;, &apos;C4MIP&apos;, &apos;PDRMIP&apos;, &apos;CMIP&apos;, &apos;DECK&apos;, &apos;LUMIP&apos;, &apos;CMIP5&apos;, &apos;CFMIP&apos;, &apos;OMIP&apos;, &apos;DAMIP&apos;, &apos;CCMI&apos;, &apos;SolarMIP&apos;, &apos;VIACSAB&apos;, &apos;SIMIP&apos;, &apos;DCPP&apos;, &apos;ISMIP6&apos;, &apos;AerChemMIP&apos;, &apos;PMIP&apos;, &apos;FAFMIP&apos;, &apos;DynVar&apos;, &apos;LS3MIP&apos;, &apos;SPECS&apos;, &apos;HighResMIP&apos;])  is:  341
 
-Number of CMOR variables for these requestLinks is : 1092
+Number of CMOR variables for these requestLinks is : 1896
 
-Number of CMOR variables once filtered by excluded vars is : 987
+Number of CMOR variables once filtered by excluded vars is : 1896
 
-Number of variables with distinct labels is : 656
+Number of variables with distinct labels is : 1272
 
-Number of simplified vars is : 987
+Number of simplified vars is : 1896
 
 </pre>
 </div>
@@ -1875,7 +1900,7 @@ Number of simplified vars is : 987
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[6]:
+In&nbsp;[19]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
@@ -1938,13 +1963,13 @@ pingFileForRealmsList(lrealms, svars, dummy=&apos;field_atm&apos;, exact=False, 
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[12]:
+In&nbsp;[22]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
 <div class="highlight"><pre><span class="n">realms</span><span class="o">=</span><span class="p">[</span> <span class="s">&#39;atmos&#39;</span><span class="p">,</span> <span class="s">&#39;land&#39;</span><span class="p">,</span><span class="s">&#39;landIce&#39;</span><span class="p">,</span><span class="s">&#39;atmosChem&#39;</span><span class="p">,</span><span class="s">&#39;aerosol&#39;</span><span class="p">]</span>
-<span class="n">pingFileForRealmsList</span><span class="p">(</span><span class="n">realms</span><span class="p">,</span><span class="n">svars</span><span class="p">,</span><span class="n">comments</span><span class="o">=</span><span class="s">&quot; &quot;</span><span class="p">,</span><span class="n">exact</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">dummy</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">filename</span><span class="o">=</span><span class="s">&#39;ping_atmos.xml&#39;</span><span class="p">)</span>
-<span class="n">pingFileForRealmsList</span><span class="p">(</span><span class="n">realms</span><span class="p">,</span><span class="n">svars</span><span class="p">,</span><span class="n">comments</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="n">exact</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">dummy</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">filename</span><span class="o">=</span><span class="s">&#39;ping_atmos_nocomments.xml&#39;</span><span class="p">)</span>
+<span class="n">pingFileForRealmsList</span><span class="p">(</span><span class="n">realms</span><span class="p">,</span><span class="n">svars</span><span class="p">,</span><span class="n">comments</span><span class="o">=</span><span class="s">&quot; &quot;</span><span class="p">,</span><span class="n">exact</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">dummy</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">filename</span><span class="o">=</span><span class="s">&#39;ping_atmos_and_co.xml&#39;</span><span class="p">)</span>
+<span class="c">#pingFileForRealmsList(realms,svars,comments=&quot;&quot;,exact=False,dummy=True,filename=&#39;ping_atmos_nocomments.xml&#39;)</span>
 </pre></div>
 
 </div>
@@ -1958,8 +1983,7 @@ In&nbsp;[12]:
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>
-509 variables written for ping_atmos.xml
-509 variables written for ping_atmos_nocomments.xml
+838 variables written for ping_atmos_and_co.xml
 
 </pre>
 </div>
@@ -1972,11 +1996,11 @@ In&nbsp;[12]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[8]:
+In&nbsp;[23]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="n">pingFileForRealmsList</span><span class="p">([</span><span class="s">&#39;ocean&#39;</span><span class="p">,</span><span class="s">&#39;seaIce&#39;</span><span class="p">],</span><span class="n">svars</span><span class="p">,</span><span class="n">comments</span><span class="o">=</span><span class="s">&quot; &quot;</span><span class="p">,</span><span class="n">exact</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">dummy</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">filename</span><span class="o">=</span><span class="s">&#39;ping_ocean.xml&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span class="n">pingFileForRealmsList</span><span class="p">([</span><span class="s">&#39;ocean&#39;</span><span class="p">,</span><span class="s">&#39;seaIce&#39;</span><span class="p">],</span><span class="n">svars</span><span class="p">,</span><span class="n">comments</span><span class="o">=</span><span class="s">&quot; &quot;</span><span class="p">,</span><span class="n">exact</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">dummy</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">filename</span><span class="o">=</span><span class="s">&#39;ping_ocean_seaice.xml&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1990,7 +2014,7 @@ In&nbsp;[8]:
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>
-159 variables written for ping_ocean.xml
+274 variables written for ping_ocean_seaice.xml
 
 </pre>
 </div>
@@ -2003,11 +2027,11 @@ In&nbsp;[8]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[9]:
+In&nbsp;[24]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="o">!</span> head -n 5 ping_ocean.xml
+<div class="highlight"><pre><span class="o">!</span> head -n 5 ping_ocean_seaice.xml
 </pre></div>
 
 </div>
@@ -2038,12 +2062,12 @@ In&nbsp;[9]:
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[11]:
+In&nbsp;[25]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
 <div class="highlight"><pre><span class="k">for</span> <span class="n">rs</span> <span class="ow">in</span> <span class="n">allrealms</span> <span class="p">:</span>
-    <span class="n">pingFileForRealmsList</span><span class="p">(</span><span class="n">rs</span><span class="p">,</span><span class="n">svars</span><span class="p">,</span><span class="n">prefix</span><span class="o">=</span><span class="n">settings</span><span class="p">[</span><span class="s">&#39;ping_variables_prefix&#39;</span><span class="p">],</span><span class="n">comments</span><span class="o">=</span><span class="s">&quot; &quot;</span><span class="p">,</span><span class="n">exact</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">pingFileForRealmsList</span><span class="p">(</span><span class="n">rs</span><span class="p">,</span><span class="n">svars</span><span class="p">,</span><span class="n">prefix</span><span class="o">=</span><span class="n">settings</span><span class="p">[</span><span class="s">&#39;ping_variables_prefix&#39;</span><span class="p">],</span><span class="n">comments</span><span class="o">=</span><span class="s">&quot; &quot;</span><span class="p">,</span><span class="n">exact</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">dummy</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -2057,14 +2081,14 @@ In&nbsp;[11]:
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>
-121 variables written for ping_ocean.xml
- 45 variables written for ping_seaIce.xml
- 24 variables written for ping_ocnBgchem.xml
-249 variables written for ping_atmos.xml
-182 variables written for ping_land.xml
-181 variables written for ping_landIce.xml
-248 variables written for ping_atmosChem.xml
- 93 variables written for ping_aerosol.xml
+185 variables written for ping_ocean.xml
+ 97 variables written for ping_seaIce.xml
+168 variables written for ping_ocnBgchem.xml
+363 variables written for ping_atmos.xml
+338 variables written for ping_land.xml
+337 variables written for ping_landIce.xml
+362 variables written for ping_atmosChem.xml
+154 variables written for ping_aerosol.xml
 
 </pre>
 </div>

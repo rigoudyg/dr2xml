@@ -12,15 +12,19 @@ allrealms=[ ['ocean'], ['seaIce'],['ocnBgchem'], [ 'atmos'], ['land'],['landIce'
 
 ### Lab settings
 
-# In[2]:
+# In[14]:
 
 
 # This dictionnary should be the same as the one used for creating file_defs.
 # Here , we quoted only those entries useful for creating ping files
 settings={
-    'mips' : {'AerChemMIP','C4MIP','CFMIP','DAMIP', 'FAFMIP' , 'GeoMIP','GMMIP','ISMIP6',\
+    'mips_CNRM' : {'AerChemMIP','C4MIP','CFMIP','DAMIP', 'FAFMIP' , 'GeoMIP','GMMIP','ISMIP6',\
                       'LS3MIP','LUMIP','OMIP','PMIP','RFMIP','ScenarioMIP','CORDEX','SIMIP'},
-    'max_priority' : 1,
+    'mips' : {"CMIP6", "AerChemMIP", "C4MIP", "CFMIP", "DAMIP", "DCPP", "FAFMIP", "GeoMIP", "GMMIP", 
+              "HighResMIP", "ISMIP6", "LS3MIP", "LUMIP", "OMIP", "PDRMIP", "PMIP", "RFMIP", "ScenarioMIP", 
+              "SolarMIP", "VolMIP", "CORDEX", "DynVar", "SIMIP", "VIACSAB", "SPECS", "CCMI", "CMIP5", 
+              "CMIP", "DECK"},
+    'max_priority' : 3,
     'tierMax'      : 3,
     "ping_variables_prefix" : "CMIP6_",
     # We account for a file listing the variables which the lab does not want to produce 
@@ -30,9 +34,13 @@ settings={
     }
 
 
+                
+                
+### List of sets of realms for which ping files must be generated
+
 #### Read excluded variables list
 
-# In[3]:
+# In[15]:
 
 l=[]
 if settings["excluded_vars"] is None and settings["excluded_vars_file"] is not None :
@@ -46,46 +54,53 @@ settings["excluded_vars"]=l
                        
 
 
-# In[4]:
+### For getting a comprehensive ping file, reset the excluded_var list to None
+
+# In[16]:
+
+settings["excluded_vars"]=[]
+
+
+# In[17]:
 
 from dr2xml import select_CMORvars_for_lab, pingFileForRealmsList
 
 
 ### Select all variables to consider, based on lab settings
 
-# In[5]:
+# In[18]:
 
 svars=select_CMORvars_for_lab(settings, printout=True)
 
 
 ### Create ping files
 
-# In[6]:
+# In[19]:
 
 help(pingFileForRealmsList)
 
 
-# In[12]:
+# In[22]:
 
 realms=[ 'atmos', 'land','landIce','atmosChem','aerosol']
-pingFileForRealmsList(realms,svars,comments=" ",exact=False,dummy=True,filename='ping_atmos.xml')
-pingFileForRealmsList(realms,svars,comments="",exact=False,dummy=True,filename='ping_atmos_nocomments.xml')
+pingFileForRealmsList(realms,svars,comments=" ",exact=False,dummy=True,filename='ping_atmos_and_co.xml')
+#pingFileForRealmsList(realms,svars,comments="",exact=False,dummy=True,filename='ping_atmos_nocomments.xml')
 
 
-# In[8]:
+# In[23]:
 
-pingFileForRealmsList(['ocean','seaIce'],svars,comments=" ",exact=False,dummy=True,filename='ping_ocean.xml')
-
-
-# In[9]:
-
-get_ipython().system(u' head -n 5 ping_ocean.xml')
+pingFileForRealmsList(['ocean','seaIce'],svars,comments=" ",exact=False,dummy=True,filename='ping_ocean_seaice.xml')
 
 
-# In[11]:
+# In[24]:
+
+get_ipython().system(u' head -n 5 ping_ocean_seaice.xml')
+
+
+# In[25]:
 
 for rs in allrealms :
-    pingFileForRealmsList(rs,svars,prefix=settings['ping_variables_prefix'],comments=" ",exact=False)
+    pingFileForRealmsList(rs,svars,prefix=settings['ping_variables_prefix'],comments=" ",exact=False, dummy=True)
 
 
 # In[ ]:
