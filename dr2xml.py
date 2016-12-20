@@ -790,7 +790,9 @@ def write_xios_field_ref_in_file_def(sv,out,lset,sset,
     wrv('realm',sv.modeling_realm) 
     wrv('variable_id',sv.label)
     wrv("standard_name",sv.stdname)
-    wrv("description",sv.description)
+    desc=sv.description
+    if desc : desc=desc.replace(">","").replace("<","")
+    wrv("description",desc)
     wrv("long_name",sv.long_name)
     if sv.positive != "None" and sv.positive != "" : wrv("positive",sv.positive) 
     wrv('history','none')
