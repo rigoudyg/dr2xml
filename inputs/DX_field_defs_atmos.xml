@@ -1,0 +1,61 @@
+<field_definition>
+  <!-- Variables from DX_field_defs_atmos.xml -->
+  
+  <!-- For some variables, the Data Request does not include the necessary
+       information on how to derive the variable from other ones,
+       while Xios can do that. So, we tell that in Xios syntax
+  -->
+  
+  <field id="DX_zg1000" field_ref="DX_zg" axis_ref="DX_p1000" />
+
+  <field id="DX_ta850" field_ref="DX_ta" axis_ref="DX_p850" />
+  <field id="DX_hus850" field_ref="DX_hus" axis_ref="DX_p850" />
+  <field id="DX_rv850" field_ref="DX_rv" axis_ref="DX_p850" />
+  <field id="DX_ua850" field_ref="DX_ua" axis_ref="DX_p850" />
+  <field id="DX_va850" field_ref="DX_va" axis_ref="DX_p850" />
+  
+  <field id="DX_ta700" field_ref="DX_ta" axis_ref="DX_p700" />
+
+  <field id="DX_wap500" field_ref="DX_wap" axis_ref="DX_p500" />
+  <field id="DX_zg500" field_ref="DX_zg" axis_ref="DX_p500" />
+  <field id="DX_ta500" field_ref="DX_ta" axis_ref="DX_p500" />
+
+  <field id="DX_ua200" field_ref="DX_ua" axis_ref="DX_p200" />
+  <field id="DX_va200" field_ref="DX_va" axis_ref="DX_p200" />
+
+
+  <!-- for variables in next group, dr2xml may at a later stage provide
+       a definition using standard operations -->
+  
+  <field_group id="DX_later_atmos">
+
+      <field_group id="DX_GHG_integrals" >
+	<field id="DX_co2mass"      field_ref="dummy_na" />
+	<field id="DX_n2oglobal"    field_ref="dummy_na" />
+	<field id="DX_cfc11global"  field_ref="dummy_na" />
+	<field id="DX_ch4global"    field_ref="dummy_na" />
+	<field id="DX_hcfc22global" field_ref="dummy_na" />
+	<field id="DX_cfc113global" field_ref="dummy_na" />
+	<field id="DX_cfc12global"  field_ref="dummy_na" />
+      </field_group >
+
+      <field_group id="DX_ISMIP_integrals" >
+	<field id="DX_lim"	      field_ref="dummy_na" />
+	<field id="DX_limnsw"     field_ref="dummy_na" />
+	<field id="DX_iareagr"    field_ref="dummy_na" />
+	<field id="DX_iareafl"    field_ref="dummy_na" />
+	<field id="DX_tendlicalvf" field_ref="dummy_na" />
+	<field id="DX_tendacabf"  field_ref="dummy_na" />
+	<field id="DX_tendlibmassbf" field_ref="dummy_na" />
+      </field_group >
+      
+      <field_group id="DX_atmos_not_much_clear" >
+	<field id="DX_spectupper" field_ref="dummy_na" />
+	<field id="DX_spectlower" field_ref="dummy_na" />
+      </field_group >
+      
+    </field_group >
+    
+  <!-- End of variables from DX_field_defs_atmos.xml -->
+</field_definition>
+

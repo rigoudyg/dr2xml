@@ -1068,7 +1068,7 @@ def analyze_cell_time_method(cm,label):
 
     #
 
-def pingFileForRealmsList(lrealms,svars,dummy="field_atm",dummy_with_shape=false,
+def pingFileForRealmsList(lrealms,svars,dummy="field_atm",dummy_with_shape=False,
                           exact=False, comments=False,prefix="CV_",filename=None):
     """
     Based on a list of realms LREALMS and a list of simplified vars SVARS, create the ping 
@@ -1154,7 +1154,7 @@ def pingFileForRealmsList(lrealms,svars,dummy="field_atm",dummy_with_shape=false
         #
         # Insert content of DX_field_defs files (changing prefix)
         for realm in lrealms :
-            filedefs=DX_field_ids_filename(realm)
+            filedefs=DX_field_defs_filename(realm)
             if os.path.exists(filedefs) :
                 with open(filedefs,"r") as fields :
                     lines=fields.readlines()
@@ -1164,7 +1164,7 @@ def pingFileForRealmsList(lrealms,svars,dummy="field_atm",dummy_with_shape=false
     
     print "%3d variables written for %s"%(len(lvars),filename)
 
-def DX_field_ids_filename(realm):
+def DX_field_defs_filename(realm):
     return prog_path+"inputs/DX_field_defs_%s.xml"%realm
 
 def analyze_ambiguous_MIPvarnames():
