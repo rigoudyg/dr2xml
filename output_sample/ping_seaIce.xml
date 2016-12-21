@@ -7,8 +7,8 @@
    <field id="CMIP6_siage"         field_ref="dummy_XY"         /> <!-- (s) age_of_sea_ice : Age of sea ice -->
    <field id="CMIP6_sialb"         field_ref="dummy_XY"         /> <!-- (1.0) sea_ice_albedo : Mean surface albedo of entire ice-covered part of grid cell -->
    <field id="CMIP6_siareaacrossline" field_ref="dummy_TRS"        /> <!-- (m2 s-1) siareaacrossline : net (sum of transport in all directions) sea ice area transport through the following four passages, positive into the Arctic Ocean 1. Fram Strait = (11.5W,81.3N to (10.5E,79.6N) 2. Canadian Archipelego = (128.2W,70.6N) to (59.3W,82.1N) 3. Barents opening = (16.8E,76.5N) to (19.2E,70.2N) 4. Bering Strait = (171W,66.2N) to (166W,65N) -->
-   <field id="CMIP6_siarean"       field_ref="dummy_0d"         /> <!-- (1e6 km2) sea_ice_area : total area of sea ice in the Northern hemisphere -->
-   <field id="CMIP6_siareas"       field_ref="dummy_0d"         /> <!-- (1e6 km2) sea_ice_area : total area of sea ice in the Southern hemisphere -->
+   <field field_ref="dummy_na" id="CMIP6_siarean" />     <!-- (1e6 km2) sea_ice_area : total area of sea ice in the Northern hemisphere -->
+   <field field_ref="dummy_na" id="CMIP6_siareas" />     <!-- (1e6 km2) sea_ice_area : total area of sea ice in the Southern hemisphere -->
    <field id="CMIP6_sic"           field_ref="dummy_XY"         /> <!-- (1.0) sea_ice_area_fraction : fraction of grid cell covered by sea ice. -->
    <field id="CMIP6_sicompstren"   field_ref="dummy_XY"         /> <!-- (N m-1) compressive_strength_of_sea_ice : Computed strength of the ice pack, defined as the energy (J m-2) dissipated per unit area removed from the ice pack under compression, and assumed proportional to the change in potential energy caused by ridging. For Hibler-type models, this is P (= P*hexp(-C(1-A))) -->
    <field id="CMIP6_siconc"        field_ref="dummy_XY"         /> <!-- (1.0) sea_ice_area_fraction : Area fraction of grid cell covered by sea ice -->
@@ -28,8 +28,8 @@
    <field id="CMIP6_sidmasstrany"  field_ref="dummy_XY"         /> <!-- (kg s-1) sea_ice_y_transport : Includes transport of both sea ice and snow by advection -->
    <field id="CMIP6_sidragbot"     field_ref="dummy_XY"         /> <!-- (1.0) sidragbot : Oceanic drag coefficient that is used to calculate the oceanic momentum drag on sea ice -->
    <field id="CMIP6_sidragtop"     field_ref="dummy_XY"         /> <!-- (1.0) surface_drag_coefficient_for_momentum_in_air : Atmospheric drag coefficient that is used to calculate the atmospheric momentum drag on sea ice -->
-   <field id="CMIP6_siextentn"     field_ref="dummy_0d"         /> <!-- (1e6 km2) sea_ice_extent : Total area of all Northern-Hemisphere grid cells that are covered by at least 15 % areal fraction of sea ice -->
-   <field id="CMIP6_siextents"     field_ref="dummy_0d"         /> <!-- (1e6 km2) sea_ice_extent : Total area of all Southern-Hemisphere grid cells that are covered by at least 15 % areal fraction of sea ice -->
+   <field field_ref="dummy_na" id="CMIP6_siextentn" />   <!-- (1e6 km2) sea_ice_extent : Total area of all Northern-Hemisphere grid cells that are covered by at least 15 % areal fraction of sea ice -->
+   <field field_ref="dummy_na" id="CMIP6_siextents" />     <!-- (1e6 km2) sea_ice_extent : Total area of all Southern-Hemisphere grid cells that are covered by at least 15 % areal fraction of sea ice -->
    <field id="CMIP6_sifb"          field_ref="dummy_XY"         /> <!-- (m) sea_ice_freeboard : Mean height of sea-ice surface (=snow-ice interface when snow covered) above sea level -->
    <field id="CMIP6_siflcondbot"   field_ref="dummy_XY"         /> <!-- (W m-2 ) siflcondbot : the net heat conduction flux at the ice base  -->
    <field id="CMIP6_siflcondtop"   field_ref="dummy_XY"         /> <!-- (W m-2 ) siflcondtop : the net heat conduction flux at the ice surface -->
@@ -85,8 +85,8 @@
    <field id="CMIP6_siu"           field_ref="dummy_XY"         /> <!-- (m s-1) sea_ice_x_velocity : The x-velocity of ice on native model grid -->
    <field id="CMIP6_siv"           field_ref="dummy_XY"         /> <!-- (m s-1) sea_ice_y_velocity : The y-velocity of ice on native model grid -->
    <field id="CMIP6_sivol"         field_ref="dummy_XY"         /> <!-- (m) sea_ice_thickness : Total volume of sea ice divided by grid-cell area (this used to be called ice thickness in CMIP5) -->
-   <field id="CMIP6_sivoln"        field_ref="dummy_0d"         /> <!-- (1e3 km3) sea_ice_volume : total volume of sea ice in the Northern hemisphere -->
-   <field id="CMIP6_sivols"        field_ref="dummy_0d"         /> <!-- (1e3 km3) sea_ice_volume : total volume of sea ice in the Southern hemisphere -->
+   <field field_ref="dummy_na" id="CMIP6_sivoln" />     <!-- (1e3 km3) sea_ice_volume : total volume of sea ice in the Northern hemisphere -->
+   <field field_ref="dummy_na" id="CMIP6_sivols" />     <!-- (1e3 km3) sea_ice_volume : total volume of sea ice in the Southern hemisphere -->
    <field id="CMIP6_sndmassdyn"    field_ref="dummy_XY"         /> <!-- (kg m-2 s-1) sndmassdyn : the rate of change of snow mass through advection with sea ice divided by grid-cell area -->
    <field id="CMIP6_sndmassmelt"   field_ref="dummy_XY"         /> <!-- (kg m-2 s-1) surface_snow_melt_flux : the rate of change of snow mass through melt divided by grid-cell area -->
    <field id="CMIP6_sndmasssi"     field_ref="dummy_XY"         /> <!-- (kg m-2 s-1) sndmasssi : the rate of change of snow mass due to transformation of snow to sea ice divided by grid-cell area -->
@@ -98,28 +98,3 @@
    <field id="CMIP6_vsfsit"        field_ref="dummy_XY"         /> <!-- (kg m-2 s-1) virtual_salt_flux_into_sea_water_due_to_sea_ice_thermodynamics : This variable measures the virtual salt flux into sea water due to the melting of sea ice. It is set to zero in models which receive a real water flux. -->
    <field id="CMIP6_vsi"           field_ref="dummy_XY"         /> <!-- (m s-1) sea_ice_y_velocity : "Reported as ""missing"" in regions free of sea ice." -->
 </field_definition>
-  <!-- Variables from CMIP6_field_defs_seaIce.xml -->
-
-  <!-- For some variables, the Data Request does not include the necessary
-  information on how to derive the variable from other ones, while
-  Xios can do that. So, we tell that in Xios syntax   -->
-
-  <!-- section yet empty  -->
-  
-
- 
-  <!-- for variables in next group, dr2xml may at a later stage provide
-       a definition using standard operations -->
-
-  <field_group id="CMIP6_seaIce_integrals">
-    <field id="CMIP6_sivols"    field_ref="dummy_na" />
-    <field id="CMIP6_sivoln"    field_ref="dummy_na" />
-    <field id="CMIP6_siareas"   field_ref="dummy_na" />
-    <field id="CMIP6_siarean"   field_ref="dummy_na" />
-    <field id="CMIP6_siextents" field_ref="dummy_na" />
-    <field id="CMIP6_siextentn" field_ref="dummy_na" />
-  </field_group >
-
-  <!-- End of variables from CMIP6_field_defs_seaIce.xml -->
-
-

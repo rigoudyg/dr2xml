@@ -463,7 +463,8 @@ def complement_svar_using_cmorvar(svar,cmvar):
         svar.stdname = mipvar.label
 
 
-def write_xios_file_def(cmvs,table, lset,sset, out,cvspath,field_defs,axis_defs,domain_defs,pingvars=None) :
+def write_xios_file_def(cmvs,table, lset,sset, out,cvspath,field_defs,axis_defs,
+                        domain_defs,dummies,pingvars=None) :
     """ 
     Generate an XIOS file_def entry in out for :
       - a dict for laboratory settings 
@@ -674,11 +675,12 @@ def write_xios_file_def(cmvs,table, lset,sset, out,cvspath,field_defs,axis_defs,
     #
 
     for cmv in cmvs : 
-        write_xios_field_ref_in_file_def(cmv,out,lset,sset,field_defs,axis_defs,domain_defs,pingvars)
+        write_xios_field_ref_in_file_def(cmv,out,lset,sset,field_defs,axis_defs,
+                                         domain_defs,dummies,pingvars)
     out.write('</file>\n\n')
 
-def write_xios_field_ref_in_file_def(sv,out,lset,sset,
-                                     field_defs,axis_defs,domain_defs,pingvars=None) :
+def write_xios_field_ref_in_file_def(sv,out,lset,sset, field_defs,axis_defs,
+                                     domain_defs,dummies,pingvars=None) :
     """
     Writes a simplified variable object sv as a field reference in out, 
     with lab prefix for the variable name
@@ -705,7 +707,7 @@ def write_xios_field_ref_in_file_def(sv,out,lset,sset,
         alias=lset["ping_variables_prefix"]+sv.label
         if pingvars is not None :
             if not alias in pingvars :
-                print "Skipping ping variable %s, which has no valid field_ref"%alias
+                print "Skipping ping variable %s, which has no valid field_ref"%sv.label
                 return
 
     # nextvar is the field name provided as output of the last operation currently defined
@@ -800,15 +802,19 @@ def write_xios_field_ref_in_file_def(sv,out,lset,sset,
     out.write('     </field>\n')
 
 def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
-                       skip_dummies=True,printout=False) :
+                       dummies='include',printout=False) :
     """
     Using global DR object dq, a dict of lab settings LSET, and a dict 
     of simulation settings SSET, generate an XIOS file_def file for a 
     given XIOS 'context', which content matches 
     the DR for the experiment quoted in simu setting dict and a YEAR.
     Makes use of CMIP6 controlled vocabulary files found in CVS_PATH
-    Reads PINGFILE for skipping dummy field_refs, but stops on dummies 
-    if SKIP_DUMMIES is False
+    Reads PINGFILE for analyzing dummy field_refs, 
+    DUMMIES='include' : include dummy refs in file_def (useful 
+                              demonstration run)
+    DUMMIES='skip'  : don't write field with a ref to a dummy
+                          (useful until ping_file is fully completed)
+    DUMMIES='forbid': stop if any dummy (useful for production run)
     Output file is named <context>.xml  
     
     Structure of the two dicts is documented elsewhere. It includes the 
@@ -925,17 +931,27 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
     # read ping_file defined variables
     pingvars=[] 
     if pingfile :
-        ping_refs=read_fields_defs(pingfile, attrib='field_ref')
+        ping_refs=read_field_defs(pingfile, attrib='field_ref')
         if ping_refs is None :
             print "Issue accessing pingfile "+pingfile
             return
-        pingvars=[ v for v in ping_refs if 'dummy' not in ping_refs[v] ]
-        if not skip_dummies and len(pingvars) != len(ping_refs) :
-            print "They are dummies in %s :"%pingfile,
-            for v in ping_refs :
-                if v not in pingvars : print v,
-            print
-            return
+        if dummies=="include" :
+            pingvars=ping_refs.keys()
+        else :
+            pingvars=[ v for v in ping_refs if 'dummy' not in ping_refs[v] ]
+            if dummies=="skip" : return pingvars
+            elif dummies=="forbid" :
+                if len(pingvars) != len(ping_refs) :
+                    print "They are dummies in %s :"%pingfile,
+                    for v in ping_refs :
+                        if v not in pingvars : print v,
+                    print
+                    return 
+                else :
+                    pingvars=ping_ref
+            else:
+                print "Forbidden option for dummies : "+dummies
+                return
     #
     # Write XIOS file_def
     filename="%s.xml"%context
@@ -947,7 +963,7 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
         out.write('<file_definition> \n')
         for table in cmvs_pertable :  
             write_xios_file_def(cmvs_pertable[table],table, lset,sset,out,cvs_path,
-                                field_defs,axis_defs,domain_defs,pingvars)
+                                field_defs,axis_defs,domain_defs,dummies,pingvars)
         out.write('</file_definition> \n')
     if printout :
         print "\nfile_def written as %s"%filename
@@ -1128,6 +1144,7 @@ def pingFileForRealmsList(lrealms,svars,dummy="field_atm",dummy_with_shape=False
     if filename is None : filename="ping"+name+".xml"
     if filename[-4:] != ".xml" : filneme +=".xml"
     #
+    specials=read_special_fields_defs(lrealms)
     with open(filename,"w") as fp:
         fp.write("<field_definition>\n")
         if exact : 
@@ -1135,19 +1152,21 @@ def pingFileForRealmsList(lrealms,svars,dummy="field_atm",dummy_with_shape=False
         else:
             fp.write("<!-- for variables which realm equals one of "+name+"-->\n")
         for v in lvars :
-            #if lset["use_area_suffix"] : 
-            #    label=v.label_with_area
-            #else: 
             label=v.label
-            fp.write('   <field id="%-20s'%(prefix+label+'"')+' field_ref="')
-            if dummy : 
-                shape=highest_rank(label)
-                if dummy is True :
-                    dummys="dummy"
-                    if dummy_with_shape : dummys+="_"+shape
-                else : dummys=dummy
-                fp.write('%-18s/>'%(dummys+'"'))
-            else : fp.write('?%-16s'%(label+'"')+' />')
+            if label in specials :
+                line=ET.tostring(specials[label]).replace("DX_",prefix)
+                line=line.replace("\n","").replace("\t","")
+                fp.write('   '); fp.write(line)
+            else:
+                fp.write('   <field id="%-20s'%(prefix+label+'"')+' field_ref="')
+                if dummy : 
+                    shape=highest_rank(label)
+                    if dummy is True :
+                        dummys="dummy"
+                        if dummy_with_shape : dummys+="_"+shape
+                    else : dummys=dummy
+                    fp.write('%-18s/>'%(dummys+'"'))
+                else : fp.write('?%-16s'%(label+'"')+' />')
             if comments :
                 # Add units, stdname and long_name as a comment string
                 if type(comments)==type("") : fp.write(comments)
@@ -1156,7 +1175,8 @@ def pingFileForRealmsList(lrealms,svars,dummy="field_atm",dummy_with_shape=False
         fp.write("</field_definition>\n")
         #
         # Insert content of DX_field_defs files (changing prefix)
-        for realm in lrealms :
+        # NO : done above
+        for realm in () : #lrealms 
             filedefs=DX_field_defs_filename(realm)
             if os.path.exists(filedefs) :
                 with open(filedefs,"r") as fields :
@@ -1213,12 +1233,13 @@ def analyze_ambiguous_MIPvarnames():
 
 ambiguous_mipvarnames=analyze_ambiguous_MIPvarnames()
 
-def read_fields_defs(filename, attrib=None, printout=False) :
+def read_field_defs(filename, attrib=None, printout=False) :
     """ 
     Returns a dict of field_ids in FILENAME, which 
     - keys are field_ids
     - values are corresponding ET elements if 
       attrib is None, otherwise elt attribute ATTRIB
+    Returns None if filename does not exist
     """
     #
     def field_defs(elt, tag='field', groups=['field_group','field_definition']) :
@@ -1236,19 +1257,31 @@ def read_fields_defs(filename, attrib=None, printout=False) :
             print 'Syntax error : tag %s not allowed'%elt.tag
             return None
     #    
-    special=dict()
+    rep=dict()
+    print "processing file %s"%filename
     if os.path.exists(filename) :
         root = ET.parse(filename).getroot()
         for field in field_defs(root) :
             if printout : print ".",
             if attrib is None: 
-                special[field.attrib['id']]=field
+                rep[field.attrib['id']]=field
             else :
-                special[field.attrib['id']]=field.attrib[attrib]
+                rep[field.attrib['id']]=field.attrib[attrib]
         if printout : print
-        return special
+        return rep
     else :
         if printout : print "No file %s"%filename
+        return None
+
+def read_special_fields_defs(realms,printout=False) :
+    special=dict()
+    for realm in realms  :
+        d=read_field_defs(DX_field_defs_filename(realm),printout=printout)
+        if d: special.update(d)
+    rep=dict()
+    # Use raw label as key
+    for r in special : rep[r.replace("DX_","")]=special[r]
+    return rep
 
 def highest_rank(mipvarlabel):
     """Returns the shape with the highest needed rank among the CMORvars
@@ -1301,3 +1334,5 @@ def highest_rank(mipvarlabel):
     else : shape="??"
 
     return shape
+
+

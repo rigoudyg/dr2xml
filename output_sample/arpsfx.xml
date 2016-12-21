@@ -4,7 +4,7 @@
   <variable name="activity_id"  type="string" > CMIP </variable>
   <variable name="contact"  type="string" > contact.cmip@cnrm.fr </variable>
   <variable name="conventions"  type="string" > CF-1.7 CMIP-6.0 </variable>
-  <variable name="creation_date"  type="string" > 2016-12-20T17:03:48Z </variable>
+  <variable name="creation_date"  type="string" > 2016-12-21T13:32:49Z </variable>
   <variable name="data_specs_version"  type="string" > 01.beta.45 </variable>
   <variable name="experiment"  type="string" > all-forcing simulation of the recent past </variable>
   <variable name="experiment_id"  type="string" > historical </variable>
@@ -41,7 +41,7 @@
   <variable name="sub_experiment"  type="string" > none </variable>
   <variable name="table_id"  type="string" > emMon </variable>
   <variable name="title"  type="string" > CNRM-CM6-1 model output prepared for CMIP6 / CMIP historical </variable>
-  <variable name="tracking_id"  type="string" > hdl:21.14100/f11cfb00-70f8-4490-84d4-cd7cc4db58a4 </variable>
+  <variable name="tracking_id"  type="string" > hdl:21.14100/092ae3fb-b1ce-437a-afd0-9fdb2c4e1b47 </variable>
   <variable name="variant_info"  type="string" > Start date chosen so that variant r1i1p1f1 has the better fit with Krakatoa impact on tos </variable>
   <variable name="variant_label"  type="string" > r1i1p1f1 </variable>
   <field field_ref="CMIP6_mrsol" name="mrsol" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -58,6 +58,22 @@
      <variable name="standard_name" type="string" > od550soa </variable>
      <variable name="description" type="string" > proposed name: atmosphere_optical_thickness_due_to_secondary_particulate_organic_matter_ambient_aerosol </variable>
      <variable name="long_name" type="string" > soa aod@550nm </variable>
+     <variable name="history" type="string" > none </variable>
+     </field>
+  <field field_ref="CMIP6_fNfert" name="fNfert" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
+     <variable name="realm" type="string" > land </variable>
+     <variable name="variable_id" type="string" > fNfert </variable>
+     <variable name="standard_name" type="string" > fNfert </variable>
+     <variable name="description" type="string" > relative to total land area of a grid cell, not relative to agricultural area </variable>
+     <variable name="long_name" type="string" > total N added for cropland fertilisation (artificial and manure) </variable>
+     <variable name="history" type="string" > none </variable>
+     </field>
+  <field field_ref="CMIP6_fNgas" name="fNgas" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
+     <variable name="realm" type="string" > land </variable>
+     <variable name="variable_id" type="string" > fNgas </variable>
+     <variable name="standard_name" type="string" > fNgas </variable>
+     <variable name="description" type="string" > as specified by C4MIP </variable>
+     <variable name="long_name" type="string" > Total Nitrogen lost to the atmosphere (sum of NHx, NOx, N2O, N2) </variable>
      <variable name="history" type="string" > none </variable>
      </field>
   <field field_ref="CMIP6_vegFrac" name="vegFrac" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -84,12 +100,12 @@
      <variable name="long_name" type="string" > Needleleaf evergreen tree fraction </variable>
      <variable name="history" type="string" > none </variable>
      </field>
-  <field field_ref="CMIP6_fNfert" name="fNfert" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
+  <field field_ref="CMIP6_fNleach" name="fNleach" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
      <variable name="realm" type="string" > land </variable>
-     <variable name="variable_id" type="string" > fNfert </variable>
-     <variable name="standard_name" type="string" > fNfert </variable>
-     <variable name="description" type="string" > relative to total land area of a grid cell, not relative to agricultural area </variable>
-     <variable name="long_name" type="string" > total N added for cropland fertilisation (artificial and manure) </variable>
+     <variable name="variable_id" type="string" > fNleach </variable>
+     <variable name="standard_name" type="string" > fNleach </variable>
+     <variable name="description" type="string" > as specified by C4MIP </variable>
+     <variable name="long_name" type="string" > Total N loss to leaching or runoff (sum of ammonium, nitrite and nitrate) </variable>
      <variable name="history" type="string" > none </variable>
      </field>
   <field field_ref="CMIP6_fAnthDisturb" name="fAnthDisturb" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -188,6 +204,14 @@
      <variable name="long_name" type="string" > Bare Soil Percentage </variable>
      <variable name="history" type="string" > none </variable>
      </field>
+  <field field_ref="CMIP6_cSoil_land" name="cSoil_land" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
+     <variable name="realm" type="string" > land </variable>
+     <variable name="variable_id" type="string" > cSoil_land </variable>
+     <variable name="standard_name" type="string" > soil_carbon_content </variable>
+     <variable name="description" type="string" > Carbon mass in the full depth of the soil model. </variable>
+     <variable name="long_name" type="string" > Carbon Mass in Model Soil Pool </variable>
+     <variable name="history" type="string" > none </variable>
+     </field>
   <field field_ref="CMIP6_treeFrac_land" name="treeFrac_land" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
      <variable name="realm" type="string" > land </variable>
      <variable name="variable_id" type="string" > treeFrac_land </variable>
@@ -250,14 +274,6 @@
      <variable name="standard_name" type="string" > mole_fraction_of_dimethyl_sulfide_in_air </variable>
      <variable name="description" type="string" > DMS volume mixing ratio </variable>
      <variable name="long_name" type="string" > DMS volume mixing ratio </variable>
-     <variable name="history" type="string" > none </variable>
-     </field>
-  <field field_ref="CMIP6_fNleach" name="fNleach" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
-     <variable name="realm" type="string" > land </variable>
-     <variable name="variable_id" type="string" > fNleach </variable>
-     <variable name="standard_name" type="string" > fNleach </variable>
-     <variable name="description" type="string" > as specified by C4MIP </variable>
-     <variable name="long_name" type="string" > Total N loss to leaching or runoff (sum of ammonium, nitrite and nitrate) </variable>
      <variable name="history" type="string" > none </variable>
      </field>
   <field field_ref="CMIP6_nMineral" name="nMineral" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -428,28 +444,12 @@
      <variable name="long_name" type="string" > total plant nitrogen uptake (sum of ammonium and nitrate), irrespective of the source of nitrogen </variable>
      <variable name="history" type="string" > none </variable>
      </field>
-  <field field_ref="CMIP6_fNgas" name="fNgas" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
-     <variable name="realm" type="string" > land </variable>
-     <variable name="variable_id" type="string" > fNgas </variable>
-     <variable name="standard_name" type="string" > fNgas </variable>
-     <variable name="description" type="string" > as specified by C4MIP </variable>
-     <variable name="long_name" type="string" > Total Nitrogen lost to the atmosphere (sum of NHx, NOx, N2O, N2) </variable>
-     <variable name="history" type="string" > none </variable>
-     </field>
   <field field_ref="CMIP6_fNProduct" name="fNProduct" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
      <variable name="realm" type="string" > land </variable>
      <variable name="variable_id" type="string" > fNProduct </variable>
      <variable name="standard_name" type="string" > fNProduct </variable>
      <variable name="description" type="string" > When land use change results in deforestation of natural vegetation (trees or grasslands) then natural biomass is removed. The treatment of deforested biomass differs significantly across models, but it shoule be straight-forward to compare deforested biomass across models. </variable>
      <variable name="long_name" type="string" > Deforested or harvested biomass as a result of anthropogenic land use or change </variable>
-     <variable name="history" type="string" > none </variable>
-     </field>
-  <field field_ref="CMIP6_cSoil_land" name="cSoil_land" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
-     <variable name="realm" type="string" > land </variable>
-     <variable name="variable_id" type="string" > cSoil_land </variable>
-     <variable name="standard_name" type="string" > soil_carbon_content </variable>
-     <variable name="description" type="string" > Carbon mass in the full depth of the soil model. </variable>
-     <variable name="long_name" type="string" > Carbon Mass in Model Soil Pool </variable>
      <variable name="history" type="string" > none </variable>
      </field>
   <field field_ref="CMIP6_fNLandToOcean" name="fNLandToOcean" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -467,7 +467,7 @@
   <variable name="activity_id"  type="string" > CMIP </variable>
   <variable name="contact"  type="string" > contact.cmip@cnrm.fr </variable>
   <variable name="conventions"  type="string" > CF-1.7 CMIP-6.0 </variable>
-  <variable name="creation_date"  type="string" > 2016-12-20T17:03:48Z </variable>
+  <variable name="creation_date"  type="string" > 2016-12-21T13:32:49Z </variable>
   <variable name="data_specs_version"  type="string" > 01.beta.45 </variable>
   <variable name="experiment"  type="string" > all-forcing simulation of the recent past </variable>
   <variable name="experiment_id"  type="string" > historical </variable>
@@ -504,7 +504,7 @@
   <variable name="sub_experiment"  type="string" > none </variable>
   <variable name="table_id"  type="string" > Amon </variable>
   <variable name="title"  type="string" > CNRM-CM6-1 model output prepared for CMIP6 / CMIP historical </variable>
-  <variable name="tracking_id"  type="string" > hdl:21.14100/e0c19a3b-727f-4830-a5ed-9de2613c5524 </variable>
+  <variable name="tracking_id"  type="string" > hdl:21.14100/e7931eb4-4b66-4067-a9fe-8f8cc9195bb0 </variable>
   <variable name="variant_info"  type="string" > Start date chosen so that variant r1i1p1f1 has the better fit with Krakatoa impact on tos </variable>
   <variable name="variant_label"  type="string" > r1i1p1f1 </variable>
   <field field_ref="CMIP6_tauv" name="tauv" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -1033,52 +1033,44 @@
      <variable name="long_name" type="string" > Global Mean Mole Fraction of N2O </variable>
      <variable name="history" type="string" > none </variable>
      </field>
+  <field field_ref="CMIP6_n2o" name="n2o" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
+     <variable name="realm" type="string" > atmos atmosChem </variable>
+     <variable name="variable_id" type="string" > n2o </variable>
+     <variable name="standard_name" type="string" > mole_fraction_of_nitrous_oxide_in_air </variable>
+     <variable name="description" type="string" > N2O volume mixing ratio </variable>
+     <variable name="long_name" type="string" > N2O volume mixing ratio </variable>
+     <variable name="history" type="string" > none </variable>
+     </field>
+  <field field_ref="CMIP6_tro3" name="tro3" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
+     <variable name="realm" type="string" > atmos atmosChem </variable>
+     <variable name="variable_id" type="string" > tro3 </variable>
+     <variable name="standard_name" type="string" > mole_fraction_of_ozone_in_air </variable>
+     <variable name="description" type="string" > Mole fraction of ozone (O3) </variable>
+     <variable name="long_name" type="string" > Mole Fraction of O3 </variable>
+     <variable name="history" type="string" > none </variable>
+     </field>
+  <field field_ref="CMIP6_tro3" name="tro3" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
+     <variable name="realm" type="string" > atmos atmosChem </variable>
+     <variable name="variable_id" type="string" > tro3 </variable>
+     <variable name="standard_name" type="string" > mole_fraction_of_ozone_in_air </variable>
+     <variable name="description" type="string" > Mole fraction of ozone (O3) </variable>
+     <variable name="long_name" type="string" > Mole Fraction of O3 </variable>
+     <variable name="history" type="string" > none </variable>
+     </field>
+  <field field_ref="CMIP6_n2o" name="n2o" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
+     <variable name="realm" type="string" > atmos atmosChem </variable>
+     <variable name="variable_id" type="string" > n2o </variable>
+     <variable name="standard_name" type="string" > mole_fraction_of_nitrous_oxide_in_air </variable>
+     <variable name="description" type="string" > N2O volume mixing ratio </variable>
+     <variable name="long_name" type="string" > N2O volume mixing ratio </variable>
+     <variable name="history" type="string" > none </variable>
+     </field>
   <field field_ref="CMIP6_n2oglobal" name="n2oglobal" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
      <variable name="realm" type="string" > atmos atmosChem </variable>
      <variable name="variable_id" type="string" > n2oglobal </variable>
      <variable name="standard_name" type="string" > mole_fraction_of_nitrous_oxide_in_air </variable>
      <variable name="description" type="string" > Global mean Nitrous Oxide (N2O) </variable>
      <variable name="long_name" type="string" > Global Mean Mole Fraction of N2O </variable>
-     <variable name="history" type="string" > none </variable>
-     </field>
-  <field field_ref="CMIP6_ch4global" name="ch4global" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
-     <variable name="realm" type="string" > atmos atmosChem </variable>
-     <variable name="variable_id" type="string" > ch4global </variable>
-     <variable name="standard_name" type="string" > mole_fraction_of_methane_in_air </variable>
-     <variable name="description" type="string" > Global Mean Mole Fraction of CH4 </variable>
-     <variable name="long_name" type="string" > Global Mean Mole Fraction of CH4 </variable>
-     <variable name="history" type="string" > none </variable>
-     </field>
-  <field field_ref="CMIP6_n2o" name="n2o" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
-     <variable name="realm" type="string" > atmos atmosChem </variable>
-     <variable name="variable_id" type="string" > n2o </variable>
-     <variable name="standard_name" type="string" > mole_fraction_of_nitrous_oxide_in_air </variable>
-     <variable name="description" type="string" > N2O volume mixing ratio </variable>
-     <variable name="long_name" type="string" > N2O volume mixing ratio </variable>
-     <variable name="history" type="string" > none </variable>
-     </field>
-  <field field_ref="CMIP6_tro3" name="tro3" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
-     <variable name="realm" type="string" > atmos atmosChem </variable>
-     <variable name="variable_id" type="string" > tro3 </variable>
-     <variable name="standard_name" type="string" > mole_fraction_of_ozone_in_air </variable>
-     <variable name="description" type="string" > Mole fraction of ozone (O3) </variable>
-     <variable name="long_name" type="string" > Mole Fraction of O3 </variable>
-     <variable name="history" type="string" > none </variable>
-     </field>
-  <field field_ref="CMIP6_tro3" name="tro3" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
-     <variable name="realm" type="string" > atmos atmosChem </variable>
-     <variable name="variable_id" type="string" > tro3 </variable>
-     <variable name="standard_name" type="string" > mole_fraction_of_ozone_in_air </variable>
-     <variable name="description" type="string" > Mole fraction of ozone (O3) </variable>
-     <variable name="long_name" type="string" > Mole Fraction of O3 </variable>
-     <variable name="history" type="string" > none </variable>
-     </field>
-  <field field_ref="CMIP6_n2o" name="n2o" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
-     <variable name="realm" type="string" > atmos atmosChem </variable>
-     <variable name="variable_id" type="string" > n2o </variable>
-     <variable name="standard_name" type="string" > mole_fraction_of_nitrous_oxide_in_air </variable>
-     <variable name="description" type="string" > N2O volume mixing ratio </variable>
-     <variable name="long_name" type="string" > N2O volume mixing ratio </variable>
      <variable name="history" type="string" > none </variable>
      </field>
   <field field_ref="CMIP6_ch4global" name="ch4global" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -1097,6 +1089,14 @@
      <variable name="long_name" type="string" > CH4 volume mixing ratio </variable>
      <variable name="history" type="string" > none </variable>
      </field>
+  <field field_ref="CMIP6_ch4global" name="ch4global" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
+     <variable name="realm" type="string" > atmos atmosChem </variable>
+     <variable name="variable_id" type="string" > ch4global </variable>
+     <variable name="standard_name" type="string" > mole_fraction_of_methane_in_air </variable>
+     <variable name="description" type="string" > Global Mean Mole Fraction of CH4 </variable>
+     <variable name="long_name" type="string" > Global Mean Mole Fraction of CH4 </variable>
+     <variable name="history" type="string" > none </variable>
+     </field>
 </file>
 
 <file name="cfMon_historical_CNRM-CM6-1_r1i1p1f1_TBD_%start_date%_%end_date%" output_freq="1mo" append="true" split_freq="TBD" timeseries="exclusive" >
@@ -1104,7 +1104,7 @@
   <variable name="activity_id"  type="string" > CMIP </variable>
   <variable name="contact"  type="string" > contact.cmip@cnrm.fr </variable>
   <variable name="conventions"  type="string" > CF-1.7 CMIP-6.0 </variable>
-  <variable name="creation_date"  type="string" > 2016-12-20T17:03:48Z </variable>
+  <variable name="creation_date"  type="string" > 2016-12-21T13:32:49Z </variable>
   <variable name="data_specs_version"  type="string" > 01.beta.45 </variable>
   <variable name="experiment"  type="string" > all-forcing simulation of the recent past </variable>
   <variable name="experiment_id"  type="string" > historical </variable>
@@ -1141,17 +1141,9 @@
   <variable name="sub_experiment"  type="string" > none </variable>
   <variable name="table_id"  type="string" > cfMon </variable>
   <variable name="title"  type="string" > CNRM-CM6-1 model output prepared for CMIP6 / CMIP historical </variable>
-  <variable name="tracking_id"  type="string" > hdl:21.14100/7f6bac31-8075-4ae9-b105-951ecddfd1ce </variable>
+  <variable name="tracking_id"  type="string" > hdl:21.14100/31b5c504-8505-4dc7-a6e0-ebe4ee45b08c </variable>
   <variable name="variant_info"  type="string" > Start date chosen so that variant r1i1p1f1 has the better fit with Krakatoa impact on tos </variable>
   <variable name="variant_label"  type="string" > r1i1p1f1 </variable>
-  <field field_ref="CMIP6_clcalipso" name="clcalipso" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
-     <variable name="realm" type="string" > atmos </variable>
-     <variable name="variable_id" type="string" > clcalipso </variable>
-     <variable name="standard_name" type="string" > cloud_area_fraction_in_atmosphere_layer </variable>
-     <variable name="description" type="string" > Percentage cloud cover at CALIPSO standard heights. </variable>
-     <variable name="long_name" type="string" > CALIPSO Percentage Cloud Cover </variable>
-     <variable name="history" type="string" > none </variable>
-     </field>
   <field field_ref="CMIP6_albisccp_cloud" name="albisccp_cloud" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
      <variable name="realm" type="string" > atmos </variable>
      <variable name="variable_id" type="string" > albisccp_cloud </variable>
@@ -1176,14 +1168,6 @@
      <variable name="long_name" type="string" > ISCCP Mean Cloud Top Pressure </variable>
      <variable name="history" type="string" > none </variable>
      </field>
-  <field field_ref="CMIP6_cltisccp" name="cltisccp" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
-     <variable name="realm" type="string" > atmos </variable>
-     <variable name="variable_id" type="string" > cltisccp </variable>
-     <variable name="standard_name" type="string" > cloud_area_fraction </variable>
-     <variable name="description" type="string" > Percentage total cloud cover, simulating ISCCP observations. </variable>
-     <variable name="long_name" type="string" > ISCCP Total Cloud Percentage </variable>
-     <variable name="history" type="string" > none </variable>
-     </field>
   <field field_ref="CMIP6_ta" name="ta" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
      <variable name="realm" type="string" > atmos </variable>
      <variable name="variable_id" type="string" > ta </variable>
@@ -1200,12 +1184,28 @@
      <variable name="long_name" type="string" > CALIPSO Mid Level Cloud Percentage </variable>
      <variable name="history" type="string" > none </variable>
      </field>
+  <field field_ref="CMIP6_cltisccp" name="cltisccp" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
+     <variable name="realm" type="string" > atmos </variable>
+     <variable name="variable_id" type="string" > cltisccp </variable>
+     <variable name="standard_name" type="string" > cloud_area_fraction </variable>
+     <variable name="description" type="string" > Percentage total cloud cover, simulating ISCCP observations. </variable>
+     <variable name="long_name" type="string" > ISCCP Total Cloud Percentage </variable>
+     <variable name="history" type="string" > none </variable>
+     </field>
   <field field_ref="CMIP6_cltcalipso" name="cltcalipso" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
      <variable name="realm" type="string" > atmos </variable>
      <variable name="variable_id" type="string" > cltcalipso </variable>
      <variable name="standard_name" type="string" > cloud_area_fraction </variable>
      <variable name="description" type="string" > unset </variable>
      <variable name="long_name" type="string" > CALIPSO Total Cloud Fraction </variable>
+     <variable name="history" type="string" > none </variable>
+     </field>
+  <field field_ref="CMIP6_clcalipso" name="clcalipso" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
+     <variable name="realm" type="string" > atmos </variable>
+     <variable name="variable_id" type="string" > clcalipso </variable>
+     <variable name="standard_name" type="string" > cloud_area_fraction_in_atmosphere_layer </variable>
+     <variable name="description" type="string" > Percentage cloud cover at CALIPSO standard heights. </variable>
+     <variable name="long_name" type="string" > CALIPSO Percentage Cloud Cover </variable>
      <variable name="history" type="string" > none </variable>
      </field>
   <field field_ref="CMIP6_clisccp" name="clisccp" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -1239,7 +1239,7 @@
   <variable name="activity_id"  type="string" > CMIP </variable>
   <variable name="contact"  type="string" > contact.cmip@cnrm.fr </variable>
   <variable name="conventions"  type="string" > CF-1.7 CMIP-6.0 </variable>
-  <variable name="creation_date"  type="string" > 2016-12-20T17:03:48Z </variable>
+  <variable name="creation_date"  type="string" > 2016-12-21T13:32:49Z </variable>
   <variable name="data_specs_version"  type="string" > 01.beta.45 </variable>
   <variable name="experiment"  type="string" > all-forcing simulation of the recent past </variable>
   <variable name="experiment_id"  type="string" > historical </variable>
@@ -1276,7 +1276,7 @@
   <variable name="sub_experiment"  type="string" > none </variable>
   <variable name="table_id"  type="string" > emDay </variable>
   <variable name="title"  type="string" > CNRM-CM6-1 model output prepared for CMIP6 / CMIP historical </variable>
-  <variable name="tracking_id"  type="string" > hdl:21.14100/fcd1ae2b-460a-4d37-8339-2fcdea548f23 </variable>
+  <variable name="tracking_id"  type="string" > hdl:21.14100/c6e67863-590e-4568-9c02-a810a38fbb53 </variable>
   <variable name="variant_info"  type="string" > Start date chosen so that variant r1i1p1f1 has the better fit with Krakatoa impact on tos </variable>
   <variable name="variant_label"  type="string" > r1i1p1f1 </variable>
   <field field_ref="CMIP6_clwvic" name="clwvic" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -1399,6 +1399,14 @@
      <variable name="long_name" type="string" > Cloud-Top Effective Droplet Radius In Stratiform Cloud </variable>
      <variable name="history" type="string" > none </variable>
      </field>
+  <field field_ref="CMIP6_lai_land" name="lai_land" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
+     <variable name="realm" type="string" > land </variable>
+     <variable name="variable_id" type="string" > lai_land </variable>
+     <variable name="standard_name" type="string" > leaf_area_index </variable>
+     <variable name="description" type="string" > leaf area index </variable>
+     <variable name="long_name" type="string" > leaf area index </variable>
+     <variable name="history" type="string" > none </variable>
+     </field>
   <field field_ref="CMIP6_mrsll" name="mrsll" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
      <variable name="realm" type="string" > land </variable>
      <variable name="variable_id" type="string" > mrsll </variable>
@@ -1413,14 +1421,6 @@
      <variable name="standard_name" type="string" > mrsol </variable>
      <variable name="description" type="string" > as specified by C4MIP </variable>
      <variable name="long_name" type="string" > Total water content of soil layer </variable>
-     <variable name="history" type="string" > none </variable>
-     </field>
-  <field field_ref="CMIP6_lai_land" name="lai_land" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
-     <variable name="realm" type="string" > land </variable>
-     <variable name="variable_id" type="string" > lai_land </variable>
-     <variable name="standard_name" type="string" > leaf_area_index </variable>
-     <variable name="description" type="string" > leaf area index </variable>
-     <variable name="long_name" type="string" > leaf area index </variable>
      <variable name="history" type="string" > none </variable>
      </field>
   <field field_ref="CMIP6_mrsfl" name="mrsfl" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -1438,7 +1438,7 @@
   <variable name="activity_id"  type="string" > CMIP </variable>
   <variable name="contact"  type="string" > contact.cmip@cnrm.fr </variable>
   <variable name="conventions"  type="string" > CF-1.7 CMIP-6.0 </variable>
-  <variable name="creation_date"  type="string" > 2016-12-20T17:03:48Z </variable>
+  <variable name="creation_date"  type="string" > 2016-12-21T13:32:49Z </variable>
   <variable name="data_specs_version"  type="string" > 01.beta.45 </variable>
   <variable name="experiment"  type="string" > all-forcing simulation of the recent past </variable>
   <variable name="experiment_id"  type="string" > historical </variable>
@@ -1475,7 +1475,7 @@
   <variable name="sub_experiment"  type="string" > none </variable>
   <variable name="table_id"  type="string" > emYr </variable>
   <variable name="title"  type="string" > CNRM-CM6-1 model output prepared for CMIP6 / CMIP historical </variable>
-  <variable name="tracking_id"  type="string" > hdl:21.14100/37fb882b-98c3-4dec-94c8-6c0cc469254e </variable>
+  <variable name="tracking_id"  type="string" > hdl:21.14100/a7828561-15eb-462d-a393-0e8266b7a6ff </variable>
   <variable name="variant_info"  type="string" > Start date chosen so that variant r1i1p1f1 has the better fit with Krakatoa impact on tos </variable>
   <variable name="variant_label"  type="string" > r1i1p1f1 </variable>
   <field field_ref="CMIP6_zfull" name="zfull" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -1493,7 +1493,7 @@
   <variable name="activity_id"  type="string" > CMIP </variable>
   <variable name="contact"  type="string" > contact.cmip@cnrm.fr </variable>
   <variable name="conventions"  type="string" > CF-1.7 CMIP-6.0 </variable>
-  <variable name="creation_date"  type="string" > 2016-12-20T17:03:48Z </variable>
+  <variable name="creation_date"  type="string" > 2016-12-21T13:32:49Z </variable>
   <variable name="data_specs_version"  type="string" > 01.beta.45 </variable>
   <variable name="experiment"  type="string" > all-forcing simulation of the recent past </variable>
   <variable name="experiment_id"  type="string" > historical </variable>
@@ -1530,7 +1530,7 @@
   <variable name="sub_experiment"  type="string" > none </variable>
   <variable name="table_id"  type="string" > em3hr </variable>
   <variable name="title"  type="string" > CNRM-CM6-1 model output prepared for CMIP6 / CMIP historical </variable>
-  <variable name="tracking_id"  type="string" > hdl:21.14100/7430fcd6-0a7f-4d09-8d47-891236b1fdfc </variable>
+  <variable name="tracking_id"  type="string" > hdl:21.14100/a1a3e469-65ba-4f12-876a-476a48621fca </variable>
   <variable name="variant_info"  type="string" > Start date chosen so that variant r1i1p1f1 has the better fit with Krakatoa impact on tos </variable>
   <variable name="variant_label"  type="string" > r1i1p1f1 </variable>
   <field field_ref="CMIP6_ra" name="ra" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -1567,7 +1567,7 @@
   <variable name="activity_id"  type="string" > CMIP </variable>
   <variable name="contact"  type="string" > contact.cmip@cnrm.fr </variable>
   <variable name="conventions"  type="string" > CF-1.7 CMIP-6.0 </variable>
-  <variable name="creation_date"  type="string" > 2016-12-20T17:03:48Z </variable>
+  <variable name="creation_date"  type="string" > 2016-12-21T13:32:49Z </variable>
   <variable name="data_specs_version"  type="string" > 01.beta.45 </variable>
   <variable name="experiment"  type="string" > all-forcing simulation of the recent past </variable>
   <variable name="experiment_id"  type="string" > historical </variable>
@@ -1604,7 +1604,7 @@
   <variable name="sub_experiment"  type="string" > none </variable>
   <variable name="table_id"  type="string" > emMonZ </variable>
   <variable name="title"  type="string" > CNRM-CM6-1 model output prepared for CMIP6 / CMIP historical </variable>
-  <variable name="tracking_id"  type="string" > hdl:21.14100/a4709d72-79ce-4427-ae63-2b47589e85e8 </variable>
+  <variable name="tracking_id"  type="string" > hdl:21.14100/bf843c5b-187a-49f4-aa3e-1506d0fe3d0f </variable>
   <variable name="variant_info"  type="string" > Start date chosen so that variant r1i1p1f1 has the better fit with Krakatoa impact on tos </variable>
   <variable name="variant_label"  type="string" > r1i1p1f1 </variable>
   <field field_ref="CMIP6_ch4" name="ch4" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -1629,14 +1629,6 @@
      <variable name="standard_name" type="string" > mole_fraction_of_hydroxyl_radical_in_air </variable>
      <variable name="description" type="string" > OH volume mixing ratio </variable>
      <variable name="long_name" type="string" > OH volume mixing ratio </variable>
-     <variable name="history" type="string" > none </variable>
-     </field>
-  <field field_ref="CMIP6_cly" name="cly" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
-     <variable name="realm" type="string" > aerosol </variable>
-     <variable name="variable_id" type="string" > cly </variable>
-     <variable name="standard_name" type="string" > mole_fraction_of_inorganic_chlorine_in_air </variable>
-     <variable name="description" type="string" > Total family (the sum of all appropriate species in the model) ; list the species in the netCDF header, e.g. Cly = HCl + ClONO2 + HOCl + ClO + Cl + 2*Cl2O2 +2Cl2 + OClO + BrCl Definition: Total inorganic stratospheric chlorine (e.g., HCl, ClO) resulting from degradation of chlorine-containing source gases (CFCs, HCFCs, VSLS), and natural inorganic chlorine sources (e.g., sea salt and other aerosols) add comment attribute with detailed description about how the model calculates these fields </variable>
-     <variable name="long_name" type="string" > Total inorganic chlorine volume mixing ratio </variable>
      <variable name="history" type="string" > none </variable>
      </field>
   <field field_ref="CMIP6_noy" name="noy" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -1677,6 +1669,14 @@
      <variable name="standard_name" type="string" > mole_fraction_of_hydrogen_chloride_in_air </variable>
      <variable name="description" type="string" > HCl volume mixing ratio </variable>
      <variable name="long_name" type="string" > HCl volume mixing ratio </variable>
+     <variable name="history" type="string" > none </variable>
+     </field>
+  <field field_ref="CMIP6_cly" name="cly" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
+     <variable name="realm" type="string" > aerosol </variable>
+     <variable name="variable_id" type="string" > cly </variable>
+     <variable name="standard_name" type="string" > mole_fraction_of_inorganic_chlorine_in_air </variable>
+     <variable name="description" type="string" > Total family (the sum of all appropriate species in the model) ; list the species in the netCDF header, e.g. Cly = HCl + ClONO2 + HOCl + ClO + Cl + 2*Cl2O2 +2Cl2 + OClO + BrCl Definition: Total inorganic stratospheric chlorine (e.g., HCl, ClO) resulting from degradation of chlorine-containing source gases (CFCs, HCFCs, VSLS), and natural inorganic chlorine sources (e.g., sea salt and other aerosols) add comment attribute with detailed description about how the model calculates these fields </variable>
+     <variable name="long_name" type="string" > Total inorganic chlorine volume mixing ratio </variable>
      <variable name="history" type="string" > none </variable>
      </field>
   <field field_ref="CMIP6_bry" name="bry" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -1750,7 +1750,7 @@
   <variable name="activity_id"  type="string" > CMIP </variable>
   <variable name="contact"  type="string" > contact.cmip@cnrm.fr </variable>
   <variable name="conventions"  type="string" > CF-1.7 CMIP-6.0 </variable>
-  <variable name="creation_date"  type="string" > 2016-12-20T17:03:48Z </variable>
+  <variable name="creation_date"  type="string" > 2016-12-21T13:32:49Z </variable>
   <variable name="data_specs_version"  type="string" > 01.beta.45 </variable>
   <variable name="experiment"  type="string" > all-forcing simulation of the recent past </variable>
   <variable name="experiment_id"  type="string" > historical </variable>
@@ -1787,7 +1787,7 @@
   <variable name="sub_experiment"  type="string" > none </variable>
   <variable name="table_id"  type="string" > cfDay </variable>
   <variable name="title"  type="string" > CNRM-CM6-1 model output prepared for CMIP6 / CMIP historical </variable>
-  <variable name="tracking_id"  type="string" > hdl:21.14100/3da2b850-abd3-4d6d-82b8-974a7c1fc7c1 </variable>
+  <variable name="tracking_id"  type="string" > hdl:21.14100/373bc8df-fe35-4de5-b0a9-56baf95ae7a4 </variable>
   <variable name="variant_info"  type="string" > Start date chosen so that variant r1i1p1f1 has the better fit with Krakatoa impact on tos </variable>
   <variable name="variant_label"  type="string" > r1i1p1f1 </variable>
   <field field_ref="CMIP6_albisccp_cloud" name="albisccp_cloud" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -1873,20 +1873,20 @@
      <variable name="long_name" type="string" > Air Pressure at Convective Cloud Top </variable>
      <variable name="history" type="string" > none </variable>
      </field>
-  <field field_ref="CMIP6_ps" name="ps" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
-     <variable name="realm" type="string" > atmos </variable>
-     <variable name="variable_id" type="string" > ps </variable>
-     <variable name="standard_name" type="string" > surface_air_pressure </variable>
-     <variable name="description" type="string" > surface pressure (not mean sea-level pressure), 2-D field to calculate the 3-D pressure field from hybrid coordinates </variable>
-     <variable name="long_name" type="string" > Surface Air Pressure </variable>
-     <variable name="history" type="string" > none </variable>
-     </field>
   <field field_ref="CMIP6_cltcalipso" name="cltcalipso" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
      <variable name="realm" type="string" > atmos </variable>
      <variable name="variable_id" type="string" > cltcalipso </variable>
      <variable name="standard_name" type="string" > cloud_area_fraction </variable>
      <variable name="description" type="string" > unset </variable>
      <variable name="long_name" type="string" > CALIPSO Total Cloud Fraction </variable>
+     <variable name="history" type="string" > none </variable>
+     </field>
+  <field field_ref="CMIP6_ps" name="ps" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
+     <variable name="realm" type="string" > atmos </variable>
+     <variable name="variable_id" type="string" > ps </variable>
+     <variable name="standard_name" type="string" > surface_air_pressure </variable>
+     <variable name="description" type="string" > surface pressure (not mean sea-level pressure), 2-D field to calculate the 3-D pressure field from hybrid coordinates </variable>
+     <variable name="long_name" type="string" > Surface Air Pressure </variable>
      <variable name="history" type="string" > none </variable>
      </field>
   <field field_ref="CMIP6_rsdscs" name="rsdscs" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -1972,7 +1972,7 @@
   <variable name="activity_id"  type="string" > CMIP </variable>
   <variable name="contact"  type="string" > contact.cmip@cnrm.fr </variable>
   <variable name="conventions"  type="string" > CF-1.7 CMIP-6.0 </variable>
-  <variable name="creation_date"  type="string" > 2016-12-20T17:03:48Z </variable>
+  <variable name="creation_date"  type="string" > 2016-12-21T13:32:49Z </variable>
   <variable name="data_specs_version"  type="string" > 01.beta.45 </variable>
   <variable name="experiment"  type="string" > all-forcing simulation of the recent past </variable>
   <variable name="experiment_id"  type="string" > historical </variable>
@@ -2009,7 +2009,7 @@
   <variable name="sub_experiment"  type="string" > none </variable>
   <variable name="table_id"  type="string" > Lmon </variable>
   <variable name="title"  type="string" > CNRM-CM6-1 model output prepared for CMIP6 / CMIP historical </variable>
-  <variable name="tracking_id"  type="string" > hdl:21.14100/e3cf9d9e-984c-4d5a-aace-d314000c2786 </variable>
+  <variable name="tracking_id"  type="string" > hdl:21.14100/b533cf88-492a-4e1a-bb04-dedd7fd2674e </variable>
   <variable name="variant_info"  type="string" > Start date chosen so that variant r1i1p1f1 has the better fit with Krakatoa impact on tos </variable>
   <variable name="variant_label"  type="string" > r1i1p1f1 </variable>
   <field field_ref="CMIP6_pastureFrac" name="pastureFrac" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -2108,6 +2108,14 @@
      <variable name="standard_name" type="string" > leaf_area_index </variable>
      <variable name="description" type="string" > leaf area index </variable>
      <variable name="long_name" type="string" > leaf area index </variable>
+     <variable name="history" type="string" > none </variable>
+     </field>
+  <field field_ref="CMIP6_fVegLitter" name="fVegLitter" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
+     <variable name="realm" type="string" > land </variable>
+     <variable name="variable_id" type="string" > fVegLitter </variable>
+     <variable name="standard_name" type="string" > litter_carbon_flux </variable>
+     <variable name="description" type="string" > unset </variable>
+     <variable name="long_name" type="string" > Total Carbon Mass Flux from Vegetation to Litter </variable>
      <variable name="history" type="string" > none </variable>
      </field>
   <field field_ref="CMIP6_residualFrac" name="residualFrac" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -2264,14 +2272,6 @@
      <variable name="positive" type="string" > down </variable>
      <variable name="history" type="string" > none </variable>
      </field>
-  <field field_ref="CMIP6_fVegLitter" name="fVegLitter" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
-     <variable name="realm" type="string" > land </variable>
-     <variable name="variable_id" type="string" > fVegLitter </variable>
-     <variable name="standard_name" type="string" > litter_carbon_flux </variable>
-     <variable name="description" type="string" > unset </variable>
-     <variable name="long_name" type="string" > Total Carbon Mass Flux from Vegetation to Litter </variable>
-     <variable name="history" type="string" > none </variable>
-     </field>
   <field field_ref="CMIP6_shrubFrac" name="shrubFrac" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
      <variable name="realm" type="string" > land </variable>
      <variable name="variable_id" type="string" > shrubFrac </variable>
@@ -2304,7 +2304,7 @@
   <variable name="activity_id"  type="string" > CMIP </variable>
   <variable name="contact"  type="string" > contact.cmip@cnrm.fr </variable>
   <variable name="conventions"  type="string" > CF-1.7 CMIP-6.0 </variable>
-  <variable name="creation_date"  type="string" > 2016-12-20T17:03:48Z </variable>
+  <variable name="creation_date"  type="string" > 2016-12-21T13:32:49Z </variable>
   <variable name="data_specs_version"  type="string" > 01.beta.45 </variable>
   <variable name="experiment"  type="string" > all-forcing simulation of the recent past </variable>
   <variable name="experiment_id"  type="string" > historical </variable>
@@ -2341,7 +2341,7 @@
   <variable name="sub_experiment"  type="string" > none </variable>
   <variable name="table_id"  type="string" > LImon </variable>
   <variable name="title"  type="string" > CNRM-CM6-1 model output prepared for CMIP6 / CMIP historical </variable>
-  <variable name="tracking_id"  type="string" > hdl:21.14100/6a813162-8dd6-4188-b1b2-1cdffc7c7ade </variable>
+  <variable name="tracking_id"  type="string" > hdl:21.14100/894ce6c2-1c2e-431f-816d-b3b18ae3bbe1 </variable>
   <variable name="variant_info"  type="string" > Start date chosen so that variant r1i1p1f1 has the better fit with Krakatoa impact on tos </variable>
   <variable name="variant_label"  type="string" > r1i1p1f1 </variable>
   <field field_ref="CMIP6_snc" name="snc" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -2384,7 +2384,7 @@
   <variable name="activity_id"  type="string" > CMIP </variable>
   <variable name="contact"  type="string" > contact.cmip@cnrm.fr </variable>
   <variable name="conventions"  type="string" > CF-1.7 CMIP-6.0 </variable>
-  <variable name="creation_date"  type="string" > 2016-12-20T17:03:48Z </variable>
+  <variable name="creation_date"  type="string" > 2016-12-21T13:32:49Z </variable>
   <variable name="data_specs_version"  type="string" > 01.beta.45 </variable>
   <variable name="experiment"  type="string" > all-forcing simulation of the recent past </variable>
   <variable name="experiment_id"  type="string" > historical </variable>
@@ -2421,7 +2421,7 @@
   <variable name="sub_experiment"  type="string" > none </variable>
   <variable name="table_id"  type="string" > day </variable>
   <variable name="title"  type="string" > CNRM-CM6-1 model output prepared for CMIP6 / CMIP historical </variable>
-  <variable name="tracking_id"  type="string" > hdl:21.14100/cd4da79e-f330-4b8d-88f8-3c74e83ed69b </variable>
+  <variable name="tracking_id"  type="string" > hdl:21.14100/43438629-594a-4a6b-af50-a43b4c62ad84 </variable>
   <variable name="variant_info"  type="string" > Start date chosen so that variant r1i1p1f1 has the better fit with Krakatoa impact on tos </variable>
   <variable name="variant_label"  type="string" > r1i1p1f1 </variable>
   <field field_ref="CMIP6_uas" name="uas" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -2719,7 +2719,7 @@
   <variable name="activity_id"  type="string" > CMIP </variable>
   <variable name="contact"  type="string" > contact.cmip@cnrm.fr </variable>
   <variable name="conventions"  type="string" > CF-1.7 CMIP-6.0 </variable>
-  <variable name="creation_date"  type="string" > 2016-12-20T17:03:48Z </variable>
+  <variable name="creation_date"  type="string" > 2016-12-21T13:32:49Z </variable>
   <variable name="data_specs_version"  type="string" > 01.beta.45 </variable>
   <variable name="experiment"  type="string" > all-forcing simulation of the recent past </variable>
   <variable name="experiment_id"  type="string" > historical </variable>
@@ -2756,7 +2756,7 @@
   <variable name="sub_experiment"  type="string" > none </variable>
   <variable name="table_id"  type="string" > aermonthly </variable>
   <variable name="title"  type="string" > CNRM-CM6-1 model output prepared for CMIP6 / CMIP historical </variable>
-  <variable name="tracking_id"  type="string" > hdl:21.14100/84131dc1-2b0b-4d89-b9df-b610ca5be25f </variable>
+  <variable name="tracking_id"  type="string" > hdl:21.14100/db9b82c3-4ade-49ae-a8f8-5884a9a16f50 </variable>
   <variable name="variant_info"  type="string" > Start date chosen so that variant r1i1p1f1 has the better fit with Krakatoa impact on tos </variable>
   <variable name="variant_label"  type="string" > r1i1p1f1 </variable>
   <field field_ref="CMIP6_ua" name="ua" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -2799,36 +2799,12 @@
      <variable name="long_name" type="string" > Cloud Droplet Number Concentration </variable>
      <variable name="history" type="string" > none </variable>
      </field>
-  <field field_ref="CMIP6_ztp" name="ztp" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
-     <variable name="realm" type="string" > aerosol </variable>
-     <variable name="variable_id" type="string" > ztp </variable>
-     <variable name="standard_name" type="string" > tropopause_altitude </variable>
-     <variable name="description" type="string" > 2D monthly mean thermal tropopause calculated using WMO tropopause definition on 3d temperature </variable>
-     <variable name="long_name" type="string" > Tropopause Altitude </variable>
-     <variable name="history" type="string" > none </variable>
-     </field>
   <field field_ref="CMIP6_mmrso4" name="mmrso4" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
      <variable name="realm" type="string" > aerosol </variable>
      <variable name="variable_id" type="string" > mmrso4 </variable>
      <variable name="standard_name" type="string" > mass_fraction_of_sulfate_dry_aerosol_particles_in_air </variable>
      <variable name="description" type="string" > Aerosol sulfate mass mixing ratio </variable>
      <variable name="long_name" type="string" > Aerosol sulfate mass mixing ratio </variable>
-     <variable name="history" type="string" > none </variable>
-     </field>
-  <field field_ref="CMIP6_swtoacsoaff" name="swtoacsoaff" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
-     <variable name="realm" type="string" > aerosol </variable>
-     <variable name="variable_id" type="string" > swtoacsoaff </variable>
-     <variable name="standard_name" type="string" > toa_instantaneous_shortwave_forcing </variable>
-     <variable name="description" type="string" > proposed name: toa_instantaneous_shortwave_forcing_due_to_particulate_organic_matter_ambient_aerosol_from_fossil_fuels_assuming_clear_sky </variable>
-     <variable name="long_name" type="string" > clear sky sw-rf oaff at toa anthropogenic </variable>
-     <variable name="history" type="string" > none </variable>
-     </field>
-  <field field_ref="CMIP6_chepsoa" name="chepsoa" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
-     <variable name="realm" type="string" > aerosol </variable>
-     <variable name="variable_id" type="string" > chepsoa </variable>
-     <variable name="standard_name" type="string" > tendency_of_atmosphere_mass_content_of_secondary_particulate_organic_matter_dry_aerosol_particles_due_to_net_chemical_production </variable>
-     <variable name="description" type="string" > Tendency of atmosphere mass content of secondary organic matter_dry aerosol due to net production:  If model lumps SOA emissions with POA, then the sum of POA and SOA emissions is reported as POA emissions. Here, mass refers to the mass of primary organic matter, not mass of organic carbon alone. Instead of emi_soa in original ACCMIP Excel spreadsheet. That variable had notes: This can be a pseudo-emission flux as used in AEROCOM (Dentener et al, ACP, 2006) or the net. ""mass"" refers to the mass of primary organic matter, not mass of organic carbon alone. proposed name: tendency_of_atmosphere_mass_content_of_anthropogenic_secondary_particulate_organic_matter_dry_aerosol_due_to_net_chemical_production. Used instead of emi_asoa in original ACCMIP Excel spreadsheet. That variable had notes: This can be a pseudo-emission flux as used in AEROCOM (Dentener et al, ACP, 2006) or the net. </variable>
-     <variable name="long_name" type="string" > Production Rate of Dry Aerosol Secondary Organic Matter </variable>
      <variable name="history" type="string" > none </variable>
      </field>
   <field field_ref="CMIP6_photo1d" name="photo1d" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -3000,6 +2976,22 @@
      <variable name="long_name" type="string" > SOA mass mixing ratio </variable>
      <variable name="history" type="string" > none </variable>
      </field>
+  <field field_ref="CMIP6_hcho" name="hcho" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
+     <variable name="realm" type="string" > aerosol </variable>
+     <variable name="variable_id" type="string" > hcho </variable>
+     <variable name="standard_name" type="string" > mole_fraction_of_formaldehyde_in_air </variable>
+     <variable name="description" type="string" > Formaldehyde volume mixing ratio </variable>
+     <variable name="long_name" type="string" > Formaldehyde volume mixing ratio </variable>
+     <variable name="history" type="string" > none </variable>
+     </field>
+  <field field_ref="CMIP6_ztp" name="ztp" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
+     <variable name="realm" type="string" > aerosol </variable>
+     <variable name="variable_id" type="string" > ztp </variable>
+     <variable name="standard_name" type="string" > tropopause_altitude </variable>
+     <variable name="description" type="string" > 2D monthly mean thermal tropopause calculated using WMO tropopause definition on 3d temperature </variable>
+     <variable name="long_name" type="string" > Tropopause Altitude </variable>
+     <variable name="history" type="string" > none </variable>
+     </field>
   <field field_ref="CMIP6_lwtoaasdust" name="lwtoaasdust" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
      <variable name="realm" type="string" > aerosol </variable>
      <variable name="variable_id" type="string" > lwtoaasdust </variable>
@@ -3110,6 +3102,14 @@
      <variable name="standard_name" type="string" > tendency_of_atmosphere_mass_content_of_ammonia_due_to_emission </variable>
      <variable name="description" type="string" > Integrate 3D emission field vertically to 2d field. </variable>
      <variable name="long_name" type="string" > Total Emission Rate of nh3 </variable>
+     <variable name="history" type="string" > none </variable>
+     </field>
+  <field field_ref="CMIP6_chepsoa" name="chepsoa" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
+     <variable name="realm" type="string" > aerosol </variable>
+     <variable name="variable_id" type="string" > chepsoa </variable>
+     <variable name="standard_name" type="string" > tendency_of_atmosphere_mass_content_of_secondary_particulate_organic_matter_dry_aerosol_particles_due_to_net_chemical_production </variable>
+     <variable name="description" type="string" > Tendency of atmosphere mass content of secondary organic matter_dry aerosol due to net production:  If model lumps SOA emissions with POA, then the sum of POA and SOA emissions is reported as POA emissions. Here, mass refers to the mass of primary organic matter, not mass of organic carbon alone. Instead of emi_soa in original ACCMIP Excel spreadsheet. That variable had notes: This can be a pseudo-emission flux as used in AEROCOM (Dentener et al, ACP, 2006) or the net. ""mass"" refers to the mass of primary organic matter, not mass of organic carbon alone. proposed name: tendency_of_atmosphere_mass_content_of_anthropogenic_secondary_particulate_organic_matter_dry_aerosol_due_to_net_chemical_production. Used instead of emi_asoa in original ACCMIP Excel spreadsheet. That variable had notes: This can be a pseudo-emission flux as used in AEROCOM (Dentener et al, ACP, 2006) or the net. </variable>
+     <variable name="long_name" type="string" > Production Rate of Dry Aerosol Secondary Organic Matter </variable>
      <variable name="history" type="string" > none </variable>
      </field>
   <field field_ref="CMIP6_o3prod" name="o3prod" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -3520,14 +3520,6 @@
      <variable name="long_name" type="string" > Total Emission Rate of anthropogenic co </variable>
      <variable name="history" type="string" > none </variable>
      </field>
-  <field field_ref="CMIP6_abs550aer" name="abs550aer" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
-     <variable name="realm" type="string" > aerosol </variable>
-     <variable name="variable_id" type="string" > abs550aer </variable>
-     <variable name="standard_name" type="string" > abs550aer </variable>
-     <variable name="description" type="string" > Ambient Aerosol Absorption Optical Thickness at 550 nm </variable>
-     <variable name="long_name" type="string" > Ambient Aerosol Absorption Optical Thickness at 550 nm </variable>
-     <variable name="history" type="string" > none </variable>
-     </field>
   <field field_ref="CMIP6_wa" name="wa" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
      <variable name="realm" type="string" > aerosol </variable>
      <variable name="variable_id" type="string" > wa </variable>
@@ -3558,6 +3550,14 @@
      <variable name="standard_name" type="string" > tendency_of_atmosphere_mass_content_of_nmvoc_due_to_emission </variable>
      <variable name="description" type="string" > proposed name: tendency_of_atmosphere_mass_content_of_non_methane_volatile_organic_compounds_as_carbon_due_to_emission. Integrate 3D emission field vertically to 2d field.  _If_ fixed molecular weight of NMVOC is not available in model, please provide in units of kilomole m-2 s-1 (i.e. kg m-2 s-1 as if model NMVOC had molecular weight of 1) and add a comment to your file. </variable>
      <variable name="long_name" type="string" > Total Emission Rate of non-Methane Volatile Organic Compounds (NMVOC) </variable>
+     <variable name="history" type="string" > none </variable>
+     </field>
+  <field field_ref="CMIP6_swtoaassoa" name="swtoaassoa" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
+     <variable name="realm" type="string" > aerosol </variable>
+     <variable name="variable_id" type="string" > swtoaassoa </variable>
+     <variable name="standard_name" type="string" > toa_instantaneous_shortwave_forcing </variable>
+     <variable name="description" type="string" > proposed name: toa_instantaneous_shortwave_forcing_due_to_secondary_particulate_organic_matter_ambient_aerosol </variable>
+     <variable name="long_name" type="string" > all sky sw-rf soa at toa </variable>
      <variable name="history" type="string" > none </variable>
      </field>
   <field field_ref="CMIP6_wetoa" name="wetoa" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -3680,12 +3680,12 @@
      <variable name="long_name" type="string" > Annual Loss of atmospheric Nitrous Oxide  </variable>
      <variable name="history" type="string" > none </variable>
      </field>
-  <field field_ref="CMIP6_swtoaassoa" name="swtoaassoa" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
+  <field field_ref="CMIP6_swtoacsoaff" name="swtoacsoaff" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
      <variable name="realm" type="string" > aerosol </variable>
-     <variable name="variable_id" type="string" > swtoaassoa </variable>
+     <variable name="variable_id" type="string" > swtoacsoaff </variable>
      <variable name="standard_name" type="string" > toa_instantaneous_shortwave_forcing </variable>
-     <variable name="description" type="string" > proposed name: toa_instantaneous_shortwave_forcing_due_to_secondary_particulate_organic_matter_ambient_aerosol </variable>
-     <variable name="long_name" type="string" > all sky sw-rf soa at toa </variable>
+     <variable name="description" type="string" > proposed name: toa_instantaneous_shortwave_forcing_due_to_particulate_organic_matter_ambient_aerosol_from_fossil_fuels_assuming_clear_sky </variable>
+     <variable name="long_name" type="string" > clear sky sw-rf oaff at toa anthropogenic </variable>
      <variable name="history" type="string" > none </variable>
      </field>
   <field field_ref="CMIP6_mmrdust" name="mmrdust" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -3726,6 +3726,14 @@
      <variable name="standard_name" type="string" > toa_instantaneous_shortwave_forcing </variable>
      <variable name="description" type="string" > proposed name: toa_instantaneous_shortwave_forcing_due_to_nitrate_ambient_aerosol </variable>
      <variable name="long_name" type="string" > all sky sw-rf no3 at toa </variable>
+     <variable name="history" type="string" > none </variable>
+     </field>
+  <field field_ref="CMIP6_abs550aer" name="abs550aer" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
+     <variable name="realm" type="string" > aerosol </variable>
+     <variable name="variable_id" type="string" > abs550aer </variable>
+     <variable name="standard_name" type="string" > abs550aer </variable>
+     <variable name="description" type="string" > Ambient Aerosol Absorption Optical Thickness at 550 nm </variable>
+     <variable name="long_name" type="string" > Ambient Aerosol Absorption Optical Thickness at 550 nm </variable>
      <variable name="history" type="string" > none </variable>
      </field>
   <field field_ref="CMIP6_swtoacsbb" name="swtoacsbb" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -3854,14 +3862,6 @@
      <variable name="standard_name" type="string" > toa_instantaneous_longwave_forcing </variable>
      <variable name="description" type="string" > proposed name: toa_instantaneous_longwave_forcing_due_to_ambient_aerosol_assuming_clear_sky </variable>
      <variable name="long_name" type="string" > clear sky lw-rf aerosols at toa </variable>
-     <variable name="history" type="string" > none </variable>
-     </field>
-  <field field_ref="CMIP6_hcho" name="hcho" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
-     <variable name="realm" type="string" > aerosol </variable>
-     <variable name="variable_id" type="string" > hcho </variable>
-     <variable name="standard_name" type="string" > mole_fraction_of_formaldehyde_in_air </variable>
-     <variable name="description" type="string" > Formaldehyde volume mixing ratio </variable>
-     <variable name="long_name" type="string" > Formaldehyde volume mixing ratio </variable>
      <variable name="history" type="string" > none </variable>
      </field>
   <field field_ref="CMIP6_mmrss" name="mmrss" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">

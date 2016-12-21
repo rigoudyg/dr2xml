@@ -4,7 +4,7 @@
   <variable name="activity_id"  type="string" > CMIP </variable>
   <variable name="contact"  type="string" > contact.cmip@cnrm.fr </variable>
   <variable name="conventions"  type="string" > CF-1.7 CMIP-6.0 </variable>
-  <variable name="creation_date"  type="string" > 2016-12-20T17:03:38Z </variable>
+  <variable name="creation_date"  type="string" > 2016-12-21T13:32:45Z </variable>
   <variable name="data_specs_version"  type="string" > 01.beta.45 </variable>
   <variable name="experiment"  type="string" > all-forcing simulation of the recent past </variable>
   <variable name="experiment_id"  type="string" > historical </variable>
@@ -41,7 +41,7 @@
   <variable name="sub_experiment"  type="string" > none </variable>
   <variable name="table_id"  type="string" > emMon </variable>
   <variable name="title"  type="string" > CNRM-CM6-1 model output prepared for CMIP6 / CMIP historical </variable>
-  <variable name="tracking_id"  type="string" > hdl:21.14100/03e03f4b-07c1-4e1a-aec0-74cfed9de977 </variable>
+  <variable name="tracking_id"  type="string" > hdl:21.14100/42f21ded-3228-47a7-9fd8-c44ccb859867 </variable>
   <variable name="variant_info"  type="string" > Start date chosen so that variant r1i1p1f1 has the better fit with Krakatoa impact on tos </variable>
   <variable name="variant_label"  type="string" > r1i1p1f1 </variable>
   <field field_ref="CMIP6_expcfe" name="expcfe" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -91,7 +91,7 @@
   <variable name="activity_id"  type="string" > CMIP </variable>
   <variable name="contact"  type="string" > contact.cmip@cnrm.fr </variable>
   <variable name="conventions"  type="string" > CF-1.7 CMIP-6.0 </variable>
-  <variable name="creation_date"  type="string" > 2016-12-20T17:03:38Z </variable>
+  <variable name="creation_date"  type="string" > 2016-12-21T13:32:45Z </variable>
   <variable name="data_specs_version"  type="string" > 01.beta.45 </variable>
   <variable name="experiment"  type="string" > all-forcing simulation of the recent past </variable>
   <variable name="experiment_id"  type="string" > historical </variable>
@@ -128,7 +128,7 @@
   <variable name="sub_experiment"  type="string" > none </variable>
   <variable name="table_id"  type="string" > SImon </variable>
   <variable name="title"  type="string" > CNRM-CM6-1 model output prepared for CMIP6 / CMIP historical </variable>
-  <variable name="tracking_id"  type="string" > hdl:21.14100/e05b23a1-2f6f-46e1-8d29-de715e7956ac </variable>
+  <variable name="tracking_id"  type="string" > hdl:21.14100/4ea760ef-15b2-4d4a-a97a-0cba8c57cbf5 </variable>
   <variable name="variant_info"  type="string" > Start date chosen so that variant r1i1p1f1 has the better fit with Krakatoa impact on tos </variable>
   <variable name="variant_label"  type="string" > r1i1p1f1 </variable>
   <field field_ref="CMIP6_siu" name="siu" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -315,6 +315,14 @@
      <variable name="long_name" type="string" > Downwelling shortwave flux over sea ice </variable>
      <variable name="history" type="string" > none </variable>
      </field>
+  <field field_ref="CMIP6_sitemptop" name="sitemptop" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
+     <variable name="realm" type="string" > seaIce </variable>
+     <variable name="variable_id" type="string" > sitemptop </variable>
+     <variable name="standard_name" type="string" > sea_ice_surface_temperature </variable>
+     <variable name="description" type="string" > Surface temperature of sea-ice (surface temperature of snow cover on the sea ice if applicable). </variable>
+     <variable name="long_name" type="string" > Surface temperature of sea ice </variable>
+     <variable name="history" type="string" > none </variable>
+     </field>
   <field field_ref="CMIP6_sisnconc" name="sisnconc" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
      <variable name="realm" type="string" > seaIce </variable>
      <variable name="variable_id" type="string" > sisnconc </variable>
@@ -345,14 +353,6 @@
      <variable name="standard_name" type="string" > sea_ice_thickness </variable>
      <variable name="description" type="string" > Total volume of sea ice divided by grid-cell area (this used to be called ice thickness in CMIP5) </variable>
      <variable name="long_name" type="string" > Sea-ice volume per area </variable>
-     <variable name="history" type="string" > none </variable>
-     </field>
-  <field field_ref="CMIP6_sitemptop" name="sitemptop" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
-     <variable name="realm" type="string" > seaIce </variable>
-     <variable name="variable_id" type="string" > sitemptop </variable>
-     <variable name="standard_name" type="string" > sea_ice_surface_temperature </variable>
-     <variable name="description" type="string" > Surface temperature of sea-ice (surface temperature of snow cover on the sea ice if applicable). </variable>
-     <variable name="long_name" type="string" > Surface temperature of sea ice </variable>
      <variable name="history" type="string" > none </variable>
      </field>
   <field field_ref="CMIP6_sicompstren" name="sicompstren" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -435,7 +435,7 @@
   <variable name="activity_id"  type="string" > CMIP </variable>
   <variable name="contact"  type="string" > contact.cmip@cnrm.fr </variable>
   <variable name="conventions"  type="string" > CF-1.7 CMIP-6.0 </variable>
-  <variable name="creation_date"  type="string" > 2016-12-20T17:03:38Z </variable>
+  <variable name="creation_date"  type="string" > 2016-12-21T13:32:45Z </variable>
   <variable name="data_specs_version"  type="string" > 01.beta.45 </variable>
   <variable name="experiment"  type="string" > all-forcing simulation of the recent past </variable>
   <variable name="experiment_id"  type="string" > historical </variable>
@@ -472,7 +472,7 @@
   <variable name="sub_experiment"  type="string" > none </variable>
   <variable name="table_id"  type="string" > Omon </variable>
   <variable name="title"  type="string" > CNRM-CM6-1 model output prepared for CMIP6 / CMIP historical </variable>
-  <variable name="tracking_id"  type="string" > hdl:21.14100/50e9f3c5-4a4e-4b41-8fcf-ee4e875e5237 </variable>
+  <variable name="tracking_id"  type="string" > hdl:21.14100/aa94a86f-cdd2-4fbd-9efd-1889585ed314 </variable>
   <variable name="variant_info"  type="string" > Start date chosen so that variant r1i1p1f1 has the better fit with Krakatoa impact on tos </variable>
   <variable name="variant_label"  type="string" > r1i1p1f1 </variable>
   <field field_ref="CMIP6_mlotstmax" name="mlotstmax" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -556,6 +556,14 @@
      <variable name="standard_name" type="string" > obvfsq </variable>
      <variable name="description" type="string" > Square of Brunt Vaisala Frequency in Sea Water </variable>
      <variable name="long_name" type="string" > Square of Brunt Vaisala Frequency in Sea Water </variable>
+     <variable name="history" type="string" > none </variable>
+     </field>
+  <field field_ref="CMIP6_tos" name="tos" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
+     <variable name="realm" type="string" > ocean </variable>
+     <variable name="variable_id" type="string" > tos </variable>
+     <variable name="standard_name" type="string" > sea_surface_temperature </variable>
+     <variable name="description" type="string" > this may differ from "surface temperature" in regions of sea ice. </variable>
+     <variable name="long_name" type="string" > Sea Surface Temperature </variable>
      <variable name="history" type="string" > none </variable>
      </field>
   <field field_ref="CMIP6_zhalf" name="zhalf" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -684,14 +692,6 @@
      <variable name="standard_name" type="string" > sea_water_conservative_temperature </variable>
      <variable name="description" type="string" > Sea water conservative temperature (this should be contributed only for models using conservative temperature as prognostic field) </variable>
      <variable name="long_name" type="string" > Sea Water Conservative Temperature </variable>
-     <variable name="history" type="string" > none </variable>
-     </field>
-  <field field_ref="CMIP6_tos" name="tos" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
-     <variable name="realm" type="string" > ocean </variable>
-     <variable name="variable_id" type="string" > tos </variable>
-     <variable name="standard_name" type="string" > sea_surface_temperature </variable>
-     <variable name="description" type="string" > this may differ from "surface temperature" in regions of sea ice. </variable>
-     <variable name="long_name" type="string" > Sea Surface Temperature </variable>
      <variable name="history" type="string" > none </variable>
      </field>
   <field field_ref="CMIP6_thkcello" name="thkcello" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -1167,7 +1167,7 @@
   <variable name="activity_id"  type="string" > CMIP </variable>
   <variable name="contact"  type="string" > contact.cmip@cnrm.fr </variable>
   <variable name="conventions"  type="string" > CF-1.7 CMIP-6.0 </variable>
-  <variable name="creation_date"  type="string" > 2016-12-20T17:03:38Z </variable>
+  <variable name="creation_date"  type="string" > 2016-12-21T13:32:45Z </variable>
   <variable name="data_specs_version"  type="string" > 01.beta.45 </variable>
   <variable name="experiment"  type="string" > all-forcing simulation of the recent past </variable>
   <variable name="experiment_id"  type="string" > historical </variable>
@@ -1203,7 +1203,7 @@
   <variable name="sub_experiment"  type="string" > none </variable>
   <variable name="table_id"  type="string" > fx </variable>
   <variable name="title"  type="string" > CNRM-CM6-1 model output prepared for CMIP6 / CMIP historical </variable>
-  <variable name="tracking_id"  type="string" > hdl:21.14100/b6dac9d3-2c0f-451a-b984-59d8221e560f </variable>
+  <variable name="tracking_id"  type="string" > hdl:21.14100/4c025c37-5cd2-4f69-98ba-972afc1965ec </variable>
   <variable name="variant_info"  type="string" > Start date chosen so that variant r1i1p1f1 has the better fit with Krakatoa impact on tos </variable>
   <variable name="variant_label"  type="string" > r1i1p1f1 </variable>
   <field field_ref="CMIP6_hfgeou_sea" name="hfgeou_sea" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -1230,7 +1230,7 @@
   <variable name="activity_id"  type="string" > CMIP </variable>
   <variable name="contact"  type="string" > contact.cmip@cnrm.fr </variable>
   <variable name="conventions"  type="string" > CF-1.7 CMIP-6.0 </variable>
-  <variable name="creation_date"  type="string" > 2016-12-20T17:03:38Z </variable>
+  <variable name="creation_date"  type="string" > 2016-12-21T13:32:45Z </variable>
   <variable name="data_specs_version"  type="string" > 01.beta.45 </variable>
   <variable name="experiment"  type="string" > all-forcing simulation of the recent past </variable>
   <variable name="experiment_id"  type="string" > historical </variable>
@@ -1267,7 +1267,7 @@
   <variable name="sub_experiment"  type="string" > none </variable>
   <variable name="table_id"  type="string" > SIday </variable>
   <variable name="title"  type="string" > CNRM-CM6-1 model output prepared for CMIP6 / CMIP historical </variable>
-  <variable name="tracking_id"  type="string" > hdl:21.14100/74c476f6-9b86-4218-b00d-a2d75071d362 </variable>
+  <variable name="tracking_id"  type="string" > hdl:21.14100/52277508-2f26-4dde-84e4-be8a6b38fd4d </variable>
   <variable name="variant_info"  type="string" > Start date chosen so that variant r1i1p1f1 has the better fit with Krakatoa impact on tos </variable>
   <variable name="variant_label"  type="string" > r1i1p1f1 </variable>
   <field field_ref="CMIP6_sispeed" name="sispeed" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -1293,7 +1293,7 @@
   <variable name="activity_id"  type="string" > CMIP </variable>
   <variable name="contact"  type="string" > contact.cmip@cnrm.fr </variable>
   <variable name="conventions"  type="string" > CF-1.7 CMIP-6.0 </variable>
-  <variable name="creation_date"  type="string" > 2016-12-20T17:03:38Z </variable>
+  <variable name="creation_date"  type="string" > 2016-12-21T13:32:45Z </variable>
   <variable name="data_specs_version"  type="string" > 01.beta.45 </variable>
   <variable name="experiment"  type="string" > all-forcing simulation of the recent past </variable>
   <variable name="experiment_id"  type="string" > historical </variable>
@@ -1330,7 +1330,7 @@
   <variable name="sub_experiment"  type="string" > none </variable>
   <variable name="table_id"  type="string" > Oyr </variable>
   <variable name="title"  type="string" > CNRM-CM6-1 model output prepared for CMIP6 / CMIP historical </variable>
-  <variable name="tracking_id"  type="string" > hdl:21.14100/9018ee17-afa8-4f49-8311-b9b6b1029d1a </variable>
+  <variable name="tracking_id"  type="string" > hdl:21.14100/c2066adb-c112-4379-839b-28659397905f </variable>
   <variable name="variant_info"  type="string" > Start date chosen so that variant r1i1p1f1 has the better fit with Krakatoa impact on tos </variable>
   <variable name="variant_label"  type="string" > r1i1p1f1 </variable>
   <field field_ref="CMIP6_cfc12" name="cfc12" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -1452,7 +1452,7 @@
   <variable name="activity_id"  type="string" > CMIP </variable>
   <variable name="contact"  type="string" > contact.cmip@cnrm.fr </variable>
   <variable name="conventions"  type="string" > CF-1.7 CMIP-6.0 </variable>
-  <variable name="creation_date"  type="string" > 2016-12-20T17:03:38Z </variable>
+  <variable name="creation_date"  type="string" > 2016-12-21T13:32:45Z </variable>
   <variable name="data_specs_version"  type="string" > 01.beta.45 </variable>
   <variable name="experiment"  type="string" > all-forcing simulation of the recent past </variable>
   <variable name="experiment_id"  type="string" > historical </variable>
@@ -1489,7 +1489,7 @@
   <variable name="sub_experiment"  type="string" > none </variable>
   <variable name="table_id"  type="string" > day </variable>
   <variable name="title"  type="string" > CNRM-CM6-1 model output prepared for CMIP6 / CMIP historical </variable>
-  <variable name="tracking_id"  type="string" > hdl:21.14100/591a8eab-9b6c-4bd0-b28d-da0c28d2b073 </variable>
+  <variable name="tracking_id"  type="string" > hdl:21.14100/e7538e17-c856-4004-b1cc-1a274c036a9d </variable>
   <variable name="variant_info"  type="string" > Start date chosen so that variant r1i1p1f1 has the better fit with Krakatoa impact on tos </variable>
   <variable name="variant_label"  type="string" > r1i1p1f1 </variable>
   <field field_ref="CMIP6_omldamax" name="omldamax" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -1531,7 +1531,7 @@
   <variable name="activity_id"  type="string" > CMIP </variable>
   <variable name="contact"  type="string" > contact.cmip@cnrm.fr </variable>
   <variable name="conventions"  type="string" > CF-1.7 CMIP-6.0 </variable>
-  <variable name="creation_date"  type="string" > 2016-12-20T17:03:38Z </variable>
+  <variable name="creation_date"  type="string" > 2016-12-21T13:32:45Z </variable>
   <variable name="data_specs_version"  type="string" > 01.beta.45 </variable>
   <variable name="experiment"  type="string" > all-forcing simulation of the recent past </variable>
   <variable name="experiment_id"  type="string" > historical </variable>
@@ -1568,7 +1568,7 @@
   <variable name="sub_experiment"  type="string" > none </variable>
   <variable name="table_id"  type="string" > Oday </variable>
   <variable name="title"  type="string" > CNRM-CM6-1 model output prepared for CMIP6 / CMIP historical </variable>
-  <variable name="tracking_id"  type="string" > hdl:21.14100/dceabf1f-594a-4ed1-84e1-8865cc379464 </variable>
+  <variable name="tracking_id"  type="string" > hdl:21.14100/6e6d005b-b0f9-4500-9cc5-eb752df8821f </variable>
   <variable name="variant_info"  type="string" > Start date chosen so that variant r1i1p1f1 has the better fit with Krakatoa impact on tos </variable>
   <variable name="variant_label"  type="string" > r1i1p1f1 </variable>
   <field field_ref="CMIP6_tossq" name="tossq" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -1594,7 +1594,7 @@
   <variable name="activity_id"  type="string" > CMIP </variable>
   <variable name="contact"  type="string" > contact.cmip@cnrm.fr </variable>
   <variable name="conventions"  type="string" > CF-1.7 CMIP-6.0 </variable>
-  <variable name="creation_date"  type="string" > 2016-12-20T17:03:38Z </variable>
+  <variable name="creation_date"  type="string" > 2016-12-21T13:32:45Z </variable>
   <variable name="data_specs_version"  type="string" > 01.beta.45 </variable>
   <variable name="experiment"  type="string" > all-forcing simulation of the recent past </variable>
   <variable name="experiment_id"  type="string" > historical </variable>
@@ -1631,7 +1631,7 @@
   <variable name="sub_experiment"  type="string" > none </variable>
   <variable name="table_id"  type="string" > Oclim </variable>
   <variable name="title"  type="string" > CNRM-CM6-1 model output prepared for CMIP6 / CMIP historical </variable>
-  <variable name="tracking_id"  type="string" > hdl:21.14100/63bdc89d-e259-44b8-b249-a4d81d4ffc58 </variable>
+  <variable name="tracking_id"  type="string" > hdl:21.14100/ac1d12d9-0fae-4db4-bc30-ecfef6f08f4c </variable>
   <variable name="variant_info"  type="string" > Start date chosen so that variant r1i1p1f1 has the better fit with Krakatoa impact on tos </variable>
   <variable name="variant_label"  type="string" > r1i1p1f1 </variable>
   <field field_ref="CMIP6_zfullo" name="zfullo" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -1657,7 +1657,7 @@
   <variable name="activity_id"  type="string" > CMIP </variable>
   <variable name="contact"  type="string" > contact.cmip@cnrm.fr </variable>
   <variable name="conventions"  type="string" > CF-1.7 CMIP-6.0 </variable>
-  <variable name="creation_date"  type="string" > 2016-12-20T17:03:38Z </variable>
+  <variable name="creation_date"  type="string" > 2016-12-21T13:32:45Z </variable>
   <variable name="data_specs_version"  type="string" > 01.beta.45 </variable>
   <variable name="experiment"  type="string" > all-forcing simulation of the recent past </variable>
   <variable name="experiment_id"  type="string" > historical </variable>
@@ -1693,7 +1693,7 @@
   <variable name="sub_experiment"  type="string" > none </variable>
   <variable name="table_id"  type="string" > Ofx </variable>
   <variable name="title"  type="string" > CNRM-CM6-1 model output prepared for CMIP6 / CMIP historical </variable>
-  <variable name="tracking_id"  type="string" > hdl:21.14100/8b943c98-1054-4b86-b5af-4cf6c489208b </variable>
+  <variable name="tracking_id"  type="string" > hdl:21.14100/4aa53091-9e19-4ab4-a58b-33781615f09a </variable>
   <variable name="variant_info"  type="string" > Start date chosen so that variant r1i1p1f1 has the better fit with Krakatoa impact on tos </variable>
   <variable name="variant_label"  type="string" > r1i1p1f1 </variable>
   <field field_ref="CMIP6_deptho" name="deptho" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">
@@ -1751,7 +1751,7 @@
   <variable name="activity_id"  type="string" > CMIP </variable>
   <variable name="contact"  type="string" > contact.cmip@cnrm.fr </variable>
   <variable name="conventions"  type="string" > CF-1.7 CMIP-6.0 </variable>
-  <variable name="creation_date"  type="string" > 2016-12-20T17:03:38Z </variable>
+  <variable name="creation_date"  type="string" > 2016-12-21T13:32:45Z </variable>
   <variable name="data_specs_version"  type="string" > 01.beta.45 </variable>
   <variable name="experiment"  type="string" > all-forcing simulation of the recent past </variable>
   <variable name="experiment_id"  type="string" > historical </variable>
@@ -1788,7 +1788,7 @@
   <variable name="sub_experiment"  type="string" > none </variable>
   <variable name="table_id"  type="string" > Odec </variable>
   <variable name="title"  type="string" > CNRM-CM6-1 model output prepared for CMIP6 / CMIP historical </variable>
-  <variable name="tracking_id"  type="string" > hdl:21.14100/2f0000d1-7a17-4638-9bf8-0b21ea6581bf </variable>
+  <variable name="tracking_id"  type="string" > hdl:21.14100/a82f25d5-947b-4f54-9dad-385e56db7441 </variable>
   <variable name="variant_info"  type="string" > Start date chosen so that variant r1i1p1f1 has the better fit with Krakatoa impact on tos </variable>
   <variable name="variant_label"  type="string" > r1i1p1f1 </variable>
   <field field_ref="CMIP6_masso" name="masso" ts_enabled="true" ts_split_freq="10y" operation="instant" detect_missing="false">

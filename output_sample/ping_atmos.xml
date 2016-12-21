@@ -24,11 +24,11 @@
    <field id="CMIP6_cct"           field_ref="dummy_XY"         /> <!-- (Pa) air_pressure_at_convective_cloud_top : Where convective cloud is present in the grid cell, the instantaneous cloud top altitude should be that of the top of the highest level containing convective cloud. Missing data should be reported in the absence of convective cloud. The time mean should be calculated from these quantities averaging over occasions when convective cloud is present only, and should contain missing data for occasions when no convective cloud is present during the meaning period. -->
    <field id="CMIP6_cfadDbze94"    field_ref="dummy_XYA"        /> <!-- (1.0) histogram_of_equivalent_reflectivity_factor_over_height_above_reference_ellipsoid : CFAD (Cloud Frequency Altitude Diagrams) are frequency distributions of radar  reflectivity (or lidar scattering ratio) as a function of altitude. The variable cfadDbze94 is defined as the simulated relative frequency of occurrence of radar reflectivity in sampling volumes defined by altitude bins. The radar is observing at a frequency of 94GHz. -->
    <field id="CMIP6_cfadLidarsr532" field_ref="dummy_XYA"        /> <!-- (1.0) histogram_of_backscattering_ratio_over_height_above_reference_ellipsoid : CFAD (Cloud Frequency Altitude Diagrams) are frequency distributions of radar  reflectivity (or lidar scattering ratio) as a function of altitude. The variable cfadLidarsr532 is defined as the simulated relative frequency of lidar scattering ratio in sampling volumes defined by altitude bins. The lidar is observing at a wavelength of 532nm. -->
-   <field id="CMIP6_cfc113global"  field_ref="dummy_0d"         /> <!-- (1e-12) mole_fraction_of_cfc113_in_air : unset -->
-   <field id="CMIP6_cfc11global"   field_ref="dummy_0d"         /> <!-- (1e-12) mole_fraction_of_cfc11_in_air : unset -->
-   <field id="CMIP6_cfc12global"   field_ref="dummy_0d"         /> <!-- (1e-12) mole_fraction_of_cfc12_in_air : unset -->
+   <field field_ref="dummy_na" id="CMIP6_cfc113global" /> <!-- (1e-12) mole_fraction_of_cfc113_in_air : unset -->
+   <field field_ref="dummy_na" id="CMIP6_cfc11global" /> <!-- (1e-12) mole_fraction_of_cfc11_in_air : unset -->
+   <field field_ref="dummy_na" id="CMIP6_cfc12global" />       <!-- (1e-12) mole_fraction_of_cfc12_in_air : unset -->
    <field id="CMIP6_ch4"           field_ref="dummy_XYA"        /> <!-- (mol mol-1) mole_fraction_of_methane_in_air : CH4 volume mixing ratio -->
-   <field id="CMIP6_ch4global"     field_ref="dummy_0d"         /> <!-- (1e-09) mole_fraction_of_methane_in_air : Global Mean Mole Fraction of CH4 -->
+   <field field_ref="dummy_na" id="CMIP6_ch4global" /> <!-- (1e-09) mole_fraction_of_methane_in_air : Global Mean Mole Fraction of CH4 -->
    <field id="CMIP6_ci"            field_ref="dummy_XY"         /> <!-- (1.0) convection_time_fraction : Fraction of time that convection occurs in the grid cell. -->
    <field id="CMIP6_cl"            field_ref="dummy_XYA"        /> <!-- (%) cloud_area_fraction_in_atmosphere_layer : Percentage cloud cover, including both large-scale and convective cloud. -->
    <field id="CMIP6_clc"           field_ref="dummy_XYA"        /> <!-- (%) convective_cloud_area_fraction_in_atmosphere_layer : Include only convective cloud. -->
@@ -65,7 +65,7 @@
    <field id="CMIP6_clwvic"        field_ref="dummy_XY"         /> <!-- (kg m-2 ) clwvic : calculate mass of convective condensed (liquid + ice) water in the column divided by the area of the column (not just the area of the cloudy portion of the column). This includes precipitating hydrometeors ONLY if the precipitating hydrometeors affect the calculation of radiative transfer in model.   -->
    <field id="CMIP6_cnc"           field_ref="dummy_XY"         /> <!-- () vegetation_area_fraction : Canopy covered fraction -->
    <field id="CMIP6_co2"           field_ref="dummy_XYA"        /> <!-- (mol mol-1) mole_fraction_of_carbon_dioxide_in_air : CO2 volume mixing ratio -->
-   <field id="CMIP6_co2mass"       field_ref="dummy_0d"         /> <!-- (kg) atmosphere_mass_of_carbon_dioxide : Total atmospheric mass of Carbon Dioxide -->
+   <field field_ref="dummy_na" id="CMIP6_co2mass" /> <!-- (kg) atmosphere_mass_of_carbon_dioxide : Total atmospheric mass of Carbon Dioxide -->
    <field id="CMIP6_co2s"          field_ref="dummy_XY"         /> <!-- (1e-06) co2s : As co2, but only at the surface -->
    <field id="CMIP6_conccmcn"      field_ref="dummy_XYA"        /> <!-- (m-3) conccmcn : includes all particles with diameter larger than 1 micron -->
    <field id="CMIP6_conccn"        field_ref="dummy_XYA"        /> <!-- (m-3) conccn : unset -->
@@ -103,7 +103,7 @@
    <field id="CMIP6_fco2nat"       field_ref="dummy_XY"         /> <!-- (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_emission_from_natural_sources : This is what the atmosphere sees (on its own grid).  This field should be equivalent to the combined natural fluxes of carbon  that account for natural exchanges between the atmosphere and land (nep) or ocean (fgco2) reservoirs. -->
    <field id="CMIP6_flashrate"     field_ref="dummy_XY"         /> <!-- (km-2 s-1) flashrate : proposed name: lightning_flash_rate (units to be interpreted as "counts km-2 s-1) -->
    <field id="CMIP6_grplmxrat"     field_ref="dummy_XYA"        /> <!-- (1.0) mass_fraction_of_graupel_in_air : Graupel mixing ratio -->
-   <field id="CMIP6_hcfc22global"  field_ref="dummy_0d"         /> <!-- (1e-12) mole_fraction_of_hcfc22_in_air : unset -->
+   <field field_ref="dummy_na" id="CMIP6_hcfc22global" /> <!-- (1e-12) mole_fraction_of_hcfc22_in_air : unset -->
    <field id="CMIP6_hfls"          field_ref="dummy_XY"         /> <!-- (W m-2) surface_upward_latent_heat_flux : Surface Upward Latent Heat Flux -->
    <field id="CMIP6_hfls_isf"      field_ref="dummy_??"         /> <!-- (W m-2) surface_upward_latent_heat_flux : Surface Upward Latent Heat Flux -->
    <field id="CMIP6_hfmlt"         field_ref="dummy_XY"         /> <!-- (W m-2 ) surface_snow_and_ice_melt_heat_flux : Energy consumed or released during liquid/solid phase changes. -->
@@ -116,10 +116,10 @@
    <field id="CMIP6_hursmax"       field_ref="dummy_XY"         /> <!-- (%) relative_humidity : Daily Maximum Near-Surface Relative Humidity -->
    <field id="CMIP6_hursmin"       field_ref="dummy_XY"         /> <!-- (%) relative_humidity : Daily Minimum Near-Surface Relative Humidity -->
    <field id="CMIP6_hus"           field_ref="dummy_XYA"        /> <!-- (1.0) specific_humidity : Specific Humidity -->
-   <field id="CMIP6_hus850"        field_ref="dummy_XY"         /> <!-- (1.0) specific_humidity : unset -->
+   <field axis_ref="CMIP6_p850" field_ref="CMIP6_hus" id="CMIP6_hus850" />   <!-- (1.0) specific_humidity : unset -->
    <field id="CMIP6_huss"          field_ref="dummy_XY"         /> <!-- (1.0) specific_humidity : Near-surface (usually, 2 meter) specific humidity. -->
-   <field id="CMIP6_iareafl"       field_ref="dummy_0d"         /> <!-- (m2) iareafl : Total area of the floating ice shelves (the component of ice sheet that flows over ocean) -->
-   <field id="CMIP6_iareagr"       field_ref="dummy_0d"         /> <!-- (m2) iareagr : Total area of the grounded ice sheets (the component of ice sheet resting over bedrock) -->
+   <field field_ref="dummy_na" id="CMIP6_iareafl" /> <!-- (m2) iareafl : Total area of the floating ice shelves (the component of ice sheet that flows over ocean) -->
+   <field field_ref="dummy_na" id="CMIP6_iareagr" /> <!-- (m2) iareagr : Total area of the grounded ice sheets (the component of ice sheet resting over bedrock) -->
    <field id="CMIP6_intuadse"      field_ref="dummy_XY"         /> <!-- (1.e6 J m-1 s-1) intuadse : Used in PMIP2 -->
    <field id="CMIP6_intuaw"        field_ref="dummy_XY"         /> <!-- (kg m-1 s-1) intuaw : Used in PMIP2 -->
    <field id="CMIP6_intvadse"      field_ref="dummy_XY"         /> <!-- (1.e6 J m-1 s-1) intvadse : Used in PMIP2 -->
@@ -129,8 +129,8 @@
    <field id="CMIP6_jpdftaureicemodis" field_ref="dummy_XYA"        /> <!-- (%) cloud_area_fraction_in_atmosphere_layer : MODIS Optical Thickness-Particle Size joint  distribution, ice -->
    <field id="CMIP6_jpdftaureliqmodis" field_ref="dummy_XYA"        /> <!-- (%) cloud_area_fraction_in_atmosphere_layer : MODIS Optical Thickness-Particle Size joint  distribution, liquid -->
    <field id="CMIP6_lat"           field_ref="dummy_COSPcurtain"/> <!-- (degrees_north) latitude : latitude -->
-   <field id="CMIP6_lim"           field_ref="dummy_0d"         /> <!-- (kg) lim : The ice sheet mass is computed as the volume times density -->
-   <field id="CMIP6_limnsw"        field_ref="dummy_0d"         /> <!-- (kg) limnsw : The ice sheet mass is computed as the volume above flotation times density. Changes in land_ice_mass_not_displacing_sea_water will always result in a change in sea level, unlike changes in land_ice_mass which may not result in sea level change (such as melting of the floating ice shelves, or portion of ice that sits on bedrock below sea level) -->
+   <field field_ref="dummy_na" id="CMIP6_lim" /> <!-- (kg) lim : The ice sheet mass is computed as the volume times density -->
+   <field field_ref="dummy_na" id="CMIP6_limnsw" /> <!-- (kg) limnsw : The ice sheet mass is computed as the volume above flotation times density. Changes in land_ice_mass_not_displacing_sea_water will always result in a change in sea level, unlike changes in land_ice_mass which may not result in sea level change (such as melting of the floating ice shelves, or portion of ice that sits on bedrock below sea level) -->
    <field id="CMIP6_loadbc"        field_ref="dummy_XY"         /> <!-- (kg m-2) loadbc : unset -->
    <field id="CMIP6_loaddust"      field_ref="dummy_XY"         /> <!-- (kg m-2) loaddust : unset -->
    <field id="CMIP6_loadnh4"       field_ref="dummy_XY"         /> <!-- (kg m-2) loadnh4 : unset -->
@@ -155,7 +155,7 @@
    <field id="CMIP6_mrsol"         field_ref="dummy_XYSo"       /> <!-- (kg m-2) mrsol : as specified by C4MIP -->
    <field id="CMIP6_mrsow"         field_ref="dummy_XY"         /> <!-- (1.0) volume_fraction_of_condensed_water_in_soil_at_field_capacity : Vertically integrated soil moisture divided by maximum allowable soil moisture above wilting point. -->
    <field id="CMIP6_n2o"           field_ref="dummy_XYA"        /> <!-- (mol mol-1) mole_fraction_of_nitrous_oxide_in_air : N2O volume mixing ratio -->
-   <field id="CMIP6_n2oglobal"     field_ref="dummy_0d"         /> <!-- (1e-09) mole_fraction_of_nitrous_oxide_in_air : Global mean Nitrous Oxide (N2O) -->
+   <field field_ref="dummy_na" id="CMIP6_n2oglobal" /> <!-- (1e-09) mole_fraction_of_nitrous_oxide_in_air : Global mean Nitrous Oxide (N2O) -->
    <field id="CMIP6_nudgincsm"     field_ref="dummy_XY"         /> <!-- (kg m-2) nudgincsm : Nudging Increment of Water in Soil Mositure -->
    <field id="CMIP6_nudgincswe"    field_ref="dummy_XY"         /> <!-- (kg m-2) nudgincswe : Nudging Increment of Water in Snow -->
    <field id="CMIP6_od550aerstrat" field_ref="dummy_XY"         /> <!-- (1.0) od550aerstrat : From tropopause to stratopause as defined by the model -->
@@ -243,7 +243,7 @@
    <field id="CMIP6_rsutna"        field_ref="dummy_XY"         /> <!-- (W m-2) rsutna : Based on Ghan (2013, ACP) -->
    <field id="CMIP6_rsutnacs"      field_ref="dummy_XY"         /> <!-- (W m-2) rsutnacs : Based on Ghan (2013, ACP) -->
    <field id="CMIP6_rtmt"          field_ref="dummy_XY"         /> <!-- (W m-2) net_downward_radiative_flux_at_top_of_atmosphere_model : Net Downward Radiative Flux at Top of Model : I.e., at the top of that portion of the atmosphere where dynamics are explicitly treated by the model. This is reported only if it differs from the net downward radiative flux at the top of the atmosphere. -->
-   <field id="CMIP6_rv850"         field_ref="dummy_XY"         /> <!-- (s-1) rv850 : Relative Vorticity at 850 hPa -->
+   <field axis_ref="CMIP6_p850" field_ref="CMIP6_rv" id="CMIP6_rv850" />   <!-- (s-1) rv850 : Relative Vorticity at 850 hPa -->
    <field id="CMIP6_rzwc"          field_ref="dummy_XY"         /> <!-- (kg m-2) rzwc : Root zone soil moisture -->
    <field id="CMIP6_sbl"           field_ref="dummy_XY"         /> <!-- (kg m-2 s-1) surface_snow_and_ice_sublimation_flux : The snow and ice sublimation flux is the loss of snow and ice mass per unit area from the surface resulting from their direct conversion to water vapor that enters the atmosphere. -->
    <field id="CMIP6_sci"           field_ref="dummy_XY"         /> <!-- (1.0) shallow_convection_time_fraction : Fraction of time that shallow convection occurs in the grid cell. -->
@@ -269,9 +269,9 @@
    <field id="CMIP6_swtoafluxaerocs" field_ref="dummy_XY"         /> <!-- (W m-2 ) swtoafluxaerocs : downwelling shortwave flux due to volcanic aerosols at TOA under clear sky to be diagnosed through double radiation call -->
    <field id="CMIP6_t2"            field_ref="dummy_XYA"        /> <!-- (K2) square_of_air_temperature : Air temperature squared -->
    <field id="CMIP6_ta"            field_ref="dummy_XYA"        /> <!-- (K) air_temperature : Air Temperature -->
-   <field id="CMIP6_ta500"         field_ref="dummy_XY"         /> <!-- (K) air_temperature : Temperature on the 500 hPa surface -->
-   <field id="CMIP6_ta700"         field_ref="dummy_XY"         /> <!-- (K) air_temperature : Air temperature at 700hPa -->
-   <field id="CMIP6_ta850"         field_ref="dummy_XY"         /> <!-- (K) air_temperature : Air temperature at 850hPa -->
+   <field axis_ref="CMIP6_p500" field_ref="CMIP6_ta" id="CMIP6_ta500" />   <!-- (K) air_temperature : Temperature on the 500 hPa surface -->
+   <field axis_ref="CMIP6_p700" field_ref="CMIP6_ta" id="CMIP6_ta700" />   <!-- (K) air_temperature : Air temperature at 700hPa -->
+   <field axis_ref="CMIP6_p850" field_ref="CMIP6_ta" id="CMIP6_ta850" />   <!-- (K) air_temperature : Air temperature at 850hPa -->
    <field id="CMIP6_tas"           field_ref="dummy_XY"         /> <!-- (K) air_temperature : near-surface (usually, 2 meter) air temperature -->
    <field id="CMIP6_tas_isf"       field_ref="dummy_??"         /> <!-- (K) air_temperature : near-surface (usually, 2 meter) air temperature -->
    <field id="CMIP6_tasmax"        field_ref="dummy_XY"         /> <!-- (K) air_temperature : maximum near-surface (usually, 2 meter) air temperature (add cell_method attribute "time: max") -->
@@ -283,9 +283,9 @@
    <field id="CMIP6_tauvpbl"       field_ref="dummy_XY"         /> <!-- (Pa) tauvpbl : The  downward northward stress associated with the models parameterization of the plantary boundary layer. (This request is related to a WGNE effort to understand how models parameterize the surface stresses.) -->
    <field id="CMIP6_tcs"           field_ref="dummy_XY"         /> <!-- (K) canopy_temperature : Vegetation temperature, averaged over all vegetation types -->
    <field id="CMIP6_tdps"          field_ref="dummy_XY"         /> <!-- (K) dew_point_temperature : unset -->
-   <field id="CMIP6_tendacabf"     field_ref="dummy_0d"         /> <!-- (kg s-1) tendacabf : The total surface mass balance flux over land ice is a spatial integration of the surface mass balance flux -->
-   <field id="CMIP6_tendlibmassbf" field_ref="dummy_0d"         /> <!-- (kg s-1) tendlibmassbf : The total basal mass balance flux over land ice is a spatial integration of the basal mass balance flux -->
-   <field id="CMIP6_tendlicalvf"   field_ref="dummy_0d"         /> <!-- (kg s-1) tendlicalvf : The total calving flux over land ice is a spatial integration of the calving flux -->
+   <field field_ref="dummy_na" id="CMIP6_tendacabf" /> <!-- (kg s-1) tendacabf : The total surface mass balance flux over land ice is a spatial integration of the surface mass balance flux -->
+   <field field_ref="dummy_na" id="CMIP6_tendlibmassbf" />       <!-- (kg s-1) tendlibmassbf : The total basal mass balance flux over land ice is a spatial integration of the basal mass balance flux -->
+   <field field_ref="dummy_na" id="CMIP6_tendlicalvf" /> <!-- (kg s-1) tendlicalvf : The total calving flux over land ice is a spatial integration of the calving flux -->
    <field id="CMIP6_tgs"           field_ref="dummy_XY"         /> <!-- (K) surface_temperature : Surface bare soil temperature -->
    <field id="CMIP6_tnhus"         field_ref="dummy_XYA"        /> <!-- (s-1) tendency_of_specific_humidity : Tendency of Specific Humidity -->
    <field id="CMIP6_tnhusa"        field_ref="dummy_COSP-A"     /> <!-- (s-1) tendency_of_specific_humidity_due_to_advection : Tendency of Specific Humidity due to Advection -->
@@ -321,8 +321,8 @@
    <field id="CMIP6_u2"            field_ref="dummy_XYA"        /> <!-- (m2 s-2) square_of_eastward_wind : u*u -->
    <field id="CMIP6_ua"            field_ref="dummy_XY"         /> <!-- (m s-1) eastward_wind : Eastward Wind -->
    <field id="CMIP6_ua100m"        field_ref="dummy_XY"         /> <!-- (m s-1) eastward_wind : Zonal wind on the 100m -->
-   <field id="CMIP6_ua200"         field_ref="dummy_XY"         /> <!-- (m s-1) eastward_wind : Zonal wind (positive eastwards) at 200hPa -->
-   <field id="CMIP6_ua850"         field_ref="dummy_XY"         /> <!-- (m s-1) eastward_wind : Zonal wind on the 850 hPa surface -->
+   <field axis_ref="CMIP6_p200" field_ref="CMIP6_ua" id="CMIP6_ua200" />   <!-- (m s-1) eastward_wind : Zonal wind (positive eastwards) at 200hPa -->
+   <field axis_ref="CMIP6_p850" field_ref="CMIP6_ua" id="CMIP6_ua850" />   <!-- (m s-1) eastward_wind : Zonal wind on the 850 hPa surface -->
    <field id="CMIP6_uas"           field_ref="dummy_XY"         /> <!-- (m s-1) eastward_wind : Eastward component of the near-surface (usually, 10 meters)  wind -->
    <field id="CMIP6_ut"            field_ref="dummy_XYA"        /> <!-- (K m s-1) product_of_eastward_wind_and_air_temperature : Product of air temperature and eastward wind -->
    <field id="CMIP6_utendepfd"     field_ref="dummy_lat-P"      /> <!-- (m s-2) tendency_of_eastward_wind_due_to_eliassen_palm_flux_divergence : Tendency of the zonal mean zonal wind due to the divergence of the Eliassen-Palm flux. -->
@@ -335,8 +335,8 @@
    <field id="CMIP6_v2"            field_ref="dummy_XYA"        /> <!-- (m2 s-2) square_of_northward_wind : v*v -->
    <field id="CMIP6_va"            field_ref="dummy_XYA"        /> <!-- (m s-1) northward_wind : Northward Wind -->
    <field id="CMIP6_va100m"        field_ref="dummy_XY"         /> <!-- (m s-1) northward_wind : Meridional wind at 100m above the surface. -->
-   <field id="CMIP6_va200"         field_ref="dummy_XY"         /> <!-- (m s-1) northward_wind : Northward component of the wind -->
-   <field id="CMIP6_va850"         field_ref="dummy_XY"         /> <!-- (m s-1) northward_wind : Northward component of the wind at 850hPa -->
+   <field axis_ref="CMIP6_p200" field_ref="CMIP6_va" id="CMIP6_va200" />       <!-- (m s-1) northward_wind : Northward component of the wind -->
+   <field axis_ref="CMIP6_p850" field_ref="CMIP6_va" id="CMIP6_va850" />     <!-- (m s-1) northward_wind : Northward component of the wind at 850hPa -->
    <field id="CMIP6_vas"           field_ref="dummy_XY"         /> <!-- (m s-1) northward_wind : Northward component of the near surface wind -->
    <field id="CMIP6_vmrox"         field_ref="dummy_lat-P"      /> <!-- (mol mol-1) vmrox : Mole Fraction of Ox -->
    <field id="CMIP6_vortmean"      field_ref="dummy_XYA"        /> <!-- (s-1) vortmean : Mean vorticity over 850,700,600 hPa -->
@@ -348,7 +348,7 @@
    <field id="CMIP6_vwap"          field_ref="dummy_XYA"        /> <!-- (Pa m s-2) product_of_northward_wind_and_omega : v*omega -->
    <field id="CMIP6_wap"           field_ref="dummy_XYA"        /> <!-- (Pa s-1) lagrangian_tendency_of_air_pressure : Omega (vertical velocity in pressure coordinates, positive downwards) -->
    <field id="CMIP6_wap2"          field_ref="dummy_XYA"        /> <!-- (Pa2 s-2) square_of_lagrangian_tendency_of_air_pressure : omega*omega -->
-   <field id="CMIP6_wap500"        field_ref="dummy_XY"         /> <!-- (Pa s-1) lagrangian_tendency_of_air_pressure : Omega (vertical velocity in pressure coordinates, positive downwards) at 500 hPa level;  -->
+   <field axis_ref="CMIP6_p500" field_ref="CMIP6_wap" id="CMIP6_wap500" />   <!-- (Pa s-1) lagrangian_tendency_of_air_pressure : Omega (vertical velocity in pressure coordinates, positive downwards) at 500 hPa level;  -->
    <field id="CMIP6_wbptemp"       field_ref="dummy_XYA"        /> <!-- (K) wbptemp : Wet bulb potential temperature -->
    <field id="CMIP6_wsgmax100m"    field_ref="dummy_XY"         /> <!-- (m s-1) wind_speed_of_gust : Wind speed gust maximum at 100m above surface -->
    <field id="CMIP6_wstarbar"      field_ref="dummy_lat-P"      /> <!-- (m s-1) wstarbar : TEM residual mean vertical circulation wstarbar, zonal mean on plev36 -->
@@ -364,62 +364,3 @@
    <field id="CMIP6_zmswaero"      field_ref="dummy_lat-A"      /> <!-- (K s-1) zmswaero : shortwave heating rate due to volcanic aerosols to be diagnosed through double radiation call, zonal average values required -->
    <field id="CMIP6_zmtnt"         field_ref="dummy_lat-P"      /> <!-- (K s-1) tendency_of_air_temperature_due_to_diabatic_processes : The diabatic heating rates due to all the processes that may change potential temperature -->
 </field_definition>
-  <!-- Variables from CMIP6_field_defs_atmos.xml -->
-  
-  <!-- For some variables, the Data Request does not include the necessary
-       information on how to derive the variable from other ones,
-       while Xios can do that. So, we tell that in Xios syntax
-  -->
-  
-  <field id="CMIP6_zg1000" field_ref="CMIP6_zg" axis_ref="CMIP6_p1000" />
-
-  <field id="CMIP6_ta850" field_ref="CMIP6_ta" axis_ref="CMIP6_p850" />
-  <field id="CMIP6_hus850" field_ref="CMIP6_hus" axis_ref="CMIP6_p850" />
-  <field id="CMIP6_rv850" field_ref="CMIP6_rv" axis_ref="CMIP6_p850" />
-  <field id="CMIP6_ua850" field_ref="CMIP6_ua" axis_ref="CMIP6_p850" />
-  <field id="CMIP6_va850" field_ref="CMIP6_va" axis_ref="CMIP6_p850" />
-  
-  <field id="CMIP6_ta700" field_ref="CMIP6_ta" axis_ref="CMIP6_p700" />
-
-  <field id="CMIP6_wap500" field_ref="CMIP6_wap" axis_ref="CMIP6_p500" />
-  <field id="CMIP6_zg500" field_ref="CMIP6_zg" axis_ref="CMIP6_p500" />
-  <field id="CMIP6_ta500" field_ref="CMIP6_ta" axis_ref="CMIP6_p500" />
-
-  <field id="CMIP6_ua200" field_ref="CMIP6_ua" axis_ref="CMIP6_p200" />
-  <field id="CMIP6_va200" field_ref="CMIP6_va" axis_ref="CMIP6_p200" />
-
-
-  <!-- for variables in next group, dr2xml may at a later stage provide
-       a definition using standard operations -->
-  
-  <field_group id="CMIP6_later_atmos">
-
-      <field_group id="CMIP6_GHG_integrals" >
-	<field id="CMIP6_co2mass"      field_ref="dummy_na" />
-	<field id="CMIP6_n2oglobal"    field_ref="dummy_na" />
-	<field id="CMIP6_cfc11global"  field_ref="dummy_na" />
-	<field id="CMIP6_ch4global"    field_ref="dummy_na" />
-	<field id="CMIP6_hcfc22global" field_ref="dummy_na" />
-	<field id="CMIP6_cfc113global" field_ref="dummy_na" />
-	<field id="CMIP6_cfc12global"  field_ref="dummy_na" />
-      </field_group >
-
-      <field_group id="CMIP6_ISMIP_integrals" >
-	<field id="CMIP6_lim"	      field_ref="dummy_na" />
-	<field id="CMIP6_limnsw"     field_ref="dummy_na" />
-	<field id="CMIP6_iareagr"    field_ref="dummy_na" />
-	<field id="CMIP6_iareafl"    field_ref="dummy_na" />
-	<field id="CMIP6_tendlicalvf" field_ref="dummy_na" />
-	<field id="CMIP6_tendacabf"  field_ref="dummy_na" />
-	<field id="CMIP6_tendlibmassbf" field_ref="dummy_na" />
-      </field_group >
-      
-      <field_group id="CMIP6_atmos_not_much_clear" >
-	<field id="CMIP6_spectupper" field_ref="dummy_na" />
-	<field id="CMIP6_spectlower" field_ref="dummy_na" />
-      </field_group >
-      
-    </field_group >
-    
-  <!-- End of variables from CMIP6_field_defs_atmos.xml -->
-
