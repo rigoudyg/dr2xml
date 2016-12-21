@@ -35,7 +35,8 @@ import dreq
 from datetime import datetime
 import json
 from uuid import uuid4
-import sys
+import sys,os
+import xml.etree.ElementTree as ET
 
 # A local auxilliary table
 from table2freq import table2freq
@@ -460,7 +461,7 @@ def complement_svar_using_cmorvar(svar,cmvar):
         svar.stdname = mipvar.label
 
 
-def write_xios_file_def(cmvs,table, lset,sset, out,cvspath,field_defs,axis_defs,domain_defs,pingvars) :
+def write_xios_file_def(cmvs,table, lset,sset, out,cvspath,field_defs,axis_defs,domain_defs,pingvars=None) :
     """ 
     Generate an XIOS file_def entry in out for :
       - a dict for laboratory settings 
@@ -675,13 +676,13 @@ def write_xios_file_def(cmvs,table, lset,sset, out,cvspath,field_defs,axis_defs,
     out.write('</file>\n\n')
 
 def write_xios_field_ref_in_file_def(sv,out,lset,sset,
-             field_defs,axis_defs,domain_defs,pingvars) :
+                                     field_defs,axis_defs,domain_defs,pingvars=None) :
     """
     Writes a simplified variable object sv as a field reference in out, 
     with lab prefix for the variable name
     Add field definitions for intermediate variables in dic field_defs
     Add axis  definitions for interpolations in dic axis_defs
-    Use pingvars for identifying some intermediate or specific variables provided by the model
+    Use pingvars as a list of variables actually defined in ping file
     """
     # TBD : logic for computing ts_split_frequency from rank and time-space ops
     #
@@ -697,18 +698,16 @@ def write_xios_field_ref_in_file_def(sv,out,lset,sset,
     # time-averaging, horizontal operations (using expr=@this)
 
     # We use a simple convention for variable names in ping files : 
-    #if lset["use_area_suffix"] : varname=sv.label
-    #else: varname=sv.label
-    varname=sv.label
-    if sv.type=='perso' : alias=varname
-    else:                 alias=lset["ping_variables_prefix"]+varname
+    if sv.type=='perso' : alias=sv.label
+    else:
+        alias=lset["ping_variables_prefix"]+sv.label
+        if pingvars is not None :
+            if not alias in pingvars :
+                print "Skipping ping variable %s, which has no valid field_ref"%alias
+                return
+
     # nextvar is the field name provided as output of the last operation currently defined
     nextvar=alias 
-
-    # First check if the ping file vars includes that variable
-    if pingvars and not nextvar in pingvars :
-        print "Skipping variable %s, which is not listed in ping file"
-        return
 
     detect_missing="false"
     operation="instant"
@@ -798,13 +797,18 @@ def write_xios_field_ref_in_file_def(sv,out,lset,sset,
     wrv('history','none')
     out.write('     </field>\n')
 
-def generate_file_defs(lset,sset,year,context,cvs_path,printout=False) :
+def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
+                       skip_dummies=True,printout=False) :
     """
-    Using DR objetc dq, a dict of lab settings and a dict of simulation settings, 
-    generate an XIOS file_def file for a given XIOS 'context', which content matches 
-    the DR for the experiment quoted in simu setting dict and a year
-    Makes use of CMIP6 controlled vocabulary files found in cvs_path
-    Output file is named <context>.xml
+    Using global DR object dq, a dict of lab settings LSET, and a dict 
+    of simulation settings SSET, generate an XIOS file_def file for a 
+    given XIOS 'context', which content matches 
+    the DR for the experiment quoted in simu setting dict and a YEAR.
+    Makes use of CMIP6 controlled vocabulary files found in CVS_PATH
+    Reads PINGFILE for skipping dummy field_refs, but stops on dummies 
+    if SKIP_DUMMIES is False
+    Output file is named <context>.xml  
+    
     Structure of the two dicts is documented elsewhere. It includes the 
     correspondance between a context and a few realms
     """
@@ -916,13 +920,27 @@ def generate_file_defs(lset,sset,year,context,cvs_path,printout=False) :
         if printout :
             print
     #
+    # read ping_file defined variables
+    pingvars=[] 
+    if pingfile :
+        ping_refs=read_fields_defs(pingfile, attrib='field_ref')
+        if ping_refs is None :
+            print "Issue accessing pingfile "+pingfile
+            return
+        pingvars=[ v for v in ping_refs if 'dummy' not in ping_refs[v] ]
+        if not skip_dummies and len(pingvars) != len(ping_refs) :
+            print "They are dummies in %s :"%pingfile,
+            for v in ping_refs :
+                if v not in pingvars : print v,
+            print
+            return
+    #
     # Write XIOS file_def
     filename="%s.xml"%context
     with open(filename,"w") as out :
         field_defs=dict()
         axis_defs=dict()
         domain_defs=dict()
-        pingvars=[] # TBD : init pingvars
         #for table in ['day'] :    
         out.write('<file_definition> \n')
         for table in cmvs_pertable :  
@@ -1050,7 +1068,8 @@ def analyze_cell_time_method(cm,label):
 
     #
 
-def pingFileForRealmsList(lrealms,svars,dummy="field_atm",exact=False,comments=False,prefix="CV_",filename=None):
+def pingFileForRealmsList(lrealms,svars,dummy="field_atm",exact=False,
+                          comments=False,prefix="CV_",filename=None):
     """
     Based on a list of realms LREALMS and a list of simplified vars SVARS, create the ping 
     file which name is ~ ping_<realms_list>.xml, which defines fields for all vars in SVARS, 
@@ -1173,3 +1192,40 @@ def analyze_ambiguous_MIPvarnames():
     return ambiguous
 
 ambiguous_mipvarnames=analyze_ambiguous_MIPvarnames()
+
+def read_fields_defs(filename, attrib=None, printout=False) :
+    """ 
+    Returns a dict of field_ids in FILENAME, which 
+    - keys are field_ids
+    - values are corresponding ET elements if 
+      attrib is None, otherwise elt attribute ATTRIB
+    """
+    #
+    def field_defs(elt, tag='field', groups=['field_group','field_definition']) :
+        """ 
+        Returns a list of elements in tree ELT 
+        which have tag TAG, by digging in sub-elements 
+        named as in GROUPS 
+        """
+        if elt.tag in groups :
+            rep=[]
+            for child in elt : rep.extend(field_defs(child))
+            return rep
+        elif elt.tag=='field' : return [elt]
+        else :
+            print 'Syntax error : tag %s not allowed'%elt.tag
+            return None
+    #    
+    special=dict()
+    if os.path.exists(filename) :
+        root = ET.parse(filename).getroot()
+        for field in field_defs(root) :
+            if printout : print ".",
+            if attrib is None: 
+                special[field.attrib['id']]=field
+            else :
+                special[field.attrib['id']]=field.attrib[attrib]
+        if printout : print
+        return special
+    else :
+        if printout : print "No file %s"%filename
