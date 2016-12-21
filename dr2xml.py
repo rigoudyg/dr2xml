@@ -37,6 +37,8 @@ import json
 from uuid import uuid4
 import sys,os
 import xml.etree.ElementTree as ET
+import posixpath
+prog_path = posixpath.dirname(__file__)
 
 # A local auxilliary table
 from table2freq import table2freq
@@ -1083,23 +1085,22 @@ def pingFileForRealmsList(lrealms,svars,dummy="field_atm",dummy_with_shape=False
     as an xml comment. If it is a string, it will be printed before this comment string (and  
     this allows for a line break)
 
-    DUMMY, if not false, shoudl be a string used as the name of all field_refs. If False, 
-    the field_refs look like ?<variable name>. 
+    DUMMY, if not false, should be either 'True', for a standard dummy label or a string 
+    used as the name of all field_refs. If False, the field_refs look like ?<variable name>. 
+
+    If DUMMY is True and DUMMY_WITH_SHAPE is True, dummy labels wiill include the highest 
+    rank shape requested by the DR, for information
 
     Field ids do include the provided PREFIX
 
     The ping file includes a <field_definition> construct
 
-    TBD - Limitation : variable labels such as zg500 should be withdrawn from the 
-    pingfile if they describe a variable that can be derived automatically by XIOS 
-    through vertical interpolation (provided the DR duly describes that it is a  
-    singleton dimension)
-
-    TBD - Limitation2 : should handle synonyms (various MIP variable names for actually a 
-    single field)
-
-    TBD - Limitation3 :  dummy field_ref names shouldn't be the same depending on the 
-    relevant field rank
+    For those MIP varnames which have a corresponding field_definition
+    in a file named like ./inputs/field_defs_<realm>.xml (path being
+    relative to source code location), this latter field_def is
+    inserted in the ping file (rather than a default one). This brings 
+    a set of 'standard' definitions fo variables which can be derived 
+    from DR-standard ones
 
     """
     name="" ; 
@@ -1141,7 +1142,9 @@ def pingFileForRealmsList(lrealms,svars,dummy="field_atm",dummy_with_shape=False
             fp.write('   <field id="%-20s'%(prefix+label+'"')+' field_ref="')
             if dummy : 
                 shape=highest_rank(label)
-                if dummy is True and dummy_with_shape : dummys="dummy_%s"%shape
+                if dummy is True :
+                    dummys="dummy"
+                    if dummy_with_shape : dummys+="_"+shape
                 else : dummys=dummy
                 fp.write('%-18s/>'%(dummys+'"'))
             else : fp.write('?%-16s'%(label+'"')+' />')
