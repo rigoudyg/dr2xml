@@ -770,7 +770,7 @@ def write_xios_field_ref_in_file_def(sv,out,lset,sset,
             print "Issue with un-managed spatial shape %s"%sshape
     #
     split_freq="10y" #TBD - Should be computed
-    out.write('  <field field_ref="%s" name="%s" ts_enabled="true" ts_split_freq="%s" operation="%s" detect_missing="%s">\n'%(
+    out.write('  <field field_ref="%s" name="%s" ts_enabled="true" ts_split_freq="%s" operation="%s" detect_missing_value="%s">\n'%(
                         nextvar,sv.label,split_freq,operation,detect_missing))
     #
     def wrv(name, value):
