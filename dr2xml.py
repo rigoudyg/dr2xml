@@ -1068,8 +1068,8 @@ def analyze_cell_time_method(cm,label):
 
     #
 
-def pingFileForRealmsList(lrealms,svars,dummy="field_atm",exact=False,
-                          comments=False,prefix="CV_",filename=None):
+def pingFileForRealmsList(lrealms,svars,dummy="field_atm",dummy_with_shape=false,
+                          exact=False, comments=False,prefix="CV_",filename=None):
     """
     Based on a list of realms LREALMS and a list of simplified vars SVARS, create the ping 
     file which name is ~ ping_<realms_list>.xml, which defines fields for all vars in SVARS, 
@@ -1140,8 +1140,10 @@ def pingFileForRealmsList(lrealms,svars,dummy="field_atm",exact=False,
             label=v.label
             fp.write('   <field id="%-20s'%(prefix+label+'"')+' field_ref="')
             if dummy : 
-                if dummy is True : dummy="dummy"
-                fp.write('%-16s/>'%(dummy+'"'))
+                shape=highest_rank(label)
+                if dummy is True and dummy_with_shape : dummys="dummy_%s"%shape
+                else : dummys=dummy
+                fp.write('%-18s/>'%(dummys+'"'))
             else : fp.write('?%-16s'%(label+'"')+' />')
             if comments :
                 # Add units, stdname and long_name as a comment string
@@ -1149,11 +1151,26 @@ def pingFileForRealmsList(lrealms,svars,dummy="field_atm",exact=False,
                 fp.write("<!-- (%s) %s : %s -->"%(v.stdunits, v.stdname, v.description)) 
             fp.write("\n")
         fp.write("</field_definition>\n")
+        #
+        # Insert content of DX_field_defs files (changing prefix)
+        for realm in lrealms :
+            filedefs=DX_field_ids_filename(realm)
+            if os.path.exists(filedefs) :
+                with open(filedefs,"r") as fields :
+                    lines=fields.readlines()
+                    for line in lines :
+                        if not "field_definition" in line:
+                            fp.write(line.replace("DX_",prefix))
+    
     print "%3d variables written for %s"%(len(lvars),filename)
 
+def DX_field_ids_filename(realm):
+    return prog_path+"inputs/DX_field_defs_%s.xml"%realm
 
 def analyze_ambiguous_MIPvarnames():
     """
+    Return the list of MIP varnames whose list of CMORvars show dsitinct 
+    values for the area part of the cell_methods
     """
     # Compute a dict which keys are MIP varnames and values = list 
     # of CMORvars items for the varname
@@ -1229,3 +1246,55 @@ def read_fields_defs(filename, attrib=None, printout=False) :
         return special
     else :
         if printout : print "No file %s"%filename
+
+def highest_rank(mipvarlabel):
+    """Returns the shape with the highest needed rank among the CMORvars
+    referencing a MIPvar with this label
+    This, assuming dr2xml would handle all needed shape reductions
+    """
+    shapes=[]
+    for  cvar in dq.coll['CMORvar'].items : 
+        v=dq.inx.uid[cvar.vid]
+        if v.label==mipvarlabel:
+            shapes=[]
+            try :
+                st=dq.inx.uid[cvar.stid]
+                try :
+                    sp=dq.inx.uid[st.spid]
+                    shape=sp.label
+                except :
+                    print "Issue with spid for "+st.label+cvar.mipTableSection
+                    shape="?sp"
+            except :
+                print "Issue with stid for "+v.label+cvar.mipTableSection
+                shape="?st"
+            shapes.append(shape)
+    if not shapes : shape="??"
+    elif any([ "XY-A"  in s for s in shapes]) : shape="XYA"
+    elif any([ "XY-O" in s for s in shapes]) : shape="XYO"
+    elif any([ "XY-AH" in s for s in shapes]) : shape="XYAh" # Zhalf
+    elif any([ "XY-SN" in s for s in shapes]) : shape="XYSn" #snow levels
+    elif any([ "XY-S" in s for s in shapes]) : shape="XYSo" #soil levels
+    elif any([ "XY-P" in s for s in shapes]) : shape="XYA"
+    elif any([ "XY-H" in s for s in shapes]) : shape="XYA"
+    #
+    elif any([ "XY-na" in s for s in shapes]) : shape="XY" # analyser realm, pb possible sur ambiguite singleton
+    #
+    elif any([ "YB-na" in s for s in shapes]) :shape="basin_zonal_mean"
+    elif any([ "YB-O" in s for s in shapes]) : shape="basin_merid_section"
+    elif any([ "YB-R" in s for s in shapes]) : shape="basin_merid_section_density"
+    elif any([ "S-A" in s for s in shapes]) :  shape="COSP-A"
+    elif any([ "S-AH" in s for s in shapes]) : shape="COSP-AH"
+    elif any([ "na-A" in s for s in shapes]) : shape="site-A"
+    elif any([ "Y-A"  in s for s in shapes]) : shape="lat-A" #XYZ
+    elif any([ "Y-P"  in s for s in shapes]) : shape="lat-P" #XYZ
+    elif any([ "Y-na" in s for s in shapes]) : shape="lat"
+    elif any([ "TRS-na" in s for s in shapes]): shape="TRS"
+    elif any([ "TR-na" in s for s in shapes]) : shape="TR"
+    elif any([ "L-na" in s for s in shapes]) :  shape="COSPcurtain"
+    elif any([ "L-H40" in s for s in shapes]) : shape="COSPcurtainH40"
+    elif any([ "S-na" in s for s in shapes]) :  shape="COSPprofile"
+    elif any([ "na-na" in s for s in shapes]) : shape="0d" # analyser realm
+    else : shape="??"
+
+    return shape
