@@ -715,7 +715,7 @@ def write_xios_field_ref_in_file_def(sv,out,lset,sset, field_defs,axis_defs,
 
     detect_missing="false"
     operation="instant"
-    if False: #TBD : complete code for handling spatial shape
+    if True: #TBD : complete code for handling spatial shape
         # Proceed with vertical interpolation if needed
         ssh=sv.spatial_shp
         if ssh[0:4] in ['XY-H','XY-P'] or ssh[0:3] == 'Y-P' :
@@ -729,53 +729,54 @@ def write_xios_field_ref_in_file_def(sv,out,lset,sset, field_defs,axis_defs,
                         # Construct an axis for interpolating to this dimension
                         axis_defs[d.label]=create_axis_def(d)
                         # Construct a field def for the interpolated variable
-                        field_defs[furthervar]='<field id="%s" axis_ref="%s" field_ref="%s"/>'\
-                            %(furthervar,d.label,nextvar)
+                        field_defs[furthervar]='<field id="%-25s axis_ref="%-10s field_ref="%-25s/>'\
+                            %(furthervar+'"',d.label+'"',nextvar+'"')
                     nextvar=furthervar
                     #TBD what to do for singleton dimension ?
 
-        # Time operation - because all basic fields are assumed to be declared as 'instant' 
-        # field, we must declare a derived (e.g. 'averaged') field when applicable
+        # Analyze 'outermost' time cell_method and translate to 'operation'
         operation,detect_missing = analyze_cell_time_method(sv.cell_methods,sv.label)
-        if operation is not None :
-            suffix={"instant":"", "average":"_avg", "minimum":"_min", "maximum":"_max"}
-            furthervar=nextvar+suffix[operation]
-            if not furthervar in pingvars :
-                op='<field id="%s" field_ref="%s" operation="%s"'%(furthervar,nextvar)
-                if detect_missing : op+=' detect_missing_value="True"'
-                op+="/>"
-                field_defs[furthervar]=op
-            nextvar=furthervar
+        # Supposons que ce n'est pas la peine de definir un var intermediaire pour
+        # operation temporelle, grace a expr="@this"
+        #
+        # if operation is not None :
+        #     suffix={"instant":"", "average":"_avg", "minimum":"_min", "maximum":"_max"}
+        #     furthervar=nextvar+suffix[operation]
+        #     if not furthervar in pingvars :
+        #         op='<field id="%s" field_ref="%s" operation="%s"'%(furthervar,nextvar)
+        #         if detect_missing : op+=' detect_missing_value="True"'
+        #         op+="/>"
+        #         field_defs[furthervar]=op
+        #     nextvar=furthervar
 
-        # Horizontal operations
+        # Horizontal operations. Can include horiz re-gridding specification
         # Compute domain name, define it if needed
         domain_ref=None
         if ssh[0:2] == 'Y-' : #zonal mean and atm zonal mean on pressure levels
             domain_ref="zonal_mean"
-            if domain_ref not in domain_defs :
-                domain_defs[domain_ref]="TBD - cf tests Martine"
+            domain_defs[domain_ref]='<domain_ref id="%s">'%domain_ref
         elif ssh[0:2] == 'S-' : #COSP sites; cas S-na, S-A, S-AH
             domain_ref="COSP_sites"
-            if domain_ref not in domain_defs :
-                domain_defs[domain_ref]="TBD - grille COSP"
+            domain_defs[domain_ref]='<domain_ref id="%s">'%domain_ref
         elif ssh[0:2] == 'L-' :
             domain_ref="COSP_curtain"
-            if domain_ref not in domain_defs :
-                domain_defs[domain_ref]="TBD - curtain COSP"
-        elif sshape == 'TR-na' or sshape == 'TRS-na' : #transects,   oce or SI
+            domain_defs[domain_ref]='<domain_ref id="%s">'%domain_ref
+        elif ssh == 'TR-na' or ssh == 'TRS-na' : #transects,   oce or SI
             pass
-        elif sshape[0:3] == 'XY-'  : # includes 'XY-AH' : model half-levels
+        elif ssh[0:3] == 'XY-'  : # includes 'XY-AH' : model half-levels
             pass
-        elif sshape[0:3] == 'YB-'  : #basin zonal mean or section
+        elif ssh[0:3] == 'YB-'  : #basin zonal mean or section
             pass
-        elif sshape      == 'na-na'  :
-            pass # TBD : global mean
+        elif ssh      == 'na-na'  : # global means or constants
+            pass 
         else :
-            print "Issue with un-managed spatial shape %s"%sshape
+            print "Issue with un-managed spatial shape %s"%ssh
+        if domain_ref : domain_op='domain_ref="%s"'%domain_ref
+        else          : domain_op=""
     #
     split_freq="10y" #TBD - Should be computed
-    out.write('  <field field_ref="%s" name="%s" ts_enabled="true" ts_split_freq="%s" operation="%s" detect_missing="%s">\n'%(
-                        nextvar,sv.label,split_freq,operation,detect_missing))
+    out.write('  <field field_ref="%s" name="%s" ts_enabled="true" ts_split_freq="%s" operation="%s" detect_missing_value="%s" %s>\n'%\
+              ( nextvar,sv.label,split_freq,operation,detect_missing,domain_op))
     #
     def wrv(name, value):
         # Write a 'variable' entry
@@ -956,15 +957,27 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
     # Write XIOS file_def
     filename="%s.xml"%context
     with open(filename,"w") as out :
+        out.write('<context id=%s> \n'%context)
         field_defs=dict()
         axis_defs=dict()
         domain_defs=dict()
         #for table in ['day'] :    
-        out.write('<file_definition> \n')
+        out.write('\t<file_definition> \n')
         for table in cmvs_pertable :  
             write_xios_file_def(cmvs_pertable[table],table, lset,sset,out,cvs_path,
                                 field_defs,axis_defs,domain_defs,dummies,pingvars)
-        out.write('</file_definition> \n')
+        out.write('\t</file_definition> \n')
+        # Write all domain, axis, field defs needed for these file_defs
+        out.write('\t+<field_definition> \n')
+        for obj in field_defs: out.write("\t\t"+field_defs[obj]+"\n")
+        out.write('\t</field_definition> \n')
+        out.write('\t<axis_definition> \n')
+        for obj in axis_defs: out.write("\t\t"+axis_defs[obj]+"\n")
+        out.write('\t</axis_definition> \n')
+        out.write('\t<domain_definition> \n')
+        for obj in domain_defs: out.write("\t\t"+domain_defs[obj]+"\n")
+        out.write('\t</domain_definition> \n')
+        out.write('</context id> \n')
     if printout :
         print "\nfile_def written as %s"%filename
 
@@ -996,15 +1009,17 @@ def create_axis_def(dim_name_or_obj):
         for g in dq.coll['grids'].items : 
             if g.label==dim_name_or_obj : dim=g
     else: dim=dim_name_or_obj
-    if dim is None : return None
+    if dim is None :
+        print "cannot cretae an axis_def from "+dim_name_or_obj
+        return None
     rep='<axis id="%s" '%dim.label
     if not dim.positive in [ None, "" ] :
         rep+='positive="%s" '%dim.positive
     if dim.requested != "" :
         # Case of a non-degenerated dimension (not a singleton)
         n_glo=len(dim.requested.split(" "))
-        rep+='n_glo=%g '%n_glo
-        rep+='value=(0,%g) [%s]">'%(n_glo - 1,dim.requested)
+        rep+='n_glo="%g" '%n_glo
+        rep+='value="(0,%g) [%s]">'%(n_glo - 1,dim.requested)
     elif dim.value != "":
         # Singleton case
         rep+='n_glo=%g '%1
@@ -1022,7 +1037,8 @@ def isVertInterpolationDim(dim):
     Returns True if dim represents a dimension for which we want an Xios interpolation 
     TBD - For now, a very simple logics for interpolated vertical dimension identification:
     """
-    return not dim.label in [ 'latitude', 'longitude' ] 
+    name=dq.inx.uid[dim.standardName]
+    return name.uid=='air_pressure' or name.uid=='altitude'
 
 def analyze_cell_time_method(cm,label):
     """
