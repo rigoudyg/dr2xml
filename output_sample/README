@@ -1,2 +1,4 @@
-A number of xml files produced for a given laboratory configuration
-(i.e. a	set of MIPS adressed, and specific list of non-processed variables)
+A number of comprehensive xml 'ping files' (i.e. adressing all MIPS,
+priority levels and Tiers)
+
+Ar example of dr2xml-generated context definition complementary files

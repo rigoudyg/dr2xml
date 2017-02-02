@@ -35,13 +35,14 @@ import dreq
 from datetime import datetime
 import json
 from uuid import uuid4
+import collections
 import sys,os
 import xml.etree.ElementTree as ET
 import posixpath
 prog_path = posixpath.dirname(__file__)
 
 # A local auxilliary table
-from table2freq import table2freq
+from table2freq import table2freq, table2splitfreq
 
 dq = dreq.loadDreq()
 print dq.version
@@ -105,8 +106,12 @@ example_lab_and_model_settings={
     # A per-variable dict of comments valid for all simulations
     'comments'     : {
         'tas' : 'nothing special about tas'
-        }
-    }
+        },
+    # Sizes for atm and oce grids (cf DR doc)
+    "sizes"  : [259200,60,64800,40,20,5,100],
+    # What is the maximum size of generated files, in number of float values
+    "max_file_size_in_floats" : 500.*1.e+6 ,
+}
 
 
 """ An example/template of settings for a simulation """
@@ -177,7 +182,7 @@ class simple_CMORvar(object):
         self.modeling_realm = None # Useful for both HOMEvar and CMORvar.
         self.mipTable       = None # Useful for both HOMEvar and CMORvar.
         self.label          = None # Useful for both HOMEvar and CMORvar.
-        self.label_with_area= None # Useful for both HOMEvar and CMORvar.
+        self.label_without_area= None # Useful for both HOMEvar and CMORvar.
         self.frequency      = None # Useful for both HOMEvar and CMORvar.
         self.mipTable       = None # Useful for both HOMEvar and CMORvar.
         self.positive       = None # Useful for CMORvar and updated HOMEvar.
@@ -192,6 +197,7 @@ class simple_CMORvar(object):
         self.temporal_shp   = None # Only useful for HOMEvar.
         self.experiment     = None # Only useful for HOMEvar.
         self.mip            = None # Only useful for HOMEvar.
+        self.Priority       = 1    # Will be changed using DR if it is a CMORvar
 
 # 2 dicts for processing home variables
 spid2label={}
@@ -312,8 +318,9 @@ def RequestItem_applies_for_exp_and_year(ri,experiment,year,debug=False):
                     if (debug) :  print " OK for experiment based on mip"+mip_id.label,
                     relevant=True
     else :
-        # TBD !! : understand what is happening in that case 
-        if (debug)  : print "%20s"%'Other case , label=%s|'%item_exp._h.label,
+        if (debug)  :
+            print "%20s"%'Error on item_exp._h.label=%s|'%item_exp._h.label
+        #raise(dr2xml_error("%20s"%'Other case , label=%s|'%item_exp._h.label))
     if relevant :
         if 'tslice' in ri.__dict__ :
             if ri.tslice == '__unset__' :
@@ -354,7 +361,14 @@ def select_CMORvars_for_lab(lset, experiment_id=None, year=None, printout=False)
     """
     #
     # From MIPS set to Request links
+    global sc
     sc = dreqQuery(dq=dq, tierMax=lset['tierMax'])
+
+    # Set sizes for lab settings, if available (or use CNRM-CM6-1 defaults)
+    mcfg = collections.namedtuple( 'mcfg', ['nho','nlo','nha','nla','nlas','nls','nh1'] )
+    sizes=lset.get("sizes",[259200,60,64800,40,20,5,100])
+    sc.mcfg = mcfg._make( sizes )._asdict()
+
     rls_for_mips=sc.getRequestLinkByMip(lset['mips'])
     if printout :
         print "\nNumber of Request Links which apply to MIPS", lset['mips']," is: ",\
@@ -407,10 +421,24 @@ def select_CMORvars_for_lab(lset, experiment_id=None, year=None, printout=False)
         cmvar = dq.inx.uid[v]
         svar.modeling_realm = cmvar.modeling_realm
         complement_svar_using_cmorvar(svar,cmvar)
+        svar.Priority=analyze_priority(cmvar,lset['mips'])
         simplified_vars.append(svar)
     print '\nNumber of simplified vars is :',len(simplified_vars)
     return simplified_vars
 
+def analyze_priority(cmvar,lmips):
+    """ 
+    Returns the max priority of the CMOR variable, for a set of mips
+    """
+    prio=cmvar.defaultPriority
+    rv_ids=dq.inx.iref_by_sect[cmvar.uid].a['requestVar']
+    for rv_id in rv_ids :
+        rv=dq.inx.uid[rv_id]
+        vg=dq.inx.uid[rv.vgid]
+        if vg.mip in lmips :
+            if rv.priority < prio : prio=rv.priority
+    return prio
+                     
 def complement_svar_using_cmorvar(svar,cmvar):
     """ 
     The label for SVAR will be suffixed by an area name it the 
@@ -420,10 +448,12 @@ def complement_svar_using_cmorvar(svar,cmvar):
     """
     svar.frequency = cmvar.frequency
     svar.mipTable = cmvar.mipTable
+    svar.Priority= cmvar.defaultPriority
     svar.positive = cmvar.positive
     [svar.spatial_shp,svar.temporal_shp]=get_SpatialAndTemporal_Shapes(cmvar)
     mipvar = dq.inx.uid[cmvar.vid]
     svar.label = mipvar.label
+    svar.label_without_area=mipvar.label
     svar.long_name = mipvar.title
     if mipvar.description :
         svar.description = mipvar.description
@@ -437,11 +467,12 @@ def complement_svar_using_cmorvar(svar,cmvar):
         svar.cell_methods=None
     area=cellmethod2area(svar.cell_methods) 
     if area : 
-        svar.label_with_area=svar.label+"_"+area
-        if mipvar.label in ambiguous_mipvarnames :
-            svar.label=svar.label_with_area
-    else:
-        svar.label_with_area=svar.label
+        ambiguous=any( [ svar.label == alabel and svar.modeling_realm== arealm 
+                         for (alabel,(arealm,lmethod)) in ambiguous_mipvarnames ])
+        if ambiguous :
+            # Special case for a set of land variables
+            if not (svar.modeling_realm=='land' and svar.label[0]=='c'):
+                svar.label=svar.label+"_"+area
 
     svar.type='cmor'
     stdname=None
@@ -464,7 +495,7 @@ def complement_svar_using_cmorvar(svar,cmvar):
 
 
 def write_xios_file_def(cmvs,table, lset,sset, out,cvspath,field_defs,axis_defs,
-                        domain_defs,dummies,pingvars=None) :
+                        domain_defs,dummies,pingvars=None,prefix="") :
     """ 
     Generate an XIOS file_def entry in out for :
       - a dict for laboratory settings 
@@ -496,19 +527,17 @@ def write_xios_file_def(cmvs,table, lset,sset, out,cvspath,field_defs,axis_defs,
         member_id = sub_experiment_id+"-"+member_id
     grid_label="TBD" #TBD
     time_range="%start_date%_%end_date%" # XIOS syntax
-    filename="%s_%s_%s_%s_%s_%s"%\
-               (table, experiment_id,lset['source_id'], member_id,grid_label,time_range)
+    filename="%s%s_%s_%s_%s_%s_%s"%\
+               (prefix,table, experiment_id,lset['source_id'], member_id,grid_label,time_range)
 
     # WIP Draft 14 july 2016
     activity_id=sset.get('activity_id','CMIP')
     try :
         freq=table2freq[table] 
     except:
-        print "Issue with table2freq[%s]"%table
-        freq="TBD_freq_of_"+table
-    split_freq="TBD" # compute file-level split_freq
+        raise(dr2xml_error("Issue : no frequency known in table2freq for table %s"%table))
     out.write('<file name="%s" output_freq="%s" append="true" split_freq="%s" timeseries="exclusive" >\n'%\
-              (filename,freq[0],split_freq))
+              (filename,freq[0],table2splitfreq[table]))
     out.write('  <variable name="project_id" type="string" > %s/%s </variable>\n'%(
                    sset.get('project',"CMIP6"),activity_id))
     #
@@ -582,7 +611,7 @@ def write_xios_file_def(cmvs,table, lset,sset, out,cvspath,field_defs,axis_defs,
     wr('grid','TBD') #TBD - depend du model et du realm, donc de la variable
     wr('grid_label','TBD') #TBD - -d - gn pour Nemo, gr pour Arpege
     wr('grid_resolution','TBD') #TBD - id
-    wr('history',sset) 
+    wr('history',sset,'none') 
     wr("initialization_index",initialization_index)
     wr("institution_id",institution_id)
     if "institution" in lset :
@@ -622,7 +651,8 @@ def write_xios_file_def(cmvs,table, lset,sset, out,cvspath,field_defs,axis_defs,
         parent_source_id=sset.get('parent_source_id',source_id) ; 
         wr('parent_source_id',parent_source_id)
         # TBX : syntaxe XIOS pour designer le time units de la simu courante
-        parent_time_units=sset.get('parent_time_units',"TBD") 
+        parent_time_ref_year=sset.get('parent_time_ref_year',"1850") 
+        parent_time_units="seconds since %s-01-01 00:00:00"%parent_time_ref_year
         wr("parent_time_units",parent_time_units)
         parent_variant_label=sset.get('parent_variant_label',variant_label) 
         wr('parent_variant_label',parent_variant_label)
@@ -632,18 +662,25 @@ def write_xios_file_def(cmvs,table, lset,sset, out,cvspath,field_defs,axis_defs,
     wr("physics_index",physics_index) 
     wr('product','output')
     wr("realization_index",realization_index) 
-    #wr('realm',"TBD") # decline par variable
     wr('references',lset) 
     #
-    with open(cvspath+"CMIP6_source_id.json","r") as json_fp :
-        try:
-            source=json.loads(json_fp.read())['source_id'][source_id]
-        except :
-            if "source" in lset : 
-                #print "source for %s not found in CMIP6_CV at %s, use lset"%(source_id,cvspath)
-                source=lset['source']
-            else:
-                print "source for %s not found in CMIP6_CV at %s, nor in lset"%(source_id,cvspath)
+    try:
+        with open(cvspath+"CMIP6_source_id.json","r") as json_fp :
+            sources=json.loads(json_fp.read())['source_id']
+            source=make_source_string(sources,source_id)
+    except :
+        if "source" in lset : 
+            #print "source for %s not found in CMIP6_CV at %s, use lset"%(source_id,cvspath)
+            source=lset['source']
+        else:
+            raise(dr2xml_error("source for %s not found in CMIP6_CV at %s, nor in lset"%(source_id,cvspath)))
+    #if 'source' in sset :
+    #    source=sset['source']
+    #else:
+    #    if 'source' in lset :
+    #        source=lset['source']
+    #    else:
+    #        raise dr2xml_error("No value found for 'source' - Check inputs")
     wr('source',source) 
     wr('source_id',source_id)
     if 'source_type' in sset :
@@ -655,8 +692,7 @@ def write_xios_file_def(cmvs,table, lset,sset, out,cvspath,field_defs,axis_defs,
             if 'source_types' in lset :
                 source_type=lset['source_types'][source_id] 
             else:
-                print "No source-type found !!"
-                source_type='TBD' 
+                raise dr2xml_error("No source-type found - Check inputs")
     if type(source_type)==type([]) :
         source_type=reduce(lambda x,y : x+" "+y, source_type)
     wr('source_type',source_type)
@@ -671,25 +707,31 @@ def write_xios_file_def(cmvs,table, lset,sset, out,cvspath,field_defs,axis_defs,
     wr("variant_info",sset,"")
     wr("variant_label",variant_label)
     #
-    # Iterate on variables
-    #
-
+    end_field_defs=dict()
     for cmv in cmvs : 
-        write_xios_field_ref_in_file_def(cmv,out,lset,sset,field_defs,axis_defs,
-                                         domain_defs,dummies,pingvars)
+        create_xios_field_ref(cmv,table,lset,sset,end_field_defs,field_defs,axis_defs,
+                              domain_defs,dummies,pingvars)
+    # Create a field group for each shape
+    for shape in end_field_defs :
+        dom="" ;
+        if shape : dom=domain_ref="%s"%shape
+        out.write('<field_group %s expr="@this" >\n'%dom)
+        for entry in end_field_defs[shape] : out.write(entry)
+        out.write('</field_group >\n')
     out.write('</file>\n\n')
 
-def write_xios_field_ref_in_file_def(sv,out,lset,sset, field_defs,axis_defs,
-                                     domain_defs,dummies,pingvars=None) :
+def create_xios_field_ref(sv,table,lset,sset,end_field_defs,field_defs,axis_defs,
+                          domain_defs,dummies,pingvars=None) :
     """
-    Writes a simplified variable object sv as a field reference in out, 
-    with lab prefix for the variable name
+    Create a field_ref for a simplified variable object sv (with
+    lab prefix for the variable name) and store it in end_field_defs
+    under a key=shape,
+    
     Add field definitions for intermediate variables in dic field_defs
     Add axis  definitions for interpolations in dic axis_defs
     Use pingvars as a list of variables actually defined in ping file
+
     """
-    # TBD : logic for computing ts_split_frequency from rank and time-space ops
-    #
     # By convention, field references are built as CMIP_<MIP_varable_name>
     # Such references must be fulfilled using a dedicated filed_def section implementing 
     # the match between legacy model field names and such names, called 'ping section'
@@ -707,7 +749,7 @@ def write_xios_field_ref_in_file_def(sv,out,lset,sset, field_defs,axis_defs,
         alias=lset["ping_variables_prefix"]+sv.label
         if pingvars is not None :
             if not alias in pingvars :
-                print "Skipping ping variable %s, which has no valid field_ref"%sv.label
+                print "Note : skipping ping variable %15s, which has no valid field_ref"%sv.label
                 return
 
     # nextvar is the field name provided as output of the last operation currently defined
@@ -715,72 +757,77 @@ def write_xios_field_ref_in_file_def(sv,out,lset,sset, field_defs,axis_defs,
 
     detect_missing="false"
     operation="instant"
-    if True: #TBD : complete code for handling spatial shape
-        # Proceed with vertical interpolation if needed
-        ssh=sv.spatial_shp
-        if ssh[0:4] in ['XY-H','XY-P'] or ssh[0:3] == 'Y-P' :
-            dimids=dq.inx.uid[sv.struct.spid].dimids
-            for dimid in dimids :
-                d=dq.inx.uid[dimid]
-                if isVertInterpolationDim(d) :
-                    #ex: alt40
-                    furthervar=nextvar+"_"+d.label
-                    if not furthervar in pingvars :
-                        # Construct an axis for interpolating to this dimension
-                        axis_defs[d.label]=create_axis_def(d)
-                        # Construct a field def for the interpolated variable
-                        field_defs[furthervar]='<field id="%-25s axis_ref="%-10s field_ref="%-25s/>'\
-                            %(furthervar+'"',d.label+'"',nextvar+'"')
-                    nextvar=furthervar
-                    #TBD what to do for singleton dimension ?
-
-        # Analyze 'outermost' time cell_method and translate to 'operation'
-        operation,detect_missing = analyze_cell_time_method(sv.cell_methods,sv.label)
-        # Supposons que ce n'est pas la peine de definir un var intermediaire pour
-        # operation temporelle, grace a expr="@this"
-        #
-        # if operation is not None :
-        #     suffix={"instant":"", "average":"_avg", "minimum":"_min", "maximum":"_max"}
-        #     furthervar=nextvar+suffix[operation]
-        #     if not furthervar in pingvars :
-        #         op='<field id="%s" field_ref="%s" operation="%s"'%(furthervar,nextvar)
-        #         if detect_missing : op+=' detect_missing_value="True"'
-        #         op+="/>"
-        #         field_defs[furthervar]=op
-        #     nextvar=furthervar
-
-        # Horizontal operations. Can include horiz re-gridding specification
-        # Compute domain name, define it if needed
-        domain_ref=None
-        if ssh[0:2] == 'Y-' : #zonal mean and atm zonal mean on pressure levels
-            domain_ref="zonal_mean"
-            domain_defs[domain_ref]='<domain_ref id="%s">'%domain_ref
-        elif ssh[0:2] == 'S-' : #COSP sites; cas S-na, S-A, S-AH
-            domain_ref="COSP_sites"
-            domain_defs[domain_ref]='<domain_ref id="%s">'%domain_ref
-        elif ssh[0:2] == 'L-' :
-            domain_ref="COSP_curtain"
-            domain_defs[domain_ref]='<domain_ref id="%s">'%domain_ref
-        elif ssh == 'TR-na' or ssh == 'TRS-na' : #transects,   oce or SI
-            pass
-        elif ssh[0:3] == 'XY-'  : # includes 'XY-AH' : model half-levels
-            pass
-        elif ssh[0:3] == 'YB-'  : #basin zonal mean or section
-            pass
-        elif ssh      == 'na-na'  : # global means or constants
-            pass 
-        else :
-            print "Issue with un-managed spatial shape %s"%ssh
-        if domain_ref : domain_op='domain_ref="%s"'%domain_ref
-        else          : domain_op=""
     #
-    split_freq="10y" #TBD - Should be computed
-    out.write('  <field field_ref="%s" name="%s" ts_enabled="true" ts_split_freq="%s" operation="%s" detect_missing_value="%s" %s>\n'%\
-              ( nextvar,sv.label,split_freq,operation,detect_missing,domain_op))
+    # Proceed with vertical interpolation if needed
+    ssh=sv.spatial_shp
+    prefix=lset["ping_variables_prefix"]
+    if ssh[0:4] in ['XY-H','XY-P'] or ssh[0:3] == 'Y-P' :
+        dimids=dq.inx.uid[sv.struct.spid].dimids
+        for dimid in dimids :
+            d=dq.inx.uid[dimid]
+            if isVertInterpolationDim(d) :
+                #ex: alt40
+                furthervar=nextvar+"_"+d.label
+                if not furthervar in pingvars :
+                    # Construct an axis for interpolating to this dimension
+                    axis_defs[d.label]=create_axis_def(d,lset["ping_variables_prefix"],field_defs)
+                    # Construct a field def for the interpolated variable
+                    field_defs[furthervar]='<field id="%-25s field_ref="%-25s axis_ref="%-10s/>'\
+                        %(furthervar+'"',nextvar+'"',d.label+'"')
+                        #%(furthervar+'"',nextvar+'"',prefix+d.label+'"')
+                nextvar=furthervar
+                #TBD what to do for singleton dimension ?
+     # Analyze 'outermost' time cell_method and translate to 'operation'
+    operation,detect_missing = analyze_cell_time_method(sv.cell_methods,sv.label,table)
+    # Supposons que ce n'est pas la peine de definir un var intermediaire pour
+    # operation temporelle, grace a expr="@this"
+    #
+    # if operation is not None :
+    #     suffix={"instant":"", "average":"_avg", "minimum":"_min", "maximum":"_max"}
+    #     furthervar=nextvar+suffix[operation]
+    #     if not furthervar in pingvars :
+    #         op='<field id="%s" field_ref="%s" operation="%s"'%(furthervar,nextvar)
+    #         if detect_missing : op+=' detect_missing_value="True"'
+    #         op+="/>"
+    #         field_defs[furthervar]=op
+    #     nextvar=furthervar
+     # Horizontal operations. Can include horiz re-gridding specification
+    # Compute domain name, define it if needed
+    domain_ref=None
+    if ssh[0:2] == 'Y-' : #zonal mean and atm zonal mean on pressure levels
+        domain_ref="zonal_mean"
+        domain_defs[domain_ref]='<domain id="%s"/>'%domain_ref
+    elif ssh[0:2] == 'S-' : #COSP sites; cas S-na, S-A, S-AH
+        domain_ref="COSP_sites"
+        domain_defs[domain_ref]='<domain id="%s"/>'%domain_ref
+    elif ssh[0:2] == 'L-' :
+        domain_ref="COSP_curtain"
+        domain_defs[domain_ref]='<domain id="%s"/>'%domain_ref
+    elif ssh == 'TR-na' or ssh == 'TRS-na' : #transects,   oce or SI
+        pass
+    elif ssh[0:3] == 'XY-'  : # includes 'XY-AH' : model half-levels
+        pass
+    elif ssh[0:3] == 'YB-'  : #basin zonal mean or section
+        pass
+    elif ssh      == 'na-na'  : # global means or constants
+        pass 
+    else :
+        raise(dr2xml_error("Issue with un-managed spatial shape %s"%ssh))
+    
+    #if domain_ref : domain_op=' domain_ref="%s"'%domain_ref
+    #else          : domain_op=""
+    domain_op="" # Rather put remapping at group level, for computing time-average before reampping
+    #
+    split_freq=split_frequency_for_variable(sv, table, lset)  
+    rep='  <field field_ref="%s" name="%s" ts_enabled="true" ts_split_freq="%s" '%\
+              ( nextvar,sv.label,split_freq)
+    rep+=' operation="%s" detect_missing_value="%s"%s'% ( operation,detect_missing,domain_op)
+    rep+=' cell_methods="%s" cell_methods_mode="overwrite"'% sv.cell_methods
+    rep+='>\n'
     #
     def wrv(name, value):
-        # Write a 'variable' entry
-        out.write('     <variable name="%s" type="string" > %s </variable>\n'%(name,value))
+        # Format a 'variable' entry
+        return '     <variable name="%s" type="string" > %s </variable>\n'%(name,value)
     #
     comment=None
     # Process experiment-specific comment for the variable
@@ -789,24 +836,29 @@ def write_xios_field_ref_in_file_def(sv,out,lset,sset, field_defs,axis_defs,
     else: # Process lab-specific comment for the variable
         if sv.label in lset['comments'] : 
             comment=sset['comments'][sv.label] 
-    if comment : wrv('comment',comment) #TBI 
+    if comment : rep+=wrv('comment',comment) #TBI 
     #
-    wrv('realm',sv.modeling_realm) 
-    wrv('variable_id',sv.label)
-    wrv("standard_name",sv.stdname)
+    rep+=wrv('realm',sv.modeling_realm) 
+    rep+=wrv('variable_id',sv.label)
+    rep+=wrv("standard_name",sv.stdname)
     desc=sv.description
     if desc : desc=desc.replace(">","").replace("<","")
-    wrv("description",desc)
-    wrv("long_name",sv.long_name)
-    if sv.positive != "None" and sv.positive != "" : wrv("positive",sv.positive) 
-    wrv('history','none')
-    out.write('     </field>\n')
+    rep+=wrv("description",desc)
+    rep+=wrv("long_name",sv.long_name)
+    if sv.positive != "None" and sv.positive != "" : rep+=wrv("positive",sv.positive) 
+    rep+=wrv('history','none')
+    rep+='     </field>\n'
+    #
+    shape=domain_ref
+    #shape=sv.spatial_shp
+    if shape not in end_field_defs : end_field_defs[shape]=[]
+    end_field_defs[shape].append(rep)
 
 def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
-                       dummies='include',printout=False) :
+                       dummies='include',printout=False,dirname="./",prefix="") :
     """
     Using global DR object dq, a dict of lab settings LSET, and a dict 
-    of simulation settings SSET, generate an XIOS file_def file for a 
+    of simulation settings SSET, generate an XIOS file_defs file for a 
     given XIOS 'context', which content matches 
     the DR for the experiment quoted in simu setting dict and a YEAR.
     Makes use of CMIP6 controlled vocabulary files found in CVS_PATH
@@ -816,7 +868,8 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
     DUMMIES='skip'  : don't write field with a ref to a dummy
                           (useful until ping_file is fully completed)
     DUMMIES='forbid': stop if any dummy (useful for production run)
-    Output file is named <context>.xml  
+    Output file is named <DIRNAME>filedefs_<CONTEXT>.xml  
+    Filedefs have a CMIP6 compliant name, with prepended PREFIX 
     
     Structure of the two dicts is documented elsewhere. It includes the 
     correspondance between a context and a few realms
@@ -932,7 +985,7 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
     # read ping_file defined variables
     pingvars=[] 
     if pingfile :
-        ping_refs=read_field_defs(pingfile, attrib='field_ref')
+        ping_refs=read_defs(pingfile, tag='field', attrib='field_ref')
         if ping_refs is None :
             print "Issue accessing pingfile "+pingfile
             return
@@ -940,8 +993,7 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
             pingvars=ping_refs.keys()
         else :
             pingvars=[ v for v in ping_refs if 'dummy' not in ping_refs[v] ]
-            if dummies=="skip" : return pingvars
-            elif dummies=="forbid" :
+            if dummies=="forbid" :
                 if len(pingvars) != len(ping_refs) :
                     print "They are dummies in %s :"%pingfile,
                     for v in ping_refs :
@@ -950,34 +1002,42 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
                     return 
                 else :
                     pingvars=ping_ref
+            elif dummies=="skip" : pass
             else:
                 print "Forbidden option for dummies : "+dummies
                 return
     #
     # Write XIOS file_def
-    filename="%s.xml"%context
+    #filename=dirname+"filedefs_%s.xml"%context
+    filename=dirname+"dr2xml_%s.xml"%context
     with open(filename,"w") as out :
-        out.write('<context id=%s> \n'%context)
+        out.write('<context id="%s"> \n'%context)
         field_defs=dict()
         axis_defs=dict()
         domain_defs=dict()
         #for table in ['day'] :    
-        out.write('\t<file_definition> \n')
+        out.write('\n<file_definition type="one_file" enabled="true" > \n')
         for table in cmvs_pertable :  
             write_xios_file_def(cmvs_pertable[table],table, lset,sset,out,cvs_path,
-                                field_defs,axis_defs,domain_defs,dummies,pingvars)
-        out.write('\t</file_definition> \n')
+                                field_defs,axis_defs,domain_defs,dummies,pingvars,prefix)
+        out.write('\n</file_definition> \n')
+        #filename=dirname+"fielddefs_%s.xml"%context
+        #with open(filename,"w") as out :
         # Write all domain, axis, field defs needed for these file_defs
-        out.write('\t+<field_definition> \n')
-        for obj in field_defs: out.write("\t\t"+field_defs[obj]+"\n")
-        out.write('\t</field_definition> \n')
-        out.write('\t<axis_definition> \n')
-        for obj in axis_defs: out.write("\t\t"+axis_defs[obj]+"\n")
-        out.write('\t</axis_definition> \n')
-        out.write('\t<domain_definition> \n')
-        for obj in domain_defs: out.write("\t\t"+domain_defs[obj]+"\n")
-        out.write('\t</domain_definition> \n')
-        out.write('</context id> \n')
+        out.write('<field_definition> \n')
+        for obj in field_defs: out.write("\t"+field_defs[obj]+"\n")
+        out.write('\n</field_definition> \n')
+        #filename=dirname+"axisdefs_%s.xml"%context
+        #with open(filename,"w") as out :
+        out.write('\n<axis_definition> \n')
+        for obj in axis_defs: out.write("\t"+axis_defs[obj]+"\n")
+        out.write('</axis_definition> \n')
+        #filename=dirname+"domaindefs_%s.xml"%context
+        #with open(filename,"w") as out :
+        out.write('\n<domain_definition> \n')
+        for obj in domain_defs: out.write("\t"+domain_defs[obj]+"\n")
+        out.write('</domain_definition> \n')
+        out.write('</context> \n')
     if printout :
         print "\nfile_def written as %s"%filename
 
@@ -1000,7 +1060,7 @@ def cellmethod2area(method) :
     if "where landuse"      in method : return "lu"
     if "where ice_shelf"    in method : return "isf"
 
-def create_axis_def(dim_name_or_obj):
+def create_axis_def(dim_name_or_obj,prefix,field_defs):
     """ 
     From a dim DR object or a dim name, returns an Xios axis definition 
     """
@@ -1019,28 +1079,33 @@ def create_axis_def(dim_name_or_obj):
         # Case of a non-degenerated dimension (not a singleton)
         n_glo=len(dim.requested.split(" "))
         rep+='n_glo="%g" '%n_glo
-        rep+='value="(0,%g) [%s]">'%(n_glo - 1,dim.requested)
+        rep+='value="(0,%g) [%s]"'%(n_glo - 1,dim.requested)
     elif dim.value != "":
         # Singleton case
         rep+='n_glo=%g '%1
-        rep+='value=(0,0)[%s]">'%dim.value
+        rep+='value=(0,0)[%s]"'%dim.value
     else :
         pass
-    coordname=dq.inx.uid[dim.standardName].uid
-    if coordname=="air_pressure" : coordname="pa"
-    if coordname=="altitude"     : coordname="zg"
-    rep+='\n\t<interpolate_axis type="polynomial" order="1" coordinate="%s"/>\n</axis>'%coordname
+    stdname=dq.inx.uid[dim.standardName].uid
+    rep+=' name="%s"'%dim.altLabel
+    rep+=' standard_name="%s"'%stdname
+    rep+=' long_name="%s"'%dim.title
+    rep+=' unit="%s"'%dim.units
+    rep+='>'
+    if stdname=="air_pressure" : coordname=prefix+"pfull"
+    if stdname=="altitude"     : coordname=prefix+"zg"
+    rep+='\n\t\t<interpolate_axis type="polynomial" order="1" coordinate="%s"/>\n\t</axis>'%coordname
     return rep
 
 def isVertInterpolationDim(dim):
     """
     Returns True if dim represents a dimension for which we want an Xios interpolation 
-    TBD - For now, a very simple logics for interpolated vertical dimension identification:
+    For now, a very simple logics for interpolated vertical dimension identification:
     """
     name=dq.inx.uid[dim.standardName]
     return name.uid=='air_pressure' or name.uid=='altitude'
 
-def analyze_cell_time_method(cm,label):
+def analyze_cell_time_method(cm,label,table):
     """
     Depending on cell method string CM, tells which time operation
     should be done, if missing value detection should be set
@@ -1048,14 +1113,17 @@ def analyze_cell_time_method(cm,label):
     operation=None
     detect_missing=False
     if cm is None : 
-        pass
+        print "DR Error : issue when analyzing cell_time_method None for %15s in table %s, averaging" %(label,table)
+        operation="average"
     elif "time: mean (with samples weighted by snow mass)" in cm : 
         #[amnla-tmnsn]: Snow Mass Weighted (LImon : agesnow, tsnLi)
-        print "TBD Cannot yet handle time: mean (with samples weighted by snow mass"
+        print "TBD Cannot yet handle time: mean (with samples weighted by snow mass)"
     elif "time: mean where cloud"  in cm : 
         #[amncl-twm]: Weighted Time Mean on Cloud (2 variables ISSCP 
         # albisccp et pctisccp, en emDay et emMon)
-        print " TBD Cannot yet handle time: mean where cloud" 
+        print "Note : assuming that 'time: mean where cloud' for %15s in table %s is well handled by 'detect_missing'" %(label,table)
+        operation="average"
+        detect_missing=True
     elif "time: mean where sea"  in cm :#[amnesi-tmn]: 
         #Area Mean of Ext. Prop. on Sea Ice : pas utilisee
         print "time: mean where sea is not supposed to be used" 
@@ -1072,37 +1140,39 @@ def analyze_cell_time_method(cm,label):
     elif "time: maximum within days time: mean over days" in cm :
         #[dmax]: Daily Maximum : tasmax Amon seulement
         if label != 'tasmax' : 
-            print "Issue with variable %s and cell method "%label+\
+            print "Error: issue with variable %s in table %s and cell method "%(label,table)+\
                 "time: maximum within days time: mean over days"
         operation="average"
     elif "time: minimum within days time: mean over days" in cm :
         #[dmin]: Daily Minimum : tasmin Amon seulement
         if label != 'tasmin' : 
-            print "Issue with variable %s and cell method "%label+\
+            print "Error: issue with variable %s in table %s and cell method "%(label,table)+\
                 "time: minimum within days time: mean over days"
         operation="average"
     elif "time: mean within years time: mean over years" in cm: 
         #[aclim]: Annual Climatology
-        print "TBD Cannot yet compute annual climatology for %s"%label 
+        print "TBD Cannot yet compute annual climatology for %15s in table %s -> averaging"%(label,table)
         # Could transform in monthly fields to be post-processed
+        operation="average"
     elif "time: mean within days time: mean over days"  in cm: 
         #[amn-tdnl]: Mean Diurnal Cycle
-        print "TBD Cannot yet compute diurnal cycle for %s"%label
+        print "TBD Cannot yet compute diurnal cycle for %15s in table %s -> averaging"%(label,table)
         # Could output a time average of 24 hourly fields at 01 UTC, 2UTC ...
+        operation="average"
     elif "time: sum"  in cm :
         # [tsum]: Temporal Sum  : pas utilisee !
-        print "time: sum is not supposed to be used" 
+        print "Errror: time: sum is not supposed to be used" 
     elif "time: mean" in cm :  #    [tmean]: Time Mean  
         operation="average"
     elif "time: point" in cm:
         operation="instant"
     else :
-        print "Issue when analyzing cell_time_method %s"%cm
+        print "Error: issue when analyzing cell_time_method %s for %15s in table %s, averaging" %(cm,label,table)
     return (operation, detect_missing)
 
     #
 
-def pingFileForRealmsList(lrealms,svars,dummy="field_atm",dummy_with_shape=False,
+def pingFileForRealmsList(context,lrealms,svars,dummy="field_atm",dummy_with_shape=False,
                           exact=False, comments=False,prefix="CV_",filename=None):
     """
     Based on a list of realms LREALMS and a list of simplified vars SVARS, create the ping 
@@ -1128,7 +1198,7 @@ def pingFileForRealmsList(lrealms,svars,dummy="field_atm",dummy_with_shape=False
     The ping file includes a <field_definition> construct
 
     For those MIP varnames which have a corresponding field_definition
-    in a file named like ./inputs/field_defs_<realm>.xml (path being
+    in a file named like ./inputs/DX_field_defs_<realm>.xml (path being
     relative to source code location), this latter field_def is
     inserted in the ping file (rather than a default one). This brings 
     a set of 'standard' definitions fo variables which can be derived 
@@ -1162,6 +1232,7 @@ def pingFileForRealmsList(lrealms,svars,dummy="field_atm",dummy_with_shape=False
     #
     specials=read_special_fields_defs(lrealms)
     with open(filename,"w") as fp:
+        fp.write('<context id="%s">\n'%context)
         fp.write("<field_definition>\n")
         if exact : 
             fp.write("<!-- for variables which realm intersects any of "+name+"-->\n")
@@ -1176,7 +1247,9 @@ def pingFileForRealmsList(lrealms,svars,dummy="field_atm",dummy_with_shape=False
             else:
                 fp.write('   <field id="%-20s'%(prefix+label+'"')+' field_ref="')
                 if dummy : 
-                    shape=highest_rank(label)
+                    shape=highest_rank(v.label_without_area)
+                    # Bugfix for DR 1.0.1 content :
+                    if v.label=='clcalipso' : shape='XYA'
                     if dummy is True :
                         dummys="dummy"
                         if dummy_with_shape : dummys+="_"+shape
@@ -1186,30 +1259,48 @@ def pingFileForRealmsList(lrealms,svars,dummy="field_atm",dummy_with_shape=False
             if comments :
                 # Add units, stdname and long_name as a comment string
                 if type(comments)==type("") : fp.write(comments)
-                fp.write("<!-- (%s) %s : %s -->"%(v.stdunits, v.stdname, v.description)) 
+                fp.write("<!-- P%d (%s) %s : %s -->"%(v.Priority,v.stdunits, v.stdname, v.description)) 
             fp.write("\n")
         fp.write("</field_definition>\n")
         #
-        # Insert content of DX_field_defs files (changing prefix)
-        # NO : done above
-        for realm in () : #lrealms 
-            filedefs=DX_field_defs_filename(realm)
-            if os.path.exists(filedefs) :
-                with open(filedefs,"r") as fields :
+        print "%3d variables written for %s"%(len(lvars),filename)
+        #
+        # Write axis_defs, domain_defs, ... read from relevant input/DX_ files
+        for obj in [ "axis", "domain", "grid" ] :
+            #print "for obj "+obj
+            copy_obj_from_DX_file(fp,obj,prefix,lrealms)
+        fp.write('</context>\n')
+
+def copy_obj_from_DX_file(fp,obj,prefix,lrealms) :
+    # Insert content of DX_<obj>_defs files (changing prefix)
+    #print "copying %s defs :"%obj,
+    subrealms_seen=[]
+    for realm in lrealms :
+        for subrealm in realm.split() :
+            if subrealm in subrealms_seen : continue
+            subrealms_seen.append(subrealm)
+            #print "\tand realm %s"%subrealm, 
+            defs=DX_defs_filename(obj,subrealm)
+            if os.path.exists(defs) :
+                with open(defs,"r") as fields :
+                    #print "from %s"%defs
+                    fp.write("\n<%s_definition>\n"%obj)
                     lines=fields.readlines()
                     for line in lines :
-                        if not "field_definition" in line:
+                        if not obj+"_definition" in line:
                             fp.write(line.replace("DX_",prefix))
-    
-    print "%3d variables written for %s"%(len(lvars),filename)
+                    fp.write("</%s_definition>\n"%obj)
+            else:
+                pass
+                #print " no file  "
 
-def DX_field_defs_filename(realm):
-    return prog_path+"inputs/DX_field_defs_%s.xml"%realm
+def DX_defs_filename(obj,realm):
+    return prog_path+"inputs/DX_%s_defs_%s.xml"%(obj,realm)
 
 def analyze_ambiguous_MIPvarnames():
     """
-    Return the list of MIP varnames whose list of CMORvars show dsitinct 
-    values for the area part of the cell_methods
+    Return the list of MIP varnames whose list of CMORvars for a single realm 
+    show distinct values for the area part of the cell_methods
     """
     # Compute a dict which keys are MIP varnames and values = list 
     # of CMORvars items for the varname
@@ -1219,46 +1310,71 @@ def analyze_ambiguous_MIPvarnames():
         refs=dq.inx.iref_by_sect[v.uid].a['CMORvar']
         for r in refs :
             d[v.label].append(dq.inx.uid[r])
-
-    # Replace dic values by list of cell_methods
+            #if v.label=="prra" : print "one prra"
+    #print "d[prra]=",d["prra"]
+    # Replace dic values by dic of cell_methods
     for vlabel in d:
         if len(d[vlabel]) > 1 :
             cvl=d[vlabel]
-            d[vlabel]=[]
+            d[vlabel]=dict()
             for cv in cvl: 
                 st=dq.inx.uid[cv.stid]
                 try :
                     cm=dq.inx.uid[st.cmid].cell_methods
-                    if cm not in d[vlabel] :
-                        d[vlabel].append(cm)
+                    cm1=cm.replace("time: mean","").replace("time: point","").\
+                        replace(" within years  over years","") .\
+                        replace('time: maximum within days  over days','').\
+                        replace('time: minimum within days  over days','').\
+                        replace('time: minimum','').\
+                        replace('time: maximum','').\
+                        replace('with samples ','')
+                    realm=cv.modeling_realm
+                    if realm=="ocean" or realm=="ocnBgchem" :
+                        cm1=cm1.replace("area: mean where sea ","")
+                    #if realm=='land':
+                    #    cm1=cm1.replace('area: mean where land ','')
+                    if True or "area:" in cm1 :
+                        cm2=cm1 #.replace("area:","")
+                        if realm not in d[vlabel]:
+                            d[vlabel][realm] =[]
+                        if cm2 not in d[vlabel][realm] :
+                            d[vlabel][realm].append(cm2)
+                        #if vlabel=="prra" : 
+                        #    print "cm2=",cm2, d[vlabel]
                 except : 
                     pass
                     #print "No cell method for %s %s"%(st.label,cv.label)
         else : d[vlabel]=None
-
+    #for l in d : print l,d[l]
+    #print "d[prra]=",d["prra"]
+    #sd=d.keys() ; sd.sort()
+    #for var in sd :
+    #    if d[var] and any( [ len(l) > 1 for l in d[var].values() ]) :
+    #        print "%20s %s"%(var,`d[var]`)
+    #        pass
     # Analyze ambiguous cases regarding area part of the cell_method
     ambiguous=[]
     for vlabel in d:
-        if d[vlabel] and len(d[vlabel])>1 and any([ "area" in cm for cm in d[vlabel]]):
-            ambiguous.append(vlabel)
-            #ambiguous.append((vlabel,d[vlabel]))
-    #ambiguous.sort(key=itemgetter(0))
-    #for a in ambiguous :
-    #    print "%-15s %s"%(a[0],`a[1]`)
+        if d[vlabel]:
+            #print vlabel,d[vlabel]
+            for realm in d[vlabel] :
+                if len(d[vlabel][realm])>1 and any([ "area" in cm for cm in d[vlabel][realm] ]):
+                    ambiguous.append(( vlabel,(realm,d[vlabel][realm])))
     return ambiguous
-
 ambiguous_mipvarnames=analyze_ambiguous_MIPvarnames()
 
-def read_field_defs(filename, attrib=None, printout=False) :
+def read_defs(filename, tag='field', attrib=None, printout=False) :
     """ 
-    Returns a dict of field_ids in FILENAME, which 
-    - keys are field_ids
+    Returns a dict of obejcts tagged TAG in FILENAME, which 
+    - keys are ids
     - values are corresponding ET elements if 
       attrib is None, otherwise elt attribute ATTRIB
     Returns None if filename does not exist
     """
     #
-    def field_defs(elt, tag='field', groups=['field_group','field_definition']) :
+    def field_defs(elt, tag='field', groups=['context', 'field_group','field_definition',
+                                             'axis_definition','axis', 'domain_definition', 'domain',
+                                              'grid_definition', 'grid' , 'interpolate_axis'  ]) :
         """ 
         Returns a list of elements in tree ELT 
         which have tag TAG, by digging in sub-elements 
@@ -1266,34 +1382,42 @@ def read_field_defs(filename, attrib=None, printout=False) :
         """
         if elt.tag in groups :
             rep=[]
-            for child in elt : rep.extend(field_defs(child))
+            for child in elt : rep.extend(field_defs(child,tag))
             return rep
-        elif elt.tag=='field' : return [elt]
+        elif elt.tag==tag : return [elt]
         else :
-            print 'Syntax error : tag %s not allowed'%elt.tag
-            return None
+            #print 'Syntax error : tag %s not allowed'%elt.tag
+            # Case of an unkown tag : don't dig in
+            return []
     #    
     rep=dict()
-    print "processing file %s"%filename
+    if printout : print "processing file %s :"%filename,
     if os.path.exists(filename) :
+        if printout : print "OK"%filename
         root = ET.parse(filename).getroot()
-        for field in field_defs(root) :
-            if printout : print ".",
-            if attrib is None: 
-                rep[field.attrib['id']]=field
-            else :
-                rep[field.attrib['id']]=field.attrib[attrib]
-        if printout : print
-        return rep
+        defs=field_defs(root,tag) 
+        if defs :
+            for field in defs :
+                if printout : print ".",
+                if attrib is None: 
+                    rep[field.attrib['id']]=field
+                else :
+                    rep[field.attrib['id']]=field.attrib[attrib]
+            if printout : print
+            return rep
     else :
-        if printout : print "No file %s"%filename
+        if printout : print "No file "
         return None
 
 def read_special_fields_defs(realms,printout=False) :
     special=dict()
+    subrealms_seen=[]
     for realm in realms  :
-        d=read_field_defs(DX_field_defs_filename(realm),printout=printout)
-        if d: special.update(d)
+        for subrealm in realm.split() :
+            if subrealm in subrealms_seen : continue
+            subrealms_seen.append(subrealm)
+            d=read_defs(DX_defs_filename("field",subrealm),tag='field',printout=printout)
+            if d: special.update(d)
     rep=dict()
     # Use raw label as key
     for r in special : rep[r.replace("DX_","")]=special[r]
@@ -1315,10 +1439,10 @@ def highest_rank(mipvarlabel):
                     sp=dq.inx.uid[st.spid]
                     shape=sp.label
                 except :
-                    print "Issue with spid for "+st.label+cvar.mipTableSection
+                    print "Error: issue with spid for "+st.label+cvar.mipTableSection
                     shape="?sp"
             except :
-                print "Issue with stid for "+v.label+cvar.mipTableSection
+                print "Error: issue with stid for "+v.label+cvar.mipTableSection
                 shape="?st"
             shapes.append(shape)
     if not shapes : shape="??"
@@ -1351,4 +1475,161 @@ def highest_rank(mipvarlabel):
 
     return shape
 
+def split_frequency_for_variable(svar, table, lset):
+    """
+    Compute variable level split_freq and returns it as a string
 
+    Method : if shape is basic, compute period using field size and a
+    parameter from lset indicating max filesize, with some smart
+    rounding.  Otherwise, use a fixed value which depends on shape, 
+    with a default value
+
+    """
+    max_size=lset.get("max_file_size_in_floats",500*1.e6)
+    global sc
+    size=field_size(svar, sc.mcfg)
+    freq=table2freq[table][1]
+    if (size != 0 ) :
+        # Try by years first
+        size_per_year=size*timesteps_per_freq_and_duration(freq,365)
+        nbyears=max_size/float(size_per_year)
+        if nbyears > 1. :
+            if nbyears < 10:
+                return("1y")
+            elif nbyears < 50 :
+                return("10y")
+            elif nbyears < 100 :
+                return("50y")
+            elif nbyears < 200 :
+                return("100y")
+            else :
+                return("200y")
+        else: 
+            # Try by month
+            size_per_month=size*timesteps_per_freq_and_duration(freq,31)
+            nbmonths=max_size/float(size_per_month)
+            if nbmonths > 1. :
+                return("1mo")
+            else:
+                # Try by day
+                size_per_day=size*timesteps_per_freq_and_duration(freq,1)
+                nbdays=max_size/float(size_per_day)
+                if nbdays > 1. :
+                    return("1d")
+                else:
+                    raise(dr2xml_error("No way to put even a single day of data in %g for frequency %s, var %s, table %s"%\
+                                       (max_size,freq,svar.label,table)))
+                
+
+def timesteps_per_freq_and_duration(freq,nbdays):
+    duration=0.
+    if freq=="3hr" : duration=1./8
+    elif freq=="6hr" : duration=1./4
+    elif freq=="day" : duration=1.
+    elif freq=="1hr" : duration=1./24
+    elif freq=="mon" : duration=31.
+    elif freq=="yr" : duration=365.
+    #
+    if duration != 0. : return float(nbdays)/duration
+    elif freq=="fx" : return 1.
+    elif freq=="monClim" : return 12.
+    elif freq=="dayClim" : return 24.
+
+    
+def field_size(svar, mcfg):
+    # ['nho','nlo','nha','nla','nlas','nls','nh1']  /  nz = sc.mcfg['nlo']
+    nb_cosp_sites=129 
+    nb_curtain_sites=1000 # TBD : better estimate of 'curtain' size
+    # TBD : better estimates of size for atmosphere/ocean zonal means, and ocean transects 
+    nb_lat=mcfg['nh1'] 
+    nb_lat_ocean=mcfg['nh1']
+    ocean_transect_size=mcfg['nh1'] 
+    #
+    siz=0
+    s=svar.spatial_shp
+    if ( s == "XY-A" ): #Global field on model atmosphere levels
+        siz=mcfg['nla']*mcfg['nha']
+    elif ( s == "XY-AH" ): #Global field on model atmosphere half-levels
+        siz=(mcfg['nla']+1)*mcfg['nha']
+    elif ( s == "XY-P7T" ): #Global field (7 pressure tropospheric levels)
+        siz=7*mcfg['nha']
+    elif ( s[0:4] == "XY-P" ): #Global field (pressure levels)
+        siz=int(s[4:])*mcfg['nha']
+    elif ( s[0:4] == "XY-H" ): #Global field (altitudes)
+        siz=int(s[4:])*mcfg['nha']
+
+    elif ( s == "S-AH" ): #Atmospheric profiles (half levels) at specified sites
+        siz=(mcfg['nla']+1)*nb_cosp_sites
+    elif ( s == "S-A" ): #Atmospheric profiles at specified sites
+        siz=mcfg['nla']*nb_cosp_sites
+    elif ( s == "S-na" ): #Site (129 specified sites)
+        siz=nb_cosp_sites
+
+    elif ( s == "L-na" ): #COSP curtain
+        siz=nb_curtain_sites        
+    elif ( s == "L-H40" ): #Site profile (at 40 altitudes)
+        siz=40*nb_curtain_sites        
+
+    elif ( s == "Y-P19") : #Atmospheric Zonal Mean (on 19 pressure levels)
+        siz=nblat*19
+    elif ( s == "Y-P39") : #Atmospheric Zonal Mean (on 39 pressure levels)
+        siz=nblat*39
+    elif ( s == "Y-A" ): #Zonal mean (on model levels)
+        siz=nblat*mcfg['nla']
+    elif ( s == "Y-na" ): #Zonal mean (on surface)
+        siz=nblat
+    elif ( s == "na-A" ): #Atmospheric profile (model levels)
+        siz=mcfg['nla']
+
+    elif ( s == "XY-S" ): #Global field on soil levels
+        siz=mcfg['nls']*mcfg['nha']
+    
+    elif ( s == "XY-O" ): #Global ocean field on model levels
+        siz=mcfg['nlo']*mcfg['nho']
+
+    elif ( s == "XY-na" ): #Global field (single level)
+        siz=mcfg['nha']
+        if svar.modeling_realm in [ 'ocean', 'seaIce', 'ocean seaIce', 'ocnBgchem', 'seaIce ocean' ] : 
+            siz=mcfg['nho']
+        
+    elif ( s == "YB-R" ): #Ocean Basin Meridional Section (on density surfaces)
+        siz=mcfg['nlo']*nb_lat_ocean
+    elif ( s == "YB-O" ): #Ocean Basin Meridional Section
+        siz=mcfg['nlo']*nb_lat_ocean
+    elif ( s == "YB-na" ): #Ocean Basin Zonal Mean
+        siz=nb_lat_ocean
+
+    elif ( s == "TR-na" ): #Ocean Transect
+        siz=ocean_transect_size
+    elif ( s == "TRS-na" ): #Sea-ice ocean transect
+        siz=ocean_transect_size
+
+    elif ( s == "na-na" ): #Global mean/constant
+        siz=1
+
+    return siz
+
+def make_source_string(sources,source_id):
+    """ 
+    From the dic of sources in CMIP6-CV, Creates the string representation of a 
+    given model (source_id) according to doc on global_file_attributes, so :
+
+    <modified source_id> (<year>): atmosphere: <model_name> (<technical_name>, <resolution_and_levels>); ocean: <model_name> (<technical_name>, <resolution_and_levels>); sea_ice: <model_name> (<technical_name>); land: <model_name> (<technical_name>); aerosol: <model_name> (<technical_name>); atmospheric_chemistry <model_name> (<technical_name>); ocean_biogeochemistry <model_name> (<technical_name>); land_ice <model_name> (<technical_name>);
+
+    """
+    source=sources[source_id] 
+    rep=source_id+"("+source['year']+")"+\
+         ": atmosphere: "+source["atmosphere"]+\
+         "; ocean: " + source["ocean"]+\
+         "; sea_ice: "+source["sea_ice"]+\
+         "; land: "+source["land"]+\
+         "; aerosol: "+source["aerosol"]+\
+         "; atmospheric_chemistry: "+source["atmospheric_chemistry"]+\
+         "; ocean_biogeochemistry: "+source["ocean_biogeochemistry"]+";"
+    return rep
+
+class dr2xml_error(Exception):
+    def __init__(self, valeur):
+        self.valeur = valeur
+    def __str__(self):
+        return `self.valeur`

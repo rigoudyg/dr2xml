@@ -6,6 +6,13 @@
        while Xios can do that. So, we tell that in Xios syntax
   -->
   
+  <field id="DX_tasmax" field_ref="DX_tas" operation="maximum" freq_op="1d"> @this </field>
+  <field id="DX_tasmin" field_ref="DX_tas" operation="minimum" freq_op="1d"> @this </field>
+  <field id="DX_hursmax" field_ref="DX_hurs" operation="maximum" freq_op="1d"> @this </field>
+  <field id="DX_sfcWindmax" field_ref="DX_sfcWind" operation="maximum" freq_op="1d"> @this </field>
+  <field id="DX_maxpblz" field_ref="DX_pblz" operation="maximum" freq_op="1d"> @this </field>
+  <field id="DX_minpblz" field_ref="DX_pblz" operation="minimum" freq_op="1d"> @this </field>
+
   <field id="DX_zg1000" field_ref="DX_zg" axis_ref="DX_p1000" />
 
   <field id="DX_ta850" field_ref="DX_ta" axis_ref="DX_p850" />
