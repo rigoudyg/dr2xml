@@ -102,7 +102,7 @@
    <field id="CMIP6_osaltpmdiff"   field_ref="dummy_XYO"        /> <!-- P1 (kg m-2 s-1) osaltpmdiff : Tendency of salt content for a grid cell from parameterized mesoscale eddy diffusion. -->
    <field id="CMIP6_osaltpsmadvect" field_ref="dummy_XYO"        /> <!-- P1 (kg m-2 s-1) osaltpsmadvect : Tendency of salt content for a grid cell from parameterized submesoscale eddy advection. -->
    <field id="CMIP6_osaltrmadvect" field_ref="dummy_XYO"        /> <!-- P1 (kg m-2 s-1) osaltrmadvect : Tendency of Sea Water Salinity Expressed as Salt Content due to Residual Mean Advection -->
-   <field id="CMIP6_osalttend"     field_ref="dummy_XYO"        /> <!-- P1 (kg m-2 s-1) osalttend : Tendency of salt content for a grid cell from all processes. -->
+   <field id="CMIP6_osalttend"     field_ref="dummy_XYO"        /> <!-- P2 (kg m-2 s-1) osalttend : Tendency of salt content for a grid cell from all processes. -->
    <field id="CMIP6_pabigthetao"   field_ref="dummy_XYO"        /> <!-- P1 (degC) pabigthetao : Sea Water Added Conservative Temperature -->
    <field id="CMIP6_pathetao"      field_ref="dummy_XYO"        /> <!-- P1 (degC) pathetao :  -->
    <field id="CMIP6_pbo"           field_ref="dummy_XY"         /> <!-- P1 (Pa) sea_water_pressure_at_sea_floor : Sea Water Pressure at Sea floor -->

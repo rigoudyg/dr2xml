@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*- coding: iso-8859-15 -*-
 """
 In the context of Climate Model Intercomparison Projects (CMIP) :
 
@@ -8,33 +10,37 @@ A few functions for processing
 to generate a set of xml-syntax files used by XIOS (see https://forge.ipsl.jussieu.fr/ioserver/) 
 for outputing geophysical variable fields 
 
-First version (0.8) : S.Senesi (CNRM) - sept 2016
+First version (0.8) : S.Sénési (CNRM) - sept 2016
 
 Changes :
   oct 2016 - Marie-Pierre Moine (CERFACS) - handle 'home' Data Request in addition
-  dec 2016 - S.Senesi (CNRM) - improve robustness
+  dec 2016 - S.Sénési (CNRM) - improve robustness
+  jan 2017 - S.Sénési (CNRM) - handle split_freq; go single-var files; adapt to new DRS ...
 
 """
 ####################################
 # Pre-requisites 
 ####################################
 
-# Next package retrieved using
-#    svn co http://proj.badc.rl.ac.uk/svn/exarch/CMIP6dreq/tags/01.beta.43
-# (and must include 01.beta.43/dreqPy in PYTHONPATH)
+# 1- CMIP6 Data Request package retrieved using
+#    svn co http://proj.badc.rl.ac.uk/svn/exarch/CMIP6dreq/tags/01.00.01
+#    (and must include 01.00.01/dreqPy in PYTHONPATH)
 from scope import dreqQuery
 import dreq
 
-# You will also need a local copy of CMIP6 Controled vocabulary (available from 
-# https://github.com/WCRP-CMIP/CMIP6_CVs). You will provide its path as argument to  
-# functions defined here
+# 2- CMIP6 Controled Vocabulary (available from 
+# https://github.com/WCRP-CMIP/CMIP6_CVs). You will provide its path 
+# as argument to functions defined here
 
-#End of 'special' pre-requisites
+# 3- XIOS release must be 1047 or above (to be fed with the outputs)
+#  see https://forge.ipsl.jussieu.fr/ioserver/wiki
+
+####################################
+#End of pre-requisites
 ####################################
 
 from datetime import datetime
 import json
-from uuid import uuid4
 import collections
 import sys,os
 import xml.etree.ElementTree as ET
@@ -46,13 +52,6 @@ from table2freq import table2freq, table2splitfreq
 
 dq = dreq.loadDreq()
 print dq.version
-
-def build_axis_definitions():
-    """ 
-    Build a dict of axis definitions 
-    """
-    for g in dq.coll['grids'].items :
-        pass
 
 """ An example/template  of settings for a lab and a model"""
 example_lab_and_model_settings={
@@ -111,6 +110,18 @@ example_lab_and_model_settings={
     "sizes"  : [259200,60,64800,40,20,5,100],
     # What is the maximum size of generated files, in number of float values
     "max_file_size_in_floats" : 500.*1.e+6 ,
+    # Grids : CMIP6 name, name_of_target_domain, CMIP6-std resolution, and description
+    "grids" : { 
+      "LR"    : {
+        "arpsfx" : [ "gr","complete" , "250 km", "data regridded to a T127 gaussian grid (128x256 latlon) from a native atmosphere T127l reduced gaussian grid"] ,
+          "nemo" : [ "gn", ""        , "100km" , "native ocean tri-polar grid with 105 k ocean cells" ],},
+      "HR"    : {
+        "arpsfx" : [ "gr","completeHR", "50 km", "data regridded to a 359 gaussian grid (180x360 latlon) from a native atmosphere T359l reduced gaussian grid"] ,
+          "nemo" : [ "gn", ""         , "25km" , "native ocean tri-polar grid with 1.47 M ocean cells" ],},
+    },
+    'grid_choice' : { "CNRM-CM6-1" : "LR", "CNRM-CM6-1-HR" : "HR",
+                      "CNRM-ESM2-1": "LR"  , "CNRM-ESM2-1-HR": "HR" },
+
 }
 
 
@@ -153,11 +164,10 @@ example_simulation_settings={
     # All about the parent experiment and branching scheme
     "parent_experiment_id" : "piControl", # omit or set to 'no parent' if not applicable
                                           # (remaining parent attributes will be disregarded)
-    "branch_method"        : "standard", # default value='standard' meaning 
-                                         #~ "select a start date" 
-    "branch_time_in_parent": "365.0D0", # a double precision value, in parent time units, 
-    "branch_time_in_child" : "0.0D0", # a double precision value, in child time units, 
-    #'parent_time_units'    : "" #in case it is not the same as child time units
+    "branch_method"        : "standard", # default value='standard' meaning ~ "select a start date" 
+    "branch_time_in_child" : "0.0D0",   # a double precision value in child time units (days), used if applicable
+    "branch_time_in_parent": "365.0D0", # a double precision value, in days, used if applicable 
+    'parent_time_ref_year' : 1850, # default=1850. 
     #'parent_variant_label' :""  #Default to 'same as child'. Other cases should be exceptional
     #"parent_mip_era"       : 'CMIP5'   # only in special cases (as e.g. PMIP warm 
                                         #start from CMIP5/PMIP3 experiment)
@@ -318,8 +328,8 @@ def RequestItem_applies_for_exp_and_year(ri,experiment,year,debug=False):
                     if (debug) :  print " OK for experiment based on mip"+mip_id.label,
                     relevant=True
     else :
-        if (debug)  :
-            print "%20s"%'Error on item_exp._h.label=%s|'%item_exp._h.label
+        #if (debug)  :
+        print "%20s"%'Error %s for %s'%(item_exp._h.label,`ri`)
         #raise(dr2xml_error("%20s"%'Other case , label=%s|'%item_exp._h.label))
     if relevant :
         if 'tslice' in ri.__dict__ :
@@ -494,13 +504,14 @@ def complement_svar_using_cmorvar(svar,cmvar):
         svar.stdname = mipvar.label
 
 
-def write_xios_file_def(cmvs,table, lset,sset, out,cvspath,field_defs,axis_defs,
-                        domain_defs,dummies,pingvars=None,prefix="") :
+def write_xios_file_def(cmv,table, lset,sset, out,cvspath,field_defs,axis_defs,
+                        domain_defs,dummies,skipped_vars,
+                        pingvars=None,prefix="",context="") :
     """ 
     Generate an XIOS file_def entry in out for :
       - a dict for laboratory settings 
       - a dict of simulation settings 
-      - a list 'cmvs' of CMOR variables DR ids, 
+      - a 'simplifed CMORvar' cmv
       - which all belong to given table
       - a path 'cvs' for Controlled Vocabulary
       
@@ -510,6 +521,17 @@ def write_xios_file_def(cmvs,table, lset,sset, out,cvspath,field_defs,axis_defs,
     in the same order than in WIP document; last, field-level meatdate are written
     """
     #
+    # We use a simple convention for variable names in ping files : 
+    if cmv.type=='perso' : alias=cmv.label
+    else:
+        alias=lset["ping_variables_prefix"]+cmv.label
+        if pingvars is not None :
+            if not alias in pingvars :
+                #print "Note : skipping ping variable %15s, which has no valid field_ref"%sv.label
+                skipped_vars.append(cmv.label)
+                return
+    #
+    source_id=lset['source_id']
     experiment_id=sset['experiment_id']
     # Variant matters
     realization_index=sset.get('realization_index',1) 
@@ -519,16 +541,24 @@ def write_xios_file_def(cmvs,table, lset,sset, out,cvspath,field_defs,axis_defs,
     variant_label="r%di%dp%df%d"%(realization_index,initialization_index,\
                                   physics_index,forcing_index)
     #
-    # WIP Draft on filenames - july 2016 
-    # <variable_id>_<table_id>_<experiment_id >_<source_id>_<member_id>_<grid_label>[_<time_range>].nc
+    # WIP doc v 6.2.0 - dec 2016 
+    # <variable_id>_<table_id>_<source_id>_<experiment_id >_<member_id>_<grid_label>[_<time_range>].nc
     member_id=variant_label
     sub_experiment_id=sset.get('sub_experiment_id','none')
-    if sub_experiment_id != 'none':
-        member_id = sub_experiment_id+"-"+member_id
-    grid_label="TBD" #TBD
+    if sub_experiment_id != 'none': member_id = sub_experiment_id+"-"+member_id
+    #
+    # Grid - for now handling one single output grid, either native or another one
+    grid_choice=lset['grid_choice'][source_id]
+    (grid_label,remap_domain,grid_resolution,grid)=lset['grids'][grid_choice][context]
+    if table in [ 'AERMonZ',' EmonZ', 'EdayZ' ] : grid_label+="z"
+    if "Ant" in table : grid_label+="a"
+    if "Gre" in table : grid_label+="g"
+    # TBD : grid and grid_label actually may even depend on the variable !!
+    # TBD : change grid_label depending on shape (sites, transects)
+    #
     time_range="%start_date%_%end_date%" # XIOS syntax
-    filename="%s%s_%s_%s_%s_%s_%s"%\
-               (prefix,table, experiment_id,lset['source_id'], member_id,grid_label,time_range)
+    filename="%s%s_%s_%s_%s_%s_%s_%s"%\
+               (prefix,cmv.label,table,source_id,experiment_id,member_id,grid_label,time_range)
 
     # WIP Draft 14 july 2016
     activity_id=sset.get('activity_id','CMIP')
@@ -536,8 +566,14 @@ def write_xios_file_def(cmvs,table, lset,sset, out,cvspath,field_defs,axis_defs,
         freq=table2freq[table] 
     except:
         raise(dr2xml_error("Issue : no frequency known in table2freq for table %s"%table))
-    out.write('<file name="%s" output_freq="%s" append="true" split_freq="%s" timeseries="exclusive" >\n'%\
-              (filename,freq[0],table2splitfreq[table]))
+    split_freq=split_frequency_for_variable(cmv, table, lset)  
+    out.write(' <file name="%s" output_freq="%s" append="true" split_freq="%s" '%\
+              (filename,freq[0],split_freq))
+    #out.write('timeseries="exclusive" >\n')
+    out.write(' time_counter="record" time_counter_name="time"')
+    out.write(' time_stamp_name="creation_date" time_stamp_format="%Y-%b-%dT%H:%M:%SZ"')
+    out.write(' uuid_name="uuid" uuid_format="hdl:21.14100/%uuid%"')
+    out.write(' >\n')
     out.write('  <variable name="project_id" type="string" > %s/%s </variable>\n'%(
                    sset.get('project',"CMIP6"),activity_id))
     #
@@ -569,11 +605,10 @@ def write_xios_file_def(cmvs,table, lset,sset, out,cvspath,field_defs,axis_defs,
     wr('activity_id',activity_id)
     contact=sset.get('contact',lset.get('contact',None))
     if contact and contact is not "" : wr('contact',contact) 
-    conventions="CF-1.7 CMIP-6.0" ;     wr('conventions',conventions) 
+    conventions="CF-1.7 CMIP-6.0" ;     wr('Conventions',conventions) 
     # YYYY-MM-DDTHH:MM:SSZ
-    creation_date=datetime.utcnow().isoformat()[0:-7]+"Z" ; wr('creation_date',creation_date) 
-    # TBC : assume data_specs_version attributes is equal to dq.version
-    wr('data_specs_version',dq.version)
+    #creation_date=datetime.utcnow().isoformat()[0:-7]+"Z" ;
+    wr('data_specs_version',dq.version) # TBC : assume data_specs_version == dq.version
     #
     with open(cvspath+"CMIP6_experiment_id.json","r") as json_fp :
         CMIP6_experiments=json.loads(json_fp.read())['experiment_id']
@@ -581,8 +616,7 @@ def write_xios_file_def(cmvs,table, lset,sset, out,cvspath,field_defs,axis_defs,
             exp_entry=CMIP6_experiments[sset['experiment_id']]
             experiment=exp_entry['experiment']
         except :
-            experiment="Issue"
-
+            raise(dr2xml_error("Issue getting experiment description for %20s"%sset['experiment_id']))
     wr('experiment',experiment)
     wr('experiment_id',experiment_id)
     # 
@@ -608,9 +642,7 @@ def write_xios_file_def(cmvs,table, lset,sset, out,cvspath,field_defs,axis_defs,
         mip_era,institution_id,source_id,experiment_id,sub_experiment_id,variant_label)
     wr('further_info_url',further_info_url)
     #
-    wr('grid','TBD') #TBD - depend du model et du realm, donc de la variable
-    wr('grid_label','TBD') #TBD - -d - gn pour Nemo, gr pour Arpege
-    wr('grid_resolution','TBD') #TBD - id
+    wr('grid',grid) ; wr('grid_label',grid_label) ; wr('grid_resolution',grid_resolution)    
     wr('history',sset,'none') 
     wr("initialization_index",initialization_index)
     wr("institution_id",institution_id)
@@ -621,27 +653,18 @@ def write_xios_file_def(cmvs,table, lset,sset, out,cvspath,field_defs,axis_defs,
             try:
                 inst=json.loads(json_fp.read())['institution_id'][institution_id]
             except :
-                print "Institution_id for %s not found in CMIP6_CV at %s"%(institution,cvspath)
-                sys.exit()
+                raise(dr2xml_error("Institution_id for %s not found in CMIP6_CV at %s"%(institution,cvspath)))
     wr("institution",inst)
     #
-    license="CMIP6 model data produced by %s is licensed under a Creative Commons Attribution"\
-        %inst+\
-     "'Share Alike' 4.0 International License (http://creativecommons.org/licenses/by/4.0/). "+\
-      "Use of the data should be acknowledged following guidelines found at "+\
-      "https://pcmdi.llnl.gov/home/CMIP6/citation.html."+\
-      "Further information about this data, including some limitations, can be found "+\
-      "via the further_info_url"+\
-      "(recorded as a global attribute in data files)[ and at %s].  "%lset["info_url"]+\
-      "The data producers and data providers make no warranty, either express or implied,, "+\
-      " including but not limited to, warranties of merchantability and fitness for a "+\
-      "particular purpose. All liabilities arising"+\
-     " from the supply of the information (including any liability arising in negligence) "+\
-     "are excluded to the fullest extent permitted by law."
+    with open(cvspath+"CMIP6_license.json","r") as json_fp :
+        license=json.loads(json_fp.read())['license'][0]
+    license=license.replace("<Your Centre Name>",inst)
+    license=license.replace("<some URL maintained by modeling group>",lset["info_url"])
     wr("license",license)
     wr('mip_era',mip_era)
     parent_experiment_id=sset.get('parent_experiment_id',None)
-    if parent_experiment_id and parent_experiment_id != 'no_parent' :
+    if parent_experiment_id and parent_experiment_id != 'no_parent'\
+        and parent_experiment_id != 'no parent' :
         parent_activity_id=sset.get('parent_activity_id','CMIP')
         wr('parent_activity_id',parent_activity_id)
         wr("parent_experiment_id",sset); 
@@ -652,7 +675,7 @@ def write_xios_file_def(cmvs,table, lset,sset, out,cvspath,field_defs,axis_defs,
         wr('parent_source_id',parent_source_id)
         # TBX : syntaxe XIOS pour designer le time units de la simu courante
         parent_time_ref_year=sset.get('parent_time_ref_year',"1850") 
-        parent_time_units="seconds since %s-01-01 00:00:00"%parent_time_ref_year
+        parent_time_units="days since %s-01-01 00:00:00"%parent_time_ref_year
         wr("parent_time_units",parent_time_units)
         parent_variant_label=sset.get('parent_variant_label',variant_label) 
         wr('parent_variant_label',parent_variant_label)
@@ -662,6 +685,7 @@ def write_xios_file_def(cmvs,table, lset,sset, out,cvspath,field_defs,axis_defs,
     wr("physics_index",physics_index) 
     wr('product','output')
     wr("realization_index",realization_index) 
+    wr('realm',cmv.modeling_realm)
     wr('references',lset) 
     #
     try:
@@ -674,13 +698,6 @@ def write_xios_file_def(cmvs,table, lset,sset, out,cvspath,field_defs,axis_defs,
             source=lset['source']
         else:
             raise(dr2xml_error("source for %s not found in CMIP6_CV at %s, nor in lset"%(source_id,cvspath)))
-    #if 'source' in sset :
-    #    source=sset['source']
-    #else:
-    #    if 'source' in lset :
-    #        source=lset['source']
-    #    else:
-    #        raise dr2xml_error("No value found for 'source' - Check inputs")
     wr('source',source) 
     wr('source_id',source_id)
     if 'source_type' in sset :
@@ -702,26 +719,28 @@ def write_xios_file_def(cmvs,table, lset,sset, out,cvspath,field_defs,axis_defs,
     wr("table_id",table)
     wr("title","%s model output prepared for %s / %s %s"%(\
         source_id,sset.get('project',"CMIP6"),activity_id,experiment_id))
-    wr("tracking_id","hdl:21.14100/"+uuid4().get_urn().split(":")[2]) 
-    #variable_id # decline par variable
+    wr("tracking_id","hdl:21.14100/"+uuid4().get_urn().split(":")[2])  # TBD : Xios should handle tracking_id
+    wr("variable_id",cmv.label)
     wr("variant_info",sset,"")
     wr("variant_label",variant_label)
     #
     end_field_defs=dict()
-    for cmv in cmvs : 
-        create_xios_field_ref(cmv,table,lset,sset,end_field_defs,field_defs,axis_defs,
-                              domain_defs,dummies,pingvars)
+    #for cmv in cmvs : 
+    create_xios_field_ref(cmv,alias,table,lset,sset,end_field_defs,field_defs,axis_defs,
+                              domain_defs,dummies,pingvars,context,remap_domain)
+    if len(end_field_defs.keys())==0 :
+        raise dr2xml_error("No field ref for %s in %s"%(cmv.label,table))
     # Create a field group for each shape
     for shape in end_field_defs :
         dom="" ;
-        if shape : dom=domain_ref="%s"%shape
+        if shape : dom='domain_ref="%s"'%shape
         out.write('<field_group %s expr="@this" >\n'%dom)
         for entry in end_field_defs[shape] : out.write(entry)
         out.write('</field_group >\n')
     out.write('</file>\n\n')
 
-def create_xios_field_ref(sv,table,lset,sset,end_field_defs,field_defs,axis_defs,
-                          domain_defs,dummies,pingvars=None) :
+def create_xios_field_ref(sv,alias,table,lset,sset,end_field_defs,field_defs,axis_defs,
+                          domain_defs,dummies,pingvars=None, context="",remap_domain="") :
     """
     Create a field_ref for a simplified variable object sv (with
     lab prefix for the variable name) and store it in end_field_defs
@@ -743,14 +762,6 @@ def create_xios_field_ref(sv,table,lset,sset,end_field_defs,field_defs,axis_defs
     # The preferred order of operation is : vertical interp (which is time-dependant), 
     # time-averaging, horizontal operations (using expr=@this)
 
-    # We use a simple convention for variable names in ping files : 
-    if sv.type=='perso' : alias=sv.label
-    else:
-        alias=lset["ping_variables_prefix"]+sv.label
-        if pingvars is not None :
-            if not alias in pingvars :
-                print "Note : skipping ping variable %15s, which has no valid field_ref"%sv.label
-                return
 
     # nextvar is the field name provided as output of the last operation currently defined
     nextvar=alias 
@@ -761,12 +772,13 @@ def create_xios_field_ref(sv,table,lset,sset,end_field_defs,field_defs,axis_defs
     # Proceed with vertical interpolation if needed
     ssh=sv.spatial_shp
     prefix=lset["ping_variables_prefix"]
+    # TBD Should handle singletons here
+    # TBD Should ensure that various additionnal dims are duly documented by model (e.g. tau)
     if ssh[0:4] in ['XY-H','XY-P'] or ssh[0:3] == 'Y-P' :
         dimids=dq.inx.uid[sv.struct.spid].dimids
         for dimid in dimids :
             d=dq.inx.uid[dimid]
-            if isVertInterpolationDim(d) :
-                #ex: alt40
+            if isVertDim(d) :
                 furthervar=nextvar+"_"+d.label
                 if not furthervar in pingvars :
                     # Construct an axis for interpolating to this dimension
@@ -774,7 +786,7 @@ def create_xios_field_ref(sv,table,lset,sset,end_field_defs,field_defs,axis_defs
                     # Construct a field def for the interpolated variable
                     field_defs[furthervar]='<field id="%-25s field_ref="%-25s axis_ref="%-10s/>'\
                         %(furthervar+'"',nextvar+'"',d.label+'"')
-                        #%(furthervar+'"',nextvar+'"',prefix+d.label+'"')
+                    #%(furthervar+'"',nextvar+'"',prefix+d.label+'"')
                 nextvar=furthervar
                 #TBD what to do for singleton dimension ?
      # Analyze 'outermost' time cell_method and translate to 'operation'
@@ -795,6 +807,7 @@ def create_xios_field_ref(sv,table,lset,sset,end_field_defs,field_defs,axis_defs
     # Compute domain name, define it if needed
     domain_ref=None
     if ssh[0:2] == 'Y-' : #zonal mean and atm zonal mean on pressure levels
+        # TBD should remap before zona mean
         domain_ref="zonal_mean"
         domain_defs[domain_ref]='<domain id="%s"/>'%domain_ref
     elif ssh[0:2] == 'S-' : #COSP sites; cas S-na, S-A, S-AH
@@ -806,7 +819,7 @@ def create_xios_field_ref(sv,table,lset,sset,end_field_defs,field_defs,axis_defs
     elif ssh == 'TR-na' or ssh == 'TRS-na' : #transects,   oce or SI
         pass
     elif ssh[0:3] == 'XY-'  : # includes 'XY-AH' : model half-levels
-        pass
+        if remap_domain : domain_ref=remap_domain
     elif ssh[0:3] == 'YB-'  : #basin zonal mean or section
         pass
     elif ssh      == 'na-na'  : # global means or constants
@@ -818,9 +831,7 @@ def create_xios_field_ref(sv,table,lset,sset,end_field_defs,field_defs,axis_defs
     #else          : domain_op=""
     domain_op="" # Rather put remapping at group level, for computing time-average before reampping
     #
-    split_freq=split_frequency_for_variable(sv, table, lset)  
-    rep='  <field field_ref="%s" name="%s" ts_enabled="true" ts_split_freq="%s" '%\
-              ( nextvar,sv.label,split_freq)
+    rep='  <field field_ref="%s" name="%s" ts_enabled="true" '% ( nextvar,sv.label)
     rep+=' operation="%s" detect_missing_value="%s"%s'% ( operation,detect_missing,domain_op)
     rep+=' cell_methods="%s" cell_methods_mode="overwrite"'% sv.cell_methods
     rep+='>\n'
@@ -838,8 +849,8 @@ def create_xios_field_ref(sv,table,lset,sset,end_field_defs,field_defs,axis_defs
             comment=sset['comments'][sv.label] 
     if comment : rep+=wrv('comment',comment) #TBI 
     #
-    rep+=wrv('realm',sv.modeling_realm) 
-    rep+=wrv('variable_id',sv.label)
+    #rep+=wrv('realm',sv.modeling_realm)  # NO : at file/global level
+    #rep+=wrv('variable_id',sv.label) # NO : at file/global level
     rep+=wrv("standard_name",sv.stdname)
     desc=sv.description
     if desc : desc=desc.replace(">","").replace("<","")
@@ -878,6 +889,7 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
     # Extract CMOR variables for the experiment and year and lab settings
     mip_vars_list=select_CMORvars_for_lab(lset, sset['experiment_id'], \
                                             year,printout=printout)
+    skipped_vars=[]
     if lset['listof_home_vars']:
         # Read HOME variables
         home_vars_list=read_homeVars_list(lset['listof_home_vars'],sset['experiment_id'],lset['mips'])
@@ -1017,9 +1029,11 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
         domain_defs=dict()
         #for table in ['day'] :    
         out.write('\n<file_definition type="one_file" enabled="true" > \n')
-        for table in cmvs_pertable :  
-            write_xios_file_def(cmvs_pertable[table],table, lset,sset,out,cvs_path,
-                                field_defs,axis_defs,domain_defs,dummies,pingvars,prefix)
+        for table in cmvs_pertable :
+            for cmv in cmvs_pertable[table] :
+                write_xios_file_def(cmv,table, lset,sset,out,cvs_path,
+                                field_defs,axis_defs,domain_defs,dummies,skipped_vars,
+                                pingvars,prefix,context)
         out.write('\n</file_definition> \n')
         #filename=dirname+"fielddefs_%s.xml"%context
         #with open(filename,"w") as out :
@@ -1040,6 +1054,7 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
         out.write('</context> \n')
     if printout :
         print "\nfile_def written as %s"%filename
+    if skipped_vars : print "Skipped variables are "+`skipped_vars`
 
 
 
@@ -1097,14 +1112,14 @@ def create_axis_def(dim_name_or_obj,prefix,field_defs):
     rep+='\n\t\t<interpolate_axis type="polynomial" order="1" coordinate="%s"/>\n\t</axis>'%coordname
     return rep
 
-def isVertInterpolationDim(dim):
+def isVertDim(dim):
     """
     Returns True if dim represents a dimension for which we want an Xios interpolation 
     For now, a very simple logics for interpolated vertical dimension identification:
     """
     name=dq.inx.uid[dim.standardName]
-    return name.uid=='air_pressure' or name.uid=='altitude'
-
+    return  (name.uid=='air_pressure' or name.uid=='altitude')
+    
 def analyze_cell_time_method(cm,label,table):
     """
     Depending on cell method string CM, tells which time operation
@@ -1540,7 +1555,7 @@ def field_size(svar, mcfg):
     # ['nho','nlo','nha','nla','nlas','nls','nh1']  /  nz = sc.mcfg['nlo']
     nb_cosp_sites=129 
     nb_curtain_sites=1000 # TBD : better estimate of 'curtain' size
-    # TBD : better estimates of size for atmosphere/ocean zonal means, and ocean transects 
+    # TBD : better size estimates for atmosphere/ocean zonal means, and ocean transects 
     nb_lat=mcfg['nh1'] 
     nb_lat_ocean=mcfg['nh1']
     ocean_transect_size=mcfg['nh1'] 
@@ -1633,3 +1648,10 @@ class dr2xml_error(Exception):
         self.valeur = valeur
     def __str__(self):
         return `self.valeur`
+
+def build_axis_definitions():
+    """ 
+    Build a dict of axis definitions 
+    """
+    for g in dq.coll['grids'].items :
+        pass

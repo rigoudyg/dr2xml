@@ -281,7 +281,7 @@
    <field id="CMIP6_topg_isf"      field_ref="dummy_XY"         /> <!-- P2 (m) bedrock_altitude : The bedrock topography beneath the land ice -->
    <field id="CMIP6_tpf"           field_ref="dummy_XY"         /> <!-- P3 (m) permafrost_layer_thickness : The mean thickness of the permafrost layer in the land portion of the grid cell.  Reported as zero in permafrost-free regions. -->
    <field id="CMIP6_tran"          field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) transpiration_flux : Transpiration (may include dew formation as a negative flux). -->
-   <field id="CMIP6_treeFrac"      field_ref="dummy_XY"         /> <!-- P2 (%) area_fraction : Percentage of entire grid cell  that is covered by trees. -->
+   <field id="CMIP6_treeFrac"      field_ref="dummy_XY"         /> <!-- P1 (%) area_fraction : Percentage of entire grid cell  that is covered by trees. -->
    <field id="CMIP6_treeFracBdlDcd" field_ref="dummy_XY"         /> <!-- P1 (%) treeFracBdlDcd : as specified by C4MIP -->
    <field id="CMIP6_treeFracBdlEvg" field_ref="dummy_XY"         /> <!-- P1 (%) treeFracBdlEvg : as specified by C4MIP -->
    <field id="CMIP6_treeFracNdlDcd" field_ref="dummy_XY"         /> <!-- P1 (%) treeFracNdlDcd : as specified by C4MIP -->

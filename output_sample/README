@@ -1,4 +1,6 @@
-A number of comprehensive xml 'ping files' (i.e. adressing all MIPS,
-priority levels and Tiers)
+A number of comprehensive xml 'ping files' templates (i.e. adressing all MIPS,
+priority levels and Tiers). Some of them are single-realm. Some
+(arpsfx, nemo_and_co) address multiple realms
 
-Ar example of dr2xml-generated context definition complementary files
+Examples of dr2xml-generated context definition complementary files,
+which make reference to fields, axis... defined in ping-files

@@ -1,0 +1,47 @@
+#!/bin/bash
+#set -x
+
+# PARAMETRES DE LA SIMULATION
+ni_glo="10" ; nj_glo="10" ; llm="5" ; 
+duration=${1:-1d} ; nb_run=${2:-1} ; ts=${3:-"600s"}
+start_date="1950-01-01 00:00:00"
+
+# PARAMETRES XML
+file_type="one_file"
+
+# PARAMETRES RUN
+nb_client="1" ; nb_server=0
+
+BINS=~/XIOS/XIOS-1028/bin
+CLIENT=$BINS/test_grid.exe
+SERVER=$BINS/xios_server.exe
+
+# MENAGE ET MISE A JOUR DES PARAMETRES
+rm -f *.nc  
+
+sed -i \
+    -e "s:^ *ni_glo *=.*:ni_glo=${ni_glo}:" \
+    -e "s:^ *nj_glo *=.*:nj_glo=${nj_glo}:" \
+    -e "s:^ *llm *=.*:llm=${llm}:" \
+    -e "s:^ *timestep *=.*:timestep=${ts}:" \
+    -e "s:^ *duration *=.*:duration=${duration}:" param.def
+
+for file in $(ls dr2xml_*xml 2>/dev/null) ; do
+    sed -i -e "s:one_file:$file_type:" -e "s:multiple_file:$file_type:" ${file}
+done
+
+args=": -np ${nb_client} $CLIENT" 
+[ $nb_server -ne 0 ] && args+=" : -np ${nb_client} $SERVER" 
+
+# RUN
+
+inidate=$start_date
+listfile=$(ls context*xml)
+for index in `seq 1 $nb_run`; do 
+    echo $index
+    for file in ${listfile}; do  
+	sed -i -e "/calendar/s/\(start_date=\"\)[^\"]*\(\"\)/\1${inidate}\2/" ${file}
+    done    
+    mpirun $args 
+    inidate=$inidate"+"$duration
+done

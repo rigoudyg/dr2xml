@@ -31,7 +31,7 @@
    <field id="CMIP6_cl"            field_ref="dummy_XYA"        /> <!-- P1 (%) cloud_area_fraction_in_atmosphere_layer : Percentage cloud cover, including both large-scale and convective cloud. -->
    <field id="CMIP6_clayFrac"      field_ref="dummy_XY"         /> <!-- P1 (1.0) clayFrac : Clay Fraction -->
    <field id="CMIP6_clc"           field_ref="dummy_XYA"        /> <!-- P1 (%) convective_cloud_area_fraction_in_atmosphere_layer : Include only convective cloud. -->
-   <field id="CMIP6_clcalipso"     field_ref="dummy_XY"         /> <!-- P1 (%) cloud_area_fraction_in_atmosphere_layer : Percentage cloud cover at CALIPSO standard heights. -->
+   <field id="CMIP6_clcalipso"     field_ref="dummy_XYA"        /> <!-- P1 (%) cloud_area_fraction_in_atmosphere_layer : Percentage cloud cover at CALIPSO standard heights. -->
    <field id="CMIP6_clcalipso2"    field_ref="dummy_XYA"        /> <!-- P1 (%) cloud_area_fraction_in_atmosphere_layer : Clouds detected by CALIPSO but below the detectability threshold of CloudSat -->
    <field id="CMIP6_clcalipsoice"  field_ref="dummy_XYA"        /> <!-- P1 (%) ice_cloud_area_fraction_in_atmosphere_layer : CALIPSO ice cloud Fraction -->
    <field id="CMIP6_clcalipsoliq"  field_ref="dummy_XYA"        /> <!-- P1 (%) clcalipsoliq : CALIPSO liquid cloud Fraction -->
@@ -119,7 +119,7 @@
    <field id="CMIP6_hursmin"       field_ref="dummy_XY"         /> <!-- P1 (%) relative_humidity : Daily Minimum Near-Surface Relative Humidity -->
    <field id="CMIP6_hus"           field_ref="dummy_XYA"        /> <!-- P1 (1.0) specific_humidity : Specific Humidity -->
    <field id="CMIP6_hus850"        field_ref="dummy_XY"         /> <!-- P1 (1.0) specific_humidity : unset -->
-   <field id="CMIP6_huss"          field_ref="dummy_XY"         /> <!-- P2 (1.0) specific_humidity : Near-surface (usually, 2 meter) specific humidity. -->
+   <field id="CMIP6_huss"          field_ref="dummy_XY"         /> <!-- P1 (1.0) specific_humidity : Near-surface (usually, 2 meter) specific humidity. -->
    <field id="CMIP6_iareafl"       field_ref="dummy_0d"         /> <!-- P3 (m2) iareafl : Total area of the floating ice shelves (the component of ice sheet that flows over ocean) -->
    <field id="CMIP6_iareagr"       field_ref="dummy_0d"         /> <!-- P3 (m2) iareagr : Total area of the grounded ice sheets (the component of ice sheet resting over bedrock) -->
    <field id="CMIP6_intuadse"      field_ref="dummy_XY"         /> <!-- P1 (1.e6 J m-1 s-1) intuadse : Used in PMIP2 -->
