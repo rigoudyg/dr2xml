@@ -462,7 +462,7 @@ def complement_svar_using_cmorvar(svar,cmvar):
     svar.positive = cmvar.positive
     [svar.spatial_shp,svar.temporal_shp]=get_SpatialAndTemporal_Shapes(cmvar)
     mipvar = dq.inx.uid[cmvar.vid]
-    svar.label = mipvar.label
+    svar.label = cmvar.label
     svar.label_without_area=mipvar.label
     svar.long_name = mipvar.title
     if mipvar.description :
@@ -719,7 +719,7 @@ def write_xios_file_def(cmv,table, lset,sset, out,cvspath,field_defs,axis_defs,
     wr("table_id",table)
     wr("title","%s model output prepared for %s / %s %s"%(\
         source_id,sset.get('project',"CMIP6"),activity_id,experiment_id))
-    wr("tracking_id","hdl:21.14100/"+uuid4().get_urn().split(":")[2])  # TBD : Xios should handle tracking_id
+    #wr("tracking_id","hdl:21.14100/"+uuid4().get_urn().split(":")[2])  #  Xios now handles tracking_id
     wr("variable_id",cmv.label)
     wr("variant_info",sset,"")
     wr("variant_label",variant_label)
@@ -1030,10 +1030,17 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
         #for table in ['day'] :    
         out.write('\n<file_definition type="one_file" enabled="true" > \n')
         for table in cmvs_pertable :
+            count=dict()
             for cmv in cmvs_pertable[table] :
-                write_xios_file_def(cmv,table, lset,sset,out,cvs_path,
+                if cmv.label not in count :
+                    count[cmv.label]=cmv
+                    write_xios_file_def(cmv,table, lset,sset,out,cvs_path,
                                 field_defs,axis_defs,domain_defs,dummies,skipped_vars,
                                 pingvars,prefix,context)
+                else :
+                    pass
+                    print "Duplicate var in %s : %s %s %s"%(
+                        table, cmv.label, `cmv.temporal_shp`, `count[cmv.label].temporal_shp`) 
         out.write('\n</file_definition> \n')
         #filename=dirname+"fielddefs_%s.xml"%context
         #with open(filename,"w") as out :
