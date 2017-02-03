@@ -1,9 +1,10 @@
 #!/bin/bash
-#set -x
+set -e
 
 # PARAMETRES DE LA SIMULATION
 ni_glo="10" ; nj_glo="10" ; llm="5" ; 
-duration=${1:-1d} ; nb_run=${2:-1} ; ts=${3:-"600s"}
+duration=${1:-1} ; dunits=${2:-d} ; nb_run=${3:-1} ;
+ts=${4:-"600s"} ; sypd=${5:-100000}
 start_date="1950-01-01 00:00:00"
 
 # PARAMETRES XML
@@ -24,7 +25,8 @@ sed -i \
     -e "s:^ *nj_glo *=.*:nj_glo=${nj_glo}:" \
     -e "s:^ *llm *=.*:llm=${llm}:" \
     -e "s:^ *timestep *=.*:timestep=${ts}:" \
-    -e "s:^ *duration *=.*:duration=${duration}:" param.def
+    -e "s:^ *duration *=.*:duration=${duration}${dunits}:" \
+    -e "s:^ *sypd *=.*:sypd=${sypd}:" param.def
 
 for file in $(ls dr2xml_*xml 2>/dev/null) ; do
     sed -i -e "s:one_file:$file_type:" -e "s:multiple_file:$file_type:" ${file}
@@ -36,12 +38,15 @@ args=": -np ${nb_client} $CLIENT"
 # RUN
 
 inidate=$start_date
+dshift=0
 listfile=$(ls context*xml)
-for index in `seq 1 $nb_run`; do 
+for index in `seq 1 $nb_run`; do
     echo $index
     for file in ${listfile}; do  
 	sed -i -e "/calendar/s/\(start_date=\"\)[^\"]*\(\"\)/\1${inidate}\2/" ${file}
     done    
-    mpirun $args 
-    inidate=$inidate"+"$duration
+    mpirun $args > run.out
+    (cat run.out | grep -v "Computing intersections" | grep -v "Computing grads" | grep -v "Remapping" ) || :
+    dshift=$((dshift + duration))
+    inidate=$start_date" + "${dshift}${dunits}
 done
