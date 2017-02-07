@@ -1,7 +1,7 @@
 <field_definition>
   <!-- Variables from DX_field_defs_atmos.xml -->
   
-  <!-- For some variables, the Data Request does not include the necessary
+  <!-- For some variables, the Data Request may miss the necessary
        information on how to derive the variable from other ones,
        while Xios can do that. So, we tell that in Xios syntax
   -->
@@ -10,6 +10,9 @@
   <field id="DX_tasmin" field_ref="DX_tas" operation="minimum" freq_op="1d"> @this </field>
   <field id="DX_hursmax" field_ref="DX_hurs" operation="maximum" freq_op="1d"> @this </field>
   <field id="DX_sfcWindmax" field_ref="DX_sfcWind" operation="maximum" freq_op="1d"> @this </field>
+
+  <field id="DX_pblz"    field_ref="dummy_XY" />
+  <!-- Should set next two to ref=dummy if ref above si dummy -->
   <field id="DX_maxpblz" field_ref="DX_pblz" operation="maximum" freq_op="1d"> @this </field>
   <field id="DX_minpblz" field_ref="DX_pblz" operation="minimum" freq_op="1d"> @this </field>
 
@@ -17,10 +20,13 @@
 
   <field id="DX_ta850" field_ref="DX_ta" axis_ref="DX_p850" />
   <field id="DX_hus850" field_ref="DX_hus" axis_ref="DX_p850" />
-  <field id="DX_rv850" field_ref="DX_rv" axis_ref="DX_p850" />
   <field id="DX_ua850" field_ref="DX_ua" axis_ref="DX_p850" />
   <field id="DX_va850" field_ref="DX_va" axis_ref="DX_p850" />
-  
+
+  <!-- Must decide if relative voorticity is provided as a 3D field or only at 8500 hPa -->
+  <field id="DX_rv"    field_ref="dummy_XYA" />
+  <field id="DX_rv850" field_ref="DX_rv" axis_ref="DX_p850" />
+
   <field id="DX_ta700" field_ref="DX_ta" axis_ref="DX_p700" />
 
   <field id="DX_wap500" field_ref="DX_wap" axis_ref="DX_p500" />

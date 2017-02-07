@@ -1,8 +1,11 @@
 <axis_definition>
-  <axis id="DX_p840" positive="up" n_glo="1" value="(0,0) [84000.]">
+  <axis id="DX_p1000" positive="up" n_glo="1" value="(0,0) [100000.]">
     <interpolate_axis type="polynomial" order="1" coordinate="DX_pfull"/>
   </axis>
   <axis id="DX_p850" positive="up" n_glo="1" value="(0,0) [85000.]">
+    <interpolate_axis type="polynomial" order="1" coordinate="DX_pfull"/>
+  </axis>
+  <axis id="DX_p840" positive="up" n_glo="1" value="(0,0) [84000.]">
     <interpolate_axis type="polynomial" order="1" coordinate="DX_pfull"/>
   </axis>
   <axis id="DX_p700" positive="up" n_glo="1" value="(0,0) [70000.]">

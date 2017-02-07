@@ -133,8 +133,10 @@ PROGRAM test_grid
 
   CALL xios_set_axis_attr("axis_atm",n_glo=llm ,value=lval) ;
 
-  CALL xios_set_domain_attr("domain_atm",ni_glo=ni_glo, nj_glo=nj_glo, ibegin=ibegin, ni=ni,jbegin=jbegin,nj=nj, type='rectilinear')
-  CALL xios_set_domain_attr("domain_atm",data_dim=2, data_ibegin=-1, data_ni=ni+2, data_jbegin=-2, data_nj=nj+4)
+  CALL xios_set_domain_attr("domain_atm",ni_glo=ni_glo, nj_glo=nj_glo, ibegin=ibegin, &
+       ni=ni,jbegin=jbegin,nj=nj, type='rectilinear')
+  CALL xios_set_domain_attr("domain_atm",data_dim=2, data_ibegin=-1, &
+       data_ni=ni+2, data_jbegin=-2, data_nj=nj+4)
   CALL xios_set_domain_attr("domain_atm",lonvalue_2D=lon,latvalue_2D=lat)
   CALL xios_set_domain_attr("domain_atm", nvertex=4, bounds_lon_2d=bounds_lon, bounds_lat_2d=bounds_lat)
 
@@ -233,9 +235,10 @@ PROGRAM test_grid
 !!! On donne la valeur du champ atm
 
       !print *,'sending field_atm_2d at timestep',ts
+      CALL xios_send_field("field_atm_scalar",field_atm_2D(1,1))+ts
+      CALL xios_send_field("field_atm_1D",field_atm_3D(1,1,:)+ts)
       CALL xios_send_field("field_atm_2D",field_atm_2D+ts)
       CALL xios_send_field("field_atm_3D",field_atm_3D+ts)
-      CALL xios_send_field("field_grid",field_atm_3D+ts)
       CALL xios_send_field("pressure" ,pressure)
       CALL xios_send_field("height"   ,height)
       
@@ -262,8 +265,9 @@ PROGRAM test_grid
 
       CALL xios_update_calendar(ts)
 
-!!! On donne la valeur du champ srf
+!!! On donne la valeur du champ oce
 
+      CALL xios_send_field("field_oce_scalar",field_oce_2D+ts(1,1))
       CALL xios_send_field("field_oce_grid_2D",field_oce_2D)
       CALL xios_send_field("field_oce_grid_3D",field_oce_3D)
 

@@ -3,6 +3,8 @@
   
  <calendar type="Gregorian" start_date="1950-01-01 00:00:00" time_origin="1950-01-01 00:00:00" />
 
+  <scalar_definition>   <scalar id="scalar_atm" />  </scalar_definition>
+
   <axis_definition >
     <axis id="axis_atm"/>
     <axis id="presnivs" axis_ref="axis_atm"  standard_name="Vertical levels" unit="Pa"/>
@@ -20,6 +22,7 @@
   </domain_definition>
   
   <field_definition level="1" prec="4" operation="average" freq_op="1ts" enabled=".true." default_value="9.96921e+36" >
+    <field id="field_atm_scalar" scalar_ref="scalar_atm" />
     <field id="field_atm_2D" domain_ref="domain_atm" />
     <field id="field_atm_3D" domain_ref="domain_atm" axis_ref="presnivs" />
     <field id="pressure"     domain_ref="domain_atm" axis_ref="presnivs" detect_missing_value="true"/>
