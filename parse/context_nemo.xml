@@ -3,10 +3,7 @@
   <calendar type="Gregorian" start_date="1950-01-01 00:00:00" time_origin="1950-01-01 00:00:00" />
   
   <scalar_definition>   <scalar id="scalar_oce" /> </scalar_definition>
-  
-  <!--axis_definition src="./axdef.xml"/--> 
   <axis_definition> <axis id="axis_oce"/> </axis_definition>
-
   <domain_definition> <domain id="domain_oce" /> </domain_definition>
 
   <grid_definition>    
