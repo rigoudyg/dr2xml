@@ -26,7 +26,7 @@
 
   <axis id="DX_alev" 	       name="alev"      axis_ref="dummy_axisatm" > </axis>
   <!-- must instantiate the level index representing the lowest atmospheric level -->
-  <axis id="DX_alev1" 	       name="alev"      axis_ref="DX_alev" > <zoom_axis begin="90" end="90"/> </axis>
+  <axis id="DX_alev1" 	       name="alev"      axis_ref="DX_alev" > <zoom_axis begin="90" n="1"/> </axis>
   <axis id="DX_alevhalf"       name="alevhalf"  axis_ref="dummy_axisatm" > </axis>
   <axis id="DX_dbze" 	       name="dbze"      axis_ref="dummy_axisatm" value="(0,14) [  -47.5 -42.5 -37.5 -32.5 -27.5 -22.5 -17.5 -12.5 -7.5 -2.5 2.5 7.5 12.5 17.5 22.5"> </axis>
   <axis id="DX_effectRadIc"    name="effectRadIc" axis_ref="dummy_axisatm" > </axis>

@@ -21,7 +21,7 @@ PROGRAM test_grid
   DOUBLE PRECISION,ALLOCATABLE :: bounds_lon_glo(:,:,:),bounds_lat_glo(:,:,:)
   DOUBLE PRECISION,ALLOCATABLE :: pressure (:,:,:), height (:,:,:)
   DOUBLE PRECISION,ALLOCATABLE :: lon(:,:),lat(:,:),lonvalue(:,:)
-  DOUBLE PRECISION,ALLOCATABLE :: bounds_lon(:,:,:),bounds_lat(:,:,:) ;
+  DOUBLE PRECISION,ALLOCATABLE :: bounds_lon(:,:,:),bounds_lat(:,:,:) 
   DOUBLE PRECISION,ALLOCATABLE :: field_atm_2D(:,:),field_atm_3D(:,:,:),field_srf_2D(:),field_srf_3D(:,:)
   DOUBLE PRECISION,ALLOCATABLE :: field_oce_2D(:,:),field_oce_3D(:,:,:)
   INTEGER, ALLOCATABLE :: kindex(:)
@@ -128,6 +128,7 @@ PROGRAM test_grid
   height(1:ni,1:nj,:)=height_glo(ibegin+1:iend+1,jbegin+1:jend+1,:)
 
   CALL xios_context_initialize("arpsfx",comm)
+  write(0,*) 'atm context initialized' ; call flush(0)
   CALL xios_get_handle("arpsfx",ctx_hdl)
   CALL xios_set_current_context(ctx_hdl)
 
@@ -192,6 +193,7 @@ PROGRAM test_grid
 !!! Fin de la definition du contexte SRF
 
   CALL xios_close_context_definition()
+  write(0,*) 'srf context def closed' ; call flush(0)
 
 !###########################################################################
 ! Contexte OCE
@@ -234,13 +236,16 @@ PROGRAM test_grid
 
 !!! On donne la valeur du champ atm
 
-      !print *,'sending field_atm_2d at timestep',ts
-      CALL xios_send_field("field_atm_scalar",field_atm_2D(1,1))+ts
+      print *,'sending field_atm_2d at timestep',ts
+      CALL xios_send_field("field_atm_scalar",field_atm_2D(1,1)+ts)
       CALL xios_send_field("field_atm_1D",field_atm_3D(1,1,:)+ts)
       CALL xios_send_field("field_atm_2D",field_atm_2D+ts)
       CALL xios_send_field("field_atm_3D",field_atm_3D+ts)
       CALL xios_send_field("pressure" ,pressure)
       CALL xios_send_field("height"   ,height)
+      if (mod(ts,2)==0) then
+         CALL xios_send_field("field_sub",field_atm_2D+ts)
+      endif
       
 !!! On change de contexte
 
@@ -267,7 +272,7 @@ PROGRAM test_grid
 
 !!! On donne la valeur du champ oce
 
-      CALL xios_send_field("field_oce_scalar",field_oce_2D+ts(1,1))
+      CALL xios_send_field("field_oce_scalar",field_oce_2D(1,1)+ts)
       CALL xios_send_field("field_oce_grid_2D",field_oce_2D)
       CALL xios_send_field("field_oce_grid_3D",field_oce_3D)
 

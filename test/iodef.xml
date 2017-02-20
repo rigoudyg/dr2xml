@@ -2,12 +2,14 @@
 <simulation>
 
   <context id="nemo"   src="./context_nemo.xml"/>
-  <context id="nemo"   src="./ping_nemo.xml"/>
+  <!-- <context id="nemo"   src="./toy2dummy_nemo.xml"/> -->
+  <!-- <context id="nemo"   src="./ping_nemo.xml"/> -->
   <!--context id="nemo"   src="./dr2xml_nemo.xml"/-->
 
   <context id="arpsfx" src="./context_arpsfx.xml"/>
-  <context id="arpsfx" src="./ping_arpsfx.xml"/>
-  <context id="arpsfx" src="./dr2xml_arpsfx.xml"/>
+  <context id="arpsfx" src="./toy2dummy_arpsfx.xml"/> 
+  <context id="arpsfx" src="./ping_arpsfx.xml"/> 
+  <context id="arpsfx" src="./dr2xml_arpsfx.xml"/> 
   
   <context id="xios">
     <variable_definition>

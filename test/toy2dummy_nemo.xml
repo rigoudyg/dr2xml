@@ -1,0 +1,22 @@
+<context id="nemo">
+
+  <field_definition>
+    <field id="dummy_na"  field_ref="field_oce_grid_scalar"/> 
+    <field id="dummy_XY"  field_ref="field_oce_grid_2D"/> 
+    <field id="dummy_??"  field_ref="field_oce_grid_2D"/> 
+    <field id="dummy_XYO" field_ref="field_oce_grid_3D"/> 
+
+    <field id="dummy_TRS" field_ref="field_oce_grid_3D"/> 
+    <field id="dummy_TR"  field_ref="field_oce_grid_3D"/> 
+
+    <field id="dummy_basin_zonal_mean"            field_ref="field_oce_grid_3D"/> 
+    <field id="dummy_basin_merid_section"         field_ref="field_oce_grid_3D"/> 
+    <field id="dummy_basin_merid_section_density" field_ref="field_oce_grid_3D"/> 
+
+    <!-- odd !! -->
+    <field id="dummy_XYA" field_ref="field_oce_grid_2D"/> 
+
+  </field_definition>
+</context>
+
+

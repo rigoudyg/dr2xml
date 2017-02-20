@@ -26,7 +26,9 @@
    <field id="CMIP6_cfc11global"   field_ref="dummy_0d"         /> <!-- P1 (1e-12) mole_fraction_of_cfc11_in_air : unset -->
    <field id="CMIP6_cfc12global"   field_ref="dummy_0d"         /> <!-- P1 (1e-12) mole_fraction_of_cfc12_in_air : unset -->
    <field id="CMIP6_ch4"           field_ref="dummy_XYA"        /> <!-- P1 (mol mol-1) mole_fraction_of_methane_in_air : CH4 volume mixing ratio -->
+   <field id="CMIP6_ch4Clim"       field_ref="dummy_XYA"        /> <!-- P1 (mol mol-1) mole_fraction_of_methane_in_air : CH4 volume mixing ratio -->
    <field id="CMIP6_ch4global"     field_ref="dummy_0d"         /> <!-- P1 (1e-09) mole_fraction_of_methane_in_air : Global Mean Mole Fraction of CH4 -->
+   <field id="CMIP6_ch4globalClim" field_ref="dummy_0d"         /> <!-- P1 (1e-09) mole_fraction_of_methane_in_air : Global Mean Mole Fraction of CH4 -->
    <field id="CMIP6_ci"            field_ref="dummy_XY"         /> <!-- P1 (1.0) convection_time_fraction : Fraction of time that convection occurs in the grid cell. -->
    <field id="CMIP6_cl"            field_ref="dummy_XYA"        /> <!-- P1 (%) cloud_area_fraction_in_atmosphere_layer : Percentage cloud cover, including both large-scale and convective cloud. -->
    <field id="CMIP6_clayFrac"      field_ref="dummy_XY"         /> <!-- P1 (1.0) clayFrac : Clay Fraction -->
@@ -35,18 +37,18 @@
    <field id="CMIP6_clcalipso2"    field_ref="dummy_XYA"        /> <!-- P1 (%) cloud_area_fraction_in_atmosphere_layer : Clouds detected by CALIPSO but below the detectability threshold of CloudSat -->
    <field id="CMIP6_clcalipsoice"  field_ref="dummy_XYA"        /> <!-- P1 (%) ice_cloud_area_fraction_in_atmosphere_layer : CALIPSO ice cloud Fraction -->
    <field id="CMIP6_clcalipsoliq"  field_ref="dummy_XYA"        /> <!-- P1 (%) clcalipsoliq : CALIPSO liquid cloud Fraction -->
-   <field id="CMIP6_cldicemxrat"   field_ref="dummy_XYA"        /> <!-- P2 (1.0) cloud_ice_mixing_ratio : Cloud ice mixing ratio -->
+   <field id="CMIP6_cldicemxrat27" field_ref="dummy_XYA"        /> <!-- P2 (1.0) cloud_ice_mixing_ratio : Cloud ice mixing ratio -->
    <field id="CMIP6_cldnci"        field_ref="dummy_XY"         /> <!-- P1 (m-3) number_concentration_of_ice_crystals_in_air_at_ice_cloud_top : Concentration 'as seen from space' over ice-cloud portion of grid cell.  This is the value from uppermost model layer with ice cloud or, if available, it is the sum over all ice cloud tops, no matter where they occur, as long as they are seen from the top of the atmosphere. Weight by total ice cloud top fraction (as seen from TOA) of each time sample when computing monthly mean. -->
    <field id="CMIP6_cldncl"        field_ref="dummy_XY"         /> <!-- P1 (m-3) number_concentration_of_cloud_liquid_water_particles_in_air_at_liquid_water_cloud_top : Droplets are liquid only.  Report concentration 'as seen from space' over liquid cloudy portion of grid cell.  This is the value from uppermost model layer with liquid cloud or, if available, it is better to sum over all liquid cloud tops, no matter where they occur, as long as they are seen from the top of the atmosphere. Weight by total liquid cloud top fraction of  (as seen from TOA) each time sample when computing monthly mean. -->
    <field id="CMIP6_cldnvi"        field_ref="dummy_XY"         /> <!-- P1 (m-2) atmosphere_number_content_of_cloud_droplets : Droplets are liquid only.  Values are weighted by liquid cloud fraction in each layer when vertically integrating, and for monthly means the samples are weighted by total liquid cloud fraction (as seen from TOA). -->
-   <field id="CMIP6_cldwatmxrat"   field_ref="dummy_XYA"        /> <!-- P2 (1.0) cloud_liquid_water_mixing_ratio : Cloud water mixing ratio -->
+   <field id="CMIP6_cldwatmxrat27" field_ref="dummy_XYA"        /> <!-- P2 (1.0) cloud_liquid_water_mixing_ratio : Cloud water mixing ratio -->
    <field id="CMIP6_clhcalipso"    field_ref="dummy_XY"         /> <!-- P1 (%) cloud_area_fraction_in_atmosphere_layer : Percentage cloud cover in layer centred on 220hPa -->
    <field id="CMIP6_cli"           field_ref="dummy_XYA"        /> <!-- P1 (kg kg-1) mass_fraction_of_cloud_ice_in_air : Includes both large-scale and convective cloud. This is calculated as the mass of cloud ice in the grid cell divided by the mass of air (including the water in all phases) in the grid cell. It includes precipitating hydrometeors ONLY if the precipitating hydrometeors affect the calculation of radiative transfer in model. -->
    <field id="CMIP6_clic"          field_ref="dummy_XYA"        /> <!-- P2 (1.0) mass_fraction_of_convective_cloud_ice_in_air : Calculated as the mass of convective cloud ice  in the grid cell divided by the mass of air (including the water in all phases) in the grid cell.  This includes precipitating hydrometeors ONLY if the precipitating hydrometeors affect the calculation of radiative transfer in model. -->
    <field id="CMIP6_climodis"      field_ref="dummy_XY"         /> <!-- P1 (%) ice_cloud_area_fraction : MODIS Ice Cloud Fraction -->
    <field id="CMIP6_clis"          field_ref="dummy_XYA"        /> <!-- P2 (1.0) mass_fraction_of_stratiform_cloud_ice_in_air : Calculated as the mass of stratiform cloud ice  in the grid cell divided by the mass of air (including the water in all phases) in the grid cell.  This includes precipitating hydrometeors ONLY if the precipitating hydrometeors affect the calculation of radiative transfer in model. -->
    <field id="CMIP6_clisccp"       field_ref="dummy_XYA"        /> <!-- P1 (%) isccp_cloud_area_fraction : Percentage cloud cover in optical depth categories. -->
-   <field id="CMIP6_clivi"         field_ref="dummy_XY"         /> <!-- P2 (kg m-2) atmosphere_mass_content_of_cloud_ice : calculate mass of ice water in the column divided by the area of the column (not just the area of the cloudy portion of the column). This includes precipitating frozen hydrometeors ONLY if the precipitating hydrometeors affect the calculation of radiative transfer in model. -->
+   <field id="CMIP6_clivi"         field_ref="dummy_XY"         /> <!-- P1 (kg m-2) atmosphere_mass_content_of_cloud_ice : calculate mass of ice water in the column divided by the area of the column (not just the area of the cloudy portion of the column). This includes precipitating frozen hydrometeors ONLY if the precipitating hydrometeors affect the calculation of radiative transfer in model. -->
    <field id="CMIP6_clivic"        field_ref="dummy_XY"         /> <!-- P1 (kg m-2 ) clivic : calculate mass of convective ice water in the column divided by the area of the column (not just the area of the cloudy portion of the column). This includes precipitating frozen hydrometeors ONLY if the precipitating hydrometeors affect the calculation of radiative transfer in model.   -->
    <field id="CMIP6_cllcalipso"    field_ref="dummy_XY"         /> <!-- P1 (%) cloud_area_fraction_in_atmosphere_layer : Percentage cloud cover in layer centred on 840hPa -->
    <field id="CMIP6_clmcalipso"    field_ref="dummy_XY"         /> <!-- P1 (%) cloud_area_fraction_in_atmosphere_layer : Percentage cloud cover in layer centred on 560hPa -->
@@ -65,7 +67,9 @@
    <field id="CMIP6_cnc"           field_ref="dummy_XY"         /> <!-- P1 () vegetation_area_fraction : Canopy covered fraction -->
    <field id="CMIP6_co2"           field_ref="dummy_XYA"        /> <!-- P1 (mol mol-1) mole_fraction_of_carbon_dioxide_in_air : CO2 volume mixing ratio -->
    <field id="CMIP6_co23D"         field_ref="dummy_XYA"        /> <!-- P2 (kg kg-1) co23D : report 3D field of model simulated atmospheric CO2 mass mixing ration on model levels -->
+   <field id="CMIP6_co2Clim"       field_ref="dummy_XYA"        /> <!-- P1 (mol mol-1) mole_fraction_of_carbon_dioxide_in_air : CO2 volume mixing ratio -->
    <field id="CMIP6_co2mass"       field_ref="dummy_0d"         /> <!-- P1 (kg) atmosphere_mass_of_carbon_dioxide : Total atmospheric mass of Carbon Dioxide -->
+   <field id="CMIP6_co2massClim"   field_ref="dummy_0d"         /> <!-- P1 (kg) atmosphere_mass_of_carbon_dioxide : Total atmospheric mass of Carbon Dioxide -->
    <field id="CMIP6_co2s"          field_ref="dummy_XY"         /> <!-- P2 (1e-06) co2s : As co2, but only at the surface -->
    <field id="CMIP6_co2totalmass"  field_ref="dummy_0d"         /> <!-- P1 (kg) co2totalmass : globally integrated mass of carbon as CO2 in atmsophere. Report as a single number for all emissions-driven runs -->
    <field id="CMIP6_conccmcn"      field_ref="dummy_XYA"        /> <!-- P1 (m-3) number_concentration_of_coarse_mode_ambient_aerosol_in_air : includes all particles with diameter larger than 1 micron -->
@@ -89,7 +93,6 @@
    <field id="CMIP6_ec"            field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) ec : Interception evaporation -->
    <field id="CMIP6_edt"           field_ref="dummy_XYA"        /> <!-- P1 (m2 s-1) atmosphere_heat_diffusivity : Vertical diffusion coefficient for temperature due to parametrised eddies -->
    <field id="CMIP6_eow"           field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) eow : Open Water Evaporation -->
-   <field id="CMIP6_epfluxdiv"     field_ref="dummy_lat-P"      /> <!-- P2 (kg m-1 s-2) epfluxdiv : Divergence of Eliassen-Palm flux (zonal mean) -->
    <field id="CMIP6_epfy"          field_ref="dummy_lat-P"      /> <!-- P1 (m3 s-2) northward_eliassen_palm_flux_in_air : Transformed Eulerian Mean Diagnostics Meridional component Fy of Eliassen-Palm (EP) flux (Fy, Fz) derived from 6hr or higher frequency fields (use daily fields or 12 hr fields if the 6 hr are not available). Please use the definitions given by equation 3.5.3a of Andrews, Holton and Leovy text book, but scaled by density to have units m3 s-2. -->
    <field id="CMIP6_epfz"          field_ref="dummy_lat-P"      /> <!-- P1 (m3 s-2) upward_eliassen_palm_flux_in_air : Transformed Eulerian Mean Diagnostics Meridional component Fz of the Eliassen-Palm (EP) flux (Fy, Fz) derived from 6hr or higher frequency fields (use daily fields or 12 hr fields if the 6 hr are not available). Please use the definitions given by equation 3.5.3b of Andrews, Holton and Leovy text book, but scaled by density to have units m3 s-2. -->
    <field id="CMIP6_es"            field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) es : Bare soil evaporation -->
@@ -97,27 +100,29 @@
    <field id="CMIP6_et"            field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) et : Total Evapotranspiration -->
    <field id="CMIP6_evspsbl"       field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) water_evaporation_flux : Evaporation at surface: flux of water into the atmosphere due to conversion of both liquid and solid phases to vapor (from underlying surface and vegetation) -->
    <field id="CMIP6_evspsblpot"    field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) water_potential_evaporation_flux : at surface; potential flux of water into the atmosphere due to conversion of both liquid and solid phases to vapor (from underlying surface and vegetation) -->
-   <field id="CMIP6_evu"           field_ref="dummy_COSP-A"     /> <!-- P1 (m2 s-1) atmosphere_momentum_diffusivity : Vertical diffusion coefficient for momentum due to parametrised eddies -->
+   <field id="CMIP6_evu"           field_ref="dummy_XYA"        /> <!-- P1 (m2 s-1) atmosphere_momentum_diffusivity : Vertical diffusion coefficient for momentum due to parametrised eddies -->
    <field id="CMIP6_fco2antt"      field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_carbon_dioxide_expressed_as_carbon_due_to_anthropogenic_emission : This is requested only for the emission-driven coupled carbon climate model runs.  Does not include natural fire sources but, includes all anthropogenic sources, including fossil fuel use, cement production, agricultural burning, and sources associated with anthropogenic land use change excluding forest regrowth. -->
    <field id="CMIP6_fco2fos"       field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_carbon_dioxide_expressed_as_carbon_due_to_emission_from_fossil_fuel_combustion : This is the prescribed anthropogenic CO2 flux from fossil fuel use, including cement production, and flaring (but not from land-use changes, agricultural burning, forest regrowth, etc.) -->
    <field id="CMIP6_fco2nat"       field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_emission_from_natural_sources : This is what the atmosphere sees (on its own grid).  This field should be equivalent to the combined natural fluxes of carbon  that account for natural exchanges between the atmosphere and land (nep) or ocean (fgco2) reservoirs. -->
    <field id="CMIP6_flashrate"     field_ref="dummy_XY"         /> <!-- P1 (km-2 s-1) flashrate : proposed name: lightning_flash_rate (units to be interpreted as "counts km-2 s-1) -->
    <field id="CMIP6_fldcapacity"   field_ref="dummy_XY"         /> <!-- P1 (%) fldcapacity : Field Capacity -->
-   <field id="CMIP6_grplmxrat"     field_ref="dummy_XYA"        /> <!-- P3 (1.0) mass_fraction_of_graupel_in_air : Graupel mixing ratio -->
+   <field id="CMIP6_grplmxrat27"   field_ref="dummy_XYA"        /> <!-- P2 (1.0) mass_fraction_of_graupel_in_air : Graupel mixing ratio -->
    <field id="CMIP6_hcfc22global"  field_ref="dummy_0d"         /> <!-- P1 (1e-12) mole_fraction_of_hcfc22_in_air : unset -->
    <field id="CMIP6_hfdsnb"        field_ref="dummy_XY"         /> <!-- P1 (W m-2) hfdsnb : Heat flux from snow into the ice or land under the snow. -->
-   <field id="CMIP6_hfls"          field_ref="dummy_XY"         /> <!-- P1 (W m-2) surface_upward_latent_heat_flux : Surface Upward Latent Heat Flux -->
-   <field id="CMIP6_hfls_isf"      field_ref="dummy_XY"         /> <!-- P1 (W m-2) surface_upward_latent_heat_flux : Surface Upward Latent Heat Flux -->
+   <field id="CMIP6_hfls"          field_ref="dummy_??"         /> <!-- P1 (W m-2) surface_upward_latent_heat_flux : Surface Upward Latent Heat Flux -->
+   <field id="CMIP6_hfls_isf"      field_ref="dummy_??"         /> <!-- P1 (W m-2) surface_upward_latent_heat_flux : Surface Upward Latent Heat Flux -->
    <field id="CMIP6_hfmlt"         field_ref="dummy_XY"         /> <!-- P1 (W m-2 ) surface_snow_and_ice_melt_heat_flux : Energy consumed or released during liquid/solid phase changes. -->
    <field id="CMIP6_hfrs"          field_ref="dummy_XY"         /> <!-- P1 (W m-2 ) hfrs : Heat transferred to a snow cover by rain.. -->
    <field id="CMIP6_hfsbl"         field_ref="dummy_XY"         /> <!-- P1 (W m-2 ) hfsbl : Energy consumed or released during vapor/solid phase changes. -->
-   <field id="CMIP6_hfss"          field_ref="dummy_XY"         /> <!-- P1 (W m-2) surface_upward_sensible_heat_flux : Surface Upward Sensible Heat Flux -->
-   <field id="CMIP6_hfss_isf"      field_ref="dummy_XY"         /> <!-- P1 (W m-2) surface_upward_sensible_heat_flux : Surface Upward Sensible Heat Flux -->
+   <field id="CMIP6_hfss"          field_ref="dummy_??"         /> <!-- P1 (W m-2) surface_upward_sensible_heat_flux : Surface Upward Sensible Heat Flux -->
+   <field id="CMIP6_hfss_isf"      field_ref="dummy_??"         /> <!-- P1 (W m-2) surface_upward_sensible_heat_flux : Surface Upward Sensible Heat Flux -->
    <field id="CMIP6_hur"           field_ref="dummy_XYA"        /> <!-- P1 (%) relative_humidity : The relative humidity with respect to liquid water for T> 0 C, and with respect to ice for T<0 C. -->
    <field id="CMIP6_hurs"          field_ref="dummy_XY"         /> <!-- P1 (%) relative_humidity : The relative humidity with respect to liquid water for T> 0 C, and with respect to ice for T<0 C. -->
    <field id="CMIP6_hursmax"       field_ref="dummy_XY"         /> <!-- P1 (%) relative_humidity : Daily Maximum Near-Surface Relative Humidity -->
    <field id="CMIP6_hursmin"       field_ref="dummy_XY"         /> <!-- P1 (%) relative_humidity : Daily Minimum Near-Surface Relative Humidity -->
    <field id="CMIP6_hus"           field_ref="dummy_XYA"        /> <!-- P1 (1.0) specific_humidity : Specific Humidity -->
+   <field id="CMIP6_hus27"         field_ref="dummy_XYA"        /> <!-- P2 (1.0) specific_humidity : Specific Humidity -->
+   <field id="CMIP6_hus7h"         field_ref="dummy_XYA"        /> <!-- P1 (1.0) specific_humidity : Specific Humidity -->
    <field id="CMIP6_hus850"        field_ref="dummy_XY"         /> <!-- P1 (1.0) specific_humidity : unset -->
    <field id="CMIP6_huss"          field_ref="dummy_XY"         /> <!-- P1 (1.0) specific_humidity : Near-surface (usually, 2 meter) specific humidity. -->
    <field id="CMIP6_iareafl"       field_ref="dummy_0d"         /> <!-- P3 (m2) iareafl : Total area of the floating ice shelves (the component of ice sheet that flows over ocean) -->
@@ -131,7 +136,7 @@
    <field id="CMIP6_jpdftaureicemodis" field_ref="dummy_XYA"        /> <!-- P1 (%) cloud_area_fraction_in_atmosphere_layer : MODIS Optical Thickness-Particle Size joint  distribution, ice -->
    <field id="CMIP6_jpdftaureliqmodis" field_ref="dummy_XYA"        /> <!-- P1 (%) cloud_area_fraction_in_atmosphere_layer : MODIS Optical Thickness-Particle Size joint  distribution, liquid -->
    <field id="CMIP6_ksat"          field_ref="dummy_XY"         /> <!-- P1 (1e-6 m s-1) ksat : Saturated Hydraulic Conductivity -->
-   <field id="CMIP6_lat"           field_ref="dummy_COSPcurtain"/> <!-- P1 (degrees_north) latitude : latitude -->
+   <field id="CMIP6_latitude"      field_ref="dummy_COSPcurtain"/> <!-- P1 (degrees_north) latitude : latitude -->
    <field id="CMIP6_lim"           field_ref="dummy_0d"         /> <!-- P2 (kg) lim : The ice sheet mass is computed as the volume times density -->
    <field id="CMIP6_limnsw"        field_ref="dummy_0d"         /> <!-- P2 (kg) limnsw : The ice sheet mass is computed as the volume above flotation times density. Changes in land_ice_mass_not_displacing_sea_water will always result in a change in sea level, unlike changes in land_ice_mass which may not result in sea level change (such as melting of the floating ice shelves, or portion of ice that sits on bedrock below sea level) -->
    <field id="CMIP6_loadbc"        field_ref="dummy_XY"         /> <!-- P1 (kg m-2) atmosphere_mass_content_of_black_carbon_dry_aerosol : unset -->
@@ -143,47 +148,51 @@
    <field id="CMIP6_loadso4"       field_ref="dummy_XY"         /> <!-- P1 (kg m-2) atmosphere_mass_content_of_sulfate_dry_aerosol : unset -->
    <field id="CMIP6_loadsoa"       field_ref="dummy_XY"         /> <!-- P1 (kg m-2) atmosphere_mass_content_of_secondary_particulate_organic_matter_dry_aerosol : unset -->
    <field id="CMIP6_loadss"        field_ref="dummy_XY"         /> <!-- P1 (kg m-2) atmosphere_mass_content_of_seasalt_dry_aerosol : unset -->
-   <field id="CMIP6_lon"           field_ref="dummy_COSPcurtain"/> <!-- P1 (degrees_east) longitude : longitude -->
+   <field id="CMIP6_longitude"     field_ref="dummy_COSPcurtain"/> <!-- P1 (degrees_east) longitude : longitude -->
    <field id="CMIP6_lts"           field_ref="dummy_XY"         /> <!-- P1 (K) lts : proposed name: potential_temperature_difference_between_700hPa_and_1000hPa (Lower Tropospheric Stability) -->
    <field id="CMIP6_lwsffluxaero"  field_ref="dummy_XY"         /> <!-- P2 (W m-2 ) lwsffluxaero : downwelling longwave  flux  due to volcanic aerosols at the surface to be diagnosed through double radiation call -->
    <field id="CMIP6_lwtoafluxaerocs" field_ref="dummy_XY"         /> <!-- P1 (W m-2 ) lwtoafluxaerocs : downwelling longwave flux due to volcanic aerosols at TOA under clear sky to be diagnosed through double radiation call -->
-   <field id="CMIP6_mc"            field_ref="dummy_XYA"        /> <!-- P3 (kg m-2 s-1) atmosphere_net_upward_convective_mass_flux : The net mass flux should represent the difference between the updraft and downdraft components.  The flux is computed as the mass divided by the area of the grid cell. -->
+   <field id="CMIP6_mc"            field_ref="dummy_XYA"        /> <!-- P1 (kg m-2 s-1) atmosphere_net_upward_convective_mass_flux : The net mass flux should represent the difference between the updraft and downdraft components.  The flux is computed as the mass divided by the area of the grid cell. -->
    <field id="CMIP6_mcd"           field_ref="dummy_XYA"        /> <!-- P2 (kg m-2 s-1) atmosphere_downdraft_convective_mass_flux : Calculated as the convective mass flux divided by the area of the whole grid cell (not just the area of the cloud). -->
    <field id="CMIP6_mcu"           field_ref="dummy_XYA"        /> <!-- P2 (kg m-2 s-1) atmosphere_updraft_convective_mass_flux : In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics. The atmosphere convective mass flux is the vertical transport of mass for a field of cumulus clouds or thermals, given by the product of air density and vertical velocity. For an area-average, cell_methods should specify whether the average is over all the area or the area of updrafts only. -->
    <field id="CMIP6_mrfsofr"       field_ref="dummy_XYSo"       /> <!-- P1 (1.0) mass_fraction_of_frozen_water_in_soil_moisture : Fraction of soil moisture mass in the solid phase in each user-defined soil layer (3D variable) -->
    <field id="CMIP6_mrlqso"        field_ref="dummy_XYSo"       /> <!-- P1 (1.0) mass_fraction_of_unfrozen_water_in_soil_moisture : Fraction of soil moisture mass in the liquid phase in each user-defined soil layer (3D variable) -->
-   <field id="CMIP6_mrroLi"        field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) mrroLi : Runoff flux over land ice is the difference between any available liquid water in the snowpack less any refreezing. Computed as the sum of rainfall and melt of snow or ice less any refreezing or water retained in the snowpack -->
+   <field id="CMIP6_mrroLi"        field_ref="dummy_??"         /> <!-- P1 (kg m-2 s-1) land_ice_runoff_flux : Runoff flux over land ice is the difference between any available liquid water in the snowpack less any refreezing. Computed as the sum of rainfall and melt of snow or ice less any refreezing or water retained in the snowpack -->
    <field id="CMIP6_mrrob"         field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) subsurface_runoff_flux : Subsurface runoff -->
    <field id="CMIP6_mrsll"         field_ref="dummy_XYSo"       /> <!-- P1 (kg m-2) mrsll : as specified by C4MIP -->
    <field id="CMIP6_mrsow"         field_ref="dummy_XY"         /> <!-- P1 (1.0) volume_fraction_of_condensed_water_in_soil_at_field_capacity : Vertically integrated soil moisture divided by maximum allowable soil moisture above wilting point. -->
    <field id="CMIP6_n2o"           field_ref="dummy_XYA"        /> <!-- P1 (mol mol-1) mole_fraction_of_nitrous_oxide_in_air : N2O volume mixing ratio -->
+   <field id="CMIP6_n2oClim"       field_ref="dummy_XYA"        /> <!-- P1 (mol mol-1) mole_fraction_of_nitrous_oxide_in_air : N2O volume mixing ratio -->
    <field id="CMIP6_n2oglobal"     field_ref="dummy_0d"         /> <!-- P1 (1e-09) mole_fraction_of_nitrous_oxide_in_air : Global mean Nitrous Oxide (N2O) -->
+   <field id="CMIP6_n2oglobalClim" field_ref="dummy_0d"         /> <!-- P1 (1e-09) mole_fraction_of_nitrous_oxide_in_air : Global mean Nitrous Oxide (N2O) -->
    <field id="CMIP6_netAtmosLandCO2Flux" field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) surface_net_downward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_all_land_processes : as specified by C4MIP -->
    <field id="CMIP6_nudgincsm"     field_ref="dummy_XY"         /> <!-- P1 (kg m-2) nudgincsm : Nudging Increment of Water in Soil Mositure -->
    <field id="CMIP6_nudgincswe"    field_ref="dummy_XY"         /> <!-- P1 (kg m-2) nudgincswe : Nudging Increment of Water in Snow -->
    <field id="CMIP6_o3"            field_ref="dummy_XYA"        /> <!-- P1 (mol mol-1) mole_fraction_of_ozone_in_air : Ozone volume mixing ratio -->
+   <field id="CMIP6_o3Clim"        field_ref="dummy_XYA"        /> <!-- P1 (mol mol-1) mole_fraction_of_ozone_in_air : Ozone volume mixing ratio -->
    <field id="CMIP6_od550aerstrat" field_ref="dummy_XY"         /> <!-- P1 (1.0) od550aerstrat : From tropopause to stratopause as defined by the model -->
-   <field id="CMIP6_orog"          field_ref="dummy_XY"         /> <!-- P1 (m) surface_altitude : The surface called "surface" means the lower boundary of the atmosphere. Altitude is the (geometric) height above the geoid, which is the reference geopotential surface. The geoid is similar to mean sea level. -->
+   <field id="CMIP6_orog"          field_ref="dummy_??"         /> <!-- P1 (m) surface_altitude : The surface called "surface" means the lower boundary of the atmosphere. Altitude is the (geometric) height above the geoid, which is the reference geopotential surface. The geoid is similar to mean sea level. -->
    <field id="CMIP6_oxloss"        field_ref="dummy_lat-P"      /> <!-- P1 (mol m-3 s-1) oxloss : total chemical loss rate for o+o1d+o3  -->
    <field id="CMIP6_oxprod"        field_ref="dummy_lat-P"      /> <!-- P1 (mol m-3 s-1) oxprod : total production rate of o+o1d+o3 including o2 photolysis and all o3 producing reactions -->
    <field id="CMIP6_parasolRefl"   field_ref="dummy_XY"         /> <!-- P1 (1.0) toa_bidirectional_reflectance : Simulated reflectance from PARASOL as seen at the top of the atmosphere for 5 solar zenith angles. Valid only over ocean and for one viewing direction (viewing zenith angle of 30 degrees and relative azimuth angle 320 degrees). -->
    <field id="CMIP6_parasolRefl_sea" field_ref="dummy_XY"         /> <!-- P1 (1.0) toa_bidirectional_reflectance : Simulated reflectance from PARASOL as seen at the top of the atmosphere for 5 solar zenith angles. Valid only over ocean and for one viewing direction (viewing zenith angle of 30 degrees and relative azimuth angle 320 degrees). -->
    <field id="CMIP6_pctisccp"      field_ref="dummy_XY"         /> <!-- P1 (Pa) air_pressure_at_cloud_top : ISCCP Mean Cloud Top Pressure. Time-means are weighted by the ISCCP Total Cloud Fraction {:cltisccp} - see  http://cfmip.metoffice.com/COSP.html -->
-   <field id="CMIP6_pfull"         field_ref="dummy_XYA"        /> <!-- P3 (Pa) air_pressure : Air pressure on model levels -->
+   <field id="CMIP6_pfull"         field_ref="dummy_XYA"        /> <!-- P1 (Pa) air_pressure : Air pressure on model levels -->
+   <field id="CMIP6_pfull27"       field_ref="dummy_XYA"        /> <!-- P3 (Pa) air_pressure : Air pressure on model levels -->
    <field id="CMIP6_phalf"         field_ref="dummy_XYA"        /> <!-- P1 (Pa) air_pressure : Air pressure on model half-levels -->
    <field id="CMIP6_pmlev"         field_ref="dummy_XYA"        /> <!-- P1 (Pa) air_pressure : The atmospheric pressure at the model layer midpoints for all times and levels in the associated output variables -->
    <field id="CMIP6_potet"         field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) potet : Potential Evapotranspiration -->
    <field id="CMIP6_pr"            field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) precipitation_flux : includes both liquid and solid phases -->
    <field id="CMIP6_prc"           field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) convective_precipitation_flux : Convective precipitation at surface; includes both liquid and solid phases. -->
    <field id="CMIP6_prhmax"        field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) precipitation_flux : Daily Maximum Hourly Precipitation Rate -->
-   <field id="CMIP6_prra"          field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) rainfall_flux : Rainfall rate -->
-   <field id="CMIP6_prra_isf"      field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) rainfall_flux : Rainfall rate -->
-   <field id="CMIP6_prra_land"     field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) rainfall_flux : Rainfall rate -->
+   <field id="CMIP6_prra"          field_ref="dummy_??"         /> <!-- P1 (kg m-2 s-1) rainfall_flux : Rainfall rate -->
+   <field id="CMIP6_prra_isf"      field_ref="dummy_??"         /> <!-- P1 (kg m-2 s-1) rainfall_flux : Rainfall rate -->
+   <field id="CMIP6_prra_land"     field_ref="dummy_??"         /> <!-- P1 (kg m-2 s-1) rainfall_flux : Rainfall rate -->
    <field id="CMIP6_prrc"          field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) convective_rainfall_flux : Convective Rainfall rate -->
    <field id="CMIP6_prrc_land"     field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) convective_rainfall_flux : Convective Rainfall rate -->
    <field id="CMIP6_prrsn"         field_ref="dummy_XY"         /> <!-- P1 (1) prrsn : The fraction of the grid averaged rainfall which falls on the snow pack -->
-   <field id="CMIP6_prsn"          field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) snowfall_flux : at surface; includes precipitation of all forms of water in the solid phase -->
-   <field id="CMIP6_prsn_isf"      field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) snowfall_flux : at surface; includes precipitation of all forms of water in the solid phase -->
+   <field id="CMIP6_prsn"          field_ref="dummy_??"         /> <!-- P1 (kg m-2 s-1) snowfall_flux : at surface; includes precipitation of all forms of water in the solid phase -->
+   <field id="CMIP6_prsn_isf"      field_ref="dummy_??"         /> <!-- P1 (kg m-2 s-1) snowfall_flux : at surface; includes precipitation of all forms of water in the solid phase -->
    <field id="CMIP6_prsnc"         field_ref="dummy_XY"         /> <!-- P2 (kg m-2 s-1) convective_snowfall_flux : convective precipitation of all forms of water in the solid phase. -->
    <field id="CMIP6_prsnc_land"    field_ref="dummy_XY"         /> <!-- P2 (kg m-2 s-1) convective_snowfall_flux : convective precipitation of all forms of water in the solid phase. -->
    <field id="CMIP6_prsnsn"        field_ref="dummy_XY"         /> <!-- P1 (1) prsnsn : The fraction of the snowfall which falls on the snow pack -->
@@ -192,30 +201,30 @@
    <field id="CMIP6_psitem"        field_ref="dummy_lat-P"      /> <!-- P1 (kg s^-1) psitem : Residual mass streamfunction, computed from vstar and integrated from the top of the atmosphere (on the native model grid). Reference: Andrews et al (1987): Middle Atmospheric Dynamics. Accademic Press. -->
    <field id="CMIP6_psl"           field_ref="dummy_XY"         /> <!-- P1 (Pa) air_pressure_at_sea_level : Sea Level Pressure -->
    <field id="CMIP6_qgwr"          field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) qgwr : Groundwater recharge from soil layer -->
-   <field id="CMIP6_rainmxrat"     field_ref="dummy_XYA"        /> <!-- P3 (1.0) mass_fraction_of_rain_in_air : Rain mixing ratio -->
+   <field id="CMIP6_rainmxrat27"   field_ref="dummy_XYA"        /> <!-- P2 (1.0) mass_fraction_of_rain_in_air : Rain mixing ratio -->
    <field id="CMIP6_reffcclwtop"   field_ref="dummy_XY"         /> <!-- P1 (m) reffcclwtop : Droplets are liquid only.  This is the effective radius "as seen from space" over convective liquid cloudy portion of grid cell.  This is the value from uppermost model layer with liquid cloud or, if available, or for some models it is the sum over all liquid cloud tops, no matter where they occur, as long as they are seen from the top of the atmosphere. Reported values are weighted by total liquid cloud top fraction of  (as seen from TOA) each time sample when computing monthly mean.daily data, separated to large-scale clouds, convective clouds. If any of the cloud is from more than one process (i.e. shallow convection), please provide them separately.  -->
    <field id="CMIP6_reffclic"      field_ref="dummy_site-A"     /> <!-- P2 (m) effective_radius_of_convective_cloud_ice_particle : This is defined as the in-cloud ratio of the third moment over the second moment of the particle size distribution (obtained by considering only the cloudy portion of the grid cell). -->
    <field id="CMIP6_reffclis"      field_ref="dummy_XYA"        /> <!-- P2 (m) effective_radius_of_stratiform_cloud_ice_particle : This is defined as the in-cloud ratio of the third moment over the second moment of the particle size distribution (obtained by considering only the cloudy portion of the grid cell). -->
    <field id="CMIP6_reffclwc"      field_ref="dummy_XYA"        /> <!-- P2 (m) effective_radius_of_convective_cloud_liquid_water_particle : Droplets are liquid.  The effective radius is defined as the ratio of the third moment over the second moment of the particle size distribution and the time-mean should be calculated, weighting the individual samples by the cloudy fraction of the grid cell. -->
    <field id="CMIP6_reffclws"      field_ref="dummy_XYA"        /> <!-- P2 (m) effective_radius_of_stratiform_cloud_liquid_water_particle : Droplets are liquid.  The effective radius is defined as the ratio of the third moment over the second moment of the particle size distribution and the time-mean should be calculated, weighting the individual samples by the cloudy fraction of the grid cell. -->
    <field id="CMIP6_reffsclwtop"   field_ref="dummy_XY"         /> <!-- P1 (m) reffsclwtop : Droplets are liquid only.  This is the effective radius "as seen from space" over liquid stratiform cloudy portion of grid cell.  This is the value from uppermost model layer with liquid cloud or, if available, or for some models it is the sum over all liquid cloud tops, no matter where they occur, as long as they are seen from the top of the atmosphere. Reported values are weighted by total liquid cloud top fraction of  (as seen from TOA) each time sample when computing monthly mean.daily data, separated to large-scale clouds, convective clouds. If any of the cloud is from more than one process (i.e. shallow convection), please provide them separately.  -->
-   <field id="CMIP6_rivi"          field_ref="dummy_XY"         /> <!-- P1 (m3 s-1) rivi : River Discharge -->
-   <field id="CMIP6_rivo"          field_ref="dummy_XY"         /> <!-- P1 (m3 s-1) rivo : River Inflow -->
+   <field id="CMIP6_rivi"          field_ref="dummy_XY"         /> <!-- P1 (m3 s-1) rivi : Inflow of River Water into Cell -->
+   <field id="CMIP6_rivo"          field_ref="dummy_XY"         /> <!-- P1 (m3 s-1) rivo : Outflow of River Water from Cell -->
    <field id="CMIP6_rld"           field_ref="dummy_site-A"     /> <!-- P1 (W m-2) downwelling_longwave_flux_in_air : Downwelling Longwave Radiation (includes the fluxes at the surface and TOA) -->
    <field id="CMIP6_rld4co2"       field_ref="dummy_XYA"        /> <!-- P1 (W m-2) downwelling_longwave_flux_in_air : Downwelling longwave radiation calculated using carbon dioxide concentrations increased fourfold (includes the fluxes at the surface and TOA) -->
-   <field id="CMIP6_rldcs"         field_ref="dummy_COSP-A"     /> <!-- P1 (W m-2) downwelling_longwave_flux_in_air_assuming_clear_sky : Downwelling clear-sky longwave radiation (includes the fluxes at the surface and TOA) -->
+   <field id="CMIP6_rldcs"         field_ref="dummy_XYA"        /> <!-- P1 (W m-2) downwelling_longwave_flux_in_air_assuming_clear_sky : Downwelling clear-sky longwave radiation (includes the fluxes at the surface and TOA) -->
    <field id="CMIP6_rldcs4co2"     field_ref="dummy_XYA"        /> <!-- P1 (W m-2) downwelling_longwave_flux_in_air_assuming_clear_sky : Downwelling clear-sky longwave radiation calculated using carbon dioxide concentrations increased fourfold (includes the fluxes at the surface and TOA) -->
-   <field id="CMIP6_rlds"          field_ref="dummy_XY"         /> <!-- P1 (W m-2) surface_downwelling_longwave_flux_in_air : Surface Downwelling Longwave Radiation -->
-   <field id="CMIP6_rlds_isf"      field_ref="dummy_XY"         /> <!-- P1 (W m-2) surface_downwelling_longwave_flux_in_air : Surface Downwelling Longwave Radiation -->
+   <field id="CMIP6_rlds"          field_ref="dummy_??"         /> <!-- P1 (W m-2) surface_downwelling_longwave_flux_in_air : Surface Downwelling Longwave Radiation -->
+   <field id="CMIP6_rlds_isf"      field_ref="dummy_??"         /> <!-- P1 (W m-2) surface_downwelling_longwave_flux_in_air : Surface Downwelling Longwave Radiation -->
    <field id="CMIP6_rldscs"        field_ref="dummy_XY"         /> <!-- P1 (W m-2) surface_downwelling_longwave_flux_in_air_assuming_clear_sky : Surface downwelling clear-sky longwave radiation -->
    <field id="CMIP6_rls"           field_ref="dummy_XY"         /> <!-- P1 (W m-2) surface_net_downward_longwave_flux : Net longwave surface radiation -->
    <field id="CMIP6_rls_land"      field_ref="dummy_XY"         /> <!-- P1 (W m-2) surface_net_downward_longwave_flux : Net longwave surface radiation -->
    <field id="CMIP6_rlu"           field_ref="dummy_site-A"     /> <!-- P1 (W m-2) upwelling_longwave_flux_in_air : Upwelling longwave radiation (includes the fluxes at the surface and TOA) -->
    <field id="CMIP6_rlu4co2"       field_ref="dummy_XYA"        /> <!-- P1 (W m-2) upwelling_longwave_flux_in_air : Upwelling longwave radiation calculated using carbon dioxide concentrations increased fourfold (includes the fluxes at the surface and TOA) -->
-   <field id="CMIP6_rlucs"         field_ref="dummy_COSP-A"     /> <!-- P1 (W m-2) upwelling_longwave_flux_in_air_assuming_clear_sky : Upwelling clear-sky longwave radiation  (includes the fluxes at the surface and TOA) -->
+   <field id="CMIP6_rlucs"         field_ref="dummy_XYA"        /> <!-- P1 (W m-2) upwelling_longwave_flux_in_air_assuming_clear_sky : Upwelling clear-sky longwave radiation  (includes the fluxes at the surface and TOA) -->
    <field id="CMIP6_rlucs4co2"     field_ref="dummy_XYA"        /> <!-- P1 (W m-2) upwelling_longwave_flux_in_air_assuming_clear_sky : Upwelling clear-sky longwave radiation calculated using carbon dioxide concentrations increased fourfold (includes the fluxes at the surface and TOA) -->
-   <field id="CMIP6_rlus"          field_ref="dummy_XY"         /> <!-- P1 (W m-2) surface_upwelling_longwave_flux_in_air : Surface Upwelling Longwave Radiation -->
-   <field id="CMIP6_rlus_isf"      field_ref="dummy_XY"         /> <!-- P1 (W m-2) surface_upwelling_longwave_flux_in_air : Surface Upwelling Longwave Radiation -->
+   <field id="CMIP6_rlus"          field_ref="dummy_??"         /> <!-- P1 (W m-2) surface_upwelling_longwave_flux_in_air : Surface Upwelling Longwave Radiation -->
+   <field id="CMIP6_rlus_isf"      field_ref="dummy_??"         /> <!-- P1 (W m-2) surface_upwelling_longwave_flux_in_air : Surface Upwelling Longwave Radiation -->
    <field id="CMIP6_rlut"          field_ref="dummy_XY"         /> <!-- P1 (W m-2) toa_outgoing_longwave_flux : at the top of the atmosphere (to be compared with satellite measurements) -->
    <field id="CMIP6_rlut4co2"      field_ref="dummy_XY"         /> <!-- P1 (W m-2) toa_outgoing_longwave_flux : Top-of-atmosphere outgoing longwave radiation calculated using carbon dioxide concentrations increased fourfold -->
    <field id="CMIP6_rlutcs"        field_ref="dummy_XY"         /> <!-- P1 (W m-2) toa_outgoing_longwave_flux_assuming_clear_sky : TOA Outgoing Clear-sky Longwave Radiation -->
@@ -225,8 +234,8 @@
    <field id="CMIP6_rsd4co2"       field_ref="dummy_XYA"        /> <!-- P1 (W m-2) downwelling_shortwave_flux_in_air : Downwelling shortwave radiation calculated using carbon dioxide concentrations increased fourfold -->
    <field id="CMIP6_rsdcs"         field_ref="dummy_XYA"        /> <!-- P1 (W m-2) downwelling_shortwave_flux_in_air_assuming_clear_sky : Downwelling clear-sky shortwave radiation (includes the fluxes at the surface and top-of-atmosphere) -->
    <field id="CMIP6_rsdcs4co2"     field_ref="dummy_XYA"        /> <!-- P1 (W m-2) downwelling_shortwave_flux_in_air_assuming_clear_sky : Downwelling clear-sky shortwave radiation calculated using carbon dioxide concentrations increased fourfold -->
-   <field id="CMIP6_rsds"          field_ref="dummy_XY"         /> <!-- P1 (W m-2) surface_downwelling_shortwave_flux_in_air : surface solar irradiance for UV calculations -->
-   <field id="CMIP6_rsds_isf"      field_ref="dummy_XY"         /> <!-- P1 (W m-2) surface_downwelling_shortwave_flux_in_air : surface solar irradiance for UV calculations -->
+   <field id="CMIP6_rsds"          field_ref="dummy_??"         /> <!-- P1 (W m-2) surface_downwelling_shortwave_flux_in_air : surface solar irradiance for UV calculations -->
+   <field id="CMIP6_rsds_isf"      field_ref="dummy_??"         /> <!-- P1 (W m-2) surface_downwelling_shortwave_flux_in_air : surface solar irradiance for UV calculations -->
    <field id="CMIP6_rsdscs"        field_ref="dummy_XY"         /> <!-- P1 (W m-2) surface_downwelling_shortwave_flux_in_air_assuming_clear_sky : surface solar irradiance clear sky for UV calculations -->
    <field id="CMIP6_rsdscsdiff"    field_ref="dummy_XY"         /> <!-- P1 (W m-2) surface_diffuse_downwelling_shortwave_flux_in_air_assuming_clear_sky : unset -->
    <field id="CMIP6_rsdsdiff"      field_ref="dummy_XY"         /> <!-- P1 (W m-2) surface_diffuse_downwelling_shortwave_flux_in_air : unset -->
@@ -237,8 +246,8 @@
    <field id="CMIP6_rsu4co2"       field_ref="dummy_XYA"        /> <!-- P1 (W m-2) upwelling_shortwave_flux_in_air : Upwelling Shortwave Radiation calculated using carbon dioxide concentrations increased fourfold -->
    <field id="CMIP6_rsucs"         field_ref="dummy_XYA"        /> <!-- P1 (W m-2) upwelling_shortwave_flux_in_air_assuming_clear_sky : Upwelling clear-sky shortwave radiation  (includes the fluxes at the surface and TOA) -->
    <field id="CMIP6_rsucs4co2"     field_ref="dummy_XYA"        /> <!-- P1 (W m-2) upwelling_shortwave_flux_in_air_assuming_clear_sky : Upwelling clear-sky shortwave radiation calculated using carbon dioxide concentrations increased fourfold -->
-   <field id="CMIP6_rsus"          field_ref="dummy_XY"         /> <!-- P1 (W m-2) surface_upwelling_shortwave_flux_in_air : Surface Upwelling Shortwave Radiation -->
-   <field id="CMIP6_rsus_isf"      field_ref="dummy_XY"         /> <!-- P1 (W m-2) surface_upwelling_shortwave_flux_in_air : Surface Upwelling Shortwave Radiation -->
+   <field id="CMIP6_rsus"          field_ref="dummy_??"         /> <!-- P1 (W m-2) surface_upwelling_shortwave_flux_in_air : Surface Upwelling Shortwave Radiation -->
+   <field id="CMIP6_rsus_isf"      field_ref="dummy_??"         /> <!-- P1 (W m-2) surface_upwelling_shortwave_flux_in_air : Surface Upwelling Shortwave Radiation -->
    <field id="CMIP6_rsuscs"        field_ref="dummy_XY"         /> <!-- P1 (W m-2) surface_upwelling_shortwave_flux_in_air_assuming_clear_sky : Surface upwelling clear-sky shortwave radiation -->
    <field id="CMIP6_rsut"          field_ref="dummy_XY"         /> <!-- P1 (W m-2) toa_outgoing_shortwave_flux : at the top of the atmosphere -->
    <field id="CMIP6_rsut4co2"      field_ref="dummy_XY"         /> <!-- P1 (W m-2) toa_outgoing_shortwave_flux : TOA Outgoing Shortwave Radiation calculated using carbon dioxide concentrations increased fourfold -->
@@ -249,7 +258,7 @@
    <field id="CMIP6_rtmt"          field_ref="dummy_XY"         /> <!-- P1 (W m-2) net_downward_radiative_flux_at_top_of_atmosphere_model : Net Downward Radiative Flux at Top of Model : I.e., at the top of that portion of the atmosphere where dynamics are explicitly treated by the model. This is reported only if it differs from the net downward radiative flux at the top of the atmosphere. -->
    <field id="CMIP6_rzwc"          field_ref="dummy_XY"         /> <!-- P1 (kg m-2) rzwc : Root zone soil moisture -->
    <field id="CMIP6_sandFrac"      field_ref="dummy_XY"         /> <!-- P1 (1.0) sandFrac : Sand Fraction -->
-   <field id="CMIP6_sbl"           field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) surface_snow_and_ice_sublimation_flux : The snow and ice sublimation flux is the loss of snow and ice mass per unit area from the surface resulting from their direct conversion to water vapor that enters the atmosphere. -->
+   <field id="CMIP6_sbl"           field_ref="dummy_??"         /> <!-- P1 (kg m-2 s-1) surface_snow_and_ice_sublimation_flux : The snow and ice sublimation flux is the loss of snow and ice mass per unit area from the surface resulting from their direct conversion to water vapor that enters the atmosphere. -->
    <field id="CMIP6_sci"           field_ref="dummy_XY"         /> <!-- P1 (1.0) shallow_convection_time_fraction : Fraction of time that shallow convection occurs in the grid cell. -->
    <field id="CMIP6_scldncl"       field_ref="dummy_XY"         /> <!-- P1 (m-3) scldncl : Droplets are liquid only.  Report concentration "as seen from space" over stratiform liquid cloudy portion of grid cell.  This is the value from uppermost model layer with liquid cloud or, if available, it is better to sum over all liquid cloud tops, no matter where they occur, as long as they are seen from the top of the atmosphere. Weight by total liquid cloud top fraction of  (as seen from TOA) each time sample when computing monthly mean. -->
    <field id="CMIP6_sconcdust"     field_ref="dummy_XY"         /> <!-- P1 (kg m-3) mass_concentration_of_dust_dry_aerosol_in_air : mass concentration of dust dry aerosol in air in model lowest layer -->
@@ -263,11 +272,11 @@
    <field id="CMIP6_slbnosn"       field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) slbnosn : Sublimation of the snow free area -->
    <field id="CMIP6_sltbasin"      field_ref="dummy_basin_zonal_mean"/> <!-- P2 (kg s-1) northward_ocean_salt_transport : function of latitude, basin -->
    <field id="CMIP6_slthick"       field_ref="dummy_XY"         /> <!-- P1 (m) slthick : Thickness of Soil Layers -->
-   <field id="CMIP6_sltnorth"      field_ref="dummy_basin_zonal_mean"/> <!-- P1 (kg s-1) northward_ocean_salt_transport : unset -->
+   <field id="CMIP6_sltnorth"      field_ref="dummy_basin_zonal_mean"/> <!-- P2 (kg s-1) northward_ocean_salt_transport : unset -->
    <field id="CMIP6_sltnortha"     field_ref="dummy_basin_zonal_mean"/> <!-- P1 (kg s-1) northward_ocean_salt_transport : unset -->
    <field id="CMIP6_smc"           field_ref="dummy_XYA"        /> <!-- P2 (kg m-2 s-1) atmosphere_net_upward_shallow_convective_mass_flux : The net mass flux represents the difference between the updraft and downdraft components.  For models with a distinct shallow convection scheme, this is calculated as convective mass flux divided by the area of the whole grid cell (not just the area of the cloud). -->
    <field id="CMIP6_snmsl"         field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) snmsl : Water flowing out of snowpack -->
-   <field id="CMIP6_snowmxrat"     field_ref="dummy_XYA"        /> <!-- P3 (1.0) mass_fraction_of_snow_in_air : Snow mixing ratio -->
+   <field id="CMIP6_snowmxrat27"   field_ref="dummy_XYA"        /> <!-- P2 (1.0) mass_fraction_of_snow_in_air : Snow mixing ratio -->
    <field id="CMIP6_snrefr"        field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) surface_snow_and_ice_refreezing_flux : Re-freezing of water in the snow -->
    <field id="CMIP6_snwc"          field_ref="dummy_XY"         /> <!-- P1 (kg m-2) snwc : Total water mass of the snowpack (liquid or frozen), averaged over a grid cell and interecepted by the canopy. -->
    <field id="CMIP6_sw"            field_ref="dummy_XY"         /> <!-- P1 (kg m-2) sw : Total liquid water storage, other than soil, snow or interception storage (i.e. lakes, river channel or depression storage). -->
@@ -275,9 +284,11 @@
    <field id="CMIP6_swtoafluxaerocs" field_ref="dummy_XY"         /> <!-- P1 (W m-2 ) swtoafluxaerocs : downwelling shortwave flux due to volcanic aerosols at TOA under clear sky to be diagnosed through double radiation call -->
    <field id="CMIP6_t2"            field_ref="dummy_XYA"        /> <!-- P2 (K2) square_of_air_temperature : Air temperature squared -->
    <field id="CMIP6_t20d"          field_ref="dummy_XY"         /> <!-- P2 (m) depth_of_isosurface_of_sea_water_potential_temperature : unset -->
-   <field id="CMIP6_ta"            field_ref="dummy_XYA"        /> <!-- P2 (K) air_temperature : Air Temperature -->
+   <field id="CMIP6_ta"            field_ref="dummy_XYA"        /> <!-- P1 (K) air_temperature : Air Temperature -->
+   <field id="CMIP6_ta27"          field_ref="dummy_XYA"        /> <!-- P3 (K) air_temperature : Air Temperature -->
    <field id="CMIP6_ta500"         field_ref="dummy_XY"         /> <!-- P1 (K) air_temperature : Temperature on the 500 hPa surface -->
    <field id="CMIP6_ta700"         field_ref="dummy_XY"         /> <!-- P1 (K) air_temperature : Air temperature at 700hPa -->
+   <field id="CMIP6_ta7h"          field_ref="dummy_XYA"        /> <!-- P1 (K) air_temperature : Air Temperature -->
    <field id="CMIP6_ta850"         field_ref="dummy_XY"         /> <!-- P1 (K) air_temperature : Air temperature at 850hPa -->
    <field id="CMIP6_tas"           field_ref="dummy_XY"         /> <!-- P1 (K) air_temperature : near-surface (usually, 2 meter) air temperature -->
    <field id="CMIP6_tas_isf"       field_ref="dummy_XY"         /> <!-- P1 (K) air_temperature : near-surface (usually, 2 meter) air temperature -->
@@ -289,11 +300,12 @@
    <field id="CMIP6_tauv"          field_ref="dummy_XY"         /> <!-- P1 (Pa) surface_downward_northward_stress : Downward northward wind stress at the surface -->
    <field id="CMIP6_tauvpbl"       field_ref="dummy_XY"         /> <!-- P1 (Pa) tauvpbl : The  downward northward stress associated with the models parameterization of the plantary boundary layer. (This request is related to a WGNE effort to understand how models parameterize the surface stresses.) -->
    <field id="CMIP6_tcs"           field_ref="dummy_XY"         /> <!-- P1 (K) canopy_temperature : Vegetation temperature, averaged over all vegetation types -->
-   <field id="CMIP6_tdps"          field_ref="dummy_XY"         /> <!-- P2 (K) dew_point_temperature : unset -->
+   <field id="CMIP6_tdps"          field_ref="dummy_XY"         /> <!-- P1 (K) dew_point_temperature : unset -->
    <field id="CMIP6_tendacabf"     field_ref="dummy_0d"         /> <!-- P3 (kg s-1) tendacabf : The total surface mass balance flux over land ice is a spatial integration of the surface mass balance flux -->
-   <field id="CMIP6_tendlibmassbf" field_ref="dummy_0d"         /> <!-- P3 (kg s-1) tendlibmassbf : The total basal mass balance flux over land ice is a spatial integration of the basal mass balance flux -->
-   <field id="CMIP6_tendlicalvf"   field_ref="dummy_0d"         /> <!-- P3 (kg s-1) tendlicalvf : The total calving flux over land ice is a spatial integration of the calving flux -->
+   <field id="CMIP6_tendlibmassbf" field_ref="dummy_0d"         /> <!-- P3 (kg s-1) tendency_of_land_ice_mass_due_to_basal_mass_balance : The total basal mass balance flux over land ice is a spatial integration of the basal mass balance flux -->
+   <field id="CMIP6_tendlicalvf"   field_ref="dummy_0d"         /> <!-- P3 (kg s-1) tendency_of_land_ice_mass_due_to_calving : The total calving flux over land ice is a spatial integration of the calving flux -->
    <field id="CMIP6_tgs"           field_ref="dummy_XY"         /> <!-- P1 (K) surface_temperature : Surface bare soil temperature -->
+   <field id="CMIP6_thetaot"       field_ref="dummy_XY"         /> <!-- P1 (K) sea_water_potential_temperature : Vertical average of the sea water potential temperature through the whole ocean depth -->
    <field id="CMIP6_thetaot2000"   field_ref="dummy_XY"         /> <!-- P1 (K) thetaot2000 : Upper 2000m, 2D field -->
    <field id="CMIP6_thetaot300"    field_ref="dummy_XY"         /> <!-- P1 (K) thetaot300 : Upper 300m, 2D field -->
    <field id="CMIP6_thetaot700"    field_ref="dummy_XY"         /> <!-- P1 (K) thetaot700 : Upper 700m, 2D field -->
@@ -304,69 +316,78 @@
    <field id="CMIP6_tnhusmp"       field_ref="dummy_COSP-A"     /> <!-- P1 (s-1) tendency_of_specific_humidity_due_to_model_physics : Tendency of specific humidity due to model physics. This includes sources and sinks from parametrized moist physics (e.g. convection, boundary layer, stratiform condensation/evaporation, etc.) and excludes sources and sinks from resolved dynamics or from horizontal or vertical numerical diffusion not associated with model physicsl.  For example any diffusive mixing by the boundary layer scheme would be included. -->
    <field id="CMIP6_tnhuspbl"      field_ref="dummy_site-A"     /> <!-- P1 (s-1) tnhuspbl : Includes all boundary layer terms including diffusive terms. -->
    <field id="CMIP6_tnhusscp"      field_ref="dummy_site-A"     /> <!-- P1 (s-1) tnhusscp : Tendency of Specific Humidity Due to Stratiform Clouds and Precipitation -->
-   <field id="CMIP6_tnhusscpbl"    field_ref="dummy_XYA"        /> <!-- P1 (s-1) tendency_of_specific_humidity_due_to_stratiform_cloud_and_precipitation_and_boundary_layer_mixing : Tendency of Specific Humidity Due to Stratiform Cloud and Precipitation and Boundary Layer Mixing  (to be specified only in  models which do not separate budget terms for stratiform cloud, precipitation and boundary layer schemes.  Includes all bounday layer terms including and diffusive terms.) -->
+   <field id="CMIP6_tnhusscpbl"    field_ref="dummy_COSP-A"     /> <!-- P1 (s-1) tendency_of_specific_humidity_due_to_stratiform_cloud_and_precipitation_and_boundary_layer_mixing : Tendency of Specific Humidity Due to Stratiform Cloud and Precipitation and Boundary Layer Mixing  (to be specified only in  models which do not separate budget terms for stratiform cloud, precipitation and boundary layer schemes.  Includes all bounday layer terms including and diffusive terms.) -->
    <field id="CMIP6_tnt"           field_ref="dummy_XYA"        /> <!-- P1 (K s-1) tendency_of_air_temperature : Tendency of Air Temperature -->
    <field id="CMIP6_tnta"          field_ref="dummy_XYA"        /> <!-- P1 (K s-1) tendency_of_air_temperature_due_to_advection : Tendency of Air Temperature due to Advection -->
    <field id="CMIP6_tntc"          field_ref="dummy_lat-P"      /> <!-- P1 (K s-1) tendency_of_air_temperature_due_to_convection : Tendencies from cumulus convection scheme. -->
    <field id="CMIP6_tntd"          field_ref="dummy_site-A"     /> <!-- P1 (K s-1) tntd : This includes any horizontal or vertical numerical temperature diffusion not associated with the parametrized moist physics or the resolved dynamics.  For example, any vertical diffusion which is part of the boundary layer mixing scheme should be excluded, as should any diffusion which is included in the terms from the resolved dynamics.   This term is required to check the closure of the temperature budget. -->
    <field id="CMIP6_tntlw"         field_ref="dummy_XYA"        /> <!-- P1 (K s-1) tendency_of_air_temperature_due_to_longwave_heating : Longwave heating rates -->
-   <field id="CMIP6_tntmp"         field_ref="dummy_lat-P"      /> <!-- P2 (K s-1) tendency_of_air_temperature_due_to_model_physics : Tendency of air temperature due to model physics. This includes sources and sinks from parametrized physics (e.g. radiation, convection, boundary layer, stratiform condensation/evaporation, etc.). It excludes sources and sinks from resolved dynamics and numerical diffusion not associated with parametrized physics.  For example, any vertical diffusion which is part of the boundary layer mixing scheme should be included, while numerical diffusion applied in addition to physics or resolved dynamics should be excluded.  This term is required to check the closure of the heat budget. -->
+   <field id="CMIP6_tntmp"         field_ref="dummy_lat-P"      /> <!-- P1 (K s-1) tendency_of_air_temperature_due_to_model_physics : Tendency of air temperature due to model physics. This includes sources and sinks from parametrized physics (e.g. radiation, convection, boundary layer, stratiform condensation/evaporation, etc.). It excludes sources and sinks from resolved dynamics and numerical diffusion not associated with parametrized physics.  For example, any vertical diffusion which is part of the boundary layer mixing scheme should be included, while numerical diffusion applied in addition to physics or resolved dynamics should be excluded.  This term is required to check the closure of the heat budget. -->
+   <field id="CMIP6_tntmp27"       field_ref="dummy_lat-P"      /> <!-- P2 (K s-1) tendency_of_air_temperature_due_to_model_physics : Tendency of air temperature due to model physics. This includes sources and sinks from parametrized physics (e.g. radiation, convection, boundary layer, stratiform condensation/evaporation, etc.). It excludes sources and sinks from resolved dynamics and numerical diffusion not associated with parametrized physics.  For example, any vertical diffusion which is part of the boundary layer mixing scheme should be included, while numerical diffusion applied in addition to physics or resolved dynamics should be excluded.  This term is required to check the closure of the heat budget. -->
    <field id="CMIP6_tntogw"        field_ref="dummy_lat-P"      /> <!-- P2 (K s-1) tntogw : Temperature tendency due to dissipation of parameterized orographic gravity waves. -->
    <field id="CMIP6_tntpbl"        field_ref="dummy_XYA"        /> <!-- P1 (K s-1) tntpbl : Includes all boundary layer terms including diffusive terms. -->
    <field id="CMIP6_tntr"          field_ref="dummy_XYA"        /> <!-- P1 (K s-1) tendency_of_air_temperature_due_to_radiative_heating : Tendency of Air Temperature due to Radiative Heating -->
-   <field id="CMIP6_tntrlcs"       field_ref="dummy_site-A"     /> <!-- P1 (K s-1) tendency_of_air_temperature_due_to_longwave_heating_assuming_clear_sky : Tendency of Air Temperature due to Clear Sky Longwave Radiative Heating -->
-   <field id="CMIP6_tntrscs"       field_ref="dummy_lat-P"      /> <!-- P1 (K s-1) tendency_of_air_temperature_due_to_shortwave_heating_assuming_clear_sky : Tendency of Air Temperature due to Clear Sky Shortwave Radiative Heating -->
+   <field id="CMIP6_tntr27"        field_ref="dummy_XYA"        /> <!-- P3 (K s-1) tendency_of_air_temperature_due_to_radiative_heating : Tendency of Air Temperature due to Radiative Heating -->
+   <field id="CMIP6_tntrlcs"       field_ref="dummy_lat-P"      /> <!-- P1 (K s-1) tendency_of_air_temperature_due_to_longwave_heating_assuming_clear_sky : Tendency of Air Temperature due to Clear Sky Longwave Radiative Heating -->
+   <field id="CMIP6_tntrscs"       field_ref="dummy_XYA"        /> <!-- P1 (K s-1) tendency_of_air_temperature_due_to_shortwave_heating_assuming_clear_sky : Tendency of Air Temperature due to Clear Sky Shortwave Radiative Heating -->
    <field id="CMIP6_tntscp"        field_ref="dummy_site-A"     /> <!-- P1 (K s-1) tntscp : Tendency of Air Temperature Due to Stratiform Clouds and Precipitation -->
-   <field id="CMIP6_tntscpbl"      field_ref="dummy_COSP-A"     /> <!-- P1 (K s-1) tendency_of_air_temperature_due_to_stratiform_cloud_and_precipitation_and_boundary_layer_mixing : Tendency of Air Temperature Due to Stratiform Cloud and Precipitation and Boundary Layer Mixing (to be specified only in  models which do not separate cloud, precipitation and boundary layer terms.  Includes all boundary layer terms including diffusive ones.) -->
+   <field id="CMIP6_tntscpbl"      field_ref="dummy_XYA"        /> <!-- P1 (K s-1) tendency_of_air_temperature_due_to_stratiform_cloud_and_precipitation_and_boundary_layer_mixing : Tendency of Air Temperature Due to Stratiform Cloud and Precipitation and Boundary Layer Mixing (to be specified only in  models which do not separate cloud, precipitation and boundary layer terms.  Includes all boundary layer terms including diffusive ones.) -->
    <field id="CMIP6_tntsw"         field_ref="dummy_XYA"        /> <!-- P1 (K s-1) tendency_of_air_temperature_due_to_shortwave_heating : shortwave heating rates -->
    <field id="CMIP6_toffset"       field_ref="dummy_COSPcurtain"/> <!-- P1 (day) time : The offset time should be added to the value stored in the time dimension to get the actual time.  The actual time is the time (UTC) of the corresponding point in the satellite orbit used to extract the model data. -->
    <field id="CMIP6_tr"            field_ref="dummy_XY"         /> <!-- P1 (K) surface_temperature : Effective radiative surface temperature, averaged over the grid cell -->
-   <field id="CMIP6_ts"            field_ref="dummy_XY"         /> <!-- P1 (K) surface_temperature : Temperature of the lower boundary of the atmosphere -->
-   <field id="CMIP6_ts_isf"        field_ref="dummy_XY"         /> <!-- P1 (K) surface_temperature : Temperature of the lower boundary of the atmosphere -->
+   <field id="CMIP6_ts"            field_ref="dummy_??"         /> <!-- P1 (K) surface_temperature : Temperature of the lower boundary of the atmosphere -->
+   <field id="CMIP6_ts_isf"        field_ref="dummy_??"         /> <!-- P1 (K) surface_temperature : Temperature of the lower boundary of the atmosphere -->
    <field id="CMIP6_tsnl"          field_ref="dummy_XY"         /> <!-- P1 (K) snow_temperature : Temperature in the snow pack present in the grid-cell. 3D variable for multi-layer snow schemes. -->
    <field id="CMIP6_tsns"          field_ref="dummy_XY"         /> <!-- P1 (K) surface_temperature : Temperature of the snow surface as it interacts with the atmosphere, averaged over a grid cell. -->
    <field id="CMIP6_twap"          field_ref="dummy_XYA"        /> <!-- P2 (K Pa s-1) product_of_omega_and_air_temperature : Product of air temperature and pressure tendency -->
    <field id="CMIP6_tws"           field_ref="dummy_XY"         /> <!-- P1 (kg m-2) tws : Terrestrial Water Storage -->
    <field id="CMIP6_u2"            field_ref="dummy_XYA"        /> <!-- P2 (m2 s-2) square_of_eastward_wind : u*u -->
-   <field id="CMIP6_ua"            field_ref="dummy_XYA"        /> <!-- P1 (m s-1) eastward_wind : Eastward Wind -->
+   <field id="CMIP6_ua"            field_ref="dummy_XY"         /> <!-- P1 (m s-1) eastward_wind : Eastward Wind -->
    <field id="CMIP6_ua200"         field_ref="dummy_XY"         /> <!-- P1 (m s-1) eastward_wind : Zonal wind (positive eastwards) at 200hPa -->
+   <field id="CMIP6_ua27"          field_ref="dummy_XY"         /> <!-- P3 (m s-1) eastward_wind : Eastward Wind -->
+   <field id="CMIP6_ua7h"          field_ref="dummy_XY"         /> <!-- P1 (m s-1) eastward_wind : Eastward Wind -->
    <field id="CMIP6_ua850"         field_ref="dummy_XY"         /> <!-- P1 (m s-1) eastward_wind : Zonal wind on the 850 hPa surface -->
    <field id="CMIP6_uas"           field_ref="dummy_XY"         /> <!-- P1 (m s-1) eastward_wind : Eastward component of the near-surface (usually, 10 meters)  wind -->
    <field id="CMIP6_ut"            field_ref="dummy_XYA"        /> <!-- P2 (K m s-1) product_of_eastward_wind_and_air_temperature : Product of air temperature and eastward wind -->
    <field id="CMIP6_utendepfd"     field_ref="dummy_lat-P"      /> <!-- P1 (m s-2) tendency_of_eastward_wind_due_to_eliassen_palm_flux_divergence : Tendency of the zonal mean zonal wind due to the divergence of the Eliassen-Palm flux. -->
    <field id="CMIP6_utendnogw"     field_ref="dummy_lat-P"      /> <!-- P1 (m s-2) tendency_of_eastward_wind_due_to_nonorographic_gravity_wave_drag : Tendency of the eastward wind by parameterized nonorographic gravity waves.   -->
-   <field id="CMIP6_utendogw"      field_ref="dummy_lat-P"      /> <!-- P1 (m s-2) tendency_of_eastward_wind_due_to_orographic_gravity_wave_drag : Tendency of the eastward wind by parameterized orographic gravity waves.  -->
+   <field id="CMIP6_utendogw"      field_ref="dummy_XYA"        /> <!-- P1 (m s-2) tendency_of_eastward_wind_due_to_orographic_gravity_wave_drag : Tendency of the eastward wind by parameterized orographic gravity waves.  -->
    <field id="CMIP6_utendvtem"     field_ref="dummy_lat-P"      /> <!-- P1 (m s-1 d-1) utendvtem : Tendency of zonally averaged eastward wind, by the residual upward wind advection (on the native model grid). Reference: Andrews et al (1987): Middle Atmospheric Dynamics. Accademic Press. -->
    <field id="CMIP6_utendwtem"     field_ref="dummy_lat-P"      /> <!-- P1 (m s-1 d-1) utendwtem : Tendency of zonally averaged eastward wind, by the residual northward wind advection (on the native model grid). Reference: Andrews et al (1987): Middle Atmospheric Dynamics. Accademic Press. -->
    <field id="CMIP6_uv"            field_ref="dummy_XYA"        /> <!-- P2 (m2 s-2) product_of_eastward_wind_and_northward_wind : u*v -->
    <field id="CMIP6_uwap"          field_ref="dummy_XYA"        /> <!-- P2 (Pa m s-2) product_of_eastward_wind_and_omega : u*omega -->
    <field id="CMIP6_v2"            field_ref="dummy_XYA"        /> <!-- P2 (m2 s-2) square_of_northward_wind : v*v -->
-   <field id="CMIP6_va"            field_ref="dummy_XYA"        /> <!-- P3 (m s-1) northward_wind : Northward Wind -->
+   <field id="CMIP6_va"            field_ref="dummy_XYA"        /> <!-- P1 (m s-1) northward_wind : Northward Wind -->
    <field id="CMIP6_va200"         field_ref="dummy_XY"         /> <!-- P1 (m s-1) northward_wind : Northward component of the wind -->
+   <field id="CMIP6_va27"          field_ref="dummy_XYA"        /> <!-- P3 (m s-1) northward_wind : Northward Wind -->
+   <field id="CMIP6_va7h"          field_ref="dummy_XYA"        /> <!-- P1 (m s-1) northward_wind : Northward Wind -->
    <field id="CMIP6_va850"         field_ref="dummy_XY"         /> <!-- P1 (m s-1) northward_wind : Northward component of the wind at 850hPa -->
    <field id="CMIP6_vas"           field_ref="dummy_XY"         /> <!-- P1 (m s-1) northward_wind : Northward component of the near surface wind -->
    <field id="CMIP6_vegFrac"       field_ref="dummy_XY"         /> <!-- P2 (%) vegFrac : as specified by C4MIP -->
    <field id="CMIP6_vmrox"         field_ref="dummy_lat-P"      /> <!-- P1 (mol mol-1) vmrox : Mole Fraction of Ox -->
-   <field id="CMIP6_vortmean"      field_ref="dummy_XYA"        /> <!-- P1 (s-1) vortmean : Mean vorticity over 850,700,600 hPa -->
-   <field id="CMIP6_vstarbar"      field_ref="dummy_lat-P"      /> <!-- P2 (m s-1) northward_transformed_eulerian_mean_air_velocity : TEM residual mean meridional circulation vstarbar, zonal mean on plev36 -->
+   <field id="CMIP6_vortmean"      field_ref="dummy_XYA"        /> <!-- P1 (s-1) atmosphere_relative_vorticity : Mean vorticity over 850,700,600 hPa -->
    <field id="CMIP6_vt"            field_ref="dummy_XYA"        /> <!-- P2 (K m s-1) product_of_northward_wind_and_air_temperature : Product of air temperature and northward wind -->
    <field id="CMIP6_vtem"          field_ref="dummy_lat-P"      /> <!-- P1 (m s-1) northward_transformed_eulerian_mean_air_velocity : Transformed Eulerian Mean Diagnostics v*, meridional component of the residual meridional circulation (v*, w*) derived from 6 hr or higher frequency data fields (use instantaneous daily fields or 12 hr fields if the 6 hr data are not available). -->
-   <field id="CMIP6_vtendnogw"     field_ref="dummy_XYA"        /> <!-- P2 (m s-2) vtendnogw : Tendency of the northward wind by parameterized nonorographic gravity waves.  (Note that CF name tables only have a general northward tendency for all gravity waves, and we need it separated by type.) -->
+   <field id="CMIP6_vtendnogw"     field_ref="dummy_lat-P"      /> <!-- P2 (m s-2) vtendnogw : Tendency of the northward wind by parameterized nonorographic gravity waves.  (Note that CF name tables only have a general northward tendency for all gravity waves, and we need it separated by type.) -->
    <field id="CMIP6_vtendogw"      field_ref="dummy_XYA"        /> <!-- P2 (m s-2) vtendogw : Tendency of the northward wind by parameterized orographic gravity waves.  (Note that CF name tables only have a general northward tendency for all gravity waves, and we need it separated by type.) -->
    <field id="CMIP6_vwap"          field_ref="dummy_XYA"        /> <!-- P2 (Pa m s-2) product_of_northward_wind_and_omega : v*omega -->
    <field id="CMIP6_wap"           field_ref="dummy_XYA"        /> <!-- P1 (Pa s-1) lagrangian_tendency_of_air_pressure : Omega (vertical velocity in pressure coordinates, positive downwards) -->
    <field id="CMIP6_wap2"          field_ref="dummy_XYA"        /> <!-- P2 (Pa2 s-2) square_of_lagrangian_tendency_of_air_pressure : omega*omega -->
+   <field id="CMIP6_wap27"         field_ref="dummy_XYA"        /> <!-- P3 (Pa s-1) lagrangian_tendency_of_air_pressure : Omega (vertical velocity in pressure coordinates, positive downwards) -->
+   <field id="CMIP6_wap4"          field_ref="dummy_XYA"        /> <!-- P1 (Pa s-1) lagrangian_tendency_of_air_pressure : Omega (vertical velocity in pressure coordinates, positive downwards) -->
    <field id="CMIP6_wap500"        field_ref="dummy_XY"         /> <!-- P1 (Pa s-1) lagrangian_tendency_of_air_pressure : Omega (vertical velocity in pressure coordinates, positive downwards) at 500 hPa level;  -->
-   <field id="CMIP6_wbptemp"       field_ref="dummy_XYA"        /> <!-- P1 (K) wbptemp : Wet bulb potential temperature -->
+   <field id="CMIP6_wap7h"         field_ref="dummy_XYA"        /> <!-- P2 (Pa s-1) lagrangian_tendency_of_air_pressure : Omega (vertical velocity in pressure coordinates, positive downwards) -->
+   <field id="CMIP6_wbptemp7h"     field_ref="dummy_XYA"        /> <!-- P1 (K) wbptemp : Wet bulb potential temperature -->
    <field id="CMIP6_wilt"          field_ref="dummy_XY"         /> <!-- P1 (%) wilt : Wilting Point -->
-   <field id="CMIP6_wstarbar"      field_ref="dummy_lat-P"      /> <!-- P2 (m s-1) wstarbar : TEM residual mean vertical circulation wstarbar, zonal mean on plev36 -->
    <field id="CMIP6_wtd"           field_ref="dummy_XY"         /> <!-- P1 (m) wtd : Water table depth -->
    <field id="CMIP6_wtem"          field_ref="dummy_lat-P"      /> <!-- P1 (m s-1) wtem : Transformed Eulerian Mean Diagnostics w*, meridional component of the residual meridional circulation (v*, w*) derived from 6 hr or higher frequency data fields (use instantaneous daily fields or 12 hr fields if the 6 hr data are not available). Scale height: 6950 m -->
    <field id="CMIP6_xgwdparam"     field_ref="dummy_lat-P"      /> <!-- P2 (Pa) atmosphere_eastward_stress_due_to_gravity_wave_drag : Parameterised x-component of gravity wave drag -->
-   <field id="CMIP6_xnonoroggwdparam" field_ref="dummy_lat-P"      /> <!-- P3 (m s-2) xnonoroggwdparam : Parameterised x-component of non-orographic gravity wave drag -->
+   <field id="CMIP6_xnonoroggwdparam27" field_ref="dummy_XYA"        /> <!-- P3 (m s-2) xnonoroggwdparam : Parameterised x-component of non-orographic gravity wave drag -->
    <field id="CMIP6_ygwdparam"     field_ref="dummy_lat-P"      /> <!-- P2 (Pa) atmosphere_northward_stress_due_to_gravity_wave_drag : Parameterised y- component of gravity wave drag -->
-   <field id="CMIP6_ynonoroggwdparam" field_ref="dummy_XYA"        /> <!-- P2 (m s-2) ynonoroggwdparam : Parameterised y- component of non-orogrpahic  gravity wave drag -->
+   <field id="CMIP6_ynonoroggwdparam27" field_ref="dummy_XYA"        /> <!-- P3 (m s-2) ynonoroggwdparam : Parameterised y- component of non-orogrpahic  gravity wave drag -->
    <field id="CMIP6_zg"            field_ref="dummy_XYA"        /> <!-- P1 (m) geopotential_height : Geopotential Height -->
+   <field id="CMIP6_zg27"          field_ref="dummy_XYA"        /> <!-- P3 (m) geopotential_height : Geopotential Height -->
+   <field id="CMIP6_zg7h"          field_ref="dummy_XYA"        /> <!-- P1 (m) geopotential_height : Geopotential Height -->
    <field id="CMIP6_zmla"          field_ref="dummy_XY"         /> <!-- P1 (m) atmosphere_boundary_layer_thickness : Height of Boundary Layer -->
    <field id="CMIP6_zmlwaero"      field_ref="dummy_lat-A"      /> <!-- P1 (K s-1) zmlwaero : longwave heating rate due to volcanic aerosols to be diagnosed through double radiation call, zonal average values required -->
    <field id="CMIP6_zmswaero"      field_ref="dummy_lat-A"      /> <!-- P1 (K s-1) zmswaero : shortwave heating rate due to volcanic aerosols to be diagnosed through double radiation call, zonal average values required -->

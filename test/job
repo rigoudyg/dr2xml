@@ -18,7 +18,7 @@ CLIENT=$BINS/test_grid.exe
 SERVER=$BINS/xios_server.exe
 
 # MENAGE ET MISE A JOUR DES PARAMETRES
-rm -f *.nc  
+rm -f *.nc  outputs/*nc
 
 sed -i \
     -e "s:^ *ni_glo *=.*:ni_glo=${ni_glo}:" \
@@ -40,13 +40,15 @@ args=": -np ${nb_client} $CLIENT"
 inidate=$start_date
 dshift=0
 listfile=$(ls context*xml)
+set -x
 for index in `seq 1 $nb_run`; do
     echo $index
     for file in ${listfile}; do  
 	sed -i -e "/calendar/s/\(start_date=\"\)[^\"]*\(\"\)/\1${inidate}\2/" ${file}
     done    
-    mpirun $args > run.out
-    (cat run.out | grep -v "Computing intersections" | grep -v "Computing grads" | grep -v "Remapping" ) || :
+    touch temoin
+    mpirun $args #| tee > run.out
+    #(cat run.out | grep -v "Computing intersections" | grep -v "Computing grads" | grep -v "Remapping" ) || :
     dshift=$((dshift + duration))
     inidate=$start_date" + "${dshift}${dunits}
 done
