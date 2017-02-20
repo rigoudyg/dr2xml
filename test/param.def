@@ -2,7 +2,7 @@
 ni_glo=10
 nj_glo=10
 llm=5
-timestep=600s
+timestep=3600s
 duration=1d
 sypd=100000
 /

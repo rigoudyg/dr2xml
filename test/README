@@ -1,12 +1,14 @@
 Pour faire tourner toutes les pièces du puzzle, en mode toy.
 
 les templates de ping file arpege+surfex (arpsfx) sont générés par le
-   notebook adhoc du répertoire parent,
+   notebook adhoc du répertoire parent, (sans interpolations
+   veticé&les pour l'instant)
 
 Les fichier *toy2dummy.xml font la correspondance entre noms de champs
    en pingfile et noms des champs fournis par le toy
 
-dofiles.py génère le fichier dr2xml_arpsfx.xml adhoc (en mode dummy=include)
+dofiles.py génère les pingfiles et les fichier dr2xml_arpsfx.xml adhoc
+  et dr2xml_nemo.xml adhoc (en mode dummy=include)
 
 Le toy test_grid.exe (cf ticket Xios https://forge.ipsl.jussieu.fr/ioserver/ticket/116)
   tourne avec les deux composantes arpsfx et nemo); il est lancé par le
@@ -15,4 +17,6 @@ Le toy test_grid.exe (cf ticket Xios https://forge.ipsl.jussieu.fr/ioserver/tick
 
 
 
-ne pas demander les interpolations vert (i.e. on laisse dummy sur certains champs, selon shape)
+exemple:
+  python dofiles.py
+  job 1 d 

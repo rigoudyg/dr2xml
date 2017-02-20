@@ -702,7 +702,7 @@ def create_xios_field_ref(sv,alias,table,lset,sset,end_field_defs,
     #
     rep='  <field field_ref="%s" name="%s" ts_enabled="true" '% \
         ( nextvar,sv.label)
-    rep+=' operation="%s" detect_missing_value="%s"'% \
+    rep+=' operation="%s" detect_missing_value="%s" default_value="1.e+20"'% \
         ( operation,detect_missing)
     rep+=' cell_methods="%s" cell_methods_mode="overwrite"'% sv.cell_methods
     rep+='>\n'

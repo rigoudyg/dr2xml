@@ -128,7 +128,7 @@ PROGRAM test_grid
   height(1:ni,1:nj,:)=height_glo(ibegin+1:iend+1,jbegin+1:jend+1,:)
 
   CALL xios_context_initialize("arpsfx",comm)
-  write(0,*) 'atm context initialized' ; call flush(0)
+  !write(0,*) 'atm context initialized' ; call flush(0)
   CALL xios_get_handle("arpsfx",ctx_hdl)
   CALL xios_set_current_context(ctx_hdl)
 

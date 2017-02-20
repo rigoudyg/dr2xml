@@ -4,7 +4,7 @@ set -e
 # PARAMETRES DE LA SIMULATION
 ni_glo="10" ; nj_glo="10" ; llm="5" ; 
 duration=${1:-1} ; dunits=${2:-d} ; nb_run=${3:-1} ;
-ts=${4:-"600s"} ; sypd=${5:-100000}
+ts=${4:-"3600s"} ; sypd=${5:-100000}
 start_date="1950-01-01 00:00:00"
 
 # PARAMETRES XML
