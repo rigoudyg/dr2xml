@@ -169,6 +169,8 @@ def read_extraTable(path,table,dq,printout=False):
             extra_var.cell_methods=v["cell_methods"]
             extra_var.cell_measures=v["cell_measures"]
             extra_var.positive=v["positive"]
+            prio=mip_era.lower()+"_priority"
+            extra_var.Priority=float(v[prio])
             # Tranlate full-dimensions read in Table (e.g. "longitude latitude time p850")
             # into DR spatial-only dimensions (e.g. "longitude|latitude")
             dims=(v["dimensions"]).split(" ")
@@ -304,9 +306,10 @@ def process_homeVars(lset,mip_vars_list,dq,expid=False,printout=False):
                                  "should be cmor.")
         # mpmoine_last_modif: process_homeVars: ajout du cas type='extra'
         elif hv.type=='extra':
-            if printout: print "Info:",hv_info,"HOMEVar is read in an extra table." \
-                            " => Taken into account."
-            mip_vars_list.append(hv)
+            if hv.Priority<=lset["max_priority"]:
+                if printout: print "Info:",hv_info,"HOMEVar is read in an extra table with priority " \
+                               ,hv.Priority," => Taken into account."
+                mip_vars_list.append(hv)
         else:
             if printout:
                 print "Error:",hv_info,"HOMEVar type",hv.type,\

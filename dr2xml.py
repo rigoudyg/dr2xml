@@ -756,7 +756,7 @@ def create_xios_field_ref(sv,alias,table,lset,sset,end_field_defs,
 def gather_AllSimpleVars(lset,expid=False,year=False,printout=False):
     mip_vars_list=select_CMORvars_for_lab(lset,expid,year,printout=printout)
     if lset['listof_home_vars']:
-        home_vars_list=process_homeVars(lset,mip_vars_list,dq,expid,printout)
+        process_homeVars(lset,mip_vars_list,dq,expid,printout)
     else: print "Info: No HOMEvars list provided."
     return mip_vars_list
 
