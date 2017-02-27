@@ -3,10 +3,12 @@
 <!-- for variables which realm equals one of _seaIce-->
    <field id="CMIP6_areacella"     field_ref="dummy_XY"         /> <!-- P1 (m2) cell_area : For atmospheres with more than 1 mesh (e.g., staggered grids), report areas that apply to surface vertical fluxes of energy. -->
    <field id="CMIP6_fsitherm"      field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) water_flux_into_sea_water_due_to_sea_ice_thermodynamics : computed as the sea ice thermodynamic water flux into the ocean divided by the area of the ocean portion of the grid cell. -->
-   <field id="CMIP6_hfsifrazil"    field_ref="dummy_XY"         /> <!-- P1 (W m-2) heat_flux_into_sea_water_due_to_freezing_of_frazil_ice : Heat Flux into Sea Water due to Frazil Ice Formation -->
+   <field id="CMIP6_hfsifrazil"    field_ref="dummy_XYO"        /> <!-- P1 (W m-2) heat_flux_into_sea_water_due_to_freezing_of_frazil_ice : Heat Flux into Sea Water due to Frazil Ice Formation -->
    <field id="CMIP6_hfsifrazil2d"  field_ref="dummy_XY"         /> <!-- P1 (W m-2) heat_flux_into_sea_water_due_to_freezing_of_frazil_ice : Heat Flux into Sea Water due to Frazil Ice Formation -->
+   <field id="CMIP6_hmv1"          field_ref="dummy_XY"         /> <!-- P1 (None) None : None -->
    <field id="CMIP6_ps"            field_ref="dummy_XY"         /> <!-- P1 (Pa) surface_air_pressure : surface pressure (not mean sea-level pressure), 2-D field to calculate the 3-D pressure field from hybrid coordinates -->
    <field id="CMIP6_sfdsi"         field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) downward_sea_ice_basal_salt_flux : This field is physical, and it arises since sea ice has a nonzero salt content, so it exchanges salt with the liquid ocean upon melting and freezing. -->
+   <field id="CMIP6_siacrossline"  field_ref="dummy_basin_zonal_mean"/> <!-- P1 (kg s-1) sea_ice_transport_across_line : None -->
    <field id="CMIP6_siage"         field_ref="dummy_XY"         /> <!-- P2 (s) age_of_sea_ice : Age of sea ice -->
    <field id="CMIP6_sialb"         field_ref="dummy_XY"         /> <!-- P2 (1.0) sea_ice_albedo : Mean surface albedo of entire ice-covered part of grid cell -->
    <field id="CMIP6_siareaacrossline" field_ref="dummy_TRS"        /> <!-- P2 (m2 s-1) siareaacrossline : net (sum of transport in all directions) sea ice area transport through the following four passages, positive into the Arctic Ocean 1. Fram Strait = (11.5W,81.3N to (10.5E,79.6N) 2. Canadian Archipelego = (128.2W,70.6N) to (59.3W,82.1N) 3. Barents opening = (16.8E,76.5N) to (19.2E,70.2N) 4. Bering Strait = (171W,66.2N) to (166W,65N) -->

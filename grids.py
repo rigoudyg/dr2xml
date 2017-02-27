@@ -157,7 +157,8 @@ def field_size(svar, mcfg):
 
     return siz
 
-def split_frequency_for_variable(svar, table, lset, mcfg):
+# mpmoine_last_modif:split_frequency_for_variable: suppression de l'argument table
+def split_frequency_for_variable(svar, lset, mcfg):
     """
     Compute variable level split_freq and returns it as a string
 
@@ -169,7 +170,9 @@ def split_frequency_for_variable(svar, table, lset, mcfg):
     """
     max_size=lset.get("max_file_size_in_floats",500*1.e6)
     size=field_size(svar, mcfg)
-    freq=table2freq[table][1]
+    # mpmoine_last_modif: split_frequency_for_variable: on ne passe plus par table2freq pour recuperer 
+    # mpmoine_last_modif: split_frequency_for_variable: la frequence de la variable mais par svar.frequency
+    freq=svar.frequency
     if (size != 0 ) :
         # Try by years first
         size_per_year=size*timesteps_per_freq_and_duration(freq,365)
@@ -198,9 +201,11 @@ def split_frequency_for_variable(svar, table, lset, mcfg):
                 if nbdays > 1. :
                     return("1d")
                 else:
+                    # mpmoine_last_modif: split_frequency_for_variable: on ne passe plus par table2freq pour recuperer
+                    # mpmoine_last_modif: split_frequency_for_variable: la frequence de la variable mais par svar.frequency
                     raise(dr2xml_error("No way to put even a single day "+\
                         "of data in %g for frequency %s, var %s, table %s"%\
-                        (max_size,freq,svar.label,table)))
+                        (max_size,freq,svar.label,svar.mipTable)))
                 
 
 def timesteps_per_freq_and_duration(freq,nbdays):
@@ -219,6 +224,13 @@ def timesteps_per_freq_and_duration(freq,nbdays):
     elif freq=="fx" : return 1.
     elif freq=="monClim" : return 12.
     elif freq=="dayClim" : return 24.
+
+# mpmoine_last_modif: dr2xml_error: deplace dans grids.py pour pouvoir l'importer depuis vars.py (pour create_ping_file)
+class dr2xml_error(Exception):
+    def __init__(self, valeur):
+        self.valeur = valeur
+    def __str__(self):
+        return `self.valeur`
 
     
 

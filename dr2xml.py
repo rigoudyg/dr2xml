@@ -56,11 +56,12 @@ prog_path = posixpath.dirname(__file__)
 # Local packages
 from vars import simple_CMORvar, process_homeVars, complement_svar_using_cmorvar
 from grids import decide_for_grids, grid2resol, grid2desc, field_size,\
-    split_frequency_for_variable, timesteps_per_freq_and_duration
+    split_frequency_for_variable, timesteps_per_freq_and_duration, dr2xml_error
 from Xparse import init_context, id2grid
 
 # A local auxilliary table
-from table2freq import table2freq, table2splitfreq
+# mpmoine_last_modif: dr2xml.py: ajout import de cmipFreq2xiosFreq
+from table2freq import table2freq, table2splitfreq, cmipFreq2xiosFreq
 
 print_DR_errors=False
 
@@ -439,12 +440,9 @@ def write_xios_file_def(cmv,table, lset,sset, out,cvspath,field_defs,axis_defs,
                 member_id,grid_label,time_range)
     # WIP Draft 14 july 2016
     activity_id=sset.get('activity_id','CMIP')
-    try :
-        freq=table2freq[table] 
-    except:
-        raise(dr2xml_error("Issue : no frequency known in table2freq "+\
-                           "for table %s"%table))
-    split_freq=split_frequency_for_variable(cmv, table, lset, sc.mcfg)
+    # mpmoine_last_modif:write_xios_file_def: Maintenant, dans le cas type='perso', table='NONE'. On ne doit donc pas compter sur le table2freq pour recuperer
+    # mpmoine_last_modif:write_xios_file_def: la frequence en convention xios => fonction cmipFreq2xiosFreq
+    split_freq=split_frequency_for_variable(cmv, lset, sc.mcfg)
     #        
     end_field_defs=dict()
     create_xios_field_ref(cmv,alias,table,lset,sset,end_field_defs,
@@ -454,7 +452,8 @@ def write_xios_file_def(cmv,table, lset,sset, out,cvspath,field_defs,axis_defs,
         #raise dr2xml_error("No field ref for %s in %s"%(cmv.label,table))
         return
     #
-    out.write(' <file name="%s" output_freq="%s" '% (filename,freq[0]))
+
+    out.write(' <file name="%s" output_freq="%s" '% (filename,cmipFreq2xiosFreq[cmv.frequency]))
     out.write('  append="true" split_freq="%s" '%split_freq)
     #out.write('timeseries="exclusive" >\n')
     out.write(' time_units="days" time_counter_name="time"')
@@ -463,7 +462,9 @@ def write_xios_file_def(cmv,table, lset,sset, out,cvspath,field_defs,axis_defs,
     out.write(' uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%"')
     out.write(' >\n')
     #
-    def wr(key,dic_or_val=None,default=None) :
+    #
+    # mpmoine_last_modif:write_xios_file_def: ajout de l'argument num_type à la fonction wr
+    def wr(key,dic_or_val=None,num_type="string",default=None) :
         """
         Short cut for a repetitive pattern : writing in 'out' 
         a string variable name and value
@@ -504,8 +505,11 @@ def write_xios_file_def(cmv,table, lset,sset, out,cvspath,field_defs,axis_defs,
             exp_entry=CMIP6_experiments[sset['experiment_id']]
             experiment=exp_entry['experiment']
         except :
-            raise(dr2xml_error("Issue getting experiment description for %20s"\
-                               %sset['experiment_id']))
+            # mpmoine_last_modif:write_xios_file_def: provisoire, laisser passer cette erreur tant que le
+            # mpmoine_last_modif:write_xios_file_def: CV_CMIP6 et celui de la DR ne sont pas concordants
+            dr2xml_error("Issue getting experiment description for %20s"\
+                               %sset['experiment_id'])
+            experiment="NOT-SET"
     wr('experiment',experiment)
     wr('experiment_id',experiment_id)
     # 
@@ -518,10 +522,12 @@ def write_xios_file_def(cmv,table, lset,sset, out,cvspath,field_defs,axis_defs,
     wr('external_variables',external_variables)
     #
     wr('forcing_index',forcing_index) 
-    wr('frequency',freq[1])
+    # mpmoine_last_modif: Maintenant, dans le cas type='perso', table='NONE'. On ne doit donc pas compter sur table2freq pour recuperer la frequence
+    wr('frequency',cmv.frequency)
     #
     # URL
-    mip_era="CMIP6"
+    # mpmoine_last_modif:write_xios_file_def: mip_era n'est plus toujours 'CMIP6'
+    mip_era=cmv.mip_era
     institution_id=lset['institution_id']
     source_id=lset['source_id']
     sub_experiment_id=sset.get('sub_experiment_id','none')
@@ -708,7 +714,8 @@ def create_xios_field_ref(sv,alias,table,lset,sset,end_field_defs,
     rep+='>\n'
     #
     #
-    def wrv(name, value):
+    # mpmoine_last_modif:wrv: ajout de l'argument num_type
+    def wrv(name, value, num_type="string"):
         # Format a 'variable' entry
         return '     <variable name="%s" type="string" > %s '%(name,value)+\
             '</variable>\n'
@@ -733,13 +740,25 @@ def create_xios_field_ref(sv,alias,table,lset,sset,end_field_defs,
         rep+=wrv("positive",sv.positive) 
     rep+=wrv('history','none')
     rep+=wrv('units',sv.stdunits)
-    rep+=wrv('cell_measures',sv.cell_methods)
+    # mpmoine_last_modif: ajout de missing_value pour satisfaire le standard attendu par CMOR
+    # mpmoine_last_modif: missing_valueS pour l'instant pour que ça passe le CMORchecker (issue)
+    rep+=wrv('missing_values',sv.missing,num_type="double")
+    rep+=wrv('cell_measures',sv.cell_measures)
     rep+='     </field>\n'
     #
     shape=domain_ref
     #shape=sv.spatial_shp
     if shape not in end_field_defs : end_field_defs[shape]=[]
     end_field_defs[shape].append(rep)
+
+# mpmoine_last_modif:gather_AllSimpleVars: nouvelle fonction qui rassemble les operations select_CMORvars_for_lab et read_homeVars_list. 
+# mpmoine_last_modif:gather_AllSimpleVars: Necessaire pour create_ping_file qui doit tenir compte des extra_Vars
+def gather_AllSimpleVars(lset,expid=False,year=False,printout=False):
+    mip_vars_list=select_CMORvars_for_lab(lset,expid,year,printout=printout)
+    if lset['listof_home_vars']:
+        home_vars_list=process_homeVars(lset,mip_vars_list,dq,expid,printout)
+    else: print "Info: No HOMEvars list provided."
+    return mip_vars_list
 
 def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
                        dummies='include',printout=False,dirname="./",prefix="") :
@@ -766,12 +785,8 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
     #global xcontext
     #xcontext=init_context(context)
     # Extract CMOR variables for the experiment and year and lab settings
-    mip_vars_list=select_CMORvars_for_lab(lset, sset['experiment_id'], \
-                                            year,printout=printout)
     skipped_vars=[]
-    if lset['listof_home_vars']:
-        home_vars_list=process_homeVars(lset,sset,mip_vars_list,dq,printout)
-    else: print "Info: No HOMEvars list provided."
+    mip_vars_list=gather_AllSimpleVars(lset,sset['experiment_id'],year,printout)
     # Group CMOR vars per realm
     svars_per_realm=dict()
     for svar in mip_vars_list :
@@ -787,7 +802,10 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
     for realm in context_realms : 
         if realm in svars_per_realm.keys():
             for svar in svars_per_realm[realm] :
-                if svar.label not in lset['excluded_vars'] : 
+                # mpmoine_last_modif:generate_file_defs: patch provisoire pour retirer les  svars qui n'ont pas de spatial_shape 
+                # mpmoine_last_modif:generate_file_defs: (cas par exemple de 'hus' dans table '6hrPlev' => spid='__struct_not_found_001__')
+                if svar.label not in lset['excluded_vars'] and svar.spatial_shp: 
+                #-if svar.label not in lset['excluded_vars'] :
                     if svar.mipTable not in svars_pertable : 
                         svars_pertable[svar.mipTable]=[]
                     svars_pertable[svar.mipTable].append(svar)
@@ -796,7 +814,10 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
     orphans=lset['orphan_variables'][context]
     for svar in mip_vars_list :
         if svar.label in orphans:
-            if svar.label not in lset['excluded_vars'] : 
+            # mpmoine_last_modif:generate_file_defs: patch provisoire pour retirer les  svars qui n'ont pas de spatial_shape 
+            # mpmoine_last_modif:generate_file_defs: (cas par exemple de 'hus' dans table '6hrPlev' => spid='__struct_not_found_001__')
+            if svar.label not in lset['excluded_vars'] and svar.spatial_shp: 
+            #-if svar.label not in lset['excluded_vars'] : 
                 if svar.mipTable not in svars_pertable :
                     svars_pertable[svar.mipTable]=[]
                 svars_pertable[svar.mipTable].append(svar)
@@ -1086,7 +1107,8 @@ def pingFileForRealmsList(context,lrealms,svars,dummy="field_atm",
                 fp.write('   <field id="%-20s'%(prefix+label+'"')+\
                          ' field_ref="')
                 if dummy : 
-                    shape=highest_rank(v.label_without_area)
+                     # mpmoine_last_modif: svar en argument de highest_rank et non pas seulement son label_without_area
+                    shape=highest_rank(v)
                     # Bugfix for DR 1.0.1 content :
                     if v.label=='clcalipso' : shape='XYA'
                     if dummy is True :
@@ -1198,11 +1220,14 @@ def read_special_fields_defs(realms,printout=False) :
     for r in special : rep[r.replace("DX_","")]=special[r]
     return rep
 
-def highest_rank(mipvarlabel):
+# mpmoine_last_modif:highest_rank: svar en argument et non pas seulement son label_without_area
+def highest_rank(svar):
     """Returns the shape with the highest needed rank among the CMORvars
     referencing a MIPvar with this label
     This, assuming dr2xml would handle all needed shape reductions
     """
+    # mpmoine_last_modif:highest_rank: pour recuperer le label_without_area
+    mipvarlabel=svar.label_without_area
     shapes=[]
     for  cvar in dq.coll['CMORvar'].items : 
         v=dq.inx.uid[cvar.vid]
@@ -1215,14 +1240,19 @@ def highest_rank(mipvarlabel):
                     shape=sp.label
                 except :
                     if print_DR_errors :
+                        # mpmoine_last_modif:highest_rank:  pour corriger l'erreur "TypeError: cannot concatenate 'str' and 'dreqItem_CoreAttributes' objects"
                         print "DR Error: issue with stid or spid for "+\
-                        st.label+" "+v.label+" "+cvar.mipTable
+                        st.label+" "+v.label+string(cvar.mipTable)
                     # One known case in DR 1.0.2: hus in 6hPlev
                     shape="XY"
             except :
-                print "DR Error: issue with stid for "+v.label+cvar.mipTableSection
+                # mpmoine_last_modif:highest_rank:  pour corriger l'erreur "TypeError: cannot concatenate 'str' and 'dreqItem_CoreAttributes' objects"
+                print "DR Error: issue with stid for "+v.label+string(cvar.mipTableSection)
                 shape="?st"
-            shapes.append(shape)
+        else:
+            # mpmoine_last_modif:highest_rank: Pour recuperer le spatial_shp pour le cas de variables qui n'ont pas un label CMORvar de la DR (ex. HOMEvar ou EXTRAvar)
+            shape=svar.spatial_shp
+        shapes.append(shape)
     if not shapes : shape="??"
     elif any([ "XY-A"  in s for s in shapes]) : shape="XYA"
     elif any([ "XY-O" in s for s in shapes]) : shape="XYO"
@@ -1273,12 +1303,6 @@ def make_source_string(sources,source_id):
          "; atmospheric_chemistry: "+source["atmospheric_chemistry"]+\
          "; ocean_biogeochemistry: "+source["ocean_biogeochemistry"]+";"
     return rep
-
-class dr2xml_error(Exception):
-    def __init__(self, valeur):
-        self.valeur = valeur
-    def __str__(self):
-        return `self.valeur`
 
 def build_axis_definitions():
     """ 

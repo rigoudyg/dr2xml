@@ -1,6 +1,12 @@
 print_DR_errors=False
 
+import sys,os
+import json
+from table2freq import table2freq
+from grids import dr2xml_error
+
 #A class for unifying CMOR vars and home variables
+# mpmoine_last_modif: simple_CMORvar: ajout des elements 'mip_era' et 'missing'
 class simple_CMORvar(object):
     def __init__(self):
         self.type           = 'perso' # Default case is HOMEvar.
@@ -18,72 +24,220 @@ class simple_CMORvar(object):
         self.long_name      = None # Useful for CMORvar and updated HOMEvar.
         self.struct         = None
         self.cell_methods   = None
-        #self.cell_measures  = None
+        self.cell_measures  = None
         self.spatial_shp    = None # Only useful for HOMEvar.
         self.temporal_shp   = None # Only useful for HOMEvar.
         self.experiment     = None # Only useful for HOMEvar.
         self.mip            = None # Only useful for HOMEvar.
         self.Priority       = 1    # Will be changed using DR if it is a CMORvar
-        
+        self.mip_era        = 'PERSO' # Later changed in 'CMIP6' or 'PRIMAVERA' when appropriate
+        self.missing        = 1.e+20
 
 ambiguous_mipvarnames=None
 
 # 2 dicts for processing home variables
-spid2label={}
-tmid2label={}
+# mpmoine_last_modif: vars.py: spid2label et tmid2label ne sont plus utilises
+#-spid2label={}
+#-tmid2label={}
+# 2 dicts and 1 list for processing extra variables
+dims2shape={}
+dim2dimid={}
+dr_single_levels=[]
 
-def read_homeVars_list(hmv_file,expid,mips):
+# mpmoine_last_modif:read_homeVars_list: fonction modifiee pour accepter des extra_Tables
+def read_homeVars_list(hmv_file,expid,mips,dq,path_extra_tables=None):
+    """
+    A function to get HOME variables that are not planned in the CMIP6 DataRequest but 
+    the lab want to outpuut anyway
+    
+    Args:
+      hmv_file (string) : a text file containing the list of home variables
+      expid (string) : if willing to filter on a given experiment 
+      mips (string)  : if willing to filter on  given mips
+      path_extra_tables (string): path where to find extra Tables. Mandatory only if 
+                                  there is'extra' lines in list of home variables.
+    
+    Returns:
+      A list of 'simplified CMOR variables'
+    """
     # File structure: name of attributes to read, number of header line 
     home_attrs=['type','label','modeling_realm','frequency','mipTable','temporal_shp','spatial_shp','experiment','mip']
     skip=3
+    if not os.path.exists(hmv_file): sys.exit("Abort: file for home variables does not exist: "+hmv_file)
     # Read file
     with open(hmv_file,"r") as fp:
         data=fp.readlines()
     # Build list of home variables
     homevars=[]
-    nhv=0
+    extravars=[]
     for line in data[skip:]:  
         line_split=line.split(';')
-        nhv+=1
-        home_var=simple_CMORvar()
-        cc=-1
-        for col in line_split:
-            ccol=col.lstrip(' ').rstrip('\n\t ')
-            if ccol!='': 
-                cc+=1
-                setattr(home_var,home_attrs[cc],ccol)
-        home_var.label_with_area=home_var.label
-        if home_var.mip!="ANY":
-            if home_var.mip in mips:
+        # get the Table full name 
+        table=line_split[4].strip(' ')
+        # overwrite  5th column with Table name without prefix
+        if table!='NONE': 
+            if '_' not in table: sys.exit("Abort: a prefix is expected in extra Table name: "+table)
+            line_split[4]=table.split('_')[1]
+        if line_split[0].strip(' ')!='extra':       
+            home_var=simple_CMORvar()
+            cc=-1
+            for col in line_split:
+                ccol=col.lstrip(' ').rstrip('\n\t ')
+                if ccol!='': 
+                    cc+=1
+                    setattr(home_var,home_attrs[cc],ccol)
+            home_var.label_with_area=home_var.label
+            if home_var.mip!="ANY":
+                if home_var.mip in mips:
+                    if home_var.experiment!="ANY":
+                         if home_var.experiment==expid: homevars.append(home_var)
+                    else: 
+                        homevars.append(home_var)
+            else:
                 if home_var.experiment!="ANY":
-                     if home_var.experiment==expid: homevars.append(home_var)
+                    if home_var.experiment==expid: homevars.append(home_var)
                 else: 
                     homevars.append(home_var)
         else:
-            if home_var.experiment!="ANY":
-                if home_var.experiment==expid: homevars.append(home_var)
-            else: 
-                homevars.append(home_var)
-    return homevars
+            extra_vars=read_extraTable(path_extra_tables,table,dq,printout=False)
+            extravars.extend(extra_vars)    
+    print "Number of 'cmor' and 'perso' among home variables: ",len(homevars)
+    print "Number of 'extra' among home variables: ",len(extravars)
+    homevars.extend(extravars) 
+    return homevars 
+
+# mpmoine_last_modif:read_extraTable: nouvelle fonction pour lire les extra_Tables
+def read_extraTable(path,table,dq,printout=False):
+    """
+    A function to get variables contained in an EXTRA Table that are is planned in the CMIP6 DataRequest but 
+    the lab want to output anyway. EXTRA Table is expected in JSON format, conform with the CMOR3 convention.
+    
+    Args:
+      path (string) : the path where the extra table are located (must include the table name prefix, if any).
+      table (string): table name (with its prefix, e.g. 'CMIP6_Amon', 'PRIMAVERA_Oday'). 
+                      Table prefix, if present, is supposed to correspond to : '<mip_era>_'.
+      printout (boolean,optional) : enhanced verbosity
+    
+    Returns:
+      A list of 'simplified CMOR variables'
+    """
+    #
+    def cids2singlev(cids):
+        slev=cids[0].split(":")
+        if len(slev)==2:return slev[1]
+    #
+    if not dims2shape:
+        for sshp in dq.coll['spatialShape'].items:
+            dims2shape[sshp.dimensions]=sshp.label
+    #
+    if not dim2dimid:
+        for g in dq.coll['grids'].items:
+            dim2dimid[g.label]=g.uid
+    #
+    if not dr_single_levels:
+        for struct in dq.coll['structure'].items:
+            for spshp in dq.coll['spatialShape'].items:
+                 if spshp.uid==struct.spid and spshp.label=="XY-na":
+                        slev=cids2singlev(struct.cids)
+                        if slev not in dr_single_levels: dr_single_levels.append(slev)
+        # other single levels in extra Tables, not in DR
+        # mpmoine: les ajouts ici correspondent  aux single levels Primavera.
+        other_single_levels=['height50m','p100']
+        dr_single_levels.extend(other_single_levels)
+    #
+    extravars=[]
+    dr_slev=dr_single_levels
+    mip_era=table.split('_')[0]
+    json_table=path+"/"+table+".json"
+    if not os.path.exists(json_table): sys.exit("Abort: file for extra Table does not exist: "+json_table)
+    tbl=table.split('_')[1]
+    with open(json_table,"r") as jt:
+        json_data=jt.read()
+        data=json.loads(json_data)
+        for k,v in data["variable_entry"].iteritems(): 
+            #- if printout: print "Info: Variable read in extra table ",table, ":",v["out_name"]
+            extra_var=simple_CMORvar()
+            extra_var.type='extra'
+            extra_var.mip_era=mip_era
+            extra_var.label=v["out_name"]
+            extra_var.stdname=v["standard_name"]
+            extra_var.long_name=v["long_name"]
+            extra_var.stdunits=v["units"]
+            extra_var.modeling_realm=v["modeling_realm"]
+            extra_var.frequency=table2freq[tbl][1]
+            extra_var.mipTable=tbl
+            extra_var.cell_methods=v["cell_methods"]
+            extra_var.cell_measures=v["cell_measures"]
+            extra_var.positive=v["positive"]
+            # Tranlate full-dimensions read in Table (e.g. "longitude latitude time p850")
+            # into DR spatial-only dimensions (e.g. "longitude|latitude")
+            dims=(v["dimensions"]).split(" ")
+            # get the index of time dimension to supress, if any
+            inddims_to_sup=[]
+            dsingle=None
+            for d in dims:
+                if "time" in d:
+                    dtime=d
+                    inddims_to_sup.append(dims.index(dtime))           
+            # get the index of single level to suppress, if any
+                for sl in dr_slev:
+                    if d==sl: 
+                        dsingle=d
+                        #- if printout: print "Info: single level found:",dsingle
+                        inddims_to_sup.append(dims.index(dsingle))      
+            # supress dimensions corresponding to time and single levels
+            dr_dims=[d for i,d in enumerate(dims) if i not in inddims_to_sup]
+            # rewrite dimension with DR convension
+            drdims=""
+            for d in dr_dims:
+                if drdims: 
+                    drdims=drdims+"|"+d
+                else:
+                    drdims=d
+            if  dims2shape.has_key(drdims):
+                extra_var.spatial_shp=dims2shape[drdims]
+            else:
+                # mpmoine_note: provisoire, on devrait toujours pouvoir associer une spatial shape a des dimensions.
+                # mpmoine_note: Je rencontre ce cas pour l'instant avec les tables Primavera ou 
+                # mpmoine_note: on a "latitude|longitude" au lieu de "longitude|latitude"
+                print "Warning: spatial shape corresponding to ",drdims,"for variable",v["out_name"],\
+                      "in Table",table," not found."
+                #-extra_var.spatial_shp=False
+            # list of spatial dimension identifiers
+            dr_dimids=[]
+            for d in dr_dims:
+                if dim2dimid.has_key(d):
+                    dr_dimids.append(dim2dimid[d])
+                else:
+                    print "Warning: dimid corresponding to ",d,"for variable",v["out_name"],\
+                          "in Table",table," not found."
+            extra_var.dimids=dr_dimids
+            # mpmoine_todo: ajouter le filtre par priorites, quand dispo dans les extra tables
+            extravars.append(extra_var)
+    if printout: 
+        print "Info: Number of variables in extra tables ",table,": ",len(extravars)
+    return extravars 
 
 def get_SpatialAndTemporal_Shapes(cmvar,dq):
-    try:
+    # mpmoine_last_modif:get_SpatialAndTemporal_Shapes: le try/except n'etait pas la bonne solution
+    spatial_shape=False
+    temporal_shape=False
+    if cmvar.stid=="__struct_not_found_001__":
+        print "Warning: stid for ",cmvar.label," in table ",cmvar.mipTable," is a broken link to structure: ", cmvar.stid
+    else:
         for struct in dq.coll['structure'].items:
             if struct.uid==cmvar.stid: 
-                spatial_shape=spid2label[struct.spid]
-                temporal_shape=tmid2label[struct.tmid]
-                return [spatial_shape,temporal_shape]
-    except:
-        print("Error: "+cmvar.label+" "+cmvar.mipTable+\
-                     "CMORvar: Structure of CMORvar NOT found!")
-        return [False,False]
-    print "DR error : No struct found for "+`cmvar`+" in table "+cmvar.mipTable
-    return [False,False]
+                 spatial_shape=dq.inx.uid[struct.spid].label
+                 temporal_shape=dq.inx.uid[struct.tmid].label
+    if not spatial_shape: print "Warning: spatial shape for ",cmvar.label," in table ",cmvar.mipTable," not found."
+    if not temporal_shape : print "Warning: temporal shape for ",cmvar.label," in table ",cmvar.mipTable," not found."
+    return [spatial_shape,temporal_shape]
 
-def process_homeVars(lset, sset,mip_vars_list,dq, printout=False):
+# mpmoine_last_modif: process_homeVars: argument supplementaire 'path_extra_tables' et expid au lieu de lset
+def process_homeVars(lset,mip_vars_list,dq,expid=False,printout=False):
     # Read HOME variables
     home_vars_list=read_homeVars_list(lset['listof_home_vars'],
-                                      sset['experiment_id'],lset['mips'])
+                                     expid,lset['mips'],dq,lset['path_extra_tables'])
     for hv in home_vars_list: 
         hv_info={"varname":hv.label,"realm":hv.modeling_realm,
                  "freq":hv.frequency,"table":hv.mipTable}
@@ -148,12 +302,17 @@ def process_homeVars(lset, sset,mip_vars_list,dq, printout=False):
                         " but in reality is cmor => Not taken into account."
                 dr2xml_error("Abort: HOMEVar is anounced as perso but "\
                                  "should be cmor.")
+        # mpmoine_last_modif: process_homeVars: ajout du cas type='extra'
+        elif hv.type=='extra':
+            if printout: print "Info:",hv_info,"HOMEVar is read in an extra table." \
+                            " => Taken into account."
+            mip_vars_list.append(hv)
         else:
             if printout:
                 print "Error:",hv_info,"HOMEVar type",hv.type,\
                     "does not correspond to any known keyword."\
                     " => Not taken into account."
-            dr2xml_error("Abort: unknown type keyword %provided "\
+            dr2xml_error("Abort: unknown type keyword provided "\
                          "for HOMEVar %s:"%`hv_info`)
 
 def get_corresp_CMORvar(hmvar,dq):
@@ -199,10 +358,11 @@ def complement_svar_using_cmorvar(svar,cmvar,dq):
     if ambiguous_mipvarnames is None :
         ambiguous_mipvarnames=analyze_ambiguous_MIPvarnames(dq)
         
-    global spid2label
-    if len(spid2label)==0 :
-        for obj in dq.coll['spatialShape'].items: spid2label[obj.uid]=obj.label
-        for obj in dq.coll['temporalShape'].items: tmid2label[obj.uid]=obj.label
+    # mpmoine_last_modif: spid2label et tmid2label ne sont plus utilises
+    #-global spid2label
+    #-if len(spid2label)==0 :
+    #-    for obj in dq.coll['spatialShape'].items: spid2label[obj.uid]=obj.label
+    #-    for obj in dq.coll['temporalShape'].items: tmid2label[obj.uid]=obj.label
 
     svar.frequency = cmvar.frequency
     svar.mipTable = cmvar.mipTable
@@ -225,12 +385,23 @@ def complement_svar_using_cmorvar(svar,cmvar,dq):
         try :
             svar.cm=dq.inx.uid[st.cmid].cell_methods
             svar.cell_methods=dq.inx.uid[st.cmid].cell_methods
+            # mpmoine_last_modif:complement_svar_using_cmorvar: il arrive que cell_methods soit une chaine vide 
+            #mpmoine_last_modif:complement_svar_using_cmorvar: et cela ne peut pas etre detecte par la regle d'exception => "NOT-SET"
+            if svar.cell_methods=='': svar.cell_methods="NOT-SET"
         except:
             if print_DR_errors : print "Issue with cell_method for "+st.label
             svar.cell_methods=None
+        try :
+            svar.cell_measures=dq.inx.uid[cmvar.stid].cell_measures
+            # mpmoine_last_modif:complement_svar_using_cmorvar: il arrive que cell_methods soit une chaine vide 
+            # mpmoine_last_modif:complement_svar_using_cmorvar: et cela ne peut pas etre detecte par la regle d'exception => "NOT-SET"
+            if svar.cell_measures=='': svar.cell_measures="NOT-SET"
+        except:
+            #print "Issue with cell_measures for "+`cmvar`
+            svar.cell_measures="NOT-SET" #None
     except :
         if print_DR_errors :
-            print "Issue with st.cmid in table % 10s for %s"%(cmvar.mipTable,cmvar.label)
+            print "Issue with st.stid in table % 10s for %s"%(cmvar.mipTable,cmvar.label)
         svar.cell_methods=None
         
     area=cellmethod2area(svar.cell_methods) 

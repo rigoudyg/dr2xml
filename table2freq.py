@@ -63,6 +63,18 @@ table2freq={
 
     "day"      : ("1d","day"),
     "fx"       : ("1d","fx"),
+
+    "prim1hrpt": ("1h","1hr"),
+    "prim3hr"  : ("3h","3hr"),
+    "prim3hrpt": ("3h","3hr"),
+    "prim6hr"  : ("6h","6hr"),
+    "prim6hrpt": ("6h","6hr"),
+    "primO6hr" : ("6h","6hr"),
+    "primDay"  : ("1d","day"),
+    "primOday" : ("1d","day"),
+    "primSIday": ("1d","day"),
+    "primMon"  : ("1mo","mon"),
+    "primOmon" : ("1mo","mon"),
 }
 
 
@@ -112,4 +124,23 @@ table2splitfreq={
     "EmonZ"      : "10y" , #Monthly zonal means (time mean, extension) [mon] (31 variables)
     "Esubhr"     : "10y" , #Sub-hourly (extension) [subhr] (32 variables)
     "fx"         : "1y" ,  #Fixed variables [fx] (10 variables)
+
+    "prim1hrpt": "1mo",
+    "prim3hr"  : "1mo",
+    "prim3hrpt": "1mo",
+    "prim6hr"  : "1mo",
+    "prim6hrpt": "1mo",
+    "primO6hr" : "1mo",
+    "primDay"  : "1mo",
+    "primOday" : "1mo",
+    "primSIday": "1mo",
+    "primMon"  : "10y",
+    "primOmon" : "10y",
+
 }
+
+# mpmoine_last_modif: table2freq.py: nouveau: cmipFreq2xiosFreq
+cmipFreq2xiosFreq={}
+for v in table2freq.values():
+    if not cmipFreq2xiosFreq.has_key(v[1]): cmipFreq2xiosFreq[v[1]]=v[0]
+
