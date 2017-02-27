@@ -414,6 +414,8 @@ def complement_svar_using_cmorvar(svar,cmvar,dq):
                 svar.label=svar.label+"_"+area
 
     svar.type='cmor'
+    #mpm_last_modif:complement_svar_using_cmorvar: mip_era='CMIP6' dans le cas CMORvar
+    svar.mip_era='CMIP6'
     stdname=None
     #
     try :
