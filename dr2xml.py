@@ -665,7 +665,8 @@ def create_xios_field_ref(sv,alias,table,lset,sset,end_field_defs,
     if ssh[0:4] in ['XY-H','XY-P'] or ssh[0:3] == 'Y-P' :
         # TBD : for now, do not interpolate vertically
         return
-        dimids=dq.inx.uid[sv.struct.spid].dimids
+        # mpmoine_last_modif:create_xios_field_ref: on recupere maintenant 'dimids' depuis svar
+        dimids=sv.dimids
         for dimid in dimids :
             d=dq.inx.uid[dimid]
             if isVertDim(d) :

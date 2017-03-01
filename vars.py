@@ -6,31 +6,32 @@ from table2freq import table2freq
 from grids import dr2xml_error
 
 #A class for unifying CMOR vars and home variables
-# mpmoine_last_modif: simple_CMORvar: ajout des elements 'mip_era' et 'missing'
+# mpmoine_last_modif: simple_CMORvar: ajout des elements 'mip_era', 'missing' et 'dimids'
 class simple_CMORvar(object):
     def __init__(self):
-        self.type           = 'perso' # Default case is HOMEvar.
-        self.modeling_realm = None # Useful for both HOMEvar and CMORvar.
-        self.grids          = [""] # Useful for CMORvar and updated HOMEvar.
-        self.mipTable       = None # Useful for both HOMEvar and CMORvar.
-        self.label          = None # Useful for both HOMEvar and CMORvar.
-        self.label_without_area= None # Useful for both HOMEvar and CMORvar.
-        self.frequency      = None # Useful for both HOMEvar and CMORvar.
-        self.mipTable       = None # Useful for both HOMEvar and CMORvar.
-        self.positive       = None # Useful for CMORvar and updated HOMEvar.
-        self.description    = None # Useful for CMORvar and updated HOMEvar.
-        self.stdname        = None # Useful for CMORvar and updated HOMEvar.
-        self.stdunits       = None # Useful for CMORvar and updated HOMEvar.
-        self.long_name      = None # Useful for CMORvar and updated HOMEvar.
+        self.type           = False #-'perso' # Default case is HOMEvar.
+        self.modeling_realm = None 
+        self.grids          = [""] 
+        self.mipTable       = None 
+        self.label          = None 
+        self.label_without_area= None 
+        self.frequency      = None 
+        self.mipTable       = None 
+        self.positive       = None 
+        self.description    = None 
+        self.stdname        = None 
+        self.stdunits       = None 
+        self.long_name      = None 
         self.struct         = None
+        self.dimids         = []
         self.cell_methods   = None
         self.cell_measures  = None
-        self.spatial_shp    = None # Only useful for HOMEvar.
-        self.temporal_shp   = None # Only useful for HOMEvar.
-        self.experiment     = None # Only useful for HOMEvar.
-        self.mip            = None # Only useful for HOMEvar.
-        self.Priority       = 1    # Will be changed using DR if it is a CMORvar
-        self.mip_era        = 'PERSO' # Later changed in 'CMIP6' or 'PRIMAVERA' when appropriate
+        self.spatial_shp    = None 
+        self.temporal_shp   = None 
+        self.experiment     = None 
+        self.mip            = None
+        self.Priority       = 1    # Will be changed using DR or extra-Tables
+        self.mip_era        = False #-'PERSO' # Later changed in 'CMIP6' or 'PRIMAVERA' when appropriate
         self.missing        = 1.e+20
 
 ambiguous_mipvarnames=None
@@ -43,6 +44,7 @@ ambiguous_mipvarnames=None
 dims2shape={}
 dim2dimid={}
 dr_single_levels=[]
+shape2dimids={}
 
 # mpmoine_last_modif:read_homeVars_list: fonction modifiee pour accepter des extra_Tables
 def read_homeVars_list(hmv_file,expid,mips,dq,path_extra_tables=None):
@@ -60,6 +62,11 @@ def read_homeVars_list(hmv_file,expid,mips,dq,path_extra_tables=None):
     Returns:
       A list of 'simplified CMOR variables'
     """
+    #
+    if not shape2dimids:
+        for sshp in dq.coll['spatialShape'].items:
+            shape2dimids[sshp.label]=sshp.dimids
+    #
     # File structure: name of attributes to read, number of header line 
     home_attrs=['type','label','modeling_realm','frequency','mipTable','temporal_shp','spatial_shp','experiment','mip']
     skip=3
@@ -74,11 +81,12 @@ def read_homeVars_list(hmv_file,expid,mips,dq,path_extra_tables=None):
         line_split=line.split(';')
         # get the Table full name 
         table=line_split[4].strip(' ')
-        # overwrite  5th column with Table name without prefix
+        # overwrite  5th column with table name without prefix
         if table!='NONE': 
             if '_' not in table: sys.exit("Abort: a prefix is expected in extra Table name: "+table)
             line_split[4]=table.split('_')[1]
-        if line_split[0].strip(' ')!='extra':       
+        hmv_type=line_split[0].strip(' ')
+        if hmv_type!='extra':       
             home_var=simple_CMORvar()
             cc=-1
             for col in line_split:
@@ -87,6 +95,11 @@ def read_homeVars_list(hmv_file,expid,mips,dq,path_extra_tables=None):
                     cc+=1
                     setattr(home_var,home_attrs[cc],ccol)
             home_var.label_with_area=home_var.label
+            if hmv_type=='perso':
+                try:
+                    home_var.dimids=shape2dimids[home_var.spatial_shp]
+                except:
+                    print "Warning: failed to derive dimids from spatial_shp for HOMEvar",home_var.label,"(",hmv_type,")"
             if home_var.mip!="ANY":
                 if home_var.mip in mips:
                     if home_var.experiment!="ANY":
@@ -434,6 +447,13 @@ def complement_svar_using_cmorvar(svar,cmvar,dq):
         # If CF standard name is NOK, let us use MIP variables attributes
         svar.stdname = mipvar.label
     svar.struct=dq.inx.uid[cmvar.stid]
+    # mpmoine_last_modif:complement_svar_using_cmorvar: on affecte ici svar.dimids (avant: dans create_xios_field_ref)
+    # mpmoine_last_modif:complement_svar_using_cmorvar: provisoire, pour by-passer le cas d'une CMORvar qui n'a pas de
+    # mpmoine_last_modif:complement_svar_using_cmorvar: structure associee ('dreqItem_remarks')
+    try:
+        svar.dimids=dq.inx.uid[svar.struct.spid].dimids
+    except:
+        print "Warning: no structure associated to ", [svar.label, svar.mipTable], "=> no dimids derived."
 
 
 def cellmethod2area(method) :
