@@ -96,6 +96,7 @@ def read_homeVars_list(hmv_file,expid,mips,dq,path_extra_tables=None):
                     setattr(home_var,home_attrs[cc],ccol)
             home_var.label_with_area=home_var.label
             if hmv_type=='perso':
+                home_var.mip_era='PERSO'
                 try:
                     home_var.dimids=shape2dimids[home_var.spatial_shp]
                 except:
