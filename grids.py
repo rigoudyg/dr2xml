@@ -118,13 +118,14 @@ def field_size(svar, mcfg):
         siz=40*nb_curtain_sites        
 
     elif ( s == "Y-P19") : #Atmospheric Zonal Mean (on 19 pressure levels)
-        siz=nblat*19
+        #mpmoine_next_modif: field_size: nb_lat au lieu de nblat (vu par Arnaud)
+        siz=nb_lat*19
     elif ( s == "Y-P39") : #Atmospheric Zonal Mean (on 39 pressure levels)
-        siz=nblat*39
+        siz=nb_lat*39
     elif ( s == "Y-A" ): #Zonal mean (on model levels)
-        siz=nblat*mcfg['nla']
+        siz=nb_lat*mcfg['nla']
     elif ( s == "Y-na" ): #Zonal mean (on surface)
-        siz=nblat
+        siz=nb_lat
     elif ( s == "na-A" ): #Atmospheric profile (model levels)
         siz=mcfg['nla']
 
@@ -158,7 +159,8 @@ def field_size(svar, mcfg):
     return siz
 
 # mpmoine_last_modif:split_frequency_for_variable: suppression de l'argument table
-def split_frequency_for_variable(svar, lset, mcfg):
+# mpmoine_next_modif: split_frequency_for_variable: passage de 'context' en argument pour recuperer le model_timestep
+def split_frequency_for_variable(svar, lset, mcfg,context):
     """
     Compute variable level split_freq and returns it as a string
 
@@ -173,9 +175,11 @@ def split_frequency_for_variable(svar, lset, mcfg):
     # mpmoine_last_modif: split_frequency_for_variable: on ne passe plus par table2freq pour recuperer 
     # mpmoine_last_modif: split_frequency_for_variable: la frequence de la variable mais par svar.frequency
     freq=svar.frequency
-    if (size != 0 ) :
+    if (size != 0 ) : 
         # Try by years first
-        size_per_year=size*timesteps_per_freq_and_duration(freq,365)
+        # mpmoine_next_modif: split_frequency_for_variable: passage de 'model_timestep' en argument de timesteps_per_freq_and_duration
+        #-print "MPMOINE_DEBUG:", svar.label, svar.mipTable, freq
+        size_per_year=size*timesteps_per_freq_and_duration(freq,365,lset["model_timestep"][context])
         nbyears=max_size/float(size_per_year)
         if nbyears > 1. :
             if nbyears < 10:
@@ -190,13 +194,15 @@ def split_frequency_for_variable(svar, lset, mcfg):
                 return("200y")
         else: 
             # Try by month
-            size_per_month=size*timesteps_per_freq_and_duration(freq,31)
+            # mpmoine_next_modif: split_frequency_for_variable: passage de 'model_timestep' en argument de timesteps_per_freq_and_duration
+            size_per_month=size*timesteps_per_freq_and_duration(freq,31,lset["model_timestep"][context])
             nbmonths=max_size/float(size_per_month)
             if nbmonths > 1. :
                 return("1mo")
             else:
                 # Try by day
-                size_per_day=size*timesteps_per_freq_and_duration(freq,1)
+                # mpmoine_next_modif: split_frequency_for_variable: passage de 'model_timestep' en argument de timesteps_per_freq_and_duration
+                size_per_day=size*timesteps_per_freq_and_duration(freq,1,lset["model_timestep"][context])
                 nbdays=max_size/float(size_per_day)
                 if nbdays > 1. :
                     return("1d")
@@ -208,15 +214,19 @@ def split_frequency_for_variable(svar, lset, mcfg):
                         (max_size,freq,svar.label,svar.mipTable)))
                 
 
-def timesteps_per_freq_and_duration(freq,nbdays):
+def timesteps_per_freq_and_duration(freq,nbdays,model_tstep):
     duration=0.
     # Translate freq strings to duration in days
     if freq=="3hr" : duration=1./8
     elif freq=="6hr" : duration=1./4
     elif freq=="day" : duration=1.
-    elif freq=="1hr" : duration=1./24
+    # mpmoine_next_modif:timesteps_per_freq_and_duration: ajour de la frequence 'hr'
+    elif freq=="1hr" or freq=="hr" : duration=1./24
     elif freq=="mon" : duration=31.
     elif freq=="yr" : duration=365.
+    #mpmoine_next_modif:timesteps_per_freq_and_duration: ajout des cas frequence 'subhr' et 'dec'
+    elif freq=="subhr" : duration=1./(1440./model_tstep)
+    elif freq=="dec" : duration=10.*365
     # If freq actually translate to a duration, return
     # number of timesteps for number of days
     if duration != 0. : return float(nbdays)/duration

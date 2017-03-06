@@ -442,7 +442,8 @@ def write_xios_file_def(cmv,table, lset,sset, out,cvspath,field_defs,axis_defs,
     activity_id=sset.get('activity_id','CMIP')
     # mpmoine_last_modif:write_xios_file_def: Maintenant, dans le cas type='perso', table='NONE'. On ne doit donc pas compter sur le table2freq pour recuperer
     # mpmoine_last_modif:write_xios_file_def: la frequence en convention xios => fonction cmipFreq2xiosFreq
-    split_freq=split_frequency_for_variable(cmv, lset, sc.mcfg)
+    # mpmoine_next_modif: write_xios_file_def: passage de 'context' en argument de split_frequency_for_variable pour recuperer le model_timestep
+    split_freq=split_frequency_for_variable(cmv, lset, sc.mcfg, context)
     #        
     end_field_defs=dict()
     create_xios_field_ref(cmv,alias,table,lset,sset,end_field_defs,
@@ -805,7 +806,8 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
             for svar in svars_per_realm[realm] :
                 # mpmoine_last_modif:generate_file_defs: patch provisoire pour retirer les  svars qui n'ont pas de spatial_shape 
                 # mpmoine_last_modif:generate_file_defs: (cas par exemple de 'hus' dans table '6hrPlev' => spid='__struct_not_found_001__')
-                if svar.label not in lset['excluded_vars'] and svar.spatial_shp: 
+                # mpmoine_next_modif: generate_file_defs: exclusion de certaines spatial shapes (ex. Polar Stereograpic Antarctic/Groenland)
+                if svar.label not in lset['excluded_vars'] and svar.spatial_shp and svar.spatial_shp not in lset["excluded_spshapes"]:  
                 #-if svar.label not in lset['excluded_vars'] :
                     if svar.mipTable not in svars_pertable : 
                         svars_pertable[svar.mipTable]=[]
@@ -817,7 +819,8 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
         if svar.label in orphans:
             # mpmoine_last_modif:generate_file_defs: patch provisoire pour retirer les  svars qui n'ont pas de spatial_shape 
             # mpmoine_last_modif:generate_file_defs: (cas par exemple de 'hus' dans table '6hrPlev' => spid='__struct_not_found_001__')
-            if svar.label not in lset['excluded_vars'] and svar.spatial_shp: 
+            # mpmoine_next_modif: generate_file_defs: exclusion de certaines spatial shapes (ex. Polar Stereograpic Antarctic/Groenland)
+            if svar.label not in lset['excluded_vars'] and svar.spatial_shp and svar.spatial_shp not in lset["excluded_spshapes"]:  
             #-if svar.label not in lset['excluded_vars'] : 
                 if svar.mipTable not in svars_pertable :
                     svars_pertable[svar.mipTable]=[]

@@ -16,7 +16,8 @@ table2freq={
 
     "AERday"   :  ("1d","day"),
     "AERfx"    : ("1d","fx"),
-    "AERhr"    : ("1h","1hr"),
+    #mpmoine_next_modif: frequence CMIP6 pour AERhr = 'hr' et non '1hr'
+    "AERhr"    : ("1h","hr"),
     "AERmon"   : ("1mo","mon"),
     "AERmonZ"  : ("1mo","mon"),
 
@@ -25,11 +26,11 @@ table2freq={
     "CF3hr"    : ("3h","3hr"),
     "CFday"    : ("1d","day"),
     "CFmon"    : ("1mo","mon"),
-    "CFsubhr"  : ("??","??"),
-    "CFsubhrOff": ("??","??"),
-
+    #mpmoine_next_modif: table2freq: frequence pour les tables subhr
+    "CFsubhr"  : ("instant","subhr"),
+    "CFsubhrOff": ("instant","subhr"),
     "E1hr"     : ("1h","1hr"),
-    "E1hrClimMon" : ("??","??"),
+    "E1hrClimMon" : ("1hr","1hr"),
     "E3hr"     : ("3h","3hr"),
     "E3hrPt"   : ("3h","3hr"),
     "E6hrZ"    : ("6h","6hr"),
@@ -38,7 +39,8 @@ table2freq={
     "Efx"      :("1d","fx"),
     "Emon"     : ("1mo","mon"),
     "EmonZ"    : ("1mo","mon"),
-    "Esubhr"   : ("??","??"),
+    #mpmoine_next_modif: table2freq: frequence pour les tables subhr
+    "Esubhr"   : ("instant","subhr"),
     "Eyr"      : ("1y","yr"),
 
     "IfxAnt"   :("1d","fx"),
@@ -53,7 +55,7 @@ table2freq={
 
     "Oclim"    : ("1d","monClim"),
     "Oday"     : ("1d","day"),
-    "Odec"     : ("1y","yr"),
+    "Odec"     : ("10y","dec"),
     "Ofx"      : ("1d","fx"),
     "Omon"     : ("1mo","mon"),
     "Oyr"      : ("1y","yr"),
@@ -64,6 +66,7 @@ table2freq={
     "day"      : ("1d","day"),
     "fx"       : ("1d","fx"),
 
+    #mpmoine_last_modif: table2freq: ajout des tables Primavera
     "prim1hrpt": ("1h","1hr"),
     "prim3hr"  : ("3h","3hr"),
     "prim3hrpt": ("3h","3hr"),
@@ -75,8 +78,8 @@ table2freq={
     "primSIday": ("1d","day"),
     "primMon"  : ("1mo","mon"),
     "primOmon" : ("1mo","mon"),
-}
 
+}
 
 table2splitfreq={
     "E3hrPt"     : "1mo" , #3-hourly (instantaneous, extension) [3hr] (22 variables)
@@ -125,6 +128,7 @@ table2splitfreq={
     "Esubhr"     : "10y" , #Sub-hourly (extension) [subhr] (32 variables)
     "fx"         : "1y" ,  #Fixed variables [fx] (10 variables)
 
+    #mpmoine_last_modif: table2splitfreq: ajout des tables Primavera
     "prim1hrpt": "1mo",
     "prim3hr"  : "1mo",
     "prim3hrpt": "1mo",

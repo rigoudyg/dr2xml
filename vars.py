@@ -1,4 +1,4 @@
-print_DR_errors=False
+print_DR_errors=True
 
 import sys,os
 import json
@@ -385,17 +385,21 @@ def complement_svar_using_cmorvar(svar,cmvar,dq):
     svar.mipTable = cmvar.mipTable
     svar.Priority= cmvar.defaultPriority
     svar.positive = cmvar.positive
-    [svar.spatial_shp,svar.temporal_shp]=get_SpatialAndTemporal_Shapes(cmvar,dq)
-    mipvar = dq.inx.uid[cmvar.vid]
-    svar.label = cmvar.label
-    svar.label_without_area=mipvar.label
-    svar.long_name = mipvar.title
     svar.modeling_realm = cmvar.modeling_realm
-    if mipvar.description :
-        svar.description = mipvar.description
-    else:
-        svar.description = mipvar.title
-    svar.stdunits = mipvar.units
+    svar.label = cmvar.label
+    [svar.spatial_shp,svar.temporal_shp]=get_SpatialAndTemporal_Shapes(cmvar,dq)
+    #mpmoine_next_modif: complement_svar_using_cmorvar: gestion d'exception pour l'acces a la 'mipvar'
+    try:
+        mipvar = dq.inx.uid[cmvar.vid]
+        svar.label_without_area=mipvar.label
+        svar.long_name = mipvar.title
+        if mipvar.description :
+            svar.description = mipvar.description
+        else:
+            svar.description = mipvar.title
+        svar.stdunits = mipvar.units
+    except:
+        if print_DR_errors : print "Issue with mipvar for "+svar.label," => Issue for label_without_area, long_name, description and units."
     try :
         st=dq.inx.uid[cmvar.stid]
         #print st.label
