@@ -1,0 +1,41 @@
+{
+    "axis_entry": {
+
+	"plev12": {
+            "standard_name": "air_pressure", 
+            "units": "Pa", 
+            "axis": "Z", 
+            "long_name": "pressure", 
+            "climatology": "", 
+            "formula": "", 
+            "must_have_bounds": "no", 
+            "out_name": "plev", 
+            "positive": "down", 
+            "requested": [
+                "100000.", 
+                "85000.", 
+                "70000.", 
+                "50000.", 
+                "25000.", 
+                "15000.", 
+                "10000.", 
+                "7000.", 
+                "5000.", 
+                "1000.",
+                "500.",
+                "200."
+            ], 
+            "requested_bounds": "", 
+            "stored_direction": "decreasing", 
+            "tolerance": "", 
+            "type": "double", 
+            "valid_max": "", 
+            "valid_min": "", 
+            "value": "", 
+            "z_bounds_factors": "", 
+            "z_factors": "", 
+            "bounds_values": ""
+        }
+    }
+}
+

@@ -192,9 +192,9 @@ example_simulation_settings={
     #'parent_source_id'     : 'CNRM-CM5.1' # only in special cases, where parent model 
                                            # is not the same model
     #
-    "sub_experiment_id"    : "none", # Optional, default is 'none'; example : s1960. 
-    "sub_experiment"       : "none", # Optional, default in 'none'
-    "history"              : "no_history", #Used when a simulation is re-run, an output file is modified ...
+    "sub_experiment_id"    : "None", # Optional, default is 'none'; example : s1960. 
+    "sub_experiment"       : "None", # Optional, default in 'none'
+    "history"              : "None", #Used when a simulation is re-run, an output file is modified ...
     # A per-variable dict of comments which are specific to this simulation. It will replace  
     # the all-simulation comment
     'comments'     : {
@@ -414,7 +414,8 @@ def write_xios_file_def(cmv,table, lset,sset, out,cvspath,field_defs,axis_defs,
     # WIP doc v 6.2.0 - dec 2016 
     # <variable_id>_<table_id>_<source_id>_<experiment_id >_<member_id>_<grid_label>[_<time_range>].nc
     member_id=variant_label
-    sub_experiment_id=sset.get('sub_experiment_id','none')
+    # mpmoine_future_modif:write_xios_file_def: CMOR3.2.2 impose 'None' pour sub_experiment_id
+    sub_experiment_id=sset.get('sub_experiment_id','None')
     if sub_experiment_id != 'none': member_id = sub_experiment_id+"-"+member_id
     #
     # Grid - 
@@ -531,7 +532,8 @@ def write_xios_file_def(cmv,table, lset,sset, out,cvspath,field_defs,axis_defs,
     mip_era=cmv.mip_era
     institution_id=lset['institution_id']
     source_id=lset['source_id']
-    sub_experiment_id=sset.get('sub_experiment_id','none')
+    # mpmoine_future_modif:write_xios_file_def: CMOR3.2.2 impose 'None' pour sub_experiment
+    sub_experiment_id=sset.get('sub_experiment_id','None')
     further_info_url="http://furtherinfo.es-doc.org/%s.%s.%s.%s.%s.%s"%(
         mip_era,institution_id,source_id,experiment_id,
         sub_experiment_id,variant_label)
@@ -612,7 +614,8 @@ def write_xios_file_def(cmv,table, lset,sset, out,cvspath,field_defs,axis_defs,
     wr('source_type',source_type)
     #
     wr('sub_experiment_id',sub_experiment_id) 
-    wr('sub_experiment',sset,'none') 
+    # mpmoine_future_modif:write_xios_file_def: CMOR3.2.2 impose 'None' pour sub_experiment_id
+    wr('sub_experiment',sset,'None') 
     wr("table_id",table)
     wr("title","%s model output prepared for %s / %s %s"%(\
         source_id,sset.get('project',"CMIP6"),activity_id,experiment_id))
@@ -665,19 +668,20 @@ def create_xios_field_ref(sv,alias,table,lset,sset,end_field_defs,
     # TBD Should ensure that various additionnal dims are duly documented by model or pingfile (e.g. tau)
     if ssh[0:4] in ['XY-H','XY-P'] or ssh[0:3] == 'Y-P' :
         # TBD : for now, do not interpolate vertically
-        return
+        #mpmoine_temporaire:je reactive l'ecriture des axis_def: return
         # mpmoine_last_modif:create_xios_field_ref: on recupere maintenant 'dimids' depuis svar
-        dimids=sv.dimids
-        for dimid in dimids :
-            d=dq.inx.uid[dimid]
-            if isVertDim(d) :
-                furthervar=nextvar+"_"+d.label
+        # mpmoine_future_modif:create_xios_field_ref: on utilise maintenant sv.sdims pour analyser les dimension
+        # mpmoine_question: je ne comprend pas l'usage de nextvar... A priori on ne peut pas avoir plus d'une dimension verticale ?
+        for sd in sv.sdims.values():
+            if isVertDim(sd):
+                furthervar=nextvar+"_"+sd.label
                 if not furthervar in pingvars :
                     # Construct an axis for interpolating to this dimension
-                    axis_defs[d.label]=create_axis_def(d,lset["ping_variables_prefix"],field_defs)
+                    # mpmoine_future_modif:reate_xios_field_ref: suppression de l'argument 'field_defs' de create_axis_def qui n'est pas utilise
+                    axis_defs[sd.label]=create_axis_def(sd,lset["ping_variables_prefix"])
                     # Construct a field def for the interpolated variable
                     field_defs[furthervar]='<field id="%-25s field_ref="%-25s axis_ref="%-10s/>'\
-                        %(furthervar+'"',nextvar+'"',d.label+'"')
+                        %(furthervar+'"',nextvar+'"',sd.label+'"')
                     #%(furthervar+'"',nextvar+'"',prefix+d.label+'"')
                 nextvar=furthervar
                 #TBD what to do for singleton dimension ?
@@ -759,6 +763,7 @@ def gather_AllSimpleVars(lset,expid=False,year=False,printout=False):
     mip_vars_list=select_CMORvars_for_lab(lset,expid,year,printout=printout)
     if lset['listof_home_vars']:
         process_homeVars(lset,mip_vars_list,dq,expid,printout)
+
     else: print "Info: No HOMEvars list provided."
     return mip_vars_list
 
@@ -808,11 +813,17 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
                 # mpmoine_last_modif:generate_file_defs: (cas par exemple de 'hus' dans table '6hrPlev' => spid='__struct_not_found_001__')
                 # mpmoine_next_modif: generate_file_defs: exclusion de certaines spatial shapes (ex. Polar Stereograpic Antarctic/Groenland)
                 if svar.label not in lset['excluded_vars'] and svar.spatial_shp and svar.spatial_shp not in lset["excluded_spshapes"]:  
-                #-if svar.label not in lset['excluded_vars'] :
                     if svar.mipTable not in svars_pertable : 
                         svars_pertable[svar.mipTable]=[]
                     svars_pertable[svar.mipTable].append(svar)
-    #
+                else:
+                    # mpmoine_future_modif:generate_file_defs: juste un peu plus de printout...
+                    if printout:
+                        print "Warning: ",svar.label," in table ",svar.mipTable," has been excluded for one or several of the following reason(s):"
+                        if svar.label in lset['excluded_vars']: print "   * is in excluded list"
+                        if not svar.spatial_shp: print "   * has no spatial shape"
+                        if svar.spatial_shp in lset["excluded_spshapes"]: print "   * has an exluded spatial shape"
+    #                  
     # Add svarars belonging to the orphan list
     orphans=lset['orphan_variables'][context]
     for svar in mip_vars_list :
@@ -821,7 +832,6 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
             # mpmoine_last_modif:generate_file_defs: (cas par exemple de 'hus' dans table '6hrPlev' => spid='__struct_not_found_001__')
             # mpmoine_next_modif: generate_file_defs: exclusion de certaines spatial shapes (ex. Polar Stereograpic Antarctic/Groenland)
             if svar.label not in lset['excluded_vars'] and svar.spatial_shp and svar.spatial_shp not in lset["excluded_spshapes"]:  
-            #-if svar.label not in lset['excluded_vars'] : 
                 if svar.mipTable not in svars_pertable :
                     svars_pertable[svar.mipTable]=[]
                 svars_pertable[svar.mipTable].append(svar)
@@ -904,55 +914,52 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
     if skipped_vars : print "Skipped variables are "+`skipped_vars`
 
 
-
-def create_axis_def(dim_name_or_obj,prefix,field_defs):
+# mpmoine_future_modif:create_axis_def: suppression de l'argument 'field_defs' qui n'est pas utilise
+def create_axis_def(sdim,prefix):
     """ 
-    From a dim DR object or a dim name, returns an Xios axis definition 
+    From a  simplified Dim object, returns an Xios axis definition 
     """
-    dim=None
-    if type(dim_name_or_obj)==type(""):
-        for g in dq.coll['grids'].items : 
-            if g.label==dim_name_or_obj : dim=g
-    else: dim=dim_name_or_obj
-    if dim is None :
-        print "cannot cretae an axis_def from "+dim_name_or_obj
+    # mpmoine_future_modif:create_axis_def: plusieurs modifs car on passe maintenant sdim en argument et non dim_name_or_obj
+    if sdim is None:
+        print "cannot create an axis_def from "+sdim
         return None
-    rep='<axis id="%s" '%dim.label
-    if not dim.positive in [ None, "" ] :
-        rep+='positive="%s" '%dim.positive
-    if dim.requested != "" :
+    rep='<axis id="%s" '%sdim.label
+    if not sdim.positive in [ None, "" ] :
+        rep+='positive="%s" '%sdim.positive
+    if sdim.requested != "" :
         # Case of a non-degenerated dimension (not a singleton)
-        n_glo=len(dim.requested.split(" "))
+        # mpmoine_future_modif: je vire le separateur " ", pour regler le pb des " " successifs
+        n_glo=len(sdim.requested.rstrip(" ").split())
         rep+='n_glo="%g" '%n_glo
-        rep+='value="(0,%g) [%s]"'%(n_glo - 1,dim.requested)
-    elif dim.value != "":
+        # mpmoine_future_modif: je supprime le -1 pour n_glo car regle avec rstrip/split()
+        rep+='value="(0,%g) [%s]"'%(n_glo,sdim.requested)
+    elif sdim.value != "":
         # Singleton case
         rep+='n_glo=%g '%1
-        rep+='value=(0,0)[%s]"'%dim.value
+        rep+='value=(0,0)[%s]"'%sdim.value
     else :
         pass
-    stdname=dq.inx.uid[dim.standardName].uid
-    rep+=' name="%s"'%dim.altLabel
-    rep+=' standard_name="%s"'%stdname
-    rep+=' long_name="%s"'%dim.title
-    rep+=' unit="%s"'%dim.units
+    rep+=' name="%s"'%sdim.out_name
+    rep+=' standard_name="%s"'%sdim.stdname
+    rep+=' long_name="%s"'%sdim.long_name
+    rep+=' unit="%s"'%sdim.units
     rep+='>'
-    if stdname=="air_pressure" : coordname=prefix+"pfull"
-    if stdname=="altitude"     : coordname=prefix+"zg"
+    if sdim.stdname=="air_pressure" : coordname=prefix+"pfull"
+    if sdim.stdname=="altitude"     : coordname=prefix+"zg"
     rep+='\n\t\t<interpolate_axis type="polynomial" order="1"'
     rep+=' coordinate="%s"/>\n\t</axis>'%coordname
     return rep
 
-def isVertDim(dim):
+def isVertDim(sdim):
     """
     Returns True if dim represents a dimension for which we want 
     an Xios interpolation. 
     For now, a very simple logics for interpolated vertical 
     dimension identification:
     """
-    name=dq.inx.uid[dim.standardName]
-    return  (name.uid=='air_pressure' or name.uid=='altitude')
-    
+    # mpmoine_future_modif: isVertDim: on utilise maintenant sv.sdims pour analyser les dimensions
+    return  (sdim.stdname=='air_pressure' or sdim.stdname=='altitude')
+
 def analyze_cell_time_method(cm,label,table):
     """
     Depending on cell method string CM, tells which time operation
@@ -962,7 +969,7 @@ def analyze_cell_time_method(cm,label,table):
     detect_missing=False
     if cm is None : 
         if print_DR_errors :
-            print "DR Error : cell_time_method is None for %15s in table %s, averaging" %(label,table)
+            print "DR Error: cell_time_method is None for %15s in table %s, averaging" %(label,table)
         operation="average"
     elif "time: mean (with samples weighted by snow mass)" in cm : 
         #[amnla-tmnsn]: Snow Mass Weighted (LImon : agesnow, tsnLi)
@@ -1014,7 +1021,7 @@ def analyze_cell_time_method(cm,label,table):
         operation="average"
     elif "time: sum"  in cm :
         # [tsum]: Temporal Sum  : pas utilisee !
-        print "Errror: time: sum is not supposed to be used" 
+        print "Error: time: sum is not supposed to be used" 
     elif "time: mean" in cm :  #    [tmean]: Time Mean  
         operation="average"
     elif "time: point" in cm:
@@ -1079,17 +1086,21 @@ def pingFileForRealmsList(context,lrealms,svars,dummy="field_atm",
     #if lset["use_area_suffix"] :
     #    lvars.sort(key=lambda x:x.label_with_area)
     #else:
-    lvars.sort(key=lambda x:x.label)
+    # mpmoine_future_modif:pingFileForRealmsList: on s'appuie sur le mipVar label (label_without_area) et non plus le cmorVar label
+    lvars.sort(key=lambda x:x.label_without_area)
     # Remove duplicates
     uniques=[] ; last_label=""
     for v in lvars : 
-        if v.label != last_label : 
+        # mpmoine_future_modif:pingFileForRealmsList: on s'appuie sur le mipVar label (label_without_area) et non plus le cmorVar label
+        if v.label_without_area!= last_label : 
             uniques.append(v)
-            last_label=v.label
+            # mpmoine_future_modif:pingFileForRealmsList: on s'appuie sur le mipVar label (label_without_area) et non plus le cmorVar label
+            last_label=v.label_without_area
     lvars=uniques
     #
     if filename is None : filename="ping"+name+".xml"
-    if filename[-4:] != ".xml" : filneme +=".xml"
+    # mpmoine_future_modif:pingFileForRealmsList: typo 'filneme' -> 'filename'
+    if filename[-4:] != ".xml" : filename +=".xml"
     #
     specials=read_special_fields_defs(lrealms)
     with open(filename,"w") as fp:
@@ -1102,7 +1113,8 @@ def pingFileForRealmsList(context,lrealms,svars,dummy="field_atm",
             fp.write("<!-- for variables which realm equals one of "\
                      +name+"-->\n")
         for v in lvars :
-            label=v.label
+            # mpmoine_future_modif:pingFileForRealmsList: on s'appuie sur le 'label_without_psuffix' et non plus le label complet
+            label=v.label_without_psuffix
             if label in specials :
                 line=ET.tostring(specials[label]).replace("DX_",prefix)
                 line=line.replace("\n","").replace("\t","")
@@ -1114,7 +1126,8 @@ def pingFileForRealmsList(context,lrealms,svars,dummy="field_atm",
                      # mpmoine_last_modif: svar en argument de highest_rank et non pas seulement son label_without_area
                     shape=highest_rank(v)
                     # Bugfix for DR 1.0.1 content :
-                    if v.label=='clcalipso' : shape='XYA'
+                    # mpmoine_future_modif:pingFileForRealmsList: on s'appuie sur le mipVar label (label_without_area) et non plus le cmorVar label
+                    if v.label_without_area=='clcalipso' : shape='XYA'
                     if dummy is True :
                         dummys="dummy"
                         if dummy_with_shape : dummys+="_"+shape
@@ -1256,7 +1269,8 @@ def highest_rank(svar):
         else:
             # mpmoine_last_modif:highest_rank: Pour recuperer le spatial_shp pour le cas de variables qui n'ont pas un label CMORvar de la DR (ex. HOMEvar ou EXTRAvar)
             shape=svar.spatial_shp
-        shapes.append(shape)
+        # mpmoine_future_modif:highest_rank: test shape =/ None, sinon on se retrouve avec shapes=liste de None et 1 liste de None n'est pas Faux
+        if shape: shapes.append(shape)
     if not shapes : shape="??"
     elif any([ "XY-A"  in s for s in shapes]) : shape="XYA"
     elif any([ "XY-O" in s for s in shapes]) : shape="XYO"
@@ -1285,7 +1299,6 @@ def highest_rank(svar):
     elif any([ "S-na" in s for s in shapes]) :  shape="COSPprofile"
     elif any([ "na-na" in s for s in shapes]) : shape="0d" # analyser realm
     else : shape="??"
-
     return shape
 
 

@@ -1,11 +1,11 @@
 {
     "Header": {
-        "data_specs_version": "01.beta.45", 
-        "table_id": "Table prim6hrpt", 
+        "data_specs_version": "01.00.03", 
+        "table_id": "Table Prim6hrPt", 
         "realm": "atmos", 
         "frequency": "6hr", 
         "cmor_version": "3.2", 
-        "table_date": "19 December 2016", 
+        "table_date": "24 February 2017", 
         "missing_value": "1e20", 
         "product": "output", 
         "approx_interval": "0.250000", 
@@ -94,7 +94,7 @@
             "cell_measures": "area: areacella", 
             "long_name": "Theta on PV +/- 2 Surface", 
             "comment": "", 
-            "dimensions": "longitude latitude time", 
+            "dimensions": "longitude latitude time1", 
             "out_name": "thetapv2", 
             "type": "real", 
             "positive": "", 

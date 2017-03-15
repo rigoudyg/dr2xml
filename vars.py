@@ -1,20 +1,22 @@
 print_DR_errors=True
+print_Debug=False
 
 import sys,os
 import json
 from table2freq import table2freq
 from grids import dr2xml_error
 
-#A class for unifying CMOR vars and home variables
-# mpmoine_last_modif: simple_CMORvar: ajout des elements 'mip_era', 'missing' et 'dimids'
+# A class for unifying CMOR vars and home variables
+# mpmoine_last_modif:simple_CMORvar: ajout des attributs 'mip_era', 'missing' et 'dimids'
+# mpmoine_future_modif:simple_CMORvar: ajout de l'attribut 'label_without_psuffix' et suppresion de l'attribut dimids
 class simple_CMORvar(object):
     def __init__(self):
-        self.type           = False #-'perso' # Default case is HOMEvar.
+        self.type           = False
         self.modeling_realm = None 
         self.grids          = [""] 
-        self.mipTable       = None 
         self.label          = None 
-        self.label_without_area= None 
+        self.label_without_area= None  # taken equal to MIPvar label
+        self.label_without_psuffix= None
         self.frequency      = None 
         self.mipTable       = None 
         self.positive       = None 
@@ -23,28 +25,45 @@ class simple_CMORvar(object):
         self.stdunits       = None 
         self.long_name      = None 
         self.struct         = None
-        self.dimids         = []
+        self.sdims          = {}
         self.cell_methods   = None
         self.cell_measures  = None
         self.spatial_shp    = None 
         self.temporal_shp   = None 
         self.experiment     = None 
         self.mip            = None
-        self.Priority       = 1    # Will be changed using DR or extra-Tables
-        self.mip_era        = False #-'PERSO' # Later changed in 'CMIP6' or 'PRIMAVERA' when appropriate
+        self.Priority       = 1     # Will be changed using DR or extra-Tables
+        self.mip_era        = False # Later changed in project lname (uppercase) when appropriate
         self.missing        = 1.e+20
+
+# mpmoine_future_modif: nouvelle classe simple_Dim
+# A class for unifying grid info coming from DR and extra_Tables
+# mpmoine_future_modif:simple_Dim: ajout de l'attribut 'is_zoom_of'
+#
+class simple_Dim(object):
+    def __init__(self):
+        self.label        = False
+        self.stdname      = False
+        self.long_name    = False
+        self.positive     = False
+        self.requested    = ""
+        self.value        = False
+        self.out_name     = False
+        self.units        = False
+        self.is_zoom_of   = False
+
+# mpmoine_future_modif: liste des suffixes de noms de variables reperant un ou plusieurs niveaux pression
+plev_suffixes=["4","7h","12","19","23","27","10","100","200","500","700","850","1000"]
 
 ambiguous_mipvarnames=None
 
 # 2 dicts for processing home variables
 # mpmoine_last_modif: vars.py: spid2label et tmid2label ne sont plus utilises
-#-spid2label={}
-#-tmid2label={}
 # 2 dicts and 1 list for processing extra variables
 dims2shape={}
 dim2dimid={}
 dr_single_levels=[]
-shape2dimids={}
+stdName2mipvarLabel={}
 
 # mpmoine_last_modif:read_homeVars_list: fonction modifiee pour accepter des extra_Tables
 def read_homeVars_list(hmv_file,expid,mips,dq,path_extra_tables=None):
@@ -62,10 +81,6 @@ def read_homeVars_list(hmv_file,expid,mips,dq,path_extra_tables=None):
     Returns:
       A list of 'simplified CMOR variables'
     """
-    #
-    if not shape2dimids:
-        for sshp in dq.coll['spatialShape'].items:
-            shape2dimids[sshp.label]=sshp.dimids
     #
     # File structure: name of attributes to read, number of header line 
     home_attrs=['type','label','modeling_realm','frequency','mipTable','temporal_shp','spatial_shp','experiment','mip']
@@ -95,12 +110,10 @@ def read_homeVars_list(hmv_file,expid,mips,dq,path_extra_tables=None):
                     cc+=1
                     setattr(home_var,home_attrs[cc],ccol)
             home_var.label_with_area=home_var.label
+            # mpmoine_future_modif:read_homeVars_list: valorisation de home_var.label_without_psuffix
+            home_var.label_without_psuffix=home_var.label
             if hmv_type=='perso':
                 home_var.mip_era='PERSO'
-                try:
-                    home_var.dimids=shape2dimids[home_var.spatial_shp]
-                except:
-                    print "Warning: failed to derive dimids from spatial_shp for HOMEvar",home_var.label,"(",hmv_type,")"
             if home_var.mip!="ANY":
                 if home_var.mip in mips:
                     if home_var.experiment!="ANY":
@@ -143,6 +156,12 @@ def read_extraTable(path,table,dq,printout=False):
     if not dims2shape:
         for sshp in dq.coll['spatialShape'].items:
             dims2shape[sshp.dimensions]=sshp.label
+        # mpmoine_future_modif:dims2shape: ajout a la main des correpondances dims->shapes Primavera qui ne sont pas couvertes par la DR
+        # mpmoine_attention: il faut mettre a jour dim2shape a chaque fois qu'une nouvelle correpondance est introduite
+        # mpmoine_attention: dans les extra-Tables
+        dims2shape['longitude|latitude|height100m']='XY-na'
+        #mpmoine_note: provisoire, plev12 juste pour exemple
+        dims2shape['longitude|latitude|plev12']='XY-P12'
     #
     if not dim2dimid:
         for g in dq.coll['grids'].items:
@@ -163,13 +182,13 @@ def read_extraTable(path,table,dq,printout=False):
     dr_slev=dr_single_levels
     mip_era=table.split('_')[0]
     json_table=path+"/"+table+".json"
+    json_coordinate=path+"/"+mip_era+"_coordinate.json"
     if not os.path.exists(json_table): sys.exit("Abort: file for extra Table does not exist: "+json_table)
     tbl=table.split('_')[1]
     with open(json_table,"r") as jt:
-        json_data=jt.read()
-        data=json.loads(json_data)
-        for k,v in data["variable_entry"].iteritems(): 
-            #- if printout: print "Info: Variable read in extra table ",table, ":",v["out_name"]
+        json_tdata=jt.read()
+        tdata=json.loads(json_tdata)
+        for k,v in tdata["variable_entry"].iteritems(): 
             extra_var=simple_CMORvar()
             extra_var.type='extra'
             extra_var.mip_era=mip_era
@@ -185,6 +204,8 @@ def read_extraTable(path,table,dq,printout=False):
             extra_var.positive=v["positive"]
             prio=mip_era.lower()+"_priority"
             extra_var.Priority=float(v[prio])
+            # mpmoine_future_modif:read_extraTable: on renseigne l'attribut label_without_psuffix
+            extra_var.label_without_psuffix=Remove_Suffix(extra_var,plev_suffixes,realms='atmos aerosol atmosChem')
             # Tranlate full-dimensions read in Table (e.g. "longitude latitude time p850")
             # into DR spatial-only dimensions (e.g. "longitude|latitude")
             dims=(v["dimensions"]).split(" ")
@@ -194,16 +215,18 @@ def read_extraTable(path,table,dq,printout=False):
             for d in dims:
                 if "time" in d:
                     dtime=d
-                    inddims_to_sup.append(dims.index(dtime))           
-            # get the index of single level to suppress, if any
+                    inddims_to_sup.append(dims.index(dtime))  
+                    ind_time=[dims.index(dtime)]
+                # get the index of single level to suppress, if any
                 for sl in dr_slev:
                     if d==sl: 
                         dsingle=d
-                        #- if printout: print "Info: single level found:",dsingle
                         inddims_to_sup.append(dims.index(dsingle))      
             # supress dimensions corresponding to time and single levels
             dr_dims=[d for i,d in enumerate(dims) if i not in inddims_to_sup]
-            # rewrite dimension with DR convension
+            # supress only the dimension corresponding to time
+            dr_dims_with_single_level=[d for i,d in enumerate(dims) if i not in ind_time]
+            # rewrite dimension with DR convention
             drdims=""
             for d in dr_dims:
                 if drdims: 
@@ -217,18 +240,37 @@ def read_extraTable(path,table,dq,printout=False):
                 # mpmoine_note: Je rencontre ce cas pour l'instant avec les tables Primavera ou 
                 # mpmoine_note: on a "latitude|longitude" au lieu de "longitude|latitude"
                 print "Warning: spatial shape corresponding to ",drdims,"for variable",v["out_name"],\
-                      "in Table",table," not found."
-                #-extra_var.spatial_shp=False
+                      "in Table",table," not found in DR."
             # list of spatial dimension identifiers
+            # mpmoine_future_modif:read_extraTable: introduction de extra_var.sdims, ajout lecture des dimensions dans 
+            # mpmoine_future_modif:read_extraTable: une table de coordinates quand pas trouvees dans la DR
             dr_dimids=[]
-            for d in dr_dims:
+            for d in dr_dims_with_single_level:
                 if dim2dimid.has_key(d):
                     dr_dimids.append(dim2dimid[d])
+                    extra_dim=get_simpleDim_from_DimId(dim2dimid[d],dq)
+                    extra_var.sdims.update({extra_dim.label:extra_dim})
                 else:
-                    print "Warning: dimid corresponding to ",d,"for variable",v["out_name"],\
-                          "in Table",table," not found."
-            extra_var.dimids=dr_dimids
-            # mpmoine_todo: ajouter le filtre par priorites, quand dispo dans les extra tables
+                    extra_sdim=simple_Dim()
+                    with open(json_coordinate,"r") as jc:
+                        json_cdata=jc.read()
+                        cdata=json.loads(json_cdata)
+                        extra_sdim.label     =d
+                        extra_sdim.stdname   =cdata["axis_entry"][d]["standard_name"]
+                        extra_sdim.units     =cdata["axis_entry"][d]["units"]
+                        extra_sdim.long_name =cdata["axis_entry"][d]["long_name"]
+                        extra_sdim.out_name  =cdata["axis_entry"][d]["out_name"]
+                        extra_sdim.positive  =cdata["axis_entry"][d]["positive"]
+                        string_of_requested=""
+                        for ilev in cdata["axis_entry"][d]["requested"]:
+                            string_of_requested=string_of_requested+" "+ilev
+                        extra_sdim.requested =string_of_requested.rstrip(" ") # values of multi vertical levels
+                        extra_sdim.value     =cdata["axis_entry"][d]["value"] # value of single vertical level
+                    extra_var.sdims.update({extra_sdim.label:extra_sdim})
+                    print "Info: dimid corresponding to ",d,"for variable",v["out_name"],\
+                          "in Table",table," not found in DR => read it in extra coordinates Table: ", extra_sdim.stdname,extra_sdim.requested
+            # mpmoine_future_modif: read_extraTable: suppression de extra_var.dimids -> elargi avec extra_var.sdims
+                
             extravars.append(extra_var)
     if printout: 
         print "Info: Number of variables in extra tables ",table,": ",len(extravars)
@@ -239,14 +281,18 @@ def get_SpatialAndTemporal_Shapes(cmvar,dq):
     spatial_shape=False
     temporal_shape=False
     if cmvar.stid=="__struct_not_found_001__":
-        print "Warning: stid for ",cmvar.label," in table ",cmvar.mipTable," is a broken link to structure: ", cmvar.stid
+        if print_DR_errors :
+            print "Warning: stid for ",cmvar.label," in table ",cmvar.mipTable," is a broken link to structure in DR: ", cmvar.stid
     else:
         for struct in dq.coll['structure'].items:
             if struct.uid==cmvar.stid: 
                  spatial_shape=dq.inx.uid[struct.spid].label
                  temporal_shape=dq.inx.uid[struct.tmid].label
-    if not spatial_shape: print "Warning: spatial shape for ",cmvar.label," in table ",cmvar.mipTable," not found."
-    if not temporal_shape : print "Warning: temporal shape for ",cmvar.label," in table ",cmvar.mipTable," not found."
+    if print_DR_errors :
+        if not spatial_shape: 
+            print "Warning: spatial shape for ",cmvar.label," in table ",cmvar.mipTable," not found in DR."
+        if not temporal_shape : 
+            print "Warning: temporal shape for ",cmvar.label," in table ",cmvar.mipTable," not found in DR."
     return [spatial_shape,temporal_shape]
 
 # mpmoine_last_modif: process_homeVars: argument supplementaire 'path_extra_tables' et expid au lieu de lset
@@ -278,13 +324,13 @@ def process_homeVars(lset,mip_vars_list,dq,expid=False,printout=False):
                     # Append HOME variable only if not already
                     # selected with the DataRequest
                     if printout: print "Info:",hv_info,\
-                       "HOMEVar is not in the DataRequest."\
+                       "HOMEVar is not in DR."\
                        " => Taken into account."
                     mip_vars_list.append(updated_hv)
                 else:
                     if printout:
                         print "Info:",hv_info,\
-                            "HOMEVar is already in the DataRequest." \
+                            "HOMEVar is already in DR." \
                             " => Not taken into account."
             else:
                 if printout:
@@ -321,7 +367,7 @@ def process_homeVars(lset,mip_vars_list,dq,expid=False,printout=False):
         # mpmoine_last_modif: process_homeVars: ajout du cas type='extra'
         elif hv.type=='extra':
             if hv.Priority<=lset["max_priority"]:
-                if printout: print "Info:",hv_info,"HOMEVar is read in an extra table with priority " \
+                if printout: print "Info:",hv_info,"HOMEVar is read in an extra Table with priority " \
                                ,hv.Priority," => Taken into account."
                 mip_vars_list.append(hv)
         else:
@@ -376,11 +422,10 @@ def complement_svar_using_cmorvar(svar,cmvar,dq):
         ambiguous_mipvarnames=analyze_ambiguous_MIPvarnames(dq)
         
     # mpmoine_last_modif: spid2label et tmid2label ne sont plus utilises
-    #-global spid2label
-    #-if len(spid2label)==0 :
-    #-    for obj in dq.coll['spatialShape'].items: spid2label[obj.uid]=obj.label
-    #-    for obj in dq.coll['temporalShape'].items: tmid2label[obj.uid]=obj.label
 
+    # mpmoine_future_modif:complement_svar_using_cmorvar: reorganisation des lignes de code
+
+    # Get information form CMORvar
     svar.frequency = cmvar.frequency
     svar.mipTable = cmvar.mipTable
     svar.Priority= cmvar.defaultPriority
@@ -388,7 +433,11 @@ def complement_svar_using_cmorvar(svar,cmvar,dq):
     svar.modeling_realm = cmvar.modeling_realm
     svar.label = cmvar.label
     [svar.spatial_shp,svar.temporal_shp]=get_SpatialAndTemporal_Shapes(cmvar,dq)
-    #mpmoine_next_modif: complement_svar_using_cmorvar: gestion d'exception pour l'acces a la 'mipvar'
+    #mpmoine_future_modif:complement_svar_using_cmorvar: on renseigne l'attribut label_without_psuffix
+    svar.label_without_psuffix=Remove_Suffix(svar,plev_suffixes,realms='atmos aerosol atmosChem')
+
+    # Get information from MIPvar
+    #mpmoine_next_modif:complement_svar_using_cmorvar: gestion d'exception pour l'acces a la 'mipvar'
     try:
         mipvar = dq.inx.uid[cmvar.vid]
         svar.label_without_area=mipvar.label
@@ -398,19 +447,35 @@ def complement_svar_using_cmorvar(svar,cmvar,dq):
         else:
             svar.description = mipvar.title
         svar.stdunits = mipvar.units
+        stdname=None
+        try :
+            stdname = dq.inx.uid[mipvar.sn]
+        except:
+            pass
+            #print "Issue accessing sn for %s %s!"%(cmvar.label,cmvar.mipTable)
+        if stdname and stdname._h.label == 'standardname':
+                svar.stdname = stdname.uid
+                #svar.stdunits = stdname.units
+                #svar.description = stdname.description
+        else :
+            # If CF standard name is NOK, let us use MIP variables attributes
+            svar.stdname = mipvar.label
     except:
-        if print_DR_errors : print "Issue with mipvar for "+svar.label," => Issue for label_without_area, long_name, description and units."
+        if print_DR_errors : 
+            print "DR Error: issue with mipvar for "+svar.label," => no label_without_area, long_name, stdname, description and units derived."
+    #
+    # Get information form Structure
     try :
         st=dq.inx.uid[cmvar.stid]
-        #print st.label
+        svar.struct=st
         try :
             svar.cm=dq.inx.uid[st.cmid].cell_methods
             svar.cell_methods=dq.inx.uid[st.cmid].cell_methods
             # mpmoine_last_modif:complement_svar_using_cmorvar: il arrive que cell_methods soit une chaine vide 
-            #mpmoine_last_modif:complement_svar_using_cmorvar: et cela ne peut pas etre detecte par la regle d'exception => "NOT-SET"
+            # mpmoine_last_modif:complement_svar_using_cmorvar: et cela ne peut pas etre detecte par la regle d'exception => "NOT-SET"
             if svar.cell_methods=='': svar.cell_methods="NOT-SET"
         except:
-            if print_DR_errors : print "Issue with cell_method for "+st.label
+            if print_DR_errors : print "DR error: issue with cell_method for "+st.label
             svar.cell_methods=None
         try :
             svar.cell_measures=dq.inx.uid[cmvar.stid].cell_measures
@@ -420,10 +485,36 @@ def complement_svar_using_cmorvar(svar,cmvar,dq):
         except:
             #print "Issue with cell_measures for "+`cmvar`
             svar.cell_measures="NOT-SET" #None
+        # mpmoine_last_modif:complement_svar_using_cmorvar: on affecte ici svar.dimids (avant: dans create_xios_field_ref)
+        # mpmoine_last_modif:complement_svar_using_cmorvar: provisoire, pour by-passer le cas d'une CMORvar qui n'a pas de
+        # mpmoine_last_modif:complement_svar_using_cmorvar: structure associee ('dreqItem_remarks')
+        # mpmoine_future_modif:complement_svar_using_cmorvar: on ne recherche les dimids que si on a pas affaire a une constante
+        if svar.spatial_shp!="na-na":
+            try:
+                spid=dq.inx.uid[svar.struct.spid]
+                try:
+                    # mpmoine_future_modif:complement_svar_using_cmorvar: suppression de svar.dimids -> elargi avec svar.sdims
+                    dimids=spid.dimids
+                    # mpmoine_future_modif:complement_svar_using_cmorvar: on rajoute les single levels dans le traitement des dimensions (dimids->all_dimids)
+                    cids=svar.struct.cids
+                    if "" in cids: 
+                        all_dimids=dimids
+                    else:
+                        all_dimids=dimids+cids
+                    # mpmoine_future_modif:complement_svar_using_cmorvar: on rajoute les single levels dans le traitement des dimensions (dimids->all_dimids)  
+                    for dimid in all_dimids:
+                        # mpmoine_future_modif:complement_svar_using_cmorvar: on valorise svar.sdims avec la fonction get_simpleDim_from_DimId
+                        sdim=get_simpleDim_from_DimId(dimid,dq)
+                        svar.sdims.update({sdim.label:sdim})
+                except:
+                    if print_DR_errors :
+                        print "DR Error: issue with dimids for ",svar.label, "in Table ",svar.mipTable, " => no sdims derived."
+            except:
+                if print_DR_errors :
+                        print "DR Error: issue with spid for ",svar.label, "in Table ",svar.mipTable, " => no sdims derived."
     except :
         if print_DR_errors :
-            print "Issue with st.stid in table % 10s for %s"%(cmvar.mipTable,cmvar.label)
-        svar.cell_methods=None
+            print "DR Error: issue with stid for",svar.label, "in Table ",svar.mipTable,"  => no cell_methods, cell_measures, dimids and sdims derived."
         
     area=cellmethod2area(svar.cell_methods) 
     if area : 
@@ -433,33 +524,43 @@ def complement_svar_using_cmorvar(svar,cmvar,dq):
             # Special case for a set of land variables
             if not (svar.modeling_realm=='land' and svar.label[0]=='c'):
                 svar.label=svar.label+"_"+area
-
+    #
+    # Fix type and mip_era
     svar.type='cmor'
     #mpm_last_modif:complement_svar_using_cmorvar: mip_era='CMIP6' dans le cas CMORvar
     svar.mip_era='CMIP6'
-    stdname=None
-    #
-    try :
-        stdname = dq.inx.uid[mipvar.sn]
-    except:
-        pass
-        #print "Issue accessing sn for %s %s!"%(cmvar.label,cmvar.mipTable)
-    if stdname and stdname._h.label == 'standardname':
-            svar.stdname = stdname.uid
-            #svar.stdunits = stdname.units
-            #svar.description = stdname.description
-    else :
-        # If CF standard name is NOK, let us use MIP variables attributes
-        svar.stdname = mipvar.label
-    svar.struct=dq.inx.uid[cmvar.stid]
-    # mpmoine_last_modif:complement_svar_using_cmorvar: on affecte ici svar.dimids (avant: dans create_xios_field_ref)
-    # mpmoine_last_modif:complement_svar_using_cmorvar: provisoire, pour by-passer le cas d'une CMORvar qui n'a pas de
-    # mpmoine_last_modif:complement_svar_using_cmorvar: structure associee ('dreqItem_remarks')
-    try:
-        svar.dimids=dq.inx.uid[svar.struct.spid].dimids
-    except:
-        print "Warning: no structure associated to ", [svar.label, svar.mipTable], "=> no dimids derived."
 
+# momoine_future_modif: nouvelle fonction get_simpleDim_from_DimId utilisee par complement_svar_using_cmorvar et read_extra_Tables
+def get_simpleDim_from_DimId(dimid,dq):
+    sdim=simple_Dim()
+    d=dq.inx.uid[dimid]
+    sdim.label=d.label
+    sdim.positive=d.positive
+    sdim.requested=d.requested 
+    sdim.value=d.value
+    sdim.stdname=dq.inx.uid[d.standardName].uid
+    sdim.longname=d.title
+    sdim.out_name=d.altLabel
+    sdim.units=d.units
+    if print_Debug:
+        list_of_attrs=["label","positive","requested","value","stdname","long_name","outname","units"]
+        for a in list_of_attrs:
+            print "mpmoine_debug:",a," ",getattr(sdim,a)
+    return sdim
+
+# mpmoine_future_modif: nouvelle fonction Remove_Suffix
+def Remove_Suffix(svar,suffixes,realms):
+    label_out=svar.label
+    svar_realms=set(svar.modeling_realm.split())
+    valid_realms=set(realms.split())
+    if svar_realms.intersection(valid_realms):
+        for s in suffixes:
+            # remove suffixes only if both suffix of svar.label *and* suffix of one of the svar.dims.label  match the search suffix
+            # to avoid truncation of variable names like 'ch4' requested on 'plev19', where '4' does not stand for a plev set
+            # mpmoine_todo: revoir pour les vars en single lev comme 'ta850' defini en 'p850' -> la troncature ne se fait pas....
+            if svar.label.endswith(s) and any(svar.sdims[k].label.endswith(s) for k in svar.sdims.iterkeys()):
+                label_out=svar.label.replace(s,"")
+    return label_out
 
 def cellmethod2area(method) :
     """

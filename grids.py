@@ -19,7 +19,7 @@ from table2freq import table2freq
 
 def decide_for_grids(svar,grid,lset):
      """
-     Decide which set of gris a given variable should be produced on
+     Decide which set of grids a given variable should be produced on
 
      SVAR is the 'simplifed' CMORvar
      GRID is the string fo grid specified a requestLink
@@ -178,7 +178,6 @@ def split_frequency_for_variable(svar, lset, mcfg,context):
     if (size != 0 ) : 
         # Try by years first
         # mpmoine_next_modif: split_frequency_for_variable: passage de 'model_timestep' en argument de timesteps_per_freq_and_duration
-        #-print "MPMOINE_DEBUG:", svar.label, svar.mipTable, freq
         size_per_year=size*timesteps_per_freq_and_duration(freq,365,lset["model_timestep"][context])
         nbyears=max_size/float(size_per_year)
         if nbyears > 1. :
