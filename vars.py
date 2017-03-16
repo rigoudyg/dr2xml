@@ -53,7 +53,7 @@ class simple_Dim(object):
         self.is_zoom_of   = False
 
 # mpmoine_future_modif: liste des suffixes de noms de variables reperant un ou plusieurs niveaux pression
-plev_suffixes=["4","7h","12","19","23","27","10","100","200","500","700","850","1000"]
+plev_suffixes=["1000","200","220","500","560","700","840","850","10","19","23","27","39","3","3h","4","7c","7h","8","12"]
 
 ambiguous_mipvarnames=None
 
@@ -110,10 +110,10 @@ def read_homeVars_list(hmv_file,expid,mips,dq,path_extra_tables=None):
                     cc+=1
                     setattr(home_var,home_attrs[cc],ccol)
             home_var.label_with_area=home_var.label
-            # mpmoine_future_modif:read_homeVars_list: valorisation de home_var.label_without_psuffix
-            home_var.label_without_psuffix=home_var.label
             if hmv_type=='perso':
                 home_var.mip_era='PERSO'
+                # mpmoine_future_modif:read_homeVars_list: valorisation de home_var.label_without_psuffix
+                home_var.label_without_psuffix=home_var.label
             if home_var.mip!="ANY":
                 if home_var.mip in mips:
                     if home_var.experiment!="ANY":
@@ -204,8 +204,6 @@ def read_extraTable(path,table,dq,printout=False):
             extra_var.positive=v["positive"]
             prio=mip_era.lower()+"_priority"
             extra_var.Priority=float(v[prio])
-            # mpmoine_future_modif:read_extraTable: on renseigne l'attribut label_without_psuffix
-            extra_var.label_without_psuffix=Remove_Suffix(extra_var,plev_suffixes,realms='atmos aerosol atmosChem')
             # Tranlate full-dimensions read in Table (e.g. "longitude latitude time p850")
             # into DR spatial-only dimensions (e.g. "longitude|latitude")
             dims=(v["dimensions"]).split(" ")
@@ -270,6 +268,8 @@ def read_extraTable(path,table,dq,printout=False):
                     print "Info: dimid corresponding to ",d,"for variable",v["out_name"],\
                           "in Table",table," not found in DR => read it in extra coordinates Table: ", extra_sdim.stdname,extra_sdim.requested
             # mpmoine_future_modif: read_extraTable: suppression de extra_var.dimids -> elargi avec extra_var.sdims
+            # mpmoine_future_modif:read_extraTable: on renseigne l'attribut label_without_psuffix (doit etre fait apres la valorisation de sdims)
+            extra_var.label_without_psuffix=Remove_pSuffix(extra_var,plev_suffixes,realms='atmos aerosol atmosChem')
                 
             extravars.append(extra_var)
     if printout: 
@@ -433,8 +433,6 @@ def complement_svar_using_cmorvar(svar,cmvar,dq):
     svar.modeling_realm = cmvar.modeling_realm
     svar.label = cmvar.label
     [svar.spatial_shp,svar.temporal_shp]=get_SpatialAndTemporal_Shapes(cmvar,dq)
-    #mpmoine_future_modif:complement_svar_using_cmorvar: on renseigne l'attribut label_without_psuffix
-    svar.label_without_psuffix=Remove_Suffix(svar,plev_suffixes,realms='atmos aerosol atmosChem')
 
     # Get information from MIPvar
     #mpmoine_next_modif:complement_svar_using_cmorvar: gestion d'exception pour l'acces a la 'mipvar'
@@ -515,7 +513,10 @@ def complement_svar_using_cmorvar(svar,cmvar,dq):
     except :
         if print_DR_errors :
             print "DR Error: issue with stid for",svar.label, "in Table ",svar.mipTable,"  => no cell_methods, cell_measures, dimids and sdims derived."
-        
+      
+    #mpmoine_future_modif:complement_svar_using_cmorvar: on renseigne l'attribut label_without_psuffix (doit etre fait apres la valorisation de sdims)
+    svar.label_without_psuffix=Remove_pSuffix(svar,plev_suffixes,realms='atmos aerosol atmosChem')
+
     area=cellmethod2area(svar.cell_methods) 
     if area : 
         ambiguous=any( [ svar.label == alabel and svar.modeling_realm== arealm 
@@ -548,18 +549,19 @@ def get_simpleDim_from_DimId(dimid,dq):
             print "mpmoine_debug:",a," ",getattr(sdim,a)
     return sdim
 
-# mpmoine_future_modif: nouvelle fonction Remove_Suffix
-def Remove_Suffix(svar,suffixes,realms):
-    label_out=svar.label
+# mpmoine_future_modif: nouvelle fonction Remove_pSuffix
+def Remove_pSuffix(svar,suffixes,realms):
+    label_out=False
     svar_realms=set(svar.modeling_realm.split())
     valid_realms=set(realms.split())
     if svar_realms.intersection(valid_realms):
         for s in suffixes:
             # remove suffixes only if both suffix of svar.label *and* suffix of one of the svar.dims.label  match the search suffix
             # to avoid truncation of variable names like 'ch4' requested on 'plev19', where '4' does not stand for a plev set
-            # mpmoine_todo: revoir pour les vars en single lev comme 'ta850' defini en 'p850' -> la troncature ne se fait pas....
-            if svar.label.endswith(s) and any(svar.sdims[k].label.endswith(s) for k in svar.sdims.iterkeys()):
-                label_out=svar.label.replace(s,"")
+            if any((svar.sdims[k].label.startswith("p") and svar.sdims[k].label.endswith(s)) for k in svar.sdims.iterkeys()):
+                label_out=svar.label
+                if svar.label.endswith(s):
+                    label_out=svar.label.replace(s,"")
     return label_out
 
 def cellmethod2area(method) :
