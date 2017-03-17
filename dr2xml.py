@@ -371,7 +371,33 @@ def analyze_priority(cmvar,lmips):
             if rv.priority < prio : prio=rv.priority
     return prio
                      
-
+# mpmoine_last_modif:wr: ajout de l'argument num_type
+def wr(key,dic_or_val=None,num_type="string",default=None) :
+    """
+    Short cut for a repetitive pattern : writing in 'out' 
+    a string variable name and value
+    If dic_or_val is not None 
+      if  dic_or_val is a dict, 
+        if key is in value is dic_or_val[key], 
+        otherwise use default as value , except if default is False
+      otherwise, use arg dic_or_val as value if not None nor False,
+    otherwise use value of local variable 'key'
+    """
+    val=None
+    if type(dic_or_val)==type({}) :  
+        if key in dic_or_val : val=dic_or_val[key]
+        else : 
+            if default is not None :
+                if default is not False : val=default
+            else :                 
+                print 'error : %s not in dic and default is None'%key
+    else : 
+        if dic_or_val is not None : val=dic_or_val
+        else :
+            print 'error in wr,  no value provided for %s'%key
+    if val :
+        out.write('  <variable name="%s"  type="string" > %s '%(key,val))
+        out.write('  </variable>\n')
 
 def write_xios_file_def(cmv,table, lset,sset, out,cvspath,field_defs,axis_defs,
                         domain_defs,dummies,skipped_vars,
@@ -464,35 +490,6 @@ def write_xios_file_def(cmv,table, lset,sset, out,cvspath,field_defs,axis_defs,
     out.write(' uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%"')
     out.write(' >\n')
     #
-    #
-    # mpmoine_last_modif:write_xios_file_def: ajout de l'argument num_type à la fonction wr
-    def wr(key,dic_or_val=None,num_type="string",default=None) :
-        """
-        Short cut for a repetitive pattern : writing in 'out' 
-        a string variable name and value
-        If dic_or_val is not None 
-          if  dic_or_val is a dict, 
-            if key is in value is dic_or_val[key], 
-            otherwise use default as value , except if default is False
-          otherwise, use arg dic_or_val as value if not None nor False,
-        otherwise use value of local variable 'key'
-        """
-        val=None
-        if type(dic_or_val)==type({}) :  
-            if key in dic_or_val : val=dic_or_val[key]
-            else : 
-                if default is not None :
-                    if default is not False : val=default
-                else :                 
-                    print 'error : %s not in dic and default is None'%key
-        else : 
-            if dic_or_val is not None : val=dic_or_val
-            else :
-                print 'error in wr,  no value provided for %s'%key
-        if val :
-            out.write('  <variable name="%s"  type="string" > %s '%(key,val))
-            out.write('  </variable>\n')
-
     wr('project_id', sset.get('project',"CMIP6")+"/"+activity_id)
     wr('activity_id',activity_id)
     contact=sset.get('contact',lset.get('contact',None))
@@ -632,6 +629,12 @@ def write_xios_file_def(cmv,table, lset,sset, out,cvspath,field_defs,axis_defs,
         out.write('</field_group >\n')
     out.write('</file>\n\n')
 
+ # mpmoine_last_modif:wrv: ajout de l'argument num_type
+def wrv(name, value, num_type="string"):
+    # Format a 'variable' entry
+    return '     <variable name="%s" type="string" > %s '%(name,value)+\
+        '</variable>\n'
+
 def create_xios_field_ref(sv,alias,table,lset,sset,end_field_defs,
      field_defs,axis_defs,domain_defs,dummies,context,remap_domain,pingvars) :
     """
@@ -718,13 +721,6 @@ def create_xios_field_ref(sv,alias,table,lset,sset,end_field_defs,
         ( operation,detect_missing)
     rep+=' cell_methods="%s" cell_methods_mode="overwrite"'% sv.cell_methods
     rep+='>\n'
-    #
-    #
-    # mpmoine_last_modif:wrv: ajout de l'argument num_type
-    def wrv(name, value, num_type="string"):
-        # Format a 'variable' entry
-        return '     <variable name="%s" type="string" > %s '%(name,value)+\
-            '</variable>\n'
     #
     comment=None
     # Process experiment-specific comment for the variable
@@ -851,7 +847,7 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
     # read ping_file defined variables
     pingvars=[] 
     if pingfile :
-        ping_refs=read_defs(pingfile, tag='field', attrib='field_ref')
+        ping_refs=read_xml_elmt_ot_attrib(pingfile, tag='field', attrib='field_ref')
         if ping_refs is None :
             print "Issue accessing pingfile "+pingfile
             return
@@ -1176,16 +1172,7 @@ def copy_obj_from_DX_file(fp,obj,prefix,lrealms) :
 def DX_defs_filename(obj,realm):
     return prog_path+"inputs/DX_%s_defs_%s.xml"%(obj,realm)
 
-def read_defs(filename, tag='field', attrib=None, printout=False) :
-    """ 
-    Returns a dict of obejcts tagged TAG in FILENAME, which 
-    - keys are ids
-    - values are corresponding ET elements if 
-      attrib is None, otherwise elt attribute ATTRIB
-    Returns None if filename does not exist
-    """
-    #
-    def field_defs(elt, tag='field', groups=['context', 'field_group',
+def get_xml_childs(elt, tag='field', groups=['context', 'field_group',
         'field_definition', 'axis_definition','axis', 'domain_definition',
         'domain', 'grid_definition', 'grid' , 'interpolate_axis'  ]) :
         """ 
@@ -1195,20 +1182,29 @@ def read_defs(filename, tag='field', attrib=None, printout=False) :
         """
         if elt.tag in groups :
             rep=[]
-            for child in elt : rep.extend(field_defs(child,tag))
+            for child in elt : rep.extend(get_xml_childs(child,tag))
             return rep
         elif elt.tag==tag : return [elt]
         else :
             #print 'Syntax error : tag %s not allowed'%elt.tag
             # Case of an unkown tag : don't dig in
             return []
+
+def read_xml_elmt_ot_attrib(filename, tag='field', attrib=None, printout=False) :
+    """ 
+    Returns a dict of objects tagged TAG in FILENAME, which 
+    - keys are ids
+    - values are corresponding ET elements if 
+      attrib is None, otherwise elt attribute ATTRIB
+    Returns None if filename does not exist
+    """
     #    
     rep=dict()
     if printout : print "processing file %s :"%filename,
     if os.path.exists(filename) :
-        if printout : print "OK"%filename
+        if printout : print "OK",filename
         root = ET.parse(filename).getroot()
-        defs=field_defs(root,tag) 
+        defs=get_xml_childs(root,tag) 
         if defs :
             for field in defs :
                 if printout : print ".",
@@ -1229,8 +1225,8 @@ def read_special_fields_defs(realms,printout=False) :
         for subrealm in realm.split() :
             if subrealm in subrealms_seen : continue
             subrealms_seen.append(subrealm)
-            d=read_defs(DX_defs_filename("field",subrealm),\
-                        tag='field',printout=printout)
+            d=read_xml_elmt_ot_attrib(DX_defs_filename("field",subrealm),\
+                                        tag='field',printout=printout)
             if d: special.update(d)
     rep=dict()
     # Use raw label as key

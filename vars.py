@@ -133,6 +133,10 @@ def read_homeVars_list(hmv_file,expid,mips,dq,path_extra_tables=None):
     homevars.extend(extravars) 
     return homevars 
 
+def cids2singlev(cids):
+    slev=cids[0].split(":")
+    if len(slev)==2:return slev[1]
+
 # mpmoine_last_modif:read_extraTable: nouvelle fonction pour lire les extra_Tables
 def read_extraTable(path,table,dq,printout=False):
     """
@@ -148,10 +152,6 @@ def read_extraTable(path,table,dq,printout=False):
     Returns:
       A list of 'simplified CMOR variables'
     """
-    #
-    def cids2singlev(cids):
-        slev=cids[0].split(":")
-        if len(slev)==2:return slev[1]
     #
     if not dims2shape:
         for sshp in dq.coll['spatialShape'].items:

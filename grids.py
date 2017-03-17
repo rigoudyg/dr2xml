@@ -16,6 +16,11 @@ Also : management of fields size/split_frequency
 """
 from table2freq import table2freq
 
+def normalize(grid) :
+     """ TBD : completely remove variants in grid strings """
+     if grid in [ "yes", "YES", "Yes" ] : return "yes"
+     if grid[0:2] in [ "NO", "No", "no" ] : return "no"
+     return grid
 
 def decide_for_grids(svar,grid,lset):
      """
@@ -29,11 +34,6 @@ def decide_for_grids(svar,grid,lset):
 
      TBD : use Martin's acronyms for grid policy
      """
-     def normalize(grid) :
-         """ TBD : completely remove variants in grid strings """
-         if grid in [ "yes", "YES", "Yes" ] : return "yes"
-         if grid[0:2] in [ "NO", "No", "no" ] : return "no"
-         return grid
      grid=normalize(grid)
      policy=lset.get("grid_policy")
      if policy is None or policy=="DR": # Follow DR spec

@@ -843,7 +843,7 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,dummies='in
     # read ping_file defined variables
     pingvars=[] 
     if pingfile :
-        ping_refs=read_defs(pingfile, tag='field', attrib='field_ref')
+        ping_refs=read_xml_elmt_or_attrib(pingfile, tag='field', attrib='field_ref')
         if ping_refs is None :
             print "Issue accessing pingfile "+pingfile
             return
@@ -1165,7 +1165,7 @@ def copy_obj_from_DX_file(fp,obj,prefix,lrealms) :
 def DX_defs_filename(obj,realm):
     return prog_path+"inputs/DX_%s_defs_%s.xml"%(obj,realm)
 
-def field_defs(elt, tag='field', groups=['context', 'field_group',
+def get_xml_childs(elt, tag='field', groups=['context', 'field_group',
     'field_definition', 'axis_definition','axis', 'domain_definition',
     'domain', 'grid_definition', 'grid' , 'interpolate_axis'  ]) :
     """ 
@@ -1175,7 +1175,7 @@ def field_defs(elt, tag='field', groups=['context', 'field_group',
     """
     if elt.tag in groups :
         rep=[]
-        for child in elt : rep.extend(field_defs(child,tag))
+        for child in elt : rep.extend(get_xml_childs(child,tag))
         return rep
     elif elt.tag==tag : return [elt]
     else :
@@ -1183,7 +1183,7 @@ def field_defs(elt, tag='field', groups=['context', 'field_group',
         # Case of an unkown tag : don't dig in
         return []
 
-def read_defs(filename, tag='field', attrib=None, printout=False) :
+def read_xml_elmt_or_attrib(filename, tag='field', attrib=None, printout=False) :
     """ 
     Returns a dict of obejcts tagged TAG in FILENAME, which 
     - keys are ids
@@ -1197,7 +1197,7 @@ def read_defs(filename, tag='field', attrib=None, printout=False) :
     if os.path.exists(filename) :
         if printout : print "OK"%filename
         root = ET.parse(filename).getroot()
-        defs=field_defs(root,tag) 
+        defs=get_xml_childs(root,tag) 
         if defs :
             for field in defs :
                 if printout : print ".",
@@ -1218,8 +1218,8 @@ def read_special_fields_defs(realms,printout=False) :
         for subrealm in realm.split() :
             if subrealm in subrealms_seen : continue
             subrealms_seen.append(subrealm)
-            d=read_defs(DX_defs_filename("field",subrealm),\
-                        tag='field',printout=printout)
+            d=read_xml_elmt_or_attrib(DX_defs_filename("field",subrealm),\
+                                        tag='field',printout=printout)
             if d: special.update(d)
     rep=dict()
     # Use raw label as key
