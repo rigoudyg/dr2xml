@@ -1,0 +1,111 @@
+digraph G        {node [shape=box, fontsize=10];
+
+/*Fonctions appelantes*/
+
+subgraph cluster0{label="Module dr2xml_total.py";
+                  n000 [label = "<Main>", fontcolor = blue2];
+                  n001 [label = "RequestItem_applies_for_exp_and_year"];
+                  n002 [label = "select_CMORvars_for_lab"];
+                  n003 [label = "analyze_priority"];
+                  n004 [label = "wr"];
+                  n005 [label = "write_xios_file_def"];
+                  n006 [label = "wrv"];
+                  n007 [label = "create_xios_field_ref"];
+                  n008 [label = "gather_AllSimpleVars"];
+                  n009 [label = "generate_file_defs"];
+                  n010 [label = "create_axis_def"];
+                  n011 [label = "isVertDim"];
+                  n012 [label = "analyze_cell_time_method"];
+                  n013 [label = "pingFileForRealmsList"];
+                  n014 [label = "copy_obj_from_DX_file"];
+                  n015 [label = "DX_defs_filename"];
+                  n016 [label = "field_defs"];
+                  n017 [label = "read_defs"];
+                  n018 [label = "read_special_fields_defs"];
+                  n019 [label = "highest_rank"];
+                  n020 [label = "make_source_string"];
+                  n021 [label = "build_axis_definitions"];
+                  n024 [label = "read_homeVars_list"];
+                  n025 [label = "cids2singlev"];
+                  n026 [label = "read_extraTable"];
+                  n027 [label = "get_SpatialAndTemporal_Shapes"];
+                  n028 [label = "process_homeVars"];
+                  n029 [label = "get_corresp_CMORvar"];
+                  n030 [label = "complement_svar_using_cmorvar"];
+                  n031 [label = "get_simpleDim_from_DimId"];
+                  n032 [label = "Remove_pSuffix"];
+                  n033 [label = "cellmethod2area"];
+                  n034 [label = "analyze_ambiguous_MIPvarnames"];
+                  n035 [label = "normalize"];
+                  n036 [label = "decide_for_grids"];
+                  n037 [label = "lab_adhoc_grid_policy"];
+                  n038 [label = "CNRM_grid_policy"];
+                  n039 [label = "grid2resol"];
+                  n040 [label = "grid2desc"];
+                  n041 [label = "field_size"];
+                  n042 [label = "split_frequency_for_variable"];
+                  n043 [label = "timesteps_per_freq_and_duration"];
+
+subgraph cluster1{label="Class dr2xml_error ";
+                  n044 [label = "__init__"];
+                  n045 [label = "__str__"];
+                 }
+subgraph cluster2{label="Class simple_CMORvar ";
+                  n022 [label = "__init__"];
+                 }
+subgraph cluster3{label="Class simple_Dim ";
+                  n023 [label = "__init__"];
+                 }
+
+/*Fonctions appelees*/
+
+                  n002 -> n001 /*RequestItem_applies_for_exp_and_year*/;
+                  n002 -> n003 /*analyze_priority*/;
+                  n002 -> n030 /*complement_svar_using_cmorvar*/;
+                  n002 -> n036 /*decide_for_grids*/;
+                  n005 -> n004 /*wr*/ [label=" 44 appels",fontsize=10];
+                  n005 -> n007 /*create_xios_field_ref*/;
+                  n005 -> n016 /*field_defs*/ [label=" 2 appels",fontsize=10];
+                  n005 -> n020 /*make_source_string*/;
+                  n005 -> n039 /*grid2resol*/;
+                  n005 -> n040 /*grid2desc*/;
+                  n005 -> n042 /*split_frequency_for_variable*/;
+                  n007 -> n006 /*wrv*/ [label=" 9 appels",fontsize=10];
+                  n007 -> n010 /*create_axis_def*/;
+                  n007 -> n011 /*isVertDim*/;
+                  n007 -> n012 /*analyze_cell_time_method*/;
+                  n007 -> n016 /*field_defs*/ [label=" 2 appels",fontsize=10];
+                  n008 -> n002 /*select_CMORvars_for_lab*/;
+                  n008 -> n028 /*process_homeVars*/;
+                  n009 -> n005 /*write_xios_file_def*/;
+                  n009 -> n008 /*gather_AllSimpleVars*/;
+                  n009 -> n016 /*field_defs*/ [label=" 4 appels",fontsize=10];
+                  n009 -> n017 /*read_defs*/;
+                  n013 -> n014 /*copy_obj_from_DX_file*/;
+                  n013 -> n018 /*read_special_fields_defs*/;
+                  n013 -> n019 /*highest_rank*/;
+                  n014 -> n015 /*DX_defs_filename*/;
+                  n016 -> n016 /*field_defs*/;
+                  n017 -> n016 /*field_defs*/;
+                  n018 -> n015 /*DX_defs_filename*/;
+                  n018 -> n017 /*read_defs*/;
+                  n024 -> n026 /*read_extraTable*/;
+                  n026 -> n025 /*cids2singlev*/;
+                  n026 -> n031 /*get_simpleDim_from_DimId*/;
+                  n026 -> n032 /*Remove_pSuffix*/;
+                  n028 -> n024 /*read_homeVars_list*/;
+                  n028 -> n029 /*get_corresp_CMORvar*/ [label=" 2 appels",fontsize=10];
+                  n029 -> n027 /*get_SpatialAndTemporal_Shapes*/ [label=" 2 appels",fontsize=10];
+                  n029 -> n030 /*complement_svar_using_cmorvar*/;
+                  n030 -> n027 /*get_SpatialAndTemporal_Shapes*/;
+                  n030 -> n031 /*get_simpleDim_from_DimId*/;
+                  n030 -> n032 /*Remove_pSuffix*/;
+                  n030 -> n033 /*cellmethod2area*/;
+                  n030 -> n034 /*analyze_ambiguous_MIPvarnames*/;
+                  n036 -> n035 /*normalize*/;
+                  n036 -> n037 /*lab_adhoc_grid_policy*/;
+                  n037 -> n038 /*CNRM_grid_policy*/;
+                  n042 -> n041 /*field_size*/;
+                  n042 -> n043 /*timesteps_per_freq_and_duration*/ [label=" 3 appels",fontsize=10];
+                 }
+                 }
