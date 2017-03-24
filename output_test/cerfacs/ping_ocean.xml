@@ -1,7 +1,6 @@
 <context id="ocean">
 <field_definition>
 <!-- for variables which realm equals one of _ocean-->
-   <field id="CMIP6_hmv3"          field_ref="dummy_XY"         /> <!-- P1 (None) None : None -->
    <field id="CMIP6_O18sw"         field_ref="dummy_XYO"        /> <!-- P1 () O18sw : Roche - LSCE -->
    <field id="CMIP6_agessc"        field_ref="dummy_XYO"        /> <!-- P1 (yr) sea_water_age_since_surface_contact : Time elapsed since water was last in surface layer of the ocean. -->
    <field id="CMIP6_areacella"     field_ref="dummy_XY"         /> <!-- P1 (m2) cell_area : For atmospheres with more than 1 mesh (e.g., staggered grids), report areas that apply to surface vertical fluxes of energy. -->
@@ -9,18 +8,26 @@
    <field id="CMIP6_basin"         field_ref="dummy_XY"         /> <!-- P1 (1.0) region : Region Selection Index -->
    <field id="CMIP6_bigthetao"     field_ref="dummy_XYO"        /> <!-- P1 (degC) sea_water_conservative_temperature : Sea water conservative temperature (this should be contributed only for models using conservative temperature as prognostic field) -->
    <field field_ref="dummy_na" id="CMIP6_bigthetaoga" />       <!-- P1 (degC) sea_water_conservative_temperature : Diagnostic should be contributed only for models using conservative temperature as prognostic field. -->
-   <field id="CMIP6_cfc11"         field_ref="dummy_XYO"        /> <!-- P1 (mol kg-1) moles_of_cfc11_per_unit_mass_in_sea_water : Moles Per Unit Mass of CFC-11 in sea water -->
-   <field id="CMIP6_cfc12"         field_ref="dummy_XYO"        /> <!-- P2 (mol kg-1) cfc12 : Mole Concentration of CFC-12 in sea water -->
+   <field id="CMIP6_cfc11"         field_ref="dummy_XYO"        /> <!-- P2 (mol kg-1) moles_of_cfc11_per_unit_mass_in_sea_water : Moles Per Unit Mass of CFC-11 in sea water -->
+   <field id="CMIP6_cfc12"         field_ref="dummy_XYO"        /> <!-- P1 (mol kg-1) cfc12 : Mole Concentration of CFC-12 in sea water -->
    <field field_ref="dummy_na" id="CMIP6_cpocean" />       <!-- P1 (J kg-1 K-1) cpocean : A global constant used to convert between temperature flux and heat flux, and to compute heat content of sea water. -->
    <field id="CMIP6_deptho"        field_ref="dummy_XY"         /> <!-- P1 (m) sea_floor_depth_below_geoid : Ocean bathymetry.   Reported here is the sea floor depth for present day relative to z=0 geoid. Reported as missing for land grid cells. -->
    <field id="CMIP6_difmxybo"      field_ref="dummy_XYO"        /> <!-- P2 (m4 s-1) ocean_momentum_xy_biharmonic_diffusivity : Lateral biharmonic viscosity applied to the momentum equitions. -->
+   <field id="CMIP6_difmxybo2d"    field_ref="dummy_XYO"        /> <!-- P3 (m4 s-1) ocean_momentum_xy_biharmonic_diffusivity : Lateral biharmonic viscosity applied to the momentum equitions. -->
    <field id="CMIP6_difmxylo"      field_ref="dummy_XYO"        /> <!-- P2 (m2 s-1) ocean_momentum_xy_laplacian_diffusivity : Lateral Laplacian viscosity applied to the momentum equitions. -->
+   <field id="CMIP6_difmxylo2d"    field_ref="dummy_XYO"        /> <!-- P3 (m2 s-1) ocean_momentum_xy_laplacian_diffusivity : Lateral Laplacian viscosity applied to the momentum equitions. -->
    <field id="CMIP6_diftrbbo"      field_ref="dummy_XYO"        /> <!-- P3 (m4 s-1) ocean_tracer_bolus_biharmonic_diffusivity : unset -->
+   <field id="CMIP6_diftrbbo2d"    field_ref="dummy_XYO"        /> <!-- P3 (m4 s-1) ocean_tracer_bolus_biharmonic_diffusivity : unset -->
    <field id="CMIP6_diftrblo"      field_ref="dummy_XYO"        /> <!-- P1 (m2 s-1) ocean_tracer_bolus_laplacian_diffusivity : Ocean tracer diffusivity associated with parameterized eddy-induced advective transport. Sometimes this diffusivity is called the 'thickness' diffusivity. For CMIP5, this diagnostic was called 'ocean tracer bolus laplacian diffusivity'.  The CMIP6 name is physically more relevant. -->
+   <field id="CMIP6_diftrblo2d"    field_ref="dummy_XYO"        /> <!-- P3 (m2 s-1) ocean_tracer_bolus_laplacian_diffusivity : Ocean tracer diffusivity associated with parameterized eddy-induced advective transport. Sometimes this diffusivity is called the 'thickness' diffusivity. For CMIP5, this diagnostic was called 'ocean tracer bolus laplacian diffusivity'.  The CMIP6 name is physically more relevant. -->
+   <field id="CMIP6_diftrebo"      field_ref="dummy_XYO"        /> <!-- P3 (m4 s-1) ocean_tracer_epineutral_biharmonic_diffusivity : unset -->
    <field id="CMIP6_diftrebo2d"    field_ref="dummy_XY"         /> <!-- P3 (m4 s-1) ocean_tracer_epineutral_biharmonic_diffusivity : unset -->
    <field id="CMIP6_diftrelo"      field_ref="dummy_XYO"        /> <!-- P1 (m2 s-1) ocean_tracer_epineutral_laplacian_diffusivity : Ocean tracer diffusivity associated with parameterized eddy-induced diffusive transport oriented along neutral or isopycnal directions. Sometimes this diffusivity is called the neutral diffusivity or isopycnal diffusivity or Redi diffusivity. -->
+   <field id="CMIP6_diftrelo2d"    field_ref="dummy_XY"         /> <!-- P3 (m2 s-1) ocean_tracer_epineutral_laplacian_diffusivity : Ocean tracer diffusivity associated with parameterized eddy-induced diffusive transport oriented along neutral or isopycnal directions. Sometimes this diffusivity is called the neutral diffusivity or isopycnal diffusivity or Redi diffusivity. -->
+   <field id="CMIP6_diftrxybo"     field_ref="dummy_XYO"        /> <!-- P3 (m4 s-1) ocean_tracer_xy_biharmonic_diffusivity : unset -->
    <field id="CMIP6_diftrxybo2d"   field_ref="dummy_XYO"        /> <!-- P3 (m4 s-1) ocean_tracer_xy_biharmonic_diffusivity : unset -->
    <field id="CMIP6_diftrxylo"     field_ref="dummy_XYO"        /> <!-- P3 (m2 s-1) ocean_tracer_xy_laplacian_diffusivity : unset -->
+   <field id="CMIP6_diftrxylo2d"   field_ref="dummy_XY"         /> <!-- P3 (m2 s-1) ocean_tracer_xy_laplacian_diffusivity : unset -->
    <field id="CMIP6_difvho"        field_ref="dummy_XYO"        /> <!-- P1 (m2 s-1) ocean_vertical_heat_diffusivity : Vertical/dianeutral diffusivity applied to prognostic temperature field. -->
    <field id="CMIP6_difvmbo"       field_ref="dummy_XYO"        /> <!-- P1 (m2 s-1) ocean_vertical_momentum_diffusivity_due_to_background : unset -->
    <field id="CMIP6_difvmfdo"      field_ref="dummy_XYO"        /> <!-- P1 (m2 s-1) ocean_vertical_momentum_diffusivity_due_to_form_drag : unset -->
@@ -31,12 +38,14 @@
    <field id="CMIP6_difvtrto"      field_ref="dummy_XYO"        /> <!-- P1 (m2 s-1) ocean_vertical_tracer_diffusivity_due_to_tides : unset -->
    <field id="CMIP6_dispkevfo"     field_ref="dummy_XYO"        /> <!-- P1 (W m-2) ocean_kinetic_energy_dissipation_per_unit_area_due_to_vertical_friction : unset -->
    <field id="CMIP6_dispkexyfo"    field_ref="dummy_XYO"        /> <!-- P3 (W m-2 ) ocean_kinetic_energy_dissipation_per_unit_area_due_to_xy_friction : Depth integrated impacts on kinetic energy arising from lateral frictional dissipation associated with Laplacian and/or biharmonic viscosity. For CMIP5, this diagnostic was 3d, whereas the CMIP6 depth integrated diagnostic is sufficient for many purposes and reduces archive requirements. -->
+   <field id="CMIP6_dispkexyfo2d"  field_ref="dummy_XY"         /> <!-- P3 (W m-2 ) ocean_kinetic_energy_dissipation_per_unit_area_due_to_xy_friction : Depth integrated impacts on kinetic energy arising from lateral frictional dissipation associated with Laplacian and/or biharmonic viscosity. For CMIP5, this diagnostic was 3d, whereas the CMIP6 depth integrated diagnostic is sufficient for many purposes and reduces archive requirements. -->
    <field id="CMIP6_evs"           field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) water_evaporation_flux : computed as the total mass of water vapor evaporating from the ice-free portion of the ocean  divided by the area of the ocean portion of the grid cell. -->
    <field id="CMIP6_expcfe"        field_ref="dummy_XYO"        /> <!-- P1 (mol m-2 s-1) sinking_mole_flux_of_particulate_iron_in_sea_water : Sinking Particulate Iron Flux -->
    <field id="CMIP6_fgcfc11"       field_ref="dummy_XY"         /> <!-- P2 (mol sec-1 m-2) surface_downward_mole_flux_of_cfc11 : gas exchange flux of CFC11 -->
    <field id="CMIP6_fgcfc12"       field_ref="dummy_XY"         /> <!-- P1 (mol sec-1 m-2) surface_downward_mole_flux_of_cfc12 : gas exchange flux of CFC12 -->
    <field id="CMIP6_fgsf6"         field_ref="dummy_XY"         /> <!-- P2 (mol sec-1 m-2) fgsf6 : gas exchange flux of SF6 -->
    <field id="CMIP6_ficeberg"      field_ref="dummy_XYO"        /> <!-- P1 (kg m-2 s-1) water_flux_into_sea_water_from_icebergs : computed as the iceberg melt water  flux into the ocean divided by the area of the ocean portion of the grid cell. -->
+   <field id="CMIP6_ficeberg2d"    field_ref="dummy_XYO"        /> <!-- P1 (kg m-2 s-1) water_flux_into_sea_water_from_icebergs : computed as the iceberg melt water  flux into the ocean divided by the area of the ocean portion of the grid cell. -->
    <field id="CMIP6_flandice"      field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) water_flux_into_sea_water_from_land_ice : Computed as the water flux into the ocean due to land ice (runoff water from surface and base of land ice or melt from base of ice shelf or vertical ice front) into the ocean divided by the area ocean portion of the grid cell -->
    <field id="CMIP6_friver"        field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) water_flux_into_sea_water_from_rivers : computed as the river flux of water into the ocean divided by the area of the ocean portion of the grid cell. -->
    <field id="CMIP6_fsitherm"      field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) water_flux_into_sea_water_due_to_sea_ice_thermodynamics : computed as the sea ice thermodynamic water flux into the ocean divided by the area of the ocean portion of the grid cell. -->
@@ -51,14 +60,20 @@
    <field id="CMIP6_hfevapds"      field_ref="dummy_XY"         /> <!-- P1 (W m-2) temperature_flux_due_to_evaporation_expressed_as_heat_flux_out_of_sea_water : This is defined as "where ice_free_sea over sea" -->
    <field id="CMIP6_hfgeou"        field_ref="dummy_XY"         /> <!-- P1 (W m-2) upward_geothermal_heat_flux_at_sea_floor : Upward Geothermal Heat Flux at Sea Floor -->
    <field id="CMIP6_hfibthermds"   field_ref="dummy_XYO"        /> <!-- P1 (W m-2) heat_flux_into_sea_water_due_to_iceberg_thermodynamics : Heat Flux into Sea Water due to Iceberg Thermodynamics -->
+   <field id="CMIP6_hfibthermds2d" field_ref="dummy_XY"         /> <!-- P1 (W m-2) heat_flux_into_sea_water_due_to_iceberg_thermodynamics : Heat Flux into Sea Water due to Iceberg Thermodynamics -->
    <field id="CMIP6_hflso"         field_ref="dummy_XY"         /> <!-- P1 (W m-2) surface_downward_latent_heat_flux : This is defined as with the cell methods string: where ice_free_sea over sea -->
    <field id="CMIP6_hfrainds"      field_ref="dummy_XY"         /> <!-- P1 (W m-2) temperature_flux_due_to_rainfall_expressed_as_heat_flux_into_sea_water : This is defined as "where ice_free_sea over sea"; i.e., the total flux (considered here) entering the ice-free portion of the grid cell divided by the area of the ocean portion of the grid cell.  All such heat fluxes are computed based on Celsius scale. -->
    <field id="CMIP6_hfrunoffds"    field_ref="dummy_XYO"        /> <!-- P2 (W m-2) temperature_flux_due_to_runoff_expressed_as_heat_flux_into_sea_water : Temperature Flux due to Runoff Expressed as Heat Flux into Sea Water -->
+   <field id="CMIP6_hfrunoffds2d"  field_ref="dummy_XYO"        /> <!-- P2 (W m-2) temperature_flux_due_to_runoff_expressed_as_heat_flux_into_sea_water : Temperature Flux due to Runoff Expressed as Heat Flux into Sea Water -->
    <field id="CMIP6_hfsifrazil"    field_ref="dummy_XYO"        /> <!-- P1 (W m-2) heat_flux_into_sea_water_due_to_freezing_of_frazil_ice : Heat Flux into Sea Water due to Frazil Ice Formation -->
+   <field id="CMIP6_hfsifrazil2d"  field_ref="dummy_XY"         /> <!-- P1 (W m-2) heat_flux_into_sea_water_due_to_freezing_of_frazil_ice : Heat Flux into Sea Water due to Frazil Ice Formation -->
    <field id="CMIP6_hfsnthermds"   field_ref="dummy_XYO"        /> <!-- P2 (W m-2) heat_flux_into_sea_water_due_to_snow_thermodynamics : Heat Flux into Sea Water due to Snow Thermodynamics -->
+   <field id="CMIP6_hfsnthermds2d" field_ref="dummy_XY"         /> <!-- P2 (W m-2) heat_flux_into_sea_water_due_to_snow_thermodynamics : Heat Flux into Sea Water due to Snow Thermodynamics -->
    <field id="CMIP6_hfsso"         field_ref="dummy_XY"         /> <!-- P1 (W m-2) surface_downward_sensible_heat_flux : This is defined as "where ice_free_sea over sea" -->
    <field id="CMIP6_hfx"           field_ref="dummy_XYO"        /> <!-- P1 (W) ocean_heat_x_transport : Contains all contributions to "x-ward" heat transport from resolved and parameterized processes.  Use Celsius for temperature scale. -->
    <field id="CMIP6_hfy"           field_ref="dummy_XYO"        /> <!-- P1 (W) ocean_heat_y_transport : Contains all contributions to "y-ward" heat transport from resolved and parameterized processes. Use Celsius for temperature scale. -->
+   <field id="CMIP6_hmv3"          field_ref="dummy_XY"         /> <!-- P1 (None) None : None -->
+   <field id="CMIP6_hmv7"          field_ref="dummy_XY"         /> <!-- P1 (None) None : None -->
    <field id="CMIP6_htovgyre"      field_ref="dummy_basin_zonal_mean"/> <!-- P1 (W) northward_ocean_heat_transport_due_to_gyre : From all advective mass transport processes, resolved and parameterized. -->
    <field id="CMIP6_htovovrt"      field_ref="dummy_basin_zonal_mean"/> <!-- P1 (W) northward_ocean_heat_transport_due_to_overturning : From all advective mass transport processes, resolved and parameterized. -->
    <field id="CMIP6_hus"           field_ref="dummy_XYA"        /> <!-- P1 (1.0) specific_humidity : Specific Humidity -->
@@ -128,6 +143,7 @@
    <field id="CMIP6_sos"           field_ref="dummy_XY"         /> <!-- P1 (0.001) sea_surface_salinity : Sea Surface Salinity -->
    <field field_ref="dummy_na" id="CMIP6_sosga" />     <!-- P1 (0.001) sea_surface_salinity : Global Average Sea Surface Salinity -->
    <field id="CMIP6_sossq"         field_ref="dummy_XY"         /> <!-- P3 (1e-06) sossq : Square of Sea Surface Salinity -->
+   <field id="CMIP6_sst"           field_ref="dummy_XY"         /> <!-- P1 (None) None : None -->
    <field id="CMIP6_t20d"          field_ref="dummy_XY"         /> <!-- P1 (m) depth_of_isosurface_of_sea_water_potential_temperature : unset -->
    <field id="CMIP6_ta"            field_ref="dummy_XYA"        /> <!-- P1 (K) air_temperature : Air Temperature -->
    <field id="CMIP6_tauucorr"      field_ref="dummy_XY"         /> <!-- P1 (N m-2) surface_downward_x_stress_correction : This is the stress on the liquid ocean from overlying atmosphere, sea ice, ice shelf, etc. -->
@@ -139,6 +155,7 @@
    <field id="CMIP6_thetaot"       field_ref="dummy_XY"         /> <!-- P1 (K) sea_water_potential_temperature : Vertical average of the sea water potential temperature through the whole ocean depth -->
    <field id="CMIP6_thkcello"      field_ref="dummy_XYO"        /> <!-- P1 (m) cell_thickness : Ocean Model Cell Thickness -->
    <field id="CMIP6_tnkebto"       field_ref="dummy_XYO"        /> <!-- P3 (W m-2) tendency_of_ocean_eddy_kinetic_energy_content_due_to_bolus_transport : Depth integrated impacts on kinetic energy arising from parameterized eddy-induced advection. For CMIP5, this diagnostic was 3d, whereas the CMIP6 depth integrated diagnostic is sufficient for many purposes and reduces archive requirements. -->
+   <field id="CMIP6_tnkebto2d"     field_ref="dummy_XY"         /> <!-- P3 (W m-2) tendency_of_ocean_eddy_kinetic_energy_content_due_to_bolus_transport : Depth integrated impacts on kinetic energy arising from parameterized eddy-induced advection. For CMIP5, this diagnostic was 3d, whereas the CMIP6 depth integrated diagnostic is sufficient for many purposes and reduces archive requirements. -->
    <field id="CMIP6_tnpeo"         field_ref="dummy_XYO"        /> <!-- P2 (W m-2) tendency_of_ocean_potential_energy_content : Rate that work is done against vertical stratification, as measured by the vertical heat and salt diffusivity. Report here as depth integrated two-dimensional field. -->
    <field id="CMIP6_tnpeot"        field_ref="dummy_XYO"        /> <!-- P1 (W m-2) tendency_of_ocean_potential_energy_content_due_to_tides : unset -->
    <field id="CMIP6_tnpeotb"       field_ref="dummy_XYO"        /> <!-- P1 (W m-2) tendency_of_ocean_potential_energy_content_due_to_background : unset -->
@@ -148,10 +165,14 @@
    <field field_ref="dummy_na" id="CMIP6_tosga" />       <!-- P1 (degC) sea_surface_temperature : This may differ from "surface temperature" in regions of sea ice.This may differ from "surface temperature" in regions of sea ice.For models using conservative temperature as prognostic field, they should report the SST as surface potent -->
    <field id="CMIP6_tossq"         field_ref="dummy_XY"         /> <!-- P1 (degC2) square_of_sea_surface_temperature : square of temperature of liquid ocean, averaged over the day. -->
    <field id="CMIP6_tso"           field_ref="dummy_XY"         /> <!-- P1 (K) sea_surface_temperature : temperature of surface of open ocean, sampled synoptically. -->
+   <field id="CMIP6_u2o"           field_ref="dummy_XYO"        /> <!-- P1 (m2 s-2) square_of_sea_water_x_velocity : None -->
    <field id="CMIP6_ua"            field_ref="dummy_XY"         /> <!-- P1 (m s-1) eastward_wind : Eastward Wind -->
    <field id="CMIP6_uas"           field_ref="dummy_XY"         /> <!-- P1 (m s-1) eastward_wind : Eastward component of the near-surface (usually, 10 meters)  wind -->
    <field id="CMIP6_umo"           field_ref="dummy_XYO"        /> <!-- P1 (kg s-1) ocean_mass_x_transport : X-ward mass transport from resolved and parameterized advective transport. -->
    <field id="CMIP6_uo"            field_ref="dummy_XYO"        /> <!-- P1 (m s-1) sea_water_x_velocity : Prognostic x-ward velocity component resolved by the model. -->
+   <field id="CMIP6_uso"           field_ref="dummy_XYO"        /> <!-- P1 (m s-1) product_of_xward_sea_water_velocity_and_salinity : None -->
+   <field id="CMIP6_uto"           field_ref="dummy_XYO"        /> <!-- P1 (degree_Celsius m s-1) product_of_xward_sea_water_velocity_and_temperature : None -->
+   <field id="CMIP6_v2o"           field_ref="dummy_XYO"        /> <!-- P1 (m2 s-2) square_of_sea_water_y_velocity : None -->
    <field id="CMIP6_va"            field_ref="dummy_XYA"        /> <!-- P1 (m s-1) northward_wind : Northward Wind -->
    <field id="CMIP6_vas"           field_ref="dummy_XY"         /> <!-- P1 (m s-1) northward_wind : Northward component of the near surface wind -->
    <field id="CMIP6_vegFrac"       field_ref="dummy_XY"         /> <!-- P2 (%) vegFrac : as specified by C4MIP -->
@@ -165,11 +186,16 @@
    <field id="CMIP6_vsfpr"         field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) virtual_salt_flux_into_sea_water_due_to_rainfall : zero for models using real water fluxes. -->
    <field id="CMIP6_vsfriver"      field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) virtual_salt_flux_into_sea_water_from_rivers : zero for models using real water fluxes. -->
    <field id="CMIP6_vsfsit"        field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) virtual_salt_flux_into_sea_water_due_to_sea_ice_thermodynamics : This variable measures the virtual salt flux into sea water due to the melting of sea ice. It is set to zero in models which receive a real water flux. -->
+   <field id="CMIP6_vso"           field_ref="dummy_XYO"        /> <!-- P1 (m s-1) product_of_yward_sea_water_velocity_and_salinity : None -->
+   <field id="CMIP6_vto"           field_ref="dummy_XYO"        /> <!-- P1 (degree_Celsius m s-1) product_of_yward_sea_water_velocity_and_temperature : None -->
+   <field id="CMIP6_w2o"           field_ref="dummy_XYO"        /> <!-- P1 (m2 s-2) square_of_sea_water_upward_velocity : None -->
    <field id="CMIP6_wfcorr"        field_ref="dummy_XY"         /> <!-- P0 (kg m-2 s-1) water_flux_correction : Positive flux implies correction adds water to ocean. -->
    <field id="CMIP6_wfo"           field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) water_flux_into_sea_water : computed as the water  flux into the ocean divided by the area of the ocean portion of the grid cell.  This is the sum of the next two variables in this table. -->
    <field id="CMIP6_wfonocorr"     field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) water_flux_into_sea_water_without_flux_correction : computed as the water  flux (without flux correction) into the ocean divided by the area of the ocean portion of the grid cell. -->
    <field id="CMIP6_wmo"           field_ref="dummy_XYO"        /> <!-- P1 (kg s-1) upward_ocean_mass_transport : Upward mass transport from resolved and parameterized advective transport. -->
    <field id="CMIP6_wo"            field_ref="dummy_XYO"        /> <!-- P1 (m s-1) upward_sea_water_velocity : Sea Water Vertical Velocity -->
+   <field id="CMIP6_wso"           field_ref="dummy_XYO"        /> <!-- P1 (m s-1) product_of_upward_sea_water_velocity_and_salinity : None -->
+   <field id="CMIP6_wto"           field_ref="dummy_XYO"        /> <!-- P1 (degree_Celsius m s-1) product_of_upward_sea_water_velocity_and_salinity : None -->
    <field id="CMIP6_zfull"         field_ref="dummy_XYO"        /> <!-- P2 (m) height_above_reference_ellipsoid : Altitude of Model Full-Levels -->
    <field id="CMIP6_zfullo"        field_ref="dummy_XYO"        /> <!-- P1 (m) depth_below_geoid : Depth below geoid -->
    <field id="CMIP6_zg"            field_ref="dummy_XYA"        /> <!-- P1 (m) geopotential_height : Geopotential Height -->

@@ -211,6 +211,10 @@ def split_frequency_for_variable(svar, lset, mcfg,context):
                     raise(dr2xml_error("No way to put even a single day "+\
                         "of data in %g for frequency %s, var %s, table %s"%\
                         (max_size,freq,svar.label,svar.mipTable)))
+    else:
+      # mpmoine_zoom_modif:split_frequency_for_variable: print de warning si on arrive pas a calculer une split_freq
+      print "Warning: field size is 0, cannot compute split frequency."
+       
                 
 
 def timesteps_per_freq_and_duration(freq,nbdays,model_tstep):

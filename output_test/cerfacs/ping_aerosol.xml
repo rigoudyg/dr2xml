@@ -1,14 +1,13 @@
 <context id="aerosol">
 <field_definition>
 <!-- for variables which realm equals one of _aerosol-->
-   <field id="CMIP6_va"            field_ref="dummy_lat-P"      /> <!-- P1 (m s-1) northward_wind : None -->
    <field id="CMIP6_abs550aer"     field_ref="dummy_XY"         /> <!-- P1 (1.0) atmosphere_absorption_optical_thickness_due_to_ambient_aerosol : Ambient Aerosol Absorption Optical Thickness at 550 nm -->
    <field id="CMIP6_airmass"       field_ref="dummy_XYA"        /> <!-- P1 (kg m-2) atmosphere_mass_of_air_per_unit_area : Vertically integrated mass content of air in layer -->
    <field id="CMIP6_albs"          field_ref="dummy_XY"         /> <!-- P1 (1.0) planetary_albedo : Grid cell average albedo for all wavelengths. -->
    <field id="CMIP6_albsrfc"       field_ref="dummy_XY"         /> <!-- P1 (1.0) surface_albedo : surface albedo -->
    <field id="CMIP6_aoanh"         field_ref="dummy_XYA"        /> <!-- P1 (yr) tracer_lifetime : Fixed surface layer mixing ratio over 30o-50oN (0 ppbv), uniform fixed source (at all levels) everywhere else (source is unspecified but must be constant in space and time and documented). Note that the source could be 1yr/yr, so the tracer concentration provides mean age in years. For method using linearly increasing tracer include a method attribute: "linearly increasing tracer"For method using uniform source (1yr/yr) include a method attribute: "uniform source" -->
    <field id="CMIP6_areacella"     field_ref="dummy_XY"         /> <!-- P1 (m2) cell_area : For atmospheres with more than 1 mesh (e.g., staggered grids), report areas that apply to surface vertical fluxes of energy. -->
-   <field id="CMIP6_bldep"         field_ref="dummy_XY"         /> <!-- P1 (m) atmosphere_boundary_layer_thickness : Boundary layer depth -->
+   <field id="CMIP6_bldep"         field_ref="dummy_XY"         /> <!-- P3 (m) atmosphere_boundary_layer_thickness : Boundary layer depth -->
    <field id="CMIP6_bry"           field_ref="dummy_lat-P"      /> <!-- P1 (mol mol-1) mole_fraction_of_inorganic_bromine_in_air : Total family (the sum of all appropriate species in the model) ; list the species in the netCDF header, e.g. Bry = Br + BrO + HOBr + HBr + BrONO2 + BrCl Definition: Total inorganic bromine (e.g., HBr and inorganic bromine oxides and radicals (e.g., BrO, atomic bromine (Br), bromine nitrate (BrONO2)) resulting from degradation of bromine-containing organicsource gases (halons, methyl bromide, VSLS), and natural inorganic bromine sources (e.g., volcanoes, sea salt, and other aerosols) add comment attribute with detailed description about how the model calculates these fields -->
    <field id="CMIP6_bs550aer"      field_ref="dummy_XYA"        /> <!-- P1 (m-1 sr-1) bs550aer : Aerosol  Backscatter @550nm @ 180 degrees, computed from extinction and lidar ratio -->
    <field id="CMIP6_c2h2"          field_ref="dummy_XYA"        /> <!-- P1 (mol mol-1) mole_fraction_of_ethyne_in_air : C2H2 volume mixing ratio -->
@@ -58,10 +57,10 @@
    <field id="CMIP6_emiso4"        field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_sulfate_dry_aerosol_particles_due_to_emission : Direct primary emission does not include secondary sulfate production. Integrate 3D emission field vertically to 2d field. -->
    <field id="CMIP6_emiss"         field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_seasalt_dry_aerosol_particles_due_to_emission : Integrate 3D emission field vertically to 2d field. -->
    <field id="CMIP6_emivoc"        field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_nmvoc_due_to_emission : Integrate 3D emission field vertically to 2d field. _If_ fixed molecular weight of NMVOC is not available in model, please provide in units of kilomole m-2 s-1 (i.e. kg m-2 s-1 as if model NMVOC had molecular weight of 1) and add a comment to your file. -->
-   <field id="CMIP6_h2o"           field_ref="dummy_lat-P"      /> <!-- P1 (1.0) mole_fraction_of_water_vapor_in_air : includes all phases of water -->
+   <field id="CMIP6_h2o"           field_ref="dummy_XYA"        /> <!-- P1 (1.0) mole_fraction_of_water_vapor_in_air : includes all phases of water -->
    <field id="CMIP6_hcho"          field_ref="dummy_XYA"        /> <!-- P1 (mol mol-1) mole_fraction_of_formaldehyde_in_air : Formaldehyde volume mixing ratio -->
-   <field id="CMIP6_hcl"           field_ref="dummy_lat-P"      /> <!-- P1 (mol mol-1) mole_fraction_of_hydrogen_chloride_in_air : HCl volume mixing ratio -->
-   <field id="CMIP6_hno3"          field_ref="dummy_lat-P"      /> <!-- P1 (mol mol-1) mole_fraction_of_nitric_acid_in_air : HNO3 volume mixing ratio -->
+   <field id="CMIP6_hcl"           field_ref="dummy_XYA"        /> <!-- P1 (mol mol-1) mole_fraction_of_hydrogen_chloride_in_air : HCl volume mixing ratio -->
+   <field id="CMIP6_hno3"          field_ref="dummy_XYA"        /> <!-- P1 (mol mol-1) mole_fraction_of_nitric_acid_in_air : HNO3 volume mixing ratio -->
    <field id="CMIP6_ho2"           field_ref="dummy_lat-P"      /> <!-- P1 (mol mol-1) mole_fraction_of_hydroperoxyl_radical_in_air : HO2 volume mixing ratio -->
    <field id="CMIP6_hus"           field_ref="dummy_XYA"        /> <!-- P1 (1.0) specific_humidity : Specific Humidity -->
    <field id="CMIP6_isop"          field_ref="dummy_XYA"        /> <!-- P1 (mol mol-1) mole_fraction_of_isoprene_in_air : Isoprene volume mixing ratio -->
@@ -109,7 +108,7 @@
    <field id="CMIP6_od550soa"      field_ref="dummy_XY"         /> <!-- P1 (1.0) atmosphere_optical_thickness_due_to_particulate_organic_matter_ambient_aerosol : total organic aerosol AOD due to secondary aerosol formation -->
    <field id="CMIP6_od550ss"       field_ref="dummy_XY"         /> <!-- P1 (1.0) atmosphere_optical_thickness_due_to_seasalt_ambient_aerosol : sea salt aod@550nm -->
    <field id="CMIP6_od870aer"      field_ref="dummy_XY"         /> <!-- P1 (1.0) atmosphere_optical_thickness_due_to_ambient_aerosol_particles : AOD from the ambient aerosls (i.e., includes aerosol water).  Does not include AOD from stratospheric aerosols if these are prescribed but includes other possible background aerosol types. Needs a comment attribute "wavelength: 870 nm" -->
-   <field id="CMIP6_oh"            field_ref="dummy_lat-P"      /> <!-- P1 (mol mol-1) mole_fraction_of_hydroxyl_radical_in_air : OH volume mixing ratio -->
+   <field id="CMIP6_oh"            field_ref="dummy_XYA"        /> <!-- P1 (mol mol-1) mole_fraction_of_hydroxyl_radical_in_air : OH volume mixing ratio -->
    <field id="CMIP6_pan"           field_ref="dummy_XYA"        /> <!-- P1 (mol mol-1) mole_fraction_of_peroxyacetyl_nitrate_in_air : PAN volume mixing ratio -->
    <field id="CMIP6_pfull"         field_ref="dummy_XYA"        /> <!-- P1 (Pa) air_pressure : Air pressure on model levels -->
    <field id="CMIP6_phalf"         field_ref="dummy_XYA"        /> <!-- P1 (Pa) air_pressure : Air pressure on model half-levels -->
@@ -122,7 +121,7 @@
    <field id="CMIP6_rlutcsca"      field_ref="dummy_XY"         /> <!-- P1 (W m-2) toa_outgoing_longwave_flux_assuming_clear_sky : Flux corresponding to rlutcs resulting fom aerosol-free call to radiation -->
    <field id="CMIP6_rsutca"        field_ref="dummy_XY"         /> <!-- P1 (W m-2) toa_outgoing_shortwave_flux : Flux corresponding to rsut resulting fom aerosol-free call to radiation -->
    <field id="CMIP6_rsutcsca"      field_ref="dummy_XY"         /> <!-- P1 (W m-2) toa_outgoing_shortwave_flux_assuming_clear_sky : Flux corresponding to rsutcs resulting fom aerosol-free call to radiation -->
-   <field id="CMIP6_rv850"         field_ref="dummy_XY"         /> <!-- P1 (s-1) atmosphere_relative_vorticity : Relative Vorticity at 850 hPa -->
+   <field id="CMIP6_rv"            field_ref="dummy_XY"         /> <!-- P1 (s-1) atmosphere_relative_vorticity : Relative Vorticity at 850 hPa -->
    <field id="CMIP6_sfno2"         field_ref="dummy_XY"         /> <!-- P1 (mol mol-1) mole_fraction_of_nitrogen_dioxide_in_air : NO2 volume mixing ratio in lowest model layer -->
    <field id="CMIP6_sfo3"          field_ref="dummy_XY"         /> <!-- P1 (mol mol-1) mole_fraction_of_ozone_in_air : O3 volume mixing ratio in lowest model layer -->
    <field id="CMIP6_sfo3max"       field_ref="dummy_XY"         /> <!-- P1 (mol mol-1) mole_fraction_of_ozone_in_air : Daily maximum O3 volume mixing ratio in lowest model layer -->
@@ -154,7 +153,7 @@
    <field id="CMIP6_wetso2"        field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_sulfur_dioxide_due_to_wet_deposition : wet deposition rate of so2 -->
    <field id="CMIP6_wetso4"        field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_sulfate_dry_aerosol_particles_due_to_wet_deposition : proposed name: tendency_of_atmosphere_mass_content_of_sulfate_dry_aerosol_due_to_wet_deposition -->
    <field id="CMIP6_wetss"         field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_seasalt_dry_aerosol_particles_due_to_wet_deposition : wet deposition rate of seasalt -->
-   <field id="CMIP6_zg"            field_ref="dummy_XYA"        /> <!-- P1 (m) geopotential_height : Geopotential Height -->
+   <field id="CMIP6_zg"            field_ref="dummy_XY"         /> <!-- P2 (m) geopotential_height : Geopotential height on the 1000 hPa surface -->
    <field id="CMIP6_zg10"          field_ref="dummy_XY"         /> <!-- P1 (m) geopotential_height : Geopotential height on the 10 hPa surface -->
    <field id="CMIP6_zg100"         field_ref="dummy_XY"         /> <!-- P1 (m) geopotential_height : Geopotential height on the 100 hPa surface -->
    <field id="CMIP6_zg1000"        field_ref="dummy_XY"         /> <!-- P1 (m) geopotential_height : Geopotential height on the 1000 hPa surface -->

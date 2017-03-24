@@ -75,7 +75,7 @@
    <field id="CMIP6_epp100"        field_ref="dummy_XY"         /> <!-- P1 (mol m-2 s-1) epp100 : Downward Flux of Particulate Phosphorus -->
    <field id="CMIP6_epsi100"       field_ref="dummy_XY"         /> <!-- P1 (mol m-2 s-1) sinking_mole_flux_of_particulate_silicon_in_sea_water : Downward Flux of Particulate Silica -->
    <field id="CMIP6_exparag"       field_ref="dummy_XYO"        /> <!-- P1 (mol m-2 s-1) sinking_mole_flux_of_aragonite_expressed_as_carbon_in_sea_water : Downward flux of Aragonite -->
-   <field id="CMIP6_expc"          field_ref="dummy_XYO"        /> <!-- P2 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_matter_expressed_as_carbon_in_sea_water : Downward flux of particulate organic carbon -->
+   <field id="CMIP6_expc"          field_ref="dummy_XYO"        /> <!-- P1 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_matter_expressed_as_carbon_in_sea_water : Downward flux of particulate organic carbon -->
    <field id="CMIP6_expcalc"       field_ref="dummy_XYO"        /> <!-- P1 (mol m-2 s-1) sinking_mole_flux_of_calcite_expressed_as_carbon_in_sea_water : Downward flux of Calcite -->
    <field id="CMIP6_expfe"         field_ref="dummy_XYO"        /> <!-- P2 (mol m-2 s-1) sinking_mole_flux_of_particulate_iron_in_sea_water : Sinking Particulate Iron Flux -->
    <field id="CMIP6_expn"          field_ref="dummy_XYO"        /> <!-- P1 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_nitrogen_in_sea_water : Sinking Particulate Organic Nitrogen Flux -->
@@ -108,7 +108,7 @@
    <field id="CMIP6_froc"          field_ref="dummy_XY"         /> <!-- P1 (mol m-2 s-1) froc : Organic Carbon loss to sediments -->
    <field id="CMIP6_fsfe"          field_ref="dummy_XY"         /> <!-- P1 (mol m-2 s-1) tendency_of_ocean_mole_content_of_iron_due_to_deposition_and_runoff_and_sediment_dissolution : Iron supply through deposition flux onto sea surface, runoff, coasts, sediments, etc -->
    <field id="CMIP6_fsn"           field_ref="dummy_XY"         /> <!-- P1 (mol m-2 s-1) tendency_of_ocean_mole_content_of_elemental_nitrogen_due_to_deposition_and_fixation_and_runoff : Surface Downward Net Flux of Nitrogen -->
-   <field id="CMIP6_graz"          field_ref="dummy_XYO"        /> <!-- P3 (mol m-3 s-1) graz : Total Grazing of Phytoplankton by Zooplankton -->
+   <field id="CMIP6_graz"          field_ref="dummy_XYO"        /> <!-- P1 (mol m-3 s-1) graz : Total Grazing of Phytoplankton by Zooplankton -->
    <field id="CMIP6_hus"           field_ref="dummy_XYA"        /> <!-- P1 (1.0) specific_humidity : Specific Humidity -->
    <field id="CMIP6_icfriver"      field_ref="dummy_XY"         /> <!-- P3 (mol m-2 s-1) icfriver : Inorganic Carbon supply to ocean through runoff (separate from gas exchange) -->
    <field id="CMIP6_intdic"        field_ref="dummy_XY"         /> <!-- P1 (kg m-2) ocean_mass_content_of_dissolved_inorganic_carbon : Vertically integrated DIC -->

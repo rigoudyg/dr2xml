@@ -1,5 +1,4 @@
 print_DR_errors=True
-print_Debug=False
 
 import sys,os
 import json
@@ -39,10 +38,12 @@ class simple_CMORvar(object):
 # mpmoine_future_modif: nouvelle classe simple_Dim
 # A class for unifying grid info coming from DR and extra_Tables
 # mpmoine_future_modif:simple_Dim: ajout de l'attribut 'is_zoom_of'
+# mpmoine_zoom_modif:simple_Dim: ajout de l'attribut 'zoom_label'
 #
 class simple_Dim(object):
     def __init__(self):
         self.label        = False
+        self.zoom_label   = False
         self.stdname      = False
         self.long_name    = False
         self.positive     = False
@@ -53,7 +54,7 @@ class simple_Dim(object):
         self.is_zoom_of   = False
 
 # mpmoine_future_modif: liste des suffixes de noms de variables reperant un ou plusieurs niveaux pression
-plev_suffixes=["1000","200","220","500","560","700","840","850","10","19","23","27","39","3","3h","4","7c","7h","8","12"]
+plev_suffixes=["1000","200","220","500","560","700","840","850","100","10","19","23","27","39","3","3h","4","7c","7h","8","12"]
 
 ambiguous_mipvarnames=None
 
@@ -160,8 +161,12 @@ def read_extraTable(path,table,dq,printout=False):
         # mpmoine_attention: il faut mettre a jour dim2shape a chaque fois qu'une nouvelle correpondance est introduite
         # mpmoine_attention: dans les extra-Tables
         dims2shape['longitude|latitude|height100m']='XY-na'
-        #mpmoine_note: provisoire, plev12 juste pour exemple
+        # mpmoine_note: provisoire, XY-P12 juste pour exemple
         dims2shape['longitude|latitude|plev12']='XY-P12'
+        # mpmoine_zoom_modif: ajout de XY-P23 qui a disparu de la DR-00.00.04 mais est demande dans les tables Primavera
+        dims2shape['longitude|latitude|plev23']='XY-P23'
+        # mpmoine_zoom_modif: ajout de XY-P10 qui n'est pas dans la DR mais demande dans les tables Primavera
+        dims2shape['longitude|latitude|plev10']='XY-P10'
     #
     if not dim2dimid:
         for g in dq.coll['grids'].items:
@@ -223,7 +228,7 @@ def read_extraTable(path,table,dq,printout=False):
             # supress dimensions corresponding to time and single levels
             dr_dims=[d for i,d in enumerate(dims) if i not in inddims_to_sup]
             # supress only the dimension corresponding to time
-            dr_dims_with_single_level=[d for i,d in enumerate(dims) if i not in ind_time]
+            all_dr_dims=[d for i,d in enumerate(dims) if i not in ind_time]
             # rewrite dimension with DR convention
             drdims=""
             for d in dr_dims:
@@ -243,7 +248,7 @@ def read_extraTable(path,table,dq,printout=False):
             # mpmoine_future_modif:read_extraTable: introduction de extra_var.sdims, ajout lecture des dimensions dans 
             # mpmoine_future_modif:read_extraTable: une table de coordinates quand pas trouvees dans la DR
             dr_dimids=[]
-            for d in dr_dims_with_single_level:
+            for d in all_dr_dims:
                 if dim2dimid.has_key(d):
                     dr_dimids.append(dim2dimid[d])
                     extra_dim=get_simpleDim_from_DimId(dim2dimid[d],dq)
@@ -484,8 +489,7 @@ def complement_svar_using_cmorvar(svar,cmvar,dq):
             #print "Issue with cell_measures for "+`cmvar`
             svar.cell_measures="NOT-SET" #None
         # mpmoine_last_modif:complement_svar_using_cmorvar: on affecte ici svar.dimids (avant: dans create_xios_field_ref)
-        # mpmoine_last_modif:complement_svar_using_cmorvar: provisoire, pour by-passer le cas d'une CMORvar qui n'a pas de
-        # mpmoine_last_modif:complement_svar_using_cmorvar: structure associee ('dreqItem_remarks')
+        # mpmoine_last_modif:complement_svar_using_cmorvar: provisoire, pour by-passer le cas d'une CMORvar qui n'a pas de structure associee ('dreqItem_remarks')
         # mpmoine_future_modif:complement_svar_using_cmorvar: on ne recherche les dimids que si on a pas affaire a une constante
         if svar.spatial_shp!="na-na":
             try:
@@ -495,9 +499,9 @@ def complement_svar_using_cmorvar(svar,cmvar,dq):
                     dimids=spid.dimids
                     # mpmoine_future_modif:complement_svar_using_cmorvar: on rajoute les single levels dans le traitement des dimensions (dimids->all_dimids)
                     cids=svar.struct.cids
-                    if "" in cids: 
-                        all_dimids=dimids
-                    else:
+                    if "" in cids: # when cids is empty, cids=('',)
+                        all_dimids=dimids 
+                    else: # when cids not empty, cids=('dim:p850',) for e.g.
                         all_dimids=dimids+cids
                     # mpmoine_future_modif:complement_svar_using_cmorvar: on rajoute les single levels dans le traitement des dimensions (dimids->all_dimids)  
                     for dimid in all_dimids:
@@ -540,18 +544,15 @@ def get_simpleDim_from_DimId(dimid,dq):
     sdim.requested=d.requested 
     sdim.value=d.value
     sdim.stdname=dq.inx.uid[d.standardName].uid
-    sdim.longname=d.title
+    sdim.long_name=d.title
     sdim.out_name=d.altLabel
     sdim.units=d.units
-    if print_Debug:
-        list_of_attrs=["label","positive","requested","value","stdname","long_name","outname","units"]
-        for a in list_of_attrs:
-            print "mpmoine_debug:",a," ",getattr(sdim,a)
     return sdim
 
 # mpmoine_future_modif: nouvelle fonction Remove_pSuffix
 def Remove_pSuffix(svar,suffixes,realms):
-    label_out=False
+    #-label_out=False
+    label_out=svar.label
     svar_realms=set(svar.modeling_realm.split())
     valid_realms=set(realms.split())
     if svar_realms.intersection(valid_realms):
