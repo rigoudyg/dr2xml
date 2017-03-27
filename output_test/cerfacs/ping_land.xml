@@ -204,7 +204,7 @@
    <field id="CMIP6_nppTree"       field_ref="dummy_XY"         /> <!-- P2 (kg m-2 s-1) nppTree : Total NPP of trees in the gridcell -->
    <field id="CMIP6_nppWood"       field_ref="dummy_XY"         /> <!-- P1 (kg m-2 s-1) net_primary_productivity_of_carbon_accumulated_in_wood : This is the rate of carbon uptake by wood due to NPP -->
    <field id="CMIP6_nwdFracLut"    field_ref="dummy_XY"         /> <!-- P1 (1) nwdFracLut : fraction of land use tile tile that is non-woody vegetation ( e.g. herbaceous crops) -->
-   <field id="CMIP6_orog"          field_ref="dummy_XY"         /> <!-- P1 (m) surface_altitude : The surface called "surface" means the lower boundary of the atmosphere. Altitude is the (geometric) height above the geoid, which is the reference geopotential surface. The geoid is similar to mean sea level. -->
+   <field id="CMIP6_orog"          field_ref="dummy_??"         /> <!-- P1 (m) surface_altitude : The surface called "surface" means the lower boundary of the atmosphere. Altitude is the (geometric) height above the geoid, which is the reference geopotential surface. The geoid is similar to mean sea level. -->
    <field id="CMIP6_orogIs"        field_ref="dummy_XY"         /> <!-- P1 (m) surface_altitude : The surface called "surface" means the lower boundary of the atmosphere. Altitude is the (geometric) height above the geoid, which is the reference geopotential surface. The geoid is similar to mean sea level. -->
    <field id="CMIP6_pastureFrac"   field_ref="dummy_XY"         /> <!-- P1 (%) area_fraction : Percentage of entire grid cell  that is covered by anthropogenic pasture. -->
    <field id="CMIP6_pastureFracC3" field_ref="dummy_XY"         /> <!-- P2 (1) pastureFracC3 : Fraction of entire grid cell covered by C3 pasture -->
@@ -289,7 +289,7 @@
    <field id="CMIP6_uas"           field_ref="dummy_XY"         /> <!-- P1 (m s-1) eastward_wind : Eastward component of the near-surface (usually, 10 meters)  wind -->
    <field id="CMIP6_va"            field_ref="dummy_XYA"        /> <!-- P1 (m s-1) northward_wind : Northward Wind -->
    <field id="CMIP6_vas"           field_ref="dummy_XY"         /> <!-- P1 (m s-1) northward_wind : Northward component of the near surface wind -->
-   <field id="CMIP6_vegFrac"       field_ref="dummy_XY"         /> <!-- P1 (%) vegFrac : as specified by C4MIP -->
+   <field id="CMIP6_vegFrac"       field_ref="dummy_XY"         /> <!-- P2 (%) vegFrac : as specified by C4MIP -->
    <field id="CMIP6_vegHeight"     field_ref="dummy_XY"         /> <!-- P2 (m) canopy_height : as specified by C4MIP -->
    <field id="CMIP6_vegHeightCrop" field_ref="dummy_XY"         /> <!-- P2 (m) canopy_height : as specified by C4MIP -->
    <field id="CMIP6_vegHeightGrass" field_ref="dummy_XY"         /> <!-- P2 (m) canopy_height : as specified by C4MIP -->

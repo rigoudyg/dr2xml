@@ -702,7 +702,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
     prefix=lset["ping_variables_prefix"]
     # mpmoine_zoom_modif:create_xios_aux_elmts_defs: recup de lwps
     lwps=sv.label_without_psuffix
-    # TBD Should handle singletons here
+    # TBD Should handle singletons here => mpmoine_note: la mecanique des zoom/union couvre aussi les dim verticale singleton
     # TBD Should ensure that various additionnal dims are duly documented by model or pingfile (e.g. tau)
     # mpmoine_zoom_modif:create_xios_aux_elmts_defs: ajout du cas 'XY-na' pour capturer les dimensions singleton
     if ssh[0:4] in ['XY-H','XY-P'] or ssh[0:3] == 'Y-P' or ssh[0:5]=='XY-na':

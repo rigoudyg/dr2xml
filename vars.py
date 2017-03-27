@@ -54,7 +54,8 @@ class simple_Dim(object):
         self.is_zoom_of   = False
 
 # mpmoine_future_modif: liste des suffixes de noms de variables reperant un ou plusieurs niveaux pression
-plev_suffixes=["1000","200","220","500","560","700","840","850","100","10","19","23","27","39","3","3h","4","7c","7h","8","12"]
+multi_plev_suffixes=set(["10","19","23","27","39","3","3h","4","7c","7h","8","12"])
+single_plev_suffixes=set(["1000","200","220","500","560","700","840","850","100"])
 
 ambiguous_mipvarnames=None
 
@@ -274,7 +275,7 @@ def read_extraTable(path,table,dq,printout=False):
                           "in Table",table," not found in DR => read it in extra coordinates Table: ", extra_sdim.stdname,extra_sdim.requested
             # mpmoine_future_modif: read_extraTable: suppression de extra_var.dimids -> elargi avec extra_var.sdims
             # mpmoine_future_modif:read_extraTable: on renseigne l'attribut label_without_psuffix (doit etre fait apres la valorisation de sdims)
-            extra_var.label_without_psuffix=Remove_pSuffix(extra_var,plev_suffixes,realms='atmos aerosol atmosChem')
+            extra_var.label_without_psuffix=Remove_pSuffix(extra_var,multi_plev_suffixes,single_plev_suffixes,realms='atmos aerosol atmosChem')
                 
             extravars.append(extra_var)
     if printout: 
@@ -519,7 +520,7 @@ def complement_svar_using_cmorvar(svar,cmvar,dq):
             print "DR Error: issue with stid for",svar.label, "in Table ",svar.mipTable,"  => no cell_methods, cell_measures, dimids and sdims derived."
       
     #mpmoine_future_modif:complement_svar_using_cmorvar: on renseigne l'attribut label_without_psuffix (doit etre fait apres la valorisation de sdims)
-    svar.label_without_psuffix=Remove_pSuffix(svar,plev_suffixes,realms='atmos aerosol atmosChem')
+    svar.label_without_psuffix=Remove_pSuffix(svar,multi_plev_suffixes,single_plev_suffixes,realms='atmos aerosol atmosChem')
 
     area=cellmethod2area(svar.cell_methods) 
     if area : 
@@ -550,19 +551,26 @@ def get_simpleDim_from_DimId(dimid,dq):
     return sdim
 
 # mpmoine_future_modif: nouvelle fonction Remove_pSuffix
-def Remove_pSuffix(svar,suffixes,realms):
+def Remove_pSuffix(svar,mlev_sfxs,slev_sfxs,realms):
+    #
+    # remove suffixes only if both suffix of svar.label *and* suffix of one of the svar.dims.label  match the search suffix
+    # to avoid truncation of variable names like 'ch4' requested on 'plev19', where '4' does not stand for a plev set
+    #
+    # mpmoine_zoom_modif:Remove_pSuffix: correction de la methode de suppression du suffixe de pression (corrige notamment ta23 -> ta2, 3 etant dans la liste des suffixes)
+    import re
+    r = re.compile("([a-zA-Z]+)([0-9]+)")
+    #
     #-label_out=False
     label_out=svar.label
     svar_realms=set(svar.modeling_realm.split())
     valid_realms=set(realms.split())
     if svar_realms.intersection(valid_realms):
-        for s in suffixes:
-            # remove suffixes only if both suffix of svar.label *and* suffix of one of the svar.dims.label  match the search suffix
-            # to avoid truncation of variable names like 'ch4' requested on 'plev19', where '4' does not stand for a plev set
-            if any((svar.sdims[k].label.startswith("p") and svar.sdims[k].label.endswith(s)) for k in svar.sdims.iterkeys()):
-                label_out=svar.label
-                if svar.label.endswith(s):
-                    label_out=svar.label.replace(s,"")
+        mvl=r.match(svar.label)
+        if mvl and any(svar.label.endswith(s) for s in mlev_sfxs.union(slev_sfxs)):
+            for sdim in svar.sdims.values(): 
+                mdl=r.match(sdim.label)
+                if mdl and mdl.group(2)==mvl.group(2): 
+                     label_out=mvl.group(1)
     return label_out
 
 def cellmethod2area(method) :
