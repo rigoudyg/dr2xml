@@ -932,180 +932,6 @@
 </field_group >
 </file>
 
- <file name="tos_Omon_CNRM-CM6-1_Forced-Atmos-Land_None-r1i1p1f1_gn_%start_date%_%end_date%" output_freq="1mo"   append="true" split_freq="200y"  time_units="days" time_counter_name="time" time_stamp_name="creation_date"  time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" >
-  <variable name="project_id"  type="string" > CMIP6/CMIP   </variable>
-  <variable name="activity_id"  type="string" > CMIP   </variable>
-  <variable name="contact"  type="string" > contact.cmip@cnrm.fr   </variable>
-  <variable name="Conventions"  type="string" > CF-1.7 CMIP-6.0   </variable>
-  <variable name="data_specs_version"  type="string" > 01.00.04   </variable>
-  <variable name="experiment"  type="string" > NOT-SET   </variable>
-  <variable name="experiment_id"  type="string" > Forced-Atmos-Land   </variable>
-  <variable name="external_variables"  type="string" > areacello   </variable>
-  <variable name="forcing_index"  type="string" > 1   </variable>
-  <variable name="frequency"  type="string" > mon   </variable>
-  <variable name="further_info_url"  type="string" > http://furtherinfo.es-doc.org/CMIP6.CNRM-CERFACS.CNRM-CM6-1.Forced-Atmos-Land.None.r1i1p1f1   </variable>
-  <variable name="grid"  type="string" > native ocean tri-polar grid with 105 k ocean cells   </variable>
-  <variable name="grid_label"  type="string" > gn   </variable>
-  <variable name="nominal_resolution"  type="string" > 100km   </variable>
-  <variable name="history"  type="string" > None   </variable>
-  <variable name="initialization_index"  type="string" > 1   </variable>
-  <variable name="institution_id"  type="string" > CNRM-CERFACS   </variable>
-  <variable name="institution"  type="string" > CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31100, France)   </variable>
-  <variable name="license"  type="string" > CMIP6 model data produced by CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31100, France) is licensed under a Creative Commons Attribution-[NonCommercial-]ShareAlike 4.0 International License (https://creativecommons.org/licenses/).  Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment.  Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file)[ and at http://www.umr-cnrm.fr/cmip6/]. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law.   </variable>
-  <variable name="mip_era"  type="string" > CMIP6   </variable>
-  <variable name="parent_activity_id"  type="string" > CMIP   </variable>
-  <variable name="parent_experiment_id"  type="string" > piControl   </variable>
-  <variable name="parent_mip_era"  type="string" > CMIP6   </variable>
-  <variable name="parent_source_id"  type="string" > CNRM-CM6-1   </variable>
-  <variable name="parent_time_units"  type="string" > days since 1850-01-01 00:00:00   </variable>
-  <variable name="parent_variant_label"  type="string" > r1i1p1f1   </variable>
-  <variable name="branch_method"  type="string" > standard   </variable>
-  <variable name="branch_time_in_child"  type="string" > 0.0D0   </variable>
-  <variable name="branch_time_in_parent"  type="string" > 365.0D0   </variable>
-  <variable name="physics_index"  type="string" > 1   </variable>
-  <variable name="product"  type="string" > output   </variable>
-  <variable name="realization_index"  type="string" > 1   </variable>
-  <variable name="realm"  type="string" > ocean   </variable>
-  <variable name="references"  type="string" > A character string containing a list of published or web-based references that describe the data or the methods used to produce it.Typically, the user should provide references describing the modelformulation here   </variable>
-  <variable name="source"  type="string" > CNRM-CM6-1   </variable>
-  <variable name="source_id"  type="string" > CNRM-CM6-1   </variable>
-  <variable name="source_type"  type="string" > AOGCM   </variable>
-  <variable name="sub_experiment_id"  type="string" > None   </variable>
-  <variable name="sub_experiment"  type="string" > None   </variable>
-  <variable name="table_id"  type="string" > Omon   </variable>
-  <variable name="title"  type="string" > CNRM-CM6-1 model output prepared for CMIP6 / CMIP Forced-Atmos-Land   </variable>
-  <variable name="variable_id"  type="string" > tos   </variable>
-  <variable name="variant_info"  type="string" > Start date chosen so that variant r1i1p1f1 has the better fit with Krakatoa impact on tos   </variable>
-  <variable name="variant_label"  type="string" > r1i1p1f1   </variable>
-<field_group  expr="@this" >
-  <field field_ref="CMIP6_tos" name="tos" ts_enabled="true"  operation="average" detect_missing_value="False" default_value="1.e+20" cell_methods="time: mean" cell_methods_mode="overwrite">
-     <variable name="standard_name" type="string" > sea_surface_temperature </variable>
-     <variable name="description" type="string" > temperature of liquid ocean.  Note that the correct standard_name for this variable is "sea_surface_temperature", not "surface_temperature", but this was discovered too late to correct.  To maintain consistency across CMIP5 models, the wrong standard_name will continue to be used. </variable>
-     <variable name="long_name" type="string" > Sea Surface Temperature </variable>
-     <variable name="history" type="string" > none </variable>
-     <variable name="units" type="string" > degC </variable>
-     <variable name="missing_values" type="string" > 1e+20 </variable>
-     <variable name="cell_measures" type="string" > area: areacello </variable>
-     </field>
-</field_group >
-</file>
-
- <file name="tos_Omon_CNRM-CM6-1_Forced-Atmos-Land_None-r1i1p1f1_1deg_%start_date%_%end_date%" output_freq="1mo"   append="true" split_freq="200y"  time_units="days" time_counter_name="time" time_stamp_name="creation_date"  time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" >
-  <variable name="project_id"  type="string" > CMIP6/CMIP   </variable>
-  <variable name="activity_id"  type="string" > CMIP   </variable>
-  <variable name="contact"  type="string" > contact.cmip@cnrm.fr   </variable>
-  <variable name="Conventions"  type="string" > CF-1.7 CMIP-6.0   </variable>
-  <variable name="data_specs_version"  type="string" > 01.00.04   </variable>
-  <variable name="experiment"  type="string" > NOT-SET   </variable>
-  <variable name="experiment_id"  type="string" > Forced-Atmos-Land   </variable>
-  <variable name="external_variables"  type="string" > areacello   </variable>
-  <variable name="forcing_index"  type="string" > 1   </variable>
-  <variable name="frequency"  type="string" > mon   </variable>
-  <variable name="further_info_url"  type="string" > http://furtherinfo.es-doc.org/CMIP6.CNRM-CERFACS.CNRM-CM6-1.Forced-Atmos-Land.None.r1i1p1f1   </variable>
-  <variable name="grid"  type="string" > data regridded to a CMIP6 standard 1x1 degree latxlon grid from the native grid   </variable>
-  <variable name="grid_label"  type="string" > 1deg   </variable>
-  <variable name="nominal_resolution"  type="string" > 1x1 degree   </variable>
-  <variable name="history"  type="string" > None   </variable>
-  <variable name="initialization_index"  type="string" > 1   </variable>
-  <variable name="institution_id"  type="string" > CNRM-CERFACS   </variable>
-  <variable name="institution"  type="string" > CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31100, France)   </variable>
-  <variable name="license"  type="string" > CMIP6 model data produced by CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31100, France) is licensed under a Creative Commons Attribution-[NonCommercial-]ShareAlike 4.0 International License (https://creativecommons.org/licenses/).  Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment.  Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file)[ and at http://www.umr-cnrm.fr/cmip6/]. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law.   </variable>
-  <variable name="mip_era"  type="string" > CMIP6   </variable>
-  <variable name="parent_activity_id"  type="string" > CMIP   </variable>
-  <variable name="parent_experiment_id"  type="string" > piControl   </variable>
-  <variable name="parent_mip_era"  type="string" > CMIP6   </variable>
-  <variable name="parent_source_id"  type="string" > CNRM-CM6-1   </variable>
-  <variable name="parent_time_units"  type="string" > days since 1850-01-01 00:00:00   </variable>
-  <variable name="parent_variant_label"  type="string" > r1i1p1f1   </variable>
-  <variable name="branch_method"  type="string" > standard   </variable>
-  <variable name="branch_time_in_child"  type="string" > 0.0D0   </variable>
-  <variable name="branch_time_in_parent"  type="string" > 365.0D0   </variable>
-  <variable name="physics_index"  type="string" > 1   </variable>
-  <variable name="product"  type="string" > output   </variable>
-  <variable name="realization_index"  type="string" > 1   </variable>
-  <variable name="realm"  type="string" > ocean   </variable>
-  <variable name="references"  type="string" > A character string containing a list of published or web-based references that describe the data or the methods used to produce it.Typically, the user should provide references describing the modelformulation here   </variable>
-  <variable name="source"  type="string" > CNRM-CM6-1   </variable>
-  <variable name="source_id"  type="string" > CNRM-CM6-1   </variable>
-  <variable name="source_type"  type="string" > AOGCM   </variable>
-  <variable name="sub_experiment_id"  type="string" > None   </variable>
-  <variable name="sub_experiment"  type="string" > None   </variable>
-  <variable name="table_id"  type="string" > Omon   </variable>
-  <variable name="title"  type="string" > CNRM-CM6-1 model output prepared for CMIP6 / CMIP Forced-Atmos-Land   </variable>
-  <variable name="variable_id"  type="string" > tos   </variable>
-  <variable name="variant_info"  type="string" > Start date chosen so that variant r1i1p1f1 has the better fit with Krakatoa impact on tos   </variable>
-  <variable name="variant_label"  type="string" > r1i1p1f1   </variable>
-<field_group domain_ref="CMIP6_1deg" expr="@this" >
-  <field field_ref="CMIP6_tos" name="tos" ts_enabled="true"  operation="average" detect_missing_value="False" default_value="1.e+20" cell_methods="time: mean" cell_methods_mode="overwrite">
-     <variable name="standard_name" type="string" > sea_surface_temperature </variable>
-     <variable name="description" type="string" > temperature of liquid ocean.  Note that the correct standard_name for this variable is "sea_surface_temperature", not "surface_temperature", but this was discovered too late to correct.  To maintain consistency across CMIP5 models, the wrong standard_name will continue to be used. </variable>
-     <variable name="long_name" type="string" > Sea Surface Temperature </variable>
-     <variable name="history" type="string" > none </variable>
-     <variable name="units" type="string" > degC </variable>
-     <variable name="missing_values" type="string" > 1e+20 </variable>
-     <variable name="cell_measures" type="string" > area: areacello </variable>
-     </field>
-</field_group >
-</file>
-
- <file name="zos_Omon_CNRM-CM6-1_Forced-Atmos-Land_None-r1i1p1f1_gn_%start_date%_%end_date%" output_freq="1mo"   append="true" split_freq="200y"  time_units="days" time_counter_name="time" time_stamp_name="creation_date"  time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" >
-  <variable name="project_id"  type="string" > CMIP6/CMIP   </variable>
-  <variable name="activity_id"  type="string" > CMIP   </variable>
-  <variable name="contact"  type="string" > contact.cmip@cnrm.fr   </variable>
-  <variable name="Conventions"  type="string" > CF-1.7 CMIP-6.0   </variable>
-  <variable name="data_specs_version"  type="string" > 01.00.04   </variable>
-  <variable name="experiment"  type="string" > NOT-SET   </variable>
-  <variable name="experiment_id"  type="string" > Forced-Atmos-Land   </variable>
-  <variable name="external_variables"  type="string" > areacello   </variable>
-  <variable name="forcing_index"  type="string" > 1   </variable>
-  <variable name="frequency"  type="string" > mon   </variable>
-  <variable name="further_info_url"  type="string" > http://furtherinfo.es-doc.org/CMIP6.CNRM-CERFACS.CNRM-CM6-1.Forced-Atmos-Land.None.r1i1p1f1   </variable>
-  <variable name="grid"  type="string" > native ocean tri-polar grid with 105 k ocean cells   </variable>
-  <variable name="grid_label"  type="string" > gn   </variable>
-  <variable name="nominal_resolution"  type="string" > 100km   </variable>
-  <variable name="history"  type="string" > None   </variable>
-  <variable name="initialization_index"  type="string" > 1   </variable>
-  <variable name="institution_id"  type="string" > CNRM-CERFACS   </variable>
-  <variable name="institution"  type="string" > CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31100, France)   </variable>
-  <variable name="license"  type="string" > CMIP6 model data produced by CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31100, France) is licensed under a Creative Commons Attribution-[NonCommercial-]ShareAlike 4.0 International License (https://creativecommons.org/licenses/).  Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment.  Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file)[ and at http://www.umr-cnrm.fr/cmip6/]. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law.   </variable>
-  <variable name="mip_era"  type="string" > CMIP6   </variable>
-  <variable name="parent_activity_id"  type="string" > CMIP   </variable>
-  <variable name="parent_experiment_id"  type="string" > piControl   </variable>
-  <variable name="parent_mip_era"  type="string" > CMIP6   </variable>
-  <variable name="parent_source_id"  type="string" > CNRM-CM6-1   </variable>
-  <variable name="parent_time_units"  type="string" > days since 1850-01-01 00:00:00   </variable>
-  <variable name="parent_variant_label"  type="string" > r1i1p1f1   </variable>
-  <variable name="branch_method"  type="string" > standard   </variable>
-  <variable name="branch_time_in_child"  type="string" > 0.0D0   </variable>
-  <variable name="branch_time_in_parent"  type="string" > 365.0D0   </variable>
-  <variable name="physics_index"  type="string" > 1   </variable>
-  <variable name="product"  type="string" > output   </variable>
-  <variable name="realization_index"  type="string" > 1   </variable>
-  <variable name="realm"  type="string" > ocean   </variable>
-  <variable name="references"  type="string" > A character string containing a list of published or web-based references that describe the data or the methods used to produce it.Typically, the user should provide references describing the modelformulation here   </variable>
-  <variable name="source"  type="string" > CNRM-CM6-1   </variable>
-  <variable name="source_id"  type="string" > CNRM-CM6-1   </variable>
-  <variable name="source_type"  type="string" > AOGCM   </variable>
-  <variable name="sub_experiment_id"  type="string" > None   </variable>
-  <variable name="sub_experiment"  type="string" > None   </variable>
-  <variable name="table_id"  type="string" > Omon   </variable>
-  <variable name="title"  type="string" > CNRM-CM6-1 model output prepared for CMIP6 / CMIP Forced-Atmos-Land   </variable>
-  <variable name="variable_id"  type="string" > zos   </variable>
-  <variable name="variant_info"  type="string" > Start date chosen so that variant r1i1p1f1 has the better fit with Krakatoa impact on tos   </variable>
-  <variable name="variant_label"  type="string" > r1i1p1f1   </variable>
-<field_group  expr="@this" >
-  <field field_ref="CMIP6_zos" name="zos" ts_enabled="true"  operation="average" detect_missing_value="False" default_value="1.e+20" cell_methods="time: mean" cell_methods_mode="overwrite">
-     <variable name="standard_name" type="string" > sea_surface_height_above_geoid </variable>
-     <variable name="description" type="string" > This is the dynamic sea level, so should have zero global area mean. It should not include inverse barometer depressions from sea ice. </variable>
-     <variable name="long_name" type="string" > Sea Surface Height Above Geoid </variable>
-     <variable name="history" type="string" > none </variable>
-     <variable name="units" type="string" > m </variable>
-     <variable name="missing_values" type="string" > 1e+20 </variable>
-     <variable name="cell_measures" type="string" > area: areacello </variable>
-     </field>
-</field_group >
-</file>
-
  <file name="sidivvel_PrimSIday_CNRM-CM6-1_Forced-Atmos-Land_None-r1i1p1f1_gn_%start_date%_%end_date%" output_freq="1d"   append="true" split_freq="10y"  time_units="days" time_counter_name="time" time_stamp_name="creation_date"  time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" >
   <variable name="project_id"  type="string" > CMIP6/CMIP   </variable>
   <variable name="activity_id"  type="string" > CMIP   </variable>
@@ -1740,6 +1566,180 @@
      <variable name="units" type="string" > m s-1 </variable>
      <variable name="missing_values" type="string" > 1e+20 </variable>
      <variable name="cell_measures" type="string" > area: areacella </variable>
+     </field>
+</field_group >
+</file>
+
+ <file name="tos_Omon_CNRM-CM6-1_Forced-Atmos-Land_None-r1i1p1f1_gn_%start_date%_%end_date%" output_freq="1mo"   append="true" split_freq="200y"  time_units="days" time_counter_name="time" time_stamp_name="creation_date"  time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" >
+  <variable name="project_id"  type="string" > CMIP6/CMIP   </variable>
+  <variable name="activity_id"  type="string" > CMIP   </variable>
+  <variable name="contact"  type="string" > contact.cmip@cnrm.fr   </variable>
+  <variable name="Conventions"  type="string" > CF-1.7 CMIP-6.0   </variable>
+  <variable name="data_specs_version"  type="string" > 01.00.04   </variable>
+  <variable name="experiment"  type="string" > NOT-SET   </variable>
+  <variable name="experiment_id"  type="string" > Forced-Atmos-Land   </variable>
+  <variable name="external_variables"  type="string" > areacello   </variable>
+  <variable name="forcing_index"  type="string" > 1   </variable>
+  <variable name="frequency"  type="string" > mon   </variable>
+  <variable name="further_info_url"  type="string" > http://furtherinfo.es-doc.org/CMIP6.CNRM-CERFACS.CNRM-CM6-1.Forced-Atmos-Land.None.r1i1p1f1   </variable>
+  <variable name="grid"  type="string" > native ocean tri-polar grid with 105 k ocean cells   </variable>
+  <variable name="grid_label"  type="string" > gn   </variable>
+  <variable name="nominal_resolution"  type="string" > 100km   </variable>
+  <variable name="history"  type="string" > None   </variable>
+  <variable name="initialization_index"  type="string" > 1   </variable>
+  <variable name="institution_id"  type="string" > CNRM-CERFACS   </variable>
+  <variable name="institution"  type="string" > CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31100, France)   </variable>
+  <variable name="license"  type="string" > CMIP6 model data produced by CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31100, France) is licensed under a Creative Commons Attribution-[NonCommercial-]ShareAlike 4.0 International License (https://creativecommons.org/licenses/).  Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment.  Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file)[ and at http://www.umr-cnrm.fr/cmip6/]. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law.   </variable>
+  <variable name="mip_era"  type="string" > CMIP6   </variable>
+  <variable name="parent_activity_id"  type="string" > CMIP   </variable>
+  <variable name="parent_experiment_id"  type="string" > piControl   </variable>
+  <variable name="parent_mip_era"  type="string" > CMIP6   </variable>
+  <variable name="parent_source_id"  type="string" > CNRM-CM6-1   </variable>
+  <variable name="parent_time_units"  type="string" > days since 1850-01-01 00:00:00   </variable>
+  <variable name="parent_variant_label"  type="string" > r1i1p1f1   </variable>
+  <variable name="branch_method"  type="string" > standard   </variable>
+  <variable name="branch_time_in_child"  type="string" > 0.0D0   </variable>
+  <variable name="branch_time_in_parent"  type="string" > 365.0D0   </variable>
+  <variable name="physics_index"  type="string" > 1   </variable>
+  <variable name="product"  type="string" > output   </variable>
+  <variable name="realization_index"  type="string" > 1   </variable>
+  <variable name="realm"  type="string" > ocean   </variable>
+  <variable name="references"  type="string" > A character string containing a list of published or web-based references that describe the data or the methods used to produce it.Typically, the user should provide references describing the modelformulation here   </variable>
+  <variable name="source"  type="string" > CNRM-CM6-1   </variable>
+  <variable name="source_id"  type="string" > CNRM-CM6-1   </variable>
+  <variable name="source_type"  type="string" > AOGCM   </variable>
+  <variable name="sub_experiment_id"  type="string" > None   </variable>
+  <variable name="sub_experiment"  type="string" > None   </variable>
+  <variable name="table_id"  type="string" > Omon   </variable>
+  <variable name="title"  type="string" > CNRM-CM6-1 model output prepared for CMIP6 / CMIP Forced-Atmos-Land   </variable>
+  <variable name="variable_id"  type="string" > tos   </variable>
+  <variable name="variant_info"  type="string" > Start date chosen so that variant r1i1p1f1 has the better fit with Krakatoa impact on tos   </variable>
+  <variable name="variant_label"  type="string" > r1i1p1f1   </variable>
+<field_group  expr="@this" >
+  <field field_ref="CMIP6_tos" name="tos" ts_enabled="true"  operation="average" detect_missing_value="False" default_value="1.e+20" cell_methods="time: mean" cell_methods_mode="overwrite">
+     <variable name="standard_name" type="string" > sea_surface_temperature </variable>
+     <variable name="description" type="string" > temperature of liquid ocean.  Note that the correct standard_name for this variable is "sea_surface_temperature", not "surface_temperature", but this was discovered too late to correct.  To maintain consistency across CMIP5 models, the wrong standard_name will continue to be used. </variable>
+     <variable name="long_name" type="string" > Sea Surface Temperature </variable>
+     <variable name="history" type="string" > none </variable>
+     <variable name="units" type="string" > degC </variable>
+     <variable name="missing_values" type="string" > 1e+20 </variable>
+     <variable name="cell_measures" type="string" > area: areacello </variable>
+     </field>
+</field_group >
+</file>
+
+ <file name="tos_Omon_CNRM-CM6-1_Forced-Atmos-Land_None-r1i1p1f1_1deg_%start_date%_%end_date%" output_freq="1mo"   append="true" split_freq="200y"  time_units="days" time_counter_name="time" time_stamp_name="creation_date"  time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" >
+  <variable name="project_id"  type="string" > CMIP6/CMIP   </variable>
+  <variable name="activity_id"  type="string" > CMIP   </variable>
+  <variable name="contact"  type="string" > contact.cmip@cnrm.fr   </variable>
+  <variable name="Conventions"  type="string" > CF-1.7 CMIP-6.0   </variable>
+  <variable name="data_specs_version"  type="string" > 01.00.04   </variable>
+  <variable name="experiment"  type="string" > NOT-SET   </variable>
+  <variable name="experiment_id"  type="string" > Forced-Atmos-Land   </variable>
+  <variable name="external_variables"  type="string" > areacello   </variable>
+  <variable name="forcing_index"  type="string" > 1   </variable>
+  <variable name="frequency"  type="string" > mon   </variable>
+  <variable name="further_info_url"  type="string" > http://furtherinfo.es-doc.org/CMIP6.CNRM-CERFACS.CNRM-CM6-1.Forced-Atmos-Land.None.r1i1p1f1   </variable>
+  <variable name="grid"  type="string" > data regridded to a CMIP6 standard 1x1 degree latxlon grid from the native grid   </variable>
+  <variable name="grid_label"  type="string" > 1deg   </variable>
+  <variable name="nominal_resolution"  type="string" > 1x1 degree   </variable>
+  <variable name="history"  type="string" > None   </variable>
+  <variable name="initialization_index"  type="string" > 1   </variable>
+  <variable name="institution_id"  type="string" > CNRM-CERFACS   </variable>
+  <variable name="institution"  type="string" > CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31100, France)   </variable>
+  <variable name="license"  type="string" > CMIP6 model data produced by CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31100, France) is licensed under a Creative Commons Attribution-[NonCommercial-]ShareAlike 4.0 International License (https://creativecommons.org/licenses/).  Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment.  Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file)[ and at http://www.umr-cnrm.fr/cmip6/]. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law.   </variable>
+  <variable name="mip_era"  type="string" > CMIP6   </variable>
+  <variable name="parent_activity_id"  type="string" > CMIP   </variable>
+  <variable name="parent_experiment_id"  type="string" > piControl   </variable>
+  <variable name="parent_mip_era"  type="string" > CMIP6   </variable>
+  <variable name="parent_source_id"  type="string" > CNRM-CM6-1   </variable>
+  <variable name="parent_time_units"  type="string" > days since 1850-01-01 00:00:00   </variable>
+  <variable name="parent_variant_label"  type="string" > r1i1p1f1   </variable>
+  <variable name="branch_method"  type="string" > standard   </variable>
+  <variable name="branch_time_in_child"  type="string" > 0.0D0   </variable>
+  <variable name="branch_time_in_parent"  type="string" > 365.0D0   </variable>
+  <variable name="physics_index"  type="string" > 1   </variable>
+  <variable name="product"  type="string" > output   </variable>
+  <variable name="realization_index"  type="string" > 1   </variable>
+  <variable name="realm"  type="string" > ocean   </variable>
+  <variable name="references"  type="string" > A character string containing a list of published or web-based references that describe the data or the methods used to produce it.Typically, the user should provide references describing the modelformulation here   </variable>
+  <variable name="source"  type="string" > CNRM-CM6-1   </variable>
+  <variable name="source_id"  type="string" > CNRM-CM6-1   </variable>
+  <variable name="source_type"  type="string" > AOGCM   </variable>
+  <variable name="sub_experiment_id"  type="string" > None   </variable>
+  <variable name="sub_experiment"  type="string" > None   </variable>
+  <variable name="table_id"  type="string" > Omon   </variable>
+  <variable name="title"  type="string" > CNRM-CM6-1 model output prepared for CMIP6 / CMIP Forced-Atmos-Land   </variable>
+  <variable name="variable_id"  type="string" > tos   </variable>
+  <variable name="variant_info"  type="string" > Start date chosen so that variant r1i1p1f1 has the better fit with Krakatoa impact on tos   </variable>
+  <variable name="variant_label"  type="string" > r1i1p1f1   </variable>
+<field_group domain_ref="CMIP6_1deg" expr="@this" >
+  <field field_ref="CMIP6_tos" name="tos" ts_enabled="true"  operation="average" detect_missing_value="False" default_value="1.e+20" cell_methods="time: mean" cell_methods_mode="overwrite">
+     <variable name="standard_name" type="string" > sea_surface_temperature </variable>
+     <variable name="description" type="string" > temperature of liquid ocean.  Note that the correct standard_name for this variable is "sea_surface_temperature", not "surface_temperature", but this was discovered too late to correct.  To maintain consistency across CMIP5 models, the wrong standard_name will continue to be used. </variable>
+     <variable name="long_name" type="string" > Sea Surface Temperature </variable>
+     <variable name="history" type="string" > none </variable>
+     <variable name="units" type="string" > degC </variable>
+     <variable name="missing_values" type="string" > 1e+20 </variable>
+     <variable name="cell_measures" type="string" > area: areacello </variable>
+     </field>
+</field_group >
+</file>
+
+ <file name="zos_Omon_CNRM-CM6-1_Forced-Atmos-Land_None-r1i1p1f1_gn_%start_date%_%end_date%" output_freq="1mo"   append="true" split_freq="200y"  time_units="days" time_counter_name="time" time_stamp_name="creation_date"  time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" >
+  <variable name="project_id"  type="string" > CMIP6/CMIP   </variable>
+  <variable name="activity_id"  type="string" > CMIP   </variable>
+  <variable name="contact"  type="string" > contact.cmip@cnrm.fr   </variable>
+  <variable name="Conventions"  type="string" > CF-1.7 CMIP-6.0   </variable>
+  <variable name="data_specs_version"  type="string" > 01.00.04   </variable>
+  <variable name="experiment"  type="string" > NOT-SET   </variable>
+  <variable name="experiment_id"  type="string" > Forced-Atmos-Land   </variable>
+  <variable name="external_variables"  type="string" > areacello   </variable>
+  <variable name="forcing_index"  type="string" > 1   </variable>
+  <variable name="frequency"  type="string" > mon   </variable>
+  <variable name="further_info_url"  type="string" > http://furtherinfo.es-doc.org/CMIP6.CNRM-CERFACS.CNRM-CM6-1.Forced-Atmos-Land.None.r1i1p1f1   </variable>
+  <variable name="grid"  type="string" > native ocean tri-polar grid with 105 k ocean cells   </variable>
+  <variable name="grid_label"  type="string" > gn   </variable>
+  <variable name="nominal_resolution"  type="string" > 100km   </variable>
+  <variable name="history"  type="string" > None   </variable>
+  <variable name="initialization_index"  type="string" > 1   </variable>
+  <variable name="institution_id"  type="string" > CNRM-CERFACS   </variable>
+  <variable name="institution"  type="string" > CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31100, France)   </variable>
+  <variable name="license"  type="string" > CMIP6 model data produced by CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31100, France) is licensed under a Creative Commons Attribution-[NonCommercial-]ShareAlike 4.0 International License (https://creativecommons.org/licenses/).  Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment.  Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file)[ and at http://www.umr-cnrm.fr/cmip6/]. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law.   </variable>
+  <variable name="mip_era"  type="string" > CMIP6   </variable>
+  <variable name="parent_activity_id"  type="string" > CMIP   </variable>
+  <variable name="parent_experiment_id"  type="string" > piControl   </variable>
+  <variable name="parent_mip_era"  type="string" > CMIP6   </variable>
+  <variable name="parent_source_id"  type="string" > CNRM-CM6-1   </variable>
+  <variable name="parent_time_units"  type="string" > days since 1850-01-01 00:00:00   </variable>
+  <variable name="parent_variant_label"  type="string" > r1i1p1f1   </variable>
+  <variable name="branch_method"  type="string" > standard   </variable>
+  <variable name="branch_time_in_child"  type="string" > 0.0D0   </variable>
+  <variable name="branch_time_in_parent"  type="string" > 365.0D0   </variable>
+  <variable name="physics_index"  type="string" > 1   </variable>
+  <variable name="product"  type="string" > output   </variable>
+  <variable name="realization_index"  type="string" > 1   </variable>
+  <variable name="realm"  type="string" > ocean   </variable>
+  <variable name="references"  type="string" > A character string containing a list of published or web-based references that describe the data or the methods used to produce it.Typically, the user should provide references describing the modelformulation here   </variable>
+  <variable name="source"  type="string" > CNRM-CM6-1   </variable>
+  <variable name="source_id"  type="string" > CNRM-CM6-1   </variable>
+  <variable name="source_type"  type="string" > AOGCM   </variable>
+  <variable name="sub_experiment_id"  type="string" > None   </variable>
+  <variable name="sub_experiment"  type="string" > None   </variable>
+  <variable name="table_id"  type="string" > Omon   </variable>
+  <variable name="title"  type="string" > CNRM-CM6-1 model output prepared for CMIP6 / CMIP Forced-Atmos-Land   </variable>
+  <variable name="variable_id"  type="string" > zos   </variable>
+  <variable name="variant_info"  type="string" > Start date chosen so that variant r1i1p1f1 has the better fit with Krakatoa impact on tos   </variable>
+  <variable name="variant_label"  type="string" > r1i1p1f1   </variable>
+<field_group  expr="@this" >
+  <field field_ref="CMIP6_zos" name="zos" ts_enabled="true"  operation="average" detect_missing_value="False" default_value="1.e+20" cell_methods="time: mean" cell_methods_mode="overwrite">
+     <variable name="standard_name" type="string" > sea_surface_height_above_geoid </variable>
+     <variable name="description" type="string" > This is the dynamic sea level, so should have zero global area mean. It should not include inverse barometer depressions from sea ice. </variable>
+     <variable name="long_name" type="string" > Sea Surface Height Above Geoid </variable>
+     <variable name="history" type="string" > none </variable>
+     <variable name="units" type="string" > m </variable>
+     <variable name="missing_values" type="string" > 1e+20 </variable>
+     <variable name="cell_measures" type="string" > area: areacello </variable>
      </field>
 </field_group >
 </file>

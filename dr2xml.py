@@ -55,7 +55,8 @@ prog_path = posixpath.dirname(__file__)
 
 # Local packages
 # mpmoine_zoom_modif: import simple_Dim
-from vars import simple_CMORvar, simple_Dim, process_homeVars, complement_svar_using_cmorvar
+from vars import simple_CMORvar, simple_Dim, process_homeVars, complement_svar_using_cmorvar, \
+                multi_plev_suffixes, single_plev_suffixes
 from grids import decide_for_grids, grid2resol, grid2desc, field_size,\
     split_frequency_for_variable, timesteps_per_freq_and_duration, dr2xml_error
 from Xparse import init_context, id2grid
@@ -920,7 +921,9 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
     #--------------------------------------------------------------------
     svars_full_list=[]
     for svl in svars_per_table.values(): svars_full_list.extend(svl)
-    union_axis_defs=create_xios_axis_for_plevs_unions(svars_full_list,lset["ping_variables_prefix"])
+    union_axis_defs=create_xios_axis_for_plevs_unions(svars_full_list,
+                                    multi_plev_suffixes.union(single_plev_suffixes),
+                                    lset["ping_variables_prefix"])
     #
     #--------------------------------------------------------------------
     # Read ping_file defined variables
@@ -1026,7 +1029,7 @@ def create_axis_def(sdim,prefix):
         if not sdim.positive in [ None, "" ] :
             rep+='positive="%s" '%sdim.positive
         if n_glo>1 :
-            # Case of a non-degenerated dimension (not a singleton)
+            # Case of a non-degenerated vertical dimension (not a singleton)
             rep+='n_glo="%g" '%n_glo
             # mpmoine_future_modif: je supprime le -1 pour n_glo car regle avec rstrip/split()
             rep+='value="(0,%g) [%s]"'%(n_glo,sdim.requested)
@@ -1034,7 +1037,7 @@ def create_axis_def(sdim,prefix):
             if n_glo!=1: 
                 print "Warning: axis is sigleton but has",n_glo,"values"
                 return None
-            # Singleton case
+            # Singleton case (degenerated vertical dimension)
             rep+='n_glo=%g '%n_glo
             rep+='value=(0,0)[%s]"'%sdim.value
         rep+=' name="%s"'%sdim.out_name
@@ -1057,7 +1060,7 @@ def create_axis_def(sdim,prefix):
         return rep
 
 # mpmoine_zoom_modif: nouvelle fonction create_xios_axis_for_plevs_unions
-def create_xios_axis_for_plevs_unions(svars,prefix,printout=False): 
+def create_xios_axis_for_plevs_unions(svars,plev_sfxs,prefix,printout=False): 
     """
     Objective of this function is to optimize Xios vertical interpolation requested in pressure levels. 
     Process in 2 steps:
@@ -1082,7 +1085,8 @@ def create_xios_axis_for_plevs_unions(svars,prefix,printout=False):
         if not sv.modeling_realm: print "Warning: no modeling_realm associated to:", \
                                             sv.label, sv.mipTable, sv.mip_era
         for sd in sv.sdims.values():
-            if sd.label.startswith("p"): # couvre les dimensions verticales de type 'plev7h' ou 'p850'
+            # mpmoine_note: couvre les dimensions verticales de type 'plev7h' ou 'p850'
+            if sd.label.startswith("p") and any(sd.label.endswith(s) for s in plev_sfxs): 
                 lwps=sv.label_without_psuffix
                 if lwps:
                     sv.sdims[sd.label].is_zoom_of="union_plevs_"+lwps
@@ -1103,7 +1107,6 @@ def create_xios_axis_for_plevs_unions(svars,prefix,printout=False):
                 else:
                     print "Warning: dim is pressure but label_without_psuffix=", lwps, \
                             "for",sv.label, sv.mipTable, sv.mip_era
-    #-for k,v in dict_plevs.items(): print k,v
     
     # Second, create xios axis for union of plevs
     for lwps in dict_plevs.keys():

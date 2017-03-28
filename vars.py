@@ -54,8 +54,12 @@ class simple_Dim(object):
         self.is_zoom_of   = False
 
 # mpmoine_future_modif: liste des suffixes de noms de variables reperant un ou plusieurs niveaux pression
+# List of multi and single pressure level suffixes for which we want the union/zoom axis mecanism turned on
+# For not using union/zoom, define these 2 lists as empty sets
 multi_plev_suffixes=set(["10","19","23","27","39","3","3h","4","7c","7h","8","12"])
+#multi_plev_suffixes=set()
 single_plev_suffixes=set(["1000","200","220","500","560","700","840","850","100"])
+#single_plev_suffixes=set()
 
 ambiguous_mipvarnames=None
 
