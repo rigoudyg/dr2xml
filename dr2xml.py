@@ -1038,8 +1038,8 @@ def create_axis_def(sdim,prefix):
                 print "Warning: axis is sigleton but has",n_glo,"values"
                 return None
             # Singleton case (degenerated vertical dimension)
-            rep+='n_glo=%g '%n_glo
-            rep+='value=(0,0)[%s]"'%sdim.value
+            rep+='n_glo="%g" '%n_glo
+            rep+='value="(0,0)[%s]"'%sdim.value
         rep+=' name="%s"'%sdim.out_name
         rep+=' standard_name="%s"'%sdim.stdname
         rep+=' long_name="%s"'%sdim.long_name
@@ -1055,7 +1055,7 @@ def create_axis_def(sdim,prefix):
         # Axis is subset of another, write it as a zoom_axis
         rep='<axis id="%s"'%sdim.zoom_label
         rep+=' axis_ref="%s">\n'%sdim.is_zoom_of
-        rep+='\t<zoom_axis begin "%g" n="%g"/>\n'%(glo_list_num[-1],n_glo)
+        rep+='\t<zoom_axis begin="%g" n="%g"/>\n'%(glo_list_num[-1],n_glo)
         rep+='\t</axis>'
         return rep
 
@@ -1126,11 +1126,14 @@ def create_xios_axis_for_plevs_unions(svars,plev_sfxs,prefix,printout=False):
                     if sdsv.positive:  sdim_union.positive=sdsv.positive
                     if sdsv.out_name:  sdim_union.out_name=sdsv.out_name
                     if sdsv.units:     sdim_union.units=sdsv.units
-                    # case of multi pressure levels
-                    plev_values=set(sdsv.requested.split())
-                    if not plev_values:
+                    if sdsv.requested: 
+                        # case of multi pressure levels
+                        plev_values=set(sdsv.requested.split())
+                    elif sdsv.value:
                         # case of single pressure level
                         plev_values=set(sdsv.value.split())
+                    else:
+                        print "Warning: No requested nor value found for",svar.label,"with vertical dimesion",plev
                     plevs_union=plevs_union.union(plev_values)
                     if printout: print "    -- on",plev,":",plev_values 
                 if printout: print "       *",svar.label,"(",svar.mipTable,")"
@@ -1139,7 +1142,8 @@ def create_xios_axis_for_plevs_unions(svars,plev_sfxs,prefix,printout=False):
         for lev in list_plevs_union: plevs_union_xios+=" "+lev
         if printout: print ">>> XIOS plevs union:", plevs_union_xios
         sdim_union.label="union_plevs_"+lwps
-        sdim_union.requested=plevs_union_xios
+        if len(list_plevs_union)>1: sdim_union.requested=plevs_union_xios
+        if len(list_plevs_union)==1: sdim_union.value=plevs_union_xios
         axis_def=create_axis_def(sdim_union,prefix)
         union_axis_defs.update({sdim_union.label:axis_def})
     return union_axis_defs
