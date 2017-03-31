@@ -1,3 +1,4 @@
+# -*- coding: iso-8859-15 -*-
 print_DR_errors=False
 
 #A class for unifying CMOR vars and home variables
@@ -18,7 +19,7 @@ class simple_CMORvar(object):
         self.long_name      = None # Useful for CMORvar and updated HOMEvar.
         self.struct         = None
         self.cell_methods   = None
-        #self.cell_measures  = None
+        self.cell_measures  = None
         self.spatial_shp    = None # Only useful for HOMEvar.
         self.temporal_shp   = None # Only useful for HOMEvar.
         self.experiment     = None # Only useful for HOMEvar.
@@ -211,14 +212,20 @@ def complement_svar_using_cmorvar(svar,cmvar,dq):
     [svar.spatial_shp,svar.temporal_shp]=get_SpatialAndTemporal_Shapes(cmvar,dq)
     mipvar = dq.inx.uid[cmvar.vid]
     svar.label = cmvar.label
-    svar.label_without_area=mipvar.label
-    svar.long_name = mipvar.title
+    try :
+        svar.label_without_area=mipvar.label
+        svar.long_name = mipvar.title
+    except:
+        print "DR error : no mipvar for CMORvar"+`cmvar`
     svar.modeling_realm = cmvar.modeling_realm
     if mipvar.description :
         svar.description = mipvar.description
     else:
         svar.description = mipvar.title
-    svar.stdunits = mipvar.units
+    try :
+        svar.stdunits = mipvar.units
+    except:
+        print "DR error : mipvar "+`mipvar`+" has no units for cmorvar "+`cmvar`
     try :
         st=dq.inx.uid[cmvar.stid]
         #print st.label
@@ -227,7 +234,18 @@ def complement_svar_using_cmorvar(svar,cmvar,dq):
             svar.cell_methods=dq.inx.uid[st.cmid].cell_methods
         except:
             if print_DR_errors : print "Issue with cell_method for "+st.label
-            svar.cell_methods=None
+            # mpmoine_last_modif: il arrive que cell_methods soit une chaîne vide et
+            # cela ne peut pas être détécté par la règle d'exception
+        if svar.cell_methods=='': svar.cell_methods="NOT-SET"
+
+        try :
+            svar.cell_measures=dq.inx.uid[cmvar.stid].cell_measures
+            # mpmoine_last_modif: il arrive que cell_methods soit une chaîne vide et
+            # cela ne peut pas être détécté par la règle d'exception
+            if svar.cell_measures=='': svar.cell_measures="NOT-SET"
+        except:
+            if print_DR_errors : print "Issue with cell_measures for "+`cmvar`
+            svar.cell_measures="NOT-SET" #None
     except :
         if print_DR_errors :
             print "Issue with st.cmid in table % 10s for %s"%(cmvar.mipTable,cmvar.label)

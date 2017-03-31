@@ -44,8 +44,10 @@ import dreq
 ####################################
 # End of pre-requisites
 ####################################
+version="0.10.1"
 
 from datetime import datetime
+import re
 import json
 import collections
 import sys,os
@@ -66,6 +68,8 @@ print_DR_errors=False
 
 dq = dreq.loadDreq()
 print dq.version
+
+context_index=None
 
 """ An example/template  of settings for a lab and a model"""
 example_lab_and_model_settings={
@@ -191,8 +195,8 @@ example_simulation_settings={
     #'parent_source_id'     : 'CNRM-CM5.1' # only in special cases, where parent model 
                                            # is not the same model
     #
-    "sub_experiment_id"    : "none", # Optional, default is 'none'; example : s1960. 
-    "sub_experiment"       : "none", # Optional, default in 'none'
+    "sub_experiment_id"    : "None", # Optional, default is 'none'; example : s1960. 
+    "sub_experiment"       : "None", # Optional, default in 'none'
     "history"              : "no_history", #Used when a simulation is re-run, an output file is modified ...
     # A per-variable dict of comments which are specific to this simulation. It will replace  
     # the all-simulation comment
@@ -207,8 +211,8 @@ example_simulation_settings={
                 
 def RequestItem_applies_for_exp_and_year(ri,experiment,year,debug=False):
     """ 
-    Returns True if requestItem 'ri' in data request 'dq' is relevant for a 
-    given 'experiment' and 'year'. Toggle 'debug' allow some printouts 
+    Returns True if requestItem 'ri' in data request 'dq' (global) is relevant 
+    for a given 'experiment' and 'year'. Toggle 'debug' allow some printouts 
     """
     # Acces experiment or experiment group for the RequestItem
     if (debug) : print "Checking ","% 15s"%ri.label,
@@ -328,7 +332,7 @@ def select_CMORvars_for_lab(lset, experiment_id=None, year=None,
             if (v,rl.grid) not in miprl_vars_grids :
                 miprl_vars_grids.append((v,rl.grid))
     if printout :
-        print 'Number of CMOR variables for these requestLinks is :%s'%len(miprl_vars_grids)
+        print 'Number of (CMOR variable, grid) pairs for these requestLinks is :%s'%len(miprl_vars_grids)
     # 
     filtered_vars=[]
     for (v,g) in miprl_vars_grids : 
@@ -337,22 +341,34 @@ def select_CMORvars_for_lab(lset, experiment_id=None, year=None,
         if mipvar.label not in lset['excluded_vars'] : 
             filtered_vars.append((v,g))
     if printout :
-        print 'Number of CMOR variables once filtered by excluded vars is : %s'%len(filtered_vars)
+        print 'Number once filtered by excluded vars is : %s'%len(filtered_vars)
+
+    # Filter the list of grids requested for each variable based on lab policy
+    d=dict()
+    for (v,g) in filtered_vars :
+        if v not in d : d[v]=set()
+        d[v].add(g)
+    if printout :
+        print 'Number of distinct CMOR variables (whatever the grid) : %d'%len(d)
+    for v in d:
+        d[v]=decide_for_grids(v,d[v],lset,dq)
+        if False and printout and len(d[v]) > 1 :
+            print "\tVariable %s will be processed with multiple grids : %s"%(dq.inx.uid[v].label,`d[v]`)
     #
     # Print a count of distinct var labels
     if printout :
         varlabels=set()
-        for (v,g) in filtered_vars : varlabels.add(dq.inx.uid[v].label)
-        print '\nNumber of variables with distinct labels is :',len(varlabels)
+        for v in d : varlabels.add(dq.inx.uid[v].label)
+        print 'Number of distinct var labels is :',len(varlabels)
 
     # Translate CMORvars to a list of simplified CMORvar objects
     simplified_vars = []
-    for (v,grid) in filtered_vars :
+    for v in d :
         svar = simple_CMORvar()
         cmvar = dq.inx.uid[v]
         complement_svar_using_cmorvar(svar,cmvar,dq)
         svar.Priority=analyze_priority(cmvar,lset['mips'])
-        svar.grids=decide_for_grids(svar,grid,lset)
+        svar.grids=d[v]
         simplified_vars.append(svar)
     print '\nNumber of simplified vars is :',len(simplified_vars)
     return simplified_vars
@@ -373,7 +389,7 @@ def analyze_priority(cmvar,lmips):
 
 
 def write_xios_file_def(cmv,table, lset,sset, out,cvspath,field_defs,axis_defs,
-                        domain_defs,dummies,skipped_vars,
+                        grid_defs, domain_defs,dummies,skipped_vars,
                         prefix,context,grid,pingvars=None) :
     """ 
     Generate an XIOS file_def entry in out for :
@@ -448,7 +464,7 @@ def write_xios_file_def(cmv,table, lset,sset, out,cvspath,field_defs,axis_defs,
     #        
     end_field_defs=dict()
     create_xios_field_ref(cmv,alias,table,lset,sset,end_field_defs,
-        field_defs,axis_defs, domain_defs,dummies,context,remap_domain,pingvars)
+                          field_defs,axis_defs, grid_defs, domain_defs,dummies,context,remap_domain,pingvars)
     if len(end_field_defs.keys())==0 :
         # TBD : restore error_message
         #raise dr2xml_error("No field ref for %s in %s"%(cmv.label,table))
@@ -503,9 +519,11 @@ def write_xios_file_def(cmv,table, lset,sset, out,cvspath,field_defs,axis_defs,
         try:
             exp_entry=CMIP6_experiments[sset['experiment_id']]
             experiment=exp_entry['experiment']
+            description=exp_entry['description']
         except :
             raise(dr2xml_error("Issue getting experiment description for %20s"\
                                %sset['experiment_id']))
+    wr('description',description)
     wr('experiment',experiment)
     wr('experiment_id',experiment_id)
     # 
@@ -616,18 +634,18 @@ def write_xios_file_def(cmv,table, lset,sset, out,cvspath,field_defs,axis_defs,
     # Create a field group for each shape
     for shape in end_field_defs :
         dom="" ;
-        if shape : dom='domain_ref="%s"'%shape
+        if shape : dom='grid_ref="%s"'%shape
         out.write('<field_group %s expr="@this" >\n'%dom)
         for entry in end_field_defs[shape] : out.write(entry)
         out.write('</field_group >\n')
     out.write('</file>\n\n')
 
 def create_xios_field_ref(sv,alias,table,lset,sset,end_field_defs,
-     field_defs,axis_defs,domain_defs,dummies,context,remap_domain,pingvars) :
+                          field_defs,axis_defs,grid_defs, domain_defs,dummies,context,remap_domain,pingvars) :
     """
     Create a field_ref for a simplified variable object sv (with
     lab prefix for the variable name) and store it in end_field_defs
-    under a key=shape
+    under a key=grid
     
     Add field definitions for intermediate variables in dic field_defs
     Add axis  definitions for interpolations in dic axis_defs
@@ -658,7 +676,6 @@ def create_xios_field_ref(sv,alias,table,lset,sset,end_field_defs,
     # TBD Should ensure that various additionnal dims are duly documented by model or pingfile (e.g. tau)
     if ssh[0:4] in ['XY-H','XY-P'] or ssh[0:3] == 'Y-P' :
         # TBD : for now, do not interpolate vertically
-        return
         dimids=dq.inx.uid[sv.struct.spid].dimids
         for dimid in dimids :
             d=dq.inx.uid[dimid]
@@ -667,9 +684,17 @@ def create_xios_field_ref(sv,alias,table,lset,sset,end_field_defs,
                 if not furthervar in pingvars :
                     # Construct an axis for interpolating to this dimension
                     axis_defs[d.label]=create_axis_def(d,lset["ping_variables_prefix"],field_defs)
-                    # Construct a field def for the interpolated variable
-                    field_defs[furthervar]='<field id="%-25s field_ref="%-25s axis_ref="%-10s/>'\
-                        %(furthervar+'"',nextvar+'"',d.label+'"')
+                    # Construct a grid using variable's grid and new axis
+                    src_grid=id2grid(nextvar,context_index)
+                    src_grid_id=src_grid.attrib ['id']
+                    src_grid_string=ET.tostring(src_grid)
+                    target_grid_id=src_grid_id+"_"+d.label
+                    target_grid_string=re.sub('axis_ref= *.([\w_])*.','axis_ref="%s"'%d.label,src_grid_string)
+                    target_grid_string=re.sub('grid id= *.([\w_])*.','grid id="%s"'%target_grid_id,target_grid_string)
+                    grid_defs[target_grid_id]=target_grid_string
+                    # Construct a field def for the re-mapped variable
+                    field_defs[furthervar]='<field id="%-25s field_ref="%-25s grid_ref="%-10s/>'\
+                        %(furthervar+'"',nextvar+'"',target_grid_id+'"')
                     #%(furthervar+'"',nextvar+'"',prefix+d.label+'"')
                 nextvar=furthervar
                 #TBD what to do for singleton dimension ?
@@ -678,21 +703,22 @@ def create_xios_field_ref(sv,alias,table,lset,sset,end_field_defs,
         sv.cell_methods,sv.label,table)
     # Horizontal operations. Can include horiz re-gridding specification
     # Compute domain name, define it if needed
-    domain_ref=None
+    grid_ref=None
     if ssh[0:2] == 'Y-' : #zonal mean and atm zonal mean on pressure levels
         # TBD should remap before zona mean
-        domain_ref="zonal_mean"
-        domain_defs[domain_ref]='<domain id="%s"/>'%domain_ref
+        grid_ref="zonal_mean"
+        grid_defs[grid_ref]='<grid id="%s"/>'%grid_ref
     elif ssh[0:2] == 'S-' : #COSP sites; cas S-na, S-A, S-AH
-        domain_ref="COSP_sites"
-        domain_defs[domain_ref]='<domain id="%s"/>'%domain_ref
+        grid_ref="COSP_sites_grid"
+        # Assume that grid COSP_sites is defined in ping_file
+        #grid_defs[grid_ref]='<grid id="%s"/>'%grid_ref
     elif ssh[0:2] == 'L-' :
-        domain_ref="COSP_curtain"
-        domain_defs[domain_ref]='<domain id="%s"/>'%domain_ref
+        grid_ref="COSP_curtain_grid"
+        grid_defs[grid_ref]='<grid id="%s"/>'%grid_ref
     elif ssh == 'TR-na' or ssh == 'TRS-na' : #transects,   oce or SI
         pass
     elif ssh[0:3] == 'XY-'  : # includes 'XY-AH' : model half-levels
-        if remap_domain : domain_ref=remap_domain
+        if remap_domain : grid_ref=remap_domain
     elif ssh[0:3] == 'YB-'  : #basin zonal mean or section
         pass
     elif ssh      == 'na-na'  : # global means or constants
@@ -733,13 +759,13 @@ def create_xios_field_ref(sv,alias,table,lset,sset,end_field_defs,
         rep+=wrv("positive",sv.positive) 
     rep+=wrv('history','none')
     rep+=wrv('units',sv.stdunits)
-    rep+=wrv('cell_measures',sv.cell_methods)
+    rep+=wrv('cell_methods',sv.cell_methods)
+    rep+=wrv("cell_measures",sv.cell_measures)
+    # rep+=wrv('missing_value','1.e+20')
     rep+='     </field>\n'
     #
-    shape=domain_ref
-    #shape=sv.spatial_shp
-    if shape not in end_field_defs : end_field_defs[shape]=[]
-    end_field_defs[shape].append(rep)
+    if grid_ref not in end_field_defs : end_field_defs[grid_ref]=[]
+    end_field_defs[grid_ref].append(rep)
 
 def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
                        dummies='include',printout=False,dirname="./",prefix="") :
@@ -763,8 +789,9 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
     """
     #
     # Parse XIOS setting files for the context
-    #global xcontext
-    #xcontext=init_context(context)
+    global context_index
+    context_index=init_context(context)
+
     # Extract CMOR variables for the experiment and year and lab settings
     mip_vars_list=select_CMORvars_for_lab(lset, sset['experiment_id'], \
                                             year,printout=printout)
@@ -777,7 +804,12 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
     for svar in mip_vars_list :
         if svar.modeling_realm not in svars_per_realm.keys() :
             svars_per_realm[svar.modeling_realm]=[]
-        svars_per_realm[svar.modeling_realm].append(svar)
+        if svar not in svars_per_realm[svar.modeling_realm]:
+            svars_per_realm[svar.modeling_realm].append(svar)
+        else:
+            old=svars_per_realm[svar.modeling_realm][0]
+            print "Duplicate svar %s %s %s %s"%(old.label,old.grid,svar.label,svar.grid)
+            pass
     if printout :
         print "\nRealms for these CMORvars :",svars_per_realm.keys()
     #
@@ -837,6 +869,7 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
             else:
                 print "Forbidden option for dummies : "+dummies
                 return
+
     #
     # Write XIOS file_def
     #filename=dirname+"filedefs_%s.xml"%context
@@ -845,6 +878,7 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
         out.write('<context id="%s"> \n'%context)
         field_defs=dict()
         axis_defs=dict()
+        grid_defs=dict()
         domain_defs=dict()
         #for table in ['day'] :    
         out.write('\n<file_definition type="one_file" enabled="true" > \n')
@@ -855,7 +889,7 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
                     count[svar.label]=svar
                     for grid in svar.grids :
                         write_xios_file_def(svar,table, lset,sset,out,cvs_path,
-                                field_defs,axis_defs,domain_defs,dummies,
+                                            field_defs,axis_defs,grid_defs,domain_defs,dummies,
                                 skipped_vars,prefix,context,grid,pingvars)
                 else :
                     pass
@@ -873,6 +907,9 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
         out.write('\n<domain_definition> \n')
         for obj in domain_defs: out.write("\t"+domain_defs[obj]+"\n")
         out.write('</domain_definition> \n')
+        out.write('\n<grid_definition> \n')
+        for obj in grid_defs: out.write("\t"+grid_defs[obj]+"\n")
+        out.write('</grid_definition> \n')
         out.write('</context> \n')
     if printout :
         print "\nfile_def written as %s"%filename
@@ -952,7 +989,7 @@ def analyze_cell_time_method(cm,label,table):
         detect_missing=True
     elif "time: mean where sea"  in cm :#[amnesi-tmn]: 
         #Area Mean of Ext. Prop. on Sea Ice : pas utilisee
-        print "time: mean where sea is not supposed to be used" 
+        print "time: mean where sea is not supposed to be used (%s,%s)"%(label,table)
     elif "time: mean where sea_ice" in cm :
         #[amnsi-twm]: Weighted Time Mean on Sea-ice (presque que des 
         #variables en SImon, sauf sispeed et sithick en SIday)
@@ -1012,7 +1049,7 @@ def pingFileForRealmsList(context,lrealms,svars,dummy="field_atm",
     
     If EXACT is True, the match between variable realm string and one
     of the realm string in the list must be exact. Otherwise, the
-    variable realm must be included in (or include) of the realm list
+    variable realm must be included in (or include) one of the realm list
     strings
 
     COMMENTS, if not False nor "", will drive the writing of variable
@@ -1048,8 +1085,9 @@ def pingFileForRealmsList(context,lrealms,svars,dummy="field_atm",
             if any([ v.modeling_realm == r for r in lrealms]) : 
                 lvars.append(v)
         else:
-            if any([ v.modeling_realm in r or r in v.modeling_realm
-                     for r in lrealms]) : 
+            var_realms=v.modeling_realm.split(" ")
+            if any([ v.modeling_realm == r or r in var_realms
+                     for r in lrealms]) :
                 lvars.append(v)
     #if lset["use_area_suffix"] :
     #    lvars.sort(key=lambda x:x.label_with_area)
@@ -1068,6 +1106,9 @@ def pingFileForRealmsList(context,lrealms,svars,dummy="field_atm",
     #
     specials=read_special_fields_defs(lrealms)
     with open(filename,"w") as fp:
+        fp.write('<!-- Ping files generated by dr2xml %s using Data Request %s -->\n'%(version,dq.version))
+        fp.write('<!-- lrealms= %s -->\n'%`lrealms`)
+        fp.write('<!-- exact= %s -->\n'%`exact`)
         fp.write('<context id="%s">\n'%context)
         fp.write("<field_definition>\n")
         if exact : 
@@ -1132,10 +1173,10 @@ def copy_obj_from_DX_file(fp,obj,prefix,lrealms) :
                     fp.write("</%s_definition>\n"%obj)
             else:
                 pass
-                #print " no file  "
+                print " no file :%s "%defs
 
 def DX_defs_filename(obj,realm):
-    return prog_path+"inputs/DX_%s_defs_%s.xml"%(obj,realm)
+    return prog_path+"/inputs/DX_%s_defs_%s.xml"%(obj,realm)
 
 def read_defs(filename, tag='field', attrib=None, printout=False) :
     """ 
@@ -1207,7 +1248,6 @@ def highest_rank(mipvarlabel):
     for  cvar in dq.coll['CMORvar'].items : 
         v=dq.inx.uid[cvar.vid]
         if v.label==mipvarlabel:
-            shapes=[]
             try :
                 st=dq.inx.uid[cvar.stid]
                 try :
@@ -1223,7 +1263,8 @@ def highest_rank(mipvarlabel):
                 print "DR Error: issue with stid for "+v.label+cvar.mipTableSection
                 shape="?st"
             shapes.append(shape)
-    if not shapes : shape="??"
+    #if not shapes : shape="??"
+    if not shapes : shape="XY"
     elif any([ "XY-A"  in s for s in shapes]) : shape="XYA"
     elif any([ "XY-O" in s for s in shapes]) : shape="XYO"
     elif any([ "XY-AH" in s for s in shapes]) : shape="XYAh" # Zhalf
@@ -1248,9 +1289,10 @@ def highest_rank(mipvarlabel):
     elif any([ "TR-na" in s for s in shapes]) : shape="TR"
     elif any([ "L-na" in s for s in shapes]) :  shape="COSPcurtain"
     elif any([ "L-H40" in s for s in shapes]) : shape="COSPcurtainH40"
-    elif any([ "S-na" in s for s in shapes]) :  shape="COSPprofile"
+    elif any([ "S-na" in s for s in shapes]) :  shape="XY" # fine once remapped
     elif any([ "na-na" in s for s in shapes]) : shape="0d" # analyser realm
-    else : shape="??"
+    #else : shape="??"
+    else : shape="XY"
 
     return shape
 

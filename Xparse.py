@@ -7,7 +7,7 @@
 #   <opaque>    context = init_context(context_name,printout=False)
 #   <ET object>    grid = d2grid(field_id,context,printout=False)
 
-import os, re
+import os, os.path, re
 import xml.etree.ElementTree as ET
 
 # Define for each object kind those attributes useful for grid inheritance 
@@ -23,7 +23,7 @@ attributes['axis']=['axis_ref']
 #attributes['grid_definition']=[]  #attributes['calendar']=[]
 
 
-def read_src(elt,printout=False, level=0) :
+def read_src(elt,printout=False, level=0, dont_read=[]) :
     """
     Recursively reads the subfiles indicated by tag 'src' in childs of ELT
     """
@@ -31,6 +31,12 @@ def read_src(elt,printout=False, level=0) :
     for child in elt :
         if 'src' in child.attrib :
             filen=child.attrib['src']
+            skip=False
+            for prefix in dont_read :
+                if os.path.basename(filen)[0:len(prefix)]==prefix :
+                    print "Skipping %s"%filen
+                    skip=True
+            if skip : continue
             et=ET.parse(filen).getroot()
             if printout :
                 print level*"\t"+"Reading %s, %s=%s"%(filen,et.tag,gattrib(et,'id','no_id'))
@@ -41,7 +47,7 @@ def read_src(elt,printout=False, level=0) :
                 child.append(el)
     for child in elt :
         #print level*"\t"+"Recursing on %s %s"%(child.tag,gattrib(child,'id','no_id'))
-        read_src(child,printout,level+1)
+        read_src(child,printout,level+1,dont_read)
 
 def gattrib(e,attrib_name,default=None):
     if attrib_name in e.attrib : return e.attrib[attrib_name]
@@ -134,7 +140,7 @@ def make_index(elt,index=None,printout=False,level=0):
                 # Update indexed object with current attributes
                 for a in child.attrib : index[the_id].attrib[a]=child.attrib[a]
                 # Add child chidlren to indexed objects
-                for sub in child :  indexed[the_id].append(sub)
+                for sub in child :  index[the_id].append(sub)
             else:
                 if printout : print " init index"
                 index[the_id]=child
@@ -201,7 +207,7 @@ def init_context(context_id,printout=False):
                 return context
     
     rootel=ET.parse("iodef.xml").getroot()
-    read_src(rootel)
+    read_src(rootel,printout=printout,dont_read=["dr2xml_"])
     merge_sons(rootel,printout)
     rootel=select_context(rootel,context_id)
     if rootel is not None :

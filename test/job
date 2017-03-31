@@ -18,7 +18,7 @@ CLIENT=$BINS/test_grid.exe
 SERVER=$BINS/xios_server.exe
 
 # MENAGE ET MISE A JOUR DES PARAMETRES
-rm -f *.nc  outputs/*nc
+rm -f   outputs/*nc
 
 sed -i \
     -e "s:^ *ni_glo *=.*:ni_glo=${ni_glo}:" \

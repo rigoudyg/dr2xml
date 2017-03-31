@@ -23,6 +23,7 @@ PROGRAM test_grid
   DOUBLE PRECISION,ALLOCATABLE :: lon(:,:),lat(:,:),lonvalue(:,:)
   DOUBLE PRECISION,ALLOCATABLE :: bounds_lon(:,:,:),bounds_lat(:,:,:) 
   DOUBLE PRECISION,ALLOCATABLE :: field_atm_2D(:,:),field_atm_3D(:,:,:),field_srf_2D(:),field_srf_3D(:,:)
+  DOUBLE PRECISION,ALLOCATABLE :: field_atm_2D_miss(:,:)
   DOUBLE PRECISION,ALLOCATABLE :: field_oce_2D(:,:),field_oce_3D(:,:,:)
   INTEGER, ALLOCATABLE :: kindex(:)
 
@@ -120,9 +121,11 @@ PROGRAM test_grid
 ! Contexte ATM
 !###########################################################################
  ALLOCATE(field_atm_2D(0:ni+1,-1:nj+2),field_atm_3D(0:ni+1,-1:nj+2,llm))
+ ALLOCATE(field_atm_2D_miss(0:ni+1,-1:nj+2))
  ALLOCATE(pressure(0:ni+1,-1:nj+2,llm))
  ALLOCATE(height(0:ni+1,-1:nj+2,llm))
   field_atm_2D(1:ni,1:nj)=field_A_glo(ibegin+1:iend+1,jbegin+1:jend+1,1)
+  field_atm_2D_miss(1:ni,1:nj)=field_A_glo(ibegin+1:iend+1,jbegin+1:jend+1,1)
   field_atm_3D(1:ni,1:nj,:)=field_A_glo(ibegin+1:iend+1,jbegin+1:jend+1,:)
   pressure(1:ni,1:nj,:)=pressure_glo(ibegin+1:iend+1,jbegin+1:jend+1,:)
   height(1:ni,1:nj,:)=height_glo(ibegin+1:iend+1,jbegin+1:jend+1,:)
@@ -193,7 +196,7 @@ PROGRAM test_grid
 !!! Fin de la definition du contexte SRF
 
   CALL xios_close_context_definition()
-  write(0,*) 'srf context def closed' ; call flush(0)
+  !write(0,*) 'srf context def closed' ; call flush(0)
 
 !###########################################################################
 ! Contexte OCE
@@ -236,7 +239,7 @@ PROGRAM test_grid
 
 !!! On donne la valeur du champ atm
 
-      print *,'sending field_atm_2d at timestep',ts
+      !print *,'sending field_atm_2d at timestep',ts
       CALL xios_send_field("field_atm_scalar",field_atm_2D(1,1)+ts)
       CALL xios_send_field("field_atm_1D",field_atm_3D(1,1,:)+ts)
       CALL xios_send_field("field_atm_2D",field_atm_2D+ts)
@@ -246,6 +249,11 @@ PROGRAM test_grid
       if (mod(ts,2)==0) then
          CALL xios_send_field("field_sub",field_atm_2D+ts)
       endif
+      !! On crée un champ avec des missings qui bougent
+      !! dans le temps : un bande verticale de 1 à ni-3
+      field_atm_2D_miss(:,:)= field_atm_2D(:,:)+ts
+      field_atm_2D_miss(mod(ts,ni-3)+1,:)=1.e+20
+      CALL xios_send_field("field_miss",field_atm_2D_miss)
       
 !!! On change de contexte
 

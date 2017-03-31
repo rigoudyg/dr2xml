@@ -138,7 +138,7 @@ from dr2xml import generate_file_defs
 
 # Path to local copy of CMIP6 CVs, which you can get from https://github.com/WCRP-CMIP/CMIP6_CVs
 #my_cvspath="/Users/moine/Codes/MyDevel_Codes/CMIP6_DATA_SUITE/CMIP6_CVs/"
-my_cvspath="/cnrm/est/USERS/senesi/public/CMIP6/data_request/CMIP6_CVs/"
+my_cvspath="~/dev/CMIP6_CVs"
 
 
 # In[5]:

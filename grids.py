@@ -17,56 +17,63 @@ Also : management of fields size/split_frequency
 from table2freq import table2freq
 
 
-def decide_for_grids(svar,grid,lset):
+def decide_for_grids(cmvarid,grids,lset,dq):
      """
      Decide which set of gris a given variable should be produced on
 
-     SVAR is the 'simplifed' CMORvar
-     GRID is the string fo grid specified a requestLink
+     CMVARID is uid of the CMORvar
+     GRIDS is a list of strings for grid as specified in requestLink 
      LSET is the laboratory settings dictionnary. It carries a policy re. grids
 
-     Returns either a single grid string or a list of such strings
+     Returns a list of grid strings (with some normalization) (see below)
 
      TBD : use Martin's acronyms for grid policy
      """
      def normalize(grid) :
-         """ TBD : completely remove variants in grid strings """
-         if grid in [ "yes", "YES", "Yes" ] : return "yes"
-         if grid[0:2] in [ "NO", "No", "no" ] : return "no"
-         return grid
-     grid=normalize(grid)
+          """ in DR 1.0.2, values are :  
+          ['', 'model grid', '100km', '50km or smaller', 'cfsites', '1deg', '2deg', '25km or smaller', 'native']"""
+          if grid in [ "native", "model grid", "" ] : return ""
+          return grid.replace(" or smaller","")
+     
+     # Normalize grids list and and remove duplicates
+     ngrids=map(normalize,grids)
+     sgrids=set()
+     for g in ngrids : sgrids.add(g)
+     ngrids=list(sgrids)
+     #
      policy=lset.get("grid_policy")
      if policy is None or policy=="DR": # Follow DR spec
-         return [grid]
+          return ngrids
      elif policy=="native": # Follow lab grids choice (gr or gn depending on context - see lset['grids"])
-         return [""]
+          return [""]
      elif policy=="native+DR": # Produce both in 'native' and DR grid
-         if grid!="" : return ["",grid]
-         else : return [""]
-     elif policy=="adhoc" : return lab_adhoc_grid_policy(svar,grid,lset)
+          return list(sgrids.add(''))
+     elif policy=="adhoc" :
+          return lab_adhoc_grid_policy(cmvarid,ngrids,lset,dq)
      else :
-         dr2xml_error("Invalid grid policy %s"%policy)
+          dr2xml_error("Invalid grid policy %s"%policy)
 
-def lab_adhoc_grid_policy(svar,grid,lset) :
+def lab_adhoc_grid_policy(cmvarid,grids,lset,dq) :
     """
     Decide , in a lab specific way, which set of grids a given
     variable should be produced on You should re-engine code below to
     your own decision scheme, if the schemes of the standard grid
     policy choices (see fucntion decide_for_grid) do not fit
 
-    SVAR is the 'simplifed' CMORvar
-    GRID is the string fo grid specified a requestLink
+    CMVARID is uid of the CMORvar
+    GRIDS is a list of strings for grid as specified in requestLink (with some normalization)
     LSET is the laboratory settings dictionnary. It carries a policy re. grids
     
     Returns either a single grid string or a list of such strings
     """
-    return CNRM_grid_policy(svar,grid,lset)
+    return CNRM_grid_policy(cmvarid,grids,lset,dq) 
 
-def CNRM_grid_policy(svar,grid,lset) : #TBD
+def CNRM_grid_policy(cmvarid,grids,lset,dq) : #TBD
     """
     See doc of lab_adhoc_grid_policy
     """
-    if svar.label in [ "tos", "sos" ] : return(["","1deg"])
+    if dq.inx.uid[cmvarid].label in [ "tos", "sos" ] : return(["","1deg"])
+    if "cfsites" in grids : return ["","cfsites"]
     return [""]
 
 

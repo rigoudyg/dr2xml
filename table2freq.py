@@ -25,11 +25,11 @@ table2freq={
     "CF3hr"    : ("3h","3hr"),
     "CFday"    : ("1d","day"),
     "CFmon"    : ("1mo","mon"),
-    "CFsubhr"  : ("??","??"),
-    "CFsubhrOff": ("??","??"),
+    "CFsubhr"  : ("1h","1hr"), # TBD : better value - model timestep
+    "CFsubhrOff": ("1h","1hr"), # TBD : better value - model timestep
 
     "E1hr"     : ("1h","1hr"),
-    "E1hrClimMon" : ("??","??"),
+    "E1hrClimMon" : ("1y","yr"), #TBD - better value ?
     "E3hr"     : ("3h","3hr"),
     "E3hrPt"   : ("3h","3hr"),
     "E6hrZ"    : ("6h","6hr"),
@@ -38,7 +38,7 @@ table2freq={
     "Efx"      :("1d","fx"),
     "Emon"     : ("1mo","mon"),
     "EmonZ"    : ("1mo","mon"),
-    "Esubhr"   : ("??","??"),
+    "Esubhr"   : ("1hr","1h"), # TBD : better value - model timestep
     "Eyr"      : ("1y","yr"),
 
     "IfxAnt"   :("1d","fx"),

@@ -29,7 +29,8 @@ settings={
     "ping_variables_prefix" : "CMIP6_",
     # We account for a file listing the variables which the lab does not want to produce 
     # Format : MIP varname as first column, comment lines begin with '#'
-    "excluded_vars_file":"/cnrm/est/USERS/senesi/public/CMIP6/data_request/cnrm/excluded_vars.txt",
+    #"excluded_vars_file":"/cnrm/est/USERS/senesi/public/CMIP6/data_request/cnrm/excluded_vars.txt",
+    "excluded_vars_file":None,
     "excluded_vars" : None,
     }
 
