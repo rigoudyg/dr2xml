@@ -44,7 +44,7 @@ import dreq
 ####################################
 # End of pre-requisites
 ####################################
-version="0.10.1"
+version="0.12"
 
 from datetime import datetime
 import re
