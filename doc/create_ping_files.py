@@ -42,6 +42,7 @@ if lab=='cnrm' or lab=='cerfacs':
         #"listof_home_vars": None,
         "path_extra_tables":None,
         }
+    
 
 
 # In[ ]:
@@ -50,6 +51,7 @@ if lab=='cerfacs':
     #settings["mips"]={'HighResMIP','DCPP'}
     settings["listof_home_vars"]="./inputs/my_listof_home_vars.txt"
     settings["path_extra_tables"]="./inputs/extra_Tables"
+    
 
 
 # In[ ]:
@@ -82,6 +84,7 @@ if lab=='ipsl':
         "listof_home_vars":None,
         "path_extra_tables":None,
         } 
+    
 
 
 # ### Read excluded variables list - you may skip that

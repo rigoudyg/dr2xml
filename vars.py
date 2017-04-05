@@ -522,9 +522,6 @@ def complement_svar_using_cmorvar(svar,cmvar,dq):
     except :
         if print_DR_errors :
             print "DR Error: issue with stid for",svar.label, "in Table ",svar.mipTable,"  => no cell_methods, cell_measures, dimids and sdims derived."
-      
-    #mpmoine_future_modif:complement_svar_using_cmorvar: on renseigne l'attribut label_without_psuffix (doit etre fait apres la valorisation de sdims)
-    svar.label_without_psuffix=Remove_pSuffix(svar,multi_plev_suffixes,single_plev_suffixes,realms='atmos aerosol atmosChem')
 
     area=cellmethod2area(svar.cell_methods) 
     if area : 
@@ -534,6 +531,11 @@ def complement_svar_using_cmorvar(svar,cmvar,dq):
             # Special case for a set of land variables
             if not (svar.modeling_realm=='land' and svar.label[0]=='c'):
                 svar.label=svar.label+"_"+area
+    # mpmoine_future_modif:complement_svar_using_cmorvar: on renseigne l'attribut label_without_psuffix (doit etre fait apres la valorisation de sdims)
+    # mpmoine_further_zoom_modif:complement_svar_using_cmorvar: deplacement de Remove_pSuffix apres la levee d'ambiguite 'where something' (verifie: aucune des variables ambigues n'est demandee en plev)
+    # removing pressure suffix must occur after raising ambuguities (add of area suffix) because this 2 processes cannot be cummulate at this stage. 
+    # this is acceptable since none of the variables requeted on pressure levels have ambiguous names.
+    svar.label_without_psuffix=Remove_pSuffix(svar,multi_plev_suffixes,single_plev_suffixes,realms='atmos aerosol atmosChem')
     #
     # Fix type and mip_era
     svar.type='cmor'

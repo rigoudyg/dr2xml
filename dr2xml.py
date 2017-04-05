@@ -402,7 +402,7 @@ def wr(out,key,dic_or_val=None,num_type="string",default=None) :
         out.write('  </variable>\n')
 
 def write_xios_file_def(cmv,table, lset,sset,out,cvspath,
-    field_defs,axis_defs,domain_defs,dummies,skipped_vars,
+    field_defs,axis_defs,domain_defs,dummies,skipped_vars_per_table,
     prefix,context,grid,pingvars=None) :
     """ 
     Generate an XIOS file_def entry in out for :
@@ -429,7 +429,14 @@ def write_xios_file_def(cmv,table, lset,sset,out,cvspath,
             # mpmoine_zoom_modif:write_xios_file_def: => creation de alias_ping
             alias_ping=lset["ping_variables_prefix"]+cmv.label_without_psuffix
             if not alias_ping in pingvars:
-                skipped_vars.append(cmv.label)
+                # mpmoine_skipped_modif: write_xios_file_def: on classe les skipped_vars par table => skipped_vars_per_table (pour avoir plus d'info au print) 
+                # WORKING_HERE
+                if skipped_vars_per_table.has_key(cmv.mipTable) and skipped_vars_per_table[cmv.mipTable]:
+                    list_of_skipped=skipped_vars_per_table[cmv.mipTable]
+                    list_of_skipped.append(cmv.label)
+                else:
+                    list_of_skipped=[cmv.label]
+                skipped_vars_per_table.update({cmv.mipTable:list_of_skipped})
                 return
     #
     #--------------------------------------------------------------------
@@ -691,7 +698,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
     
     # nextvar is the field name provided as output of the last
     # operation currently defined
-    # mpmoine_union_modif:create_xios_field_ref: on supprime l'usage de netxvar
+    # mpmoine_zoom_modif:create_xios_field_ref: on supprime l'usage de netxvar
     #
     #--------------------------------------------------------------------
     # Build XIOS axis elements (stored in axis_defs)
@@ -852,7 +859,8 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
     #xcontext=init_context(context)
     # Extract CMOR variables for the experiment and year and lab settings
     #--------------------------------------------------------------------
-    skipped_vars=[]
+    # mpmoine_skipped_modif:generate_file_defs: skipped_vars (liste) change en skipped_vars_per_table (dictionnaire)
+    skipped_vars_per_table={}
     mip_vars_list=gather_AllSimpleVars(lset,sset['experiment_id'],year,printout)
     # Group CMOR vars per realm
     svars_per_realm=dict()
@@ -972,7 +980,7 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
                     count[svar.label]=svar
                     for grid in svar.grids :
                         write_xios_file_def(svar,table,lset,sset,out,cvs_path,
-                                field_defs,axis_defs,domain_defs,dummies,skipped_vars,
+                                field_defs,axis_defs,domain_defs,dummies,skipped_vars_per_table,
                                 prefix,context,grid,pingvars)
                 else :
                     pass
@@ -1000,7 +1008,14 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
         out.write('</context> \n')
     if printout :
         print "\nfile_def written as %s"%filename
-    if skipped_vars : print "Skipped variables are "+`skipped_vars`
+    # mpmoine_skipped_modif:generate_file_defs: plus d'info sur les skipped_vars
+    # WORKING_HERE
+    if skipped_vars_per_table: 
+        print "\nSkipped variables (i.e. whose alias is not present in the pingfile):"
+        for table,skipvars in skipped_vars_per_table.items():
+            print "\n%15s %02d/%02d ---->"%(table,len(skipvars),len(svars_per_table[table])),
+            #-print "\n\t",table ," ",len(skipvars),"--->",
+            for skv in skipvars: print skv,
 
 # mpmoine_future_modif:create_axis_def: suppression de l'argument 'field_defs' qui n'est pas utilise
 # mpmoine_future_modif:create_axis_def: suppression de l'argument 'field_defs' qui n'est pas utilise
@@ -1075,7 +1090,7 @@ def create_xios_axis_for_plevs_unions(svars,plev_sfxs,prefix,printout=False):
              { "plevA": {"svar7":svar7},
                "plevD": {"svar8":svar8,"svar9":svar9} }
         }
-    * Second, create and write Xios union axis (axis id: union_plevs_<label_without_psuffix>)
+    * Second, create create all of the Xios union axis (axis id: union_plevs_<label_without_psuffix>)
     """
     
     union_axis_defs={}
@@ -1138,7 +1153,10 @@ def create_xios_axis_for_plevs_unions(svars,plev_sfxs,prefix,printout=False):
                     if printout: print "    -- on",plev,":",plev_values 
                 if printout: print "       *",svar.label,"(",svar.mipTable,")"
         list_plevs_union=list(plevs_union)
-        list_plevs_union.sort(reverse=True)
+        # mpmoine_further_zoom_modif:create_xios_axis_for_plevs_unions: correction du tri des niveaux de pression sur les axes d'union
+        list_plevs_union_num=[float(lev) for lev in list_plevs_union]
+        list_plevs_union_num.sort(reverse=True)
+        list_plevs_union=[str(lev) for lev in list_plevs_union_num]
         for lev in list_plevs_union: plevs_union_xios+=" "+lev
         if printout: print ">>> XIOS plevs union:", plevs_union_xios
         sdim_union.label="union_plevs_"+lwps

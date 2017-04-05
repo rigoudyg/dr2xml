@@ -106,7 +106,7 @@ if lab=='cnrm' or lab=='cerfacs':
 # In[ ]:
 
 if lab=='cerfacs':  
-    lab_and_model_settings["mips"]={'HighResMIP','DCPP'}
+    lab_and_model_settings["mips"]={'HighResMIP'}
     lab_and_model_settings["listof_home_vars"]="./inputs/my_listof_home_vars.txt"
     lab_and_model_settings["path_extra_tables"]="./inputs/extra_Tables"
 
@@ -201,9 +201,9 @@ simulation_settings={
     # Warning : some lines are commented out in this example but should be 
     # un-commented in some cases. See comments
     "experiment_id"  : "historical",
-    #-"experiment_id"  : "Forced-Atmos-Land",
-    #-"experiment_id"  : "Coupled",
-    #-"experiment_id"  : "DCPP-C13",
+    #"experiment_id"  : "Forced-Atmos-Land",
+    #"experiment_id"  : "Coupled",
+    #"experiment_id"  : "DCPP-C13",
     
     #"contact"        : "", set it only if it is specific to the simualtion
     #"project"        : "CMIP6",  #CMIP6 is the default
@@ -240,9 +240,10 @@ simulation_settings={
     #'parent_activity   '   : 'CMIP'    # only in special cases, defaults to CMIP
     #'parent_source_id'     : 'CNRM-CM5.1' #only in special cases, where parent model is not the same model
     #
-    "sub_experiment_id"    : "none", # Optional, default is 'none'; example : s1960. 
-    "sub_experiment"       : "none", # Optional, default in 'none'
-    "history"              : "none", #Used when a simulation is re-run, an output file is modified ....
+    # mpmoine_future_modif: CMOR3.2.2 impose 'None' pour sub_experiment_id et sub_experiment
+    "sub_experiment_id"    : "None", # Optional, default is 'None'; example : s1960. 
+    "sub_experiment"       : "None", # Optional, default in 'None'
+    "history"              : "None", #Used when a simulation is re-run, an output file is modified ....
     # A per-variable dict of comments which are specific to this simulation. It will replace  
     # the all-simulation comment present in lab_and_model_settings
     'comments'     : {
@@ -250,6 +251,14 @@ simulation_settings={
         }
     }
 
+
+
+# In[ ]:
+
+if lab=='cerfacs':    
+    simulation_settings["experiment_id"]="Forced-Atmos-Land"
+    #simulation_settings["experiment_id"]="Coupled"
+    #simulation_settings["experiment_id"]="DCPP-C13"
 
 
 # In[ ]:
@@ -294,10 +303,15 @@ if True :
 
 # In[ ]:
 
+# In/Out directory
+my_dir="../pingfiles_edited/"+lab+"/"
+
+
+# In[ ]:
+
 # after some edit in ping_arpsfx.xml, which does not discard every 'dummy' entries 
 if False :
-    #for my_context in lab_and_model_settings["realms_per_context"].keys():
-    for my_context in ['nemo']:
+    for my_context in lab_and_model_settings["realms_per_context"].keys():
         generate_file_defs(lab_and_model_settings, simulation_settings,year=2000,context=my_context,
                     pingfile=my_dir+"ping_"+my_context+".xml", printout=True, 
                     cvs_path=my_cvspath,dummies='skip', dirname=my_dir)
