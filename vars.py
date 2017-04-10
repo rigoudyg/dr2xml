@@ -1,9 +1,9 @@
 print_DR_errors=True
 
-import sys,os
-import json
-from table2freq import table2freq
-from grids import dr2xml_error
+#-import sys,os
+#-import json
+#-from table2freq import table2freq
+#-from grids import dr2xml_error
 
 # A class for unifying CMOR vars and home variables
 # mpmoine_last_modif:simple_CMORvar: ajout des attributs 'mip_era', 'missing' et 'dimids'
@@ -52,6 +52,8 @@ class simple_Dim(object):
         self.out_name     = False
         self.units        = False
         self.is_zoom_of   = False
+        # mpmoine_union_optim: simple_Dim: ajout de l'attribut 'is_union_for'
+        self.is_union_for = []
 
 # mpmoine_future_modif: liste des suffixes de noms de variables reperant un ou plusieurs niveaux pression
 # List of multi and single pressure level suffixes for which we want the union/zoom axis mecanism turned on
@@ -163,8 +165,8 @@ def read_extraTable(path,table,dq,printout=False):
         for sshp in dq.coll['spatialShape'].items:
             dims2shape[sshp.dimensions]=sshp.label
         # mpmoine_future_modif:dims2shape: ajout a la main des correpondances dims->shapes Primavera qui ne sont pas couvertes par la DR
-        # mpmoine_attention: il faut mettre a jour dim2shape a chaque fois qu'une nouvelle correpondance est introduite
-        # mpmoine_attention: dans les extra-Tables
+        # mpmoine_note: attention, il faut mettre a jour dim2shape a chaque fois qu'une nouvelle correpondance est introduite
+        # mpmoine_note: attention, dans les extra-Tables
         dims2shape['longitude|latitude|height100m']='XY-na'
         # mpmoine_note: provisoire, XY-P12 juste pour exemple
         dims2shape['longitude|latitude|plev12']='XY-P12'
@@ -487,7 +489,7 @@ def complement_svar_using_cmorvar(svar,cmvar,dq):
             svar.cell_methods=None
         try :
             svar.cell_measures=dq.inx.uid[cmvar.stid].cell_measures
-            # mpmoine_last_modif:complement_svar_using_cmorvar: il arrive que cell_methods soit une chaine vide 
+            # mpmoine_last_modif:complement_svar_using_cmorvar: il arrive que cell_measures soit une chaine vide 
             # mpmoine_last_modif:complement_svar_using_cmorvar: et cela ne peut pas etre detecte par la regle d'exception => "NOT-SET"
             if svar.cell_measures=='': svar.cell_measures="NOT-SET"
         except:

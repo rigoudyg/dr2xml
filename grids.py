@@ -17,56 +17,63 @@ Also : management of fields size/split_frequency
 from table2freq import table2freq
 
 def normalize(grid) :
-     """ TBD : completely remove variants in grid strings """
-     if grid in [ "yes", "YES", "Yes" ] : return "yes"
-     if grid[0:2] in [ "NO", "No", "no" ] : return "no"
-     return grid
+    """ in DR 1.0.2, values are :  
+    ['', 'model grid', '100km', '50km or smaller', 'cfsites', '1deg', '2deg', '25km or smaller', 'native']"""
+    if grid in [ "native", "model grid", "" ] : return ""
+    return grid.replace(" or smaller","")
 
-def decide_for_grids(svar,grid,lset):
-     """
-     Decide which set of grids a given variable should be produced on
+def decide_for_grids(cmvarid,grids,lset,dq):
+    """
+    Decide which set of grids a given variable should be produced on
 
-     SVAR is the 'simplifed' CMORvar
-     GRID is the string fo grid specified a requestLink
-     LSET is the laboratory settings dictionnary. It carries a policy re. grids
+    CMVARID is uid of the CMORvar
+    GRIDS is a list of strings for grid as specified in requestLink 
+    LSET is the laboratory settings dictionnary. It carries a policy re. grids
 
-     Returns either a single grid string or a list of such strings
+    Returns a list of grid strings (with some normalization) (see below)
 
-     TBD : use Martin's acronyms for grid policy
-     """
-     grid=normalize(grid)
-     policy=lset.get("grid_policy")
-     if policy is None or policy=="DR": # Follow DR spec
-         return [grid]
-     elif policy=="native": # Follow lab grids choice (gr or gn depending on context - see lset['grids"])
-         return [""]
-     elif policy=="native+DR": # Produce both in 'native' and DR grid
-         if grid!="" : return ["",grid]
-         else : return [""]
-     elif policy=="adhoc" : return lab_adhoc_grid_policy(svar,grid,lset)
-     else :
-         dr2xml_error("Invalid grid policy %s"%policy)
+    TBD : use Martin's acronyms for grid policy
+    """
+    #
+    # Normalize grids list and and remove duplicates
+    ngrids=map(normalize,grids)
+    sgrids=set()
+    for g in ngrids : sgrids.add(g)
+    ngrids=list(sgrids)
+    #
+    policy=lset.get("grid_policy")
+    if policy is None or policy=="DR": # Follow DR spec
+        return ngrids
+    elif policy=="native": # Follow lab grids choice (gr or gn depending on context - see lset['grids"])
+        return [""]
+    elif policy=="native+DR": # Produce both in 'native' and DR grid
+        return list(sgrids.add(''))
+    elif policy=="adhoc" :
+        return lab_adhoc_grid_policy(cmvarid,ngrids,lset,dq)
+    else :
+        dr2xml_error("Invalid grid policy %s"%policy)
 
-def lab_adhoc_grid_policy(svar,grid,lset) :
+def lab_adhoc_grid_policy(cmvarid,grids,lset,dq) :
     """
     Decide , in a lab specific way, which set of grids a given
     variable should be produced on You should re-engine code below to
     your own decision scheme, if the schemes of the standard grid
     policy choices (see fucntion decide_for_grid) do not fit
 
-    SVAR is the 'simplifed' CMORvar
-    GRID is the string fo grid specified a requestLink
+    CMVARID is uid of the CMORvar
+    GRIDS is a list of strings for grid as specified in requestLink (with some normalization)
     LSET is the laboratory settings dictionnary. It carries a policy re. grids
     
     Returns either a single grid string or a list of such strings
     """
-    return CNRM_grid_policy(svar,grid,lset)
+    return CNRM_grid_policy(cmvarid,grids,lset,dq) 
 
-def CNRM_grid_policy(svar,grid,lset) : #TBD
+def CNRM_grid_policy(cmvarid,grids,lset,dq) : #TBD
     """
     See doc of lab_adhoc_grid_policy
     """
-    if svar.label in [ "tos", "sos" ] : return(["","1deg"])
+    if dq.inx.uid[cmvarid].label in [ "tos", "sos" ] : return(["","1deg"])
+    if "cfsites" in grids : return ["","cfsites"]
     return [""]
 
 
@@ -118,7 +125,7 @@ def field_size(svar, mcfg):
         siz=40*nb_curtain_sites        
 
     elif ( s == "Y-P19") : #Atmospheric Zonal Mean (on 19 pressure levels)
-        #mpmoine_next_modif: field_size: nb_lat au lieu de nblat (vu par Arnaud)
+        #mpmoine_next_modif:field_size: nb_lat au lieu de nblat (vu par Arnaud)
         siz=nb_lat*19
     elif ( s == "Y-P39") : #Atmospheric Zonal Mean (on 39 pressure levels)
         siz=nb_lat*39
@@ -159,7 +166,7 @@ def field_size(svar, mcfg):
     return siz
 
 # mpmoine_last_modif:split_frequency_for_variable: suppression de l'argument table
-# mpmoine_next_modif: split_frequency_for_variable: passage de 'context' en argument pour recuperer le model_timestep
+# mpmoine_next_modif:split_frequency_for_variable: passage de 'context' en argument pour recuperer le model_timestep
 def split_frequency_for_variable(svar, lset, mcfg,context):
     """
     Compute variable level split_freq and returns it as a string
@@ -172,12 +179,12 @@ def split_frequency_for_variable(svar, lset, mcfg,context):
     """
     max_size=lset.get("max_file_size_in_floats",500*1.e6)
     size=field_size(svar, mcfg)
-    # mpmoine_last_modif: split_frequency_for_variable: on ne passe plus par table2freq pour recuperer 
-    # mpmoine_last_modif: split_frequency_for_variable: la frequence de la variable mais par svar.frequency
+    # mpmoine_last_modif:split_frequency_for_variable: on ne passe plus par table2freq pour recuperer 
+    # mpmoine_last_modif:split_frequency_for_variable: la frequence de la variable mais par svar.frequency
     freq=svar.frequency
     if (size != 0 ) : 
         # Try by years first
-        # mpmoine_next_modif: split_frequency_for_variable: passage de 'model_timestep' en argument de timesteps_per_freq_and_duration
+        # mpmoine_next_modif:split_frequency_for_variable: passage de 'model_timestep' en argument de timesteps_per_freq_and_duration
         size_per_year=size*timesteps_per_freq_and_duration(freq,365,lset["model_timestep"][context])
         nbyears=max_size/float(size_per_year)
         if nbyears > 1. :
@@ -193,21 +200,21 @@ def split_frequency_for_variable(svar, lset, mcfg,context):
                 return("200y")
         else: 
             # Try by month
-            # mpmoine_next_modif: split_frequency_for_variable: passage de 'model_timestep' en argument de timesteps_per_freq_and_duration
+            # mpmoine_next_modif:split_frequency_for_variable: passage de 'model_timestep' en argument de timesteps_per_freq_and_duration
             size_per_month=size*timesteps_per_freq_and_duration(freq,31,lset["model_timestep"][context])
             nbmonths=max_size/float(size_per_month)
             if nbmonths > 1. :
                 return("1mo")
             else:
                 # Try by day
-                # mpmoine_next_modif: split_frequency_for_variable: passage de 'model_timestep' en argument de timesteps_per_freq_and_duration
+                # mpmoine_next_modif:split_frequency_for_variable: passage de 'model_timestep' en argument de timesteps_per_freq_and_duration
                 size_per_day=size*timesteps_per_freq_and_duration(freq,1,lset["model_timestep"][context])
                 nbdays=max_size/float(size_per_day)
                 if nbdays > 1. :
                     return("1d")
                 else:
-                    # mpmoine_last_modif: split_frequency_for_variable: on ne passe plus par table2freq pour recuperer
-                    # mpmoine_last_modif: split_frequency_for_variable: la frequence de la variable mais par svar.frequency
+                    # mpmoine_last_modif:split_frequency_for_variable: on ne passe plus par table2freq pour recuperer
+                    # mpmoine_last_modif:split_frequency_for_variable: la frequence de la variable mais par svar.frequency
                     raise(dr2xml_error("No way to put even a single day "+\
                         "of data in %g for frequency %s, var %s, table %s"%\
                         (max_size,freq,svar.label,svar.mipTable)))
@@ -216,7 +223,7 @@ def split_frequency_for_variable(svar, lset, mcfg,context):
       print "Warning: field size is 0, cannot compute split frequency."
        
                 
-
+# mpmoine_next_modif: ajout de 'model_timestep' en argument de timesteps_per_freq_and_duration
 def timesteps_per_freq_and_duration(freq,nbdays,model_tstep):
     duration=0.
     # Translate freq strings to duration in days
@@ -237,13 +244,6 @@ def timesteps_per_freq_and_duration(freq,nbdays,model_tstep):
     elif freq=="fx" : return 1.
     elif freq=="monClim" : return 12.
     elif freq=="dayClim" : return 24.
-
-# mpmoine_last_modif: dr2xml_error: deplace dans grids.py pour pouvoir l'importer depuis vars.py (pour create_ping_file)
-class dr2xml_error(Exception):
-    def __init__(self, valeur):
-        self.valeur = valeur
-    def __str__(self):
-        return `self.valeur`
 
     
 
