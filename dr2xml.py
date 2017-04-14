@@ -69,6 +69,8 @@ from Xparse import init_context, id2grid
 # mpmoine_last_modif: dr2xml.py: ajout import de cmipFreq2xiosFreq
 from table2freq import table2freq, table2splitfreq, cmipFreq2xiosFreq
 
+from dr2cmip6_expname import dr2cmip6_expname
+
 print_DR_errors=False
 
 dq = dreq.loadDreq()
@@ -213,7 +215,7 @@ example_simulation_settings={
 #def hasCMORVarName(hmvar):
 #    for cmvar in dq.coll['CMORvar'].items:
 #        if (cmvar.label==hmvar.label): return True
-                
+
 def RequestItem_applies_for_exp_and_year(ri,experiment,year,debug=False):
     """ 
     Returns True if requestItem 'ri' in data request 'dq' (global) is relevant 
@@ -503,8 +505,25 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     #--------------------------------------------------------------------
     # Set NetCDF output file name according to the DRS
     #--------------------------------------------------------------------
+    #
+    # mpmoine_expname:write_xios_file_def: es noms d'expe dans la DR ne sont pas les meme que dans le CV CMIP6
+    with open(cvspath+"CMIP6_experiment_id.json","r") as json_fp :
+        CMIP6_experiments=json.loads(json_fp.read())['experiment_id']
+        if CMIP6_experiments.has_key(sset['experiment_id']):
+            expname=sset['experiment_id']
+        else:
+            # mpmoine_last_modif:write_xios_file_def: provisoire, laisser passer cette erreur tant que le
+            # mpmoine_last_modif:write_xios_file_def: CV_CMIP6 et celui de la DR ne sont pas concordants
+            dr2xml_error("Issue getting experiment description in CMIP6 CV for %20s => Search for experiment name correspondance from DR to CMIP6 CV."\
+                               %sset['experiment_id'])
+            expname=dr2cmip6_expname[sset['experiment_id']]
+        exp_entry=CMIP6_experiments[expname]
+        experiment=exp_entry['experiment']
+        description=exp_entry['description']
+    print ">>> DEBUG >>>",expname
+    #
     filename="%s%s_%s_%s_%s_%s_%s_%s"%\
-               (prefix,cmv.label,table,source_id,experiment_id,
+               (prefix,cmv.label,table,source_id,expname,
                 member_id,grid_label,time_range)
     #
     #--------------------------------------------------------------------
@@ -536,21 +555,9 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     # TBC : assume data_specs_version == dq.version
     wr(out,'data_specs_version',dq.version) 
     #
-    with open(cvspath+"CMIP6_experiment_id.json","r") as json_fp :
-        CMIP6_experiments=json.loads(json_fp.read())['experiment_id']
-        try:
-            exp_entry=CMIP6_experiments[sset['experiment_id']]
-            experiment=exp_entry['experiment']
-            description=exp_entry['description']
-        except :
-            # mpmoine_last_modif:write_xios_file_def: provisoire, laisser passer cette erreur tant que le
-            # mpmoine_last_modif:write_xios_file_def: CV_CMIP6 et celui de la DR ne sont pas concordants
-            dr2xml_error("Issue getting experiment description for %20s"\
-                               %sset['experiment_id'])
-            experiment="NOT-SET"
     wr(out,'description',description)
     wr(out,'experiment',experiment)
-    wr(out,'experiment_id',experiment_id)
+    wr(out,'experiment_id',expname)
     # 
     # TBD: check external_variables
     # Let us yet hope that all tables but those with an 'O'
@@ -751,7 +758,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
                     cible=prefix+lwps           # e.g. 'CMIP6_hus'
                     axis_key=sd.zoom_label      # e.g. 'zoom_plev7h_hus'
                 else: # mpmoine_note: cas variable definie grace a seul axis_def (non zoom)
-                    alias1=alias+"_"+sd.label   # e.g. 'CMIP6_hus7h'
+                    alias1=alias+"_"+sd.label   # e.g. 'CMIP6_hus7h_plev7h'
                     alias2=False 
                     cible=prefix+lwps           # e.g. 'CMIP6_hus'
                     axis_key=sd.label           # e.g. 'plev7h'
@@ -767,7 +774,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
                     # Construct a grid using variable's grid and new axis
                     # mpmoine_merge_dev2_v0.12: j'ai change nextvar en alias
                     # mpmoine_merge_dev2_v0.12: nouvelle une fonction 'create_grid_def' car utilisee aussi par 'create_xios_grids_for_plev_unions'
-                    if not sd.is_zoom_of: # create a (target) grid for re-mapping only if vert axis is not a zoom
+                    if not sd.is_zoom_of: # create a (target) grid for re-mapping only if vert axis is not a zoom (i.e. if normal or union)
                         grid_def=create_grid_def(sd,alias,context_index)
                         grid_id=grid_def[0]
                         grid_defs[grid_id]=grid_def[1]
@@ -819,8 +826,12 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
     # Build XIOS field elements (stored in end_field_defs)
     # including their CMOR attributes
     #--------------------------------------------------------------------
-    rep='  <field field_ref="%s" name="%s" ts_enabled="true" '% \
-        (alias,sv.label)
+    if any (sd.is_zoom_of for sd in sv.sdims.values()):
+        rep='  <field field_ref="%s" name="%s" ts_enabled="true" '% \
+            (alias1,sv.label)
+    else:
+        rep='  <field field_ref="%s" name="%s" ts_enabled="true" '% \
+            (alias,sv.label)
     rep+=' operation="%s" detect_missing_value="%s" default_value="1.e+20"'% \
         ( operation,detect_missing)
     rep+=' cell_methods="%s" cell_methods_mode="overwrite"'% sv.cell_methods
@@ -1637,12 +1648,6 @@ def make_source_string(sources,source_id):
          "; ocean_biogeochemistry: "+source["ocean_biogeochemistry"]+";"
     return rep
 
-class dr2xml_error(Exception):
-    def __init__(self, valeur):
-        self.valeur = valeur
-    def __str__(self):
-        return `self.valeur`
-
 def build_axis_definitions():
     """ 
     Build a dict of axis definitions 
@@ -1650,6 +1655,10 @@ def build_axis_definitions():
     for g in dq.coll['grids'].items :
         pass
 
-
+class dr2xml_error(Exception):
+    def __init__(self, valeur):
+        self.valeur = valeur
+    def __str__(self):
+        return `self.valeur`
     
 

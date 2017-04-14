@@ -15,6 +15,7 @@ Also : management of fields size/split_frequency
 
 """
 from table2freq import table2freq
+#-from dr2xml import dr2xml_error
 
 def normalize(grid) :
     """ in DR 1.0.2, values are :  
