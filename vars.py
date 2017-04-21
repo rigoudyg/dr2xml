@@ -1,21 +1,23 @@
 print_DR_errors=True
 
-#-import sys,os
-#-import json
-#-from table2freq import table2freq
-#-from grids import dr2xml_error
+import sys,os
+import json
+from table2freq import table2freq
+#-from dr2xml import dr2xml_error
 
 # A class for unifying CMOR vars and home variables
 # mpmoine_last_modif:simple_CMORvar: ajout des attributs 'mip_era', 'missing' et 'dimids'
 # mpmoine_future_modif:simple_CMORvar: ajout de l'attribut 'label_without_psuffix' et suppresion de l'attribut dimids
+# mpmoine_correction:simple_CMORvar: ajout de l'attribut 'label_non_ambiguous' 
 class simple_CMORvar(object):
     def __init__(self):
         self.type           = False
         self.modeling_realm = None 
         self.grids          = [""] 
-        self.label          = None 
+        self.label          = None  # taken equal to the CMORvar label
         self.label_without_area= None  # taken equal to MIPvar label
         self.label_without_psuffix= None
+        self.label_non_ambiguous= None
         self.frequency      = None 
         self.mipTable       = None 
         self.positive       = None 
@@ -451,7 +453,9 @@ def complement_svar_using_cmorvar(svar,cmvar,dq):
     try:
         mipvar = dq.inx.uid[cmvar.vid]
         svar.label_without_area=mipvar.label
-        svar.long_name = mipvar.title
+        # mpmoine_correction:complement_svar_using_cmorvar: le long_name doit etre le title de la CMORvar et non pas de la MIPvar
+        #TBS# svar.long_name = mipvar.title
+        svar.long_name = cmvar.title
         if mipvar.description :
             svar.description = mipvar.description
         else:
@@ -532,7 +536,10 @@ def complement_svar_using_cmorvar(svar,cmvar,dq):
         if ambiguous :
             # Special case for a set of land variables
             if not (svar.modeling_realm=='land' and svar.label[0]=='c'):
-                svar.label=svar.label+"_"+area
+                # mpmoine_correction:complement_svar_using_cmorvar: la levee d'ambiguite par ajour de "_land" par ex., ne doit pas impacter le svar.label
+                # mpmoine_correction:complement_svar_using_cmorvar: sinon le "_land " se retrouve dans le nom du fichier netcdf
+                #TBS# svar.label=svar.label+"_"+area
+                svar.label_non_ambiguous=svar.label+"_"+area
     # mpmoine_future_modif:complement_svar_using_cmorvar: on renseigne l'attribut label_without_psuffix (doit etre fait apres la valorisation de sdims)
     # mpmoine_further_zoom_modif:complement_svar_using_cmorvar: deplacement de Remove_pSuffix apres la levee d'ambiguite 'where something' (verifie: aucune des variables ambigues n'est demandee en plev)
     # removing pressure suffix must occur after raising ambuguities (add of area suffix) because this 2 processes cannot be cummulate at this stage. 
@@ -568,13 +575,15 @@ def Remove_pSuffix(svar,mlev_sfxs,slev_sfxs,realms):
     import re
     r = re.compile("([a-zA-Z]+)([0-9]+)")
     #
-    #-label_out=False
-    label_out=svar.label
+    # mpmoine_correction:write_xios_file_def:Remove_pSuffix: suppression des terminaisons en "Clim" le cas echant
+    split_label=svar.label.split("Clim")
+    label_out=split_label[0]
+    #
     svar_realms=set(svar.modeling_realm.split())
     valid_realms=set(realms.split())
     if svar_realms.intersection(valid_realms):
-        mvl=r.match(svar.label)
-        if mvl and any(svar.label.endswith(s) for s in mlev_sfxs.union(slev_sfxs)):
+        mvl=r.match(label_out)
+        if mvl and any(label_out.endswith(s) for s in mlev_sfxs.union(slev_sfxs)):
             for sdim in svar.sdims.values(): 
                 mdl=r.match(sdim.label)
                 if mdl and mdl.group(2)==mvl.group(2): 
@@ -624,6 +633,7 @@ def analyze_ambiguous_MIPvarnames(dq):
                 st=dq.inx.uid[cv.stid]
                 try :
                     cm=dq.inx.uid[st.cmid].cell_methods
+                    # mpmoine_a_verifier: certaines de ces chaines n existent pas dans les cell_methods de la DR
                     cm1=cm.replace("time: mean","").replace("time: point","").\
                         replace(" within years  over years","") .\
                         replace('time: maximum within days  over days','').\
