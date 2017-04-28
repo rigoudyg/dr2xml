@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<simulation>
+
+  <context id="nemo" src="CONTEXT/context_nemo.xml"/>
+  <context id="nemo"   src="CONTEXT/ping_nemo.xml"/>
+   <context id="nemo"   src="FILE_DEF/nemo.xml"/>
+
+  <context id="lmdz" src="CONTEXT/context_lmdz.xml"/>
+  <context id="lmdz"   src="CONTEXT/ping_lmdz.xml"/> 
+  <context id="lmdz"   src="FILE_DEF/lmdz.xml"/> 
+  
+  <context id="orchidee" src="CONTEXT/context_orchidee.xml"/>
+  <context id="orchidee"   src="CONTEXT/ping_orchidee.xml"/>
+  <context id="orchidee"   src="FILE_DEF/orchidee.xml"/>
+  
+  <context id="xios">
+    <variable_definition>
+      <variable_group id="buffer">
+            <variable id="optimal_buffer_size" type="string">memory</variable>
+            <variable id="buffer_size_factor" type="double">1.0</variable>
+         </variable_group>
+
+        <variable_group id="parameters" >
+          <variable id="info_level" type="int">1</variable>
+          <variable id="print_file" type="bool">true</variable>
+        </variable_group>
+      </variable_definition>
+  </context>
+
+</simulation>

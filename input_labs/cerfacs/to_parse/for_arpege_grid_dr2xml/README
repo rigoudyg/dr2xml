@@ -1,0 +1,29 @@
+==============================================================================================================
+Fichiers xml pour Arpege en formalisme grid + config dr2xml
+==============================================================================================================
+===
+Date: 27/04/2017
+===
+(1) Base en formalisme grid:
+===
+  * Source: de senesi sur beaufix: /home/gmgec/mrgu/senesi/SAVE/XIOS/data/CNRM-CM6-1/xml/spinup/v2 
+                                   (equiv. aux xml presents sous  ~senesi/relances/TECH/grid1)
+  => je conserve le xml de context ou apparait le formalisme grid et les field defs de Stephane.
+===
+(2) Adaptations pour passer en config dr2xml:
+===
+  * Source: de valckes sur beaufix: /home/ext/cf/cglo/valckes/SAVE/xios/arp6.27_dr
+  => je conserve iodef et adapte le contexte pour remonter au niveau iodef le sourcage du file def dr2xml.
+  => utilisation du ping_arpsfx_120417b_06.xml de Sophie mais regresse (dummy_NIFD_<nom_var_modele>) pour
+     toutes les variables non definies dans les fields_arpege.xml et fields_surfex.xml de senesi
+===
+(3) Generation du file def dr2xml:
+ * dr2xml dev3 mpmoine@github + modifs locales (a preciser)
+ * DR 01.00.07
+ * dr2xml en config d'expe HifghResMIP/highresSST-present
+ * sans les extra-Tables Primavera
+ * sans la mecanique d'union/zoom pour les interpolations en niveaux pression
+ * parsing de l'ensemble des fichiers xml tels qu'installes en (1) et (2)
+===
+ 
+==============================================================================================================

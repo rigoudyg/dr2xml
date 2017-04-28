@@ -1,0 +1,43 @@
+<!-- Context surface -->
+
+<context id="orchidee">
+
+  <calendar type="Gregorian" start_date="1950-01-01 00:00:00" time_origin="1950-01-01 00:00:00" />
+  <!-- Define available variables -->
+  <field_definition src="./FIELD_DEF/field_def_orchidee.xml"/> 
+  <!-- <file_definition src="./FILE_DEF/file_def_orchidee.xml"/> -->
+
+  <axis_definition>
+    <axis id="axis_srf"/>
+    <axis id="nvm" axis_ref="axis_srf" name="veget" standard_name="model_level_number" long_name="Vegetation types" unit="1"/>
+    <axis id="nlaip1" axis_ref="axis_srf" name="laiax" standard_name="model_level_number" long_name="Interface of LAI layers" unit="1"/>
+    <axis id="ngrnd" axis_ref="axis_srf" name="solth" standard_name="model_level_number" long_name="Thermal soil levels" unit="m"/>
+    <axis id="nstm" axis_ref="axis_srf" name="soiltyp" standard_name="model_level_number" long_name="Soil tiles" unit="1"/>
+    <axis id="nnobio" axis_ref="axis_srf" name="nobio" standard_name="model_level_number" long_name="Other surface types" unit="1"/>
+    <axis id="albtyp" axis_ref="axis_srf" standard_name="model_level_number" long_name="Albedo types" unit="1"/>
+    <axis id="nslm" axis_ref="axis_srf" name="solay" standard_name="model_level_number" long_name="Hydrological soil levels" unit="1"/>
+    <axis id="nbdl" axis_ref="axis_srf" name="soildiag" standard_name="model_level_number" long_name="Diagnostic soil levels" unit="m"/>
+    <axis id="nsnow" axis_ref="axis_srf" name="snowlev" standard_name="model_level_number" long_name="Snow levels" unit="1"/>
+    <axis id="P10" axis_ref="axis_srf" standard_name="model_level_number" long_name="Pool 10 years" unit="1"/>
+    <axis id="P100" axis_ref="axis_srf" standard_name="model_level_number" long_name="Pool 100 years" unit="1"/>
+    <axis id="P11" axis_ref="axis_srf" standard_name="model_level_number" long_name="Pool 10 years + 1" unit="1"/>
+    <axis id="P101" axis_ref="axis_srf" standard_name="model_level_number" long_name="Pool 100 years + 1" unit="1"/>
+  </axis_definition>
+
+  <domain_definition>
+    <domain id="domain_srf" />
+    <domain id="domain_landpoints" domain_ref="domain_srf" />
+  </domain_definition>
+
+  <grid_definition>
+   <grid id="grid_srf_2D">
+     <domain id="domain_srf" />
+   </grid>
+   <grid id="grid_srf_3D">
+     <domain id="domain_srf" />
+     <axis axis_ref="axis_srf" />
+   </grid>
+  </grid_definition>
+
+</context>
+

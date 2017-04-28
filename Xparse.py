@@ -22,22 +22,23 @@ attributes['axis']=['axis_ref']
 #attributes['axis_definition']=[]  #attributes['domain_definition']=[]
 #attributes['grid_definition']=[]  #attributes['calendar']=[]
 
-# mpmoine_merge_dev2_v0.12: ajout de l'argument 'path' a 'read_src'
-def read_src(elt,printout=False, level=0, dont_read=[]) :
+# mpmoine_amelioration: ajout de l'argument 'path_parse' a la fonction read_src pour pouvoir lire les context.xml d'Arnaud
+def read_src(elt,path_parse,printout=False, level=0, dont_read=[]) :
     """
     Recursively reads the subfiles indicated by tag 'src' in childs of ELT
     """
     childs=[]
     for child in elt :
         if 'src' in child.attrib :
-            # mpmoine_merge_dev2_v0.12:read_src: ajout de "./parse/" pour acceder aux context_<X>.xml
-            filen="./parse/"+child.attrib['src']
+            # mpmoine_amelioration:read_src: ajout de path_parse pour acceder aux context_<X>.xml
+            filen=path_parse+"/"+child.attrib['src']
             skip=False
             for prefix in dont_read :
                 if os.path.basename(filen)[0:len(prefix)]==prefix :
                     print "Skipping %s"%filen
                     skip=True
             if skip : continue
+            # mpmoine_correction: read_src: gestion du type de codage XML pour pouvoir lire les context.xml d'Arnaud
             et=ET.parse(filen).getroot()
             if printout :
                 print level*"\t"+"Reading %s, %s=%s"%(filen,et.tag,gattrib(et,'id','no_id'))
@@ -48,7 +49,7 @@ def read_src(elt,printout=False, level=0, dont_read=[]) :
                 child.append(el)
     for child in elt :
         #print level*"\t"+"Recursing on %s %s"%(child.tag,gattrib(child,'id','no_id'))
-        read_src(child,printout,level+1,dont_read)
+        read_src(child,path_parse,printout,level+1,dont_read)
 
 def gattrib(e,attrib_name,default=None):
     if attrib_name in e.attrib : return e.attrib[attrib_name]
@@ -199,10 +200,12 @@ def select_context(rootel,context_id):
             if 'id' in context.attrib and context.attrib['id']==context_id :
                 return context
 
-def init_context(context_id,printout=False):
+# mpmoine_amelioration: ajout de l'argument 'path_parse' a la fonction init_context
+def init_context(context_id,path_parse,printout=False):
     # mpmoine_merge_dev2_v0.12:init_context: ajout de "./parse/" pour acceder a iodef.xml 
-    rootel=ET.parse("./parse/iodef.xml").getroot()
-    read_src(rootel,printout=printout,dont_read=["dr2xml_"])
+    rootel=ET.parse(path_parse+"/iodef.xml").getroot()
+    # mpmoine_amelioration:init_context: ajout de l'argument 'path_parse' a la fonction read_src
+    read_src(rootel,path_parse,printout=printout,dont_read=["dr2xml_"])
     merge_sons(rootel,printout)
     rootel=select_context(rootel,context_id)
     if rootel is not None :
@@ -221,7 +224,7 @@ def init_context(context_id,printout=False):
 
 def id2grid(field_id,index,printout=False) :
     """ 
-    Returns the list of Element composing the grid of a field
+    Returns the list of Element composing the grid IOXof a field
     """
     if field_id in index : 
         attrib=index[field_id].attrib

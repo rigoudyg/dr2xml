@@ -1,0 +1,60 @@
+<!-- 
+Example of XIOS-2.0 xml sub-file for Trip
+First version - 03/2017 - Bertrand decharme
+Changes : S.Senesi - 04/2017 : create fixed fields file_def, 
+                               change file names and ts_prefixes
+
+This file defines some output files 
+
+For running with Eclis, the file ids below must match IOSOUTPATT,in order
+for the output files to be duly processed 
+ 
+Ref: 
+  - for XIOS : https://forge.ipsl.jussieu.fr/ioserver/wiki 
+  - for XIAS (implementation in Surfex and Arpege) : http://www.cnrm-game-meteo.fr/cm/spip.php?article60
+-->
+<!-- -->
+
+<context id="trip">
+     
+  <file_definition  type="one_file">
+
+    <file_group timeseries="exclusive" append="true">
+
+      <file ts_prefix="%file_name%" name="/scratch/utmp/ftdir/senesi/eclis/transfers/grid1/iox//grid1_trip_fx" output_freq="1mo" enabled="true" append="false">
+	<field_group group_ref="trip_fix"    operation="once"    />
+      </file>
+      
+      <file ts_prefix="%file_name%" name="/scratch/utmp/ftdir/senesi/eclis/transfers/grid1/iox//grid1_trip_timestep"
+	    output_freq="1ts" split_freq="1mo" enabled="false" >
+	  <field_group ts_split_freq="1y" ts_enabled="true" >
+	    <field_group group_ref="trip_group1" operation="instant" enabled="false"  />
+	    <field_group group_ref="trip_group2" operation="instant" enabled="false" />
+	    <field_group group_ref="trip_misc"   operation="instant" enabled="false" />
+	  </field_group >
+	</file>
+
+	<file ts_prefix="%file_name%" name="/scratch/utmp/ftdir/senesi/eclis/transfers/grid1/iox//grid1_trip_daily"
+	      output_freq="1d" split_freq="1y" enabled="true" >
+	  <field_group ts_split_freq="20y" ts_enabled="true" >
+	    <field_group group_ref="trip_group1" operation="average" enabled="true"  />
+	    <field_group group_ref="trip_group2" operation="average" enabled="false" />
+	    <field_group group_ref="trip_misc"   operation="average" enabled="false" />
+	  </field_group >
+      </file>
+
+      <file ts_prefix="%file_name%" name="/scratch/utmp/ftdir/senesi/eclis/transfers/grid1/iox//grid1_trip_monthly"
+	    output_freq="1mo" split_freq="10y" enabled="true" >
+	<field_group ts_split_freq="1000y" ts_enabled="true" >
+	  <field_group group_ref="trip_group1" operation="average" enabled="true"  />
+	  <field_group group_ref="trip_group2" operation="average" enabled="false" />
+	  <field_group group_ref="trip_misc"   operation="average" enabled="false" />
+	</field_group >
+      </file>
+      
+    </file_group>
+
+  </file_definition>
+
+</context>
+  

@@ -54,8 +54,8 @@ import sys,os
 import xml.etree.ElementTree as ET
 
 # mpmoine_merge_dev2_v0.12: posixpath.dirname ne marche pas chez moi
-#from os import path as os_path
-#prog_path=os_path.abspath(os_path.split(__file__)[0])
+#TBS# from os import path as os_path
+#TBS# prog_path=os_path.abspath(os_path.split(__file__)[0])
 
 # Local packages
 # mpmoine_zoom_modif: import simple_Dim
@@ -418,8 +418,32 @@ def wr(out,key,dic_or_val=None,num_type="string",default=None) :
         else :
             print 'error in wr,  no value provided for %s'%key
     if val :
-        out.write('  <variable name="%s"  type="string" > %s '%(key,val))
+        out.write('  <variable name="%s"  type="%s" > %s '%(key,num_type,val))
         out.write('  </variable>\n')
+
+
+# mpmoine_cmor_update:write_xios_file_def: CMOR3.0.3 impose des formats de date dans les noms de fichiers dependants de la frequence => nouvelle fonction freq2datefmt
+def freq2datefmt(freq):
+    datefmt=False
+    if freq=="decadal":
+        datefmt="%y"
+    elif freq=="yr":
+        datefmt="%y"
+    elif freq=="mon" or freq=="monClim":
+        datefmt="%y%mo"
+    elif freq=="day":
+        datefmt="%y%mo%d"
+    elif freq=="6hr":
+        datefmt="%y%mo%d%h"
+    elif freq=="3hr":
+        datefmt="%y%mo%d%h"
+    elif freq=="1hr" or freq=="1hrClimMon":
+        datefmt="%y%mo%d%h"
+    elif freq=="subhr":
+        datefmt="%y%mo%d%h%mi%s"
+    elif freq=="fx":
+        datefmt="%y" #TBD: verifier le format de date attendu par CMOR pour les fichiers de champ fixe
+    return datefmt
 
 def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     field_defs,axis_defs,grid_defs,domain_defs,
@@ -441,6 +465,16 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     """
     #
     global sc
+
+    # mpmoine_amelioration:write_xios_file_def: gestion ici des attributs pour lesquels on a recupere des chaines vides (" " est Faux mais est ecrit " "")
+    #--------------------------------------------------------------------
+    # Set to NOT-SET field attributes that can be empty strings
+    #--------------------------------------------------------------------
+    if not cmv.stdname       : cmv.stdname       = "DR-ISSUE"
+    if not cmv.long_name     : cmv.long_name     = "DR-ISSUE"
+    if not cmv.cell_methods  : cmv.cell_methods  = "DR-ISSUE"
+    if not cmv.cell_measures : cmv.cell_measures = "DR-ISSUE"
+    if not cmv.stdunits      : cmv.stdunits      = "DR-ISSUE"
 
     #--------------------------------------------------------------------
     # Define alias for field_ref in file-def file 
@@ -531,8 +565,6 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     if "Gre" in table : grid_label+="g"
     # TBD : change grid_label depending on shape (sites, transects)
     #
-    time_range="%start_date%_%end_date%" # XIOS syntax
-    #
     #--------------------------------------------------------------------
     # Set NetCDF output file name according to the DRS
     #--------------------------------------------------------------------
@@ -552,9 +584,13 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
         experiment=exp_entry['experiment']
         description=exp_entry['description']
     #
+    date_range="%start_date%_%end_date%" # XIOS syntax
+    # mpmoine_cmor_update:write_xios_file_def: CMOR3.0.3 impose des formats de date dans les noms de fichiers dependants de la frequence
+    date_format=freq2datefmt(cmv.frequency)
+    #
     filename="%s%s_%s_%s_%s_%s_%s_%s"%\
                (prefix,cmv.label,table,source_id,expname,
-                member_id,grid_label,time_range)
+                member_id,grid_label,date_range)
     #
     #--------------------------------------------------------------------
     # Compute XIOS split frequency
@@ -568,8 +604,16 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     # Write XIOS file node:
     # including global CMOR file attributes
     #--------------------------------------------------------------------
-    out.write(' <file name="%s" output_freq="%s" '% (filename,cmipFreq2xiosFreq[cmv.frequency]))
-    out.write('  append="true" split_freq="%s" '%split_freq)
+    # mpmoine_amelioration:write_xios_file_def: ajout de 'ts_prefix' et de time_series="only"
+    ts_prefix=lset['output_path']
+    if ts_prefix:
+        out.write(' <file ts_prefix="%s" name="%s" timeseries="only" '%(ts_prefix,filename))
+    else:
+        out.write(' <file name="%s" timeseries="only" '%filename)
+    out.write(' output_freq="%s" '%cmipFreq2xiosFreq[cmv.frequency])
+    out.write(' append="true" split_freq="%s" '%split_freq)
+    # mpmoine_cmor_update:write_xios_file_def: ajout de 'split_freq_format' pour se coformer a CMOR3.0.3 
+    out.write(' split_freq_format="%s" '%date_format)
     #out.write('timeseries="exclusive" >\n')
     out.write(' time_units="days" time_counter_name="time"')
     out.write(' time_stamp_name="creation_date" ')
@@ -597,7 +641,8 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     if 'fx' in table : external_variables= "" 
     wr(out,'external_variables',external_variables)
     #
-    wr(out,'forcing_index',forcing_index) 
+    # mpmoine_cmor_update:write_xios_file_def: ecriture de forcing_index en integer requis par la version CMOR3.2.3
+    wr(out,'forcing_index',forcing_index,num_type="int") 
     # mpmoine_last_modif: Maintenant, dans le cas type='perso', table='NONE'. On ne doit donc pas compter sur table2freq pour recuperer la frequence
     wr(out,'frequency',cmv.frequency)
     #
@@ -606,8 +651,9 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     #
     wr(out,'grid',grid_description) ; wr(out,'grid_label',grid_label) ;
     wr(out,'nominal_resolution',grid_resolution)    
-    wr(out,'history',sset,'none') 
-    wr(out,"initialization_index",initialization_index)
+    wr(out,'history',sset,default='none') 
+    # mpmoine_cmor_update:write_xios_file_def: ecriture de  initialization_index en integer requis par la version CMOR3.2.3 
+    wr(out,"initialization_index",initialization_index,num_type="int")
     wr(out,"institution_id",institution_id)
     if "institution" in lset :
         inst=lset['institution']
@@ -616,7 +662,7 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
             try:
                 inst=json.loads(json_fp.read())['institution_id'][institution_id]
             except :
-                raise(dr2xml_error("Institution_id for %s not found "+\
+                raise(dr2xml_error("Fatal: Institution_id for %s not found "+\
                         "in CMIP6_CV at %s"%(institution,cvspath)))
     wr(out,"institution",inst)
     #
@@ -644,13 +690,15 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
         wr(out,"parent_time_units",parent_time_units)
         parent_variant_label=sset.get('parent_variant_label',variant_label) 
         wr(out,'parent_variant_label',parent_variant_label)
-        wr(out,'branch_method',sset,'standard')
+        wr(out,'branch_method',sset,default='standard')
         wr(out,'branch_time_in_child',sset)
         wr(out,'branch_time_in_parent',sset) 
-    wr(out,"physics_index",physics_index) 
-    # mpmoine_cmor_update:write_xios_file_def: changement des valeurs de 'product' avec la version CMOR3.2.3
+    # mpmoine_cmor_update:write_xios_file_def: ecriture de physics_index en integer requis par la version CMOR3.2.3 
+    wr(out,"physics_index",physics_index,num_type="int") 
+    # mpmoine_cmor_update:write_xios_file_def: changement des valeurs de 'product' requis par la version CMOR3.2.3
     wr(out,'product','model-output')
-    wr(out,"realization_index",realization_index) 
+    # mpmoine_cmor_update:write_xios_file_def: ecriture de realization_index en integer requis par la version CMOR3.2.3
+    wr(out,"realization_index",realization_index,num_type="int") 
     wr(out,'realm',cmv.modeling_realm)
     wr(out,'references',lset) 
     #
@@ -661,7 +709,7 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     except :
         if "source" in lset : source=lset['source']
         else:
-            raise(dr2xml_error("source for %s not found in CMIP6_CV at"+\
+            raise(dr2xml_error("Fatal: source for %s not found in CMIP6_CV at"+\
                                "%s, nor in lset"%(source_id,cvspath)))
     wr(out,'source',source) 
     wr(out,'source_id',source_id)
@@ -674,7 +722,7 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
             if 'source_types' in lset :
                 source_type=lset['source_types'][source_id] 
             else:
-                raise dr2xml_error("No source-type found - Check inputs")
+                raise dr2xml_error("Fatal: No source-type found - Check inputs")
     if type(source_type)==type([]) :
         source_type=reduce(lambda x,y : x+" "+y, source_type)
     wr(out,'source_type',source_type)
@@ -682,12 +730,12 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     wr(out,'sub_experiment_id',sub_experiment_id) 
     # mpmoine_cmor_update:write_xios_file_def: CMOR3.2.2 impose 'None' (et non 'none') pour sub_experiment
     # mpmoine_cmor_update:write_xios_file_def: CMOR3.2.3 impose 'none' (et non 'None' !)pour sub_experiment
-    wr(out,'sub_experiment',sset,'none') 
+    wr(out,'sub_experiment',sset,default='none') 
     wr(out,"table_id",table)
     wr(out,"title","%s model output prepared for %s / %s %s"%(\
         source_id,sset.get('project',"CMIP6"),activity_id,experiment_id))
     wr(out,"variable_id",cmv.label)
-    wr(out,"variant_info",sset,"")
+    wr(out,"variant_info",sset,default="none")
     wr(out,"variant_label",variant_label)
     #
     #--------------------------------------------------------------------
@@ -719,7 +767,7 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
 
 def wrv(name, value, num_type="string"):
     # Format a 'variable' entry
-    return '     <variable name="%s" type="string" > %s '%(name,value)+\
+    return '     <variable name="%s" type="%s" > %s '%(name,num_type,value)+\
         '</variable>\n'
 
 # mpmoine_zoom_modif: renommage de la fonction 'create_xios_field_ref' en 'create_xios_aux_elmts_defs'
@@ -789,7 +837,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
                     axis_key=sd.label           # e.g. 'plev7h'
                 if not cible in pingvars:       # e.g. alias_ping='CMIP6_hus'
                     print "Warning: field id",cible,"expected in pingfile but not found."
-                if not alias1 in pingvars: # mpmoine_note: maintenant on est toujours dans ce cas (e.g. 'CMPI6_hus7h_ple7h' plus jamais ecrit dans le ping)
+                if not alias1 in pingvars: # mpmoine_note: maintenant on est toujours dans ce cas (e.g. 'CMPI6_hus7h_plev7h' plus jamais ecrit dans le ping)
                     #
                     # Construct an axis for interpolating to this dimension
                     # mpmoine_future_modif:create_xios_aux_elmts_defs: suppression de l'argument 'field_defs' de create_axis_def qui n'est pas utilise
@@ -825,11 +873,22 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
                 #TBD what to do for singleton dimension ?
     #
     #--------------------------------------------------------------------
-    # Build XIOS domain elements (stored in domain_defs)
+    # Retrieve XIOS temporal operation to perform
+    # by analyzing the time part of cell_methods
     #--------------------------------------------------------------------
-     # Analyze 'outermost' time cell_method and translate to 'operation'
+     # Analyze 'outermost' time cell_methods and translate to 'operation'
     operation,detect_missing = analyze_cell_time_method(sv.cell_methods,sv.label,table)
-    # Horizontal operations. Can include horiz re-gridding specification
+    # mpmoine_alelioration:create_xios_aux_elmts_defs: lever une erreur quand on ne trouve pas une operation temporelle xios correcte
+    if not operation: 
+        raise dr2xml_error("Fatal: bad xios 'operation' for %s in table %s: %s (%s)"%(sv.label,table,operation,sv.cell_methods))
+    if not type(detect_missing)==type(bool()): 
+        raise dr2xml_error("Fatal: bad xios 'detect_missing_value' for %s in table %s: %s (%s)"%(sv.label,table,detect_missing,sv.cell_methods))
+    #
+    #--------------------------------------------------------------------
+    # Build XIOS grid elements (stored in grid_defs)
+    # by analyzing the spatial shape
+    # Including horizontal operations. Can include horiz re-gridding specification
+    #--------------------------------------------------------------------
     # Compute domain name, define it if needed
     grid_ref=None
     if ssh[0:2] == 'Y-' : #zonal mean and atm zonal mean on pressure levels
@@ -852,7 +911,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
     elif ssh      == 'na-na'  : # global means or constants
         pass 
     else :
-        raise(dr2xml_error("Issue with un-managed spatial shape %s"%ssh))
+        raise(dr2xml_error("Fatal: Issue with un-managed spatial shape %s"%ssh))
     #
     #--------------------------------------------------------------------
     # Build XIOS field elements (stored in end_field_defs)
@@ -937,7 +996,8 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
     # Parse XIOS setting files for the context
     #--------------------------------------------------------------------
     global context_index
-    context_index=init_context(context)
+    # mpmoine_amelioration:generate_file_defs: ajout de l'argument 'path_parse' a la fonction init_context
+    context_index=init_context(context,lset["path_to_parse"],printout=False)
     #
     #--------------------------------------------------------------------
     # Extract CMOR variables for the experiment and year and lab settings
@@ -1178,16 +1238,16 @@ def create_grid_def(sd,alias=None,context_index=None):
     # mpmoine_correction:create_grid_def:  si, il faut generer une grille autour des axes de zoom aussi
     if not sd.is_zoom_of and not sd.is_union_for: # a grid_def to build in classical case (a vertical axis without using union)
         if alias and context_index:
-            src_grid=id2grid(alias,context_index)
-            src_grid_id=src_grid.attrib ['id']
+            src_grid=id2grid(alias,context_index,printout=True)
+            src_grid_id=src_grid.attrib['id']
             src_grid_string=ET.tostring(src_grid)
             target_grid_id=src_grid_id+"_"+sd.label
             target_grid_string=re.sub('axis_ref= *.([\w_])*.','axis_ref="%s"'%sd.label,src_grid_string)
             target_grid_string=re.sub('grid id= *.([\w_])*.','grid id="%s"'%target_grid_id,target_grid_string)
             return (target_grid_id,target_grid_string)
         else:
-            print "Error: ask for creating a grid_def from a native grid \
-            but variable alias and/or context_index not provided."
+            raise dr2xml_error("Fatal: ask for creating a grid_def from a native grid "+\
+            "but variable alias and/or context_index not provided (alias:%s, context_index:%s)"%(alias,context_index))
             return False
     elif sd.is_union_for: # a grid_def to build in union case
         grid_id="grid_"+sd.label
@@ -1323,18 +1383,24 @@ def analyze_cell_time_method(cm,label,table):
     """
     Depending on cell method string CM, tells which time operation
     should be done, and if missing value detection should be set
+    We rely on the missing value detection to match the requirements like
+    "where sea-ice", "where cloud" since we suppose fields required in this way
+    are physically undefined oustide of "where something".
     """
     operation=None
     detect_missing=False
+    #
     if cm is None : 
         if print_DR_errors :
             print "DR Error: cell_time_method is None for %15s in table %s, averaging" %(label,table)
         operation="average"
+    #----------------------------------------------------------------------------------------------------------------
     elif "time: mean (with samples weighted by snow mass)" in cm : 
         #[amnla-tmnsn]: Snow Mass Weighted (LImon : agesnow, tsnLi)
         print "TBD: Cannot yet handle time: mean (with samples weighted by snow mass) for "+\
             "%15s in table %s -> averaging"%(label,table)
         operation="average"
+    #----------------------------------------------------------------------------------------------------------------
     elif "time: mean where cloud"  in cm : 
         #[amncl-twm]: Weighted Time Mean on Cloud (2 variables ISSCP 
         # albisccp et pctisccp, en emDay et emMon)
@@ -1343,61 +1409,187 @@ def analyze_cell_time_method(cm,label,table):
             %(label,table)
         operation="average"
         detect_missing=True
-    elif "time: mean where sea"  in cm :#[amnesi-tmn]: 
-        #Area Mean of Ext. Prop. on Sea Ice : pas utilisee
-        print "time: mean where sea is not supposed to be used (%s,%s)"%(label,table)
+    #----------------------------------------------------------------------------------------------------------------
     elif "time: mean where sea_ice" in cm :
         #[amnsi-twm]: Weighted Time Mean on Sea-ice (presque que des 
         #variables en SImon, sauf sispeed et sithick en SIday)
+        # mpmoine_correction:analyze_cell_time_method: ajout de operation="average" pour "time: mean where sea_ice"
+        print "Note : assuming that 'time: mean where sea_ice' "+\
+            " for %15s in table %s is well handled by 'detect_missing'"\
+            %(label,table)
+        operation="average"
         detect_missing=True
+    #----------------------------------------------------------------------------------------------------------------
+    elif "time: mean where sea"  in cm :#[amnesi-tmn]: 
+        #Area Mean of Ext. Prop. on Sea Ice : pas utilisee
+        print "time: mean where sea is not supposed to be used (%s,%s)"%(label,table)
+    #----------------------------------------------------------------------------------------------------------------
+    # mpmoine_correction:analyze_cell_time_method: ajout du cas "time: mean where floating_ice_shelf"
+    elif "time: mean where floating_ice_shelf" in cm :
+        #[amnfi-twmn]: Weighted Time Mean on Floating Ice Shelf (presque que des 
+        #variables en Imon, Iyr, sauf sftflt en LImon !?)
+        print "Note : assuming that 'time: mean where floating_ice_shelf' "+\
+            " for %15s in table %s is well handled by 'detect_missing'"\
+            %(label,table)
+        operation="average"
+        detect_missing=True
+    #----------------------------------------------------------------------------------------------------------------
+    # mpmoine_correction:analyze_cell_time_method: ajout du cas "time: mean where grounded_ice_sheet"
+    elif "time: mean where grounded_ice_sheet" in cm :
+        #[amngi-twm]: Weighted Time Mean on Grounded Ice Shelf (uniquement des 
+        #variables en Imon, Iyr)
+        print "Note : assuming that 'time: mean where grounded_ice_sheet' "+\
+            " for %15s in table %s is well handled by 'detect_missing'"\
+            %(label,table)
+        operation="average"
+        detect_missing=True
+    #----------------------------------------------------------------------------------------------------------------
+    # mpmoine_correction:analyze_cell_time_method: ajout du cas "time: mean where ice_sheet"
+    elif "time: mean where ice_sheet" in cm :
+        #[amnni-twmn]: Weighted Time Mean on Ice Shelf (uniquement des 
+        #variables en Imon, Iyr)
+        print "Note : assuming that 'time: mean where ice_sheet' "+\
+            " for %15s in table %s is well handled by 'detect_missing'"\
+            %(label,table)
+        operation="average"
+        detect_missing=True
+    #----------------------------------------------------------------------------------------------------------------
+    # mpmoine_correction:analyze_cell_time_method: ajout du cas "time: mean where sea_ice_melt_pound"
+    elif "time: mean where sea_ice_melt_pound" in cm :
+        #[amnnsimp-twmm]: Weighted Time Mean in Sea-ice Melt Pounds (uniquement des 
+        #variables en SImon)
+        print "Note : assuming that 'time: mean where sea_ice_melt_pound' "+\
+            " for %15s in table %s is well handled by 'detect_missing'"\
+            %(label,table)
+        operation="average"
+        detect_missing=True
+    #----------------------------------------------------------------------------------------------------------------
+    # mpmoine_correction:analyze_cell_time_method: ajout du cas "time: mean where landuse"
+    elif "time: mean where landuse" in cm :
+        #[amlu-twm]: Weighted Time Mean on Land Use Tiles (uniquement des 
+        #variables suffixees en 'Lut')
+        print "Note : assuming that 'time: mean where landuse' "+\
+            " for %15s in table %s is well handled by 'detect_missing'"\
+            %(label,table)
+        operation="average"
+        detect_missing=True
+    #----------------------------------------------------------------------------------------------------------------
+    # mpmoine_correction:analyze_cell_time_method: ajout du cas "time: mean where crops"
+    elif "time: mean where crops" in cm :
+        #[amc-twm]: Weighted Time Mean on Crops (uniquement des 
+        #variables suffixees en 'Crop')
+        print "Note : assuming that 'time: mean where crops' "+\
+            " for %15s in table %s is well handled by 'detect_missing'"\
+            %(label,table)
+        operation="average"
+        detect_missing=True
+    #----------------------------------------------------------------------------------------------------------------
+    # mpmoine_correction:analyze_cell_time_method: ajout du cas "time: mean where natural_grasses"
+    elif "time: mean where natural_grasses" in cm :
+        #[amng-twm]: Weighted Time Mean on Natural Grasses (uniquement des 
+        #variables suffixees en 'Grass')
+        print "Note : assuming that 'time: mean where natural_grasses' "+\
+            " for %15s in table %s is well handled by 'detect_missing'"\
+            %(label,table)
+        operation="average"
+        detect_missing=True
+    #----------------------------------------------------------------------------------------------------------------
+    # mpmoine_correction:analyze_cell_time_method: ajout du cas "time: mean where shrubs"
+    elif "time: mean where shrubs" in cm :
+        #[ams-twm]: Weighted Time Mean on Shrubs (uniquement des 
+        #variables suffixees en 'Shrub')
+        print "Note : assuming that 'time: mean where shrubs' "+\
+            " for %15s in table %s is well handled by 'detect_missing'"\
+            %(label,table)
+        operation="average"
+        detect_missing=True
+    #----------------------------------------------------------------------------------------------------------------
+    # mpmoine_correction:analyze_cell_time_method: ajout du cas "time: mean where trees"
+    elif "time: mean where trees" in cm :
+        #[amtr-twm]: Weighted Time Mean on Bare Ground (uniquement des 
+        #variables suffixees en 'Tree')
+        print "Note : assuming that 'time: mean where trees' "+\
+            " for %15s in table %s is well handled by 'detect_missing'"\
+            %(label,table)
+        operation="average"
+        detect_missing=True
+    #----------------------------------------------------------------------------------------------------------------
+    # mpmoine_correction:analyze_cell_time_method: ajout du cas "time: mean where vegetation"
+    elif "time: mean where vegetation" in cm :
+        #[amv-twm]: Weighted Time Mean on Vegetation (pas de varibles concernees)
+        print "Note : assuming that 'time: mean where vegetation' "+\
+            " for %15s in table %s is well handled by 'detect_missing'"\
+            %(label,table)
+        operation="average"
+        detect_missing=True
+    #----------------------------------------------------------------------------------------------------------------
     elif "time: minimum" in cm :    
         #[tmin]: Temporal Minimum : utilisee seulement dans table daily
         operation="minimum"
+    #----------------------------------------------------------------------------------------------------------------
     elif "time: maximum" in cm :   
         #[tmax]: Time Maximum  : utilisee seulement dans table daily
         operation="maximum"
+    #----------------------------------------------------------------------------------------------------------------
     elif "time: maximum within days time: mean over days" in cm :
         #[dmax]: Daily Maximum : tasmax Amon seulement
         if label != 'tasmax' : 
             print "Error: issue with variable %s in table %s "%(label,table)+\
                 "and cell method time: maximum within days time: mean over days"
         operation="average"
+    #----------------------------------------------------------------------------------------------------------------
     elif "time: minimum within days time: mean over days" in cm :
         #[dmin]: Daily Minimum : tasmin Amon seulement
         if label != 'tasmin' : 
             print "Error: issue with variable %s in table %s  "%(label,table)+\
                 "and cell method time: minimum within days time: mean over days"
         operation="average"
+    #----------------------------------------------------------------------------------------------------------------
     elif "time: mean within years time: mean over years" in cm: 
         #[aclim]: Annual Climatology
         print "TBD: Cannot yet compute annual climatology for "+\
             "%15s in table %s -> averaging"%(label,table)
         # Could transform in monthly fields to be post-processed
         operation="average"
+    #----------------------------------------------------------------------------------------------------------------
     elif "time: mean within days time: mean over days"  in cm: 
         #[amn-tdnl]: Mean Diurnal Cycle
         print "TBD: Cannot yet compute diurnal cycle for "+\
         " %15s in table %s -> averaging"%(label,table)
+    #----------------------------------------------------------------------------------------------------------------
+    # mpmoine_correction:analyze_cell_time_method: ajout du cas 'Maximum Hourly Rate'
+    elif "time: mean within hours time: maximum over hours"  in cm: 
+        #[amn-tdnl]: Mean Diurnal Cycle
+        print "TBD: Cannot yet compute maximum hourly rate for "+\
+        " %15s in table %s -> averaging"%(label,table)
         # Could output a time average of 24 hourly fields at 01 UTC, 2UTC ...
         operation="average"
+    #----------------------------------------------------------------------------------------------------------------
     elif "time: sum"  in cm :
         # [tsum]: Temporal Sum  : pas utilisee !
-        print "Error: time: sum is not supposed to be used" 
+        # mpmoine_correction: on utilise 'accumulate' quand un "time: sum" est demande
+        operation="accumulate"
+        #TBS# print "Error: time: sum is not supposed to be used" 
+    #----------------------------------------------------------------------------------------------------------------
     elif "time: mean" in cm :  #    [tmean]: Time Mean  
         operation="average"
+    #----------------------------------------------------------------------------------------------------------------
     elif "time: point" in cm:
         operation="instant"
+    #
     # mpmoine_correction:analyze_cell_time_method: ajout du cas sans operation temporelle (champs fixes)
     elif not "time:" in cm:
         operation="once"
+    #----------------------------------------------------------------------------------------------------------------
     else :
         print "Error: issue when analyzing cell_time_method "+\
             "%s for %15s in table %s, averaging" %(cm,label,table)
+    #----------------------------------------------------------------------------------------------------------------
     return (operation, detect_missing)
 
-    #
-
-def pingFileForRealmsList(context,lrealms,svars,dummy="field_atm",
+#
+#mpmoine_amelioration: ajout argument 'path_special' a la fonction pingFileForRealmsList
+def pingFileForRealmsList(context,lrealms,svars,path_special,dummy="field_atm",
     dummy_with_shape=False, exact=False,
     comments=False,prefix="CV_",filename=None):
     """Based on a list of realms LREALMS and a list of simplified vars
@@ -1469,7 +1661,11 @@ def pingFileForRealmsList(context,lrealms,svars,dummy="field_atm",
     # mpmoine_future_modif:pingFileForRealmsList: typo 'filneme' -> 'filename'
     if filename[-4:] != ".xml" : filename +=".xml"
     #
-    specials=read_special_fields_defs(lrealms)
+    #mpmoine_amelioration:pingFileForRealmsList:: ajout argument 'path_special' a la fonction read_special_fields_defs + protection si path_special existe
+    if path_special: 
+        specials=read_special_fields_defs(lrealms,path_special)
+    else: 
+        specials=False
     with open(filename,"w") as fp:
         fp.write('<!-- Ping files generated by dr2xml %s using Data Request %s -->\n'%(version,dq.version))
         fp.write('<!-- lrealms= %s -->\n'%`lrealms`)
@@ -1489,7 +1685,8 @@ def pingFileForRealmsList(context,lrealms,svars,dummy="field_atm",
                 label=v.label_non_ambiguous
             else:
                 label=v.label_without_psuffix
-            if label in specials :
+            #mpmoine_amelioration:pingFileForRealmsList: protection si specials existe
+            if specials and label in specials :
                 line=ET.tostring(specials[label]).replace("DX_",prefix)
                 line=line.replace("\n","").replace("\t","")
                 fp.write('   '); fp.write(line)
@@ -1521,12 +1718,16 @@ def pingFileForRealmsList(context,lrealms,svars,dummy="field_atm",
         print "%3d variables written for %s"%(len(lvars),filename)
         #
         # Write axis_defs, domain_defs, ... read from relevant input/DX_ files
-        for obj in [ "axis", "domain", "grid" ] :
-            #print "for obj "+obj
-            copy_obj_from_DX_file(fp,obj,prefix,lrealms)
+        # mpmoine_amelioration:pingFileForRealmsList: protection si path_special existe
+        if path_special:
+            for obj in [ "axis", "domain", "grid" ] :
+                #print "for obj "+obj
+                #mpmoine_amelioration:pingFileForRealmsList: ajout argument 'path_special' a la fonction copy_obj_from_DX_file
+                copy_obj_from_DX_file(fp,obj,prefix,lrealms,path_special)
         fp.write('</context>\n')
 
-def copy_obj_from_DX_file(fp,obj,prefix,lrealms) :
+#mpmoine_amelioration: ajout argument 'path_special' a la fonction copy_obj_from_DX_file
+def copy_obj_from_DX_file(fp,obj,prefix,lrealms,path_special) :
     # Insert content of DX_<obj>_defs files (changing prefix)
     #print "copying %s defs :"%obj,
     subrealms_seen=[]
@@ -1535,7 +1736,8 @@ def copy_obj_from_DX_file(fp,obj,prefix,lrealms) :
             if subrealm in subrealms_seen : continue
             subrealms_seen.append(subrealm)
             #print "\tand realm %s"%subrealm, 
-            defs=DX_defs_filename(obj,subrealm)
+            #mpmoine_amelioration:opy_obj_from_DX_file: ajout argument 'path_special' a la fonction DX_defs_filename
+            defs=DX_defs_filename(obj,subrealm,path_special)
             if os.path.exists(defs) :
                 with open(defs,"r") as fields :
                     #print "from %s"%defs
@@ -1549,9 +1751,10 @@ def copy_obj_from_DX_file(fp,obj,prefix,lrealms) :
                 pass
                 print " no file :%s "%defs
 
-def DX_defs_filename(obj,realm):
-    #-return prog_path+"/inputs/DX_%s_defs_%s.xml"%(obj,realm)
-    return "./inputs/DX_%s_defs_%s.xml"%(obj,realm)
+#mpmoine_amelioration: ajout argument 'path_special' a la fonction DX_defs_filename
+def DX_defs_filename(obj,realm,path_special):
+    #TBS# return prog_path+"/inputs/DX_%s_defs_%s.xml"%(obj,realm)
+    return path_special+"/DX_%s_defs_%s.xml"%(obj,realm)
 
 # mpmoine_future_modif: renommage de la fonction 'field_defs' en 'get_xml_childs'
 def get_xml_childs(elt, tag='field', groups=['context', 'field_group',
@@ -1601,14 +1804,16 @@ def read_xml_elmt_or_attrib(filename, tag='field', attrib=None, printout=False) 
         if printout : print "No file "
         return None
 
-def read_special_fields_defs(realms,printout=False) :
+# mpmoine_amelioration: ajout de l'argument 'path_special' a la fonction read_special_field_defs
+def read_special_fields_defs(realms,path_special,printout=False) :
     special=dict()
     subrealms_seen=[]
     for realm in realms  :
         for subrealm in realm.split() :
             if subrealm in subrealms_seen : continue
             subrealms_seen.append(subrealm)
-            d=read_xml_elmt_or_attrib(DX_defs_filename("field",subrealm),\
+            # mpmoine_amelioration:read_special_fields_defs: ajout de l'argument 'path_special' a la fonction DX_defs_filename
+            d=read_xml_elmt_or_attrib(DX_defs_filename("field",subrealm,path_special),\
                                         tag='field',printout=printout)
             if d: special.update(d)
     rep=dict()

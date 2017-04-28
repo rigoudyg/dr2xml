@@ -1,0 +1,21 @@
+<context id="nemo">
+
+  <calendar type="Gregorian" start_date="1950-01-01 00:00:00" time_origin="1950-01-01 00:00:00" />
+  
+  <scalar_definition>   <scalar id="scalar_oce" /> </scalar_definition>
+  <axis_definition> <axis id="axis_oce"/> </axis_definition>
+  <domain_definition> <domain id="domain_oce" /> </domain_definition>
+
+  <grid_definition>    
+    <grid id="grid_oce_scalar"> <scalar scalar_ref="scalar_oce" /> </grid>
+    <grid id="grid_oce_2D" > <domain id="domain_oce" /> </grid>
+    <grid id="grid_oce_3D" > <domain id="domain_oce" /> <axis id="axis_oce"  /> </grid>
+  </grid_definition>    
+
+  <field_definition level="1" prec="4" operation="average" enabled=".TRUE." default_value="1.e20" > 
+        <field id="field_oce_grid_scalar" grid_ref="grid_oce_scalar" />
+        <field id="field_oce_grid_2D"     grid_ref="grid_oce_2D" />
+        <field id="field_oce_grid_3D"     grid_ref="grid_oce_3D" />
+   </field_definition >
+
+</context>

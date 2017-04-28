@@ -1,0 +1,6 @@
+<context id="nemo">
+<field_definition>
+<!-- for variables which realm equals one of _ocean_seaIce_ocnBgchem-->
+   <field id="CMIP6_O18sw"         field_ref="dummy_XYO"        /> <!-- P1 () O18sw : Roche - LSCE -->
+</field_definition>
+</context>

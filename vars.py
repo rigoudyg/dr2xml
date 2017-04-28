@@ -60,10 +60,10 @@ class simple_Dim(object):
 # mpmoine_future_modif: liste des suffixes de noms de variables reperant un ou plusieurs niveaux pression
 # List of multi and single pressure level suffixes for which we want the union/zoom axis mecanism turned on
 # For not using union/zoom, define these 2 lists as empty sets
-multi_plev_suffixes=set(["10","19","23","27","39","3","3h","4","7c","7h","8","12"])
-#multi_plev_suffixes=set()
-single_plev_suffixes=set(["1000","200","220","500","560","700","840","850","100"])
-#single_plev_suffixes=set()
+#multi_plev_suffixes=set(["10","19","23","27","39","3","3h","4","7c","7h","8","12"])
+multi_plev_suffixes=set()
+#single_plev_suffixes=set(["1000","200","220","500","560","700","840","850","100"])
+single_plev_suffixes=set()
 
 ambiguous_mipvarnames=None
 
@@ -172,9 +172,9 @@ def read_extraTable(path,table,dq,printout=False):
         dims2shape['longitude|latitude|height100m']='XY-na'
         # mpmoine_note: provisoire, XY-P12 juste pour exemple
         dims2shape['longitude|latitude|plev12']='XY-P12'
-        # mpmoine_zoom_modif: ajout de XY-P23 qui a disparu de la DR-00.00.04 mais est demande dans les tables Primavera
+        # mpmoine_zoom_modif:dims2shape:: ajout de XY-P23 qui a disparu de la DR-00.00.04 mais est demande dans les tables Primavera
         dims2shape['longitude|latitude|plev23']='XY-P23'
-        # mpmoine_zoom_modif: ajout de XY-P10 qui n'est pas dans la DR mais demande dans les tables Primavera
+        # mpmoine_zoom_modif:dims2shape:: ajout de XY-P10 qui n'est pas dans la DR mais demande dans les tables Primavera
         dims2shape['longitude|latitude|plev10']='XY-P10'
     #
     if not dim2dimid:
@@ -202,20 +202,21 @@ def read_extraTable(path,table,dq,printout=False):
     with open(json_table,"r") as jt:
         json_tdata=jt.read()
         tdata=json.loads(json_tdata)
+        # mpmoine_correction:read_extraTable: ajout de precautions 'NOT-SET' pour certains attributs pour eviter les chaines vides qui font planter XIOS (">  <")
         for k,v in tdata["variable_entry"].iteritems(): 
             extra_var=simple_CMORvar()
             extra_var.type='extra'
             extra_var.mip_era=mip_era
-            extra_var.label=v["out_name"]
-            extra_var.stdname=v["standard_name"]
-            extra_var.long_name=v["long_name"]
-            extra_var.stdunits=v["units"]
-            extra_var.modeling_realm=v["modeling_realm"]
+            extra_var.label=v["out_name"].strip(' ')
+            extra_var.stdname=v["standard_name"].strip(' ')
+            extra_var.long_name=v["long_name"].strip(' ')
+            extra_var.stdunits=v["units"].strip(' ')
+            extra_var.modeling_realm=v["modeling_realm"].strip(' ')
             extra_var.frequency=table2freq[tbl][1]
             extra_var.mipTable=tbl
-            extra_var.cell_methods=v["cell_methods"]
-            extra_var.cell_measures=v["cell_measures"]
-            extra_var.positive=v["positive"]
+            extra_var.cell_methods=v["cell_methods"].strip(' ')
+            extra_var.cell_measures=v["cell_measures"].strip(' ')
+            extra_var.positive=v["positive"].strip(' ')
             prio=mip_era.lower()+"_priority"
             extra_var.Priority=float(v[prio])
             # Tranlate full-dimensions read in Table (e.g. "longitude latitude time p850")
@@ -440,40 +441,40 @@ def complement_svar_using_cmorvar(svar,cmvar,dq):
     # mpmoine_future_modif:complement_svar_using_cmorvar: reorganisation des lignes de code
 
     # Get information form CMORvar
-    svar.frequency = cmvar.frequency
-    svar.mipTable = cmvar.mipTable
+    svar.frequency = cmvar.frequency.rstrip(' ')
+    svar.mipTable = cmvar.mipTable.rstrip(' ')
     svar.Priority= cmvar.defaultPriority
-    svar.positive = cmvar.positive
-    svar.modeling_realm = cmvar.modeling_realm
-    svar.label = cmvar.label
+    svar.positive = cmvar.positive.rstrip(' ')
+    svar.modeling_realm = cmvar.modeling_realm.rstrip(' ')
+    svar.label = cmvar.label.rstrip(' ')
     [svar.spatial_shp,svar.temporal_shp]=get_SpatialAndTemporal_Shapes(cmvar,dq)
 
     # Get information from MIPvar
     #mpmoine_next_modif:complement_svar_using_cmorvar: gestion d'exception pour l'acces a la 'mipvar'
     try:
         mipvar = dq.inx.uid[cmvar.vid]
-        svar.label_without_area=mipvar.label
+        svar.label_without_area=mipvar.label.rstrip(' ')
         # mpmoine_correction:complement_svar_using_cmorvar: le long_name doit etre le title de la CMORvar et non pas de la MIPvar
         #TBS# svar.long_name = mipvar.title
-        svar.long_name = cmvar.title
+        svar.long_name = cmvar.title.rstrip(' ')
         if mipvar.description :
-            svar.description = mipvar.description
+            svar.description = mipvar.description.rstrip(' ')
         else:
             svar.description = mipvar.title
-        svar.stdunits = mipvar.units
+        svar.stdunits = mipvar.units.rstrip(' ')
         stdname=None
         try :
-            stdname = dq.inx.uid[mipvar.sn]
+            stdname = dq.inx.uid[mipvar.sn].rstrip(' ')
         except:
             pass
             #print "Issue accessing sn for %s %s!"%(cmvar.label,cmvar.mipTable)
         if stdname and stdname._h.label == 'standardname':
-                svar.stdname = stdname.uid
+                svar.stdname = stdname.uid.rstrip(' ')
                 #svar.stdunits = stdname.units
                 #svar.description = stdname.description
         else :
             # If CF standard name is NOK, let us use MIP variables attributes
-            svar.stdname = mipvar.label
+            svar.stdname = mipvar.label.rstrip(' ')
     except:
         if print_DR_errors : 
             print "DR Error: issue with mipvar for "+svar.label," => no label_without_area, long_name, stdname, description and units derived."
@@ -484,21 +485,14 @@ def complement_svar_using_cmorvar(svar,cmvar,dq):
         svar.struct=st
         try :
             svar.cm=dq.inx.uid[st.cmid].cell_methods
-            svar.cell_methods=dq.inx.uid[st.cmid].cell_methods
-            # mpmoine_last_modif:complement_svar_using_cmorvar: il arrive que cell_methods soit une chaine vide 
-            # mpmoine_last_modif:complement_svar_using_cmorvar: et cela ne peut pas etre detecte par la regle d'exception => "NOT-SET"
-            if svar.cell_methods=='': svar.cell_methods="NOT-SET"
+            svar.cell_methods=dq.inx.uid[st.cmid].cell_methods.rstrip(' ')
         except:
-            if print_DR_errors : print "DR error: issue with cell_method for "+st.label
-            svar.cell_methods=None
+            if print_DR_errors : print "DR Error: issue with cell_method for "+st.label
+            #TBS# svar.cell_methods=None
         try :
-            svar.cell_measures=dq.inx.uid[cmvar.stid].cell_measures
-            # mpmoine_last_modif:complement_svar_using_cmorvar: il arrive que cell_measures soit une chaine vide 
-            # mpmoine_last_modif:complement_svar_using_cmorvar: et cela ne peut pas etre detecte par la regle d'exception => "NOT-SET"
-            if svar.cell_measures=='': svar.cell_measures="NOT-SET"
+            svar.cell_measures=dq.inx.uid[cmvar.stid].cell_measures.rstrip(' ')
         except:
-            #print "Issue with cell_measures for "+`cmvar`
-            svar.cell_measures="NOT-SET" #None
+            print "DR Error: Issue with cell_measures for "+`cmvar`
         # mpmoine_last_modif:complement_svar_using_cmorvar: on affecte ici svar.dimids (avant: dans create_xios_field_ref)
         # mpmoine_last_modif:complement_svar_using_cmorvar: provisoire, pour by-passer le cas d'une CMORvar qui n'a pas de structure associee ('dreqItem_remarks')
         # mpmoine_future_modif:complement_svar_using_cmorvar: on ne recherche les dimids que si on a pas affaire a une constante

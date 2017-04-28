@@ -1,0 +1,465 @@
+    <file_definition type="one_file" name="@expname@_@freq@_@startdate@_@enddate@" sync_freq="1d" min_digits="4" time_units="days">
+    
+      <file_group id="1ts" output_freq="1ts"  output_level="10" enabled=".TRUE."/> <!-- 1 time step files -->
+
+      <file_group id="1h" output_freq="1h"  output_level="10" enabled=".TRUE."/> <!-- 1h files -->
+
+      <file_group id="2h" output_freq="2h"  output_level="10" enabled=".TRUE."/> <!-- 2h files -->
+
+      <file_group id="3h" output_freq="3h"  output_level="10" enabled=".TRUE."/> <!-- 3h files -->     
+
+      <file_group id="4h" output_freq="4h"  output_level="10" enabled=".TRUE."/> <!-- 4h files -->
+
+      <file_group id="6h" output_freq="6h"  output_level="10" enabled=".TRUE."/> <!-- 6h files -->     
+    
+      <file_group id="1d" output_freq="1d"  output_level="10" enabled=".TRUE.">  <!-- 1d files -->   
+	
+        <file id="file1" name_suffix="_grid_T" description="ocean T grid variables" >
+	  <field field_ref="sst"          name="tos"      long_name="sea_surface_temperature"                       />
+	  <field field_ref="sss"          name="sos"      long_name="sea_surface_salinity"                          />
+	  <field field_ref="sshdyn"       name="zos"      long_name="sea_surface_height_above_geoid"                />
+	  <field field_ref="sst"          name="tosstd"   long_name="sea_surface_temperature_standard_deviation"         operation="average" freq_op="1d" > sqrt( @sst2 - @sst * @sst ) </field>
+	  <field field_ref="sshdyn"       name="zosstd"   long_name="sea_surface_height_above_geoid_standard_deviation"  operation="average" freq_op="1d" > sqrt( @ssh2 - @ssh * @ssh ) </field>
+	  <field field_ref="sst"          name="sstdcy"   long_name="amplitude of sst diurnal cycle" operation="average" freq_op="1d" > @sstmax - @sstmin </field>
+	  <field field_ref="mldr10_1"     />
+	  <field field_ref="mldr10_1"     name="mldr10_1dcy"  long_name="amplitude of mldr10_1 diurnal cycle" operation="average" freq_op="1d" > @mldr10_1max - @mldr10_1min </field>
+        </file>
+  
+        <file id="file2" name_suffix="_scalar" description="scalar variables" enabled=".true." >
+           <field field_ref="voltot"       grid_ref="grid_1point" name="scvoltot"  />
+           <field field_ref="sshtot"       grid_ref="grid_1point" name="scsshtot"  />
+           <field field_ref="sshsteric"    grid_ref="grid_1point" name="scsshste"  />
+           <field field_ref="sshthster"    grid_ref="grid_1point" name="scsshtst"  />
+           <field field_ref="masstot"      grid_ref="grid_1point" name="scmastot"  />
+           <field field_ref="temptot"      grid_ref="grid_1point" name="sctemtot"  />
+           <field field_ref="saltot"       grid_ref="grid_1point" name="scsaltot"  />
+
+          <field field_ref="bgtemper"     grid_ref="grid_1point" name="bgtemper"    />
+          <field field_ref="bgsaline"     grid_ref="grid_1point" name="bgsaline"    />
+          <field field_ref="bgheatco"     grid_ref="grid_1point" name="bgheatco"    />
+          <field field_ref="bgheatfx"     grid_ref="grid_1point" name="bgheatfx"    />
+          <field field_ref="bgsaltco"     grid_ref="grid_1point" name="bgsaltco"    />
+          <field field_ref="bgvolssh"     grid_ref="grid_1point" name="bgvolssh"    /> 
+          <field field_ref="bgvole3t"     grid_ref="grid_1point" name="bgvole3t"    />
+          <field field_ref="bgfrcvol"     grid_ref="grid_1point" name="bgfrcvol"    />
+          <field field_ref="bgfrctem"     grid_ref="grid_1point" name="bgfrctem"    />
+          <field field_ref="bgfrchfx"     grid_ref="grid_1point" name="bgfrchfx"    />
+	  <field field_ref="bgfrcsal"     grid_ref="grid_1point" name="bgfrcsal"    />
+
+          <field field_ref="temptot_pot"     grid_ref="grid_1point" name="sctmptot"  />	  
+        </file>
+
+<!--
+         <file id="file8" name_suffix="_ice_CMIP6_grid_T" description="sea ice variables" enabled=".true." >
+         <field field_ref="siconc" name="siconc" />
+         <field field_ref="sivol" name="sivol" />
+         <field field_ref="sisnmass" name="sisnmass" />
+         <field field_ref="sitemptop" name="sitemptop" />
+         <field field_ref="sitempsnic" name="sitempsnic" />
+         <field field_ref="siage" name="siage" />
+         <field field_ref="sialb" name="sialb" />
+         <field field_ref="sisali" name="sisali" />
+        </file>
+        <file id="file9" name_suffix="_ice_CMIP6_grid_U" description="sea ice variables" enabled=".true." >
+         <field field_ref="siu" name="siu" />
+        </file>
+
+        <file id="file10" name_suffix="_ice_CMIP6_grid_V" description="sea ice variables" enabled=".true." >
+         <field field_ref="siv" name="siv" />
+        </file>
+
+        <file id="file12" name_suffix="_ice_scalar" description="scalar variables" enabled=".true." >
+         <field field_ref="siextentn" name="siextentn" grid_ref="grid_1point" />
+         <field field_ref="siextents" name="siextents" grid_ref="grid_1point" />
+         <field field_ref="sivoln" name="sivoln" grid_ref="grid_1point" />
+         <field field_ref="sivols" name="sivols" grid_ref="grid_1point" />
+         <field field_ref="siarean" name="siarean" grid_ref="grid_1point" />
+         <field field_ref="siareas" name="siareas" grid_ref="grid_1point" />
+         <field field_ref="snovoln" name="snovoln" grid_ref="grid_1point" />
+         <field field_ref="snovols" name="snovols" grid_ref="grid_1point" />
+        </file>
+-->
+
+      </file_group> 
+
+      <file_group id="5d" output_freq="5d"  output_level="10" enabled=".TRUE."/>  <!-- 5d files -->  
+      <file_group id="1m" output_freq="1mo" output_level="10" enabled=".TRUE."> <!-- real monthly files -->
+
+        <file id="file3" name_suffix="_grid_T" >
+	  <field field_ref="e3t" 	  name="thkcello"  long_name="T-cell thickness" />
+	  <field field_ref="masscello" 	  name="masscello" long_name="sea_water_mass" />
+          <field field_ref="botpres"      name="pbo"      long_name="Pressure_at_sea_floor"                                          />
+          <!-- pso : sea_water_pressure_at_sea_water_surface = 0 -->
+          <field field_ref="sshdyn"       name="zos"      long_name="sea_surface_height_above_geoid"                                 />
+          <field field_ref="sshdyn2"      name="zossq"    long_name="square_of_sea_surface_height_above_geoid"             level="2" />
+	  <field field_ref="sshdyn"       name="zosstd"   long_name="sea_surface_height_above_geoid_standard_deviation"  operation="instant" freq_op="1d" > sqrt( @sshdyn2 - @sshdyn * @sshdyn ) </field>
+
+          <field field_ref="toce"         name="bigthetao" long_name="sea_water_conservative_temperature"   operation="average" freq_op="1mo" > @toce_e3t / @e3t </field>     
+          <field field_ref="toce_pot"     name="thetao"   long_name="sea_water_potential_temperature"   operation="average" freq_op="1mo" > @toce_pot_e3t / @e3t </field>       
+          <field field_ref="sst"          name="tos"      long_name="sea_surface_temperature"                              level="1" />
+          <field field_ref="sst2"         name="tossq"    long_name="square_of_sea_surface_temperature"                    level="2" />
+	  <field field_ref="sst"          name="tosstd"   long_name="sea_surface_temperature_standard_deviation"         operation="instant" freq_op="1d" > sqrt( @sst2 - @sst * @sst ) </field>       
+          <field field_ref="sbt"          name="tob"      long_name="sea_water_potential_temperature_at_sea_floor"         level="1" />
+          <!-- no agessc : sea_water_age_since_surface_contact -->
+          <!-- no cfc11  : moles_per_unit_mass_of_cfc11_in_sea_water -->
+          <!-- msftbarot : ocean_barotropic_mass_streamfunction : offline -->
+          <!-- mlotst    :           ocean_mixed_layer_thickness_defined_by_sigma_t : must be done offline -->
+          <!-- mlotstsq  : square_of_ocean_mixed_layer_thickness_defined_by_sigma_t : must be done offline -->
+          <field field_ref="qns"           name="nshfls"      long_name="surface_net_downward_non_solar_flux"                                         level="1" />
+          <field field_ref="qns_tot"                                                                                                                  level="1" />
+          <field field_ref="qnsrcv"                                                                                                                   level="1" />
+          <field field_ref="hflx_evap_cea" name="hfevapds"    long_name="temperature_flux_due_to_evaporation_expressed_as_heat_flux_out_of_sea_water" level="1" />
+          <field field_ref="hflx_cal_cea"  name="hfibthermds" long_name="heat_flux_into_sea_water_due_to_iceberg_thermodynamics"                      level="1" />
+          <field field_ref="hflx_snow_cea" name="qnssnw"                                                                                              level="1" />
+          <field field_ref="hflx_rnf_cea"  name="hfrunoffds"  long_name="temperature_flux_due_to_runoff_expressed_as_heat_flux_into_sea_water"        level="1" />
+          <field field_ref="hflx_rain_cea" name="hfrainds"    long_name="temperature_flux_due_to_rainfall_expressed_as_heat_flux_into_sea_water" level="1" > @hflx_rain_cea + @hflx_snow_cea </field>
+          <field field_ref="qsr"           name="rsntds"      long_name="surface_net_downward_shortwave_flux"                                         level="1" />
+          <field field_ref="qsr_tot"                                                                                                                  level="1" />
+          <field field_ref="qsrrcv"                                                                                                                  level="1" />
+          <field field_ref="qsr3d"         name="rsds"        long_name="downwelling_shortwave_flux_in_sea_water"                                     level="1" />
+	  <field field_ref="heatc"         name="heatc"       long_name="Heat content vertically integrated"            />
+          <field field_ref="qns"           name="hfds"        long_name="surface_downward_heat_flux_in_sea_water"  level="1" > @qt + @hflx_rnf_cea </field>
+          <field field_ref="sst_m"        name="sst_m"    long_name="averaged_sea_surface_temperature"                     level="1" />
+          <field field_ref="sss_m"        name="sss_m"    long_name="averaged_sea_surface_salinity"                        level="1" />
+          <field field_ref="qoc_m"        name="qoc_m"   long_name="averaged_sea_surface_temperature_xlevels"             level="1" />
+          <!-- next variables available with key_diahth -->
+          <field field_ref="20d"          name="z20d"     long_name="depth_of_isosurface_of_sea_water_potential_temperature"  level="2" />
+          <field field_ref="28d"          name="z28d"     long_name="depth_of_isosurface_of_sea_water_potential_temperature"  level="2" />
+          <field field_ref="hc300"        name="hc300"   long_name="integral_of_sea_water_potential_temperature_wrt_depth_expressed_as_heat_content"   level="2"  />
+
+         </file>
+
+        <file id="file4" name_suffix="_grid_S" >
+	  <field field_ref="e3t" long_name="T-cell thickness" />
+          <field field_ref="soce"         name="so"       long_name="sea_water_salinity"                operation="average" freq_op="1mo" > @soce_e3t / @e3t </field>       
+          <field field_ref="sss"          name="sos"      long_name="sea_surface_salinity"                                 level="1" />
+          <field field_ref="sbs"          name="sob"      long_name="sea_water_salinity_at_sea_floor"                                 level="1" />
+	  <field field_ref="saltc"        name="saltc"    long_name="Salt content vertically integrated"		             />                         
+          <field field_ref="rhop"         name="rhopoto"  long_name="sea_water_potential_density"                             level="2" />
+
+          <field field_ref="empmr"        name="wfo"      long_name="water_flux_into_sea_water"                               level="1" />
+	  <!--field_ref="erp"          name="wfcorr"   long_name="water_flux_correction"	                              level="1" -->
+          <!-- wfonocorr : water_flux_into_sea_water_without_flux_correction : emp - erp -->	  
+          <field field_ref="empmr"        name="wfnocorr" long_name="water_flux_into_sea_water_without_flux_correction"       level="1" />
+          <field field_ref="emp_gel"      name="evs"      long_name="water_evaporation_flux"		                      level="1" > @emp_gel - @pr - @prsn </field>
+          <field field_ref="calving_cea"  name="ficeberg" long_name="water_flux_into_sea_water_from_icebergs"                 level="1" />
+          <field field_ref="runoffs"      name="friver"   long_name="water_flux_into_sea_water_from_rivers"                   level="1" />
+
+          <field field_ref="mldkz5"       name="omlmax"   long_name="ocean_mixed_layer_thickness_defined_by_mixing_scheme" level="2" operation="maximum" />
+          <field field_ref="mldkz5"       name="mldkz5"   level="2"  />
+          <field field_ref="mldr10_1"     name="mldr10_1" level="2" />
+          <field field_ref="mldr10_1max"  name="mldr10_1max"  long_name="max of Mixed Layer Depth 0.01 ref.10m"              operation="maximum" />
+          <field field_ref="mldr10_1min"  name="mldr10_1min"  long_name="min of Mixed Layer Depth 0.01 ref.10m"              operation="minimum" />          
+          <field field_ref="acalving_cea" name="fcalva"    long_name="antarctic_calving"                                     level="1" /> <!-- usually = 0 -->
+          <field field_ref="gcalving_cea" name="fcalvg"    long_name="groenland_calving"                                     level="1" /> <!-- usually = 0 -->
+          <field field_ref="lake"         name="flake"     long_name="lake_water_budget"                                     level="1" /> <!-- usually = 0 -->
+          <field field_ref="tevp"                                                                                            level="1" /> <!-- usually = 0 -->
+          <field field_ref="tprec"                                                                                           level="1" /> <!-- usually = 0 -->
+          <field field_ref="e-p"                                                                                             level="1" /> <!-- usually = 0 -->
+          <!-- next variables available with key_diahth -->
+          <field field_ref="mldr0_3"    name="mlotst"     long_name="ocean_mixed_layer_thickness_defined_by_sigma_t"	     level="2" />
+          <field field_ref="mldr0_3"    name="mlotstmax"  long_name="ocean_mixed_layer_thickness_defined_by_sigma_t"	     level="2" operation="maximum" />
+          <field field_ref="mldr0_3"    name="mlotstmin"  long_name="ocean_mixed_layer_thickness_defined_by_sigma_t"	     level="2" operation="minimum" />
+        </file>
+
+
+	<file id="file5" name_suffix="_grid_U" description="ocean U grid variables" >
+	  <field field_ref="e3u"  />
+	  <field field_ref="ssu"          name="uos"     long_name="sea_surface_x_velocity"    />
+	  <field field_ref="uoce"         name="uo"      long_name="sea_water_x_velocity" operation="average" freq_op="1mo" > @uoce_e3u / @e3u </field>
+	  <field field_ref="utau"         name="tauuo"   long_name="surface_downward_x_stress" />
+	  <field field_ref="uocetr_eff"   name="umo"     long_name="ocean_mass_x_transport" />
+	  <field field_ref="u_masstr_vint" name="sozomatr" />
+	  <field field_ref="u_heattr"     name="sozohetr" />
+      	  <field field_ref="u_salttr"     name="sozosatr" />
+	  <field field_ref="ahu_bbl"       />
+	</file>
+
+	<file id="file6" name_suffix="_grid_V" description="ocean V grid variables" >
+	  <field field_ref="e3v"  />
+	  <field field_ref="ssv"          name="vos"     long_name="sea_surface_y_velocity"    />
+	  <field field_ref="voce"         name="vo"      long_name="sea_water_y_velocity" operation="average" freq_op="1mo" > @voce_e3v / @e3v </field>
+	  <field field_ref="vtau"         name="tauvo"   long_name="surface_downward_y_stress" />
+	  <field field_ref="vocetr_eff"   name="vmo"     long_name="ocean_mass_y_transport" />
+	  <field field_ref="v_masstr_vint" name="somematr" />
+	  <field field_ref="v_heattr"     name="somehetr" />
+	  <field field_ref="v_salttr"     name="somesatr" />  	  
+	  <field field_ref="ahv_bbl"       />	  
+	</file>
+	
+	<file id="file7" name_suffix="_grid_W" description="ocean W grid variables" >
+	  <field field_ref="e3w"  />
+          <field field_ref="woce"         name="wo"     />
+          <field field_ref="avs"          name="difvso"  long_name="ocean_vertical_salt_diffusivity" />
+          <field field_ref="logavs"       name="difvsolog"  long_name="ocean_vertical_salt_diffusivity" operation="average" freq_op="5d" > exp( @logavs ) </field>
+          <field field_ref="aht2d"        name="ahtt"   />
+	  <field field_ref="aht2d_eiv"    name="aeiv"   />
+	  <field field_ref="wocetr_eff"   name="wmo"     long_name="upward_ocean_mass_transport" />	  
+	</file>
+
+	<file id="file8" name_suffix="_gelato_T" description="sea ice variables on T-point" enabled=".true." >
+         <field field_ref="sitimefrac" name="sitimefrac" />
+         <field field_ref="siconc" name="siconc" />
+         <field field_ref="simass" name="simass" />
+         <field field_ref="sithick" name="sithick" />
+         <field field_ref="sivol" name="sivol" />
+         <field field_ref="sisnconc" name="sisnconc" />
+         <field field_ref="sisnmass" name="sisnmass" />
+         <field field_ref="simpthick" name="simpthick" />
+<!--     <field field_ref="sisnthick" name="sisnthick" />
+                  <field field_ref="siitdconc" name="siitdconc" />
+         <field field_ref="siitdthick" name="siitdthick" /> -->
+<!--     <field field_ref="siitdsnconc" name="siitdsnconc" />
+                  <field field_ref="siitdsnthick" name="siitdsnthick" />  -->
+         <field field_ref="sitemptop" name="sitemptop" />
+         <field field_ref="sitempsnic" name="sitempsnic" />
+         <field field_ref="sitempbot" name="sitempbot" />
+         <field field_ref="siage" name="siage" />
+         <field field_ref="sialb" name="sialb" />
+         <field field_ref="sisaltmass" name="sisaltmass" />
+         <field field_ref="simpconc" name="simpconc" />
+         <field field_ref="simpmass" name="simpmass" />
+         <!-- <field field_ref="simprefrozen" name="simprefrozen" />
+                       <field field_ref="sirdgconc" name="sirdgconc" />
+         <field field_ref="sirdgthick" name="sirdgthick" />  -->
+         <field field_ref="sisali" name="sisali" />
+         <field field_ref="sifb" name="sifb" />
+         <field field_ref="sihc" name="sihc" />
+         <field field_ref="sisnhc" name="sisnhc" />
+         <field field_ref="siflfwdrain" name="siflfwdrain" />
+         <field field_ref="sidconcth" name="sidconcth" />
+         <field field_ref="sidconcdyn" name="sidconcdyn" />
+         <field field_ref="sidmassth" name="sidmassth" />
+         <field field_ref="sidmassdyn" name="sidmassdyn" />
+         <field field_ref="sidmassgrowthwat" name="sidmassgrowthwat" />
+         <field field_ref="sidmassgrowthbot" name="sidmassgrowthbot" />
+         <field field_ref="sidmasssi" name="sidmasssi" />
+         <field field_ref="sidmassevapsubl" name="sidmassevapsubl" />
+         <field field_ref="sidmassmelttop" name="sidmassmelttop" />
+         <field field_ref="sidmassmeltbot" name="sidmassmeltbot" />
+         <field field_ref="sidmasslat" name="sidmasslat" />
+         <field field_ref="sndmasssnf" name="sndmasssnf" />
+         <field field_ref="sndmassmelt" name="sndmassmelt" />
+         <field field_ref="sndmasssubl" name="sndmasssubl" />
+         <field field_ref="sndmassdyn" name="sndmassdyn" />
+         <field field_ref="sndmasssi" name="sndmasssi" />
+         <field field_ref="sndmasswindrif" name="sndmasswindrif" />
+         <field field_ref="siflswdtop" name="siflswdtop" />
+         <field field_ref="siflswutop" name="siflswutop" />
+         <field field_ref="siflswdbot" name="siflswdbot" />
+         <!--
+                       <field field_ref="sifllwdtop" name="sifllwdtop" /> -->
+         <field field_ref="sifllwutop" name="sifllwutop" />
+         <!--
+                       <field field_ref="siflsenstop" name="siflsenstop" /> -->
+         <field field_ref="sifllatstop" name="sifllatstop" />
+         <field field_ref="siflsensupbot" name="siflsensupbot" />
+         <field field_ref="siflcondtop" name="siflcondtop" />
+         <field field_ref="siflcondbot" name="siflcondbot" />
+         <field field_ref="sipr" name="sipr" />
+         <field field_ref="siflsaltbot" name="siflsaltbot" />
+         <field field_ref="siflfwbot" name="siflfwbot" />
+         <field field_ref="sispeed" name="sispeed" />
+         <field field_ref="sicompstren" name="sicompstren" />
+<!--
+         <field field_ref="sidragtop" name="sidragtop" /> -->
+         <field field_ref="sidragbot" name="sidragbot" />
+<!--         <field field_ref="sistresave" name="sistresave" />
+                      <field field_ref="sistremax" name="sistremax" />  -->
+         <field field_ref="sidivvel" name="sidivvel" />
+         <field field_ref="sishevel" name="sishevel" />
+<!--         <field field_ref="siextentn" name="siextentn" grid_ref="grid_1point" />
+         <field field_ref="siextents" name="siextents" grid_ref="grid_1point" />
+         <field field_ref="sivoln" name="sivoln" grid_ref="grid_1point" />
+         <field field_ref="sivols" name="sivols" grid_ref="grid_1point" />
+         <field field_ref="siarean" name="siarean" grid_ref="grid_1point" />
+         <field field_ref="siareas" name="siareas" grid_ref="grid_1point" />
+         <field field_ref="siacrossline" name="siacrossline" /> -->
+        </file>
+
+        <file id="file9" name_suffix="_ice_CMIP6_grid_U" description="sea ice variables" enabled=".true." >
+         <field field_ref="siu" name="siu" />
+         <field field_ref="sidmasstranx" name="sidmasstranx" />
+         <field field_ref="sistrxdtop" name="sistrxdtop" />
+         <field field_ref="sistrxubot" name="sistrxubot" />
+<!--         <field field_ref="siforcetiltx" name="siforcetiltx" />
+                      <field field_ref="siforcecoriolx" name="siforcecoriolx" />
+         <field field_ref="siforceintstrx" name="siforceintstrx" /> -->
+        </file>
+
+        <file id="file10" name_suffix="_ice_CMIP6_grid_V" description="sea ice variables" enabled=".true." >
+         <field field_ref="siv" name="siv" />
+         <field field_ref="sidmasstrany" name="sidmasstrany" />
+         <field field_ref="sistrydtop" name="sistrydtop" />
+         <field field_ref="sistryubot" name="sistryubot" />
+<!--         <field field_ref="siforcetilty" name="siforcetilty" />
+                      <field field_ref="siforcecorioly" name="siforcecorioly" />
+         <field field_ref="siforceintstry" name="siforceintstry" /> -->
+        </file>
+
+       <file id="file11" name_suffix="_ice_gelato_grid_T" description="sea ice variables" enabled=".true." >
+          <field field_ref="sitimefrac15" name="sitimefrac15" />
+<!--      <field field_ref="siitdtemptop" name="siitdtemptop" />
+                    <field field_ref="siitdalbtop"  name="siitdalbtop" />
+          <field field_ref="siitdmpmass"  name="siitdmpmass" /> -->
+          <field field_ref="sndmasslat"   name="sndmasslat" />
+          <field field_ref="evap_ice"     name="evap_ice" />
+<!--      <field field_ref="siitdvtem1"   name="siitdvtem1" />
+                    <field field_ref="siitdvtem2"   name="siitdvtem2" />
+          <field field_ref="siitdvtem3"   name="siitdvtem3" />
+          <field field_ref="siitdvtem4"   name="siitdvtem4" />
+          <field field_ref="siitdvtem5"   name="siitdvtem5" />
+          <field field_ref="siitdvent1"   name="siitdvent1" />
+          <field field_ref="siitdvent2"   name="siitdvent2" />
+          <field field_ref="siitdvent3"   name="siitdvent3" />
+          <field field_ref="siitdvent4"   name="siitdvent4" />
+          <field field_ref="siitdvent5"   name="siitdvent5" />  -->
+          <field field_ref="sitemptop"    name="sitemptop" />
+          <field field_ref="sim"          name="sim" />
+          <field field_ref="evap"         name="evap" />
+          <field field_ref="snd"          name="snd" />
+          <field field_ref="ialb"         name="ialb" />
+          <field field_ref="mpalb"        name="mpalb" />
+          <field field_ref="tsice"        name="tsice" />
+          <field field_ref="pr"           name="pr" />
+          <field field_ref="prsn"         name="prsn" />
+          <field field_ref="grFrazil"     name="grFrazil" />
+          <field field_ref="grCongel"     name="grCongel" />
+          <field field_ref="grLateral"    name="grLateral" />
+          <field field_ref="snoToIce"     name="snoToIce" />
+          <field field_ref="snomelt"      name="snomelt" />
+          <field field_ref="tmelt"        name="tmelt" />
+          <field field_ref="bmelt"        name="bmelt" />
+          <field field_ref="vsfsub"       name="vsfsub" />
+          <field field_ref="vsflml"       name="vsflml" />
+          <field field_ref="vsfsal"       name="vsfsal" />
+          <field field_ref="vsfhsi"       name="vsfhsi" />
+          <field field_ref="vsfsni"       name="vsfsni" />
+          <field field_ref="hfsithermds"  name="hfsithermds" />
+          <field field_ref="hfdssi"       name="hfdssi" />
+          <field field_ref="hfdso"        name="hfdso" />
+          <field field_ref="nsftdssi"     name="nsftdssi" />
+          <field field_ref="nsftdso"      name="nsftdso" />
+          <field field_ref="rsntdssi"     name="rsntdssi" />
+          <field field_ref="rsntdso"      name="rsntdso" />
+          <field field_ref="sisnalb"      name="sisnalb" />
+          <field field_ref="timesi"       name="timesi" />
+          <field field_ref="subIce"       name="subIce" />
+          <field field_ref="subTot"       name="subTot" />
+          <field field_ref="subSnw"       name="subSnw" />
+          <field field_ref="subO"         name="subO" />
+          <field field_ref="subL"         name="subL" />
+          <field field_ref="s_pr"         name="s_pr" />
+          <field field_ref="o_pr"         name="o_pr" />
+          <field field_ref="l_pr"         name="l_pr" />
+          <field field_ref="s_prsn"       name="s_prsn" />
+          <field field_ref="o_prsn"       name="o_prsn" />
+          <field field_ref="l_prsn"       name="l_prsn" />
+          <field field_ref="snc"          name="snc" />
+          <field field_ref="hcice"        name="hcice" />
+          <field field_ref="hcsnow"       name="hcsnow" />
+          <field field_ref="hfoi"         name="hfoi" />
+          <field field_ref="efhfso"       name="efhfso" />
+          <field field_ref="sfhfso"       name="sfhfso" />
+          <field field_ref="rfhfso"       name="rfhfso" />
+          <field field_ref="sfhfssi"      name="sfhfssi" />
+          <field field_ref="rfhfssi"      name="rfhfssi" />
+          <field field_ref="dhcicet"      name="dhcicet" />
+          <field field_ref="dhcicea"      name="dhcicea" />
+          <field field_ref="dhciced"      name="dhciced" />
+          <field field_ref="snm"          name="snm" />
+          <field field_ref="wio"          name="wio" />
+          <field field_ref="wai"          name="wai" />
+          <field field_ref="wao"          name="wao" />
+          <field field_ref="wiov"         name="wiov" />
+          <field field_ref="sio"          name="sio" />
+          <field field_ref="wfsitsi"      name="wfsitsi" />
+          <field field_ref="vwfsit"       name="vwfsit" />
+          <field field_ref="rsntdusi"     name="rsntdusi" />
+          <field field_ref="rsntduso"     name="rsntduso" />
+          <field field_ref="hfduo"        name="hfduo" />
+          <field field_ref="hfdusi"       name="hfdusi" />
+          <field field_ref="dmsalt"       name="dmsalt" />
+          <field field_ref="dmsnow"       name="dmsnow" />
+          <field field_ref="dmsnowdyn"    name="dmsnowdyn" />
+          <field field_ref="dmice"        name="dmice" />
+          <field field_ref="dmicea"       name="dmicea" />
+          <field field_ref="dmicer"       name="dmicer" />
+          <field field_ref="dmwice"       name="dmwice" />
+          <field field_ref="dfwnt"        name="dfwnt" />
+<!--      <field field_ref="ssi"          name="ssi" />  -->
+          <field field_ref="divice"       name="divice" />
+          <field field_ref="shearice"     name="shearice" />
+        </file>
+
+
+        <file id="file12" name_suffix="_scalar" description="scalar variables" enabled=".true." >
+          <field field_ref="voltot"       grid_ref="grid_1point" name="scvoltot"  />
+          <field field_ref="sshtot"       grid_ref="grid_1point" name="scsshtot"  />
+          <field field_ref="sshsteric"    grid_ref="grid_1point" name="scsshste"  />
+          <field field_ref="sshthster"    grid_ref="grid_1point" name="scsshtst"  />
+          <field field_ref="masstot"      grid_ref="grid_1point" name="scmastot"  />
+          <field field_ref="temptot"      grid_ref="grid_1point" name="sctemtot"  />
+          <field field_ref="saltot"       grid_ref="grid_1point" name="scsaltot"  />
+
+          <field field_ref="bgtemper"     grid_ref="grid_1point" name="bgtemper"    />
+          <field field_ref="bgsaline"     grid_ref="grid_1point" name="bgsaline"    />
+          <field field_ref="bgheatco"     grid_ref="grid_1point" name="bgheatco"    />
+          <field field_ref="bgheatfx"     grid_ref="grid_1point" name="bgheatfx"    />
+          <field field_ref="bgsaltco"     grid_ref="grid_1point" name="bgsaltco"    />
+          <field field_ref="bgvolssh"     grid_ref="grid_1point" name="bgvolssh"    /> 
+          <field field_ref="bgvole3t"     grid_ref="grid_1point" name="bgvole3t"    />
+          <field field_ref="bgfrcvol"     grid_ref="grid_1point" name="bgfrcvol"    />
+          <field field_ref="bgfrctem"     grid_ref="grid_1point" name="bgfrctem"    />
+          <field field_ref="bgfrchfx"     grid_ref="grid_1point" name="bgfrchfx"    />
+	  <field field_ref="bgfrcsal"     grid_ref="grid_1point" name="bgfrcsal"    />
+
+          <field field_ref="temptot_pot"     grid_ref="grid_1point" name="sctmptot"  />	  
+  	</file>
+
+        <file id="file13" name_suffix="_diaptr" description="meridional transports" enabled=".true." >
+          <field field_ref="zomsfglo"      name="zomsfglo"     long_name="meridional_mass_streamfunction_global_ocean"          grid_ref="grid_ptr_W_3D" />
+          <field field_ref="zomsfatl"      name="zomsfatl"     long_name="meridional_mass_streamfunction_atlantic_ocean"        grid_ref="grid_ptr_W_3D" />
+          <field field_ref="zomsfpac"      name="zomsfpac"     long_name="meridional_mass_streamfunction_pacific_ocean"         grid_ref="grid_ptr_W_3D" />
+          <field field_ref="zomsfind"      name="zomsfind"     long_name="meridional_mass_streamfunction_indian_ocean"          grid_ref="grid_ptr_W_3D" />
+          <field field_ref="zomsfipc"      name="zomsfipc"     long_name="meridional_mass_streamfunction_indian_pacific_ocean"  grid_ref="grid_ptr_W_3D" />
+          <field field_ref="zotemglo"      name="zotemglo"     long_name="zonal_mean_temperature_global_ocean"		        grid_ref="grid_ptr_T_3D" />
+          <field field_ref="zotematl"      name="zotematl"     long_name="zonal_mean_temperature_atlantic_ocean"        	grid_ref="grid_ptr_T_3D" />
+          <field field_ref="zotempac"      name="zotempac"     long_name="zonal_mean_temperature_pacific_ocean"         	grid_ref="grid_ptr_T_3D" />
+          <field field_ref="zotemind"      name="zotemind"     long_name="zonal_mean_temperature_indian_ocean"          	grid_ref="grid_ptr_T_3D" />
+          <field field_ref="zotemipc"      name="zotemipc"     long_name="zonal_mean_temperature_indian_pacific_ocean"  	grid_ref="grid_ptr_T_3D" />
+          <field field_ref="zosalglo"      name="zosalglo"     long_name="zonal_mean_salinity_global_ocean"		        grid_ref="grid_ptr_T_3D" />
+          <field field_ref="zosalatl"      name="zosalatl"     long_name="zonal_mean_salinity_atlantic_ocean"      	  	grid_ref="grid_ptr_T_3D" />
+          <field field_ref="zosalpac"      name="zosalpac"     long_name="zonal_mean_salinity_pacific_ocean"	         	grid_ref="grid_ptr_T_3D" />
+          <field field_ref="zosalind"      name="zosalind"     long_name="zonal_mean_salinity_indian_ocean" 	         	grid_ref="grid_ptr_T_3D" />
+          <field field_ref="zosalipc"      name="zosalipc"     long_name="zonal_mean_salinity_indian_pacific_ocean" 	 	grid_ref="grid_ptr_T_3D" />
+          <field field_ref="zosrfglo"      name="zosrfglo"     long_name="zonal_mean_surface_global_ocean"		        grid_ref="grid_ptr_T_3D" />
+          <field field_ref="zosrfatl"      name="zosrfatl"     long_name="zonal_mean_surface_atlantic_ocean"      	  	grid_ref="grid_ptr_T_3D" />
+          <field field_ref="zosrfpac"      name="zosrfpac"     long_name="zonal_mean_surface_pacific_ocean"	         	grid_ref="grid_ptr_T_3D" />
+          <field field_ref="zosrfind"      name="zosrfind"     long_name="zonal_mean_surface_indian_ocean" 	         	grid_ref="grid_ptr_T_3D" />
+          <field field_ref="zosrfipc"      name="zosrfipc"     long_name="zonal_mean_surface_indian_pacific_ocean" 	 	grid_ref="grid_ptr_T_3D" />
+          <field field_ref="sophtadv"      name="sophtadv"     long_name="meridional_advective_heat_transport"			grid_ref="grid_ptr_T_2D" />
+          <field field_ref="sophtldf"      name="sophtldf"     long_name="meridional_diffusive_heat_transport"			grid_ref="grid_ptr_T_2D" />
+          <field field_ref="sopstadv"      name="sopstadv"     long_name="meridional_advective_salt_transport"			grid_ref="grid_ptr_T_2D" />
+	  <field field_ref="sopstldf"      name="sopstldf"     long_name="meridional_diffusive_salt_transport"			grid_ref="grid_ptr_T_2D" />
+        </file>
+
+        <file id="file14" name_suffix="_diadct" description="transports through straits" enabled=".true." >
+          <field field_ref="mfo"      name="mfo"     long_name="mass_transports_through_sections"          grid_ref="grid_straits" />
+          <field field_ref="hfo"      name="hfo"     long_name="heat_transports_through_sections"          grid_ref="grid_straits" />
+          <field field_ref="sfo"      name="sfo"     long_name="salt_transports_through_sections"          grid_ref="grid_straits" />
+          <field field_ref="vfi"      name="vfi"     long_name="sea_ice_volume_transports_through_sections"          grid_ref="grid_straits" />
+          <field field_ref="afi"      name="afi"     long_name="sea_ice_area_transports_through_sections"          grid_ref="grid_straits" />
+	</file>               
+      </file_group>
+
+      <file_group id="2m" output_freq="2mo" output_level="10" enabled=".TRUE."/> <!-- real 2m files -->
+      <file_group id="3m" output_freq="3mo" output_level="10" enabled=".TRUE."/> <!-- real 3m files -->
+      <file_group id="4m" output_freq="4mo" output_level="10" enabled=".TRUE."/> <!-- real 4m files -->
+      <file_group id="6m" output_freq="6mo" output_level="10" enabled=".TRUE."/> <!-- real 6m files -->
+      <file_group id="1y"  output_freq="1y" output_level="10" enabled=".TRUE."/> <!-- real yearly files -->
+      <file_group id="2y"  output_freq="2y" output_level="10" enabled=".TRUE."/> <!-- real 2y files -->
+      <file_group id="5y"  output_freq="5y" output_level="10" enabled=".TRUE."/> <!-- real 5y files -->
+      <file_group id="10y" output_freq="10y" output_level="10" enabled=".TRUE."/> <!-- real 10y files -->
+
+   </file_definition>

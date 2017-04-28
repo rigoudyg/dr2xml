@@ -1,0 +1,833 @@
+<field_definition level="1" prec="4" operation="average" freq_op="1ts" enabled=".true." default_value="9.96921e+36" ts_enabled="true">
+    
+        <!-- <field id="field_atm_2D" domain_ref="dom_glo" /> -->
+        <!-- <field id="field_atm_3D" domain_ref="dom_glo" axis_ref="presnivs" /> -->
+
+      <field id="field_atm_scalar" grid_ref="grid_atm_scalar" />
+      <field id="field_atm_1D" grid_ref="grid_atm_1D" />
+      <field id="field_atm_2D" grid_ref="grid_atm_2D" />
+      <field id="field_atm_3D" grid_ref="grid_atm_3D" />
+      <field id="field_sub"    grid_ref="grid_atm_2D" freq_op="2ts" operation="instant"/>
+      
+      <field id="hmv5"  grid_ref="grid_atm_2D" />
+      
+      <field id="pressure"     grid_ref="grid_atm_3D"  detect_missing_value="true"/>
+      <field id="height"       grid_ref="grid_atm_3D"  detect_missing_value="true"/>
+ 
+      <field id="dummy_XY"   field_ref="field_atm_2D"/> 
+    <field id="dummy_??"   field_ref="field_atm_2D"/> 
+    <field id="dummy_XYA"  field_ref="field_atm_3D"/> 
+    <field id="dummy_XYSo" field_ref="field_atm_3D"/> 
+
+    <field id="dummy_na" field_ref="field_atm_scalar"/> 
+    <field id="dummy_0d" field_ref="field_atm_scalar"/>
+
+    <!-- To be changed : dr2xml will avoid using it -->
+    <field id="dummy_lat"    field_ref="field_atm_1D"/> 
+    <field id="dummy_lat-P"  field_ref="field_atm_2D"/> 
+    <field id="dummy_lat-A"  field_ref="field_atm_2D"/> 
+    <field id="dummy_site-A" field_ref="field_atm_1D"/> 
+    <field id="dummy_COSP-A" field_ref="field_atm_1D"/> 
+    <field id="dummy_COSPcurtain" field_ref="field_atm_2D"/> 
+
+    <!-- odd for atmos !! DR error -->
+    <field id="dummy_basin_zonal_mean" field_ref="field_atm_2D"/> 
+    <field id="dummy_XYO" field_ref="field_atm_3D"/> 
+
+     
+    <field_group id="fields_2D" field_ref="field_atm_2D" >
+        <field id="phis"    long_name="Surface geop.height"     unit="m2/s2" />
+        <field id="aire"    long_name="Grid area"               unit="-"    />
+        <field id="contfracATM"     long_name="% sfce ter+lic"  unit="-"    />
+        <field id="contfracOR"      long_name="% sfce terre OR" unit="-" />
+        <field id="aireTER"         long_name="Grid area CONT"  unit="-" />
+        <field id="flat"  name="toto"  long_name="Latent heat flux"        unit="W/m2" />
+        <field id="slp"     long_name="Sea Level Pressure"      unit="Pa" />
+        <field id="ptstar"  long_name="Air Surface Temperature" unit="K" />
+        <field id="pt0"     long_name="Standard Air Surface Temperature"      unit="K" />
+        <field id="tsol"    long_name="Surface Temperature"     unit="K" />
+        <field id="t2m"        long_name="Temperature 2m" unit="K" />
+        <field id="t2m_min"    long_name="Temp 2m min"    unit="K" />
+        <field id="t2m_max"    long_name="Temp 2m max"    unit="K" />
+        <field id="t2m_ter"    long_name="Temp 2m ter"    unit="K" />
+        <field id="t2m_max_mon"   long_name="Monthly average max 2m temperature" unit="K" />
+        <field id="t2m_min_mon"   long_name="Monthly average min 2m temperature" unit="K" />
+        <field id="t2m_lic"    long_name="Temp 2m lic"    unit="K" />
+        <field id="t2m_oce"    long_name="Temp 2m oce"    unit="K" />
+        <field id="t2m_sic"    long_name="Temp 2m sic"    unit="K" />
+        <field id="gusts"    long_name="surface gustiness"    unit="m2/s2" />
+        <field id="wind10m"    long_name="10-m wind speed"      unit="m/s" />
+        <field id="wind10max"  long_name="10m wind speed max"   unit="m/s" />
+        <field id="sicf"    long_name="Sea-ice fraction"        unit="-" />
+        <field id="q2m"     long_name="Specific humidity 2m"    unit="kg/kg" />
+        <field id="ustar"   long_name="Friction velocity"       unit="m/s" />
+        <field id="u10m"    long_name="Vent zonal 10m"          unit="m/s" />
+        <field id="v10m"    long_name="Vent meridien 10m"       unit="m/s" />
+        <field id="psol"    long_name="Surface Pressure"        unit="Pa" />
+        <field id="qsurf"   long_name="Surface Air humidity"    unit="kg/kg" />
+        <field id="ustar_ter"    long_name="Friction velocity ter"    unit="m/s" />
+        <field id="ustar_lic"    long_name="Friction velocity lic"    unit="m/s" />
+        <field id="ustar_oce"    long_name="Friction velocity oce"    unit="m/s" />
+        <field id="ustar_sic"    long_name="Friction velocity sic"    unit="m/s" />
+        <field id="wstar_ter"    long_name="Friction velocity ter"    unit="m/s" />
+        <field id="wstar_lic"    long_name="Friction velocity lic"    unit="m/s" />
+        <field id="wstar_oce"    long_name="Friction velocity oce"    unit="m/s" />
+        <field id="wstar_sic"    long_name="Friction velocity sic"    unit="m/s" />
+        <field id="wstar"       long_name="w* convective velocity "    unit="m/s" />
+        <field id="u10m_ter"    long_name="Vent Zonal 10m ter"    unit="m/s" />
+        <field id="u10m_lic"    long_name="Vent Zonal 10m lic"    unit="m/s" />
+        <field id="u10m_oce"    long_name="Vent Zonal 10m oce"    unit="m/s" />
+        <field id="u10m_sic"    long_name="Vent Zonal 10m sic"    unit="m/s" />
+        <field id="v10m_ter"    long_name="Vent meredien 10m ter"    unit="m/s" />
+        <field id="v10m_lic"    long_name="Vent meredien 10m lic"    unit="m/s" />
+        <field id="v10m_oce"    long_name="Vent meredien 10m oce"    unit="m/s" />
+        <field id="v10m_sic"    long_name="Vent meredien 10m sic"    unit="m/s" />
+        <field id="qsol"        long_name="Soil watter content"         unit="mm" />
+        <field id="JrNt"        long_name="1 if Day 0 if Night"         unit="-" />
+        <field id="cldhjn"      long_name="High-level cloudiness Day"         unit="-" />
+        <field id="cldmjn"      long_name="Mid-level cloudiness Day"         unit="-" />
+        <field id="cldljn"      long_name="Low-level cloudiness Day"         unit="-" />
+        <field id="cldtjn"      long_name="Total cloudiness Day"         unit="-" />
+        <field id="rnebjn"      long_name="Cloud fraction in day"         unit="-" />
+        <field id="ndayrain"    long_name="Number of dayrain(liq+sol)"  unit="-" />
+        <field id="precip"      long_name="Precip Totale liq+sol"       unit="kg/(s*m2)" />
+        <field id="plul"    long_name="Large-scale Precip."     unit="kg/(s*m2)" />
+        <field id="plun"    long_name="Numerical Precip."       unit="kg/(s*m2)" />
+        <field id="pluc"    long_name="Convective Precip."      unit="kg/(s*m2)" />
+        <field id="snow"    long_name="Snow fall"               unit="kg/(s*m2)" />
+        <field id="evap"    long_name="Evaporat"                unit="kg/(s*m2)" />
+        <field id="evap_ter"    long_name="evaporation at surface ter"    unit="kg/(s*m2)" />
+        <field id="evap_lic"    long_name="evaporation at surface lic"    unit="kg/(s*m2)" />
+        <field id="evap_oce"    long_name="evaporation at surface oce"    unit="kg/(s*m2)" />
+        <field id="evap_sic"    long_name="evaporation at surface sic"    unit="kg/(s*m2)" />
+        <field id="msnow"    long_name="Surface snow amount"    unit="kg/m2" />
+        <field id="fsnow"    long_name="Surface snow area fraction"    unit="-" />
+        <field id="tops"    long_name="Solar rad. at TOA"    unit="W/m2" />
+        <field id="tops0"    long_name="CS Solar rad. at TOA"    unit="W/m2" />
+        <field id="topl"    long_name="IR rad. at TOA"    unit="W/m2" />
+        <field id="topl0"    long_name="IR rad. at TOA"    unit="W/m2" />
+        <field id="SWupTOA"    long_name="SWup at TOA"    unit="W/m2" />
+        <field id="SWupTOAclr"    long_name="SWup clear sky at TOA"    unit="W/m2" />
+        <field id="SWdnTOA"    long_name="SWdn at TOA"    unit="W/m2" />
+        <field id="SWdnTOAclr"    long_name="SWdn clear sky at TOA"    unit="W/m2" />
+        <field id="nettop"    long_name="Net dn radiatif flux at TOA"    unit="W/m2" />
+        <field id="SWup200"    long_name="SWup at 200mb"    unit="W/m2" />
+        <field id="SWup200clr"    long_name="SWup clear sky at 200mb"    unit="W/m2" />
+        <field id="SWdn200"    long_name="SWdn at 200mb"    unit="W/m2" />
+        <field id="SWdn200clr"    long_name="SWdn clear sky at 200mb"    unit="W/m2" />
+        <field id="LWup200"    long_name="LWup at 200mb"    unit="W/m2" />
+        <field id="LWup200clr"    long_name="LWup clear sky at 200mb"    unit="W/m2" />
+        <field id="LWdn200"    long_name="LWdn at 200mb"    unit="W/m2" />
+        <field id="LWdn200clr"    long_name="LWdn clear sky at 200mb"    unit="W/m2" />
+        <field id="sols"    long_name="Solar rad. at surf."    unit="W/m2" />
+        <field id="sols0"    long_name="Solar rad. at surf."    unit="W/m2" />
+        <field id="soll"    long_name="IR rad. at surface"    unit="W/m2" />
+        <field id="soll0"    long_name="IR rad. at surface"    unit="W/m2" />
+        <field id="radsol"    long_name="Rayonnement au sol"    unit="W/m2" />
+        <field id="SWupSFC"    long_name="SWup at surface"    unit="W/m2" />
+        <field id="SWupSFCclr"    long_name="SWup clear sky at surface"    unit="W/m2" />
+        <field id="SWdnSFC"    long_name="SWdn at surface"    unit="W/m2" />
+        <field id="SWdnSFCclr"    long_name="SWdn clear sky at surface"    unit="W/m2" />
+        <field id="LWupSFC"    long_name="Upwd. IR rad. at surface"    unit="W/m2" />
+        <field id="LWupSFCclr"    long_name="CS Upwd. IR rad. at surface"    unit="W/m2" />
+        <field id="LWdnSFC"    long_name="Down. IR rad. at surface"    unit="W/m2" />
+        <field id="LWdnSFCclr"    long_name="Down. CS IR rad. at surface"    unit="W/m2" />
+        <field id="bils"    long_name="Surf. total heat flux"    unit="W/m2" />
+        <field id="bils_tke"    long_name="Surf. total heat flux"    unit="W/m2" />
+        <field id="bils_diss"    long_name="Surf. total heat flux"    unit="W/m2" />
+        <field id="bils_ec"    long_name="Surf. total heat flux"    unit="W/m2" />
+        <field id="bils_kinetic"    long_name="Surf. total heat flux"    unit="W/m2" />
+        <field id="bils_enthalp"    long_name="Surf. total heat flux"    unit="W/m2" />
+        <field id="bils_latent"    long_name="Surf. total heat flux"    unit="W/m2" />
+	<field id="bils_ech"    long_name="peu importe"    unit="W/m2" />
+	<field id="du_gwd_rando"    long_name="peu importe"    unit="W/m2" />
+	<field id="dv_gwd_rando"    long_name="peu importe"    unit="W/m2" />
+	<field id="ustr_gwd_hines"    long_name="zonal wind stress Hines gravity waves"    unit="Pa" />
+	<field id="vstr_gwd_hines"    long_name="meridional wind stress Hines gravity waves"    unit="Pa" />
+	<field id="ustr_gwd_front"    long_name="zonal wind stress fronts gravity waves"    unit="Pa" />
+	<field id="vstr_gwd_front"    long_name="meridional wind stress fronts gravity waves"    unit="Pa" />
+	<field id="ustr_gwd_rando"    long_name="zonal wind stress random gravity waves"    unit="Pa" />
+	<field id="vstr_gwd_rando"    long_name="meridinal wind stress random gravity waves"    unit="Pa" />
+        <field id="sens"    long_name="Sensible heat flux"    unit="W/m2" />
+        <field id="fder"    long_name="Heat flux derivation"    unit="W/m2" />
+        <field id="ffonte"    long_name="Thermal flux for snow melting"    unit="W/m2" />
+        <field id="fqcalving"    long_name="Ice Calving"    unit="kg/m2/s" />
+        <field id="fqfonte"    long_name="Land ice melt"    unit="kg/m2/s" />
+        <field id="runofflic"  long_name="Land ice melt to ocean" unit="kg/m2/s" />
+        <field id="taux"    long_name="Zonal wind stress"    unit="Pa" />
+        <field id="tauy"    long_name="Meridional wind stress"    unit="Pa" />
+        <field id="taux_ter"    long_name="Zonal wind stress ter"    unit="Pa" />
+        <field id="taux_lic"    long_name="Zonal wind stress lic"    unit="Pa" />
+        <field id="taux_oce"    long_name="Zonal wind stress oce"    unit="Pa" />
+        <field id="taux_sic"    long_name="Zonal wind stress sic"    unit="Pa" />
+        <field id="tauy_ter"    long_name="Meridional wind stress ter"    unit="Pa" />
+        <field id="tauy_lic"    long_name="Meridional wind stress lic"    unit="Pa" />
+        <field id="tauy_oce"    long_name="Meridional wind stress oce"    unit="Pa" />
+        <field id="tauy_sic"    long_name="Meridional wind stress sic"    unit="Pa" />
+        <field id="pourc_ter"    long_name="% ter"    unit="%" />
+        <field id="pourc_lic"    long_name="% lic"    unit="%" />
+        <field id="pourc_oce"    long_name="% oce"    unit="%" />
+        <field id="pourc_sic"    long_name="% sic"    unit="%" />
+        <field id="fract_ter"    long_name="Fraction ter"    unit="1" />
+        <field id="fract_lic"    long_name="Fraction lic"    unit="1" />
+        <field id="fract_oce"    long_name="Fraction oce"    unit="1" />
+        <field id="fract_sic"    long_name="Fraction sic"    unit="1" />
+        <field id="tsol_ter"    long_name="Temperature ter"    unit="K" />
+        <field id="tsol_lic"    long_name="Temperature lic"    unit="K" />
+        <field id="tsol_oce"    long_name="Temperature oce"    unit="K" />
+        <field id="tsol_sic"    long_name="Temperature sic"    unit="K" />
+        <field id="evappot_ter"    long_name="Temperature ter"    unit="K" />
+        <field id="evappot_lic"    long_name="Temperature lic"    unit="K" />
+        <field id="evappot_oce"    long_name="Temperature oce"    unit="K" />
+        <field id="evappot_sic"    long_name="Temperature sic"    unit="K" />
+        <field id="sens_ter"    long_name="Sensible heat flux ter"    unit="W/m2" />
+        <field id="sens_lic"    long_name="Sensible heat flux lic"    unit="W/m2" />
+        <field id="sens_oce"    long_name="Sensible heat flux oce"    unit="W/m2" />
+        <field id="sens_sic"    long_name="Sensible heat flux sic"    unit="W/m2" />
+        <field id="lat_ter"    long_name="Latent heat flux ter"    unit="W/m2" />
+        <field id="lat_lic"    long_name="Latent heat flux lic"    unit="W/m2" />
+        <field id="lat_oce"    long_name="Latent heat flux oce"    unit="W/m2" />
+        <field id="lat_sic"    long_name="Latent heat flux sic"    unit="W/m2" />
+        <field id="flw_ter"    long_name="LW ter"    unit="W/m2" />
+        <field id="flw_lic"    long_name="LW lic"    unit="W/m2" />
+        <field id="flw_oce"    long_name="LW oce"    unit="W/m2" />
+        <field id="flw_sic"    long_name="LW sic"    unit="W/m2" />
+        <field id="fsw_ter"    long_name="SW ter"    unit="W/m2" />
+        <field id="fsw_lic"    long_name="SW lic"    unit="W/m2" />
+        <field id="fsw_oce"    long_name="SW oce"    unit="W/m2" />
+        <field id="fsw_sic"    long_name="SW sic"    unit="W/m2" />
+        <field id="wbils_ter"    long_name="Bilan sol ter"    unit="W/m2" />
+        <field id="wbils_lic"    long_name="Bilan sol lic"    unit="W/m2" />
+        <field id="wbils_oce"    long_name="Bilan sol oce"    unit="W/m2" />
+        <field id="wbils_sic"    long_name="Bilan sol sic"    unit="W/m2" />
+        <field id="wbilo_ter"    long_name="Bilan eau ter"    unit="kg/(m2*s)" />
+        <field id="wbilo_lic"    long_name="Bilan eau lic"    unit="kg/(m2*s)" />
+        <field id="wbilo_oce"    long_name="Bilan eau oce"    unit="kg/(m2*s)" />
+        <field id="wbilo_sic"    long_name="Bilan eau sic"    unit="kg/(m2*s)" />
+        <field id="cdrm"    long_name="Momentum drag coef."    unit="-" />
+        <field id="cdrh"    long_name="Heat drag coef."    unit="-" />
+        <field id="cldl"    long_name="Low-level cloudiness"    unit="-" />
+        <field id="cldm"    long_name="Mid-level cloudiness"    unit="-" />
+        <field id="cldh"    long_name="High-level cloudiness"    unit="-" />
+        <field id="cldt"    long_name="Total cloudiness"    unit="-" />
+        <field id="cldq"    long_name="Cloud liquid water path"    unit="kg/m2" />
+        <field id="lwp"    long_name="Cloud water path"    unit="kg/m2" />
+        <field id="iwp"    long_name="Cloud ice water path"    unit="kg/m2" />
+        <field id="ue"    long_name="Zonal energy transport"    unit="-" />
+        <field id="ve"    long_name="Merid energy transport"    unit="-" />
+        <field id="uq"    long_name="Zonal humidity transport"    unit="-" />
+        <field id="vq"    long_name="Merid humidity transport"    unit="-" />
+        <field id="cape"    long_name="Conv avlbl pot ener"    unit="J/kg" />
+        <field id="pbase"    long_name="Cld base pressure"    unit="Pa" />
+        <field id="ptop"    long_name="Cld top pressure"    unit="Pa" />
+        <field id="fbase"    long_name="Cld base mass flux"    unit="kg/m2/s" />
+        <field id="plcl"    long_name="Lifting Condensation Level"    unit="hPa" enabled=".false." />
+        <field id="plfc"    long_name="Level of Free Convection"    unit="hPa" />
+        <field id="wbeff"    long_name="Conv. updraft velocity at LFC (inf100)"    unit="m/s" />
+        <field id="prw"    long_name="Precipitable water"    unit="kg/m2" />
+        <field id="prlw"   long_name="Precipitable liquid water"  unit="kg/m2" />
+        <field id="prsw"   long_name="Precipitable solid water"  unit="kg/m2" />
+        <field id="s_pblh"    long_name="Boundary Layer Height"    unit="m" />
+        <field id="s_pblt"    long_name="t at Boundary Layer Height"    unit="K" />
+        <field id="s_lcl"    long_name="Condensation level"    unit="m" />
+        <field id="s_therm"    long_name="Exces du thermique"    unit="K" />
+        <field id="slab_bils_oce"    long_name="Bilan au sol sur ocean slab"    unit="W/m2" />
+        <field id="ale_bl"    long_name="ALE BL"    unit="m2/s2" />
+        <field id="alp_bl"    long_name="ALP BL"    unit="m2/s2" />
+        <field id="ale_wk"    long_name="ALE WK"    unit="m2/s2" />
+        <field id="alp_wk"    long_name="ALP WK"    unit="m2/s2" />
+        <field id="ale"    long_name="ALE"    unit="m2/s2" />
+        <field id="alp"    long_name="ALP"    unit="W/m2" />
+        <field id="cin"    long_name="Convective INhibition"    unit="m2/s2" />
+        <field id="wape"    long_name="-"    unit="-" />
+        <field id="n2"    long_name="Nombre de panaches de type 2"    unit="-" />
+        <field id="s2"    long_name="Surface moyenne des panaches de type 2"    unit="m2" />
+        <field id="proba_notrig"    long_name="Probabilité de non-déclenchement"    unit="-" />
+        <field id="random_notrig"    long_name="Tirage aléatoire de non-déclenchement"    unit="-" />
+        <field id="ale_bl_stat"    long_name="ALE_BL_STAT"    unit="m2/s2" />
+        <field id="ale_bl_trig"    long_name="ALE_BL_STAT + Condition P>Pseuil"    unit="m2/s2" />
+        <field id="alp_bl_det"    long_name="ALP_BL_DET"    unit="W/m2" />
+        <field id="alp_bl_fluct_m"    long_name="ALP_BL_FLUCT_M"    unit="W/m2" />
+        <field id="alp_bl_fluct_tke"    long_name="ALP_BL_FLUCT_TKE"    unit="W/m2" />
+        <field id="alp_bl_conv"    long_name="ALP_BL_CONV"    unit="W/m2" />
+        <field id="alp_bl_stat"    long_name="ALP_BL_STAT"    unit="W/m2" />
+        <field id="u850"    long_name="Zonal wind 850hPa"    unit="m/s" />
+        <field id="u700"    long_name="Zonal wind 700hPa"    unit="m/s" />
+        <field id="u500"    long_name="Zonal wind 500hPa"    unit="m/s" />
+        <field id="u200"    long_name="Zonal wind 200hPa"    unit="m/s" />
+        <field id="u100"    long_name="Zonal wind 100hPa"    unit="m/s" />
+        <field id="u50"     long_name="Zonal wind 50hPa"    unit="m/s" />
+        <field id="u10"     long_name="Zonal wind 10hPa"    unit="m/s" />
+        <field id="v850"    long_name="Meridional wind 850hPa"    unit="m/s" />
+        <field id="v700"    long_name="Meridional wind 700hPa"    unit="m/s" />
+        <field id="v500"    long_name="Meridional wind 500hPa"    unit="m/s" />
+        <field id="v200"    long_name="Meridional wind 200hPa"    unit="m/s" />
+        <field id="v100"    long_name="Meridional wind 100hPa"    unit="m/s" />
+        <field id="v50"     long_name="Meridional wind 50hPa"    unit="m/s" />
+        <field id="v10"    long_name="Meridional wind 10hPa"    unit="m/s" />
+        <field id="w850"    long_name="Vertical wind 850hPa"    unit="Pa/s" />
+        <field id="w700"    long_name="Vertical wind 700hPa"    unit="Pa/s" />
+        <field id="w500"    long_name="Vertical wind 500hPa"    unit="Pa/s" />
+        <field id="w200"    long_name="Vertical wind 200hPa"    unit="Pa/s" />
+        <field id="w100"    long_name="Vertical wind 100hPa"    unit="Pa/s" />
+        <field id="w50"    long_name="Vertical wind 50hPa"    unit="Pa/s" />
+        <field id="w10"    long_name="Vertical wind 10hPa"    unit="Pa/s" />
+        <field id="t850"    long_name="Temperature 850hPa"    unit="K" />
+        <field id="t700"    long_name="Temperature 700hPa"    unit="K" />
+        <field id="t500"    long_name="Temperature 500hPa"    unit="K" />
+        <field id="t200"    long_name="Temperature 200hPa"    unit="K" />
+        <field id="t100"    long_name="Temperature 100hPa"    unit="K" />
+        <field id="t50"    long_name="Temperature 50hPa"    unit="K" />
+        <field id="t10"    long_name="Temperature 10hPa"    unit="K" />
+        <field id="q850"    long_name="Specific humidity 850hPa"    unit="kg/kg" />
+        <field id="q700"    long_name="Specific humidity 700hPa"    unit="kg/kg" />
+        <field id="q500"    long_name="Specific humidity 500hPa"    unit="kg/kg" />
+        <field id="q200"    long_name="Specific humidity 200hPa"    unit="kg/kg" />
+        <field id="q100"    long_name="Specific humidity 100hPa"    unit="kg/kg" />
+        <field id="q50"    long_name="Specific humidity 50hPa"    unit="kg/kg" />
+        <field id="q10"    long_name="Specific humidity 10hPa"    unit="kg/kg" />
+        <field id="z850"    long_name="Geopotential height 850hPa"    unit="m" />
+        <field id="z700"    long_name="Geopotential height 700hPa"    unit="m" />
+        <field id="z500"    long_name="Geopotential height 500hPa"    unit="m" />
+        <field id="z200"    long_name="Geopotential height 200hPa"    unit="m" />
+        <field id="z100"    long_name="Geopotential height 100hPa"    unit="m" />
+        <field id="z50"    long_name="Geopotential height 50hPa"    unit="m" />
+        <field id="z10"    long_name="Geopotential height 10hPa"    unit="m" />
+        <field id="t_oce_sic"    long_name="Temp mixte oce-sic"    unit="K" />
+        <field id="weakinv"    long_name="Weak inversion"    unit="-" />
+        <field id="dthmin"    long_name="dTheta mini"    unit="K/m" />
+        <field id="u10_ter"    long_name="-"    unit="-" />
+        <field id="u10_lic"    long_name="-"    unit="-" />
+        <field id="u10_oce"    long_name="-"    unit="-" />
+        <field id="u10_sic"    long_name="-"    unit="-" />
+        <field id="v10_ter"    long_name="-"    unit="-" />
+        <field id="v10_lic"    long_name="-"    unit="-" />
+        <field id="v10_oce"    long_name="-"    unit="-" />
+        <field id="v10_sic"    long_name="-"    unit="-" />
+        <field id="rh2m"    long_name="Relative humidity at 2m"    unit="%" />
+        <field id="rh2m_min"    long_name="Min Relative humidity at 2m"    unit="%" />
+        <field id="rh2m_max"    long_name="Max Relative humidity at 2m"    unit="%" />
+        <field id="qsat2m"    long_name="Saturant humidity at 2m"    unit="%" />
+        <field id="tpot"    long_name="Surface air potential temperature"    unit="K" />
+        <field id="tpote"    long_name="Surface air equivalent potential temperature"    unit="K" />
+        <field id="SWnetOR"    long_name="Sfce net SW radiation OR"    unit="W/m2" />
+        <field id="SWdownOR"    long_name="Sfce incident SW radiation OR"    unit="W/m2" />
+        <field id="LWdownOR"    long_name="Sfce incident LW radiation OR"    unit="W/m2" />
+        <field id="snowl"    long_name="Solid Large-scale Precip."    unit="kg/(m2*s)" />
+        <field id="cape_max"    long_name="CAPE max."    unit="J/kg" />
+        <field id="solldown"    long_name="Down. IR rad. at surface"    unit="W/m2" />
+        <field id="dtsvdfo"    long_name="Boundary-layer dTs(o)"    unit="K/s" />
+        <field id="dtsvdft"    long_name="Boundary-layer dTs(t)"    unit="K/s" />
+        <field id="dtsvdfg"    long_name="Boundary-layer dTs(g)"    unit="K/s" />
+        <field id="dtsvdfi"    long_name="Boundary-layer dTs(g)"    unit="K/s" />
+        <field id="rugs"    long_name="rugosity"    unit="-" />
+        <field id="z0m"    long_name="roughness length, momentum"    unit="-" />
+        <field id="z0h"    long_name="roughness length, enthalpy"    unit="-" />
+        <field id="topswad"    long_name="ADE at TOA"    unit="W/m2" />
+        <field id="topswad0"    long_name="ADE clear-sky at TOA"    unit="W/m2" />
+        <field id="topswai"    long_name="AIE at TOA"    unit="W/m2" />
+        <field id="solswad"    long_name="ADE at SRF"    unit="W/m2" />
+        <field id="solswad0"    long_name="ADE clear-sky at SRF"    unit="W/m2" />
+        <field id="solswai"    long_name="AIE at SFR"    unit="W/m2" />
+        <field id="toplwad"    long_name="LW-ADE at TOA" unit="W/m2" />
+        <field id="toplwad0"    long_name="LW-ADE clear-sky at TOA"    unit="W/m2" />
+        <field id="sollwad"    long_name="LW-ADE at SRF" unit="W/m2" />
+        <field id="sollwad0"    long_name="LW-ADE clear-sky at SRF"    unit="W/m2" />
+        <field id="OD550_ASBCM"    long_name="Aerosol Optical depth at 550 nm "    unit="1" />
+        <field id="OD550_ASPOMM"    long_name="Aerosol Optical depth at 550 nm "    unit="1" />
+        <field id="OD550_ASSO4M"    long_name="Aerosol Optical depth at 550 nm "    unit="1" />
+        <field id="OD550_CSSO4M"    long_name="Aerosol Optical depth at 550 nm "    unit="1" />
+        <field id="OD550_SSSSM"    long_name="Aerosol Optical depth at 550 nm "    unit="1" />
+        <field id="OD550_ASSSM"    long_name="Aerosol Optical depth at 550 nm "    unit="1" />
+        <field id="OD550_CSSSM"    long_name="Aerosol Optical depth at 550 nm "    unit="1" />
+        <field id="OD550_CIDUSTM"    long_name="Aerosol Optical depth at 550 nm "    unit="1" />
+        <field id="OD550_AIBCM"    long_name="Aerosol Optical depth at 550 nm "    unit="1" />
+        <field id="OD550_AIPOMM"    long_name="Aerosol Optical depth at 550 nm "    unit="1" />
+        <field id="OD550_STRAT"    long_name="Aerosol Optical depth at 550 nm "    unit="1" enabled="TRUE" />
+        <field id="OD550_SO4"     long_name="Aerosol Optical depth at 550 nm "    unit="1" />
+        <field id="OD550_ASNO3M"     long_name="Aerosol Optical depth at 550 nm "    unit="1" />
+        <field id="OD550_CSNO3M"     long_name="Aerosol Optical depth at 550 nm "    unit="1" />
+        <field id="OD550_CINO3M"     long_name="Aerosol Optical depth at 550 nm "    unit="1" />
+        <field id="OD_10um_STRAT" long_name="Stratospheric Aerosol Optical depth at 10 um" unit="-" />
+        <field id="od550aer"    long_name="Total aerosol optical depth at 550nm"    unit="-" />
+        <field id="od865aer"    long_name="Total aerosol optical depth at 870nm"    unit="-" />
+        <field id="absvisaer"    long_name="Absorption aerosol visible optical depth"    unit="-" />
+        <field id="od550lt1aer"    long_name="Fine mode optical depth"    unit="-" />
+        <field id="sconcso4"    long_name="Surface Concentration of Sulfate "    unit="kg/m3" />
+        <field id="sconcno3"    long_name="Surface Concentration of Nitrate "    unit="kg/m3" />
+        <field id="sconcoa"    long_name="Surface Concentration of Organic Aerosol "    unit="kg/m3" />
+        <field id="sconcbc"    long_name="Surface Concentration of Black Carbon "    unit="kg/m3" />
+        <field id="sconcss"    long_name="Surface Concentration of Sea Salt "    unit="kg/m3" />
+        <field id="sconcdust"    long_name="Surface Concentration of Dust "    unit="kg/m3" />
+        <field id="loadso4"    long_name="Column Load of Sulfate "    unit="kg/m2" />
+        <field id="loadoa"    long_name="Column Load of Organic Aerosol "    unit="kg/m2" />
+        <field id="loadbc"    long_name="Column Load of Black Carbon "    unit="kg/m2" />
+        <field id="loadss"    long_name="Column Load of Sea Salt "    unit="kg/m2" />
+        <field id="loaddust"    long_name="Column Load of Dust "    unit="kg/m2" />
+        <field id="swtoaas_nat"    long_name="Natural aerosol radiative forcing all-sky at TOA"    unit="W/m2" />
+        <field id="swsrfas_nat"    long_name="Natural aerosol radiative forcing all-sky at SRF"    unit="W/m2" />
+        <field id="swtoacs_nat"    long_name="Natural aerosol radiative forcing clear-sky at TOA"    unit="W/m2" />
+        <field id="swsrfcs_nat"    long_name="Natural aerosol radiative forcing clear-sky at SRF"    unit="W/m2" />
+        <field id="swtoaas_ant"    long_name="Anthropogenic aerosol radiative forcing all-sky at TOA"    unit="W/m2" />
+        <field id="swsrfas_ant"    long_name="Anthropogenic aerosol radiative forcing all-sky at SRF"    unit="W/m2" />
+        <field id="swtoacs_ant"    long_name="Anthropogenic aerosol radiative forcing clear-sky at TOA"    unit="W/m2" />
+        <field id="swsrfcs_ant"    long_name="Anthropogenic aerosol radiative forcing clear-sky at SRF"    unit="W/m2" />
+        <field id="swtoacf_nat"    long_name="Natural aerosol impact on cloud radiative forcing at TOA"    unit="W/m2" />
+        <field id="swsrfcf_nat"    long_name="Natural aerosol impact on cloud radiative forcing  at SRF"    unit="W/m2" />
+        <field id="swtoacf_ant"    long_name="Anthropogenic aerosol impact on cloud radiative forcing at TOA"    unit="W/m2" />
+        <field id="swsrfcf_ant"    long_name="Anthropogenic aerosol impact on cloud radiative forcing at SRF"    unit="W/m2" />
+        <field id="swtoacf_zero"    long_name="Cloud radiative forcing (allsky-clearsky fluxes) at TOA"    unit="W/m2" />
+        <field id="swsrfcf_zero"    long_name="Cloud radiative forcing (allsky-clearsky fluxes) at SRF"    unit="W/m2" />
+        <field id="cldncl"    long_name="CDNC at top of liquid water cloud"    unit="m-3" />
+        <field id="reffclwtop"    long_name="Droplet effective radius at top of liquid water cloud"    unit="m" />
+        <field id="cldnvi"    long_name="Column Integrated Cloud Droplet Number"    unit="m-2" />
+        <field id="lcc"    long_name="Cloud liquid fraction at top of cloud"    unit="1" />
+        <field id="wvapp"    long_name="-"    unit="-" />
+        <field id="albe_ter"    long_name="Albedo VIS surf. ter"    unit="-" />
+        <field id="albe_lic"    long_name="Albedo VIS surf. lic"    unit="-" />
+        <field id="albe_oce"    long_name="Albedo VIS surf. oce"    unit="-" />
+        <field id="albe_sic"    long_name="Albedo VIS surf. sic"    unit="-" />
+        <field id="ages_ter"    long_name="Snow age ter"    unit="day" />
+        <field id="ages_lic"    long_name="Snow age lic"    unit="day" />
+        <field id="ages_oce"    long_name="Snow age oce"    unit="day" />
+        <field id="ages_sic"    long_name="Snow age sic"    unit="day" />
+        <field id="snow_ter"    long_name="Snow"    unit="kg/m2" />
+        <field id="snow_lic"    long_name="Snow"    unit="kg/m2" />
+        <field id="snow_oce"    long_name="Snow"    unit="kg/m2" />
+        <field id="snow_sic"    long_name="Snow"    unit="kg/m2" />
+        <field id="rugs_ter"    long_name="Surface roughness ter"    unit="m" />
+        <field id="rugs_lic"    long_name="Surface roughness lic"    unit="m" />
+        <field id="rugs_oce"    long_name="Surface roughness oce"    unit="m" />
+        <field id="rugs_sic"    long_name="Surface roughness sic"    unit="m" />
+        <field id="z0m_ter"    long_name="roughness length, momentum ter"    unit="m" />
+        <field id="z0m_lic"    long_name="roughness length, momentum lic"    unit="m" />
+        <field id="z0m_oce"    long_name="roughness length, momentum oce"    unit="m" />
+        <field id="z0m_sic"    long_name="roughness length, momentum sic"    unit="m" />
+        <field id="z0h_ter"    long_name="roughness length, enthalpy ter"    unit="m" />
+        <field id="z0h_lic"    long_name="roughness length, enthalpy lic"    unit="m" />
+        <field id="z0h_oce"    long_name="roughness length, enthalpy oce"    unit="m" />
+        <field id="z0h_sic"    long_name="roughness length, enthalpy sic"    unit="m" />
+        <field id="sens_rain_oce"  long_name="Sensible heat flux associated withliquid prec. over ocean"    unit="W/m2" />
+        <field id="sens_rain_sic"  long_name="Sensible heat flux associated with liquid prec. over seaice"    unit="W/m2" />
+        <field id="sens_snow_oce"  long_name="Sensible heat flux associated with solid prec. over ocean"    unit="W/m2" />
+        <field id="sens_snow_sic"  long_name="Sensible heat flux associated with solid prec. over seaice"    unit="W/m2" />
+        <field id="lat_rain_oce"  long_name="Latent heat flux associated with liquid prec. over ocean"    unit="W/m2" />
+        <field id="lat_rain_sic"  long_name="Latent heat flux associated with liquid prec. over seaice"    unit="W/m2" />
+        <field id="lat_snow_oce"  long_name="Latent heat flux associated with solid prec. over ocean"    unit="W/m2" />
+        <field id="lat_snow_sic"  long_name="Latent heat flux associated with solid prec. over seaice"    unit="W/m2" />
+        <field id="alb1"    long_name="Surface VIS albedo"    unit="-" />
+        <field id="alb2"    long_name="Surface Near IR albedo"    unit="-" />
+        <field id="ftime_con"    long_name="Fraction of time convection Occurs"    unit="-" />
+        <field id="wake_h"    long_name="wake_h"    unit="-" />
+        <field id="wake_s"    long_name="wake_s"    unit="-" />
+        <field id="epmax"    long_name="epmax en fn cape"    unit="su" />
+        <field id="plulth"    long_name="Rainfall therm."    unit="K/s" />
+        <field id="plulst"    long_name="Rainfall strat."    unit="K/s" />
+        <field id="lmaxth"    long_name="Upper level thermals"    unit="-" />
+        <field id="ftime_th"    long_name="Fraction of time Shallow convection occurs"    unit="-" />
+        <field id="f0_th"    long_name="Thermal closure mass flux"    unit="K/s" />
+        <field id="zmax_th"    long_name="Thermal plume height"    unit="K/s" />
+        <field id="rsut4co2"    long_name="TOA Out SW in 4xCO2 atmosphere"    unit="W/m2" />
+        <field id="rlut4co2"    long_name="TOA Out LW in 4xCO2 atmosphere"    unit="W/m2" />
+        <field id="rsutcs4co2"    long_name="TOA Out CS SW in 4xCO2 atmosphere"    unit="W/m2" />
+        <field id="rlutcs4co2"    long_name="TOA Out CS LW in 4xCO2 atmosphere"    unit="W/m2" />
+        <field id="dqphy2d"    long_name="Physics dQ"    unit="(kg/m2)/s" />
+        <field id="dqlphy2d"    long_name="Physics dQL"    unit="(kg/m2)/s" />
+        <field id="dqsphy2d"    long_name="Physics dQS"    unit="(kg/m2)/s" />
+        <field id="dqdyn2d"    long_name="Dynamics dQ"    unit="(kg/m2)/s" />
+        <field id="dqldyn2d"   long_name="Dynamics dQL"    unit="(kg/m2)/s" />
+        <field id="dqsdyn2d"   long_name="Dynamics dQS"    unit="(kg/m2)/s" />
+        <field id="dqcon2d"    long_name="Convection dQ"    unit="(kg/m2)/s" />
+        <field id="dqwak2d"    long_name="Wake dQ"    unit="(kg/m2)/s" />
+        <field id="dqlsc2d"    long_name="Condensation dQ"    unit="(kg/m2)/s" />
+        <field id="dqvdf2d"    long_name="Boundary-layer dQ"    unit="(kg/m2)/s" />
+        <field id="dqeva2d"    long_name="Reevaporation dQ"    unit="(kg/m2)/s" />
+        <field id="dqlscth2d"    long_name="dQ therm."    unit="(kg/m2)/s" />
+        <field id="dqlscst2d"    long_name="dQ strat."    unit="(kg/m2)/s" />
+        <field id="dqthe2d"    long_name="Thermal dQ"    unit="(kg/m2)/s" />
+        <field id="dqajs2d"    long_name="Dry ajdust dQ"    unit="(kg/m2)/s" />
+    </field_group>
+
+    <field_group id="fields_3D" field_ref="field_atm_3D" >
+        <field id="tke"    long_name="TKE"    unit="m2/s2" />
+        <field id="tke_ter"    long_name="Max Turb. Kinetic Energy ter"    unit="-" />
+        <field id="tke_lic"    long_name="Max Turb. Kinetic Energy lic"    unit="-" />
+        <field id="tke_oce"    long_name="Max Turb. Kinetic Energy oce"    unit="-" />
+        <field id="tke_sic"    long_name="Max Turb. Kinetic Energy sic"    unit="-" />
+        <field id="tke_max_ter"    long_name="Max Turb. Kinetic Energy ter"    unit="-" />
+        <field id="tke_max_lic"    long_name="Max Turb. Kinetic Energy lic"    unit="-" />
+        <field id="tke_max_oce"    long_name="Max Turb. Kinetic Energy oce"    unit="-" />
+        <field id="tke_max_sic"    long_name="Max Turb. Kinetic Energy sic"    unit="-" />
+        <field id="dltpbltke_ter"    long_name="TKE difference (w - x)"    unit="-" />
+        <field id="dltpbltke_lic"    long_name="TKE difference (w - x)"    unit="-" />
+        <field id="dltpbltke_oce"    long_name="TKE difference (w - x)"    unit="-" />
+        <field id="dltpbltke_sic"    long_name="TKE difference (w - x)"    unit="-" />
+        <field id="cldtau"    long_name="Cloud optical thickness"    unit="1" />
+        <field id="cldemi"    long_name="Cloud optical emissivity"    unit="1" />
+        <field id="tke_max"    long_name="TKE max"    unit="m2/s2" />
+        <field id="kz"    long_name="Kz melange"    unit="m2/s" enabled="FALSE" />
+        <field id="kz_max"    long_name="Kz melange max"    unit="m2/s" enabled="FALSE" />
+        <field id="concso4"    long_name="Concentration of Sulfate "    unit="kg/m3" />
+        <field id="concno3"    long_name="Concentration of Nitrate "    unit="kg/m3" /> 
+        <field id="concoa"    long_name="Concentration of Organic Aerosol "    unit="kg/m3" />
+        <field id="concbc"    long_name="Concentration of Black Carbon "    unit="kg/m3" />
+        <field id="concss"    long_name="Concentration of Sea Salt "    unit="kg/m3" />
+        <field id="concdust"    long_name="Concentration of Dust "    unit="kg/m3" />
+        <field id="ec550aer"    long_name="Extinction at 550nm"    unit="m^-1" />
+        <field id="lwcon"    long_name="Cloud liquid water content"    unit="kg/kg" />
+        <field id="iwcon"    long_name="Cloud ice water content"    unit="kg/kg" />
+        <field id="temp"    long_name="Air temperature"    unit="K" />
+        <field id="theta"    long_name="Potential air temperature"    unit="K" />
+        <field id="ovap"    long_name="Specific humidity"    unit="kg/kg" />
+        <field id="ovapinit"    long_name="Specific humidity (begin of timestep)"    unit="kg/kg" />
+        <field id="oliq"    long_name="Condensed water"    unit="kg/kg" />
+        <field id="geop"    long_name="Geopotential height"    unit="m2/s2" />
+        <field id="vitu"    long_name="Zonal wind"    unit="m/s" />
+        <field id="vitv"    long_name="Meridional wind"    unit="m/s" />
+        <field id="vitw"    long_name="Vertical wind"    unit="Pa/s" />
+        <field id="pres"    long_name="Air pressure"    unit="Pa" />
+        <field id="paprs"    long_name="Air pressure Inter-Couches"    unit="Pa" />
+        <field id="mass"    long_name="Masse Couches"    unit="kg/m2" />
+        <field id="zfull"    long_name="Altitude of full pressure levels"    unit="m" />
+        <field id="zhalf"    long_name="Altitude of half pressure levels"    unit="m" />
+        <field id="rneb"    long_name="Cloud fraction"    unit="-" />
+        <field id="rnebcon"    long_name="Convective Cloud Fraction"    unit="-" />
+        <field id="rnebls"    long_name="LS Cloud fraction"    unit="-" />
+        <field id="rhum"    long_name="Relative humidity"    unit="-" />
+        <field id="ozone"    long_name="Ozone mole fraction"    unit="-" />
+        <field id="ozone_daylight"    long_name="Daylight ozone mole fraction"    unit="-" />
+        <field id="upwd"    long_name="saturated updraft"    unit="kg/m2/s" />
+        <field id="ep"    long_name="ep"    unit="su" />
+        <field id="dtphy"    long_name="Physics dT"    unit="K/s" />
+        <field id="dqphy"    long_name="Physics dQ"    unit="(kg/kg)/s" />
+        <field id="dqlphy"   long_name="Physics dQL"    unit="(kg/kg)/s" />
+        <field id="dqsphy"   long_name="Physics dQS"    unit="(kg/kg)/s" />
+        <field id="pr_con_l"    long_name="Convective precipitation lic"    unit="-" />
+        <field id="pr_con_i"    long_name="Convective precipitation ice"    unit="-" />
+        <field id="pr_lsc_l"    long_name="Large scale precipitation lic"    unit="-" />
+        <field id="pr_lsc_i"    long_name="Large scale precipitation ice"    unit="-" />
+        <field id="re"    long_name="Cloud droplet effective radius"    unit="um" />
+        <field id="fl"    long_name="Denominator of Cloud droplet effective radius"    unit="-" />
+        <field id="scdnc"    long_name="Cloud droplet number concentration"    unit="m-3" />
+        <field id="reffclws"    long_name="Stratiform Cloud Droplet Effective Radius (aerosol diags.)"    unit="m" />
+        <field id="reffclwc"    long_name="Convective Cloud Droplet Effective Radius (aerosol diags.)"    unit="m" />
+        <field id="lcc3d"    long_name="Cloud liquid fraction"    unit="1" />
+        <field id="lcc3dcon"    long_name="Convective cloud liquid fraction"    unit="1" />
+        <field id="lcc3dstra"    long_name="Stratiform cloud liquid fraction"    unit="1" />
+        <field id="clwcon"    long_name="Convective Cloud Liquid water content"    unit="kg/kg" />
+        <field id="Ma"    long_name="undilute adiab updraft"    unit="kg/m2/s" />
+        <field id="dnwd"    long_name="saturated downdraft"    unit="kg/m2/s" />
+        <field id="dnwd0"    long_name="unsat. downdraft"    unit="kg/m2/s" />
+        <field id="mc"    long_name="Convective mass flux"    unit="kg/m2/s" />
+        <field id="dtdyn"    long_name="Dynamics dT"    unit="K/s" />
+        <field id="dqdyn"    long_name="Dynamics dQ"    unit="(kg/kg)/s" />
+        <field id="dqldyn"    long_name="Dynamics dQL"    unit="(kg/kg)/s" />
+        <field id="dqsdyn"    long_name="Dynamics dQS"    unit="(kg/kg)/s" />
+        <field id="dudyn"    long_name="Dynamics dU"    unit="m/s2" />
+        <field id="dvdyn"    long_name="Dynamics dV"    unit="m/s2" />
+        <field id="dtcon"    long_name="Convection dT"    unit="K/s" />
+        <field id="ducon"    long_name="Convection du"    unit="m/s2" />
+        <field id="dvcon"    long_name="Convection dv"    unit="m/s2" />
+        <field id="dqcon"    long_name="Convection dQ"    unit="(kg/kg)/s" />
+        <field id="dtwak"    long_name="Wake dT"    unit="K/s" />
+        <field id="dqwak"    long_name="Wake dQ"    unit="(kg/kg)/s" />
+        <field id="wake_deltat"    long_name="wake_deltat"    unit="-" />
+        <field id="wake_deltaq"    long_name="wake_deltaq"    unit="-" />
+        <field id="wake_omg"    long_name="wake_omg"    unit="-" />
+        <field id="wdtrainA"    long_name="precipitation from AA"    unit="-" />
+        <field id="wdtrainM"    long_name="precipitation from mixture"    unit="-" />
+        <field id="Vprecip"    long_name="precipitation vertical profile"    unit="-" />
+        <field id="ftd"    long_name="tend temp due aux descentes precip"    unit="-" />
+        <field id="fqd"    long_name="tend vap eau due aux descentes precip"    unit="-" />
+        <field id="dtlsc"    long_name="Condensation dT"    unit="K/s" />
+        <field id="dtlschr"    long_name="Large-scale condensational heating rate"    unit="K/s" />
+        <field id="dqlsc"    long_name="Condensation dQ"    unit="(kg/kg)/s" />
+        <field id="beta_prec"    long_name="LS Conversion rate to prec"    unit="(kg/kg)/s" />
+        <field id="dtvdf"    long_name="Boundary-layer dT"    unit="K/s" />
+        <field id="dtdis"    long_name="TKE dissipation dT"    unit="K/s" />
+        <field id="dqvdf"    long_name="Boundary-layer dQ"    unit="(kg/kg)/s" />
+        <field id="dteva"    long_name="Reevaporation dT"    unit="K/s" />
+        <field id="dqeva"    long_name="Reevaporation dQ"    unit="(kg/kg)/s" />
+        <field id="dqlscth"    long_name="dQ therm."    unit="(kg/kg)/s" />
+        <field id="dqlscst"    long_name="dQ strat."    unit="(kg/kg)/s" />
+        <field id="dtlscth"    long_name="dQ therm."    unit="K/s" />
+        <field id="dtlscst"    long_name="dQ strat."    unit="K/s" />
+        <field id="ptconvth"    long_name="POINTS CONVECTIFS therm."    unit="-" />
+        <field id="ptconv"    long_name="POINTS CONVECTIFS"    unit="-" />
+        <field id="ratqs"    long_name="RATQS"    unit="-" />
+        <field id="dtthe"    long_name="Thermal dT"    unit="K/s" />
+        <field id="duthe"    long_name="Thermal du"    unit="m/s2" />
+        <field id="dvthe"    long_name="Thermal dv"    unit="m/s2" />
+        <field id="f_th"    long_name="Thermal plume mass flux"    unit="kg/(m2*s)" />
+        <field id="e_th"    long_name="Thermal plume entrainment"    unit="K/s" />
+        <field id="w_th"    long_name="Thermal plume vertical velocity"    unit="m/s" />
+        <field id="lambda_th"    long_name="Thermal plume vertical velocity"    unit="m/s" />
+        <field id="q_th"    long_name="Thermal plume total humidity"    unit="kg/kg" />
+        <field id="a_th"    long_name="Thermal plume fraction"    unit="-" />
+        <field id="d_th"    long_name="Thermal plume detrainment"    unit="K/s" />
+        <field id="dqthe"    long_name="Thermal dQ"    unit="(kg/kg)/s" />
+        <field id="dtajs"    long_name="Dry adjust. dT"    unit="K/s" />
+        <field id="dqajs"    long_name="Dry adjust. dQ"    unit="(kg/kg)/s" />
+        <field id="dtswr"    long_name="SW radiation dT"    unit="K/s" />
+        <field id="dtsw0"    long_name="CS SW radiation dT"    unit="K/s" />
+        <field id="dtlwr"    long_name="LW radiation dT"    unit="K/s" />
+        <field id="dtlw0"    long_name="CS LW radiation dT"    unit="K/s" />
+        <field id="dtec"    long_name="Cinetic dissip dT"    unit="K/s" />
+        <field id="duvdf"    long_name="Boundary-layer dU"    unit="m/s2" />
+        <field id="dvvdf"    long_name="Boundary-layer dV"    unit="m/s2" />
+        <field id="duoro"    long_name="Orography dU"    unit="m/s2" />
+        <field id="dvoro"    long_name="Orography dV"    unit="m/s2" />
+        <field id="dulif"    long_name="Orography dU"    unit="m/s2" />
+        <field id="dvlif"    long_name="Orography dV"    unit="m/s2" />
+	<field id="du_gwd_hines" long_name="Hines GWD dU" unit="m/s2" />
+	<field id="dv_gwd_hines" long_name="Hines GWD dV" unit="m/s2" />
+	<field id="du_gwd_front" long_name="Fronts GWD dU" unit="m/s2" />
+	<field id="dv_gwd_front" long_name="Fronts GWD dV" unit="m/s2" />
+	<field id="east_gwstress" long_name="Eastward GW Stress" unit="Pa" />
+	<field id="west_gwstress" long_name="Westward GW Stress" unit="Pa" />
+        <field id="dtoro"    long_name="Orography dT"    unit="K/s" />
+        <field id="dtlif"    long_name="Orography dT"    unit="K/s" />
+        <field id="dthin"    long_name="Hines GWD dT"    unit="K/s" />
+        <field id="rsu"    long_name="SW upward radiation"    unit="W m-2" enabled="FALSE" />
+        <field id="rsd"    long_name="SW downward radiation"    unit="W m-2" enabled="FALSE" />
+        <field id="rlu"    long_name="LW upward radiation"    unit="W m-2" enabled="FALSE" />
+        <field id="rld"    long_name="LW downward radiation"    unit="W m-2" enabled="FALSE" />
+        <field id="rsucs"    long_name="SW CS upward radiation"    unit="W m-2" enabled="FALSE" />
+        <field id="rsdcs"    long_name="SW CS downward radiation"    unit="W m-2" enabled="FALSE" />
+        <field id="rlucs"    long_name="LW CS upward radiation"    unit="W m-2" enabled="FALSE" />
+        <field id="rldcs"    long_name="LW CS downward radiation"    unit="W m-2" enabled="FALSE" />
+        <field id="tnt"    long_name="Tendency of air temperature"    unit="K s-1" />
+        <field id="tntc"    long_name="Tendency of air temperature due to Moist Convection"    unit="K s-1" />
+        <field id="tntr"    long_name="Air temperature tendency due to Radiative heating"    unit="K s-1" />
+        <field id="tntscpbl"    long_name="Air temperature tendency due to St cloud and precipitation and BL mixing"    unit="K s-1" />
+        <field id="tnhus"    long_name="Tendency of specific humidity"    unit="s-1" />
+        <field id="tnhusc"    long_name="Tendency of specific humidity due to convection"    unit="s-1" />
+        <field id="tnhusscpbl"    long_name="Tendency of Specific humidity due to ST cl, precip and BL mixing"    unit="s-1" />
+        <field id="evu"    long_name="Eddy viscosity coefficient for Momentum Variables"    unit="m2 s-1" />
+        <field id="h2o"    long_name="Mass Fraction of Water"    unit="1" />
+        <field id="mcd"    long_name="Downdraft COnvective Mass Flux"    unit="kg/(m2*s)" />
+        <field id="dmc"    long_name="Deep COnvective Mass Flux"    unit="kg/(m2*s)" />
+        <field id="ref_liq"    long_name="Effective radius of convective cloud liquid water particle"    unit="m" />
+        <field id="ref_ice"    long_name="Effective radius of startiform cloud ice particle"    unit="m" />
+        <field id="rsu4co2"    long_name="Upwelling SW 4xCO2 atmosphere"    unit="W/m2" />
+        <field id="rlu4co2"    long_name="Upwelling LW 4xCO2 atmosphere"    unit="W/m2" />
+        <field id="rsucs4co2"    long_name="Upwelling CS SW 4xCO2 atmosphere"    unit="W/m2" />
+        <field id="rlucs4co2"    long_name="Upwelling CS LW 4xCO2 atmosphere"    unit="W/m2" />
+        <field id="rsd4co2"    long_name="Downwelling SW 4xCO2 atmosphere"    unit="W/m2" />
+        <field id="rld4co2"    long_name="Downwelling LW 4xCO2 atmosphere"    unit="W/m2" />
+        <field id="rsdcs4co2"    long_name="Downwelling CS SW 4xCO2 atmosphere"    unit="W/m2" />
+        <field id="rldcs4co2"    long_name="Downwelling CS LW 4xCO2 atmosphere"    unit="W/m2" />
+        <field id="stratomask"    long_name="Stratospheric fraction"    unit="-" />
+    </field_group>
+    
+    <field_group  id="fields_NMC" field_ref="field_atm_3D" >
+<!--  <field id="tnondef" long_name="Undefined value of T" unit="K" /> -->
+      <field id="ta" long_name="Air temperature" unit="K" />
+      <field id="zg" long_name="Geopotential height" unit="m" />
+      <field id="hus" long_name="Specific humidity" unit="1" />
+      <field id="hur" long_name="Relative humidity" unit="%" />
+      <field id="ua" long_name="Eastward wind" unit="m s-1" />
+      <field id="va" long_name="Northward wind" unit="m s-1" />
+      <field id="wap" long_name="Lagrangian tendency of air pressure" unit="Pa s-1" />
+<!--  <field id="psbg" long_name="Pressure sfce below ground" unit="%" /> -->
+      <field id="tro3" long_name="Ozone mole fraction" unit="1e-9" />
+      <field id="tro3_daylight" long_name="Daylight ozone mole fraction" unit="1e-9" />
+      <field id="uv" long_name="uv" unit="m2/s2" />
+      <field id="vxq" long_name="vxq" unit="m/s * (kg/kg)" />
+      <field id="vT" long_name="vT" unit="mK/s" />
+      <field id="wq" long_name="wq" unit="(Pa/s)*(kg/kg)" />
+      <field id="vphi" long_name="vphi" unit="m2/s" />
+      <field id="wT" long_name="wT" unit="K*Pa/s" />
+      <field id="u2" long_name="u2" unit="m2/s2" />
+      <field id="v2" long_name="v2" unit="m2/s2" />
+      <field id="T2" long_name="T2" unit="K2" />
+    </field_group>
+
+    <field_group id="fields_trac" field_ref="field_atm_2D" >
+          <field id="cumRN"    long_name="Cumulated tracer  RNVL1"    unit="-" />
+          <field id="cumPB"    long_name="Cumulated tracer  PBVL1"    unit="-" />
+          <field id="cumAga"    long_name="Cumulated tracer  Aga"    unit="-" />
+    </field_group>
+
+    <field_group id="fields_trac" field_ref="field_atm_3D" >
+      <field id="RN"    long_name="Tracer RNVL1"    unit="-" />
+      <field id="dRN_vdf"    long_name="Tendance tracer RNVL1"    unit="-" />
+      <field id="dRN_the"    long_name="Tendance tracer  RNVL1"    unit="-" />
+      <field id="dRN_con"    long_name="Tendance tracer  RNVL1"    unit="-" />
+      <field id="dRN_lessi_impa"    long_name="Tendance tracer  RNVL1"    unit="-" />
+      <field id="dRN_lessi_nucl"    long_name="Tendance tracer  RNVL1"    unit="-" />
+      <field id="dRN_insc"    long_name="Tendance tracer  RNVL1"    unit="-" />
+      <field id="dRN_bcscav"    long_name="Tendance tracer  RNVL1"    unit="-" />
+      <field id="dRN_evapls"    long_name="Tendance tracer  RNVL1"    unit="-" />
+      <field id="dRN_ls"    long_name="Tendance tracer  RNVL1"    unit="-" />
+      <field id="dRN_trsp"    long_name="Tendance tracer  RNVL1"    unit="-" />
+      <field id="dRN_sscav"    long_name="Tendance tracer  RNVL1"    unit="-" />
+      <field id="dRN_sat"    long_name="Tendance tracer  RNVL1"    unit="-" />
+      <field id="dRN_uscav"    long_name="Tendance tracer  RNVL1"    unit="-" />
+      <field id="PB"    long_name="Tracer PBVL1"    unit="-" />
+      <field id="dPB_vdf"    long_name="Tendance tracer PBVL1"    unit="-" />
+      <field id="dPB_the"    long_name="Tendance tracer  PBVL1"    unit="-" />
+      <field id="dPB_con"    long_name="Tendance tracer  PBVL1"    unit="-" />
+      <field id="dPB_lessi_impa"    long_name="Tendance tracer  PBVL1"    unit="-" />
+      <field id="dPB_lessi_nucl"    long_name="Tendance tracer  PBVL1"    unit="-" />
+      <field id="dPB_insc"    long_name="Tendance tracer  PBVL1"    unit="-" />
+      <field id="dPB_bcscav"    long_name="Tendance tracer  PBVL1"    unit="-" />
+      <field id="dPB_evapls"    long_name="Tendance tracer  PBVL1"    unit="-" />
+      <field id="dPB_ls"    long_name="Tendance tracer  PBVL1"    unit="-" />
+      <field id="dPB_trsp"    long_name="Tendance tracer  PBVL1"    unit="-" />
+      <field id="dPB_sscav"    long_name="Tendance tracer  PBVL1"    unit="-" />
+      <field id="dPB_sat"    long_name="Tendance tracer  PBVL1"    unit="-" />
+      <field id="dPB_uscav"    long_name="Tendance tracer  PBVL1"    unit="-" />
+      <field id="Aga"    long_name="Tracer AgaVL1"    unit="-" />
+      <field id="dAga_vdf"    long_name="Tendance tracer Aga"    unit="-" />
+      <field id="dAga_the"    long_name="Tendance tracer  Aga"    unit="-" />
+      <field id="dAga_con"    long_name="Tendance tracer  Aga"    unit="-" />
+      <field id="dAga_lessi_impa"    long_name="Tendance tracer  Aga"    unit="-" />
+      <field id="dAga_lessi_nucl"    long_name="Tendance tracer  Aga"    unit="-" />
+      <field id="dAga_insc"    long_name="Tendance tracer  Aga"    unit="-" />
+      <field id="dAga_bcscav"    long_name="Tendance tracer  Aga"    unit="-" />
+      <field id="dAga_evapls"    long_name="Tendance tracer  Aga"    unit="-" />
+      <field id="dAga_ls"    long_name="Tendance tracer  Aga"    unit="-" />
+      <field id="dAga_trsp"    long_name="Tendance tracer  Aga"    unit="-" />
+      <field id="dAga_sscav"    long_name="Tendance tracer  Aga"    unit="-" />
+      <field id="dAga_sat"    long_name="Tendance tracer  Aga"    unit="-" />
+      <field id="dAga_uscav"    long_name="Tendance tracer  Aga"    unit="-" />
+    </field_group>
+
+    <field_group id="fields_COSP_CALIPSO" field_ref="field_atm_2D" freq_op="3h">
+      <field id="cllcalipso"    long_name="Lidar Low-level Cloud Fraction"   unit="1" />
+      <field id="clhcalipso"    long_name="Lidar Hight-level Cloud Fraction"   unit="1" />
+      <field id="clmcalipso"    long_name="Lidar Mid-level Cloud Fraction"   unit="1" />
+      <field id="cltcalipso"    long_name="Lidar Total Cloud Fraction"   unit="1" />
+      <field id="clcalipso"  long_name="Lidar Cloud Fraction (532 nm)" unit="1" axis_ref="height" />
+      <field id="parasol_refl"  long_name="PARASOL-like mono-directional reflectance" unit="1" axis_ref="sza" />
+      <field id="parasol_crefl"  long_name="PARASOL-like mono-directional reflectance (integral)" unit="1" axis_ref="sza" />
+      <field id="Ncrefl"  long_name="Nb for PARASOL-like mono-directional reflectance" unit="1" axis_ref="sza" />
+      <field id="c01_cfad_lidarsr532" long_name="Lidar Scattering Ratio CFAD (532 nm)" unit="1" axis_ref="height" />
+      <field id="c02_cfad_lidarsr532" long_name="Lidar Scattering Ratio CFAD (532 nm)" unit="1" axis_ref="height" />
+      <field id="c03_cfad_lidarsr532" long_name="Lidar Scattering Ratio CFAD (532 nm)" unit="1" axis_ref="height" />
+      <field id="c04_cfad_lidarsr532" long_name="Lidar Scattering Ratio CFAD (532 nm)" unit="1" axis_ref="height" />
+      <field id="c05_cfad_lidarsr532" long_name="Lidar Scattering Ratio CFAD (532 nm)" unit="1" axis_ref="height" />
+      <field id="c06_cfad_lidarsr532" long_name="Lidar Scattering Ratio CFAD (532 nm)" unit="1" axis_ref="height" />
+      <field id="c07_cfad_lidarsr532" long_name="Lidar Scattering Ratio CFAD (532 nm)" unit="1" axis_ref="height" />
+      <field id="c08_cfad_lidarsr532" long_name="Lidar Scattering Ratio CFAD (532 nm)" unit="1" axis_ref="height" />
+      <field id="c09_cfad_lidarsr532" long_name="Lidar Scattering Ratio CFAD (532 nm)" unit="1" axis_ref="height" />
+      <field id="c10_cfad_lidarsr532" long_name="Lidar Scattering Ratio CFAD (532 nm)" unit="1" axis_ref="height" />
+      <field id="c11_cfad_lidarsr532" long_name="Lidar Scattering Ratio CFAD (532 nm)" unit="1" axis_ref="height" />
+      <field id="c12_cfad_lidarsr532" long_name="Lidar Scattering Ratio CFAD (532 nm)" unit="1" axis_ref="height" />
+      <field id="c13_cfad_lidarsr532" long_name="Lidar Scattering Ratio CFAD (532 nm)" unit="1" axis_ref="height" />
+      <field id="c14_cfad_lidarsr532" long_name="Lidar Scattering Ratio CFAD (532 nm)" unit="1" axis_ref="height" />
+      <field id="c15_cfad_lidarsr532" long_name="Lidar Scattering Ratio CFAD (532 nm)" unit="1" axis_ref="height" />
+      <field id="c01_atb532" long_name="Lidar Attenuated Total Backscatter (532 nm)" unit="1" axis_ref="height_mlev" />
+      <field id="c02_atb532" long_name="Lidar Attenuated Total Backscatter (532 nm)" unit="1" axis_ref="height_mlev" />
+      <field id="c03_atb532" long_name="Lidar Attenuated Total Backscatter (532 nm)" unit="1" axis_ref="height_mlev" />
+      <field id="c04_atb532" long_name="Lidar Attenuated Total Backscatter (532 nm)" unit="1" axis_ref="height_mlev" />
+      <field id="c05_atb532" long_name="Lidar Attenuated Total Backscatter (532 nm)" unit="1" axis_ref="height_mlev" />
+      <field id="c06_atb532" long_name="Lidar Attenuated Total Backscatter (532 nm)" unit="1" axis_ref="height_mlev" />
+      <field id="c07_atb532" long_name="Lidar Attenuated Total Backscatter (532 nm)" unit="1" axis_ref="height_mlev" />
+      <field id="c08_atb532" long_name="Lidar Attenuated Total Backscatter (532 nm)" unit="1" axis_ref="height_mlev" />
+      <field id="c09_atb532" long_name="Lidar Attenuated Total Backscatter (532 nm)" unit="1" axis_ref="height_mlev" />
+      <field id="c10_atb532" long_name="Lidar Attenuated Total Backscatter (532 nm)" unit="1" axis_ref="height_mlev" />
+      <field id="c11_atb532" long_name="Lidar Attenuated Total Backscatter (532 nm)" unit="1" axis_ref="height_mlev" />
+      <field id="c12_atb532" long_name="Lidar Attenuated Total Backscatter (532 nm)" unit="1" axis_ref="height_mlev" />
+      <field id="c13_atb532" long_name="Lidar Attenuated Total Backscatter (532 nm)" unit="1" axis_ref="height_mlev" />
+      <field id="c14_atb532" long_name="Lidar Attenuated Total Backscatter (532 nm)" unit="1" axis_ref="height_mlev" />
+      <field id="c15_atb532" long_name="Lidar Attenuated Total Backscatter (532 nm)" unit="1" axis_ref="height_mlev" />
+      <field id="c16_atb532" long_name="Lidar Attenuated Total Backscatter (532 nm)" unit="1" axis_ref="height_mlev" />
+      <field id="c17_atb532" long_name="Lidar Attenuated Total Backscatter (532 nm)" unit="1" axis_ref="height_mlev" />
+      <field id="c18_atb532" long_name="Lidar Attenuated Total Backscatter (532 nm)" unit="1" axis_ref="height_mlev" />
+      <field id="c19_atb532" long_name="Lidar Attenuated Total Backscatter (532 nm)" unit="1" axis_ref="height_mlev" />
+      <field id="c20_atb532" long_name="Lidar Attenuated Total Backscatter (532 nm)" unit="1" axis_ref="height_mlev" />
+      <field id="beta_mol532" long_name="Lidar Molecular Backscatter (532 nm)" unit="m-1 sr-1" axis_ref="height_mlev" />
+      <field id="cllcalipsoice"    long_name="Lidar Ice-Phase Low-level Cloud Fraction"   unit="%" />
+      <field id="clhcalipsoice"    long_name="Lidar Ice-Phase Hight-level Cloud Fraction"   unit="%" />
+      <field id="clmcalipsoice"    long_name="Lidar Ice-Phase Mid-level Cloud Fraction"   unit="%" />
+      <field id="cltcalipsoice"    long_name="Lidar Ice-Phase Total Cloud Fraction"   unit="%" />
+      <field id="clcalipsoice"  long_name="Lidar Ice-Phase Cloud Fraction (532 nm)" unit="%" axis_ref="height" />
+      <field id="cllcalipsoliq"    long_name="Lidar Liq-Phase Low-level Cloud Fraction"   unit="%" />
+      <field id="clhcalipsoliq"    long_name="Lidar Liq-Phase Hight-level Cloud Fraction"   unit="%" />
+      <field id="clmcalipsoliq"    long_name="Lidar Liq-Phase Mid-level Cloud Fraction"   unit="%" />
+      <field id="cltcalipsoliq"    long_name="Lidar Liq-Phase Total Cloud Fraction"   unit="%" />
+      <field id="clcalipsoliq"  long_name="Lidar Liq-Phase Cloud Fraction (532 nm)" unit="%" axis_ref="height" />
+      <field id="cllcalipsoun"    long_name="Lidar Undefined-Phase Low-level Cloud Fraction"   unit="%" />
+      <field id="clhcalipsoun"    long_name="Lidar Undefined-Phase Hight-level Cloud Fraction"   unit="%" />
+      <field id="clmcalipsoun"    long_name="Lidar Undefined-Phase Mid-level Cloud Fraction"   unit="%" />
+      <field id="cltcalipsoun"    long_name="Lidar Undefined-Phase Total Cloud Fraction"   unit="%" />
+      <field id="clcalipsoun"  long_name="Lidar Undefined-Phase Cloud Fraction (532 nm)" unit="%" axis_ref="height" />
+      <field id="clcalipsotmp"  long_name="Lidar Cloud Fraction (532 nm)" unit="%" axis_ref="height" />
+      <field id="clcalipsotmpliq"  long_name="Lidar Liq-Phase Cloud Fraction (532 nm)" unit="%" axis_ref="height" />
+      <field id="clcalipsotmpice"  long_name="Lidar Ice-Phase Cloud Fraction (532 nm)" unit="%" axis_ref="height" />
+      <field id="clcalipsotmpun"  long_name="Undefined-Phase Total Cloud Fraction"   unit="%" axis_ref="height" />
+    </field_group>  
+
+    <field_group id="fields_COSP_CLOUDSAT" field_ref="field_atm_2D" freq_op="3h">
+      <field id="cltlidarradar" long_name="Lidar and Radar Total Cloud Fraction" unit="%" />
+      <field id="clcalipso2"  long_name="CALIPSO Cloud Fraction Undetected by CloudSat" unit="%" axis_ref="height" />
+      <field id="c01_dbze94" long_name="CloudSat Radar Reflectivity" unit="1" axis_ref="height_mlev" />
+      <field id="c02_dbze94" long_name="CloudSat Radar Reflectivity" unit="1" axis_ref="height_mlev" />
+      <field id="c03_dbze94" long_name="CloudSat Radar Reflectivity" unit="1" axis_ref="height_mlev" />
+      <field id="c04_dbze94" long_name="CloudSat Radar Reflectivity" unit="1" axis_ref="height_mlev" />
+      <field id="c05_dbze94" long_name="CloudSat Radar Reflectivity" unit="1" axis_ref="height_mlev" />
+      <field id="c06_dbze94" long_name="CloudSat Radar Reflectivity" unit="1" axis_ref="height_mlev" />
+      <field id="c07_dbze94" long_name="CloudSat Radar Reflectivity" unit="1" axis_ref="height_mlev" />
+      <field id="c08_dbze94" long_name="CloudSat Radar Reflectivity" unit="1" axis_ref="height_mlev" />
+      <field id="c09_dbze94" long_name="CloudSat Radar Reflectivity" unit="1" axis_ref="height_mlev" />
+      <field id="c10_dbze94" long_name="CloudSat Radar Reflectivity" unit="1" axis_ref="height_mlev" />
+      <field id="c11_dbze94" long_name="CloudSat Radar Reflectivity" unit="1" axis_ref="height_mlev" />
+      <field id="c12_dbze94" long_name="CloudSat Radar Reflectivity" unit="1" axis_ref="height_mlev" />
+      <field id="c13_dbze94" long_name="CloudSat Radar Reflectivity" unit="1" axis_ref="height_mlev" />
+      <field id="c14_dbze94" long_name="CloudSat Radar Reflectivity" unit="1" axis_ref="height_mlev" />
+      <field id="c15_dbze94" long_name="CloudSat Radar Reflectivity" unit="1" axis_ref="height_mlev" />
+      <field id="c16_dbze94" long_name="CloudSat Radar Reflectivity" unit="1" axis_ref="height_mlev" />
+      <field id="c17_dbze94" long_name="CloudSat Radar Reflectivity" unit="1" axis_ref="height_mlev" />
+      <field id="c18_dbze94" long_name="CloudSat Radar Reflectivity" unit="1" axis_ref="height_mlev" />
+      <field id="c19_dbze94" long_name="CloudSat Radar Reflectivity" unit="1" axis_ref="height_mlev" />
+      <field id="c20_dbze94" long_name="CloudSat Radar Reflectivity" unit="1" axis_ref="height_mlev" />
+      <field id="c01_cfadDbze94" long_name="CloudSat Radar Reflectivity CFAD" unit="1" axis_ref="height" />
+      <field id="c02_cfadDbze94" long_name="CloudSat Radar Reflectivity CFAD" unit="1" axis_ref="height" />
+      <field id="c03_cfadDbze94" long_name="CloudSat Radar Reflectivity CFAD" unit="1" axis_ref="height" />
+      <field id="c04_cfadDbze94" long_name="CloudSat Radar Reflectivity CFAD" unit="1" axis_ref="height" />
+      <field id="c05_cfadDbze94" long_name="CloudSat Radar Reflectivity CFAD" unit="1" axis_ref="height" />
+      <field id="c06_cfadDbze94" long_name="CloudSat Radar Reflectivity CFAD" unit="1" axis_ref="height" />
+      <field id="c07_cfadDbze94" long_name="CloudSat Radar Reflectivity CFAD" unit="1" axis_ref="height" />
+      <field id="c08_cfadDbze94" long_name="CloudSat Radar Reflectivity CFAD" unit="1" axis_ref="height" />
+      <field id="c09_cfadDbze94" long_name="CloudSat Radar Reflectivity CFAD" unit="1" axis_ref="height" />
+      <field id="c10_cfadDbze94" long_name="CloudSat Radar Reflectivity CFAD" unit="1" axis_ref="height" />
+      <field id="c11_cfadDbze94" long_name="CloudSat Radar Reflectivity CFAD" unit="1" axis_ref="height" />
+      <field id="c12_cfadDbze94" long_name="CloudSat Radar Reflectivity CFAD" unit="1" axis_ref="height" />
+      <field id="c13_cfadDbze94" long_name="CloudSat Radar Reflectivity CFAD" unit="1" axis_ref="height" />
+      <field id="c14_cfadDbze94" long_name="CloudSat Radar Reflectivity CFAD" unit="1" axis_ref="height" />
+      <field id="c15_cfadDbze94" long_name="CloudSat Radar Reflectivity CFAD" unit="1" axis_ref="height" />
+    </field_group>
+
+    <field_group id="fields_COSP_ISCCP" field_ref="field_atm_2D"  freq_op="3h">
+      <field id="sunlit" long_name="1 for day points, 0 for nightime" unit="1" />
+      <field id="c01_clisccp2" long_name="Cloud Fraction as Calculated by the ISCCP Simulator" unit="1" axis_ref="pressure2" />
+      <field id="c02_clisccp2" long_name="Cloud Fraction as Calculated by the ISCCP Simulator" unit="1" axis_ref="pressure2" />
+      <field id="c03_clisccp2" long_name="Cloud Fraction as Calculated by the ISCCP Simulator" unit="1" axis_ref="pressure2" />
+      <field id="c04_clisccp2" long_name="Cloud Fraction as Calculated by the ISCCP Simulator" unit="1" axis_ref="pressure2" />
+      <field id="c05_clisccp2" long_name="Cloud Fraction as Calculated by the ISCCP Simulator" unit="1" axis_ref="pressure2" />
+      <field id="c06_clisccp2" long_name="Cloud Fraction as Calculated by the ISCCP Simulator" unit="1" axis_ref="pressure2" />
+      <field id="c07_clisccp2" long_name="Cloud Fraction as Calculated by the ISCCP Simulator" unit="1" axis_ref="pressure2" />
+      <field id="boxtauisccp" long_name="Optical Depth in Each Column as Calculated by the ISCCP Simulator" unit="1" axis_ref="column" />
+      <field id="boxptopisccp" long_name="Cloud Top Pressure in Each Column as Calculated by the ISCCP Simulator" unit="Pa" axis_ref="column" />
+      <field id="tclisccp" long_name="Total Cloud Fraction as Calculated by the ISCCP Simulator" unit="1" />
+      <field id="ctpisccp" long_name="Mean Cloud Top Pressure as Calculated by the ISCCP Simulator" unit="Pa" />
+      <field id="tauisccp" long_name="Optical Depth as Calculated by the ISCCP Simulator" unit="1" />
+      <field id="albisccp" long_name="Mean Cloud Albedo as Calculated by the ISCCP Simulator" unit="1" />
+      <field id="meantbisccp" long_name="Mean all-sky 10.5 micron brightness temperature as calculated by the ISCCP Simulator" unit="K" />
+      <field id="meantbclrisccp" long_name="Mean clear-sky 10.5 micron brightness temperature as calculated by the ISCCP Simulator" unit="K" />
+    </field_group>
+
+    <field_group id="fields_COSP_MISR" field_ref="field_atm_2D" freq_op="3h">
+      <field id="c01_clMISR" long_name="Cloud Fraction as Calculated by the MISR Simulator" unit="1" axis_ref="cth16" />
+      <field id="c02_clMISR" long_name="Cloud Fraction as Calculated by the MISR Simulator" unit="1" axis_ref="cth16" />
+      <field id="c03_clMISR" long_name="Cloud Fraction as Calculated by the MISR Simulator" unit="1" axis_ref="cth16" />
+      <field id="c04_clMISR" long_name="Cloud Fraction as Calculated by the MISR Simulator" unit="1" axis_ref="cth16" />
+      <field id="c05_clMISR" long_name="Cloud Fraction as Calculated by the MISR Simulator" unit="1" axis_ref="cth16" />
+      <field id="c06_clMISR" long_name="Cloud Fraction as Calculated by the MISR Simulator" unit="1" axis_ref="cth16" />
+      <field id="c07_clMISR" long_name="Cloud Fraction as Calculated by the MISR Simulator" unit="1" axis_ref="cth16" />
+    </field_group>
+
+</field_definition>
+

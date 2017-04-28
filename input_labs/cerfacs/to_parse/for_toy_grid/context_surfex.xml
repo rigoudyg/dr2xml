@@ -1,0 +1,67 @@
+<!-- -->
+<context id="surfex">
+  
+  <calendar type="Gregorian" start_date="1950-01-02 00:00:00" time_origin="1950-01-01 00:00:00" />
+
+  <scalar_definition>   <scalar id="scalar_atm" />  </scalar_definition>
+
+  <axis_definition >
+    <axis id="axis_atm"/>
+    <axis id="presnivs" axis_ref="axis_atm"  standard_name="Vertical levels" unit="Pa"/>
+    <axis id="axis_srf"/>
+  </axis_definition>
+
+  <domain_definition >
+    <domain id="domain_atm" />
+    <domain id="domain_srf" />
+    <domain id="complete" ni_glo="18" nj_glo="9" type="rectilinear">
+      <generate_rectilinear_domain/>
+      <interpolate_domain order="2" renormalize="true" write_weight="true" mode="read_or_compute" />
+      <!-- <interpolate_domain order="2" renormalize="true" mode="read" /> -->
+    </domain>
+  </domain_definition>
+  
+  <grid_definition>
+    <grid id="grid_atm_scalar">
+      <scalar scalar_ref="scalar_atm" />
+    </grid>
+    <grid id="grid_atm_1D">
+      <axis   axis_ref="axis_atm" />
+    </grid>    
+    <grid id="grid_atm_2D">
+      <domain domain_ref="domain_atm" />
+    </grid>    
+    <grid id="grid_atm_3D">
+      <domain domain_ref="domain_atm" />
+      <axis axis_ref="axis_atm" />
+    </grid>
+    <grid id="grid_srf_2D">
+      <domain domain_ref="domain_srf" />
+    </grid>
+    <grid id="grid_srf_3D">
+      <domain domain_ref="domain_srf" />
+      <axis axis_ref="axis_atm" />
+    </grid>
+  </grid_definition>
+
+  <field_definition>
+    <field_group level="1" prec="4" operation="average" freq_op="1ts" enabled=".true." >
+      <field id="field_atm_scalar" grid_ref="grid_atm_scalar" />
+      <field id="field_atm_1D" grid_ref="grid_atm_1D" />
+      <field id="field_atm_2D" grid_ref="grid_atm_2D" />
+      <field id="field_atm_3D" grid_ref="grid_atm_3D" />
+      <field id="field_sub"    grid_ref="grid_atm_2D" freq_op="2ts" operation="instant"/>
+      
+      <field id="hmv5"  grid_ref="grid_atm_2D" />
+      
+      <field id="pressure"     grid_ref="grid_atm_3D"  detect_missing_value="true"/>
+      <field id="height"       grid_ref="grid_atm_3D"  detect_missing_value="true"/>
+      
+      <field id="field_srf_2D" grid_ref="grid_srf_2D" />
+      <field id="field_srf_3D" grid_ref="grid_srf_3D" />
+    </field_group>
+  </field_definition >
+
+  
+</context>
+
