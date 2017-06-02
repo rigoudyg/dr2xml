@@ -17,6 +17,7 @@ table2freq={
     "AERday"   :  ("1d","day"),
     "AERfx"    : ("1d","fx"),
     # mpmoine_next_modif: frequence CMIP6 pour AERhr = 'hr' et non '1hr'
+    #TBD: remplacer "hr" par "1hr" selon reponse de D. Nadeau a l'issue https://github.com/PCMDI/cmip6-cmor-tables/issues/59
     "AERhr"    : ("1h","hr"),
     "AERmon"   : ("1mo","mon"),
     "AERmonZ"  : ("1mo","mon"),
@@ -85,6 +86,7 @@ table2freq={
     "PrimmonZ" : ("1mo","mon"),
 
     "Myproday"  : ("1d","day"),
+    "testAmon"  : ("1mo","mon"),
 
 }
 

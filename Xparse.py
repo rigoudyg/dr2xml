@@ -165,7 +165,7 @@ def attrib_by_ref(elt,attrib,index,printout,level):
                         rep=attrib_by_ref(ref,attrib,index,printout,level+1)
                         if rep : return rep
                 except :
-                    print "Error : reference '%s' is invalid"%refid
+                    if not refid.startswith("dummy_"): print "Error : reference '%s' is invalid"%refid
 
 def solve_by_ref(attrib,index,elt,printout=False,level=0) :
     """ 

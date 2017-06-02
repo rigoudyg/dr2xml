@@ -1,0 +1,100 @@
+
+##################################################################################
+#
+mpmoine, 10-MAI-2017
+#
+Toutes les lignes non commentees sont regressees en "dummy_NIFD_"
+dans le ping_arpsfx_NIFD.xml
+#
+##################################################################################
+#
+Error : reference 'Br_y' is invalid
+Error : reference 'CH_4' is invalid
+Error : reference 'CMIP6_pblz' is invalid
+Error : reference 'CO' is invalid
+Error : reference 'CO_2' is invalid
+Error : reference 'Cl_y' is invalid
+========================================> CE SONT DES MISSING GRID_REF ASSOCIEES AUX SORTIES COSP, OK CAR ON LES IGNORE POUR L'INSTANT
+Error : reference 'FULL_alt40' is invalid 
+Error : reference 'FULL_alt40_dbze' is invalid
+Error : reference 'FULL_alt40_scatratio' is invalid
+Error : reference 'FULL_column' is invalid
+Error : reference 'FULL_cth16_tau' is invalid
+Error : reference 'FULL_klev_column' is invalid
+Error : reference 'FULL_klev_half_sw' is invalid
+Error : reference 'FULL_plev7_tau' is invalid
+Error : reference 'FULL_reffIce_tau' is invalid
+Error : reference 'FULL_reffLiq_tau' is invalid
+Error : reference 'FULL_sza5' is invalid
+Error : reference 'FULL_temp' is invalid
+========================================< CE SONT DES MISSING GRID_REF ASSOCIEES AUX SORTIES COSP, OK CAR ON LES IGNORE POUR L'INSTANT
+Error : reference 'HCHO' is invalid
+Error : reference 'HCl' is invalid
+Error : reference 'HNO_3' is invalid
+Error : reference 'HO_2' is invalid
+Error : reference 'H_2O' is invalid
+Error : reference 'LIN_AOA' is invalid
+Error : reference 'NO' is invalid
+Error : reference 'NO_2' is invalid
+Error : reference 'NO_y' is invalid
+Error : reference 'N_2O' is invalid
+Error : reference 'OH' is invalid
+Error : reference 'O_x' is invalid
+=========================================> NORMAL, ON N'A PAS LES AEROSOLS INTERACTIFS
+Error : reference 'TACconcdust_ll' is invalid 
+Error : reference 'TACconcso4_ll' is invalid
+Error : reference 'TACconcss_ll' is invalid 
+Error : reference 'TACod550lt1aer' is invalid
+Error : reference 'TACwet_bc' is invalid
+Error : reference 'TACwet_dust' is invalid
+Error : reference 'TACwet_oa' is invalid
+Error : reference 'TACwet_so2' is invalid
+Error : reference 'TACwet_so4' is invalid
+Error : reference 'TACwet_ss' is invalid
+=========================================< NORMAL, ON N'A PAS LES AEROSOLS INTERACTIFS
+Error : reference 'ares' is invalid
+Error : reference 'cLitterGrass' is invalid
+Error : reference 'cLitterTree' is invalid
+Error : reference 'cSoilGrass' is invalid
+Error : reference 'cSoilTree' is invalid
+Error : reference 'cVegGrass' is invalid
+Error : reference 'cVegTree' is invalid
+Error : reference 'carbdis' is invalid => OK, in TRIP fields
+Error : reference 'cdnctop' is invalid
+Error : reference 'cdncvi' is invalid
+Error : reference 'dgw' is invalid => OK, in TRIP fields
+Error : reference 'drivw' is invalid => OK, in TRIP fields
+Error : reference 'fDeforest' is invalid
+Error : reference 'fracOutLut' is invalid
+Error : reference 'gppGrass' is invalid
+Error : reference 'gppTree' is invalid
+Error : reference 'mmrbc' is invalid
+Error : reference 'mmrdust' is invalid
+Error : reference 'mmroa' is invalid
+Error : reference 'mmrpm1' is invalid
+Error : reference 'mmrso2mol' is invalid
+Error : reference 'mmrso4' is invalid
+Error : reference 'mmrss' is invalid
+Error : reference 'nppGrass' is invalid
+Error : reference 'nppTree' is invalid
+Error : reference 'o3loss' is invalid
+Error : reference 'o3prod' is invalid
+Error : reference 'qgwr' is invalid => OK, in TRIP fields
+Error : reference 'qis' is invalid
+Error : reference 'qls' is invalid
+Error : reference 'raGrass' is invalid
+Error : reference 'reffclwtop' is invalid
+Error : reference 'rhGrass' is invalid
+Error : reference 'rhLitter' is invalid
+Error : reference 'rhSoil' is invalid
+Error : reference 'rhTree' is invalid
+Error : reference 'rivdis' is invalid => OK, in TRIP fields
+Error : reference 'rivin' is invalid => OK, in TRIP fields
+Error : reference 'rsut4co2' is invalid
+Error : reference 'rsutcs4co2' is invalid
+Error : reference 'sandfrac' is invalid  => BIZARRE QU'IL N'Y SOIT PAS...
+Error : reference 'siltfrac' is invalid  => BIZARRE QU'IL N'Y SOIT PAS...
+Error : reference 'slbnosn' is invalid
+Error : reference 'tSoilPools' is invalid
+Error : reference 'ttop' is invalid
+Error : reference 'wtd' is invalid => OK, in TRIP fields

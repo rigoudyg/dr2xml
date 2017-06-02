@@ -11755,22 +11755,17 @@ div#notebook {
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="This-example-shows-how-to-use-a-list-of-Home-Variables"><em>This example shows how to use a list of Home Variables</em><a class="anchor-link" href="#This-example-shows-how-to-use-a-list-of-Home-Variables">&#182;</a></h1>
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Select your laboratory among: &#39;cnrm&#39;, &#39;cerfacs&#39;, &#39;ipsl&#39;</span>
-<span class="n">lab</span><span class="o">=</span><span class="s1">&#39;cnrm&#39;</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#--- Select your laboratory: &#39;cnrm&#39;, &#39;cerfacs&#39; or&#39;ipsl&#39;</span>
+<span class="n">lab</span><span class="o">=</span><span class="s1">&#39;cerfacs&#39;</span> 
+<span class="c1">#--- Select your model type: &#39;GCM&#39; or &#39;ESM&#39;</span>
+<span class="n">mod</span><span class="o">=</span><span class="s1">&#39;GCM&#39;</span>
+<span class="c1">#--- Select your molde resolution: &#39;LR&#39; or &#39;HR&#39;</span>
+<span class="n">resol</span><span class="o">=</span><span class="s1">&#39;LR&#39;</span>
 </pre></div>
 
 </div>
@@ -11783,7 +11778,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Define-the-settings-specific-to-the-laboratory-and-the-model">Define the settings specific to the laboratory and the model<a class="anchor-link" href="#Define-the-settings-specific-to-the-laboratory-and-the-model">&#182;</a></h2>
+<h2 id="1.-Define-the-settings-specific-to-the-laboratory-and-the-model">1. Define the settings specific to the laboratory and the model<a class="anchor-link" href="#1.-Define-the-settings-specific-to-the-laboratory-and-the-model">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -11793,90 +11788,130 @@ div#notebook {
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">if</span> <span class="n">lab</span><span class="o">==</span><span class="s1">&#39;cnrm&#39;</span> <span class="ow">or</span> <span class="n">lab</span><span class="o">==</span><span class="s1">&#39;cerfacs&#39;</span><span class="p">:</span>
+    <span class="c1">#</span>
+    <span class="c1">#--- Sizes of oce and atm grids [&#39;nho&#39;,&#39;nlo&#39;,&#39;nha&#39;,&#39;nla&#39;,&#39;nlas&#39;,&#39;nls&#39;,&#39;nh1&#39;] (cf DR doc)</span>
+    <span class="k">if</span> <span class="n">resol</span><span class="o">==</span><span class="s2">&quot;LR&quot;</span><span class="p">:</span> <span class="n">actual_sizes</span><span class="o">=</span><span class="p">[</span><span class="mi">292</span><span class="o">*</span><span class="mi">362</span><span class="p">,</span><span class="mi">75</span><span class="p">,</span><span class="mi">128</span><span class="o">*</span><span class="mi">256</span><span class="p">,</span><span class="mi">91</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">14</span><span class="p">,</span><span class="mi">128</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">resol</span><span class="o">==</span><span class="s2">&quot;HR&quot;</span><span class="p">:</span> <span class="n">actual_sizes</span><span class="o">=</span><span class="p">[</span><span class="mi">1442</span><span class="o">*</span><span class="mi">1021</span><span class="p">,</span><span class="mi">75</span><span class="p">,</span><span class="mi">720</span><span class="o">*</span><span class="mi">360</span><span class="p">,</span><span class="mi">91</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">14</span><span class="p">,</span><span class="mi">128</span><span class="p">]</span>
+    <span class="c1">#--- Model name like declared to the CMIP6 WIP panel</span>
+    <span class="k">if</span> <span class="n">mod</span><span class="o">==</span><span class="s1">&#39;GCM&#39;</span><span class="ow">and</span> <span class="n">resol</span><span class="o">==</span><span class="s1">&#39;LR&#39;</span><span class="p">:</span>
+        <span class="n">actual_source_id</span><span class="o">=</span><span class="s2">&quot;CNRM-CM6-1&quot;</span>
+    <span class="k">if</span> <span class="n">mod</span><span class="o">==</span><span class="s1">&#39;GCM&#39;</span><span class="ow">and</span> <span class="n">resol</span><span class="o">==</span><span class="s1">&#39;HR&#39;</span><span class="p">:</span>
+        <span class="n">actual_source_id</span><span class="o">=</span><span class="s2">&quot;CNRM-CM6-1-HR&quot;</span>
+    <span class="k">if</span> <span class="n">mod</span><span class="o">==</span><span class="s1">&#39;ESM&#39;</span><span class="ow">and</span> <span class="n">resol</span><span class="o">==</span><span class="s1">&#39;LR&#39;</span><span class="p">:</span>
+        <span class="n">actual_source_id</span><span class="o">=</span><span class="s2">&quot;CNRM-ESM2-1&quot;</span>
+    <span class="k">if</span> <span class="n">mod</span><span class="o">==</span><span class="s1">&#39;ESM&#39;</span><span class="ow">and</span> <span class="n">resol</span><span class="o">==</span><span class="s1">&#39;HR&#39;</span><span class="p">:</span>
+        <span class="n">actual_source_id</span><span class="o">=</span><span class="s2">&quot;CNRM-ESM2-1-HR&quot;</span>   
+    <span class="c1">#</span>
     <span class="n">lab_and_model_settings</span><span class="o">=</span><span class="p">{</span>
-        <span class="s1">&#39;institution_id&#39;</span><span class="p">:</span> <span class="s2">&quot;CNRM-CERFACS&quot;</span><span class="p">,</span> <span class="c1"># institution should be read in CMIP6_CV, if up-to-date</span>
-
-        <span class="c1"># entry &#39;source_types&#39; allows to describe, using CMIP6 CV, the various model configurations</span>
-        <span class="c1"># for the lab; This can be superseded by an entry &#39;source_type&#39; either just below or in dict  </span>
-        <span class="c1"># for simulation settings (further below)</span>
-        <span class="s1">&#39;source_types&#39;</span> <span class="p">:</span> <span class="p">{</span> <span class="s2">&quot;CNRM-CM6-1&quot;</span> <span class="p">:</span> <span class="s2">&quot;AOGCM&quot;</span><span class="p">,</span> <span class="s2">&quot;CNRM-CM6-1-HR&quot;</span> <span class="p">:</span> <span class="s2">&quot;AOGCM&quot;</span><span class="p">,</span> 
+        <span class="c1">#</span>
+        <span class="s2">&quot;institution_id&quot;</span><span class="p">:</span> <span class="s2">&quot;CNRM-CERFACS&quot;</span><span class="p">,</span>
+        <span class="c1">#&quot;institution&quot;: &quot;CNRM, blabla...; CERFACS, blabla...&quot;, # institution should be read in CMIP6_CV, if up-to-date</span>
+        <span class="c1">#</span>
+        <span class="c1">#--- entry &#39;source_types&#39; allows to describe, using CMIP6 CV, the various model configurations</span>
+        <span class="c1">#--- for the lab; This can be superseded by an entry &#39;source_type&#39; either just below or in dict  </span>
+        <span class="c1">#--- for simulation settings (further below)</span>
+        <span class="s2">&quot;source_types&quot;</span> <span class="p">:</span> <span class="p">{</span> <span class="s2">&quot;CNRM-CM6-1&quot;</span> <span class="p">:</span> <span class="s2">&quot;AOGCM&quot;</span><span class="p">,</span> <span class="s2">&quot;CNRM-CM6-1-HR&quot;</span> <span class="p">:</span> <span class="s2">&quot;AOGCM&quot;</span><span class="p">,</span> 
                            <span class="s2">&quot;CNRM-ESM2-1&quot;</span><span class="p">:</span> <span class="s2">&quot;ESM&quot;</span>  <span class="p">,</span> <span class="s2">&quot;CNRM-ESM2-1-HR&quot;</span><span class="p">:</span> <span class="s2">&quot;ESM&quot;</span> <span class="p">},</span>
-
-        <span class="s2">&quot;source_id&quot;</span>      <span class="p">:</span> <span class="s2">&quot;CNRM-CM6-1&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;source&quot;</span>         <span class="p">:</span> <span class="s2">&quot;CNRM-CM6-1&quot;</span><span class="p">,</span> <span class="c1"># Useful only if CMIP6_CV is not up-to-date for the source_id</span>
-        <span class="c1"># You may override here the source-type value deduced from source_id and sources_type</span>
-        <span class="c1">#-&#39;source_type&#39; : &quot;AER&quot;  </span>
-
-        <span class="s1">&#39;references&#39;</span>    <span class="p">:</span>  <span class="s2">&quot;A character string containing a list of published or web-based &quot;</span><span class="o">+</span>\
-            <span class="s2">&quot;references that describe the data or the methods used to produce it.&quot;</span><span class="o">+</span>\
-            <span class="s2">&quot;Typically, the user should provide references describing the model&quot;</span><span class="o">+</span>\
-            <span class="s2">&quot;formulation here&quot;</span><span class="p">,</span>
-        <span class="s1">&#39;info_url&#39;</span>      <span class="p">:</span> <span class="s2">&quot;http://www.umr-cnrm.fr/cmip6/&quot;</span><span class="p">,</span>
-        <span class="s1">&#39;contact&#39;</span>       <span class="p">:</span> <span class="s1">&#39;contact.cmip@cnrm.fr&#39;</span><span class="p">,</span>
-
-        <span class="c1"># We account for the list of MIPS in which the lab takes part.</span>
-        <span class="c1"># Note : a MIPs set limited to {&#39;C4MIP&#39;} leads to a number of tables and </span>
-        <span class="c1"># variables which is manageable for eye inspection</span>
-        <span class="s1">&#39;mips_all&#39;</span> <span class="p">:</span> <span class="p">{</span><span class="s1">&#39;AerChemMIP&#39;</span><span class="p">,</span><span class="s1">&#39;C4MIP&#39;</span><span class="p">,</span><span class="s1">&#39;CFMIP&#39;</span><span class="p">,</span><span class="s1">&#39;DAMIP&#39;</span><span class="p">,</span> <span class="s1">&#39;FAFMIP&#39;</span> <span class="p">,</span> <span class="s1">&#39;GeoMIP&#39;</span><span class="p">,</span><span class="s1">&#39;GMMIP&#39;</span><span class="p">,</span><span class="s1">&#39;ISMIP6&#39;</span><span class="p">,</span>\
+        <span class="c1">#</span>
+        <span class="s2">&quot;source_id&quot;</span>      <span class="p">:</span> <span class="n">actual_source_id</span><span class="p">,</span>
+        <span class="c1">#&quot;source&quot;         : &quot;CNRM-CM6-1 blabla...&quot;, # Useful only if CMIP6_CV is not up-to-date for the source_id</span>
+        <span class="c1">#--- You may override here the source_type value deduced from source_id and sources_type</span>
+        <span class="c1">#&quot;source_type&quot; : &quot;AER&quot;  </span>
+        <span class="c1">#</span>
+        <span class="c1">#--- references &amp; contact</span>
+        <span class="c1">#&quot;references&quot;    :  &quot;Blabla...&quot;, # A character string containing a list of published or web-based</span>
+                                         <span class="c1"># references that describe the data or the methods used to produce it.</span>
+                                         <span class="c1"># Typically, the user should provide references describing the model</span>
+                                         <span class="c1"># formulation here</span>
+        <span class="s2">&quot;info_url&quot;</span>      <span class="p">:</span> <span class="s2">&quot;http://www.umr-cnrm.fr/cmip6/&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;contact&quot;</span>       <span class="p">:</span> <span class="s1">&#39;contact.cmip@cnrm.fr&#39;</span><span class="p">,</span>
+        <span class="c1">#</span>
+        <span class="c1">#--- We account for the list of MIPS in which the lab takes part.</span>
+        <span class="c1">#--- Note : a MIPs set limited to {&#39;C4MIP&#39;} leads to a number of tables and </span>
+        <span class="c1">#--- variables which is manageable for eye inspection</span>
+        <span class="s2">&quot;mips_all&quot;</span> <span class="p">:</span> <span class="p">{</span><span class="s1">&#39;AerChemMIP&#39;</span><span class="p">,</span><span class="s1">&#39;C4MIP&#39;</span><span class="p">,</span><span class="s1">&#39;CFMIP&#39;</span><span class="p">,</span><span class="s1">&#39;DAMIP&#39;</span><span class="p">,</span> <span class="s1">&#39;FAFMIP&#39;</span> <span class="p">,</span> <span class="s1">&#39;GeoMIP&#39;</span><span class="p">,</span><span class="s1">&#39;GMMIP&#39;</span><span class="p">,</span><span class="s1">&#39;ISMIP6&#39;</span><span class="p">,</span>\
                           <span class="s1">&#39;LS3MIP&#39;</span><span class="p">,</span><span class="s1">&#39;LUMIP&#39;</span><span class="p">,</span><span class="s1">&#39;OMIP&#39;</span><span class="p">,</span><span class="s1">&#39;PMIP&#39;</span><span class="p">,</span><span class="s1">&#39;RFMIP&#39;</span><span class="p">,</span><span class="s1">&#39;ScenarioMIP&#39;</span><span class="p">,</span><span class="s1">&#39;CORDEX&#39;</span><span class="p">,</span><span class="s1">&#39;SIMIP&#39;</span><span class="p">},</span>
-        <span class="s1">&#39;mips&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;C4MIP&#39;</span><span class="p">,</span> <span class="s1">&#39;SIMIP&#39;</span><span class="p">,</span> <span class="s1">&#39;OMIP&#39;</span><span class="p">,</span> <span class="s1">&#39;CFMIP&#39;</span><span class="p">,</span> <span class="s1">&#39;RFMIP&#39;</span><span class="p">}</span> <span class="p">,</span> 
-
-        <span class="c1"># Max variable priority level to be output</span>
-        <span class="s1">&#39;max_priority&#39;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s1">&#39;tierMax&#39;</span>      <span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-
-        <span class="c1"># The ping file defines variable names, which are constructed using CMIP6 &quot;MIPvarnames&quot; </span>
-        <span class="c1"># and a prefix which must be set here, and can be the empty string :</span>
+        <span class="s2">&quot;mips&quot;</span> <span class="p">:</span> <span class="p">{</span><span class="s1">&#39;C4MIP&#39;</span><span class="p">,</span> <span class="s1">&#39;SIMIP&#39;</span><span class="p">,</span> <span class="s1">&#39;OMIP&#39;</span><span class="p">,</span> <span class="s1">&#39;CFMIP&#39;</span><span class="p">,</span> <span class="s1">&#39;RFMIP&#39;</span><span class="p">}</span> <span class="p">,</span> 
+        <span class="c1">#</span>
+        <span class="c1">#--- Max variable priority level to be output</span>
+        <span class="s2">&quot;max_priority&quot;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;tierMax&quot;</span>      <span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="c1">#</span>
+        <span class="c1">#--- The ping file defines variable names, which are constructed using CMIP6 &quot;MIPvarnames&quot; </span>
+        <span class="c1">#--- and a prefix which must be set here, and can be the empty string :</span>
         <span class="s2">&quot;ping_variables_prefix&quot;</span> <span class="p">:</span> <span class="s2">&quot;CMIP6_&quot;</span><span class="p">,</span>
-
-        <span class="c1"># We account for a list of variables which the lab does not want to produce , </span>
-        <span class="c1"># oragnized by realms</span>
-        <span class="s2">&quot;excluded_vars_file&quot;</span><span class="p">:</span><span class="s2">&quot;./inputs/non_published_variables.txt&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;excluded_vars&quot;</span><span class="p">:[],</span>
-        <span class="c1"># mpmoine_next_modif: ignore some spatial shapes</span>
-        <span class="s2">&quot;excluded_spshapes&quot;</span><span class="p">:[</span><span class="s2">&quot;XYA-na&quot;</span><span class="p">,</span><span class="s2">&quot;XYG-na&quot;</span><span class="p">],</span>
-
-        <span class="c1"># We account for a list of variables which the lab wants to produce in some cases</span>
+        <span class="c1">#        </span>
+        <span class="c1">#--- mpmoine_amelioration: pour ecrire un ts_prefix</span>
+        <span class="c1">#&#39;output_path&#39; : &quot;@IOXDIR@/%file_name%&quot;,</span>
+        <span class="s1">&#39;output_path&#39;</span> <span class="p">:</span> <span class="s2">&quot;@IOXDIR@/&quot;</span><span class="p">,</span>
+        <span class="c1">#</span>
+        <span class="c1">#--- We account for a list of variables which the lab does not want to produce , </span>
+        <span class="c1">#--- oragnized by realms</span>
+        <span class="c1">#&quot;excluded_vars_file&quot;:&quot;./input/excluded_vars/non_published_variables.txt&quot;,</span>
+        <span class="c1"># mpmoine_note: exclusion des variables Cloud Simulator tant que pas activé</span>
+        <span class="s2">&quot;excluded_vars&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;clcalipso&quot;</span><span class="p">,</span><span class="s2">&quot;clcalipso2&quot;</span><span class="p">,</span><span class="s2">&quot;clhcalipso&quot;</span><span class="p">,</span><span class="s2">&quot;clcalipsoice&quot;</span><span class="p">,</span><span class="s2">&quot;clcalipsoliq&quot;</span><span class="p">,</span> \
+                           <span class="s2">&quot;cllcalipso&quot;</span><span class="p">,</span><span class="s2">&quot;clmcalipso&quot;</span><span class="p">,</span><span class="s2">&quot;cltcalipso&quot;</span><span class="p">,</span>\
+                           <span class="s2">&quot;cfadLidarsr532&quot;</span><span class="p">,</span><span class="s2">&quot;cfadDbze94&quot;</span><span class="p">,</span><span class="s2">&quot;cfadLidarsr532&quot;</span><span class="p">,</span><span class="s2">&quot;clisccp&quot;</span><span class="p">,</span><span class="s2">&quot;cltisccp&quot;</span><span class="p">,</span>\
+                           <span class="s2">&quot;climodis&quot;</span><span class="p">,</span><span class="s2">&quot;clwmodis&quot;</span><span class="p">,</span><span class="s2">&quot;jpdftaureicemodis&quot;</span><span class="p">,</span><span class="s2">&quot;cltmodis&quot;</span><span class="p">,</span><span class="s2">&quot;clmisr&quot;</span><span class="p">,</span><span class="s2">&quot;parasolRefl&quot;</span><span class="p">],</span>
+        <span class="c1">#        </span>
+        <span class="c1">#--- mpmoine_next_modif: ignore some spatial shapes</span>
+        <span class="c1">#mpmoine_note: grilles Groenland, Antarctic et les profils en Sites (pas encore codé dans dr2xml)</span>
+        <span class="s2">&quot;excluded_spshapes&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;XYA-na&quot;</span><span class="p">,</span><span class="s2">&quot;XYG-na&quot;</span><span class="p">,</span><span class="s2">&quot;S-na&quot;</span><span class="p">,</span><span class="s2">&quot;S-AH&quot;</span><span class="p">,</span><span class="s2">&quot;S-A&quot;</span><span class="p">,</span><span class="s2">&quot;na-A&quot;</span><span class="p">],</span>
+        <span class="c1">#</span>
+        <span class="c1">#--- We account for a list of variables which the lab wants to produce in some cases</span>
         <span class="s2">&quot;listof_home_vars&quot;</span><span class="p">:</span><span class="bp">None</span><span class="p">,</span>
-        <span class="c1"># mpmoine_last_modif: Path for extra Tables</span>
+        <span class="c1">#        </span>
+        <span class="c1">#--- mpmoine_last_modif: Path for extra Tables</span>
         <span class="s2">&quot;path_extra_tables&quot;</span><span class="p">:</span><span class="bp">None</span><span class="p">,</span>
-
+        <span class="c1">#        </span>
+        <span class="c1">#--- mpmoine_correction: Path for natives XIOS xml files to parse</span>
+        <span class="s2">&quot;path_to_parse&quot;</span><span class="p">:</span><span class="s2">&quot;./input_labs/cnrm/to_parse/for_arpege_grid&quot;</span><span class="p">,</span>
+        <span class="c1">#</span>
         <span class="c1"># Each XIOS  context does adress a number of realms</span>
-        <span class="s1">&#39;realms_per_context&#39;</span> <span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;nemo&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;seaIce&#39;</span><span class="p">,</span> <span class="s1">&#39;ocean&#39;</span><span class="p">,</span> <span class="s1">&#39;ocean seaIce&#39;</span><span class="p">,</span> <span class="s1">&#39;ocnBgchem&#39;</span><span class="p">,</span> <span class="s1">&#39;seaIce ocean&#39;</span><span class="p">]</span> <span class="p">,</span>
+        <span class="s2">&quot;realms_per_context&quot;</span> <span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;nemo&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;seaIce&#39;</span><span class="p">,</span> <span class="s1">&#39;ocean&#39;</span><span class="p">,</span> <span class="s1">&#39;ocean seaIce&#39;</span><span class="p">,</span> <span class="s1">&#39;ocnBgchem&#39;</span><span class="p">,</span> <span class="s1">&#39;seaIce ocean&#39;</span><span class="p">]</span> <span class="p">,</span>
                               <span class="s1">&#39;arpsfx&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;atmos&#39;</span><span class="p">,</span> <span class="s1">&#39;atmos atmosChem&#39;</span><span class="p">,</span> <span class="s1">&#39;aerosol&#39;</span><span class="p">,</span> <span class="s1">&#39;atmos land&#39;</span><span class="p">,</span> <span class="s1">&#39;land&#39;</span><span class="p">,</span>
                                             <span class="s1">&#39;landIce land&#39;</span><span class="p">,</span>  <span class="s1">&#39;aerosol land&#39;</span><span class="p">,</span><span class="s1">&#39;land landIce&#39;</span><span class="p">,</span>  <span class="s1">&#39;landIce&#39;</span><span class="p">,</span> <span class="p">],</span>
                               <span class="p">},</span> 
-
-        <span class="c1"># Some variables, while belonging to a realm, may fall in another XIOS context than the </span>
-        <span class="c1"># context which handles that realm</span>
-        <span class="s1">&#39;orphan_variables&#39;</span> <span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;nemo&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;dummy_variable_for_illustration_purpose&#39;</span><span class="p">],</span>
+        <span class="c1">#</span>
+        <span class="c1">#--- Some variables, while belonging to a realm, may fall in another XIOS context than the </span>
+        <span class="c1">#--- context which handles that realm</span>
+        <span class="s2">&quot;orphan_variables&quot;</span> <span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;nemo&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;dummy_variable_for_illustration_purpose&#39;</span><span class="p">],</span>
                                <span class="s1">&#39;arpsfx&#39;</span> <span class="p">:</span> <span class="p">[],</span>
                                <span class="p">},</span>
-        <span class="s1">&#39;vars_OK&#39;</span> <span class="p">:</span> <span class="nb">dict</span><span class="p">(),</span>
-        <span class="c1"># A per-variable dict of comments valid for all simulations</span>
-        <span class="s1">&#39;comments&#39;</span>     <span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;vars_OK&quot;</span> <span class="p">:</span> <span class="nb">dict</span><span class="p">(),</span>
+        <span class="c1">#        </span>
+        <span class="c1">#--- A per-variable dict of comments valid for all simulations</span>
+        <span class="s2">&quot;comments&quot;</span>     <span class="p">:</span> <span class="p">{</span>
             <span class="s1">&#39;tas&#39;</span> <span class="p">:</span> <span class="s1">&#39;nothing special about tas&#39;</span>
             <span class="p">},</span>
-
-        <span class="c1"># Sizes of oce and atm grids (cf DR doc)</span>
-        <span class="s2">&quot;sizes&quot;</span>  <span class="p">:</span> <span class="p">[</span><span class="mi">292</span><span class="o">*</span><span class="mi">362</span><span class="p">,</span><span class="mi">75</span><span class="p">,</span><span class="mi">128</span><span class="o">*</span><span class="mi">256</span><span class="p">,</span><span class="mi">91</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">14</span><span class="p">,</span><span class="mi">128</span><span class="p">],</span>
-
-        <span class="c1"># What is the maximum size of generated files, in number of float values</span>
+        <span class="c1">#</span>
+        <span class="c1">#--- Sizes of oce and atm grids [&#39;nho&#39;,&#39;nlo&#39;,&#39;nha&#39;,&#39;nla&#39;,&#39;nlas&#39;,&#39;nls&#39;,&#39;nh1&#39;] (cf DR doc)</span>
+        <span class="s2">&quot;sizes&quot;</span>  <span class="p">:</span> <span class="n">actual_sizes</span><span class="p">,</span>
+        <span class="c1">#</span>
+        <span class="c1">#--- What is the maximum size of generated files, in number of float values</span>
         <span class="s2">&quot;max_file_size_in_floats&quot;</span> <span class="p">:</span> <span class="mf">500.</span><span class="o">*</span><span class="mf">1.e+6</span> <span class="p">,</span>
-        <span class="c1"># grid_policy among None, DR, native, native+DR, adhoc- see docin grids.py </span>
+        <span class="c1">#        </span>
+        <span class="c1">#--- grid_policy among None, DR, native, native+DR, adhoc- see docin grids.py </span>
         <span class="s2">&quot;grid_policy&quot;</span> <span class="p">:</span> <span class="s2">&quot;adhoc&quot;</span><span class="p">,</span>
-        <span class="c1"># Grids : CMIP6 name, name_of_target_domain, CMIP6-std resolution, and description</span>
+        <span class="c1">#        </span>
+        <span class="c1">#--- Grids : CMIP6 name, name_of_target_domain, CMIP6-std resolution, and description</span>
         <span class="s2">&quot;grids&quot;</span> <span class="p">:</span> <span class="p">{</span> 
           <span class="s2">&quot;LR&quot;</span>    <span class="p">:</span> <span class="p">{</span>
             <span class="s2">&quot;arpsfx&quot;</span> <span class="p">:</span> <span class="p">[</span> <span class="s2">&quot;gr&quot;</span><span class="p">,</span><span class="s2">&quot;complete&quot;</span> <span class="p">,</span> <span class="s2">&quot;250 km&quot;</span><span class="p">,</span> <span class="s2">&quot;data regridded to a T127 gaussian grid (128x256 latlon) from a native atmosphere T127l reduced gaussian grid&quot;</span><span class="p">]</span> <span class="p">,</span>
-              <span class="s2">&quot;nemo&quot;</span> <span class="p">:</span> <span class="p">[</span> <span class="s2">&quot;gn&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span>        <span class="p">,</span> <span class="s2">&quot;100km&quot;</span> <span class="p">,</span> <span class="s2">&quot;native ocean tri-polar grid with 105 k ocean cells&quot;</span> <span class="p">],},</span>
+              <span class="s2">&quot;nemo&quot;</span> <span class="p">:</span> <span class="p">[</span> <span class="s2">&quot;gn&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span>        <span class="p">,</span> <span class="s2">&quot;100 km&quot;</span> <span class="p">,</span> <span class="s2">&quot;native ocean tri-polar grid with 105 k ocean cells&quot;</span> <span class="p">],},</span>
           <span class="s2">&quot;HR&quot;</span>    <span class="p">:</span> <span class="p">{</span>
             <span class="s2">&quot;arpsfx&quot;</span> <span class="p">:</span> <span class="p">[</span> <span class="s2">&quot;gr&quot;</span><span class="p">,</span><span class="s2">&quot;completeHR&quot;</span><span class="p">,</span> <span class="s2">&quot;50 km&quot;</span><span class="p">,</span> <span class="s2">&quot;data regridded to a 359 gaussian grid (180x360 latlon) from a native atmosphere T359l reduced gaussian grid&quot;</span><span class="p">]</span> <span class="p">,</span>
-              <span class="s2">&quot;nemo&quot;</span> <span class="p">:</span> <span class="p">[</span> <span class="s2">&quot;gn&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span>         <span class="p">,</span> <span class="s2">&quot;25km&quot;</span> <span class="p">,</span> <span class="s2">&quot;native ocean tri-polar grid with 1.47 M ocean cells&quot;</span> <span class="p">],},</span>
+              <span class="s2">&quot;nemo&quot;</span> <span class="p">:</span> <span class="p">[</span> <span class="s2">&quot;gn&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span>         <span class="p">,</span> <span class="s2">&quot;25 km&quot;</span> <span class="p">,</span> <span class="s2">&quot;native ocean tri-polar grid with 1.47 M ocean cells&quot;</span> <span class="p">],},</span>
         <span class="p">},</span>
-        <span class="s1">&#39;grid_choice&#39;</span> <span class="p">:</span> <span class="p">{</span> <span class="s2">&quot;CNRM-CM6-1&quot;</span> <span class="p">:</span> <span class="s2">&quot;LR&quot;</span><span class="p">,</span> <span class="s2">&quot;CNRM-CM6-1-HR&quot;</span> <span class="p">:</span> <span class="s2">&quot;HR&quot;</span><span class="p">,</span> <span class="s2">&quot;CNRM-ESM2-1&quot;</span><span class="p">:</span> <span class="s2">&quot;LR&quot;</span>  <span class="p">,</span> <span class="s2">&quot;CNRM-ESM2-1-HR&quot;</span><span class="p">:</span> <span class="s2">&quot;HR&quot;</span> <span class="p">},</span>
-        <span class="c1"># mpmpoine_next_modif: Model component Time steps (min)</span>
-        <span class="s2">&quot;model_timestep&quot;</span> <span class="p">:</span> <span class="p">{</span> <span class="s2">&quot;arpsfx&quot;</span><span class="p">:</span><span class="mf">60.</span><span class="p">,</span> <span class="s2">&quot;nemo&quot;</span><span class="p">:</span><span class="mf">60.</span><span class="p">}</span>
+        <span class="s2">&quot;grid_choice&quot;</span> <span class="p">:</span> <span class="p">{</span> <span class="s2">&quot;CNRM-CM6-1&quot;</span> <span class="p">:</span> <span class="s2">&quot;LR&quot;</span><span class="p">,</span> <span class="s2">&quot;CNRM-CM6-1-HR&quot;</span> <span class="p">:</span> <span class="s2">&quot;HR&quot;</span><span class="p">,</span> <span class="s2">&quot;CNRM-ESM2-1&quot;</span><span class="p">:</span> <span class="s2">&quot;LR&quot;</span>  <span class="p">,</span> <span class="s2">&quot;CNRM-ESM2-1-HR&quot;</span><span class="p">:</span> <span class="s2">&quot;HR&quot;</span> <span class="p">},</span>
+        <span class="c1">#        </span>
+        <span class="c1">#--- mpmpoine_next_modif: Model component Time steps (min)</span>
+        <span class="s2">&quot;model_timestep&quot;</span> <span class="p">:</span> <span class="p">{</span> <span class="s2">&quot;arpsfx&quot;</span><span class="p">:</span><span class="mf">900.</span><span class="p">,</span> <span class="s2">&quot;nemo&quot;</span><span class="p">:</span><span class="mf">900.</span><span class="p">},</span>
+        <span class="c1">#        </span>
+        <span class="c1">#--- mpmoine_amelioration: booleen pour activer ou non l&#39;usage des union/zoom</span>
+        <span class="c1">#--- Say if you want to use XIOS union/zoom axis to optimize vertical interpolation requested by the DR</span>
+        <span class="s2">&quot;use_union_zoom&quot;</span> <span class="p">:</span> <span class="bp">False</span>
+        <span class="c1">#        </span>
         <span class="p">}</span>
 </pre></div>
 
@@ -11890,10 +11925,31 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">if</span> <span class="n">lab</span><span class="o">==</span><span class="s1">&#39;cerfacs&#39;</span><span class="p">:</span>  
-    <span class="n">lab_and_model_settings</span><span class="p">[</span><span class="s2">&quot;mips&quot;</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;HighResMIP&#39;</span><span class="p">,</span><span class="s1">&#39;DCPP&#39;</span><span class="p">}</span>
-    <span class="n">lab_and_model_settings</span><span class="p">[</span><span class="s2">&quot;listof_home_vars&quot;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;./inputs/my_listof_home_vars.txt&quot;</span>
-    <span class="n">lab_and_model_settings</span><span class="p">[</span><span class="s2">&quot;path_extra_tables&quot;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;./inputs/extra_Tables&quot;</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="k">if</span> <span class="n">lab</span><span class="o">==</span><span class="s1">&#39;cerfacs&#39;</span><span class="p">:</span>
+    <span class="n">changes</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;mips&quot;</span>                <span class="p">:</span> <span class="s1">&#39;HighResMIP&#39;</span><span class="p">,</span>
+        <span class="s2">&quot;max_priority&quot;</span>        <span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s2">&quot;listof_home_vars&quot;</span>    <span class="p">:</span> <span class="s2">&quot;./input_labs/cerfacs/home_vars/listof_primavera_extra_vars.txt&quot;</span><span class="p">,</span>
+        <span class="c1">#&quot;listof_home_vars&quot;    : &quot;./input_labs/cerfacs/home_vars/listof_test_extra_vars.txt&quot;,</span>
+        <span class="s2">&quot;path_extra_tables&quot;</span>   <span class="p">:</span> <span class="s2">&quot;./input_labs/cerfacs/extra_Tables&quot;</span><span class="p">,</span>
+        <span class="c1">#&quot;path_to_parse&quot;       : &quot;./input_labs/cerfacs/to_parse/for_arpege_grid_dr2xml_&quot;+resol+&quot;_STMARTIN_EXCLUPLEV&quot;,</span>
+        <span class="s2">&quot;path_to_parse&quot;</span>       <span class="p">:</span> <span class="s2">&quot;./input_labs/cerfacs/to_parse/for_arpege_grid_dr2xml_&quot;</span><span class="o">+</span><span class="n">resol</span><span class="o">+</span><span class="s2">&quot;_STMARTIN&quot;</span><span class="p">,</span>
+        <span class="c1">#&quot;path_to_parse&quot;       : &quot;./input_labs/cerfacs/to_parse/for_arpege_grid_dr2xml_&quot;+resol+&quot;_TEST&quot;,</span>
+        <span class="c1">#&quot;path_to_parse&quot;       : &quot;./input_labs/cerfacs/to_parse/for_toy_grid_&quot;+resol,</span>
+        <span class="c1">#&quot;grids&quot; : { </span>
+        <span class="c1">#  &quot;LR&quot;    : {</span>
+        <span class="c1">#    &quot;arpsfx&quot; : [ &quot;gn&quot;,&quot;reduced-gaussian_LR&quot; ,&quot;250 km&quot;, &quot;native atmosphere T127l reduced gaussian grid&quot;] ,</span>
+        <span class="c1">#      &quot;nemo&quot; : [ &quot;gn&quot;, &quot;&quot;        , &quot;100 km&quot; , &quot;native ocean tri-polar grid ORCA1 with 105 k ocean cells&quot; ],},</span>
+        <span class="c1">#  &quot;HR&quot;    : {</span>
+        <span class="c1">#    &quot;arpsfx&quot; : [ &quot;gn&quot;,&quot;reduced-gaussian_HR&quot;, &quot;50 km&quot;, &quot;native atmosphere T359l reduced gaussian grid&quot;] ,</span>
+        <span class="c1">#      &quot;nemo&quot; : [ &quot;gn&quot;, &quot;&quot;         , &quot;25 km&quot; , &quot;native ocean tri-polar grid ORCA025 with 1.47 M ocean cells&quot; ],},</span>
+        <span class="c1">#},</span>
+        <span class="s1">&#39;comments&#39;</span>            <span class="p">:</span> <span class="p">{},</span>
+        <span class="s1">&#39;contact&#39;</span>             <span class="p">:</span> <span class="s1">&#39;contact.cmip6@cerfacs.fr&#39;</span><span class="p">,</span>
+        <span class="s2">&quot;excluded_spshapes&quot;</span>   <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;XYA-na&quot;</span><span class="p">,</span><span class="s2">&quot;XYG-na&quot;</span><span class="p">,</span><span class="s2">&quot;S-na&quot;</span><span class="p">,</span><span class="s2">&quot;S-AH&quot;</span><span class="p">,</span><span class="s2">&quot;S-A&quot;</span><span class="p">,</span><span class="s2">&quot;na-A&quot;</span><span class="p">,</span><span class="s2">&quot;Y-P39&quot;</span><span class="p">]</span>
+                                 <span class="c1">#&quot;Y-P19&quot;,&quot;Y-P39&quot;,&quot;XY-P19&quot;,&quot;XY-P27&quot;,&quot;XY-P3&quot;,&quot;XY-P4&quot;,&quot;XY-P7&quot;,&quot;XY-P7T&quot;,&quot;XY-P8&quot;]</span>
+        <span class="p">}</span>
+    <span class="n">lab_and_model_settings</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">changes</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -11908,79 +11964,110 @@ div#notebook {
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">if</span> <span class="n">lab</span><span class="o">==</span><span class="s1">&#39;ipsl&#39;</span><span class="p">:</span>
     <span class="n">lab_and_model_settings</span><span class="o">=</span><span class="p">{</span>
-        <span class="s1">&#39;institution_id&#39;</span><span class="p">:</span> <span class="s2">&quot;IPSL&quot;</span><span class="p">,</span> <span class="c1"># institution should be read in CMIP6_CV, if up-to-date</span>
-        <span class="s1">&#39;source_id&#39;</span>      <span class="p">:</span> <span class="s2">&quot;IPSL-CM6-1&quot;</span><span class="p">,</span> 
-        <span class="c1"># The description of lab models, in CMIP6 CV wording</span>
-        <span class="s1">&#39;source_types&#39;</span> <span class="p">:</span> <span class="p">{</span> <span class="s2">&quot;IPSL-CM6-1&quot;</span> <span class="p">:</span> <span class="s2">&quot;AOGCM&quot;</span><span class="p">,</span> <span class="s2">&quot;IPSL-CM6-1-HR&quot;</span> <span class="p">:</span> <span class="s2">&quot;AOGCM&quot;</span><span class="p">,</span> 
+        <span class="c1">#        </span>
+        <span class="s2">&quot;institution_id&quot;</span> <span class="p">:</span> <span class="s2">&quot;IPSL&quot;</span><span class="p">,</span>
+        <span class="c1">#&quot;institution&quot;: &quot;IPSL, blabla...&quot;, # institution should be read in CMIP6_CV, if up-to-date</span>
+        <span class="s2">&quot;source_id&quot;</span>      <span class="p">:</span> <span class="s2">&quot;IPSL-CM6-1&quot;</span><span class="p">,</span> 
+        <span class="c1">#&quot;source&quot;         : &quot;IPSL-CM6-1 blabla...&quot;, # Useful only if CMIP6_CV is not up-to-date for the source_id</span>
+        <span class="c1">#--- You may override here the source_type value deduced from source_id and sources_type</span>
+        <span class="c1">#&quot;source_type&quot; : &quot;AER&quot;  </span>
+        <span class="c1">#        </span>
+        <span class="c1">#--- The description of lab models, in CMIP6 CV wording</span>
+        <span class="s2">&quot;source_types&quot;</span> <span class="p">:</span> <span class="p">{</span> <span class="s2">&quot;IPSL-CM6-1&quot;</span> <span class="p">:</span> <span class="s2">&quot;AOGCM&quot;</span><span class="p">,</span> <span class="s2">&quot;IPSL-CM6-1-HR&quot;</span> <span class="p">:</span> <span class="s2">&quot;AOGCM&quot;</span><span class="p">,</span> 
                            <span class="s2">&quot;IPSL-ESM2-1&quot;</span><span class="p">:</span> <span class="s2">&quot;ESM&quot;</span>  <span class="p">,</span> <span class="s2">&quot;IPSL-ESM2-1-HR&quot;</span><span class="p">:</span> <span class="s2">&quot;ESM&quot;</span> <span class="p">},</span>
-        <span class="s1">&#39;source&#39;</span>         <span class="p">:</span> <span class="s2">&quot;IPSL-CM6-1&quot;</span><span class="p">,</span> <span class="c1"># Useful only if CMIP6_CV is not up to date</span>
-        <span class="s1">&#39;references&#39;</span>    <span class="p">:</span>  <span class="s2">&quot;A character string containing a list of published or web-based &quot;</span><span class="o">+</span>\
-            <span class="s2">&quot;references that describe the data or the methods used to produce it.&quot;</span><span class="o">+</span>\
-            <span class="s2">&quot;Typically, the user should provide references describing the model&quot;</span><span class="o">+</span>\
-            <span class="s2">&quot;formulation here&quot;</span><span class="p">,</span>
-        <span class="s1">&#39;info_url&#39;</span>      <span class="p">:</span> <span class="s2">&quot;http://www.umr-cnrm.fr/cmip6/&quot;</span><span class="p">,</span>
-        <span class="s1">&#39;contact&#39;</span>       <span class="p">:</span> <span class="s1">&#39;contact.cmip@meteo.fr&#39;</span><span class="p">,</span>
-
-        <span class="c1"># We account for the list of MIPS in which the lab takes part.</span>
-        <span class="c1"># Note : a MIPs set limited to {&#39;C4MIP&#39;} leads to a number of tables and </span>
-        <span class="c1"># variables which is manageable for eye inspection</span>
-        <span class="s1">&#39;mips_for_test&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;C4MIP&#39;</span><span class="p">,</span> <span class="s1">&#39;SIMIP&#39;</span><span class="p">,</span> <span class="s1">&#39;OMIP&#39;</span><span class="p">,</span> <span class="s1">&#39;CFMIP&#39;</span><span class="p">,</span> <span class="s1">&#39;RFMIP&#39;</span><span class="p">}</span> <span class="p">,</span> 
-        <span class="s1">&#39;mips&#39;</span> <span class="p">:</span> <span class="p">{</span><span class="s1">&#39;AerChemMIP&#39;</span><span class="p">,</span><span class="s1">&#39;C4MIP&#39;</span><span class="p">,</span><span class="s1">&#39;CFMIP&#39;</span><span class="p">,</span><span class="s1">&#39;DAMIP&#39;</span><span class="p">,</span> <span class="s1">&#39;FAFMIP&#39;</span> <span class="p">,</span> <span class="s1">&#39;GeoMIP&#39;</span><span class="p">,</span><span class="s1">&#39;GMMIP&#39;</span><span class="p">,</span><span class="s1">&#39;ISMIP6&#39;</span><span class="p">,</span>\
+        <span class="s2">&quot;source&quot;</span>         <span class="p">:</span> <span class="s2">&quot;IPSL-CM6-1&quot;</span><span class="p">,</span> <span class="c1"># Useful only if CMIP6_CV is not up to date</span>
+        <span class="c1">#</span>
+        <span class="c1">#--- references &amp; contact</span>
+        <span class="c1">#&quot;references&quot;    :  &quot;Blabla...&quot;, # A character string containing a list of published or web-based</span>
+                                         <span class="c1"># references that describe the data or the methods used to produce it.</span>
+                                         <span class="c1"># Typically, the user should provide references describing the model</span>
+                                         <span class="c1"># formulation here</span>
+        <span class="s2">&quot;info_url&quot;</span>      <span class="p">:</span> <span class="s2">&quot;http://www.blabla&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;contact&quot;</span>       <span class="p">:</span> <span class="s1">&#39;blabla@blabla.fr&#39;</span><span class="p">,</span>
+        <span class="c1">#</span>
+        <span class="c1">#--- We account for the list of MIPS in which the lab takes part.</span>
+        <span class="c1">#--- Note : a MIPs set limited to {&#39;C4MIP&#39;} leads to a number of tables and </span>
+        <span class="c1">#--- variables which is manageable for eye inspection</span>
+        <span class="s2">&quot;mips_for_test&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;C4MIP&#39;</span><span class="p">,</span> <span class="s1">&#39;SIMIP&#39;</span><span class="p">,</span> <span class="s1">&#39;OMIP&#39;</span><span class="p">,</span> <span class="s1">&#39;CFMIP&#39;</span><span class="p">,</span> <span class="s1">&#39;RFMIP&#39;</span><span class="p">}</span> <span class="p">,</span> 
+        <span class="s2">&quot;mips&quot;</span> <span class="p">:</span> <span class="p">{</span><span class="s1">&#39;AerChemMIP&#39;</span><span class="p">,</span><span class="s1">&#39;C4MIP&#39;</span><span class="p">,</span><span class="s1">&#39;CFMIP&#39;</span><span class="p">,</span><span class="s1">&#39;DAMIP&#39;</span><span class="p">,</span> <span class="s1">&#39;FAFMIP&#39;</span> <span class="p">,</span> <span class="s1">&#39;GeoMIP&#39;</span><span class="p">,</span><span class="s1">&#39;GMMIP&#39;</span><span class="p">,</span><span class="s1">&#39;ISMIP6&#39;</span><span class="p">,</span>\
                           <span class="s1">&#39;LS3MIP&#39;</span><span class="p">,</span><span class="s1">&#39;LUMIP&#39;</span><span class="p">,</span><span class="s1">&#39;OMIP&#39;</span><span class="p">,</span><span class="s1">&#39;PMIP&#39;</span><span class="p">,</span><span class="s1">&#39;RFMIP&#39;</span><span class="p">,</span><span class="s1">&#39;ScenarioMIP&#39;</span><span class="p">,</span><span class="s1">&#39;CORDEX&#39;</span><span class="p">,</span><span class="s1">&#39;SIMIP&#39;</span><span class="p">},</span>
-        <span class="c1"># Max variable priority level to be output</span>
+        <span class="c1">#        </span>
+        <span class="c1">#--- Max variable priority level to be output</span>
         <span class="s1">&#39;max_priority&#39;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
         <span class="s1">&#39;tierMax&#39;</span>      <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-
-        <span class="c1"># The ping file defines variable names, which are constructed using CMIP6 &quot;MIPvarnames&quot; </span>
-        <span class="c1"># and a prefix which must be set here, and can be the empty string :</span>
+        <span class="c1">#</span>
+        <span class="c1">#--- The ping file defines variable names, which are constructed using CMIP6 &quot;MIPvarnames&quot; </span>
+        <span class="c1">#--- and a prefix which must be set here, and can be the empty string :</span>
         <span class="s2">&quot;ping_variables_prefix&quot;</span> <span class="p">:</span> <span class="s2">&quot;CMIP6_&quot;</span><span class="p">,</span>
-
-        <span class="c1"># We account for a list of variables which the lab does not want to produce , </span>
-        <span class="c1"># Names must match DR MIPvarnames (and **NOT** CF standard_names)</span>
+        <span class="c1">#        </span>
+        <span class="c1">#--- mpmoine_amelioration: pour ecrire un ts_prefix</span>
+        <span class="s1">&#39;output_path&#39;</span> <span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+        <span class="c1">#</span>
+        <span class="c1">#--- We account for a list of variables which the lab does not want to produce , </span>
+        <span class="c1">#--- Names must match DR MIPvarnames (and **NOT** CF standard_names)</span>
         <span class="s2">&quot;excluded_vars_file&quot;</span><span class="p">:</span><span class="bp">None</span><span class="p">,</span>
-        <span class="s2">&quot;excluded_vars&quot;</span><span class="p">:[],</span>
-        <span class="c1"># mpmoine_next_modif: ignore some spatial shapes</span>
-        <span class="s2">&quot;excluded_spshapes&quot;</span><span class="p">:[</span><span class="s2">&quot;XYA-na&quot;</span><span class="p">,</span><span class="s2">&quot;XYG-na&quot;</span><span class="p">],</span>
-
-        <span class="c1"># We account for a list of variables which the lab wants to produce in some cases</span>
+        <span class="c1"># mpmoine_note: exclusion des variables Cloud Simulator tant que pas activé</span>
+        <span class="s2">&quot;excluded_vars&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;clcalipso&quot;</span><span class="p">,</span><span class="s2">&quot;clcalipso2&quot;</span><span class="p">,</span><span class="s2">&quot;clhcalipso&quot;</span><span class="p">,</span><span class="s2">&quot;clcalipsoice&quot;</span><span class="p">,</span><span class="s2">&quot;clcalipsoliq&quot;</span><span class="p">,</span> \
+                           <span class="s2">&quot;cllcalipso&quot;</span><span class="p">,</span><span class="s2">&quot;clmcalipso&quot;</span><span class="p">,</span><span class="s2">&quot;cltcalipso&quot;</span><span class="p">,</span>\
+                           <span class="s2">&quot;cfadLidarsr532&quot;</span><span class="p">,</span><span class="s2">&quot;cfadDbze94&quot;</span><span class="p">,</span><span class="s2">&quot;cfadLidarsr532&quot;</span><span class="p">,</span><span class="s2">&quot;clisccp&quot;</span><span class="p">,</span><span class="s2">&quot;cltisccp&quot;</span><span class="p">,</span>\
+                           <span class="s2">&quot;climodis&quot;</span><span class="p">,</span><span class="s2">&quot;clwmodis&quot;</span><span class="p">,</span><span class="s2">&quot;jpdftaureicemodis&quot;</span><span class="p">,</span><span class="s2">&quot;cltmodis&quot;</span><span class="p">,</span><span class="s2">&quot;clmisr&quot;</span><span class="p">,</span><span class="s2">&quot;parasolRefl&quot;</span><span class="p">],</span>
+        <span class="c1">#--- mpmoine_next_modif: ignore some spatial shapes</span>
+        <span class="c1">#mpmoine_note: grilles Groenland, Antarctic et les profils en Sites (pas encore codé dans dr2xml)</span>
+        <span class="s2">&quot;excluded_spshapes&quot;</span><span class="p">:[</span><span class="s2">&quot;XYA-na&quot;</span><span class="p">,</span><span class="s2">&quot;XYG-na&quot;</span><span class="p">,</span><span class="s2">&quot;S-na&quot;</span><span class="p">,</span><span class="s2">&quot;S-AH&quot;</span><span class="p">,</span><span class="s2">&quot;S-A&quot;</span><span class="p">,</span><span class="s2">&quot;na-A&quot;</span><span class="p">],</span>
+        <span class="c1">#</span>
+        <span class="c1">#--- We account for a list of variables which the lab wants to produce in some cases</span>
         <span class="s2">&quot;listof_home_vars&quot;</span><span class="p">:</span><span class="bp">None</span><span class="p">,</span>
-        <span class="c1"># mpmoine_last_modif: Path for extra Tables</span>
+        <span class="c1">#        </span>
+        <span class="c1">#--- mpmoine_last_modif: Path for extra Tables</span>
         <span class="s2">&quot;path_extra_tables&quot;</span><span class="p">:</span><span class="bp">None</span><span class="p">,</span>
-
-        <span class="c1"># Each XIOS  context does adress a number of realms</span>
-        <span class="s1">&#39;realms_per_context&#39;</span> <span class="p">:</span> <span class="p">{</span> 
+        <span class="c1">#        </span>
+        <span class="c1">#--- mpmoine_correction: Path for natives XIOS xml files to parse</span>
+        <span class="s2">&quot;path_to_parse&quot;</span><span class="p">:</span><span class="s2">&quot;./input_labs/ipsl/to_parse&quot;</span><span class="p">,</span>
+        <span class="c1">#</span>
+        <span class="c1">#--- Each XIOS  context does adress a number of realms</span>
+        <span class="s2">&quot;realms_per_context&quot;</span> <span class="p">:</span> <span class="p">{</span> 
             <span class="s1">&#39;nemo&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;seaIce&#39;</span><span class="p">,</span> <span class="s1">&#39;ocean&#39;</span><span class="p">,</span> <span class="s1">&#39;ocean seaIce&#39;</span><span class="p">,</span> <span class="s1">&#39;ocnBgchem&#39;</span><span class="p">,</span> <span class="s1">&#39;seaIce ocean&#39;</span><span class="p">],</span>
             <span class="s1">&#39;lmdz&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;atmos&#39;</span><span class="p">,</span> <span class="s1">&#39;atmos land&#39;</span><span class="p">]</span> <span class="p">,</span> 
             <span class="s1">&#39;orchidee&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;land&#39;</span><span class="p">,</span> <span class="s1">&#39;landIce land&#39;</span><span class="p">,</span>  <span class="s1">&#39;land landIce&#39;</span><span class="p">,</span> <span class="s1">&#39;landIce&#39;</span><span class="p">]</span> <span class="p">,</span>
                               <span class="p">},</span> 
-        <span class="c1"># Some variables, while belonging to a realm, may fall in another XIOS context than the </span>
-        <span class="c1"># context which hanldes that realm</span>
-        <span class="s1">&#39;orphan_variables&#39;</span> <span class="p">:</span> <span class="p">{</span> 
+        <span class="c1">#        </span>
+        <span class="c1">#--- Some variables, while belonging to a realm, may fall in another XIOS context than the </span>
+        <span class="c1">#--- context which hanldes that realm</span>
+        <span class="s2">&quot;orphan_variables&quot;</span> <span class="p">:</span> <span class="p">{</span> 
             <span class="s1">&#39;nemo&#39;</span> <span class="p">:</span> <span class="p">[],</span>
             <span class="s1">&#39;lmdz&#39;</span> <span class="p">:</span> <span class="p">[],</span>
             <span class="s1">&#39;orchidee&#39;</span> <span class="p">:</span> <span class="p">[],</span>
                              <span class="p">},</span>
-        <span class="s1">&#39;vars_OK&#39;</span> <span class="p">:</span> <span class="nb">dict</span><span class="p">(),</span>
-        <span class="c1"># A per-variable dict of comments valid for all simulations</span>
-        <span class="s1">&#39;comments&#39;</span>     <span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;vars_OK&quot;</span> <span class="p">:</span> <span class="nb">dict</span><span class="p">(),</span>
+        <span class="c1">#        </span>
+        <span class="c1">#--- A per-variable dict of comments valid for all simulations</span>
+        <span class="s2">&quot;comments&quot;</span>     <span class="p">:</span> <span class="p">{</span>
             <span class="s1">&#39;tas&#39;</span> <span class="p">:</span> <span class="s1">&#39;nothing special about tas&#39;</span>
             <span class="p">},</span>
-        <span class="c1"># Sizes for atm and oce grids (cf DR doc)</span>
+        <span class="c1">#        </span>
+        <span class="c1">#--- Sizes for atm and oce grids [&#39;nho&#39;,&#39;nlo&#39;,&#39;nha&#39;,&#39;nla&#39;,&#39;nlas&#39;,&#39;nls&#39;,&#39;nh1&#39;] (cf DR doc)</span>
         <span class="s2">&quot;sizes&quot;</span>  <span class="p">:</span> <span class="p">[</span><span class="mi">259200</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="mi">64800</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">100</span><span class="p">],</span>
-        <span class="c1"># What is the maximum size of generated files, in number of float values</span>
+        <span class="c1">#        </span>
+        <span class="c1">#--- What is the maximum size of generated files, in number of float values</span>
         <span class="s2">&quot;max_file_size_in_floats&quot;</span> <span class="p">:</span> <span class="mf">500.</span><span class="o">*</span><span class="mf">1.e+6</span> <span class="p">,</span>
-        <span class="c1"># Grids : CMIP6 name, name_of_target_domain, CMIP6-std resolution, and description</span>
+        <span class="c1">#        </span>
+        <span class="c1">#--- Grids : CMIP6 name, name_of_target_domain, CMIP6-std resolution, and description</span>
         <span class="s2">&quot;grids&quot;</span> <span class="p">:</span> <span class="p">{</span> 
           <span class="s2">&quot;LR&quot;</span>    <span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;lmdz&quot;</span> <span class="p">:</span> <span class="p">[</span> <span class="s2">&quot;gr&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span> <span class="p">,</span> <span class="s2">&quot;??? km&quot;</span><span class="p">,</span> <span class="s2">&quot;LMDZ grid&quot;</span><span class="p">]</span> <span class="p">,</span>
-              <span class="s2">&quot;nemo&quot;</span> <span class="p">:</span> <span class="p">[</span> <span class="s2">&quot;gn&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span>        <span class="p">,</span> <span class="s2">&quot;100km&quot;</span> <span class="p">,</span> <span class="s2">&quot;native ocean tri-polar grid with 105 k ocean cells&quot;</span> <span class="p">],</span>
-          <span class="s2">&quot;orchidee&quot;</span> <span class="p">:</span>  <span class="p">[</span> <span class="s2">&quot;gr&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span> <span class="p">,</span> <span class="s2">&quot;??? km&quot;</span><span class="p">,</span> <span class="s2">&quot;LMDZ grid&quot;</span><span class="p">],},</span>
+            <span class="s2">&quot;lmdz&quot;</span> <span class="p">:</span>     <span class="p">[</span> <span class="s2">&quot;gr&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span> <span class="p">,</span> <span class="s2">&quot;??? km&quot;</span><span class="p">,</span> <span class="s2">&quot;LMDZ grid&quot;</span><span class="p">]</span> <span class="p">,</span>
+            <span class="s2">&quot;nemo&quot;</span> <span class="p">:</span>     <span class="p">[</span> <span class="s2">&quot;gn&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span>        <span class="p">,</span> <span class="s2">&quot;100 km&quot;</span> <span class="p">,</span> <span class="s2">&quot;native ocean tri-polar grid with 105 k ocean cells&quot;</span> <span class="p">],</span>
+            <span class="s2">&quot;orchidee&quot;</span> <span class="p">:</span> <span class="p">[</span> <span class="s2">&quot;gr&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span> <span class="p">,</span> <span class="s2">&quot;??? km&quot;</span><span class="p">,</span> <span class="s2">&quot;LMDZ grid&quot;</span><span class="p">],},</span>
         <span class="p">},</span>
-        <span class="s1">&#39;grid_choice&#39;</span> <span class="p">:</span> <span class="p">{</span> <span class="s2">&quot;IPSL-CM6-1&quot;</span> <span class="p">:</span> <span class="s2">&quot;LR&quot;</span><span class="p">,</span> <span class="s2">&quot;IPSL-CM6-1-HR&quot;</span> <span class="p">:</span> <span class="s2">&quot;HR&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;grid_choice&quot;</span> <span class="p">:</span> <span class="p">{</span> <span class="s2">&quot;IPSL-CM6-1&quot;</span> <span class="p">:</span> <span class="s2">&quot;LR&quot;</span><span class="p">,</span> <span class="s2">&quot;IPSL-CM6-1-HR&quot;</span> <span class="p">:</span> <span class="s2">&quot;HR&quot;</span><span class="p">,</span>
                           <span class="s2">&quot;IPSL-ESM2-1&quot;</span><span class="p">:</span> <span class="s2">&quot;LR&quot;</span>  <span class="p">,</span> <span class="s2">&quot;IPSL-ESM2-1-HR&quot;</span><span class="p">:</span> <span class="s2">&quot;HR&quot;</span> <span class="p">},</span>
-        <span class="c1"># mpmpoine_next_modif: Model component Time steps (min)</span>
-        <span class="s2">&quot;model_timestep&quot;</span> <span class="p">:</span> <span class="p">{</span> <span class="s2">&quot;nemo&quot;</span><span class="p">:</span><span class="mf">60.</span><span class="p">,</span> <span class="s2">&quot;lmdz&quot;</span><span class="p">:</span><span class="mf">60.</span><span class="p">,</span><span class="s2">&quot;orchidee&quot;</span><span class="p">:</span><span class="mf">60.</span><span class="p">}</span>
-
+        <span class="c1">#        </span>
+        <span class="c1">#--- mpmpoine_next_modif: Model component Time steps (min)</span>
+        <span class="s2">&quot;model_timestep&quot;</span> <span class="p">:</span> <span class="p">{</span> <span class="s2">&quot;nemo&quot;</span><span class="p">:</span><span class="mf">60.</span><span class="p">,</span> <span class="s2">&quot;lmdz&quot;</span><span class="p">:</span><span class="mf">60.</span><span class="p">,</span><span class="s2">&quot;orchidee&quot;</span><span class="p">:</span><span class="mf">60.</span><span class="p">},</span>
+        <span class="c1">#        </span>
+        <span class="c1">#--- mpmoine_amelioration: booleen pour activer ou non l&#39;usage des union/zoom</span>
+        <span class="c1">#--- Say if you want to use XIOS union/zoom axis to optimize vertical interpolation requested by the DR</span>
+        <span class="s2">&quot;use_union_zoom&quot;</span> <span class="p">:</span> <span class="bp">False</span>
+        <span class="c1">#</span>
     <span class="p">}</span>
 </pre></div>
 
@@ -11994,7 +12081,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Define-the-settings-for-the-processed-simulation">Define the settings for the processed simulation<a class="anchor-link" href="#Define-the-settings-for-the-processed-simulation">&#182;</a></h2>
+<h2 id="2.-Define-the-settings-for-the-processed-simulation">2. Define the settings for the processed simulation<a class="anchor-link" href="#2.-Define-the-settings-for-the-processed-simulation">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -12003,60 +12090,63 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">simulation_settings</span><span class="o">=</span><span class="p">{</span>    
-    <span class="c1"># Dictionnary describing the necessary attributes for a given simulation</span>
-
-    <span class="c1"># Warning : some lines are commented out in this example but should be </span>
-    <span class="c1"># un-commented in some cases. See comments</span>
-    <span class="s2">&quot;experiment_id&quot;</span>  <span class="p">:</span> <span class="s2">&quot;historical&quot;</span><span class="p">,</span>
-    <span class="c1">#-&quot;experiment_id&quot;  : &quot;Forced-Atmos-Land&quot;,</span>
-    <span class="c1">#-&quot;experiment_id&quot;  : &quot;Coupled&quot;,</span>
-    <span class="c1">#-&quot;experiment_id&quot;  : &quot;DCPP-C13&quot;,</span>
+<div class=" highlight hl-ipython2"><pre><span></span>    <span class="n">simulation_settings</span><span class="o">=</span><span class="p">{</span>    
+        <span class="c1">#--- Dictionnary describing the necessary attributes for a given simulation</span>
+        <span class="c1">#--- Warning : some lines are commented out in this example but should be </span>
+        <span class="c1">#--- un-commented in some cases. See comments</span>
+        <span class="c1">#</span>
+        <span class="s2">&quot;experiment_id&quot;</span>  <span class="p">:</span> <span class="s2">&quot;historical&quot;</span><span class="p">,</span>
+        <span class="c1">#</span>
+        <span class="c1">#&quot;contact&quot;        : &quot;&quot;, set it only if it is specific to the simualtion</span>
+        <span class="s2">&quot;project&quot;</span>         <span class="p">:</span> <span class="s2">&quot;CMIP6&quot;</span><span class="p">,</span>  <span class="c1">#CMIP6 is the default</span>
+        <span class="c1">#</span>
+        <span class="c1">#&quot;source_type&quot;    : &quot;ESM&quot; # If source_type is special only for this experiment (e.g. : AMIP)</span>
+                                  <span class="c1">#(i.e. not the same as in lab_and_model settings), you may tell that here</span>
+        <span class="c1">#</span>
+        <span class="c1">#--- MIP specifying the experiment. For historical, it is CMIP6 itself</span>
+        <span class="c1">#--- In a few cases it may be appropriate to include multiple activities in the activity_id </span>
+        <span class="c1">#--- (with multiple activities allowed, separated by single spaces).  </span>
+        <span class="c1">#--- An example of this is “LUMIP AerChemMIP” for one of the land-use change experiments.</span>
+        <span class="s2">&quot;activity_id&quot;</span>       <span class="p">:</span> <span class="s2">&quot;CMIP&quot;</span><span class="p">,</span> <span class="c1"># examples : “PMIP”, “LS3MIP LUMIP”; default is &quot;CMIP&quot;</span>
     
-    <span class="c1">#&quot;contact&quot;        : &quot;&quot;, set it only if it is specific to the simualtion</span>
-    <span class="c1">#&quot;project&quot;        : &quot;CMIP6&quot;,  #CMIP6 is the default</span>
-
-    <span class="c1">#&#39;source_type&#39;    : &quot;ESM&quot; # If source_type is special only for this experiment (e.g. : AMIP)</span>
-                      <span class="c1">#(i.e. not the same as in lab_and_model settings), you may tell that here</span>
-
-    <span class="c1"># MIP specifying the experiment. For historical, it is CMIP6 itself</span>
-    <span class="c1"># In a few cases it may be appropriate to include multiple activities in the activity_id </span>
-    <span class="c1"># (with multiple activities allowed, separated by single spaces).  </span>
-    <span class="c1"># An example of this is “LUMIP AerChemMIP” for one of the land-use change experiments.</span>
-    <span class="s2">&quot;activity_id&quot;</span>       <span class="p">:</span> <span class="s2">&quot;CMIP&quot;</span><span class="p">,</span> <span class="c1"># examples : “PMIP”, “LS3MIP LUMIP”; defaults to &quot;CMIP6&quot;</span>
-    
-    <span class="c1"># It is recommended that some description be included to help identify major differences among variants, </span>
-    <span class="c1"># but care should be taken to record correct information.  Prudence dictates that this attribute includes </span>
-    <span class="c1"># a warning along the following lines:  “Information provided by this attribute may in some cases be flawed.#</span>
-    <span class="c1"># Users can find more comprehensive and up-to-date documentation via the further_info_url global attribute.”</span>
-    <span class="s2">&quot;variant_info&quot;</span>      <span class="p">:</span> <span class="s2">&quot;Start date chosen so that variant r1i1p1f1 has the better fit with Krakatoa impact on tos&quot;</span><span class="p">,</span>
-    <span class="c1">#</span>
-    <span class="s2">&quot;realization_index&quot;</span>    <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="c1"># Value may be omitted if = 1</span>
-    <span class="s2">&quot;initialization_index&quot;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="c1"># Value may be omitted if = 1</span>
-    <span class="s2">&quot;physics_index&quot;</span>        <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="c1"># Value may be omitted if = 1</span>
-    <span class="s2">&quot;forcing_index&quot;</span>        <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="c1"># Value may be omitted if = 1</span>
-    <span class="c1">#</span>
-    <span class="c1"># All about the parent experiment and branching scheme</span>
-    <span class="s2">&quot;parent_experiment_id&quot;</span> <span class="p">:</span> <span class="s2">&quot;piControl&quot;</span><span class="p">,</span> <span class="c1"># omit this setting (or set to &#39;no parent&#39;) if not applicable</span>
-                                          <span class="c1"># (remaining parent attributes will be disregarded)</span>
-    <span class="s2">&quot;branch_method&quot;</span>        <span class="p">:</span> <span class="s2">&quot;standard&quot;</span><span class="p">,</span> <span class="c1"># default value=&#39;standard&#39;, meaning ~ &quot;select a start date&quot; </span>
-    <span class="s2">&quot;branch_time_in_parent&quot;</span><span class="p">:</span> <span class="s2">&quot;365.0D0&quot;</span><span class="p">,</span> <span class="c1"># a double precision value, in parent time units, </span>
-    <span class="s2">&quot;branch_time_in_child&quot;</span> <span class="p">:</span> <span class="s2">&quot;0.0D0&quot;</span><span class="p">,</span> <span class="c1"># a double precision value, in child time units, </span>
-    <span class="c1">#&#39;parent_time_units&#39;    : &quot;&quot; #in case it is not the same as child time units</span>
-    <span class="c1">#&#39;parent_variant_label&#39; :&quot;&quot;  #Default to &#39;same as child&#39;. Other cases should be expceptional</span>
-    <span class="c1">#&quot;parent_mip_era&quot;       : &#39;CMIP5&#39;   # only in special cases (e.g. PMIP warm start from CMIP5/PMIP3 experiment)</span>
-    <span class="c1">#&#39;parent_activity   &#39;   : &#39;CMIP&#39;    # only in special cases, defaults to CMIP</span>
-    <span class="c1">#&#39;parent_source_id&#39;     : &#39;CNRM-CM5.1&#39; #only in special cases, where parent model is not the same model</span>
-    <span class="c1">#</span>
-    <span class="s2">&quot;sub_experiment_id&quot;</span>    <span class="p">:</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="c1"># Optional, default is &#39;none&#39;; example : s1960. </span>
-    <span class="s2">&quot;sub_experiment&quot;</span>       <span class="p">:</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="c1"># Optional, default in &#39;none&#39;</span>
-    <span class="s2">&quot;history&quot;</span>              <span class="p">:</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="c1">#Used when a simulation is re-run, an output file is modified ....</span>
-    <span class="c1"># A per-variable dict of comments which are specific to this simulation. It will replace  </span>
-    <span class="c1"># the all-simulation comment present in lab_and_model_settings</span>
-    <span class="s1">&#39;comments&#39;</span>     <span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;tas&#39;</span> <span class="p">:</span> <span class="s1">&#39;tas diagnostic uses a special scheme in this simulation&#39;</span><span class="p">,</span>
+        <span class="c1">#--- It is recommended that some description be included to help identify major differences among variants, </span>
+        <span class="c1">#--- but care should be taken to record correct information.  Prudence dictates that this attribute includes </span>
+        <span class="c1">#--- a warning along the following lines:  “Information provided by this attribute may in some cases be flawed.#</span>
+        <span class="c1">#--- Users can find more comprehensive and up-to-date documentation via the further_info_url global attribute.”</span>
+        <span class="s2">&quot;variant_info&quot;</span>      <span class="p">:</span> <span class="s2">&quot;Start date chosen so that variant r1i1p1f1 has the better fit with Krakatoa impact on tos&quot;</span><span class="p">,</span>
+        <span class="c1">#</span>
+        <span class="c1">#--- &#39;variant_label&#39; attribute is built gluing &lt;r&gt;&lt;i&gt;&lt;p&gt;&lt;f&gt; values</span>
+        <span class="s2">&quot;realization_index&quot;</span>    <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="c1"># Value may be omitted if = 1</span>
+        <span class="s2">&quot;initialization_index&quot;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="c1"># Value may be omitted if = 1</span>
+        <span class="s2">&quot;physics_index&quot;</span>        <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="c1"># Value may be omitted if = 1</span>
+        <span class="s2">&quot;forcing_index&quot;</span>        <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="c1"># Value may be omitted if = 1</span>
+        <span class="c1">#</span>
+        <span class="c1">#--- All about the parent experiment and branching scheme</span>
+        <span class="s2">&quot;parent_experiment_id&quot;</span> <span class="p">:</span> <span class="s2">&quot;piControl&quot;</span><span class="p">,</span>  <span class="c1"># Optional, default is False. Omit it (or set it to &#39;no parent&#39;) if not applicable</span>
+                                               <span class="c1"># Others parent and branch attributes will be disregarded if omitted or set to &#39;no parent&#39;</span>
+                                               <span class="c1"># but will be required id parent_experiment_id is defined.</span>
+        <span class="c1">#                             </span>
+        <span class="s2">&quot;parent_mip_era&quot;</span>       <span class="p">:</span> <span class="s1">&#39;CMIP5&#39;</span><span class="p">,</span>      <span class="c1"># Optional, default is &#39;mip_era&#39;. Only in special cases (e.g. PMIP warm start from CMIP5/PMIP3 experiment)</span>
+        <span class="s2">&quot;parent_activity_id&quot;</span>   <span class="p">:</span> <span class="s1">&#39;CMIP&#39;</span><span class="p">,</span>       <span class="c1"># Optional, default is &#39;activity_id&#39;. Only in special cases, defaults to CMIP</span>
+        <span class="s2">&quot;parent_source_id&quot;</span>     <span class="p">:</span> <span class="s1">&#39;CNRM-CM5.1&#39;</span><span class="p">,</span> <span class="c1"># Optional, default is &#39;source_id&#39;. Only in special cases, where parent model is not the same model</span>
+        <span class="c1">#&quot;parent_time_ref_year&quot; : &#39;1950&#39;       # Optional, default is &#39;1850&#39;. Is used to build &#39;parent_time_units&#39;</span>
+        <span class="c1">#&quot;parent_time_units&quot;    : &quot;days sice 1950-31-12 00:00:00&quot;  # Default is &#39;days since &lt;parent_time_ref_year&gt;-01-01 00:00:00&#39;.   # Default is ???. In case it is not the same as child time units</span>
+        <span class="c1">#&quot;parent_variant_label&quot; : &quot;r3i1p1f2&quot;   # Optional, default is &#39;variant label&#39;. Other cases should be expceptional</span>
+        <span class="s2">&quot;branch_method&quot;</span>        <span class="p">:</span> <span class="s2">&quot;standard&quot;</span><span class="p">,</span>   <span class="c1"># Optional, default is &#39;standard&#39;. Meaning ~ &quot;select a start date&quot; </span>
+        <span class="s2">&quot;branch_time_in_parent&quot;</span><span class="p">:</span> <span class="s2">&quot;365.0D0&quot;</span><span class="p">,</span>    <span class="c1"># Optional, default is False. A double precision value, in parent time units </span>
+        <span class="s2">&quot;branch_time_in_child&quot;</span> <span class="p">:</span> <span class="s2">&quot;0.0D0&quot;</span><span class="p">,</span>      <span class="c1"># Optional, default is False. a double precision value, in child time units </span>
+        <span class="c1">#</span>
+        <span class="c1">#--- mpmoine_cmor_update: CMOR3.2.3 impose &#39;none&#39; comme default values pour sub_experiment_id et sub_experiment</span>
+        <span class="s2">&quot;sub_experiment_id&quot;</span>    <span class="p">:</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="c1"># Optional, default is &#39;none&#39;; example : s1960. </span>
+        <span class="s2">&quot;sub_experiment&quot;</span>       <span class="p">:</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="c1"># Optional, default in &#39;none&#39;</span>
+        <span class="s2">&quot;history&quot;</span>              <span class="p">:</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="c1">#Used when a simulation is re-run, an output file is modified ....</span>
+        <span class="c1">#        </span>
+        <span class="c1">#--- A per-variable dict of comments which are specific to this simulation. It will replace  </span>
+        <span class="c1">#--- the all-simulation comment present in lab_and_model_settings</span>
+        <span class="s1">&#39;comments&#39;</span>     <span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;tas&#39;</span> <span class="p">:</span> <span class="s1">&#39;tas diagnostic uses a special scheme in this simulation&#39;</span><span class="p">,</span>
+            <span class="p">}</span>
         <span class="p">}</span>
-    <span class="p">}</span>
 </pre></div>
 
 </div>
@@ -12069,7 +12159,24 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">dr2xml</span> <span class="kn">import</span> <span class="n">generate_file_defs</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="k">if</span> <span class="n">lab</span><span class="o">==</span><span class="s1">&#39;cerfacs&#39;</span><span class="p">:</span> 
+    <span class="n">changes</span><span class="o">=</span><span class="p">{</span>    
+        <span class="s2">&quot;experiment_id&quot;</span>        <span class="p">:</span> <span class="s2">&quot;Forced-Atmos-Land&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;source_type&quot;</span>          <span class="p">:</span> <span class="s2">&quot;AGCM&quot;</span><span class="p">,</span> <span class="c1"># If source_type is special only for this experiment (e.g. : AMIP)</span>
+                                  <span class="c1">#(i.e. not the same as in lab_and_model settings), you may tell that here</span>
+        <span class="s2">&quot;activity_id&quot;</span>          <span class="p">:</span> <span class="s2">&quot;HighResMIP&quot;</span><span class="p">,</span> <span class="c1"># examples : “PMIP”, “LS3MIP LUMIP”; defaults is &quot;CMIP&quot;</span>
+        <span class="s2">&quot;realization_index&quot;</span>    <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="c1"># Value may be omitted if = 1</span>
+        <span class="s2">&quot;initialization_index&quot;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="c1"># Value may be omitted if = 1</span>
+        <span class="s2">&quot;physics_index&quot;</span>        <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="c1"># Value may be omitted if = 1</span>
+        <span class="s2">&quot;forcing_index&quot;</span>        <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="c1"># Value may be omitted if = 1</span>
+        <span class="s2">&quot;parent_experiment_id&quot;</span> <span class="p">:</span> <span class="s2">&quot;no parent&quot;</span><span class="p">,</span> <span class="c1"># Optional, default is False. Omit this setting (or set it to &#39;no parent&#39;) if not applicable</span>
+                                              <span class="c1"># Others parent and branch attributes will be disregarded if omitted or set to &#39;no parent&#39;</span>
+                                              <span class="c1"># but will be required id parent_experiment_id is defined.</span>
+        <span class="c1">#&quot;variant_info&quot;         : &quot;Petite variation en Re mineur&quot;,</span>
+        <span class="s2">&quot;variant_info&quot;</span>         <span class="p">:</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span>
+        <span class="s1">&#39;comments&#39;</span>             <span class="p">:</span> <span class="p">{}</span>
+        <span class="p">}</span>
+    <span class="n">simulation_settings</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">changes</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12082,7 +12189,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Path to local copy of CMIP6 CVs, which you can get from https://github.com/WCRP-CMIP/CMIP6_CVs</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#--- Path to local copy of CMIP6 CVs, which you can get from https://github.com/WCRP-CMIP/CMIP6_CVs</span>
 <span class="k">if</span> <span class="n">lab</span><span class="o">==</span><span class="s1">&#39;cnrm&#39;</span><span class="p">:</span>
     <span class="n">my_cvspath</span><span class="o">=</span><span class="s2">&quot;/cnrm/est/USERS/senesi/public/CMIP6/data_request/CMIP6_CVs/&quot;</span>
 <span class="k">elif</span> <span class="n">lab</span><span class="o">==</span><span class="s1">&#39;cerfacs&#39;</span><span class="p">:</span>
@@ -12097,13 +12204,64 @@ div#notebook {
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="3.-Generate-a-first-file-def-with-a-dummy-ping-file,-including-dummies">3. Generate a first file-def with a dummy ping-file, including dummies<a class="anchor-link" href="#3.-Generate-a-first-file-def-with-a-dummy-ping-file,-including-dummies">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">note</span><span class="o">=</span><span class="s2">&quot;VERSIONS:&quot;</span>
+<span class="k">print</span> <span class="n">note</span>
+<span class="k">print</span> <span class="s2">&quot;-&quot;</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">dr2xml</span> <span class="kn">import</span> <span class="n">generate_file_defs</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">note</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">LAB AND MODEL SETTINGS:&quot;</span>
+<span class="k">print</span> <span class="n">note</span>
+<span class="k">print</span> <span class="s2">&quot;-&quot;</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">lab_and_model_settings</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s2">&quot;* &quot;</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="s2">&quot;=&quot;</span><span class="p">,</span><span class="n">v</span>
+    
+<span class="n">note</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">SIMULATION SETTINGS:&quot;</span>
+<span class="k">print</span> <span class="n">note</span>
+<span class="k">print</span> <span class="s2">&quot;-&quot;</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">simulation_settings</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s2">&quot;* &quot;</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="s2">&quot;=&quot;</span><span class="p">,</span><span class="n">v</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># In/Out directory</span>
-<span class="n">my_dir</span><span class="o">=</span><span class="s2">&quot;output_test/&quot;</span><span class="o">+</span><span class="n">lab</span><span class="o">+</span><span class="s2">&quot;/&quot;</span>
+<span class="n">my_dir</span><span class="o">=</span><span class="s2">&quot;output_labs/&quot;</span><span class="o">+</span><span class="n">lab</span><span class="o">+</span><span class="s2">&quot;/&quot;</span>
 </pre></div>
 
 </div>
@@ -12129,8 +12287,9 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">if</span> <span class="bp">True</span> <span class="p">:</span> 
-    <span class="k">for</span> <span class="n">my_context</span> <span class="ow">in</span> <span class="n">lab_and_model_settings</span><span class="p">[</span><span class="s2">&quot;realms_per_context&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="k">if</span> <span class="bp">False</span> <span class="p">:</span> 
+    <span class="c1">#for my_context in lab_and_model_settings[&quot;realms_per_context&quot;].keys():</span>
+    <span class="k">for</span> <span class="n">my_context</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;arpsfx&quot;</span><span class="p">]:</span>
         <span class="n">generate_file_defs</span><span class="p">(</span><span class="n">lab_and_model_settings</span><span class="p">,</span> <span class="n">simulation_settings</span><span class="p">,</span><span class="n">year</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span><span class="n">context</span><span class="o">=</span><span class="n">my_context</span><span class="p">,</span>
                     <span class="n">pingfile</span><span class="o">=</span><span class="n">my_dir</span><span class="o">+</span><span class="s2">&quot;ping_&quot;</span><span class="o">+</span><span class="n">my_context</span><span class="o">+</span><span class="s2">&quot;.xml&quot;</span><span class="p">,</span> <span class="n">printout</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> 
                     <span class="n">cvs_path</span><span class="o">=</span><span class="n">my_cvspath</span><span class="p">,</span><span class="n">dummies</span><span class="o">=</span><span class="s1">&#39;include&#39;</span><span class="p">,</span> <span class="n">dirname</span><span class="o">=</span><span class="n">my_dir</span><span class="p">)</span>
@@ -12146,7 +12305,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="after-some-edit-in-ping-files,-which-does-not-discard-every-'dummy'-entries">after some edit in ping files, which does not discard every 'dummy' entries<a class="anchor-link" href="#after-some-edit-in-ping-files,-which-does-not-discard-every-'dummy'-entries">&#182;</a></h3>
+<h2 id="4.-After-some-edit-in-ping-files,-which-does-not-discard-every-'dummy'-entries">4. After some edit in ping files, which does not discard every 'dummy' entries<a class="anchor-link" href="#4.-After-some-edit-in-ping-files,-which-does-not-discard-every-'dummy'-entries">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -12155,10 +12314,68 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># after some edit in ping_arpsfx.xml, which does not discard every &#39;dummy&#39; entries </span>
-<span class="k">if</span> <span class="bp">False</span> <span class="p">:</span>
-    <span class="c1">#for my_context in lab_and_model_settings[&quot;realms_per_context&quot;].keys():</span>
-    <span class="k">for</span> <span class="n">my_context</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;nemo&#39;</span><span class="p">]:</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">note</span><span class="o">=</span><span class="s2">&quot;VERSIONS:&quot;</span>
+<span class="k">print</span> <span class="n">note</span>
+<span class="k">print</span> <span class="s2">&quot;-&quot;</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">dr2xml</span> <span class="kn">import</span> <span class="n">generate_file_defs</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">note</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">LAB AND MODEL SETTINGS:&quot;</span>
+<span class="k">print</span> <span class="n">note</span>
+<span class="k">print</span> <span class="s2">&quot;-&quot;</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">lab_and_model_settings</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s2">&quot;* &quot;</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="s2">&quot;=&quot;</span><span class="p">,</span><span class="n">v</span>
+    
+<span class="n">note</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">SIMULATION SETTINGS:&quot;</span>
+<span class="k">print</span> <span class="n">note</span>
+<span class="k">print</span> <span class="s2">&quot;-&quot;</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">simulation_settings</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s2">&quot;* &quot;</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="s2">&quot;=&quot;</span><span class="p">,</span><span class="n">v</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># In/Out directory</span>
+<span class="c1">#my_dir=&quot;../pingfiles_edited/&quot;+lab+&quot;/&quot;</span>
+<span class="c1">#my_dir=&quot;../pingfiles_reduced/&quot;+lab+&quot;/&quot;</span>
+<span class="n">my_dir</span><span class="o">=</span><span class="n">lab_and_model_settings</span><span class="p">[</span><span class="s2">&quot;path_to_parse&quot;</span><span class="p">]</span><span class="o">+</span><span class="s2">&quot;/&quot;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># after some edit in the ping files, which does not discard every &#39;dummy&#39; entries </span>
+<span class="k">if</span> <span class="bp">True</span> <span class="p">:</span>
+    <span class="c1">#for my_context in lab_and_model_settings[&quot;realms_per_context&quot;].keys():  </span>
+    <span class="k">for</span> <span class="n">my_context</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;arpsfx&quot;</span><span class="p">]:</span>       
         <span class="n">generate_file_defs</span><span class="p">(</span><span class="n">lab_and_model_settings</span><span class="p">,</span> <span class="n">simulation_settings</span><span class="p">,</span><span class="n">year</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span><span class="n">context</span><span class="o">=</span><span class="n">my_context</span><span class="p">,</span>
                     <span class="n">pingfile</span><span class="o">=</span><span class="n">my_dir</span><span class="o">+</span><span class="s2">&quot;ping_&quot;</span><span class="o">+</span><span class="n">my_context</span><span class="o">+</span><span class="s2">&quot;.xml&quot;</span><span class="p">,</span> <span class="n">printout</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> 
                     <span class="n">cvs_path</span><span class="o">=</span><span class="n">my_cvspath</span><span class="p">,</span><span class="n">dummies</span><span class="o">=</span><span class="s1">&#39;skip&#39;</span><span class="p">,</span> <span class="n">dirname</span><span class="o">=</span><span class="n">my_dir</span><span class="p">)</span>

@@ -1,0 +1,17 @@
+<!-- git id : e37dafe -->
+<context id="trip">
+<field_definition>
+<!-- for variables which realm equals one of _atmos_atmos%atmosChem_aerosol_atmos%land_land_landIce%land_aerosol%land_land%landIce_landIce-->
+   <field id="CMIP6_dgw"           field_ref="dgw"         /> <!-- P1 (kg m-2) dgw : Change in Groundwater -->
+   <field id="CMIP6_drivw"         field_ref="drivw"         /> <!-- P1 (kg m-2) drivw : Change in River Storage -->
+   <field id="CMIP6_fCLandToOcean" field_ref="carbdis"         /> <!-- P1 (kg m-2 s-1) fCLandToOcean : leached carbon etc that goes into run off or river routing and finds its way into ocean should be reported here.  -->
+   <field id="CMIP6_qgwr"          field_ref="qgwr"         /> <!-- P1 (kg m-2 s-1) qgwr : Groundwater recharge from soil layer -->
+   <field id="CMIP6_rivi"          field_ref="rivin"         /> <!-- P1 (m3 s-1) rivi : Inflow of River Water into Cell -->
+   <field id="CMIP6_rivo"          field_ref="rivdis"         /> <!-- P1 (m3 s-1) rivo : Outflow of River Water from Cell -->
+   <field id="CMIP6_waterDpth"     field_ref="wtd"         /> <!-- P2 (m) waterDpth : Water table depth from surface. -->
+   <field id="CMIP6_wtd"           field_ref="wtd"         /> <!-- P1 (m) wtd : Water table depth -->
+</field_definition>
+
+<axis_definition>
+</axis_definition>
+</context>

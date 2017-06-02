@@ -6,7 +6,7 @@
 # In[ ]:
 
 # Select your laboratory among: 'cnrm', 'cerfacs', 'ipsl'
-lab='cnrm'
+lab='cerfacs'
 
 
 # ## Lab settings
@@ -28,7 +28,7 @@ if lab=='cnrm' or lab=='cerfacs':
         'tierMax'      : 3,
        # Each XIOS  context does adress a number of realms
         'realms_per_context' : { 'nemo': ['seaIce', 'ocean', 'ocean seaIce', 'ocnBgchem', 'seaIce ocean'] ,
-                              'arpsfx' : ['atmos', 'atmos atmosChem', 'aerosol', 'atmos land', 'land',
+                               'arpsfx': ['atmos', 'atmos atmosChem', 'aerosol', 'atmos land', 'land',
                                          'landIce land',  'aerosol land','land landIce',  'landIce', ],
                               }, 
         "ping_variables_prefix" : "CMIP6_",
@@ -41,6 +41,8 @@ if lab=='cnrm' or lab=='cerfacs':
         "listof_home_vars":None,
         #"listof_home_vars": None,
         "path_extra_tables":None,
+        # mpmoine_correction: Path for special XIOS defs files
+        "path_special_defs":"./input/special_defs"
         }
     
 
@@ -49,8 +51,8 @@ if lab=='cnrm' or lab=='cerfacs':
 
 if lab=='cerfacs':  
     #settings["mips"]={'HighResMIP','DCPP'}
-    settings["listof_home_vars"]="./inputs/my_listof_home_vars.txt"
-    settings["path_extra_tables"]="./inputs/extra_Tables"
+    settings["listof_home_vars"]="./input_labs/cerfacs/home_vars/listof_primavera_extra_vars.txt"
+    settings["path_extra_tables"]="./input_labs/cerfacs/extra_Tables"
     
 
 
@@ -83,6 +85,8 @@ if lab=='ipsl':
         # We account for a list of variables which the lab wants to produce in some cases
         "listof_home_vars":None,
         "path_extra_tables":None,
+        # mpmoine_correction: Path for special XIOS defs files
+        "path_special_defs":None
         } 
     
 
@@ -138,15 +142,16 @@ help(pingFileForRealmsList)
 # In[ ]:
 
 # In/Out directory
-my_dir="output_test/"+lab+"/"
+my_dir="output_labs/"+lab+"/"
 
 
 # In[ ]:
 
 # Generate one ping file per context:
 for my_context in settings["realms_per_context"].keys():
+    print "=== CREATING PINGFILE FOR CONTEXT",my_context
     realms=settings['realms_per_context'][my_context]
-    pingFileForRealmsList(my_context,realms,svars,comments=" ",exact=False,dummy=True, 
+    pingFileForRealmsList(my_context,realms,svars,settings["path_special_defs"],comments=" ",exact=False,dummy=True, 
                           prefix=settings['ping_variables_prefix'],
                           filename=my_dir+'ping_'+my_context+'.xml',dummy_with_shape=True)
 
@@ -162,7 +167,8 @@ for my_context in settings["realms_per_context"].keys():
 single_realms=[ ['ocean'], ['seaIce'],['ocnBgchem'], [ 'atmos'], ['land'],['landIce'], ['atmosChem'],[ 'aerosol' ]]
 for rs in single_realms :
     #print rs[0]
-    pingFileForRealmsList(rs[0],rs,svars,prefix=settings['ping_variables_prefix'],
+    print "=== CREATING PINGFILE FOR SINGLE REALM",rs
+    pingFileForRealmsList(rs[0],rs,svars,settings["path_special_defs"],prefix=settings['ping_variables_prefix'],
                          comments=" ",exact=False, dummy=True,dummy_with_shape=True,
                          filename=my_dir+'ping_%s.xml'%rs[0])
 

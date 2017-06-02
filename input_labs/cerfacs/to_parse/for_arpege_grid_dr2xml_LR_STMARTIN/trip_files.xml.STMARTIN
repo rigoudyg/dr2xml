@@ -1,0 +1,39 @@
+<!-- 
+Example of XIOS-2.0 xml sub-file for Trip
+First version - 03/2017 - Bertrand decharme 
+
+This file defines some output files 
+
+For running with Eclis, the file ids below must match IOSOUTPATT,in order
+for the output files to be duly processed 
+ 
+Ref: 
+  - for XIOS : https://forge.ipsl.jussieu.fr/ioserver/wiki 
+  - for XIAS (implementation in Surfex and Arpege) : http://www.cnrm-game-meteo.fr/cm/spip.php?article60
+-->
+<!-- -->
+
+<file_definition  type="one_file">
+
+  <file name="@EXPID@_trip_timestep" output_freq="1ts" enabled="false" >
+    <field_group group_ref="trip_fix"    operation="once"    enabled="false"  />
+    <field_group group_ref="trip_group1" operation="instant" enabled="true"  />
+    <field_group group_ref="trip_group2" operation="instant" enabled="false" />
+    <field_group group_ref="trip_misc"   operation="instant" enabled="false" />
+  </file>
+
+  <file name="@EXPID@_trip_daily" output_freq="1d" enabled="true" >
+    <field_group group_ref="trip_fix"    operation="once"    enabled="false"  />
+    <field_group group_ref="trip_group1" operation="average" enabled="true"  />
+    <field_group group_ref="trip_group2" operation="average" enabled="false" />
+    <field_group group_ref="trip_misc"   operation="average" enabled="false" />
+  </file>
+
+  <file name="@EXPID@_trip_monthly" output_freq="1mo" enabled="true" >
+    <field_group group_ref="trip_fix"    operation="once"    enabled="true"  />
+    <field_group group_ref="trip_group1" operation="average" enabled="true"  />
+    <field_group group_ref="trip_group2" operation="average" enabled="false" />
+    <field_group group_ref="trip_misc"   operation="average" enabled="false" />
+  </file>
+
+</file_definition>  

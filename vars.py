@@ -34,7 +34,7 @@ class simple_CMORvar(object):
         self.experiment     = None 
         self.mip            = None
         self.Priority       = 1     # Will be changed using DR or extra-Tables
-        self.mip_era        = False # Later changed in project lname (uppercase) when appropriate
+        self.mip_era        = False # Later changed in project name (uppercase) when appropriate
         self.missing        = 1.e+20
 
 # mpmoine_future_modif: nouvelle classe simple_Dim
@@ -59,11 +59,11 @@ class simple_Dim(object):
 
 # mpmoine_future_modif: liste des suffixes de noms de variables reperant un ou plusieurs niveaux pression
 # List of multi and single pressure level suffixes for which we want the union/zoom axis mecanism turned on
-# For not using union/zoom, define these 2 lists as empty sets
-#multi_plev_suffixes=set(["10","19","23","27","39","3","3h","4","7c","7h","8","12"])
-multi_plev_suffixes=set()
-#single_plev_suffixes=set(["1000","200","220","500","560","700","840","850","100"])
-single_plev_suffixes=set()
+# For not using union/zoom, set 'use_union_zoom' to False in lab settings
+multi_plev_suffixes=set(["10","19","23","27","39","3","3h","4","7c","7h","8","12"])
+single_plev_suffixes=set(["1000","200","220","500","560","700","840","850","100"])
+#multi_plev_suffixes=set()
+#single_plev_suffixes=set()
 
 ambiguous_mipvarnames=None
 
@@ -143,10 +143,6 @@ def read_homeVars_list(hmv_file,expid,mips,dq,path_extra_tables=None):
     homevars.extend(extravars) 
     return homevars 
 
-def cids2singlev(cids):
-    slev=cids[0].split(":")
-    if len(slev)==2:return slev[1]
-
 # mpmoine_last_modif:read_extraTable: nouvelle fonction pour lire les extra_Tables
 def read_extraTable(path,table,dq,printout=False):
     """
@@ -181,19 +177,22 @@ def read_extraTable(path,table,dq,printout=False):
         for g in dq.coll['grids'].items:
             dim2dimid[g.label]=g.uid
     #
+    # mpmoine_correction:read_extraTable: Solution de Martin Juckes du 04/05/2017 en utilisant cids necessaire a partir de la version 01.00.08 => plus besoin de la fonction 'cids2singlev'
     if not dr_single_levels:
         for struct in dq.coll['structure'].items:
-            for spshp in dq.coll['spatialShape'].items:
-                 if spshp.uid==struct.spid and spshp.label=="XY-na":
-                        slev=cids2singlev(struct.cids)
-                        if slev not in dr_single_levels: dr_single_levels.append(slev)
+            spshp = dq.inx.uid[ struct.spid ]
+            if spshp.label=="XY-na" and 'cids' in struct.__dict__:
+                 if  struct.cids[0] != '':    ## this line is needed prior to version 01.00.08.
+                    c = dq.inx.uid[ struct.cids[0] ]
+                    #if c.axis == 'Z': # mpmoine_note: non car je veux dans dr_single_levels toutes les dimensions singletons (ex. 'typenatgr'), par seulement les niveaux
+                    dr_single_levels.append(c.label)
         # other single levels in extra Tables, not in DR
         # mpmoine: les ajouts ici correspondent  aux single levels Primavera.
         other_single_levels=['height50m','p100']
         dr_single_levels.extend(other_single_levels)
     #
     extravars=[]
-    dr_slev=dr_single_levels
+    dr_slevs=dr_single_levels
     mip_era=table.split('_')[0]
     json_table=path+"/"+table+".json"
     json_coordinate=path+"/"+mip_era+"_coordinate.json"
@@ -202,7 +201,7 @@ def read_extraTable(path,table,dq,printout=False):
     with open(json_table,"r") as jt:
         json_tdata=jt.read()
         tdata=json.loads(json_tdata)
-        # mpmoine_correction:read_extraTable: ajout de precautions 'NOT-SET' pour certains attributs pour eviter les chaines vides qui font planter XIOS (">  <")
+        # mpmoine_correction:read_extraTable: read_extraTable: ajout de precautions 'NOT-SET' pour certains attributs pour eviter les chaines vides qui font planter XIOS (">  <")
         for k,v in tdata["variable_entry"].iteritems(): 
             extra_var=simple_CMORvar()
             extra_var.type='extra'
@@ -231,7 +230,7 @@ def read_extraTable(path,table,dq,printout=False):
                     inddims_to_sup.append(dims.index(dtime))  
                     ind_time=[dims.index(dtime)]
                 # get the index of single level to suppress, if any
-                for sl in dr_slev:
+                for sl in dr_slevs:
                     if d==sl: 
                         dsingle=d
                         inddims_to_sup.append(dims.index(dsingle))      
@@ -312,6 +311,7 @@ def get_SpatialAndTemporal_Shapes(cmvar,dq):
 
 # mpmoine_last_modif: process_homeVars: argument supplementaire 'path_extra_tables' et expid au lieu de lset
 def process_homeVars(lset,mip_vars_list,dq,expid=False,printout=False):
+    printmore=False
     # Read HOME variables
     home_vars_list=read_homeVars_list(lset['listof_home_vars'],
                                      expid,lset['mips'],dq,lset['path_extra_tables'])
@@ -338,12 +338,12 @@ def process_homeVars(lset,mip_vars_list,dq,expid=False,printout=False):
                 if not already_in_dr:
                     # Append HOME variable only if not already
                     # selected with the DataRequest
-                    if printout: print "Info:",hv_info,\
+                    if printmore: print "Info:",hv_info,\
                        "HOMEVar is not in DR."\
                        " => Taken into account."
                     mip_vars_list.append(updated_hv)
                 else:
-                    if printout:
+                    if printmore:
                         print "Info:",hv_info,\
                             "HOMEVar is already in DR." \
                             " => Not taken into account."
@@ -370,7 +370,7 @@ def process_homeVars(lset,mip_vars_list,dq,expid=False,printout=False):
                     dr2xml_error("Abort: HOMEVar is anounced as perso,"\
                                      " is not a CMORVar, but has a cmor name.")
                 else:
-                    if printout: print "Info:",hv_info,\
+                    if printmore: print "Info:",hv_info,\
                        "HOMEVar is purely personnal. => Taken into account."
                     mip_vars_list.append(hv)
             else:
@@ -382,7 +382,7 @@ def process_homeVars(lset,mip_vars_list,dq,expid=False,printout=False):
         # mpmoine_last_modif: process_homeVars: ajout du cas type='extra'
         elif hv.type=='extra':
             if hv.Priority<=lset["max_priority"]:
-                if printout: print "Info:",hv_info,"HOMEVar is read in an extra Table with priority " \
+                if printmore: print "Info:",hv_info,"HOMEVar is read in an extra Table with priority " \
                                ,hv.Priority," => Taken into account."
                 mip_vars_list.append(hv)
         else:
@@ -399,7 +399,7 @@ def get_corresp_CMORvar(hmvar,dq):
     for cmvar in collect.items:
         # Consider case where no modeling_realm associated to the
         # current CMORvar as matching anymay. 
-        #mpmoine# A mieux gerer avec les orphan_variables ?
+        # mpmoine_TBD: A mieux gerer avec les orphan_variables ?
         match_label=(cmvar.label==hmvar.label)
         match_freq=(cmvar.frequency==hmvar.frequency)
         match_table=(cmvar.mipTable==hmvar.mipTable)
@@ -423,7 +423,6 @@ def get_corresp_CMORvar(hmvar,dq):
         complement_svar_using_cmorvar(hmvar,cmvar_found,dq)
         return hmvar
     return False
-
 
 def complement_svar_using_cmorvar(svar,cmvar,dq):
     """ 
@@ -450,7 +449,7 @@ def complement_svar_using_cmorvar(svar,cmvar,dq):
     [svar.spatial_shp,svar.temporal_shp]=get_SpatialAndTemporal_Shapes(cmvar,dq)
 
     # Get information from MIPvar
-    #mpmoine_next_modif:complement_svar_using_cmorvar: gestion d'exception pour l'acces a la 'mipvar'
+    # mpmoine_next_modif:complement_svar_using_cmorvar: gestion d'exception pour l'acces a la 'mipvar'
     try:
         mipvar = dq.inx.uid[cmvar.vid]
         svar.label_without_area=mipvar.label.rstrip(' ')
@@ -462,22 +461,24 @@ def complement_svar_using_cmorvar(svar,cmvar,dq):
         else:
             svar.description = mipvar.title
         svar.stdunits = mipvar.units.rstrip(' ')
-        stdname=None
+        sn=None
         try :
-            stdname = dq.inx.uid[mipvar.sn].rstrip(' ')
+            sn=dq.inx.uid[mipvar.sn]
         except:
             pass
             #print "Issue accessing sn for %s %s!"%(cmvar.label,cmvar.mipTable)
-        if stdname and stdname._h.label == 'standardname':
-                svar.stdname = stdname.uid.rstrip(' ')
+        if sn and sn._h.label == 'standardname':
+                svar.stdname = sn.uid.rstrip(' ')
                 #svar.stdunits = stdname.units
                 #svar.description = stdname.description
         else :
             # If CF standard name is NOK, let us use MIP variables attributes
             svar.stdname = mipvar.label.rstrip(' ')
+            if print_DR_errors: 
+                print "DR Error: issue with stdname for "+svar.label,"in",svar.mipTable," => take the MIPvar label instead."
     except:
-        if print_DR_errors : 
-            print "DR Error: issue with mipvar for "+svar.label," => no label_without_area, long_name, stdname, description and units derived."
+        if print_DR_errors: 
+            print "DR Error: issue with MIPvar for "+svar.label," => no label_without_area, long_name, stdname, description and units derived."
     #
     # Get information form Structure
     try :
@@ -487,12 +488,12 @@ def complement_svar_using_cmorvar(svar,cmvar,dq):
             svar.cm=dq.inx.uid[st.cmid].cell_methods
             svar.cell_methods=dq.inx.uid[st.cmid].cell_methods.rstrip(' ')
         except:
-            if print_DR_errors : print "DR Error: issue with cell_method for "+st.label
+            if print_DR_errors: print "DR Error: issue with cell_method for "+st.label
             #TBS# svar.cell_methods=None
         try :
             svar.cell_measures=dq.inx.uid[cmvar.stid].cell_measures.rstrip(' ')
         except:
-            print "DR Error: Issue with cell_measures for "+`cmvar`
+            if print_DR_errors: print "DR Error: Issue with cell_measures for "+`cmvar`
         # mpmoine_last_modif:complement_svar_using_cmorvar: on affecte ici svar.dimids (avant: dans create_xios_field_ref)
         # mpmoine_last_modif:complement_svar_using_cmorvar: provisoire, pour by-passer le cas d'une CMORvar qui n'a pas de structure associee ('dreqItem_remarks')
         # mpmoine_future_modif:complement_svar_using_cmorvar: on ne recherche les dimids que si on a pas affaire a une constante
@@ -503,11 +504,13 @@ def complement_svar_using_cmorvar(svar,cmvar,dq):
                     # mpmoine_future_modif:complement_svar_using_cmorvar: suppression de svar.dimids -> elargi avec svar.sdims
                     dimids=spid.dimids
                     # mpmoine_future_modif:complement_svar_using_cmorvar: on rajoute les single levels dans le traitement des dimensions (dimids->all_dimids)
-                    cids=svar.struct.cids
-                    if "" in cids: # when cids is empty, cids=('',)
-                        all_dimids=dimids 
-                    else: # when cids not empty, cids=('dim:p850',) for e.g.
-                        all_dimids=dimids+cids
+                    all_dimids=dimids
+                    # mpmoine_correction: Solution de Martin Juckes du 04/05/2017 en utilisant cids necessaire a partir de la version 01.00.08
+                    if 'cids' in svar.struct.__dict__:
+                        cids=svar.struct.cids
+                        # when cids not empty, cids=('dim:p850',) or ('dim:typec4pft', 'dim:typenatgr') for e.g.; when empty , cids=('',).
+                        if cids[0]!='':  ## this line is needed prior to version 01.00.08.
+                            all_dimids+=cids
                     # mpmoine_future_modif:complement_svar_using_cmorvar: on rajoute les single levels dans le traitement des dimensions (dimids->all_dimids)  
                     for dimid in all_dimids:
                         # mpmoine_future_modif:complement_svar_using_cmorvar: on valorise svar.sdims avec la fonction get_simpleDim_from_DimId
@@ -601,7 +604,6 @@ def cellmethod2area(method) :
     if "where cloud"        in method : return "cloud"
     if "where landuse"      in method : return "lu"
     if "where ice_shelf"    in method : return "isf"
-
 
 def analyze_ambiguous_MIPvarnames(dq):
     """

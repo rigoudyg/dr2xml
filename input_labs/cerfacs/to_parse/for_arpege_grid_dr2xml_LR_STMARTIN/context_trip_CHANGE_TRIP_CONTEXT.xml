@@ -1,0 +1,16 @@
+<!--
+Ref: 
+  - for XIOS : https://forge.ipsl.jussieu.fr/ioserver/wiki 
+  - for XIAS (implementation in Surfex and Arpege) : http://www.cnrm-game-meteo.fr/cm/spip.php?article60
+
+-->
+
+<context id="arpsfx">
+
+  <domain_definition>
+    <domain id="trip_grid" />
+  </domain_definition>    
+
+  <field_definition src="./trip_fields.xml"/> 
+
+</context>

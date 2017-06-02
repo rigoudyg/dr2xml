@@ -96,9 +96,9 @@ def field_size(svar, mcfg):
     nb_cosp_sites=129 
     nb_curtain_sites=1000 # TBD : better estimate of 'curtain' size
     # TBD : better size estimates for atmosphere/ocean zonal means, and ocean transects 
-    nb_lat=mcfg['nh1'] 
+    nb_lat=mcfg['nh1'] # TBC
     nb_lat_ocean=mcfg['nh1']
-    ocean_transect_size=mcfg['nh1'] 
+    ocean_transect_size=mcfg['nh1'] # TBC, mais comment le calculer ?
     #
     siz=0
     s=svar.spatial_shp
@@ -135,7 +135,8 @@ def field_size(svar, mcfg):
     elif ( s == "Y-na" ): #Zonal mean (on surface)
         siz=nb_lat
     elif ( s == "na-A" ): #Atmospheric profile (model levels)
-        siz=mcfg['nla']
+        # mpmoine_correction:field_size: 'na-A' s'applique a des dims (alevel)+spectband mais aussi a (alevel,site) => *nb_cosp_sites
+        siz=mcfg['nla']*nb_cosp_sites
 
     elif ( s == "XY-S" ): #Global field on soil levels
         siz=mcfg['nls']*mcfg['nha']
@@ -226,6 +227,7 @@ def split_frequency_for_variable(svar, lset, mcfg,context):
                 
 # mpmoine_next_modif: ajout de 'model_timestep' en argument de timesteps_per_freq_and_duration
 def timesteps_per_freq_and_duration(freq,nbdays,model_tstep):
+    # This function returns the number of records within nbdays
     duration=0.
     # Translate freq strings to duration in days
     if freq=="3hr" : duration=1./8
@@ -236,7 +238,7 @@ def timesteps_per_freq_and_duration(freq,nbdays,model_tstep):
     elif freq=="mon" : duration=31.
     elif freq=="yr" : duration=365.
     #mpmoine_next_modif:timesteps_per_freq_and_duration: ajout des cas frequence 'subhr' et 'dec'
-    elif freq=="subhr" : duration=1./(1440./model_tstep)
+    elif freq=="subhr" : duration=1./(86400./model_tstep)
     elif freq=="dec" : duration=10.*365
     # If freq actually translate to a duration, return
     # number of timesteps for number of days

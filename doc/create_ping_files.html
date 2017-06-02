@@ -11761,7 +11761,7 @@ div#notebook {
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Select your laboratory among: &#39;cnrm&#39;, &#39;cerfacs&#39;, &#39;ipsl&#39;</span>
-<span class="n">lab</span><span class="o">=</span><span class="s1">&#39;cnrm&#39;</span>
+<span class="n">lab</span><span class="o">=</span><span class="s1">&#39;cerfacs&#39;</span>
 </pre></div>
 
 </div>
@@ -11798,7 +11798,7 @@ div#notebook {
         <span class="s1">&#39;tierMax&#39;</span>      <span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
        <span class="c1"># Each XIOS  context does adress a number of realms</span>
         <span class="s1">&#39;realms_per_context&#39;</span> <span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;nemo&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;seaIce&#39;</span><span class="p">,</span> <span class="s1">&#39;ocean&#39;</span><span class="p">,</span> <span class="s1">&#39;ocean seaIce&#39;</span><span class="p">,</span> <span class="s1">&#39;ocnBgchem&#39;</span><span class="p">,</span> <span class="s1">&#39;seaIce ocean&#39;</span><span class="p">]</span> <span class="p">,</span>
-                              <span class="s1">&#39;arpsfx&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;atmos&#39;</span><span class="p">,</span> <span class="s1">&#39;atmos atmosChem&#39;</span><span class="p">,</span> <span class="s1">&#39;aerosol&#39;</span><span class="p">,</span> <span class="s1">&#39;atmos land&#39;</span><span class="p">,</span> <span class="s1">&#39;land&#39;</span><span class="p">,</span>
+                               <span class="s1">&#39;arpsfx&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;atmos&#39;</span><span class="p">,</span> <span class="s1">&#39;atmos atmosChem&#39;</span><span class="p">,</span> <span class="s1">&#39;aerosol&#39;</span><span class="p">,</span> <span class="s1">&#39;atmos land&#39;</span><span class="p">,</span> <span class="s1">&#39;land&#39;</span><span class="p">,</span>
                                          <span class="s1">&#39;landIce land&#39;</span><span class="p">,</span>  <span class="s1">&#39;aerosol land&#39;</span><span class="p">,</span><span class="s1">&#39;land landIce&#39;</span><span class="p">,</span>  <span class="s1">&#39;landIce&#39;</span><span class="p">,</span> <span class="p">],</span>
                               <span class="p">},</span> 
         <span class="s2">&quot;ping_variables_prefix&quot;</span> <span class="p">:</span> <span class="s2">&quot;CMIP6_&quot;</span><span class="p">,</span>
@@ -11811,7 +11811,10 @@ div#notebook {
         <span class="s2">&quot;listof_home_vars&quot;</span><span class="p">:</span><span class="bp">None</span><span class="p">,</span>
         <span class="c1">#&quot;listof_home_vars&quot;: None,</span>
         <span class="s2">&quot;path_extra_tables&quot;</span><span class="p">:</span><span class="bp">None</span><span class="p">,</span>
+        <span class="c1"># mpmoine_correction: Path for special XIOS defs files</span>
+        <span class="s2">&quot;path_special_defs&quot;</span><span class="p">:</span><span class="s2">&quot;./input/special_defs&quot;</span>
         <span class="p">}</span>
+    
 </pre></div>
 
 </div>
@@ -11826,8 +11829,9 @@ div#notebook {
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">if</span> <span class="n">lab</span><span class="o">==</span><span class="s1">&#39;cerfacs&#39;</span><span class="p">:</span>  
     <span class="c1">#settings[&quot;mips&quot;]={&#39;HighResMIP&#39;,&#39;DCPP&#39;}</span>
-    <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;listof_home_vars&quot;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;./inputs/my_listof_home_vars.txt&quot;</span>
-    <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;path_extra_tables&quot;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;./inputs/extra_Tables&quot;</span>
+    <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;listof_home_vars&quot;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;./input_labs/cerfacs/home_vars/listof_primavera_extra_vars.txt&quot;</span>
+    <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;path_extra_tables&quot;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;./input_labs/cerfacs/extra_Tables&quot;</span>
+    
 </pre></div>
 
 </div>
@@ -11867,7 +11871,10 @@ div#notebook {
         <span class="c1"># We account for a list of variables which the lab wants to produce in some cases</span>
         <span class="s2">&quot;listof_home_vars&quot;</span><span class="p">:</span><span class="bp">None</span><span class="p">,</span>
         <span class="s2">&quot;path_extra_tables&quot;</span><span class="p">:</span><span class="bp">None</span><span class="p">,</span>
+        <span class="c1"># mpmoine_correction: Path for special XIOS defs files</span>
+        <span class="s2">&quot;path_special_defs&quot;</span><span class="p">:</span><span class="bp">None</span>
         <span class="p">}</span> 
+    
 </pre></div>
 
 </div>
@@ -12012,7 +12019,7 @@ div#notebook {
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># In/Out directory</span>
-<span class="n">my_dir</span><span class="o">=</span><span class="s2">&quot;output_test/&quot;</span><span class="o">+</span><span class="n">lab</span><span class="o">+</span><span class="s2">&quot;/&quot;</span>
+<span class="n">my_dir</span><span class="o">=</span><span class="s2">&quot;output_labs/&quot;</span><span class="o">+</span><span class="n">lab</span><span class="o">+</span><span class="s2">&quot;/&quot;</span>
 </pre></div>
 
 </div>
@@ -12027,8 +12034,9 @@ div#notebook {
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Generate one ping file per context:</span>
 <span class="k">for</span> <span class="n">my_context</span> <span class="ow">in</span> <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;realms_per_context&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s2">&quot;=== CREATING PINGFILE FOR CONTEXT&quot;</span><span class="p">,</span><span class="n">my_context</span>
     <span class="n">realms</span><span class="o">=</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;realms_per_context&#39;</span><span class="p">][</span><span class="n">my_context</span><span class="p">]</span>
-    <span class="n">pingFileForRealmsList</span><span class="p">(</span><span class="n">my_context</span><span class="p">,</span><span class="n">realms</span><span class="p">,</span><span class="n">svars</span><span class="p">,</span><span class="n">comments</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">,</span><span class="n">exact</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">dummy</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> 
+    <span class="n">pingFileForRealmsList</span><span class="p">(</span><span class="n">my_context</span><span class="p">,</span><span class="n">realms</span><span class="p">,</span><span class="n">svars</span><span class="p">,</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;path_special_defs&quot;</span><span class="p">],</span><span class="n">comments</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">,</span><span class="n">exact</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">dummy</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> 
                           <span class="n">prefix</span><span class="o">=</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;ping_variables_prefix&#39;</span><span class="p">],</span>
                           <span class="n">filename</span><span class="o">=</span><span class="n">my_dir</span><span class="o">+</span><span class="s1">&#39;ping_&#39;</span><span class="o">+</span><span class="n">my_context</span><span class="o">+</span><span class="s1">&#39;.xml&#39;</span><span class="p">,</span><span class="n">dummy_with_shape</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
@@ -12060,7 +12068,8 @@ div#notebook {
 <span class="n">single_realms</span><span class="o">=</span><span class="p">[</span> <span class="p">[</span><span class="s1">&#39;ocean&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;seaIce&#39;</span><span class="p">],[</span><span class="s1">&#39;ocnBgchem&#39;</span><span class="p">],</span> <span class="p">[</span> <span class="s1">&#39;atmos&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;land&#39;</span><span class="p">],[</span><span class="s1">&#39;landIce&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;atmosChem&#39;</span><span class="p">],[</span> <span class="s1">&#39;aerosol&#39;</span> <span class="p">]]</span>
 <span class="k">for</span> <span class="n">rs</span> <span class="ow">in</span> <span class="n">single_realms</span> <span class="p">:</span>
     <span class="c1">#print rs[0]</span>
-    <span class="n">pingFileForRealmsList</span><span class="p">(</span><span class="n">rs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">rs</span><span class="p">,</span><span class="n">svars</span><span class="p">,</span><span class="n">prefix</span><span class="o">=</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;ping_variables_prefix&#39;</span><span class="p">],</span>
+    <span class="k">print</span> <span class="s2">&quot;=== CREATING PINGFILE FOR SINGLE REALM&quot;</span><span class="p">,</span><span class="n">rs</span>
+    <span class="n">pingFileForRealmsList</span><span class="p">(</span><span class="n">rs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">rs</span><span class="p">,</span><span class="n">svars</span><span class="p">,</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;path_special_defs&quot;</span><span class="p">],</span><span class="n">prefix</span><span class="o">=</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;ping_variables_prefix&#39;</span><span class="p">],</span>
                          <span class="n">comments</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">,</span><span class="n">exact</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">dummy</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">dummy_with_shape</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
                          <span class="n">filename</span><span class="o">=</span><span class="n">my_dir</span><span class="o">+</span><span class="s1">&#39;ping_</span><span class="si">%s</span><span class="s1">.xml&#39;</span><span class="o">%</span><span class="k">rs</span>[0])
 </pre></div>

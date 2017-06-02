@@ -44,7 +44,8 @@ import dreq
 ####################################
 # End of pre-requisites
 ####################################
-version="mpmoine-dev3 = mpmoine-dev2 merged with senesi-dev-v0.12"
+version="mpmoine-dev3 = mpmoine-dev2 merged with senesi-dev-v0.12 + updates untill 05/05/2017"
+print "* dr2xml version:", version
 
 from datetime import datetime
 import re
@@ -71,10 +72,10 @@ from table2freq import table2freq, table2splitfreq, cmipFreq2xiosFreq
 
 from dr2cmip6_expname import dr2cmip6_expname
 
-print_DR_errors=False
+print_DR_errors=True
 
 dq = dreq.loadDreq()
-print dq.version
+print "* CMIP6 Data Request version: ", dq.version
 
 context_index=None
 
@@ -422,27 +423,23 @@ def wr(out,key,dic_or_val=None,num_type="string",default=None) :
         out.write('  </variable>\n')
 
 
-# mpmoine_cmor_update:write_xios_file_def: CMOR3.0.3 impose des formats de date dans les noms de fichiers dependants de la frequence => nouvelle fonction freq2datefmt
+# mpmoine_WIP_update: WIP doc v6.2.3 - Apr. 2017: <time_range> format is frequency-dependant => new function 'freq2datefmt'
 def freq2datefmt(freq):
+
     datefmt=False
-    if freq=="decadal":
+    if freq in ["yr","decadal"]:
         datefmt="%y"
-    elif freq=="yr":
-        datefmt="%y"
-    elif freq=="mon" or freq=="monClim":
+    elif freq in ["mon","monClim"]:
         datefmt="%y%mo"
     elif freq=="day":
         datefmt="%y%mo%d"
-    elif freq=="6hr":
-        datefmt="%y%mo%d%h"
-    elif freq=="3hr":
-        datefmt="%y%mo%d%h"
-    elif freq=="1hr" or freq=="1hrClimMon":
-        datefmt="%y%mo%d%h"
+    #mpmoine_TBD: supprimer "hr" selon reponse de D. Nadeau a l'issue https://github.com/PCMDI/cmip6-cmor-tables/issues/59
+    elif freq in ["6hr","3hr","3hrClim","1hr","hr","1hrClimMon"]: 
+        datefmt="%y%mo%d%h%mi"
     elif freq=="subhr":
         datefmt="%y%mo%d%h%mi%s"
     elif freq=="fx":
-        datefmt="%y" #TBD: verifier le format de date attendu par CMOR pour les fichiers de champ fixe
+        pass ## WIP doc v6.2.3 - Apr. 2017: if frequency="fx", [_<time_range>] is ommitted
     return datefmt
 
 def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
@@ -506,7 +503,7 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
                 # mpmoine_skipped_modif: write_xios_file_def: on classe les skipped_vars par table => skipped_vars_per_table (pour avoir plus d'info au print) 
                 if skipped_vars_per_table.has_key(cmv.mipTable) and skipped_vars_per_table[cmv.mipTable]:
                     list_of_skipped=skipped_vars_per_table[cmv.mipTable]
-                    list_of_skipped.append(cmv.label)
+                    list_of_skipped.append(cmv.label+"("+str(cmv.Priority)+")")
                 else:
                     list_of_skipped=[cmv.label]
                 skipped_vars_per_table.update({cmv.mipTable:list_of_skipped})
@@ -515,13 +512,15 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     #--------------------------------------------------------------------
     # Set global CMOR file attributes
     #--------------------------------------------------------------------
+    #
+    project=sset.get('project',"CMIP6")
     source_id=lset['source_id']
     experiment_id=sset['experiment_id']
-    #
     institution_id=lset['institution_id']
     #
     contact=sset.get('contact',lset.get('contact',None))
     conventions="CF-1.7 CMIP-6.0"
+    #
     # Variant matters
     realization_index=sset.get('realization_index',1) 
     initialization_index=sset.get('initialization_index',1)
@@ -529,9 +528,13 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     forcing_index=sset.get('forcing_index',1)
     variant_label="r%di%dp%df%d"%(realization_index,initialization_index,\
                                   physics_index,forcing_index)
+    # mpmoine_WIP_update:write_xios_file_def: WIP doc v6.2.3 - Apr. 2017: cf recommendation in note 16 for 'variant_info'
+    variant_info_warning=". Information provided by this attribute may in some cases be flawed. "+\
+                         "Users can find more comprehensive and up-to-date documentation via the further_info_url global attribute."
+    #
     # WIP Draft 14 july 2016
     activity_id=sset.get('activity_id','CMIP')
-    # mpmoine_last_modif:write_xios_file_def: mip_era n'est plus toujours 'CMIP6'
+    # mpmoine_last_modif:write_xios_file_def: mip_era n'est plus toujours 'CMIP6' (par ex. 'PRIMAVERA')
     mip_era=cmv.mip_era
     #
     # WIP doc v 6.2.0 - dec 2016 
@@ -541,10 +544,6 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     # mpmoine_cmor_update:write_xios_file_def: CMOR3.2.3 impose 'none'(et non 'None' !) comme default value de sub_experiment_id
     sub_experiment_id=sset.get('sub_experiment_id','none')
     if sub_experiment_id != 'none': member_id = sub_experiment_id+"-"+member_id
-    #
-    further_info_url="http://furtherinfo.es-doc.org/%s.%s.%s.%s.%s.%s"%(
-        mip_era,institution_id,source_id,experiment_id,
-        sub_experiment_id,variant_label)
     #
     #--------------------------------------------------------------------
     # Set grid info
@@ -563,14 +562,14 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     if table in [ 'AERMonZ',' EmonZ', 'EdayZ' ] : grid_label+="z"
     if "Ant" in table : grid_label+="a"
     if "Gre" in table : grid_label+="g"
-    # TBD : change grid_label depending on shape (sites, transects)
+    # mpmoine_TBD : change grid_label depending on shape (sites, transects)
     #
     #--------------------------------------------------------------------
     # Set NetCDF output file name according to the DRS
     #--------------------------------------------------------------------
     #
     # mpmoine_expname:write_xios_file_def: es noms d'expe dans la DR ne sont pas les meme que dans le CV CMIP6
-    with open(cvspath+"CMIP6_experiment_id.json","r") as json_fp :
+    with open(cvspath+project+"_experiment_id.json","r") as json_fp :
         CMIP6_experiments=json.loads(json_fp.read())['experiment_id']
         if CMIP6_experiments.has_key(sset['experiment_id']):
             expname=sset['experiment_id']
@@ -583,14 +582,29 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
         exp_entry=CMIP6_experiments[expname]
         experiment=exp_entry['experiment']
         description=exp_entry['description']
-    #
-    date_range="%start_date%_%end_date%" # XIOS syntax
-    # mpmoine_cmor_update:write_xios_file_def: CMOR3.0.3 impose des formats de date dans les noms de fichiers dependants de la frequence
+    # 
+    # mpmoine_WIP_update:write_xios_file_def: WIP doc v6.2.3 - Apr. 2017: <time_range>="N1-N2" (instead of "N1_N2")
+    date_range="%start_date%-%end_date%" # XIOS syntax
+    # mpmoine_WIP_update:write_xios_file_def: WIP doc v6.2.3 - Apr. 2017: <time_range> format is frequency dependant
     date_format=freq2datefmt(cmv.frequency)
     #
-    filename="%s%s_%s_%s_%s_%s_%s_%s"%\
-               (prefix,cmv.label,table,source_id,expname,
-                member_id,grid_label,date_range)
+    # mpmoine_WIP_update:write_xios_file_def: WIP doc v6.2.3 - Apr. 2017: [_<time_range>] omitted if frequency is "fx"; a suffix "-clim" is added if climatology
+    if cmv.frequency=="fx":
+        filename="%s%s_%s_%s_%s_%s_%s"%\
+                   (prefix,cmv.label,table,source_id,expname,
+                    member_id,grid_label)
+    elif "Clim" in cmv.frequency:
+        filename="%s%s_%s_%s_%s_%s_%s_%s-clim"%\
+                   (prefix,cmv.label,table,source_id,expname,
+                    member_id,grid_label,date_range)
+    else:
+        filename="%s%s_%s_%s_%s_%s_%s_%s"%\
+                   (prefix,cmv.label,table,source_id,expname,
+                    member_id,grid_label,date_range)
+    #
+    further_info_url="http://furtherinfo.es-doc.org/%s.%s.%s.%s.%s.%s"%(
+        mip_era,institution_id,source_id,expname,
+        sub_experiment_id,variant_label)
     #
     #--------------------------------------------------------------------
     # Compute XIOS split frequency
@@ -604,24 +618,29 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     # Write XIOS file node:
     # including global CMOR file attributes
     #--------------------------------------------------------------------
-    # mpmoine_amelioration:write_xios_file_def: ajout de 'ts_prefix' et de time_series="only"
+    # mpmoine_amelioration:write_xios_file_def: ajout de 'ts_prefix' et de time_series="only" => finalement non, et ts_prefix dans le 'name' car on gere nous-meme les time-series
     ts_prefix=lset['output_path']
     if ts_prefix:
-        out.write(' <file ts_prefix="%s" name="%s" timeseries="only" '%(ts_prefix,filename))
+        #TBS#out.write(' <file ts_prefix="%s" name="%s" timeseries="only" '%(ts_prefix,filename))
+        out.write(' <file name="%s" '%(ts_prefix+filename))
     else:
-        out.write(' <file name="%s" timeseries="only" '%filename)
+        #TBS#out.write(' <file name="%s" timeseries="only" '%filename)
+        out.write(' <file name="%s" '%filename)
     out.write(' output_freq="%s" '%cmipFreq2xiosFreq[cmv.frequency])
     out.write(' append="true" split_freq="%s" '%split_freq)
     # mpmoine_cmor_update:write_xios_file_def: ajout de 'split_freq_format' pour se coformer a CMOR3.0.3 
     out.write(' split_freq_format="%s" '%date_format)
     #out.write('timeseries="exclusive" >\n')
     out.write(' time_units="days" time_counter_name="time"')
+    # mpmoine_cmor_update:write_xios_file_def: ajout de time_counter="exclusive"
+    out.write(' time_counter="exclusive"')
     out.write(' time_stamp_name="creation_date" ')
     out.write(' time_stamp_format="%Y-%m-%dT%H:%M:%SZ"')
     out.write(' uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%"')
     out.write(' >\n')
     #
-    wr(out,'project_id', sset.get('project',"CMIP6")+"/"+activity_id)
+    # mpmoine_WIP_update:write_xios_file_def: WIP doc v6.2.3 - Apr. 2017: suppression de 'project_id' pas requis pour CMIP6 (remplace par 'activity_id' et 'mip_era')
+    #TBS#wr(out,'project_id', sset.get('project',"CMIP6")+"/"+activity_id)
     wr(out,'activity_id',activity_id)
     #
     if contact and contact is not "" : wr(out,'contact',contact) 
@@ -658,7 +677,7 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     if "institution" in lset :
         inst=lset['institution']
     else:
-        with open(cvspath+"CMIP6_institution_id.json","r") as json_fp :
+        with open(cvspath+project+"_institution_id.json","r") as json_fp :
             try:
                 inst=json.loads(json_fp.read())['institution_id'][institution_id]
             except :
@@ -666,33 +685,33 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
                         "in CMIP6_CV at %s"%(institution,cvspath)))
     wr(out,"institution",inst)
     #
-    with open(cvspath+"CMIP6_license.json","r") as json_fp :
+    with open(cvspath+project+"_license.json","r") as json_fp :
         license=json.loads(json_fp.read())['license'][0]
-    license=license.replace("<Your Centre Name>",inst)
-    license=license.replace("<some URL maintained by modeling group>",
-                            lset["info_url"])
+    # mpmoine_cmor_update: 'licence' est trop long... passe pas le CMIP6-Checker => 'institution_id' au lieu de inst='institution'
+    license=license.replace("<Your Centre Name>",institution_id)
+    license=license.replace("[NonCommercial-]","NonCommercial-")
+    license=license.replace("[ and at <some URL maintained by modeling group>]",
+                            " and at "+lset["info_url"])
     wr(out,"license",license)
     wr(out,'mip_era',mip_era)
-    parent_experiment_id=sset.get('parent_experiment_id',None)
-    if parent_experiment_id and parent_experiment_id != 'no_parent'\
-        and parent_experiment_id != 'no parent' :
-        parent_activity_id=sset.get('parent_activity_id','CMIP')
-        wr(out,'parent_activity_id',parent_activity_id)
-        wr(out,"parent_experiment_id",sset); 
-        parent_mip_era=sset.get('parent_mip_era',"CMIP6") ; 
-        if parent_mip_era=="" : parent_mip_era="CMIP6"
-        wr(out,'parent_mip_era',parent_mip_era) 
-        parent_source_id=sset.get('parent_source_id',source_id) ; 
-        wr(out,'parent_source_id',parent_source_id)
+    #
+    # mpmoine_cmor_update:write_xios_file_def: changement des defaults values pour les parent_<XXX>: default en dur remplace par la valeur pour <XXX> 
+    # mpmoine_cmor_update:write_xios_file_def: et utilisation de l'attribut optionnel 'default' de la fonction 'wr' plutot que sset.get avec une default
+    parent_experiment_id=sset.get('parent_experiment_id',False)
+    if parent_experiment_id and parent_experiment_id != 'no parent':
+        wr(out,'parent_experiment_id',parent_experiment_id)
+        wr(out,'parent_mip_era',sset,default=mip_era)
+        wr(out,'parent_activity_id',sset,default=activity_id)
+        wr(out,'parent_source_id',sset,default=source_id)
         # TBX : syntaxe XIOS pour designer le time units de la simu courante
-        parent_time_ref_year=sset.get('parent_time_ref_year',"1850") 
+        parent_time_ref_year=sset.get('parent_time_ref_year',"1850")
         parent_time_units="days since %s-01-01 00:00:00"%parent_time_ref_year
-        wr(out,"parent_time_units",parent_time_units)
-        parent_variant_label=sset.get('parent_variant_label',variant_label) 
-        wr(out,'parent_variant_label',parent_variant_label)
-        wr(out,'branch_method',sset,default='standard')
+        wr(out,'parent_time_units',sset,default=parent_time_units)
+        wr(out,'parent_variant_label',sset,default=variant_label)
+        wr(out,'branch_method',sset,default='standard') 
         wr(out,'branch_time_in_child',sset)
         wr(out,'branch_time_in_parent',sset) 
+    #
     # mpmoine_cmor_update:write_xios_file_def: ecriture de physics_index en integer requis par la version CMOR3.2.3 
     wr(out,"physics_index",physics_index,num_type="int") 
     # mpmoine_cmor_update:write_xios_file_def: changement des valeurs de 'product' requis par la version CMOR3.2.3
@@ -700,10 +719,10 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     # mpmoine_cmor_update:write_xios_file_def: ecriture de realization_index en integer requis par la version CMOR3.2.3
     wr(out,"realization_index",realization_index,num_type="int") 
     wr(out,'realm',cmv.modeling_realm)
-    wr(out,'references',lset) 
+    wr(out,'references',lset,default=False) 
     #
     try:
-        with open(cvspath+"CMIP6_source_id.json","r") as json_fp :
+        with open(cvspath+project+"_source_id.json","r") as json_fp :
             sources=json.loads(json_fp.read())['source_id']
             source=make_source_string(sources,source_id)
     except :
@@ -731,11 +750,18 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     # mpmoine_cmor_update:write_xios_file_def: CMOR3.2.2 impose 'None' (et non 'none') pour sub_experiment
     # mpmoine_cmor_update:write_xios_file_def: CMOR3.2.3 impose 'none' (et non 'None' !)pour sub_experiment
     wr(out,'sub_experiment',sset,default='none') 
+    #
     wr(out,"table_id",table)
+    #
     wr(out,"title","%s model output prepared for %s / %s %s"%(\
-        source_id,sset.get('project',"CMIP6"),activity_id,experiment_id))
+        source_id,project,activity_id,experiment_id))
+    #
     wr(out,"variable_id",cmv.label)
-    wr(out,"variant_info",sset,default="none")
+    #
+    # mpmoine_WIP_update:write_xios_file_def: WIP doc v6.2.3 - Apr. 2017: cf recommendation in note 16 for 'variant_info'
+    variant_info=sset.get('variant_info',"none")
+    if variant_info!="none": variant_info+=variant_info_warning
+    wr(out,"variant_info",variant_info)
     wr(out,"variant_label",variant_label)
     #
     #--------------------------------------------------------------------
@@ -744,13 +770,12 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     # Write XIOS field_group node (containing field elements, stored in end_field_defs)
     # including CF field attributes 
     #--------------------------------------------------------------------
-    #mpmoine_zoom_modif:write_xios_file_def: appel a create_xios_aux_elmts_defs (anc. create_xios_field_ref) descendu ici
+    # mpmoine_zoom_modif:write_xios_file_def: appel a create_xios_aux_elmts_defs (anc. create_xios_field_ref) descendu ici
     end_field_defs=dict()
     create_xios_aux_elmts_defs(cmv,alias,table,lset,sset,end_field_defs,
                                 field_defs,axis_defs,grid_defs,domain_defs,dummies,context,remap_domain,pingvars)
     if len(end_field_defs.keys())==0 :
-        # TBD : restore error_message
-        #raise dr2xml_error("No end field ref for %s in %s"%(cmv.label,table))
+        raise dr2xml_error("No end field ref for %s in %s"%(cmv.label,table))
         return
     #
     # Create a field group for each shape
@@ -816,8 +841,6 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
     # TBD Should ensure that various additionnal dims are duly documented by model or pingfile (e.g. tau)
     # mpmoine_zoom_modif:create_xios_aux_elmts_defs: ajout du cas 'XY-na' pour capturer les dimensions singleton
     if ssh[0:4] in ['XY-H','XY-P'] or ssh[0:3] == 'Y-P' or ssh[0:5]=='XY-na':
-        # TBD : for now, do not interpolate vertically
-        # mpmoine_temporaire:je reactive l'ecriture des axis_def: return
         # mpmoine_last_modif:create_xios_aux_elmts_defs: on recupere maintenant 'dimids' depuis svar
         # mpmoine_future_modif:create_xios_aux_elmts_defs: on utilise maintenant sv.sdims pour analyser les dimension
         # mpmoine_question: je ne comprend pas l'usage de nextvar... A priori on ne peut pas avoir plus d'une dimension verticale ?
@@ -825,12 +848,14 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
             if isVertDim(sd):
                 # mpmoine_zoom_modif:create_xios_aux_elmts_defs: on supprime l'usage de netxvar
                 # mpmoine_zoom_modif:create_xios_aux_elmts_defs: passage par 2 niveaux de field id auxiliaires rebond (alias et alias2)
-                if sd.is_zoom_of: # mpmoine_note: cas variable definie grace a 2 axis_def (zoom+union)
+                if sd.is_zoom_of: 
+                    # mpmoine_note: cas d'une variable definie grace a 2 axis (zoom+union)
                     alias1=alias+"_"+sd.label   # e.g. 'CMIP6_hus7h_plev7h'
                     alias2=prefix+lwps+"_union" # e.g. 'CMIP6_hus_union'
                     cible=prefix+lwps           # e.g. 'CMIP6_hus'
                     axis_key=sd.zoom_label      # e.g. 'zoom_plev7h_hus'
-                else: # mpmoine_note: cas variable definie grace a seul axis_def (non zoom)
+                else: 
+                    # mpmoine_note: cas d'une variable definie grace a seul axis (non zoom)
                     alias1=alias+"_"+sd.label   # e.g. 'CMIP6_hus7h_plev7h'
                     alias2=False 
                     cible=prefix+lwps           # e.g. 'CMIP6_hus'
@@ -869,8 +894,9 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
                         # mpmoine_merge_dev2_v0.12:create_xios_aux_elmts_defs: remplacement axis_ref=sd.label -> grid_ref=grid_id
                         # mpmoine_correction:create_xios_aux_elmts_defs: alias1  au lieu de alias pour l'ecriture de field_defs
                         field_defs[alias1]='<field id="%-25s field_ref="%-25s grid_ref="%-10s/>'\
-                        %(alias1+'"',cible+'"',grid_id+'"')                    
-                #TBD what to do for singleton dimension ?
+                        %(alias1+'"',cible+'"',grid_id+'"') 
+                # mpmoine_note: voir en desactivant les zooms si c'est ok                    
+                #TBD what to do for singleton dimension ? 
     #
     #--------------------------------------------------------------------
     # Retrieve XIOS temporal operation to perform
@@ -892,7 +918,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
     # Compute domain name, define it if needed
     grid_ref=None
     if ssh[0:2] == 'Y-' : #zonal mean and atm zonal mean on pressure levels
-        # TBD should remap before zona mean
+        # TBD should remap before zonal mean # STOPICI_REVUE_TBD_09-05-2017
         grid_ref="zonal_mean"
         grid_defs[grid_ref]='<grid id="%s"/>'%grid_ref
     elif ssh[0:2] == 'S-' : #COSP sites; cas S-na, S-A, S-AH
@@ -919,23 +945,25 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
     #--------------------------------------------------------------------
     # mpmoine_correction:create_xios_aux_elmts_defs: alias1  au lieu de alias pour l'ecriture de end_field_defs
     #TBS# if any (sd.is_zoom_of for sd in sv.sdims.values()):
+    # mpmoine_cmor_update:create_xios_aux_elmts_defs: les tables CMOR demandent les champs en 'float' ou 'real' => ajout de prec="4"
+    # TBI: idealement if faudrait recuperer le type attendu de la DR ou des tables CMOR
     if alias1:
-        rep='  <field field_ref="%s" name="%s" ts_enabled="true" '% \
+        rep='  <field field_ref="%s" name="%s" ts_enabled="true"'% \
             (alias1,sv.label)
     else:
-        rep='  <field field_ref="%s" name="%s" ts_enabled="true" '% \
+        rep='  <field field_ref="%s" name="%s" ts_enabled="true"'% \
             (alias,sv.label)
-    rep+=' operation="%s" detect_missing_value="%s" default_value="1.e+20"'% \
+    rep+=' operation="%s" detect_missing_value="%s" default_value="1.e+20" prec="4"'% \
         ( operation,detect_missing)
     rep+=' cell_methods="%s" cell_methods_mode="overwrite"'% sv.cell_methods
     rep+='>\n'
     #
     comment=None
     # Process experiment-specific comment for the variable
-    if sv.label in sset['comments'] :
+    if sv.label in sset['comments'].keys() :
         comment=sset['comments'][sv.label] 
     else: # Process lab-specific comment for the variable
-        if sv.label in lset['comments'] : 
+        if sv.label in lset['comments'].keys() : 
             comment=sset['comments'][sv.label] 
     if comment : rep+=wrv('comment',comment) #TBI 
     #
@@ -1021,6 +1049,7 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
     #
     #--------------------------------------------------------------------
     # Select on context realms, grouping by table
+    # Excluding 'excluded_vars' and 'excluded_spshapes' lists
     #--------------------------------------------------------------------
     svars_per_table=dict()
     context_realms=lset['realms_per_context'][context]
@@ -1040,7 +1069,7 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
                         print "Warning: ",svar.label," in table ",svar.mipTable," has been excluded for one or several of the following reason(s):"
                         if svar.label in lset['excluded_vars']: print "   * is in excluded list"
                         if not svar.spatial_shp: print "   * has no spatial shape"
-                        if svar.spatial_shp in lset["excluded_spshapes"]: print "   * has an exluded spatial shape"
+                        if svar.spatial_shp in lset["excluded_spshapes"]: print "   * has an excluded spatial shape:", svar.spatial_shp
     #      
     #--------------------------------------------------------------------
     # Add svars belonging to the orphan list
@@ -1056,31 +1085,18 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
                     svars_per_table[svar.mipTable]=[]
                 svars_per_table[svar.mipTable].append(svar)
     #    
-    #--------------------------------------------------------------------
-    # Print Summary: list of variables per table
-    #--------------------------------------------------------------------
-    if printout :
-        print "\nTables concerned by context %s : "%context,\
-            svars_per_table.keys()
-    if printout :
-        print "\nVariables per table :"
-    for table in svars_per_table :    
-        if printout :
-            print "%15s %02d ---->"%(table,len(svars_per_table[table])),
-        for svar in svars_per_table[table] : 
-            if printout : print svar.label,
-        if printout : print
     #
     # mpmoine_zoom_modif:generate_file_defs: build axis defs of plevs unions
     #--------------------------------------------------------------------
     # Build all plev union axis and grids
     #--------------------------------------------------------------------
-    svars_full_list=[]
-    for svl in svars_per_table.values(): svars_full_list.extend(svl)
-    # mpmoine_merge_dev2_v0.12:generate_file_defs: on recupere maintenant non seulement les union_axis_defs mais aussi les union_grid_defs
-    (union_axis_defs,union_grid_defs)=create_xios_axis_and_grids_for_plevs_unions(svars_full_list,
-                                    multi_plev_suffixes.union(single_plev_suffixes),
-                                    lset["ping_variables_prefix"])
+    if lset['use_union_zoom']:
+        svars_full_list=[]
+        for svl in svars_per_table.values(): svars_full_list.extend(svl)
+        # mpmoine_merge_dev2_v0.12:generate_file_defs: on recupere maintenant non seulement les union_axis_defs mais aussi les union_grid_defs
+        (union_axis_defs,union_grid_defs)=create_xios_axis_and_grids_for_plevs_unions(svars_full_list,
+                                        multi_plev_suffixes.union(single_plev_suffixes),
+                                        lset["ping_variables_prefix"])
     #
     #--------------------------------------------------------------------
     # Read ping_file defined variables
@@ -1089,7 +1105,7 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
     if pingfile :
         ping_refs=read_xml_elmt_or_attrib(pingfile, tag='field', attrib='field_ref')
         if ping_refs is None :
-            print "Issue accessing pingfile "+pingfile
+            print "Error: issue accessing pingfile "+pingfile
             return
         if dummies=="include" :
             pingvars=ping_refs.keys()
@@ -1152,7 +1168,9 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
         out.write('\n<axis_definition> \n')
         for obj in axis_defs.keys(): out.write("\t"+axis_defs[obj]+"\n")
         # mpmoine_zoom_modif:generate_file_defs: on ecrit maintenant les axis defs pour les unions
-        for obj in union_axis_defs.keys(): out.write("\t"+union_axis_defs[obj]+"\n")
+        # mpmoine_zoom_amelioration:generate_file_defs: usage de 'use_union_zoom'
+        if lset['use_union_zoom']:
+            for obj in union_axis_defs.keys(): out.write("\t"+union_axis_defs[obj]+"\n")
         out.write('</axis_definition> \n')
         out.write('\n<domain_definition> \n')
         for obj in domain_defs.keys(): out.write("\t"+domain_defs[obj]+"\n")
@@ -1161,18 +1179,74 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
         out.write('\n<grid_definition> \n')
         for obj in grid_defs.keys(): out.write("\t"+grid_defs[obj]+"\n")
         # mpmoine_merge_dev2_v0.12:generate_file_defs: on ecrit maintenant les grid defs pour les unions
-        for obj in union_grid_defs.keys(): out.write("\t"+union_grid_defs[obj]+"\n")
+        # mpmoine_zoom_amelioration:generate_file_defs: usage de 'use_union_zoom'
+        if lset['use_union_zoom']:
+            for obj in union_grid_defs.keys(): out.write("\t"+union_grid_defs[obj]+"\n")
         out.write('</grid_definition> \n')
         out.write('</context> \n')
     if printout :
         print "\nfile_def written as %s"%filename
-    # mpmoine_skipped_modif:generate_file_defs: plus d'info sur les skipped_vars
-    if skipped_vars_per_table: 
-        print "\nSkipped variables (i.e. whose alias is not present in the pingfile):"
+    
+    # mpmoine_petitplus:generate_file_defs: pour sortir des stats sur ce que l'on sort reelement
+    if printout: print_SomeStats(context,svars_per_table,skipped_vars_per_table)
+
+# mpmoine_petitplus: nouvelle fonction print_SomeStats (plus d'info sur les skipped_vars, nbre de vars / (shape,freq) )
+def print_SomeStats(context,svars_per_table,skipped_vars_per_table):
+
+	#--------------------------------------------------------------------
+    # Print Summary: list of  considered variables per table 
+    # (i.e. not excuded_vars and not excluded_shapes)
+    #--------------------------------------------------------------------
+    print "\nTables concerned by context %s : "%context, svars_per_table.keys()
+    print "\nVariables per table :"
+    for table in svars_per_table.keys():
+    	print ">>> DBG >>> TABLE"
+        print "%15s %02d ---->"%(table,len(svars_per_table[table])),
+        for svar in svars_per_table[table]: 
+        	print svar.label+"("+str(svar.Priority)+")",
+
+    #--------------------------------------------------------------------
+    # Print Summary: list of skipped variables per table
+    # (i.e. not in the ping_file)
+    #--------------------------------------------------------------------
+	if skipped_vars_per_table:
+		print "\nSkipped variables (i.e. whose alias is not present in the pingfile):"
         for table,skipvars in skipped_vars_per_table.items():
             print "\n%15s %02d/%02d ---->"%(table,len(skipvars),len(svars_per_table[table])),
             #TBS# print "\n\t",table ," ",len(skipvars),"--->",
-            for skv in skipvars: print skv,
+            for skv in skipvars: 
+            	print skv, #already contains priority info
+
+    #--------------------------------------------------------------------
+    # Print Summary: list of variables really written in the file_def
+    # (i.e. not excluded and not skipped)
+    #--------------------------------------------------------------------
+	stats_out={}
+    for table in svars_per_table.keys():
+    	for sv in svars_per_table[table]:
+    		dic_freq={}
+    		dic_shp={}
+    		if ( table not in skipped_vars_per_table.keys() ) or \
+    		   ( table in skipped_vars_per_table.keys() and sv not in skipped_vars_per_table[table] ) :
+    			freq=sv.frequency
+    			shp=sv.spatial_shp
+    			prio=sv.Priority
+    			var=sv.label
+    			if stats_out.has_key(freq):
+    				dic_freq=stats_out[freq]
+    				if dic_freq.has_key(shp):
+    					dic_shp=dic_freq[shp]
+    			dic_shp.update({var:table+"-P"+str(prio)})
+    			dic_freq.update({shp:dic_shp})
+    			stats_out.update({freq:dic_freq})
+
+    print "\n\nSome Statistics..."
+    for k1,v1 in stats_out.items():
+    	for k2,v2 in v1.items():
+    		nb=len(v2.values())
+    		print "\n\n* %d variables output at %s frequency with shape %s ---> "%(nb,k1,k2)
+    		for k3,v3 in v2.items(): print k3,"(",v3,"),",
+
 
 # mpmoine_future_modif:create_axis_def: suppression de l'argument 'field_defs' qui n'est pas utilise
 # mpmoine_future_modif:create_axis_def: suppression de l'argument 'field_defs' qui n'est pas utilise
@@ -1588,7 +1662,7 @@ def analyze_cell_time_method(cm,label,table):
     return (operation, detect_missing)
 
 #
-#mpmoine_amelioration: ajout argument 'path_special' a la fonction pingFileForRealmsList
+# mpmoine_amelioration: ajout argument 'path_special' a la fonction pingFileForRealmsList
 def pingFileForRealmsList(context,lrealms,svars,path_special,dummy="field_atm",
     dummy_with_shape=False, exact=False,
     comments=False,prefix="CV_",filename=None):
@@ -1661,7 +1735,7 @@ def pingFileForRealmsList(context,lrealms,svars,path_special,dummy="field_atm",
     # mpmoine_future_modif:pingFileForRealmsList: typo 'filneme' -> 'filename'
     if filename[-4:] != ".xml" : filename +=".xml"
     #
-    #mpmoine_amelioration:pingFileForRealmsList:: ajout argument 'path_special' a la fonction read_special_fields_defs + protection si path_special existe
+    # mpmoine_amelioration:pingFileForRealmsList:: ajout argument 'path_special' a la fonction read_special_fields_defs + protection si path_special existe
     if path_special: 
         specials=read_special_fields_defs(lrealms,path_special)
     else: 
@@ -1685,7 +1759,7 @@ def pingFileForRealmsList(context,lrealms,svars,path_special,dummy="field_atm",
                 label=v.label_non_ambiguous
             else:
                 label=v.label_without_psuffix
-            #mpmoine_amelioration:pingFileForRealmsList: protection si specials existe
+            # mpmoine_amelioration:pingFileForRealmsList: protection si specials existe
             if specials and label in specials :
                 line=ET.tostring(specials[label]).replace("DX_",prefix)
                 line=line.replace("\n","").replace("\t","")
@@ -1722,11 +1796,11 @@ def pingFileForRealmsList(context,lrealms,svars,path_special,dummy="field_atm",
         if path_special:
             for obj in [ "axis", "domain", "grid" ] :
                 #print "for obj "+obj
-                #mpmoine_amelioration:pingFileForRealmsList: ajout argument 'path_special' a la fonction copy_obj_from_DX_file
+                # mpmoine_amelioration:pingFileForRealmsList: ajout argument 'path_special' a la fonction copy_obj_from_DX_file
                 copy_obj_from_DX_file(fp,obj,prefix,lrealms,path_special)
         fp.write('</context>\n')
 
-#mpmoine_amelioration: ajout argument 'path_special' a la fonction copy_obj_from_DX_file
+# mpmoine_amelioration: ajout argument 'path_special' a la fonction copy_obj_from_DX_file
 def copy_obj_from_DX_file(fp,obj,prefix,lrealms,path_special) :
     # Insert content of DX_<obj>_defs files (changing prefix)
     #print "copying %s defs :"%obj,
@@ -1736,7 +1810,7 @@ def copy_obj_from_DX_file(fp,obj,prefix,lrealms,path_special) :
             if subrealm in subrealms_seen : continue
             subrealms_seen.append(subrealm)
             #print "\tand realm %s"%subrealm, 
-            #mpmoine_amelioration:opy_obj_from_DX_file: ajout argument 'path_special' a la fonction DX_defs_filename
+            # mpmoine_amelioration:opy_obj_from_DX_file: ajout argument 'path_special' a la fonction DX_defs_filename
             defs=DX_defs_filename(obj,subrealm,path_special)
             if os.path.exists(defs) :
                 with open(defs,"r") as fields :
@@ -1751,7 +1825,7 @@ def copy_obj_from_DX_file(fp,obj,prefix,lrealms,path_special) :
                 pass
                 print " no file :%s "%defs
 
-#mpmoine_amelioration: ajout argument 'path_special' a la fonction DX_defs_filename
+# mpmoine_amelioration: ajout argument 'path_special' a la fonction DX_defs_filename
 def DX_defs_filename(obj,realm,path_special):
     #TBS# return prog_path+"/inputs/DX_%s_defs_%s.xml"%(obj,realm)
     return path_special+"/DX_%s_defs_%s.xml"%(obj,realm)
@@ -1839,7 +1913,7 @@ def highest_rank(svar):
                     sp=dq.inx.uid[st.spid]
                     shape=sp.label
                 except :
-                    if print_DR_errors :
+                    if print_DR_errors:
                         # mpmoine_last_modif:highest_rank:  pour corriger l'erreur "TypeError: cannot concatenate 'str' and 'dreqItem_CoreAttributes' objects"
                         print "DR Error: issue with stid or spid for "+\
                         st.label+" "+v.label+string(cvar.mipTable)
@@ -1894,15 +1968,14 @@ def make_source_string(sources,source_id):
     <modified source_id> (<year>): atmosphere: <model_name> (<technical_name>, <resolution_and_levels>); ocean: <model_name> (<technical_name>, <resolution_and_levels>); sea_ice: <model_name> (<technical_name>); land: <model_name> (<technical_name>); aerosol: <model_name> (<technical_name>); atmospheric_chemistry <model_name> (<technical_name>); ocean_biogeochemistry <model_name> (<technical_name>); land_ice <model_name> (<technical_name>);
 
     """
+    # mpmoine_correction:make_source_string: pour lire correctement le fichier 'CMIP6_source_id.json'
     source=sources[source_id] 
-    rep=source_id+"("+source['year']+")"+\
-         ": atmosphere: "+source["atmosphere"]+\
-         "; ocean: " + source["ocean"]+\
-         "; sea_ice: "+source["sea_ice"]+\
-         "; land: "+source["land"]+\
-         "; aerosol: "+source["aerosol"]+\
-         "; atmospheric_chemistry: "+source["atmospheric_chemistry"]+\
-         "; ocean_biogeochemistry: "+source["ocean_biogeochemistry"]+";"
+    components=source['model_component']
+    rep=source_id+" ("+source['release_year']+"): "
+    for realm in ["aerosol","atmos","atmosChem","land","ocean","ocnBgchem","seaIce"]:
+        component=components[realm]
+        description=component['description']
+        if description!="none": rep=rep+"\n"+realm+": "+description
     return rep
 
 def build_axis_definitions():
