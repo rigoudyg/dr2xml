@@ -686,6 +686,10 @@ def create_xios_field_ref(sv,alias,table,lset,sset,end_field_defs,
                     axis_defs[d.label]=create_axis_def(d,lset["ping_variables_prefix"],field_defs)
                     # Construct a grid using variable's grid and new axis
                     src_grid=id2grid(nextvar,context_index)
+                    if src_grid is None :
+                        print "Issue with grid for var %s"%nextvar
+                        return
+                        #sys.exit(1)
                     src_grid_id=src_grid.attrib ['id']
                     src_grid_string=ET.tostring(src_grid)
                     target_grid_id=src_grid_id+"_"+d.label
@@ -723,8 +727,10 @@ def create_xios_field_ref(sv,alias,table,lset,sset,end_field_defs,
         pass
     elif ssh      == 'na-na'  : # global means or constants
         pass 
+    elif ssh      == 'na-A'  : # only used for rlu, rsd, rsu ... in Efx ????
+        pass 
     else :
-        raise(dr2xml_error("Issue with un-managed spatial shape %s"%ssh))
+        raise(dr2xml_error("Issue with un-managed spatial shape %s for variable %s"%(ssh,sv.label)))
     #
     rep='  <field field_ref="%s" name="%s" ts_enabled="true" '% \
         ( nextvar,sv.label)
@@ -791,6 +797,9 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
     # Parse XIOS setting files for the context
     global context_index
     context_index=init_context(context)
+    if context_index is None :
+        print "Issue when parsing context "+context
+        sys.exit(1)
 
     # Extract CMOR variables for the experiment and year and lab settings
     mip_vars_list=select_CMORvars_for_lab(lset, sset['experiment_id'], \
@@ -1026,14 +1035,19 @@ def analyze_cell_time_method(cm,label,table):
         operation="average"
     elif "time: sum"  in cm :
         # [tsum]: Temporal Sum  : pas utilisee !
-        print "Errror: time: sum is not supposed to be used" 
+        print "Error: time: sum is not supposed to be used" 
     elif "time: mean" in cm :  #    [tmean]: Time Mean  
         operation="average"
     elif "time: point" in cm:
         operation="instant"
+    elif table=='fx' or table=='Efx':
+        print "Warning: assuming operation is 'once' for cell_time_method "+\
+            "%s for %15s in table %s" %(cm,label,table)
+        operation="once"
     else :
-        print "Error: issue when analyzing cell_time_method "+\
-            "%s for %15s in table %s, averaging" %(cm,label,table)
+        print "Warning: issue when analyzing cell_time_method "+\
+            "%s for %15s in table %s, assuming it is once" %(cm,label,table)
+        operation="once"
     return (operation, detect_missing)
 
     #
