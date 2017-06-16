@@ -151,7 +151,7 @@ def make_index(elt,index=None,printout=False,level=0):
     return(index)
 
 
-def solve_by_ref(attrib,index,elt,printout=False,level=0) :
+def solve_by_ref(attrib,index,elt,printout=False,level=0,silent_on_dummies=True) :
     """ 
     Solve remainig attributes by ref, otherwise by default value
     """
@@ -174,7 +174,10 @@ def solve_by_ref(attrib,index,elt,printout=False,level=0) :
                         rep=attrib_by_ref(ref,attrib,index,printout,level+1)
                         if rep : return rep
                 except :
-                    print "Error : reference '%s' is invalid"%refid
+                    if 'dummy' in refid and silent_on_dummies :
+                        pass
+                    else:
+                        print "Error : reference '%s' is invalid"%refid
     got_one=0
     for child in elt :
         if type(child) != type('') and child.tag != 'variable' :
@@ -223,7 +226,8 @@ def init_context(context_id,printout=False):
                 if n==0 : break
         #ET.dump(rootel)
         return (index)
-
+    else:
+        print "context %s not found"%context_id
 
 def id2grid(field_id,index,printout=False) :
     """ 
