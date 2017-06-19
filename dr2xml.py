@@ -130,16 +130,17 @@ example_lab_and_model_settings={
     "max_file_size_in_floats" : 500.*1.e+6 ,
     # grid_policy among None, DR, native, native+DR, adhoc- see docin grids.py 
     "grid_policy" : "adhoc",
-    # Grids : CMIP6 name, name_of_target_domain, CMIP6-std resolution, and description
+    # Grids : per model resolution and per context :
+    #              CMIP6 name, name_of_target_domain (if remapping is needed), CMIP6-std resolution, and description
     "grids" : { 
       "LR"    : {
         "arpsfx" : [ "gr","complete" , "250 km", "data regridded to a T127 gaussian grid (128x256 latlon) from a native atmosphere T127l reduced gaussian grid"] ,
           "nemo" : [ "gn", ""        , "100km" , "native ocean tri-polar grid with 105 k ocean cells" ],},
       "HR"    : {
-        "arpsfx" : [ "gr","completeHR", "50 km", "data regridded to a 359 gaussian grid (180x360 latlon) from a native atmosphere T359l reduced gaussian grid"] ,
+        "arpsfx" : [ "gr","complete" , "50 km", "data regridded to a 359 gaussian grid (180x360 latlon) from a native atmosphere T359l reduced gaussian grid"] ,
           "nemo" : [ "gn", ""         , "25km" , "native ocean tri-polar grid with 1.47 M ocean cells" ],},
     },
-    'grid_choice' : { "CNRM-CM6-1" : "LR", "CNRM-CM6-1-HR" : "HR",
+    'resolution' : { "CNRM-CM6-1" : "LR", "CNRM-CM6-1-HR" : "HR",
                       "CNRM-ESM2-1": "LR"  , "CNRM-ESM2-1-HR": "HR" },
 
 }
@@ -435,7 +436,7 @@ def write_xios_file_def(cmv,table, lset,sset, out,cvspath,field_defs,axis_defs,
     # Grid - 
     if grid == "" :
         # either native or close-to-native
-        grid_choice=lset['grid_choice'][source_id]
+        grid_choice=lset['resolution'][source_id]
         grid_label,remap_domain,grid_resolution,grid_description=\
         lset['grids'][grid_choice][context]
     else:
