@@ -16,7 +16,9 @@ table2freq={
 
     "AERday"   :  ("1d","day"),
     "AERfx"    : ("1d","fx"),
-    "AERhr"    : ("1h","1hr"),
+    # mpmoine_next_modif: frequence CMIP6 pour AERhr = 'hr' et non '1hr'
+    #TBD: remplacer "hr" par "1hr" selon reponse de D. Nadeau a l'issue https://github.com/PCMDI/cmip6-cmor-tables/issues/59
+    "AERhr"    : ("1h","hr"),
     "AERmon"   : ("1mo","mon"),
     "AERmonZ"  : ("1mo","mon"),
 
@@ -25,11 +27,13 @@ table2freq={
     "CF3hr"    : ("3h","3hr"),
     "CFday"    : ("1d","day"),
     "CFmon"    : ("1mo","mon"),
-    "CFsubhr"  : ("1h","1hr"), # TBD : better value - model timestep
-    "CFsubhrOff": ("1h","1hr"), # TBD : better value - model timestep
-
+    # mpmoine_next_modif: table2freq: frequence pour les tables subhr
+    # mpmoine_future_modif: table2freq: la syntaxe xios pour le subhr est '1ts' et non 'instant' (vu par Arnaud)
+    "CFsubhr"  : ("1ts","subhr"),
+    "CFsubhrOff": ("1ts","subhr"),
     "E1hr"     : ("1h","1hr"),
-    "E1hrClimMon" : ("1y","yr"), #TBD - better value ?
+     # mpmoine_future_modif: table2freq: la syntaxe xios pour 1hr est '1h' et non '1hr'
+    "E1hrClimMon" : ("1h","1hr"),
     "E3hr"     : ("3h","3hr"),
     "E3hrPt"   : ("3h","3hr"),
     "E6hrZ"    : ("6h","6hr"),
@@ -38,7 +42,9 @@ table2freq={
     "Efx"      :("1d","fx"),
     "Emon"     : ("1mo","mon"),
     "EmonZ"    : ("1mo","mon"),
-    "Esubhr"   : ("1hr","1h"), # TBD : better value - model timestep
+    # mpmoine_next_modif: table2freq: frequence pour les tables subhr
+    # mpmoine_future_modif: table2freq: la syntaxe pour le subhe est '1ts' et non 'instant' (vu par Arnaud)
+    "Esubhr"   : ("1ts","subhr"),
     "Eyr"      : ("1y","yr"),
 
     "IfxAnt"   :("1d","fx"),
@@ -53,7 +59,7 @@ table2freq={
 
     "Oclim"    : ("1d","monClim"),
     "Oday"     : ("1d","day"),
-    "Odec"     : ("1y","yr"),
+    "Odec"     : ("10y","dec"),
     "Ofx"      : ("1d","fx"),
     "Omon"     : ("1mo","mon"),
     "Oyr"      : ("1y","yr"),
@@ -63,8 +69,26 @@ table2freq={
 
     "day"      : ("1d","day"),
     "fx"       : ("1d","fx"),
-}
 
+    # mpmoine_last_modif: table2freq: ajout des tables Primavera
+    "Prim1hr"  : ("1h","1hr"),
+    "Prim3hr"  : ("3h","3hr"),
+    "Prim3hrPt": ("3h","3hr"),
+    "Prim6hr"  : ("6h","6hr"),
+    "Prim6hrPt": ("6h","6hr"),
+    "PrimO6hr" : ("6h","6hr"),
+    "PrimOday" : ("1d","day"),
+    "PrimOmon" : ("1mo","mon"),
+    "PrimSIday": ("1d","day"),
+    "Primday"  : ("1d","day"),
+    "PrimdayPt": ("1d","day"),
+    "Primmon"  : ("1mo","mon"),
+    "PrimmonZ" : ("1mo","mon"),
+
+    "Myproday"  : ("1d","day"),
+    "testAmon"  : ("1mo","mon"),
+
+}
 
 table2splitfreq={
     "E3hrPt"     : "1mo" , #3-hourly (instantaneous, extension) [3hr] (22 variables)
@@ -112,4 +136,28 @@ table2splitfreq={
     "EmonZ"      : "10y" , #Monthly zonal means (time mean, extension) [mon] (31 variables)
     "Esubhr"     : "10y" , #Sub-hourly (extension) [subhr] (32 variables)
     "fx"         : "1y" ,  #Fixed variables [fx] (10 variables)
+
+    #mpmoine_last_modif: table2splitfreq: ajout des tables Primavera
+    "Prim1hr"  : "1mo",
+    "Prim3hr"  : "1mo",
+    "Prim3hrPt": "1mo",
+    "Prim6hr"  : "1mo",
+    "Prim6hrPt": "1mo",
+    "PrimO6hr" : "1mo",
+    "PrimOday" : "1mo",
+    "PrimOmon" : "10y",
+    "PrimSIday": "1mo",
+    "Primday"  : "1mo",
+    "PrimdayPt": "1mo",
+    "Primmon"  : "10y",
+    "PrimmonZ" : "10y",
+
+    "Myproday" : "1mo",
+
 }
+
+# mpmoine_last_modif: table2freq.py: nouveau: cmipFreq2xiosFreq
+cmipFreq2xiosFreq={}
+for v in table2freq.values():
+    if not cmipFreq2xiosFreq.has_key(v[1]): cmipFreq2xiosFreq[v[1]]=v[0]
+

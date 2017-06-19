@@ -22,21 +22,23 @@ attributes['axis']=['axis_ref']
 #attributes['axis_definition']=[]  #attributes['domain_definition']=[]
 #attributes['grid_definition']=[]  #attributes['calendar']=[]
 
-
-def read_src(elt,printout=False, level=0, dont_read=[]) :
+# mpmoine_amelioration: ajout de l'argument 'path_parse' a la fonction read_src pour pouvoir lire les context.xml d'Arnaud
+def read_src(elt,path_parse,printout=False, level=0, dont_read=[]) :
     """
     Recursively reads the subfiles indicated by tag 'src' in childs of ELT
     """
     childs=[]
     for child in elt :
         if 'src' in child.attrib :
-            filen=child.attrib['src']
+            # mpmoine_amelioration:read_src: ajout de path_parse pour acceder aux context_<X>.xml
+            filen=path_parse+"/"+child.attrib['src']
             skip=False
             for prefix in dont_read :
                 if os.path.basename(filen)[0:len(prefix)]==prefix :
                     print "Skipping %s"%filen
                     skip=True
             if skip : continue
+            # mpmoine_correction: read_src: gestion du type de codage XML pour pouvoir lire les context.xml d'Arnaud
             et=ET.parse(filen).getroot()
             if printout :
                 print level*"\t"+"Reading %s, %s=%s"%(filen,et.tag,gattrib(et,'id','no_id'))
@@ -47,14 +49,11 @@ def read_src(elt,printout=False, level=0, dont_read=[]) :
                 child.append(el)
     for child in elt :
         #print level*"\t"+"Recursing on %s %s"%(child.tag,gattrib(child,'id','no_id'))
-        read_src(child,printout,level+1,dont_read)
+        read_src(child,path_parse,printout,level+1,dont_read)
 
 def gattrib(e,attrib_name,default=None):
     if attrib_name in e.attrib : return e.attrib[attrib_name]
     else : return default
-
-
-# In[107]:
 
 def merge_sons(elt,printout=False, level=0):
     """
@@ -99,8 +98,6 @@ def merge_sons(elt,printout=False, level=0):
         if printout : print level*"\t"+"%s %s"%(child.tag,child.attrib.get('id','no_id'))
         merge_sons(child,printout,level+1)
 
-
-
 def solve_downward(attrib,elt,value=None,printout=False,level=0) :
     """ propagate attribute ATTRIB 's VALUE downward of ELT, 
     setting recursively it for all childs to the parent value or 
@@ -122,7 +119,6 @@ def solve_downward(attrib,elt,value=None,printout=False,level=0) :
         else:
             if printout : print
         solve_downward(attrib,child,value_down,printout,level+1)
-
 
 def make_index(elt,index=None,printout=False,level=0):
     """
@@ -150,12 +146,7 @@ def make_index(elt,index=None,printout=False,level=0):
         make_index(child,index,printout,level+1)
     return(index)
 
-
-def solve_by_ref(attrib,index,elt,printout=False,level=0,silent_on_dummies=True) :
-    """ 
-    Solve remainig attributes by ref, otherwise by default value
-    """
-    def attrib_by_ref(elt,attrib,index,printout,level):
+def attrib_by_ref(elt,attrib,index,printout,level):
         """
         Provide ATTRIB value for ELT' id using its references 
         and objects's dict INDEX
@@ -174,10 +165,12 @@ def solve_by_ref(attrib,index,elt,printout=False,level=0,silent_on_dummies=True)
                         rep=attrib_by_ref(ref,attrib,index,printout,level+1)
                         if rep : return rep
                 except :
-                    if 'dummy' in refid and silent_on_dummies :
-                        pass
-                    else:
-                        print "Error : reference '%s' is invalid"%refid
+                    if not refid.startswith("dummy_"): print "Error : reference '%s' is invalid"%refid
+
+def solve_by_ref(attrib,index,elt,printout=False,level=0) :
+    """ 
+    Solve remainig attributes by ref, otherwise by default value
+    """
     got_one=0
     for child in elt :
         if type(child) != type('') and child.tag != 'variable' :
@@ -202,15 +195,17 @@ def solve_by_ref(attrib,index,elt,printout=False,level=0,silent_on_dummies=True)
                 if printout : print " : N/A"
     return got_one
         
-
-def init_context(context_id,printout=False):
-    def select_context(rootel,context_id):
+def select_context(rootel,context_id):
         for context in rootel :
             if 'id' in context.attrib and context.attrib['id']==context_id :
                 return context
-    
-    rootel=ET.parse("iodef.xml").getroot()
-    read_src(rootel,printout=printout,dont_read=["dr2xml_"])
+
+# mpmoine_amelioration: ajout de l'argument 'path_parse' a la fonction init_context
+def init_context(context_id,path_parse,printout=False):
+    # mpmoine_merge_dev2_v0.12:init_context: ajout de "./parse/" pour acceder a iodef.xml 
+    rootel=ET.parse(path_parse+"/iodef.xml").getroot()
+    # mpmoine_amelioration:init_context: ajout de l'argument 'path_parse' a la fonction read_src
+    read_src(rootel,path_parse,printout=printout,dont_read=["dr2xml_"])
     merge_sons(rootel,printout)
     rootel=select_context(rootel,context_id)
     if rootel is not None :
@@ -231,7 +226,7 @@ def init_context(context_id,printout=False):
 
 def id2grid(field_id,index,printout=False) :
     """ 
-    Returns the list of Element composing the grid of a field
+    Returns the list of Element composing the grid IOXof a field
     """
     if field_id in index : 
         attrib=index[field_id].attrib
@@ -245,7 +240,6 @@ def id2grid(field_id,index,printout=False) :
             if printout: print("field %s has no grid_ref"%(field_id))
     else:
         if printout: print("field %s is not known"%field_id)
-
 
 if False :
     
