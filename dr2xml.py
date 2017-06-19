@@ -60,15 +60,13 @@ import xml.etree.ElementTree as ET
 #TBS# prog_path=os_path.abspath(os_path.split(__file__)[0])
 
 # Local packages
-# mpmoine_zoom_modif: import simple_Dim
 from vars import simple_CMORvar, simple_Dim, process_homeVars, complement_svar_using_cmorvar, \
                 multi_plev_suffixes, single_plev_suffixes
 from grids import decide_for_grids, grid2resol, grid2desc, field_size,\
     split_frequency_for_variable, timesteps_per_freq_and_duration
 from Xparse import init_context, id2grid
 
-# A local auxilliary table
-# mpmoine_last_modif: dr2xml.py: ajout import de cmipFreq2xiosFreq
+# A auxilliary tables
 from table2freq import table2freq, table2splitfreq, cmipFreq2xiosFreq
 
 from dr2cmip6_expname import dr2cmip6_expname
@@ -396,8 +394,6 @@ def analyze_priority(cmvar,lmips):
             if rv.priority < prio : prio=rv.priority
     return prio
                      
-# mpmoine_last_modif:wr: ajout de l'argument num_type
-# mpmoine_zoom_modif:wr: ajout de l'argument out (car fonction remontee d un niveau)
 def wr(out,key,dic_or_val=None,num_type="string",default=None) :
     """
     Short cut for a repetitive pattern : writing in 'out' 
@@ -426,9 +422,8 @@ def wr(out,key,dic_or_val=None,num_type="string",default=None) :
         out.write('  </variable>\n')
 
 
-# mpmoine_WIP_update: WIP doc v6.2.3 - Apr. 2017: <time_range> format is frequency-dependant => new function 'freq2datefmt'
 def freq2datefmt(freq):
-
+    # WIP doc v6.2.3 - Apr. 2017: <time_range> format is frequency-dependant 
     datefmt=False
     if freq in ["yr","decadal"]:
         datefmt="%y"
@@ -621,14 +616,8 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     # Write XIOS file node:
     # including global CMOR file attributes
     #--------------------------------------------------------------------
-    # mpmoine_amelioration:write_xios_file_def: ajout de 'ts_prefix' et de time_series="only" => finalement non, et ts_prefix dans le 'name' car on gere nous-meme les time-series
-    ts_prefix=lset['output_path']
-    if ts_prefix:
-        #TBS#out.write(' <file ts_prefix="%s" name="%s" timeseries="only" '%(ts_prefix,filename))
-        out.write(' <file name="%s" '%(ts_prefix+filename))
-    else:
-        #TBS#out.write(' <file name="%s" timeseries="only" '%filename)
-        out.write(' <file name="%s" '%filename)
+    if prefix: out.write(' <file name="%s" '%(prefix+filename))
+    else:      out.write(' <file name="%s" '%filename)
     out.write(' output_freq="%s" '%cmipFreq2xiosFreq[cmv.frequency])
     out.write(' append="true" split_freq="%s" '%split_freq)
     # mpmoine_cmor_update:write_xios_file_def: ajout de 'split_freq_format' pour se coformer a CMOR3.0.3 
@@ -781,18 +770,12 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
         raise dr2xml_error("No end field ref for %s in %s"%(cmv.label,table))
         return
     #
-    # Create a field group for each shape
     for shape in end_field_defs :
-<<<<<<< variant A
-        dom="" ;
-        if shape : dom='grid_ref="%s"'%shape
-        out.write('<field_group %s expr="@this" >\n'%dom)
->>>>>>> variant B
         # mpmoine_correction:write_xios_file_def: suppression du niveau 'field_group'
+        #TBS# Create a field group for each shape
         #TBS# dom="" ;
         #TBS# if shape : dom='grid_ref="%s"'%shape
         #TBS# out.write('<field_group %s expr="@this" >\n'%dom)
-======= end
         for entry in end_field_defs[shape] : out.write(entry)
         #TBS# out.write('</field_group >\n')
     out.write('</file>\n\n')
@@ -1034,7 +1017,7 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
     #--------------------------------------------------------------------
     global context_index
     # mpmoine_amelioration:generate_file_defs: ajout de l'argument 'path_parse' a la fonction init_context
-    context_index=init_context(context,lset["path_to_parse"],printout=False)
+    context_index=init_context(context,lset.get("path_to_parse","./"),printout=False)
     #
     #--------------------------------------------------------------------
     # Extract CMOR variables for the experiment and year and lab settings
@@ -1157,7 +1140,7 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
                     for grid in svar.grids :
                         write_xios_file_def(svar,table, lset,sset,out,cvs_path,
                                             field_defs,axis_defs,grid_defs,domain_defs,dummies,
-                                skipped_vars,prefix,context,grid,pingvars)
+                                skipped_vars_per_table,prefix,context,grid,pingvars)
                 else :
                     pass
                     print "Duplicate var in %s : %s %s %s"%(
@@ -1321,16 +1304,20 @@ def create_grid_def(sd,alias=None,context_index=None):
     if not sd.is_zoom_of and not sd.is_union_for: # a grid_def to build in classical case (a vertical axis without using union)
         if alias and context_index:
             src_grid=id2grid(alias,context_index,printout=True)
-            src_grid_id=src_grid.attrib['id']
-            src_grid_string=ET.tostring(src_grid)
-            target_grid_id=src_grid_id+"_"+sd.label
-            target_grid_string=re.sub('axis_ref= *.([\w_])*.','axis_ref="%s"'%sd.label,src_grid_string)
-            target_grid_string=re.sub('grid id= *.([\w_])*.','grid id="%s"'%target_grid_id,target_grid_string)
-            return (target_grid_id,target_grid_string)
+            if src_grid is not None : 
+                src_grid_id=src_grid.attrib['id']
+                src_grid_string=ET.tostring(src_grid)
+                target_grid_id=src_grid_id+"_"+sd.label
+                target_grid_string=re.sub('axis_ref= *.([\w_])*.','axis_ref="%s"'%sd.label,src_grid_string)
+                target_grid_string=re.sub('grid id= *.([\w_])*.','grid id="%s"'%target_grid_id,target_grid_string)
+                return (target_grid_id,target_grid_string)
+            else:
+                print("Fatal: ask for creating a grid_def for var %s which has no grid "%(alias))
+                return False
         else:
             raise dr2xml_error("Fatal: ask for creating a grid_def from a native grid "+\
             "but variable alias and/or context_index not provided (alias:%s, context_index:%s)"%(alias,context_index))
-            return False
+            #return False
     elif sd.is_union_for: # a grid_def to build in union case
         grid_id="grid_"+sd.label
         grid_string='<grid id="%s">'%grid_id
@@ -1658,8 +1645,8 @@ def analyze_cell_time_method(cm,label,table):
     elif "time: point" in cm:
         operation="instant"
     elif table=='fx' or table=='Efx':
-        print "Warning: assuming operation is 'once' for cell_time_method "+\
-            "%s for %15s in table %s" %(cm,label,table)
+        #print "Warning: assuming operation is 'once' for cell_method "+\
+        #    "%s for %15s in table %s" %(cm,label,table)
         operation="once"
     #----------------------------------------------------------------------------------------------------------------
     else :
@@ -1909,7 +1896,6 @@ def highest_rank(svar):
     referencing a MIPvar with this label
     This, assuming dr2xml would handle all needed shape reductions
     """
-    # mpmoine_last_modif:highest_rank: pour recuperer le label_without_area
     mipvarlabel=svar.label_without_area
     shapes=[]
     for  cvar in dq.coll['CMORvar'].items : 
@@ -1922,19 +1908,17 @@ def highest_rank(svar):
                     shape=sp.label
                 except :
                     if print_DR_errors:
-                        # mpmoine_last_modif:highest_rank:  pour corriger l'erreur "TypeError: cannot concatenate 'str' and 'dreqItem_CoreAttributes' objects"
                         print "DR Error: issue with stid or spid for "+\
                         st.label+" "+v.label+string(cvar.mipTable)
                     # One known case in DR 1.0.2: hus in 6hPlev
                     shape="XY"
             except :
-                # mpmoine_last_modif:highest_rank:  pour corriger l'erreur "TypeError: cannot concatenate 'str' and 'dreqItem_CoreAttributes' objects"
                 print "DR Error: issue with stid for "+v.label+string(cvar.mipTableSection)
                 shape="?st"
         else:
-            # mpmoine_last_modif:highest_rank: Pour recuperer le spatial_shp pour le cas de variables qui n'ont pas un label CMORvar de la DR (ex. HOMEvar ou EXTRAvar)
+            # Pour recuperer le spatial_shp pour le cas de variables qui n'ont
+            # pas un label CMORvar de la DR (ex. HOMEvar ou EXTRAvar)
             shape=svar.spatial_shp
-        # mpmoine_future_modif:highest_rank: test shape =/ None, sinon on se retrouve avec shapes=liste de None et 1 liste de None n'est pas Faux
         if shape: shapes.append(shape)
     #if not shapes : shape="??"
     if not shapes : shape="XY"

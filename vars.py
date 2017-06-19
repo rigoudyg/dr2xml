@@ -1,5 +1,6 @@
 # -*- coding: iso-8859-15 -*-
 print_DR_errors=True
+print_DR_stdname_errors=False
 
 import sys,os
 import json
@@ -35,7 +36,7 @@ class simple_CMORvar(object):
         self.experiment     = None 
         self.mip            = None
         self.Priority       = 1     # Will be changed using DR or extra-Tables
-        self.mip_era        = False # Later changed in project name (uppercase) when appropriate
+        self.mip_era        = False # Later changed in projectname (uppercase) when appropriate
         self.missing        = 1.e+20
 
 # mpmoine_future_modif: nouvelle classe simple_Dim
@@ -475,15 +476,20 @@ def complement_svar_using_cmorvar(svar,cmvar,dq):
         else :
             # If CF standard name is NOK, let us use MIP variables attributes
             svar.stdname = mipvar.label.rstrip(' ')
-            if print_DR_errors: 
+            if print_DR_stdname_errors: 
                 print "DR Error: issue with stdname for "+svar.label,"in",svar.mipTable," => take the MIPvar label instead."
     except:
         if print_DR_errors: 
             print "DR Error: issue with MIPvar for "+svar.label," => no label_without_area, long_name, stdname, description and units derived."
     #
     # Get information form Structure
+    st=None
     try :
         st=dq.inx.uid[cmvar.stid]
+    except :
+        if print_DR_errors :
+            print "DR Error: issue with stid for",svar.label, "in Table ",svar.mipTable,"  => no cell_methods, cell_measures, dimids and sdims derived."
+    if st is not None :
         svar.struct=st
         try :
             svar.cm=dq.inx.uid[st.cmid].cell_methods
@@ -499,11 +505,21 @@ def complement_svar_using_cmorvar(svar,cmvar,dq):
         # mpmoine_last_modif:complement_svar_using_cmorvar: provisoire, pour by-passer le cas d'une CMORvar qui n'a pas de structure associee ('dreqItem_remarks')
         # mpmoine_future_modif:complement_svar_using_cmorvar: on ne recherche les dimids que si on a pas affaire a une constante
         if svar.spatial_shp!="na-na":
+            spid=None
             try:
                 spid=dq.inx.uid[svar.struct.spid]
+            except:
+                if print_DR_errors :
+                        print "DR Error: issue with spid for ",svar.label, "in Table ",svar.mipTable, " => no sdims derived."
+                dimids=None
+            if spid is not None :
                 try:
                     # mpmoine_future_modif:complement_svar_using_cmorvar: suppression de svar.dimids -> elargi avec svar.sdims
                     dimids=spid.dimids
+                except:
+                    if print_DR_errors :
+                        print "DR Error: issue with dimids for ",svar.label, "in Table ",svar.mipTable, " => no sdims derived."
+                if dimids is not None :
                     # mpmoine_future_modif:complement_svar_using_cmorvar: on rajoute les single levels dans le traitement des dimensions (dimids->all_dimids)
                     all_dimids=dimids
                     # mpmoine_correction: Solution de Martin Juckes du 04/05/2017 en utilisant cids necessaire a partir de la version 01.00.08
@@ -517,15 +533,6 @@ def complement_svar_using_cmorvar(svar,cmvar,dq):
                         # mpmoine_future_modif:complement_svar_using_cmorvar: on valorise svar.sdims avec la fonction get_simpleDim_from_DimId
                         sdim=get_simpleDim_from_DimId(dimid,dq)
                         svar.sdims.update({sdim.label:sdim})
-                except:
-                    if print_DR_errors :
-                        print "DR Error: issue with dimids for ",svar.label, "in Table ",svar.mipTable, " => no sdims derived."
-            except:
-                if print_DR_errors :
-                        print "DR Error: issue with spid for ",svar.label, "in Table ",svar.mipTable, " => no sdims derived."
-    except :
-        if print_DR_errors :
-            print "DR Error: issue with stid for",svar.label, "in Table ",svar.mipTable,"  => no cell_methods, cell_measures, dimids and sdims derived."
 
     area=cellmethod2area(svar.cell_methods) 
     if area : 
@@ -557,7 +564,11 @@ def get_simpleDim_from_DimId(dimid,dq):
     sdim.positive=d.positive
     sdim.requested=d.requested 
     sdim.value=d.value
-    sdim.stdname=dq.inx.uid[d.standardName].uid
+    try :
+        sdim.stdname=dq.inx.uid[d.standardName].uid
+    except:
+        if print_DR_stdname_errors : print "Issue with standardname for dimid %s"%dimid
+        sdim.stdname="No_std_name"
     sdim.long_name=d.title
     sdim.out_name=d.altLabel
     sdim.units=d.units

@@ -31,7 +31,14 @@ def read_src(elt,path_parse,printout=False, level=0, dont_read=[]) :
     for child in elt :
         if 'src' in child.attrib :
             # mpmoine_amelioration:read_src: ajout de path_parse pour acceder aux context_<X>.xml
-            filen=path_parse+"/"+child.attrib['src']
+            src=child.attrib['src']
+            if src[0] != "/" :
+                if path_parse != "./" :
+                    filen=path_parse+"/"+src
+                else :
+                    filen=src
+            else:
+                filen=src
             skip=False
             for prefix in dont_read :
                 if os.path.basename(filen)[0:len(prefix)]==prefix :

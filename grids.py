@@ -24,15 +24,15 @@ def normalize(grid) :
     return grid.replace(" or smaller","")
 
 def decide_for_grids(cmvarid,grids,lset,dq):
-    """
-    Decide which set of grids a given variable should be produced on
-
-    CMVARID is uid of the CMORvar
-    GRIDS is a list of strings for grid as specified in requestLink 
-    LSET is the laboratory settings dictionnary. It carries a policy re. grids
-
-    Returns a list of grid strings (with some normalization) (see below)
-
+     """
+     Decide which set of grids a given variable should be produced on
+     
+     CMVARID is uid of the CMORvar
+     GRIDS is a list of strings for grid as specified in requestLink 
+     LSET is the laboratory settings dictionnary. It carries a policy re. grids
+     
+     Returns a list of grid strings (with some normalization) (see below)
+     
      TBD : use Martin's acronyms for grid policy
      """
      def normalize(grid) :
