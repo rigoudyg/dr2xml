@@ -22,6 +22,8 @@ Changes :
                                adapt to new DRS ...
   feb 2017 - S.Sénési (CNRM) - handle grids and remapping; 
                                put some func in separate module
+  april-may 2017 - M-P Moine (CERFACS) : handle pressure axes ..
+  june 2017 - SS               introduce horizontal remapping
 
 """
 ####################################
@@ -78,7 +80,6 @@ print "* CMIP6 Data Request version: ", dq.version
 
 context_index=None
 
-context_index=None
 
 """ An example/template  of settings for a lab and a model"""
 example_lab_and_model_settings={
@@ -360,7 +361,7 @@ def select_CMORvars_for_lab(lset, experiment_id=None, year=None,printout=False):
         print 'Number of distinct CMOR variables (whatever the grid) : %d'%len(d)
     for v in d:
         d[v]=decide_for_grids(v,d[v],lset,dq)
-        if False and printout and len(d[v]) > 1 :
+        if printout and len(d[v]) > 1 :
             print "\tVariable %s will be processed with multiple grids : %s"%(dq.inx.uid[v].label,`d[v]`)
     #
     # Print a count of distinct var labels
@@ -461,7 +462,7 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     #
     global sc
 
-    # mpmoine_amelioration:write_xios_file_def: gestion ici des attributs pour lesquels on a recupere des chaines vides (" " est Faux mais est ecrit " "")
+    # gestion des attributs pour lesquels on a recupere des chaines vides (" " est Faux mais est ecrit " "")
     #--------------------------------------------------------------------
     # Set to NOT-SET field attributes that can be empty strings
     #--------------------------------------------------------------------
@@ -480,25 +481,23 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     # We use a simple convention for variable names in ping files : 
     if cmv.type=='perso' : alias=cmv.label
     else:
-        # mpmoine_correction:write_xios_file_def: si on a defini un label non ambigu alors on l'untilise comme alias (i.e. le field_ref) 
-        # mpmoine_correction:write_xios_file_def: et pour l'alias seulement (le nom de variable dans le nom de fichier restant svar.label)
-        if cmv.label_non_ambiguous:
-            alias=lset["ping_variables_prefix"]+cmv.label_non_ambiguous
-        else:
-            alias=lset["ping_variables_prefix"]+cmv.label
-        # mpmoine_correction:write_xios_file_def: suppression des terminaisons en "Clim" pour l'alias (i.e. le field_ref) le cas echeant
+        # MPM : si on a defini un label non ambigu alors on l'utilise comme alias (i.e. le field_ref) 
+        # et pour l'alias seulement (le nom de variable dans le nom de fichier restant svar.label)
+        if cmv.label_non_ambiguous: alias=lset["ping_variables_prefix"]+cmv.label_non_ambiguous
+        else:                       alias=lset["ping_variables_prefix"]+cmv.label
+        # TBD mpmoine_correction: suppression des terminaisons en "Clim" pour l'alias 
         split_alias=alias.split("Clim")
         alias=split_alias[0]
         if pingvars is not None :
             # mpmoine_zoom_modif:write_xios_file_def: dans le pingfile, on attend plus les alias complets  des variables (CMIP6_<label>) mais les alias reduits (CMIP6_<lwps>)
-            # mpmoine_zoom_modif:write_xios_file_def: => creation de alias_ping
-            # mpmoine_correction:write_xios_file_def: si on a defini un label non ambigu alors on l'untilise comme ping_alias (i.e. le field_ref) 
+            # mpmoine  si on a defini un label non ambigu alors on l'untilise comme ping_alias (i.e. le field_ref) 
             if cmv.label_non_ambiguous:
                 alias_ping=lset["ping_variables_prefix"]+cmv.label_non_ambiguous # e.g. 'CMIP6_tsn_land' and not 'CMIP6_tsn'
             else:
                 alias_ping=lset["ping_variables_prefix"]+cmv.label_without_psuffix # e.g. 'CMIP6_hus' and not 'CMIP6_hus7h'
             if not alias_ping in pingvars:
-                # mpmoine_skipped_modif: write_xios_file_def: on classe les skipped_vars par table => skipped_vars_per_table (pour avoir plus d'info au print) 
+                #print "Must skip alias_ping=%s"%alias_ping
+                # mpmoine: on classe les skipped_vars par table (pour avoir plus d'info au print) 
                 if skipped_vars_per_table.has_key(cmv.mipTable) and skipped_vars_per_table[cmv.mipTable]:
                     list_of_skipped=skipped_vars_per_table[cmv.mipTable]
                     list_of_skipped.append(cmv.label+"("+str(cmv.Priority)+")")
@@ -549,12 +548,12 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     if grid == "" :
         # either native or close-to-native
         grid_choice=lset['grid_choice'][source_id]
-        grid_label,remap_domain,grid_resolution,grid_description=\
+        grid_label,target_hgrid_id,grid_resolution,grid_description=\
         lset['grids'][grid_choice][context]
     else:
-        # DR requested type of grid
+        # DR requested type of grid. Assume that the ping_file includes an Xios definition for it <- TBD
         grid_label=grid
-        remap_domain=lset["ping_variables_prefix"]+grid
+        target_hgrid_id=lset["ping_variables_prefix"]+grid
         grid_description=grid2desc(grid)
         grid_resolution=grid2resol(grid)
     if table in [ 'AERMonZ',' EmonZ', 'EdayZ' ] : grid_label+="z"
@@ -566,7 +565,7 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     # Set NetCDF output file name according to the DRS
     #--------------------------------------------------------------------
     #
-    # mpmoine_expname:write_xios_file_def: es noms d'expe dans la DR ne sont pas les meme que dans le CV CMIP6
+    # mpmoine : les noms d'expe dans la DR ne sont pas les meme que dans le CV CMIP6
     with open(cvspath+project+"_experiment_id.json","r") as json_fp :
         CMIP6_experiments=json.loads(json_fp.read())['experiment_id']
         if CMIP6_experiments.has_key(sset['experiment_id']):
@@ -574,19 +573,18 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
         else:
             # mpmoine_last_modif:write_xios_file_def: provisoire, laisser passer cette erreur tant que le
             # mpmoine_last_modif:write_xios_file_def: CV_CMIP6 et celui de la DR ne sont pas concordants
-            dr2xml_error("Issue getting experiment description in CMIP6 CV for %20s => Search for experiment name correspondance from DR to CMIP6 CV."\
+            dr2xml_error("Issue getting experiment description in CMIP6 CV for %20s"+\
+                         " => Search for experiment name correspondance from DR to CMIP6 CV."\
                                %sset['experiment_id'])
             expname=dr2cmip6_expname[sset['experiment_id']]
         exp_entry=CMIP6_experiments[expname]
         experiment=exp_entry['experiment']
         description=exp_entry['description']
     # 
-    # mpmoine_WIP_update:write_xios_file_def: WIP doc v6.2.3 - Apr. 2017: <time_range>="N1-N2" (instead of "N1_N2")
     date_range="%start_date%-%end_date%" # XIOS syntax
-    # mpmoine_WIP_update:write_xios_file_def: WIP doc v6.2.3 - Apr. 2017: <time_range> format is frequency dependant
     date_format=freq2datefmt(cmv.frequency)
     #
-    # mpmoine_WIP_update:write_xios_file_def: WIP doc v6.2.3 - Apr. 2017: [_<time_range>] omitted if frequency is "fx"; a suffix "-clim" is added if climatology
+    # mpmoine: WIP doc v6.2.3 : [_<time_range>] omitted if frequency is "fx"; a suffix "-clim" is added if climatology
     if cmv.frequency=="fx":
         filename="%s%s_%s_%s_%s_%s_%s"%\
                    (prefix,cmv.label,table,source_id,expname,
@@ -607,17 +605,14 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     #--------------------------------------------------------------------
     # Compute XIOS split frequency
     #--------------------------------------------------------------------
-    # mpmoine_last_modif:write_xios_file_def: Maintenant, dans le cas type='perso', table='NONE'. On ne doit donc pas compter sur le table2freq pour recuperer
-    # mpmoine_last_modif:write_xios_file_def: la frequence en convention xios => fonction cmipFreq2xiosFreq
-    # mpmoine_next_modif: write_xios_file_def: passage de 'context' en argument de split_frequency_for_variable pour recuperer le model_timestep
+    # mpmoine_last_modif:write_xios_file_def: Maintenant, dans le cas type='perso', table='NONE'. On ne doit donc pas compter sur le table2freq pour recuperer la frequence en convention xios => fonction cmipFreq2xiosFreq
     split_freq=split_frequency_for_variable(cmv, lset, sc.mcfg, context)
     #
     #--------------------------------------------------------------------
     # Write XIOS file node:
     # including global CMOR file attributes
     #--------------------------------------------------------------------
-    if prefix: out.write(' <file name="%s" '%(prefix+filename))
-    else:      out.write(' <file name="%s" '%filename)
+    out.write(' <file name="%s" '%filename)
     out.write(' output_freq="%s" '%cmipFreq2xiosFreq[cmv.frequency])
     out.write(' append="true" split_freq="%s" '%split_freq)
     # mpmoine_cmor_update:write_xios_file_def: ajout de 'split_freq_format' pour se coformer a CMOR3.0.3 
@@ -631,13 +626,10 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     out.write(' uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%"')
     out.write(' >\n')
     #
-    # mpmoine_WIP_update:write_xios_file_def: WIP doc v6.2.3 - Apr. 2017: suppression de 'project_id' pas requis pour CMIP6 (remplace par 'activity_id' et 'mip_era')
-    #TBS#wr(out,'project_id', sset.get('project',"CMIP6")+"/"+activity_id)
     wr(out,'activity_id',activity_id)
     #
     if contact and contact is not "" : wr(out,'contact',contact) 
     wr(out,'Conventions',conventions) 
-    # TBC : assume data_specs_version == dq.version
     wr(out,'data_specs_version',dq.version) 
     #
     wr(out,'description',description)
@@ -739,8 +731,6 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     wr(out,'source_type',source_type)
     #
     wr(out,'sub_experiment_id',sub_experiment_id) 
-    # mpmoine_cmor_update:write_xios_file_def: CMOR3.2.2 impose 'None' (et non 'none') pour sub_experiment
-    # mpmoine_cmor_update:write_xios_file_def: CMOR3.2.3 impose 'none' (et non 'None' !)pour sub_experiment
     wr(out,'sub_experiment',sset,default='none') 
     #
     wr(out,"table_id",table)
@@ -750,7 +740,6 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     #
     wr(out,"variable_id",cmv.label)
     #
-    # mpmoine_WIP_update:write_xios_file_def: WIP doc v6.2.3 - Apr. 2017: cf recommendation in note 16 for 'variant_info'
     variant_info=sset.get('variant_info',"none")
     if variant_info!="none": variant_info+=variant_info_warning
     wr(out,"variant_info",variant_info)
@@ -762,22 +751,20 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     # Write XIOS field_group node (containing field elements, stored in end_field_defs)
     # including CF field attributes 
     #--------------------------------------------------------------------
-    # mpmoine_zoom_modif:write_xios_file_def: appel a create_xios_aux_elmts_defs (anc. create_xios_field_ref) descendu ici
     end_field_defs=dict()
     create_xios_aux_elmts_defs(cmv,alias,table,lset,sset,end_field_defs,
-                                field_defs,axis_defs,grid_defs,domain_defs,dummies,context,remap_domain,pingvars)
+                                field_defs,axis_defs,grid_defs,domain_defs,dummies,context,target_hgrid_id,pingvars)
     if len(end_field_defs.keys())==0 :
-        raise dr2xml_error("No end field ref for %s in %s"%(cmv.label,table))
+        raise dr2xml_error("No end_field_def for %s in %s"%(cmv.label,table))
         return
     #
     for shape in end_field_defs :
-        # mpmoine_correction:write_xios_file_def: suppression du niveau 'field_group'
-        #TBS# Create a field group for each shape
-        #TBS# dom="" ;
-        #TBS# if shape : dom='grid_ref="%s"'%shape
-        #TBS# out.write('<field_group %s expr="@this" >\n'%dom)
+        if shape :
+            # Create a field group for each non-trivial shape, for performance issues
+            # (remapping must follow time average !)
+            out.write('<field_group expr="@this" grid_ref="%s">\n'%shape)
         for entry in end_field_defs[shape] : out.write(entry)
-        #TBS# out.write('</field_group >\n')
+        if shape : out.write('</field_group >\n')
     out.write('</file>\n\n')
 
  # mpmoine_last_modif:wrv: ajout de l'argument num_type
@@ -787,10 +774,8 @@ def wrv(name, value, num_type="string"):
     return '     <variable name="%s" type="%s" > %s '%(name,num_type,value)+\
         '</variable>\n'
 
-# mpmoine_zoom_modif: renommage de la fonction 'create_xios_field_ref' en 'create_xios_aux_elmts_defs'
-# mpmoine_zoom_modif: renommage de la fonction 'create_xios_field_ref' en 'create_xios_aux_elmts_defs'
 def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
-    field_defs,axis_defs,grid_defs,domain_defs,dummies,context,remap_domain,pingvars) :
+    field_defs,axis_defs,grid_defs,domain_defs,dummies,context,target_hgrid_id,pingvars) :
     """
     Create a field_ref for a simplified variable object sv (with
     lab prefix for the variable name) and store it in end_field_defs
@@ -813,10 +798,6 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
     # The preferred order of operation is : vertical interp (which
     # is time-dependant), time-averaging, horizontal operations (using
     # expr=@this)
-
-    # nextvar is the field name provided as output of the last
-    # operation currently defined
-    # mpmoine_zoom_modif:create_xios_aux_elmts_defs: on supprime l'usage de netxvar
     #
     #--------------------------------------------------------------------
     # Build XIOS axis elements (stored in axis_defs)
@@ -824,79 +805,74 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
     #---
     # Build XIOS auxilliary field elements (stored in field_defs)
     #--------------------------------------------------------------------
-    alias1=False
+    has_vertical_interpolation=False
     ssh=sv.spatial_shp
     prefix=lset["ping_variables_prefix"]
     # mpmoine_zoom_modif:create_xios_aux_elmts_defs: recup de lwps
     lwps=sv.label_without_psuffix
-    # TBD Should handle singletons here => mpmoine_note: la mecanique des zoom/union couvre aussi les dim verticale singleton
     # TBD Should ensure that various additionnal dims are duly documented by model or pingfile (e.g. tau)
-    # mpmoine_zoom_modif:create_xios_aux_elmts_defs: ajout du cas 'XY-na' pour capturer les dimensions singleton
+    # TBD : cas 'XY-na' pour capturer les dimensions singleton : il faut etre plus selectif : existence d'un cids (grid de lg 1)
     if ssh[0:4] in ['XY-H','XY-P'] or ssh[0:3] == 'Y-P' or ssh[0:5]=='XY-na':
         # mpmoine_last_modif:create_xios_aux_elmts_defs: on recupere maintenant 'dimids' depuis svar
         # mpmoine_future_modif:create_xios_aux_elmts_defs: on utilise maintenant sv.sdims pour analyser les dimension
         # mpmoine_question: je ne comprend pas l'usage de nextvar... A priori on ne peut pas avoir plus d'une dimension verticale ?
-        for sd in sv.sdims.values():
+        for sd in sv.sdims.values(): # Expect that only one can be a vertical dim
             if isVertDim(sd):
+                has_vertical_interpolation=True
                 # mpmoine_zoom_modif:create_xios_aux_elmts_defs: on supprime l'usage de netxvar
                 # mpmoine_zoom_modif:create_xios_aux_elmts_defs: passage par 2 niveaux de field id auxiliaires rebond (alias et alias2)
+                alias1=alias+"_"+sd.label   # e.g. 'CMIP6_hus7h_plev7h'
+                alias_ping=prefix+lwps      # e.g. 'CMIP6_hus' and not 'CMIP6_hus7h'; 'CMIP6_co2' and not 'CMIP6_co2Clim'
                 if sd.is_zoom_of: 
                     # mpmoine_note: cas d'une variable definie grace a 2 axis (zoom+union)
-                    alias1=alias+"_"+sd.label   # e.g. 'CMIP6_hus7h_plev7h'
                     alias2=prefix+lwps+"_union" # e.g. 'CMIP6_hus_union'
-                    cible=prefix+lwps           # e.g. 'CMIP6_hus'
                     axis_key=sd.zoom_label      # e.g. 'zoom_plev7h_hus'
                 else: 
                     # mpmoine_note: cas d'une variable definie grace a seul axis (non zoom)
-                    alias1=alias+"_"+sd.label   # e.g. 'CMIP6_hus7h_plev7h'
                     alias2=False 
-                    cible=prefix+lwps           # e.g. 'CMIP6_hus'
                     axis_key=sd.label           # e.g. 'plev7h'
-                if not cible in pingvars:       # e.g. alias_ping='CMIP6_hus'
-                    print "Warning: field id",cible,"expected in pingfile but not found."
-                if not alias1 in pingvars: # mpmoine_note: maintenant on est toujours dans ce cas (e.g. 'CMPI6_hus7h_plev7h' plus jamais ecrit dans le ping)
+                if not alias_ping in pingvars:       # e.g. alias_ping='CMIP6_hus'
+                    print "Error: field id ",alias_ping," expected in pingfile but not found."
+                if not alias1 in pingvars:
+                    # mpmoine_note: maintenant on est toujours dans ce cas (e.g. 'CMPI6_hus7h_plev7h' plus jamais ecrit dans le ping)
+                    # SS : peut-etre a revoir, ca.. (COSP)
                     #
                     # Construct an axis for interpolating to this dimension
-                    # mpmoine_future_modif:create_xios_aux_elmts_defs: suppression de l'argument 'field_defs' de create_axis_def qui n'est pas utilise
                     # Here, only zoom or normal axis attached to svar, axis for unions of plevs are managed elsewhere
-                    axis_defs[axis_key]=create_axis_def(sd,lset["ping_variables_prefix"])
+                    axis_defs[axis_key]=create_axis_def(sd,prefix)
                     #
                     # Construct a grid using variable's grid and new axis
-                    # mpmoine_merge_dev2_v0.12:create_xios_aux_elmts_defs: j'ai change nextvar en alias
-                    # mpmoine_merge_dev2_v0.12:create_xios_aux_elmts_defs: nouvelle une fonction 'create_grid_def' car utilisee aussi par 'create_xios_grids_for_plev_unions'
-                    
                     #TBS# if not sd.is_zoom_of: # create a (target) grid for re-mapping only if vert axis is not a zoom (i.e. if normal or union)
-                    # mpmoine_correction:create_xios_aux_elmts_defs: il faut creer un grid aussi autour des zoom axis
-                    # mpmoine_correction:create_xios_aux_elmts_defs: alias_ping au lieu de alias en arg de create_grid_def
-                    alias_ping=lset["ping_variables_prefix"]+lwps # e.g. 'CMIP6_hus' and not 'CMIP6_hus7h'; 'CMIP6_co2' and not 'CMIP6_co2Clim'
                     #TBS# grid_def=create_grid_def(sd,alias,context_index)
-                    grid_def=create_grid_def(sd,alias_ping,context_index)
+                    grid_def=create_grid_def(sd,axis_key,alias_ping,context_index)
+                    if grid_def is False : 
+                        raise dr2xml_error("Fatal: cannot create grid_def for %s and %s"%(alias,sd))
                     grid_id=grid_def[0]
                     grid_defs[grid_id]=grid_def[1]
 		            #
                     # Construct a field def for the re-mapped variable
                     # mpmoine_correction:create_xios_aux_elmts_defs: passage par grid_ref aussi pour les varaibles definies sur des zoom
-                    if sd.is_zoom_of: # mpmoine_note: cas variable definie grace a 2 axis_def (union+zoom)
+                    if sd.is_zoom_of: # cas d'une variable definie grace a 2 axis_def (union+zoom)
                         field_defs[alias1]='<field id="%-25s field_ref="%-25s grid_ref="%-10s/>'\
                         %(alias1+'"',alias2+'"',"grid_"+sd.zoom_label+'"')
                         # mpmoine_merge_dev2_v0.12:create_xios_aux_elmts_defs: remplacement axis_ref=sd.is_zoom_of -> grid_ref="grid_"+sd.is_zoom_of
                         field_defs[alias2]='<field id="%-25s field_ref="%-25s grid_ref="%-10s/>'\
-                        %(alias2+'"',cible+'"',"grid_"+sd.is_zoom_of+'"') 
-                    else: # mpmoine_note: cas variable definie grace a seul axis_def (non union+zoom)
-                        # mpmoine_merge_dev2_v0.12:create_xios_aux_elmts_defs: remplacement axis_ref=sd.label -> grid_ref=grid_id
-                        # mpmoine_correction:create_xios_aux_elmts_defs: alias1  au lieu de alias pour l'ecriture de field_defs
+                        %(alias2+'"',alias_ping+'"',"grid_"+sd.is_zoom_of+'"') 
+                    else: # cas d'une variable definie grace a seul axis_def (non union+zoom)
                         field_defs[alias1]='<field id="%-25s field_ref="%-25s grid_ref="%-10s/>'\
-                        %(alias1+'"',cible+'"',grid_id+'"') 
+                        %(alias1+'"',alias_ping+'"',grid_id+'"') 
                 # mpmoine_note: voir en desactivant les zooms si c'est ok                    
                 #TBD what to do for singleton dimension ? 
     #
+    # SS : ecriture plus lisible, et evitant des redondances
+    last_alias=alias 
+    if has_vertical_interpolation : last_alias=alias1 
     #--------------------------------------------------------------------
     # Retrieve XIOS temporal operation to perform
     # by analyzing the time part of cell_methods
     #--------------------------------------------------------------------
      # Analyze 'outermost' time cell_methods and translate to 'operation'
     operation,detect_missing = analyze_cell_time_method(sv.cell_methods,sv.label,table)
-    # mpmoine_alelioration:create_xios_aux_elmts_defs: lever une erreur quand on ne trouve pas une operation temporelle xios correcte
     if not operation: 
         raise dr2xml_error("Fatal: bad xios 'operation' for %s in table %s: %s (%s)"%(sv.label,table,operation,sv.cell_methods))
     if not type(detect_missing)==type(bool()): 
@@ -916,14 +892,26 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
     elif ssh[0:2] == 'S-' : #COSP sites; cas S-na, S-A, S-AH
         grid_ref="COSP_sites_grid"
         # Assume that grid COSP_sites is defined in ping_file
-        #grid_defs[grid_ref]='<grid id="%s"/>'%grid_ref
+        # grid_defs[grid_ref]='<grid id="%s"/>'%grid_ref
     elif ssh[0:2] == 'L-' :
         grid_ref="COSP_curtain_grid"
         grid_defs[grid_ref]='<grid id="%s"/>'%grid_ref
     elif ssh == 'TR-na' or ssh == 'TRS-na' : #transects,   oce or SI
         pass
     elif ssh[0:3] == 'XY-'  : # includes 'XY-AH' : model half-levels
-        if remap_domain : grid_ref=remap_domain
+        if target_hgrid_id :
+            # Must create and a use a grid similar to the last one defined
+            # for that variable, except for a change in the hgrid/domain
+            if has_vertical_interpolation and not last_alias in pingvars:
+                margs={"src_grid_string":grid_defs[grid_id]}
+            else:
+                margs={"alias":last_alias}
+            grid_def=change_domain_in_grid(domain=target_hgrid_id, index=context_index,**margs)
+            if grid_def is False or grid_def is None : 
+                raise dr2xml_error("Fatal: cannot create grid_def for %s with hgrid=%s"%(alias,target_hgrid_id))
+            grid_ref=grid_def[0] ;
+            grid_defs[grid_ref]=grid_def[1]
+            
     elif ssh[0:3] == 'YB-'  : #basin zonal mean or section
         pass
     elif ssh      == 'na-na'  : # global means or constants
@@ -941,12 +929,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
     #TBS# if any (sd.is_zoom_of for sd in sv.sdims.values()):
     # mpmoine_cmor_update:create_xios_aux_elmts_defs: les tables CMOR demandent les champs en 'float' ou 'real' => ajout de prec="4"
     # TBI: idealement if faudrait recuperer le type attendu de la DR ou des tables CMOR
-    if alias1:
-        rep='  <field field_ref="%s" name="%s" ts_enabled="true"'% \
-            (alias1,sv.label)
-    else:
-        rep='  <field field_ref="%s" name="%s" ts_enabled="true"'% \
-            (alias,sv.label)
+    rep='  <field field_ref="%s" name="%s" '% (last_alias,sv.label)
     rep+=' operation="%s" detect_missing_value="%s" default_value="1.e+20" prec="4"'% \
         ( operation,detect_missing)
     rep+=' cell_methods="%s" cell_methods_mode="overwrite"'% sv.cell_methods
@@ -980,6 +963,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
     #
     if grid_ref not in end_field_defs : end_field_defs[grid_ref]=[]
     end_field_defs[grid_ref].append(rep)
+    #print "Appending for %s : %s"%(grid_ref,rep)
 
 # mpmoine_last_modif:gather_AllSimpleVars: nouvelle fonction qui rassemble les operations select_CMORvars_for_lab et read_homeVars_list. 
 # mpmoine_last_modif:gather_AllSimpleVars: Necessaire pour create_ping_file qui doit tenir compte des extra_Vars
@@ -1051,17 +1035,22 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
                 # mpmoine_last_modif:generate_file_defs: patch provisoire pour retirer les  svars qui n'ont pas de spatial_shape 
                 # mpmoine_last_modif:generate_file_defs: (cas par exemple de 'hus' dans table '6hrPlev' => spid='__struct_not_found_001__')
                 # mpmoine_next_modif: generate_file_defs: exclusion de certaines spatial shapes (ex. Polar Stereograpic Antarctic/Groenland)
-                if svar.label not in lset['excluded_vars'] and svar.spatial_shp and svar.spatial_shp not in lset["excluded_spshapes"]:  
+                if svar.label not in lset['excluded_vars'] and \
+                   svar.spatial_shp and \
+                   svar.spatial_shp not in lset["excluded_spshapes"]:  
                     if svar.mipTable not in svars_per_table : 
                         svars_per_table[svar.mipTable]=[]
                     svars_per_table[svar.mipTable].append(svar)
                 else:
                     # mpmoine_future_modif:generate_file_defs: juste un peu plus de printout...
                     if printout:
-                        print "Warning: ",svar.label," in table ",svar.mipTable," has been excluded for one or several of the following reason(s):"
-                        if svar.label in lset['excluded_vars']: print "   * is in excluded list"
-                        if not svar.spatial_shp: print "   * has no spatial shape"
-                        if svar.spatial_shp in lset["excluded_spshapes"]: print "   * has an excluded spatial shape:", svar.spatial_shp
+                        print "Warning: ",svar.label," in table ",svar.mipTable,\
+                            " has been excluded because :",
+                        if svar.label in lset['excluded_vars']: print " it is in exclusion list /",
+                        if not svar.spatial_shp: print " it has no spatial shape /",
+                        if svar.spatial_shp in lset["excluded_spshapes"]:
+                            print " it has an excluded spatial shape:", svar.spatial_shp,
+                        print
     #      
     #--------------------------------------------------------------------
     # Add svars belonging to the orphan list
@@ -1126,6 +1115,9 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
     filename=dirname+"dr2xml_%s.xml"%context
     with open(filename,"w") as out :
         out.write('<context id="%s"> \n'%context)
+        out.write('<!-- CMIP6 Data Request version %s --> \n'%dq.version)
+        out.write('<!-- CMIP6-CV version %s --> \n'%"??")
+        out.write('<!-- dr2xml version %s --> \n'%version)
         field_defs=dict()
         axis_defs=dict()
         grid_defs=dict()
@@ -1298,43 +1290,72 @@ def create_axis_def(sdim,prefix):
         rep+='\t</axis>'
         return rep
 
-# mpmoine_merge_dev2_v0.12: nouvelle fonction create_grid_def
-def create_grid_def(sd,alias=None,context_index=None):
-    # mpmoine_correction:create_grid_def:  si, il faut generer une grille autour des axes de zoom aussi
-    if not sd.is_zoom_of and not sd.is_union_for: # a grid_def to build in classical case (a vertical axis without using union)
-        if alias and context_index:
-            src_grid=id2grid(alias,context_index,printout=True)
-            if src_grid is not None : 
-                src_grid_id=src_grid.attrib['id']
-                src_grid_string=ET.tostring(src_grid)
-                target_grid_id=src_grid_id+"_"+sd.label
-                target_grid_string=re.sub('axis_ref= *.([\w_])*.','axis_ref="%s"'%sd.label,src_grid_string)
-                target_grid_string=re.sub('grid id= *.([\w_])*.','grid id="%s"'%target_grid_id,target_grid_string)
-                return (target_grid_id,target_grid_string)
-            else:
-                print("Fatal: ask for creating a grid_def for var %s which has no grid "%(alias))
-                return False
+def change_domain_in_grid(domain,alias=None,src_grid_string=None,index=None):
+    """ 
+    Provided with either a variable name (ALIAS) or the string for a grid definition,
+    returns a grid_definition where the domain has been changed  to DOMAIN
+    """
+    if src_grid_string is None:
+        if alias is None :
+            raise dr2xml_error("change_domain_in_grid: must provide alias or grid_string ")
+        src_grid=id2grid(alias,index)
+        if src_grid is not None : 
+            src_grid_id=src_grid.attrib['id']
+            src_grid_string=ET.tostring(src_grid)
         else:
-            raise dr2xml_error("Fatal: ask for creating a grid_def from a native grid "+\
-            "but variable alias and/or context_index not provided (alias:%s, context_index:%s)"%(alias,context_index))
-            #return False
-    elif sd.is_union_for: # a grid_def to build in union case
-        grid_id="grid_"+sd.label
-        grid_string='<grid id="%s">'%grid_id
-        grid_string+='\n\t<domain domain_ref="%s"/>'%"domain_atm" # mpmoine_note: attention, en dur !
-        grid_string+='\n\t<axis axis_ref="%s"/>'%sd.label
-        grid_string+='\n\t</grid>'
-        return (grid_id,grid_string)
-    elif sd.is_zoom_of: # a grid_def to build in zoom case
-        grid_id="grid_"+sd.zoom_label
-        grid_string='<grid id="%s">'%grid_id
-        grid_string+='\n\t<domain domain_ref="%s"/>'%"domain_atm" # mpmoine_note: attention, en dur !
-        grid_string+='\n\t<axis axis_ref="%s"/>'%sd.zoom_label
-        grid_string+='\n\t</grid>'
-        return (grid_id,grid_string)
+            raise dr2xml_error("Fatal: ask for creating a grid_def for var %s which has no grid "%(alias))
+    else :
+        src_grid_id=re.sub(r'.*grid id= *.([\w_]*).*\n.*',r'\g<1>',src_grid_string,1)
+        if src_grid_id == src_grid_string : 
+            raise dr2xml_error("Issue extracting grid id for %s from %s "%(alias,src_grid_string))
+        #print "src_grid_id=%s"%src_grid_id
+    target_grid_id=src_grid_id+"_"+domain
+    # Change domain
+    (target_grid_string,count)=re.subn('domain_ref= *.([\w_])*.','domain_ref="%s"'%domain,src_grid_string,1)
+    if count != 1 : 
+        raise dr2xml_error("Fatal: cannot find a domain to change in src_grid_string %s"%src_grid_string)
+    target_grid_string=re.sub('grid id= *.([\w_])*.','grid id="%s"'%target_grid_id,target_grid_string)
+    return (target_grid_id,target_grid_string)
+
+def create_grid_def(sd,axis_key,alias=None,context_index=None):
+    # mpmoine_correction:create_grid_def:  si, il faut generer une grille autour des axes de zoom aussi
+    #if not sd.is_zoom_of and not sd.is_union_for: # a grid_def to build in classical case (a vertical axis without using union)
+    if alias and context_index:
+        src_grid=id2grid(alias,context_index,printout=True)
+        if src_grid is not None : 
+            src_grid_id=src_grid.attrib['id']
+            src_grid_string=ET.tostring(src_grid)
+            target_grid_id=src_grid_id+"_"+axis_key
+            # Change only first instance of axis_ref, which is assumed to match the vertical dimension
+            (target_grid_string,count)=re.subn('axis_ref= *.([\w_])*.','axis_ref="%s"'%axis_key,src_grid_string,1)
+            if count != 1 : 
+                raise dr2xml_error("Fatal: cannot find an axis_ref to change in src_grid_string %s"%src_grid_string)
+            target_grid_string=re.sub('grid id= *.([\w_])*.','grid id="%s"'%target_grid_id,target_grid_string)
+            return (target_grid_id,target_grid_string)
+        else:
+            raise dr2xml_error("Fatal: ask for creating a grid_def for var %s which has no grid "%(alias))
+        #return False
     else:
-        print "Warning: calling create_grid_def for a vertical axis which nothing among classical/union/zoom... Humm, don't know what this axis is..."
-        return False
+        raise dr2xml_error("Fatal: ask for creating a grid_def from a native grid "+\
+                           "but variable alias and/or context_index not provided (alias:%s, context_index:%s)"%(alias,context_index))
+        #return False
+    # elif sd.is_union_for: # a grid_def to build in union case
+    #     grid_id="grid_"+axis_key
+    #     grid_string='<grid id="%s">'%grid_id
+    #     grid_string+='\n\t<domain domain_ref="%s"/>'%"domain_atm" # mpmoine_note: attention, en dur !
+    #     grid_string+='\n\t<axis axis_ref="%s"/>'%axis_key
+    #     grid_string+='\n\t</grid>'
+    #     return (grid_id,grid_string)
+    # elif sd.is_zoom_of: # a grid_def to build in zoom case
+    #     grid_id="grid_"+axis_key
+    #     grid_string='<grid id="%s">'%grid_id
+    #     grid_string+='\n\t<domain domain_ref="%s"/>'%"domain_atm" # mpmoine_note: attention, en dur !
+    #     grid_string+='\n\t<axis axis_ref="%s"/>'%axis_key
+    #     grid_string+='\n\t</grid>'
+    #     return (grid_id,grid_string)
+    # else:
+    #     print "Warning: calling create_grid_def for a vertical axis which nothing among classical/union/zoom... Humm, don't know what this axis is..."
+    #     return False
 
 # mpmoine_zoom_modif: nouvelle fonction 'create_xios_axis_for_plevs_unions'
 # mpmoine_merge_dev2_v0.12: 'create_xios_axis_for_plevs_unions' renomee en 'create_xios_axis_and_grids_for_plevs_unions'
@@ -1356,6 +1377,7 @@ def create_xios_axis_and_grids_for_plevs_unions(svars,plev_sfxs,prefix,printout=
     * Second, create create all of the Xios union axis (axis id: union_plevs_<label_without_psuffix>)
     """
     #
+    global context_index
     #First, search plev unions for each label_without_psuffix and build dict_plevs
     dict_plevs={}
     for sv in svars:
@@ -1431,7 +1453,8 @@ def create_xios_axis_and_grids_for_plevs_unions(svars,plev_sfxs,prefix,printout=
         axis_def=create_axis_def(sdim_union,prefix)
         union_axis_defs.update({sdim_union.label:axis_def})
         # mpmoine_merge_dev2_v0.12: maintenant on doit non seulement creer les axes d'union mais aussi les grid les englobant
-        grid_def=create_grid_def(sdim_union)
+        # SS : ajout des deux derniers arguments, pour ne pas avoir de domains en dur dans create_grid_def
+        grid_def=create_grid_def(sdim_union,sdim_union.label,prefix+lwps,context_index)
         grid_id=grid_def[0]
         union_grid_defs[grid_id]=grid_def[1]
     #
