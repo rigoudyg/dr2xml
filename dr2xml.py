@@ -433,23 +433,47 @@ def wr(out,key,dic_or_val=None,num_type="string",default=None) :
         out.write('  </variable>\n')
 
 
-def freq2datefmt(freq):
+def freq2datefmt(freq,operation):
     # WIP doc v6.2.3 - Apr. 2017: <time_range> format is frequency-dependant 
     datefmt=False
-    if freq in ["yr","decadal"]:
+    offset=None
+    if freq == "decadal":
         datefmt="%y"
+        if operation=='average' : offset="5y"
+    if freq == "yr":
+        datefmt="%y"
+        if operation=='average' : offset="0.5y"
     elif freq in ["mon","monClim"]:
         datefmt="%y%mo"
+        if operation=='average' : offset="0.5m"
     elif freq=="day":
         datefmt="%y%mo%d"
-    #mpmoine_TBD: supprimer "hr" selon reponse de D. Nadeau a l'issue https://github.com/PCMDI/cmip6-cmor-tables/issues/59
+        if operation=='average' : offset="0.5d"
     elif freq in ["6hr","3hr","3hrClim","1hr","hr","1hrClimMon"]: 
         datefmt="%y%mo%d%h%mi"
+        if freq=="6hr":
+            if operation=='average' : offset="3h"
+        elif freq in [ "3hr", "3hrClim"] :
+            if operation=='average' : offset="1.5h"
+        #mpmoine_TBD: supprimer "hr" selon reponse de D. Nadeau a l'issue https://github.com/PCMDI/cmip6-cmor-tables/issues/59
+        elif freq in ["1hr", "hr",  "1hrClimMon"]: 
+            if operation=='average' : offset="0.5h"
     elif freq=="subhr":
         datefmt="%y%mo%d%h%mi%s"
-    elif freq=="fx":
+        # assume that 'subhr' means every timestep
+        if operation=='average' :
+            # Does it make sense ??
+            offset="0.5ts"
+    elif "fx" in freq :
         pass ## WIP doc v6.2.3 - Apr. 2017: if frequency="fx", [_<time_range>] is ommitted
-    return datefmt
+    if offset is not None:
+        if operation=="average" : offset_end=offset
+        else :
+            offset="1ts"
+            offset_end="0s"
+    else:
+        offset="0s"; offset_end="0s"
+    return datefmt,offset,offset_end
 
 def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     field_defs,axis_defs,grid_defs,domain_defs,
@@ -592,10 +616,11 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
         description=exp_entry['description']
     # 
     date_range="%start_date%-%end_date%" # XIOS syntax
-    date_format=freq2datefmt(cmv.frequency)
+    operation,detect_missing = analyze_cell_time_method(cmv.cell_methods,cmv.label,table)
+    date_format,offset_begin,offset_end=freq2datefmt(cmv.frequency,operation)
     #
     # mpmoine: WIP doc v6.2.3 : [_<time_range>] omitted if frequency is "fx"; a suffix "-clim" is added if climatology
-    if cmv.frequency=="fx":
+    if "fx" in cmv.frequency:
         filename="%s%s_%s_%s_%s_%s_%s"%\
                    (prefix,cmv.label,table,source_id,expname,
                     member_id,grid_label)
@@ -627,6 +652,11 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     out.write(' append="true" split_freq="%s" '%split_freq)
     # mpmoine_cmor_update:write_xios_file_def: ajout de 'split_freq_format' pour se coformer a CMOR3.0.3 
     out.write(' split_freq_format="%s" '%date_format)
+    #
+    # Modifiers for date parts of the filename, due to silly KT conventions
+    out.write( 'begin_date_offset="%s" ' %offset_begin)
+    out.write(   'end_date_offset="%-s" '%offset_end)
+    #
     #out.write('timeseries="exclusive" >\n')
     out.write(' time_units="days" time_counter_name="time"')
     # mpmoine_cmor_update:write_xios_file_def: ajout de time_counter="exclusive"
