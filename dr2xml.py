@@ -649,13 +649,15 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     #--------------------------------------------------------------------
     out.write(' <file name="%s" '%filename)
     out.write(' output_freq="%s" '%cmipFreq2xiosFreq[cmv.frequency])
-    out.write(' append="true" split_freq="%s" '%split_freq)
-    # mpmoine_cmor_update:write_xios_file_def: ajout de 'split_freq_format' pour se coformer a CMOR3.0.3 
-    out.write(' split_freq_format="%s" '%date_format)
-    #
-    # Modifiers for date parts of the filename, due to silly KT conventions
-    out.write( 'begin_date_offset="%s" ' %offset_begin)
-    out.write(   'end_date_offset="%-s" '%offset_end)
+    out.write(' append="true" ')
+    if not "fx" in cmv.frequency :
+        out.write(' split_freq="%s" '%split_freq)
+        # mpmoine_cmor_update:write_xios_file_def: ajout de 'split_freq_format' pour se conformer a CMOR3.0.3 
+        out.write(' split_freq_format="%s" '%date_format)
+        #
+        # Modifiers for date parts of the filename, due to silly KT conventions
+        out.write( 'begin_date_offset="%s" ' %offset_begin)
+        out.write(   'end_date_offset="%-s" '%offset_end)
     #
     #out.write('timeseries="exclusive" >\n')
     out.write(' time_units="days" time_counter_name="time"')
