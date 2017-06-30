@@ -123,11 +123,13 @@ example_lab_and_model_settings={
         'nemo': ['seaIce', 'ocean', 'ocean seaIce', 'ocnBgchem', 'seaIce ocean'] ,
         'arpsfx' : ['atmos', 'atmos atmosChem', 'aerosol', 'atmos land', 'land',
                     'landIce land',  'aerosol land','land landIce',  'landIce', ],
+        'trip'   : [],
                           }, 
     # Some variables, while belonging to a realm, may fall in another XIOS context than the 
     # context which hanldes that realm
-    'orphan_variables' : { 'nemo' : ['dummy_variable_for_illustration_purpose'],
-                        ' arpsfx' : [],
+    'orphan_variables' : { 'nemo'    : [''],
+                           ' arpsfx' : [],
+                           'trip'    : ['dgw', 'drivw', 'cfCLandToOcean', 'qgwr', 'rivi', 'rivo', 'waterDpth', 'wtd'],
                            },
     'vars_OK' : dict(),
     # A per-variable dict of comments valid for all simulations
@@ -149,16 +151,18 @@ example_lab_and_model_settings={
     "grids" : { 
       "LR"    : {
         "surfex" : [ "gr","complete" , "250 km", "data regridded to a T127 gaussian grid (128x256 latlon) from a native atmosphere T127l reduced gaussian grid"] ,
+          "trip" : [ "gn", "" ,  "50km" , "regular 1/2° lat-lon grid" ],
           "nemo" : [ "gn", ""        , "100km" , "native ocean tri-polar grid with 105 k ocean cells" ],},
       "HR"    : {
         "surfex" : [ "gr","complete" , "50 km", "data regridded to a 359 gaussian grid (180x360 latlon) from a native atmosphere T359l reduced gaussian grid"] ,
+          "trip" : [ "gn", "" ,  "50km" , "regular 1/2° lat-lon grid" ],
           "nemo" : [ "gn", ""         , "25km" , "native ocean tri-polar grid with 1.47 M ocean cells" ],},
     },
     'grid_choice' : { "CNRM-CM6-1" : "LR", "CNRM-CM6-1-HR" : "HR",
                       "CNRM-ESM2-1": "LR"  , "CNRM-ESM2-1-HR": "HR" },
     #        
     # Component Models Time steps (s)
-    "model_timestep" : { "surfex":900., "nemo":900.},
+    "model_timestep" : { "surfex":900., "nemo":900., "trip": 1800. },
     #--- Say if you want to use XIOS union/zoom axis to optimize vertical interpolation requested by the DR
     "use_union_zoom" : False,
 
@@ -655,9 +659,9 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
         # mpmoine_cmor_update:write_xios_file_def: ajout de 'split_freq_format' pour se conformer a CMOR3.0.3 
         out.write(' split_freq_format="%s" '%date_format)
         #
-        # Modifiers for date parts of the filename, due to silly KT conventions
+        # Modifiers for date parts of the filename, due to silly KT conventions. Need XIOS release >= TBD
         out.write( 'begin_date_offset="%s" ' %offset_begin)
-        out.write(   'end_date_offset="%-s" '%offset_end)
+        out.write(   'end_date_offset="-%s" '%offset_end)
     #
     #out.write('timeseries="exclusive" >\n')
     out.write(' time_units="days" time_counter_name="time"')
@@ -1039,11 +1043,12 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
     """
     #
     #--------------------------------------------------------------------
-    # Parse XIOS setting files for the context
+    # Parse XIOS settings file for the context
     #--------------------------------------------------------------------
     global context_index
     # mpmoine_amelioration:generate_file_defs: ajout de l'argument 'path_parse' a la fonction init_context
     context_index=init_context(context,lset.get("path_to_parse","./"),printout=False)
+    if context_index is None : sys.exit(0)
     #
     #--------------------------------------------------------------------
     # Extract CMOR variables for the experiment and year and lab settings

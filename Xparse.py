@@ -209,8 +209,9 @@ def select_context(rootel,context_id):
 
 # mpmoine_amelioration: ajout de l'argument 'path_parse' a la fonction init_context
 def init_context(context_id,path_parse,printout=False):
-    # mpmoine_merge_dev2_v0.12:init_context: ajout de "./parse/" pour acceder a iodef.xml 
-    rootel=ET.parse(path_parse+"/iodef.xml").getroot()
+    # mpmoine_merge_dev2_v0.12:init_context: ajout de "./parse/" pour acceder a iodef.xml
+    xmldef=path_parse+"iodef.xml"
+    rootel=ET.parse(xmldef).getroot()
     # mpmoine_amelioration:init_context: ajout de l'argument 'path_parse' a la fonction read_src
     read_src(rootel,path_parse,printout=printout,dont_read=["dr2xml_"])
     merge_sons(rootel,printout)
@@ -229,7 +230,7 @@ def init_context(context_id,path_parse,printout=False):
         #ET.dump(rootel)
         return (index)
     else:
-        print "context %s not found"%context_id
+        print "Xparse::init_context : context %s not found in %s"%(context_id,xmldef)
 
 def id2grid(field_id,index,printout=False) :
     """ 
