@@ -47,7 +47,7 @@ import dreq
 # End of pre-requisites
 ####################################
 
-version="0.13"
+version="0.14"
 print "* dr2xml version:", version
 
 from datetime import datetime
@@ -80,6 +80,15 @@ print "* CMIP6 Data Request version: ", dq.version
 
 context_index=None
 
+# Names for COSP-CFsites related elements.
+# A file named cfsites_grid_file_id must be provided at runtime, which
+# includes a field named cfsites_grid_field_id, defined on a unstructured 
+# grid which is composed of CF sites
+cfsites_radix        ="cfsites"
+cfsites_domain_id    =cfsites_radix+"_domain"
+cfsites_grid_id      =cfsites_radix+"_grid"
+cfsites_grid_file_id =cfsites_grid_id
+cfsites_grid_field_id=cfsites_radix+"_field"
 
 """ An example/template  of settings for a lab and a model"""
 example_lab_and_model_settings={
@@ -326,6 +335,13 @@ def select_CMORvars_for_lab(lset, experiment_id=None, year=None,printout=False):
         print "Number of Request Links which apply to MIPS",
         print lset['mips']," is: ", len(rls_for_mips)
     #
+    for rl in rls_for_mips :
+        if rl.label=="CFsubhr":
+            rlCFsubhr=rl
+            #print "One reqlink : "+`rl.label`+" grid="+rl.grid+" uid="+rl.uid
+    # TBD : vérifier si ce requestlink CFsubhr, qui indique grille native en subhr (!), a été rectifié
+    rls_for_mips.remove(rlCFsubhr)
+    #
     if (year) :
         filtered_rls=[]
         for rl in rls_for_mips :
@@ -441,48 +457,56 @@ def freq2datefmt(freq,operation):
     # WIP doc v6.2.3 - Apr. 2017: <time_range> format is frequency-dependant 
     datefmt=False
     offset=None
-    if freq == "decadal":
+    if freq == "dec":
         datefmt="%y"
-        if operation=='average' : offset="5y"
+        if operation in ["average","minimum","maximum"] : offset="5y"
+        else : offset="10y"
     if freq == "yr":
         datefmt="%y"
-        if operation=='average' : offset="0.5y"
+        if operation in ["average","minimum","maximum"] : offset="0.5y"
+        else : offset="1y"
     elif freq in ["mon","monClim"]:
         datefmt="%y%mo"
-        if operation=='average' : offset="0.5m"
+        if operation in ["average","minimum","maximum"] : offset="0.5mo"
+        else : offset="1mo"
     elif freq=="day":
         datefmt="%y%mo%d"
-        if operation=='average' : offset="0.5d"
+        if operation in ["average","minimum","maximum"] : offset="0.5d"
+        else : offset="1d"
     elif freq in ["6hr","3hr","3hrClim","1hr","hr","1hrClimMon"]: 
         datefmt="%y%mo%d%h%mi"
         if freq=="6hr":
-            if operation=='average' : offset="3h"
+            if operation in ["average","minimum","maximum"] : offset="3h"
+            else : offset="6h"
         elif freq in [ "3hr", "3hrClim"] :
-            if operation=='average' : offset="1.5h"
+            if operation in ["average","minimum","maximum"] : offset="1.5h"
+            else : offset="3h"
         #mpmoine_TBD: supprimer "hr" selon reponse de D. Nadeau a l'issue https://github.com/PCMDI/cmip6-cmor-tables/issues/59
         elif freq in ["1hr", "hr",  "1hrClimMon"]: 
-            if operation=='average' : offset="0.5h"
+            if operation in ["average","minimum","maximum"] : offset="0.5h"
+            else : offset="1h"
     elif freq=="subhr":
         datefmt="%y%mo%d%h%mi%s"
         # assume that 'subhr' means every timestep
-        if operation=='average' :
+        if operation in ["average","minimum","maximum"] :
             # Does it make sense ??
             offset="0.5ts"
+        else : offset="1ts"
     elif "fx" in freq :
         pass ## WIP doc v6.2.3 - Apr. 2017: if frequency="fx", [_<time_range>] is ommitted
     if offset is not None:
-        if operation=="average" : offset_end=offset
-        else :
-            offset="1ts"
-            offset_end="0s"
+        if operation in ["average","minimum","maximum"] : offset_end="-"+offset
+        else : offset_end="0s"
     else:
         offset="0s"; offset_end="0s"
+        if not "fx" in freq :
+            raise dr2xml_error("Cannot compute offsets for freq=%s and operation=%s"%(freq,operation))
     return datefmt,offset,offset_end
 
 def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     field_defs,axis_defs,grid_defs,domain_defs,
     dummies,skipped_vars_per_table,
-    prefix,context,grid,pingvars=None) :
+                        prefix,context,grid,pingvars=None,enddate=None) :
     """ 
     Generate an XIOS file_def entry in out for :
       - a dict for laboratory settings 
@@ -591,7 +615,10 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     else:
         # DR requested type of grid. Assume that the ping_file includes an Xios definition for it <- TBD
         grid_label=grid
-        target_hgrid_id=lset["ping_variables_prefix"]+grid
+        if grid == 'cfsites' :
+            target_hgrid_id=cfsites_domain_id
+        else:
+            target_hgrid_id=lset["ping_variables_prefix"]+grid
         grid_description=grid2desc(grid)
         grid_resolution=grid2resol(grid)
     if table in [ 'AERMonZ',' EmonZ', 'EdayZ' ] : grid_label+="z"
@@ -660,8 +687,13 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
         out.write(' split_freq_format="%s" '%date_format)
         #
         # Modifiers for date parts of the filename, due to silly KT conventions. Need XIOS release >= TBD
-        out.write( 'begin_date_offset="%s" ' %offset_begin)
-        out.write(   'end_date_offset="-%s" '%offset_end)
+        out.write(' split_start_offset="%s" ' %offset_begin)
+        out.write(' split_end_offset="%s" '%offset_end)
+        # Using Eclis convention : endday looks like 20131231, rather than 20140101
+        endyear=enddate[0:4]
+        endmonth=enddate[4:6]
+        endday=enddate[6:8]
+        out.write(' split_last_date="%s-%s-%s 00:00:00 +1d" '%(endyear,endmonth,endday))
     #
     #out.write('timeseries="exclusive" >\n')
     out.write(' time_units="days" time_counter_name="time"')
@@ -677,6 +709,7 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     if contact and contact is not "" : wr(out,'contact',contact) 
     wr(out,'Conventions',conventions) 
     wr(out,'data_specs_version',dq.version) 
+    wr(out,'dr2xml_version',version) 
     #
     wr(out,'description',description)
     wr(out,'experiment',experiment)
@@ -920,9 +953,12 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
      # Analyze 'outermost' time cell_methods and translate to 'operation'
     operation,detect_missing = analyze_cell_time_method(sv.cell_methods,sv.label,table)
     if not operation: 
-        raise dr2xml_error("Fatal: bad xios 'operation' for %s in table %s: %s (%s)"%(sv.label,table,operation,sv.cell_methods))
+        #raise dr2xml_error("Fatal: bad xios 'operation' for %s in table %s: %s (%s)"%(sv.label,table,operation,sv.cell_methods))
+        print("Fatal: bad xios 'operation' for %s in table %s: %s (%s)"%(sv.label,table,operation,sv.cell_methods))
+        operation="once"
     if not type(detect_missing)==type(bool()): 
-        raise dr2xml_error("Fatal: bad xios 'detect_missing_value' for %s in table %s: %s (%s)"%(sv.label,table,detect_missing,sv.cell_methods))
+        #raise dr2xml_error("Fatal: bad xios 'detect_missing_value' for %s in table %s: %s (%s)"%(sv.label,table,detect_missing,sv.cell_methods))
+        print("Fatal: bad xios 'detect_missing_value' for %s in table %s: %s (%s)"%(sv.label,table,detect_missing,sv.cell_methods))
     #
     #--------------------------------------------------------------------
     # Build XIOS grid elements (stored in grid_defs)
@@ -935,19 +971,19 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
         # TBD should remap before zonal mean # STOPICI_REVUE_TBD_09-05-2017
         grid_ref="zonal_mean"
         grid_defs[grid_ref]='<grid id="%s"/>'%grid_ref
-    elif ssh[0:2] == 'S-' : #COSP sites; cas S-na, S-A, S-AH
-        grid_ref="COSP_sites_grid"
-        # Assume that grid COSP_sites is defined in ping_file
-        # grid_defs[grid_ref]='<grid id="%s"/>'%grid_ref
-    elif ssh[0:2] == 'L-' :
-        grid_ref="COSP_curtain_grid"
-        grid_defs[grid_ref]='<grid id="%s"/>'%grid_ref
+    #elif ssh[0:2] == 'S-' : # COSP sites - neutralise
+    #    pass
+    elif ssh == 'S-na' : # COSP sites
+        grid_ref=cfsites_grid_id
+        grid_defs[grid_ref]='<grid id="%s" > <domain id="%s" /> </grid>'%(cfsites_grid_id,cfsites_domain_id)
+        domain_defs[cfsites_radix]=' <domain id="%s" type="unstructured" prec="8"> '%cfsites_domain_id+\
+            '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true"/> </domain>'
     elif ssh == 'TR-na' or ssh == 'TRS-na' : #transects,   oce or SI
         pass
-    elif ssh[0:3] == 'XY-'  : # includes 'XY-AH' : model half-levels
+    elif ssh[0:3] == 'XY-' or ssh[0:3] == 'S-A'  : # includes 'XY-AH' and 'S-AH' : model half-levels
         if target_hgrid_id :
-            # Must create and a use a grid similar to the last one defined
-            # for that variable, except for a change in the hgrid/domain
+            # Must create and a use a grid similar to the last one defined 
+           # for that variable, except for a change in the hgrid/domain
             if has_vertical_interpolation and not last_alias in pingvars:
                 margs={"src_grid_string":grid_defs[grid_id]}
             else:
@@ -1021,7 +1057,7 @@ def gather_AllSimpleVars(lset,expid=False,year=False,printout=False):
     else: print "Info: No HOMEvars list provided."
     return mip_vars_list
 
-def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
+def generate_file_defs(lset,sset,year,enddate,context,cvs_path,pingfile=None,
     dummies='include',printout=False,dirname="./",prefix="") :
     """
     Using global DR object dq, a dict of lab settings LSET, and a dict 
@@ -1076,7 +1112,9 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
     #--------------------------------------------------------------------
     svars_per_table=dict()
     context_realms=lset['realms_per_context'][context]
-    for realm in context_realms : 
+    for realm in context_realms :
+        print "Processing realm '%s' of context '%s'"%(realm,context)
+        print 50*"_"
         if realm in svars_per_realm.keys():
             for svar in svars_per_realm[realm] :
                 # mpmoine_last_modif:generate_file_defs: patch provisoire pour retirer les  svars qui n'ont pas de spatial_shape 
@@ -1091,7 +1129,7 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
                 else:
                     # mpmoine_future_modif:generate_file_defs: juste un peu plus de printout...
                     if printout:
-                        print "Warning: ",svar.label," in table ",svar.mipTable,\
+                        print "Warning: %20s in table %s"%(svar.label,svar.mipTable)+\
                             " has been excluded because :",
                         if svar.label in lset['excluded_vars']: print " it is in exclusion list /",
                         if not svar.spatial_shp: print " it has no spatial shape /",
@@ -1108,9 +1146,9 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
             # mpmoine_last_modif:generate_file_defs: patch provisoire pour retirer les  svars qui n'ont pas de spatial_shape 
             # mpmoine_last_modif:generate_file_defs: (cas par exemple de 'hus' dans table '6hrPlev' => spid='__struct_not_found_001__')
             # mpmoine_next_modif: generate_file_defs: exclusion de certaines spatial shapes (ex. Polar Stereograpic Antarctic/Groenland)
-            if svar.label not in lset['excluded_vars'] and svar.spatial_shp and svar.spatial_shp not in lset["excluded_spshapes"]:  
-                if svar.mipTable not in svars_per_table :
-                    svars_per_table[svar.mipTable]=[]
+            if svar.label not in lset['excluded_vars'] and svar.spatial_shp and \
+               svar.spatial_shp not in lset["excluded_spshapes"]:  
+                if svar.mipTable not in svars_per_table : svars_per_table[svar.mipTable]=[]
                 svars_per_table[svar.mipTable].append(svar)
     #    
     #
@@ -1151,7 +1189,7 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
             elif dummies=="skip" : pass
             else:
                 print "Forbidden option for dummies : "+dummies
-                return
+                return 
 
     #
     #--------------------------------------------------------------------
@@ -1179,12 +1217,13 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
                     for grid in svar.grids :
                         write_xios_file_def(svar,table, lset,sset,out,cvs_path,
                                             field_defs,axis_defs,grid_defs,domain_defs,dummies,
-                                skipped_vars_per_table,prefix,context,grid,pingvars)
+                                            skipped_vars_per_table,prefix,context,grid,pingvars,enddate)
                 else :
                     pass
                     print "Duplicate var in %s : %s %s %s"%(
                         table, svar.label, `svar.temporal_shp`, \
-                        `count[svar.label].temporal_shp`) 
+                        `count[svar.label].temporal_shp`)
+        if cfsites_grid_id in grid_defs : out.write(cfsites_input_filedef())
         out.write('\n</file_definition> \n')
         #
         #--------------------------------------------------------------------
@@ -1203,9 +1242,12 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
         if lset['use_union_zoom']:
             for obj in union_axis_defs.keys(): out.write("\t"+union_axis_defs[obj]+"\n")
         out.write('</axis_definition> \n')
+        #
         out.write('\n<domain_definition> \n')
+        create_standard_domains(domain_defs)
         for obj in domain_defs.keys(): out.write("\t"+domain_defs[obj]+"\n")
         out.write('</domain_definition> \n')
+        #
         out.write('\n<grid_definition> \n')
         for obj in grid_defs.keys(): out.write("\t"+grid_defs[obj]+"\n")
         # mpmoine_merge_dev2_v0.12:generate_file_defs: on ecrit maintenant les grid defs pour les unions
@@ -1223,35 +1265,37 @@ def generate_file_defs(lset,sset,year,context,cvs_path,pingfile=None,
 # mpmoine_petitplus: nouvelle fonction print_SomeStats (plus d'info sur les skipped_vars, nbre de vars / (shape,freq) )
 def print_SomeStats(context,svars_per_table,skipped_vars_per_table):
 
-	#--------------------------------------------------------------------
+    #--------------------------------------------------------------------
     # Print Summary: list of  considered variables per table 
     # (i.e. not excuded_vars and not excluded_shapes)
     #--------------------------------------------------------------------
     print "\nTables concerned by context %s : "%context, svars_per_table.keys()
     print "\nVariables per table :"
     for table in svars_per_table.keys():
-    	print ">>> DBG >>> TABLE"
+    	print "\n>>> DBG >>> TABLE",
         print "%15s %02d ---->"%(table,len(svars_per_table[table])),
         for svar in svars_per_table[table]: 
         	print svar.label+"("+str(svar.Priority)+")",
+    print
 
     #--------------------------------------------------------------------
     # Print Summary: list of skipped variables per table
     # (i.e. not in the ping_file)
     #--------------------------------------------------------------------
-	if skipped_vars_per_table:
-		print "\nSkipped variables (i.e. whose alias is not present in the pingfile):"
+    if skipped_vars_per_table:
+	print "\nSkipped variables (i.e. whose alias is not present in the pingfile):"
         for table,skipvars in skipped_vars_per_table.items():
-            print "\n%15s %02d/%02d ---->"%(table,len(skipvars),len(svars_per_table[table])),
+            print "%15s %02d/%02d ---->"%(table,len(skipvars),len(svars_per_table[table])),
             #TBS# print "\n\t",table ," ",len(skipvars),"--->",
             for skv in skipvars: 
-            	print skv, #already contains priority info
+            	print skv #already contains priority info
+        print
 
     #--------------------------------------------------------------------
     # Print Summary: list of variables really written in the file_def
     # (i.e. not excluded and not skipped)
     #--------------------------------------------------------------------
-	stats_out={}
+    stats_out={}
     for table in svars_per_table.keys():
     	for sv in svars_per_table[table]:
     		dic_freq={}
@@ -1276,6 +1320,7 @@ def print_SomeStats(context,svars_per_table,skipped_vars_per_table):
     		nb=len(v2.values())
     		print "\n\n* %d variables output at %s frequency with shape %s ---> "%(nb,k1,k2)
     		for k3,v3 in v2.items(): print k3,"(",v3,"),",
+    return True
 
 
 # mpmoine_future_modif:create_axis_def: suppression de l'argument 'field_defs' qui n'est pas utilise
@@ -1358,7 +1403,7 @@ def change_domain_in_grid(domain,alias=None,src_grid_string=None,index=None):
         #print "src_grid_id=%s"%src_grid_id
     target_grid_id=src_grid_id+"_"+domain
     # Change domain
-    (target_grid_string,count)=re.subn('domain_ref= *.([\w_])*.','domain_ref="%s"'%domain,src_grid_string,1)
+    (target_grid_string,count)=re.subn('domain *id= *.([\w_])*.','domain id="%s"'%domain,src_grid_string,1)
     if count != 1 : 
         raise dr2xml_error("Fatal: cannot find a domain to change in src_grid_string %s"%src_grid_string)
     target_grid_string=re.sub('grid id= *.([\w_])*.','grid id="%s"'%target_grid_id,target_grid_string)
@@ -1374,9 +1419,10 @@ def create_grid_def(sd,axis_key,alias=None,context_index=None):
             src_grid_string=ET.tostring(src_grid)
             target_grid_id=src_grid_id+"_"+axis_key
             # Change only first instance of axis_ref, which is assumed to match the vertical dimension
-            (target_grid_string,count)=re.subn('axis_ref= *.([\w_])*.','axis_ref="%s"'%axis_key,src_grid_string,1)
+            (target_grid_string,count)=re.subn('axis *id= *.([\w_])*.','axis id="%s"'%axis_key,src_grid_string,1)
             if count != 1 : 
-                raise dr2xml_error("Fatal: cannot find an axis_ref to change in src_grid_string %s"%src_grid_string)
+                raise dr2xml_error("Fatal: cannot find an axis_ref to change in src_grid_string %s for %s"%\
+                                   (src_grid_string,alias))
             target_grid_string=re.sub('grid id= *.([\w_])*.','grid id="%s"'%target_grid_id,target_grid_string)
             return (target_grid_id,target_grid_string)
         else:
@@ -1515,7 +1561,9 @@ def isVertDim(sdim):
     dimension identification:
     """
     # mpmoine_future_modif: isVertDim: on utilise maintenant sv.sdims pour analyser les dimensions
-    test=(sdim.stdname=='air_pressure' or sdim.stdname=='altitude')
+    # SS : p840, p220 sont des couches de pression , pour lesquelles COSP forunit directement
+    # les valeurs moyennes de paramètres (e.g. cllcalipso). On les détecte par l'attribut bounds 
+    test=(sdim.stdname=='air_pressure' or sdim.stdname=='altitude') and (sdim.bounds != "yes")
     return test
 
 def analyze_cell_time_method(cm,label,table):
@@ -1548,9 +1596,17 @@ def analyze_cell_time_method(cm,label,table):
             %(label,table)
         operation="average"
         detect_missing=True
-    elif "time: mean where sea"  in cm :#[amnesi-tmn]: 
-        #Area Mean of Ext. Prop. on Sea Ice : pas utilisee
-        print "time: mean where sea is not supposed to be used (%s,%s)"%(label,table)
+    #-------------------------------------------------------------------------------------
+    # mpmoine_correction:analyze_cell_time_method: ajout du cas "time: mean where sea_ice_melt_pound"
+    elif "time: mean where sea_ice_melt_pound" in cm :
+        #[amnnsimp-twmm]: Weighted Time Mean in Sea-ice Melt Pounds (uniquement des 
+        #variables en SImon)
+        print "Note : assuming that 'time: mean where sea_ice_melt_pound' "+\
+            " for %15s in table %s is well handled by 'detect_missing'"\
+            %(label,table)
+        operation="average"
+        detect_missing=True
+    #-------------------------------------------------------------------------------------------------
     elif "time: mean where sea_ice" in cm :
         #[amnsi-twm]: Weighted Time Mean on Sea-ice (presque que des 
         #variables en SImon, sauf sispeed et sithick en SIday)
@@ -1560,11 +1616,14 @@ def analyze_cell_time_method(cm,label,table):
             %(label,table)
         operation="average"
         detect_missing=True
-    #----------------------------------------------------------------------------------------------------------------
     elif "time: mean where sea"  in cm :#[amnesi-tmn]: 
         #Area Mean of Ext. Prop. on Sea Ice : pas utilisee
         print "time: mean where sea is not supposed to be used (%s,%s)"%(label,table)
-    #----------------------------------------------------------------------------------------------------------------
+    #-------------------------------------------------------------------------------------
+    elif "time: mean where sea"  in cm :#[amnesi-tmn]: 
+        #Area Mean of Ext. Prop. on Sea Ice : pas utilisee
+        print "time: mean where sea is not supposed to be used (%s,%s)"%(label,table)
+    #-------------------------------------------------------------------------------------
     # mpmoine_correction:analyze_cell_time_method: ajout du cas "time: mean where floating_ice_shelf"
     elif "time: mean where floating_ice_shelf" in cm :
         #[amnfi-twmn]: Weighted Time Mean on Floating Ice Shelf (presque que des 
@@ -1590,16 +1649,6 @@ def analyze_cell_time_method(cm,label,table):
         #[amnni-twmn]: Weighted Time Mean on Ice Shelf (uniquement des 
         #variables en Imon, Iyr)
         print "Note : assuming that 'time: mean where ice_sheet' "+\
-            " for %15s in table %s is well handled by 'detect_missing'"\
-            %(label,table)
-        operation="average"
-        detect_missing=True
-    #----------------------------------------------------------------------------------------------------------------
-    # mpmoine_correction:analyze_cell_time_method: ajout du cas "time: mean where sea_ice_melt_pound"
-    elif "time: mean where sea_ice_melt_pound" in cm :
-        #[amnnsimp-twmm]: Weighted Time Mean in Sea-ice Melt Pounds (uniquement des 
-        #variables en SImon)
-        print "Note : assuming that 'time: mean where sea_ice_melt_pound' "+\
             " for %15s in table %s is well handled by 'detect_missing'"\
             %(label,table)
         operation="average"
@@ -1708,13 +1757,14 @@ def analyze_cell_time_method(cm,label,table):
     #----------------------------------------------------------------------------------------------------------------
     elif "time: sum"  in cm :
         # [tsum]: Temporal Sum  : pas utilisee !
-        print "Error: time: sum is not supposed to be used" 
+        #print "Error: time: sum is not supposed to be used - Transformed to 'average' for %s in table %s"%(label,table)
+        operation="accumulate"
     elif "time: mean" in cm :  #    [tmean]: Time Mean  
         operation="average"
     #----------------------------------------------------------------------------------------------------------------
     elif "time: point" in cm:
         operation="instant"
-    elif table=='fx' or table=='Efx':
+    elif table=='fx' or table=='Efx' or table=='Ofx':
         #print "Warning: assuming operation is 'once' for cell_method "+\
         #    "%s for %15s in table %s" %(cm,label,table)
         operation="once"
@@ -2041,6 +2091,45 @@ def make_source_string(sources,source_id):
         if description!="none": rep=rep+"\n"+realm+": "+description
     return rep
 
+def create_standard_domains(domain_defs):
+    """
+    Add to dictionnary domain_defs the Xios string representation for DR-standard horizontal grids, such as '1deg'
+
+    """
+    # Next definition is just for letting the workflow work when using option dummy='include'
+    # Actually, ping_files for production run at CNRM do not activate variables on that grid (IceSheet vars)
+    domain_defs['50km']='<domain id="CMIP6_50km" ni_glo="720" nj_glo="360" type="rectilinear"  prec="8"> '+\
+      '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true" /> '+\
+    '</domain>  '
+    domain_defs['100km']='<domain id="CMIP6_100km" ni_glo="360" nj_glo="180" type="rectilinear"  prec="8"> '+\
+      '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true" /> '+\
+    '</domain>  '
+    domain_defs['1deg']='<domain id="CMIP6_1deg" ni_glo="360" nj_glo="180" type="rectilinear"  prec="8"> '+\
+      '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true" /> '+\
+    '</domain>  '
+    domain_defs['2deg']='<domain id="CMIP6_2deg" ni_glo="180" nj_glo="90" type="rectilinear"  prec="8"> '+\
+      '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true" /> '+\
+    '</domain>  '
+
+# def create_cfsites_grids(grid_defs):
+#     """
+#     Add to dictionnary grid_defs the Xios string representation for COSP standard grids
+#     """
+#     grid_defs['cfsites']='<grid id="cfsites_grid" > <domain id="cfsites_domain" /> </grid>'
+#     grid_defs['cfsites_3D']='<grid id="cfsites_grid_3D" > <domain id="cfsites_domain" /> <axis id="axis_atm"/> </grid>'
+
+def cfsites_input_filedef() :
+    """
+    Returns a file definition for defining a COSP site grid by reading a field named 
+    'cfsites_grid_field' in a file named 'cfsites_grid.nc'
+    """
+    rep='<file id="%s" name="%s" mode="read" output_freq="1ts">\n'%(cfsites_grid_file_id,cfsites_grid_file_id)+\
+      '\t<field id="%s" operation="instant" grid_ref="%s" />\n'%(cfsites_grid_field_id,cfsites_grid_id)+\
+      ' </file>'
+    return rep
+    
+
+
 def build_axis_definitions():
     """ 
     Build a dict of axis definitions 
@@ -2053,5 +2142,4 @@ class dr2xml_error(Exception):
         self.valeur = valeur
     def __str__(self):
         return `self.valeur`
-    
-
+    #""" just for test"""

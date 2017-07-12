@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-15 -*-
 print_DR_errors=True
-print_DR_stdname_errors=False
+print_DR_stdname_errors=True
 
 import sys,os
 import json
@@ -56,6 +56,8 @@ class simple_Dim(object):
         self.out_name     = False
         self.units        = False
         self.is_zoom_of   = False
+        # SS : ajout bounds pour distinguer le cas de couches de pression
+        self.bounds       = False
         # mpmoine_union_optim: simple_Dim: ajout de l'attribut 'is_union_for'
         self.is_union_for = []
 
@@ -572,6 +574,7 @@ def get_simpleDim_from_DimId(dimid,dq):
     sdim.long_name=d.title
     sdim.out_name=d.altLabel
     sdim.units=d.units
+    sdim.bounds=d.bounds
     return sdim
 
 # mpmoine_future_modif: nouvelle fonction Remove_pSuffix

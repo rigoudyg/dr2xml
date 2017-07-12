@@ -19,45 +19,40 @@ from table2freq import table2freq
 
 def normalize(grid) :
     """ in DR 1.0.2, values are :  
-    ['', 'model grid', '100km', '50km or smaller', 'cfsites', '1deg', '2deg', '25km or smaller', 'native']"""
+    ['', 'model grid', '100km', '50km or smaller', 'cfsites', '1deg', '2deg', '25km or smaller', 'native']
+    """
     if grid in [ "native", "model grid", "" ] : return ""
     return grid.replace(" or smaller","")
 
 def decide_for_grids(cmvarid,grids,lset,dq):
-     """
-     Decide which set of grids a given variable should be produced on
-     
-     CMVARID is uid of the CMORvar
-     GRIDS is a list of strings for grid as specified in requestLink 
-     LSET is the laboratory settings dictionnary. It carries a policy re. grids
-     
-     Returns a list of grid strings (with some normalization) (see below)
-     
-     TBD : use Martin's acronyms for grid policy
-     """
-     def normalize(grid) :
-          """ in DR 1.0.2, values are :  
-          ['', 'model grid', '100km', '50km or smaller', 'cfsites', '1deg', '2deg', '25km or smaller', 'native']"""
-          if grid in [ "native", "model grid", "" ] : return ""
-          return grid.replace(" or smaller","")
-     
-     # Normalize grids list and and remove duplicates
-     ngrids=map(normalize,grids)
-     sgrids=set()
-     for g in ngrids : sgrids.add(g)
-     ngrids=list(sgrids)
-     #
-     policy=lset.get("grid_policy")
-     if policy is None or policy=="DR": # Follow DR spec
-          return ngrids
-     elif policy=="native": # Follow lab grids choice (gr or gn depending on context - see lset['grids"])
-          return [""]
-     elif policy=="native+DR": # Produce both in 'native' and DR grid
-          return list(sgrids.add(''))
-     elif policy=="adhoc" :
-          return lab_adhoc_grid_policy(cmvarid,ngrids,lset,dq)
-     else :
-          dr2xml_error("Invalid grid policy %s"%policy)
+    """
+    Decide which set of grids a given variable should be produced on
+    
+    CMVARID is uid of the CMORvar
+    GRIDS is a list of strings for grid as specified in requestLink 
+    LSET is the laboratory settings dictionnary. It carries a policy re. grids
+    
+    Returns a list of grid strings (with some normalization) (see below)
+    
+    TBD : use Martin's acronyms for grid policy
+    """
+    # Normalize and remove duplicates in grids list
+    ngrids=map(normalize,grids)
+    sgrids=set()
+    for g in ngrids : sgrids.add(g)
+    ngrids=list(sgrids)
+    #
+    policy=lset.get("grid_policy")
+    if policy is None or policy=="DR": # Follow DR spec
+        return ngrids
+    elif policy=="native": # Follow lab grids choice (gr or gn depending on context - see lset['grids"])
+        return [""]
+    elif policy=="native+DR": # Produce both in 'native' and DR grid
+        return list(sgrids.add(''))
+    elif policy=="adhoc" :
+        return lab_adhoc_grid_policy(cmvarid,ngrids,lset,dq)
+    else :
+        dr2xml_error("Invalid grid policy %s"%policy)
 
 def lab_adhoc_grid_policy(cmvarid,grids,lset,dq) :
     """
@@ -78,9 +73,12 @@ def CNRM_grid_policy(cmvarid,grids,lset,dq) : #TBD
     """
     See doc of lab_adhoc_grid_policy
     """
-    if dq.inx.uid[cmvarid].label in [ "tos", "sos" ] : return(["","1deg"])
-    if "cfsites" in grids : return ["","cfsites"]
-    return [""]
+    if dq.inx.uid[cmvarid].label in [ "tos", "sos" ] :
+        return [ g for g in grids if g in ["","1deg"]]
+    else:
+        ngrids=[ g for g in grids if g not in [ "1deg", "2deg", "100km", "50km" ]]
+        #if "cfsites" in grids : return ["","cfsites"]
+        return ngrids
 
 
 def grid2resol(grid) :
@@ -248,10 +246,11 @@ def timesteps_per_freq_and_duration(freq,nbdays,model_tstep):
     # If freq actually translate to a duration, return
     # number of timesteps for number of days
     if duration != 0. : return float(nbdays)/duration
-    # Otherwise , retrun a senesible value
+    # Otherwise , return a sensible value
     elif freq=="fx" : return 1.
-    elif freq=="monClim" : return 12.
-    elif freq=="dayClim" : return 24.
+    elif freq=="monClim" : return (int(float(nbdays)/365) + 1)* 12.
+    elif freq=="dayClim" : return (int(float(nbdays)/365) + 1)* 365.
+    elif freq=="1hrClimMon" : return (int(float(nbdays)/31) + 1) * 24.
 
     
 
