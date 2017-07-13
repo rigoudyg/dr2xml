@@ -686,7 +686,7 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
         # mpmoine_cmor_update:write_xios_file_def: ajout de 'split_freq_format' pour se conformer a CMOR3.0.3 
         out.write(' split_freq_format="%s" '%date_format)
         #
-        # Modifiers for date parts of the filename, due to silly KT conventions. Need XIOS release >= TBD
+        # Modifiers for date parts of the filename, due to silly KT conventions. 
         out.write(' split_start_offset="%s" ' %offset_begin)
         out.write(' split_end_offset="%s" '%offset_end)
         # Using Eclis convention : endday looks like 20131231, rather than 20140101
