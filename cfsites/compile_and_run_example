@@ -1,0 +1,19 @@
+module purge
+module load intel/16.1.150 intelmpi/5.1.2.150
+module load netcdf-c/4.4.0_par_giec hdf5/1.8.16_par_thrsaf szip/2.1  zlib/1.2.8
+
+NETCDF_LIB="-lnetcdff -lnetcdf  -lhdf5_hl -lhdf5 -lsz -lz"
+
+OASISD=/home/gmgec/mrgu/senesi/SAVE/oasis/oasis-mct-3.0/beaufix_CM6b
+OASIS_INCDIR="-I${OASISD}/build/lib/psmile.MPI1"
+OASIS_LIB="-L${OASISD}/lib -lpsmile.MPI1 -lscrip -lmct -lmpeu"
+
+XIOSDIR=~/senesi/xios/XIOS-1183--prod/
+opts="-fp-model source -fp-speculation=strict -O1 -D__NONE__"
+
+rm -f create_cosp_grid
+mpiifort $opts -o create_cfsites_grid create_cfsites_grid.f90 \
+   -I$XIOSDIR/inc -L$XIOSDIR/lib -lxios -lstdc++ -lcurl $OASIS_LIB $NETCDF_LIB
+
+echo ; echo
+./create_cfsites_grid && echo "Done !"
