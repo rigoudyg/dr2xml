@@ -1413,7 +1413,7 @@ def change_domain_in_grid(domain,alias=None,src_grid_string=None,index=None):
         #print "src_grid_id=%s"%src_grid_id
     target_grid_id=src_grid_id+"_"+domain
     # Change domain
-    (target_grid_string,count)=re.subn('domain *id= *.([\w_])*.','domain id="%s"'%domain,src_grid_string,1)
+    (target_grid_string,count)=re.subn('domain *id= *.([\w_])*.','domain id="%s"'%domain,src_grid_string,1) 
     if count != 1 : 
         raise dr2xml_error("Fatal: cannot find a domain to change in src_grid_string %s for %s"%(src_grid_string,alias))
     target_grid_string=re.sub('grid id= *.([\w_])*.','grid id="%s"'%target_grid_id,target_grid_string)
@@ -1522,7 +1522,7 @@ def create_xios_axis_and_grids_for_plevs_unions(svars,plev_sfxs,prefix,printout=
             for sv in dict_plevs[lwps][plev].values(): 
                 if not plev_values:
                     # svar is the first one with this plev => get its level values
-                    # mpmoine_note: on reecrase les attributs de sdim_union à chaque nouveau plev. Pas utile mais
+                    # mpmoine_note: on reecrase les attributs de sdim_union a chaque nouveau plev. Pas utile mais
                     # mpmoine_note: c'est la facon la plus simple de faire
                     sdsv=sv.sdims[plev]
                     if sdsv.stdname:   sdim_union.stdname=sdsv.stdname
@@ -1572,7 +1572,7 @@ def isVertDim(sdim):
     """
     # mpmoine_future_modif: isVertDim: on utilise maintenant sv.sdims pour analyser les dimensions
     # SS : p840, p220 sont des couches de pression , pour lesquelles COSP forunit directement
-    # les valeurs moyennes de paramètres (e.g. cllcalipso). On les détecte par l'attribut bounds 
+    # les valeurs moyennes de paramètres (e.g. cllcalipso). On les detecte par l'attribut bounds 
     test=(sdim.stdname=='air_pressure' or sdim.stdname=='altitude') and (sdim.bounds != "yes")
     return test
 
