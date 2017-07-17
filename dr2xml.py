@@ -12,15 +12,15 @@ to generate a set of xml-syntax files used by XIOS (see
 https://forge.ipsl.jussieu.fr/ioserver/) for outputing geophysical 
 variable fields 
 
-First version (0.8) : S.Sénési (CNRM) - sept 2016
+First version (0.8) : S.Senesi (CNRM) - sept 2016
 
 Changes :
   oct 2016 - Marie-Pierre Moine (CERFACS) - handle 'home' Data Request 
                                in addition
-  dec 2016 - S.Sénési (CNRM) - improve robustness
-  jan 2017 - S.Sénési (CNRM) - handle split_freq; go single-var files; 
+  dec 2016 - S.Senesi (CNRM) - improve robustness
+  jan 2017 - S.Senesi (CNRM) - handle split_freq; go single-var files; 
                                adapt to new DRS ...
-  feb 2017 - S.Sénési (CNRM) - handle grids and remapping; 
+  feb 2017 - S.Senesi (CNRM) - handle grids and remapping; 
                                put some func in separate module
   april-may 2017 - M-P Moine (CERFACS) : handle pressure axes ..
   june 2017 - SS               introduce horizontal remapping
@@ -160,11 +160,11 @@ example_lab_and_model_settings={
     "grids" : { 
       "LR"    : {
         "surfex" : [ "gr","complete" , "250 km", "data regridded to a T127 gaussian grid (128x256 latlon) from a native atmosphere T127l reduced gaussian grid"] ,
-          "trip" : [ "gn", "" ,  "50km" , "regular 1/2° lat-lon grid" ],
+          "trip" : [ "gn", "" ,  "50km" , "regular 1/2 deg lat-lon grid" ],
           "nemo" : [ "gn", ""        , "100km" , "native ocean tri-polar grid with 105 k ocean cells" ],},
       "HR"    : {
         "surfex" : [ "gr","complete" , "50 km", "data regridded to a 359 gaussian grid (180x360 latlon) from a native atmosphere T359l reduced gaussian grid"] ,
-          "trip" : [ "gn", "" ,  "50km" , "regular 1/2° lat-lon grid" ],
+          "trip" : [ "gn", "" ,  "50km" , "regular 1/2 deg lat-lon grid" ],
           "nemo" : [ "gn", ""         , "25km" , "native ocean tri-polar grid with 1.47 M ocean cells" ],},
     },
     'grid_choice' : { "CNRM-CM6-1" : "LR", "CNRM-CM6-1-HR" : "HR",
@@ -339,7 +339,7 @@ def select_CMORvars_for_lab(lset, experiment_id=None, year=None,printout=False):
         if rl.label=="CFsubhr":
             rlCFsubhr=rl
             #print "One reqlink : "+`rl.label`+" grid="+rl.grid+" uid="+rl.uid
-    # TBD : vérifier si ce requestlink CFsubhr, qui indique grille native en subhr (!), a été rectifié
+    # TBD : verifier si ce requestlink CFsubhr, qui indique grille native en subhr (!), a ete rectifie
     rls_for_mips.remove(rlCFsubhr)
     #
     if (year) :
@@ -459,15 +459,15 @@ def freq2datefmt(freq,operation):
     offset=None
     if freq == "dec":
         datefmt="%y"
-        if operation in ["average","minimum","maximum"] : offset="5y"
+        if operation in ["average","minimum","maximum"] : offset=False
         else : offset="10y"
     if freq == "yr":
         datefmt="%y"
-        if operation in ["average","minimum","maximum"] : offset="0.5y"
+        if operation in ["average","minimum","maximum"] : offset=False
         else : offset="1y"
     elif freq in ["mon","monClim"]:
         datefmt="%y%mo"
-        if operation in ["average","minimum","maximum"] : offset="0.5mo"
+        if operation in ["average","minimum","maximum"] : offset=False
         else : offset="1mo"
     elif freq=="day":
         datefmt="%y%mo%d"
@@ -495,7 +495,9 @@ def freq2datefmt(freq,operation):
     elif "fx" in freq :
         pass ## WIP doc v6.2.3 - Apr. 2017: if frequency="fx", [_<time_range>] is ommitted
     if offset is not None:
-        if operation in ["average","minimum","maximum"] : offset_end="-"+offset
+        if operation in ["average","minimum","maximum"] :
+            if offset is not False : offset_end="-"+offset
+            else: offset_end=False
         else : offset_end="0s"
     else:
         offset="0s"; offset_end="0s"
@@ -504,9 +506,10 @@ def freq2datefmt(freq,operation):
     return datefmt,offset,offset_end
 
 def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
-    field_defs,axis_defs,grid_defs,domain_defs,
-    dummies,skipped_vars_per_table,
-                        prefix,context,grid,pingvars=None,enddate=None) :
+                        field_defs,axis_defs,grid_defs,domain_defs,
+                        dummies,skipped_vars_per_table,
+                        prefix,context,grid,pingvars=None,enddate=None,
+                        attributes=[]) :
     """ 
     Generate an XIOS file_def entry in out for :
       - a dict for laboratory settings 
@@ -687,8 +690,10 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
         out.write(' split_freq_format="%s" '%date_format)
         #
         # Modifiers for date parts of the filename, due to silly KT conventions. 
-        out.write(' split_start_offset="%s" ' %offset_begin)
-        out.write(' split_end_offset="%s" '%offset_end)
+        if offset_begin is not False :
+            out.write(' split_start_offset="%s" ' %offset_begin)
+        if offset_end is not False  :
+            out.write(' split_end_offset="%s" '%offset_end)
         # Using Eclis convention : endday looks like 20131231, rather than 20140101
         endyear=enddate[0:4]
         endmonth=enddate[4:6]
@@ -823,6 +828,7 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     if variant_info!="none": variant_info+=variant_info_warning
     wr(out,"variant_info",variant_info)
     wr(out,"variant_label",variant_label)
+    for name,value in attributes : wr(out,name,value)
     #
     #--------------------------------------------------------------------
     # Build all XIOS auxilliary elements (end_file_defs, field_defs, domain_defs, grid_defs, axis_defs)
@@ -977,7 +983,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
         grid_ref=cfsites_grid_id
         grid_defs[grid_ref]='<grid id="%s" > <domain id="%s" /> </grid>'%(cfsites_grid_id,cfsites_domain_id)
         domain_defs[cfsites_radix]=' <domain id="%s" type="unstructured" prec="8"> '%cfsites_domain_id+\
-            '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true"/> </domain>'
+            '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true" mode="read_or_compute"/> </domain>'
     elif ssh == 'TR-na' or ssh == 'TRS-na' : #transects,   oce or SI
         pass
     elif ssh[0:3] == 'XY-' or ssh[0:3] == 'S-A'  : # includes 'XY-AH' and 'S-AH' : model half-levels
@@ -1058,7 +1064,7 @@ def gather_AllSimpleVars(lset,expid=False,year=False,printout=False):
     return mip_vars_list
 
 def generate_file_defs(lset,sset,year,enddate,context,cvs_path,pingfile=None,
-    dummies='include',printout=False,dirname="./",prefix="") :
+                       dummies='include',printout=False,dirname="./",prefix="",attributes=[]) :
     """
     Using global DR object dq, a dict of lab settings LSET, and a dict 
     of simulation settings SSET, generate an XIOS file_defs file for a 
@@ -1076,6 +1082,9 @@ def generate_file_defs(lset,sset,year,enddate,context,cvs_path,pingfile=None,
     
     Structure of the two dicts is documented elsewhere. It includes the 
     correspondance between a context and a few realms
+
+    ATTRIBUTES is a list of (name,value) pairs which are to be inserted as 
+    additional file-level attributes
     """
     #
     #--------------------------------------------------------------------
@@ -1217,7 +1226,8 @@ def generate_file_defs(lset,sset,year,enddate,context,cvs_path,pingfile=None,
                     for grid in svar.grids :
                         write_xios_file_def(svar,table, lset,sset,out,cvs_path,
                                             field_defs,axis_defs,grid_defs,domain_defs,dummies,
-                                            skipped_vars_per_table,prefix,context,grid,pingvars,enddate)
+                                            skipped_vars_per_table,prefix,context,grid,pingvars,
+                                            enddate,attributes)
                 else :
                     pass
                     print "Duplicate var in %s : %s %s %s"%(
@@ -1405,7 +1415,7 @@ def change_domain_in_grid(domain,alias=None,src_grid_string=None,index=None):
     # Change domain
     (target_grid_string,count)=re.subn('domain *id= *.([\w_])*.','domain id="%s"'%domain,src_grid_string,1)
     if count != 1 : 
-        raise dr2xml_error("Fatal: cannot find a domain to change in src_grid_string %s"%src_grid_string)
+        raise dr2xml_error("Fatal: cannot find a domain to change in src_grid_string %s for %s"%(src_grid_string,alias))
     target_grid_string=re.sub('grid id= *.([\w_])*.','grid id="%s"'%target_grid_id,target_grid_string)
     return (target_grid_id,target_grid_string)
 
@@ -2099,16 +2109,16 @@ def create_standard_domains(domain_defs):
     # Next definition is just for letting the workflow work when using option dummy='include'
     # Actually, ping_files for production run at CNRM do not activate variables on that grid (IceSheet vars)
     domain_defs['50km']='<domain id="CMIP6_50km" ni_glo="720" nj_glo="360" type="rectilinear"  prec="8"> '+\
-      '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true" /> '+\
+      '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true"  mode="read_or_compute"/> '+\
     '</domain>  '
     domain_defs['100km']='<domain id="CMIP6_100km" ni_glo="360" nj_glo="180" type="rectilinear"  prec="8"> '+\
-      '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true" /> '+\
+      '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true"  mode="read_or_compute"/> '+\
     '</domain>  '
     domain_defs['1deg']='<domain id="CMIP6_1deg" ni_glo="360" nj_glo="180" type="rectilinear"  prec="8"> '+\
-      '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true" /> '+\
+      '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true"  mode="read_or_compute"/> '+\
     '</domain>  '
     domain_defs['2deg']='<domain id="CMIP6_2deg" ni_glo="180" nj_glo="90" type="rectilinear"  prec="8"> '+\
-      '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true" /> '+\
+      '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true"  mode="read_or_compute"/> '+\
     '</domain>  '
 
 # def create_cfsites_grids(grid_defs):
