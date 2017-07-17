@@ -504,9 +504,10 @@ def freq2datefmt(freq,operation):
     return datefmt,offset,offset_end
 
 def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
-    field_defs,axis_defs,grid_defs,domain_defs,
-    dummies,skipped_vars_per_table,
-                        prefix,context,grid,pingvars=None,enddate=None) :
+                        field_defs,axis_defs,grid_defs,domain_defs,
+                        dummies,skipped_vars_per_table,
+                        prefix,context,grid,pingvars=None,enddate=None,
+                        attributes=[]) :
     """ 
     Generate an XIOS file_def entry in out for :
       - a dict for laboratory settings 
@@ -823,6 +824,7 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     if variant_info!="none": variant_info+=variant_info_warning
     wr(out,"variant_info",variant_info)
     wr(out,"variant_label",variant_label)
+    for name,value in attributes : wr(out,name,value)
     #
     #--------------------------------------------------------------------
     # Build all XIOS auxilliary elements (end_file_defs, field_defs, domain_defs, grid_defs, axis_defs)
@@ -1058,7 +1060,7 @@ def gather_AllSimpleVars(lset,expid=False,year=False,printout=False):
     return mip_vars_list
 
 def generate_file_defs(lset,sset,year,enddate,context,cvs_path,pingfile=None,
-    dummies='include',printout=False,dirname="./",prefix="") :
+                       dummies='include',printout=False,dirname="./",prefix="",attributes=[]) :
     """
     Using global DR object dq, a dict of lab settings LSET, and a dict 
     of simulation settings SSET, generate an XIOS file_defs file for a 
@@ -1076,6 +1078,9 @@ def generate_file_defs(lset,sset,year,enddate,context,cvs_path,pingfile=None,
     
     Structure of the two dicts is documented elsewhere. It includes the 
     correspondance between a context and a few realms
+
+    ATTRIBUTES is a list of (name,value) pairs which are to be inserted as 
+    additional file-level attributes
     """
     #
     #--------------------------------------------------------------------
@@ -1217,7 +1222,8 @@ def generate_file_defs(lset,sset,year,enddate,context,cvs_path,pingfile=None,
                     for grid in svar.grids :
                         write_xios_file_def(svar,table, lset,sset,out,cvs_path,
                                             field_defs,axis_defs,grid_defs,domain_defs,dummies,
-                                            skipped_vars_per_table,prefix,context,grid,pingvars,enddate)
+                                            skipped_vars_per_table,prefix,context,grid,pingvars,
+                                            enddate,attributes)
                 else :
                     pass
                     print "Duplicate var in %s : %s %s %s"%(
