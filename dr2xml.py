@@ -452,14 +452,13 @@ def wr(out,key,dic_or_val=None,num_type="string",default=None) :
         out.write('  <variable name="%s"  type="%s" > %s '%(key,num_type,val))
         out.write('  </variable>\n')
 
-
-def freq2datefmt(freq,operation):
+def freq2datefmt(freq,operation,table):
     # WIP doc v6.2.3 - Apr. 2017: <time_range> format is frequency-dependant 
     datefmt=False
     offset=None
     if freq == "dec":
         datefmt="%y"
-        if operation in ["average","minimum","maximum"] : offset=False
+        if operation in ["average","minimum","maximum"] : offset="5y"
         else : offset="10y"
     if freq == "yr":
         datefmt="%y"
