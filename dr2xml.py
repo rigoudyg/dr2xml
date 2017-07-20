@@ -174,7 +174,7 @@ example_lab_and_model_settings={
     "model_timestep" : { "surfex":900., "nemo":900., "trip": 1800. },
     #--- Say if you want to use XIOS union/zoom axis to optimize vertical interpolation requested by the DR
     "use_union_zoom" : False,
-
+    "vertical_interpolation_sample_freq" : "3h"
 }
 
 
@@ -904,6 +904,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
         # mpmoine_question: je ne comprend pas l'usage de nextvar... A priori on ne peut pas avoir plus d'une dimension verticale ?
         for sd in sv.sdims.values(): # Expect that only one can be a vertical dim
             if isVertDim(sd):
+                vert_freq=lset["vertical_interpolation_sample_freq"]
                 has_vertical_interpolation=True
                 # mpmoine_zoom_modif:create_xios_aux_elmts_defs: on supprime l'usage de netxvar
                 # mpmoine_zoom_modif:create_xios_aux_elmts_defs: passage par 2 niveaux de field id auxiliaires rebond (alias et alias2)
@@ -925,7 +926,9 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
                     #
                     # Construct an axis for interpolating to this dimension
                     # Here, only zoom or normal axis attached to svar, axis for unions of plevs are managed elsewhere
-                    axis_defs[axis_key]=create_axis_def(sd,prefix)
+                    axisdef,coordname,coorddef=create_axis_def(sd,prefix,vert_freq)
+                    axis_defs[axis_key]=axisdef
+                    field_defs[coordname]=coorddef
                     #
                     # Construct a grid using variable's grid and new axis
                     #TBS# if not sd.is_zoom_of: # create a (target) grid for re-mapping only if vert axis is not a zoom (i.e. if normal or union)
@@ -945,8 +948,13 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
                         field_defs[alias2]='<field id="%-25s field_ref="%-25s grid_ref="%-10s/>'\
                         %(alias2+'"',alias_ping+'"',"grid_"+sd.is_zoom_of+'"') 
                     else: # cas d'une variable definie grace a seul axis_def (non union+zoom)
+                        # alias_sample for a field which is time-sampled before vertical interpolation
+                        alias_sample=alias_ping+"_sampled_"+vert_freq # e.g.  CMIP6_zg_sampled_3h
                         field_defs[alias1]='<field id="%-25s field_ref="%-25s grid_ref="%-10s/>'\
-                        %(alias1+'"',alias_ping+'"',grid_id+'"') 
+                        %(alias1+'"',alias_sample+'"',grid_id+'"')
+                        #
+                        field_defs[alias_sample]='<field id="%-25s field_ref="%-25s operation="instant" freq_op="%-10s> @%s</field>'\
+                        %(alias_sample+'"',alias_ping+'"',vert_freq+'"',alias_ping) 
                 # mpmoine_note: voir en desactivant les zooms si c'est ok                    
                 #TBD what to do for singleton dimension ? 
     #
@@ -1336,7 +1344,7 @@ def print_SomeStats(context,svars_per_table,skipped_vars_per_table):
 
 # mpmoine_future_modif:create_axis_def: suppression de l'argument 'field_defs' qui n'est pas utilise
 # mpmoine_future_modif:create_axis_def: suppression de l'argument 'field_defs' qui n'est pas utilise
-def create_axis_def(sdim,prefix):
+def create_axis_def(sdim,prefix,vert_frequency=None):
     """ 
     From a  simplified Dim object, returns an Xios axis definition 
     """
@@ -1380,9 +1388,12 @@ def create_axis_def(sdim,prefix):
         rep+='>'
         if sdim.stdname=="air_pressure" : coordname=prefix+"pfull"
         if sdim.stdname=="altitude"     : coordname=prefix+"zg"
+        coordname_sampled=coordname+"_sampled_"+vert_frequency # e.g. CMIP6_pfull_sampled_3h
         rep+='\n\t<interpolate_axis type="polynomial" order="1"'
-        rep+=' coordinate="%s"/>\n\t</axis>'%coordname
-        return rep
+        rep+=' coordinate="%s"/>\n\t</axis>'%coordname_sampled
+        coorddef='<field id="%-25s field_ref="%-25s operation="instant" freq_op="%-10s> @%s</field>'\
+                        %(coordname_sampled+'"',coordname+'"', vert_frequency+'"',coordname) 
+        return rep,coordname_sampled,coorddef
     # mpmoine_zoom_modif:create_axis_def: traitement du cas zoom
     else:
         # Axis is subset of another, write it as a zoom_axis

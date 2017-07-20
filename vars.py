@@ -471,10 +471,17 @@ def complement_svar_using_cmorvar(svar,cmvar,dq):
         except:
             pass
             #print "Issue accessing sn for %s %s!"%(cmvar.label,cmvar.mipTable)
-        if sn and sn._h.label == 'standardname':
+        if sn:
+            if sn._h.label == 'standardname':
                 svar.stdname = sn.uid.rstrip(' ')
                 #svar.stdunits = stdname.units
                 #svar.description = stdname.description
+            elif sn._h.label == 'remarks' :
+                svar.stdname = sn.uid.rstrip(' ')
+                if svar.stdname=="missing" or 'pending' in svar.stdname :
+                    print "for var %s, sn is %s"%(svar.label,svar.stdname)
+            else:
+                print "for var %s, sn._h.label=%s"%(svar.label,sn._h.label)
         else :
             # If CF standard name is NOK, let us use MIP variables attributes
             svar.stdname = mipvar.label.rstrip(' ')
