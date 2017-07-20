@@ -47,7 +47,7 @@ import dreq
 # End of pre-requisites
 ####################################
 
-version="0.14"
+version="0.15"
 print "* dr2xml version:", version
 
 from datetime import datetime
