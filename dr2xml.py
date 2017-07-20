@@ -1036,6 +1036,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
     # mpmoine_cmor_update:create_xios_aux_elmts_defs: les tables CMOR demandent les champs en 'float' ou 'real' => ajout de prec="4"
     # TBI: idealement if faudrait recuperer le type attendu de la DR ou des tables CMOR
     rep='  <field field_ref="%s" name="%s" '% (last_alias,sv.label)
+    rep+=' freq_op="%s"'% cmipFreq2xiosFreq[sv.frequency]
     rep+=' operation="%s" detect_missing_value="%s" default_value="1.e+20" prec="4"'% \
         ( operation,detect_missing)
     rep+=' cell_methods="%s" cell_methods_mode="overwrite"'% sv.cell_methods
