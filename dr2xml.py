@@ -680,6 +680,8 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     #--------------------------------------------------------------------
     # mpmoine_last_modif:write_xios_file_def: Maintenant, dans le cas type='perso', table='NONE'. On ne doit donc pas compter sur le table2freq pour recuperer la frequence en convention xios => fonction cmipFreq2xiosFreq
     split_freq=split_frequency_for_variable(cmv, lset, sc.mcfg, context)
+    # TBD : restore a variable split_freq
+    split_freq="1mo"
     #
     #--------------------------------------------------------------------
     # Write XIOS file node:
@@ -702,7 +704,8 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
         endyear=enddate[0:4]
         endmonth=enddate[4:6]
         endday=enddate[6:8]
-        out.write(' split_last_date="%s-%s-%s 00:00:00 +1d" '%(endyear,endmonth,endday))
+        # TBD : reactiver split_last_date quand Xios OK
+        #out.write(' split_last_date="%s-%s-%s 00:00:00" '%(endyear,endmonth,endday))
     #
     #out.write('timeseries="exclusive" >\n')
     out.write(' time_units="days" time_counter_name="time"')
