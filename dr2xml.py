@@ -1591,7 +1591,7 @@ def isVertDim(sdim):
     """
     # mpmoine_future_modif: isVertDim: on utilise maintenant sv.sdims pour analyser les dimensions
     # SS : p840, p220 sont des couches de pression , pour lesquelles COSP forunit directement
-    # les valeurs moyennes de paramètres (e.g. cllcalipso). On les detecte par l'attribut bounds 
+    # les valeurs moyennes de parametres (e.g. cllcalipso). On les detecte par l'attribut bounds 
     test=(sdim.stdname=='air_pressure' or sdim.stdname=='altitude') and (sdim.bounds != "yes")
     return test
 
