@@ -471,7 +471,7 @@ def freq2datefmt(freq,operation):
         else : offset="1mo"
     elif freq=="day":
         datefmt="%y%mo%d"
-        if operation in ["average","minimum","maximum"] : offset="0.5d"
+        if operation in ["average","minimum","maximum"] : offset="12h"
         else : offset="1d"
     elif freq in ["6hr","3hr","3hrClim","1hr","hr","1hrClimMon"]: 
         datefmt="%y%mo%d%h%mi"
@@ -479,12 +479,15 @@ def freq2datefmt(freq,operation):
             if operation in ["average","minimum","maximum"] : offset="3h"
             else : offset="6h"
         elif freq in [ "3hr", "3hrClim"] :
-            if operation in ["average","minimum","maximum"] : offset="1.5h"
+            if operation in ["average","minimum","maximum"] : offset="90mi"
             else : offset="3h"
         #mpmoine_TBD: supprimer "hr" selon reponse de D. Nadeau a l'issue https://github.com/PCMDI/cmip6-cmor-tables/issues/59
         elif freq in ["1hr", "hr",  "1hrClimMon"]: 
-            if operation in ["average","minimum","maximum"] : offset="0.5h"
+            if operation in ["average","minimum","maximum"] : offset="30mi"
             else : offset="1h"
+        # TBD : remove this use of 'table', which is here only for compensating a bug in PrePARE.py checks (3.2.5)
+        if table=="6hrPlevPt" : datefmt="%y%mo%d%h%mi%s"
+
     elif freq=="subhr":
         datefmt="%y%mo%d%h%mi%s"
         # assume that 'subhr' means every timestep
@@ -652,21 +655,22 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     # 
     date_range="%start_date%-%end_date%" # XIOS syntax
     operation,detect_missing = analyze_cell_time_method(cmv.cell_methods,cmv.label,table)
-    date_format,offset_begin,offset_end=freq2datefmt(cmv.frequency,operation)
+    date_format,offset_begin,offset_end=freq2datefmt(cmv.frequency,operation,table)
     #
-    # mpmoine: WIP doc v6.2.3 : [_<time_range>] omitted if frequency is "fx"; a suffix "-clim" is added if climatology
+    # mpmoine: WIP doc v6.2.3 : [_<time_range>] omitted if frequency is "fx"
     if "fx" in cmv.frequency:
         filename="%s%s_%s_%s_%s_%s_%s"%\
                    (prefix,cmv.label,table,source_id,expname,
                     member_id,grid_label)
-    elif "Clim" in cmv.frequency:
-        filename="%s%s_%s_%s_%s_%s_%s_%s-clim"%\
-                   (prefix,cmv.label,table,source_id,expname,
-                    member_id,grid_label,date_range)
     else:
-        filename="%s%s_%s_%s_%s_%s_%s_%s"%\
-                   (prefix,cmv.label,table,source_id,expname,
-                    member_id,grid_label,date_range)
+        # mpmoine: WIP doc v6.2.3 : a suffix "-clim" should be added if climatology
+        # TBD : for the time being, we should also have attribute 'climatology' for dimension 'time',
+        # TBD : but we cannot -> forget temporarily about this extension
+        if False and "Clim" in cmv.frequency: suffix="-clim"
+        else: suffix=""
+        filename="%s%s_%s_%s_%s_%s_%s_%s%s"%\
+            (prefix,cmv.label,table,source_id,expname,
+             member_id,grid_label,date_range,suffix)
     #
     further_info_url="http://furtherinfo.es-doc.org/%s.%s.%s.%s.%s.%s"%(
         mip_era,institution_id,source_id,expname,
