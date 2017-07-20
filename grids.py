@@ -81,17 +81,15 @@ def CNRM_grid_policy(cmvarid,grids,lset,dq) : #TBD
         return ngrids
 
 
-def grid2resol(grid) :
-     """ Returns string for nominal_resolution for a DR grid name"""
-     if grid=="1deg" : return "1x1 degree"
-     return("undescribed")
-
-
-def grid2desc(grid) :
-     """ Returns string for grid description for a DR grid name"""
-     if grid=="1deg" :
-          return "data regridded to a CMIP6 standard 1x1 degree latxlon grid from the native grid"
-     return("no description for this grid")
+def DRgrid2gridatts(grid) :
+     """ Returns label, resolution, description for a DR grid name"""
+     if grid=="1deg" : return ("gr1","1x1 degree", \
+                               "data regridded to a CMIP6 standard 1x1 degree latxlon grid from the native grid")
+     if grid=="2deg" : return ("gr2","2x2 degree", \
+                               "data regridded to a CMIP6 standard 2x2 degree latxlon grid from the native grid")
+     if grid=="100km" : return ("gr3","100 km", \
+                               "data regridded to a CMIP6 standard 100 km resol grid from the native grid")
+     return("gr?","?x? degree", "grid has no description- please fix DRgrid2gridatts for grid %s"%grid)
 
 
 def field_size(svar, mcfg):

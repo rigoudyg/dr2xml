@@ -64,7 +64,7 @@ import xml.etree.ElementTree as ET
 # Local packages
 from vars import simple_CMORvar, simple_Dim, process_homeVars, complement_svar_using_cmorvar, \
                 multi_plev_suffixes, single_plev_suffixes
-from grids import decide_for_grids, grid2resol, grid2desc, field_size,\
+from grids import decide_for_grids, DRgrid2gridatts,\
     split_frequency_for_variable, timesteps_per_freq_and_duration
 from Xparse import init_context, id2grid
 
@@ -160,12 +160,12 @@ example_lab_and_model_settings={
     "grids" : { 
       "LR"    : {
         "surfex" : [ "gr","complete" , "250 km", "data regridded to a T127 gaussian grid (128x256 latlon) from a native atmosphere T127l reduced gaussian grid"] ,
-          "trip" : [ "gn", "" ,  "50km" , "regular 1/2 deg lat-lon grid" ],
-          "nemo" : [ "gn", ""        , "100km" , "native ocean tri-polar grid with 105 k ocean cells" ],},
+          "trip" : [ "gn", "" ,  "50 km" , "regular 1/2 deg lat-lon grid" ],
+          "nemo" : [ "gn", ""        , "100 km" , "native ocean tri-polar grid with 105 k ocean cells" ],},
       "HR"    : {
         "surfex" : [ "gr","complete" , "50 km", "data regridded to a 359 gaussian grid (180x360 latlon) from a native atmosphere T359l reduced gaussian grid"] ,
-          "trip" : [ "gn", "" ,  "50km" , "regular 1/2 deg lat-lon grid" ],
-          "nemo" : [ "gn", ""         , "25km" , "native ocean tri-polar grid with 1.47 M ocean cells" ],},
+          "trip" : [ "gn", "" ,  "50 km" , "regular 1/2 deg lat-lon grid" ],
+          "nemo" : [ "gn", ""         , "25 km" , "native ocean tri-polar grid with 1.47 M ocean cells" ],},
     },
     'grid_choice' : { "CNRM-CM6-1" : "LR", "CNRM-CM6-1-HR" : "HR",
                       "CNRM-ESM2-1": "LR"  , "CNRM-ESM2-1-HR": "HR" },
@@ -614,16 +614,17 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
         # either native or close-to-native
         grid_choice=lset['grid_choice'][source_id]
         grid_label,target_hgrid_id,grid_resolution,grid_description=\
-        lset['grids'][grid_choice][context]
+                lset['grids'][grid_choice][context]
     else:
         # DR requested type of grid. Assume that the ping_file includes an Xios definition for it <- TBD
-        grid_label=grid
         if grid == 'cfsites' :
             target_hgrid_id=cfsites_domain_id
         else:
             target_hgrid_id=lset["ping_variables_prefix"]+grid
-        grid_description=grid2desc(grid)
-        grid_resolution=grid2resol(grid)
+        grid_label,grid_resolution,grid_description=DRgrid2gridatts(grid)
+        # grid_label=grid2label(grid)
+        # grid_description=grid2desc(grid)
+        # grid_resolution=grid2resol(grid)
     if table in [ 'AERMonZ',' EmonZ', 'EdayZ' ] : grid_label+="z"
     if "Ant" in table : grid_label+="a"
     if "Gre" in table : grid_label+="g"
