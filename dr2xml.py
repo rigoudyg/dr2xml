@@ -998,7 +998,8 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
         grid_ref=cfsites_grid_id
         grid_defs[grid_ref]='<grid id="%s" > <domain id="%s" /> </grid>'%(cfsites_grid_id,cfsites_domain_id)
         domain_defs[cfsites_radix]=' <domain id="%s" type="unstructured" prec="8"> '%cfsites_domain_id+\
-            '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true" mode="read_or_compute"/> </domain>'
+            '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true" /> </domain>'
+        # 
     elif ssh == 'TR-na' or ssh == 'TRS-na' : #transects,   oce or SI
         pass
     elif ssh[0:3] == 'XY-' or ssh[0:3] == 'S-A'  : # includes 'XY-AH' and 'S-AH' : model half-levels
@@ -2127,16 +2128,16 @@ def create_standard_domains(domain_defs):
     # Next definition is just for letting the workflow work when using option dummy='include'
     # Actually, ping_files for production run at CNRM do not activate variables on that grid (IceSheet vars)
     domain_defs['50km']='<domain id="CMIP6_50km" ni_glo="720" nj_glo="360" type="rectilinear"  prec="8"> '+\
-      '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true"  mode="read_or_compute"/> '+\
+      '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true"  mode="read_or_compute" write_weight="true" /> '+\
     '</domain>  '
     domain_defs['100km']='<domain id="CMIP6_100km" ni_glo="360" nj_glo="180" type="rectilinear"  prec="8"> '+\
-      '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true"  mode="read_or_compute"/> '+\
+      '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true"  mode="read_or_compute" write_weight="true"  /> '+\
     '</domain>  '
     domain_defs['1deg']='<domain id="CMIP6_1deg" ni_glo="360" nj_glo="180" type="rectilinear"  prec="8"> '+\
-      '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true"  mode="read_or_compute"/> '+\
+      '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true"  mode="read_or_compute" write_weight="true"  /> '+\
     '</domain>  '
     domain_defs['2deg']='<domain id="CMIP6_2deg" ni_glo="180" nj_glo="90" type="rectilinear"  prec="8"> '+\
-      '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true"  mode="read_or_compute"/> '+\
+      '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true"  mode="read_or_compute" write_weight="true"  /> '+\
     '</domain>  '
 
 # def create_cfsites_grids(grid_defs):
