@@ -376,8 +376,10 @@ def select_CMORvars_for_lab(lset, experiment_id=None, year=None,printout=False):
     filtered_vars=[]
     for (v,g) in miprl_vars_grids : 
         cmvar=dq.inx.uid[v]
+        ttable=dq.inx.uid[cmvar.mtid]
         mipvar=dq.inx.uid[cmvar.vid]
-        if mipvar.label not in lset['excluded_vars'] : 
+        if mipvar.label not in lset['excluded_vars'] and \
+           ttable.label not in lset.get("excluded_tables",[]): 
             filtered_vars.append((v,g))
     if printout :
         print 'Number once filtered by excluded vars is : %s'%len(filtered_vars)
