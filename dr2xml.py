@@ -47,7 +47,7 @@ import dreq
 # End of pre-requisites
 ####################################
 
-version="0.15"
+version="0.16"
 print "* dr2xml version:", version
 
 from datetime import datetime
@@ -123,6 +123,9 @@ example_lab_and_model_settings={
     # Names must match DR MIPvarnames (and **NOT** CF standard_names)
     # excluded_vars_file="../../cnrm/non_published_variables"
     "excluded_vars":[],
+    "excluded_spshapes": ["XYA-na","XYG-na","na-A","Y-P19","Y-P39","Y-A","Y-na"],
+    "excluded_tables"  : ["Oclim" , "E1hrClimMon" ] , # Clims are not handled by Xios yet
+    "excluded_request_links"  : ["CFsubhr"] , # request native grid, numerous 2D fields and even 3D fields
 
     # We account for a list of variables which the lab wants to produce in some cases
     "listof_home_vars":"../../cnrm/listof_home_vars.txt",
@@ -174,7 +177,11 @@ example_lab_and_model_settings={
     "model_timestep" : { "surfex":900., "nemo":900., "trip": 1800. },
     #--- Say if you want to use XIOS union/zoom axis to optimize vertical interpolation requested by the DR
     "use_union_zoom" : False,
-    "vertical_interpolation_sample_freq" : "3h"
+    "vertical_interpolation_sample_freq" : "3h",
+    # The CMIP6 frequencies that are unreachable for a single model run. Datafiles will
+    # be labelled with dates consistent with content (but not with CMIP6 requirements).
+    # Allowed values are only 'dec' and 'yr'
+    "too_long_periods" : ["dec", "yr" ] 
 }
 
 
@@ -335,12 +342,11 @@ def select_CMORvars_for_lab(lset, experiment_id=None, year=None,printout=False):
         print "Number of Request Links which apply to MIPS",
         print lset['mips']," is: ", len(rls_for_mips)
     #
+    excluded_rls=[]
     for rl in rls_for_mips :
-        if rl.label=="CFsubhr":
-            rlCFsubhr=rl
-            #print "One reqlink : "+`rl.label`+" grid="+rl.grid+" uid="+rl.uid
-    # TBD : verifier si ce requestlink CFsubhr, qui indique grille native en subhr (!), a ete rectifie
-    rls_for_mips.remove(rlCFsubhr)
+        if rl.label in lset["excluded_request_links"] :
+            excluded_rls.append(rl)
+    for rl in excluded_rls : rls_for_mips.remove(rl)
     #
     if (year) :
         filtered_rls=[]
@@ -381,6 +387,7 @@ def select_CMORvars_for_lab(lset, experiment_id=None, year=None,printout=False):
         if mipvar.label not in lset['excluded_vars'] and \
            ttable.label not in lset.get("excluded_tables",[]): 
             filtered_vars.append((v,g))
+            print "for var %s, ttable=%s"%(cmvar.label,ttable.label)
     if printout :
         print 'Number once filtered by excluded vars is : %s'%len(filtered_vars)
 
@@ -454,19 +461,24 @@ def wr(out,key,dic_or_val=None,num_type="string",default=None) :
         out.write('  <variable name="%s"  type="%s" > %s '%(key,num_type,val))
         out.write('  </variable>\n')
 
-def freq2datefmt(freq,operation,table):
+def freq2datefmt(in_freq,operation,lset):
     # WIP doc v6.2.3 - Apr. 2017: <time_range> format is frequency-dependant 
     datefmt=False
     offset=None
+    freq=in_freq
     if freq == "dec":
-        datefmt="%y"
-        if operation in ["average","minimum","maximum"] : offset="5y"
-        else : offset="10y"
+        if "dec" not in lset.get("too_long_periods",[]) :
+            datefmt="%y"
+            if operation in ["average","minimum","maximum"] : offset="5y"
+            else : offset="10y"
+        else : freq="yr" #Ensure dates in filenames are consistent with content, even if not as required
     if freq == "yr":
-        datefmt="%y"
-        if operation in ["average","minimum","maximum"] : offset=False
-        else : offset="1y"
-    elif freq in ["mon","monClim"]:
+        if "dec" not in lset["too_long_periods"] :
+            datefmt="%y"
+            if operation in ["average","minimum","maximum"] : offset=False
+            else : offset="1y"
+        else : freq="mon" #Ensure dates in filenames are consistent with content, even if not as required
+    if freq in ["mon","monClim"]:
         datefmt="%y%mo"
         if operation in ["average","minimum","maximum"] : offset=False
         else : offset="1mo"
@@ -486,9 +498,6 @@ def freq2datefmt(freq,operation,table):
         elif freq in ["1hr", "hr",  "1hrClimMon"]: 
             if operation in ["average","minimum","maximum"] : offset="30mi"
             else : offset="1h"
-        # TBD : remove this use of 'table', which is here only for compensating a bug in PrePARE.py checks (3.2.5)
-        if table=="6hrPlevPt" : datefmt="%y%mo%d%h%mi%s"
-
     elif freq=="subhr":
         datefmt="%y%mo%d%h%mi%s"
         # assume that 'subhr' means every timestep
@@ -656,7 +665,7 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     # 
     date_range="%start_date%-%end_date%" # XIOS syntax
     operation,detect_missing = analyze_cell_time_method(cmv.cell_methods,cmv.label,table)
-    date_format,offset_begin,offset_end=freq2datefmt(cmv.frequency,operation,table)
+    date_format,offset_begin,offset_end=freq2datefmt(cmv.frequency,operation,lset)
     #
     # mpmoine: WIP doc v6.2.3 : [_<time_range>] omitted if frequency is "fx"
     if "fx" in cmv.frequency:
@@ -683,7 +692,7 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     # mpmoine_last_modif:write_xios_file_def: Maintenant, dans le cas type='perso', table='NONE'. On ne doit donc pas compter sur le table2freq pour recuperer la frequence en convention xios => fonction cmipFreq2xiosFreq
     split_freq=split_frequency_for_variable(cmv, lset, sc.mcfg, context)
     # TBD : restore a variable split_freq
-    split_freq="1mo"
+    #split_freq="2mo"
     #
     #--------------------------------------------------------------------
     # Write XIOS file node:
@@ -702,12 +711,11 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
             out.write(' split_start_offset="%s" ' %offset_begin)
         if offset_end is not False  :
             out.write(' split_end_offset="%s" '%offset_end)
-        # Using Eclis convention : endday looks like 20131231, rather than 20140101
+        # enddate must be 20140101 , rather than 20131231
         endyear=enddate[0:4]
         endmonth=enddate[4:6]
         endday=enddate[6:8]
-        # TBD : reactiver split_last_date quand Xios OK
-        #out.write(' split_last_date="%s-%s-%s 00:00:00" '%(endyear,endmonth,endday))
+        out.write(' split_last_date="%s-%s-%s 00:00:00" '%(endyear,endmonth,endday))
     #
     #out.write('timeseries="exclusive" >\n')
     out.write(' time_units="days" time_counter_name="time"')
@@ -1064,6 +1072,17 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
     rep+=wrv('units',sv.stdunits)
     rep+=wrv('cell_methods',sv.cell_methods)
     rep+=wrv('cell_measures',sv.cell_measures)
+    if sv.label == "basin" :
+        rep+=wrv('flag_meanings','global_land southern_ocean atlantic_ocean '+\
+            'pacific_ocean arctic_ocean indian_ocean mediterranean_sea '+\
+            'black_sea hudson_bay baltic_sea red_sea')
+    # We override the Xios value for interval_operation because it sets it to
+    # the freq_output value with our settings (for complicated reasons)
+    if not has_vertical_interpolation :
+        interval_op=`int(lset['model_timestep'][context])`+" s"
+    else:
+        interval_op=vert_freq
+    rep+=wrv('interval_operation',interval_op)
     # mpmoine_note: 'missing_value(s)' normalement plus necessaire, a verifier
     #TBS# rep+=wrv('missing_values',sv.missing,num_type="double")
     rep+='     </field>\n'

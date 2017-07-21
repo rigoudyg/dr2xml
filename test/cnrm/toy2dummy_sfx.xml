@@ -5,11 +5,14 @@
   <field_definition>
     <field id="dummy_XY"   field_ref="field_atm_2D"/> 
     <field id="dummy_??"   field_ref="field_atm_2D"/> 
-    <!-- <field id="dummy_XYA"  field_ref="field_atm_3D" freq_op="6h"/> -->
-    <!-- <field id="dummy_XYSo" field_ref="field_srf_3D" freq_op="6h"/> -->
-    <field id="dummy_XYA"  field_ref="field_atm_3D" freq_op="6h" operation="instant" > @field_atm_3D </field>
-    <field id="pfull"      field_ref="pressure"     freq_op="6h" operation="instant" > @pressure     </field>
-    <field id="dummy_XYSo" field_ref="field_srf_3D" freq_op="6h" operation="instant" > @field_atm_3D </field>
+
+    <field id="dummy_XYA"  field_ref="field_atm_3D"/>
+    <field id="pfull"      field_ref="pressure"    />
+    <field id="dummy_XYSo" field_ref="field_srf_3D"/>
+
+    <!-- <field id="dummy_XYA"  field_ref="field_atm_3D" freq_op="6h" operation="instant" > @field_atm_3D </field> -->
+    <!-- <field id="pfull"      field_ref="pressure"     freq_op="6h" operation="instant" > @pressure     </field> -->
+    <!-- <field id="dummy_XYSo" field_ref="field_srf_3D" freq_op="6h" operation="instant" > @field_atm_3D </field> -->
 
     <field id="dummy_na" field_ref="field_atm_scalar"/> 
     <field id="dummy_0d" field_ref="field_atm_scalar"/>

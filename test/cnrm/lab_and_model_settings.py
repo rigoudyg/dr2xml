@@ -29,7 +29,8 @@ lab_and_model_settings={
     #mpmoine_note: grilles Groenland, Antarctic et les profils en Sites (pas encore codé dans dr2xml)
     #"excluded_spshapes": ["XYA-na","XYG-na","S-na","S-AH","S-A","na-A"],
     "excluded_spshapes": ["XYA-na","XYG-na","na-A","Y-P19","Y-P39","Y-A","Y-na"],
-    "excluded_tables"  : [] ,#"6hrPlevPt","6hrPlev"], # NOT WORKING !!
+    "excluded_tables"  : ["Oclim" , "E1hrClimMon" ] , # Clims are not handled by Xios yet
+    "excluded_request_links"  : ["CFsubhr"] , # request native grid, numerous 2D fields and even 3D fields
     
     #"listof_home_vars":rootpath+"dr2xml/config_utest/utest020_listof_home_vars.txt",
     "listof_home_vars":None,
@@ -77,9 +78,17 @@ lab_and_model_settings={
     #        
     # Component Models Time steps (s)
     "model_timestep" : { "sfx":900., "nem":900., "trip": 1800. },
+
     #--- Say if you want to use XIOS union/zoom axis to optimize vertical interpolation requested by the DR
     "use_union_zoom" : False,
-    "vertical_interpolation_sample_freq" : "3h"
+
+    #
+    "vertical_interpolation_sample_freq" : "3h",
+    
+    # The CMIP6 frequencies that are unreachable for a single model run. Datafiles will
+    # be labelled with dates consistent with content (but not with CMIP6 requirements).
+    # Allowed values are only 'dec' and 'yr'
+    "too_long_periods" : ["dec", "yr" ]
     
     }
 

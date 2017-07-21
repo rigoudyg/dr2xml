@@ -56,7 +56,7 @@
     <field id="field_atm_scalar" grid_ref="grid_atm_scalar" />
     <field id="field_atm_1D" grid_ref="grid_atm_1D" />
     <field id="field_atm_2D" grid_ref="grid_atm_2D" />
-    <field id="field_atm_3D" grid_ref="grid_atm_3D" freq_op="6h" check_if_active="yes" operation="instant"/>
+    <field id="field_atm_3D" grid_ref="grid_atm_3D" operation="instant"/>
     <field id="field_sub"    grid_ref="grid_atm_2D" freq_op="2ts" operation="instant"/>
     <field id="field_miss"   grid_ref="grid_atm_2D" detect_missing_value="true"/>
 
