@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-15 -*-
 print_DR_errors=True
-print_DR_stdname_errors=True
+print_DR_stdname_errors=False
 
 import sys,os
 import json

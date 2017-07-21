@@ -8,8 +8,8 @@ set -x
 # Output files are named after pattern dr2xml_<context>.xml
 #
 EXPID=$1 ; shift # The value for an attribute 'EXPID' in datafiles
-ln -sf $1 lab_and_model_settings.tmp.py ; shift
-ln -sf $1 simulation_settings.tmp.py ; shift
+ln -sf $1 lab_and_model_settings_tmp.py ; shift
+ln -sf $1 simulation_settings_tmp.py ; shift
 year=$1 ; shift # year that will be simulated
 enddate=$1 ; shift  # simulation end date - YYYYMMDD - must be at 00h next day
 ncdir=${1:-@IOXDIR@/} ; shift  # Directory for outpu files
@@ -31,8 +31,8 @@ export PYTHONPATH=$dr2xmlpath:$DRpath:$PYTHONPATH
 #
 cat >create_file_defs.tmp.py  <<-EOF
 	#!/usr/bin/python
-	from lab_and_model_settings.tmp import lab_and_model_settings
-	from simulation_settings.tmp import simulation_settings
+	from lab_and_model_settings_tmp import lab_and_model_settings
+	from simulation_settings_tmp import simulation_settings
 	from dr2xml import generate_file_defs
 	import sys, os, traceback
 	#print "* CMIP6_CV commit : "
@@ -63,5 +63,5 @@ cat >create_file_defs.tmp.py  <<-EOF
 [[ $(uname -n) == beaufix* ]] && module load python/2.7.5-2
 python create_file_defs.tmp.py
 ret=$?
-rm create_file_defs.tmp.py simulation_setting.tmp.py lab_and_model_settings.tmp.py
+rm create_file_defs.tmp.py simulation_settings_tmp.py lab_and_model_settings_tmp.py
 exit $ret
