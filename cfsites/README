@@ -1,0 +1,1 @@
+génération d'un fichier NetCDF d'entrée pour Xios, qui décrit la liste des sites comme une grille non structurée, ayant des mailles de très petite taille centrées sur les sites COSP (ceci pour que le remapping Xios produise le résultat souhaité : une interpolation 'plus proche voisin'
