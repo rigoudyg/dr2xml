@@ -89,7 +89,9 @@ def DRgrid2gridatts(grid) :
                                "data regridded to a CMIP6 standard 2x2 degree latxlon grid from the native grid")
      if grid=="100km" : return ("gr3","100 km", \
                                "data regridded to a CMIP6 standard 100 km resol grid from the native grid")
-     return("gr?","?x? degree", "grid has no description- please fix DRgrid2gridatts for grid %s"%grid)
+     if grid=="50km"  : return ("gr4","50 km", \
+                               "data regridded to a CMIP6 standard 50 km resol grid from the native grid")
+     return("grx","?x? degree", "grid has no description- please fix DRgrid2gridatts for grid %s"%grid)
 
 
 def field_size(svar, mcfg):

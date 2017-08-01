@@ -24,6 +24,10 @@ Changes :
                                put some func in separate module
   april-may 2017 - M-P Moine (CERFACS) : handle pressure axes ..
   june 2017 - SS               introduce horizontal remapping
+  july 2017 - SS               improve efficieny in remapping; allow for 
+                 sampling before vert. interpolation, for filters on table, reqLink..
+                 Adapt filenames to CMIP6 conventions (including date offset). 
+                 Handle remapping for CFsites
 
 """
 ####################################
@@ -63,7 +67,7 @@ import xml.etree.ElementTree as ET
 
 # Local packages
 from vars import simple_CMORvar, simple_Dim, process_homeVars, complement_svar_using_cmorvar, \
-                multi_plev_suffixes, single_plev_suffixes
+                multi_plev_suffixes, single_plev_suffixes, get_simplevar
 from grids import decide_for_grids, DRgrid2gridatts,\
     split_frequency_for_variable, timesteps_per_freq_and_duration
 from Xparse import init_context, id2grid
@@ -74,10 +78,13 @@ from table2freq import table2freq, table2splitfreq, cmipFreq2xiosFreq
 from dr2cmip6_expname import dr2cmip6_expname
 
 print_DR_errors=True
+print_multiple_grids=False
 
 dq = dreq.loadDreq()
 print "* CMIP6 Data Request version: ", dq.version
 
+cell_method_warnings=[]
+sn_issues=dict()
 context_index=None
 
 # Names for COSP-CFsites related elements.
@@ -343,11 +350,12 @@ def select_CMORvars_for_lab(lset, experiment_id=None, year=None,printout=False):
     #
     excluded_rls=[]
     for rl in rls_for_mips :
-        if rl.label in lset["excluded_request_links"] :
+        if rl.label in lset.get("excluded_request_links",[]) :
             excluded_rls.append(rl)
     for rl in excluded_rls : rls_for_mips.remove(rl)
     #
     if (year) :
+        #print "Request links before filter :"+`[ rl.label for rl in rls_for_mips ]`
         filtered_rls=[]
         for rl in rls_for_mips :
             # Access all requesItems ids which refer to this RequestLink
@@ -363,6 +371,7 @@ def select_CMORvars_for_lab(lset, experiment_id=None, year=None,printout=False):
         if printout :
             print "Number of Request Links which apply to experiment ", \
                 experiment_id,"and MIPs", lset['mips'] ," is: ",len(rls)
+        #print "Request links that apply :"+`[ rl.label for rl in filtered_rls ]`
     else :
         rls=rls_for_mips
        
@@ -383,12 +392,12 @@ def select_CMORvars_for_lab(lset, experiment_id=None, year=None,printout=False):
         cmvar=dq.inx.uid[v]
         ttable=dq.inx.uid[cmvar.mtid]
         mipvar=dq.inx.uid[cmvar.vid]
-        if mipvar.label not in lset['excluded_vars'] and \
+        if mipvar.label not in lset.get('excluded_vars',[]) and \
            ttable.label not in lset.get("excluded_tables",[]): 
             filtered_vars.append((v,g))
-            print "for var %s, ttable=%s"%(cmvar.label,ttable.label)
+            #print "for var %s, ttable=%s"%(cmvar.label,ttable.label)
     if printout :
-        print 'Number once filtered by excluded vars is : %s'%len(filtered_vars)
+        print 'Number once filtered by excluded vars and tables and spatial shapes is : %s'%len(filtered_vars)
 
     # Filter the list of grids requested for each variable based on lab policy
     d=dict()
@@ -397,10 +406,17 @@ def select_CMORvars_for_lab(lset, experiment_id=None, year=None,printout=False):
         d[v].add(g)
     if printout :
         print 'Number of distinct CMOR variables (whatever the grid) : %d'%len(d)
+    multiple_grids=[]
     for v in d:
         d[v]=decide_for_grids(v,d[v],lset,dq)
         if printout and len(d[v]) > 1 :
-            print "\tVariable %s will be processed with multiple grids : %s"%(dq.inx.uid[v].label,`d[v]`)
+            multiple_grids.append(dq.inx.uid[v].label)
+            if print_multiple_grids :
+                print "\tVariable %s will be processed with multiple grids : %s"%(dq.inx.uid[v].label,`d[v]`)
+    if not print_multiple_grids :
+        multiple_grids.sort()
+        print "\tThese variables will be processed with multiple grids "+\
+            "(rerun with print_multiple_grids set to True for details) :"+`multiple_grids`
     #
     # Print a count of distinct var labels
     if printout :
@@ -413,11 +429,14 @@ def select_CMORvars_for_lab(lset, experiment_id=None, year=None,printout=False):
     for v in d :
         svar = simple_CMORvar()
         cmvar = dq.inx.uid[v]
-        complement_svar_using_cmorvar(svar,cmvar,dq)
+        complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues)
         svar.Priority=analyze_priority(cmvar,lset['mips'])
         svar.grids=d[v]
         simplified_vars.append(svar)
     print '\nNumber of simplified vars is :',len(simplified_vars)
+    print "Issues with standard names are :"
+    for iss in sn_issues : print "\t"+iss+" vars : "+`sn_issues[iss]`
+    
     return simplified_vars
 
 def analyze_priority(cmvar,lmips):
@@ -532,9 +551,13 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
       
     Lenghty code, but not longer than the corresponding specification document
     
-    After a prologue, attributes valid for all variables are 
+    1- After a prologue, attributes valid for all variables are 
     written as file-level metadata, in the same order than in 
-    WIP document; last, field-level metadate are written
+    WIP document; 
+    2- Next, field-level metadata are written
+    3- For 3D variables in model levels or half-levels, also write the auxilliary 
+    variables requested by CF convention (e.g. for hybrid coordinate, psol field 
+    plus AP and B arrays and their bounds, and lev + lev_bnds with formula attribute)
     """
     #
     global sc
@@ -663,7 +686,7 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
         description=exp_entry['description']
     # 
     date_range="%start_date%-%end_date%" # XIOS syntax
-    operation,detect_missing = analyze_cell_time_method(cmv.cell_methods,cmv.label,table)
+    operation,detect_missing = analyze_cell_time_method(cmv.cell_methods,cmv.label,table,printout=False)
     date_format,offset_begin,offset_end=freq2datefmt(cmv.frequency,operation,lset)
     #
     # mpmoine: WIP doc v6.2.3 : [_<time_range>] omitted if frequency is "fx"
@@ -858,14 +881,30 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     if len(end_field_defs.keys())==0 :
         raise dr2xml_error("No end_field_def for %s in %s"%(cmv.label,table))
         return
+    if table == "6hrLev" :
+        # create a fiel_def entry for surface pressure 
+        sv_psol=get_simplevar(dq,"ps","6hrLev")
+        create_xios_aux_elmts_defs(sv_psol,lset["ping_variables_prefix"]+"ps",table,lset,sset,end_field_defs,
+                          field_defs,axis_defs,grid_defs,domain_defs,dummies,context,target_hgrid_id,pingvars)
+        # Add 
+        pass
     #
     for shape in end_field_defs :
         if shape :
             # Create a field group for each non-trivial shape, for performance issues
-            # (remapping must follow time average !)
+            # (remapping must be done after time average !)
             out.write('<field_group expr="@this" grid_ref="%s">\n'%shape)
         for entry in end_field_defs[shape] : out.write(entry)
         if shape : out.write('</field_group >\n')
+    if table == "6hrLev" :
+        # add entries for auxilliary variables : ap, ap_bnds, b, b_bnds
+        names={"ap": "vertical coordinate formula term: ap(k)",
+               "ap_bnds": "vertical coordinate formula term: ap(k+1/2)",
+               "bp": "vertical coordinate formula term: b(k)",
+               "bp_bnds" : "vertical coordinate formula term: b(k+1/2)"  ] :
+        for tab in names :
+            out.write('\t<field field_ref="%s%s" long_name="%s" operation="once" prec="8" />\n'%\
+                      (lset["ping_variables_prefix"],tab,names[tab]))
     out.write('</file>\n\n')
 
  # mpmoine_last_modif:wrv: ajout de l'argument num_type
@@ -948,7 +987,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
                     # Construct a grid using variable's grid and new axis
                     #TBS# if not sd.is_zoom_of: # create a (target) grid for re-mapping only if vert axis is not a zoom (i.e. if normal or union)
                     #TBS# grid_def=create_grid_def(sd,alias,context_index)
-                    grid_def=create_grid_def(sd,axis_key,alias_ping,context_index)
+                    grid_def=create_grid_def(sd,axis_key,alias_ping,context_index,table)
                     if grid_def is False : 
                         raise dr2xml_error("Fatal: cannot create grid_def for %s and %s"%(alias,sd))
                     grid_id=grid_def[0]
@@ -981,7 +1020,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
     # by analyzing the time part of cell_methods
     #--------------------------------------------------------------------
      # Analyze 'outermost' time cell_methods and translate to 'operation'
-    operation,detect_missing = analyze_cell_time_method(sv.cell_methods,sv.label,table)
+    operation,detect_missing = analyze_cell_time_method(sv.cell_methods,sv.label,table, printout=False)
     if not operation: 
         #raise dr2xml_error("Fatal: bad xios 'operation' for %s in table %s: %s (%s)"%(sv.label,table,operation,sv.cell_methods))
         print("Fatal: bad xios 'operation' for %s in table %s: %s (%s)"%(sv.label,table,operation,sv.cell_methods))
@@ -1032,7 +1071,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
     elif ssh      == 'na-A'  : # only used for rlu, rsd, rsu ... in Efx ????
         pass 
     else :
-        raise(dr2xml_error("Fatal: Issue with un-managed spatial shape %s for variable %s"%(ssh,sv.label)))
+        raise(dr2xml_error("Fatal: Issue with un-managed spatial shape %s for variable %s in table %s"%(ssh,sv.label,table)))
     #
     #--------------------------------------------------------------------
     # Build XIOS field elements (stored in end_field_defs)
@@ -1104,7 +1143,7 @@ def generate_file_defs(lset,sset,year,enddate,context,cvs_path,pingfile=None,
                        dummies='include',printout=False,dirname="./",prefix="",attributes=[]) :
     """
     Using global DR object dq, a dict of lab settings LSET, and a dict 
-    of simulation settings SSET, generate an XIOS file_defs file for a 
+    of simulation settings SSET, generate an XIOS file_defs 'file' for a 
     given XIOS 'context', which content matches 
     the DR for the experiment quoted in simu setting dict and a YEAR.
     Makes use of CMIP6 controlled vocabulary files found in CVS_PATH
@@ -1160,7 +1199,7 @@ def generate_file_defs(lset,sset,year,enddate,context,cvs_path,pingfile=None,
     context_realms=lset['realms_per_context'][context]
     for realm in context_realms :
         print "Processing realm '%s' of context '%s'"%(realm,context)
-        print 50*"_"
+        #print 50*"_"
         if realm in svars_per_realm.keys():
             for svar in svars_per_realm[realm] :
                 # mpmoine_last_modif:generate_file_defs: patch provisoire pour retirer les  svars qui n'ont pas de spatial_shape 
@@ -1186,7 +1225,7 @@ def generate_file_defs(lset,sset,year,enddate,context,cvs_path,pingfile=None,
     #--------------------------------------------------------------------
     # Add svars belonging to the orphan list
     #--------------------------------------------------------------------
-    if context in lset['orphan_variables']:
+    if 'orphan_variables' in context and context in lset['orphan_variables']:
         orphans=lset['orphan_variables'][context]
         for svar in mip_vars_list :
             if svar.label in orphans:
@@ -1309,6 +1348,14 @@ def generate_file_defs(lset,sset,year,enddate,context,cvs_path,pingfile=None,
     
     # mpmoine_petitplus:generate_file_defs: pour sortir des stats sur ce que l'on sort reelement
     if printout: print_SomeStats(context,svars_per_table,skipped_vars_per_table)
+
+    warn=dict()
+    for warning,label,table in cell_method_warnings:
+        if warning not in warn : warn[warning]=set()
+        warn[warning].add(label)
+    print "Warnings about cell methods (with var list)"
+    for w in warn  : print "\t",w," for vars : ",warn[w]
+        
 
 # mpmoine_petitplus: nouvelle fonction print_SomeStats (plus d'info sur les skipped_vars, nbre de vars / (shape,freq) )
 def print_SomeStats(context,svars_per_table,skipped_vars_per_table):
@@ -1455,12 +1502,14 @@ def change_domain_in_grid(domain,alias=None,src_grid_string=None,index=None):
     target_grid_id=src_grid_id+"_"+domain
     # Change domain
     (target_grid_string,count)=re.subn('domain *id= *.([\w_])*.','domain id="%s"'%domain,src_grid_string,1) 
-    if count != 1 : 
-        raise dr2xml_error("Fatal: cannot find a domain to change in src_grid_string %s for %s"%(src_grid_string,alias))
+    if count != 1 :
+        (target_grid_string,count)=re.subn('domain *domain_ref= *.([\w_])*.','domain domain_ref="%s"'%domain,src_grid_string,1) 
+        if count != 1 :
+            raise dr2xml_error("Fatal: cannot find a domain to change in src_grid_string %s for %s"%(src_grid_string,alias))
     target_grid_string=re.sub('grid id= *.([\w_])*.','grid id="%s"'%target_grid_id,target_grid_string)
     return (target_grid_id,target_grid_string)
 
-def create_grid_def(sd,axis_key,alias=None,context_index=None):
+def create_grid_def(sd,axis_key,alias=None,context_index=None,table=None):
     # mpmoine_correction:create_grid_def:  si, il faut generer une grille autour des axes de zoom aussi
     #if not sd.is_zoom_of and not sd.is_union_for: # a grid_def to build in classical case (a vertical axis without using union)
     if alias and context_index:
@@ -1472,8 +1521,10 @@ def create_grid_def(sd,axis_key,alias=None,context_index=None):
             # Change only first instance of axis_ref, which is assumed to match the vertical dimension
             (target_grid_string,count)=re.subn('axis *id= *.([\w_])*.','axis id="%s"'%axis_key,src_grid_string,1)
             if count != 1 : 
-                raise dr2xml_error("Fatal: cannot find an axis_ref to change in src_grid_string %s for %s"%\
-                                   (src_grid_string,alias))
+                (target_grid_string,count)=re.subn('axis *axis_ref= *.([\w_])*.','axis axis_ref="%s"'%axis_key,src_grid_string,1)
+                if count != 1 : 
+                    raise dr2xml_error("Fatal: cannot find an axis_ref to change in src_grid_string %s for %s in %s"%\
+                                       (src_grid_string,alias,table))
             target_grid_string=re.sub('grid id= *.([\w_])*.','grid id="%s"'%target_grid_id,target_grid_string)
             return (target_grid_id,target_grid_string)
         else:
@@ -1617,7 +1668,7 @@ def isVertDim(sdim):
     test=(sdim.stdname=='air_pressure' or sdim.stdname=='altitude') and (sdim.bounds != "yes")
     return test
 
-def analyze_cell_time_method(cm,label,table):
+def analyze_cell_time_method(cm,label,table,printout=False):
     """
     Depending on cell method string CM, tells which time operation
     should be done, and if missing value detection should be set
@@ -1635,16 +1686,20 @@ def analyze_cell_time_method(cm,label,table):
     #----------------------------------------------------------------------------------------------------------------
     elif "time: mean (with samples weighted by snow mass)" in cm : 
         #[amnla-tmnsn]: Snow Mass Weighted (LImon : agesnow, tsnLi)
-        print "TBD: Cannot yet handle time: mean (with samples weighted by snow mass) for "+\
-            "%15s in table %s -> averaging"%(label,table)
+        cell_method_warnings.append(('Cannot yet handle time: mean (with samples weighted by snow mass)',label,table))
+        if printout : 
+            print "TBD: Cannot yet handle time: mean (with samples weighted by snow mass) for "+\
+                "%15s in table %s -> averaging"%(label,table)
         operation="average"
     #----------------------------------------------------------------------------------------------------------------
     elif "time: mean where cloud"  in cm : 
         #[amncl-twm]: Weighted Time Mean on Cloud (2 variables ISSCP 
         # albisccp et pctisccp, en emDay et emMon)
-        print "Note : assuming that 'time: mean where cloud' "+\
-            " for %15s in table %s is well handled by 'detect_missing'"\
-            %(label,table)
+        cell_method_warnings.append(('time: mean where cloud',label,table))
+        if printout :
+            print "Note : assuming that  "+\
+                " for %15s in table %s is well handled by 'detect_missing'"\
+                %(label,table)
         operation="average"
         detect_missing=True
     #-------------------------------------------------------------------------------------
@@ -1652,9 +1707,11 @@ def analyze_cell_time_method(cm,label,table):
     elif "time: mean where sea_ice_melt_pound" in cm :
         #[amnnsimp-twmm]: Weighted Time Mean in Sea-ice Melt Pounds (uniquement des 
         #variables en SImon)
-        print "Note : assuming that 'time: mean where sea_ice_melt_pound' "+\
-            " for %15s in table %s is well handled by 'detect_missing'"\
-            %(label,table)
+        cell_method_warnings.append(('time: mean where sea_ice_melt_pound',label,table))
+        if printout :
+            print "Note : assuming that 'time: mean where sea_ice_melt_pound' "+\
+                " for %15s in table %s is well handled by 'detect_missing'"\
+                %(label,table)
         operation="average"
         detect_missing=True
     #-------------------------------------------------------------------------------------------------
@@ -1662,9 +1719,11 @@ def analyze_cell_time_method(cm,label,table):
         #[amnsi-twm]: Weighted Time Mean on Sea-ice (presque que des 
         #variables en SImon, sauf sispeed et sithick en SIday)
         # mpmoine_correction:analyze_cell_time_method: ajout de operation="average" pour "time: mean where sea_ice"
-        print "Note : assuming that 'time: mean where sea_ice' "+\
-            " for %15s in table %s is well handled by 'detect_missing'"\
-            %(label,table)
+        cell_method_warnings.append(('time: mean where sea_ice',label,table))
+        if printout: 
+            print "Note : assuming that 'time: mean where sea_ice' "+\
+                " for %15s in table %s is well handled by 'detect_missing'"\
+                %(label,table)
         operation="average"
         detect_missing=True
     elif "time: mean where sea"  in cm :#[amnesi-tmn]: 
@@ -1679,9 +1738,11 @@ def analyze_cell_time_method(cm,label,table):
     elif "time: mean where floating_ice_shelf" in cm :
         #[amnfi-twmn]: Weighted Time Mean on Floating Ice Shelf (presque que des 
         #variables en Imon, Iyr, sauf sftflt en LImon !?)
-        print "Note : assuming that 'time: mean where floating_ice_shelf' "+\
-            " for %15s in table %s is well handled by 'detect_missing'"\
-            %(label,table)
+        cell_method_warnings.append(('time: mean where floating_ice_shelf',label,table))
+        if printout: 
+            print "Note : assuming that 'time: mean where floating_ice_shelf' "+\
+                " for %15s in table %s is well handled by 'detect_missing'"\
+                %(label,table)
         operation="average"
         detect_missing=True
     #----------------------------------------------------------------------------------------------------------------
@@ -1689,9 +1750,11 @@ def analyze_cell_time_method(cm,label,table):
     elif "time: mean where grounded_ice_sheet" in cm :
         #[amngi-twm]: Weighted Time Mean on Grounded Ice Shelf (uniquement des 
         #variables en Imon, Iyr)
-        print "Note : assuming that 'time: mean where grounded_ice_sheet' "+\
-            " for %15s in table %s is well handled by 'detect_missing'"\
-            %(label,table)
+        cell_method_warnings.append(('time: mean where grounded_ice_sheet',label,table))
+        if printout: 
+            print "Note : assuming that 'time: mean where grounded_ice_sheet' "+\
+                " for %15s in table %s is well handled by 'detect_missing'"\
+                %(label,table)
         operation="average"
         detect_missing=True
     #----------------------------------------------------------------------------------------------------------------
@@ -1699,9 +1762,11 @@ def analyze_cell_time_method(cm,label,table):
     elif "time: mean where ice_sheet" in cm :
         #[amnni-twmn]: Weighted Time Mean on Ice Shelf (uniquement des 
         #variables en Imon, Iyr)
-        print "Note : assuming that 'time: mean where ice_sheet' "+\
-            " for %15s in table %s is well handled by 'detect_missing'"\
-            %(label,table)
+        cell_method_warnings.append(('time: mean where ice_sheet',label,table))
+        if printout: 
+            print "Note : assuming that 'time: mean where ice_sheet' "+\
+                " for %15s in table %s is well handled by 'detect_missing'"\
+                %(label,table)
         operation="average"
         detect_missing=True
     #----------------------------------------------------------------------------------------------------------------
@@ -1709,9 +1774,11 @@ def analyze_cell_time_method(cm,label,table):
     elif "time: mean where landuse" in cm :
         #[amlu-twm]: Weighted Time Mean on Land Use Tiles (uniquement des 
         #variables suffixees en 'Lut')
-        print "Note : assuming that 'time: mean where landuse' "+\
-            " for %15s in table %s is well handled by 'detect_missing'"\
-            %(label,table)
+        cell_method_warnings.append(('time: mean where land_use',label,table))
+        if printout: 
+            print "Note : assuming that 'time: mean where landuse' "+\
+                " for %15s in table %s is well handled by 'detect_missing'"\
+                %(label,table)
         operation="average"
         detect_missing=True
     #----------------------------------------------------------------------------------------------------------------
@@ -1719,9 +1786,11 @@ def analyze_cell_time_method(cm,label,table):
     elif "time: mean where crops" in cm :
         #[amc-twm]: Weighted Time Mean on Crops (uniquement des 
         #variables suffixees en 'Crop')
-        print "Note : assuming that 'time: mean where crops' "+\
-            " for %15s in table %s is well handled by 'detect_missing'"\
-            %(label,table)
+        cell_method_warnings.append(('time: mean where crops',label,table))
+        if printout: 
+            print "Note : assuming that 'time: mean where crops' "+\
+                " for %15s in table %s is well handled by 'detect_missing'"\
+                %(label,table)
         operation="average"
         detect_missing=True
     #----------------------------------------------------------------------------------------------------------------
@@ -1729,9 +1798,11 @@ def analyze_cell_time_method(cm,label,table):
     elif "time: mean where natural_grasses" in cm :
         #[amng-twm]: Weighted Time Mean on Natural Grasses (uniquement des 
         #variables suffixees en 'Grass')
-        print "Note : assuming that 'time: mean where natural_grasses' "+\
-            " for %15s in table %s is well handled by 'detect_missing'"\
-            %(label,table)
+        cell_method_warnings.append(('time: mean where natural_grasses',label,table))
+        if printout: 
+            print "Note : assuming that 'time: mean where natural_grasses' "+\
+                " for %15s in table %s is well handled by 'detect_missing'"\
+                %(label,table)
         operation="average"
         detect_missing=True
     #----------------------------------------------------------------------------------------------------------------
@@ -1739,9 +1810,11 @@ def analyze_cell_time_method(cm,label,table):
     elif "time: mean where shrubs" in cm :
         #[ams-twm]: Weighted Time Mean on Shrubs (uniquement des 
         #variables suffixees en 'Shrub')
-        print "Note : assuming that 'time: mean where shrubs' "+\
-            " for %15s in table %s is well handled by 'detect_missing'"\
-            %(label,table)
+        cell_method_warnings.append(('time: mean where shrubs',label,table))
+        if printout: 
+            print "Note : assuming that 'time: mean where shrubs' "+\
+                " for %15s in table %s is well handled by 'detect_missing'"\
+                %(label,table)
         operation="average"
         detect_missing=True
     #----------------------------------------------------------------------------------------------------------------
@@ -1749,18 +1822,22 @@ def analyze_cell_time_method(cm,label,table):
     elif "time: mean where trees" in cm :
         #[amtr-twm]: Weighted Time Mean on Bare Ground (uniquement des 
         #variables suffixees en 'Tree')
-        print "Note : assuming that 'time: mean where trees' "+\
-            " for %15s in table %s is well handled by 'detect_missing'"\
-            %(label,table)
+        cell_method_warnings.append(('time: mean where trees',label,table))
+        if printout: 
+            print "Note : assuming that 'time: mean where trees' "+\
+                " for %15s in table %s is well handled by 'detect_missing'"\
+                %(label,table)
         operation="average"
         detect_missing=True
     #----------------------------------------------------------------------------------------------------------------
     # mpmoine_correction:analyze_cell_time_method: ajout du cas "time: mean where vegetation"
     elif "time: mean where vegetation" in cm :
         #[amv-twm]: Weighted Time Mean on Vegetation (pas de varibles concernees)
-        print "Note : assuming that 'time: mean where vegetation' "+\
-            " for %15s in table %s is well handled by 'detect_missing'"\
-            %(label,table)
+        cell_method_warnings.append(('time: mean where vegetation',label,table))
+        if printout: 
+            print "Note : assuming that 'time: mean where vegetation' "+\
+                " for %15s in table %s is well handled by 'detect_missing'"\
+                %(label,table)
         operation="average"
         detect_missing=True
     #----------------------------------------------------------------------------------------------------------------
@@ -1788,22 +1865,28 @@ def analyze_cell_time_method(cm,label,table):
     #----------------------------------------------------------------------------------------------------------------
     elif "time: mean within years time: mean over years" in cm: 
         #[aclim]: Annual Climatology
-        print "TBD: Cannot yet compute annual climatology for "+\
-            "%15s in table %s -> averaging"%(label,table)
+        cell_method_warnings.append(('Cannot yet compute annual climatology',label,table))
+        if printout: 
+            print "TBD: Cannot yet compute annual climatology for "+\
+                "%15s in table %s -> averaging"%(label,table)
         # Could transform in monthly fields to be post-processed
         operation="average"
     #----------------------------------------------------------------------------------------------------------------
     elif "time: mean within days time: mean over days"  in cm: 
         #[amn-tdnl]: Mean Diurnal Cycle
-        print "TBD: Cannot yet compute diurnal cycle for "+\
-        " %15s in table %s -> averaging"%(label,table)
+        cell_method_warnings.append(('Cannot yet compute diurnam cycle',label,table))
+        if printout: 
+            print "TBD: Cannot yet compute diurnal cycle for "+\
+                " %15s in table %s -> averaging"%(label,table)
     #----------------------------------------------------------------------------------------------------------------
     # mpmoine_correction:analyze_cell_time_method: ajout du cas 'Maximum Hourly Rate'
     elif "time: mean within hours time: maximum over hours"  in cm: 
         #[amn-tdnl]: Mean Diurnal Cycle
-        print "TBD: Cannot yet compute maximum hourly rate for "+\
-        " %15s in table %s -> averaging"%(label,table)
-        # Could output a time average of 24 hourly fields at 01 UTC, 2UTC ...
+        cell_method_warnings.append(('Cannot yet compute maximum hourly rate',label,table))
+        if printout: 
+            print "TBD: Cannot yet compute maximum hourly rate for "+\
+                " %15s in table %s -> averaging"%(label,table)
+            # Could output a time average of 24 hourly fields at 01 UTC, 2UTC ...
         operation="average"
     #----------------------------------------------------------------------------------------------------------------
     elif "time: sum"  in cm :
@@ -1934,6 +2017,7 @@ def pingFileForRealmsList(settings, context,lrealms,svars,path_special,dummy="fi
             # mpmoine_amelioration:pingFileForRealmsList: protection si specials existe
             if specials and label in specials :
                 line=ET.tostring(specials[label]).replace("DX_",prefix)
+                #if 'ta' in label : print "ta is special : "+line
                 line=line.replace("\n","").replace("\t","")
                 fp.write('   '); fp.write(line)
             else:
@@ -1959,6 +2043,8 @@ def pingFileForRealmsList(settings, context,lrealms,svars,path_special,dummy="fi
                 fp.write("<!-- P%d (%s) %s : %s -->"\
                          %(v.Priority,v.stdunits, v.stdname, v.description)) 
             fp.write("\n")
+        for tab in ["ap","ap_bnds","bp","bp_bnds" ] :
+            fp.write('\t<field id="%s%s" field_ref="dummy_hyb" /><!-- One of the hybrid coordinate arrays -->\n'%(prefix,tab))
         fp.write("</field_definition>\n")
         #
         print "%3d variables written for %s"%(len(lvars),filename)
@@ -1966,7 +2052,7 @@ def pingFileForRealmsList(settings, context,lrealms,svars,path_special,dummy="fi
         # Write axis_defs, domain_defs, ... read from relevant input/DX_ files
         # mpmoine_amelioration:pingFileForRealmsList: protection si path_special existe
         if path_special:
-            for obj in [ "axis", "domain", "grid" ] :
+            for obj in [ "axis", "domain", "grid" , "field" ] :
                 #print "for obj "+obj
                 # mpmoine_amelioration:pingFileForRealmsList: ajout argument 'path_special' a la fonction copy_obj_from_DX_file
                 copy_obj_from_DX_file(fp,obj,prefix,lrealms,path_special)
@@ -2073,7 +2159,8 @@ def highest_rank(svar):
     referencing a MIPvar with this label
     This, assuming dr2xml would handle all needed shape reductions
     """
-    mipvarlabel=svar.label_without_area
+    #mipvarlabel=svar.label_without_area
+    mipvarlabel=svar.label_without_psuffix
     shapes=[]
     for  cvar in dq.coll['CMORvar'].items : 
         v=dq.inx.uid[cvar.vid]
@@ -2116,8 +2203,8 @@ def highest_rank(svar):
     elif any([ "S-A" in s for s in shapes]) :  shape="COSP-A"
     elif any([ "S-AH" in s for s in shapes]) : shape="COSP-AH"
     elif any([ "na-A" in s for s in shapes]) : shape="site-A"
-    elif any([ "Y-A"  in s for s in shapes]) : shape="lat-A" #XYZ
-    elif any([ "Y-P"  in s for s in shapes]) : shape="lat-P" #XYZ
+    elif any([ "Y-A"  in s for s in shapes]) : shape="XYA" #lat-A
+    elif any([ "Y-P"  in s for s in shapes]) : shape="XYA" #lat-P
     elif any([ "Y-na" in s for s in shapes]) : shape="lat"
     elif any([ "TRS-na" in s for s in shapes]): shape="TRS"
     elif any([ "TR-na" in s for s in shapes]) : shape="TR"
@@ -2193,6 +2280,7 @@ def build_axis_definitions():
     """
     for g in dq.coll['grids'].items :
         pass
+
 
 class dr2xml_error(Exception):
     def __init__(self, valeur):

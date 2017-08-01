@@ -16,34 +16,12 @@
   <field id="DX_maxpblz" field_ref="DX_pblz" operation="maximum" freq_op="1d"> @this </field>
   <field id="DX_minpblz" field_ref="DX_pblz" operation="minimum" freq_op="1d"> @this </field>
 
-  <field id="DX_zg1000" field_ref="DX_zg" axis_ref="DX_p1000" />
-   <field id="DX_hus1000" field_ref="DX_hus" axis_ref="DX_p1000" />
-  <field id="DX_ua1000" field_ref="DX_ua" axis_ref="DX_p1000" />
-  <field id="DX_va1000" field_ref="DX_va" axis_ref="DX_p1000" />
-
-  <field id="DX_ta850" field_ref="DX_ta" grid_ref="DX_p850" />
-  <field id="DX_hus850" field_ref="DX_hus" grid_ref="DX_p850" />
-  <field id="DX_ua850" field_ref="DX_ua" grid_ref="DX_p850" />
-  <field id="DX_va850" field_ref="DX_va" grid_ref="DX_p850" />
-
   <!-- Must decide if relative voorticity is provided as a 3D field or only at 8500 hPa -->
   <field id="DX_rv"    field_ref="dummy_XYA" />
   <field id="DX_rv850" field_ref="DX_rv" grid_ref="DX_p850" />
 
   <field id="DX_ta700" field_ref="DX_ta" grid_ref="DX_p700" />
 
-  <field id="DX_wap500" field_ref="DX_wap" grid_ref="DX_p500" />
-  <field id="DX_zg500" field_ref="DX_zg" grid_ref="DX_p500" />
-  <field id="DX_ta500" field_ref="DX_ta" grid_ref="DX_p500" />
-
-  <field id="DX_ua200" field_ref="DX_ua" grid_ref="DX_p200" />
-  <field id="DX_va200" field_ref="DX_va" grid_ref="DX_p200" />
-
-  <field id="DX_zg100" field_ref="DX_zg" axis_ref="DX_p100" />
-  <field id="DX_ta100" field_ref="DX_ta" axis_ref="DX_p100" />
-  <field id="DX_hus100" field_ref="DX_hus" axis_ref="DX_p100" />
-  <field id="DX_ua100" field_ref="DX_ua" axis_ref="DX_p100" />
-  <field id="DX_va100" field_ref="DX_va" axis_ref="DX_p100" />
 
   <field id="DX_ua100m" field_ref="DX_ua" axis_ref="DX_height100m" />
   <field id="DX_va100m" field_ref="DX_va" axis_ref="DX_height100m" />

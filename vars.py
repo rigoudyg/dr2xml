@@ -424,11 +424,11 @@ def get_corresp_CMORvar(hmvar,dq):
                     " -> Provided:",[hmvar.spatial_shp,hmvar.temporal_shp],\
                     'Expected:',get_SpatialAndTemporal_Shapes(cmvar,dq)
     if count==1: 
-        complement_svar_using_cmorvar(hmvar,cmvar_found,dq)
+        complement_svar_using_cmorvar(hmvar,cmvar_found,dq,None)
         return hmvar
     return False
 
-def complement_svar_using_cmorvar(svar,cmvar,dq):
+def complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues):
     """ 
     The label for SVAR will be suffixed by an area name it the 
     MIPvarname is ambiguous for that
@@ -478,8 +478,10 @@ def complement_svar_using_cmorvar(svar,cmvar,dq):
                 #svar.description = stdname.description
             elif sn._h.label == 'remarks' :
                 svar.stdname = sn.uid.rstrip(' ')
-                if svar.stdname=="missing" or 'pending' in svar.stdname :
-                    print "for var %s, sn is %s"%(svar.label,svar.stdname)
+                if sn_issues is not None and svar.stdname=="missing" or 'pending' in svar.stdname :
+                    if svar.stdname not in sn_issues : sn_issues[svar.stdname]=set()
+                    sn_issues[svar.stdname].add(svar.label)
+                    #print "for var %s, sn is %s"%(svar.label,svar.stdname)
             else:
                 print "for var %s, sn._h.label=%s"%(svar.label,sn._h.label)
         else :
@@ -694,3 +696,19 @@ def analyze_ambiguous_MIPvarnames(dq):
                     ambiguous.append(( vlabel,(realm,d[vlabel][realm])))
     return ambiguous
 
+
+def get_simplevar(dq,label,table):
+    """ 
+    Returns 'simplified variable' for a given CMORvar label and table
+    """
+    svar = simple_CMORvar()
+    collect=dq.coll['CMORvar']
+    psvar=None
+    for cmvar in collect.items:
+        if cmvar.mipTable==table and cmvar.label==label :
+            psvar=cmvar
+            break
+    if psvar :
+        complement_svar_using_cmorvar(svar,cmvar,dq,None)
+        return svar
+    
