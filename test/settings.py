@@ -13,8 +13,8 @@ lab_and_model_settings={
     'references'    :  "ref",
     'info_url'      : "http://www.umr-cnrm.fr/cmip6/",
     'contact'       : 'contact.cmip@cnrm.fr',
-    'mips': {'C4MIP', 'SIMIP', 'OMIP', 'CFMIP', 'RFMIP'} , 
-    'mips_all' : {'AerChemMIP','C4MIP','CFMIP','DAMIP', 'FAFMIP' , 'GeoMIP','GMMIP','ISMIP6',\
+    'mips_short': {'C4MIP', 'SIMIP', 'OMIP', 'CFMIP', 'RFMIP'} , 
+    'mips' : {'AerChemMIP','C4MIP','CFMIP','DAMIP', 'FAFMIP' , 'GeoMIP','GMMIP','ISMIP6',\
                       'LS3MIP','LUMIP','OMIP','PMIP','RFMIP','ScenarioMIP','CORDEX','SIMIP'},
     'max_priority' : 3,
     'tierMax'      : 3,

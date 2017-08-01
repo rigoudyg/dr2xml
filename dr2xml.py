@@ -344,7 +344,7 @@ def select_CMORvars_for_lab(lset, experiment_id=None, year=None,printout=False):
     #
     excluded_rls=[]
     for rl in rls_for_mips :
-        if rl.label in lset["excluded_request_links"] :
+        if rl.label in lset.get("excluded_request_links",[]) :
             excluded_rls.append(rl)
     for rl in excluded_rls : rls_for_mips.remove(rl)
     #
@@ -387,7 +387,7 @@ def select_CMORvars_for_lab(lset, experiment_id=None, year=None,printout=False):
         if mipvar.label not in lset['excluded_vars'] and \
            ttable.label not in lset.get("excluded_tables",[]): 
             filtered_vars.append((v,g))
-            print "for var %s, ttable=%s"%(cmvar.label,ttable.label)
+            #print "for var %s, ttable=%s"%(cmvar.label,ttable.label)
     if printout :
         print 'Number once filtered by excluded vars is : %s'%len(filtered_vars)
 

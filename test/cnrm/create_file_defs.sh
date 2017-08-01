@@ -7,6 +7,7 @@ set -x
 #
 # Output files are named after pattern dr2xml_<context>.xml
 #
+dummies=$1 ; shift # See dr2xml doc : forbid/skip/include
 EXPID=$1 ; shift # The value for an attribute 'EXPID' in datafiles
 ln -sf $1 lab_and_model_settings_tmp.py ; shift
 ln -sf $1 simulation_settings_tmp.py ; shift
@@ -14,8 +15,7 @@ year=$1 ; shift # year that will be simulated
 enddate=$1 ; shift  # simulation end date - YYYYMMDD - must be at 00h next day
 ncdir=${1:-@IOXDIR@/} ; shift  # Directory for outpu files
 print=${1:-1} ; shift # Want some reporting ?
-dummies=${1:-skip} ; shift # See dr2xml doc : forbid/skip/include
-dummies=include
+#dummies=include
 #
 # Set paths for all software components
 #
