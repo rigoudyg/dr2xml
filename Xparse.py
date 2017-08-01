@@ -46,6 +46,7 @@ def read_src(elt,path_parse,printout=False, level=0, dont_read=[]) :
                     skip=True
             if skip : continue
             # mpmoine_correction: read_src: gestion du type de codage XML pour pouvoir lire les context.xml d'Arnaud
+            if printout : print level*"\t"+"Reading %s"%filen
             et=ET.parse(filen).getroot()
             if printout :
                 print level*"\t"+"Reading %s, %s=%s"%(filen,et.tag,gattrib(et,'id','no_id'))
@@ -211,8 +212,10 @@ def select_context(rootel,context_id):
 def init_context(context_id,path_parse,printout=False):
     # mpmoine_merge_dev2_v0.12:init_context: ajout de "./parse/" pour acceder a iodef.xml
     xmldef=path_parse+"iodef.xml"
+    if printout: print "Parsing %s ..."%xmldef,
     rootel=ET.parse(xmldef).getroot()
     # mpmoine_amelioration:init_context: ajout de l'argument 'path_parse' a la fonction read_src
+    if printout: print "sourcing files  ...",
     read_src(rootel,path_parse,printout=printout,dont_read=["dr2xml_"])
     merge_sons(rootel,printout)
     rootel=select_context(rootel,context_id)
