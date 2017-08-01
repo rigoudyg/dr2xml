@@ -901,7 +901,7 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
         names={"ap": "vertical coordinate formula term: ap(k)",
                "ap_bnds": "vertical coordinate formula term: ap(k+1/2)",
                "bp": "vertical coordinate formula term: b(k)",
-               "bp_bnds" : "vertical coordinate formula term: b(k+1/2)"  ] :
+               "bp_bnds" : "vertical coordinate formula term: b(k+1/2)"  }
         for tab in names :
             out.write('\t<field field_ref="%s%s" long_name="%s" operation="once" prec="8" />\n'%\
                       (lset["ping_variables_prefix"],tab,names[tab]))
@@ -976,8 +976,6 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
                     print "Error: field id ",alias_ping," expected in pingfile but not found."
                 if not alias1 in pingvars:
                     # mpmoine_note: maintenant on est toujours dans ce cas (e.g. 'CMPI6_hus7h_plev7h' plus jamais ecrit dans le ping)
-                    # SS : peut-etre a revoir, ca.. (COSP)
-                    #
                     # Construct an axis for interpolating to this dimension
                     # Here, only zoom or normal axis attached to svar, axis for unions of plevs are managed elsewhere
                     axisdef,coordname,coorddef=create_axis_def(sd,prefix,vert_freq)
@@ -993,6 +991,10 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
                     grid_id=grid_def[0]
                     grid_defs[grid_id]=grid_def[1]
 		            #
+                    # alias_sample for a field which is time-sampled before vertical interpolation
+                    alias_sample=alias_ping+"_sampled_"+vert_freq # e.g.  CMIP6_zg_sampled_3h
+                    field_defs[alias_sample]='<field id="%-25s field_ref="%-25s operation="instant" freq_op="%-10s> @%s</field>'\
+                        %(alias_sample+'"',alias_ping+'"',vert_freq+'"',alias_ping) 
                     # Construct a field def for the re-mapped variable
                     # mpmoine_correction:create_xios_aux_elmts_defs: passage par grid_ref aussi pour les varaibles definies sur des zoom
                     if sd.is_zoom_of: # cas d'une variable definie grace a 2 axis_def (union+zoom)
@@ -1000,15 +1002,11 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
                         %(alias1+'"',alias2+'"',"grid_"+sd.zoom_label+'"')
                         # mpmoine_merge_dev2_v0.12:create_xios_aux_elmts_defs: remplacement axis_ref=sd.is_zoom_of -> grid_ref="grid_"+sd.is_zoom_of
                         field_defs[alias2]='<field id="%-25s field_ref="%-25s grid_ref="%-10s/>'\
-                        %(alias2+'"',alias_ping+'"',"grid_"+sd.is_zoom_of+'"') 
+                        %(alias2+'"',alias_sample+'"',"grid_"+sd.is_zoom_of+'"') 
                     else: # cas d'une variable definie grace a seul axis_def (non union+zoom)
-                        # alias_sample for a field which is time-sampled before vertical interpolation
-                        alias_sample=alias_ping+"_sampled_"+vert_freq # e.g.  CMIP6_zg_sampled_3h
                         field_defs[alias1]='<field id="%-25s field_ref="%-25s grid_ref="%-10s/>'\
-                        %(alias1+'"',alias_sample+'"',grid_id+'"')
+                            %(alias1+'"',alias_sample+'"',grid_id+'"')
                         #
-                        field_defs[alias_sample]='<field id="%-25s field_ref="%-25s operation="instant" freq_op="%-10s> @%s</field>'\
-                        %(alias_sample+'"',alias_ping+'"',vert_freq+'"',alias_ping) 
                 # mpmoine_note: voir en desactivant les zooms si c'est ok                    
                 #TBD what to do for singleton dimension ? 
     #
