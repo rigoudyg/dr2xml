@@ -20,8 +20,14 @@ lab_and_model_settings={
     'tierMax'      : 3,
     "ping_variables_prefix" : "CMIP6_",
     # excluded_vars_file="./inputs/non_published_variables.txt"
-    "excluded_vars":[],
-    "listof_home_vars":rootpath+"dr2xml/config_utest/utest020_listof_home_vars.txt",
+    "excluded_vars" : ['pfull', 'phalf'],
+    "excluded_spshapes": ["XYA-na","XYG-na","na-A","Y-P19","Y-P39","Y-A","Y-na"],
+    # Clims are not handled by Xios yet, nor ice-sheet dedicated grids
+    "excluded_tables"  : ["Oclim" , "E1hrClimMon", 'IfxAnt' , 'IfxGre', 'ImonGre', 'ImonAnt' ] , 
+    #"listof_home_vars":rootpath+"dr2xml/config_utest/utest020_listof_home_vars.txt",
+    "listof_home_vars":None,
+    "path_extra_tables":None,
+    "excluded_spshapes" : [],
     'realms_per_context' : { 'nemo': ['seaIce', 'ocean', 'ocean seaIce', 'ocnBgchem', 'seaIce ocean'] ,
                           'arpsfx' : ['atmos', 'atmos atmosChem', 'aerosol', 'atmos land', 'land',
                                      'landIce land',  'aerosol land','land landIce',  'landIce', ],
@@ -41,8 +47,8 @@ lab_and_model_settings={
     # Resolutions
     "grids" : { 
       "LR"    : {
-#        "arpsfx" : [ "gr","complete" , "250 km", "data regridded to a T127 gaussian grid (128x256 latlon) from a native atmosphere T127l reduced gaussian grid"] ,
-        "arpsfx" : [ "gn","" , "250 km", "native T127 reduced gaussian grid"] ,
+        "arpsfx" : [ "gr","complete" , "250 km", "data regridded to a T127 gaussian grid (128x256 latlon) from a native atmosphere T127l reduced gaussian grid"] ,
+#        "arpsfx" : [ "gn","" , "250 km", "native T127 reduced gaussian grid"] ,
           "nemo" : [ "gn", ""        , "100km" , "native ocean tri-polar grid with 105 k ocean cells" ],},
 
 
@@ -51,8 +57,20 @@ lab_and_model_settings={
           "nemo" : [ "gn", ""         , "25km" , "native ocean tri-polar grid with 1.47 M ocean cells" ],},
     },
     'grid_choice' : { "CNRM-CM6-1" : "LR", "CNRM-CM6-1-HR" : "HR", "CNRM-ESM2-1": "LR"  , "CNRM-ESM2-1-HR": "HR" },
+    # Component Models Time steps (s)
+    "model_timestep" : { "arpsfx":900., "nemo":900., "trip": 1800. },
 
-    }
+    #--- Say if you want to use XIOS union/zoom axis to optimize vertical interpolation requested by the DR
+    "use_union_zoom" : False,
+
+    #
+    "vertical_interpolation_sample_freq" : "3h",
+    
+    # The CMIP6 frequencies that are unreachable for a single model run. Datafiles will
+    # be labelled with dates consistent with content (but not with CMIP6 requirements).
+    # Allowed values are only 'dec' and 'yr'
+    "too_long_periods" : ["dec", "yr" ]
+}
 
 simulation_settings_old={    
     "experiment_id"  : "historical",
