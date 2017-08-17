@@ -22,7 +22,7 @@ print=${1:-1} ; shift # Want some reporting ?
 root=$(cd $(dirname $0) ; pwd)
 cvspath=$root/CMIP6_CVs # Path for CMIP6_CV
 dr2xmlpath=$root/dr2pub
-DRpath=$root/01.00.13/dreqPy
+DRpath=$root/01.00.15/dreqPy
 #
 #CVtag=$(cd $cvspath ; git log --oneline | head -n 1 | cut -d\  -f 1)
 export PYTHONPATH=$dr2xmlpath:$DRpath:$PYTHONPATH
@@ -42,7 +42,9 @@ cat >create_file_defs.tmp.py  <<-EOF
 	if $print=="1" : printout=True
 	else : printout=False
 	#
-	for context in lab_and_model_settings['realms_per_context']:
+	contexts=[ c for c in lab_and_model_settings['realms_per_context'] \
+          if c not in simulation_settings.get('unused_contexts',[]) ]
+	for context in contexts :
 	    ok=generate_file_defs(lab_and_model_settings,
 	                       simulation_settings,
 	                       year       =$year,

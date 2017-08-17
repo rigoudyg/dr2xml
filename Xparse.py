@@ -7,7 +7,7 @@
 #   <opaque>    context = init_context(context_name,printout=False)
 #   <ET object>    grid = d2grid(field_id,context,printout=False)
 
-import os, os.path, re
+import os, os.path, re, sys
 import xml.etree.ElementTree as ET
 
 # Define for each object kind those attributes useful for grid inheritance 
@@ -173,7 +173,9 @@ def attrib_by_ref(elt,attrib,index,printout,level):
                         rep=attrib_by_ref(ref,attrib,index,printout,level+1)
                         if rep : return rep
                 except :
-                    if not refid.startswith("dummy_"): print "Error : reference '%s' is invalid"%refid
+                    if not refid.startswith("dummy_"):
+                        print "Error : reference '%s' is invalid"%refid
+                        sys.exit(1)
 
 def solve_by_ref(attrib,index,elt,printout=False,level=0) :
     """ 

@@ -83,6 +83,8 @@ def CNRM_grid_policy(cmvarid,grids,lset,dq) : #TBD
 
 def DRgrid2gridatts(grid) :
      """ Returns label, resolution, description for a DR grid name"""
+     if grid=="cfsites" : return ("gn","100km", \
+                               "data sampled in model native grid by nearest neighbour method ")
      if grid=="1deg" : return ("gr1","1x1 degree", \
                                "data regridded to a CMIP6 standard 1x1 degree latxlon grid from the native grid")
      if grid=="2deg" : return ("gr2","2x2 degree", \
