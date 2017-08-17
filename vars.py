@@ -64,10 +64,14 @@ class simple_Dim(object):
 # mpmoine_future_modif: liste des suffixes de noms de variables reperant un ou plusieurs niveaux pression
 # List of multi and single pressure level suffixes for which we want the union/zoom axis mecanism turned on
 # For not using union/zoom, set 'use_union_zoom' to False in lab settings
-multi_plev_suffixes=set(["10","19","23","27","39","3","3h","4","7c","7h","8","12"])
-single_plev_suffixes=set(["1000","200","220","500","560","700","840","850","100"])
-#multi_plev_suffixes=set()
-#single_plev_suffixes=set()
+
+# SS : le jeu plev7c est un jeu de couches du simulateur ISCCP - pas d'interpolation
+#multi_plev_suffixes=set(["10","19","23","27","39","3","3h","4","7c","7h","8","12"])
+multi_plev_suffixes=set(["10","19","23","27","39","3","3h","4",     "7h","8","12"])
+
+# SS : les niveaux 220, 560 et 840 sont des couches du simulateur ISCCP - pas d'interpolation
+#single_plev_suffixes=set(["1000","200","220","500","560","700","840","850","100"])
+single_plev_suffixes=set(["1000","200",      "500",      "700",      "850","100"])
 
 ambiguous_mipvarnames=None
 
