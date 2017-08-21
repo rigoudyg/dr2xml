@@ -38,6 +38,7 @@ class simple_CMORvar(object):
         self.Priority       = 1     # Will be changed using DR or extra-Tables
         self.mip_era        = False # Later changed in projectname (uppercase) when appropriate
         self.missing        = 1.e+20
+        self.cmvar          =None  # corresponding CMORvar, if any
 
 # mpmoine_future_modif: nouvelle classe simple_Dim
 # A class for unifying grid info coming from DR and extra_Tables
@@ -455,6 +456,7 @@ def complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues):
     svar.modeling_realm = cmvar.modeling_realm.rstrip(' ')
     svar.label = cmvar.label.rstrip(' ')
     [svar.spatial_shp,svar.temporal_shp]=get_SpatialAndTemporal_Shapes(cmvar,dq)
+    svar.cmvar=cmvar
 
     # Get information from MIPvar
     # mpmoine_next_modif:complement_svar_using_cmorvar: gestion d'exception pour l'acces a la 'mipvar'

@@ -256,7 +256,7 @@ example_simulation_settings={
 #    for cmvar in dq.coll['CMORvar'].items:
 #        if (cmvar.label==hmvar.label): return True
 
-def RequestItem_applies_for_exp_and_year(ri,experiment,year,debug=False):
+def RequestItem_applies_for_exp_and_year(ri,experiment,year=None,debug=False):
     """ 
     Returns True if requestItem 'ri' in data request 'dq' (global) is relevant 
     for a given 'experiment' and 'year'. Toggle 'debug' allow some printouts 
@@ -296,6 +296,7 @@ def RequestItem_applies_for_exp_and_year(ri,experiment,year,debug=False):
             print "%20s"%'Error %s for %s'%(item_exp._h.label,`ri`)
         #raise(dr2xml_error("%20s"%'Other case , label=%s|'%item_exp._h.label))
     if relevant :
+        if year is None : return True
         if 'tslice' in ri.__dict__ :
             if ri.tslice == '__unset__' :
                 print "tslice is unset for reqlink %s "%ri.title
@@ -721,8 +722,6 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     #--------------------------------------------------------------------
     # mpmoine_last_modif:write_xios_file_def: Maintenant, dans le cas type='perso', table='NONE'. On ne doit donc pas compter sur le table2freq pour recuperer la frequence en convention xios => fonction cmipFreq2xiosFreq
     split_freq=split_frequency_for_variable(cmv, lset, sc.mcfg, context)
-    # TBD : restore a variable split_freq
-    #split_freq="2mo"
     #
     #--------------------------------------------------------------------
     # Write XIOS file node:
@@ -733,7 +732,6 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     out.write(' append="true" ')
     if not "fx" in cmv.frequency :
         out.write(' split_freq="%s" '%split_freq)
-        # mpmoine_cmor_update:write_xios_file_def: ajout de 'split_freq_format' pour se conformer a CMOR3.0.3 
         out.write(' split_freq_format="%s" '%date_format)
         #
         # Modifiers for date parts of the filename, due to silly KT conventions. 
@@ -901,7 +899,7 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
         if shape :
             # Create a field group for each non-trivial shape, for performance issues
             # (remapping must be done after time average !)
-            out.write('<field_group expr="@this" grid_ref="%s">\n'%shape)
+            out.write('<field_group grid_ref="%s">\n'%shape)
         for entry in end_field_defs[shape] : out.write(entry)
         if shape : out.write('</field_group >\n')
     if table == "6hrLev" :
@@ -929,8 +927,8 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
     lab prefix for the variable name) and store it in end_field_defs
     under a key=grid
     
-    Add field definitions for intermediate variables in dic field_defs
-    Add axis  definitions for interpolations in dic axis_defs
+    Add field definitions for intermediate variables in dict field_defs
+    Add axis  definitions for interpolations in dict axis_defs
     Use pingvars as the list of variables actually defined in ping file
 
     """
@@ -1093,13 +1091,21 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
     #--------------------------------------------------------------------
     # mpmoine_correction:create_xios_aux_elmts_defs: alias1  au lieu de alias pour l'ecriture de end_field_defs
     #TBS# if any (sd.is_zoom_of for sd in sv.sdims.values()):
-    # TBI: idealement if faudrait recuperer le type attendu de la DR ou des tables CMOR
-    rep='  <field field_ref="%s" name="%s" '% (last_alias,sv.label)
+    alias_with_operation=last_alias+"_"+operation
+    rep='  <field field_ref="%s" name="%s" '% (alias_with_operation,sv.label)
     rep+=' freq_op="%s"'% cmipFreq2xiosFreq[sv.frequency]
-    rep+=' operation="%s" detect_missing_value="%s" default_value="1.e+20" prec="4"'% \
-        ( operation,detect_missing)
+    # No more need for specifying an operation at this level, because there is only 
+    # one field out of the explicit time operation below
+    #rep+=' operation="%s" detect_missing_value="%s" default_value="1.e+20" prec="4"'% \
+    #    ( operation,detect_missing)
+    detect_missing="True"
+    rep+=' detect_missing_value="%s" \n\tdefault_value="1.e+20" prec="4"'%detect_missing
+    # TBD: idealement if faudrait recuperer le type attendu de la DR ou des tables CMOR
     rep+=' cell_methods="%s" cell_methods_mode="overwrite"'% sv.cell_methods
-    rep+='>\n'
+    rep+='>\n\t@%s\n'%alias_with_operation
+    # Create field_def for alias_with_operation
+    field_defs[alias_with_operation]='<field id="%-25s field_ref="%-25s operation="%-10s/>'\
+                            %(alias_with_operation+'"',last_alias+'"',operation+'"')
     #
     comment=None
     # Process experiment-specific comment for the variable
@@ -1400,7 +1406,7 @@ def print_SomeStats(context,svars_per_table,skipped_vars_per_table):
             print "%15s %02d/%02d ---->"%(table,len(skipvars),len(svars_per_table[table])),
             #TBS# print "\n\t",table ," ",len(skipvars),"--->",
             for skv in skipvars: 
-            	print skv #already contains priority info
+            	print skv, #already contains priority info
         print
 
     #--------------------------------------------------------------------
@@ -2320,6 +2326,11 @@ def ping_alias(svar,lset):
     else:
         alias_ping=lset["ping_variables_prefix"]+svar.label_without_psuffix # e.g. 'CMIP6_hus' and not 'CMIP6_hus7h'
     return alias_ping
+
+    
+        
+        
+        
 
 
 class dr2xml_error(Exception):
