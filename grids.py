@@ -176,7 +176,7 @@ def field_size(svar, mcfg):
 
 # mpmoine_last_modif:split_frequency_for_variable: suppression de l'argument table
 # mpmoine_next_modif:split_frequency_for_variable: passage de 'context' en argument pour recuperer le model_timestep
-def split_frequency_for_variable(svar, lset, mcfg,context):
+def split_frequency_for_variable(svar, lset, mcfg,context,printout=False):
     """
     Compute variable level split_freq and returns it as a string
 

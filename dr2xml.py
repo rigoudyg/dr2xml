@@ -975,8 +975,8 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
     if len(end_field_defs.keys())==0 :
         raise dr2xml_error("No end_field_def for %s in %s"%(cmv.label,table))
         return
-    if table == "6hrLev" :
-        # create a fiel_def entry for surface pressure 
+    if table == "6hrLev" and alias != lset["ping_variables_prefix"]+"ps" :
+        # create a field_def entry for surface pressure 
         sv_psol=get_simplevar(dq,"ps","6hrLev")
         create_xios_aux_elmts_defs(sv_psol,lset["ping_variables_prefix"]+"ps",table,lset,sset,end_field_defs,
                           field_defs,axis_defs,grid_defs,domain_defs,dummies,context,target_hgrid_id,pingvars)
@@ -1421,10 +1421,10 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfile=No
         out.write('<!-- CMIP6_conventions_version %s --> \n'%CMIP6_conventions_version)
         out.write('<!-- dr2xml version %s --> \n'%version)
         out.write('<!-- Lab_and_model settings : \n')        
-        for s in settings : out.write(' %s : %s\n'%(s,lset[s]))
+        for s in lset : out.write(' %s : %s\n'%(s,lset[s]))
         out.write('-->\n')
         out.write('<!-- Simulation settings : \n')        
-        for s in settings : out.write(' %s : %s\n'%(s,sset[s]))
+        for s in sset : out.write(' %s : %s\n'%(s,sset[s]))
         out.write('-->\n')
         domain_defs=dict()
         #for table in ['day'] :    
