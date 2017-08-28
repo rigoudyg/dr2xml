@@ -51,7 +51,7 @@ import dreq
 # End of pre-requisites
 ####################################
 
-version="0.17"
+version="0.18"
 print "* dr2xml version: ", version
 
 conventions="CF-1.7 CMIP-6.2" 
@@ -1188,6 +1188,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
     detect_missing="True"
     rep+=' detect_missing_value="%s" \n\tdefault_value="1.e+20" prec="4"'%detect_missing
     # TBD: idealement if faudrait recuperer le type attendu de la DR ou des tables CMOR
+    # TBD : implement DR recommendation for cell_method : The syntax is to append, in brackets, 'interval: *amount* *units*', for example 'area: time: mean (interval: 1 hr)'. The units must be valid UDUNITS, e.g. day or hr.
     rep+=' cell_methods="%s" cell_methods_mode="overwrite"'% sv.cell_methods
     rep+='>\n\t@%s\n'%alias_with_operation
     # Create field_def for alias_with_operation
@@ -1417,7 +1418,14 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfile=No
         out.write('<context id="%s"> \n'%context)
         out.write('<!-- CMIP6 Data Request version %s --> \n'%dq.version)
         out.write('<!-- CMIP6-CV version %s --> \n'%"??")
+        out.write('<!-- CMIP6_conventions_version %s --> \n'%CMIP6_conventions_version)
         out.write('<!-- dr2xml version %s --> \n'%version)
+        out.write('<!-- Lab_and_model settings : \n')        
+        for s in settings : out.write(' %s : %s\n'%(s,lset[s]))
+        out.write('-->\n')
+        out.write('<!-- Simulation settings : \n')        
+        for s in settings : out.write(' %s : %s\n'%(s,sset[s]))
+        out.write('-->\n')
         domain_defs=dict()
         #for table in ['day'] :    
         out.write('\n<file_definition type="one_file" enabled="true" > \n')
