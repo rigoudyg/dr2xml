@@ -6,29 +6,21 @@
        while Xios can do that. So, we tell that in Xios syntax
   -->
   
-  <field id="DX_tasmax" field_ref="DX_tas" operation="maximum" freq_op="1d"> @this </field>
-  <field id="DX_tasmin" field_ref="DX_tas" operation="minimum" freq_op="1d"> @this </field>
-  <field id="DX_hursmax" field_ref="DX_hurs" operation="maximum" freq_op="1d"> @this </field>
-  <field id="DX_sfcWindmax" field_ref="DX_sfcWind" operation="maximum" freq_op="1d"> @this </field>
+  <field id="DX_tas_max" field_ref="DX_tas" operation="maximum" />
+  <field id="DX_tasmax" field_ref="DX_tas_max" freq_op="1d" operation="average"> @DX_tas_max </field>
 
-  <field id="DX_pblz"    field_ref="dummy_XY" />
-  <!-- Should set next two to ref=dummy if ref above si dummy -->
-  <field id="DX_maxpblz" field_ref="DX_pblz" operation="maximum" freq_op="1d"> @this </field>
-  <field id="DX_minpblz" field_ref="DX_pblz" operation="minimum" freq_op="1d"> @this </field>
+  <field id="DX_tas_min" field_ref="DX_tas" operation="minimum" />
+  <field id="DX_tasmin" field_ref="DX_tas_min" freq_op="1d"  operation="average"> @DX_tas_min </field>
 
-  <!-- Must decide if relative voorticity is provided as a 3D field or only at 8500 hPa -->
-  <field id="DX_rv"    field_ref="dummy_XYA" />
-  <field id="DX_rv850" field_ref="DX_rv" grid_ref="DX_p850" />
+  <field id="DX_hurs_max" field_ref="DX_hurs" operation="maximum" />
+  <field id="DX_hursmax" field_ref="DX_hurs_max" freq_op="1d"  operation="average"> @DX_hurs_max </field>
 
-  <field id="DX_ta700" field_ref="DX_ta" grid_ref="DX_p700" />
+  <field id="DX_sfcWind_max" field_ref="DX_sfcWind" operation="maximum" />
+  <field id="DX_sfcWindmax" field_ref="DX_sfcWind_max" freq_op="1d"  operation="average"> @DX_sfcWind_max </field>
 
-
-  <field id="DX_ua100m" field_ref="DX_ua" axis_ref="DX_height100m" />
-  <field id="DX_va100m" field_ref="DX_va" axis_ref="DX_height100m" />
-
-  <field id="DX_ua50m" field_ref="DX_ua" axis_ref="DX_height50m" />
-  <field id="DX_va50m" field_ref="DX_va" axis_ref="DX_height50m" />
-
+  <!-- You may define some fields on singleton level as being provided
+       by the model rather than by an Xios vertical interpolation  -->
+  <!-- field id="DX_rv850" field_ref="dummy_XY"  -->
 
   <!-- for variables in next group, dr2xml may at a later stage provide
        a definition using standard operations -->

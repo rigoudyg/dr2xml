@@ -93,6 +93,8 @@ def DRgrid2gridatts(grid) :
                                "data regridded to a CMIP6 standard 100 km resol grid from the native grid")
      if grid=="50km"  : return ("gr4","50 km", \
                                "data regridded to a CMIP6 standard 50 km resol grid from the native grid")
+     if grid=="25km"  : return ("gr5","25 km", \
+                               "data regridded to a CMIP6 standard 25 km resol grid from the native grid")
      return("grx","?x? degree", "grid has no description- please fix DRgrid2gridatts for grid %s"%grid)
 
 
@@ -194,6 +196,7 @@ def split_frequency_for_variable(svar, lset, mcfg,context):
         # mpmoine_next_modif:split_frequency_for_variable: passage de 'model_timestep' en argument de timesteps_per_freq_and_duration
         size_per_year=size*timesteps_per_freq_and_duration(freq,365,lset["model_timestep"][context])
         nbyears=max_size/float(size_per_year)
+        if printout : print "size per year=%s, size=%s, nbyears=%g"%(`size_per_year`,`size`,nbyears)
         if nbyears > 1. :
             if nbyears < 10:
                 return("1y")

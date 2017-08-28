@@ -44,7 +44,7 @@ import dreq
 # https://github.com/WCRP-CMIP/CMIP6_CVs). You will provide its path 
 # as argument to functions defined here
 
-# 3- XIOS release must be 1047 or above (to be fed with the outputs)
+# 3- XIOS release must be 1242 or above (to be fed with the outputs)
 #  see https://forge.ipsl.jussieu.fr/ioserver/wiki
 
 ####################################
@@ -52,7 +52,13 @@ import dreq
 ####################################
 
 version="0.17"
-print "* dr2xml version:", version
+print "* dr2xml version: ", version
+
+conventions="CF-1.7 CMIP-6.2" 
+# The current code should comply with this version of spec doc at
+# https://docs.google.com/document/d/1h0r8RZr_f3-8egBMMh7aqLwy3snpD6_MrDz1q8n5XUk/edit
+CMIP6_conventions_version="v6.2.4"
+print "CMIP6 conventions version: "+CMIP6_conventions_version
 
 from datetime import datetime
 import re
@@ -86,6 +92,10 @@ print "* CMIP6 Data Request version: ", dq.version
 cell_method_warnings=[]
 sn_issues=dict()
 context_index=None
+
+# global variable : the list of Request Links which apply for 'our' MIPS and which are not explicitly excluded using settings
+# It is set in select_CMORvars_for_lab and used in endyear_for_CMORvar
+global_rls=None  
 
 # Names for COSP-CFsites related elements.
 # A file named cfsites_grid_file_id must be provided at runtime, which
@@ -132,8 +142,12 @@ example_lab_and_model_settings={
     "excluded_vars":[],
     "excluded_spshapes": ["XYA-na","XYG-na","na-A","Y-P19","Y-P39","Y-A","Y-na"],
     #"included_tables"  : ["AMon" ] , # If not empty, has priority over excluded_tables 
-    "excluded_tables"  : ["Oclim" , "E1hrClimMon" ] , # Clims are not handled by Xios yet
-    #"excluded_request_links"  : ["CFsubhr"] , # request native grid, numerous 2D fields and even 3D fields
+    "excluded_tables"  : ["Oclim" , "E1hrClimMon" , "ImonAnt", "ImonGre" ] , # Clims are not handled by Xios yet
+
+    "excluded_request_links"  : [
+    # "CFsubhr",      # some issue yet with Xios
+    "RFMIP-AeroIrf" # 4 scattered days of historical, heavy output -> rerun model for one day
+    ],
 
     # We account for a list of variables which the lab wants to produce in some cases
     "listof_home_vars":"../../cnrm/listof_home_vars.txt",
@@ -188,7 +202,10 @@ example_lab_and_model_settings={
     # The CMIP6 frequencies that are unreachable for a single model run. Datafiles will
     # be labelled with dates consistent with content (but not with CMIP6 requirements).
     # Allowed values are only 'dec' and 'yr'
-    "too_long_periods" : ["dec", "yr" ] 
+    "too_long_periods" : ["dec", "yr" ] ,
+    # Describe the branching scheme for experiments involved in some 'branchedYears type' tslice
+    # Just put the start year in child and the start years in parent for all members
+    "branching" : { "historical" : (1850, [ 500,550,600 ]) }
 }
 
 
@@ -256,66 +273,120 @@ example_simulation_settings={
 #    for cmvar in dq.coll['CMORvar'].items:
 #        if (cmvar.label==hmvar.label): return True
 
-def RequestItem_applies_for_exp_and_year(ri,experiment,year=None,debug=False):
+def RequestItem_applies_for_exp_and_year(ri,experiment,lset,year=None,debug=False):
     """ 
     Returns True if requestItem 'ri' in data request 'dq' (global) is relevant 
     for a given 'experiment' and 'year'. Toggle 'debug' allow some printouts 
     """
+    # Returns a couple : relevant, endyear.
+    # RELEVANT is True if requestItem RI applies to EXPERIMENT and
+    #   has a timeslice wich includes YEAR, either implicitly or explicitly
+    # ENDYEAR is meaningful if RELEVANT is True, and is the
+    #   last year in the timeslice (or None if timeslice ==
+    #   the whole experiment duration)
+
     # Acces experiment or experiment group for the RequestItem
     if (debug) : print "Checking ","% 15s"%ri.label,
     item_exp=dq.inx.uid[ri.esid]
-    relevant=False
-    exps=dq.coll['experiment'].items
+    ri_applies_to_experiment=False
+    endyear=None
     # esid can link to an experiment or an experiment group
     if item_exp._h.label== 'experiment' :
         if (debug) : print "%20s"%"Simple Expt case", item_exp.label,
         if item_exp.label==experiment : 
             if (debug) : print " OK",
-            relevant=True
+            ri_applies_to_experiment=True
     elif item_exp._h.label== 'exptgroup' :
         if (debug)  : print "%20s"%"Expt Group case ",item_exp.label,
-        group_id=ri.esid
-        for e in exps :
-            if 'egid' in dir(e) and e.egid == group_id and \
-               e.label==experiment : 
+        exps_id=dq.inx.iref_by_sect[ri.esid].a['experiment']
+        for e in [ dq.inx.uid[eid] for eid in exps_id ] :
+            if e.label==experiment : 
                 if (debug) :  print " OK for experiment based on group"+\
                    group_id.label,
-                relevant=True
+                ri_applies_to_experiment=True
     elif item_exp._h.label== 'mip' :
-        mip_id=ri.esid
         if (debug)  : print "%20s"%"Mip case ",dq.inx.uid[mip_id].label,
-        for e in exps :
-            if 'mip' in dir(e) and e.mip == mip_id :
-                if (debug) :  print e.label,",",
-                if e.label==experiment : 
-                    if (debug) :  print " OK for experiment based on mip"+\
-                       mip_id.label,
-                    relevant=True
+        exps_id=dq.inx.iref_by_sect[ri.esid].a['experiment']
+        for e in [ dq.inx.uid[eid] for eid in exps_id ] :
+            if (debug) :  print e.label,",",
+            if e.label==experiment : 
+                if (debug) :  print " OK for experiment based on mip"+ mip_id.label,
+                ri_applies_to_experiment=True
     else :
         if (debug)  :
-            print "%20s"%'Error %s for %s'%(item_exp._h.label,`ri`)
-        #raise(dr2xml_error("%20s"%'Other case , label=%s|'%item_exp._h.label))
-    if relevant :
-        if year is None : return True
-        if 'tslice' in ri.__dict__ :
-            if ri.tslice == '__unset__' :
-                print "tslice is unset for reqlink %s "%ri.title
-                relevant=True
-            else:
-                timeslice=dq.inx.uid[ri.tslice]
-                if (debug) : print "OK for the year"
-                try :
-                    relevant=year >= timeslice.start and year<=timeslice.end
-                except :
-                    relevant=True
-                    print "tslice not well set for "+timeslice.label+" "+\
-                        timeslice.uid+\
-                        ". Assuming it applies for RequestItem "+ri.title
+            print "Error on esid link for ri : %s uid=%s %s"%\
+                           ( ri.title, ri.uid, item_exp._h.label)
+    if ri_applies_to_experiment :
+        if year is None :
+            rep=True ; endyear=None
         else :
-            if (debug)  : print "tslice not set -> OK for the year"
-            #print "No tslice for %s"%ri.title
+            rep,endyear=year_in_ri_tslice(ri,experiment,lset,year,debug=debug)
+        return rep,endyear
+    else : return False,None
+
+
+def year_in_ri_tslice(ri,experiment,lset,year,debug=False):
+    # Returns a couple : relevant, endyear.
+    # RELEVANT is True if requestItem RI has a timeslice wich
+    #   includes YEAR, either implicitly or explicitly
+    # ENDYEAR is meaningful if RELEVANT is True, and is the
+    #   last year in the timeslice (or None if timeslice ==
+    #   the whole experiment duration)
+    if 'tslice' not in ri.__dict__ :
+        if (debug)  : print "No tslice for reqItem %s -> OK for any year"%ri.title
+        return True, None
+    if ri.tslice == '__unset__' :
+        if (debug) : print "tslice is unset for reqItem %s "%ri.title
+        return True, None
+    #
+    relevant=False
+    endyear=None
+    tslice=dq.inx.uid[ri.tslice]
+    if (debug) :
+        print "tslice label/type is %s/%s for reqItem %s "%(tslice.label,tslice.type,ri.title)
+    if tslice.type=="simpleRange" : # e.g. _slice_DAMIP20
+        relevant = (year >= tslice.start and year<=tslice.end)
+        endyear=tslice.end
+    elif tslice.type=="sliceList": # e.g. _slice_DAMIP40
+        for start in range(tslice.start,int(tslice.end-tslice.sliceLen+2),int(tslice.step)) :
+            if year >= start and year < start+tslice.sliceLen :
+                relevant = True
+                endyear=start+tslice.sliceLen-1
+    elif tslice.type=="dayList": # e.g. _slice_RFMIP2
+        # e.g. startList[i]: [1980, 1, 1, 1980, 4, 1, 1980, 7, 1, 1980, 10, 1, 1992, 1, 1, 1992, 4, 1]
+        years= [ tslice.startList[3*i] for i in range(len(tslice.startList)/3)]
+        if year in years :
             relevant=True
-    return relevant
+            endyear=year
+    elif tslice.type=="startRange": # e.g. _slice_VolMIP3
+        #start_year=experiment_start_year(experiment)
+        # TBD : code experiment_start_year (used for VolMIP : _slice_VolMIP3)
+        start_year=1850
+        relevant= (year >= start_year and year < start_year+nyear)
+        endyear=start_year + nyear - 1
+    elif tslice.type=="monthlyClimatology": # e.g. _slice_clim20
+        relevant = (year >= tslice.start and year<=tslice.end)
+        endyear=tslice.end
+    elif tslice.type=="branchedYears" : # e.g. _slice_piControl020
+        if tslice.child in lset["branching"] :
+            endyear=False
+            (refyear,starts)=lset["branching"][tslice.child]
+            for start in starts :
+                if ((year - start >= tslice.start - refyear) and \
+                    (year - start < tslice.start - refyear + tslice.nyears )):
+                    relevant=True
+                    lastyear=start+tslice.nyears-1
+                    if endyear is False : endyear=lastyear
+                    else : endyear=max(endyear,lastyear)
+        else : dr2xml_error("For tslice %s, child %s start year is not documented"%\
+                                (tslice.title, tslice.child))
+    else :
+        dr2xml_error("type %s for time slice %s is not handled"%(tslice.type,tslice.title))
+    if (debug) :
+        print "for year %d and experiment %s, relevant is %s for tslice %s of type %s, endyear=%s"%\
+            (year,experiment,`relevant`,ri.title,tslice.type,`endyear`)
+    return relevant,endyear
+
 
 def select_CMORvars_for_lab(lset, experiment_id=None, year=None,printout=False):
     """
@@ -336,7 +407,7 @@ def select_CMORvars_for_lab(lset, experiment_id=None, year=None,printout=False):
     """
     #
     # From MIPS set to Request links
-    global sc
+    global sc,global_rls
     sc = dreqQuery(dq=dq, tierMax=lset['tierMax'])
 
     # Set sizes for lab settings, if available (or use CNRM-CM6-1 defaults)
@@ -365,8 +436,9 @@ def select_CMORvars_for_lab(lset, experiment_id=None, year=None,printout=False):
             for ri_id in ri_ids :
                 ri=dq.inx.uid[ri_id]
                 #print "Checking requestItem ",ri.label
-                if RequestItem_applies_for_exp_and_year(ri,
-                                    experiment_id, year,False) :
+                applies,endyear=RequestItem_applies_for_exp_and_year(ri,
+                                       experiment_id, lset,year,False)
+                if applies:
                     #print "% 25s"%ri.label," applies "
                     filtered_rls.append(rl)
         rls=filtered_rls
@@ -376,6 +448,8 @@ def select_CMORvars_for_lab(lset, experiment_id=None, year=None,printout=False):
         #print "Request links that apply :"+`[ rl.label for rl in filtered_rls ]`
     else :
         rls=rls_for_mips
+
+    global_rls=rls
        
     # From Request links to CMOR vars + grid
     #miprl_ids=[ rl.uid for rl in rls ]
@@ -549,7 +623,7 @@ def freq2datefmt(in_freq,operation,lset):
             raise dr2xml_error("Cannot compute offsets for freq=%s and operation=%s"%(freq,operation))
     return datefmt,offset,offset_end
 
-def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
+def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
                         field_defs,axis_defs,grid_defs,domain_defs,
                         dummies,skipped_vars_per_table,
                         prefix,context,grid,pingvars=None,enddate=None,
@@ -603,9 +677,9 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
         alias=split_alias[0]
         if pingvars is not None :
             # Get alias without pressure_suffix but possibly with area_suffix
-            alias_ping=ping_alias(cmv,lset)
+            alias_ping=ping_alias(cmv,lset,pingvars)
             if not alias_ping in pingvars:
-                #print "Must skip alias_ping=%s"%alias_ping
+                #print "Must skip svar %s because alias_ping=%s not in pingfile "%(cmv.label,alias_ping)
                 # mpmoine: on classe les skipped_vars par table (pour avoir plus d'info au print) 
                 if skipped_vars_per_table.has_key(cmv.mipTable) and skipped_vars_per_table[cmv.mipTable]:
                     list_of_skipped=skipped_vars_per_table[cmv.mipTable]
@@ -625,7 +699,6 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
     institution_id=lset['institution_id']
     #
     contact=sset.get('contact',lset.get('contact',None))
-    conventions="CF-1.7 CMIP-6.0"
     #
     # Variant matters
     realization_index=sset.get('realization_index',1) 
@@ -739,10 +812,25 @@ def write_xios_file_def(cmv,table,lset,sset,out,cvspath,
             out.write(' split_start_offset="%s" ' %offset_begin)
         if offset_end is not False  :
             out.write(' split_end_offset="%s" '%offset_end)
-        # enddate must be 20140101 , rather than 20131231
-        endyear=enddate[0:4]
-        endmonth=enddate[4:6]
-        endday=enddate[6:8]
+        # Try to get enddate for the CMOR variable from the DR
+        lastyear=None
+        if cmv.cmvar is not None :
+            lastyear=endyear_for_CMORvar(dq,cmv.cmvar,expname,year,lset)
+            #if (cmv.cmvar.label=="tsl" and cmv.cmvar.frequency=="mon") : printout=True
+            #else : printout=False
+            #if printout : print " for tsl, lastyear=",lastyear, "enddate=",enddate
+        if lastyear is None or lastyear >= int(enddate[0:4]) :
+            # Use run end date as the latest possible date
+            # enddate must be 20140101 , rather than 20131231
+            endyear=enddate[0:4]
+            endmonth=enddate[4:6]
+            endday=enddate[6:8]
+        else:
+            # Use requestItems-based end date as the latest possible date when it is earlier than run end date
+            print "split_last_date year %d derived from DR for variable %s in table %s"%(lastyear,cmv.label,table)
+            endyear="%04s"%(lastyear+1)
+            endmonth="01"
+            endday="01"
         out.write(' split_last_date="%s-%s-%s 00:00:00" '%(endyear,endmonth,endday))
     #
     #out.write('timeseries="exclusive" >\n')
@@ -954,11 +1042,10 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
     has_vertical_interpolation=False
     ssh=sv.spatial_shp
     prefix=lset["ping_variables_prefix"]
-    # mpmoine_zoom_modif:create_xios_aux_elmts_defs: recup de lwps
     lwps=sv.label_without_psuffix
     # TBD Should ensure that various additionnal dims are duly documented by model or pingfile (e.g. tau)
-    # TBD : cas 'XY-na' pour capturer les dimensions singleton : il faut etre plus selectif : existence d'un cids (grid de lg 1)
-    if ssh[0:4] in ['XY-H','XY-P'] or ssh[0:3] == 'Y-P' or ssh[0:5]=='XY-na':
+    if ssh[0:4] in ['XY-H','XY-P'] or ssh[0:3] == 'Y-P' or \
+       (ssh[0:5]=='XY-na' and prefix+sv.label not in pingvars ):
         # mpmoine_last_modif:create_xios_aux_elmts_defs: on recupere maintenant 'dimids' depuis svar
         # mpmoine_future_modif:create_xios_aux_elmts_defs: on utilise maintenant sv.sdims pour analyser les dimension
         # mpmoine_question: je ne comprend pas l'usage de nextvar... A priori on ne peut pas avoir plus d'une dimension verticale ?
@@ -1062,7 +1149,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
     elif ssh == 'TR-na' or ssh == 'TRS-na' : #transects,   oce or SI
         pass
     elif ssh[0:3] == 'XY-' or ssh[0:3] == 'S-A'  or ( ssh == 'S-na' and sv.label == "rsucs") :
-        # also includes 'XY-AH' and 'S-AH' : model half-levels
+        # this includes 'XY-AH' and 'S-AH' : model half-levels
         if target_hgrid_id :
             # Must create and a use a grid similar to the last one defined 
            # for that variable, except for a change in the hgrid/domain
@@ -1159,6 +1246,22 @@ def gather_AllSimpleVars(lset,expid=False,year=False,printout=False):
     return mip_vars_list
 
 def generate_file_defs(lset,sset,year,enddate,context,cvs_path,pingfile=None,
+                       dummies='include',printout=False,dirname="./",prefix="",attributes=[]) :
+    # A wrapper for profiling top-level function : generate_file_defs_inner
+    import cProfile, pstats, StringIO
+    pr = cProfile.Profile()
+    pr.enable()
+    generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfile=pingfile,dummies=dummies,printout=printout,dirname=dirname,prefix=prefix,attributes=attributes) 
+    pr.disable()
+    s = StringIO.StringIO()
+    sortby = 'cumulative'
+    ps = pstats.Stats(pr, stream=s).sort_stats(sortby)
+    ps.print_stats()
+    # Just un-comment next line to get the profile on stdout
+    #print s.getvalue()
+
+    
+def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfile=None,
                        dummies='include',printout=False,dirname="./",prefix="",attributes=[]) :
     """
     Using global DR object dq, a dict of lab settings LSET, and a dict 
@@ -1266,8 +1369,8 @@ def generate_file_defs(lset,sset,year,enddate,context,cvs_path,pingfile=None,
         svars_full_list=[]
         for svl in svars_per_table.values(): svars_full_list.extend(svl)
         # mpmoine_merge_dev2_v0.12:generate_file_defs: on recupere maintenant non seulement les union_axis_defs mais aussi les union_grid_defs
-        # SS : fin des dictionnaires spécifiques pour les unions d'axes et de grille, pour
-        # pouvoir accéder aux unions dans les dico communs
+        # SS : les dictionnaires spécifiques pour les unions d'axes et de grille, 
+        # sont supprimé et leur contenu va dans les dicos generaux
         #(union_axis_defs,union_grid_defs)=
 
         create_xios_axis_and_grids_for_plevs_unions(svars_full_list,
@@ -1291,17 +1394,17 @@ def generate_file_defs(lset,sset,year,enddate,context,cvs_path,pingfile=None,
             pingvars=[ v for v in ping_refs if 'dummy' not in ping_refs[v] ]
             if dummies=="forbid" :
                 if len(pingvars) != len(ping_refs) :
-                    print "They are dummies in %s :"%pingfile,
+                    print "They are still dummies in %s , while option is 'forbid' :"%pingfile,
                     for v in ping_refs :
                         if v not in pingvars : print v,
                     print
-                    return 
+                    sys.exit(1)
                 else :
-                    pingvars=ping_ref
+                    pingvars=ping_refs
             elif dummies=="skip" : pass
             else:
                 print "Forbidden option for dummies : "+dummies
-                return 
+                sys.exit(1)
 
     #
     #--------------------------------------------------------------------
@@ -1324,7 +1427,7 @@ def generate_file_defs(lset,sset,year,enddate,context,cvs_path,pingfile=None,
                 if svar.label not in count :
                     count[svar.label]=svar
                     for grid in svar.grids :
-                        write_xios_file_def(svar,table, lset,sset,out,cvs_path,
+                        write_xios_file_def(svar,year,table, lset,sset,out,cvs_path,
                                             field_defs,axis_defs,grid_defs,domain_defs,dummies,
                                             skipped_vars_per_table,prefix,context,grid,pingvars,
                                             enddate,attributes)
@@ -1407,6 +1510,7 @@ def print_SomeStats(context,svars_per_table,skipped_vars_per_table):
             #TBS# print "\n\t",table ," ",len(skipvars),"--->",
             for skv in skipvars: 
             	print skv, #already contains priority info
+            print
         print
 
     #--------------------------------------------------------------------
@@ -1418,8 +1522,8 @@ def print_SomeStats(context,svars_per_table,skipped_vars_per_table):
     	for sv in svars_per_table[table]:
     		dic_freq={}
     		dic_shp={}
-    		if ( table not in skipped_vars_per_table.keys() ) or \
-    		   ( table in skipped_vars_per_table.keys() and sv not in skipped_vars_per_table[table] ) :
+    		if table not in skipped_vars_per_table.keys()  or \
+    		   sv.label+"("+str(sv.Priority)+")" not in skipped_vars_per_table[table]  :
     			freq=sv.frequency
     			shp=sv.spatial_shp
     			prio=sv.Priority
@@ -1513,15 +1617,15 @@ def create_axis_def(sdim,prefix,vert_frequency,axis_defs,field_defs):
     # Store definition for the new axis
     return rep 
 
-def change_domain_in_grid(domain,alias=None,src_grid_string=None,index=None):
+def change_domain_in_grid(domain,alias=None,src_grid_string=None,index=None,printout=False):
     """ 
     Provided with either a variable name (ALIAS) or the string for a grid definition,
-    returns a grid_definition where the domain has been changed  to DOMAIN
+    (SRC_GRID_STRING) returns a grid_definition where the domain has been changed to DOMAIN
     """
     if src_grid_string is None:
         if alias is None :
             raise dr2xml_error("change_domain_in_grid: must provide alias or grid_string ")
-        src_grid=id2grid(alias,index)
+        src_grid=id2grid(alias,index,printout=printout)
         if src_grid is not None : 
             src_grid_id=src_grid.attrib['id']
             src_grid_string=ET.tostring(src_grid)
@@ -1553,8 +1657,11 @@ def create_grid_def(grid_defs,axis_key,alias=None,context_index=None,table=None)
             target_grid_id=src_grid_id+"_"+axis_key
             # Change only first instance of axis_ref, which is assumed to match the vertical dimension
             (target_grid_string,count)=re.subn('axis *id= *.([\w_])*.','axis id="%s"'%axis_key,src_grid_string,1)
-            if count != 1 : 
-                (target_grid_string,count)=re.subn('axis *axis_ref= *.([\w_])*.','axis axis_ref="%s"'%axis_key,src_grid_string,1)
+            if count != 1 :
+                axis_name="axis_for_"+target_grid_id
+                (target_grid_string,count)=re.subn('axis *axis_ref= *.([\w_])*.',\
+                                                   'axis id="%s" axis_ref="%s"'% (axis_name,axis_key),\
+                                                   src_grid_string,1)
                 if count != 1 : 
                     raise dr2xml_error("Fatal: cannot find an axis_ref to change in src_grid_string %s for %s in %s"%\
                                        (src_grid_string,alias,table))
@@ -2278,6 +2385,9 @@ def create_standard_domains(domain_defs):
     """
     # Next definition is just for letting the workflow work when using option dummy='include'
     # Actually, ping_files for production run at CNRM do not activate variables on that grid (IceSheet vars)
+    domain_defs['25km']='<domain id="CMIP6_25km" ni_glo="1440" nj_glo="720" type="rectilinear"  prec="8"> '+\
+      '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true"  mode="read_or_compute" write_weight="true" /> '+\
+    '</domain>  '
     domain_defs['50km']='<domain id="CMIP6_50km" ni_glo="720" nj_glo="360" type="rectilinear"  prec="8"> '+\
       '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true"  mode="read_or_compute" write_weight="true" /> '+\
     '</domain>  '
@@ -2318,19 +2428,88 @@ def build_axis_definitions():
         pass
 
 
-def ping_alias(svar,lset):
-    # mpmoine_zoom_modif:write_xios_file_def: dans le pingfile, on attend plus les alias complets  des variables (CMIP6_<label>) mais les alias reduits (CMIP6_<lwps>)
-    # mpmoine  si on a defini un label non ambigu alors on l'untilise comme ping_alias (i.e. le field_ref) 
+def ping_alias(svar,lset,pingvars):
+    # dans le pingfile, grace à la gestion des interpolations
+    # verticales, on n'attend pas forcément les alias complets des
+    # variables (CMIP6_<label>), on peut se contenter des alias
+    # reduits (CMIP6_<lwps>)
+
+    # par ailleurs, si on a defini un label non ambigu alors on l'utilise
+    # comme ping_alias (i.e. le field_ref)
+    
+    pref=lset["ping_variables_prefix"]
     if svar.label_non_ambiguous:
-        alias_ping=lset["ping_variables_prefix"]+svar.label_non_ambiguous # e.g. 'CMIP6_tsn_land' and not 'CMIP6_tsn'
+        alias_ping=pref+svar.label_non_ambiguous # e.g. 'CMIP6_tsn_land' and not 'CMIP6_tsn'
     else:
-        alias_ping=lset["ping_variables_prefix"]+svar.label_without_psuffix # e.g. 'CMIP6_hus' and not 'CMIP6_hus7h'
+        # Ping file may provide the variable on the relevant pressure level - e.g. CMIP6_rv850
+        alias_ping=pref+svar.label 
+        if alias_ping not in pingvars :
+            # if not, ping_alias is supposed to be without a pressure level suffix
+            alias_ping=pref+svar.label_without_psuffix # e.g. 'CMIP6_hus' and not 'CMIP6_hus7h'
     return alias_ping
 
     
         
-        
-        
+def RequestItemInclude(ri,var_label,freq) :
+    """ 
+    test if a variable is requested by a requestItem at a given freq
+    """
+    varGroup=dq.inx.uid[dq.inx.uid[ri.rlid].refid]
+    reqVars=dq.inx.iref_by_sect[varGroup.uid].a['requestVar']
+    cmVars=[ dq.inx.uid[dq.inx.uid[reqvar].vid] for reqvar in reqVars ]
+    return any( [ cmv.label==var_label and cmv.frequency==freq for cmv in cmVars ])
+
+def endyear_for_CMORvar(dq,cv,expt,year,lset): 
+    """ 
+    For a CMORvar, returns the larger year in the time slice(s)  
+    of those requestItems which apply for experiment EXPT and which 
+    include YEAR. If no time slice applies, returns None 
+    """ 
+    # 1- Get the RequestItems which apply to CmorVar 
+    # 2- Select those requestItems which include expt,
+    #    and retain their endyear if larger than former one
+ 
+    global global_rls
+
+    # Some debug material
+    if False and (cv.label=="tsl" and cv.frequency=="mon") : printout=True
+    else : printout=False
+
+    # 1- Get the RequestItems which apply to CmorVar
+    rVarsUid=dq.inx.iref_by_sect[cv.uid].a['requestVar']
+    rVars=[ dq.inx.uid[uid] for uid in rVarsUid ]
+    if printout : print "les requestVars:" , [ rVar.title for rVar in rVars ]
+    VarGroups=[ dq.inx.uid[rv.vgid] for rv in rVars ] 
+    if printout : print "les requestVars groups:" , [ rVg.label for rVg in VarGroups ]
+    RequestLinksId=[]
+    for vg in VarGroups: 
+        RequestLinksId.extend(dq.inx.iref_by_sect[vg.uid].a['requestLink'])
+    FilteredRequestLinks=[ ]
+    for rlid in RequestLinksId :
+        rl=dq.inx.uid[rlid] 
+        if rl in global_rls :
+            FilteredRequestLinks.append(rl)
+    if printout : print "les requestlinks:" , [ dq.inx.uid[rlid].label for rlid in RequestLinksId ]
+    if printout : print "les FilteredRequestlinks:" , [ rl.label for rl in FilteredRequestLinks ]
+    RequestItems=[] 
+    for rl in FilteredRequestLinks : 
+        RequestItems.extend(dq.inx.iref_by_sect[rl.uid].a['requestItem']) 
+    if printout : print "les requestItems:" , [ dq.inx.uid[riid].label for riid in RequestItems ]
+ 
+    # 2- Select those request links which include expt and year
+    larger=None
+    for riid in RequestItems : 
+        ri=dq.inx.uid[riid] 
+        applies,endyear=RequestItem_applies_for_exp_and_year(ri,expt,lset,year)
+        if printout :
+            print "For var and freq selected for debug, for ri %s, applies=%s, endyear=%s"%(ri.title, `applies`,`endyear`)
+        if applies :
+            if endyear is None:  return None # One of the timeslices cover the whole expt
+            else :
+                if larger is None : larger=endyear
+                else : larger=max(larger,endyear)
+    return larger
+
 
 
 class dr2xml_error(Exception):

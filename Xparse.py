@@ -239,20 +239,24 @@ def init_context(context_id,path_parse,printout=False):
 
 def id2grid(field_id,index,printout=False) :
     """ 
-    Returns the list of Element composing the grid IOXof a field
+    Returns the list of Element composing the grid of a field
     """
     if field_id in index : 
         attrib=index[field_id].attrib
         if 'grid_ref' in attrib :
             grid_ref_field_id=attrib['grid_ref']
             if grid_ref_field_id in index :
+                if printout : print "grid_ref value for %s is %s"%(grid_ref_field_id,`index[grid_ref_field_id]`)
                 return index[grid_ref_field_id] 
             else:
-                if printout: print("field %s reference is %s but has no grid"%(field_id,grid_ref_field_id))
+                #if printout: print("field %s grid reference is %s but that field has no grid"%(field_id,grid_ref_field_id))
+                raise Xparse_error("field %s grid reference is %s but that field no grid"%(field_id,grid_ref_field_id))
         else:
-            if printout: print("field %s has no grid_ref"%(field_id))
+            #if printout: print("field %s has no grid_ref"%(field_id))
+            raise Xparse_error("field %s has no grid_ref"%(field_id))
     else:
-        if printout: print("field %s is not known"%field_id)
+        #if printout: print("field %s is not known"%field_id)
+        raise Xparse_error("field %s is not known"%field_id)
 
 if False :
     
@@ -273,5 +277,8 @@ if False :
         print new_grid_string
 
 
-
-
+class Xparse_error(Exception):
+    def __init__(self, valeur):
+        self.valeur = valeur
+    def __str__(self):
+        return `self.valeur`
