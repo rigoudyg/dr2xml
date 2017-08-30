@@ -840,12 +840,13 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
     out.write(' time_stamp_name="creation_date" ')
     out.write(' time_stamp_format="%Y-%m-%dT%H:%M:%SZ"')
     out.write(' uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%"')
+    out.write(' convention_str="%s"',conventions) 
+
     out.write(' >\n')
     #
     wr(out,'activity_id',activity_id)
     #
     if contact and contact is not "" : wr(out,'contact',contact) 
-    wr(out,'Conventions',conventions) 
     wr(out,'data_specs_version',dq.version) 
     wr(out,'dr2xml_version',version) 
     #
@@ -1658,7 +1659,7 @@ def create_grid_def(grid_defs,axis_key,alias=None,context_index=None,table=None)
     # mpmoine_correction:create_grid_def:  si, il faut generer une grille autour des axes de zoom aussi
     #if not sd.is_zoom_of and not sd.is_union_for: # a grid_def to build in classical case (a vertical axis without using union)
     if alias and context_index:
-        src_grid=id2grid(alias,context_index,printout=True)
+        src_grid=id2grid(alias,context_index)
         if src_grid is not None : 
             src_grid_id=src_grid.attrib['id']
             src_grid_string=ET.tostring(src_grid)
@@ -2194,7 +2195,7 @@ def pingFileForRealmsList(settings, context,lrealms,svars,path_special,dummy="fi
                 fp.write("<!-- P%d (%s) %s : %s -->"\
                          %(v.Priority,v.stdunits, v.stdname, v.description)) 
             fp.write("\n")
-        for tab in ["ap","ap_bnds","bp","bp_bnds" ] :
+        for tab in ["ap","ap_bnds","b","b_bnds" ] :
             fp.write('\t<field id="%s%s" field_ref="dummy_hyb" /><!-- One of the hybrid coordinate arrays -->\n'%(prefix,tab))
         fp.write("</field_definition>\n")
         #
