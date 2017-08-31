@@ -840,8 +840,8 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
     out.write(' time_stamp_name="creation_date" ')
     out.write(' time_stamp_format="%Y-%m-%dT%H:%M:%SZ"')
     out.write(' uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%"')
-    out.write(' convention_str="%s"',conventions) 
-
+    out.write(' convention_str="%s"'%conventions) 
+    #out.write(' description="A %s result for experiment %s of %s"'%(lset['source_id'],sset['experiment_id'],sset.get('project',"CMIP6"))) 
     out.write(' >\n')
     #
     wr(out,'activity_id',activity_id)
