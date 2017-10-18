@@ -232,6 +232,7 @@ def read_extraTable(path,table,dq,printout=False):
             dims=(v["dimensions"]).split(" ")
             # get the index of time dimension to supress, if any
             inddims_to_sup=[]
+            ind_time=[]
             dsingle=None
             for d in dims:
                 if "time" in d:

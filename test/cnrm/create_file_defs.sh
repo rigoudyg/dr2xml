@@ -1,9 +1,12 @@
 #!/bin/bash
 set -x
 #
-# Create XIOS file_defs for each context described in file in arg2 ,
-# for the simulation described by file in arg3
+# Create XIOS file_defs for each context described in file in arg3 ,
+# for the simulation described by file in arg4
 # and accounting for a few other args
+#
+# Assumes that a full set of xml files is available in current dir,
+# including ping_files (named like ping_<context>.xml)
 #
 # Output files are named after pattern dr2xml_<context>.xml
 #
@@ -13,7 +16,7 @@ ln -sf $1 lab_and_model_settings_tmp.py ; shift
 ln -sf $1 simulation_settings_tmp.py ; shift
 year=$1 ; shift # year that will be simulated
 enddate=$1 ; shift  # simulation end date - YYYYMMDD - must be at 00h next day
-ncdir=${1:-@IOXDIR@/} ; shift  # Directory for outpu files
+ncdir=${1:-@IOXDIR@/} ; shift  # Directory for data outpu files
 print=${1:-1} ; shift # Want some reporting ?
 #dummies=include
 #
