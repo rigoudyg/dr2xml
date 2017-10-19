@@ -190,7 +190,11 @@ example_lab_and_model_settings={
     # grid_policy among None, DR, native, native+DR, adhoc- see docin grids.py 
     "grid_policy" : "adhoc",
     # Grids : per model resolution and per context :
-    #              CMIP6 name, name_of_target_domain (if remapping is needed), CMIP6-std resolution, and description
+    #              - CMIP6 qualifier (i.e. 'gn' or 'gr') for the main grid chosen (because you
+    #                 may choose has main production grid a regular one, when the native grid is e.g. unstructured)
+    #              - Xios id for the production grid (if it is not the native grid),
+    #              - resolution of the production grid (using CMIP6 conventions),
+    #              - grid description
     "grids" : { 
       "LR"    : {
         "surfex" : [ "gr","complete" , "250 km", "data regridded to a T127 gaussian grid (128x256 latlon) from a native atmosphere T127l reduced gaussian grid"] ,
@@ -1393,8 +1397,8 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfile=No
         svars_full_list=[]
         for svl in svars_per_table.values(): svars_full_list.extend(svl)
         # mpmoine_merge_dev2_v0.12:generate_file_defs: on recupere maintenant non seulement les union_axis_defs mais aussi les union_grid_defs
-        # SS : les dictionnaires spécifiques pour les unions d'axes et de grille, 
-        # sont supprimé et leur contenu va dans les dicos generaux
+        # SS : les dictionnaires specifiques pour les unions d'axes et de grille, 
+        # sont supprimes et leur contenu va dans les dicos generaux
         #(union_axis_defs,union_grid_defs)=
 
         create_xios_axis_and_grids_for_plevs_unions(svars_full_list,
@@ -2471,7 +2475,7 @@ def build_axis_definitions():
 
 def ping_alias(svar,lset,pingvars):
     # dans le pingfile, grace à la gestion des interpolations
-    # verticales, on n'attend pas forcément les alias complets des
+    # verticales, on n'attend pas forcement les alias complets des
     # variables (CMIP6_<label>), on peut se contenter des alias
     # reduits (CMIP6_<lwps>)
 
