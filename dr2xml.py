@@ -2336,7 +2336,8 @@ def highest_rank(svar):
     """
     #mipvarlabel=svar.label_without_area
     mipvarlabel=svar.label_without_psuffix
-    shapes=[]
+    shapes=[];
+    altdims=set()
     for  cvar in dq.coll['CMORvar'].items : 
         v=dq.inx.uid[cvar.vid]
         if v.label==mipvarlabel:
@@ -2347,12 +2348,17 @@ def highest_rank(svar):
                     shape=sp.label
                 except :
                     if print_DR_errors:
-                        print "DR Error: issue with stid or spid for "+\
+                        print "DR Error: issue with spid for "+\
                         st.label+" "+v.label+string(cvar.mipTable)
                     # One known case in DR 1.0.2: hus in 6hPlev
                     shape="XY"
+                if "odims" in st.__dict__ :
+                    try :
+                        map(altdims.add,st.odims.split("|"))
+                    except :
+                        print "Issue with odims for "+v.label+" st="+st.label
             except :
-                print "DR Error: issue with stid for "+v.label+string(cvar.mipTableSection)
+                print "DR Error: issue with stid for :"+v.label+" in table section :"+str(cvar.mipTableSection)
                 shape="?st"
         else:
             # Pour recuperer le spatial_shp pour le cas de variables qui n'ont
@@ -2360,7 +2366,7 @@ def highest_rank(svar):
             shape=svar.spatial_shp
         if shape: shapes.append(shape)
     #if not shapes : shape="??"
-    if not shapes : shape="XY"
+    if len(shapes)==0 : shape="XY"
     elif any([ "XY-A"  in s for s in shapes]) : shape="XYA"
     elif any([ "XY-O" in s for s in shapes]) : shape="XYO"
     elif any([ "XY-AH" in s for s in shapes]) : shape="XYAh" # Zhalf
@@ -2389,7 +2395,9 @@ def highest_rank(svar):
     elif any([ "na-na" in s for s in shapes]) : shape="0d" # analyser realm
     #else : shape="??"
     else : shape="XY"
-
+    #
+    for d in altdims: shape+="_"+d
+    #
     return shape
 
 def make_source_string(sources,source_id):
