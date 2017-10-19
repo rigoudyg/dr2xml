@@ -1386,26 +1386,6 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfile=No
                    svar.spatial_shp not in lset["excluded_spshapes"]:  
                     if svar.mipTable not in svars_per_table : svars_per_table[svar.mipTable]=[]
                     svars_per_table[svar.mipTable].append(svar)
-    #    
-    #--------------------------------------------------------------------
-    # Build all plev union axis and grids
-    #--------------------------------------------------------------------
-    field_defs=dict()
-    axis_defs=dict()
-    grid_defs=dict()
-    if lset['use_union_zoom']:
-        svars_full_list=[]
-        for svl in svars_per_table.values(): svars_full_list.extend(svl)
-        # mpmoine_merge_dev2_v0.12:generate_file_defs: on recupere maintenant non seulement les union_axis_defs mais aussi les union_grid_defs
-        # SS : les dictionnaires specifiques pour les unions d'axes et de grille, 
-        # sont supprimes et leur contenu va dans les dicos generaux
-        #(union_axis_defs,union_grid_defs)=
-
-        create_xios_axis_and_grids_for_plevs_unions(svars_full_list,
-                                        multi_plev_suffixes.union(single_plev_suffixes),
-                                        lset["ping_variables_prefix"],
-                                        lset["vertical_interpolation_sample_freq"],
-                                        axis_defs,grid_defs,field_defs )
     #
     #--------------------------------------------------------------------
     # Read ping_file defined variables
@@ -1433,7 +1413,26 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfile=No
             else:
                 print "Forbidden option for dummies : "+dummies
                 sys.exit(1)
-
+    #
+    #--------------------------------------------------------------------
+    # Build all plev union axis and grids
+    #--------------------------------------------------------------------
+    field_defs=dict()
+    axis_defs=dict()
+    grid_defs=dict()
+    if lset['use_union_zoom']:
+        svars_full_list=[]
+        for svl in svars_per_table.values(): svars_full_list.extend(svl)
+        # mpmoine_merge_dev2_v0.12:generate_file_defs: on recupere maintenant non seulement les union_axis_defs mais aussi les union_grid_defs
+        # SS : les dictionnaires spécifiques pour les unions d'axes et de grille, 
+        # sont supprimé et leur contenu va dans les dicos generaux
+        #(union_axis_defs,union_grid_defs)=
+        #DEBUG_ZOOM_MPM ajout argument ping_refs + deplacement ici, apres lecture du ping, de l'appel a create_xios_axis_and_grids_for_plevs_unions
+        create_xios_axis_and_grids_for_plevs_unions(svars_full_list,
+                                        multi_plev_suffixes.union(single_plev_suffixes),
+                                        lset["ping_variables_prefix"],
+                                        lset["vertical_interpolation_sample_freq"],
+                                        axis_defs,grid_defs,field_defs, ping_refs, printout=True )
     #
     #--------------------------------------------------------------------
     # Start writing XIOS file_def file: 
@@ -1731,7 +1730,7 @@ def create_grid_def(grid_defs,axis_key,alias=None,context_index=None,table=None)
 
 # mpmoine_zoom_modif: nouvelle fonction 'create_xios_axis_for_plevs_unions'
 # mpmoine_merge_dev2_v0.12: 'create_xios_axis_for_plevs_unions' renomee en 'create_xios_axis_and_grids_for_plevs_unions'
-def create_xios_axis_and_grids_for_plevs_unions(svars,plev_sfxs,prefix,vert_freq,axis_defs,grid_defs,field_defs,printout=False): 
+def create_xios_axis_and_grids_for_plevs_unions(svars,plev_sfxs,prefix,vert_freq,axis_defs,grid_defs,field_defs, ping_refs, printout=False): 
     """
     Objective of this function is to optimize Xios vertical interpolation requested in pressure levels. 
     Process in 2 steps:
@@ -1760,18 +1759,29 @@ def create_xios_axis_and_grids_for_plevs_unions(svars,plev_sfxs,prefix,vert_freq
             if sd.label.startswith("p") and any(sd.label.endswith(s) for s in plev_sfxs) and sd.label != 'pl700' : 
                 lwps=sv.label_without_psuffix
                 if lwps:
-                    sv.sdims[sd.label].is_zoom_of="union_plevs_"+lwps
-                    if not dict_plevs.has_key(lwps):
-                        dict_plevs[lwps]={sd.label:{sv.label:sv}}
+                    present_in_ping=ping_refs.has_key(prefix+lwps) #DEBUG_ZOOM_MPM
+                    dummy_in_ping=None #DEBUG_ZOOM_MPM
+                    if present_in_ping: dummy_in_ping=("dummy" in ping_refs[prefix+lwps]) #DEBUG_ZOOM_MPM
+
+                    if  present_in_ping and not dummy_in_ping: #DEBUG_ZOOM_MPM
+                        sv.sdims[sd.label].is_zoom_of="union_plevs_"+lwps
+                        if not dict_plevs.has_key(lwps):
+                            dict_plevs[lwps]={sd.label:{sv.label:sv}}
+                        else:
+                            if not dict_plevs[lwps].has_key(sd.label):
+                                dict_plevs[lwps].update({sd.label:{sv.label:sv}})
+                            else:    
+                                if sv.label not in dict_plevs[lwps][sd.label].keys(): 
+                                    dict_plevs[lwps][sd.label].update({sv.label:sv})
+                                else:
+                                    #TBS# print sv.label,"in table",sv.mipTable,"already listed for",sd.label
+                                    pass
                     else:
-                        if not dict_plevs[lwps].has_key(sd.label):
-                            dict_plevs[lwps].update({sd.label:{sv.label:sv}})
-                        else:    
-                            if sv.label not in dict_plevs[lwps][sd.label].keys(): 
-                                dict_plevs[lwps][sd.label].update({sv.label:sv})
-                            else:
-                                #TBS# print sv.label,"in table",sv.mipTable,"already listed for",sd.label
-                                pass
+                        if printout: 
+                            print "Info: ", lwps, "not taken into account for building plevs union axis because one of these 2 reasons:" #DEBUG_ZOOM_MPM
+                            print "      a)", prefix+lwps,"is not an entry in the pingfile: Entry?",present_in_ping  #DEBUG_ZOOM_MPM
+                            print "      b)", prefix+lwps,"has au dummy reference in the pingfile. Dummy?",dummy_in_ping #DEBUG_ZOOM_MPM
+
                     # svar will be expected on a zoom axis of the union. Corresponding vertical dim must
                     # have a zoom_label named plevXX_<lwps> (multiple pressure levels) or pXX_<lwps> (single pressure level)
                     sv.sdims[sd.label].zoom_label='zoom_'+sd.label+"_"+lwps 
