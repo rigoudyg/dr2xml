@@ -2232,8 +2232,9 @@ def pingFileForRealmsList(settings, context,lrealms,svars,path_special,dummy="fi
                 fp.write("<!-- P%d (%s) %s : %s -->"\
                          %(v.Priority,v.stdunits, v.stdname, v.description)) 
             fp.write("\n")
-        for tab in ["ap","ap_bnds","b","b_bnds" ] :
-            fp.write('\t<field id="%s%s" field_ref="dummy_hyb" /><!-- One of the hybrid coordinate arrays -->\n'%(prefix,tab))
+        if 'atmos' in lrealms or 'atmosChem' in lrealms or 'aerosol' in lrealms :
+            for tab in ["ap","ap_bnds","b","b_bnds" ] :
+                fp.write('\t<field id="%s%s" field_ref="dummy_hyb" /><!-- One of the hybrid coordinate arrays -->\n'%(prefix,tab))
         fp.write("</field_definition>\n")
         #
         print "%3d variables written for %s"%(len(lvars),filename)
@@ -2410,7 +2411,10 @@ def highest_rank(svar):
     #else : shape="??"
     else : shape="XY"
     #
-    for d in altdims: shape+="_"+d
+    for d in altdims:
+        dims=d.split(' ')
+        for dim in dims:
+            shape+="_"+dim
     #
     return shape
 

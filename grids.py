@@ -48,7 +48,8 @@ def decide_for_grids(cmvarid,grids,lset,dq):
     elif policy=="native": # Follow lab grids choice (gr or gn depending on context - see lset['grids"])
         return [""]
     elif policy=="native+DR": # Produce both in 'native' and DR grid
-        return list(sgrids.add(''))
+        sgrids.add('')
+        return list(sgrids)
     elif policy=="adhoc" :
         return lab_adhoc_grid_policy(cmvarid,ngrids,lset,dq)
     else :
