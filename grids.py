@@ -194,8 +194,7 @@ def split_frequency_for_variable(svar, lset, mcfg,context,printout=False):
     freq=svar.frequency
     if (size != 0 ) : 
         # Try by years first
-        # mpmoine_next_modif:split_frequency_for_variable: passage de 'model_timestep' en argument de timesteps_per_freq_and_duration
-        size_per_year=size*timesteps_per_freq_and_duration(freq,365,lset["model_timestep"][context])
+        size_per_year=size*timesteps_per_freq_and_duration(freq,365,lset["sampling_timestep"][context])
         nbyears=max_size/float(size_per_year)
         if printout : print "size per year=%s, size=%s, nbyears=%g"%(`size_per_year`,`size`,nbyears)
         if nbyears > 1. :
@@ -211,15 +210,13 @@ def split_frequency_for_variable(svar, lset, mcfg,context,printout=False):
                 return("200y")
         else: 
             # Try by month
-            # mpmoine_next_modif:split_frequency_for_variable: passage de 'model_timestep' en argument de timesteps_per_freq_and_duration
-            size_per_month=size*timesteps_per_freq_and_duration(freq,31,lset["model_timestep"][context])
+            size_per_month=size*timesteps_per_freq_and_duration(freq,31,lset["sampling_timestep"][context])
             nbmonths=max_size/float(size_per_month)
             if nbmonths > 1. :
                 return("1mo")
             else:
                 # Try by day
-                # mpmoine_next_modif:split_frequency_for_variable: passage de 'model_timestep' en argument de timesteps_per_freq_and_duration
-                size_per_day=size*timesteps_per_freq_and_duration(freq,1,lset["model_timestep"][context])
+                size_per_day=size*timesteps_per_freq_and_duration(freq,1,lset["sampling_timestep"][context])
                 nbdays=max_size/float(size_per_day)
                 if nbdays > 1. :
                     return("1d")
@@ -234,8 +231,7 @@ def split_frequency_for_variable(svar, lset, mcfg,context,printout=False):
       print "Warning: field size is 0, cannot compute split frequency."
        
                 
-# mpmoine_next_modif: ajout de 'model_timestep' en argument de timesteps_per_freq_and_duration
-def timesteps_per_freq_and_duration(freq,nbdays,model_tstep):
+def timesteps_per_freq_and_duration(freq,nbdays,sampling_tstep):
     # This function returns the number of records within nbdays
     duration=0.
     # Translate freq strings to duration in days
@@ -247,7 +243,7 @@ def timesteps_per_freq_and_duration(freq,nbdays,model_tstep):
     elif freq=="mon" : duration=31.
     elif freq=="yr" : duration=365.
     #mpmoine_next_modif:timesteps_per_freq_and_duration: ajout des cas frequence 'subhr' et 'dec'
-    elif freq=="subhr" : duration=1./(86400./model_tstep)
+    elif freq=="subhr" : duration=1./(86400./sampling_tstep)
     elif freq=="dec" : duration=10.*365
     # If freq actually translate to a duration, return
     # number of timesteps for number of days

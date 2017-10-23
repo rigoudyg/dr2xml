@@ -51,7 +51,7 @@ import dreq
 # End of pre-requisites
 ####################################
 
-version="0.20"
+version="0.21"
 print "* dr2xml version: ", version
 
 conventions="CF-1.7 CMIP-6.2" 
@@ -60,7 +60,7 @@ conventions="CF-1.7 CMIP-6.2"
 CMIP6_conventions_version="v6.2.4"
 print "CMIP6 conventions version: "+CMIP6_conventions_version
 
-from datetime import datetime
+import datetime
 import re
 import json
 import collections
@@ -113,12 +113,14 @@ cfsites_grid_field_id =cfsites_radix+"_field"
 
 """ An example/template  of settings for a lab and a model"""
 example_lab_and_model_settings={
+
     'institution_id': "CNRM-CERFACS", # institution should be read in CMIP6_CV, if up-to-date
-    'source_id'      : "CNRM-CM6-1", 
-    # The description of lab models, in CMIP6 CV wording
-    'source_types' : { "CNRM-CM6-1" : "AOGCM", "CNRM-CM6-1-HR" : "AOGCM", 
-                       "CNRM-ESM2-1": "ESM"  , "CNRM-ESM2-1-HR": "ESM" },
-    'source'         : "CNRM-CM6-1", # Useful only if CMIP6_CV is not up to date
+
+    # The description of lab models, in CMIP6 CV wording. Details can be overriden in simulation_settings
+    'source_types' : { "CNRM-CM6-1" : "AOGCM AER", "CNRM-CM6-1-HR" : "AOGCM AER", 
+                       "CNRM-ESM2-1": "AOGCM BGC AER CHEM"  , "CNRM-ESM2-1-HR": "AOGCM BGC AER" },
+
+    #'source'         : "CNRM-CM6-1", # Useful only if CMIP6_CV is not up to date
     'references'    :  "A character string containing a list of published or web-based "+\
         "references that describe the data or the methods used to produce it."+\
         "Typically, the user should provide references describing the model"+\
@@ -132,7 +134,9 @@ example_lab_and_model_settings={
     'mips_for_test': {'C4MIP', 'SIMIP', 'OMIP', 'CFMIP', 'RFMIP'} , 
     'mips' : {'AerChemMIP','C4MIP','CFMIP','DAMIP', 'FAFMIP' , 'GeoMIP','GMMIP','ISMIP6',\
                       'LS3MIP','LUMIP','OMIP','PMIP','RFMIP','ScenarioMIP','CORDEX','SIMIP'},
-    # Max variable priority level to be output
+
+    # Max variable priority level to be output (you may set 3 when creating ping_files while
+    # being more restrictive at run time)
     'max_priority' : 1,
     'tierMax'      : 1,
 
@@ -141,24 +145,26 @@ example_lab_and_model_settings={
     "ping_variables_prefix" : "CMIP6_",
 
     # We account for a list of variables which the lab does not want to produce , 
-    # Names must match DR MIPvarnames (and **NOT** CF standard_names)
+    # Names must match DR MIPvarnames (and **NOT** CMOR standard_names)
     # excluded_vars_file="../../cnrm/non_published_variables"
     "excluded_vars":[],
-    "excluded_spshapes": ["XYA-na","XYG-na","na-A","Y-P19","Y-P39","Y-A","Y-na"],
-    #"included_tables"  : ["AMon" ] , # If not empty, has priority over excluded_tables 
+    "excluded_spshapes": ["XYA-na","XYG-na", # GreenLand and Antarctic grids we do not want to produce
+                          "na-A", # RFMIP.OfflineRad : rld, rlu, rsd, rsu in table Efx ?????
+                          "Y-P19","Y-P39", "Y-A","Y-na" # Not yet handled by dr2xml
+    ],
+
     "excluded_tables"  : ["Oclim" , "E1hrClimMon" , "ImonAnt", "ImonGre" ] , # Clims are not handled by Xios yet
 
+    # For debugging purpose : if next list has members, only those tables will be processed 
+    #"included_tables"  : ["AMon" ] , # If not empty, has priority over excluded_tables 
+
     "excluded_request_links"  : [
-    # "CFsubhr",      # some issue yet with Xios
-    "RFMIP-AeroIrf" # 4 scattered days of historical, heavy output -> rerun model for one day
+        "RFMIP-AeroIrf" # 4 scattered days of historical, heavy output -> please rerun model for one day
+         # for each day of this request_link 
     ],
-    # if next list has members, only those requestLinks will be processed
+    # For debugging purpose : if next list has members, only those requestLinks will be processed 
     "included_request_links"  : [ ],
     
-    # We can control the max output level set for all output files, and the NetCDF compression level
-    "output_level"       : 10,
-    "compression_level"  :  0,
-
     # We account for a list of variables which the lab wants to produce in some cases
     "listof_home_vars":"../../cnrm/listof_home_vars.txt",
     
@@ -177,49 +183,62 @@ example_lab_and_model_settings={
     'vars_OK' : dict(),
     # A per-variable dict of comments valid for all simulations
     'comments'     : {
-        'tas' : 'nothing special about tas'
+        'rld' : 'nothing special about this variable'
         },
-    # Sizes for atm and oce grids (cf DR doc)
-    # actual_sizes=[292*362,75,128*256,91,30,14,128]
-    # actual_sizes=[1442*1021,75,720*360,91,30,14,128]
-    #"sizes"  : [259200,60,64800,40,20,5,100],
-    "sizes"  : [292*362,75,128*256,91,30,14,128],
+    #
+    'grid_choice' : { "CNRM-CM6-1" : "LR", "CNRM-CM6-1-HR" : "HR",
+                      "CNRM-ESM2-1": "LR"  , "CNRM-ESM2-1-HR": "HR" },
+    # Sizes for atm and oce grids (cf DR doc); Used for computing file split frequency
+    "sizes"  : { "LR" : [292*362  , 75, 128*256, 91, 30, 14, 128],
+                 "HR" : [1442*1021, 75, 720*360, 91, 30, 14, 128] },
     #
     # What is the maximum size of generated files, in number of float values
-    "max_file_size_in_floats" : 500.*1.e+6 ,
+    "max_file_size_in_floats" : 2000.*1.e+6 , # 2 Giga octets
+    
     # grid_policy among None, DR, native, native+DR, adhoc- see docin grids.py 
     "grid_policy" : "adhoc",
+    
     # Grids : per model resolution and per context :
     #              - CMIP6 qualifier (i.e. 'gn' or 'gr') for the main grid chosen (because you
     #                 may choose has main production grid a regular one, when the native grid is e.g. unstructured)
     #              - Xios id for the production grid (if it is not the native grid),
     #              - resolution of the production grid (using CMIP6 conventions),
     #              - grid description
-    "grids" : { 
+    "grids" : {
+        
       "LR"    : {
         "surfex" : [ "gr","complete" , "250 km", "data regridded to a T127 gaussian grid (128x256 latlon) from a native atmosphere T127l reduced gaussian grid"] ,
-          "trip" : [ "gn", "" ,  "50 km" , "regular 1/2 deg lat-lon grid" ],
+          "trip" : [ "gn", ""        ,  "50 km" , "regular 1/2 deg lat-lon grid" ],
           "nemo" : [ "gn", ""        , "100 km" , "native ocean tri-polar grid with 105 k ocean cells" ],},
+        
       "HR"    : {
         "surfex" : [ "gr","complete" , "50 km", "data regridded to a 359 gaussian grid (180x360 latlon) from a native atmosphere T359l reduced gaussian grid"] ,
-          "trip" : [ "gn", "" ,  "50 km" , "regular 1/2 deg lat-lon grid" ],
-          "nemo" : [ "gn", ""         , "25 km" , "native ocean tri-polar grid with 1.47 M ocean cells" ],},
+          "trip" : [ "gn", ""        ,  "50 km" , "regular 1/2 deg lat-lon grid" ],
+          "nemo" : [ "gn", ""        ,  "25 km" , "native ocean tri-polar grid with 1.47 M ocean cells" ],},
     },
-    'grid_choice' : { "CNRM-CM6-1" : "LR", "CNRM-CM6-1-HR" : "HR",
-                      "CNRM-ESM2-1": "LR"  , "CNRM-ESM2-1-HR": "HR" },
     #        
-    # Component Models Time steps (s)
-    "model_timestep" : { "surfex":900., "nemo":900., "trip": 1800. },
+    # Basic sampling timestep set in you field definition (used for setting interval_operation)
+    "sampling_timestep" : { "surfex":900., "nemo":900., "trip": 1800. },
+
+    # We create sampled time-variables for controlling the frequency of vertical interpolations
+    "vertical_interpolation_sample_freq" : "3h",
+
     #--- Say if you want to use XIOS union/zoom axis to optimize vertical interpolation requested by the DR
     "use_union_zoom" : False,
-    "vertical_interpolation_sample_freq" : "3h",
+
     # The CMIP6 frequencies that are unreachable for a single model run. Datafiles will
     # be labelled with dates consistent with content (but not with CMIP6 requirements).
     # Allowed values are only 'dec' and 'yr'
     "too_long_periods" : ["dec", "yr" ] ,
+
     # Describe the branching scheme for experiments involved in some 'branchedYears type' tslice
     # Just put the start year in child and the start years in parent for all members
-    "branching" : { "historical" : (1850, [ 500,550,600 ]) },
+    "branching" : { "historical" : (1850, [ 2350, 2400, 2450 ]) },
+
+    # We can control the max output level set for all output files, and the NetCDF compression level
+    "output_level"       : 10,
+    "compression_level"  :  0,
+
     # For debug purpose, you may slim down xml files by setting next entry to False
     "print_variables" : True ,
 }
@@ -233,12 +252,18 @@ example_simulation_settings={
     # Warning : some lines are commented out in this example but should be 
     # un-commented in some cases. See comments
 
+    'source_id'      : "CNRM-CM6-1", 
+    #'source_type'    : "OGCM" # If source-type value from lab settings does not fit, you may change it here.
+    # "This should describe the model most directly responsible for the
+    # output.  Sometimes it is appropriate to list two (or more) model types here, among
+    # AER, AGCM, AOGCM, BGC, CHEM, ISM, LAND, OGCM, RAD, SLAB "
+    # e.g. amip , run with CNRM-CM6-1, should quote "AGCM AER"
+    # Also see note 14 of https://docs.google.com/document/d/1h0r8RZr_f3-8egBMMh7aqLwy3snpD6_MrDz1q8n5XUk/edit
+
     "experiment_id"  : "historical",
     #"contact"        : "", set it only if it is specific to the simualtion
     #"project"        : "CMIP6",  #CMIP6 is the default
 
-    #'source_type'    : "ESM" # If source_type deduced from model name is not relevant for this 
-                   #experiment (e.g. : AMIP), you may tell that here
 
     # MIPs specifying the experiment. For historical, it is CMIP
     # itself In a few cases it may be appropriate to include multiple
@@ -248,29 +273,36 @@ example_simulation_settings={
     
     # It is recommended that some description be included to help
     # identify major differences among variants, but care should be
-    # taken to record correct information.  Prudence dictates that
-    # this attribute includes a warning along the following lines:
-    # 'Information provided by this attribute may in some cases be
-    # flawed.# Users can find more comprehensive and up-to-date
-    # documentation via the further_info_url global attribute.'
-    "variant_info"      : "Start date chosen so that variant r1i1p1f1 has "+\
-                          "the better fit with Krakatoa impact on tos",
+    # taken to record correct information.  dr2xml will add in all cases:
+    #  'Information provided by this attribute may in some cases be
+    #  flawed. Users can find more comprehensive and up-to-date
+    #  documentation via the further_info_url global attribute.'
+    "variant_info"      : "Start date after 300 years of control run",
     #
     "realization_index"    : 1, # Value may be omitted if = 1
     "initialization_index" : 1, # Value may be omitted if = 1
     "physics_index"        : 1, # Value may be omitted if = 1
-    "forcing_index"        : 1, # Value may be omitted if = 1
+    "forcing_index"        : 3, # Value may be omitted if = 1
     #
     # All about the parent experiment and branching scheme
     "parent_experiment_id" : "piControl", # omit or set to 'no parent' if not applicable
-                                          # (remaining parent attributes will be disregarded)
+                                          # (remaining parent attributes will then be disregarded)
     "branch_method"        : "standard", # default value='standard' meaning ~ "select a start date" 
-    "branch_time_in_child" : "0.0D0",   # a double precision value in child time units (days), used if applicable
-    "branch_time_in_parent": "365.0D0", # a double precision value, in days, used if applicable 
-    'parent_time_ref_year' : 1850, # default=1850. 
-    #'parent_variant_label' :""  #Default to 'same as child'. Other cases should be exceptional
+                                        # (this is not necessarily the parent start date)
+    'parent_time_ref_year' : 1850,      # MUST BE CONSISTENT WITH THE TIME UNITS OF YOUR MODEL(S) !!!
+    "branch_year_in_parent": 2150,      # if your calendar is Gregorian, you can specify the branch year in parent directly
+    #"branch_time_in_parent": "365.0D0", # a double precision value, in days, used if branch_year_in_parent is not applicable
+    #'parent_time_units'    : "" #in case it is not the same as child time units
+
+    "branch_year_in_child" : 1850,      # if your calendar is Gregorian, you can specify the branch year in child directly
+    'child_time_ref_year'  : 1850,      # MUST BE CONSISTENT WITH THE TIME UNITS OF YOUR MODEL(S) !!!
+                                        # (this is not necessarily the parent start date)
+    #"branch_time_in_child" : "0.0D0",   # a double precision value in child time units (days),
+                                        # used if branch_year_in_child is not applicable
+    
+    #'parent_variant_label' :""  #Default to 'same variant as child'. Other cases should be exceptional
     #"parent_mip_era"       : 'CMIP5'   # only in special cases (as e.g. PMIP warm 
-                                        #start from CMIP5/PMIP3 experiment)
+                                        # start from CMIP5/PMIP3 experiment)
     #'parent_activity_id'   : 'CMIP'    # only in special cases, defaults to CMIP
     #'parent_source_id'     : 'CNRM-CM5.1' # only in special cases, where parent model 
                                            # is not the same model
@@ -281,7 +313,7 @@ example_simulation_settings={
     # A per-variable dict of comments which are specific to this simulation. It will replace  
     # the all-simulation comment
     'comments'     : {
-        'tas' : 'tas diagnostic uses a special scheme in this simulation : .....',
+        'tas' : 'this is a dummy comment, placeholder for describing a special, simulation dependent scheme for a given variable',
         }
     }
 
@@ -404,7 +436,7 @@ def year_in_ri_tslice(ri,experiment,lset,year,debug=False):
     return relevant,endyear
 
 
-def select_CMORvars_for_lab(lset, experiment_id=None, year=None,printout=False):
+def select_CMORvars_for_lab(lset, sset, year=None,printout=False):
     """
     A function to list CMOR variables relevant for a lab (and also, 
     optionnally for an experiment and a year)
@@ -412,7 +444,7 @@ def select_CMORvars_for_lab(lset, experiment_id=None, year=None,printout=False):
     Args:
       lset (dict): laboratory settings; used to provide the list of MIPS,  
                    the max Tier, and a list of excluded variable names
-      experiment_id (string,optional): if willing to filter on a given 
+      sset (dict): simulation settings, if willing to filter on a given 
                    experiment - not used if year is None
       year (int,optional) : simulation year - used to filter the request 
                    for an experiment and a year
@@ -429,7 +461,10 @@ def select_CMORvars_for_lab(lset, experiment_id=None, year=None,printout=False):
     # Set sizes for lab settings, if available (or use CNRM-CM6-1 defaults)
     mcfg = collections.namedtuple( 'mcfg', \
                 ['nho','nlo','nha','nla','nlas','nls','nh1'] )
-    sizes=lset.get("sizes",[259200,60,64800,40,20,5,100])
+    source=sset["source_id"]
+    grid_choice=lset["grid_choice"][source]
+    sizes=lset["sizes"][grid_choice]
+    #sizes=lset.get("sizes",[259200,60,64800,40,20,5,100])
     sc.mcfg = mcfg._make( sizes )._asdict()
     #
     rls_for_mips=sc.getRequestLinkByMip(lset['mips'])
@@ -453,6 +488,7 @@ def select_CMORvars_for_lab(lset, experiment_id=None, year=None,printout=False):
             rls_for_mips.remove(rl)
     #
     if (year) :
+        experiment_id=sset['experiment_id']
         #print "Request links before filter :"+`[ rl.label for rl in rls_for_mips ]`
         filtered_rls=[]
         for rl in rls_for_mips :
@@ -720,7 +756,7 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
     #--------------------------------------------------------------------
     #
     project=sset.get('project',"CMIP6")
-    source_id=lset['source_id']
+    source_id=sset['source_id']
     experiment_id=sset['experiment_id']
     institution_id=lset['institution_id']
     #
@@ -924,9 +960,23 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
         parent_time_units="days since %s-01-01 00:00:00"%parent_time_ref_year
         wr(out,'parent_time_units',sset,default=parent_time_units)
         wr(out,'parent_variant_label',sset,default=variant_label)
-        wr(out,'branch_method',sset,default='standard') 
-        wr(out,'branch_time_in_child',sset)
-        wr(out,'branch_time_in_parent',sset) 
+        wr(out,'branch_method',sset,default='standard')
+        # Use branch year in parent if available
+        if "branch_year_in_parent" in sset :
+           date_branch=datetime.datetime(sset["branch_year_in_parent"],1,1)
+           date_ref=datetime.datetime(int(parent_time_ref_year),1,1)
+           nb_days=(date_branch-date_ref).days
+           wr(out,'branch_time_in_parent',"%d.0D"%nb_days) 
+        else:
+            wr(out,'branch_time_in_parent',sset) 
+        # Use branch year in child if available
+        if "branch_year_in_parent" in sset :
+           date_branch=datetime.datetime(sset["branch_year_in_child"],1,1)
+           date_ref=datetime.datetime(sset["child_time_ref_year"],1,1)
+           nb_days=(date_branch-date_ref).days
+           wr(out,'branch_time_in_child',"%d.0D"%nb_days) 
+        else:
+            wr(out,'branch_time_in_child',sset)
     #
     wr(out,"physics_index",physics_index,num_type="int") 
     wr(out,'product','model-output')
@@ -1239,7 +1289,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
     # We override the Xios value for interval_operation because it sets it to
     # the freq_output value with our settings (for complicated reasons)
     if not has_vertical_interpolation :
-        interval_op=`int(lset['model_timestep'][context])`+" s"
+        interval_op=`int(lset['sampling_timestep'][context])`+" s"
     else:
         interval_op=vert_freq
     rep+=wrv('interval_operation',interval_op)
@@ -1253,8 +1303,8 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
 
 # mpmoine_last_modif:gather_AllSimpleVars: nouvelle fonction qui rassemble les operations select_CMORvars_for_lab et read_homeVars_list. 
 # mpmoine_last_modif:gather_AllSimpleVars: Necessaire pour create_ping_file qui doit tenir compte des extra_Vars
-def gather_AllSimpleVars(lset,expid=False,year=False,printout=False):
-    mip_vars_list=select_CMORvars_for_lab(lset,expid,year,printout=printout)
+def gather_AllSimpleVars(lset,sset,year=False,printout=False):
+    mip_vars_list=select_CMORvars_for_lab(lset,sset,year,printout=printout)
     if lset['listof_home_vars']:
         process_homeVars(lset,mip_vars_list,dq,expid,printout)
 
@@ -1316,7 +1366,7 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfile=No
     #--------------------------------------------------------------------
     # mpmoine_skipped_modif:generate_file_defs: skipped_vars (liste) change en skipped_vars_per_table (dictionnaire)
     skipped_vars_per_table={}
-    mip_vars_list=gather_AllSimpleVars(lset,sset['experiment_id'],year,printout)
+    mip_vars_list=gather_AllSimpleVars(lset,sset,year,printout)
     # Group CMOR vars per realm
     svars_per_realm=dict()
     for svar in mip_vars_list :
@@ -1413,7 +1463,7 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfile=No
         for svl in svars_per_table.values(): svars_full_list.extend(svl)
         # mpmoine_merge_dev2_v0.12:generate_file_defs: on recupere maintenant non seulement les union_axis_defs mais aussi les union_grid_defs
         # SS : les dictionnaires specifiques pour les unions d'axes et de grille, 
-        # sont supprimé et leur contenu va dans les dicos generaux
+        # sont supprimes et leur contenu va dans les dicos generaux
         #(union_axis_defs,union_grid_defs)=
         #DEBUG_ZOOM_MPM ajout argument ping_refs + deplacement ici, apres lecture du ping, de l'appel a create_xios_axis_and_grids_for_plevs_unions
         create_xios_axis_and_grids_for_plevs_unions(svars_full_list,
@@ -2476,7 +2526,7 @@ def build_axis_definitions():
 
 
 def ping_alias(svar,lset,pingvars):
-    # dans le pingfile, grace à la gestion des interpolations
+    # dans le pingfile, grace a la gestion des interpolations
     # verticales, on n'attend pas forcement les alias complets des
     # variables (CMIP6_<label>), on peut se contenter des alias
     # reduits (CMIP6_<lwps>)
