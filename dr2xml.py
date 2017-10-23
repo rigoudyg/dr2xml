@@ -669,7 +669,7 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
     WIP document; 
     2- Next, field-level metadata are written
     3- For 3D variables in model levels or half-levels, also write the auxilliary 
-    variables requested by CF convention (e.g. for hybrid coordinate, psol field 
+    variables requested by CF convention (e.g. for hybrid coordinate, surface_pressure field 
     plus AP and B arrays and their bounds, and lev + lev_bnds with formula attribute)
     """
     #
@@ -796,8 +796,7 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
     # mpmoine: WIP doc v6.2.3 : [_<time_range>] omitted if frequency is "fx"
     if "fx" in cmv.frequency:
         filename="%s%s_%s_%s_%s_%s_%s"%\
-                   (prefix,cmv.label,table,source_id,expname,
-                    member_id,grid_label)
+                   (prefix,cmv.label,table,source_id,expname, member_id,grid_label)
     else:
         # mpmoine: WIP doc v6.2.3 : a suffix "-clim" should be added if climatology
         # TBD : for the time being, we should also have attribute 'climatology' for dimension 'time', but we cannot -> forget temporarily about this extension
@@ -814,7 +813,6 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
     #--------------------------------------------------------------------
     # Compute XIOS split frequency
     #--------------------------------------------------------------------
-    # mpmoine_last_modif:write_xios_file_def: Maintenant, dans le cas type='perso', table='NONE'. On ne doit donc pas compter sur le table2freq pour recuperer la frequence en convention xios => fonction cmipFreq2xiosFreq
     split_freq=split_frequency_for_variable(cmv, lset, sc.mcfg, context)
     #
     #--------------------------------------------------------------------
@@ -839,9 +837,6 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
         lastyear=None
         if cmv.cmvar is not None :
             lastyear=endyear_for_CMORvar(dq,cmv.cmvar,expname,year,lset)
-            #if (cmv.cmvar.label=="tsl" and cmv.cmvar.frequency=="mon") : printout=True
-            #else : printout=False
-            #if printout : print " for tsl, lastyear=",lastyear, "enddate=",enddate
         if lastyear is None or lastyear >= int(enddate[0:4]) :
             # Use run end date as the latest possible date
             # enddate must be 20140101 , rather than 20131231
@@ -858,13 +853,13 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
     #
     #out.write('timeseries="exclusive" >\n')
     out.write(' time_units="days" time_counter_name="time"')
-    # mpmoine_cmor_update:write_xios_file_def: ajout de time_counter="exclusive"
     out.write(' time_counter="exclusive"')
     out.write(' time_stamp_name="creation_date" ')
     out.write(' time_stamp_format="%Y-%m-%dT%H:%M:%SZ"')
     out.write(' uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%"')
     out.write(' convention_str="%s"'%conventions) 
-    #out.write(' description="A %s result for experiment %s of %s"'%(lset['source_id'],sset['experiment_id'],sset.get('project',"CMIP6"))) 
+    #out.write(' description="A %s result for experiment %s of %s"'%
+    #            (lset['source_id'],sset['experiment_id'],sset.get('project',"CMIP6"))) 
     out.write(' >\n')
     #
     wr(out,'activity_id',activity_id)
@@ -885,18 +880,14 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
     if 'fx' in table : external_variables= "" 
     wr(out,'external_variables',external_variables)
     #
-    # mpmoine_cmor_update:write_xios_file_def: ecriture de forcing_index en integer requis par la version CMOR3.2.3
     wr(out,'forcing_index',forcing_index,num_type="int") 
-    # mpmoine_last_modif: Maintenant, dans le cas type='perso', table='NONE'. On ne doit donc pas compter sur table2freq pour recuperer la frequence
     wr(out,'frequency',cmv.frequency)
     #
-    # URL
     wr(out,'further_info_url',further_info_url)
     #
     wr(out,'grid',grid_description) ; wr(out,'grid_label',grid_label) ;
     wr(out,'nominal_resolution',grid_resolution)    
     wr(out,'history',sset,default='none') 
-    # mpmoine_cmor_update:write_xios_file_def: ecriture de  initialization_index en integer requis par la version CMOR3.2.3 
     wr(out,"initialization_index",initialization_index,num_type="int")
     wr(out,"institution_id",institution_id)
     if "institution" in lset :
@@ -928,7 +919,7 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
         wr(out,'parent_mip_era',sset,default=mip_era)
         wr(out,'parent_activity_id',sset,default=activity_id)
         wr(out,'parent_source_id',sset,default=source_id)
-        # TBX : syntaxe XIOS pour designer le time units de la simu courante
+        # TBD : syntaxe XIOS pour designer le time units de la simu courante
         parent_time_ref_year=sset.get('parent_time_ref_year',"1850")
         parent_time_units="days since %s-01-01 00:00:00"%parent_time_ref_year
         wr(out,'parent_time_units',sset,default=parent_time_units)
@@ -937,11 +928,8 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
         wr(out,'branch_time_in_child',sset)
         wr(out,'branch_time_in_parent',sset) 
     #
-    # mpmoine_cmor_update:write_xios_file_def: ecriture de physics_index en integer requis par la version CMOR3.2.3 
     wr(out,"physics_index",physics_index,num_type="int") 
-    # mpmoine_cmor_update:write_xios_file_def: changement des valeurs de 'product' requis par la version CMOR3.2.3
     wr(out,'product','model-output')
-    # mpmoine_cmor_update:write_xios_file_def: ecriture de realization_index en integer requis par la version CMOR3.2.3
     wr(out,"realization_index",realization_index,num_type="int") 
     wr(out,'realm',cmv.modeling_realm)
     wr(out,'references',lset,default=False) 
@@ -999,13 +987,12 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
     if len(end_field_defs.keys())==0 :
         raise dr2xml_error("No end_field_def for %s in %s"%(cmv.label,table))
         return
-    if table == "6hrLev" and alias != lset["ping_variables_prefix"]+"ps" :
+    #if table == "6hrLev" and alias != lset["ping_variables_prefix"]+"ps" :
+    if cmv.spatial_shp[0:4]=='XY-A':
         # create a field_def entry for surface pressure 
-        sv_psol=get_simplevar(dq,"ps","6hrLev")
+        sv_psol=get_simplevar(dq,"ps",table)
         create_xios_aux_elmts_defs(sv_psol,lset["ping_variables_prefix"]+"ps",table,lset,sset,end_field_defs,
                           field_defs,axis_defs,grid_defs,domain_defs,dummies,context,target_hgrid_id,pingvars)
-        # Add 
-        pass
     #
     for shape in end_field_defs :
         if shape :
@@ -1014,15 +1001,16 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
             out.write('<field_group grid_ref="%s">\n'%shape)
         for entry in end_field_defs[shape] : out.write(entry)
         if shape : out.write('</field_group >\n')
-    if table == "6hrLev" :
+    #if table == "6hrLev" :
+    if cmv.spatial_shp[0:4]=='XY-A':
         # add entries for auxilliary variables : ap, ap_bnds, b, b_bnds
         names={"ap": "vertical coordinate formula term: ap(k)",
                "ap_bnds": "vertical coordinate formula term: ap(k+1/2)",
                "b": "vertical coordinate formula term: b(k)",
                "b_bnds" : "vertical coordinate formula term: b(k+1/2)"  }
         for tab in names :
-            out.write('\t<field field_ref="%s%s" long_name="%s" operation="once" prec="8" />\n'%\
-                      (lset["ping_variables_prefix"],tab,names[tab]))
+            out.write('\t<field field_ref="%s%s" name="%s" long_name="%s" operation="once" prec="8" />\n'%\
+                      (lset["ping_variables_prefix"],tab,tab,names[tab]))
     out.write('</file>\n\n')
 
  # mpmoine_last_modif:wrv: ajout de l'argument num_type
@@ -1424,7 +1412,7 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfile=No
         svars_full_list=[]
         for svl in svars_per_table.values(): svars_full_list.extend(svl)
         # mpmoine_merge_dev2_v0.12:generate_file_defs: on recupere maintenant non seulement les union_axis_defs mais aussi les union_grid_defs
-        # SS : les dictionnaires spécifiques pour les unions d'axes et de grille, 
+        # SS : les dictionnaires specifiques pour les unions d'axes et de grille, 
         # sont supprimé et leur contenu va dans les dicos generaux
         #(union_axis_defs,union_grid_defs)=
         #DEBUG_ZOOM_MPM ajout argument ping_refs + deplacement ici, apres lecture du ping, de l'appel a create_xios_axis_and_grids_for_plevs_unions
