@@ -1161,9 +1161,9 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
                     grid_id=create_grid_def(grid_defs,axis_key,alias_ping,context_index,table)
 		    #
                     # alias_sample for a field which is time-sampled before vertical interpolation
-	            # <field id="CMIP6_hus_sampled_3h" field_ref="CMIP6_hus" operation="instant" freq_op="3h" > @CMIP6_hus</field>
+	            # <field id="CMIP6_hus_sampled_3h" field_ref="CMIP6_hus" operation="instant" freq_op="3h" expr="@CMIP6_hus"/>
                     alias_sample=alias_ping+"_sampled_"+vert_freq # e.g.  CMIP6_zg_sampled_3h
-                    field_defs[alias_sample]='<field id="%-25s field_ref="%-25s operation="instant" freq_op="%-10s expr="@%s />'\
+                    field_defs[alias_sample]='<field id="%-25s field_ref="%-25s operation="instant" freq_op="%-10s expr="@%s" />'\
                         %(alias_sample+'"',alias_ping+'"',vert_freq+'"',alias_ping)
 
                     # Construct a field def for the re-mapped variable
