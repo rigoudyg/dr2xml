@@ -136,7 +136,7 @@ example_lab_and_model_settings={
                       'LS3MIP','LUMIP','OMIP','PMIP','RFMIP','ScenarioMIP','CORDEX','SIMIP'},
 
     # Max variable priority level to be output (you may set 3 when creating ping_files while
-    # being more restrictive at run time)
+    # being more restrictive at run time); a value in simulation_settings may override this one
     'max_priority' : 1,
     'tierMax'      : 1,
 
@@ -147,7 +147,12 @@ example_lab_and_model_settings={
     # We account for a list of variables which the lab does not want to produce , 
     # Names must match DR MIPvarnames (and **NOT** CMOR standard_names)
     # excluded_vars_file="../../cnrm/non_published_variables"
-    "excluded_vars":[],
+    "excluded_vars" : ['pfull', 'phalf', "zfull" ], # because we have a pressure based hydrid coordinate,
+                                                    # and no fixed height levels 
+    #
+    # For debugging purpose, if next list has members, this has precedence over 'excluded_vars'
+    #"included_vars" : [ 'ccb' ],
+    #
     "excluded_spshapes": ["XYA-na","XYG-na", # GreenLand and Antarctic grids we do not want to produce
                           "na-A", # RFMIP.OfflineRad : rld, rlu, rsd, rsu in table Efx ?????
                           "Y-P19","Y-P39", "Y-A","Y-na" # Not yet handled by dr2xml
@@ -264,6 +269,7 @@ example_simulation_settings={
     #"contact"        : "", set it only if it is specific to the simualtion
     #"project"        : "CMIP6",  #CMIP6 is the default
 
+    #'max_priority' : 1,  # a simulation may be run with a max_priority which override the one in lab_settings
 
     # MIPs specifying the experiment. For historical, it is CMIP
     # itself In a few cases it may be appropriate to include multiple
@@ -515,9 +521,13 @@ def select_CMORvars_for_lab(lset, sset, year=None,printout=False):
     # From Request links to CMOR vars + grid
     #miprl_ids=[ rl.uid for rl in rls ]
     #miprl_vars=sc.varsByRql(miprl_ids, pmax=lset['max_priority'])
+    if 'max_priority' in sset :
+        pmax=sset['max_priority']
+    else :
+        pmax=lset['max_priority']
     miprl_vars_grids=[]
     for rl in rls :
-        rl_vars=sc.varsByRql([rl.uid], pmax=lset['max_priority'])
+        rl_vars=sc.varsByRql([rl.uid], pmax=pmax)
         for v in rl_vars :
             # The requested grid is given by the RequestLink except if spatial shape matches S-*
             gr=rl.grid
@@ -532,18 +542,22 @@ def select_CMORvars_for_lab(lset, sset, year=None,printout=False):
     #
     inctab=lset.get("included_tables",[])
     exctab=lset.get("excluded_tables",[])
+    incvars=lset.get('included_vars',[])
+    excvars=lset.get('excluded_vars',[])
     filtered_vars=[]
     for (v,g) in miprl_vars_grids : 
         cmvar=dq.inx.uid[v]
         ttable=dq.inx.uid[cmvar.mtid]
         mipvar=dq.inx.uid[cmvar.vid]
-        if mipvar.label not in lset.get('excluded_vars',[]) and \
+        if ((len(incvars) == 0 and mipvar.label not in excvars) or\
+            (len(incvars) > 0 and mipvar.label in incvars))\
+            and \
            ((len(inctab)>0 and ttable.label in inctab) or \
             (len(inctab)==0 and ttable.label not in exctab)):
             filtered_vars.append((v,g))
             #print "for var %s, ttable=%s"%(cmvar.label,ttable.label)
     if printout :
-        print 'Number once filtered by excluded vars and tables and spatial shapes is : %s'%len(filtered_vars)
+        print 'Number once filtered by excluded/included vars and tables and spatial shapes is : %s'%len(filtered_vars)
 
     # Filter the list of grids requested for each variable based on lab policy
     d=dict()
@@ -855,7 +869,7 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
     # Write XIOS file node:
     # including global CMOR file attributes
     #--------------------------------------------------------------------
-    out.write(' <file name="%s" '%filename)
+    out.write(' <file id="%s_%s" name="%s" '%(cmv.label,table,filename))
     out.write(' output_freq="%s" '%cmipFreq2xiosFreq[cmv.frequency])
     out.write(' append="true" ')
     out.write(' output_level="%d" '%lset.get("output_level",10))
@@ -873,6 +887,7 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
         lastyear=None
         if cmv.cmvar is not None :
             lastyear=endyear_for_CMORvar(dq,cmv.cmvar,expname,year,lset)
+        #print "lastyear=",lastyear," enddate=",enddate
         if lastyear is None or lastyear >= int(enddate[0:4]) :
             # Use run end date as the latest possible date
             # enddate must be 20140101 , rather than 20131231
@@ -1148,7 +1163,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
                     # alias_sample for a field which is time-sampled before vertical interpolation
 	            # <field id="CMIP6_hus_sampled_3h" field_ref="CMIP6_hus" operation="instant" freq_op="3h" > @CMIP6_hus</field>
                     alias_sample=alias_ping+"_sampled_"+vert_freq # e.g.  CMIP6_zg_sampled_3h
-                    field_defs[alias_sample]='<field id="%-25s field_ref="%-25s operation="instant" freq_op="%-10s> @%s</field>'\
+                    field_defs[alias_sample]='<field id="%-25s field_ref="%-25s operation="instant" freq_op="%-10s expr="@%s />'\
                         %(alias_sample+'"',alias_ping+'"',vert_freq+'"',alias_ping)
 
                     # Construct a field def for the re-mapped variable
@@ -1255,7 +1270,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
     # TBD: idealement if faudrait recuperer le type attendu de la DR ou des tables CMOR
     # TBD : implement DR recommendation for cell_method : The syntax is to append, in brackets, 'interval: *amount* *units*', for example 'area: time: mean (interval: 1 hr)'. The units must be valid UDUNITS, e.g. day or hr.
     rep+=' cell_methods="%s" cell_methods_mode="overwrite"'% sv.cell_methods
-    rep+='>\n\t@%s\n'%alias_with_operation
+    rep+='\n\texpr="@%s">\n'%alias_with_operation
     # Create field_def for alias_with_operation
     field_defs[alias_with_operation]='<field id="%-25s field_ref="%-25s operation="%-10s/>'\
                             %(alias_with_operation+'"',last_alias+'"',operation+'"')
@@ -2509,6 +2524,7 @@ def cfsites_input_filedef() :
     Returns a file definition for defining a COSP site grid by reading a field named 
     'cfsites_grid_field' in a file named 'cfsites_grid.nc'
     """
+    #rep='<file id="%s" name="%s" mode="read" >\n'%\
     rep='<file id="%s" name="%s" mode="read" output_freq="1y" >\n'%\
         (cfsites_grid_file_id,cfsites_grid_file_name)+\
       '\t<field id="%s" operation="instant" grid_ref="%s" />\n'%(cfsites_grid_field_id,cfsites_grid_id)+\
