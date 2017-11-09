@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x
+#set -x
 #
 # Create XIOS file_defs for each context described in file in arg3 ,
 # for the simulation described by file in arg4
@@ -65,7 +65,7 @@ cat >create_file_defs.tmp.py  <<-EOF
 	EOF
 
 
-[[ $(uname -n) == beaufix* ]] && module load python/2.7.5-2
+[[ $(uname -n) == beaufix* ]] && module load python/2.7.5-2 2>/dev/null
 python create_file_defs.tmp.py
 ret=$?
 rm create_file_defs.tmp.py simulation_settings_tmp.py lab_and_model_settings_tmp.py

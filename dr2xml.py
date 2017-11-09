@@ -81,8 +81,6 @@ from Xparse import init_context, id2grid
 # A auxilliary tables
 from table2freq import table2freq, table2splitfreq, cmipFreq2xiosFreq
 
-from dr2cmip6_expname import dr2cmip6_expname
-
 print_DR_errors=True
 print_multiple_grids=False
 
@@ -116,9 +114,24 @@ example_lab_and_model_settings={
 
     'institution_id': "CNRM-CERFACS", # institution should be read in CMIP6_CV, if up-to-date
 
-    # The description of lab models, in CMIP6 CV wording. Details can be overriden in simulation_settings
+    # The description of lab models default source_type, in CMIP6 CV wording.
+    # The value can be overriden in simulation_settings. Or one can use entry 'configuration'
+    # (see below)
     'source_types' : { "CNRM-CM6-1" : "AOGCM AER", "CNRM-CM6-1-HR" : "AOGCM AER", 
                        "CNRM-ESM2-1": "AOGCM BGC AER CHEM"  , "CNRM-ESM2-1-HR": "AOGCM BGC AER" },
+
+    # Optional : 'configurations' are shortcuts for various couples (model, source_type)
+    'configurations' : {
+        "AGCM":   ("CNRM-CM6-1"   ,"AGCM"),
+        "AESM":   ("CNRM-ESM2-1"  ,"AGCM BGC AER CHEM"),
+        "AOGCM":  ("CNRM-CM6-1"   ,"AOGCM"),
+        "AOESM":  ("CNRM-ESM2-1"  ,"AOGCM BGC AER CHEM"),
+        "AGCMHR": ("CNRM-CM6-1-HR","AGCM"),
+        "AOGCMHR":("CNRM-CM6-1-HR","AOGCM"),
+        "LGCM":   ("CNRM-CM6-1"   ,"LAND"),
+        "LESM":   ("CNRM-ESM2-1"  ,"LAND BGC"),
+        "OGCM":   ("CNRM-CM6-1"   ,"OGCM"),
+        "OESM":   ("CNRM-ESM2-1"  ,"OGCM BGC") },
 
     #'source'         : "CNRM-CM6-1", # Useful only if CMIP6_CV is not up to date
     'references'    :  "A character string containing a list of published or web-based "+\
@@ -132,8 +145,15 @@ example_lab_and_model_settings={
     # Note : a MIPs set limited to {'C4MIP'} leads to a number of tables and 
     # variables which is manageable for eye inspection
     'mips_for_test': {'C4MIP', 'SIMIP', 'OMIP', 'CFMIP', 'RFMIP'} , 
-    'mips' : {'AerChemMIP','C4MIP','CFMIP','DAMIP', 'FAFMIP' , 'GeoMIP','GMMIP','ISMIP6',\
-                      'LS3MIP','LUMIP','OMIP','PMIP','RFMIP','ScenarioMIP','CORDEX','SIMIP'},
+    'mips' : {
+        "LR" : {'AerChemMIP','C4MIP','CFMIP','DAMIP', 'FAFMIP' , 'GeoMIP','GMMIP','ISMIP6',\
+                      'LS3MIP','LUMIP','OMIP','PMIP','RFMIP','ScenarioMIP','CORDEX','SIMIP','CMIP6', 'CMIP'},
+        "HR" : {'OMIP','ScenarioMIP','CORDEX','CMIP6', 'CMIP'},
+        },
+
+    # A character string containing additional information about the models. Will be complemented
+    # with the experiment's specific comment string
+    "comment"              : ""
 
     # Max variable priority level to be output (you may set 3 when creating ping_files while
     # being more restrictive at run time); a value in simulation_settings may override this one
@@ -271,12 +291,6 @@ example_simulation_settings={
 
     #'max_priority' : 1,  # a simulation may be run with a max_priority which override the one in lab_settings
 
-    # MIPs specifying the experiment. For historical, it is CMIP
-    # itself In a few cases it may be appropriate to include multiple
-    # activities in the activity_id (separated by single spaces).  
-    # An example of this is 'LUMIP AerChemMIP' for one of the land-use change experiments.
-    "activity_id"      : "CMIP", # examples : "PMIP", 'LS3MIP LUMIP'; defaults to "CMIP"
-    
     # It is recommended that some description be included to help
     # identify major differences among variants, but care should be
     # taken to record correct information.  dr2xml will add in all cases:
@@ -290,9 +304,7 @@ example_simulation_settings={
     "physics_index"        : 1, # Value may be omitted if = 1
     "forcing_index"        : 3, # Value may be omitted if = 1
     #
-    # All about the parent experiment and branching scheme
-    "parent_experiment_id" : "piControl", # omit or set to 'no parent' if not applicable
-                                          # (remaining parent attributes will then be disregarded)
+    # All about the branching scheme from parent
     "branch_method"        : "standard", # default value='standard' meaning ~ "select a start date" 
                                         # (this is not necessarily the parent start date)
     'parent_time_ref_year' : 1850,      # MUST BE CONSISTENT WITH THE TIME UNITS OF YOUR MODEL(S) !!!
@@ -309,13 +321,16 @@ example_simulation_settings={
     #'parent_variant_label' :""  #Default to 'same variant as child'. Other cases should be exceptional
     #"parent_mip_era"       : 'CMIP5'   # only in special cases (as e.g. PMIP warm 
                                         # start from CMIP5/PMIP3 experiment)
-    #'parent_activity_id'   : 'CMIP'    # only in special cases, defaults to CMIP
     #'parent_source_id'     : 'CNRM-CM5.1' # only in special cases, where parent model 
                                            # is not the same model
     #
     "sub_experiment_id"    : "None", # Optional, default is 'none'; example : s1960. 
     "sub_experiment"       : "None", # Optional, default in 'none'
     "history"              : "None", #Used when a simulation is re-run, an output file is modified ...
+
+    # A character string containing additional information about this simulation
+    "comment"              : ""
+
     # A per-variable dict of comments which are specific to this simulation. It will replace  
     # the all-simulation comment
     'comments'     : {
@@ -467,16 +482,16 @@ def select_CMORvars_for_lab(lset, sset, year=None,printout=False):
     # Set sizes for lab settings, if available (or use CNRM-CM6-1 defaults)
     mcfg = collections.namedtuple( 'mcfg', \
                 ['nho','nlo','nha','nla','nlas','nls','nh1'] )
-    source=sset["source_id"]
+    source,source_type=get_source_id_and_type(sset,lset)
     grid_choice=lset["grid_choice"][source]
     sizes=lset["sizes"][grid_choice]
     #sizes=lset.get("sizes",[259200,60,64800,40,20,5,100])
     sc.mcfg = mcfg._make( sizes )._asdict()
     #
-    rls_for_mips=sc.getRequestLinkByMip(lset['mips'])
+    rls_for_mips=sc.getRequestLinkByMip(lset['mips'][grid_choice])
     if printout :
         print "Number of Request Links which apply to MIPS",
-        print lset['mips']," is: ", len(rls_for_mips)
+        print lset['mips'][grid_choice]," is: ", len(rls_for_mips)
     #
     excluded_rls=[]
     for rl in rls_for_mips :
@@ -511,7 +526,7 @@ def select_CMORvars_for_lab(lset, sset, year=None,printout=False):
         rls=filtered_rls
         if printout :
             print "Number of Request Links which apply to experiment ", \
-                experiment_id,"and MIPs", lset['mips'] ," is: ",len(rls)
+                experiment_id,"and MIPs", lset['mips'][grid_choice] ," is: ",len(rls)
         #print "Request links that apply :"+`[ rl.label for rl in filtered_rls ]`
     else :
         rls=rls_for_mips
@@ -590,7 +605,7 @@ def select_CMORvars_for_lab(lset, sset, year=None,printout=False):
         svar = simple_CMORvar()
         cmvar = dq.inx.uid[v]
         complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues)
-        svar.Priority=analyze_priority(cmvar,lset['mips'])
+        svar.Priority=analyze_priority(cmvar,lset['mips'][grid_choice])
         svar.grids=d[v]
         simplified_vars.append(svar)
     print '\nNumber of simplified vars is :',len(simplified_vars)
@@ -770,7 +785,7 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
     #--------------------------------------------------------------------
     #
     project=sset.get('project',"CMIP6")
-    source_id=sset['source_id']
+    source_id,source_type=get_source_id_and_type(sset,lset)
     experiment_id=sset['experiment_id']
     institution_id=lset['institution_id']
     #
@@ -788,8 +803,6 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
                          "Users can find more comprehensive and up-to-date documentation via the further_info_url global attribute."
     #
     # WIP Draft 14 july 2016
-    activity_id=sset.get('activity_id','CMIP')
-    # mpmoine_last_modif:write_xios_file_def: mip_era n'est plus toujours 'CMIP6' (par ex. 'PRIMAVERA')
     mip_era=cmv.mip_era
     #
     # WIP doc v 6.2.0 - dec 2016 
@@ -823,21 +836,18 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
     # Set NetCDF output file name according to the DRS
     #--------------------------------------------------------------------
     #
-    # mpmoine : les noms d'expe dans la DR ne sont pas les meme que dans le CV CMIP6
     with open(cvspath+project+"_experiment_id.json","r") as json_fp :
         CMIP6_experiments=json.loads(json_fp.read())['experiment_id']
-        if CMIP6_experiments.has_key(sset['experiment_id']):
-            expname=sset['experiment_id']
-        else:
-            # mpmoine_last_modif:write_xios_file_def: provisoire, laisser passer cette erreur tant que le
-            # mpmoine_last_modif:write_xios_file_def: CV_CMIP6 et celui de la DR ne sont pas concordants
+        if not CMIP6_experiments.has_key(sset['experiment_id']):
             dr2xml_error("Issue getting experiment description in CMIP6 CV for %20s"+\
-                         " => Search for experiment name correspondance from DR to CMIP6 CV."\
-                               %sset['experiment_id'])
-            expname=dr2cmip6_expname[sset['experiment_id']]
+                         %sset['experiment_id'])
+        expname=sset['experiment_id']
         exp_entry=CMIP6_experiments[expname]
         experiment=exp_entry['experiment']
         description=exp_entry['description']
+        activity_id=exp_entry['activity_id']
+        parent_activity_id=exp_entry['parent_activity_id']
+        parent_experiment_id=exp_entry['parent_experiment_id']
     # 
     date_range="%start_date%-%end_date%" # XIOS syntax
     operation,detect_missing = analyze_cell_time_method(cmv.cell_methods,cmv.label,table,printout=False)
@@ -937,7 +947,10 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
     wr(out,'further_info_url',further_info_url)
     #
     wr(out,'grid',grid_description) ; wr(out,'grid_label',grid_label) ;
-    wr(out,'nominal_resolution',grid_resolution)    
+    wr(out,'nominal_resolution',grid_resolution)
+    comment=lset.get('comment','')+" "+sset.get('comment','')
+    comment=comment.replace(">","").replace("<","")
+    wr(out,'comment',comment) 
     wr(out,'history',sset,default='none') 
     wr(out,"initialization_index",initialization_index,num_type="int")
     wr(out,"institution_id",institution_id)
@@ -962,13 +975,10 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
     wr(out,"license",license)
     wr(out,'mip_era',mip_era)
     #
-    # mpmoine_cmor_update:write_xios_file_def: changement des defaults values pour les parent_<XXX>: default en dur remplace par la valeur pour <XXX> 
-    # mpmoine_cmor_update:write_xios_file_def: et utilisation de l'attribut optionnel 'default' de la fonction 'wr' plutot que sset.get avec une default
-    parent_experiment_id=sset.get('parent_experiment_id',False)
     if parent_experiment_id and parent_experiment_id != 'no parent':
         wr(out,'parent_experiment_id',parent_experiment_id)
         wr(out,'parent_mip_era',sset,default=mip_era)
-        wr(out,'parent_activity_id',sset,default=activity_id)
+        wr(out,'parent_activity_id',parent_activity_id)
         wr(out,'parent_source_id',sset,default=source_id)
         # TBD : syntaxe XIOS pour designer le time units de la simu courante
         parent_time_ref_year=sset.get('parent_time_ref_year',"1850")
@@ -1010,16 +1020,6 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
                                "%s, nor in lset"%(source_id,cvspath)))
     wr(out,'source',source) 
     wr(out,'source_id',source_id)
-    if 'source_type' in sset :
-        source_type=sset['source_type']
-    else:
-        if 'source_type' in lset :
-            source_type=lset['source_type']
-        else:
-            if 'source_types' in lset :
-                source_type=lset['source_types'][source_id] 
-            else:
-                raise dr2xml_error("Fatal: No source-type found - Check inputs")
     if type(source_type)==type([]) :
         source_type=reduce(lambda x,y : x+" "+y, source_type)
     wr(out,'source_type',source_type)
@@ -1260,7 +1260,8 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
     #TBS# if any (sd.is_zoom_of for sd in sv.sdims.values()):
     alias_with_operation=last_alias+"_"+operation
     rep='  <field field_ref="%s" name="%s" '% (alias_with_operation,sv.label)
-    rep+=' freq_op="%s"'% cmipFreq2xiosFreq[sv.frequency]
+    if operation != 'once' :
+        rep+=' freq_op="%s"'% cmipFreq2xiosFreq[sv.frequency]
     # No more need for specifying an operation at this level, because there is only 
     # one field out of the explicit time operation below
     #rep+=' operation="%s" detect_missing_value="%s" default_value="1.e+20" prec="4"'% \
@@ -1270,7 +1271,10 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
     # TBD: idealement if faudrait recuperer le type attendu de la DR ou des tables CMOR
     # TBD : implement DR recommendation for cell_method : The syntax is to append, in brackets, 'interval: *amount* *units*', for example 'area: time: mean (interval: 1 hr)'. The units must be valid UDUNITS, e.g. day or hr.
     rep+=' cell_methods="%s" cell_methods_mode="overwrite"'% sv.cell_methods
-    rep+='\n\texpr="@%s">\n'%alias_with_operation
+    if operation != 'once' :
+        rep+='\n\texpr="@%s">\n'%alias_with_operation
+    else:
+        rep+='\n\texpr="%s">\n'%alias_with_operation
     # Create field_def for alias_with_operation
     field_defs[alias_with_operation]='<field id="%-25s field_ref="%-25s operation="%-10s/>'\
                             %(alias_with_operation+'"',last_alias+'"',operation+'"')
@@ -1321,7 +1325,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
 def gather_AllSimpleVars(lset,sset,year=False,printout=False):
     mip_vars_list=select_CMORvars_for_lab(lset,sset,year,printout=printout)
     if lset['listof_home_vars']:
-        process_homeVars(lset,mip_vars_list,dq,expid,printout)
+        process_homeVars(lset,mip_vars_list,dq,printout=printout)
 
     else: print "Info: No HOMEvars list provided."
     return mip_vars_list
@@ -2624,6 +2628,26 @@ def endyear_for_CMORvar(dq,cv,expt,year,lset):
     return larger
 
 
+def get_source_id_and_type(sset,lset):
+    if "configuration" in sset and "configurations" in lset :
+        if sset["configuration"] in lset["configurations"]: 
+            source_id,source_type=lset["configurations"][sset["configuration"]]
+        else:
+            dr2xml_error("configuration %s is not known (allowed values are :)"%\
+                         sset["configuration"]+`lset["configurations"]`)
+    else:
+        source_id=sset['source_id']
+        if 'source_type' in sset :
+            source_type=sset['source_type']
+        else:
+            if 'source_type' in lset :
+                source_type=lset['source_type']
+            else:
+                if 'source_types' in lset :
+                    source_type=lset['source_types'][source_id] 
+                else:
+                    raise dr2xml_error("Fatal: No source-type found - Check inputs")
+    return source_id,source_type
 
 class dr2xml_error(Exception):
     def __init__(self, valeur):
