@@ -51,7 +51,7 @@ import dreq
 # End of pre-requisites
 ####################################
 
-version="0.21"
+version="0.22+"
 print "* dr2xml version: ", version
 
 conventions="CF-1.7 CMIP-6.2" 
@@ -127,7 +127,9 @@ example_lab_and_model_settings={
         "AOGCM":  ("CNRM-CM6-1"   ,"AOGCM"),
         "AOESM":  ("CNRM-ESM2-1"  ,"AOGCM BGC AER CHEM"),
         "AGCMHR": ("CNRM-CM6-1-HR","AGCM"),
+        "AESMHR": ("CNRM-ESM2-1"  ,"AGCM BGC AER"),
         "AOGCMHR":("CNRM-CM6-1-HR","AOGCM"),
+        "AOESMHR":("CNRM-ESM2-1"  ,"AOGCM BGC AER"),
         "LGCM":   ("CNRM-CM6-1"   ,"LAND"),
         "LESM":   ("CNRM-ESM2-1"  ,"LAND BGC"),
         "OGCM":   ("CNRM-CM6-1"   ,"OGCM"),
@@ -153,7 +155,7 @@ example_lab_and_model_settings={
 
     # A character string containing additional information about the models. Will be complemented
     # with the experiment's specific comment string
-    "comment"              : ""
+    "comment"              : "",
 
     # Max variable priority level to be output (you may set 3 when creating ping_files while
     # being more restrictive at run time); a value in simulation_settings may override this one
@@ -277,15 +279,22 @@ example_simulation_settings={
     # Warning : some lines are commented out in this example but should be 
     # un-commented in some cases. See comments
 
-    'source_id'      : "CNRM-CM6-1", 
-    #'source_type'    : "OGCM" # If source-type value from lab settings does not fit, you may change it here.
+    # DR experiment name to process. See http://clipc-services.ceda.ac.uk/dreq/index/experiment.html
+    "experiment_id"  : "historical",
+
+    # If there is no configuration in lab_settings which matches you case, please rather
+    # use next or next two entries : source_id and, if needed, source_type
+    'configuration'   : 'AOGCM',
+    
+    #'source_id'      : "CNRM-CM6-1", 
+    #'source_type'    : "OGCM" ,# If the default source-type value for your source (from lab settings)
+    # does not fit, you may change it here.
     # "This should describe the model most directly responsible for the
     # output.  Sometimes it is appropriate to list two (or more) model types here, among
     # AER, AGCM, AOGCM, BGC, CHEM, ISM, LAND, OGCM, RAD, SLAB "
     # e.g. amip , run with CNRM-CM6-1, should quote "AGCM AER"
     # Also see note 14 of https://docs.google.com/document/d/1h0r8RZr_f3-8egBMMh7aqLwy3snpD6_MrDz1q8n5XUk/edit
 
-    "experiment_id"  : "historical",
     #"contact"        : "", set it only if it is specific to the simualtion
     #"project"        : "CMIP6",  #CMIP6 is the default
 
@@ -329,12 +338,12 @@ example_simulation_settings={
     "history"              : "None", #Used when a simulation is re-run, an output file is modified ...
 
     # A character string containing additional information about this simulation
-    "comment"              : ""
+    "comment"              : "",
 
     # A per-variable dict of comments which are specific to this simulation. It will replace  
     # the all-simulation comment
     'comments'     : {
-        'tas' : 'this is a dummy comment, placeholder for describing a special, simulation dependent scheme for a given variable',
+        'tas' : 'this is a dummy comment, placeholder for describing a special, simulation dependent, scheme for a given variable',
         }
     }
 
@@ -654,9 +663,10 @@ def wr(out,key,dic_or_val=None,num_type="string",default=None) :
             print 'error in wr,  no value provided for %s'%key
     if val :
         if num_type == "string" :
-            val=val.replace(">","").replace("<","")
-        out.write('  <variable name="%s"  type="%s" > %s '%(key,num_type,val))
-        out.write('  </variable>\n')
+            val=val.replace(">","").replace("<","").strip()
+        if num_type != "string" or len(val) > 0 :
+            out.write('  <variable name="%s"  type="%s" > %s '%(key,num_type,val))
+            out.write('  </variable>\n')
 
 def freq2datefmt(in_freq,operation,lset):
     # WIP doc v6.2.3 - Apr. 2017: <time_range> format is frequency-dependant 
@@ -808,8 +818,6 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
     # WIP doc v 6.2.0 - dec 2016 
     # <variable_id>_<table_id>_<source_id>_<experiment_id >_<member_id>_<grid_label>[_<time_range>].nc
     member_id=variant_label
-    # mpmoine_cmor_update:write_xios_file_def: CMOR3.2.2 impose 'None' (et non 'none') comme default value de sub_experiment_id
-    # mpmoine_cmor_update:write_xios_file_def: CMOR3.2.3 impose 'none'(et non 'None' !) comme default value de sub_experiment_id
     sub_experiment_id=sset.get('sub_experiment_id','none')
     if sub_experiment_id != 'none': member_id = sub_experiment_id+"-"+member_id
     #
@@ -830,17 +838,11 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
     if table in [ 'AERMonZ',' EmonZ', 'EdayZ' ] : grid_label+="z"
     if "Ant" in table : grid_label+="a"
     if "Gre" in table : grid_label+="g"
-    # mpmoine_TBD : change grid_label depending on shape (sites, transects)
-    #
-    #--------------------------------------------------------------------
-    # Set NetCDF output file name according to the DRS
-    #--------------------------------------------------------------------
     #
     with open(cvspath+project+"_experiment_id.json","r") as json_fp :
         CMIP6_experiments=json.loads(json_fp.read())['experiment_id']
         if not CMIP6_experiments.has_key(sset['experiment_id']):
-            dr2xml_error("Issue getting experiment description in CMIP6 CV for %20s"+\
-                         %sset['experiment_id'])
+            dr2xml_error("Issue getting experiment description in CMIP6 CV for %20s"%sset['experiment_id'])
         expname=sset['experiment_id']
         exp_entry=CMIP6_experiments[expname]
         experiment=exp_entry['experiment']
@@ -848,7 +850,28 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
         activity_id=exp_entry['activity_id']
         parent_activity_id=exp_entry['parent_activity_id']
         parent_experiment_id=exp_entry['parent_experiment_id']
-    # 
+        required_components=exp_entry['required_model_components']#.split(" ")
+        allowed_components=exp_entry['additional_allowed_model_components']#.split(" ")
+    #
+    # Check model components re. CV components
+    actual_components=source_type.split(" ")
+    ok=True
+    for c in required_components :
+        if c not in actual_components :
+            ok=False
+            print "Model component %s is required by CMIP6 CV and not present (%s)"%\
+                (c,actual_components)
+    for c in actual_components :
+        if c not in allowed_components and c not in required_components :
+            ok=False
+            print "Model component %s is present but not required nor allowed (%s)"%\
+                (c,allowed_components)
+    if not ok : raise dr2xml_error("Issue with model components")
+    #
+    #--------------------------------------------------------------------
+    # Set NetCDF output file name according to the DRS
+    #--------------------------------------------------------------------
+    #
     date_range="%start_date%-%end_date%" # XIOS syntax
     operation,detect_missing = analyze_cell_time_method(cmv.cell_methods,cmv.label,table,printout=False)
     date_format,offset_begin,offset_end=freq2datefmt(cmv.frequency,operation,lset)
@@ -866,7 +889,7 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
             (prefix,cmv.label,table,source_id,expname,
              member_id,grid_label,date_range,suffix)
     #
-    further_info_url="http://furtherinfo.es-doc.org/%s.%s.%s.%s.%s.%s"%(
+    further_info_url="https://furtherinfo.es-doc.org/%s.%s.%s.%s.%s.%s"%(
         mip_era,institution_id,source_id,expname,
         sub_experiment_id,variant_label)
     #
@@ -879,7 +902,7 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
     # Write XIOS file node:
     # including global CMOR file attributes
     #--------------------------------------------------------------------
-    out.write(' <file id="%s_%s" name="%s" '%(cmv.label,table,filename))
+    out.write(' <file id="%s_%s_%s" name="%s" '%(cmv.label,table,grid_label,filename))
     out.write(' output_freq="%s" '%cmipFreq2xiosFreq[cmv.frequency])
     out.write(' append="true" ')
     out.write(' output_level="%d" '%lset.get("output_level",10))
@@ -923,7 +946,7 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
     #            (lset['source_id'],sset['experiment_id'],sset.get('project',"CMIP6"))) 
     out.write(' >\n')
     #
-    wr(out,'activity_id',activity_id)
+    wr(out,'activity_id',reduce(lambda x,y : x+" "+y, activity_id))
     #
     if contact and contact is not "" : wr(out,'contact',contact) 
     wr(out,'data_specs_version',dq.version) 
@@ -949,7 +972,6 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
     wr(out,'grid',grid_description) ; wr(out,'grid_label',grid_label) ;
     wr(out,'nominal_resolution',grid_resolution)
     comment=lset.get('comment','')+" "+sset.get('comment','')
-    comment=comment.replace(">","").replace("<","")
     wr(out,'comment',comment) 
     wr(out,'history',sset,default='none') 
     wr(out,"initialization_index",initialization_index,num_type="int")
@@ -976,9 +998,9 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
     wr(out,'mip_era',mip_era)
     #
     if parent_experiment_id and parent_experiment_id != 'no parent':
-        wr(out,'parent_experiment_id',parent_experiment_id)
+        wr(out,'parent_experiment_id',reduce(lambda x,y : x+" "+y, parent_experiment_id))
         wr(out,'parent_mip_era',sset,default=mip_era)
-        wr(out,'parent_activity_id',parent_activity_id)
+        wr(out,'parent_activity_id',reduce(lambda x,y : x+" "+y, parent_activity_id))
         wr(out,'parent_source_id',sset,default=source_id)
         # TBD : syntaxe XIOS pour designer le time units de la simu courante
         parent_time_ref_year=sset.get('parent_time_ref_year',"1850")
@@ -1271,10 +1293,8 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
     # TBD: idealement if faudrait recuperer le type attendu de la DR ou des tables CMOR
     # TBD : implement DR recommendation for cell_method : The syntax is to append, in brackets, 'interval: *amount* *units*', for example 'area: time: mean (interval: 1 hr)'. The units must be valid UDUNITS, e.g. day or hr.
     rep+=' cell_methods="%s" cell_methods_mode="overwrite"'% sv.cell_methods
-    if operation != 'once' :
-        rep+='\n\texpr="@%s">\n'%alias_with_operation
-    else:
-        rep+='\n\texpr="%s">\n'%alias_with_operation
+    if operation != 'once' : rep+='\n\texpr="@%s"'%alias_with_operation
+    rep+='>\n'
     # Create field_def for alias_with_operation
     field_defs[alias_with_operation]='<field id="%-25s field_ref="%-25s operation="%-10s/>'\
                             %(alias_with_operation+'"',last_alias+'"',operation+'"')
@@ -1376,7 +1396,6 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfile=No
     # Parse XIOS settings file for the context
     #--------------------------------------------------------------------
     global context_index
-    # mpmoine_amelioration:generate_file_defs: ajout de l'argument 'path_parse' a la fonction init_context
     context_index=init_context(context,lset.get("path_to_parse","./"),printout=False)
     if context_index is None : sys.exit(1)
     #
@@ -1411,6 +1430,7 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfile=No
         #print 50*"_"
         if realm in svars_per_realm.keys():
             for svar in svars_per_realm[realm] :
+                excludedv=dict()
                 # exclusion de certaines spatial shapes (ex. Polar Stereograpic Antarctic/Groenland)
                 if svar.label not in lset['excluded_vars'] and \
                    svar.spatial_shp and \
@@ -1419,15 +1439,17 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfile=No
                         svars_per_table[svar.mipTable]=[]
                     svars_per_table[svar.mipTable].append(svar)
                 else:
-                    # mpmoine_future_modif:generate_file_defs: juste un peu plus de printout...
                     if printout:
-                        print "Warning: %20s in table %s"%(svar.label,svar.mipTable)+\
-                            " has been excluded because :",
-                        if svar.label in lset['excluded_vars']: print " it is in exclusion list /",
-                        if not svar.spatial_shp: print " it has no spatial shape /",
+                        reason="unknown reason"
+                        if svar.label in lset['excluded_vars']: reason= "They are in exclusion list "
+                        if not svar.spatial_shp: reason= "They have no spatial shape "
                         if svar.spatial_shp in lset["excluded_spshapes"]:
-                            print " it has an excluded spatial shape:", svar.spatial_shp,
-                        print
+                            reason="They have excluded spatial shape : %s"%svar.spatial_shp
+                        if reason not in excludedv : excludedv[reason]=[]
+                        excludedv[reason].append((svar.label,svar.mipTable))
+        if printout and len(excludedv.keys())>0:
+            print "The following pairs (variable,table) have been excluded for these reasons :"
+            for reason in excludedv : print "\t",reason,":",excludedv[reason]
     #      
     #--------------------------------------------------------------------
     # Add svars belonging to the orphan list
@@ -2640,13 +2662,10 @@ def get_source_id_and_type(sset,lset):
         if 'source_type' in sset :
             source_type=sset['source_type']
         else:
-            if 'source_type' in lset :
-                source_type=lset['source_type']
+            if 'source_types' in lset :
+                source_type=lset['source_types'][source_id] 
             else:
-                if 'source_types' in lset :
-                    source_type=lset['source_types'][source_id] 
-                else:
-                    raise dr2xml_error("Fatal: No source-type found - Check inputs")
+                raise dr2xml_error("Fatal: No source-type found - Check inputs")
     return source_id,source_type
 
 class dr2xml_error(Exception):
