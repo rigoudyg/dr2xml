@@ -8,9 +8,6 @@ from table2freq import table2freq
 #-from dr2xml import dr2xml_error
 
 # A class for unifying CMOR vars and home variables
-# mpmoine_last_modif:simple_CMORvar: ajout des attributs 'mip_era', 'missing' et 'dimids'
-# mpmoine_future_modif:simple_CMORvar: ajout de l'attribut 'label_without_psuffix' et suppresion de l'attribut dimids
-# mpmoine_correction:simple_CMORvar: ajout de l'attribut 'label_non_ambiguous' 
 class simple_CMORvar(object):
     def __init__(self):
         self.type           = False
@@ -41,10 +38,7 @@ class simple_CMORvar(object):
         self.missing        = 1.e+20
         self.cmvar          =None  # corresponding CMORvar, if any
 
-# mpmoine_future_modif: nouvelle classe simple_Dim
 # A class for unifying grid info coming from DR and extra_Tables
-# mpmoine_future_modif:simple_Dim: ajout de l'attribut 'is_zoom_of'
-# mpmoine_zoom_modif:simple_Dim: ajout de l'attribut 'zoom_label'
 #
 class simple_Dim(object):
     def __init__(self):
@@ -58,12 +52,9 @@ class simple_Dim(object):
         self.out_name     = False
         self.units        = False
         self.is_zoom_of   = False
-        # SS : ajout bounds pour distinguer le cas de couches de pression
         self.bounds       = False
-        # mpmoine_union_optim: simple_Dim: ajout de l'attribut 'is_union_for'
         self.is_union_for = []
 
-# mpmoine_future_modif: liste des suffixes de noms de variables reperant un ou plusieurs niveaux pression
 # List of multi and single pressure level suffixes for which we want the union/zoom axis mecanism turned on
 # For not using union/zoom, set 'use_union_zoom' to False in lab settings
 
@@ -78,14 +69,12 @@ single_plev_suffixes=set(["1000","200",      "500",      "700",      "850","100"
 ambiguous_mipvarnames=None
 
 # 2 dicts for processing home variables
-# mpmoine_last_modif: vars.py: spid2label et tmid2label ne sont plus utilises
 # 2 dicts and 1 list for processing extra variables
 dims2shape={}
 dim2dimid={}
 dr_single_levels=[]
 stdName2mipvarLabel={}
 
-# mpmoine_last_modif:read_homeVars_list: fonction modifiee pour accepter des extra_Tables
 def read_homeVars_list(hmv_file,expid,mips,dq,path_extra_tables=None):
     """
     A function to get HOME variables that are not planned in the CMIP6 DataRequest but 
@@ -132,7 +121,6 @@ def read_homeVars_list(hmv_file,expid,mips,dq,path_extra_tables=None):
             home_var.label_with_area=home_var.label
             if hmv_type=='perso':
                 home_var.mip_era='PERSO'
-                # mpmoine_future_modif:read_homeVars_list: valorisation de home_var.label_without_psuffix
                 home_var.label_without_psuffix=home_var.label
             if home_var.mip!="ANY":
                 if home_var.mip in mips:
@@ -153,7 +141,6 @@ def read_homeVars_list(hmv_file,expid,mips,dq,path_extra_tables=None):
     homevars.extend(extravars) 
     return homevars 
 
-# mpmoine_last_modif:read_extraTable: nouvelle fonction pour lire les extra_Tables
 def read_extraTable(path,table,dq,printout=False):
     """
     A function to get variables contained in an EXTRA Table that are is planned in the CMIP6 DataRequest but 
@@ -187,7 +174,6 @@ def read_extraTable(path,table,dq,printout=False):
         for g in dq.coll['grids'].items:
             dim2dimid[g.label]=g.uid
     #
-    # mpmoine_correction:read_extraTable: Solution de Martin Juckes du 04/05/2017 en utilisant cids necessaire a partir de la version 01.00.08 => plus besoin de la fonction 'cids2singlev'
     if not dr_single_levels:
         for struct in dq.coll['structure'].items:
             spshp = dq.inx.uid[ struct.spid ]
@@ -211,7 +197,6 @@ def read_extraTable(path,table,dq,printout=False):
     with open(json_table,"r") as jt:
         json_tdata=jt.read()
         tdata=json.loads(json_tdata)
-        # mpmoine_correction:read_extraTable: read_extraTable: ajout de precautions 'NOT-SET' pour certains attributs pour eviter les chaines vides qui font planter XIOS (">  <")
         for k,v in tdata["variable_entry"].iteritems(): 
             extra_var=simple_CMORvar()
             extra_var.type='extra'
@@ -264,9 +249,6 @@ def read_extraTable(path,table,dq,printout=False):
                 # mpmoine_note: on a "latitude|longitude" au lieu de "longitude|latitude"
                 print "Warning: spatial shape corresponding to ",drdims,"for variable",v["out_name"],\
                       "in Table",table," not found in DR."
-            # list of spatial dimension identifiers
-            # mpmoine_future_modif:read_extraTable: introduction de extra_var.sdims, ajout lecture des dimensions dans 
-            # mpmoine_future_modif:read_extraTable: une table de coordinates quand pas trouvees dans la DR
             dr_dimids=[]
             for d in all_dr_dims:
                 if dim2dimid.has_key(d):
@@ -292,8 +274,6 @@ def read_extraTable(path,table,dq,printout=False):
                     extra_var.sdims.update({extra_sdim.label:extra_sdim})
                     print "Info: dimid corresponding to ",d,"for variable",v["out_name"],\
                           "in Table",table," not found in DR => read it in extra coordinates Table: ", extra_sdim.stdname,extra_sdim.requested
-            # mpmoine_future_modif: read_extraTable: suppression de extra_var.dimids -> elargi avec extra_var.sdims
-            # mpmoine_future_modif:read_extraTable: on renseigne l'attribut label_without_psuffix (doit etre fait apres la valorisation de sdims)
             extra_var.label_without_psuffix=Remove_pSuffix(extra_var,multi_plev_suffixes,single_plev_suffixes,realms='atmos aerosol atmosChem')
                 
             extravars.append(extra_var)
@@ -302,7 +282,6 @@ def read_extraTable(path,table,dq,printout=False):
     return extravars 
 
 def get_SpatialAndTemporal_Shapes(cmvar,dq):
-    # mpmoine_last_modif:get_SpatialAndTemporal_Shapes: le try/except n'etait pas la bonne solution
     spatial_shape=False
     temporal_shape=False
     if cmvar.stid=="__struct_not_found_001__":
@@ -320,7 +299,6 @@ def get_SpatialAndTemporal_Shapes(cmvar,dq):
             print "Warning: temporal shape for ",cmvar.label," in table ",cmvar.mipTable," not found in DR."
     return [spatial_shape,temporal_shape]
 
-# mpmoine_last_modif: process_homeVars: argument supplementaire 'path_extra_tables' et expid au lieu de lset
 def process_homeVars(lset,sset,mip_vars_list,dq,expid=False,printout=False):
     printmore=False
     # Read HOME variables
@@ -390,7 +368,6 @@ def process_homeVars(lset,sset,mip_vars_list,dq,expid=False,printout=False):
                         " but in reality is cmor => Not taken into account."
                 dr2xml_error("Abort: HOMEVar is anounced as perso but "\
                                  "should be cmor.")
-        # mpmoine_last_modif: process_homeVars: ajout du cas type='extra'
         elif hv.type=='extra':
             if hv.Priority<=lset["max_priority"]:
                 if printmore: print "Info:",hv_info,"HOMEVar is read in an extra Table with priority " \
@@ -436,11 +413,13 @@ def get_corresp_CMORvar(hmvar,dq):
     return False
 
 def complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues,debug=[]):
-    """ 
-    The label for SVAR will be suffixed by an area name it the 
-    MIPvarname is ambiguous for that
+
+    """
+    SVAR will have an attribute label_non_ambiguous suffixed by an
+    area name if the MIPvarname is ambiguous for that
 
     Used by get_corresp_CMORvar and by select_CMORvars_for_lab
+
     """
     global ambiguous_mipvarnames
     if ambiguous_mipvarnames is None :
@@ -567,9 +546,6 @@ def complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues,debug=[]):
         if ambiguous :
             # Special case for a set of land variables
             if not (svar.modeling_realm=='land' and svar.label[0]=='c'):
-                # MPM :la levee d'ambiguite par ajout de "_land" par ex., ne doit pas impacter le svar.label
-                # sinon le "_land " se retrouve dans le nom du fichier netcdf
-                #TBS# svar.label=svar.label+"_"+area
                 svar.label_non_ambiguous=svar.label+"_"+area
     if (svar.label in debug) :
         print "complement_svar ... processing %s, label_non_ambiguous=%s"%\
@@ -615,7 +591,6 @@ def Remove_pSuffix(svar,mlev_sfxs,slev_sfxs,realms):
     # remove suffixes only if both suffix of svar.label *and* suffix of one of the svar.dims.label  match the search suffix
     # to avoid truncation of variable names like 'ch4' requested on 'plev19', where '4' does not stand for a plev set
     #
-    # mpmoine_zoom_modif:Remove_pSuffix: correction de la methode de suppression du suffixe de pression (corrige notamment ta23 -> ta2, 3 etant dans la liste des suffixes)
     import re
     r = re.compile("([a-zA-Z]+)([0-9]+)")
     #
@@ -641,27 +616,27 @@ def cellmethod2area(method) :
     """
     if method is None                 : return None
     if "where ice_free_sea over sea " in method : return "ifs"
-    if "where land"         in method : return "land"
+    if "where land"                   in method : return "land"
     if "where floating_ice_shelf"     in method : return "fisf"
-    if "where land over all_area_types" in method : return "loaat" #
-    if "where landuse over all_area_types"     in method : return "luoaat" #
-    if "where sea"          in method : return "sea"
-    if "where sea_ice"      in method : return "si"
-    if "where sea_ice_over_sea"      in method : return "sios" #
-    if "where snow over sea_ice" in method : return "sosi"
+    if "where land over all_area_types"    in method : return "loaat" #
+    if "where landuse over all_area_types" in method : return "luoaat" #
+    if "where sea"                    in method : return "sea"
+    if "where sea_ice"                in method : return "si"
+    if "where sea_ice_over_sea"       in method : return "sios" #
+    if "where snow over sea_ice"      in method : return "sosi"
     if "where grounded_ice_shelf"     in method : return "gisf" #
-    if "where snow"         in method : return "snow"
-    if "where cloud"        in method : return "cloud"
-    if "where crops"        in method : return "crops" #
+    if "where snow"                   in method : return "snow"
+    if "where cloud"                  in method : return "cloud"
+    if "where crops"                  in method : return "crops" #
     if "where grounded_ice_sheet"     in method : return "gist" #
-    if "ice_sheet"     in method : return "ist" #
-    if "where landuse"      in method : return "lu"
-    if "where natural_grasses"     in method : return "ngrass" #
-    if "where sea_ice_melt_ponds"      in method : return "simp" #
-    if "where shrubs"      in method : return "shrubs" #
-    if "where trees"      in method : return "trees" #
-    if "where vegetation"      in method : return "veg" #
-    if "where ice_shelf"    in method : return "isf"
+    if "ice_sheet"                    in method : return "ist" #
+    if "where landuse"                in method : return "lu"
+    if "where natural_grasses"        in method : return "ngrass" #
+    if "where sea_ice_melt_ponds"     in method : return "simp" #
+    if "where shrubs"                 in method : return "shrubs" #
+    if "where trees"                  in method : return "trees" #
+    if "where vegetation"             in method : return "veg" #
+    if "where ice_shelf"              in method : return "isf"
 
 def analyze_ambiguous_MIPvarnames(dq,debug=[]):
     """

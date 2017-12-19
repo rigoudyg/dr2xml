@@ -861,8 +861,6 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
             # Get alias without pressure_suffix but possibly with area_suffix
             alias_ping=ping_alias(cmv,lset,pingvars)
             if not alias_ping in pingvars:
-                #print "Must skip svar %s because alias_ping=%s not in pingfile "%(cmv.label,alias_ping)
-                # mpmoine: on classe les skipped_vars par table (pour avoir plus d'info au print) 
                 if skipped_vars_per_table.has_key(cmv.mipTable) and skipped_vars_per_table[cmv.mipTable]:
                     list_of_skipped=skipped_vars_per_table[cmv.mipTable]
                     list_of_skipped.append(cmv.label+"("+str(cmv.Priority)+")")
@@ -889,7 +887,6 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
     forcing_index=sset.get('forcing_index',1)
     variant_label="r%di%dp%df%d"%(realization_index,initialization_index,\
                                   physics_index,forcing_index)
-    # mpmoine_WIP_update:write_xios_file_def: WIP doc v6.2.3 - Apr. 2017: cf recommendation in note 16 for 'variant_info'
     variant_info_warning=". Information provided by this attribute may in some cases be flawed. "+\
                          "Users can find more comprehensive and up-to-date documentation via the further_info_url global attribute."
     #
@@ -957,7 +954,6 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
     operation,detect_missing = analyze_cell_time_method(cmv.cell_methods,cmv.label,table,printout=False)
     date_format,offset_begin,offset_end=freq2datefmt(cmv.frequency,operation,lset)
     #
-    # mpmoine: WIP doc v6.2.3 : [_<time_range>] omitted if frequency is "fx"
     if "fx" in cmv.frequency:
         filename="%s%s_%s_%s_%s_%s_%s"%\
                    (prefix,cmv.label,table,source_id,expname, member_id,grid_label)
@@ -1184,8 +1180,6 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
                       (lset["ping_variables_prefix"],tab,tab,names[tab]))
     out.write('</file>\n\n')
 
- # mpmoine_last_modif:wrv: ajout de l'argument num_type
-
 def wrv(name, value, num_type="string"):
     global print_wrv
     if not print_wrv : return ""
@@ -1231,8 +1225,6 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
     # TBD Should ensure that various additionnal dims are duly documented by model or pingfile (e.g. tau)
     if ssh[0:4] in ['XY-H','XY-P'] or ssh[0:3] == 'Y-P' or \
        (ssh[0:5]=='XY-na' and prefix+sv.label not in pingvars ):
-        # mpmoine_last_modif:create_xios_aux_elmts_defs: on recupere maintenant 'dimids' depuis svar
-        # mpmoine_future_modif:create_xios_aux_elmts_defs: on utilise maintenant sv.sdims pour analyser les dimension
         # mpmoine_question: je ne comprend pas l'usage de nextvar... A priori on ne peut pas avoir plus d'une dimension verticale ?
         for sd in sv.sdims.values(): # Expect that only one can be a vertical dim
             if isVertDim(sd):
@@ -1301,7 +1293,6 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
                         field_defs[alias1]='<field id="%-25s field_ref="%-25s grid_ref="%-10s/>'\
                             %(alias1+'"',alias_sample+'"',grid_id+'"')
                         #
-                # mpmoine_note: voir en desactivant les zooms si c'est ok                    
                 #TBD what to do for singleton dimension ? 
     #
     # SS : ecriture plus lisible, et evitant des redondances
@@ -1368,7 +1359,6 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
     # Build XIOS field elements (stored in end_field_defs)
     # including their CMOR attributes
     #--------------------------------------------------------------------
-    # mpmoine_correction:create_xios_aux_elmts_defs: alias1  au lieu de alias pour l'ecriture de end_field_defs
     #TBS# if any (sd.is_zoom_of for sd in sv.sdims.values()):
     alias_with_operation=last_alias+"_"+operation
     rep='  <field field_ref="%s" name="%s" '% (alias_with_operation,sv.label)
@@ -1491,7 +1481,6 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfile=No
     #--------------------------------------------------------------------
     # Extract CMOR variables for the experiment and year and lab settings
     #--------------------------------------------------------------------
-    # mpmoine_skipped_modif:generate_file_defs: skipped_vars (liste) change en skipped_vars_per_table (dictionnaire)
     skipped_vars_per_table={}
     mip_vars_list=gather_AllSimpleVars(lset,sset,year,printout)
     # Group CMOR vars per realm
@@ -1547,9 +1536,6 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfile=No
         orphans=lset['orphan_variables'][context]
         for svar in mip_vars_list :
             if svar.label in orphans:
-                # mpmoine_last_modif:generate_file_defs: patch provisoire pour retirer les  svars qui n'ont pas de spatial_shape 
-                # mpmoine_last_modif:generate_file_defs: (cas par exemple de 'hus' dans table '6hrPlev' => spid='__struct_not_found_001__')
-                # mpmoine_next_modif: generate_file_defs: exclusion de certaines spatial shapes (ex. Polar Stereograpic Antarctic/Groenland)
                 if svar.label not in lset['excluded_vars'] and svar.spatial_shp and \
                    svar.spatial_shp not in lset["excluded_spshapes"]:  
                     if svar.mipTable not in svars_per_table : svars_per_table[svar.mipTable]=[]
@@ -1591,11 +1577,6 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfile=No
     if lset['use_union_zoom']:
         svars_full_list=[]
         for svl in svars_per_table.values(): svars_full_list.extend(svl)
-        # mpmoine_merge_dev2_v0.12:generate_file_defs: on recupere maintenant non seulement les union_axis_defs mais aussi les union_grid_defs
-        # SS : les dictionnaires specifiques pour les unions d'axes et de grille, 
-        # sont supprimes et leur contenu va dans les dicos generaux
-        #(union_axis_defs,union_grid_defs)=
-        #DEBUG_ZOOM_MPM ajout argument ping_refs + deplacement ici, apres lecture du ping, de l'appel a create_xios_axis_and_grids_for_plevs_unions
         create_xios_axis_and_grids_for_plevs_unions(svars_full_list,
                                         multi_plev_suffixes.union(single_plev_suffixes),
                                         lset["ping_variables_prefix"],
@@ -1663,8 +1644,6 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfile=No
         out.write('\n<axis_definition> \n')
         out.write('<axis_group prec="8">\n')
         for obj in axis_defs.keys(): out.write("\t"+axis_defs[obj]+"\n")
-        # mpmoine_zoom_modif:generate_file_defs: on ecrit maintenant les axis defs pour les unions
-        # mpmoine_zoom_amelioration:generate_file_defs: usage de 'use_union_zoom'
         if False and lset['use_union_zoom']:
             for obj in union_axis_defs.keys(): out.write("\t"+union_axis_defs[obj]+"\n")
         out.write('</axis_group>\n')
@@ -1679,8 +1658,6 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfile=No
         #
         out.write('\n<grid_definition> \n')
         for obj in grid_defs.keys(): out.write("\t"+grid_defs[obj])
-        # mpmoine_merge_dev2_v0.12:generate_file_defs: on ecrit maintenant les grid defs pour les unions
-        # mpmoine_zoom_amelioration:generate_file_defs: usage de 'use_union_zoom'
         if False and lset['use_union_zoom']:
             for obj in union_grid_defs.keys(): out.write("\t"+union_grid_defs[obj]+"\n")
         out.write('</grid_definition> \n')
@@ -1781,7 +1758,7 @@ def create_axis_def(sdim,prefix,vert_frequency,axis_defs,field_defs):
 
     """
 
-    # mpmoine_zoom_modif:create_axis_def: nbre de valeurs de l'axe determine aussi si on est en dim singleton
+    # nbre de valeurs de l'axe determine aussi si on est en dim singleton
     if sdim.requested: glo_list=sdim.requested.strip(" ").split()
     else: glo_list=sdim.value.strip(" ").split()
     glo_list_num=[float(v) for v in glo_list]
@@ -1894,27 +1871,8 @@ def create_grid_def(grid_defs,axis_key,alias=None,context_index=None,table=None)
     else:
         raise dr2xml_error("Fatal: ask for creating a grid_def from a native grid "+\
                            "but variable alias and/or context_index not provided (alias:%s, context_index:%s)"%(alias,context_index))
-        #return False
-    # elif sd.is_union_for: # a grid_def to build in union case
-    #     grid_id="grid_"+axis_key
-    #     grid_string='<grid id="%s">'%grid_id
-    #     grid_string+='\n\t<domain domain_ref="%s"/>'%"domain_atm" # mpmoine_note: attention, en dur !
-    #     grid_string+='\n\t<axis axis_ref="%s"/>'%axis_key
-    #     grid_string+='\n\t</grid>'
-    #     return (grid_id,grid_string)
-    # elif sd.is_zoom_of: # a grid_def to build in zoom case
-    #     grid_id="grid_"+axis_key
-    #     grid_string='<grid id="%s">'%grid_id
-    #     grid_string+='\n\t<domain domain_ref="%s"/>'%"domain_atm" # mpmoine_note: attention, en dur !
-    #     grid_string+='\n\t<axis axis_ref="%s"/>'%axis_key
-    #     grid_string+='\n\t</grid>'
-    #     return (grid_id,grid_string)
-    # else:
-    #     print "Warning: calling create_grid_def for a vertical axis which nothing among classical/union/zoom... Humm, don't know what this axis is..."
-    #     return False
 
-# mpmoine_zoom_modif: nouvelle fonction 'create_xios_axis_for_plevs_unions'
-# mpmoine_merge_dev2_v0.12: 'create_xios_axis_for_plevs_unions' renomee en 'create_xios_axis_and_grids_for_plevs_unions'
+
 def create_xios_axis_and_grids_for_plevs_unions(svars,plev_sfxs,prefix,vert_freq,axis_defs,grid_defs,field_defs, ping_refs, printout=False): 
     """
     Objective of this function is to optimize Xios vertical interpolation requested in pressure levels. 
@@ -1940,15 +1898,15 @@ def create_xios_axis_and_grids_for_plevs_unions(svars,plev_sfxs,prefix,vert_freq
         if not sv.modeling_realm: print "Warning: no modeling_realm associated to:", \
                                             sv.label, sv.mipTable, sv.mip_era
         for sd in sv.sdims.values():
-            # mpmoine_note: couvre les dimensions verticales de type 'plev7h' ou 'p850'
+            # couvre les dimensions verticales de type 'plev7h' ou 'p850'
             if sd.label.startswith("p") and any(sd.label.endswith(s) for s in plev_sfxs) and sd.label != 'pl700' : 
                 lwps=sv.label_without_psuffix
                 if lwps:
-                    present_in_ping=ping_refs.has_key(prefix+lwps) #DEBUG_ZOOM_MPM
-                    dummy_in_ping=None #DEBUG_ZOOM_MPM
-                    if present_in_ping: dummy_in_ping=("dummy" in ping_refs[prefix+lwps]) #DEBUG_ZOOM_MPM
+                    present_in_ping=ping_refs.has_key(prefix+lwps) 
+                    dummy_in_ping=None
+                    if present_in_ping: dummy_in_ping=("dummy" in ping_refs[prefix+lwps]) 
 
-                    if  present_in_ping and not dummy_in_ping: #DEBUG_ZOOM_MPM
+                    if  present_in_ping and not dummy_in_ping: 
                         sv.sdims[sd.label].is_zoom_of="union_plevs_"+lwps
                         if not dict_plevs.has_key(lwps):
                             dict_plevs[lwps]={sd.label:{sv.label:sv}}
@@ -1963,9 +1921,9 @@ def create_xios_axis_and_grids_for_plevs_unions(svars,plev_sfxs,prefix,vert_freq
                                     pass
                     else:
                         if printout: 
-                            print "Info: ", lwps, "not taken into account for building plevs union axis because one of these 2 reasons:" #DEBUG_ZOOM_MPM
-                            print "      a)", prefix+lwps,"is not an entry in the pingfile: Entry?",present_in_ping  #DEBUG_ZOOM_MPM
-                            print "      b)", prefix+lwps,"has au dummy reference in the pingfile. Dummy?",dummy_in_ping #DEBUG_ZOOM_MPM
+                            print "Info: ", lwps, "not taken into account for building plevs union axis because one of these 2 reasons:" 
+                            print "      a)", prefix+lwps,"is not an entry in the pingfile: Entry?",present_in_ping  
+                            print "      b)", prefix+lwps,"has au dummy reference in the pingfile. Dummy?",dummy_in_ping 
 
                     # svar will be expected on a zoom axis of the union. Corresponding vertical dim must
                     # have a zoom_label named plevXX_<lwps> (multiple pressure levels) or pXX_<lwps> (single pressure level)
@@ -1990,8 +1948,8 @@ def create_xios_axis_and_grids_for_plevs_unions(svars,plev_sfxs,prefix,vert_freq
             for sv in dict_plevs[lwps][plev].values(): 
                 if not plev_values:
                     # svar is the first one with this plev => get its level values
-                    # mpmoine_note: on reecrase les attributs de sdim_union a chaque nouveau plev. Pas utile mais
-                    # mpmoine_note: c'est la facon la plus simple de faire
+                    # on reecrase les attributs de sdim_union a chaque nouveau plev. Pas utile mais
+                    # c'est la facon la plus simple de faire
                     sdsv=sv.sdims[plev]
                     if sdsv.stdname:   sdim_union.stdname=sdsv.stdname
                     if sdsv.long_name: sdim_union.long_name=sdsv.long_name
@@ -2012,7 +1970,6 @@ def create_xios_axis_and_grids_for_plevs_unions(svars,plev_sfxs,prefix,vert_freq
                     if printout: print "    -- on",plev,":",plev_values 
                 if printout: print "       *",sv.label,"(",sv.mipTable,")"
         list_plevs_union=list(plevs_union)
-        # mpmoine_further_zoom_modif:create_xios_axis_for_plevs_unions: correction du tri des niveaux de pression sur les axes d'union
         list_plevs_union_num=[float(lev) for lev in list_plevs_union]
         list_plevs_union_num.sort(reverse=True)
         list_plevs_union=[str(lev) for lev in list_plevs_union_num]
@@ -2023,8 +1980,6 @@ def create_xios_axis_and_grids_for_plevs_unions(svars,plev_sfxs,prefix,vert_freq
         if len(list_plevs_union)==1: sdim_union.value=plevs_union_xios
         if printout : print "creating axis def for union :%s"%sdim_union.label
         axis_def=create_axis_def(sdim_union,prefix,vert_freq,union_axis_defs,field_defs)
-        # mpmoine_merge_dev2_v0.12: maintenant on doit non seulement creer les axes d'union mais aussi les grid les englobant
-        # SS : ajout des deux derniers arguments, pour ne pas avoir de domains en dur dans create_grid_def
         create_grid_def(union_grid_defs,sdim_union.label,prefix+lwps,context_index)
     #
     #return (union_axis_defs,union_grid_defs)
@@ -2036,7 +1991,6 @@ def isVertDim(sdim):
     For now, a very simple logics for interpolated vertical 
     dimension identification:
     """
-    # mpmoine_future_modif: isVertDim: on utilise maintenant sv.sdims pour analyser les dimensions
     # SS : p840, p220 sont des couches de pression , pour lesquelles COSP forunit directement
     # les valeurs moyennes de parametres (e.g. cllcalipso). On les detecte par l'attribut bounds 
     test=(sdim.stdname=='air_pressure' or sdim.stdname=='altitude') and (sdim.bounds != "yes")
@@ -2077,7 +2031,6 @@ def analyze_cell_time_method(cm,label,table,printout=False):
         operation="average"
         detect_missing=True
     #-------------------------------------------------------------------------------------
-    # mpmoine_correction:analyze_cell_time_method: ajout du cas "time: mean where sea_ice_melt_pound"
     elif "time: mean where sea_ice_melt_pound" in cm :
         #[amnnsimp-twmm]: Weighted Time Mean in Sea-ice Melt Pounds (uniquement des 
         #variables en SImon)
@@ -2092,7 +2045,6 @@ def analyze_cell_time_method(cm,label,table,printout=False):
     elif "time: mean where sea_ice" in cm :
         #[amnsi-twm]: Weighted Time Mean on Sea-ice (presque que des 
         #variables en SImon, sauf sispeed et sithick en SIday)
-        # mpmoine_correction:analyze_cell_time_method: ajout de operation="average" pour "time: mean where sea_ice"
         cell_method_warnings.append(('time: mean where sea_ice',label,table))
         if printout: 
             print "Note : assuming that 'time: mean where sea_ice' "+\
@@ -2108,7 +2060,6 @@ def analyze_cell_time_method(cm,label,table,printout=False):
         #Area Mean of Ext. Prop. on Sea Ice : pas utilisee
         print "time: mean where sea is not supposed to be used (%s,%s)"%(label,table)
     #-------------------------------------------------------------------------------------
-    # mpmoine_correction:analyze_cell_time_method: ajout du cas "time: mean where floating_ice_shelf"
     elif "time: mean where floating_ice_shelf" in cm :
         #[amnfi-twmn]: Weighted Time Mean on Floating Ice Shelf (presque que des 
         #variables en Imon, Iyr, sauf sftflt en LImon !?)
@@ -2120,7 +2071,6 @@ def analyze_cell_time_method(cm,label,table,printout=False):
         operation="average"
         detect_missing=True
     #----------------------------------------------------------------------------------------------------------------
-    # mpmoine_correction:analyze_cell_time_method: ajout du cas "time: mean where grounded_ice_sheet"
     elif "time: mean where grounded_ice_sheet" in cm :
         #[amngi-twm]: Weighted Time Mean on Grounded Ice Shelf (uniquement des 
         #variables en Imon, Iyr)
@@ -2132,7 +2082,6 @@ def analyze_cell_time_method(cm,label,table,printout=False):
         operation="average"
         detect_missing=True
     #----------------------------------------------------------------------------------------------------------------
-    # mpmoine_correction:analyze_cell_time_method: ajout du cas "time: mean where ice_sheet"
     elif "time: mean where ice_sheet" in cm :
         #[amnni-twmn]: Weighted Time Mean on Ice Shelf (uniquement des 
         #variables en Imon, Iyr)
@@ -2144,7 +2093,6 @@ def analyze_cell_time_method(cm,label,table,printout=False):
         operation="average"
         detect_missing=True
     #----------------------------------------------------------------------------------------------------------------
-    # mpmoine_correction:analyze_cell_time_method: ajout du cas "time: mean where landuse"
     elif "time: mean where landuse" in cm :
         #[amlu-twm]: Weighted Time Mean on Land Use Tiles (uniquement des 
         #variables suffixees en 'Lut')
@@ -2156,7 +2104,6 @@ def analyze_cell_time_method(cm,label,table,printout=False):
         operation="average"
         detect_missing=True
     #----------------------------------------------------------------------------------------------------------------
-    # mpmoine_correction:analyze_cell_time_method: ajout du cas "time: mean where crops"
     elif "time: mean where crops" in cm :
         #[amc-twm]: Weighted Time Mean on Crops (uniquement des 
         #variables suffixees en 'Crop')
@@ -2168,7 +2115,6 @@ def analyze_cell_time_method(cm,label,table,printout=False):
         operation="average"
         detect_missing=True
     #----------------------------------------------------------------------------------------------------------------
-    # mpmoine_correction:analyze_cell_time_method: ajout du cas "time: mean where natural_grasses"
     elif "time: mean where natural_grasses" in cm :
         #[amng-twm]: Weighted Time Mean on Natural Grasses (uniquement des 
         #variables suffixees en 'Grass')
@@ -2180,7 +2126,6 @@ def analyze_cell_time_method(cm,label,table,printout=False):
         operation="average"
         detect_missing=True
     #----------------------------------------------------------------------------------------------------------------
-    # mpmoine_correction:analyze_cell_time_method: ajout du cas "time: mean where shrubs"
     elif "time: mean where shrubs" in cm :
         #[ams-twm]: Weighted Time Mean on Shrubs (uniquement des 
         #variables suffixees en 'Shrub')
@@ -2192,7 +2137,6 @@ def analyze_cell_time_method(cm,label,table,printout=False):
         operation="average"
         detect_missing=True
     #----------------------------------------------------------------------------------------------------------------
-    # mpmoine_correction:analyze_cell_time_method: ajout du cas "time: mean where trees"
     elif "time: mean where trees" in cm :
         #[amtr-twm]: Weighted Time Mean on Bare Ground (uniquement des 
         #variables suffixees en 'Tree')
@@ -2204,7 +2148,6 @@ def analyze_cell_time_method(cm,label,table,printout=False):
         operation="average"
         detect_missing=True
     #----------------------------------------------------------------------------------------------------------------
-    # mpmoine_correction:analyze_cell_time_method: ajout du cas "time: mean where vegetation"
     elif "time: mean where vegetation" in cm :
         #[amv-twm]: Weighted Time Mean on Vegetation (pas de varibles concernees)
         cell_method_warnings.append(('time: mean where vegetation',label,table))
@@ -2284,7 +2227,6 @@ def analyze_cell_time_method(cm,label,table,printout=False):
     return (operation, detect_missing)
 
 #
-# mpmoine_amelioration: ajout argument 'path_special' a la fonction pingFileForRealmsList
 def pingFileForRealmsList(settings, context,lrealms,svars,path_special,dummy="field_atm",
                           dummy_with_shape=False, exact=False,
                           comments=False,prefix="CV_",filename=None, debug=[]):
@@ -2354,10 +2296,8 @@ def pingFileForRealmsList(settings, context,lrealms,svars,path_special,dummy="fi
     lvars=uniques
     #
     if filename is None : filename="ping"+name+".xml"
-    # mpmoine_future_modif:pingFileForRealmsList: typo 'filneme' -> 'filename'
     if filename[-4:] != ".xml" : filename +=".xml"
     #
-    # mpmoine_amelioration:pingFileForRealmsList:: ajout argument 'path_special' a la fonction read_special_fields_defs + protection si path_special existe
     if path_special: 
         specials=read_special_fields_defs(lrealms,path_special)
     else: 
@@ -2380,15 +2320,12 @@ def pingFileForRealmsList(settings, context,lrealms,svars,path_special,dummy="fi
             fp.write("<!-- for variables which realm equals one of "\
                      +name+"-->\n")
         for v in lvars :
-            # mpmoine_future_modif:pingFileForRealmsList: pour le field_id du pingfile on s'appuie sur le 'label_without_psuffix' et non plus le label complet
-            # mpmoine_correction:pingFileForRealmsList: pour le field_id du pingfile on prend le label non ambigu s'il existe
             if v.label_non_ambiguous: 
                 label=v.label_non_ambiguous
             else:
                 label=v.label_without_psuffix
             if (v.label in debug) : print "pingFile ... processing %s in table %s, label=%s"%(v.label,v.mipTable,label)
                 
-            # mpmoine_amelioration:pingFileForRealmsList: protection si specials existe
             if specials and label in specials :
                 line=ET.tostring(specials[label]).replace("DX_",prefix)
                 #if 'ta' in label : print "ta is special : "+line
@@ -2398,12 +2335,7 @@ def pingFileForRealmsList(settings, context,lrealms,svars,path_special,dummy="fi
                 fp.write('   <field id="%-20s'%(prefix+label+'"')+\
                          ' field_ref="')
                 if dummy : 
-                    # mpmoine_last_modif: svar en argument de highest_rank et non pas seulement son label_without_area
-                    # mpmoine_zoom_modif:pingFileForRealmsList: on s'appuie sur le label_without_psuffix et non plus le label_without_area
                     shape=highest_rank(v)
-                    # Bugfix for DR 1.0.1 content :
-                    # mpmoine_future_modif:pingFileForRealmsList: on s'appuie sur le mipVar label (label_without_area) et non plus le cmorVar label
-                    # mpmoine_zoom_modif:pingFileForRealmsList: on s'appuie sur le label_without_psuffix et non plus le label_without_area
                     if v.label_without_psuffix=='clcalipso' : shape='XYA'
                     if dummy is True :
                         dummys="dummy"
@@ -2427,15 +2359,11 @@ def pingFileForRealmsList(settings, context,lrealms,svars,path_special,dummy="fi
         print "%3d variables written for %s"%(len(lvars),filename)
         #
         # Write axis_defs, domain_defs, ... read from relevant input/DX_ files
-        # mpmoine_amelioration:pingFileForRealmsList: protection si path_special existe
         if path_special:
             for obj in [ "axis", "domain", "grid" , "field" ] :
-                #print "for obj "+obj
-                # mpmoine_amelioration:pingFileForRealmsList: ajout argument 'path_special' a la fonction copy_obj_from_DX_file
                 copy_obj_from_DX_file(fp,obj,prefix,lrealms,path_special)
         fp.write('</context>\n')
 
-# mpmoine_amelioration: ajout argument 'path_special' a la fonction copy_obj_from_DX_file
 def copy_obj_from_DX_file(fp,obj,prefix,lrealms,path_special) :
     # Insert content of DX_<obj>_defs files (changing prefix)
     #print "copying %s defs :"%obj,
@@ -2445,7 +2373,6 @@ def copy_obj_from_DX_file(fp,obj,prefix,lrealms,path_special) :
             if subrealm in subrealms_seen : continue
             subrealms_seen.append(subrealm)
             #print "\tand realm %s"%subrealm, 
-            # mpmoine_amelioration:opy_obj_from_DX_file: ajout argument 'path_special' a la fonction DX_defs_filename
             defs=DX_defs_filename(obj,subrealm,path_special)
             if os.path.exists(defs) :
                 with open(defs,"r") as fields :
@@ -2460,12 +2387,10 @@ def copy_obj_from_DX_file(fp,obj,prefix,lrealms,path_special) :
                 pass
                 print " no file :%s "%defs
 
-# mpmoine_amelioration: ajout argument 'path_special' a la fonction DX_defs_filename
 def DX_defs_filename(obj,realm,path_special):
     #TBS# return prog_path+"/inputs/DX_%s_defs_%s.xml"%(obj,realm)
     return path_special+"/DX_%s_defs_%s.xml"%(obj,realm)
 
-# mpmoine_future_modif: renommage de la fonction 'field_defs' en 'get_xml_childs'
 def get_xml_childs(elt, tag='field', groups=['context', 'field_group',
     'field_definition', 'axis_definition','axis', 'domain_definition',
     'domain', 'grid_definition', 'grid' , 'interpolate_axis'  ]) :
@@ -2484,7 +2409,6 @@ def get_xml_childs(elt, tag='field', groups=['context', 'field_group',
             # Case of an unkown tag : don't dig in
             return []
 
-# mpmoine_future_modif: renommage de la fonction 'read_defs' en 'read_xml_elmt_or_attrib'
 def read_xml_elmt_or_attrib(filename, tag='field', attrib=None, printout=False) :
     """ 
     Returns a dict of objects tagged TAG in FILENAME, which 
@@ -2513,7 +2437,6 @@ def read_xml_elmt_or_attrib(filename, tag='field', attrib=None, printout=False) 
         if printout : print "No file "
         return None
 
-# mpmoine_amelioration: ajout de l'argument 'path_special' a la fonction read_special_field_defs
 def read_special_fields_defs(realms,path_special,printout=False) :
     special=dict()
     subrealms_seen=[]
@@ -2521,7 +2444,6 @@ def read_special_fields_defs(realms,path_special,printout=False) :
         for subrealm in realm.split() :
             if subrealm in subrealms_seen : continue
             subrealms_seen.append(subrealm)
-            # mpmoine_amelioration:read_special_fields_defs: ajout de l'argument 'path_special' a la fonction DX_defs_filename
             d=read_xml_elmt_or_attrib(DX_defs_filename("field",subrealm,path_special),\
                                         tag='field',printout=printout)
             if d: special.update(d)
@@ -2530,7 +2452,6 @@ def read_special_fields_defs(realms,path_special,printout=False) :
     for r in special : rep[r.replace("DX_","")]=special[r]
     return rep
 
-# mpmoine_last_modif:highest_rank: svar en argument et non pas seulement son label_without_area
 def highest_rank(svar):
     """Returns the shape with the highest needed rank among the CMORvars
     referencing a MIPvar with this label
