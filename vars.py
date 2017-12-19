@@ -29,6 +29,7 @@ class simple_CMORvar(object):
         self.long_name      = None 
         self.struct         = None
         self.sdims          = {}
+        self.other_dims_size= 1
         self.cell_methods   = None
         self.cell_measures  = None
         self.spatial_shp    = None 
@@ -270,7 +271,7 @@ def read_extraTable(path,table,dq,printout=False):
             for d in all_dr_dims:
                 if dim2dimid.has_key(d):
                     dr_dimids.append(dim2dimid[d])
-                    extra_dim=get_simpleDim_from_DimId(dim2dimid[d],dq)
+                    extra_dim,dummy=get_simpleDim_from_DimId(dim2dimid[d],dq)
                     extra_var.sdims.update({extra_dim.label:extra_dim})
                 else:
                     extra_sdim=simple_Dim()
@@ -320,7 +321,7 @@ def get_SpatialAndTemporal_Shapes(cmvar,dq):
     return [spatial_shape,temporal_shape]
 
 # mpmoine_last_modif: process_homeVars: argument supplementaire 'path_extra_tables' et expid au lieu de lset
-def process_homeVars(lset,mip_vars_list,dq,expid=False,printout=False):
+def process_homeVars(lset,sset,mip_vars_list,dq,expid=False,printout=False):
     printmore=False
     # Read HOME variables
     home_vars_list=read_homeVars_list(lset['listof_home_vars'],
@@ -434,7 +435,7 @@ def get_corresp_CMORvar(hmvar,dq):
         return hmvar
     return False
 
-def complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues):
+def complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues,debug=[]):
     """ 
     The label for SVAR will be suffixed by an area name it the 
     MIPvarname is ambiguous for that
@@ -445,10 +446,6 @@ def complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues):
     if ambiguous_mipvarnames is None :
         ambiguous_mipvarnames=analyze_ambiguous_MIPvarnames(dq)
         
-    # mpmoine_last_modif: spid2label et tmid2label ne sont plus utilises
-
-    # mpmoine_future_modif:complement_svar_using_cmorvar: reorganisation des lignes de code
-
     # Get information form CMORvar
     svar.frequency = cmvar.frequency.rstrip(' ')
     svar.mipTable = cmvar.mipTable.rstrip(' ')
@@ -460,17 +457,14 @@ def complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues):
     svar.cmvar=cmvar
 
     # Get information from MIPvar
-    # mpmoine_next_modif:complement_svar_using_cmorvar: gestion d'exception pour l'acces a la 'mipvar'
     try:
         mipvar = dq.inx.uid[cmvar.vid]
         svar.label_without_area=mipvar.label.rstrip(' ')
-        # mpmoine_correction:complement_svar_using_cmorvar: le long_name doit etre le title de la CMORvar et non pas de la MIPvar
-        #TBS# svar.long_name = mipvar.title
         svar.long_name = cmvar.title.rstrip(' ')
-        if mipvar.description :
-            svar.description = mipvar.description.rstrip(' ')
+        if cmvar.description :
+            svar.description = cmvar.description.rstrip(' ')
         else:
-            svar.description = mipvar.title
+            svar.description = cmvar.title
         svar.stdunits = mipvar.units.rstrip(' ')
         sn=None
         try :
@@ -498,7 +492,8 @@ def complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues):
                 print "DR Error: issue with stdname for "+svar.label,"in",svar.mipTable," => take the MIPvar label instead."
     except:
         if print_DR_errors: 
-            print "DR Error: issue with MIPvar for "+svar.label," => no label_without_area, long_name, stdname, description and units derived."
+            print "DR Error: issue with MIPvar for "+svar.label,\
+                " => no label_without_area, long_name, stdname, description and units derived."
     #
     # Get information form Structure
     st=None
@@ -506,7 +501,8 @@ def complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues):
         st=dq.inx.uid[cmvar.stid]
     except :
         if print_DR_errors :
-            print "DR Error: issue with stid for",svar.label, "in Table ",svar.mipTable,"  => no cell_methods, cell_measures, dimids and sdims derived."
+            print "DR Error: issue with stid for",svar.label, "in Table ",svar.mipTable,\
+                "  => no cell_methods, cell_measures, dimids and sdims derived."
     if st is not None :
         svar.struct=st
         try :
@@ -519,9 +515,15 @@ def complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues):
             svar.cell_measures=dq.inx.uid[cmvar.stid].cell_measures.rstrip(' ')
         except:
             if print_DR_errors: print "DR Error: Issue with cell_measures for "+`cmvar`
-        # mpmoine_last_modif:complement_svar_using_cmorvar: on affecte ici svar.dimids (avant: dans create_xios_field_ref)
-        # mpmoine_last_modif:complement_svar_using_cmorvar: provisoire, pour by-passer le cas d'une CMORvar qui n'a pas de structure associee ('dreqItem_remarks')
-        # mpmoine_future_modif:complement_svar_using_cmorvar: on ne recherche les dimids que si on a pas affaire a une constante
+        # A number of DR values indicate a choice or a directive for this attribute :
+        # This can be either a string value for inclusion in the NetCDF variable attribute cell_measures, or a directive. In the latter case it will be a single word, --OPT or --MODEL. The first of these indicates that the data may be provided either on the cell centres or on the cell boundaries. --MODEL indicates that the data should be provided at the cell locations used for that variable in the model code (e.g. cell vertices).
+        # We turn the directive in as sensible choice 
+        if svar.cell_measures in [ '--MODEL', '--OPT', '--UGRID'] :
+            svar.cell_measures=''
+        if svar.cell_measures in [ 'area: areacello OR areacella' ] :
+            svar.cell_measures='areacello'  #TBD Actually applies to seaice variables only, in DR01.00.17
+        product_of_other_dims=1
+        all_dimids=[]
         if svar.spatial_shp!="na-na":
             spid=None
             try:
@@ -532,55 +534,70 @@ def complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues):
                 dimids=None
             if spid is not None :
                 try:
-                    # mpmoine_future_modif:complement_svar_using_cmorvar: suppression de svar.dimids -> elargi avec svar.sdims
-                    dimids=spid.dimids
+                    all_dimids+=spid.dimids
                 except:
                     if print_DR_errors :
-                        print "DR Error: issue with dimids for ",svar.label, "in Table ",svar.mipTable, " => no sdims derived."
-                if dimids is not None :
-                    # mpmoine_future_modif:complement_svar_using_cmorvar: on rajoute les single levels dans le traitement des dimensions (dimids->all_dimids)
-                    all_dimids=dimids
-                    # mpmoine_correction: Solution de Martin Juckes du 04/05/2017 en utilisant cids necessaire a partir de la version 01.00.08
-                    if 'cids' in svar.struct.__dict__:
-                        cids=svar.struct.cids
-                        # when cids not empty, cids=('dim:p850',) or ('dim:typec4pft', 'dim:typenatgr') for e.g.; when empty , cids=('',).
-                        if cids[0]!='':  ## this line is needed prior to version 01.00.08.
-                            all_dimids+=cids
-                    # mpmoine_future_modif:complement_svar_using_cmorvar: on rajoute les single levels dans le traitement des dimensions (dimids->all_dimids)  
-                    for dimid in all_dimids:
-                        # mpmoine_future_modif:complement_svar_using_cmorvar: on valorise svar.sdims avec la fonction get_simpleDim_from_DimId
-                        sdim=get_simpleDim_from_DimId(dimid,dq)
-                        svar.sdims.update({sdim.label:sdim})
-
+                        print "DR Error: issue with spid for ",svar.label, "in Table ",svar.mipTable, " => no sdims derived."
+        if 'cids' in svar.struct.__dict__:
+            cids=svar.struct.cids
+            # when cids not empty, cids=('dim:p850',) or ('dim:typec4pft', 'dim:typenatgr') for e.g.; when empty , cids=('',).
+            if cids[0]!='':  ## this line is needed prior to version 01.00.08.
+                all_dimids+=cids
+        if 'dids' in svar.struct.__dict__:
+            dids=svar.struct.dids
+            if dids[0]!='': all_dimids+=dids
+        for dimid in all_dimids:
+            sdim,dimsize=get_simpleDim_from_DimId(dimid,dq)
+            if (dimsize > 1) :
+                #print "for var % 15s and dim % 15s, size=%3d"%(svar.label,dimid,dimsize)
+                pass
+            product_of_other_dims*=dimsize
+            svar.sdims.update({sdim.label:sdim})
+        if (product_of_other_dims > 1) :
+            #print 'for % 20s'%svar.label,' product_of_other_dims=',product_of_other_dims
+            svar.other_dims_size=product_of_other_dims
     area=cellmethod2area(svar.cell_methods) 
+    if (svar.label in debug) :
+        print "complement_svar ... processing %s, area=%s"%(svar.label,`area`)
     if area : 
         ambiguous=any( [ svar.label == alabel and svar.modeling_realm== arealm 
                    for (alabel,(arealm,lmethod)) in ambiguous_mipvarnames ])
+        if (svar.label in debug) :
+            print "complement_svar ... processing %s, ambiguous=%s"%(svar.label,`ambiguous`)
         if ambiguous :
             # Special case for a set of land variables
             if not (svar.modeling_realm=='land' and svar.label[0]=='c'):
-                # mpmoine_correction:complement_svar_using_cmorvar: la levee d'ambiguite par ajour de "_land" par ex., ne doit pas impacter le svar.label
-                # mpmoine_correction:complement_svar_using_cmorvar: sinon le "_land " se retrouve dans le nom du fichier netcdf
+                # MPM :la levee d'ambiguite par ajout de "_land" par ex., ne doit pas impacter le svar.label
+                # sinon le "_land " se retrouve dans le nom du fichier netcdf
                 #TBS# svar.label=svar.label+"_"+area
                 svar.label_non_ambiguous=svar.label+"_"+area
-    # mpmoine_future_modif:complement_svar_using_cmorvar: on renseigne l'attribut label_without_psuffix (doit etre fait apres la valorisation de sdims)
-    # mpmoine_further_zoom_modif:complement_svar_using_cmorvar: deplacement de Remove_pSuffix apres la levee d'ambiguite 'where something' (verifie: aucune des variables ambigues n'est demandee en plev)
-    # removing pressure suffix must occur after raising ambuguities (add of area suffix) because this 2 processes cannot be cummulate at this stage. 
+    if (svar.label in debug) :
+        print "complement_svar ... processing %s, label_non_ambiguous=%s"%\
+            (svar.label,svar.label_non_ambiguous)
+    # removing pressure suffix must occur after resolving ambiguities (add of area suffix)
+    # because this 2 processes cannot be cummulate at this stage. 
     # this is acceptable since none of the variables requeted on pressure levels have ambiguous names.
-    svar.label_without_psuffix=Remove_pSuffix(svar,multi_plev_suffixes,single_plev_suffixes,realms='atmos aerosol atmosChem')
+    svar.label_without_psuffix=Remove_pSuffix(svar,multi_plev_suffixes,single_plev_suffixes,
+                                              realms='atmos aerosol atmosChem')
     #
     # Fix type and mip_era
     svar.type='cmor'
-    #mpm_last_modif:complement_svar_using_cmorvar: mip_era='CMIP6' dans le cas CMORvar
+    #mip_era='CMIP6' dans le cas CMORvar
     svar.mip_era='CMIP6'
 
-# momoine_future_modif: nouvelle fonction get_simpleDim_from_DimId utilisee par complement_svar_using_cmorvar et read_extra_Tables
 def get_simpleDim_from_DimId(dimid,dq):
     sdim=simple_Dim()
     d=dq.inx.uid[dimid]
     sdim.label=d.label
     sdim.positive=d.positive
-    sdim.requested=d.requested 
+    sdim.requested=d.requested
+    #
+    if (d.requested and len(d.requested) > 0 ) : dimsize=max(len(d.requested.split(" ")),1)
+    elif sdim.label=='misrBands' :
+        dimsize=16 # because value is unset in DR01.00.18
+        #print 'got one case with misrbands',d
+    else: dimsize=1
+    #
     sdim.value=d.value
     try :
         sdim.stdname=dq.inx.uid[d.standardName].uid
@@ -591,9 +608,8 @@ def get_simpleDim_from_DimId(dimid,dq):
     sdim.out_name=d.altLabel
     sdim.units=d.units
     sdim.bounds=d.bounds
-    return sdim
+    return sdim,dimsize
 
-# mpmoine_future_modif: nouvelle fonction Remove_pSuffix
 def Remove_pSuffix(svar,mlev_sfxs,slev_sfxs,realms):
     #
     # remove suffixes only if both suffix of svar.label *and* suffix of one of the svar.dims.label  match the search suffix
@@ -624,19 +640,30 @@ def cellmethod2area(method) :
     some key words which describe given area types
     """
     if method is None                 : return None
-    if "where floating_ice_shelf"     in method : return "fisf"
-    if "where grounded_ice_shelf"     in method : return "gisf"
-    if "where snow over sea_ice area" in method : return "sosi"
     if "where ice_free_sea over sea " in method : return "ifs"
     if "where land"         in method : return "land"
-    if "where sea_ice"      in method : return "si"
+    if "where floating_ice_shelf"     in method : return "fisf"
+    if "where land over all_area_types" in method : return "loaat" #
+    if "where landuse over all_area_types"     in method : return "luoaat" #
     if "where sea"          in method : return "sea"
+    if "where sea_ice"      in method : return "si"
+    if "where sea_ice_over_sea"      in method : return "sios" #
+    if "where snow over sea_ice" in method : return "sosi"
+    if "where grounded_ice_shelf"     in method : return "gisf" #
     if "where snow"         in method : return "snow"
     if "where cloud"        in method : return "cloud"
+    if "where crops"        in method : return "crops" #
+    if "where grounded_ice_sheet"     in method : return "gist" #
+    if "ice_sheet"     in method : return "ist" #
     if "where landuse"      in method : return "lu"
+    if "where natural_grasses"     in method : return "ngrass" #
+    if "where sea_ice_melt_ponds"      in method : return "simp" #
+    if "where shrubs"      in method : return "shrubs" #
+    if "where trees"      in method : return "trees" #
+    if "where vegetation"      in method : return "veg" #
     if "where ice_shelf"    in method : return "isf"
 
-def analyze_ambiguous_MIPvarnames(dq):
+def analyze_ambiguous_MIPvarnames(dq,debug=[]):
     """
     Return the list of MIP varnames whose list of CMORvars for a single realm 
     show distinct values for the area part of the cell_methods
@@ -645,62 +672,53 @@ def analyze_ambiguous_MIPvarnames(dq):
     # of CMORvars items for the varname
     d=dict()
     for v in dq.coll['var'].items :
-        if v.label not in d : d[v.label]=[]
+        if v.label not in d :
+            d[v.label]=[]
+            if v.label  in debug : print "Adding %s"%v.label
         refs=dq.inx.iref_by_sect[v.uid].a['CMORvar']
         for r in refs :
             d[v.label].append(dq.inx.uid[r])
-            #if v.label=="prra" : print "one prra"
-    #print "d[prra]=",d["prra"]
-    # Replace dic values by dic of cell_methods
+            if v.label in debug :
+                print "Adding CmorVar %s(%s) for %s"%(v.label,dq.inx.uid[r].mipTable,dq.inx.uid[r].label)
+
+    # Replace dic values by dic of area portion of cell_methods
     for vlabel in d:
         if len(d[vlabel]) > 1 :
             cvl=d[vlabel]
             d[vlabel]=dict()
             for cv in cvl: 
                 st=dq.inx.uid[cv.stid]
+                cm=None
                 try :
                     cm=dq.inx.uid[st.cmid].cell_methods
-                    # mpmoine_a_verifier: certaines de ces chaines n existent pas dans les cell_methods de la DR
-                    cm1=cm.replace("time: mean","").replace("time: point","").\
-                        replace(" within years  over years","") .\
-                        replace('time: maximum within days  over days','').\
-                        replace('time: minimum within days  over days','').\
-                        replace('time: minimum','').\
-                        replace('time: maximum','').\
-                        replace('with samples ','')
-                    realm=cv.modeling_realm
-                    if realm=="ocean" or realm=="ocnBgchem" :
-                        cm1=cm1.replace("area: mean where sea ","")
-                    #if realm=='land':
-                    #    cm1=cm1.replace('area: mean where land ','')
-                    if True or "area:" in cm1 :
-                        cm2=cm1 #.replace("area:","")
-                        if realm not in d[vlabel]:
-                            d[vlabel][realm] =[]
-                        if cm2 not in d[vlabel][realm] :
-                            d[vlabel][realm].append(cm2)
-                        #if vlabel=="prra" : 
-                        #    print "cm2=",cm2, d[vlabel]
                 except : 
-                    pass
-                    #print "No cell method for %s %s"%(st.label,cv.label)
+                    #pass
+                    print "No cell method for %-15s %s(%s)"%(st.label,cv.label,cv.mipTable)
+                if cm is not None :
+                    area=cellmethod2area(cm)
+                    realm=cv.modeling_realm
+                    #realm=""
+                    if vlabel in debug : print "for %s 's CMORvar %s(%s), area=%s"%(vlabel,cv.label,cv.mipTable,area)
+                    if realm not in d[vlabel]: d[vlabel][realm] =dict()
+                    if area not in d[vlabel][realm] : d[vlabel][realm][area]=[]
+                    d[vlabel][realm][area].append(cv.mipTable)
+            if vlabel in debug  : print vlabel, d[vlabel]
         else : d[vlabel]=None
-    #for l in d : print l,d[l]
-    #print "d[prra]=",d["prra"]
-    #sd=d.keys() ; sd.sort()
-    #for var in sd :
-    #    if d[var] and any( [ len(l) > 1 for l in d[var].values() ]) :
-    #        print "%20s %s"%(var,`d[var]`)
-    #        pass
+
     # Analyze ambiguous cases regarding area part of the cell_method
     ambiguous=[]
     for vlabel in d:
         if d[vlabel]:
             #print vlabel,d[vlabel]
             for realm in d[vlabel] :
-                if len(d[vlabel][realm])>1 and \
-                   any([ "area" in cm for cm in d[vlabel][realm] ]):
+                if len(d[vlabel][realm])>1 :
                     ambiguous.append(( vlabel,(realm,d[vlabel][realm])))
+    if "all" in debug :
+        for v,p in ambiguous :
+            print v
+            b,d=p
+            for r in d :
+                print "\t",r,d[r]
     return ambiguous
 
 

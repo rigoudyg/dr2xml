@@ -15,7 +15,6 @@ Also : management of fields size/split_frequency
 
 """
 from table2freq import table2freq
-#-from dr2xml import dr2xml_error
 
 def normalize(grid) :
     """ in DR 1.0.2, values are :  
@@ -100,84 +99,90 @@ def DRgrid2gridatts(grid) :
 
 
 def field_size(svar, mcfg):
-    # ['nho','nlo','nha','nla','nlas','nls','nh1']  /  nz = sc.mcfg['nlo']
+
+    # COmputing field size is basee on the fact that sptial dimensions
+    # are deduced from spatial shape and values in mcfg, while
+    # attribute other_dims_size of the variable indicates he prodcut
+    # of the non-spatial dimensions sizes
+
+    # ['nho','nlo','nha','nla','nlas','nls','nh1'] / nz = sc.mcfg['nlo']
+
+    nb_lat=mcfg['nh1'] 
+    nb_lat_ocean=mcfg['nh1']
+    atm_grid_size=mcfg['nha']
+    atm_nblev=mcfg['nla']
+    soil_nblev=mcfg['nls']
+    oce_nblev=mcfg['nlo']
+    oce_grid_size=mcfg['nho']
     nb_cosp_sites=129 
     nb_curtain_sites=1000 # TBD : better estimate of 'curtain' size
-    # TBD : better size estimates for atmosphere/ocean zonal means, and ocean transects 
-    nb_lat=mcfg['nh1'] # TBC
-    nb_lat_ocean=mcfg['nh1']
-    ocean_transect_size=mcfg['nh1'] # TBC, mais comment le calculer ?
     #
     siz=0
     s=svar.spatial_shp
     if ( s == "XY-A" ): #Global field on model atmosphere levels
-        siz=mcfg['nla']*mcfg['nha']
+        siz=atm_nblev*atm_grid_size
     elif ( s == "XY-AH" ): #Global field on model atmosphere half-levels
-        siz=(mcfg['nla']+1)*mcfg['nha']
-    elif ( s == "XY-P7T" ): #Global field (7 pressure tropospheric levels)
-        siz=7*mcfg['nha']
+        siz=(atm_nblev+1)*atm_grid_size
     elif ( s[0:4] == "XY-P" ): #Global field (pressure levels)
-        siz=int(s[4:])*mcfg['nha']
+        siz=atm_grid_size*svar.other_dims_size
     elif ( s[0:4] == "XY-H" ): #Global field (altitudes)
-        siz=int(s[4:])*mcfg['nha']
+        siz=atm_grid_size*svar.other_dims_size
 
     elif ( s == "S-AH" ): #Atmospheric profiles (half levels) at specified sites
-        siz=(mcfg['nla']+1)*nb_cosp_sites
+        siz=(atm_nblev+1)*nb_cosp_sites
     elif ( s == "S-A" ): #Atmospheric profiles at specified sites
-        siz=mcfg['nla']*nb_cosp_sites
+        siz=atm_nblev*nb_cosp_sites
     elif ( s == "S-na" ): #Site (129 specified sites)
         siz=nb_cosp_sites
 
     elif ( s == "L-na" ): #COSP curtain
         siz=nb_curtain_sites        
     elif ( s == "L-H40" ): #Site profile (at 40 altitudes)
-        siz=40*nb_curtain_sites        
+        siz=nb_curtain_sites*svar.other_dims_size
 
     elif ( s == "Y-P19") : #Atmospheric Zonal Mean (on 19 pressure levels)
-        #mpmoine_next_modif:field_size: nb_lat au lieu de nblat (vu par Arnaud)
-        siz=nb_lat*19
+        siz=nb_lat*svar.other_dims_size
     elif ( s == "Y-P39") : #Atmospheric Zonal Mean (on 39 pressure levels)
-        siz=nb_lat*39
+        siz=nb_lat*svar.other_dims_size
+
     elif ( s == "Y-A" ): #Zonal mean (on model levels)
-        siz=nb_lat*mcfg['nla']
+        siz=nb_lat*atm_nblev
     elif ( s == "Y-na" ): #Zonal mean (on surface)
         siz=nb_lat
     elif ( s == "na-A" ): #Atmospheric profile (model levels)
         # mpmoine_correction:field_size: 'na-A' s'applique a des dims (alevel)+spectband mais aussi a (alevel,site) => *nb_cosp_sites
-        siz=mcfg['nla']*nb_cosp_sites
+        siz=atm_nblev*nb_cosp_sites
 
     elif ( s == "XY-S" ): #Global field on soil levels
-        siz=mcfg['nls']*mcfg['nha']
+        siz=soil_nblev*atm_grid_size
     
     elif ( s == "XY-O" ): #Global ocean field on model levels
-        siz=mcfg['nlo']*mcfg['nho']
+        siz=oce_nblev*oce_grid_size
 
     elif ( s == "XY-na" ): #Global field (single level)
-        siz=mcfg['nha']
+        siz=atm_grid_size
         if svar.modeling_realm in \
            [ 'ocean', 'seaIce', 'ocean seaIce', 'ocnBgchem', 'seaIce ocean' ] : 
-            siz=mcfg['nho']
+            siz=oce_grid_size
         
     elif ( s == "YB-R" ): #Ocean Basin Meridional Section (on density surfaces)
-        siz=mcfg['nlo']*nb_lat_ocean
+        siz=oce_nblev*nb_lat_ocean
     elif ( s == "YB-O" ): #Ocean Basin Meridional Section
-        siz=mcfg['nlo']*nb_lat_ocean
+        siz=oce_nblev*nb_lat_ocean
     elif ( s == "YB-na" ): #Ocean Basin Zonal Mean
         siz=nb_lat_ocean
 
     elif ( s == "TR-na" ): #Ocean Transect
-        siz=ocean_transect_size
+        siz=svar.other_dims_size
     elif ( s == "TRS-na" ): #Sea-ice ocean transect
-        siz=ocean_transect_size
+        siz=svar.other_dims_size
 
     elif ( s == "na-na" ): #Global mean/constant
         siz=1
 
     return siz
 
-# mpmoine_last_modif:split_frequency_for_variable: suppression de l'argument table
-# mpmoine_next_modif:split_frequency_for_variable: passage de 'context' en argument pour recuperer le model_timestep
-def split_frequency_for_variable(svar, lset, mcfg,context,printout=False):
+def split_frequency_for_variable(svar, lset, grid, mcfg,context,printout=False):
     """
     Compute variable level split_freq and returns it as a string
 
@@ -188,13 +193,12 @@ def split_frequency_for_variable(svar, lset, mcfg,context,printout=False):
 
     """
     max_size=lset.get("max_file_size_in_floats",500*1.e6)
-    size=field_size(svar, mcfg)
-    # mpmoine_last_modif:split_frequency_for_variable: on ne passe plus par table2freq pour recuperer 
-    # mpmoine_last_modif:split_frequency_for_variable: la frequence de la variable mais par svar.frequency
-    freq=svar.frequency
+    size=field_size(svar, mcfg)*lset.get("bytes_per_float",2)
     if (size != 0 ) : 
+        freq=svar.frequency
+        sts=lset["sampling_timestep"][grid][context]
         # Try by years first
-        size_per_year=size*timesteps_per_freq_and_duration(freq,365,lset["sampling_timestep"][context])
+        size_per_year=size*timesteps_per_freq_and_duration(freq,365,sts)
         nbyears=max_size/float(size_per_year)
         if printout : print "size per year=%s, size=%s, nbyears=%g"%(`size_per_year`,`size`,nbyears)
         if nbyears > 1. :
@@ -210,24 +214,21 @@ def split_frequency_for_variable(svar, lset, mcfg,context,printout=False):
                 return("200y")
         else: 
             # Try by month
-            size_per_month=size*timesteps_per_freq_and_duration(freq,31,lset["sampling_timestep"][context])
+            size_per_month=size*timesteps_per_freq_and_duration(freq,31,sts)
             nbmonths=max_size/float(size_per_month)
             if nbmonths > 1. :
                 return("1mo")
             else:
                 # Try by day
-                size_per_day=size*timesteps_per_freq_and_duration(freq,1,lset["sampling_timestep"][context])
+                size_per_day=size*timesteps_per_freq_and_duration(freq,1,sts)
                 nbdays=max_size/float(size_per_day)
                 if nbdays > 1. :
                     return("1d")
                 else:
-                    # mpmoine_last_modif:split_frequency_for_variable: on ne passe plus par table2freq pour recuperer
-                    # mpmoine_last_modif:split_frequency_for_variable: la frequence de la variable mais par svar.frequency
-                    raise(dr2xml_error("No way to put even a single day "+\
+                    raise(dr2xml_grids_error("No way to put even a single day "+\
                         "of data in %g for frequency %s, var %s, table %s"%\
                         (max_size,freq,svar.label,svar.mipTable)))
     else:
-      # mpmoine_zoom_modif:split_frequency_for_variable: print de warning si on arrive pas a calculer une split_freq
       print "Warning: field size is 0, cannot compute split frequency."
        
                 
@@ -238,21 +239,26 @@ def timesteps_per_freq_and_duration(freq,nbdays,sampling_tstep):
     if freq=="3hr" : duration=1./8
     elif freq=="6hr" : duration=1./4
     elif freq=="day" : duration=1.
-    # mpmoine_next_modif:timesteps_per_freq_and_duration: ajour de la frequence 'hr'
     elif freq=="1hr" or freq=="hr" : duration=1./24
     elif freq=="mon" : duration=31.
     elif freq=="yr" : duration=365.
-    #mpmoine_next_modif:timesteps_per_freq_and_duration: ajout des cas frequence 'subhr' et 'dec'
     elif freq=="subhr" : duration=1./(86400./sampling_tstep)
     elif freq=="dec" : duration=10.*365
+    #
     # If freq actually translate to a duration, return
     # number of timesteps for number of days
+    #
     if duration != 0. : return float(nbdays)/duration
     # Otherwise , return a sensible value
     elif freq=="fx" : return 1.
     elif freq=="monClim" : return (int(float(nbdays)/365) + 1)* 12.
     elif freq=="dayClim" : return (int(float(nbdays)/365) + 1)* 365.
     elif freq=="1hrClimMon" : return (int(float(nbdays)/31) + 1) * 24.
-
+    else : raise(dr2xml_grids_error("Frequency %s is not handled"%freq))
     
 
+class dr2xml_grids_error(Exception):
+    def __init__(self, valeur):
+        self.valeur = valeur
+    def __str__(self):
+        return `self.valeur`

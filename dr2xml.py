@@ -23,11 +23,12 @@ Changes :
   feb 2017 - S.Senesi (CNRM) - handle grids and remapping; 
                                put some func in separate module
   april-may 2017 - M-P Moine (CERFACS) : handle pressure axes ..
-  june 2017 - SS               introduce horizontal remapping
-  july 2017 - SS               improve efficieny in remapping; allow for 
+  june 2017 - S.Senesi (CNRM)  introduce horizontal remapping
+  july 2017 - S.Senesi -CNRM)  improve efficieny in remapping; allow for 
                  sampling before vert. interpolation, for filters on table, reqLink..
                  Adapt filenames to CMIP6 conventions (including date offset). 
                  Handle remapping for CFsites
+  Rather look at git log for identifying further changes and contriubutors....
 
 """
 ####################################
@@ -51,7 +52,7 @@ import dreq
 # End of pre-requisites
 ####################################
 
-version="0.23"
+version="0.24"
 print "* dr2xml version: ", version
 
 conventions="CF-1.7 CMIP-6.2" 
@@ -114,26 +115,28 @@ example_lab_and_model_settings={
 
     'institution_id': "CNRM-CERFACS", # institution should be read in CMIP6_CV, if up-to-date
 
-    # The description of lab models default source_type, in CMIP6 CV wording.
-    # The value can be overriden in simulation_settings. Or one can use entry 'configuration'
-    # (see below)
+    # We describe the "CMIP6 source type" (i.e. components assembly) which is the default
+    # for each model. This value can be changed on a per experiment basis, in experiment_settings file
+    # However, using a 'configuration' is finer (see below)
+    # CMIP6 component conventions are described at
+    #          https://github.com/WCRP-CMIP/CMIP6_CVs/blob/master/CMIP6_source_type.json
     'source_types' : { "CNRM-CM6-1" : "AOGCM AER", "CNRM-CM6-1-HR" : "AOGCM AER", 
                        "CNRM-ESM2-1": "AOGCM BGC AER CHEM"  , "CNRM-ESM2-1-HR": "AOGCM BGC AER" },
 
-    # Optional : 'configurations' are shortcuts for various couples (model, source_type)
+    # Optional : 'configurations' are shortcuts for a triplet (model, source_type, unused_contexts)
     'configurations' : {
-        "AGCM":   ("CNRM-CM6-1"   ,"AGCM"),
-        "AESM":   ("CNRM-ESM2-1"  ,"AGCM BGC AER CHEM"),
-        "AOGCM":  ("CNRM-CM6-1"   ,"AOGCM"),
-        "AOESM":  ("CNRM-ESM2-1"  ,"AOGCM BGC AER CHEM"),
-        "AGCMHR": ("CNRM-CM6-1-HR","AGCM"),
-        "AESMHR": ("CNRM-ESM2-1"  ,"AGCM BGC AER"),
-        "AOGCMHR":("CNRM-CM6-1-HR","AOGCM"),
-        "AOESMHR":("CNRM-ESM2-1"  ,"AOGCM BGC AER"),
-        "LGCM":   ("CNRM-CM6-1"   ,"LAND"),
-        "LESM":   ("CNRM-ESM2-1"  ,"LAND BGC"),
-        "OGCM":   ("CNRM-CM6-1"   ,"OGCM"),
-        "OESM":   ("CNRM-ESM2-1"  ,"OGCM BGC") },
+        "AGCM":   ("CNRM-CM6-1"   ,"AGCM"               , ['nemo']),
+        "AESM":   ("CNRM-ESM2-1"  ,"AGCM BGC AER CHEM"  , ['nemo']),
+        "AOGCM":  ("CNRM-CM6-1"   ,"AOGCM"              , []      ),
+        "AOESM":  ("CNRM-ESM2-1"  ,"AOGCM BGC AER CHEM" , []      ),
+        "AGCMHR": ("CNRM-CM6-1-HR","AGCM"               , ['nemo']),
+        "AESMHR": ("CNRM-ESM2-1"  ,"AGCM BGC AER"       , []      ),
+        "AOGCMHR":("CNRM-CM6-1-HR","AOGCM"              , []      ),
+        "AOESMHR":("CNRM-ESM2-1"  ,"AOGCM BGC AER"      , []      ),
+        "LGCM":   ("CNRM-CM6-1"   ,"LAND"               , ['nemo']),
+        "LESM":   ("CNRM-ESM2-1"  ,"LAND BGC"           , ['nemo']),
+        "OGCM":   ("CNRM-CM6-1"   ,"OGCM"               , ['surfex','trip']),
+        "OESM":   ("CNRM-ESM2-1"  ,"OGCM BGC"           , ['surfex','trip']) },
 
     #'source'         : "CNRM-CM6-1", # Useful only if CMIP6_CV is not up to date
     'references'    :  "A character string containing a list of published or web-based "+\
@@ -158,7 +161,7 @@ example_lab_and_model_settings={
     "comment"              : "",
 
     # Max variable priority level to be output (you may set 3 when creating ping_files while
-    # being more restrictive at run time); a value in simulation_settings may override this one
+    # being more restrictive at run time); values in simulation_settings may override the one below
     'max_priority' : 1,
     'tierMax'      : 1,
 
@@ -171,9 +174,23 @@ example_lab_and_model_settings={
     # excluded_vars_file="../../cnrm/non_published_variables"
     "excluded_vars" : ['pfull', 'phalf', "zfull" ], # because we have a pressure based hydrid coordinate,
                                                     # and no fixed height levels 
-    #
-    # For debugging purpose, if next list has members, this has precedence over 'excluded_vars'
+    # For debugging purpose, if next list has members, this has precedence over
+    # 'excluded_vars' and over 'excluded_vars_per_config'
     #"included_vars" : [ 'ccb' ],
+
+    # When atmospheric vertical coordinate implies putting psol in model-level output files, we
+    # must avoid creating such file_def entries if the model does not actually send the 3D fields
+    # (because this leads to files full of undefined values)
+    # We choose to describe such fields as a list of vars dependant on the model configuration
+    # because the DR is not in a good enough shape about realms for this purpose
+    "excluded_vars_per_config" : {
+        "AGCM":   [ "ch4", "co2", "co", "concdust", "ec550aer", "h2o", "hcho", "hcl", \
+                    "hno3", "mmrbc", "mmrdust", "mmroa", "mmrso4", "mmrss", \
+                    "n2o", "no2", "no", "o3Clim", "o3loss", "o3prod", "oh", "so2" ],
+        "AOGCM":   [ "ch4", "co2", "co", "concdust", "ec550aer", "h2o", "hcho", "hcl", \
+                    "hno3", "mmrbc", "mmrdust", "mmroa", "mmrso4", "mmrss", \
+                    "n2o", "no2", "no", "o3Clim", "o3loss", "o3prod", "oh", "so2" ],
+        },
     #
     "excluded_spshapes": ["XYA-na","XYG-na", # GreenLand and Antarctic grids we do not want to produce
                           "na-A", # RFMIP.OfflineRad : rld, rlu, rsd, rsu in table Efx ?????
@@ -192,20 +209,21 @@ example_lab_and_model_settings={
     # For debugging purpose : if next list has members, only those requestLinks will be processed 
     "included_request_links"  : [ ],
     
-    # We account for a list of variables which the lab wants to produce in some cases
+    # We account for a default list of variables which the lab wants to produce in most cases
+    # This can be changed at the experiment_settings level
     "listof_home_vars":"../../cnrm/listof_home_vars.txt",
     
     # Each XIOS  context does adress a number of realms
     'realms_per_context' : { 
         'nemo': ['seaIce', 'ocean', 'ocean seaIce', 'ocnBgchem', 'seaIce ocean'] ,
-        'arpsfx' : ['atmos', 'atmos atmosChem', 'aerosol', 'atmos land', 'land',
-                    'landIce land',  'aerosol land','land landIce',  'landIce', ],
+        'arpsfx' : ['atmos', 'atmos atmosChem', 'atmosChem', 'aerosol', 'atmos land', 'land',
+                    'landIce land',  'aerosol','land landIce',  'landIce', ],
         'trip'   : [],
     }, 
     # Some variables, while belonging to a realm, may fall in another XIOS context than the 
     # context which hanldes that realm
     'orphan_variables' : {
-        'trip'    : ['dgw', 'drivw', 'cfCLandToOcean', 'qgwr', 'rivi', 'rivo', 'waterDpth', 'wtd'],
+        'trip'    : ['dgw', 'drivw', 'fCLandToOcean', 'qgwr', 'rivi', 'rivo', 'waterDpth', 'wtd'],
     },
     'vars_OK' : dict(),
     # A per-variable dict of comments valid for all simulations
@@ -221,6 +239,10 @@ example_lab_and_model_settings={
     #
     # What is the maximum size of generated files, in number of float values
     "max_file_size_in_floats" : 2000.*1.e+6 , # 2 Giga octets
+    # Required NetCDF compression level
+    "compression_level"  :  0,
+    # Estimate of number of bytes per floating value, given the chosen compresssion level
+    "bytes_per_float" : 2.0,
     
     # grid_policy among None, DR, native, native+DR, adhoc- see docin grids.py 
     "grid_policy" : "adhoc",
@@ -244,8 +266,11 @@ example_lab_and_model_settings={
           "nemo" : [ "gn", ""        ,  "25 km" , "native ocean tri-polar grid with 1.47 M ocean cells" ],},
     },
     #        
-    # Basic sampling timestep set in you field definition (used for setting interval_operation)
-    "sampling_timestep" : { "surfex":900., "nemo":900., "trip": 1800. },
+    # Basic sampling timestep set in your field definition (used to feed metadata 'interval_operation')
+    "sampling_timestep" : {
+              "LR"    : { "surfex":900., "nemo":1800. },
+              "HR"    : { "surfex":900., "nemo":1800. },
+    },
 
     # We create sampled time-variables for controlling the frequency of vertical interpolations
     "vertical_interpolation_sample_freq" : "3h",
@@ -262,12 +287,19 @@ example_lab_and_model_settings={
     # Just put the start year in child and the start years in parent for all members
     "branching" : { "historical" : (1850, [ 2350, 2400, 2450 ]) },
 
-    # We can control the max output level set for all output files, and the NetCDF compression level
+    # We can control the max output level set for all output files, 
     "output_level"       : 10,
-    "compression_level"  :  0,
 
     # For debug purpose, you may slim down xml files by setting next entry to False
     "print_variables" : True ,
+
+    # Set that to True if you use a context named 'nemo' and the
+    # corresponding model unduly sets a general freq_op AT THE
+    # FIELD_DEFINITION GROUP LEVEL. Due to Xios rules for inheritance,
+    # that behavior prevents inheriting specific freq_ops by reference
+    # from dr2xml generated field_definitions
+    "nemo_sources_management_policy_master_of_the_world" : False,
+    
 }
 
 
@@ -298,7 +330,8 @@ example_simulation_settings={
     #"contact"        : "", set it only if it is specific to the simualtion
     #"project"        : "CMIP6",  #CMIP6 is the default
 
-    #'max_priority' : 1,  # a simulation may be run with a max_priority which override the one in lab_settings
+    #'max_priority' : 1,  # a simulation may be run with a max_priority which overrides the one in lab_settings
+    #'tierMax'      : 1,  # a simulation may be run with a Tiermax overrides the one in lab_settings
 
     # It is recommended that some description be included to help
     # identify major differences among variants, but care should be
@@ -318,14 +351,17 @@ example_simulation_settings={
                                         # (this is not necessarily the parent start date)
     'parent_time_ref_year' : 1850,      # MUST BE CONSISTENT WITH THE TIME UNITS OF YOUR MODEL(S) !!!
     "branch_year_in_parent": 2150,      # if your calendar is Gregorian, you can specify the branch year in parent directly
+                                        # This is an alternative to using "branch_time_in_parent"
     #"branch_time_in_parent": "365.0D0", # a double precision value, in days, used if branch_year_in_parent is not applicable
+                                         # This is an alternative to using "branch_year_in_parent"
     #'parent_time_units'    : "" #in case it is not the same as child time units
 
     "branch_year_in_child" : 1850,      # if your calendar is Gregorian, you can specify the branch year in child directly
+                                        # This is an alternative to using "branch_time_in_child"
     'child_time_ref_year'  : 1850,      # MUST BE CONSISTENT WITH THE TIME UNITS OF YOUR MODEL(S) !!!
                                         # (this is not necessarily the parent start date)
     #"branch_time_in_child" : "0.0D0",   # a double precision value in child time units (days),
-                                        # used if branch_year_in_child is not applicable
+                                        # This is an alternative to using "branch_year_in_child"
     
     #'parent_variant_label' :""  #Default to 'same variant as child'. Other cases should be exceptional
     #"parent_mip_era"       : 'CMIP5'   # only in special cases (as e.g. PMIP warm 
@@ -344,14 +380,19 @@ example_simulation_settings={
     # the all-simulation comment
     'comments'     : {
         'tas' : 'this is a dummy comment, placeholder for describing a special, simulation dependent, scheme for a given variable',
-        }
-    }
+        },
+    # We can supersede the default list of variables of lab_settings, which tells
+    # which additionnal variables/frequecny are to produce
+    "listof_home_vars":"../../cnrm/home_vars_historical.txt",
+    #
+    'unused_contexts'    : [  ]        # If you havn't set a 'configuration', you may fine tune here 
+}
 
 #def hasCMORVarName(hmvar):
 #    for cmvar in dq.coll['CMORvar'].items:
 #        if (cmvar.label==hmvar.label): return True
 
-def RequestItem_applies_for_exp_and_year(ri,experiment,lset,year=None,debug=False):
+def RequestItem_applies_for_exp_and_year(ri,experiment,lset,sset,year=None,debug=False):
     """ 
     Returns True if requestItem 'ri' in data request 'dq' (global) is relevant 
     for a given 'experiment' and 'year'. Toggle 'debug' allow some printouts 
@@ -398,16 +439,35 @@ def RequestItem_applies_for_exp_and_year(ri,experiment,lset,year=None,debug=Fals
         if year is None :
             rep=True ; endyear=None
         else :
-            rep,endyear=year_in_ri_tslice(ri,experiment,lset,year,debug=debug)
+            rep,endyear=year_in_ri(ri,experiment,lset,sset,year,debug=debug)
         return rep,endyear
     else : return False,None
 
 
+def year_in_ri(ri,experiment,lset,sset,year,debug=False):
+    if 'tslice' in ri.__dict__ :
+        rep,endyear=year_in_ri_tslice(ri,experiment,lset,year,debug=debug)
+        return rep,endyear
+    try :
+        ny=int(ri.nymax)
+        first_year=sset["branch_year_in_child"]
+        if (ny > 0) : endyear=first_year+ny-1
+        else :
+            # assume that it means : whole experiment duration
+            # TBD : year_in_ri : endyear is not meaningful for some cases
+            endyear=first_year+10000
+        applies=(year <= endyear)
+        return applies,endyear
+    except:
+        print "Cannot tell if year %d applies to reqItem %s -> assumes yes"%(year,ri.title)
+        return True,None
+        
+    
 def year_in_ri_tslice(ri,experiment,lset,year,debug=False):
     # Returns a couple : relevant, endyear.
-    # RELEVANT is True if requestItem RI has a timeslice wich
-    #   includes YEAR, either implicitly or explicitly
-    # ENDYEAR is meaningful if RELEVANT is True, and is the
+    # RELEVANT is True if requestItem RI applies to
+    #   YEAR, either implicitly or explicitly (e.g. timeslice)
+    # ENDYEAR, which is meaningful if RELEVANT is True, and is the
     #   last year in the timeslice (or None if timeslice ==
     #   the whole experiment duration)
     if 'tslice' not in ri.__dict__ :
@@ -466,7 +526,7 @@ def year_in_ri_tslice(ri,experiment,lset,year,debug=False):
     return relevant,endyear
 
 
-def select_CMORvars_for_lab(lset, sset, year=None,printout=False):
+def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
     """
     A function to list CMOR variables relevant for a lab (and also, 
     optionnally for an experiment and a year)
@@ -474,8 +534,10 @@ def select_CMORvars_for_lab(lset, sset, year=None,printout=False):
     Args:
       lset (dict): laboratory settings; used to provide the list of MIPS,  
                    the max Tier, and a list of excluded variable names
-      sset (dict): simulation settings, if willing to filter on a given 
-                   experiment - not used if year is None
+      sset (dict): simulation settings, used for indicating source_type, 
+                   max priority (and for filtering on the simulation if 
+                   year is notNone)
+                   if sset is None, use union of mips among all grid choices 
       year (int,optional) : simulation year - used to filter the request 
                    for an experiment and a year
 
@@ -486,21 +548,26 @@ def select_CMORvars_for_lab(lset, sset, year=None,printout=False):
     #
     # From MIPS set to Request links
     global sc,global_rls
-    sc = dreqQuery(dq=dq, tierMax=lset['tierMax'])
+    if sset and 'tierMax' in sset : tierMax=sset['tierMax']
+    else: tierMax=lset['tierMax']
+    sc = dreqQuery(dq=dq, tierMax=tierMax)
 
     # Set sizes for lab settings, if available (or use CNRM-CM6-1 defaults)
     mcfg = collections.namedtuple( 'mcfg', \
                 ['nho','nlo','nha','nla','nlas','nls','nh1'] )
-    source,source_type=get_source_id_and_type(sset,lset)
-    grid_choice=lset["grid_choice"][source]
-    sizes=lset["sizes"][grid_choice]
-    #sizes=lset.get("sizes",[259200,60,64800,40,20,5,100])
-    sc.mcfg = mcfg._make( sizes )._asdict()
-    #
-    rls_for_mips=sc.getRequestLinkByMip(lset['mips'][grid_choice])
+    if sset : 
+        source,source_type=get_source_id_and_type(sset,lset)
+        grid_choice=lset["grid_choice"][source]
+        mips_list=set(lset['mips'][grid_choice])
+        sizes=lset["sizes"][grid_choice] #sizes=lset.get("sizes",[259200,60,64800,40,20,5,100])
+        sc.mcfg = mcfg._make( sizes )._asdict()
+    else :
+        mips_list= set()
+        for grid in lset['mips']  : mips_list=mips_list.union(set(lset['mips'][grid]))
+    rls_for_mips=sc.getRequestLinkByMip(mips_list)
     if printout :
         print "Number of Request Links which apply to MIPS",
-        print lset['mips'][grid_choice]," is: ", len(rls_for_mips)
+        print mips_list," is: ", len(rls_for_mips)
     #
     excluded_rls=[]
     for rl in rls_for_mips :
@@ -517,7 +584,7 @@ def select_CMORvars_for_lab(lset, sset, year=None,printout=False):
             print "RequestLink %s is not included"%rl.label
             rls_for_mips.remove(rl)
     #
-    if (year) :
+    if sset and year :
         experiment_id=sset['experiment_id']
         #print "Request links before filter :"+`[ rl.label for rl in rls_for_mips ]`
         filtered_rls=[]
@@ -527,15 +594,15 @@ def select_CMORvars_for_lab(lset, sset, year=None,printout=False):
             for ri_id in ri_ids :
                 ri=dq.inx.uid[ri_id]
                 #print "Checking requestItem ",ri.label
-                applies,endyear=RequestItem_applies_for_exp_and_year(ri,
-                                       experiment_id, lset,year,False)
+                applies,endyear= RequestItem_applies_for_exp_and_year(ri,
+                                 experiment_id, lset,sset,year,False)
                 if applies:
                     #print "% 25s"%ri.label," applies "
                     filtered_rls.append(rl)
         rls=filtered_rls
         if printout :
             print "Number of Request Links which apply to experiment ", \
-                experiment_id,"and MIPs", lset['mips'][grid_choice] ," is: ",len(rls)
+                experiment_id,"and MIPs", mips_list ," is: ",len(rls)
         #print "Request links that apply :"+`[ rl.label for rl in filtered_rls ]`
     else :
         rls=rls_for_mips
@@ -545,7 +612,7 @@ def select_CMORvars_for_lab(lset, sset, year=None,printout=False):
     # From Request links to CMOR vars + grid
     #miprl_ids=[ rl.uid for rl in rls ]
     #miprl_vars=sc.varsByRql(miprl_ids, pmax=lset['max_priority'])
-    if 'max_priority' in sset :
+    if sset and 'max_priority' in sset :
         pmax=sset['max_priority']
     else :
         pmax=lset['max_priority']
@@ -568,6 +635,12 @@ def select_CMORvars_for_lab(lset, sset, year=None,printout=False):
     exctab=lset.get("excluded_tables",[])
     incvars=lset.get('included_vars',[])
     excvars=lset.get('excluded_vars',[])
+    if sset :
+        config=sset['configuration']
+        if ('excluded_vars_per_config' in lset) and \
+           (config in lset('excluded_vars_per_config')):
+            excvars.extend(lset['excluded_vars_per_config'][config])
+    
     filtered_vars=[]
     for (v,g) in miprl_vars_grids : 
         cmvar=dq.inx.uid[v]
@@ -614,7 +687,7 @@ def select_CMORvars_for_lab(lset, sset, year=None,printout=False):
         svar = simple_CMORvar()
         cmvar = dq.inx.uid[v]
         complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues)
-        svar.Priority=analyze_priority(cmvar,lset['mips'][grid_choice])
+        svar.Priority=analyze_priority(cmvar,mips_list)
         svar.grids=d[v]
         simplified_vars.append(svar)
     print '\nNumber of simplified vars is :',len(simplified_vars)
@@ -663,7 +736,7 @@ def wr(out,key,dic_or_val=None,num_type="string",default=None) :
             print 'error in wr,  no value provided for %s'%key
     if val :
         if num_type == "string" :
-            val=val.replace(">","").replace("<","").strip()
+            val=val.replace(">","&gt").replace("<","&lt").replace("&","&amp").replace("'","&apos").replace('"',"&quot").strip()
         if num_type != "string" or len(val) > 0 :
             out.write('  <variable name="%s"  type="%s" > %s '%(key,num_type,val))
             out.write('  </variable>\n')
@@ -728,7 +801,7 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
                         field_defs,axis_defs,grid_defs,domain_defs,
                         dummies,skipped_vars_per_table,
                         prefix,context,grid,pingvars=None,enddate=None,
-                        attributes=[]) :
+                        attributes=[],debug=[]) :
     """ 
     Generate an XIOS file_def entry in out for :
       - a dict for laboratory settings 
@@ -772,7 +845,15 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
         # MPM : si on a defini un label non ambigu alors on l'utilise comme alias (i.e. le field_ref) 
         # et pour l'alias seulement (le nom de variable dans le nom de fichier restant svar.label)
         if cmv.label_non_ambiguous: alias=lset["ping_variables_prefix"]+cmv.label_non_ambiguous
-        else:                       alias=lset["ping_variables_prefix"]+cmv.label
+        else:
+            # 'tau' is ambiguous in DR 01.00.18 : either a variable name (stress)
+            # or a dimension name (optical thickness). We choose to rename the stress
+            if cmv.label != "tau" :
+                alias=lset["ping_variables_prefix"]+cmv.label
+            else:
+                alias=lset["ping_variables_prefix"]+"tau_stress"
+        if (cmv.label in debug) : print "write_xios_file_def ... processing %s, alias=%s"%(cmv.label,alias)
+        
         # TBD mpmoine_correction: suppression des terminaisons en "Clim" pour l'alias 
         split_alias=alias.split("Clim")
         alias=split_alias[0]
@@ -859,13 +940,13 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
     for c in required_components :
         if c not in actual_components :
             ok=False
-            print "Model component %s is required by CMIP6 CV and not present (%s)"%\
-                (c,actual_components)
+            print "Model component %s is required by CMIP6 CV for experiment %s and not present (present=%s)"%\
+                (c,experiment,`actual_components`)
     for c in actual_components :
         if c not in allowed_components and c not in required_components :
-            ok=False
-            print "Model component %s is present but not required nor allowed (%s)"%\
-                (c,allowed_components)
+            #ok=False # TBD : restore blocking on non-allowed components
+            print "Warning : Model component %s is present but not required nor allowed (%s)"%\
+                (c,`allowed_components` )
     if not ok : raise dr2xml_error("Issue with model components")
     #
     #--------------------------------------------------------------------
@@ -896,7 +977,8 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
     #--------------------------------------------------------------------
     # Compute XIOS split frequency
     #--------------------------------------------------------------------
-    split_freq=split_frequency_for_variable(cmv, lset, sc.mcfg, context)
+    grid=lset['grid_choice'][source_id]
+    split_freq=split_frequency_for_variable(cmv, lset, grid, sc.mcfg, context)
     #
     #--------------------------------------------------------------------
     # Write XIOS file node:
@@ -953,6 +1035,7 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
     wr(out,'dr2xml_version',version) 
     #
     wr(out,'description',description)
+    wr(out,'title',description)
     wr(out,'experiment',experiment)
     wr(out,'experiment_id',expname)
     # 
@@ -1078,7 +1161,8 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
     if cmv.spatial_shp[0:4]=='XY-A':
         # create a field_def entry for surface pressure 
         sv_psol=get_simplevar(dq,"ps",table)
-        create_xios_aux_elmts_defs(sv_psol,lset["ping_variables_prefix"]+"ps",table,lset,sset,end_field_defs,
+        if sv_psol :
+            create_xios_aux_elmts_defs(sv_psol,lset["ping_variables_prefix"]+"ps",table,lset,sset,end_field_defs,
                           field_defs,axis_defs,grid_defs,domain_defs,dummies,context,target_hgrid_id,pingvars)
     #
     for shape in end_field_defs :
@@ -1182,15 +1266,21 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
                     # <grid id="FULL_klev_zoom_plev7h_hus"> <domain domain_ref="FULL" /> <axis axis_ref="zoom_plev7h_hus" />
                     grid_id=create_grid_def(grid_defs,axis_key,alias_ping,context_index,table)
 		    #
-                    # alias_sample for a field which is time-sampled before vertical interpolation
-	            # <field id="CMIP6_hus_sampled_3h" field_ref="CMIP6_hus" operation="instant" freq_op="3h" expr="@CMIP6_hus"/>
+                    # alias_instant for a field which has 'instant' operation before time sampling
+                    alias_instant=alias_ping+"_instant" # e.g.  CMIP6_zg_instant
+	            # <field id="CMIP6_hus_instant" field_ref="CMIP6_hus" operation="instant" />
+                    field_defs[alias_instant]=\
+                        '<field id="%-25s field_ref="%-25s operation="instant" />'\
+                        %(alias_instant+'"',alias_ping+'"')
+
+                    # alias_sample for a field which is time-samples the insant field before vertical interpolation
                     alias_sample=alias_ping+"_sampled_"+vert_freq # e.g.  CMIP6_zg_sampled_3h
-                    field_defs[alias_sample]='<field id="%-25s field_ref="%-25s operation="instant" freq_op="%-10s expr="@%s" />'\
-                        %(alias_sample+'"',alias_ping+'"',vert_freq+'"',alias_ping)
+	            # <field id="CMIP6_hus_sampled_3h" field_ref="CMIP6_hus_instant" freq_op="3h" expr="@CMIP6_hus_instant"/>
+                    field_defs[alias_sample]=\
+                        '<field id="%-25s field_ref="%-25s freq_op="%-10s > @%s </field>'\
+                        %(alias_sample+'"',alias_instant+'"',vert_freq+'"',alias_instant)
 
                     # Construct a field def for the re-mapped variable
-                    # mpmoine_correction:create_xios_aux_elmts_defs: passage par grid_ref aussi pour les
-                    # variables definies sur des zoom
                     if sd.is_zoom_of: # cas d'une variable definie grace a 2 axis_def (union+zoom)
                         
                         # SS : Must first create grid for levels union, e.g.:
@@ -1241,7 +1331,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
         # TBD should remap before zonal mean # STOPICI_REVUE_TBD_09-05-2017
         grid_ref="zonal_mean"
         grid_defs[grid_ref]='<grid id="%s"/>'%grid_ref
-    elif ssh == 'S-na' and sv.label != "rsucs" : # COSP sites (and a bug in DR 01.00.15 for rsucs)
+    elif (ssh == 'S-na' or ssh == 'S-A') and sv.label != "rsucs" : # COSP sites (and a bug in DR 01.00.15 for rsucs)
         grid_ref=cfsites_grid_id
         grid_defs[grid_ref]='<grid id="%s" > <domain id="%s" /> </grid>\n'%(cfsites_grid_id,cfsites_domain_id)
         domain_defs[cfsites_radix]=' <domain id="%s" type="unstructured" prec="8"> '%(cfsites_domain_id)+\
@@ -1293,8 +1383,8 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
     # TBD: idealement if faudrait recuperer le type attendu de la DR ou des tables CMOR
     # TBD : implement DR recommendation for cell_method : The syntax is to append, in brackets, 'interval: *amount* *units*', for example 'area: time: mean (interval: 1 hr)'. The units must be valid UDUNITS, e.g. day or hr.
     rep+=' cell_methods="%s" cell_methods_mode="overwrite"'% sv.cell_methods
-    if operation != 'once' : rep+='\n\texpr="@%s"'%alias_with_operation
     rep+='>\n'
+    if operation != 'once' : rep+='\n\@%s'%alias_with_operation
     # Create field_def for alias_with_operation
     field_defs[alias_with_operation]='<field id="%-25s field_ref="%-25s operation="%-10s/>'\
                             %(alias_with_operation+'"',last_alias+'"',operation+'"')
@@ -1311,7 +1401,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
     rep+=wrv("standard_name",sv.stdname)
     #
     desc=sv.description
-    if desc : desc=desc.replace(">","").replace("<","") #.replace("'","").replace('"',"")
+    if desc : desc=desc.replace(">","&gt;").replace("<","&lt;").replace("&","&amp;").replace("'","&apos;").replace('"',"&quot;")
     rep+=wrv("description",desc)
     #
     rep+=wrv("long_name",sv.long_name)
@@ -1328,7 +1418,9 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
     # We override the Xios value for interval_operation because it sets it to
     # the freq_output value with our settings (for complicated reasons)
     if not has_vertical_interpolation :
-        interval_op=`int(lset['sampling_timestep'][context])`+" s"
+        source,source_type=get_source_id_and_type(sset,lset)
+        grid_choice=lset["grid_choice"][source]
+        interval_op=`int(lset['sampling_timestep'][grid_choice][context])`+" s"
     else:
         interval_op=vert_freq
     rep+=wrv('interval_operation',interval_op)
@@ -1340,13 +1432,10 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
     end_field_defs[grid_ref].append(rep)
     #print "Appending for %s : %s"%(grid_ref,rep)
 
-# mpmoine_last_modif:gather_AllSimpleVars: nouvelle fonction qui rassemble les operations select_CMORvars_for_lab et read_homeVars_list. 
-# mpmoine_last_modif:gather_AllSimpleVars: Necessaire pour create_ping_file qui doit tenir compte des extra_Vars
 def gather_AllSimpleVars(lset,sset,year=False,printout=False):
     mip_vars_list=select_CMORvars_for_lab(lset,sset,year,printout=printout)
-    if lset['listof_home_vars']:
-        process_homeVars(lset,mip_vars_list,dq,printout=printout)
-
+    if sset.get('listof_home_vars',lset.get('listof_home_vars',None)):
+        process_homeVars(lset,sset,mip_vars_list,dq,printout=printout)
     else: print "Info: No HOMEvars list provided."
     return mip_vars_list
 
@@ -1426,11 +1515,11 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfile=No
     svars_per_table=dict()
     context_realms=lset['realms_per_context'][context]
     for realm in context_realms :
+        excludedv=dict()
         print "Processing realm '%s' of context '%s'"%(realm,context)
         #print 50*"_"
         if realm in svars_per_realm.keys():
             for svar in svars_per_realm[realm] :
-                excludedv=dict()
                 # exclusion de certaines spatial shapes (ex. Polar Stereograpic Antarctic/Groenland)
                 if svar.label not in lset['excluded_vars'] and \
                    svar.spatial_shp and \
@@ -1534,21 +1623,26 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfile=No
         domain_defs=dict()
         #for table in ['day'] :    
         out.write('\n<file_definition type="one_file" enabled="true" > \n')
+        foo,sourcetype=get_source_id_and_type(sset,lset)
         for table in svars_per_table :
             count=dict()
             for svar in svars_per_table[table] :
-                if svar.label not in count :
-                    count[svar.label]=svar
-                    for grid in svar.grids :
-                        write_xios_file_def(svar,year,table, lset,sset,out,cvs_path,
+                if True : #realm_is_processed(svar.modeling_realm,sourcetype) : <- realms are note reliable enough in DR
+                    if svar.label not in count :
+                        count[svar.label]=svar
+                        for grid in svar.grids :
+                            write_xios_file_def(svar,year,table, lset,sset,out,cvs_path,
                                             field_defs,axis_defs,grid_defs,domain_defs,dummies,
                                             skipped_vars_per_table,prefix,context,grid,pingvars,
                                             enddate,attributes)
-                else :
-                    pass
-                    print "Duplicate var in %s : %s %s %s"%(
-                        table, svar.label, `svar.temporal_shp`, \
-                        `count[svar.label].temporal_shp`)
+                    else :
+                        pass
+                        print "Duplicate var in %s : %s %s %s"%(
+                            table, svar.label, `svar.temporal_shp`, \
+                            `count[svar.label].temporal_shp`)
+                else:
+                    print "Var %s of realm %s is not processed by source-type %s"%\
+                        (svar.label,svar.modeling_realm,sourcetype)
         if cfsites_grid_id in grid_defs : out.write(cfsites_input_filedef())
         out.write('\n</file_definition> \n')
         #
@@ -1559,19 +1653,28 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfile=No
         #--------------------------------------------------------------------
         # Write all domain, axis, field defs needed for these file_defs
         out.write('<field_definition> \n')
+        if lset.get("nemo_sources_management_policy_master_of_the_world",False) and context=='nemo':
+            out.write('<field_group freq_op="_reset_" >\n')
         for obj in field_defs: out.write("\t"+field_defs[obj]+"\n")
+        if lset.get("nemo_sources_management_policy_master_of_the_world",False) and context=='nemo':
+            out.write('</field_group>\n')
         out.write('\n</field_definition> \n')
+        #
         out.write('\n<axis_definition> \n')
+        out.write('<axis_group prec="8">\n')
         for obj in axis_defs.keys(): out.write("\t"+axis_defs[obj]+"\n")
         # mpmoine_zoom_modif:generate_file_defs: on ecrit maintenant les axis defs pour les unions
         # mpmoine_zoom_amelioration:generate_file_defs: usage de 'use_union_zoom'
         if False and lset['use_union_zoom']:
             for obj in union_axis_defs.keys(): out.write("\t"+union_axis_defs[obj]+"\n")
+        out.write('</axis_group>\n')
         out.write('</axis_definition> \n')
         #
         out.write('\n<domain_definition> \n')
+        out.write('<domain_group prec="8">\n')
         if lset['grid_policy'] != "native" : create_standard_domains(domain_defs)
         for obj in domain_defs.keys(): out.write("\t"+domain_defs[obj]+"\n")
+        out.write('</domain_group>\n')
         out.write('</domain_definition> \n')
         #
         out.write('\n<grid_definition> \n')
@@ -1586,17 +1689,19 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfile=No
         print "\nfile_def written as %s"%filename
     
     # mpmoine_petitplus:generate_file_defs: pour sortir des stats sur ce que l'on sort reelement
+    # SS - non : gros plus
     if printout: print_SomeStats(context,svars_per_table,skipped_vars_per_table)
 
     warn=dict()
     for warning,label,table in cell_method_warnings:
         if warning not in warn : warn[warning]=set()
         warn[warning].add(label)
-    print "Warnings about cell methods (with var list)"
+    print "\nWarnings about cell methods (with var list)"
     for w in warn  : print "\t",w," for vars : ",warn[w]
         
 
 # mpmoine_petitplus: nouvelle fonction print_SomeStats (plus d'info sur les skipped_vars, nbre de vars / (shape,freq) )
+# SS - non : gros plus
 def print_SomeStats(context,svars_per_table,skipped_vars_per_table):
 
     #--------------------------------------------------------------------
@@ -1606,8 +1711,8 @@ def print_SomeStats(context,svars_per_table,skipped_vars_per_table):
     print "\nTables concerned by context %s : "%context, svars_per_table.keys()
     print "\nVariables per table :"
     for table in svars_per_table.keys():
-    	print "\n>>> DBG >>> TABLE",
-        print "%15s %02d ---->"%(table,len(svars_per_table[table])),
+    	print "\n>>> TABLE",
+        print "%12s %02d ---->"%(table,len(svars_per_table[table])),
         for svar in svars_per_table[table]: 
         	print svar.label+"("+str(svar.Priority)+")",
     print
@@ -1649,12 +1754,13 @@ def print_SomeStats(context,svars_per_table,skipped_vars_per_table):
     			dic_freq.update({shp:dic_shp})
     			stats_out.update({freq:dic_freq})
 
-    print "\n\nSome Statistics..."
+    print "\n\nSome Statistics on variables per frequency+shape..."
     for k1,v1 in stats_out.items():
     	for k2,v2 in v1.items():
     		nb=len(v2.values())
-    		print "\n\n* %d variables output at %s frequency with shape %s ---> "%(nb,k1,k2)
+    		print "\n\t* %d variables output at %s frequency with shape %s ---> "%(nb,k1,k2),
     		for k3,v3 in v2.items(): print k3,"(",v3,"),",
+    print
     return True
 
 
@@ -2181,7 +2287,7 @@ def analyze_cell_time_method(cm,label,table,printout=False):
 # mpmoine_amelioration: ajout argument 'path_special' a la fonction pingFileForRealmsList
 def pingFileForRealmsList(settings, context,lrealms,svars,path_special,dummy="field_atm",
                           dummy_with_shape=False, exact=False,
-                          comments=False,prefix="CV_",filename=None, ):
+                          comments=False,prefix="CV_",filename=None, debug=[]):
     """Based on a list of realms LREALMS and a list of simplified vars
     SVARS, create the ping file which name is ~
     ping_<realms_list>.xml, which defines fields for all vars in
@@ -2233,22 +2339,18 @@ def pingFileForRealmsList(settings, context,lrealms,svars,path_special,dummy="fi
         if context in settings['orphan_variables'] and \
            v.label in settings['orphan_variables'][context] :
             lvars.append(v)
-    #if lset["use_area_suffix"] :
-    #    lvars.sort(key=lambda x:x.label_with_area)
-    #else:
-    # mpmoine_future_modif:pingFileForRealmsList: on s'appuie sur le mipVar label (label_without_area) et non plus le cmorVar label
-    # mpmoine_zoom_modif:pingFileForRealmsList: on s'appuie sur le label_without_psuffix et non plus le label_without_area
     lvars.sort(key=lambda x:x.label_without_psuffix)
-    # Remove duplicates
-    uniques=[] ; last_label=""
+
+    # Remove duplicates : want to get one single entry for all variables having
+    # the same label without psuffix, and one for each having different non-ambiguous label
+    # (Merci Marie-Pierre pour la régression....)
+    uniques=[] ; labels=[]
     for v in lvars : 
-        # mpmoine_future_modif:pingFileForRealmsList: on s'appuie sur le mipVar label (label_without_area) et non plus le cmorVar label
-        # mpmoine_zoom_modif:pingFileForRealmsList: on s'appuie sur le label_without_psuffix et non plus le label_without_area
-        if v.label_without_psuffix!= last_label : 
-            uniques.append(v)
-            # mpmoine_future_modif:pingFileForRealmsList: on s'appuie sur le mipVar label (label_without_area) et non plus le cmorVar label
-            # mpmoine_zoom_modif:pingFileForRealmsList: on s'appuie sur le label_without_psuffix et non plus le label_without_area
-            last_label=v.label_without_psuffix
+        if not v.label_non_ambiguous in labels :
+            uniques.append(v); labels.append(v.label_non_ambiguous)
+        elif not v.label_without_psuffix in labels :
+            uniques.append(v); labels.append(v.label_without_psuffix)
+            
     lvars=uniques
     #
     if filename is None : filename="ping"+name+".xml"
@@ -2269,6 +2371,8 @@ def pingFileForRealmsList(settings, context,lrealms,svars,path_special,dummy="fi
         fp.write('--> \n\n')
         fp.write('<context id="%s">\n'%context)
         fp.write("<field_definition>\n")
+        if settings.get("nemo_sources_management_policy_master_of_the_world",False) and context=='nemo':
+            out.write('<field_group freq_op="_reset_" >\n')
         if exact : 
             fp.write("<!-- for variables which realm intersects any of "\
                      +name+"-->\n")
@@ -2282,6 +2386,8 @@ def pingFileForRealmsList(settings, context,lrealms,svars,path_special,dummy="fi
                 label=v.label_non_ambiguous
             else:
                 label=v.label_without_psuffix
+            if (v.label in debug) : print "pingFile ... processing %s in table %s, label=%s"%(v.label,v.mipTable,label)
+                
             # mpmoine_amelioration:pingFileForRealmsList: protection si specials existe
             if specials and label in specials :
                 line=ET.tostring(specials[label]).replace("DX_",prefix)
@@ -2314,6 +2420,8 @@ def pingFileForRealmsList(settings, context,lrealms,svars,path_special,dummy="fi
         if 'atmos' in lrealms or 'atmosChem' in lrealms or 'aerosol' in lrealms :
             for tab in ["ap","ap_bnds","b","b_bnds" ] :
                 fp.write('\t<field id="%s%s" field_ref="dummy_hyb" /><!-- One of the hybrid coordinate arrays -->\n'%(prefix,tab))
+        if settings.get("nemo_sources_management_policy_master_of_the_world",False) and context=='nemo':
+            out.write('</field_group>\n')
         fp.write("</field_definition>\n")
         #
         print "%3d variables written for %s"%(len(lvars),filename)
@@ -2653,7 +2761,7 @@ def endyear_for_CMORvar(dq,cv,expt,year,lset):
 def get_source_id_and_type(sset,lset):
     if "configuration" in sset and "configurations" in lset :
         if sset["configuration"] in lset["configurations"]: 
-            source_id,source_type=lset["configurations"][sset["configuration"]]
+            source_id,source_type,unused=lset["configurations"][sset["configuration"]]
         else:
             dr2xml_error("configuration %s is not known (allowed values are :)"%\
                          sset["configuration"]+`lset["configurations"]`)
@@ -2667,6 +2775,37 @@ def get_source_id_and_type(sset,lset):
             else:
                 raise dr2xml_error("Fatal: No source-type found - Check inputs")
     return source_id,source_type
+
+def realm_is_processed(realm, source_type) :
+    """ 
+    Tells if a realm is definitely not processed by a source type 
+
+    list of source-types : AGCM BGC AER CHEM LAND OGCM AOGCM
+    list of known realms : ['seaIce', '', 'land', 'atmos atmosChem', 'landIce', 'ocean seaIce', 
+                            'landIce land', 'ocean', 'atmosChem', 'seaIce ocean', 'atmos', 
+                             'aerosol', 'atmos land', 'land landIce', 'ocnBgChem']
+    """
+    components=source_type.split(" ")
+    rep=True
+    #
+    if realm=="atmosChem" and 'CHEM' not in components : return False
+    if realm=="aerosol"   and 'AER'  not in components : return False
+    if realm=="ocnBgChem" and 'BGC'  not in components : return False
+    #
+    with_ocean= ('OGCM' in components or 'AOGCM' in components)
+    if 'seaIce' in realm and not with_ocean : return False
+    if 'ocean'  in realm and not with_ocean : return False
+    #
+    with_atmos= ('AGCM' in components or 'AOGCM' in components)
+    if 'atmos'  in realm and not with_atmos : return False 
+    if 'atmosChem' in realm and not with_atmos : return False 
+    if realm=='' and not with_atmos : return False #In DR 01.00.15 : some atmos variables have realm=''
+    #
+    with_land= with_atmos or ('LAND' in components)
+    if 'land'   in realm and not with_land  : return False
+    #
+    return rep
+
 
 class dr2xml_error(Exception):
     def __init__(self, valeur):

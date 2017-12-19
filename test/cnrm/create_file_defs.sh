@@ -18,6 +18,7 @@ year=$1 ; shift # year that will be simulated
 enddate=$1 ; shift  # simulation end date - YYYYMMDD - must be at 00h next day
 ncdir=${1:-@IOXDIR@/} ; shift  # Directory for data outpu files
 print=${1:-1} ; shift # Want some reporting ?
+homedr=$1 # Filename for a 'home' data request - optional
 #dummies=include
 #
 # Set paths for all software components
@@ -45,8 +46,12 @@ cat >create_file_defs.tmp.py  <<-EOF
 	if $print=="1" : printout=True
 	else : printout=False
 	#
+	if "$homedr" : 
+	  simulation_settings['listof_home_vars']="$homedr"
+	config_unused=lab_and_model_settings.get('configuration',(1,1,[]))[2]
+	exp_unused=simulation_settings.get('unused_contexts',[])
 	contexts=[ c for c in lab_and_model_settings['realms_per_context'] \
-          if c not in simulation_settings.get('unused_contexts',[]) ]
+	  if c not in  and exp_unused and c not in config_unused ]
 	for context in contexts :
 	    ok=generate_file_defs(lab_and_model_settings,
 	                       simulation_settings,
@@ -59,13 +64,14 @@ cat >create_file_defs.tmp.py  <<-EOF
 	                       dummies    ="$dummies",
 	                       dirname    ="./",
 	                       prefix     ="$ncdir",
-                               attributes= [ ("EXPID","$EXPID") ]   
+                               attributes =[ ("EXPID","$EXPID") ]
                                )
 	#if not ok : sys.exit(1)
 	EOF
 
 
 [[ $(uname -n) == beaufix* ]] && module load python/2.7.5-2 2>/dev/null
+[[ $(uname -n) == prolix*  ]] && module load python/2.7.5   2>/dev/null
 python create_file_defs.tmp.py
 ret=$?
 rm create_file_defs.tmp.py simulation_settings_tmp.py lab_and_model_settings_tmp.py
