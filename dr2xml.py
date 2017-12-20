@@ -1542,7 +1542,7 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfile=No
     #--------------------------------------------------------------------
     # Add svars belonging to the orphan list
     #--------------------------------------------------------------------
-    if 'orphan_variables' in context and context in lset['orphan_variables']:
+    if context in lset['orphan_variables']:
         orphans=lset['orphan_variables'][context]
         for svar in mip_vars_list :
             if svar.label in orphans:

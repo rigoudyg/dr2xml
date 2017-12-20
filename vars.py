@@ -171,6 +171,8 @@ def read_extraTable(path,table,dq,printout=False):
         dims2shape['longitude|latitude|plev23']='XY-P23'
         # mpmoine_zoom_modif:dims2shape:: ajout de XY-P10 qui n'est pas dans la DR mais demande dans les tables Primavera
         dims2shape['longitude|latitude|plev10']='XY-P10'
+        # David : test
+        dims2shape['longitude|latitude|plev5']='XY-P5'
     #
     if not dim2dimid:
         for g in dq.coll['grids'].items:
@@ -386,6 +388,7 @@ def process_homeVars(lset,mip_vars_list,mips,dq,expid=False,printout=False):
 def get_corresp_CMORvar(hmvar,dq):
     collect=dq.coll['CMORvar']
     count=0
+    empty_table=(hmvar.mipTable=='NONE') 
     for cmvar in collect.items:
         # Consider case where no modeling_realm associated to the
         # current CMORvar as matching anymay. 
@@ -395,9 +398,10 @@ def get_corresp_CMORvar(hmvar,dq):
         match_table=(cmvar.mipTable==hmvar.mipTable)
         match_realm=(hmvar.modeling_realm in cmvar.modeling_realm.split(' '))
         empty_realm=(cmvar.modeling_realm=='') 
-        matching=( match_label and match_freq and match_table and \
+
+        matching=( match_label and (match_freq or empty_table) and (match_table or empty_table) and \
                    (match_realm or empty_realm) )
-        if matching: 
+        if matching:
             same_shapes=(get_SpatialAndTemporal_Shapes(cmvar,dq)==\
                          [hmvar.spatial_shp,hmvar.temporal_shp])
             if same_shapes:
@@ -410,7 +414,12 @@ def get_corresp_CMORvar(hmvar,dq):
                     " -> Provided:",[hmvar.spatial_shp,hmvar.temporal_shp],\
                     'Expected:',get_SpatialAndTemporal_Shapes(cmvar,dq)
     if count==1: 
+        # empty table means that the frequency is changed (but the variable exists in another frequency cmor table
+        if empty_table : var_freq_asked = hmvar.frequency
         complement_svar_using_cmorvar(hmvar,cmvar_found,dq,None)
+        if empty_table : 
+           hmvar.frequency = var_freq_asked 
+           hmvar.mipTable = "None"+ hmvar.frequency
         return hmvar
     return False
 

@@ -79,6 +79,9 @@ table2freq={
     "Primmon"  : ("1mo","mon"),
     "PrimmonZ" : ("1mo","mon"),
 
+    "Myproday"  : ("1d","day"),
+    "testAmon"  : ("1mo","mon"),
+
     "ipsl5day" : ("5d","5day"),
     
 }
@@ -145,6 +148,7 @@ table2splitfreq={
     "Primmon"  : "10y",
     "PrimmonZ" : "10y",
 
+    "Myproday" : "1mo",
     "ipsl5day" : "1y",
 
 }
