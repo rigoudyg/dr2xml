@@ -239,6 +239,7 @@ def timesteps_per_freq_and_duration(freq,nbdays,sampling_tstep):
     if freq=="3hr" : duration=1./8
     elif freq=="6hr" : duration=1./4
     elif freq=="day" : duration=1.
+    elif freq=="5day" : duration=5.
     elif freq=="1hr" or freq=="hr" : duration=1./24
     elif freq=="mon" : duration=31.
     elif freq=="yr" : duration=365.

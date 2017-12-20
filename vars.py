@@ -74,6 +74,7 @@ dims2shape={}
 dim2dimid={}
 dr_single_levels=[]
 stdName2mipvarLabel={}
+tcmName2tcmValue={"time-mean":"time: mean", "time-point":"time: point"} 
 
 def read_homeVars_list(hmv_file,expid,mips,dq,path_extra_tables=None):
     """
@@ -121,6 +122,7 @@ def read_homeVars_list(hmv_file,expid,mips,dq,path_extra_tables=None):
             home_var.label_with_area=home_var.label
             if hmv_type=='perso':
                 home_var.mip_era='PERSO'
+                home_var.cell_methods=tcmName2tcmValue[home_var.temporal_shp] 
                 home_var.label_without_psuffix=home_var.label
             if home_var.mip!="ANY":
                 if home_var.mip in mips:
@@ -299,11 +301,11 @@ def get_SpatialAndTemporal_Shapes(cmvar,dq):
             print "Warning: temporal shape for ",cmvar.label," in table ",cmvar.mipTable," not found in DR."
     return [spatial_shape,temporal_shape]
 
-def process_homeVars(lset,sset,mip_vars_list,dq,expid=False,printout=False):
+def process_homeVars(lset,mip_vars_list,mips,dq,expid=False,printout=False):
     printmore=False
     # Read HOME variables
     home_vars_list=read_homeVars_list(lset['listof_home_vars'],
-                                     expid,lset['mips'],dq,lset['path_extra_tables'])
+                expid,mips,dq,lset['path_extra_tables']) 
     for hv in home_vars_list: 
         hv_info={"varname":hv.label,"realm":hv.modeling_realm,
                  "freq":hv.frequency,"table":hv.mipTable}

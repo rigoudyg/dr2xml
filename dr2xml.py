@@ -313,6 +313,8 @@ example_simulation_settings={
 
     # DR experiment name to process. See http://clipc-services.ceda.ac.uk/dreq/index/experiment.html
     "experiment_id"  : "historical",
+    # Experiment label to use in file names and attribute, (default is experiment_id)
+    #"expid_in_filename"   : "myexpe", 
 
     # If there is no configuration in lab_settings which matches you case, please rather
     # use next or next two entries : source_id and, if needed, source_type
@@ -547,7 +549,7 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
     """
     #
     # From MIPS set to Request links
-    global sc,global_rls
+    global sc,global_rls,grid_choice
     if sset and 'tierMax' in sset : tierMax=sset['tierMax']
     else: tierMax=lset['tierMax']
     sc = dreqQuery(dq=dq, tierMax=tierMax)
@@ -766,6 +768,10 @@ def freq2datefmt(in_freq,operation,lset):
         datefmt="%y%mo%d"
         if operation in ["average","minimum","maximum"] : offset="12h"
         else : offset="1d"
+    elif freq=="5day":
+        datefmt="%y%mo%d"
+        if operation in ["average","minimum","maximum"] : offset="60h"
+        else : offset="5d"
     elif freq in ["6hr","3hr","3hrClim","1hr","hr","1hrClimMon"]: 
         datefmt="%y%mo%d%h%mi"
         if freq=="6hr":
@@ -922,6 +928,7 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
         if not CMIP6_experiments.has_key(sset['experiment_id']):
             dr2xml_error("Issue getting experiment description in CMIP6 CV for %20s"%sset['experiment_id'])
         expname=sset['experiment_id']
+        expid_in_filename=sset.get('expid_in_filename',expname) 
         exp_entry=CMIP6_experiments[expname]
         experiment=exp_entry['experiment']
         description=exp_entry['description']
@@ -956,18 +963,18 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
     #
     if "fx" in cmv.frequency:
         filename="%s%s_%s_%s_%s_%s_%s"%\
-                   (prefix,cmv.label,table,source_id,expname, member_id,grid_label)
+                   (prefix,cmv.label,table,source_id,expid_in_filename, member_id,grid_label)
     else:
         # mpmoine: WIP doc v6.2.3 : a suffix "-clim" should be added if climatology
         # TBD : for the time being, we should also have attribute 'climatology' for dimension 'time', but we cannot -> forget temporarily about this extension
         if False and "Clim" in cmv.frequency: suffix="-clim"
         else: suffix=""
         filename="%s%s_%s_%s_%s_%s_%s_%s%s"%\
-            (prefix,cmv.label,table,source_id,expname,
+            (prefix,cmv.label,table,source_id,expid_in_filename,
              member_id,grid_label,date_range,suffix)
     #
     further_info_url="https://furtherinfo.es-doc.org/%s.%s.%s.%s.%s.%s"%(
-        mip_era,institution_id,source_id,expname,
+        mip_era,institution_id,source_id,expid_in_filename,
         sub_experiment_id,variant_label)
     #
     #--------------------------------------------------------------------
@@ -1030,10 +1037,11 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
     wr(out,'data_specs_version',dq.version) 
     wr(out,'dr2xml_version',version) 
     #
-    wr(out,'description',description)
-    wr(out,'title',description)
-    wr(out,'experiment',experiment)
-    wr(out,'experiment_id',expname)
+    wr(out,'experiment_id',expid_in_filename)
+    if experiment_id != expid_in_filename :
+        wr(out,'description',description)
+        wr(out,'title',description)
+        wr(out,'experiment',experiment)
     # 
     # TBD: check external_variables
     # Let us yet hope that all tables but those with an 'O'
@@ -1424,8 +1432,9 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
 
 def gather_AllSimpleVars(lset,sset,year=False,printout=False):
     mip_vars_list=select_CMORvars_for_lab(lset,sset,year,printout=printout)
-    if sset.get('listof_home_vars',lset.get('listof_home_vars',None)):
-        process_homeVars(lset,sset,mip_vars_list,dq,printout=printout)
+    if lset['listof_home_vars']:
+        process_homeVars(lset,mip_vars_list,lset["mips"][grid_choice],dq,expid=sset['experiment_id'],printout=printout)
+
     else: print "Info: No HOMEvars list provided."
     return mip_vars_list
 
@@ -1507,6 +1516,7 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfile=No
         excludedv=dict()
         print "Processing realm '%s' of context '%s'"%(realm,context)
         #print 50*"_"
+        excludedv=dict()
         if realm in svars_per_realm.keys():
             for svar in svars_per_realm[realm] :
                 # exclusion de certaines spatial shapes (ex. Polar Stereograpic Antarctic/Groenland)
@@ -1688,8 +1698,8 @@ def print_SomeStats(context,svars_per_table,skipped_vars_per_table):
     print "\nTables concerned by context %s : "%context, svars_per_table.keys()
     print "\nVariables per table :"
     for table in svars_per_table.keys():
-    	print "\n>>> TABLE",
-        print "%12s %02d ---->"%(table,len(svars_per_table[table])),
+    	print "\n>>> TABLE:",
+        print "%15s %02d ---->"%(table,len(svars_per_table[table])),
         for svar in svars_per_table[table]: 
         	print svar.label+"("+str(svar.Priority)+")",
     print
@@ -1701,6 +1711,7 @@ def print_SomeStats(context,svars_per_table,skipped_vars_per_table):
     if skipped_vars_per_table:
 	print "\nSkipped variables (i.e. whose alias is not present in the pingfile):"
         for table,skipvars in skipped_vars_per_table.items():
+    	    print "\n>>> TABLE:",
             print "%15s %02d/%02d ---->"%(table,len(skipvars),len(svars_per_table[table])),
             #TBS# print "\n\t",table ," ",len(skipvars),"--->",
             for skv in skipvars: 
