@@ -19,6 +19,7 @@ enddate=$1 ; shift  # simulation end date - YYYYMMDD - must be at 00h next day
 ncdir=${1:-@IOXDIR@/} ; shift  # Directory for data outpu files
 print=${1:-1} ; shift # Want some reporting ?
 homedr=$1 # Filename for a 'home' data request - optional
+path_extra_tables=$1 # Filename for a 'home' data request - optional
 #dummies=include
 #
 # Set paths for all software components
@@ -26,7 +27,7 @@ homedr=$1 # Filename for a 'home' data request - optional
 root=$(cd $(dirname $0) ; pwd)
 cvspath=$root/CMIP6_CVs # Path for CMIP6_CV
 dr2xmlpath=$root/dr2pub
-DRpath=$root/01.00.15/dreqPy
+DRpath=$root/01.00.18/dreqPy
 #
 #CVtag=$(cd $cvspath ; git log --oneline | head -n 1 | cut -d\  -f 1)
 export PYTHONPATH=$dr2xmlpath:$DRpath:$PYTHONPATH
@@ -48,10 +49,15 @@ cat >create_file_defs.tmp.py  <<-EOF
 	#
 	if "$homedr" : 
 	  simulation_settings['listof_home_vars']="$homedr"
-	config_unused=lab_and_model_settings.get('configuration',(1,1,[]))[2]
+	if "$path_extra_tables" : 
+	  simulation_settings['path_extra_tables']="$path_extra_tables" 
+	config=simulation_settings['configuration']
+	configuration_triplet=lab_and_model_settings['configurations'][config]
+	config_unused=configuration_triplet[2]
 	exp_unused=simulation_settings.get('unused_contexts',[])
+	#print "exp_unsued=",exp_unused," config_unused=",config_unused
 	contexts=[ c for c in lab_and_model_settings['realms_per_context'] \
-	  if c not in  and exp_unused and c not in config_unused ]
+	  if c not in exp_unused and c not in config_unused ]
 	for context in contexts :
 	    ok=generate_file_defs(lab_and_model_settings,
 	                       simulation_settings,

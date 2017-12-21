@@ -92,6 +92,7 @@ def read_homeVars_list(hmv_file,expid,mips,dq,path_extra_tables=None):
       A list of 'simplified CMOR variables'
     """
     #
+    if hmv_file is None : return []
     # File structure: name of attributes to read, number of header line 
     home_attrs=['type','label','modeling_realm','frequency','mipTable','temporal_shp','spatial_shp','experiment','mip']
     skip=3
@@ -306,8 +307,9 @@ def get_SpatialAndTemporal_Shapes(cmvar,dq):
 def process_homeVars(lset,mip_vars_list,mips,dq,expid=False,printout=False):
     printmore=False
     # Read HOME variables
-    home_vars_list=read_homeVars_list(lset['listof_home_vars'],
-                expid,mips,dq,lset['path_extra_tables']) 
+    homevars=sset.get('listof_home_vars',lset.get('listof_home_vars',None))
+    extra_tables=sset('path_extra_tables',lset('path_extra_tables',None))
+    home_vars_list=read_homeVars_list(homevars,expid,mips,dq,extra_tables)
     for hv in home_vars_list: 
         hv_info={"varname":hv.label,"realm":hv.modeling_realm,
                  "freq":hv.frequency,"table":hv.mipTable}
@@ -683,6 +685,7 @@ def analyze_ambiguous_MIPvarnames(dq,debug=[]):
                 if cm is not None :
                     area=cellmethod2area(cm)
                     realm=cv.modeling_realm
+                    if (area=='sea' and realm=='ocean') : area=None
                     #realm=""
                     if vlabel in debug : print "for %s 's CMORvar %s(%s), area=%s"%(vlabel,cv.label,cv.mipTable,area)
                     if realm not in d[vlabel]: d[vlabel][realm] =dict()

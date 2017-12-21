@@ -211,7 +211,10 @@ example_lab_and_model_settings={
     
     # We account for a default list of variables which the lab wants to produce in most cases
     # This can be changed at the experiment_settings level
-    "listof_home_vars":"../../cnrm/listof_home_vars.txt",
+    #"listof_home_vars":"../../cnrm/listof_home_vars.txt",
+
+    # If we use extra tables, we can set it here (and supersed it in experiment settings)
+    #'path_extra_tables'=
     
     # Each XIOS  context does adress a number of realms
     'realms_per_context' : { 
@@ -385,8 +388,11 @@ example_simulation_settings={
         },
     # We can supersede the default list of variables of lab_settings, which tells
     # which additionnal variables/frequecny are to produce
-    "listof_home_vars":"../../cnrm/home_vars_historical.txt",
-    #
+    #"listof_home_vars":"../../cnrm/home_vars_historical.txt",
+
+    # If we use extra tables, we can here supersede the value set it in lab settings
+    #'path_extra_tables'=
+
     'unused_contexts'    : [  ]        # If you havn't set a 'configuration', you may fine tune here 
 }
 
@@ -654,7 +660,7 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
            ((len(inctab)>0 and ttable.label in inctab) or \
             (len(inctab)==0 and ttable.label not in exctab)):
             filtered_vars.append((v,g))
-            #print "for var %s, ttable=%s"%(cmvar.label,ttable.label)
+            if (ttable.label=="Oclim") : print "for var %s, ttable=%s"%(cmvar.label,ttable.label)
     if printout :
         print 'Number once filtered by excluded/included vars and tables and spatial shapes is : %s'%len(filtered_vars)
 
@@ -772,18 +778,18 @@ def freq2datefmt(in_freq,operation,lset):
         datefmt="%y%mo%d"
         if operation in ["average","minimum","maximum"] : offset="60h"
         else : offset="5d"
-    elif freq in ["6hr","3hr","3hrClim","1hr","hr","1hrClimMon"]: 
+    elif freq in ["6hr","6hrPt","3hr","3hrPt","3hrClim","1hr","hr","1hrClimMon"]: 
         datefmt="%y%mo%d%h%mi"
-        if freq=="6hr":
+        if freq=="6hr" or freq=="6hrPt":
             if operation in ["average","minimum","maximum"] : offset="3h"
             else : offset="6h"
-        elif freq in [ "3hr", "3hrClim"] :
+        elif freq in [ "3hr", "3hrPt", "3hrClim"] :
             if operation in ["average","minimum","maximum"] : offset="90mi"
             else : offset="3h"
         elif freq in ["1hr", "1hrClimMon"]: 
             if operation in ["average","minimum","maximum"] : offset="30mi"
             else : offset="1h"
-    elif freq=="subhr":
+    elif freq=="subhr" or freq=="subhrPt":
         datefmt="%y%mo%d%h%mi%s"
         # assume that 'subhr' means every timestep
         if operation in ["average","minimum","maximum"] :
@@ -959,6 +965,7 @@ def write_xios_file_def(cmv,year,table,lset,sset,out,cvspath,
     #
     date_range="%start_date%-%end_date%" # XIOS syntax
     operation,detect_missing = analyze_cell_time_method(cmv.cell_methods,cmv.label,table,printout=False)
+    #print "--> ",cmv.label, cmv.frequency, table
     date_format,offset_begin,offset_end=freq2datefmt(cmv.frequency,operation,lset)
     #
     if "fx" in cmv.frequency:
@@ -1233,13 +1240,11 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
     # TBD Should ensure that various additionnal dims are duly documented by model or pingfile (e.g. tau)
     if ssh[0:4] in ['XY-H','XY-P'] or ssh[0:3] == 'Y-P' or \
        (ssh[0:5]=='XY-na' and prefix+sv.label not in pingvars ):
-        # mpmoine_question: je ne comprend pas l'usage de nextvar... A priori on ne peut pas avoir plus d'une dimension verticale ?
         for sd in sv.sdims.values(): # Expect that only one can be a vertical dim
             if isVertDim(sd):
                 vert_freq=lset["vertical_interpolation_sample_freq"]
                 has_vertical_interpolation=True
-                # mpmoine_zoom_modif:create_xios_aux_elmts_defs: on supprime l'usage de netxvar
-                # mpmoine_zoom_modif:create_xios_aux_elmts_defs: passage par 2 niveaux de field id auxiliaires rebond (alias et alias2)
+                #  passage par 2 niveaux de field id auxiliaires rebond (alias et alias2)
                 alias1=alias+"_"+sd.label   # e.g. 'CMIP6_hus7h_plev7h'
                 alias_ping=prefix+lwps      # e.g. 'CMIP6_hus' and not 'CMIP6_hus7h'; 'CMIP6_co2' and not 'CMIP6_co2Clim'
 
@@ -1330,7 +1335,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
         # TBD should remap before zonal mean # STOPICI_REVUE_TBD_09-05-2017
         grid_ref="zonal_mean"
         grid_defs[grid_ref]='<grid id="%s"/>'%grid_ref
-    elif (ssh == 'S-na' or ssh == 'S-A') and sv.label != "rsucs" : # COSP sites (and a bug in DR 01.00.15 for rsucs)
+    elif (ssh == 'S-na' and 'rsucs' not in alias)  : # COSP sites
         grid_ref=cfsites_grid_id
         grid_defs[grid_ref]='<grid id="%s" > <domain id="%s" /> </grid>\n'%(cfsites_grid_id,cfsites_domain_id)
         domain_defs[cfsites_radix]=' <domain id="%s" type="unstructured" prec="8"> '%(cfsites_domain_id)+\
@@ -1338,9 +1343,10 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
         # 
     elif ssh == 'TR-na' or ssh == 'TRS-na' : #transects,   oce or SI
         pass
-    elif ssh[0:3] == 'XY-' or ssh[0:3] == 'S-A'  or ( ssh == 'S-na' and sv.label == "rsucs") :
+    elif ssh[0:3] == 'XY-' or ssh[0:3] == 'S-A'  or (ssh== "S-na" and 'rsucs' in alias) : 
         # this includes 'XY-AH' and 'S-AH' : model half-levels
-        if (ssh[0:3] == 'S-A') : target_hgrid_id="cfsites_domain"
+        if (ssh[0:3] == 'S-A' or (ssh== "S-na" and 'rsucs' in alias )) :
+            target_hgrid_id="cfsites_domain"
         if target_hgrid_id :
             # Must create and a use a grid similar to the last one defined 
             # for that variable, except for a change in the hgrid/domain
@@ -1382,7 +1388,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
     # TBD : implement DR recommendation for cell_method : The syntax is to append, in brackets, 'interval: *amount* *units*', for example 'area: time: mean (interval: 1 hr)'. The units must be valid UDUNITS, e.g. day or hr.
     rep+=' cell_methods="%s" cell_methods_mode="overwrite"'% sv.cell_methods
     rep+='>\n'
-    if operation != 'once' : rep+='\n\@%s'%alias_with_operation
+    if operation != 'once' : rep+='\t\t@%s\n'%alias_with_operation
     # Create field_def for alias_with_operation
     field_defs[alias_with_operation]='<field id="%-25s field_ref="%-25s operation="%-10s/>'\
                             %(alias_with_operation+'"',last_alias+'"',operation+'"')
@@ -1432,7 +1438,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
 
 def gather_AllSimpleVars(lset,sset,year=False,printout=False):
     mip_vars_list=select_CMORvars_for_lab(lset,sset,year,printout=printout)
-    if lset['listof_home_vars']:
+    if sset.get('listof_home_vars',lset.get('listof_home_vars',None)):
         process_homeVars(lset,mip_vars_list,lset["mips"][grid_choice],dq,expid=sset['experiment_id'],printout=printout)
 
     else: print "Info: No HOMEvars list provided."
@@ -1444,7 +1450,8 @@ def generate_file_defs(lset,sset,year,enddate,context,cvs_path,pingfile=None,
     import cProfile, pstats, StringIO
     pr = cProfile.Profile()
     pr.enable()
-    generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfile=pingfile,dummies=dummies,printout=printout,dirname=dirname,prefix=prefix,attributes=attributes) 
+    generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfile=pingfile,
+                             dummies=dummies,printout=printout,dirname=dirname,prefix=prefix,attributes=attributes) 
     pr.disable()
     s = StringIO.StringIO()
     sortby = 'cumulative'
@@ -1628,9 +1635,9 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfile=No
                                             enddate,attributes)
                     else :
                         pass
-                        print "Duplicate var in %s : %s %s %s"%(
-                            table, svar.label, `svar.temporal_shp`, \
-                            `count[svar.label].temporal_shp`)
+                        #print "Duplicate var in %s : %s %s %s"%(
+                        #    table, svar.label, `svar.temporal_shp`, \
+                        #    `count[svar.label].temporal_shp`)
                 else:
                     print "Var %s of realm %s is not processed by source-type %s"%\
                         (svar.label,svar.modeling_realm,sourcetype)
@@ -1711,7 +1718,7 @@ def print_SomeStats(context,svars_per_table,skipped_vars_per_table):
     if skipped_vars_per_table:
 	print "\nSkipped variables (i.e. whose alias is not present in the pingfile):"
         for table,skipvars in skipped_vars_per_table.items():
-    	    print "\n>>> TABLE:",
+    	    print ">>> TABLE:",
             print "%15s %02d/%02d ---->"%(table,len(skipvars),len(svars_per_table[table])),
             #TBS# print "\n\t",table ," ",len(skipvars),"--->",
             for skv in skipvars: 

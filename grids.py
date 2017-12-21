@@ -236,14 +236,15 @@ def timesteps_per_freq_and_duration(freq,nbdays,sampling_tstep):
     # This function returns the number of records within nbdays
     duration=0.
     # Translate freq strings to duration in days
-    if freq=="3hr" : duration=1./8
+    if freq=="3hr" or freq=="3hrPt" : duration=1./8
     elif freq=="6hr" : duration=1./4
+    elif freq=="6hrPt" : duration=1./4
     elif freq=="day" : duration=1.
     elif freq=="5day" : duration=5.
     elif freq=="1hr" or freq=="hr" : duration=1./24
     elif freq=="mon" : duration=31.
     elif freq=="yr" : duration=365.
-    elif freq=="subhr" : duration=1./(86400./sampling_tstep)
+    elif freq=="subhr" or freq=="subhrPt" : duration=1./(86400./sampling_tstep)
     elif freq=="dec" : duration=10.*365
     #
     # If freq actually translate to a duration, return

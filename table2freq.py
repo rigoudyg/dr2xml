@@ -9,10 +9,12 @@
 
 table2freq={
     "3hr"      : ("3h","3hr"),
+    "3hrPt"    : ("3h","3hrPt"),
 
     "6hrLev"   : ("6h","6hr"),
     "6hrPlev"  : ("6h","6hr"),
     "6hrPlevPt": ("6h","6hr"),
+    "6hrPt"    : ("6h","6hrPt"),
 
     "AERday"   :  ("1d","day"),
     "AERfx"    : ("1d","fx"),
@@ -39,6 +41,7 @@ table2freq={
     "Emon"     : ("1mo","mon"),
     "EmonZ"    : ("1mo","mon"),
     "Esubhr"   : ("1ts","subhr"),
+    "subhrPt"  : ("1ts","subhrPt"),
     "Eyr"      : ("1y","yr"),
 
     "IfxAnt"   :("1d","fx"),
