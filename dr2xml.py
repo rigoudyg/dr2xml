@@ -1439,7 +1439,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
 def gather_AllSimpleVars(lset,sset,year=False,printout=False):
     mip_vars_list=select_CMORvars_for_lab(lset,sset,year,printout=printout)
     if sset.get('listof_home_vars',lset.get('listof_home_vars',None)):
-        process_homeVars(lset,mip_vars_list,lset["mips"][grid_choice],dq,expid=sset['experiment_id'],printout=printout)
+        process_homeVars(lset,sset,mip_vars_list,lset["mips"][grid_choice],dq,expid=sset['experiment_id'],printout=printout)
 
     else: print "Info: No HOMEvars list provided."
     return mip_vars_list

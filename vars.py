@@ -304,7 +304,7 @@ def get_SpatialAndTemporal_Shapes(cmvar,dq):
             print "Warning: temporal shape for ",cmvar.label," in table ",cmvar.mipTable," not found in DR."
     return [spatial_shape,temporal_shape]
 
-def process_homeVars(lset,mip_vars_list,mips,dq,expid=False,printout=False):
+def process_homeVars(lset,ssetmip_vars_list,mips,dq,expid=False,printout=False):
     printmore=False
     # Read HOME variables
     homevars=sset.get('listof_home_vars',lset.get('listof_home_vars',None))
