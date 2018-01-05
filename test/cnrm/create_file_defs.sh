@@ -18,7 +18,7 @@ year=$1 ; shift # year that will be simulated
 enddate=$1 ; shift  # simulation end date - YYYYMMDD - must be at 00h next day
 ncdir=${1:-@IOXDIR@/} ; shift  # Directory for data outpu files
 print=${1:-1} ; shift # Want some reporting ?
-homedr=$1 # Filename for a 'home' data request - optional
+homedr=$1 ; shift # Filename for a 'home' data request - optional
 path_extra_tables=$1 # Filename for a 'home' data request - optional
 #dummies=include
 #

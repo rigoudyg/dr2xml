@@ -4,7 +4,7 @@ print_DR_stdname_errors=False
 
 import sys,os
 import json
-from table2freq import table2freq
+from table2freq import guess_freq_from_table_name
 #-from dr2xml import dr2xml_error
 
 # A class for unifying CMOR vars and home variables
@@ -211,7 +211,8 @@ def read_extraTable(path,table,dq,printout=False):
             extra_var.long_name=v["long_name"].strip(' ')
             extra_var.stdunits=v["units"].strip(' ')
             extra_var.modeling_realm=v["modeling_realm"].strip(' ')
-            extra_var.frequency=table2freq[tbl][1]
+            #extra_var.frequency=table2freq[tbl][1]
+            extra_var.frequency=guess_freq_from_table(tbl)
             extra_var.mipTable=tbl
             extra_var.cell_methods=v["cell_methods"].strip(' ')
             extra_var.cell_measures=v["cell_measures"].strip(' ')
@@ -444,6 +445,7 @@ def complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues,debug=[]):
     svar.Priority= cmvar.defaultPriority
     svar.positive = cmvar.positive.rstrip(' ')
     svar.modeling_realm = cmvar.modeling_realm.rstrip(' ')
+    if (svar.modeling_realm[0:3]=="zoo") : svar.modeling_realm="ocnBgChem" #Because wrong in DR01.00.20
     svar.label = cmvar.label.rstrip(' ')
     [svar.spatial_shp,svar.temporal_shp]=get_SpatialAndTemporal_Shapes(cmvar,dq)
     svar.cmvar=cmvar
@@ -471,9 +473,12 @@ def complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues,debug=[]):
                 #svar.description = stdname.description
             elif sn._h.label == 'remarks' :
                 svar.stdname = sn.uid.rstrip(' ')
-                if sn_issues is not None and svar.stdname=="missing" or 'pending' in svar.stdname :
+                if sn_issues is not None and svar.stdname=="missing" or \
+                   svar.stdname=='pending' or 'unset' in svar.stdname :
+                    #print "issue with %s, stdname=|%s|"%(svar.label,svar.stdname)
                     if svar.stdname not in sn_issues : sn_issues[svar.stdname]=set()
                     sn_issues[svar.stdname].add(svar.label)
+                    svar.stdname='' # For CF compliance , see https://github.com/cmip6dr/CMIP6_DataRequest_VariableDefinitions/issues/279
                     #print "for var %s, sn is %s"%(svar.label,svar.stdname)
             else:
                 print "for var %s, sn._h.label=%s"%(svar.label,sn._h.label)
