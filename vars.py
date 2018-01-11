@@ -104,6 +104,7 @@ def read_homeVars_list(hmv_file,expid,mips,dq,path_extra_tables=None):
     # Build list of home variables
     homevars=[]
     extravars=[]
+    extra_vars_per_table = dict()
     for line in data[skip:]:  
         line_split=line.split(';')
         # get the Table full name 
