@@ -211,7 +211,7 @@ def select_context(rootel,context_id):
                 return context
 
 # mpmoine_amelioration: ajout de l'argument 'path_parse' a la fonction init_context
-def init_context(context_id,path_parse,printout=False):
+def init_context(context_id,path_parse="./",printout=False):
     # mpmoine_merge_dev2_v0.12:init_context: ajout de "./parse/" pour acceder a iodef.xml
     xmldef=path_parse+"iodef.xml"
     if printout: print "Parsing %s ..."%xmldef,
@@ -260,13 +260,13 @@ def id2grid(field_id,index,printout=False) :
 
 if False :
     
-    nemo=init_context('nemo',False)
+    nemo=init_context('nemo',"./",False)
     #print nemo.keys()
     grid=id2grid("CMIP6_O18sw",nemo,True)
     print grid.attrib['id'] ; print
 
 
-    arpsfx=init_context('arpsfx',False)
+    arpsfx=init_context('arpsfx',"./",False)
     grid=id2grid("CMIP6_cdnc",arpsfx,True)
     #grid=None
     if grid is not None: 
