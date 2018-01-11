@@ -113,14 +113,17 @@ def read_homeVars_list(hmv_file,expid,mips,dq,path_extra_tables=None):
             if '_' not in table: sys.exit("Abort: a prefix is expected in extra Table name: "+table)
             line_split[4]=table.split('_')[1]
         hmv_type=line_split[0].strip(' ')
-        if hmv_type!='extra':       
-            home_var=simple_CMORvar()
-            cc=-1
-            for col in line_split:
-                ccol=col.lstrip(' ').rstrip('\n\t ')
-                if ccol!='': 
-                    cc+=1
-                    setattr(home_var,home_attrs[cc],ccol)
+        # If extra, the table can be added as a whole or by variable
+        extra_tables = []
+        #if hmv_type!='extra':       
+        home_var=simple_CMORvar()
+        cc=-1
+        for col in line_split:
+            ccol=col.lstrip(' ').rstrip('\n\t ')
+            if ccol!='': 
+                cc+=1
+                setattr(home_var,home_attrs[cc],ccol)
+        if hmv_type!='extra':
             home_var.label_with_area=home_var.label
             if hmv_type=='perso':
                 home_var.mip_era='PERSO'
@@ -137,9 +140,22 @@ def read_homeVars_list(hmv_file,expid,mips,dq,path_extra_tables=None):
                     if home_var.experiment==expid: homevars.append(home_var)
                 else: 
                     homevars.append(home_var)
-        else:
-            extra_vars=read_extraTable(path_extra_tables,table,dq,printout=False)
-            extravars.extend(extra_vars)    
+        else :
+            if not extra_vars_per_table.has_key(table) :
+                 extra_vars_per_table[table] = read_extraTable(path_extra_tables,table,dq,printout=False)
+            if home_var.label == "ANY" :
+                 extravars.extend(extra_vars_per_table[table])
+            else :
+                 # find home_var in extra_vars
+                 var_found = None
+                 for var in extra_vars_per_table[table] :
+                     if var.label == home_var.label : 
+                       var_found = var
+                       break
+                 if var_found is None :
+                     print " 'extra' variable %s not found in table %s"%(home_var.label, table)
+                 else :
+                     extravars.append(var_found)
     print "Number of 'cmor' and 'perso' among home variables: ",len(homevars)
     print "Number of 'extra' among home variables: ",len(extravars)
     homevars.extend(extravars) 
@@ -174,7 +190,7 @@ def read_extraTable(path,table,dq,printout=False):
         # mpmoine_zoom_modif:dims2shape:: ajout de XY-P10 qui n'est pas dans la DR mais demande dans les tables Primavera
         dims2shape['longitude|latitude|plev10']='XY-P10'
         # David : test
-        dims2shape['longitude|latitude|plev5']='XY-P5'
+        dims2shape['longitude|latitude|plev7hm']='XY-P7HM'
     #
     if not dim2dimid:
         for g in dq.coll['grids'].items:
@@ -310,8 +326,8 @@ def process_homeVars(lset,sset,mip_vars_list,mips,dq,expid=False,printout=False)
     printmore=False
     # Read HOME variables
     homevars=sset.get('listof_home_vars',lset.get('listof_home_vars',None))
-    extra_tables=sset.get('path_extra_tables',lset.get('path_extra_tables',None))
-    home_vars_list=read_homeVars_list(homevars,expid,mips,dq,extra_tables)
+    path_extra_tables=sset.get('path_extra_tables',lset.get('path_extra_tables',None))
+    home_vars_list=read_homeVars_list(homevars,expid,mips,dq,path_extra_tables)
     for hv in home_vars_list: 
         hv_info={"varname":hv.label,"realm":hv.modeling_realm,
                  "freq":hv.frequency,"table":hv.mipTable}
