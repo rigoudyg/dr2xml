@@ -14,7 +14,6 @@ dr2xml allows for the lab to choose among various policy  :
 Also : management of fields size/split_frequency 
 
 """
-from table2freq import table2freq
 
 def normalize(grid) :
     """ in DR 1.0.2, values are :  
@@ -236,16 +235,16 @@ def timesteps_per_freq_and_duration(freq,nbdays,sampling_tstep):
     # This function returns the number of records within nbdays
     duration=0.
     # Translate freq strings to duration in days
-    if freq=="3hr" or freq=="3hrPt" : duration=1./8
-    elif freq=="6hr" : duration=1./4
-    elif freq=="6hrPt" : duration=1./4
-    elif freq=="day" : duration=1.
-    elif freq=="5day" : duration=5.
-    elif freq=="1hr" or freq=="hr" : duration=1./24
-    elif freq=="mon" : duration=31.
-    elif freq=="yr" : duration=365.
-    elif freq=="subhr" or freq=="subhrPt" : duration=1./(86400./sampling_tstep)
-    elif freq=="dec" : duration=10.*365
+    if   freq=="3hr" or freq=="3hrPt" or freq=="3h" : duration=1./8
+    elif freq=="6hr" or freq=="6hrPt" or freq=="6h" : duration=1./4
+    elif freq=="day" or freq=="1d"                  : duration=1.
+    elif freq=="5day" or freq=="5d"                 : duration=5.
+    elif freq=="10day" or freq=="10d"               : duration=10.
+    elif freq=="1hr" or freq=="hr" or freq=="1hrPt" or freq=="1h" : duration=1./24
+    elif freq=="mon" or freq=="monPt" or freq=="monC" or freq=="1mo" : duration=31.
+    elif freq=="yr"  or freq=="yrPt" or freq=="1y"  : duration=365.
+    elif freq=="subhr" or freq=="subhrPt" or freq=="1ts" : duration=1./(86400./sampling_tstep)
+    elif freq=="dec" or freq=="10y"                  : duration=10.*365
     #
     # If freq actually translate to a duration, return
     # number of timesteps for number of days
@@ -253,9 +252,10 @@ def timesteps_per_freq_and_duration(freq,nbdays,sampling_tstep):
     if duration != 0. : return float(nbdays)/duration
     # Otherwise , return a sensible value
     elif freq=="fx" : return 1.
-    elif freq=="monClim" : return (int(float(nbdays)/365) + 1)* 12.
-    elif freq=="dayClim" : return (int(float(nbdays)/365) + 1)* 365.
-    elif freq=="1hrClimMon" : return (int(float(nbdays)/31) + 1) * 24.
+    #elif freq=="monClim" : return (int(float(nbdays)/365) + 1)* 12.
+    #elif freq=="dayClim" : return (int(float(nbdays)/365) + 1)* 365.
+    #elif freq=="1hrClimMon" : return (int(float(nbdays)/31) + 1) * 24.
+    elif freq=="1hrCM" : return (int(float(nbdays)/31) + 1) * 24.
     else : raise(dr2xml_grids_error("Frequency %s is not handled"%freq))
     
 

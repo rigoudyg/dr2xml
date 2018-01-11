@@ -35,8 +35,9 @@ class simple_CMORvar(object):
         self.mip            = None
         self.Priority       = 1     # Will be changed using DR or extra-Tables
         self.mip_era        = False # Later changed in projectname (uppercase) when appropriate
+        self.prec           = "float"
         self.missing        = 1.e+20
-        self.cmvar          =None  # corresponding CMORvar, if any
+        self.cmvar          = None  # corresponding CMORvar, if any
 
 # A class for unifying grid info coming from DR and extra_Tables
 #
@@ -212,7 +213,7 @@ def read_extraTable(path,table,dq,printout=False):
             extra_var.stdunits=v["units"].strip(' ')
             extra_var.modeling_realm=v["modeling_realm"].strip(' ')
             #extra_var.frequency=table2freq[tbl][1]
-            extra_var.frequency=guess_freq_from_table(tbl)
+            extra_var.frequency=guess_freq_from_table_name(tbl)
             extra_var.mipTable=tbl
             extra_var.cell_methods=v["cell_methods"].strip(' ')
             extra_var.cell_measures=v["cell_measures"].strip(' ')
@@ -305,11 +306,11 @@ def get_SpatialAndTemporal_Shapes(cmvar,dq):
             print "Warning: temporal shape for ",cmvar.label," in table ",cmvar.mipTable," not found in DR."
     return [spatial_shape,temporal_shape]
 
-def process_homeVars(lset,ssetmip_vars_list,mips,dq,expid=False,printout=False):
+def process_homeVars(lset,sset,mip_vars_list,mips,dq,expid=False,printout=False):
     printmore=False
     # Read HOME variables
     homevars=sset.get('listof_home_vars',lset.get('listof_home_vars',None))
-    extra_tables=sset('path_extra_tables',lset('path_extra_tables',None))
+    extra_tables=sset.get('path_extra_tables',lset.get('path_extra_tables',None))
     home_vars_list=read_homeVars_list(homevars,expid,mips,dq,extra_tables)
     for hv in home_vars_list: 
         hv_info={"varname":hv.label,"realm":hv.modeling_realm,
@@ -440,6 +441,7 @@ def complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues,debug=[]):
         ambiguous_mipvarnames=analyze_ambiguous_MIPvarnames(dq)
         
     # Get information form CMORvar
+    svar.prec=cmvar.type # integer / float / double
     svar.frequency = cmvar.frequency.rstrip(' ')
     svar.mipTable = cmvar.mipTable.rstrip(' ')
     svar.Priority= cmvar.defaultPriority
@@ -448,6 +450,9 @@ def complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues,debug=[]):
     if (svar.modeling_realm[0:3]=="zoo") : svar.modeling_realm="ocnBgChem" #Because wrong in DR01.00.20
     svar.label = cmvar.label.rstrip(' ')
     [svar.spatial_shp,svar.temporal_shp]=get_SpatialAndTemporal_Shapes(cmvar,dq)
+    if ("rsucs" == svar.label) and cmvar.mipTable=="CFsubhr" :
+        print "rsucs in table CFsubhr has shape %s in DR"%svar.spatial_shp
+        svar.spatial_shp="S-AH"
     svar.cmvar=cmvar
 
     # Get information from MIPvar
@@ -516,7 +521,12 @@ def complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues,debug=[]):
         # This can be either a string value for inclusion in the NetCDF variable attribute cell_measures, or a directive. In the latter case it will be a single word, --OPT or --MODEL. The first of these indicates that the data may be provided either on the cell centres or on the cell boundaries. --MODEL indicates that the data should be provided at the cell locations used for that variable in the model code (e.g. cell vertices).
         # We turn the directive in as sensible choice 
         if svar.cell_measures in [ '--MODEL', '--OPT', '--UGRID'] :
-            svar.cell_measures=''
+            if (svar.label=="ua" or svar.label=="va") and svar.mipTable=="6hrLev" :
+                svar.cell_measures='--OPT' # because PrePARE 3.3.0 is waiting for such a value !!
+            if (svar.label in [ "uo","vo","wo","umo","vmo","tauuo","tauvo"]) and svar.mipTable=="Omon" :
+                svar.cell_measures='--OPT' # because PrePARE 3.3.0 is waiting for such a value !!
+            else :
+                svar.cell_measures=''
         if svar.cell_measures in [ 'area: areacello OR areacella' ] :
             svar.cell_measures='areacello'  #TBD Actually applies to seaice variables only, in DR01.00.17
         product_of_other_dims=1

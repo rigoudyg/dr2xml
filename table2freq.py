@@ -26,60 +26,65 @@ Cmip6Freq2XiosFreq={
     "10day"     :"10d",
     #
     "mon"       :"1mo",
+    "monPt"     :"1mo",
+    #
     "yr"        :"1y",
+    "yrPt"      :"1y",
+    #
     "dec"       :"10y",
     #
     "fx"        :"1d",
     #
-    "monClim"   :"1d",
-    "1hrClimMon":"1hr",
+    "monC"      :"1mo",
+    "1hrCM"     :"1mo",
     }
 
 def guess_freq_from_table_name(table):
     """ 
     Based on non-written CMIP6 conventions, deduce the frequency from the 
-    table name; frequencies are in Xios syntax 
+    table name; returned frequencies are in CMIP6 syntax 
 
     Used for cases where the table is not a CMIP6 one
     """
     
-    if   table=="E1hrClimMon"     : return "1h"
+    if   table=="E1hrClimMon"     : return "1hr"
     #
-    elif table[0:5]  =="subhr"    : return "1ts"
-    elif table[-6:-1]=="subhr"    : return "1ts"
-    elif table[-9:-1]=="subhrOff" : return "1ts"
+    elif table[0:5]  =="subhr"  : return "subhr"
+    elif table[-5:]=="subhr"    : return "subhr"
+    elif table[-8:]=="subhrOff" : return "subhr"
     #
-    elif table[0:3]  =="3hr"      : return "3h"
-    elif table[-4:-1]=="3hr"      : return "3h" # CF3hr
-    elif table[1:4]  =="3hr"      : return "3h" # E3hr, E3hrPt
-    elif table[-6:-1]=="3hrPt"    : return "3h"   
+    elif table[0:3]  =="3hr"    : return "3hr"
+    elif table[-3:]=="3hr"      : return "3hr" # CF3hr
+    elif table[1:4]  =="3hr"    : return "3hr" # E3hr, E3hrPt
+    elif table[-5:]=="3hrPt"    : return "3hr"   
     #
-    elif table[0:3]  =="6hr"      : return "6h"
-    elif table[1:4]  =="6hr"      : return "6h"
-    elif table[-6:-1]=="6hrPt"    : return "6h"
+    elif table[0:3]  =="6hr"    : return "6hr"
+    elif table[1:4]  =="6hr"    : return "6hr"
+    elif table[-5:]=="6hrPt"    : return "6hr"
     #
-    elif table[0:3]  =="1hr"      : return "1h"
-    elif table[-4:-1]=="1hr"      : return "1h"
-    elif table[-3:-1]=="hr"       : return "1h"
+    elif table[0:3]  =="1hr"    : return "1hr"
+    elif table[-3:]=="1hr"      : return "1hr"
+    elif table[-2:]=="hr"       : return "1hr"
     #
-    elif table[-4:-1]=="day"      : return "1d"
-    elif table[-6:-1]=="dayPt"    : return "1d"
+    elif table[-3:]=="day"      : return "1d"
+    elif table[-5:]=="dayPt"    : return "1d"
     #
-    elif table[-5:-1]=="5day"     : return "5d"
+    elif table[-4:]=="5day"     : return "5d"
     #
-    elif table[1:4]  =="mon"      : return "1mo"
-    elif table[-4:-1]=="mon"      : return "1mo"
-    elif table[-5:-1]=="monZ"     : return "1mo"
-    elif table[-4:-1]=="Mon"      : return "1mo"
-    elif table[-1:-5]=="Clim"     : return "1mo"
+    elif table[1:4]  =="mon"    : return "mon"
+    elif table[-3:]=="mon"      : return "mon"
+    elif table[-4:]=="monZ"     : return "mon"
+    elif table[-3:]=="Mon"      : return "mon"
+    elif table[-4:]=="Clim"     : return "mon"
     #
-    elif table[-3:-1]=="yr"       : return "1y" # Eyr, Oyr ...
-    elif table[1:3]  =="yr"       : return "1y" # IyrAnt et al.
+    elif table[-2:]=="yr"       : return "yr" # Eyr, Oyr ...
+    elif table[1:3]=="yr"       : return "yr" # IyrAnt et al.
     #
-    elif table[1:4]  =="dec"      : return "10y"
+    elif table[1:4]=="dec"      : return "dec"
     #
-    elif table[-3:-1]=="fx"       : return "1d"
-    elif table[1:3]  =="fx"       : return "1d"
+    elif table[-2:]=="fx"       : return "fx"
+    elif table[1:3]=="fx"       : return "fx"
+    elif table[0:2]=="fx"       : return "fx"
     #
     else :
         print "ERROR in guess_freq_from_table : cannot deduce frequency from table named %s"%table
