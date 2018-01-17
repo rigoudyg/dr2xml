@@ -67,7 +67,7 @@ import json
 import datetime
 import re
 import collections
-import sys,os
+import sys,os,glob
 import xml.etree.ElementTree as ET
 
 # mpmoine_merge_dev2_v0.12: posixpath.dirname ne marche pas chez moi
@@ -256,20 +256,22 @@ example_lab_and_model_settings={
     #              - CMIP6 qualifier (i.e. 'gn' or 'gr') for the main grid chosen (because you
     #                 may choose has main production grid a regular one, when the native grid is e.g. unstructured)
     #              - Xios id for the production grid (if it is not the native grid),
+    #              - Xios id for the latitude axis used for zonal means (mist match latitudes for grid above)
     #              - resolution of the production grid (using CMIP6 conventions),
     #              - grid description
     "grids" : {
         
       "LR"    : {
-        "surfex" : [ "gr","complete" , "250 km", "data regridded to a T127 gaussian grid (128x256 latlon) from a native atmosphere T127l reduced gaussian grid"] ,
-          "trip" : [ "gn", ""        ,  "50 km" , "regular 1/2 deg lat-lon grid" ],
-          "nemo" : [ "gn", ""        , "100 km" , "native ocean tri-polar grid with 105 k ocean cells" ],},
+        "surfex" : [ "gr","complete" , "glat", "250 km", "data regridded to a T127 gaussian grid (128x256 latlon) from a native atmosphere T127l reduced gaussian grid"] ,
+          "trip" : [ "gn", ""        ,  ""   , "50 km" , "regular 1/2 deg lat-lon grid" ],
+          "nemo" : [ "gn", ""        ,  ""   , "100 km" , "native ocean tri-polar grid with 105 k ocean cells" ],},
         
       "HR"    : {
-        "surfex" : [ "gr","complete" , "50 km", "data regridded to a 359 gaussian grid (180x360 latlon) from a native atmosphere T359l reduced gaussian grid"] ,
-          "trip" : [ "gn", ""        ,  "50 km" , "regular 1/2 deg lat-lon grid" ],
-          "nemo" : [ "gn", ""        ,  "25 km" , "native ocean tri-polar grid with 1.47 M ocean cells" ],},
+        "surfex" : [ "gr","complete" , "glat", "50 km", "data regridded to a 359 gaussian grid (180x360 latlon) from a native atmosphere T359l reduced gaussian grid"] ,
+          "trip" : [ "gn", ""        ,  ""   , "50 km" , "regular 1/2 deg lat-lon grid" ],
+          "nemo" : [ "gn", ""        ,  ""   , "25 km" , "native ocean tri-polar grid with 1.47 M ocean cells" ],},
     },
+    # "nb_longitudes_in_model": { "surfex" :"ndlon", "nemo": "" },
     #        
     # Basic sampling timestep set in your field definition (used to feed metadata 'interval_operation')
     "sampling_timestep" : {
@@ -445,13 +447,19 @@ def RequestItem_applies_for_exp_and_year(ri,experiment,lset,sset,year=None,debug
         if (debug)  :
             print "Error on esid link for ri : %s uid=%s %s"%\
                            ( ri.title, ri.uid, item_exp._h.label)
+    #print "ri=%s"%ri.title,
     if ri_applies_to_experiment :
         if year is None :
             rep=True ; endyear=None
         else :
             rep,endyear=year_in_ri(ri,experiment,lset,sset,year,debug=debug)
+            #if (ri.label=="CmipOclim") :
+            #    print "reqItem=%s,experiment=%s,year=%d,rep=%s,"%(ri.label,experiment,year,rep)
+        #print " rep=",rep
         return rep,endyear
-    else : return False,None
+    else :
+        #print
+        return False,None
 
 
 def year_in_ri(ri,experiment,lset,sset,year,debug=False):
@@ -648,7 +656,7 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
     if sset :
         config=sset['configuration']
         if ('excluded_vars_per_config' in lset) and \
-           (config in lset('excluded_vars_per_config')):
+           (config in lset['excluded_vars_per_config']):
             excvars.extend(lset['excluded_vars_per_config'][config])
     
     filtered_vars=[]
@@ -656,13 +664,18 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
         cmvar=dq.inx.uid[v]
         ttable=dq.inx.uid[cmvar.mtid]
         mipvar=dq.inx.uid[cmvar.vid]
+        #if (ttable.label=="Ofx") : print "considering var %s, ttable=%s, exctab="%(cmvar.label,ttable.label),exctab
         if ((len(incvars) == 0 and mipvar.label not in excvars) or\
             (len(incvars) > 0 and mipvar.label in incvars))\
             and \
            ((len(inctab)>0 and ttable.label in inctab) or \
             (len(inctab)==0 and ttable.label not in exctab)):
             filtered_vars.append((v,g))
-            #if (ttable.label=="Oclim") : print "for var %s, ttable=%s"%(cmvar.label,ttable.label)
+            if ("clwvi" in mipvar.label) : print "adding var %s, ttable=%s, exctab="%(cmvar.label,ttable.label),exctab,excvars
+        else:
+            #if (ttable.label=="Ofx") : print "discarding var %s, ttable=%s, exctab="%(cmvar.label,ttable.label),exctab
+            pass
+
     if printout :
         print 'Number once filtered by excluded/included vars and tables and spatial shapes is : %s'%len(filtered_vars)
 
@@ -696,6 +709,7 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
     for v in d :
         svar = simple_CMORvar()
         cmvar = dq.inx.uid[v]
+        #if cmvar.mipTable=="Ofx" : print "Got an Ofx var : ",cmvar.label
         complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues)
         svar.Priority=analyze_priority(cmvar,mips_list)
         svar.grids=d[v]
@@ -796,7 +810,7 @@ def freq2datefmt(in_freq,operation,lset):
         elif freq in ["1hr","1h"]: 
             if operation in ["average","minimum","maximum"] : offset="30mi"
             else : offset="1h"
-    elif freq in ["1hrClimMon"]: 
+    elif freq in ["1hrClimMon" , "1hrCM" ]: 
         return "%y%mo%d%h%mi","0s","0s"
         offset="0s"
     elif freq=="subhr" or freq=="subhrPt" or freq=="1ts":
@@ -843,7 +857,7 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     plus AP and B arrays and their bounds, and lev + lev_bnds with formula attribute)
     """
     #
-    global sc
+    global sc #,nlonz
 
     # gestion des attributs pour lesquels on a recupere des chaines vides (" " est Faux mais est ecrit " "")
     #--------------------------------------------------------------------
@@ -884,7 +898,9 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
         if pingvars is not None :
             # Get alias without pressure_suffix but possibly with area_suffix
             alias_ping=ping_alias(sv,lset,pingvars)
+            if ("vt" in alias ): print "processing(vt) ",alias, "alias_oing=",alias_ping
             if not alias_ping in pingvars:
+                if (table=="3hr") : print "Skipping 3hr var %s (%s) because not in pingfile"%(alias_ping,sv.label)
                 if skipped_vars_per_table.has_key(sv.mipTable) and skipped_vars_per_table[sv.mipTable]:
                     list_of_skipped=skipped_vars_per_table[sv.mipTable]
                     list_of_skipped.append(sv.label+"("+str(sv.Priority)+")")
@@ -929,15 +945,36 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     if grid == "" :
         # either native or close-to-native
         grid_choice=lset['grid_choice'][source_id]
-        grid_label,target_hgrid_id,grid_resolution,grid_description=\
+        grid_label,target_hgrid_id,zgrid_id,grid_resolution,grid_description=\
                 lset['grids'][grid_choice][context]
     else:
         if grid == 'cfsites' :
             target_hgrid_id=cfsites_domain_id
+            zgrid_id=None
         else:
             target_hgrid_id=lset["ping_variables_prefix"]+grid
+            zgrid_id="TBD : Should create zonal grid for CMIP6 standard grid %s"%grid
         grid_label,grid_resolution,grid_description=DRgrid2gridatts(grid)
-    if table in [ 'AERMonZ',' EmonZ', 'EdayZ' ] : grid_label+="z"
+        
+
+    if table in [ 'AERMonZ',' EmonZ', 'EdayZ' ] :
+        grid_label+="z"
+        # Below : when reduction was done trough a two steps sum, we needed to divide afterwards
+        # by the nmber of longitudes
+        #
+        # if lset.has_key("nb_longitudes_in_model") and lset["nb_longitudes_in_model"][context]:
+        #     # Get from settings the name of Xios variable holding number of longitudes and set by model
+        #     nlonz=lset["nb_longitudes_in_model"][context] # e.g.: nlonz="ndlon"
+        # elif context_index.has_key(target_hgrid_id):
+        #     # Get the number of longitudes from xml context_index
+        #     # an integer if attribute of the target horizontal grid, declared in XMLs: nlonz=256
+        #     nlonz=context_index[target_hgrid_id].attrib['ni_glo'] 
+        # else: 
+        #     raise(dr2xml_error("Fatal: Cannot access the number of longitudes (ni_glo) for %s\
+        #                 grid required for zonal means computation "%target_hgrid_id))
+        # print ">>> DBG >>> nlonz=", nlonz
+
+        
     if "Ant" in table : grid_label+="a"
     if "Gre" in table : grid_label+="g"
     #
@@ -1176,31 +1213,23 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     #--------------------------------------------------------------------
     # Build all XIOS auxilliary elements (end_file_defs, field_defs, domain_defs, grid_defs, axis_defs)
     #---
-    # Write XIOS field_group node (containing field elements, stored in end_field_defs)
+    # Write XIOS field entry
     # including CF field attributes 
     #--------------------------------------------------------------------
-    end_field_defs=dict()
-    create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
-                                field_defs,axis_defs,grid_defs,domain_defs,dummies,context,target_hgrid_id,pingvars)
-    if len(end_field_defs.keys())==0 :
-        raise dr2xml_error("No end_field_def for %s in %s"%(sv.label,table))
-        return
-    #if table == "6hrLev" and alias != lset["ping_variables_prefix"]+"ps" :
+    end_field=create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
+                               field_defs,axis_defs,grid_defs,domain_defs,
+                               dummies,context,target_hgrid_id,zgrid_id,pingvars)
+    out.write(end_field)
     if sv.spatial_shp[0:4]=='XY-A':
         # create a field_def entry for surface pressure 
         sv_psol=get_simplevar(dq,"ps",table)
         if sv_psol :
-            create_xios_aux_elmts_defs(sv_psol,lset["ping_variables_prefix"]+"ps",table,lset,sset,end_field_defs,
-                          field_defs,axis_defs,grid_defs,domain_defs,dummies,context,target_hgrid_id,pingvars)
+            psol_field=create_xios_aux_elmts_defs(sv_psol,lset["ping_variables_prefix"]+"ps",table,lset,sset,
+                                                  field_defs,axis_defs,grid_defs,domain_defs,
+                                       dummies,context,target_hgrid_id,zgrid_id,pingvars)
+            out.write(psol_field)
+
     #
-    for shape in end_field_defs :
-        if shape :
-            # Create a field group for each non-trivial shape, for performance issues
-            # (remapping must be done after time average !)
-            out.write('<field_group grid_ref="%s">\n'%shape)
-        for entry in end_field_defs[shape] : out.write(entry)
-        if shape : out.write('</field_group >\n')
-    #if table == "6hrLev" :
     if sv.spatial_shp[0:4]=='XY-A':
         # add entries for auxilliary variables : ap, ap_bnds, b, b_bnds
         names={"ap": "vertical coordinate formula term: ap(k)",
@@ -1219,12 +1248,12 @@ def wrv(name, value, num_type="string"):
     return '     <variable name="%s" type="%s" > %s '%(name,num_type,value)+\
         '</variable>\n'
 
-def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
-    field_defs,axis_defs,grid_defs,domain_defs,dummies,context,target_hgrid_id,pingvars) :
+def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
+                               field_defs,axis_defs,grid_defs,domain_defs,
+                               dummies,context,target_hgrid_id,zgrid_id,pingvars) :
     """
-    Create a field_ref for a simplified variable object sv (with
-    lab prefix for the variable name) and store it in end_field_defs
-    under a key=grid
+    Create a field_ref string for a simplified variable object sv (with
+    lab prefix for the variable name) and returns it
     
     Add field definitions for intermediate variables in dict field_defs
     Add axis  definitions for interpolations in dict axis_defs
@@ -1252,83 +1281,95 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
     #--------------------------------------------------------------------
     ssh=sv.spatial_shp
     prefix=lset["ping_variables_prefix"]
-    # The variable name to use downstream of vertical interpolation, even if it doesn't occur :
-    alias_maybe_with_levels=alias 
+
+    # The id of the currently most downstream field is last_field_id
+    last_field_id=alias 
+    last_grid_id=None
     grid_with_vertical_interpolation=None
-    # TBD Should ensure that various additionnal dims are duly documented by model or pingfile (e.g. tau)
+
+    # translate 'outermost' time cell_methods to Xios 'operation')
+    operation,detect_missing,clim = analyze_cell_time_method(sv.cell_methods,sv.label,table, printout=False)
     #
     #--------------------------------------------------------------------
-    # Handle vertical interpolation
+    # Handle vertical interpolation, both XY-any and Y-P outputs
     #--------------------------------------------------------------------
     #
     if ssh[0:4] in ['XY-H','XY-P'] or ssh[0:3] == 'Y-P' or \
-       (ssh[0:5]=='XY-na' and prefix+sv.label not in pingvars ): #TBD check - last case is for singleton
-        grid_with_vertical_interpolation,alias_maybe_with_levels=\
-                  process_vertical_interpolation(sv,alias, lset,pingvars,
-                                             field_defs,axis_defs,grid_defs,domain_defs,table)
+       ((ssh[0:5]=='XY-na' or ssh[0:4]=='Y-na') and prefix+sv.label not in pingvars ): #TBD check - last case is for singleton
+        last_grid_id,last_field_id= process_vertical_interpolation(\
+            sv,alias, lset,pingvars,field_defs,axis_defs,grid_defs,domain_defs,table)
+
     #
-    # translate 'outermost' time cell_methods to 'operation'
+    #--------------------------------------------------------------------
+    # Handle zonal means
+    #--------------------------------------------------------------------
     #
-    operation,detect_missing,clim = analyze_cell_time_method(sv.cell_methods,sv.label,table, printout=False)
-    if not operation: 
-        #raise dr2xml_error("Fatal: bad xios 'operation' for %s in table %s: %s (%s)"%(sv.label,table,operation,sv.cell_methods))
-        print("Fatal: bad xios 'operation' for %s in table %s: %s (%s)"%(sv.label,table,operation,sv.cell_methods))
-        operation="once"
-    if not type(detect_missing)==type(bool()): 
-        #raise dr2xml_error("Fatal: bad xios 'detect_missing_value' for %s in table %s: %s (%s)"%(sv.label,table,detect_missing,sv.cell_methods))
-        print("Fatal: bad xios 'detect_missing_value' for %s in table %s: %s (%s)"%(sv.label,table,detect_missing,sv.cell_methods))
+    if ssh[0:2] == 'Y-' : #zonal mean and atm zonal mean on pressure levels
+        if last_grid_id is None : # actually useful for shape Y-na which are not pressure singleton
+            last_grid_id=id2grid(alias,context_index)
+        last_field_id,last_grid_id=\
+            process_zonal_mean(last_field_id,last_grid_id, target_hgrid_id,zgrid_id,\
+                               field_defs,axis_defs,grid_defs,domain_defs,operation,sv.frequency)
+
     #
+    #--------------------------------------------------------------------
     # Build a construct for computing a climatology (if applicable)
-    alias_maybe_with_levels_and_clim=alias_maybe_with_levels
+    #--------------------------------------------------------------------
     if clim :
         if sv.frequency == "1hrCM" :
-            alias_maybe_with_levels_and_clim,grid_clim=process_diurnal_cycle(alias_maybe_with_levels,\
-                                                                   field_defs,grid_defs,axis_defs)
-            margs={"src_grid_string":grid_with_vertical_interpolation}
+            last_field_id,last_grid_id=process_diurnal_cycle(last_field_id,\
+                                                          field_defs,grid_defs,axis_defs)
         else :
             dr2xml_error("Cannot handle climatology cell_method for frequency %s"%sv.frequency)
+    # 
+    # Create intermediate field_def for enforcing operation upstream
+    #
+    but_last_field_id=last_field_id
+    last_field_id=last_field_id+"_"+operation
+    field_defs[last_field_id]='<field id="%-25s field_ref="%-25s operation="%-10s/>'\
+                            %(last_field_id+'"',but_last_field_id+'"',operation+'"')
+    #
     #--------------------------------------------------------------------
     # Build output grid (stored in grid_defs)
     #--------------------------------------------------------------------
     #
-    if clim :
-            margs={"src_grid_string":grid_defs[grid_clim]}
-            print "margs=",margs
-    elif grid_with_vertical_interpolation is not None :
-            margs={"src_grid_string":grid_with_vertical_interpolation}
-    else: margs={"alias":alias}
-        
+    margs={"src_grid_id":last_grid_id, "ping_alias":alias}
     output_grid_id=create_output_grid(ssh,grid_defs,domain_defs,target_hgrid_id,margs)
-    if output_grid_id is not None :
-        print "output_grid_id=",output_grid_id,"***>",grid_defs[output_grid_id]
-
+    if ("rlutcs" in alias) :
+        print "for rlutcs: targte_grid_id=",target_hgrid_id, " outp_grid_id=",output_grid_id," margs=",margs
+    #if output_grid_id is not None :
+    #    print "output_grid_id=",output_grid_id,"***>",grid_defs[output_grid_id]
     #
     #--------------------------------------------------------------------
-    # Build <field> construct and store it in end_field_defs
+    # Create <field> construct to be inserted in a file_def, which includes re-griding
     #--------------------------------------------------------------------
-    alias_with_operation=alias_maybe_with_levels_and_clim+"_"+operation
-    rep='  <field field_ref="%s" name="%s" '% (alias_with_operation,sv.label)
+    #
+    if output_grid_id is not None :
+        rep='  <field field_ref="%s" name="%s" grid_ref="%s" '% \
+            (last_field_id,sv.label,output_grid_id)
+    else :
+        rep='  <field field_ref="%s" name="%s" '% (last_field_id,sv.label)
+    #
     if operation != 'once' : rep+=' freq_op="%s"'% Cmip6Freq2XiosFreq[sv.frequency]
+    #
+    # handle data type and missing value
     #
     detect_missing="True"
     missing_value="1.e+20"
     if   sv.prec.strip() in ["float","real",""] : prec="4"
     elif sv.prec.strip() =="double"  : prec="8"
     elif sv.prec.strip() =="integer" :
-        prec="2" ; missing_value="16384"
+        prec="2" ; missing_value="0" #16384"
     else :
         dr2xml_error("prec=%s for sv=%s"%(sv.prec,sv.label))
     rep+=' detect_missing_value="%s" \n\tdefault_value="%s" prec="%s"'%(detect_missing,missing_value,prec)
     #
     # TBD : implement DR recommendation for cell_method : The syntax is to append, in brackets,
     # TBD    'interval: *amount* *units*', for example 'area: time: mean (interval: 1 hr)'.
-    # TBP    The units must be valid UDUNITS, e.g. day or hr.
+    # TBD    The units must be valid UDUNITS, e.g. day or hr.
     rep+=' cell_methods="%s" cell_methods_mode="overwrite"'% sv.cell_methods
     rep+='>\n'
-    if operation != 'once' : rep+='\t\t@%s\n'%alias_with_operation
-    # Create field_def for alias_with_operation
-    field_defs[alias_with_operation]='<field id="%-25s field_ref="%-25s operation="%-10s/>'\
-                            %(alias_with_operation+'"',alias_maybe_with_levels_and_clim+'"',operation+'"')
+    if operation != 'once' : rep+='\t\t@%s\n'%last_field_id
     #
     #--------------------------------------------------------------------
     # Add Xios variables for creating NetCDF attributes matching CMIP6 specs
@@ -1379,9 +1420,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,end_field_defs,
     #TBS# rep+=wrv('missing_values',sv.missing,num_type="double")
     rep+='     </field>\n'
     #
-    if not output_grid_id in end_field_defs : end_field_defs[output_grid_id]=[]
-    end_field_defs[output_grid_id].append(rep)
-    #print "Appending for %s : %s"%(grid_ref,rep)
+    return rep
 
 
 def process_vertical_interpolation(sv,alias,lset,pingvars,
@@ -1427,21 +1466,27 @@ def process_vertical_interpolation(sv,alias,lset,pingvars,
     field_defs[alias_instant]=\
                '<field id="%-25s field_ref="%-25s operation="instant" />'\
                %(alias_instant+'"',alias_in_ping+'"')
-    
+    #
+    vert_freq=lset["vertical_interpolation_sample_freq"]
+    #
+    # Construct an axis for interpolating to this vertical dimension
+    # e.g. for zoom_case :
+    #    <axis id="zoom_plev7h_hus" axis_ref="union_plevs_hus"> <zoom_axis index="(0,6)[  3 6 11 13 15 20 28 ]"/>
+    create_axis_def(sd,prefix,vert_freq,axis_defs,field_defs)
+
     # Creat field alias_sample which time-samples the inst at required freq
     # before vertical interpolation
-    vert_freq=lset["vertical_interpolation_sample_freq"]
     alias_sample=alias_in_ping+"_sampled_"+vert_freq # e.g.  CMIP6_zg_sampled_3h
     # <field id="CMIP6_hus_sampled_3h" field_ref="CMIP6_hus_instant" freq_op="3h" expr="@CMIP6_hus_instant"/>
     field_defs[alias_sample]=\
-               '<field id="%-25s field_ref="%-25s freq_op="%-10s > @%s </field>'\
+               '<field id="%-25s field_ref="%-25s freq_op="%-10s detect_missing_value="true" > @%s </field>'\
                %(alias_sample+'"',alias_instant+'"',vert_freq+'"',alias_instant)
     
     # Construct a grid using variable's grid and target vertical axis
     # e.g. <grid id="FULL_klev_zoom_plev7h_hus"> <domain domain_ref="FULL" /> <axis axis_ref="zoom_plev7h_hus" />
     if sd.is_zoom_of: axis_key=sd.zoom_label  # e.g. 'zoom_plev7h_hus'
     else:             axis_key=sd.label       # e.g. 'plev7h'
-    grid_id=create_grid_def(grid_defs,axis_key,sd.out_name,alias_in_ping,context_index,table)
+    grid_id=create_grid_def(grid_defs,axis_defs[axis_key],sd.out_name,alias_in_ping,context_index,table)
     
     # Construct a field def for the vertically interpolated variable
     if sd.is_zoom_of: # cas d'une variable definie grace a 2 axis_def (union+zoom)
@@ -1449,7 +1494,7 @@ def process_vertical_interpolation(sv,alias,lset,pingvars,
         # cas d'une variable definie grace a 2 axes verticaux (zoom+union)
         # Must first create grid for levels union, e.g.:
         # <grid id="FULL_klev_union_plevs_hus"> <domain domain_ref="FULL" /> <axis axis_ref="union_plevs_hus" />
-        grid_id=create_grid_def(grid_defs,sd.is_zoom_of,alias_in_ping,context_index)
+        grid_id=create_grid_def(grid_defs,axis_defs[sd.is_zoom_of],sd.out_name,alias_in_ping,context_index)
         #
         union_alias=prefix+lwps+"_union" # e.g. 'CMIP6_hus_union'
 	# Ss e.g.: <field id="CMIP6_hus_union" field_ref="CMIP6_hus_sampled_3h" grid_ref="FULL_klev_union_plevs_hus"/>
@@ -1459,7 +1504,7 @@ def process_vertical_interpolation(sv,alias,lset,pingvars,
         # SS : Must first create grid for levels subset zoom, e.g.:
     	# <grid id="FULL_klev_zoom_plev7h_hus"> <domain domain_ref="FULL" /> <axis axis_ref="zoom_plev7h_hus" /
         axis_key=sd.zoom_label      # e.g. 'zoom_plev7h_hus'
-        grid_id=create_grid_def(grid_defs,axis_key,alias_in_ping,context_index)
+        grid_id=create_grid_def(grid_defs,axis_defs[axis_key],sd.out_name,alias_in_ping,context_index)
 	# SS: e.g.: <field id="CMIP6_hus7h_plev7h" field_ref="CMIP6_hus_union" grid_ref="FULL_klev_zoom_plev7h_hus"
         field_defs[alias_with_levels]='<field id="%-25s field_ref="%-25s grid_ref="%-10s/>'\
             %(alias_with_levels+'"',union_alias+'"',grid_id+'"')
@@ -1473,12 +1518,8 @@ def process_vertical_interpolation(sv,alias,lset,pingvars,
         #    print "--->",alias, alias_with_levels,sd
         #    print "field_def=",field_defs[alias_with_levels]
 
-    # Construct an axis for interpolating to this vertical dimension
-    # e.g. for zoom_case :
-    #    <axis id="zoom_plev7h_hus" axis_ref="union_plevs_hus"> <zoom_axis index="(0,6)[  3 6 11 13 15 20 28 ]"/>
-    create_axis_def(sd,prefix,vert_freq,axis_defs,field_defs)
     #
-    return grid_defs[grid_id],alias_with_levels
+    return grid_id,alias_with_levels
 
 def create_output_grid(ssh, grid_defs,domain_defs,target_hgrid_id,margs):
     # Build output grid (stored in grid_defs) by analyzing the spatial shape
@@ -1488,29 +1529,25 @@ def create_output_grid(ssh, grid_defs,domain_defs,target_hgrid_id,margs):
 
     # Compute domain name, define it if needed
     if ssh[0:2] == 'Y-' : #zonal mean and atm zonal mean on pressure levels
-        # TBD should remap before zonal mean # STOPICI_REVUE_TBD_09-05-2017
-        grid_ref="zonal_mean"
-        grid_defs[grid_ref]='<grid id="%s"/>'%grid_ref
+        # Grid normally has already been created upstream
+        grid_ref=margs['src_grid_id']
     elif (ssh == 'S-na')  : # COSP sites
         grid_ref=cfsites_grid_id
         grid_defs[grid_ref]='<grid id="%s" > <domain id="%s" /> </grid>\n'%(cfsites_grid_id,cfsites_domain_id)
         domain_defs[cfsites_radix]=' <domain id="%s" type="unstructured" prec="8"> '%(cfsites_domain_id)+\
             '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true" /> </domain>'
         # 
-    elif ssh == 'TR-na' or ssh == 'TRS-na' : #transects,   oce or SI
-        pass
     elif ssh[0:3] == 'XY-' or ssh[0:3] == 'S-A' :
         # this includes 'XY-AH' and 'S-AH' : model half-levels
         if (ssh[0:3] == 'S-A') : target_hgrid_id="cfsites_domain"
         if target_hgrid_id :
             # Must create and a use a grid similar to the last one defined 
             # for that variable, except for a change in the hgrid/domain
-            grid_def=change_domain_in_grid(domain=target_hgrid_id, index=context_index,**margs)
-            if grid_def is False or grid_def is None : 
+            grid_ref=change_domain_in_grid(domain=target_hgrid_id, grid_defs=grid_defs,**margs)
+            if grid_ref is False or grid_ref is None : 
                 raise dr2xml_error("Fatal: cannot create grid_def for %s with hgrid=%s"%(alias,target_hgrid_id))
-            grid_ref=grid_def[0] ;
-            grid_defs[grid_ref]=grid_def[1]
-            
+    elif ssh == 'TR-na' or ssh == 'TRS-na' : #transects,   oce or SI
+        pass
     elif ssh[0:3] == 'YB-'  : #basin zonal mean or section
         pass
     elif ssh      == 'na-na'  : # TBD? global means or constants - spatial integration is not handled 
@@ -1521,7 +1558,80 @@ def create_output_grid(ssh, grid_defs,domain_defs,target_hgrid_id,margs):
         raise(dr2xml_error("Fatal: Issue with un-managed spatial shape %s for variable %s in table %s"%(ssh,sv.label,table)))
     return grid_ref
 
+def process_zonal_mean(field_id, grid_id, target_hgrid_id,zgrid_id,\
+                       field_defs,axis_defs,grid_defs,domain_defs,\
+                       operation,frequency,printout=False):
+    """
+    Based on a field FIELD_ID defined on some grid GRID_ID, build all XIOS constructs 
+    needed to derive the zonal mean of the field, by chaining the definition of 
+    successive derived fields:
+    field1 which sets the relevant 'operation' on input field
+    field2 which applies the time operation 
+    field3 which applies a regriding to an intermediate horizontal grid  TARGET_HGRID_ID
+    field4 which regrids to the relevant zonal grid ZGRID_ID
+
+    Returns field_id and  grid_id for the 4th, final, field
+    Intermediate constructs are stored in dics field_defs, grid_defs, axis_defs
+
+    For fields 1 and 2, we adopt the same naming conventions than when
+    the same operations are done outside the zonal grid context; this
+    is for optimzation when both contexts occur
+
+    """
+    printout=False
+    global nlonz
+
+    # e.g. <field id="CMIP6_ua_plev39_average" field_ref="CMIP6_ua_plev39" operation="average" />
+    xios_freq=Cmip6Freq2XiosFreq[frequency]
+    field1_id= field_id+"_"+operation     # e.g. CMIP6_hus_plev7h_instant
+    field_defs[field1_id]='<field id="%-s field_ref="%-s operation="%s />'\
+        %(field1_id+'"',field_id+'"',operation+'"')
+    if printout :
+        print "+++ field1 ",field1_id,"\n",field_defs[field1_id]
+    #
+    # e.g. <field id="CMIP6_ua_plev39_average_1d" field_ref="CMIP6_ua_plev39_average" freq_op="1d" >
+    #              @CMIP6_ua_plev39_average </field>
+    field2_id= field1_id+"_"+xios_freq 
+    field_defs[field2_id]='<field id="%-s field_ref="%-s freq_op="%s > @%s </field>'\
+        %(field2_id+'"',field1_id+'"',xios_freq+'"',field1_id)
+    if printout :
+        print "+++ field2 ",field2_id,"\n",field_defs[field2_id]
+    
+    # e.g. <field id="CMIP6_ua_plev39_average_1d_complete" field_ref="CMIP6_ua_plev39_average_1d"
+    #             grid_ref="FULL_klev_plev39_complete" /> 
+    field3_id= field2_id+"_"+target_hgrid_id 
+    # Must create and a use a grid similar to the last one defined 
+    # for that variable, except for a change in the hgrid/domain (=> complete)
+    grid_id3=change_domain_in_grid(domain=target_hgrid_id, grid_defs=grid_defs,\
+                                  src_grid_id=grid_id)
+    if printout :
+        print "+++ grid3 ",grid_id3,"\n",grid_defs[grid_id3]
+    field_defs[field3_id]='<field id="%s field_ref="%s grid_ref="%s /> '\
+        %(field3_id+'"',field2_id+'"',grid_id3+'"')
+    if printout :
+        print "+++ field3 ",field3_id,"\n",field_defs[field3_id]
+
+    # And then regrid to final grid
+    # e.g. <field id="CMIP6_ua_plev39_average_1d_glat" field_ref="CMIP6_ua_plev39_average_1d_complete"
+    #             grid_ref="FULL_klev_plev39_complete_glat" > this / $ndlon </field>
+    field4_id= field2_id+"_"+zgrid_id 
+    grid4_id=change_domain_in_grid(domain=zgrid_id, grid_defs=grid_defs,\
+                                   src_grid_id=grid_id3,turn_into_axis=True)
+    if printout :
+        print "+++ grid4 ",grid4_id,"\n",grid_defs[grid4_id]
+    
+    # First syntax below was used when computing redution by a two steps sum (local + global)
+    #field_defs[field4_id]='<field id="%s field_ref="%s grid_ref="%s > this / $%s </field>'\
+    #    %(field4_id+'"',field3_id+'"',grid4_id+'"',str(nlonz))
+    field_defs[field4_id]='<field id="%s field_ref="%s grid_ref="%s > this </field>'\
+        %(field4_id+'"',field3_id+'"',grid4_id+'"')
+    if printout :
+        print "+++ field4 ",field4_id,"\n",field_defs[field4_id]
+
+    return field4_id, grid4_id
+    
 def process_diurnal_cycle(alias,field_defs,grid_defs,axis_defs,printout=False):
+
     """
     Based on a field id ALIAS, and gobal CONTEXT_INDEX, creates and
     stores Xios xml constructs for defining a derived variable which
@@ -1542,7 +1652,8 @@ def process_diurnal_cycle(alias,field_defs,grid_defs,axis_defs,printout=False):
 
     """
 
-    # 0- create a clone of ALIAS with opeartion=average
+    printout=False
+    # 0- create a clone of ALIAS with operation=average
     field_for_average_id=alias+"_for_average"
     field_defs[field_for_average_id]='<field id="%s" field_ref="%s" operation="average" />'%\
         (field_for_average_id,alias)
@@ -1567,7 +1678,7 @@ def process_diurnal_cycle(alias,field_defs,grid_defs,axis_defs,printout=False):
     if printout : print "***>",field_defs[averaged_field_id]
     
     # 3- create an axis of 24 values having sub-construct 'time splitting'; axis id is "24h_axis"
-    axis_24h_id="24h_axis"
+    axis_24h_id="hour_in_diurnal_cycle"
     name_and_units='name="time3" unit="days since ?" standard_name="time"'
     axis_24h='<axis id="%s" n_glo="24" %s value="(0,23)[ '%(axis_24h_id,name_and_units)
     for i in range(0,24) : axis_24h += '%g '%(i+0.5)
@@ -1579,7 +1690,7 @@ def process_diurnal_cycle(alias,field_defs,grid_defs,axis_defs,printout=False):
     grid_24h_id=grid_id+"_plus_axis24h"
     grid_24h=re.sub(r'(.*)grid  *id *= *"[^"]*"(.*)',r'\1grid id="%s"\2'%grid_24h_id,base_grid_string)
     grid_24h=re.sub("</ *grid *>",'\t<axis axis_ref="%s" %s /></grid>'%(axis_24h_id,name_and_units),grid_24h)
-    grid_defs[grid_24h]=grid_24h
+    grid_defs[grid_24h_id]=grid_24h
     if printout : print "***>",grid_24h
     
     # 5- create a construct for re-gridding ALIAS_SCALAR on that second grid; id is ALIAS_24hcycle, which is returned
@@ -1589,7 +1700,7 @@ def process_diurnal_cycle(alias,field_defs,grid_defs,axis_defs,printout=False):
     field_defs[alias_24h_id]=alias_24h
     if printout : print "***>",alias_24h,"\n"
     
-    return alias_24h_id,grid_24h
+    return alias_24h_id,grid_24h_id
 
 
 def gather_AllSimpleVars(lset,sset,year=False,printout=False):
@@ -1600,13 +1711,13 @@ def gather_AllSimpleVars(lset,sset,year=False,printout=False):
     else: print "Info: No HOMEvars list provided."
     return mip_vars_list
 
-def generate_file_defs(lset,sset,year,enddate,context,cvs_path,pingfile=None,
+def generate_file_defs(lset,sset,year,enddate,context,cvs_path,pingfiles=None,
                        dummies='include',printout=False,dirname="./",prefix="",attributes=[]) :
     # A wrapper for profiling top-level function : generate_file_defs_inner
     import cProfile, pstats, StringIO
     pr = cProfile.Profile()
     pr.enable()
-    generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfile=pingfile,
+    generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=pingfiles,
                              dummies=dummies,printout=printout,dirname=dirname,prefix=prefix,attributes=attributes) 
     pr.disable()
     s = StringIO.StringIO()
@@ -1617,7 +1728,7 @@ def generate_file_defs(lset,sset,year,enddate,context,cvs_path,pingfile=None,
     #print s.getvalue()
 
     
-def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfile=None,
+def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=None,
                        dummies='include',printout=False,dirname="./",prefix="",attributes=[]) :
     """
     Using global DR object dq, a dict of lab settings LSET, and a dict 
@@ -1625,7 +1736,7 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfile=No
     given XIOS 'context', which content matches 
     the DR for the experiment quoted in simu setting dict and a YEAR.
     Makes use of CMIP6 controlled vocabulary files found in CVS_PATH
-    Reads PINGFILE for analyzing dummy field_refs, 
+    Reads files matching PINGFILE for analyzing dummy field_refs, 
     DUMMIES='include' : include dummy refs in file_def (useful 
                               demonstration run)
     DUMMIES='skip'  : don't write field with a ref to a dummy
@@ -1731,28 +1842,36 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfile=No
     # Read ping_file defined variables
     #--------------------------------------------------------------------
     pingvars=[] 
-    if pingfile :
-        ping_refs=read_xml_elmt_or_attrib(pingfile, tag='field', attrib='field_ref')
-        if ping_refs is None :
-            print "Error: issue accessing pingfile "+pingfile
-            return
-        if dummies=="include" :
-            pingvars=ping_refs.keys()
-        else :
-            pingvars=[ v for v in ping_refs if 'dummy' not in ping_refs[v] ]
-            if dummies=="forbid" :
-                if len(pingvars) != len(ping_refs) :
-                    print "They are still dummies in %s , while option is 'forbid' :"%pingfile,
-                    for v in ping_refs :
-                        if v not in pingvars : print v,
-                    print
+    all_ping_refs={} 
+    if pingfiles is not None:
+        all_pingvars=[]
+        #print "pingfiles=",pingfiles
+        for pingfile in pingfiles.split() :
+            ping_refs=read_xml_elmt_or_attrib(pingfile, tag='field', attrib='field_ref')
+            if ping_refs is None :
+                print "Error: issue accessing pingfile "+pingfile
+                return
+            all_ping_refs.update(ping_refs)
+            if dummies=="include" :
+                pingvars=ping_refs.keys()
+            else :
+                pingvars=[ v for v in ping_refs if 'dummy' not in ping_refs[v] ]
+                if dummies=="forbid" :
+                    if len(pingvars) != len(ping_refs) :
+                        print "They are still dummies in %s , while option is 'forbid' :"%pingfile,
+                        for v in ping_refs :
+                            if v not in pingvars : print v,
+                            print
+                            sys.exit(1)
+                    else :
+                        pingvars=ping_refs
+                elif dummies=="skip" : pass
+                else:
+                    print "Forbidden option for dummies : "+dummies
                     sys.exit(1)
-                else :
-                    pingvars=ping_refs
-            elif dummies=="skip" : pass
-            else:
-                print "Forbidden option for dummies : "+dummies
-                sys.exit(1)
+            all_pingvars.extend(pingvars)
+        pingvars=all_pingvars
+
     #
     #--------------------------------------------------------------------
     # Build all plev union axis and grids
@@ -1767,7 +1886,7 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfile=No
                                         multi_plev_suffixes.union(single_plev_suffixes),
                                         lset["ping_variables_prefix"],
                                         lset["vertical_interpolation_sample_freq"],
-                                        axis_defs,grid_defs,field_defs, ping_refs, printout=True )
+                                        axis_defs,grid_defs,field_defs, all_ping_refs, printout=False )
     #
     #--------------------------------------------------------------------
     # Start writing XIOS file_def file: 
@@ -1794,6 +1913,8 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfile=No
         for table in svars_per_table :
             count=dict()
             for svar in svars_per_table[table] :
+                if table=="3hr" :
+                    print "*** ",table," var=",svar.label
                 if True : #realm_is_processed(svar.modeling_realm,sourcetype) : <- realms are note reliable enough in DR
                     if svar.label not in count :
                         count[svar.label]=svar
@@ -1804,9 +1925,9 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfile=No
                                             enddate,attributes)
                     else :
                         pass
-                        #print "Duplicate var in %s : %s %s %s"%(
-                        #    table, svar.label, `svar.temporal_shp`, \
-                        #    `count[svar.label].temporal_shp`)
+                        # print "Duplicate var in %s : %s %s %s / %s %s"%(
+                        #     table, svar.label, `svar.temporal_shp`, svar.mipTable,\
+                        #     `count[svar.label].temporal_shp`,count[svar.label].mipTable)
                 else:
                     print "Var %s of realm %s is not processed by source-type %s"%\
                         (svar.label,svar.modeling_realm,sourcetype)
@@ -1981,7 +2102,7 @@ def create_axis_def(sdim,prefix,vert_frequency,axis_defs,field_defs):
         axis_defs[sdim.label]=rep
         #
         # Create and store a definition for time-sampled field for the vertical coordinate
-        coorddef='<field id="%-25s field_ref="%-25s operation="instant" freq_op="%-10s> @%s</field>'\
+        coorddef='<field id="%-25s field_ref="%-25s operation="instant" freq_op="%-10s detect_missing_value="true"> @%s</field>'\
                         %(coordname_sampled+'"',coordname+'"', vert_frequency+'"',coordname)
         field_defs[coordname_sampled]=coorddef
     else: # zoom case
@@ -2000,36 +2121,47 @@ def create_axis_def(sdim,prefix,vert_frequency,axis_defs,field_defs):
     # Store definition for the new axis
     return rep 
 
-def change_domain_in_grid(domain,alias=None,src_grid_string=None,index=None,printout=False):
+def change_domain_in_grid(domain,grid_defs,ping_alias=None,src_grid_id=None,\
+                          turn_into_axis=False,printout=False):
     """ 
-    Provided with either a variable name (ALIAS) or the string for a grid definition,
-    (SRC_GRID_STRING) returns a grid_definition where the domain has been changed to DOMAIN
+    Provided with a grid id SRC_GRID_ID or alternatively a variable name (ALIAS),
+    (SRC_GRID_STRING) 
+     - creates ans stores a grid_definition where the domain has been changed to DOMAIN
+    -  returns its id, which is 
     """
-    if src_grid_string is None:
-        if alias is None :
+    if src_grid_id is None:
+        if ping_alias is None :
             raise dr2xml_error("change_domain_in_grid: must provide alias or grid_string ")
-        src_grid=id2grid(alias,index,printout=printout)
+        src_grid=id2grid(ping_alias,context_index,printout=printout)
         if src_grid is not None : 
             src_grid_id=src_grid.attrib['id']
             src_grid_string=ET.tostring(src_grid)
         else:
-            raise dr2xml_error("Fatal: ask for creating a grid_def for var %s which has no grid "%(alias))
+            raise dr2xml_error("Fatal: ask for creating a grid_def for var %s which has no grid "%(ping_alias))
     else :
-        src_grid_id=re.sub(r'.*grid id= *.([\w_]*).*\n.*',r'\g<1>',src_grid_string,1)
-        if src_grid_id == src_grid_string : 
-            raise dr2xml_error("Issue extracting grid id for %s from %s "%(alias,src_grid_string))
+        src_grid_string=grid_defs[src_grid_id]
+        #src_grid_id=re.sub(r'.*grid id= *.([\w_]*).*\n.*',r'\g<1>',src_grid_string,1)
+        #if src_grid_id == src_grid_string : 
+        #    raise dr2xml_error("Issue extracting grid id for %s from %s "%(alias,src_grid_string))
         #print "src_grid_id=%s"%src_grid_id
     target_grid_id=src_grid_id+"_"+domain
     # Change domain
-    (target_grid_string,count)=re.subn('domain *id= *.([\w_])*.','domain id="%s"'%domain,src_grid_string,1) 
+    domain_or_axis="domain" ; axis_name=""
+    if turn_into_axis :
+        domain_or_axis="axis" ; axis_name=' name="lat"'
+    (target_grid_string,count)=re.subn('domain *id= *.([\w_])*.','%s id="%s" %s'%(domain_or_axis,domain,axis_name),\
+                                       src_grid_string,1) 
     if count != 1 :
-        (target_grid_string,count)=re.subn('domain *domain_ref= *.([\w_])*.','domain domain_ref="%s"'%domain,src_grid_string,1) 
+        #print "trying with regexp : ",'domain *domain_ref= *.([\w_])*.'
+        (target_grid_string,count)=re.subn('domain *domain_ref= *.([\w_])*.','%s %s_ref="%s" %s'%\
+                                           (domain_or_axis,domain_or_axis,domain,axis_name),src_grid_string,1) 
         if count != 1 :
-            raise dr2xml_error("Fatal: cannot find a domain to change in src_grid_string %s for %s"%(src_grid_string,alias))
+            raise dr2xml_error("Fatal: cannot find a domain to change in src_grid_string %s, count=%d "%(src_grid_string,count))
     target_grid_string=re.sub('grid id= *.([\w_])*.','grid id="%s"'%target_grid_id,target_grid_string)
-    return (target_grid_id,target_grid_string)
+    grid_defs[target_grid_id]=target_grid_string
+    return target_grid_id
 
-def create_grid_def(grid_defs,axis_key,axis_name,alias=None,context_index=None,table=None):
+def create_grid_def(grid_defs,axis_def_string,axis_name,alias=None,context_index=None,table=None):
     # mpmoine_correction:create_grid_def:  si, il faut generer une grille autour des axes de zoom aussi
     #if not sd.is_zoom_of and not sd.is_union_for: # a grid_def to build in classical case (a vertical axis without using union)
     if alias and context_index:
@@ -2037,19 +2169,30 @@ def create_grid_def(grid_defs,axis_key,axis_name,alias=None,context_index=None,t
         if src_grid is not None : 
             src_grid_id=src_grid.attrib['id']
             src_grid_string=ET.tostring(src_grid)
+            #if "union_plevs_zg" in axis_def_string :
+            #    print "union_plevs_zg def string is ",axis_def_string
+            # Retrieve axis key from axis definition string
+            axis_key=re.sub(r'.*id= *.([\w_]*).*',r'\1',axis_def_string.replace('\n',''))
             target_grid_id=src_grid_id+"_"+axis_key
+            # Remove id= from axis definition string
+            axis_def_string=re.sub(r'id= *.([\w_]*).','',axis_def_string)
             # Change only first instance of axis_ref, which is assumed to match the vertical dimension
-            #(target_grid_string,count)=re.subn('axis *id= *.([\w_])*.','axis id="%s"'%axis_key,src_grid_string,1)
-            (target_grid_string,count)=re.subn('<axis[^\>]*>','<axis axis_ref="%s" name="%s"/>'\
-                                               %(axis_key,axis_name),src_grid_string,1)
+            #(target_grid_string,count)=re.subn('<axis[^\>]*>','<axis axis_ref="%s" name="%s"/>'\
+            #                                   %(axis_key,axis_name),src_grid_string,1)
+            # Enforce axis_name in axis_def_string :  TBD
+            #
+            (target_grid_string,count)=re.subn('<axis[^\>]*>',axis_def_string,src_grid_string,1)
+            #print "axis_key = ", axis_key
+            #print "axis_name = ", axis_name
             if count != 1 :
-                alt_axis_name="axis_for_"+target_grid_id
-                (target_grid_string,count)=re.subn('axis *axis_ref= *.([\w_])*.',\
-                                                   'axis id="%s" axis_ref="%s"'% (alt_axis_name,axis_key),\
-                                                   src_grid_string,1)
-                if count != 1 : 
-                    raise dr2xml_error("Fatal: cannot find an axis_ref to change in src_grid_string %s for %s in %s"%\
-                                       (src_grid_string,alias,table))
+                raise dr2xml_error("Fatal: cannot find an axis ref in %s "%(src_grid_string))
+                # alt_axis_name="axis_for_"+target_grid_id
+                # (target_grid_string,count)=re.subn('axis *axis_ref= *.([\w_])*.',\
+                #                                    'axis id="%s" axis_ref="%s"'% (alt_axis_name,axis_key),\
+                #                                    src_grid_string,1)
+                # if count != 1 : 
+                #     raise dr2xml_error("Fatal: cannot find an axis_ref to change in src_grid_string %s for %s in %s"%\
+                #                        (src_grid_string,alias,table))
             target_grid_string=re.sub('grid id= *.([\w_])*.','grid id="%s"'%target_grid_id,target_grid_string)
             grid_defs[target_grid_id]=target_grid_string
             return target_grid_id
@@ -2109,9 +2252,9 @@ def create_xios_axis_and_grids_for_plevs_unions(svars,plev_sfxs,prefix,vert_freq
                                     pass
                     else:
                         if printout: 
-                            print "Info: ", lwps, "not taken into account for building plevs union axis because one of these 2 reasons:" 
-                            print "      a)", prefix+lwps,"is not an entry in the pingfile: Entry?",present_in_ping  
-                            print "      b)", prefix+lwps,"has au dummy reference in the pingfile. Dummy?",dummy_in_ping 
+                            print "Info: ", lwps, "not taken into account for building plevs union axis because ",prefix+lwps,
+                            if not present_in_ping : print  "is not an entry in the pingfile"
+                            else : print "has a dummy reference in the pingfile"
 
                     # svar will be expected on a zoom axis of the union. Corresponding vertical dim must
                     # have a zoom_label named plevXX_<lwps> (multiple pressure levels) or pXX_<lwps> (single pressure level)
@@ -2168,7 +2311,7 @@ def create_xios_axis_and_grids_for_plevs_unions(svars,plev_sfxs,prefix,vert_freq
         if len(list_plevs_union)==1: sdim_union.value=plevs_union_xios
         if printout : print "creating axis def for union :%s"%sdim_union.label
         axis_def=create_axis_def(sdim_union,prefix,vert_freq,union_axis_defs,field_defs)
-        create_grid_def(union_grid_defs,sdim_union.label,prefix+lwps,context_index)
+        create_grid_def(union_grid_defs,axis_def,sdim_union.out_name,prefix+lwps,context_index)
     #
     #return (union_axis_defs,union_grid_defs)
 
@@ -2418,6 +2561,15 @@ def analyze_cell_time_method(cm,label,table,printout=False):
         print "Warning: issue when analyzing cell_time_method "+\
             "%s for %15s in table %s, assuming it is once" %(cm,label,table)
         operation="once"
+        
+    if not operation: 
+        #raise dr2xml_error("Fatal: bad xios 'operation' for %s in table %s: %s (%s)"%(sv.label,table,operation,sv.cell_methods))
+        print("Fatal: bad xios 'operation' for %s in table %s: %s (%s)"%(label,table,operation,cm))
+        operation="once"
+    if not type(detect_missing)==type(bool()): 
+        #raise dr2xml_error("Fatal: bad xios 'detect_missing_value' for %s in table %s: %s (%s)"%(sv.label,table,detect_missing,sv.cell_methods))
+        print("Fatal: bad xios 'detect_missing_value' for %s in table %s: %s (%s)"%(label,table,detect_missing,cm))
+
     return (operation, detect_missing, clim)
 
 #
@@ -2924,5 +3076,5 @@ class dr2xml_error(Exception):
     def __init__(self, valeur):
         self.valeur = valeur
     def __str__(self):
-        return `self.valeur`
+        return "\n\n"+`self.valeur`+"\n\n"
     #""" just for test"""

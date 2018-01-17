@@ -6,7 +6,7 @@
 # and accounting for a few other args
 #
 # Assumes that a full set of xml files is available in current dir,
-# including ping_files (named like ping_<context>.xml)
+# including ping_files (named like ping_<context>*.xml)
 #
 # Output files are named after pattern dr2xml_<context>.xml
 #
@@ -31,6 +31,10 @@ DRpath=$root/01.00.18/dreqPy
 #
 #CVtag=$(cd $cvspath ; git log --oneline | head -n 1 | cut -d\  -f 1)
 export PYTHONPATH=$dr2xmlpath:$DRpath:$PYTHONPATH
+#
+# Identify which ping_files are used (according to $(pwd)/iodef.xml)
+#
+pings=$(grep "ping_.*\.xml" iodef.xml | grep -v "<!--" | sed -r -e 's/.*(ping_.*xml).*/\1/g' | tr "\n" " ")
 #
 # Create Python script for using dr2xml's generate_file_defs()
 #
@@ -64,7 +68,7 @@ cat >create_file_defs.tmp.py  <<-EOF
 	                       year       =$year,
 	                       enddate    ="$enddate",
 	                       context    =context,
-	                       pingfile   ="./ping_%s.xml"%context,
+	                       pingfiles  ="$pings",
 	                       printout   =$print, 
 	                       cvs_path   ="${cvspath}/",
 	                       dummies    ="$dummies",
