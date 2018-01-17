@@ -52,7 +52,7 @@ import dreq
 # End of pre-requisites
 ####################################
 
-version="pre-0.26"
+version="0.26"
 print "* dr2xml version: ", version
 
 conventions="CF-1.7 CMIP-6.2" 
@@ -664,7 +664,6 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
         cmvar=dq.inx.uid[v]
         ttable=dq.inx.uid[cmvar.mtid]
         mipvar=dq.inx.uid[cmvar.vid]
-        #if (ttable.label=="Ofx") : print "considering var %s, ttable=%s, exctab="%(cmvar.label,ttable.label),exctab
         if ((len(incvars) == 0 and mipvar.label not in excvars) or\
             (len(incvars) > 0 and mipvar.label in incvars))\
             and \
@@ -900,7 +899,6 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
             alias_ping=ping_alias(sv,lset,pingvars)
             if ("vt" in alias ): print "processing(vt) ",alias, "alias_oing=",alias_ping
             if not alias_ping in pingvars:
-                if (table=="3hr") : print "Skipping 3hr var %s (%s) because not in pingfile"%(alias_ping,sv.label)
                 if skipped_vars_per_table.has_key(sv.mipTable) and skipped_vars_per_table[sv.mipTable]:
                     list_of_skipped=skipped_vars_per_table[sv.mipTable]
                     list_of_skipped.append(sv.label+"("+str(sv.Priority)+")")
@@ -1335,10 +1333,9 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
     #
     margs={"src_grid_id":last_grid_id, "ping_alias":alias}
     output_grid_id=create_output_grid(ssh,grid_defs,domain_defs,target_hgrid_id,margs)
-    if ("rlutcs" in alias) :
-        print "for rlutcs: targte_grid_id=",target_hgrid_id, " outp_grid_id=",output_grid_id," margs=",margs
-    #if output_grid_id is not None :
-    #    print "output_grid_id=",output_grid_id,"***>",grid_defs[output_grid_id]
+    if output_grid_id is not None :
+        print "output_grid_id=",output_grid_id,"***>",grid_defs[output_grid_id]
+
     #
     #--------------------------------------------------------------------
     # Create <field> construct to be inserted in a file_def, which includes re-griding
@@ -1913,8 +1910,6 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
         for table in svars_per_table :
             count=dict()
             for svar in svars_per_table[table] :
-                if table=="3hr" :
-                    print "*** ",table," var=",svar.label
                 if True : #realm_is_processed(svar.modeling_realm,sourcetype) : <- realms are note reliable enough in DR
                     if svar.label not in count :
                         count[svar.label]=svar
