@@ -267,6 +267,12 @@ def read_extraTable(path,table,dq,printout=False):
                     drdims=d
             if  dims2shape.has_key(drdims):
                 extra_var.spatial_shp=dims2shape[drdims]
+            elif drdims[0:19]=='longitude|latitude|' :
+                # Allow the user to put any additional vertical dimension name 
+                # which syntax fits further tests, such as P8MINE
+                extra_var.spatial_shp='XY-'+drdims[19:]
+                print "Warning: spatial shape corresponding to ",drdims,"for variable",v["out_name"],\
+                      "in Table",table," not explicitly known by DR nor dr2xml, trying %s"%extra_var.spatial_shp
             else:
                 # mpmoine_note: provisoire, on devrait toujours pouvoir associer une spatial shape a des dimensions.
                 # mpmoine_note: Je rencontre ce cas pour l'instant avec les tables Primavera ou 

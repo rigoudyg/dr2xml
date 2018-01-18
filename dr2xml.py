@@ -865,7 +865,7 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     if not sv.stdname       : sv.stdname       = "empty in DR "+dq.version
     if not sv.long_name     : sv.long_name     = "empty in DR "+dq.version
     if not sv.cell_methods  : sv.cell_methods  = "empty in DR "+dq.version
-    if not sv.cell_measures : sv.cell_measures = "empty in DR "+dq.version
+    if not sv.cell_measures : sv.cell_measures = "cell measure is not specified in DR "+dq.version
     if not sv.stdunits      : sv.stdunits      = "empty in DR "+dq.version
 
     #--------------------------------------------------------------------
@@ -1089,7 +1089,8 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     #            (lset['source_id'],sset['experiment_id'],sset.get('project',"CMIP6"))) 
     out.write(' >\n')
     #
-    wr(out,'activity_id',reduce(lambda x,y : x+" "+y, activity_id))
+    activity_idr=reduce(lambda x,y : x+" "+y, activity_id)
+    wr(out,'activity_id',activity_idr)
     #
     if contact and contact is not "" : wr(out,'contact',contact) 
     wr(out,'data_specs_version',dq.version) 
@@ -1197,8 +1198,8 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     #
     wr(out,"table_id",table)
     #
-    wr(out,"title","%s model output prepared for %s / %s %s"%(\
-        source_id,project,activity_id,experiment_id))
+    wr(out,"title","%s model output prepared for %s / "%(\
+        source_id,project)+activity_idr+" "+experiment_id)
     #
     wr(out,"variable_id",sv.label)
     #
@@ -1218,17 +1219,19 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
                                field_defs,axis_defs,grid_defs,domain_defs,
                                dummies,context,target_hgrid_id,zgrid_id,pingvars)
     out.write(end_field)
-    if sv.spatial_shp[0:4]=='XY-A':
+    if sv.spatial_shp[0:4]=='XY-A' or sv.spatial_shp[0:3]=='S-A': # includes half-level cases
         # create a field_def entry for surface pressure 
         sv_psol=get_simplevar(dq,"ps",table)
+        
         if sv_psol :
+            if not sv_psol.cell_measures : sv_psol.cell_measures = "cell measure is not specified in DR "+dq.version
             psol_field=create_xios_aux_elmts_defs(sv_psol,lset["ping_variables_prefix"]+"ps",table,lset,sset,
                                                   field_defs,axis_defs,grid_defs,domain_defs,
                                        dummies,context,target_hgrid_id,zgrid_id,pingvars)
             out.write(psol_field)
 
     #
-    if sv.spatial_shp[0:4]=='XY-A':
+    if sv.spatial_shp[0:4]=='XY-A' or sv.spatial_shp[0:3]=='S-A':
         # add entries for auxilliary variables : ap, ap_bnds, b, b_bnds
         names={"ap": "vertical coordinate formula term: ap(k)",
                "ap_bnds": "vertical coordinate formula term: ap(k+1/2)",
@@ -1333,8 +1336,8 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
     #
     margs={"src_grid_id":last_grid_id, "ping_alias":alias}
     output_grid_id=create_output_grid(ssh,grid_defs,domain_defs,target_hgrid_id,margs)
-    if output_grid_id is not None :
-        print "output_grid_id=",output_grid_id,"***>",grid_defs[output_grid_id]
+    #if output_grid_id is not None :
+    #    print "output_grid_id=",output_grid_id,"***>",grid_defs[output_grid_id]
 
     #
     #--------------------------------------------------------------------
@@ -1610,17 +1613,14 @@ def process_zonal_mean(field_id, grid_id, target_hgrid_id,zgrid_id,\
 
     # And then regrid to final grid
     # e.g. <field id="CMIP6_ua_plev39_average_1d_glat" field_ref="CMIP6_ua_plev39_average_1d_complete"
-    #             grid_ref="FULL_klev_plev39_complete_glat" > this / $ndlon </field>
+    #             grid_ref="FULL_klev_plev39_complete_glat" />
     field4_id= field2_id+"_"+zgrid_id 
     grid4_id=change_domain_in_grid(domain=zgrid_id, grid_defs=grid_defs,\
                                    src_grid_id=grid_id3,turn_into_axis=True)
     if printout :
         print "+++ grid4 ",grid4_id,"\n",grid_defs[grid4_id]
     
-    # First syntax below was used when computing redution by a two steps sum (local + global)
-    #field_defs[field4_id]='<field id="%s field_ref="%s grid_ref="%s > this / $%s </field>'\
-    #    %(field4_id+'"',field3_id+'"',grid4_id+'"',str(nlonz))
-    field_defs[field4_id]='<field id="%s field_ref="%s grid_ref="%s > this </field>'\
+    field_defs[field4_id]='<field id="%s field_ref="%s grid_ref="%s /> '\
         %(field4_id+'"',field3_id+'"',grid4_id+'"')
     if printout :
         print "+++ field4 ",field4_id,"\n",field_defs[field4_id]
