@@ -26,8 +26,8 @@ path_extra_tables=$1 # Filename for a 'home' data request - optional
 #
 root=$(cd $(dirname $0) ; pwd)
 cvspath=$root/CMIP6_CVs # Path for CMIP6_CV
-dr2xmlpath=$root/dr2pub
-DRpath=$root/01.00.18/dreqPy
+dr2xmlpath=${altdr2xmlpath:-$root/dr2pub}
+DRpath=$root/01.00.20/dreqPy
 #
 #CVtag=$(cd $cvspath ; git log --oneline | head -n 1 | cut -d\  -f 1)
 export PYTHONPATH=$dr2xmlpath:$DRpath:$PYTHONPATH

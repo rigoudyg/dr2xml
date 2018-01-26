@@ -53,17 +53,19 @@ def guess_freq_from_table_name(table):
     elif table[-5:]=="subhr"    : return "subhr"
     elif table[-8:]=="subhrOff" : return "subhr"
     #
-    elif table[0:3]  =="3hr"    : return "3hr"
+    elif table[0:3]=="3hr"      : return "3hr"
     elif table[-3:]=="3hr"      : return "3hr" # CF3hr
-    elif table[1:4]  =="3hr"    : return "3hr" # E3hr, E3hrPt
+    elif table[1:4]=="3hr"      : return "3hr" # E3hr, E3hrPt
     elif table[-5:]=="3hrPt"    : return "3hr"   
     #
-    elif table[0:3]  =="6hr"    : return "6hr"
-    elif table[1:4]  =="6hr"    : return "6hr"
+    elif table[0:3]=="6hr"      : return "6hr"
+    elif table[1:4]=="6hr"      : return "6hr"
     elif table[-5:]=="6hrPt"    : return "6hr"
     #
-    elif table[0:3]  =="1hr"    : return "1hr"
+    elif table[0:3]=="1hr"      : return "1hr"
+    elif table[0:5]=="1hrPt"    : return "1hr"
     elif table[-3:]=="1hr"      : return "1hr"
+    elif table[-5:]=="1hrPt"    : return "1hr"
     elif table[-2:]=="hr"       : return "1hr"
     #
     elif table[-3:]=="day"      : return "1d"
@@ -91,3 +93,15 @@ def guess_freq_from_table_name(table):
         sys.exit(1)
     
 
+def longest_possible_period(freq,too_long_periods):
+    """
+    Returns the longest period/frequency acessible given the value of too_long_periods
+    Input and output freqs follow Xios syntax
+    Too_long_periods follow CMIP6 syntax (i.e.  : dec, "yr" )
+    """
+    if freq=="10y" and 'dec' in too_long_periods :
+        return longest_possible_period("1y",too_long_periods)
+    elif freq=="1y" and 'yr' in too_long_periods :
+        return longest_possible_period("1mo",too_long_periods)
+    else :
+        return freq

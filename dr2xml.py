@@ -52,7 +52,7 @@ import dreq
 # End of pre-requisites
 ####################################
 
-version="0.26"
+version="0.26a"
 print "* dr2xml version: ", version
 
 conventions="CF-1.7 CMIP-6.2" 
@@ -82,7 +82,7 @@ from grids import decide_for_grids, DRgrid2gridatts,\
 from Xparse import init_context, id2grid
 
 # A auxilliary tables
-from table2freq import Cmip6Freq2XiosFreq
+from table2freq import Cmip6Freq2XiosFreq, longest_possible_period
 
 print_DR_errors=True
 print_multiple_grids=False
@@ -417,7 +417,8 @@ def RequestItem_applies_for_exp_and_year(ri,experiment,lset,sset,year=None,debug
     #   the whole experiment duration)
 
     # Acces experiment or experiment group for the RequestItem
-    if (debug) : print "Checking ","% 15s"%ri.label,
+    #if (ri.label=='AerchemmipAermonthly3d') : debug=True
+    if (debug) : print "In RIapplies.. Checking ","% 15s"%ri.title,
     item_exp=dq.inx.uid[ri.esid]
     ri_applies_to_experiment=False
     endyear=None
@@ -453,7 +454,7 @@ def RequestItem_applies_for_exp_and_year(ri,experiment,lset,sset,year=None,debug
             rep=True ; endyear=None
         else :
             rep,endyear=year_in_ri(ri,experiment,lset,sset,year,debug=debug)
-            #if (ri.label=="CmipOclim") :
+            #if (ri.label=="AerchemmipAermonthly3d") :
             #    print "reqItem=%s,experiment=%s,year=%d,rep=%s,"%(ri.label,experiment,year,rep)
         #print " rep=",rep
         return rep,endyear
@@ -564,6 +565,7 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
     
     """
     #
+    debug=False
     # From MIPS set to Request links
     global sc,global_rls,grid_choice
     if sset and 'tierMax' in sset : tierMax=sset['tierMax']
@@ -611,12 +613,15 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
             ri_ids=dq.inx.iref_by_sect[rl.uid].a['requestItem']
             for ri_id in ri_ids :
                 ri=dq.inx.uid[ri_id]
-                #print "Checking requestItem ",ri.label
+                if debug : print "Checking requestItem ",ri.label,
                 applies,endyear= RequestItem_applies_for_exp_and_year(ri,
                                  experiment_id, lset,sset,year,False)
                 if applies:
-                    #print "% 25s"%ri.label," applies "
+                    if debug : print " applies "
                     filtered_rls.append(rl)
+                else :
+                    if debug : print " does not apply "
+
         rls=filtered_rls
         if printout :
             print "Number of Request Links which apply to experiment ", \
@@ -670,7 +675,7 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
            ((len(inctab)>0 and ttable.label in inctab) or \
             (len(inctab)==0 and ttable.label not in exctab)):
             filtered_vars.append((v,g))
-            if ("clwvi" in mipvar.label) : print "adding var %s, ttable=%s, exctab="%(cmvar.label,ttable.label),exctab,excvars
+            #if ("clwvi" in mipvar.label) : print "adding var %s, ttable=%s, exctab="%(cmvar.label,ttable.label),exctab,excvars
         else:
             #if (ttable.label=="Ofx") : print "discarding var %s, ttable=%s, exctab="%(cmvar.label,ttable.label),exctab
             pass
@@ -806,7 +811,7 @@ def freq2datefmt(in_freq,operation,lset):
         elif freq in [ "3hr", "3hrPt", "3hrClim","3h"] :
             if operation in ["average","minimum","maximum"] : offset="90mi"
             else : offset="3h"
-        elif freq in ["1hr","1h"]: 
+        elif freq in ["1hr","1h", "hr", "1hrPt"]: 
             if operation in ["average","minimum","maximum"] : offset="30mi"
             else : offset="1h"
     elif freq in ["1hrClimMon" , "1hrCM" ]: 
@@ -834,7 +839,7 @@ def freq2datefmt(in_freq,operation,lset):
 
 def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
                         field_defs,axis_defs,grid_defs,domain_defs,
-                        dummies,skipped_vars_per_table,
+                        dummies,skipped_vars_per_table,actually_written_vars,
                         prefix,context,grid,pingvars=None,enddate=None,
                         attributes=[],debug=[]) :
     """ 
@@ -899,12 +904,9 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
             alias_ping=ping_alias(sv,lset,pingvars)
             if ("vt" in alias ): print "processing(vt) ",alias, "alias_oing=",alias_ping
             if not alias_ping in pingvars:
-                if skipped_vars_per_table.has_key(sv.mipTable) and skipped_vars_per_table[sv.mipTable]:
-                    list_of_skipped=skipped_vars_per_table[sv.mipTable]
-                    list_of_skipped.append(sv.label+"("+str(sv.Priority)+")")
-                else:
-                    list_of_skipped=[sv.label]
-                skipped_vars_per_table.update({sv.mipTable:list_of_skipped})
+                table=sv.mipTable
+                if table not in skipped_vars_per_table: skipped_vars_per_table[table]=[]
+                skipped_vars_per_table[table].append(sv.label+"("+str(sv.Priority)+")")
                 return
     #
     #--------------------------------------------------------------------
@@ -955,7 +957,7 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
         grid_label,grid_resolution,grid_description=DRgrid2gridatts(grid)
         
 
-    if table in [ 'AERMonZ',' EmonZ', 'EdayZ' ] :
+    if table[-1:] == "Z" : # e.g. 'AERmonZ','EmonZ', 'EdayZ'
         grid_label+="z"
         # Below : when reduction was done trough a two steps sum, we needed to divide afterwards
         # by the nmber of longitudes
@@ -1046,7 +1048,8 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     # including global CMOR file attributes
     #--------------------------------------------------------------------
     out.write(' <file id="%s_%s_%s" name="%s" '%(sv.label,table,grid_label,filename))
-    out.write(' output_freq="%s" '%Cmip6Freq2XiosFreq[sv.frequency])
+    freq=longest_possible_period(Cmip6Freq2XiosFreq[sv.frequency],lset.get("too_long_periods",[]))
+    out.write(' output_freq="%s" '%freq)
     out.write(' append="true" ')
     out.write(' output_level="%d" '%lset.get("output_level",10))
     out.write(' compression_level="%d" '%lset.get("compression_level",0))
@@ -1231,16 +1234,24 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
             out.write(psol_field)
 
     #
-    if sv.spatial_shp[0:4]=='XY-A' or sv.spatial_shp[0:3]=='S-A':
+    names={}
+    if sv.spatial_shp=='XY-A' or sv.spatial_shp=='S-A':
         # add entries for auxilliary variables : ap, ap_bnds, b, b_bnds
         names={"ap": "vertical coordinate formula term: ap(k)",
                "ap_bnds": "vertical coordinate formula term: ap(k+1/2)",
                "b": "vertical coordinate formula term: b(k)",
                "b_bnds" : "vertical coordinate formula term: b(k+1/2)"  }
-        for tab in names :
-            out.write('\t<field field_ref="%s%s" name="%s" long_name="%s" operation="once" prec="8" />\n'%\
-                      (lset["ping_variables_prefix"],tab,tab,names[tab]))
+    if sv.spatial_shp=='XY-AH' or sv.spatial_shp=='S-AH':
+        # add entries for auxilliary variables : ap, ap_bnds, b, b_bnds
+        names={"ahp": "vertical coordinate formula term: ap(k)",
+               "ahp_bnds": "vertical coordinate formula term: ap(k+1/2)",
+               "bh": "vertical coordinate formula term: b(k)",
+               "bh_bnds" : "vertical coordinate formula term: b(k+1/2)"  }
+    for tab in names :
+        out.write('\t<field field_ref="%s%s" name="%s" long_name="%s" operation="once" prec="8" />\n'%\
+                  (lset["ping_variables_prefix"],tab,tab.replace('h',''),names[tab]))
     out.write('</file>\n\n')
+    actually_written_vars.append((sv.label,sv.mipTable,sv.frequency,sv.Priority,sv.spatial_shp))
 
 def wrv(name, value, num_type="string"):
     global print_wrv
@@ -1345,6 +1356,8 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
     #--------------------------------------------------------------------
     #
     if output_grid_id is not None :
+        #rep='  <field id="%s+%s" field_ref="%s" name="%s" grid_ref="%s" '% \
+        #    (sv.label,last_field_id,last_field_id,sv.label,output_grid_id)
         rep='  <field field_ref="%s" name="%s" grid_ref="%s" '% \
             (last_field_id,sv.label,output_grid_id)
     else :
@@ -1369,7 +1382,9 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
     # TBD    The units must be valid UDUNITS, e.g. day or hr.
     rep+=' cell_methods="%s" cell_methods_mode="overwrite"'% sv.cell_methods
     rep+='>\n'
-    if operation != 'once' : rep+='\t\t@%s\n'%last_field_id
+    #if operation != 'once' : rep+='\t\t@%s\n'%last_field_id
+    # enforce time average before remapping
+    if operation == 'average' : rep+='\t\t@%s\n'%last_field_id 
     #
     #--------------------------------------------------------------------
     # Add Xios variables for creating NetCDF attributes matching CMIP6 specs
@@ -1464,7 +1479,7 @@ def process_vertical_interpolation(sv,alias,lset,pingvars,
     alias_instant=alias_in_ping+"_instant" # e.g.  CMIP6_zg_instant
     # <field id="CMIP6_hus_instant" field_ref="CMIP6_hus" operation="instant" />
     field_defs[alias_instant]=\
-               '<field id="%-25s field_ref="%-25s operation="instant" />'\
+               '<field id="%-25s field_ref="%-25s operation="instant" freq_offset="0ts"/>'\
                %(alias_instant+'"',alias_in_ping+'"')
     #
     vert_freq=lset["vertical_interpolation_sample_freq"]
@@ -1584,8 +1599,10 @@ def process_zonal_mean(field_id, grid_id, target_hgrid_id,zgrid_id,\
     # e.g. <field id="CMIP6_ua_plev39_average" field_ref="CMIP6_ua_plev39" operation="average" />
     xios_freq=Cmip6Freq2XiosFreq[frequency]
     field1_id= field_id+"_"+operation     # e.g. CMIP6_hus_plev7h_instant
-    field_defs[field1_id]='<field id="%-s field_ref="%-s operation="%s />'\
-        %(field1_id+'"',field_id+'"',operation+'"')
+    if operation=='instant' : freqoffset='freq_offset="0ts"'
+    else : freqoffset=''
+    field_defs[field1_id]='<field id="%-s field_ref="%-s operation="%s %s />'\
+        %(field1_id+'"',field_id+'"',operation+'"',freqoffset)
     if printout :
         print "+++ field1 ",field1_id,"\n",field_defs[field1_id]
     #
@@ -1597,20 +1614,30 @@ def process_zonal_mean(field_id, grid_id, target_hgrid_id,zgrid_id,\
     if printout :
         print "+++ field2 ",field2_id,"\n",field_defs[field2_id]
     
-    # e.g. <field id="CMIP6_ua_plev39_average_1d_complete" field_ref="CMIP6_ua_plev39_average_1d"
-    #             grid_ref="FULL_klev_plev39_complete" /> 
-    field3_id= field2_id+"_"+target_hgrid_id 
-    # Must create and a use a grid similar to the last one defined 
-    # for that variable, except for a change in the hgrid/domain (=> complete)
-    grid_id3=change_domain_in_grid(domain=target_hgrid_id, grid_defs=grid_defs,\
+    if target_hgrid_id : # case where an intermediate grid is needed
+        # e.g. <field id="CMIP6_ua_plev39_average_1d_complete" field_ref="CMIP6_ua_plev39_average_1d"
+        #             grid_ref="FULL_klev_plev39_complete" /> 
+        field3_id= field2_id+"_"+target_hgrid_id 
+        # Must create and a use a grid similar to the last one defined 
+        # for that variable, except for a change in the hgrid/domain (=> complete)
+        grid_id3=change_domain_in_grid(domain=target_hgrid_id, grid_defs=grid_defs,\
                                   src_grid_id=grid_id)
-    if printout :
-        print "+++ grid3 ",grid_id3,"\n",grid_defs[grid_id3]
-    field_defs[field3_id]='<field id="%s field_ref="%s grid_ref="%s /> '\
-        %(field3_id+'"',field2_id+'"',grid_id3+'"')
-    if printout :
-        print "+++ field3 ",field3_id,"\n",field_defs[field3_id]
+        if printout :
+            print "+++ grid3 ",grid_id3,"\n",grid_defs[grid_id3]
+        field_defs[field3_id]='<field id="%s field_ref="%s grid_ref="%s /> '\
+                %(field3_id+'"',field2_id+'"',grid_id3+'"')
+        if printout :
+            print "+++ field3 ",field3_id,"\n",field_defs[field3_id]
+    else :
+        # Case where the input field is already on a rectangular grid
+        print '~~~~>', "no target_hgrid_id for field=",field_id," grid=",grid_id
+        field3_id=field2_id
+        grid_id3=grid_id
 
+    if not zgrid_id :
+        dr2xml_error("Must provide zgrid_id in lab_settings, the id of a latitude axis which has "+\
+                     "(initialized) latitude values equals to those of the rectangular grid used")
+        
     # And then regrid to final grid
     # e.g. <field id="CMIP6_ua_plev39_average_1d_glat" field_ref="CMIP6_ua_plev39_average_1d_complete"
     #             grid_ref="FULL_klev_plev39_complete_glat" />
@@ -1763,16 +1790,24 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
     # Extract CMOR variables for the experiment and year and lab settings
     #--------------------------------------------------------------------
     skipped_vars_per_table={}
+    actually_written_vars=[]
     mip_vars_list=gather_AllSimpleVars(lset,sset,year,printout)
     # Group CMOR vars per realm
     svars_per_realm=dict()
     for svar in mip_vars_list :
-        if svar.modeling_realm not in svars_per_realm.keys() :
-            svars_per_realm[svar.modeling_realm]=[]
-        if svar not in svars_per_realm[svar.modeling_realm]:
-            svars_per_realm[svar.modeling_realm].append(svar)
+        realm=svar.modeling_realm
+        if realm not in svars_per_realm :
+            svars_per_realm[realm]=[]
+        if svar not in svars_per_realm[realm]:
+            add=True
+            for ovar in svars_per_realm[realm]:
+                if ovar.label==svar.label and ovar.spatial_shp==svar.spatial_shp \
+                   and ovar.frequency==svar.frequency and ovar.cell_methods==svar.cell_methods:
+                    add=False
+            if add :
+                svars_per_realm[realm].append(svar)
         else:
-            old=svars_per_realm[svar.modeling_realm][0]
+            old=svars_per_realm[realm][0]
             print "Duplicate svar %s %s %s %s"%(old.label,old.grid,svar.label,svar.grid)
             pass
     if printout :
@@ -1784,12 +1819,15 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
     #--------------------------------------------------------------------
     svars_per_table=dict()
     context_realms=lset['realms_per_context'][context]
+    processed_realms=[]
     for realm in context_realms :
+        if realm in processed_realms : continue
+        processed_realms.append(realm)
         excludedv=dict()
-        print "Processing realm '%s' of context '%s'"%(realm,context)
+        print "Processing realm '%s' of context '%s'"%(realm,context),context_realms
         #print 50*"_"
         excludedv=dict()
-        if realm in svars_per_realm.keys():
+        if realm in svars_per_realm:
             for svar in svars_per_realm[realm] :
                 # exclusion de certaines spatial shapes (ex. Polar Stereograpic Antarctic/Groenland)
                 if svar.label not in lset['excluded_vars'] and \
@@ -1883,6 +1921,7 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
                                         multi_plev_suffixes.union(single_plev_suffixes),
                                         lset["ping_variables_prefix"],
                                         lset["vertical_interpolation_sample_freq"],
+                                        dummies,
                                         axis_defs,grid_defs,field_defs, all_ping_refs, printout=False )
     #
     #--------------------------------------------------------------------
@@ -1903,6 +1942,8 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
         out.write('<!-- Simulation settings : \n')        
         for s in sset : out.write(' %s : %s\n'%(s,sset[s]))
         out.write('-->\n')
+        out.write('<!-- Year processed is  %d --> \n'%year)
+        #
         domain_defs=dict()
         #for table in ['day'] :    
         out.write('\n<file_definition type="one_file" enabled="true" > \n')
@@ -1915,9 +1956,9 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
                         count[svar.label]=svar
                         for grid in svar.grids :
                             write_xios_file_def(svar,year,table, lset,sset,out,cvs_path,
-                                            field_defs,axis_defs,grid_defs,domain_defs,dummies,
-                                            skipped_vars_per_table,prefix,context,grid,pingvars,
-                                            enddate,attributes)
+                                field_defs,axis_defs,grid_defs,domain_defs,dummies,
+                                skipped_vars_per_table,actually_written_vars,
+                                prefix,context,grid,pingvars,enddate,attributes)
                     else :
                         pass
                         # print "Duplicate var in %s : %s %s %s / %s %s"%(
@@ -1969,7 +2010,7 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
     
     # mpmoine_petitplus:generate_file_defs: pour sortir des stats sur ce que l'on sort reelement
     # SS - non : gros plus
-    if printout: print_SomeStats(context,svars_per_table,skipped_vars_per_table)
+    if printout: print_SomeStats(context,svars_per_table,skipped_vars_per_table,actually_written_vars)
 
     warn=dict()
     for warning,label,table in cell_method_warnings:
@@ -1981,14 +2022,14 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
 
 # mpmoine_petitplus: nouvelle fonction print_SomeStats (plus d'info sur les skipped_vars, nbre de vars / (shape,freq) )
 # SS - non : gros plus
-def print_SomeStats(context,svars_per_table,skipped_vars_per_table):
+def print_SomeStats(context,svars_per_table,skipped_vars_per_table,actually_written_vars):
 
     #--------------------------------------------------------------------
     # Print Summary: list of  considered variables per table 
     # (i.e. not excuded_vars and not excluded_shapes)
     #--------------------------------------------------------------------
     print "\nTables concerned by context %s : "%context, svars_per_table.keys()
-    print "\nVariables per table :"
+    print "\nVariables per table :" 
     for table in svars_per_table.keys():
     	print "\n>>> TABLE:",
         print "%15s %02d ---->"%(table,len(svars_per_table[table])),
@@ -2016,11 +2057,11 @@ def print_SomeStats(context,svars_per_table,skipped_vars_per_table):
     # (i.e. not excluded and not skipped)
     #--------------------------------------------------------------------
     stats_out={}
-    for table in svars_per_table.keys():
+    for table in svars_per_table:
     	for sv in svars_per_table[table]:
     		dic_freq={}
     		dic_shp={}
-    		if table not in skipped_vars_per_table.keys()  or \
+    		if table not in skipped_vars_per_table  or \
     		   sv.label+"("+str(sv.Priority)+")" not in skipped_vars_per_table[table]  :
     			freq=sv.frequency
     			shp=sv.spatial_shp
@@ -2034,13 +2075,36 @@ def print_SomeStats(context,svars_per_table,skipped_vars_per_table):
     			dic_freq.update({shp:dic_shp})
     			stats_out.update({freq:dic_freq})
 
-    print "\n\nSome Statistics on variables per frequency+shape..."
-    for k1,v1 in stats_out.items():
-    	for k2,v2 in v1.items():
-    		nb=len(v2.values())
-    		print "\n\t* %d variables output at %s frequency with shape %s ---> "%(nb,k1,k2),
-    		for k3,v3 in v2.items(): print k3,"(",v3,"),",
-    print
+    print "\n\nSome Statistics on actually written variables per frequency+shape..."
+    # for k1,v1 in stats_out.items():
+    # 	for k2,v2 in v1.items():
+    # 		nb=len(v2.values())
+    # 		print "\n\t* %d variables output at %s frequency with shape %s ---> "%(nb,k1,k2),
+    # 		for k3,v3 in v2.items(): print k3,"(",v3,"),",
+    # print
+
+    #    ((sv.label,sv.table,sv.frequency,sv.Priority,sv.spatial_shp))
+    dic=dict()
+    for label,table,frequency,Priority,spatial_shp in actually_written_vars :
+        if frequency not in dic : dic[frequency]=dict()
+        if spatial_shp not in dic[frequency] : dic[frequency][spatial_shp]=dict()
+        if table not in dic[frequency][spatial_shp] : dic[frequency][spatial_shp][table]=dict()
+        if Priority not in dic[frequency][spatial_shp][table] : dic[frequency][spatial_shp][table][Priority]=[]
+        dic[frequency][spatial_shp][table][Priority].append(label)
+    nbtot=0
+    for frequency in dic :
+        for spatial_shp in dic[frequency] :
+            nb=0
+            for table in dic[frequency][spatial_shp] :
+                for Priority in dic[frequency][spatial_shp][table] :
+                    print "%10s"%" ", " %8s"%" ", "% 12s"%table,"P%1d"%Priority,
+                    l=dic[frequency][spatial_shp][table][Priority]
+                    print "% 3d : "%len(l),l
+                    nb+=len(l)
+            print "%10s"%frequency," %8s"%spatial_shp,"% 11s"%"--------","---","%3d"%nb
+            print
+            nbtot+=nb
+    
     return True
 
 
@@ -2097,7 +2161,7 @@ def create_axis_def(sdim,prefix,vert_frequency,axis_defs,field_defs):
         axis_defs[sdim.label]=rep
         #
         # Create and store a definition for time-sampled field for the vertical coordinate
-        coorddef='<field id="%-25s field_ref="%-25s operation="instant" freq_op="%-10s detect_missing_value="true"> @%s</field>'\
+        coorddef='<field id="%-25s field_ref="%-25s operation="instant" freq_op="%-10s detect_missing_value="true" freq_offset="0ts"> @%s</field>'\
                         %(coordname_sampled+'"',coordname+'"', vert_frequency+'"',coordname)
         field_defs[coordname_sampled]=coorddef
     else: # zoom case
@@ -2199,7 +2263,9 @@ def create_grid_def(grid_defs,axis_def_string,axis_name,alias=None,context_index
                            "but variable alias and/or context_index not provided (alias:%s, context_index:%s)"%(alias,context_index))
 
 
-def create_xios_axis_and_grids_for_plevs_unions(svars,plev_sfxs,prefix,vert_freq,axis_defs,grid_defs,field_defs, ping_refs, printout=False): 
+def create_xios_axis_and_grids_for_plevs_unions(svars,plev_sfxs,prefix,vert_freq,
+                                                dummies,
+                                                axis_defs,grid_defs,field_defs, ping_refs, printout=False): 
     """
     Objective of this function is to optimize Xios vertical interpolation requested in pressure levels. 
     Process in 2 steps:
@@ -2232,7 +2298,7 @@ def create_xios_axis_and_grids_for_plevs_unions(svars,plev_sfxs,prefix,vert_freq
                     dummy_in_ping=None
                     if present_in_ping: dummy_in_ping=("dummy" in ping_refs[prefix+lwps]) 
 
-                    if  present_in_ping and not dummy_in_ping: 
+                    if  present_in_ping and ( not dummy_in_ping or dummies=='include' ): 
                         sv.sdims[sd.label].is_zoom_of="union_plevs_"+lwps
                         if not dict_plevs.has_key(lwps):
                             dict_plevs[lwps]={sd.label:{sv.label:sv}}
@@ -2627,7 +2693,6 @@ def pingFileForRealmsList(settings, context,lrealms,svars,path_special,dummy="fi
     # Remove duplicates : want to get one single entry for all variables having
     # the same label without psuffix, and one for each having different non-ambiguous label
     # Keep the one with the best piority
-    # (Merci Marie-Pierre pour la régression....)
     uniques=[] ; best_prio=dict()
     for v in lvars :
         lna=v.label_non_ambiguous

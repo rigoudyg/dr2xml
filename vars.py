@@ -372,8 +372,8 @@ def process_homeVars(lset,sset,mip_vars_list,mips,dq,expid=False,printout=False)
                     print "Error:",hv_info,\
                         "HOMEVar announced as cmor but no corresponding "\
                         " CMORVar found => Not taken into account."
-                    dr2xml_error("Abort: HOMEVar is cmor but no corresponding"\
-                                 " CMORVar found.")
+                    vars_error("Abort: HOMEVar %s is declared as cmor but no corresponding"\
+                                 " CMORVar found."%`hv_info`)
         elif hv.type=='perso':
             # Check if HOME variable anounced as 'perso' is in fact 'cmor'
             is_cmor=get_corresp_CMORvar(hv,dq)
@@ -387,7 +387,7 @@ def process_homeVars(lset,sset,mip_vars_list,mips,dq,expid=False,printout=False)
                         print "Warning:",hv_info,"HOMEVar is anounced "\
                             " as perso, is not a CMORVar, but has a cmor name." \
                             " => Not taken into account."
-                    dr2xml_error("Abort: HOMEVar is anounced as perso,"\
+                    vars_error("Abort: HOMEVar is anounced as perso,"\
                                      " is not a CMORVar, but has a cmor name.")
                 else:
                     if printmore: print "Info:",hv_info,\
@@ -397,7 +397,7 @@ def process_homeVars(lset,sset,mip_vars_list,mips,dq,expid=False,printout=False)
                 if printout:
                     print "Error:",hv_info,"HOMEVar is anounced as perso,"\
                         " but in reality is cmor => Not taken into account."
-                dr2xml_error("Abort: HOMEVar is anounced as perso but "\
+                vars_error("Abort: HOMEVar is anounced as perso but "\
                                  "should be cmor.")
         elif hv.type=='extra':
             if hv.Priority<=lset["max_priority"]:
@@ -409,7 +409,7 @@ def process_homeVars(lset,sset,mip_vars_list,mips,dq,expid=False,printout=False)
                 print "Error:",hv_info,"HOMEVar type",hv.type,\
                     "does not correspond to any known keyword."\
                     " => Not taken into account."
-            dr2xml_error("Abort: unknown type keyword provided "\
+            vars_error("Abort: unknown type keyword provided "\
                          "for HOMEVar %s:"%`hv_info`)
 
 def get_corresp_CMORvar(hmvar,dq):
@@ -440,7 +440,7 @@ def get_corresp_CMORvar(hmvar,dq):
                     "DO NOT match CMORvar ones." \
                     " -> Provided:",[hmvar.spatial_shp,hmvar.temporal_shp],\
                     'Expected:',get_SpatialAndTemporal_Shapes(cmvar,dq)
-    if count==1: 
+    if count>=1: 
         # empty table means that the frequency is changed (but the variable exists in another frequency cmor table
         if empty_table : var_freq_asked = hmvar.frequency
         complement_svar_using_cmorvar(hmvar,cmvar_found,dq,None)
@@ -764,3 +764,9 @@ def get_simplevar(dq,label,table):
         complement_svar_using_cmorvar(svar,cmvar,dq,None)
         return svar
     
+
+class vars_error(Exception):
+    def __init__(self, valeur):
+        self.valeur = valeur
+    def __str__(self):
+        return "\n\n"+`self.valeur`+"\n\n"
