@@ -68,8 +68,8 @@ def guess_freq_from_table_name(table):
     elif table[-5:]=="1hrPt"    : return "1hr"
     elif table[-2:]=="hr"       : return "1hr"
     #
-    elif table[-3:]=="day"      : return "1d"
-    elif table[-5:]=="dayPt"    : return "1d"
+    elif table[-3:]=="day"      : return "day"
+    elif table[-5:]=="dayPt"    : return "day"
     #
     elif table[-4:]=="5day"     : return "5d"
     #
@@ -99,9 +99,9 @@ def longest_possible_period(freq,too_long_periods):
     Input and output freqs follow Xios syntax
     Too_long_periods follow CMIP6 syntax (i.e.  : dec, "yr" )
     """
-    if freq=="10y" and 'dec' in too_long_periods :
+    if freq=="10y" and any ([ 'dec' in f for f in too_long_periods ]) :
         return longest_possible_period("1y",too_long_periods)
-    elif freq=="1y" and 'yr' in too_long_periods :
+    elif freq=="1y" and any ([ 'yr' in f for f in too_long_periods ]) :
         return longest_possible_period("1mo",too_long_periods)
     else :
         return freq

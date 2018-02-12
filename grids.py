@@ -115,6 +115,10 @@ def field_size(svar, mcfg):
     oce_grid_size=mcfg['nho']
     nb_cosp_sites=129 
     nb_curtain_sites=1000 # TBD : better estimate of 'curtain' size
+    nb_lidar_temp=40
+    nb_parasol_refl=5
+    nb_isccp_tau=7
+    nb_isccp_pc=7
     #
     siz=0
     s=svar.spatial_shp
@@ -164,6 +168,13 @@ def field_size(svar, mcfg):
            [ 'ocean', 'seaIce', 'ocean seaIce', 'ocnBgchem', 'seaIce ocean' ] : 
             siz=oce_grid_size
         
+    elif ( s == "XY-temp" ): #Global field (lidar_temp)
+        siz=atm_grid_size*nb_lidar_temp
+    elif ( s == "XY-sza5" ): #Global field (parasol_refl)
+        siz=atm_grid_size*nb_parasol_refl
+    elif ( s == "XY-tau|plev7c" ): #Global field (isccp_tau x isccp_pc)
+        siz=atm_grid_size*nb_isccp_tau*nb_isccp_pc
+
     elif ( s == "YB-R" ): #Ocean Basin Meridional Section (on density surfaces)
         siz=oce_nblev*nb_lat_ocean
     elif ( s == "YB-O" ): #Ocean Basin Meridional Section

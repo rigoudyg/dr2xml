@@ -532,7 +532,9 @@ def complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues,debug=[]):
         svar.struct=st
         try :
             svar.cm=dq.inx.uid[st.cmid].cell_methods
-            svar.cell_methods=dq.inx.uid[st.cmid].cell_methods.rstrip(' ')
+            methods=dq.inx.uid[st.cmid].cell_methods.rstrip(' ')
+            methods=methods.replace("mask=siconc or siconca","mask=siconc")
+            svar.cell_methods=methods
         except:
             if print_DR_errors: print "DR Error: issue with cell_method for "+st.label
             #TBS# svar.cell_methods=None
@@ -544,14 +546,14 @@ def complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues,debug=[]):
         # This can be either a string value for inclusion in the NetCDF variable attribute cell_measures, or a directive. In the latter case it will be a single word, --OPT or --MODEL. The first of these indicates that the data may be provided either on the cell centres or on the cell boundaries. --MODEL indicates that the data should be provided at the cell locations used for that variable in the model code (e.g. cell vertices).
         # We turn the directive in as sensible choice 
         if svar.cell_measures in [ '--MODEL', '--OPT', '--UGRID'] :
-            if (svar.label=="ua" or svar.label=="va") and svar.mipTable=="6hrLev" :
-                svar.cell_measures='--OPT' # because PrePARE 3.3.0 is waiting for such a value !!
-            if (svar.label in [ "uo","vo","wo","umo","vmo","tauuo","tauvo"]) and svar.mipTable=="Omon" :
-                svar.cell_measures='--OPT' # because PrePARE 3.3.0 is waiting for such a value !!
-            else :
-                svar.cell_measures=''
+            #if (svar.label=="ua" or svar.label=="va") and svar.mipTable=="6hrLev" :
+            #    svar.cell_measures='--OPT' # because PrePARE 3.3.0 is waiting for such a value !!
+            #if (svar.label in [ "uo","vo","wo","umo","vmo","tauuo","tauvo"]) and svar.mipTable=="Omon" :
+            #    svar.cell_measures='--OPT' # because PrePARE 3.3.0 is waiting for such a value !!
+            #else :
+            svar.cell_measures=''
         if svar.cell_measures in [ 'area: areacello OR areacella' ] :
-            svar.cell_measures='areacello'  #TBD Actually applies to seaice variables only, in DR01.00.17
+            svar.cell_measures='area: areacello'  #TBD Actually applies to seaice variables only, in DR01.00.17
         product_of_other_dims=1
         all_dimids=[]
         if svar.spatial_shp!="na-na":

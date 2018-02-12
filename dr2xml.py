@@ -52,7 +52,7 @@ import dreq
 # End of pre-requisites
 ####################################
 
-version="0.27"
+version="pre-0.28"
 print "* dr2xml version: ", version
 
 conventions="CF-1.7 CMIP-6.2" 
@@ -175,7 +175,22 @@ example_lab_and_model_settings={
     # Names must match DR MIPvarnames (and **NOT** CMOR standard_names)
     # excluded_vars_file="../../cnrm/non_published_variables"
     "excluded_vars" : ['pfull', 'phalf', "zfull" ], # because we have a pressure based hydrid coordinate,
-                                                    # and no fixed height levels 
+                                                    # and no fixed height levels
+    
+    # Vars computed with a period which is not the basic timestep must be declared explictly,
+    # with that period, in order that 'instant' sampling works correctly
+    # (the units for period should be different from the units of any instant ouput frequency
+    # for those variables - 'mi' loooks fine, 'ts' may work)
+    "special_timestep_vars" : {
+        "60mi" : ['parasolRefl','clhcalipso','cltcalipso','cllcalipso','clmcalipso', \
+                'cfadLidarsr532','clcalipso','clcalipso2','cfadDbze94', \
+                'jpdftaureliqmodis','clisccp','jpdftaureicemodis','clmisr'],
+        },
+
+    # You can specifically exclude some pairs (vars,tables), in lab_settings or (higher priority)
+    # in experiment_settings
+    "excluded_pairs" : [ ('fbddtalk','Omon') ] ,
+
     # For debugging purpose, if next list has members, this has precedence over
     # 'excluded_vars' and over 'excluded_vars_per_config'
     #"included_vars" : [ 'ccb' ],
@@ -281,6 +296,7 @@ example_lab_and_model_settings={
 
     # We create sampled time-variables for controlling the frequency of vertical interpolations
     "vertical_interpolation_sample_freq" : "3h",
+    "vertical_interpolation_operation"   : "instant", # LMD prefers 'average'
 
     #--- Say if you want to use XIOS union/zoom axis to optimize vertical interpolation requested by the DR
     "use_union_zoom" : False,
@@ -369,6 +385,7 @@ example_simulation_settings={
                                         # This is an alternative to using "branch_time_in_child"
     'child_time_ref_year'  : 1850,      # MUST BE CONSISTENT WITH THE TIME UNITS OF YOUR MODEL(S) !!!
                                         # (this is not necessarily the parent start date)
+                                        # the ref_year for a scenario must be the same as for the historical
     #"branch_time_in_child" : "0.0D0",   # a double precision value in child time units (days),
                                         # This is an alternative to using "branch_year_in_child"
     
@@ -384,6 +401,11 @@ example_simulation_settings={
 
     # A character string containing additional information about this simulation
     "comment"              : "",
+
+    # You can specifically exclude some pairs (vars,tables), in lab_settings or (higher priority)
+    # in experiment_settings (means that an empty list in experiment settings supersedes a non-empty one
+    # in lab_settings
+    # "excluded_pairs" : [ ('fbddtalk','Omon') ]
 
     # A per-variable dict of comments which are specific to this simulation. It will replace  
     # the all-simulation comment
@@ -663,6 +685,8 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
         if ('excluded_vars_per_config' in lset) and \
            (config in lset['excluded_vars_per_config']):
             excvars.extend(lset['excluded_vars_per_config'][config])
+    excpairs=sset.get('excluded_pairs',lset.get('excluded_pairs',[]))
+    
     
     filtered_vars=[]
     for (v,g) in miprl_vars_grids : 
@@ -673,8 +697,10 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
             (len(incvars) > 0 and mipvar.label in incvars))\
             and \
            ((len(inctab)>0 and ttable.label in inctab) or \
-            (len(inctab)==0 and ttable.label not in exctab)):
-            filtered_vars.append((v,g))
+            (len(inctab)==0 and ttable.label not in exctab))\
+            and \
+            ((mipvar.label,ttable.label) not in excpairs) :
+             filtered_vars.append((v,g))
             #if ("clwvi" in mipvar.label) : print "adding var %s, ttable=%s, exctab="%(cmvar.label,ttable.label),exctab,excvars
         else:
             #if (ttable.label=="Ofx") : print "discarding var %s, ttable=%s, exctab="%(cmvar.label,ttable.label),exctab
@@ -766,6 +792,8 @@ def wr(out,key,dic_or_val=None,num_type="string",default=None) :
         if num_type == "string" :
             #val=val.replace(">","&gt").replace("<","&lt").replace("&","&amp").replace("'","&apos").replace('"',"&quot").strip()
             val=val.replace(">","&gt").replace("<","&lt").strip()
+            #CMIP6 spec : no more than 1024 char
+            val=val[0:1024]
         if num_type != "string" or len(val) > 0 :
             out.write('  <variable name="%s"  type="%s" > %s '%(key,num_type,val))
             out.write('  </variable>\n')
@@ -776,13 +804,13 @@ def freq2datefmt(in_freq,operation,lset):
     offset=None
     freq=in_freq
     if freq == "dec" or freq == "10y":
-        if "dec" not in lset.get("too_long_periods",[]) :
+        if not any( "dec" in f for f in lset.get("too_long_periods",[])) :
             datefmt="%y"
             if operation in ["average","minimum","maximum"] : offset="5y"
             else : offset="10y"
         else : freq="yr" #Ensure dates in filenames are consistent with content, even if not as required
     if freq == "yr" or freq == "yrPt" or freq == "1y":
-        if "yr" not in lset.get("too_long_periods",[]) :
+        if not any( "yr" in f for f in lset.get("too_long_periods",[])) :
             datefmt="%y"
             if operation in ["average","minimum","maximum"] : offset=False
             else : offset="1y"
@@ -867,10 +895,10 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     #--------------------------------------------------------------------
     # Put a warning for field attributes that shouldn't be empty strings
     #--------------------------------------------------------------------
-    if not sv.stdname       : sv.stdname       = "empty in DR "+dq.version
+    if not sv.stdname       : sv.stdname       = "missing" #"empty in DR "+dq.version
     if not sv.long_name     : sv.long_name     = "empty in DR "+dq.version
-    if not sv.cell_methods  : sv.cell_methods  = "empty in DR "+dq.version
-    if not sv.cell_measures : sv.cell_measures = "cell measure is not specified in DR "+dq.version
+    #if not sv.cell_methods  : sv.cell_methods  = "empty in DR "+dq.version
+    #if not sv.cell_measures : sv.cell_measures = "cell measure is not specified in DR "+dq.version
     if not sv.stdunits      : sv.stdunits      = "empty in DR "+dq.version
 
     #--------------------------------------------------------------------
@@ -1256,6 +1284,7 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
 def wrv(name, value, num_type="string"):
     global print_wrv
     if not print_wrv : return ""
+    if type(value)==type("") : value=value[0:1024] #CMIP6 spec : no more than 1024 char
     # Format a 'variable' entry
     return '     <variable name="%s" type="%s" > %s '%(name,num_type,value)+\
         '</variable>\n'
@@ -1364,6 +1393,15 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
         rep='  <field field_ref="%s" name="%s" '% (last_field_id,sv.label)
     #
     if operation != 'once' : rep+=' freq_op="%s"'% Cmip6Freq2XiosFreq[sv.frequency]
+    # 
+    # Add offset if operation=instant for some specific variables defined in lab_settings
+    #
+    if operation == 'instant' :
+        for ts in lset.get('special_timestep_vars',[]) :
+            if sv.label in lset['special_timestep_vars'][ts] :
+                xios_freq = Cmip6Freq2XiosFreq[sv.frequency]
+                # works only if units are different :
+                rep += ' freq_offset="%s-%s"'%(xios_freq,ts) 
     #
     # handle data type and missing value
     #
@@ -1371,7 +1409,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
     missing_value="1.e+20"
     if   sv.prec.strip() in ["float","real",""] : prec="4"
     elif sv.prec.strip() =="double"  : prec="8"
-    elif sv.prec.strip() =="integer" :
+    elif sv.prec.strip() =="integer" or sv.prec.strip() =="int" :
         prec="2" ; missing_value="0" #16384"
     else :
         dr2xml_error("prec=%s for sv=%s"%(sv.prec,sv.label))
@@ -1408,9 +1446,9 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
     rep+=wrv("long_name",sv.long_name)
     if sv.positive != "None" and sv.positive != "" : rep+=wrv("positive",sv.positive) 
     rep+=wrv('history','none')
-    rep+=wrv('units',sv.stdunits)
-    rep+=wrv('cell_methods',sv.cell_methods)
-    rep+=wrv('cell_measures',sv.cell_measures)
+    if sv.stdunits : rep+=wrv('units',sv.stdunits)
+    if sv.cell_methods  : rep+=wrv('cell_methods',sv.cell_methods)
+    if sv.cell_measures : rep+=wrv('cell_measures',sv.cell_measures)
     #
     if sv.struct is not None :
         fmeanings=sv.struct.flag_meanings
@@ -1475,19 +1513,20 @@ def process_vertical_interpolation(sv,alias,lset,pingvars,
     if not alias_in_ping in pingvars:       # e.g. alias_in_ping='CMIP6_hus'
         dr2xml_error("Field id "+alias_in_ping+" expected in pingfile but not found.")
     #
-    # Create field alias_instant for enforcing 'instant' operation before time sampling
-    alias_instant=alias_in_ping+"_instant" # e.g.  CMIP6_zg_instant
+    # Create field alias_for_sampling for enforcing the operation before time sampling
+    operation=lset.get("vertical_interpolation_operation","instant")
+    alias_for_sampling=alias_in_ping+"_with_"+operation 
     # <field id="CMIP6_hus_instant" field_ref="CMIP6_hus" operation="instant" />
-    field_defs[alias_instant]=\
-               '<field id="%-25s field_ref="%-25s operation="instant" freq_offset="0ts"/>'\
-               %(alias_instant+'"',alias_in_ping+'"')
+    field_defs[alias_for_sampling]=\
+               '<field id="%-25s field_ref="%-25s operation="%s" />'\
+               %(alias_for_sampling+'"',alias_in_ping+'"',operation)
     #
     vert_freq=lset["vertical_interpolation_sample_freq"]
     #
     # Construct an axis for interpolating to this vertical dimension
     # e.g. for zoom_case :
     #    <axis id="zoom_plev7h_hus" axis_ref="union_plevs_hus"> <zoom_axis index="(0,6)[  3 6 11 13 15 20 28 ]"/>
-    create_axis_def(sd,prefix,vert_freq,axis_defs,field_defs)
+    create_axis_def(sd,lset,axis_defs,field_defs)
 
     # Creat field alias_sample which time-samples the inst at required freq
     # before vertical interpolation
@@ -1495,7 +1534,7 @@ def process_vertical_interpolation(sv,alias,lset,pingvars,
     # <field id="CMIP6_hus_sampled_3h" field_ref="CMIP6_hus_instant" freq_op="3h" expr="@CMIP6_hus_instant"/>
     field_defs[alias_sample]=\
                '<field id="%-25s field_ref="%-25s freq_op="%-10s detect_missing_value="true" > @%s </field>'\
-               %(alias_sample+'"',alias_instant+'"',vert_freq+'"',alias_instant)
+               %(alias_sample+'"',alias_for_sampling+'"',vert_freq+'"',alias_for_sampling)
     
     # Construct a grid using variable's grid and target vertical axis
     # e.g. <grid id="FULL_klev_zoom_plev7h_hus"> <domain domain_ref="FULL" /> <axis axis_ref="zoom_plev7h_hus" />
@@ -1549,12 +1588,17 @@ def create_output_grid(ssh, grid_defs,domain_defs,target_hgrid_id,margs):
     elif (ssh == 'S-na')  : # COSP sites
         grid_ref=cfsites_grid_id
         grid_defs[grid_ref]='<grid id="%s" > <domain id="%s" /> </grid>\n'%(cfsites_grid_id,cfsites_domain_id)
-        domain_defs[cfsites_radix]=' <domain id="%s" type="unstructured" prec="8"> '%(cfsites_domain_id)+\
+        domain_defs[cfsites_radix]=' <domain id="%s" type="unstructured" prec="8" lat_name="latitude" lon_name="longitude"> '%(cfsites_domain_id)+\
             '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true" /> </domain>'
         # 
     elif ssh[0:3] == 'XY-' or ssh[0:3] == 'S-A' :
         # this includes 'XY-AH' and 'S-AH' : model half-levels
-        if (ssh[0:3] == 'S-A') : target_hgrid_id="cfsites_domain"
+        if (ssh[0:3] == 'S-A') :
+            target_hgrid_id="cfsites_domain"
+            grid_ref=cfsites_grid_id
+            grid_defs[grid_ref]='<grid id="%s" > <domain id="%s" /> </grid>\n'%(cfsites_grid_id,cfsites_domain_id)
+            domain_defs[cfsites_radix]=' <domain id="%s" type="unstructured" prec="8" lat_name="latitude" lon_name="longitude"> '%(cfsites_domain_id)+\
+                '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true" /> </domain>'
         if target_hgrid_id :
             # Must create and a use a grid similar to the last one defined 
             # for that variable, except for a change in the hgrid/domain
@@ -1599,10 +1643,8 @@ def process_zonal_mean(field_id, grid_id, target_hgrid_id,zgrid_id,\
     # e.g. <field id="CMIP6_ua_plev39_average" field_ref="CMIP6_ua_plev39" operation="average" />
     xios_freq=Cmip6Freq2XiosFreq[frequency]
     field1_id= field_id+"_"+operation     # e.g. CMIP6_hus_plev7h_instant
-    if operation=='instant' : freqoffset='freq_offset="0ts"'
-    else : freqoffset=''
-    field_defs[field1_id]='<field id="%-s field_ref="%-s operation="%s %s />'\
-        %(field1_id+'"',field_id+'"',operation+'"',freqoffset)
+    field_defs[field1_id]='<field id="%-s field_ref="%-s operation="%s />'\
+        %(field1_id+'"',field_id+'"',operation+'"')
     if printout :
         print "+++ field1 ",field1_id,"\n",field_defs[field1_id]
     #
@@ -1919,10 +1961,8 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
         for svl in svars_per_table.values(): svars_full_list.extend(svl)
         create_xios_axis_and_grids_for_plevs_unions(svars_full_list,
                                         multi_plev_suffixes.union(single_plev_suffixes),
-                                        lset["ping_variables_prefix"],
-                                        lset["vertical_interpolation_sample_freq"],
-                                        dummies,
-                                        axis_defs,grid_defs,field_defs, all_ping_refs, printout=False )
+                                        lset, dummies, axis_defs,grid_defs,field_defs,
+                                        all_ping_refs, printout=False )
     #
     #--------------------------------------------------------------------
     # Start writing XIOS file_def file: 
@@ -1978,7 +2018,7 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
         # Write all domain, axis, field defs needed for these file_defs
         out.write('<field_definition> \n')
         if lset.get("nemo_sources_management_policy_master_of_the_world",False) and context=='nemo':
-            out.write('<field_group freq_op="_reset_" >\n')
+            out.write('<field_group freq_op="_reset_ freq_offset="_reset_" >\n')
         for obj in field_defs: out.write("\t"+field_defs[obj]+"\n")
         if lset.get("nemo_sources_management_policy_master_of_the_world",False) and context=='nemo':
             out.write('</field_group>\n')
@@ -2108,16 +2148,16 @@ def print_SomeStats(context,svars_per_table,skipped_vars_per_table,actually_writ
     return True
 
 
-def create_axis_def(sdim,prefix,vert_frequency,axis_defs,field_defs):
+def create_axis_def(sdim,lset,axis_defs,field_defs):
     """
 
     From a simplified Dim object SDIM representing a vertical dimension,
     creates and stores an Xios axis definition in AXIS_DEFS
 
     If the dimension implies vertical interpolation (on air_pressure
-    or altitude levels), creates and stores (in FIELD_DEFS) an
-    intermediate field for the sampling of that coordinate field at
-    VERT_FREQUENCY
+    or altitude levels), creates and stores (in FIELD_DEFS) two
+    intermediate fields for the sampling of that coordinate field at
+    the vert_frequency and with the type of operation indicated by LSET
 
     If the dimension is a zoom of another one, analyzes its 'requested'
     field against the list of values declared for the other one, for
@@ -2125,6 +2165,7 @@ def create_axis_def(sdim,prefix,vert_frequency,axis_defs,field_defs):
 
     """
 
+    prefix=lset["ping_variables_prefix"]
     # nbre de valeurs de l'axe determine aussi si on est en dim singleton
     if sdim.requested: glo_list=sdim.requested.strip(" ").split()
     else: glo_list=sdim.value.strip(" ").split()
@@ -2155,14 +2196,22 @@ def create_axis_def(sdim,prefix,vert_frequency,axis_defs,field_defs):
         rep+='>'
         if sdim.stdname=="air_pressure" : coordname=prefix+"pfull"
         if sdim.stdname=="altitude"     : coordname=prefix+"zg"
-        coordname_sampled=coordname+"_sampled_"+vert_frequency # e.g. CMIP6_pfull_sampled_3h
+        #
+        # Create an intemediate field for coordinate , just adding time sampling
+        operation=lset.get("vertical_interpolation_operation","instant")
+        coordname_with_op=coordname+"_"+operation # e.g. CMIP6_pfull_instant
+        coorddef_op='<field id="%-25s field_ref="%-25s operation="%s" detect_missing_value="true"/>'\
+            %(coordname_with_op+'"',coordname+'"', operation)
+        field_defs[coordname_with_op]=coorddef_op
+        #
+        # Create and store a definition for time-sampled field for the vertical coordinate
+        vert_frequency=lset["vertical_interpolation_sample_freq"]
+        coordname_sampled=coordname_with_op+"_sampled_"+vert_frequency # e.g. CMIP6_pfull_instant_sampled_3h
         rep+='\n\t<interpolate_axis type="polynomial" order="1"'
         rep+=' coordinate="%s"/>\n\t</axis>'%coordname_sampled
         axis_defs[sdim.label]=rep
-        #
-        # Create and store a definition for time-sampled field for the vertical coordinate
-        coorddef='<field id="%-25s field_ref="%-25s operation="instant" freq_op="%-10s detect_missing_value="true" freq_offset="0ts"> @%s</field>'\
-                        %(coordname_sampled+'"',coordname+'"', vert_frequency+'"',coordname)
+        coorddef='<field id="%-25s field_ref="%-25s freq_op="%-10s detect_missing_value="true"> @%s</field>'\
+            %(coordname_sampled+'"',coordname_with_op+'"', vert_frequency+'"',coordname)
         field_defs[coordname_sampled]=coorddef
     else: # zoom case
         # Axis is subset of another, write it as a zoom_axis
@@ -2263,8 +2312,7 @@ def create_grid_def(grid_defs,axis_def_string,axis_name,alias=None,context_index
                            "but variable alias and/or context_index not provided (alias:%s, context_index:%s)"%(alias,context_index))
 
 
-def create_xios_axis_and_grids_for_plevs_unions(svars,plev_sfxs,prefix,vert_freq,
-                                                dummies,
+def create_xios_axis_and_grids_for_plevs_unions(svars,plev_sfxs,lset, dummies,
                                                 axis_defs,grid_defs,field_defs, ping_refs, printout=False): 
     """
     Objective of this function is to optimize Xios vertical interpolation requested in pressure levels. 
@@ -2284,6 +2332,7 @@ def create_xios_axis_and_grids_for_plevs_unions(svars,plev_sfxs,prefix,vert_freq
     """
     #
     global context_index
+    prefix=lset["ping_variables_prefix"]
     #First, search plev unions for each label_without_psuffix and build dict_plevs
     dict_plevs={}
     for sv in svars:
@@ -2371,7 +2420,7 @@ def create_xios_axis_and_grids_for_plevs_unions(svars,plev_sfxs,prefix,vert_freq
         if len(list_plevs_union)>1: sdim_union.requested=plevs_union_xios
         if len(list_plevs_union)==1: sdim_union.value=plevs_union_xios
         if printout : print "creating axis def for union :%s"%sdim_union.label
-        axis_def=create_axis_def(sdim_union,prefix,vert_freq,union_axis_defs,field_defs)
+        axis_def=create_axis_def(sdim_union,lset,union_axis_defs,field_defs)
         create_grid_def(union_grid_defs,axis_def,sdim_union.out_name,prefix+lwps,context_index)
     #
     #return (union_axis_defs,union_grid_defs)
@@ -2556,9 +2605,10 @@ def analyze_cell_time_method(cm,label,table,printout=False):
     #----------------------------------------------------------------------------------------------------------------
     elif "time: maximum within days time: mean over days" in cm :
         #[dmax]: Daily Maximum : tasmax Amon seulement
-        if label != 'tasmax' : 
+        if label != 'tasmax' and label != 'sfcWindmax' : 
             print "Error: issue with variable %s in table %s "%(label,table)+\
                 "and cell method time: maximum within days time: mean over days"
+        # we assume that pingfile provides a reference field which already implements "max within days" 
         operation="average"
     #----------------------------------------------------------------------------------------------------------------
     elif "time: minimum within days time: mean over days" in cm :
@@ -2566,6 +2616,7 @@ def analyze_cell_time_method(cm,label,table,printout=False):
         if label != 'tasmin' : 
             print "Error: issue with variable %s in table %s  "%(label,table)+\
                 "and cell method time: minimum within days time: mean over days"
+        # we assume that pingfile provides a reference field which already implements "min within days" 
         operation="average"
     #----------------------------------------------------------------------------------------------------------------
     elif "time: mean within years time: mean over years" in cm: 
@@ -2579,10 +2630,7 @@ def analyze_cell_time_method(cm,label,table,printout=False):
     #----------------------------------------------------------------------------------------------------------------
     elif "time: mean within days time: mean over days"  in cm: 
         #[amn-tdnl]: Mean Diurnal Cycle
-        #cell_method_warnings.append(('Cannot yet compute diurnal cycle',label,table))
-        #if printout: 
-        #    print "TBD: Cannot yet compute diurnal cycle for "+\
-        #        " %15s in table %s -> averaging"%(label,table)
+        cell_method_warnings.append(('File structure for diurnal cycle is not yet CF-compliant',label,table))
         operation="average"
         clim=True
     #----------------------------------------------------------------------------------------------------------------
@@ -2614,8 +2662,6 @@ def analyze_cell_time_method(cm,label,table,printout=False):
     elif "time: point" in cm:
         operation="instant"
     elif table=='fx' or table=='Efx' or table=='Ofx':
-        #print "Warning: assuming operation is 'once' for cell_method "+\
-        #    "%s for %15s in table %s" %(cm,label,table)
         operation="once"
     #----------------------------------------------------------------------------------------------------------------
     else :
@@ -2725,7 +2771,7 @@ def pingFileForRealmsList(settings, context,lrealms,svars,path_special,dummy="fi
         fp.write('<context id="%s">\n'%context)
         fp.write("<field_definition>\n")
         if settings.get("nemo_sources_management_policy_master_of_the_world",False) and context=='nemo':
-            out.write('<field_group freq_op="_reset_" >\n')
+            out.write('<field_group freq_op="_reset_ freq_offset="_reset_" >\n')
         if exact : 
             fp.write("<!-- for variables which realm intersects any of "\
                      +name+"-->\n")
