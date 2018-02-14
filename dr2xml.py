@@ -1979,10 +1979,10 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
         out.write('<!-- CMIP6_conventions_version %s --> \n'%CMIP6_conventions_version)
         out.write('<!-- dr2xml version %s --> \n'%version)
         out.write('<!-- Lab_and_model settings : \n')        
-        for s in lset : out.write(' %s : %s\n'%(s,lset[s]))
+        for s,v in sorted(lset.iteritems()) : out.write(' %s : %s\n'%(s,v))
         out.write('-->\n')
         out.write('<!-- Simulation settings : \n')        
-        for s in sset : out.write(' %s : %s\n'%(s,sset[s]))
+        for s,v in sorted(sset.iteritems()) : out.write(' %s : %s\n'%(s,v))
         out.write('-->\n')
         out.write('<!-- Year processed is  %d --> \n'%year)
         #
@@ -1990,9 +1990,9 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
         #for table in ['day'] :    
         out.write('\n<file_definition type="one_file" enabled="true" > \n')
         foo,sourcetype=get_source_id_and_type(sset,lset)
-        for table in svars_per_table :
+        for table in sorted(svars_per_table.keys()) :
             count=dict()
-            for svar in svars_per_table[table] :
+            for svar in sorted(svars_per_table[table],key = lambda x: (x.label + "_" + table)):
                 if True : #realm_is_processed(svar.modeling_realm,sourcetype) : <- realms are note reliable enough in DR
                     if svar.label not in count :
                         count[svar.label]=svar
