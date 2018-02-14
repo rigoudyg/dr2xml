@@ -3175,4 +3175,3 @@ class dr2xml_error(Exception):
     def __str__(self):
         return "\n\n"+`self.valeur`+"\n\n"
     #""" just for test"""
-======= end
