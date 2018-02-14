@@ -84,6 +84,9 @@ from Xparse import init_context, id2grid
 # A auxilliary tables
 from table2freq import Cmip6Freq2XiosFreq, longest_possible_period
 
+# CFsites handling has its own module
+from cfsites import cfsites_domain_id, cfsites_grid_id, cfsites_input_filedef, add_cfsites_in_defs
+
 print_DR_errors=True
 print_multiple_grids=False
 
@@ -98,16 +101,6 @@ context_index=None
 # It is set in select_CMORvars_for_lab and used in endyear_for_CMORvar
 global_rls=None  
 
-# CFsites-related elements (CFMIP)
-# A file named cfsites_grid_file_name must be provided at runtime, which
-# includes a field named cfsites_grid_field_id, defined on an unstructured 
-# grid which is composed of CF sites
-cfsites_radix         ="cfsites"
-cfsites_domain_id     =cfsites_radix+"_domain"
-cfsites_grid_id       =cfsites_radix+"_grid"
-cfsites_grid_file_name=cfsites_radix+"_grid"
-cfsites_grid_file_id  =cfsites_radix+"_file"
-cfsites_grid_field_id =cfsites_radix+"_field"
 # Next variable is used to circumvent an Xios 1270 shortcoming. Xios
 # should read that value in the datafile. Actually, it did, in some
 # earlier version ...
@@ -1363,7 +1356,9 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
         else :
             dr2xml_error("Cannot handle climatology cell_method for frequency %s"%sv.frequency)
     # 
+    #--------------------------------------------------------------------
     # Create intermediate field_def for enforcing operation upstream
+    #--------------------------------------------------------------------
     #
     but_last_field_id=last_field_id
     last_field_id=last_field_id+"_"+operation
@@ -1394,7 +1389,9 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
     #
     if operation != 'once' : rep+=' freq_op="%s"'% Cmip6Freq2XiosFreq[sv.frequency]
     # 
+    #--------------------------------------------------------------------
     # Add offset if operation=instant for some specific variables defined in lab_settings
+    #--------------------------------------------------------------------
     #
     if operation == 'instant' :
         for ts in lset.get('special_timestep_vars',[]) :
@@ -1403,7 +1400,9 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
                 # works only if units are different :
                 rep += ' freq_offset="%s-%s"'%(xios_freq,ts) 
     #
+    #--------------------------------------------------------------------
     # handle data type and missing value
+    #--------------------------------------------------------------------
     #
     detect_missing="True"
     missing_value="1.e+20"
@@ -1585,20 +1584,16 @@ def create_output_grid(ssh, grid_defs,domain_defs,target_hgrid_id,margs):
     if ssh[0:2] == 'Y-' : #zonal mean and atm zonal mean on pressure levels
         # Grid normally has already been created upstream
         grid_ref=margs['src_grid_id']
-    elif (ssh == 'S-na')  : # COSP sites
+    elif (ssh == 'S-na')  :
+        # COSP sites. Input field may have a singleton dimension (XIOS scalar component)
         grid_ref=cfsites_grid_id
-        grid_defs[grid_ref]='<grid id="%s" > <domain id="%s" /> </grid>\n'%(cfsites_grid_id,cfsites_domain_id)
-        domain_defs[cfsites_radix]=' <domain id="%s" type="unstructured" prec="8" lat_name="latitude" lon_name="longitude"> '%(cfsites_domain_id)+\
-            '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true" /> </domain>'
+        add_cfsites_in_defs(grid_defs,domain_defs)
         # 
     elif ssh[0:3] == 'XY-' or ssh[0:3] == 'S-A' :
         # this includes 'XY-AH' and 'S-AH' : model half-levels
         if (ssh[0:3] == 'S-A') :
-            target_hgrid_id="cfsites_domain"
-            grid_ref=cfsites_grid_id
-            grid_defs[grid_ref]='<grid id="%s" > <domain id="%s" /> </grid>\n'%(cfsites_grid_id,cfsites_domain_id)
-            domain_defs[cfsites_radix]=' <domain id="%s" type="unstructured" prec="8" lat_name="latitude" lon_name="longitude"> '%(cfsites_domain_id)+\
-                '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true" /> </domain>'
+            add_cfsites_in_defs(grid_defs,domain_defs)
+            target_hgrid_id=cfsites_domain_id
         if target_hgrid_id :
             # Must create and a use a grid similar to the last one defined 
             # for that variable, except for a change in the hgrid/domain
@@ -3024,17 +3019,6 @@ def create_standard_domain(resol,ni,nj):
     #    '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true"  mode="read_or_compute" write_weight="true" /> '+\
     #    '</domain>  '
 
-def cfsites_input_filedef() :
-    """
-    Returns a file definition for defining a COSP site grid by reading a field named 
-    'cfsites_grid_field' in a file named 'cfsites_grid.nc'
-    """
-    #rep='<file id="%s" name="%s" mode="read" >\n'%\
-    rep='<file id="%s" name="%s" mode="read" output_freq="1y" >\n'%\
-        (cfsites_grid_file_id,cfsites_grid_file_name)+\
-      '\t<field id="%s" operation="instant" grid_ref="%s" />\n'%(cfsites_grid_field_id,cfsites_grid_id)+\
-      ' </file>'
-    return rep
     
 
 
