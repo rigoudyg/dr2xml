@@ -258,6 +258,24 @@ def id2grid(field_id,index,printout=False) :
         #if printout: print("field %s is not known"%field_id)
         raise Xparse_error("field %s is not known"%field_id)
 
+def idHasExprWithAt(field_id,index,printout=False) :
+    """ 
+    Returns True if field has an expr attribute with includes an @
+    """
+    printout=True
+    if field_id in index : 
+        attrib=index[field_id].attrib
+        if 'expr' in attrib :
+            if printout : print "In withAt, for %s, expr=%s"%(field_id,attrib['expr'])
+            return '@' in attrib['expr']
+        else :
+            #if printout : print "In withAt, for %s, no expr"%(field_id)
+            return False
+    else:
+        return False
+        #raise Xparse_error("field %s is not known"%field_id)
+
+
 if False :
     
     nemo=init_context('nemo',"./",False)

@@ -79,7 +79,7 @@ from vars import simple_CMORvar, simple_Dim, process_homeVars, complement_svar_u
                 multi_plev_suffixes, single_plev_suffixes, get_simplevar
 from grids import decide_for_grids, DRgrid2gridatts,\
     split_frequency_for_variable, timesteps_per_freq_and_duration
-from Xparse import init_context, id2grid
+from Xparse import init_context, id2grid, idHasExprWithAt
 
 # A auxilliary tables
 from table2freq import Cmip6Freq2XiosFreq, longest_possible_period
@@ -923,7 +923,6 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
         if pingvars is not None :
             # Get alias without pressure_suffix but possibly with area_suffix
             alias_ping=ping_alias(sv,lset,pingvars)
-            if ("vt" in alias ): print "processing(vt) ",alias, "alias_oing=",alias_ping
             if not alias_ping in pingvars:
                 table=sv.mipTable
                 if table not in skipped_vars_per_table: skipped_vars_per_table[table]=[]
@@ -1419,9 +1418,17 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
     # TBD    The units must be valid UDUNITS, e.g. day or hr.
     rep+=' cell_methods="%s" cell_methods_mode="overwrite"'% sv.cell_methods
     rep+='>\n'
-    #if operation != 'once' : rep+='\t\t@%s\n'%last_field_id
-    # enforce time average before remapping
-    if operation == 'average' : rep+='\t\t@%s\n'%last_field_id 
+    #--------------------------------------------------------------------
+    # enforce time average before remapping (when there is one) except if there 
+    # is an expr, set in ping for the ping variable of that field, and which 
+    # involves time operation (using @)
+    #--------------------------------------------------------------------
+    if operation == 'average' and output_grid_id is not None :
+        if not idHasExprWithAt(alias,context_index) : 
+            rep+='\t\t@%s\n'%last_field_id
+        else :
+            print "Warning : Cannot optimise (i.e. average before remap)"+\
+                "for field %s which got an expr with @"%alias
     #
     #--------------------------------------------------------------------
     # Add Xios variables for creating NetCDF attributes matching CMIP6 specs
@@ -2288,7 +2295,7 @@ def create_grid_def(grid_defs,axis_def_string,axis_name,alias=None,context_index
             #print "axis_key = ", axis_key
             #print "axis_name = ", axis_name
             if count != 1 :
-                raise dr2xml_error("Fatal: cannot find an axis ref in %s "%(src_grid_string))
+                raise dr2xml_error("Fatal: cannot find an axis ref for field %s in %s "%(alias,src_grid_string))
                 # alt_axis_name="axis_for_"+target_grid_id
                 # (target_grid_string,count)=re.subn('axis *axis_ref= *.([\w_])*.',\
                 #                                    'axis id="%s" axis_ref="%s"'% (alt_axis_name,axis_key),\
