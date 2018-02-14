@@ -1,0 +1,79 @@
+<grid_definition>
+  <grid id="COSP_sites_grid">
+    <domain id="COSP_sites_domain" ni_glo="256" nj_glo="128" type="rectilinear"  prec="8">
+      <generate_rectilinear_domain/>
+      <interpolate_domain order="1" renormalize="true" write_weight="true" mode="read_or_compute"/>
+    </domain>
+    <!-- <domain id="COSP_sites_domain" data_dim="1" type="unstructured" -->
+    <!-- 	    ni_glo="1" latvalue_1d="(0,0)[ 45. ]" lonvalue_1d="(0,0)[ 0. ]" -->
+    <!-- 	    nvertex="4" -->
+    <!-- 	    bounds_lat_1d="(0,3)x(0,0)[ 45.01 45.01 44.99 44.99 ]" -->
+    <!-- 	    bounds_lon_1d="(0,3)x(0,0)[ -0.01 0.01  0.01 - 0.01 ]" > -->
+    <!--         <generate_rectilinear_domain/> -->
+    <!-- </domain> -->
+  </grid>
+
+  <grid id="DX_p1000" >
+    <domain domain_ref="domain_atm"/>
+    <axis id="DX_axis_p1000" positive="up" n_glo="1" value="(0,0) [100000.]">
+      <interpolate_axis type="polynomial" order="1" coordinate="DX_pfull"/>
+    </axis>
+  </grid>
+  
+  <grid id="DX_p850">
+    <domain domain_ref="domain_atm"/>
+    <axis id="DX_axis_p850" positive="up" n_glo="1" value="(0,0) [85000.]">" >
+    <interpolate_axis type="polynomial" order="1" coordinate="DX_pfull"/>
+    </axis>
+  </grid>
+  
+  <grid id="DX_p840">
+    <domain domain_ref="domain_atm"/>
+    <axis id="DX_axis_p840" positive="up" n_glo="1" value="(0,0) [84000.]">
+      <interpolate_axis type="polynomial" order="1" coordinate="DX_pfull"/>
+    </axis>
+  </grid>
+    
+  <grid id="DX_p700">
+    <domain domain_ref="domain_atm"/>
+    <axis id="DX_axis_p700" positive="up" n_glo="1" value="(0,0) [70000.]">
+      <interpolate_axis type="polynomial" order="1" coordinate="DX_pfull"/>
+    </axis>
+  </grid>
+  
+  <grid id="DX_p560">
+    <domain domain_ref="domain_atm"/>
+    <axis id="DX_axis_p560" positive="up" n_glo="1" value="(0,0) [56000.]">
+      <interpolate_axis type="polynomial" order="1" coordinate="DX_pfull"/>
+    </axis>
+  </grid>
+  
+  <grid id="DX_p500">
+    <domain domain_ref="domain_atm"/>
+    <axis id="DX_axis_p500" positive="up" n_glo="1" value="(0,0) [50000.]">
+      <interpolate_axis type="polynomial" order="1" coordinate="DX_pfull"/>
+    </axis>
+  </grid>
+  
+  <grid id="DX_p220">
+    <domain domain_ref="domain_atm"/>
+    <axis id="DX_axis_p220" positive="up" n_glo="1" value="(0,0) [22000.]">
+      <interpolate_axis type="polynomial" order="1" coordinate="DX_pfull"/>
+    </axis>
+  </grid>
+  
+  <grid id="DX_p200">
+    <domain domain_ref="domain_atm"/>
+    <axis id="DX_axis_p200" positive="up" n_glo="1" value="(0,0) [20000.]">
+      <interpolate_axis type="polynomial" order="1" coordinate="DX_pfull"/>
+    </axis>
+  </grid>
+  
+  <grid id="DX_p10">
+    <domain domain_ref="domain_atm"/>
+    <axis id="DX_axis_p10" positive="up" n_glo="1" value="(0,0) [1000.]">
+      <interpolate_axis type="polynomial" order="1" coordinate="DX_pfull"/>
+    </axis>
+  </grid>
+
+</grid_definition>
