@@ -167,7 +167,7 @@ def field_size(svar, mcfg):
         if svar.modeling_realm in \
            [ 'ocean', 'seaIce', 'ocean seaIce', 'ocnBgchem', 'seaIce ocean' ] : 
             siz=oce_grid_size
-        
+        siz*=svar.other_dims_size
     elif ( s == "XY-temp" ): #Global field (lidar_temp)
         siz=atm_grid_size*nb_lidar_temp
     elif ( s == "XY-sza5" ): #Global field (parasol_refl)
