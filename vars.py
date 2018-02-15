@@ -133,12 +133,12 @@ def read_homeVars_list(hmv_file,expid,mips,dq,path_extra_tables=None):
             if home_var.mip!="ANY":
                 if home_var.mip in mips:
                     if home_var.experiment!="ANY":
-                         if home_var.experiment==expid: homevars.append(home_var)
+                         if expid in home_var.experiment: homevars.append(home_var)
                     else: 
                         homevars.append(home_var)
             else:
                 if home_var.experiment!="ANY":
-                    if home_var.experiment==expid: homevars.append(home_var)
+                    if expid in home_var.experiment: homevars.append(home_var)
                 else: 
                     homevars.append(home_var)
         else :

@@ -316,6 +316,9 @@ example_lab_and_model_settings={
     # from dr2xml generated field_definitions
     "nemo_sources_management_policy_master_of_the_world" : False,
     
+    # You may add a series of NetCDF attributes in all files for this simulation
+    "non_standard_attributes" : { "model_minor_version" : "6.1.0" },
+
 }
 
 
@@ -1231,6 +1234,7 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     wr(out,"variant_info",variant_info)
     wr(out,"variant_label",variant_label)
     for name,value in attributes : wr(out,name,value)
+    for name,value in lset.get("non_standard_attributes",dict()) : wr(out,name,value)
     #
     #--------------------------------------------------------------------
     # Build all XIOS auxilliary elements (end_file_defs, field_defs, domain_defs, grid_defs, axis_defs)
@@ -1817,7 +1821,9 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
     correspondance between a context and a few realms
 
     ATTRIBUTES is a list of (name,value) pairs which are to be inserted as 
-    additional file-level attributes
+    additional file-level attributes. They are complemented with entry
+    "non_standard__attributes" of dict sset
+
     """
     #
     global print_wrv
