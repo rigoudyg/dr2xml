@@ -1234,7 +1234,8 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     wr(out,"variant_info",variant_info)
     wr(out,"variant_label",variant_label)
     for name,value in attributes : wr(out,name,value)
-    for name,value in lset.get("non_standard_attributes",dict()) : wr(out,name,value)
+    non_stand_att=lset.get("non_standard_attributes",dict())
+    for name in non_stand_att : wr(out,name,non_stand_att[name])
     #
     #--------------------------------------------------------------------
     # Build all XIOS auxilliary elements (end_file_defs, field_defs, domain_defs, grid_defs, axis_defs)
