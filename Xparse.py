@@ -237,6 +237,10 @@ def init_context(context_id,path_parse="./",printout=False):
     else:
         print "Xparse::init_context : context %s not found in %s"%(context_id,xmldef)
 
+def id2gridid(field_id,index,printout=False) :
+    grid=id2grid(field_id,index,printout=printout)
+    return grid.attrib['id']
+    
 def id2grid(field_id,index,printout=False) :
     """ 
     Returns the list of Element composing the grid of a field

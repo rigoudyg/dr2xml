@@ -217,6 +217,7 @@ def read_extraTable(path,table,dq,printout=False):
     extravars=[]
     dr_slevs=dr_single_levels
     mip_era=table.split('_')[0]
+    if path is None : vars_error("Must provide a path for Extra_table !!")
     json_table=path+"/"+table+".json"
     json_coordinate=path+"/"+mip_era+"_coordinate.json"
     if not os.path.exists(json_table): sys.exit("Abort: file for extra Table does not exist: "+json_table)
@@ -477,9 +478,6 @@ def complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues,debug=[]):
     if (svar.modeling_realm[0:3]=="zoo") : svar.modeling_realm="ocnBgChem" #Because wrong in DR01.00.20
     svar.label = cmvar.label.rstrip(' ')
     [svar.spatial_shp,svar.temporal_shp]=get_SpatialAndTemporal_Shapes(cmvar,dq)
-    if ("rsucs" == svar.label) and cmvar.mipTable=="CFsubhr" :
-        print "rsucs in table CFsubhr has shape %s in DR"%svar.spatial_shp
-        svar.spatial_shp="S-AH"
     svar.cmvar=cmvar
 
     # Get information from MIPvar

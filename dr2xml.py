@@ -1040,7 +1040,7 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     for c in actual_components :
         if c not in allowed_components and c not in required_components :
             #ok=False # TBD : restore blocking on non-allowed components
-            print "Warning : Model component %s is present but not required nor allowed (%s)"%\
+            print "Warning: Model component %s is present but not required nor allowed (%s)"%\
                 (c,`allowed_components` )
     if not ok : raise dr2xml_error("Issue with model components")
     #
@@ -1351,8 +1351,8 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
     # Handle the case of singleton dimensions
     #--------------------------------------------------------------------
     #
-    if True :
-        last_field_id,last_grid_id= process_singleton( sv,last_field_id,lset,pingvars,
+    if has_singleton(sv) :
+        last_field_id,last_grid_id= process_singleton(sv,last_field_id,lset,pingvars,
                       field_defs,grid_defs,scalar_defs,table)
     #
     #--------------------------------------------------------------------
@@ -1363,8 +1363,9 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
         if last_grid_id is None : # actually useful for shape Y-na which are not pressure singleton
             last_grid_id=id2grid(alias,context_index)
         last_field_id,last_grid_id=\
-            process_zonal_mean(last_field_id,last_grid_id, target_hgrid_id,zgrid_id,\
-                               field_defs,axis_defs,grid_defs,domain_defs,operation,sv.frequency,lset)
+            process_zonal_mean(last_field_id,last_grid_id, target_hgrid_id,
+                               zgrid_id, field_defs,axis_defs,grid_defs,
+                               domain_defs, operation,sv.frequency,lset)
 
     #
     #--------------------------------------------------------------------
@@ -1450,7 +1451,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
         if not idHasExprWithAt(alias,context_index) : 
             rep+='\t\t@%s\n'%last_field_id
         else :
-            print "Warning : Cannot optimise (i.e. average before remap)"+\
+            print "Warning: Cannot optimise (i.e. average before remap)"+\
                 "for field %s which got an expr with @"%alias
     #
     #--------------------------------------------------------------------
@@ -1504,6 +1505,18 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
     #
     return rep
 
+def is_singleton(sdim):
+    # test dim.value!='' should be enough, but dim scatratio has a value
+    if sdim.axis=='' :
+        return sdim.value!= '' and len(sdim.value.strip().split(" ")) == 1
+    else:
+        # Case of space sdimension singletons
+        return ((sdim.value!='') and (sdim.requested.strip()== '' ))
+
+def has_singleton(sv):
+    rep=any([ is_singleton(sv.sdims[k]) for k in sv.sdims ])
+    return rep
+
 
 def process_singleton(sv,alias,lset,pingvars,
                       field_defs,grid_defs,scalar_defs,table):
@@ -1514,24 +1527,15 @@ def process_singleton(sv,alias,lset,pingvars,
     re-using the domain of original grid
 
     """
-    def is_singleton(sdim):
-        # test dim.value!='' should be enough, but dim scatratio has a value
-        if sdim.axis=='' :
-            return sdim.value!= '' and len(sdim.value.strip().split(" ")) == 1
-        else:
-            # Case of space sdimension singletons
-            return ((sdim.value!='') and (sdim.requested.strip()== '' ))
     
     printout=True
     #  get grid for the variable
     alias_ping=ping_alias(sv,lset,pingvars)
     input_grid_id=id2gridid(alias_ping,context_index)
-    if printout:
-        print "process_singleton : ","processing %s with grid %s "%(alias,input_grid_id)
+    input_grid_def=get_grid_def(input_grid_id,grid_defs,lset)
+    #
     further_field_id=alias
     further_grid_id=input_grid_id
-    input_grid_def=grid_defs.get(further_grid_id,
-                                 guess_simple_domain_grid_def(input_grid_id,lset))
     further_grid_def=input_grid_def
     #
     # for each sv's singleton dimension, create the scalar, add a scalar
@@ -1554,14 +1558,10 @@ def process_singleton(sv,alias,lset,pingvars,
             scalar_def='<scalar id="%s" name="%s" standard_name="%s" long_name="%s" value="%s" %s%s%s />'%\
                    (scalar_id,sdim.out_name,sdim.stdname,sdim.title,sdim.value,types[sdim.type],axis,unit)
             scalar_defs[scalar_id]=scalar_def
-            if printout:
-                print "process_singleton : ","adding scalar %s"%scalar_def
             #
             # Create a grid with added (or changed) scalar
             glabel=further_grid_id+"_"+scalar_id
             further_grid_def=add_scalar_in_grid(further_grid_def,glabel,scalar_id)
-            if printout:
-                print "process_singleton : "," adding grid %s"%further_grid_def
             grid_defs[glabel]=further_grid_def
             further_grid_id=glabel
         else :
@@ -1575,8 +1575,6 @@ def process_singleton(sv,alias,lset,pingvars,
         field_def='<field id="%s" field_ref="%s" grid_ref="%s"> %s </field>'%\
             (further_field_id,alias,further_grid_id,alias)
         field_defs[further_field_id]=field_def
-        if printout:
-            print "process_singleton : "," adding field %s"%field_def
     return further_field_id,further_grid_id
     
 def process_vertical_interpolation(sv,alias,lset,pingvars,
@@ -2378,7 +2376,7 @@ def change_domain_in_grid(domain,grid_defs,lset,ping_alias=None,src_grid_id=None
         else:
             raise dr2xml_error("Fatal: ask for creating a grid_def for var %s which has no grid "%(ping_alias))
     else :
-        src_grid_string=grid_defs.get(src_grid_id,guess_simple_domain_grid_def(src_grid_id,lset))
+        src_grid_string=get_grid_def(src_grid_id,grid_defs,lset)
         #print "src_grid_id is %s, def =%s"%(src_grid_id,src_grid_string)
         #src_grid_id=re.sub(r'.*grid id= *.([\w_]*).*\n.*',r'\g<1>',src_grid_string,1)
         #if src_grid_id == src_grid_string : 
@@ -3306,11 +3304,19 @@ def guess_simple_domain_grid_def(grid_id,lset):
     regexp=lset["simple_domain_grid_regexp"]
     domain_id,n=re.subn(regexp[0],r'\%d'%regexp[1],grid_id)
     if n != 1 :
-        dr2xml_error("Cannot identify domain name in grid_id %s using regexp %s"%(grid_id,regexp[0]))
-    grid_def='<grid id="%s" ><domain domain_ref="%s"/></grid>'%\
-        (grid_id,domain_id)
-    print "Warning : Guess that structure for grid %s is : %s"%\
-        (grid_id,grid_def)
+        dr2xml_error("Cannot identify domain name in grid_id %s using regexp %s"%\
+                     (grid_id,regexp[0]))
+    grid_def='<grid id="%s" ><domain domain_ref="%s"/></grid>'% (grid_id,domain_id)
+    print("Warning: Guess that structure for grid %s is : %s"%(grid_id,grid_def))
+    #dr2xml_error("Warning: Guess that structure for grid %s is : %s"%(grid_id,grid_def))
+    return grid_def
+
+def get_grid_def(grid_id,grid_defs,lset):
+    if grid_id in grid_defs :
+        grid_def=grid_defs[grid_id]
+    else:
+        grid_def=guess_simple_domain_grid_def(grid_id,lset)
+        grid_defs[grid_id]=grid_def
     return grid_def
 
 class dr2xml_error(Exception):
