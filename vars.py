@@ -54,6 +54,10 @@ class simple_Dim(object):
         self.units        = False
         self.is_zoom_of   = False
         self.bounds       = False
+        self.axis         = False
+        self.type         = False
+        self.coords       = False
+        self.title        = False
         self.is_union_for = []
 
 # List of multi and single pressure level suffixes for which we want the union/zoom axis mecanism turned on
@@ -637,6 +641,10 @@ def get_simpleDim_from_DimId(dimid,dq):
     sdim.out_name=d.altLabel
     sdim.units=d.units
     sdim.bounds=d.bounds
+    sdim.axis=d.axis
+    sdim.coords=d.coords
+    sdim.title=d.title
+    sdim.type=d.type
     return sdim,dimsize
 
 def Remove_pSuffix(svar,mlev_sfxs,slev_sfxs,realms):

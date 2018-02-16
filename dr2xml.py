@@ -79,7 +79,7 @@ from vars import simple_CMORvar, simple_Dim, process_homeVars, complement_svar_u
                 multi_plev_suffixes, single_plev_suffixes, get_simplevar
 from grids import decide_for_grids, DRgrid2gridatts,\
     split_frequency_for_variable, timesteps_per_freq_and_duration
-from Xparse import init_context, id2grid, idHasExprWithAt
+from Xparse import init_context, id2grid, id2gridid, idHasExprWithAt
 
 # A auxilliary tables
 from table2freq import Cmip6Freq2XiosFreq, longest_possible_period
@@ -319,6 +319,15 @@ example_lab_and_model_settings={
     # You may add a series of NetCDF attributes in all files for this simulation
     "non_standard_attributes" : { "model_minor_version" : "6.1.0" },
 
+    # If you use some early version of Xios such as r1428, set that setting to True
+    "xios_has_axis_in_scalar_attributes" : False,
+
+    # dr2xml sometimes must be able to reconstruct the grid def for a grid which has
+    # just a domain, from the grid_id, using a regexp with a numbered group that matches
+    # domain_name in grid_id. Second item is group number
+    # This is not needed if such grids are defined in xml files
+    # For CNRM we use  a pattern that returns full id except for a '_grid' suffix 
+    "simple_domain_grid_regexp" : ("(.*)_grid$",1), 
 }
 
 
@@ -862,7 +871,7 @@ def freq2datefmt(in_freq,operation,lset):
     return datefmt,offset,offset_end
 
 def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
-                        field_defs,axis_defs,grid_defs,domain_defs,
+                        field_defs,axis_defs,grid_defs,domain_defs,scalar_defs,
                         dummies,skipped_vars_per_table,actually_written_vars,
                         prefix,context,grid,pingvars=None,enddate=None,
                         attributes=[],debug=[]) :
@@ -1244,7 +1253,7 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     # including CF field attributes 
     #--------------------------------------------------------------------
     end_field=create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
-                               field_defs,axis_defs,grid_defs,domain_defs,
+                               field_defs,axis_defs,grid_defs,domain_defs,scalar_defs,
                                dummies,context,target_hgrid_id,zgrid_id,pingvars)
     out.write(end_field)
     if sv.spatial_shp[0:4]=='XY-A' or sv.spatial_shp[0:3]=='S-A': # includes half-level cases
@@ -1254,7 +1263,7 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
         if sv_psol :
             if not sv_psol.cell_measures : sv_psol.cell_measures = "cell measure is not specified in DR "+dq.version
             psol_field=create_xios_aux_elmts_defs(sv_psol,lset["ping_variables_prefix"]+"ps",table,lset,sset,
-                                                  field_defs,axis_defs,grid_defs,domain_defs,
+                                                  field_defs,axis_defs,grid_defs,domain_defs,scalar_defs,
                                        dummies,context,target_hgrid_id,zgrid_id,pingvars)
             out.write(psol_field)
 
@@ -1287,7 +1296,7 @@ def wrv(name, value, num_type="string"):
         '</variable>\n'
 
 def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
-                               field_defs,axis_defs,grid_defs,domain_defs,
+                               field_defs,axis_defs,grid_defs,domain_defs,scalar_defs,
                                dummies,context,target_hgrid_id,zgrid_id,pingvars) :
     """
     Create a field_ref string for a simplified variable object sv (with
@@ -1339,6 +1348,14 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
 
     #
     #--------------------------------------------------------------------
+    # Handle the case of singleton dimensions
+    #--------------------------------------------------------------------
+    #
+    if True :
+        last_field_id,last_grid_id= process_singleton( sv,last_field_id,lset,pingvars,
+                      field_defs,grid_defs,scalar_defs,table)
+    #
+    #--------------------------------------------------------------------
     # Handle zonal means
     #--------------------------------------------------------------------
     #
@@ -1347,7 +1364,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
             last_grid_id=id2grid(alias,context_index)
         last_field_id,last_grid_id=\
             process_zonal_mean(last_field_id,last_grid_id, target_hgrid_id,zgrid_id,\
-                               field_defs,axis_defs,grid_defs,domain_defs,operation,sv.frequency)
+                               field_defs,axis_defs,grid_defs,domain_defs,operation,sv.frequency,lset)
 
     #
     #--------------------------------------------------------------------
@@ -1374,7 +1391,8 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
     #--------------------------------------------------------------------
     #
     margs={"src_grid_id":last_grid_id, "ping_alias":alias}
-    output_grid_id=create_output_grid(ssh,grid_defs,domain_defs,target_hgrid_id,margs)
+    #print "creating output grid with",margs, "target_grid=",target_hgrid_id
+    output_grid_id=create_output_grid(ssh,lset,grid_defs,domain_defs,target_hgrid_id,margs)
     #if output_grid_id is not None :
     #    print "output_grid_id=",output_grid_id,"***>",grid_defs[output_grid_id]
 
@@ -1487,6 +1505,80 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
     return rep
 
 
+def process_singleton(sv,alias,lset,pingvars,
+                      field_defs,grid_defs,scalar_defs,table):
+    """
+    Based singleton dimensions of variable SV, and assuming that this/these dimension(s) 
+    is/are not yet represented by a scalar Xios construct in corresponding field's grid, 
+    creates a further field with such a grid, including creating the scalar and 
+    re-using the domain of original grid
+
+    """
+    def is_singleton(sdim):
+        # test dim.value!='' should be enough, but dim scatratio has a value
+        if sdim.axis=='' :
+            return sdim.value!= '' and len(sdim.value.strip().split(" ")) == 1
+        else:
+            # Case of space sdimension singletons
+            return ((sdim.value!='') and (sdim.requested.strip()== '' ))
+    
+    printout=True
+    #  get grid for the variable
+    alias_ping=ping_alias(sv,lset,pingvars)
+    input_grid_id=id2gridid(alias_ping,context_index)
+    if printout:
+        print "process_singleton : ","processing %s with grid %s "%(alias,input_grid_id)
+    further_field_id=alias
+    further_grid_id=input_grid_id
+    input_grid_def=grid_defs.get(further_grid_id,
+                                 guess_simple_domain_grid_def(input_grid_id,lset))
+    further_grid_def=input_grid_def
+    #
+    # for each sv's singleton dimension, create the scalar, add a scalar
+    # construct in a further grid, and convert field to a further field
+    for dimk in sv.sdims :
+        sdim=sv.sdims[dimk]
+        if is_singleton(sdim) :
+            #
+            # Create a scalar for singleton dimension
+            # sdim.label is non-ambiguous id, thanks to the DR, but its value may be
+            # ambiguous w.r.t. a dr2xml suffix for interpolating to a single pressure level
+            scalar_id="Scal"+sdim.label 
+            types={'double':' prec="8"', 'character':' type="char"'}
+            if sdim.axis!='' : # Space axis, probably Z
+                axis=' axis="%s" positive="%s"'%(sdim.axis,sdim.positive)
+            else : axis=""
+            if not lset.get("xios_have_axis_in_scalar_attributes","True") : axis=""
+            if sdim.units!='' : unit=' unit="%s"'%sdim.units
+            else  : unit=""
+            scalar_def='<scalar id="%s" name="%s" standard_name="%s" long_name="%s" value="%s" %s%s%s />'%\
+                   (scalar_id,sdim.out_name,sdim.stdname,sdim.title,sdim.value,types[sdim.type],axis,unit)
+            scalar_defs[scalar_id]=scalar_def
+            if printout:
+                print "process_singleton : ","adding scalar %s"%scalar_def
+            #
+            # Create a grid with added (or changed) scalar
+            glabel=further_grid_id+"_"+scalar_id
+            further_grid_def=add_scalar_in_grid(further_grid_def,glabel,scalar_id)
+            if printout:
+                print "process_singleton : "," adding grid %s"%further_grid_def
+            grid_defs[glabel]=further_grid_def
+            further_grid_id=glabel
+        else :
+            pass
+            #print "dim %s is not a singleton, axis=%s value=%s requested=%s"%\
+            #   (sdim.label,sdim.axis,sdim.value,sdim.requested)
+    # Compare grid definition (in case the input_grid already had correct ref to scalars)
+    if further_grid_def != input_grid_def :
+        #  create derived_field through an Xios operation (apply all scalars at once)
+        further_field_id=alias+"_"+further_grid_id.replace(input_grid_id+'_','')
+        field_def='<field id="%s" field_ref="%s" grid_ref="%s"> %s </field>'%\
+            (further_field_id,alias,further_grid_id,alias)
+        field_defs[further_field_id]=field_def
+        if printout:
+            print "process_singleton : "," adding field %s"%field_def
+    return further_field_id,further_grid_id
+    
 def process_vertical_interpolation(sv,alias,lset,pingvars,
                                    field_defs,axis_defs,grid_defs,domain_defs,table):
     """
@@ -1586,7 +1678,7 @@ def process_vertical_interpolation(sv,alias,lset,pingvars,
     #
     return grid_id,alias_with_levels
 
-def create_output_grid(ssh, grid_defs,domain_defs,target_hgrid_id,margs):
+def create_output_grid(ssh, lset,grid_defs,domain_defs,target_hgrid_id,margs):
     # Build output grid (stored in grid_defs) by analyzing the spatial shape
     # Including horizontal operations. Can include horiz re-gridding specification
     #--------------------------------------------------------------------
@@ -1609,7 +1701,7 @@ def create_output_grid(ssh, grid_defs,domain_defs,target_hgrid_id,margs):
         if target_hgrid_id :
             # Must create and a use a grid similar to the last one defined 
             # for that variable, except for a change in the hgrid/domain
-            grid_ref=change_domain_in_grid(domain=target_hgrid_id, grid_defs=grid_defs,**margs)
+            grid_ref=change_domain_in_grid(domain=target_hgrid_id, grid_defs=grid_defs,lset=lset,**margs)
             if grid_ref is False or grid_ref is None : 
                 raise dr2xml_error("Fatal: cannot create grid_def for %s with hgrid=%s"%(alias,target_hgrid_id))
     elif ssh == 'TR-na' or ssh == 'TRS-na' : #transects,   oce or SI
@@ -1626,7 +1718,7 @@ def create_output_grid(ssh, grid_defs,domain_defs,target_hgrid_id,margs):
 
 def process_zonal_mean(field_id, grid_id, target_hgrid_id,zgrid_id,\
                        field_defs,axis_defs,grid_defs,domain_defs,\
-                       operation,frequency,printout=False):
+                       operation,frequency,lset,printout=False):
     """
     Based on a field FIELD_ID defined on some grid GRID_ID, build all XIOS constructs 
     needed to derive the zonal mean of the field, by chaining the definition of 
@@ -1670,7 +1762,7 @@ def process_zonal_mean(field_id, grid_id, target_hgrid_id,zgrid_id,\
         # Must create and a use a grid similar to the last one defined 
         # for that variable, except for a change in the hgrid/domain (=> complete)
         grid_id3=change_domain_in_grid(domain=target_hgrid_id, grid_defs=grid_defs,\
-                                  src_grid_id=grid_id)
+                                  lset=lset,src_grid_id=grid_id)
         if printout :
             print "+++ grid3 ",grid_id3,"\n",grid_defs[grid_id3]
         field_defs[field3_id]='<field id="%s field_ref="%s grid_ref="%s /> '\
@@ -1692,7 +1784,7 @@ def process_zonal_mean(field_id, grid_id, target_hgrid_id,zgrid_id,\
     #             grid_ref="FULL_klev_plev39_complete_glat" />
     field4_id= field2_id+"_"+zgrid_id 
     grid4_id=change_domain_in_grid(domain=zgrid_id, grid_defs=grid_defs,\
-                                   src_grid_id=grid_id3,turn_into_axis=True)
+                                   lset=lset,src_grid_id=grid_id3,turn_into_axis=True)
     if printout :
         print "+++ grid4 ",grid4_id,"\n",grid_defs[grid4_id]
     
@@ -1965,6 +2057,7 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
     field_defs=dict()
     axis_defs=dict()
     grid_defs=dict()
+    scalar_defs=dict()
     if lset['use_union_zoom']:
         svars_full_list=[]
         for svl in svars_per_table.values(): svars_full_list.extend(svl)
@@ -2005,7 +2098,7 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
                         count[svar.label]=svar
                         for grid in svar.grids :
                             write_xios_file_def(svar,year,table, lset,sset,out,cvs_path,
-                                field_defs,axis_defs,grid_defs,domain_defs,dummies,
+                                field_defs,axis_defs,grid_defs,domain_defs,scalar_defs,dummies,
                                 skipped_vars_per_table,actually_written_vars,
                                 prefix,context,grid,pingvars,enddate,attributes)
                     else :
@@ -2053,6 +2146,11 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
         if False and lset['use_union_zoom']:
             for obj in union_grid_defs.keys(): out.write("\t"+union_grid_defs[obj]+"\n")
         out.write('</grid_definition> \n')
+        #
+        out.write('\n<scalar_definition> \n')
+        for obj in scalar_defs.keys(): out.write("\t"+scalar_defs[obj]+"\n")
+        out.write('</scalar_definition> \n')
+        #
         out.write('</context> \n')
     if printout :
         print "\nfile_def written as %s"%filename
@@ -2238,7 +2336,31 @@ def create_axis_def(sdim,lset,axis_defs,field_defs):
     # Store definition for the new axis
     return rep 
 
-def change_domain_in_grid(domain,grid_defs,ping_alias=None,src_grid_id=None,\
+def add_scalar_in_grid(gridin_def,gridout_id,scalar_id):
+    """
+    Returns a grid_definition with id GRIDOUT_ID from an input grid definition 
+    GRIDIN_DEF, by adding a reference to scalar SCALAR_ID, 
+
+    If such a reference is already included in that grid definition, just return 
+    input def
+    
+    Note : name of input_grid is not changed in output_grid
+
+    """
+    format='< *scalar *([^>]*)scalar_ref=["\']%s["\']'
+    expr=format%scalar_id
+    if re.search(expr,gridin_def) :
+        return gridin_def
+    #pattern= '<grid *([\>]*) *id=["\']([^"\']*)["\'] *(.*)< */ *grid *>'
+    pattern= '< *grid *([^> ]*) *id=["\']([^"\']*)["\'] *(.*)</ *grid *>'
+    replace=r'<grid \1 id="%s" \3<scalar scalar_ref="%s"/>  </grid>'%(gridout_id,scalar_id)
+    (rep,count)=re.subn(pattern,replace,gridin_def)
+    if count==0 : dr2xml_error("No way to add scalar '%s' in grid '%s'"%(scalar_id,gridin_def))
+    return rep+"\n"
+                               
+    
+
+def change_domain_in_grid(domain,grid_defs,lset,ping_alias=None,src_grid_id=None,\
                           turn_into_axis=False,printout=False):
     """ 
     Provided with a grid id SRC_GRID_ID or alternatively a variable name (ALIAS),
@@ -2256,7 +2378,8 @@ def change_domain_in_grid(domain,grid_defs,ping_alias=None,src_grid_id=None,\
         else:
             raise dr2xml_error("Fatal: ask for creating a grid_def for var %s which has no grid "%(ping_alias))
     else :
-        src_grid_string=grid_defs[src_grid_id]
+        src_grid_string=grid_defs.get(src_grid_id,guess_simple_domain_grid_def(src_grid_id,lset))
+        #print "src_grid_id is %s, def =%s"%(src_grid_id,src_grid_string)
         #src_grid_id=re.sub(r'.*grid id= *.([\w_]*).*\n.*',r'\g<1>',src_grid_string,1)
         #if src_grid_id == src_grid_string : 
         #    raise dr2xml_error("Issue extracting grid id for %s from %s "%(alias,src_grid_string))
@@ -2274,8 +2397,9 @@ def change_domain_in_grid(domain,grid_defs,ping_alias=None,src_grid_id=None,\
                                            (domain_or_axis,domain_or_axis,domain,axis_name),src_grid_string,1) 
         if count != 1 :
             raise dr2xml_error("Fatal: cannot find a domain to change in src_grid_string %s, count=%d "%(src_grid_string,count))
-    target_grid_string=re.sub('grid id= *.([\w_])*.','grid id="%s"'%target_grid_id,target_grid_string)
+    target_grid_string=re.sub('grid *id= *.([\w_])*.','grid id="%s"'%target_grid_id,target_grid_string)
     grid_defs[target_grid_id]=target_grid_string
+    #print "target_grid_id=%s"%target_grid_id
     return target_grid_id
 
 def create_grid_def(grid_defs,axis_def_string,axis_name,alias=None,context_index=None,table=None):
@@ -3175,6 +3299,19 @@ def realm_is_processed(realm, source_type) :
     #
     return rep
 
+def guess_simple_domain_grid_def(grid_id,lset):
+    # dr2xml sometimes must be able to restconstruct the grid def for a grid which has
+    # just a domain, from the grid_id, using a regexp with a numbered group that matches
+    # domain_name in grid_id. Second item is group number
+    regexp=lset["simple_domain_grid_regexp"]
+    domain_id,n=re.subn(regexp[0],r'\%d'%regexp[1],grid_id)
+    if n != 1 :
+        dr2xml_error("Cannot identify domain name in grid_id %s using regexp %s"%(grid_id,regexp[0]))
+    grid_def='<grid id="%s" ><domain domain_ref="%s"/></grid>'%\
+        (grid_id,domain_id)
+    print "Warning : Guess that structure for grid %s is : %s"%\
+        (grid_id,grid_def)
+    return grid_def
 
 class dr2xml_error(Exception):
     def __init__(self, valeur):
