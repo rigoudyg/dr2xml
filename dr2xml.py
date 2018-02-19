@@ -52,7 +52,7 @@ import dreq
 # End of pre-requisites
 ####################################
 
-version="pre-0.28"
+version="pre-1.0"
 print "* dr2xml version: ", version
 
 conventions="CF-1.7 CMIP-6.2" 
@@ -76,7 +76,7 @@ import xml.etree.ElementTree as ET
 
 # Local packages
 from vars import simple_CMORvar, simple_Dim, process_homeVars, complement_svar_using_cmorvar, \
-                multi_plev_suffixes, single_plev_suffixes, get_simplevar
+                multi_plev_suffixes, single_plev_suffixes, get_simplevar, scalar_vertical_dimension
 from grids import decide_for_grids, DRgrid2gridatts,\
     split_frequency_for_variable, timesteps_per_freq_and_duration
 from Xparse import init_context, id2grid, id2gridid, idHasExprWithAt
@@ -564,10 +564,10 @@ def year_in_ri_tslice(ri,experiment,lset,year,debug=False):
                     lastyear=start+tslice.nyears-1
                     if endyear is False : endyear=lastyear
                     else : endyear=max(endyear,lastyear)
-        else : dr2xml_error("For tslice %s, child %s start year is not documented"%\
+        else : raise dr2xml_error("For tslice %s, child %s start year is not documented"%\
                                 (tslice.title, tslice.child))
     else :
-        dr2xml_error("type %s for time slice %s is not handled"%(tslice.type,tslice.title))
+        raise dr2xml_error("type %s for time slice %s is not handled"%(tslice.type,tslice.title))
     if (debug) :
         print "for year %d and experiment %s, relevant is %s for tslice %s of type %s, endyear=%s"%\
             (year,experiment,`relevant`,ri.title,tslice.type,`endyear`)
@@ -937,11 +937,13 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
         if pingvars is not None :
             # Get alias without pressure_suffix but possibly with area_suffix
             alias_ping=ping_alias(sv,lset,pingvars)
-            if not alias_ping in pingvars:
-                table=sv.mipTable
-                if table not in skipped_vars_per_table: skipped_vars_per_table[table]=[]
-                skipped_vars_per_table[table].append(sv.label+"("+str(sv.Priority)+")")
-                return
+    #
+    # process only variables in pingvars
+    if not alias_ping in pingvars:
+        table=sv.mipTable
+        if table not in skipped_vars_per_table: skipped_vars_per_table[table]=[]
+        skipped_vars_per_table[table].append(sv.label+"("+str(sv.Priority)+")")
+        return
     #
     #--------------------------------------------------------------------
     # Set global CMOR file attributes
@@ -1004,8 +1006,8 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
         #     # an integer if attribute of the target horizontal grid, declared in XMLs: nlonz=256
         #     nlonz=context_index[target_hgrid_id].attrib['ni_glo'] 
         # else: 
-        #     raise(dr2xml_error("Fatal: Cannot access the number of longitudes (ni_glo) for %s\
-        #                 grid required for zonal means computation "%target_hgrid_id))
+        #     raise dr2xml_error("Fatal: Cannot access the number of longitudes (ni_glo) for %s\
+        #                 grid required for zonal means computation "%target_hgrid_id)
         # print ">>> DBG >>> nlonz=", nlonz
 
         
@@ -1019,7 +1021,7 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     with open(cvspath+project+"_experiment_id.json","r") as json_fp :
         CMIP6_experiments=json.loads(json_fp.read())['experiment_id']
         if not CMIP6_experiments.has_key(sset['experiment_id']):
-            dr2xml_error("Issue getting experiment description in CMIP6 CV for %20s"%sset['experiment_id'])
+            raise dr2xml_error("Issue getting experiment description in CMIP6 CV for %20s"%sset['experiment_id'])
         expid=sset['experiment_id']
         expid_in_filename=sset.get('expid_in_filename',expid) 
         exp_entry=CMIP6_experiments[expid]
@@ -1167,8 +1169,8 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
             try:
                 inst=json.loads(json_fp.read())['institution_id'][institution_id]
             except :
-                raise(dr2xml_error("Fatal: Institution_id for %s not found "+\
-                        "in CMIP6_CV at %s"%(institution,cvspath)))
+                raise dr2xml_error("Fatal: Institution_id for %s not found "+\
+                        "in CMIP6_CV at %s"%(institution,cvspath))
     wr(out,"institution",inst)
     #
     with open(cvspath+project+"_license.json","r") as json_fp :
@@ -1222,8 +1224,8 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     except :
         if "source" in lset : source=lset['source']
         else:
-            raise(dr2xml_error("Fatal: source for %s not found in CMIP6_CV at"+\
-                               "%s, nor in lset"%(source_id,cvspath)))
+            raise dr2xml_error("Fatal: source for %s not found in CMIP6_CV at"+\
+                               "%s, nor in lset"%(source_id,cvspath))
     wr(out,'source',source) 
     wr(out,'source_id',source_id)
     if type(source_type)==type([]) :
@@ -1333,7 +1335,12 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
 
     # The id of the currently most downstream field is last_field_id
     last_field_id=alias 
-    last_grid_id=None
+
+    alias_ping=ping_alias(sv,lset,pingvars)
+    grid_id_in_ping=id2gridid(alias_ping,context_index)
+    last_grid_id=grid_id_in_ping
+    #last_grid_id=None
+    #
     grid_with_vertical_interpolation=None
 
     # translate 'outermost' time cell_methods to Xios 'operation')
@@ -1344,9 +1351,11 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
     #--------------------------------------------------------------------
     #
     if ssh[0:4] in ['XY-H','XY-P'] or ssh[0:3] == 'Y-P' or \
-       ((ssh[0:5]=='XY-na' or ssh[0:4]=='Y-na') and prefix+sv.label not in pingvars ): #TBD check - last case is for singleton
+       ((ssh[0:5]=='XY-na' or ssh[0:4]=='Y-na') and
+        prefix+sv.label not in pingvars and sv.label_without_psuffix != sv.label ): #TBD check - last case is for singleton
+        if sv.label=='tsn' :print "for tsn, ssh=%s"%ssh
         last_grid_id,last_field_id= process_vertical_interpolation(\
-            sv,alias, lset,pingvars,field_defs,axis_defs,grid_defs,domain_defs,table)
+             sv,alias, lset,pingvars,last_grid_id,field_defs,axis_defs,grid_defs,domain_defs,table)
 
     #
     #--------------------------------------------------------------------
@@ -1362,8 +1371,6 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
     #--------------------------------------------------------------------
     #
     if ssh[0:2] == 'Y-' : #zonal mean and atm zonal mean on pressure levels
-        if last_grid_id is None : # actually useful for shape Y-na which are not pressure singleton
-            last_grid_id=id2grid(alias,context_index)
         last_field_id,last_grid_id=\
             process_zonal_mean(last_field_id,last_grid_id, target_hgrid_id,
                                zgrid_id, field_defs,axis_defs,grid_defs,
@@ -1378,7 +1385,8 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
             last_field_id,last_grid_id=process_diurnal_cycle(last_field_id,\
                                                           field_defs,grid_defs,axis_defs)
         else :
-            dr2xml_error("Cannot handle climatology cell_method for frequency %s"%sv.frequency)
+            raise dr2xml_error("Cannot handle climatology cell_method for frequency %s and variable "%\
+                               sv.frequency,sv.label)
     # 
     #--------------------------------------------------------------------
     # Create intermediate field_def for enforcing operation upstream
@@ -1393,24 +1401,21 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
     # Build output grid (stored in grid_defs)
     #--------------------------------------------------------------------
     #
-    margs={"src_grid_id":last_grid_id, "ping_alias":alias}
-    #print "creating output grid with",margs, "target_grid=",target_hgrid_id
-    output_grid_id=create_output_grid(ssh,lset,grid_defs,domain_defs,target_hgrid_id,margs)
-    #if output_grid_id is not None :
-    #    print "output_grid_id=",output_grid_id,"***>",grid_defs[output_grid_id]
-
+    if ssh[0:2]=='Y-' or ssh=='na-na' or ssh=='TR-na' or ssh=='TRS-na' or ssh[0:3]=='YB-' or ssh=='na-A' :
+        pass
+    elif target_hgrid_id :
+        if target_hgrid_id==cfsites_domain_id : add_cfsites_in_defs(grid_defs,domain_defs)
+        #print "changing domain to %s in %s"%(target_hgrid_id, last_grid_id)
+        # Apply DR required remapping, either to cfsites grid or to regular grid 
+        last_grid_id=change_domain_in_grid(target_hgrid_id, grid_defs,lset,src_grid_id=last_grid_id)
     #
     #--------------------------------------------------------------------
     # Create <field> construct to be inserted in a file_def, which includes re-griding
     #--------------------------------------------------------------------
     #
-    if output_grid_id is not None :
-        #rep='  <field id="%s+%s" field_ref="%s" name="%s" grid_ref="%s" '% \
-        #    (sv.label,last_field_id,last_field_id,sv.label,output_grid_id)
-        rep='  <field field_ref="%s" name="%s" grid_ref="%s" '% \
-            (last_field_id,sv.label,output_grid_id)
-    else :
-        rep='  <field field_ref="%s" name="%s" '% (last_field_id,sv.label)
+    if last_grid_id != grid_id_in_ping  : gref='grid_ref="%s"'% last_grid_id
+    else : gref=""
+    rep='  <field field_ref="%s" name="%s" %s '% (last_field_id,sv.label,gref)
     #
     if operation != 'once' : rep+=' freq_op="%s"'% Cmip6Freq2XiosFreq[sv.frequency]
     # 
@@ -1436,7 +1441,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
     elif sv.prec.strip() =="integer" or sv.prec.strip() =="int" :
         prec="2" ; missing_value="0" #16384"
     else :
-        dr2xml_error("prec=%s for sv=%s"%(sv.prec,sv.label))
+        raise dr2xml_error("prec=%s for sv=%s"%(sv.prec,sv.label))
     rep+=' detect_missing_value="%s" \n\tdefault_value="%s" prec="%s"'%(detect_missing,missing_value,prec)
     #
     # TBD : implement DR recommendation for cell_method : The syntax is to append, in brackets,
@@ -1449,7 +1454,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
     # is an expr, set in ping for the ping variable of that field, and which 
     # involves time operation (using @)
     #--------------------------------------------------------------------
-    if operation == 'average' and output_grid_id is not None :
+    if operation == 'average' and last_grid_id != grid_id_in_ping  :
         if not idHasExprWithAt(alias,context_index) : 
             rep+='\t\t@%s\n'%last_field_id
         else :
@@ -1530,7 +1535,7 @@ def process_singleton(sv,alias,lset,pingvars,
 
     """
     
-    printout=True
+    printout=False
     # get grid for the variable , before vertical interpo. if any
     # (could rather use last_grid_id and analyze if it has pressure dim)
     alias_ping=ping_alias(sv,lset,pingvars)
@@ -1547,7 +1552,7 @@ def process_singleton(sv,alias,lset,pingvars,
     # construct in a further grid, and convert field to a further field
     for dimk in sv.sdims :
         sdim=sv.sdims[dimk]
-        if is_singleton(sdim) :
+        if is_singleton(sdim) : #Only one dim should match
             #
             # Create a scalar for singleton dimension
             # sdim.label is non-ambiguous id, thanks to the DR, but its value may be
@@ -1583,15 +1588,13 @@ def process_singleton(sv,alias,lset,pingvars,
             #
             # Create a grid with added (or changed) scalar
             glabel=further_grid_id+"_"+scalar_id
-            further_grid_def=add_scalar_in_grid(further_grid_def,glabel,scalar_id,sdim.out_name)
+            further_grid_def=add_scalar_in_grid(further_grid_def,glabel,scalar_id,\
+                                                sdim.out_name,sdim.axis=="Z")
             if printout:
                 print "process_singleton : "," adding grid %s"%further_grid_def
             grid_defs[glabel]=further_grid_def
             further_grid_id=glabel
-        else :
-            pass
-            #print "dim %s is not a singleton, axis=%s value=%s requested=%s"%\
-            #   (sdim.label,sdim.axis,sdim.value,sdim.requested)
+            
     # Compare grid definition (in case the input_grid already had correct ref to scalars)
     if further_grid_def != input_grid_def :
         #  create derived_field through an Xios operation (apply all scalars at once)
@@ -1603,7 +1606,7 @@ def process_singleton(sv,alias,lset,pingvars,
             print "process_singleton : "," adding field %s"%field_def
     return further_field_id,further_grid_id
     
-def process_vertical_interpolation(sv,alias,lset,pingvars,
+def process_vertical_interpolation(sv,alias,lset,pingvars,src_grid_id,
                                    field_defs,axis_defs,grid_defs,domain_defs,table):
     """
     Based on vertical dimension of variable SV, creates the intermediate fields 
@@ -1618,27 +1621,29 @@ def process_vertical_interpolation(sv,alias,lset,pingvars,
     """
     #
     vdims=[ sd  for sd in sv.sdims.values() if isVertDim(sd) ]
-    if len(vdims) > 1 :
-        dr2xml_error("Too many vertical dims for %s (%s)"%(sv.label,`vdims`))
+    if len(vdims) == 1 : sd=vdims[0]
+    elif len(vdims) > 1 : raise dr2xml_error("Too many vertical dims for %s (%s)"%(sv.label,`vdims`))
     if len(vdims)==0 :
-        returned_alias=alias
-        if ("hus" in alias) : print "uuu> hus no vdims"
-        return None,alias
+        # Analyze if there is a singleton vertical dimension for the variable
+        #sd=scalar_vertical_dimension(sv,dq)
+        #if sd is not None :
+        #    print "Single level %s for %s"%(sv,sv.label),vdims
+        #else:
+        raise dr2xml_error("Not enough vertical dims for %s (%s)"%(sv.label,[ (s.label,s.out_name) for s in sv.sdims.values()]))
     #
-    sd=vdims[0]
+    #
+    #sd=vdims[0]
     alias_with_levels=alias+"_"+sd.label   # e.g. 'CMIP6_hus7h_plev7h'
-    #if "wap" in alias :
-    #    print "--->",alias, alias_with_levels,sd
     if alias_with_levels in pingvars:
         print "No vertical interpolation for %s because the pingfile provides it"%alias_with_levels
-        return None,alias_with_levels
-        #dr2xml_error("Finding an alias with levels (%s) in pingfile is unexexpected")
+        return src_grid_id,alias_with_levels
+        #raise dr2xml_error("Finding an alias with levels (%s) in pingfile is unexpected")
     #
     prefix=lset["ping_variables_prefix"]
     lwps=sv.label_without_psuffix
     alias_in_ping=prefix+lwps      # e.g. 'CMIP6_hus' and not 'CMIP6_hus7h'; 'CMIP6_co2' and not 'CMIP6_co2Clim'
     if not alias_in_ping in pingvars:       # e.g. alias_in_ping='CMIP6_hus'
-        dr2xml_error("Field id "+alias_in_ping+" expected in pingfile but not found.")
+        raise dr2xml_error("Field id "+alias_in_ping+" expected in pingfile but not found.")
     #
     # Create field alias_for_sampling for enforcing the operation before time sampling
     operation=lset.get("vertical_interpolation_operation","instant")
@@ -1655,7 +1660,7 @@ def process_vertical_interpolation(sv,alias,lset,pingvars,
     #    <axis id="zoom_plev7h_hus" axis_ref="union_plevs_hus"> <zoom_axis index="(0,6)[  3 6 11 13 15 20 28 ]"/>
     create_axis_def(sd,lset,axis_defs,field_defs)
 
-    # Creat field alias_sample which time-samples the inst at required freq
+    # Create field 'alias_sample' which time-samples the field at required freq
     # before vertical interpolation
     alias_sample=alias_in_ping+"_sampled_"+vert_freq # e.g.  CMIP6_zg_sampled_3h
     # <field id="CMIP6_hus_sampled_3h" field_ref="CMIP6_hus_instant" freq_op="3h" expr="@CMIP6_hus_instant"/>
@@ -1663,36 +1668,35 @@ def process_vertical_interpolation(sv,alias,lset,pingvars,
                '<field id="%-25s field_ref="%-25s freq_op="%-10s detect_missing_value="true" > @%s </field>'\
                %(alias_sample+'"',alias_for_sampling+'"',vert_freq+'"',alias_for_sampling)
     
-    # Construct a grid using variable's grid and target vertical axis
-    # e.g. <grid id="FULL_klev_zoom_plev7h_hus"> <domain domain_ref="FULL" /> <axis axis_ref="zoom_plev7h_hus" />
-    if sd.is_zoom_of: axis_key=sd.zoom_label  # e.g. 'zoom_plev7h_hus'
-    else:             axis_key=sd.label       # e.g. 'plev7h'
-    grid_id=create_grid_def(grid_defs,axis_defs[axis_key],sd.out_name,alias_in_ping,context_index,table)
-    
     # Construct a field def for the vertically interpolated variable
     if sd.is_zoom_of: # cas d'une variable definie grace a 2 axis_def (union+zoom)
         
+        # Construct a grid using variable's grid and target vertical axis
+        # e.g. <grid id="FULL_klev_zoom_plev7h_hus"> <domain domain_ref="FULL" /> <axis axis_ref="zoom_plev7h_hus" />
+
         # cas d'une variable definie grace a 2 axes verticaux (zoom+union)
         # Must first create grid for levels union, e.g.:
         # <grid id="FULL_klev_union_plevs_hus"> <domain domain_ref="FULL" /> <axis axis_ref="union_plevs_hus" />
-        grid_id=create_grid_def(grid_defs,axis_defs[sd.is_zoom_of],sd.out_name,alias_in_ping,context_index)
+        grid_id=create_grid_def(grid_defs,axis_defs[sd.is_zoom_of],sd.out_name,src_grid_id)
         #
         union_alias=prefix+lwps+"_union" # e.g. 'CMIP6_hus_union'
 	# Ss e.g.: <field id="CMIP6_hus_union" field_ref="CMIP6_hus_sampled_3h" grid_ref="FULL_klev_union_plevs_hus"/>
         field_defs[union_alias]='<field id="%-25s field_ref="%-25s grid_ref="%-10s/>'\
             %(union_alias+'"',alias_sample+'"',grid_id+'"')
         
-        # SS : Must first create grid for levels subset zoom, e.g.:
+        # SS : first create grid for levels subset zoom, e.g.:
     	# <grid id="FULL_klev_zoom_plev7h_hus"> <domain domain_ref="FULL" /> <axis axis_ref="zoom_plev7h_hus" /
-        axis_key=sd.zoom_label      # e.g. 'zoom_plev7h_hus'
-        grid_id=create_grid_def(grid_defs,axis_defs[axis_key],sd.out_name,alias_in_ping,context_index)
+        # e.g. zoom_label : 'zoom_plev7h_hus'
+        grid_id=create_grid_def(grid_defs,axis_defs[sd.zoom_label],sd.out_name,src_grid_id)
 	# SS: e.g.: <field id="CMIP6_hus7h_plev7h" field_ref="CMIP6_hus_union" grid_ref="FULL_klev_zoom_plev7h_hus"
         field_defs[alias_with_levels]='<field id="%-25s field_ref="%-25s grid_ref="%-10s/>'\
             %(alias_with_levels+'"',union_alias+'"',grid_id+'"')
         
     else: # cas d'une variable definie grace a seul axis_def (non union+zoom)
+        # Construct a grid using variable's grid and target vertical axis
         union_alias=False 
         axis_key=sd.label           # e.g. 'plev7h'
+        grid_id=create_grid_def(grid_defs,axis_defs[axis_key],sd.out_name,src_grid_id)
         field_defs[alias_with_levels]='<field id="%-25s field_ref="%-25s grid_ref="%-10s/>'\
             %(alias_with_levels+'"',alias_sample+'"',grid_id+'"')
         #if "hus" in alias :
@@ -1725,7 +1729,7 @@ def create_output_grid(ssh, lset,grid_defs,domain_defs,target_hgrid_id,margs):
         if target_hgrid_id :
             # Must create and a use a grid similar to the last one defined 
             # for that variable, except for a change in the hgrid/domain
-            grid_ref=change_domain_in_grid(domain=target_hgrid_id, grid_defs=grid_defs,lset=lset,**margs)
+            grid_ref=change_domain_in_grid(target_hgrid_id, grid_defs,lset=lset,**margs)
             if grid_ref is False or grid_ref is None : 
                 raise dr2xml_error("Fatal: cannot create grid_def for %s with hgrid=%s"%(alias,target_hgrid_id))
     elif ssh == 'TR-na' or ssh == 'TRS-na' : #transects,   oce or SI
@@ -1737,7 +1741,7 @@ def create_output_grid(ssh, lset,grid_defs,domain_defs,target_hgrid_id,margs):
     elif ssh      == 'na-A'  : # only used for rlu, rsd, rsu ... in Efx ????
         pass 
     else :
-        raise(dr2xml_error("Fatal: Issue with un-managed spatial shape %s for variable %s in table %s"%(ssh,sv.label,table)))
+        raise dr2xml_error("Fatal: Issue with un-managed spatial shape %s for variable %s in table %s"%(ssh,sv.label,table))
     return grid_ref
 
 def process_zonal_mean(field_id, grid_id, target_hgrid_id,zgrid_id,\
@@ -1785,8 +1789,7 @@ def process_zonal_mean(field_id, grid_id, target_hgrid_id,zgrid_id,\
         field3_id= field2_id+"_"+target_hgrid_id 
         # Must create and a use a grid similar to the last one defined 
         # for that variable, except for a change in the hgrid/domain (=> complete)
-        grid_id3=change_domain_in_grid(domain=target_hgrid_id, grid_defs=grid_defs,\
-                                  lset=lset,src_grid_id=grid_id)
+        grid_id3=change_domain_in_grid(target_hgrid_id, grid_defs,lset,src_grid_id=grid_id)
         if printout :
             print "+++ grid3 ",grid_id3,"\n",grid_defs[grid_id3]
         field_defs[field3_id]='<field id="%s field_ref="%s grid_ref="%s /> '\
@@ -1800,15 +1803,14 @@ def process_zonal_mean(field_id, grid_id, target_hgrid_id,zgrid_id,\
         grid_id3=grid_id
 
     if not zgrid_id :
-        dr2xml_error("Must provide zgrid_id in lab_settings, the id of a latitude axis which has "+\
+        raise dr2xml_error("Must provide zgrid_id in lab_settings, the id of a latitude axis which has "+\
                      "(initialized) latitude values equals to those of the rectangular grid used")
         
     # And then regrid to final grid
     # e.g. <field id="CMIP6_ua_plev39_average_1d_glat" field_ref="CMIP6_ua_plev39_average_1d_complete"
     #             grid_ref="FULL_klev_plev39_complete_glat" />
     field4_id= field2_id+"_"+zgrid_id 
-    grid4_id=change_domain_in_grid(domain=zgrid_id, grid_defs=grid_defs,\
-                                   lset=lset,src_grid_id=grid_id3,turn_into_axis=True)
+    grid4_id=change_domain_in_grid(zgrid_id, grid_defs,lset,src_grid_id=grid_id3,turn_into_axis=True)
     if printout :
         print "+++ grid4 ",grid4_id,"\n",grid_defs[grid4_id]
     
@@ -2361,7 +2363,7 @@ def create_axis_def(sdim,lset,axis_defs,field_defs):
     # Store definition for the new axis
     return rep 
 
-def add_scalar_in_grid(gridin_def,gridout_id,scalar_id,scalar_name):
+def add_scalar_in_grid(gridin_def,gridout_id,scalar_id,scalar_name,remove_axis):
     """
     Returns a grid_definition with id GRIDOUT_ID from an input grid definition 
     GRIDIN_DEF, by adding a reference to scalar SCALAR_ID, 
@@ -2369,8 +2371,7 @@ def add_scalar_in_grid(gridin_def,gridout_id,scalar_id,scalar_name):
     If such a reference is already included in that grid definition, just return 
     input def
 
-    If GRIDIN_DEF already includes an axis named SCALAR_NAME, remove this axis
-    for output grid
+    if REMOVE_AXIS is True, if GRIDIN_DEF already includes an axis, remove it for output grid
     
     Note : name of input_grid is not changed in output_grid
 
@@ -2382,104 +2383,76 @@ def add_scalar_in_grid(gridin_def,gridout_id,scalar_id,scalar_name):
     pattern= '< *grid *([^> ]*) *id=["\']([^"\']*)["\'] *(.*)</ *grid *>'
     replace=r'<grid \1 id="%s" \3<scalar scalar_ref="%s"/>  </grid>'%(gridout_id,scalar_id)
     (rep,count)=re.subn(pattern,replace,gridin_def.replace("\n",""))
-    if count==0 : dr2xml_error("No way to add scalar '%s' in grid '%s'"%(scalar_id,gridin_def))
+    if count==0 : raise dr2xml_error("No way to add scalar '%s' in grid '%s'"%(scalar_id,gridin_def))
     #
-    # Remove any axis named SCALAR_NAME
-    if "p500" in scalar_id :
-        print "checking for axis with name %s in %s"%(scalar_name,rep)
-    axis_pattern='< *axis *[^>]* name="%s" *[^>]*>[ \t]*(<interpolate_axis[^/]*/>)?[ \t]*</axis>'%scalar_name
-    (rep,count)=re.subn(axis_pattern,"",rep)
-    if count==1 :
-        print "Info: axis has been removed for scalar %s (%s)"%(scalar_name,scalar_id)
-        print "grid_def="+rep
+    # Remove any axis if asked for
+    if remove_axis:
+        axis_pattern='< *axis *[^>]*>'
+        (rep,count)=re.subn(axis_pattern,"",rep)
+        #if count==1 :
+        #    print "Info: axis has been removed for scalar %s (%s)"%(scalar_name,scalar_id)
+        #    print "grid_def="+rep
     return rep+"\n"
                                
     
 
-def change_domain_in_grid(domain,grid_defs,lset,ping_alias=None,src_grid_id=None,\
+def change_domain_in_grid(domain_id,grid_defs,lset,ping_alias=None,src_grid_id=None,\
                           turn_into_axis=False,printout=False):
     """ 
     Provided with a grid id SRC_GRID_ID or alternatively a variable name (ALIAS),
     (SRC_GRID_STRING) 
-     - creates ans stores a grid_definition where the domain has been changed to DOMAIN
+     - creates ans stores a grid_definition where the domain_id has been changed to DOMAIN_ID
     -  returns its id, which is 
     """
-    if src_grid_id is None:
-        if ping_alias is None :
-            raise dr2xml_error("change_domain_in_grid: must provide alias or grid_string ")
-        src_grid=id2grid(ping_alias,context_index,printout=printout)
-        if src_grid is not None : 
-            src_grid_id=src_grid.attrib['id']
-            src_grid_string=ET.tostring(src_grid)
-        else:
-            raise dr2xml_error("Fatal: ask for creating a grid_def for var %s which has no grid "%(ping_alias))
-    else :
-        src_grid_string=get_grid_def(src_grid_id,grid_defs,lset)
-        #print "src_grid_id is %s, def =%s"%(src_grid_id,src_grid_string)
-        #src_grid_id=re.sub(r'.*grid id= *.([\w_]*).*\n.*',r'\g<1>',src_grid_string,1)
-        #if src_grid_id == src_grid_string : 
-        #    raise dr2xml_error("Issue extracting grid id for %s from %s "%(alias,src_grid_string))
-        #print "src_grid_id=%s"%src_grid_id
-    target_grid_id=src_grid_id+"_"+domain
+    if src_grid_id is None: raise dr2xml_error("deprecated")
+    else : src_grid_string=get_grid_def(src_grid_id,grid_defs,lset)
+    target_grid_id=src_grid_id+"_"+domain_id
     # Change domain
     domain_or_axis="domain" ; axis_name=""
     if turn_into_axis :
         domain_or_axis="axis" ; axis_name=' name="lat"'
-    (target_grid_string,count)=re.subn('domain *id= *.([\w_])*.','%s id="%s" %s'%(domain_or_axis,domain,axis_name),\
+    (target_grid_string,count)=re.subn('domain *id= *.([\w_])*.','%s id="%s" %s'%(domain_or_axis,domain_id,axis_name),\
                                        src_grid_string,1) 
     if count != 1 :
         #print "trying with regexp : ",'domain *domain_ref= *.([\w_])*.'
         (target_grid_string,count)=re.subn('domain *domain_ref= *.([\w_])*.','%s %s_ref="%s" %s'%\
-                                           (domain_or_axis,domain_or_axis,domain,axis_name),src_grid_string,1) 
+                                           (domain_or_axis,domain_or_axis,domain_id,axis_name),src_grid_string,1) 
         if count != 1 :
-            raise dr2xml_error("Fatal: cannot find a domain to change in src_grid_string %s, count=%d "%(src_grid_string,count))
+            raise dr2xml_error("Fatal: cannot find a domain to replace by %s in src_grid_string %s, count=%d "%\
+                               (domain_id,src_grid_string,count))
     target_grid_string=re.sub('grid *id= *.([\w_])*.','grid id="%s"'%target_grid_id,target_grid_string)
     grid_defs[target_grid_id]=target_grid_string
-    #print "target_grid_id=%s"%target_grid_id
+    #print "target_grid_id=%s : %s"%(target_grid_id,target_grid_string)
     return target_grid_id
 
-def create_grid_def(grid_defs,axis_def_string,axis_name,alias=None,context_index=None,table=None):
-    # mpmoine_correction:create_grid_def:  si, il faut generer une grille autour des axes de zoom aussi
-    #if not sd.is_zoom_of and not sd.is_union_for: # a grid_def to build in classical case (a vertical axis without using union)
-    if alias and context_index:
-        src_grid=id2grid(alias,context_index)
-        if src_grid is not None : 
-            src_grid_id=src_grid.attrib['id']
-            src_grid_string=ET.tostring(src_grid)
-            #if "union_plevs_zg" in axis_def_string :
-            #    print "union_plevs_zg def string is ",axis_def_string
-            # Retrieve axis key from axis definition string
-            axis_key=re.sub(r'.*id= *.([\w_]*).*',r'\1',axis_def_string.replace('\n',''))
-            target_grid_id=src_grid_id+"_"+axis_key
-            # Remove id= from axis definition string
-            axis_def_string=re.sub(r'id= *.([\w_]*).','',axis_def_string)
-            # Change only first instance of axis_ref, which is assumed to match the vertical dimension
-            #(target_grid_string,count)=re.subn('<axis[^\>]*>','<axis axis_ref="%s" name="%s"/>'\
-            #                                   %(axis_key,axis_name),src_grid_string,1)
-            # Enforce axis_name in axis_def_string :  TBD
-            #
-            (target_grid_string,count)=re.subn('<axis[^\>]*>',axis_def_string,src_grid_string,1)
-            #print "axis_key = ", axis_key
-            #print "axis_name = ", axis_name
-            if count != 1 :
-                raise dr2xml_error("Fatal: cannot find an axis ref for field %s in %s "%(alias,src_grid_string))
-                # alt_axis_name="axis_for_"+target_grid_id
-                # (target_grid_string,count)=re.subn('axis *axis_ref= *.([\w_])*.',\
-                #                                    'axis id="%s" axis_ref="%s"'% (alt_axis_name,axis_key),\
-                #                                    src_grid_string,1)
-                # if count != 1 : 
-                #     raise dr2xml_error("Fatal: cannot find an axis_ref to change in src_grid_string %s for %s in %s"%\
-                #                        (src_grid_string,alias,table))
-            target_grid_string=re.sub('grid id= *.([\w_])*.','grid id="%s"'%target_grid_id,target_grid_string)
-            grid_defs[target_grid_id]=target_grid_string
-            return target_grid_id
-        else:
-            raise dr2xml_error("Fatal: ask for creating a grid_def for var %s which has no grid "%(alias))
-        #return False
-    else:
-        raise dr2xml_error("Fatal: ask for creating a grid_def from a native grid "+\
-                           "but variable alias and/or context_index not provided (alias:%s, context_index:%s)"%(alias,context_index))
+def create_grid_def(grid_defs,axis_def,axis_name,src_grid_id):
+    """
+    Create and store a grid definition by changing in SRC_GRID_ID grid def
+    its only axis member (either def or ref) with AXIS_DEF (where any id 
+    has been removed)
 
+    Returned grid_id = input grid_id + suffix '_AXIS_NAME'
+
+    raises error if there is not exactly one axis def or reg in input grid
+
+    """
+    src_grid_def=get_grid_def(src_grid_id,grid_defs)
+    #
+    # Retrieve axis key from axis definition string
+    axis_key=re.sub(r'.*id= *.([\w_]*).*',r'\1',axis_def.replace('\n',' '))
+    target_grid_id=src_grid_id+"_"+axis_key
+    #
+    # Remove id= from axis definition string
+    axis_def=re.sub(r'id= *.([\w_]*).','',axis_def)
+    #
+    # Change only first instance of axis_ref, which is assumed to match the vertical dimension
+    # Enforce axis_name in axis_def :  TBD
+    (target_grid_def,count)=re.subn('<axis[^\>]*>',axis_def,src_grid_def,1)
+    if count != 1 :
+        raise dr2xml_error("Fatal: cannot find an axis ref in grid %s : %s "%(src_grid_id,src_grid_def))
+    target_grid_def=re.sub('grid id= *.([\w_])*.','grid id="%s"'%target_grid_id,target_grid_def)
+    grid_defs[target_grid_id]=target_grid_def
+    return target_grid_id
 
 def create_xios_axis_and_grids_for_plevs_unions(svars,plev_sfxs,lset, dummies,
                                                 axis_defs,grid_defs,field_defs, ping_refs, printout=False): 
@@ -2590,7 +2563,8 @@ def create_xios_axis_and_grids_for_plevs_unions(svars,plev_sfxs,lset, dummies,
         if len(list_plevs_union)==1: sdim_union.value=plevs_union_xios
         if printout : print "creating axis def for union :%s"%sdim_union.label
         axis_def=create_axis_def(sdim_union,lset,union_axis_defs,field_defs)
-        create_grid_def(union_grid_defs,axis_def,sdim_union.out_name,prefix+lwps,context_index)
+        create_grid_def(union_grid_defs,axis_def,sdim_union.out_name,
+                        id2gridid(prefix+lwps,context_index))
     #
     #return (union_axis_defs,union_grid_defs)
 
@@ -2601,9 +2575,9 @@ def isVertDim(sdim):
     For now, a very simple logics for interpolated vertical 
     dimension identification:
     """
-    # SS : p840, p220 sont des couches de pression , pour lesquelles COSP forunit directement
-    # les valeurs moyennes de parametres (e.g. cllcalipso). On les detecte par l'attribut bounds 
-    test=(sdim.stdname=='air_pressure' or sdim.stdname=='altitude') and (sdim.bounds != "yes")
+    # SS : p840, p220 sont des couches de pression.  On les detecte par l'attribut value
+    #test=(sdim.stdname=='air_pressure' or sdim.stdname=='altitude') and (sdim.value == "")
+    test=(sdim.axis=='Z')
     return test
 
 def analyze_cell_time_method(cm,label,table,printout=False):
@@ -3204,7 +3178,7 @@ def build_axis_definitions():
         pass
 
 
-def ping_alias(svar,lset,pingvars):
+def ping_alias(svar,lset,pingvars,error_on_fail=False):
     # dans le pingfile, grace a la gestion des interpolations
     # verticales, on n'attend pas forcement les alias complets des
     # variables (CMIP6_<label>), on peut se contenter des alias
@@ -3222,6 +3196,10 @@ def ping_alias(svar,lset,pingvars):
         if alias_ping not in pingvars :
             # if not, ping_alias is supposed to be without a pressure level suffix
             alias_ping=pref+svar.label_without_psuffix # e.g. 'CMIP6_hus' and not 'CMIP6_hus7h'
+    if alias_ping not in pingvars :
+        if error_on_fail :
+            raise dr2xml_error("Cannot find an alias in ping for variable %s"%svar.label)
+        else : return None
     return alias_ping
 
     
@@ -3292,7 +3270,7 @@ def get_source_id_and_type(sset,lset):
         if sset["configuration"] in lset["configurations"]: 
             source_id,source_type,unused=lset["configurations"][sset["configuration"]]
         else:
-            dr2xml_error("configuration %s is not known (allowed values are :)"%\
+            raise dr2xml_error("configuration %s is not known (allowed values are :)"%\
                          sset["configuration"]+`lset["configurations"]`)
     else:
         source_id=sset['source_id']
@@ -3342,14 +3320,14 @@ def guess_simple_domain_grid_def(grid_id,lset):
     regexp=lset["simple_domain_grid_regexp"]
     domain_id,n=re.subn(regexp[0],r'\%d'%regexp[1],grid_id)
     if n != 1 :
-        dr2xml_error("Cannot identify domain name in grid_id %s using regexp %s"%\
+        raise dr2xml_error("Cannot identify domain name in grid_id %s using regexp %s"%\
                      (grid_id,regexp[0]))
     grid_def='<grid id="%s" ><domain domain_ref="%s"/></grid>'% (grid_id,domain_id)
     print("Warning: Guess that structure for grid %s is : %s"%(grid_id,grid_def))
-    #dr2xml_error("Warning: Guess that structure for grid %s is : %s"%(grid_id,grid_def))
+    #raise dr2xml_error("Warning: Guess that structure for grid %s is : %s"%(grid_id,grid_def))
     return grid_def
 
-def get_grid_def(grid_id,grid_defs,lset):
+def get_grid_def(grid_id,grid_defs,lset=None):
     if grid_id in grid_defs :
         # Simple case : already stored
         grid_def=grid_defs[grid_id]
@@ -3358,9 +3336,13 @@ def get_grid_def(grid_id,grid_defs,lset):
             # Grid defined through xml  
             grid_def=ET.tostring(context_index[grid_id])
         else:
-            # Try to guess a grid_def from its id
-            grid_def=guess_simple_domain_grid_def(grid_id,lset)
-            grid_defs[grid_id]=grid_def
+            if lset is not None :
+                # Try to guess a grid_def from its id
+                grid_def=guess_simple_domain_grid_def(grid_id,lset)
+                grid_defs[grid_id]=grid_def
+            else:
+                raise dr2xml_error("Cannot guess a grid def for %s"%grid_id)
+                grid_def=None
     return grid_def
 
 class dr2xml_error(Exception):

@@ -297,6 +297,7 @@ def read_extraTable(path,table,dq,printout=False):
                         json_cdata=jc.read()
                         cdata=json.loads(json_cdata)
                         extra_sdim.label     =d
+                        extra_sdim.axis      =cdata["axis_entry"][d]["axis"]
                         extra_sdim.stdname   =cdata["axis_entry"][d]["standard_name"]
                         extra_sdim.units     =cdata["axis_entry"][d]["units"]
                         extra_sdim.long_name =cdata["axis_entry"][d]["long_name"]
@@ -549,35 +550,20 @@ def complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues,debug=[]):
         # This can be either a string value for inclusion in the NetCDF variable attribute cell_measures, or a directive. In the latter case it will be a single word, --OPT or --MODEL. The first of these indicates that the data may be provided either on the cell centres or on the cell boundaries. --MODEL indicates that the data should be provided at the cell locations used for that variable in the model code (e.g. cell vertices).
         # We turn the directive in as sensible choice 
         if svar.cell_measures in [ '--MODEL', '--OPT', '--UGRID'] :
-            #if (svar.label=="ua" or svar.label=="va") and svar.mipTable=="6hrLev" :
-            #    svar.cell_measures='--OPT' # because PrePARE 3.3.0 is waiting for such a value !!
-            #if (svar.label in [ "uo","vo","wo","umo","vmo","tauuo","tauvo"]) and svar.mipTable=="Omon" :
-            #    svar.cell_measures='--OPT' # because PrePARE 3.3.0 is waiting for such a value !!
-            #else :
             svar.cell_measures=''
         if svar.cell_measures in [ 'area: areacello OR areacella' ] :
             svar.cell_measures='area: areacello'  #TBD Actually applies to seaice variables only, in DR01.00.17
         product_of_other_dims=1
         all_dimids=[]
         if svar.spatial_shp!="na-na":
-            spid=None
-            try:
-                spid=dq.inx.uid[svar.struct.spid]
-            except:
-                if print_DR_errors :
-                        print "DR Error: issue with spid for ",svar.label, "in Table ",svar.mipTable, " => no sdims derived."
-                dimids=None
-            if spid is not None :
-                try:
-                    all_dimids+=spid.dimids
-                except:
-                    if print_DR_errors :
-                        print "DR Error: issue with spid for ",svar.label, "in Table ",svar.mipTable, " => no sdims derived."
+            spid=dq.inx.uid[svar.struct.spid]
+            all_dimids+=spid.dimids
         if 'cids' in svar.struct.__dict__:
             cids=svar.struct.cids
             # when cids not empty, cids=('dim:p850',) or ('dim:typec4pft', 'dim:typenatgr') for e.g.; when empty , cids=('',).
             if cids[0]!='':  ## this line is needed prior to version 01.00.08.
                 all_dimids+=cids
+            #if (svar.label=="rv850") : print "rv850 has cids %s"%cids
         if 'dids' in svar.struct.__dict__:
             dids=svar.struct.dids
             if dids[0]!='': all_dimids+=dids
@@ -773,7 +759,13 @@ def get_simplevar(dq,label,table):
     if psvar :
         complement_svar_using_cmorvar(svar,cmvar,dq,None)
         return svar
-    
+
+def scalar_vertical_dimension(sv,dq):
+    if 'cids' in sv.struct.__dict__:
+         cid=dq.inx.uid[sv.struct.cids[0]]
+         if cid.axis=='Z' :
+             return cid.altLabel
+    return None
 
 class vars_error(Exception):
     def __init__(self, valeur):
