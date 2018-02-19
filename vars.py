@@ -54,6 +54,7 @@ class simple_Dim(object):
         self.units        = False
         self.is_zoom_of   = False
         self.bounds       = False
+        self.boundsValues = False
         self.axis         = False
         self.type         = False
         self.coords       = False
@@ -639,6 +640,7 @@ def get_simpleDim_from_DimId(dimid,dq):
     sdim.out_name=d.altLabel
     sdim.units=d.units
     sdim.bounds=d.bounds
+    sdim.boundsValues=d.boundsValues
     sdim.axis=d.axis
     sdim.coords=d.coords
     sdim.title=d.title

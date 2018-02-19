@@ -81,6 +81,7 @@ from grids import decide_for_grids, DRgrid2gridatts,\
     split_frequency_for_variable, timesteps_per_freq_and_duration
 from Xparse import init_context, id2grid, id2gridid, idHasExprWithAt
 
+
 # A auxilliary tables
 from table2freq import Cmip6Freq2XiosFreq, longest_possible_period
 
@@ -319,13 +320,14 @@ example_lab_and_model_settings={
     # You may add a series of NetCDF attributes in all files for this simulation
     "non_standard_attributes" : { "model_minor_version" : "6.1.0" },
 
-    # If you use some early version of Xios such as r1428, set that setting to True
-    "xios_has_axis_in_scalar_attributes" : False,
-
-    # dr2xml sometimes must be able to reconstruct the grid def for a grid which has
-    # just a domain, from the grid_id, using a regexp with a numbered group that matches
-    # domain_name in grid_id. Second item is group number
-    # This is not needed if such grids are defined in xml files
+    # If you use some early version of Xios such as r1428, set this to False
+    "xios_has_type_in_scalar_attributes" : False,
+    
+    # If some grid is not defined in xml but by API, and is referenced by a
+    # field which is considered by the DR as having a singleton dimension, then :
+    #  1) it must be a grid which has only a domain
+    #  2) the domain name must be extractable from the grid_id using a regexp
+    #     and a group number
     # For CNRM we use  a pattern that returns full id except for a '_grid' suffix 
     "simple_domain_grid_regexp" : ("(.*)_grid$",1), 
 }
@@ -1036,7 +1038,7 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
         if c not in actual_components :
             ok=False
             print "Model component %s is required by CMIP6 CV for experiment %s and not present (present=%s)"%\
-                (c,experiment,`actual_components`)
+                (c,experiment_id,`actual_components`)
     for c in actual_components :
         if c not in allowed_components and c not in required_components :
             #ok=False # TBD : restore blocking on non-allowed components
@@ -1529,10 +1531,13 @@ def process_singleton(sv,alias,lset,pingvars,
     """
     
     printout=True
-    #  get grid for the variable
+    # get grid for the variable , before vertical interpo. if any
+    # (could rather use last_grid_id and analyze if it has pressure dim)
     alias_ping=ping_alias(sv,lset,pingvars)
     input_grid_id=id2gridid(alias_ping,context_index)
     input_grid_def=get_grid_def(input_grid_id,grid_defs,lset)
+    if printout:
+        print "process_singleton : ","processing %s with grid %s "%(alias,input_grid_id)
     #
     further_field_id=alias
     further_grid_id=input_grid_id
@@ -1548,20 +1553,39 @@ def process_singleton(sv,alias,lset,pingvars,
             # sdim.label is non-ambiguous id, thanks to the DR, but its value may be
             # ambiguous w.r.t. a dr2xml suffix for interpolating to a single pressure level
             scalar_id="Scal"+sdim.label 
+            if sdim.units =='' : unit=''
+            else  : unit=' unit="%s"'%sdim.units
             types={'double':' prec="8"', 'character':' type="char"'}
-            if sdim.axis!='' : # Space axis, probably Z
-                axis=' axis="%s" positive="%s"'%(sdim.axis,sdim.positive)
-            else : axis=""
-            if not lset.get("xios_have_axis_in_scalar_attributes","True") : axis=""
-            if sdim.units!='' : unit=' unit="%s"'%sdim.units
-            else  : unit=""
-            scalar_def='<scalar id="%s" name="%s" standard_name="%s" long_name="%s" value="%s" %s%s%s />'%\
-                   (scalar_id,sdim.out_name,sdim.stdname,sdim.title,sdim.value,types[sdim.type],axis,unit)
+            value=types[sdim.type]+" "+'value="%s"'%sdim.value
+            if "xios_dont_have_type_in_scalar_attributes" in lset :
+                dont_use_type=lset["xios_dont_have_type_in_scalar_attributes"]
+            else:
+                dont_use_type=True
+            if dont_use_type and sdim.type=='character' : value=''
+            if sdim.axis!='' :
+                # Space axis, probably Z
+                axis=' axis_type="%s"'%(sdim.axis)
+                if dont_use_type is False:
+                    axis+=' positive="%s"'%(sdim.positive)
+            else: axis=""
+            if sdim.bounds=="yes":
+                bounds=sdim.boundsValues.split()
+                bounds_value=' bounds_value="(0,1)[ %s %s ]" bounds_value_name="%s_bounds"'%\
+                    (bounds[0],bounds[1],sdim.out_name)
+            else:
+                bounds_value=""
+            #
+            scalar_def='<scalar id="%s" name="%s" standard_name="%s" long_name="%s"%s%s%s%s />'%\
+                   (scalar_id,sdim.out_name,sdim.stdname,sdim.title,value,bounds_value,axis,unit)
             scalar_defs[scalar_id]=scalar_def
+            if printout:
+                print "process_singleton : ","adding scalar %s"%scalar_def
             #
             # Create a grid with added (or changed) scalar
             glabel=further_grid_id+"_"+scalar_id
-            further_grid_def=add_scalar_in_grid(further_grid_def,glabel,scalar_id)
+            further_grid_def=add_scalar_in_grid(further_grid_def,glabel,scalar_id,sdim.out_name)
+            if printout:
+                print "process_singleton : "," adding grid %s"%further_grid_def
             grid_defs[glabel]=further_grid_def
             further_grid_id=glabel
         else :
@@ -1572,9 +1596,11 @@ def process_singleton(sv,alias,lset,pingvars,
     if further_grid_def != input_grid_def :
         #  create derived_field through an Xios operation (apply all scalars at once)
         further_field_id=alias+"_"+further_grid_id.replace(input_grid_id+'_','')
-        field_def='<field id="%s" field_ref="%s" grid_ref="%s"> %s </field>'%\
-            (further_field_id,alias,further_grid_id,alias)
+        field_def='<field id="%s" grid_ref="%s" operation="instant"> %s </field>'%\
+            (further_field_id,further_grid_id,alias)
         field_defs[further_field_id]=field_def
+        if printout:
+            print "process_singleton : "," adding field %s"%field_def
     return further_field_id,further_grid_id
     
 def process_vertical_interpolation(sv,alias,lset,pingvars,
@@ -2283,7 +2309,7 @@ def create_axis_def(sdim,lset,axis_defs,field_defs):
         rep='<axis id="%s" '%sdim.label
         if not sdim.positive in [ None, "" ] :
             rep+='positive="%s" '%sdim.positive
-        if n_glo>1 :
+        if n_glo > 1 :
             # Case of a non-degenerated vertical dimension (not a singleton)
             rep+='n_glo="%g" '%n_glo
             rep+='value="(0,%g)[ %s ]"'%(n_glo-1,sdim.requested)
@@ -2328,19 +2354,23 @@ def create_axis_def(sdim,lset,axis_defs,field_defs):
         union_vals=values.strip(" ").split()
         union_vals_num=[float(v) for v in union_vals]
         for val in glo_list_num : rep+=' %g'%union_vals_num.index(val)
-        rep+=' ]"/>'
+        rep+=' ]"'
+        rep+=' axis_type="%s"/>'%sdim.axis
         rep+='</axis>'
         axis_defs[sdim.zoom_label]=rep
     # Store definition for the new axis
     return rep 
 
-def add_scalar_in_grid(gridin_def,gridout_id,scalar_id):
+def add_scalar_in_grid(gridin_def,gridout_id,scalar_id,scalar_name):
     """
     Returns a grid_definition with id GRIDOUT_ID from an input grid definition 
     GRIDIN_DEF, by adding a reference to scalar SCALAR_ID, 
 
     If such a reference is already included in that grid definition, just return 
     input def
+
+    If GRIDIN_DEF already includes an axis named SCALAR_NAME, remove this axis
+    for output grid
     
     Note : name of input_grid is not changed in output_grid
 
@@ -2349,11 +2379,19 @@ def add_scalar_in_grid(gridin_def,gridout_id,scalar_id):
     expr=format%scalar_id
     if re.search(expr,gridin_def) :
         return gridin_def
-    #pattern= '<grid *([\>]*) *id=["\']([^"\']*)["\'] *(.*)< */ *grid *>'
     pattern= '< *grid *([^> ]*) *id=["\']([^"\']*)["\'] *(.*)</ *grid *>'
     replace=r'<grid \1 id="%s" \3<scalar scalar_ref="%s"/>  </grid>'%(gridout_id,scalar_id)
-    (rep,count)=re.subn(pattern,replace,gridin_def)
+    (rep,count)=re.subn(pattern,replace,gridin_def.replace("\n",""))
     if count==0 : dr2xml_error("No way to add scalar '%s' in grid '%s'"%(scalar_id,gridin_def))
+    #
+    # Remove any axis named SCALAR_NAME
+    if "p500" in scalar_id :
+        print "checking for axis with name %s in %s"%(scalar_name,rep)
+    axis_pattern='< *axis *[^>]* name="%s" *[^>]*>[ \t]*(<interpolate_axis[^/]*/>)?[ \t]*</axis>'%scalar_name
+    (rep,count)=re.subn(axis_pattern,"",rep)
+    if count==1 :
+        print "Info: axis has been removed for scalar %s (%s)"%(scalar_name,scalar_id)
+        print "grid_def="+rep
     return rep+"\n"
                                
     
@@ -3313,10 +3351,16 @@ def guess_simple_domain_grid_def(grid_id,lset):
 
 def get_grid_def(grid_id,grid_defs,lset):
     if grid_id in grid_defs :
+        # Simple case : already stored
         grid_def=grid_defs[grid_id]
     else:
-        grid_def=guess_simple_domain_grid_def(grid_id,lset)
-        grid_defs[grid_id]=grid_def
+        if grid_id in context_index :
+            # Grid defined through xml  
+            grid_def=ET.tostring(context_index[grid_id])
+        else:
+            # Try to guess a grid_def from its id
+            grid_def=guess_simple_domain_grid_def(grid_id,lset)
+            grid_defs[grid_id]=grid_def
     return grid_def
 
 class dr2xml_error(Exception):

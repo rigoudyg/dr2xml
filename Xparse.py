@@ -5,7 +5,7 @@
 
 # Main useful functions :
 #   <opaque>    context = init_context(context_name,printout=False)
-#   <ET object>    grid = d2grid(field_id,context,printout=False)
+#   <ET object>    grid = id2grid(field_id,context,printout=False)
 
 import os, os.path, re, sys
 import xml.etree.ElementTree as ET
@@ -236,6 +236,7 @@ def init_context(context_id,path_parse="./",printout=False):
         return (index)
     else:
         print "Xparse::init_context : context %s not found in %s"%(context_id,xmldef)
+
 
 def id2gridid(field_id,index,printout=False) :
     grid=id2grid(field_id,index,printout=printout)
