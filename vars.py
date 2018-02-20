@@ -135,14 +135,9 @@ def read_homeVars_list(hmv_file,expid,mips,dq,path_extra_tables=None):
                 home_var.mip_era='PERSO'
                 home_var.cell_methods=tcmName2tcmValue[home_var.temporal_shp] 
                 home_var.label_without_psuffix=home_var.label
-            if home_var.mip!="ANY":
-                if home_var.mip in mips:
-                    if home_var.experiment!="ANY":
-                         if expid in home_var.experiment: homevars.append(home_var)
-                    else: 
-                        homevars.append(home_var)
-            else:
+            if home_var.mip == "ANY" or home_var.mip in mips :
                 if home_var.experiment!="ANY":
+                    # if home_var.experiment==expid: homevars.append(home_var)
                     if expid in home_var.experiment: homevars.append(home_var)
                 else: 
                     homevars.append(home_var)
@@ -150,7 +145,11 @@ def read_homeVars_list(hmv_file,expid,mips,dq,path_extra_tables=None):
             if not extra_vars_per_table.has_key(table) :
                  extra_vars_per_table[table] = read_extraTable(path_extra_tables,table,dq,printout=False)
             if home_var.label == "ANY" :
-                 extravars.extend(extra_vars_per_table[table])
+                 if home_var.mip == "ANY" or home_var.mip in mips :
+                     if home_var.experiment!="ANY":
+                        if expid in home_var.experiment: extravars.extend(extra_vars_per_table[table])
+                     else :
+                        extravars.extend(extra_vars_per_table[table])
             else :
                  # find home_var in extra_vars
                  var_found = None
@@ -161,7 +160,11 @@ def read_homeVars_list(hmv_file,expid,mips,dq,path_extra_tables=None):
                  if var_found is None :
                      print " 'extra' variable %s not found in table %s"%(home_var.label, table)
                  else :
-                     extravars.append(var_found)
+                     if home_var.mip == "ANY" or home_var.mip in mips :
+                         if home_var.experiment!="ANY":
+                             if expid in home_var.experiment: extravars.append(var_found)
+                         else :
+                             extravars.append(var_found)
     print "Number of 'cmor' and 'perso' among home variables: ",len(homevars)
     print "Number of 'extra' among home variables: ",len(extravars)
     homevars.extend(extravars) 
@@ -218,7 +221,6 @@ def read_extraTable(path,table,dq,printout=False):
     extravars=[]
     dr_slevs=dr_single_levels
     mip_era=table.split('_')[0]
-    if path is None : vars_error("Must provide a path for Extra_table !!")
     json_table=path+"/"+table+".json"
     json_coordinate=path+"/"+mip_era+"_coordinate.json"
     if not os.path.exists(json_table): sys.exit("Abort: file for extra Table does not exist: "+json_table)

@@ -698,7 +698,9 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
         if ('excluded_vars_per_config' in lset) and \
            (config in lset['excluded_vars_per_config']):
             excvars.extend(lset['excluded_vars_per_config'][config])
-    excpairs=sset.get('excluded_pairs',lset.get('excluded_pairs',[]))
+        excpairs=sset.get('excluded_pairs',lset.get('excluded_pairs',[]))
+    else :
+        excpairs=lset.get('excluded_pairs',[])
     
     
     filtered_vars=[]
