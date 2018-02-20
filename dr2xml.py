@@ -1273,7 +1273,7 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
         sv_psol=get_simplevar(dq,"ps",table)
         
         if sv_psol :
-            if not sv_psol.cell_measures : sv_psol.cell_measures = "cell measure is not specified in DR "+dq.version
+            #if not sv_psol.cell_measures : sv_psol.cell_measures = "cell measure is not specified in DR "+dq.version
             psol_field=create_xios_aux_elmts_defs(sv_psol,lset["ping_variables_prefix"]+"ps",table,lset,sset,
                                                   field_defs,axis_defs,grid_defs,domain_defs,scalar_defs,
                                        dummies,context,target_hgrid_id,zgrid_id,pingvars)
@@ -1465,7 +1465,6 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
     # TBD    'interval: *amount* *units*', for example 'area: time: mean (interval: 1 hr)'.
     # TBD    The units must be valid UDUNITS, e.g. day or hr.
     rep+=' cell_methods="%s" cell_methods_mode="overwrite"'% sv.cell_methods
-    rep+='>\n'
     #--------------------------------------------------------------------
     # enforce time average before remapping (when there is one) except if there 
     # is an expr, set in ping for the ping variable of that field, and which 
@@ -1474,12 +1473,14 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
     if operation == 'average':
         if last_grid_id != grid_id_in_ping  :
             if not idHasExprWithAt(alias,context_index) : 
-                rep+='\t\t@%s\n'%last_field_id
+                rep+='>\n \t\t@%s\n'%last_field_id
             else :
                 print "Warning: Cannot optimise (i.e. average before remap)"+\
                     "for field %s which got an expr with @"%alias
         else :
-            rep+=' operation="%s"'%operation
+            rep+=' operation="%s">\n'%operation
+    else :
+        rep+='>\n'
     #
     #--------------------------------------------------------------------
     # Add Xios variables for creating NetCDF attributes matching CMIP6 specs
