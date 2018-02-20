@@ -36,8 +36,8 @@ Changes :
 ####################################
 
 # 1- CMIP6 Data Request package retrieved using
-#    svn co http://proj.badc.rl.ac.uk/svn/exarch/CMIP6dreq/tags/01.00.01
-#    (and must include 01.00.01/dreqPy in PYTHONPATH)
+#    svn co http://proj.badc.rl.ac.uk/svn/exarch/CMIP6dreq/tags/01.00.21
+#    (and must include 01.00.21/dreqPy in PYTHONPATH)
 from scope import dreqQuery
 import dreq
 
@@ -45,7 +45,7 @@ import dreq
 # https://github.com/WCRP-CMIP/CMIP6_CVs). You will provide its path 
 # as argument to functions defined here
 
-# 3- XIOS release must be 1242 or above (to be fed with the outputs)
+# 3- XIOS release must be 1432 or above (to be fed with the outputs)
 #  see https://forge.ipsl.jussieu.fr/ioserver/wiki
 
 ####################################
@@ -329,7 +329,13 @@ example_lab_and_model_settings={
     #  2) the domain name must be extractable from the grid_id using a regexp
     #     and a group number
     # For CNRM we use  a pattern that returns full id except for a '_grid' suffix 
-    "simple_domain_grid_regexp" : ("(.*)_grid$",1), 
+    "simple_domain_grid_regexp" : ("(.*)_grid$",1),
+
+    # Should axes / dimensions be CMIP6-normalized ? (default to True)
+    # This applies to scalar dimensions and to that list :  effectRadIc landUse 
+    # snowband yant dbze location oline sza5 icesheet siline soilpools basin 
+    # ygre iceband xgre effectRadLi site typewetla scatratio spectband tau vegtype xant 
+    'do_normalize_axes' : True,
 }
 
 
@@ -1398,16 +1404,25 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
                             %(last_field_id+'"',but_last_field_id+'"',operation+'"')
     #
     #--------------------------------------------------------------------
-    # Build output grid (stored in grid_defs)
+    # Change horizontal grid if requested 
     #--------------------------------------------------------------------
     #
-    if ssh[0:2]=='Y-' or ssh=='na-na' or ssh=='TR-na' or ssh=='TRS-na' or ssh[0:3]=='YB-' or ssh=='na-A' :
-        pass
-    elif target_hgrid_id :
-        if target_hgrid_id==cfsites_domain_id : add_cfsites_in_defs(grid_defs,domain_defs)
-        #print "changing domain to %s in %s"%(target_hgrid_id, last_grid_id)
-        # Apply DR required remapping, either to cfsites grid or to regular grid 
-        last_grid_id=change_domain_in_grid(target_hgrid_id, grid_defs,lset,src_grid_id=last_grid_id)
+    if target_hgrid_id :
+        # This does not apply for a series of shapes 
+        if ssh[0:2]=='Y-' or ssh=='na-na' or ssh=='TR-na' or ssh=='TRS-na' or ssh[0:3]=='YB-' or ssh=='na-A' :
+            pass
+        else:
+            if target_hgrid_id==cfsites_domain_id : add_cfsites_in_defs(grid_defs,domain_defs)
+            #print "changing domain to %s in %s"%(target_hgrid_id, last_grid_id)
+            # Apply DR required remapping, either to cfsites grid or to regular grid 
+            last_grid_id=change_domain_in_grid(target_hgrid_id, grid_defs,lset,src_grid_id=last_grid_id)
+    #
+    #--------------------------------------------------------------------
+    # Change axes in grid to CMIP6-compliant ones
+    #--------------------------------------------------------------------
+    #
+    if lset.get('do_normalize_axes',True): 
+        last_grid_id=change_axes_in_grid(last_grid_id, grid_defs,axis_defs,lset)
     #
     #--------------------------------------------------------------------
     # Create <field> construct to be inserted in a file_def, which includes re-griding
@@ -1513,11 +1528,11 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
     return rep
 
 def is_singleton(sdim):
-    # test dim.value!='' should be enough, but dim scatratio has a value
     if sdim.axis=='' :
+        # Case of non-spatial dims. Singleton only have a 'value' (except Scatratio has a lot (in DR01.00.21))
         return sdim.value!= '' and len(sdim.value.strip().split(" ")) == 1
     else:
-        # Case of space sdimension singletons
+        # Case of space dimension singletons. Should a 'value' and no 'requested'
         return ((sdim.value!='') and (sdim.requested.strip()== '' ))
 
 def has_singleton(sv):
@@ -1580,8 +1595,11 @@ def process_singleton(sv,alias,lset,pingvars,
             else:
                 bounds_value=""
             #
+            name=sdim.out_name
+            # These dimensions are shared by some variables with another sdim with same out_name :
+            if sdim.label in [ "typec3pft", "typec4pft" ] : name=sdim.label
             scalar_def='<scalar id="%s" name="%s" standard_name="%s" long_name="%s"%s%s%s%s />'%\
-                   (scalar_id,sdim.out_name,sdim.stdname,sdim.title,value,bounds_value,axis,unit)
+                   (scalar_id,name,sdim.stdname,sdim.title,value,bounds_value,axis,unit)
             scalar_defs[scalar_id]=scalar_def
             if printout:
                 print "process_singleton : ","adding scalar %s"%scalar_def
@@ -1589,7 +1607,7 @@ def process_singleton(sv,alias,lset,pingvars,
             # Create a grid with added (or changed) scalar
             glabel=further_grid_id+"_"+scalar_id
             further_grid_def=add_scalar_in_grid(further_grid_def,glabel,scalar_id,\
-                                                sdim.out_name,sdim.axis=="Z")
+                                                name,sdim.axis=="Z")
             if printout:
                 print "process_singleton : "," adding grid %s"%further_grid_def
             grid_defs[glabel]=further_grid_def
@@ -1599,7 +1617,8 @@ def process_singleton(sv,alias,lset,pingvars,
     if further_grid_def != input_grid_def :
         #  create derived_field through an Xios operation (apply all scalars at once)
         further_field_id=alias+"_"+further_grid_id.replace(input_grid_id+'_','')
-        field_def='<field id="%s" grid_ref="%s" operation="instant"> %s </field>'%\
+        # Must init operation and detect_missing when there is no field ref 
+        field_def='<field id="%s" grid_ref="%s" operation="instant" detect_missing_value="true"> %s </field>'%\
             (further_field_id,further_grid_id,alias)
         field_defs[further_field_id]=field_def
         if printout:
@@ -2381,7 +2400,7 @@ def add_scalar_in_grid(gridin_def,gridout_id,scalar_id,scalar_name,remove_axis):
     if re.search(expr,gridin_def) :
         return gridin_def
     pattern= '< *grid *([^> ]*) *id=["\']([^"\']*)["\'] *(.*)</ *grid *>'
-    replace=r'<grid \1 id="%s" \3<scalar scalar_ref="%s"/>  </grid>'%(gridout_id,scalar_id)
+    replace=r'<grid \1 id="%s" \3<scalar scalar_ref="%s" name="%s"/>  </grid>'%(gridout_id,scalar_id,scalar_name)
     (rep,count)=re.subn(pattern,replace,gridin_def.replace("\n",""))
     if count==0 : raise dr2xml_error("No way to add scalar '%s' in grid '%s'"%(scalar_id,gridin_def))
     #
@@ -2395,6 +2414,53 @@ def add_scalar_in_grid(gridin_def,gridout_id,scalar_id,scalar_name,remove_axis):
     return rep+"\n"
                                
     
+def change_axes_in_grid(grid_id, grid_defs,axis_defs,lset):
+    """
+    Create a new grid based on GRID_ID def by changing all its axis references to newly created 
+    axis which implement CMIP6 axis attributes
+    Works only on axes which id match the labels of DR dimensions (e.g. sdepth, landUSe ...)
+    Stores the definitions in GRID_DEFS and AXIS_DEFS
+    Returns the new grid_id
+    """
+    grid_def=get_grid_def(grid_id,grid_defs)
+    grid_el=ET.fromstring(grid_def)
+    output_grid_id=grid_id
+    for sub in grid_el :
+        #to_remove=[]
+        to_change=[]
+        if sub.tag=='axis' :
+            if 'axis_ref' not in sub.attrib :
+                raise dr2xml_error("Grid %s has an axis without axis_ref : %s"%(grid_id,grid_def))
+            axis_ref=sub.attrib['axisref']
+            if axis_ref in dq.inx.uid : # Assume this actually is a dimension
+                dim=dq.inx.uid[axis_ref]
+                if not (dim.altLabel=='plev') : # pressure axes are dealt with elsewhere
+                    axis_id=create_axis_from_dim(dim,lset,axis_defs)
+                    # cannot use ET library which does not guarantee the ordering of axes
+                    #sub_changed=ET.from_string(axis_defs[axis_id])
+                    #to_remove.append(sub)
+                    #grid_el.insert(sub_changed)
+                    to_change.append((axis_ref,axis_id))
+                    output_grid_id+="_"+dim.label
+    if len(to_remove) == 0 : return grid_id
+    for old,new in to_change :
+        #grid_el.remove(r)
+        grid_def=re.sub("< *axis[^>]*axis_ref= *.%s. *[^>]*>"%old,
+                        '<axis axis_ref="%s"/>'%new, grid_def)
+    grid_el.attrib['id']=output_grid_id
+    #grid_defs[output_grid_id]=ET.tostring(grid_el)
+    grid_defs[output_grid_id]=grid_def
+    return output_grid_id
+            
+def create_axis_from_dim(dim,lset,axis_defs):
+    """
+    Create an axis definition bu transaltin all DR dimension attributes to XIos 
+    constructs generating CMIP6 requested attributes
+    """
+    rep='<axis id="%s%s" axis_ref="%s"'%(lset['prefix'],dim.label,dim.label)
+    rep+=' standard_name="%s"'%(dim.standard_name)
+    rep+=' long_name="%s"'%(dim.title)
+
 
 def change_domain_in_grid(domain_id,grid_defs,lset,ping_alias=None,src_grid_id=None,\
                           turn_into_axis=False,printout=False):
@@ -3168,16 +3234,6 @@ def create_standard_domain(resol,ni,nj):
     #    '</domain>  '
 
     
-
-
-def build_axis_definitions():
-    """ 
-    Build a dict of axis definitions 
-    """
-    for g in dq.coll['grids'].items :
-        pass
-
-
 def ping_alias(svar,lset,pingvars,error_on_fail=False):
     # dans le pingfile, grace a la gestion des interpolations
     # verticales, on n'attend pas forcement les alias complets des
