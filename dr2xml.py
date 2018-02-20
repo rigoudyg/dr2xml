@@ -1471,12 +1471,15 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
     # is an expr, set in ping for the ping variable of that field, and which 
     # involves time operation (using @)
     #--------------------------------------------------------------------
-    if operation == 'average' and last_grid_id != grid_id_in_ping  :
-        if not idHasExprWithAt(alias,context_index) : 
-            rep+='\t\t@%s\n'%last_field_id
+    if operation == 'average':
+        if last_grid_id != grid_id_in_ping  :
+            if not idHasExprWithAt(alias,context_index) : 
+                rep+='\t\t@%s\n'%last_field_id
+            else :
+                print "Warning: Cannot optimise (i.e. average before remap)"+\
+                    "for field %s which got an expr with @"%alias
         else :
-            print "Warning: Cannot optimise (i.e. average before remap)"+\
-                "for field %s which got an expr with @"%alias
+            rep+=' operation="%s"'%operation
     #
     #--------------------------------------------------------------------
     # Add Xios variables for creating NetCDF attributes matching CMIP6 specs
