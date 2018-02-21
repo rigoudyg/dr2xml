@@ -1359,12 +1359,11 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
     #--------------------------------------------------------------------
     #
     #if ssh[0:4] in ['XY-H','XY-P'] or ssh[0:3] == 'Y-P' or \
-    # must exclude COSP outputs which are already inetrpolated to height or P7 levels
-    if (ssh[0:4] == ['XY-P'] and ssh != ['XY-P7']) \
-       or ssh[0:3] == 'Y-P' or \
+    # must exclude COSP outputs which are already interpolated to height or P7 levels 
+    if (ssh[0:4] == 'XY-P' and ssh != ['XY-P7']) or \
+       ssh[0:3] == 'Y-P' or \
        ((ssh[0:5]=='XY-na' or ssh[0:4]=='Y-na') and
         prefix+sv.label not in pingvars and sv.label_without_psuffix != sv.label ): #TBD check - last case is for singleton
-        if sv.label=='tsn' :print "for tsn, ssh=%s"%ssh
         last_grid_id,last_field_id= process_vertical_interpolation(\
              sv,alias, lset,pingvars,last_grid_id,field_defs,axis_defs,grid_defs,domain_defs,table)
 
