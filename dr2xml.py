@@ -1358,7 +1358,10 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
     # Handle vertical interpolation, both XY-any and Y-P outputs
     #--------------------------------------------------------------------
     #
-    if ssh[0:4] in ['XY-H','XY-P'] or ssh[0:3] == 'Y-P' or \
+    #if ssh[0:4] in ['XY-H','XY-P'] or ssh[0:3] == 'Y-P' or \
+    # must exclude COSP outputs which are already inetrpolated to height or P7 levels
+    if (ssh[0:4] == ['XY-P'] and ssh != ['XY-P7']) \
+       or ssh[0:3] == 'Y-P' or \
        ((ssh[0:5]=='XY-na' or ssh[0:4]=='Y-na') and
         prefix+sv.label not in pingvars and sv.label_without_psuffix != sv.label ): #TBD check - last case is for singleton
         if sv.label=='tsn' :print "for tsn, ssh=%s"%ssh
