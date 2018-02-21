@@ -1436,7 +1436,6 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
     else : gref=""
     rep='  <field field_ref="%s" name="%s" %s '% (last_field_id,sv.label,gref)
     #
-    if operation != 'once' : rep+=' freq_op="%s"'% Cmip6Freq2XiosFreq[sv.frequency]
     # 
     #--------------------------------------------------------------------
     # Add offset if operation=instant for some specific variables defined in lab_settings
@@ -1472,15 +1471,19 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
     # is an expr, set in ping for the ping variable of that field, and which 
     # involves time operation (using @)
     #--------------------------------------------------------------------
+    if operation == 'once' : freq_op=""
+    else : freq_op='freq_op="%s"'% Cmip6Freq2XiosFreq[sv.frequency]
+    #
+    rep+=' operation="%s"'%operation
     if operation == 'average':
         if last_grid_id != grid_id_in_ping  :
             if not idHasExprWithAt(alias,context_index) : 
-                rep+='>\n \t\t@%s\n'%last_field_id
+                rep+=' %s>\n\t\t@%s\n'%(freq_op,last_field_id)
             else :
                 print "Warning: Cannot optimise (i.e. average before remap)"+\
                     "for field %s which got an expr with @"%alias
         else :
-            rep+=' operation="%s">\n'%operation
+            rep+='>\n'
     else :
         rep+='>\n'
     #
@@ -1626,7 +1629,7 @@ def process_singleton(sv,alias,lset,pingvars,
         #  create derived_field through an Xios operation (apply all scalars at once)
         further_field_id=alias+"_"+further_grid_id.replace(input_grid_id+'_','')
         # Must init operation and detect_missing when there is no field ref 
-        field_def='<field id="%s" grid_ref="%s" operation="instant" detect_missing_value="true"> %s </field>'%\
+        field_def='<field id="%s" grid_ref="%s" operation="instant" detect_missing_value="true" default_value="1.e+20"> %s </field>'%\
             (further_field_id,further_grid_id,alias)
         field_defs[further_field_id]=field_def
         if printout:
