@@ -1487,6 +1487,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
             else :
                 print "Warning: Cannot optimise (i.e. average before remap)"+\
                     "for field %s which got an expr with @"%alias
+                rep+='>\n'
         else :
             rep+='>\n'
     else :
