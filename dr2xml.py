@@ -52,7 +52,7 @@ import dreq
 # End of pre-requisites
 ####################################
 
-version="0.97"
+version="0.99"
 print "* dr2xml version: ", version
 
 conventions="CF-1.7 CMIP-6.2" 
