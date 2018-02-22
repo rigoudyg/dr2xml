@@ -337,9 +337,17 @@ example_lab_and_model_settings={
     # For a few dimensions with free label values (i.e. vegtype and soilpools),
     # if your model does not provide label values to Xios, you must give it
     # in the same order as in the data array. (works if do_normalize_axes=True)
-    # BE CAREFUL to provide exactly the right number of labels
+    # This also allows to tell the true data order sent by model
     'label_dimensions' : { 'vegtype'   : 'veg1 veg2 veg3 veg4 veg5 veg6' ,
-                           'soilpools' : 'fast medium slow', }
+                           'soilpools' : 'fast medium slow',
+                           'basin' : 'global_ocean atlantic_arctic_ocean indian_pacific_ocean '},
+
+    # If your workflow is able to rename files in order that end date
+    # in filenames ultimately matches simulation end_date (even when
+    # you change the latter in the course of the simulation), you may set
+    # next toggle to False [ and can then provide enddate=None as
+    # argument to generate_file_defs()]. Default value is True
+    'dr2xml_manages_enddate' : True ,
     
 }
 
@@ -1111,24 +1119,27 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
             out.write(' split_start_offset="%s" ' %offset_begin)
         if offset_end is not False  :
             out.write(' split_end_offset="%s" '%offset_end)
-        # Try to get enddate for the CMOR variable from the DR
-        lastyear=None
-        if sv.cmvar is not None :
-            lastyear=endyear_for_CMORvar(dq,sv.cmvar,expid,year,lset)
-        #print "lastyear=",lastyear," enddate=",enddate
-        if lastyear is None or lastyear >= int(enddate[0:4]) :
-            # Use run end date as the latest possible date
-            # enddate must be 20140101 , rather than 20131231
-            endyear=enddate[0:4]
-            endmonth=enddate[4:6]
-            endday=enddate[6:8]
-        else:
-            # Use requestItems-based end date as the latest possible date when it is earlier than run end date
-            print "split_last_date year %d derived from DR for variable %s in table %s"%(lastyear,sv.label,table)
-            endyear="%04s"%(lastyear+1)
-            endmonth="01"
-            endday="01"
-        out.write(' split_last_date="%s-%s-%s 00:00:00" '%(endyear,endmonth,endday))
+        if lset.get('dr2xml_manages_enddate',True) :
+            # If not wishing to possibly extend simulation end date, or if 
+            # let Xios handle the end_date for each file, based on split_freq
+            # Try to get enddate for the CMOR variable from the DR
+            lastyear=None
+            if sv.cmvar is not None :
+                lastyear=endyear_for_CMORvar(dq,sv.cmvar,expid,year,lset)
+                #print "lastyear=",lastyear," enddate=",enddate
+            if lastyear is None or lastyear >= int(enddate[0:4]) :
+                # Use run end date as the latest possible date
+                # enddate must be 20140101 , rather than 20131231
+                endyear=enddate[0:4]
+                endmonth=enddate[4:6]
+                endday=enddate[6:8]
+            else:
+                # Use requestItems-based end date as the latest possible date when it is earlier than run end date
+                print "split_last_date year %d derived from DR for variable %s in table %s"%(lastyear,sv.label,table)
+                endyear="%04s"%(lastyear+1)
+                endmonth="01"
+                endday="01"
+            out.write(' split_last_date="%s-%s-%s 00:00:00" '%(endyear,endmonth,endday))
     #
     #out.write('timeseries="exclusive" >\n')
     out.write(' time_units="days" time_counter_name="time"')
