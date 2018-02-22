@@ -239,7 +239,6 @@ example_lab_and_model_settings={
     'orphan_variables' : {
         'trip'    : ['dgw', 'drivw', 'fCLandToOcean', 'qgwr', 'rivi', 'rivo', 'waterDpth', 'wtd'],
     },
-    'vars_OK' : dict(),
     # A per-variable dict of comments valid for all simulations
     'comments'     : {
         'rld' : 'nothing special about this variable'
@@ -320,9 +319,6 @@ example_lab_and_model_settings={
     # You may add a series of NetCDF attributes in all files for this simulation
     "non_standard_attributes" : { "model_minor_version" : "6.1.0" },
 
-    # If you use some early version of Xios such as r1428, set this to False
-    "xios_has_type_in_scalar_attributes" : False,
-    
     # If some grid is not defined in xml but by API, and is referenced by a
     # field which is considered by the DR as having a singleton dimension, then :
     #  1) it must be a grid which has only a domain
@@ -332,10 +328,19 @@ example_lab_and_model_settings={
     "simple_domain_grid_regexp" : ("(.*)_grid$",1),
 
     # Should axes / dimensions be CMIP6-normalized ? (default to True)
-    # This applies to scalar dimensions and to that list :  effectRadIc landUse 
-    # snowband yant dbze location oline sza5 icesheet siline soilpools basin 
-    # ygre iceband xgre effectRadLi site typewetla scatratio spectband tau vegtype xant 
+    # This will apply to scalar, non-spatial dimensions; i.e. for DR01.00.21  :
+    # effectRadIc landUse snowband yant dbze location oline sza5 icesheet 
+    # siline soilpools basin  ygre iceband xgre effectRadLi site typewetla
+    # scatratio spectband tau vegtype xant 
     'do_normalize_axes' : True,
+
+    # For a few dimensions with free label values (i.e. vegtype and soilpools),
+    # if your model does not provide label values to Xios, you must give it
+    # in the same order as in the data array. (works if do_normalize_axes=True)
+    # BE CAREFUL to provide exactly the right number of labels
+    'label_dimensions' : { 'vegtype'   : 'veg1 veg2 veg3 veg4 veg5 veg6' ,
+                           'soilpools' : 'fast medium slow', }
+    
 }
 
 
@@ -1360,7 +1365,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
     #
     #if ssh[0:4] in ['XY-H','XY-P'] or ssh[0:3] == 'Y-P' or \
     # must exclude COSP outputs which are already interpolated to height or P7 levels 
-    if (ssh[0:4] == 'XY-P' and ssh != ['XY-P7']) or \
+    if (ssh[0:4] == 'XY-P' and ssh != 'XY-P7') or \
        ssh[0:3] == 'Y-P' or \
        ((ssh[0:5]=='XY-na' or ssh[0:4]=='Y-na') and
         prefix+sv.label not in pingvars and sv.label_without_psuffix != sv.label ): #TBD check - last case is for singleton
@@ -1485,7 +1490,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
         else :
             rep+='>\n'
     else :
-        rep+='>\n'
+        rep+=' %s>\n'%(freq_op)
     #
     #--------------------------------------------------------------------
     # Add Xios variables for creating NetCDF attributes matching CMIP6 specs
@@ -1586,22 +1591,21 @@ def process_singleton(sv,alias,lset,pingvars,
             scalar_id="Scal"+sdim.label 
             if sdim.units =='' : unit=''
             else  : unit=' unit="%s"'%sdim.units
-            types={'double':' prec="8"', 'character':' type="char"'}
-            value=types[sdim.type]+" "+'value="%s"'%sdim.value
-            if "xios_dont_have_type_in_scalar_attributes" in lset :
-                dont_use_type=lset["xios_dont_have_type_in_scalar_attributes"]
+            #
+            if sdim.type=='character' :
+                value='label="%s"'%sdim.label
             else:
-                dont_use_type=True
-            if dont_use_type and sdim.type=='character' : value=''
+                value='value="%s"'%sdim.value
+                types={'double':' prec="8"','float':' prec="4"', 'integer':' prec="2"'}
+                value=types[sdim.type]+" "+'value="%s"'%sdim.value
             if sdim.axis!='' :
                 # Space axis, probably Z
                 axis=' axis_type="%s"'%(sdim.axis)
-                if dont_use_type is False:
-                    axis+=' positive="%s"'%(sdim.positive)
+                if sdim.positive : axis+=' positive="%s"'%(sdim.positive)
             else: axis=""
             if sdim.bounds=="yes":
                 bounds=sdim.boundsValues.split()
-                bounds_value=' bounds_value="(0,1)[ %s %s ]" bounds_value_name="%s_bounds"'%\
+                bounds_value=' bounds="(0,1)[ %s %s ]" bounds_name="%s_bounds"'%\
                     (bounds[0],bounds[1],sdim.out_name)
             else:
                 bounds_value=""
@@ -1609,8 +1613,12 @@ def process_singleton(sv,alias,lset,pingvars,
             name=sdim.out_name
             # These dimensions are shared by some variables with another sdim with same out_name :
             if sdim.label in [ "typec3pft", "typec4pft" ] : name=sdim.label
-            scalar_def='<scalar id="%s" name="%s" standard_name="%s" long_name="%s"%s%s%s%s />'%\
-                   (scalar_id,name,sdim.stdname,sdim.title,value,bounds_value,axis,unit)
+            #
+            stdname='standard_name="%s"'%sdim.stdname
+            if sdim.label=="typewetla" : stdname=""
+            #
+            scalar_def='<scalar id="%s" name="%s" %s long_name="%s"%s%s%s%s />'%\
+                   (scalar_id,name,stdname,sdim.title,value,bounds_value,axis,unit)
             scalar_defs[scalar_id]=scalar_def
             if printout:
                 print "process_singleton : ","adding scalar %s"%scalar_def
@@ -2370,7 +2378,7 @@ def create_axis_def(sdim,lset,axis_defs,field_defs):
         # Create and store a definition for time-sampled field for the vertical coordinate
         vert_frequency=lset["vertical_interpolation_sample_freq"]
         coordname_sampled=coordname_with_op+"_sampled_"+vert_frequency # e.g. CMIP6_pfull_instant_sampled_3h
-        rep+='\n\t<interpolate_axis type="polynomial" order="1"'
+        rep+='<interpolate_axis type="polynomial" order="1"'
         rep+=' coordinate="%s"/>\n\t</axis>'%coordname_sampled
         axis_defs[sdim.label]=rep
         coorddef='<field id="%-25s field_ref="%-25s freq_op="%-10s detect_missing_value="true"> @%s</field>'\
@@ -2425,6 +2433,7 @@ def add_scalar_in_grid(gridin_def,gridout_id,scalar_id,scalar_name,remove_axis):
     return rep+"\n"
                                
     
+
 def change_axes_in_grid(grid_id, grid_defs,axis_defs,lset):
     """
     Create a new grid based on GRID_ID def by changing all its axis references to newly created 
@@ -2436,47 +2445,89 @@ def change_axes_in_grid(grid_id, grid_defs,axis_defs,lset):
     grid_def=get_grid_def(grid_id,grid_defs)
     grid_el=ET.fromstring(grid_def)
     output_grid_id=grid_id
+    axes_to_change=[]
+    #print "in change_axis for %s "%(grid_id)
     for sub in grid_el :
-        #to_remove=[]
-        to_change=[]
         if sub.tag=='axis' :
             if 'axis_ref' not in sub.attrib :
-                raise dr2xml_error("Grid %s has an axis without axis_ref : %s"%(grid_id,grid_def))
-            axis_ref=sub.attrib['axisref']
-            if axis_ref in dq.inx.uid : # Assume this actually is a dimension
-                dim=dq.inx.uid[axis_ref]
-                if not (dim.altLabel=='plev') : # pressure axes are dealt with elsewhere
-                    axis_id=create_axis_from_dim(dim,lset,axis_defs)
+                # Definitely don't want to change an unnamed axis. Such an axis is
+                # generated by vertical interpolation
+                continue
+                #raise dr2xml_error("Grid %s has an axis without axis_ref : %s"%(grid_id,grid_def))
+            axis_ref=sub.attrib['axis_ref']
+            alt_axis_ref=axis_ref.replace('axis_','') # For some toy xmls
+            dim_id='dim:%s'%alt_axis_ref
+            #print "in change_axis for %s %s"%(grid_id,dim_id)
+            if dim_id in dq.inx.uid : # This should be a dimension !
+                dim=dq.inx.uid[dim_id]
+                # We have to process only non-spatial dimensions which are not scalars
+                if dim.axis=='' and (dim.value=='' or dim.label=="scatratio") :
+                    axis_id,axis_name=create_axis_from_dim(dim,axis_ref,axis_defs,lset)
                     # cannot use ET library which does not guarantee the ordering of axes
-                    #sub_changed=ET.from_string(axis_defs[axis_id])
-                    #to_remove.append(sub)
-                    #grid_el.insert(sub_changed)
-                    to_change.append((axis_ref,axis_id))
+                    axes_to_change.append((axis_ref,axis_id,axis_name))
                     output_grid_id+="_"+dim.label
-    if len(to_remove) == 0 : return grid_id
-    for old,new in to_change :
-        #grid_el.remove(r)
+    if len(axes_to_change) == 0 : return grid_id
+    for old,new,name in axes_to_change :
         grid_def=re.sub("< *axis[^>]*axis_ref= *.%s. *[^>]*>"%old,
-                        '<axis axis_ref="%s"/>'%new, grid_def)
-    grid_el.attrib['id']=output_grid_id
-    #grid_defs[output_grid_id]=ET.tostring(grid_el)
+                        '<axis axis_ref="%s" name="%s" />'%(new,name), grid_def)
+    grid_def=re.sub("< *grid([^>]*)id= *.%s.( *[^>]*)>"%grid_id,
+                        r'<grid\1id="%s"\2>'%output_grid_id, grid_def)
     grid_defs[output_grid_id]=grid_def
     return output_grid_id
             
-def create_axis_from_dim(dim,lset,axis_defs):
+def create_axis_from_dim(dim,axis_ref,axis_defs,lset):
     """
-    Create an axis definition bu transaltin all DR dimension attributes to XIos 
+    Create an axis definition by translating all DR dimension attributes to XIos 
     constructs generating CMIP6 requested attributes
     """
-    rep='<axis id="%s%s" axis_ref="%s"'%(lset['prefix'],dim.label,dim.label)
-    rep+=' standard_name="%s"'%(dim.standard_name)
+    axis_id="DRaxis_"+dim.label
+    if dim.axis!="" :
+        raise dr2xml_error('Not tuned for dimensions like %s which have "axis" set'%dim.label)
+    axis_name=dim.altLabel
+    if axis_id in axis_defs : return axis_id,axis_name
+    rep='<axis id="%s" name="%s" axis_ref="%s"'%(axis_id,axis_name,axis_ref)
+    if type(dim.standardName)==type(""):
+        rep+=' standard_name="%s"'%(dim.standardName)
     rep+=' long_name="%s"'%(dim.title)
+    #
+    if dim.type=="double": rep+=' prec="8"'
+    elif dim.type in [ "integer", "int" ]: rep+=' prec="2"'
+    elif dim.type=="float": rep+=' prec="4"'
+    #
+    if dim.units != '' : 
+        rep+=' unit="%s"'%dim.units
+    if True: # Should we put values/labels
+        if dim.type!="character" :
+            if dim.requested!="": 
+                nb=len(dim.requested.split())
+                rep+=' value="(0,%d)[ '%nb + dim.requested + ' ]"'
+            if  type(dim.boundsRequested)==type([]) :
+                vals=[ " %s"%v for v in dim.boundsRequested ]
+                valsr=reduce(lambda x,y : x+y, vals)
+                rep+=' bounds="(0,1)(0,%d)[ '%(nb-1) + valsr +' ]"'
+        else:
+            rep+=' dim_name="sector" '
+            if dim.label in lset.get('label_dimensions',[]):
+                # maybe for vegtype soilpools icesheet
+                req=lset.get('label_dimensions')[dim.label]
+            else:
+                # landUse oline siline basin 
+                req=dim.requested.replace(', ',' ').replace(',',' ')
+            req=req.replace(', ',' ').replace(',',' ')
+            length=len(req.split())
+            strings=" "
+            for s in req.split() : strings+="'%s' "%s
+            if length > 0 : rep+='label="(0,%d)[ %s ]"'%(length-1,strings)
+    rep+="/>"
+    axis_defs[axis_id]=rep
+    print "new DR_axis :  %s "%rep
+    return axis_id,axis_name
 
 
 def change_domain_in_grid(domain_id,grid_defs,lset,ping_alias=None,src_grid_id=None,\
                           turn_into_axis=False,printout=False):
     """ 
-    Provided with a grid id SRC_GRID_ID or alternatively a variable name (ALIAS),
+    Provided with a grid id SRC_GRID_ID or alertnatively a variable name (ALIAS),
     (SRC_GRID_STRING) 
      - creates ans stores a grid_definition where the domain_id has been changed to DOMAIN_ID
     -  returns its id, which is 
