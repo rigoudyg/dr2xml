@@ -1550,7 +1550,8 @@ def is_singleton(sdim):
         return sdim.value!= '' and len(sdim.value.strip().split(" ")) == 1
     else:
         # Case of space dimension singletons. Should a 'value' and no 'requested'
-        return ((sdim.value!='') and (sdim.requested.strip()== '' ))
+        return ((sdim.value!='') and (sdim.requested.strip()== '' )) \
+            or (sdim.label=="typewetla") # The latter is a bug in DR01.00.21 : typewetla has no value tehre
 
 def has_singleton(sv):
     rep=any([ is_singleton(sv.sdims[k]) for k in sv.sdims ])
@@ -1616,8 +1617,13 @@ def process_singleton(sv,alias,lset,pingvars,
             if sdim.label in [ "typec3pft", "typec4pft" ] : name="pfttype"
             #
             stdname='standard_name="%s"'%sdim.stdname
-            if sdim.label=="typewetla" : stdname=""
+            if sdim.label=="typewetla" :
+                stdname=""
+                value=' value="wetland"'
             #
+            #SSSS
+            #bounds_value="" ; axis="" ; value=""
+            
             scalar_def='<scalar id="%s" name="%s" %s long_name="%s"%s%s%s%s />'%\
                    (scalar_id,name,stdname,sdim.title,value,bounds_value,axis,unit)
             scalar_defs[scalar_id]=scalar_def
