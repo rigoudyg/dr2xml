@@ -1594,9 +1594,9 @@ def process_singleton(sv,alias,lset,pingvars,
             else  : unit=' unit="%s"'%sdim.units
             #
             if sdim.type=='character' :
-                value='label="%s"'%sdim.label
+                value=' label="%s"'%sdim.label
             else:
-                value='value="%s"'%sdim.value
+                value=' value="%s"'%sdim.value
                 types={'double':' prec="8"','float':' prec="4"', 'integer':' prec="2"'}
                 value=types[sdim.type]+" "+'value="%s"'%sdim.value
             if sdim.axis!='' :
@@ -1612,8 +1612,8 @@ def process_singleton(sv,alias,lset,pingvars,
                 bounds_value=""
             #
             name=sdim.out_name
-            # These dimensions are shared by some variables with another sdim with same out_name :
-            if sdim.label in [ "typec3pft", "typec4pft" ] : name=sdim.label
+            # These dimensions are shared by some variables with another sdim with same out_name ('type'):
+            if sdim.label in [ "typec3pft", "typec4pft" ] : name="pfttype"
             #
             stdname='standard_name="%s"'%sdim.stdname
             if sdim.label=="typewetla" : stdname=""
@@ -2518,7 +2518,7 @@ def create_axis_from_dim(dim,axis_ref,axis_defs,lset):
             length=len(req.split())
             strings=" "
             for s in req.split() : strings+="'%s' "%s
-            if length > 0 : rep+='label="(0,%d)[ %s ]"'%(length-1,strings)
+            if length > 0 : rep+=' label="(0,%d)[ %s ]"'%(length-1,strings)
     rep+="/>"
     axis_defs[axis_id]=rep
     print "new DR_axis :  %s "%rep
