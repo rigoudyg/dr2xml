@@ -113,12 +113,13 @@ def field_size(svar, mcfg):
     soil_nblev=mcfg['nls']
     oce_nblev=mcfg['nlo']
     oce_grid_size=mcfg['nho']
+    # TBD : dimension sizes below should be derived from DR query
     nb_cosp_sites=129 
-    nb_curtain_sites=1000 # TBD : better estimate of 'curtain' size
     nb_lidar_temp=40
     nb_parasol_refl=5
     nb_isccp_tau=7
     nb_isccp_pc=7
+    nb_curtain_sites=1000 
     #
     siz=0
     s=svar.spatial_shp
@@ -190,6 +191,9 @@ def field_size(svar, mcfg):
     elif ( s == "na-na" ): #Global mean/constant
         siz=1
 
+    if siz==0 :
+        raise dr2xml_grids_error("Cannot compute field_size for var %s"%(svar.label))
+
     return siz
 
 def split_frequency_for_variable(svar, lset, grid, mcfg,context,printout=False):
@@ -239,7 +243,7 @@ def split_frequency_for_variable(svar, lset, grid, mcfg,context,printout=False):
                         "of data in %g for frequency %s, var %s, table %s"%\
                         (max_size,freq,svar.label,svar.mipTable)))
     else:
-      print "Warning: field size is 0, cannot compute split frequency."
+      raise dr2xml_grids_error("Warning: field_size returns 0 for var %s, cannot compute split frequency."%(svar.label))
        
                 
 def timesteps_per_freq_and_duration(freq,nbdays,sampling_tstep):

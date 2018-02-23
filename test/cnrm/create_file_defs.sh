@@ -29,7 +29,7 @@ cvspath=$root/CMIP6_CVs # Path for CMIP6_CV
 dr2xmlpath=${altdr2xmlpath:-$root/dr2pub}
 DRpath=$root/01.00.21/dreqPy
 #
-#CVtag=$(cd $cvspath ; git log --oneline | head -n 1 | cut -d\  -f 1)
+CVtag=cv=$(cd $cvspath ; git describe HEAD ) 
 export PYTHONPATH=$dr2xmlpath:$DRpath:$PYTHONPATH
 #
 # Identify which ping_files are used (according to $(pwd)/iodef.xml)
@@ -74,7 +74,7 @@ cat >create_file_defs.tmp.py  <<-EOF
 	                       dummies    ="$dummies",
 	                       dirname    ="./",
 	                       prefix     ="$ncdir",
-                               attributes =[ ("EXPID","$EXPID") ]
+                               attributes =[ ("EXPID","$EXPID") , ("CMIP6_CV_version", "$CVtag") ]
                                )
 	#if not ok : sys.exit(1)
 	EOF

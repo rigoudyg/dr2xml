@@ -105,6 +105,7 @@ global_rls=None
 # Next variable is used to circumvent an Xios 1270 shortcoming. Xios
 # should read that value in the datafile. Actually, it did, in some
 # earlier version ...
+axis_count=0
 
 """ An example/template  of settings for a lab and a model"""
 example_lab_and_model_settings={
@@ -1617,13 +1618,8 @@ def process_singleton(sv,alias,lset,pingvars,
             if sdim.label in [ "typec3pft", "typec4pft" ] : name="pfttype"
             #
             stdname='standard_name="%s"'%sdim.stdname
-            if sdim.label=="typewetla" :
-                stdname=""
-                value=' value="wetland"'
+            if sdim.label=="typewetla" : stdname=""
             #
-            #SSSS
-            #bounds_value="" ; axis="" ; value=""
-            
             scalar_def='<scalar id="%s" name="%s" %s long_name="%s"%s%s%s%s />'%\
                    (scalar_id,name,stdname,sdim.title,value,bounds_value,axis,unit)
             scalar_defs[scalar_id]=scalar_def
@@ -2449,6 +2445,7 @@ def change_axes_in_grid(grid_id, grid_defs,axis_defs,lset):
     Stores the definitions in GRID_DEFS and AXIS_DEFS
     Returns the new grid_id
     """
+    global axis_count
     grid_def=get_grid_def(grid_id,grid_defs)
     grid_el=ET.fromstring(grid_def)
     output_grid_id=grid_id
@@ -2475,8 +2472,9 @@ def change_axes_in_grid(grid_id, grid_defs,axis_defs,lset):
                     output_grid_id+="_"+dim.label
     if len(axes_to_change) == 0 : return grid_id
     for old,new,name in axes_to_change :
+        axis_count+=1
         grid_def=re.sub("< *axis[^>]*axis_ref= *.%s. *[^>]*>"%old,
-                        '<axis axis_ref="%s" name="%s" />'%(new,name), grid_def)
+                        '<axis axis_ref="%s" name="%s" id="ref_to_%s_%d_CHECK_DECLARED_SIZE"/>'%(new,name,new,axis_count), grid_def)
     grid_def=re.sub("< *grid([^>]*)id= *.%s.( *[^>]*)>"%grid_id,
                         r'<grid\1id="%s"\2>'%output_grid_id, grid_def)
     grid_defs[output_grid_id]=grid_def
@@ -2511,7 +2509,7 @@ def create_axis_from_dim(dim,axis_ref,axis_defs,lset):
             if  type(dim.boundsRequested)==type([]) :
                 vals=[ " %s"%v for v in dim.boundsRequested ]
                 valsr=reduce(lambda x,y : x+y, vals)
-                rep+=' bounds="(0,1)(0,%d)[ '%(nb-1) + valsr +' ]"'
+                rep+=' bounds="(0,1)x(0,%d)[ '%(nb-1) + valsr +' ]"'
         else:
             rep+=' dim_name="sector" '
             if dim.label in lset.get('label_dimensions',[]):
