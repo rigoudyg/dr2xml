@@ -59,7 +59,7 @@ conventions="CF-1.7 CMIP-6.2"
 # The current code should comply with this version of spec doc at
 # https://docs.google.com/document/d/1h0r8RZr_f3-8egBMMh7aqLwy3snpD6_MrDz1q8n5XUk/edit
 CMIP6_conventions_version="v6.2.4"
-print "CMIP6 conventions version: "+CMIP6_conventions_version
+print "* CMIP6 conventions version: "+CMIP6_conventions_version
 
 import json
  
@@ -325,22 +325,44 @@ example_lab_and_model_settings={
     #  1) it must be a grid which has only a domain
     #  2) the domain name must be extractable from the grid_id using a regexp
     #     and a group number
-    # For CNRM we use  a pattern that returns full id except for a '_grid' suffix 
-    "simple_domain_grid_regexp" : ("(.*)_grid$",1),
+    # Example : using a pattern that returns full id except for a '_grid' suffix 
+    # "simple_domain_grid_regexp" : ("(.*)_grid$",1),
 
-    # Should axes / dimensions be CMIP6-normalized ? (default to True)
-    # This will apply to scalar, non-spatial dimensions; i.e. for DR01.00.21  :
-    # effectRadIc landUse snowband yant dbze location oline sza5 icesheet 
-    # siline soilpools basin  ygre iceband xgre effectRadLi site typewetla
-    # scatratio spectband tau vegtype xant 
-    'do_normalize_axes' : True,
-
-    # For a few dimensions with free label values (i.e. vegtype and soilpools),
-    # if your model does not provide label values to Xios, you must give it
-    # in the same order as in the data array. (works if do_normalize_axes=True)
-    # BE CAREFUL to provide exactly the right number of labels
-    'label_dimensions' : { 'vegtype'   : 'veg1 veg2 veg3 veg4 veg5 veg6' ,
-                           'soilpools' : 'fast medium slow', }
+    # If your model has some axis which does not have all its attributes
+    # as in DR, and you want dr2xml to fix that it, give here
+    # the correspondence from model axis id to DR dim/grid id.
+    # For label dimensions you should provide the list of labels, ordered
+    # as in your model, as second element of a pair
+    # Label-type axes will be processed even if not quoted
+    # Scalar dimensions are not concerned by this feature
+    'non_standard_axes' : {
+        # Space dimensions - Arpege :
+        'klev' : 'alevel' , 'klev_half' : 'alevel' ,
+    
+        # COSP
+        'effectRadIc'  :'effectRadIc' , 'effectRadL'   :'effectRadL',
+        'sza5'         :'sza5' ,
+        'dbze'         :'dbze' ,
+        
+        # Land dimensions
+        'soilpools'    :('soilpools', 'fast medium slow'),
+        #'landUse'      :'landUse' ,
+        'vegtype'      : ('vegtype','Bare_soil Rock Permanent_snow Temperate_broad-leaved_decidus Boreal_needleaf_evergreen Tropical_broad-leaved_evergreen C3_crop C4_crop Irrigated_crop C3_grass C4_grass Wetland Tropical_broad-leaved_decidus Temperate_broad-leaved_evergreen Temperate_needleaf_evergreen Boreal_broad-leaved_decidus Boreal_needleaf_decidus Tundra_grass Shrub') ,
+        
+        # Space dimensions - Nemo
+        'depthw' : 'olevel','deptht':'olevel','depthu':'olevel','depthv':'olevel',
+        'j-mean' : 'latitude',
+    
+        # Ocean transects and basins
+        #'oline'        :'oline' ,
+        #'siline'       :'siline',
+        'basin '       :('basin','global_ocean atlantic_arctic_ocean indian_pacific_ocean dummy dummy'),
+    
+        # toy_cnrmcm, for oce (Note : for atm, there is adhoc code)
+        'axis_oce' :'olevel' , 'lat_oce' : 'latitude', 'transect_axis' : 'oline',
+        'basin_oce_3' :('basin','global_ocean atlantic_arctic_ocean indian_pacific_ocean dummy dummy'),
+    },
+   
     
 }
 
@@ -954,6 +976,7 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     #
     # process only variables in pingvars
     if not alias_ping in pingvars:
+        #print "+++ =>>>>>>>>>>>", alias_ping, " ", sv.label
         table=sv.mipTable
         if table not in skipped_vars_per_table: skipped_vars_per_table[table]=[]
         skipped_vars_per_table[table].append(sv.label+"("+str(sv.Priority)+")")
@@ -1431,7 +1454,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
     # Change axes in grid to CMIP6-compliant ones
     #--------------------------------------------------------------------
     #
-    if lset.get('do_normalize_axes',True): 
+    if len( lset.get('non_standard_axes',dict() ) )  > 0 :
         last_grid_id=change_axes_in_grid(last_grid_id, grid_defs,axis_defs,lset)
     #
     #--------------------------------------------------------------------
@@ -1988,6 +2011,8 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
     #
     global print_wrv
     print_wrv=lset.get("print_variables",True)
+    cmvk="CMIP6_CV_version"
+    if cmvk in  attributes : print "* %s: %s"%(cmvk,attributes[cmvk])
     #--------------------------------------------------------------------
     # Parse XIOS settings file for the context
     #--------------------------------------------------------------------
@@ -2451,45 +2476,82 @@ def change_axes_in_grid(grid_id, grid_defs,axis_defs,lset):
     output_grid_id=grid_id
     axes_to_change=[]
     #print "in change_axis for %s "%(grid_id)
+
+    # Get settings info about axes normalization  
+    aliases=lset.get('non_standard_axes',dict())
+
+    # Add cases where dim name 'sector' should be used,if needed
+    # sectors = dims which have type charcter and are not scalar
+    if 'sectors' in lset : sectors=lset['sectors']
+    else:
+        sectors=[ dim.label for dim in dq.coll['grids'].items if \
+                  dim.type=='character' and dim.value=='' ]
+    if 'typewetla'in sectors : sectors.remove('typewetla') # Error in DR 01.00.21
+    #print "sectors=",sectors
+    for sector in sectors: 
+        found=False
+        for aid in aliases :
+            if aliases[aid]==sector :
+                found=True ; continue
+            if type(aliases[aid])==type(()) and aliases[aid][0]==sector :
+                found=True ; continue
+        if not found :
+            #print "\nadding sector : %s"%sector
+            aliases[sector]=sector
+
     for sub in grid_el :
         if sub.tag=='axis' :
+            #print "checking grid %s"%grid_def
             if 'axis_ref' not in sub.attrib :
                 # Definitely don't want to change an unnamed axis. Such an axis is
                 # generated by vertical interpolation
-                continue
-                #raise dr2xml_error("Grid %s has an axis without axis_ref : %s"%(grid_id,grid_def))
+                if any ([ ssub.tag=='interpolate_axis' for ssub in sub ]) : continue
+                else:
+                    raise dr2xml_error("Grid %s has an axis without axis_ref : %s"%(grid_id,grid_def))
             axis_ref=sub.attrib['axis_ref']
-            alt_axis_ref=axis_ref.replace('axis_','') # For some toy xmls
-            dim_id='dim:%s'%alt_axis_ref
+            #
+                    
+            # Just quit if axis doesn't have to be processed
+            if axis_ref not in aliases : continue
+            #
+            dr_axis_id=aliases[axis_ref] ; alt_labels=None
+            if type(dr_axis_id)==type(()) : dr_axis_id,alt_labels=dr_axis_id
+            dr_axis_id=dr_axis_id.replace('axis_','') # For toy_cnrmcm, atmosphere part
+            #print ">>> axis_ref=%s, dr_axis_id=%s,alt_labels=%s"%(axis_ref,dr_axis_id,alt_labels),aliases[axis_ref]
+            #
+            dim_id='dim:%s'%dr_axis_id
             #print "in change_axis for %s %s"%(grid_id,dim_id)
-            if dim_id in dq.inx.uid : # This should be a dimension !
-                dim=dq.inx.uid[dim_id]
-                # We have to process only non-spatial dimensions which are not scalars
-                if dim.axis=='' and (dim.value=='' or dim.label=="scatratio") :
-                    axis_id,axis_name=create_axis_from_dim(dim,axis_ref,axis_defs,lset)
-                    # cannot use ET library which does not guarantee the ordering of axes
-                    axes_to_change.append((axis_ref,axis_id,axis_name))
-                    output_grid_id+="_"+dim.label
+            if dim_id not in dq.inx.uid : # This should be a dimension !
+                raise dr2xml_error("Value %s in 'non_standard_axes' is not a DR dimension id"%dr_axis_id)
+            dim=dq.inx.uid[dim_id]
+            # We don't process scalars here
+            if dim.value=='' or dim.label=="scatratio" :
+                axis_id,axis_name=create_axis_from_dim(dim,alt_labels,axis_ref,axis_defs,lset)
+                # cannot use ET library which does not guarantee the ordering of axes
+                axes_to_change.append((axis_ref,axis_id,axis_name))
+                output_grid_id+="_"+dim.label
+            else:
+                raise dr2xml_error("Dimension %s is scalar and shouldn't be quoted in 'non_standard_axes'"%dr_axis_id)
     if len(axes_to_change) == 0 : return grid_id
     for old,new,name in axes_to_change :
         axis_count+=1
         grid_def=re.sub("< *axis[^>]*axis_ref= *.%s. *[^>]*>"%old,
-                        '<axis axis_ref="%s" name="%s" id="ref_to_%s_%d_CHECK_DECLARED_SIZE"/>'%(new,name,new,axis_count), grid_def)
+                        '<axis axis_ref="%s" name="%s" id="ref_to_%s_%d"/>'%(new,name,new,axis_count), grid_def)
     grid_def=re.sub("< *grid([^>]*)id= *.%s.( *[^>]*)>"%grid_id,
                         r'<grid\1id="%s"\2>'%output_grid_id, grid_def)
     grid_defs[output_grid_id]=grid_def
     return output_grid_id
             
-def create_axis_from_dim(dim,axis_ref,axis_defs,lset):
+def create_axis_from_dim(dim,labels,axis_ref,axis_defs,lset):
     """
     Create an axis definition by translating all DR dimension attributes to XIos 
     constructs generating CMIP6 requested attributes
     """
-    axis_id="DRaxis_"+dim.label
-    if dim.axis!="" :
-        raise dr2xml_error('Not tuned for dimensions like %s which have "axis" set'%dim.label)
-    axis_name=dim.altLabel
+    axis_id="DR_"+dim.label
+    if dim.type=="character" : axis_name="sector"
+    else : axis_name=dim.altLabel
     if axis_id in axis_defs : return axis_id,axis_name
+    
     rep='<axis id="%s" name="%s" axis_ref="%s"'%(axis_id,axis_name,axis_ref)
     if type(dim.standardName)==type(""):
         rep+=' standard_name="%s"'%(dim.standardName)
@@ -2501,28 +2563,22 @@ def create_axis_from_dim(dim,axis_ref,axis_defs,lset):
     #
     if dim.units != '' : 
         rep+=' unit="%s"'%dim.units
-    if True: # Should we put values/labels
-        if dim.type!="character" :
-            if dim.requested!="": 
-                nb=len(dim.requested.split())
-                rep+=' value="(0,%d)[ '%nb + dim.requested + ' ]"'
-            if  type(dim.boundsRequested)==type([]) :
-                vals=[ " %s"%v for v in dim.boundsRequested ]
-                valsr=reduce(lambda x,y : x+y, vals)
-                rep+=' bounds="(0,1)x(0,%d)[ '%(nb-1) + valsr +' ]"'
-        else:
-            rep+=' dim_name="sector" '
-            if dim.label in lset.get('label_dimensions',[]):
-                # maybe for vegtype soilpools icesheet
-                req=lset.get('label_dimensions')[dim.label]
-            else:
-                # landUse oline siline basin 
-                req=dim.requested.replace(', ',' ').replace(',',' ')
-            req=req.replace(', ',' ').replace(',',' ')
-            length=len(req.split())
-            strings=" "
-            for s in req.split() : strings+="'%s' "%s
-            if length > 0 : rep+=' label="(0,%d)[ %s ]"'%(length-1,strings)
+    if dim.type!="character" :
+        if dim.requested!="": 
+            nb=len(dim.requested.split())
+            rep+=' value="(0,%d)[ '%nb + dim.requested + ' ]"'
+        if  type(dim.boundsRequested)==type([]) :
+            vals=[ " %s"%v for v in dim.boundsRequested ]
+            valsr=reduce(lambda x,y : x+y, vals)
+            rep+=' bounds="(0,1)x(0,%d)[ '%(nb-1) + valsr +' ]"'
+    else:
+        rep+=' dim_name="%s" '%dim.altLabel
+        if labels is None : labels=dim.requested
+        labels=labels.replace(', ',' ').replace(',',' ')
+        length=len(labels.split())
+        strings=" "
+        for s in labels.split() : strings+="%s "%s
+        if length > 0 : rep+=' label="(0,%d)[ %s ]"'%(length-1,strings)
     rep+="/>"
     axis_defs[axis_id]=rep
     print "new DR_axis :  %s "%rep
@@ -3312,13 +3368,16 @@ def ping_alias(svar,lset,pingvars,error_on_fail=False):
     
     pref=lset["ping_variables_prefix"]
     if svar.label_non_ambiguous:
+        #print "+++ non ambiguous", svar.label
         alias_ping=pref+svar.label_non_ambiguous # e.g. 'CMIP6_tsn_land' and not 'CMIP6_tsn'
     else:
+        #print "+++ ambiguous", svar.label
         # Ping file may provide the variable on the relevant pressure level - e.g. CMIP6_rv850
         alias_ping=pref+svar.label 
         if alias_ping not in pingvars :
             # if not, ping_alias is supposed to be without a pressure level suffix
             alias_ping=pref+svar.label_without_psuffix # e.g. 'CMIP6_hus' and not 'CMIP6_hus7h'
+        #print "+++ alias_ping = ", pref, svar.label_without_psuffix, alias_ping
     if alias_ping not in pingvars :
         if error_on_fail :
             raise dr2xml_error("Cannot find an alias in ping for variable %s"%svar.label)
