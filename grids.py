@@ -160,6 +160,9 @@ def field_size(svar, mcfg):
     elif ( s == "XY-S" ): #Global field on soil levels
         siz=soil_nblev*atm_grid_size
     
+    elif ( s == "XY-SN" ): #TBD : restore correct size for fields on snow levels (was supposed to be size 1, for tsnl)
+        siz=atm_grid_size
+    
     elif ( s == "XY-O" ): #Global ocean field on model levels
         siz=oce_nblev*oce_grid_size
 
