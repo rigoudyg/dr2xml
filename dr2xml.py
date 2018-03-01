@@ -2478,6 +2478,7 @@ def create_axis_def(sdim,lset,axis_defs,field_defs):
         # Axis is subset of another, write it as a zoom_axis
         rep='<axis id="%s"'%sdim.zoom_label
         rep+=' axis_ref="%s" name="plev">'%sdim.is_zoom_of
+        rep+=' axis_type="%s"'%sdim.axis
         rep+='\t<zoom_axis index="(0,%g)[ '%(n_glo-1)
         values=re.sub(r'.*\[ *(.*) *\].*',r'\1',axis_defs[sdim.is_zoom_of])
         values=values.split("\n")[0]
