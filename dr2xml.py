@@ -371,8 +371,26 @@ example_lab_and_model_settings={
     # course and to complement the output files accordingly, by
     # managing the 'end date' part in filenames. You can then set next
     # setting to False (default is True)
-    'dr2xml_manages_enddate' : True   
+    'dr2xml_manages_enddate' : True,
+
+    # You may provide some variables already horizontally remapped 
+    # to some grid (i.e. Xios domain) in external files. The varname in file 
+    # must match the referenced id in pingfile. Tested only for fixed fields 
+    'fx_from_file_vars' : {
+        "areacella" : { "complete" :
+                        { "LR" : "areacella_LR",
+                          "HR" : "areacella_HR",}}},
     
+    # The path of the directory which, at run time, contains the root XML file (iodef.xml)
+    'path_to_parse': "./",
+
+    # Should we allow for duplicate vars : two vars with same
+    # frequency, shape and realm , which differ only by the table.
+    # In DR01.00.21, this actually applies to very few fields (ps-Aermon,
+    # tas-ImonAnt, areacellg-IfxAnt). Defaults to True
+    'allow_duplicates' : True,
+
+
 }
 
 
@@ -558,7 +576,7 @@ def year_in_ri(ri,experiment,lset,sset,year,debug=False):
         return True,None
         
     
-def year_in_ri_tslice(ri,experiment,lset,year,debug=False):
+def year_in_ri_tslice(ri,experiment,sset,lset,year,debug=False):
     # Returns a couple : relevant, endyear.
     # RELEVANT is True if requestItem RI applies to
     #   YEAR, either implicitly or explicitly (e.g. timeslice)
@@ -733,8 +751,14 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
             if sp.label[0:2]=="S-" : gr='cfsites'
             if (v,gr) not in miprl_vars_grids :
                 miprl_vars_grids.append((v,gr))
+            #else:
+            #    print "Duplicate pair var/grid : ",cmvar.label,cmvar.mipTable,gr
     if printout :
         print 'Number of (CMOR variable, grid) pairs for these requestLinks is :%s'%len(miprl_vars_grids)
+
+    #for (v,g) in miprl_vars_grids :
+    #    if dq.inx.uid[v].label=="ps" : print "step 1 : ps in table",dq.inx.uid[v].mipTable,g
+
     #
     inctab=lset.get("included_tables",[])
     exctab=lset.get("excluded_tables",[])
@@ -931,7 +955,7 @@ def freq2datefmt(in_freq,operation,lset):
     return datefmt,offset,offset_end
 
 def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
-                        field_defs,axis_defs,grid_defs,domain_defs,scalar_defs,
+                        field_defs,axis_defs,grid_defs,domain_defs,scalar_defs,file_defs,
                         dummies,skipped_vars_per_table,actually_written_vars,
                         prefix,context,grid,pingvars=None,enddate=None,
                         attributes=[],debug=[]) :
@@ -1352,6 +1376,10 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
                "ahp_bnds": "vertical coordinate formula term: ap(k+1/2)",
                "bh": "vertical coordinate formula term: b(k)",
                "bh_bnds" : "vertical coordinate formula term: b(k+1/2)"  }
+    externs=lset.get('fx_from_file',[])
+    if sv.label in externs :
+	# add entry for auxilliary ghost variable ap, in order to activate the output file
+	names={"ap": "vertical coordinate formula term: ap(k)"} 
     for tab in names :
         out.write('\t<field field_ref="%s%s" name="%s" long_name="%s" operation="once" prec="8" />\n'%\
                   (lset["ping_variables_prefix"],tab,tab.replace('h',''),names[tab]))
@@ -1486,8 +1514,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
     # Change axes in grid to CMIP6-compliant ones
     #--------------------------------------------------------------------
     #
-    if len( lset.get('non_standard_axes',dict() ) )  > 0 :
-        last_grid_id=change_axes_in_grid(last_grid_id, grid_defs,axis_defs,lset)
+    last_grid_id=change_axes_in_grid(last_grid_id, grid_defs,axis_defs,lset)
     #
     #--------------------------------------------------------------------
     # Create <field> construct to be inserted in a file_def, which includes re-griding
@@ -2074,8 +2101,12 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
                 if ovar.label==svar.label and ovar.spatial_shp==svar.spatial_shp \
                    and ovar.frequency==svar.frequency and ovar.cell_methods==svar.cell_methods:
                     add=False
-            if add :
+            # Settings may allow for duplicate var in two tables. In DR01.00.21, this actually
+            # applies to very few fields (ps-Aermon, tas-ImonAnt, areacellg)
+            if lset.get('allow_duplicates',True) or add : 
                 svars_per_realm[realm].append(svar)
+            else :
+                print "Not adding duplicate %s (from %s) for realm %s"%(svar.label,svar.mipTable,realm)
         else:
             old=svars_per_realm[realm][0]
             print "Duplicate svar %s %s %s %s"%(old.label,old.grid,svar.label,svar.grid)
@@ -2176,15 +2207,16 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
                     sys.exit(1)
             all_pingvars.extend(pingvars)
         pingvars=all_pingvars
-
+    #
+    field_defs=dict()
+    axis_defs=dict()
+    grid_defs=dict()
+    file_defs=dict()
+    scalar_defs=dict()
     #
     #--------------------------------------------------------------------
     # Build all plev union axis and grids
     #--------------------------------------------------------------------
-    field_defs=dict()
-    axis_defs=dict()
-    grid_defs=dict()
-    scalar_defs=dict()
     if lset['use_union_zoom']:
         svars_full_list=[]
         for svl in svars_per_table.values(): svars_full_list.extend(svl)
@@ -2211,32 +2243,28 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
         out.write('<!-- Simulation settings : \n')        
         for s,v in sorted(sset.iteritems()) : out.write(' %s : %s\n'%(s,v))
         out.write('-->\n')
-        out.write('<!-- Year processed is  %d --> \n'%year)
+        out.write('<!-- Year processed is  %s --> \n'%year)
         #
         domain_defs=dict()
         #for table in ['day'] :    
-        out.write('\n<file_definition type="one_file" enabled="true" > \n')
+        out.write('\n<file_definition type="one_file" enabled="true" par_access="collective"> \n')
         foo,sourcetype=get_source_id_and_type(sset,lset)
         for table in sorted(svars_per_table.keys()) :
             count=dict()
             for svar in sorted(svars_per_table[table],key = lambda x: (x.label + "_" + table)):
-                if True : #realm_is_processed(svar.modeling_realm,sourcetype) : <- realms are note reliable enough in DR
-                    if svar.label not in count :
-                        count[svar.label]=svar
-                        for grid in svar.grids :
-                            write_xios_file_def(svar,year,table, lset,sset,out,cvs_path,
-                                field_defs,axis_defs,grid_defs,domain_defs,scalar_defs,dummies,
-                                skipped_vars_per_table,actually_written_vars,
-                                prefix,context,grid,pingvars,enddate,attributes)
-                    else :
-                        pass
-                        # print "Duplicate var in %s : %s %s %s / %s %s"%(
-                        #     table, svar.label, `svar.temporal_shp`, svar.mipTable,\
-                        #     `count[svar.label].temporal_shp`,count[svar.label].mipTable)
-                else:
-                    print "Var %s of realm %s is not processed by source-type %s"%\
-                        (svar.label,svar.modeling_realm,sourcetype)
+                if svar.label not in count :
+                    count[svar.label]=svar
+                    for grid in svar.grids :
+                        a,hgrid,b,c,d=lset['grids'][grid_choice][context]
+                        check_for_file_input(svar,lset,hgrid,pingvars,field_defs,
+                                             grid_defs,domain_defs,file_defs)
+                        write_xios_file_def(svar,year,table, lset,sset,out,cvs_path,
+                                            field_defs,axis_defs,grid_defs,domain_defs,scalar_defs,file_defs,
+                                            dummies, skipped_vars_per_table,actually_written_vars,
+                                            prefix,context,grid,pingvars,enddate,attributes)
+                        
         if cfsites_grid_id in grid_defs : out.write(cfsites_input_filedef())
+        for file_def in file_defs : out.write(file_defs[file_def])
         out.write('\n</file_definition> \n')
         #
         #--------------------------------------------------------------------
@@ -3563,6 +3591,58 @@ def get_grid_def(grid_id,grid_defs,lset=None):
                 raise dr2xml_error("Cannot guess a grid def for %s"%grid_id)
                 grid_def=None
     return grid_def
+
+def check_for_file_input(sv,lset,hgrid,pingvars,field_defs,grid_defs,\
+                         domain_defs,file_defs, printout=False):
+    """
+    
+
+    Add an entry in pingvars
+    """
+    externs=lset.get('fx_from_file',[])
+    #print "/// sv.label=%s"%sv.label, sv.label in externs ,"hgrid=",hgrid
+    if sv.label in externs and \
+       any( [ d==hgrid for d in externs[sv.label] ]) :
+        pingvar=lset['ping_variables_prefix']+sv.label
+        pingvars.append(pingvar)
+        # Add a grid made of domain hgrid only
+        grid_id="grid_"+hgrid
+        grid_def='<grid id="%s"><domain domain_ref="%s"/></grid>\n'%(grid_id,hgrid)
+        #grid_defs[grid_id]=grid_def
+        #context_index[grid_id]=ET.fromstring(grid_def)
+
+        # Add a grid and domain for reading the file (don't use grid above to avoid reampping)
+        file_domain_id="remapped_%s_file_domain"%sv.label
+        domain_defs[file_domain_id]='<domain id="%s" type="rectilinear" >'%file_domain_id +\
+            '<generate_rectilinear_domain/></domain>'
+        file_grid_id="remapped_%s_file_grid"%sv.label
+        grid_defs[file_grid_id]='<grid id="%s"><domain domain_ref="%s"/></grid>\n'%(file_grid_id,file_domain_id)
+        if printout : print domain_defs[file_domain_id]
+        if printout : print grid_defs[file_grid_id]
+        
+        # Create xml for reading the variable
+        filename=externs[sv.label][hgrid][grid_choice]
+        file_id="remapped_%s_file"%sv.label
+        field_in_file_id="%s_%s"%(sv.label,hgrid)
+        #field_in_file_id=sv.label
+        file_def='\n<file id="%s" name="%s" mode="read" output_freq="1y" enabled="true" >'%\
+              (         file_id,filename)
+        file_def+= '\n\t<field id="%s" name="%s" operation="instant" grid_ref="%s"/>'%\
+              ( field_in_file_id,        sv.label,                     file_grid_id)
+        file_def+='\n</file>'
+        file_defs[file_id]=file_def
+        if printout : print file_defs[file_id]
+        #
+        #field_def='<field id="%s" grid_ref="%s" operation="instant" >%s</field>'%\
+        field_def='<field id="%s" grid_ref="%s" field_ref="%s" operation="instant" />'%\
+            (             pingvar,grid_id,       field_in_file_id)
+        field_defs[field_in_file_id]=field_def
+        context_index[pingvar]=ET.fromstring(field_def)
+
+        if printout : print field_defs[field_in_file_id]
+        #
+
+       
 
 class dr2xml_error(Exception):
     def __init__(self, valeur):
