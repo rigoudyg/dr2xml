@@ -15,6 +15,7 @@ Cmip6Freq2XiosFreq={
     "subhrPt"   :"1ts",
     #
     "1hr"       :"1h",
+    "1hrPt"     :"1h",
     "hr"        :"1h",
     "3hr"       :"3h",
     "3hrPt"     :"3h",
