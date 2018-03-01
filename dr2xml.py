@@ -1564,17 +1564,26 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
     else : freq_op='freq_op="%s"'% Cmip6Freq2XiosFreq[sv.frequency]
     #
     rep+=' operation="%s"'%operation
-    if operation == 'average':
-        if last_grid_id != grid_id_in_ping  :
-            if not idHasExprWithAt(alias,context_index) : 
-                rep+=' %s>\n\t\t@%s\n'%(freq_op,last_field_id)
-            else :
-                print "Warning: Cannot optimise (i.e. average before remap)"+\
-                    "for field %s which got an expr with @"%alias
-                rep+='>\n'
-        else :
+    if not idHasExprWithAt(alias,context_index) : 
+        # either no expr, or expr without an @  ->
+        # may use @ for optimizing operations order (average before re-gridding)
+        if last_grid_id != grid_id_in_ping  and operation=='average':
+            # do use @ for optimizing :
+            rep+=' %s>\n\t\t@%s\n'%(freq_op,last_field_id)
+        else:
+            # Just basic syntax, no @; do not set a freq_op, because it is useless here and
+            # could pollute the value of 'interval_operation' set by Xios, which is just fine
             rep+='>\n'
-    else :
+    else: # field has an expr, with an @
+        # Cannot optimize
+        if operation == 'instant':
+            # must reset expr (if any) if instant, for using arithm. operation defined in ping.
+            # this allows that the type of operation applied is really 'instant', and not the one
+            # that operands did inherit from ping_file
+            rep+=' expr="_reset_"'
+        if (operation=='average') :
+            warnings_for_optimisation.append(alias)
+        # must set freq_op (this souldn't be necessary, but is needed with Xios 1442)
         rep+=' %s>\n'%(freq_op)
     #
     #--------------------------------------------------------------------
