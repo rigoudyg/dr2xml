@@ -2329,6 +2329,7 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
 # SS - non : gros plus
 def print_SomeStats(context,svars_per_table,skipped_vars_per_table,actually_written_vars):
 
+  if False:
     #--------------------------------------------------------------------
     # Print Summary: list of  considered variables per table 
     # (i.e. not excuded_vars and not excluded_shapes)
@@ -2620,7 +2621,7 @@ def create_axis_from_dim(dim,labels,axis_ref,axis_defs,lset):
     Create an axis definition by translating all DR dimension attributes to XIos 
     constructs generating CMIP6 requested attributes
     """
-    axis_id="DR_"+dim.label
+    axis_id="DR_"+dim.label+"_"+axis_ref
     if dim.type=="character" : axis_name="sector"
     else : axis_name=dim.altLabel
     if axis_id in axis_defs : return axis_id,axis_name
