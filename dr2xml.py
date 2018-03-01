@@ -541,7 +541,7 @@ def RequestItem_applies_for_exp_and_year(ri,experiment,lset,sset,year=None,debug
 
 def year_in_ri(ri,experiment,lset,sset,year,debug=False):
     if 'tslice' in ri.__dict__ :
-        rep,endyear=year_in_ri_tslice(ri,experiment,lset,year,debug=debug)
+        rep,endyear=year_in_ri_tslice(ri,experiment,sset,lset,year,debug=debug)
         return rep,endyear
     try :
         ny=int(ri.nymax)
@@ -578,8 +578,14 @@ def year_in_ri_tslice(ri,experiment,lset,year,debug=False):
     if (debug) :
         print "tslice label/type is %s/%s for reqItem %s "%(tslice.label,tslice.type,ri.title)
     if tslice.type=="simpleRange" : # e.g. _slice_DAMIP20
-        relevant = (year >= tslice.start and year<=tslice.end)
-        endyear=tslice.end
+        if tslice.start < 1800 :
+        # to manage _slice_abrupt*
+            first_year=sset["branch_year_in_child"]
+            relevant = (year >= tslice.start + first_year - 1 and year <= tslice.end + first_year - 1)
+            endyear = first_year + tslice.end - 1
+        else :
+            relevant = (year >= tslice.start and year<=tslice.end)
+            endyear=tslice.end
     elif tslice.type=="sliceList": # e.g. _slice_DAMIP40
         for start in range(tslice.start,int(tslice.end-tslice.sliceLen+2),int(tslice.step)) :
             if year >= start and year < start+tslice.sliceLen :
