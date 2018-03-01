@@ -53,13 +53,14 @@ import dreq
 ####################################
 
 version="0.99"
-print "* dr2xml version: ", version
+print "\n",50*"*","\n*"
+print "* %29s"%"dr2xml version: ", version
 
 conventions="CF-1.7 CMIP-6.2" 
 # The current code should comply with this version of spec doc at
 # https://docs.google.com/document/d/1h0r8RZr_f3-8egBMMh7aqLwy3snpD6_MrDz1q8n5XUk/edit
 CMIP6_conventions_version="v6.2.4"
-print "* CMIP6 conventions version: "+CMIP6_conventions_version
+print "* %29s"%"CMIP6 conventions version: ",CMIP6_conventions_version
 
 import json
  
@@ -92,9 +93,11 @@ print_DR_errors=True
 print_multiple_grids=False
 
 dq = dreq.loadDreq()
-print "* CMIP6 Data Request version: ", dq.version
+print "* %29s"%"CMIP6 Data Request version: ", dq.version
+print "\n*\n",50*"*"
 
 cell_method_warnings=[]
+warnings_for_optimisation=[]
 sn_issues=dict()
 context_index=None
 
@@ -106,6 +109,7 @@ global_rls=None
 # should read that value in the datafile. Actually, it did, in some
 # earlier version ...
 axis_count=0
+
 
 """ An example/template  of settings for a lab and a model"""
 example_lab_and_model_settings={
@@ -1118,8 +1122,8 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     #--------------------------------------------------------------------
     # Compute XIOS split frequency
     #--------------------------------------------------------------------
-    grid=lset['grid_choice'][source_id]
-    split_freq=split_frequency_for_variable(sv, lset, grid, sc.mcfg, context)
+    resolution=lset['grid_choice'][source_id]
+    split_freq=split_frequency_for_variable(sv, lset, resolution, sc.mcfg, context)
     #
     #--------------------------------------------------------------------
     # Write XIOS file node:
@@ -1334,6 +1338,7 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
                   (lset["ping_variables_prefix"],tab,tab.replace('h',''),names[tab]))
     out.write('</file>\n\n')
     actually_written_vars.append((sv.label,sv.mipTable,sv.frequency,sv.Priority,sv.spatial_shp))
+    
 
 def wrv(name, value, num_type="string"):
     global print_wrv
@@ -1412,6 +1417,8 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
         last_field_id,last_grid_id= process_singleton(sv,last_field_id,lset,pingvars,
                       field_defs,grid_defs,scalar_defs,table)
     #
+    # TBD : handle explicitly the case of scalars (global means, shape na-na) : enforce <scalar name="sector" standard_name="region" label="global" >, or , better, remove the XIOS-generated scalar introduced by reduce_domain
+    #
     #--------------------------------------------------------------------
     # Handle zonal means
     #--------------------------------------------------------------------
@@ -1453,8 +1460,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
             pass
         else:
             if target_hgrid_id==cfsites_domain_id : add_cfsites_in_defs(grid_defs,domain_defs)
-            #print "changing domain to %s in %s"%(target_hgrid_id, last_grid_id)
-            # Apply DR required remapping, either to cfsites grid or to regular grid 
+            # Apply DR required remapping, either toward cfsites grid or a regular grid 
             last_grid_id=change_domain_in_grid(target_hgrid_id, grid_defs,lset,src_grid_id=last_grid_id)
     #
     #--------------------------------------------------------------------
@@ -1470,6 +1476,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
     #
     if last_grid_id != grid_id_in_ping  : gref='grid_ref="%s"'% last_grid_id
     else : gref=""
+  
     rep='  <field field_ref="%s" name="%s" %s '% (last_field_id,sv.label,gref)
     #
     # 
@@ -1807,7 +1814,7 @@ def create_output_grid(ssh, lset,grid_defs,domain_defs,target_hgrid_id,margs):
         pass
     elif ssh[0:3] == 'YB-'  : #basin zonal mean or section
         pass
-    elif ssh      == 'na-na'  : # TBD? global means or constants - spatial integration is not handled 
+    elif ssh      == 'na-na'  : # TBD ? global means or constants - spatial integration is not handled 
         pass 
     elif ssh      == 'na-A'  : # only used for rlu, rsd, rsu ... in Efx ????
         pass 
@@ -2024,7 +2031,9 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
     # Parse XIOS settings file for the context
     #--------------------------------------------------------------------
     global context_index
-    print "Reading context ",context
+    print "\n",50*"*","\n"
+    print "Processing context ",context
+    print "\n",50*"*","\n"
     context_index=init_context(context,lset.get("path_to_parse","./"),printout=False)
     if context_index is None : sys.exit(1)
     #
@@ -2066,7 +2075,7 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
         if realm in processed_realms : continue
         processed_realms.append(realm)
         excludedv=dict()
-        print "Processing realm '%s' of context '%s'"%(realm,context),context_realms
+        print "Processing realm '%s' of context '%s'"%(realm,context)
         #print 50*"_"
         excludedv=dict()
         if realm in svars_per_realm:
@@ -2135,13 +2144,12 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
                 pingvars=[ v for v in ping_refs if 'dummy' not in ping_refs[v] ]
                 if dummies=="forbid" :
                     if len(pingvars) != len(ping_refs) :
-                        print "They are still dummies in %s , while option is 'forbid' :"%pingfile,
                         for v in ping_refs :
                             if v not in pingvars : print v,
-                            print
-                            sys.exit(1)
+                        print
+                        raise dr2xml_error("They are still dummies in %s , while option is 'forbid' :"%pingfile)
                     else :
-                        pingvars=ping_refs
+                        pingvars=ping_refs.keys()
                 elif dummies=="skip" : pass
                 else:
                     print "Forbidden option for dummies : "+dummies
@@ -2219,7 +2227,7 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
         # Write all domain, axis, field defs needed for these file_defs
         out.write('<field_definition> \n')
         if lset.get("nemo_sources_management_policy_master_of_the_world",False) and context=='nemo':
-            out.write('<field_group freq_op="_reset_ freq_offset="_reset_" >\n')
+            out.write('<field_group freq_op="_reset_" freq_offset="_reset_" >\n')
         for obj in field_defs: out.write("\t"+field_defs[obj]+"\n")
         if lset.get("nemo_sources_management_policy_master_of_the_world",False) and context=='nemo':
             out.write('</field_group>\n')
@@ -2264,6 +2272,9 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
         warn[warning].add(label)
     print "\nWarnings about cell methods (with var list)"
     for w in warn  : print "\t",w," for vars : ",warn[w]
+    print "Warning for fields which cannot be optimised (i.e. average before remap) beause of an expr with @\n\t",
+    for w in warnings_for_optimisation  : print w.replace(lset['ping_variables_prefix'],""),
+    print
         
 
 # mpmoine_petitplus: nouvelle fonction print_SomeStats (plus d'info sur les skipped_vars, nbre de vars / (shape,freq) )
@@ -2283,6 +2294,7 @@ def print_SomeStats(context,svars_per_table,skipped_vars_per_table,actually_writ
         	print svar.label+"("+str(svar.Priority)+")",
     print
 
+  if True :
     #--------------------------------------------------------------------
     # Print Summary: list of skipped variables per table
     # (i.e. not in the ping_file)
@@ -2322,12 +2334,6 @@ def print_SomeStats(context,svars_per_table,skipped_vars_per_table,actually_writ
     			stats_out.update({freq:dic_freq})
 
     print "\n\nSome Statistics on actually written variables per frequency+shape..."
-    # for k1,v1 in stats_out.items():
-    # 	for k2,v2 in v1.items():
-    # 		nb=len(v2.values())
-    # 		print "\n\t* %d variables output at %s frequency with shape %s ---> "%(nb,k1,k2),
-    # 		for k3,v3 in v2.items(): print k3,"(",v3,"),",
-    # print
 
     #    ((sv.label,sv.table,sv.frequency,sv.Priority,sv.spatial_shp))
     dic=dict()
@@ -2415,6 +2421,7 @@ def create_axis_def(sdim,lset,axis_defs,field_defs):
         coordname_sampled=coordname_with_op+"_sampled_"+vert_frequency # e.g. CMIP6_pfull_instant_sampled_3h
         rep+='<interpolate_axis type="polynomial" order="1"'
         rep+=' coordinate="%s"/>\n\t</axis>'%coordname_sampled
+        # Store definition for the new axis
         axis_defs[sdim.label]=rep
         coorddef='<field id="%-25s field_ref="%-25s freq_op="%-10s detect_missing_value="true"> @%s</field>'\
             %(coordname_sampled+'"',coordname_with_op+'"', vert_frequency+'"',coordname)
@@ -2519,7 +2526,9 @@ def change_axes_in_grid(grid_id, grid_defs,axis_defs,lset):
             #
                     
             # Just quit if axis doesn't have to be processed
-            if axis_ref not in aliases : continue
+            if axis_ref not in aliases.keys() :
+                #print "for grid ",grid_id,"axis ",axis_ref, " is not in aliases"
+                continue
             #
             dr_axis_id=aliases[axis_ref] ; alt_labels=None
             if type(dr_axis_id)==type(()) : dr_axis_id,alt_labels=dr_axis_id
@@ -2583,12 +2592,13 @@ def create_axis_from_dim(dim,labels,axis_ref,axis_defs,lset):
         if labels is None : labels=dim.requested
         labels=labels.replace(', ',' ').replace(',',' ')
         length=len(labels.split())
+        #print 'labels=',labels.split()
         strings=" "
         for s in labels.split() : strings+="%s "%s
         if length > 0 : rep+=' label="(0,%d)[ %s ]"'%(length-1,strings)
     rep+="/>"
     axis_defs[axis_id]=rep
-    print "new DR_axis :  %s "%rep
+    #print "new DR_axis :  %s "%rep
     return axis_id,axis_name
 
 
@@ -2975,7 +2985,6 @@ def analyze_cell_time_method(cm,label,table,printout=False):
     #----------------------------------------------------------------------------------------------------------------
     # mpmoine_correction:analyze_cell_time_method: ajout du cas 'Maximum Hourly Rate'
     elif "time: mean within hours time: maximum over hours"  in cm: 
-        #[amn-tdnl]: Mean Diurnal Cycle
         cell_method_warnings.append(('Cannot yet compute maximum hourly rate',label,table))
         if printout: 
             print "TBD: Cannot yet compute maximum hourly rate for "+\

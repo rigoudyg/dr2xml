@@ -22,7 +22,6 @@ attributes['axis']=['axis_ref']
 #attributes['axis_definition']=[]  #attributes['domain_definition']=[]
 #attributes['grid_definition']=[]  #attributes['calendar']=[]
 
-# mpmoine_amelioration: ajout de l'argument 'path_parse' a la fonction read_src pour pouvoir lire les context.xml d'Arnaud
 def read_src(elt,path_parse,printout=False, level=0, dont_read=[]) :
     """
     Recursively reads the subfiles indicated by tag 'src' in childs of ELT
@@ -30,22 +29,16 @@ def read_src(elt,path_parse,printout=False, level=0, dont_read=[]) :
     childs=[]
     for child in elt :
         if 'src' in child.attrib :
-            # mpmoine_amelioration:read_src: ajout de path_parse pour acceder aux context_<X>.xml
             src=child.attrib['src']
             if src[0] != "/" :
-                if path_parse != "./" :
-                    filen=path_parse+"/"+src
-                else :
-                    filen=src
+                if path_parse != "./" : filen=path_parse+"/"+src
+                else : filen=src
             else:
                 filen=src
             skip=False
             for prefix in dont_read :
-                if os.path.basename(filen)[0:len(prefix)]==prefix :
-                    print "Skipping %s"%filen
-                    skip=True
+                if os.path.basename(filen)[0:len(prefix)]==prefix : skip=True
             if skip : continue
-            # mpmoine_correction: read_src: gestion du type de codage XML pour pouvoir lire les context.xml d'Arnaud
             if printout : print level*"\t"+"Reading %s"%filen
             et=ET.parse(filen).getroot()
             if printout :
@@ -210,13 +203,10 @@ def select_context(rootel,context_id):
             if 'id' in context.attrib and context.attrib['id']==context_id :
                 return context
 
-# mpmoine_amelioration: ajout de l'argument 'path_parse' a la fonction init_context
 def init_context(context_id,path_parse="./",printout=False):
-    # mpmoine_merge_dev2_v0.12:init_context: ajout de "./parse/" pour acceder a iodef.xml
     xmldef=path_parse+"iodef.xml"
     if printout: print "Parsing %s ..."%xmldef,
     rootel=ET.parse(xmldef).getroot()
-    # mpmoine_amelioration:init_context: ajout de l'argument 'path_parse' a la fonction read_src
     if printout: print "sourcing files  ...",
     read_src(rootel,path_parse,printout=printout,dont_read=["dr2xml_"])
     merge_sons(rootel,printout)
@@ -267,7 +257,7 @@ def idHasExprWithAt(field_id,index,printout=False) :
     """ 
     Returns True if field has an expr attribute with includes an @
     """
-    printout=True
+    #printout=True
     if field_id in index : 
         attrib=index[field_id].attrib
         if 'expr' in attrib :
