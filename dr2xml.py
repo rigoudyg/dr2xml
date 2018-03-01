@@ -3240,8 +3240,9 @@ def read_xml_elmt_or_attrib(filename, tag='field', attrib=None, printout=False) 
     """ 
     Returns a dict of objects tagged TAG in FILENAME, which 
     - keys are ids
-    - values are corresponding ET elements if 
-      attrib is None, otherwise elt attribute ATTRIB
+    - values depend on ATTRIB 
+          * if ATTRIB is None : object (elt)
+          * else : values of attribute ATTRIB  (None if field does not have attribute ATTRIB)
     Returns None if filename does not exist
     """
     #    
@@ -3254,10 +3255,10 @@ def read_xml_elmt_or_attrib(filename, tag='field', attrib=None, printout=False) 
         if defs :
             for field in defs :
                 if printout : print ".",
-                if attrib is None: 
-                    rep[field.attrib['id']]=field
-                else :
-                    rep[field.attrib['id']]=field.attrib[attrib]
+                key=field.attrib['id']
+                if attrib is None: value=field
+                else : value=field.attrib.get(attrib,None)
+                rep[key]=value
             if printout : print
             return rep
     else :
