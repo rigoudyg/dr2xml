@@ -1075,7 +1075,7 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     #
     with open(cvspath+project+"_experiment_id.json","r") as json_fp :
         CMIP6_CV_version_metadata=json.loads(json_fp.read())['version_metadata']
-        CMIP6_CV_latest_tag=CMIP6_CV_version_metadata['latest_tag_point']
+        CMIP6_CV_latest_tag=CMIP6_CV_version_metadata.get('latest_tag_point','no more value in CMIP6_CV')
     #
     with open(cvspath+project+"_experiment_id.json","r") as json_fp :
         CMIP6_experiments=json.loads(json_fp.read())['experiment_id']
