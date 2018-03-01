@@ -2485,17 +2485,19 @@ def create_axis_def(sdim,lset,axis_defs,field_defs):
         union_vals=values.strip(" ").split()
         union_vals_num=[float(v) for v in union_vals]
         for val in glo_list_num : rep+=' %g'%union_vals_num.index(val)
-        rep+=' ]"'
-        rep+=' axis_type="%s"/>'%sdim.axis
+        rep+=' ]/>"'
         rep+='</axis>'
+        # Store definition for the new axis
         axis_defs[sdim.zoom_label]=rep
-    # Store definition for the new axis
     return rep 
 
-def add_scalar_in_grid(gridin_def,gridout_id,scalar_id,scalar_name,remove_axis):
+def add_scalar_in_grid(gridin_def,gridout_id,scalar_id,scalar_name,remove_axis, change_scalar=True):
     """
     Returns a grid_definition with id GRIDOUT_ID from an input grid definition 
-    GRIDIN_DEF, by adding a reference to scalar SCALAR_ID, 
+    GRIDIN_DEF, by adding a reference to scalar SCALAR_ID 
+
+    If CHANGE_SCALAR is True and GRIDIN_DEF has an axis with an extract_axis child, 
+    remove it (because it is assumed to be a less well-defined proxy for the DR scalar
 
     If such a reference is already included in that grid definition, just return 
     input def
@@ -2509,6 +2511,12 @@ def add_scalar_in_grid(gridin_def,gridout_id,scalar_id,scalar_name,remove_axis):
     expr=format%scalar_id
     if re.search(expr,gridin_def) :
         return gridin_def
+    gridin_def=gridin_def.replace("\n","")
+    # TBD : in change_scalar : discard extract_axis only if really relevant (get the right axis)
+    # TBD : in change_scalar : preserve ordering of domains/axes...
+    if change_scalar :
+        extract_pattern="<scalar *>.*<extract_axis.*/> *</scalar *>"
+        gridin_def,count=re.subn(extract_pattern,"",gridin_def)
     pattern= '< *grid *([^> ]*) *id=["\']([^"\']*)["\'] *(.*)</ *grid *>'
     replace=r'<grid \1 id="%s" \3<scalar scalar_ref="%s" name="%s"/>  </grid>'%(gridout_id,scalar_id,scalar_name)
     (rep,count)=re.subn(pattern,replace,gridin_def.replace("\n",""))
