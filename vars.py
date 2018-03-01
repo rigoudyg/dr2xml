@@ -110,7 +110,8 @@ def read_homeVars_list(hmv_file,expid,mips,dq,path_extra_tables=None):
     homevars=[]
     extravars=[]
     extra_vars_per_table = dict()
-    for line in data[skip:]:  
+    for line in data[skip:]:
+        if line[0]=='#' : continue
         line_split=line.split(';')
         # get the Table full name 
         table=line_split[4].strip(' ')
@@ -158,7 +159,7 @@ def read_homeVars_list(hmv_file,expid,mips,dq,path_extra_tables=None):
                        var_found = var
                        break
                  if var_found is None :
-                     print " 'extra' variable %s not found in table %s"%(home_var.label, table)
+                     print "Warning: 'extra' variable %s not found in table %s"%(home_var.label, table)
                  else :
                      if home_var.mip == "ANY" or home_var.mip in mips :
                          if home_var.experiment!="ANY":
@@ -225,6 +226,8 @@ def read_extraTable(path,table,dq,printout=False):
     json_coordinate=path+"/"+mip_era+"_coordinate.json"
     if not os.path.exists(json_table): sys.exit("Abort: file for extra Table does not exist: "+json_table)
     tbl=table.split('_')[1]
+    dim_from_extra=dict()
+    dynamic_shapes=dict()
     with open(json_table,"r") as jt:
         json_tdata=jt.read()
         tdata=json.loads(json_tdata)
@@ -278,9 +281,13 @@ def read_extraTable(path,table,dq,printout=False):
             elif drdims[0:19]=='longitude|latitude|' :
                 # Allow the user to put any additional vertical dimension name 
                 # which syntax fits further tests, such as P8MINE
-                extra_var.spatial_shp='XY-'+drdims[19:]
-                print "Warning: spatial shape corresponding to ",drdims,"for variable",v["out_name"],\
-                      "in Table",table," not explicitly known by DR nor dr2xml, trying %s"%extra_var.spatial_shp
+                edim=drdims[19:]
+                extra_var.spatial_shp='XY-'+edim
+                if edim  not in dynamic_shapes : dynamic_shapes[edim]=dict()
+                if v["out_name"]  not in dynamic_shapes[edim] :
+                    dynamic_shapes[edim][v["out_name"]]=extra_var.spatial_shp
+                #print "Warning: spatial shape corresponding to ",drdims,"for variable",v["out_name"],\
+                #      "in Table",table," not explicitly known by DR nor dr2xml, trying %s"%extra_var.spatial_shp
             else:
                 # mpmoine_note: provisoire, on devrait toujours pouvoir associer une spatial shape a des dimensions.
                 # mpmoine_note: Je rencontre ce cas pour l'instant avec les tables Primavera ou 
@@ -311,13 +318,27 @@ def read_extraTable(path,table,dq,printout=False):
                         extra_sdim.requested =string_of_requested.rstrip(" ") # values of multi vertical levels
                         extra_sdim.value     =cdata["axis_entry"][d]["value"] # value of single vertical level
                     extra_var.sdims.update({extra_sdim.label:extra_sdim})
-                    print "Info: dimid corresponding to ",d,"for variable",v["out_name"],\
-                          "in Table",table," not found in DR => read it in extra coordinates Table: ", extra_sdim.stdname,extra_sdim.requested
+                    if True  :
+                        #print "Info: dimid corresponding to ",d,"for variable",v["out_name"],\
+                        #  "in Table",table," not found in DR => read it in extra coordinates Table: ", extra_sdim.stdname,extra_sdim.requested
+                        if d not in dim_from_extra : dim_from_extra[d]=dict()
+                        if v['out_name']  not in dim_from_extra : dim_from_extra[d][v['out_name']]=(extra_sdim.stdname,extra_sdim.requested)
             extra_var.label_without_psuffix=Remove_pSuffix(extra_var,multi_plev_suffixes,single_plev_suffixes,realms='atmos aerosol atmosChem')
                 
             extravars.append(extra_var)
-    if printout: 
-        print "Info: Number of variables in extra tables ",table,": ",len(extravars)
+    if True or printout:
+        print "For extra table ",table, " (which has %d variables): "%len(extravars)
+        print "\tVariables which dim was found in extra coordinates table:"
+        for d in dim_from_extra :
+            print "\t\t%20s : "%d,
+            for v in dim_from_extra[d] : print v,
+            print
+        print "\tDynamical XY-xxx spatial shapes (shapes not found in DR)"
+        for d in dynamic_shapes :
+            print "\t\t%20s : "%("XY-"+d),
+            for v in dynamic_shapes[d] : print v,
+            print
+        
     return extravars 
 
 def get_SpatialAndTemporal_Shapes(cmvar,dq):
