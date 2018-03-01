@@ -2153,6 +2153,7 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
         #print "pingfiles=",pingfiles
         for pingfile in pingfiles.split() :
             ping_refs=read_xml_elmt_or_attrib(pingfile, tag='field', attrib='field_ref')
+            #ping_refs=read_xml_elmt_or_attrib(pingfile, tag='field')
             if ping_refs is None :
                 print "Error: issue accessing pingfile "+pingfile
                 return
