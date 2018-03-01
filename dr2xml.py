@@ -1203,11 +1203,17 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
         wr(out,'title',description)
         wr(out,'experiment',experiment)
     # 
-    # TBD: check external_variables
+    # TBD : external_variables : improve logics
     # Let us yet hope that all tables but those with an 'O'
     # as first letter require areacella, and the others require areacello
     external_variables= "areacella" 
-    if table[0]=='O' or table[0:1]=='SI' : external_variables= "areacello" 
+    if table[0]=='O' or table[0:2]=='SI' : external_variables= "areacello"
+    if sv.label=="siconca" : external_variables= "areacella"
+    trip_orphans=[]
+    if 'trip' in lset.get('orphan_variables',[]) :
+        trip_orphans=lset['orphan_variables']['trip']
+    if sv.label in trip_orphans : external_variables= 'areacellr'
+    #
     if 'fx' in table : external_variables= "" 
     wr(out,'external_variables',external_variables)
     #
