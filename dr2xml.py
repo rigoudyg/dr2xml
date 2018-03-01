@@ -1696,7 +1696,7 @@ def process_singleton(sv,alias,lset,pingvars,
         #  create derived_field through an Xios operation (apply all scalars at once)
         further_field_id=alias+"_"+further_grid_id.replace(input_grid_id+'_','')
         # Must init operation and detect_missing when there is no field ref 
-        field_def='<field id="%s" grid_ref="%s" operation="instant" detect_missing_value="true" default_value="1.e+20"> %s </field>'%\
+        field_def='<field id="%s" grid_ref="%s" operation="instant" detect_missing_value="true" > %s </field>'%\
             (further_field_id,further_grid_id,alias)
         field_defs[further_field_id]=field_def
         if printout:
