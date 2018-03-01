@@ -392,6 +392,10 @@ example_simulation_settings={
     # If there is no configuration in lab_settings which matches you case, please rather
     # use next or next two entries : source_id and, if needed, source_type
     'configuration'   : 'AOGCM',
+
+    # For some experiments (e.g. concentration-driven historical in AESM config), the only way to 
+    # avoid producing useless fields is to explictly exclude variables (in addition to those in lab_settings)
+    'excluded_vars' : [],
     
     #'source_id'      : "CNRM-CM6-1", 
     #'source_type'    : "OGCM" ,# If the default source-type value for your source (from lab settings)
@@ -730,6 +734,9 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
     exctab=lset.get("excluded_tables",[])
     incvars=lset.get('included_vars',[])
     excvars=lset.get('excluded_vars',[])
+    excvars_for_expes=sset.get('excluded_vars',[])
+    excvars.extend(excvars_for_expes)
+    
     if sset :
         config=sset['configuration']
         if ('excluded_vars_per_config' in lset) and \
