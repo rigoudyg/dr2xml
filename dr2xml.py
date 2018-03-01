@@ -2552,7 +2552,12 @@ def change_axes_in_grid(grid_id, grid_defs,axis_defs,lset):
     Returns the new grid_id
     """
     global axis_count
-    grid_def=get_grid_def(grid_id,grid_defs)
+    try : 
+        grid_def=get_grid_def(grid_id,grid_defs)
+    except:
+        print "Cannot normalize axes in grid %s, because there is no axis_ref"%grid_id
+        print "Grid def is ; %s"%gir_defs[grid_id]
+        return
     grid_el=ET.fromstring(grid_def)
     output_grid_id=grid_id
     axes_to_change=[]
