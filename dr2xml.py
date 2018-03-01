@@ -1102,7 +1102,7 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
                 (c,experiment_id,`actual_components`)
     for c in actual_components :
         if c not in allowed_components and c not in required_components :
-            #ok=False # TBD : restore blocking on non-allowed components
+            ok=False #  restore blocking on non-allowed components
             print "Warning: Model component %s is present but not required nor allowed (%s)"%\
                 (c,`allowed_components` )
     if not ok : raise dr2xml_error("Issue with model components")
