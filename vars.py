@@ -101,16 +101,20 @@ def read_homeVars_list(hmv_file,expid,mips,dq,path_extra_tables=None):
     if hmv_file is None : return []
     # File structure: name of attributes to read, number of header line 
     home_attrs=['type','label','modeling_realm','frequency','mipTable','temporal_shp','spatial_shp','experiment','mip']
-    skip=3
-    if not os.path.exists(hmv_file): sys.exit("Abort: file for home variables does not exist: "+hmv_file)
-    # Read file
-    with open(hmv_file,"r") as fp:
-        data=fp.readlines()
+    data=[]
+    file_list=hmv_file.replace('  ',' ').split(' ')
+    for fil in file_list :
+        if fil.strip()=='': continue
+        if not os.path.exists(fil):
+            raise vars_error("Abort: file for home variables does not exist: %s"%fil)
+        # Read file
+        with open(fil,"r") as fp:
+            data.extend(fp.readlines())
     # Build list of home variables
     homevars=[]
     extravars=[]
     extra_vars_per_table = dict()
-    for line in data[skip:]:
+    for line in data:
         if line[0]=='#' : continue
         line_split=line.split(';')
         # get the Table full name 
