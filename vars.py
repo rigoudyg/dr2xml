@@ -464,12 +464,13 @@ def get_corresp_CMORvar(hmvar,dq):
             if same_shapes:
                 count+=1
                 cmvar_found=cmvar
-            else: 
-                print "Error: ",[hmvar.label,hmvar.mipTable],\
-                    "HOMEVar: Spatial and Temporal Shapes specified "\
-                    "DO NOT match CMORvar ones." \
-                    " -> Provided:",[hmvar.spatial_shp,hmvar.temporal_shp],\
-                    'Expected:',get_SpatialAndTemporal_Shapes(cmvar,dq)
+            else:
+                if not empty_table :
+                    print "Error: ",[hmvar.label,hmvar.mipTable],\
+                        "HOMEVar: Spatial and Temporal Shapes specified "\
+                        "DO NOT match CMORvar ones." \
+                        " -> Provided:",[hmvar.spatial_shp,hmvar.temporal_shp],\
+                        'Expected:',get_SpatialAndTemporal_Shapes(cmvar,dq)
     if count>=1: 
         # empty table means that the frequency is changed (but the variable exists in another frequency cmor table
         if empty_table : var_freq_asked = hmvar.frequency
