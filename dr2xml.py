@@ -390,7 +390,8 @@ example_lab_and_model_settings={
     # tas-ImonAnt, areacellg-IfxAnt). Defaults to True
     'allow_duplicates' : True,
 
-
+    # In order to identify which xml files generates a problem, you can use this flag
+    'debug_parsing' : False,
 }
 
 
@@ -2089,7 +2090,7 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
     print "\n",50*"*","\n"
     print "Processing context ",context
     print "\n",50*"*","\n"
-    context_index=init_context(context,lset.get("path_to_parse","./"),printout=False)
+    context_index=init_context(context,lset.get("path_to_parse","./"),printout=lset.get("debug_parsing",False))
     if context_index is None : sys.exit(1)
     #
     #--------------------------------------------------------------------
@@ -2226,7 +2227,7 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
     #--------------------------------------------------------------------
     # Build all plev union axis and grids
     #--------------------------------------------------------------------
-    if lset['use_union_zoom']:
+    if lset.get('use_union_zoom',False):
         svars_full_list=[]
         for svl in svars_per_table.values(): svars_full_list.extend(svl)
         create_xios_axis_and_grids_for_plevs_unions(svars_full_list,
@@ -2293,7 +2294,7 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
         out.write('\n<axis_definition> \n')
         out.write('<axis_group prec="8">\n')
         for obj in axis_defs.keys(): out.write("\t"+axis_defs[obj]+"\n")
-        if False and lset['use_union_zoom']:
+        if False and lset.get('use_union_zoom',False):
             for obj in union_axis_defs.keys(): out.write("\t"+union_axis_defs[obj]+"\n")
         out.write('</axis_group>\n')
         out.write('</axis_definition> \n')
@@ -2307,7 +2308,7 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
         #
         out.write('\n<grid_definition> \n')
         for obj in grid_defs.keys(): out.write("\t"+grid_defs[obj])
-        if False and lset['use_union_zoom']:
+        if False and lset.get('use_union_zoom',False):
             for obj in union_grid_defs.keys(): out.write("\t"+union_grid_defs[obj]+"\n")
         out.write('</grid_definition> \n')
         #
