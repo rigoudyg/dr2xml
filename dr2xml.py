@@ -1377,10 +1377,6 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
                "ahp_bnds": "vertical coordinate formula term: ap(k+1/2)",
                "bh": "vertical coordinate formula term: b(k)",
                "bh_bnds" : "vertical coordinate formula term: b(k+1/2)"  }
-    externs=lset.get('fx_from_file',[])
-    if sv.label in externs :
-	# add entry for auxilliary ghost variable ap, in order to activate the output file
-	names={"ap": "vertical coordinate formula term: ap(k)"} 
     for tab in names :
         out.write('\t<field field_ref="%s%s" name="%s" long_name="%s" operation="once" prec="8" />\n'%\
                   (lset["ping_variables_prefix"],tab,tab.replace('h',''),names[tab]))
@@ -2090,7 +2086,8 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
     print "\n",50*"*","\n"
     print "Processing context ",context
     print "\n",50*"*","\n"
-    context_index=init_context(context,lset.get("path_to_parse","./"),printout=lset.get("debug_parsing",False))
+    context_index=init_context(context,lset.get("path_to_parse","./"),
+                               printout=lset.get("debug_parsing",False))
     if context_index is None : sys.exit(1)
     #
     #--------------------------------------------------------------------
@@ -3647,16 +3644,16 @@ def check_for_file_input(sv,lset,hgrid,pingvars,field_defs,grid_defs,\
         file_id="remapped_%s_file"%sv.label
         field_in_file_id="%s_%s"%(sv.label,hgrid)
         #field_in_file_id=sv.label
-        file_def='\n<file id="%s" name="%s" mode="read" output_freq="1y" enabled="true" >'%\
+        file_def='\n<file id="%s" name="%s" mode="read" output_freq="1ts" enabled="true" >'%\
               (         file_id,filename)
-        file_def+= '\n\t<field id="%s" name="%s" operation="instant" grid_ref="%s"/>'%\
+        file_def+= '\n\t<field id="%s" name="%s" operation="instant" freq_op="1ts" freq_offset="1ts" grid_ref="%s"/>'%\
               ( field_in_file_id,        sv.label,                     file_grid_id)
         file_def+='\n</file>'
         file_defs[file_id]=file_def
         if printout : print file_defs[file_id]
         #
         #field_def='<field id="%s" grid_ref="%s" operation="instant" >%s</field>'%\
-        field_def='<field id="%s" grid_ref="%s" field_ref="%s" operation="instant" />'%\
+        field_def='<field id="%s" grid_ref="%s" field_ref="%s" operation="instant" freq_op="1ts" freq_offset="0ts" />'%\
             (             pingvar,grid_id,       field_in_file_id)
         field_defs[field_in_file_id]=field_def
         context_index[pingvar]=ET.fromstring(field_def)
