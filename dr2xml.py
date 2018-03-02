@@ -2495,7 +2495,7 @@ def create_axis_def(sdim,lset,axis_defs,field_defs):
         union_vals=values.strip(" ").split()
         union_vals_num=[float(v) for v in union_vals]
         for val in glo_list_num : rep+=' %g'%union_vals_num.index(val)
-        rep+=' ]/>"'
+        rep+=' ]"/>'
         rep+='</axis>'
         # Store definition for the new axis
         axis_defs[sdim.zoom_label]=rep
