@@ -2287,34 +2287,34 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
         out.write('<field_definition> \n')
         if lset.get("nemo_sources_management_policy_master_of_the_world",False) and context=='nemo':
             out.write('<field_group freq_op="_reset_" freq_offset="_reset_" >\n')
-        for obj in field_defs: out.write("\t"+field_defs[obj]+"\n")
+        for obj in sorted(field_defs.keys()): out.write("\t"+field_defs[obj]+"\n")
         if lset.get("nemo_sources_management_policy_master_of_the_world",False) and context=='nemo':
             out.write('</field_group>\n')
         out.write('\n</field_definition> \n')
         #
         out.write('\n<axis_definition> \n')
         out.write('<axis_group prec="8">\n')
-        for obj in axis_defs.keys(): out.write("\t"+axis_defs[obj]+"\n")
+        for obj in sorted(axis_defs.keys()): out.write("\t"+axis_defs[obj]+"\n")
         if False and lset.get('use_union_zoom',False):
-            for obj in union_axis_defs.keys(): out.write("\t"+union_axis_defs[obj]+"\n")
+            for obj in sorted(union_axis_defs.keys()): out.write("\t"+union_axis_defs[obj]+"\n")
         out.write('</axis_group>\n')
         out.write('</axis_definition> \n')
         #
         out.write('\n<domain_definition> \n')
         out.write('<domain_group prec="8">\n')
         if lset['grid_policy'] != "native" : create_standard_domains(domain_defs)
-        for obj in domain_defs.keys(): out.write("\t"+domain_defs[obj]+"\n")
+        for obj in sorted(domain_defs.keys()): out.write("\t"+domain_defs[obj]+"\n")
         out.write('</domain_group>\n')
         out.write('</domain_definition> \n')
         #
         out.write('\n<grid_definition> \n')
         for obj in grid_defs.keys(): out.write("\t"+grid_defs[obj])
         if False and lset.get('use_union_zoom',False):
-            for obj in union_grid_defs.keys(): out.write("\t"+union_grid_defs[obj]+"\n")
+            for obj in sorted(union_grid_defs.keys()): out.write("\t"+union_grid_defs[obj]+"\n")
         out.write('</grid_definition> \n')
         #
         out.write('\n<scalar_definition> \n')
-        for obj in scalar_defs.keys(): out.write("\t"+scalar_defs[obj]+"\n")
+        for obj in sorted(scalar_defs.keys()): out.write("\t"+scalar_defs[obj]+"\n")
         out.write('</scalar_definition> \n')
         #
         out.write('</context> \n')
