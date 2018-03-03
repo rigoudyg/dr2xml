@@ -1696,9 +1696,13 @@ def process_singleton(sv,alias,lset,pingvars,
                 if sdim.positive : axis+=' positive="%s"'%(sdim.positive)
             else: axis=""
             if sdim.bounds=="yes":
-                bounds=sdim.boundsValues.split()
-                bounds_value=' bounds="(0,1)[ %s %s ]" bounds_name="%s_bounds"'%\
-                    (bounds[0],bounds[1],sdim.out_name)
+                try :
+                    bounds=sdim.boundsValues.split()
+                    bounds_value=' bounds="(0,1)[ %s %s ]" bounds_name="%s_bounds"'%\
+                        (bounds[0],bounds[1],sdim.out_name)
+                except :
+                    if sdim.label=="lambda550nm" : bounds_value=''
+                    else : raise dr2xml_error("Issue for var %s with dim %s bounds=%s"%(sv.label,sdim.label,bounds))
             else:
                 bounds_value=""
             #
