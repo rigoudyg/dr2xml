@@ -511,46 +511,24 @@ def complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues,debug=[]):
     svar.cmvar=cmvar
 
     # Get information from MIPvar
-    try:
-        mipvar = dq.inx.uid[cmvar.vid]
-        svar.label_without_area=mipvar.label.rstrip(' ')
-        svar.long_name = cmvar.title.rstrip(' ')
-        if cmvar.description :
-            svar.description = cmvar.description.rstrip(' ')
-        else:
-            svar.description = cmvar.title
-        svar.stdunits = mipvar.units.rstrip(' ')
-        sn=None
-        try :
-            sn=dq.inx.uid[mipvar.sn]
-        except:
-            pass
-            #print "Issue accessing sn for %s %s!"%(cmvar.label,cmvar.mipTable)
-        if sn:
-            if sn._h.label == 'standardname':
-                svar.stdname = sn.uid.rstrip(' ')
-                #svar.stdunits = stdname.units
-                #svar.description = stdname.description
-            elif sn._h.label == 'remarks' :
-                svar.stdname = sn.uid.rstrip(' ')
-                if sn_issues is not None and svar.stdname=="missing" or \
-                   svar.stdname=='pending' or 'unset' in svar.stdname :
-                    #print "issue with %s, stdname=|%s|"%(svar.label,svar.stdname)
-                    if svar.stdname not in sn_issues : sn_issues[svar.stdname]=set()
-                    sn_issues[svar.stdname].add(svar.label)
-                    svar.stdname='' # For CF compliance , see https://github.com/cmip6dr/CMIP6_DataRequest_VariableDefinitions/issues/279
-                    #print "for var %s, sn is %s"%(svar.label,svar.stdname)
-            else:
-                print "for var %s, sn._h.label=%s"%(svar.label,sn._h.label)
-        else :
-            # If CF standard name is NOK, let us use MIP variables attributes
-            svar.stdname = mipvar.label.rstrip(' ')
-            if print_DR_stdname_errors: 
-                print "DR Error: issue with stdname for "+svar.label,"in",svar.mipTable," => take the MIPvar label instead."
-    except:
-        if print_DR_errors: 
-            print "DR Error: issue with MIPvar for "+svar.label,\
-                " => no label_without_area, long_name, stdname, description and units derived."
+    mipvar = dq.inx.uid[cmvar.vid]
+    svar.label_without_area=mipvar.label.rstrip(' ')
+    svar.long_name = cmvar.title.rstrip(' ')
+    if cmvar.description :
+        svar.description = cmvar.description.rstrip(' ')
+    else:
+        svar.description = cmvar.title
+    svar.stdunits = mipvar.units.rstrip(' ') # In case no unit is found with stdname
+    # For CF compliance , better no stdname than a false one
+    # see https://github.com/cmip6dr/CMIP6_DataRequest_VariableDefinitions/issues/279                
+    svar.stdname='' 
+    sn=dq.inx.uid[mipvar.sn] #None
+    if sn._h.label == 'standardname':
+        svar.stdname = sn.uid.strip()
+        svar.stdunits = sn.units
+    elif sn_issues :
+        if svar.stdname not in sn_issues : sn_issues[svar.stdname]=set()
+        sn_issues[svar.stdname].add(svar.label)
     #
     # Get information form Structure
     st=None

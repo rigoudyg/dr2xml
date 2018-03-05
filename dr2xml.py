@@ -985,7 +985,7 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     #--------------------------------------------------------------------
     # Put a warning for field attributes that shouldn't be empty strings
     #--------------------------------------------------------------------
-    if not sv.stdname       : sv.stdname       = "missing" #"empty in DR "+dq.version
+    #if not sv.stdname       : sv.stdname       = "missing" #"empty in DR "+dq.version
     if not sv.long_name     : sv.long_name     = "empty in DR "+dq.version
     #if not sv.cell_methods  : sv.cell_methods  = "empty in DR "+dq.version
     #if not sv.cell_measures : sv.cell_measures = "cell measure is not specified in DR "+dq.version
@@ -1595,7 +1595,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
             comment=sset['comments'][sv.label] 
     if comment : rep+=wrv('comment',comment) #TBI 
     #
-    rep+=wrv("standard_name",sv.stdname)
+    if sv.stdname : rep+=wrv("standard_name",sv.stdname)
     #
     desc=sv.description
     #if desc : desc=desc.replace(">","&gt;").replace("<","&lt;").replace("&","&amp;").replace("'","&apos;").replace('"',"&quot;")
@@ -1710,8 +1710,8 @@ def process_singleton(sv,alias,lset,pingvars,
             # These dimensions are shared by some variables with another sdim with same out_name ('type'):
             if sdim.label in [ "typec3pft", "typec4pft" ] : name="pfttype"
             #
-            stdname='standard_name="%s"'%sdim.stdname
-            if sdim.label=="typewetla" : stdname=""
+            if sdim.stdname.strip()=='' or sdim.label=="typewetla" : stdname=""
+            else: stdname='standard_name="%s"'%sdim.stdname
             #
             scalar_def='<scalar id="%s" name="%s" %s long_name="%s"%s%s%s%s />'%\
                    (scalar_id,name,stdname,sdim.title,value,bounds_value,axis,unit)
