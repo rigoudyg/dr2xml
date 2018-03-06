@@ -2258,7 +2258,7 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
         #
         domain_defs=dict()
         #for table in ['day'] :    
-        out.write('\n<file_definition type="one_file" enabled="true" par_access="collective"> \n')
+        out.write('\n<file_definition type="one_file" enabled="true" > \n')
         foo,sourcetype=get_source_id_and_type(sset,lset)
         for table in sorted(svars_per_table.keys()) :
             count=dict()
