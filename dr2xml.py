@@ -834,7 +834,7 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
         svar.Priority=analyze_priority(cmvar,mips_list)
         svar.grids=d[v]
         simplified_vars.append(svar)
-    print '\nNumber of simplified vars is :',len(simplified_vars)
+    print 'Number of simplified vars is :',len(simplified_vars)
     print "Issues with standard names are :"
     for iss in sn_issues : print "\t"+iss+" vars : "+`sn_issues[iss]`
     
