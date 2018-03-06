@@ -186,7 +186,7 @@ example_lab_and_model_settings={
                 'jpdftaureliqmodis','clisccp','jpdftaureicemodis','clmisr'],
         },
 
-    # You can specifically exclude some pairs (vars,tables), in lab_settings or (higher priority)
+    # You can specifically exclude some pairs (vars,tables), in lab_settings and (in addition)
     # in experiment_settings
     "excluded_pairs" : [ ('fbddtalk','Omon') ] ,
 
@@ -475,9 +475,8 @@ example_simulation_settings={
     # A character string containing additional information about this simulation
     "comment"              : "",
 
-    # You can specifically exclude some pairs (vars,tables), in lab_settings or (higher priority)
-    # in experiment_settings (means that an empty list in experiment settings supersedes a non-empty one
-    # in lab_settings
+    # You can specifically exclude some pairs (vars,tables), in lab_settings but also, in addition, 
+    # in experiment_settings 
     # "excluded_pairs" : [ ('fbddtalk','Omon') ]
 
     # A per-variable dict of comments which are specific to this simulation. It will replace  
@@ -768,15 +767,13 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
     excvars_for_expes=sset.get('excluded_vars',[])
     excvars.extend(excvars_for_expes)
     
+    excpairs=lset.get('excluded_pairs',[])
     if sset :
         config=sset['configuration']
         if ('excluded_vars_per_config' in lset) and \
            (config in lset['excluded_vars_per_config']):
             excvars.extend(lset['excluded_vars_per_config'][config])
-        excpairs=sset.get('excluded_pairs',lset.get('excluded_pairs',[]))
-    else :
-        excpairs=lset.get('excluded_pairs',[])
-    
+        excpairs.extend(sset.get('excluded_pairs',[]))
     
     filtered_vars=[]
     for (v,g) in miprl_vars_grids : 
