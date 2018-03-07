@@ -186,8 +186,8 @@ example_lab_and_model_settings={
                 'jpdftaureliqmodis','clisccp','jpdftaureicemodis','clmisr'],
         },
 
-    # You can specifically exclude some pairs (vars,tables), in lab_settings and (in addition)
-    # in experiment_settings
+    # You can specifically exclude some pairs (vars,tables), here in lab_settings 
+    # and also (in addition) in experiment_settings
     "excluded_pairs" : [ ('fbddtalk','Omon') ] ,
 
     # For debugging purpose, if next list has members, this has precedence over
@@ -475,8 +475,8 @@ example_simulation_settings={
     # A character string containing additional information about this simulation
     "comment"              : "",
 
-    # You can specifically exclude some pairs (vars,tables), in lab_settings but also, in addition, 
-    # in experiment_settings 
+    # You can specifically exclude some pairs (vars,tables), here in experiment settings
+    # They wil be added to the lab-settings list of excluded pairs 
     # "excluded_pairs" : [ ('fbddtalk','Omon') ]
 
     # A per-variable dict of comments which are specific to this simulation. It will replace  
