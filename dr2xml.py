@@ -1565,9 +1565,8 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
             # do use @ for optimizing :
             rep+=' %s>\n\t\t@%s\n'%(freq_op,last_field_id)
         else:
-            # Just basic syntax, no @; do not set a freq_op, because it is useless here and
-            # could pollute the value of 'interval_operation' set by Xios, which is just fine
-            rep+='>\n'
+            # Just basic case, no remap or no average; 
+            rep+=' %s>\n'%(freq_op)
     else: # field has an expr, with an @
         # Cannot optimize
         if operation == 'instant':
