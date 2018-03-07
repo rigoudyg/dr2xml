@@ -419,7 +419,10 @@ example_simulation_settings={
     # For some experiments (e.g. concentration-driven historical in AESM config), the only way to 
     # avoid producing useless fields is to explictly exclude variables (in addition to those in lab_settings)
     'excluded_vars' : [],
-    
+
+    # It can be handy to exclude some Tables at the experiment level. They are added to the lab-level set
+    #"excluded_tables"  : [ ] , 
+
     #'source_id'      : "CNRM-CM6-1", 
     #'source_type'    : "OGCM" ,# If the default source-type value for your source (from lab settings)
     # does not fit, you may change it here.
@@ -767,6 +770,7 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
     #
     inctab=lset.get("included_tables",[])
     exctab=lset.get("excluded_tables",[])
+    exctab.extend=sset.get("excluded_tables",[])    
     incvars=lset.get('included_vars',[])
     excvars=lset.get('excluded_vars',[])
     excvars_for_expes=sset.get('excluded_vars',[])
@@ -1598,7 +1602,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
                 rep+=' >'
         else :
             # No remap 
-            rep+=' >'%
+            rep+=' >'
     else: # field has an expr, with an @
         # Cannot optimize
         if operation == 'instant':
