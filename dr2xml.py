@@ -1224,20 +1224,37 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
         wr(out,'description',description)
         wr(out,'title',description)
         wr(out,'experiment',experiment)
-    # 
-    # TBD : external_variables : improve logics
-    # Let us yet hope that all tables but those with an 'O'
-    # as first letter require areacella, and the others require areacello
-    external_variables= "areacella" 
-    if table[0]=='O' or table[0:2]=='SI' : external_variables= "areacello"
-    if sv.label=="siconca" : external_variables= "areacella"
-    trip_orphans=[]
-    if 'trip' in lset.get('orphan_variables',[]) :
-        trip_orphans=lset['orphan_variables']['trip']
-    if sv.label in trip_orphans : external_variables= 'areacellr'
     #
+    # Fix cell_measures for some DR 01.00.21 bugs
+    #
+    if sv.modeling_realm=="atmos" and (sv.cell_measures=='--OPT' or sv.cell_measures=='area: areacello'):
+        # prra, prsn, ua, va
+        sv.cell_measures='area: areacella'
+    if sv.modeling_realm=="ocean":
+        if sv.cell_measures=='area: areacella':
+            # 'tos', 't20d', 'thetaot700', 'thetaot2000', 'thetaot300', 'mlotst'  (fixed in DR01.00.22)
+            sv.cell_measures='area: areacello'
+        elif sv.cell_measures=='--OPT'
+            sv.cell_measures='' # can be some merdidan mean ...
+    if sv.modeling_realm=="seaIce" and 'area' in sv.cell_measures: 
+            sv.cell_measures='area: areacello'
+    if sv.label=="siconca" :
+        sv.cell_measures = "areacella"
+    #
+    #  When remapping occurs to a regular grid -> CF does not ask for cell_measure
+    if grid_label[0:2]=='gr': sv.cell_measures=""
+    #
+    # CF rule : if the file variable has a cell_measures attribute, and
+    # the corresponding 'measure' variable is not included in the file, 
+    # it must be quoted as external_variable
+    external_variables=''
+    if "areacell" in sv.cell_measures :
+        external_variables=re.sub(sv.cell_measures,"[^ ]* (areacell.) [^ ]*",r'\1')
+    if "volcell" in sv.cell_measures :
+        external_variables=re.sub(sv.cell_measures,"[^ ]* (volcell.) [^ ]*",r'\1')
     if 'fx' in table : external_variables= "" 
-    wr(out,'external_variables',external_variables)
+    if external_variables : wr(out,'external_variables',external_variables)
+    #
     #
     wr(out,'forcing_index',forcing_index,num_type="int") 
     wr(out,'frequency',sv.frequency)
