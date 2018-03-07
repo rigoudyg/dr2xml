@@ -305,8 +305,12 @@ example_lab_and_model_settings={
     "too_long_periods" : ["dec", "yr" ] ,
 
     # Describe the branching scheme for experiments involved in some 'branchedYears type' tslice
-    # Just put the start year in child and the start years in parent for all members
-    "branching" : { "historical" : (1850, [ 2350, 2400, 2450 ]) },
+    # (for details, see: http://clipc-services.ceda.ac.uk/dreq/index/Slice.html )
+    # Just put the as key the common start year in child and as value the list of start years in parent for all members
+    "branching" : {
+        "CNRM-CM6-1"  : {"historical" : (1850, [ 1850, 1883, 1941, 1960, 1990, 2045, 2079, 2108, 2214, 2269 ]) },
+        "CNRM-ESM2-1" : {"historical" : (1850, [ 1850, 1883, 1941 ]) },
+        },
 
     # We can control the max output level set for all output files, 
     "output_level"       : 10,
@@ -625,9 +629,10 @@ def year_in_ri_tslice(ri,experiment,sset,lset,year,debug=False):
         relevant = (year >= tslice.start and year<=tslice.end)
         endyear=tslice.end
     elif tslice.type=="branchedYears" : # e.g. _slice_piControl020
-        if tslice.child in lset["branching"] :
+        source,source_type=get_source_id_and_type(sset,lset)
+        if tslice.child in lset["branching"][source] :
             endyear=False
-            (refyear,starts)=lset["branching"][tslice.child]
+            (refyear,starts)=lset["branching"][source][tslice.child]
             for start in starts :
                 if ((year - start >= tslice.start - refyear) and \
                     (year - start < tslice.start - refyear + tslice.nyears )):
