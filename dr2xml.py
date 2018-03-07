@@ -1234,24 +1234,27 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
         if sv.cell_measures=='area: areacella':
             # 'tos', 't20d', 'thetaot700', 'thetaot2000', 'thetaot300', 'mlotst'  (fixed in DR01.00.22)
             sv.cell_measures='area: areacello'
-        elif sv.cell_measures=='--OPT'
+        elif sv.cell_measures=='--OPT' :
             sv.cell_measures='' # can be some merdidan mean ...
     if sv.modeling_realm=="seaIce" and 'area' in sv.cell_measures: 
             sv.cell_measures='area: areacello'
     if sv.label=="siconca" :
         sv.cell_measures = "areacella"
     #
-    #  When remapping occurs to a regular grid -> CF does not ask for cell_measure
-    if grid_label[0:2]=='gr': sv.cell_measures=""
+    # When remapping occurs to a regular grid -> CF does not ask for cell_measure
+    # but CMIP6 do ask for it !
+    # if grid_label[0:2]=='gr': sv.cell_measures=""
+    # TBD : find a way to provide an areacella field for variables which are remapped to a 'CMIP6' grid such as '1deg'
+    
     #
     # CF rule : if the file variable has a cell_measures attribute, and
     # the corresponding 'measure' variable is not included in the file, 
     # it must be quoted as external_variable
     external_variables=''
-    if "areacell" in sv.cell_measures :
-        external_variables=re.sub(sv.cell_measures,"[^ ]* (areacell.) [^ ]*",r'\1')
-    if "volcell" in sv.cell_measures :
-        external_variables=re.sub(sv.cell_measures,"[^ ]* (volcell.) [^ ]*",r'\1')
+    if "area:" in sv.cell_measures :
+        external_variables+=" "+re.sub(".*area: ([^ ]*).*",r'\1',sub(sv.cell_measures)
+    if "volume:" in sv.cell_measures :
+        external_variables+=" "+re.sub(".*volume: ([^ ]*).*",r'\1',sub(sv.cell_measures)
     if 'fx' in table : external_variables= "" 
     if external_variables : wr(out,'external_variables',external_variables)
     #
