@@ -1586,12 +1586,19 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
     if not idHasExprWithAt(alias,context_index) : 
         # either no expr, or expr without an @  ->
         # may use @ for optimizing operations order (average before re-gridding)
-        if last_grid_id != grid_id_in_ping  and operation=='average':
-            # do use @ for optimizing :
-            rep+=' %s>\n\t\t@%s\n'%(freq_op,last_field_id)
-        else:
-            # Just basic case, no remap or no average; 
-            rep+=' %s>\n'%(freq_op)
+        if last_grid_id != grid_id_in_ping :
+            if operation=='average' :
+                # do use @ for optimizing :
+                rep+=' %s>\n\t\t@%s'%(freq_op,last_field_id)
+            elif operation=='instant':
+                # must set freq_op (this souldn't be necessary, but is needed with Xios 1442)
+                rep+=' %s>'%(freq_op)
+            else:
+                # covers only case once , already addressed by freq_op value='' ?
+                rep+=' >'
+        else :
+            # No remap 
+            rep+=' >'%
     else: # field has an expr, with an @
         # Cannot optimize
         if operation == 'instant':
@@ -1601,8 +1608,8 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
             rep+=' expr="_reset_"'
         if (operation=='average') :
             warnings_for_optimisation.append(alias)
-        # must set freq_op (this souldn't be necessary, but is needed with Xios 1442)
-        rep+=' %s>\n'%(freq_op)
+        rep+=' %s>'%(freq_op)
+    rep+='\n'
     #
     #--------------------------------------------------------------------
     # Add Xios variables for creating NetCDF attributes matching CMIP6 specs
