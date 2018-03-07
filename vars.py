@@ -22,7 +22,7 @@ class simple_CMORvar(object):
         self.positive       = None 
         self.description    = None 
         self.stdname        = None 
-        self.stdunits       = None 
+        self.units       = None 
         self.long_name      = None 
         self.struct         = None
         self.sdims          = {}
@@ -242,7 +242,7 @@ def read_extraTable(path,table,dq,printout=False):
             extra_var.label=v["out_name"].strip(' ')
             extra_var.stdname=v["standard_name"].strip(' ')
             extra_var.long_name=v["long_name"].strip(' ')
-            extra_var.stdunits=v["units"].strip(' ')
+            extra_var.units=v["units"].strip(' ')
             extra_var.modeling_realm=v["modeling_realm"].strip(' ')
             #extra_var.frequency=table2freq[tbl][1]
             extra_var.frequency=guess_freq_from_table_name(tbl)
@@ -518,14 +518,14 @@ def complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues,debug=[]):
         svar.description = cmvar.description.rstrip(' ')
     else:
         svar.description = cmvar.title
-    svar.stdunits = mipvar.units.rstrip(' ') # In case no unit is found with stdname
+    svar.units = mipvar.units.rstrip(' ') # In case no unit is found with stdname
     # For CF compliance , better no stdname than a false one
     # see https://github.com/cmip6dr/CMIP6_DataRequest_VariableDefinitions/issues/279                
     svar.stdname='' 
     sn=dq.inx.uid[mipvar.sn] #None
     if sn._h.label == 'standardname':
         svar.stdname = sn.uid.strip()
-        svar.stdunits = sn.units
+        #svar.units = sn.units
     elif sn_issues :
         if svar.stdname not in sn_issues : sn_issues[svar.stdname]=set()
         sn_issues[svar.stdname].add(svar.label)

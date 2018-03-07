@@ -991,7 +991,7 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     if not sv.long_name     : sv.long_name     = "empty in DR "+dq.version
     #if not sv.cell_methods  : sv.cell_methods  = "empty in DR "+dq.version
     #if not sv.cell_measures : sv.cell_measures = "cell measure is not specified in DR "+dq.version
-    if not sv.stdunits      : sv.stdunits      = "empty in DR "+dq.version
+    if not sv.units      : sv.units      = "empty in DR "+dq.version
 
     #--------------------------------------------------------------------
     # Define alias for field_ref in file-def file 
@@ -1626,7 +1626,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
     rep+=wrv("long_name",sv.long_name)
     if sv.positive != "None" and sv.positive != "" : rep+=wrv("positive",sv.positive) 
     rep+=wrv('history','none')
-    if sv.stdunits : rep+=wrv('units',sv.stdunits)
+    if sv.units : rep+=wrv('units',sv.units)
     if sv.cell_methods  : rep+=wrv('cell_methods',sv.cell_methods)
     if sv.cell_measures : rep+=wrv('cell_measures',sv.cell_measures)
     #
@@ -3246,7 +3246,7 @@ def pingFileForRealmsList(settings, context,lrealms,svars,path_special,dummy="fi
                 # Add units, stdname and long_name as a comment string
                 if type(comments)==type("") : fp.write(comments)
                 fp.write("<!-- P%d (%s) %s : %s -->"\
-                         %(v.Priority,v.stdunits, v.stdname, v.description)) 
+                         %(v.Priority,v.units, v.stdname, v.description)) 
             fp.write("\n")
         if 'atmos' in lrealms or 'atmosChem' in lrealms or 'aerosol' in lrealms :
             for tab in ["ap","ap_bnds","b","b_bnds" ] :
