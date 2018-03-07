@@ -1257,9 +1257,9 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     # it must be quoted as external_variable
     external_variables=''
     if "area:" in sv.cell_measures :
-        external_variables+=" "+re.sub(".*area: ([^ ]*).*",r'\1',sub(sv.cell_measures)
+        external_variables+=" "+re.sub(".*area: ([^ ]*).*",r'\1',sv.cell_measures)
     if "volume:" in sv.cell_measures :
-        external_variables+=" "+re.sub(".*volume: ([^ ]*).*",r'\1',sub(sv.cell_measures)
+        external_variables+=" "+re.sub(".*volume: ([^ ]*).*",r'\1',sv.cell_measures)
     if 'fx' in table : external_variables= "" 
     if external_variables : wr(out,'external_variables',external_variables)
     #
