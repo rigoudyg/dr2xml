@@ -131,7 +131,10 @@ def field_size(svar, mcfg):
     elif ( s == "XY-AH" ): #Global field on model atmosphere half-levels
         siz=(atm_nblev+1)*atm_grid_size
     elif ( s[0:4] == "XY-P" ): #Global field (pressure levels)
-        siz=atm_grid_size*svar.other_dims_size
+        if "jpdftaure" in svar.label :
+            siz=atm_grid_size
+        else:
+            siz=atm_grid_size*svar.other_dims_size
     elif ( s[0:4] == "XY-H" ): #Global field (altitudes)
         siz=atm_grid_size*svar.other_dims_size
 

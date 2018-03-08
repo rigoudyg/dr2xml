@@ -1269,7 +1269,7 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     #
     wr(out,'grid',grid_description) ; wr(out,'grid_label',grid_label) ;
     wr(out,'nominal_resolution',grid_resolution)
-    comment=lset.get('comment','')+" "+sset.get('comment','')
+    comment=lset.get('comment','')+" "+sset.get('comment','')+dynamic_comment
     wr(out,'comment',comment) 
     wr(out,'history',sset,default='none') 
     wr(out,"initialization_index",initialization_index,num_type="int")
@@ -1618,7 +1618,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
         comment=sset['comments'][sv.label] 
     else: # Process lab-specific comment for the variable
         if sv.label in lset['comments'].keys() : 
-            comment=sset['comments'][sv.label] 
+            comment=lset['comments'][sv.label] 
     if comment : rep+=wrv('comment',comment) #TBI 
     #
     if sv.stdname : rep+=wrv("standard_name",sv.stdname)
