@@ -338,7 +338,7 @@ example_lab_and_model_settings={
 
     # If your model has some axis which does not have all its attributes
     # as in DR, and you want dr2xml to fix that it, give here
-    # the correspondence from model axis id to DR dim/grid id.
+    # the correspondence from model axis id to DR dim/grid id.
     # For label dimensions you should provide the list of labels, ordered
     # as in your model, as second element of a pair
     # Label-type axes will be processed even if not quoted
@@ -770,7 +770,7 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
     #
     inctab=lset.get("included_tables",[])
     exctab=lset.get("excluded_tables",[])
-    exctab.extend=sset.get("excluded_tables",[])    
+    if sset : exctab.extend(sset.get("excluded_tables",[]))
     incvars=lset.get('included_vars',[])
     excvars=lset.get('excluded_vars',[])
     excvars_for_expes=sset.get('excluded_vars',[])
