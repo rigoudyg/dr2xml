@@ -1234,21 +1234,15 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
         wr(out,'title',description)
         wr(out,'experiment',experiment)
     #
-    # Fix cell_measures for some DR 01.00.21 bugs
+    # Fixing cell_measures is done in vars.py 
     #
-    if sv.modeling_realm=="atmos" and (sv.cell_measures=='--OPT' or sv.cell_measures=='area: areacello'):
-        # prra, prsn, ua, va
-        sv.cell_measures='area: areacella'
-    if sv.modeling_realm=="ocean":
-        if sv.cell_measures=='area: areacella':
-            # 'tos', 't20d', 'thetaot700', 'thetaot2000', 'thetaot300', 'mlotst'  (fixed in DR01.00.22)
-            sv.cell_measures='area: areacello'
-        elif sv.cell_measures=='--OPT' :
-            sv.cell_measures='' # can be some merdidan mean ...
-    if sv.modeling_realm=="seaIce" and 'area' in sv.cell_measures: 
-            sv.cell_measures='area: areacello'
     if sv.label=="siconca" :
-        sv.cell_measures = "areacella"
+        sv.cell_measures = "area: areacella"
+
+    dynamic_comment=""
+    if sv.modeling_realm=="seaIce" and 'areacella' in sv.cell_measures and sv.label != "siconca" : 
+        dynamic_comment='. Due an error in DR01.00.21 and to technical constraints, this variable has attribute cell_mesaures set to area: areacella, while it actually is area: areacello'
+
     #
     # When remapping occurs to a regular grid -> CF does not ask for cell_measure
     # but CMIP6 do ask for it !
