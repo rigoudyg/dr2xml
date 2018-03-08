@@ -1240,8 +1240,8 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
         sv.cell_measures = "area: areacella"
 
     dynamic_comment=""
-    if sv.modeling_realm=="seaIce" and 'areacella' in sv.cell_measures and sv.label != "siconca" : 
-        dynamic_comment='. Due an error in DR01.00.21 and to technical constraints, this variable has attribute cell_mesaures set to area: areacella, while it actually is area: areacello'
+    if "seaIce" in sv.modeling_realm and 'areacella' in sv.cell_measures and sv.label != "siconca" : 
+        dynamic_comment='. Due an error in DR01.00.21 and to technical constraints, this variable may have  attribute cell_measures set to area: areacella, while it actually is area: areacello'
 
     #
     # When remapping occurs to a regular grid -> CF does not ask for cell_measure
