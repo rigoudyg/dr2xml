@@ -480,14 +480,15 @@ def get_corresp_CMORvar(hmvar,dq,lset):
     if count>=1: 
         # empty table means that the frequency is changed (but the variable exists in another frequency cmor table
         if empty_table : var_freq_asked = hmvar.frequency
-        complement_svar_using_cmorvar(hmvar,cmvar_found,dq,sn_issues_home,lset=lset)
+        allow_pseudo=lset.get('allow_pseudo_standard_names',False)
+        complement_svar_using_cmorvar(hmvar,cmvar_found,dq,sn_issues_home,allow_pseudo=allow_pseudo)
         if empty_table : 
            hmvar.frequency = var_freq_asked 
            hmvar.mipTable = "None"+ hmvar.frequency
         return hmvar
     return False
 
-def complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues,debug=[],lset=None):
+def complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues,debug=[],allow_pseudo=False):
 
     """
     SVAR will have an attribute label_non_ambiguous suffixed by an
@@ -521,20 +522,19 @@ def complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues,debug=[],lset=None):
     else:
         svar.description = cmvar.title
     svar.units = mipvar.units.rstrip(' ') # In case no unit is found with stdname
-    # For CF compliance , better no stdname than a false one
+    #
     # see https://github.com/cmip6dr/CMIP6_DataRequest_VariableDefinitions/issues/279                
     svar.stdname='' 
     sn=dq.inx.uid[mipvar.sn] #None
     if sn._h.label == 'standardname':
         svar.stdname = sn.uid.strip()
         #svar.units = sn.units
-    elif sn_issues is not None :
-        #print "For %s, sn label is %s, lset is %s, allow is "%(svar.label, sn._h.label,lset)
-        if lset is not None and lset.get('allow_pseudo_standard_names',False):
+    else :
+        if allow_pseudo :
             svar.stdname = sn.uid.strip()
-            #print "Non_stanradr name used for %s is %s"%(svar.label,svar.stdname)
-        if svar.stdname not in sn_issues : sn_issues[svar.label]=set()
-        sn_issues[svar.label].add(svar.mipTable)
+        if sn_issues is not None :
+            if svar.stdname not in sn_issues : sn_issues[svar.label]=set()
+            sn_issues[svar.label].add(svar.mipTable)
     if svar.label=="sitimefrac" : svar.stdname="sea_ice_time_fraction" # For PrePARE missing in DR01.00.21!
     #
     # Get information form Structure

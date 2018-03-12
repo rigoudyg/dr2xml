@@ -837,11 +837,11 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
 
     # Translate CMORvars to a list of simplified CMORvar objects
     simplified_vars = []
+    allow_pseudo=lset.get('allow_pseudo_standard_names',False)
     for v in d :
         svar = simple_CMORvar()
         cmvar = dq.inx.uid[v]
-        #if cmvar.mipTable=="Ofx" : print "Got an Ofx var : ",cmvar.label
-        complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues,lset)
+        complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues,allow_pseudo=allow_pseudo)
         svar.Priority=analyze_priority(cmvar,mips_list)
         svar.grids=d[v]
         simplified_vars.append(svar)
