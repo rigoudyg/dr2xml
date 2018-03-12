@@ -485,7 +485,7 @@ def get_corresp_CMORvar(hmvar,dq):
         return hmvar
     return False
 
-def complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues,debug=[]):
+def complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues,debug=[],lset=None):
 
     """
     SVAR will have an attribute label_non_ambiguous suffixed by an
@@ -527,6 +527,8 @@ def complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues,debug=[]):
         svar.stdname = sn.uid.strip()
         #svar.units = sn.units
     elif sn_issues :
+        if lset and lset.get('allow_pseudo_standard_names',False):
+            svar.stdname = sn.uid.strip()
         if svar.stdname not in sn_issues : sn_issues[svar.stdname]=set()
         sn_issues[svar.stdname].add(svar.label)
     #

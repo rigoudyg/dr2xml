@@ -396,6 +396,11 @@ example_lab_and_model_settings={
 
     # In order to identify which xml files generates a problem, you can use this flag
     'debug_parsing' : False,
+
+    # DR has sn attributes for MIP variables. They can be real,CF-compliant, standard_names or
+    # pseudo_standard_names, i.e. not yet approved labels. Default is to use only CF ones
+    'allow_pseudo_standard_names' : False,
+    
 }
 
 
@@ -836,7 +841,7 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
         svar = simple_CMORvar()
         cmvar = dq.inx.uid[v]
         #if cmvar.mipTable=="Ofx" : print "Got an Ofx var : ",cmvar.label
-        complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues)
+        complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues,lset)
         svar.Priority=analyze_priority(cmvar,mips_list)
         svar.grids=d[v]
         simplified_vars.append(svar)
