@@ -553,30 +553,23 @@ def complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues,debug=[]):
         except:
             if print_DR_errors: print "DR Error: Issue with cell_measures for "+`cmvar`
 
-        # A number of DR values indicate a choice or a directive for this attribute :
-        # This can be either a string value for inclusion in the NetCDF variable attribute cell_measures, or a directive. In the latter case it will be a single word, --OPT or --MODEL. The first of these indicates that the data may be provided either on the cell centres or on the cell boundaries. --MODEL indicates that the data should be provided at the cell locations used for that variable in the model code (e.g. cell vertices).
-        # We turn the directive in as sensible choice 
-        #if svar.cell_measures in [ '--MODEL', '--OPT', '--UGRID'] :
 
-        if svar.cell_measures=='--MODEL' and svar.label in ['sistrxdtop', 'sistrydtop' ] :
+        # A number of DR values indicate a choice or a directive for attribute cell_measures (--OPT, --MODEL ...)
+        # See interpretation guidelines at https://www.earthsystemcog.org/projects/wip/drq_interp_cell_center
+        if svar.cell_measures=='--MODEL' : svar.cell_measures=''
+        elif svar.cell_measures=='--OPT' : svar.cell_measures=''
+
+        # TBD Next sequences are adhoc for errors DR 01.00.21
+        if svar.cell_measures=='--OPT' and svar.label in ['tauuo', 'tauvo' ] :
             svar.cell_measures='area: areacello'
-        elif svar.cell_measures=='--MODEL' and svar.label in ['siu', 'siv' ] :
-            svar.cell_measures=''
-        elif svar.cell_measures=='--OPT' and svar.label in [ 'wo', 'vo', 'uo','vmo', 'umo' ] :
-            svar.cell_measures=''
-        elif svar.cell_measures=='--OPT' and svar.label in ['tauuo', 'tauvo' ] :
-            svar.cell_measures='area: areacello'
-        elif svar.cell_measures=='--OPT' and svar.label in ['ua', 'va' ] :
-            svar.cell_measures='area: areacella'
-        # TBD Next sequences aare adhoc for DR 01.00.21
-        elif svar.cell_measures=='area: areacello' and svar.label in ['prra', 'prsn'] :
-            svar.cell_measures='area: areacella'
         elif svar.cell_measures=='area: areacella' and \
              svar.label in ['tos', 't20d', 'thetaot700', 'thetaot2000', 'thetaot300', 'mlotst'] :
             svar.cell_measures='area: areacello'
+
         # TBD : this cell_measure choice for seaice variables is specific to Nemo
-        elif "seaIce" in svar.modeling_realm and svar.cell_measures in [ 'area: areacello OR areacella' ] :
-            svar.cell_measures='area: areacello'  
+        if "seaIce" in svar.modeling_realm and svar.cell_measures in [ 'area: areacello OR areacella' ] :
+            if svar.label == 'siconca' : svar.cell_measures='area: areacella'
+            else : svar.cell_measures='area: areacello'
         #
         product_of_other_dims=1
         all_dimids=[]

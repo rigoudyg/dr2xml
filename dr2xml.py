@@ -1236,9 +1236,6 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     #
     # Fixing cell_measures is done in vars.py 
     #
-    if sv.label=="siconca" :
-        sv.cell_measures = "area: areacella"
-
     dynamic_comment=""
     if "seaIce" in sv.modeling_realm and 'areacella' in sv.cell_measures and sv.label != "siconca" : 
         dynamic_comment='. Due an error in DR01.00.21 and to technical constraints, this variable may have  attribute cell_measures set to area: areacella, while it actually is area: areacello'
