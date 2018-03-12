@@ -846,8 +846,10 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
         svar.grids=d[v]
         simplified_vars.append(svar)
     print 'Number of simplified vars is :',len(simplified_vars)
-    print "Issues with standard names are :"
-    for iss in sn_issues : print "\t"+iss+" vars : "+`sn_issues[iss]`
+    print "Issues with standard names are :",
+    lissues=sn_issues.keys()
+    lissues.sort()
+    print lissues
     
     return simplified_vars
 

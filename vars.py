@@ -81,6 +81,8 @@ dim2dimid={}
 dr_single_levels=[]
 stdName2mipvarLabel={}
 tcmName2tcmValue={"time-mean":"time: mean", "time-point":"time: point"} 
+# A dict for storing home_variables issues re. standard_names
+sn_issues_home=dict()
 
 def read_homeVars_list(hmv_file,expid,mips,dq,path_extra_tables=None):
     """
@@ -376,7 +378,7 @@ def process_homeVars(lset,sset,mip_vars_list,mips,dq,expid=False,printout=False)
         if hv.type=='cmor':
             # Complement each HOME variable with attributes got from 
             # the corresponding CMOR variable (if exist)
-            updated_hv=get_corresp_CMORvar(hv,dq)
+            updated_hv=get_corresp_CMORvar(hv,dq,lset)
             if(updated_hv):
                 already_in_dr=False
                 for cmv in mip_vars_list:
@@ -410,7 +412,7 @@ def process_homeVars(lset,sset,mip_vars_list,mips,dq,expid=False,printout=False)
                                  " CMORVar found."%`hv_info`)
         elif hv.type=='perso':
             # Check if HOME variable anounced as 'perso' is in fact 'cmor'
-            is_cmor=get_corresp_CMORvar(hv,dq)
+            is_cmor=get_corresp_CMORvar(hv,dq,lset)
             if not is_cmor:
                 # Check if HOME variable differs from CMOR one only by shapes
                 has_cmor_varname=any([ cmvar.label==hv.label for
@@ -446,7 +448,7 @@ def process_homeVars(lset,sset,mip_vars_list,mips,dq,expid=False,printout=False)
             vars_error("Abort: unknown type keyword provided "\
                          "for HOMEVar %s:"%`hv_info`)
 
-def get_corresp_CMORvar(hmvar,dq):
+def get_corresp_CMORvar(hmvar,dq,lset):
     collect=dq.coll['CMORvar']
     count=0
     empty_table=(hmvar.mipTable=='NONE') 
@@ -478,7 +480,7 @@ def get_corresp_CMORvar(hmvar,dq):
     if count>=1: 
         # empty table means that the frequency is changed (but the variable exists in another frequency cmor table
         if empty_table : var_freq_asked = hmvar.frequency
-        complement_svar_using_cmorvar(hmvar,cmvar_found,dq,None)
+        complement_svar_using_cmorvar(hmvar,cmvar_found,dq,sn_issues_home,lset=lset)
         if empty_table : 
            hmvar.frequency = var_freq_asked 
            hmvar.mipTable = "None"+ hmvar.frequency
@@ -526,11 +528,13 @@ def complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues,debug=[],lset=None):
     if sn._h.label == 'standardname':
         svar.stdname = sn.uid.strip()
         #svar.units = sn.units
-    elif sn_issues :
-        if lset and lset.get('allow_pseudo_standard_names',False):
+    elif sn_issues is not None :
+        #print "For %s, sn label is %s, lset is %s, allow is "%(svar.label, sn._h.label,lset)
+        if lset is not None and lset.get('allow_pseudo_standard_names',False):
             svar.stdname = sn.uid.strip()
-        if svar.stdname not in sn_issues : sn_issues[svar.stdname]=set()
-        sn_issues[svar.stdname].add(svar.label)
+            #print "Non_stanradr name used for %s is %s"%(svar.label,svar.stdname)
+        if svar.stdname not in sn_issues : sn_issues[svar.label]=set()
+        sn_issues[svar.label].add(svar.mipTable)
     #
     # Get information form Structure
     st=None
@@ -545,7 +549,7 @@ def complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues,debug=[],lset=None):
         try :
             svar.cm=dq.inx.uid[st.cmid].cell_methods
             methods=dq.inx.uid[st.cmid].cell_methods.rstrip(' ')
-            #methods=methods.replace("mask=siconc or siconca","mask=siconc")
+            methods=methods.replace("mask=siconc or siconca","mask=siconc")
             svar.cell_methods=methods
         except:
             if print_DR_errors: print "DR Error: issue with cell_method for "+st.label
@@ -562,14 +566,14 @@ def complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues,debug=[],lset=None):
         elif svar.cell_measures=='--OPT' : svar.cell_measures=''
 
         # TBD Next sequences are adhoc for errors DR 01.00.21
-        if svar.cell_measures=='--OPT' and svar.label in ['tauuo', 'tauvo' ] :
+        if svar.label in ['tauuo', 'tauvo' ] :
             svar.cell_measures='area: areacello'
         elif svar.cell_measures=='area: areacella' and \
              svar.label in ['tos', 't20d', 'thetaot700', 'thetaot2000', 'thetaot300', 'mlotst'] :
             svar.cell_measures='area: areacello'
 
         # TBD : this cell_measure choice for seaice variables is specific to Nemo
-        if "seaIce" in svar.modeling_realm and svar.cell_measures in [ 'area: areacello OR areacella' ] :
+        if "seaIce" in svar.modeling_realm and svar.cell_measures in [ 'area: areacello OR areacella' , 'areacella' ] :
             if svar.label == 'siconca' : svar.cell_measures='area: areacella'
             else : svar.cell_measures='area: areacello'
         #
