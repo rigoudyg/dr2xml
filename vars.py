@@ -535,6 +535,7 @@ def complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues,debug=[],lset=None):
             #print "Non_stanradr name used for %s is %s"%(svar.label,svar.stdname)
         if svar.stdname not in sn_issues : sn_issues[svar.label]=set()
         sn_issues[svar.label].add(svar.mipTable)
+    if svar.label=="sitimefrac" : svar.stdname="sea_ice_time_fraction" # For PrePARE missing in DR01.00.21!
     #
     # Get information form Structure
     st=None
@@ -573,7 +574,7 @@ def complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues,debug=[],lset=None):
             svar.cell_measures='area: areacello'
 
         # TBD : this cell_measure choice for seaice variables is specific to Nemo
-        if "seaIce" in svar.modeling_realm and svar.cell_measures in [ 'area: areacello OR areacella' , 'areacella' ] :
+        if "seaIce" in svar.modeling_realm and "areacella" in svar.cell_measures :
             if svar.label == 'siconca' : svar.cell_measures='area: areacella'
             else : svar.cell_measures='area: areacello'
         #
