@@ -45,14 +45,14 @@ import dreq
 # https://github.com/WCRP-CMIP/CMIP6_CVs). You will provide its path 
 # as argument to functions defined here
 
-# 3- XIOS release must be 1432 or above (to be fed with the outputs)
+# 3- XIOS release must be 1442 or above (to be fed with the outputs)
 #  see https://forge.ipsl.jussieu.fr/ioserver/wiki
 
 ####################################
 # End of pre-requisites
 ####################################
 
-version="0.99"
+version="1.0"
 print "\n",50*"*","\n*"
 print "* %29s"%"dr2xml version: ", version
 
