@@ -1,5 +1,5 @@
 #!/bin/bash
-#set -x
+#
 #
 # Create XIOS file_defs for each context described in file in arg3 ,
 # for the simulation described by file in arg4
@@ -10,26 +10,34 @@
 #
 # Output files are named after pattern dr2xml_<context>.xml
 #
-dummies=$1 ; shift # See dr2xml doc : forbid/skip/include
-EXPID=$1 ; shift # The value for an attribute 'EXPID' in datafiles
-ln -sf $1 lab_and_model_settings_tmp.py ; shift
-ln -sf $1 simulation_settings_tmp.py ; shift
-year=$1 ; shift # year that will be simulated
-enddate=$1 ; shift  # simulation end date - YYYYMMDD - must be at 00h next day
-ncdir=${1:-@IOXDIR@/} ; shift  # Directory for data outpu files
-print=${1:-1} ; shift # Want some reporting ?
-homedr=$1 ; shift # Filename for a 'home' data request - optional
-path_extra_tables=$1 # Filename for a 'home' data request - optional
+[ ${setx:-0} -eq 1 ] && echo "Entering create_file_defs.sh" && set -x
+
+dummies=$1 ;  # See dr2xml doc : forbid/skip/include
+EXPID=$2 ;  # The value for an attribute 'EXPID' in datafiles
+ln -sf $3 lab_and_model_settings_tmp.py ; 
+ln -sf $4 simulation_settings_tmp.py ; 
+year=$5 ;  # year that will be simulated
+enddate=$6 ;   # simulation end date - YYYYMMDD - must be at 00h next day
+ncdir=${7:-@IOXDIR@/} ;   # Directory for data output files
+print=${8:-1} ;  # Want some reporting ?
+homedr="$9" ;  # Filenames for a 'home' data request - optional
+path_extra_tables=${10} # Filename for a 'home' data request - optional
+all_vars=${all_vars:-False} # For debug purpose  : if True no filtering by experiment nor year
 #dummies=include
 #
 # Set paths for all software components
 #
 root=$(cd $(dirname $0) ; pwd)
-cvspath=$root/CMIP6_CVs # Path for CMIP6_CV
-dr2xmlpath=${altdr2xmlpath:-$root/dr2pub}
-DRpath=$root/01.00.21/dreqPy
+dr2xmlpath=${altdr2xmlpath:-$root}
+md5=$(md5sum -b $dr2xmlpath/dr2xml.py | cut -f 1 -d " ")
+CMIP6=${CMIP6:-$root/../..}
+cvspath=${cvspath:-$CMIP6/externals/CMIP6_CVs}
+DRpath=${DRpath:-$CMIP6/externals/DR01.00.21/dreqPy}
 #
+export PATH=/opt/softs/libraries/GCC5.3.0/git-2.11.0/bin:$PATH 
+export GIT_EXEC_PATH=/opt/softs/libraries/GCC5.3.0/git-2.11.0/libexec/git-core
 CVtag=cv=$(cd $cvspath ; git describe HEAD ) 
+
 export PYTHONPATH=$dr2xmlpath:$DRpath:$PYTHONPATH
 #
 # Identify which ping_files are used (according to $(pwd)/iodef.xml)
@@ -65,16 +73,17 @@ cat >create_file_defs.tmp.py  <<-EOF
 	for context in contexts :
 	    ok=generate_file_defs(lab_and_model_settings,
 	                       simulation_settings,
-	                       year       =$year,
-	                       enddate    ="$enddate",
-	                       context    =context,
-	                       pingfiles  ="$pings",
-	                       printout   =$print, 
-	                       cvs_path   ="${cvspath}/",
-	                       dummies    ="$dummies",
-	                       dirname    ="./",
-	                       prefix     ="$ncdir",
-                               attributes =[ ("EXPID","$EXPID") , ("CMIP6_CV_version", "$CVtag") ]
+	                       year       = $year,
+	                       enddate    = "$enddate",
+	                       context    = context,
+	                       pingfiles  = "$pings",
+	                       printout   = $print, 
+	                       cvs_path   = "${cvspath}/",
+	                       dummies    = "$dummies",
+	                       dirname    = "./",
+	                       prefix     = "$ncdir",
+                               attributes = [ ("EXPID","$EXPID") , ("CMIP6_CV_version", "$CVtag"), ("dr2xml_md5sum", "$md5") ],
+                               allvars    = $allvars
                                )
 	#if not ok : sys.exit(1)
 	EOF
