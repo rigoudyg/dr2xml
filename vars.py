@@ -504,6 +504,8 @@ def complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues,debug=[],allow_pseudo=
     # Get information form CMORvar
     svar.prec=cmvar.type # integer / float / double
     svar.frequency = cmvar.frequency.rstrip(' ')
+    # Fix for emulating DR01.00.22 from content of DR01.00.21
+    if "SoilPools" in cmvar.label : svar.frequency="mon"
     svar.mipTable = cmvar.mipTable.rstrip(' ')
     svar.Priority= cmvar.defaultPriority
     svar.positive = cmvar.positive.rstrip(' ')
@@ -551,6 +553,8 @@ def complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues,debug=[],allow_pseudo=
             svar.cm=dq.inx.uid[st.cmid].cell_methods
             methods=dq.inx.uid[st.cmid].cell_methods.rstrip(' ')
             methods=methods.replace("mask=siconc or siconca","mask=siconc")
+            # Fix for emulating DR01.00.22 from content of DR01.00.21
+            if "SoilPools" in svar.label : methods="area: mean where land time: mean"
             svar.cell_methods=methods
         except:
             if print_DR_errors: print "DR Error: issue with cell_method for "+st.label

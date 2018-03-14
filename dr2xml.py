@@ -1235,7 +1235,6 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     if contact and contact is not "" : wr(out,'contact',contact) 
     wr(out,'data_specs_version',dq.version) 
     wr(out,'dr2xml_version',version)
-    wr(out,'CMIP6_CV_experiments_latest_tag',CMIP6_CV_latest_tag)
     #
     wr(out,'experiment_id',expid_in_filename)
     if experiment_id == expid_in_filename :
