@@ -697,6 +697,7 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
     else :
         mips_list= set()
         for grid in lset['mips']  : mips_list=mips_list.union(set(lset['mips'][grid]))
+        grid_choice="LR"
     rls_for_mips=sc.getRequestLinkByMip(mips_list)
     if printout :
         print "Number of Request Links which apply to MIPS",
@@ -778,8 +779,9 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
     if sset : exctab.extend(sset.get("excluded_tables",[]))
     incvars=lset.get('included_vars',[])
     excvars=lset.get('excluded_vars',[])
-    excvars_for_expes=sset.get('excluded_vars',[])
-    excvars.extend(excvars_for_expes)
+    if sset : 
+        excvars_for_expes=sset.get('excluded_vars',[])
+        excvars.extend(excvars_for_expes)
     
     excpairs=lset.get('excluded_pairs',[])
     if sset :
@@ -2058,22 +2060,26 @@ def process_diurnal_cycle(alias,field_defs,grid_defs,axis_defs,printout=False):
     return alias_24h_id,grid_24h_id
 
 
-def gather_AllSimpleVars(lset,sset,year=False,printout=False):
-    mip_vars_list=select_CMORvars_for_lab(lset,sset,year,printout=printout)
+def gather_AllSimpleVars(lset,sset,year=False,printout=False,allvars=False):
+    if allvars : 
+        mip_vars_list=select_CMORvars_for_lab(lset,sset,None,printout=printout)
+    else:
+        mip_vars_list=select_CMORvars_for_lab(lset,sset,year,printout=printout)
     if sset.get('listof_home_vars',lset.get('listof_home_vars',None)):
-        process_homeVars(lset,sset,mip_vars_list,lset["mips"][grid_choice],dq,expid=sset['experiment_id'],printout=printout)
-
+        process_homeVars(lset,sset,mip_vars_list,lset["mips"][grid_choice],
+                         dq,expid=sset['experiment_id'],printout=printout)
     else: print "Info: No HOMEvars list provided."
     return mip_vars_list
 
 def generate_file_defs(lset,sset,year,enddate,context,cvs_path,pingfiles=None,
-                       dummies='include',printout=False,dirname="./",prefix="",attributes=[]) :
+                       dummies='include',printout=False,dirname="./",prefix="",attributes=[],allvars=False) :
     # A wrapper for profiling top-level function : generate_file_defs_inner
     import cProfile, pstats, StringIO
     pr = cProfile.Profile()
     pr.enable()
     generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=pingfiles,
-                             dummies=dummies,printout=printout,dirname=dirname,prefix=prefix,attributes=attributes) 
+                             dummies=dummies,printout=printout,dirname=dirname,
+                             prefix=prefix,attributes=attributes,allvars=allvars) 
     pr.disable()
     s = StringIO.StringIO()
     sortby = 'cumulative'
@@ -2084,7 +2090,7 @@ def generate_file_defs(lset,sset,year,enddate,context,cvs_path,pingfiles=None,
 
     
 def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=None,
-                       dummies='include',printout=False,dirname="./",prefix="",attributes=[]) :
+                             dummies='include',printout=False,dirname="./",prefix="",attributes=[],allvars=False) :
     """
     Using global DR object dq, a dict of lab settings LSET, and a dict 
     of simulation settings SSET, generate an XIOS file_defs 'file' for a 
@@ -2129,7 +2135,7 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
     #--------------------------------------------------------------------
     skipped_vars_per_table={}
     actually_written_vars=[]
-    mip_vars_list=gather_AllSimpleVars(lset,sset,year,printout)
+    mip_vars_list=gather_AllSimpleVars(lset,sset,year,printout,allvars)
     # Group CMOR vars per realm
     svars_per_realm=dict()
     for svar in mip_vars_list :
