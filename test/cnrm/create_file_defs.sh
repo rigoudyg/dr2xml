@@ -22,7 +22,8 @@ ncdir=${7:-@IOXDIR@/} ;   # Directory for data output files
 print=${8:-1} ;  # Want some reporting ?
 homedr="$9" ;  # Filenames for a 'home' data request - optional
 path_extra_tables=${10} # Filename for a 'home' data request - optional
-all_vars=${all_vars:-False} # For debug purpose  : if True no filtering by experiment nor year
+#
+select=${select:-""} # For debug purpose  : can be "" "on_expt" and "no"
 #dummies=include
 #
 # Set paths for all software components
@@ -83,7 +84,7 @@ cat >create_file_defs.tmp.py  <<-EOF
 	                       dirname    = "./",
 	                       prefix     = "$ncdir",
                                attributes = [ ("EXPID","$EXPID") , ("CMIP6_CV_version", "$CVtag"), ("dr2xml_md5sum", "$md5") ],
-                               allvars    = $allvars
+                               select     = "$select"
                                )
 	#if not ok : sys.exit(1)
 	EOF

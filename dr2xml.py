@@ -99,6 +99,7 @@ print "\n*\n",50*"*"
 cell_method_warnings=[]
 warnings_for_optimisation=[]
 sn_issues=dict()
+
 context_index=None
 
 # global variable : the list of Request Links which apply for 'our' MIPS and which are not explicitly excluded using settings
@@ -555,6 +556,9 @@ def RequestItem_applies_for_exp_and_year(ri,experiment,lset,sset,year=None,debug
             print "Error on esid link for ri : %s uid=%s %s"%\
                            ( ri.title, ri.uid, item_exp._h.label)
     #print "ri=%s"%ri.title,
+    if year is not None :
+        print "Filtering for year %d"%year
+
     if ri_applies_to_experiment :
         if year is None :
             rep=True ; endyear=None
@@ -667,11 +671,10 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
       lset (dict): laboratory settings; used to provide the list of MIPS,  
                    the max Tier, and a list of excluded variable names
       sset (dict): simulation settings, used for indicating source_type, 
-                   max priority (and for filtering on the simulation if 
-                   year is notNone)
-                   if sset is None, use union of mips among all grid choices 
-      year (int,optional) : simulation year - used to filter the request 
-                   for an experiment and a year
+                   max priority (and for filtering on the simulation)
+                   If sset is None, use union of mips among all grid choices 
+      year (int,optional) : simulation year - used when sset is not None, 
+                   to additionally filter on year
 
     Returns:
       A list of 'simplified CMOR variables'
@@ -718,8 +721,9 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
             print "RequestLink %s is not included"%rl.label
             rls_for_mips.remove(rl)
     #
-    if sset and year :
+    if sset  :
         experiment_id=sset['experiment_id']
+        print "Filtering for experiment %s"%experiment_id
         #print "Request links before filter :"+`[ rl.label for rl in rls_for_mips ]`
         filtered_rls=[]
         for rl in rls_for_mips :
@@ -1177,6 +1181,7 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     #--------------------------------------------------------------------
     resolution=lset['grid_choice'][source_id]
     split_freq=split_frequency_for_variable(sv, lset, resolution, sc.mcfg, context)
+    #print "split_freq: %-25s %-8s"%(sv.label,split_freq)
     #
     #--------------------------------------------------------------------
     # Write XIOS file node:
@@ -2059,11 +2064,16 @@ def process_diurnal_cycle(alias,field_defs,grid_defs,axis_defs,printout=False):
     return alias_24h_id,grid_24h_id
 
 
-def gather_AllSimpleVars(lset,sset,year=False,printout=False,allvars=False):
-    if allvars : 
-        mip_vars_list=select_CMORvars_for_lab(lset,sset,None,printout=printout)
-    else:
+def gather_AllSimpleVars(lset,sset,year=False,printout=False,select="on_expt_and_year"):
+    if select=="on_expt_and_year" or select=="" :
         mip_vars_list=select_CMORvars_for_lab(lset,sset,year,printout=printout)
+    elif select=="on_expt" : 
+        mip_vars_list=select_CMORvars_for_lab(lset,sset ,None,printout=printout)
+    elif select=="no" :
+        mip_vars_list=select_CMORvars_for_lab(lset,None ,None,printout=printout)
+    else:
+        raise dr2xml_errors("Choice %s is not allowed for arg 'select'"%select)
+    #
     if sset.get('listof_home_vars',lset.get('listof_home_vars',None)):
         process_homeVars(lset,sset,mip_vars_list,lset["mips"][grid_choice],
                          dq,expid=sset['experiment_id'],printout=printout)
@@ -2071,14 +2081,14 @@ def gather_AllSimpleVars(lset,sset,year=False,printout=False,allvars=False):
     return mip_vars_list
 
 def generate_file_defs(lset,sset,year,enddate,context,cvs_path,pingfiles=None,
-                       dummies='include',printout=False,dirname="./",prefix="",attributes=[],allvars=False) :
+                       dummies='include',printout=False,dirname="./",prefix="",attributes=[],select="on_expt_and_year") :
     # A wrapper for profiling top-level function : generate_file_defs_inner
     import cProfile, pstats, StringIO
     pr = cProfile.Profile()
     pr.enable()
     generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=pingfiles,
                              dummies=dummies,printout=printout,dirname=dirname,
-                             prefix=prefix,attributes=attributes,allvars=allvars) 
+                             prefix=prefix,attributes=attributes,select=select) 
     pr.disable()
     s = StringIO.StringIO()
     sortby = 'cumulative'
@@ -2089,7 +2099,8 @@ def generate_file_defs(lset,sset,year,enddate,context,cvs_path,pingfiles=None,
 
     
 def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=None,
-                             dummies='include',printout=False,dirname="./",prefix="",attributes=[],allvars=False) :
+                             dummies='include',printout=False,dirname="./",prefix="",
+                             attributes=[],select="on_expt_and_year") :
     """
     Using global DR object dq, a dict of lab settings LSET, and a dict 
     of simulation settings SSET, generate an XIOS file_defs 'file' for a 
@@ -2128,13 +2139,17 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
     context_index=init_context(context,lset.get("path_to_parse","./"),
                                printout=lset.get("debug_parsing",False))
     if context_index is None : sys.exit(1)
+    cell_method_warnings=[]
+    warnings_for_optimisation=[]
+    sn_issues=dict()
+
     #
     #--------------------------------------------------------------------
     # Extract CMOR variables for the experiment and year and lab settings
     #--------------------------------------------------------------------
     skipped_vars_per_table={}
     actually_written_vars=[]
-    mip_vars_list=gather_AllSimpleVars(lset,sset,year,printout,allvars)
+    mip_vars_list=gather_AllSimpleVars(lset,sset,year,printout,select)
     # Group CMOR vars per realm
     svars_per_realm=dict()
     for svar in mip_vars_list :
