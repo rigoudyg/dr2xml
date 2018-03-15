@@ -15,6 +15,34 @@ Also : management of fields size/split_frequency
 
 """
 
+compression_factor=None
+
+def read_compression_factors():
+    """
+    read compression factors: first column is variable label, second 
+    column is a correction factor due to compression efficiency for that 
+    variable (good compression <-> high value); they should be evaluated on 
+    test runs, and applied on runs with the same compression_level setting
+    This factor is applied above the bytes_per_float setting
+    """
+    global compression_factor
+    # No need to reread or try for ever
+    if compression_factor is not None : return
+    try:
+        fact=open("compression_factors.dat","r")
+    except:
+        compression_factor=False
+        return
+    lines=fact.readlines()
+    compression_factor=dict()
+    for line in lines :
+        if line[0]=='#' : continue
+        varlabel=line.split()[0]
+        factor=float(line.split()[1])
+        # Keep smallest factor for each variablelabel
+        if varlabel not in compression_factor or compression_factor[varlabel]> factor :
+            compression_factor[varlabel]=factor
+    
 def normalize(grid) :
     """ in DR 1.0.2, values are :  
     ['', 'model grid', '100km', '50km or smaller', 'cfsites', '1deg', '2deg', '25km or smaller', 'native']
@@ -214,10 +242,19 @@ def split_frequency_for_variable(svar, lset, grid, mcfg,context,printout=False):
     with a default value
 
     """
+    global compression_factor
+    #if svar.label=='tossq' : printout=True
     max_size=lset.get("max_file_size_in_floats",500*1.e6)
     size=field_size(svar, mcfg)*lset.get("bytes_per_float",2)
-    # Some COSP outputs are highly compressed
-    if 'cfad' in svar.label : size/=10.
+    if compression_factor is None : read_compression_factors()
+    if compression_factor and svar.label in compression_factor:
+        if printout : print "Dividing size of %s by %g : %g -> %g"%(svar.label,\
+            compression_factor[svar.label],size,(size+0.)/compression_factor[svar.label])
+        size = (size+0.)/compression_factor[svar.label]
+    else:
+        # Some COSP outputs are highly compressed
+        if 'cfad' in svar.label : size/=10.
+        if 'clmisr' in svar.label : size/=10.
 
     if (size != 0 ) : 
         freq=svar.frequency
@@ -227,16 +264,15 @@ def split_frequency_for_variable(svar, lset, grid, mcfg,context,printout=False):
         nbyears=max_size/float(size_per_year)
         if printout : print "size per year=%s, size=%s, nbyears=%g"%(`size_per_year`,`size`,nbyears)
         if nbyears > 1. :
-            if nbyears < 10:
-                return("1y")
-            elif nbyears < 50 :
-                return("10y")
-            elif nbyears < 100 :
-                return("50y")
-            elif nbyears < 200 :
-                return("100y")
-            else :
-                return("200y")
+            if   nbyears > 500 : return "500y"
+            elif nbyears > 250 : return "250y"
+            elif nbyears > 100 : return "100y"
+            elif nbyears >  50 : return  "50y"
+            elif nbyears >  25 : return  "25y"
+            elif nbyears >  10 : return  "10y"
+            elif nbyears >   5 : return   "5y"
+            elif nbyears >   2 : return   "2y"
+            else : return "1y"
         else: 
             # Try by month
             size_per_month=size*timesteps_per_freq_and_duration(freq,31,sts)
