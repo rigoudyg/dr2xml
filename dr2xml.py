@@ -2723,15 +2723,15 @@ def change_domain_in_grid(domain_id,grid_defs,lset,ping_alias=None,src_grid_id=N
     domain_or_axis="domain" ; axis_name=""
     if turn_into_axis :
         domain_or_axis="axis" ; axis_name=' name="lat"'
-    (target_grid_string,count)=re.subn('domain *id= *.([\w_])*.','%s id="%s" %s'%(domain_or_axis,domain_id,axis_name),\
-                                       src_grid_string,1) 
+    # sequence below was too permissive re. assumption that all grid definition use refs rather than ids
+    #(target_grid_string,count)=re.subn('domain *id= *.([\w_])*.','%s id="%s" %s'%(domain_or_axis,domain_id,axis_name),\
+    #                                   src_grid_string,1) 
+    #if count != 1 :
+    (target_grid_string,count)=re.subn('domain *domain_ref= *.([\w_])*.','%s %s_ref="%s" %s'%\
+                            (domain_or_axis,domain_or_axis,domain_id,axis_name),src_grid_string,1) 
     if count != 1 :
-        #print "trying with regexp : ",'domain *domain_ref= *.([\w_])*.'
-        (target_grid_string,count)=re.subn('domain *domain_ref= *.([\w_])*.','%s %s_ref="%s" %s'%\
-                                           (domain_or_axis,domain_or_axis,domain_id,axis_name),src_grid_string,1) 
-        if count != 1 :
-            raise dr2xml_error("Fatal: cannot find a domain to replace by %s in src_grid_string %s, count=%d "%\
-                               (domain_id,src_grid_string,count))
+        raise dr2xml_error("Fatal: cannot find a domain to replace by %s in src_grid_string %s, count=%d "%\
+                           (domain_id,src_grid_string,count))
     target_grid_string=re.sub('grid *id= *.([\w_])*.','grid id="%s"'%target_grid_id,target_grid_string)
     grid_defs[target_grid_id]=target_grid_string
     #print "target_grid_id=%s : %s"%(target_grid_id,target_grid_string)
