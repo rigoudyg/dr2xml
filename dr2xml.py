@@ -2453,20 +2453,24 @@ def print_SomeStats(context,svars_per_table,skipped_vars_per_table,actually_writ
         if table not in dic[frequency][spatial_shp] : dic[frequency][spatial_shp][table]=dict()
         if Priority not in dic[frequency][spatial_shp][table] : dic[frequency][spatial_shp][table][Priority]=[]
         dic[frequency][spatial_shp][table][Priority].append(label)
-    nbtot=0
+    tot_among_freqs=0
     for frequency in dic :
+        tot_for_freq_among_shapes=0
         for spatial_shp in dic[frequency] :
-            nb=0
+            tot_for_freq_and_shape_among_tables=0
             for table in dic[frequency][spatial_shp] :
                 for Priority in dic[frequency][spatial_shp][table] :
                     print "%10s"%" ", " %8s"%" ", "% 12s"%table,"P%1d"%Priority,
                     l=dic[frequency][spatial_shp][table][Priority]
                     print "% 3d : "%len(l),l
-                    nb+=len(l)
-            print "%10s"%frequency," %8s"%spatial_shp,"% 11s"%"--------","---","%3d"%nb
+                    tot_for_freq_and_shape_among_tables+=len(l)
+            print "%10s"%frequency," %8s"%spatial_shp,"% 11s"%"--------","---","%3d"%tot_for_freq_and_shape_among_tables
+            tot_for_freq_among_shapes+=tot_for_freq_and_shape_among_tables
             print
-            nbtot+=nb
-    
+        print "%10s"%frequency," %8s"%"--------","% 11s"%"--------","---","%3d"%tot_for_freq_among_shapes
+        tot_among_freqs+=tot_for_freq_among_shapes
+        print; print
+    print "%10s"%"----------"," %8s"%"--------","% 11s"%"--------","---","%3d"%tot_among_freqs
     return True
 
 
