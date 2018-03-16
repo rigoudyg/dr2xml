@@ -556,8 +556,8 @@ def RequestItem_applies_for_exp_and_year(ri,experiment,lset,sset,year=None,debug
             print "Error on esid link for ri : %s uid=%s %s"%\
                            ( ri.title, ri.uid, item_exp._h.label)
     #print "ri=%s"%ri.title,
-    if year is not None :
-        print "Filtering for year %d"%year
+    #if year is not None :
+    #    print "Filtering for year %d"%year
 
     if ri_applies_to_experiment :
         if year is None :

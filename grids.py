@@ -17,31 +17,6 @@ Also : management of fields size/split_frequency
 
 compression_factor=None
 
-def read_compression_factors():
-    """
-    read compression factors: first column is variable label, second 
-    column is a correction factor due to compression efficiency for that 
-    variable (good compression <-> high value); they should be evaluated on 
-    test runs, and applied on runs with the same compression_level setting
-    This factor is applied above the bytes_per_float setting
-    """
-    global compression_factor
-    # No need to reread or try for ever
-    if compression_factor is not None : return
-    try:
-        fact=open("compression_factors.dat","r")
-    except:
-        compression_factor=False
-        return
-    lines=fact.readlines()
-    compression_factor=dict()
-    for line in lines :
-        if line[0]=='#' : continue
-        varlabel=line.split()[0]
-        factor=float(line.split()[1])
-        # Keep smallest factor for each variablelabel
-        if varlabel not in compression_factor or compression_factor[varlabel]> factor :
-            compression_factor[varlabel]=factor
     
 def normalize(grid) :
     """ in DR 1.0.2, values are :  
@@ -247,14 +222,16 @@ def split_frequency_for_variable(svar, lset, grid, mcfg,context,printout=False):
     max_size=lset.get("max_file_size_in_floats",500*1.e6)
     size=field_size(svar, mcfg)*lset.get("bytes_per_float",2)
     if compression_factor is None : read_compression_factors()
-    if compression_factor and svar.label in compression_factor:
+    if compression_factor and svar.label in compression_factor and \
+       svar.mipTable in compression_factor[svar.label] :
         if printout : print "Dividing size of %s by %g : %g -> %g"%(svar.label,\
-            compression_factor[svar.label],size,(size+0.)/compression_factor[svar.label])
-        size = (size+0.)/compression_factor[svar.label]
-    else:
-        # Some COSP outputs are highly compressed
-        if 'cfad' in svar.label : size/=10.
-        if 'clmisr' in svar.label : size/=10.
+                compression_factor[svar.label][svar.mipTable],size,\
+                (size+0.)/compression_factor[svar.label][svar.mipTable])
+        size = (size+0.)/compression_factor[svar.label][svar.mipTable]
+    #else:
+    #    # Some COSP outputs are highly compressed
+    #    if 'cfad' in svar.label : size/=10.
+    #    if 'clmisr' in svar.label : size/=10.
 
     if (size != 0 ) : 
         freq=svar.frequency
@@ -277,7 +254,13 @@ def split_frequency_for_variable(svar, lset, grid, mcfg,context,printout=False):
             # Try by month
             size_per_month=size*timesteps_per_freq_and_duration(freq,31,sts)
             nbmonths=max_size/float(size_per_month)
-            if nbmonths > 1. :
+            if nbmonths > 6. :
+                return("6mo")
+            elif nbmonths > 4. :
+                return("4mo")
+            elif nbmonths > 3. :
+                return("3mo")
+            elif nbmonths > 0.7 :
                 return("1mo")
             else:
                 # Try by day
@@ -320,6 +303,37 @@ def timesteps_per_freq_and_duration(freq,nbdays,sampling_tstep):
     elif freq=="1hrCM" : return (int(float(nbdays)/31) + 1) * 24.
     else : raise(dr2xml_grids_error("Frequency %s is not handled"%freq))
     
+
+def read_compression_factors():
+    """
+    read compression factors: first column is variable label, second 
+    column is mipTabe; third column is a correction factor due to 
+    compression efficiency for that variable (good compression <-> high value); 
+    They should be evaluated on test runs, and applied on runs with 
+    the same compression_level setting
+    This factor is applied above the bytes_per_float setting
+    """
+    global compression_factor
+    # No need to reread or try for ever
+    if compression_factor is not None : return
+    try:
+        fact=open("compression_factors.dat","r")
+    except:
+        compression_factor=False
+        return
+    lines=fact.readlines()
+    compression_factor=dict()
+    for line in lines :
+        if line[0]=='#' : continue
+        varlabel=line.split()[0]
+        table=float(line.split()[1])
+        factor=float(line.split()[2])
+        if varlabel not in compression_factor :
+            compression_factor[varlabel]=dict()
+        # Keep smallest factor for each variablelabel
+        if table not in compression_factor[varlabel] or \
+           compression_factor[varlabel][table] > factor :
+            compression_factor[varlabel][table]=factor
 
 class dr2xml_grids_error(Exception):
     def __init__(self, valeur):
