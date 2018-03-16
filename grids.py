@@ -326,7 +326,7 @@ def read_compression_factors():
     for line in lines :
         if line[0]=='#' : continue
         varlabel=line.split()[0]
-        table=float(line.split()[1])
+        table=line.split()[1]
         factor=float(line.split()[2])
         if varlabel not in compression_factor :
             compression_factor[varlabel]=dict()
