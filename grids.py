@@ -16,6 +16,7 @@ Also : management of fields size/split_frequency
 """
 
 compression_factor=None
+splitfreqs=None
 
     
 def normalize(grid) :
@@ -217,9 +218,15 @@ def split_frequency_for_variable(svar, lset, grid, mcfg,context,printout=False):
     with a default value
 
     """
-    global compression_factor
-    #if svar.label=='tossq' : printout=True
+    global splitfreqs
+    if splitfreqs is None : read_splitfreqs()
+    if splitfreqs and svar.label in splitfreqs and \
+       svar.mipTable in splitfreqs[svar.label] :
+        return splitfreqs[svar.label][svar.mipTable]
+    #
     max_size=lset.get("max_file_size_in_floats",500*1.e6)
+    #
+    global compression_factor
     size=field_size(svar, mcfg)*lset.get("bytes_per_float",2)
     if compression_factor is None : read_compression_factors()
     if compression_factor and svar.label in compression_factor and \
@@ -334,6 +341,34 @@ def read_compression_factors():
         if table not in compression_factor[varlabel] or \
            compression_factor[varlabel][table] > factor :
             compression_factor[varlabel][table]=factor
+
+def read_splitfreqs():
+    """
+    read split_frequencies: first column is variable label, second 
+    column is mipTabe; third column is the split_freq
+    """
+    global splitfreqs
+    # No need to reread or try for ever
+    if splitfreqs is not None : return
+    try:
+        freq=open("splitfreqs.dat","r")
+        print "Reading split_freqs from file"
+    except:
+        splitfreqs=False
+        return
+    lines=freq.readlines()
+    freq.close()
+    splitfreqs=dict()
+    for line in lines :
+        if line[0]=='#' : continue
+        varlabel=line.split()[0]
+        table=line.split()[1]
+        freq=line.split()[2]
+        if varlabel not in splitfreqs :
+            splitfreqs[varlabel]=dict()
+        # Keep smallest factor for each variablelabel
+        if table not in splitfreqs[varlabel] :
+            splitfreqs[varlabel][table]=freq
 
 class dr2xml_grids_error(Exception):
     def __init__(self, valeur):

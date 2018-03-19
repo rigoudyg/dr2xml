@@ -1181,7 +1181,7 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     #--------------------------------------------------------------------
     resolution=lset['grid_choice'][source_id]
     split_freq=split_frequency_for_variable(sv, lset, resolution, sc.mcfg, context)
-    #print "split_freq: %-25s %-8s"%(sv.label,split_freq)
+    #print "split_freq: %-25s %-10s %-8s"%(sv.label,sv.mipTable,split_freq)
     #
     #--------------------------------------------------------------------
     # Write XIOS file node:
