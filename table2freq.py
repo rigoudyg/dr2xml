@@ -48,9 +48,9 @@ def guess_freq_from_table_name(table):
     Used for cases where the table is not a CMIP6 one
     """
     
-    if   table=="E1hrClimMon"     : return "1hr"
+    if table=="E1hrClimMon"     : return "1hr"
     #
-    elif table[0:5]  =="subhr"  : return "subhr"
+    elif table[0:5]=="subhr"    : return "subhr"
     elif table[-5:]=="subhr"    : return "subhr"
     elif table[-8:]=="subhrOff" : return "subhr"
     #
@@ -62,6 +62,7 @@ def guess_freq_from_table_name(table):
     elif table[0:3]=="6hr"      : return "6hr"
     elif table[1:4]=="6hr"      : return "6hr"
     elif table[-5:]=="6hrPt"    : return "6hr"
+    elif table[-3:]=="6hr"      : return "6hr"
     #
     elif table[0:3]=="1hr"      : return "1hr"
     elif table[0:5]=="1hrPt"    : return "1hr"
@@ -69,12 +70,12 @@ def guess_freq_from_table_name(table):
     elif table[-5:]=="1hrPt"    : return "1hr"
     elif table[-2:]=="hr"       : return "1hr"
     #
+    elif table[-4:]=="5day"     : return "5d"
+    #
     elif table[-3:]=="day"      : return "day"
     elif table[-5:]=="dayPt"    : return "day"
     #
-    elif table[-4:]=="5day"     : return "5d"
-    #
-    elif table[1:4]  =="mon"    : return "mon"
+    elif table[1:4]=="mon"      : return "mon"
     elif table[-3:]=="mon"      : return "mon"
     elif table[-4:]=="monZ"     : return "mon"
     elif table[-3:]=="Mon"      : return "mon"
