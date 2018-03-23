@@ -1169,7 +1169,7 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
         if sv.frequency in [ "1hrCM", "monC" ]: suffix="-clim"
         else: suffix=""
         filename="%s%s_%s_%s_%s_%s_%s_%s%s"%\
-            (prefix,sv.label,table,source_id,expid_in_filename,
+            (prefix,sv.mipVarLabel,table,source_id,expid_in_filename,
              member_id,grid_label,date_range,suffix)
     #
     further_info_url="https://furtherinfo.es-doc.org/%s.%s.%s.%s.%s.%s"%(
@@ -1187,7 +1187,7 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     # Write XIOS file node:
     # including global CMOR file attributes
     #--------------------------------------------------------------------
-    out.write(' <file id="%s_%s_%s" name="%s" '%(sv.mipVarLabel,table,grid_label,filename))
+    out.write(' <file id="%s_%s_%s" name="%s" '%(sv.label,table,grid_label,filename))
     freq=longest_possible_period(Cmip6Freq2XiosFreq[sv.frequency],lset.get("too_long_periods",[]))
     out.write(' output_freq="%s" '%freq)
     out.write(' append="true" ')
