@@ -14,7 +14,7 @@ class simple_CMORvar(object):
         self.modeling_realm = None 
         self.grids          = [""] 
         self.label          = None  # taken equal to the CMORvar label
-        self.label_without_area= None  # taken equal to MIPvar label
+        self.mipVarLabel    = None  # taken equal to MIPvar label
         self.label_without_psuffix= None
         self.label_non_ambiguous= None
         self.frequency      = None 
@@ -242,6 +242,7 @@ def read_extraTable(path,table,dq,printout=False):
             extra_var.type='extra'
             extra_var.mip_era=mip_era
             extra_var.label=v["out_name"].strip(' ')
+            extra_var.mipVarLabel=extra_var.label
             extra_var.stdname=v.get("standard_name","").strip(' ')
             extra_var.long_name=v["long_name"].strip(' ')
             extra_var.units=v["units"].strip(' ')
@@ -517,7 +518,7 @@ def complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues,debug=[],allow_pseudo=
 
     # Get information from MIPvar
     mipvar = dq.inx.uid[cmvar.vid]
-    svar.label_without_area=mipvar.label.rstrip(' ')
+    svar.mipVarLabel=mipvar.label.rstrip(' ')
     svar.long_name = cmvar.title.rstrip(' ')
     if cmvar.description :
         svar.description = cmvar.description.rstrip(' ')

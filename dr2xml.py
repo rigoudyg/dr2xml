@@ -1187,7 +1187,7 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     # Write XIOS file node:
     # including global CMOR file attributes
     #--------------------------------------------------------------------
-    out.write(' <file id="%s_%s_%s" name="%s" '%(sv.label,table,grid_label,filename))
+    out.write(' <file id="%s_%s_%s" name="%s" '%(sv.mipVarLabel,table,grid_label,filename))
     freq=longest_possible_period(Cmip6Freq2XiosFreq[sv.frequency],lset.get("too_long_periods",[]))
     out.write(' output_freq="%s" '%freq)
     out.write(' append="true" ')
@@ -1362,7 +1362,7 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     wr(out,"title","%s model output prepared for %s / "%(\
         source_id,project)+activity_idr+" "+experiment_id)
     #
-    wr(out,"variable_id",sv.label)
+    wr(out,"variable_id",sv.mipVarLabel)
     #
     variant_info=sset.get('variant_info',"none")
     if variant_info!="none": variant_info+=variant_info_warning
