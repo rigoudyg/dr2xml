@@ -40,7 +40,7 @@ Cmip6Freq2XiosFreq={
     "1hrCM"     :"1mo",
     }
 
-def guess_freq_from_table_name(table):
+def old_guess_freq_from_table_name(table):
     """ 
     Based on non-written CMIP6 conventions, deduce the frequency from the 
     table name; returned frequencies are in CMIP6 syntax 
@@ -93,7 +93,28 @@ def guess_freq_from_table_name(table):
     else :
         print "ERROR in guess_freq_from_table : cannot deduce frequency from table named %s"%table
         sys.exit(1)
-    
+
+def guess_freq_from_table_name(table):
+    """ 
+    Based on non-written CMIP6 conventions, deduce the frequency from the 
+    table name; returned frequencies are in CMIP6 syntax 
+
+    Used for cases where the table is not a CMIP6 one
+    """
+    if "subhr"  in table   : return "subhr"
+    elif "1hr"  in table   : return "1hr"
+    elif "3hr"  in table   : return "3hr"
+    elif "6hr"  in table   : return "6hr"
+    elif "hr"   in table   : return "1hr"
+    elif "5day" in table   : return "5d"
+    elif "day"  in table   : return "day"
+    elif "mon"  in table   : return "mon"
+    elif "yr"   in table   : return "yr"
+    elif "dec"  in table   : return "dec"
+    elif "fx"   in table   : return "fx"
+    else :
+        print "ERROR in guess_freq_from_table : cannot deduce frequency from table named %s"%table
+        sys.exit(1)
 
 def longest_possible_period(freq,too_long_periods):
     """

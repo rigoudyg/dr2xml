@@ -52,7 +52,7 @@ import dreq
 # End of pre-requisites
 ####################################
 
-version="1.0"
+version="1.1"
 print "\n",50*"*","\n*"
 print "* %29s"%"dr2xml version: ", version
 
