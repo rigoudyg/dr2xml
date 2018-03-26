@@ -2339,7 +2339,7 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
                                             dummies, skipped_vars_per_table,actually_written_vars,
                                             prefix,context,grid,pingvars,enddate,attributes)
                 else:
-                    print "Duplicate variable %s,%s in table %s is skipped, preferred is"%\
+                    print "Duplicate variable %s,%s in table %s is skipped, preferred is %s"%\
                         (svar.label, svar.mipVarLabel,table,count[svar.mipVarLabel].label)
                         
         if cfsites_grid_id in grid_defs : out.write(cfsites_input_filedef())
