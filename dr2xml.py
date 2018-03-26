@@ -2313,8 +2313,8 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
         for table in sorted(svars_per_table.keys()) :
             count=dict()
             for svar in sorted(svars_per_table[table],key = lambda x: (x.label + "_" + table)):
-                if svar.label not in count :
-                    count[svar.label]=svar
+                if svar.mipVarLabel not in count :
+                    count[svar.mipVarLabel]=svar
                     for grid in svar.grids :
                         a,hgrid,b,c,d=lset['grids'][grid_choice][context]
                         check_for_file_input(svar,lset,hgrid,pingvars,field_defs,
