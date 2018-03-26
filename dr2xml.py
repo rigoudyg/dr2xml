@@ -711,6 +711,8 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
         if rl.label in lset.get("excluded_request_links",[]) :
             excluded_rls.append(rl)
     for rl in excluded_rls : rls_for_mips.remove(rl)
+    if printout :
+        print "Number of Request Links after filtering by excluded_request_links is: ", len(rls_for_mips)
     #
     excluded_rls=[]
     inclinks=lset.get("included_request_links",[])
@@ -720,6 +722,8 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
         for rl in excluded_rls :
             print "RequestLink %s is not included"%rl.label
             rls_for_mips.remove(rl)
+    if printout :
+        print "Number of Request Links after filtering by included_request_links is: ", len(rls_for_mips)
     #
     if sset  :
         experiment_id=sset['experiment_id']
@@ -731,7 +735,7 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
             ri_ids=dq.inx.iref_by_sect[rl.uid].a['requestItem']
             for ri_id in ri_ids :
                 ri=dq.inx.uid[ri_id]
-                if debug : print "Checking requestItem ",ri.label,
+                if debug : print "Checking requestItem ",ri.title,
                 applies,endyear= RequestItem_applies_for_exp_and_year(ri,
                                  experiment_id, lset,sset,year,False)
                 if applies:
@@ -759,8 +763,12 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
         pmax=lset['max_priority']
     miprl_vars_grids=[]
     for rl in rls :
+        if debug :
+            print "processing RequestLink %s"%rl.title
         rl_vars=sc.varsByRql([rl.uid], pmax=pmax)
         for v in rl_vars :
+            if (debug) :
+                if dq.inx.uid[v].label=='tas' : print 'tas is in request link %s'%rl.title
             # The requested grid is given by the RequestLink except if spatial shape matches S-*
             gr=rl.grid
             cmvar=dq.inx.uid[v]
@@ -808,7 +816,8 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
             and \
             ((mipvar.label,ttable.label) not in excpairs) :
              filtered_vars.append((v,g))
-            #if ("clwvi" in mipvar.label) : print "adding var %s, ttable=%s, exctab="%(cmvar.label,ttable.label),exctab,excvars
+             if debug and ("tas" == mipvar.label) :
+                 print "adding var %s, grid=%s, ttable=%s="%(cmvar.label,g,ttable.label) #,exctab,excvars
         else:
             #if (ttable.label=="Ofx") : print "discarding var %s, ttable=%s, exctab="%(cmvar.label,ttable.label),exctab
             pass
@@ -850,6 +859,9 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
         complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues,allow_pseudo=allow_pseudo)
         svar.Priority=analyze_priority(cmvar,mips_list)
         svar.grids=d[v]
+        if debug :
+            if "tas" == dq.inx.uid[v].label :
+                print "When complementing, tas is included , grids are %s"%svar.grids
         simplified_vars.append(svar)
     print 'Number of simplified vars is :',len(simplified_vars)
     print "Issues with standard names are :",
@@ -2125,6 +2137,7 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
 
     """
     #
+    debug=False
     global print_wrv
     print_wrv=lset.get("print_variables",True)
     cmvk="CMIP6_CV_version"
@@ -2210,6 +2223,7 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
         if printout and len(excludedv.keys())>0:
             print "The following pairs (variable,table) have been excluded for these reasons :"
             for reason in excludedv : print "\t",reason,":",excludedv[reason]
+    if (debug ) : print "For table AMon: ",[ v.label for v in svars_per_table["Amon"] ]
     #      
     #--------------------------------------------------------------------
     # Add svars belonging to the orphan list
@@ -2234,6 +2248,7 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
                 for svar in svars_per_table[table] :
                     if svar.label in orphans: toremove.append(svar)
                 for svar in toremove : svars_per_table[table].remove(svar)
+    if (debug ) : print "Pour table AMon: ",[ v.label for v in svars_per_table["Amon"] ]
     #
     #--------------------------------------------------------------------
     # Read ping_file defined variables
@@ -2323,6 +2338,9 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
                                             field_defs,axis_defs,grid_defs,domain_defs,scalar_defs,file_defs,
                                             dummies, skipped_vars_per_table,actually_written_vars,
                                             prefix,context,grid,pingvars,enddate,attributes)
+                else:
+                    print "Duplicate variable %s,%s in table %s is skipped, preferred is"%\
+                        (svar.label, svar.mipVarLabel,table,count[svar.mipVarLabel].label)
                         
         if cfsites_grid_id in grid_defs : out.write(cfsites_input_filedef())
         for file_def in file_defs : out.write(file_defs[file_def])

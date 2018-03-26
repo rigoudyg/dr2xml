@@ -84,6 +84,7 @@ def CNRM_grid_policy(cmvarid,grids,lset,dq) : #TBD
     else:
         ngrids=[ g for g in grids if g not in [ "1deg", "2deg", "100km", "50km" ]]
         #if "cfsites" in grids : return ["","cfsites"]
+        if ngrids == [] : ngrids=[ "" ] # We should at least provide native grid
         return ngrids
 
 
