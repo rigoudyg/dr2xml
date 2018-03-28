@@ -1562,7 +1562,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
     if last_grid_id != grid_id_in_ping  : gref='grid_ref="%s"'% last_grid_id
     else : gref=""
   
-    rep='  <field field_ref="%s" name="%s" %s '% (last_field_id,sv.label,gref)
+    rep='  <field field_ref="%s" name="%s" %s '% (last_field_id,sv.mipVarLabel,gref)
     #
     # 
     #--------------------------------------------------------------------
