@@ -1612,7 +1612,10 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
                 rep+=' %s>\n\t\t@%s'%(freq_op,last_field_id)
             elif operation=='instant':
                 # must set freq_op (this souldn't be necessary, but is needed with Xios 1442)
-                rep+=' %s>'%(freq_op)
+                if lset.get("useAtForInstant",False):
+                    rep+=' %s>\n\t\t@%s'%(freq_op,last_field_id)
+                else: 
+                    rep+=' %s>'%(freq_op)
             else:
                 # covers only case once , already addressed by freq_op value='' ?
                 rep+=' >'
