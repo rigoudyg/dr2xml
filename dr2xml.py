@@ -574,6 +574,8 @@ def RequestItem_applies_for_exp_and_year(ri,experiment,lset,sset,year=None,debug
 
 
 def year_in_ri(ri,experiment,lset,sset,year,debug=False):
+    if ri.label=="CfmipCf3hrSimNew" :
+        return (year==2008),2008
     if 'tslice' in ri.__dict__ :
         rep,endyear=year_in_ri_tslice(ri,experiment,sset,lset,year,debug=debug)
         return rep,endyear
