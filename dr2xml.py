@@ -52,7 +52,7 @@ import dreq
 # End of pre-requisites
 ####################################
 
-version="1.1"
+version="1.2"
 print "\n",50*"*","\n*"
 print "* %29s"%"dr2xml version: ", version
 
@@ -1238,7 +1238,9 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
             out.write(' split_last_date="%s-%s-%s 00:00:00" '%(endyear,endmonth,endday))
     #
     #out.write('timeseries="exclusive" >\n')
-    out.write(' time_units="days" time_counter_name="time"')
+    time_name="time" 
+    if operation=="instant" : time_name="time1"
+    out.write(' time_units="days" time_counter_name="%s"'%time_name)
     out.write(' time_counter="exclusive"')
     out.write(' time_stamp_name="creation_date" ')
     out.write(' time_stamp_format="%Y-%m-%dT%H:%M:%SZ"')
