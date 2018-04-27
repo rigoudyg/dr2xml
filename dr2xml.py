@@ -1603,7 +1603,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
     # involves time operation (using @)
     #--------------------------------------------------------------------
     if operation == 'once' : freq_op=""
-    else : freq_op='freq_op="%s"'% Cmip6Freq2XiosFreq[sv.frequency]
+    else : freq_op='freq_op="%s"'% longest_possible_period(Cmip6Freq2XiosFreq[sv.frequency],lset.get("too_long_periods",[]))
     #
     rep+=' operation="%s"'%operation
     if not idHasExprWithAt(alias,context_index) : 
@@ -3534,7 +3534,7 @@ def ping_alias(svar,lset,pingvars,error_on_fail=False):
     
     pref=lset["ping_variables_prefix"]
     if svar.label_non_ambiguous:
-        #print "+++ non ambiguous", svar.label
+        #print "+++ non ambiguous", svar.label,svar.label_non_ambiguous
         alias_ping=pref+svar.label_non_ambiguous # e.g. 'CMIP6_tsn_land' and not 'CMIP6_tsn'
     else:
         #print "+++ ambiguous", svar.label
