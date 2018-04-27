@@ -1399,7 +1399,8 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     out.write(end_field)
     if sv.spatial_shp[0:4]=='XY-A' or sv.spatial_shp[0:3]=='S-A': # includes half-level cases
         # create a field_def entry for surface pressure 
-        sv_psol=get_simplevar(dq,"ps",table)
+        #print "Searching for ps for var %s, freq %s="%(alias,freq)
+        sv_psol=get_simplevar(dq,"ps",table,sv.frequency)
         
         if sv_psol :
             #if not sv_psol.cell_measures : sv_psol.cell_measures = "cell measure is not specified in DR "+dq.version
@@ -1407,6 +1408,10 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
                                                   field_defs,axis_defs,grid_defs,domain_defs,scalar_defs,
                                        dummies,context,target_hgrid_id,zgrid_id,pingvars)
             out.write(psol_field)
+        else:
+            print "Warning: Cannot complement model levels with psol for variable %s and table %s"%\
+                (sv.label,sv.frequency)
+
 
     #
     names={}

@@ -775,7 +775,7 @@ def analyze_ambiguous_MIPvarnames(dq,debug=[]):
     return ambiguous
 
 
-def get_simplevar(dq,label,table):
+def get_simplevar(dq,label,table,freq=None):
     """ 
     Returns 'simplified variable' for a given CMORvar label and table
     """
@@ -786,9 +786,31 @@ def get_simplevar(dq,label,table):
         if cmvar.mipTable==table and cmvar.label==label :
             psvar=cmvar
             break
+    #
+    # Try to get a var for 'ps' when table is only in Home DR 
+    if psvar is None and label=="ps" and freq is not None :
+        #print "\tSearching for alternate ps "
+        if   freq in [ "3h", "3hr", "3hrPt" ] : psvar=get_CMORvar(dq,'ps','E3hrPt')
+        elif freq in [ "6h", "6hr" ] : psvar=get_CMORvar(dq,'ps','6hrLev')
+        elif freq in [ "day" ]       : psvar=get_CMORvar(dq,'ps','CFday' )
+        elif freq in [ "mon", "1mo" ]: psvar=get_CMORvar(dq,'ps','Emon'  )
+        elif freq in [ "subhr" ]     : psvar=get_CMORvar(dq,'ps','Esubhr')
     if psvar :
-        complement_svar_using_cmorvar(svar,cmvar,dq,None)
+        complement_svar_using_cmorvar(svar,psvar,dq,None)
         return svar
+
+def get_CMORvar(dq,label,table):
+    """ 
+    Returns CMOR variable for a given label in a given table
+    (could be optimized using inverse index)
+    """
+    collect=dq.coll['CMORvar']
+    thevar=None
+    for cmvar in collect.items:
+        if cmvar.mipTable==table and cmvar.label==label :
+            thevar=cmvar
+            break
+    return thevar
 
 def scalar_vertical_dimension(sv,dq):
     if 'cids' in sv.struct.__dict__:
