@@ -207,7 +207,9 @@ def read_extraTable(path,table,dq,printout=False):
         dims2shape['longitude|latitude|plev10']='XY-P10'
         # David : test
         dims2shape['longitude|latitude|plev7hm']='XY-P7HM'
-    #
+        # Romain
+        dims2shape['longitude|latitude|plev19hm']='XY-P19HM'
+#
     if not dim2dimid:
         for g in dq.coll['grids'].items:
             dim2dimid[g.label]=g.uid

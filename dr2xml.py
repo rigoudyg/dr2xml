@@ -1085,7 +1085,8 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
                          "Users can find more comprehensive and up-to-date documentation via the further_info_url global attribute."
     #
     # WIP Draft 14 july 2016
-    mip_era=sv.mip_era
+    if 'mip_era' in lset : mip_era=lset('mip_era')
+    else: mip_era=sv.mip_era
     #
     # WIP doc v 6.2.0 - dec 2016 
     # <variable_id>_<table_id>_<source_id>_<experiment_id >_<member_id>_<grid_label>[_<time_range>].nc
@@ -1145,8 +1146,8 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
         exp_entry=CMIP6_experiments[expid]
         experiment=exp_entry['experiment']
         description=exp_entry['description']
-        activity_id=exp_entry['activity_id']
-        parent_activity_id=exp_entry['parent_activity_id']
+        activity_id=lset.get('activity_id',exp_entry['activity_id'])
+        parent_activity_id=lset.get('parent_activity_id',lset.get('activity_id',exp_entry['parent_activity_id']))
         parent_experiment_id=exp_entry['parent_experiment_id']
         required_components=exp_entry['required_model_components']#.split(" ")
         allowed_components=exp_entry['additional_allowed_model_components']#.split(" ")
@@ -1187,9 +1188,12 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
             (prefix,sv.mipVarLabel,table,source_id,expid_in_filename,
              member_id,grid_label,date_range,suffix)
     #
-    further_info_url="https://furtherinfo.es-doc.org/%s.%s.%s.%s.%s.%s"%(
-        mip_era,institution_id,source_id,expid_in_filename,
-        sub_experiment_id,variant_label)
+    if 'mip_era' not in lset : 
+        further_info_url="https://furtherinfo.es-doc.org/%s.%s.%s.%s.%s.%s"%(
+            mip_era,institution_id,source_id,expid_in_filename,
+            sub_experiment_id,variant_label)
+    else:
+        further_info_url=""
     #
     #--------------------------------------------------------------------
     # Compute XIOS split frequency
@@ -1290,7 +1294,7 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     wr(out,'forcing_index',forcing_index,num_type="int") 
     wr(out,'frequency',sv.frequency)
     #
-    wr(out,'further_info_url',further_info_url)
+    if further_info_url : wr(out,'further_info_url',further_info_url)
     #
     wr(out,'grid',grid_description) ; wr(out,'grid_label',grid_label) ;
     wr(out,'nominal_resolution',grid_resolution)
@@ -1374,14 +1378,18 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     #
     wr(out,"table_id",table)
     #
-    wr(out,"title","%s model output prepared for %s / "%(\
-        source_id,project)+activity_idr+" "+experiment_id)
+    if 'expid_in_filename' not in sset :
+        wr(out,"title","%s model output prepared for %s / "%(\
+                        source_id,project)+activity_idr+" "+experiment_id)
+    else
+        wr(out,"title","%s model output prepared for %s and "%(\
+                        source_id,project)+activity_idr+" / "+expid_in_filename+" simulation")
     #
     wr(out,"variable_id",sv.mipVarLabel)
     #
     variant_info=sset.get('variant_info',"none")
-    if variant_info!="none": variant_info+=variant_info_warning
-    wr(out,"variant_info",variant_info)
+    if variant_info!="none" and variant_info!="" : variant_info+=variant_info_warning
+    if variant_info!="" : wr(out,"variant_info",variant_info)
     wr(out,"variant_label",variant_label)
     for name,value in attributes : wr(out,name,value)
     non_stand_att=lset.get("non_standard_attributes",dict())
