@@ -1085,7 +1085,7 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
                          "Users can find more comprehensive and up-to-date documentation via the further_info_url global attribute."
     #
     # WIP Draft 14 july 2016
-    if 'mip_era' in lset : mip_era=lset('mip_era')
+    if 'mip_era' in lset : mip_era=lset['mip_era']
     else: mip_era=sv.mip_era
     #
     # WIP doc v 6.2.0 - dec 2016 
@@ -1253,7 +1253,10 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     #            (lset['source_id'],sset['experiment_id'],sset.get('project',"CMIP6"))) 
     out.write(' >\n')
     #
-    activity_idr=reduce(lambda x,y : x+" "+y, activity_id)
+    if type(activity_id)==type([]) :
+        activity_idr=reduce(lambda x,y : x+" "+y, activity_id)
+    else:
+        activity_idr=activity_id
     wr(out,'activity_id',activity_idr)
     #
     if contact and contact is not "" : wr(out,'contact',contact) 
@@ -1381,7 +1384,7 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     if 'expid_in_filename' not in sset :
         wr(out,"title","%s model output prepared for %s / "%(\
                         source_id,project)+activity_idr+" "+experiment_id)
-    else
+    else:
         wr(out,"title","%s model output prepared for %s and "%(\
                         source_id,project)+activity_idr+" / "+expid_in_filename+" simulation")
     #
