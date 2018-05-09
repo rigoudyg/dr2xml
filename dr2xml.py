@@ -563,8 +563,10 @@ def RequestItem_applies_for_exp_and_year(ri,experiment,lset,sset,year=None,debug
     if ri_applies_to_experiment :
         if year is None :
             rep=True ; endyear=None
+            if (debug) : print " ..applies because arg year is None"
         else :
             rep,endyear=year_in_ri(ri,experiment,lset,sset,year,debug=debug)
+            if (debug) : print " ..year in ri returns :",rep,endyear
             #if (ri.label=="AerchemmipAermonthly3d") :
             #    print "reqItem=%s,experiment=%s,year=%d,rep=%s,"%(ri.label,experiment,year,rep)
         #print " rep=",rep
@@ -1226,9 +1228,11 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
         lastyear=None
         # Try to get enddate for the CMOR variable from the DR
         if sv.cmvar is not None :
-            lastyear=endyear_for_CMORvar(dq,sv.cmvar,expid,year,lset)
+            #print "calling endyear_for... for %s, with year="%(sv.label), year
+            lastyear=endyear_for_CMORvar(dq,sv.cmvar,expid,year,lset,sset)
             #print "lastyear=",lastyear," enddate=",enddate
         if lastyear is None or lastyear >= int(enddate[0:4]) :
+            # DR doesn't specify an end date for that var, or a very late one
             if lset.get('dr2xml_manages_enddate',True) :
                 # Use run end date as the latest possible date
                 # enddate must be 20140101 , rather than 20131231
@@ -3579,7 +3583,7 @@ def RequestItemInclude(ri,var_label,freq) :
     cmVars=[ dq.inx.uid[dq.inx.uid[reqvar].vid] for reqvar in reqVars ]
     return any( [ cmv.label==var_label and cmv.frequency==freq for cmv in cmVars ])
 
-def endyear_for_CMORvar(dq,cv,expt,year,lset): 
+def endyear_for_CMORvar(dq,cv,expt,year,lset,sset): 
     """ 
     For a CMORvar, returns the larger year in the time slice(s)  
     of those requestItems which apply for experiment EXPT and which 
@@ -3592,9 +3596,9 @@ def endyear_for_CMORvar(dq,cv,expt,year,lset):
     global global_rls
 
     # Some debug material
-    if False and (cv.label=="tsl" and cv.frequency=="mon") : printout=True
+    if False and (cv.label=="zg500" ) : printout=True
     else : printout=False
-
+    
     # 1- Get the RequestItems which apply to CmorVar
     rVarsUid=dq.inx.iref_by_sect[cv.uid].a['requestVar']
     rVars=[ dq.inx.uid[uid] for uid in rVarsUid ]
@@ -3620,9 +3624,10 @@ def endyear_for_CMORvar(dq,cv,expt,year,lset):
     larger=None
     for riid in RequestItems : 
         ri=dq.inx.uid[riid] 
-        applies,endyear=RequestItem_applies_for_exp_and_year(ri,expt,lset,year)
+        applies,endyear=RequestItem_applies_for_exp_and_year(ri,expt,lset,sset,year,debug=printout)
         if printout :
-            print "For var and freq selected for debug, for ri %s, applies=%s, endyear=%s"%(ri.title, `applies`,`endyear`)
+            print "For var and freq selected for debug and year %d, for ri %s, applies=%s, endyear=%s"%\
+                (year,ri.title, `applies`,`endyear`)
         if applies :
             if endyear is None:  return None # One of the timeslices cover the whole expt
             else :
