@@ -1142,7 +1142,9 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
         if not CMIP6_experiments.has_key(sset['experiment_id']):
             raise dr2xml_error("Issue getting experiment description in CMIP6 CV for %20s"%sset['experiment_id'])
         expid=sset['experiment_id']
-        expid_in_filename=sset.get('expid_in_filename',expid) 
+        expid_in_filename=sset.get('expid_in_filename',expid)
+        if "_" in expid_in_filename:
+            raise dr2xml_error("Cannot use character '_' in expid_in_filename (%s)"%expid_in_filename)
         exp_entry=CMIP6_experiments[expid]
         experiment=exp_entry['experiment']
         description=exp_entry['description']
