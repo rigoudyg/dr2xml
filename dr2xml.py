@@ -2521,7 +2521,11 @@ def print_SomeStats(context,svars_per_table,skipped_vars_per_table,actually_writ
         print; print
     print "%10s"%"----------"," %8s"%"--------","% 11s"%"--------","---","%3d"%tot_among_freqs
     
+<<<<<<< HEAD
     if extended :
+=======
+    if lset.get("print_stats_per_var_label", False):
+>>>>>>> GH/master
         print "\n\nSome Statistics on actually written variables per variable..."
         dic=dict()
         dic_ln=dict()
