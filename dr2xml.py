@@ -402,7 +402,9 @@ example_lab_and_model_settings={
     # DR has sn attributes for MIP variables. They can be real,CF-compliant, standard_names or
     # pseudo_standard_names, i.e. not yet approved labels. Default is to use only CF ones
     'allow_pseudo_standard_names' : False,
-    
+
+    # For an extended printout of selected CMOR variables, grouped by variable label
+    'print_stats_per_var_label' : False,
 }
 
 
@@ -1448,7 +1450,7 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
         out.write('\t<field field_ref="%s%s" name="%s" long_name="%s" operation="once" prec="8" />\n'%\
                   (lset["ping_variables_prefix"],tab,tab.replace('h',''),names[tab]))
     out.write('</file>\n\n')
-    actually_written_vars.append((sv.label,sv.mipTable,sv.frequency,sv.Priority,sv.spatial_shp))
+    actually_written_vars.append((sv.label,sv.long_name,sv.mipTable,sv.frequency,sv.Priority,sv.spatial_shp))
     
 
 def wrv(name, value, num_type="string"):
@@ -2493,7 +2495,7 @@ def print_SomeStats(context,svars_per_table,skipped_vars_per_table,actually_writ
 
     #    ((sv.label,sv.table,sv.frequency,sv.Priority,sv.spatial_shp))
     dic=dict()
-    for label,table,frequency,Priority,spatial_shp in actually_written_vars :
+    for label,long_name,table,frequency,Priority,spatial_shp in actually_written_vars :
         if frequency not in dic : dic[frequency]=dict()
         if spatial_shp not in dic[frequency] : dic[frequency][spatial_shp]=dict()
         if table not in dic[frequency][spatial_shp] : dic[frequency][spatial_shp][table]=dict()
@@ -2517,6 +2519,28 @@ def print_SomeStats(context,svars_per_table,skipped_vars_per_table,actually_writ
         tot_among_freqs+=tot_for_freq_among_shapes
         print; print
     print "%10s"%"----------"," %8s"%"--------","% 11s"%"--------","---","%3d"%tot_among_freqs
+    
+    if lset.get("print_stats_per_var_label", False):
+        print "\n\nSome Statistics on actually written variables per variable..."
+        dic=dict()
+        dic_ln=dict()
+        for label,long_name,table,frequency,Priority,spatial_shp in actually_written_vars :
+            if not dic.has_key(label): 
+                dic[label]=[]
+                dic_ln.update({label:long_name})
+                dic[label].append(frequency+'_'+table+'_'+spatial_shp+'_'+str(Priority))
+            
+        list_labels=dic.keys()
+        list_labels.sort()
+        print ">>> DBG >>>",list_labels
+    
+        for label in list_labels:
+            print (14+len(label))*"-"
+            print "--- VARNAME: ",label,":", dic_ln[label]
+            print (14+len(label))*"-"
+            for val in dic[label]:
+                print 14*" "+"* ",val
+                
     return True
 
 
