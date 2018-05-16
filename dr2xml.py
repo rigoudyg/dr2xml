@@ -2529,7 +2529,7 @@ def print_SomeStats(context,svars_per_table,skipped_vars_per_table,actually_writ
             if not dic.has_key(label): 
                 dic[label]=[]
                 dic_ln.update({label:long_name})
-                dic[label].append(frequency+'_'+table+'_'+spatial_shp+'_'+str(Priority))
+            dic[label].append(frequency+'_'+table+'_'+spatial_shp+'_'+str(Priority))
             
         list_labels=dic.keys()
         list_labels.sort()
