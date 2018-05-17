@@ -396,6 +396,21 @@ example_lab_and_model_settings={
     # tas-ImonAnt, areacellg-IfxAnt). Defaults to True
     'allow_duplicates' : True,
 
+    # Should we allow for another type of duplicate vars : two vars
+    # with same name in same table (usually with different
+    # shapes). This applies to e.g. CMOR vars 'ua' and 'ua7h' in
+    # 6hPlevPt. Default to False, because CMIP6 rules does not allow
+    # to name output files differently in that case. If set to True,
+    # you should also set 'use_cmorvar_label_in_filename' to True to
+    # overcome the said rule
+    'allow_duplicates_in_same_table' : False,
+
+    # CMIP6 rule is that filenames includes the variable label, and
+    # that this variable label is not the CMORvar label, but 'MIPvar'
+    # label. This may lead to conflicts, e.g. for 'ua' and 'ua7h' in
+    # table 6hPlevPt; next setting allows to avoid that
+    'use_cmorvar_label_in_filename' : False,
+
     # In order to identify which xml files generates a problem, you can use this flag
     'debug_parsing' : False,
 
@@ -784,6 +799,7 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
             if sp.label[0:2]=="S-" : gr='cfsites'
             if (v,gr) not in miprl_vars_grids :
                 miprl_vars_grids.append((v,gr))
+                #if 'ua' in cmvar.label : print "adding %s %s"%(cmvar.label,dq.inx.uid[cmvar.vid].label)
             #else:
             #    print "Duplicate pair var/grid : ",cmvar.label,cmvar.mipTable,gr
     if printout :
@@ -1186,12 +1202,14 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
         filename="%s%s_%s_%s_%s_%s_%s"%\
                    (prefix,sv.label,table,source_id,expid_in_filename, member_id,grid_label)
     else:
+        varname_for_filename=sv.mipVarLabel
+        if lset.get('use_cmorvar_label_in_filename',False) : varname_for_filename=sv.label
         # WIP doc v6.2.3 : a suffix "-clim" should be added if climatology
         #if False and "Clim" in sv.frequency: suffix="-clim"
         if sv.frequency in [ "1hrCM", "monC" ]: suffix="-clim"
         else: suffix=""
         filename="%s%s_%s_%s_%s_%s_%s_%s%s"%\
-            (prefix,sv.mipVarLabel,table,source_id,expid_in_filename,
+            (prefix,varname_for_filename,table,source_id,expid_in_filename,
              member_id,grid_label,date_range,suffix)
     #
     if 'mip_era' not in lset : 
@@ -2358,7 +2376,11 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
         for table in sorted(svars_per_table.keys()) :
             count=dict()
             for svar in sorted(svars_per_table[table],key = lambda x: (x.label + "_" + table)):
-                if svar.mipVarLabel not in count :
+                if lset.get("allow_duplicates_in_same_table",False) or svar.mipVarLabel not in count :
+                    if not lset.get("use_cmorvar_label_in_filename",False) and svar.mipVarLabel in count :
+                        form="If you really want to actually produce both %s and %s in table %s, "+\
+                            "you must set 'use_cmorvar_label_in_filename' to True in lab settings"
+                        raise dr2xml_error(form%(svar.label, count[svar.mipVarLabel].label,table))
                     count[svar.mipVarLabel]=svar
                     for grid in svar.grids :
                         a,hgrid,b,c,d=lset['grids'][grid_choice][context]
