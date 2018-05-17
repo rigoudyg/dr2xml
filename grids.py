@@ -79,7 +79,10 @@ def CNRM_grid_policy(cmvarid,grids,lset,dq) : #TBD
     """
     See doc of lab_adhoc_grid_policy
     """
-    if dq.inx.uid[cmvarid].label in [ "tos", "sos" ] :
+    if dq.inx.uid[cmvarid].label in [ "sos" ] :
+        return [ g for g in grids if g in ["","1deg"]]
+    elif dq.inx.uid[cmvarid].label in [ "tos" ] and \
+         ( dq.inx.uid[cmvarid].mipTable not in [ "3hr" ] or lset.get("allow_tos_3hr_1deg",True)):
         return [ g for g in grids if g in ["","1deg"]]
     else:
         ngrids=[ g for g in grids if g not in [ "1deg", "2deg", "100km", "50km" ]]

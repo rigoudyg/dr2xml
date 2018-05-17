@@ -424,6 +424,9 @@ example_lab_and_model_settings={
 
     # For an extended printout of selected CMOR variables, grouped by variable label
     'print_stats_per_var_label' : False,
+
+    # When using select='no', Xios may enter an endless loop, which is solved if next setting is False
+    'allow_tos_3hr_1deg' : True
 }
 
 
@@ -2454,11 +2457,13 @@ def generate_file_defs_inner(lset,sset,year,enddate,context,cvs_path,pingfiles=N
     for warning,label,table in cell_method_warnings:
         if warning not in warn : warn[warning]=set()
         warn[warning].add(label)
-    print "\nWarnings about cell methods (with var list)"
-    for w in warn  : print "\t",w," for vars : ",warn[w]
-    print "Warning for fields which cannot be optimised (i.e. average before remap) beause of an expr with @\n\t",
-    for w in warnings_for_optimisation  : print w.replace(lset['ping_variables_prefix'],""),
-    print
+    if len(warn) > 0 :
+        print "\nWarnings about cell methods (with var list)"
+        for w in warn  : print "\t",w," for vars : ",warn[w]
+    if len(warnings_for_optimisation) > 0 :
+        print "Warning for fields which cannot be optimised (i.e. average before remap) because of an expr with @\n\t",
+        for w in warnings_for_optimisation  : print w.replace(lset['ping_variables_prefix'],""),
+        print
         
 
 # mpmoine_petitplus: nouvelle fonction print_SomeStats (plus d'info sur les skipped_vars, nbre de vars / (shape,freq) )
