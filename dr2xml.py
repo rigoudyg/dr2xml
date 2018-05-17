@@ -411,6 +411,10 @@ example_lab_and_model_settings={
     # table 6hPlevPt; next setting allows to avoid that
     'use_cmorvar_label_in_filename' : False,
 
+    # DR01.00.21 does not include Gibraltar strait, which is requested by OMIP
+    # Can include it, if model provides it as last value of array. Defaults to false
+    'add_Gribraltar' : False,
+
     # In order to identify which xml files generates a problem, you can use this flag
     'debug_parsing' : False,
 
@@ -2808,6 +2812,8 @@ def create_axis_from_dim(dim,labels,axis_ref,axis_defs,lset):
     else:
         rep+=' dim_name="%s" '%dim.altLabel
         if labels is None : labels=dim.requested
+        if dim.label=="oline" and lset.get('add_Gibraltar',False) :
+            labels+=" gibraltar"
         labels=labels.replace(', ',' ').replace(',',' ')
         length=len(labels.split())
         #print 'labels=',labels.split()
