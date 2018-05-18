@@ -492,8 +492,20 @@ example_simulation_settings={
                                          # This is an alternative to using "branch_year_in_parent"
     #'parent_time_units'    : "" #in case it is not the same as child time units
 
-    "branch_year_in_child" : 1850,      # if your calendar is Gregorian, you can specify the branch year in child directly
-                                        # This is an alternative to using "branch_time_in_child"
+    # In some instances, the experiment start year is not explicit or is doubtful in DR. See
+    # file doc/some_experiments_starty_in_DR01.00.21. You should then specifiy it, using next setting
+    # in order that requestItems analysis work in all cases
+    
+    # In some other cases, DR requestItems which apply to the experiment form its start does not 
+    # cover its whole duration and have a wrong duration (computed based on a wrong start year); 
+    # They necessitate to fix the start year 
+    #'branch_year_in_child' : 1950,
+
+    # If you want to carry on the experiment beyond the duration set in DR, and that all
+    # requestItems that apply to DR end year also apply later on, set 'end_year'
+    # You can also set it if you don't know if DR has a wrong value
+    #'end_year' : 2014,
+
     'child_time_ref_year'  : 1850,      # MUST BE CONSISTENT WITH THE TIME UNITS OF YOUR MODEL(S) !!!
                                         # (this is not necessarily the parent start date)
                                         # the ref_year for a scenario must be the same as for the historical
@@ -566,15 +578,15 @@ def RequestItem_applies_for_exp_and_year(ri,experiment,lset,sset,year=None,debug
         for e in [ dq.inx.uid[eid] for eid in exps_id ] :
             if e.label==experiment : 
                 if (debug) :  print " OK for experiment based on group"+\
-                   group_id.label,
+                   item_exp.label,
                 ri_applies_to_experiment=True
     elif item_exp._h.label== 'mip' :
-        if (debug)  : print "%20s"%"Mip case ",dq.inx.uid[mip_id].label,
+        if (debug)  : print "%20s"%"Mip case ",dq.inx.uid[item_exp.label].label,
         exps_id=dq.inx.iref_by_sect[ri.esid].a['experiment']
         for e in [ dq.inx.uid[eid] for eid in exps_id ] :
             if (debug) :  print e.label,",",
             if e.label==experiment : 
-                if (debug) :  print " OK for experiment based on mip"+ mip_id.label,
+                if (debug) :  print " OK for experiment based on mip"+ item_exp.label,
                 ri_applies_to_experiment=True
     else :
         if (debug)  :
@@ -589,7 +601,8 @@ def RequestItem_applies_for_exp_and_year(ri,experiment,lset,sset,year=None,debug
             rep=True ; endyear=None
             if (debug) : print " ..applies because arg year is None"
         else :
-            rep,endyear=year_in_ri(ri,experiment,lset,sset,year,debug=debug)
+            exp=dq.inx.uid[dq.inx.experiment.label[experiment][0]]
+            rep,endyear=year_in_ri(ri,exp,lset,sset,year,debug=debug)
             if (debug) : print " ..year in ri returns :",rep,endyear
             #if (ri.label=="AerchemmipAermonthly3d") :
             #    print "reqItem=%s,experiment=%s,year=%d,rep=%s,"%(ri.label,experiment,year,rep)
@@ -600,28 +613,80 @@ def RequestItem_applies_for_exp_and_year(ri,experiment,lset,sset,year=None,debug
         return False,None
 
 
-def year_in_ri(ri,experiment,lset,sset,year,debug=False):
+def year_in_ri(ri,exp,lset,sset,year,debug=False):
     if ri.label=="CfmipCf3hrSimNew" :
         return (year==2008),2008
     if 'tslice' in ri.__dict__ :
-        rep,endyear=year_in_ri_tslice(ri,experiment,sset,lset,year,debug=debug)
+        if (debug) : print "calling year_in_ri_tslice"
+        rep,endyear=year_in_ri_tslice(ri,exp,sset,lset,year,debug=debug)
         return rep,endyear
     try :
         ny=int(ri.nymax)
-        first_year=sset["branch_year_in_child"]
-        if (ny > 0) : endyear=first_year+ny-1
-        else :
-            # assume that it means : whole experiment duration
-            # TBD : year_in_ri : endyear is not meaningful for some cases
-            endyear=first_year+10000
-        applies=(year <= endyear)
-        return applies,endyear
     except:
-        print "Cannot tell if year %d applies to reqItem %s -> assumes yes"%(year,ri.title)
+        print "Warning : Cannot tell if reqItem %s applies to year %d  (ny=%s) -> assumes yes"%(ri.title,year,`ny`)
         return True,None
-        
+    # 
+    # From now, this the case of a RequestItem which starts from experiment's start
+    actual_first_year=experiment_start_year(exp,sset)  # The start year, possibly fixed by the user
+    actual_end_year  =experiment_end_year(exp,sset)  # = the end year requested by the user if any
+    DR_first_year    =experiment_start_year(exp,False,debug=debug)  
+    DR_end_year      =experiment_end_year(exp,False)  
+    if debug : print "year_in_ri : start DR : %s actual : %s | end DR : %s actual : %s | ny=%d"%\
+       (DR_first_year,actual_first_year, DR_end_year ,actual_end_year,ny)
+    #
+    ri_is_for_all_experiment=False
+    if (ny <= 0) :
+        ri_is_for_all_experiment=True
+        if debug : print "year_in_ri : RI applies systematically"
+    else :
+        if DR_first_year and DR_end_year and ny==(DR_end_year - DR_first_year +1):
+            ri_is_for_all_experiment=True
+        if debug : print "year_in_ri : RI applies because ny=end-start"
+    if ri_is_for_all_experiment : return True,actual_end_year
+    #
+    # From now, we know that requestItem duration is less than experiment duration
+    # We may have errors in requestItem duration ny, because of an error in DR for start year
+    # So, we add to ny the difference between DR and actual start_years, if the DR value is meaningful
+    if DR_first_year  :
+        ny += DR_first_year - actual_first_year  # Will be 0 if end is defined in DR and not by the user
+        if debug and actual_first_year != DR_first_year :
+            print "year_in_ri : compensating ny for diff in first year"
+    RI_end_year=actual_first_year+ny-1
+    # For these kind of requestItem of limited duration, no need to extend it, whatever the actual end date
+    applies=(year <= RI_end_year)
+    if debug : print "year_in_ri : returning ",applies,RI_end_year
+    return applies,RI_end_year
     
-def year_in_ri_tslice(ri,experiment,sset,lset,year,debug=False):
+def experiment_start_year(exp,sset=None,debug=False):
+    if sset and "branch_year_in_child" in sset :
+        return sset["branch_year_in_child"]
+    else:
+        try:
+            return int(float(exp.starty))
+        except:
+            if sset is False :
+                if debug : print "start_year : starty=",exp.starty
+                return None
+            form="Cannot guess first year for experiment %s : DR says :'%s' "
+            if sset :
+                form += "and 'branch_year_in_child' is not provided in experiment's settings"
+            raise dr2xml_error(form%(exp.label,exp.starty))
+        
+        
+def experiment_end_year(exp,sset=None):
+    if sset and "end_year" in sset :
+        return sset["end_year"]
+    else:
+        try:
+            return int(float(exp.endy))
+        except:
+            if set is False : return None
+            form="Cannot guess end year for experiment %s : DR says :'%s' "
+            if sset : form += "and 'end_year' is not provided in experiment's settings"
+            raise dr2xml_error(form%(exp.label,exp.endy))
+        
+        
+def year_in_ri_tslice(ri,exp,sset,lset,year,debug=False):
     # Returns a couple : relevant, endyear.
     # RELEVANT is True if requestItem RI applies to
     #   YEAR, either implicitly or explicitly (e.g. timeslice)
@@ -643,7 +708,8 @@ def year_in_ri_tslice(ri,experiment,sset,lset,year,debug=False):
     if tslice.type=="simpleRange" : # e.g. _slice_DAMIP20
         if tslice.start < 1800 :
         # to manage _slice_abrupt*
-            first_year=sset["branch_year_in_child"]
+            first_year=experiment_start_year(exp,sset)
+            #first_year=sset["branch_year_in_child"]
             relevant = (year >= tslice.start + first_year - 1 and year <= tslice.end + first_year - 1)
             endyear = first_year + tslice.end - 1
         else :
@@ -661,9 +727,8 @@ def year_in_ri_tslice(ri,experiment,sset,lset,year,debug=False):
             relevant=True
             endyear=year
     elif tslice.type=="startRange": # e.g. _slice_VolMIP3
-        #start_year=experiment_start_year(experiment)
-        # TBD : code experiment_start_year (used for VolMIP : _slice_VolMIP3)
-        start_year=1850
+        # used only for VolMIP : _slice_VolMIP3 
+        start_year=experiment_start_year(exp,sset)
         relevant= (year >= start_year and year < start_year+nyear)
         endyear=start_year + nyear - 1
     elif tslice.type=="monthlyClimatology": # e.g. _slice_clim20
@@ -687,7 +752,7 @@ def year_in_ri_tslice(ri,experiment,sset,lset,year,debug=False):
         raise dr2xml_error("type %s for time slice %s is not handled"%(tslice.type,tslice.title))
     if (debug) :
         print "for year %d and experiment %s, relevant is %s for tslice %s of type %s, endyear=%s"%\
-            (year,experiment,`relevant`,ri.title,tslice.type,`endyear`)
+            (year,exp.label,`relevant`,ri.title,tslice.type,`endyear`)
     return relevant,endyear
 
 
@@ -3643,7 +3708,7 @@ def RequestItemInclude(ri,var_label,freq) :
 
 def endyear_for_CMORvar(dq,cv,expt,year,lset,sset): 
     """ 
-    For a CMORvar, returns the larger year in the time slice(s)  
+    For a CMORvar, returns the largest year in the time slice(s)  
     of those requestItems which apply for experiment EXPT and which 
     include YEAR. If no time slice applies, returns None 
     """ 
@@ -3654,7 +3719,7 @@ def endyear_for_CMORvar(dq,cv,expt,year,lset,sset):
     global global_rls
 
     # Some debug material
-    if False and (cv.label=="zg500" ) : printout=True
+    if False and (cv.label=="uas" ) : printout=True
     else : printout=False
     
     # 1- Get the RequestItems which apply to CmorVar
@@ -3688,9 +3753,7 @@ def endyear_for_CMORvar(dq,cv,expt,year,lset,sset):
                 (year,ri.title, `applies`,`endyear`)
         if applies :
             if endyear is None:  return None # One of the timeslices cover the whole expt
-            else :
-                if larger is None : larger=endyear
-                else : larger=max(larger,endyear)
+            else : larger=max(larger,endyear)
     return larger
 
 
