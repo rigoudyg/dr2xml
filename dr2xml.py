@@ -680,7 +680,7 @@ def experiment_end_year(exp,sset=None):
         try:
             return int(float(exp.endy))
         except:
-            if set is False : return None
+            if sset is False : return None
             form="Cannot guess end year for experiment %s : DR says :'%s' "
             if sset : form += "and 'end_year' is not provided in experiment's settings"
             raise dr2xml_error(form%(exp.label,exp.endy))
