@@ -408,7 +408,7 @@ example_lab_and_model_settings={
     # CMIP6 rule is that filenames includes the variable label, and
     # that this variable label is not the CMORvar label, but 'MIPvar'
     # label. This may lead to conflicts, e.g. for 'ua' and 'ua7h' in
-    # table 6hPlevPt; next setting allows to avoid that
+    # table 6hPlevPt; next setting allows to avoid that, if set to True
     'use_cmorvar_label_in_filename' : False,
 
     # DR01.00.21 does not include Gibraltar strait, which is requested by OMIP
@@ -677,13 +677,8 @@ def experiment_end_year(exp,sset=None):
     if sset and "end_year" in sset :
         return sset["end_year"]
     else:
-        try:
-            return int(float(exp.endy))
-        except:
-            if sset is False : return None
-            form="Cannot guess end year for experiment %s : DR says :'%s' "
-            if sset : form += "and 'end_year' is not provided in experiment's settings"
-            raise dr2xml_error(form%(exp.label,exp.endy))
+        try: return int(float(exp.endy))
+        except: return None
         
         
 def year_in_ri_tslice(ri,exp,sset,lset,year,debug=False):
