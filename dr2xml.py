@@ -641,8 +641,8 @@ def year_in_ri(ri,exp,lset,sset,year,debug=False):
     else :
         if DR_first_year and DR_end_year and ny==(DR_end_year - DR_first_year +1):
             ri_is_for_all_experiment=True
-        if debug : print "year_in_ri : RI applies because ny=end-start"
-    if ri_is_for_all_experiment : return True,actual_end_year
+            if debug : print "year_in_ri : RI applies because ny=end-start"
+    if ri_is_for_all_experiment : return True,None
     #
     # From now, we know that requestItem duration is less than experiment duration
     # We may have errors in requestItem duration ny, because of an error in DR for start year
@@ -1101,7 +1101,10 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     """
     #
     global sc #,nlonz
-
+    # If list of included vars has size 1, activate debug on the corresponding variable
+    inc=lset.get('included_vars',[])
+    if len(inc)==1 : debug=inc
+    
     # gestion des attributs pour lesquels on a recupere des chaines vides (" " est Faux mais est ecrit " "")
     #--------------------------------------------------------------------
     # Put a warning for field attributes that shouldn't be empty strings
@@ -1316,7 +1319,7 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
         # Try to get enddate for the CMOR variable from the DR
         if sv.cmvar is not None :
             #print "calling endyear_for... for %s, with year="%(sv.label), year
-            lastyear=endyear_for_CMORvar(dq,sv.cmvar,expid,year,lset,sset)
+            lastyear=endyear_for_CMORvar(dq,sv.cmvar,expid,year,lset,sset,sv.label in debug)
             #print "lastyear=",lastyear," enddate=",enddate
         if lastyear is None or lastyear >= int(enddate[0:4]) :
             # DR doesn't specify an end date for that var, or a very late one
@@ -1329,8 +1332,11 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
                 out.write(' split_last_date="%s-%s-%s 00:00:00" '%(endyear,endmonth,endday))
         else:
             # Use requestItems-based end date as the latest possible date when it is earlier than run end date
-            print "split_last_date year %d derived from DR for variable %s in table %s for year %d"%(lastyear,sv.label,table,year)
+            if (sv.label in debug) :
+                print "split_last_date year %d derived from DR for variable %s in table %s for year %d"%(lastyear,sv.label,table,year)
             endyear="%04s"%(lastyear+1)
+            if last_year < 1000 :
+                dr2xml_error("split_last_date year %d derived from DR for variable %s in table %s for year %d does not make sense except maybe for paleo runs"%(lastyear,sv.label,table,year))
             endmonth="01"
             endday="01"
             out.write(' split_last_date="%s-%s-%s 00:00:00" '%(endyear,endmonth,endday))
@@ -3701,7 +3707,7 @@ def RequestItemInclude(ri,var_label,freq) :
     cmVars=[ dq.inx.uid[dq.inx.uid[reqvar].vid] for reqvar in reqVars ]
     return any( [ cmv.label==var_label and cmv.frequency==freq for cmv in cmVars ])
 
-def endyear_for_CMORvar(dq,cv,expt,year,lset,sset): 
+def endyear_for_CMORvar(dq,cv,expt,year,lset,sset,printout=False): 
     """ 
     For a CMORvar, returns the largest year in the time slice(s)  
     of those requestItems which apply for experiment EXPT and which 
@@ -3714,8 +3720,7 @@ def endyear_for_CMORvar(dq,cv,expt,year,lset,sset):
     global global_rls
 
     # Some debug material
-    if False and (cv.label=="uas" ) : printout=True
-    else : printout=False
+    if False and (cv.label=="abs550aer" ) : printout=True
     
     # 1- Get the RequestItems which apply to CmorVar
     rVarsUid=dq.inx.iref_by_sect[cv.uid].a['requestVar']
