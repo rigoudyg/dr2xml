@@ -1335,8 +1335,8 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
             if (sv.label in debug) :
                 print "split_last_date year %d derived from DR for variable %s in table %s for year %d"%(lastyear,sv.label,table,year)
             endyear="%04s"%(lastyear+1)
-            if last_year < 1000 :
-                dr2xml_error("split_last_date year %d derived from DR for variable %s in table %s for year %d does not make sense except maybe for paleo runs"%(lastyear,sv.label,table,year))
+            if lastyear < 1000 :
+                dr2xml_error("split_last_date year %d derived from DR for variable %s in table %s for year %d does not make sense except maybe for paleo runs; please set the right value for 'end_year' in experiment's settings file"%(lastyear,sv.label,table,year))
             endmonth="01"
             endday="01"
             out.write(' split_last_date="%s-%s-%s 00:00:00" '%(endyear,endmonth,endday))
