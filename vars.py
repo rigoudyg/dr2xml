@@ -83,6 +83,7 @@ stdName2mipvarLabel={}
 tcmName2tcmValue={"time-mean":"time: mean", "time-point":"time: point"} 
 # A dict for storing home_variables issues re. standard_names
 sn_issues_home=dict()
+homevars_list=None
 
 def read_homeVars_list(hmv_file,expid,mips,dq,path_extra_tables=None):
     """
@@ -100,7 +101,10 @@ def read_homeVars_list(hmv_file,expid,mips,dq,path_extra_tables=None):
       A list of 'simplified CMOR variables'
     """
     #
+    global homevars_list
+    #
     if hmv_file is None : return []
+    if homevars_list is not None : return homevars_list
     # File structure: name of attributes to read, number of header line 
     home_attrs=['type','label','modeling_realm','frequency','mipTable','temporal_shp','spatial_shp','experiment','mip']
     data=[]
@@ -175,6 +179,7 @@ def read_homeVars_list(hmv_file,expid,mips,dq,path_extra_tables=None):
     print "Number of 'cmor' and 'perso' among home variables: ",len(homevars)
     print "Number of 'extra' among home variables: ",len(extravars)
     homevars.extend(extravars) 
+    homevars_list=homevars
     return homevars 
 
 def read_extraTable(path,table,dq,printout=False):
@@ -335,7 +340,7 @@ def read_extraTable(path,table,dq,printout=False):
             extra_var.label_without_psuffix=Remove_pSuffix(extra_var,multi_plev_suffixes,single_plev_suffixes,realms='atmos aerosol atmosChem')
                 
             extravars.append(extra_var)
-    if True or printout:
+    if printout:
         print "For extra table ",table, " (which has %d variables): "%len(extravars)
         print "\tVariables which dim was found in extra coordinates table:"
         for d in dim_from_extra :
