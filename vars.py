@@ -362,10 +362,9 @@ def get_SpatialAndTemporal_Shapes(cmvar,dq):
         if print_DR_errors :
             print "Warning: stid for ",cmvar.label," in table ",cmvar.mipTable," is a broken link to structure in DR: ", cmvar.stid
     else:
-        for struct in dq.coll['structure'].items:
-            if struct.uid==cmvar.stid: 
-                 spatial_shape=dq.inx.uid[struct.spid].label
-                 temporal_shape=dq.inx.uid[struct.tmid].label
+        struct=dq.inx.uid[cmvar.stid]
+        spatial_shape=dq.inx.uid[struct.spid].label
+        temporal_shape=dq.inx.uid[struct.tmid].label
     if print_DR_errors :
         if not spatial_shape: 
             print "Warning: spatial shape for ",cmvar.label," in table ",cmvar.mipTable," not found in DR."
@@ -380,9 +379,10 @@ def process_homeVars(lset,sset,mip_vars_list,mips,dq,expid=False,printout=False)
     path_extra_tables=sset.get('path_extra_tables',lset.get('path_extra_tables',None))
     home_vars_list=read_homeVars_list(homevars,expid,mips,dq,path_extra_tables)
     for hv in home_vars_list: 
+        printmore= False and (hv.label=='lwsnl')
         hv_info={"varname":hv.label,"realm":hv.modeling_realm,
                  "freq":hv.frequency,"table":hv.mipTable}
-        #if printout : print hv_info
+        if printmore : print hv_info
         if hv.type=='cmor':
             # Complement each HOME variable with attributes got from 
             # the corresponding CMOR variable (if exist)
@@ -396,27 +396,30 @@ def process_homeVars(lset,sset,mip_vars_list,mips,dq,expid=False,printout=False)
                               cmv.mipTable==updated_hv.mipTable and \
                               cmv.temporal_shp==updated_hv.temporal_shp and \
                               cmv.spatial_shp==updated_hv.spatial_shp  )
-                    if matching: already_in_dr=True
+                    if matching:
+                        already_in_dr=True
+                        break
 
                 # Corresponding CMOR Variable found 
                 if not already_in_dr:
                     # Append HOME variable only if not already
                     # selected with the DataRequest
-                    if printmore: print "Info:",hv_info,\
+                    if printmore  :
+                        print "Info:",hv_info,\
                        "HOMEVar is not in DR."\
                        " => Taken into account."
                     mip_vars_list.append(updated_hv)
                 else:
-                    if printmore:
+                    if printmore :
                         print "Info:",hv_info,\
                             "HOMEVar is already in DR." \
                             " => Not taken into account."
             else:
-                if printout:
+                if printout or printmore:
                     print "Error:",hv_info,\
                         "HOMEVar announced as cmor but no corresponding "\
                         " CMORVar found => Not taken into account."
-                    vars_error("Abort: HOMEVar %s is declared as cmor but no corresponding"\
+                    raise vars_error("Abort: HOMEVar %s is declared as cmor but no corresponding"\
                                  " CMORVar found."%`hv_info`)
         elif hv.type=='perso':
             # Check if HOME variable anounced as 'perso' is in fact 'cmor'
@@ -425,13 +428,13 @@ def process_homeVars(lset,sset,mip_vars_list,mips,dq,expid=False,printout=False)
                 # Check if HOME variable differs from CMOR one only by shapes
                 has_cmor_varname=any([ cmvar.label==hv.label for
                                        cmvar in dq.coll['CMORvar'].items])
-                #hasCMORVarName(hv)
+                #has_cmor_varname=any(dq.inx.CMORvar.label[hv.label])
                 if has_cmor_varname:
                     if printout:
                         print "Warning:",hv_info,"HOMEVar is anounced "\
                             " as perso, is not a CMORVar, but has a cmor name." \
                             " => Not taken into account."
-                    vars_error("Abort: HOMEVar is anounced as perso,"\
+                    raise vars_error("Abort: HOMEVar is anounced as perso,"\
                                      " is not a CMORVar, but has a cmor name.")
                 else:
                     if printmore: print "Info:",hv_info,\
@@ -441,7 +444,7 @@ def process_homeVars(lset,sset,mip_vars_list,mips,dq,expid=False,printout=False)
                 if printout:
                     print "Error:",hv_info,"HOMEVar is anounced as perso,"\
                         " but in reality is cmor => Not taken into account."
-                vars_error("Abort: HOMEVar is anounced as perso but "\
+                raise vars_error("Abort: HOMEVar is anounced as perso but "\
                                  "should be cmor.")
         elif hv.type=='extra':
             if hv.Priority<=lset["max_priority"]:
@@ -453,31 +456,39 @@ def process_homeVars(lset,sset,mip_vars_list,mips,dq,expid=False,printout=False)
                 print "Error:",hv_info,"HOMEVar type",hv.type,\
                     "does not correspond to any known keyword."\
                     " => Not taken into account."
-            vars_error("Abort: unknown type keyword provided "\
+            raise vars_error("Abort: unknown type keyword provided "\
                          "for HOMEVar %s:"%`hv_info`)
 
 def get_corresp_CMORvar(hmvar,dq,lset):
-    collect=dq.coll['CMORvar']
+
+    printout= False and ("lwsnl" in hmvar.label)
     count=0
-    empty_table=(hmvar.mipTable=='NONE') 
-    for cmvar in collect.items:
+    empty_table=(hmvar.mipTable=='NONE') or (hmvar.mipTable[0:4]=='None') 
+    for cmvarid in dq.inx.CMORvar.label[hmvar.label] :
+        cmvar=dq.inx.uid[cmvarid]
+        if printout : print "get_corresp, checking %s vs %s in %s"%(hmvar.label,cmvar.label,cmvar.mipTable)
+        #
         # Consider case where no modeling_realm associated to the
-        # current CMORvar as matching anymay. 
+        # current CMORvar as matching anyway. 
         # mpmoine_TBD: A mieux gerer avec les orphan_variables ?
         match_label=(cmvar.label==hmvar.label)
-        match_freq=(cmvar.frequency==hmvar.frequency)
+        match_freq=(cmvar.frequency==hmvar.frequency) or \
+            ("SoilPools" in hmvar.label and hmvar.frequency=="mon" and cmvar.frequency=="monPt")
         match_table=(cmvar.mipTable==hmvar.mipTable)
-        match_realm=(hmvar.modeling_realm in cmvar.modeling_realm.split(' '))
+        match_realm=(hmvar.modeling_realm in cmvar.modeling_realm.split(' ')) or \
+                    (hmvar.modeling_realm == cmvar.modeling_realm)
         empty_realm=(cmvar.modeling_realm=='') 
 
         matching=( match_label and (match_freq or empty_table) and (match_table or empty_table) and \
                    (match_realm or empty_realm) )
         if matching:
+            if printout : print "matches"
             same_shapes=(get_SpatialAndTemporal_Shapes(cmvar,dq)==\
                          [hmvar.spatial_shp,hmvar.temporal_shp])
             if same_shapes:
                 count+=1
                 cmvar_found=cmvar
+                if printout : print "ans same shapes !"
             else:
                 if not empty_table :
                     print "Error: ",[hmvar.label,hmvar.mipTable],\
@@ -485,11 +496,15 @@ def get_corresp_CMORvar(hmvar,dq,lset):
                         "DO NOT match CMORvar ones." \
                         " -> Provided:",[hmvar.spatial_shp,hmvar.temporal_shp],\
                         'Expected:',get_SpatialAndTemporal_Shapes(cmvar,dq)
+        else:
+            if printout : print "doesn't match",match_label, match_freq,cmvar.frequency,hmvar.frequency,\
+               match_table,match_realm,empty_realm,hmvar.mipTable
+
     if count>=1: 
         # empty table means that the frequency is changed (but the variable exists in another frequency cmor table
         if empty_table : var_freq_asked = hmvar.frequency
         allow_pseudo=lset.get('allow_pseudo_standard_names',False)
-        complement_svar_using_cmorvar(hmvar,cmvar_found,dq,sn_issues_home,allow_pseudo=allow_pseudo)
+        complement_svar_using_cmorvar(hmvar,cmvar_found,dq,sn_issues_home,[],allow_pseudo)
         if empty_table : 
            hmvar.frequency = var_freq_asked 
            hmvar.mipTable = "None"+ hmvar.frequency
@@ -803,7 +818,7 @@ def get_simplevar(dq,label,table,freq=None):
         elif freq in [ "mon", "1mo" ]: psvar=get_CMORvar(dq,'ps','Emon'  )
         elif freq in [ "subhr" ]     : psvar=get_CMORvar(dq,'ps','Esubhr')
     if psvar :
-        complement_svar_using_cmorvar(svar,psvar,dq,None)
+        complement_svar_using_cmorvar(svar,psvar,dq,None,[],False)
         return svar
 
 def get_CMORvar(dq,label,table):

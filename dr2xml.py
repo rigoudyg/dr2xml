@@ -105,7 +105,9 @@ context_index=None
 
 # global variable : the list of Request Links which apply for 'our' MIPS and which are not explicitly excluded using settings
 # It is set in select_CMORvars_for_lab and used in endyear_for_CMORvar
-global_rls=None  
+global_rls=None
+rls_for_all_experiments=None
+sc=None
 
 # Next variable is used to circumvent an Xios 1270 shortcoming. Xios
 # should read that value in the datafile. Actually, it did, in some
@@ -561,7 +563,7 @@ def RequestItem_applies_for_exp_and_year(ri,experiment,lset,sset,year=None,debug
     #   the whole experiment duration)
 
     # Acces experiment or experiment group for the RequestItem
-    #if (ri.label=='AerchemmipAermonthly3d') : debug=True
+    #if (ri.label=='C4mipC4mipLandt2') : debug=True
     if (debug) : print "In RIapplies.. Checking ","% 15s"%ri.title,
     item_exp=dq.inx.uid[ri.esid]
     ri_applies_to_experiment=False
@@ -772,10 +774,11 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
     #
     debug=False
     # From MIPS set to Request links
-    global sc,global_rls,grid_choice
+    global sc,global_rls,grid_choice,rls_for_all_experiments
     if sset and 'tierMax' in sset : tierMax=sset['tierMax']
     else: tierMax=lset['tierMax']
-    sc = dreqQuery(dq=dq, tierMax=tierMax)
+    if sc is None :
+        sc = dreqQuery(dq=dq, tierMax=tierMax)
 
     # Set sizes for lab settings, if available (or use CNRM-CM6-1 defaults)
     mcfg = collections.namedtuple( 'mcfg', \
@@ -790,33 +793,38 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
         mips_list= set()
         for grid in lset['mips']  : mips_list=mips_list.union(set(lset['mips'][grid]))
         grid_choice="LR"
-    rls_for_mips=sc.getRequestLinkByMip(mips_list)
-    if printout :
-        print "Number of Request Links which apply to MIPS",
-        print mips_list," is: ", len(rls_for_mips)
     #
-    excluded_rls=[]
-    for rl in rls_for_mips :
-        if rl.label in lset.get("excluded_request_links",[]) :
-            excluded_rls.append(rl)
-    for rl in excluded_rls : rls_for_mips.remove(rl)
-    if printout :
-        print "Number of Request Links after filtering by excluded_request_links is: ", len(rls_for_mips)
-    #
-    excluded_rls=[]
-    inclinks=lset.get("included_request_links",[])
-    if len(inclinks) > 0 :
+    if rls_for_all_experiments is None :
+        rls_for_mips=sc.getRequestLinkByMip(mips_list)
+        if printout :
+            print "Number of Request Links which apply to MIPS",
+            print mips_list," is: ", len(rls_for_mips)
+        #
+        excluded_rls=[]
         for rl in rls_for_mips :
-            if rl.label not in inclinks : excluded_rls.append(rl)
-        for rl in excluded_rls :
-            print "RequestLink %s is not included"%rl.label
-            rls_for_mips.remove(rl)
-    if printout :
-        print "Number of Request Links after filtering by included_request_links is: ", len(rls_for_mips)
+            if rl.label in lset.get("excluded_request_links",[]) :
+                excluded_rls.append(rl)
+        for rl in excluded_rls : rls_for_mips.remove(rl)
+        if printout :
+            print "Number of Request Links after filtering by excluded_request_links is: ", len(rls_for_mips)
+        #
+        excluded_rls=[]
+        inclinks=lset.get("included_request_links",[])
+        if len(inclinks) > 0 :
+            for rl in rls_for_mips :
+                if rl.label not in inclinks : excluded_rls.append(rl)
+            for rl in excluded_rls :
+                print "RequestLink %s is not included"%rl.label
+                rls_for_mips.remove(rl)
+        if printout :
+            print "Number of Request Links after filtering by included_request_links is: ", len(rls_for_mips)
+        rls_for_all_experiments=[ rl for rl in rls_for_mips ]
+    else:
+        rls_for_mips=rls_for_all_experiments
     #
     if sset  :
         experiment_id=sset['experiment_id']
-        print "Filtering for experiment %s"%experiment_id
+        if printout : print "Filtering for experiment %s"%experiment_id
         #print "Request links before filter :"+`[ rl.label for rl in rls_for_mips ]`
         filtered_rls=[]
         for rl in rls_for_mips :
@@ -824,9 +832,10 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
             ri_ids=dq.inx.iref_by_sect[rl.uid].a['requestItem']
             for ri_id in ri_ids :
                 ri=dq.inx.uid[ri_id]
+                #debug=(ri.label=='C4mipC4mipLandt2')
                 if debug : print "Checking requestItem ",ri.title,
                 applies,endyear= RequestItem_applies_for_exp_and_year(ri,
-                                 experiment_id, lset,sset,year,False)
+                                       experiment_id, lset,sset,year,debug)
                 if applies:
                     if debug : print " applies "
                     filtered_rls.append(rl)
@@ -856,8 +865,6 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
             print "processing RequestLink %s"%rl.title
         rl_vars=sc.varsByRql([rl.uid], pmax=pmax)
         for v in rl_vars :
-            if (debug) :
-                if dq.inx.uid[v].label=='tas' : print 'tas is in request link %s'%rl.title
             # The requested grid is given by the RequestLink except if spatial shape matches S-*
             gr=rl.grid
             cmvar=dq.inx.uid[v]
@@ -906,7 +913,7 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
             and \
             ((mipvar.label,ttable.label) not in excpairs) :
              filtered_vars.append((v,g))
-             if debug and ("tas" == mipvar.label) :
+             if debug :
                  print "adding var %s, grid=%s, ttable=%s="%(cmvar.label,g,ttable.label) #,exctab,excvars
         else:
             #if (ttable.label=="Ofx") : print "discarding var %s, ttable=%s, exctab="%(cmvar.label,ttable.label),exctab
@@ -930,9 +937,11 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
             if print_multiple_grids :
                 print "\tVariable %s will be processed with multiple grids : %s"%(dq.inx.uid[v].label,`d[v]`)
     if not print_multiple_grids :
-        multiple_grids.sort()
-        print "\tThese variables will be processed with multiple grids "+\
-            "(rerun with print_multiple_grids set to True for details) :"+`multiple_grids`
+        if printout : 
+            multiple_grids.sort()
+            if len(multiple_grids)>0 :
+                print "\tThese variables will be processed with multiple grids "+\
+                "(rerun with print_multiple_grids set to True for details) :"+`multiple_grids`
     #
     # Print a count of distinct var labels
     if printout :
@@ -946,18 +955,19 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
     for v in d :
         svar = simple_CMORvar()
         cmvar = dq.inx.uid[v]
-        complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues,allow_pseudo=allow_pseudo)
+        complement_svar_using_cmorvar(svar,cmvar,dq,sn_issues,[],allow_pseudo)
         svar.Priority=analyze_priority(cmvar,mips_list)
         svar.grids=d[v]
         if debug :
             if "tas" == dq.inx.uid[v].label :
                 print "When complementing, tas is included , grids are %s"%svar.grids
         simplified_vars.append(svar)
-    print 'Number of simplified vars is :',len(simplified_vars)
-    print "Issues with standard names are :",
-    lissues=sn_issues.keys()
-    lissues.sort()
-    print lissues
+    if printout : print 'Number of simplified vars is :',len(simplified_vars)
+    if printout :
+        print "Issues with standard names are :",
+        lissues=sn_issues.keys()
+        lissues.sort()
+        print lissues
     
     return simplified_vars
 
@@ -3720,7 +3730,8 @@ def endyear_for_CMORvar(dq,cv,expt,year,lset,sset,printout=False):
     global global_rls
 
     # Some debug material
-    if False and (cv.label=="abs550aer" ) : printout=True
+    if False and (cv.label=="lwsnl" ) : printout=True
+    if printout  : print "In end_year for %s %s"(cv.label,cv.mipTable)
     
     # 1- Get the RequestItems which apply to CmorVar
     rVarsUid=dq.inx.iref_by_sect[cv.uid].a['requestVar']
