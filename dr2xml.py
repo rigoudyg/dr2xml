@@ -543,6 +543,10 @@ example_simulation_settings={
     # If we use extra tables, we can here supersede the value set it in lab settings
     #'path_extra_tables'=
 
+    # If the CMIP6 Controlled Vocabulary doesn't allow all the components you activate, you can set
+    # next toggle to True
+    'bypass_CV_components' : False,
+    
     'unused_contexts'    : [  ]        # If you havn't set a 'configuration', you may fine tune here 
 }
 
@@ -1264,7 +1268,7 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
                 (c,experiment_id,`actual_components`)
     for c in actual_components :
         if c not in allowed_components and c not in required_components :
-            ok=False #  restore blocking on non-allowed components
+            ok=False or sset.get('bypass_CV_components',False) 
             print "Warning: Model component %s is present but not required nor allowed (%s)"%\
                 (c,`allowed_components` )
     if not ok : raise dr2xml_error("Issue with model components")
