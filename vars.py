@@ -85,7 +85,7 @@ tcmName2tcmValue={"time-mean":"time: mean", "time-point":"time: point"}
 sn_issues_home=dict()
 homevars_list=None
 
-def read_homeVars_list(hmv_file,expid,mips,dq,path_extra_tables=None):
+def read_homeVars_list(hmv_file,expid,mips,dq,path_extra_tables=None,printout=False):
     """
     A function to get HOME variables that are not planned in the CMIP6 DataRequest but 
     the lab want to outpuut anyway
@@ -154,7 +154,7 @@ def read_homeVars_list(hmv_file,expid,mips,dq,path_extra_tables=None):
                     homevars.append(home_var)
         else :
             if not extra_vars_per_table.has_key(table) :
-                 extra_vars_per_table[table] = read_extraTable(path_extra_tables,table,dq,printout=False)
+                 extra_vars_per_table[table] = read_extraTable(path_extra_tables,table,dq,printout=printout)
             if home_var.label == "ANY" :
                  if home_var.mip == "ANY" or home_var.mip in mips :
                      if home_var.experiment!="ANY":
@@ -176,8 +176,9 @@ def read_homeVars_list(hmv_file,expid,mips,dq,path_extra_tables=None):
                              if expid in home_var.experiment: extravars.append(var_found)
                          else :
                              extravars.append(var_found)
-    print "Number of 'cmor' and 'perso' among home variables: ",len(homevars)
-    print "Number of 'extra' among home variables: ",len(extravars)
+    if printout :
+        print "Number of 'cmor' and 'perso' among home variables: ",len(homevars)
+        print "Number of 'extra' among home variables: ",len(extravars)
     homevars.extend(extravars) 
     homevars_list=homevars
     return homevars 
@@ -377,7 +378,7 @@ def process_homeVars(lset,sset,mip_vars_list,mips,dq,expid=False,printout=False)
     # Read HOME variables
     homevars=sset.get('listof_home_vars',lset.get('listof_home_vars',None))
     path_extra_tables=sset.get('path_extra_tables',lset.get('path_extra_tables',None))
-    home_vars_list=read_homeVars_list(homevars,expid,mips,dq,path_extra_tables)
+    home_vars_list=read_homeVars_list(homevars,expid,mips,dq,path_extra_tables,printout=printout)
     for hv in home_vars_list: 
         printmore= False and (hv.label=='lwsnl')
         hv_info={"varname":hv.label,"realm":hv.modeling_realm,
