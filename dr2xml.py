@@ -828,7 +828,9 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
     #
     if sset  :
         experiment_id=sset['experiment_id']
-        if printout : print "Filtering for experiment %s"%experiment_id
+        exp=dq.inx.uid[dq.inx.experiment.label[experiment_id][0]]
+        if printout : print "Filtering for experiment %s, covering years [ %s , %s ] in DR"%\
+           (experiment_id,exp.starty,exp.endy)
         #print "Request links before filter :"+`[ rl.label for rl in rls_for_mips ]`
         filtered_rls=[]
         for rl in rls_for_mips :
