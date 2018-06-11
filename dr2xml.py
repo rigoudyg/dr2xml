@@ -258,7 +258,10 @@ example_lab_and_model_settings={
     # Sizes for atm and oce grids (cf DR doc); Used for computing file split frequency
     "sizes"  : { "LR" : [292*362  , 75, 128*256, 91, 30, 14, 128],
                  "HR" : [1442*1021, 75, 720*360, 91, 30, 14, 128] },
-    #
+
+    # What is the maximum duration of data period in a single file (integer, in years)
+    "max_split_freq"          : None,
+    
     # What is the maximum size of generated files, in number of float values
     "max_file_size_in_floats" : 2000.*1.e+6 , # 2 Giga octets
     # Required NetCDF compression level
@@ -546,6 +549,9 @@ example_simulation_settings={
     # If the CMIP6 Controlled Vocabulary doesn't allow all the components you activate, you can set
     # next toggle to True
     'bypass_CV_components' : False,
+    
+    # What is the maximum duration of data period in a single file, for this experiment (integer, in years)
+    "max_split_freq"          : None,
     
     'unused_contexts'    : [  ]        # If you havn't set a 'configuration', you may fine tune here 
 }
@@ -1258,7 +1264,7 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
         parent_activity_id=lset.get('parent_activity_id',lset.get('activity_id',exp_entry['parent_activity_id']))
         parent_experiment_id=exp_entry['parent_experiment_id']
         required_components=exp_entry['required_model_components']#.split(" ")
-        allowed_components=exp_entry['additional_allowed_model_components']#.split(" ")
+        allowed_components=exp_entry['additional_allowed_model_components']#.split(" ")                                
     #
     # Check model components re. CV components
     actual_components=source_type.split(" ")
@@ -1310,6 +1316,14 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     #--------------------------------------------------------------------
     resolution=lset['grid_choice'][source_id]
     split_freq=split_frequency_for_variable(sv, lset, resolution, sc.mcfg, context)
+    # Cap split_freq by setting max_split_freq (if expressed in years)
+    if split_freq[-1]=='y' :
+        max_split_freq=sset.get('max_split_freq',None)
+        if max_split_freq is None: max_split_freq=lset.get('max_split_freq',None)
+        if max_split_freq is not None:
+            if max_split_freq[0:-1] != "y" :
+                dr2xml_error("max_split_freq must end with an 'y' (%s)"%max_split_freq)
+            split_freq="%dy"%min(int(max_split_freq[0:-1]),int(split_freq[0:-1]))
     #print "split_freq: %-25s %-10s %-8s"%(sv.label,sv.mipTable,split_freq)
     #
     #--------------------------------------------------------------------
@@ -1455,6 +1469,10 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
         wr(out,'branch_method',sset,default='standard')
         # Use branch year in parent if available
         if "branch_year_in_parent" in sset :
+           if experiment_id in lset['branching']['source_id'] and \
+              sset["branch_year_in_parent"] not in lset['branching']['source_id'][1] :
+               dr2xml_error("branch_year_in_parent (%d) doesn't belong to the list of branch_years declared for this experiment %s"\
+                            %(sset["branch_year_in_parent"],lset['branching']['source_id'][1]))
            date_branch=datetime.datetime(sset["branch_year_in_parent"],1,1)
            date_ref=datetime.datetime(int(parent_time_ref_year),1,1)
            nb_days=(date_branch-date_ref).days
