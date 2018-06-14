@@ -1468,11 +1468,11 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
         wr(out,'parent_variant_label',sset,default=variant_label)
         wr(out,'branch_method',sset,default='standard')
         # Use branch year in parent if available
-        if "branch_year_in_parent" in sset :
-           if experiment_id in lset['branching']['source_id'] and \
-              sset["branch_year_in_parent"] not in lset['branching']['source_id'][1] :
+        if "branch_year_in_parent" in sset and source_id in lset['branching'] :
+           if experiment_id in lset['branching'][source_id] and \
+              sset["branch_year_in_parent"] not in lset['branching'][source_id][experiment_id][1] :
                dr2xml_error("branch_year_in_parent (%d) doesn't belong to the list of branch_years declared for this experiment %s"\
-                            %(sset["branch_year_in_parent"],lset['branching']['source_id'][1]))
+                            %(sset["branch_year_in_parent"],lset['branching'][source_id][experiment_id][1]))
            date_branch=datetime.datetime(sset["branch_year_in_parent"],1,1)
            date_ref=datetime.datetime(int(parent_time_ref_year),1,1)
            nb_days=(date_branch-date_ref).days
