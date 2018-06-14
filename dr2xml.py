@@ -628,6 +628,8 @@ def RequestItem_applies_for_exp_and_year(ri,experiment,lset,sset,year=None,debug
 def year_in_ri(ri,exp,lset,sset,year,debug=False):
     if ri.label=="CfmipCf3hrSimNew" :
         return (year==2008),2008
+    if "HighResMIP, HighResMIP-6hrPlevExtr, amip" in ri.title:
+        return True,2018
     if 'tslice' in ri.__dict__ :
         if (debug) : print "calling year_in_ri_tslice"
         rep,endyear=year_in_ri_tslice(ri,exp,sset,lset,year,debug=debug)
@@ -1351,15 +1353,18 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
             #print "calling endyear_for... for %s, with year="%(sv.label), year
             lastyear=endyear_for_CMORvar(dq,sv.cmvar,expid,year,lset,sset,sv.label in debug)
             #print "lastyear=",lastyear," enddate=",enddate
-        if lastyear is None or lastyear >= int(enddate[0:4]) :
+        if lastyear is None or (enddate is not None and lastyear >= int(enddate[0:4]) ) :
             # DR doesn't specify an end date for that var, or a very late one
             if lset.get('dr2xml_manages_enddate',True) :
                 # Use run end date as the latest possible date
                 # enddate must be 20140101 , rather than 20131231
-                endyear=enddate[0:4]
-                endmonth=enddate[4:6]
-                endday=enddate[6:8]
-                out.write(' split_last_date="%s-%s-%s 00:00:00" '%(endyear,endmonth,endday))
+                if enddate is not None :
+                    endyear=enddate[0:4]
+                    endmonth=enddate[4:6]
+                    endday=enddate[6:8]
+                    out.write(' split_last_date="%s-%s-%s 00:00:00" '%(endyear,endmonth,endday))
+                else :
+                    out.write(' split_last_date=10000-01-01 00:00:00" ')
         else:
             # Use requestItems-based end date as the latest possible date when it is earlier than run end date
             if (sv.label in debug) :
