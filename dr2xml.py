@@ -52,7 +52,7 @@ import dreq
 # End of pre-requisites
 ####################################
 
-version="1.10"
+version="1.11"
 print "\n",50*"*","\n*"
 print "* %29s"%"dr2xml version: ", version
 
@@ -3762,12 +3762,13 @@ def endyear_for_CMORvar(dq,cv,expt,year,lset,sset,printout=False):
     global global_rls
 
     # Some debug material
-    if False and (cv.label=="lwsnl" ) : printout=True
-    if printout  : print "In end_year for %s %s"(cv.label,cv.mipTable)
+    if False and (cv.label=="clc" ) : printout=True
+    if printout  : print "In end_year for %s %s"%(cv.label,cv.mipTable)
+    pmax=sset.get('max_priority',lset.get('max_priority'))
     
     # 1- Get the RequestItems which apply to CmorVar
     rVarsUid=dq.inx.iref_by_sect[cv.uid].a['requestVar']
-    rVars=[ dq.inx.uid[uid] for uid in rVarsUid ]
+    rVars=[ dq.inx.uid[uid] for uid in rVarsUid if dq.inx.uid[uid].priority <= pmax ]
     if printout : print "les requestVars:" , [ rVar.title for rVar in rVars ]
     VarGroups=[ dq.inx.uid[rv.vgid] for rv in rVars ] 
     if printout : print "les requestVars groups:" , [ rVg.label for rVg in VarGroups ]
