@@ -492,7 +492,8 @@ example_simulation_settings={
                                         # (this is not necessarily the parent start date)
     'parent_time_ref_year' : 1850,      # MUST BE CONSISTENT WITH THE TIME UNITS OF YOUR MODEL(S) !!!
     "branch_year_in_parent": 2150,      # if your calendar is Gregorian, you can specify the branch year in parent directly
-                                        # This is an alternative to using "branch_time_in_parent"
+                                        # This is an alternative to using "branch_time_in_parent".
+    #"branch_month_in_parent": 1,        # You can then also set the month. Default to 1
     #"branch_time_in_parent": "365.0D0", # a double precision value, in days, used if branch_year_in_parent is not applicable
                                          # This is an alternative to using "branch_year_in_parent"
     #'parent_time_units'    : "" #in case it is not the same as child time units
@@ -1478,7 +1479,7 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
               sset["branch_year_in_parent"] not in lset['branching'][source_id][experiment_id][1] :
                dr2xml_error("branch_year_in_parent (%d) doesn't belong to the list of branch_years declared for this experiment %s"\
                             %(sset["branch_year_in_parent"],lset['branching'][source_id][experiment_id][1]))
-           date_branch=datetime.datetime(sset["branch_year_in_parent"],1,1)
+           date_branch=datetime.datetime(sset["branch_year_in_parent"],sset.get("branch_month_in_parent",1),1)
            date_ref=datetime.datetime(int(parent_time_ref_year),1,1)
            nb_days=(date_branch-date_ref).days
            wr(out,'branch_time_in_parent',"%d.0D"%nb_days,"double") 
