@@ -255,6 +255,8 @@ example_lab_and_model_settings={
     #
     'grid_choice' : { "CNRM-CM6-1" : "LR", "CNRM-CM6-1-HR" : "HR",
                       "CNRM-ESM2-1": "LR"  , "CNRM-ESM2-1-HR": "HR" },
+    # if you want to produce the same variables set for all members, set next parameter to False
+    "filter_on_realization" : True,
     # Sizes for atm and oce grids (cf DR doc); Used for computing file split frequency
     "sizes"  : { "LR" : [292*362  , 75, 128*256, 91, 30, 14, 128],
                  "HR" : [1442*1021, 75, 720*360, 91, 30, 14, 128] },
@@ -608,7 +610,10 @@ def RequestItem_applies_for_exp_and_year(ri,experiment,lset,sset,year=None,debug
     #print "ri=%s"%ri.title,
     #if year is not None :
     #    print "Filtering for year %d"%year
-
+    if lset.get('filter_on_realization',True) :
+        if ri.nenmax != -1 and (sset["realization_index"] > ri.nenmax) :
+            ri_applies_to_experiment = False
+    
     if ri_applies_to_experiment :
         if year is None :
             rep=True ; endyear=None
@@ -860,7 +865,7 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
         rls=filtered_rls
         if printout :
             print "Number of Request Links which apply to experiment ", \
-                experiment_id,"and MIPs", mips_list ," is: ",len(rls)
+                experiment_id," member ", sset['realization_index']," and MIPs", mips_list ," is: ",len(rls)
         #print "Request links that apply :"+`[ rl.label for rl in filtered_rls ]`
     else :
         rls=rls_for_mips
