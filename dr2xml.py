@@ -664,7 +664,8 @@ def year_in_ri(ri,exp,lset,sset,year,debug=False):
             if debug : print "year_in_ri : RI applies because ny=end-start"
     if ri_is_for_all_experiment : return True,None
     #
-    # From now, we know that requestItem duration is less than experiment duration
+    # From now, we know that requestItem duration is less than experiment duration, or that
+    # experiment duration is not known
     # We may have errors in requestItem duration ny, because of an error in DR for start year
     # So, we add to ny the difference between DR and actual start_years, if the DR value is meaningful
     if DR_first_year  :
@@ -1375,7 +1376,7 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
             # Use requestItems-based end date as the latest possible date when it is earlier than run end date
             if (sv.label in debug) :
                 print "split_last_date year %d derived from DR for variable %s in table %s for year %d"%(lastyear,sv.label,table,year)
-            endyear="%04s"%(lastyear+1)
+            endyear="%04d"%(lastyear+1)
             if lastyear < 1000 :
                 dr2xml_error("split_last_date year %d derived from DR for variable %s in table %s for year %d does not make sense except maybe for paleo runs; please set the right value for 'end_year' in experiment's settings file"%(lastyear,sv.label,table,year))
             endmonth="01"
