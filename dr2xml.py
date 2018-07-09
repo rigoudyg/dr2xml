@@ -52,7 +52,7 @@ import dreq
 # End of pre-requisites
 ####################################
 
-version="1.11"
+version="1.12"
 print "\n",50*"*","\n*"
 print "* %29s"%"dr2xml version: ", version
 
@@ -577,6 +577,7 @@ def RequestItem_applies_for_exp_and_year(ri,experiment,lset,sset,year=None,debug
 
     # Acces experiment or experiment group for the RequestItem
     #if (ri.label=='C4mipC4mipLandt2') : debug=True
+    if ri.title=='AerChemMIP, AERmon-3d, piControl' : debug=True
     if (debug) : print "In RIapplies.. Checking ","% 15s"%ri.title,
     item_exp=dq.inx.uid[ri.esid]
     ri_applies_to_experiment=False
