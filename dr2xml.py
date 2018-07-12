@@ -760,9 +760,12 @@ def year_in_ri_tslice(ri,exp,sset,lset,year,debug=False):
                 if ((year - start >= tslice.start - refyear) and \
                     (year - start < tslice.start - refyear + tslice.nyears )):
                     relevant=True
-                    lastyear=start+tslice.nyears-1
+                    lastyear=start + tslice.start - refyear + tslice.nyears-1
                     if endyear is False : endyear=lastyear
                     else : endyear=max(endyear,lastyear)
+                    if (debug) :
+                        print "slice OK : year=%d, start=%d tslice.start=%d refyear=%d tslice.nyears=%d lastyear=%d"%\
+                            (year,start,tslice.start,refyear,tslice.nyears,lastyear)
         else : raise dr2xml_error("For tslice %s, child %s start year is not documented"%\
                                 (tslice.title, tslice.child))
     else :
