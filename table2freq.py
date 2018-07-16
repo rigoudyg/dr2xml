@@ -10,35 +10,44 @@
 import sys
 
 
-Cmip6Freq2XiosFreq={
-    "subhr"     :"1ts",
-    "subhrPt"   :"1ts",
-    #
-    "1hr"       :"1h",
-    "1hrPt"     :"1h",
-    "hr"        :"1h",
-    "3hr"       :"3h",
-    "3hrPt"     :"3h",
-    "6hr"       :"6h",
-    "6hrPt"     :"6h",
-    #
-    "day"       :"1d",
-    "5day"      :"5d",
-    "10day"     :"10d",
-    #
-    "mon"       :"1mo",
-    "monPt"     :"1mo",
-    #
-    "yr"        :"1y",
-    "yrPt"      :"1y",
-    #
-    "dec"       :"10y",
-    #
-    "fx"        :"1d",
-    #
-    "monC"      :"1mo",
-    "1hrCM"     :"1mo",
-    }
+def Cmip6Freq2XiosFreq(freq,table,lset) :
+    if freq in [ "subhr", "subhrPt" ] :
+        if table=="CFsubhr" : rep=lset.get("CFsubhr_frequency","1ts")
+        elif table is None :
+                print "Issue in dr2xml with table None and freq=",freq
+                sys.exit(0)
+        else:
+            rep="1ts"
+    else:
+        corresp={
+            "1hr"       :"1h",
+            "1hrPt"     :"1h",
+            "hr"        :"1h",
+            "3hr"       :"3h",
+            "3hrPt"     :"3h",
+            "6hr"       :"6h",
+            "6hrPt"     :"6h",
+            #
+            "day"       :"1d",
+            "5day"      :"5d",
+            "10day"     :"10d",
+            #
+            "mon"       :"1mo",
+            "monPt"     :"1mo",
+            #
+            "yr"        :"1y",
+            "yrPt"      :"1y",
+            #
+            "dec"       :"10y",
+            #
+            "fx"        :"1d",
+            #
+            "monC"      :"1mo",
+            "1hrCM"     :"1mo",
+        }
+        rep=corresp[freq]
+    return rep
+    
 
 def old_guess_freq_from_table_name(table):
     """ 

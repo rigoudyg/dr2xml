@@ -299,7 +299,8 @@ def timesteps_per_freq_and_duration(freq,nbdays,sampling_tstep):
     elif freq=="1hr" or freq=="hr" or freq=="1hrPt" or freq=="1h" : duration=1./24
     elif freq=="mon" or freq=="monPt" or freq=="monC" or freq=="1mo" : duration=31.
     elif freq=="yr"  or freq=="yrPt" or freq=="1y"  : duration=365.
-    elif freq=="subhr" or freq=="subhrPt" or freq=="1ts" : duration=1./(86400./sampling_tstep)
+    # TBD ; use setting's value for CFsubhr_frequency
+    elif freq=="subhr" or freq=="subhrPt" or freq=="1ts" : duration=1./(86400./sampling_tstep) 
     elif freq=="dec" or freq=="10y"                  : duration=10.*365
     #
     # If freq actually translate to a duration, return

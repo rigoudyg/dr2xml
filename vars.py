@@ -817,7 +817,9 @@ def get_simplevar(dq,label,table,freq=None):
         elif freq in [ "6h", "6hr" ] : psvar=get_CMORvar(dq,'ps','6hrLev')
         elif freq in [ "day" ]       : psvar=get_CMORvar(dq,'ps','CFday' )
         elif freq in [ "mon", "1mo" ]: psvar=get_CMORvar(dq,'ps','Emon'  )
-        elif freq in [ "subhr" ]     : psvar=get_CMORvar(dq,'ps','Esubhr')
+        elif freq in [ "subhr" ]     :
+            if table=="CFsubhr" : psvar=get_CMORvar(dq,'ps','CFsubhr')
+            else :                psvar=get_CMORvar(dq,'ps','Esubhr')
     if psvar :
         complement_svar_using_cmorvar(svar,psvar,dq,None,[],False)
         return svar

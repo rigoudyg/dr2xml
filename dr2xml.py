@@ -52,7 +52,7 @@ import dreq
 # End of pre-requisites
 ####################################
 
-version="1.12"
+version="1.13"
 print "\n",50*"*","\n*"
 print "* %29s"%"dr2xml version: ", version
 
@@ -301,6 +301,9 @@ example_lab_and_model_settings={
               "HR"    : { "surfex":900., "nemo":1800. },
     },
 
+    # CFMIP has an elaborated requirement for defining subhr frequency; by default, dr2xml uses 1 time step
+    "CFsubhr_frequency" : "1ts",
+    
     # We create sampled time-variables for controlling the frequency of vertical interpolations
     "vertical_interpolation_sample_freq" : "3h",
     "vertical_interpolation_operation"   : "instant", # LMD prefers 'average'
@@ -577,7 +580,8 @@ def RequestItem_applies_for_exp_and_year(ri,experiment,lset,sset,year=None,debug
 
     # Acces experiment or experiment group for the RequestItem
     #if (ri.label=='C4mipC4mipLandt2') : debug=True
-    if ri.title=='AerChemMIP, AERmon-3d, piControl' : debug=True
+    #if ri.title=='AerChemMIP, AERmon-3d, piControl' : debug=True
+    #if ri.title=='CFMIP, CFMIP.CFsubhr, amip' : debug=True
     if (debug) : print "In RIapplies.. Checking ","% 15s"%ri.title,
     item_exp=dq.inx.uid[ri.esid]
     ri_applies_to_experiment=False
@@ -1044,7 +1048,7 @@ def wr(out,key,dic_or_val=None,num_type="string",default=None) :
             out.write('  <variable name="%s"  type="%s" > %s '%(key,num_type,val))
             out.write('  </variable>\n')
 
-def freq2datefmt(in_freq,operation,lset):
+def freq2datefmt(in_freq,operation,lset,table):
     # WIP doc v6.2.3 - Apr. 2017: <time_range> format is frequency-dependant 
     datefmt=False
     offset=None
@@ -1093,11 +1097,14 @@ def freq2datefmt(in_freq,operation,lset):
         offset="0s"
     elif freq=="subhr" or freq=="subhrPt" or freq=="1ts":
         datefmt="%y%mo%d%h%mi%s"
-        # assume that 'subhr' means every timestep
         if operation in ["average","minimum","maximum"] :
             # Does it make sense ??
+            # assume that 'subhr' means every timestep
             offset="0.5ts"
-        else : offset="1ts"
+        else :
+            offset="1ts"
+            if "subhr" in freq and "CFsubhr" in table :
+                offset=lset.get("CFsubhr_frequency","1ts")
     elif "fx" in freq :
         pass ## WIP doc v6.2.3 - Apr. 2017: if frequency="fx", [_<time_range>] is ommitted
     if offset is not None:
@@ -1301,7 +1308,7 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     date_range="%start_date%-%end_date%" # XIOS syntax
     operation,detect_missing,foo = analyze_cell_time_method(sv.cell_methods,sv.label,table,printout=False)
     #print "--> ",sv.label, sv.frequency, table
-    date_format,offset_begin,offset_end=freq2datefmt(sv.frequency,operation,lset)
+    date_format,offset_begin,offset_end=freq2datefmt(sv.frequency,operation,lset,table)
     #
     if "fx" in sv.frequency:
         filename="%s%s_%s_%s_%s_%s_%s"%\
@@ -1344,7 +1351,7 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     # including global CMOR file attributes
     #--------------------------------------------------------------------
     out.write(' <file id="%s_%s_%s" name="%s" '%(sv.label,table,grid_label,filename))
-    freq=longest_possible_period(Cmip6Freq2XiosFreq[sv.frequency],lset.get("too_long_periods",[]))
+    freq=longest_possible_period(Cmip6Freq2XiosFreq(sv.frequency,table,lset),lset.get("too_long_periods",[]))
     out.write(' output_freq="%s" '%freq)
     out.write(' append="true" ')
     out.write(' output_level="%d" '%lset.get("output_level",10))
@@ -1742,7 +1749,7 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
     if operation == 'instant' :
         for ts in lset.get('special_timestep_vars',[]) :
             if sv.label in lset['special_timestep_vars'][ts] :
-                xios_freq = Cmip6Freq2XiosFreq[sv.frequency]
+                xios_freq = Cmip6Freq2XiosFreq(sv.frequency,table,lset)
                 # works only if units are different :
                 rep += ' freq_offset="%s-%s"'%(xios_freq,ts) 
     #
@@ -1770,7 +1777,9 @@ def create_xios_aux_elmts_defs(sv,alias,table,lset,sset,
     # involves time operation (using @)
     #--------------------------------------------------------------------
     if operation == 'once' : freq_op=""
-    else : freq_op='freq_op="%s"'% longest_possible_period(Cmip6Freq2XiosFreq[sv.frequency],lset.get("too_long_periods",[]))
+    else : freq_op='freq_op="%s"'% \
+         longest_possible_period(Cmip6Freq2XiosFreq(sv.frequency,table,lset),
+                                 lset.get("too_long_periods",[]))
     #
     rep+=' operation="%s"'%operation
     if not idHasExprWithAt(alias,context_index) : 
@@ -2123,7 +2132,7 @@ def process_zonal_mean(field_id, grid_id, target_hgrid_id,zgrid_id,\
     global nlonz
 
     # e.g. <field id="CMIP6_ua_plev39_average" field_ref="CMIP6_ua_plev39" operation="average" />
-    xios_freq=Cmip6Freq2XiosFreq[frequency]
+    xios_freq=Cmip6Freq2XiosFreq(frequency,None,lset)
     field1_id= field_id+"_"+operation     # e.g. CMIP6_hus_plev7h_instant
     field_defs[field1_id]='<field id="%-s field_ref="%-s operation="%s />'\
         %(field1_id+'"',field_id+'"',operation+'"')
