@@ -39,7 +39,7 @@ Changes :
 #    svn co http://proj.badc.rl.ac.uk/svn/exarch/CMIP6dreq/tags/01.00.21
 #    (and must include 01.00.21/dreqPy in PYTHONPATH)
 from scope import dreqQuery
-import dreq
+import dreq 
 
 # 2- CMIP6 Controled Vocabulary (available from 
 # https://github.com/WCRP-CMIP/CMIP6_CVs). You will provide its path 
@@ -52,7 +52,7 @@ import dreq
 # End of pre-requisites
 ####################################
 
-version="1.13"
+version="1.14"
 print "\n",50*"*","\n*"
 print "* %29s"%"dr2xml version: ", version
 
@@ -726,14 +726,12 @@ def year_in_ri_tslice(ri,exp,sset,lset,year,debug=False):
     tslice=dq.inx.uid[ri.tslice]
     if (debug) :
         print "tslice label/type is %s/%s for reqItem %s "%(tslice.label,tslice.type,ri.title)
-    if tslice.type=="simpleRange" : # e.g. _slice_DAMIP20
-        if tslice.start < 1800 :
-        # to manage _slice_abrupt*
+    if tslice.type=="relativeRange" : # e.g. _slice_abrupt30
             first_year=experiment_start_year(exp,sset)
             #first_year=sset["branch_year_in_child"]
             relevant = (year >= tslice.start + first_year - 1 and year <= tslice.end + first_year - 1)
             endyear = first_year + tslice.end - 1
-        else :
+    elif tslice.type=="simpleRange" : # e.g. _slice_DAMIP20
             relevant = (year >= tslice.start and year<=tslice.end)
             endyear=tslice.end
     elif tslice.type=="sliceList": # e.g. _slice_DAMIP40
@@ -2698,7 +2696,7 @@ def print_SomeStats(context,svars_per_table,skipped_vars_per_table,actually_writ
             print "--- VARNAME: ",label,":", dic_ln[label]
             print (14+len(label))*"-"
             for val in dic[label]:
-                print 14*" "+"* ",val
+                print 14*" "+"* %20s %s"%(val,label)
                 
     return True
 

@@ -138,6 +138,8 @@ def field_size(svar, mcfg):
         siz=atm_nblev*atm_grid_size
     elif ( s == "XY-AH" ): #Global field on model atmosphere half-levels
         siz=(atm_nblev+1)*atm_grid_size
+    elif ( s == "na-AH" ): #profile on model atmosphere half-levels
+        siz=atm_nblev+1
     elif ( s[0:4] == "XY-P" ): #Global field (pressure levels)
         if "jpdftaure" in svar.label :
             siz=atm_grid_size
@@ -196,6 +198,8 @@ def field_size(svar, mcfg):
         siz=oce_nblev*nb_lat_ocean
     elif ( s == "YB-O" ): #Ocean Basin Meridional Section
         siz=oce_nblev*nb_lat_ocean
+    elif ( s == "GYB-O" ): #Ocean Basin Meridional Section
+        siz=oce_nblev*nb_lat_ocean
     elif ( s == "YB-na" ): #Ocean Basin Zonal Mean
         siz=nb_lat_ocean
 
@@ -208,7 +212,7 @@ def field_size(svar, mcfg):
         siz=1
 
     if siz==0 :
-        raise dr2xml_grids_error("Cannot compute field_size for var %s"%(svar.label))
+        raise dr2xml_grids_error("Cannot compute field_size for var %s and shape %s"%(svar.label,s))
 
     return siz
 
