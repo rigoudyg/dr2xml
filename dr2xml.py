@@ -1314,6 +1314,8 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     else:
         varname_for_filename=sv.mipVarLabel
         if lset.get('use_cmorvar_label_in_filename',False) : varname_for_filename=sv.label
+        # DR21 has a bug with tsland : the MIP variable is named "ts"
+        if sv.label == "tsland" : varname_for_filename="tsland"
         # WIP doc v6.2.3 : a suffix "-clim" should be added if climatology
         #if False and "Clim" in sv.frequency: suffix="-clim"
         if sv.frequency in [ "1hrCM", "monC" ]: suffix="-clim"
@@ -1544,7 +1546,11 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
         wr(out,"title","%s model output prepared for %s and "%(\
                         source_id,project)+activity_idr+" / "+expid_in_filename+" simulation")
     #
-    wr(out,"variable_id",sv.mipVarLabel)
+    # DR21 has a bug with tsland : the MIP variable is named "ts"
+    if sv.label != "tsland" :
+        wr(out,"variable_id",sv.mipVarLabel)
+    else:
+        wr(out,"variable_id","tsland")
     #
     variant_info=sset.get('variant_info',"none")
     if variant_info!="none" and variant_info!="" : variant_info+=variant_info_warning
