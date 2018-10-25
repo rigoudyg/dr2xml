@@ -52,7 +52,7 @@ import dreq
 # End of pre-requisites
 ####################################
 
-version="1.14"
+version="1.16"
 print "\n",50*"*","\n*"
 print "* %29s"%"dr2xml version: ", version
 
@@ -436,7 +436,13 @@ example_lab_and_model_settings={
     'print_stats_per_var_label' : False,
 
     # When using select='no', Xios may enter an endless loop, which is solved if next setting is False
-    'allow_tos_3hr_1deg' : True
+    'allow_tos_3hr_1deg' : True,
+
+    # Some scenario experiment in DR 01.00.21 do not request tos on 1 degree grid, while other do.
+    # If you use grid_policy=adhoc and had not changed the mapping of function
+    # grids.lab_adhoc_grid_policy to grids.CNRM_grid_policy, next setting can force any tos request
+    # to also produce tos on a 1 degree grid
+    "adhoc_policy_do_add_1deg_grid_for_tos" : False,
 }
 
 
