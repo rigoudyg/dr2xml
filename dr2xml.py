@@ -392,7 +392,7 @@ example_lab_and_model_settings={
     # You may provide some variables already horizontally remapped 
     # to some grid (i.e. Xios domain) in external files. The varname in file 
     # must match the referenced id in pingfile. Tested only for fixed fields 
-    'fx_from_file_vars' : {
+    'fx_from_file' : {
         "areacella" : { "complete" :
                         { "LR" : "areacella_LR",
                           "HR" : "areacella_HR",}}},
@@ -1521,7 +1521,7 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     wr(out,'product','model-output')
     wr(out,"realization_index",realization_index,num_type="int")
     # Patch for an issue id DR01.0021 -> 01.00.24
-    if sv.modeling_realm=="ocnBgChem" : sv.modeling_realm=="ocnBgchem" 
+    if sv.modeling_realm=="ocnBgChem" : sv.modeling_realm="ocnBgchem" 
     wr(out,'realm',sv.modeling_realm)
     wr(out,'references',lset,default=False) 
     #
