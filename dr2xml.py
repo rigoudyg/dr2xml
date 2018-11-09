@@ -457,7 +457,9 @@ example_simulation_settings={
     # DR experiment name to process. See http://clipc-services.ceda.ac.uk/dreq/index/experiment.html
     "experiment_id"  : "historical",
     # Experiment label to use in file names and attribute, (default is experiment_id)
-    #"expid_in_filename"   : "myexpe", 
+    #"expid_in_filename"   : "myexpe",
+    # Experiment id to use for driving the use of the Data Request (default is experiment_id)
+    # 'experiment_for_requests' : "piControl",
 
     # If there is no configuration in lab_settings which matches you case, please rather
     # use next or next two entries : source_id and, if needed, source_type
@@ -854,7 +856,7 @@ def select_CMORvars_for_lab(lset, sset=None, year=None,printout=False):
         rls_for_mips=rls_for_all_experiments
     #
     if sset  :
-        experiment_id=sset['experiment_id']
+        experiment_id=sset.get('experiment_for_requests',sset['experiment_id'])
         exp=dq.inx.uid[dq.inx.experiment.label[experiment_id][0]]
         if printout : print "Filtering for experiment %s, covering years [ %s , %s ] in DR"%\
            (experiment_id,exp.starty,exp.endy)
@@ -2279,8 +2281,9 @@ def gather_AllSimpleVars(lset,sset,year=False,printout=False,select="on_expt_and
         raise dr2xml_errors("Choice %s is not allowed for arg 'select'"%select)
     #
     if sset.get('listof_home_vars',lset.get('listof_home_vars',None)):
+        exp=sset.get('experiment_for_requests',sset['experiment_id'])
         process_homeVars(lset,sset,mip_vars_list,lset["mips"][grid_choice],
-                         dq,expid=sset['experiment_id'],printout=printout)
+                         dq,expid=exp,printout=printout)
     else: print "Info: No HOMEvars list provided."
     return mip_vars_list
 
@@ -3926,8 +3929,6 @@ def check_for_file_input(sv,lset,hgrid,pingvars,field_defs,grid_defs,\
         # Add a grid made of domain hgrid only
         grid_id="grid_"+hgrid
         grid_def='<grid id="%s"><domain domain_ref="%s"/></grid>\n'%(grid_id,hgrid)
-        #grid_defs[grid_id]=grid_def
-        #context_index[grid_id]=ET.fromstring(grid_def)
 
         # Add a grid and domain for reading the file (don't use grid above to avoid reampping)
         file_domain_id="remapped_%s_file_domain"%sv.label
