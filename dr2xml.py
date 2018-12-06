@@ -1523,8 +1523,9 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
     wr(out,'product','model-output')
     wr(out,"realization_index",realization_index,num_type="int")
     # Patch for an issue id DR01.0021 -> 01.00.24
-    if sv.modeling_realm=="ocnBgChem" : sv.modeling_realm="ocnBgchem" 
-    wr(out,'realm',sv.modeling_realm)
+    crealm=sv.modeling_realm
+    if crealm =="ocnBgChem" : crealm="ocnBgchem" 
+    wr(out,'realm',crealm)
     wr(out,'references',lset,default=False) 
     #
     try:
