@@ -1298,7 +1298,7 @@ def write_xios_file_def(sv,year,table,lset,sset,out,cvspath,
         description=exp_entry['description']
         activity_id=lset.get('activity_id',exp_entry['activity_id'])
         parent_activity_id=lset.get('parent_activity_id',lset.get('activity_id',exp_entry['parent_activity_id']))
-        parent_experiment_id=exp_entry['parent_experiment_id']
+        parent_experiment_id=sset.get('parent_experiment_id',exp_entry['parent_experiment_id'])
         required_components=exp_entry['required_model_components']#.split(" ")
         allowed_components=exp_entry['additional_allowed_model_components']#.split(" ")                                
     #
