@@ -255,8 +255,10 @@ example_lab_and_model_settings={
     #
     'grid_choice' : { "CNRM-CM6-1" : "LR", "CNRM-CM6-1-HR" : "HR",
                       "CNRM-ESM2-1": "LR"  , "CNRM-ESM2-1-HR": "HR" },
-    # if you want to produce the same variables set for all members, set next parameter to False
+    # If you want to produce the same variables set for all members, set next parameter to False
+    # You can anyway override this parameter in dict simulation_settings
     "filter_on_realization" : True,
+    
     # Sizes for atm and oce grids (cf DR doc); Used for computing file split frequency
     "sizes"  : { "LR" : [292*362  , 75, 128*256, 91, 30, 14, 128],
                  "HR" : [1442*1021, 75, 720*360, 91, 30, 14, 128] },
@@ -500,6 +502,10 @@ example_simulation_settings={
     "physics_index"        : 1, # Value may be omitted if = 1
     "forcing_index"        : 3, # Value may be omitted if = 1
     #
+    # If you want to produce the same variables set for all members, set next parameter to False
+    # This value does override the value for same parameter in lab_settings
+    # "filter_on_realization" : True,
+    #
     # All about the branching scheme from parent
     "branch_method"        : "standard", # default value='standard' meaning ~ "select a start date" 
                                         # (this is not necessarily the parent start date)
@@ -623,7 +629,11 @@ def RequestItem_applies_for_exp_and_year(ri,experiment,lset,sset,year=None,debug
     #print "ri=%s"%ri.title,
     #if year is not None :
     #    print "Filtering for year %d"%year
-    if lset.get('filter_on_realization',True) :
+    if 'filter_on_realization' in sset :
+        filter_on_realization=sset['filter_on_realization']
+    else:
+        filter_on_realization=lset.get('filter_on_realization',True)
+    if filter_on_realization :
         if ri.nenmax != -1 and (sset["realization_index"] > ri.nenmax) :
             ri_applies_to_experiment = False
     
