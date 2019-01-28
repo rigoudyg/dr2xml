@@ -75,8 +75,8 @@ import xml.etree.ElementTree as ET
 # Local packages
 from vars import simple_CMORvar, simple_Dim, process_homeVars, complement_svar_using_cmorvar, \
     multi_plev_suffixes, single_plev_suffixes, get_simplevar, scalar_vertical_dimension
-from grids import decide_for_grids, DRgrid2gridatts, \
-    split_frequency_for_variable, timesteps_per_freq_and_duration
+from grids import decide_for_grids, DRgrid2gridatts
+from split_frequencies import split_frequency_for_variable, timesteps_per_freq_and_duration
 from Xparse import init_context, id2grid, id2gridid, idHasExprWithAt
 
 # Statistics module
