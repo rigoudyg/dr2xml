@@ -15,7 +15,12 @@ Also : management of fields size/split_frequency
 
 """
 
+# Utilities
 from utils import dr2xml_grid_error
+
+# DR interface
+from dr_interface import get_uid
+
 
 compression_factor = None
 splitfreqs = None
@@ -30,7 +35,7 @@ def normalize(grid):
     return grid.replace(" or smaller", "")
 
 
-def decide_for_grids(cmvarid, grids, lset, dq):
+def decide_for_grids(cmvarid, grids, lset):
     """
     Decide which set of grids a given variable should be produced on
 
@@ -64,12 +69,12 @@ def decide_for_grids(cmvarid, grids, lset, dq):
             sgrids.add('')
             return list(sgrids)
     elif policy == "adhoc":
-        return lab_adhoc_grid_policy(cmvarid, ngrids, lset, dq)
+        return lab_adhoc_grid_policy(cmvarid, ngrids, lset)
     else:
         dr2xml_error("Invalid grid policy %s" % policy)
 
 
-def lab_adhoc_grid_policy(cmvarid, grids, lset, dq):
+def lab_adhoc_grid_policy(cmvarid, grids, lset):
     """
     Decide , in a lab specific way, which set of grids a given
     variable should be produced on You should re-engine code below to
@@ -82,17 +87,17 @@ def lab_adhoc_grid_policy(cmvarid, grids, lset, dq):
 
     Returns either a single grid string or a list of such strings
     """
-    return CNRM_grid_policy(cmvarid, grids, lset, dq)
+    return CNRM_grid_policy(cmvarid, grids, lset)
 
 
-def CNRM_grid_policy(cmvarid, grids, lset, dq):  # TBD
+def CNRM_grid_policy(cmvarid, grids, lset):  # TBD
     """
     See doc of lab_adhoc_grid_policy
     """
-    if dq.inx.uid[cmvarid].label in ["sos"]:
+    if get_uid(cmvarid).label in ["sos"]:
         return [g for g in grids if g in ["", "1deg"]]
-    elif dq.inx.uid[cmvarid].label in ["tos"] and \
-            (dq.inx.uid[cmvarid].mipTable not in ["3hr"] or lset.get("allow_tos_3hr_1deg", True)):
+    elif get_uid(cmvarid).label in ["tos"] and \
+            (get_uid(cmvarid).mipTable not in ["3hr"] or lset.get("allow_tos_3hr_1deg", True)):
         if lset.get("adhoc_policy_do_add_1deg_grid_for_tos", False):
             if "" in grids:
                 l = [""]

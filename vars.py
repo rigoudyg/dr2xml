@@ -4,8 +4,12 @@ print_DR_stdname_errors = False
 
 import sys, os
 import json
+import json
 from table2freq import guess_freq_from_table_name
 from utils import vars_error
+
+# DR interface
+from dr_interface import get_collection, get_uid, get_CMORvarId_by_label, get_request_by_id_by_sect
 
 
 # -from dr2xml import dr2xml_error
@@ -91,7 +95,7 @@ sn_issues_home = dict()
 homevars_list = None
 
 
-def read_homeVars_list(hmv_file, expid, mips, dq, path_extra_tables=None, printout=False):
+def read_homeVars_list(hmv_file, expid, mips, path_extra_tables=None, printout=False):
     """
     A function to get HOME variables that are not planned in the CMIP6 DataRequest but
     the lab want to outpuut anyway
@@ -161,7 +165,7 @@ def read_homeVars_list(hmv_file, expid, mips, dq, path_extra_tables=None, printo
                     homevars.append(home_var)
         else:
             if not extra_vars_per_table.has_key(table):
-                extra_vars_per_table[table] = read_extraTable(path_extra_tables, table, dq, printout=printout)
+                extra_vars_per_table[table] = read_extraTable(path_extra_tables, table, printout=printout)
             if home_var.label == "ANY":
                 if home_var.mip == "ANY" or home_var.mip in mips:
                     if home_var.experiment != "ANY":
@@ -191,7 +195,7 @@ def read_homeVars_list(hmv_file, expid, mips, dq, path_extra_tables=None, printo
     return homevars
 
 
-def read_extraTable(path, table, dq, printout=False):
+def read_extraTable(path, table, printout=False):
     """
     A function to get variables contained in an EXTRA Table that are is planned in the CMIP6 DataRequest but
     the lab want to output anyway. EXTRA Table is expected in JSON format, conform with the CMOR3 convention.
@@ -207,7 +211,7 @@ def read_extraTable(path, table, dq, printout=False):
     """
     #
     if not dims2shape:
-        for sshp in dq.coll['spatialShape'].items:
+        for sshp in get_collection('spatialShape').items:
             dims2shape[sshp.dimensions] = sshp.label
         # mpmoine_future_modif:dims2shape: ajout a la main des correpondances dims->shapes Primavera qui ne sont pas couvertes par la DR
         # mpmoine_note: attention, il faut mettre a jour dim2shape a chaque fois qu'une nouvelle correpondance est introduite
@@ -225,15 +229,15 @@ def read_extraTable(path, table, dq, printout=False):
         dims2shape['longitude|latitude|plev19hm'] = 'XY-P19HM'
     #
     if not dim2dimid:
-        for g in dq.coll['grids'].items:
+        for g in get_collection('grids').items:
             dim2dimid[g.label] = g.uid
     #
     if not dr_single_levels:
-        for struct in dq.coll['structure'].items:
-            spshp = dq.inx.uid[struct.spid]
+        for struct in get_collection('structure').items:
+            spshp = get_uid(struct.spid)
             if spshp.label == "XY-na" and 'cids' in struct.__dict__:
                 if struct.cids[0] != '':  ## this line is needed prior to version 01.00.08.
-                    c = dq.inx.uid[struct.cids[0]]
+                    c = get_uid(struct.cids[0])
                     # if c.axis == 'Z': # mpmoine_note: non car je veux dans dr_single_levels toutes les dimensions singletons (ex. 'typenatgr'), par seulement les niveaux
                     dr_single_levels.append(c.label)
         # other single levels in extra Tables, not in DR
@@ -321,7 +325,7 @@ def read_extraTable(path, table, dq, printout=False):
             for d in all_dr_dims:
                 if dim2dimid.has_key(d):
                     dr_dimids.append(dim2dimid[d])
-                    extra_dim, dummy = get_simpleDim_from_DimId(dim2dimid[d], dq)
+                    extra_dim, dummy = get_simpleDim_from_DimId(dim2dimid[d])
                     extra_var.sdims.update({extra_dim.label: extra_dim})
                 else:
                     extra_sdim = simple_Dim()
@@ -367,16 +371,16 @@ def read_extraTable(path, table, dq, printout=False):
     return extravars
 
 
-def get_SpatialAndTemporal_Shapes(cmvar, dq):
+def get_SpatialAndTemporal_Shapes(cmvar):
     spatial_shape = False
     temporal_shape = False
     if cmvar.stid == "__struct_not_found_001__":
         if print_DR_errors:
             print "Warning: stid for ", cmvar.label, " in table ", cmvar.mipTable, " is a broken link to structure in DR: ", cmvar.stid
     else:
-        struct = dq.inx.uid[cmvar.stid]
-        spatial_shape = dq.inx.uid[struct.spid].label
-        temporal_shape = dq.inx.uid[struct.tmid].label
+        struct = get_uid(cmvar.stid)
+        spatial_shape = get_uid(struct.spid).label
+        temporal_shape = get_uid(struct.tmid).label
     if print_DR_errors:
         if not spatial_shape:
             print "Warning: spatial shape for ", cmvar.label, " in table ", cmvar.mipTable, " not found in DR."
@@ -385,12 +389,12 @@ def get_SpatialAndTemporal_Shapes(cmvar, dq):
     return [spatial_shape, temporal_shape]
 
 
-def process_homeVars(lset, sset, mip_vars_list, mips, dq, expid=False, printout=False):
+def process_homeVars(lset, sset, mip_vars_list, mips, expid=False, printout=False):
     printmore = False
     # Read HOME variables
     homevars = sset.get('listof_home_vars', lset.get('listof_home_vars', None))
     path_extra_tables = sset.get('path_extra_tables', lset.get('path_extra_tables', None))
-    home_vars_list = read_homeVars_list(homevars, expid, mips, dq, path_extra_tables, printout=printout)
+    home_vars_list = read_homeVars_list(homevars, expid, mips, path_extra_tables, printout=printout)
     for hv in home_vars_list:
         printmore = False and (hv.label == 'lwsnl')
         hv_info = {"varname": hv.label, "realm": hv.modeling_realm,
@@ -399,7 +403,7 @@ def process_homeVars(lset, sset, mip_vars_list, mips, dq, expid=False, printout=
         if hv.type == 'cmor':
             # Complement each HOME variable with attributes got from
             # the corresponding CMOR variable (if exist)
-            updated_hv = get_corresp_CMORvar(hv, dq, lset)
+            updated_hv = get_corresp_CMORvar(hv, lset)
             if (updated_hv):
                 already_in_dr = False
                 for cmv in mip_vars_list:
@@ -436,12 +440,12 @@ def process_homeVars(lset, sset, mip_vars_list, mips, dq, expid=False, printout=
                                      " CMORVar found." % `hv_info`)
         elif hv.type == 'perso':
             # Check if HOME variable anounced as 'perso' is in fact 'cmor'
-            is_cmor = get_corresp_CMORvar(hv, dq, lset)
+            is_cmor = get_corresp_CMORvar(hv, lset)
             if not is_cmor:
                 # Check if HOME variable differs from CMOR one only by shapes
                 has_cmor_varname = any([cmvar.label == hv.label for
-                                        cmvar in dq.coll['CMORvar'].items])
-                # has_cmor_varname=any(dq.inx.CMORvar.label[hv.label])
+                                        cmvar in get_collection('CMORvar').items])
+                # has_cmor_varname=any(get_CMORvarId_by_label(hv.label))
                 if has_cmor_varname:
                     if printout:
                         print "Warning:", hv_info, "HOMEVar is anounced " \
@@ -473,12 +477,12 @@ def process_homeVars(lset, sset, mip_vars_list, mips, dq, expid=False, printout=
                              "for HOMEVar %s:" % `hv_info`)
 
 
-def get_corresp_CMORvar(hmvar, dq, lset):
+def get_corresp_CMORvar(hmvar, lset):
     printout = False and ("lwsnl" in hmvar.label)
     count = 0
     empty_table = (hmvar.mipTable == 'NONE') or (hmvar.mipTable[0:4] == 'None')
-    for cmvarid in dq.inx.CMORvar.label[hmvar.label]:
-        cmvar = dq.inx.uid[cmvarid]
+    for cmvarid in get_CMORvarId_by_label(hmvar.label):
+        cmvar = get_uid(cmvarid)
         if printout: print "get_corresp, checking %s vs %s in %s" % (hmvar.label, cmvar.label, cmvar.mipTable)
         #
         # Consider case where no modeling_realm associated to the
@@ -496,7 +500,7 @@ def get_corresp_CMORvar(hmvar, dq, lset):
                     (match_realm or empty_realm))
         if matching:
             if printout: print "matches"
-            same_shapes = (get_SpatialAndTemporal_Shapes(cmvar, dq) == \
+            same_shapes = (get_SpatialAndTemporal_Shapes(cmvar) == \
                            [hmvar.spatial_shp, hmvar.temporal_shp])
             if same_shapes:
                 count += 1
@@ -508,7 +512,7 @@ def get_corresp_CMORvar(hmvar, dq, lset):
                         "HOMEVar: Spatial and Temporal Shapes specified " \
                         "DO NOT match CMORvar ones." \
                         " -> Provided:", [hmvar.spatial_shp, hmvar.temporal_shp], \
-                        'Expected:', get_SpatialAndTemporal_Shapes(cmvar, dq)
+                        'Expected:', get_SpatialAndTemporal_Shapes(cmvar)
         else:
             if printout: print "doesn't match", match_label, match_freq, cmvar.frequency, hmvar.frequency, \
                 match_table, match_realm, empty_realm, hmvar.mipTable
@@ -517,7 +521,7 @@ def get_corresp_CMORvar(hmvar, dq, lset):
         # empty table means that the frequency is changed (but the variable exists in another frequency cmor table
         if empty_table: var_freq_asked = hmvar.frequency
         allow_pseudo = lset.get('allow_pseudo_standard_names', False)
-        complement_svar_using_cmorvar(hmvar, cmvar_found, dq, sn_issues_home, [], allow_pseudo)
+        complement_svar_using_cmorvar(hmvar, cmvar_found, sn_issues_home, [], allow_pseudo)
         if empty_table:
             hmvar.frequency = var_freq_asked
             hmvar.mipTable = "None" + hmvar.frequency
@@ -525,7 +529,7 @@ def get_corresp_CMORvar(hmvar, dq, lset):
     return False
 
 
-def complement_svar_using_cmorvar(svar, cmvar, dq, sn_issues, debug=[], allow_pseudo=False):
+def complement_svar_using_cmorvar(svar, cmvar, sn_issues, debug=[], allow_pseudo=False):
     """
     SVAR will have an attribute label_non_ambiguous suffixed by an
     area name if the MIPvarname is ambiguous for that
@@ -535,7 +539,7 @@ def complement_svar_using_cmorvar(svar, cmvar, dq, sn_issues, debug=[], allow_ps
     """
     global ambiguous_mipvarnames
     if ambiguous_mipvarnames is None:
-        ambiguous_mipvarnames = analyze_ambiguous_MIPvarnames(dq)
+        ambiguous_mipvarnames = analyze_ambiguous_MIPvarnames()
 
     # Get information form CMORvar
     svar.prec = cmvar.type  # integer / float / double
@@ -548,11 +552,11 @@ def complement_svar_using_cmorvar(svar, cmvar, dq, sn_issues, debug=[], allow_ps
     svar.modeling_realm = cmvar.modeling_realm.rstrip(' ')
     if (svar.modeling_realm[0:3] == "zoo"): svar.modeling_realm = "ocnBgChem"  # Because wrong in DR01.00.20
     svar.label = cmvar.label.rstrip(' ')
-    [svar.spatial_shp, svar.temporal_shp] = get_SpatialAndTemporal_Shapes(cmvar, dq)
+    [svar.spatial_shp, svar.temporal_shp] = get_SpatialAndTemporal_Shapes(cmvar)
     svar.cmvar = cmvar
 
     # Get information from MIPvar
-    mipvar = dq.inx.uid[cmvar.vid]
+    mipvar = get_uid(cmvar.vid)
     svar.mipVarLabel = mipvar.label.rstrip(' ')
     svar.long_name = cmvar.title.rstrip(' ')
     if cmvar.description:
@@ -563,7 +567,7 @@ def complement_svar_using_cmorvar(svar, cmvar, dq, sn_issues, debug=[], allow_ps
     #
     # see https://github.com/cmip6dr/CMIP6_DataRequest_VariableDefinitions/issues/279
     svar.stdname = ''
-    sn = dq.inx.uid[mipvar.sn]  # None
+    sn = get_uid(mipvar.sn)  # None
     if sn._h.label == 'standardname':
         svar.stdname = sn.uid.strip()
         # svar.units = sn.units
@@ -578,7 +582,7 @@ def complement_svar_using_cmorvar(svar, cmvar, dq, sn_issues, debug=[], allow_ps
     # Get information form Structure
     st = None
     try:
-        st = dq.inx.uid[cmvar.stid]
+        st = get_uid(cmvar.stid)
     except:
         if print_DR_errors:
             print "DR Error: issue with stid for", svar.label, "in Table ", svar.mipTable, \
@@ -586,8 +590,8 @@ def complement_svar_using_cmorvar(svar, cmvar, dq, sn_issues, debug=[], allow_ps
     if st is not None:
         svar.struct = st
         try:
-            svar.cm = dq.inx.uid[st.cmid].cell_methods
-            methods = dq.inx.uid[st.cmid].cell_methods.rstrip(' ')
+            svar.cm = get_uid(st.cmid).cell_methods
+            methods = get_uid(st.cmid).cell_methods.rstrip(' ')
             methods = methods.replace("mask=siconc or siconca", "mask=siconc")
             # Fix for emulating DR01.00.22 from content of DR01.00.21
             if "SoilPools" in svar.label: methods = "area: mean where land time: mean"
@@ -596,7 +600,7 @@ def complement_svar_using_cmorvar(svar, cmvar, dq, sn_issues, debug=[], allow_ps
             if print_DR_errors: print "DR Error: issue with cell_method for " + st.label
             # TBS# svar.cell_methods=None
         try:
-            svar.cell_measures = dq.inx.uid[cmvar.stid].cell_measures.rstrip(' ')
+            svar.cell_measures = get_uid(cmvar.stid).cell_measures.rstrip(' ')
         except:
             if print_DR_errors: print "DR Error: Issue with cell_measures for " + `cmvar`
 
@@ -624,7 +628,7 @@ def complement_svar_using_cmorvar(svar, cmvar, dq, sn_issues, debug=[], allow_ps
         product_of_other_dims = 1
         all_dimids = []
         if svar.spatial_shp != "na-na":
-            spid = dq.inx.uid[svar.struct.spid]
+            spid = get_uid(svar.struct.spid)
             all_dimids += spid.dimids
         if 'cids' in svar.struct.__dict__:
             cids = svar.struct.cids
@@ -636,7 +640,7 @@ def complement_svar_using_cmorvar(svar, cmvar, dq, sn_issues, debug=[], allow_ps
             dids = svar.struct.dids
             if dids[0] != '': all_dimids += dids
         for dimid in all_dimids:
-            sdim, dimsize = get_simpleDim_from_DimId(dimid, dq)
+            sdim, dimsize = get_simpleDim_from_DimId(dimid)
             if (dimsize > 1):
                 # print "for var % 15s and dim % 15s, size=%3d"%(svar.label,dimid,dimsize)
                 pass
@@ -672,9 +676,9 @@ def complement_svar_using_cmorvar(svar, cmvar, dq, sn_issues, debug=[], allow_ps
     svar.mip_era = 'CMIP6'
 
 
-def get_simpleDim_from_DimId(dimid, dq):
+def get_simpleDim_from_DimId(dimid):
     sdim = simple_Dim()
-    d = dq.inx.uid[dimid]
+    d = get_uid(dimid)
     sdim.label = d.label
     sdim.positive = d.positive
     sdim.requested = d.requested
@@ -689,7 +693,7 @@ def get_simpleDim_from_DimId(dimid, dq):
     #
     sdim.value = d.value
     try:
-        sdim.stdname = dq.inx.uid[d.standardName].uid
+        sdim.stdname = get_uid(d.standardName).uid
     except:
         if print_DR_stdname_errors: print "Issue with standardname for dimid %s" % dimid
         sdim.stdname = ""
@@ -759,7 +763,7 @@ def cellmethod2area(method):
     if "where ice_shelf" in method: return "isf"
 
 
-def analyze_ambiguous_MIPvarnames(dq, debug=[]):
+def analyze_ambiguous_MIPvarnames(debug=[]):
     """
     Return the list of MIP varnames whose list of CMORvars for a single realm
     show distinct values for the area part of the cell_methods
@@ -767,15 +771,15 @@ def analyze_ambiguous_MIPvarnames(dq, debug=[]):
     # Compute a dict which keys are MIP varnames and values = list
     # of CMORvars items for the varname
     d = dict()
-    for v in dq.coll['var'].items:
+    for v in get_collection('var').items:
         if v.label not in d:
             d[v.label] = []
             if v.label in debug: print "Adding %s" % v.label
-        refs = dq.inx.iref_by_sect[v.uid].a['CMORvar']
+        refs = get_request_by_id_by_sect(v.uid, 'CMORvar')
         for r in refs:
-            d[v.label].append(dq.inx.uid[r])
+            d[v.label].append(get_uid(r))
             if v.label in debug:
-                print "Adding CmorVar %s(%s) for %s" % (v.label, dq.inx.uid[r].mipTable, dq.inx.uid[r].label)
+                print "Adding CmorVar %s(%s) for %s" % (v.label, get_uid(r).mipTable, get_uid(r).label)
 
     # Replace dic values by dic of area portion of cell_methods
     for vlabel in d:
@@ -783,10 +787,10 @@ def analyze_ambiguous_MIPvarnames(dq, debug=[]):
             cvl = d[vlabel]
             d[vlabel] = dict()
             for cv in cvl:
-                st = dq.inx.uid[cv.stid]
+                st = get_uid(cv.stid)
                 cm = None
                 try:
-                    cm = dq.inx.uid[st.cmid].cell_methods
+                    cm = get_uid(st.cmid).cell_methods
                 except:
                     # pass
                     print "No cell method for %-15s %s(%s)" % (st.label, cv.label, cv.mipTable)
@@ -821,45 +825,40 @@ def analyze_ambiguous_MIPvarnames(dq, debug=[]):
     return ambiguous
 
 
-def get_simplevar(dq, label, table, freq=None):
+def get_simplevar(label, table, freq=None):
     """
     Returns 'simplified variable' for a given CMORvar label and table
     """
     svar = simple_CMORvar()
-    collect = dq.coll['CMORvar']
-    psvar = None
-    for cmvar in collect.items:
-        if cmvar.mipTable == table and cmvar.label == label:
-            psvar = cmvar
-            break
+    psvar = get_CMORvar(label, table)
     #
     # Try to get a var for 'ps' when table is only in Home DR
     if psvar is None and label == "ps" and freq is not None:
         # print "\tSearching for alternate ps "
         if freq in ["3h", "3hr", "3hrPt"]:
-            psvar = get_CMORvar(dq, 'ps', 'E3hrPt')
+            psvar = get_CMORvar('ps', 'E3hrPt')
         elif freq in ["6h", "6hr"]:
-            psvar = get_CMORvar(dq, 'ps', '6hrLev')
+            psvar = get_CMORvar('ps', '6hrLev')
         elif freq in ["day"]:
-            psvar = get_CMORvar(dq, 'ps', 'CFday')
+            psvar = get_CMORvar('ps', 'CFday')
         elif freq in ["mon", "1mo"]:
-            psvar = get_CMORvar(dq, 'ps', 'Emon')
+            psvar = get_CMORvar('ps', 'Emon')
         elif freq in ["subhr"]:
             if table == "CFsubhr":
-                psvar = get_CMORvar(dq, 'ps', 'CFsubhr')
+                psvar = get_CMORvar('ps', 'CFsubhr')
             else:
-                psvar = get_CMORvar(dq, 'ps', 'Esubhr')
+                psvar = get_CMORvar('ps', 'Esubhr')
     if psvar:
-        complement_svar_using_cmorvar(svar, psvar, dq, None, [], False)
+        complement_svar_using_cmorvar(svar, psvar, None, [], False)
         return svar
 
 
-def get_CMORvar(dq, label, table):
+def get_CMORvar(label, table):
     """
     Returns CMOR variable for a given label in a given table
     (could be optimized using inverse index)
     """
-    collect = dq.coll['CMORvar']
+    collect = get_collection('CMORvar')
     thevar = None
     for cmvar in collect.items:
         if cmvar.mipTable == table and cmvar.label == label:
@@ -868,9 +867,9 @@ def get_CMORvar(dq, label, table):
     return thevar
 
 
-def scalar_vertical_dimension(sv, dq):
+def scalar_vertical_dimension(sv):
     if 'cids' in sv.struct.__dict__:
-        cid = dq.inx.uid[sv.struct.cids[0]]
+        cid = get_uid(sv.struct.cids[0])
         if cid.axis == 'Z':
             return cid.altLabel
     return None

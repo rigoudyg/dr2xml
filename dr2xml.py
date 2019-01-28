@@ -38,8 +38,6 @@ Changes :
 # 1- CMIP6 Data Request package retrieved using
 #    svn co http://proj.badc.rl.ac.uk/svn/exarch/CMIP6dreq/tags/01.00.21
 #    (and must include 01.00.21/dreqPy in PYTHONPATH)
-from scope import dreqQuery
-import dreq
 
 # 2- CMIP6 Controled Vocabulary (available from
 # https://github.com/WCRP-CMIP/CMIP6_CVs). You will provide its path
@@ -87,6 +85,10 @@ from stats import print_SomeStats
 # Utilities
 from utils import dr2xml_error
 
+# Data request interface
+from dr_interface import get_DR_version, initialize_sc, get_collection, get_uid, get_request_by_id_by_sect, \
+    get_experiment_label
+
 # A auxilliary tables
 from table2freq import Cmip6Freq2XiosFreq, longest_possible_period
 
@@ -96,8 +98,7 @@ from cfsites import cfsites_domain_id, cfsites_grid_id, cfsites_input_filedef, a
 print_DR_errors = True
 print_multiple_grids = False
 
-dq = dreq.loadDreq()
-print "* %29s" % "CMIP6 Data Request version: ", dq.version
+print "* %29s" % "CMIP6 Data Request version: ", get_DR_version()
 print "\n*\n", 50 * "*"
 
 cell_method_warnings = []
@@ -581,13 +582,13 @@ example_simulation_settings = {
 
 
 # def hasCMORVarName(hmvar):
-#    for cmvar in dq.coll['CMORvar'].items:
+#    for cmvar in get_collection('CMORvar').items:
 #        if (cmvar.label==hmvar.label): return True
 
 
 def RequestItem_applies_for_exp_and_year(ri, experiment, lset, sset, year=None, debug=False):
     """
-    Returns True if requestItem 'ri' in data request 'dq' (global) is relevant
+    Returns True if requestItem 'ri' in data request is relevant
     for a given 'experiment' and 'year'. Toggle 'debug' allow some printouts
     """
     # Returns a couple : relevant, endyear.
@@ -603,7 +604,7 @@ def RequestItem_applies_for_exp_and_year(ri, experiment, lset, sset, year=None, 
     # if ri.title=='CFMIP, CFMIP.CFsubhr, amip' : debug=True
     if debug:
         print "In RIapplies.. Checking ", "% 15s" % ri.title,
-    item_exp = dq.inx.uid[ri.esid]
+    item_exp = get_uid(ri.esid)
     ri_applies_to_experiment = False
     endyear = None
     # esid can link to an experiment or an experiment group
@@ -617,17 +618,17 @@ def RequestItem_applies_for_exp_and_year(ri, experiment, lset, sset, year=None, 
     elif item_exp._h.label == 'exptgroup':
         if debug:
             print "%20s" % "Expt Group case ", item_exp.label,
-        exps_id = dq.inx.iref_by_sect[ri.esid].a['experiment']
-        for e in [dq.inx.uid[eid] for eid in exps_id]:
+        exps_id = get_request_by_id_by_sect(ri.esid,'experiment')
+        for e in [get_uid(eid) for eid in exps_id]:
             if e.label == experiment:
                 if debug:
                     print " OK for experiment based on group" + item_exp.label,
                 ri_applies_to_experiment = True
     elif item_exp._h.label == 'mip':
         if debug:
-            print "%20s" % "Mip case ", dq.inx.uid[item_exp.label].label,
-        exps_id = dq.inx.iref_by_sect[ri.esid].a['experiment']
-        for e in [dq.inx.uid[eid] for eid in exps_id]:
+            print "%20s" % "Mip case ", get_uid(item_exp.label).label,
+        exps_id = get_request_by_id_by_sect(ri.esid,'experiment')
+        for e in [get_uid(eid) for eid in exps_id]:
             if debug:
                 print e.label, ",",
             if e.label == experiment:
@@ -655,7 +656,7 @@ def RequestItem_applies_for_exp_and_year(ri, experiment, lset, sset, year=None, 
             if debug:
                 print " ..applies because arg year is None"
         else:
-            exp = dq.inx.uid[dq.inx.experiment.label[experiment][0]]
+            exp = get_uid(get_experiment_label(experiment))
             rep, endyear = year_in_ri(ri, exp, lset, sset, year, debug=debug)
             if debug:
                 print " ..year in ri returns :", rep, endyear
@@ -767,7 +768,7 @@ def year_in_ri_tslice(ri, exp, sset, lset, year, debug=False):
     #
     relevant = False
     endyear = None
-    tslice = dq.inx.uid[ri.tslice]
+    tslice = get_uid(ri.tslice)
     if debug:
         print "tslice label/type is %s/%s for reqItem %s " % (tslice.label, tslice.type, ri.title)
     if tslice.type == "relativeRange":  # e.g. _slice_abrupt30
@@ -852,7 +853,7 @@ def select_CMORvars_for_lab(lset, sset=None, year=None, printout=False):
     else:
         tierMax = lset['tierMax']
     if sc is None:
-        sc = dreqQuery(dq=dq, tierMax=tierMax)
+        sc = initialize_sc(tierMax)
 
     # Set sizes for lab settings, if available (or use CNRM-CM6-1 defaults)
     mcfg = collections.namedtuple('mcfg', \
@@ -898,16 +899,16 @@ def select_CMORvars_for_lab(lset, sset=None, year=None, printout=False):
     #
     if sset:
         experiment_id = sset.get('experiment_for_requests', sset['experiment_id'])
-        exp = dq.inx.uid[dq.inx.experiment.label[experiment_id][0]]
+        exp = get_uid(get_experiment_label(experiment_id))
         if printout: print "Filtering for experiment %s, covering years [ %s , %s ] in DR" % \
                            (experiment_id, exp.starty, exp.endy)
         # print "Request links before filter :"+`[ rl.label for rl in rls_for_mips ]`
         filtered_rls = []
         for rl in rls_for_mips:
             # Access all requesItems ids which refer to this RequestLink
-            ri_ids = dq.inx.iref_by_sect[rl.uid].a['requestItem']
+            ri_ids = get_request_by_id_by_sect(rl.uid, 'requestItem')
             for ri_id in ri_ids:
-                ri = dq.inx.uid[ri_id]
+                ri = get_uid(ri_id)
                 # debug=(ri.label=='C4mipC4mipLandt2')
                 if debug: print "Checking requestItem ", ri.title,
                 applies, endyear = RequestItem_applies_for_exp_and_year(ri,
@@ -943,20 +944,20 @@ def select_CMORvars_for_lab(lset, sset=None, year=None, printout=False):
         for v in rl_vars:
             # The requested grid is given by the RequestLink except if spatial shape matches S-*
             gr = rl.grid
-            cmvar = dq.inx.uid[v]
-            st = dq.inx.uid[cmvar.stid]
-            sp = dq.inx.uid[st.spid]
+            cmvar = get_uid(v)
+            st = get_uid(cmvar.stid)
+            sp = get_uid(st.spid)
             if sp.label[0:2] == "S-": gr = 'cfsites'
             if (v, gr) not in miprl_vars_grids:
                 miprl_vars_grids.append((v, gr))
-                # if 'ua' in cmvar.label : print "adding %s %s"%(cmvar.label,dq.inx.uid[cmvar.vid].label)
+                # if 'ua' in cmvar.label : print "adding %s %s"%(cmvar.label,get_uid(cmvar.vid).label)
             # else:
             #    print "Duplicate pair var/grid : ",cmvar.label,cmvar.mipTable,gr
     if printout:
         print 'Number of (CMOR variable, grid) pairs for these requestLinks is :%s' % len(miprl_vars_grids)
 
     # for (v,g) in miprl_vars_grids :
-    #    if dq.inx.uid[v].label=="ps" : print "step 1 : ps in table",dq.inx.uid[v].mipTable,g
+    #    if get_uid(v).label=="ps" : print "step 1 : ps in table",get_uid(v).mipTable,g
 
     #
     inctab = lset.get("included_tables", [])
@@ -978,9 +979,9 @@ def select_CMORvars_for_lab(lset, sset=None, year=None, printout=False):
 
     filtered_vars = []
     for (v, g) in miprl_vars_grids:
-        cmvar = dq.inx.uid[v]
-        ttable = dq.inx.uid[cmvar.mtid]
-        mipvar = dq.inx.uid[cmvar.vid]
+        cmvar = get_uid(v)
+        ttable = get_uid(cmvar.mtid)
+        mipvar = get_uid(cmvar.vid)
         if ((len(incvars) == 0 and mipvar.label not in excvars) or \
             (len(incvars) > 0 and mipvar.label in incvars)) \
                 and \
@@ -1008,11 +1009,11 @@ def select_CMORvars_for_lab(lset, sset=None, year=None, printout=False):
         print 'Number of distinct CMOR variables (whatever the grid) : %d' % len(d)
     multiple_grids = []
     for v in d:
-        d[v] = decide_for_grids(v, d[v], lset, dq)
+        d[v] = decide_for_grids(v, d[v], lset)
         if printout and len(d[v]) > 1:
-            multiple_grids.append(dq.inx.uid[v].label)
+            multiple_grids.append(get_uid(v).label)
             if print_multiple_grids:
-                print "\tVariable %s will be processed with multiple grids : %s" % (dq.inx.uid[v].label, `d[v]`)
+                print "\tVariable %s will be processed with multiple grids : %s" % (get_uid(v).label, `d[v]`)
     if not print_multiple_grids:
         if printout:
             multiple_grids.sort()
@@ -1023,7 +1024,7 @@ def select_CMORvars_for_lab(lset, sset=None, year=None, printout=False):
     # Print a count of distinct var labels
     if printout:
         varlabels = set()
-        for v in d: varlabels.add(dq.inx.uid[v].label)
+        for v in d: varlabels.add(get_uid(v).label)
         print 'Number of distinct var labels is :', len(varlabels)
 
     # Translate CMORvars to a list of simplified CMORvar objects
@@ -1031,12 +1032,12 @@ def select_CMORvars_for_lab(lset, sset=None, year=None, printout=False):
     allow_pseudo = lset.get('allow_pseudo_standard_names', False)
     for v in d:
         svar = simple_CMORvar()
-        cmvar = dq.inx.uid[v]
-        complement_svar_using_cmorvar(svar, cmvar, dq, sn_issues, [], allow_pseudo)
+        cmvar = get_uid(v)
+        complement_svar_using_cmorvar(svar, cmvar, sn_issues, [], allow_pseudo)
         svar.Priority = analyze_priority(cmvar, mips_list)
         svar.grids = d[v]
         if debug:
-            if "tas" == dq.inx.uid[v].label:
+            if "tas" == get_uid(v).label:
                 print "When complementing, tas is included , grids are %s" % svar.grids
         simplified_vars.append(svar)
     if printout: print 'Number of simplified vars is :', len(simplified_vars)
@@ -1054,10 +1055,10 @@ def analyze_priority(cmvar, lmips):
     Returns the max priority of the CMOR variable, for a set of mips
     """
     prio = cmvar.defaultPriority
-    rv_ids = dq.inx.iref_by_sect[cmvar.uid].a['requestVar']
+    rv_ids = get_request_by_id_by_sect(cmvar.uid, 'requestVar')
     for rv_id in rv_ids:
-        rv = dq.inx.uid[rv_id]
-        vg = dq.inx.uid[rv.vgid]
+        rv = get_uid(rv_id)
+        vg = get_uid(rv.vgid)
         if vg.mip in lmips:
             if rv.priority < prio: prio = rv.priority
     return prio
@@ -1229,11 +1230,11 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
     # --------------------------------------------------------------------
     # Put a warning for field attributes that shouldn't be empty strings
     # --------------------------------------------------------------------
-    # if not sv.stdname       : sv.stdname       = "missing" #"empty in DR "+dq.version
-    if not sv.long_name: sv.long_name = "empty in DR " + dq.version
-    # if not sv.cell_methods  : sv.cell_methods  = "empty in DR "+dq.version
-    # if not sv.cell_measures : sv.cell_measures = "cell measure is not specified in DR "+dq.version
-    if not sv.units: sv.units = "empty in DR " + dq.version
+    # if not sv.stdname       : sv.stdname       = "missing" #"empty in DR "+get_DR_version()
+    if not sv.long_name: sv.long_name = "empty in DR " + get_DR_version()
+    # if not sv.cell_methods  : sv.cell_methods  = "empty in DR "+get_DR_version()
+    # if not sv.cell_measures : sv.cell_measures = "cell measure is not specified in DR "+get_DR_version()
+    if not sv.units: sv.units = "empty in DR " + get_DR_version()
 
     # --------------------------------------------------------------------
     # Define alias for field_ref in file-def file
@@ -1458,7 +1459,7 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
         # Try to get enddate for the CMOR variable from the DR
         if sv.cmvar is not None:
             # print "calling endyear_for... for %s, with year="%(sv.label), year
-            lastyear = endyear_for_CMORvar(dq, sv.cmvar, expid, year, lset, sset, sv.label in debug)
+            lastyear = endyear_for_CMORvar(sv.cmvar, expid, year, lset, sset, sv.label in debug)
             # print "lastyear=",lastyear," enddate=",enddate
         if lastyear is None or (enddate is not None and lastyear >= int(enddate[0:4])):
             # DR doesn't specify an end date for that var, or a very late one
@@ -1504,7 +1505,7 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
     wr(out, 'activity_id', activity_idr)
     #
     if contact and contact is not "": wr(out, 'contact', contact)
-    wr(out, 'data_specs_version', dq.version)
+    wr(out, 'data_specs_version', get_DR_version())
     wr(out, 'dr2xml_version', version)
     #
     wr(out, 'experiment_id', expid_in_filename)
@@ -1669,10 +1670,10 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
     if sv.spatial_shp[0:4] == 'XY-A' or sv.spatial_shp[0:3] == 'S-A':  # includes half-level cases
         # create a field_def entry for surface pressure
         # print "Searching for ps for var %s, freq %s="%(alias,freq)
-        sv_psol = get_simplevar(dq, "ps", table, sv.frequency)
+        sv_psol = get_simplevar("ps", table, sv.frequency)
 
         if sv_psol:
-            # if not sv_psol.cell_measures : sv_psol.cell_measures = "cell measure is not specified in DR "+dq.version
+            # if not sv_psol.cell_measures : sv_psol.cell_measures = "cell measure is not specified in DR "+get_DR_version()
             psol_field = create_xios_aux_elmts_defs(sv_psol, lset["ping_variables_prefix"] + "ps", table, lset, sset,
                                                     field_defs, axis_defs, grid_defs, domain_defs, scalar_defs,
                                                     dummies, context, target_hgrid_id, zgrid_id, pingvars)
@@ -2109,7 +2110,7 @@ def process_vertical_interpolation(sv, alias, lset, pingvars, src_grid_id,
         raise dr2xml_error("Too many vertical dims for %s (%s)" % (sv.label, `vdims`))
     if len(vdims) == 0:
         # Analyze if there is a singleton vertical dimension for the variable
-        # sd=scalar_vertical_dimension(sv,dq)
+        # sd=scalar_vertical_dimension(sv)
         # if sd is not None :
         #    print "Single level %s for %s"%(sv,sv.label),vdims
         # else:
@@ -2394,8 +2395,7 @@ def gather_AllSimpleVars(lset, sset, year=False, printout=False, select="on_expt
     #
     if sset.get('listof_home_vars', lset.get('listof_home_vars', None)):
         exp = sset.get('experiment_for_requests', sset['experiment_id'])
-        process_homeVars(lset, sset, mip_vars_list, lset["mips"][grid_choice],
-                         dq, expid=exp, printout=printout)
+        process_homeVars(lset, sset, mip_vars_list, lset["mips"][grid_choice], expid=exp, printout=printout)
     else:
         print "Info: No HOMEvars list provided."
     return mip_vars_list
@@ -2424,7 +2424,7 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
                              dummies='include', printout=False, dirname="./", prefix="",
                              attributes=[], select="on_expt_and_year"):
     """
-    Using global DR object dq, a dict of lab settings LSET, and a dict
+    Using the DR module, a dict of lab settings LSET, and a dict
     of simulation settings SSET, generate an XIOS file_defs 'file' for a
     given XIOS 'context', which content matches
     the DR for the experiment quoted in simu setting dict and a YEAR.
@@ -2620,7 +2620,7 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
     filename = dirname + "dr2xml_%s.xml" % context
     with open(filename, "w") as out:
         out.write('<context id="%s"> \n' % context)
-        out.write('<!-- CMIP6 Data Request version %s --> \n' % dq.version)
+        out.write('<!-- CMIP6 Data Request version %s --> \n' % get_DR_version())
         out.write('<!-- CMIP6-CV version %s --> \n' % "??")
         out.write('<!-- CMIP6_conventions_version %s --> \n' % CMIP6_conventions_version)
         out.write('<!-- dr2xml version %s --> \n' % version)
@@ -2872,7 +2872,7 @@ def change_axes_in_grid(grid_id, grid_defs, axis_defs, lset):
     if 'sectors' in lset:
         sectors = lset['sectors']
     else:
-        sectors = [dim.label for dim in dq.coll['grids'].items if \
+        sectors = [dim.label for dim in get_collection('grids').items if \
                    dim.type == 'character' and dim.value == '']
     if 'typewetla' in sectors: sectors.remove('typewetla')  # Error in DR 01.00.21
     # print "sectors=",sectors
@@ -2917,9 +2917,9 @@ def change_axes_in_grid(grid_id, grid_defs, axis_defs, lset):
             #
             dim_id = 'dim:%s' % dr_axis_id
             # print "in change_axis for %s %s"%(grid_id,dim_id)
-            if dim_id not in dq.inx.uid:  # This should be a dimension !
+            if dim_id not in get_uid():  # This should be a dimension !
                 raise dr2xml_error("Value %s in 'non_standard_axes' is not a DR dimension id" % dr_axis_id)
-            dim = dq.inx.uid[dim_id]
+            dim = get_uid(dim_id)
             # We don't process scalars here
             if dim.value == '' or dim.label == "scatratio":
                 axis_id, axis_name = create_axis_from_dim(dim, alt_labels, axis_ref, axis_defs, lset)
@@ -3510,7 +3510,7 @@ def pingFileForRealmsList(settings, context, lrealms, svars, path_special, dummy
     else:
         specials = False
     with open(filename, "w") as fp:
-        fp.write('<!-- Ping files generated by dr2xml %s using Data Request %s -->\n' % (version, dq.version))
+        fp.write('<!-- Ping files generated by dr2xml %s using Data Request %s -->\n' % (version, get_DR_version()))
         fp.write('<!-- lrealms= %s -->\n' % `lrealms`)
         fp.write('<!-- exact= %s -->\n' % `exact`)
         fp.write('<!-- ')
@@ -3683,13 +3683,13 @@ def highest_rank(svar):
     mipvarlabel = svar.label_without_psuffix
     shapes = [];
     altdims = set()
-    for cvar in dq.coll['CMORvar'].items:
-        v = dq.inx.uid[cvar.vid]
+    for cvar in get_collection('CMORvar').items:
+        v = get_uid(cvar.vid)
         if v.label == mipvarlabel:
             try:
-                st = dq.inx.uid[cvar.stid]
+                st = get_uid(cvar.stid)
                 try:
-                    sp = dq.inx.uid[st.spid]
+                    sp = get_uid(st.spid)
                     shape = sp.label
                 except:
                     if print_DR_errors:
@@ -3848,13 +3848,13 @@ def RequestItemInclude(ri, var_label, freq):
     """
     test if a variable is requested by a requestItem at a given freq
     """
-    varGroup = dq.inx.uid[dq.inx.uid[ri.rlid].refid]
-    reqVars = dq.inx.iref_by_sect[varGroup.uid].a['requestVar']
-    cmVars = [dq.inx.uid[dq.inx.uid[reqvar].vid] for reqvar in reqVars]
+    varGroup = get_uid(get_uid(ri.rlid).refid)
+    reqVars = get_request_by_id_by_sect(varGroup.uid, 'requestVar')
+    cmVars = [get_uid(get_uid(reqvar).vid) for reqvar in reqVars]
     return any([cmv.label == var_label and cmv.frequency == freq for cmv in cmVars])
 
 
-def endyear_for_CMORvar(dq, cv, expt, year, lset, sset, printout=False):
+def endyear_for_CMORvar(cv, expt, year, lset, sset, printout=False):
     """
     For a CMORvar, returns the largest year in the time slice(s)
     of those requestItems which apply for experiment EXPT and which
@@ -3872,30 +3872,30 @@ def endyear_for_CMORvar(dq, cv, expt, year, lset, sset, printout=False):
     pmax = sset.get('max_priority', lset.get('max_priority'))
 
     # 1- Get the RequestItems which apply to CmorVar
-    rVarsUid = dq.inx.iref_by_sect[cv.uid].a['requestVar']
-    rVars = [dq.inx.uid[uid] for uid in rVarsUid if dq.inx.uid[uid].priority <= pmax]
+    rVarsUid = get_request_by_id_by_sect(cv.uid, 'requestVar')
+    rVars = [get_uid(uid) for uid in rVarsUid if get_uid(uid).priority <= pmax]
     if printout: print "les requestVars:", [rVar.title for rVar in rVars]
-    VarGroups = [dq.inx.uid[rv.vgid] for rv in rVars]
+    VarGroups = [get_uid(rv.vgid) for rv in rVars]
     if printout: print "les requestVars groups:", [rVg.label for rVg in VarGroups]
     RequestLinksId = []
     for vg in VarGroups:
-        RequestLinksId.extend(dq.inx.iref_by_sect[vg.uid].a['requestLink'])
+        RequestLinksId.extend(get_request_by_id_by_sect(vg.uid, 'requestLink'))
     FilteredRequestLinks = []
     for rlid in RequestLinksId:
-        rl = dq.inx.uid[rlid]
+        rl = get_uid(rlid)
         if rl in global_rls:
             FilteredRequestLinks.append(rl)
-    if printout: print "les requestlinks:", [dq.inx.uid[rlid].label for rlid in RequestLinksId]
+    if printout: print "les requestlinks:", [get_uid(rlid).label for rlid in RequestLinksId]
     if printout: print "les FilteredRequestlinks:", [rl.label for rl in FilteredRequestLinks]
     RequestItems = []
     for rl in FilteredRequestLinks:
-        RequestItems.extend(dq.inx.iref_by_sect[rl.uid].a['requestItem'])
-    if printout: print "les requestItems:", [dq.inx.uid[riid].label for riid in RequestItems]
+        RequestItems.extend(get_request_by_id_by_sect(rl.uid, 'requestItem'))
+    if printout: print "les requestItems:", [get_uid(riid).label for riid in RequestItems]
 
     # 2- Select those request links which include expt and year
     larger = None
     for riid in RequestItems:
-        ri = dq.inx.uid[riid]
+        ri = get_uid(riid)
         applies, endyear = RequestItem_applies_for_exp_and_year(ri, expt, lset, sset, year, debug=printout)
         if printout:
             print "For var and freq selected for debug and year %d, for ri %s, applies=%s, endyear=%s" % \
