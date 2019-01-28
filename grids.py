@@ -15,6 +15,8 @@ Also : management of fields size/split_frequency
 
 """
 
+from utils import dr2xml_grid_error
+
 compression_factor = None
 splitfreqs = None
 
@@ -422,11 +424,3 @@ def read_splitfreqs():
         # Keep smallest factor for each variablelabel
         if table not in splitfreqs[varlabel]:
             splitfreqs[varlabel][table] = freq
-
-
-class dr2xml_grids_error(Exception):
-    def __init__(self, valeur):
-        self.valeur = valeur
-
-    def __str__(self):
-        return `self.valeur`

@@ -5,6 +5,7 @@ print_DR_stdname_errors = False
 import sys, os
 import json
 from table2freq import guess_freq_from_table_name
+from utils import vars_error
 
 
 # -from dr2xml import dr2xml_error
@@ -873,11 +874,3 @@ def scalar_vertical_dimension(sv, dq):
         if cid.axis == 'Z':
             return cid.altLabel
     return None
-
-
-class vars_error(Exception):
-    def __init__(self, valeur):
-        self.valeur = valeur
-
-    def __str__(self):
-        return "\n\n" + `self.valeur` + "\n\n"

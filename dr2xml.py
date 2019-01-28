@@ -84,6 +84,9 @@ from Xparse import init_context, id2grid, id2gridid, idHasExprWithAt
 # Statistics module
 from stats import print_SomeStats
 
+# Utilities
+from utils import dr2xml_error
+
 # A auxilliary tables
 from table2freq import Cmip6Freq2XiosFreq, longest_possible_period
 
@@ -4036,12 +4039,3 @@ def check_for_file_input(sv, lset, hgrid, pingvars, field_defs, grid_defs, \
 
         if printout: print field_defs[field_in_file_id]
         #
-
-
-class dr2xml_error(Exception):
-    def __init__(self, valeur):
-        self.valeur = valeur
-
-    def __str__(self):
-        return "\n\n" + `self.valeur` + "\n\n"
-    # """ just for test"""
