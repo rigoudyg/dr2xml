@@ -2,7 +2,9 @@
 # -*- coding: utf-8 -*-
 
 """
-    Time settings functions
+    Settings functions.
+
+    In particular:
 
     Provide frequencies for a table name - Both in XIOS syntax and in CMIP6_CV
     and also split_frequencies for the files hodling the whole of a table's variables
@@ -12,7 +14,7 @@
     we need to translate anyway to XIOS syntax
 """
 from dict_interface import get_variable_from_lset_with_default
-from dr2xml import print_DR_errors
+from dr_interface import print_DR_errors
 from utils import dr2xml_error
 
 
@@ -452,3 +454,50 @@ def longest_possible_period(freq, too_long_periods):
         return longest_possible_period("1mo", too_long_periods)
     else:
         return freq
+
+
+def cellmethod2area(method):
+    """
+    Analyze METHOD to identify if its part related to area includes
+    some key words which describe given area types
+    """
+    if method is None: return None
+    if "where ice_free_sea over sea " in method: return "ifs"
+    if "where land" in method: return "land"
+    if "where floating_ice_shelf" in method: return "fisf"
+    if "where land over all_area_types" in method: return "loaat"  #
+    if "where landuse over all_area_types" in method: return "luoaat"  #
+    if "where sea" in method: return "sea"
+    if "where sea_ice" in method: return "si"
+    if "where sea_ice_over_sea" in method: return "sios"  #
+    if "where snow over sea_ice" in method: return "sosi"
+    if "where grounded_ice_shelf" in method: return "gisf"  #
+    if "where snow" in method: return "snow"
+    if "where cloud" in method: return "cloud"
+    if "where crops" in method: return "crops"  #
+    if "where grounded_ice_sheet" in method: return "gist"  #
+    if "ice_sheet" in method: return "ist"  #
+    if "where landuse" in method: return "lu"
+    if "where natural_grasses" in method: return "ngrass"  #
+    if "where sea_ice_melt_ponds" in method: return "simp"  #
+    if "where shrubs" in method: return "shrubs"  #
+    if "where trees" in method: return "trees"  #
+    if "where vegetation" in method: return "veg"  #
+    if "where ice_shelf" in method: return "isf"
+
+
+def DRgrid2gridatts(grid):
+    """ Returns label, resolution, description for a DR grid name"""
+    if grid == "cfsites":
+        return ("gn", "100 km", "data sampled in model native grid by nearest neighbour method ")
+    if grid == "1deg":
+        return ("gr1", "1x1 degree", "data regridded to a CMIP6 standard 1x1 degree latxlon grid from the native grid")
+    if grid == "2deg":
+        return ("gr2", "2x2 degree", "data regridded to a CMIP6 standard 2x2 degree latxlon grid from the native grid")
+    if grid == "100km":
+        return ("gr3", "100 km", "data regridded to a CMIP6 standard 100 km resol grid from the native grid")
+    if grid == "50km":
+        return ("gr4", "50 km", "data regridded to a CMIP6 standard 50 km resol grid from the native grid")
+    if grid == "25km":
+        return ("gr5", "25 km", "data regridded to a CMIP6 standard 25 km resol grid from the native grid")
+    return ("grx", "?x? degree", "grid has no description- please fix DRgrid2gridatts for grid %s" % grid)

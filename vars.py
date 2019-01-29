@@ -5,7 +5,7 @@ print_DR_stdname_errors = False
 import sys, os
 import json
 import json
-from settings_time import guess_freq_from_table_name
+from settings import guess_freq_from_table_name, cellmethod2area
 from utils import vars_error
 
 # DR interface
@@ -734,36 +734,6 @@ def Remove_pSuffix(svar, mlev_sfxs, slev_sfxs, realms):
                 if mdl and mdl.group(2) == mvl.group(2):
                     label_out = mvl.group(1)
     return label_out
-
-
-def cellmethod2area(method):
-    """
-    Analyze METHOD to identify if its part related to area includes
-    some key words which describe given area types
-    """
-    if method is None: return None
-    if "where ice_free_sea over sea " in method: return "ifs"
-    if "where land" in method: return "land"
-    if "where floating_ice_shelf" in method: return "fisf"
-    if "where land over all_area_types" in method: return "loaat"  #
-    if "where landuse over all_area_types" in method: return "luoaat"  #
-    if "where sea" in method: return "sea"
-    if "where sea_ice" in method: return "si"
-    if "where sea_ice_over_sea" in method: return "sios"  #
-    if "where snow over sea_ice" in method: return "sosi"
-    if "where grounded_ice_shelf" in method: return "gisf"  #
-    if "where snow" in method: return "snow"
-    if "where cloud" in method: return "cloud"
-    if "where crops" in method: return "crops"  #
-    if "where grounded_ice_sheet" in method: return "gist"  #
-    if "ice_sheet" in method: return "ist"  #
-    if "where landuse" in method: return "lu"
-    if "where natural_grasses" in method: return "ngrass"  #
-    if "where sea_ice_melt_ponds" in method: return "simp"  #
-    if "where shrubs" in method: return "shrubs"  #
-    if "where trees" in method: return "trees"  #
-    if "where vegetation" in method: return "veg"  #
-    if "where ice_shelf" in method: return "isf"
 
 
 def analyze_ambiguous_MIPvarnames(debug=[]):

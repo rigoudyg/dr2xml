@@ -75,13 +75,13 @@ import xml.etree.ElementTree as ET
 # Local packages
 from vars import simple_CMORvar, simple_Dim, process_homeVars, complement_svar_using_cmorvar, \
     multi_plev_suffixes, single_plev_suffixes, get_simplevar, scalar_vertical_dimension
-from grids import decide_for_grids, DRgrid2gridatts
+from grids import decide_for_grids
 from split_frequencies import split_frequency_for_variable, timesteps_per_freq_and_duration
 from Xparse import init_context, id2grid, id2gridid, idHasExprWithAt
 
 # Time settings
-from settings_time import freq2datefmt, analyze_cell_time_method, Cmip6Freq2XiosFreq, longest_possible_period, \
-    initialize_cell_method_warnings, get_cell_method_warnings
+from settings import freq2datefmt, analyze_cell_time_method, Cmip6Freq2XiosFreq, longest_possible_period, \
+    initialize_cell_method_warnings, get_cell_method_warnings, DRgrid2gridatts
 
 # Statistics module
 from stats import print_SomeStats
