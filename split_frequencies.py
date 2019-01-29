@@ -5,6 +5,7 @@
 Tools to compute split frequencies.
 """
 
+from dict_interface import get_variable_from_lset_with_default, get_variable_from_lset_without_default
 from utils import dr2xml_grid_error
 
 compression_factor = None
@@ -72,7 +73,7 @@ def read_compression_factors():
             compression_factor[varlabel][table] = factor
 
 
-def split_frequency_for_variable(svar, lset, grid, mcfg, context, printout=False):
+def split_frequency_for_variable(svar, grid, mcfg, context, printout=False):
     """
     Compute variable level split_freq and returns it as a string
 
@@ -88,10 +89,10 @@ def split_frequency_for_variable(svar, lset, grid, mcfg, context, printout=False
             svar.mipTable in splitfreqs[svar.label]:
         return splitfreqs[svar.label][svar.mipTable]
     #
-    max_size = lset.get("max_file_size_in_floats", 500 * 1.e6)
+    max_size = get_variable_from_lset_with_default("max_file_size_in_floats", 500 * 1.e6)
     #
     global compression_factor
-    size = field_size(svar, mcfg) * lset.get("bytes_per_float", 2)
+    size = field_size(svar, mcfg) * get_variable_from_lset_with_default("bytes_per_float", 2)
     if compression_factor is None: read_compression_factors()
     if compression_factor and svar.label in compression_factor and \
             svar.mipTable in compression_factor[svar.label]:
@@ -108,7 +109,7 @@ def split_frequency_for_variable(svar, lset, grid, mcfg, context, printout=False
 
     if (size != 0):
         freq = svar.frequency
-        sts = lset["sampling_timestep"][grid][context]
+        sts = get_variable_from_lset_without_default("sampling_timestep", grid, context)
         # Try by years first
         size_per_year = size * timesteps_per_freq_and_duration(freq, 365, sts)
         nbyears = max_size / float(size_per_year)

@@ -2,6 +2,7 @@
 
 from settings import lab_and_model_settings, simulation_settings, my_cvspath
 from dr2xml import select_CMORvars_for_lab, pingFileForRealmsList, generate_file_defs
+from dict_interface import initialize_dict
 
 #
 lab_and_model_settings["excluded_vars"] = []
@@ -11,7 +12,8 @@ lab_and_model_settings["excluded_vars"] = []
 if True:
     context = 'arpsfx'
     realms = lab_and_model_settings['realms_per_context'][context]
-    svars = select_CMORvars_for_lab(lab_and_model_settings, printout=True)
+    initialize_dict(lab_and_model_settings)
+    svars = select_CMORvars_for_lab(printout=True)
     # pingFileForRealmsList(context,realms,svars,comments=False,exact=False,dummy=True,
     pingFileForRealmsList(lab_and_model_settings, context, realms, svars,
                           path_special="../input/special_defs",
@@ -25,7 +27,8 @@ if True:
 if False:
     context = 'nemo'
     realms = lab_and_model_settings['realms_per_context'][context]
-    svars = select_CMORvars_for_lab(lab_and_model_settings, printout=True)
+    initialize_dict(lab_and_model_settings)
+    svars = select_CMORvars_for_lab(printout=True)
     pingFileForRealmsList(context, realms, svars, comments=" ", exact=False, dummy=True,
                           prefix=lab_and_model_settings['ping_variables_prefix'],
                           filename='./ping_%s.xml' % context, dummy_with_shape=True)

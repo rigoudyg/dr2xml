@@ -11,6 +11,9 @@ from utils import vars_error
 # DR interface
 from dr_interface import get_collection, get_uid, get_CMORvarId_by_label, get_request_by_id_by_sect
 
+# Settings dictionaries interface
+from dict_interface import get_variable_from_sset_else_lset_with_default, get_variable_from_lset_with_default, \
+    get_variable_from_lset_without_default
 
 # -from dr2xml import dr2xml_error
 
@@ -389,11 +392,11 @@ def get_SpatialAndTemporal_Shapes(cmvar):
     return [spatial_shape, temporal_shape]
 
 
-def process_homeVars(lset, sset, mip_vars_list, mips, expid=False, printout=False):
+def process_homeVars(mip_vars_list, mips, expid=False, printout=False):
     printmore = False
     # Read HOME variables
-    homevars = sset.get('listof_home_vars', lset.get('listof_home_vars', None))
-    path_extra_tables = sset.get('path_extra_tables', lset.get('path_extra_tables', None))
+    homevars = get_variable_from_sset_else_lset_with_default('listof_home_vars', default=None)
+    path_extra_tables = get_variable_from_sset_else_lset_with_default('path_extra_tables', default=None)
     home_vars_list = read_homeVars_list(homevars, expid, mips, path_extra_tables, printout=printout)
     for hv in home_vars_list:
         printmore = False and (hv.label == 'lwsnl')
@@ -403,7 +406,7 @@ def process_homeVars(lset, sset, mip_vars_list, mips, expid=False, printout=Fals
         if hv.type == 'cmor':
             # Complement each HOME variable with attributes got from
             # the corresponding CMOR variable (if exist)
-            updated_hv = get_corresp_CMORvar(hv, lset)
+            updated_hv = get_corresp_CMORvar(hv)
             if (updated_hv):
                 already_in_dr = False
                 for cmv in mip_vars_list:
@@ -440,7 +443,7 @@ def process_homeVars(lset, sset, mip_vars_list, mips, expid=False, printout=Fals
                                      " CMORVar found." % `hv_info`)
         elif hv.type == 'perso':
             # Check if HOME variable anounced as 'perso' is in fact 'cmor'
-            is_cmor = get_corresp_CMORvar(hv, lset)
+            is_cmor = get_corresp_CMORvar(hv)
             if not is_cmor:
                 # Check if HOME variable differs from CMOR one only by shapes
                 has_cmor_varname = any([cmvar.label == hv.label for
@@ -464,7 +467,7 @@ def process_homeVars(lset, sset, mip_vars_list, mips, expid=False, printout=Fals
                 raise vars_error("Abort: HOMEVar is anounced as perso but " \
                                  "should be cmor.")
         elif hv.type == 'extra':
-            if hv.Priority <= lset["max_priority"]:
+            if hv.Priority <= get_variable_from_lset_without_default("max_priority"):
                 if printmore: print "Info:", hv_info, "HOMEVar is read in an extra Table with priority " \
                     , hv.Priority, " => Taken into account."
                 mip_vars_list.append(hv)
@@ -477,7 +480,7 @@ def process_homeVars(lset, sset, mip_vars_list, mips, expid=False, printout=Fals
                              "for HOMEVar %s:" % `hv_info`)
 
 
-def get_corresp_CMORvar(hmvar, lset):
+def get_corresp_CMORvar(hmvar):
     printout = False and ("lwsnl" in hmvar.label)
     count = 0
     empty_table = (hmvar.mipTable == 'NONE') or (hmvar.mipTable[0:4] == 'None')
@@ -520,7 +523,7 @@ def get_corresp_CMORvar(hmvar, lset):
     if count >= 1:
         # empty table means that the frequency is changed (but the variable exists in another frequency cmor table
         if empty_table: var_freq_asked = hmvar.frequency
-        allow_pseudo = lset.get('allow_pseudo_standard_names', False)
+        allow_pseudo = get_variable_from_lset_with_default('allow_pseudo_standard_names', False)
         complement_svar_using_cmorvar(hmvar, cmvar_found, sn_issues_home, [], allow_pseudo)
         if empty_table:
             hmvar.frequency = var_freq_asked

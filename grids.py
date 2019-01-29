@@ -19,6 +19,9 @@ from utils import dr2xml_grid_error
 # DR interface
 from dr_interface import get_uid
 
+# Laboratory and simulations dictionaries
+from dict_interface import get_variable_from_lset_with_default
+
 
 def normalize(grid):
     """ in DR 1.0.2, values are :
@@ -29,7 +32,7 @@ def normalize(grid):
     return grid.replace(" or smaller", "")
 
 
-def decide_for_grids(cmvarid, grids, lset):
+def decide_for_grids(cmvarid, grids):
     """
     Decide which set of grids a given variable should be produced on
 
@@ -48,7 +51,7 @@ def decide_for_grids(cmvarid, grids, lset):
         sgrids.add(g)
     ngrids = list(sgrids)
     #
-    policy = lset.get("grid_policy")
+    policy = get_variable_from_lset_with_default("grid_policy")
     if policy is None or policy == "DR":  # Follow DR spec
         return ngrids
     elif policy == "native":  # Follow lab grids choice (gr or gn depending on context - see lset['grids"])
@@ -63,12 +66,12 @@ def decide_for_grids(cmvarid, grids, lset):
             sgrids.add('')
             return list(sgrids)
     elif policy == "adhoc":
-        return lab_adhoc_grid_policy(cmvarid, ngrids, lset)
+        return lab_adhoc_grid_policy(cmvarid, ngrids)
     else:
         dr2xml_error("Invalid grid policy %s" % policy)
 
 
-def lab_adhoc_grid_policy(cmvarid, grids, lset):
+def lab_adhoc_grid_policy(cmvarid, grids):
     """
     Decide , in a lab specific way, which set of grids a given
     variable should be produced on You should re-engine code below to
@@ -81,18 +84,18 @@ def lab_adhoc_grid_policy(cmvarid, grids, lset):
 
     Returns either a single grid string or a list of such strings
     """
-    return CNRM_grid_policy(cmvarid, grids, lset)
+    return CNRM_grid_policy(cmvarid, grids)
 
 
-def CNRM_grid_policy(cmvarid, grids, lset):  # TBD
+def CNRM_grid_policy(cmvarid, grids):  # TBD
     """
     See doc of lab_adhoc_grid_policy
     """
     if get_uid(cmvarid).label in ["sos"]:
         return [g for g in grids if g in ["", "1deg"]]
     elif get_uid(cmvarid).label in ["tos"] and \
-            (get_uid(cmvarid).mipTable not in ["3hr"] or lset.get("allow_tos_3hr_1deg", True)):
-        if lset.get("adhoc_policy_do_add_1deg_grid_for_tos", False):
+            (get_uid(cmvarid).mipTable not in ["3hr"] or get_variable_from_lset_with_default("allow_tos_3hr_1deg", True)):
+        if get_variable_from_lset_with_default("adhoc_policy_do_add_1deg_grid_for_tos", False):
             if "" in grids:
                 l = [""]
             else:

@@ -82,6 +82,13 @@ from Xparse import init_context, id2grid, id2gridid, idHasExprWithAt
 # Statistics module
 from stats import print_SomeStats
 
+# Simulations and laboratory settings dictionnaries interface
+from dict_interface import initialize_dict, get_variable_from_lset_with_default, get_variable_from_lset_without_default, \
+    is_key_in_sset, get_variable_from_sset_without_default, is_sset_not_None, get_source_id_and_type, \
+    get_variable_from_sset_and_lset_without_default, get_variable_from_sset_with_default_in_sset, \
+    get_variable_from_sset_with_default, is_key_in_lset, get_variable_from_sset_else_lset_with_default, \
+    get_lset_iteritems, get_sset_iteritems
+
 # Utilities
 from utils import dr2xml_error
 
@@ -586,7 +593,7 @@ example_simulation_settings = {
 #        if (cmvar.label==hmvar.label): return True
 
 
-def RequestItem_applies_for_exp_and_year(ri, experiment, lset, sset, year=None, debug=False):
+def RequestItem_applies_for_exp_and_year(ri, experiment, year=None, debug=False):
     """
     Returns True if requestItem 'ri' in data request is relevant
     for a given 'experiment' and 'year'. Toggle 'debug' allow some printouts
@@ -641,12 +648,9 @@ def RequestItem_applies_for_exp_and_year(ri, experiment, lset, sset, year=None, 
     # print "ri=%s"%ri.title,
     # if year is not None :
     #    print "Filtering for year %d"%year
-    if 'filter_on_realization' in sset:
-        filter_on_realization = sset['filter_on_realization']
-    else:
-        filter_on_realization = lset.get('filter_on_realization', True)
+    filter_on_realization = get_variable_from_sset_else_lset_with_default("filter_on_realization", default=True)
     if filter_on_realization:
-        if ri.nenmax != -1 and (sset["realization_index"] > ri.nenmax):
+        if ri.nenmax != -1 and (get_variable_from_sset_without_default("realization_index") > ri.nenmax):
             ri_applies_to_experiment = False
 
     if ri_applies_to_experiment:
@@ -657,7 +661,7 @@ def RequestItem_applies_for_exp_and_year(ri, experiment, lset, sset, year=None, 
                 print " ..applies because arg year is None"
         else:
             exp = get_uid(get_experiment_label(experiment))
-            rep, endyear = year_in_ri(ri, exp, lset, sset, year, debug=debug)
+            rep, endyear = year_in_ri(ri, exp, year, debug=debug)
             if debug:
                 print " ..year in ri returns :", rep, endyear
             # if (ri.label=="AerchemmipAermonthly3d") :
@@ -669,7 +673,7 @@ def RequestItem_applies_for_exp_and_year(ri, experiment, lset, sset, year=None, 
         return False, None
 
 
-def year_in_ri(ri, exp, lset, sset, year, debug=False):
+def year_in_ri(ri, exp, year, debug=False):
     if ri.label == "CfmipCf3hrSimNew":
         return (year == 2008), 2008
     if "HighResMIP, HighResMIP-6hrPlevExtr, amip" in ri.title:
@@ -677,7 +681,7 @@ def year_in_ri(ri, exp, lset, sset, year, debug=False):
     if 'tslice' in ri.__dict__:
         if debug:
             print "calling year_in_ri_tslice"
-        rep, endyear = year_in_ri_tslice(ri, exp, sset, lset, year, debug=debug)
+        rep, endyear = year_in_ri_tslice(ri, exp, year, debug=debug)
         return rep, endyear
     try:
         ny = int(ri.nymax)
@@ -686,10 +690,10 @@ def year_in_ri(ri, exp, lset, sset, year, debug=False):
         return True, None
     #
     # From now, this the case of a RequestItem which starts from experiment's start
-    actual_first_year = experiment_start_year(exp, sset)  # The start year, possibly fixed by the user
-    actual_end_year = experiment_end_year(exp, sset)  # = the end year requested by the user if any
-    DR_first_year = experiment_start_year(exp, False, debug=debug)
-    DR_end_year = experiment_end_year(exp, False)
+    actual_first_year = experiment_start_year(exp)  # The start year, possibly fixed by the user
+    actual_end_year = experiment_end_year_from_sset(exp)  # = the end year requested by the user if any
+    DR_first_year = experiment_start_year_without_sset(exp, debug=debug)
+    DR_end_year = experiment_end_year(exp)
     if debug:
         print "year_in_ri : start DR : %s actual : %s | end DR : %s actual : %s | ny=%d" % \
               (DR_first_year, actual_first_year, DR_end_year, actual_end_year, ny)
@@ -723,34 +727,42 @@ def year_in_ri(ri, exp, lset, sset, year, debug=False):
     return applies, RI_end_year
 
 
-def experiment_start_year(exp, sset=None, debug=False):
-    if sset and "branch_year_in_child" in sset:
-        return sset["branch_year_in_child"]
+def experiment_start_year_without_sset(exp, debug=False):
+    try:
+        return int(float(exp.starty))
+    except:
+        if debug:
+            print "start_year : starty=", exp.starty
+        return None
+
+
+def experiment_start_year(exp, debug=False):
+    if is_key_in_sset("branch_year_in_child"):
+        return get_variable_from_sset_without_default("branch_year_in_sset")
     else:
-        try:
-            return int(float(exp.starty))
-        except:
-            if sset is False:
-                if debug:
-                    print "start_year : starty=", exp.starty
-                return None
+        starty = experiment_start_year_without_sset(exp, debug)
+        if starty is None:
             form = "Cannot guess first year for experiment %s : DR says :'%s' "
-            if sset:
+            if is_sset_not_None():
                 form += "and 'branch_year_in_child' is not provided in experiment's settings"
             raise dr2xml_error(form % (exp.label, exp.starty))
 
 
-def experiment_end_year(exp, sset=None):
-    if sset and "end_year" in sset:
-        return sset["end_year"]
+def experiment_end_year(exp):
+    try:
+        return int(float(exp.endy))
+    except:
+        return None
+
+
+def experiment_end_year_from_sset(exp):
+    if is_key_in_sset("end_year"):
+        return get_variable_from_sset_without_default("end_year")
     else:
-        try:
-            return int(float(exp.endy))
-        except:
-            return None
+        return experiment_end_year(exp)
 
 
-def year_in_ri_tslice(ri, exp, sset, lset, year, debug=False):
+def year_in_ri_tslice(ri, exp, year, debug=False):
     # Returns a couple : relevant, endyear.
     # RELEVANT is True if requestItem RI applies to
     #   YEAR, either implicitly or explicitly (e.g. timeslice)
@@ -772,7 +784,7 @@ def year_in_ri_tslice(ri, exp, sset, lset, year, debug=False):
     if debug:
         print "tslice label/type is %s/%s for reqItem %s " % (tslice.label, tslice.type, ri.title)
     if tslice.type == "relativeRange":  # e.g. _slice_abrupt30
-        first_year = experiment_start_year(exp, sset)
+        first_year = experiment_start_year(exp)
         # first_year = sset["branch_year_in_child"]
         relevant = (year >= tslice.start + first_year - 1 and year <= tslice.end + first_year - 1)
         endyear = first_year + tslice.end - 1
@@ -792,17 +804,17 @@ def year_in_ri_tslice(ri, exp, sset, lset, year, debug=False):
             endyear = year
     elif tslice.type == "startRange":  # e.g. _slice_VolMIP3
         # used only for VolMIP : _slice_VolMIP3
-        start_year = experiment_start_year(exp, sset)
+        start_year = experiment_start_year(exp)
         relevant = (year >= start_year and year < start_year + nyear)
         endyear = start_year + nyear - 1
     elif tslice.type == "monthlyClimatology":  # e.g. _slice_clim20
         relevant = (year >= tslice.start and year <= tslice.end)
         endyear = tslice.end
     elif tslice.type == "branchedYears":  # e.g. _slice_piControl020
-        source, source_type = get_source_id_and_type(sset, lset)
-        if tslice.child in lset["branching"][source]:
+        source, source_type = get_source_id_and_type()
+        if tslice.child in get_variable_from_lset_without_default("branching", source):
             endyear = False
-            (refyear, starts) = lset["branching"][source][tslice.child]
+            (refyear, starts) = get_variable_from_lset_without_default("branching", source, tslice.child)
             for start in starts:
                 if ((year - start >= tslice.start - refyear) and \
                         (year - start < tslice.start - refyear + tslice.nyears)):
@@ -826,17 +838,18 @@ def year_in_ri_tslice(ri, exp, sset, lset, year, debug=False):
     return relevant, endyear
 
 
-def select_CMORvars_for_lab(lset, sset=None, year=None, printout=False):
+def select_CMORvars_for_lab(sset=False, year=None, printout=False):
     """
     A function to list CMOR variables relevant for a lab (and also,
     optionnally for an experiment and a year)
+    The variables relative to the laboratory settings are get using the dict_interface module:
+    list of MIPS, max Tier, list of excluded variables names
 
     Args:
-      lset (dict): laboratory settings; used to provide the list of MIPS,
-                   the max Tier, and a list of excluded variable names
-      sset (dict): simulation settings, used for indicating source_type,
-                   max priority (and for filtering on the simulation)
-                   If sset is None, use union of mips among all grid choices
+      sset (boolean): should simulation settings be used
+                      the parameter taken here are: source_type,
+                      max priority (and all for filtering on the simulation)
+                      If sset is False, use union of mips among all grid choices
       year (int,optional) : simulation year - used when sset is not None,
                    to additionally filter on year
 
@@ -848,10 +861,10 @@ def select_CMORvars_for_lab(lset, sset=None, year=None, printout=False):
     debug = False
     # From MIPS set to Request links
     global sc, global_rls, grid_choice, rls_for_all_experiments
-    if sset and 'tierMax' in sset:
-        tierMax = sset['tierMax']
+    if sset:
+        tierMax = get_variable_from_sset_and_lset_without_default('tierMax')
     else:
-        tierMax = lset['tierMax']
+        tierMax = get_variable_from_lset_without_default('tierMax')
     if sc is None:
         sc = initialize_sc(tierMax)
 
@@ -859,14 +872,16 @@ def select_CMORvars_for_lab(lset, sset=None, year=None, printout=False):
     mcfg = collections.namedtuple('mcfg', \
                                   ['nho', 'nlo', 'nha', 'nla', 'nlas', 'nls', 'nh1'])
     if sset:
-        source, source_type = get_source_id_and_type(sset, lset)
-        grid_choice = lset["grid_choice"][source]
-        mips_list = set(lset['mips'][grid_choice])
-        sizes = lset["sizes"][grid_choice]  # sizes=lset.get("sizes",[259200,60,64800,40,20,5,100])
+        source, source_type = get_source_id_and_type()
+        grid_choice = get_variable_from_lset_without_default("grid_choice", source)
+        mips_list = set(get_variable_from_lset_without_default('mips', grid_choice))
+        sizes = get_variable_from_lset_without_default("sizes", grid_choice)
+        # sizes=get_variable_from_lset_with_default("sizes",[259200,60,64800,40,20,5,100])
         sc.mcfg = mcfg._make(sizes)._asdict()
     else:
         mips_list = set()
-        for grid in lset['mips']: mips_list = mips_list.union(set(lset['mips'][grid]))
+        for grid in get_variable_from_lset_without_default('mips'):
+            mips_list = mips_list.union(set(get_variable_from_lset_without_default('mips', grid)))
         grid_choice = "LR"
     #
     if rls_for_all_experiments is None:
@@ -877,17 +892,19 @@ def select_CMORvars_for_lab(lset, sset=None, year=None, printout=False):
         #
         excluded_rls = []
         for rl in rls_for_mips:
-            if rl.label in lset.get("excluded_request_links", []):
+            if rl.label in get_variable_from_lset_with_default("excluded_request_links", []):
                 excluded_rls.append(rl)
-        for rl in excluded_rls: rls_for_mips.remove(rl)
+        for rl in excluded_rls:
+            rls_for_mips.remove(rl)
         if printout:
             print "Number of Request Links after filtering by excluded_request_links is: ", len(rls_for_mips)
         #
         excluded_rls = []
-        inclinks = lset.get("included_request_links", [])
+        inclinks = get_variable_from_lset_with_default("included_request_links", [])
         if len(inclinks) > 0:
             for rl in rls_for_mips:
-                if rl.label not in inclinks: excluded_rls.append(rl)
+                if rl.label not in inclinks:
+                    excluded_rls.append(rl)
             for rl in excluded_rls:
                 print "RequestLink %s is not included" % rl.label
                 rls_for_mips.remove(rl)
@@ -898,10 +915,11 @@ def select_CMORvars_for_lab(lset, sset=None, year=None, printout=False):
         rls_for_mips = rls_for_all_experiments
     #
     if sset:
-        experiment_id = sset.get('experiment_for_requests', sset['experiment_id'])
+        experiment_id = get_variable_from_sset_with_default_in_sset('experiment_for_requests', 'experiment_id')
         exp = get_uid(get_experiment_label(experiment_id))
-        if printout: print "Filtering for experiment %s, covering years [ %s , %s ] in DR" % \
-                           (experiment_id, exp.starty, exp.endy)
+        if printout:
+            print "Filtering for experiment %s, covering years [ %s , %s ] in DR" % \
+                  (experiment_id, exp.starty, exp.endy)
         # print "Request links before filter :"+`[ rl.label for rl in rls_for_mips ]`
         filtered_rls = []
         for rl in rls_for_mips:
@@ -911,8 +929,7 @@ def select_CMORvars_for_lab(lset, sset=None, year=None, printout=False):
                 ri = get_uid(ri_id)
                 # debug=(ri.label=='C4mipC4mipLandt2')
                 if debug: print "Checking requestItem ", ri.title,
-                applies, endyear = RequestItem_applies_for_exp_and_year(ri,
-                                                                        experiment_id, lset, sset, year, debug)
+                applies, endyear = RequestItem_applies_for_exp_and_year(ri, experiment_id, year, debug)
                 if applies:
                     if debug: print " applies "
                     filtered_rls.append(rl)
@@ -932,10 +949,10 @@ def select_CMORvars_for_lab(lset, sset=None, year=None, printout=False):
     # From Request links to CMOR vars + grid
     # miprl_ids=[ rl.uid for rl in rls ]
     # miprl_vars=sc.varsByRql(miprl_ids, pmax=lset['max_priority'])
-    if sset and 'max_priority' in sset:
-        pmax = sset['max_priority']
+    if sset:
+        pmax = get_variable_from_sset_and_lset_without_default('max_priority')
     else:
-        pmax = lset['max_priority']
+        pmax = get_variable_from_lset_without_default('max_priority')
     miprl_vars_grids = []
     for rl in rls:
         if debug:
@@ -960,22 +977,23 @@ def select_CMORvars_for_lab(lset, sset=None, year=None, printout=False):
     #    if get_uid(v).label=="ps" : print "step 1 : ps in table",get_uid(v).mipTable,g
 
     #
-    inctab = lset.get("included_tables", [])
-    exctab = lset.get("excluded_tables", [])
-    if sset: exctab.extend(sset.get("excluded_tables", []))
-    incvars = lset.get('included_vars', [])
-    excvars = lset.get('excluded_vars', [])
+    inctab = get_variable_from_lset_with_default("included_tables", [])
+    exctab = get_variable_from_lset_with_default("excluded_tables", [])
     if sset:
-        excvars_for_expes = sset.get('excluded_vars', [])
+        exctab.extend(get_variable_from_sset_with_default("excluded_tables", []))
+    incvars = get_variable_from_lset_with_default('included_vars', [])
+    excvars = get_variable_from_lset_with_default('excluded_vars', [])
+    if sset:
+        excvars_for_expes = get_variable_from_sset_with_default('excluded_vars', [])
         excvars.extend(excvars_for_expes)
 
-    excpairs = lset.get('excluded_pairs', [])
+    excpairs = get_variable_from_lset_with_default('excluded_pairs', [])
     if sset:
-        config = sset['configuration']
-        if ('excluded_vars_per_config' in lset) and \
-                (config in lset['excluded_vars_per_config']):
-            excvars.extend(lset['excluded_vars_per_config'][config])
-        excpairs.extend(sset.get('excluded_pairs', []))
+        config = get_variable_from_sset_without_default('configuration')
+        if (is_key_in_lset('excluded_vars_per_config')) and \
+                (config in get_variable_from_lset_without_default('excluded_vars_per_config')):
+            excvars.extend(get_variable_from_lset_without_default('excluded_vars_per_config', config))
+        excpairs.extend(get_variable_from_sset_with_default('excluded_pairs', []))
 
     filtered_vars = []
     for (v, g) in miprl_vars_grids:
@@ -1009,7 +1027,7 @@ def select_CMORvars_for_lab(lset, sset=None, year=None, printout=False):
         print 'Number of distinct CMOR variables (whatever the grid) : %d' % len(d)
     multiple_grids = []
     for v in d:
-        d[v] = decide_for_grids(v, d[v], lset)
+        d[v] = decide_for_grids(v, d[v])
         if printout and len(d[v]) > 1:
             multiple_grids.append(get_uid(v).label)
             if print_multiple_grids:
@@ -1024,12 +1042,13 @@ def select_CMORvars_for_lab(lset, sset=None, year=None, printout=False):
     # Print a count of distinct var labels
     if printout:
         varlabels = set()
-        for v in d: varlabels.add(get_uid(v).label)
+        for v in d:
+            varlabels.add(get_uid(v).label)
         print 'Number of distinct var labels is :', len(varlabels)
 
     # Translate CMORvars to a list of simplified CMORvar objects
     simplified_vars = []
-    allow_pseudo = lset.get('allow_pseudo_standard_names', False)
+    allow_pseudo = get_variable_from_lset_with_default('allow_pseudo_standard_names', False)
     for v in d:
         svar = simple_CMORvar()
         cmvar = get_uid(v)
@@ -1040,7 +1059,8 @@ def select_CMORvars_for_lab(lset, sset=None, year=None, printout=False):
             if "tas" == get_uid(v).label:
                 print "When complementing, tas is included , grids are %s" % svar.grids
         simplified_vars.append(svar)
-    if printout: print 'Number of simplified vars is :', len(simplified_vars)
+    if printout:
+        print 'Number of simplified vars is :', len(simplified_vars)
     if printout:
         print "Issues with standard names are :",
         lissues = sn_issues.keys()
@@ -1102,13 +1122,13 @@ def wr(out, key, dic_or_val=None, num_type="string", default=None):
             out.write('  </variable>\n')
 
 
-def freq2datefmt(in_freq, operation, lset, table):
+def freq2datefmt(in_freq, operation, table):
     # WIP doc v6.2.3 - Apr. 2017: <time_range> format is frequency-dependant
     datefmt = False
     offset = None
     freq = in_freq
     if freq == "dec" or freq == "10y":
-        if not any("dec" in f for f in lset.get("too_long_periods", [])):
+        if not any("dec" in f for f in get_variable_from_lset_with_default("too_long_periods", [])):
             datefmt = "%y"
             if operation in ["average", "minimum", "maximum"]:
                 offset = "5y"
@@ -1117,7 +1137,7 @@ def freq2datefmt(in_freq, operation, lset, table):
         else:
             freq = "yr"  # Ensure dates in filenames are consistent with content, even if not as required
     if freq == "yr" or freq == "yrPt" or freq == "1y":
-        if not any("yr" in f for f in lset.get("too_long_periods", [])):
+        if not any("yr" in f for f in get_variable_from_lset_with_default("too_long_periods", [])):
             datefmt = "%y"
             if operation in ["average", "minimum", "maximum"]:
                 offset = False
@@ -1178,7 +1198,7 @@ def freq2datefmt(in_freq, operation, lset, table):
         else:
             offset = "1ts"
             if "subhr" in freq and "CFsubhr" in table:
-                offset = lset.get("CFsubhr_frequency", "1ts")
+                offset = get_variable_from_lset_with_default("CFsubhr_frequency", "1ts")
     elif "fx" in freq:
         pass  ## WIP doc v6.2.3 - Apr. 2017: if frequency="fx", [_<time_range>] is ommitted
     if offset is not None:
@@ -1223,7 +1243,7 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
     #
     global sc  # ,nlonz
     # If list of included vars has size 1, activate debug on the corresponding variable
-    inc = lset.get('included_vars', [])
+    inc = get_variable_from_lset_with_default('included_vars', [])
     if len(inc) == 1: debug = inc
 
     # gestion des attributs pour lesquels on a recupere des chaines vides (" " est Faux mais est ecrit " "")
@@ -1231,10 +1251,12 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
     # Put a warning for field attributes that shouldn't be empty strings
     # --------------------------------------------------------------------
     # if not sv.stdname       : sv.stdname       = "missing" #"empty in DR "+get_DR_version()
-    if not sv.long_name: sv.long_name = "empty in DR " + get_DR_version()
+    if not sv.long_name:
+        sv.long_name = "empty in DR " + get_DR_version()
     # if not sv.cell_methods  : sv.cell_methods  = "empty in DR "+get_DR_version()
     # if not sv.cell_measures : sv.cell_measures = "cell measure is not specified in DR "+get_DR_version()
-    if not sv.units: sv.units = "empty in DR " + get_DR_version()
+    if not sv.units:
+        sv.units = "empty in DR " + get_DR_version()
 
     # --------------------------------------------------------------------
     # Define alias for field_ref in file-def file
@@ -1249,15 +1271,16 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
         # MPM : si on a defini un label non ambigu alors on l'utilise comme alias (i.e. le field_ref)
         # et pour l'alias seulement (le nom de variable dans le nom de fichier restant svar.label)
         if sv.label_non_ambiguous:
-            alias = lset["ping_variables_prefix"] + sv.label_non_ambiguous
+            alias = get_variable_from_lset_without_default("ping_variables_prefix") + sv.label_non_ambiguous
         else:
             # 'tau' is ambiguous in DR 01.00.18 : either a variable name (stress)
             # or a dimension name (optical thickness). We choose to rename the stress
             if sv.label != "tau":
-                alias = lset["ping_variables_prefix"] + sv.label
+                alias = get_variable_from_lset_without_default("ping_variables_prefix") + sv.label
             else:
-                alias = lset["ping_variables_prefix"] + "tau_stress"
-        if (sv.label in debug): print "write_xios_file_def ... processing %s, alias=%s" % (sv.label, alias)
+                alias = get_variable_from_lset_without_default("ping_variables_prefix") + "tau_stress"
+        if (sv.label in debug):
+            print "write_xios_file_def ... processing %s, alias=%s" % (sv.label, alias)
 
         # suppression des terminaisons en "Clim" pour l'alias : elles concernent uniquement les cas
         # d'absence de variation inter-annuelle sur les GHG. Peut-etre genant pour IPSL ?
@@ -1266,7 +1289,7 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
         alias = split_alias[0]
         if pingvars is not None:
             # Get alias without pressure_suffix but possibly with area_suffix
-            alias_ping = ping_alias(sv, lset, pingvars)
+            alias_ping = ping_alias(sv, pingvars)
     #
     # process only variables in pingvars
     if not alias_ping in pingvars:
@@ -1280,49 +1303,47 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
     # Set global CMOR file attributes
     # --------------------------------------------------------------------
     #
-    project = sset.get('project', "CMIP6")
-    source_id, source_type = get_source_id_and_type(sset, lset)
-    experiment_id = sset['experiment_id']
-    institution_id = lset['institution_id']
+    project = get_variable_from_sset_with_default('project', "CMIP6")
+    source_id, source_type = get_source_id_and_type()
+    experiment_id = get_variable_from_sset_without_default('experiment_id')
+    institution_id = get_variable_from_lset_without_default('institution_id')
     #
-    contact = sset.get('contact', lset.get('contact', None))
+    contact = get_variable_from_sset_else_lset_with_default('contact', default=None)
     #
     # Variant matters
-    realization_index = sset.get('realization_index', 1)
-    initialization_index = sset.get('initialization_index', 1)
-    physics_index = sset.get('physics_index', 1)
-    forcing_index = sset.get('forcing_index', 1)
+    realization_index = get_variable_from_sset_with_default('realization_index', 1)
+    initialization_index = get_variable_from_sset_with_default('initialization_index', 1)
+    physics_index = get_variable_from_sset_with_default('physics_index', 1)
+    forcing_index = get_variable_from_sset_with_default('forcing_index', 1)
     variant_label = "r%di%dp%df%d" % (realization_index, initialization_index, \
                                       physics_index, forcing_index)
     variant_info_warning = ". Information provided by this attribute may in some cases be flawed. " + \
                            "Users can find more comprehensive and up-to-date documentation via the further_info_url global attribute."
     #
     # WIP Draft 14 july 2016
-    if 'mip_era' in lset:
-        mip_era = lset['mip_era']
-    else:
-        mip_era = sv.mip_era
+    mip_era = get_variable_from_lset_with_default(sv.mip_era)
     #
     # WIP doc v 6.2.0 - dec 2016
     # <variable_id>_<table_id>_<source_id>_<experiment_id >_<member_id>_<grid_label>[_<time_range>].nc
     member_id = variant_label
-    sub_experiment_id = sset.get('sub_experiment_id', 'none')
-    if sub_experiment_id != 'none': member_id = sub_experiment_id + "-" + member_id
+    sub_experiment_id = get_variable_from_sset_with_default('sub_experiment_id', 'none')
+    if sub_experiment_id != 'none':
+        member_id = sub_experiment_id + "-" + member_id
     #
     # --------------------------------------------------------------------
     # Set grid info
     # --------------------------------------------------------------------
     if grid == "":
         # either native or close-to-native
-        grid_choice = lset['grid_choice'][source_id]
+        grid_choice = get_variable_from_lset_without_default('grid_choice', source_id)
         grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description = \
-            lset['grids'][grid_choice][context]
+            get_variable_from_lset_without_default('grids', grid_choice, context)
     else:
         if grid == 'cfsites':
             target_hgrid_id = cfsites_domain_id
             zgrid_id = None
         else:
-            target_hgrid_id = lset["ping_variables_prefix"] + grid
+            target_hgrid_id = get_variable_from_lset_without_default("ping_variables_prefix") + grid
             zgrid_id = "TBD : Should create zonal grid for CMIP6 standard grid %s" % grid
         grid_label, grid_resolution, grid_description = DRgrid2gridatts(grid)
 
@@ -1331,9 +1352,9 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
         # Below : when reduction was done trough a two steps sum, we needed to divide afterwards
         # by the nmber of longitudes
         #
-        # if lset.has_key("nb_longitudes_in_model") and lset["nb_longitudes_in_model"][context]:
+        # if is_key_in_lset("nb_longitudes_in_model") and get_variable_from_lset_without_default("nb_longitudes_in_model", context):
         #     # Get from settings the name of Xios variable holding number of longitudes and set by model
-        #     nlonz=lset["nb_longitudes_in_model"][context] # e.g.: nlonz="ndlon"
+        #     nlonz=get_variable_from_lset_without_default("nb_longitudes_in_model", context) # e.g.: nlonz="ndlon"
         # elif context_index.has_key(target_hgrid_id):
         #     # Get the number of longitudes from xml context_index
         #     # an integer if attribute of the target horizontal grid, declared in XMLs: nlonz=256
@@ -1343,8 +1364,10 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
         #                 grid required for zonal means computation "%target_hgrid_id)
         # print ">>> DBG >>> nlonz=", nlonz
 
-    if "Ant" in table: grid_label += "a"
-    if "Gre" in table: grid_label += "g"
+    if "Ant" in table:
+        grid_label += "a"
+    if "Gre" in table:
+        grid_label += "g"
     #
     with open(cvspath + project + "_experiment_id.json", "r") as json_fp:
         CMIP6_CV_version_metadata = json.loads(json_fp.read())['version_metadata']
@@ -1352,21 +1375,21 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
     #
     with open(cvspath + project + "_experiment_id.json", "r") as json_fp:
         CMIP6_experiments = json.loads(json_fp.read())['experiment_id']
-        if not CMIP6_experiments.has_key(sset['experiment_id']):
+        if not CMIP6_experiments.has_key(get_variable_from_sset_without_default('experiment_id')):
             raise dr2xml_error("Issue getting experiment description in CMIP6 CV for %20s" % sset['experiment_id'])
-        expid = sset['experiment_id']
-        expid_in_filename = sset.get('expid_in_filename', expid)
+        expid = get_variable_from_sset_without_default('experiment_id')
+        expid_in_filename = get_variable_from_sset_with_default('expid_in_filename', expid)
         if "_" in expid_in_filename:
             raise dr2xml_error("Cannot use character '_' in expid_in_filename (%s)" % expid_in_filename)
         exp_entry = CMIP6_experiments[expid]
         experiment = exp_entry['experiment']
         description = exp_entry['description']
-        activity_id = lset.get('activity_id', exp_entry['activity_id'])
-        parent_activity_id = lset.get('parent_activity_id', lset.get('activity_id', exp_entry['parent_activity_id']))
+        activity_id = get_variable_from_lset_with_default('activity_id', exp_entry['activity_id'])
+        parent_activity_id = get_variable_from_lset_with_default('parent_activity_id', lset.get('activity_id', exp_entry['parent_activity_id']))
         if type(parent_activity_id) == type([]):
             parent_activity_id = reduce(lambda x, y: x+" "+y, parent_activity_id)
-        if ['parent_experiment_id'] in sset:
-            parent_experiment_id = sset.get('parent_experiment_id')
+        if is_key_in_sset('parent_experiment_id'):
+            parent_experiment_id = get_variable_from_sset_with_default('parent_experiment_id')
         else:
             parent_experiment_id = reduce(lambda x, y: x+" "+y, exp_entry['parent_experiment_id'])
         required_components = exp_entry['required_model_components']  # .split(" ")
@@ -1382,7 +1405,7 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
                   (c, experiment_id, `actual_components`)
     for c in actual_components:
         if c not in allowed_components and c not in required_components:
-            ok = False or sset.get('bypass_CV_components', False)
+            ok = False or get_variable_from_sset_with_default('bypass_CV_components', False)
             print "Warning: Model component %s is present but not required nor allowed (%s)" % \
                   (c, `allowed_components`)
     if not ok: raise dr2xml_error("Issue with model components")
@@ -1394,16 +1417,18 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
     date_range = "%start_date%-%end_date%"  # XIOS syntax
     operation, detect_missing, foo = analyze_cell_time_method(sv.cell_methods, sv.label, table, printout=False)
     # print "--> ",sv.label, sv.frequency, table
-    date_format, offset_begin, offset_end = freq2datefmt(sv.frequency, operation, lset, table)
+    date_format, offset_begin, offset_end = freq2datefmt(sv.frequency, operation, table)
     #
     if "fx" in sv.frequency:
         filename = "%s%s_%s_%s_%s_%s_%s" % \
                    (prefix, sv.label, table, source_id, expid_in_filename, member_id, grid_label)
     else:
         varname_for_filename = sv.mipVarLabel
-        if lset.get('use_cmorvar_label_in_filename', False): varname_for_filename = sv.label
+        if get_variable_from_lset_with_default('use_cmorvar_label_in_filename', False):
+            varname_for_filename = sv.label
         # DR21 has a bug with tsland : the MIP variable is named "ts"
-        if sv.label == "tsland": varname_for_filename = "tsland"
+        if sv.label == "tsland":
+            varname_for_filename = "tsland"
         # WIP doc v6.2.3 : a suffix "-clim" should be added if climatology
         # if False and "Clim" in sv.frequency: suffix="-clim"
         if sv.frequency in ["1hrCM", "monC"]:
@@ -1414,7 +1439,7 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
                    (prefix, varname_for_filename, table, source_id, expid_in_filename,
                     member_id, grid_label, date_range, suffix)
     #
-    if 'mip_era' not in lset:
+    if is_key_in_lset('mip_era'):
         further_info_url = "https://furtherinfo.es-doc.org/%s.%s.%s.%s.%s.%s" % (
             mip_era, institution_id, source_id, expid_in_filename,
             sub_experiment_id, variant_label)
@@ -1424,12 +1449,13 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
     # --------------------------------------------------------------------
     # Compute XIOS split frequency
     # --------------------------------------------------------------------
-    resolution = lset['grid_choice'][source_id]
-    split_freq = split_frequency_for_variable(sv, lset, resolution, sc.mcfg, context)
+    resolution = get_variable_from_lset_without_default('grid_choice', source_id)
+    split_freq = split_frequency_for_variable(sv, resolution, sc.mcfg, context)
     # Cap split_freq by setting max_split_freq (if expressed in years)
     if split_freq[-1] == 'y':
-        max_split_freq = sset.get('max_split_freq', None)
-        if max_split_freq is None: max_split_freq = lset.get('max_split_freq', None)
+        max_split_freq = get_variable_from_sset_with_default('max_split_freq', None)
+        if max_split_freq is None:
+            max_split_freq = get_variable_from_lset_with_default('max_split_freq', None)
         if max_split_freq is not None:
             if max_split_freq[0:-1] != "y":
                 dr2xml_error("max_split_freq must end with an 'y' (%s)" % max_split_freq)
@@ -1441,11 +1467,11 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
     # including global CMOR file attributes
     # --------------------------------------------------------------------
     out.write(' <file id="%s_%s_%s" name="%s" ' % (sv.label, table, grid_label, filename))
-    freq = longest_possible_period(Cmip6Freq2XiosFreq(sv.frequency, table, lset), lset.get("too_long_periods", []))
+    freq = longest_possible_period(Cmip6Freq2XiosFreq(sv.frequency, table), get_variable_from_lset_with_default("too_long_periods", []))
     out.write(' output_freq="%s" ' % freq)
     out.write(' append="true" ')
-    out.write(' output_level="%d" ' % lset.get("output_level", 10))
-    out.write(' compression_level="%d" ' % lset.get("compression_level", 0))
+    out.write(' output_level="%d" ' % get_variable_from_lset_with_default("output_level", 10))
+    out.write(' compression_level="%d" ' % get_variable_from_lset_with_default("compression_level", 0))
     if not "fx" in sv.frequency:
         out.write(' split_freq="%s" ' % split_freq)
         out.write(' split_freq_format="%s" ' % date_format)
@@ -1459,11 +1485,11 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
         # Try to get enddate for the CMOR variable from the DR
         if sv.cmvar is not None:
             # print "calling endyear_for... for %s, with year="%(sv.label), year
-            lastyear = endyear_for_CMORvar(sv.cmvar, expid, year, lset, sset, sv.label in debug)
+            lastyear = endyear_for_CMORvar(sv.cmvar, expid, year, sv.label in debug)
             # print "lastyear=",lastyear," enddate=",enddate
         if lastyear is None or (enddate is not None and lastyear >= int(enddate[0:4])):
             # DR doesn't specify an end date for that var, or a very late one
-            if lset.get('dr2xml_manages_enddate', True):
+            if get_variable_from_lset_with_default('dr2xml_manages_enddate', True):
                 # Use run end date as the latest possible date
                 # enddate must be 20140101 , rather than 20131231
                 if enddate is not None:
@@ -1535,25 +1561,28 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
         external_variables += " " + re.sub(".*area: ([^ ]*).*", r'\1', sv.cell_measures)
     if "volume:" in sv.cell_measures:
         external_variables += " " + re.sub(".*volume: ([^ ]*).*", r'\1', sv.cell_measures)
-    if 'fx' in table: external_variables = ""
-    if external_variables: wr(out, 'external_variables', external_variables)
+    if 'fx' in table:
+        external_variables = ""
+    if external_variables:
+        wr(out, 'external_variables', external_variables)
     #
     #
     wr(out, 'forcing_index', forcing_index, num_type="int")
     wr(out, 'frequency', sv.frequency)
     #
-    if further_info_url: wr(out, 'further_info_url', further_info_url)
+    if further_info_url:
+        wr(out, 'further_info_url', further_info_url)
     #
     wr(out, 'grid', grid_description);
     wr(out, 'grid_label', grid_label);
     wr(out, 'nominal_resolution', grid_resolution)
-    comment = lset.get('comment', '') + " " + sset.get('comment', '') + dynamic_comment
+    comment = get_variable_from_lset_with_default('comment', '') + " " + get_variable_from_sset_with_default('comment', '') + dynamic_comment
     wr(out, 'comment', comment)
     wr(out, 'history', sset, default='none')
     wr(out, "initialization_index", initialization_index, num_type="int")
     wr(out, "institution_id", institution_id)
-    if "institution" in lset:
-        inst = lset['institution']
+    if is_key_in_lset('institution'):
+        inst = get_variable_from_lset_without_default('institution')
     else:
         with open(cvspath + project + "_institution_id.json", "r") as json_fp:
             try:
@@ -1569,7 +1598,7 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
     license = license.replace("<Your Centre Name>", institution_id)
     license = license.replace("[NonCommercial-]", "NonCommercial-")
     license = license.replace("[ and at <some URL maintained by modeling group>]",
-                              " and at " + lset["info_url"])
+                              " and at " + get_variable_from_lset_without_default("info_url"))
     wr(out, "license", license)
     wr(out, 'mip_era', mip_era)
     #
@@ -1579,28 +1608,28 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
         wr(out, 'parent_activity_id', parent_activity_id)
         wr(out, 'parent_source_id', sset, default=source_id)
         # TBD : syntaxe XIOS pour designer le time units de la simu courante
-        parent_time_ref_year = sset.get('parent_time_ref_year', "1850")
+        parent_time_ref_year = get_variable_from_sset_with_default('parent_time_ref_year', "1850")
         parent_time_units = "days since %s-01-01 00:00:00" % parent_time_ref_year
         wr(out, 'parent_time_units', sset, default=parent_time_units)
         wr(out, 'parent_variant_label', sset, default=variant_label)
         wr(out, 'branch_method', sset, default='standard')
         # Use branch year in parent if available
-        if "branch_year_in_parent" in sset and source_id in lset['branching']:
-            if experiment_id in lset['branching'][source_id] and \
-                    sset["branch_year_in_parent"] not in lset['branching'][source_id][experiment_id][1]:
+        if is_key_in_sset("branch_year_in_parent") and source_id in get_variable_from_lset_without_default('branching'):
+            if experiment_id in get_variable_from_lset_without_default('branching', source_id) and \
+                    get_variable_from_sset_without_default("branch_year_in_parent") not in get_variable_from_lset_without_default('branching', source_id, experiment_id, 1):
                 dr2xml_error(
                     "branch_year_in_parent (%d) doesn't belong to the list of branch_years declared for this experiment %s" \
-                    % (sset["branch_year_in_parent"], lset['branching'][source_id][experiment_id][1]))
-            date_branch = datetime.datetime(sset["branch_year_in_parent"], sset.get("branch_month_in_parent", 1), 1)
+                    % (get_variable_from_sset_without_default("branch_year_in_parent"), get_variable_from_lset_without_default('branching', source_id, experiment_id, 1)))
+            date_branch = datetime.datetime(get_variable_from_sset_without_default("branch_year_in_parent"), get_variable_from_sset_with_default("branch_month_in_parent", 1), 1)
             date_ref = datetime.datetime(int(parent_time_ref_year), 1, 1)
             nb_days = (date_branch - date_ref).days
             wr(out, 'branch_time_in_parent', "%d.0D" % nb_days, "double")
         else:
             wr(out, 'branch_time_in_parent', sset, "double")
         # Use branch year in child if available
-        if "branch_year_in_parent" in sset:
-            date_branch = datetime.datetime(sset["branch_year_in_child"], 1, 1)
-            date_ref = datetime.datetime(sset["child_time_ref_year"], 1, 1)
+        if is_key_in_sset("branch_year_in_parent"):
+            date_branch = datetime.datetime(get_variable_from_sset_without_default("branch_year_in_child"), 1, 1)
+            date_ref = datetime.datetime(get_variable_from_sset_without_default("child_time_ref_year"), 1, 1)
             nb_days = (date_branch - date_ref).days
             wr(out, 'branch_time_in_child', "%d.0D" % nb_days, "double")
         else:
@@ -1611,7 +1640,8 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
     wr(out, "realization_index", realization_index, num_type="int")
     # Patch for an issue id DR01.0021 -> 01.00.24
     crealm = sv.modeling_realm
-    if crealm == "ocnBgChem": crealm = "ocnBgchem"
+    if crealm == "ocnBgChem":
+        crealm = "ocnBgchem"
     wr(out, 'realm', crealm)
     wr(out, 'references', lset, default=False)
     #
@@ -1620,8 +1650,8 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
             sources = json.loads(json_fp.read())['source_id']
             source = make_source_string(sources, source_id)
     except:
-        if "source" in lset:
-            source = lset['source']
+        if is_key_in_lset('source'):
+            source = get_variable_from_lset_without_default('source')
         else:
             raise dr2xml_error("Fatal: source for %s not found in CMIP6_CV at" + \
                                "%s, nor in lset" % (source_id, cvspath))
@@ -1636,7 +1666,7 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
     #
     wr(out, "table_id", table)
     #
-    if 'expid_in_filename' not in sset:
+    if not is_key_in_sset('expid_in_filename'):
         wr(out, "title", "%s model output prepared for %s / " % ( \
             source_id, project) + activity_idr + " " + experiment_id)
     else:
@@ -1649,12 +1679,12 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
     else:
         wr(out, "variable_id", "tsland")
     #
-    variant_info = sset.get('variant_info', "none")
+    variant_info = get_variable_from_sset_with_default('variant_info', "none")
     if variant_info != "none" and variant_info != "": variant_info += variant_info_warning
     if variant_info != "": wr(out, "variant_info", variant_info)
     wr(out, "variant_label", variant_label)
     for name, value in attributes: wr(out, name, value)
-    non_stand_att = lset.get("non_standard_attributes", dict())
+    non_stand_att = get_variable_from_lset_with_default("non_standard_attributes", dict())
     for name in non_stand_att: wr(out, name, non_stand_att[name])
     #
     # --------------------------------------------------------------------
@@ -1663,8 +1693,7 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
     # Write XIOS field entry
     # including CF field attributes
     # --------------------------------------------------------------------
-    end_field = create_xios_aux_elmts_defs(sv, alias, table, lset, sset,
-                                           field_defs, axis_defs, grid_defs, domain_defs, scalar_defs,
+    end_field = create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_defs, domain_defs, scalar_defs,
                                            dummies, context, target_hgrid_id, zgrid_id, pingvars)
     out.write(end_field)
     if sv.spatial_shp[0:4] == 'XY-A' or sv.spatial_shp[0:3] == 'S-A':  # includes half-level cases
@@ -1674,9 +1703,9 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
 
         if sv_psol:
             # if not sv_psol.cell_measures : sv_psol.cell_measures = "cell measure is not specified in DR "+get_DR_version()
-            psol_field = create_xios_aux_elmts_defs(sv_psol, lset["ping_variables_prefix"] + "ps", table, lset, sset,
-                                                    field_defs, axis_defs, grid_defs, domain_defs, scalar_defs,
-                                                    dummies, context, target_hgrid_id, zgrid_id, pingvars)
+            psol_field = create_xios_aux_elmts_defs(sv_psol, get_variable_from_lset_without_default("ping_variables_prefix") + "ps", table, field_defs,
+                                                    axis_defs, grid_defs, domain_defs, scalar_defs, dummies, context,
+                                                    target_hgrid_id, zgrid_id, pingvars)
             out.write(psol_field)
         else:
             print "Warning: Cannot complement model levels with psol for variable %s and table %s" % \
@@ -1698,7 +1727,7 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
                  "bh_bnds": "vertical coordinate formula term: b(k+1/2)"}
     for tab in names:
         out.write('\t<field field_ref="%s%s" name="%s" long_name="%s" operation="once" prec="8" />\n' % \
-                  (lset["ping_variables_prefix"], tab, tab.replace('h', ''), names[tab]))
+                  (get_variable_from_lset_without_default("ping_variables_prefix"), tab, tab.replace('h', ''), names[tab]))
     out.write('</file>\n\n')
     actually_written_vars.append((sv.label, sv.long_name, sv.mipTable, sv.frequency, sv.Priority, sv.spatial_shp))
 
@@ -1712,9 +1741,8 @@ def wrv(name, value, num_type="string"):
            '</variable>\n'
 
 
-def create_xios_aux_elmts_defs(sv, alias, table, lset, sset,
-                               field_defs, axis_defs, grid_defs, domain_defs, scalar_defs,
-                               dummies, context, target_hgrid_id, zgrid_id, pingvars):
+def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_defs, domain_defs, scalar_defs, dummies,
+                               context, target_hgrid_id, zgrid_id, pingvars):
     """
     Create a field_ref string for a simplified variable object sv (with
     lab prefix for the variable name) and returns it
@@ -1744,12 +1772,12 @@ def create_xios_aux_elmts_defs(sv, alias, table, lset, sset,
     # Build XIOS auxilliary field elements (stored in field_defs)
     # --------------------------------------------------------------------
     ssh = sv.spatial_shp
-    prefix = lset["ping_variables_prefix"]
+    prefix = get_variable_from_lset_without_default("ping_variables_prefix")
 
     # The id of the currently most downstream field is last_field_id
     last_field_id = alias
 
-    alias_ping = ping_alias(sv, lset, pingvars)
+    alias_ping = ping_alias(sv, pingvars)
     grid_id_in_ping = id2gridid(alias_ping, context_index)
     last_grid_id = grid_id_in_ping
     # last_grid_id=None
@@ -1769,8 +1797,8 @@ def create_xios_aux_elmts_defs(sv, alias, table, lset, sset,
             ssh[0:3] == 'Y-P' or \
             ((ssh[0:5] == 'XY-na' or ssh[0:4] == 'Y-na') and
              prefix + sv.label not in pingvars and sv.label_without_psuffix != sv.label):  # TBD check - last case is for singleton
-        last_grid_id, last_field_id = process_vertical_interpolation( \
-            sv, alias, lset, pingvars, last_grid_id, field_defs, axis_defs, grid_defs, domain_defs, table)
+        last_grid_id, last_field_id = process_vertical_interpolation(sv, alias, pingvars, last_grid_id, field_defs,
+                                                                     axis_defs, grid_defs, domain_defs, table)
 
     #
     # --------------------------------------------------------------------
@@ -1778,8 +1806,8 @@ def create_xios_aux_elmts_defs(sv, alias, table, lset, sset,
     # --------------------------------------------------------------------
     #
     if has_singleton(sv):
-        last_field_id, last_grid_id = process_singleton(sv, last_field_id, lset, pingvars,
-                                                        field_defs, grid_defs, scalar_defs, table)
+        last_field_id, last_grid_id = process_singleton(sv, last_field_id, pingvars, field_defs, grid_defs, scalar_defs,
+                                                        table)
     #
     # TBD : handle explicitly the case of scalars (global means, shape na-na) : enforce <scalar name="sector" standard_name="region" label="global" >, or , better, remove the XIOS-generated scalar introduced by reduce_domain
     #
@@ -1789,9 +1817,8 @@ def create_xios_aux_elmts_defs(sv, alias, table, lset, sset,
     #
     if ssh[0:2] == 'Y-':  # zonal mean and atm zonal mean on pressure levels
         last_field_id, last_grid_id = \
-            process_zonal_mean(last_field_id, last_grid_id, target_hgrid_id,
-                               zgrid_id, field_defs, axis_defs, grid_defs,
-                               domain_defs, operation, sv.frequency, lset)
+            process_zonal_mean(last_field_id, last_grid_id, target_hgrid_id, zgrid_id, field_defs, axis_defs, grid_defs,
+                               domain_defs, operation, sv.frequency)
 
     #
     # --------------------------------------------------------------------
@@ -1824,15 +1851,16 @@ def create_xios_aux_elmts_defs(sv, alias, table, lset, sset,
                                                                                       0:3] == 'YB-' or ssh == 'na-A':
             pass
         else:
-            if target_hgrid_id == cfsites_domain_id: add_cfsites_in_defs(grid_defs, domain_defs)
+            if target_hgrid_id == cfsites_domain_id:
+                add_cfsites_in_defs(grid_defs, domain_defs)
             # Apply DR required remapping, either toward cfsites grid or a regular grid
-            last_grid_id = change_domain_in_grid(target_hgrid_id, grid_defs, lset, src_grid_id=last_grid_id)
+            last_grid_id = change_domain_in_grid(target_hgrid_id, grid_defs, src_grid_id=last_grid_id)
     #
     # --------------------------------------------------------------------
     # Change axes in grid to CMIP6-compliant ones
     # --------------------------------------------------------------------
     #
-    last_grid_id = change_axes_in_grid(last_grid_id, grid_defs, axis_defs, lset)
+    last_grid_id = change_axes_in_grid(last_grid_id, grid_defs, axis_defs)
     #
     # --------------------------------------------------------------------
     # Create <field> construct to be inserted in a file_def, which includes re-griding
@@ -1851,9 +1879,9 @@ def create_xios_aux_elmts_defs(sv, alias, table, lset, sset,
     # --------------------------------------------------------------------
     #
     if operation == 'instant':
-        for ts in lset.get('special_timestep_vars', []):
-            if sv.label in lset['special_timestep_vars'][ts]:
-                xios_freq = Cmip6Freq2XiosFreq(sv.frequency, table, lset)
+        for ts in get_variable_from_lset_with_default('special_timestep_vars', []):
+            if sv.label in get_variable_from_lset_without_default('special_timestep_vars', ts):
+                xios_freq = Cmip6Freq2XiosFreq(sv.frequency, table)
                 # works only if units are different :
                 rep += ' freq_offset="%s-%s"' % (xios_freq, ts)
     #
@@ -1887,8 +1915,8 @@ def create_xios_aux_elmts_defs(sv, alias, table, lset, sset,
         freq_op = ""
     else:
         freq_op = 'freq_op="%s"' % \
-                  longest_possible_period(Cmip6Freq2XiosFreq(sv.frequency, table, lset),
-                                          lset.get("too_long_periods", []))
+                  longest_possible_period(Cmip6Freq2XiosFreq(sv.frequency, table),
+                                          get_variable_from_lset_with_default("too_long_periods", []))
     #
     rep += ' operation="%s"' % operation
     if not idHasExprWithAt(alias, context_index):
@@ -1900,7 +1928,7 @@ def create_xios_aux_elmts_defs(sv, alias, table, lset, sset,
                 rep += ' %s>\n\t\t@%s' % (freq_op, last_field_id)
             elif operation == 'instant':
                 # must set freq_op (this souldn't be necessary, but is needed with Xios 1442)
-                if lset.get("useAtForInstant", False):
+                if get_variable_from_lset_with_default("useAtForInstant", False):
                     rep += ' %s>\n\t\t@%s' % (freq_op, last_field_id)
                 else:
                     rep += ' %s>' % (freq_op)
@@ -1927,26 +1955,33 @@ def create_xios_aux_elmts_defs(sv, alias, table, lset, sset,
     # --------------------------------------------------------------------
     comment = None
     # Process experiment-specific comment for the variable
-    if sv.label in sset['comments'].keys():
-        comment = sset['comments'][sv.label]
+    if sv.label in get_variable_from_sset_without_default('comments').keys():
+        comment = get_variable_from_sset_without_default('comments', sv.label)
     else:  # Process lab-specific comment for the variable
-        if sv.label in lset['comments'].keys():
-            comment = lset['comments'][sv.label]
-    if comment: rep += wrv('comment', comment)  # TBI
+        if sv.label in get_variable_from_lset_without_default('comments').keys():
+            comment = get_variable_from_lset_without_default('comments', sv.label)
+    if comment:
+        rep += wrv('comment', comment)  # TBI
     #
-    if sv.stdname: rep += wrv("standard_name", sv.stdname)
+    if sv.stdname:
+        rep += wrv("standard_name", sv.stdname)
     #
     desc = sv.description
     # if desc : desc=desc.replace(">","&gt;").replace("<","&lt;").replace("&","&amp;").replace("'","&apos;").replace('"',"&quot;")
-    if desc: desc = desc.replace(">", "&gt;").replace("<", "&lt;").strip()
+    if desc:
+        desc = desc.replace(">", "&gt;").replace("<", "&lt;").strip()
     rep += wrv("description", desc)
     #
     rep += wrv("long_name", sv.long_name)
-    if sv.positive != "None" and sv.positive != "": rep += wrv("positive", sv.positive)
+    if sv.positive != "None" and sv.positive != "":
+        rep += wrv("positive", sv.positive)
     rep += wrv('history', 'none')
-    if sv.units: rep += wrv('units', sv.units)
-    if sv.cell_methods: rep += wrv('cell_methods', sv.cell_methods)
-    if sv.cell_measures: rep += wrv('cell_measures', sv.cell_measures)
+    if sv.units:
+        rep += wrv('units', sv.units)
+    if sv.cell_methods:
+        rep += wrv('cell_methods', sv.cell_methods)
+    if sv.cell_measures:
+        rep += wrv('cell_measures', sv.cell_measures)
     #
     if sv.struct is not None:
         fmeanings = sv.struct.flag_meanings
@@ -1959,11 +1994,11 @@ def create_xios_aux_elmts_defs(sv, alias, table, lset, sset,
     # We override the Xios value for interval_operation because it sets it to
     # the freq_output value with our settings (for complicated reasons)
     if grid_with_vertical_interpolation:
-        interval_op = lset["vertical_interpolation_sample_freq"]
+        interval_op = get_variable_from_lset_without_default("vertical_interpolation_sample_freq")
     else:
-        source, source_type = get_source_id_and_type(sset, lset)
-        grid_choice = lset["grid_choice"][source]
-        interval_op = `int(lset['sampling_timestep'][grid_choice][context])` + " s"
+        source, source_type = get_source_id_and_type()
+        grid_choice = get_variable_from_lset_without_default("grid_choice", source)
+        interval_op = `int(get_variable_from_lset_without_default('sampling_timestep', grid_choice, context))` + " s"
     if operation != 'once':
         rep += wrv('interval_operation', interval_op)
 
@@ -1989,8 +2024,7 @@ def has_singleton(sv):
     return rep
 
 
-def process_singleton(sv, alias, lset, pingvars,
-                      field_defs, grid_defs, scalar_defs, table):
+def process_singleton(sv, alias, pingvars, field_defs, grid_defs, scalar_defs, table):
     """
     Based on singleton dimensions of variable SV, and assuming that this/these dimension(s)
     is/are not yet represented by a scalar Xios construct in corresponding field's grid,
@@ -2002,9 +2036,9 @@ def process_singleton(sv, alias, lset, pingvars,
     printout = False
     # get grid for the variable , before vertical interpo. if any
     # (could rather use last_grid_id and analyze if it has pressure dim)
-    alias_ping = ping_alias(sv, lset, pingvars)
+    alias_ping = ping_alias(sv, pingvars)
     input_grid_id = id2gridid(alias_ping, context_index)
-    input_grid_def = get_grid_def(input_grid_id, grid_defs, lset)
+    input_grid_def = get_grid_def_with_lset(input_grid_id, grid_defs)
     if printout:
         print "process_singleton : ", "processing %s with grid %s " % (alias, input_grid_id)
     #
@@ -2089,8 +2123,8 @@ def process_singleton(sv, alias, lset, pingvars,
     return further_field_id, further_grid_id
 
 
-def process_vertical_interpolation(sv, alias, lset, pingvars, src_grid_id,
-                                   field_defs, axis_defs, grid_defs, domain_defs, table):
+def process_vertical_interpolation(sv, alias, pingvars, src_grid_id, field_defs, axis_defs, grid_defs, domain_defs,
+                                   table):
     """
     Based on vertical dimension of variable SV, creates the intermediate fields
     for triggering vertical interpolation with the required levels; also includes
@@ -2125,26 +2159,26 @@ def process_vertical_interpolation(sv, alias, lset, pingvars, src_grid_id,
         return src_grid_id, alias_with_levels
         # raise dr2xml_error("Finding an alias with levels (%s) in pingfile is unexpected")
     #
-    prefix = lset["ping_variables_prefix"]
+    prefix = get_variable_from_lset_without_default("ping_variables_prefix")
     lwps = sv.label_without_psuffix
     alias_in_ping = prefix + lwps  # e.g. 'CMIP6_hus' and not 'CMIP6_hus7h'; 'CMIP6_co2' and not 'CMIP6_co2Clim'
     if not alias_in_ping in pingvars:  # e.g. alias_in_ping='CMIP6_hus'
         raise dr2xml_error("Field id " + alias_in_ping + " expected in pingfile but not found.")
     #
     # Create field alias_for_sampling for enforcing the operation before time sampling
-    operation = lset.get("vertical_interpolation_operation", "instant")
+    operation = get_variable_from_lset_with_default("vertical_interpolation_operation", "instant")
     alias_for_sampling = alias_in_ping + "_with_" + operation
     # <field id="CMIP6_hus_instant" field_ref="CMIP6_hus" operation="instant" />
     field_defs[alias_for_sampling] = \
         '<field id="%-25s field_ref="%-25s operation="%s" />' \
         % (alias_for_sampling + '"', alias_in_ping + '"', operation)
     #
-    vert_freq = lset["vertical_interpolation_sample_freq"]
+    vert_freq = get_variable_from_lset_without_default("vertical_interpolation_sample_freq")
     #
     # Construct an axis for interpolating to this vertical dimension
     # e.g. for zoom_case :
     #    <axis id="zoom_plev7h_hus" axis_ref="union_plevs_hus"> <zoom_axis index="(0,6)[  3 6 11 13 15 20 28 ]"/>
-    create_axis_def(sd, lset, axis_defs, field_defs)
+    create_axis_def(sd, axis_defs, field_defs)
 
     # Create field 'alias_sample' which time-samples the field at required freq
     # before vertical interpolation
@@ -2193,7 +2227,7 @@ def process_vertical_interpolation(sv, alias, lset, pingvars, src_grid_id,
     return grid_id, alias_with_levels
 
 
-def create_output_grid(ssh, lset, grid_defs, domain_defs, target_hgrid_id, margs):
+def create_output_grid(ssh, grid_defs, domain_defs, target_hgrid_id, margs):
     # Build output grid (stored in grid_defs) by analyzing the spatial shape
     # Including horizontal operations. Can include horiz re-gridding specification
     # --------------------------------------------------------------------
@@ -2216,7 +2250,7 @@ def create_output_grid(ssh, lset, grid_defs, domain_defs, target_hgrid_id, margs
         if target_hgrid_id:
             # Must create and a use a grid similar to the last one defined
             # for that variable, except for a change in the hgrid/domain
-            grid_ref = change_domain_in_grid(target_hgrid_id, grid_defs, lset=lset, **margs)
+            grid_ref = change_domain_in_grid(target_hgrid_id, grid_defs)
             if grid_ref is False or grid_ref is None:
                 raise dr2xml_error("Fatal: cannot create grid_def for %s with hgrid=%s" % (alias, target_hgrid_id))
     elif ssh == 'TR-na' or ssh == 'TRS-na':  # transects,   oce or SI
@@ -2233,9 +2267,8 @@ def create_output_grid(ssh, lset, grid_defs, domain_defs, target_hgrid_id, margs
     return grid_ref
 
 
-def process_zonal_mean(field_id, grid_id, target_hgrid_id, zgrid_id, \
-                       field_defs, axis_defs, grid_defs, domain_defs, \
-                       operation, frequency, lset, printout=False):
+def process_zonal_mean(field_id, grid_id, target_hgrid_id, zgrid_id, field_defs, axis_defs, grid_defs, domain_defs,
+                       operation, frequency, printout=False):
     """
     Based on a field FIELD_ID defined on some grid GRID_ID, build all XIOS constructs
     needed to derive the zonal mean of the field, by chaining the definition of
@@ -2257,7 +2290,7 @@ def process_zonal_mean(field_id, grid_id, target_hgrid_id, zgrid_id, \
     global nlonz
 
     # e.g. <field id="CMIP6_ua_plev39_average" field_ref="CMIP6_ua_plev39" operation="average" />
-    xios_freq = Cmip6Freq2XiosFreq(frequency, None, lset)
+    xios_freq = Cmip6Freq2XiosFreq(frequency, None)
     field1_id = field_id + "_" + operation  # e.g. CMIP6_hus_plev7h_instant
     field_defs[field1_id] = '<field id="%-s field_ref="%-s operation="%s />' \
                             % (field1_id + '"', field_id + '"', operation + '"')
@@ -2278,7 +2311,7 @@ def process_zonal_mean(field_id, grid_id, target_hgrid_id, zgrid_id, \
         field3_id = field2_id + "_" + target_hgrid_id
         # Must create and a use a grid similar to the last one defined
         # for that variable, except for a change in the hgrid/domain (=> complete)
-        grid_id3 = change_domain_in_grid(target_hgrid_id, grid_defs, lset, src_grid_id=grid_id)
+        grid_id3 = change_domain_in_grid(target_hgrid_id, grid_defs, src_grid_id=grid_id)
         if printout:
             print "+++ grid3 ", grid_id3, "\n", grid_defs[grid_id3]
         field_defs[field3_id] = '<field id="%s field_ref="%s grid_ref="%s /> ' \
@@ -2299,7 +2332,7 @@ def process_zonal_mean(field_id, grid_id, target_hgrid_id, zgrid_id, \
     # e.g. <field id="CMIP6_ua_plev39_average_1d_glat" field_ref="CMIP6_ua_plev39_average_1d_complete"
     #             grid_ref="FULL_klev_plev39_complete_glat" />
     field4_id = field2_id + "_" + zgrid_id
-    grid4_id = change_domain_in_grid(zgrid_id, grid_defs, lset, src_grid_id=grid_id3, turn_into_axis=True)
+    grid4_id = change_domain_in_grid(zgrid_id, grid_defs, src_grid_id=grid_id3, turn_into_axis=True)
     if printout:
         print "+++ grid4 ", grid4_id, "\n", grid_defs[grid4_id]
 
@@ -2383,19 +2416,20 @@ def process_diurnal_cycle(alias, field_defs, grid_defs, axis_defs, printout=Fals
     return alias_24h_id, grid_24h_id
 
 
-def gather_AllSimpleVars(lset, sset, year=False, printout=False, select="on_expt_and_year"):
+def gather_AllSimpleVars(year=False, printout=False, select="on_expt_and_year"):
     if select == "on_expt_and_year" or select == "":
-        mip_vars_list = select_CMORvars_for_lab(lset, sset, year, printout=printout)
+        mip_vars_list = select_CMORvars_for_lab(True, year, printout=printout)
     elif select == "on_expt":
-        mip_vars_list = select_CMORvars_for_lab(lset, sset, None, printout=printout)
+        mip_vars_list = select_CMORvars_for_lab(True, None, printout=printout)
     elif select == "no":
-        mip_vars_list = select_CMORvars_for_lab(lset, None, None, printout=printout)
+        mip_vars_list = select_CMORvars_for_lab(False, None, printout=printout)
     else:
         raise dr2xml_errors("Choice %s is not allowed for arg 'select'" % select)
     #
-    if sset.get('listof_home_vars', lset.get('listof_home_vars', None)):
-        exp = sset.get('experiment_for_requests', sset['experiment_id'])
-        process_homeVars(lset, sset, mip_vars_list, lset["mips"][grid_choice], expid=exp, printout=printout)
+    if get_variable_from_sset_else_lset_with_default('listof_home_vars', 'listof_home_vars', None):
+        exp = get_variable_from_sset_with_default_in_sset('experiment_for_requests', 'experiment_id')
+        process_homeVars(mip_vars_list, get_variable_from_lset_without_default("mips", grid_choice),
+                         expid=exp, printout=printout)
     else:
         print "Info: No HOMEvars list provided."
     return mip_vars_list
@@ -2408,6 +2442,8 @@ def generate_file_defs(lset, sset, year, enddate, context, cvs_path, pingfiles=N
     import cProfile, pstats, StringIO
     pr = cProfile.Profile()
     pr.enable()
+    # Initialize lset and sset variables for all functions
+    initialize_dict(lset, sset)
     generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingfiles=pingfiles,
                              dummies=dummies, printout=printout, dirname=dirname,
                              prefix=prefix, attributes=attributes, select=select)
@@ -2449,7 +2485,7 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
     #
     debug = False
     global print_wrv
-    print_wrv = lset.get("print_variables", True)
+    print_wrv = get_variable_from_lset_with_default("print_variables", True)
     cmvk = "CMIP6_CV_version"
     if cmvk in attributes: print "* %s: %s" % (cmvk, attributes[cmvk])
     # --------------------------------------------------------------------
@@ -2459,8 +2495,8 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
     print "\n", 50 * "*", "\n"
     print "Processing context ", context
     print "\n", 50 * "*", "\n"
-    context_index = init_context(context, lset.get("path_to_parse", "./"),
-                                 printout=lset.get("debug_parsing", False))
+    context_index = init_context(context, get_variable_from_lset_with_default("path_to_parse", "./"),
+                                 printout=get_variable_from_lset_with_default("debug_parsing", False))
     if context_index is None: sys.exit(1)
     cell_method_warnings = []
     warnings_for_optimisation = []
@@ -2472,7 +2508,7 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
     # --------------------------------------------------------------------
     skipped_vars_per_table = {}
     actually_written_vars = []
-    mip_vars_list = gather_AllSimpleVars(lset, sset, year, printout, select)
+    mip_vars_list = gather_AllSimpleVars(year, printout, select)
     # Group CMOR vars per realm
     svars_per_realm = dict()
     for svar in mip_vars_list:
@@ -2487,7 +2523,7 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
                     add = False
             # Settings may allow for duplicate var in two tables. In DR01.00.21, this actually
             # applies to very few fields (ps-Aermon, tas-ImonAnt, areacellg)
-            if lset.get('allow_duplicates', True) or add:
+            if get_variable_from_lset_with_default('allow_duplicates', True) or add:
                 svars_per_realm[realm].append(svar)
             else:
                 print "Not adding duplicate %s (from %s) for realm %s" % (svar.label, svar.mipTable, realm)
@@ -2503,7 +2539,7 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
     # Excluding 'excluded_vars' and 'excluded_spshapes' lists
     # --------------------------------------------------------------------
     svars_per_table = dict()
-    context_realms = lset['realms_per_context'][context]
+    context_realms = get_variable_from_lset_without_default('realms_per_context', context)
     processed_realms = []
     for realm in context_realms:
         if realm in processed_realms: continue
@@ -2515,18 +2551,20 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
         if realm in svars_per_realm:
             for svar in svars_per_realm[realm]:
                 # exclusion de certaines spatial shapes (ex. Polar Stereograpic Antarctic/Groenland)
-                if svar.label not in lset['excluded_vars'] and \
+                if svar.label not in get_variable_from_lset_without_default('excluded_vars') and \
                         svar.spatial_shp and \
-                        svar.spatial_shp not in lset["excluded_spshapes"]:
+                        svar.spatial_shp not in get_variable_from_lset_without_default("excluded_spshapes"):
                     if svar.mipTable not in svars_per_table:
                         svars_per_table[svar.mipTable] = []
                     svars_per_table[svar.mipTable].append(svar)
                 else:
                     if printout:
                         reason = "unknown reason"
-                        if svar.label in lset['excluded_vars']: reason = "They are in exclusion list "
-                        if not svar.spatial_shp: reason = "They have no spatial shape "
-                        if svar.spatial_shp in lset["excluded_spshapes"]:
+                        if svar.label in get_variable_from_lset_without_default('excluded_vars'):
+                            reason = "They are in exclusion list "
+                        if not svar.spatial_shp:
+                            reason = "They have no spatial shape "
+                        if svar.spatial_shp in get_variable_from_lset_without_default("excluded_spshapes"):
                             reason = "They have excluded spatial shape : %s" % svar.spatial_shp
                         if reason not in excludedv: excludedv[reason] = []
                         excludedv[reason].append((svar.label, svar.mipTable))
@@ -2538,27 +2576,31 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
     # --------------------------------------------------------------------
     # Add svars belonging to the orphan list
     # --------------------------------------------------------------------
-    if context in lset['orphan_variables']:
-        orphans = lset['orphan_variables'][context]
+    if context in get_variable_from_lset_without_default('orphan_variables'):
+        orphans = get_variable_from_lset_without_default('orphan_variables', context)
         for svar in mip_vars_list:
             if svar.label in orphans:
-                if svar.label not in lset['excluded_vars'] and svar.spatial_shp and \
-                        svar.spatial_shp not in lset["excluded_spshapes"]:
-                    if svar.mipTable not in svars_per_table: svars_per_table[svar.mipTable] = []
+                if svar.label not in get_variable_from_lset_without_default('excluded_vars') and svar.spatial_shp and \
+                        svar.spatial_shp not in get_variable_from_lset_without_default("excluded_spshapes"):
+                    if svar.mipTable not in svars_per_table:
+                        svars_per_table[svar.mipTable] = []
                     svars_per_table[svar.mipTable].append(svar)
     #
     # --------------------------------------------------------------------
     # Remove svars belonging to other contexts' orphan lists
     # --------------------------------------------------------------------
-    for other_context in lset['orphan_variables']:
+    for other_context in get_variable_from_lset_without_default('orphan_variables'):
         if other_context != context:
-            orphans = lset['orphan_variables'][other_context]
+            orphans = get_variable_from_lset_without_default('orphan_variables', other_context)
             for table in svars_per_table:
                 toremove = []
                 for svar in svars_per_table[table]:
-                    if svar.label in orphans: toremove.append(svar)
-                for svar in toremove: svars_per_table[table].remove(svar)
-    if (debug): print "Pour table AMon: ", [v.label for v in svars_per_table["Amon"]]
+                    if svar.label in orphans:
+                        toremove.append(svar)
+                for svar in toremove:
+                    svars_per_table[table].remove(svar)
+    if (debug):
+        print "Pour table AMon: ", [v.label for v in svars_per_table["Amon"]]
     #
     # --------------------------------------------------------------------
     # Read ping_file defined variables
@@ -2604,13 +2646,13 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
     # --------------------------------------------------------------------
     # Build all plev union axis and grids
     # --------------------------------------------------------------------
-    if lset.get('use_union_zoom', False):
+    if get_variable_from_lset_with_default('use_union_zoom', False):
         svars_full_list = []
-        for svl in svars_per_table.values(): svars_full_list.extend(svl)
-        create_xios_axis_and_grids_for_plevs_unions(svars_full_list,
-                                                    multi_plev_suffixes.union(single_plev_suffixes),
-                                                    lset, dummies, axis_defs, grid_defs, field_defs,
-                                                    all_ping_refs, printout=False)
+        for svl in svars_per_table.values():
+            svars_full_list.extend(svl)
+        create_xios_axis_and_grids_for_plevs_unions(svars_full_list, multi_plev_suffixes.union(single_plev_suffixes),
+                                                    dummies, axis_defs, grid_defs, field_defs, all_ping_refs,
+                                                    printout=False)
     #
     # --------------------------------------------------------------------
     # Start writing XIOS file_def file:
@@ -2625,30 +2667,31 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
         out.write('<!-- CMIP6_conventions_version %s --> \n' % CMIP6_conventions_version)
         out.write('<!-- dr2xml version %s --> \n' % version)
         out.write('<!-- Lab_and_model settings : \n')
-        for s, v in sorted(lset.iteritems()): out.write(' %s : %s\n' % (s, v))
+        for s, v in sorted(get_lset_iteritems()):
+            out.write(' %s : %s\n' % (s, v))
         out.write('-->\n')
         out.write('<!-- Simulation settings : \n')
-        for s, v in sorted(sset.iteritems()): out.write(' %s : %s\n' % (s, v))
+        for s, v in sorted(get_sset_iteritems()):
+            out.write(' %s : %s\n' % (s, v))
         out.write('-->\n')
         out.write('<!-- Year processed is  %s --> \n' % year)
         #
         domain_defs = dict()
         # for table in ['day'] :
         out.write('\n<file_definition type="one_file" enabled="true" > \n')
-        foo, sourcetype = get_source_id_and_type(sset, lset)
+        foo, sourcetype = get_source_id_and_type()
         for table in sorted(svars_per_table.keys()):
             count = dict()
             for svar in sorted(svars_per_table[table], key=lambda x: (x.label + "_" + table)):
-                if lset.get("allow_duplicates_in_same_table", False) or svar.mipVarLabel not in count:
-                    if not lset.get("use_cmorvar_label_in_filename", False) and svar.mipVarLabel in count:
+                if get_variable_from_lset_with_default("allow_duplicates_in_same_table", False) or svar.mipVarLabel not in count:
+                    if not get_variable_from_lset_with_default("use_cmorvar_label_in_filename", False) and svar.mipVarLabel in count:
                         form = "If you really want to actually produce both %s and %s in table %s, " + \
                                "you must set 'use_cmorvar_label_in_filename' to True in lab settings"
                         raise dr2xml_error(form % (svar.label, count[svar.mipVarLabel].label, table))
                     count[svar.mipVarLabel] = svar
                     for grid in svar.grids:
-                        a, hgrid, b, c, d = lset['grids'][grid_choice][context]
-                        check_for_file_input(svar, lset, hgrid, pingvars, field_defs,
-                                             grid_defs, domain_defs, file_defs)
+                        a, hgrid, b, c, d = get_variable_from_lset_without_default('grids', grid_choice, context)
+                        check_for_file_input(svar, hgrid, pingvars, field_defs, grid_defs, domain_defs, file_defs)
                         write_xios_file_def(svar, year, table, lset, sset, out, cvs_path,
                                             field_defs, axis_defs, grid_defs, domain_defs, scalar_defs, file_defs,
                                             dummies, skipped_vars_per_table, actually_written_vars,
@@ -2668,36 +2711,42 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
         # --------------------------------------------------------------------
         # Write all domain, axis, field defs needed for these file_defs
         out.write('<field_definition> \n')
-        if lset.get("nemo_sources_management_policy_master_of_the_world", False) and context == 'nemo':
+        if get_variable_from_lset_with_default("nemo_sources_management_policy_master_of_the_world", False) and context == 'nemo':
             out.write('<field_group freq_op="_reset_" freq_offset="_reset_" >\n')
         for obj in sorted(field_defs.keys()): out.write("\t" + field_defs[obj] + "\n")
-        if lset.get("nemo_sources_management_policy_master_of_the_world", False) and context == 'nemo':
+        if get_variable_from_lset_with_default("nemo_sources_management_policy_master_of_the_world", False) and context == 'nemo':
             out.write('</field_group>\n')
         out.write('\n</field_definition> \n')
         #
         out.write('\n<axis_definition> \n')
         out.write('<axis_group prec="8">\n')
         for obj in sorted(axis_defs.keys()): out.write("\t" + axis_defs[obj] + "\n")
-        if False and lset.get('use_union_zoom', False):
-            for obj in sorted(union_axis_defs.keys()): out.write("\t" + union_axis_defs[obj] + "\n")
+        if False and get_variable_from_lset_with_default('use_union_zoom', False):
+            for obj in sorted(union_axis_defs.keys()):
+                out.write("\t" + union_axis_defs[obj] + "\n")
         out.write('</axis_group>\n')
         out.write('</axis_definition> \n')
         #
         out.write('\n<domain_definition> \n')
         out.write('<domain_group prec="8">\n')
-        if lset['grid_policy'] != "native": create_standard_domains(domain_defs)
-        for obj in sorted(domain_defs.keys()): out.write("\t" + domain_defs[obj] + "\n")
+        if get_variable_from_lset_without_default('grid_policy') != "native":
+            create_standard_domains(domain_defs)
+        for obj in sorted(domain_defs.keys()):
+            out.write("\t" + domain_defs[obj] + "\n")
         out.write('</domain_group>\n')
         out.write('</domain_definition> \n')
         #
         out.write('\n<grid_definition> \n')
-        for obj in grid_defs.keys(): out.write("\t" + grid_defs[obj])
+        for obj in grid_defs.keys():
+            out.write("\t" + grid_defs[obj])
         if False and lset.get('use_union_zoom', False):
-            for obj in sorted(union_grid_defs.keys()): out.write("\t" + union_grid_defs[obj] + "\n")
+            for obj in sorted(union_grid_defs.keys()):
+                out.write("\t" + union_grid_defs[obj] + "\n")
         out.write('</grid_definition> \n')
         #
         out.write('\n<scalar_definition> \n')
-        for obj in sorted(scalar_defs.keys()): out.write("\t" + scalar_defs[obj] + "\n")
+        for obj in sorted(scalar_defs.keys()):
+            out.write("\t" + scalar_defs[obj] + "\n")
         out.write('</scalar_definition> \n')
         #
         out.write('</context> \n')
@@ -2706,23 +2755,26 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
 
     # mpmoine_petitplus:generate_file_defs: pour sortir des stats sur ce que l'on sort reelement
     # SS - non : gros plus
-    if printout: print_SomeStats(context, svars_per_table, skipped_vars_per_table,
-                                 actually_written_vars, lset.get("print_stats_per_var_label", False))
+    if printout:
+        print_SomeStats(context, svars_per_table, skipped_vars_per_table,
+                        actually_written_vars, get_variable_from_lset_with_default("print_stats_per_var_label", False))
 
     warn = dict()
     for warning, label, table in cell_method_warnings:
-        if warning not in warn: warn[warning] = set()
+        if warning not in warn:
+            warn[warning] = set()
         warn[warning].add(label)
     if len(warn) > 0:
         print "\nWarnings about cell methods (with var list)"
         for w in warn: print "\t", w, " for vars : ", warn[w]
     if len(warnings_for_optimisation) > 0:
         print "Warning for fields which cannot be optimised (i.e. average before remap) because of an expr with @\n\t",
-        for w in warnings_for_optimisation: print w.replace(lset['ping_variables_prefix'], ""),
+        for w in warnings_for_optimisation:
+            print w.replace(get_variable_from_lset_without_default('ping_variables_prefix'), ""),
         print
 
 
-def create_axis_def(sdim, lset, axis_defs, field_defs):
+def create_axis_def(sdim, axis_defs, field_defs):
     """
 
     From a simplified Dim object SDIM representing a vertical dimension,
@@ -2738,8 +2790,7 @@ def create_axis_def(sdim, lset, axis_defs, field_defs):
     defining the zoom in XIOS syntax
 
     """
-
-    prefix = lset["ping_variables_prefix"]
+    prefix = get_variable_from_lset_without_default("ping_variables_prefix")
     # nbre de valeurs de l'axe determine aussi si on est en dim singleton
     if sdim.requested:
         glo_list = sdim.requested.strip(" ").split()
@@ -2774,14 +2825,14 @@ def create_axis_def(sdim, lset, axis_defs, field_defs):
         if sdim.stdname == "altitude": coordname = prefix + "zg"
         #
         # Create an intemediate field for coordinate , just adding time sampling
-        operation = lset.get("vertical_interpolation_operation", "instant")
+        operation = get_variable_from_lset_with_default("vertical_interpolation_operation", "instant")
         coordname_with_op = coordname + "_" + operation  # e.g. CMIP6_pfull_instant
         coorddef_op = '<field id="%-25s field_ref="%-25s operation="%s" detect_missing_value="true"/>' \
                       % (coordname_with_op + '"', coordname + '"', operation)
         field_defs[coordname_with_op] = coorddef_op
         #
         # Create and store a definition for time-sampled field for the vertical coordinate
-        vert_frequency = lset["vertical_interpolation_sample_freq"]
+        vert_frequency = get_variable_from_lset_without_default("vertical_interpolation_sample_freq")
         coordname_sampled = coordname_with_op + "_sampled_" + vert_frequency  # e.g. CMIP6_pfull_instant_sampled_3h
         rep += '<interpolate_axis type="polynomial" order="1"'
         rep += ' coordinate="%s"/>\n\t</axis>' % coordname_sampled
@@ -2849,7 +2900,7 @@ def add_scalar_in_grid(gridin_def, gridout_id, scalar_id, scalar_name, remove_ax
     return rep + "\n"
 
 
-def change_axes_in_grid(grid_id, grid_defs, axis_defs, lset):
+def change_axes_in_grid(grid_id, grid_defs, axis_defs):
     """
     Create a new grid based on GRID_ID def by changing all its axis references to newly created
     axis which implement CMIP6 axis attributes
@@ -2865,12 +2916,12 @@ def change_axes_in_grid(grid_id, grid_defs, axis_defs, lset):
     # print "in change_axis for %s "%(grid_id)
 
     # Get settings info about axes normalization
-    aliases = lset.get('non_standard_axes', dict())
+    aliases = get_variable_from_lset_with_default('non_standard_axes', dict())
 
     # Add cases where dim name 'sector' should be used,if needed
     # sectors = dims which have type charcter and are not scalar
-    if 'sectors' in lset:
-        sectors = lset['sectors']
+    if is_key_in_lset('sectors'):
+        sectors = get_variable_from_lset_without_default('sectors')
     else:
         sectors = [dim.label for dim in get_collection('grids').items if \
                    dim.type == 'character' and dim.value == '']
@@ -2922,7 +2973,7 @@ def change_axes_in_grid(grid_id, grid_defs, axis_defs, lset):
             dim = get_uid(dim_id)
             # We don't process scalars here
             if dim.value == '' or dim.label == "scatratio":
-                axis_id, axis_name = create_axis_from_dim(dim, alt_labels, axis_ref, axis_defs, lset)
+                axis_id, axis_name = create_axis_from_dim(dim, alt_labels, axis_ref, axis_defs)
                 # cannot use ET library which does not guarantee the ordering of axes
                 axes_to_change.append((axis_ref, axis_id, axis_name))
                 output_grid_id += "_" + dim.label
@@ -2939,7 +2990,7 @@ def change_axes_in_grid(grid_id, grid_defs, axis_defs, lset):
     return output_grid_id
 
 
-def create_axis_from_dim(dim, labels, axis_ref, axis_defs, lset):
+def create_axis_from_dim(dim, labels, axis_ref, axis_defs):
     """
     Create an axis definition by translating all DR dimension attributes to XIos
     constructs generating CMIP6 requested attributes
@@ -2976,7 +3027,7 @@ def create_axis_from_dim(dim, labels, axis_ref, axis_defs, lset):
     else:
         rep += ' dim_name="%s" ' % dim.altLabel
         if labels is None: labels = dim.requested
-        if dim.label == "oline" and lset.get('add_Gibraltar', False):
+        if dim.label == "oline" and get_variable_from_lset_with_default('add_Gibraltar', False):
             labels += " gibraltar"
         labels = labels.replace(', ', ' ').replace(',', ' ')
         length = len(labels.split())
@@ -2990,8 +3041,8 @@ def create_axis_from_dim(dim, labels, axis_ref, axis_defs, lset):
     return axis_id, axis_name
 
 
-def change_domain_in_grid(domain_id, grid_defs, lset, ping_alias=None, src_grid_id=None, \
-                          turn_into_axis=False, printout=False):
+def change_domain_in_grid(domain_id, grid_defs, ping_alias=None, src_grid_id=None, turn_into_axis=False,
+                          printout=False):
     """
     Provided with a grid id SRC_GRID_ID or alertnatively a variable name (ALIAS),
     (SRC_GRID_STRING)
@@ -3001,7 +3052,7 @@ def change_domain_in_grid(domain_id, grid_defs, lset, ping_alias=None, src_grid_
     if src_grid_id is None:
         raise dr2xml_error("deprecated")
     else:
-        src_grid_string = get_grid_def(src_grid_id, grid_defs, lset)
+        src_grid_string = get_grid_def_with_lset(src_grid_id, grid_defs)
     target_grid_id = src_grid_id + "_" + domain_id
     # Change domain
     domain_or_axis = "domain";
@@ -3054,8 +3105,8 @@ def create_grid_def(grid_defs, axis_def, axis_name, src_grid_id):
     return target_grid_id
 
 
-def create_xios_axis_and_grids_for_plevs_unions(svars, plev_sfxs, lset, dummies,
-                                                axis_defs, grid_defs, field_defs, ping_refs, printout=False):
+def create_xios_axis_and_grids_for_plevs_unions(svars, plev_sfxs, dummies, axis_defs, grid_defs, field_defs, ping_refs,
+                                                printout=False):
     """
     Objective of this function is to optimize Xios vertical interpolation requested in pressure levels.
     Process in 2 steps:
@@ -3074,7 +3125,7 @@ def create_xios_axis_and_grids_for_plevs_unions(svars, plev_sfxs, lset, dummies,
     """
     #
     global context_index
-    prefix = lset["ping_variables_prefix"]
+    prefix = get_variable_from_lset_without_default("ping_variables_prefix")
     # First, search plev unions for each label_without_psuffix and build dict_plevs
     dict_plevs = {}
     for sv in svars:
@@ -3164,7 +3215,7 @@ def create_xios_axis_and_grids_for_plevs_unions(svars, plev_sfxs, lset, dummies,
         if len(list_plevs_union) > 1: sdim_union.requested = plevs_union_xios
         if len(list_plevs_union) == 1: sdim_union.value = plevs_union_xios
         if printout: print "creating axis def for union :%s" % sdim_union.label
-        axis_def = create_axis_def(sdim_union, lset, union_axis_defs, field_defs)
+        axis_def = create_axis_def(sdim_union, union_axis_defs, field_defs)
         create_grid_def(union_grid_defs, axis_def, sdim_union.out_name,
                         id2gridid(prefix + lwps, context_index))
     #
@@ -3815,7 +3866,7 @@ def create_standard_domain(resol, ni, nj):
     #    '</domain>  '
 
 
-def ping_alias(svar, lset, pingvars, error_on_fail=False):
+def ping_alias(svar, pingvars, error_on_fail=False):
     # dans le pingfile, grace a la gestion des interpolations
     # verticales, on n'attend pas forcement les alias complets des
     # variables (CMIP6_<label>), on peut se contenter des alias
@@ -3824,7 +3875,7 @@ def ping_alias(svar, lset, pingvars, error_on_fail=False):
     # par ailleurs, si on a defini un label non ambigu alors on l'utilise
     # comme ping_alias (i.e. le field_ref)
 
-    pref = lset["ping_variables_prefix"]
+    pref = get_variable_from_lset_without_default("ping_variables_prefix")
     if svar.label_non_ambiguous:
         # print "+++ non ambiguous", svar.label,svar.label_non_ambiguous
         alias_ping = pref + svar.label_non_ambiguous  # e.g. 'CMIP6_tsn_land' and not 'CMIP6_tsn'
@@ -3854,7 +3905,7 @@ def RequestItemInclude(ri, var_label, freq):
     return any([cmv.label == var_label and cmv.frequency == freq for cmv in cmVars])
 
 
-def endyear_for_CMORvar(cv, expt, year, lset, sset, printout=False):
+def endyear_for_CMORvar(cv, expt, year, printout=False):
     """
     For a CMORvar, returns the largest year in the time slice(s)
     of those requestItems which apply for experiment EXPT and which
@@ -3869,7 +3920,7 @@ def endyear_for_CMORvar(cv, expt, year, lset, sset, printout=False):
     # Some debug material
     if False and (cv.label == "clc"): printout = True
     if printout: print "In end_year for %s %s" % (cv.label, cv.mipTable)
-    pmax = sset.get('max_priority', lset.get('max_priority'))
+    pmax = get_variable_from_sset_and_lset_without_default('max_priority')
 
     # 1- Get the RequestItems which apply to CmorVar
     rVarsUid = get_request_by_id_by_sect(cv.uid, 'requestVar')
@@ -3896,7 +3947,7 @@ def endyear_for_CMORvar(cv, expt, year, lset, sset, printout=False):
     larger = None
     for riid in RequestItems:
         ri = get_uid(riid)
-        applies, endyear = RequestItem_applies_for_exp_and_year(ri, expt, lset, sset, year, debug=printout)
+        applies, endyear = RequestItem_applies_for_exp_and_year(ri, expt, year, debug=printout)
         if printout:
             print "For var and freq selected for debug and year %d, for ri %s, applies=%s, endyear=%s" % \
                   (year, ri.title, `applies`, `endyear`)
@@ -3906,25 +3957,6 @@ def endyear_for_CMORvar(cv, expt, year, lset, sset, printout=False):
             else:
                 larger = max(larger, endyear)
     return larger
-
-
-def get_source_id_and_type(sset, lset):
-    if "configuration" in sset and "configurations" in lset:
-        if sset["configuration"] in lset["configurations"]:
-            source_id, source_type, unused = lset["configurations"][sset["configuration"]]
-        else:
-            raise dr2xml_error("configuration %s is not known (allowed values are :)" % \
-                               sset["configuration"] + `lset["configurations"]`)
-    else:
-        source_id = sset['source_id']
-        if 'source_type' in sset:
-            source_type = sset['source_type']
-        else:
-            if 'source_types' in lset:
-                source_type = lset['source_types'][source_id]
-            else:
-                raise dr2xml_error("Fatal: No source-type found - Check inputs")
-    return source_id, source_type
 
 
 def realm_is_processed(realm, source_type):
@@ -3958,11 +3990,11 @@ def realm_is_processed(realm, source_type):
     return rep
 
 
-def guess_simple_domain_grid_def(grid_id, lset):
+def guess_simple_domain_grid_def(grid_id):
     # dr2xml sometimes must be able to restconstruct the grid def for a grid which has
     # just a domain, from the grid_id, using a regexp with a numbered group that matches
     # domain_name in grid_id. Second item is group number
-    regexp = lset["simple_domain_grid_regexp"]
+    regexp = get_variable_from_lset_without_default("simple_domain_grid_regexp")
     domain_id, n = re.subn(regexp[0], r'\%d' % regexp[1], grid_id)
     if n != 1:
         raise dr2xml_error("Cannot identify domain name in grid_id %s using regexp %s" % \
@@ -3973,7 +4005,7 @@ def guess_simple_domain_grid_def(grid_id, lset):
     return grid_def
 
 
-def get_grid_def(grid_id, grid_defs, lset=None):
+def get_grid_def(grid_id, grid_defs):
     if grid_id in grid_defs:
         # Simple case : already stored
         grid_def = grid_defs[grid_id]
@@ -3982,28 +4014,31 @@ def get_grid_def(grid_id, grid_defs, lset=None):
             # Grid defined through xml
             grid_def = ET.tostring(context_index[grid_id])
         else:
-            if lset is not None:
-                # Try to guess a grid_def from its id
-                grid_def = guess_simple_domain_grid_def(grid_id, lset)
-                grid_defs[grid_id] = grid_def
-            else:
-                raise dr2xml_error("Cannot guess a grid def for %s" % grid_id)
-                grid_def = None
+            raise dr2xml_error("Cannot guess a grid def for %s" % grid_id)
+            grid_def = None
     return grid_def
 
 
-def check_for_file_input(sv, lset, hgrid, pingvars, field_defs, grid_defs, \
-                         domain_defs, file_defs, printout=False):
+def get_grid_def_with_lset(grid_id, grid_defs):
+    try:
+        grid_def = get_grid_def(grid_id, grid_defs)
+    except:
+        grid_def = guess_simple_domain_grid_def(grid_id)
+        grid_defs[grid_id] = grid_def
+    return grid_def
+
+
+def check_for_file_input(sv, hgrid, pingvars, field_defs, grid_defs, domain_defs, file_defs, printout=False):
     """
 
 
     Add an entry in pingvars
     """
-    externs = lset.get('fx_from_file', [])
+    externs = get_variable_from_lset_with_default('fx_from_file', [])
     # print "/// sv.label=%s"%sv.label, sv.label in externs ,"hgrid=",hgrid
     if sv.label in externs and \
             any([d == hgrid for d in externs[sv.label]]):
-        pingvar = lset['ping_variables_prefix'] + sv.label
+        pingvar = get_variable_from_lset_without_default('ping_variables_prefix') + sv.label
         pingvars.append(pingvar)
         # Add a grid made of domain hgrid only
         grid_id = "grid_" + hgrid

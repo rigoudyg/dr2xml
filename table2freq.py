@@ -9,11 +9,13 @@
 
 import sys
 
+from dict_interface import get_variable_from_lset_with_default
 
-def Cmip6Freq2XiosFreq(freq, table, lset):
+
+def Cmip6Freq2XiosFreq(freq, table):
     if freq in ["subhr", "subhrPt"]:
         if table == "CFsubhr":
-            rep = lset.get("CFsubhr_frequency", "1ts")
+            rep = get_variable_from_lset_with_default("CFsubhr_frequency", "1ts")
         elif table is None:
             print "Issue in dr2xml with table None and freq=", freq
             sys.exit(0)

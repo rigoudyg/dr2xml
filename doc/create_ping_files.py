@@ -115,7 +115,7 @@ from dr2xml import gather_AllSimpleVars, pingFileForRealmsList
 # In[ ]:
 
 # svars=select_CMORvars_for_lab(settings, printout=True)
-svars = gather_AllSimpleVars(settings, printout=True)
+svars = gather_AllSimpleVars(printout=True)
 
 # ## Doc for ping files create function
 
