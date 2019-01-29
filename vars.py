@@ -5,7 +5,7 @@ print_DR_stdname_errors = False
 import sys, os
 import json
 import json
-from table2freq import guess_freq_from_table_name
+from settings_time import guess_freq_from_table_name
 from utils import vars_error
 
 # DR interface

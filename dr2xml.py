@@ -79,6 +79,10 @@ from grids import decide_for_grids, DRgrid2gridatts
 from split_frequencies import split_frequency_for_variable, timesteps_per_freq_and_duration
 from Xparse import init_context, id2grid, id2gridid, idHasExprWithAt
 
+# Time settings
+from settings_time import freq2datefmt, analyze_cell_time_method, Cmip6Freq2XiosFreq, longest_possible_period, \
+    initialize_cell_method_warnings, get_cell_method_warnings
+
 # Statistics module
 from stats import print_SomeStats
 
@@ -97,7 +101,6 @@ from dr_interface import get_DR_version, initialize_sc, get_collection, get_uid,
     get_experiment_label
 
 # A auxilliary tables
-from table2freq import Cmip6Freq2XiosFreq, longest_possible_period
 
 # CFsites handling has its own module
 from cfsites import cfsites_domain_id, cfsites_grid_id, cfsites_input_filedef, add_cfsites_in_defs
@@ -108,7 +111,6 @@ print_multiple_grids = False
 print "* %29s" % "CMIP6 Data Request version: ", get_DR_version()
 print "\n*\n", 50 * "*"
 
-cell_method_warnings = []
 warnings_for_optimisation = []
 sn_issues = dict()
 
@@ -1120,101 +1122,6 @@ def wr(out, key, dic_or_val=None, num_type="string", default=None):
         if num_type != "string" or len(val) > 0:
             out.write('  <variable name="%s"  type="%s" > %s ' % (key, num_type, val))
             out.write('  </variable>\n')
-
-
-def freq2datefmt(in_freq, operation, table):
-    # WIP doc v6.2.3 - Apr. 2017: <time_range> format is frequency-dependant
-    datefmt = False
-    offset = None
-    freq = in_freq
-    if freq == "dec" or freq == "10y":
-        if not any("dec" in f for f in get_variable_from_lset_with_default("too_long_periods", [])):
-            datefmt = "%y"
-            if operation in ["average", "minimum", "maximum"]:
-                offset = "5y"
-            else:
-                offset = "10y"
-        else:
-            freq = "yr"  # Ensure dates in filenames are consistent with content, even if not as required
-    if freq == "yr" or freq == "yrPt" or freq == "1y":
-        if not any("yr" in f for f in get_variable_from_lset_with_default("too_long_periods", [])):
-            datefmt = "%y"
-            if operation in ["average", "minimum", "maximum"]:
-                offset = False
-            else:
-                offset = "1y"
-        else:
-            freq = "mon"  # Ensure dates in filenames are consistent with content, even if not as required
-    if freq in ["mon", "monC", "monPt", "1mo"]:
-        datefmt = "%y%mo"
-        if operation in ["average", "minimum", "maximum"]:
-            offset = False
-        else:
-            offset = "1mo"
-    elif freq == "day" or freq == "1d":
-        datefmt = "%y%mo%d"
-        if operation in ["average", "minimum", "maximum"]:
-            offset = "12h"
-        else:
-            offset = "1d"
-    elif freq == "10day" or freq == "10d":
-        datefmt = "%y%mo%d"
-        if operation in ["average", "minimum", "maximum"]:
-            offset = "30h"
-        else:
-            offset = "2.5d"
-    elif freq == "5day" or freq == "5d":
-        datefmt = "%y%mo%d"
-        if operation in ["average", "minimum", "maximum"]:
-            offset = "60h"
-        else:
-            offset = "5d"
-    elif freq in ["6hr", "6hrPt", "3hr", "3hrPt", "3hrClim", "1hr", "1hrPt", "hr", "6h", "3h", "1h"]:
-        datefmt = "%y%mo%d%h%mi"
-        if freq == "6hr" or freq == "6hrPt" or freq == "6h":
-            if operation in ["average", "minimum", "maximum"]:
-                offset = "3h"
-            else:
-                offset = "6h"
-        elif freq in ["3hr", "3hrPt", "3hrClim", "3h"]:
-            if operation in ["average", "minimum", "maximum"]:
-                offset = "90mi"
-            else:
-                offset = "3h"
-        elif freq in ["1hr", "1h", "hr", "1hrPt"]:
-            if operation in ["average", "minimum", "maximum"]:
-                offset = "30mi"
-            else:
-                offset = "1h"
-    elif freq in ["1hrClimMon", "1hrCM"]:
-        return "%y%mo%d%h%mi", "0s", "0s"
-        offset = "0s"
-    elif freq == "subhr" or freq == "subhrPt" or freq == "1ts":
-        datefmt = "%y%mo%d%h%mi%s"
-        if operation in ["average", "minimum", "maximum"]:
-            # Does it make sense ??
-            # assume that 'subhr' means every timestep
-            offset = "0.5ts"
-        else:
-            offset = "1ts"
-            if "subhr" in freq and "CFsubhr" in table:
-                offset = get_variable_from_lset_with_default("CFsubhr_frequency", "1ts")
-    elif "fx" in freq:
-        pass  ## WIP doc v6.2.3 - Apr. 2017: if frequency="fx", [_<time_range>] is ommitted
-    if offset is not None:
-        if operation in ["average", "minimum", "maximum"]:
-            if offset is not False:
-                offset_end = "-" + offset
-            else:
-                offset_end = False
-        else:
-            offset_end = "0s"
-    else:
-        offset = "0s";
-        offset_end = "0s"
-        if not "fx" in freq:
-            raise dr2xml_error("Cannot compute offsets for freq=%s and operation=%s" % (freq, operation))
-    return datefmt, offset, offset_end
 
 
 def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
@@ -2498,7 +2405,7 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
     context_index = init_context(context, get_variable_from_lset_with_default("path_to_parse", "./"),
                                  printout=get_variable_from_lset_with_default("debug_parsing", False))
     if context_index is None: sys.exit(1)
-    cell_method_warnings = []
+    initialize_cell_method_warnings([])
     warnings_for_optimisation = []
     sn_issues = dict()
 
@@ -2760,7 +2667,7 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
                         actually_written_vars, get_variable_from_lset_with_default("print_stats_per_var_label", False))
 
     warn = dict()
-    for warning, label, table in cell_method_warnings:
+    for warning, label, table in get_cell_method_warnings():
         if warning not in warn:
             warn[warning] = set()
         warn[warning].add(label)
@@ -3233,248 +3140,6 @@ def isVertDim(sdim):
     # test=(sdim.stdname=='air_pressure' or sdim.stdname=='altitude') and (sdim.value == "")
     test = (sdim.axis == 'Z')
     return test
-
-
-def analyze_cell_time_method(cm, label, table, printout=False):
-    """
-    Depending on cell method string CM, tells / returns
-    - which time operation should be done
-    - if missing value detection should be set
-    - if some cimatology has to be done (and its name - e.g. )
-
-    We rely on the missing value detection to match the requirements like
-    "where sea-ice", "where cloud" since we suppose fields required in this way
-    are physically undefined oustide of "where something".
-    """
-    operation = None
-    detect_missing = False
-    clim = False
-    #
-    if cm is None:
-        if print_DR_errors:
-            print "DR Error: cell_time_method is None for %15s in table %s, averaging" % (label, table)
-        operation = "average"
-    # ----------------------------------------------------------------------------------------------------------------
-    elif "time: mean (with samples weighted by snow mass)" in cm:
-        # [amnla-tmnsn]: Snow Mass Weighted (LImon : agesnow, tsnLi)
-        cell_method_warnings.append(('Cannot yet handle time: mean (with samples weighted by snow mass)', label, table))
-        if printout:
-            print "Will not explicitly handle time: mean (with samples weighted by snow mass) for " + \
-                  "%15s in table %s -> averaging" % (label, table)
-        operation = "average"
-    # ----------------------------------------------------------------------------------------------------------------
-    elif "time: mean where cloud" in cm:
-        # [amncl-twm]: Weighted Time Mean on Cloud (2 variables ISSCP
-        # albisccp et pctisccp, en emDay et emMon)
-        cell_method_warnings.append(('Will not explicitly handle time: mean where cloud', label, table))
-        if printout:
-            print "Note : assuming that  " + \
-                  " for %15s in table %s is well handled by 'detect_missing'" \
-                  % (label, table)
-        operation = "average"
-        detect_missing = True
-    # -------------------------------------------------------------------------------------
-    elif "time: mean where sea_ice_melt_pound" in cm:
-        # [amnnsimp-twmm]: Weighted Time Mean in Sea-ice Melt Pounds (uniquement des
-        # variables en SImon)
-        cell_method_warnings.append(('time: mean where sea_ice_melt_pound', label, table))
-        if printout:
-            print "Note : assuming that 'time: mean where sea_ice_melt_pound' " + \
-                  " for %15s in table %s is well handled by 'detect_missing'" \
-                  % (label, table)
-        operation = "average"
-        detect_missing = True
-    # -------------------------------------------------------------------------------------------------
-    elif "time: mean where sea_ice" in cm:
-        # [amnsi-twm]: Weighted Time Mean on Sea-ice (presque que des
-        # variables en SImon, sauf sispeed et sithick en SIday)
-        cell_method_warnings.append(('time: mean where sea_ice', label, table))
-        if printout:
-            print "Note : assuming that 'time: mean where sea_ice' " + \
-                  " for %15s in table %s is well handled by 'detect_missing'" \
-                  % (label, table)
-        operation = "average"
-        detect_missing = True
-    elif "time: mean where sea" in cm:  # [amnesi-tmn]:
-        # Area Mean of Ext. Prop. on Sea Ice : pas utilisee
-        print "time: mean where sea is not supposed to be used (%s,%s)" % (label, table)
-    # -------------------------------------------------------------------------------------
-    elif "time: mean where sea" in cm:  # [amnesi-tmn]:
-        # Area Mean of Ext. Prop. on Sea Ice : pas utilisee
-        print "time: mean where sea is not supposed to be used (%s,%s)" % (label, table)
-    # -------------------------------------------------------------------------------------
-    elif "time: mean where floating_ice_shelf" in cm:
-        # [amnfi-twmn]: Weighted Time Mean on Floating Ice Shelf (presque que des
-        # variables en Imon, Iyr, sauf sftflt en LImon !?)
-        cell_method_warnings.append(('time: mean where floating_ice_shelf', label, table))
-        if printout:
-            print "Note : assuming that 'time: mean where floating_ice_shelf' " + \
-                  " for %15s in table %s is well handled by 'detect_missing'" \
-                  % (label, table)
-        operation = "average"
-        detect_missing = True
-    # ----------------------------------------------------------------------------------------------------------------
-    elif "time: mean where grounded_ice_sheet" in cm:
-        # [amngi-twm]: Weighted Time Mean on Grounded Ice Shelf (uniquement des
-        # variables en Imon, Iyr)
-        cell_method_warnings.append(('time: mean where grounded_ice_sheet', label, table))
-        if printout:
-            print "Note : assuming that 'time: mean where grounded_ice_sheet' " + \
-                  " for %15s in table %s is well handled by 'detect_missing'" \
-                  % (label, table)
-        operation = "average"
-        detect_missing = True
-    # ----------------------------------------------------------------------------------------------------------------
-    elif "time: mean where ice_sheet" in cm:
-        # [amnni-twmn]: Weighted Time Mean on Ice Shelf (uniquement des
-        # variables en Imon, Iyr)
-        cell_method_warnings.append(('time: mean where ice_sheet', label, table))
-        if printout:
-            print "Note : assuming that 'time: mean where ice_sheet' " + \
-                  " for %15s in table %s is well handled by 'detect_missing'" \
-                  % (label, table)
-        operation = "average"
-        detect_missing = True
-    # ----------------------------------------------------------------------------------------------------------------
-    elif "time: mean where landuse" in cm:
-        # [amlu-twm]: Weighted Time Mean on Land Use Tiles (uniquement des
-        # variables suffixees en 'Lut')
-        cell_method_warnings.append(('time: mean where land_use', label, table))
-        if printout:
-            print "Note : assuming that 'time: mean where landuse' " + \
-                  " for %15s in table %s is well handled by 'detect_missing'" \
-                  % (label, table)
-        operation = "average"
-        detect_missing = True
-    # ----------------------------------------------------------------------------------------------------------------
-    elif "time: mean where crops" in cm:
-        # [amc-twm]: Weighted Time Mean on Crops (uniquement des
-        # variables suffixees en 'Crop')
-        cell_method_warnings.append(('time: mean where crops', label, table))
-        if printout:
-            print "Note : assuming that 'time: mean where crops' " + \
-                  " for %15s in table %s is well handled by 'detect_missing'" \
-                  % (label, table)
-        operation = "average"
-        detect_missing = True
-    # ----------------------------------------------------------------------------------------------------------------
-    elif "time: mean where natural_grasses" in cm:
-        # [amng-twm]: Weighted Time Mean on Natural Grasses (uniquement des
-        # variables suffixees en 'Grass')
-        cell_method_warnings.append(('time: mean where natural_grasses', label, table))
-        if printout:
-            print "Note : assuming that 'time: mean where natural_grasses' " + \
-                  " for %15s in table %s is well handled by 'detect_missing'" \
-                  % (label, table)
-        operation = "average"
-        detect_missing = True
-    # ----------------------------------------------------------------------------------------------------------------
-    elif "time: mean where shrubs" in cm:
-        # [ams-twm]: Weighted Time Mean on Shrubs (uniquement des
-        # variables suffixees en 'Shrub')
-        cell_method_warnings.append(('time: mean where shrubs', label, table))
-        if printout:
-            print "Note : assuming that 'time: mean where shrubs' " + \
-                  " for %15s in table %s is well handled by 'detect_missing'" \
-                  % (label, table)
-        operation = "average"
-        detect_missing = True
-    # ----------------------------------------------------------------------------------------------------------------
-    elif "time: mean where trees" in cm:
-        # [amtr-twm]: Weighted Time Mean on Bare Ground (uniquement des
-        # variables suffixees en 'Tree')
-        cell_method_warnings.append(('time: mean where trees', label, table))
-        if printout:
-            print "Note : assuming that 'time: mean where trees' " + \
-                  " for %15s in table %s is well handled by 'detect_missing'" \
-                  % (label, table)
-        operation = "average"
-        detect_missing = True
-    # ----------------------------------------------------------------------------------------------------------------
-    elif "time: mean where vegetation" in cm:
-        # [amv-twm]: Weighted Time Mean on Vegetation (pas de varibles concernees)
-        cell_method_warnings.append(('time: mean where vegetation', label, table))
-        if printout:
-            print "Note : assuming that 'time: mean where vegetation' " + \
-                  " for %15s in table %s is well handled by 'detect_missing'" \
-                  % (label, table)
-        operation = "average"
-        detect_missing = True
-    # ----------------------------------------------------------------------------------------------------------------
-    elif "time: maximum within days time: mean over days" in cm:
-        # [dmax]: Daily Maximum : tasmax Amon seulement
-        if label != 'tasmax' and label != 'sfcWindmax':
-            print "Error: issue with variable %s in table %s " % (label, table) + \
-                  "and cell method time: maximum within days time: mean over days"
-        # we assume that pingfile provides a reference field which already implements "max within days"
-        operation = "average"
-    # ----------------------------------------------------------------------------------------------------------------
-    elif "time: minimum within days time: mean over days" in cm:
-        # [dmin]: Daily Minimum : tasmin Amon seulement
-        if label != 'tasmin':
-            print "Error: issue with variable %s in table %s  " % (label, table) + \
-                  "and cell method time: minimum within days time: mean over days"
-        # we assume that pingfile provides a reference field which already implements "min within days"
-        operation = "average"
-    # ----------------------------------------------------------------------------------------------------------------
-    elif "time: mean within years time: mean over years" in cm:
-        # [aclim]: Annual Climatology
-        cell_method_warnings.append(('Cannot yet compute annual climatology - must do it as a postpro', label, table))
-        if printout:
-            print "Cannot yet compute annual climatology for " + \
-                  "%15s in table %s -> averaging" % (label, table)
-        # Could transform in monthly fields to be post-processed
-        operation = "average"
-    # ----------------------------------------------------------------------------------------------------------------
-    elif "time: mean within days time: mean over days" in cm:
-        # [amn-tdnl]: Mean Diurnal Cycle
-        cell_method_warnings.append(('File structure for diurnal cycle is not yet CF-compliant', label, table))
-        operation = "average"
-        clim = True
-    # ----------------------------------------------------------------------------------------------------------------
-    # mpmoine_correction:analyze_cell_time_method: ajout du cas 'Maximum Hourly Rate'
-    elif "time: mean within hours time: maximum over hours" in cm:
-        cell_method_warnings.append(('Cannot yet compute maximum hourly rate', label, table))
-        if printout:
-            print "TBD: Cannot yet compute maximum hourly rate for " + \
-                  " %15s in table %s -> averaging" % (label, table)
-            # Could output a time average of 24 hourly fields at 01 UTC, 2UTC ...
-        operation = "average"
-    # ----------------------------------------------------------------------------------------------------------------
-    elif "time: minimum" in cm:
-        # [tmin]: Temporal Minimum : utilisee seulement dans table daily
-        operation = "minimum"
-    # ----------------------------------------------------------------------------------------------------------------
-    elif "time: maximum" in cm:
-        # [tmax]: Time Maximum  : utilisee seulement dans table daily
-        operation = "maximum"
-    # ----------------------------------------------------------------------------------------------------------------
-    elif "time: sum" in cm:
-        # [tsum]: Temporal Sum  : pas utilisee !
-        # print "Error: time: sum is not supposed to be used - Transformed to 'average' for %s in table %s"%(label,table)
-        operation = "accumulate"
-    elif "time: mean" in cm:  # [tmean]: Time Mean
-        operation = "average"
-    # ----------------------------------------------------------------------------------------------------------------
-    elif "time: point" in cm:
-        operation = "instant"
-    elif table == 'fx' or table == 'Efx' or table == 'Ofx':
-        operation = "once"
-    # ----------------------------------------------------------------------------------------------------------------
-    else:
-        print "Warning: issue when analyzing cell_time_method " + \
-              "%s for %15s in table %s, assuming it is once" % (cm, label, table)
-        operation = "once"
-
-    if not operation:
-        # raise dr2xml_error("Fatal: bad xios 'operation' for %s in table %s: %s (%s)"%(sv.label,table,operation,sv.cell_methods))
-        print("Fatal: bad xios 'operation' for %s in table %s: %s (%s)" % (label, table, operation, cm))
-        operation = "once"
-    if not type(detect_missing) == type(bool()):
-        # raise dr2xml_error("Fatal: bad xios 'detect_missing_value' for %s in table %s: %s (%s)"%(sv.label,table,detect_missing,sv.cell_methods))
-        print("Fatal: bad xios 'detect_missing_value' for %s in table %s: %s (%s)" % (label, table, detect_missing, cm))
-
-    return (operation, detect_missing, clim)
 
 
 #
