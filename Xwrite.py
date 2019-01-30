@@ -10,7 +10,8 @@ from config import get_config_variable
 from dict_interface import get_variable_from_lset_with_default, get_variable_from_lset_without_default, \
     get_variable_from_sset_with_default, get_source_id_and_type, get_variable_from_sset_without_default, \
     get_variable_from_sset_else_lset_with_default, is_key_in_lset, is_key_in_sset
-from dr2xml import ping_alias, conventions, version, warnings_for_optimisation
+from dr2xml import conventions, version, warnings_for_optimisation
+from vars_cmor import ping_alias
 from dr_interface import get_DR_version
 from grids import change_domain_in_grid, change_axes_in_grid, get_grid_def_with_lset
 from postprocessing import process_vertical_interpolation, process_zonal_mean, process_diurnal_cycle
@@ -18,7 +19,7 @@ from settings import DRgrid2gridatts, analyze_cell_time_method, freq2datefmt, lo
     Cmip6Freq2XiosFreq
 from split_frequencies import split_frequency_for_variable
 from utils import dr2xml_error
-from vars import get_simplevar
+from vars_home import get_simplevar
 from vars_selection import get_sc, endyear_for_CMORvar
 
 

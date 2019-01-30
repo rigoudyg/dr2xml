@@ -14,7 +14,8 @@ from dict_interface import get_variable_from_sset_and_lset_without_default, get_
 from dr_interface import get_request_by_id_by_sect, get_uid, get_experiment_label, initialize_sc
 from grids_selection import decide_for_grids
 from utils import dr2xml_error
-from vars import simple_CMORvar, complement_svar_using_cmorvar, process_homeVars, analyze_priority
+from vars_home import complement_svar_using_cmorvar, process_homeVars
+from vars_cmor import analyze_priority, simple_CMORvar
 
 print_multiple_grids = False
 

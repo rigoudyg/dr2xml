@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 """
 In the context of Climate Model Intercomparison Projects (CMIP) :
 
@@ -80,8 +80,9 @@ import xml.etree.ElementTree as ET
 # TBS# prog_path=os_path.abspath(os_path.split(__file__)[0])
 
 # Local packages
-from vars import simple_CMORvar, simple_Dim, process_homeVars, complement_svar_using_cmorvar, \
+from vars_home import process_homeVars, complement_svar_using_cmorvar, \
     multi_plev_suffixes, single_plev_suffixes, get_simplevar
+from vars_cmor import simple_CMORvar, simple_Dim
 from grids_selection import decide_for_grids
 from split_frequencies import split_frequency_for_variable, timesteps_per_freq_and_duration
 from Xparse import init_context, id2grid, id2gridid, idHasExprWithAt
@@ -1451,35 +1452,6 @@ def create_standard_domain(resol, ni, nj):
     # return '<domain id="CMIP6_%s" ni_glo="%d" nj_glo="%d" type="rectilinear"  prec="8" lat_name="lat" lon_name="lon" > '%(resol,ni,nj) +\
     #    '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true"  mode="read_or_compute" write_weight="true" /> '+\
     #    '</domain>  '
-
-
-def ping_alias(svar, pingvars, error_on_fail=False):
-    # dans le pingfile, grace a la gestion des interpolations
-    # verticales, on n'attend pas forcement les alias complets des
-    # variables (CMIP6_<label>), on peut se contenter des alias
-    # reduits (CMIP6_<lwps>)
-
-    # par ailleurs, si on a defini un label non ambigu alors on l'utilise
-    # comme ping_alias (i.e. le field_ref)
-
-    pref = get_variable_from_lset_without_default("ping_variables_prefix")
-    if svar.label_non_ambiguous:
-        # print "+++ non ambiguous", svar.label,svar.label_non_ambiguous
-        alias_ping = pref + svar.label_non_ambiguous  # e.g. 'CMIP6_tsn_land' and not 'CMIP6_tsn'
-    else:
-        # print "+++ ambiguous", svar.label
-        # Ping file may provide the variable on the relevant pressure level - e.g. CMIP6_rv850
-        alias_ping = pref + svar.label
-        if alias_ping not in pingvars:
-            # if not, ping_alias is supposed to be without a pressure level suffix
-            alias_ping = pref + svar.label_without_psuffix  # e.g. 'CMIP6_hus' and not 'CMIP6_hus7h'
-        # print "+++ alias_ping = ", pref, svar.label_without_psuffix, alias_ping
-    if alias_ping not in pingvars:
-        if error_on_fail:
-            raise dr2xml_error("Cannot find an alias in ping for variable %s" % svar.label)
-        else:
-            return None
-    return alias_ping
 
 
 def RequestItemInclude(ri, var_label, freq):

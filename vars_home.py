@@ -4,78 +4,22 @@
 """
 Variables general tools.
 """
-print_DR_errors = True
-print_DR_stdname_errors = False
-
 import sys, os
 import json
-import json
-from settings import guess_freq_from_table_name, cellmethod2area
-from utils import vars_error
+import re
 
 # DR interface
-from dr_interface import get_collection, get_uid, get_CMORvarId_by_label, get_request_by_id_by_sect
+from dr_interface import get_collection, get_uid, get_CMORvarId_by_label, get_request_by_id_by_sect,\
+    print_DR_stdname_errors, print_DR_errors
 
 # Settings dictionaries interface
 from dict_interface import get_variable_from_sset_else_lset_with_default, get_variable_from_lset_with_default, \
     get_variable_from_lset_without_default
 
-# -from dr2xml import dr2xml_error
-
-# A class for unifying CMOR vars and home variables
-class simple_CMORvar(object):
-    def __init__(self):
-        self.type = False
-        self.modeling_realm = None
-        self.grids = [""]
-        self.label = None  # taken equal to the CMORvar label
-        self.mipVarLabel = None  # taken equal to MIPvar label
-        self.label_without_psuffix = None
-        self.label_non_ambiguous = None
-        self.frequency = None
-        self.mipTable = None
-        self.positive = None
-        self.description = None
-        self.stdname = None
-        self.units = None
-        self.long_name = None
-        self.struct = None
-        self.sdims = {}
-        self.other_dims_size = 1
-        self.cell_methods = None
-        self.cell_measures = None
-        self.spatial_shp = None
-        self.temporal_shp = None
-        self.experiment = None
-        self.mip = None
-        self.Priority = 1  # Will be changed using DR or extra-Tables
-        self.mip_era = False  # Later changed in projectname (uppercase) when appropriate
-        self.prec = "float"
-        self.missing = 1.e+20
-        self.cmvar = None  # corresponding CMORvar, if any
-
-
-# A class for unifying grid info coming from DR and extra_Tables
-#
-class simple_Dim(object):
-    def __init__(self):
-        self.label = False
-        self.zoom_label = False
-        self.stdname = False
-        self.long_name = False
-        self.positive = False
-        self.requested = ""
-        self.value = False
-        self.out_name = False
-        self.units = False
-        self.is_zoom_of = False
-        self.bounds = False
-        self.boundsValues = False
-        self.axis = False
-        self.type = False
-        self.coords = False
-        self.title = False
-        self.is_union_for = []
+from vars_cmor import get_CMORvar, get_SpatialAndTemporal_Shapes, analyze_ambiguous_MIPvarnames, simple_CMORvar, \
+    simple_Dim
+from settings import guess_freq_from_table_name, cellmethod2area
+from utils import vars_error
 
 
 # List of multi and single pressure level suffixes for which we want the union/zoom axis mecanism turned on
@@ -377,24 +321,6 @@ def read_extraTable(path, table, printout=False):
             print
 
     return extravars
-
-
-def get_SpatialAndTemporal_Shapes(cmvar):
-    spatial_shape = False
-    temporal_shape = False
-    if cmvar.stid == "__struct_not_found_001__":
-        if print_DR_errors:
-            print "Warning: stid for ", cmvar.label, " in table ", cmvar.mipTable, " is a broken link to structure in DR: ", cmvar.stid
-    else:
-        struct = get_uid(cmvar.stid)
-        spatial_shape = get_uid(struct.spid).label
-        temporal_shape = get_uid(struct.tmid).label
-    if print_DR_errors:
-        if not spatial_shape:
-            print "Warning: spatial shape for ", cmvar.label, " in table ", cmvar.mipTable, " not found in DR."
-        if not temporal_shape:
-            print "Warning: temporal shape for ", cmvar.label, " in table ", cmvar.mipTable, " not found in DR."
-    return [spatial_shape, temporal_shape]
 
 
 def process_homeVars(mip_vars_list, mips, expid=False, printout=False):
@@ -741,68 +667,6 @@ def Remove_pSuffix(svar, mlev_sfxs, slev_sfxs, realms):
     return label_out
 
 
-def analyze_ambiguous_MIPvarnames(debug=[]):
-    """
-    Return the list of MIP varnames whose list of CMORvars for a single realm
-    show distinct values for the area part of the cell_methods
-    """
-    # Compute a dict which keys are MIP varnames and values = list
-    # of CMORvars items for the varname
-    d = dict()
-    for v in get_collection('var').items:
-        if v.label not in d:
-            d[v.label] = []
-            if v.label in debug: print "Adding %s" % v.label
-        refs = get_request_by_id_by_sect(v.uid, 'CMORvar')
-        for r in refs:
-            d[v.label].append(get_uid(r))
-            if v.label in debug:
-                print "Adding CmorVar %s(%s) for %s" % (v.label, get_uid(r).mipTable, get_uid(r).label)
-
-    # Replace dic values by dic of area portion of cell_methods
-    for vlabel in d:
-        if len(d[vlabel]) > 1:
-            cvl = d[vlabel]
-            d[vlabel] = dict()
-            for cv in cvl:
-                st = get_uid(cv.stid)
-                cm = None
-                try:
-                    cm = get_uid(st.cmid).cell_methods
-                except:
-                    # pass
-                    print "No cell method for %-15s %s(%s)" % (st.label, cv.label, cv.mipTable)
-                if cm is not None:
-                    area = cellmethod2area(cm)
-                    realm = cv.modeling_realm
-                    if (area == 'sea' and realm == 'ocean'): area = None
-                    # realm=""
-                    if vlabel in debug: print "for %s 's CMORvar %s(%s), area=%s" % (
-                    vlabel, cv.label, cv.mipTable, area)
-                    if realm not in d[vlabel]: d[vlabel][realm] = dict()
-                    if area not in d[vlabel][realm]: d[vlabel][realm][area] = []
-                    d[vlabel][realm][area].append(cv.mipTable)
-            if vlabel in debug: print vlabel, d[vlabel]
-        else:
-            d[vlabel] = None
-
-    # Analyze ambiguous cases regarding area part of the cell_method
-    ambiguous = []
-    for vlabel in d:
-        if d[vlabel]:
-            # print vlabel,d[vlabel]
-            for realm in d[vlabel]:
-                if len(d[vlabel][realm]) > 1:
-                    ambiguous.append((vlabel, (realm, d[vlabel][realm])))
-    if "all" in debug:
-        for v, p in ambiguous:
-            print v
-            b, d = p
-            for r in d:
-                print "\t", r, d[r]
-    return ambiguous
-
-
 def get_simplevar(label, table, freq=None):
     """
     Returns 'simplified variable' for a given CMORvar label and table
@@ -829,31 +693,3 @@ def get_simplevar(label, table, freq=None):
     if psvar:
         complement_svar_using_cmorvar(svar, psvar, None, [], False)
         return svar
-
-
-def get_CMORvar(label, table):
-    """
-    Returns CMOR variable for a given label in a given table
-    (could be optimized using inverse index)
-    """
-    collect = get_collection('CMORvar')
-    thevar = None
-    for cmvar in collect.items:
-        if cmvar.mipTable == table and cmvar.label == label:
-            thevar = cmvar
-            break
-    return thevar
-
-
-def analyze_priority(cmvar, lmips):
-    """
-    Returns the max priority of the CMOR variable, for a set of mips
-    """
-    prio = cmvar.defaultPriority
-    rv_ids = get_request_by_id_by_sect(cmvar.uid, 'requestVar')
-    for rv_id in rv_ids:
-        rv = get_uid(rv_id)
-        vg = get_uid(rv.vgid)
-        if vg.mip in lmips:
-            if rv.priority < prio: prio = rv.priority
-    return prio

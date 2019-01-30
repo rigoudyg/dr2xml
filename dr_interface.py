@@ -12,6 +12,7 @@ import dreq
 
 dq = dreq.loadDreq()
 print_DR_errors = True
+print_DR_stdname_errors = False
 
 
 def get_uid(id=None):
