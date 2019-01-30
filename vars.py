@@ -1,4 +1,9 @@
-# -*- coding: iso-8859-15 -*-
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+"""
+Variables general tools.
+"""
 print_DR_errors = True
 print_DR_stdname_errors = False
 
@@ -838,14 +843,6 @@ def get_CMORvar(label, table):
             thevar = cmvar
             break
     return thevar
-
-
-def scalar_vertical_dimension(sv):
-    if 'cids' in sv.struct.__dict__:
-        cid = get_uid(sv.struct.cids[0])
-        if cid.axis == 'Z':
-            return cid.altLabel
-    return None
 
 
 def analyze_priority(cmvar, lmips):
