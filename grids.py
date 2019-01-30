@@ -9,7 +9,7 @@ import re
 import xml.etree.ElementTree as ET
 
 from dict_interface import get_variable_from_lset_without_default, get_variable_from_lset_with_default, is_key_in_lset
-from dr2xml import context_index
+from config import get_config_variable
 from dr_interface import get_collection, get_uid
 from utils import dr2xml_error
 
@@ -21,6 +21,7 @@ axis_count = 0
 
 
 def get_grid_def(grid_id, grid_defs):
+    context_index = get_config_variable("context_index")
     if grid_id in grid_defs:
         # Simple case : already stored
         grid_def = grid_defs[grid_id]

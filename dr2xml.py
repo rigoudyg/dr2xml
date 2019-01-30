@@ -49,6 +49,7 @@ Changes :
 ####################################
 # End of pre-requisites
 ####################################
+from config import get_config_variable, set_config_variable
 from grids import get_grid_def, guess_simple_domain_grid_def, create_grid_def, create_axis_def, change_domain_in_grid, \
     get_grid_def_with_lset, change_axes_in_grid, isVertDim, scalar_vertical_dimension
 from vars_selection import endyear_for_CMORvar, RequestItem_applies_for_exp_and_year, select_CMORvars_for_lab, \
@@ -115,8 +116,6 @@ print "* %29s" % "CMIP6 Data Request version: ", get_DR_version()
 print "\n*\n", 50 * "*"
 
 warnings_for_optimisation = []
-
-context_index = None
 
 """ An example/template  of settings for a lab and a model"""
 example_lab_and_model_settings = {
@@ -1185,6 +1184,7 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
     last_field_id = alias
 
     alias_ping = ping_alias(sv, pingvars)
+    context_index = get_config_variable("context_index")
     grid_id_in_ping = id2gridid(alias_ping, context_index)
     last_grid_id = grid_id_in_ping
     # last_grid_id=None
@@ -1444,6 +1444,7 @@ def process_singleton(sv, alias, pingvars, field_defs, grid_defs, scalar_defs, t
     # get grid for the variable , before vertical interpo. if any
     # (could rather use last_grid_id and analyze if it has pressure dim)
     alias_ping = ping_alias(sv, pingvars)
+    context_index = get_config_variable("context_index")
     input_grid_id = id2gridid(alias_ping, context_index)
     input_grid_def = get_grid_def_with_lset(input_grid_id, grid_defs)
     if printout:
@@ -1780,6 +1781,7 @@ def process_diurnal_cycle(alias, field_defs, grid_defs, axis_defs, printout=Fals
     if printout: print "***>", field_defs[field_for_average_id]
 
     # 1- create a grid composed of ALIAS's original grid extended by a scalar; id is <grid_id>_scalar_grid
+    context_index = get_config_variable("context_index")
     base_grid = id2grid(alias, context_index)
     base_grid_string = ET.tostring(base_grid)
     grid_id = base_grid.attrib['id']
@@ -1879,13 +1881,14 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
     # --------------------------------------------------------------------
     # Parse XIOS settings file for the context
     # --------------------------------------------------------------------
-    global context_index
     print "\n", 50 * "*", "\n"
     print "Processing context ", context
     print "\n", 50 * "*", "\n"
-    context_index = init_context(context, get_variable_from_lset_with_default("path_to_parse", "./"),
-                                 printout=get_variable_from_lset_with_default("debug_parsing", False))
-    if context_index is None: sys.exit(1)
+    set_config_variable("context_index",
+                        init_context(context, get_variable_from_lset_with_default("path_to_parse", "./"),
+                                     printout=get_variable_from_lset_with_default("debug_parsing", False)))
+    if get_config_variable("context_index") is None:
+        sys.exit(1)
     initialize_cell_method_warnings([])
     warnings_for_optimisation = []
     initialize_sn_issues(dict())
@@ -2222,7 +2225,6 @@ def create_xios_axis_and_grids_for_plevs_unions(svars, plev_sfxs, dummies, axis_
     * Second, create create all of the Xios union axis (axis id: union_plevs_<label_without_psuffix>)
     """
     #
-    global context_index
     prefix = get_variable_from_lset_without_default("ping_variables_prefix")
     # First, search plev unions for each label_without_psuffix and build dict_plevs
     dict_plevs = {}
@@ -2315,7 +2317,7 @@ def create_xios_axis_and_grids_for_plevs_unions(svars, plev_sfxs, dummies, axis_
         if printout: print "creating axis def for union :%s" % sdim_union.label
         axis_def = create_axis_def(sdim_union, union_axis_defs, field_defs)
         create_grid_def(union_grid_defs, axis_def, sdim_union.out_name,
-                        id2gridid(prefix + lwps, context_index))
+                        id2gridid(prefix + lwps, get_config_variable("context_index")))
     #
     # return (union_axis_defs,union_grid_defs)
 
@@ -2821,7 +2823,9 @@ def check_for_file_input(sv, hgrid, pingvars, field_defs, grid_defs, domain_defs
         field_def = '<field id="%s" grid_ref="%s" field_ref="%s" operation="instant" freq_op="1ts" freq_offset="0ts" />' % \
                     (pingvar, grid_id, field_in_file_id)
         field_defs[field_in_file_id] = field_def
+        context_index = get_config_variable("context_index")
         context_index[pingvar] = ET.fromstring(field_def)
 
-        if printout: print field_defs[field_in_file_id]
+        if printout:
+            print field_defs[field_in_file_id]
         #
