@@ -46,22 +46,25 @@ def get_variable_from_sset_and_lset_without_default(key_sset, key_lset=None):
         return lset[key_lset]
 
 
-def get_variable_from_lset_with_default(key, default):
+def get_variable_from_lset_with_default(key, default=None):
     return lset.get(key, default)
 
 
 def get_variable_from_lset_without_default(*args):
-    result = None
-    nb_levels = len(args)
-    for level in range(nb_levels):
-        if level == 0:
-            result = lset[args[level]]
-        else:
-            result = result[args[level]]
-    return result
+    return get_variable_from_dict_without_default(dictionary=lset, args=args)
 
 
-def get_variable_from_sset_with_default(key, default):
+def get_variable_from_dict_without_default(dictionary, args):
+    if len(args) > 1:
+        newdict = copy.deepcopy(dictionary[args[0]])
+        return get_variable_from_dict_without_default(dictionary=newdict, args=args[1:])
+    elif len(args) == 1:
+        return dictionary[args[0]]
+    else: # Should not happen
+        raise dr2xml_error("Could not guess which key to look for.")
+
+
+def get_variable_from_sset_with_default(key, default=None):
     return sset.get(key, default)
 
 
@@ -70,14 +73,8 @@ def get_variable_from_sset_with_default_in_sset(key, key_default):
 
 
 def get_variable_from_sset_without_default(*args):
-    result = None
-    nb_levels = len(args)
-    for level in range(nb_levels):
-        if level == 0:
-            result = sset[args[level]]
-        else:
-            result = result[args[level]]
-    return result
+    return get_variable_from_dict_without_default(dictionary=sset, args=args)
+
 
 
 def is_key_in_lset(key):

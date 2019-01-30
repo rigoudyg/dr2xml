@@ -18,6 +18,7 @@ from vars_home import complement_svar_using_cmorvar, process_homeVars
 from vars_cmor import analyze_priority, simple_CMORvar
 
 print_multiple_grids = False
+grid_choice = None
 
 
 # global variable : the list of Request Links which apply for 'our' MIPS and which are not explicitly excluded using settings
@@ -27,6 +28,10 @@ rls_for_all_experiments = None
 sc = None
 
 sn_issues = dict()
+
+
+def get_grid_choice():
+    return grid_choice
 
 
 def initialize_sn_issues(init):
@@ -313,7 +318,7 @@ def experiment_start_year_without_sset(exp, debug=False):
 
 def experiment_start_year(exp, debug=False):
     if is_key_in_sset("branch_year_in_child"):
-        return get_variable_from_sset_without_default("branch_year_in_sset")
+        return get_variable_from_sset_without_default("branch_year_in_child")
     else:
         starty = experiment_start_year_without_sset(exp, debug)
         if starty is None:
@@ -438,7 +443,8 @@ def select_CMORvars_for_lab(sset=False, year=None, printout=False):
         rls = filtered_rls
         if printout:
             print "Number of Request Links which apply to experiment ", \
-                experiment_id, " member ", sset['realization_index'], " and MIPs", mips_list, " is: ", len(rls)
+                experiment_id, " member ", get_variable_from_sset_without_default('realization_index'), " and MIPs",\
+                mips_list, " is: ", len(rls)
         # print "Request links that apply :"+`[ rl.label for rl in filtered_rls ]`
     else:
         rls = rls_for_mips

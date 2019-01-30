@@ -4,13 +4,17 @@
 """
 XIOS writing files tools.
 """
+import json
+import re
+import datetime
+
+
 from Xparse import id2gridid, idHasExprWithAt
 from cfsites import cfsites_domain_id, add_cfsites_in_defs
 from config import get_config_variable
 from dict_interface import get_variable_from_lset_with_default, get_variable_from_lset_without_default, \
     get_variable_from_sset_with_default, get_source_id_and_type, get_variable_from_sset_without_default, \
     get_variable_from_sset_else_lset_with_default, is_key_in_lset, is_key_in_sset
-from dr2xml import conventions, version, warnings_for_optimisation
 from vars_cmor import ping_alias
 from dr_interface import get_DR_version
 from grids import change_domain_in_grid, change_axes_in_grid, get_grid_def_with_lset
@@ -23,9 +27,11 @@ from vars_home import get_simplevar
 from vars_selection import get_sc, endyear_for_CMORvar
 
 
+warnings_for_optimisation = []
+
+
 def wr(out, key, dic_or_val=None, num_type="string", default=None):
-    global print_wrv
-    if not print_wrv: return
+    if not get_variable_from_lset_with_default("print_variables", True): return
     """
     Short cut for a repetitive pattern : writing in 'out' 
     a string variable name and value
@@ -164,7 +170,7 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
                            "Users can find more comprehensive and up-to-date documentation via the further_info_url global attribute."
     #
     # WIP Draft 14 july 2016
-    mip_era = get_variable_from_lset_with_default(sv.mip_era)
+    mip_era = get_variable_from_lset_with_default("mip_era", sv.mip_era)
     #
     # WIP doc v 6.2.0 - dec 2016
     # <variable_id>_<table_id>_<source_id>_<experiment_id >_<member_id>_<grid_label>[_<time_range>].nc
@@ -282,7 +288,7 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
                    (prefix, varname_for_filename, table, source_id, expid_in_filename,
                     member_id, grid_label, date_range, suffix)
     #
-    if is_key_in_lset('mip_era'):
+    if not is_key_in_lset('mip_era'):
         further_info_url = "https://furtherinfo.es-doc.org/%s.%s.%s.%s.%s.%s" % (
             mip_era, institution_id, source_id, expid_in_filename,
             sub_experiment_id, variant_label)
@@ -363,7 +369,7 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
     out.write(' time_stamp_name="creation_date" ')
     out.write(' time_stamp_format="%Y-%m-%dT%H:%M:%SZ"')
     out.write(' uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%"')
-    out.write(' convention_str="%s"' % conventions)
+    out.write(' convention_str="%s"' % get_config_variable("conventions"))
     # out.write(' description="A %s result for experiment %s of %s"'%
     #            (lset['source_id'],sset['experiment_id'],sset.get('project',"CMIP6")))
     out.write(' >\n')
@@ -376,7 +382,7 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
     #
     if contact and contact is not "": wr(out, 'contact', contact)
     wr(out, 'data_specs_version', get_DR_version())
-    wr(out, 'dr2xml_version', version)
+    wr(out, 'dr2xml_version', get_config_variable("version"))
     #
     wr(out, 'experiment_id', expid_in_filename)
     if experiment_id == expid_in_filename:
@@ -1002,8 +1008,7 @@ def add_scalar_in_grid(gridin_def, gridout_id, scalar_id, scalar_name, remove_ax
 
 
 def wrv(name, value, num_type="string"):
-    global print_wrv
-    if not print_wrv: return ""
+    if not get_variable_from_lset_with_default("print_variables", True): return ""
     if type(value) == type(""): value = value[0:1024]  # CMIP6 spec : no more than 1024 char
     # Format a 'variable' entry
     return '     <variable name="%s" type="%s" > %s ' % (name, num_type, value) + \
