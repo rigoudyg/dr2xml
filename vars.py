@@ -846,3 +846,17 @@ def scalar_vertical_dimension(sv):
         if cid.axis == 'Z':
             return cid.altLabel
     return None
+
+
+def analyze_priority(cmvar, lmips):
+    """
+    Returns the max priority of the CMOR variable, for a set of mips
+    """
+    prio = cmvar.defaultPriority
+    rv_ids = get_request_by_id_by_sect(cmvar.uid, 'requestVar')
+    for rv_id in rv_ids:
+        rv = get_uid(rv_id)
+        vg = get_uid(rv.vgid)
+        if vg.mip in lmips:
+            if rv.priority < prio: prio = rv.priority
+    return prio

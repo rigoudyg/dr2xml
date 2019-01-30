@@ -108,7 +108,8 @@ settings["excluded_vars"] = []
 # In[ ]:
 
 # from dr2xml import select_CMORvars_for_lab, pingFileForRealmsList
-from dr2xml import gather_AllSimpleVars, pingFileForRealmsList
+from dr2xml import pingFileForRealmsList
+from vars_selection import gather_AllSimpleVars
 
 # ## Select all variables to consider, based on lab settings
 

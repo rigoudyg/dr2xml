@@ -1,7 +1,8 @@
 #!/usr/bin/python
 
 from settings import lab_and_model_settings, simulation_settings, my_cvspath
-from dr2xml import select_CMORvars_for_lab, pingFileForRealmsList, generate_file_defs
+from dr2xml import pingFileForRealmsList, generate_file_defs
+from vars_selection import select_CMORvars_for_lab
 from dict_interface import initialize_dict
 
 #
