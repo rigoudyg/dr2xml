@@ -85,7 +85,7 @@ from grids_selection import decide_for_grids
 from split_frequencies import split_frequency_for_variable, timesteps_per_freq_and_duration
 from Xparse import init_context, id2grid, id2gridid, idHasExprWithAt
 
-# Time settings
+# Settings
 from settings import freq2datefmt, analyze_cell_time_method, Cmip6Freq2XiosFreq, longest_possible_period, \
     initialize_cell_method_warnings, get_cell_method_warnings, DRgrid2gridatts
 
@@ -104,14 +104,12 @@ from utils import dr2xml_error
 
 # Data request interface
 from dr_interface import get_DR_version, initialize_sc, get_collection, get_uid, get_request_by_id_by_sect, \
-    get_experiment_label
+    get_experiment_label, print_DR_errors
 
 # A auxilliary tables
 
 # CFsites handling has its own module
 from cfsites import cfsites_domain_id, cfsites_grid_id, cfsites_input_filedef, add_cfsites_in_defs
-
-print_DR_errors = True
 
 print "* %29s" % "CMIP6 Data Request version: ", get_DR_version()
 print "\n*\n", 50 * "*"
@@ -954,7 +952,8 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
         warn[warning].add(label)
     if len(warn) > 0:
         print "\nWarnings about cell methods (with var list)"
-        for w in warn: print "\t", w, " for vars : ", warn[w]
+        for w in warn:
+            print "\t", w, " for vars : ", warn[w]
     if len(warnings_for_optimisation) > 0:
         print "Warning for fields which cannot be optimised (i.e. average before remap) because of an expr with @\n\t",
         for w in warnings_for_optimisation:

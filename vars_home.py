@@ -648,7 +648,6 @@ def Remove_pSuffix(svar, mlev_sfxs, slev_sfxs, realms):
     # remove suffixes only if both suffix of svar.label *and* suffix of one of the svar.dims.label  match the search suffix
     # to avoid truncation of variable names like 'ch4' requested on 'plev19', where '4' does not stand for a plev set
     #
-    import re
     r = re.compile("([a-zA-Z]+)([0-9]+)")
     #
     # mpmoine_correction:write_xios_file_def:Remove_pSuffix: suppression des terminaisons en "Clim" le cas echant
