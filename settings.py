@@ -108,7 +108,7 @@ def freq2datefmt(in_freq, operation, table):
             if "subhr" in freq and "CFsubhr" in table:
                 offset = get_variable_from_lset_with_default("CFsubhr_frequency", "1ts")
     elif "fx" in freq:
-        pass  ## WIP doc v6.2.3 - Apr. 2017: if frequency="fx", [_<time_range>] is ommitted
+        pass  # WIP doc v6.2.3 - Apr. 2017: if frequency="fx", [_<time_range>] is ommitted
     if offset is not None:
         if operation in ["average", "minimum", "maximum"]:
             if offset is not False:
@@ -118,9 +118,9 @@ def freq2datefmt(in_freq, operation, table):
         else:
             offset_end = "0s"
     else:
-        offset = "0s";
+        offset = "0s"
         offset_end = "0s"
-        if not "fx" in freq:
+        if "fx" not in freq:
             raise dr2xml_error("Cannot compute offsets for freq=%s and operation=%s" % (freq, operation))
     return datefmt, offset, offset_end
 
@@ -342,7 +342,8 @@ def analyze_cell_time_method(cm, label, table, printout=False):
     # ----------------------------------------------------------------------------------------------------------------
     elif "time: sum" in cm:
         # [tsum]: Temporal Sum  : pas utilisee !
-        # print "Error: time: sum is not supposed to be used - Transformed to 'average' for %s in table %s"%(label,table)
+        # print "Error: time: sum is not supposed to be used - Transformed to 'average' for %s in table %s"
+        #       %(label,table)
         operation = "accumulate"
     elif "time: mean" in cm:  # [tmean]: Time Mean
         operation = "average"
@@ -358,11 +359,13 @@ def analyze_cell_time_method(cm, label, table, printout=False):
         operation = "once"
 
     if not operation:
-        # raise dr2xml_error("Fatal: bad xios 'operation' for %s in table %s: %s (%s)"%(sv.label,table,operation,sv.cell_methods))
+        # raise dr2xml_error("Fatal: bad xios 'operation' for %s in table %s: %s (%s)"
+        #                    %(sv.label,table,operation,sv.cell_methods))
         print("Fatal: bad xios 'operation' for %s in table %s: %s (%s)" % (label, table, operation, cm))
         operation = "once"
     if not type(detect_missing) == type(bool()):
-        # raise dr2xml_error("Fatal: bad xios 'detect_missing_value' for %s in table %s: %s (%s)"%(sv.label,table,detect_missing,sv.cell_methods))
+        # raise dr2xml_error("Fatal: bad xios 'detect_missing_value' for %s in table %s: %s (%s)"
+        #                    %(sv.label,table,detect_missing,sv.cell_methods))
         print("Fatal: bad xios 'detect_missing_value' for %s in table %s: %s (%s)" % (label, table, detect_missing, cm))
 
     return (operation, detect_missing, clim)
@@ -461,29 +464,52 @@ def cellmethod2area(method):
     Analyze METHOD to identify if its part related to area includes
     some key words which describe given area types
     """
-    if method is None: return None
-    if "where ice_free_sea over sea " in method: return "ifs"
-    if "where land" in method: return "land"
-    if "where floating_ice_shelf" in method: return "fisf"
-    if "where land over all_area_types" in method: return "loaat"  #
-    if "where landuse over all_area_types" in method: return "luoaat"  #
-    if "where sea" in method: return "sea"
-    if "where sea_ice" in method: return "si"
-    if "where sea_ice_over_sea" in method: return "sios"  #
-    if "where snow over sea_ice" in method: return "sosi"
-    if "where grounded_ice_shelf" in method: return "gisf"  #
-    if "where snow" in method: return "snow"
-    if "where cloud" in method: return "cloud"
-    if "where crops" in method: return "crops"  #
-    if "where grounded_ice_sheet" in method: return "gist"  #
-    if "ice_sheet" in method: return "ist"  #
-    if "where landuse" in method: return "lu"
-    if "where natural_grasses" in method: return "ngrass"  #
-    if "where sea_ice_melt_ponds" in method: return "simp"  #
-    if "where shrubs" in method: return "shrubs"  #
-    if "where trees" in method: return "trees"  #
-    if "where vegetation" in method: return "veg"  #
-    if "where ice_shelf" in method: return "isf"
+    if method is None:
+        return None
+    if "where ice_free_sea over sea " in method:
+        return "ifs"
+    if "where land" in method:
+        return "land"
+    if "where floating_ice_shelf" in method:
+        return "fisf"
+    if "where land over all_area_types" in method:
+        return "loaat"  #
+    if "where landuse over all_area_types" in method:
+        return "luoaat"  #
+    if "where sea" in method:
+        return "sea"
+    if "where sea_ice" in method:
+        return "si"
+    if "where sea_ice_over_sea" in method:
+        return "sios"  #
+    if "where snow over sea_ice" in method:
+        return "sosi"
+    if "where grounded_ice_shelf" in method:
+        return "gisf"  #
+    if "where snow" in method:
+        return "snow"
+    if "where cloud" in method:
+        return "cloud"
+    if "where crops" in method:
+        return "crops"  #
+    if "where grounded_ice_sheet" in method:
+        return "gist"  #
+    if "ice_sheet" in method:
+        return "ist"  #
+    if "where landuse" in method:
+        return "lu"
+    if "where natural_grasses" in method:
+        return "ngrass"  #
+    if "where sea_ice_melt_ponds" in method:
+        return "simp"  #
+    if "where shrubs" in method:
+        return "shrubs"  #
+    if "where trees" in method:
+        return "trees"  #
+    if "where vegetation" in method:
+        return "veg"  #
+    if "where ice_shelf" in method:
+        return "isf"
 
 
 def DRgrid2gridatts(grid):

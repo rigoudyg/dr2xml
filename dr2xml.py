@@ -49,13 +49,61 @@ Changes :
 ####################################
 # End of pre-requisites
 ####################################
-from Xwrite import wr, write_xios_file_def
+import json
+import datetime
+import re
+import collections
+import sys
+import os
+import glob
+import xml.etree.ElementTree as ET
+
+# Utilities
+from utils import dr2xml_error
+
+# Settings and config
 from config import get_config_variable, set_config_variable
+from settings import freq2datefmt, analyze_cell_time_method, Cmip6Freq2XiosFreq, longest_possible_period, \
+    initialize_cell_method_warnings, get_cell_method_warnings, DRgrid2gridatts
+
+# Data request interface
+from dr_interface import get_DR_version, initialize_sc, get_collection, get_uid, get_request_by_id_by_sect, \
+    get_experiment_label, print_DR_errors
+
+# Simulations and laboratory settings dictionnaries interface
+from dict_interface import initialize_dict, get_variable_from_lset_with_default, \
+    is_key_in_sset, get_variable_from_sset_without_default, is_sset_not_None, get_source_id_and_type, \
+    get_variable_from_sset_and_lset_without_default, get_variable_from_sset_with_default_in_sset, \
+    get_variable_from_sset_with_default, is_key_in_lset, get_variable_from_sset_else_lset_with_default, \
+    get_lset_iteritems, get_sset_iteritems, get_variable_from_lset_without_default
+
+# XIOS linked modules
+from Xparse import init_context, id2grid, id2gridid, idHasExprWithAt
+from Xwrite import wr, write_xios_file_def
+
+# Grids modules
 from grids import get_grid_def, guess_simple_domain_grid_def, create_grid_def, create_axis_def, change_domain_in_grid, \
     get_grid_def_with_lset, change_axes_in_grid, isVertDim, scalar_vertical_dimension
-from postprocessing import process_vertical_interpolation, process_zonal_mean, process_diurnal_cycle
+from grids_selection import decide_for_grids
+
+# Variables modules
+from vars_home import process_homeVars, complement_svar_using_cmorvar, \
+    multi_plev_suffixes, single_plev_suffixes, get_simplevar
+from vars_cmor import simple_CMORvar, simple_Dim
 from vars_selection import endyear_for_CMORvar, RequestItem_applies_for_exp_and_year, select_CMORvars_for_lab, \
     gather_AllSimpleVars, get_sc, initialize_sn_issues, get_grid_choice
+
+# Split frequencies module
+from split_frequencies import split_frequency_for_variable, timesteps_per_freq_and_duration
+
+# Statistics module
+from stats import print_SomeStats
+
+# CFsites handling has its own module
+from cfsites import cfsites_domain_id, cfsites_grid_id, cfsites_input_filedef, add_cfsites_in_defs
+
+# Post-processing modules
+from postprocessing import process_vertical_interpolation, process_zonal_mean, process_diurnal_cycle
 
 print "\n", 50 * "*", "\n*"
 print "* %29s" % "dr2xml version: ", get_config_variable("version")
@@ -65,51 +113,9 @@ print "* %29s" % "dr2xml version: ", get_config_variable("version")
 CMIP6_conventions_version = "v6.2.4"
 print "* %29s" % "CMIP6 conventions version: ", CMIP6_conventions_version
 
-import json
-
-import datetime
-import re
-import collections
-import sys, os, glob
-import xml.etree.ElementTree as ET
-
 # mpmoine_merge_dev2_v0.12: posixpath.dirname ne marche pas chez moi
 # TBS# from os import path as os_path
 # TBS# prog_path=os_path.abspath(os_path.split(__file__)[0])
-
-# Local packages
-from vars_home import process_homeVars, complement_svar_using_cmorvar, \
-    multi_plev_suffixes, single_plev_suffixes, get_simplevar
-from vars_cmor import simple_CMORvar, simple_Dim
-from grids_selection import decide_for_grids
-from split_frequencies import split_frequency_for_variable, timesteps_per_freq_and_duration
-from Xparse import init_context, id2grid, id2gridid, idHasExprWithAt
-
-# Settings
-from settings import freq2datefmt, analyze_cell_time_method, Cmip6Freq2XiosFreq, longest_possible_period, \
-    initialize_cell_method_warnings, get_cell_method_warnings, DRgrid2gridatts
-
-# Statistics module
-from stats import print_SomeStats
-
-# Simulations and laboratory settings dictionnaries interface
-from dict_interface import initialize_dict, get_variable_from_lset_with_default, get_variable_from_lset_without_default, \
-    is_key_in_sset, get_variable_from_sset_without_default, is_sset_not_None, get_source_id_and_type, \
-    get_variable_from_sset_and_lset_without_default, get_variable_from_sset_with_default_in_sset, \
-    get_variable_from_sset_with_default, is_key_in_lset, get_variable_from_sset_else_lset_with_default, \
-    get_lset_iteritems, get_sset_iteritems
-
-# Utilities
-from utils import dr2xml_error
-
-# Data request interface
-from dr_interface import get_DR_version, initialize_sc, get_collection, get_uid, get_request_by_id_by_sect, \
-    get_experiment_label, print_DR_errors
-
-# A auxilliary tables
-
-# CFsites handling has its own module
-from cfsites import cfsites_domain_id, cfsites_grid_id, cfsites_input_filedef, add_cfsites_in_defs
 
 print "* %29s" % "CMIP6 Data Request version: ", get_DR_version()
 print "\n*\n", 50 * "*"
@@ -285,13 +291,15 @@ example_lab_and_model_settings = {
 
         "LR": {
             "surfex": ["gr", "complete", "glat", "250 km",
-                       "data regridded to a T127 gaussian grid (128x256 latlon) from a native atmosphere T127l reduced gaussian grid"],
+                       "data regridded to a T127 gaussian grid (128x256 latlon)"
+                       "from a native atmosphere T127l reduced gaussian grid"],
             "trip": ["gn", "", "", "50 km", "regular 1/2 deg lat-lon grid"],
             "nemo": ["gn", "", "", "100 km", "native ocean tri-polar grid with 105 k ocean cells"], },
 
         "HR": {
             "surfex": ["gr", "complete", "glat", "50 km",
-                       "data regridded to a 359 gaussian grid (180x360 latlon) from a native atmosphere T359l reduced gaussian grid"],
+                       "data regridded to a 359 gaussian grid (180x360 latlon)"
+                       "from a native atmosphere T359l reduced gaussian grid"],
             "trip": ["gn", "", "", "50 km", "regular 1/2 deg lat-lon grid"],
             "nemo": ["gn", "", "", "25 km", "native ocean tri-polar grid with 1.47 M ocean cells"], },
     },
@@ -370,7 +378,10 @@ example_lab_and_model_settings = {
         'soilpools': ('soilpools', 'fast medium slow'),
         # 'landUse'      :'landUse' ,
         'vegtype': ('vegtype',
-                    'Bare_soil Rock Permanent_snow Temperate_broad-leaved_decidus Boreal_needleaf_evergreen Tropical_broad-leaved_evergreen C3_crop C4_crop Irrigated_crop C3_grass C4_grass Wetland Tropical_broad-leaved_decidus Temperate_broad-leaved_evergreen Temperate_needleaf_evergreen Boreal_broad-leaved_decidus Boreal_needleaf_decidus Tundra_grass Shrub'),
+                    'Bare_soil Rock Permanent_snow Temperate_broad-leaved_decidus Boreal_needleaf_evergreen'
+                    'Tropical_broad-leaved_evergreen C3_crop C4_crop Irrigated_crop C3_grass C4_grass Wetland'
+                    'Tropical_broad-leaved_decidus Temperate_broad-leaved_evergreen Temperate_needleaf_evergreen'
+                    'Boreal_broad-leaved_decidus Boreal_needleaf_decidus Tundra_grass Shrub'),
 
         # Space dimensions - Nemo
         'depthw': 'olevel', 'deptht': 'olevel', 'depthu': 'olevel', 'depthv': 'olevel',
@@ -398,7 +409,10 @@ example_lab_and_model_settings = {
     'fx_from_file': {
         "areacella": {"complete":
                           {"LR": "areacella_LR",
-                           "HR": "areacella_HR", }}},
+                           "HR": "areacella_HR", }
+                      }
+
+    },
 
     # The path of the directory which, at run time, contains the root XML file (iodef.xml)
     'path_to_parse': "./",
@@ -513,7 +527,8 @@ example_simulation_settings = {
     "branch_year_in_parent": 2150,  # if your calendar is Gregorian, you can specify the branch year in parent directly
     # This is an alternative to using "branch_time_in_parent".
     # "branch_month_in_parent": 1,        # You can then also set the month. Default to 1
-    # "branch_time_in_parent": "365.0D0", # a double precision value, in days, used if branch_year_in_parent is not applicable
+    # "branch_time_in_parent": "365.0D0", # a double precision value, in days, used if branch_year_in_parent
+    #                                     # is not applicable
     # This is an alternative to using "branch_year_in_parent"
     # 'parent_time_units'    : "" #in case it is not the same as child time units
 
@@ -557,7 +572,8 @@ example_simulation_settings = {
     # A per-variable dict of comments which are specific to this simulation. It will replace
     # the all-simulation comment
     'comments': {
-        'tas': 'this is a dummy comment, placeholder for describing a special, simulation dependent, scheme for a given variable',
+        'tas': 'this is a dummy comment, placeholder for describing a special, '
+               'simulation dependent, scheme for a given variable',
     },
     # We can supersede the default list of variables of lab_settings, which tells
     # which additionnal variables/frequecny are to produce
@@ -626,7 +642,9 @@ def generate_file_defs(lset, sset, year, enddate, context, cvs_path, pingfiles=N
                        dummies='include', printout=False, dirname="./", prefix="", attributes=[],
                        select="on_expt_and_year"):
     # A wrapper for profiling top-level function : generate_file_defs_inner
-    import cProfile, pstats, StringIO
+    import cProfile
+    import pstats
+    import StringIO
     pr = cProfile.Profile()
     pr.enable()
     # Initialize lset and sset variables for all functions
@@ -672,7 +690,8 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
     #
     debug = False
     cmvk = "CMIP6_CV_version"
-    if cmvk in attributes: print "* %s: %s" % (cmvk, attributes[cmvk])
+    if cmvk in attributes:
+        print "* %s: %s" % (cmvk, attributes[cmvk])
     # --------------------------------------------------------------------
     # Parse XIOS settings file for the context
     # --------------------------------------------------------------------
@@ -728,7 +747,8 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
     context_realms = get_variable_from_lset_without_default('realms_per_context', context)
     processed_realms = []
     for realm in context_realms:
-        if realm in processed_realms: continue
+        if realm in processed_realms:
+            continue
         processed_realms.append(realm)
         excludedv = dict()
         print "Processing realm '%s' of context '%s'" % (realm, context)
@@ -752,12 +772,15 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
                             reason = "They have no spatial shape "
                         if svar.spatial_shp in get_variable_from_lset_without_default("excluded_spshapes"):
                             reason = "They have excluded spatial shape : %s" % svar.spatial_shp
-                        if reason not in excludedv: excludedv[reason] = []
+                        if reason not in excludedv:
+                            excludedv[reason] = []
                         excludedv[reason].append((svar.label, svar.mipTable))
         if printout and len(excludedv.keys()) > 0:
             print "The following pairs (variable,table) have been excluded for these reasons :"
-            for reason in excludedv: print "\t", reason, ":", excludedv[reason]
-    if (debug): print "For table AMon: ", [v.label for v in svars_per_table["Amon"]]
+            for reason in excludedv:
+                print "\t", reason, ":", excludedv[reason]
+    if debug:
+        print "For table AMon: ", [v.label for v in svars_per_table["Amon"]]
     #
     # --------------------------------------------------------------------
     # Add svars belonging to the orphan list
@@ -810,7 +833,8 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
                 if dummies == "forbid":
                     if len(pingvars) != len(ping_refs):
                         for v in ping_refs:
-                            if v not in pingvars: print v,
+                            if v not in pingvars:
+                                print v,
                         print
                         raise dr2xml_error("They are still dummies in %s , while option is 'forbid' :" % pingfile)
                     else:
@@ -869,8 +893,10 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
         for table in sorted(svars_per_table.keys()):
             count = dict()
             for svar in sorted(svars_per_table[table], key=lambda x: (x.label + "_" + table)):
-                if get_variable_from_lset_with_default("allow_duplicates_in_same_table", False) or svar.mipVarLabel not in count:
-                    if not get_variable_from_lset_with_default("use_cmorvar_label_in_filename", False) and svar.mipVarLabel in count:
+                if get_variable_from_lset_with_default("allow_duplicates_in_same_table", False) \
+                        or svar.mipVarLabel not in count:
+                    if not get_variable_from_lset_with_default("use_cmorvar_label_in_filename", False) \
+                            and svar.mipVarLabel in count:
                         form = "If you really want to actually produce both %s and %s in table %s, " + \
                                "you must set 'use_cmorvar_label_in_filename' to True in lab settings"
                         raise dr2xml_error(form % (svar.label, count[svar.mipVarLabel].label, table))
@@ -886,8 +912,10 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
                     print "Duplicate variable %s,%s in table %s is skipped, preferred is %s" % \
                           (svar.label, svar.mipVarLabel, table, count[svar.mipVarLabel].label)
 
-        if cfsites_grid_id in grid_defs: out.write(cfsites_input_filedef())
-        for file_def in file_defs: out.write(file_defs[file_def])
+        if cfsites_grid_id in grid_defs:
+            out.write(cfsites_input_filedef())
+        for file_def in file_defs:
+            out.write(file_defs[file_def])
         out.write('\n</file_definition> \n')
         #
         # --------------------------------------------------------------------
@@ -897,16 +925,20 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
         # --------------------------------------------------------------------
         # Write all domain, axis, field defs needed for these file_defs
         out.write('<field_definition> \n')
-        if get_variable_from_lset_with_default("nemo_sources_management_policy_master_of_the_world", False) and context == 'nemo':
+        if get_variable_from_lset_with_default("nemo_sources_management_policy_master_of_the_world", False) \
+                and context == 'nemo':
             out.write('<field_group freq_op="_reset_" freq_offset="_reset_" >\n')
-        for obj in sorted(field_defs.keys()): out.write("\t" + field_defs[obj] + "\n")
-        if get_variable_from_lset_with_default("nemo_sources_management_policy_master_of_the_world", False) and context == 'nemo':
+        for obj in sorted(field_defs.keys()):
+            out.write("\t" + field_defs[obj] + "\n")
+        if get_variable_from_lset_with_default("nemo_sources_management_policy_master_of_the_world", False) \
+                and context == 'nemo':
             out.write('</field_group>\n')
         out.write('\n</field_definition> \n')
         #
         out.write('\n<axis_definition> \n')
         out.write('<axis_group prec="8">\n')
-        for obj in sorted(axis_defs.keys()): out.write("\t" + axis_defs[obj] + "\n")
+        for obj in sorted(axis_defs.keys()):
+            out.write("\t" + axis_defs[obj] + "\n")
         if False and get_variable_from_lset_with_default('use_union_zoom', False):
             for obj in sorted(union_axis_defs.keys()):
                 out.write("\t" + union_axis_defs[obj] + "\n")
@@ -984,23 +1016,24 @@ def create_xios_axis_and_grids_for_plevs_unions(svars, plev_sfxs, dummies, axis_
     # First, search plev unions for each label_without_psuffix and build dict_plevs
     dict_plevs = {}
     for sv in svars:
-        if not sv.modeling_realm: print "Warning: no modeling_realm associated to:", \
-            sv.label, sv.mipTable, sv.mip_era
+        if not sv.modeling_realm:
+            print "Warning: no modeling_realm associated to:", sv.label, sv.mipTable, sv.mip_era
         for sd in sv.sdims.values():
             # couvre les dimensions verticales de type 'plev7h' ou 'p850'
             if sd.label.startswith("p") and any(sd.label.endswith(s) for s in plev_sfxs) and sd.label != 'pl700':
                 lwps = sv.label_without_psuffix
                 if lwps:
-                    present_in_ping = ping_refs.has_key(prefix + lwps)
+                    present_in_ping = (prefix + lwps) in ping_refs
                     dummy_in_ping = None
-                    if present_in_ping: dummy_in_ping = ("dummy" in ping_refs[prefix + lwps])
+                    if present_in_ping:
+                        dummy_in_ping = ("dummy" in ping_refs[prefix + lwps])
 
                     if present_in_ping and (not dummy_in_ping or dummies == 'include'):
                         sv.sdims[sd.label].is_zoom_of = "union_plevs_" + lwps
-                        if not dict_plevs.has_key(lwps):
+                        if lwps not in dict_plevs:
                             dict_plevs[lwps] = {sd.label: {sv.label: sv}}
                         else:
-                            if not dict_plevs[lwps].has_key(sd.label):
+                            if sd.label not in dict_plevs[lwps]:
                                 dict_plevs[lwps].update({sd.label: {sv.label: sv}})
                             else:
                                 if sv.label not in dict_plevs[lwps][sd.label].keys():
@@ -1010,14 +1043,16 @@ def create_xios_axis_and_grids_for_plevs_unions(svars, plev_sfxs, dummies, axis_
                                     pass
                     else:
                         if printout:
-                            print "Info: ", lwps, "not taken into account for building plevs union axis because ", prefix + lwps,
+                            print "Info: ", lwps, "not taken into account for building plevs union axis because ", \
+                                prefix + lwps,
                             if not present_in_ping:
-                                print  "is not an entry in the pingfile"
+                                print "is not an entry in the pingfile"
                             else:
                                 print "has a dummy reference in the pingfile"
 
                     # svar will be expected on a zoom axis of the union. Corresponding vertical dim must
-                    # have a zoom_label named plevXX_<lwps> (multiple pressure levels) or pXX_<lwps> (single pressure level)
+                    # have a zoom_label named plevXX_<lwps> (multiple pressure levels)
+                    # or pXX_<lwps> (single pressure level)
                     sv.sdims[sd.label].zoom_label = 'zoom_' + sd.label + "_" + lwps
                 else:
                     print "Warning: dim is pressure but label_without_psuffix=", lwps, \
@@ -1042,11 +1077,16 @@ def create_xios_axis_and_grids_for_plevs_unions(svars, plev_sfxs, dummies, axis_
                     # on reecrase les attributs de sdim_union a chaque nouveau plev. Pas utile mais
                     # c'est la facon la plus simple de faire
                     sdsv = sv.sdims[plev]
-                    if sdsv.stdname:   sdim_union.stdname = sdsv.stdname
-                    if sdsv.long_name: sdim_union.long_name = sdsv.long_name
-                    if sdsv.positive:  sdim_union.positive = sdsv.positive
-                    if sdsv.out_name:  sdim_union.out_name = sdsv.out_name
-                    if sdsv.units:     sdim_union.units = sdsv.units
+                    if sdsv.stdname:
+                        sdim_union.stdname = sdsv.stdname
+                    if sdsv.long_name:
+                        sdim_union.long_name = sdsv.long_name
+                    if sdsv.positive:
+                        sdim_union.positive = sdsv.positive
+                    if sdsv.out_name:
+                        sdim_union.out_name = sdsv.out_name
+                    if sdsv.units:
+                        sdim_union.units = sdsv.units
                     if sdsv.requested:
                         # case of multi pressure levels
                         plev_values = set(sdsv.requested.split())
@@ -1058,18 +1098,25 @@ def create_xios_axis_and_grids_for_plevs_unions(svars, plev_sfxs, dummies, axis_
                     else:
                         print "Warning: No requested nor value found for", svar.label, "with vertical dimesion", plev
                     plevs_union = plevs_union.union(plev_values)
-                    if printout: print "    -- on", plev, ":", plev_values
-                if printout: print "       *", sv.label, "(", sv.mipTable, ")"
+                    if printout:
+                        print "    -- on", plev, ":", plev_values
+                if printout:
+                    print "       *", sv.label, "(", sv.mipTable, ")"
         list_plevs_union = list(plevs_union)
         list_plevs_union_num = [float(lev) for lev in list_plevs_union]
         list_plevs_union_num.sort(reverse=True)
         list_plevs_union = [str(lev) for lev in list_plevs_union_num]
-        for lev in list_plevs_union: plevs_union_xios += " " + lev
-        if printout: print ">>> XIOS plevs union:", plevs_union_xios
+        for lev in list_plevs_union:
+            plevs_union_xios += " " + lev
+        if printout:
+            print ">>> XIOS plevs union:", plevs_union_xios
         sdim_union.label = "union_plevs_" + lwps
-        if len(list_plevs_union) > 1: sdim_union.requested = plevs_union_xios
-        if len(list_plevs_union) == 1: sdim_union.value = plevs_union_xios
-        if printout: print "creating axis def for union :%s" % sdim_union.label
+        if len(list_plevs_union) > 1:
+            sdim_union.requested = plevs_union_xios
+        if len(list_plevs_union) == 1:
+            sdim_union.value = plevs_union_xios
+        if printout:
+            print "creating axis def for union :%s" % sdim_union.label
         axis_def = create_axis_def(sdim_union, union_axis_defs, field_defs)
         create_grid_def(union_grid_defs, axis_def, sdim_union.out_name,
                         id2gridid(prefix + lwps, get_config_variable("context_index")))
@@ -1117,8 +1164,9 @@ def pingFileForRealmsList(settings, context, lrealms, svars, path_special, dummy
     from DR-standard ones
 
     """
-    name = "";
-    for r in lrealms: name += "_" + r.replace(" ", "%")
+    name = ""
+    for r in lrealms:
+        name += "_" + r.replace(" ", "%")
     lvars = []
     for v in svars:
         if exact:
@@ -1137,14 +1185,14 @@ def pingFileForRealmsList(settings, context, lrealms, svars, path_special, dummy
     # Remove duplicates : want to get one single entry for all variables having
     # the same label without psuffix, and one for each having different non-ambiguous label
     # Keep the one with the best piority
-    uniques = [];
+    uniques = []
     best_prio = dict()
     for v in lvars:
         lna = v.label_non_ambiguous
         lwps = v.label_without_psuffix
-        if (not lna in best_prio) or (lna in best_prio and v.Priority < best_prio[lna].Priority):
+        if (lna not in best_prio) or (lna in best_prio and v.Priority < best_prio[lna].Priority):
             best_prio[lna] = v
-        elif (not lwps in best_prio) or (lwps in best_prio and v.Priority < best_prio[lwps].Priority):
+        elif (lwps not in best_prio) or (lwps in best_prio and v.Priority < best_prio[lwps].Priority):
             best_prio[lwps] = v
         # elif not v.label_without_psuffix in labels :
         #    uniques.append(v); labels.append(v.label_without_psuffix)
@@ -1153,8 +1201,10 @@ def pingFileForRealmsList(settings, context, lrealms, svars, path_special, dummy
     lvars = best_prio.values()
     lvars.sort(key=lambda x: x.label_without_psuffix)
     #
-    if filename is None: filename = "ping" + name + ".xml"
-    if filename[-4:] != ".xml": filename += ".xml"
+    if filename is None:
+        filename = "ping" + name + ".xml"
+    if filename[-4:] != ".xml":
+        filename += ".xml"
     #
     if path_special:
         specials = read_special_fields_defs(lrealms, path_special)
@@ -1166,41 +1216,41 @@ def pingFileForRealmsList(settings, context, lrealms, svars, path_special, dummy
         fp.write('<!-- lrealms= %s -->\n' % `lrealms`)
         fp.write('<!-- exact= %s -->\n' % `exact`)
         fp.write('<!-- ')
-        for s in settings: fp.write(' %s : %s\n' % (s, settings[s]))
+        for s in settings:
+            fp.write(' %s : %s\n' % (s, settings[s]))
         fp.write('--> \n\n')
         fp.write('<context id="%s">\n' % context)
         fp.write("<field_definition>\n")
         if settings.get("nemo_sources_management_policy_master_of_the_world", False) and context == 'nemo':
             out.write('<field_group freq_op="_reset_ freq_offset="_reset_" >\n')
         if exact:
-            fp.write("<!-- for variables which realm intersects any of " \
-                     + name + "-->\n")
+            fp.write("<!-- for variables which realm intersects any of " + name + "-->\n")
         else:
-            fp.write("<!-- for variables which realm equals one of " \
-                     + name + "-->\n")
+            fp.write("<!-- for variables which realm equals one of " + name + "-->\n")
         for v in lvars:
             if v.label_non_ambiguous:
                 label = v.label_non_ambiguous
             else:
                 label = v.label_without_psuffix
-            if (v.label in debug): print "pingFile ... processing %s in table %s, label=%s" % (
-            v.label, v.mipTable, label)
+            if (v.label in debug):
+                print "pingFile ... processing %s in table %s, label=%s" % (v.label, v.mipTable, label)
 
             if specials and label in specials:
                 line = ET.tostring(specials[label]).replace("DX_", prefix)
                 # if 'ta' in label : print "ta is special : "+line
                 line = line.replace("\n", "").replace("\t", "")
-                fp.write('   ');
+                fp.write('   ')
                 fp.write(line)
             else:
-                fp.write('   <field id="%-20s' % (prefix + label + '"') + \
-                         ' field_ref="')
+                fp.write('   <field id="%-20s' % (prefix + label + '"') + ' field_ref="')
                 if dummy:
                     shape = highest_rank(v)
-                    if v.label_without_psuffix == 'clcalipso': shape = 'XYA'
+                    if v.label_without_psuffix == 'clcalipso':
+                        shape = 'XYA'
                     if dummy is True:
                         dummys = "dummy"
-                        if dummy_with_shape: dummys += "_" + shape
+                        if dummy_with_shape:
+                            dummys += "_" + shape
                     else:
                         dummys = dummy
                     fp.write('%-18s/>' % (dummys + '"'))
@@ -1208,14 +1258,14 @@ def pingFileForRealmsList(settings, context, lrealms, svars, path_special, dummy
                     fp.write('?%-16s' % (label + '"') + ' />')
             if comments:
                 # Add units, stdname and long_name as a comment string
-                if type(comments) == type(""): fp.write(comments)
-                fp.write("<!-- P%d (%s) %s : %s -->" \
-                         % (v.Priority, v.units, v.stdname, v.description))
+                if type(comments) == type(""):
+                    fp.write(comments)
+                fp.write("<!-- P%d (%s) %s : %s -->" % (v.Priority, v.units, v.stdname, v.description))
             fp.write("\n")
         if 'atmos' in lrealms or 'atmosChem' in lrealms or 'aerosol' in lrealms:
             for tab in ["ap", "ap_bnds", "b", "b_bnds"]:
-                fp.write('\t<field id="%s%s" field_ref="dummy_hyb" /><!-- One of the hybrid coordinate arrays -->\n' % (
-                prefix, tab))
+                fp.write('\t<field id="%s%s" field_ref="dummy_hyb" /><!-- One of the hybrid coordinate arrays -->\n'
+                         % (prefix, tab))
         if settings.get("nemo_sources_management_policy_master_of_the_world", False) and context == 'nemo':
             out.write('</field_group>\n')
         fp.write("</field_definition>\n")
@@ -1235,7 +1285,8 @@ def copy_obj_from_DX_file(fp, obj, prefix, lrealms, path_special):
     subrealms_seen = []
     for realm in lrealms:
         for subrealm in realm.split():
-            if subrealm in subrealms_seen: continue
+            if subrealm in subrealms_seen:
+                continue
             subrealms_seen.append(subrealm)
             # print "\tand realm %s"%subrealm,
             defs = DX_defs_filename(obj, subrealm, path_special)
@@ -1268,7 +1319,8 @@ def get_xml_childs(elt, tag='field', groups=['context', 'field_group',
         """
     if elt.tag in groups:
         rep = []
-        for child in elt: rep.extend(get_xml_childs(child, tag))
+        for child in elt:
+            rep.extend(get_xml_childs(child, tag))
         return rep
     elif elt.tag == tag:
         return [elt]
@@ -1289,24 +1341,29 @@ def read_xml_elmt_or_attrib(filename, tag='field', attrib=None, printout=False):
     """
     #
     rep = dict()
-    if printout: print "processing file %s :" % filename,
+    if printout:
+        print "processing file %s :" % filename,
     if os.path.exists(filename):
-        if printout: print "OK", filename
+        if printout:
+            print "OK", filename
         root = ET.parse(filename).getroot()
         defs = get_xml_childs(root, tag)
         if defs:
             for field in defs:
-                if printout: print ".",
+                if printout:
+                    print ".",
                 key = field.attrib['id']
                 if attrib is None:
                     value = field
                 else:
                     value = field.attrib.get(attrib, None)
                 rep[key] = value
-            if printout: print
+            if printout:
+                print
             return rep
     else:
-        if printout: print "No file "
+        if printout:
+            print "No file "
         return None
 
 
@@ -1315,14 +1372,17 @@ def read_special_fields_defs(realms, path_special, printout=False):
     subrealms_seen = []
     for realm in realms:
         for subrealm in realm.split():
-            if subrealm in subrealms_seen: continue
+            if subrealm in subrealms_seen:
+                continue
             subrealms_seen.append(subrealm)
-            d = read_xml_elmt_or_attrib(DX_defs_filename("field", subrealm, path_special), \
-                                        tag='field', printout=printout)
-            if d: special.update(d)
+            d = read_xml_elmt_or_attrib(DX_defs_filename("field", subrealm, path_special), tag='field',
+                                        printout=printout)
+            if d:
+                special.update(d)
     rep = dict()
     # Use raw label as key
-    for r in special: rep[r.replace("DX_", "")] = special[r]
+    for r in special:
+        rep[r.replace("DX_", "")] = special[r]
     return rep
 
 
@@ -1333,7 +1393,7 @@ def highest_rank(svar):
     """
     # mipvarlabel=svar.label_without_area
     mipvarlabel = svar.label_without_psuffix
-    shapes = [];
+    shapes = []
     altdims = set()
     for cvar in get_collection('CMORvar').items:
         v = get_uid(cvar.vid)
@@ -1361,7 +1421,8 @@ def highest_rank(svar):
             # Pour recuperer le spatial_shp pour le cas de variables qui n'ont
             # pas un label CMORvar de la DR (ex. HOMEvar ou EXTRAvar)
             shape = svar.spatial_shp
-        if shape: shapes.append(shape)
+        if shape:
+            shapes.append(shape)
     # if not shapes : shape="??"
     if len(shapes) == 0:
         shape = "XY"
@@ -1441,10 +1502,13 @@ def create_standard_domains(domain_defs):
 
 def create_standard_domain(resol, ni, nj):
     return '<domain id="CMIP6_%s" ni_glo="%d" nj_glo="%d" type="rectilinear"  prec="8"> ' % (resol, ni, nj) + \
-           '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true"  mode="read_or_compute" write_weight="true" /> ' + \
+           '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true"  ' \
+           'mode="read_or_compute" write_weight="true" /> ' + \
            '</domain>  '
-    # return '<domain id="CMIP6_%s" ni_glo="%d" nj_glo="%d" type="rectilinear"  prec="8" lat_name="lat" lon_name="lon" > '%(resol,ni,nj) +\
-    #    '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true"  mode="read_or_compute" write_weight="true" /> '+\
+    # return '<domain id="CMIP6_%s" ni_glo="%d" nj_glo="%d" type="rectilinear"  prec="8" lat_name="lat" lon_name="lon" >
+    #  '%(resol,ni,nj) +\
+    #    '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true"  mode="read_or_compute"
+    #  write_weight="true" /> '+\
     #    '</domain>  '
 
 
@@ -1470,21 +1534,30 @@ def realm_is_processed(realm, source_type):
     components = source_type.split(" ")
     rep = True
     #
-    if realm == "atmosChem" and 'CHEM' not in components: return False
-    if realm == "aerosol" and 'AER' not in components: return False
-    if realm == "ocnBgChem" and 'BGC' not in components: return False
+    if realm == "atmosChem" and 'CHEM' not in components:
+        return False
+    if realm == "aerosol" and 'AER' not in components:
+        return False
+    if realm == "ocnBgChem" and 'BGC' not in components:
+        return False
     #
     with_ocean = ('OGCM' in components or 'AOGCM' in components)
-    if 'seaIce' in realm and not with_ocean: return False
-    if 'ocean' in realm and not with_ocean: return False
+    if 'seaIce' in realm and not with_ocean:
+        return False
+    if 'ocean' in realm and not with_ocean:
+        return False
     #
     with_atmos = ('AGCM' in components or 'AOGCM' in components)
-    if 'atmos' in realm and not with_atmos: return False
-    if 'atmosChem' in realm and not with_atmos: return False
-    if realm == '' and not with_atmos: return False  # In DR 01.00.15 : some atmos variables have realm=''
+    if 'atmos' in realm and not with_atmos:
+        return False
+    if 'atmosChem' in realm and not with_atmos:
+        return False
+    if realm == '' and not with_atmos:  # In DR 01.00.15 : some atmos variables have realm=''
+        return False
     #
     with_land = with_atmos or ('LAND' in components)
-    if 'land' in realm and not with_land: return False
+    if 'land' in realm and not with_land:
+        return False
     #
     return rep
 
@@ -1511,8 +1584,10 @@ def check_for_file_input(sv, hgrid, pingvars, field_defs, grid_defs, domain_defs
                                       '<generate_rectilinear_domain/></domain>'
         file_grid_id = "remapped_%s_file_grid" % sv.label
         grid_defs[file_grid_id] = '<grid id="%s"><domain domain_ref="%s"/></grid>\n' % (file_grid_id, file_domain_id)
-        if printout: print domain_defs[file_domain_id]
-        if printout: print grid_defs[file_grid_id]
+        if printout:
+            print domain_defs[file_domain_id]
+        if printout:
+            print grid_defs[file_grid_id]
 
         # Create xml for reading the variable
         filename = externs[sv.label][hgrid][get_grid_choice()]
@@ -1521,15 +1596,16 @@ def check_for_file_input(sv, hgrid, pingvars, field_defs, grid_defs, domain_defs
         # field_in_file_id=sv.label
         file_def = '\n<file id="%s" name="%s" mode="read" output_freq="1ts" enabled="true" >' % \
                    (file_id, filename)
-        file_def += '\n\t<field id="%s" name="%s" operation="instant" freq_op="1ts" freq_offset="1ts" grid_ref="%s"/>' % \
-                    (field_in_file_id, sv.label, file_grid_id)
+        file_def += '\n\t<field id="%s" name="%s" operation="instant" freq_op="1ts" freq_offset="1ts" grid_ref="%s"/>'\
+                    % (field_in_file_id, sv.label, file_grid_id)
         file_def += '\n</file>'
         file_defs[file_id] = file_def
-        if printout: print file_defs[file_id]
+        if printout:
+            print file_defs[file_id]
         #
         # field_def='<field id="%s" grid_ref="%s" operation="instant" >%s</field>'%\
-        field_def = '<field id="%s" grid_ref="%s" field_ref="%s" operation="instant" freq_op="1ts" freq_offset="0ts" />' % \
-                    (pingvar, grid_id, field_in_file_id)
+        field_def = '<field id="%s" grid_ref="%s" field_ref="%s" operation="instant" freq_op="1ts" ' \
+                    'freq_offset="0ts" />' % (pingvar, grid_id, field_in_file_id)
         field_defs[field_in_file_id] = field_def
         context_index = get_config_variable("context_index")
         context_index[pingvar] = ET.fromstring(field_def)

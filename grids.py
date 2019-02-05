@@ -42,8 +42,7 @@ def guess_simple_domain_grid_def(grid_id):
     regexp = get_variable_from_lset_without_default("simple_domain_grid_regexp")
     domain_id, n = re.subn(regexp[0], r'\%d' % regexp[1], grid_id)
     if n != 1:
-        raise dr2xml_error("Cannot identify domain name in grid_id %s using regexp %s" % \
-                           (grid_id, regexp[0]))
+        raise dr2xml_error("Cannot identify domain name in grid_id %s using regexp %s" % (grid_id, regexp[0]))
     grid_def = '<grid id="%s" ><domain domain_ref="%s"/></grid>' % (grid_id, domain_id)
     print("Warning: Guess that structure for grid %s is : %s" % (grid_id, grid_def))
     # raise dr2xml_error("Warning: Guess that structure for grid %s is : %s"%(grid_id,grid_def))
@@ -109,7 +108,7 @@ def create_axis_def(sdim, axis_defs, field_defs):
     if not sdim.is_zoom_of:  # pure interpolation
         # Axis is not a zoom of another, write axis_def normally (with value, interpolate_axis,etc.)
         rep = '<axis id="%s" ' % sdim.label
-        if not sdim.positive in [None, ""]:
+        if sdim.positive not in [None, ""]:
             rep += 'positive="%s" ' % sdim.positive
         if n_glo > 1:
             # Case of a non-degenerated vertical dimension (not a singleton)
@@ -127,8 +126,10 @@ def create_axis_def(sdim, axis_defs, field_defs):
         rep += ' long_name="%s"' % sdim.long_name
         rep += ' unit="%s"' % sdim.units
         rep += '>'
-        if sdim.stdname == "air_pressure": coordname = prefix + "pfull"
-        if sdim.stdname == "altitude": coordname = prefix + "zg"
+        if sdim.stdname == "air_pressure":
+            coordname = prefix + "pfull"
+        if sdim.stdname == "altitude":
+            coordname = prefix + "zg"
         #
         # Create an intemediate field for coordinate , just adding time sampling
         operation = get_variable_from_lset_with_default("vertical_interpolation_operation", "instant")
@@ -157,7 +158,8 @@ def create_axis_def(sdim, axis_defs, field_defs):
         values = values.split("\n")[0]
         union_vals = values.strip(" ").split()
         union_vals_num = [float(v) for v in union_vals]
-        for val in glo_list_num: rep += ' %g' % union_vals_num.index(val)
+        for val in glo_list_num:
+            rep += ' %g' % union_vals_num.index(val)
         rep += ' ]"/>'
         rep += '</axis>'
         # Store definition for the new axis
@@ -179,20 +181,21 @@ def change_domain_in_grid(domain_id, grid_defs, ping_alias=None, src_grid_id=Non
         src_grid_string = get_grid_def_with_lset(src_grid_id, grid_defs)
     target_grid_id = src_grid_id + "_" + domain_id
     # Change domain
-    domain_or_axis = "domain";
+    domain_or_axis = "domain"
     axis_name = ""
     if turn_into_axis:
-        domain_or_axis = "axis";
+        domain_or_axis = "axis"
         axis_name = ' name="lat"'
     # sequence below was too permissive re. assumption that all grid definition use refs rather than ids
-    # (target_grid_string,count)=re.subn('domain *id= *.([\w_])*.','%s id="%s" %s'%(domain_or_axis,domain_id,axis_name),\
-    #                                   src_grid_string,1)
+    # (target_grid_string,count)=re.subn('domain *id= *.([\w_])*.','%s id="%s" %s'% \
+    # (domain_or_axis,domain_id,axis_name), src_grid_string,1)
     # if count != 1 :
-    (target_grid_string, count) = re.subn('domain *domain_ref= *.([\w_])*.', '%s %s_ref="%s" %s' % \
-                                          (domain_or_axis, domain_or_axis, domain_id, axis_name), src_grid_string, 1)
+    (target_grid_string, count) = re.subn('domain *domain_ref= *.([\w_])*.',
+                                          '%s %s_ref="%s" %s' % (domain_or_axis, domain_or_axis, domain_id, axis_name),
+                                          src_grid_string, 1)
     if count != 1:
-        raise dr2xml_error("Fatal: cannot find a domain to replace by %s in src_grid_string %s, count=%d " % \
-                           (domain_id, src_grid_string, count))
+        raise dr2xml_error("Fatal: cannot find a domain to replace by %s"
+                           "in src_grid_string %s, count=%d " % (domain_id, src_grid_string, count))
     target_grid_string = re.sub('grid *id= *.([\w_])*.', 'grid id="%s"' % target_grid_id, target_grid_string)
     grid_defs[target_grid_id] = target_grid_string
     # print "target_grid_id=%s : %s"%(target_grid_id,target_grid_string)
@@ -231,18 +234,18 @@ def change_axes_in_grid(grid_id, grid_defs, axis_defs):
     if is_key_in_lset('sectors'):
         sectors = get_variable_from_lset_without_default('sectors')
     else:
-        sectors = [dim.label for dim in get_collection('grids').items if \
-                   dim.type == 'character' and dim.value == '']
-    if 'typewetla' in sectors: sectors.remove('typewetla')  # Error in DR 01.00.21
+        sectors = [dim.label for dim in get_collection('grids').items if dim.type == 'character' and dim.value == '']
+    if 'typewetla' in sectors:
+        sectors.remove('typewetla')  # Error in DR 01.00.21
     # print "sectors=",sectors
     for sector in sectors:
         found = False
         for aid in aliases:
             if aliases[aid] == sector:
-                found = True;
+                found = True
                 continue
             if type(aliases[aid]) == type(()) and aliases[aid][0] == sector:
-                found = True;
+                found = True
                 continue
         if not found:
             # print "\nadding sector : %s"%sector
@@ -268,9 +271,10 @@ def change_axes_in_grid(grid_id, grid_defs, axis_defs):
                 # print "for grid ",grid_id,"axis ",axis_ref, " is not in aliases"
                 continue
             #
-            dr_axis_id = aliases[axis_ref];
+            dr_axis_id = aliases[axis_ref]
             alt_labels = None
-            if type(dr_axis_id) == type(()): dr_axis_id, alt_labels = dr_axis_id
+            if type(dr_axis_id) == type(()):
+                dr_axis_id, alt_labels = dr_axis_id
             dr_axis_id = dr_axis_id.replace('axis_', '')  # For toy_cnrmcm, atmosphere part
             # print ">>> axis_ref=%s, dr_axis_id=%s,alt_labels=%s"%(axis_ref,dr_axis_id,alt_labels),aliases[axis_ref]
             #
@@ -287,7 +291,8 @@ def change_axes_in_grid(grid_id, grid_defs, axis_defs):
                 output_grid_id += "_" + dim.label
             else:
                 raise dr2xml_error("Dimension %s is scalar and shouldn't be quoted in 'non_standard_axes'" % dr_axis_id)
-    if len(axes_to_change) == 0: return grid_id
+    if len(axes_to_change) == 0:
+        return grid_id
     for old, new, name in axes_to_change:
         axis_count += 1
         grid_def = re.sub("< *axis[^>]*axis_ref= *.%s. *[^>]*>" % old,
@@ -308,7 +313,8 @@ def create_axis_from_dim(dim, labels, axis_ref, axis_defs):
         axis_name = "sector"
     else:
         axis_name = dim.altLabel
-    if axis_id in axis_defs: return axis_id, axis_name
+    if axis_id in axis_defs:
+        return axis_id, axis_name
 
     rep = '<axis id="%s" name="%s" axis_ref="%s"' % (axis_id, axis_name, axis_ref)
     if type(dim.standardName) == type(""):
@@ -334,15 +340,18 @@ def create_axis_from_dim(dim, labels, axis_ref, axis_defs):
             rep += ' bounds="(0,1)x(0,%d)[ ' % (nb - 1) + valsr + ' ]"'
     else:
         rep += ' dim_name="%s" ' % dim.altLabel
-        if labels is None: labels = dim.requested
+        if labels is None:
+            labels = dim.requested
         if dim.label == "oline" and get_variable_from_lset_with_default('add_Gibraltar', False):
             labels += " gibraltar"
         labels = labels.replace(', ', ' ').replace(',', ' ')
         length = len(labels.split())
         # print 'labels=',labels.split()
         strings = " "
-        for s in labels.split(): strings += "%s " % s
-        if length > 0: rep += ' label="(0,%d)[ %s ]"' % (length - 1, strings)
+        for s in labels.split():
+            strings += "%s " % s
+        if length > 0:
+            rep += ' label="(0,%d)[ %s ]"' % (length - 1, strings)
     rep += "/>"
     axis_defs[axis_id] = rep
     # print "new DR_axis :  %s "%rep

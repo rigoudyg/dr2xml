@@ -9,14 +9,13 @@ from utils import dr2xml_error
 
 
 # General variables
-version = "1.16" # dr2xml version
+version = "1.16"  # dr2xml version
 
 # CMIP6 variables
 conventions = "CF-1.7 CMIP-6.2"
 
 
 context_index = None
-
 
 
 # Functions to deal with those configuration variables

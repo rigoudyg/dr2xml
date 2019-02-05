@@ -1,7 +1,8 @@
 """
 Management of output grids
 
-Principles : the Data Request may specify which grid to use : either native or a common, regular, one. This specifed per requestLink, which means per set of variables and experiments.
+Principles : the Data Request may specify which grid to use : either native or a common, regular, one.
+             This specifed per requestLink, which means per set of variables and experiments.
 
 dr2xml allows for the lab to choose among various policy  :
    - DR or None : always follow DR spec
@@ -93,8 +94,8 @@ def CNRM_grid_policy(cmvarid, grids):  # TBD
     """
     if get_uid(cmvarid).label in ["sos"]:
         return [g for g in grids if g in ["", "1deg"]]
-    elif get_uid(cmvarid).label in ["tos"] and \
-            (get_uid(cmvarid).mipTable not in ["3hr"] or get_variable_from_lset_with_default("allow_tos_3hr_1deg", True)):
+    elif get_uid(cmvarid).label in ["tos"] and (get_uid(cmvarid).mipTable not in ["3hr"] or
+                                                get_variable_from_lset_with_default("allow_tos_3hr_1deg", True)):
         if get_variable_from_lset_with_default("adhoc_policy_do_add_1deg_grid_for_tos", False):
             if "" in grids:
                 l = [""]

@@ -9,8 +9,8 @@ import collections
 
 from dict_interface import get_variable_from_sset_and_lset_without_default, get_variable_from_lset_with_default, \
     get_variable_from_sset_without_default, get_source_id_and_type, get_variable_from_lset_without_default, \
-    is_key_in_sset, is_sset_not_None, get_variable_from_sset_with_default_in_sset, get_variable_from_sset_with_default, \
-    is_key_in_lset, get_variable_from_sset_else_lset_with_default
+    is_key_in_sset, is_sset_not_None, get_variable_from_sset_with_default_in_sset, \
+    get_variable_from_sset_with_default, is_key_in_lset, get_variable_from_sset_else_lset_with_default
 from dr_interface import get_request_by_id_by_sect, get_uid, get_experiment_label, initialize_sc
 from grids_selection import decide_for_grids
 from utils import dr2xml_error
@@ -21,7 +21,8 @@ print_multiple_grids = False
 grid_choice = None
 
 
-# global variable : the list of Request Links which apply for 'our' MIPS and which are not explicitly excluded using settings
+# global variable : the list of Request Links which apply for 'our' MIPS
+# and which are not explicitly excluded using settings
 # It is set in select_CMORvars_for_lab and used in endyear_for_CMORvar
 global_rls = None
 rls_for_all_experiments = None
@@ -56,16 +57,20 @@ def endyear_for_CMORvar(cv, expt, year, printout=False):
     global global_rls
 
     # Some debug material
-    if False and (cv.label == "clc"): printout = True
-    if printout: print "In end_year for %s %s" % (cv.label, cv.mipTable)
+    if False and (cv.label == "clc"):
+        printout = True
+    if printout:
+        print "In end_year for %s %s" % (cv.label, cv.mipTable)
     pmax = get_variable_from_sset_and_lset_without_default('max_priority')
 
     # 1- Get the RequestItems which apply to CmorVar
     rVarsUid = get_request_by_id_by_sect(cv.uid, 'requestVar')
     rVars = [get_uid(uid) for uid in rVarsUid if get_uid(uid).priority <= pmax]
-    if printout: print "les requestVars:", [rVar.title for rVar in rVars]
+    if printout:
+        print "les requestVars:", [rVar.title for rVar in rVars]
     VarGroups = [get_uid(rv.vgid) for rv in rVars]
-    if printout: print "les requestVars groups:", [rVg.label for rVg in VarGroups]
+    if printout:
+        print "les requestVars groups:", [rVg.label for rVg in VarGroups]
     RequestLinksId = []
     for vg in VarGroups:
         RequestLinksId.extend(get_request_by_id_by_sect(vg.uid, 'requestLink'))
@@ -74,12 +79,15 @@ def endyear_for_CMORvar(cv, expt, year, printout=False):
         rl = get_uid(rlid)
         if rl in global_rls:
             FilteredRequestLinks.append(rl)
-    if printout: print "les requestlinks:", [get_uid(rlid).label for rlid in RequestLinksId]
-    if printout: print "les FilteredRequestlinks:", [rl.label for rl in FilteredRequestLinks]
+    if printout:
+        print "les requestlinks:", [get_uid(rlid).label for rlid in RequestLinksId]
+    if printout:
+        print "les FilteredRequestlinks:", [rl.label for rl in FilteredRequestLinks]
     RequestItems = []
     for rl in FilteredRequestLinks:
         RequestItems.extend(get_request_by_id_by_sect(rl.uid, 'requestItem'))
-    if printout: print "les requestItems:", [get_uid(riid).label for riid in RequestItems]
+    if printout:
+        print "les requestItems:", [get_uid(riid).label for riid in RequestItems]
 
     # 2- Select those request links which include expt and year
     larger = None
@@ -129,7 +137,7 @@ def RequestItem_applies_for_exp_and_year(ri, experiment, year=None, debug=False)
     elif item_exp._h.label == 'exptgroup':
         if debug:
             print "%20s" % "Expt Group case ", item_exp.label,
-        exps_id = get_request_by_id_by_sect(ri.esid,'experiment')
+        exps_id = get_request_by_id_by_sect(ri.esid, 'experiment')
         for e in [get_uid(eid) for eid in exps_id]:
             if e.label == experiment:
                 if debug:
@@ -138,7 +146,7 @@ def RequestItem_applies_for_exp_and_year(ri, experiment, year=None, debug=False)
     elif item_exp._h.label == 'mip':
         if debug:
             print "%20s" % "Mip case ", get_uid(item_exp.label).label,
-        exps_id = get_request_by_id_by_sect(ri.esid,'experiment')
+        exps_id = get_request_by_id_by_sect(ri.esid, 'experiment')
         for e in [get_uid(eid) for eid in exps_id]:
             if debug:
                 print e.label, ",",
@@ -285,7 +293,7 @@ def year_in_ri_tslice(ri, exp, year, debug=False):
             endyear = False
             (refyear, starts) = get_variable_from_lset_without_default("branching", source, tslice.child)
             for start in starts:
-                if ((year - start >= tslice.start - refyear) and \
+                if ((year - start >= tslice.start - refyear) and
                         (year - start < tslice.start - refyear + tslice.nyears)):
                     relevant = True
                     lastyear = start + tslice.start - refyear + tslice.nyears - 1
@@ -297,8 +305,7 @@ def year_in_ri_tslice(ri, exp, year, debug=False):
                         print "slice OK : year=%d, start=%d tslice.start=%d refyear=%d tslice.nyears=%d lastyear=%d" % \
                               (year, start, tslice.start, refyear, tslice.nyears, lastyear)
         else:
-            raise dr2xml_error("For tslice %s, child %s start year is not documented" % \
-                               (tslice.title, tslice.child))
+            raise dr2xml_error("For tslice %s, child %s start year is not documented" % (tslice.title, tslice.child))
     else:
         raise dr2xml_error("type %s for time slice %s is not handled" % (tslice.type, tslice.title))
     if debug:
@@ -373,8 +380,7 @@ def select_CMORvars_for_lab(sset=False, year=None, printout=False):
         sc = initialize_sc(tierMax)
 
     # Set sizes for lab settings, if available (or use CNRM-CM6-1 defaults)
-    mcfg = collections.namedtuple('mcfg', \
-                                  ['nho', 'nlo', 'nha', 'nla', 'nlas', 'nls', 'nh1'])
+    mcfg = collections.namedtuple('mcfg', ['nho', 'nlo', 'nha', 'nla', 'nlas', 'nls', 'nh1'])
     if sset:
         source, source_type = get_source_id_and_type()
         grid_choice = get_variable_from_lset_without_default("grid_choice", source)
@@ -432,13 +438,16 @@ def select_CMORvars_for_lab(sset=False, year=None, printout=False):
             for ri_id in ri_ids:
                 ri = get_uid(ri_id)
                 # debug=(ri.label=='C4mipC4mipLandt2')
-                if debug: print "Checking requestItem ", ri.title,
+                if debug:
+                    print "Checking requestItem ", ri.title,
                 applies, endyear = RequestItem_applies_for_exp_and_year(ri, experiment_id, year, debug)
                 if applies:
-                    if debug: print " applies "
+                    if debug:
+                        print " applies "
                     filtered_rls.append(rl)
                 else:
-                    if debug: print " does not apply "
+                    if debug:
+                        print " does not apply "
 
         rls = filtered_rls
         if printout:
@@ -469,7 +478,8 @@ def select_CMORvars_for_lab(sset=False, year=None, printout=False):
             cmvar = get_uid(v)
             st = get_uid(cmvar.stid)
             sp = get_uid(st.spid)
-            if sp.label[0:2] == "S-": gr = 'cfsites'
+            if sp.label[0:2] == "S-":
+                gr = 'cfsites'
             if (v, gr) not in miprl_vars_grids:
                 miprl_vars_grids.append((v, gr))
                 # if 'ua' in cmvar.label : print "adding %s %s"%(cmvar.label,get_uid(cmvar.vid).label)
@@ -505,13 +515,9 @@ def select_CMORvars_for_lab(sset=False, year=None, printout=False):
         cmvar = get_uid(v)
         ttable = get_uid(cmvar.mtid)
         mipvar = get_uid(cmvar.vid)
-        if ((len(incvars) == 0 and mipvar.label not in excvars) or \
-            (len(incvars) > 0 and mipvar.label in incvars)) \
-                and \
-                ((len(inctab) > 0 and ttable.label in inctab) or \
-                 (len(inctab) == 0 and ttable.label not in exctab)) \
-                and \
-                ((mipvar.label, ttable.label) not in excpairs):
+        if ((len(incvars) == 0 and mipvar.label not in excvars) or (len(incvars) > 0 and mipvar.label in incvars))\
+                and ((len(inctab) > 0 and ttable.label in inctab) or (len(inctab) == 0 and ttable.label not in exctab))\
+                and ((mipvar.label, ttable.label) not in excpairs):
             filtered_vars.append((v, g))
             if debug:
                 print "adding var %s, grid=%s, ttable=%s=" % (cmvar.label, g, ttable.label)  # ,exctab,excvars
@@ -526,7 +532,8 @@ def select_CMORvars_for_lab(sset=False, year=None, printout=False):
     # Filter the list of grids requested for each variable based on lab policy
     d = dict()
     for (v, g) in filtered_vars:
-        if v not in d: d[v] = set()
+        if v not in d:
+            d[v] = set()
         d[v].add(g)
     if printout:
         print 'Number of distinct CMOR variables (whatever the grid) : %d' % len(d)

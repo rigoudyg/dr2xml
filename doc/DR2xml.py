@@ -128,11 +128,13 @@ if lab == 'cnrm' or lab == 'cerfacs':
         "grids": {
             "LR": {
                 "arpsfx": ["gr", "complete", "250 km",
-                           "data regridded to a T127 gaussian grid (128x256 latlon) from a native atmosphere T127l reduced gaussian grid"],
+                           "data regridded to a T127 gaussian grid (128x256 latlon) "
+                           "from a native atmosphere T127l reduced gaussian grid"],
                 "nemo": ["gn", "", "100 km", "native ocean tri-polar grid with 105 k ocean cells"], },
             "HR": {
                 "arpsfx": ["gr", "completeHR", "50 km",
-                           "data regridded to a 359 gaussian grid (180x360 latlon) from a native atmosphere T359l reduced gaussian grid"],
+                           "data regridded to a 359 gaussian grid (180x360 latlon) "
+                           "from a native atmosphere T359l reduced gaussian grid"],
                 "nemo": ["gn", "", "25 km", "native ocean tri-polar grid with 1.47 M ocean cells"], },
         },
         "grid_choice": {"CNRM-CM6-1": "LR", "CNRM-CM6-1-HR": "HR", "CNRM-ESM2-1": "LR", "CNRM-ESM2-1-HR": "HR"},
@@ -161,11 +163,11 @@ if lab == 'cerfacs':
         # "path_to_parse"       : "./input_labs/cerfacs/to_parse/for_toy_grid_"+resol,
         # "grids" : {
         #  "LR"    : {
-        #    "arpsfx" : [ "gn","reduced-gaussian_LR" ,"250 km", "native atmosphere T127l reduced gaussian grid"] ,
-        #      "nemo" : [ "gn", ""        , "100 km" , "native ocean tri-polar grid ORCA1 with 105 k ocean cells" ],},
+        #    "arpsfx" : ["gn","reduced-gaussian_LR" ,"250 km", "native atmosphere T127l reduced gaussian grid"] ,
+        #      "nemo" : ["gn", ""        , "100 km" , "native ocean tri-polar grid ORCA1 with 105 k ocean cells"],},
         #  "HR"    : {
-        #    "arpsfx" : [ "gn","reduced-gaussian_HR", "50 km", "native atmosphere T359l reduced gaussian grid"] ,
-        #      "nemo" : [ "gn", ""         , "25 km" , "native ocean tri-polar grid ORCA025 with 1.47 M ocean cells" ],},
+        #    "arpsfx" : ["gn","reduced-gaussian_HR", "50 km", "native atmosphere T359l reduced gaussian grid"] ,
+        #      "nemo" : ["gn", ""         , "25 km" , "native ocean tri-polar grid ORCA025 with 1.47 M ocean cells"],},
         # },
         'comments': {},
         'contact': 'contact.cmip6@cerfacs.fr',
@@ -321,17 +323,19 @@ simulation_settings = {
     #
     # --- All about the parent experiment and branching scheme
     "parent_experiment_id": "piControl",
-# Optional, default is False. Omit it (or set it to 'no parent') if not applicable
+    # Optional, default is False. Omit it (or set it to 'no parent') if not applicable
     # Others parent and branch attributes will be disregarded if omitted or set to 'no parent'
     # but will be required id parent_experiment_id is defined.
     #
     "parent_mip_era": 'CMIP5',
-# Optional, default is 'mip_era'. Only in special cases (e.g. PMIP warm start from CMIP5/PMIP3 experiment)
+    # Optional, default is 'mip_era'. Only in special cases (e.g. PMIP warm start from CMIP5/PMIP3 experiment)
     "parent_activity_id": 'CMIP',  # Optional, default is 'activity_id'. Only in special cases, defaults to CMIP
     "parent_source_id": 'CNRM-CM5.1',
-# Optional, default is 'source_id'. Only in special cases, where parent model is not the same model
+    # Optional, default is 'source_id'. Only in special cases, where parent model is not the same model
     # "parent_time_ref_year" : '1950'       # Optional, default is '1850'. Is used to build 'parent_time_units'
-    # "parent_time_units"    : "days sice 1950-31-12 00:00:00"  # Default is 'days since <parent_time_ref_year>-01-01 00:00:00'.   # Default is ???. In case it is not the same as child time units
+    # "parent_time_units"    : "days sice 1950-31-12 00:00:00"
+    #                                                   # Default is 'days since <parent_time_ref_year>-01-01 00:00:00'.
+    #                                                   # Default is ???. In case it is not the same as child time units
     # "parent_variant_label" : "r3i1p1f2"   # Optional, default is 'variant label'. Other cases should be expceptional
     "branch_method": "standard",  # Optional, default is 'standard'. Meaning ~ "select a start date"
     "branch_time_in_parent": "365.0D0",  # Optional, default is False. A double precision value, in parent time units
@@ -362,7 +366,7 @@ if lab == 'cerfacs':
         "physics_index": 1,  # Value may be omitted if = 1
         "forcing_index": 1,  # Value may be omitted if = 1
         "parent_experiment_id": "no parent",
-    # Optional, default is False. Omit this setting (or set it to 'no parent') if not applicable
+        # Optional, default is False. Omit this setting (or set it to 'no parent') if not applicable
         # Others parent and branch attributes will be disregarded if omitted or set to 'no parent'
         # but will be required id parent_experiment_id is defined.
         # "variant_info"         : "Petite variation en Re mineur",

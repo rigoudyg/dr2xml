@@ -7,7 +7,10 @@
 #   <opaque>    context = init_context(context_name,printout=False)
 #   <ET object>    grid = id2grid(field_id,context,printout=False)
 
-import os, os.path, re, sys
+import os
+import os.path
+import re
+import sys
 import xml.etree.ElementTree as ET
 
 # Define for each object kind those attributes useful for grid inheritance
@@ -297,7 +300,8 @@ def id2grid(field_id, index, printout=False):
                     print "grid_ref value for %s is %s" % (grid_ref_field_id, `index[grid_ref_field_id]`)
                 return index[grid_ref_field_id]
             else:
-                # if printout: print("field %s grid reference is %s but that field has no grid"%(field_id,grid_ref_field_id))
+                # if printout: print("field %s grid reference is %s
+                # but that field has no grid"%(field_id,grid_ref_field_id))
                 raise Xparse_error(
                     "field %s grid reference is %s but that field no grid" % (field_id, grid_ref_field_id))
         else:
@@ -340,7 +344,7 @@ if False:
     # grid=None
     if grid is not None:
         # print "Grid id is :"+grid.attrib['id']
-        print ET.tostring(grid);
+        print ET.tostring(grid)
         grid_string = ET.tostring(grid)
         new_grid_string = re.sub('axis_ref= *.([\w_])*.', 'axis_ref="axis_autre"', grid_string)
         print new_grid_string

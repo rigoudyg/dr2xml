@@ -29,7 +29,8 @@ def get_SpatialAndTemporal_Shapes(cmvar):
     temporal_shape = False
     if cmvar.stid == "__struct_not_found_001__":
         if print_DR_errors:
-            print "Warning: stid for ", cmvar.label, " in table ", cmvar.mipTable, " is a broken link to structure in DR: ", cmvar.stid
+            print "Warning: stid for ", cmvar.label, " in table ", cmvar.mipTable,\
+                " is a broken link to structure in DR: ", cmvar.stid
     else:
         struct = get_uid(cmvar.stid)
         spatial_shape = get_uid(struct.spid).label
@@ -53,7 +54,8 @@ def analyze_ambiguous_MIPvarnames(debug=[]):
     for v in get_collection('var').items:
         if v.label not in d:
             d[v.label] = []
-            if v.label in debug: print "Adding %s" % v.label
+            if v.label in debug:
+                print "Adding %s" % v.label
         refs = get_request_by_id_by_sect(v.uid, 'CMORvar')
         for r in refs:
             d[v.label].append(get_uid(r))
@@ -76,14 +78,18 @@ def analyze_ambiguous_MIPvarnames(debug=[]):
                 if cm is not None:
                     area = cellmethod2area(cm)
                     realm = cv.modeling_realm
-                    if (area == 'sea' and realm == 'ocean'): area = None
+                    if (area == 'sea' and realm == 'ocean'):
+                        area = None
                     # realm=""
-                    if vlabel in debug: print "for %s 's CMORvar %s(%s), area=%s" % (
-                    vlabel, cv.label, cv.mipTable, area)
-                    if realm not in d[vlabel]: d[vlabel][realm] = dict()
-                    if area not in d[vlabel][realm]: d[vlabel][realm][area] = []
+                    if vlabel in debug:
+                        print "for %s 's CMORvar %s(%s), area=%s" % (vlabel, cv.label, cv.mipTable, area)
+                    if realm not in d[vlabel]:
+                        d[vlabel][realm] = dict()
+                    if area not in d[vlabel][realm]:
+                        d[vlabel][realm][area] = []
                     d[vlabel][realm][area].append(cv.mipTable)
-            if vlabel in debug: print vlabel, d[vlabel]
+            if vlabel in debug:
+                print vlabel, d[vlabel]
         else:
             d[vlabel] = None
 
@@ -143,7 +149,8 @@ def analyze_priority(cmvar, lmips):
         rv = get_uid(rv_id)
         vg = get_uid(rv.vgid)
         if vg.mip in lmips:
-            if rv.priority < prio: prio = rv.priority
+            if rv.priority < prio:
+                prio = rv.priority
     return prio
 
 

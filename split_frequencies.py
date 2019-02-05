@@ -19,7 +19,8 @@ def read_splitfreqs():
     """
     global splitfreqs
     # No need to reread or try for ever
-    if splitfreqs is not None: return
+    if splitfreqs is not None:
+        return
     try:
         freq = open("splitfreqs.dat", "r")
         print "Reading split_freqs from file"
@@ -30,7 +31,8 @@ def read_splitfreqs():
     freq.close()
     splitfreqs = dict()
     for line in lines:
-        if line[0] == '#': continue
+        if line[0] == '#':
+            continue
         varlabel = line.split()[0]
         table = line.split()[1]
         freq = line.split()[2]
@@ -52,7 +54,8 @@ def read_compression_factors():
     """
     global compression_factor
     # No need to reread or try for ever
-    if compression_factor is not None: return
+    if compression_factor is not None:
+        return
     try:
         fact = open("compression_factors.dat", "r")
     except:
@@ -61,7 +64,8 @@ def read_compression_factors():
     lines = fact.readlines()
     compression_factor = dict()
     for line in lines:
-        if line[0] == '#': continue
+        if line[0] == '#':
+            continue
         varlabel = line.split()[0]
         table = line.split()[1]
         factor = float(line.split()[2])
@@ -84,7 +88,8 @@ def split_frequency_for_variable(svar, grid, mcfg, context, printout=False):
 
     """
     global splitfreqs
-    if splitfreqs is None: read_splitfreqs()
+    if splitfreqs is None:
+        read_splitfreqs()
     if splitfreqs and svar.label in splitfreqs and \
             svar.mipTable in splitfreqs[svar.label]:
         return splitfreqs[svar.label][svar.mipTable]
@@ -93,14 +98,15 @@ def split_frequency_for_variable(svar, grid, mcfg, context, printout=False):
     #
     global compression_factor
     size = field_size(svar, mcfg) * get_variable_from_lset_with_default("bytes_per_float", 2)
-    if compression_factor is None: read_compression_factors()
+    if compression_factor is None:
+        read_compression_factors()
     if compression_factor and svar.label in compression_factor and \
             svar.mipTable in compression_factor[svar.label]:
-        if printout: print "Dividing size of %s by %g : %g -> %g" % (svar.label, \
-                                                                     compression_factor[svar.label][svar.mipTable],
-                                                                     size, \
-                                                                     (size + 0.) / compression_factor[svar.label][
-                                                                         svar.mipTable])
+        if printout:
+            print "Dividing size of %s by %g : %g -> %g" % (svar.label,
+                                                            compression_factor[svar.label][svar.mipTable],
+                                                            size,
+                                                            (size + 0.) / compression_factor[svar.label][svar.mipTable])
         size = (size + 0.) / compression_factor[svar.label][svar.mipTable]
     # else:
     #    # Some COSP outputs are highly compressed
@@ -113,7 +119,8 @@ def split_frequency_for_variable(svar, grid, mcfg, context, printout=False):
         # Try by years first
         size_per_year = size * timesteps_per_freq_and_duration(freq, 365, sts)
         nbyears = max_size / float(size_per_year)
-        if printout: print "size per year=%s, size=%s, nbyears=%g" % (`size_per_year`, `size`, nbyears)
+        if printout:
+            print "size per year=%s, size=%s, nbyears=%g" % (`size_per_year`, `size`, nbyears)
         if nbyears > 1.:
             if nbyears > 500:
                 return "500y"
@@ -152,9 +159,8 @@ def split_frequency_for_variable(svar, grid, mcfg, context, printout=False):
                 if nbdays > 1.:
                     return ("1d")
                 else:
-                    raise (dr2xml_grids_error("No way to put even a single day " + \
-                                              "of data in %g for frequency %s, var %s, table %s" % \
-                                              (max_size, freq, svar.label, svar.mipTable)))
+                    raise (dr2xml_grids_error("No way to put even a single day of data in %g for frequency %s, var %s,"
+                                              " table %s" % (max_size, freq, svar.label, svar.mipTable)))
     else:
         raise dr2xml_grids_error(
             "Warning: field_size returns 0 for var %s, cannot compute split frequency." % (svar.label))
@@ -263,7 +269,8 @@ def field_size(svar, mcfg):
     elif (s == "Y-na"):  # Zonal mean (on surface)
         siz = nb_lat
     elif (s == "na-A"):  # Atmospheric profile (model levels)
-        # mpmoine_correction:field_size: 'na-A' s'applique a des dims (alevel)+spectband mais aussi a (alevel,site) => *nb_cosp_sites
+        # mpmoine_correction:field_size: 'na-A' s'applique a des dims (alevel)+spectband mais aussi a (alevel,site)
+        # => *nb_cosp_sites
         siz = atm_nblev * nb_cosp_sites
 
     elif (s == "XY-S"):  # Global field on soil levels

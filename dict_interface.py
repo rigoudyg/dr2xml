@@ -60,7 +60,7 @@ def get_variable_from_dict_without_default(dictionary, args):
         return get_variable_from_dict_without_default(dictionary=newdict, args=args[1:])
     elif len(args) == 1:
         return dictionary[args[0]]
-    else: # Should not happen
+    else:  # Should not happen
         raise dr2xml_error("Could not guess which key to look for.")
 
 
@@ -74,7 +74,6 @@ def get_variable_from_sset_with_default_in_sset(key, key_default):
 
 def get_variable_from_sset_without_default(*args):
     return get_variable_from_dict_without_default(dictionary=sset, args=args)
-
 
 
 def is_key_in_lset(key):
@@ -102,7 +101,7 @@ def get_source_id_and_type():
         if sset["configuration"] in lset["configurations"]:
             source_id, source_type, unused = lset["configurations"][sset["configuration"]]
         else:
-            raise dr2xml_error("configuration %s is not known (allowed values are :)" % \
+            raise dr2xml_error("configuration %s is not known (allowed values are :)" %
                                sset["configuration"] + `lset["configurations"]`)
     else:
         source_id = sset['source_id']

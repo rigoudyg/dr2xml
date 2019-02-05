@@ -54,9 +54,9 @@ def print_SomeStats(context, svars_per_table, skipped_vars_per_table, actually_w
                     shp = sv.spatial_shp
                     prio = sv.Priority
                     var = sv.label
-                    if stats_out.has_key(freq):
+                    if freq in stats_out:
                         dic_freq = stats_out[freq]
-                        if dic_freq.has_key(shp):
+                        if shp in dic_freq:
                             dic_shp = dic_freq[shp]
                     dic_shp.update({var: table + "-P" + str(prio)})
                     dic_freq.update({shp: dic_shp})
@@ -67,10 +67,14 @@ def print_SomeStats(context, svars_per_table, skipped_vars_per_table, actually_w
         #    ((sv.label,sv.table,sv.frequency,sv.Priority,sv.spatial_shp))
         dic = dict()
         for label, long_name, table, frequency, Priority, spatial_shp in actually_written_vars:
-            if frequency not in dic: dic[frequency] = dict()
-            if spatial_shp not in dic[frequency]: dic[frequency][spatial_shp] = dict()
-            if table not in dic[frequency][spatial_shp]: dic[frequency][spatial_shp][table] = dict()
-            if Priority not in dic[frequency][spatial_shp][table]: dic[frequency][spatial_shp][table][Priority] = []
+            if frequency not in dic:
+                dic[frequency] = dict()
+            if spatial_shp not in dic[frequency]:
+                dic[frequency][spatial_shp] = dict()
+            if table not in dic[frequency][spatial_shp]:
+                dic[frequency][spatial_shp][table] = dict()
+            if Priority not in dic[frequency][spatial_shp][table]:
+                dic[frequency][spatial_shp][table][Priority] = []
             dic[frequency][spatial_shp][table][Priority].append(label)
         tot_among_freqs = 0
         for frequency in dic:
@@ -83,12 +87,14 @@ def print_SomeStats(context, svars_per_table, skipped_vars_per_table, actually_w
                         l = dic[frequency][spatial_shp][table][Priority]
                         print "% 3d : " % len(l), l
                         tot_for_freq_and_shape_among_tables += len(l)
-                print "%10s" % frequency, " %8s" % spatial_shp, "% 11s" % "--------", "---", "%3d" % tot_for_freq_and_shape_among_tables
+                print "%10s" % frequency, " %8s" % spatial_shp, "% 11s" % "--------", "---", "%3d" % \
+                                                                                             tot_for_freq_and_shape_among_tables
                 tot_for_freq_among_shapes += tot_for_freq_and_shape_among_tables
                 print
-            print "%10s" % frequency, " %8s" % "--------", "% 11s" % "--------", "---", "%3d" % tot_for_freq_among_shapes
+            print "%10s" % frequency, " %8s" % "--------", "% 11s" % "--------", "---", "%3d" % \
+                                                                                        tot_for_freq_among_shapes
             tot_among_freqs += tot_for_freq_among_shapes
-            print;
+            print
             print
         print "%10s" % "----------", " %8s" % "--------", "% 11s" % "--------", "---", "%3d" % tot_among_freqs
 
@@ -97,7 +103,7 @@ def print_SomeStats(context, svars_per_table, skipped_vars_per_table, actually_w
             dic = dict()
             dic_ln = dict()
             for label, long_name, table, frequency, Priority, spatial_shp in actually_written_vars:
-                if not dic.has_key(label):
+                if label not in dic:
                     dic[label] = []
                     dic_ln.update({label: long_name})
                 dic[label].append(frequency + '_' + table + '_' + spatial_shp + '_' + str(Priority))

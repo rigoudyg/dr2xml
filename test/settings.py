@@ -48,13 +48,15 @@ lab_and_model_settings = {
     "grids": {
         "LR": {
             "arpsfx": ["gr", "complete", "250 km",
-                       "data regridded to a T127 gaussian grid (128x256 latlon) from a native atmosphere T127l reduced gaussian grid"],
+                       "data regridded to a T127 gaussian grid (128x256 latlon) "
+                       "from a native atmosphere T127l reduced gaussian grid"],
             #        "arpsfx" : [ "gn","" , "250 km", "native T127 reduced gaussian grid"] ,
             "nemo": ["gn", "", "100km", "native ocean tri-polar grid with 105 k ocean cells"], },
 
         "HR": {
             "arpsfx": ["gr", "completeHR", "50 km",
-                       "data regridded to a 359 gaussian grid (180x360 latlon) from a native atmosphere T359l reduced gaussian grid"],
+                       "data regridded to a 359 gaussian grid (180x360 latlon) "
+                       "from a native atmosphere T359l reduced gaussian grid"],
             "nemo": ["gn", "", "25km", "native ocean tri-polar grid with 1.47 M ocean cells"], },
     },
     'grid_choice': {"CNRM-CM6-1": "LR", "CNRM-CM6-1-HR": "HR", "CNRM-ESM2-1": "LR", "CNRM-ESM2-1-HR": "HR"},
