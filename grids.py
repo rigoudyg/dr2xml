@@ -6,8 +6,8 @@ Grids general tools.
 """
 
 import re
-import xml.etree.ElementTree as ET
 
+from xml_interface import create_xml_element_from_string, create_string_from_xml_element
 from cfsites import cfsites_grid_id, add_cfsites_in_defs, cfsites_domain_id
 from settings_interface import get_variable_from_lset_without_default, get_variable_from_lset_with_default, is_key_in_lset
 from config import get_config_variable
@@ -29,7 +29,7 @@ def get_grid_def(grid_id, grid_defs):
     else:
         if grid_id in context_index:
             # Grid defined through xml
-            grid_def = ET.tostring(context_index[grid_id])
+            grid_def = create_string_from_xml_element(context_index[grid_id])
         else:
             raise dr2xml_error("Cannot guess a grid def for %s" % grid_id)
             grid_def = None
@@ -222,7 +222,7 @@ def change_axes_in_grid(grid_id, grid_defs, axis_defs):
     """
     global axis_count
     grid_def = get_grid_def(grid_id, grid_defs)
-    grid_el = ET.fromstring(grid_def)
+    grid_el = create_xml_element_from_string(grid_def)
     output_grid_id = grid_id
     axes_to_change = []
     # print "in change_axis for %s "%(grid_id)
@@ -261,7 +261,8 @@ def change_axes_in_grid(grid_id, grid_defs, axis_defs):
                 if any([ssub.tag == 'interpolate_axis' for ssub in sub]):
                     continue
                 else:
-                    print "Cannot normalize an axis in grid %s : no axis_ref for axis %s" % (grid_id, ET.tostring(sub))
+                    print "Cannot normalize an axis in grid %s : no axis_ref for axis %s" %\
+                          (grid_id, create_string_from_xml_element(sub))
                     continue
                     # raise dr2xml_error("Grid %s has an axis without axis_ref : %s"%(grid_id,grid_def))
             axis_ref = sub.attrib['axis_ref']

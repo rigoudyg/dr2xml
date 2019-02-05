@@ -5,9 +5,9 @@
 Postprocessing functions
 """
 import re
-import xml.etree.ElementTree as ET
 
 
+from xml_interface import create_string_from_xml_element
 from Xparse import id2grid
 from config import get_config_variable
 from settings_interface import get_variable_from_lset_without_default, get_variable_from_lset_with_default
@@ -229,7 +229,7 @@ def process_diurnal_cycle(alias, field_defs, grid_defs, axis_defs, printout=Fals
     # 1- create a grid composed of ALIAS's original grid extended by a scalar; id is <grid_id>_scalar_grid
     context_index = get_config_variable("context_index")
     base_grid = id2grid(alias, context_index)
-    base_grid_string = ET.tostring(base_grid)
+    base_grid_string = create_string_from_xml_element(base_grid)
     grid_id = base_grid.attrib['id']
 
     grid_scalar_id = grid_id + "_plus_scalar"

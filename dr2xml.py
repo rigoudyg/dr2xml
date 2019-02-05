@@ -56,7 +56,6 @@ import collections
 import sys
 import os
 import glob
-import xml.etree.ElementTree as ET
 
 # Utilities
 from utils import dr2xml_error
@@ -69,6 +68,10 @@ from analyzer import freq2datefmt, analyze_cell_time_method, Cmip6Freq2XiosFreq,
 # Data request interface
 from dr_interface import get_DR_version, initialize_sc, get_collection, get_uid, get_request_by_id_by_sect, \
     get_experiment_label, print_DR_errors
+
+# XML interface
+from xml_interface import create_xml_element_from_string, create_string_from_xml_element, get_root_of_xml_file, \
+    create_xml_element, create_xml_string
 
 # Simulations and laboratory settings dictionnaries interface
 from settings_interface import initialize_dict, get_variable_from_lset_with_default, \
@@ -1188,7 +1191,7 @@ def pingFileForRealmsList(settings, context, lrealms, svars, path_special, dummy
                 print "pingFile ... processing %s in table %s, label=%s" % (v.label, v.mipTable, label)
 
             if specials and label in specials:
-                line = ET.tostring(specials[label]).replace("DX_", prefix)
+                line = create_string_from_xml_element(specials[label]).replace("DX_", prefix)
                 # if 'ta' in label : print "ta is special : "+line
                 line = line.replace("\n", "").replace("\t", "")
                 fp.write('   ')
@@ -1298,7 +1301,7 @@ def read_xml_elmt_or_attrib(filename, tag='field', attrib=None, printout=False):
     if os.path.exists(filename):
         if printout:
             print "OK", filename
-        root = ET.parse(filename).getroot()
+        root = get_root_of_xml_file(filename)
         defs = get_xml_childs(root, tag)
         if defs:
             for field in defs:
@@ -1560,7 +1563,7 @@ def check_for_file_input(sv, hgrid, pingvars, field_defs, grid_defs, domain_defs
                     'freq_offset="0ts" />' % (pingvar, grid_id, field_in_file_id)
         field_defs[field_in_file_id] = field_def
         context_index = get_config_variable("context_index")
-        context_index[pingvar] = ET.fromstring(field_def)
+        context_index[pingvar] = create_xml_element_from_string(field_def)
 
         if printout:
             print field_defs[field_in_file_id]

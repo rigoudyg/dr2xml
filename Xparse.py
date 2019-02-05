@@ -11,7 +11,9 @@ import os
 import os.path
 import re
 import sys
-import xml.etree.ElementTree as ET
+
+from xml_interface import get_root_of_xml_file, create_string_from_xml_element
+
 
 # Define for each object kind those attributes useful for grid inheritance
 attributes = dict()
@@ -51,7 +53,7 @@ def read_src(elt, path_parse, printout=False, level=0, dont_read=[]):
                 continue
             if printout:
                 print level * "\t" + "Reading %s" % filen
-            et = ET.parse(filen).getroot()
+            et = get_root_of_xml_file(filen)
             if printout:
                 print level * "\t" + "Reading %s, %s=%s" % (filen, et.tag, gattrib(et, 'id', 'no_id'))
             for el in et:
@@ -257,7 +259,7 @@ def init_context(context_id, path_parse="./", printout=False):
     xmldef = path_parse + "iodef.xml"
     if printout:
         print "Parsing %s ..." % xmldef,
-    rootel = ET.parse(xmldef).getroot()
+    rootel = get_root_of_xml_file(xmldef)
     if printout:
         print "sourcing files  ...",
     read_src(rootel, path_parse, printout=printout, dont_read=["dr2xml_"])
@@ -344,8 +346,8 @@ if False:
     # grid=None
     if grid is not None:
         # print "Grid id is :"+grid.attrib['id']
-        print ET.tostring(grid)
-        grid_string = ET.tostring(grid)
+        print create_string_from_xml_element(grid)
+        grid_string = create_string_from_xml_element(grid)
         new_grid_string = re.sub('axis_ref= *.([\w_])*.', 'axis_ref="axis_autre"', grid_string)
         print new_grid_string
 
