@@ -102,7 +102,7 @@ def CNRM_grid_policy(cmvarid, grids):  # TBD
             else:
                 l = []
             l.append("1deg")
-            return (l)
+            return l
         else:
             return [g for g in grids if g in ["", "1deg"]]
     else:

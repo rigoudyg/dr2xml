@@ -78,7 +78,7 @@ def analyze_ambiguous_MIPvarnames(debug=[]):
                 if cm is not None:
                     area = cellmethod2area(cm)
                     realm = cv.modeling_realm
-                    if (area == 'sea' and realm == 'ocean'):
+                    if area == 'sea' and realm == 'ocean':
                         area = None
                     # realm=""
                     if vlabel in debug:

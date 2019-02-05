@@ -31,8 +31,7 @@ def add_cfsites_in_defs(grid_defs, domain_defs):
                                  (cfsites_grid_id, cfsites_domain_id)
     domain_defs[
         cfsites_radix] = ' <domain id="%s" type="unstructured" prec="8" lat_name="latitude" ' \
-                         'lon_name="longitude" dim_i_name="site" > ' % \
-                         (cfsites_domain_id) + \
+                         'lon_name="longitude" dim_i_name="site" > ' % cfsites_domain_id + \
                          '<generate_rectilinear_domain/>' + \
                          '<interpolate_domain order="1" renormalize="true" mode="read_or_compute" ' \
                          'write_weight="true" />' + \

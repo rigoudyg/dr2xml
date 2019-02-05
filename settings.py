@@ -368,7 +368,7 @@ def analyze_cell_time_method(cm, label, table, printout=False):
         #                    %(sv.label,table,detect_missing,sv.cell_methods))
         print("Fatal: bad xios 'detect_missing_value' for %s in table %s: %s (%s)" % (label, table, detect_missing, cm))
 
-    return (operation, detect_missing, clim)
+    return operation, detect_missing, clim
 
 
 def Cmip6Freq2XiosFreq(freq, table):
@@ -515,15 +515,15 @@ def cellmethod2area(method):
 def DRgrid2gridatts(grid):
     """ Returns label, resolution, description for a DR grid name"""
     if grid == "cfsites":
-        return ("gn", "100 km", "data sampled in model native grid by nearest neighbour method ")
+        return "gn", "100 km", "data sampled in model native grid by nearest neighbour method "
     if grid == "1deg":
-        return ("gr1", "1x1 degree", "data regridded to a CMIP6 standard 1x1 degree latxlon grid from the native grid")
+        return "gr1", "1x1 degree", "data regridded to a CMIP6 standard 1x1 degree latxlon grid from the native grid"
     if grid == "2deg":
-        return ("gr2", "2x2 degree", "data regridded to a CMIP6 standard 2x2 degree latxlon grid from the native grid")
+        return "gr2", "2x2 degree", "data regridded to a CMIP6 standard 2x2 degree latxlon grid from the native grid"
     if grid == "100km":
-        return ("gr3", "100 km", "data regridded to a CMIP6 standard 100 km resol grid from the native grid")
+        return "gr3", "100 km", "data regridded to a CMIP6 standard 100 km resol grid from the native grid"
     if grid == "50km":
-        return ("gr4", "50 km", "data regridded to a CMIP6 standard 50 km resol grid from the native grid")
+        return "gr4", "50 km", "data regridded to a CMIP6 standard 50 km resol grid from the native grid"
     if grid == "25km":
-        return ("gr5", "25 km", "data regridded to a CMIP6 standard 25 km resol grid from the native grid")
-    return ("grx", "?x? degree", "grid has no description- please fix DRgrid2gridatts for grid %s" % grid)
+        return "gr5", "25 km", "data regridded to a CMIP6 standard 25 km resol grid from the native grid"
+    return "grx", "?x? degree", "grid has no description- please fix DRgrid2gridatts for grid %s" % grid

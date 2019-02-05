@@ -59,7 +59,7 @@ if lab == 'cnrm' or lab == 'cerfacs':
         # --- We account for the list of MIPS in which the lab takes part.
         # --- Note : a MIPs set limited to {'C4MIP'} leads to a number of tables and
         # --- variables which is manageable for eye inspection
-        "mips_all": {'AerChemMIP', 'C4MIP', 'CFMIP', 'DAMIP', 'FAFMIP', 'GeoMIP', 'GMMIP', 'ISMIP6', \
+        "mips_all": {'AerChemMIP', 'C4MIP', 'CFMIP', 'DAMIP', 'FAFMIP', 'GeoMIP', 'GMMIP', 'ISMIP6',
                      'LS3MIP', 'LUMIP', 'OMIP', 'PMIP', 'RFMIP', 'ScenarioMIP', 'CORDEX', 'SIMIP'},
         "mips": {'C4MIP', 'SIMIP', 'OMIP', 'CFMIP', 'RFMIP'},
         #
@@ -79,10 +79,9 @@ if lab == 'cnrm' or lab == 'cerfacs':
         # --- oragnized by realms
         # "excluded_vars_file":"./input/excluded_vars/non_published_variables.txt",
         # mpmoine_note: exclusion des variables Cloud Simulator tant que pas activé
-        "excluded_vars": ["clcalipso", "clcalipso2", "clhcalipso", "clcalipsoice", "clcalipsoliq", \
-                          "cllcalipso", "clmcalipso", "cltcalipso", \
-                          "cfadLidarsr532", "cfadDbze94", "cfadLidarsr532", "clisccp", "cltisccp", \
-                          "climodis", "clwmodis", "jpdftaureicemodis", "cltmodis", "clmisr", "parasolRefl"],
+        "excluded_vars": ["clcalipso", "clcalipso2", "clhcalipso", "clcalipsoice", "clcalipsoliq", "cllcalipso",
+                          "clmcalipso", "cltcalipso", "cfadLidarsr532", "cfadDbze94", "cfadLidarsr532", "clisccp",
+                          "cltisccp", "climodis", "clwmodis", "jpdftaureicemodis", "cltmodis", "clmisr", "parasolRefl"],
         #
         # --- mpmoine_next_modif: ignore some spatial shapes
         # mpmoine_note: grilles Groenland, Antarctic et les profils en Sites (pas encore codé dans dr2xml)
@@ -205,8 +204,8 @@ if lab == 'ipsl':
         # --- Note : a MIPs set limited to {'C4MIP'} leads to a number of tables and
         # --- variables which is manageable for eye inspection
         "mips_for_test": {'C4MIP', 'SIMIP', 'OMIP', 'CFMIP', 'RFMIP'},
-        "mips": {'AerChemMIP', 'C4MIP', 'CFMIP', 'DAMIP', 'FAFMIP', 'GeoMIP', 'GMMIP', 'ISMIP6', \
-                 'LS3MIP', 'LUMIP', 'OMIP', 'PMIP', 'RFMIP', 'ScenarioMIP', 'CORDEX', 'SIMIP'},
+        "mips": {'AerChemMIP', 'C4MIP', 'CFMIP', 'DAMIP', 'FAFMIP', 'GeoMIP', 'GMMIP', 'ISMIP6', 'LS3MIP', 'LUMIP',
+                 'OMIP', 'PMIP', 'RFMIP', 'ScenarioMIP', 'CORDEX', 'SIMIP'},
         #
         # --- Max variable priority level to be output
         'max_priority': 1,
@@ -223,10 +222,9 @@ if lab == 'ipsl':
         # --- Names must match DR MIPvarnames (and **NOT** CF standard_names)
         "excluded_vars_file": None,
         # mpmoine_note: exclusion des variables Cloud Simulator tant que pas activé
-        "excluded_vars": ["clcalipso", "clcalipso2", "clhcalipso", "clcalipsoice", "clcalipsoliq", \
-                          "cllcalipso", "clmcalipso", "cltcalipso", \
-                          "cfadLidarsr532", "cfadDbze94", "cfadLidarsr532", "clisccp", "cltisccp", \
-                          "climodis", "clwmodis", "jpdftaureicemodis", "cltmodis", "clmisr", "parasolRefl"],
+        "excluded_vars": ["clcalipso", "clcalipso2", "clhcalipso", "clcalipsoice", "clcalipsoliq", "cllcalipso",
+                          "clmcalipso", "cltcalipso", "cfadLidarsr532", "cfadDbze94", "cfadLidarsr532", "clisccp",
+                          "cltisccp", "climodis", "clwmodis", "jpdftaureicemodis", "cltmodis", "clmisr", "parasolRefl"],
         # --- mpmoine_next_modif: ignore some spatial shapes
         # mpmoine_note: grilles Groenland, Antarctic et les profils en Sites (pas encore codé dans dr2xml)
         "excluded_spshapes": ["XYA-na", "XYG-na", "S-na", "S-AH", "S-A", "na-A"],

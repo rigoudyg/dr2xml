@@ -318,8 +318,8 @@ def create_axis_from_dim(dim, labels, axis_ref, axis_defs):
 
     rep = '<axis id="%s" name="%s" axis_ref="%s"' % (axis_id, axis_name, axis_ref)
     if type(dim.standardName) == type(""):
-        rep += ' standard_name="%s"' % (dim.standardName)
-    rep += ' long_name="%s"' % (dim.title)
+        rep += ' standard_name="%s"' % dim.standardName
+    rep += ' long_name="%s"' % dim.title
     #
     if dim.type == "double":
         rep += ' prec="8"'

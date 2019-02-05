@@ -359,7 +359,7 @@ def process_homeVars(mip_vars_list, mips, expid=False, printout=False):
             # Complement each HOME variable with attributes got from
             # the corresponding CMOR variable (if exist)
             updated_hv = get_corresp_CMORvar(hv)
-            if (updated_hv):
+            if updated_hv:
                 already_in_dr = False
                 for cmv in mip_vars_list:
                     matching = (cmv.label == updated_hv.label and cmv.modeling_realm == updated_hv.modeling_realm and
@@ -505,7 +505,7 @@ def complement_svar_using_cmorvar(svar, cmvar, sn_issues, debug=[], allow_pseudo
     svar.Priority = cmvar.defaultPriority
     svar.positive = cmvar.positive.rstrip(' ')
     svar.modeling_realm = cmvar.modeling_realm.rstrip(' ')
-    if (svar.modeling_realm[0:3] == "zoo"):
+    if svar.modeling_realm[0:3] == "zoo":
         svar.modeling_realm = "ocnBgChem"  # Because wrong in DR01.00.20
     svar.label = cmvar.label.rstrip(' ')
     [svar.spatial_shp, svar.temporal_shp] = get_SpatialAndTemporal_Shapes(cmvar)
@@ -604,27 +604,27 @@ def complement_svar_using_cmorvar(svar, cmvar, sn_issues, debug=[], allow_pseudo
                 all_dimids += dids
         for dimid in all_dimids:
             sdim, dimsize = get_simpleDim_from_DimId(dimid)
-            if (dimsize > 1):
+            if dimsize > 1:
                 # print "for var % 15s and dim % 15s, size=%3d"%(svar.label,dimid,dimsize)
                 pass
             product_of_other_dims *= dimsize
             svar.sdims.update({sdim.label: sdim})
-        if (product_of_other_dims > 1):
+        if product_of_other_dims > 1:
             # print 'for % 20s'%svar.label,' product_of_other_dims=',product_of_other_dims
             svar.other_dims_size = product_of_other_dims
     area = cellmethod2area(svar.cell_methods)
-    if (svar.label in debug):
+    if svar.label in debug:
         print "complement_svar ... processing %s, area=%s" % (svar.label, `area`)
     if area:
         ambiguous = any([svar.label == alabel and svar.modeling_realm == arealm
                          for (alabel, (arealm, lmethod)) in ambiguous_mipvarnames])
-        if (svar.label in debug):
+        if svar.label in debug:
             print "complement_svar ... processing %s, ambiguous=%s" % (svar.label, `ambiguous`)
         if ambiguous:
             # Special case for a set of land variables
             if not (svar.modeling_realm == 'land' and svar.label[0] == 'c'):
                 svar.label_non_ambiguous = svar.label + "_" + area
-    if (svar.label in debug):
+    if svar.label in debug:
         print "complement_svar ... processing %s, label_non_ambiguous=%s" % \
               (svar.label, svar.label_non_ambiguous)
     # removing pressure suffix must occur after resolving ambiguities (add of area suffix)
@@ -646,7 +646,7 @@ def get_simpleDim_from_DimId(dimid):
     sdim.positive = d.positive
     sdim.requested = d.requested
     #
-    if (d.requested and len(d.requested) > 0):
+    if d.requested and len(d.requested) > 0:
         dimsize = max(len(d.requested.split(" ")), 1)
     elif sdim.label == 'misrBands':
         dimsize = 16  # because value is unset in DR01.00.18

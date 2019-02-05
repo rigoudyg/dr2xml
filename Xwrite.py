@@ -131,7 +131,7 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
                 alias = get_variable_from_lset_without_default("ping_variables_prefix") + sv.label
             else:
                 alias = get_variable_from_lset_without_default("ping_variables_prefix") + "tau_stress"
-        if (sv.label in debug):
+        if sv.label in debug:
             print "write_xios_file_def ... processing %s, alias=%s" % (sv.label, alias)
 
         # suppression des terminaisons en "Clim" pour l'alias : elles concernent uniquement les cas
@@ -361,7 +361,7 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
                     out.write(' split_last_date=10000-01-01 00:00:00" ')
         else:
             # Use requestItems-based end date as the latest possible date when it is earlier than run end date
-            if (sv.label in debug):
+            if sv.label in debug:
                 print "split_last_date year %d derived from DR for variable %s in table %s " \
                       "for year %d" % (lastyear, sv.label, table, year)
             endyear = "%04d" % (lastyear + 1)
@@ -799,7 +799,7 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
                 if get_variable_from_lset_with_default("useAtForInstant", False):
                     rep += ' %s>\n\t\t@%s' % (freq_op, last_field_id)
                 else:
-                    rep += ' %s>' % (freq_op)
+                    rep += ' %s>' % freq_op
             else:
                 # covers only case once , already addressed by freq_op value='' ?
                 rep += ' >'
@@ -813,9 +813,9 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
             # this allows that the type of operation applied is really 'instant', and not the one
             # that operands did inherit from ping_file
             rep += ' expr="_reset_"'
-        if (operation == 'average'):
+        if operation == 'average':
             warnings_for_optimisation.append(alias)
-        rep += ' %s>' % (freq_op)
+        rep += ' %s>' % freq_op
     rep += '\n'
     #
     # --------------------------------------------------------------------
@@ -924,9 +924,9 @@ def process_singleton(sv, alias, pingvars, field_defs, grid_defs, scalar_defs, t
                 value = types[sdim.type] + " " + 'value="%s"' % sdim.value
             if sdim.axis != '':
                 # Space axis, probably Z
-                axis = ' axis_type="%s"' % (sdim.axis)
+                axis = ' axis_type="%s"' % sdim.axis
                 if sdim.positive:
-                    axis += ' positive="%s"' % (sdim.positive)
+                    axis += ' positive="%s"' % sdim.positive
             else:
                 axis = ""
             if sdim.bounds == "yes":

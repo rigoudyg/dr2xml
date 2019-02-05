@@ -161,7 +161,7 @@ example_lab_and_model_settings = {
     # variables which is manageable for eye inspection
     'mips_for_test': {'C4MIP', 'SIMIP', 'OMIP', 'CFMIP', 'RFMIP'},
     'mips': {
-        "LR": {'AerChemMIP', 'C4MIP', 'CFMIP', 'DAMIP', 'FAFMIP', 'GeoMIP', 'GMMIP', 'ISMIP6', \
+        "LR": {'AerChemMIP', 'C4MIP', 'CFMIP', 'DAMIP', 'FAFMIP', 'GeoMIP', 'GMMIP', 'ISMIP6',
                'LS3MIP', 'LUMIP', 'OMIP', 'PMIP', 'RFMIP', 'ScenarioMIP', 'CORDEX', 'SIMIP', 'CMIP6', 'CMIP'},
         "HR": {'OMIP', 'ScenarioMIP', 'CORDEX', 'CMIP6', 'CMIP'},
     },
@@ -190,9 +190,8 @@ example_lab_and_model_settings = {
     # (the units for period should be different from the units of any instant ouput frequency
     # for those variables - 'mi' loooks fine, 'ts' may work)
     "special_timestep_vars": {
-        "60mi": ['parasolRefl', 'clhcalipso', 'cltcalipso', 'cllcalipso', 'clmcalipso', \
-                 'cfadLidarsr532', 'clcalipso', 'clcalipso2', 'cfadDbze94', \
-                 'jpdftaureliqmodis', 'clisccp', 'jpdftaureicemodis', 'clmisr'],
+        "60mi": ['parasolRefl', 'clhcalipso', 'cltcalipso', 'cllcalipso', 'clmcalipso', 'cfadLidarsr532', 'clcalipso',
+                 'clcalipso2', 'cfadDbze94', 'jpdftaureliqmodis', 'clisccp', 'jpdftaureicemodis', 'clmisr'],
     },
 
     # You can specifically exclude some pairs (vars,tables), here in lab_settings
@@ -209,12 +208,10 @@ example_lab_and_model_settings = {
     # We choose to describe such fields as a list of vars dependant on the model configuration
     # because the DR is not in a good enough shape about realms for this purpose
     "excluded_vars_per_config": {
-        "AGCM": ["ch4", "co2", "co", "concdust", "ec550aer", "h2o", "hcho", "hcl", \
-                 "hno3", "mmrbc", "mmrdust", "mmroa", "mmrso4", "mmrss", \
-                 "n2o", "no2", "no", "o3Clim", "o3loss", "o3prod", "oh", "so2"],
-        "AOGCM": ["ch4", "co2", "co", "concdust", "ec550aer", "h2o", "hcho", "hcl", \
-                  "hno3", "mmrbc", "mmrdust", "mmroa", "mmrso4", "mmrss", \
-                  "n2o", "no2", "no", "o3Clim", "o3loss", "o3prod", "oh", "so2"],
+        "AGCM": ["ch4", "co2", "co", "concdust", "ec550aer", "h2o", "hcho", "hcl", "hno3", "mmrbc", "mmrdust", "mmroa",
+                 "mmrso4", "mmrss", "n2o", "no2", "no", "o3Clim", "o3loss", "o3prod", "oh", "so2"],
+        "AOGCM": ["ch4", "co2", "co", "concdust", "ec550aer", "h2o", "hcho", "hcl", "hno3", "mmrbc", "mmrdust", "mmroa",
+                  "mmrso4", "mmrss", "n2o", "no2", "no", "o3Clim", "o3loss", "o3prod", "oh", "so2"],
     },
     #
     "excluded_spshapes": ["XYA-na", "XYG-na",  # GreenLand and Antarctic grids we do not want to produce
@@ -608,14 +605,14 @@ def create_output_grid(ssh, grid_defs, domain_defs, target_hgrid_id, margs):
     if ssh[0:2] == 'Y-':  # zonal mean and atm zonal mean on pressure levels
         # Grid normally has already been created upstream
         grid_ref = margs['src_grid_id']
-    elif (ssh == 'S-na'):
+    elif ssh == 'S-na':
         # COSP sites. Input field may have a singleton dimension (XIOS scalar component)
         grid_ref = cfsites_grid_id
         add_cfsites_in_defs(grid_defs, domain_defs)
         #
     elif ssh[0:3] == 'XY-' or ssh[0:3] == 'S-A':
         # this includes 'XY-AH' and 'S-AH' : model half-levels
-        if (ssh[0:3] == 'S-A'):
+        if ssh[0:3] == 'S-A':
             add_cfsites_in_defs(grid_defs, domain_defs)
             target_hgrid_id = cfsites_domain_id
         if target_hgrid_id:
@@ -808,7 +805,7 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
                         toremove.append(svar)
                 for svar in toremove:
                     svars_per_table[table].remove(svar)
-    if (debug):
+    if debug:
         print "Pour table AMon: ", [v.label for v in svars_per_table["Amon"]]
     #
     # --------------------------------------------------------------------
@@ -1232,7 +1229,7 @@ def pingFileForRealmsList(settings, context, lrealms, svars, path_special, dummy
                 label = v.label_non_ambiguous
             else:
                 label = v.label_without_psuffix
-            if (v.label in debug):
+            if v.label in debug:
                 print "pingFile ... processing %s in table %s, label=%s" % (v.label, v.mipTable, label)
 
             if specials and label in specials:

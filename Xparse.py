@@ -182,7 +182,7 @@ def make_index(elt, index=None, printout=False, level=0):
         #    if printout : print
     for child in elt:
         make_index(child, index, printout, level + 1)
-    return (index)
+    return index
 
 
 def attrib_by_ref(elt, attrib, index, printout, level):
@@ -277,7 +277,7 @@ def init_context(context_id, path_parse="./", printout=False):
                 if n == 0:
                     break
         # ET.dump(rootel)
-        return (index)
+        return index
     else:
         print "Xparse::init_context : context %s not found in %s" % (context_id, xmldef)
 
@@ -306,7 +306,7 @@ def id2grid(field_id, index, printout=False):
                     "field %s grid reference is %s but that field no grid" % (field_id, grid_ref_field_id))
         else:
             # if printout: print("field %s has no grid_ref"%(field_id))
-            raise Xparse_error("field %s has no grid_ref" % (field_id))
+            raise Xparse_error("field %s has no grid_ref" % field_id)
     else:
         # if printout: print("field %s is not known"%field_id)
         raise Xparse_error("field %s is not known" % field_id)
