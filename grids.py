@@ -8,6 +8,7 @@ Grids general tools.
 import re
 import xml.etree.ElementTree as ET
 
+from cfsites import cfsites_grid_id, add_cfsites_in_defs, cfsites_domain_id
 from settings_interface import get_variable_from_lset_without_default, get_variable_from_lset_with_default, is_key_in_lset
 from config import get_config_variable
 from dr_interface import get_collection, get_uid
@@ -377,3 +378,43 @@ def scalar_vertical_dimension(sv):
         if cid.axis == 'Z':
             return cid.altLabel
     return None
+
+
+def create_output_grid(ssh, grid_defs, domain_defs, target_hgrid_id, margs):
+    # Build output grid (stored in grid_defs) by analyzing the spatial shape
+    # Including horizontal operations. Can include horiz re-gridding specification
+    # --------------------------------------------------------------------
+    grid_ref = None
+
+    # Compute domain name, define it if needed
+    if ssh[0:2] == 'Y-':  # zonal mean and atm zonal mean on pressure levels
+        # Grid normally has already been created upstream
+        grid_ref = margs['src_grid_id']
+    elif ssh == 'S-na':
+        # COSP sites. Input field may have a singleton dimension (XIOS scalar component)
+        grid_ref = cfsites_grid_id
+        add_cfsites_in_defs(grid_defs, domain_defs)
+        #
+    elif ssh[0:3] == 'XY-' or ssh[0:3] == 'S-A':
+        # this includes 'XY-AH' and 'S-AH' : model half-levels
+        if ssh[0:3] == 'S-A':
+            add_cfsites_in_defs(grid_defs, domain_defs)
+            target_hgrid_id = cfsites_domain_id
+        if target_hgrid_id:
+            # Must create and a use a grid similar to the last one defined
+            # for that variable, except for a change in the hgrid/domain
+            grid_ref = change_domain_in_grid(target_hgrid_id, grid_defs)
+            if grid_ref is False or grid_ref is None:
+                raise dr2xml_error("Fatal: cannot create grid_def for %s with hgrid=%s" % (alias, target_hgrid_id))
+    elif ssh == 'TR-na' or ssh == 'TRS-na':  # transects,   oce or SI
+        pass
+    elif ssh[0:3] == 'YB-':  # basin zonal mean or section
+        pass
+    elif ssh == 'na-na':  # TBD ? global means or constants - spatial integration is not handled
+        pass
+    elif ssh == 'na-A':  # only used for rlu, rsd, rsu ... in Efx ????
+        pass
+    else:
+        raise dr2xml_error(
+            "Fatal: Issue with un-managed spatial shape %s for variable %s in table %s" % (ssh, sv.label, table))
+    return grid_ref

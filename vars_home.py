@@ -723,3 +723,8 @@ def get_simplevar(label, table, freq=None):
     if psvar:
         complement_svar_using_cmorvar(svar, psvar, None, [], False)
         return svar
+
+
+# def hasCMORVarName(hmvar):
+#    for cmvar in get_collection('CMORvar').items:
+#        if (cmvar.label==hmvar.label): return True
