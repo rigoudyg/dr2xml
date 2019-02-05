@@ -5,7 +5,7 @@
 Tools to compute split frequencies.
 """
 
-from dict_interface import get_variable_from_lset_with_default, get_variable_from_lset_without_default
+from settings_interface import get_variable_from_lset_with_default, get_variable_from_lset_without_default
 from utils import dr2xml_grid_error
 
 compression_factor = None

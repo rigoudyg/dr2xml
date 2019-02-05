@@ -8,7 +8,7 @@ Grids general tools.
 import re
 import xml.etree.ElementTree as ET
 
-from dict_interface import get_variable_from_lset_without_default, get_variable_from_lset_with_default, is_key_in_lset
+from settings_interface import get_variable_from_lset_without_default, get_variable_from_lset_with_default, is_key_in_lset
 from config import get_config_variable
 from dr_interface import get_collection, get_uid
 from utils import dr2xml_error

@@ -4,9 +4,9 @@
 """
 CMOR variables tools.
 """
-from dict_interface import get_variable_from_lset_without_default
+from settings_interface import get_variable_from_lset_without_default
 from dr_interface import get_collection, get_uid, get_request_by_id_by_sect, print_DR_errors
-from settings import cellmethod2area
+from analyzer import cellmethod2area
 from utils import dr2xml_error
 
 

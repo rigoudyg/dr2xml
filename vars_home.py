@@ -14,12 +14,12 @@ from dr_interface import get_collection, get_uid, get_CMORvarId_by_label, get_re
     print_DR_stdname_errors, print_DR_errors
 
 # Settings dictionaries interface
-from dict_interface import get_variable_from_sset_else_lset_with_default, get_variable_from_lset_with_default, \
+from settings_interface import get_variable_from_sset_else_lset_with_default, get_variable_from_lset_with_default, \
     get_variable_from_lset_without_default
 
 from vars_cmor import get_CMORvar, get_SpatialAndTemporal_Shapes, analyze_ambiguous_MIPvarnames, simple_CMORvar, \
     simple_Dim
-from settings import guess_freq_from_table_name, cellmethod2area
+from analyzer import guess_freq_from_table_name, cellmethod2area
 from utils import vars_error
 
 

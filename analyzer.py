@@ -13,7 +13,7 @@
     and the corresponding frequency (albeit this is instrumental in DRS), and because
     we need to translate anyway to XIOS syntax
 """
-from dict_interface import get_variable_from_lset_with_default
+from settings_interface import get_variable_from_lset_with_default
 from dr_interface import print_DR_errors
 from utils import dr2xml_error
 

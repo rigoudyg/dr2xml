@@ -3,7 +3,7 @@
 from settings import lab_and_model_settings, simulation_settings, my_cvspath
 from dr2xml import pingFileForRealmsList, generate_file_defs
 from vars_selection import select_CMORvars_for_lab
-from dict_interface import initialize_dict
+from settings_interface import initialize_dict
 
 #
 lab_and_model_settings["excluded_vars"] = []

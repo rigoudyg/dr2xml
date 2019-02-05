@@ -7,7 +7,7 @@ Tools for variables selection.
 
 import collections
 
-from dict_interface import get_variable_from_sset_and_lset_without_default, get_variable_from_lset_with_default, \
+from settings_interface import get_variable_from_sset_and_lset_without_default, get_variable_from_lset_with_default, \
     get_variable_from_sset_without_default, get_source_id_and_type, get_variable_from_lset_without_default, \
     is_key_in_sset, is_sset_not_None, get_variable_from_sset_with_default_in_sset, \
     get_variable_from_sset_with_default, is_key_in_lset, get_variable_from_sset_else_lset_with_default

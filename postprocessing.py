@@ -10,9 +10,9 @@ import xml.etree.ElementTree as ET
 
 from Xparse import id2grid
 from config import get_config_variable
-from dict_interface import get_variable_from_lset_without_default, get_variable_from_lset_with_default
+from settings_interface import get_variable_from_lset_without_default, get_variable_from_lset_with_default
 from grids import isVertDim, create_axis_def, create_grid_def, change_domain_in_grid
-from settings import Cmip6Freq2XiosFreq
+from analyzer import Cmip6Freq2XiosFreq
 from utils import dr2xml_error
 
 

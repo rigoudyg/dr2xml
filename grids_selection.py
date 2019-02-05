@@ -21,7 +21,7 @@ from utils import dr2xml_grid_error
 from dr_interface import get_uid
 
 # Laboratory and simulations dictionaries
-from dict_interface import get_variable_from_lset_with_default
+from settings_interface import get_variable_from_lset_with_default
 
 
 def normalize(grid):

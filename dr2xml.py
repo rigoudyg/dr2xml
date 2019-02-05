@@ -63,7 +63,7 @@ from utils import dr2xml_error
 
 # Settings and config
 from config import get_config_variable, set_config_variable
-from settings import freq2datefmt, analyze_cell_time_method, Cmip6Freq2XiosFreq, longest_possible_period, \
+from analyzer import freq2datefmt, analyze_cell_time_method, Cmip6Freq2XiosFreq, longest_possible_period, \
     initialize_cell_method_warnings, get_cell_method_warnings, DRgrid2gridatts
 
 # Data request interface
@@ -71,7 +71,7 @@ from dr_interface import get_DR_version, initialize_sc, get_collection, get_uid,
     get_experiment_label, print_DR_errors
 
 # Simulations and laboratory settings dictionnaries interface
-from dict_interface import initialize_dict, get_variable_from_lset_with_default, \
+from settings_interface import initialize_dict, get_variable_from_lset_with_default, \
     is_key_in_sset, get_variable_from_sset_without_default, is_sset_not_None, get_source_id_and_type, \
     get_variable_from_sset_and_lset_without_default, get_variable_from_sset_with_default_in_sset, \
     get_variable_from_sset_with_default, is_key_in_lset, get_variable_from_sset_else_lset_with_default, \
@@ -94,10 +94,10 @@ from vars_selection import endyear_for_CMORvar, RequestItem_applies_for_exp_and_
     gather_AllSimpleVars, get_sc, initialize_sn_issues, get_grid_choice
 
 # Split frequencies module
-from split_frequencies import split_frequency_for_variable, timesteps_per_freq_and_duration
+from file_splitting import split_frequency_for_variable, timesteps_per_freq_and_duration
 
 # Statistics module
-from stats import print_SomeStats
+from infos import print_SomeStats
 
 # CFsites handling has its own module
 from cfsites import cfsites_domain_id, cfsites_grid_id, cfsites_input_filedef, add_cfsites_in_defs
