@@ -115,6 +115,7 @@ def read_homeVars_list(hmv_file, expid, mips, path_extra_tables=None, printout=F
                 home_var.mip_era = 'PERSO'
                 home_var.cell_methods = tcmName2tcmValue[home_var.temporal_shp]
                 home_var.label_without_psuffix = home_var.label
+                home_var.cell_measures = ""
             if home_var.mip == "ANY" or home_var.mip in mips:
                 if home_var.experiment != "ANY":
                     # if home_var.experiment==expid: homevars.append(home_var)

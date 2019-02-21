@@ -119,6 +119,7 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
     # We use a simple convention for variable names in ping files :
     if sv.type == 'perso':
         alias = sv.label
+        alias_ping = alias
     else:
         # MPM : si on a defini un label non ambigu alors on l'utilise comme alias (i.e. le field_ref)
         # et pour l'alias seulement (le nom de variable dans le nom de fichier restant svar.label)
