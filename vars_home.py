@@ -73,6 +73,7 @@ def read_homeVars_list(hmv_file, expid, mips, path_extra_tables=None, printout=F
     # File structure: name of attributes to read, number of header line
     home_attrs = ['type', 'label', 'modeling_realm', 'frequency', 'mipTable', 'temporal_shp', 'spatial_shp',
                   'experiment', 'mip']
+    dev_home_attrs = ['units', 'long_name', 'stdname']
     data = []
     file_list = hmv_file.replace('  ', ' ').split(' ')
     for fil in file_list:
@@ -99,20 +100,37 @@ def read_homeVars_list(hmv_file, expid, mips, path_extra_tables=None, printout=F
                 sys.exit("Abort: a prefix is expected in extra Table name: " + table)
             line_split[4] = table.split('_')[1]
         hmv_type = line_split[0].strip(' ')
+        # Build the list of attributes
         # If extra, the table can be added as a whole or by variable
         extra_tables = []
         # if hmv_type!='extra':
         home_var = simple_CMORvar()
-        cc = -1
+        # Build the line that will contain all useful elements
+        line_to_treat = []
         for col in line_split:
             ccol = col.lstrip(' ').rstrip('\n\t ')
             if ccol != '':
-                cc += 1
-                setattr(home_var, home_attrs[cc], ccol)
+                line_to_treat.append(ccol)
+        # Get the last columns in case of dev variable
+        if hmv_type == "dev":
+            for (key, value) in zip(home_attrs+dev_home_attrs, line_to_treat):
+                setattr(home_var, key, value)
+            # Add the grids description (grid_id and grid_ref)
+            home_var.description = "|".join(line_to_treat[len(home_attrs+dev_home_attrs):])
+        else:
+            for (key, value) in zip(home_attrs, line_to_treat):
+                setattr(home_var, key, value)
+
         if hmv_type != 'extra':
             home_var.label_with_area = home_var.label
             if hmv_type == 'perso':
                 home_var.mip_era = 'PERSO'
+                home_var.cell_methods = tcmName2tcmValue[home_var.temporal_shp]
+                home_var.label_without_psuffix = home_var.label
+                home_var.cell_measures = ""
+            elif hmv_type == "dev":
+                home_var.mip_era = 'DEV'
+                home_var.mipVarLabel = home_var.label
                 home_var.cell_methods = tcmName2tcmValue[home_var.temporal_shp]
                 home_var.label_without_psuffix = home_var.label
                 home_var.cell_measures = ""
@@ -150,7 +168,7 @@ def read_homeVars_list(hmv_file, expid, mips, path_extra_tables=None, printout=F
                         else:
                             extravars.append(var_found)
     if printout:
-        print "Number of 'cmor' and 'perso' among home variables: ", len(homevars)
+        print "Number of 'cmor', 'dev' and 'perso' among home variables: ", len(homevars)
         print "Number of 'extra' among home variables: ", len(extravars)
     homevars.extend(extravars)
     homevars_list = homevars
@@ -415,6 +433,29 @@ def process_homeVars(mip_vars_list, mips, expid=False, printout=False):
                     print "Error:", hv_info, "HOMEVar is anounced as perso," \
                                              " but in reality is cmor => Not taken into account."
                 raise vars_error("Abort: HOMEVar is anounced as perso but should be cmor.")
+        elif hv.type == 'dev':
+            # Check if HOME variable anounced as 'dev' is in fact 'cmor'
+            is_cmor = get_corresp_CMORvar(hv)
+            if not is_cmor:
+                # Check if HOME variable differs from CMOR one only by shapes
+                has_cmor_varname = any([cmvar.label == hv.label for
+                                        cmvar in get_collection('CMORvar').items])
+                # has_cmor_varname=any(get_CMORvarId_by_label(hv.label))
+                if has_cmor_varname:
+                    if printout:
+                        print "Warning:", hv_info, "HOMEVar is anounced " \
+                                                   " as dev, is not a CMORVar, but has a cmor name." \
+                                                   " => Not taken into account."
+                    raise vars_error("Abort: HOMEVar is anounced as dev, is not a CMORVar, but has a cmor name.")
+                else:
+                    if printmore:
+                        print "Info:", hv_info, "HOMEVar is purely dev. => Taken into account."
+                    mip_vars_list.append(hv)
+            else:
+                if printout:
+                    print "Error:", hv_info, "HOMEVar is anounced as dev," \
+                                             " but in reality is cmor => Not taken into account."
+                raise vars_error("Abort: HOMEVar is anounced as dev but should be cmor.")
         elif hv.type == 'extra':
             if hv.Priority <= get_variable_from_lset_without_default("max_priority"):
                 if printmore:

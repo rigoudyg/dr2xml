@@ -117,9 +117,9 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
     #   intermediate field id(s) due to union/zoom
     # --------------------------------------------------------------------
     # We use a simple convention for variable names in ping files :
-    if sv.type == 'perso':
+    if sv.type in ['perso', 'dev']:
         alias = sv.label
-        alias_ping = alias
+        alias_ping = sv.label
     else:
         # MPM : si on a defini un label non ambigu alors on l'utilise comme alias (i.e. le field_ref)
         # et pour l'alias seulement (le nom de variable dans le nom de fichier restant svar.label)
@@ -144,8 +144,8 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
             # Get alias without pressure_suffix but possibly with area_suffix
             alias_ping = ping_alias(sv, pingvars)
     #
-    # process only variables in pingvars
-    if alias_ping not in pingvars:
+    # process only variables in pingvars except for dev variables
+    if alias_ping not in pingvars and sv.type != "dev":
         # print "+++ =>>>>>>>>>>>", alias_ping, " ", sv.label
         table = sv.mipTable
         if table not in skipped_vars_per_table:
@@ -643,9 +643,21 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
     # The id of the currently most downstream field is last_field_id
     last_field_id = alias
 
-    alias_ping = ping_alias(sv, pingvars)
     context_index = get_config_variable("context_index")
-    grid_id_in_ping = id2gridid(alias_ping, context_index)
+
+    if sv.type == "dev":
+        alias_ping = alias
+        if alias_ping in context_index:
+            grid_id_in_ping = id2gridid(alias_ping, context_index)
+        else:
+            (grid_id, grid_ref) = sv.description.split("|")
+            sv.description = None
+            field_defs[alias_ping] = '<field id="%-25s long_name="%s standard_name="%s unit="%s grid_ref="%s />' \
+        % (alias_ping + '"', sv.long_name + '"', sv.stdname + '"', sv.units + '"', grid_ref + '"')
+            grid_id_in_ping = context_index[grid_id].attrib["id"]
+    else:
+        alias_ping = ping_alias(sv, pingvars)
+        grid_id_in_ping = id2gridid(alias_ping, context_index)
     last_grid_id = grid_id_in_ping
     # last_grid_id=None
     #
