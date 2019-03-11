@@ -1361,7 +1361,7 @@ def highest_rank(svar):
                 except:
                     if print_DR_errors:
                         print "DR Error: issue with spid for " + \
-                              st.label + " " + v.label + string(cvar.mipTable)
+                              st.label + " " + v.label + str(cvar.mipTable)
                     # One known case in DR 1.0.2: hus in 6hPlev
                     shape = "XY"
                 if "odims" in st.__dict__:

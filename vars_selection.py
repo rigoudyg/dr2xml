@@ -590,7 +590,7 @@ def gather_AllSimpleVars(year=False, printout=False, select="on_expt_and_year"):
     elif select == "no":
         mip_vars_list = select_CMORvars_for_lab(False, None, printout=printout)
     else:
-        raise dr2xml_errors("Choice %s is not allowed for arg 'select'" % select)
+        raise dr2xml_error("Choice %s is not allowed for arg 'select'" % select)
     #
     if get_variable_from_sset_else_lset_with_default('listof_home_vars', 'listof_home_vars', None):
         exp = get_variable_from_sset_with_default_in_sset('experiment_for_requests', 'experiment_id')

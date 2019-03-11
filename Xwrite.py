@@ -960,7 +960,8 @@ def process_singleton(sv, alias, pingvars, field_defs, grid_defs, scalar_defs, t
             #
             # Create a grid with added (or changed) scalar
             glabel = further_grid_id + "_" + scalar_id
-            further_grid_def = add_scalar_in_grid(further_grid_def, glabel, scalar_id, name, sdim.axis == "Z")
+            further_grid_def = add_scalar_in_grid(further_grid_def, glabel, scalar_id, name,
+                                                  sdim.axis == "Z" and further_grid_def != "NATURE_landuse")
             if printout:
                 print "process_singleton : ", " adding grid %s" % further_grid_def
             grid_defs[glabel] = further_grid_def
