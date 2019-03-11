@@ -912,7 +912,7 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
         out.write('\n<grid_definition> \n')
         for obj in grid_defs.keys():
             out.write("\t" + grid_defs[obj])
-        if False and lset.get('use_union_zoom', False):
+        if False and get_variable_from_lset_with_default('use_union_zoom', False):
             for obj in sorted(union_grid_defs.keys()):
                 out.write("\t" + union_grid_defs[obj] + "\n")
         out.write('</grid_definition> \n')
