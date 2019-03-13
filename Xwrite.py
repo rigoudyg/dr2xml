@@ -649,6 +649,7 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
         alias_ping = alias
         if alias_ping in context_index:
             grid_id_in_ping = id2gridid(alias_ping, context_index)
+            sv.description = None
         else:
             (grid_id, grid_ref) = sv.description.split("|")
             sv.description = None

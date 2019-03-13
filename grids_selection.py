@@ -15,7 +15,7 @@ dr2xml allows for the lab to choose among various policy  :
 """
 
 # Utilities
-from utils import dr2xml_grid_error
+from utils import dr2xml_grid_error, dr2xml_error
 
 # DR interface
 from dr_interface import get_uid
