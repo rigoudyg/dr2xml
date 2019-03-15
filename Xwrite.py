@@ -175,7 +175,7 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
                            "via the further_info_url global attribute."
     #
     # WIP Draft 14 july 2016
-    mip_era = get_variable_from_lset_with_default("mip_era", sv.mip_era)
+    mip_era = get_variable_from_sset_else_lset_with_default("mip_era", default=sv.mip_era)
     #
     # WIP doc v 6.2.0 - dec 2016
     # <variable_id>_<table_id>_<source_id>_<experiment_id >_<member_id>_<grid_label>[_<time_range>].nc
@@ -237,19 +237,23 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
         if "_" in expid_in_filename:
             raise dr2xml_error("Cannot use character '_' in expid_in_filename (%s)" % expid_in_filename)
         exp_entry = CMIP6_experiments[expid]
-        experiment = exp_entry['experiment']
-        description = exp_entry['description']
-        activity_id = get_variable_from_lset_with_default('activity_id', exp_entry['activity_id'])
-        parent_activity_id = \
-            get_variable_from_lset_with_default('parent_activity_id',
-                                                get_variable_from_lset_with_default('activity_id',
-                                                                                    exp_entry['parent_activity_id']))
+        experiment = get_variable_from_sset_with_default("experiment", exp_entry["experiment"])
+        description = get_variable_from_sset_with_default("description", exp_entry['description'])
+        activity_id = get_variable_from_sset_else_lset_with_default('activity_id', default=exp_entry['activity_id'])
+        if is_key_in_sset("parent_activity_id"):
+            parent_activity_id = get_variable_from_sset_without_default("parent_acivity_id")
+        elif is_key_in_sset("activity_id"):
+            parent_activity_id = get_variable_from_sset_without_default("activity_id")
+        elif is_key_in_lset("parent_activity_id"):
+            parent_activity_id = get_variable_from_lset_without_default("parent_activity_id")
+        else:
+            parent_activity_id= get_variable_from_sset_with_default("activity_id", exp_entry["parent_activity_id"])
         if type(parent_activity_id) == type([]):
             parent_activity_id = reduce(lambda x, y: x+" "+y, parent_activity_id)
-        if is_key_in_sset('parent_experiment_id'):
-            parent_experiment_id = get_variable_from_sset_with_default('parent_experiment_id')
-        else:
-            parent_experiment_id = reduce(lambda x, y: x+" "+y, exp_entry['parent_experiment_id'])
+        parent_experiment_id = \
+            get_variable_from_sset_else_lset_with_default("parent_experiment_id",
+                                                          default=reduce(lambda x, y:
+                                                                         x+" "+y, exp_entry['parent_experiment_id']))
         required_components = exp_entry['required_model_components']  # .split(" ")
         allowed_components = exp_entry['additional_allowed_model_components']  # .split(" ")
     #
@@ -298,7 +302,7 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
                    (prefix, varname_for_filename, table, source_id, expid_in_filename,
                     member_id, grid_label, date_range, suffix)
     #
-    if not is_key_in_lset('mip_era'):
+    if not (is_key_in_lset('mip_era') or is_key_in_sset("mip_era")):
         further_info_url = "https://furtherinfo.es-doc.org/%s.%s.%s.%s.%s.%s" % (
             mip_era, institution_id, source_id, expid_in_filename,
             sub_experiment_id, variant_label)

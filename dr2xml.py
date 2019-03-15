@@ -460,6 +460,10 @@ example_lab_and_model_settings = {
     # grids.lab_adhoc_grid_policy to grids.CNRM_grid_policy, next setting can force any tos request
     # to also produce tos on a 1 degree grid
     "adhoc_policy_do_add_1deg_grid_for_tos": False,
+
+    # The variable mip_era can be defined at simulation and laboratory levels.
+    # If it is not defined, it will be taken in the variable.
+    # mip_era: "",
 }
 
 """ An example/template of settings for a simulation """
@@ -476,6 +480,10 @@ example_simulation_settings = {
     # "expid_in_filename"   : "myexpe",
     # Experiment id to use for driving the use of the Data Request (default is experiment_id)
     # 'experiment_for_requests' : "piControl",
+
+    # The variable mip_era can be defined at simulation and laboratory levels.
+    # If it is not defined, it will be taken in the variable.
+    # mip_era: "",
 
     # If there is no configuration in lab_settings which matches you case, please rather
     # use next or next two entries : source_id and, if needed, source_type
@@ -597,7 +605,7 @@ example_simulation_settings = {
     # What is the maximum duration of data period in a single file, for this experiment (integer, in years)
     "max_split_freq": None,
 
-    'unused_contexts': []  # If you havn't set a 'configuration', you may fine tune here
+    'unused_contexts': [],  # If you havn't set a 'configuration', you may fine tune here
 }
 
 
