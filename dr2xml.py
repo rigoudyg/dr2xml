@@ -482,11 +482,19 @@ example_simulation_settings = {
     'configuration': 'AOGCM',
 
     # For some experiments (e.g. concentration-driven historical in AESM config), the only way to
-    # avoid producing useless fields is to explictly exclude variables (in addition to those in lab_settings)
+    # avoid producing useless fields is to explicitly exclude variables (in addition to those in lab_settings)
     'excluded_vars': [],
+
+    # It is possible to define the list of included vars in simulation settings.
+    # If it is done, it replace the list which could be defined in laboratory settings.
+    'included_vars': [],
 
     # It can be handy to exclude some Tables at the experiment level. They are added to the lab-level set
     # "excluded_tables"  : [ ] ,
+
+    # The included_tables can be defined at the simulation simulation.
+    # In this case, it replaces the variable that could be defined at laboratory level.
+    'included_tables': [],
 
     # 'source_id'      : "CNRM-CM6-1",
     # 'source_type'    : "OGCM" ,# If the default source-type value for your source (from lab settings)

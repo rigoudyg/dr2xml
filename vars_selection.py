@@ -492,11 +492,17 @@ def select_CMORvars_for_lab(sset=False, year=None, printout=False):
     #    if get_uid(v).label=="ps" : print "step 1 : ps in table",get_uid(v).mipTable,g
 
     #
-    inctab = get_variable_from_lset_with_default("included_tables", [])
+    if sset:
+        inctab = get_variable_from_sset_else_lset_with_default("included_tables", default=[])
+    else:
+        inctab = get_variable_from_lset_with_default("included_tables", [])
     exctab = get_variable_from_lset_with_default("excluded_tables", [])
     if sset:
         exctab.extend(get_variable_from_sset_with_default("excluded_tables", []))
-    incvars = get_variable_from_lset_with_default('included_vars', [])
+    if sset:
+        incvars = get_variable_from_sset_else_lset_with_default("included_vars", default=[])
+    else:
+        incvars = get_variable_from_lset_with_default('included_vars', [])
     excvars = get_variable_from_lset_with_default('excluded_vars', [])
     if sset:
         excvars_for_expes = get_variable_from_sset_with_default('excluded_vars', [])
