@@ -89,6 +89,7 @@ def read_homeVars_list(hmv_file, expid, mips, path_extra_tables=None, printout=F
     extravars = []
     extra_vars_per_table = dict()
     for line in data:
+        print line
         if line[0] == '#':
             continue
         line_split = line.split(';')
@@ -134,7 +135,16 @@ def read_homeVars_list(hmv_file, expid, mips, path_extra_tables=None, printout=F
                 home_var.cell_methods = tcmName2tcmValue[home_var.temporal_shp]
                 home_var.label_without_psuffix = home_var.label
                 home_var.cell_measures = ""
-            if home_var.mip == "ANY" or home_var.mip in mips:
+            print home_var.mip
+            actual_mip = home_var.mip
+            if actual_mip.startswith(r"[") and actual_mip.endswith(r"]"):
+                new_mip = actual_mip[1:]
+                new_mip = new_mip[:-1]
+                new_mip = new_mip.split(",")
+                home_var.mip = new_mip
+            print home_var.mip
+            if (isinstance(home_var.mip, str) and (home_var.mip == "ANY" or home_var.mip in mips)) or \
+                    (isinstance(home_var.mip, list) and mips.issuperset(home_var.mip)):
                 if home_var.experiment != "ANY":
                     # if home_var.experiment==expid: homevars.append(home_var)
                     if expid in home_var.experiment:
