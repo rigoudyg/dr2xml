@@ -1,392 +1,421 @@
-"""
-Management of output grids 
-
-Principles : the Data Request may specify which grid to use : either native or a common, regular, one. This specifed per requestLink, which means per set of variables and experiments. 
-
-dr2xml allows for the lab to choose among various policy  :
-   - DR or None : always follow DR spec
-   - native     : never not follow DR spec (always use native or close-to-native grid)
-   - native+DR  : always produce on the union of grids
-   - adhoc      : decide on each case, based on CMORvar attributes, using a 
-                  lab-specific scheme implemented in a lab-provided Python 
-                  function which should replace function lab_adhoc_grid_policy
-
-Also : management of fields size/split_frequency 
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 """
+Grids general tools.
+"""
 
-compression_factor=None
-splitfreqs=None
+import re
 
-    
-def normalize(grid) :
-    """ in DR 1.0.2, values are :  
-    ['', 'model grid', '100km', '50km or smaller', 'cfsites', '1deg', '2deg', '25km or smaller', 'native']
-    """
-    if grid in [ "native", "model grid", "" ] : return ""
-    return grid.replace(" or smaller","")
+from xml_interface import create_xml_element_from_string, create_string_from_xml_element
+from cfsites import cfsites_grid_id, add_cfsites_in_defs, cfsites_domain_id
+from settings_interface import get_variable_from_lset_without_default, get_variable_from_lset_with_default, is_key_in_lset
+from config import get_config_variable
+from dr_interface import get_collection, get_uid
+from utils import dr2xml_error
 
-def decide_for_grids(cmvarid,grids,lset,dq):
-    """
-    Decide which set of grids a given variable should be produced on
-    
-    CMVARID is uid of the CMORvar
-    GRIDS is a list of strings for grid as specified in requestLink 
-    LSET is the laboratory settings dictionnary. It carries a policy re. grids
-    
-    Returns a list of grid strings (with some normalization) (see below)
-    
-    TBD : use Martin's acronyms for grid policy
-    """
-    # Normalize and remove duplicates in grids list
-    ngrids=map(normalize,grids)
-    sgrids=set()
-    for g in ngrids : sgrids.add(g)
-    ngrids=list(sgrids)
-    #
-    policy=lset.get("grid_policy")
-    if policy is None or policy=="DR": # Follow DR spec
-        return ngrids
-    elif policy=="native": # Follow lab grids choice (gr or gn depending on context - see lset['grids"])
-        if ngrids==['cfsites'] : return ngrids
-        else: return [""]
-    elif policy=="native+DR": # Produce both in 'native' and DR grid
-        if ngrids==['cfsites'] : return ngrids
-        else: 
-            sgrids.add('')
-            return list(sgrids)
-    elif policy=="adhoc" :
-        return lab_adhoc_grid_policy(cmvarid,ngrids,lset,dq)
-    else :
-        dr2xml_error("Invalid grid policy %s"%policy)
 
-def lab_adhoc_grid_policy(cmvarid,grids,lset,dq) :
-    """
-    Decide , in a lab specific way, which set of grids a given
-    variable should be produced on You should re-engine code below to
-    your own decision scheme, if the schemes of the standard grid
-    policy choices (see fucntion decide_for_grid) do not fit
+# Next variable is used to circumvent an Xios 1270 shortcoming. Xios
+# should read that value in the datafile. Actually, it did, in some
+# earlier version ...
+axis_count = 0
 
-    CMVARID is uid of the CMORvar
-    GRIDS is a list of strings for grid as specified in requestLink (with some normalization)
-    LSET is the laboratory settings dictionnary. It carries a policy re. grids
-    
-    Returns either a single grid string or a list of such strings
-    """
-    return CNRM_grid_policy(cmvarid,grids,lset,dq) 
 
-def CNRM_grid_policy(cmvarid,grids,lset,dq) : #TBD
-    """
-    See doc of lab_adhoc_grid_policy
-    """
-    if dq.inx.uid[cmvarid].label in [ "sos" ] :
-        return [ g for g in grids if g in ["","1deg"]]
-    elif dq.inx.uid[cmvarid].label in [ "tos" ] and \
-         ( dq.inx.uid[cmvarid].mipTable not in [ "3hr" ] or lset.get("allow_tos_3hr_1deg",True)):
-        if lset.get("adhoc_policy_do_add_1deg_grid_for_tos",False) :
-            if "" in grids : l= [""]
-            else : l=[]
-            l.append("1deg")
-            return(l)
-        else:
-            return [ g for g in grids if g in ["","1deg"]]
+def get_grid_def(grid_id, grid_defs):
+    context_index = get_config_variable("context_index")
+    if grid_id in grid_defs:
+        # Simple case : already stored
+        grid_def = grid_defs[grid_id]
     else:
-        ngrids=[ g for g in grids if g not in [ "1deg", "2deg", "100km", "50km" ]]
-        #if "cfsites" in grids : return ["","cfsites"]
-        if ngrids == [] : ngrids=[ "" ] # We should at least provide native grid
-        return ngrids
-
-
-def DRgrid2gridatts(grid) :
-     """ Returns label, resolution, description for a DR grid name"""
-     if grid=="cfsites" : return ("gn","100 km", \
-                               "data sampled in model native grid by nearest neighbour method ")
-     if grid=="1deg" : return ("gr1","1x1 degree", \
-                               "data regridded to a CMIP6 standard 1x1 degree latxlon grid from the native grid")
-     if grid=="2deg" : return ("gr2","2x2 degree", \
-                               "data regridded to a CMIP6 standard 2x2 degree latxlon grid from the native grid")
-     if grid=="100km" : return ("gr3","100 km", \
-                               "data regridded to a CMIP6 standard 100 km resol grid from the native grid")
-     if grid=="50km"  : return ("gr4","50 km", \
-                               "data regridded to a CMIP6 standard 50 km resol grid from the native grid")
-     if grid=="25km"  : return ("gr5","25 km", \
-                               "data regridded to a CMIP6 standard 25 km resol grid from the native grid")
-     return("grx","?x? degree", "grid has no description- please fix DRgrid2gridatts for grid %s"%grid)
-
-
-def field_size(svar, mcfg):
-
-    # COmputing field size is basee on the fact that sptial dimensions
-    # are deduced from spatial shape and values in mcfg, while
-    # attribute other_dims_size of the variable indicates he prodcut
-    # of the non-spatial dimensions sizes
-
-    # ['nho','nlo','nha','nla','nlas','nls','nh1'] / nz = sc.mcfg['nlo']
-
-    nb_lat=mcfg['nh1'] 
-    nb_lat_ocean=mcfg['nh1']
-    atm_grid_size=mcfg['nha']
-    atm_nblev=mcfg['nla']
-    soil_nblev=mcfg['nls']
-    oce_nblev=mcfg['nlo']
-    oce_grid_size=mcfg['nho']
-    # TBD : dimension sizes below should be derived from DR query
-    nb_cosp_sites=129 
-    nb_lidar_temp=40
-    nb_parasol_refl=5
-    nb_isccp_tau=7
-    nb_isccp_pc=7
-    nb_curtain_sites=1000 
-    #
-    siz=0
-    s=svar.spatial_shp
-    if ( s == "XY-A" ): #Global field on model atmosphere levels
-        siz=atm_nblev*atm_grid_size
-    elif ( s == "XY-AH" ): #Global field on model atmosphere half-levels
-        siz=(atm_nblev+1)*atm_grid_size
-    elif ( s == "na-AH" ): #profile on model atmosphere half-levels
-        siz=atm_nblev+1
-    elif ( s[0:4] == "XY-P" ): #Global field (pressure levels)
-        if "jpdftaure" in svar.label :
-            siz=atm_grid_size
+        if grid_id in context_index:
+            # Grid defined through xml
+            grid_def = create_string_from_xml_element(context_index[grid_id])
         else:
-            siz=atm_grid_size*svar.other_dims_size
-    elif ( s[0:4] == "XY-H" ): #Global field (altitudes)
-        siz=atm_grid_size*svar.other_dims_size
-    elif ( s == "S-AH" ): #Atmospheric profiles (half levels) at specified sites
-        siz=(atm_nblev+1)*nb_cosp_sites
-    elif ( s == "S-A" ): #Atmospheric profiles at specified sites
-        siz=atm_nblev*nb_cosp_sites
-    elif ( s == "S-na" ): #Site (129 specified sites)
-        siz=nb_cosp_sites
+            raise dr2xml_error("Cannot guess a grid def for %s" % grid_id)
+            grid_def = None
+    return grid_def
 
-    elif ( s == "L-na" ): #COSP curtain
-        siz=nb_curtain_sites        
-    elif ( s == "L-H40" ): #Site profile (at 40 altitudes)
-        siz=nb_curtain_sites*svar.other_dims_size
 
-    elif ( s == "Y-P19") : #Atmospheric Zonal Mean (on 19 pressure levels)
-        siz=nb_lat*svar.other_dims_size
-    elif ( s == "Y-P39") : #Atmospheric Zonal Mean (on 39 pressure levels)
-        siz=nb_lat*svar.other_dims_size
+def guess_simple_domain_grid_def(grid_id):
+    # dr2xml sometimes must be able to restconstruct the grid def for a grid which has
+    # just a domain, from the grid_id, using a regexp with a numbered group that matches
+    # domain_name in grid_id. Second item is group number
+    regexp = get_variable_from_lset_without_default("simple_domain_grid_regexp")
+    domain_id, n = re.subn(regexp[0], r'\%d' % regexp[1], grid_id)
+    if n != 1:
+        raise dr2xml_error("Cannot identify domain name in grid_id %s using regexp %s" % (grid_id, regexp[0]))
+    grid_def = '<grid id="%s" ><domain domain_ref="%s"/></grid>' % (grid_id, domain_id)
+    print("Warning: Guess that structure for grid %s is : %s" % (grid_id, grid_def))
+    # raise dr2xml_error("Warning: Guess that structure for grid %s is : %s"%(grid_id,grid_def))
+    return grid_def
 
-    elif ( s == "Y-A" ): #Zonal mean (on model levels)
-        siz=nb_lat*atm_nblev
-    elif ( s == "Y-na" ): #Zonal mean (on surface)
-        siz=nb_lat
-    elif ( s == "na-A" ): #Atmospheric profile (model levels)
-        # mpmoine_correction:field_size: 'na-A' s'applique a des dims (alevel)+spectband mais aussi a (alevel,site) => *nb_cosp_sites
-        siz=atm_nblev*nb_cosp_sites
 
-    elif ( s == "XY-S" ): #Global field on soil levels
-        siz=soil_nblev*atm_grid_size
-    
-    elif ( s == "XY-SN" ): #TBD : restore correct size for fields on snow levels (was supposed to be size 1, for tsnl)
-        siz=atm_grid_size
-    
-    elif ( s == "XY-O" ): #Global ocean field on model levels
-        siz=oce_nblev*oce_grid_size
-
-    elif ( s == "XY-na" ): #Global field (single level)
-        siz=atm_grid_size
-        if svar.modeling_realm in \
-           [ 'ocean', 'seaIce', 'ocean seaIce', 'ocnBgchem', 'seaIce ocean' ] : 
-            siz=oce_grid_size
-        siz*=svar.other_dims_size
-    elif ( s == "XY-temp" ): #Global field (lidar_temp)
-        siz=atm_grid_size*nb_lidar_temp
-    elif ( s == "XY-sza5" ): #Global field (parasol_refl)
-        siz=atm_grid_size*nb_parasol_refl
-    elif ( s == "XY-tau|plev7c" ): #Global field (isccp_tau x isccp_pc)
-        siz=atm_grid_size*nb_isccp_tau*nb_isccp_pc
-
-    elif ( s == "YB-R" ): #Ocean Basin Meridional Section (on density surfaces)
-        siz=oce_nblev*nb_lat_ocean
-    elif ( s == "YB-O" ): #Ocean Basin Meridional Section
-        siz=oce_nblev*nb_lat_ocean
-    elif ( s == "GYB-O" ): #Ocean Basin Meridional Section
-        siz=oce_nblev*nb_lat_ocean
-    elif ( s == "YB-na" ): #Ocean Basin Zonal Mean
-        siz=nb_lat_ocean
-
-    elif ( s == "TR-na" ): #Ocean Transect
-        siz=svar.other_dims_size
-    elif ( s == "TRS-na" ): #Sea-ice ocean transect
-        siz=svar.other_dims_size
-
-    elif ( s == "na-na" ): #Global mean/constant
-        siz=1
-
-    if siz==0 :
-        raise dr2xml_grids_error("Cannot compute field_size for var %s and shape %s"%(svar.label,s))
-
-    return siz
-
-def split_frequency_for_variable(svar, lset, grid, mcfg,context,printout=False):
+def create_grid_def(grid_defs, axis_def, axis_name, src_grid_id):
     """
-    Compute variable level split_freq and returns it as a string
+    Create and store a grid definition by changing in SRC_GRID_ID grid def
+    its only axis member (either def or ref) with AXIS_DEF (where any id
+    has been removed)
 
-    Method : if shape is basic, compute period using field size and a
-    parameter from lset indicating max filesize, with some smart
-    rounding.  Otherwise, use a fixed value which depends on shape, 
-    with a default value
+    Returned grid_id = input grid_id + suffix '_AXIS_NAME'
+
+    raises error if there is not exactly one axis def or reg in input grid
 
     """
-    global splitfreqs
-    if splitfreqs is None : read_splitfreqs()
-    if splitfreqs and svar.label in splitfreqs and \
-       svar.mipTable in splitfreqs[svar.label] :
-        return splitfreqs[svar.label][svar.mipTable]
+    src_grid_def = get_grid_def(src_grid_id, grid_defs)
     #
-    max_size=lset.get("max_file_size_in_floats",500*1.e6)
+    # Retrieve axis key from axis definition string
+    axis_key = re.sub(r'.*id= *.([\w_]*).*', r'\1', axis_def.replace('\n', ' '))
+    target_grid_id = src_grid_id + "_" + axis_key
     #
-    global compression_factor
-    size=field_size(svar, mcfg)*lset.get("bytes_per_float",2)
-    if compression_factor is None : read_compression_factors()
-    if compression_factor and svar.label in compression_factor and \
-       svar.mipTable in compression_factor[svar.label] :
-        if printout : print "Dividing size of %s by %g : %g -> %g"%(svar.label,\
-                compression_factor[svar.label][svar.mipTable],size,\
-                (size+0.)/compression_factor[svar.label][svar.mipTable])
-        size = (size+0.)/compression_factor[svar.label][svar.mipTable]
-    #else:
-    #    # Some COSP outputs are highly compressed
-    #    if 'cfad' in svar.label : size/=10.
-    #    if 'clmisr' in svar.label : size/=10.
+    # Remove id= from axis definition string
+    axis_def = re.sub(r'id= *.([\w_]*).', '', axis_def)
+    #
+    # Change only first instance of axis_ref, which is assumed to match the vertical dimension
+    # Enforce axis_name in axis_def :  TBD
+    (target_grid_def, count) = re.subn('<axis[^\>]*>', axis_def, src_grid_def, 1)
+    if count != 1:
+        raise dr2xml_error("Fatal: cannot find an axis ref in grid %s : %s " % (src_grid_id, src_grid_def))
+    target_grid_def = re.sub('grid id= *.([\w_])*.', 'grid id="%s"' % target_grid_id, target_grid_def)
+    grid_defs[target_grid_id] = target_grid_def
+    return target_grid_id
 
-    if (size != 0 ) : 
-        freq=svar.frequency
-        sts=lset["sampling_timestep"][grid][context]
-        # Try by years first
-        size_per_year=size*timesteps_per_freq_and_duration(freq,365,sts)
-        nbyears=max_size/float(size_per_year)
-        if printout : print "size per year=%s, size=%s, nbyears=%g"%(`size_per_year`,`size`,nbyears)
-        if nbyears > 1. :
-            if   nbyears > 500 : return "500y"
-            elif nbyears > 250 : return "250y"
-            elif nbyears > 100 : return "100y"
-            elif nbyears >  50 : return  "50y"
-            elif nbyears >  25 : return  "25y"
-            elif nbyears >  10 : return  "10y"
-            elif nbyears >   5 : return   "5y"
-            elif nbyears >   2 : return   "2y"
-            else : return "1y"
-        else: 
-            # Try by month
-            size_per_month=size*timesteps_per_freq_and_duration(freq,31,sts)
-            nbmonths=max_size/float(size_per_month)
-            if nbmonths > 6. :
-                return("6mo")
-            elif nbmonths > 4. :
-                return("4mo")
-            elif nbmonths > 3. :
-                return("3mo")
-            elif nbmonths > 0.7 :
-                return("1mo")
-            else:
-                # Try by day
-                size_per_day=size*timesteps_per_freq_and_duration(freq,1,sts)
-                nbdays=max_size/float(size_per_day)
-                if nbdays > 1. :
-                    return("1d")
+
+def create_axis_def(sdim, axis_defs, field_defs):
+    """
+
+    From a simplified Dim object SDIM representing a vertical dimension,
+    creates and stores an Xios axis definition in AXIS_DEFS
+
+    If the dimension implies vertical interpolation (on air_pressure
+    or altitude levels), creates and stores (in FIELD_DEFS) two
+    intermediate fields for the sampling of that coordinate field at
+    the vert_frequency and with the type of operation indicated by LSET
+
+    If the dimension is a zoom of another one, analyzes its 'requested'
+    field against the list of values declared for the other one, for
+    defining the zoom in XIOS syntax
+
+    """
+    prefix = get_variable_from_lset_without_default("ping_variables_prefix")
+    # nbre de valeurs de l'axe determine aussi si on est en dim singleton
+    if sdim.requested:
+        glo_list = sdim.requested.strip(" ").split()
+    else:
+        glo_list = sdim.value.strip(" ").split()
+    glo_list_num = [float(v) for v in glo_list]
+    glo_list_num.sort(reverse=True)
+    n_glo = len(glo_list)
+
+    if not sdim.is_zoom_of:  # pure interpolation
+        # Axis is not a zoom of another, write axis_def normally (with value, interpolate_axis,etc.)
+        rep = '<axis id="%s" ' % sdim.label
+        if sdim.positive not in [None, ""]:
+            rep += 'positive="%s" ' % sdim.positive
+        if n_glo > 1:
+            # Case of a non-degenerated vertical dimension (not a singleton)
+            rep += 'n_glo="%g" ' % n_glo
+            rep += 'value="(0,%g)[ %s ]"' % (n_glo - 1, sdim.requested)
+        else:
+            if n_glo != 1:
+                print "Warning: axis for %s is singleton but has %d values" % (sdim.label, n_glo)
+                return None
+            # Singleton case (degenerated vertical dimension)
+            rep += 'n_glo="%g" ' % n_glo
+            rep += 'value="(0,0)[ %s ]"' % sdim.value
+        rep += ' name="%s"' % sdim.out_name
+        rep += ' standard_name="%s"' % sdim.stdname
+        rep += ' long_name="%s"' % sdim.long_name
+        rep += ' unit="%s"' % sdim.units
+        rep += '>'
+        if sdim.stdname == "air_pressure":
+            coordname = prefix + "pfull"
+        if sdim.stdname == "altitude":
+            coordname = prefix + "zg"
+        #
+        # Create an intemediate field for coordinate , just adding time sampling
+        operation = get_variable_from_lset_with_default("vertical_interpolation_operation", "instant")
+        coordname_with_op = coordname + "_" + operation  # e.g. CMIP6_pfull_instant
+        coorddef_op = '<field id="%-25s field_ref="%-25s operation="%s" detect_missing_value="true"/>' \
+                      % (coordname_with_op + '"', coordname + '"', operation)
+        field_defs[coordname_with_op] = coorddef_op
+        #
+        # Create and store a definition for time-sampled field for the vertical coordinate
+        vert_frequency = get_variable_from_lset_without_default("vertical_interpolation_sample_freq")
+        coordname_sampled = coordname_with_op + "_sampled_" + vert_frequency  # e.g. CMIP6_pfull_instant_sampled_3h
+        rep += '<interpolate_axis type="polynomial" order="1"'
+        rep += ' coordinate="%s"/>\n\t</axis>' % coordname_sampled
+        # Store definition for the new axis
+        axis_defs[sdim.label] = rep
+        coorddef = '<field id="%-25s field_ref="%-25s freq_op="%-10s detect_missing_value="true"> @%s</field>' \
+                   % (coordname_sampled + '"', coordname_with_op + '"', vert_frequency + '"', coordname)
+        field_defs[coordname_sampled] = coorddef
+    else:  # zoom case
+        # Axis is subset of another, write it as a zoom_axis
+        rep = '<axis id="%s"' % sdim.zoom_label
+        rep += ' axis_ref="%s" name="plev"' % sdim.is_zoom_of
+        rep += ' axis_type="%s">' % sdim.axis
+        rep += '\t<zoom_axis index="(0,%g)[ ' % (n_glo - 1)
+        values = re.sub(r'.*\[ *(.*) *\].*', r'\1', axis_defs[sdim.is_zoom_of])
+        values = values.split("\n")[0]
+        union_vals = values.strip(" ").split()
+        union_vals_num = [float(v) for v in union_vals]
+        for val in glo_list_num:
+            rep += ' %g' % union_vals_num.index(val)
+        rep += ' ]"/>'
+        rep += '</axis>'
+        # Store definition for the new axis
+        axis_defs[sdim.zoom_label] = rep
+    return rep
+
+
+def change_domain_in_grid(domain_id, grid_defs, ping_alias=None, src_grid_id=None, turn_into_axis=False,
+                          printout=False):
+    """
+    Provided with a grid id SRC_GRID_ID or alertnatively a variable name (ALIAS),
+    (SRC_GRID_STRING)
+     - creates ans stores a grid_definition where the domain_id has been changed to DOMAIN_ID
+    -  returns its id, which is
+    """
+    if src_grid_id is None:
+        raise dr2xml_error("deprecated")
+    else:
+        src_grid_string = get_grid_def_with_lset(src_grid_id, grid_defs)
+    target_grid_id = src_grid_id + "_" + domain_id
+    # Change domain
+    domain_or_axis = "domain"
+    axis_name = ""
+    if turn_into_axis:
+        domain_or_axis = "axis"
+        axis_name = ' name="lat"'
+    # sequence below was too permissive re. assumption that all grid definition use refs rather than ids
+    # (target_grid_string,count)=re.subn('domain *id= *.([\w_])*.','%s id="%s" %s'% \
+    # (domain_or_axis,domain_id,axis_name), src_grid_string,1)
+    # if count != 1 :
+    (target_grid_string, count) = re.subn('domain *domain_ref= *.([\w_])*.',
+                                          '%s %s_ref="%s" %s' % (domain_or_axis, domain_or_axis, domain_id, axis_name),
+                                          src_grid_string, 1)
+    if count != 1:
+        raise dr2xml_error("Fatal: cannot find a domain to replace by %s"
+                           "in src_grid_string %s, count=%d " % (domain_id, src_grid_string, count))
+    target_grid_string = re.sub('grid *id= *.([\w_])*.', 'grid id="%s"' % target_grid_id, target_grid_string)
+    grid_defs[target_grid_id] = target_grid_string
+    # print "target_grid_id=%s : %s"%(target_grid_id,target_grid_string)
+    return target_grid_id
+
+
+def get_grid_def_with_lset(grid_id, grid_defs):
+    try:
+        grid_def = get_grid_def(grid_id, grid_defs)
+    except:
+        grid_def = guess_simple_domain_grid_def(grid_id)
+        grid_defs[grid_id] = grid_def
+    return grid_def
+
+
+def change_axes_in_grid(grid_id, grid_defs, axis_defs):
+    """
+    Create a new grid based on GRID_ID def by changing all its axis references to newly created
+    axis which implement CMIP6 axis attributes
+    Works only on axes which id match the labels of DR dimensions (e.g. sdepth, landUSe ...)
+    Stores the definitions in GRID_DEFS and AXIS_DEFS
+    Returns the new grid_id
+    """
+    global axis_count
+    grid_def = get_grid_def(grid_id, grid_defs)
+    grid_el = create_xml_element_from_string(grid_def)
+    output_grid_id = grid_id
+    axes_to_change = []
+    # print "in change_axis for %s "%(grid_id)
+
+    # Get settings info about axes normalization
+    aliases = get_variable_from_lset_with_default('non_standard_axes', dict())
+
+    # Add cases where dim name 'sector' should be used,if needed
+    # sectors = dims which have type charcter and are not scalar
+    if is_key_in_lset('sectors'):
+        sectors = get_variable_from_lset_without_default('sectors')
+    else:
+        sectors = [dim.label for dim in get_collection('grids').items if dim.type == 'character' and dim.value == '']
+    if 'typewetla' in sectors:
+        sectors.remove('typewetla')  # Error in DR 01.00.21
+    # print "sectors=",sectors
+    for sector in sectors:
+        found = False
+        for aid in aliases:
+            if aliases[aid] == sector:
+                found = True
+                continue
+            if type(aliases[aid]) == type(()) and aliases[aid][0] == sector:
+                found = True
+                continue
+        if not found:
+            # print "\nadding sector : %s"%sector
+            aliases[sector] = sector
+
+    for sub in grid_el:
+        if sub.tag == 'axis':
+            # print "checking grid %s"%grid_def
+            if 'axis_ref' not in sub.attrib:
+                # Definitely don't want to change an unnamed axis. Such an axis is
+                # generated by vertical interpolation
+                if any([ssub.tag == 'interpolate_axis' for ssub in sub]):
+                    continue
                 else:
-                    raise(dr2xml_grids_error("No way to put even a single day "+\
-                        "of data in %g for frequency %s, var %s, table %s"%\
-                        (max_size,freq,svar.label,svar.mipTable)))
+                    print "Cannot normalize an axis in grid %s : no axis_ref for axis %s" %\
+                          (grid_id, create_string_from_xml_element(sub))
+                    continue
+                    # raise dr2xml_error("Grid %s has an axis without axis_ref : %s"%(grid_id,grid_def))
+            axis_ref = sub.attrib['axis_ref']
+            #
+
+            # Just quit if axis doesn't have to be processed
+            if axis_ref not in aliases.keys():
+                # print "for grid ",grid_id,"axis ",axis_ref, " is not in aliases"
+                continue
+            #
+            dr_axis_id = aliases[axis_ref]
+            alt_labels = None
+            if type(dr_axis_id) == type(()):
+                dr_axis_id, alt_labels = dr_axis_id
+            dr_axis_id = dr_axis_id.replace('axis_', '')  # For toy_cnrmcm, atmosphere part
+            # print ">>> axis_ref=%s, dr_axis_id=%s,alt_labels=%s"%(axis_ref,dr_axis_id,alt_labels),aliases[axis_ref]
+            #
+            dim_id = 'dim:%s' % dr_axis_id
+            # print "in change_axis for %s %s"%(grid_id,dim_id)
+            if dim_id not in get_uid():  # This should be a dimension !
+                raise dr2xml_error("Value %s in 'non_standard_axes' is not a DR dimension id" % dr_axis_id)
+            dim = get_uid(dim_id)
+            # We don't process scalars here
+            if dim.value == '' or dim.label == "scatratio":
+                axis_id, axis_name = create_axis_from_dim(dim, alt_labels, axis_ref, axis_defs)
+                # cannot use ET library which does not guarantee the ordering of axes
+                axes_to_change.append((axis_ref, axis_id, axis_name))
+                output_grid_id += "_" + dim.label
+            else:
+                raise dr2xml_error("Dimension %s is scalar and shouldn't be quoted in 'non_standard_axes'" % dr_axis_id)
+    if len(axes_to_change) == 0:
+        return grid_id
+    for old, new, name in axes_to_change:
+        axis_count += 1
+        grid_def = re.sub("< *axis[^>]*axis_ref= *.%s. *[^>]*>" % old,
+                          '<axis axis_ref="%s" name="%s" id="ref_to_%s_%d"/>' % (new, name, new, axis_count), grid_def)
+    grid_def = re.sub("< *grid([^>]*)id= *.%s.( *[^>]*)>" % grid_id,
+                      r'<grid\1id="%s"\2>' % output_grid_id, grid_def)
+    grid_defs[output_grid_id] = grid_def
+    return output_grid_id
+
+
+def create_axis_from_dim(dim, labels, axis_ref, axis_defs):
+    """
+    Create an axis definition by translating all DR dimension attributes to XIos
+    constructs generating CMIP6 requested attributes
+    """
+    axis_id = "DR_" + dim.label + "_" + axis_ref
+    if dim.type == "character":
+        axis_name = "sector"
     else:
-      raise dr2xml_grids_error("Warning: field_size returns 0 for var %s, cannot compute split frequency."%(svar.label))
-       
-                
-def timesteps_per_freq_and_duration(freq,nbdays,sampling_tstep):
-    # This function returns the number of records within nbdays
-    duration=0.
-    # Translate freq strings to duration in days
-    if   freq=="3hr" or freq=="3hrPt" or freq=="3h" : duration=1./8
-    elif freq=="6hr" or freq=="6hrPt" or freq=="6h" : duration=1./4
-    elif freq=="day" or freq=="1d"                  : duration=1.
-    elif freq=="5day" or freq=="5d"                 : duration=5.
-    elif freq=="10day" or freq=="10d"               : duration=10.
-    elif freq=="1hr" or freq=="hr" or freq=="1hrPt" or freq=="1h" : duration=1./24
-    elif freq=="mon" or freq=="monPt" or freq=="monC" or freq=="1mo" : duration=31.
-    elif freq=="yr"  or freq=="yrPt" or freq=="1y"  : duration=365.
-    # TBD ; use setting's value for CFsubhr_frequency
-    elif freq=="subhr" or freq=="subhrPt" or freq=="1ts" : duration=1./(86400./sampling_tstep) 
-    elif freq=="dec" or freq=="10y"                  : duration=10.*365
+        axis_name = dim.altLabel
+    if axis_id in axis_defs:
+        return axis_id, axis_name
+
+    rep = '<axis id="%s" name="%s" axis_ref="%s"' % (axis_id, axis_name, axis_ref)
+    if type(dim.standardName) == type(""):
+        rep += ' standard_name="%s"' % dim.standardName
+    rep += ' long_name="%s"' % dim.title
     #
-    # If freq actually translate to a duration, return
-    # number of timesteps for number of days
+    if dim.type == "double":
+        rep += ' prec="8"'
+    elif dim.type in ["integer", "int"]:
+        rep += ' prec="2"'
+    elif dim.type == "float":
+        rep += ' prec="4"'
     #
-    if duration != 0. : return float(nbdays)/duration
-    # Otherwise , return a sensible value
-    elif freq=="fx" : return 1.
-    #elif freq=="monClim" : return (int(float(nbdays)/365) + 1)* 12.
-    #elif freq=="dayClim" : return (int(float(nbdays)/365) + 1)* 365.
-    #elif freq=="1hrClimMon" : return (int(float(nbdays)/31) + 1) * 24.
-    elif freq=="1hrCM" : return (int(float(nbdays)/31) + 1) * 24.
-    else : raise(dr2xml_grids_error("Frequency %s is not handled"%freq))
-    
+    if dim.units != '':
+        rep += ' unit="%s"' % dim.units
+    if dim.type != "character":
+        if dim.requested != "":
+            nb = len(dim.requested.split())
+            rep += ' value="(0,%d)[ ' % nb + dim.requested + ' ]"'
+        if type(dim.boundsRequested) == type([]):
+            vals = [" %s" % v for v in dim.boundsRequested]
+            valsr = reduce(lambda x, y: x + y, vals)
+            rep += ' bounds="(0,1)x(0,%d)[ ' % (nb - 1) + valsr + ' ]"'
+    else:
+        rep += ' dim_name="%s" ' % dim.altLabel
+        if labels is None:
+            labels = dim.requested
+        if dim.label == "oline" and get_variable_from_lset_with_default('add_Gibraltar', False):
+            labels += " gibraltar"
+        labels = labels.replace(', ', ' ').replace(',', ' ')
+        length = len(labels.split())
+        # print 'labels=',labels.split()
+        strings = " "
+        for s in labels.split():
+            strings += "%s " % s
+        if length > 0:
+            rep += ' label="(0,%d)[ %s ]"' % (length - 1, strings)
+    rep += "/>"
+    axis_defs[axis_id] = rep
+    # print "new DR_axis :  %s "%rep
+    return axis_id, axis_name
 
-def read_compression_factors():
-    """
-    read compression factors: first column is variable label, second 
-    column is mipTabe; third column is a correction factor due to 
-    compression efficiency for that variable (good compression <-> high value); 
-    They should be evaluated on test runs, and applied on runs with 
-    the same compression_level setting
-    This factor is applied above the bytes_per_float setting
-    """
-    global compression_factor
-    # No need to reread or try for ever
-    if compression_factor is not None : return
-    try:
-        fact=open("compression_factors.dat","r")
-    except:
-        compression_factor=False
-        return
-    lines=fact.readlines()
-    compression_factor=dict()
-    for line in lines :
-        if line[0]=='#' : continue
-        varlabel=line.split()[0]
-        table=line.split()[1]
-        factor=float(line.split()[2])
-        if varlabel not in compression_factor :
-            compression_factor[varlabel]=dict()
-        # Keep smallest factor for each variablelabel
-        if table not in compression_factor[varlabel] or \
-           compression_factor[varlabel][table] > factor :
-            compression_factor[varlabel][table]=factor
 
-def read_splitfreqs():
+def isVertDim(sdim):
     """
-    read split_frequencies: first column is variable label, second 
-    column is mipTabe; third column is the split_freq
+    Returns True if dim represents a dimension for which we want
+    an Xios interpolation.
+    For now, a very simple logics for interpolated vertical
+    dimension identification:
     """
-    global splitfreqs
-    # No need to reread or try for ever
-    if splitfreqs is not None : return
-    try:
-        freq=open("splitfreqs.dat","r")
-        print "Reading split_freqs from file"
-    except:
-        splitfreqs=False
-        return
-    lines=freq.readlines()
-    freq.close()
-    splitfreqs=dict()
-    for line in lines :
-        if line[0]=='#' : continue
-        varlabel=line.split()[0]
-        table=line.split()[1]
-        freq=line.split()[2]
-        if varlabel not in splitfreqs :
-            splitfreqs[varlabel]=dict()
-        # Keep smallest factor for each variablelabel
-        if table not in splitfreqs[varlabel] :
-            splitfreqs[varlabel][table]=freq
+    # SS : p840, p220 sont des couches de pression.  On les detecte par l'attribut value
+    # test=(sdim.stdname=='air_pressure' or sdim.stdname=='altitude') and (sdim.value == "")
+    test = (sdim.axis == 'Z')
+    return test
 
-class dr2xml_grids_error(Exception):
-    def __init__(self, valeur):
-        self.valeur = valeur
-    def __str__(self):
-        return `self.valeur`
+
+def scalar_vertical_dimension(sv):
+    if 'cids' in sv.struct.__dict__:
+        cid = get_uid(sv.struct.cids[0])
+        if cid.axis == 'Z':
+            return cid.altLabel
+    return None
+
+
+def create_output_grid(ssh, grid_defs, domain_defs, target_hgrid_id, margs):
+    # Build output grid (stored in grid_defs) by analyzing the spatial shape
+    # Including horizontal operations. Can include horiz re-gridding specification
+    # --------------------------------------------------------------------
+    grid_ref = None
+
+    # Compute domain name, define it if needed
+    if ssh[0:2] == 'Y-':  # zonal mean and atm zonal mean on pressure levels
+        # Grid normally has already been created upstream
+        grid_ref = margs['src_grid_id']
+    elif ssh == 'S-na':
+        # COSP sites. Input field may have a singleton dimension (XIOS scalar component)
+        grid_ref = cfsites_grid_id
+        add_cfsites_in_defs(grid_defs, domain_defs)
+        #
+    elif ssh[0:3] == 'XY-' or ssh[0:3] == 'S-A':
+        # this includes 'XY-AH' and 'S-AH' : model half-levels
+        if ssh[0:3] == 'S-A':
+            add_cfsites_in_defs(grid_defs, domain_defs)
+            target_hgrid_id = cfsites_domain_id
+        if target_hgrid_id:
+            # Must create and a use a grid similar to the last one defined
+            # for that variable, except for a change in the hgrid/domain
+            grid_ref = change_domain_in_grid(target_hgrid_id, grid_defs)
+            if grid_ref is False or grid_ref is None:
+                raise dr2xml_error("Fatal: cannot create grid_def for %s with hgrid=%s" % (alias, target_hgrid_id))
+    elif ssh == 'TR-na' or ssh == 'TRS-na':  # transects,   oce or SI
+        pass
+    elif ssh[0:3] == 'YB-':  # basin zonal mean or section
+        pass
+    elif ssh == 'na-na':  # TBD ? global means or constants - spatial integration is not handled
+        pass
+    elif ssh == 'na-A':  # only used for rlu, rsd, rsu ... in Efx ????
+        pass
+    else:
+        raise dr2xml_error(
+            "Fatal: Issue with un-managed spatial shape %s for variable %s in table %s" % (ssh, sv.label, table))
+    return grid_ref
