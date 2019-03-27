@@ -27,7 +27,6 @@ lab_and_model_settings = {
     # "listof_home_vars":rootpath+"dr2xml/config_utest/utest020_listof_home_vars.txt",
     "listof_home_vars": None,
     "path_extra_tables": None,
-    "excluded_spshapes": [],
     'realms_per_context': {'nemo': ['seaIce', 'ocean', 'ocean seaIce', 'ocnBgchem', 'seaIce ocean'],
                            'arpsfx': ['atmos', 'atmos atmosChem', 'aerosol', 'atmos land', 'land',
                                       'landIce land', 'aerosol land', 'land landIce', 'landIce', ],
