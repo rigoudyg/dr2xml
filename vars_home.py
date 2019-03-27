@@ -271,7 +271,7 @@ def read_extraTable(path, table, printout=False):
     with open(json_table, "r") as jt:
         json_tdata = jt.read()
         tdata = json.loads(json_tdata)
-        for k, v in tdata["variable_entry"].iteritems():
+        for k, v in tdata["variable_entry"].items():
             extra_var = simple_CMORvar()
             extra_var.type = 'extra'
             extra_var.mip_era = mip_era
@@ -437,7 +437,7 @@ def process_homeVars(mip_vars_list, mips, expid=False, printout=False):
                         "HOMEVar announced as cmor but no corresponding " \
                         " CMORVar found => Not taken into account.")
                     raise vars_error("Abort: HOMEVar %s is declared as cmor but no corresponding CMORVar found."
-                                     % `hv_info`)
+                                     % repr(hv_info))
         elif hv.type == 'perso':
             # Check if HOME variable anounced as 'perso' is in fact 'cmor'
             is_cmor = get_corresp_CMORvar(hv)
@@ -494,7 +494,7 @@ def process_homeVars(mip_vars_list, mips, expid=False, printout=False):
             if printout:
                 print("Error:", hv_info, "HOMEVar type", hv.type, "does not correspond to any known keyword." \
                                                                   " => Not taken into account.")
-            raise vars_error("Abort: unknown type keyword provided for HOMEVar %s:" % `hv_info`)
+            raise vars_error("Abort: unknown type keyword provided for HOMEVar %s:" % repr(hv_info))
 
 
 def get_corresp_CMORvar(hmvar):
@@ -633,7 +633,7 @@ def complement_svar_using_cmorvar(svar, cmvar, sn_issues, debug=[], allow_pseudo
             svar.cell_measures = get_uid(cmvar.stid).cell_measures.rstrip(' ')
         except:
             if print_DR_errors:
-                print("DR Error: Issue with cell_measures for " + `cmvar`)
+                print("DR Error: Issue with cell_measures for " + repr(cmvar))
 
         # A number of DR values indicate a choice or a directive for attribute cell_measures (--OPT, --MODEL ...)
         # See interpretation guidelines at https://www.earthsystemcog.org/projects/wip/drq_interp_cell_center
@@ -684,12 +684,12 @@ def complement_svar_using_cmorvar(svar, cmvar, sn_issues, debug=[], allow_pseudo
             svar.other_dims_size = product_of_other_dims
     area = cellmethod2area(svar.cell_methods)
     if svar.label in debug:
-        print("complement_svar ... processing %s, area=%s" % (svar.label, `area`))
+        print("complement_svar ... processing %s, area=%s" % (svar.label, repr(area)))
     if area:
         ambiguous = any([svar.label == alabel and svar.modeling_realm == arealm
                          for (alabel, (arealm, lmethod)) in ambiguous_mipvarnames])
         if svar.label in debug:
-            print("complement_svar ... processing %s, ambiguous=%s" % (svar.label, `ambiguous`))
+            print("complement_svar ... processing %s, ambiguous=%s" % (svar.label, repr(ambiguous)))
         if ambiguous:
             # Special case for a set of land variables
             if not (svar.modeling_realm == 'land' and svar.label[0] == 'c'):

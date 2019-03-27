@@ -1,6 +1,9 @@
-# coding: utf-8
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 # # An example for generating the XIOS file_def for a given lab, model, experiment, year and XIOS context
+
+from __future__ import print_function, division, absolute_import, unicode_literals
 
 # In[ ]:
 
@@ -389,30 +392,30 @@ my_cvspath = "/Users/moine/Codes/MyDevel_Codes/CMIP6_DATA_SUITE/CMIP6_CVs/"
 # In[ ]:
 
 note = "VERSIONS:"
-print note
-print "-" * len(note)
+print(note)
+print("-" * len(note))
 
 from dr2xml import generate_file_defs
 
 # In[ ]:
 
 note = "\nLAB AND MODEL SETTINGS:"
-print note
-print "-" * len(note)
+print(note)
+print("-" * len(note))
 
 for k, v in lab_and_model_settings.items():
-    print "* ", k, "=", v
+    print("* ", k, "=", v)
 
 note = "\nSIMULATION SETTINGS:"
-print note
-print "-" * len(note)
+print(note)
+print("-" * len(note))
 
 # Path to local copy of CMIP6 CVs, which you can get from https://github.com/WCRP-CMIP/CMIP6_CVs
 # my_cvspath="/Users/moine/Codes/MyDevel_Codes/CMIP6_DATA_SUITE/CMIP6_CVs/"
 my_cvspath = "~/dev/CMIP6_CVs"
 
 for k, v in simulation_settings.items():
-    print "* ", k, "=", v
+    print("* ", k, "=", v)
 
 # In[ ]:
 
@@ -439,26 +442,26 @@ if False:
 # In[ ]:
 
 note = "VERSIONS:"
-print note
-print "-" * len(note)
+print(note)
+print("-" * len(note))
 
 from dr2xml import generate_file_defs
 
 # In[ ]:
 
 note = "\nLAB AND MODEL SETTINGS:"
-print note
-print "-" * len(note)
+print(note)
+print("-" * len(note))
 
 for k, v in lab_and_model_settings.items():
-    print "* ", k, "=", v
+    print("* ", k, "=", v)
 
 note = "\nSIMULATION SETTINGS:"
-print note
-print "-" * len(note)
+print(note)
+print("-" * len(note))
 
 for k, v in simulation_settings.items():
-    print "* ", k, "=", v
+    print("* ", k, "=", v)
 
 # In[ ]:
 

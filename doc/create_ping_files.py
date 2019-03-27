@@ -1,6 +1,9 @@
-# coding: utf-8
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 # # Create ping files based on lab choices
+
+from __future__ import print_function, division, absolute_import, unicode_literals
 
 # In[ ]:
 
@@ -137,7 +140,7 @@ my_dir = "output_labs/" + lab + "/"
 
 # Generate one ping file per context:
 for my_context in settings["realms_per_context"].keys():
-    print "=== CREATING PINGFILE FOR CONTEXT", my_context
+    print("=== CREATING PINGFILE FOR CONTEXT", my_context)
     realms = settings['realms_per_context'][my_context]
     pingFileForRealmsList(my_context, realms, svars, settings["path_special_defs"],
                           comments=" ", exact=False, dummy=True,
@@ -155,7 +158,7 @@ for my_context in settings["realms_per_context"].keys():
 single_realms = [['ocean'], ['seaIce'], ['ocnBgchem'], ['atmos'], ['land'], ['landIce'], ['atmosChem'], ['aerosol']]
 for rs in single_realms:
     # print rs[0]
-    print "=== CREATING PINGFILE FOR SINGLE REALM", rs
+    print("=== CREATING PINGFILE FOR SINGLE REALM", rs)
     pingFileForRealmsList(rs[0], rs, svars, settings["path_special_defs"], prefix=settings['ping_variables_prefix'],
                           comments=" ", exact=False, dummy=True, dummy_with_shape=True,
                           filename=my_dir + 'ping_%s.xml' % rs[0])

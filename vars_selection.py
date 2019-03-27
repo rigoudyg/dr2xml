@@ -98,7 +98,7 @@ def endyear_for_CMORvar(cv, expt, year, printout=False):
         applies, endyear = RequestItem_applies_for_exp_and_year(ri, expt, year, debug=printout)
         if printout:
             print("For var and freq selected for debug and year %d, for ri %s, applies=%s, endyear=%s" % \
-                  (year, ri.title, `applies`, `endyear`))
+                  (year, ri.title, repr(applies), repr(endyear)))
         if applies:
             if endyear is None:
                 return None  # One of the timeslices cover the whole expt
@@ -200,7 +200,8 @@ def year_in_ri(ri, exp, year, debug=False):
     try:
         ny = int(ri.nymax)
     except:
-        print("Warning : Cannot tell if reqItem %s applies to year %d  (ny=%s) -> assumes yes" % (ri.title, year, `ny`))
+        print("Warning : Cannot tell if reqItem %s applies to year %d  (ny=%s) -> assumes yes" % (ri.title, year,
+                                                                                                  repr(ny)))
         return True, None
     #
     # From now, this the case of a RequestItem which starts from experiment's start
@@ -312,7 +313,7 @@ def year_in_ri_tslice(ri, exp, year, debug=False):
         raise dr2xml_error("type %s for time slice %s is not handled" % (tslice.type, tslice.title))
     if debug:
         print("for year %d and experiment %s, relevant is %s for tslice %s of type %s, endyear=%s" % \
-              (year, exp.label, `relevant`, ri.title, tslice.type, `endyear`))
+              (year, exp.label, repr(relevant), ri.title, tslice.type, repr(endyear)))
     return relevant, endyear
 
 
@@ -551,13 +552,13 @@ def select_CMORvars_for_lab(sset=False, year=None, printout=False):
         if printout and len(d[v]) > 1:
             multiple_grids.append(get_uid(v).label)
             if print_multiple_grids:
-                print("\tVariable %s will be processed with multiple grids : %s" % (get_uid(v).label, `d[v]`))
+                print("\tVariable %s will be processed with multiple grids : %s" % (get_uid(v).label, repr(d[v])))
     if not print_multiple_grids:
         if printout:
             multiple_grids.sort()
             if len(multiple_grids) > 0:
                 print("\tThese variables will be processed with multiple grids " + \
-                      "(rerun with print_multiple_grids set to True for details) :" + `multiple_grids`)
+                      "(rerun with print_multiple_grids set to True for details) :" + repr(multiple_grids))
     #
     # Print a count of distinct var labels
     if printout:

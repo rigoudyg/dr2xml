@@ -13,7 +13,7 @@ class dr2xml_error(Exception):
         self.valeur = valeur
 
     def __str__(self):
-        return "\n\n" + `self.valeur` + "\n\n"
+        return "\n\n" + repr(self.valeur) + "\n\n"
     # """ just for test"""
 
 
@@ -22,7 +22,7 @@ class dr2xml_grid_error(Exception):
         self.valeur = valeur
 
     def __str__(self):
-        return `self.valeur`
+        return repr(self.valeur)
 
 
 class vars_error(Exception):
@@ -30,4 +30,4 @@ class vars_error(Exception):
         self.valeur = valeur
 
     def __str__(self):
-        return "\n\n" + `self.valeur` + "\n\n"
+        return "\n\n" + repr(self.valeur) + "\n\n"

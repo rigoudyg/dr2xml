@@ -120,7 +120,7 @@ def merge_sons(elt, printout=False, level=0):
                 toremove.append(child)
     for child in toremove:
         if printout:
-            print("removing one %s child : %s" % (`elt`, `child`))
+            print("removing one %s child : %s" % (repr(elt), repr(child)))
         elt.remove(child)
     # Recursion
     for child in elt:
@@ -137,7 +137,7 @@ def solve_downward(attrib, elt, value=None, printout=False, level=0):
     for child in elt:
         value_down = value
         if printout:
-            print(level * "\t" + " solving on " + `child`,)
+            print(level * "\t" + " solving on " + repr(child),)
         if attrib in attributes.get(child.tag, []):
             if attrib not in child.attrib:
                 if value is not None:
@@ -227,7 +227,7 @@ def solve_by_ref(attrib, index, elt, printout=False, level=0):
             if 'id' in child.attrib:
                 name = child.attrib['id']
             else:
-                name = `child`
+                name = repr(child)
             if printout:
                 print(level * "\t" + attrib + " by_ref on  " + name,)
             #
@@ -302,7 +302,7 @@ def id2grid(field_id, index, printout=False):
             grid_ref_field_id = attrib['grid_ref']
             if grid_ref_field_id in index:
                 if printout:
-                    print("grid_ref value for %s is %s" % (grid_ref_field_id, `index[grid_ref_field_id]`))
+                    print("grid_ref value for %s is %s" % (grid_ref_field_id, repr(index[grid_ref_field_id])))
                 return index[grid_ref_field_id]
             else:
                 # if printout: print("field %s grid reference is %s
@@ -361,4 +361,4 @@ class Xparse_error(Exception):
         self.valeur = valeur
 
     def __str__(self):
-        return `self.valeur`
+        return repr(self.valeur)

@@ -37,7 +37,7 @@ def process_vertical_interpolation(sv, alias, pingvars, src_grid_id, field_defs,
     if len(vdims) == 1:
         sd = vdims[0]
     elif len(vdims) > 1:
-        raise dr2xml_error("Too many vertical dims for %s (%s)" % (sv.label, `vdims`))
+        raise dr2xml_error("Too many vertical dims for %s (%s)" % (sv.label, repr(vdims)))
     if len(vdims) == 0:
         # Analyze if there is a singleton vertical dimension for the variable
         # sd=scalar_vertical_dimension(sv)

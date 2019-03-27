@@ -896,7 +896,8 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
     else:
         source, source_type = get_source_id_and_type()
         grid_choice = get_variable_from_lset_without_default("grid_choice", source)
-        interval_op = `int(get_variable_from_lset_without_default('sampling_timestep', grid_choice, context))` + " s"
+        interval_op = repr(int(get_variable_from_lset_without_default('sampling_timestep', grid_choice, context))) \
+                      + " s"
     if operation != 'once':
         rep += wrv('interval_operation', interval_op)
 
