@@ -4,6 +4,9 @@
 """
 Postprocessing functions
 """
+
+from __future__ import print_function, division, absolute_import, unicode_literals
+
 import re
 
 
@@ -48,7 +51,7 @@ def process_vertical_interpolation(sv, alias, pingvars, src_grid_id, field_defs,
     # sd=vdims[0]
     alias_with_levels = alias + "_" + sd.label  # e.g. 'CMIP6_hus7h_plev7h'
     if alias_with_levels in pingvars:
-        print "No vertical interpolation for %s because the pingfile provides it" % alias_with_levels
+        print("No vertical interpolation for %s because the pingfile provides it" % alias_with_levels)
         return src_grid_id, alias_with_levels
         # raise dr2xml_error("Finding an alias with levels (%s) in pingfile is unexpected")
     #
@@ -148,7 +151,7 @@ def process_zonal_mean(field_id, grid_id, target_hgrid_id, zgrid_id, field_defs,
     field_defs[field1_id] = '<field id="%-s field_ref="%-s operation="%s />' \
                             % (field1_id + '"', field_id + '"', operation + '"')
     if printout:
-        print "+++ field1 ", field1_id, "\n", field_defs[field1_id]
+        print("+++ field1 ", field1_id, "\n", field_defs[field1_id])
     #
     # e.g. <field id="CMIP6_ua_plev39_average_1d" field_ref="CMIP6_ua_plev39_average" freq_op="1d" >
     #              @CMIP6_ua_plev39_average </field>
@@ -156,7 +159,7 @@ def process_zonal_mean(field_id, grid_id, target_hgrid_id, zgrid_id, field_defs,
     field_defs[field2_id] = '<field id="%-s field_ref="%-s freq_op="%s > @%s </field>' \
                             % (field2_id + '"', field1_id + '"', xios_freq + '"', field1_id)
     if printout:
-        print "+++ field2 ", field2_id, "\n", field_defs[field2_id]
+        print("+++ field2 ", field2_id, "\n", field_defs[field2_id])
 
     if target_hgrid_id:  # case where an intermediate grid is needed
         # e.g. <field id="CMIP6_ua_plev39_average_1d_complete" field_ref="CMIP6_ua_plev39_average_1d"
@@ -166,14 +169,14 @@ def process_zonal_mean(field_id, grid_id, target_hgrid_id, zgrid_id, field_defs,
         # for that variable, except for a change in the hgrid/domain (=> complete)
         grid_id3 = change_domain_in_grid(target_hgrid_id, grid_defs, src_grid_id=grid_id)
         if printout:
-            print "+++ grid3 ", grid_id3, "\n", grid_defs[grid_id3]
+            print("+++ grid3 ", grid_id3, "\n", grid_defs[grid_id3])
         field_defs[field3_id] = '<field id="%s field_ref="%s grid_ref="%s /> ' \
                                 % (field3_id + '"', field2_id + '"', grid_id3 + '"')
         if printout:
-            print "+++ field3 ", field3_id, "\n", field_defs[field3_id]
+            print("+++ field3 ", field3_id, "\n", field_defs[field3_id])
     else:
         # Case where the input field is already on a rectangular grid
-        print '~~~~>', "no target_hgrid_id for field=", field_id, " grid=", grid_id
+        print('~~~~>', "no target_hgrid_id for field=", field_id, " grid=", grid_id)
         field3_id = field2_id
         grid_id3 = grid_id
 
@@ -187,12 +190,12 @@ def process_zonal_mean(field_id, grid_id, target_hgrid_id, zgrid_id, field_defs,
     field4_id = field2_id + "_" + zgrid_id
     grid4_id = change_domain_in_grid(zgrid_id, grid_defs, src_grid_id=grid_id3, turn_into_axis=True)
     if printout:
-        print "+++ grid4 ", grid4_id, "\n", grid_defs[grid4_id]
+        print("+++ grid4 ", grid4_id, "\n", grid_defs[grid4_id])
 
     field_defs[field4_id] = '<field id="%s field_ref="%s grid_ref="%s /> ' \
                             % (field4_id + '"', field3_id + '"', grid4_id + '"')
     if printout:
-        print "+++ field4 ", field4_id, "\n", field_defs[field4_id]
+        print("+++ field4 ", field4_id, "\n", field_defs[field4_id])
 
     return field4_id, grid4_id
 
@@ -224,7 +227,7 @@ def process_diurnal_cycle(alias, field_defs, grid_defs, axis_defs, printout=Fals
     field_defs[field_for_average_id] = '<field id="%s" field_ref="%s" operation="average" />' % \
                                        (field_for_average_id, alias)
     if printout:
-        print "***>", field_defs[field_for_average_id]
+        print("***>", field_defs[field_for_average_id])
 
     # 1- create a grid composed of ALIAS's original grid extended by a scalar; id is <grid_id>_scalar_grid
     context_index = get_config_variable("context_index")
@@ -236,7 +239,7 @@ def process_diurnal_cycle(alias, field_defs, grid_defs, axis_defs, printout=Fals
     grid_scalar = re.sub(r'(.*)grid  *id *= *"[^"]*"(.*)', r'\1grid id="%s"\2' % grid_scalar_id, base_grid_string)
     grid_scalar = re.sub("(.*)</ *grid *>(.*)", r'\1<scalar /> </grid>\2', grid_scalar)
     if printout:
-        print "***>", grid_scalar
+        print("***>", grid_scalar)
     grid_defs[grid_scalar_id] = grid_scalar
 
     # 2- create a construct for re-gridding the field with operation average on that ,
@@ -245,7 +248,7 @@ def process_diurnal_cycle(alias, field_defs, grid_defs, axis_defs, printout=Fals
     field_defs[averaged_field_id] = '<field id="%s" freq_op="1h" grid_ref="%s"> @%s </field>' % \
                                     (averaged_field_id, grid_scalar_id, field_for_average_id)
     if printout:
-        print "***>", field_defs[averaged_field_id]
+        print("***>", field_defs[averaged_field_id])
 
     # 3- create an axis of 24 values having sub-construct 'time splitting'; axis id is "24h_axis"
     axis_24h_id = "hour_in_diurnal_cycle"
@@ -256,7 +259,7 @@ def process_diurnal_cycle(alias, field_defs, grid_defs, axis_defs, printout=Fals
     axis_24h += ']" >\n\t<temporal_splitting /></axis>'
     axis_defs[axis_24h_id] = axis_24h
     if printout:
-        print "***>", axis_24h
+        print("***>", axis_24h)
 
     # 4- create a grid composed of ALIAS's original grid extended by that axis; id is <grid_id>_24h_grid
     grid_24h_id = grid_id + "_plus_axis24h"
@@ -264,7 +267,7 @@ def process_diurnal_cycle(alias, field_defs, grid_defs, axis_defs, printout=Fals
     grid_24h = re.sub("</ *grid *>", '\t<axis axis_ref="%s" %s /></grid>' % (axis_24h_id, name_and_units), grid_24h)
     grid_defs[grid_24h_id] = grid_24h
     if printout:
-        print "***>", grid_24h
+        print("***>", grid_24h)
 
     # 5- create a construct for re-gridding ALIAS_SCALAR on that second grid; id is ALIAS_24hcycle, which is returned
     #        <field id="field_B"  grid_ref="grid_B" field_ref="field_As" />
@@ -272,6 +275,6 @@ def process_diurnal_cycle(alias, field_defs, grid_defs, axis_defs, printout=Fals
     alias_24h = '<field id="%s"  grid_ref="%s" field_ref="%s" />' % (alias_24h_id, grid_24h_id, averaged_field_id)
     field_defs[alias_24h_id] = alias_24h
     if printout:
-        print "***>", alias_24h, "\n"
+        print("***>", alias_24h, "\n")
 
     return alias_24h_id, grid_24h_id

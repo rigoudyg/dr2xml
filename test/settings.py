@@ -1,4 +1,8 @@
-# -*- coding: iso-8859-15 -*-
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+from __future__ import print_function, division, absolute_import, unicode_literals
+
 
 rootpath = "/cnrm/est/USERS/senesi/public/CMIP6/"
 my_cvspath = rootpath + "data_request/CMIP6_CVs/"

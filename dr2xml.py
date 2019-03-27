@@ -49,6 +49,9 @@ Changes :
 ####################################
 # End of pre-requisites
 ####################################
+
+from __future__ import print_function, division, absolute_import, unicode_literals
+
 import json
 import datetime
 import re
@@ -108,20 +111,20 @@ from cfsites import cfsites_domain_id, cfsites_grid_id, cfsites_input_filedef, a
 # Post-processing modules
 from postprocessing import process_vertical_interpolation, process_zonal_mean, process_diurnal_cycle
 
-print "\n", 50 * "*", "\n*"
-print "* %29s" % "dr2xml version: ", get_config_variable("version")
+print("\n", 50 * "*", "\n*")
+print("* %29s" % "dr2xml version: ", get_config_variable("version"))
 
 # The current code should comply with this version of spec doc at
 # https://docs.google.com/document/d/1h0r8RZr_f3-8egBMMh7aqLwy3snpD6_MrDz1q8n5XUk/edit
 CMIP6_conventions_version = "v6.2.4"
-print "* %29s" % "CMIP6 conventions version: ", CMIP6_conventions_version
+print("* %29s" % "CMIP6 conventions version: ", CMIP6_conventions_version)
 
 # mpmoine_merge_dev2_v0.12: posixpath.dirname ne marche pas chez moi
 # TBS# from os import path as os_path
 # TBS# prog_path=os_path.abspath(os_path.split(__file__)[0])
 
-print "* %29s" % "CMIP6 Data Request version: ", get_DR_version()
-print "\n*\n", 50 * "*"
+print("* %29s" % "CMIP6 Data Request version: ", get_DR_version())
+print("\n*\n", 50 * "*")
 
 """ An example/template  of settings for a lab and a model"""
 example_lab_and_model_settings = {
@@ -665,13 +668,13 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
     debug = False
     cmvk = "CMIP6_CV_version"
     if cmvk in attributes:
-        print "* %s: %s" % (cmvk, attributes[cmvk])
+        print("* %s: %s" % (cmvk, attributes[cmvk]))
     # --------------------------------------------------------------------
     # Parse XIOS settings file for the context
     # --------------------------------------------------------------------
-    print "\n", 50 * "*", "\n"
-    print "Processing context ", context
-    print "\n", 50 * "*", "\n"
+    print("\n", 50 * "*", "\n")
+    print("Processing context ", context)
+    print("\n", 50 * "*", "\n")
     set_config_variable("context_index",
                         init_context(context, get_variable_from_lset_with_default("path_to_parse", "./"),
                                      printout=get_variable_from_lset_with_default("debug_parsing", False)))
@@ -705,13 +708,13 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
             if get_variable_from_lset_with_default('allow_duplicates', True) or add:
                 svars_per_realm[realm].append(svar)
             else:
-                print "Not adding duplicate %s (from %s) for realm %s" % (svar.label, svar.mipTable, realm)
+                print("Not adding duplicate %s (from %s) for realm %s" % (svar.label, svar.mipTable, realm))
         else:
             old = svars_per_realm[realm][0]
-            print "Duplicate svar %s %s %s %s" % (old.label, old.grid, svar.label, svar.grid)
+            print("Duplicate svar %s %s %s %s" % (old.label, old.grid, svar.label, svar.grid))
             pass
     if printout:
-        print "\nRealms for these CMORvars :", svars_per_realm.keys()
+        print("\nRealms for these CMORvars :", svars_per_realm.keys())
     #
     # --------------------------------------------------------------------
     # Select on context realms, grouping by table
@@ -725,7 +728,7 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
             continue
         processed_realms.append(realm)
         excludedv = dict()
-        print "Processing realm '%s' of context '%s'" % (realm, context)
+        print("Processing realm '%s' of context '%s'" % (realm, context))
         # print 50*"_"
         excludedv = dict()
         if realm in svars_per_realm:
@@ -750,11 +753,11 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
                             excludedv[reason] = []
                         excludedv[reason].append((svar.label, svar.mipTable))
         if printout and len(excludedv.keys()) > 0:
-            print "The following pairs (variable,table) have been excluded for these reasons :"
+            print("The following pairs (variable,table) have been excluded for these reasons :")
             for reason in excludedv:
-                print "\t", reason, ":", excludedv[reason]
+                print("\t", reason, ":", excludedv[reason])
     if debug:
-        print "For table AMon: ", [v.label for v in svars_per_table["Amon"]]
+        print("For table AMon: ", [v.label for v in svars_per_table["Amon"]])
     #
     # --------------------------------------------------------------------
     # Add svars belonging to the orphan list
@@ -783,7 +786,7 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
                 for svar in toremove:
                     svars_per_table[table].remove(svar)
     if debug:
-        print "Pour table AMon: ", [v.label for v in svars_per_table["Amon"]]
+        print("Pour table AMon: ", [v.label for v in svars_per_table["Amon"]])
     #
     # --------------------------------------------------------------------
     # Read ping_file defined variables
@@ -797,7 +800,7 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
             ping_refs = read_xml_elmt_or_attrib(pingfile, tag='field', attrib='field_ref')
             # ping_refs=read_xml_elmt_or_attrib(pingfile, tag='field')
             if ping_refs is None:
-                print "Error: issue accessing pingfile " + pingfile
+                print("Error: issue accessing pingfile " + pingfile)
                 return
             all_ping_refs.update(ping_refs)
             if dummies == "include":
@@ -808,15 +811,15 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
                     if len(pingvars) != len(ping_refs):
                         for v in ping_refs:
                             if v not in pingvars:
-                                print v,
-                        print
+                                print(v,)
+                        print()
                         raise dr2xml_error("They are still dummies in %s , while option is 'forbid' :" % pingfile)
                     else:
                         pingvars = ping_refs.keys()
                 elif dummies == "skip":
                     pass
                 else:
-                    print "Forbidden option for dummies : " + dummies
+                    print("Forbidden option for dummies : " + dummies)
                     sys.exit(1)
             all_pingvars.extend(pingvars)
         pingvars = all_pingvars
@@ -883,8 +886,8 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
                                             dummies, skipped_vars_per_table, actually_written_vars,
                                             prefix, context, grid, pingvars, enddate, attributes)
                 else:
-                    print "Duplicate variable %s,%s in table %s is skipped, preferred is %s" % \
-                          (svar.label, svar.mipVarLabel, table, count[svar.mipVarLabel].label)
+                    print("Duplicate variable %s,%s in table %s is skipped, preferred is %s" % \
+                          (svar.label, svar.mipVarLabel, table, count[svar.mipVarLabel].label))
 
         if cfsites_grid_id in grid_defs:
             out.write(cfsites_input_filedef())
@@ -943,7 +946,7 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
         #
         out.write('</context> \n')
     if printout:
-        print "\nfile_def written as %s" % filename
+        print("\nfile_def written as %s" % filename)
 
     # mpmoine_petitplus:generate_file_defs: pour sortir des stats sur ce que l'on sort reelement
     # SS - non : gros plus
@@ -957,14 +960,14 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
             warn[warning] = set()
         warn[warning].add(label)
     if len(warn) > 0:
-        print "\nWarnings about cell methods (with var list)"
+        print("\nWarnings about cell methods (with var list)")
         for w in warn:
-            print "\t", w, " for vars : ", warn[w]
+            print("\t", w, " for vars : ", warn[w])
     if len(warnings_for_optimisation) > 0:
-        print "Warning for fields which cannot be optimised (i.e. average before remap) because of an expr with @\n\t",
+        print("Warning for fields which cannot be optimised (i.e. average before remap) because of an expr with @\n\t",)
         for w in warnings_for_optimisation:
-            print w.replace(get_variable_from_lset_without_default('ping_variables_prefix'), ""),
-        print
+            print(w.replace(get_variable_from_lset_without_default('ping_variables_prefix'), ""),)
+        print()
 
 
 def create_xios_axis_and_grids_for_plevs_unions(svars, plev_sfxs, dummies, axis_defs, grid_defs, field_defs, ping_refs,
@@ -991,7 +994,7 @@ def create_xios_axis_and_grids_for_plevs_unions(svars, plev_sfxs, dummies, axis_
     dict_plevs = {}
     for sv in svars:
         if not sv.modeling_realm:
-            print "Warning: no modeling_realm associated to:", sv.label, sv.mipTable, sv.mip_era
+            print("Warning: no modeling_realm associated to:", sv.label, sv.mipTable, sv.mip_era)
         for sd in sv.sdims.values():
             # couvre les dimensions verticales de type 'plev7h' ou 'p850'
             if sd.label.startswith("p") and any(sd.label.endswith(s) for s in plev_sfxs) and sd.label != 'pl700':
@@ -1017,20 +1020,20 @@ def create_xios_axis_and_grids_for_plevs_unions(svars, plev_sfxs, dummies, axis_
                                     pass
                     else:
                         if printout:
-                            print "Info: ", lwps, "not taken into account for building plevs union axis because ", \
-                                prefix + lwps,
+                            print("Info: ", lwps, "not taken into account for building plevs union axis because ", \
+                                prefix + lwps,)
                             if not present_in_ping:
-                                print "is not an entry in the pingfile"
+                                print("is not an entry in the pingfile")
                             else:
-                                print "has a dummy reference in the pingfile"
+                                print("has a dummy reference in the pingfile")
 
                     # svar will be expected on a zoom axis of the union. Corresponding vertical dim must
                     # have a zoom_label named plevXX_<lwps> (multiple pressure levels)
                     # or pXX_<lwps> (single pressure level)
                     sv.sdims[sd.label].zoom_label = 'zoom_' + sd.label + "_" + lwps
                 else:
-                    print "Warning: dim is pressure but label_without_psuffix=", lwps, \
-                        "for", sv.label, sv.mipTable, sv.mip_era
+                    print("Warning: dim is pressure but label_without_psuffix=", lwps, \
+                        "for", sv.label, sv.mipTable, sv.mip_era)
             # else :
             #    print "for var %s/%s, dim %s is not related to pressure"%(sv.label,sv.label_without_psuffix,sd.label)
     #
@@ -1070,12 +1073,12 @@ def create_xios_axis_and_grids_for_plevs_unions(svars, plev_sfxs, dummies, axis_
                         plev_values = set(sdsv.value.split())
                         sdim_union.is_union_for.append(sv.label + "_" + sd.label)
                     else:
-                        print "Warning: No requested nor value found for", svar.label, "with vertical dimesion", plev
+                        print("Warning: No requested nor value found for", svar.label, "with vertical dimesion", plev)
                     plevs_union = plevs_union.union(plev_values)
                     if printout:
-                        print "    -- on", plev, ":", plev_values
+                        print("    -- on", plev, ":", plev_values)
                 if printout:
-                    print "       *", sv.label, "(", sv.mipTable, ")"
+                    print("       *", sv.label, "(", sv.mipTable, ")")
         list_plevs_union = list(plevs_union)
         list_plevs_union_num = [float(lev) for lev in list_plevs_union]
         list_plevs_union_num.sort(reverse=True)
@@ -1083,14 +1086,14 @@ def create_xios_axis_and_grids_for_plevs_unions(svars, plev_sfxs, dummies, axis_
         for lev in list_plevs_union:
             plevs_union_xios += " " + lev
         if printout:
-            print ">>> XIOS plevs union:", plevs_union_xios
+            print(">>> XIOS plevs union:", plevs_union_xios)
         sdim_union.label = "union_plevs_" + lwps
         if len(list_plevs_union) > 1:
             sdim_union.requested = plevs_union_xios
         if len(list_plevs_union) == 1:
             sdim_union.value = plevs_union_xios
         if printout:
-            print "creating axis def for union :%s" % sdim_union.label
+            print("creating axis def for union :%s" % sdim_union.label)
         axis_def = create_axis_def(sdim_union, union_axis_defs, field_defs)
         create_grid_def(union_grid_defs, axis_def, sdim_union.out_name,
                         id2gridid(prefix + lwps, get_config_variable("context_index")))
@@ -1207,7 +1210,7 @@ def pingFileForRealmsList(settings, context, lrealms, svars, path_special, dummy
             else:
                 label = v.label_without_psuffix
             if v.label in debug:
-                print "pingFile ... processing %s in table %s, label=%s" % (v.label, v.mipTable, label)
+                print("pingFile ... processing %s in table %s, label=%s" % (v.label, v.mipTable, label))
 
             if specials and label in specials:
                 line = create_string_from_xml_element(specials[label]).replace("DX_", prefix)
@@ -1244,7 +1247,7 @@ def pingFileForRealmsList(settings, context, lrealms, svars, path_special, dummy
             out.write('</field_group>\n')
         fp.write("</field_definition>\n")
         #
-        print "%3d variables written for %s" % (len(lvars), filename)
+        print("%3d variables written for %s" % (len(lvars), filename))
         #
         # Write axis_defs, domain_defs, ... read from relevant input/DX_ files
         if path_special:
@@ -1275,7 +1278,7 @@ def copy_obj_from_DX_file(fp, obj, prefix, lrealms, path_special):
                     fp.write("</%s_definition>\n" % obj)
             else:
                 pass
-                print " no file :%s " % defs
+                print(" no file :%s " % defs)
 
 
 def DX_defs_filename(obj, realm, path_special):
@@ -1316,16 +1319,16 @@ def read_xml_elmt_or_attrib(filename, tag='field', attrib=None, printout=False):
     #
     rep = dict()
     if printout:
-        print "processing file %s :" % filename,
+        print("processing file %s :" % filename,)
     if os.path.exists(filename):
         if printout:
-            print "OK", filename
+            print("OK", filename)
         root = get_root_of_xml_file(filename)
         defs = get_xml_childs(root, tag)
         if defs:
             for field in defs:
                 if printout:
-                    print ".",
+                    print(".",)
                 key = field.attrib['id']
                 if attrib is None:
                     value = field
@@ -1333,11 +1336,11 @@ def read_xml_elmt_or_attrib(filename, tag='field', attrib=None, printout=False):
                     value = field.attrib.get(attrib, None)
                 rep[key] = value
             if printout:
-                print
+                print()
             return rep
     else:
         if printout:
-            print "No file "
+            print("No file ")
         return None
 
 
@@ -1379,17 +1382,17 @@ def highest_rank(svar):
                     shape = sp.label
                 except:
                     if print_DR_errors:
-                        print "DR Error: issue with spid for " + \
-                              st.label + " " + v.label + str(cvar.mipTable)
+                        print("DR Error: issue with spid for " + \
+                              st.label + " " + v.label + str(cvar.mipTable))
                     # One known case in DR 1.0.2: hus in 6hPlev
                     shape = "XY"
                 if "odims" in st.__dict__:
                     try:
                         map(altdims.add, st.odims.split("|"))
                     except:
-                        print "Issue with odims for " + v.label + " st=" + st.label
+                        print("Issue with odims for " + v.label + " st=" + st.label)
             except:
-                print "DR Error: issue with stid for :" + v.label + " in table section :" + str(cvar.mipTableSection)
+                print("DR Error: issue with stid for :" + v.label + " in table section :" + str(cvar.mipTableSection))
                 shape = "?st"
         else:
             # Pour recuperer le spatial_shp pour le cas de variables qui n'ont
@@ -1559,9 +1562,9 @@ def check_for_file_input(sv, hgrid, pingvars, field_defs, grid_defs, domain_defs
         file_grid_id = "remapped_%s_file_grid" % sv.label
         grid_defs[file_grid_id] = '<grid id="%s"><domain domain_ref="%s"/></grid>\n' % (file_grid_id, file_domain_id)
         if printout:
-            print domain_defs[file_domain_id]
+            print(domain_defs[file_domain_id])
         if printout:
-            print grid_defs[file_grid_id]
+            print(grid_defs[file_grid_id])
 
         # Create xml for reading the variable
         filename = externs[sv.label][hgrid][get_grid_choice()]
@@ -1575,7 +1578,7 @@ def check_for_file_input(sv, hgrid, pingvars, field_defs, grid_defs, domain_defs
         file_def += '\n</file>'
         file_defs[file_id] = file_def
         if printout:
-            print file_defs[file_id]
+            print(file_defs[file_id])
         #
         # field_def='<field id="%s" grid_ref="%s" operation="instant" >%s</field>'%\
         field_def = '<field id="%s" grid_ref="%s" field_ref="%s" operation="instant" freq_op="1ts" ' \
@@ -1585,5 +1588,5 @@ def check_for_file_input(sv, hgrid, pingvars, field_defs, grid_defs, domain_defs
         context_index[pingvar] = create_xml_element_from_string(field_def)
 
         if printout:
-            print field_defs[field_in_file_id]
+            print(field_defs[field_in_file_id])
         #

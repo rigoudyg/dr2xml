@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # coding: utf-8
 
 # Whats' necessary for reading XIOS xml file and process attribute's inheritance for
@@ -6,6 +7,8 @@
 # Main useful functions :
 #   <opaque>    context = init_context(context_name,printout=False)
 #   <ET object>    grid = id2grid(field_id,context,printout=False)
+
+from __future__ import print_function, division, absolute_import, unicode_literals
 
 import os
 import os.path
@@ -52,14 +55,14 @@ def read_src(elt, path_parse, printout=False, level=0, dont_read=[]):
             if skip:
                 continue
             if printout:
-                print level * "\t" + "Reading %s" % filen
+                print(level * "\t" + "Reading %s" % filen)
             et = get_root_of_xml_file(filen)
             if printout:
-                print level * "\t" + "Reading %s, %s=%s" % (filen, et.tag, gattrib(et, 'id', 'no_id'))
+                print(level * "\t" + "Reading %s, %s=%s" % (filen, et.tag, gattrib(et, 'id', 'no_id')))
             for el in et:
                 if printout:
-                    print (level + 1) * "\t" + "Storing %s in %s id=%s" % (
-                        el.tag, child.tag, gattrib(child, 'id', 'no_id'))
+                    print((level + 1) * "\t" + "Storing %s in %s id=%s" % (el.tag, child.tag,
+                                                                           gattrib(child, 'id', 'no_id')))
                 child.append(el)
     for child in elt:
         # print level*"\t"+"Recursing on %s %s"%(child.tag,gattrib(child,'id','no_id'))
@@ -106,7 +109,7 @@ def merge_sons(elt, printout=False, level=0):
                     else:
                         name = 'no_id'
                 if printout:
-                    print level * "\t" + "Moving %s %s content to %s" % (child.tag, name, tag)
+                    print(level * "\t" + "Moving %s %s content to %s" % (child.tag, name, tag))
                 #
                 # Move childs from secondary entry to first entry (brother)
                 for sub in child:
@@ -117,12 +120,12 @@ def merge_sons(elt, printout=False, level=0):
                 toremove.append(child)
     for child in toremove:
         if printout:
-            print "removing one %s child : %s" % (`elt`, `child`)
+            print("removing one %s child : %s" % (`elt`, `child`))
         elt.remove(child)
     # Recursion
     for child in elt:
         if printout:
-            print level * "\t" + "%s %s" % (child.tag, child.attrib.get('id', 'no_id'))
+            print(level * "\t" + "%s %s" % (child.tag, child.attrib.get('id', 'no_id')))
         merge_sons(child, printout, level + 1)
 
 
@@ -134,23 +137,23 @@ def solve_downward(attrib, elt, value=None, printout=False, level=0):
     for child in elt:
         value_down = value
         if printout:
-            print level * "\t" + " solving on " + `child`,
+            print(level * "\t" + " solving on " + `child`,)
         if attrib in attributes.get(child.tag, []):
             if attrib not in child.attrib:
                 if value is not None:
                     child.attrib[attrib] = value
                     if printout:
-                        print " set :" + value
+                        print(" set :" + value)
                 else:
                     if printout:
-                        print " pass"
+                        print(" pass")
             else:
                 value_down = child.attrib[attrib]
                 if printout:
-                    print " get :" + value_down
+                    print(" get :" + value_down)
         else:
             if printout:
-                print
+                print()
         solve_downward(attrib, child, value_down, printout, level + 1)
 
 
@@ -166,10 +169,10 @@ def make_index(elt, index=None, printout=False, level=0):
         if 'id' in child.attrib:
             the_id = child.attrib['id']
             if printout:
-                print level * "\t" + " indexing " + the_id,
+                print(level * "\t" + " indexing " + the_id,)
             if the_id in index:
                 if printout:
-                    print " (merging)"
+                    print(" (merging)")
                 # Update indexed object with current attributes
                 for a in child.attrib:
                     index[the_id].attrib[a] = child.attrib[a]
@@ -178,7 +181,7 @@ def make_index(elt, index=None, printout=False, level=0):
                     index[the_id].append(sub)
             else:
                 if printout:
-                    print " init index"
+                    print(" init index")
                 index[the_id] = child
         # else:
         #    if printout : print
@@ -196,13 +199,13 @@ def attrib_by_ref(elt, attrib, index, printout, level):
         if '_ref' in a:
             refid = elt.attrib[a]
             if printout:
-                print "\n" + (level + 1) * "\t" + a + " -> " + refid,
+                print("\n" + (level + 1) * "\t" + a + " -> " + refid,)
             try:
                 ref = index[refid]
                 if attrib in ref.attrib:
                     rep = ref.attrib[attrib]
                     if printout:
-                        print " ---> !! GOT : " + rep + " !!!"
+                        print(" ---> !! GOT : " + rep + " !!!")
                     return rep
                 else:
                     rep = attrib_by_ref(ref, attrib, index, printout, level + 1)
@@ -210,7 +213,7 @@ def attrib_by_ref(elt, attrib, index, printout, level):
                         return rep
             except:
                 if not refid.startswith("dummy_"):
-                    print "Error : reference '%s' is invalid" % refid
+                    print("Error : reference '%s' is invalid" % refid)
                     sys.exit(1)
 
 
@@ -226,7 +229,7 @@ def solve_by_ref(attrib, index, elt, printout=False, level=0):
             else:
                 name = `child`
             if printout:
-                print level * "\t" + attrib + " by_ref on  " + name,
+                print(level * "\t" + attrib + " by_ref on  " + name,)
             #
             if child.tag in attributes and attrib in attributes[child.tag]:
                 if attrib not in child.attrib:
@@ -237,15 +240,15 @@ def solve_by_ref(attrib, index, elt, printout=False, level=0):
                         got_one = got_one + 1
                     else:
                         if printout:
-                            print
+                            print()
                 else:
                     if printout:
-                        print ", already set : %s" % child.attrib[attrib]
+                        print(", already set : %s" % child.attrib[attrib])
                 got = solve_by_ref(attrib, index, child, printout, level + 1)
                 got_one = got_one + got
             else:
                 if printout:
-                    print " : N/A"
+                    print(" : N/A")
     return got_one
 
 
@@ -258,10 +261,10 @@ def select_context(rootel, context_id):
 def init_context(context_id, path_parse="./", printout=False):
     xmldef = path_parse + "iodef.xml"
     if printout:
-        print "Parsing %s ..." % xmldef,
+        print("Parsing %s ..." % xmldef,)
     rootel = get_root_of_xml_file(xmldef)
     if printout:
-        print "sourcing files  ...",
+        print("sourcing files  ...",)
     read_src(rootel, path_parse, printout=printout, dont_read=["dr2xml_"])
     merge_sons(rootel, printout)
     rootel = select_context(rootel, context_id)
@@ -275,13 +278,13 @@ def init_context(context_id, path_parse="./", printout=False):
             while True:
                 n = solve_by_ref(ref, index, rootel, printout)
                 if printout:
-                    print "%d refs solved" % n
+                    print("%d refs solved" % n)
                 if n == 0:
                     break
         # ET.dump(rootel)
         return index
     else:
-        print "Xparse::init_context : context %s not found in %s" % (context_id, xmldef)
+        print("Xparse::init_context : context %s not found in %s" % (context_id, xmldef))
 
 
 def id2gridid(field_id, index, printout=False):
@@ -299,7 +302,7 @@ def id2grid(field_id, index, printout=False):
             grid_ref_field_id = attrib['grid_ref']
             if grid_ref_field_id in index:
                 if printout:
-                    print "grid_ref value for %s is %s" % (grid_ref_field_id, `index[grid_ref_field_id]`)
+                    print("grid_ref value for %s is %s" % (grid_ref_field_id, `index[grid_ref_field_id]`))
                 return index[grid_ref_field_id]
             else:
                 # if printout: print("field %s grid reference is %s
@@ -323,7 +326,7 @@ def idHasExprWithAt(field_id, index, printout=False):
         attrib = index[field_id].attrib
         if 'expr' in attrib:
             if printout:
-                print "In withAt, for %s, expr=%s" % (field_id, attrib['expr'])
+                print("In withAt, for %s, expr=%s" % (field_id, attrib['expr']))
             return '@' in attrib['expr']
         else:
             # if printout : print "In withAt, for %s, no expr"%(field_id)
@@ -338,18 +341,18 @@ if False:
     nemo = init_context('nemo', "./", False)
     # print nemo.keys()
     grid = id2grid("CMIP6_O18sw", nemo, True)
-    print grid.attrib['id']
-    print
+    print(grid.attrib['id'])
+    print()
 
     arpsfx = init_context('arpsfx', "./", False)
     grid = id2grid("CMIP6_cdnc", arpsfx, True)
     # grid=None
     if grid is not None:
         # print "Grid id is :"+grid.attrib['id']
-        print create_string_from_xml_element(grid)
+        print(create_string_from_xml_element(grid))
         grid_string = create_string_from_xml_element(grid)
         new_grid_string = re.sub('axis_ref= *.([\w_])*.', 'axis_ref="axis_autre"', grid_string)
-        print new_grid_string
+        print(new_grid_string)
 
 
 class Xparse_error(Exception):

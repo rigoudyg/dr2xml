@@ -5,6 +5,10 @@
 Grids general tools.
 """
 
+from __future__ import print_function, division, absolute_import, unicode_literals
+
+from functools import reduce
+
 import re
 
 from xml_interface import create_xml_element_from_string, create_string_from_xml_element
@@ -117,7 +121,7 @@ def create_axis_def(sdim, axis_defs, field_defs):
             rep += 'value="(0,%g)[ %s ]"' % (n_glo - 1, sdim.requested)
         else:
             if n_glo != 1:
-                print "Warning: axis for %s is singleton but has %d values" % (sdim.label, n_glo)
+                print("Warning: axis for %s is singleton but has %d values" % (sdim.label, n_glo))
                 return None
             # Singleton case (degenerated vertical dimension)
             rep += 'n_glo="%g" ' % n_glo
@@ -261,8 +265,8 @@ def change_axes_in_grid(grid_id, grid_defs, axis_defs):
                 if any([ssub.tag == 'interpolate_axis' for ssub in sub]):
                     continue
                 else:
-                    print "Cannot normalize an axis in grid %s : no axis_ref for axis %s" %\
-                          (grid_id, create_string_from_xml_element(sub))
+                    print("Cannot normalize an axis in grid %s : no axis_ref for axis %s" %\
+                          (grid_id, create_string_from_xml_element(sub)))
                     continue
                     # raise dr2xml_error("Grid %s has an axis without axis_ref : %s"%(grid_id,grid_def))
             axis_ref = sub.attrib['axis_ref']

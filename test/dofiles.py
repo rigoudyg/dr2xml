@@ -1,6 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+from __future__ import print_function, division, absolute_import, unicode_literals
+
+
 from settings import lab_and_model_settings, simulation_settings, my_cvspath
 from dr2xml import pingFileForRealmsList, generate_file_defs
 from vars_selection import select_CMORvars_for_lab

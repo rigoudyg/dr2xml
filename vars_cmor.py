@@ -4,6 +4,9 @@
 """
 CMOR variables tools.
 """
+
+from __future__ import print_function, division, absolute_import, unicode_literals
+
 from settings_interface import get_variable_from_lset_without_default
 from dr_interface import get_collection, get_uid, get_request_by_id_by_sect, print_DR_errors
 from analyzer import cellmethod2area
@@ -29,17 +32,17 @@ def get_SpatialAndTemporal_Shapes(cmvar):
     temporal_shape = False
     if cmvar.stid == "__struct_not_found_001__":
         if print_DR_errors:
-            print "Warning: stid for ", cmvar.label, " in table ", cmvar.mipTable,\
-                " is a broken link to structure in DR: ", cmvar.stid
+            print("Warning: stid for ", cmvar.label, " in table ", cmvar.mipTable,\
+                " is a broken link to structure in DR: ", cmvar.stid)
     else:
         struct = get_uid(cmvar.stid)
         spatial_shape = get_uid(struct.spid).label
         temporal_shape = get_uid(struct.tmid).label
     if print_DR_errors:
         if not spatial_shape:
-            print "Warning: spatial shape for ", cmvar.label, " in table ", cmvar.mipTable, " not found in DR."
+            print("Warning: spatial shape for ", cmvar.label, " in table ", cmvar.mipTable, " not found in DR.")
         if not temporal_shape:
-            print "Warning: temporal shape for ", cmvar.label, " in table ", cmvar.mipTable, " not found in DR."
+            print("Warning: temporal shape for ", cmvar.label, " in table ", cmvar.mipTable, " not found in DR.")
     return [spatial_shape, temporal_shape]
 
 
@@ -55,12 +58,12 @@ def analyze_ambiguous_MIPvarnames(debug=[]):
         if v.label not in d:
             d[v.label] = []
             if v.label in debug:
-                print "Adding %s" % v.label
+                print("Adding %s" % v.label)
         refs = get_request_by_id_by_sect(v.uid, 'CMORvar')
         for r in refs:
             d[v.label].append(get_uid(r))
             if v.label in debug:
-                print "Adding CmorVar %s(%s) for %s" % (v.label, get_uid(r).mipTable, get_uid(r).label)
+                print("Adding CmorVar %s(%s) for %s" % (v.label, get_uid(r).mipTable, get_uid(r).label))
 
     # Replace dic values by dic of area portion of cell_methods
     for vlabel in d:
@@ -74,7 +77,7 @@ def analyze_ambiguous_MIPvarnames(debug=[]):
                     cm = get_uid(st.cmid).cell_methods
                 except:
                     # pass
-                    print "No cell method for %-15s %s(%s)" % (st.label, cv.label, cv.mipTable)
+                    print("No cell method for %-15s %s(%s)" % (st.label, cv.label, cv.mipTable))
                 if cm is not None:
                     area = cellmethod2area(cm)
                     realm = cv.modeling_realm
@@ -82,14 +85,14 @@ def analyze_ambiguous_MIPvarnames(debug=[]):
                         area = None
                     # realm=""
                     if vlabel in debug:
-                        print "for %s 's CMORvar %s(%s), area=%s" % (vlabel, cv.label, cv.mipTable, area)
+                        print("for %s 's CMORvar %s(%s), area=%s" % (vlabel, cv.label, cv.mipTable, area))
                     if realm not in d[vlabel]:
                         d[vlabel][realm] = dict()
                     if area not in d[vlabel][realm]:
                         d[vlabel][realm][area] = []
                     d[vlabel][realm][area].append(cv.mipTable)
             if vlabel in debug:
-                print vlabel, d[vlabel]
+                print(vlabel, d[vlabel])
         else:
             d[vlabel] = None
 
@@ -103,10 +106,10 @@ def analyze_ambiguous_MIPvarnames(debug=[]):
                     ambiguous.append((vlabel, (realm, d[vlabel][realm])))
     if "all" in debug:
         for v, p in ambiguous:
-            print v
+            print(v)
             b, d = p
             for r in d:
-                print "\t", r, d[r]
+                print("\t", r, d[r])
     return ambiguous
 
 

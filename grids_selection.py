@@ -16,6 +16,8 @@ dr2xml allows for the lab to choose among various policy  :
 
 """
 
+from __future__ import print_function, division, absolute_import, unicode_literals
+
 # Utilities
 from utils import dr2xml_grid_error, dr2xml_error
 

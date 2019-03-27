@@ -5,6 +5,7 @@
 Interface between xml module and dr2xml.
 """
 
+from __future__ import print_function, division, absolute_import, unicode_literals
 
 import xml.etree.ElementTree as ET
 

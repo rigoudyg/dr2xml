@@ -4,6 +4,12 @@
 """
 XIOS writing files tools.
 """
+
+from __future__ import print_function, division, absolute_import, unicode_literals
+
+# To access reduce function in python3
+from functools import reduce
+
 import json
 import re
 import datetime
@@ -52,12 +58,12 @@ def wr(out, key, dic_or_val=None, num_type="string", default=None):
                 if default is not False:
                     val = default
             else:
-                print 'error : %s not in dic and default is None' % key
+                print('error : %s not in dic and default is None' % key)
     else:
         if dic_or_val is not None:
             val = dic_or_val
         else:
-            print 'error in wr,  no value provided for %s' % key
+            print('error in wr,  no value provided for %s' % key)
     if val:
         if num_type == "string":
             # val=val.replace(">","&gt").replace("<","&lt").replace("&","&amp").replace("'","&apos").replace('"',"&quot").strip()
@@ -133,7 +139,7 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
             else:
                 alias = get_variable_from_lset_without_default("ping_variables_prefix") + "tau_stress"
         if sv.label in debug:
-            print "write_xios_file_def ... processing %s, alias=%s" % (sv.label, alias)
+            print("write_xios_file_def ... processing %s, alias=%s" % (sv.label, alias))
 
         # suppression des terminaisons en "Clim" pour l'alias : elles concernent uniquement les cas
         # d'absence de variation inter-annuelle sur les GHG. Peut-etre genant pour IPSL ?
@@ -263,13 +269,13 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
     for c in required_components:
         if c not in actual_components:
             ok = False
-            print "Model component %s is required by CMIP6 CV for experiment %s and not present (present=%s)" % \
-                  (c, experiment_id, `actual_components`)
+            print("Model component %s is required by CMIP6 CV for experiment %s and not present (present=%s)" %
+                  (c, experiment_id, repr(actual_components)))
     for c in actual_components:
         if c not in allowed_components and c not in required_components:
             ok = False or get_variable_from_sset_with_default('bypass_CV_components', False)
-            print "Warning: Model component %s is present but not required nor allowed (%s)" % \
-                  (c, `allowed_components`)
+            print("Warning: Model component %s is present but not required nor allowed (%s)" %
+                  (c, repr(allowed_components)))
     if not ok:
         raise dr2xml_error("Issue with model components")
     #
@@ -372,8 +378,8 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
         else:
             # Use requestItems-based end date as the latest possible date when it is earlier than run end date
             if sv.label in debug:
-                print "split_last_date year %d derived from DR for variable %s in table %s " \
-                      "for year %d" % (lastyear, sv.label, table, year)
+                print("split_last_date year %d derived from DR for variable %s in table %s for year %d" %
+                      (lastyear, sv.label, table, year))
             endyear = "%04d" % (lastyear + 1)
             if lastyear < 1000:
                 dr2xml_error(
@@ -591,8 +597,8 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
                                                     target_hgrid_id, zgrid_id, pingvars)
             out.write(psol_field)
         else:
-            print "Warning: Cannot complement model levels with psol for variable %s and table %s" % \
-                  (sv.label, sv.frequency)
+            print("Warning: Cannot complement model levels with psol for variable %s and table %s" %
+                  (sv.label, sv.frequency))
 
     #
     names = {}
@@ -918,7 +924,7 @@ def process_singleton(sv, alias, pingvars, field_defs, grid_defs, scalar_defs, t
     input_grid_id = id2gridid(alias_ping, context_index)
     input_grid_def = get_grid_def_with_lset(input_grid_id, grid_defs)
     if printout:
-        print "process_singleton : ", "processing %s with grid %s " % (alias, input_grid_id)
+        print("process_singleton : ", "processing %s with grid %s " % (alias, input_grid_id))
     #
     further_field_id = alias
     further_grid_id = input_grid_id
@@ -979,14 +985,14 @@ def process_singleton(sv, alias, pingvars, field_defs, grid_defs, scalar_defs, t
                          (scalar_id, name, stdname, sdim.title, value, bounds_value, axis, unit)
             scalar_defs[scalar_id] = scalar_def
             if printout:
-                print "process_singleton : ", "adding scalar %s" % scalar_def
+                print("process_singleton : ", "adding scalar %s" % scalar_def)
             #
             # Create a grid with added (or changed) scalar
             glabel = further_grid_id + "_" + scalar_id
             further_grid_def = add_scalar_in_grid(further_grid_def, glabel, scalar_id, name,
                                                   sdim.axis == "Z" and further_grid_def != "NATURE_landuse")
             if printout:
-                print "process_singleton : ", " adding grid %s" % further_grid_def
+                print("process_singleton : ", " adding grid %s" % further_grid_def)
             grid_defs[glabel] = further_grid_def
             further_grid_id = glabel
 
@@ -999,7 +1005,7 @@ def process_singleton(sv, alias, pingvars, field_defs, grid_defs, scalar_defs, t
                     (further_field_id, further_grid_id, alias)
         field_defs[further_field_id] = field_def
         if printout:
-            print "process_singleton : ", " adding field %s" % field_def
+            print("process_singleton : ", " adding field %s" % field_def)
     return further_field_id, further_grid_id
 
 

@@ -1,4 +1,7 @@
-# -*- coding: iso-8859-15 -*-
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+from __future__ import print_function, division, absolute_import, unicode_literals
 
 
 lab_and_model_settings = {
@@ -26,7 +29,7 @@ lab_and_model_settings = {
                       # "climodis","clwmodis","jpdftaureicemodis","cltmodis","clmisr","parasolRefl"\
                       ],
     # --- mpmoine_next_modif: ignore some spatial shapes
-    # mpmoine_note: grilles Groenland, Antarctic et les profils en Sites (pas encore codé dans dr2xml)
+    # mpmoine_note: grilles Groenland, Antarctic et les profils en Sites (pas encore codÃ© dans dr2xml)
     # "excluded_spshapes": ["XYA-na","XYG-na","S-na","S-AH","S-A","na-A"],
     "excluded_spshapes": ["XYA-na", "XYG-na", "na-A", "Y-P19", "Y-P39", "Y-A", "Y-na"],
     "excluded_tables": ["Oclim", "E1hrClimMon"],  # Clims are not handled by Xios yet
@@ -63,13 +66,13 @@ lab_and_model_settings = {
             "sfx": ["gr", "complete", "250 km", "data regridded to a T127 gaussian grid " + \
                     "(128x256 latlon) from a native atmosphere T127l reduced gaussian grid"],
             # "sfx" : [ "gn", "" , "250 km", "native T127 reduced gaussian grid"] ,
-            "trip": ["gn", "", "50 km", "regular 1/2° lat-lon grid"],
+            "trip": ["gn", "", "50 km", "regular 1/2Â° lat-lon grid"],
             "nem": ["gn", "", "100 km", "native ocean tri-polar grid with 105 k ocean cells"], },
 
         "HR": {
             "sfx": ["gr", "complete", "50 km", "data regridded to a 359 gaussian grid " + \
                     "(180x360 latlon) from a native atmosphere T359l reduced gaussian grid"],
-            "trip": ["gn", "", "50 km", "regular 1/2° lat-lon grid"],
+            "trip": ["gn", "", "50 km", "regular 1/2Â° lat-lon grid"],
             "nem": ["gn", "", "25 km", "native ocean tri-polar grid with 1.47 M ocean cells"], },
     },
 
