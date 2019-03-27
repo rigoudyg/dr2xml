@@ -143,7 +143,6 @@ def process_zonal_mean(field_id, grid_id, target_hgrid_id, zgrid_id, field_defs,
 
     """
     printout = False
-    global nlonz
 
     # e.g. <field id="CMIP6_ua_plev39_average" field_ref="CMIP6_ua_plev39" operation="average" />
     xios_freq = Cmip6Freq2XiosFreq(frequency, None)
