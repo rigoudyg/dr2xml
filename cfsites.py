@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 # CFsites-related elements (CFMIP)
 # A file named cfsites_grid_file_name must be provided at runtime, which
 # includes a field named cfsites_grid_field_id, defined on an unstructured
