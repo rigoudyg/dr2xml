@@ -27,6 +27,9 @@ axis_count = 0
 
 
 def get_grid_def(grid_id, grid_defs):
+    """
+    Get the grid definition corresponding to grid_id from the context_index or the list of grid definitions.
+    """
     context_index = get_config_variable("context_index")
     if grid_id in grid_defs:
         # Simple case : already stored
@@ -42,9 +45,11 @@ def get_grid_def(grid_id, grid_defs):
 
 
 def guess_simple_domain_grid_def(grid_id):
-    # dr2xml sometimes must be able to restconstruct the grid def for a grid which has
-    # just a domain, from the grid_id, using a regexp with a numbered group that matches
-    # domain_name in grid_id. Second item is group number
+    """
+    dr2xml sometimes must be able to restconstruct the grid def for a grid which has
+    just a domain, from the grid_id, using a regexp with a numbered group that matches
+    domain_name in grid_id. Second item is group number
+    """
     regexp = get_variable_from_lset_without_default("simple_domain_grid_regexp")
     domain_id, n = re.subn(regexp[0], r'\%d' % regexp[1], grid_id)
     if n != 1:
@@ -209,6 +214,9 @@ def change_domain_in_grid(domain_id, grid_defs, ping_alias=None, src_grid_id=Non
 
 
 def get_grid_def_with_lset(grid_id, grid_defs):
+    """
+    Get the grid definition corresponding to grid_id.
+    """
     try:
         grid_def = get_grid_def(grid_id, grid_defs)
     except:
@@ -379,6 +387,9 @@ def isVertDim(sdim):
 
 
 def scalar_vertical_dimension(sv):
+    """
+    Return the altLabel attribute if it is a vertical dimension, else None.
+    """
     if 'cids' in sv.struct.__dict__:
         cid = get_uid(sv.struct.cids[0])
         if cid.axis == 'Z':
@@ -387,9 +398,10 @@ def scalar_vertical_dimension(sv):
 
 
 def create_output_grid(ssh, grid_defs, domain_defs, target_hgrid_id, margs):
-    # Build output grid (stored in grid_defs) by analyzing the spatial shape
-    # Including horizontal operations. Can include horiz re-gridding specification
-    # --------------------------------------------------------------------
+    """
+    Build output grid (stored in grid_defs) by analyzing the spatial shape
+    Including horizontal operations. Can include horiz re-gridding specification
+    """
     grid_ref = None
 
     # Compute domain name, define it if needed

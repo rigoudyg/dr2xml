@@ -37,6 +37,16 @@ warnings_for_optimisation = []
 
 
 def wr(out, key, dic_or_val=None, num_type="string", default=None):
+    """
+    Short cut for a repetitive pattern : writing in 'out'
+    a string variable name and value
+    If dic_or_val is not None
+      if  dic_or_val is a dict,
+        if key is in value is dic_or_val[key],
+        otherwise use default as value , except if default is False
+      otherwise, use arg dic_or_val as value if not None nor False,
+    otherwise use value of local variable 'key'
+    """
     if not get_variable_from_lset_with_default("print_variables", True):
         return
     """
@@ -1012,18 +1022,28 @@ def process_singleton(sv, alias, pingvars, field_defs, grid_defs, scalar_defs, t
 
 
 def has_singleton(sv):
+    """
+    Determine if a variable has a singleton dimension.
+    :param sv: variable
+    :return: boolean indicating whether the variable has a singleton dimension
+    """
     rep = any([is_singleton(sv.sdims[k]) for k in sv.sdims])
     return rep
 
 
 def is_singleton(sdim):
+    """
+    Based on sdim (dimensions) characteristics, determine if it corresponds to a singleton
+    :param sdim: dimensions characteristics
+    :return: boolean indicating whether sdim corresponds to a singleton or not
+    """
     if sdim.axis == '':
         # Case of non-spatial dims. Singleton only have a 'value' (except Scatratio has a lot (in DR01.00.21))
         return sdim.value != '' and len(sdim.value.strip().split(" ")) == 1
     else:
         # Case of space dimension singletons. Should a 'value' and no 'requested'
         return ((sdim.value != '') and (sdim.requested.strip() == '')) \
-               or (sdim.label == "typewetla")  # The latter is a bug in DR01.00.21 : typewetla has no value tehre
+               or (sdim.label == "typewetla")  # The latter is a bug in DR01.00.21 : typewetla has no value there
 
 
 def add_scalar_in_grid(gridin_def, gridout_id, scalar_id, scalar_name, remove_axis, change_scalar=True):
@@ -1069,6 +1089,13 @@ def add_scalar_in_grid(gridin_def, gridout_id, scalar_id, scalar_name, remove_ax
 
 
 def wrv(name, value, num_type="string"):
+    """
+    Create a string corresponding of a variable for Xios files.
+    :param name: name of the variable
+    :param value: value of the variable
+    :param num_type: type of the variable
+    :return: string corresponding to the xml variable
+    """
     if not get_variable_from_lset_with_default("print_variables", True):
         return ""
     if isinstance(value, str):

@@ -28,6 +28,9 @@ def get_CMORvar(label, table):
 
 
 def get_SpatialAndTemporal_Shapes(cmvar):
+    """
+    Get the spatial et temporal shape of a CMOR variable from the DR.
+    """
     spatial_shape = False
     temporal_shape = False
     if cmvar.stid == "__struct_not_found_001__":
@@ -114,14 +117,15 @@ def analyze_ambiguous_MIPvarnames(debug=[]):
 
 
 def ping_alias(svar, pingvars, error_on_fail=False):
-    # dans le pingfile, grace a la gestion des interpolations
-    # verticales, on n'attend pas forcement les alias complets des
-    # variables (CMIP6_<label>), on peut se contenter des alias
-    # reduits (CMIP6_<lwps>)
+    """
+    Dans le pingfile, grace a la gestion des interpolations
+    verticales, on n'attend pas forcement les alias complets des
+    variables (CMIP6_<label>), on peut se contenter des alias
+    reduits (CMIP6_<lwps>)
 
-    # par ailleurs, si on a defini un label non ambigu alors on l'utilise
-    # comme ping_alias (i.e. le field_ref)
-
+    par ailleurs, si on a defini un label non ambigu alors on l'utilise
+    comme ping_alias (i.e. le field_ref)
+    """
     pref = get_variable_from_lset_without_default("ping_variables_prefix")
     if svar.label_non_ambiguous:
         # print "+++ non ambiguous", svar.label,svar.label_non_ambiguous
@@ -157,8 +161,10 @@ def analyze_priority(cmvar, lmips):
     return prio
 
 
-# A class for unifying CMOR vars and home variables
 class simple_CMORvar(object):
+    """
+    A class for unifying CMOR vars and home variables
+    """
     def __init__(self):
         self.type = False
         self.modeling_realm = None
@@ -190,9 +196,10 @@ class simple_CMORvar(object):
         self.cmvar = None  # corresponding CMORvar, if any
 
 
-# A class for unifying grid info coming from DR and extra_Tables
-#
 class simple_Dim(object):
+    """
+    A class for unifying grid info coming from DR and extra_Tables
+    """
     def __init__(self):
         self.label = False
         self.zoom_label = False

@@ -34,15 +34,24 @@ sn_issues = dict()
 
 
 def get_grid_choice():
+    """
+    Get the value of global variable grid_choice
+    """
     return grid_choice
 
 
 def initialize_sn_issues(init):
+    """
+    Initialize global variable sn_issues
+    """
     global sn_issues
     sn_issues = init
 
 
 def get_sc():
+    """
+    Return the value of global variable sc
+    """
     return sc
 
 
@@ -188,6 +197,13 @@ def RequestItem_applies_for_exp_and_year(ri, experiment, year=None, debug=False)
 
 
 def year_in_ri(ri, exp, year, debug=False):
+    """
+    :param ri: request item
+    :param exp: experiment
+    :param year: year to treat
+    :param debug: boolean to active debug mode
+    :return: a tuple which contains a boolean indicated whether the year has to be treated and the last year to treat
+    """
     if ri.label == "CfmipCf3hrSimNew":
         return (year == 2008), 2008
     if "HighResMIP, HighResMIP-6hrPlevExtr, amip" in ri.title:
@@ -243,12 +259,15 @@ def year_in_ri(ri, exp, year, debug=False):
 
 
 def year_in_ri_tslice(ri, exp, year, debug=False):
-    # Returns a couple : relevant, endyear.
-    # RELEVANT is True if requestItem RI applies to
-    #   YEAR, either implicitly or explicitly (e.g. timeslice)
-    # ENDYEAR, which is meaningful if RELEVANT is True, and is the
-    #   last year in the timeslice (or None if timeslice ==
-    #   the whole experiment duration)
+    """
+    Returns a couple : relevant, endyear.
+    RELEVANT is True if requestItem RI applies to
+      YEAR, either implicitly or explicitly (e.g. timeslice)
+    ENDYEAR, which is meaningful if RELEVANT is True, and is the
+      last year in the timeslice (or None if timeslice ==
+      the whole experiment duration)
+    """
+
     if 'tslice' not in ri.__dict__:
         if debug:
             print("No tslice for reqItem %s -> OK for any year" % ri.title)
@@ -318,6 +337,12 @@ def year_in_ri_tslice(ri, exp, year, debug=False):
 
 
 def experiment_start_year_without_sset(exp, debug=False):
+    """
+    Find start year of an experiment
+    :param exp: experiment
+    :param debug: boolean to activate debug log
+    :return: start year of the experiment
+    """
     try:
         return int(float(exp.starty))
     except:
@@ -327,6 +352,12 @@ def experiment_start_year_without_sset(exp, debug=False):
 
 
 def experiment_start_year(exp, debug=False):
+    """
+    Find star year of an experiment
+    :param exp: experiment
+    :param debug: boolean for debug verbose level activation
+    :return: start year of an experiment
+    """
     if is_key_in_sset("branch_year_in_child"):
         return get_variable_from_sset_without_default("branch_year_in_child")
     else:
@@ -339,6 +370,11 @@ def experiment_start_year(exp, debug=False):
 
 
 def experiment_end_year(exp):
+    """
+    Find the year of an experiment
+    :param exp: experiment
+    :return: end year of the experiment
+    """
     try:
         return int(float(exp.endy))
     except:
@@ -346,6 +382,11 @@ def experiment_end_year(exp):
 
 
 def experiment_end_year_from_sset(exp):
+    """
+    Find the end year of an experiment
+    :param exp: experiment
+    :return: end year of the experiment
+    """
     if is_key_in_sset("end_year"):
         return get_variable_from_sset_without_default("end_year")
     else:
@@ -592,6 +633,13 @@ def select_CMORvars_for_lab(sset=False, year=None, printout=False):
 
 
 def gather_AllSimpleVars(year=False, printout=False, select="on_expt_and_year"):
+    """
+    List of mip variables asked
+    :param year: year when the variables are created
+    :param printout: boolean to activate verbose log
+    :param select: selection criteria
+    :return: list of mip variables
+    """
     if select == "on_expt_and_year" or select == "":
         mip_vars_list = select_CMORvars_for_lab(True, year, printout=printout)
     elif select == "on_expt":

@@ -22,6 +22,9 @@ context_index = None
 
 # Functions to deal with those configuration variables
 def set_config_variable(variable, value):
+    """
+    Set the value of the indicated global variable
+    """
     if variable == "context_index":
         global context_index
         context_index = value
@@ -30,6 +33,9 @@ def set_config_variable(variable, value):
 
 
 def get_config_variable(variable):
+    """
+    Get the value of the indicated global variable.
+    """
     if variable == "context_index":
         return context_index
     elif variable == "conventions":

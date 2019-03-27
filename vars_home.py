@@ -391,6 +391,9 @@ def read_extraTable(path, table, printout=False):
 
 
 def process_homeVars(mip_vars_list, mips, expid=False, printout=False):
+    """
+    Deal with home variables.
+    """
     printmore = False
     # Read HOME variables
     homevars = get_variable_from_sset_else_lset_with_default('listof_home_vars', default=None)
@@ -492,6 +495,9 @@ def process_homeVars(mip_vars_list, mips, expid=False, printout=False):
 
 
 def get_corresp_CMORvar(hmvar):
+    """
+    For a home variable, find the CMOR var which corresponds.
+    """
     printout = False and ("lwsnl" in hmvar.label)
     count = 0
     empty_table = (hmvar.mipTable == 'NONE') or (hmvar.mipTable[0:4] == 'None')
@@ -701,6 +707,9 @@ def complement_svar_using_cmorvar(svar, cmvar, sn_issues, debug=[], allow_pseudo
 
 
 def get_simpleDim_from_DimId(dimid):
+    """
+    Build a simple_Dim object which characteristics fit with dimid.
+    """
     sdim = simple_Dim()
     d = get_uid(dimid)
     sdim.label = d.label
@@ -735,11 +744,11 @@ def get_simpleDim_from_DimId(dimid):
 
 
 def Remove_pSuffix(svar, mlev_sfxs, slev_sfxs, realms):
-    #
-    # remove suffixes only if both suffix of svar.label *and* suffix of one of the svar.dims.label
-    # match the search suffix to avoid truncation of variable names like 'ch4' requested on 'plev19',
-    # where '4' does not stand for a plev set
-    #
+    """
+    Remove suffixes only if both suffix of svar.label *and* suffix of one of the svar.dims.label
+    match the search suffix to avoid truncation of variable names like 'ch4' requested on 'plev19',
+    where '4' does not stand for a plev set
+    """
     r = re.compile("([a-zA-Z]+)([0-9]+)")
     #
     # mpmoine_correction:write_xios_file_def:Remove_pSuffix: suppression des terminaisons en "Clim" le cas echant

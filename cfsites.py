@@ -1,13 +1,16 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+"""
+CFsites-related elements (CFMIP)
+A file named cfsites_grid_file_name must be provided at runtime, which
+includes a field named cfsites_grid_field_id, defined on an unstructured
+grid which is composed of CF sites
+"""
+
 from __future__ import print_function, division, absolute_import, unicode_literals
 
 
-# CFsites-related elements (CFMIP)
-# A file named cfsites_grid_file_name must be provided at runtime, which
-# includes a field named cfsites_grid_field_id, defined on an unstructured
-# grid which is composed of CF sites
 cfsites_radix = "cfsites"
 cfsites_domain_id = cfsites_radix + "_domain"
 cfsites_grid_id = cfsites_radix + "_grid"

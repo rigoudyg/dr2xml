@@ -1,12 +1,14 @@
 #!/usr/bin/python
 # coding: utf-8
 
-# Whats' necessary for reading XIOS xml file and process attribute's inheritance for
-# being able to request the grid_ref for any valid XIOS 'field' object
+"""
+Whats' necessary for reading XIOS xml file and process attribute's inheritance for
+being able to request the grid_ref for any valid XIOS 'field' object
 
-# Main useful functions :
-#   <opaque>    context = init_context(context_name,printout=False)
-#   <ET object>    grid = id2grid(field_id,context,printout=False)
+Main useful functions :
+  <opaque>    context = init_context(context_name,printout=False)
+  <ET object>    grid = id2grid(field_id,context,printout=False)
+"""
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
@@ -70,6 +72,13 @@ def read_src(elt, path_parse, printout=False, level=0, dont_read=[]):
 
 
 def gattrib(e, attrib_name, default=None):
+    """
+    Get the value of an attribute of an element.
+    :param e: xml element
+    :param attrib_name: name of the attribute
+    :param default: default value if attribute is missing
+    :return: the value of the attribute or default
+    """
     if attrib_name in e.attrib:
         return e.attrib[attrib_name]
     else:
@@ -253,12 +262,25 @@ def solve_by_ref(attrib, index, elt, printout=False, level=0):
 
 
 def select_context(rootel, context_id):
+    """
+    Find the context corresponding to context_id
+    :param rootel: root of xml element
+    :param context_id: id of the context to find
+    :return: context corresponding to context_id in rootel
+    """
     for context in rootel:
         if 'id' in context.attrib and context.attrib['id'] == context_id:
             return context
 
 
 def init_context(context_id, path_parse="./", printout=False):
+    """
+    Create the index for xml elements
+    :param context_id: id of the context of the index
+    :param path_parse: directory of the xml iodef
+    :param printout: boolean to active verbose log
+    :return: the index of the context
+    """
     xmldef = path_parse + "iodef.xml"
     if printout:
         print("Parsing %s ..." % xmldef,)
@@ -288,6 +310,13 @@ def init_context(context_id, path_parse="./", printout=False):
 
 
 def id2gridid(field_id, index, printout=False):
+    """
+    Call to id2grid and get "id" parameter
+    :param field_id: id of the field
+    :param index: index of the xml elements
+    :param printout: boolean to active verbose log
+    :return: the id of the grid corresponding to the entry parameters.
+    """
     grid = id2grid(field_id, index, printout=printout)
     return grid.attrib['id']
 
@@ -356,6 +385,9 @@ if False:
 
 
 class Xparse_error(Exception):
+    """
+    Xparse exceptions class.
+    """
 
     def __init__(self, valeur):
         self.valeur = valeur

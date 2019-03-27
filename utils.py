@@ -9,6 +9,9 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 
 
 class dr2xml_error(Exception):
+    """
+    dr2xml generic exceptions.
+    """
     def __init__(self, valeur):
         self.valeur = valeur
 
@@ -18,6 +21,9 @@ class dr2xml_error(Exception):
 
 
 class dr2xml_grid_error(Exception):
+    """
+    Dr2xml grids specific exceptions.
+    """
     def __init__(self, valeur):
         self.valeur = valeur
 
@@ -26,6 +32,9 @@ class dr2xml_grid_error(Exception):
 
 
 class vars_error(Exception):
+    """
+    Vars specific exceptions.
+    """
     def __init__(self, valeur):
         self.valeur = valeur
 

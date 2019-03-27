@@ -60,6 +60,10 @@ import sys
 import os
 import glob
 
+import cProfile
+import pstats
+import io
+
 # Utilities
 from utils import dr2xml_error
 
@@ -618,10 +622,9 @@ example_simulation_settings = {
 def generate_file_defs(lset, sset, year, enddate, context, cvs_path, pingfiles=None,
                        dummies='include', printout=False, dirname="./", prefix="", attributes=[],
                        select="on_expt_and_year"):
-    # A wrapper for profiling top-level function : generate_file_defs_inner
-    import cProfile
-    import pstats
-    import io
+    """
+    A wrapper for profiling top-level function : generate_file_defs_inner
+    """
     pr = cProfile.Profile()
     pr.enable()
     # Initialize lset and sset variables for all functions
@@ -1257,7 +1260,9 @@ def pingFileForRealmsList(settings, context, lrealms, svars, path_special, dummy
 
 
 def copy_obj_from_DX_file(fp, obj, prefix, lrealms, path_special):
-    # Insert content of DX_<obj>_defs files (changing prefix)
+    """
+    Insert content of DX_<obj>_defs files (changing prefix)
+    """
     # print "copying %s defs :"%obj,
     subrealms_seen = []
     for realm in lrealms:
@@ -1282,6 +1287,9 @@ def copy_obj_from_DX_file(fp, obj, prefix, lrealms, path_special):
 
 
 def DX_defs_filename(obj, realm, path_special):
+    """
+    Return the path of the DX file.
+    """
     # TBS# return prog_path+"/inputs/DX_%s_defs_%s.xml"%(obj,realm)
     return path_special + "/DX_%s_defs_%s.xml" % (obj, realm)
 
@@ -1345,6 +1353,9 @@ def read_xml_elmt_or_attrib(filename, tag='field', attrib=None, printout=False):
 
 
 def read_special_fields_defs(realms, path_special, printout=False):
+    """
+    Read external files and return a dictionary containing the fields.
+    """
     special = dict()
     subrealms_seen = []
     for realm in realms:
@@ -1477,6 +1488,9 @@ def create_standard_domains(domain_defs):
 
 
 def create_standard_domain(resol, ni, nj):
+    """
+    Create a xml like string corresponding to the domain using resol, ni and nj.
+    """
     return '<domain id="CMIP6_%s" ni_glo="%d" nj_glo="%d" type="rectilinear"  prec="8"> ' % (resol, ni, nj) + \
            '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true"  ' \
            'mode="read_or_compute" write_weight="true" /> ' + \
