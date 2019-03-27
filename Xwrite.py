@@ -50,7 +50,7 @@ def wr(out, key, dic_or_val=None, num_type="string", default=None):
     otherwise use value of local variable 'key'
     """
     val = None
-    if type(dic_or_val) == type({}):
+    if isinstance(dic_or_val, dict):
         if key in dic_or_val:
             val = dic_or_val[key]
         else:
@@ -253,8 +253,8 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
         elif is_key_in_lset("parent_activity_id"):
             parent_activity_id = get_variable_from_lset_without_default("parent_activity_id")
         else:
-            parent_activity_id= get_variable_from_sset_with_default("activity_id", exp_entry["parent_activity_id"])
-        if type(parent_activity_id) == type([]):
+            parent_activity_id = get_variable_from_sset_with_default("activity_id", exp_entry["parent_activity_id"])
+        if isinstance(parent_activity_id, list):
             parent_activity_id = reduce(lambda x, y: x+" "+y, parent_activity_id)
         parent_experiment_id = \
             get_variable_from_sset_else_lset_with_default("parent_experiment_id",
@@ -401,7 +401,7 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
     #            (lset['source_id'],sset['experiment_id'],sset.get('project',"CMIP6")))
     out.write(' >\n')
     #
-    if type(activity_id) == type([]):
+    if isinstance(activity_id, list):
         activity_idr = reduce(lambda x, y: x + " " + y, activity_id)
     else:
         activity_idr = activity_id
@@ -455,8 +455,8 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
     wr(out, 'grid', grid_description)
     wr(out, 'grid_label', grid_label)
     wr(out, 'nominal_resolution', grid_resolution)
-    comment = get_variable_from_lset_with_default('comment', '') + " " + \
-              get_variable_from_sset_with_default('comment', '') + dynamic_comment
+    comment = get_variable_from_lset_with_default('comment', '') +\
+              " " + get_variable_from_sset_with_default('comment', '') + dynamic_comment
     wr(out, 'comment', comment)
     wr(out, 'history', sset, default='none')
     wr(out, "initialization_index", initialization_index, num_type="int")
@@ -539,7 +539,7 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
             raise dr2xml_error("Fatal: source for %s not found in CMIP6_CV at %s, nor in lset" % (source_id, cvspath))
     wr(out, 'source', source)
     wr(out, 'source_id', source_id)
-    if type(source_type) == type([]):
+    if isinstance(source_type, list):
         source_type = reduce(lambda x, y: x + " " + y, source_type)
     wr(out, 'source_type', source_type)
     #
@@ -668,8 +668,9 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
         else:
             (grid_id, grid_ref) = sv.description.split("|")
             sv.description = None
-            field_defs[alias_ping] = '<field id="%-25s long_name="%s standard_name="%s unit="%s grid_ref="%s />' \
-        % (alias_ping + '"', sv.long_name + '"', sv.stdname + '"', sv.units + '"', grid_ref + '"')
+            field_defs[alias_ping] = '<field id="%-25s long_name="%s standard_name="%s unit="%s grid_ref="%s />' % \
+                                     (alias_ping + '"', sv.long_name + '"', sv.stdname + '"', sv.units + '"',
+                                      grid_ref + '"')
             grid_id_in_ping = context_index[grid_id].attrib["id"]
     else:
         alias_ping = ping_alias(sv, pingvars)
@@ -896,8 +897,8 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
     else:
         source, source_type = get_source_id_and_type()
         grid_choice = get_variable_from_lset_without_default("grid_choice", source)
-        interval_op = repr(int(get_variable_from_lset_without_default('sampling_timestep', grid_choice, context))) \
-                      + " s"
+        interval_op = repr(int(get_variable_from_lset_without_default('sampling_timestep', grid_choice, context))) + \
+                      " s"
     if operation != 'once':
         rep += wrv('interval_operation', interval_op)
 
@@ -1070,7 +1071,7 @@ def add_scalar_in_grid(gridin_def, gridout_id, scalar_id, scalar_name, remove_ax
 def wrv(name, value, num_type="string"):
     if not get_variable_from_lset_with_default("print_variables", True):
         return ""
-    if type(value) == type(""):
+    if isinstance(value, str):
         value = value[0:1024]  # CMIP6 spec : no more than 1024 char
     # Format a 'variable' entry
     return '     <variable name="%s" type="%s" > %s ' % (name, num_type, value) + \

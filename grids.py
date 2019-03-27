@@ -13,7 +13,8 @@ import re
 
 from xml_interface import create_xml_element_from_string, create_string_from_xml_element
 from cfsites import cfsites_grid_id, add_cfsites_in_defs, cfsites_domain_id
-from settings_interface import get_variable_from_lset_without_default, get_variable_from_lset_with_default, is_key_in_lset
+from settings_interface import get_variable_from_lset_without_default, get_variable_from_lset_with_default, \
+    is_key_in_lset
 from config import get_config_variable
 from dr_interface import get_collection, get_uid
 from utils import dr2xml_error
@@ -249,7 +250,7 @@ def change_axes_in_grid(grid_id, grid_defs, axis_defs):
             if aliases[aid] == sector:
                 found = True
                 continue
-            if type(aliases[aid]) == type(()) and aliases[aid][0] == sector:
+            if isinstance(aliases[aid], tuple) and aliases[aid][0] == sector:
                 found = True
                 continue
         if not found:
@@ -265,7 +266,7 @@ def change_axes_in_grid(grid_id, grid_defs, axis_defs):
                 if any([ssub.tag == 'interpolate_axis' for ssub in sub]):
                     continue
                 else:
-                    print("Cannot normalize an axis in grid %s : no axis_ref for axis %s" %\
+                    print("Cannot normalize an axis in grid %s : no axis_ref for axis %s" %
                           (grid_id, create_string_from_xml_element(sub)))
                     continue
                     # raise dr2xml_error("Grid %s has an axis without axis_ref : %s"%(grid_id,grid_def))
@@ -279,7 +280,7 @@ def change_axes_in_grid(grid_id, grid_defs, axis_defs):
             #
             dr_axis_id = aliases[axis_ref]
             alt_labels = None
-            if type(dr_axis_id) == type(()):
+            if isinstance(dr_axis_id, tuple):
                 dr_axis_id, alt_labels = dr_axis_id
             dr_axis_id = dr_axis_id.replace('axis_', '')  # For toy_cnrmcm, atmosphere part
             # print ">>> axis_ref=%s, dr_axis_id=%s,alt_labels=%s"%(axis_ref,dr_axis_id,alt_labels),aliases[axis_ref]
@@ -323,7 +324,7 @@ def create_axis_from_dim(dim, labels, axis_ref, axis_defs):
         return axis_id, axis_name
 
     rep = '<axis id="%s" name="%s" axis_ref="%s"' % (axis_id, axis_name, axis_ref)
-    if type(dim.standardName) == type(""):
+    if isinstance(dim.standardName, str) or isinstance(dim.standardName, unicode):
         rep += ' standard_name="%s"' % dim.standardName
     rep += ' long_name="%s"' % dim.title
     #
@@ -340,7 +341,7 @@ def create_axis_from_dim(dim, labels, axis_ref, axis_defs):
         if dim.requested != "":
             nb = len(dim.requested.split())
             rep += ' value="(0,%d)[ ' % nb + dim.requested + ' ]"'
-        if type(dim.boundsRequested) == type([]):
+        if isinstance(dim.boundsRequested, list):
             vals = [" %s" % v for v in dim.boundsRequested]
             valsr = reduce(lambda x, y: x + y, vals)
             rep += ' bounds="(0,1)x(0,%d)[ ' % (nb - 1) + valsr + ' ]"'

@@ -97,7 +97,7 @@ def endyear_for_CMORvar(cv, expt, year, printout=False):
         ri = get_uid(riid)
         applies, endyear = RequestItem_applies_for_exp_and_year(ri, expt, year, debug=printout)
         if printout:
-            print("For var and freq selected for debug and year %d, for ri %s, applies=%s, endyear=%s" % \
+            print("For var and freq selected for debug and year %d, for ri %s, applies=%s, endyear=%s" %
                   (year, ri.title, repr(applies), repr(endyear)))
         if applies:
             if endyear is None:
@@ -210,7 +210,7 @@ def year_in_ri(ri, exp, year, debug=False):
     DR_first_year = experiment_start_year_without_sset(exp, debug=debug)
     DR_end_year = experiment_end_year(exp)
     if debug:
-        print("year_in_ri : start DR : %s actual : %s | end DR : %s actual : %s | ny=%d" % \
+        print("year_in_ri : start DR : %s actual : %s | end DR : %s actual : %s | ny=%d" %
               (DR_first_year, actual_first_year, DR_end_year, actual_end_year, ny))
     #
     ri_is_for_all_experiment = False
@@ -305,14 +305,14 @@ def year_in_ri_tslice(ri, exp, year, debug=False):
                     else:
                         endyear = max(endyear, lastyear)
                     if debug:
-                        print("slice OK : year=%d, start=%d tslice.start=%d refyear=%d tslice.nyears=%d lastyear=%d" % \
+                        print("slice OK : year=%d, start=%d tslice.start=%d refyear=%d tslice.nyears=%d lastyear=%d" %
                               (year, start, tslice.start, refyear, tslice.nyears, lastyear))
         else:
             raise dr2xml_error("For tslice %s, child %s start year is not documented" % (tslice.title, tslice.child))
     else:
         raise dr2xml_error("type %s for time slice %s is not handled" % (tslice.type, tslice.title))
     if debug:
-        print("for year %d and experiment %s, relevant is %s for tslice %s of type %s, endyear=%s" % \
+        print("for year %d and experiment %s, relevant is %s for tslice %s of type %s, endyear=%s" %
               (year, exp.label, repr(relevant), ri.title, tslice.type, repr(endyear)))
     return relevant, endyear
 
@@ -431,7 +431,7 @@ def select_CMORvars_for_lab(sset=False, year=None, printout=False):
         experiment_id = get_variable_from_sset_with_default_in_sset('experiment_for_requests', 'experiment_id')
         exp = get_uid(get_experiment_label(experiment_id))
         if printout:
-            print("Filtering for experiment %s, covering years [ %s , %s ] in DR" % \
+            print("Filtering for experiment %s, covering years [ %s , %s ] in DR" %
                   (experiment_id, exp.starty, exp.endy))
         # print "Request links before filter :"+`[ rl.label for rl in rls_for_mips ]`
         filtered_rls = []
@@ -454,9 +454,9 @@ def select_CMORvars_for_lab(sset=False, year=None, printout=False):
 
         rls = filtered_rls
         if printout:
-            print("Number of Request Links which apply to experiment ", \
-                experiment_id, " member ", get_variable_from_sset_without_default('realization_index'), " and MIPs",\
-                mips_list, " is: ", len(rls))
+            print("Number of Request Links which apply to experiment ",
+                  experiment_id, " member ", get_variable_from_sset_without_default('realization_index'), " and MIPs",
+                  mips_list, " is: ", len(rls))
         # print "Request links that apply :"+`[ rl.label for rl in filtered_rls ]`
     else:
         rls = rls_for_mips
@@ -557,7 +557,7 @@ def select_CMORvars_for_lab(sset=False, year=None, printout=False):
         if printout:
             multiple_grids.sort()
             if len(multiple_grids) > 0:
-                print("\tThese variables will be processed with multiple grids " + \
+                print("\tThese variables will be processed with multiple grids " +
                       "(rerun with print_multiple_grids set to True for details) :" + repr(multiple_grids))
     #
     # Print a count of distinct var labels

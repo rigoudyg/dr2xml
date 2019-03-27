@@ -5,6 +5,10 @@
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+# from dr2xml import select_CMORvars_for_lab, pingFileForRealmsList
+from dr2xml import pingFileForRealmsList
+from vars_selection import gather_AllSimpleVars
+
 # In[ ]:
 
 # Select your laboratory among: 'cnrm', 'cerfacs', 'ipsl'
@@ -110,10 +114,6 @@ settings["excluded_vars"] = []
 
 # In[ ]:
 
-# from dr2xml import select_CMORvars_for_lab, pingFileForRealmsList
-from dr2xml import pingFileForRealmsList
-from vars_selection import gather_AllSimpleVars
-
 # ## Select all variables to consider, based on lab settings
 
 # In[ ]:
@@ -127,7 +127,9 @@ svars = gather_AllSimpleVars(printout=True)
 
 help(pingFileForRealmsList)
 
-# ### When using function create_ping_files with argument exact=False, each ping file will adress all variables which realm includes or is included in one of the strings in a realms set  <br><br> e.g for set ['ocean','seaIce'], ping file 'ping_ocean_seaIce.xml' will includes variables which realm is either 'ocean' or 'seaIce' or 'ocean seaIce'
+# When using function create_ping_files with argument exact=False, each ping file will adress all variables which
+# realm includes or is included in one of the strings in a realms set  <br><br> e.g for set ['ocean','seaIce'],
+# ping file 'ping_ocean_seaIce.xml' will includes variables which realm is either 'ocean' or 'seaIce' or 'ocean seaIce'
 
 # ## Create various ping files for various sets of realms
 

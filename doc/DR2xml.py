@@ -5,6 +5,8 @@
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+from dr2xml import generate_file_defs
+
 # In[ ]:
 
 # --- Select your laboratory: 'cnrm', 'cerfacs' or'ipsl'
@@ -395,8 +397,6 @@ note = "VERSIONS:"
 print(note)
 print("-" * len(note))
 
-from dr2xml import generate_file_defs
-
 # In[ ]:
 
 note = "\nLAB AND MODEL SETTINGS:"
@@ -444,8 +444,6 @@ if False:
 note = "VERSIONS:"
 print(note)
 print("-" * len(note))
-
-from dr2xml import generate_file_defs
 
 # In[ ]:
 

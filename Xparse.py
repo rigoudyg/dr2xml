@@ -223,7 +223,7 @@ def solve_by_ref(attrib, index, elt, printout=False, level=0):
     """
     got_one = 0
     for child in elt:
-        if type(child) != type('') and child.tag != 'variable':
+        if not isinstance(child, str) and child.tag != 'variable':
             if 'id' in child.attrib:
                 name = child.attrib['id']
             else:

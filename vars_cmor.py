@@ -32,8 +32,8 @@ def get_SpatialAndTemporal_Shapes(cmvar):
     temporal_shape = False
     if cmvar.stid == "__struct_not_found_001__":
         if print_DR_errors:
-            print("Warning: stid for ", cmvar.label, " in table ", cmvar.mipTable,\
-                " is a broken link to structure in DR: ", cmvar.stid)
+            print("Warning: stid for ", cmvar.label, " in table ", cmvar.mipTable,
+                  " is a broken link to structure in DR: ", cmvar.stid)
     else:
         struct = get_uid(cmvar.stid)
         spatial_shape = get_uid(struct.spid).label

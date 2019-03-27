@@ -886,7 +886,7 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
                                             dummies, skipped_vars_per_table, actually_written_vars,
                                             prefix, context, grid, pingvars, enddate, attributes)
                 else:
-                    print("Duplicate variable %s,%s in table %s is skipped, preferred is %s" % \
+                    print("Duplicate variable %s,%s in table %s is skipped, preferred is %s" %
                           (svar.label, svar.mipVarLabel, table, count[svar.mipVarLabel].label))
 
         if cfsites_grid_id in grid_defs:
@@ -1020,8 +1020,8 @@ def create_xios_axis_and_grids_for_plevs_unions(svars, plev_sfxs, dummies, axis_
                                     pass
                     else:
                         if printout:
-                            print("Info: ", lwps, "not taken into account for building plevs union axis because ", \
-                                prefix + lwps,)
+                            print("Info: ", lwps, "not taken into account for building plevs union axis because ",
+                                  prefix + lwps,)
                             if not present_in_ping:
                                 print("is not an entry in the pingfile")
                             else:
@@ -1032,8 +1032,8 @@ def create_xios_axis_and_grids_for_plevs_unions(svars, plev_sfxs, dummies, axis_
                     # or pXX_<lwps> (single pressure level)
                     sv.sdims[sd.label].zoom_label = 'zoom_' + sd.label + "_" + lwps
                 else:
-                    print("Warning: dim is pressure but label_without_psuffix=", lwps, \
-                        "for", sv.label, sv.mipTable, sv.mip_era)
+                    print("Warning: dim is pressure but label_without_psuffix=", lwps,
+                          "for", sv.label, sv.mipTable, sv.mip_era)
             # else :
             #    print "for var %s/%s, dim %s is not related to pressure"%(sv.label,sv.label_without_psuffix,sd.label)
     #
@@ -1235,7 +1235,7 @@ def pingFileForRealmsList(settings, context, lrealms, svars, path_special, dummy
                     fp.write('?%-16s' % (label + '"') + ' />')
             if comments:
                 # Add units, stdname and long_name as a comment string
-                if type(comments) == type(""):
+                if isinstance(comments, str) or isinstance(comments, unicode):
                     fp.write(comments)
                 fp.write("<!-- P%d (%s) %s : %s -->" % (v.Priority, v.units, v.stdname, v.description))
             fp.write("\n")
@@ -1382,8 +1382,7 @@ def highest_rank(svar):
                     shape = sp.label
                 except:
                     if print_DR_errors:
-                        print("DR Error: issue with spid for " + \
-                              st.label + " " + v.label + str(cvar.mipTable))
+                        print("DR Error: issue with spid for " + st.label + " " + v.label + str(cvar.mipTable))
                     # One known case in DR 1.0.2: hus in 6hPlev
                     shape = "XY"
                 if "odims" in st.__dict__:
