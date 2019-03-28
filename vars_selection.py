@@ -441,8 +441,7 @@ def select_CMORvars_for_lab(sset=False, year=None, printout=False):
     if rls_for_all_experiments is None:
         rls_for_mips = sc.getRequestLinkByMip(mips_list)
         if printout:
-            print("Number of Request Links which apply to MIPS",)
-            print(mips_list, " is: ", len(rls_for_mips))
+            print("Number of Request Links which apply to MIPS", mips_list, " is: ", len(rls_for_mips))
         #
         excluded_rls = []
         for rl in rls_for_mips:
@@ -624,10 +623,9 @@ def select_CMORvars_for_lab(sset=False, year=None, printout=False):
     if printout:
         print('Number of simplified vars is :', len(simplified_vars))
     if printout:
-        print("Issues with standard names are :",)
         lissues = sn_issues.keys()
         lissues.sort()
-        print(lissues)
+        print("Issues with standard names are :", lissues)
 
     return simplified_vars
 

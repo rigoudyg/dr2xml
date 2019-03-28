@@ -161,7 +161,8 @@ def read_homeVars_list(hmv_file, expid, mips, path_extra_tables=None, printout=F
                 new_mip = new_mip[:-1]
                 new_mip = new_mip.split(",")
                 home_var.mip = new_mip
-            if (isinstance(home_var.mip, str) and (home_var.mip == "ANY" or home_var.mip in mips)) or \
+            if ((isinstance(home_var.mip, str) or isinstance(home_var.mip, unicode))
+                and (home_var.mip == "ANY" or home_var.mip in mips)) or \
                     (isinstance(home_var.mip, list) and mips.issuperset(home_var.mip)):
                 if home_var.experiment != "ANY":
                     # if home_var.experiment==expid: homevars.append(home_var)
@@ -376,15 +377,11 @@ def read_extraTable(path, table, printout=False):
         print("For extra table ", table, " (which has %d variables): " % len(extravars))
         print("\tVariables which dim was found in extra coordinates table:")
         for d in dim_from_extra:
-            print("\t\t%20s : " % d,)
-            for v in dim_from_extra[d]:
-                print(v,)
+            print("\t\t%20s : " % d, *dim_from_extra[d])
             print()
         print("\tDynamical XY-xxx spatial shapes (shapes not found in DR)")
         for d in dynamic_shapes:
-            print("\t\t%20s : " % ("XY-" + d),)
-            for v in dynamic_shapes[d]:
-                print(v,)
+            print("\t\t%20s : " % ("XY-" + d), *dynamic_shapes[d])
             print()
 
     return extravars

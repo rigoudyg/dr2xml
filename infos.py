@@ -32,11 +32,9 @@ def print_SomeStats(context, svars_per_table, skipped_vars_per_table, actually_w
         if skipped_vars_per_table:
             print("\nSkipped variables (i.e. whose alias is not present in the pingfile):")
             for table, skipvars in skipped_vars_per_table.items():
-                print(">>> TABLE:",)
-                print("%15s %02d/%02d ---->" % (table, len(skipvars), len(svars_per_table[table])),)
+                print(">>> TABLE:", "%15s %02d/%02d ---->" % (table, len(skipvars), len(svars_per_table[table])),
+                      *skipvars)
                 # TBS# print "\n\t",table ," ",len(skipvars),"--->",
-                for skv in skipvars:
-                    print(skv,)  # already contains priority info
                 print()
             print()
 
@@ -84,10 +82,9 @@ def print_SomeStats(context, svars_per_table, skipped_vars_per_table, actually_w
                 tot_for_freq_and_shape_among_tables = 0
                 for table in dic[frequency][spatial_shp]:
                     for Priority in dic[frequency][spatial_shp][table]:
-                        print("%10s" % " ", " %8s" % " ", "% 12s" % table, "P%1d" % Priority,)
                         l = dic[frequency][spatial_shp][table][Priority]
-                        print("% 3d : " % len(l), l)
                         tot_for_freq_and_shape_among_tables += len(l)
+                        print("%10s" % " ", " %8s" % " ", "% 12s" % table, "P%1d" % Priority, "% 3d : " % len(l), l)
                 print("%10s" % frequency, " %8s" % spatial_shp, "% 11s" % "--------", "---", "%3d" %
                       tot_for_freq_and_shape_among_tables)
                 tot_for_freq_among_shapes += tot_for_freq_and_shape_among_tables

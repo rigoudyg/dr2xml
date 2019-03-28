@@ -52,13 +52,8 @@ Changes :
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
-import json
-import datetime
-import re
-import collections
 import sys
 import os
-import glob
 
 import cProfile
 import pstats
@@ -69,51 +64,35 @@ from utils import dr2xml_error
 
 # Settings and config
 from config import get_config_variable, set_config_variable
-from analyzer import freq2datefmt, analyze_cell_time_method, Cmip6Freq2XiosFreq, longest_possible_period, \
-    initialize_cell_method_warnings, get_cell_method_warnings, DRgrid2gridatts
+from analyzer import initialize_cell_method_warnings, get_cell_method_warnings
 
 # Data request interface
-from dr_interface import get_DR_version, initialize_sc, get_collection, get_uid, get_request_by_id_by_sect, \
-    get_experiment_label, print_DR_errors
+from dr_interface import get_DR_version, get_collection, get_uid, get_request_by_id_by_sect, print_DR_errors
 
 # XML interface
-from xml_interface import create_xml_element_from_string, create_string_from_xml_element, get_root_of_xml_file, \
-    create_xml_element, create_xml_string
+from xml_interface import create_xml_element_from_string, create_string_from_xml_element, get_root_of_xml_file
 
 # Simulations and laboratory settings dictionnaries interface
-from settings_interface import initialize_dict, get_variable_from_lset_with_default, \
-    is_key_in_sset, get_variable_from_sset_without_default, is_sset_not_None, get_source_id_and_type, \
-    get_variable_from_sset_and_lset_without_default, get_variable_from_sset_with_default_in_sset, \
-    get_variable_from_sset_with_default, is_key_in_lset, get_variable_from_sset_else_lset_with_default, \
+from settings_interface import initialize_dict, get_variable_from_lset_with_default, get_source_id_and_type, \
     get_lset_iteritems, get_sset_iteritems, get_variable_from_lset_without_default
 
 # XIOS linked modules
-from Xparse import init_context, id2grid, id2gridid, idHasExprWithAt
-from Xwrite import wr, write_xios_file_def
+from Xparse import init_context, id2gridid
+from Xwrite import write_xios_file_def
 
 # Grids modules
-from grids import get_grid_def, guess_simple_domain_grid_def, create_grid_def, create_axis_def, change_domain_in_grid, \
-    get_grid_def_with_lset, change_axes_in_grid, isVertDim, scalar_vertical_dimension
-from grids_selection import decide_for_grids
+from grids import create_grid_def, create_axis_def
 
 # Variables modules
-from vars_home import process_homeVars, complement_svar_using_cmorvar, \
-    multi_plev_suffixes, single_plev_suffixes, get_simplevar
-from vars_cmor import simple_CMORvar, simple_Dim
-from vars_selection import endyear_for_CMORvar, RequestItem_applies_for_exp_and_year, select_CMORvars_for_lab, \
-    gather_AllSimpleVars, get_sc, initialize_sn_issues, get_grid_choice
-
-# Split frequencies module
-from file_splitting import split_frequency_for_variable, timesteps_per_freq_and_duration
+from vars_home import multi_plev_suffixes, single_plev_suffixes
+from vars_cmor import simple_Dim
+from vars_selection import gather_AllSimpleVars, initialize_sn_issues, get_grid_choice
 
 # Statistics module
 from infos import print_SomeStats
 
 # CFsites handling has its own module
-from cfsites import cfsites_domain_id, cfsites_grid_id, cfsites_input_filedef, add_cfsites_in_defs
-
-# Post-processing modules
-from postprocessing import process_vertical_interpolation, process_zonal_mean, process_diurnal_cycle
+from cfsites import cfsites_grid_id, cfsites_input_filedef
 
 print("\n", 50 * "*", "\n*")
 print("* %29s" % "dr2xml version: ", get_config_variable("version"))
@@ -633,7 +612,7 @@ def generate_file_defs(lset, sset, year, enddate, context, cvs_path, pingfiles=N
                              dummies=dummies, printout=printout, dirname=dirname,
                              prefix=prefix, attributes=attributes, select=select)
     pr.disable()
-    s = io.StringIO()
+    s = io.BytesIO()
     sortby = 'cumulative'
     ps = pstats.Stats(pr, stream=s).sort_stats(sortby)
     ps.print_stats()
@@ -675,9 +654,13 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
     # --------------------------------------------------------------------
     # Parse XIOS settings file for the context
     # --------------------------------------------------------------------
-    print("\n", 50 * "*", "\n")
+    print()
+    print(50 * "*")
+    print()
     print("Processing context ", context)
-    print("\n", 50 * "*", "\n")
+    print()
+    print(50 * "*")
+    print()
     set_config_variable("context_index",
                         init_context(context, get_variable_from_lset_with_default("path_to_parse", "./"),
                                      printout=get_variable_from_lset_with_default("debug_parsing", False)))
