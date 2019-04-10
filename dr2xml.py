@@ -606,6 +606,9 @@ example_simulation_settings = {
     "max_split_freq": None,
 
     'unused_contexts': [],  # If you havn't set a 'configuration', you may fine tune here
+    # perso_sdims_description variable should be a dictionnary which described each element of the
+    # custom sdim shape
+    'perso_sdims_description': {},
 }
 
 

@@ -15,7 +15,7 @@ from dr_interface import get_collection, get_uid, get_CMORvarId_by_label, get_re
 
 # Settings dictionaries interface
 from settings_interface import get_variable_from_sset_else_lset_with_default, get_variable_from_lset_with_default, \
-    get_variable_from_lset_without_default
+    get_variable_from_lset_without_default, get_variable_from_sset_with_default
 
 from vars_cmor import get_CMORvar, get_SpatialAndTemporal_Shapes, analyze_ambiguous_MIPvarnames, simple_CMORvar, \
     simple_Dim
@@ -89,7 +89,6 @@ def read_homeVars_list(hmv_file, expid, mips, path_extra_tables=None, printout=F
     extravars = []
     extra_vars_per_table = dict()
     for line in data:
-        print line
         if line[0] == '#':
             continue
         line_split = line.split(';')
@@ -135,14 +134,30 @@ def read_homeVars_list(hmv_file, expid, mips, path_extra_tables=None, printout=F
                 home_var.cell_methods = tcmName2tcmValue[home_var.temporal_shp]
                 home_var.label_without_psuffix = home_var.label
                 home_var.cell_measures = ""
-            print home_var.mip
+            if home_var.spatial_shp == "XY-perso":
+                home_var_sdims_info = get_variable_from_sset_with_default('perso_sdims_description', dict())
+                if home_var.label in home_var_sdims_info:
+                    home_var_sdims = dict()
+                    for home_var_dim in home_var_sdims_info[home_var.label]:
+                        home_var_sdim = simple_Dim()
+                        home_var_sdim.label = home_var_dim
+                        for sdim_key in ["zoom_label", "stdname", "long_name", "positive", "requested", "value",
+                                         "out_name", "units", "is_zoom_of", "bounds", "boundsValue", "axis", "type",
+                                         "coords", "title", "is_union_for"]:
+                            if sdim_key in home_var_sdims_info[home_var.label][home_var_dim]:
+                                setattr(home_var_dim, sdim_key,
+                                        home_var_sdims_info[home_var.label][home_var_dim][sdim_key])
+                        home_var_sdims[home_var_dim] = home_var_sdim
+                    home_var.sdims = home_var_sdims
+                else:
+                    print  "Could not find custom sdims for {} in simulation settings.".format(home_var.label)
+                    raise vars_error("Could not find custom sdims for %s in simulation settings.", home_var.label)
             actual_mip = home_var.mip
             if actual_mip.startswith(r"[") and actual_mip.endswith(r"]"):
                 new_mip = actual_mip[1:]
                 new_mip = new_mip[:-1]
                 new_mip = new_mip.split(",")
                 home_var.mip = new_mip
-            print home_var.mip
             if (isinstance(home_var.mip, str) and (home_var.mip == "ANY" or home_var.mip in mips)) or \
                     (isinstance(home_var.mip, list) and mips.issuperset(home_var.mip)):
                 if home_var.experiment != "ANY":
