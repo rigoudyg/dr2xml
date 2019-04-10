@@ -301,6 +301,11 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
         filename = "%s%s_%s_%s_%s_%s_%s_%s%s" % \
                    (prefix, varname_for_filename, table, source_id, expid_in_filename,
                     member_id, grid_label, date_range, suffix)
+    # Create an other file which will contain the list of file names of perso and dev variables
+    list_perso_and_dev_file_name = "dr2xml_list_perso_and_dev_file_names"
+    if sv.type in ["perso", "dev"]:
+        with open(list_perso_and_dev_file_name, mode="a") as list_perso_and_dev:
+            list_perso_and_dev.write(filename)
     #
     if not (is_key_in_lset('mip_era') or is_key_in_sset("mip_era")):
         further_info_url = "https://furtherinfo.es-doc.org/%s.%s.%s.%s.%s.%s" % (
