@@ -654,3 +654,112 @@ def gather_AllSimpleVars(year=False, printout=False, select="on_expt_and_year"):
     else:
         print("Info: No HOMEvars list provided.")
     return mip_vars_list
+
+
+def select_variables_to_be_processed(year, context, select, printout, debug):
+    """
+    Return the list of variables to be processed.
+    """
+    #
+    # --------------------------------------------------------------------
+    # Extract CMOR variables for the experiment and year and lab settings
+    # --------------------------------------------------------------------
+    mip_vars_list = gather_AllSimpleVars(year, printout, select)
+    # Group CMOR vars per realm
+    svars_per_realm = dict()
+    for svar in mip_vars_list:
+        realm = svar.modeling_realm
+        if realm not in svars_per_realm:
+            svars_per_realm[realm] = []
+        if svar not in svars_per_realm[realm]:
+            add = True
+            for ovar in svars_per_realm[realm]:
+                if ovar.label == svar.label and ovar.spatial_shp == svar.spatial_shp \
+                        and ovar.frequency == svar.frequency and ovar.cell_methods == svar.cell_methods:
+                    add = False
+            # Settings may allow for duplicate var in two tables. In DR01.00.21, this actually
+            # applies to very few fields (ps-Aermon, tas-ImonAnt, areacellg)
+            if get_variable_from_lset_with_default('allow_duplicates', True) or add:
+                svars_per_realm[realm].append(svar)
+            else:
+                print("Not adding duplicate %s (from %s) for realm %s" % (svar.label, svar.mipTable, realm))
+        else:
+            old = svars_per_realm[realm][0]
+            print("Duplicate svar %s %s %s %s" % (old.label, old.grid, svar.label, svar.grid))
+            pass
+    if printout:
+        print("\nRealms for these CMORvars :", svars_per_realm.keys())
+    #
+    # --------------------------------------------------------------------
+    # Select on context realms, grouping by table
+    # Excluding 'excluded_vars' and 'excluded_spshapes' lists
+    # --------------------------------------------------------------------
+    svars_per_table = dict()
+    context_realms = get_variable_from_lset_without_default('realms_per_context', context)
+    processed_realms = list()
+    for realm in context_realms:
+        if realm in processed_realms:
+            continue
+        processed_realms.append(realm)
+        excludedv = dict()
+        print("Processing realm '%s' of context '%s'" % (realm, context))
+        # print 50*"_"
+        excludedv = dict()
+        if realm in svars_per_realm:
+            for svar in svars_per_realm[realm]:
+                # exclusion de certaines spatial shapes (ex. Polar Stereograpic Antarctic/Groenland)
+                if svar.label not in get_variable_from_lset_without_default('excluded_vars') and \
+                        svar.spatial_shp and \
+                        svar.spatial_shp not in get_variable_from_lset_without_default("excluded_spshapes"):
+                    if svar.mipTable not in svars_per_table:
+                        svars_per_table[svar.mipTable] = []
+                    svars_per_table[svar.mipTable].append(svar)
+                else:
+                    if printout:
+                        reason = "unknown reason"
+                        if svar.label in get_variable_from_lset_without_default('excluded_vars'):
+                            reason = "They are in exclusion list "
+                        if not svar.spatial_shp:
+                            reason = "They have no spatial shape "
+                        if svar.spatial_shp in get_variable_from_lset_without_default("excluded_spshapes"):
+                            reason = "They have excluded spatial shape : %s" % svar.spatial_shp
+                        if reason not in excludedv:
+                            excludedv[reason] = []
+                        excludedv[reason].append((svar.label, svar.mipTable))
+        if printout and len(excludedv.keys()) > 0:
+            print("The following pairs (variable,table) have been excluded for these reasons :")
+            for reason in excludedv:
+                print("\t", reason, ":", excludedv[reason])
+    if debug:
+        print("For table AMon: ", [v.label for v in svars_per_table["Amon"]])
+    #
+    # --------------------------------------------------------------------
+    # Add svars belonging to the orphan list
+    # --------------------------------------------------------------------
+    if context in get_variable_from_lset_without_default('orphan_variables'):
+        orphans = get_variable_from_lset_without_default('orphan_variables', context)
+        for svar in mip_vars_list:
+            if svar.label in orphans:
+                if svar.label not in get_variable_from_lset_without_default('excluded_vars') and svar.spatial_shp and \
+                        svar.spatial_shp not in get_variable_from_lset_without_default("excluded_spshapes"):
+                    if svar.mipTable not in svars_per_table:
+                        svars_per_table[svar.mipTable] = []
+                    svars_per_table[svar.mipTable].append(svar)
+    #
+    # --------------------------------------------------------------------
+    # Remove svars belonging to other contexts' orphan lists
+    # --------------------------------------------------------------------
+    for other_context in get_variable_from_lset_without_default('orphan_variables'):
+        if other_context != context:
+            orphans = get_variable_from_lset_without_default('orphan_variables', other_context)
+            for table in svars_per_table:
+                toremove = list()
+                for svar in svars_per_table[table]:
+                    if svar.label in orphans:
+                        toremove.append(svar)
+                for svar in toremove:
+                    svars_per_table[table].remove(svar)
+    if debug:
+        print("Pour table AMon: ", [v.label for v in svars_per_table["Amon"]])
+    # Return the different values
+    return svars_per_table
