@@ -22,3 +22,6 @@ test/dr.xml
 /test/run.out
 *.pyc
 *.pyc
+pycallgraph_tree/
+dr2xml_*.xml
+pycallgraph_use.py
