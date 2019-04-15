@@ -7,10 +7,16 @@ CMOR variables tools.
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
-from settings_interface import get_variable_from_lset_without_default
-from dr_interface import get_collection, get_uid, get_request_by_id_by_sect, print_DR_errors
-from analyzer import cellmethod2area
+# Utilities
 from utils import dr2xml_error
+
+# Interface to settings dictionaries
+from settings_interface import get_variable_from_lset_without_default
+# Interface to Data Request
+from dr_interface import get_collection, get_uid, get_request_by_id_by_sect, print_DR_errors
+
+# Settings tools
+from analyzer import cellmethod2area
 
 
 def get_CMORvar(label, table):

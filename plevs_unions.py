@@ -8,11 +8,20 @@ It is not used nor finished.
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
-from Xparse import id2gridid
+# Global variables and configuration tools
 from config import get_config_variable
-from grids import create_axis_def, create_grid_def
+
+# Interface to settings dictionaries
 from settings_interface import get_variable_from_lset_without_default
+
+# Grids tools
+from grids import create_axis_def, create_grid_def
+
+# Variables tools
 from vars_cmor import simple_Dim
+
+# XIOS reading and writing tools
+from Xparse import id2gridid
 
 
 def create_xios_axis_and_grids_for_plevs_unions(svars, plev_sfxs, dummies, axis_defs, grid_defs, field_defs, ping_refs,

@@ -58,46 +58,37 @@ import cProfile
 import pstats
 import io
 
-# Utilities
-from plevs_unions import create_xios_axis_and_grids_for_plevs_unions
-from utils import dr2xml_error
-
-# Settings and config
+# Global variables and configuration tools
 from config import get_config_variable, set_config_variable
-from analyzer import initialize_cell_method_warnings, get_cell_method_warnings
 
-# Data request interface
+# Interface to settings dictionaries
+from settings_interface import initialize_dict, get_variable_from_lset_with_default, \
+    get_variable_from_lset_without_default
+# Interface to Data Request
 from dr_interface import get_DR_version, get_uid, get_request_by_id_by_sect
 
-# XML interface
+# Tools to deal with ping files
 from pingfiles_interface import read_pingfiles_variables
-from xml_interface import create_xml_element_from_string
 
-# Simulations and laboratory settings dictionaries interface
-from settings_interface import initialize_dict, get_variable_from_lset_with_default, get_source_id_and_type, \
-    get_lset_iteritems, get_sset_iteritems, get_variable_from_lset_without_default
+# Tools to deal with computation of used pressure levels
+from plevs_unions import create_xios_axis_and_grids_for_plevs_unions
 
-# XIOS linked modules
+# Variables tools
+from vars_home import multi_plev_suffixes, single_plev_suffixes
+from vars_selection import initialize_sn_issues, select_variables_to_be_processed
+
+# XIOS reading and writing tools
 from Xparse import init_context
 from Xwrite import write_xios_file_def
 
-# Variables modules
-from vars_home import multi_plev_suffixes, single_plev_suffixes
-from vars_selection import initialize_sn_issues, get_grid_choice, select_variables_to_be_processed
-
-# Statistics module
+# Info printing tools
 from infos import print_SomeStats
 
-# CFsites handling has its own module
-from cfsites import cfsites_grid_id, cfsites_input_filedef
 
 print("\n", 50 * "*", "\n*")
 print("* %29s" % "dr2xml version: ", get_config_variable("version"))
 
-# The current code should comply with this version of spec doc at
-# https://docs.google.com/document/d/1h0r8RZr_f3-8egBMMh7aqLwy3snpD6_MrDz1q8n5XUk/edit
-CMIP6_conventions_version = "v6.2.4"
-print("* %29s" % "CMIP6 conventions version: ", CMIP6_conventions_version)
+print("* %29s" % "CMIP6 conventions version: ", get_config_variable("CMIP6_conventions_version"))
 
 # mpmoine_merge_dev2_v0.12: posixpath.dirname ne marche pas chez moi
 # TBS# from os import path as os_path
@@ -663,7 +654,7 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
                                      printout=get_variable_from_lset_with_default("debug_parsing", False)))
     if get_config_variable("context_index") is None:
         sys.exit(1)
-    initialize_cell_method_warnings([])
+    set_config_variable("cell_method_warnings", list())
     warnings_for_optimisation = []
     initialize_sn_issues(dict())
     #
@@ -697,112 +688,20 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
                                                     printout=False)
     #
     # --------------------------------------------------------------------
-    # Start writing XIOS file_def file:
-    # file_definition node, including field child-nodes
+    # Write XIOS file_def
     # --------------------------------------------------------------------
     # filename=dirname+"filedefs_%s.xml"%context
     filename = dirname + "dr2xml_%s.xml" % context
-    with open(filename, "w") as out:
-        out.write('<context id="%s"> \n' % context)
-        out.write('<!-- CMIP6 Data Request version %s --> \n' % get_DR_version())
-        out.write('<!-- CMIP6-CV version %s --> \n' % "??")
-        out.write('<!-- CMIP6_conventions_version %s --> \n' % CMIP6_conventions_version)
-        out.write('<!-- dr2xml version %s --> \n' % get_config_variable("version"))
-        out.write('<!-- Lab_and_model settings : \n')
-        for s, v in sorted(get_lset_iteritems()):
-            out.write(' %s : %s\n' % (s, v))
-        out.write('-->\n')
-        out.write('<!-- Simulation settings : \n')
-        for s, v in sorted(get_sset_iteritems()):
-            out.write(' %s : %s\n' % (s, v))
-        out.write('-->\n')
-        out.write('<!-- Year processed is  %s --> \n' % year)
-        #
-        domain_defs = dict()
-        # for table in ['day'] :
-        out.write('\n<file_definition type="one_file" enabled="true" > \n')
-        foo, sourcetype = get_source_id_and_type()
-        for table in sorted(svars_per_table.keys()):
-            count = dict()
-            for svar in sorted(svars_per_table[table], key=lambda x: (x.label + "_" + table)):
-                if get_variable_from_lset_with_default("allow_duplicates_in_same_table", False) \
-                        or svar.mipVarLabel not in count:
-                    if not get_variable_from_lset_with_default("use_cmorvar_label_in_filename", False) \
-                            and svar.mipVarLabel in count:
-                        form = "If you really want to actually produce both %s and %s in table %s, " + \
-                               "you must set 'use_cmorvar_label_in_filename' to True in lab settings"
-                        raise dr2xml_error(form % (svar.label, count[svar.mipVarLabel].label, table))
-                    count[svar.mipVarLabel] = svar
-                    for grid in svar.grids:
-                        a, hgrid, b, c, d = get_variable_from_lset_without_default('grids', get_grid_choice(), context)
-                        check_for_file_input(svar, hgrid, pingvars, field_defs, grid_defs, domain_defs, file_defs)
-                        write_xios_file_def(svar, year, table, lset, sset, out, cvs_path,
-                                            field_defs, axis_defs, grid_defs, domain_defs, scalar_defs, file_defs,
-                                            dummies, skipped_vars_per_table, actually_written_vars,
-                                            prefix, context, grid, pingvars, enddate, attributes)
-                else:
-                    print("Duplicate variable %s,%s in table %s is skipped, preferred is %s" %
-                          (svar.label, svar.mipVarLabel, table, count[svar.mipVarLabel].label))
-
-        if cfsites_grid_id in grid_defs:
-            out.write(cfsites_input_filedef())
-        for file_def in file_defs:
-            out.write(file_defs[file_def])
-        out.write('\n</file_definition> \n')
-        #
-        # --------------------------------------------------------------------
-        # End writing XIOS file_def file:
-        # field_definition, axis_definition, grid_definition
-        # and domain_definition auxilliary nodes
-        # --------------------------------------------------------------------
-        # Write all domain, axis, field defs needed for these file_defs
-        out.write('<field_definition> \n')
-        if get_variable_from_lset_with_default("nemo_sources_management_policy_master_of_the_world", False) \
-                and context == 'nemo':
-            out.write('<field_group freq_op="_reset_" freq_offset="_reset_" >\n')
-        for obj in sorted(field_defs.keys()):
-            out.write("\t" + field_defs[obj] + "\n")
-        if get_variable_from_lset_with_default("nemo_sources_management_policy_master_of_the_world", False) \
-                and context == 'nemo':
-            out.write('</field_group>\n')
-        out.write('\n</field_definition> \n')
-        #
-        out.write('\n<axis_definition> \n')
-        out.write('<axis_group prec="8">\n')
-        for obj in sorted(axis_defs.keys()):
-            out.write("\t" + axis_defs[obj] + "\n")
-        if False and get_variable_from_lset_with_default('use_union_zoom', False):
-            for obj in sorted(union_axis_defs.keys()):
-                out.write("\t" + union_axis_defs[obj] + "\n")
-        out.write('</axis_group>\n')
-        out.write('</axis_definition> \n')
-        #
-        out.write('\n<domain_definition> \n')
-        out.write('<domain_group prec="8">\n')
-        if get_variable_from_lset_without_default('grid_policy') != "native":
-            create_standard_domains(domain_defs)
-        for obj in sorted(domain_defs.keys()):
-            out.write("\t" + domain_defs[obj] + "\n")
-        out.write('</domain_group>\n')
-        out.write('</domain_definition> \n')
-        #
-        out.write('\n<grid_definition> \n')
-        for obj in grid_defs.keys():
-            out.write("\t" + grid_defs[obj])
-        if False and get_variable_from_lset_with_default('use_union_zoom', False):
-            for obj in sorted(union_grid_defs.keys()):
-                out.write("\t" + union_grid_defs[obj] + "\n")
-        out.write('</grid_definition> \n')
-        #
-        out.write('\n<scalar_definition> \n')
-        for obj in sorted(scalar_defs.keys()):
-            out.write("\t" + scalar_defs[obj] + "\n")
-        out.write('</scalar_definition> \n')
-        #
-        out.write('</context> \n')
+    write_xios_file_def(filename, svars_per_table, year, lset, sset, cvs_path, field_defs, axis_defs, grid_defs,
+                        scalar_defs, file_defs, dummies, skipped_vars_per_table, actually_written_vars, prefix, context,
+                        pingvars, enddate, attributes)
     if printout:
         print("\nfile_def written as %s" % filename)
 
+    #
+    # --------------------------------------------------------------------
+    # Print infos about the run
+    # --------------------------------------------------------------------
     # mpmoine_petitplus:generate_file_defs: pour sortir des stats sur ce que l'on sort reelement
     # SS - non : gros plus
     if printout:
@@ -810,7 +709,7 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
                         actually_written_vars, get_variable_from_lset_with_default("print_stats_per_var_label", False))
 
     warn = dict()
-    for warning, label, table in get_cell_method_warnings():
+    for warning, label, table in get_config_variable("cell_method_warnings"):
         if warning not in warn:
             warn[warning] = set()
         warn[warning].add(label)
@@ -823,35 +722,6 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
         for w in warnings_for_optimisation:
             print(w.replace(get_variable_from_lset_without_default('ping_variables_prefix'), ""),)
         print()
-
-
-def create_standard_domains(domain_defs):
-    """
-    Add to dictionnary domain_defs the Xios string representation for DR-standard horizontal grids, such as '1deg'
-
-    """
-    # Next definition is just for letting the workflow work when using option dummy='include'
-    # Actually, ping_files for production run at CNRM do not activate variables on that grid (IceSheet vars)
-    domain_defs['25km'] = create_standard_domain('25km', 1440, 720)
-    domain_defs['50km'] = create_standard_domain('50km', 720, 360)
-    domain_defs['100km'] = create_standard_domain('100km', 360, 180)
-    domain_defs['1deg'] = create_standard_domain('1deg', 360, 180)
-    domain_defs['2deg'] = create_standard_domain('2deg', 180, 90)
-
-
-def create_standard_domain(resol, ni, nj):
-    """
-    Create a xml like string corresponding to the domain using resol, ni and nj.
-    """
-    return '<domain id="CMIP6_%s" ni_glo="%d" nj_glo="%d" type="rectilinear"  prec="8"> ' % (resol, ni, nj) + \
-           '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true"  ' \
-           'mode="read_or_compute" write_weight="true" /> ' + \
-           '</domain>  '
-    # return '<domain id="CMIP6_%s" ni_glo="%d" nj_glo="%d" type="rectilinear"  prec="8" lat_name="lat" lon_name="lon" >
-    #  '%(resol,ni,nj) +\
-    #    '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true"  mode="read_or_compute"
-    #  write_weight="true" /> '+\
-    #    '</domain>  '
 
 
 def RequestItemInclude(ri, var_label, freq):
@@ -904,54 +774,3 @@ def realm_is_processed(realm, source_type):
     return rep
 
 
-def check_for_file_input(sv, hgrid, pingvars, field_defs, grid_defs, domain_defs, file_defs, printout=False):
-    """
-
-
-    Add an entry in pingvars
-    """
-    externs = get_variable_from_lset_with_default('fx_from_file', [])
-    # print "/// sv.label=%s"%sv.label, sv.label in externs ,"hgrid=",hgrid
-    if sv.label in externs and \
-            any([d == hgrid for d in externs[sv.label]]):
-        pingvar = get_variable_from_lset_without_default('ping_variables_prefix') + sv.label
-        pingvars.append(pingvar)
-        # Add a grid made of domain hgrid only
-        grid_id = "grid_" + hgrid
-        grid_def = '<grid id="%s"><domain domain_ref="%s"/></grid>\n' % (grid_id, hgrid)
-
-        # Add a grid and domain for reading the file (don't use grid above to avoid reampping)
-        file_domain_id = "remapped_%s_file_domain" % sv.label
-        domain_defs[file_domain_id] = '<domain id="%s" type="rectilinear" >' % file_domain_id + \
-                                      '<generate_rectilinear_domain/></domain>'
-        file_grid_id = "remapped_%s_file_grid" % sv.label
-        grid_defs[file_grid_id] = '<grid id="%s"><domain domain_ref="%s"/></grid>\n' % (file_grid_id, file_domain_id)
-        if printout:
-            print(domain_defs[file_domain_id])
-        if printout:
-            print(grid_defs[file_grid_id])
-
-        # Create xml for reading the variable
-        filename = externs[sv.label][hgrid][get_grid_choice()]
-        file_id = "remapped_%s_file" % sv.label
-        field_in_file_id = "%s_%s" % (sv.label, hgrid)
-        # field_in_file_id=sv.label
-        file_def = '\n<file id="%s" name="%s" mode="read" output_freq="1ts" enabled="true" >' % \
-                   (file_id, filename)
-        file_def += '\n\t<field id="%s" name="%s" operation="instant" freq_op="1ts" freq_offset="1ts" grid_ref="%s"/>'\
-                    % (field_in_file_id, sv.label, file_grid_id)
-        file_def += '\n</file>'
-        file_defs[file_id] = file_def
-        if printout:
-            print(file_defs[file_id])
-        #
-        # field_def='<field id="%s" grid_ref="%s" operation="instant" >%s</field>'%\
-        field_def = '<field id="%s" grid_ref="%s" field_ref="%s" operation="instant" freq_op="1ts" ' \
-                    'freq_offset="0ts" />' % (pingvar, grid_id, field_in_file_id)
-        field_defs[field_in_file_id] = field_def
-        context_index = get_config_variable("context_index")
-        context_index[pingvar] = create_xml_element_from_string(field_def)
-
-        if printout:
-            print(field_defs[field_in_file_id])
-        #

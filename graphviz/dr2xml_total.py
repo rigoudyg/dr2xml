@@ -470,7 +470,7 @@ def write_xios_file_def(cmv, table, lset, sset, out, cvspath,
     #
     global sc
 
-    # mpmoine_amelioration:write_xios_file_def: gestion ici des attributs pour lesquels on a recupere des chaines vides (" " est Faux mais est ecrit " "")
+    # mpmoine_amelioration:write_xios_file_def_for_svar: gestion ici des attributs pour lesquels on a recupere des chaines vides (" " est Faux mais est ecrit " "")
     # --------------------------------------------------------------------
     # Set to NOT-SET field attributes that can be empty strings
     # --------------------------------------------------------------------
@@ -490,19 +490,19 @@ def write_xios_file_def(cmv, table, lset, sset, out, cvspath,
     if cmv.type == 'perso':
         alias = cmv.label
     else:
-        # mpmoine_correction:write_xios_file_def: si on a defini un label non ambigu alors on l'untilise comme alias (i.e. le field_ref)
-        # mpmoine_correction:write_xios_file_def: et pour l'alias seulement (le nom de variable dans le nom de fichier restant svar.label)
+        # mpmoine_correction:write_xios_file_def_for_svar: si on a defini un label non ambigu alors on l'untilise comme alias (i.e. le field_ref)
+        # mpmoine_correction:write_xios_file_def_for_svar: et pour l'alias seulement (le nom de variable dans le nom de fichier restant svar.label)
         if cmv.label_non_ambiguous:
             alias = lset["ping_variables_prefix"] + cmv.label_non_ambiguous
         else:
             alias = lset["ping_variables_prefix"] + cmv.label
-        # mpmoine_correction:write_xios_file_def: suppression des terminaisons en "Clim" pour l'alias (i.e. le field_ref) le cas echeant
+        # mpmoine_correction:write_xios_file_def_for_svar: suppression des terminaisons en "Clim" pour l'alias (i.e. le field_ref) le cas echeant
         split_alias = alias.split("Clim")
         alias = split_alias[0]
         if pingvars is not None:
-            # mpmoine_zoom_modif:write_xios_file_def: dans le pingfile, on attend plus les alias complets  des variables (CMIP6_<label>) mais les alias reduits (CMIP6_<lwps>)
-            # mpmoine_zoom_modif:write_xios_file_def: => creation de alias_ping
-            # mpmoine_correction:write_xios_file_def: si on a defini un label non ambigu alors on l'untilise comme ping_alias (i.e. le field_ref)
+            # mpmoine_zoom_modif:write_xios_file_def_for_svar: dans le pingfile, on attend plus les alias complets  des variables (CMIP6_<label>) mais les alias reduits (CMIP6_<lwps>)
+            # mpmoine_zoom_modif:write_xios_file_def_for_svar: => creation de alias_ping
+            # mpmoine_correction:write_xios_file_def_for_svar: si on a defini un label non ambigu alors on l'untilise comme ping_alias (i.e. le field_ref)
             if cmv.label_non_ambiguous:
                 alias_ping = lset[
                                  "ping_variables_prefix"] + cmv.label_non_ambiguous  # e.g. 'CMIP6_tsn_land' and not 'CMIP6_tsn'
@@ -510,7 +510,7 @@ def write_xios_file_def(cmv, table, lset, sset, out, cvspath,
                 alias_ping = lset[
                                  "ping_variables_prefix"] + cmv.label_without_psuffix  # e.g. 'CMIP6_hus' and not 'CMIP6_hus7h'
             if not alias_ping in pingvars:
-                # mpmoine_skipped_modif: write_xios_file_def: on classe les skipped_vars par table => skipped_vars_per_table (pour avoir plus d'info au print)
+                # mpmoine_skipped_modif: write_xios_file_def_for_svar: on classe les skipped_vars par table => skipped_vars_per_table (pour avoir plus d'info au print)
                 if skipped_vars_per_table.has_key(cmv.mipTable) and skipped_vars_per_table[cmv.mipTable]:
                     list_of_skipped = skipped_vars_per_table[cmv.mipTable]
                     list_of_skipped.append(cmv.label + "(" + str(cmv.Priority) + ")")
@@ -538,20 +538,20 @@ def write_xios_file_def(cmv, table, lset, sset, out, cvspath,
     forcing_index = sset.get('forcing_index', 1)
     variant_label = "r%di%dp%df%d" % (realization_index, initialization_index, \
                                       physics_index, forcing_index)
-    # mpmoine_WIP_update:write_xios_file_def: WIP doc v6.2.3 - Apr. 2017: cf recommendation in note 16 for 'variant_info'
+    # mpmoine_WIP_update:write_xios_file_def_for_svar: WIP doc v6.2.3 - Apr. 2017: cf recommendation in note 16 for 'variant_info'
     variant_info_warning = ". Information provided by this attribute may in some cases be flawed. " + \
                            "Users can find more comprehensive and up-to-date documentation via the further_info_url global attribute."
     #
     # WIP Draft 14 july 2016
     activity_id = sset.get('activity_id', 'CMIP')
-    # mpmoine_last_modif:write_xios_file_def: mip_era n'est plus toujours 'CMIP6' (par ex. 'PRIMAVERA')
+    # mpmoine_last_modif:write_xios_file_def_for_svar: mip_era n'est plus toujours 'CMIP6' (par ex. 'PRIMAVERA')
     mip_era = cmv.mip_era
     #
     # WIP doc v 6.2.0 - dec 2016
     # <variable_id>_<table_id>_<source_id>_<experiment_id >_<member_id>_<grid_label>[_<time_range>].nc
     member_id = variant_label
-    # mpmoine_cmor_update:write_xios_file_def: CMOR3.2.2 impose 'None' (et non 'none') comme default value de sub_experiment_id
-    # mpmoine_cmor_update:write_xios_file_def: CMOR3.2.3 impose 'none'(et non 'None' !) comme default value de sub_experiment_id
+    # mpmoine_cmor_update:write_xios_file_def_for_svar: CMOR3.2.2 impose 'None' (et non 'none') comme default value de sub_experiment_id
+    # mpmoine_cmor_update:write_xios_file_def_for_svar: CMOR3.2.3 impose 'none'(et non 'None' !) comme default value de sub_experiment_id
     sub_experiment_id = sset.get('sub_experiment_id', 'none')
     if sub_experiment_id != 'none': member_id = sub_experiment_id + "-" + member_id
     #
@@ -578,14 +578,14 @@ def write_xios_file_def(cmv, table, lset, sset, out, cvspath,
     # Set NetCDF output file name according to the DRS
     # --------------------------------------------------------------------
     #
-    # mpmoine_expname:write_xios_file_def: es noms d'expe dans la DR ne sont pas les meme que dans le CV CMIP6
+    # mpmoine_expname:write_xios_file_def_for_svar: es noms d'expe dans la DR ne sont pas les meme que dans le CV CMIP6
     with open(cvspath + project + "_experiment_id.json", "r") as json_fp:
         CMIP6_experiments = json.loads(json_fp.read())['experiment_id']
         if CMIP6_experiments.has_key(sset['experiment_id']):
             expname = sset['experiment_id']
         else:
-            # mpmoine_last_modif:write_xios_file_def: provisoire, laisser passer cette erreur tant que le
-            # mpmoine_last_modif:write_xios_file_def: CV_CMIP6 et celui de la DR ne sont pas concordants
+            # mpmoine_last_modif:write_xios_file_def_for_svar: provisoire, laisser passer cette erreur tant que le
+            # mpmoine_last_modif:write_xios_file_def_for_svar: CV_CMIP6 et celui de la DR ne sont pas concordants
             dr2xml_error(
                 "Issue getting experiment description in CMIP6 CV for %20s => Search for experiment name correspondance from DR to CMIP6 CV." \
                 % sset['experiment_id'])
@@ -594,12 +594,12 @@ def write_xios_file_def(cmv, table, lset, sset, out, cvspath,
         experiment = exp_entry['experiment']
         description = exp_entry['description']
     #
-    # mpmoine_WIP_update:write_xios_file_def: WIP doc v6.2.3 - Apr. 2017: <time_range>="N1-N2" (instead of "N1_N2")
+    # mpmoine_WIP_update:write_xios_file_def_for_svar: WIP doc v6.2.3 - Apr. 2017: <time_range>="N1-N2" (instead of "N1_N2")
     date_range = "%start_date%-%end_date%"  # XIOS syntax
-    # mpmoine_WIP_update:write_xios_file_def: WIP doc v6.2.3 - Apr. 2017: <time_range> format is frequency dependant
+    # mpmoine_WIP_update:write_xios_file_def_for_svar: WIP doc v6.2.3 - Apr. 2017: <time_range> format is frequency dependant
     date_format = freq2datefmt(cmv.frequency)
     #
-    # mpmoine_WIP_update:write_xios_file_def: WIP doc v6.2.3 - Apr. 2017: [_<time_range>] omitted if frequency is "fx"; a suffix "-clim" is added if climatology
+    # mpmoine_WIP_update:write_xios_file_def_for_svar: WIP doc v6.2.3 - Apr. 2017: [_<time_range>] omitted if frequency is "fx"; a suffix "-clim" is added if climatology
     if cmv.frequency == "fx":
         filename = "%s%s_%s_%s_%s_%s_%s" % \
                    (prefix, cmv.label, table, source_id, expname,
@@ -620,16 +620,16 @@ def write_xios_file_def(cmv, table, lset, sset, out, cvspath,
     # --------------------------------------------------------------------
     # Compute XIOS split frequency
     # --------------------------------------------------------------------
-    # mpmoine_last_modif:write_xios_file_def: Maintenant, dans le cas type='perso', table='NONE'. On ne doit donc pas compter sur le table2freq pour recuperer
-    # mpmoine_last_modif:write_xios_file_def: la frequence en convention xios => fonction cmipFreq2xiosFreq
-    # mpmoine_next_modif: write_xios_file_def: passage de 'context' en argument de split_frequency_for_variable pour recuperer le model_timestep
+    # mpmoine_last_modif:write_xios_file_def_for_svar: Maintenant, dans le cas type='perso', table='NONE'. On ne doit donc pas compter sur le table2freq pour recuperer
+    # mpmoine_last_modif:write_xios_file_def_for_svar: la frequence en convention xios => fonction cmipFreq2xiosFreq
+    # mpmoine_next_modif: write_xios_file_def_for_svar: passage de 'context' en argument de split_frequency_for_variable pour recuperer le model_timestep
     split_freq = split_frequency_for_variable(cmv, lset, sc.mcfg, context)
     #
     # --------------------------------------------------------------------
     # Write XIOS file node:
     # including global CMOR file attributes
     # --------------------------------------------------------------------
-    # mpmoine_amelioration:write_xios_file_def: ajout de 'ts_prefix' et de time_series="only" => finalement non, et ts_prefix dans le 'name' car on gere nous-meme les time-series
+    # mpmoine_amelioration:write_xios_file_def_for_svar: ajout de 'ts_prefix' et de time_series="only" => finalement non, et ts_prefix dans le 'name' car on gere nous-meme les time-series
     ts_prefix = lset['output_path']
     if ts_prefix:
         # TBS#out.write(' <file ts_prefix="%s" name="%s" timeseries="only" '%(ts_prefix,filename))
@@ -639,18 +639,18 @@ def write_xios_file_def(cmv, table, lset, sset, out, cvspath,
         out.write(' <file name="%s" ' % filename)
     out.write(' output_freq="%s" ' % cmipFreq2xiosFreq[cmv.frequency])
     out.write(' append="true" split_freq="%s" ' % split_freq)
-    # mpmoine_cmor_update:write_xios_file_def: ajout de 'split_freq_format' pour se coformer a CMOR3.0.3
+    # mpmoine_cmor_update:write_xios_file_def_for_svar: ajout de 'split_freq_format' pour se coformer a CMOR3.0.3
     out.write(' split_freq_format="%s" ' % date_format)
     # out.write('timeseries="exclusive" >\n')
     out.write(' time_units="days" time_counter_name="time"')
-    # mpmoine_cmor_update:write_xios_file_def: ajout de time_counter="exclusive"
+    # mpmoine_cmor_update:write_xios_file_def_for_svar: ajout de time_counter="exclusive"
     out.write(' time_counter="exclusive"')
     out.write(' time_stamp_name="creation_date" ')
     out.write(' time_stamp_format="%Y-%m-%dT%H:%M:%SZ"')
     out.write(' uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%"')
     out.write(' >\n')
     #
-    # mpmoine_WIP_update:write_xios_file_def: WIP doc v6.2.3 - Apr. 2017: suppression de 'project_id' pas requis pour CMIP6 (remplace par 'activity_id' et 'mip_era')
+    # mpmoine_WIP_update:write_xios_file_def_for_svar: WIP doc v6.2.3 - Apr. 2017: suppression de 'project_id' pas requis pour CMIP6 (remplace par 'activity_id' et 'mip_era')
     # TBS#wr(out,'project_id', sset.get('project',"CMIP6")+"/"+activity_id)
     wr(out, 'activity_id', activity_id)
     #
@@ -671,7 +671,7 @@ def write_xios_file_def(cmv, table, lset, sset, out, cvspath,
     if 'fx' in table: external_variables = ""
     wr(out, 'external_variables', external_variables)
     #
-    # mpmoine_cmor_update:write_xios_file_def: ecriture de forcing_index en integer requis par la version CMOR3.2.3
+    # mpmoine_cmor_update:write_xios_file_def_for_svar: ecriture de forcing_index en integer requis par la version CMOR3.2.3
     wr(out, 'forcing_index', forcing_index, num_type="int")
     # mpmoine_last_modif: Maintenant, dans le cas type='perso', table='NONE'. On ne doit donc pas compter sur table2freq pour recuperer la frequence
     wr(out, 'frequency', cmv.frequency)
@@ -683,7 +683,7 @@ def write_xios_file_def(cmv, table, lset, sset, out, cvspath,
     wr(out, 'grid_label', grid_label);
     wr(out, 'nominal_resolution', grid_resolution)
     wr(out, 'history', sset, default='none')
-    # mpmoine_cmor_update:write_xios_file_def: ecriture de  initialization_index en integer requis par la version CMOR3.2.3
+    # mpmoine_cmor_update:write_xios_file_def_for_svar: ecriture de  initialization_index en integer requis par la version CMOR3.2.3
     wr(out, "initialization_index", initialization_index, num_type="int")
     wr(out, "institution_id", institution_id)
     if "institution" in lset:
@@ -707,8 +707,8 @@ def write_xios_file_def(cmv, table, lset, sset, out, cvspath,
     wr(out, "license", license)
     wr(out, 'mip_era', mip_era)
     #
-    # mpmoine_cmor_update:write_xios_file_def: changement des defaults values pour les parent_<XXX>: default en dur remplace par la valeur pour <XXX>
-    # mpmoine_cmor_update:write_xios_file_def: et utilisation de l'attribut optionnel 'default' de la fonction 'wr' plutot que sset.get avec une default
+    # mpmoine_cmor_update:write_xios_file_def_for_svar: changement des defaults values pour les parent_<XXX>: default en dur remplace par la valeur pour <XXX>
+    # mpmoine_cmor_update:write_xios_file_def_for_svar: et utilisation de l'attribut optionnel 'default' de la fonction 'wr' plutot que sset.get avec une default
     parent_experiment_id = sset.get('parent_experiment_id', False)
     if parent_experiment_id and parent_experiment_id != 'no parent':
         wr(out, 'parent_experiment_id', parent_experiment_id)
@@ -724,11 +724,11 @@ def write_xios_file_def(cmv, table, lset, sset, out, cvspath,
         wr(out, 'branch_time_in_child', sset)
         wr(out, 'branch_time_in_parent', sset)
         #
-    # mpmoine_cmor_update:write_xios_file_def: ecriture de physics_index en integer requis par la version CMOR3.2.3
+    # mpmoine_cmor_update:write_xios_file_def_for_svar: ecriture de physics_index en integer requis par la version CMOR3.2.3
     wr(out, "physics_index", physics_index, num_type="int")
-    # mpmoine_cmor_update:write_xios_file_def: changement des valeurs de 'product' requis par la version CMOR3.2.3
+    # mpmoine_cmor_update:write_xios_file_def_for_svar: changement des valeurs de 'product' requis par la version CMOR3.2.3
     wr(out, 'product', 'model-output')
-    # mpmoine_cmor_update:write_xios_file_def: ecriture de realization_index en integer requis par la version CMOR3.2.3
+    # mpmoine_cmor_update:write_xios_file_def_for_svar: ecriture de realization_index en integer requis par la version CMOR3.2.3
     wr(out, "realization_index", realization_index, num_type="int")
     wr(out, 'realm', cmv.modeling_realm)
     wr(out, 'references', lset, default=False)
@@ -760,8 +760,8 @@ def write_xios_file_def(cmv, table, lset, sset, out, cvspath,
     wr(out, 'source_type', source_type)
     #
     wr(out, 'sub_experiment_id', sub_experiment_id)
-    # mpmoine_cmor_update:write_xios_file_def: CMOR3.2.2 impose 'None' (et non 'none') pour sub_experiment
-    # mpmoine_cmor_update:write_xios_file_def: CMOR3.2.3 impose 'none' (et non 'None' !)pour sub_experiment
+    # mpmoine_cmor_update:write_xios_file_def_for_svar: CMOR3.2.2 impose 'None' (et non 'none') pour sub_experiment
+    # mpmoine_cmor_update:write_xios_file_def_for_svar: CMOR3.2.3 impose 'none' (et non 'None' !)pour sub_experiment
     wr(out, 'sub_experiment', sset, default='none')
     #
     wr(out, "table_id", table)
@@ -771,7 +771,7 @@ def write_xios_file_def(cmv, table, lset, sset, out, cvspath,
     #
     wr(out, "variable_id", cmv.label)
     #
-    # mpmoine_WIP_update:write_xios_file_def: WIP doc v6.2.3 - Apr. 2017: cf recommendation in note 16 for 'variant_info'
+    # mpmoine_WIP_update:write_xios_file_def_for_svar: WIP doc v6.2.3 - Apr. 2017: cf recommendation in note 16 for 'variant_info'
     variant_info = sset.get('variant_info', "none")
     if variant_info != "none": variant_info += variant_info_warning
     wr(out, "variant_info", variant_info)
@@ -783,7 +783,7 @@ def write_xios_file_def(cmv, table, lset, sset, out, cvspath,
     # Write XIOS field_group node (containing field elements, stored in end_field_defs)
     # including CF field attributes
     # --------------------------------------------------------------------
-    # mpmoine_zoom_modif:write_xios_file_def: appel a create_xios_aux_elmts_defs (anc. create_xios_field_ref) descendu ici
+    # mpmoine_zoom_modif:write_xios_file_def_for_svar: appel a create_xios_aux_elmts_defs (anc. create_xios_field_ref) descendu ici
     end_field_defs = dict()
     create_xios_aux_elmts_defs(cmv, alias, table, lset, sset, end_field_defs,
                                field_defs, axis_defs, grid_defs, domain_defs, dummies, context, remap_domain, pingvars)
@@ -793,7 +793,7 @@ def write_xios_file_def(cmv, table, lset, sset, out, cvspath,
     #
     # Create a field group for each shape
     for shape in end_field_defs:
-        # mpmoine_correction:write_xios_file_def: suppression du niveau 'field_group'
+        # mpmoine_correction:write_xios_file_def_for_svar: suppression du niveau 'field_group'
         # TBS# dom="" ;
         # TBS# if shape : dom='grid_ref="%s"'%shape
         # TBS# out.write('<field_group %s expr="@this" >\n'%dom)
@@ -2652,7 +2652,7 @@ def Remove_pSuffix(svar, mlev_sfxs, slev_sfxs, realms):
     import re
     r = re.compile("([a-zA-Z]+)([0-9]+)")
     #
-    # mpmoine_correction:write_xios_file_def:Remove_pSuffix: suppression des terminaisons en "Clim" le cas echant
+    # mpmoine_correction:write_xios_file_def_for_svar:Remove_pSuffix: suppression des terminaisons en "Clim" le cas echant
     split_label = svar.label.split("Clim")
     label_out = split_label[0]
     #

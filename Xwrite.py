@@ -14,23 +14,46 @@ import json
 import re
 import datetime
 
+# Utilities
+from utils import dr2xml_error
 
-from Xparse import id2gridid, idHasExprWithAt
-from cfsites import cfsites_domain_id, add_cfsites_in_defs
+# Global variables and configuration tools
 from config import get_config_variable
+
+# Interface to settings dictionaries
 from settings_interface import get_variable_from_lset_with_default, get_variable_from_lset_without_default, \
     get_variable_from_sset_with_default, get_source_id_and_type, get_variable_from_sset_without_default, \
-    get_variable_from_sset_else_lset_with_default, is_key_in_lset, is_key_in_sset
-from vars_cmor import ping_alias
+    get_variable_from_sset_else_lset_with_default, is_key_in_lset, is_key_in_sset, get_lset_iteritems, \
+    get_sset_iteritems
+# Interface to Data Request
 from dr_interface import get_DR_version
-from grids import change_domain_in_grid, change_axes_in_grid, get_grid_def_with_lset
-from postprocessing import process_vertical_interpolation, process_zonal_mean, process_diurnal_cycle
+
+# Settings tools
 from analyzer import DRgrid2gridatts, analyze_cell_time_method, freq2datefmt, longest_possible_period, \
     Cmip6Freq2XiosFreq
-from file_splitting import split_frequency_for_variable
-from utils import dr2xml_error
+
+# CFsites tools
+from cfsites import cfsites_domain_id, add_cfsites_in_defs, cfsites_grid_id, cfsites_input_filedef
+
+# Tools to deal with ping files
+from pingfiles_interface import check_for_file_input
+
+# Grids tools
+from grids import change_domain_in_grid, change_axes_in_grid, get_grid_def_with_lset, create_standard_domains
+
+# Variables tools
+from vars_cmor import ping_alias
 from vars_home import get_simplevar
-from vars_selection import get_sc, endyear_for_CMORvar
+from vars_selection import get_sc, endyear_for_CMORvar, get_grid_choice
+
+# Post-processing tools
+from postprocessing import process_vertical_interpolation, process_zonal_mean, process_diurnal_cycle
+
+# XIOS tools
+from Xparse import id2gridid, idHasExprWithAt
+
+# File splitting tools
+from file_splitting import split_frequency_for_variable
 
 
 warnings_for_optimisation = []
@@ -85,11 +108,11 @@ def wr(out, key, dic_or_val=None, num_type="string", default=None):
             out.write('  </variable>\n')
 
 
-def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
-                        field_defs, axis_defs, grid_defs, domain_defs, scalar_defs, file_defs,
-                        dummies, skipped_vars_per_table, actually_written_vars,
-                        prefix, context, grid, pingvars=None, enddate=None,
-                        attributes=[], debug=[]):
+def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
+                                 field_defs, axis_defs, grid_defs, domain_defs, scalar_defs, file_defs,
+                                 dummies, skipped_vars_per_table, actually_written_vars,
+                                 prefix, context, grid, pingvars=None, enddate=None,
+                                 attributes=[], debug=[]):
     """
     Generate an XIOS file_def entry in out for :
       - a dict for laboratory settings
@@ -149,7 +172,7 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
             else:
                 alias = get_variable_from_lset_without_default("ping_variables_prefix") + "tau_stress"
         if sv.label in debug:
-            print("write_xios_file_def ... processing %s, alias=%s" % (sv.label, alias))
+            print("write_xios_file_def_for_svar ... processing %s, alias=%s" % (sv.label, alias))
 
         # suppression des terminaisons en "Clim" pour l'alias : elles concernent uniquement les cas
         # d'absence de variation inter-annuelle sur les GHG. Peut-etre genant pour IPSL ?
@@ -1128,3 +1151,113 @@ def make_source_string(sources, source_id):
         if description != "none":
             rep = rep + "\n" + realm + ": " + description
     return rep
+
+
+def write_xios_file_def(filename, svars_per_table, year, lset, sset, cvs_path, field_defs, axis_defs, grid_defs,
+                        scalar_defs, file_defs, dummies, skipped_vars_per_table, actually_written_vars, prefix, context,
+                        pingvars=None, enddate=None, attributes=[]):
+    """
+    Write XIOS file_def.
+    """
+    # --------------------------------------------------------------------
+    # Start writing XIOS file_def file:
+    # file_definition node, including field child-nodes
+    # --------------------------------------------------------------------
+    with open(filename, "w") as out:
+        out.write('<context id="%s"> \n' % context)
+        out.write('<!-- CMIP6 Data Request version %s --> \n' % get_DR_version())
+        out.write('<!-- CMIP6-CV version %s --> \n' % "??")
+        out.write('<!-- CMIP6_conventions_version %s --> \n' % get_config_variable("CMIP6_conventions_version"))
+        out.write('<!-- dr2xml version %s --> \n' % get_config_variable("version"))
+        out.write('<!-- Lab_and_model settings : \n')
+        for s, v in sorted(get_lset_iteritems()):
+            out.write(' %s : %s\n' % (s, v))
+        out.write('-->\n')
+        out.write('<!-- Simulation settings : \n')
+        for s, v in sorted(get_sset_iteritems()):
+            out.write(' %s : %s\n' % (s, v))
+        out.write('-->\n')
+        out.write('<!-- Year processed is  %s --> \n' % year)
+        #
+        domain_defs = dict()
+        # for table in ['day'] :
+        out.write('\n<file_definition type="one_file" enabled="true" > \n')
+        foo, sourcetype = get_source_id_and_type()
+        for table in sorted(list(svars_per_table)):
+            count = dict()
+            for svar in sorted(svars_per_table[table], key=lambda x: (x.label + "_" + table)):
+                if get_variable_from_lset_with_default("allow_duplicates_in_same_table", False) \
+                        or svar.mipVarLabel not in count:
+                    if not get_variable_from_lset_with_default("use_cmorvar_label_in_filename", False) \
+                            and svar.mipVarLabel in count:
+                        form = "If you really want to actually produce both %s and %s in table %s, " + \
+                               "you must set 'use_cmorvar_label_in_filename' to True in lab settings"
+                        raise dr2xml_error(form % (svar.label, count[svar.mipVarLabel].label, table))
+                    count[svar.mipVarLabel] = svar
+                    for grid in svar.grids:
+                        a, hgrid, b, c, d = get_variable_from_lset_without_default('grids', get_grid_choice(), context)
+                        check_for_file_input(svar, hgrid, pingvars, field_defs, grid_defs, domain_defs, file_defs)
+                        write_xios_file_def_for_svar(svar, year, table, lset, sset, out, cvs_path,
+                                                     field_defs, axis_defs, grid_defs, domain_defs, scalar_defs, file_defs,
+                                                     dummies, skipped_vars_per_table, actually_written_vars,
+                                                     prefix, context, grid, pingvars, enddate, attributes)
+                else:
+                    print("Duplicate variable %s,%s in table %s is skipped, preferred is %s" %
+                          (svar.label, svar.mipVarLabel, table, count[svar.mipVarLabel].label))
+
+        if cfsites_grid_id in grid_defs:
+            out.write(cfsites_input_filedef())
+        for file_def in file_defs:
+            out.write(file_defs[file_def])
+        out.write('\n</file_definition> \n')
+        #
+        # --------------------------------------------------------------------
+        # End writing XIOS file_def file:
+        # field_definition, axis_definition, grid_definition
+        # and domain_definition auxilliary nodes
+        # --------------------------------------------------------------------
+        # Write all domain, axis, field defs needed for these file_defs
+        out.write('<field_definition> \n')
+        if get_variable_from_lset_with_default("nemo_sources_management_policy_master_of_the_world", False) \
+                and context == 'nemo':
+            out.write('<field_group freq_op="_reset_" freq_offset="_reset_" >\n')
+        for obj in sorted(list(field_defs)):
+            out.write("\t" + field_defs[obj] + "\n")
+        if get_variable_from_lset_with_default("nemo_sources_management_policy_master_of_the_world", False) \
+                and context == 'nemo':
+            out.write('</field_group>\n')
+        out.write('\n</field_definition> \n')
+        #
+        out.write('\n<axis_definition> \n')
+        out.write('<axis_group prec="8">\n')
+        for obj in sorted(axis_defs.keys()):
+            out.write("\t" + axis_defs[obj] + "\n")
+        if False and get_variable_from_lset_with_default('use_union_zoom', False):
+            for obj in sorted(list(union_axis_defs)):
+                out.write("\t" + union_axis_defs[obj] + "\n")
+        out.write('</axis_group>\n')
+        out.write('</axis_definition> \n')
+        #
+        out.write('\n<domain_definition> \n')
+        out.write('<domain_group prec="8">\n')
+        if get_variable_from_lset_without_default('grid_policy') != "native":
+            create_standard_domains(domain_defs)
+        for obj in sorted(domain_defs.keys()):
+            out.write("\t" + domain_defs[obj] + "\n")
+        out.write('</domain_group>\n')
+        out.write('</domain_definition> \n')
+        #
+        out.write('\n<grid_definition> \n')
+        for obj in grid_defs.keys():
+            out.write("\t" + grid_defs[obj])
+        if False and get_variable_from_lset_with_default('use_union_zoom', False):
+            for obj in sorted(list(union_grid_defs)):
+                out.write("\t" + union_grid_defs[obj] + "\n")
+        out.write('</grid_definition> \n')
+        #
+        out.write('\n<scalar_definition> \n')
+        for obj in sorted(scalar_defs.keys()):
+            out.write("\t" + scalar_defs[obj] + "\n")
+        out.write('</scalar_definition> \n')
+        #
+        out.write('</context> \n')

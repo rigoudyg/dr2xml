@@ -748,7 +748,7 @@ def Remove_pSuffix(svar, mlev_sfxs, slev_sfxs, realms):
     """
     r = re.compile("([a-zA-Z]+)([0-9]+)")
     #
-    # mpmoine_correction:write_xios_file_def:Remove_pSuffix: suppression des terminaisons en "Clim" le cas echant
+    # mpmoine_correction:write_xios_file_def_for_svar:Remove_pSuffix: suppression des terminaisons en "Clim" le cas echant
     split_label = svar.label.split("Clim")
     label_out = split_label[0]
     #

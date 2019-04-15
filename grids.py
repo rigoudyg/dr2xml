@@ -11,13 +11,22 @@ from functools import reduce
 
 import re
 
-from xml_interface import create_xml_element_from_string, create_string_from_xml_element
-from cfsites import cfsites_grid_id, add_cfsites_in_defs, cfsites_domain_id
+# Utilities
+from utils import dr2xml_error
+
+# Global variables and configuration tools
+from config import get_config_variable
+
+# Interface to settings dictionaries
 from settings_interface import get_variable_from_lset_without_default, get_variable_from_lset_with_default, \
     is_key_in_lset
-from config import get_config_variable
+# Interface to Data Request
 from dr_interface import get_collection, get_uid
-from utils import dr2xml_error
+# Interface to xml tools
+from xml_interface import create_xml_element_from_string, create_string_from_xml_element
+
+# CFsites tools
+from cfsites import cfsites_grid_id, add_cfsites_in_defs, cfsites_domain_id
 
 
 # Next variable is used to circumvent an Xios 1270 shortcoming. Xios
@@ -436,3 +445,32 @@ def create_output_grid(ssh, grid_defs, domain_defs, target_hgrid_id, margs):
         raise dr2xml_error(
             "Fatal: Issue with un-managed spatial shape %s for variable %s in table %s" % (ssh, sv.label, table))
     return grid_ref
+
+
+def create_standard_domains(domain_defs):
+    """
+    Add to dictionnary domain_defs the Xios string representation for DR-standard horizontal grids, such as '1deg'
+
+    """
+    # Next definition is just for letting the workflow work when using option dummy='include'
+    # Actually, ping_files for production run at CNRM do not activate variables on that grid (IceSheet vars)
+    domain_defs['25km'] = create_standard_domain('25km', 1440, 720)
+    domain_defs['50km'] = create_standard_domain('50km', 720, 360)
+    domain_defs['100km'] = create_standard_domain('100km', 360, 180)
+    domain_defs['1deg'] = create_standard_domain('1deg', 360, 180)
+    domain_defs['2deg'] = create_standard_domain('2deg', 180, 90)
+
+
+def create_standard_domain(resol, ni, nj):
+    """
+    Create a xml like string corresponding to the domain using resol, ni and nj.
+    """
+    return '<domain id="CMIP6_%s" ni_glo="%d" nj_glo="%d" type="rectilinear"  prec="8"> ' % (resol, ni, nj) + \
+           '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true"  ' \
+           'mode="read_or_compute" write_weight="true" /> ' + \
+           '</domain>  '
+    # return '<domain id="CMIP6_%s" ni_glo="%d" nj_glo="%d" type="rectilinear"  prec="8" lat_name="lat" lon_name="lon" >
+    #  '%(resol,ni,nj) +\
+    #    '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true"  mode="read_or_compute"
+    #  write_weight="true" /> '+\
+    #    '</domain>  '

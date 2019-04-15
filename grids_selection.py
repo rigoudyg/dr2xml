@@ -19,13 +19,12 @@ dr2xml allows for the lab to choose among various policy  :
 from __future__ import print_function, division, absolute_import, unicode_literals
 
 # Utilities
-from utils import dr2xml_grid_error, dr2xml_error
+from utils import dr2xml_error
 
-# DR interface
-from dr_interface import get_uid
-
-# Laboratory and simulations dictionaries
+# Interface to settings dictionaries
 from settings_interface import get_variable_from_lset_with_default
+# Interface to Data Request
+from dr_interface import get_uid
 
 
 def normalize(grid):

@@ -7,8 +7,12 @@ Tools to compute split frequencies.
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
-from settings_interface import get_variable_from_lset_with_default, get_variable_from_lset_without_default
+# Utilities
 from utils import dr2xml_grid_error
+
+# Interface to settings dictionaries
+from settings_interface import get_variable_from_lset_with_default, get_variable_from_lset_without_default
+
 
 compression_factor = None
 splitfreqs = None

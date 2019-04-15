@@ -9,14 +9,25 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 
 import re
 
-
-from xml_interface import create_string_from_xml_element
-from Xparse import id2grid
-from config import get_config_variable
-from settings_interface import get_variable_from_lset_without_default, get_variable_from_lset_with_default
-from grids import isVertDim, create_axis_def, create_grid_def, change_domain_in_grid
-from analyzer import Cmip6Freq2XiosFreq
+# Utilities
 from utils import dr2xml_error
+
+# Global variables and configuration tools
+from config import get_config_variable
+
+# Interface to settings dictionaries
+from settings_interface import get_variable_from_lset_without_default, get_variable_from_lset_with_default
+# Interface to xml tools
+from xml_interface import create_string_from_xml_element
+
+# Settings tools
+from analyzer import Cmip6Freq2XiosFreq
+
+# Grids tools
+from grids import isVertDim, create_axis_def, create_grid_def, change_domain_in_grid
+
+# XIOS reading and writing tools
+from Xparse import id2grid
 
 
 def process_vertical_interpolation(sv, alias, pingvars, src_grid_id, field_defs, axis_defs, grid_defs, domain_defs,

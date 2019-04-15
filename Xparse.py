@@ -14,10 +14,10 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 
 import os
 import os.path
-import re
 import sys
 
-from xml_interface import get_root_of_xml_file, create_string_from_xml_element
+# Interface to xml tools
+from xml_interface import get_root_of_xml_file
 
 
 # Define for each object kind those attributes useful for grid inheritance

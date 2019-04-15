@@ -10,11 +10,21 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 import os
 import sys
 
-from config import get_config_variable
-from dr_interface import get_DR_version, get_collection, get_uid, print_DR_errors
-
+# Utilities
 from utils import dr2xml_error
-from xml_interface import get_root_of_xml_file, create_string_from_xml_element
+
+# Global variables and configuration tools
+from config import get_config_variable
+
+# Interface to settings dictionaries
+from settings_interface import get_variable_from_lset_with_default, get_variable_from_lset_without_default
+# Interface to Data Request
+from dr_interface import get_DR_version, get_collection, get_uid, print_DR_errors
+# Interface to xml tools
+from xml_interface import get_root_of_xml_file, create_string_from_xml_element, create_xml_element_from_string
+
+# Variables tools
+from vars_selection import get_grid_choice
 
 
 def read_pingfiles_variables(pingfiles, dummies):
@@ -422,3 +432,56 @@ def DX_defs_filename(obj, realm, path_special):
     """
     # TBS# return prog_path+"/inputs/DX_%s_defs_%s.xml"%(obj,realm)
     return path_special + "/DX_%s_defs_%s.xml" % (obj, realm)
+
+
+def check_for_file_input(sv, hgrid, pingvars, field_defs, grid_defs, domain_defs, file_defs, printout=False):
+    """
+
+
+    Add an entry in pingvars
+    """
+    externs = get_variable_from_lset_with_default('fx_from_file', [])
+    # print "/// sv.label=%s"%sv.label, sv.label in externs ,"hgrid=",hgrid
+    if sv.label in externs and \
+            any([d == hgrid for d in externs[sv.label]]):
+        pingvar = get_variable_from_lset_without_default('ping_variables_prefix') + sv.label
+        pingvars.append(pingvar)
+        # Add a grid made of domain hgrid only
+        grid_id = "grid_" + hgrid
+        grid_def = '<grid id="%s"><domain domain_ref="%s"/></grid>\n' % (grid_id, hgrid)
+
+        # Add a grid and domain for reading the file (don't use grid above to avoid reampping)
+        file_domain_id = "remapped_%s_file_domain" % sv.label
+        domain_defs[file_domain_id] = '<domain id="%s" type="rectilinear" >' % file_domain_id + \
+                                      '<generate_rectilinear_domain/></domain>'
+        file_grid_id = "remapped_%s_file_grid" % sv.label
+        grid_defs[file_grid_id] = '<grid id="%s"><domain domain_ref="%s"/></grid>\n' % (file_grid_id, file_domain_id)
+        if printout:
+            print(domain_defs[file_domain_id])
+        if printout:
+            print(grid_defs[file_grid_id])
+
+        # Create xml for reading the variable
+        filename = externs[sv.label][hgrid][get_grid_choice()]
+        file_id = "remapped_%s_file" % sv.label
+        field_in_file_id = "%s_%s" % (sv.label, hgrid)
+        # field_in_file_id=sv.label
+        file_def = '\n<file id="%s" name="%s" mode="read" output_freq="1ts" enabled="true" >' % \
+                   (file_id, filename)
+        file_def += '\n\t<field id="%s" name="%s" operation="instant" freq_op="1ts" freq_offset="1ts" grid_ref="%s"/>'\
+                    % (field_in_file_id, sv.label, file_grid_id)
+        file_def += '\n</file>'
+        file_defs[file_id] = file_def
+        if printout:
+            print(file_defs[file_id])
+        #
+        # field_def='<field id="%s" grid_ref="%s" operation="instant" >%s</field>'%\
+        field_def = '<field id="%s" grid_ref="%s" field_ref="%s" operation="instant" freq_op="1ts" ' \
+                    'freq_offset="0ts" />' % (pingvar, grid_id, field_in_file_id)
+        field_defs[field_in_file_id] = field_def
+        context_index = get_config_variable("context_index")
+        context_index[pingvar] = create_xml_element_from_string(field_def)
+
+        if printout:
+            print(field_defs[field_in_file_id])
+        #

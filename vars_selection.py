@@ -9,15 +9,24 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 
 import collections
 
+# Utilities
+from utils import dr2xml_error
+
+# Interface to settings dictionaries
 from settings_interface import get_variable_from_sset_and_lset_without_default, get_variable_from_lset_with_default, \
     get_variable_from_sset_without_default, get_source_id_and_type, get_variable_from_lset_without_default, \
     is_key_in_sset, is_sset_not_None, get_variable_from_sset_with_default_in_sset, \
     get_variable_from_sset_with_default, is_key_in_lset, get_variable_from_sset_else_lset_with_default
+# Interface to Data Request
 from dr_interface import get_request_by_id_by_sect, get_uid, get_experiment_label, initialize_sc
+
+# Grids tools
 from grids_selection import decide_for_grids
-from utils import dr2xml_error
+
+# Variables tools
 from vars_home import complement_svar_using_cmorvar, process_homeVars
 from vars_cmor import analyze_priority, simple_CMORvar
+
 
 print_multiple_grids = False
 grid_choice = None
