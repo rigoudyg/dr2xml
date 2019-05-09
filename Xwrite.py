@@ -730,6 +730,8 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
         # TBD check - last case is for singleton
         last_grid_id, last_field_id = process_vertical_interpolation(sv, alias, pingvars, last_grid_id, field_defs,
                                                                      axis_defs, grid_defs, domain_defs, table)
+        # If vertical interpolation is done, change the value of those boolean to modify the behaviour of dr2xml
+        grid_with_vertical_interpolation = True
 
     #
     # --------------------------------------------------------------------
