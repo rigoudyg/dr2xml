@@ -70,18 +70,12 @@ def wr(out, key, dic_or_val=None, num_type="string", default=None):
       otherwise, use arg dic_or_val as value if not None nor False,
     otherwise use value of local variable 'key'
     """
-    if not get_variable_from_lset_with_default("print_variables", True):
+    print_variables = get_variable_from_lset_with_default("print_variables", True)
+    if not print_variables:
         return
-    """
-    Short cut for a repetitive pattern : writing in 'out' 
-    a string variable name and value
-    If dic_or_val is not None 
-      if  dic_or_val is a dict, 
-        if key is in value is dic_or_val[key], 
-        otherwise use default as value , except if default is False
-      otherwise, use arg dic_or_val as value if not None nor False,
-    otherwise use value of local variable 'key'
-    """
+    elif isinstance(print_variables, list) and key not in print_variables:
+        return
+
     val = None
     if isinstance(dic_or_val, dict):
         if key in dic_or_val:
@@ -1122,7 +1116,10 @@ def wrv(name, value, num_type="string"):
     :param num_type: type of the variable
     :return: string corresponding to the xml variable
     """
-    if not get_variable_from_lset_with_default("print_variables", True):
+    print_variables = get_variable_from_lset_with_default("print_variables", True)
+    if not print_variables:
+        return ""
+    elif isinstance(print_variables, list) and name not in print_variables:
         return ""
     if isinstance(value, str):
         value = value[0:1024]  # CMIP6 spec : no more than 1024 char
