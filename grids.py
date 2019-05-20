@@ -7,7 +7,9 @@ Grids general tools.
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+from six import string_types
 from functools import reduce
+from collections import OrderedDict
 
 import re
 
@@ -55,7 +57,7 @@ def get_grid_def(grid_id, grid_defs):
 
 def guess_simple_domain_grid_def(grid_id):
     """
-    dr2xml sometimes must be able to restconstruct the grid def for a grid which has
+    dr2xml sometimes must be able to reconstruct the grid def for a grid which has
     just a domain, from the grid_id, using a regexp with a numbered group that matches
     domain_name in grid_id. Second item is group number
     """
@@ -250,7 +252,7 @@ def change_axes_in_grid(grid_id, grid_defs, axis_defs):
     # print "in change_axis for %s "%(grid_id)
 
     # Get settings info about axes normalization
-    aliases = get_variable_from_lset_with_default('non_standard_axes', dict())
+    aliases = get_variable_from_lset_with_default('non_standard_axes', OrderedDict())
 
     # Add cases where dim name 'sector' should be used,if needed
     # sectors = dims which have type charcter and are not scalar
@@ -291,7 +293,7 @@ def change_axes_in_grid(grid_id, grid_defs, axis_defs):
             #
 
             # Just quit if axis doesn't have to be processed
-            if axis_ref not in aliases.keys():
+            if axis_ref not in aliases:
                 # print "for grid ",grid_id,"axis ",axis_ref, " is not in aliases"
                 continue
             #
@@ -341,7 +343,7 @@ def create_axis_from_dim(dim, labels, axis_ref, axis_defs):
         return axis_id, axis_name
 
     rep = '<axis id="%s" name="%s" axis_ref="%s"' % (axis_id, axis_name, axis_ref)
-    if isinstance(dim.standardName, str) or isinstance(dim.standardName, unicode):
+    if isinstance(dim.standardName, string_types):
         rep += ' standard_name="%s"' % dim.standardName
     rep += ' long_name="%s"' % dim.title
     #

@@ -8,6 +8,8 @@ It is not used nor finished.
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+from collections import OrderedDict
+
 # Global variables and configuration tools
 from config import get_config_variable
 
@@ -45,7 +47,7 @@ def create_xios_axis_and_grids_for_plevs_unions(svars, plev_sfxs, dummies, axis_
     #
     prefix = get_variable_from_lset_without_default("ping_variables_prefix")
     # First, search plev unions for each label_without_psuffix and build dict_plevs
-    dict_plevs = {}
+    dict_plevs = OrderedDict()
     for sv in svars:
         if not sv.modeling_realm:
             print("Warning: no modeling_realm associated to:", sv.label, sv.mipTable, sv.mip_era)
@@ -67,7 +69,7 @@ def create_xios_axis_and_grids_for_plevs_unions(svars, plev_sfxs, dummies, axis_
                             if sd.label not in dict_plevs[lwps]:
                                 dict_plevs[lwps].update({sd.label: {sv.label: sv}})
                             else:
-                                if sv.label not in dict_plevs[lwps][sd.label].keys():
+                                if sv.label not in dict_plevs[lwps][sd.label]:
                                     dict_plevs[lwps][sd.label].update({sv.label: sv})
                                 else:
                                     # TBS# print sv.label,"in table",sv.mipTable,"already listed for",sd.label
@@ -96,11 +98,11 @@ def create_xios_axis_and_grids_for_plevs_unions(svars, plev_sfxs, dummies, axis_
     union_grid_defs = grid_defs
     # union_axis_defs={}
     # union_grid_defs={}
-    for lwps in dict_plevs.keys():
+    for lwps in list(dict_plevs):
         sdim_union = simple_Dim()
         plevs_union_xios = ""
         plevs_union = set()
-        for plev in dict_plevs[lwps].keys():
+        for plev in list(dict_plevs[lwps]):
             plev_values = []
             for sv in dict_plevs[lwps][plev].values():
                 if not plev_values:

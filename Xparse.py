@@ -12,6 +12,8 @@ Main useful functions :
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+from collections import OrderedDict
+
 import os
 import os.path
 import sys
@@ -21,7 +23,7 @@ from xml_interface import get_root_of_xml_file
 
 
 # Define for each object kind those attributes useful for grid inheritance
-attributes = dict()
+attributes = OrderedDict()
 attributes['field'] = ['grid_ref', 'field_ref']
 attributes['field_definition'] = attributes['field']
 attributes['field_group'] = attributes['field']
@@ -92,7 +94,7 @@ def merge_sons(elt, printout=False, level=0):
     """
     toremove = []
     # Using a dict with first instance of an elt for each tag (or tag+id)
-    bytag = dict()
+    bytag = OrderedDict()
     tags_to_merge = ['context', 'file_definition', 'field_definition',
                      'axis_definition', 'grid_definition', 'calendar', 'field',
                      'field_group', 'file_group']
@@ -173,7 +175,7 @@ def make_index(elt, index=None, printout=False, level=0):
     crossing their id multiple times
     """
     if index is None:
-        index = dict()
+        index = OrderedDict()
     for child in elt:
         if 'id' in child.attrib:
             the_id = child.attrib['id']
@@ -368,7 +370,7 @@ def idHasExprWithAt(field_id, index, printout=False):
 if False:
 
     nemo = init_context('nemo', "./", False)
-    # print nemo.keys()
+    # print list(nemo)
     grid = id2grid("CMIP6_O18sw", nemo, True)
     print(grid.attrib['id'])
     print()

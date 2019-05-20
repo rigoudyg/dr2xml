@@ -7,6 +7,8 @@ Tools to compute split frequencies.
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+from collections import OrderedDict
+
 # Utilities
 from utils import dr2xml_grid_error
 
@@ -35,7 +37,7 @@ def read_splitfreqs():
         return
     lines = freq.readlines()
     freq.close()
-    splitfreqs = dict()
+    splitfreqs = OrderedDict()
     for line in lines:
         if line[0] == '#':
             continue
@@ -43,7 +45,7 @@ def read_splitfreqs():
         table = line.split()[1]
         freq = line.split()[2]
         if varlabel not in splitfreqs:
-            splitfreqs[varlabel] = dict()
+            splitfreqs[varlabel] = OrderedDict()
         # Keep smallest factor for each variablelabel
         if table not in splitfreqs[varlabel]:
             splitfreqs[varlabel][table] = freq
@@ -68,7 +70,7 @@ def read_compression_factors():
         compression_factor = False
         return
     lines = fact.readlines()
-    compression_factor = dict()
+    compression_factor = OrderedDict()
     for line in lines:
         if line[0] == '#':
             continue
@@ -76,7 +78,7 @@ def read_compression_factors():
         table = line.split()[1]
         factor = float(line.split()[2])
         if varlabel not in compression_factor:
-            compression_factor[varlabel] = dict()
+            compression_factor[varlabel] = OrderedDict()
         # Keep smallest factor for each variablelabel
         if table not in compression_factor[varlabel] or \
                 compression_factor[varlabel][table] > factor:
@@ -126,7 +128,7 @@ def split_frequency_for_variable(svar, grid, mcfg, context, printout=False):
         size_per_year = size * timesteps_per_freq_and_duration(freq, 365, sts)
         nbyears = max_size / float(size_per_year)
         if printout:
-            print("size per year=%s, size=%s, nbyears=%g" % (`size_per_year`, `size`, nbyears))
+            print("size per year=%s, size=%s, nbyears=%g" % (repr(size_per_year), repr(size), nbyears))
         if nbyears > 1.:
             if nbyears > 500:
                 return "500y"

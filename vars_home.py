@@ -7,6 +7,9 @@ Variables general tools.
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+from six import string_types
+from collections import OrderedDict
+
 import sys
 import os
 import json
@@ -41,13 +44,13 @@ ambiguous_mipvarnames = None
 
 # 2 dicts for processing home variables
 # 2 dicts and 1 list for processing extra variables
-dims2shape = {}
-dim2dimid = {}
-dr_single_levels = []
-stdName2mipvarLabel = {}
+dims2shape = OrderedDict()
+dim2dimid = OrderedDict()
+dr_single_levels = list()
+stdName2mipvarLabel = OrderedDict()
 tcmName2tcmValue = {"time-mean": "time: mean", "time-point": "time: point"}
 # A dict for storing home_variables issues re. standard_names
-sn_issues_home = dict()
+sn_issues_home = OrderedDict()
 homevars_list = None
 
 
@@ -90,7 +93,7 @@ def read_homeVars_list(hmv_file, expid, mips, path_extra_tables=None, printout=F
     # Build list of home variables
     homevars = []
     extravars = []
-    extra_vars_per_table = dict()
+    extra_vars_per_table = OrderedDict()
     for line in data:
         if line[0] == '#':
             continue
@@ -138,9 +141,9 @@ def read_homeVars_list(hmv_file, expid, mips, path_extra_tables=None, printout=F
                 home_var.label_without_psuffix = home_var.label
                 home_var.cell_measures = ""
             if home_var.spatial_shp == "XY-perso":
-                home_var_sdims_info = get_variable_from_sset_with_default('perso_sdims_description', dict())
+                home_var_sdims_info = get_variable_from_sset_with_default('perso_sdims_description', OrderedDict())
                 if home_var.label in home_var_sdims_info:
-                    home_var_sdims = dict()
+                    home_var_sdims = OrderedDict()
                     for home_var_dim in home_var_sdims_info[home_var.label]:
                         home_var_sdim = simple_Dim()
                         home_var_sdim.label = home_var_dim
@@ -161,8 +164,7 @@ def read_homeVars_list(hmv_file, expid, mips, path_extra_tables=None, printout=F
                 new_mip = new_mip[:-1]
                 new_mip = new_mip.split(",")
                 home_var.mip = new_mip
-            if ((isinstance(home_var.mip, str) or isinstance(home_var.mip, unicode))
-                and (home_var.mip == "ANY" or home_var.mip in mips)) or \
+            if (isinstance(home_var.mip, string_types) and (home_var.mip == "ANY" or home_var.mip in mips)) or \
                     (isinstance(home_var.mip, list) and mips.issuperset(home_var.mip)):
                 if home_var.experiment != "ANY":
                     # if home_var.experiment==expid: homevars.append(home_var)
@@ -267,8 +269,8 @@ def read_extraTable(path, table, printout=False):
     if not os.path.exists(json_table):
         sys.exit("Abort: file for extra Table does not exist: " + json_table)
     tbl = table.split('_')[1]
-    dim_from_extra = dict()
-    dynamic_shapes = dict()
+    dim_from_extra = OrderedDict()
+    dynamic_shapes = OrderedDict()
     with open(json_table, "r") as jt:
         json_tdata = jt.read()
         tdata = json.loads(json_tdata)
@@ -326,7 +328,7 @@ def read_extraTable(path, table, printout=False):
                 edim = drdims[19:]
                 extra_var.spatial_shp = 'XY-' + edim
                 if edim not in dynamic_shapes:
-                    dynamic_shapes[edim] = dict()
+                    dynamic_shapes[edim] = OrderedDict()
                 if v["out_name"] not in dynamic_shapes[edim]:
                     dynamic_shapes[edim][v["out_name"]] = extra_var.spatial_shp
                 # print "Warning: spatial shape corresponding to ",drdims,"for variable",v["out_name"],\
@@ -366,7 +368,7 @@ def read_extraTable(path, table, printout=False):
                         #  "in Table",table," not found in DR => read it in extra coordinates Table: ",
                         #  extra_sdim.stdname,extra_sdim.requested
                         if d not in dim_from_extra:
-                            dim_from_extra[d] = dict()
+                            dim_from_extra[d] = OrderedDict()
                         if v['out_name'] not in dim_from_extra:
                             dim_from_extra[d][v['out_name']] = (extra_sdim.stdname, extra_sdim.requested)
             extra_var.label_without_psuffix = Remove_pSuffix(extra_var, multi_plev_suffixes, single_plev_suffixes,
@@ -376,12 +378,12 @@ def read_extraTable(path, table, printout=False):
     if printout:
         print("For extra table ", table, " (which has %d variables): " % len(extravars))
         print("\tVariables which dim was found in extra coordinates table:")
-        for d in dim_from_extra:
-            print("\t\t%20s : " % d, *dim_from_extra[d])
+        for d in sorted(list(dim_from_extra)):
+            print("\t\t%20s : " % d, *sorted(dim_from_extra[d]))
             print()
         print("\tDynamical XY-xxx spatial shapes (shapes not found in DR)")
-        for d in dynamic_shapes:
-            print("\t\t%20s : " % ("XY-" + d), *dynamic_shapes[d])
+        for d in sorted(list(dynamic_shapes)):
+            print("\t\t%20s : " % ("XY-" + d), *sorted(dynamic_shapes[d]))
             print()
 
     return extravars

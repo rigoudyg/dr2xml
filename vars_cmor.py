@@ -7,6 +7,8 @@ CMOR variables tools.
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+from collections import OrderedDict
+
 # Utilities
 from utils import dr2xml_error
 
@@ -62,7 +64,7 @@ def analyze_ambiguous_MIPvarnames(debug=[]):
     """
     # Compute a dict which keys are MIP varnames and values = list
     # of CMORvars items for the varname
-    d = dict()
+    d = OrderedDict()
     for v in get_collection('var').items:
         if v.label not in d:
             d[v.label] = []
@@ -78,7 +80,7 @@ def analyze_ambiguous_MIPvarnames(debug=[]):
     for vlabel in d:
         if len(d[vlabel]) > 1:
             cvl = d[vlabel]
-            d[vlabel] = dict()
+            d[vlabel] = OrderedDict()
             for cv in cvl:
                 st = get_uid(cv.stid)
                 cm = None
@@ -96,7 +98,7 @@ def analyze_ambiguous_MIPvarnames(debug=[]):
                     if vlabel in debug:
                         print("for %s 's CMORvar %s(%s), area=%s" % (vlabel, cv.label, cv.mipTable, area))
                     if realm not in d[vlabel]:
-                        d[vlabel][realm] = dict()
+                        d[vlabel][realm] = OrderedDict()
                     if area not in d[vlabel][realm]:
                         d[vlabel][realm][area] = []
                     d[vlabel][realm][area].append(cv.mipTable)

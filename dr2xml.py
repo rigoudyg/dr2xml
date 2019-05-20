@@ -58,8 +58,10 @@ import cProfile
 import pstats
 import io
 
+from collections import OrderedDict
+
 # Global variables and configuration tools
-from config import get_config_variable, set_config_variable
+from config import get_config_variable, set_config_variable, python_version
 
 # Interface to settings dictionaries
 from settings_interface import initialize_dict, get_variable_from_lset_with_default, \
@@ -600,7 +602,10 @@ def generate_file_defs(lset, sset, year, enddate, context, cvs_path, pingfiles=N
                              dummies=dummies, printout=printout, dirname=dirname,
                              prefix=prefix, attributes=attributes, select=select)
     pr.disable()
-    s = io.BytesIO()
+    if python_version == "python2":
+        s = io.BytesIO()
+    else:
+        s = io.StringIO()
     sortby = 'cumulative'
     ps = pstats.Stats(pr, stream=s).sort_stats(sortby)
     ps.print_stats()
@@ -656,12 +661,12 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
         sys.exit(1)
     set_config_variable("cell_method_warnings", list())
     warnings_for_optimisation = []
-    initialize_sn_issues(dict())
+    initialize_sn_issues(OrderedDict())
     #
     # --------------------------------------------------------------------
     # Select variables that should be processed
     # --------------------------------------------------------------------
-    skipped_vars_per_table = dict()
+    skipped_vars_per_table = OrderedDict()
     actually_written_vars = list()
     svars_per_table = select_variables_to_be_processed(year, context, select, printout, debug)
     #
@@ -670,11 +675,11 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
     # --------------------------------------------------------------------
     pingvars, all_ping_refs = read_pingfiles_variables(pingfiles, dummies)
     #
-    field_defs = dict()
-    axis_defs = dict()
-    grid_defs = dict()
-    file_defs = dict()
-    scalar_defs = dict()
+    field_defs = OrderedDict()
+    axis_defs = OrderedDict()
+    grid_defs = OrderedDict()
+    file_defs = OrderedDict()
+    scalar_defs = OrderedDict()
     #
     # --------------------------------------------------------------------
     # Build all plev union axis and grids
@@ -708,7 +713,7 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
         print_SomeStats(context, svars_per_table, skipped_vars_per_table,
                         actually_written_vars, get_variable_from_lset_with_default("print_stats_per_var_label", False))
 
-    warn = dict()
+    warn = OrderedDict()
     for warning, label, table in get_config_variable("cell_method_warnings"):
         if warning not in warn:
             warn[warning] = set()

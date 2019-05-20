@@ -6,6 +6,8 @@ Tools to print statistics
 """
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+from collections import OrderedDict
+
 
 # mpmoine_petitplus: nouvelle fonction print_SomeStats (plus d'info sur les skipped_vars, nbre de vars / (shape,freq) )
 # SS - non : gros plus
@@ -15,9 +17,9 @@ def print_SomeStats(context, svars_per_table, skipped_vars_per_table, actually_w
         # Print Summary: list of  considered variables per table
         # (i.e. not excuded_vars and not excluded_shapes)
         # --------------------------------------------------------------------
-        print("\nTables concerned by context %s : " % context, svars_per_table.keys())
+        print("\nTables concerned by context %s : " % context, list(svars_per_table))
         print("\nVariables per table :")
-        for table in svars_per_table.keys():
+        for table in list(svars_per_table):
             print("\n>>> TABLE:",)
             print("%15s %02d ---->" % (table, len(svars_per_table[table])),)
             for svar in svars_per_table[table]:
@@ -64,14 +66,14 @@ def print_SomeStats(context, svars_per_table, skipped_vars_per_table, actually_w
         print("\n\nSome Statistics on actually written variables per frequency+shape...")
 
         #    ((sv.label,sv.table,sv.frequency,sv.Priority,sv.spatial_shp))
-        dic = dict()
+        dic = OrderedDict()
         for label, long_name, table, frequency, Priority, spatial_shp in actually_written_vars:
             if frequency not in dic:
-                dic[frequency] = dict()
+                dic[frequency] = OrderedDict()
             if spatial_shp not in dic[frequency]:
-                dic[frequency][spatial_shp] = dict()
+                dic[frequency][spatial_shp] = OrderedDict()
             if table not in dic[frequency][spatial_shp]:
-                dic[frequency][spatial_shp][table] = dict()
+                dic[frequency][spatial_shp][table] = OrderedDict()
             if Priority not in dic[frequency][spatial_shp][table]:
                 dic[frequency][spatial_shp][table][Priority] = []
             dic[frequency][spatial_shp][table][Priority].append(label)
@@ -98,15 +100,15 @@ def print_SomeStats(context, svars_per_table, skipped_vars_per_table, actually_w
 
         if extended:
             print("\n\nSome Statistics on actually written variables per variable...")
-            dic = dict()
-            dic_ln = dict()
+            dic = OrderedDict()
+            dic_ln = OrderedDict()
             for label, long_name, table, frequency, Priority, spatial_shp in actually_written_vars:
                 if label not in dic:
                     dic[label] = []
                     dic_ln.update({label: long_name})
                 dic[label].append(frequency + '_' + table + '_' + spatial_shp + '_' + str(Priority))
 
-            list_labels = dic.keys()
+            list_labels = list(dic)
             list_labels.sort()
             print(">>> DBG >>>", list_labels)
 

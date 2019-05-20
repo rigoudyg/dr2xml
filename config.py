@@ -7,9 +7,14 @@ Configuration variables and associated tools.
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+import sys
+
 # Utilities
 from utils import dr2xml_error
 
+
+# Python version
+python_version = "python"+sys.version[0]
 
 # General variables
 version = "1.16"  # dr2xml version

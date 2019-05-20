@@ -7,7 +7,7 @@ Tools for variables selection.
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
-import collections
+from collections import OrderedDict, namedtuple
 
 # Utilities
 from utils import dr2xml_error
@@ -39,7 +39,7 @@ global_rls = None
 rls_for_all_experiments = None
 sc = None
 
-sn_issues = dict()
+sn_issues = OrderedDict()
 
 
 def get_grid_choice():
@@ -433,7 +433,7 @@ def select_CMORvars_for_lab(sset=False, year=None, printout=False):
         sc = initialize_sc(tierMax)
 
     # Set sizes for lab settings, if available (or use CNRM-CM6-1 defaults)
-    mcfg = collections.namedtuple('mcfg', ['nho', 'nlo', 'nha', 'nla', 'nlas', 'nls', 'nh1'])
+    mcfg = namedtuple('mcfg', ['nho', 'nlo', 'nha', 'nla', 'nlas', 'nls', 'nh1'])
     if sset:
         source, source_type = get_source_id_and_type()
         grid_choice = get_variable_from_lset_without_default("grid_choice", source)
@@ -446,9 +446,12 @@ def select_CMORvars_for_lab(sset=False, year=None, printout=False):
         for grid in get_variable_from_lset_without_default('mips'):
             mips_list = mips_list.union(set(get_variable_from_lset_without_default('mips', grid)))
         grid_choice = "LR"
+    # Sort mip_list for reproducibility
+    mips_list = list(mips_list)
+    mips_list.sort()
     #
     if rls_for_all_experiments is None:
-        rls_for_mips = sc.getRequestLinkByMip(mips_list)
+        rls_for_mips = sc.getRequestLinkByMip(set(mips_list)) # Because scope do not accept list types
         if printout:
             print("Number of Request Links which apply to MIPS", mips_list, " is: ", len(rls_for_mips))
         #
@@ -588,7 +591,7 @@ def select_CMORvars_for_lab(sset=False, year=None, printout=False):
             filtered_vars))
 
     # Filter the list of grids requested for each variable based on lab policy
-    d = dict()
+    d = OrderedDict()
     for (v, g) in filtered_vars:
         if v not in d:
             d[v] = set()
@@ -632,7 +635,7 @@ def select_CMORvars_for_lab(sset=False, year=None, printout=False):
     if printout:
         print('Number of simplified vars is :', len(simplified_vars))
     if printout:
-        lissues = sn_issues.keys()
+        lissues = list(sn_issues)
         lissues.sort()
         print("Issues with standard names are :", lissues)
 
@@ -675,7 +678,7 @@ def select_variables_to_be_processed(year, context, select, printout, debug):
     # --------------------------------------------------------------------
     mip_vars_list = gather_AllSimpleVars(year, printout, select)
     # Group CMOR vars per realm
-    svars_per_realm = dict()
+    svars_per_realm = OrderedDict()
     for svar in mip_vars_list:
         realm = svar.modeling_realm
         if realm not in svars_per_realm:
@@ -697,25 +700,24 @@ def select_variables_to_be_processed(year, context, select, printout, debug):
             print("Duplicate svar %s %s %s %s" % (old.label, old.grid, svar.label, svar.grid))
             pass
     if printout:
-        print("\nRealms for these CMORvars :", svars_per_realm.keys())
+        print("\nRealms for these CMORvars :", *sorted(list(svars_per_realm)))
     #
     # --------------------------------------------------------------------
     # Select on context realms, grouping by table
     # Excluding 'excluded_vars' and 'excluded_spshapes' lists
     # --------------------------------------------------------------------
-    svars_per_table = dict()
+    svars_per_table = OrderedDict()
     context_realms = get_variable_from_lset_without_default('realms_per_context', context)
     processed_realms = list()
     for realm in context_realms:
         if realm in processed_realms:
             continue
         processed_realms.append(realm)
-        excludedv = dict()
         print("Processing realm '%s' of context '%s'" % (realm, context))
         # print 50*"_"
-        excludedv = dict()
+        excludedv = OrderedDict()
         if realm in svars_per_realm:
-            for svar in svars_per_realm[realm]:
+            for svar in list(svars_per_realm[realm]):
                 # exclusion de certaines spatial shapes (ex. Polar Stereograpic Antarctic/Groenland)
                 if svar.label not in get_variable_from_lset_without_default('excluded_vars') and \
                         svar.spatial_shp and \
@@ -735,9 +737,9 @@ def select_variables_to_be_processed(year, context, select, printout, debug):
                         if reason not in excludedv:
                             excludedv[reason] = []
                         excludedv[reason].append((svar.label, svar.mipTable))
-        if printout and len(excludedv.keys()) > 0:
+        if printout and len(list(excludedv)) > 0:
             print("The following pairs (variable,table) have been excluded for these reasons :")
-            for reason in excludedv:
+            for reason in sorted(list(excludedv)):
                 print("\t", reason, ":", excludedv[reason])
     if debug:
         print("For table AMon: ", [v.label for v in svars_per_table["Amon"]])

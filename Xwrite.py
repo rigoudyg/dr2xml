@@ -9,6 +9,8 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 
 # To access reduce function in python3
 from functools import reduce
+# To have ordered dictionaries
+from collections import OrderedDict
 
 import json
 import re
@@ -77,7 +79,7 @@ def wr(out, key, dic_or_val=None, num_type="string", default=None):
         return
 
     val = None
-    if isinstance(dic_or_val, dict):
+    if isinstance(dic_or_val, (dict, OrderedDict)):
         if key in dic_or_val:
             val = dic_or_val[key]
         else:
@@ -595,10 +597,10 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
     if variant_info != "":
         wr(out, "variant_info", variant_info)
     wr(out, "variant_label", variant_label)
-    for name, value in attributes:
+    for name, value in sorted(list(attributes)):
         wr(out, name, value)
-    non_stand_att = get_variable_from_lset_with_default("non_standard_attributes", dict())
-    for name in non_stand_att:
+    non_stand_att = get_variable_from_lset_with_default("non_standard_attributes", OrderedDict())
+    for name in sorted(list(non_stand_att)):
         wr(out, name, non_stand_att[name])
     #
     # --------------------------------------------------------------------
@@ -629,20 +631,21 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
                   (sv.label, sv.frequency))
 
     #
-    names = {}
-    if sv.spatial_shp == 'XY-A' or sv.spatial_shp == 'S-A':
+    names = OrderedDict()
+    if sv.spatial_shp in ['XY-A', 'S-A']:
         # add entries for auxilliary variables : ap, ap_bnds, b, b_bnds
-        names = {"ap": "vertical coordinate formula term: ap(k)",
-                 "ap_bnds": "vertical coordinate formula term: ap(k+1/2)",
-                 "b": "vertical coordinate formula term: b(k)",
-                 "b_bnds": "vertical coordinate formula term: b(k+1/2)"}
-    if sv.spatial_shp == 'XY-AH' or sv.spatial_shp == 'S-AH':
+        names["ap"] = "vertical coordinate formula term: ap(k)"
+        names["ap_bnds"] = "vertical coordinate formula term: ap(k+1/2)"
+        names["b"] = "vertical coordinate formula term: b(k)"
+        names["b_bnds"] = "vertical coordinate formula term: b(k+1/2)"
+    elif sv.spatial_shp in ['XY-AH', 'S-AH']:
         # add entries for auxilliary variables : ap, ap_bnds, b, b_bnds
-        names = {"ahp": "vertical coordinate formula term: ap(k)",
-                 "ahp_bnds": "vertical coordinate formula term: ap(k+1/2)",
-                 "bh": "vertical coordinate formula term: b(k)",
-                 "bh_bnds": "vertical coordinate formula term: b(k+1/2)"}
-    for tab in names:
+        names["ahp"] = "vertical coordinate formula term: ap(k)"
+        names["ahp_bnds"] = "vertical coordinate formula term: ap(k+1/2)"
+        names["bh"] = "vertical coordinate formula term: b(k)"
+        names["bh_bnds"] = "vertical coordinate formula term: b(k+1/2)"
+
+    for tab in list(names):
         out.write('\t<field field_ref="%s%s" name="%s" long_name="%s" '
                   'operation="once" prec="8" />\n' % (get_variable_from_lset_without_default("ping_variables_prefix"),
                                                       tab, tab.replace('h', ''), names[tab]))
@@ -883,10 +886,10 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
     # --------------------------------------------------------------------
     comment = None
     # Process experiment-specific comment for the variable
-    if sv.label in get_variable_from_sset_without_default('comments').keys():
+    if sv.label in get_variable_from_sset_without_default('comments'):
         comment = get_variable_from_sset_without_default('comments', sv.label)
     else:  # Process lab-specific comment for the variable
-        if sv.label in get_variable_from_lset_without_default('comments').keys():
+        if sv.label in get_variable_from_lset_without_default('comments'):
             comment = get_variable_from_lset_without_default('comments', sv.label)
     if comment:
         rep += wrv('comment', comment)  # TBI
@@ -1178,12 +1181,12 @@ def write_xios_file_def(filename, svars_per_table, year, lset, sset, cvs_path, f
         out.write('-->\n')
         out.write('<!-- Year processed is  %s --> \n' % year)
         #
-        domain_defs = dict()
+        domain_defs = OrderedDict()
         # for table in ['day'] :
         out.write('\n<file_definition type="one_file" enabled="true" > \n')
         foo, sourcetype = get_source_id_and_type()
         for table in sorted(list(svars_per_table)):
-            count = dict()
+            count = OrderedDict()
             for svar in sorted(svars_per_table[table], key=lambda x: (x.label + "_" + table)):
                 if get_variable_from_lset_with_default("allow_duplicates_in_same_table", False) \
                         or svar.mipVarLabel not in count:
@@ -1220,7 +1223,7 @@ def write_xios_file_def(filename, svars_per_table, year, lset, sset, cvs_path, f
         if get_variable_from_lset_with_default("nemo_sources_management_policy_master_of_the_world", False) \
                 and context == 'nemo':
             out.write('<field_group freq_op="_reset_" freq_offset="_reset_" >\n')
-        for obj in sorted(list(field_defs)):
+        for obj in list(field_defs):
             out.write("\t" + field_defs[obj] + "\n")
         if get_variable_from_lset_with_default("nemo_sources_management_policy_master_of_the_world", False) \
                 and context == 'nemo':
@@ -1229,7 +1232,7 @@ def write_xios_file_def(filename, svars_per_table, year, lset, sset, cvs_path, f
         #
         out.write('\n<axis_definition> \n')
         out.write('<axis_group prec="8">\n')
-        for obj in sorted(axis_defs.keys()):
+        for obj in list(axis_defs):
             out.write("\t" + axis_defs[obj] + "\n")
         if False and get_variable_from_lset_with_default('use_union_zoom', False):
             for obj in sorted(list(union_axis_defs)):
@@ -1241,21 +1244,21 @@ def write_xios_file_def(filename, svars_per_table, year, lset, sset, cvs_path, f
         out.write('<domain_group prec="8">\n')
         if get_variable_from_lset_without_default('grid_policy') != "native":
             create_standard_domains(domain_defs)
-        for obj in sorted(domain_defs.keys()):
+        for obj in list(domain_defs):
             out.write("\t" + domain_defs[obj] + "\n")
         out.write('</domain_group>\n')
         out.write('</domain_definition> \n')
         #
         out.write('\n<grid_definition> \n')
-        for obj in grid_defs.keys():
+        for obj in list(grid_defs):
             out.write("\t" + grid_defs[obj])
         if False and get_variable_from_lset_with_default('use_union_zoom', False):
-            for obj in sorted(list(union_grid_defs)):
+            for obj in list(union_grid_defs):
                 out.write("\t" + union_grid_defs[obj] + "\n")
         out.write('</grid_definition> \n')
         #
         out.write('\n<scalar_definition> \n')
-        for obj in sorted(scalar_defs.keys()):
+        for obj in list(scalar_defs):
             out.write("\t" + scalar_defs[obj] + "\n")
         out.write('</scalar_definition> \n')
         #

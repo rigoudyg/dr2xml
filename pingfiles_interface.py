@@ -7,6 +7,9 @@ Ping files variables tools.
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+from six import string_types
+from collections import OrderedDict
+
 import os
 import sys
 
@@ -32,7 +35,7 @@ def read_pingfiles_variables(pingfiles, dummies):
     Read variables defined in the ping files.
     """
     pingvars = list()
-    all_ping_refs = dict()
+    all_ping_refs = OrderedDict()
     if pingfiles is not None:
         all_pingvars = list()
         # print "pingfiles=",pingfiles
@@ -76,7 +79,7 @@ def read_xml_elmt_or_attrib(filename, tag='field', attrib=None, printout=False):
     Returns None if filename does not exist
     """
     #
-    rep = dict()
+    rep = OrderedDict()
     if printout:
         print("processing file %s :" % filename,)
     if os.path.exists(filename):
@@ -185,7 +188,7 @@ def pingFileForRealmsList(settings, context, lrealms, svars, path_special, dummy
     # the same label without psuffix, and one for each having different non-ambiguous label
     # Keep the one with the best piority
     uniques = []
-    best_prio = dict()
+    best_prio = OrderedDict()
     for v in lvars:
         lna = v.label_non_ambiguous
         lwps = v.label_without_psuffix
@@ -257,7 +260,7 @@ def pingFileForRealmsList(settings, context, lrealms, svars, path_special, dummy
                     fp.write('?%-16s' % (label + '"') + ' />')
             if comments:
                 # Add units, stdname and long_name as a comment string
-                if isinstance(comments, str) or isinstance(comments, unicode):
+                if isinstance(comments, string_types):
                     fp.write(comments)
                 fp.write("<!-- P%d (%s) %s : %s -->" % (v.Priority, v.units, v.stdname, v.description))
             fp.write("\n")
@@ -282,7 +285,7 @@ def read_special_fields_defs(realms, path_special, printout=False):
     """
     Read external files and return a dictionary containing the fields.
     """
-    special = dict()
+    special = OrderedDict()
     subrealms_seen = []
     for realm in realms:
         for subrealm in realm.split():
@@ -293,7 +296,7 @@ def read_special_fields_defs(realms, path_special, printout=False):
                                         printout=printout)
             if d:
                 special.update(d)
-    rep = dict()
+    rep = OrderedDict()
     # Use raw label as key
     for r in special:
         rep[r.replace("DX_", "")] = special[r]
