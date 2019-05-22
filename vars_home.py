@@ -137,7 +137,10 @@ def read_homeVars_list(hmv_file, expid, mips, path_extra_tables=None, printout=F
             elif hmv_type == "dev":
                 home_var.mip_era = 'DEV'
                 home_var.mipVarLabel = home_var.label
-                home_var.cell_methods = tcmName2tcmValue[home_var.temporal_shp]
+                if home_var.frequency == "fx":
+                    home_var.cell_methods = None
+                else:
+                    home_var.cell_methods = tcmName2tcmValue[home_var.temporal_shp]
                 home_var.label_without_psuffix = home_var.label
                 home_var.cell_measures = ""
             if home_var.spatial_shp == "XY-perso":

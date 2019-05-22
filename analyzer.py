@@ -140,9 +140,13 @@ def analyze_cell_time_method(cm, label, table, printout=False):
     clim = False
     #
     if cm is None:
-        if print_DR_errors:
-            print("DR Error: cell_time_method is None for %15s in table %s, averaging" % (label, table))
-        operation = "average"
+        if "fx" in table:
+            # Case of fixed fields required by home data request
+            operation = "once"
+        else:
+            if print_DR_errors:
+                print("DR Error: cell_time_method is None for %15s in table %s, averaging" % (label, table))
+            operation = "average"
     # ----------------------------------------------------------------------------------------------------------------
     elif "time: mean (with samples weighted by snow mass)" in cm:
         # [amnla-tmnsn]: Snow Mass Weighted (LImon : agesnow, tsnLi)
