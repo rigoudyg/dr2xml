@@ -283,12 +283,12 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
             parent_activity_id = get_variable_from_lset_without_default("parent_activity_id")
         else:
             parent_activity_id = get_variable_from_sset_with_default("activity_id", exp_entry["parent_activity_id"])
-        if isinstance(parent_activity_id, list):
+        if isinstance(parent_activity_id, list) and len(parent_activity_id) > 1:
             parent_activity_id = reduce(lambda x, y: x+" "+y, parent_activity_id)
-        parent_experiment_id = \
-            get_variable_from_sset_else_lset_with_default("parent_experiment_id",
-                                                          default=reduce(lambda x, y:
-                                                                         x+" "+y, exp_entry['parent_experiment_id']))
+        parent_experiment_id =  get_variable_from_sset_else_lset_with_default("parent_experiment_id",
+                                                                              default=exp_entry['parent_experiment_id'])
+        if isinstance(parent_experiment_id, list) and len(parent_experiment_id) > 1:
+            parent_experiment_id = reduce(lambda x, y: x+" "+y, parent_experiment_id)
         required_components = exp_entry['required_model_components']  # .split(" ")
         allowed_components = exp_entry['additional_allowed_model_components']  # .split(" ")
     #
