@@ -532,7 +532,7 @@ def cellmethod2area(method):
         return "isf"
 
 
-def DRgrid2gridatts(grid):
+def DRgrid2gridatts(grid, is_dev=False):
     """ Returns label, resolution, description for a DR grid name"""
     if grid == "cfsites":
         return "gn", "100 km", "data sampled in model native grid by nearest neighbour method "

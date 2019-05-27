@@ -225,8 +225,17 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
     if grid == "":
         # either native or close-to-native
         grid_choice = get_variable_from_lset_without_default('grid_choice', source_id)
-        grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description = \
-            get_variable_from_lset_without_default('grids', grid_choice, context)
+        if sv.type == "dev":
+            grid_ref = sv.description.split('|')[1]
+            if grid_ref == "native":
+                grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description = \
+                    get_variable_from_lset_without_default('grids_dev', sv.label, grid_choice, context)
+            else:
+                grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description = \
+                    get_variable_from_lset_without_default('grids', grid_choice, context)
+        else:
+            grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description = \
+                get_variable_from_lset_without_default('grids', grid_choice, context)
     else:
         if grid == 'cfsites':
             target_hgrid_id = cfsites_domain_id
@@ -234,7 +243,8 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
         else:
             target_hgrid_id = get_variable_from_lset_without_default("ping_variables_prefix") + grid
             zgrid_id = "TBD : Should create zonal grid for CMIP6 standard grid %s" % grid
-        grid_label, grid_resolution, grid_description = DRgrid2gridatts(grid)
+        grid_label, grid_resolution, grid_description = DRgrid2gridatts(grid, is_dev=(grid == "native" and
+                                                                                      sv.type == "dev"))
 
     if table[-1:] == "Z":  # e.g. 'AERmonZ','EmonZ', 'EdayZ'
         grid_label += "z"
@@ -622,9 +632,8 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
             # get_DR_version()
             psol_field = create_xios_aux_elmts_defs(sv_psol,
                                                     get_variable_from_lset_without_default("ping_variables_prefix")
-                                                    + "ps", table, field_defs,
-                                                    axis_defs, grid_defs, domain_defs, scalar_defs, dummies, context,
-                                                    target_hgrid_id, zgrid_id, pingvars)
+                                                    + "ps", table, field_defs, axis_defs, grid_defs, domain_defs,
+                                                    scalar_defs, dummies, context, target_hgrid_id, zgrid_id, pingvars)
             out.write(psol_field)
         else:
             print("Warning: Cannot complement model levels with psol for variable %s and table %s" %
@@ -681,7 +690,7 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
     # Build XIOS axis elements (stored in axis_defs)
     # Proceed with vertical interpolation if needed
     # ---
-    # Build XIOS auxilliary field elements (stored in field_defs)
+    # Build XIOS auxiliary field elements (stored in field_defs)
     # --------------------------------------------------------------------
     ssh = sv.spatial_shp
     prefix = get_variable_from_lset_without_default("ping_variables_prefix")
@@ -699,9 +708,14 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
         else:
             (grid_id, grid_ref) = sv.description.split("|")
             sv.description = None
-            field_defs[alias_ping] = '<field id="%-25s long_name="%s standard_name="%s unit="%s grid_ref="%s />' % \
-                                     (alias_ping + '"', sv.long_name + '"', sv.stdname + '"', sv.units + '"',
-                                      grid_ref + '"')
+            if grid_ref == "native":
+                grid_ref = ""
+                field_def = '<field id="%-25s long_name="%s standard_name="%s unit="%s/>' \
+                            % (alias_ping + '"', sv.long_name + '"', sv.stdname + '"', sv.units + '"')
+            else:
+                field_def = '<field id="%-25s long_name="%s standard_name="%s unit="%s grid_ref="%s />' \
+                            % (alias_ping + '"', sv.long_name + '"', sv.stdname + '"', sv.units + '"', grid_ref + '"')
+            field_defs[alias_ping] = field_def
             grid_id_in_ping = context_index[grid_id].attrib["id"]
     else:
         alias_ping = ping_alias(sv, pingvars)

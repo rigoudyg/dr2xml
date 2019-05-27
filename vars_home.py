@@ -122,7 +122,12 @@ def read_homeVars_list(hmv_file, expid, mips, path_extra_tables=None, printout=F
             for (key, value) in zip(home_attrs+dev_home_attrs, line_to_treat):
                 setattr(home_var, key, value)
             # Add the grids description (grid_id and grid_ref)
-            home_var.description = "|".join(line_to_treat[len(home_attrs+dev_home_attrs):])
+            remain_attrs = line_to_treat[len(home_attrs+dev_home_attrs):]
+            if len(remain_attrs) < 2:
+                raise vars_error("Missing geometry description for dev variable {}.".format(home_var.label))
+            else:
+                # Consider the two first items to be grids description
+                home_var.description = "|".join(remain_attrs)
         else:
             for (key, value) in zip(home_attrs, line_to_treat):
                 setattr(home_var, key, value)
