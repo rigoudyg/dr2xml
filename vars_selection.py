@@ -740,7 +740,7 @@ def select_variables_to_be_processed(year, context, select, printout, debug):
         if printout and len(list(excludedv)) > 0:
             print("The following pairs (variable,table) have been excluded for these reasons :")
             for reason in sorted(list(excludedv)):
-                print("\t", reason, ":", excludedv[reason])
+                print("\t", reason, ":", *excludedv[reason])
     if debug:
         print("For table AMon: ", [v.label for v in svars_per_table["Amon"]])
     #

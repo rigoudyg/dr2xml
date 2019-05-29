@@ -86,7 +86,7 @@ def print_SomeStats(context, svars_per_table, skipped_vars_per_table, actually_w
                     for Priority in dic[frequency][spatial_shp][table]:
                         l = dic[frequency][spatial_shp][table][Priority]
                         tot_for_freq_and_shape_among_tables += len(l)
-                        print("%10s" % " ", " %8s" % " ", "% 12s" % table, "P%1d" % Priority, "% 3d : " % len(l), l)
+                        print("%10s" % " ", " %8s" % " ", "% 12s" % table, "P%1d" % Priority, "% 3d : " % len(l), *l)
                 print("%10s" % frequency, " %8s" % spatial_shp, "% 11s" % "--------", "---", "%3d" %
                       tot_for_freq_and_shape_among_tables)
                 tot_for_freq_among_shapes += tot_for_freq_and_shape_among_tables
@@ -110,7 +110,7 @@ def print_SomeStats(context, svars_per_table, skipped_vars_per_table, actually_w
 
             list_labels = list(dic)
             list_labels.sort()
-            print(">>> DBG >>>", list_labels)
+            print(">>> DBG >>>", *list_labels)
 
             for label in list_labels:
                 print((14 + len(label)) * "-")

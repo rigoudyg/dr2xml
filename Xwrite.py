@@ -330,6 +330,7 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
     if "fx" in sv.frequency:
         filename = "%s%s_%s_%s_%s_%s_%s" % \
                    (prefix, sv.label, table, source_id, expid_in_filename, member_id, grid_label)
+        varname_for_filename = "%s%s" % (prefix, sv.label)
     else:
         varname_for_filename = sv.mipVarLabel
         if get_variable_from_lset_with_default('use_cmorvar_label_in_filename', False):
