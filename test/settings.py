@@ -1,4 +1,8 @@
-# -*- coding: iso-8859-15 -*-
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+from __future__ import print_function, division, absolute_import, unicode_literals
+
 
 rootpath = "/cnrm/est/USERS/senesi/public/CMIP6/"
 my_cvspath = rootpath + "data_request/CMIP6_CVs/"
@@ -27,7 +31,6 @@ lab_and_model_settings = {
     # "listof_home_vars":rootpath+"dr2xml/config_utest/utest020_listof_home_vars.txt",
     "listof_home_vars": None,
     "path_extra_tables": None,
-    "excluded_spshapes": [],
     'realms_per_context': {'nemo': ['seaIce', 'ocean', 'ocean seaIce', 'ocnBgchem', 'seaIce ocean'],
                            'arpsfx': ['atmos', 'atmos atmosChem', 'aerosol', 'atmos land', 'land',
                                       'landIce land', 'aerosol land', 'land landIce', 'landIce', ],

@@ -5,6 +5,8 @@
 Interface to get and set laboratory and simulations dictionaries.
 """
 
+from __future__ import print_function, division, absolute_import, unicode_literals
+
 import copy
 
 from utils import dr2xml_error
@@ -89,11 +91,11 @@ def is_sset_not_None():
 
 
 def get_lset_iteritems():
-    return lset.iteritems()
+    return lset.items()
 
 
 def get_sset_iteritems():
-    return sset.iteritems()
+    return sset.items()
 
 
 def get_source_id_and_type():
@@ -102,7 +104,7 @@ def get_source_id_and_type():
             source_id, source_type, unused = lset["configurations"][sset["configuration"]]
         else:
             raise dr2xml_error("configuration %s is not known (allowed values are :)" %
-                               sset["configuration"] + `lset["configurations"]`)
+                               sset["configuration"] + repr(lset["configurations"]))
     else:
         source_id = sset['source_id']
         if 'source_type' in sset:

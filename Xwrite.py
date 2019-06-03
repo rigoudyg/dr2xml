@@ -4,47 +4,82 @@
 """
 XIOS writing files tools.
 """
+
+from __future__ import print_function, division, absolute_import, unicode_literals
+
+# To access reduce function in python3
+from functools import reduce
+# To have ordered dictionaries
+from collections import OrderedDict
+
 import json
 import re
 import datetime
 
+# Utilities
+from utils import dr2xml_error
 
-from Xparse import id2gridid, idHasExprWithAt
-from cfsites import cfsites_domain_id, add_cfsites_in_defs
+# Global variables and configuration tools
 from config import get_config_variable
+
+# Interface to settings dictionaries
 from settings_interface import get_variable_from_lset_with_default, get_variable_from_lset_without_default, \
     get_variable_from_sset_with_default, get_source_id_and_type, get_variable_from_sset_without_default, \
-    get_variable_from_sset_else_lset_with_default, is_key_in_lset, is_key_in_sset
-from vars_cmor import ping_alias
+    get_variable_from_sset_else_lset_with_default, is_key_in_lset, is_key_in_sset, get_lset_iteritems, \
+    get_sset_iteritems
+# Interface to Data Request
 from dr_interface import get_DR_version
-from grids import change_domain_in_grid, change_axes_in_grid, get_grid_def_with_lset
-from postprocessing import process_vertical_interpolation, process_zonal_mean, process_diurnal_cycle
+
+# Settings tools
 from analyzer import DRgrid2gridatts, analyze_cell_time_method, freq2datefmt, longest_possible_period, \
     Cmip6Freq2XiosFreq
-from file_splitting import split_frequency_for_variable
-from utils import dr2xml_error
+
+# CFsites tools
+from cfsites import cfsites_domain_id, add_cfsites_in_defs, cfsites_grid_id, cfsites_input_filedef
+
+# Tools to deal with ping files
+from pingfiles_interface import check_for_file_input
+
+# Grids tools
+from grids import change_domain_in_grid, change_axes_in_grid, get_grid_def_with_lset, create_standard_domains
+
+# Variables tools
+from vars_cmor import ping_alias
 from vars_home import get_simplevar
-from vars_selection import get_sc, endyear_for_CMORvar
+from vars_selection import get_sc, endyear_for_CMORvar, get_grid_choice
+
+# Post-processing tools
+from postprocessing import process_vertical_interpolation, process_zonal_mean, process_diurnal_cycle
+
+# XIOS tools
+from Xparse import id2gridid, idHasExprWithAt
+
+# File splitting tools
+from file_splitting import split_frequency_for_variable
 
 
 warnings_for_optimisation = []
 
 
 def wr(out, key, dic_or_val=None, num_type="string", default=None):
-    if not get_variable_from_lset_with_default("print_variables", True):
-        return
     """
-    Short cut for a repetitive pattern : writing in 'out' 
+    Short cut for a repetitive pattern : writing in 'out'
     a string variable name and value
-    If dic_or_val is not None 
-      if  dic_or_val is a dict, 
-        if key is in value is dic_or_val[key], 
+    If dic_or_val is not None
+      if  dic_or_val is a dict,
+        if key is in value is dic_or_val[key],
         otherwise use default as value , except if default is False
       otherwise, use arg dic_or_val as value if not None nor False,
     otherwise use value of local variable 'key'
     """
+    print_variables = get_variable_from_lset_with_default("print_variables", True)
+    if not print_variables:
+        return
+    elif isinstance(print_variables, list) and key not in print_variables:
+        return
+
     val = None
-    if type(dic_or_val) == type({}):
+    if isinstance(dic_or_val, (dict, OrderedDict)):
         if key in dic_or_val:
             val = dic_or_val[key]
         else:
@@ -52,12 +87,12 @@ def wr(out, key, dic_or_val=None, num_type="string", default=None):
                 if default is not False:
                     val = default
             else:
-                print 'error : %s not in dic and default is None' % key
+                print('error : %s not in dic and default is None' % key)
     else:
         if dic_or_val is not None:
             val = dic_or_val
         else:
-            print 'error in wr,  no value provided for %s' % key
+            print('error in wr,  no value provided for %s' % key)
     if val:
         if num_type == "string":
             # val=val.replace(">","&gt").replace("<","&lt").replace("&","&amp").replace("'","&apos").replace('"',"&quot").strip()
@@ -69,11 +104,11 @@ def wr(out, key, dic_or_val=None, num_type="string", default=None):
             out.write('  </variable>\n')
 
 
-def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
-                        field_defs, axis_defs, grid_defs, domain_defs, scalar_defs, file_defs,
-                        dummies, skipped_vars_per_table, actually_written_vars,
-                        prefix, context, grid, pingvars=None, enddate=None,
-                        attributes=[], debug=[]):
+def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
+                                 field_defs, axis_defs, grid_defs, domain_defs, scalar_defs, file_defs,
+                                 dummies, skipped_vars_per_table, actually_written_vars,
+                                 prefix, context, grid, pingvars=None, enddate=None,
+                                 attributes=[], debug=[]):
     """
     Generate an XIOS file_def entry in out for :
       - a dict for laboratory settings
@@ -133,7 +168,7 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
             else:
                 alias = get_variable_from_lset_without_default("ping_variables_prefix") + "tau_stress"
         if sv.label in debug:
-            print "write_xios_file_def ... processing %s, alias=%s" % (sv.label, alias)
+            print("write_xios_file_def_for_svar ... processing %s, alias=%s" % (sv.label, alias))
 
         # suppression des terminaisons en "Clim" pour l'alias : elles concernent uniquement les cas
         # d'absence de variation inter-annuelle sur les GHG. Peut-etre genant pour IPSL ?
@@ -190,8 +225,17 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
     if grid == "":
         # either native or close-to-native
         grid_choice = get_variable_from_lset_without_default('grid_choice', source_id)
-        grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description = \
-            get_variable_from_lset_without_default('grids', grid_choice, context)
+        if sv.type == "dev":
+            grid_ref = sv.description.split('|')[1]
+            if grid_ref == "native":
+                grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description = \
+                    get_variable_from_lset_without_default('grids_dev', sv.label, grid_choice, context)
+            else:
+                grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description = \
+                    get_variable_from_lset_without_default('grids', grid_choice, context)
+        else:
+            grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description = \
+                get_variable_from_lset_without_default('grids', grid_choice, context)
     else:
         if grid == 'cfsites':
             target_hgrid_id = cfsites_domain_id
@@ -199,7 +243,8 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
         else:
             target_hgrid_id = get_variable_from_lset_without_default("ping_variables_prefix") + grid
             zgrid_id = "TBD : Should create zonal grid for CMIP6 standard grid %s" % grid
-        grid_label, grid_resolution, grid_description = DRgrid2gridatts(grid)
+        grid_label, grid_resolution, grid_description = DRgrid2gridatts(grid, is_dev=(grid == "native" and
+                                                                                      sv.type == "dev"))
 
     if table[-1:] == "Z":  # e.g. 'AERmonZ','EmonZ', 'EdayZ'
         grid_label += "z"
@@ -247,13 +292,13 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
         elif is_key_in_lset("parent_activity_id"):
             parent_activity_id = get_variable_from_lset_without_default("parent_activity_id")
         else:
-            parent_activity_id= get_variable_from_sset_with_default("activity_id", exp_entry["parent_activity_id"])
-        if type(parent_activity_id) == type([]):
+            parent_activity_id = get_variable_from_sset_with_default("activity_id", exp_entry["parent_activity_id"])
+        if isinstance(parent_activity_id, list) and len(parent_activity_id) > 1:
             parent_activity_id = reduce(lambda x, y: x+" "+y, parent_activity_id)
-        parent_experiment_id = \
-            get_variable_from_sset_else_lset_with_default("parent_experiment_id",
-                                                          default=reduce(lambda x, y:
-                                                                         x+" "+y, exp_entry['parent_experiment_id']))
+        parent_experiment_id =  get_variable_from_sset_else_lset_with_default("parent_experiment_id",
+                                                                              default=exp_entry['parent_experiment_id'])
+        if isinstance(parent_experiment_id, list) and len(parent_experiment_id) > 1:
+            parent_experiment_id = reduce(lambda x, y: x+" "+y, parent_experiment_id)
         required_components = exp_entry['required_model_components']  # .split(" ")
         allowed_components = exp_entry['additional_allowed_model_components']  # .split(" ")
     #
@@ -263,13 +308,13 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
     for c in required_components:
         if c not in actual_components:
             ok = False
-            print "Model component %s is required by CMIP6 CV for experiment %s and not present (present=%s)" % \
-                  (c, experiment_id, `actual_components`)
+            print("Model component %s is required by CMIP6 CV for experiment %s and not present (present=%s)" %
+                  (c, experiment_id, repr(actual_components)))
     for c in actual_components:
         if c not in allowed_components and c not in required_components:
             ok = False or get_variable_from_sset_with_default('bypass_CV_components', False)
-            print "Warning: Model component %s is present but not required nor allowed (%s)" % \
-                  (c, `allowed_components`)
+            print("Warning: Model component %s is present but not required nor allowed (%s)" %
+                  (c, repr(allowed_components)))
     if not ok:
         raise dr2xml_error("Issue with model components")
     #
@@ -285,6 +330,7 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
     if "fx" in sv.frequency:
         filename = "%s%s_%s_%s_%s_%s_%s" % \
                    (prefix, sv.label, table, source_id, expid_in_filename, member_id, grid_label)
+        varname_for_filename = "%s%s" % (prefix, sv.label)
     else:
         varname_for_filename = sv.mipVarLabel
         if get_variable_from_lset_with_default('use_cmorvar_label_in_filename', False):
@@ -301,6 +347,12 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
         filename = "%s%s_%s_%s_%s_%s_%s_%s%s" % \
                    (prefix, varname_for_filename, table, source_id, expid_in_filename,
                     member_id, grid_label, date_range, suffix)
+    # Create an other file which will contain the list of file names of perso and dev variables
+    list_perso_and_dev_file_name = "dr2xml_list_perso_and_dev_file_names"
+    if sv.type in ["perso", "dev"]:
+        with open(list_perso_and_dev_file_name, mode="a") as list_perso_and_dev:
+            list_perso_and_dev.write("*%s_%s_%s_%s_%s_%s*\n" % (varname_for_filename, table, source_id, expid_in_filename,
+                                                              member_id, grid_label))
     #
     if not (is_key_in_lset('mip_era') or is_key_in_sset("mip_era")):
         further_info_url = "https://furtherinfo.es-doc.org/%s.%s.%s.%s.%s.%s" % (
@@ -367,8 +419,8 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
         else:
             # Use requestItems-based end date as the latest possible date when it is earlier than run end date
             if sv.label in debug:
-                print "split_last_date year %d derived from DR for variable %s in table %s " \
-                      "for year %d" % (lastyear, sv.label, table, year)
+                print("split_last_date year %d derived from DR for variable %s in table %s for year %d" %
+                      (lastyear, sv.label, table, year))
             endyear = "%04d" % (lastyear + 1)
             if lastyear < 1000:
                 dr2xml_error(
@@ -390,7 +442,7 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
     #            (lset['source_id'],sset['experiment_id'],sset.get('project',"CMIP6")))
     out.write(' >\n')
     #
-    if type(activity_id) == type([]):
+    if isinstance(activity_id, list):
         activity_idr = reduce(lambda x, y: x + " " + y, activity_id)
     else:
         activity_idr = activity_id
@@ -444,8 +496,8 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
     wr(out, 'grid', grid_description)
     wr(out, 'grid_label', grid_label)
     wr(out, 'nominal_resolution', grid_resolution)
-    comment = get_variable_from_lset_with_default('comment', '') + " " + \
-              get_variable_from_sset_with_default('comment', '') + dynamic_comment
+    comment = get_variable_from_lset_with_default('comment', '') +\
+              " " + get_variable_from_sset_with_default('comment', '') + dynamic_comment
     wr(out, 'comment', comment)
     wr(out, 'history', sset, default='none')
     wr(out, "initialization_index", initialization_index, num_type="int")
@@ -528,7 +580,7 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
             raise dr2xml_error("Fatal: source for %s not found in CMIP6_CV at %s, nor in lset" % (source_id, cvspath))
     wr(out, 'source', source)
     wr(out, 'source_id', source_id)
-    if type(source_type) == type([]):
+    if isinstance(source_type, list):
         source_type = reduce(lambda x, y: x + " " + y, source_type)
     wr(out, 'source_type', source_type)
     #
@@ -556,10 +608,10 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
     if variant_info != "":
         wr(out, "variant_info", variant_info)
     wr(out, "variant_label", variant_label)
-    for name, value in attributes:
+    for name, value in sorted(list(attributes)):
         wr(out, name, value)
-    non_stand_att = get_variable_from_lset_with_default("non_standard_attributes", dict())
-    for name in non_stand_att:
+    non_stand_att = get_variable_from_lset_with_default("non_standard_attributes", OrderedDict())
+    for name in sorted(list(non_stand_att)):
         wr(out, name, non_stand_att[name])
     #
     # --------------------------------------------------------------------
@@ -581,29 +633,29 @@ def write_xios_file_def(sv, year, table, lset, sset, out, cvspath,
             # get_DR_version()
             psol_field = create_xios_aux_elmts_defs(sv_psol,
                                                     get_variable_from_lset_without_default("ping_variables_prefix")
-                                                    + "ps", table, field_defs,
-                                                    axis_defs, grid_defs, domain_defs, scalar_defs, dummies, context,
-                                                    target_hgrid_id, zgrid_id, pingvars)
+                                                    + "ps", table, field_defs, axis_defs, grid_defs, domain_defs,
+                                                    scalar_defs, dummies, context, target_hgrid_id, zgrid_id, pingvars)
             out.write(psol_field)
         else:
-            print "Warning: Cannot complement model levels with psol for variable %s and table %s" % \
-                  (sv.label, sv.frequency)
+            print("Warning: Cannot complement model levels with psol for variable %s and table %s" %
+                  (sv.label, sv.frequency))
 
     #
-    names = {}
-    if sv.spatial_shp == 'XY-A' or sv.spatial_shp == 'S-A':
+    names = OrderedDict()
+    if sv.spatial_shp in ['XY-A', 'S-A']:
         # add entries for auxilliary variables : ap, ap_bnds, b, b_bnds
-        names = {"ap": "vertical coordinate formula term: ap(k)",
-                 "ap_bnds": "vertical coordinate formula term: ap(k+1/2)",
-                 "b": "vertical coordinate formula term: b(k)",
-                 "b_bnds": "vertical coordinate formula term: b(k+1/2)"}
-    if sv.spatial_shp == 'XY-AH' or sv.spatial_shp == 'S-AH':
+        names["ap"] = "vertical coordinate formula term: ap(k)"
+        names["ap_bnds"] = "vertical coordinate formula term: ap(k+1/2)"
+        names["b"] = "vertical coordinate formula term: b(k)"
+        names["b_bnds"] = "vertical coordinate formula term: b(k+1/2)"
+    elif sv.spatial_shp in ['XY-AH', 'S-AH']:
         # add entries for auxilliary variables : ap, ap_bnds, b, b_bnds
-        names = {"ahp": "vertical coordinate formula term: ap(k)",
-                 "ahp_bnds": "vertical coordinate formula term: ap(k+1/2)",
-                 "bh": "vertical coordinate formula term: b(k)",
-                 "bh_bnds": "vertical coordinate formula term: b(k+1/2)"}
-    for tab in names:
+        names["ahp"] = "vertical coordinate formula term: ap(k)"
+        names["ahp_bnds"] = "vertical coordinate formula term: ap(k+1/2)"
+        names["bh"] = "vertical coordinate formula term: b(k)"
+        names["bh_bnds"] = "vertical coordinate formula term: b(k+1/2)"
+
+    for tab in list(names):
         out.write('\t<field field_ref="%s%s" name="%s" long_name="%s" '
                   'operation="once" prec="8" />\n' % (get_variable_from_lset_without_default("ping_variables_prefix"),
                                                       tab, tab.replace('h', ''), names[tab]))
@@ -639,7 +691,7 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
     # Build XIOS axis elements (stored in axis_defs)
     # Proceed with vertical interpolation if needed
     # ---
-    # Build XIOS auxilliary field elements (stored in field_defs)
+    # Build XIOS auxiliary field elements (stored in field_defs)
     # --------------------------------------------------------------------
     ssh = sv.spatial_shp
     prefix = get_variable_from_lset_without_default("ping_variables_prefix")
@@ -657,8 +709,14 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
         else:
             (grid_id, grid_ref) = sv.description.split("|")
             sv.description = None
-            field_defs[alias_ping] = '<field id="%-25s long_name="%s standard_name="%s unit="%s grid_ref="%s />' \
-        % (alias_ping + '"', sv.long_name + '"', sv.stdname + '"', sv.units + '"', grid_ref + '"')
+            if grid_ref == "native":
+                grid_ref = ""
+                field_def = '<field id="%-25s long_name="%s standard_name="%s unit="%s/>' \
+                            % (alias_ping + '"', sv.long_name + '"', sv.stdname + '"', sv.units + '"')
+            else:
+                field_def = '<field id="%-25s long_name="%s standard_name="%s unit="%s grid_ref="%s />' \
+                            % (alias_ping + '"', sv.long_name + '"', sv.stdname + '"', sv.units + '"', grid_ref + '"')
+            field_defs[alias_ping] = field_def
             grid_id_in_ping = context_index[grid_id].attrib["id"]
     else:
         alias_ping = ping_alias(sv, pingvars)
@@ -679,11 +737,13 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
     # must exclude COSP outputs which are already interpolated to height or P7 levels
     if (ssh[0:4] == 'XY-P' and ssh != 'XY-P7') or \
             ssh[0:3] == 'Y-P' or \
-            ((ssh[0:5] == 'XY-na' or ssh[0:4] == 'Y-na') and
+            ((ssh[0:5] == 'XY-na' or ssh[0:4] == 'Y-na' or ssh == "XY-perso") and
              prefix + sv.label not in pingvars and sv.label_without_psuffix != sv.label):
         # TBD check - last case is for singleton
         last_grid_id, last_field_id = process_vertical_interpolation(sv, alias, pingvars, last_grid_id, field_defs,
                                                                      axis_defs, grid_defs, domain_defs, table)
+        # If vertical interpolation is done, change the value of those boolean to modify the behaviour of dr2xml
+        grid_with_vertical_interpolation = True
 
     #
     # --------------------------------------------------------------------
@@ -841,10 +901,10 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
     # --------------------------------------------------------------------
     comment = None
     # Process experiment-specific comment for the variable
-    if sv.label in get_variable_from_sset_without_default('comments').keys():
+    if sv.label in get_variable_from_sset_without_default('comments'):
         comment = get_variable_from_sset_without_default('comments', sv.label)
     else:  # Process lab-specific comment for the variable
-        if sv.label in get_variable_from_lset_without_default('comments').keys():
+        if sv.label in get_variable_from_lset_without_default('comments'):
             comment = get_variable_from_lset_without_default('comments', sv.label)
     if comment:
         rep += wrv('comment', comment)  # TBI
@@ -885,7 +945,8 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
     else:
         source, source_type = get_source_id_and_type()
         grid_choice = get_variable_from_lset_without_default("grid_choice", source)
-        interval_op = `int(get_variable_from_lset_without_default('sampling_timestep', grid_choice, context))` + " s"
+        interval_op = repr(int(get_variable_from_lset_without_default('sampling_timestep', grid_choice, context))) + \
+                      " s"
     if operation != 'once':
         rep += wrv('interval_operation', interval_op)
 
@@ -913,7 +974,7 @@ def process_singleton(sv, alias, pingvars, field_defs, grid_defs, scalar_defs, t
     input_grid_id = id2gridid(alias_ping, context_index)
     input_grid_def = get_grid_def_with_lset(input_grid_id, grid_defs)
     if printout:
-        print "process_singleton : ", "processing %s with grid %s " % (alias, input_grid_id)
+        print("process_singleton : ", "processing %s with grid %s " % (alias, input_grid_id))
     #
     further_field_id = alias
     further_grid_id = input_grid_id
@@ -974,14 +1035,14 @@ def process_singleton(sv, alias, pingvars, field_defs, grid_defs, scalar_defs, t
                          (scalar_id, name, stdname, sdim.title, value, bounds_value, axis, unit)
             scalar_defs[scalar_id] = scalar_def
             if printout:
-                print "process_singleton : ", "adding scalar %s" % scalar_def
+                print("process_singleton : ", "adding scalar %s" % scalar_def)
             #
             # Create a grid with added (or changed) scalar
             glabel = further_grid_id + "_" + scalar_id
             further_grid_def = add_scalar_in_grid(further_grid_def, glabel, scalar_id, name,
                                                   sdim.axis == "Z" and further_grid_def != "NATURE_landuse")
             if printout:
-                print "process_singleton : ", " adding grid %s" % further_grid_def
+                print("process_singleton : ", " adding grid %s" % further_grid_def)
             grid_defs[glabel] = further_grid_def
             further_grid_id = glabel
 
@@ -994,23 +1055,33 @@ def process_singleton(sv, alias, pingvars, field_defs, grid_defs, scalar_defs, t
                     (further_field_id, further_grid_id, alias)
         field_defs[further_field_id] = field_def
         if printout:
-            print "process_singleton : ", " adding field %s" % field_def
+            print("process_singleton : ", " adding field %s" % field_def)
     return further_field_id, further_grid_id
 
 
 def has_singleton(sv):
+    """
+    Determine if a variable has a singleton dimension.
+    :param sv: variable
+    :return: boolean indicating whether the variable has a singleton dimension
+    """
     rep = any([is_singleton(sv.sdims[k]) for k in sv.sdims])
     return rep
 
 
 def is_singleton(sdim):
+    """
+    Based on sdim (dimensions) characteristics, determine if it corresponds to a singleton
+    :param sdim: dimensions characteristics
+    :return: boolean indicating whether sdim corresponds to a singleton or not
+    """
     if sdim.axis == '':
         # Case of non-spatial dims. Singleton only have a 'value' (except Scatratio has a lot (in DR01.00.21))
         return sdim.value != '' and len(sdim.value.strip().split(" ")) == 1
     else:
         # Case of space dimension singletons. Should a 'value' and no 'requested'
         return ((sdim.value != '') and (sdim.requested.strip() == '')) \
-               or (sdim.label == "typewetla")  # The latter is a bug in DR01.00.21 : typewetla has no value tehre
+               or (sdim.label == "typewetla")  # The latter is a bug in DR01.00.21 : typewetla has no value there
 
 
 def add_scalar_in_grid(gridin_def, gridout_id, scalar_id, scalar_name, remove_axis, change_scalar=True):
@@ -1056,9 +1127,19 @@ def add_scalar_in_grid(gridin_def, gridout_id, scalar_id, scalar_name, remove_ax
 
 
 def wrv(name, value, num_type="string"):
-    if not get_variable_from_lset_with_default("print_variables", True):
+    """
+    Create a string corresponding of a variable for Xios files.
+    :param name: name of the variable
+    :param value: value of the variable
+    :param num_type: type of the variable
+    :return: string corresponding to the xml variable
+    """
+    print_variables = get_variable_from_lset_with_default("print_variables", True)
+    if not print_variables:
         return ""
-    if type(value) == type(""):
+    elif isinstance(print_variables, list) and name not in print_variables:
+        return ""
+    if isinstance(value, str):
         value = value[0:1024]  # CMIP6 spec : no more than 1024 char
     # Format a 'variable' entry
     return '     <variable name="%s" type="%s" > %s ' % (name, num_type, value) + \
@@ -1087,3 +1168,113 @@ def make_source_string(sources, source_id):
         if description != "none":
             rep = rep + "\n" + realm + ": " + description
     return rep
+
+
+def write_xios_file_def(filename, svars_per_table, year, lset, sset, cvs_path, field_defs, axis_defs, grid_defs,
+                        scalar_defs, file_defs, dummies, skipped_vars_per_table, actually_written_vars, prefix, context,
+                        pingvars=None, enddate=None, attributes=[]):
+    """
+    Write XIOS file_def.
+    """
+    # --------------------------------------------------------------------
+    # Start writing XIOS file_def file:
+    # file_definition node, including field child-nodes
+    # --------------------------------------------------------------------
+    with open(filename, "w") as out:
+        out.write('<context id="%s"> \n' % context)
+        out.write('<!-- CMIP6 Data Request version %s --> \n' % get_DR_version())
+        out.write('<!-- CMIP6-CV version %s --> \n' % "??")
+        out.write('<!-- CMIP6_conventions_version %s --> \n' % get_config_variable("CMIP6_conventions_version"))
+        out.write('<!-- dr2xml version %s --> \n' % get_config_variable("version"))
+        out.write('<!-- Lab_and_model settings : \n')
+        for s, v in sorted(get_lset_iteritems()):
+            out.write(' %s : %s\n' % (s, v))
+        out.write('-->\n')
+        out.write('<!-- Simulation settings : \n')
+        for s, v in sorted(get_sset_iteritems()):
+            out.write(' %s : %s\n' % (s, v))
+        out.write('-->\n')
+        out.write('<!-- Year processed is  %s --> \n' % year)
+        #
+        domain_defs = OrderedDict()
+        # for table in ['day'] :
+        out.write('\n<file_definition type="one_file" enabled="true" > \n')
+        foo, sourcetype = get_source_id_and_type()
+        for table in sorted(list(svars_per_table)):
+            count = OrderedDict()
+            for svar in sorted(svars_per_table[table], key=lambda x: (x.label + "_" + table)):
+                if get_variable_from_lset_with_default("allow_duplicates_in_same_table", False) \
+                        or svar.mipVarLabel not in count:
+                    if not get_variable_from_lset_with_default("use_cmorvar_label_in_filename", False) \
+                            and svar.mipVarLabel in count:
+                        form = "If you really want to actually produce both %s and %s in table %s, " + \
+                               "you must set 'use_cmorvar_label_in_filename' to True in lab settings"
+                        raise dr2xml_error(form % (svar.label, count[svar.mipVarLabel].label, table))
+                    count[svar.mipVarLabel] = svar
+                    for grid in svar.grids:
+                        a, hgrid, b, c, d = get_variable_from_lset_without_default('grids', get_grid_choice(), context)
+                        check_for_file_input(svar, hgrid, pingvars, field_defs, grid_defs, domain_defs, file_defs)
+                        write_xios_file_def_for_svar(svar, year, table, lset, sset, out, cvs_path,
+                                                     field_defs, axis_defs, grid_defs, domain_defs, scalar_defs, file_defs,
+                                                     dummies, skipped_vars_per_table, actually_written_vars,
+                                                     prefix, context, grid, pingvars, enddate, attributes)
+                else:
+                    print("Duplicate variable %s,%s in table %s is skipped, preferred is %s" %
+                          (svar.label, svar.mipVarLabel, table, count[svar.mipVarLabel].label))
+
+        if cfsites_grid_id in grid_defs:
+            out.write(cfsites_input_filedef())
+        for file_def in file_defs:
+            out.write(file_defs[file_def])
+        out.write('\n</file_definition> \n')
+        #
+        # --------------------------------------------------------------------
+        # End writing XIOS file_def file:
+        # field_definition, axis_definition, grid_definition
+        # and domain_definition auxilliary nodes
+        # --------------------------------------------------------------------
+        # Write all domain, axis, field defs needed for these file_defs
+        out.write('<field_definition> \n')
+        if get_variable_from_lset_with_default("nemo_sources_management_policy_master_of_the_world", False) \
+                and context == 'nemo':
+            out.write('<field_group freq_op="_reset_" freq_offset="_reset_" >\n')
+        for obj in list(field_defs):
+            out.write("\t" + field_defs[obj] + "\n")
+        if get_variable_from_lset_with_default("nemo_sources_management_policy_master_of_the_world", False) \
+                and context == 'nemo':
+            out.write('</field_group>\n')
+        out.write('\n</field_definition> \n')
+        #
+        out.write('\n<axis_definition> \n')
+        out.write('<axis_group prec="8">\n')
+        for obj in list(axis_defs):
+            out.write("\t" + axis_defs[obj] + "\n")
+        if False and get_variable_from_lset_with_default('use_union_zoom', False):
+            for obj in sorted(list(union_axis_defs)):
+                out.write("\t" + union_axis_defs[obj] + "\n")
+        out.write('</axis_group>\n')
+        out.write('</axis_definition> \n')
+        #
+        out.write('\n<domain_definition> \n')
+        out.write('<domain_group prec="8">\n')
+        if get_variable_from_lset_without_default('grid_policy') != "native":
+            create_standard_domains(domain_defs)
+        for obj in list(domain_defs):
+            out.write("\t" + domain_defs[obj] + "\n")
+        out.write('</domain_group>\n')
+        out.write('</domain_definition> \n')
+        #
+        out.write('\n<grid_definition> \n')
+        for obj in list(grid_defs):
+            out.write("\t" + grid_defs[obj])
+        if False and get_variable_from_lset_with_default('use_union_zoom', False):
+            for obj in list(union_grid_defs):
+                out.write("\t" + union_grid_defs[obj] + "\n")
+        out.write('</grid_definition> \n')
+        #
+        out.write('\n<scalar_definition> \n')
+        for obj in list(scalar_defs):
+            out.write("\t" + scalar_defs[obj] + "\n")
+        out.write('</scalar_definition> \n')
+        #
+        out.write('</context> \n')

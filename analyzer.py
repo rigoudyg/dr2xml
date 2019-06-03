@@ -13,23 +13,20 @@
     and the corresponding frequency (albeit this is instrumental in DRS), and because
     we need to translate anyway to XIOS syntax
 """
+from __future__ import print_function, division, absolute_import, unicode_literals
+
 import sys
 
-from settings_interface import get_variable_from_lset_with_default
-from dr_interface import print_DR_errors
+# Utilities
 from utils import dr2xml_error
 
+# Global variables and configuration tools
+from config import add_value_in_list_config_variable
 
-cell_method_warnings = []
-
-
-def initialize_cell_method_warnings(init):
-    global cell_method_warnings
-    cell_method_warnings = init
-
-
-def get_cell_method_warnings():
-    return cell_method_warnings
+# Interface to settings dictionaries
+from settings_interface import get_variable_from_lset_with_default
+# Interface to Data Request
+from dr_interface import print_DR_errors
 
 
 def freq2datefmt(in_freq, operation, table):
@@ -138,199 +135,220 @@ def analyze_cell_time_method(cm, label, table, printout=False):
     "where sea-ice", "where cloud" since we suppose fields required in this way
     are physically undefined oustide of "where something".
     """
-    global cell_method_warnings
     operation = None
     detect_missing = False
     clim = False
     #
     if cm is None:
-        if print_DR_errors:
-            print "DR Error: cell_time_method is None for %15s in table %s, averaging" % (label, table)
-        operation = "average"
+        if "fx" in table:
+            # Case of fixed fields required by home data request
+            operation = "once"
+        else:
+            if print_DR_errors:
+                print("DR Error: cell_time_method is None for %15s in table %s, averaging" % (label, table))
+            operation = "average"
     # ----------------------------------------------------------------------------------------------------------------
     elif "time: mean (with samples weighted by snow mass)" in cm:
         # [amnla-tmnsn]: Snow Mass Weighted (LImon : agesnow, tsnLi)
-        cell_method_warnings.append(('Cannot yet handle time: mean (with samples weighted by snow mass)', label, table))
+        add_value_in_list_config_variable("cell_method_warnings",
+                                          ('Cannot yet handle time: mean (with samples weighted by snow mass)',
+                                           label, table))
         if printout:
-            print "Will not explicitly handle time: mean (with samples weighted by snow mass) for " + \
-                  "%15s in table %s -> averaging" % (label, table)
+            print("Will not explicitly handle time: mean (with samples weighted by snow mass) for " + \
+                  "%15s in table %s -> averaging" % (label, table))
         operation = "average"
     # ----------------------------------------------------------------------------------------------------------------
     elif "time: mean where cloud" in cm:
         # [amncl-twm]: Weighted Time Mean on Cloud (2 variables ISSCP
         # albisccp et pctisccp, en emDay et emMon)
-        cell_method_warnings.append(('Will not explicitly handle time: mean where cloud', label, table))
+        add_value_in_list_config_variable("cell_method_warnings",
+                                          ('Will not explicitly handle time: mean where cloud', label, table))
         if printout:
-            print "Note : assuming that  " + \
+            print("Note : assuming that  " + \
                   " for %15s in table %s is well handled by 'detect_missing'" \
-                  % (label, table)
+                  % (label, table))
         operation = "average"
         detect_missing = True
     # -------------------------------------------------------------------------------------
     elif "time: mean where sea_ice_melt_pound" in cm:
         # [amnnsimp-twmm]: Weighted Time Mean in Sea-ice Melt Pounds (uniquement des
         # variables en SImon)
-        cell_method_warnings.append(('time: mean where sea_ice_melt_pound', label, table))
+        add_value_in_list_config_variable("cell_method_warnings",
+                                          ('time: mean where sea_ice_melt_pound', label, table))
         if printout:
-            print "Note : assuming that 'time: mean where sea_ice_melt_pound' " + \
+            print("Note : assuming that 'time: mean where sea_ice_melt_pound' " + \
                   " for %15s in table %s is well handled by 'detect_missing'" \
-                  % (label, table)
+                  % (label, table))
         operation = "average"
         detect_missing = True
     # -------------------------------------------------------------------------------------------------
     elif "time: mean where sea_ice" in cm:
         # [amnsi-twm]: Weighted Time Mean on Sea-ice (presque que des
         # variables en SImon, sauf sispeed et sithick en SIday)
-        cell_method_warnings.append(('time: mean where sea_ice', label, table))
+        add_value_in_list_config_variable("cell_method_warnings",
+                                          ('time: mean where sea_ice', label, table))
         if printout:
-            print "Note : assuming that 'time: mean where sea_ice' " + \
+            print("Note : assuming that 'time: mean where sea_ice' " + \
                   " for %15s in table %s is well handled by 'detect_missing'" \
-                  % (label, table)
+                  % (label, table))
         operation = "average"
         detect_missing = True
     elif "time: mean where sea" in cm:  # [amnesi-tmn]:
         # Area Mean of Ext. Prop. on Sea Ice : pas utilisee
-        print "time: mean where sea is not supposed to be used (%s,%s)" % (label, table)
+        print("time: mean where sea is not supposed to be used (%s,%s)" % (label, table))
     # -------------------------------------------------------------------------------------
     elif "time: mean where sea" in cm:  # [amnesi-tmn]:
         # Area Mean of Ext. Prop. on Sea Ice : pas utilisee
-        print "time: mean where sea is not supposed to be used (%s,%s)" % (label, table)
+        print("time: mean where sea is not supposed to be used (%s,%s)" % (label, table))
     # -------------------------------------------------------------------------------------
     elif "time: mean where floating_ice_shelf" in cm:
         # [amnfi-twmn]: Weighted Time Mean on Floating Ice Shelf (presque que des
         # variables en Imon, Iyr, sauf sftflt en LImon !?)
-        cell_method_warnings.append(('time: mean where floating_ice_shelf', label, table))
+        add_value_in_list_config_variable("cell_method_warnings",
+                                          ('time: mean where floating_ice_shelf', label, table))
         if printout:
-            print "Note : assuming that 'time: mean where floating_ice_shelf' " + \
+            print("Note : assuming that 'time: mean where floating_ice_shelf' " + \
                   " for %15s in table %s is well handled by 'detect_missing'" \
-                  % (label, table)
+                  % (label, table))
         operation = "average"
         detect_missing = True
     # ----------------------------------------------------------------------------------------------------------------
     elif "time: mean where grounded_ice_sheet" in cm:
         # [amngi-twm]: Weighted Time Mean on Grounded Ice Shelf (uniquement des
         # variables en Imon, Iyr)
-        cell_method_warnings.append(('time: mean where grounded_ice_sheet', label, table))
+        add_value_in_list_config_variable("cell_method_warnings",
+                                          ('time: mean where grounded_ice_sheet', label, table))
         if printout:
-            print "Note : assuming that 'time: mean where grounded_ice_sheet' " + \
+            print("Note : assuming that 'time: mean where grounded_ice_sheet' " + \
                   " for %15s in table %s is well handled by 'detect_missing'" \
-                  % (label, table)
+                  % (label, table))
         operation = "average"
         detect_missing = True
     # ----------------------------------------------------------------------------------------------------------------
     elif "time: mean where ice_sheet" in cm:
         # [amnni-twmn]: Weighted Time Mean on Ice Shelf (uniquement des
         # variables en Imon, Iyr)
-        cell_method_warnings.append(('time: mean where ice_sheet', label, table))
+        add_value_in_list_config_variable("cell_method_warnings",
+                                          ('time: mean where ice_sheet', label, table))
         if printout:
-            print "Note : assuming that 'time: mean where ice_sheet' " + \
+            print("Note : assuming that 'time: mean where ice_sheet' " + \
                   " for %15s in table %s is well handled by 'detect_missing'" \
-                  % (label, table)
+                  % (label, table))
         operation = "average"
         detect_missing = True
     # ----------------------------------------------------------------------------------------------------------------
     elif "time: mean where landuse" in cm:
         # [amlu-twm]: Weighted Time Mean on Land Use Tiles (uniquement des
         # variables suffixees en 'Lut')
-        cell_method_warnings.append(('time: mean where land_use', label, table))
+        add_value_in_list_config_variable("cell_method_warnings",
+                                          ('time: mean where land_use', label, table))
         if printout:
-            print "Note : assuming that 'time: mean where landuse' " + \
+            print("Note : assuming that 'time: mean where landuse' " + \
                   " for %15s in table %s is well handled by 'detect_missing'" \
-                  % (label, table)
+                  % (label, table))
         operation = "average"
         detect_missing = True
     # ----------------------------------------------------------------------------------------------------------------
     elif "time: mean where crops" in cm:
         # [amc-twm]: Weighted Time Mean on Crops (uniquement des
         # variables suffixees en 'Crop')
-        cell_method_warnings.append(('time: mean where crops', label, table))
+        add_value_in_list_config_variable("cell_method_warnings",
+                                          ('time: mean where crops', label, table))
         if printout:
-            print "Note : assuming that 'time: mean where crops' " + \
+            print("Note : assuming that 'time: mean where crops' " + \
                   " for %15s in table %s is well handled by 'detect_missing'" \
-                  % (label, table)
+                  % (label, table))
         operation = "average"
         detect_missing = True
     # ----------------------------------------------------------------------------------------------------------------
     elif "time: mean where natural_grasses" in cm:
         # [amng-twm]: Weighted Time Mean on Natural Grasses (uniquement des
         # variables suffixees en 'Grass')
-        cell_method_warnings.append(('time: mean where natural_grasses', label, table))
+        add_value_in_list_config_variable("cell_method_warnings",
+                                          ('time: mean where natural_grasses', label, table))
         if printout:
-            print "Note : assuming that 'time: mean where natural_grasses' " + \
+            print("Note : assuming that 'time: mean where natural_grasses' " + \
                   " for %15s in table %s is well handled by 'detect_missing'" \
-                  % (label, table)
+                  % (label, table))
         operation = "average"
         detect_missing = True
     # ----------------------------------------------------------------------------------------------------------------
     elif "time: mean where shrubs" in cm:
         # [ams-twm]: Weighted Time Mean on Shrubs (uniquement des
         # variables suffixees en 'Shrub')
-        cell_method_warnings.append(('time: mean where shrubs', label, table))
+        add_value_in_list_config_variable("cell_method_warnings",
+                                          ('time: mean where shrubs', label, table))
         if printout:
-            print "Note : assuming that 'time: mean where shrubs' " + \
+            print("Note : assuming that 'time: mean where shrubs' " + \
                   " for %15s in table %s is well handled by 'detect_missing'" \
-                  % (label, table)
+                  % (label, table))
         operation = "average"
         detect_missing = True
     # ----------------------------------------------------------------------------------------------------------------
     elif "time: mean where trees" in cm:
         # [amtr-twm]: Weighted Time Mean on Bare Ground (uniquement des
         # variables suffixees en 'Tree')
-        cell_method_warnings.append(('time: mean where trees', label, table))
+        add_value_in_list_config_variable("cell_method_warnings",
+                                          ('time: mean where trees', label, table))
         if printout:
-            print "Note : assuming that 'time: mean where trees' " + \
+            print("Note : assuming that 'time: mean where trees' " + \
                   " for %15s in table %s is well handled by 'detect_missing'" \
-                  % (label, table)
+                  % (label, table))
         operation = "average"
         detect_missing = True
     # ----------------------------------------------------------------------------------------------------------------
     elif "time: mean where vegetation" in cm:
-        # [amv-twm]: Weighted Time Mean on Vegetation (pas de varibles concernees)
-        cell_method_warnings.append(('time: mean where vegetation', label, table))
+        # [amv-twm]: Weighted Time Mean on Vegetation (pas de variables concernees)
+        add_value_in_list_config_variable("cell_method_warnings",
+                                          ('time: mean where vegetation', label, table))
         if printout:
-            print "Note : assuming that 'time: mean where vegetation' " + \
+            print("Note : assuming that 'time: mean where vegetation' " + \
                   " for %15s in table %s is well handled by 'detect_missing'" \
-                  % (label, table)
+                  % (label, table))
         operation = "average"
         detect_missing = True
     # ----------------------------------------------------------------------------------------------------------------
     elif "time: maximum within days time: mean over days" in cm:
         # [dmax]: Daily Maximum : tasmax Amon seulement
         if label != 'tasmax' and label != 'sfcWindmax':
-            print "Error: issue with variable %s in table %s " % (label, table) + \
-                  "and cell method time: maximum within days time: mean over days"
+            print("Error: issue with variable %s in table %s " % (label, table) + \
+                  "and cell method time: maximum within days time: mean over days")
         # we assume that pingfile provides a reference field which already implements "max within days"
         operation = "average"
     # ----------------------------------------------------------------------------------------------------------------
     elif "time: minimum within days time: mean over days" in cm:
         # [dmin]: Daily Minimum : tasmin Amon seulement
         if label != 'tasmin':
-            print "Error: issue with variable %s in table %s  " % (label, table) + \
-                  "and cell method time: minimum within days time: mean over days"
+            print("Error: issue with variable %s in table %s  " % (label, table) + \
+                  "and cell method time: minimum within days time: mean over days")
         # we assume that pingfile provides a reference field which already implements "min within days"
         operation = "average"
     # ----------------------------------------------------------------------------------------------------------------
     elif "time: mean within years time: mean over years" in cm:
         # [aclim]: Annual Climatology
-        cell_method_warnings.append(('Cannot yet compute annual climatology - must do it as a postpro', label, table))
+        add_value_in_list_config_variable("cell_method_warnings",
+                                          ('Cannot yet compute annual climatology - must do it as a postpro',
+                                           label, table))
         if printout:
-            print "Cannot yet compute annual climatology for " + \
-                  "%15s in table %s -> averaging" % (label, table)
+            print("Cannot yet compute annual climatology for " + \
+                  "%15s in table %s -> averaging" % (label, table))
         # Could transform in monthly fields to be post-processed
         operation = "average"
     # ----------------------------------------------------------------------------------------------------------------
     elif "time: mean within days time: mean over days" in cm:
         # [amn-tdnl]: Mean Diurnal Cycle
-        cell_method_warnings.append(('File structure for diurnal cycle is not yet CF-compliant', label, table))
+        add_value_in_list_config_variable("cell_method_warnings",
+                                          ('File structure for diurnal cycle is not yet CF-compliant', label, table))
         operation = "average"
         clim = True
     # ----------------------------------------------------------------------------------------------------------------
     # mpmoine_correction:analyze_cell_time_method: ajout du cas 'Maximum Hourly Rate'
     elif "time: mean within hours time: maximum over hours" in cm:
-        cell_method_warnings.append(('Cannot yet compute maximum hourly rate', label, table))
+        add_value_in_list_config_variable("cell_method_warnings",
+                                          ('Cannot yet compute maximum hourly rate', label, table))
         if printout:
-            print "TBD: Cannot yet compute maximum hourly rate for " + \
-                  " %15s in table %s -> averaging" % (label, table)
+            print("TBD: Cannot yet compute maximum hourly rate for " + \
+                  " %15s in table %s -> averaging" % (label, table))
             # Could output a time average of 24 hourly fields at 01 UTC, 2UTC ...
         operation = "average"
     # ----------------------------------------------------------------------------------------------------------------
@@ -356,8 +374,8 @@ def analyze_cell_time_method(cm, label, table, printout=False):
         operation = "once"
     # ----------------------------------------------------------------------------------------------------------------
     else:
-        print "Warning: issue when analyzing cell_time_method " + \
-              "%s for %15s in table %s, assuming it is once" % (cm, label, table)
+        print("Warning: issue when analyzing cell_time_method " + \
+              "%s for %15s in table %s, assuming it is once" % (cm, label, table))
         operation = "once"
 
     if not operation:
@@ -378,7 +396,7 @@ def Cmip6Freq2XiosFreq(freq, table):
         if table == "CFsubhr":
             rep = get_variable_from_lset_with_default("CFsubhr_frequency", "1ts")
         elif table is None:
-            print "Issue in dr2xml with table None and freq=", freq
+            print("Issue in dr2xml with table None and freq=", freq)
             sys.exit(0)
         else:
             rep = "1ts"
@@ -443,7 +461,7 @@ def guess_freq_from_table_name(table):
     elif "fx" in table:
         return "fx"
     else:
-        print "ERROR in guess_freq_from_table : cannot deduce frequency from table named %s" % table
+        print("ERROR in guess_freq_from_table : cannot deduce frequency from table named %s" % table)
         sys.exit(1)
 
 
@@ -514,7 +532,7 @@ def cellmethod2area(method):
         return "isf"
 
 
-def DRgrid2gridatts(grid):
+def DRgrid2gridatts(grid, is_dev=False):
     """ Returns label, resolution, description for a DR grid name"""
     if grid == "cfsites":
         return "gn", "100 km", "data sampled in model native grid by nearest neighbour method "

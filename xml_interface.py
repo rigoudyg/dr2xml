@@ -5,15 +5,21 @@
 Interface between xml module and dr2xml.
 """
 
+from __future__ import print_function, division, absolute_import, unicode_literals
+
+from collections import OrderedDict
 
 import xml.etree.ElementTree as ET
 
+# Configuration variables
+from config import python_version
 
-def create_xml_element(tag, attrib=dict()):
+
+def create_xml_element(tag, attrib=OrderedDict()):
     return ET.Element(tag=tag, attrib=attrib)
 
 
-def create_xml_sub_element(xml_element, tag, attrib=dict()):
+def create_xml_sub_element(xml_element, tag, attrib=OrderedDict()):
     return ET.SubElement(parent=xml_element, tag=tag, attrib=attrib)
 
 
@@ -22,7 +28,10 @@ def create_xml_element_from_string(string):
 
 
 def create_string_from_xml_element(xml_element):
-    return ET.tostring(xml_element)
+    if python_version == "python2":
+        return ET.tostring(xml_element)
+    else:
+        return ET.tostring(xml_element, encoding="unicode")
 
 
 def dump_xml_element(xml_element):

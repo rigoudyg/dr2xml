@@ -4,10 +4,21 @@
 """
 CMOR variables tools.
 """
-from settings_interface import get_variable_from_lset_without_default
-from dr_interface import get_collection, get_uid, get_request_by_id_by_sect, print_DR_errors
-from analyzer import cellmethod2area
+
+from __future__ import print_function, division, absolute_import, unicode_literals
+
+from collections import OrderedDict
+
+# Utilities
 from utils import dr2xml_error
+
+# Interface to settings dictionaries
+from settings_interface import get_variable_from_lset_without_default
+# Interface to Data Request
+from dr_interface import get_collection, get_uid, get_request_by_id_by_sect, print_DR_errors
+
+# Settings tools
+from analyzer import cellmethod2area
 
 
 def get_CMORvar(label, table):
@@ -25,21 +36,24 @@ def get_CMORvar(label, table):
 
 
 def get_SpatialAndTemporal_Shapes(cmvar):
+    """
+    Get the spatial et temporal shape of a CMOR variable from the DR.
+    """
     spatial_shape = False
     temporal_shape = False
     if cmvar.stid == "__struct_not_found_001__":
         if print_DR_errors:
-            print "Warning: stid for ", cmvar.label, " in table ", cmvar.mipTable,\
-                " is a broken link to structure in DR: ", cmvar.stid
+            print("Warning: stid for ", cmvar.label, " in table ", cmvar.mipTable,
+                  " is a broken link to structure in DR: ", cmvar.stid)
     else:
         struct = get_uid(cmvar.stid)
         spatial_shape = get_uid(struct.spid).label
         temporal_shape = get_uid(struct.tmid).label
     if print_DR_errors:
         if not spatial_shape:
-            print "Warning: spatial shape for ", cmvar.label, " in table ", cmvar.mipTable, " not found in DR."
+            print("Warning: spatial shape for ", cmvar.label, " in table ", cmvar.mipTable, " not found in DR.")
         if not temporal_shape:
-            print "Warning: temporal shape for ", cmvar.label, " in table ", cmvar.mipTable, " not found in DR."
+            print("Warning: temporal shape for ", cmvar.label, " in table ", cmvar.mipTable, " not found in DR.")
     return [spatial_shape, temporal_shape]
 
 
@@ -50,23 +64,23 @@ def analyze_ambiguous_MIPvarnames(debug=[]):
     """
     # Compute a dict which keys are MIP varnames and values = list
     # of CMORvars items for the varname
-    d = dict()
+    d = OrderedDict()
     for v in get_collection('var').items:
         if v.label not in d:
             d[v.label] = []
             if v.label in debug:
-                print "Adding %s" % v.label
+                print("Adding %s" % v.label)
         refs = get_request_by_id_by_sect(v.uid, 'CMORvar')
         for r in refs:
             d[v.label].append(get_uid(r))
             if v.label in debug:
-                print "Adding CmorVar %s(%s) for %s" % (v.label, get_uid(r).mipTable, get_uid(r).label)
+                print("Adding CmorVar %s(%s) for %s" % (v.label, get_uid(r).mipTable, get_uid(r).label))
 
     # Replace dic values by dic of area portion of cell_methods
     for vlabel in d:
         if len(d[vlabel]) > 1:
             cvl = d[vlabel]
-            d[vlabel] = dict()
+            d[vlabel] = OrderedDict()
             for cv in cvl:
                 st = get_uid(cv.stid)
                 cm = None
@@ -74,7 +88,7 @@ def analyze_ambiguous_MIPvarnames(debug=[]):
                     cm = get_uid(st.cmid).cell_methods
                 except:
                     # pass
-                    print "No cell method for %-15s %s(%s)" % (st.label, cv.label, cv.mipTable)
+                    print("No cell method for %-15s %s(%s)" % (st.label, cv.label, cv.mipTable))
                 if cm is not None:
                     area = cellmethod2area(cm)
                     realm = cv.modeling_realm
@@ -82,14 +96,14 @@ def analyze_ambiguous_MIPvarnames(debug=[]):
                         area = None
                     # realm=""
                     if vlabel in debug:
-                        print "for %s 's CMORvar %s(%s), area=%s" % (vlabel, cv.label, cv.mipTable, area)
+                        print("for %s 's CMORvar %s(%s), area=%s" % (vlabel, cv.label, cv.mipTable, area))
                     if realm not in d[vlabel]:
-                        d[vlabel][realm] = dict()
+                        d[vlabel][realm] = OrderedDict()
                     if area not in d[vlabel][realm]:
                         d[vlabel][realm][area] = []
                     d[vlabel][realm][area].append(cv.mipTable)
             if vlabel in debug:
-                print vlabel, d[vlabel]
+                print(vlabel, d[vlabel])
         else:
             d[vlabel] = None
 
@@ -103,22 +117,23 @@ def analyze_ambiguous_MIPvarnames(debug=[]):
                     ambiguous.append((vlabel, (realm, d[vlabel][realm])))
     if "all" in debug:
         for v, p in ambiguous:
-            print v
+            print(v)
             b, d = p
             for r in d:
-                print "\t", r, d[r]
+                print("\t", r, d[r])
     return ambiguous
 
 
 def ping_alias(svar, pingvars, error_on_fail=False):
-    # dans le pingfile, grace a la gestion des interpolations
-    # verticales, on n'attend pas forcement les alias complets des
-    # variables (CMIP6_<label>), on peut se contenter des alias
-    # reduits (CMIP6_<lwps>)
+    """
+    Dans le pingfile, grace a la gestion des interpolations
+    verticales, on n'attend pas forcement les alias complets des
+    variables (CMIP6_<label>), on peut se contenter des alias
+    reduits (CMIP6_<lwps>)
 
-    # par ailleurs, si on a defini un label non ambigu alors on l'utilise
-    # comme ping_alias (i.e. le field_ref)
-
+    par ailleurs, si on a defini un label non ambigu alors on l'utilise
+    comme ping_alias (i.e. le field_ref)
+    """
     pref = get_variable_from_lset_without_default("ping_variables_prefix")
     if svar.label_non_ambiguous:
         # print "+++ non ambiguous", svar.label,svar.label_non_ambiguous
@@ -154,8 +169,10 @@ def analyze_priority(cmvar, lmips):
     return prio
 
 
-# A class for unifying CMOR vars and home variables
 class simple_CMORvar(object):
+    """
+    A class for unifying CMOR vars and home variables
+    """
     def __init__(self):
         self.type = False
         self.modeling_realm = None
@@ -187,9 +204,10 @@ class simple_CMORvar(object):
         self.cmvar = None  # corresponding CMORvar, if any
 
 
-# A class for unifying grid info coming from DR and extra_Tables
-#
 class simple_Dim(object):
+    """
+    A class for unifying grid info coming from DR and extra_Tables
+    """
     def __init__(self):
         self.label = False
         self.zoom_label = False

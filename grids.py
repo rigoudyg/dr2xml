@@ -5,14 +5,30 @@
 Grids general tools.
 """
 
+from __future__ import print_function, division, absolute_import, unicode_literals
+
+from six import string_types
+from functools import reduce
+from collections import OrderedDict
+
 import re
 
-from xml_interface import create_xml_element_from_string, create_string_from_xml_element
-from cfsites import cfsites_grid_id, add_cfsites_in_defs, cfsites_domain_id
-from settings_interface import get_variable_from_lset_without_default, get_variable_from_lset_with_default, is_key_in_lset
-from config import get_config_variable
-from dr_interface import get_collection, get_uid
+# Utilities
 from utils import dr2xml_error
+
+# Global variables and configuration tools
+from config import get_config_variable
+
+# Interface to settings dictionaries
+from settings_interface import get_variable_from_lset_without_default, get_variable_from_lset_with_default, \
+    is_key_in_lset
+# Interface to Data Request
+from dr_interface import get_collection, get_uid
+# Interface to xml tools
+from xml_interface import create_xml_element_from_string, create_string_from_xml_element
+
+# CFsites tools
+from cfsites import cfsites_grid_id, add_cfsites_in_defs, cfsites_domain_id
 
 
 # Next variable is used to circumvent an Xios 1270 shortcoming. Xios
@@ -22,6 +38,9 @@ axis_count = 0
 
 
 def get_grid_def(grid_id, grid_defs):
+    """
+    Get the grid definition corresponding to grid_id from the context_index or the list of grid definitions.
+    """
     context_index = get_config_variable("context_index")
     if grid_id in grid_defs:
         # Simple case : already stored
@@ -37,9 +56,11 @@ def get_grid_def(grid_id, grid_defs):
 
 
 def guess_simple_domain_grid_def(grid_id):
-    # dr2xml sometimes must be able to restconstruct the grid def for a grid which has
-    # just a domain, from the grid_id, using a regexp with a numbered group that matches
-    # domain_name in grid_id. Second item is group number
+    """
+    dr2xml sometimes must be able to reconstruct the grid def for a grid which has
+    just a domain, from the grid_id, using a regexp with a numbered group that matches
+    domain_name in grid_id. Second item is group number
+    """
     regexp = get_variable_from_lset_without_default("simple_domain_grid_regexp")
     domain_id, n = re.subn(regexp[0], r'\%d' % regexp[1], grid_id)
     if n != 1:
@@ -117,7 +138,7 @@ def create_axis_def(sdim, axis_defs, field_defs):
             rep += 'value="(0,%g)[ %s ]"' % (n_glo - 1, sdim.requested)
         else:
             if n_glo != 1:
-                print "Warning: axis for %s is singleton but has %d values" % (sdim.label, n_glo)
+                print("Warning: axis for %s is singleton but has %d values" % (sdim.label, n_glo))
                 return None
             # Singleton case (degenerated vertical dimension)
             rep += 'n_glo="%g" ' % n_glo
@@ -204,6 +225,9 @@ def change_domain_in_grid(domain_id, grid_defs, ping_alias=None, src_grid_id=Non
 
 
 def get_grid_def_with_lset(grid_id, grid_defs):
+    """
+    Get the grid definition corresponding to grid_id.
+    """
     try:
         grid_def = get_grid_def(grid_id, grid_defs)
     except:
@@ -228,7 +252,7 @@ def change_axes_in_grid(grid_id, grid_defs, axis_defs):
     # print "in change_axis for %s "%(grid_id)
 
     # Get settings info about axes normalization
-    aliases = get_variable_from_lset_with_default('non_standard_axes', dict())
+    aliases = get_variable_from_lset_with_default('non_standard_axes', OrderedDict())
 
     # Add cases where dim name 'sector' should be used,if needed
     # sectors = dims which have type charcter and are not scalar
@@ -245,7 +269,7 @@ def change_axes_in_grid(grid_id, grid_defs, axis_defs):
             if aliases[aid] == sector:
                 found = True
                 continue
-            if type(aliases[aid]) == type(()) and aliases[aid][0] == sector:
+            if isinstance(aliases[aid], tuple) and aliases[aid][0] == sector:
                 found = True
                 continue
         if not found:
@@ -261,21 +285,21 @@ def change_axes_in_grid(grid_id, grid_defs, axis_defs):
                 if any([ssub.tag == 'interpolate_axis' for ssub in sub]):
                     continue
                 else:
-                    print "Cannot normalize an axis in grid %s : no axis_ref for axis %s" %\
-                          (grid_id, create_string_from_xml_element(sub))
+                    print("Cannot normalize an axis in grid %s : no axis_ref for axis %s" %
+                          (grid_id, create_string_from_xml_element(sub)))
                     continue
                     # raise dr2xml_error("Grid %s has an axis without axis_ref : %s"%(grid_id,grid_def))
             axis_ref = sub.attrib['axis_ref']
             #
 
             # Just quit if axis doesn't have to be processed
-            if axis_ref not in aliases.keys():
+            if axis_ref not in aliases:
                 # print "for grid ",grid_id,"axis ",axis_ref, " is not in aliases"
                 continue
             #
             dr_axis_id = aliases[axis_ref]
             alt_labels = None
-            if type(dr_axis_id) == type(()):
+            if isinstance(dr_axis_id, tuple):
                 dr_axis_id, alt_labels = dr_axis_id
             dr_axis_id = dr_axis_id.replace('axis_', '')  # For toy_cnrmcm, atmosphere part
             # print ">>> axis_ref=%s, dr_axis_id=%s,alt_labels=%s"%(axis_ref,dr_axis_id,alt_labels),aliases[axis_ref]
@@ -319,7 +343,7 @@ def create_axis_from_dim(dim, labels, axis_ref, axis_defs):
         return axis_id, axis_name
 
     rep = '<axis id="%s" name="%s" axis_ref="%s"' % (axis_id, axis_name, axis_ref)
-    if type(dim.standardName) == type(""):
+    if isinstance(dim.standardName, string_types):
         rep += ' standard_name="%s"' % dim.standardName
     rep += ' long_name="%s"' % dim.title
     #
@@ -336,7 +360,7 @@ def create_axis_from_dim(dim, labels, axis_ref, axis_defs):
         if dim.requested != "":
             nb = len(dim.requested.split())
             rep += ' value="(0,%d)[ ' % nb + dim.requested + ' ]"'
-        if type(dim.boundsRequested) == type([]):
+        if isinstance(dim.boundsRequested, list):
             vals = [" %s" % v for v in dim.boundsRequested]
             valsr = reduce(lambda x, y: x + y, vals)
             rep += ' bounds="(0,1)x(0,%d)[ ' % (nb - 1) + valsr + ' ]"'
@@ -374,6 +398,9 @@ def isVertDim(sdim):
 
 
 def scalar_vertical_dimension(sv):
+    """
+    Return the altLabel attribute if it is a vertical dimension, else None.
+    """
     if 'cids' in sv.struct.__dict__:
         cid = get_uid(sv.struct.cids[0])
         if cid.axis == 'Z':
@@ -382,9 +409,10 @@ def scalar_vertical_dimension(sv):
 
 
 def create_output_grid(ssh, grid_defs, domain_defs, target_hgrid_id, margs):
-    # Build output grid (stored in grid_defs) by analyzing the spatial shape
-    # Including horizontal operations. Can include horiz re-gridding specification
-    # --------------------------------------------------------------------
+    """
+    Build output grid (stored in grid_defs) by analyzing the spatial shape
+    Including horizontal operations. Can include horiz re-gridding specification
+    """
     grid_ref = None
 
     # Compute domain name, define it if needed
@@ -419,3 +447,32 @@ def create_output_grid(ssh, grid_defs, domain_defs, target_hgrid_id, margs):
         raise dr2xml_error(
             "Fatal: Issue with un-managed spatial shape %s for variable %s in table %s" % (ssh, sv.label, table))
     return grid_ref
+
+
+def create_standard_domains(domain_defs):
+    """
+    Add to dictionnary domain_defs the Xios string representation for DR-standard horizontal grids, such as '1deg'
+
+    """
+    # Next definition is just for letting the workflow work when using option dummy='include'
+    # Actually, ping_files for production run at CNRM do not activate variables on that grid (IceSheet vars)
+    domain_defs['25km'] = create_standard_domain('25km', 1440, 720)
+    domain_defs['50km'] = create_standard_domain('50km', 720, 360)
+    domain_defs['100km'] = create_standard_domain('100km', 360, 180)
+    domain_defs['1deg'] = create_standard_domain('1deg', 360, 180)
+    domain_defs['2deg'] = create_standard_domain('2deg', 180, 90)
+
+
+def create_standard_domain(resol, ni, nj):
+    """
+    Create a xml like string corresponding to the domain using resol, ni and nj.
+    """
+    return '<domain id="CMIP6_%s" ni_glo="%d" nj_glo="%d" type="rectilinear"  prec="8"> ' % (resol, ni, nj) + \
+           '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true"  ' \
+           'mode="read_or_compute" write_weight="true" /> ' + \
+           '</domain>  '
+    # return '<domain id="CMIP6_%s" ni_glo="%d" nj_glo="%d" type="rectilinear"  prec="8" lat_name="lat" lon_name="lon" >
+    #  '%(resol,ni,nj) +\
+    #    '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true"  mode="read_or_compute"
+    #  write_weight="true" /> '+\
+    #    '</domain>  '
