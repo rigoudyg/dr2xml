@@ -10,6 +10,7 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 from collections import OrderedDict
 
 import xml.etree.ElementTree as ET
+from xml.dom import minidom
 
 # Configuration variables
 from config import python_version
@@ -34,6 +35,16 @@ def create_string_from_xml_element(xml_element):
         return ET.tostring(xml_element, encoding="unicode")
 
 
+def create_xml_comment(text):
+    return ET.Comment(text)
+
+
+def add_xml_comment_to_element(element, text):
+    element.append(create_xml_comment(text))
+
+
+
+
 def dump_xml_element(xml_element):
     ET.dump(xml_element)
 
@@ -48,3 +59,14 @@ def get_root_of_xml_file(xml_file):
 
 def create_xml_string(tag, attrib):
     return create_string_from_xml_element(create_xml_element(tag, attrib))
+
+
+def create_pretty_string_from_xml_element(xml_element):
+    xml_str = create_string_from_xml_element(xml_element)
+    reparsed = minidom.parseString(xml_str, "utf-8")
+    return reparsed.toprettyxml(indent="\t", newl="\n", encoding="utf-8")
+
+
+def create_pretty_xml_doc(xml_element, filename):
+    with open(filename, "wb") as out:
+        out.write(create_pretty_string_from_xml_element(xml_element))
