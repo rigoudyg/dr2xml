@@ -8,6 +8,7 @@ Tools to compute split frequencies.
 from __future__ import print_function, division, absolute_import, unicode_literals
 
 from collections import OrderedDict
+from io import open
 
 # Utilities
 from utils import dr2xml_grid_error

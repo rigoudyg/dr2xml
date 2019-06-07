@@ -9,6 +9,7 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 
 from six import string_types
 from collections import OrderedDict
+from io import open
 
 import os
 import sys

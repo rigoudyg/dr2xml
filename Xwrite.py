@@ -15,6 +15,7 @@ from collections import OrderedDict
 import json
 import re
 import datetime
+from io import open
 
 # Utilities
 from utils import dr2xml_error
@@ -350,7 +351,7 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
     # Create an other file which will contain the list of file names of perso and dev variables
     list_perso_and_dev_file_name = "dr2xml_list_perso_and_dev_file_names"
     if sv.type in ["perso", "dev"]:
-        with open(list_perso_and_dev_file_name, mode="a") as list_perso_and_dev:
+        with open(list_perso_and_dev_file_name, mode="a", encoding="utf-8") as list_perso_and_dev:
             list_perso_and_dev.write(".*%s_%s_%s_%s_%s_%s.*\n" % (varname_for_filename, table, source_id, expid_in_filename,
                                                                   member_id, grid_label))
     #
@@ -1180,7 +1181,7 @@ def write_xios_file_def(filename, svars_per_table, year, lset, sset, cvs_path, f
     # Start writing XIOS file_def file:
     # file_definition node, including field child-nodes
     # --------------------------------------------------------------------
-    with open(filename, "w") as out:
+    with open(filename, "w", encoding="utf-8") as out:
         out.write('<context id="%s"> \n' % context)
         out.write('<!-- CMIP6 Data Request version %s --> \n' % get_DR_version())
         out.write('<!-- CMIP6-CV version %s --> \n' % "??")

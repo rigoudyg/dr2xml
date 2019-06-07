@@ -14,6 +14,7 @@ import sys
 import os
 import json
 import re
+from io import open
 
 # DR interface
 from dr_interface import get_collection, get_uid, get_CMORvarId_by_label, get_request_by_id_by_sect,\
