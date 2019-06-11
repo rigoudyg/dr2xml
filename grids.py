@@ -12,6 +12,7 @@ from functools import reduce
 from collections import OrderedDict
 
 import re
+import copy
 
 # Utilities
 from utils import dr2xml_error
@@ -25,7 +26,7 @@ from settings_interface import get_variable_from_lset_without_default, get_varia
 # Interface to Data Request
 from dr_interface import get_collection, get_uid
 # Interface to xml tools
-from xml_interface import create_xml_element_from_string, create_string_from_xml_element
+from xml_interface import create_xml_element_from_string, create_string_from_xml_element, create_xml_element, create_xml_sub_element
 
 # CFsites tools
 from cfsites import cfsites_grid_id, add_cfsites_in_defs, cfsites_domain_id
@@ -48,7 +49,7 @@ def get_grid_def(grid_id, grid_defs):
     else:
         if grid_id in context_index:
             # Grid defined through xml
-            grid_def = create_string_from_xml_element(context_index[grid_id])
+            grid_def = context_index[grid_id]
         else:
             raise dr2xml_error("Cannot guess a grid def for %s" % grid_id)
             grid_def = None
@@ -65,7 +66,8 @@ def guess_simple_domain_grid_def(grid_id):
     domain_id, n = re.subn(regexp[0], r'\%d' % regexp[1], grid_id)
     if n != 1:
         raise dr2xml_error("Cannot identify domain name in grid_id %s using regexp %s" % (grid_id, regexp[0]))
-    grid_def = '<grid id="%s" ><domain domain_ref="%s"/></grid>' % (grid_id, domain_id)
+    grid_def = create_xml_element(tag="grid", attrib=dict(id=grid_id))
+    create_xml_sub_element(xml_element=grid_def, tag="domain", attrib=dict(domain_ref=domain_id))
     print("Warning: Guess that structure for grid %s is : %s" % (grid_id, grid_def))
     # raise dr2xml_error("Warning: Guess that structure for grid %s is : %s"%(grid_id,grid_def))
     return grid_def
@@ -84,19 +86,26 @@ def create_grid_def(grid_defs, axis_def, axis_name, src_grid_id):
     """
     src_grid_def = get_grid_def(src_grid_id, grid_defs)
     #
-    # Retrieve axis key from axis definition string
-    axis_key = re.sub(r'.*id= *.([\w_]*).*', r'\1', axis_def.replace('\n', ' '))
+    # Retrieve axis key and remove id= from axis definition
+    axis_key = axis_def.attrib.pop("id")
     target_grid_id = src_grid_id + "_" + axis_key
-    #
-    # Remove id= from axis definition string
-    axis_def = re.sub(r'id= *.([\w_]*).', '', axis_def)
     #
     # Change only first instance of axis_ref, which is assumed to match the vertical dimension
     # Enforce axis_name in axis_def :  TBD
-    (target_grid_def, count) = re.subn('<axis[^\>]*>', axis_def, src_grid_def, 1)
-    if count != 1:
-        raise dr2xml_error("Fatal: cannot find an axis ref in grid %s : %s " % (src_grid_id, src_grid_def))
-    target_grid_def = re.sub('grid id= *.([\w_])*.', 'grid id="%s"' % target_grid_id, target_grid_def)
+    target_grid_def = copy.deepcopy(src_grid_def)
+    for grid_child in src_grid_def:
+        target_grid_def.remove(grid_child)
+    is_axis_changed = False
+    for grid_child in src_grid_def:
+        if not is_axis_changed and grid_child.tag == "axis":
+            target_grid_def.append(axis_def)
+            is_axis_changed = True
+        else:
+            target_grid_def.append(grid_child)
+    if not is_axis_changed:
+        raise dr2xml_error("Fatal: cannot find an axis ref in grid %s : %s " %
+                           (src_grid_id, create_string_from_xml_element(src_grid_def)))
+    target_grid_def.attrib["id"] = target_grid_id
     grid_defs[target_grid_id] = target_grid_def
     return target_grid_id
 
@@ -129,25 +138,27 @@ def create_axis_def(sdim, axis_defs, field_defs):
 
     if not sdim.is_zoom_of:  # pure interpolation
         # Axis is not a zoom of another, write axis_def normally (with value, interpolate_axis,etc.)
-        rep = '<axis id="%s" ' % sdim.label
+        axis_dict = OrderedDict()
+        axis_dict["id"] = sdim.label
         if sdim.positive not in [None, ""]:
-            rep += 'positive="%s" ' % sdim.positive
+            axis_dict['positive']= sdim.positive
         if n_glo > 1:
             # Case of a non-degenerated vertical dimension (not a singleton)
-            rep += 'n_glo="%g" ' % n_glo
-            rep += 'value="(0,%g)[ %s ]"' % (n_glo - 1, sdim.requested)
+            axis_dict["n_glo"] = "%g" % n_glo
+            axis_dict["value"] = "(0,%g)[ %s ]" % (n_glo - 1, sdim.requested)
         else:
             if n_glo != 1:
                 print("Warning: axis for %s is singleton but has %d values" % (sdim.label, n_glo))
                 return None
             # Singleton case (degenerated vertical dimension)
-            rep += 'n_glo="%g" ' % n_glo
-            rep += 'value="(0,0)[ %s ]"' % sdim.value
-        rep += ' name="%s"' % sdim.out_name
-        rep += ' standard_name="%s"' % sdim.stdname
-        rep += ' long_name="%s"' % sdim.long_name
-        rep += ' unit="%s"' % sdim.units
-        rep += '>'
+            axis_dict["n_glo"] = "%g" % n_glo
+            axis_dict["value"] = '(0,0)[ %s ]' % sdim.value
+        axis_dict['name'] = sdim.out_name
+        axis_dict["standard_name"] = sdim.stdname
+        axis_dict["long_name"] = sdim.long_name
+        axis_dict["unit"] = sdim.units
+        axis_xml = create_xml_element(tag="axis", attrib=axis_dict)
+        # Define some other values
         if sdim.stdname == "air_pressure":
             coordname = prefix + "pfull"
         if sdim.stdname == "altitude":
@@ -156,70 +167,78 @@ def create_axis_def(sdim, axis_defs, field_defs):
         # Create an intemediate field for coordinate , just adding time sampling
         operation = get_variable_from_lset_with_default("vertical_interpolation_operation", "instant")
         coordname_with_op = coordname + "_" + operation  # e.g. CMIP6_pfull_instant
-        coorddef_op = '<field id="%-25s field_ref="%-25s operation="%s" detect_missing_value="true"/>' \
-                      % (coordname_with_op + '"', coordname + '"', operation)
+        coorddef_op = create_xml_element(tag="field",
+                                         attrib=OrderedDict(id="%-25s" % coordname_with_op,
+                                                            field_ref="%-25s" % coordname, operation=operation,
+                                                            detect_missing_value="true"))
         field_defs[coordname_with_op] = coorddef_op
         #
         # Create and store a definition for time-sampled field for the vertical coordinate
         vert_frequency = get_variable_from_lset_without_default("vertical_interpolation_sample_freq")
         coordname_sampled = coordname_with_op + "_sampled_" + vert_frequency  # e.g. CMIP6_pfull_instant_sampled_3h
-        rep += '<interpolate_axis type="polynomial" order="1"'
-        rep += ' coordinate="%s"/>\n\t</axis>' % coordname_sampled
+        create_xml_sub_element(xml_element=axis_xml, tag="interpolate_axis",
+                               attrib=OrderedDict(type="polynomial", order=1, coordinate=coordname_sampled))
         # Store definition for the new axis
-        axis_defs[sdim.label] = rep
-        coorddef = '<field id="%-25s field_ref="%-25s freq_op="%-10s detect_missing_value="true"> @%s</field>' \
-                   % (coordname_sampled + '"', coordname_with_op + '"', vert_frequency + '"', coordname)
+        axis_defs[sdim.label] = axis_xml
+        coorddef = create_xml_element(tag="field", text="@%s" % coordname,
+                                      attrib=OrderedDict(id="%-25s" % coordname_sampled,
+                                                         field_ref="%-25s" % coordname_with_op,
+                                                         freq_op="%-10s" % vert_frequency,
+                                                         detect_missing_value="true"))
         field_defs[coordname_sampled] = coorddef
     else:  # zoom case
         # Axis is subset of another, write it as a zoom_axis
-        rep = '<axis id="%s"' % sdim.zoom_label
-        rep += ' axis_ref="%s" name="plev"' % sdim.is_zoom_of
-        rep += ' axis_type="%s">' % sdim.axis
-        rep += '\t<zoom_axis index="(0,%g)[ ' % (n_glo - 1)
-        values = re.sub(r'.*\[ *(.*) *\].*', r'\1', axis_defs[sdim.is_zoom_of])
+        axis_dict = OrderedDict()
+        axis_dict["id"] = sdim.zoom_label
+        axis_dict["axis_ref"] = sdim.zoom_of
+        axis_dict["name"] = "plev"
+        axis_dict["axis_type"] = sdim.axis
+        axis_xml = create_xml_element(tag="axis", attrib=axis_dict)
+        values = re.sub(r'.*\[ *(.*) *\].*', r'\1', axis_defs[sdim.is_zoom_of].attrib["value"])
         values = values.split("\n")[0]
         union_vals = values.strip(" ").split()
         union_vals_num = [float(v) for v in union_vals]
-        for val in glo_list_num:
-            rep += ' %g' % union_vals_num.index(val)
-        rep += ' ]"/>'
-        rep += '</axis>'
+        index_values = "(0, %g)[ %s ]" % (n_glo - 1,
+                                          " ".join(["%g" % union_vals_num.index(val) for val in glo_list_num]))
+        create_xml_sub_element(xml_element=axis_xml, tag="zoom_axis", attrib=OrderedDict(index=index_values))
         # Store definition for the new axis
-        axis_defs[sdim.zoom_label] = rep
-    return rep
+        axis_defs[sdim.zoom_label] = axis_xml
+    return axis_xml
 
 
 def change_domain_in_grid(domain_id, grid_defs, ping_alias=None, src_grid_id=None, turn_into_axis=False,
                           printout=False):
     """
-    Provided with a grid id SRC_GRID_ID or alertnatively a variable name (ALIAS),
-    (SRC_GRID_STRING)
-     - creates ans stores a grid_definition where the domain_id has been changed to DOMAIN_ID
+    Provided with a grid id SRC_GRID_ID or alternatively a variable name (ALIAS),
+    (SRC_GRID)
+     - creates and stores a grid_definition where the domain_id has been changed to DOMAIN_ID
     -  returns its id, which is
     """
     if src_grid_id is None:
         raise dr2xml_error("deprecated")
     else:
-        src_grid_string = get_grid_def_with_lset(src_grid_id, grid_defs)
+        src_grid = get_grid_def_with_lset(src_grid_id, grid_defs)
     target_grid_id = src_grid_id + "_" + domain_id
-    # Change domain
-    domain_or_axis = "domain"
-    axis_name = ""
-    if turn_into_axis:
-        domain_or_axis = "axis"
-        axis_name = ' name="lat"'
     # sequence below was too permissive re. assumption that all grid definition use refs rather than ids
     # (target_grid_string,count)=re.subn('domain *id= *.([\w_])*.','%s id="%s" %s'% \
     # (domain_or_axis,domain_id,axis_name), src_grid_string,1)
     # if count != 1 :
-    (target_grid_string, count) = re.subn('domain *domain_ref= *.([\w_])*.',
-                                          '%s %s_ref="%s" %s' % (domain_or_axis, domain_or_axis, domain_id, axis_name),
-                                          src_grid_string, 1)
-    if count != 1:
-        raise dr2xml_error("Fatal: cannot find a domain to replace by %s"
-                           "in src_grid_string %s, count=%d " % (domain_id, src_grid_string, count))
-    target_grid_string = re.sub('grid *id= *.([\w_])*.', 'grid id="%s"' % target_grid_id, target_grid_string)
-    grid_defs[target_grid_id] = target_grid_string
+    target_grid_xml = copy.deepcopy(src_grid)
+    is_domain_found = False
+    for (rank, grid_child) in src_grid:
+        if not is_domain_found and grid_child.tag == "domain" and "domain_ref" in grid_child.attrib:
+            if turn_into_axis:
+                target_grid_xml[rank].tag = "axis"
+                del target_grid_xml[rank].attrib["domain_ref"]
+                target_grid_xml[rank].attrib["axis_ref"] = domain_id
+                target_grid_xml[rank].attrib["name"] = "lat"
+            else:
+                target_grid_xml[rank].attrib["domain_ref"] = domain_id
+            is_domain_found = True
+    if not is_domain_found:
+        raise dr2xml_error("Fatal: cannot find a domain to replace by %s in src_grid_string %s" % (domain_id, src_grid))
+    target_grid_xml.attrib["id"] = target_grid_id
+    grid_defs[target_grid_id] = target_grid_xml
     # print "target_grid_id=%s : %s"%(target_grid_id,target_grid_string)
     return target_grid_id
 
@@ -246,7 +265,6 @@ def change_axes_in_grid(grid_id, grid_defs, axis_defs):
     """
     global axis_count
     grid_def = get_grid_def(grid_id, grid_defs)
-    grid_el = create_xml_element_from_string(grid_def)
     output_grid_id = grid_id
     axes_to_change = []
     # print "in change_axis for %s "%(grid_id)
@@ -276,7 +294,7 @@ def change_axes_in_grid(grid_id, grid_defs, axis_defs):
             # print "\nadding sector : %s"%sector
             aliases[sector] = sector
 
-    for sub in grid_el:
+    for sub in grid_def:
         if sub.tag == 'axis':
             # print "checking grid %s"%grid_def
             if 'axis_ref' not in sub.attrib:
@@ -319,12 +337,15 @@ def change_axes_in_grid(grid_id, grid_defs, axis_defs):
                 raise dr2xml_error("Dimension %s is scalar and shouldn't be quoted in 'non_standard_axes'" % dr_axis_id)
     if len(axes_to_change) == 0:
         return grid_id
-    for old, new, name in axes_to_change:
-        axis_count += 1
-        grid_def = re.sub("< *axis[^>]*axis_ref= *.%s. *[^>]*>" % old,
-                          '<axis axis_ref="%s" name="%s" id="ref_to_%s_%d"/>' % (new, name, new, axis_count), grid_def)
-    grid_def = re.sub("< *grid([^>]*)id= *.%s.( *[^>]*)>" % grid_id,
-                      r'<grid\1id="%s"\2>' % output_grid_id, grid_def)
+    for (rank, grid_child) in enumerate(grid_def):
+        axes_to_change_new = list()
+        for old, new, name in axes_to_change:
+            if grid_child.tag == "axis" and "axis_ref" in grid_child.attr and grid_child.attr["axis_ref"] == old:
+                grid_def[rank].attr = OrderedDict(axis_ref=new, name=name, id="ref_to_%s_%d" % (new, axis_count))
+            else:
+                axes_to_change_new.append((old, new, name))
+        axes_to_change = axes_to_change_new
+    grid_def.attr["id"] = output_grid_id
     grid_defs[output_grid_id] = grid_def
     return output_grid_id
 
@@ -342,30 +363,33 @@ def create_axis_from_dim(dim, labels, axis_ref, axis_defs):
     if axis_id in axis_defs:
         return axis_id, axis_name
 
-    rep = '<axis id="%s" name="%s" axis_ref="%s"' % (axis_id, axis_name, axis_ref)
+    rep_dict = OrderedDict()
+    rep_dict["id"] = axis_id
+    rep_dict["name"] = axis_name
+    rep_dict["axis_ref"] = axis_ref
     if isinstance(dim.standardName, string_types):
-        rep += ' standard_name="%s"' % dim.standardName
-    rep += ' long_name="%s"' % dim.title
+        rep_dict["standard_name"] = dim.standardName
+    rep_dict["long_name"] = dim.title
     #
     if dim.type == "double":
-        rep += ' prec="8"'
+        rep_dict["prec"] = 8
     elif dim.type in ["integer", "int"]:
-        rep += ' prec="2"'
+        rep_dict["prec"] = 2
     elif dim.type == "float":
-        rep += ' prec="4"'
+        rep_dict["prec"] = 4
     #
     if dim.units != '':
-        rep += ' unit="%s"' % dim.units
+        rep_dict["unit"] = dim.units
     if dim.type != "character":
         if dim.requested != "":
             nb = len(dim.requested.split())
-            rep += ' value="(0,%d)[ ' % nb + dim.requested + ' ]"'
+            rep_dict["value"] = "(0,%d)[ %s ]" % (nb, dim.requested)
         if isinstance(dim.boundsRequested, list):
             vals = [" %s" % v for v in dim.boundsRequested]
             valsr = reduce(lambda x, y: x + y, vals)
-            rep += ' bounds="(0,1)x(0,%d)[ ' % (nb - 1) + valsr + ' ]"'
+            rep_dict["bounds"] = "(0,1)x(0,%d)[ %s ]" % (nb - 1, valsr)
     else:
-        rep += ' dim_name="%s" ' % dim.altLabel
+        rep_dict["dim_name"] = dim.altLabel
         if labels is None:
             labels = dim.requested
         if dim.label == "oline" and get_variable_from_lset_with_default('add_Gibraltar', False):
@@ -377,8 +401,8 @@ def create_axis_from_dim(dim, labels, axis_ref, axis_defs):
         for s in labels.split():
             strings += "%s " % s
         if length > 0:
-            rep += ' label="(0,%d)[ %s ]"' % (length - 1, strings)
-    rep += "/>"
+            rep_dict["label"] = "(0,%d)[ %s ]" % (length - 1, strings)
+    rep = create_xml_element(tag="axis", attrib=rep_dict)
     axis_defs[axis_id] = rep
     # print "new DR_axis :  %s "%rep
     return axis_id, axis_name
@@ -467,12 +491,10 @@ def create_standard_domain(resol, ni, nj):
     """
     Create a xml like string corresponding to the domain using resol, ni and nj.
     """
-    return '<domain id="CMIP6_%s" ni_glo="%d" nj_glo="%d" type="rectilinear"  prec="8"> ' % (resol, ni, nj) + \
-           '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true"  ' \
-           'mode="read_or_compute" write_weight="true" /> ' + \
-           '</domain>  '
-    # return '<domain id="CMIP6_%s" ni_glo="%d" nj_glo="%d" type="rectilinear"  prec="8" lat_name="lat" lon_name="lon" >
-    #  '%(resol,ni,nj) +\
-    #    '<generate_rectilinear_domain/> <interpolate_domain order="1" renormalize="true"  mode="read_or_compute"
-    #  write_weight="true" /> '+\
-    #    '</domain>  '
+    rep = create_xml_element(tag="domain", attrib=OrderedDict(id="CMIP6_%s" % resol, ni_glo=ni, nj_glo=nj,
+                                                              type="rectilinear", prec=8))
+    create_xml_sub_element(xml_element=rep, tag="generate_rectilinear_domain")
+    create_xml_sub_element(xml_element=rep, tag="interpolate_domain",
+                           attrib=OrderedDict(order=1, renormalize="true", mode="read_or_compute", write_weight="true"))
+    return rep
+
