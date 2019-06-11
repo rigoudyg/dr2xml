@@ -67,7 +67,7 @@ def create_xml_string(tag, attrib):
 
 def create_pretty_string_from_xml_element(xml_element):
     xml_str = create_string_from_xml_element(xml_element)
-    reparsed = minidom.parseString(xml_str, "utf-8")
+    reparsed = minidom.parseString(xml_str)
     return reparsed.toprettyxml(indent="\t", newl="\n", encoding="utf-8")
 
 

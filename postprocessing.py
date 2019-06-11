@@ -273,7 +273,7 @@ def process_diurnal_cycle(alias, field_defs, grid_defs, axis_defs, printout=Fals
 
     # 3- create an axis of 24 values having sub-construct 'time splitting'; axis id is "24h_axis"
     axis_24h_id = "hour_in_diurnal_cycle"
-    axis_24h = create_xml_element(tag="axis", attrib=dict(id=axis_24h_id, n_glo=24, name="time3", unit="days since ?",
+    axis_24h = create_xml_element(tag="axis", attrib=dict(id=axis_24h_id, n_glo="24", name="time3", unit="days since ?",
                                                           standard_name="time",
                                                           value="(0,23)[%s]" % " ".join(["%g" % (i + 0.5)
                                                                                          for i in range(0,24)])))

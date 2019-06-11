@@ -43,11 +43,11 @@ def add_cfsites_in_defs(grid_defs, domain_defs):
     create_xml_sub_element(xml_element=grid_xml, tag="domain", attrib=dict(domain_ref=cfsites_domain_id))
     grid_defs[cfsites_grid_id] = grid_xml
 
-    domain_dict = dict(id=cfsites_domain_id, type="unstructured", prec=8, lat_name="latitude", lon_name="longitude",
+    domain_dict = dict(id=cfsites_domain_id, type="unstructured", prec='8', lat_name="latitude", lon_name="longitude",
                        dim_i_name="site")
     domain_xml = create_xml_element(tag="domain", attrib=domain_dict)
     create_xml_sub_element(xml_element=domain_xml, tag="generate_rectilinear_domain")
-    create_xml_sub_element(xml_element=domain_xml, tag="interpolate_domain", attrib=dict(order=1, renormalize="true",
+    create_xml_sub_element(xml_element=domain_xml, tag="interpolate_domain", attrib=dict(order="1", renormalize="true",
                                                                                          mode="read_or_compute",
                                                                                          write_weight="true"))
     domain_defs[cfsites_radix] = domain_xml

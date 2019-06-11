@@ -93,7 +93,8 @@ def create_grid_def(grid_defs, axis_def, axis_name, src_grid_id):
     # Change only first instance of axis_ref, which is assumed to match the vertical dimension
     # Enforce axis_name in axis_def :  TBD
     target_grid_def = copy.deepcopy(src_grid_def)
-    for grid_child in src_grid_def:
+    target_grid_def_children = [x for x in target_grid_def]
+    for grid_child in target_grid_def_children:
         target_grid_def.remove(grid_child)
     is_axis_changed = False
     for grid_child in src_grid_def:
@@ -177,7 +178,7 @@ def create_axis_def(sdim, axis_defs, field_defs):
         vert_frequency = get_variable_from_lset_without_default("vertical_interpolation_sample_freq")
         coordname_sampled = coordname_with_op + "_sampled_" + vert_frequency  # e.g. CMIP6_pfull_instant_sampled_3h
         create_xml_sub_element(xml_element=axis_xml, tag="interpolate_axis",
-                               attrib=OrderedDict(type="polynomial", order=1, coordinate=coordname_sampled))
+                               attrib=OrderedDict(type="polynomial", order="1", coordinate=coordname_sampled))
         # Store definition for the new axis
         axis_defs[sdim.label] = axis_xml
         coorddef = create_xml_element(tag="field", text="@%s" % coordname,
@@ -225,7 +226,7 @@ def change_domain_in_grid(domain_id, grid_defs, ping_alias=None, src_grid_id=Non
     # if count != 1 :
     target_grid_xml = copy.deepcopy(src_grid)
     is_domain_found = False
-    for (rank, grid_child) in src_grid:
+    for (rank, grid_child) in enumerate(src_grid):
         if not is_domain_found and grid_child.tag == "domain" and "domain_ref" in grid_child.attrib:
             if turn_into_axis:
                 target_grid_xml[rank].tag = "axis"
@@ -340,12 +341,12 @@ def change_axes_in_grid(grid_id, grid_defs, axis_defs):
     for (rank, grid_child) in enumerate(grid_def):
         axes_to_change_new = list()
         for old, new, name in axes_to_change:
-            if grid_child.tag == "axis" and "axis_ref" in grid_child.attr and grid_child.attr["axis_ref"] == old:
-                grid_def[rank].attr = OrderedDict(axis_ref=new, name=name, id="ref_to_%s_%d" % (new, axis_count))
+            if grid_child.tag == "axis" and "axis_ref" in grid_child.attrib and grid_child.attrib["axis_ref"] == old:
+                grid_def[rank].attrib = OrderedDict(axis_ref=new, name=name, id="ref_to_%s_%d" % (new, axis_count))
             else:
                 axes_to_change_new.append((old, new, name))
         axes_to_change = axes_to_change_new
-    grid_def.attr["id"] = output_grid_id
+    grid_def.attrib["id"] = output_grid_id
     grid_defs[output_grid_id] = grid_def
     return output_grid_id
 
@@ -372,11 +373,11 @@ def create_axis_from_dim(dim, labels, axis_ref, axis_defs):
     rep_dict["long_name"] = dim.title
     #
     if dim.type == "double":
-        rep_dict["prec"] = 8
+        rep_dict["prec"] = '8'
     elif dim.type in ["integer", "int"]:
-        rep_dict["prec"] = 2
+        rep_dict["prec"] = '2'
     elif dim.type == "float":
-        rep_dict["prec"] = 4
+        rep_dict["prec"] = '4'
     #
     if dim.units != '':
         rep_dict["unit"] = dim.units
@@ -491,10 +492,11 @@ def create_standard_domain(resol, ni, nj):
     """
     Create a xml like string corresponding to the domain using resol, ni and nj.
     """
-    rep = create_xml_element(tag="domain", attrib=OrderedDict(id="CMIP6_%s" % resol, ni_glo=ni, nj_glo=nj,
-                                                              type="rectilinear", prec=8))
+    rep = create_xml_element(tag="domain", attrib=OrderedDict(id="CMIP6_%s" % resol, ni_glo="%d" % ni, nj_glo="%d" % nj,
+                                                              type="rectilinear", prec="8"))
     create_xml_sub_element(xml_element=rep, tag="generate_rectilinear_domain")
     create_xml_sub_element(xml_element=rep, tag="interpolate_domain",
-                           attrib=OrderedDict(order=1, renormalize="true", mode="read_or_compute", write_weight="true"))
+                           attrib=OrderedDict(order="1", renormalize="true", mode="read_or_compute",
+                                              write_weight="true"))
     return rep
 
