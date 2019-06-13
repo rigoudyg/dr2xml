@@ -361,12 +361,15 @@ def xml_parser(xml_string):
     return text, header, root_element
 
 
+def xml_file_parser(xml_file):
+    with open(xml_file) as opened_file:
+        xml_content = opened_file.readlines()
+    xml_string = "\n".join(xml_content)
+    return xml_parser(xml_string)
+
 if __name__ == "__main__":
     my_xml_file = "/home/rigoudyg/dev/dr2xml/tests/test_a4SST_AGCM_1960/output_test_python2/dr2xml_trip.xml"
-    with open(my_xml_file) as my_file:
-        xml_content = my_file.readlines()
-    xml_string = "\n".join(xml_content)
-    text, header, root_element = xml_parser(xml_string)
+    text, header, root_element = xml_file_parser(my_xml_file)
     print(text)
     print(header.dump())
     print(root_element.dump())

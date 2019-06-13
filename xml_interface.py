@@ -11,38 +11,31 @@ from collections import OrderedDict
 
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
+import xml_writer
 
 # Configuration variables
 from config import python_version
 
 
 def create_xml_element(tag, attrib=OrderedDict(), text=None):
-    element = ET.Element(tag=tag, attrib=attrib)
-    if text is not None:
-        element.text = text
-    return element
+    return xml_writer.Element(tag=tag, attrib=attrib, text=text)
 
 
 def create_xml_sub_element(xml_element, tag, attrib=OrderedDict(), text=None):
-    element = ET.SubElement(parent=xml_element, tag=tag, attrib=attrib)
-    if text is not None:
-        element.text = text
-    return element
+    subelement = xml_writer.Element(tag=tag, attrib=attrib, text=text)
+    xml_element.append(subelement)
 
 
 def create_xml_element_from_string(string):
-    return ET.fromstring(string)
+    return xml_writer.xml_parser(string)
 
 
 def create_string_from_xml_element(xml_element):
-    if python_version == "python2":
-        return ET.tostring(xml_element)
-    else:
-        return ET.tostring(xml_element, encoding="unicode")
+    return xml_element.dump()
 
 
 def create_xml_comment(text):
-    return ET.Comment(text)
+    return xml_writer.Comment(comment=text)
 
 
 def add_xml_comment_to_element(element, text):
@@ -50,19 +43,20 @@ def add_xml_comment_to_element(element, text):
 
 
 def dump_xml_element(xml_element):
-    ET.dump(xml_element)
+    return xml_element.dump()
 
 
 def parse_xml_file(xml_file):
-    return ET.parse(xml_file)
+    return xml_writer.xml_file_parser(xml_file)
 
 
 def get_root_of_xml_file(xml_file):
-    return parse_xml_file(xml_file).getroot()
+    text, header, root_element = parse_xml_file(xml_file)
+    return root_element
 
 
-def create_xml_string(tag, attrib):
-    return create_string_from_xml_element(create_xml_element(tag, attrib))
+def create_xml_string(tag, attrib=OrderedDict(), text=None):
+    return create_string_from_xml_element(create_xml_element(tag=tag, attrib=attrib, text=text))
 
 
 def create_pretty_string_from_xml_element(xml_element):
@@ -71,9 +65,14 @@ def create_pretty_string_from_xml_element(xml_element):
     return reparsed.toprettyxml(indent="\t", newl="\n", encoding="utf-8")
 
 
+def create_header():
+    return xml_writer.Header(tag="xml", attrib=OrderedDict(version="1.0", encoding="utf-8"))
+
+
 def create_pretty_xml_doc(xml_element, filename):
     with open(filename, "wb") as out:
-        out.write(create_pretty_string_from_xml_element(xml_element))
+        xml_header = create_header()
+        out.write("\n".join([xml_header.dump(), xml_element.dump]))
 
 
 def remove_subelement_in_xml_element(xml_element, tag=None, attrib=OrderedDict()):

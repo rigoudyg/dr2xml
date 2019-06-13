@@ -280,7 +280,7 @@ def process_diurnal_cycle(alias, field_defs, grid_defs, axis_defs, printout=Fals
     create_xml_sub_element(xml_element=axis_24h, tag="temporal_splitting")
     axis_defs[axis_24h_id] = axis_24h
     if printout:
-        print("***>", create_xml_sub_element(axis_24h))
+        print("***>", create_string_from_xml_element(axis_24h))
 
     # 4- create a grid composed of ALIAS's original grid extended by that axis; id is <grid_id>_24h_grid
     grid_24h_id = grid_id + "_plus_axis24h"

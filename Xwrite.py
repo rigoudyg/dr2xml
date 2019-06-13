@@ -448,7 +448,7 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
     dict_file["convention_str"] = get_config_variable("conventions")
     # out.write(' description="A %s result for experiment %s of %s"'%
     #            (lset['source_id'],sset['experiment_id'],sset.get('project',"CMIP6")))
-    xml_file = create_xml_sub_element(xml_element=out, tag="file", attrib=dict_file)
+    xml_file = create_xml_element(tag="file", attrib=dict_file)
     #
     if isinstance(activity_id, list):
         activity_idr = reduce(lambda x, y: x + " " + y, activity_id)
@@ -669,6 +669,8 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
                                attrib=dict(field_ref="%s%s" % (ping_variable_prefix, tab), name=tab.replace('h', ''),
                                            long_name=names[tab], operation="once", prec="8"))
     actually_written_vars.append((sv.label, sv.long_name, sv.mipTable, sv.frequency, sv.Priority, sv.spatial_shp))
+    # Add content to xml_file to out
+    out.append(xml_file)
 
 
 def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_defs, domain_defs, scalar_defs, dummies,
@@ -1217,8 +1219,8 @@ def write_xios_file_def(filename, svars_per_table, year, lset, sset, cvs_path, f
     domain_defs = OrderedDict()
     foo, sourcetype = get_source_id_and_type()
     # Add xml_file_definition
-    xml_file_definition = create_xml_sub_element(xml_element=xml_context, tag="file_definition",
-                                                 attrib=OrderedDict(type="one_file", enabled="true"))
+    xml_file_definition = create_xml_element(tag="file_definition",
+                                             attrib=OrderedDict(type="one_file", enabled="true"))
     # Loop on values to fill the xml element
     for table in sorted(list(svars_per_table)):
         count = OrderedDict()
@@ -1247,6 +1249,7 @@ def write_xios_file_def(filename, svars_per_table, year, lset, sset, cvs_path, f
     # Add other file definitions
     for file_def in file_defs:
         xml_file_definition.append(file_defs[file_def])
+    xml_context.append(xml_file_definition)
     #
     # --------------------------------------------------------------------
     # End writing XIOS file_def file:
@@ -1254,44 +1257,50 @@ def write_xios_file_def(filename, svars_per_table, year, lset, sset, cvs_path, f
     # and domain_definition auxilliary nodes
     # --------------------------------------------------------------------
     # Write all domain, axis, field defs needed for these file_defs
-    xml_field_definition = create_xml_sub_element(xml_element=xml_context, tag="field_definition")
+    xml_field_definition = create_xml_element(tag="field_definition")
     is_reset_field_group = get_variable_from_lset_with_default("nemo_sources_management_policy_master_of_the_world",
                                                                False) and context == 'nemo'
     if is_reset_field_group:
-        xml_field_group = create_xml_sub_element(xml_element=xml_field_definition, tag="field_group",
-                                                 attrib=OrderedDict(freq_op="_reset_", freq_offset="_reset_"))
+        xml_field_group = create_xml_element(tag="field_group",
+                                             attrib=OrderedDict(freq_op="_reset_", freq_offset="_reset_"))
         for xml_field in list(field_defs):
             xml_field_group.append(field_defs[xml_field])
+        xml_field_definition.append(xml_field_group)
     else:
         for xml_field in list(field_defs):
             xml_field_definition.append(field_defs[xml_field])
+    xml_context.append(xml_field_definition)
     #
-    xml_axis_definition = create_xml_sub_element(xml_element=xml_context, tag="axis_definition")
-    xml_axis_group = create_xml_sub_element(xml_element=xml_axis_definition, tag="axis_group",
-                                            attrib=OrderedDict(prec="8"))
+    xml_axis_definition = create_xml_element(tag="axis_definition")
+    xml_axis_group = create_xml_element(tag="axis_group", attrib=OrderedDict(prec="8"))
     for xml_axis in list(axis_defs):
         xml_axis_group.append(axis_defs[xml_axis])
     if False and get_variable_from_lset_with_default('use_union_zoom', False):
         for xml_axis in list(union_axis_defs):
             xml_axis_group.append(union_axis_defs[xml_axis])
+    xml_axis_definition.append(xml_axis_group)
+    xml_context.append(xml_axis_definition)
     #
-    xml_domain_definition = create_xml_sub_element(xml_element=xml_context, tag="domain_definition")
-    xml_domain_group = create_xml_sub_element(xml_element=xml_domain_definition, tag="domain_group",
-                                              attrib=OrderedDict(prec="8"))
+    xml_domain_definition = create_xml_element(tag="domain_definition")
+    xml_domain_group = create_xml_element(tag="domain_group", attrib=OrderedDict(prec="8"))
     if get_variable_from_lset_without_default('grid_policy') != "native":
         create_standard_domains(domain_defs)
     for xml_domain in list(domain_defs):
         xml_domain_group.append(domain_defs[xml_domain])
+    xml_domain_definition.append(xml_domain_group)
+    xml_context.append(xml_domain_definition)
     #
-    xml_grid_definition = create_xml_sub_element(xml_element=xml_context, tag="grid_definition")
+    xml_grid_definition = create_xml_element(tag="grid_definition")
     for xml_grid in list(grid_defs):
         xml_grid_definition.append(grid_defs[xml_grid])
     if False and get_variable_from_lset_with_default('use_union_zoom', False):
         for xml_grid in list(union_grid_defs):
             xml_grid_definition.append(union_grid_defs[xml_grid])
+    xml_context.append(xml_grid_definition)
     #
-    xml_scalar_definition = create_xml_sub_element(xml_element=xml_context, tag="scalar_definition")
+    xml_scalar_definition = create_xml_element(tag="scalar_definition")
     for xml_scalar in list(scalar_defs):
         xml_scalar_definition.append(scalar_defs[xml_scalar])
+    xml_context.append(xml_scalar_definition)
     # Write the xml element to the dedicated file
     create_pretty_xml_doc(xml_element=xml_context, filename=filename)
