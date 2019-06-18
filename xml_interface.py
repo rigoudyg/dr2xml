@@ -51,7 +51,7 @@ def parse_xml_file(xml_file):
 
 
 def get_root_of_xml_file(xml_file):
-    text, header, root_element = parse_xml_file(xml_file)
+    text, comments, header, root_element = parse_xml_file(xml_file)
     return root_element
 
 

@@ -41,6 +41,7 @@ def read_src(elt, path_parse, printout=False, level=0, dont_read=[]):
     """
     Recursively reads the subfiles indicated by tag 'src' in childs of ELT
     """
+    printout = True
     childs = []
     for child in elt:
         if 'src' in child.attrib:

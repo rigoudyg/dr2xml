@@ -21,111 +21,15 @@ class Beacon(object):
     """
     def __init__(self):
         self.level = 0
+        self.attrib = OrderedDict()
+        self.children = list()
+        self.tag = None
 
     def __str__(self):
         return self.dump()
 
     def __repr__(self):
         return self.dump()
-
-    def is_xml_element(self):
-        return isinstance(self, (Beacon, Element, Comment, Header))
-
-    def dump(self):
-        raise NotImplementedError()
-
-    def update_level(self, new_level):
-        if self.level != new_level:
-            self.level = new_level
-
-    def copy(self):
-        element = Beacon()
-        element.level = self.level
-        return element
-
-    def _dump_attrib(self, sorted=False):
-        if len(self.attrib) > 0:
-            if sorted:
-                return " ".join(['{}="{}"'.format(key, self.attrib[key]) for key in sorted(list(self.attrib))])
-            else:
-                return " ".join(['{}="{}"'.format(key, value) for (key, value) in self.attrib.items()])
-        else:
-            return None
-
-
-class Comment(Beacon):
-    """
-    Class to deal with XML comments.
-    """
-    def __init__(self, comment):
-        super(Comment, self).__init__()
-        # Deal with comment attribute
-        if not isinstance(comment, str):
-            comment = str(comment)
-        self.comment = comment
-
-    def copy(self):
-        element = super(Element, self).copy()
-        element.comment = self.comment
-        return element
-
-    def dump(self):
-        return "\t"*self.level+"<!-- {} -->".format(self.comment)
-
-    def copy(self):
-        element = super(Comment, self).copy()
-        element.comment = self.comment
-
-
-class Header(Beacon):
-    """
-    Class to deal with xml header.
-    """
-    def __init__(self, tag, attrib=OrderedDict()):
-        super(Header, self).__init__()
-        # Deal with attrib attribute
-        if not isinstance(attrib, (dict, OrderedDict)):
-            raise TypeError("attrib must be a dict or an OrderDict.")
-        self.attrib = attrib
-        self.tag = tag
-
-    def copy(self):
-        element = super(Element, self).copy()
-        element.tag = self.tag
-        element.attrib = copy.deepcopy(self.attrib)
-        return element
-
-    def dump(self):
-        offset = "\t" * self.level
-        if len(self.attrib) > 0:
-            return offset + '<?{} {} ?>'.format(self.tag, self._dump_attrib())
-        else:
-            return offset + '<?{} ?>'.format(self.tag)
-
-
-class Element(Beacon):
-    """
-    Class to deal with xml elements.
-    """
-    def __init__(self, tag, text=None, attrib=OrderedDict()):
-        super(Element, self).__init__()
-        # Deal with tag attribute
-        if not isinstance(tag, str):
-            tag = str(tag)
-        self.tag = tag
-        # Deal with attrib attribute
-        if not isinstance(attrib, (dict, OrderedDict)):
-            raise TypeError("attrib must be a dict or an OrderDict.")
-        self.attrib = attrib
-        # Deal with text attribute
-        if text is not None and not isinstance(text, str):
-            text = str(text)
-        self.text = text
-        # Deal with children attribute
-        self.children = list()
-
-    def __len__(self):
-        return len(self.children)
 
     def __getitem__(self, index):
         return self.children[index]
@@ -136,22 +40,46 @@ class Element(Beacon):
     def __delitem__(self, index):
         del self.children[index]
 
-    def copy(self):
-        element = super(Element, self).copy()
-        element.tag = self.tag
-        element.attrib = copy.deepcopy(self.attrib)
-        element.text = self.text
-        element.children = self.children
-        return element
+    def is_xml_element(self):
+        return isinstance(self, (Beacon, Element, Comment, Header))
+
+    def dump(self):
+        raise NotImplementedError()
 
     def update_level(self, new_level):
         if self.level != new_level:
             self.level = new_level
-            if len(self) > 0:
+            if len(self.children) > 0:
                 i = 0
                 while i < len(self.children):
                     self.children[i].update_level(new_level + 1)
                     i += 1
+
+    def copy(self):
+        element = Beacon()
+        element.level = self.level
+        element.attrib = copy.deepcopy(self.attrib)
+        element.children = self.children
+        element.tag = self.tag
+        return element
+
+    @staticmethod
+    def correct_attrib(attrib):
+        if not isinstance(attrib, (dict, OrderedDict)):
+            raise TypeError("attrib must be a dict or an OrderDict.")
+        corrected_attrib = OrderedDict()
+        for (key, value) in attrib.items():
+            corrected_attrib[str(key)] = str(value)
+        return corrected_attrib
+
+    def _dump_attrib(self, sorted=False):
+        if len(self.attrib) > 0:
+            if sorted:
+                return " ".join(['{}="{}"'.format(key, self.attrib[key]) for key in sorted(list(self.attrib))])
+            else:
+                return " ".join(['{}="{}"'.format(key, value) for (key, value) in self.attrib.items()])
+        else:
+            return None
 
     def append(self, element):
         if not element.is_xml_element():
@@ -179,7 +107,80 @@ class Element(Beacon):
         self.children.remove(element)
 
     def _dump_children(self):
-        return "\n".join(child.dump() for child in self.children)
+        if len(self.children) > 0:
+            return "\n".join([child.dump() for child in self.children])
+        else:
+            return ""
+
+
+class Comment(Beacon):
+    """
+    Class to deal with XML comments.
+    """
+    def __init__(self, comment):
+        super(Comment, self).__init__()
+        # Deal with comment attribute
+        self.comment = comment
+        #self.comment = str(comment)
+
+    def copy(self):
+        element = super(Element, self).copy()
+        element.comment = self.comment
+        return element
+
+    def dump(self):
+        rep = "\t"*self.level+"<!-- %s -->" % self.comment
+        return rep.encode("utf-8")
+
+    def copy(self):
+        element = super(Comment, self).copy()
+        element.comment = self.comment
+
+
+class Header(Beacon):
+    """
+    Class to deal with xml header.
+    """
+    def __init__(self, tag, attrib=OrderedDict()):
+        super(Header, self).__init__()
+        # Deal with attrib attribute
+        self.attrib = copy.deepcopy(attrib)
+        #self.attrib = self.correct_attrib(attrib)
+        self.tag = tag
+        #self.tag = str(tag)
+
+    def dump(self):
+        offset = "\t" * self.level
+        if len(self.attrib) > 0:
+            rep = offset + '<?{} {} ?>'.format(self.tag, self._dump_attrib())
+        else:
+            rep = offset + '<?{} ?>'.format(self.tag)
+        return rep.encode("utf-8")
+
+
+class Element(Beacon):
+    """
+    Class to deal with xml elements.
+    """
+    def __init__(self, tag, text=None, attrib=OrderedDict()):
+        super(Element, self).__init__()
+        # Deal with tag attribute
+        self.tag = tag
+        #self.tag = str(tag)
+        # Deal with attrib attribute
+        self.attrib = copy.deepcopy(attrib)
+        #self.attrib = self.correct_attrib(attrib)
+        # Deal with text attribute
+        self.text = text
+        #self.text = str(text)
+
+    def __len__(self):
+        return len(self.children)
+
+    def copy(self):
+        element = super(Element, self).copy()
+        element.text = self.text
+        return element
 
     def dump(self):
         offset = "\t" * self.level
@@ -204,11 +205,25 @@ class Element(Beacon):
             rep = "{}< {} />".format(offset, header)
         else:
             rep = "{}< {} >{}</ {} >".format(offset, header, content, self.tag)
-        return rep
+        return rep.encode("utf-8")
 
 
 # XML parser tools
 _dict_regexp = re.compile(r"(?P<key>\S+)=(?P<value>[\S]+)")
+_xml_header_regexp = re.compile(r'(<\?\s*\w*\s*(([^><])*)\s*\?>)')
+_xml_header_regexp_begin = re.compile(r'^<\?\s*(?P<tag>\w*)\s*(?P<attrib>([^><])*)\s*\?>')
+_xml_comment_regexp = re.compile(r"^(?P<all><\!--\s*(?P<comment>((?!<!--)(?!-->).)+)\s*-->)")
+_xml_single_part_element_regexp = re.compile(r'^(?P<all><\s*(?P<tag>\w+)\s*(?P<attrib>([^><])*)\s*/>)')
+#_xml_init_two_parts_element_regexp = re.compile(r'^(?P<begin><\s*(?P<tag>\w+)\s*(?P<attrib>([^><])*)\s*>)')
+_xml_string_first_element_replace = r'(?P<begin><\s*(?P<tag>{})\s*(?P<attrib>([^><])*)\s*>)'
+_xml_string_init_element_replace = r'^'+_xml_string_first_element_replace
+_xml_init_two_parts_element_regexp = re.compile(_xml_string_init_element_replace.format(r"\w+"))
+_xml_string_content_element = r'(?P<content>\s*{}\s*)'
+_xml_string_end_element_replace = r'(?P<end></\s*{}\s*>)'
+_xml_string_two_parts_element_replace = _xml_string_init_element_replace + _xml_string_content_element + \
+                                        _xml_string_end_element_replace
+
+
 def _build_dict_attrib(dict_string):
     dict_string = dict_string.strip()
     string_match = _dict_regexp.findall(dict_string)
@@ -218,9 +233,7 @@ def _build_dict_attrib(dict_string):
     return attrib
 
 
-_xml_header_regexp = re.compile(r'(<\?\s*\w*\s*(\w+=[\w+|\s+|"|\.|\-]+)*\s*\?>)')
-_xml_header_regexp_begin = re.compile(r'^<\?\s*(?P<tag>\w*)\s*(?P<attrib>(\w+=[\w+|\s+|"|\.|\-]+)*)\s*\?>')
-def _find_xml_header(xml_string):
+def _find_xml_header(xml_string, verbose=False):
     pattern_findall = _xml_header_regexp.findall(xml_string)
     if len(pattern_findall) > 1:
         raise Exception("There should be only one header in an XML document.")
@@ -239,29 +252,53 @@ def _find_xml_header(xml_string):
             return xml_string, header
 
 
-_xml_comment_regexp = re.compile(r"^(?P<all><\!--\s*(?P<comment>.*)\s*-->)")
-def _find_comment(xml_string):
+def _find_xml_comment(xml_string, verbose=False):
+    if verbose:
+        print("<<<find_xml_comment: XML_STRING before>>>", len(xml_string), xml_string)
     match_comment = _xml_comment_regexp.match(xml_string)
     if not match_comment:
+        if verbose:
+            print("<<<find_xml_comment: XML_STRING after>>>", len(xml_string), xml_string)
         return xml_string, None
     else:
         text = match_comment.groupdict()["comment"]
+        text = text.strip()
         comment = Comment(comment=text)
         xml_string = xml_string.replace(match_comment.groupdict()["all"], "")
+        if verbose:
+            print("<<<find_xml_comment: XML_STRING after>>>", len(xml_string), xml_string)
         return xml_string, comment
 
 
-_xml_single_part_element_regexp = re.compile(r'^(?P<all><\s*(?P<tag>\w+)\s*(?P<attrib>(\w+=[\w+|\s+|"]+)*)\s*/>)')
-_xml_init_two_parts_element_regexp = re.compile(r'^(?P<begin><\s*(?P<tag>\w+)\s*(?P<attrib>([^><])*)\s*>)')
-_xml_string_init_element_replace = r'^(?P<begin><\s*(?P<tag>{})\s*(?P<attrib>([^><])*)\s*>)'
-_xml_string_content_element = r'(?P<content>.*)'
-_xml_string_end_element_replace = r'(?P<end></\s*{}\s*>)'
-_xml_string_two_parts_element_replace = _xml_string_init_element_replace + _xml_string_content_element + \
-                                        _xml_string_end_element_replace
-def _find_element(xml_string):
+def _build_element(xml_string, verbose=False):
+    # Delete unused spaces
+    xml_string = xml_string.strip()
+    if verbose:
+        print("<<<build_element: XML_STRING before>>>", len(xml_string), xml_string)
+    if len(xml_string) == 0:
+        raise Exception("The XML string should not be void.")
+    # Check if the element is a XML comment
+    xml_string, comment = _find_xml_comment(xml_string, verbose=verbose)
+    if comment is not None:
+        xml_string = xml_string.strip()
+        if verbose:
+            print("<<<build_element: XML_STRING after comment>>>", len(xml_string), xml_string)
+        return xml_string, comment
+    else:
+        # Check if the element is a XML element
+        xml_string, element = _find_element(xml_string, verbose=verbose)
+        if element is not None:
+            xml_string = xml_string.strip()
+            if verbose:
+                print("<<<build_element: XML_STRING after element>>>", len(xml_string), xml_string)
+            return xml_string, element
+        else:
+            raise Exception("Could not find what the element could be...")
+
+
+def _find_element(xml_string, verbose=False):
     xml_string = xml_string.strip()
     match_single_part = _xml_single_part_element_regexp.match(xml_string)
-    print(xml_string)
     if match_single_part:
         tag = match_single_part.groupdict()["tag"]
         attrib = match_single_part.groupdict()["attrib"]
@@ -272,45 +309,94 @@ def _find_element(xml_string):
     else:
         match_first_part = _xml_init_two_parts_element_regexp.match(xml_string)
         if match_first_part:
+            # Get as most information as possible
             tag = match_first_part.groupdict()["tag"]
-            match_two_strings = re.compile(_xml_string_two_parts_element_replace.format(tag, tag)).match(xml_string)
+            match_two_strings = re.compile(_xml_string_two_parts_element_replace.format(tag, r".*", tag)).match(xml_string)
             attrib = match_two_strings.groupdict()["attrib"]
             attrib = _build_dict_attrib(attrib)
             begin = match_two_strings.groupdict()["begin"]
             end = match_two_strings.groupdict()["end"]
+            # Find out if the content contains a subpart with the same tag
             content = match_two_strings.groupdict()["content"]
-            if end in content:
-                content = content.split(end)[0]
+            if verbose:
+                print("<<<find_element: CONTENT before>>>", len(content), content)
+            finditer_matches_first_part_in_content = \
+                re.compile(_xml_string_first_element_replace.format(tag)).finditer(content)
+            find_positions_first_part_in_content = list()
+            last_position = 0
+            for match in finditer_matches_first_part_in_content:
+                last_position = content.find(match.groupdict()["begin"], last_position + 1)
+                find_positions_first_part_in_content.append(last_position)
+            if verbose:
+                print("<<<find_element: rank match first part>>>", len(find_positions_first_part_in_content), find_positions_first_part_in_content)
+            finditer_matches_last_part_in_content = \
+                re.compile(_xml_string_end_element_replace.format(tag)).finditer(content)
+            find_positions_last_part_in_content = list()
+            last_position = 0
+            for match in finditer_matches_last_part_in_content:
+                last_position = content.find(match.groupdict()["end"], last_position + 1)
+                find_positions_last_part_in_content.append(last_position)
+            if verbose:
+                print("<<<find_element: rank match last part>>>", len(find_positions_last_part_in_content), find_positions_last_part_in_content)
+            # Find out where the content really stop
+            if len(find_positions_first_part_in_content) != 0 and len(find_positions_last_part_in_content) != 0:
+                # Case of nested beacons with same tag
+                position_start = 0
+                nb_positions_start = len(find_positions_first_part_in_content)
+                position_end = 0
+                nb_positions_end = len(find_positions_last_part_in_content)
+                find_end = False
+                nb_nested = 0
+                while position_start < nb_positions_start and position_end < nb_positions_end and not find_end:
+                    if verbose:
+                        print("<<<find_element: POSITIONS START/END NESTED before>>>", position_start, "/", nb_positions_start, position_end, "/", nb_positions_end, nb_nested)
+                    if find_positions_last_part_in_content[position_end] < find_positions_first_part_in_content[position_start]:
+                        if nb_nested > 0:
+                            position_end += 1
+                            nb_nested -= 1
+                        else:
+                            content = content[0:find_positions_last_part_in_content[position_end]]
+                            find_end = True
+                    else:
+                        nb_nested += 1
+                        position_start += 1
+                if verbose:
+                    print("<<<find_element: POSITIONS START/END NESTED after>>>", position_start, "/",
+                          nb_positions_start, position_end, "/", nb_positions_end, nb_nested)
+
+                if not find_end and position_start == nb_positions_start and position_end == nb_positions_end - nb_nested:
+                    # Case of nested and finished beacons with same tag
+                    find_end = True
+                    position_end += nb_nested
+                    nb_nested = 0
+                if not find_end:
+                    raise Exception("There is a problem with the xml file... All opened beacon must be closed.")
+            elif len(find_positions_last_part_in_content) != 0 or len(find_positions_first_part_in_content) != 0:
+                raise Exception("There is a problem with the xml file... All opened beacon must be closed.")
+            if verbose:
+                print("<<<find_element: CONTENT after>>>", len(content), content)
+            # Create string to remove
+            string_to_remove = begin + content + end
+            # Separate children from text
             sub_xml_string, text = _find_text(content)
-            print(len(sub_xml_string), sub_xml_string)
-            print(begin + content + end)
+            sub_xml_string = sub_xml_string.strip()
             if len(text) == 0:
                     text = None
+            # Create the element and its children
             element = Element(tag=tag, text=text, attrib=attrib)
             while len(sub_xml_string) > 0:
-                print(">>>>sub_xml_string<<<<", len(sub_xml_string), sub_xml_string)
-                sub_xml_string, subelement = _find_comment(sub_xml_string)
+                sub_xml_string, subelement = _build_element(sub_xml_string, verbose=verbose)
+                sub_xml_string = sub_xml_string.strip()
                 if subelement is not None:
                     element.append(subelement)
-                    print(">>>subelement<<<<", subelement)
-                    print(">>>element<<<<", element)
-                else:
-                    sub_xml_string, subelement = _find_element(sub_xml_string)
-                    if subelement is not None:
-                        element.append(subelement)
-                        print(">>>subelement<<<<", subelement)
-                        print(">>>element<<<<", element)
-                    else:
-                        raise Exception("Content do not match anything know as a XML beacon.")
-            xml_string = xml_string.replace(begin+content+end, "")
-            print(">>>>", xml_string)
-            print(">>>>", element)
+            xml_string = xml_string.replace(string_to_remove, "")
             return xml_string, element
         else:
             raise Exception("It seems that there is a problem in the XML file...")
 
 
-def _find_text(xml_string, fatal=False):
+def _find_text(xml_string, fatal=False, verbose=False):
+    xml_string = xml_string.strip()
     rank_start_init_element = xml_string.find("<")
     rank_end_last_element = xml_string.rfind(">")
     if rank_start_init_element < 0 and rank_end_last_element < 0:
@@ -338,38 +424,59 @@ def _find_text(xml_string, fatal=False):
     return xml_string, xml_text
 
 
-def xml_parser(xml_string):
+def xml_parser(xml_string, verbose=False):
     if not isinstance(xml_string, six.string_types):
         raise TypeError("Argument must be a string or equivalent, not %s." % type(xml_string))
     # Some pre-treatments on the string
-    xml_string = xml_string.strip()
     xml_string = xml_string.replace("\n", "")
     xml_string = xml_string.replace("\t", "")
+    xml_string = xml_string.strip()
     # Check init or end text (there should not have been any but let's check
-    xml_string, text = _find_text(xml_string, fatal=True)
-    print(xml_string)
+    if len(xml_string) > 0:
+        xml_string, text = _find_text(xml_string, fatal=True)
     # Check for header
-    xml_string, header = _find_xml_header(xml_string)
-    print(header)
-    print(xml_string)
+    if len(xml_string) > 0:
+        xml_string, header = _find_xml_header(xml_string, verbose=verbose)
+    # Check for comments
+    comments = list()
+    comment = True
+    while len(xml_string) > 0 and comment:
+        xml_string, comment = _find_xml_comment(xml_string, verbose=verbose)
+        if comment is not None:
+            comments.append(comment)
     # Check for root element (there should not have comment at this place)
-    xml_string, root_element = _find_element(xml_string)
-    print(root_element)
+    if len(xml_string) > 0:
+        xml_string, root_element = _find_element(xml_string, verbose=verbose)
+    # Check for additional comments
+    comment = True
+    while comment and len(xml_string) > 0:
+        xml_string, comment = _build_element(xml_string, verbose=verbose)
+        if comment is not None:
+            comments.append(comment)
     # Check that len of xml_string is 0
     if len(xml_string) > 0:
         raise Exception("The XML string should have a length of 0.")
-    return text, header, root_element
+    return text, comments, header, root_element
 
 
-def xml_file_parser(xml_file):
-    with open(xml_file) as opened_file:
-        xml_content = opened_file.readlines()
-    xml_string = "\n".join(xml_content)
-    return xml_parser(xml_string)
+def xml_file_parser(xml_file, verbose=False):
+    with open(xml_file, "rb") as opened_file:
+        xml_content = opened_file.read().decode(encoding="utf-8")
+    xml_string = "\n".join([line for line in xml_content])
+    return xml_parser(xml_string, verbose=verbose)
+
 
 if __name__ == "__main__":
-    my_xml_file = "/home/rigoudyg/dev/dr2xml/tests/test_a4SST_AGCM_1960/output_test_python2/dr2xml_trip.xml"
-    text, header, root_element = xml_file_parser(my_xml_file)
-    print(text)
-    print(header.dump())
-    print(root_element.dump())
+    for my_xml_file in [
+        #"/home/rigoudyg/dev/dr2xml/tests/test_a4SST_AGCM_1960/output_ref_python2/dr2xml_trip.xml",
+        #"/home/rigoudyg/dev/dr2xml/tests/common/xml_files//./ping_surfex.xml",
+        #"/home/rigoudyg/dev/dr2xml/tests/common/xml_files/iodef.xml",
+        "/home/rigoudyg/dev/dr2xml/tests/common/xml_files//./surfex_fields.xml",
+        "/home/rigoudyg/dev/dr2xml/tests/common/xml_files/atmo_fields.xml",
+    ]:
+        print(my_xml_file)
+        text, comments, header, root_element = xml_file_parser(my_xml_file, verbose=True)
+        print(text)
+        print(comments)
+        print(header)
+        print(root_element)
