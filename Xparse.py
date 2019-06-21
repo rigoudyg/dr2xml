@@ -41,7 +41,6 @@ def read_src(elt, path_parse, printout=False, level=0, dont_read=[]):
     """
     Recursively reads the subfiles indicated by tag 'src' in childs of ELT
     """
-    printout = True
     childs = []
     for child in elt:
         if 'src' in child.attrib:
@@ -65,10 +64,14 @@ def read_src(elt, path_parse, printout=False, level=0, dont_read=[]):
             if printout:
                 print(level * "\t" + "Reading %s, %s=%s" % (filen, et.tag, gattrib(et, 'id', 'no_id')))
             for el in et:
-                if printout:
-                    print((level + 1) * "\t" + "Storing %s in %s id=%s" % (el.tag, child.tag,
-                                                                           gattrib(child, 'id', 'no_id')))
-                child.append(el)
+                if el.tag is not None:
+                    if printout:
+                        print((level + 1) * "\t" + "Storing %s in %s id=%s" % (el.tag, child.tag,
+                                                                               gattrib(child, 'id', 'no_id')))
+                    child.append(el)
+                else:
+                    # Case of comments and headers
+                    pass
     for child in elt:
         # print level*"\t"+"Recursing on %s %s"%(child.tag,gattrib(child,'id','no_id'))
         read_src(child, path_parse, printout, level + 1, dont_read)
@@ -132,13 +135,14 @@ def merge_sons(elt, printout=False, level=0):
                 toremove.append(child)
     for child in toremove:
         if printout:
-            print("removing one %s child : %s" % (repr(elt), repr(child)))
+            print("removing one %s child : %s" % (elt.tag, child.tag))
         elt.remove(child)
     # Recursion
     for child in elt:
-        if printout:
-            print(level * "\t" + "%s %s" % (child.tag, child.attrib.get('id', 'no_id')))
-        merge_sons(child, printout, level + 1)
+        if child.tag is not None:
+            if printout:
+                print(level * "\t" + "%s %s" % (child.tag, child.attrib.get('id', 'no_id')))
+            merge_sons(child, printout, level + 1)
 
 
 def solve_downward(attrib, elt, value=None, printout=False, level=0):
@@ -235,11 +239,11 @@ def solve_by_ref(attrib, index, elt, printout=False, level=0):
     """
     got_one = 0
     for child in elt:
-        if not isinstance(child, str) and child.tag != 'variable':
+        if not isinstance(child, str) and child.tag != 'variable' and child.tag is not None:
             if 'id' in child.attrib:
                 name = child.attrib['id']
             else:
-                name = repr(child)
+                name = child.tag
             if printout:
                 print(level * "\t" + attrib + " by_ref on  " + name,)
             #

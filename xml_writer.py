@@ -57,10 +57,12 @@ class Beacon(object):
 
     def copy(self):
         element = Beacon()
-        element.level = self.level
+        element.tag = copy.copy(self.tag)
+        element.level = copy.copy(self.level)
         element.attrib = copy.deepcopy(self.attrib)
-        element.children = self.children
-        element.tag = self.tag
+        element.children = list()
+        for child in self.children:
+            element.children.append(child.copy())
         return element
 
     @staticmethod
@@ -74,10 +76,14 @@ class Beacon(object):
 
     def _dump_attrib(self, sorted=False):
         if len(self.attrib) > 0:
+            list_key_value = list()
             if sorted:
-                return " ".join(['{}="{}"'.format(key, self.attrib[key]) for key in sorted(list(self.attrib))])
+                for key in sorted(list(self.attrib)):
+                    list_key_value.append((key, self.attrib[key]))
             else:
-                return " ".join(['{}="{}"'.format(key, value) for (key, value) in self.attrib.items()])
+                for (key, value) in self.attrib.items():
+                    list_key_value.append((key, value))
+            return " ".join(['{}={}'.format(key, '"{}"'.format(value)) for (key, value) in list_key_value])
         else:
             return None
 
@@ -124,17 +130,18 @@ class Comment(Beacon):
         #self.comment = str(comment)
 
     def copy(self):
-        element = super(Element, self).copy()
-        element.comment = self.comment
+        element = Comment(comment=self.comment)
+        element.level = copy.copy(self.level)
+        element.attrib = copy.deepcopy(self.attrib)
+        element.children = list()
+        for child in self.children:
+            element.children.append(child.copy())
+        element.tag = copy.copy(self.tag)
         return element
 
     def dump(self):
         rep = "\t"*self.level+"<!-- %s -->" % self.comment
         return rep.encode("utf-8")
-
-    def copy(self):
-        element = super(Comment, self).copy()
-        element.comment = self.comment
 
 
 class Header(Beacon):
@@ -145,9 +152,16 @@ class Header(Beacon):
         super(Header, self).__init__()
         # Deal with attrib attribute
         self.attrib = copy.deepcopy(attrib)
-        #self.attrib = self.correct_attrib(attrib)
         self.tag = tag
-        #self.tag = str(tag)
+
+    def copy(self):
+        element = Header(tag=self.tag)
+        element.level = copy.copy(self.level)
+        element.attrib = copy.deepcopy(self.attrib)
+        element.children = list()
+        for child in self.children:
+            element.children.append(child.copy())
+        return element
 
     def dump(self):
         offset = "\t" * self.level
@@ -178,8 +192,12 @@ class Element(Beacon):
         return len(self.children)
 
     def copy(self):
-        element = super(Element, self).copy()
-        element.text = self.text
+        element = Element(tag=self.tag, text=self.text)
+        element.level = copy.copy(self.level)
+        element.attrib = copy.deepcopy(self.attrib)
+        element.children = list()
+        for child in self.children:
+            element.children.append(child.copy())
         return element
 
     def dump(self):
@@ -202,14 +220,14 @@ class Element(Beacon):
                 content = "{}\t{}\n{}\n{}".format(offset, self.text, self._dump_children(), offset)
         # Build the string
         if content is None:
-            rep = "{}< {} />".format(offset, header)
+            rep = "{}<{} />".format(offset, header)
         else:
-            rep = "{}< {} >{}</ {} >".format(offset, header, content, self.tag)
+            rep = "{}<{} >{}</{} >".format(offset, header, content, self.tag)
         return rep.encode("utf-8")
 
 
 # XML parser tools
-_dict_regexp = re.compile(r"(?P<key>\S+)=(?P<value>[\S]+)")
+_dict_regexp = re.compile(r'(?P<key>\S+)="(?P<value>[^"]+)"')
 _xml_header_regexp = re.compile(r'(<\?\s*\w*\s*(([^><])*)\s*\?>)')
 _xml_header_regexp_begin = re.compile(r'^<\?\s*(?P<tag>\w*)\s*(?P<attrib>([^><])*)\s*\?>')
 _xml_comment_regexp = re.compile(r"^(?P<all><\!--\s*(?P<comment>((?!<!--)(?!-->).)+)\s*-->)")
@@ -429,7 +447,7 @@ def xml_parser(xml_string, verbose=False):
         raise TypeError("Argument must be a string or equivalent, not %s." % type(xml_string))
     # Some pre-treatments on the string
     xml_string = xml_string.replace("\n", "")
-    xml_string = xml_string.replace("\t", "")
+    xml_string = xml_string.replace("\t", " ")
     xml_string = xml_string.strip()
     # Check init or end text (there should not have been any but let's check
     if len(xml_string) > 0:
@@ -472,7 +490,7 @@ if __name__ == "__main__":
         #"/home/rigoudyg/dev/dr2xml/tests/common/xml_files//./ping_surfex.xml",
         #"/home/rigoudyg/dev/dr2xml/tests/common/xml_files/iodef.xml",
         "/home/rigoudyg/dev/dr2xml/tests/common/xml_files//./surfex_fields.xml",
-        "/home/rigoudyg/dev/dr2xml/tests/common/xml_files/atmo_fields.xml",
+        #"/home/rigoudyg/dev/dr2xml/tests/common/xml_files/atmo_fields.xml",
     ]:
         print(my_xml_file)
         text, comments, header, root_element = xml_file_parser(my_xml_file, verbose=True)

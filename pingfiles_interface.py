@@ -458,10 +458,13 @@ def check_for_file_input(sv, hgrid, pingvars, field_defs, grid_defs, domain_defs
 
         # Add a grid and domain for reading the file (don't use grid above to avoid reampping)
         file_domain_id = "remapped_%s_file_domain" % sv.label
-        domain_def = create_xml_element(tag="domain", attrib=OrderedDict(id=file_domain_id, type="rectilinear"))
+        domain_def_dict = OrderedDict()
+        domain_def_dict["id"] = file_domain_id
+        domain_def_dict["type"] = "rectilinear"
+        domain_def = create_xml_element(tag="domain", attrib=domain_def_dict)
         create_xml_sub_element(xml_element=domain_def, tag="generate_rectilinear_domain")
         domain_defs[file_domain_id] = domain_def
-        file_grid_id = "remapped_%s_file_grid" % sv.label
+        file_grid_id = "remapped_{}_file_grid".format(sv.label)
         remap_grid_def = create_xml_element(tag="grid", attrib=OrderedDict(id=file_grid_id))
         create_xml_sub_element(xml_element=remap_grid_def, tag="domain", attrib=OrderedDict(domain_ref=file_domain_id))
         grid_defs[file_grid_id] = remap_grid_def
@@ -472,22 +475,37 @@ def check_for_file_input(sv, hgrid, pingvars, field_defs, grid_defs, domain_defs
 
         # Create xml for reading the variable
         filename = externs[sv.label][hgrid][get_grid_choice()]
-        file_id = "remapped_%s_file" % sv.label
-        field_in_file_id = "%s_%s" % (sv.label, hgrid)
+        file_id = "remapped_{}_file".format(sv.label)
+        field_in_file_id = "_".join([sv.label, hgrid])
         # field_in_file_id=sv.label
-        file_def = create_xml_element(tag="file", attrib=OrderedDict(id=file_id, name=filename, mode="read",
-                                                                     output_freq="1ts", enabled="true"))
-        create_xml_sub_element(xml_element=file_def, tag="field",
-                               attrib=OrderedDict(id=field_in_file_id, name=sv.label, operation="instant",
-                                                  freq_op="1ts", freq_offset="1ts", grid_ref=file_grid_id))
+        file_def_dict = OrderedDict()
+        file_def_dict["id"] = file_id
+        file_def_dict["name"] = filename
+        file_def_dict["mode"] = "read"
+        file_def_dict["output_freq"] = "1ts"
+        file_def_dict["enabled"] = "true"
+        file_def = create_xml_element(tag="file", attrib=file_def_dict)
+        file_def_child_dict = OrderedDict()
+        file_def_child_dict["id"] = field_in_file_id
+        file_def_child_dict["name"] = sv.label
+        file_def_child_dict["operation"] = "instant"
+        file_def_child_dict["freq_op"] = "1ts"
+        file_def_child_dict["freq_offset"] = "1ts"
+        file_def_child_dict["grid_ref"] = file_grid_id
+        create_xml_sub_element(xml_element=file_def, tag="field", attrib=file_def_child_dict)
         file_defs[file_id] = file_def
         if printout:
             print(create_string_from_xml_element(file_defs[file_id]))
         #
         # field_def='<field id="%s" grid_ref="%s" operation="instant" >%s</field>'%\
-        field_def = create_xml_element(tag="field",
-                                       attrib=OrderedDict(id=pingvar, grid_ref=grid_id, field_ref=field_in_file_id,
-                                                          operation="instant", freq_op="1ts", freq_offset="0ts"))
+        field_def_dict = OrderedDict()
+        field_def_dict["id"] = pingvar
+        field_def_dict["grid_ref"] = grid_id
+        field_def_dict["field_ref"] = field_in_file_id
+        field_def_dict["operation"] = "instant"
+        field_def_dict["freq_op"] = "1ts"
+        field_def_dict["freq_offset"] = "0ts"
+        field_def = create_xml_element(tag="field", attrib=field_def_dict)
         field_defs[field_in_file_id] = field_def
         context_index = get_config_variable("context_index")
         context_index[pingvar] = field_def

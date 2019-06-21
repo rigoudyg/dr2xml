@@ -4,7 +4,7 @@
 Management of output grids
 
 Principles : the Data Request may specify which grid to use : either native or a common, regular, one.
-             This specifed per requestLink, which means per set of variables and experiments.
+             This specified per requestLink, which means per set of variables and experiments.
 
 dr2xml allows for the lab to choose among various policy  :
    - DR or None : always follow DR spec

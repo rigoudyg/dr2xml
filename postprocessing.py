@@ -8,7 +8,7 @@ Postprocessing functions
 from __future__ import print_function, division, absolute_import, unicode_literals
 
 import re
-import copy
+from collections import OrderedDict
 
 # Utilities
 from utils import dr2xml_error
@@ -61,7 +61,7 @@ def process_vertical_interpolation(sv, alias, pingvars, src_grid_id, field_defs,
     #
     #
     # sd=vdims[0]
-    alias_with_levels = alias + "_" + sd.label  # e.g. 'CMIP6_hus7h_plev7h'
+    alias_with_levels = "_".join([alias, sd.label]) # e.g. 'CMIP6_hus7h_plev7h'
     if alias_with_levels in pingvars:
         print("No vertical interpolation for %s because the pingfile provides it" % alias_with_levels)
         return src_grid_id, alias_with_levels
@@ -77,9 +77,11 @@ def process_vertical_interpolation(sv, alias, pingvars, src_grid_id, field_defs,
     operation = get_variable_from_lset_with_default("vertical_interpolation_operation", "instant")
     alias_for_sampling = alias_in_ping + "_with_" + operation
     # <field id="CMIP6_hus_instant" field_ref="CMIP6_hus" operation="instant" />
-    field_defs[alias_for_sampling] = create_xml_element(tag="field", attrib=dict(id="%25s" % alias_for_sampling,
-                                                                                 field_ref="%25s" % alias_in_ping,
-                                                                                 operation=operation))
+    field_dict = OrderedDict()
+    field_dict["id"] = alias_for_sampling
+    field_dict["field_ref"] = alias_in_ping
+    field_dict["operation"] = operation
+    field_defs[alias_for_sampling] = create_xml_element(tag="field", attrib=field_dict)
     #
     vert_freq = get_variable_from_lset_without_default("vertical_interpolation_sample_freq")
     #
@@ -90,13 +92,15 @@ def process_vertical_interpolation(sv, alias, pingvars, src_grid_id, field_defs,
 
     # Create field 'alias_sample' which time-samples the field at required freq
     # before vertical interpolation
-    alias_sample = alias_in_ping + "_sampled_" + vert_freq  # e.g.  CMIP6_zg_sampled_3h
+    alias_sample = "_".join([alias_in_ping, "sampled", vert_freq]) # e.g.  CMIP6_zg_sampled_3h
     # <field id="CMIP6_hus_sampled_3h" field_ref="CMIP6_hus_instant" freq_op="3h" expr="@CMIP6_hus_instant"/>
-    field_defs[alias_sample] = create_xml_element(tag="field", text="@%s" % alias_for_sampling,
-                                                  attrib=dict(id="%-25s" % alias_sample,
-                                                              field_ref="%-25s" % alias_for_sampling,
-                                                              freq_op="%-10s" % vert_freq,
-                                                              detect_missing_value="true"))
+    sampled_field_dict = OrderedDict()
+    sampled_field_dict["id"] = alias_sample
+    sampled_field_dict["field_ref"] = alias_for_sampling
+    sampled_field_dict["freq_op"] = vert_freq
+    sampled_field_dict["detect_missing_value"] = "true"
+    field_defs[alias_sample] = create_xml_element(tag="field", text="@{}".format(alias_for_sampling),
+                                                  attrib=sampled_field_dict)
 
     # Construct a field def for the vertically interpolated variable
     if sd.is_zoom_of:  # cas d'une variable definie grace a 2 axis_def (union+zoom)
@@ -111,27 +115,33 @@ def process_vertical_interpolation(sv, alias, pingvars, src_grid_id, field_defs,
         #
         union_alias = prefix + lwps + "_union"  # e.g. 'CMIP6_hus_union'
         # Ss e.g.: <field id="CMIP6_hus_union" field_ref="CMIP6_hus_sampled_3h" grid_ref="FULL_klev_union_plevs_hus"/>
-        field_defs[union_alias] = create_xml_element(tag="field", attrib=dict(id="%-25s" % union_alias,
-                                                                              field_ref="%-25s" % alias_sample,
-                                                                              grid_ref="%-10s" % grid_id))
+        union_field_dict = OrderedDict()
+        union_field_dict["id"] = union_alias
+        union_field_dict["field_ref"] = alias_sample
+        union_field_dict["grid_ref"] = grid_id
+        field_defs[union_alias] = create_xml_element(tag="field", attrib=union_field_dict)
 
         # SS : first create grid for levels subset zoom, e.g.:
         # <grid id="FULL_klev_zoom_plev7h_hus"> <domain domain_ref="FULL" /> <axis axis_ref="zoom_plev7h_hus" /
         # e.g. zoom_label : 'zoom_plev7h_hus'
         grid_id = create_grid_def(grid_defs, axis_defs[sd.zoom_label], sd.out_name, src_grid_id)
         # SS: e.g.: <field id="CMIP6_hus7h_plev7h" field_ref="CMIP6_hus_union" grid_ref="FULL_klev_zoom_plev7h_hus"
-        field_defs[alias_with_levels] = create_xml_element(tag="field", attrib=dict(id="%-25s" % alias_with_levels,
-                                                                                    field_ref="%-25s" % union_alias,
-                                                                                    grid_ref="%-10s" % grid_id))
+        levels_union_field_dict = OrderedDict()
+        levels_union_field_dict["id"] = alias_with_levels
+        levels_union_field_dict["field_ref"] = union_alias
+        levels_union_field_dict["grid_ref"] = grid_id
+        field_defs[alias_with_levels] = create_xml_element(tag="field", attrib=levels_union_field_dict)
 
     else:  # cas d'une variable definie grace a seul axis_def (non union+zoom)
         # Construct a grid using variable's grid and target vertical axis
         union_alias = False
         axis_key = sd.label  # e.g. 'plev7h'
         grid_id = create_grid_def(grid_defs, axis_defs[axis_key], sd.out_name, src_grid_id)
-        field_defs[alias_with_levels] = create_xml_element(tag="field", attrib=dict(id="%-25s" % alias_with_levels,
-                                                                                    field_ref="%-25s" % alias_sample,
-                                                                                    grid_ref="%-10s" %grid_id))
+        levels_field_dict = OrderedDict()
+        levels_field_dict["id"] = alias_with_levels
+        levels_field_dict["field_ref"] = alias_sample
+        levels_field_dict["grid_ref"] = grid_id
+        field_defs[alias_with_levels] = create_xml_element(tag="field", attrib=levels_field_dict)
         # if "hus" in alias :
         #    print "--->",alias, alias_with_levels,sd
         #    print "field_def=",field_defs[alias_with_levels]
@@ -163,33 +173,40 @@ def process_zonal_mean(field_id, grid_id, target_hgrid_id, zgrid_id, field_defs,
 
     # e.g. <field id="CMIP6_ua_plev39_average" field_ref="CMIP6_ua_plev39" operation="average" />
     xios_freq = Cmip6Freq2XiosFreq(frequency, None)
-    field1_id = field_id + "_" + operation  # e.g. CMIP6_hus_plev7h_instant
-    field_defs[field1_id] = create_xml_element(tag="field", attrib=dict(id="%-s" % field1_id,
-                                                                        field_ref="%-s" % field_id,
-                                                                        operation=operation))
+    field1_id = "_".join([field_id, operation])  # e.g. CMIP6_hus_plev7h_instant
+    field_1_dict = OrderedDict()
+    field_1_dict["id"] = field1_id
+    field_1_dict["field_ref"] = field_id
+    field_1_dict["operation"] = operation
+    field_defs[field1_id] = create_xml_element(tag="field", attrib=field_1_dict)
     if printout:
         print("+++ field1 ", field1_id, "\n", create_string_from_xml_element(field_defs[field1_id]))
     #
     # e.g. <field id="CMIP6_ua_plev39_average_1d" field_ref="CMIP6_ua_plev39_average" freq_op="1d" >
     #              @CMIP6_ua_plev39_average </field>
-    field2_id = field1_id + "_" + xios_freq
-    field_defs[field2_id] = create_xml_element(tag="field", text="@%s" % field1_id,
-                                               attrib=dict(id="%-s" % field2_id, field_ref="%-s" % field1_id,
-                                                           freq_op=xios_freq))
+    field2_id = "_".join([field1_id, xios_freq])
+    field_2_dict = OrderedDict()
+    field_2_dict["id"] = field2_id
+    field_2_dict["field_ref"] = field1_id
+    field_2_dict["freq_op"] = xios_freq
+    field_defs[field2_id] = create_xml_element(tag="field", text="@{}".format(field1_id), attrib=field_2_dict)
     if printout:
         print("+++ field2 ", field2_id, "\n", create_string_from_xml_element(field_defs[field2_id]))
 
     if target_hgrid_id:  # case where an intermediate grid is needed
         # e.g. <field id="CMIP6_ua_plev39_average_1d_complete" field_ref="CMIP6_ua_plev39_average_1d"
         #             grid_ref="FULL_klev_plev39_complete" />
-        field3_id = field2_id + "_" + target_hgrid_id
+        field3_id = "_".join([field2_id, target_hgrid_id])
         # Must create and a use a grid similar to the last one defined
         # for that variable, except for a change in the hgrid/domain (=> complete)
         grid_id3 = change_domain_in_grid(target_hgrid_id, grid_defs, src_grid_id=grid_id)
         if printout:
             print("+++ grid3 ", grid_id3, "\n", create_string_from_xml_element(grid_defs[grid_id3]))
-        field_defs[field3_id] = create_xml_element(tag="field", attrib=dict(id=field3_id, field_ref=field2_id,
-                                                                        grid_ref=grid_id3))
+        field_3_dict = OrderedDict()
+        field_3_dict["id"] = field3_id
+        field_3_dict["field_ref"] = field2_id
+        field_3_dict["grid_ref"] = grid_id3
+        field_defs[field3_id] = create_xml_element(tag="field", attrib=field_3_dict)
         if printout:
             print("+++ field3 ", field3_id, "\n", create_string_from_xml_element(field_defs[field3_id]))
     else:
@@ -205,13 +222,16 @@ def process_zonal_mean(field_id, grid_id, target_hgrid_id, zgrid_id, field_defs,
     # And then regrid to final grid
     # e.g. <field id="CMIP6_ua_plev39_average_1d_glat" field_ref="CMIP6_ua_plev39_average_1d_complete"
     #             grid_ref="FULL_klev_plev39_complete_glat" />
-    field4_id = field2_id + "_" + zgrid_id
+    field4_id = "_".join([field2_id, zgrid_id])
     grid4_id = change_domain_in_grid(zgrid_id, grid_defs, src_grid_id=grid_id3, turn_into_axis=True)
     if printout:
         print("+++ grid4 ", grid4_id, "\n", create_string_from_xml_element(grid_defs[grid4_id]))
 
-    field_defs[field4_id] = create_xml_element(tag="field", attrib=dict(id=field4_id, field_ref=field3_id,
-                                                                        grid_ref=grid4_id))
+    field_4_dict = OrderedDict()
+    field_4_dict["id"] = field4_id
+    field_4_dict["field_ref"] = field3_id
+    field_4_dict["grid_ref"] = grid4_id
+    field_defs[field4_id] = create_xml_element(tag="field", attrib=field_4_dict)
     if printout:
         print("+++ field4 ", field4_id, "\n", create_string_from_xml_element(field_defs[field4_id]))
 
@@ -242,9 +262,11 @@ def process_diurnal_cycle(alias, field_defs, grid_defs, axis_defs, printout=Fals
     printout = False
     # 0- create a clone of ALIAS with operation=average
     field_for_average_id = alias + "_for_average"
-    field_defs[field_for_average_id] = create_xml_element(tag="field", attrib=dict(id=field_for_average_id,
-                                                                                   field_ref=alias,
-                                                                                   operation="average"))
+    field_dict = OrderedDict()
+    field_dict["id"] = field_for_average_id
+    field_dict["field_ref"] = alias
+    field_dict["operation"] = "average"
+    field_defs[field_for_average_id] = create_xml_element(tag="field", attrib=field_dict)
 
     if printout:
         print("***>", field_defs[field_for_average_id])
@@ -252,7 +274,7 @@ def process_diurnal_cycle(alias, field_defs, grid_defs, axis_defs, printout=Fals
     # 1- create a grid composed of ALIAS's original grid extended by a scalar; id is <grid_id>_scalar_grid
     context_index = get_config_variable("context_index")
     base_grid = id2grid(alias, context_index)
-    grid_scalar = copy.deepcopy(base_grid)
+    grid_scalar = base_grid.copy()
     grid_id = base_grid.attrib['id']
 
     grid_scalar_id = grid_id + "_plus_scalar"
@@ -265,18 +287,25 @@ def process_diurnal_cycle(alias, field_defs, grid_defs, axis_defs, printout=Fals
     # 2- create a construct for re-gridding the field with operation average on that ,
     # first grid, and also averaging over 1h ; id is ALIAS_1h_average_scalar
     averaged_field_id = alias + "_1h_average_scalar"
-    field_defs[averaged_field_id] = create_xml_element(tag="field", text="@%s" % field_for_average_id,
-                                                       attrib=dict(id=averaged_field_id, freq_op="1h",
-                                                                   grid_ref=grid_scalar_id))
+    averaged_field_dict = OrderedDict()
+    averaged_field_dict["id"] = averaged_field_id
+    averaged_field_dict["freq_op"] = "1h"
+    averaged_field_dict["grid_ref"] = grid_scalar_id
+    field_defs[averaged_field_id] = create_xml_element(tag="field", text="@{}".format(field_for_average_id),
+                                                       attrib=averaged_field_dict)
     if printout:
         print("***>", create_string_from_xml_element(field_defs[averaged_field_id]))
 
     # 3- create an axis of 24 values having sub-construct 'time splitting'; axis id is "24h_axis"
     axis_24h_id = "hour_in_diurnal_cycle"
-    axis_24h = create_xml_element(tag="axis", attrib=dict(id=axis_24h_id, n_glo="24", name="time3", unit="days since ?",
-                                                          standard_name="time",
-                                                          value="(0,23)[%s]" % " ".join(["%g" % (i + 0.5)
-                                                                                         for i in range(0,24)])))
+    axis_24h_dict = OrderedDict()
+    axis_24h_dict["id"] = axis_24h_id
+    axis_24h_dict["n_glo"] = "24"
+    axis_24h_dict["name"] = "time3"
+    axis_24h_dict["unit"] = "days since ?"
+    axis_24h_dict["standard_name"] = "time"
+    axis_24h_dict["value"] = "(0,23)[{}]".format(" ".join([str(i + 0.5) for i in range(0,24)]))
+    axis_24h = create_xml_element(tag="axis", attrib=axis_24h_dict)
     create_xml_sub_element(xml_element=axis_24h, tag="temporal_splitting")
     axis_defs[axis_24h_id] = axis_24h
     if printout:
@@ -284,10 +313,14 @@ def process_diurnal_cycle(alias, field_defs, grid_defs, axis_defs, printout=Fals
 
     # 4- create a grid composed of ALIAS's original grid extended by that axis; id is <grid_id>_24h_grid
     grid_24h_id = grid_id + "_plus_axis24h"
-    grid_24h = copy.deepcopy(base_grid)
+    grid_24h = base_grid.copy()
     grid_24h.attrib["id"] = grid_24h_id
-    create_xml_sub_element(xml_element=grid_24h, tag="axis", attrib=dict(axis_ref=axis_24h_id, name="time3",
-                                                                         unit="days since ?", standard_name="time"))
+    grid_24h_dict = OrderedDict()
+    grid_24h_dict["axis_ref"] = axis_24h_id
+    grid_24h_dict["name"] = "time3"
+    grid_24h_dict["unit"] = "days since ?"
+    grid_24h_dict["standard_name"] = "time"
+    create_xml_sub_element(xml_element=grid_24h, tag="axis", attrib=grid_24h_dict)
     grid_defs[grid_24h_id] = grid_24h
     if printout:
         print("***>", create_string_from_xml_element(grid_24h))
@@ -295,8 +328,11 @@ def process_diurnal_cycle(alias, field_defs, grid_defs, axis_defs, printout=Fals
     # 5- create a construct for re-gridding ALIAS_SCALAR on that second grid; id is ALIAS_24hcycle, which is returned
     #        <field id="field_B"  grid_ref="grid_B" field_ref="field_As" />
     alias_24h_id = alias + "_split24h"
-    alias_24h = create_xml_element(tag="field", attrib=dict(id=alias_24h_id, grid_ref=grid_24h_id,
-                                                            field_ref=averaged_field_id))
+    alias_24h_dict = OrderedDict()
+    alias_24h_dict["id"] = alias_24h_id
+    alias_24h_dict["grid_ref"] = grid_24h_id
+    alias_24h_dict["field_ref"] = averaged_field_id
+    alias_24h = create_xml_element(tag="field", attrib=alias_24h_dict)
     field_defs[alias_24h_id] = alias_24h
     if printout:
         print("***>", create_string_from_xml_element(alias_24h), "\n")
