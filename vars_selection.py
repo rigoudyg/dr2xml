@@ -13,7 +13,7 @@ from collections import OrderedDict, namedtuple
 from utils import dr2xml_error
 
 # Interface to settings dictionaries
-from settings_interface import get_variable_from_sset_and_lset_without_default, get_variable_from_lset_with_default, \
+from settings_interface import get_variable_from_sset_else_lset_without_default, get_variable_from_lset_with_default, \
     get_variable_from_sset_without_default, get_source_id_and_type, get_variable_from_lset_without_default, \
     is_key_in_sset, is_sset_not_None, get_variable_from_sset_with_default_in_sset, \
     get_variable_from_sset_with_default, is_key_in_lset, get_variable_from_sset_else_lset_with_default
@@ -81,7 +81,7 @@ def endyear_for_CMORvar(cv, expt, year, printout=False):
         printout = True
     if printout:
         print("In end_year for %s %s" % (cv.label, cv.mipTable))
-    pmax = get_variable_from_sset_and_lset_without_default('max_priority')
+    pmax = get_variable_from_sset_else_lset_without_default('max_priority')
 
     # 1- Get the RequestItems which apply to CmorVar
     rVarsUid = get_request_by_id_by_sect(cv.uid, 'requestVar')
@@ -426,7 +426,7 @@ def select_CMORvars_for_lab(sset=False, year=None, printout=False):
     # From MIPS set to Request links
     global sc, global_rls, grid_choice, rls_for_all_experiments
     if sset:
-        tierMax = get_variable_from_sset_and_lset_without_default('tierMax')
+        tierMax = get_variable_from_sset_else_lset_without_default('tierMax')
     else:
         tierMax = get_variable_from_lset_without_default('tierMax')
     if sc is None:
@@ -519,7 +519,7 @@ def select_CMORvars_for_lab(sset=False, year=None, printout=False):
     # miprl_ids=[ rl.uid for rl in rls ]
     # miprl_vars=sc.varsByRql(miprl_ids, pmax=lset['max_priority'])
     if sset:
-        pmax = get_variable_from_sset_and_lset_without_default('max_priority')
+        pmax = get_variable_from_sset_else_lset_without_default('max_priority')
     else:
         pmax = get_variable_from_lset_without_default('max_priority')
     miprl_vars_grids = []

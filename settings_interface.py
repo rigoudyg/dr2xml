@@ -100,7 +100,7 @@ def get_variable_from_sset_else_lset_with_default(key_sset, key_lset=None, defau
     return sset.get(key_sset, lset.get(key_lset, default))
 
 
-def get_variable_from_sset_and_lset_without_default(key_sset, key_lset=None):
+def get_variable_from_sset_else_lset_without_default(key_sset, key_lset=None):
     if key_lset is None:
         key_lset = key_sset
     if sset and key_sset in sset:
