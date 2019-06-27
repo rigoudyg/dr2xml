@@ -8,6 +8,8 @@ Interface to get and set laboratory and simulations dictionaries.
 from __future__ import print_function, division, absolute_import, unicode_literals
 
 import copy
+from collections import OrderedDict
+from six import string_types
 
 from utils import dr2xml_error
 
@@ -20,9 +22,68 @@ lset = None
 def initialize_dict(new_lset=None, new_sset=None):
     global sset, lset
     if new_lset is not None:
-        lset = copy.deepcopy(new_lset)
+        lset = decode_strings_in_dict(new_lset)
+        print(new_lset)
     if new_sset is not None:
-        sset = copy.deepcopy(new_sset)
+        sset = decode_strings_in_dict(new_sset)
+
+
+def decode_strings(struct):
+    if isinstance(struct, (int, float)):
+        return struct
+    elif isinstance(struct, string_types):
+        struct = str(struct)
+        struct = struct.decode("utf-8")
+        return struct
+    elif isinstance(struct, (dict, OrderedDict)):
+        return decode_strings_in_dict(struct)
+    elif isinstance(struct, list):
+        return decode_strings_in_list(struct)
+    elif isinstance(struct, tuple):
+        return decode_strings_in_tuple(struct)
+    elif isinstance(struct, set):
+        return decode_strings_in_set(struct)
+    else:
+        raise TypeError("Type of value %s is not handled by dr2xml, please report it the development team."
+                        % type(struct))
+
+
+def decode_strings_in_dict(init_dict):
+    new_dictionary = OrderedDict()
+    for key in sorted(list(init_dict)):
+        value = init_dict[key]
+        value = decode_strings(value)
+        new_dictionary[key] = value
+    return new_dictionary
+
+
+def decode_strings_in_set(init_set):
+    new_set = set(decode_strings_in_list(list(init_set)))
+    return new_set
+
+
+def decode_strings_in_list(init_list):
+    new_list = list()
+    for value in init_list:
+        new_list.append(decode_strings(value))
+    return new_list
+
+
+def decode_strings_in_tuple(init_tuple):
+    new_tuple = list()
+    for value in init_tuple:
+        new_tuple.append(value)
+    new_tuple = decode_strings_in_list(new_tuple)
+    new_tuple = tuple(new_tuple)
+    return new_tuple
+
+
+def format_dict_for_printing(dictionary):
+    if dictionary == "lset":
+        dictionary = lset
+    elif dictionary == "sset":
+        dictionary = sset
+    return "\n".join(["{} : {}".format(s, v) for (s,v) in sorted(dictionary.items())])
 
 
 def get_variable_from_sset_else_lset_with_default(key_sset, key_lset=None, default=None):

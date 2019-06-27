@@ -114,7 +114,7 @@ class Beacon(object):
 
     def _dump_children(self):
         if len(self.children) > 0:
-            return "\n".join([child.dump() for child in self.children])
+            return "\n".join([child.dump().decode("utf-8") for child in self.children])
         else:
             return ""
 
@@ -127,7 +127,6 @@ class Comment(Beacon):
         super(Comment, self).__init__()
         # Deal with comment attribute
         self.comment = comment
-        #self.comment = str(comment)
 
     def copy(self):
         element = Comment(comment=self.comment)
@@ -180,13 +179,10 @@ class Element(Beacon):
         super(Element, self).__init__()
         # Deal with tag attribute
         self.tag = tag
-        #self.tag = str(tag)
         # Deal with attrib attribute
         self.attrib = copy.deepcopy(attrib)
-        #self.attrib = self.correct_attrib(attrib)
         # Deal with text attribute
         self.text = text
-        #self.text = str(text)
 
     def __len__(self):
         return len(self.children)

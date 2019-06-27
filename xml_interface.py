@@ -72,7 +72,8 @@ def create_header():
 def create_pretty_xml_doc(xml_element, filename):
     with open(filename, "wb") as out:
         xml_header = create_header()
-        out.write("\n".join([xml_header.dump(), xml_element.dump()]))
+        out.write(xml_header.dump())
+        out.write(xml_element.dump())
 
 
 def remove_subelement_in_xml_element(xml_element, tag=None, attrib=OrderedDict()):

@@ -27,7 +27,7 @@ from config import get_config_variable
 from settings_interface import get_variable_from_lset_with_default, get_variable_from_lset_without_default, \
     get_variable_from_sset_with_default, get_source_id_and_type, get_variable_from_sset_without_default, \
     get_variable_from_sset_else_lset_with_default, is_key_in_lset, is_key_in_sset, get_lset_iteritems, \
-    get_sset_iteritems
+    get_sset_iteritems, format_dict_for_printing
 # Interface to Data Request
 from dr_interface import get_DR_version
 
@@ -107,7 +107,7 @@ def wr(out, key, dic_or_val=None, num_type="string", default=None):
             attrib_dict = OrderedDict()
             attrib_dict["name"] = key
             attrib_dict["type"] = num_type
-            create_xml_sub_element(xml_element=out, tag="variable", text=str(val), attrib=attrib_dict)
+            create_xml_sub_element(xml_element=out, tag="variable", text=val, attrib=attrib_dict)
 
 
 def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
@@ -1227,11 +1227,9 @@ def write_xios_file_def(filename, svars_per_table, year, lset, sset, cvs_path, f
                                text="CMIP6_conventions_version {}".format(get_config_variable("CMIP6_conventions_version")))
     add_xml_comment_to_element(element=xml_context, text="dr2xml version {}".format(get_config_variable("version")))
     add_xml_comment_to_element(element=xml_context,
-                               text="\n".join(["Lab_and_model settings", ] +
-                                              ["{} : {}".format(s, v) for (s,v) in sorted((get_lset_iteritems()))]))
+                               text="\n".join(["Lab_and_model settings", format_dict_for_printing("lset")]))
     add_xml_comment_to_element(element=xml_context,
-                               text="\n".join(["Simulation settings", ] +
-                                              ["{} : {}".format(s, v) for (s,v) in sorted((get_sset_iteritems()))]))
+                               text="\n".join(["Simulation settings", format_dict_for_printing("sset")]))
     add_xml_comment_to_element(element=xml_context, text="Year processed {}".format(year))
     # Initialize some variables
     domain_defs = OrderedDict()
