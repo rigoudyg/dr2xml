@@ -202,6 +202,16 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
     source_id, source_type = get_source_id_and_type()
     experiment_id = get_variable_from_sset_without_default('experiment_id')
     institution_id = get_variable_from_lset_without_default('institution_id')
+    if get_variable_from_sset_with_default("CORDEX_data", False):
+        driving_model_id = get_variable_from_sset_without_default('driving_model_id')
+        driving_model_ensemble_member = get_variable_from_sset_without_default('driving_model_ensemble_member')
+        driving_experiment = get_variable_from_sset_without_default('driving_experiment')
+        driving_experiment_name = get_variable_from_sset_without_default('driving_experiment_name')
+        CORDEX_domain = get_variable_from_sset_without_default('CORDEX_domain')
+        lambert_conformal_longitude_of_central_meridian = get_variable_from_sset_without_default('Lambert_conformal_longitude_of_central_meridian')
+        lambert_conformal_standard_parallel = get_variable_from_sset_without_default('Lambert_conformal_standard_parallel')
+        lambert_conformal_latitude_of_projection_origin = get_variable_from_sset_without_default('Lambert_conformal_latitude_of_projection_origin')
+
     #
     contact = get_variable_from_sset_else_lset_with_default('contact', default=None)
     #
@@ -334,7 +344,11 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
     date_format, offset_begin, offset_end = freq2datefmt(sv.frequency, operation, table)
     #
     if "fx" in sv.frequency:
-        filename = "_".join(([prefix + sv.label, table, source_id, expid_in_filename, member_id, grid_label]))
+        if get_variable_from_sset_with_default("CORDEX_data", False):
+            filename = "_".join(([prefix + sv.label, CORDEX_domain, driving_model_id, expid_in_filename, member_id,
+                                  sv.frequency]))
+        else:
+            filename = "_".join(([prefix + sv.label, table, source_id, expid_in_filename, member_id, grid_label]))
         varname_for_filename = sv.label
     else:
         varname_for_filename = sv.mipVarLabel
@@ -349,8 +363,12 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
             suffix = "-clim"
         else:
             suffix = ""
-        filename = "_".join([prefix + varname_for_filename, table, source_id, expid_in_filename, member_id, grid_label,
-                             date_range, suffix])
+        if get_variable_from_sset_with_default("CORDEX_data", False):
+            filename = "_".join([prefix + varname_for_filename, CORDEX_domain, driving_model_id, expid_in_filename,
+                                 member_id, source_id, sv.frequency, date_range, suffix])
+        else:
+            filename = "_".join([prefix + varname_for_filename, table, source_id, expid_in_filename, member_id,
+                                 grid_label, date_range, suffix])
     # Create an other file which will contain the list of file names of perso and dev variables
     list_perso_and_dev_file_name = "dr2xml_list_perso_and_dev_file_names"
     if sv.type in ["perso", "dev"]:
@@ -510,6 +528,15 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
     wr(xml_file, 'history', sset, default='none')
     wr(xml_file, "initialization_index", initialization_index, num_type="int")
     wr(xml_file, "institution_id", institution_id)
+    if get_variable_from_sset_with_default("CORDEX_data", False):
+        wr(xml_file, "CORDEX_domain", CORDEX_domain)
+        wr(xml_file, "driving_model_id", driving_model_id)
+        wr(xml_file, "driving_model_ensemble_member", driving_model_ensemble_member)
+        wr(xml_file, "driving_experiment_name", driving_experiment_name)
+        wr(xml_file, "driving_experiment", driving_experiment)
+        wr(xml_file, "Lambert_conformal_longitude_of_central_meridian", lambert_conformal_longitude_of_central_meridian)
+        wr(xml_file, "Lambert_conformal_standard_parallel", lambert_conformal_standard_parallel)
+        wr(xml_file, "Lambert_conformal_latitude_of_projection_origin", lambert_conformal_latitude_of_projection_origin)
     if is_key_in_lset('institution'):
         inst = get_variable_from_lset_without_default('institution')
     else:
@@ -958,6 +985,8 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
         fvalues = sv.struct.flag_values
         if fvalues is not None and fvalues.strip() != '':
             rep.append(wrv('flag_values', fvalues.strip()))
+    if get_variable_from_sset_with_default("CORDEX_data", False):
+        rep.append(wrv('grid_mapping', "Lambert_Conformal"))
     #
     # We override the Xios value for interval_operation because it sets it to
     # the freq_output value with our settings (for complicated reasons)

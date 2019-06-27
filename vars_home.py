@@ -251,6 +251,12 @@ def read_extraTable(path, table, printout=False):
         dims2shape['longitude|latitude|plev7hm'] = 'XY-P7HM'
         # Romain
         dims2shape['longitude|latitude|plev19hm'] = 'XY-P19HM'
+        # By level for CORDEX
+        dims2shape['longitude|latitude|plev925'] = 'XY-P925HM'
+        dims2shape['longitude|latitude|plev850'] = 'XY-P850HM'
+        dims2shape['longitude|latitude|plev700'] = 'XY-P700HM'
+        dims2shape['longitude|latitude|plev500'] = 'XY-P500HM'
+        dims2shape['longitude|latitude|plev200'] = 'XY-P200HM'
     #
     if not dim2dimid:
         for g in get_collection('grids').items:
@@ -371,6 +377,7 @@ def read_extraTable(path, table, printout=False):
                             string_of_requested = string_of_requested + " " + ilev
                         extra_sdim.requested = string_of_requested.rstrip(" ")  # values of multi vertical levels
                         extra_sdim.value = cdata["axis_entry"][d]["value"]  # value of single vertical level
+                        extra_sdim.type = cdata["axis_entry"][d]["type"]  # axis type
                     extra_var.sdims.update({extra_sdim.label: extra_sdim})
                     if True:
                         # print "Info: dimid corresponding to ",d,"for variable",v["out_name"],\
