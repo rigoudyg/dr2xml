@@ -1201,9 +1201,9 @@ def wrv(name, value, num_type="string"):
     """
     print_variables = get_variable_from_lset_with_default("print_variables", True)
     if not print_variables:
-        return ""
+        return None
     elif isinstance(print_variables, list) and name not in print_variables:
-        return ""
+        return None
     if isinstance(value, str):
         value = value[0:1024]  # CMIP6 spec : no more than 1024 char
     # Format a 'variable' entry

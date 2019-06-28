@@ -88,10 +88,11 @@ class Beacon(object):
             return None
 
     def append(self, element):
-        if not element.is_xml_element():
-            raise TypeError("Could not append an element of type %s to an XML element." % type(element))
-        element.update_level(self.level + 1)
-        self.children.append(element)
+        if element is not None:
+            if not element.is_xml_element():
+                raise TypeError("Could not append an element of type %s to an XML element." % type(element))
+            element.update_level(self.level + 1)
+            self.children.append(element)
 
     def extend(self, elements):
         for (rank, element) in enumerate(elements):
@@ -99,18 +100,21 @@ class Beacon(object):
                 raise TypeError("Could not extend an XML element with elements of type %s." % type(element))
             else:
                 elements[rank].update_level(self.level + 1)
-        self.children.extend(elements)
+        if elements is not None:
+            self.children.extend(elements)
 
     def insert(self, index, element):
-        if not element.is_xml_element():
-            raise TypeError("Could not insert an element of type %s to an XML element." % type(element))
-        element.update_level(self.level + 1)
-        self.children.insert(index, element)
+        if element is not None:
+            if not element.is_xml_element():
+                raise TypeError("Could not insert an element of type %s to an XML element." % type(element))
+            element.update_level(self.level + 1)
+            self.children.insert(index, element)
 
     def remove(self, element):
-        if not element.is_xml_element():
-            raise TypeError("Could not append an remove of type %s to an XML element." % type(element))
-        self.children.remove(element)
+        if element is not None:
+            if not element.is_xml_element():
+                raise TypeError("Could not append an remove of type %s to an XML element." % type(element))
+            self.children.remove(element)
 
     def _dump_children(self):
         if len(self.children) > 0:
