@@ -364,8 +364,9 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
         else:
             suffix = ""
         if get_variable_from_sset_with_default("CORDEX_data", False):
-            filename = "_".join([prefix + varname_for_filename, CORDEX_domain, driving_model_id, expid_in_filename,
-                                 member_id, source_id, sv.frequency, date_range, suffix])
+            liste_attributes = [prefix + varname_for_filename, CORDEX_domain, driving_model_id, expid_in_filename,
+                                member_id, source_id, sv.frequency, date_range, suffix]
+            filename = "_".join([attribute for attribute in liste_attributes if attribute != ""])
         else:
             filename = "_".join([prefix + varname_for_filename, table, source_id, expid_in_filename, member_id,
                                  grid_label, date_range, suffix])
