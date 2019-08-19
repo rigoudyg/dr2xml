@@ -594,6 +594,9 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
             wr(xml_file, 'branch_time_in_child', "{}.0D".format(nb_days), "double")
         else:
             wr(xml_file, 'branch_time_in_child', sset, "double")
+    else:
+        # Only add branch method meta-data, which is needed for publication
+        wr(xml_file, 'branch_method', "no parent")
     #
     wr(xml_file, "physics_index", physics_index, num_type="int")
     wr(xml_file, 'product', 'model-output')
