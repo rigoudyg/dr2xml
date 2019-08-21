@@ -345,8 +345,8 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
     #
     if "fx" in sv.frequency:
         if get_variable_from_sset_with_default("CORDEX_data", False):
-            filename = "_".join(([prefix + sv.label, CORDEX_domain, driving_model_id, expid_in_filename, member_id,
-                                  sv.frequency]))
+            filename = "_".join(([prefix + sv.label, CORDEX_domain.get(context), driving_model_id, expid_in_filename,
+                                  member_id, sv.frequency]))
         else:
             filename = "_".join(([prefix + sv.label, table, source_id, expid_in_filename, member_id, grid_label]))
         varname_for_filename = sv.label
@@ -364,8 +364,8 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
         else:
             suffix = ""
         if get_variable_from_sset_with_default("CORDEX_data", False):
-            liste_attributes = [prefix + varname_for_filename, CORDEX_domain, driving_model_id, expid_in_filename,
-                                member_id, source_id, sv.frequency, date_range, suffix]
+            liste_attributes = [prefix + varname_for_filename, CORDEX_domain.get(context), driving_model_id,
+                                expid_in_filename, member_id, source_id, sv.frequency, date_range, suffix]
             filename = "_".join([attribute for attribute in liste_attributes if attribute != ""])
         else:
             filename = "_".join([prefix + varname_for_filename, table, source_id, expid_in_filename, member_id,
@@ -530,7 +530,7 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
     wr(xml_file, "initialization_index", initialization_index, num_type="int")
     wr(xml_file, "institution_id", institution_id)
     if get_variable_from_sset_with_default("CORDEX_data", False):
-        wr(xml_file, "CORDEX_domain", CORDEX_domain)
+        wr(xml_file, "CORDEX_domain", CORDEX_domain.get(context))
         wr(xml_file, "driving_model_id", driving_model_id)
         wr(xml_file, "driving_model_ensemble_member", driving_model_ensemble_member)
         wr(xml_file, "driving_experiment_name", driving_experiment_name)
