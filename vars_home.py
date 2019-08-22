@@ -372,6 +372,10 @@ def read_extraTable(path, table, printout=False):
                         extra_sdim.long_name = cdata["axis_entry"][d]["long_name"]
                         extra_sdim.out_name = cdata["axis_entry"][d]["out_name"]
                         extra_sdim.positive = cdata["axis_entry"][d]["positive"]
+                        if "title" in cdata["axis_entry"][d]:
+                            extra_sdim.title = cdata["axis_entry"][d]["title"]
+                        else:
+                            extra_sdim.title = cdata["axis_entry"][d]["long_name"]
                         string_of_requested = ""
                         for ilev in cdata["axis_entry"][d]["requested"]:
                             string_of_requested = string_of_requested + " " + ilev

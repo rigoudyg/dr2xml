@@ -324,13 +324,15 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
     for c in required_components:
         if c not in actual_components:
             ok = False
-            print("Model component %s is required by CMIP6 CV for experiment %s and not present (present=%s)" %
-                  (c, experiment_id, repr(actual_components)))
+            if not get_variable_from_sset_with_default("CORDEX_data", False):
+                print("Model component %s is required by CMIP6 CV for experiment %s and not present (present=%s)" %
+                      (c, experiment_id, repr(actual_components)))
     for c in actual_components:
         if c not in allowed_components and c not in required_components:
             ok = False or get_variable_from_sset_with_default('bypass_CV_components', False)
-            print("Warning: Model component %s is present but not required nor allowed (%s)" %
-                  (c, repr(allowed_components)))
+            if not get_variable_from_sset_with_default("CORDEX_data", False):
+                print("Warning: Model component %s is present but not required nor allowed (%s)" %
+                      (c, repr(allowed_components)))
     if not ok:
         raise dr2xml_error("Issue with model components")
     #

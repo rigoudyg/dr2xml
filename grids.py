@@ -156,7 +156,6 @@ def create_axis_def(sdim, axis_defs, field_defs):
         axis_dict["standard_name"] = sdim.stdname
         axis_dict["long_name"] = sdim.long_name
         axis_dict["unit"] = sdim.units
-        print("AXIS_DICT", axis_dict)
         axis_xml = create_xml_element(tag="axis", attrib=axis_dict)
         # Define some other values
         if sdim.stdname == "air_pressure":
