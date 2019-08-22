@@ -270,21 +270,25 @@ def _find_xml_header(xml_string, verbose=False):
             return xml_string, header
 
 
-def _find_xml_comment(xml_string, verbose=False):
-    if verbose:
-        print("<<<find_xml_comment: XML_STRING before>>>", len(xml_string), xml_string)
+def _find_xml_comment(xml_string, verbose=True):
+    verbose = True
+    # if verbose:
+    #     print("<<<find_xml_comment: XML_STRING before>>>", len(xml_string), xml_string)
+    xml_string = xml_string.strip()
     match_comment = _xml_comment_regexp.match(xml_string)
     if not match_comment:
-        if verbose:
-            print("<<<find_xml_comment: XML_STRING after>>>", len(xml_string), xml_string)
+        # if verbose:
+        #     print("<<<find_xml_comment: XML_STRING after>>>", len(xml_string), xml_string)
         return xml_string, None
     else:
         text = match_comment.groupdict()["comment"]
         text = text.strip()
         comment = Comment(comment=text)
         xml_string = xml_string.replace(match_comment.groupdict()["all"], "")
+        xml_string = xml_string.strip()
         if verbose:
-            print("<<<find_xml_comment: XML_STRING after>>>", len(xml_string), xml_string)
+            # print("<<<find_xml_comment: XML_STRING after>>>", len(xml_string), xml_string)
+            print("<<<find_xml_comment: comment >>>", len(str(comment)), str(comment))
         return xml_string, comment
 
 
@@ -428,7 +432,7 @@ def _find_text(xml_string, fatal=False, verbose=False):
     else:
         if rank_end_last_element < len(xml_string) - 1:
             end_text = xml_string[(rank_end_last_element + 1):]
-            xml_string = xml_string[0:rank_end_last_element]
+            xml_string = xml_string[0:(rank_end_last_element + 1)]
         else:
             end_text = ""
         if rank_start_init_element > 0:
@@ -489,11 +493,12 @@ if __name__ == "__main__":
         #"/home/rigoudyg/dev/dr2xml/tests/test_a4SST_AGCM_1960/output_ref_python2/dr2xml_trip.xml",
         #"/home/rigoudyg/dev/dr2xml/tests/common/xml_files//./ping_surfex.xml",
         #"/home/rigoudyg/dev/dr2xml/tests/common/xml_files/iodef.xml",
-        "/home/rigoudyg/dev/dr2xml/tests/common/xml_files//./surfex_fields.xml",
+        #"/home/rigoudyg/dev/dr2xml/tests/common/xml_files//./surfex_fields.xml",
         #"/home/rigoudyg/dev/dr2xml/tests/common/xml_files/atmo_fields.xml",
+        "/home/rigoudyg/dev/dr2xml/tests/nemo_fields.xml",
     ]:
         print(my_xml_file)
-        text, comments, header, root_element = xml_file_parser(my_xml_file, verbose=True)
+        text, comments, header, root_element = xml_file_parser(my_xml_file, verbose=False)
         print(text)
         print(comments)
         print(header)
