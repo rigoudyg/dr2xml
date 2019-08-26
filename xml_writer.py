@@ -12,6 +12,7 @@ import copy
 import six
 import re
 from io import open
+import string
 
 
 # Create some classes to deal with xml writing
@@ -30,6 +31,9 @@ class Beacon(object):
 
     def __repr__(self):
         return self.dump()
+
+    def __len__(self):
+        return len(self.dump())
 
     def __getitem__(self, index):
         return self.children[index]
@@ -143,7 +147,7 @@ class Comment(Beacon):
         return element
 
     def dump(self):
-        rep = "\t"*self.level+"<!-- %s -->" % self.comment
+        rep = "\t"*self.level+"<!--%s-->" % self.comment
         return rep.encode("utf-8")
 
 
@@ -169,9 +173,9 @@ class Header(Beacon):
     def dump(self):
         offset = "\t" * self.level
         if len(self.attrib) > 0:
-            rep = offset + '<?{} {} ?>'.format(self.tag, self._dump_attrib())
+            rep = offset + '<?{} {}?>'.format(self.tag, self._dump_attrib())
         else:
-            rep = offset + '<?{} ?>'.format(self.tag)
+            rep = offset + '<?{}?>'.format(self.tag)
         return rep.encode("utf-8")
 
 
@@ -220,26 +224,14 @@ class Element(Beacon):
                 content = "{}\t{}\n{}\n{}".format(offset, self.text, self._dump_children(), offset)
         # Build the string
         if content is None:
-            rep = "{}<{} />".format(offset, header)
+            rep = "{}<{}/>".format(offset, header)
         else:
-            rep = "{}<{} >{}</{} >".format(offset, header, content, self.tag)
+            rep = "{}<{}>{}</{}>".format(offset, header, content, self.tag)
         return rep.encode("utf-8")
 
 
-# XML parser tools
+# XML dict regexp
 _dict_regexp = re.compile(r'(?P<key>\S+)="(?P<value>[^"]+)"')
-_xml_header_regexp = re.compile(r'(<\?\s*\w*\s*(([^><])*)\s*\?>)')
-_xml_header_regexp_begin = re.compile(r'^<\?\s*(?P<tag>\w*)\s*(?P<attrib>([^><])*)\s*\?>')
-_xml_comment_regexp = re.compile(r"^(?P<all><\!--\s*(?P<comment>((?!<!--)(?!-->).)+)\s*-->)")
-_xml_single_part_element_regexp = re.compile(r'^(?P<all><\s*(?P<tag>\w+)\s*(?P<attrib>([^><])*)\s*/>)')
-#_xml_init_two_parts_element_regexp = re.compile(r'^(?P<begin><\s*(?P<tag>\w+)\s*(?P<attrib>([^><])*)\s*>)')
-_xml_string_first_element_replace = r'(?P<begin><\s*(?P<tag>{})\s*(?P<attrib>([^><])*)\s*>)'
-_xml_string_init_element_replace = r'^'+_xml_string_first_element_replace
-_xml_init_two_parts_element_regexp = re.compile(_xml_string_init_element_replace.format(r"\w+"))
-_xml_string_content_element = r'(?P<content>\s*{}\s*)'
-_xml_string_end_element_replace = r'(?P<end></\s*{}\s*>)'
-_xml_string_two_parts_element_replace = _xml_string_init_element_replace + _xml_string_content_element + \
-                                        _xml_string_end_element_replace
 
 
 def _build_dict_attrib(dict_string):
@@ -249,6 +241,11 @@ def _build_dict_attrib(dict_string):
     for (key, value) in string_match:
         attrib[key] = value.replace('"', '')
     return attrib
+
+
+# XML header regexp
+_xml_header_regexp = re.compile(r'(<\?\s?\w*\s?(([^><])*)\s?\?>)')
+_xml_header_regexp_begin = re.compile(r'^<\?\s?(?P<tag>\w*)\s?(?P<attrib>([^><])*)\s?\?>')
 
 
 def _find_xml_header(xml_string, verbose=False):
@@ -270,8 +267,11 @@ def _find_xml_header(xml_string, verbose=False):
             return xml_string, header
 
 
+# XML comment regexp
+_xml_comment_regexp = re.compile(r"^(?P<all><\!--\s?(?P<comment>((?!<!--)(?!-->).)+)\s?-->)")
+
+
 def _find_xml_comment(xml_string, verbose=True):
-    verbose = True
     # if verbose:
     #     print("<<<find_xml_comment: XML_STRING before>>>", len(xml_string), xml_string)
     xml_string = xml_string.strip()
@@ -307,18 +307,30 @@ def _build_element(xml_string, verbose=False):
             print("<<<build_element: XML_STRING after comment>>>", len(xml_string), xml_string)
         return xml_string, comment
     else:
-        # Check if the element is a XML element
-        xml_string, element = _find_element(xml_string, verbose=verbose)
+        # Check if the element is a XML element made of one single part
+        xml_string, element = _find_one_part_element(xml_string, verbose=verbose)
         if element is not None:
             xml_string = xml_string.strip()
             if verbose:
                 print("<<<build_element: XML_STRING after element>>>", len(xml_string), xml_string)
             return xml_string, element
         else:
-            raise Exception("Could not find what the element could be...")
+            # Check if the element is a XML element made of two parts
+            xml_string, element = _find_two_parts_element(xml_string, verbose=verbose)
+            if element is not None:
+                xml_string = xml_string.strip()
+                if verbose:
+                    print("<<<build_element: XML_STRING after element>>>", len(xml_string), xml_string)
+                return xml_string, element
+            else:
+                raise Exception("Could not find what the element could be...")
 
 
-def _find_element(xml_string, verbose=False):
+# XML single part regexp
+_xml_single_part_element_regexp = re.compile(r'^(?P<all><\s?(?P<tag>\w+)\s?(?P<attrib>([^><])*)\s?/>)')
+
+
+def _find_one_part_element(xml_string, verbose=False):
     xml_string = xml_string.strip()
     match_single_part = _xml_single_part_element_regexp.match(xml_string)
     if match_single_part:
@@ -329,96 +341,155 @@ def _find_element(xml_string, verbose=False):
         xml_string = xml_string.replace(match_single_part.groupdict()["all"], "")
         return xml_string, element
     else:
-        match_first_part = _xml_init_two_parts_element_regexp.match(xml_string)
-        if match_first_part:
-            # Get as most information as possible
-            tag = match_first_part.groupdict()["tag"]
-            match_two_strings = re.compile(_xml_string_two_parts_element_replace.format(tag, r".*", tag)).match(xml_string)
-            attrib = match_two_strings.groupdict()["attrib"]
-            attrib = _build_dict_attrib(attrib)
-            begin = match_two_strings.groupdict()["begin"]
-            end = match_two_strings.groupdict()["end"]
-            # Find out if the content contains a subpart with the same tag
-            content = match_two_strings.groupdict()["content"]
-            if verbose:
-                print("<<<find_element: CONTENT before>>>", len(content), content)
-            finditer_matches_first_part_in_content = \
-                re.compile(_xml_string_first_element_replace.format(tag)).finditer(content)
-            find_positions_first_part_in_content = list()
-            last_position = 0
-            for match in finditer_matches_first_part_in_content:
-                last_position = content.find(match.groupdict()["begin"], last_position + 1)
-                find_positions_first_part_in_content.append(last_position)
-            if verbose:
-                print("<<<find_element: rank match first part>>>", len(find_positions_first_part_in_content), find_positions_first_part_in_content)
-            finditer_matches_last_part_in_content = \
-                re.compile(_xml_string_end_element_replace.format(tag)).finditer(content)
-            find_positions_last_part_in_content = list()
-            last_position = 0
-            for match in finditer_matches_last_part_in_content:
-                last_position = content.find(match.groupdict()["end"], last_position + 1)
-                find_positions_last_part_in_content.append(last_position)
-            if verbose:
-                print("<<<find_element: rank match last part>>>", len(find_positions_last_part_in_content), find_positions_last_part_in_content)
-            # Find out where the content really stop
-            if len(find_positions_first_part_in_content) != 0 and len(find_positions_last_part_in_content) != 0:
-                # Case of nested beacons with same tag
-                position_start = 0
-                nb_positions_start = len(find_positions_first_part_in_content)
-                position_end = 0
-                nb_positions_end = len(find_positions_last_part_in_content)
-                find_end = False
-                nb_nested = 0
-                while position_start < nb_positions_start and position_end < nb_positions_end and not find_end:
-                    if verbose:
-                        print("<<<find_element: POSITIONS START/END NESTED before>>>", position_start, "/", nb_positions_start, position_end, "/", nb_positions_end, nb_nested)
-                    if find_positions_last_part_in_content[position_end] < find_positions_first_part_in_content[position_start]:
-                        if nb_nested > 0:
-                            position_end += 1
-                            nb_nested -= 1
-                        else:
-                            content = content[0:find_positions_last_part_in_content[position_end]]
-                            find_end = True
-                    else:
-                        nb_nested += 1
-                        position_start += 1
-                if verbose:
-                    print("<<<find_element: POSITIONS START/END NESTED after>>>", position_start, "/",
-                          nb_positions_start, position_end, "/", nb_positions_end, nb_nested)
+        return xml_string, None
 
-                if not find_end and position_start == nb_positions_start and position_end == nb_positions_end - nb_nested:
-                    # Case of nested and finished beacons with same tag
-                    find_end = True
-                    position_end += nb_nested
-                    nb_nested = 0
-                if not find_end:
-                    raise Exception("There is a problem with the xml file... All opened beacon must be closed.")
-            elif len(find_positions_last_part_in_content) != 0 or len(find_positions_first_part_in_content) != 0:
-                raise Exception("There is a problem with the xml file... All opened beacon must be closed.")
+
+# XML two parts regexp
+_xml_string_first_element_replace = r'(?P<begin><\s?(?P<tag>{})\s?(?P<attrib>([^><])*)\s?>)'
+_xml_string_init_element_replace = r'^'+_xml_string_first_element_replace
+_xml_init_two_parts_element_regexp = re.compile(_xml_string_init_element_replace.format(r"\w+"))
+_xml_string_content_element = r'(?P<content>\s?{}\s?)'
+_xml_string_end_element_replace = r'(?P<end></\s?{}\s?>)'
+_xml_string_two_parts_element_replace = _xml_string_init_element_replace + _xml_string_content_element + \
+                                        _xml_string_end_element_replace
+
+
+def _find_matching_first_part_in_content(content, tag, verbose=False):
+    finditer_matches_first_part_in_content = \
+        re.compile(_xml_string_first_element_replace.format(tag)).finditer(content)
+    find_positions_first_part_in_content = list()
+    last_position = 0
+    for match in finditer_matches_first_part_in_content:
+        last_position = content.find(match.groupdict()["begin"], last_position + 1)
+        find_positions_first_part_in_content.append(last_position)
+    if verbose:
+        print("<<<find_matching_first_part_in_content: rank match first part>>>",
+              len(find_positions_first_part_in_content), find_positions_first_part_in_content)
+    return find_positions_first_part_in_content
+
+
+def _find_matching_last_part_in_content(content, tag, verbose=False):
+    finditer_matches_last_part_in_content = \
+        re.compile(_xml_string_end_element_replace.format(tag)).finditer(content)
+    find_positions_last_part_in_content = list()
+    find_groups_last_part_in_content = list()
+    last_position = 0
+    for match in finditer_matches_last_part_in_content:
+        last_position = content.find(match.groupdict()["end"], last_position + 1)
+        find_positions_last_part_in_content.append(last_position)
+        find_groups_last_part_in_content.append(match.groupdict()["end"])
+    if verbose:
+        print("<<<find_matching_last_part_in_content: rank match last part>>>",
+              len(find_positions_last_part_in_content), find_positions_last_part_in_content)
+    return find_positions_last_part_in_content, find_groups_last_part_in_content
+
+
+def _find_real_content(content, match_first_part, match_last_part, groups_last_part, verbose=False):
+    find_end = False
+    if len(match_first_part) != 0 and len(match_last_part) != 0:
+        # Case of nested beacons with same tag
+        position_start = 0
+        nb_positions_start = len(match_first_part)
+        position_end = 0
+        nb_positions_end = len(match_last_part)
+        nb_nested = 0
+        while position_start < nb_positions_start and position_end < nb_positions_end and not find_end:
             if verbose:
-                print("<<<find_element: CONTENT after>>>", len(content), content)
-            # Create string to remove
-            string_to_remove = begin + content + end
-            # Separate children from text
-            sub_xml_string, text = _find_text(content)
-            sub_xml_string = sub_xml_string.strip()
-            if len(text) == 0:
-                    text = None
-            # Create the element and its children
-            element = Element(tag=tag, text=text, attrib=attrib)
-            while len(sub_xml_string) > 0:
-                sub_xml_string, subelement = _build_element(sub_xml_string, verbose=verbose)
-                sub_xml_string = sub_xml_string.strip()
-                if subelement is not None:
-                    element.append(subelement)
-            xml_string = xml_string.replace(string_to_remove, "")
-            return xml_string, element
+                print("<<<find_element: POSITIONS START/END NESTED before>>>", position_start, "/",
+                      nb_positions_start, position_end, "/", nb_positions_end, nb_nested)
+            if match_last_part[position_end] < match_first_part[position_start]:
+                if nb_nested > 0:
+                    position_end += 1
+                    nb_nested -= 1
+                else:
+                    content = content[0:match_last_part[position_end]]
+                    find_end = True
+            else:
+                nb_nested += 1
+                position_start += 1
+        if verbose:
+            print("<<<find_real_content: POSITIONS START/END NESTED after>>>", position_start, "/",
+                  nb_positions_start, position_end, "/", nb_positions_end, nb_nested)
+
+        if not find_end and position_start == nb_positions_start and position_end == (nb_positions_end - nb_nested):
+            # Case of nested and finished beacons with same tag
+            find_end = True
+            position_end += nb_nested
+            nb_nested = 0
+        if not find_end:
+            raise Exception("There is a problem with the xml file... All opened beacon must be closed.")
+    elif len(match_last_part) != 0 or len(match_first_part) != 0:
+        raise Exception("There is a problem with the xml file... All opened beacon must be closed.")
+    if find_end:
+        if position_end > (nb_positions_end - 1):
+            return content, None
         else:
-            raise Exception("It seems that there is a problem in the XML file...")
+            return content, groups_last_part[position_end]
+    else:
+        return content, None
+
+
+def _find_two_parts_element(xml_string, verbose=False):
+    xml_string = xml_string.strip()
+    # Match the first part of the two parts xml element
+    match_first_part = _xml_init_two_parts_element_regexp.match(xml_string)
+    if match_first_part:
+        # Get as many information as possible
+        tag = match_first_part.groupdict()["tag"]
+        match_two_strings = re.compile(_xml_string_two_parts_element_replace.format(tag, r".*", tag)).match(xml_string)
+        attrib = match_two_strings.groupdict()["attrib"]
+        attrib = _build_dict_attrib(attrib)
+        begin = match_two_strings.groupdict()["begin"]
+        end = match_two_strings.groupdict()["end"]
+        content = match_two_strings.groupdict()["content"]
+        # Find out if the content contains a subpart with the same tag
+        if verbose:
+            print("<<<find_element: CONTENT before>>>", len(content), content)
+        find_positions_first_part_in_content = _find_matching_first_part_in_content(content, tag, verbose)
+        find_positions_last_part_in_content, find_groups_last_part_in_content = \
+            _find_matching_last_part_in_content(content, tag, verbose)
+        # Find out where the content really stop
+        content, new_end = _find_real_content(content, find_positions_first_part_in_content,
+                                          find_positions_last_part_in_content, find_groups_last_part_in_content,
+                                              verbose=verbose)
+        if new_end is not None:
+            end = new_end
+        if verbose:
+            print("<<<find_element: CONTENT after>>>", len(content), content)
+        # Create string to remove
+        string_to_remove = begin + content + end
+        # Separate children from text
+        sub_xml_string, text = _find_text(content)
+        if verbose:
+            print("<<<SUB_XML_STRING>>>", len(sub_xml_string), sub_xml_string)
+        if len(text) == 0:
+            text = None
+        # Create the element and its children
+        element = Element(tag=tag, text=text, attrib=attrib)
+        while len(sub_xml_string) > 0:
+            if verbose:
+                print("<<<SUB_XML_STRING>>> Enter the loop...", len(sub_xml_string), sub_xml_string)
+            new_sub_xml_string, subelement = _build_element(sub_xml_string, verbose=verbose)
+            if sub_xml_string == new_sub_xml_string:
+                raise Exception("Stop: Infinite loop!!!!!!")
+            else:
+                sub_xml_string = new_sub_xml_string
+            sub_xml_string = sub_xml_string.strip()
+            if subelement is not None:
+                element.append(subelement)
+        xml_string = xml_string.replace(string_to_remove, "")
+        if verbose:
+            print("<<<XML_STRING end of treatment>>>", len(xml_string), xml_string)
+            print("<<<XML_STRING string replaced>>>", len(string_to_remove), string_to_remove)
+        return xml_string, element
+    else:
+        return xml_string, None
 
 
 def _find_text(xml_string, fatal=False, verbose=False):
     xml_string = xml_string.strip()
+    if verbose:
+        print("<<<find_text: XML_STRING before>>>", len(xml_string), xml_string)
     rank_start_init_element = xml_string.find("<")
     rank_end_last_element = xml_string.rfind(">")
     if rank_start_init_element < 0 and rank_end_last_element < 0:
@@ -436,13 +507,17 @@ def _find_text(xml_string, fatal=False, verbose=False):
         else:
             end_text = ""
         if rank_start_init_element > 0:
-            init_text = xml_string[0:(rank_start_init_element-1)]
+            init_text = xml_string[0:(rank_start_init_element - 1)]
             xml_string = xml_string[rank_start_init_element:]
         else:
             init_text = ""
         xml_text = " ".join([init_text, end_text])
     xml_text = xml_text.strip()
+    if verbose:
+        print("<<<find_text: TEXT after>>>", len(xml_text), xml_text)
     xml_string = xml_string.strip()
+    if verbose:
+        print("<<<find_text: XML_STRING after>>>", len(xml_string), xml_string)
     return xml_string, xml_text
 
 
@@ -453,6 +528,7 @@ def xml_parser(xml_string, verbose=False):
     xml_string = xml_string.replace("\n", "")
     xml_string = xml_string.replace("\t", " ")
     xml_string = xml_string.strip()
+    xml_string = " ".join(xml_string.split())
     # Check init or end text (there should not have been any but let's check
     if len(xml_string) > 0:
         xml_string, text = _find_text(xml_string, fatal=True)
@@ -468,16 +544,24 @@ def xml_parser(xml_string, verbose=False):
             comments.append(comment)
     # Check for root element (there should not have comment at this place)
     if len(xml_string) > 0:
-        xml_string, root_element = _find_element(xml_string, verbose=verbose)
+        xml_string, root_element = _find_one_part_element(xml_string, verbose=verbose)
+        if root_element is None:
+            xml_string, root_element = _find_two_parts_element(xml_string, verbose=verbose)
+            if root_element is None:
+                raise Exception("Could not guess what the root element could be...")
     # Check for additional comments
     comment = True
     while comment and len(xml_string) > 0:
-        xml_string, comment = _build_element(xml_string, verbose=verbose)
+        new_xml_string, comment = _build_element(xml_string, verbose=verbose)
+        if new_xml_string == xml_string:
+            raise Exception("It seems that there was something that is not a comment after the root element...")
+        else:
+            xml_string = new_xml_string
         if comment is not None:
             comments.append(comment)
     # Check that len of xml_string is 0
     if len(xml_string) > 0:
-        raise Exception("The XML string should have a length of 0.")
+        raise Exception("The XML string should follow the pattern: header comment root_xml_element comment")
     return text, comments, header, root_element
 
 
@@ -490,12 +574,21 @@ def xml_file_parser(xml_file, verbose=False):
 
 if __name__ == "__main__":
     for my_xml_file in [
-        #"/home/rigoudyg/dev/dr2xml/tests/test_a4SST_AGCM_1960/output_ref_python2/dr2xml_trip.xml",
-        #"/home/rigoudyg/dev/dr2xml/tests/common/xml_files//./ping_surfex.xml",
-        #"/home/rigoudyg/dev/dr2xml/tests/common/xml_files/iodef.xml",
-        #"/home/rigoudyg/dev/dr2xml/tests/common/xml_files//./surfex_fields.xml",
-        #"/home/rigoudyg/dev/dr2xml/tests/common/xml_files/atmo_fields.xml",
-        "/home/rigoudyg/dev/dr2xml/tests/nemo_fields.xml",
+        "/home/rigoudyg/dev/dr2xml/tests/test_files_aladin/arpsfx.xml",
+        "/home/rigoudyg/dev/dr2xml/tests/test_files_aladin/atmo_fields.xml",
+        "/home/rigoudyg/dev/dr2xml/tests/test_files_aladin/iodef.AORCM.xml",
+        "/home/rigoudyg/dev/dr2xml/tests/test_files_aladin/nemo.xml",
+        "/home/rigoudyg/dev/dr2xml/tests/test_files_aladin/nemo_domains.xml",
+        "/home/rigoudyg/dev/dr2xml/tests/test_files_aladin/nemo_fields.xml",
+        "/home/rigoudyg/dev/dr2xml/tests/test_files_aladin/ping_nemo.xml",
+        "/home/rigoudyg/dev/dr2xml/tests/test_files_aladin/ping_surfex.xml",
+        "/home/rigoudyg/dev/dr2xml/tests/test_files_aladin/surfex_fields.xml",
+        "/home/rigoudyg/dev/dr2xml/tests//test_a4SST_AGCM_1960/output_ref_python2/dr2xml_surfex.xml",
+        "/home/rigoudyg/dev/dr2xml/tests//test_a4SST_AGCM_1960/output_ref_python2/dr2xml_trip.xml",
+        "/home/rigoudyg/dev/dr2xml/tests//test_amip_hist_AGCM_1870_r10/output_ref_python2/dr2xml_surfex.xml",
+        "/home/rigoudyg/dev/dr2xml/tests//test_amip_hist_AGCM_1870_r10/output_ref_python2/dr2xml_trip.xml",
+        "/home/rigoudyg/dev/dr2xml/tests//test_land_hist_LGCM/output_ref_python2/dr2xml_surfex.xml",
+        "/home/rigoudyg/dev/dr2xml/tests//test_land_hist_LGCM/output_ref_python2/dr2xml_trip.xml",
     ]:
         print(my_xml_file)
         text, comments, header, root_element = xml_file_parser(my_xml_file, verbose=False)
