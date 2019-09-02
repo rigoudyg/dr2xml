@@ -8,22 +8,22 @@ Prototype of xml writer to keep order.
 from __future__ import print_function, division, absolute_import, unicode_literals
 
 from collections import OrderedDict
-import copy
 import six
 import re
 from io import open
+import os
+from copy import copy, deepcopy
+
+
+def is_xml_element(element):
+    return isinstance(element, (Beacon, Element, Comment, Header))
 
 
 # Create some classes to deal with xml writing
 class Beacon(object):
-    """
-    Generic class to deal with XML beacons.
-    """
+
     def __init__(self):
         self.level = 0
-        self.attrib = OrderedDict()
-        self.children = list()
-        self.tag = None
 
     def __str__(self):
         return self.dump()
@@ -34,39 +34,42 @@ class Beacon(object):
     def __len__(self):
         return len(self.dump())
 
-    def __getitem__(self, index):
-        return self.children[index]
+    def __eq__(self, other):
+        test = isinstance(other, type(self))
+        if test:
+            test = self._test_attribute_equality("level", other)
+        return test
 
-    def __setitem__(self, index, element):
-        self.children[index] = element
-
-    def __delitem__(self, index):
-        del self.children[index]
-
-    def is_xml_element(self):
-        return isinstance(self, (Beacon, Element, Comment, Header))
+    def __copy__(self):
+        element = Beacon()
+        element.update_level(self.level)
+        return element
 
     def dump(self):
         raise NotImplementedError()
 
-    def update_level(self, new_level):
-        if self.level != new_level:
-            self.level = new_level
-            if len(self.children) > 0:
-                i = 0
-                while i < len(self.children):
-                    self.children[i].update_level(new_level + 1)
-                    i += 1
+    @staticmethod
+    def _test_dict_equality(a_dict, an_other_dict):
+        test = isinstance(a_dict, (dict, OrderedDict)) and isinstance(an_other_dict, (dict, OrderedDict))
+        if test:
+            test = len(a_dict) == len(an_other_dict)
+        if test:
+            for key in list(a_dict):
+                test = test and key in an_other_dict and a_dict[key] == an_other_dict[key]
+        return test
 
-    def copy(self):
-        element = Beacon()
-        element.tag = copy.copy(self.tag)
-        element.level = copy.copy(self.level)
-        element.attrib = copy.deepcopy(self.attrib)
-        element.children = list()
-        for child in self.children:
-            element.children.append(child.copy())
-        return element
+    def _test_attribute_equality(self, attrib, other):
+        if attrib == "text":
+            default = ""
+        else:
+            default = None
+        self_attrib = getattr(self, attrib, default)
+        other_attrib = getattr(other, attrib, default)
+        test = isinstance(other_attrib, type(self_attrib))
+        if test and self_attrib != default and other_attrib != default and self_attrib == other_attrib:
+            return True
+        else:
+            return False
 
     @staticmethod
     def correct_attrib(attrib):
@@ -77,96 +80,68 @@ class Beacon(object):
             corrected_attrib[str(key)] = str(value)
         return corrected_attrib
 
-    def _dump_attrib(self, sorted=False):
-        if len(self.attrib) > 0:
+    @staticmethod
+    def dump_dict(a_dict, sort=False):
+        if len(a_dict) >0:
             list_key_value = list()
-            if sorted:
-                for key in sorted(list(self.attrib)):
-                    list_key_value.append((key, self.attrib[key]))
+            if sort:
+                for key in sorted(list(a_dict)):
+                    list_key_value.append((key, a_dict[key]))
             else:
-                for (key, value) in self.attrib.items():
+                for (key, value) in a_dict.items():
                     list_key_value.append((key, value))
             return " ".join(['{}={}'.format(key, '"{}"'.format(value)) for (key, value) in list_key_value])
         else:
             return None
 
-    def append(self, element):
-        if element is not None:
-            if not element.is_xml_element():
-                raise TypeError("Could not append an element of type %s to an XML element." % type(element))
-            element.update_level(self.level + 1)
-            self.children.append(element)
+    def _dump_attrib(self, sort=False):
+        raise NotImplementedError()
 
-    def extend(self, elements):
-        for (rank, element) in enumerate(elements):
-            if not element.is_xml_element():
-                raise TypeError("Could not extend an XML element with elements of type %s." % type(element))
-            else:
-                elements[rank].update_level(self.level + 1)
-        if elements is not None:
-            self.children.extend(elements)
-
-    def insert(self, index, element):
-        if element is not None:
-            if not element.is_xml_element():
-                raise TypeError("Could not insert an element of type %s to an XML element." % type(element))
-            element.update_level(self.level + 1)
-            self.children.insert(index, element)
-
-    def remove(self, element):
-        if element is not None:
-            if not element.is_xml_element():
-                raise TypeError("Could not append an remove of type %s to an XML element." % type(element))
-            self.children.remove(element)
-
-    def _dump_children(self):
-        if len(self.children) > 0:
-            return "\n".join([child.dump().decode("utf-8") for child in self.children])
-        else:
-            return ""
+    def update_level(self, new_level):
+        if self.level != new_level:
+            self.level = new_level
 
 
 class Comment(Beacon):
-    """
-    Class to deal with XML comments.
-    """
+
     def __init__(self, comment):
         super(Comment, self).__init__()
-        # Deal with comment attribute
         self.comment = comment
 
-    def copy(self):
+    def __eq__(self, other):
+        test = super(Comment, self).__eq__(other)
+        if test:
+            test = self._test_attribute_equality("comment", other)
+        return test
+
+    def __copy__(self):
         element = Comment(comment=self.comment)
-        element.level = copy.copy(self.level)
-        element.attrib = copy.deepcopy(self.attrib)
-        element.children = list()
-        for child in self.children:
-            element.children.append(child.copy())
-        element.tag = copy.copy(self.tag)
+        element.update_level(self.level)
         return element
 
     def dump(self):
-        rep = "\t"*self.level+"<!--%s-->" % self.comment
+        rep = "\t" * self.level + "<!--%s-->" % self.comment
         return rep.encode("utf-8")
 
 
 class Header(Beacon):
-    """
-    Class to deal with xml header.
-    """
+
     def __init__(self, tag, attrib=OrderedDict()):
         super(Header, self).__init__()
-        # Deal with attrib attribute
-        self.attrib = copy.deepcopy(attrib)
         self.tag = tag
+        self.attrib = deepcopy(attrib)
 
-    def copy(self):
-        element = Header(tag=self.tag)
-        element.level = copy.copy(self.level)
-        element.attrib = copy.deepcopy(self.attrib)
-        element.children = list()
-        for child in self.children:
-            element.children.append(child.copy())
+    def __eq__(self, other):
+        test = super(Header, self).__eq__(other)
+        if test:
+            test = self._test_attribute_equality("tag", other)
+        if test:
+            test = self._test_dict_equality(self.attrib, other.attrib)
+        return test
+
+    def __copy__(self):
+        element = Header(tag=self.tag, attrib=deepcopy(self.attrib))
+        element.update_level(self.level)
         return element
 
     def dump(self):
@@ -177,30 +152,39 @@ class Header(Beacon):
             rep = offset + '<?{}?>'.format(self.tag)
         return rep.encode("utf-8")
 
+    def _dump_attrib(self, sort=False):
+        return self.dump_dict(deepcopy(self.attrib), sort=sort)
+
 
 class Element(Beacon):
-    """
-    Class to deal with xml elements.
-    """
+
     def __init__(self, tag, text=None, attrib=OrderedDict()):
         super(Element, self).__init__()
-        # Deal with tag attribute
         self.tag = tag
-        # Deal with attrib attribute
-        self.attrib = copy.deepcopy(attrib)
-        # Deal with text attribute
         self.text = text
+        self.attrib = deepcopy(attrib)
+        self.children = list()
+
+    def __eq__(self, other):
+        test = super(Element, self).__eq__(other)
+        if test:
+            test = self._test_attribute_equality("tag", other)
+        if test:
+            test = self._test_attribute_equality("text", other)
+        if test:
+            test = self._test_dict_equality(self.attrib, other.attrib)
+        if test:
+            test = self._test_attribute_equality("children", other)
+        return test
 
     def __len__(self):
         return len(self.children)
 
-    def copy(self):
-        element = Element(tag=self.tag, text=self.text)
-        element.level = copy.copy(self.level)
-        element.attrib = copy.deepcopy(self.attrib)
-        element.children = list()
+    def __copy__(self):
+        element = Element(tag=self.tag, text=self.text, attrib=deepcopy(self.attrib))
+        element.update_level(self.level)
         for child in self.children:
-            element.children.append(child.copy())
+            element.children.append(copy(child))
         return element
 
     def dump(self):
@@ -227,6 +211,50 @@ class Element(Beacon):
         else:
             rep = "{}<{}>{}</{}>".format(offset, header, content, self.tag)
         return rep.encode("utf-8")
+
+    def append(self, element):
+        if element is not None:
+            if not is_xml_element(element):
+                raise TypeError("Could not append an element of type %s to an XML element." % type(element))
+            element.update_level(self.level + 1)
+            self.children.append(element)
+
+    def extend(self, elements):
+        if elements is not None:
+            for (rank, element) in enumerate(elements):
+                if not is_xml_element(element):
+                    raise TypeError("Could not extend an XML element with elements of type %s." % type(element))
+                else:
+                    elements[rank].update_level(self.level + 1)
+            self.children.extend(elements)
+
+    def insert(self, index, element):
+        if element is not None:
+            if not is_xml_element(element):
+                raise TypeError("Could not insert an element of type %s to an XML element." % type(element))
+            element.update_level(self.level + 1)
+            self.children.insert(index, element)
+
+    def remove(self, element):
+        if element is not None:
+            if not is_xml_element(element):
+                raise TypeError("Could not append an remove of type %s to an XML element." % type(element))
+            self.children.remove(element)
+
+    def update_level(self, new_level):
+        super(Element, self).update_level(new_level)
+        if len(self.children) > 0:
+            for i in range(len(self.children)):
+                self.children[i].update_level(new_level + 1)
+
+    def _dump_children(self):
+        if len(self.children) > 0:
+            return "\n".join([child.dump().decode("utf-8") for child in self.children])
+        else:
+            return ""
+
+    def _dump_attrib(self, sort=False):
+        return self.dump_dict(deepcopy(self.attrib), sort=sort)
 
 
 # XML dict regexp
@@ -758,41 +786,42 @@ def xml_file_parser(xml_file, verbose=False):
 
 
 if __name__ == "__main__":
+    dr2xml_tests_dir = os.sep.join([os.sep.join(os.path.abspath(__file__).split(os.sep)[:-1]), "tests"])
     for my_xml_file in [
-        #"/home/rigoudyg/dev/dr2xml/tests/test_files_aladin/arpsfx.xml",
-        #"/home/rigoudyg/dev/dr2xml/tests/test_files_aladin/atmo_fields.xml",
-        #"/home/rigoudyg/dev/dr2xml/tests/test_files_aladin/iodef.AORCM.xml",
-        #"/home/rigoudyg/dev/dr2xml/tests/test_files_aladin/nemo.xml",
-        #"/home/rigoudyg/dev/dr2xml/tests/test_files_aladin/nemo_domains.xml",
-        #"/home/rigoudyg/dev/dr2xml/tests/test_files_aladin/nemo_fields.xml",
-        #"/home/rigoudyg/dev/dr2xml/tests/test_files_aladin/ping_nemo.xml",
-        #"/home/rigoudyg/dev/dr2xml/tests/test_files_aladin/ping_surfex.xml",
-        #"/home/rigoudyg/dev/dr2xml/tests/test_files_aladin/surfex_fields.xml",
-        #"/home/rigoudyg/dev/dr2xml/tests/test_a4SST_AGCM_1960/output_ref_python2/dr2xml_surfex.xml",
-        #"/home/rigoudyg/dev/dr2xml/tests/test_a4SST_AGCM_1960/output_ref_python2/dr2xml_trip.xml",
-        #"/home/rigoudyg/dev/dr2xml/tests/test_amip_hist_AGCM_1870_r10/output_ref_python2/dr2xml_surfex.xml",
-        #"/home/rigoudyg/dev/dr2xml/tests/test_amip_hist_AGCM_1870_r10/output_ref_python2/dr2xml_trip.xml",
-        #"/home/rigoudyg/dev/dr2xml/tests/test_land_hist_LGCM/output_ref_python2/dr2xml_surfex.xml",
-        #"/home/rigoudyg/dev/dr2xml/tests/test_land_hist_LGCM/output_ref_python2/dr2xml_trip.xml",
-        #"/home/rigoudyg/dev/dr2xml/tests/common/xml_files/aero_fields.xml",
-        #"/home/rigoudyg/dev/dr2xml/tests/common/xml_files/arpsfx.xml",
-        #"/home/rigoudyg/dev/dr2xml/tests/common/xml_files/atmo_fields.xml",
-        #"/home/rigoudyg/dev/dr2xml/tests/common/xml_files/chem_fields.xml",
-        #"/home/rigoudyg/dev/dr2xml/tests/common/xml_files/iodef.xml",
-        #"/home/rigoudyg/dev/dr2xml/tests/common/xml_files/nemo.xml",
-        #"/home/rigoudyg/dev/dr2xml/tests/common/xml_files/nemo_domains.xml",
-        #"/home/rigoudyg/dev/dr2xml/tests/common/xml_files/nemo_fields.xml",
-        #"/home/rigoudyg/dev/dr2xml/tests/common/xml_files/ping_nemo.xml",
-        #"/home/rigoudyg/dev/dr2xml/tests/common/xml_files/ping_nemo_gelato.xml",
-        #"/home/rigoudyg/dev/dr2xml/tests/common/xml_files/ping_nemo_ocnBgChem.xml",
-        #"/home/rigoudyg/dev/dr2xml/tests/common/xml_files/ping_surfex.xml",
-        #"/home/rigoudyg/dev/dr2xml/tests/common/xml_files/ping_trip.xml",
-        #"/home/rigoudyg/dev/dr2xml/tests/common/xml_files/surfex_fields.xml",
-        #"/home/rigoudyg/dev/dr2xml/tests/common/xml_files/trip.xml",
-        #"/home/rigoudyg/dev/dr2xml/tests/common/xml_files/trip_fields.xml"
+        os.sep.join([dr2xml_tests_dir, "test_files_aladin/arpsfx.xml"]),
+        os.sep.join([dr2xml_tests_dir, "test_files_aladin/atmo_fields.xml"]),
+        os.sep.join([dr2xml_tests_dir, "test_files_aladin/iodef.AORCM.xml"]),
+        os.sep.join([dr2xml_tests_dir, "test_files_aladin/nemo.xml"]),
+        os.sep.join([dr2xml_tests_dir, "test_files_aladin/nemo_domains.xml"]),
+        os.sep.join([dr2xml_tests_dir, "test_files_aladin/nemo_fields.xml"]),
+        os.sep.join([dr2xml_tests_dir, "test_files_aladin/ping_nemo.xml"]),
+        os.sep.join([dr2xml_tests_dir, "test_files_aladin/ping_surfex.xml"]),
+        os.sep.join([dr2xml_tests_dir, "test_files_aladin/surfex_fields.xml"]),
+        os.sep.join([dr2xml_tests_dir, "test_a4SST_AGCM_1960/output_ref_python2/dr2xml_surfex.xml"]),
+        os.sep.join([dr2xml_tests_dir, "test_a4SST_AGCM_1960/output_ref_python2/dr2xml_trip.xml"]),
+        os.sep.join([dr2xml_tests_dir, "test_amip_hist_AGCM_1870_r10/output_ref_python2/dr2xml_surfex.xml"]),
+        os.sep.join([dr2xml_tests_dir, "test_amip_hist_AGCM_1870_r10/output_ref_python2/dr2xml_trip.xml"]),
+        os.sep.join([dr2xml_tests_dir, "test_land_hist_LGCM/output_ref_python2/dr2xml_surfex.xml"]),
+        os.sep.join([dr2xml_tests_dir, "test_land_hist_LGCM/output_ref_python2/dr2xml_trip.xml"]),
+        os.sep.join([dr2xml_tests_dir, "common/xml_files/aero_fields.xml"]),
+        os.sep.join([dr2xml_tests_dir, "common/xml_files/arpsfx.xml"]),
+        os.sep.join([dr2xml_tests_dir, "common/xml_files/atmo_fields.xml"]),
+        os.sep.join([dr2xml_tests_dir, "common/xml_files/chem_fields.xml"]),
+        os.sep.join([dr2xml_tests_dir, "common/xml_files/iodef.xml"]),
+        os.sep.join([dr2xml_tests_dir, "common/xml_files/nemo.xml"]),
+        os.sep.join([dr2xml_tests_dir, "common/xml_files/nemo_domains.xml"]),
+        os.sep.join([dr2xml_tests_dir, "common/xml_files/nemo_fields.xml"]),
+        os.sep.join([dr2xml_tests_dir, "common/xml_files/ping_nemo.xml"]),
+        os.sep.join([dr2xml_tests_dir, "common/xml_files/ping_nemo_gelato.xml"]),
+        os.sep.join([dr2xml_tests_dir, "common/xml_files/ping_nemo_ocnBgChem.xml"]),
+        os.sep.join([dr2xml_tests_dir, "common/xml_files/ping_surfex.xml"]),
+        os.sep.join([dr2xml_tests_dir, "common/xml_files/ping_trip.xml"]),
+        os.sep.join([dr2xml_tests_dir, "common/xml_files/surfex_fields.xml"]),
+        os.sep.join([dr2xml_tests_dir, "common/xml_files/trip.xml"]),
+        os.sep.join([dr2xml_tests_dir, "common/xml_files/trip_fields.xml"]),
     ]:
         print(my_xml_file)
-        text, comments, header, root_element = xml_file_parser(my_xml_file, verbose=True)
+        text, comments, header, root_element = xml_file_parser(my_xml_file, verbose=False)
         print(text)
         print(comments)
         print(header)
