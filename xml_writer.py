@@ -13,15 +13,36 @@ import re
 from io import open
 import os
 from copy import copy, deepcopy
+import sys
 
 
 def is_xml_element(element):
     return isinstance(element, (Beacon, Element, Comment, Header))
 
 
+def encode_if_needed(a_string, encoding="utf-8"):
+    if sys.version.startswith("2."):
+        return a_string.encode(encoding)
+    elif sys.version.startswith("3."):
+        return a_string
+    else:
+        raise OSError("Unknown Python version %s", sys.version.split()[0])
+
+
+def decode_if_needed(a_string, encoding="utf-8"):
+    if sys.version.startswith("2."):
+        return a_string.decode(encoding)
+    elif sys.version.startswith("3."):
+        return a_string
+    else:
+        raise OSError("Unknown Python version %s", sys.version.split()[0])
+
+
 # Create some classes to deal with xml writing
 class Beacon(object):
-
+    """
+    Generic class to deal with XML beacons.
+    """
     def __init__(self):
         self.level = 0
 
@@ -82,7 +103,7 @@ class Beacon(object):
 
     @staticmethod
     def dump_dict(a_dict, sort=False):
-        if len(a_dict) >0:
+        if len(a_dict) > 0:
             list_key_value = list()
             if sort:
                 for key in sorted(list(a_dict)):
@@ -121,11 +142,13 @@ class Comment(Beacon):
 
     def dump(self):
         rep = "\t" * self.level + "<!--%s-->" % self.comment
-        return rep.encode("utf-8")
+        return encode_if_needed(rep)
 
 
 class Header(Beacon):
-
+    """
+    Class to deal with xml header.
+    """
     def __init__(self, tag, attrib=OrderedDict()):
         super(Header, self).__init__()
         self.tag = tag
@@ -150,14 +173,16 @@ class Header(Beacon):
             rep = offset + '<?{} {}?>'.format(self.tag, self._dump_attrib())
         else:
             rep = offset + '<?{}?>'.format(self.tag)
-        return rep.encode("utf-8")
+        return encode_if_needed(rep)
 
     def _dump_attrib(self, sort=False):
         return self.dump_dict(deepcopy(self.attrib), sort=sort)
 
 
 class Element(Beacon):
-
+    """
+    Class to deal with xml elements.
+    """
     def __init__(self, tag, text=None, attrib=OrderedDict()):
         super(Element, self).__init__()
         self.tag = tag
@@ -210,7 +235,7 @@ class Element(Beacon):
             rep = "{}<{}/>".format(offset, header)
         else:
             rep = "{}<{}>{}</{}>".format(offset, header, content, self.tag)
-        return rep.encode("utf-8")
+        return encode_if_needed(rep)
 
     def append(self, element):
         if element is not None:
@@ -249,7 +274,7 @@ class Element(Beacon):
 
     def _dump_children(self):
         if len(self.children) > 0:
-            return "\n".join([child.dump().decode("utf-8") for child in self.children])
+            return "\n".join([decode_if_needed(child.dump()) for child in self.children])
         else:
             return ""
 
@@ -781,7 +806,7 @@ def xml_parser(xml_string, verbose=False):
 def xml_file_parser(xml_file, verbose=False):
     with open(xml_file, "rb") as opened_file:
         xml_content = opened_file.readlines()
-    xml_string = "\n".join([line.decode(encoding="utf-8") for line in xml_content])
+    xml_string = "\n".join([line.decode("utf-8") for line in xml_content])
     return xml_parser(xml_string, verbose=verbose)
 
 
