@@ -11,7 +11,7 @@ import copy
 from collections import OrderedDict
 from six import string_types
 
-from utils import dr2xml_error
+from utils import dr2xml_error, decode_if_needed, print_struct
 
 
 # Initial simulation (sset) and laboratory (lset) dictionaries
@@ -23,7 +23,6 @@ def initialize_dict(new_lset=None, new_sset=None):
     global sset, lset
     if new_lset is not None:
         lset = decode_strings_in_dict(new_lset)
-        print(new_lset)
     if new_sset is not None:
         sset = decode_strings_in_dict(new_sset)
 
@@ -33,7 +32,7 @@ def decode_strings(struct):
         return struct
     elif isinstance(struct, string_types):
         struct = str(struct)
-        struct = struct.decode("utf-8")
+        struct = decode_if_needed(struct)
         return struct
     elif isinstance(struct, (dict, OrderedDict)):
         return decode_strings_in_dict(struct)
@@ -83,7 +82,7 @@ def format_dict_for_printing(dictionary):
         dictionary = lset
     elif dictionary == "sset":
         dictionary = sset
-    return "\n".join(["{} : {}".format(s, v) for (s,v) in sorted(dictionary.items())])
+    return print_struct(dictionary, back_line=True, sort=True)
 
 
 def get_variable_from_sset_else_lset_with_default(key_sset, key_lset=None, default=None):

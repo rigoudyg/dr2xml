@@ -8,13 +8,13 @@ Interface between xml module and dr2xml.
 from __future__ import print_function, division, absolute_import, unicode_literals
 
 from collections import OrderedDict
+from io import open
 
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
-import xml_writer
 
-# Configuration variables
-from config import python_version
+import xml_writer
+from utils import encode_if_needed, decode_if_needed
 
 
 def create_xml_element(tag, attrib=OrderedDict(), text=None):
@@ -70,10 +70,11 @@ def create_header():
 
 
 def create_pretty_xml_doc(xml_element, filename):
-    with open(filename, "wb") as out:
+    with open(filename, "w", encoding="utf-8") as out:
         xml_header = create_header()
-        out.write(xml_header.dump())
-        out.write(xml_element.dump())
+        out.write(decode_if_needed(xml_header.dump()))
+        out.write("\n")
+        out.write(decode_if_needed(xml_element.dump()))
 
 
 def remove_subelement_in_xml_element(xml_element, tag=None, attrib=OrderedDict()):

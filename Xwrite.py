@@ -18,7 +18,7 @@ import datetime
 from io import open
 
 # Utilities
-from utils import dr2xml_error
+from utils import dr2xml_error, print_struct
 
 # Global variables and configuration tools
 from config import get_config_variable

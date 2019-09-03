@@ -66,6 +66,18 @@ class Beacon(object):
         element.update_level(self.level)
         return element
 
+    def __getitem__(self, item):
+        pass
+
+    def __setitem__(self, key, value):
+        pass
+
+    def __delitem__(self, key):
+        pass
+
+    def copy(self):
+        return self.__copy__()
+
     def dump(self):
         raise NotImplementedError()
 
@@ -236,6 +248,15 @@ class Element(Beacon):
         else:
             rep = "{}<{}>{}</{}>".format(offset, header, content, self.tag)
         return encode_if_needed(rep)
+
+    def __getitem__(self, item):
+        return self.children[item]
+
+    def __setitem__(self, key, value):
+        self.children[key] = value
+
+    def __delitem__(self, key):
+        self.remove(self[key])
 
     def append(self, element):
         if element is not None:

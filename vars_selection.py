@@ -10,7 +10,7 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 from collections import OrderedDict, namedtuple
 
 # Utilities
-from utils import dr2xml_error
+from utils import dr2xml_error, print_struct
 
 # Interface to settings dictionaries
 from settings_interface import get_variable_from_sset_else_lset_without_default, get_variable_from_lset_with_default, \
@@ -453,7 +453,7 @@ def select_CMORvars_for_lab(sset=False, year=None, printout=False):
     if rls_for_all_experiments is None:
         rls_for_mips = sc.getRequestLinkByMip(set(mips_list)) # Because scope do not accept list types
         if printout:
-            print("Number of Request Links which apply to MIPS", mips_list, " is: ", len(rls_for_mips))
+            print("Number of Request Links which apply to MIPS", print_struct(mips_list), " is: ", len(rls_for_mips))
         #
         excluded_rls = []
         for rl in rls_for_mips:
@@ -508,7 +508,7 @@ def select_CMORvars_for_lab(sset=False, year=None, printout=False):
         if printout:
             print("Number of Request Links which apply to experiment ",
                   experiment_id, " member ", get_variable_from_sset_without_default('realization_index'), " and MIPs",
-                  mips_list, " is: ", len(rls))
+                  print_struct(mips_list), " is: ", len(rls))
         # print "Request links that apply :"+`[ rl.label for rl in filtered_rls ]`
     else:
         rls = rls_for_mips
@@ -740,7 +740,7 @@ def select_variables_to_be_processed(year, context, select, printout, debug):
         if printout and len(list(excludedv)) > 0:
             print("The following pairs (variable,table) have been excluded for these reasons :")
             for reason in sorted(list(excludedv)):
-                print("\t", reason, ":", *excludedv[reason])
+                print("\t", reason, ":", print_struct(excludedv[reason], skip_sep=True))
     if debug:
         print("For table AMon: ", [v.label for v in svars_per_table["Amon"]])
     #

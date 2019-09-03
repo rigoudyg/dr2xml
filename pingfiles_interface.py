@@ -116,16 +116,19 @@ def get_xml_childs(elt, tag='field', groups=['context', 'field_group',
         which have tag TAG, by digging in sub-elements
         named as in GROUPS
         """
-    if elt.tag in groups:
-        rep = []
-        for child in elt:
-            rep.extend(get_xml_childs(child, tag))
-        return rep
-    elif elt.tag == tag:
-        return [elt]
+    if getattr(elt, "tag", None):
+        if elt.tag in groups:
+            rep = []
+            for child in elt:
+                rep.extend(get_xml_childs(child, tag))
+            return rep
+        elif elt.tag == tag:
+            return [elt]
+        else:
+            # print 'Syntax error : tag %s not allowed'%elt.tag
+            # Case of an unkown tag : don't dig in
+            return []
     else:
-        # print 'Syntax error : tag %s not allowed'%elt.tag
-        # Case of an unkown tag : don't dig in
         return []
 
 

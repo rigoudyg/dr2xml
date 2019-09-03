@@ -42,8 +42,11 @@ def read_src(elt, path_parse, printout=False, level=0, dont_read=[]):
     Recursively reads the subfiles indicated by tag 'src' in childs of ELT
     """
     childs = []
+    children_to_delete = list()
     for child in elt:
-        if 'src' in child.attrib:
+        if getattr(child, "attrib", None) is None:
+            children_to_delete.append(child)
+        elif 'src' in child.attrib:
             src = child.attrib['src']
             if src[0] != "/":
                 if path_parse != "./":
@@ -64,7 +67,7 @@ def read_src(elt, path_parse, printout=False, level=0, dont_read=[]):
             if printout:
                 print(level * "\t" + "Reading %s, %s=%s" % (filen, et.tag, gattrib(et, 'id', 'no_id')))
             for el in et:
-                if el.tag is not None:
+                if getattr(el, "tag", None):
                     if printout:
                         print((level + 1) * "\t" + "Storing %s in %s id=%s" % (el.tag, child.tag,
                                                                                gattrib(child, 'id', 'no_id')))
@@ -72,6 +75,8 @@ def read_src(elt, path_parse, printout=False, level=0, dont_read=[]):
                 else:
                     # Case of comments and headers
                     pass
+    for child in children_to_delete:
+        elt.remove(child)
     for child in elt:
         # print level*"\t"+"Recursing on %s %s"%(child.tag,gattrib(child,'id','no_id'))
         read_src(child, path_parse, printout, level + 1, dont_read)
