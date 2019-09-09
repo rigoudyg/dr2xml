@@ -66,7 +66,10 @@ def create_pretty_string_from_xml_element(xml_element):
 
 
 def create_header():
-    return xml_writer.Header(tag="xml", attrib=OrderedDict(version="1.0", encoding="utf-8"))
+    att_dict = OrderedDict()
+    att_dict["version"] = "1.0"
+    att_dict["encoding"] = "utf-8"
+    return xml_writer.Header(tag="xml", attrib=att_dict)
 
 
 def create_pretty_xml_doc(xml_element, filename):

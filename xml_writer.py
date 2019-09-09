@@ -304,21 +304,24 @@ class Element(Beacon):
 
 
 # XML dict regexp
+_generic_dict_regexp = r'(?P<attrib>\s(([^<>\s])+\s?=\s?"([^"])+"\s?)*)'
 _dict_regexp = re.compile(r'(?P<key>\S+)\s?=\s?"(?P<value>[^"]+)"')
 
 
 def _build_dict_attrib(dict_string):
-    dict_string = dict_string.strip()
-    string_match = _dict_regexp.findall(dict_string)
     attrib = OrderedDict()
-    for (key, value) in string_match:
-        attrib[key] = value.replace('"', '')
+    if dict_string and len(dict_string) > 0:
+        dict_string = dict_string.strip()
+        string_match = _dict_regexp.findall(dict_string)
+        for (key, value) in string_match:
+            value = value.strip().replace('"', '')
+            attrib[key] = value
     return attrib
 
 
 # XML header regexp
-_xml_header_regexp = re.compile(r'(\s?<\?\s?\w*\s?(([^><])*)\s?\?>\s?)')
-_xml_header_regexp_begin = re.compile(r'^<\s?\?\s?(?P<tag>\w*)\s?(?P<attrib>([^><])*)\s?\?>')
+_xml_header_regexp = re.compile(r'(\s?<\s?\?\s?(?P<tag>\w*){}\s?\?>\s?)'.format(_generic_dict_regexp))
+_xml_header_regexp_begin = re.compile(r'^<\s?\?\s?(?P<tag>\w*){}\s?\?>'.format(_generic_dict_regexp))
 
 
 def _find_xml_header(xml_string, verbose=False):
@@ -344,7 +347,7 @@ def _find_xml_header(xml_string, verbose=False):
 _xml_comment_regexp = re.compile(r"^(?P<all>\s?<\!--\s?(?P<comment>((?!<\!--)(?!-->).)+)\s?-->)\s?")
 
 
-def _find_xml_comment(xml_string, verbose=True):
+def _find_xml_comment(xml_string, verbose=False):
     # if verbose:
     #     print("<<<find_xml_comment: XML_STRING before>>>", len(xml_string), xml_string)
     xml_string = xml_string.strip()
@@ -408,27 +411,32 @@ def _build_element(xml_string, verbose=False):
 
 
 # XML single part regexp
-_xml_single_part_element_regexp = re.compile(r'^\s?(?P<all><\s?(?P<tag>\w+)\s?(?P<attrib>([^><])*)\s?/>)\s?')
+_xml_single_part_element_regexp = re.compile(r'^\s?(?P<all><\s?(?P<tag>(\w+\s?)+){}*\s?/>)\s?'.format(_generic_dict_regexp))
 
 
 def _find_one_part_element(xml_string, verbose=False):
+    if verbose:
+        print("<<<find_one_part_element BEFORE>>>", len(xml_string), xml_string)
     xml_string = xml_string.strip()
     match_single_part = _xml_single_part_element_regexp.match(xml_string)
     if match_single_part:
         tag = match_single_part.groupdict()["tag"]
+        tag = tag.strip()
         attrib = match_single_part.groupdict()["attrib"]
         attrib = _build_dict_attrib(attrib)
         element = Element(tag=tag, attrib=attrib)
         xml_string = xml_string.replace(match_single_part.groupdict()["all"], "")
+        if verbose:
+            print("<<<find_one_part_element AFTER>>>", len(xml_string), xml_string)
         return xml_string, element
     else:
         return xml_string, None
 
 
 # XML two parts regexp
-_xml_string_first_element_replace = r'(?P<all_begin>\s?(?P<begin><\s?(?P<tag>{})\s?(?P<attrib>([^><])*)\s?>)\s?)'
+_xml_string_first_element_replace = r'(?P<all_begin>\s?(?P<begin><\s?(?P<tag>{}){}*\s?>)\s?)'.format('{}', _generic_dict_regexp)
 _xml_string_init_element_replace = r'^'+_xml_string_first_element_replace
-_xml_init_two_parts_element_regexp = re.compile(_xml_string_init_element_replace.format(r"\w+"))
+_xml_init_two_parts_element_regexp = re.compile(_xml_string_init_element_replace.format(r"(\w+\s?)+"))
 _xml_string_content_element = r'(?P<content>{})'
 _xml_string_end_element_replace = r'(?P<all_end>\s?(?P<end></\s?{}\s?>)\s?)'
 _xml_string_two_parts_element_replace = _xml_string_init_element_replace + _xml_string_content_element + \
@@ -441,8 +449,9 @@ def _find_matching_first_part_in_content(content, tag, verbose=False):
     find_positions_first_part_in_content = list()
     last_position = 0
     for match in finditer_matches_first_part_in_content:
-        last_position = content.find(match.groupdict()["begin"], last_position + 1)
+        last_position = content.find(match.groupdict()["begin"], last_position)
         find_positions_first_part_in_content.append(last_position)
+        last_position += 1
     if verbose:
         print("<<<find_matching_first_part_in_content: rank match first part>>>",
               len(find_positions_first_part_in_content), find_positions_first_part_in_content)
@@ -546,8 +555,9 @@ def _find_two_parts_element(xml_string, verbose=False):
         # Create string to remove
         string_to_remove = all_begin + content + end
         # Separate children from text
-        sub_xml_string, text = _find_text(content)
+        sub_xml_string, text = _find_text(content, verbose=verbose)
         if verbose:
+            print("<<<SUB_XML_STRING>>> Text found", text)
             print("<<<SUB_XML_STRING>>>", len(sub_xml_string), sub_xml_string)
         if len(text) == 0:
             text = None
@@ -556,13 +566,24 @@ def _find_two_parts_element(xml_string, verbose=False):
         while len(sub_xml_string) > 0:
             if verbose:
                 print("<<<SUB_XML_STRING>>> Enter the loop...", len(sub_xml_string), sub_xml_string)
-            new_sub_xml_string, subelement = _build_element(sub_xml_string, verbose=verbose)
+            new_sub_xml_string, text = _find_text(sub_xml_string, verbose=verbose)
+            if len(text) > 0:
+                if verbose:
+                    print("<<<SUB_XML_STRING>>> Text found:", text)
+                if element.text is None:
+                    element.text = text
+                else:
+                    element.text = "\n".join(element.text, text)
+                new_sub_xml_string = new_sub_xml_string.strip()
+            new_sub_xml_string, subelement = _build_element(new_sub_xml_string, verbose=verbose)
             if sub_xml_string == new_sub_xml_string:
                 raise Exception("Stop: Infinite loop!!!!!!")
             else:
                 sub_xml_string = new_sub_xml_string
             sub_xml_string = sub_xml_string.strip()
             if subelement is not None:
+                if verbose:
+                    print("<<<find sub_element>>>", subelement)
                 element.append(subelement)
         xml_string = xml_string.replace(string_to_remove, "")
         if verbose:
@@ -594,7 +615,7 @@ def _find_text(xml_string, fatal=False, verbose=False):
         else:
             end_text = ""
         if rank_start_init_element > 0:
-            init_text = xml_string[0:(rank_start_init_element - 1)]
+            init_text = xml_string[0:rank_start_init_element]
             xml_string = xml_string[rank_start_init_element:]
         else:
             init_text = ""
@@ -615,7 +636,8 @@ def _pre_xml_string_format(xml_string, verbose=False):
     xml_string = xml_string.replace("\n", " ")
     xml_string = xml_string.replace("\t", " ")
     xml_string = xml_string.strip()
-    xml_string = " ".join(xml_string.split(" "))
+    xml_string = xml_string.split(" ")
+    xml_string = " ".join([m for m in xml_string if len(m) > 0])
     # Look for reserved symbols (< and >) and replace them
     begin_comment_positions = [m.start() for m in re.compile(r"<!--").finditer(xml_string)]
     end_comment_positions = [m.end() - 1 for m in re.compile(r"-->").finditer(xml_string)]
@@ -675,7 +697,7 @@ def _pre_xml_string_format(xml_string, verbose=False):
                 if verbose:
                     print("<<<pre_xml_string_format: last beacons>>>", possible_lower_positions[l-1],
                           l_pos, xml_string[possible_lower_positions[l-1]:l_pos + 1])
-                    raise Exception("Unexpected '<' symbol", l_pos)
+                raise Exception("Unexpected '<' symbol", l_pos)
         else:
             if _find_in_out(g_pos, comments_positions, verbose=verbose):
                 if verbose:
@@ -756,18 +778,30 @@ def _pre_xml_string_format(xml_string, verbose=False):
 
 
 def replace_char_at_pos_by_string(complete_string, string_in, replace_out, pos_init, pos_end, verbose=False):
-    if (pos_init == pos_end and complete_string[pos_init] != string_in) or \
-            (pos_init != pos_end and complete_string[pos_init:pos_end] != string_in):
+    if verbose:
+        print("<<<replace_char_at_pos_by_string>>> len of input string", len(complete_string))
+    single_char = pos_init == pos_end
+    if pos_init < 0 or (not single_char and pos_end > len(complete_string)) or \
+            (single_char and pos_end >= len(complete_string)):
+        raise Exception("The string to be replaced is not in the complete string")
+    if (single_char and complete_string[pos_init] != string_in) or \
+            (not single_char and complete_string[pos_init:pos_end] != string_in):
         raise Exception("The string to be replaced is not the one present: %s / %s" %
                         (string_in, complete_string[pos_init:pos_end]))
-    if pos_end >= len(complete_string) or pos_init < 0:
-        raise Exception("The string to be replaced is not in the complete string")
-    if pos_init == 0:
-        return replace_out + complete_string[(pos_end + 1):]
-    elif pos_end == len(complete_string) - 1:
-        return complete_string[:pos_end] + replace_out
+    if single_char:
+        if pos_init == 0:
+            return replace_out + complete_string[pos_end + 1:]
+        elif pos_end == len(complete_string) - 1:
+            return complete_string[:pos_init] + replace_out
+        else:
+            return complete_string[:pos_init] + replace_out + complete_string[pos_end + 1:]
     else:
-        return complete_string[:pos_init] + replace_out + complete_string[(pos_end + 1):]
+        if pos_init == 0:
+            return replace_out + complete_string[pos_end:]
+        elif pos_end == len(complete_string):
+            return complete_string[:pos_init] + replace_out
+        else:
+            return complete_string[:pos_init] + replace_out + complete_string[pos_end:]
 
 
 def _find_in_out(pos, list_in_out_pos, verbose=False):
@@ -788,9 +822,13 @@ def xml_parser(xml_string, verbose=False):
     # Check init or end text (there should not have been any but let's check
     if len(xml_string) > 0:
         xml_string, text = _find_text(xml_string, fatal=True)
+    else:
+        text = None
     # Check for header
     if len(xml_string) > 0:
         xml_string, header = _find_xml_header(xml_string, verbose=verbose)
+    else:
+        header = None
     # Check for comments
     comments = list()
     comment = True
@@ -800,14 +838,15 @@ def xml_parser(xml_string, verbose=False):
             comments.append(comment)
         xml_string = xml_string.strip()
     # Check for root element (there should not have comment at this place)
+    root_element = None
     if len(xml_string) > 0:
         xml_string, root_element = _find_one_part_element(xml_string, verbose=verbose)
         xml_string = xml_string.strip()
         if root_element is None:
             xml_string, root_element = _find_two_parts_element(xml_string, verbose=verbose)
             xml_string = xml_string.strip()
-            if root_element is None:
-                raise Exception("Could not guess what the root element could be...")
+    if root_element is None:
+        raise Exception("Could not guess what the root element could be...")
     # Check for additional comments
     comment = True
     while comment and len(xml_string) > 0:
@@ -834,37 +873,7 @@ def xml_file_parser(xml_file, verbose=False):
 if __name__ == "__main__":
     dr2xml_tests_dir = os.sep.join([os.sep.join(os.path.abspath(__file__).split(os.sep)[:-1]), "tests"])
     for my_xml_file in [
-        os.sep.join([dr2xml_tests_dir, "test_files_aladin/arpsfx.xml"]),
-        os.sep.join([dr2xml_tests_dir, "test_files_aladin/atmo_fields.xml"]),
-        os.sep.join([dr2xml_tests_dir, "test_files_aladin/iodef.AORCM.xml"]),
-        os.sep.join([dr2xml_tests_dir, "test_files_aladin/nemo.xml"]),
-        os.sep.join([dr2xml_tests_dir, "test_files_aladin/nemo_domains.xml"]),
-        os.sep.join([dr2xml_tests_dir, "test_files_aladin/nemo_fields.xml"]),
-        os.sep.join([dr2xml_tests_dir, "test_files_aladin/ping_nemo.xml"]),
-        os.sep.join([dr2xml_tests_dir, "test_files_aladin/ping_surfex.xml"]),
-        os.sep.join([dr2xml_tests_dir, "test_files_aladin/surfex_fields.xml"]),
-        os.sep.join([dr2xml_tests_dir, "test_a4SST_AGCM_1960/output_ref_python2/dr2xml_surfex.xml"]),
-        os.sep.join([dr2xml_tests_dir, "test_a4SST_AGCM_1960/output_ref_python2/dr2xml_trip.xml"]),
-        os.sep.join([dr2xml_tests_dir, "test_amip_hist_AGCM_1870_r10/output_ref_python2/dr2xml_surfex.xml"]),
-        os.sep.join([dr2xml_tests_dir, "test_amip_hist_AGCM_1870_r10/output_ref_python2/dr2xml_trip.xml"]),
-        os.sep.join([dr2xml_tests_dir, "test_land_hist_LGCM/output_ref_python2/dr2xml_surfex.xml"]),
-        os.sep.join([dr2xml_tests_dir, "test_land_hist_LGCM/output_ref_python2/dr2xml_trip.xml"]),
-        os.sep.join([dr2xml_tests_dir, "common/xml_files/aero_fields.xml"]),
-        os.sep.join([dr2xml_tests_dir, "common/xml_files/arpsfx.xml"]),
-        os.sep.join([dr2xml_tests_dir, "common/xml_files/atmo_fields.xml"]),
-        os.sep.join([dr2xml_tests_dir, "common/xml_files/chem_fields.xml"]),
-        os.sep.join([dr2xml_tests_dir, "common/xml_files/iodef.xml"]),
-        os.sep.join([dr2xml_tests_dir, "common/xml_files/nemo.xml"]),
-        os.sep.join([dr2xml_tests_dir, "common/xml_files/nemo_domains.xml"]),
-        os.sep.join([dr2xml_tests_dir, "common/xml_files/nemo_fields.xml"]),
-        os.sep.join([dr2xml_tests_dir, "common/xml_files/ping_nemo.xml"]),
-        os.sep.join([dr2xml_tests_dir, "common/xml_files/ping_nemo_gelato.xml"]),
-        os.sep.join([dr2xml_tests_dir, "common/xml_files/ping_nemo_ocnBgChem.xml"]),
-        os.sep.join([dr2xml_tests_dir, "common/xml_files/ping_surfex.xml"]),
-        os.sep.join([dr2xml_tests_dir, "common/xml_files/ping_trip.xml"]),
-        os.sep.join([dr2xml_tests_dir, "common/xml_files/surfex_fields.xml"]),
-        os.sep.join([dr2xml_tests_dir, "common/xml_files/trip.xml"]),
-        os.sep.join([dr2xml_tests_dir, "common/xml_files/trip_fields.xml"]),
+        os.sep.join([dr2xml_tests_dir, "tests_xml_writer.xml"]),
     ]:
         print(my_xml_file)
         text, comments, header, root_element = xml_file_parser(my_xml_file, verbose=False)
