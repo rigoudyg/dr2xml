@@ -86,5 +86,11 @@ def print_struct(struct, skip_sep=False, sort=False, back_line=False):
         if not skip_sep:
             rep = "{" + rep + "}"
         return rep
+    elif isinstance(struct, set):
+        list_items = sorted(list(struct))
+        rep = ", ".join([print_struct(elt) for elt in struct])
+        if not skip_sep:
+            rep = "{" + rep + "}"
+        return rep
     else:
         return "'{}'".format(struct)

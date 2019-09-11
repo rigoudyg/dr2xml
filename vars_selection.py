@@ -637,7 +637,7 @@ def select_CMORvars_for_lab(sset=False, year=None, printout=False):
     if printout:
         lissues = list(sn_issues)
         lissues.sort()
-        print("Issues with standard names are :", lissues)
+        print("Issues with standard names are :", print_struct(lissues))
 
     return simplified_vars
 

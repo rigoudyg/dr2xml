@@ -60,6 +60,9 @@ import io
 
 from collections import OrderedDict
 
+# Utilities
+from utils import print_struct
+
 # Global variables and configuration tools
 from config import get_config_variable, set_config_variable, python_version
 
@@ -721,7 +724,7 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
     if len(warn) > 0:
         print("\nWarnings about cell methods (with var list)")
         for w in warn:
-            print("\t", w, " for vars : ", warn[w])
+            print("\t", w, " for vars : ", print_struct(warn[w]))
     if len(warnings_for_optimisation) > 0:
         print("Warning for fields which cannot be optimised (i.e. average before remap) because of an expr with @\n\t",)
         for w in warnings_for_optimisation:
