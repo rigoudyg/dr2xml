@@ -424,7 +424,7 @@ def select_CMORvars_for_lab(sset=False, year=None, printout=False):
     #
     debug = False
     # From MIPS set to Request links
-    global sc, global_rls, grid_choice, rls_for_all_experiments
+    global sc, global_rls, grid_choice, rls_for_all_experiments, sn_issues
     if sset:
         tierMax = get_variable_from_sset_else_lset_without_default('tierMax')
     else:
@@ -625,7 +625,7 @@ def select_CMORvars_for_lab(sset=False, year=None, printout=False):
     for v in d:
         svar = simple_CMORvar()
         cmvar = get_uid(v)
-        complement_svar_using_cmorvar(svar, cmvar, sn_issues, [], allow_pseudo)
+        sn_issues = complement_svar_using_cmorvar(svar, cmvar, sn_issues, [], allow_pseudo)
         svar.Priority = analyze_priority(cmvar, mips_list)
         svar.grids = d[v]
         if debug:
@@ -740,7 +740,7 @@ def select_variables_to_be_processed(year, context, select, printout, debug):
         if printout and len(list(excludedv)) > 0:
             print("The following pairs (variable,table) have been excluded for these reasons :")
             for reason in sorted(list(excludedv)):
-                print("\t", reason, ":", print_struct(excludedv[reason], skip_sep=True))
+                print("\t", reason, ":", print_struct(excludedv[reason], skip_sep=True, sort=True))
     if debug:
         print("For table AMon: ", [v.label for v in svars_per_table["Amon"]])
     #

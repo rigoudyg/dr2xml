@@ -65,7 +65,10 @@ def decode_if_needed(a_string, encoding="utf-8"):
 
 def print_struct(struct, skip_sep=False, sort=False, back_line=False):
     if isinstance(struct, list):
-        rep = ", ".join([print_struct(elt) for elt in struct])
+        list_elt = [print_struct(elt) for elt in struct]
+        if sort:
+            list_elt = sorted(list_elt)
+        rep = ", ".join(list_elt)
         if not skip_sep:
             rep = "[" + rep + "]"
         return rep
@@ -88,7 +91,7 @@ def print_struct(struct, skip_sep=False, sort=False, back_line=False):
         return rep
     elif isinstance(struct, set):
         list_items = sorted(list(struct))
-        rep = ", ".join([print_struct(elt) for elt in struct])
+        rep = ", ".join([print_struct(elt) for elt in list_items])
         if not skip_sep:
             rep = "{" + rep + "}"
         return rep

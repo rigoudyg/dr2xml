@@ -562,7 +562,8 @@ def get_corresp_CMORvar(hmvar):
         if empty_table:
             var_freq_asked = hmvar.frequency
         allow_pseudo = get_variable_from_lset_with_default('allow_pseudo_standard_names', False)
-        complement_svar_using_cmorvar(hmvar, cmvar_found, sn_issues_home, [], allow_pseudo)
+        global sn_issues_home
+        sn_issues_home = complement_svar_using_cmorvar(hmvar, cmvar_found, sn_issues_home, [], allow_pseudo)
         if empty_table:
             hmvar.frequency = var_freq_asked
             hmvar.mipTable = "None" + hmvar.frequency
@@ -723,6 +724,8 @@ def complement_svar_using_cmorvar(svar, cmvar, sn_issues, debug=[], allow_pseudo
     svar.type = 'cmor'
     # mip_era='CMIP6' dans le cas CMORvar
     svar.mip_era = 'CMIP6'
+    #
+    return sn_issues
 
 
 def get_simpleDim_from_DimId(dimid):
