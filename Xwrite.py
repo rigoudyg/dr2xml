@@ -376,7 +376,7 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
     list_perso_and_dev_file_name = "dr2xml_list_perso_and_dev_file_names"
     if sv.type in ["perso", "dev"]:
         with open(list_perso_and_dev_file_name, mode="a", encoding="utf-8") as list_perso_and_dev:
-            list_perso_and_dev.write(".*{}.*".format("_".join([varname_for_filename, table, source_id,
+            list_perso_and_dev.write(".*{}.*\n".format("_".join([varname_for_filename, table, source_id,
                                                                expid_in_filename, member_id, grid_label])))
     #
     if not (is_key_in_lset('mip_era') or is_key_in_sset("mip_era")):
