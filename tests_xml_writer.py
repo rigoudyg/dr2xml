@@ -618,6 +618,20 @@ class TestFindTwoPartsElement(unittest.TestCase):
         rep_tmp_4.append(Comment("a comment"))
         rep_4.append(rep_tmp_4)
         self.assertTrue(test_4[1] == rep_4)
+        str_test_5 = "<my_beacon></my_beacon>"
+        test_5 = _find_two_parts_element(str_test_5)
+        self.assertEqual(test_5[0], "")
+        self.assertTrue(test_5[1] == Element("my_beacon"))
+        str_test_6 = '<my_beacon attr=""> </my_beacon><my_beacon> some text </ my_beacon>'
+        test_6 = _find_two_parts_element(str_test_6)
+        self.assertEqual(test_6[0], "<my_beacon> some text </ my_beacon>")
+        self.assertTrue(test_6[1] == Element("my_beacon", attrib=OrderedDict(attr="")))
+        str_test_7 = "<field_group > <a beacon/> </field_group>"
+        test_7 = _find_two_parts_element(str_test_7)
+        self.assertEqual(test_7[0], "")
+        rep_7 = Element("field_group")
+        rep_7.append(Element("a beacon"))
+        self.assertTrue(test_7[1] == rep_7)
 
 
 class TestFindText(unittest.TestCase):
@@ -661,7 +675,7 @@ class TestPreTreatment(unittest.TestCase):
         str_6 = '<my_beacon> a test <!--value </my_beacon>'
         str_7 = '<my_beacon> a test value </my_beacon>>'
         str_8 = '<my_beacon> a test value </my_beacon'
-        str_9 = '<my_beacon attr="1<2"/>'
+        str_9 = "<my_beacon attr='1<2'/>"
         test_str_9 = '<my_beacon attr="1&lt2"/>'
         with self.assertRaises(TypeError):
             _pre_xml_string_format(2019, verbose=True)

@@ -304,8 +304,8 @@ class Element(Beacon):
 
 
 # XML dict regexp
-_generic_dict_regexp = r'(?P<attrib>\s(([^<>\s])+\s?=\s?"([^"])+"\s?)*)'
-_dict_regexp = re.compile(r'(?P<key>\S+)\s?=\s?"(?P<value>[^"]+)"')
+_generic_dict_regexp = r'(?P<attrib>(\s(\w+\s?=\s?"([^"])*"\s?))*)'
+_dict_regexp = re.compile(r'(?P<key>\w+)\s?=\s?"(?P<value>[^"]*)"')
 
 
 def _build_dict_attrib(dict_string):
@@ -411,7 +411,7 @@ def _build_element(xml_string, verbose=False):
 
 
 # XML single part regexp
-_xml_single_part_element_regexp = re.compile(r'^\s?(?P<all><\s?(?P<tag>(\w+\s?)+){}*\s?/>)\s?'.format(_generic_dict_regexp))
+_xml_single_part_element_regexp = re.compile(r'^\s?(?P<all><\s?(?P<tag>(\w+\s?)+){}\s?/>)\s?'.format(_generic_dict_regexp))
 
 
 def _find_one_part_element(xml_string, verbose=False):
@@ -434,13 +434,14 @@ def _find_one_part_element(xml_string, verbose=False):
 
 
 # XML two parts regexp
-_xml_string_first_element_replace = r'(?P<all_begin>\s?(?P<begin><\s?(?P<tag>{}){}*\s?>)\s?)'.format('{}', _generic_dict_regexp)
+_xml_string_first_element_replace = r'(?P<all_begin>\s?(?P<begin><\s?(?P<tag>{}){}\s?>)\s?)'.format('{}', _generic_dict_regexp)
 _xml_string_init_element_replace = r'^'+_xml_string_first_element_replace
 _xml_init_two_parts_element_regexp = re.compile(_xml_string_init_element_replace.format(r"(\w+\s?)+"))
 _xml_string_content_element = r'(?P<content>{})'
 _xml_string_end_element_replace = r'(?P<all_end>\s?(?P<end></\s?{}\s?>)\s?)'
 _xml_string_two_parts_element_replace = _xml_string_init_element_replace + _xml_string_content_element + \
                                         _xml_string_end_element_replace
+_xml_string_pseudo_two_parts_element_replace = _xml_string_init_element_replace + r"\s?" + _xml_string_end_element_replace
 
 
 def _find_matching_first_part_in_content(content, tag, verbose=False):
@@ -526,70 +527,86 @@ def _find_two_parts_element(xml_string, verbose=False):
     if match_first_part:
         # Get as many information as possible
         tag = match_first_part.groupdict()["tag"]
-        match_two_strings = re.compile(_xml_string_two_parts_element_replace.format(tag, r".*", tag)).match(xml_string)
-        if not match_two_strings:
-            raise Exception("Error - element should be a two parts element but seems not...")
-        attrib = match_two_strings.groupdict()["attrib"]
-        attrib = _build_dict_attrib(attrib)
-        begin = match_two_strings.groupdict()["begin"]
-        all_begin = match_two_strings.groupdict()["all_begin"]
-        end = match_two_strings.groupdict()["end"]
-        all_end = match_two_strings.groupdict()["all_end"]
-        content = match_two_strings.groupdict()["content"]
-        # Find out if the content contains a subpart with the same tag
-        if verbose:
-            print("<<<find_element: CONTENT before>>>", len(content), content)
-        find_positions_first_part_in_content = _find_matching_first_part_in_content(content, tag, verbose)
-        find_positions_last_part_in_content, find_groups_last_part_in_content = \
-            _find_matching_last_part_in_content(content, tag, verbose)
-        # Find out where the content really stop
-        content, new_end = _find_real_content(content, find_positions_first_part_in_content,
-                                              find_positions_last_part_in_content, find_groups_last_part_in_content,
-                                              verbose=verbose)
-        if new_end is not None:
-            end = new_end
+        tag = tag.strip()
+        # Check if it is a pseudo two parts element
+        match_pseudo_two_strings = re.compile(_xml_string_pseudo_two_parts_element_replace.format(tag, tag)).match(xml_string)
+        if match_pseudo_two_strings:
+            attrib = match_pseudo_two_strings.groupdict()["attrib"]
+            attrib = _build_dict_attrib(attrib)
+            all_begin = match_pseudo_two_strings.groupdict()["all_begin"]
+            all_end = match_pseudo_two_strings.groupdict()["all_end"]
+            element = Element(tag=tag, attrib=attrib)
+            string_to_remove = all_begin + all_end
+            xml_string = xml_string.replace(string_to_remove, "")
+            return xml_string, element
+        # It is a real two parts element
         else:
-            end = all_end
-        if verbose:
-            print("<<<find_element: CONTENT after>>>", len(content), content)
-        # Create string to remove
-        string_to_remove = all_begin + content + end
-        # Separate children from text
-        sub_xml_string, text = _find_text(content, verbose=verbose)
-        if verbose:
-            print("<<<SUB_XML_STRING>>> Text found", text)
-            print("<<<SUB_XML_STRING>>>", len(sub_xml_string), sub_xml_string)
-        if len(text) == 0:
-            text = None
-        # Create the element and its children
-        element = Element(tag=tag, text=text, attrib=attrib)
-        while len(sub_xml_string) > 0:
-            if verbose:
-                print("<<<SUB_XML_STRING>>> Enter the loop...", len(sub_xml_string), sub_xml_string)
-            new_sub_xml_string, text = _find_text(sub_xml_string, verbose=verbose)
-            if len(text) > 0:
-                if verbose:
-                    print("<<<SUB_XML_STRING>>> Text found:", text)
-                if element.text is None:
-                    element.text = text
-                else:
-                    element.text = "\n".join(element.text, text)
-                new_sub_xml_string = new_sub_xml_string.strip()
-            new_sub_xml_string, subelement = _build_element(new_sub_xml_string, verbose=verbose)
-            if sub_xml_string == new_sub_xml_string:
-                raise Exception("Stop: Infinite loop!!!!!!")
+            two_strings_regexp = _xml_string_two_parts_element_replace.format(tag, r".*", tag)
+            match_two_strings = re.compile(two_strings_regexp).match(xml_string)
+            if not match_two_strings:
+                raise Exception("Error - element should be a two parts element but seems not...")
             else:
-                sub_xml_string = new_sub_xml_string
-            sub_xml_string = sub_xml_string.strip()
-            if subelement is not None:
+                attrib = match_two_strings.groupdict()["attrib"]
+                attrib = _build_dict_attrib(attrib)
+                begin = match_two_strings.groupdict()["begin"]
+                all_begin = match_two_strings.groupdict()["all_begin"]
+                end = match_two_strings.groupdict()["end"]
+                all_end = match_two_strings.groupdict()["all_end"]
+                content = match_two_strings.groupdict()["content"]
+                # Find out if the content contains a subpart with the same tag
                 if verbose:
-                    print("<<<find sub_element>>>", subelement)
-                element.append(subelement)
-        xml_string = xml_string.replace(string_to_remove, "")
-        if verbose:
-            print("<<<XML_STRING end of treatment>>>", len(xml_string), xml_string)
-            print("<<<XML_STRING string replaced>>>", len(string_to_remove), string_to_remove)
-        return xml_string, element
+                    print("<<<find_element: CONTENT before>>>", len(content), content)
+                find_positions_first_part_in_content = _find_matching_first_part_in_content(content, tag, verbose)
+                find_positions_last_part_in_content, find_groups_last_part_in_content = \
+                    _find_matching_last_part_in_content(content, tag, verbose)
+                # Find out where the content really stop
+                content, new_end = _find_real_content(content, find_positions_first_part_in_content,
+                                                      find_positions_last_part_in_content, find_groups_last_part_in_content,
+                                                      verbose=verbose)
+                if new_end is not None:
+                    end = new_end
+                else:
+                    end = all_end
+                if verbose:
+                    print("<<<find_element: CONTENT after>>>", len(content), content)
+                # Create string to remove
+                string_to_remove = all_begin + content + end
+                # Separate children from text
+                sub_xml_string, text = _find_text(content, verbose=verbose)
+                if verbose:
+                    print("<<<SUB_XML_STRING>>> Text found", text)
+                    print("<<<SUB_XML_STRING>>>", len(sub_xml_string), sub_xml_string)
+                if len(text) == 0:
+                    text = None
+                # Create the element and its children
+                element = Element(tag=tag, text=text, attrib=attrib)
+                while len(sub_xml_string) > 0:
+                    if verbose:
+                        print("<<<SUB_XML_STRING>>> Enter the loop...", len(sub_xml_string), sub_xml_string)
+                    new_sub_xml_string, text = _find_text(sub_xml_string, verbose=verbose)
+                    if len(text) > 0:
+                        if verbose:
+                            print("<<<SUB_XML_STRING>>> Text found:", text)
+                        if element.text is None:
+                            element.text = text
+                        else:
+                            element.text = "\n".join(element.text, text)
+                        new_sub_xml_string = new_sub_xml_string.strip()
+                    new_sub_xml_string, subelement = _build_element(new_sub_xml_string, verbose=verbose)
+                    if sub_xml_string == new_sub_xml_string:
+                        raise Exception("Stop: Infinite loop!!!!!!")
+                    else:
+                        sub_xml_string = new_sub_xml_string
+                    sub_xml_string = sub_xml_string.strip()
+                    if subelement is not None:
+                        if verbose:
+                            print("<<<find sub_element>>>", subelement)
+                        element.append(subelement)
+                xml_string = xml_string.replace(string_to_remove, "")
+                if verbose:
+                    print("<<<XML_STRING end of treatment>>>", len(xml_string), xml_string)
+                    print("<<<XML_STRING string replaced>>>", len(string_to_remove), string_to_remove)
+                return xml_string, element
     else:
         return xml_string, None
 
@@ -635,6 +652,7 @@ def _pre_xml_string_format(xml_string, verbose=False):
     # Some pre-treatments on the string
     xml_string = xml_string.replace("\n", " ")
     xml_string = xml_string.replace("\t", " ")
+    xml_string = xml_string.replace("'", '"')
     xml_string = xml_string.strip()
     xml_string = xml_string.split(" ")
     xml_string = " ".join([m for m in xml_string if len(m) > 0])
