@@ -300,7 +300,10 @@ def read_extraTable(path, table, printout=False):
             extra_var.units = v["units"].strip(' ')
             extra_var.modeling_realm = v["modeling_realm"].strip(' ')
             # extra_var.frequency=table2freq[tbl][1]
-            extra_var.frequency = guess_freq_from_table_name(tbl)
+            if get_variable_from_sset_with_default("CORDEX_data", False):
+                extra_var.frequency = v.get("frequency",guess_freq_from_table_name(tbl)).strip(' ')
+            else:
+                extra_var.frequency = guess_freq_from_table_name(tbl)
             extra_var.mipTable = tbl
             extra_var.cell_methods = v["cell_methods"].strip(' ')
             extra_var.cell_measures = v["cell_measures"].strip(' ')

@@ -208,9 +208,13 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
         driving_experiment = get_variable_from_sset_without_default('driving_experiment')
         driving_experiment_name = get_variable_from_sset_without_default('driving_experiment_name')
         CORDEX_domain = get_variable_from_sset_without_default('CORDEX_domain')
-        lambert_conformal_longitude_of_central_meridian = get_variable_from_sset_without_default('Lambert_conformal_longitude_of_central_meridian')
-        lambert_conformal_standard_parallel = get_variable_from_sset_without_default('Lambert_conformal_standard_parallel')
-        lambert_conformal_latitude_of_projection_origin = get_variable_from_sset_without_default('Lambert_conformal_latitude_of_projection_origin')
+        lambert_conformal_longitude_of_central_meridian = \
+            get_variable_from_sset_without_default('Lambert_conformal_longitude_of_central_meridian')
+        lambert_conformal_standard_parallel = \
+            get_variable_from_sset_without_default('Lambert_conformal_standard_parallel')
+        lambert_conformal_latitude_of_projection_origin = \
+            get_variable_from_sset_without_default('Lambert_conformal_latitude_of_projection_origin')
+        rcm_id_version = get_variable_from_sset_without_default("rcm_id_version")
 
     #
     contact = get_variable_from_sset_else_lset_with_default('contact', default=None)
@@ -348,7 +352,7 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
     if "fx" in sv.frequency:
         if get_variable_from_sset_with_default("CORDEX_data", False):
             filename = "_".join(([prefix + sv.label, CORDEX_domain.get(context), driving_model_id, expid_in_filename,
-                                  member_id, sv.frequency]))
+                                  member_id, rcm_id_version, sv.frequency]))
         else:
             filename = "_".join(([prefix + sv.label, table, source_id, expid_in_filename, member_id, grid_label]))
         varname_for_filename = sv.label
@@ -367,7 +371,8 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
             suffix = ""
         if get_variable_from_sset_with_default("CORDEX_data", False):
             liste_attributes = [prefix + varname_for_filename, CORDEX_domain.get(context), driving_model_id,
-                                expid_in_filename, member_id, source_id, sv.frequency, date_range, suffix]
+                                expid_in_filename, member_id, source_id, rcm_id_version, sv.frequency, date_range,
+                                suffix]
             filename = "_".join([attribute for attribute in liste_attributes if attribute != ""])
         else:
             filename = "_".join([prefix + varname_for_filename, table, source_id, expid_in_filename, member_id,
