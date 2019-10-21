@@ -14,7 +14,8 @@ from io import open
 from utils import dr2xml_grid_error
 
 # Interface to settings dictionaries
-from settings_interface import get_variable_from_lset_with_default, get_variable_from_lset_without_default
+from settings_interface import get_variable_from_lset_with_default, get_variable_from_lset_without_default,\
+    get_variable_from_sset_else_lset_with_default
 
 
 compression_factor = None
@@ -31,8 +32,11 @@ def read_splitfreqs():
     if splitfreqs is not None:
         return
     try:
-        freq = open("splitfreqs.dat", "r")
-        print("Reading split_freqs from file")
+        splitfile = get_variable_from_sset_else_lset_with_default(key_sset="split_frequencies",
+                                                                  key_lset="split_frequencies",
+                                                                  default="splitfreqs.dat")
+        freq = open(splitfile, "r")
+        print("Reading split_freqs from file %s" % splitfile)
     except:
         splitfreqs = False
         return
