@@ -214,7 +214,7 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
             get_variable_from_sset_without_default('Lambert_conformal_standard_parallel')
         lambert_conformal_latitude_of_projection_origin = \
             get_variable_from_sset_without_default('Lambert_conformal_latitude_of_projection_origin')
-        rcm_id_version = get_variable_from_sset_without_default("rcm_id_version")
+        rcm_version_id = get_variable_from_sset_without_default("rcm_version_id")
 
     #
     contact = get_variable_from_sset_else_lset_with_default('contact', default=None)
@@ -352,7 +352,7 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
     if "fx" in sv.frequency:
         if get_variable_from_sset_with_default("CORDEX_data", False):
             filename = "_".join(([prefix + sv.label, CORDEX_domain.get(context), driving_model_id, expid_in_filename,
-                                  member_id, rcm_id_version, sv.frequency]))
+                                  member_id, rcm_version_id, sv.frequency]))
         else:
             filename = "_".join(([prefix + sv.label, table, source_id, expid_in_filename, member_id, grid_label]))
         varname_for_filename = sv.label
@@ -371,7 +371,7 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
             suffix = ""
         if get_variable_from_sset_with_default("CORDEX_data", False):
             liste_attributes = [prefix + varname_for_filename, CORDEX_domain.get(context), driving_model_id,
-                                expid_in_filename, member_id, source_id, rcm_id_version, sv.frequency, date_range,
+                                expid_in_filename, member_id, source_id, rcm_version_id, sv.frequency, date_range,
                                 suffix]
             filename = "_".join([attribute for attribute in liste_attributes if attribute != ""])
         else:
