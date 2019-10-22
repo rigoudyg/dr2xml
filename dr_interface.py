@@ -2,13 +2,21 @@
 # -*- coding: utf-8 -*-
 
 """
-Interface between the Data Request and dr2xml.
+Interface between the CMIP6 Data Request and dr2xml.
+# See documentation at: https://c6dreq.dkrz.de/DreqPy_Intro.html
 """
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
-from scope import dreqQuery
-import dreq
+try:
+    import dreq
+except ImportError:
+    from dreqPy import dreq
+
+try:
+    from scope import dreqQuery
+except ImportError:
+    from dreqPy.scope import dreqQuery
 
 
 dq = dreq.loadDreq()

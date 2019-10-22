@@ -362,7 +362,7 @@ def read_extraTable(path, table, printout=False):
                 if d in dim2dimid:
                     dr_dimids.append(dim2dimid[d])
                     extra_dim, dummy = get_simpleDim_from_DimId(dim2dimid[d])
-                    extra_var.sdims.update({extra_dim.label: extra_dim})
+                    extra_var.sdims[extra_dim.label] = extra_dim
                 else:
                     extra_sdim = simple_Dim()
                     with open(json_coordinate, "r") as jc:
@@ -385,7 +385,7 @@ def read_extraTable(path, table, printout=False):
                         extra_sdim.requested = string_of_requested.rstrip(" ")  # values of multi vertical levels
                         extra_sdim.value = cdata["axis_entry"][d]["value"]  # value of single vertical level
                         extra_sdim.type = cdata["axis_entry"][d]["type"]  # axis type
-                    extra_var.sdims.update({extra_sdim.label: extra_sdim})
+                    extra_var.sdims[extra_sdim.label] = extra_sdim
                     if True:
                         # print "Info: dimid corresponding to ",d,"for variable",v["out_name"],\
                         #  "in Table",table," not found in DR => read it in extra coordinates Table: ",
@@ -699,13 +699,13 @@ def complement_svar_using_cmorvar(svar, cmvar, sn_issues, debug=[], allow_pseudo
                 # print "for var % 15s and dim % 15s, size=%3d"%(svar.label,dimid,dimsize)
                 pass
             product_of_other_dims *= dimsize
-            svar.sdims.update({sdim.label: sdim})
+            svar.sdims[sdim.label] = sdim
         if product_of_other_dims > 1:
             # print 'for % 20s'%svar.label,' product_of_other_dims=',product_of_other_dims
             svar.other_dims_size = product_of_other_dims
     area = cellmethod2area(svar.cell_methods)
     if svar.label in debug:
-        print("complement_svar ... processing %s, area=%s" % (svar.label, repr(area)))
+        print("complement_svar ... processing %s, area=%s" % (svar.label, str(area)))
     if area:
         ambiguous = any([svar.label == alabel and svar.modeling_realm == arealm
                          for (alabel, (arealm, lmethod)) in ambiguous_mipvarnames])

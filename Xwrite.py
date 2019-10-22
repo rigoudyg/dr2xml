@@ -1042,7 +1042,7 @@ def process_singleton(sv, alias, pingvars, field_defs, grid_defs, scalar_defs, t
     #
     # for each sv's singleton dimension, create the scalar, add a scalar
     # construct in a further grid, and convert field to a further field
-    for dimk in sv.sdims:
+    for dimk in sorted(list(sv.sdims)):
         sdim = sv.sdims[dimk]
         if is_singleton(sdim):  # Only one dim should match
             #

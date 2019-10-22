@@ -1,1 +1,7 @@
 sphinx
+# Need either dreq and scope or dreqPy
+# dreq
+# scope
+dreqPy
+coverage
+xlsxwriter

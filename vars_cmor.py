@@ -189,7 +189,7 @@ class simple_CMORvar(object):
         self.units = None
         self.long_name = None
         self.struct = None
-        self.sdims = {}
+        self.sdims = OrderedDict()
         self.other_dims_size = 1
         self.cell_methods = None
         self.cell_measures = None

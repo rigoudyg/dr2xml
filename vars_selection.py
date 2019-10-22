@@ -115,11 +115,13 @@ def endyear_for_CMORvar(cv, expt, year, printout=False):
         ri = get_uid(riid)
         applies, endyear = RequestItem_applies_for_exp_and_year(ri, expt, year, debug=printout)
         if printout:
-            print("For var and freq selected for debug and year %d, for ri %s, applies=%s, endyear=%s" %
-                  (year, ri.title, repr(applies), repr(endyear)))
+            print("For var and freq selected for debug and year %s, for ri %s, applies=%s, endyear=%s" %
+                  (str(year), ri.title, str(applies), str(endyear)))
         if applies:
             if endyear is None:
                 return None  # One of the timeslices cover the whole expt
+            if larger is None:
+                larger = endyear
             else:
                 larger = max(larger, endyear)
     return larger
