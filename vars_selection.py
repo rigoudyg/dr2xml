@@ -192,6 +192,7 @@ def RequestItem_applies_for_exp_and_year(ri, experiment, year=None, debug=False)
             if debug:
                 print(" ..applies because arg year is None")
         else:
+            year = int(year)
             exp = get_uid(get_experiment_label(experiment))
             rep, endyear = year_in_ri(ri, exp, year, debug=debug)
             if debug:

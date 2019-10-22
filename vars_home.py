@@ -549,7 +549,7 @@ def get_corresp_CMORvar(hmvar):
                 count += 1
                 cmvar_found = cmvar
                 if printout:
-                    print("ans same shapes !")
+                    print("and same shapes !")
             else:
                 if not empty_table:
                     print("Error: ", [hmvar.label, hmvar.mipTable],
