@@ -21,8 +21,10 @@ test/outputs/
 test/dr.xml
 /test/run.out
 *.pyc
-*.pyc
 pycallgraph_tree/
 dr2xml_*.xml
 pycallgraph_use.py
-tests/
+.coverage
+create_file_defs.sh
+tests/htmlcov
+tests/test*/output_*
