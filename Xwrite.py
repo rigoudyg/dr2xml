@@ -371,12 +371,12 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
             suffix = ""
         if get_variable_from_sset_with_default("CORDEX_data", False):
             liste_attributes = [prefix + varname_for_filename, CORDEX_domain.get(context), driving_model_id,
-                                expid_in_filename, member_id, source_id, rcm_version_id, sv.frequency, date_range,
+                                expid_in_filename, member_id, source_id, rcm_version_id, sv.frequency, date_range +
                                 suffix]
             filename = "_".join([attribute for attribute in liste_attributes if attribute != ""])
         else:
             filename = "_".join([prefix + varname_for_filename, table, source_id, expid_in_filename, member_id,
-                                 grid_label, date_range, suffix])
+                                 grid_label, date_range + suffix])
     # Create an other file which will contain the list of file names of perso and dev variables
     list_perso_and_dev_file_name = "dr2xml_list_perso_and_dev_file_names"
     if sv.type in ["perso", "dev"]:

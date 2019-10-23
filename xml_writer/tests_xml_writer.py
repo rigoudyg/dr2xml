@@ -11,10 +11,14 @@ import unittest
 from collections import OrderedDict
 from copy import copy
 
-from xml_writer import Beacon, Comment, Header, Element, is_xml_element, _build_dict_attrib, _find_xml_header, \
-    _find_xml_comment, _build_element, _find_one_part_element, _find_matching_first_part_in_content, \
-    _find_matching_last_part_in_content, _find_real_content, _find_two_parts_element, _find_text, \
-    _pre_xml_string_format, replace_char_at_pos_by_string, _find_in_out
+from xml_writer.pre_treament import _pre_xml_string_format, replace_char_at_pos_by_string, _find_in_out
+from xml_writer.element import _build_element, _find_one_part_element, _find_matching_first_part_in_content, \
+    _find_matching_last_part_in_content, _find_real_content, _find_two_parts_element, is_xml_element
+from xml_writer.comment import _find_xml_comment
+from xml_writer.header import _find_xml_header
+from xml_writer.beacon import Beacon
+from xml_writer.utils import _build_dict_attrib, _find_text
+from xml_writer import Comment, Header, Element
 
 
 class TestNonSpecificMethods(unittest.TestCase):
@@ -676,7 +680,11 @@ class TestPreTreatment(unittest.TestCase):
         str_7 = '<my_beacon> a test value </my_beacon>>'
         str_8 = '<my_beacon> a test value </my_beacon'
         str_9 = "<my_beacon attr='1<2'/>"
+        str_10 = '<!-- a comment with special " \' characters -->' \
+                 '<my_beacon attr=\'toto\' attr2="\'"> a test value \' with special character </my_beacon>'
         test_str_9 = '<my_beacon attr="1&lt2"/>'
+        test_str_10 = '<!-- a comment with special " \' characters -->' \
+                      '<my_beacon attr="toto" attr2="\'"> a test value \' with special character </my_beacon>'
         with self.assertRaises(TypeError):
             _pre_xml_string_format(2019, verbose=True)
         with self.assertRaises(Exception):
@@ -695,6 +703,7 @@ class TestPreTreatment(unittest.TestCase):
             _pre_xml_string_format(str_8)
         self.assertEqual(_pre_xml_string_format(str_1, verbose=True), test_str_1)
         self.assertEqual(_pre_xml_string_format(str_9, verbose=True), test_str_9)
+        self.assertEqual(_pre_xml_string_format(str_10, verbose=True), test_str_10)
 
     def test_replace_char_at_pos_by_string(self):
         test_string = '<my_beacon><!-- a comment element -->a test value < an element attr ="5" attr2="3>=2"/> <a beacon></a beacon> </my_beacon>'
