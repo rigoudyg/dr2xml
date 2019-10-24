@@ -597,21 +597,21 @@ def generate_file_defs(lset, sset, year, enddate, context, cvs_path, pingfiles=N
     """
     A wrapper for profiling top-level function : generate_file_defs_inner
     """
-    pr = cProfile.Profile()
-    pr.enable()
+    # pr = cProfile.Profile()
+    # pr.enable()
     # Initialize lset and sset variables for all functions
     initialize_dict(lset, sset)
     generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingfiles=pingfiles,
                              dummies=dummies, printout=printout, dirname=dirname,
                              prefix=prefix, attributes=attributes, select=select)
-    pr.disable()
-    if python_version == "python2":
-        s = io.BytesIO()
-    else:
-        s = io.StringIO()
-    sortby = 'cumulative'
-    ps = pstats.Stats(pr, stream=s).sort_stats(sortby)
-    ps.print_stats()
+    # pr.disable()
+    # if python_version == "python2":
+    #     s = io.BytesIO()
+    # else:
+    #     s = io.StringIO()
+    # sortby = 'cumulative'
+    # ps = pstats.Stats(pr, stream=s).sort_stats(sortby)
+    # ps.print_stats()
     # Just un-comment next line to get the profile on stdout
     # print s.getvalue()
 
