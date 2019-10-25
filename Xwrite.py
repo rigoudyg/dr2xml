@@ -352,7 +352,7 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
     if "fx" in sv.frequency:
         if get_variable_from_sset_with_default("CORDEX_data", False):
             filename = "_".join(([prefix + sv.label, CORDEX_domain.get(context), driving_model_id, expid_in_filename,
-                                  member_id, rcm_version_id, sv.frequency]))
+                                  member_id, source_id, rcm_version_id, sv.frequency]))
         else:
             filename = "_".join(([prefix + sv.label, table, source_id, expid_in_filename, member_id, grid_label]))
         varname_for_filename = sv.label
