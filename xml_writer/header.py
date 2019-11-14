@@ -69,5 +69,5 @@ def _find_xml_header(xml_string, verbose=False):
             attrib = pattern_match.groupdict()["attrib"]
             attrib = _build_dict_attrib(attrib)
             header = Header(tag=tag, attrib=attrib)
-            xml_string = xml_string.replace(pattern_findall[0][0], "")
+            xml_string = xml_string.replace(pattern_findall[0][0], "", 1)
             return xml_string, header

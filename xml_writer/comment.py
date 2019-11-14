@@ -60,7 +60,7 @@ def _find_xml_comment(xml_string, verbose=False):
         text = match_comment.groupdict()["comment"]
         text = text.strip()
         comment = Comment(comment=text)
-        xml_string = xml_string.replace(match_comment.groupdict()["all"], "")
+        xml_string = xml_string.replace(match_comment.groupdict()["all"], "", 1)
         xml_string = xml_string.strip()
         if verbose:
             # print("<<<find_xml_comment: XML_STRING after>>>", len(xml_string), xml_string)

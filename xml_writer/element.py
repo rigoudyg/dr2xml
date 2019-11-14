@@ -180,7 +180,7 @@ def _find_one_part_element(xml_string, verbose=False):
         attrib = match_single_part.groupdict()["attrib"]
         attrib = _build_dict_attrib(attrib)
         element = Element(tag=tag, attrib=attrib)
-        xml_string = xml_string.replace(match_single_part.groupdict()["all"], "")
+        xml_string = xml_string.replace(match_single_part.groupdict()["all"], "", 1)
         if verbose:
             print("<<<find_one_part_element AFTER>>>", len(xml_string), xml_string)
         return xml_string, element
@@ -293,7 +293,7 @@ def _find_two_parts_element(xml_string, verbose=False):
             all_end = match_pseudo_two_strings.groupdict()["all_end"]
             element = Element(tag=tag, attrib=attrib)
             string_to_remove = all_begin + all_end
-            xml_string = xml_string.replace(string_to_remove, "")
+            xml_string = xml_string.replace(string_to_remove, "", 1)
             return xml_string, element
         # It is a real two parts element
         else:
@@ -358,7 +358,7 @@ def _find_two_parts_element(xml_string, verbose=False):
                         if verbose:
                             print("<<<find sub_element>>>", subelement)
                         element.append(subelement)
-                xml_string = xml_string.replace(string_to_remove, "")
+                xml_string = xml_string.replace(string_to_remove, "", 1)
                 if verbose:
                     print("<<<XML_STRING end of treatment>>>", len(xml_string), xml_string)
                     print("<<<XML_STRING string replaced>>>", len(string_to_remove), string_to_remove)

@@ -636,6 +636,18 @@ class TestFindTwoPartsElement(unittest.TestCase):
         rep_7 = Element("field_group")
         rep_7.append(Element("a beacon"))
         self.assertTrue(test_7[1] == rep_7)
+        str_test_8 = "<var><variable> none </variable><variable> none </variable></var>"
+        test_8 = _find_two_parts_element(str_test_8, verbose=True)
+        rep_8 = Element("var")
+        tmp_rep_8 = Element("variable")
+        tmp_rep_8.text = "none"
+        tmp_rep_8_2 = tmp_rep_8.copy()
+        rep_8.append(tmp_rep_8)
+        rep_8.append(tmp_rep_8_2)
+        print(rep_8)
+        print(test_8[1])
+        self.assertTrue(test_8[0] == "")
+        self.assertTrue(test_8[1] == rep_8)
 
 
 class TestFindText(unittest.TestCase):
