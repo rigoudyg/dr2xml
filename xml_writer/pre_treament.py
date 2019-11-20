@@ -8,166 +8,207 @@ Pre-treatment tools
 from __future__ import print_function, division, absolute_import, unicode_literals
 
 import re
-
 import six
+
+
+def iterate_on_characters_to_check(xml_string, verbose=False):
+    # Find the special characters' positions
+    begin_header_position = [m.start() for m in re.compile(r"<\?").finditer(xml_string)]
+    end_header_positions = [m.end() - 1 for m in re.compile(r"\?>").finditer(xml_string)]
+    if len(begin_header_position) > 1 or len(end_header_positions) > 1:
+        raise Exception("There should be only one header...")
+    begin_comment_positions = [m.start() for m in re.compile(r"<!--").finditer(xml_string)]
+    end_comment_positions = [m.end() - 1 for m in re.compile(r"-->").finditer(xml_string)]
+    double_quotes_positions = [m.start() for m in re.compile(r'"').finditer(xml_string)]
+    single_quotes_positions = [m.start() for m in re.compile(r"'").finditer(xml_string)]
+    greater_positions = sorted(list(set([m.start() for m in re.compile(r">").finditer(xml_string)]) -
+                                    set(end_comment_positions) - set(end_header_positions)))
+    lower_positions = sorted(list(set([m.start() for m in re.compile(r'<').finditer(xml_string)]) -
+                                  set(begin_comment_positions) - set(begin_header_position)))
+    if verbose:
+        print("<<<pre_xml_string_format: begin_header_positions>>>", len(begin_header_position), begin_header_position)
+        print("<<<pre_xml_string_format: end_header_positions>>>", len(end_header_positions), end_header_positions)
+        print("<<<pre_xml_string_format: begin_comment_positions>>>", len(begin_comment_positions),
+              begin_comment_positions)
+        print("<<<pre_xml_string_format: end_comment_positions>>>", len(end_comment_positions), end_comment_positions)
+        print("<<<pre_xml_string_format: double_quotes_positions>>>", len(double_quotes_positions),
+              double_quotes_positions)
+        print("<<<pre_xml_string_format: single_quotes_positions>>>", len(single_quotes_positions),
+              single_quotes_positions)
+        print("<<<pre_xml_string_format: greater_positions>>>", len(greater_positions), greater_positions)
+        print("<<<pre_xml_string_format: lower_positions>>>", len(lower_positions), lower_positions)
+    # Build the iterator
+    tmp_characters_to_check = sorted(double_quotes_positions + single_quotes_positions + greater_positions +
+                                     lower_positions + begin_comment_positions + end_comment_positions)
+    for pos in tmp_characters_to_check:
+        if pos in begin_header_position:
+            yield (pos, "begin_header")
+        elif pos in end_header_positions:
+            yield (pos, "end_header")
+        elif pos in begin_comment_positions:
+            yield (pos, "begin_comment")
+        elif pos in end_comment_positions:
+            yield (pos, "end_comment")
+        elif pos in double_quotes_positions:
+            yield (pos, "double_quote")
+        elif pos in single_quotes_positions:
+            yield (pos, "single_quote")
+        elif pos in greater_positions:
+            yield (pos, "greater_than")
+        elif pos in lower_positions:
+            yield (pos, "lower_than")
+        else:
+            raise ValueError("Unknown source for position %d" % pos)
+
+
+def iterate_on_string(xml_string, verbose=False):
+    new_xml_string = xml_string.split("\n")
+    pos_init = 0
+    old_substring = ""
+    for substring in new_xml_string:
+        pos_init += len(old_substring)
+        old_substring = substring + "\n"
+        yield (old_substring, pos_init)
 
 
 def _pre_xml_string_format(xml_string, verbose=False):
     if not isinstance(xml_string, six.string_types):
         raise TypeError("Argument must be a string or equivalent, not %s." % type(xml_string))
     # Some other pre-treatments on the string
-    xml_string = xml_string.replace("\n", " ")
     xml_string = xml_string.replace("\t", " ")
     xml_string = xml_string.strip()
     xml_string = xml_string.split(" ")
     xml_string = " ".join([m for m in xml_string if len(m) > 0])
-    # Initialize the dictionary of strings to be replaced
+    # Initialize the dictionary of strings to be replaced and the len of the xml string
     to_replace = dict()
-    # Initialize the comments' positions list
-    begin_comment_positions = [m.start() for m in re.compile(r"<!--").finditer(xml_string)]
-    end_comment_positions = [m.end() - 1 for m in re.compile(r"-->").finditer(xml_string)]
-    if len(begin_comment_positions) != len(end_comment_positions):
-        raise Exception("All comments must be closed")
-    comments_positions = [(comment_begin, comment_end) for (comment_begin, comment_end) in zip(begin_comment_positions, end_comment_positions)]
-    if verbose:
-        print("<<<pre_xml_string_format: comment_positions>>>", len(comments_positions))
-    # Initialize the double quotes' positions list
-    double_quotes_positions_tmp = [m.start() for m in re.compile(r'"').finditer(xml_string)]
-    double_quotes_positions = list()
-    for pos in double_quotes_positions_tmp:
-        if not _find_in_out(pos, comments_positions, verbose=False):
-            double_quotes_positions.append(pos)
-    double_quotes_positions_tmp = double_quotes_positions
-    if len(double_quotes_positions_tmp) % 2 != 0:
-        raise Exception("There should have an even number of '\"' in the xml file... have",
-                        len(double_quotes_positions_tmp))
-    double_quotes_positions = [(double_quotes_positions_tmp[2 * pos], double_quotes_positions_tmp[2 * pos + 1])
-                               for pos in range(len(double_quotes_positions_tmp) // 2)]
-    if verbose:
-        print("<<<pre_xml_string_format: double_quotes_positions>>>", len(double_quotes_positions))
-    # Initialize the single quotes' positions list
-    single_quotes_positions_tmp = [m.start() for m in re.compile(r"'").finditer(xml_string)]
-    single_quotes_positions = list()
-    for pos in single_quotes_positions_tmp:
-        if _find_in_out(pos, comments_positions, verbose=False) or \
-                _find_in_out(pos, double_quotes_positions, verbose=False):
-            single_quotes_positions.append(pos)
-    single_quotes_positions_tmp = sorted(list(set(single_quotes_positions_tmp) - set(single_quotes_positions)))
-    i = 0
-    to_add = list()
-    while i < len(single_quotes_positions_tmp):
-        pos = single_quotes_positions_tmp[i]
-        if ((pos > 0 and xml_string[pos - 1] == "=") or
-            (pos > 1 and xml_string[pos - 2] == "=" and xml_string[pos - 1] == " ")) and \
-                i < len(single_quotes_positions_tmp) - 1:
-            next_pos = single_quotes_positions_tmp[i + 1]
-            xml_string = replace_char_at_pos_by_string(xml_string, "'", '"', pos, pos, verbose=verbose)
-            xml_string = replace_char_at_pos_by_string(xml_string, "'", '"', next_pos, next_pos, verbose=verbose)
-            to_add.extend([pos, next_pos])
-            i += 2
-        else:
-            single_quotes_positions.append(pos)
-            i += 1
-    single_quotes_positions_tmp = sorted(list(set(single_quotes_positions_tmp) - set(single_quotes_positions)))
-    single_quotes_positions_tmp = sorted(list(set(single_quotes_positions_tmp) - set(to_add)))
-    if len(single_quotes_positions_tmp) > 0:
-        raise Exception("Find additional single quotes and do not know what to do with them...",
-                        len(single_quotes_positions_tmp), single_quotes_positions_tmp)
-    to_add = [(to_add[2 * pos], to_add[2 * pos + 1]) for pos in range(len(to_add) // 2)]
-    double_quotes_positions.extend(to_add)
-    double_quotes_positions = sorted(double_quotes_positions, key=lambda t: t[0])
-    if verbose:
-        print("<<<pre_xml_string_format: single_quotes_positions>>>", len(single_quotes_positions))
-        print("<<<pre_xml_string_format: double_quotes_positions>>>", len(double_quotes_positions))
-
-    # Look for reserved symbols (< and >) and replace them
-    possible_greater_positions = [m.start() for m in re.compile(r">").finditer(xml_string)]
-    if verbose:
-        print("<<<pre_xml_string_format: possible_greater_positions>>>", len(possible_greater_positions))
-
-    possible_lower_positions = [m.start() for m in re.compile(r'<').finditer(xml_string)]
-    if verbose:
-        print("<<<pre_xml_string_format: possible_lower_positions>>>", len(possible_lower_positions))
-
-    g = 0
-    l = 0
-    beacon_open = False
-    nb_beacons = 1
-    while (g < len(possible_greater_positions) and l < len(possible_lower_positions)):
-        g_pos = possible_greater_positions[g]
-        l_pos = possible_lower_positions[l]
-        if l_pos < g_pos:
-            if _find_in_out(l_pos, comments_positions, verbose=verbose):
-                if verbose:
-                    print("<<<pre_xml_string_format: discarded because in comment>>>", l_pos)
-                l += 1
-            elif _find_in_out(l_pos, double_quotes_positions, verbose=verbose):
-                if verbose:
-                    print("<<<pre_xml_string_format: lower than found>>>", l_pos)
-                to_replace[l_pos] = ("<", "&lt")
-                l += 1
-            elif not beacon_open:
-                if verbose:
-                    print("<<<pre_xml_string_format: open beacon>>>", l_pos)
-                beacon_open = True
-                l += 1
+    xml_string_len = len(xml_string) + 2
+    # Initialize booleans and counters
+    is_comment_open = False
+    is_header_open = False
+    is_double_quote_open = False
+    is_single_quote_open = False
+    nb_beacons_nested = 0
+    is_beacon_open = False
+    is_beacon_ending = False
+    for (sub_xml_string, pos_init) in iterate_on_string(xml_string, verbose=verbose):
+        # Loop on the characters' position to be checked
+        for (pos, character_type) in iterate_on_characters_to_check(sub_xml_string, verbose=verbose):
+            pos += pos_init
+            if character_type == "begin_header":
+                if not is_header_open:
+                    is_header_open = True
+                    print_if_needed("<<<pre_xml_string_format: open header>>>", pos, verbose=verbose)
+                else:
+                    print_if_needed("<<<pre_xml_string_format: unexpected open header>>>", pos, verbose=verbose)
+                    raise Exception("There should be only one header, second opened at pos %d" % pos)
+            elif character_type == "end_header":
+                if is_header_open:
+                    is_header_open = False
+                    print_if_needed("<<<pre_xml_string_format: close header>>>", pos, verbose=verbose)
+                else:
+                    print_if_needed("<<<pre_xml_string_format: unexpected close header>>>", pos, verbose=verbose)
+                    raise Exception("Unexpected end of header at pos %d" % pos)
+            elif character_type == "begin_comment":
+                if not is_comment_open:
+                    is_comment_open = True
+                    print_if_needed("<<<pre_xml_string_format: open comment>>>", pos, verbose=verbose)
+                else:
+                    print_if_needed("<<<pre_xml_string_format: unexpected open comment>>>", pos, verbose=verbose)
+                    raise Exception("Comments should not be nested... "
+                                    "Previous comment has not been closed when opening next at pos %d." % pos)
+            elif character_type == "end_comment":
+                if is_comment_open:
+                    is_comment_open = False
+                    print_if_needed("<<<pre_xml_string_format: close comment>>>", pos, verbose=verbose)
+                else:
+                    print_if_needed("<<<pre_xml_string_format: unexpected close comment>>>", pos, verbose=verbose)
+                    raise Exception("Unexpected end of comment at pos %d" % pos)
+            elif character_type == "double_quote":
+                if is_comment_open or is_header_open or is_single_quote_open or (not is_beacon_open and nb_beacons_nested > 0):
+                    print_if_needed("<<<pre_xml_string_format: double quote>>>", pos, verbose=verbose)
+                elif is_double_quote_open:
+                    print_if_needed("<<<pre_xml_string_format: close double quote>>>", pos, verbose=verbose)
+                    is_double_quote_open = False
+                else:
+                    print_if_needed("<<<pre_xml_string_format: open double quote>>>", pos, verbose=verbose)
+                    is_double_quote_open = True
+            elif character_type == "single_quote":
+                if is_comment_open or is_header_open or is_double_quote_open or (not is_beacon_open and nb_beacons_nested > 0):
+                    print_if_needed("<<<pre_xml_string_format: single quote>>>", pos, verbose=verbose)
+                elif is_single_quote_open:
+                    to_replace[pos] = ("'", '"')
+                    is_single_quote_open = False
+                    print_if_needed("<<<pre_xml_string_format: close single quote>>>", pos, verbose=verbose)
+                else:
+                    to_replace[pos] = ("'", '"')
+                    is_single_quote_open = True
+                    print_if_needed("<<<pre_xml_string_format: open single quote>>>", pos, verbose=verbose)
+            elif character_type == "greater_than":
+                if is_comment_open or is_header_open or is_single_quote_open or is_double_quote_open:
+                    to_replace[pos] = (">", "&gt")
+                    print_if_needed("<<<pre_xml_string_format: greater than>>>", pos, verbose=verbose)
+                elif is_beacon_open:
+                    is_beacon_open = False
+                    if is_beacon_ending:
+                        nb_beacons_nested -= 1
+                        is_beacon_ending = False
+                    elif pos > 0 and xml_string[pos - 1] == "/":
+                        pass
+                    else:
+                        nb_beacons_nested += 1
+                    print_if_needed("<<<pre_xml_string_format: close beacon>>> %d (remain %d nested)"
+                                    % (pos, nb_beacons_nested), verbose=verbose)
+                elif nb_beacons_nested > 0:
+                    print_if_needed("<<<pre_xml_string_format: greater than>>>", pos, verbose=verbose)
+                    to_replace[pos] = (">", "&gt")
+                else:
+                    print_if_needed("<<<pre_xml_string_format: unexpected close beacon>>>", pos, verbose=verbose)
+                    raise Exception("Unexpected '>' symbol", pos)
+            elif character_type == "lower_than":
+                if is_comment_open or is_header_open or is_single_quote_open or is_double_quote_open:
+                    to_replace[pos] = ("<", "&lt")
+                    print_if_needed("<<<pre_xml_string_format: lower than>>>", pos, verbose=verbose)
+                elif not is_beacon_open:
+                    print_if_needed("<<<pre_xml_string_format: open beacon>>>", pos, verbose=verbose)
+                    is_beacon_open = True
+                    if xml_string_len > pos + 1 and xml_string[pos + 1] == "/":
+                        is_beacon_ending = True
+                elif nb_beacons_nested > 0:
+                    to_replace[pos] = ("<", "&lt")
+                    print_if_needed("<<<pre_xml_string_format: lower than>>>", pos, verbose=verbose)
+                else:
+                    print_if_needed("<<<pre_xml_string_format: unexpected open beacon>>>", pos, verbose=verbose)
+                    raise Exception("Unexpected '<' symbol", pos)
             else:
-                if verbose:
-                    print("<<<pre_xml_string_format: last beacons>>>", possible_lower_positions[l-1],
-                          l_pos, xml_string[possible_lower_positions[l-1]:l_pos + 1])
-                raise Exception("Unexpected '<' symbol", l_pos)
-        else:
-            if _find_in_out(g_pos, comments_positions, verbose=verbose):
-                if verbose:
-                    print("<<<pre_xml_string_format: discarded because in comment>>>", g_pos)
-                g += 1
-            elif _find_in_out(g_pos, double_quotes_positions, verbose=verbose):
-                if verbose:
-                    print("<<<pre_xml_string_format: greater than found>>>", g_pos)
-                to_replace[g_pos] = (">", "&gt")
-                g += 1
-            elif beacon_open:
-                if verbose:
-                    print("<<<pre_xml_string_format: close beacon>>>", g_pos, "/", nb_beacons)
-                nb_beacons += 1
-                beacon_open = False
-                g += 1
-            else:
-                if verbose:
-                    print("<<<pre_xml_string_format: last beacon>>>", possible_greater_positions[g - 1], g_pos,
-                          xml_string[possible_greater_positions[g - 1]:g_pos + 1])
-                raise Exception("Unexpected '>' symbol", g_pos)
-
-    while g < len(possible_greater_positions):
-        if beacon_open:
-            if _find_in_out(possible_greater_positions[g], double_quotes_positions, verbose=verbose):
-                to_replace[possible_greater_positions[g]] = (">", "&gt")
-            else:
-                beacon_open = False
-            g += 1
-        else:
-            raise Exception("There are two many '>' in XML string.")
-    if beacon_open or l != len(possible_lower_positions) or g != len(possible_greater_positions):
-        raise Exception("There is issues in '>' and '<' usage in XML string")
-    greater_positions = [i for i in to_replace if to_replace[i] == (">", "&gt")]
-    lower_positions = [i for i in to_replace if to_replace[i] == ("<", "&lt")]
+                raise ValueError("Unknown type %s for position %d" % (character_type, pos))
+    # Check that all opened structure has been closed
+    if verbose:
+        print("<<<pre_xml_string_format: end treatment is_header_open>>>", is_header_open)
+        print("<<<pre_xml_string_format: end treatment is_comment_open>>>", is_comment_open)
+        print("<<<pre_xml_string_format: end treatment is_double_quote_open>>>", is_double_quote_open)
+        print("<<<pre_xml_string_format: end treatment is_single_quote_open>>>", is_single_quote_open)
+        print("<<<pre_xml_string_format: end treatment is_beacon_open>>>", is_beacon_open)
+        print("<<<pre_xml_string_format: end treatment is_beacon_ending>>>", is_beacon_ending)
+        print("<<<pre_xml_string_format: end treatment nb_beacons_nested>>>", nb_beacons_nested)
+    if is_comment_open or is_header_open or is_double_quote_open or is_single_quote_open or is_beacon_open or \
+            is_beacon_ending or nb_beacons_nested > 0:
+        raise Exception("There is issues with beacons or quotes opening and ending...")
     # Replace all that needs to be replaced
-    if verbose:
-        print("<<<pre_xml_string_format: greater than found:>>>", len(greater_positions), greater_positions, [xml_string[a-20:a+20] for a in greater_positions])
-        print("<<<pre_xml_string_format: lower than found:>>>", len(lower_positions), lower_positions, [xml_string[a-20:a+20] for a in lower_positions])
     new_xml_string = xml_string
     for i in sorted(list(to_replace), reverse=True):
-        if verbose:
-            print("<<<pre_xml_string_format: before replacement:>>>", new_xml_string[i - 2:i + 20])
         new_xml_string = replace_char_at_pos_by_string(new_xml_string, to_replace[i][0],
                                                        to_replace[i][1], i, i + len(to_replace[i][0]) - 1,
                                                        verbose=verbose)
-        if verbose:
-            print("<<<pre_xml_string_format: after replacement:>>>", new_xml_string[i - 2:i + 20])
+    # Last statistics and return result
+    new_xml_string = new_xml_string.replace("\n", " ")
+    new_xml_string = new_xml_string.split(" ")
+    return " ".join([m for m in new_xml_string if len(m) > 0])
+
+
+def print_if_needed(*args, **kwargs):
+    verbose = kwargs.get("verbose", False)
     if verbose:
-        print("<<<pre_xml_string_format: greater than found:>>>", len(greater_positions), greater_positions, [new_xml_string[a-20:a+20] for a in greater_positions])
-        print("<<<pre_xml_string_format: lower than found:>>>", len(lower_positions), lower_positions, [new_xml_string[a-20:a+20] for a in lower_positions])
-    return " ".join(new_xml_string.split(" "))
+        print(*args)
 
 
 def replace_char_at_pos_by_string(complete_string, string_in, replace_out, pos_init, pos_end, verbose=False):
@@ -200,11 +241,9 @@ def replace_char_at_pos_by_string(complete_string, string_in, replace_out, pos_i
 def _find_in_out(pos, list_in_out_pos, verbose=False):
     if verbose:
         print("<<<find_in_out: check pos>>>", pos)
-    test = False
-    for (pos_in, pos_out) in list_in_out_pos:
-        if pos_in <= pos and pos_out >= pos:
-            if verbose:
-                print("<<<find_in_out: in out found>>>", pos, pos_in, pos_out)
-            test = True
-            break
+    is_pos_in = [pos_in <= pos <= pos_out for (pos_in, pos_out) in list_in_out_pos]
+    test = any(is_pos_in)
+    if verbose and test:
+        (pos_in, pos_out) = list_in_out_pos[is_pos_in.index(True)]
+        print("<<<find_in_out: in out found>>>", pos, pos_in, pos_out)
     return test

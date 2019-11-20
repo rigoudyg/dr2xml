@@ -683,26 +683,26 @@ class TestPreTreatment(unittest.TestCase):
 
     def test_pre_xml_string_format(self):
         str_1 = '<my_beacon>\n\n<!-- a comment element <=> -->a test value < an element attr ="><5" attr2="3>=2"/>     <a beacon>\t</a beacon>\n \t</my_beacon attr=">">'
-        test_str_1 = '<my_beacon> <!-- a comment element <=> -->a test value < an element attr ="&gt&lt5" attr2="3&gt=2"/> <a beacon> </a beacon> </my_beacon attr="&gt">'
+        test_str_1 = '<my_beacon> <!-- a comment element &lt=&gt -->a test value < an element attr ="&gt&lt5" attr2="3&gt=2"/> <a beacon> </a beacon> </my_beacon attr="&gt">'
         str_2 = '<my_beacon> a test <value </my_beacon>'
         str_3 = '<my_beacon> a test "value </my_beacon>'
-        str_4 = '<my_beacon> a test >value </my_beacon>'
+        str_4 = '><my_beacon> a test >value </my_beacon>'
         str_5 = '<my_beacon> a test -->value </my_beacon>'
         str_6 = '<my_beacon> a test <!--value </my_beacon>'
         str_7 = '<my_beacon> a test value </my_beacon>>'
         str_8 = '<my_beacon> a test value </my_beacon'
         str_9 = "<my_beacon attr='1<2'/>"
         str_10 = '<!-- a comment with special " \' characters -->' \
-                 '<my_beacon attr=\'toto\' attr2="\'"> a test value \' with special character </my_beacon>'
+                 '<my_beacon \nattr=\'toto\' attr2="\'"> a test value \' with special character " </my_beacon>'
+        str_11 = '<my_beacon> a test >value </my_beacon>'
         test_str_9 = '<my_beacon attr="1&lt2"/>'
         test_str_10 = '<!-- a comment with special " \' characters -->' \
-                      '<my_beacon attr="toto" attr2="\'"> a test value \' with special character </my_beacon>'
+                      '<my_beacon attr="toto" attr2="\'"> a test value \' with special character " </my_beacon>'
+        test_str_11 = '<my_beacon> a test &gtvalue </my_beacon>'
         with self.assertRaises(TypeError):
             _pre_xml_string_format(2019, verbose=True)
         with self.assertRaises(Exception):
             _pre_xml_string_format(str_2, verbose=True)
-        with self.assertRaises(Exception):
-            _pre_xml_string_format(str_3)
         with self.assertRaises(Exception):
             _pre_xml_string_format(str_4, verbose=True)
         with self.assertRaises(Exception):
@@ -714,8 +714,10 @@ class TestPreTreatment(unittest.TestCase):
         with self.assertRaises(Exception):
             _pre_xml_string_format(str_8)
         self.assertEqual(_pre_xml_string_format(str_1, verbose=True), test_str_1)
+        self.assertEqual(_pre_xml_string_format(str_3, verbose=True), str_3)
         self.assertEqual(_pre_xml_string_format(str_9, verbose=True), test_str_9)
         self.assertEqual(_pre_xml_string_format(str_10, verbose=True), test_str_10)
+        self.assertEqual(_pre_xml_string_format(str_11, verbose=True), test_str_11)
 
     def test_replace_char_at_pos_by_string(self):
         test_string = '<my_beacon><!-- a comment element -->a test value < an element attr ="5" attr2="3>=2"/> <a beacon></a beacon> </my_beacon>'
