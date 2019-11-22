@@ -58,8 +58,7 @@ class Beacon(object):
         if test:
             test = len(a_dict) == len(an_other_dict)
         if test:
-            for key in list(a_dict):
-                test = test and key in an_other_dict and a_dict[key] == an_other_dict[key]
+            test = all([key in an_other_dict and value == an_other_dict[key] for (key, value) in a_dict.items()])
         return test
 
     def _test_attribute_equality(self, attrib, other):
@@ -87,13 +86,9 @@ class Beacon(object):
     @staticmethod
     def dump_dict(a_dict, sort=False):
         if len(a_dict) > 0:
-            list_key_value = list()
+            list_key_value = [(key, value) for (key, value) in a_dict.items()]
             if sort:
-                for key in sorted(list(a_dict)):
-                    list_key_value.append((key, a_dict[key]))
-            else:
-                for (key, value) in a_dict.items():
-                    list_key_value.append((key, value))
+                list_key_value = sorted(list_key_value, key=lambda t: t[0])
             return " ".join(['{}={}'.format(key, '"{}"'.format(value)) for (key, value) in list_key_value])
         else:
             return None

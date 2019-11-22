@@ -10,65 +10,53 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 import re
 import six
 
+from xml_writer.utils import print_if_needed
+
 
 def iterate_on_characters_to_check(xml_string, verbose=False):
     # Find the special characters' positions
-    begin_header_position = [m.start() for m in re.compile(r"<\?").finditer(xml_string)]
-    end_header_positions = [m.end() - 1 for m in re.compile(r"\?>").finditer(xml_string)]
-    if len(begin_header_position) > 1 or len(end_header_positions) > 1:
-        raise Exception("There should be only one header...")
-    begin_comment_positions = [m.start() for m in re.compile(r"<!--").finditer(xml_string)]
-    end_comment_positions = [m.end() - 1 for m in re.compile(r"-->").finditer(xml_string)]
-    double_quotes_positions = [m.start() for m in re.compile(r'"').finditer(xml_string)]
-    single_quotes_positions = [m.start() for m in re.compile(r"'").finditer(xml_string)]
-    greater_positions = sorted(list(set([m.start() for m in re.compile(r">").finditer(xml_string)]) -
-                                    set(end_comment_positions) - set(end_header_positions)))
-    lower_positions = sorted(list(set([m.start() for m in re.compile(r'<').finditer(xml_string)]) -
-                                  set(begin_comment_positions) - set(begin_header_position)))
-    if verbose:
-        print("<<<pre_xml_string_format: begin_header_positions>>>", len(begin_header_position), begin_header_position)
-        print("<<<pre_xml_string_format: end_header_positions>>>", len(end_header_positions), end_header_positions)
-        print("<<<pre_xml_string_format: begin_comment_positions>>>", len(begin_comment_positions),
-              begin_comment_positions)
-        print("<<<pre_xml_string_format: end_comment_positions>>>", len(end_comment_positions), end_comment_positions)
-        print("<<<pre_xml_string_format: double_quotes_positions>>>", len(double_quotes_positions),
-              double_quotes_positions)
-        print("<<<pre_xml_string_format: single_quotes_positions>>>", len(single_quotes_positions),
-              single_quotes_positions)
-        print("<<<pre_xml_string_format: greater_positions>>>", len(greater_positions), greater_positions)
-        print("<<<pre_xml_string_format: lower_positions>>>", len(lower_positions), lower_positions)
+    tmp_characters_to_check = list()
+    list_other_greater = list()
+    list_other_lower = list()
+    for m in re.compile(r"<\?").finditer(xml_string):
+        tmp_characters_to_check.append((m.start(), "begin_header"))
+        list_other_lower.append(m.start())
+    if len(tmp_characters_to_check) not in [0, 1]:
+        raise Exception("There should be only one header at most...")
+    for m in re.compile(r"\?>").finditer(xml_string):
+        tmp_characters_to_check.append((m.start(), "end_header"))
+        list_other_greater.append(m.start() + 1)
+    if len(tmp_characters_to_check) not in [0, 2]:
+        raise Exception("There should be only one header at most...")
+    for m in re.compile(r"<!--").finditer(xml_string):
+        tmp_characters_to_check.append((m.start(), "begin_comment"))
+        list_other_lower.append(m.start())
+    for m in re.compile(r"-->").finditer(xml_string):
+        tmp_characters_to_check.append((m.start(), "end_comment"))
+        list_other_greater.append(m.start() + 2)
+    for m in re.compile(r"<").finditer(xml_string):
+        if m.start() not in list_other_lower:
+            tmp_characters_to_check.append((m.start(), "lower_than"))
+    for m in re.compile(r">").finditer(xml_string):
+        if m.start() not in list_other_greater:
+            tmp_characters_to_check.append((m.start(), "greater_than"))
+    for m in re.compile(r'"').finditer(xml_string):
+        tmp_characters_to_check.append((m.start(), "double_quote"))
+    for m in re.compile(r"'").finditer(xml_string):
+        tmp_characters_to_check.append((m.start(), "single_quote"))
     # Build the iterator
-    tmp_characters_to_check = sorted(double_quotes_positions + single_quotes_positions + greater_positions +
-                                     lower_positions + begin_comment_positions + end_comment_positions)
-    for pos in tmp_characters_to_check:
-        if pos in begin_header_position:
-            yield (pos, "begin_header")
-        elif pos in end_header_positions:
-            yield (pos, "end_header")
-        elif pos in begin_comment_positions:
-            yield (pos, "begin_comment")
-        elif pos in end_comment_positions:
-            yield (pos, "end_comment")
-        elif pos in double_quotes_positions:
-            yield (pos, "double_quote")
-        elif pos in single_quotes_positions:
-            yield (pos, "single_quote")
-        elif pos in greater_positions:
-            yield (pos, "greater_than")
-        elif pos in lower_positions:
-            yield (pos, "lower_than")
-        else:
-            raise ValueError("Unknown source for position %d" % pos)
+    tmp_characters_to_check = sorted(tmp_characters_to_check, key=lambda t: t[0])
+    for (pos, char_type) in tmp_characters_to_check:
+        yield (pos, char_type)
 
 
 def iterate_on_string(xml_string, verbose=False):
     new_xml_string = xml_string.split("\n")
     pos_init = 0
-    old_substring = ""
     for substring in new_xml_string:
-        pos_init += len(old_substring)
-        old_substring = substring + "\n"
-        yield (old_substring, pos_init)
+        substring += "\n"
+        yield (substring, pos_init)
+        pos_init += len(substring)
 
 
 def _pre_xml_string_format(xml_string, verbose=False):
@@ -203,12 +191,6 @@ def _pre_xml_string_format(xml_string, verbose=False):
     new_xml_string = new_xml_string.replace("\n", " ")
     new_xml_string = new_xml_string.split(" ")
     return " ".join([m for m in new_xml_string if len(m) > 0])
-
-
-def print_if_needed(*args, **kwargs):
-    verbose = kwargs.get("verbose", False)
-    if verbose:
-        print(*args)
 
 
 def replace_char_at_pos_by_string(complete_string, string_in, replace_out, pos_init, pos_end, verbose=False):

@@ -12,8 +12,7 @@ from collections import OrderedDict
 from copy import copy
 
 from xml_writer.pre_treament import _pre_xml_string_format, replace_char_at_pos_by_string, _find_in_out
-from xml_writer.element import _build_element, _find_one_part_element, _find_matching_first_part_in_content, \
-    _find_matching_last_part_in_content, _find_real_content, _find_two_parts_element, is_xml_element
+from xml_writer.element import _build_element, _find_one_part_element, _find_two_parts_element, is_xml_element
 from xml_writer.comment import _find_xml_comment
 from xml_writer.header import _find_xml_header
 from xml_writer.beacon import Beacon
@@ -550,47 +549,47 @@ class TestFindTwoPartsElement(unittest.TestCase):
         self.test_str_1 = '<my_beacon><!-- a comment element -->a test value < an element attr ="5" attr2="3>=2"/> <a beacon> <my_beacon>an other test value <an other element /> </my_beacon> </a beacon> </my_beacon>'
         self.test_str_2 = '<!-- a comment element --></my_beacon >< my_beacon>an other test value <an other element /> </my_beacon>'
 
-    def test_find_matching_first_part_in_content(self):
-        test_1 = _find_matching_first_part_in_content(content=self.test_str_2, tag="my beacon", verbose=True)
-        self.assertEqual(test_1, [])
-        test_2 = _find_matching_first_part_in_content(content=self.test_str_2, tag="my_beacon", verbose=True)
-        self.assertEqual(test_2, [39, ])
-        test_3 = _find_matching_first_part_in_content(content=self.test_str_1, tag="my_beacon")
-        self.assertEqual(test_3, [0, 99])
+    # def test_find_matching_first_part_in_content(self):
+    #     test_1 = _find_matching_first_part_in_content(content=self.test_str_2, tag="my beacon", verbose=True)
+    #     self.assertEqual(test_1, [])
+    #     test_2 = _find_matching_first_part_in_content(content=self.test_str_2, tag="my_beacon", verbose=True)
+    #     self.assertEqual(test_2, [39, ])
+    #     test_3 = _find_matching_first_part_in_content(content=self.test_str_1, tag="my_beacon")
+    #     self.assertEqual(test_3, [0, 99])
+    #
+    # def test_find_matching_last_part_in_content(self):
+    #     test_1 = _find_matching_last_part_in_content(content=self.test_str_2, tag="an element", verbose=True)
+    #     self.assertEqual(test_1[0], [])
+    #     self.assertEqual(test_1[1], [])
+    #     test_2 = _find_matching_last_part_in_content(content=self.test_str_2, tag="my_beacon")
+    #     self.assertEqual(test_2[0], [26, 92])
+    #     self.assertEqual(test_2[1], ['</my_beacon >', '</my_beacon>'])
+    #     test_3 = _find_matching_last_part_in_content(content=self.test_str_1, tag="my_beacon", verbose=True)
+    #     self.assertEqual(test_3[0], [151, 176])
+    #     self.assertEqual(test_3[1], ['</my_beacon>', '</my_beacon>'])
 
-    def test_find_matching_last_part_in_content(self):
-        test_1 = _find_matching_last_part_in_content(content=self.test_str_2, tag="an element", verbose=True)
-        self.assertEqual(test_1[0], [])
-        self.assertEqual(test_1[1], [])
-        test_2 = _find_matching_last_part_in_content(content=self.test_str_2, tag="my_beacon")
-        self.assertEqual(test_2[0], [26, 92])
-        self.assertEqual(test_2[1], ['</my_beacon >', '</my_beacon>'])
-        test_3 = _find_matching_last_part_in_content(content=self.test_str_1, tag="my_beacon", verbose=True)
-        self.assertEqual(test_3[0], [151, 176])
-        self.assertEqual(test_3[1], ['</my_beacon>', '</my_beacon>'])
-
-    def test_find_real_content(self):
-        test_1 = _find_real_content(content=self.test_str_2, match_first_part=[], match_last_part=[],
-                                    groups_last_part=[], verbose=True)
-        self.assertEqual(test_1[0], self.test_str_2)
-        self.assertIsNone(test_1[1])
-        with self.assertRaises(Exception):
-            _find_real_content(content=self.test_str_2, match_first_part=[5,], match_last_part=[],
-                               groups_last_part=[], verbose=True)
-        test_2 = _find_real_content(content=self.test_str_2, match_first_part=[39], match_last_part=[26, 92],
-                                    groups_last_part=['</my_beacon >', '</my_beacon>'], verbose=True)
-        self.assertEqual(test_2[0], '<!-- a comment element -->')
-        self.assertEqual(test_2[1], '</my_beacon >')
-        str_test_3 = '<my_beacon> some text <my_beacon> <!-- a comment --></my_beacon> some text </my_beacon > </my_beacon><my_beacon> an other text </my_beacon>'
-        test_3 = _find_real_content(content=str_test_3, match_first_part=[0, 22, 101], match_last_part=[52, 75, 89, 127],
-                                    groups_last_part=['</my_beacon>', '</my_beacon >', '</my_beacon>', '</my_beacon>'],
-                                    verbose=True)
-        self.assertEqual(test_3[0], '<my_beacon> some text <my_beacon> <!-- a comment --></my_beacon> some text </my_beacon > ')
-        self.assertEqual(test_3[1], '</my_beacon>')
-        test_str_1 = '<!-- a comment element --><my_beacon><my_beacon>some text</my_beacon>'
-        with self.assertRaises(Exception):
-            _find_real_content(content=test_str_1, match_first_part=[26, 37], match_last_part=[57, ],
-                               groups_last_part=['</my_beacon>', ])
+    # def test_find_real_content(self):
+    #     test_1 = _find_real_content(content=self.test_str_2, match_first_part=[], match_last_part=[],
+    #                                 groups_last_part=[], verbose=True)
+    #     self.assertEqual(test_1[0], self.test_str_2)
+    #     self.assertIsNone(test_1[1])
+    #     with self.assertRaises(Exception):
+    #         _find_real_content(content=self.test_str_2, match_first_part=[5,], match_last_part=[],
+    #                            groups_last_part=[], verbose=True)
+    #     test_2 = _find_real_content(content=self.test_str_2, match_first_part=[39], match_last_part=[26, 92],
+    #                                 groups_last_part=['</my_beacon >', '</my_beacon>'], verbose=True)
+    #     self.assertEqual(test_2[0], '<!-- a comment element -->')
+    #     self.assertEqual(test_2[1], '</my_beacon >')
+    #     str_test_3 = '<my_beacon> some text <my_beacon> <!-- a comment --></my_beacon> some text </my_beacon > </my_beacon><my_beacon> an other text </my_beacon>'
+    #     test_3 = _find_real_content(content=str_test_3, match_first_part=[0, 22, 101], match_last_part=[52, 75, 89, 127],
+    #                                 groups_last_part=['</my_beacon>', '</my_beacon >', '</my_beacon>', '</my_beacon>'],
+    #                                 verbose=True)
+    #     self.assertEqual(test_3[0], '<my_beacon> some text <my_beacon> <!-- a comment --></my_beacon> some text </my_beacon > ')
+    #     self.assertEqual(test_3[1], '</my_beacon>')
+    #     test_str_1 = '<!-- a comment element --><my_beacon><my_beacon>some text</my_beacon>'
+    #     with self.assertRaises(Exception):
+    #         _find_real_content(content=test_str_1, match_first_part=[26, 37], match_last_part=[57, ],
+    #                            groups_last_part=['</my_beacon>', ])
 
     def test_find_two_parts_element(self):
         test_1 = _find_two_parts_element(self.test_str_1)
@@ -682,6 +681,7 @@ class TestFindText(unittest.TestCase):
 class TestPreTreatment(unittest.TestCase):
 
     def test_pre_xml_string_format(self):
+        # TODO: add a test with a header
         str_1 = '<my_beacon>\n\n<!-- a comment element <=> -->a test value < an element attr ="><5" attr2="3>=2"/>     <a beacon>\t</a beacon>\n \t</my_beacon attr=">">'
         test_str_1 = '<my_beacon> <!-- a comment element &lt=&gt -->a test value < an element attr ="&gt&lt5" attr2="3&gt=2"/> <a beacon> </a beacon> </my_beacon attr="&gt">'
         str_2 = '<my_beacon> a test <value </my_beacon>'

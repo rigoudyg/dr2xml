@@ -10,7 +10,7 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 import re
 
 from xml_writer.beacon import Beacon
-from xml_writer.utils import encode_if_needed
+from xml_writer.utils import encode_if_needed, print_if_needed
 
 
 class Comment(Beacon):
@@ -50,19 +50,14 @@ def _find_xml_comment(xml_string, verbose=False):
             little_xml_string = xml_string
         print("<<<find_xml_comment: beginning of the XML string >>>", little_xml_string)
     match_comment = _xml_comment_regexp.match(xml_string)
-    if verbose:
-        print("<<<find_xml_comment: is there a comment? >>>", match_comment)
+    print_if_needed("<<<find_xml_comment: is there a comment? >>>", match_comment, verbose=verbose)
     if not match_comment:
-        # if verbose:
-        #     print("<<<find_xml_comment: XML_STRING after>>>", len(xml_string), xml_string)
         return xml_string, None
     else:
-        text = match_comment.groupdict()["comment"]
-        text = text.strip()
+        match_group_dict = match_comment.groupdict()
+        text = match_group_dict["comment"].strip()
         comment = Comment(comment=text)
-        xml_string = xml_string.replace(match_comment.groupdict()["all"], "", 1)
+        xml_string = xml_string.replace(match_group_dict["all"], "", 1)
         xml_string = xml_string.strip()
-        if verbose:
-            # print("<<<find_xml_comment: XML_STRING after>>>", len(xml_string), xml_string)
-            print("<<<find_xml_comment: comment >>>", len(str(comment)), str(comment))
+        print_if_needed("<<<find_xml_comment: comment >>>", len(str(comment)), str(comment), verbose=verbose)
         return xml_string, comment

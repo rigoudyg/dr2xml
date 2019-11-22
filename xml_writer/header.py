@@ -65,9 +65,9 @@ def _find_xml_header(xml_string, verbose=False):
         if not pattern_match:
             raise Exception("Header should be at the beginning of the xml document.")
         else:
-            tag = pattern_match.groupdict()["tag"]
-            attrib = pattern_match.groupdict()["attrib"]
-            attrib = _build_dict_attrib(attrib)
+            match_group_dict = pattern_match.groupdict()
+            tag = match_group_dict["tag"]
+            attrib = _build_dict_attrib(match_group_dict["attrib"])
             header = Header(tag=tag, attrib=attrib)
             xml_string = xml_string.replace(pattern_findall[0][0], "", 1)
             return xml_string, header
