@@ -13,7 +13,7 @@ from xml_writer.beacon import Beacon
 from xml_writer.element import Element
 from xml_writer.header import Header
 from xml_writer.comment import Comment
-from xml_writer.parser import xml_parser, xml_file_parser
+from xml_writer.parser import xml_file_parser, parse_xml_string_rewrite
 from xml_writer.utils import encode_if_needed, decode_if_needed
 
 if __name__ == "__main__":

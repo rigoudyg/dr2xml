@@ -19,30 +19,38 @@ def iterate_on_characters_to_check(xml_string, verbose=False):
     list_other_greater = list()
     list_other_lower = list()
     for m in re.compile(r"<\?").finditer(xml_string):
+        print_if_needed("Find begin header at pos", m.start(), verbose=verbose)
         tmp_characters_to_check.append((m.start(), "begin_header"))
         list_other_lower.append(m.start())
     if len(tmp_characters_to_check) not in [0, 1]:
         raise Exception("There should be only one header at most...")
     for m in re.compile(r"\?>").finditer(xml_string):
+        print_if_needed("Find end header at pos", m.start(), verbose=verbose)
         tmp_characters_to_check.append((m.start(), "end_header"))
         list_other_greater.append(m.start() + 1)
     if len(tmp_characters_to_check) not in [0, 2]:
         raise Exception("There should be only one header at most...")
     for m in re.compile(r"<!--").finditer(xml_string):
+        print_if_needed("Find begin comment at pos", m.start(), verbose=verbose)
         tmp_characters_to_check.append((m.start(), "begin_comment"))
         list_other_lower.append(m.start())
     for m in re.compile(r"-->").finditer(xml_string):
+        print_if_needed("Find end comment at pos", m.start(), verbose=verbose)
         tmp_characters_to_check.append((m.start(), "end_comment"))
         list_other_greater.append(m.start() + 2)
     for m in re.compile(r"<").finditer(xml_string):
         if m.start() not in list_other_lower:
             tmp_characters_to_check.append((m.start(), "lower_than"))
+            print_if_needed("Find lower than at pos", m.start(), verbose=verbose)
     for m in re.compile(r">").finditer(xml_string):
         if m.start() not in list_other_greater:
             tmp_characters_to_check.append((m.start(), "greater_than"))
+            print_if_needed("Find greater than at pos", m.start(), verbose=verbose)
     for m in re.compile(r'"').finditer(xml_string):
+        print_if_needed("Find double quote at pos", m.start(), verbose=verbose)
         tmp_characters_to_check.append((m.start(), "double_quote"))
     for m in re.compile(r"'").finditer(xml_string):
+        print_if_needed("Find single quote at pos", m.start(), verbose=verbose)
         tmp_characters_to_check.append((m.start(), "single_quote"))
     # Build the iterator
     tmp_characters_to_check = sorted(tmp_characters_to_check, key=lambda t: t[0])
@@ -209,14 +217,3 @@ def replace_char_at_pos_by_string(complete_string, string_in, replace_out, pos_i
             return complete_string[:pos_init] + replace_out
         else:
             return complete_string[:pos_init] + replace_out + complete_string[pos_end:]
-
-
-def _find_in_out(pos, list_in_out_pos, verbose=False):
-    if verbose:
-        print("<<<find_in_out: check pos>>>", pos)
-    is_pos_in = [pos_in <= pos <= pos_out for (pos_in, pos_out) in list_in_out_pos]
-    test = any(is_pos_in)
-    if verbose and test:
-        (pos_in, pos_out) = list_in_out_pos[is_pos_in.index(True)]
-        print("<<<find_in_out: in out found>>>", pos, pos_in, pos_out)
-    return test

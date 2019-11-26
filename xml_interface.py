@@ -27,7 +27,7 @@ def create_xml_sub_element(xml_element, tag, attrib=OrderedDict(), text=None):
 
 
 def create_xml_element_from_string(string):
-    return xml_writer.xml_parser(string)
+    return xml_writer.parse_xml_string_rewrite(string)
 
 
 def create_string_from_xml_element(xml_element):
