@@ -25,8 +25,8 @@ from settings_interface import get_variable_from_lset_with_default, get_variable
 # Interface to Data Request
 from dr_interface import get_DR_version, get_collection, get_uid, print_DR_errors
 # Interface to xml tools
-from xml_interface import get_root_of_xml_file, create_string_from_xml_element, create_xml_element_from_string, \
-    create_xml_element, create_xml_sub_element
+from xml_interface import get_root_of_xml_file, create_string_from_xml_element, create_xml_element, \
+    create_xml_sub_element
 
 # Variables tools
 from vars_selection import get_grid_choice

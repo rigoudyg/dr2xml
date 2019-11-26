@@ -24,7 +24,7 @@ class Element(Beacon):
     """
     def __init__(self, tag, text=None, attrib=OrderedDict()):
         super(Element, self).__init__()
-        self.tag = tag
+        self.tag = tag.strip()
         self.text = text
         self.attrib = deepcopy(attrib)
         self.children = list()
@@ -170,7 +170,7 @@ def _build_element(xml_string, verbose=False):
 
 
 # XML single part regexp
-_xml_single_part_element_regexp = re.compile(r'^\s?(?P<all><\s?(?P<tag>(\w+\s?)+){}\s?/>)\s?'.format(
+_xml_single_part_element_regexp = re.compile(r'^\s?(?P<all><\s?(?P<tag>\w+)\s?{}\s?/>)\s?'.format(
     _generic_dict_regexp))
 
 
@@ -194,13 +194,41 @@ def _find_one_part_element(xml_string, verbose=False):
 _xml_string_first_element_replace = r'(?P<all_begin>\s?(?P<begin><\s?(?P<tag>{}){}\s?>)\s?)'.format('{}',
                                                                                                     _generic_dict_regexp)
 _xml_string_init_element_replace = r'^'+_xml_string_first_element_replace
-_xml_init_two_parts_element_regexp = re.compile(_xml_string_init_element_replace.format(r"(\w+\s?)+"))
+_xml_init_two_parts_element_regexp = re.compile(_xml_string_init_element_replace.format(r"\w+\s?"))
 _xml_string_content_element = r'(?P<content>{})'
 _xml_string_end_element_replace = r'(?P<all_end>\s?(?P<end></\s?{}\s?>)\s?)'
 _xml_string_two_parts_element_replace = _xml_string_init_element_replace + _xml_string_content_element + \
                                         _xml_string_end_element_replace
 _xml_string_pseudo_two_parts_element_replace = r"(?P<all>" + _xml_string_init_element_replace + r"\s?" + \
                                                _xml_string_end_element_replace + r")"
+
+
+def _find_two_parts_element_init(xml_string, verbose=False):
+    xml_string = xml_string.strip()
+    match = _xml_init_two_parts_element_regexp.match(xml_string)
+    if not match:
+        return xml_string, None
+    else:
+        match_group_dict = match.groupdict()
+        begin = match_group_dict["begin"]
+        tag = match_group_dict["tag"]
+        attrib = match_group_dict["attrib"]
+        attrib = _build_dict_attrib(attrib)
+        xml_string = xml_string.replace(begin, "", 1).strip()
+        elt = Element(tag=tag, attrib=attrib)
+        return xml_string, elt
+
+
+def _find_two_parts_element_end(xml_string, tag, verbose=False):
+    xml_string = xml_string.strip()
+    match = re.compile(r"^" + _xml_string_end_element_replace.format(tag)).match(xml_string)
+    if not match:
+        return xml_string, None
+    else:
+        match_group_dict = match.groupdict()
+        end = match_group_dict["end"]
+        xml_string = xml_string.replace(end, "", 1).strip()
+        return xml_string, True
 
 
 # def _find_matching_first_part_in_content(content, tag, verbose=False):

@@ -10,7 +10,7 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 import re
 import six
 
-from xml_writer.utils import print_if_needed
+from xml_writer.utils import print_if_needed, iterate_on_string
 
 
 def iterate_on_characters_to_check(xml_string, verbose=False):
@@ -50,15 +50,6 @@ def iterate_on_characters_to_check(xml_string, verbose=False):
         yield (pos, char_type)
 
 
-def iterate_on_string(xml_string, verbose=False):
-    new_xml_string = xml_string.split("\n")
-    pos_init = 0
-    for substring in new_xml_string:
-        substring += "\n"
-        yield (substring, pos_init)
-        pos_init += len(substring)
-
-
 def _pre_xml_string_format(xml_string, verbose=False):
     if not isinstance(xml_string, six.string_types):
         raise TypeError("Argument must be a string or equivalent, not %s." % type(xml_string))
@@ -78,7 +69,7 @@ def _pre_xml_string_format(xml_string, verbose=False):
     nb_beacons_nested = 0
     is_beacon_open = False
     is_beacon_ending = False
-    for (sub_xml_string, pos_init) in iterate_on_string(xml_string, verbose=verbose):
+    for (sub_xml_string, pos_init) in iterate_on_string(xml_string, separator="\n", verbose=verbose):
         # Loop on the characters' position to be checked
         for (pos, character_type) in iterate_on_characters_to_check(sub_xml_string, verbose=verbose):
             pos += pos_init

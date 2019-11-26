@@ -25,7 +25,7 @@ from settings_interface import get_variable_from_lset_without_default, get_varia
 # Interface to Data Request
 from dr_interface import get_collection, get_uid
 # Interface to xml tools
-from xml_interface import create_xml_element_from_string, create_string_from_xml_element, create_xml_element, create_xml_sub_element
+from xml_interface import create_string_from_xml_element, create_xml_element, create_xml_sub_element
 
 # CFsites tools
 from cfsites import cfsites_grid_id, add_cfsites_in_defs, cfsites_domain_id
