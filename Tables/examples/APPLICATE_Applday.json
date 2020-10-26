@@ -1,0 +1,55 @@
+{
+    "Header": {
+        "data_specs_version": "01.00.21",
+        "table_id": "Table APPLICATE_Applday",
+        "realm": "atmos land aerosol",
+        "cmor_version": "3.2",
+        "table_date": "5 Dec 2018",
+        "missing_value": "1e20",
+        "product": "model-output",
+        "approx_interval": "0.250000",
+        "generic_levels": "",
+        "mip_era": "APPLICATE",
+        "Conventions": "CF-1.7 CMIP-6.0"
+    },
+    "variable_entry": {
+        "uqint": {
+            "frequency": "day",
+            "modeling_realm": "atmos",
+            "standard_name": "integral_of_product_of_eastward_wind_and_specific_humidity_wrt_height",
+            "units": "m2 s-1",
+            "cell_methods": "area: time: mean",
+            "cell_measures": "area: areacella",
+            "long_name": "integrated_eastward_wind_times_humidity",
+            "comment": "Column integrated eastward wind times specific humidity",
+            "dimensions": "longitude latitude time",
+            "out_name": "uqint",
+            "type": "real",
+            "positive": "",
+            "valid_min": "",
+            "valid_max": "",
+            "ok_min_mean_abs": "",
+            "ok_max_mean_abs": "",
+            "applicate_priority": "1"
+        },
+        "vqint": {
+            "frequency": "day",
+            "modeling_realm": "atmos",
+            "standard_name": "integral_of_product_of_northward_wind_and_specific_humidity_wrt_height",
+            "units": "m2 s-1",
+            "cell_methods": "area: time: mean",
+            "cell_measures": "area: areacella",
+            "long_name": "integrated_northward_wind_times_humidity",
+            "comment": "Column integrated northward wind times specific humidity",
+            "dimensions": "longitude latitude time",
+            "out_name": "vqint",
+            "type": "real",
+            "positive": "",
+            "valid_min": "",
+            "valid_max": "",
+            "ok_min_mean_abs": "",
+            "ok_max_mean_abs": "",
+            "applicate_priority": "1"
+        }
+    }
+}

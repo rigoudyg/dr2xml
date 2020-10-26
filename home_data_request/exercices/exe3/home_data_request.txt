@@ -1,0 +1,14 @@
+#------------------------------------------------------------------------------------------------------------------------------------------------------
+#TYPE;    VARNAME;         REALM;     FREQUENCY;     TABLE;                     TEMPORAL_SHP;         SPATIAL_SHP;       EXPNAME;            MIP
+#------------------------------------------------------------------------------------------------------------------------------------------------------
+# (a) requesting additionnal CMIP6 standard variables, already existing in a CMIP6 Table
+cmor;      huss;           atmos;     day;           CMIP6_day;                 time-mean;            XY-na;             ANY;                ANY
+cmor;      zg;             atmos;     day;           CMIP6_day;                 time-mean;            XY-P8;             ANY;                ANY
+cmor;      ts;             atmos;     day;           CMIP6_Eday;                time-mean;            XY-na;             ANY;                ANY
+cmor;      uas;            atmos;     3hrPt;         CMIP6_3hr;                 time-point;           XY-na;             ANY;                ANY
+cmor;      vas;            atmos;     3hrPt;         CMIP6_3hr;                 time-point;           XY-na;             ANY;                ANY
+# (b) requesting a CMIP6 standard variable but that doest not exist in the predefined CMIP6 Table for the frequency or the spatial shape we want
+extra;  wap;              atmos;      6hrPt;         TRAINING_6hrPtExe3;         ANY;                  ANY;               ANY;                ANY
+# (c) requesting a totally new variable, that is defined in the CMIP6 standards
+perso;  pblh;             atmos;      mon;           NONE;                        time-mean;           XY-na;             ANY;                ANY
+extra;  pblh;             atmos;      mon;           TRAINING_monExe3;           ANY;                  ANY;               ANY;                ANY

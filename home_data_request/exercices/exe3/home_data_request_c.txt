@@ -1,0 +1,6 @@
+#------------------------------------------------------------------------------------------------------------------------------------------------------
+#TYPE;    VARNAME;         REALM;     FREQUENCY;     TABLE;                     TEMPORAL_SHP;         SPATIAL_SHP;       EXPNAME;            MIP
+#------------------------------------------------------------------------------------------------------------------------------------------------------
+# (c) requesting a CMIP6 standard variable but that doest not exist in the predefined CMIP6 Table for the spatial shape we want
+extra;  no2;             atmos;      mon;           CNRM_HOMEPmon;           ANY;                  ANY;               ANY;                ANY
+extra;  o3;              atmos;      mon;           CNRM_HOMEPmon;           ANY;                  ANY;               ANY;                ANY

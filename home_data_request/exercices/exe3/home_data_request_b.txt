@@ -1,0 +1,5 @@
+#------------------------------------------------------------------------------------------------------------------------------------------------------
+#TYPE;    VARNAME;         REALM;     FREQUENCY;     TABLE;                     TEMPORAL_SHP;         SPATIAL_SHP;       EXPNAME;            MIP
+#------------------------------------------------------------------------------------------------------------------------------------------------------
+# (b) requesting a CMIP6 standard variable but that doest not exist in the predefined CMIP6 Table for the frequency we want
+extra;  wap;              atmos;      6hrPt;         TRAINING_6hrPtExe3;         ANY;                  ANY;               ANY;                ANY

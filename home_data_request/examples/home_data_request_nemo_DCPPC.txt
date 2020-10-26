@@ -1,0 +1,10 @@
+#------------------------------------------------------------------------------------------------------------------------------------------------------
+#TYPE;    VARNAME;         REALM;     FREQUENCY;     TABLE;                     TEMPORAL_SHP;         SPATIAL_SHP;       EXPNAME;            MIP
+#------------------------------------------------------------------------------------------------------------------------------------------------------
+#--- Requested by PRIMAVERA WP5 minDR or WP10/11 but missing in CMIP6/DCPPC DR
+cmor;    hfcorr;           ocean;       mon;         CMIP6_Omon;               time-mean;            XY-na;             ANY;                ANY
+cmor;    wfcorr;           ocean;       mon;         CMIP6_Omon;               time-mean;            XY-na;             ANY;                ANY
+cmor;    msftyz;           ocean;       mon;         CMIP6_Omon;               time-mean;            GYB-O;             ANY;                ANY
+#--- Emilia's DR
+cmor;    tos;              ocean;       day;         CMIP6_Oday;               time-mean;            XY-na;             ANY;                ANY
+cmor;    sos;              ocean;       day;         CMIP6_Oday;               time-mean;            XY-na;             ANY;                ANY

@@ -1,0 +1,26 @@
+#------------------------------------------------------------------------------------------------------------------------------------------------------
+#TYPE;    VARNAME;         REALM;     FREQUENCY;     TABLE;                     TEMPORAL_SHP;         SPATIAL_SHP;       EXPNAME;            MIP
+#------------------------------------------------------------------------------------------------------------------------------------------------------
+cmor;    areacello;       ocean;      fx;            CMIP_Ofx;                      None;            XY-na;             ANY;                ANY
+cmor;    tos;             ocean;     mon;           CMIP_Omon;                 time-mean;            XY-na;             ANY;                ANY
+cmor;    zos;             ocean;     mon;           CMIP_Omon;                 time-mean;            XY-na;             ANY;                ANY
+cmor;    sos;             ocean;     mon;           CMIP_Omon;                 time-mean;            XY-na;             ANY;                ANY
+cmor;    rsntds;          ocean;     mon;           CMIP_Omon;                 time-mean;            XY-na;             ANY;                ANY
+cmor;    hfds;            ocean;     mon;           CMIP_Omon;                 time-mean;            XY-na;             ANY;                ANY
+cmor;    hfx;             ocean;     mon;           CMIP_Omon;                 time-mean;            XY-na;             ANY;                ANY
+cmor;    hfy;             ocean;     mon;           CMIP_Omon;                 time-mean;            XY-na;             ANY;                ANY
+cmor;    wfo;             ocean;     mon;           CMIP_Omon;                 time-mean;            XY-na;             ANY;                ANY
+cmor;    tauuo;           ocean;     mon;           CMIP_Omon;                 time-mean;            XY-na;             ANY;                ANY
+cmor;    tauvo;           ocean;     mon;           CMIP_Omon;                 time-mean;            XY-na;             ANY;                ANY
+cmor;    t20d;            ocean;     mon;           CMIP_Emon;                 time-mean;            XY-na;             ANY;                ANY
+cmor;    mlotst;          ocean;     mon;           CMIP_Omon;                 time-mean;            XY-na;             ANY;                ANY
+cmor;    mlotstmin;       ocean;     mon;           CMIP_Omon;                 time-mean;            XY-na;             ANY;                ANY
+extra;   hcont300;        ocean;     mon;           CNRM_HOMOImon;             time-mean;            XY-na;             ANY;                ANY
+cmor;    bigthetaoga;     ocean;     mon;           CMIP_Omon;                 time-mean;            na-na;             ANY;                ANY
+cmor;    soga;            ocean;     mon;           CMIP_Omon;                 time-mean;            na-na;             ANY;                ANY
+cmor;    sosga;           ocean;     mon;           CMIP_Omon;                 time-mean;            na-na;             ANY;                ANY
+extra;   msftyz;          ocean;     mon;           CNRM_HOMOImon;             time-mean;             YB-O;             ANY;                ANY
+cmor;    htovgyre;        ocean;     mon;           CMIP_Omon;                 time-mean;            YB-na;             ANY;                ANY
+cmor;    htovovrt;        ocean;     mon;           CMIP_Omon;                 time-mean;            YB-na;             ANY;                ANY
+cmor;    siconc;         seaIce;     mon;          CMIP_SImon;                 time-mean;            XY-na;             ANY;                ANY
+cmor;    sivol;          seaIce;     mon;          CMIP_SImon;                 time-mean;            XY-na;             ANY;                ANY

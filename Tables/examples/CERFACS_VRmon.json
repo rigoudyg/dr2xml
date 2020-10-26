@@ -1,0 +1,53 @@
+{
+    "Header": {
+        "data_specs_version": "01.00.21",
+        "table_id": "Table CERFACS_VRmon",
+        "realm": "atmos land aerosol",
+        "cmor_version": "3.2",
+        "table_date": "07 Sep 2018",
+        "missing_value": "1e20",
+        "product": "model-output",
+        "approx_interval": "0.250000",
+        "generic_levels": "",
+        "mip_era": "CERFACS",
+        "Conventions": "CF-1.7 CMIP-6.0"
+    },
+    "variable_entry": {
+        "pblh": {
+            "frequency": "mon",
+            "modeling_realm": "atmos",
+            "units": "m",
+            "cell_methods": "area: time: mean",
+            "cell_measures": "area: areacella",
+            "long_name": "Planetary Boundary Layer Height",
+            "comment": "",
+            "dimensions": "longitude latitude time",
+            "out_name": "pblh",
+            "type": "real",
+            "positive": "",
+            "valid_min": "",
+            "valid_max": "",
+            "ok_min_mean_abs": "",
+            "ok_max_mean_abs": "",
+            "cerfacs_priority": "1"
+        },
+        "drhdzpblh": {
+            "frequency": "mon",
+            "modeling_realm": "atmos",
+            "units": "m-1",
+            "cell_methods": "area: time: mean",
+            "cell_measures": "area: areacella",
+            "long_name": "RH Gradient At Planetary Boundary Layer Top",
+            "comment": "",
+            "dimensions": "longitude latitude time",
+            "out_name": "drhdzpblh",
+            "type": "real",
+            "positive": "",
+            "valid_min": "",
+            "valid_max": "",
+            "ok_min_mean_abs": "",
+            "ok_max_mean_abs": "",
+            "cerfacs_priority": "1"
+        }
+    }
+}

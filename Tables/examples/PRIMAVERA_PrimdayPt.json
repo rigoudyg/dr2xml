@@ -1,0 +1,55 @@
+{
+    "Header": {
+        "data_specs_version": "01.00.13", 
+        "table_id": "Table PrimdayPt", 
+        "realm": "atmos", 
+        "cmor_version": "3.2", 
+        "table_date": "12 July 2017", 
+        "missing_value": "1e20", 
+        "product": "model-output", 
+        "approx_interval": "1.00000", 
+        "generic_levels": "", 
+        "mip_era": "PRIMAVERA", 
+        "Conventions": "CF-1.7 CMIP-6.0"
+    }, 
+    "variable_entry": {
+        "va": {
+            "frequency": "day", 
+            "modeling_realm": "atmos", 
+            "standard_name": "northward_wind", 
+            "units": "m s-1", 
+            "cell_methods": "time: point", 
+            "cell_measures": "area: areacella", 
+            "long_name": "Northward Wind", 
+            "comment": "", 
+            "dimensions": "longitude latitude plev19 time1", 
+            "out_name": "va", 
+            "type": "", 
+            "positive": "", 
+            "valid_min": "", 
+            "valid_max": "", 
+            "ok_min_mean_abs": "", 
+            "ok_max_mean_abs": "", 
+            "primavera_priority": "1"
+        }, 
+        "ua": {
+            "frequency": "day", 
+            "modeling_realm": "atmos", 
+            "standard_name": "eastward_wind", 
+            "units": "m s-1", 
+            "cell_methods": "time: point", 
+            "cell_measures": "area: areacella", 
+            "long_name": "Eastward Wind", 
+            "comment": "", 
+            "dimensions": "longitude latitude plev19 time1", 
+            "out_name": "ua", 
+            "type": "", 
+            "positive": "", 
+            "valid_min": "", 
+            "valid_max": "", 
+            "ok_min_mean_abs": "", 
+            "ok_max_mean_abs": "", 
+            "primavera_priority": "1"
+        }
+    }
+}

@@ -1,0 +1,36 @@
+{
+    "Header": {
+        "data_specs_version": "01.00.21",
+        "table_id": "Table CERFACS_VR6hrPlevPt",
+        "realm": "atmos land aerosol",
+        "cmor_version": "3.2",
+        "table_date": "13 Sep 2018",
+        "missing_value": "1e20",
+        "product": "model-output",
+        "approx_interval": "0.250000",
+        "generic_levels": "",
+        "mip_era": "CERFACS",
+        "Conventions": "CF-1.7 CMIP-6.0"
+    },
+    "variable_entry": {
+        "wap7h": {
+            "frequency": "6hrPt", 
+            "modeling_realm": "atmos", 
+            "standard_name": "lagrangian_tendency_of_air_pressure", 
+            "units": "Pa s-1", 
+            "cell_methods": "area: mean time: point", 
+            "cell_measures": "area: areacella", 
+            "long_name": "omega (=dp/dt)", 
+            "comment": "Omega (vertical velocity in pressure coordinates, positive downwards)", 
+            "dimensions": "longitude latitude plev7h time1", 
+            "out_name": "wap", 
+            "type": "real", 
+            "positive": "", 
+            "valid_min": "", 
+            "valid_max": "", 
+            "ok_min_mean_abs": "", 
+            "ok_max_mean_abs": "",
+            "cerfacs_priority": "1"
+        }
+    }
+}

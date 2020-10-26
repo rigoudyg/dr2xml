@@ -1,0 +1,9 @@
+#------------------------------------------------------------------------------------------------------------------------------------------------------
+#TYPE;    VARNAME;         REALM;     FREQUENCY;     TABLE;                     TEMPORAL_SHP;         SPATIAL_SHP;       EXPNAME;            MIP
+#------------------------------------------------------------------------------------------------------------------------------------------------------
+# (a) requesting additionnal CMIP6 standard variables, already existing in a CMIP6 Table
+cmor;      huss;           atmos;     day;           CMIP6_day;                 time-mean;            XY-na;             ANY;                ANY
+cmor;      zg;             atmos;     day;           CMIP6_day;                 time-mean;            XY-P8;             ANY;                ANY
+cmor;      ts;             atmos;     day;           CMIP6_Eday;                time-mean;            XY-na;             ANY;                ANY
+cmor;      uas;            atmos;     3hrPt;         CMIP6_3hr;                 time-point;           XY-na;             ANY;                ANY
+cmor;      vas;            atmos;     3hrPt;         CMIP6_3hr;                 time-point;           XY-na;             ANY;                ANY
