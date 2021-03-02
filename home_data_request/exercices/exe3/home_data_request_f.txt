@@ -1,0 +1,8 @@
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#TYPE; VARNAME;   REALM;  FREQUENCY; TABLE;    TEMPORAL_SHP; SPATIAL_SHP; EXPNAME; MIP; UNITS;       LONG_NAME;                 STD_NAME;                  GRID_ID; GRID_REF
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# (e) requesting a totally new variable, that is NOT defined in the CMIP6 standards and which can be not defined in any other input file
+# To be used with XIOS, the variables must be implemented in the model in order to be output.
+#
+# (e2) output a variable which is not present in any file but has a known shape on a defined grid
+dev;   hmv1;  ocean;   day;   CNRM_day; time-mean; XY-na; ANY; ANY; my_units; my_long_name; my_std_name; grid_T; grid_T_2D

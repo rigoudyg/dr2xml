@@ -3,7 +3,7 @@
 	<!--CMIP6 Data Request version 01.00.32-->
 	<!--CMIP6-CV version ??-->
 	<!--CMIP6_conventions_version v6.2.4-->
-	<!--dr2xml version 2.1-->
+	<!--dr2xml version 2.2-->
 	<!--Lab_and_model settings
 {'branching' = {},
 'bytes_per_float' = '2.4',
@@ -23,7 +23,7 @@
 'max_priority' = '1',
 'mips' = {'HR' = {'CMIP'}, 'LR' = {'CMIP', 'OMIP'}},
 'orphan_variables' = {},
-'path_to_parse' = './xml_input/basics/',
+'path_to_parse' = '/home/rigoudyg/dev/DR2XML/dr2xml_training/settings/basics/../../xml_input/basics/',
 'ping_variables_prefix' = 'CMIP6_',
 'realms_per_context' = {'nemo' = ['seaIce', 'ocean', 'ocean seaIce', 'ocnBgChem', 'seaIce ocean'], 'surfex' = ['atmos', 'atmos atmosChem', 'atmosChem', 'aerosol', 'atmos land', 'land', 'landIce land', 'aerosol', 'land landIce', 'landIce'], 'trip' = []},
 'sampling_timestep' = {'HR' = {'nemo' = '1800.0', 'surfex' = '900.0', 'trip' = '1800.0'}, 'LR' = {'nemo' = '1800.0', 'surfex' = '900.0', 'trip' = '1800.0'}},
@@ -40,10 +40,10 @@
 'realization_index' = '1'}-->
 	<!--Year processed 1900-->
 	<file_definition type="one_file" enabled="true">
-		<file id="omldamax_Oday_gn" name="omldamax_Oday_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="25y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="omldamax_Oday_gn" name="omldamax_Oday_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="25y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -89,7 +89,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> omldamax </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_omldamax_maximum" name="omldamax" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean time: maximum" cell_methods_mode="overwrite" operation="maximum">
+			<field name="omldamax" field_ref="CMIP6_omldamax_maximum" operation="maximum" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean time: maximum" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> ocean_mixed_layer_thickness_defined_by_mixing_scheme </variable>
 				<variable name="description" type="string"> The ocean mixed layer is the upper part of the ocean, regarded as being well-mixed. The base of the mixed layer defined by the mixing scheme is a diagnostic of ocean models. "Thickness" means the vertical extent of a layer. </variable>
 				<variable name="long_name" type="string"> Mean Daily Maximum Ocean Mixed Layer Thickness Defined by Mixing Scheme </variable>
@@ -100,10 +100,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="tos_Oday_gr1" name="tos_Oday_CNRM-CM6-1_historical_r1i1p1f1_gr1_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="25y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="tos_Oday_gr1" name="tos_Oday_CNRM-CM6-1_historical_r1i1p1f1_gr1_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="25y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -149,7 +149,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> tos </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_tos_average" name="tos" grid_ref="grid_T_2D_CMIP6_1deg" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@CMIP6_tos_average
+			<field name="tos" grid_ref="grid_T_2D_CMIP6_1deg" field_ref="CMIP6_tos_average" operation="average" freq_op="1d" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite">				@CMIP6_tos_average
 				<variable name="standard_name" type="string"> sea_surface_temperature </variable>
 				<variable name="description" type="string"> This may differ from "surface temperature" in regions of sea ice or floating ice shelves. For models using conservative temperature as the prognostic field, they should report the top ocean layer as surface potential temperature, which is the same as surface in situ temperature. </variable>
 				<variable name="long_name" type="string"> Sea Surface Temperature </variable>
@@ -160,10 +160,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="tossq_Oday_gn" name="tossq_Oday_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="25y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="tossq_Oday_gn" name="tossq_Oday_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="25y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -209,7 +209,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> tossq </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_tossq_average" name="tossq" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average">
+			<field name="tossq" field_ref="CMIP6_tossq_average" operation="average" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> square_of_sea_surface_temperature </variable>
 				<variable name="description" type="string"> Square of temperature of liquid ocean, averaged over the day. </variable>
 				<variable name="long_name" type="string"> Square of Sea Surface Temperature </variable>
@@ -220,10 +220,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="areacello_Ofx_gn" name="areacello_Ofx_CNRM-CM6-1_historical_r1i1p1f1_gn" output_freq="1d" append="true" output_level="10" compression_level="4" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="areacello_Ofx_gn" name="areacello_Ofx_CNRM-CM6-1_historical_r1i1p1f1_gn" output_freq="1d" append="true" output_level="10" compression_level="4" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -268,7 +268,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> areacello </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_areacello_once" name="areacello" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: sum" cell_methods_mode="overwrite" operation="once">
+			<field name="areacello" field_ref="CMIP6_areacello_once" operation="once" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: sum" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> cell_area </variable>
 				<variable name="description" type="string"> Cell areas for any grid used to report ocean variables and variables which are requested as used on the model ocean grid (e.g. hfsso, which is a downward heat flux from the atmosphere interpolated onto the ocean grid). These cell areas should be defined to enable exact calculation of global integrals (e.g., of vertical fluxes of energy at the surface and top of the atmosphere). </variable>
 				<variable name="long_name" type="string"> Grid-Cell Area for Ocean Variables </variable>
@@ -277,14 +277,15 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="cell_methods" type="string"> area: sum </variable>
 			</field>
 		</file>
-		<file id="basin_Ofx_gn" name="basin_Ofx_CNRM-CM6-1_historical_r1i1p1f1_gn" output_freq="1d" append="true" output_level="10" compression_level="4" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="basin_Ofx_gn" name="basin_Ofx_CNRM-CM6-1_historical_r1i1p1f1_gn" output_freq="1d" append="true" output_level="10" compression_level="4" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
 			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="external_variables" type="string"> areacello </variable>
 			<variable name="forcing_index" type="int"> 1 </variable>
 			<variable name="frequency" type="string"> fx </variable>
 			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/CMIP6.CNRM-CERFACS.CNRM-CM6-1.historical.none.r1i1p1f1 </variable>
@@ -325,7 +326,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> basin </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_basin_once" name="basin" detect_missing_value="True" default_value="0" prec="2" cell_methods="area: mean" cell_methods_mode="overwrite" operation="once">
+			<field name="basin" field_ref="CMIP6_basin_once" operation="once" detect_missing_value="True" default_value="0" prec="2" cell_methods="area: mean" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> region </variable>
 				<variable name="description" type="string"> A variable with the standard name of region contains strings which indicate geographical regions. These strings must be chosen from the standard region list. </variable>
 				<variable name="long_name" type="string"> Region Selection Index </variable>
@@ -337,14 +338,15 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="flag_values" type="string"> 0 1 2 3 4 5 6 7 8 9 10 </variable>
 			</field>
 		</file>
-		<file id="deptho_Ofx_gn" name="deptho_Ofx_CNRM-CM6-1_historical_r1i1p1f1_gn" output_freq="1d" append="true" output_level="10" compression_level="4" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="deptho_Ofx_gn" name="deptho_Ofx_CNRM-CM6-1_historical_r1i1p1f1_gn" output_freq="1d" append="true" output_level="10" compression_level="4" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
 			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="external_variables" type="string"> areacello </variable>
 			<variable name="forcing_index" type="int"> 1 </variable>
 			<variable name="frequency" type="string"> fx </variable>
 			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/CMIP6.CNRM-CERFACS.CNRM-CM6-1.historical.none.r1i1p1f1 </variable>
@@ -385,7 +387,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> deptho </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_deptho_once" name="deptho" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea" cell_methods_mode="overwrite" operation="once">
+			<field name="deptho" field_ref="CMIP6_deptho_once" operation="once" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> sea_floor_depth_below_geoid </variable>
 				<variable name="description" type="string"> Ocean bathymetry. Reported here is the sea floor depth for present day relative to z=0 geoid. Reported as missing for land grid cells. </variable>
 				<variable name="long_name" type="string"> Sea Floor Depth Below Geoid </variable>
@@ -395,14 +397,15 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="cell_measures" type="string"> area: areacello </variable>
 			</field>
 		</file>
-		<file id="hfgeou_Ofx_gn" name="hfgeou_Ofx_CNRM-CM6-1_historical_r1i1p1f1_gn" output_freq="1d" append="true" output_level="10" compression_level="4" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="hfgeou_Ofx_gn" name="hfgeou_Ofx_CNRM-CM6-1_historical_r1i1p1f1_gn" output_freq="1d" append="true" output_level="10" compression_level="4" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
 			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="external_variables" type="string"> areacello </variable>
 			<variable name="forcing_index" type="int"> 1 </variable>
 			<variable name="frequency" type="string"> fx </variable>
 			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/CMIP6.CNRM-CERFACS.CNRM-CM6-1.historical.none.r1i1p1f1 </variable>
@@ -443,7 +446,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> hfgeou </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_hfgeou_once" name="hfgeou" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea" cell_methods_mode="overwrite" operation="once">
+			<field name="hfgeou" field_ref="CMIP6_hfgeou_once" operation="once" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> upward_geothermal_heat_flux_at_sea_floor </variable>
 				<variable name="description" type="string"> Upward geothermal heat flux per unit area on the sea floor </variable>
 				<variable name="long_name" type="string"> Upward Geothermal Heat Flux at Sea Floor </variable>
@@ -454,14 +457,15 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="cell_measures" type="string"> area: areacello </variable>
 			</field>
 		</file>
-		<file id="masscello_Ofx_gn" name="masscello_Ofx_CNRM-CM6-1_historical_r1i1p1f1_gn" output_freq="1d" append="true" output_level="10" compression_level="4" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="masscello_Ofx_gn" name="masscello_Ofx_CNRM-CM6-1_historical_r1i1p1f1_gn" output_freq="1d" append="true" output_level="10" compression_level="4" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
 			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="external_variables" type="string"> areacello volcello </variable>
 			<variable name="forcing_index" type="int"> 1 </variable>
 			<variable name="frequency" type="string"> fx </variable>
 			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/CMIP6.CNRM-CERFACS.CNRM-CM6-1.historical.none.r1i1p1f1 </variable>
@@ -502,7 +506,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> masscello </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_masscello_once" name="masscello" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: sum" cell_methods_mode="overwrite" operation="once">
+			<field name="masscello" field_ref="CMIP6_masscello_once" operation="once" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: sum" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> sea_water_mass_per_unit_area </variable>
 				<variable name="description" type="string"> Tracer grid-cell mass per unit area used for computing tracer budgets. For Boussinesq models with static ocean grid cell thickness, masscello = rhozero*thickcello, where thickcello is static cell thickness and rhozero is constant Boussinesq reference density. More generally, masscello is time dependent and reported as part of Omon. </variable>
 				<variable name="long_name" type="string"> Ocean Grid-Cell Mass per Area </variable>
@@ -512,14 +516,15 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="cell_measures" type="string"> area: areacello volume: volcello </variable>
 			</field>
 		</file>
-		<file id="thkcello_Ofx_gn" name="thkcello_Ofx_CNRM-CM6-1_historical_r1i1p1f1_gn" output_freq="1d" append="true" output_level="10" compression_level="4" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="thkcello_Ofx_gn" name="thkcello_Ofx_CNRM-CM6-1_historical_r1i1p1f1_gn" output_freq="1d" append="true" output_level="10" compression_level="4" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
 			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="external_variables" type="string"> areacello volcello </variable>
 			<variable name="forcing_index" type="int"> 1 </variable>
 			<variable name="frequency" type="string"> fx </variable>
 			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/CMIP6.CNRM-CERFACS.CNRM-CM6-1.historical.none.r1i1p1f1 </variable>
@@ -560,7 +565,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> thkcello </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_thkcello_once" name="thkcello" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean" cell_methods_mode="overwrite" operation="once">
+			<field name="thkcello" field_ref="CMIP6_thkcello_once" operation="once" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> cell_thickness </variable>
 				<variable name="description" type="string"> "Thickness" means the vertical extent of a layer. "Cell" refers to a model grid-cell. </variable>
 				<variable name="long_name" type="string"> Ocean Model Cell Thickness </variable>
@@ -570,10 +575,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="cell_measures" type="string"> area: areacello volume: volcello </variable>
 			</field>
 		</file>
-		<file id="agessc_Omon_gn" name="agessc_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="agessc_Omon_gn" name="agessc_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -619,7 +624,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> agessc </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_agessc_average" name="agessc" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">
+			<field name="agessc" field_ref="CMIP6_agessc_average" operation="average" freq_op="1mo" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> sea_water_age_since_surface_contact </variable>
 				<variable name="description" type="string"> Time elapsed since water was last in surface layer of the ocean. </variable>
 				<variable name="long_name" type="string"> Sea Water Age Since Surface Contact </variable>
@@ -630,10 +635,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="bigthetao_Omon_gn" name="bigthetao_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="bigthetao_Omon_gn" name="bigthetao_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -679,7 +684,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> bigthetao </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_bigthetao_average" name="bigthetao" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">
+			<field name="bigthetao" field_ref="CMIP6_bigthetao_average" operation="average" freq_op="1mo" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> sea_water_conservative_temperature </variable>
 				<variable name="description" type="string"> Diagnostic should be contributed only for models using conservative temperature as prognostic field. </variable>
 				<variable name="long_name" type="string"> Sea Water Conservative Temperature </variable>
@@ -690,10 +695,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="bigthetaoga_Omon_gn" name="bigthetaoga_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="bigthetaoga_Omon_gn" name="bigthetaoga_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -738,7 +743,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> bigthetaoga </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_bigthetaoga_average" name="bigthetaoga" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average">
+			<field name="bigthetaoga" field_ref="CMIP6_bigthetaoga_average" operation="average" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> sea_water_conservative_temperature </variable>
 				<variable name="description" type="string"> Diagnostic should be contributed only for models using conservative temperature as prognostic field. </variable>
 				<variable name="long_name" type="string"> Global Average Sea Water Conservative Temperature </variable>
@@ -748,10 +753,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="hfbasin_Omon_gn" name="hfbasin_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="hfbasin_Omon_gn" name="hfbasin_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -796,7 +801,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> hfbasin </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_hfbasin_average" name="hfbasin" grid_ref="grid_znl_3basin_basin" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="longitude: sum (comment: basin sum [along zig-zag grid path]) depth: sum time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">				@CMIP6_hfbasin_average
+			<field name="hfbasin" grid_ref="grid_znl_3basin_basin" field_ref="CMIP6_hfbasin_average" operation="average" freq_op="1mo" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="longitude: sum (comment: basin sum [along zig-zag grid path]) depth: sum time: mean" cell_methods_mode="overwrite">				@CMIP6_hfbasin_average
 				<variable name="standard_name" type="string"> northward_ocean_heat_transport </variable>
 				<variable name="description" type="string"> Contains contributions from all physical processes affecting the northward heat transport, including resolved advection, parameterized advection, lateral diffusion, etc. Diagnosed here as a function of latitude and basin.   Use Celsius for temperature scale. </variable>
 				<variable name="long_name" type="string"> Northward Ocean Heat Transport </variable>
@@ -806,10 +811,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="hfbasinpmadv_Omon_gn" name="hfbasinpmadv_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="hfbasinpmadv_Omon_gn" name="hfbasinpmadv_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -854,7 +859,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> hfbasinpmadv </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_hfbasinpmadv_average" name="hfbasinpmadv" grid_ref="grid_znl_3basin_basin" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="longitude: sum (comment: basin sum [along zig-zag grid path]) depth: sum time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">				@CMIP6_hfbasinpmadv_average
+			<field name="hfbasinpmadv" grid_ref="grid_znl_3basin_basin" field_ref="CMIP6_hfbasinpmadv_average" operation="average" freq_op="1mo" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="longitude: sum (comment: basin sum [along zig-zag grid path]) depth: sum time: mean" cell_methods_mode="overwrite">				@CMIP6_hfbasinpmadv_average
 				<variable name="standard_name" type="string"> northward_ocean_heat_transport_due_to_parameterized_mesoscale_eddy_advection </variable>
 				<variable name="description" type="string"> Contributions to heat transport from parameterized mesoscale eddy-induced advective transport. Diagnosed here as a function of latitude and basin.  Use Celsius for temperature scale. </variable>
 				<variable name="long_name" type="string"> Northward Ocean Heat Transport Due to Parameterized Mesoscale Advection </variable>
@@ -864,10 +869,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="hfds_Omon_gn" name="hfds_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="hfds_Omon_gn" name="hfds_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -913,7 +918,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> hfds </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_hfds_average" name="hfds" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average">
+			<field name="hfds" field_ref="CMIP6_hfds_average" operation="average" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> surface_downward_heat_flux_in_sea_water </variable>
 				<variable name="description" type="string"> This is the net flux of heat entering the liquid water column through its upper surface (excluding any "flux adjustment") . </variable>
 				<variable name="long_name" type="string"> Downward Heat Flux at Sea Water Surface </variable>
@@ -925,10 +930,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="masscello_Omon_gn" name="masscello_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="masscello_Omon_gn" name="masscello_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -974,7 +979,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> masscello </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_masscello_average" name="masscello" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: sum where sea time: mean" cell_methods_mode="overwrite" operation="average">
+			<field name="masscello" field_ref="CMIP6_masscello_average" operation="average" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: sum where sea time: mean" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> sea_water_mass_per_unit_area </variable>
 				<variable name="description" type="string"> For Boussinesq models, report this diagnostic as Boussinesq reference density times grid celll volume. </variable>
 				<variable name="long_name" type="string"> Ocean Grid-Cell Mass per Area </variable>
@@ -985,10 +990,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="masso_Omon_gn" name="masso_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="masso_Omon_gn" name="masso_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -1033,7 +1038,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> masso </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_masso_average" name="masso" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: sum where sea time: mean" cell_methods_mode="overwrite" operation="average">
+			<field name="masso" field_ref="CMIP6_masso_average" operation="average" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: sum where sea time: mean" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> sea_water_mass </variable>
 				<variable name="description" type="string"> Total mass of liquid sea water. For Boussinesq models, report this diagnostic as Boussinesq reference density times total volume. </variable>
 				<variable name="long_name" type="string"> Sea Water Mass </variable>
@@ -1043,10 +1048,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="mlotst_Omon_gn" name="mlotst_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="mlotst_Omon_gn" name="mlotst_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -1092,7 +1097,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> mlotst </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_mlotst_average" name="mlotst" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average">
+			<field name="mlotst" field_ref="CMIP6_mlotst_average" operation="average" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> ocean_mixed_layer_thickness_defined_by_sigma_t </variable>
 				<variable name="description" type="string"> Sigma T is potential density referenced to ocean surface. </variable>
 				<variable name="long_name" type="string"> Ocean Mixed Layer Thickness Defined by Sigma T </variable>
@@ -1103,10 +1108,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="mlotstmax_Omon_gn" name="mlotstmax_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="mlotstmax_Omon_gn" name="mlotstmax_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -1152,7 +1157,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> mlotstmax </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_mlotstmax_maximum" name="mlotstmax" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean time: maximum" cell_methods_mode="overwrite" operation="maximum">
+			<field name="mlotstmax" field_ref="CMIP6_mlotstmax_maximum" operation="maximum" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean time: maximum" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> ocean_mixed_layer_thickness_defined_by_sigma_t </variable>
 				<variable name="description" type="string"> Sigma T is potential density referenced to ocean surface. </variable>
 				<variable name="long_name" type="string"> Maximum Ocean Mixed Layer Thickness Defined by Sigma T </variable>
@@ -1163,10 +1168,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="mlotstmin_Omon_gn" name="mlotstmin_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="mlotstmin_Omon_gn" name="mlotstmin_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -1212,7 +1217,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> mlotstmin </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_mlotstmin_minimum" name="mlotstmin" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean time: minimum" cell_methods_mode="overwrite" operation="minimum">
+			<field name="mlotstmin" field_ref="CMIP6_mlotstmin_minimum" operation="minimum" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean time: minimum" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> ocean_mixed_layer_thickness_defined_by_sigma_t </variable>
 				<variable name="description" type="string"> Sigma T is potential density referenced to ocean surface. </variable>
 				<variable name="long_name" type="string"> Minimum Ocean Mixed Layer Thickness Defined by Sigma T </variable>
@@ -1223,10 +1228,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="msftyz_Omon_gn" name="msftyz_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="msftyz_Omon_gn" name="msftyz_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -1271,7 +1276,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> msftyz </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_msftyz_average" name="msftyz" grid_ref="grid_znl_3basin_2D_basin" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean grid_longitude: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">				@CMIP6_msftyz_average
+			<field name="msftyz" grid_ref="grid_znl_3basin_2D_basin" field_ref="CMIP6_msftyz_average" operation="average" freq_op="1mo" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean grid_longitude: mean" cell_methods_mode="overwrite">				@CMIP6_msftyz_average
 				<variable name="standard_name" type="string"> ocean_y_overturning_mass_streamfunction </variable>
 				<variable name="description" type="string"> Overturning mass streamfunction arising from all advective mass transport processes, resolved and parameterized. </variable>
 				<variable name="long_name" type="string"> Ocean Y Overturning Mass Streamfunction </variable>
@@ -1281,10 +1286,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="obvfsq_Omon_gn" name="obvfsq_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="obvfsq_Omon_gn" name="obvfsq_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -1330,7 +1335,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> obvfsq </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_obvfsq_average" name="obvfsq" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">
+			<field name="obvfsq" field_ref="CMIP6_obvfsq_average" operation="average" freq_op="1mo" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> square_of_brunt_vaisala_frequency_in_sea_water </variable>
 				<variable name="description" type="string"> The phrase "square_of_X" means X*X. Frequency is the number of oscillations of a wave per unit time. Brunt-Vaisala frequency is also sometimes called "buoyancy frequency" and is a measure of the vertical stratification of the medium. </variable>
 				<variable name="long_name" type="string"> Square of Brunt Vaisala Frequency in Sea Water </variable>
@@ -1341,10 +1346,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="pbo_Omon_gn" name="pbo_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="pbo_Omon_gn" name="pbo_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -1390,7 +1395,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> pbo </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_pbo_average" name="pbo" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average">
+			<field name="pbo" field_ref="CMIP6_pbo_average" operation="average" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> sea_water_pressure_at_sea_floor </variable>
 				<variable name="description" type="string"> "Sea water pressure" is the pressure that exists in the medium of sea water.  It includes the pressure due to overlying sea water, sea ice, air and any other medium that may be present. </variable>
 				<variable name="long_name" type="string"> Sea Water Pressure at Sea Floor </variable>
@@ -1401,10 +1406,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="sfdsi_Omon_gn" name="sfdsi_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="sfdsi_Omon_gn" name="sfdsi_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -1450,7 +1455,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> sfdsi </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_sfdsi_average" name="sfdsi" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average">
+			<field name="sfdsi" field_ref="CMIP6_sfdsi_average" operation="average" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> downward_sea_ice_basal_salt_flux </variable>
 				<variable name="description" type="string"> This field is physical, and it arises since sea ice has a nonzero salt content, so it exchanges salt with the liquid ocean upon melting and freezing. </variable>
 				<variable name="long_name" type="string"> Downward Sea Ice Basal Salt Flux </variable>
@@ -1462,10 +1467,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="so_Omon_gn" name="so_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="so_Omon_gn" name="so_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -1511,7 +1516,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> so </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_so_average" name="so" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">
+			<field name="so" field_ref="CMIP6_so_average" operation="average" freq_op="1mo" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> sea_water_salinity </variable>
 				<variable name="description" type="string"> Sea water salinity is the salt content of sea water, often on the Practical Salinity Scale of 1978. However, the unqualified term 'salinity' is generic and does not necessarily imply any particular method of calculation. The units of salinity are dimensionless and the units attribute should normally be given as 1e-3 or 0.001 i.e. parts per thousand. </variable>
 				<variable name="long_name" type="string"> Sea Water Salinity </variable>
@@ -1522,10 +1527,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="sob_Omon_gn" name="sob_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="sob_Omon_gn" name="sob_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -1571,7 +1576,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> sob </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_sob_average" name="sob" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">
+			<field name="sob" field_ref="CMIP6_sob_average" operation="average" freq_op="1mo" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> sea_water_salinity_at_sea_floor </variable>
 				<variable name="description" type="string"> Model prognostic salinity at bottom-most model grid cell </variable>
 				<variable name="long_name" type="string"> Sea Water Salinity at Sea Floor </variable>
@@ -1582,10 +1587,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="soga_Omon_gn" name="soga_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="soga_Omon_gn" name="soga_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -1630,7 +1635,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> soga </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_soga_average" name="soga" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average">
+			<field name="soga" field_ref="CMIP6_soga_average" operation="average" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> sea_water_salinity </variable>
 				<variable name="description" type="string"> Sea water salinity is the salt content of sea water, often on the Practical Salinity Scale of 1978. However, the unqualified term 'salinity' is generic and does not necessarily imply any particular method of calculation. The units of salinity are dimensionless and the units attribute should normally be given as 1e-3 or 0.001 i.e. parts per thousand. </variable>
 				<variable name="long_name" type="string"> Global Mean Sea Water Salinity </variable>
@@ -1640,10 +1645,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="sos_Omon_gn" name="sos_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="sos_Omon_gn" name="sos_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -1689,7 +1694,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> sos </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_sos_average" name="sos" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average">
+			<field name="sos" field_ref="CMIP6_sos_average" operation="average" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> sea_surface_salinity </variable>
 				<variable name="description" type="string"> Sea water salinity is the salt content of sea water, often on the Practical Salinity Scale of 1978. However, the unqualified term 'salinity' is generic and does not necessarily imply any particular method of calculation. The units of salinity are dimensionless and the units attribute should normally be given as 1e-3 or 0.001 i.e. parts per thousand. </variable>
 				<variable name="long_name" type="string"> Sea Surface Salinity </variable>
@@ -1700,10 +1705,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="sosga_Omon_gn" name="sosga_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="sosga_Omon_gn" name="sosga_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -1748,7 +1753,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> sosga </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_sosga_average" name="sosga" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average">
+			<field name="sosga" field_ref="CMIP6_sosga_average" operation="average" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> sea_surface_salinity </variable>
 				<variable name="description" type="string"> Sea water salinity is the salt content of sea water, often on the Practical Salinity Scale of 1978. However, the unqualified term 'salinity' is generic and does not necessarily imply any particular method of calculation. The units of salinity are dimensionless and the units attribute should normally be given as 1e-3 or 0.001 i.e. parts per thousand. </variable>
 				<variable name="long_name" type="string"> Global Average Sea Surface Salinity </variable>
@@ -1758,10 +1763,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="tauuo_Omon_gn" name="tauuo_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="tauuo_Omon_gn" name="tauuo_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -1807,7 +1812,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> tauuo </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_tauuo_average" name="tauuo" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average">
+			<field name="tauuo" field_ref="CMIP6_tauuo_average" operation="average" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> downward_x_stress_at_sea_water_surface </variable>
 				<variable name="description" type="string"> This is the stress on the liquid ocean from overlying atmosphere, sea ice, ice shelf, etc. </variable>
 				<variable name="long_name" type="string"> Sea Water Surface Downward X Stress </variable>
@@ -1819,10 +1824,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="tauvo_Omon_gn" name="tauvo_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="tauvo_Omon_gn" name="tauvo_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -1868,7 +1873,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> tauvo </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_tauvo_average" name="tauvo" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average">
+			<field name="tauvo" field_ref="CMIP6_tauvo_average" operation="average" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> downward_y_stress_at_sea_water_surface </variable>
 				<variable name="description" type="string"> This is the stress on the liquid ocean from overlying atmosphere, sea ice, ice shelf, etc. </variable>
 				<variable name="long_name" type="string"> Sea Water Surface Downward Y Stress </variable>
@@ -1880,10 +1885,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="thetao_Omon_gn" name="thetao_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="thetao_Omon_gn" name="thetao_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -1929,7 +1934,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> thetao </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_thetao_average" name="thetao" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">
+			<field name="thetao" field_ref="CMIP6_thetao_average" operation="average" freq_op="1mo" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> sea_water_potential_temperature </variable>
 				<variable name="description" type="string"> Diagnostic should be contributed even for models using conservative temperature as prognostic field. </variable>
 				<variable name="long_name" type="string"> Sea Water Potential Temperature </variable>
@@ -1940,10 +1945,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="thetaoga_Omon_gn" name="thetaoga_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="thetaoga_Omon_gn" name="thetaoga_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -1988,7 +1993,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> thetaoga </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_thetaoga_average" name="thetaoga" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average">
+			<field name="thetaoga" field_ref="CMIP6_thetaoga_average" operation="average" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> sea_water_potential_temperature </variable>
 				<variable name="description" type="string"> Diagnostic should be contributed even for models using conservative temperature as prognostic field </variable>
 				<variable name="long_name" type="string"> Global Average Sea Water Potential Temperature </variable>
@@ -1998,10 +2003,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="tob_Omon_gn" name="tob_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="tob_Omon_gn" name="tob_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -2047,7 +2052,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> tob </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_tob_average" name="tob" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">
+			<field name="tob" field_ref="CMIP6_tob_average" operation="average" freq_op="1mo" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> sea_water_potential_temperature_at_sea_floor </variable>
 				<variable name="description" type="string"> Potential temperature at the ocean bottom-most grid cell. </variable>
 				<variable name="long_name" type="string"> Sea Water Potential Temperature at Sea Floor </variable>
@@ -2058,10 +2063,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="tos_Omon_gn" name="tos_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="tos_Omon_gn" name="tos_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -2107,7 +2112,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> tos </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_tos_average" name="tos" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average">
+			<field name="tos" field_ref="CMIP6_tos_average" operation="average" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> sea_surface_temperature </variable>
 				<variable name="description" type="string"> This may differ from "surface temperature" in regions of sea ice or floating ice shelves. For models using conservative temperature as the prognostic field, they should report the top ocean layer as surface potential temperature, which is the same as surface in situ temperature. </variable>
 				<variable name="long_name" type="string"> Sea Surface Temperature </variable>
@@ -2118,10 +2123,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="tosga_Omon_gn" name="tosga_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="tosga_Omon_gn" name="tosga_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -2166,7 +2171,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> tosga </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_tosga_average" name="tosga" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average">
+			<field name="tosga" field_ref="CMIP6_tosga_average" operation="average" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> sea_surface_temperature </variable>
 				<variable name="description" type="string"> This may differ from "surface temperature" in regions of sea ice or floating ice shelves. For models using conservative temperature as the prognostic field, they should report the top ocean layer as surface potential temperature, which is the same as surface in situ temperature. </variable>
 				<variable name="long_name" type="string"> Global Average Sea Surface Temperature </variable>
@@ -2176,10 +2181,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="umo_Omon_gn" name="umo_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="umo_Omon_gn" name="umo_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -2224,7 +2229,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> umo </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_umo_average" name="umo" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average">
+			<field name="umo" field_ref="CMIP6_umo_average" operation="average" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> ocean_mass_x_transport </variable>
 				<variable name="description" type="string"> X-ward mass transport from residual mean (resolved plus parameterized) advective transport. </variable>
 				<variable name="long_name" type="string"> Ocean Mass X Transport </variable>
@@ -2234,10 +2239,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="uo_Omon_gn" name="uo_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="uo_Omon_gn" name="uo_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -2282,7 +2287,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> uo </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_uo_average" name="uo" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">
+			<field name="uo" field_ref="CMIP6_uo_average" operation="average" freq_op="1mo" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> sea_water_x_velocity </variable>
 				<variable name="description" type="string"> Prognostic x-ward velocity component resolved by the model. </variable>
 				<variable name="long_name" type="string"> Sea Water X Velocity </variable>
@@ -2292,10 +2297,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="vmo_Omon_gn" name="vmo_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="vmo_Omon_gn" name="vmo_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -2340,7 +2345,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> vmo </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_vmo_average" name="vmo" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average">
+			<field name="vmo" field_ref="CMIP6_vmo_average" operation="average" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> ocean_mass_y_transport </variable>
 				<variable name="description" type="string"> Y-ward mass transport from residual mean (resolved plus parameterized) advective transport. </variable>
 				<variable name="long_name" type="string"> Ocean Mass Y Transport </variable>
@@ -2350,10 +2355,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="vo_Omon_gn" name="vo_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="vo_Omon_gn" name="vo_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -2398,7 +2403,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> vo </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_vo_average" name="vo" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">
+			<field name="vo" field_ref="CMIP6_vo_average" operation="average" freq_op="1mo" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> sea_water_y_velocity </variable>
 				<variable name="description" type="string"> Prognostic y-ward velocity component resolved by the model. </variable>
 				<variable name="long_name" type="string"> Sea Water Y Velocity </variable>
@@ -2408,10 +2413,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="volo_Omon_gn" name="volo_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="volo_Omon_gn" name="volo_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -2456,7 +2461,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> volo </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_volo_average" name="volo" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: sum where sea time: mean" cell_methods_mode="overwrite" operation="average">
+			<field name="volo" field_ref="CMIP6_volo_average" operation="average" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: sum where sea time: mean" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> sea_water_volume </variable>
 				<variable name="description" type="string"> Total volume of liquid sea water. </variable>
 				<variable name="long_name" type="string"> Sea Water Volume </variable>
@@ -2466,10 +2471,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="wfo_Omon_gn" name="wfo_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="wfo_Omon_gn" name="wfo_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -2515,7 +2520,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> wfo </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_wfo_average" name="wfo" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average">
+			<field name="wfo" field_ref="CMIP6_wfo_average" operation="average" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> water_flux_into_sea_water </variable>
 				<variable name="description" type="string"> Computed as the water flux into the ocean divided by the area of the ocean portion of the grid cell. This is the sum *wfonocorr* and *wfcorr*. </variable>
 				<variable name="long_name" type="string"> Water Flux into Sea Water </variable>
@@ -2526,10 +2531,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="wfonocorr_Omon_gn" name="wfonocorr_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="wfonocorr_Omon_gn" name="wfonocorr_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -2575,7 +2580,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> wfonocorr </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_wfonocorr_average" name="wfonocorr" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average">
+			<field name="wfonocorr" field_ref="CMIP6_wfonocorr_average" operation="average" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> water_flux_into_sea_water_without_flux_correction </variable>
 				<variable name="description" type="string"> Computed as the water flux (without flux correction) into the ocean divided by the area of the ocean portion of the grid cell. </variable>
 				<variable name="long_name" type="string"> Water Flux into Sea Water Without Flux Correction </variable>
@@ -2586,10 +2591,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="wmo_Omon_gn" name="wmo_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="wmo_Omon_gn" name="wmo_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -2635,7 +2640,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> wmo </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_wmo_average" name="wmo" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: sum where sea time: mean" cell_methods_mode="overwrite" operation="average">
+			<field name="wmo" field_ref="CMIP6_wmo_average" operation="average" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: sum where sea time: mean" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> upward_ocean_mass_transport </variable>
 				<variable name="description" type="string"> Upward mass transport from residual mean (resolved plus parameterized) advective transport. </variable>
 				<variable name="long_name" type="string"> Upward Ocean Mass Transport </variable>
@@ -2646,10 +2651,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="wo_Omon_gn" name="wo_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="wo_Omon_gn" name="wo_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -2694,7 +2699,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> wo </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_wo_average" name="wo" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">
+			<field name="wo" field_ref="CMIP6_wo_average" operation="average" freq_op="1mo" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> upward_sea_water_velocity </variable>
 				<variable name="description" type="string"> Prognostic z-ward velocity component resolved by the model. </variable>
 				<variable name="long_name" type="string"> Sea Water Vertical Velocity </variable>
@@ -2704,10 +2709,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="zos_Omon_gn" name="zos_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="zos_Omon_gn" name="zos_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -2753,7 +2758,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> zos </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_zos_average" name="zos" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average">
+			<field name="zos" field_ref="CMIP6_zos_average" operation="average" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> sea_surface_height_above_geoid </variable>
 				<variable name="description" type="string"> This is the dynamic sea level, so should have zero global area mean. It should not include inverse barometer depressions from sea ice. </variable>
 				<variable name="long_name" type="string"> Sea Surface Height Above Geoid </variable>
@@ -2764,10 +2769,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="zostoga_Omon_gn" name="zostoga_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="zostoga_Omon_gn" name="zostoga_Omon_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -2812,7 +2817,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> zostoga </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_zostoga_average" name="zostoga" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average">
+			<field name="zostoga" field_ref="CMIP6_zostoga_average" operation="average" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> global_average_thermosteric_sea_level_change </variable>
 				<variable name="description" type="string"> There is no CMIP6 request for zosga nor zossga. </variable>
 				<variable name="long_name" type="string"> Global Average Thermosteric Sea Level Change </variable>
@@ -2822,10 +2827,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="cfc12_Oyr_gn" name="cfc12_Oyr_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1y" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="cfc12_Oyr_gn" name="cfc12_Oyr_CNRM-CM6-1_historical_r1i1p1f1_gn_%start_date%-%end_date%" output_freq="1y" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -2871,7 +2876,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> cfc12 </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_cfc12_average" name="cfc12" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1y">
+			<field name="cfc12" field_ref="CMIP6_cfc12_average" operation="average" freq_op="1y" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where sea time: mean" cell_methods_mode="overwrite">
 				<variable name="standard_name" type="string"> mole_concentration_of_cfc12_in_sea_water </variable>
 				<variable name="description" type="string"> Mole concentration means number of moles per unit volume, also called "molarity", and is used in the construction "mole_concentration_of_X_in_Y", where X is a material constituent of Y. A chemical or biological species denoted by X may be described by a single term such as "nitrogen" or a phrase such as "nox_expressed_as_nitrogen". The chemical formula for CFC12 is CF2Cl2. The IUPAC name for CFC12 is dichloro-difluoro-methane. </variable>
 				<variable name="long_name" type="string"> Mole Concentration of CFC12 in Sea Water </variable>

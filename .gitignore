@@ -30,3 +30,4 @@ create_file_defs.sh
 tests/htmlcov
 tests/test*/output_*
 /sphinx/build/
+/dr2xml_list_perso_and_dev_file_names

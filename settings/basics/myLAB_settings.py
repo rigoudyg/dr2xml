@@ -12,6 +12,13 @@
 #   - paragraph 5 of https://pcmdi.llnl.gov/CMIP6/Guide/modelers.html
 #   - CMIP6 Data Request , in browsable format: http://clipc-services.ceda.ac.uk/dreq/index.html
 
+from __future__ import print_function, division, absolute_import, unicode_literals
+
+
+import os
+current_dirname = os.path.dirname(os.path.abspath(__file__))
+
+
 lab_and_model_settings={
 
     #---------------------------------------------------------------------------------------------- 
@@ -68,7 +75,7 @@ lab_and_model_settings={
     "ping_variables_prefix" : "CMIP6_",
 
     # The path of the directory which, at run time, contains the root XML file (iodef.xml)
-    "path_to_parse":"./xml_input/basics/",
+    "path_to_parse": os.sep.join([current_dirname, "..", "..", "xml_input", "basics", ""]),
 
     #---------------------------------------------------------------------------------------------- 
     #----- SELECTION OF OUTPUT VARIABLE TO PRODUCE (EXCLUDE/INCLUDE ONLY):

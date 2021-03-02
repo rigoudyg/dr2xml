@@ -3,7 +3,7 @@
 	<!--CMIP6 Data Request version 01.00.32-->
 	<!--CMIP6-CV version ??-->
 	<!--CMIP6_conventions_version v6.2.4-->
-	<!--dr2xml version 2.1-->
+	<!--dr2xml version 2.2-->
 	<!--Lab_and_model settings
 {'branching' = {},
 'bytes_per_float' = '2.4',
@@ -44,10 +44,10 @@
 'realization_index' = '1'}-->
 	<!--Year processed 1900-->
 	<file_definition type="one_file" enabled="true">
-		<file id="tas_Amon_gr" name="tas_Amon_CNRM-CM6-1_historical_r1i1p1f1_gr_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="tas_Amon_gr" name="tas_Amon_CNRM-CM6-1_historical_r1i1p1f1_gr_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -93,7 +93,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> tas </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_tas_Scalheight2m_average" name="tas" grid_ref="FULL_grid_Scalheight2m_complete" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">				@CMIP6_tas_Scalheight2m_average
+			<field name="tas" grid_ref="FULL_grid_Scalheight2m_complete" field_ref="CMIP6_tas_Scalheight2m_average" operation="average" freq_op="1mo" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: time: mean" cell_methods_mode="overwrite">				@CMIP6_tas_Scalheight2m_average
 				<variable name="standard_name" type="string"> air_temperature </variable>
 				<variable name="description" type="string"> near-surface (usually, 2 meter) air temperature </variable>
 				<variable name="long_name" type="string"> Near-Surface Air Temperature </variable>
@@ -104,10 +104,10 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 900 s </variable>
 			</field>
 		</file>
-		<file id="pblh_monExe3_gr" name="pblh_monExe3_CNRM-CM6-1_historical_r1i1p1f1_gr_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="pblh_monExe3_gr" name="pblh_monExe3_CNRM-CM6-1_historical_r1i1p1f1_gr_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="2014-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:None/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="data_specs_version" type="string"> 01.00.32 </variable>
-			<variable name="dr2xml_version" type="string"> 2.1 </variable>
+			<variable name="dr2xml_version" type="string"> 2.2 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
@@ -153,7 +153,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="variable_id" type="string"> pblh </variable>
 			<variable name="variant_info" type="string"> none </variable>
 			<variable name="variant_label" type="string"> r1i1p1f1 </variable>
-			<field field_ref="CMIP6_pblh_average" name="pblh" grid_ref="FULL_grid_complete" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">				@CMIP6_pblh_average
+			<field name="pblh" grid_ref="FULL_grid_complete" field_ref="CMIP6_pblh_average" operation="average" freq_op="1mo" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: time: mean" cell_methods_mode="overwrite">				@CMIP6_pblh_average
 				<variable name="description" type="string"> None </variable>
 				<variable name="long_name" type="string"> Planetary Boundary Layer Height </variable>
 				<variable name="history" type="string"> none </variable>

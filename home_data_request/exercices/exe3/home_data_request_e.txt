@@ -1,0 +1,8 @@
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#TYPE; VARNAME;   REALM;  FREQUENCY; TABLE;    TEMPORAL_SHP; SPATIAL_SHP; EXPNAME; MIP; UNITS;       LONG_NAME;                 STD_NAME;                  GRID_ID; GRID_REF
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# (e) requesting a totally new variable, that is NOT defined in the CMIP6 standards and which can be not defined in any other input file
+# To be used with XIOS, the variables must be implemented in the model in order to be output.
+#
+# (e1) output a variable which is present in the field def but nowhere else on a defined grid
+dev;   wg_patch1; atmos;  day;       CNRM_day; time-mean;    XY-na;       ANY;     ANY;  m3 m-3;     soil liquid water content by patch over land; soil liquid water; NATURE;    NATURE_grid
