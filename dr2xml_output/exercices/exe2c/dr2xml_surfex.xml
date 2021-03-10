@@ -23,7 +23,7 @@
 'max_priority' = '1',
 'mips' = {'HR' = {'CMIP'}, 'LR' = {'CMIP', 'OMIP'}},
 'orphan_variables' = {},
-'path_to_parse' = '/home/rigoudyg/dev/DR2XML/dr2xml_training/settings/basics/../../xml_input/basics/',
+'path_to_parse' = '/Users/moine/MacDocs/TRAINING_XIOS_DR2XML/dr2xml_training/settings/basics/../../xml_input/basics/',
 'ping_variables_prefix' = 'CMIP6_',
 'realms_per_context' = {'nemo' = ['seaIce', 'ocean', 'ocean seaIce', 'ocnBgChem', 'seaIce ocean'], 'surfex' = ['atmos', 'atmos atmosChem', 'atmosChem', 'aerosol', 'atmos land', 'land', 'landIce land', 'aerosol', 'land landIce', 'landIce'], 'trip' = []},
 'sampling_timestep' = {'HR' = {'nemo' = '1800.0', 'surfex' = '900.0', 'trip' = '1800.0'}, 'LR' = {'nemo' = '1800.0', 'surfex' = '900.0', 'trip' = '1800.0'}},
