@@ -515,7 +515,7 @@ def check_for_file_input(sv, hgrid, pingvars, field_defs, grid_defs, domain_defs
         field_def_dict["freq_offset"] = "0ts"
         field_def = create_xml_element(tag="field", attrib=field_def_dict)
         field_defs[field_in_file_id] = field_def
-        context_index = get_config_variable("context_index")
+        context_index = get_config_variable("context_index", to_change=True)
         context_index[pingvar] = field_def
 
         if printout:
