@@ -114,7 +114,7 @@ def create_grid_def(grid_defs, axis_def, axis_name, src_grid_id):
     return target_grid_id
 
 
-def create_axis_def(sdim, axis_defs, field_defs):
+def create_axis_def(sdim, axis_defs, field_defs, pingvars):
     """
 
     From a simplified Dim object SDIM representing a vertical dimension,
@@ -166,10 +166,14 @@ def create_axis_def(sdim, axis_defs, field_defs):
             axis_dict["axis_type"] = sdim.axis
         axis_xml = create_xml_element(tag="axis", attrib=axis_dict)
         # Define some other values
-        if sdim.stdname == "air_pressure":
+        if sdim.stdname in ["air_pressure", ]:
             coordname = prefix + "pfull"
-        if sdim.stdname == "altitude":
+        elif sdim.stdname in ["altitude", ]:
             coordname = prefix + "zg"
+        else:
+            coordname = prefix + sdim.label
+        if coordname not in pingvars:
+            raise Dr2xmlError("Could not find coordinate variable %s in pingfile." % coordname)
         #
         # Create an intermediate field for coordinate , just adding time sampling
         operation = get_variable_from_lset_with_default("vertical_interpolation_operation", "instant")
@@ -344,7 +348,7 @@ def change_axes_in_grid(grid_id, grid_defs, axis_defs):
                 raise Dr2xmlError("Value %s in 'non_standard_axes' is not a DR dimension id" % dr_axis_id)
             dim = get_uid(dim_id)
             # We don't process scalars here
-            if dim.value == '' or dim.label == "scatratio":
+            if dim.value in ['', ] or dim.label in ["scatratio", ]:
                 axis_id, axis_name = create_axis_from_dim(dim, alt_labels, axis_ref, axis_defs)
                 # cannot use ET library which does not guarantee the ordering of axes
                 axes_to_change.append((axis_ref, axis_id, axis_name))
@@ -357,7 +361,8 @@ def change_axes_in_grid(grid_id, grid_defs, axis_defs):
     for (rank, grid_child) in enumerate(grid_def):
         axes_to_change_new = list()
         for old, new, name in axes_to_change:
-            if grid_child.tag == "axis" and "axis_ref" in grid_child.attrib and grid_child.attrib["axis_ref"] == old:
+            if grid_child.tag in ["axis", ] and "axis_ref" in grid_child.attrib and \
+                    grid_child.attrib["axis_ref"] == old:
                 axis_count += 1
                 grid_def_dict = OrderedDict()
                 grid_def_dict["axis_ref"] = new
@@ -393,17 +398,14 @@ def create_axis_from_dim(dim, labels, axis_ref, axis_defs):
         rep_dict["standard_name"] = dim.standardName
     rep_dict["long_name"] = dim.title
     #
-    if dim.type == "double":
-        rep_dict["prec"] = '8'
-    elif dim.type in ["integer", "int"]:
-        rep_dict["prec"] = '2'
-    elif dim.type == "float":
-        rep_dict["prec"] = '4'
+    prec_dict = dict(double="8", integer=2, int=2, float=4)
+    if dim.type in prec_dict:
+        rep_dict["prec"] = prec_dict[dim.type]
     #
-    if dim.units != '':
+    if dim.units not in ['', ]:
         rep_dict["unit"] = dim.units
-    if dim.type != "character":
-        if dim.requested != "":
+    if dim.type not in ["character", ]:
+        if dim.requested not in ['', ]:
             nb = len(dim.requested.split())
             rep_dict["value"] = "(0,{})[ {} ]".format(nb, dim.requested.strip())
         if isinstance(dim.boundsRequested, list):
@@ -451,7 +453,7 @@ def scalar_vertical_dimension(sv):
     """
     if 'cids' in sv.struct.__dict__:
         cid = get_uid(sv.struct.cids[0])
-        if cid.axis == 'Z':
+        if cid.axis in ['Z', ]:
             return cid.altLabel
     return None
 
@@ -464,17 +466,17 @@ def create_output_grid(ssh, grid_defs, domain_defs, target_hgrid_id, margs):
     grid_ref = None
 
     # Compute domain name, define it if needed
-    if ssh[0:2] == 'Y-':  # zonal mean and atm zonal mean on pressure levels
+    if ssh[0:2] in ['Y-', ]:  # zonal mean and atm zonal mean on pressure levels
         # Grid normally has already been created upstream
         grid_ref = margs['src_grid_id']
-    elif ssh == 'S-na':
+    elif ssh in ['S-na', ]:
         # COSP sites. Input field may have a singleton dimension (XIOS scalar component)
         grid_ref = cfsites_grid_id
         add_cfsites_in_defs(grid_defs, domain_defs)
         #
-    elif ssh[0:3] == 'XY-' or ssh[0:3] == 'S-A':
+    elif ssh[0:3] in ['XY-', 'S-A']:
         # this includes 'XY-AH' and 'S-AH' : model half-levels
-        if ssh[0:3] == 'S-A':
+        if ssh[0:3] in ['S-A', ]:
             add_cfsites_in_defs(grid_defs, domain_defs)
             target_hgrid_id = cfsites_domain_id
         if target_hgrid_id:
@@ -483,13 +485,13 @@ def create_output_grid(ssh, grid_defs, domain_defs, target_hgrid_id, margs):
             grid_ref = change_domain_in_grid(target_hgrid_id, grid_defs)
             if grid_ref is False or grid_ref is None:
                 raise Dr2xmlError("Fatal: cannot create grid_def for %s with hgrid=%s" % (alias, target_hgrid_id))
-    elif ssh == 'TR-na' or ssh == 'TRS-na':  # transects,   oce or SI
+    elif ssh in ['TR-na', 'TRS-na']:  # transects,   oce or SI
         pass
-    elif ssh[0:3] == 'YB-':  # basin zonal mean or section
+    elif ssh[0:3] in ['YB-', ]:  # basin zonal mean or section
         pass
-    elif ssh == 'na-na':  # TBD ? global means or constants - spatial integration is not handled
+    elif ssh in ['na-na', ]:  # TBD ? global means or constants - spatial integration is not handled
         pass
-    elif ssh == 'na-A':  # only used for rlu, rsd, rsu ... in Efx ????
+    elif ssh in ['na-A', ]:  # only used for rlu, rsd, rsu ... in Efx ????
         pass
     else:
         raise Dr2xmlError(
@@ -551,8 +553,8 @@ def add_scalar_in_grid(gridin_def, gridout_id, scalar_id, scalar_name, remove_ax
     rep = gridin_def.copy()
     test_scalar_in_grid = False
     for child in rep:
-        if child.tag == "scalar":
-            if "scalar_ref" in child.attrib and child.attrib["scalar_ref"] == scalar_id:
+        if child.tag in ["scalar", ]:
+            if "scalar_ref" in child.attrib and child.attrib["scalar_ref"] in [scalar_id, ]:
                 test_scalar_in_grid = True
     if test_scalar_in_grid:
         return rep
@@ -563,10 +565,9 @@ def add_scalar_in_grid(gridin_def, gridout_id, scalar_id, scalar_name, remove_ax
         children_to_remove = list()
         for child in rep:
             test_child = False
-            if child.tag == "scalar":
-                for scalar_child in child:
-                    if scalar_child.tag == "extract_axis":
-                        test_child = True
+            if child.tag in ["scalar", ]:
+                if any([scalar_child.tag in ["extract_axis", ] for scalar_child in child]):
+                    test_child = True
             if test_child:
                 count += 1
                 children_to_remove.append(child)
