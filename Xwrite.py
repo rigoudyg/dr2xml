@@ -268,8 +268,8 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
         # either native or close-to-native
         grid_choice = get_variable_from_lset_without_default('grid_choice', source_id)
         if sv.type == "dev":
-            grid_ref = sv.description.split('|')[1]
-            if grid_ref == "native":
+            target_grid = sv.description.split('|')[1]
+            if target_grid == "native":
                 grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description = \
                     get_variable_from_lset_without_default('grids_dev', sv.label, grid_choice, context)
             else:
@@ -278,15 +278,14 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
         else:
             grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description = \
                 get_variable_from_lset_without_default('grids', grid_choice, context)
+    elif grid == 'cfsites':
+        target_hgrid_id = cfsites_domain_id
+        zgrid_id = None
     else:
-        if grid == 'cfsites':
-            target_hgrid_id = cfsites_domain_id
-            zgrid_id = None
-        else:
-            target_hgrid_id = get_variable_from_lset_without_default("ping_variables_prefix") + grid
-            zgrid_id = "TBD : Should create zonal grid for CMIP6 standard grid %s" % grid
-        grid_label, grid_resolution, grid_description = DR_grid_to_grid_atts(grid, is_dev=(grid == "native" and
-                                                                                      sv.type == "dev"))
+        target_hgrid_id = get_variable_from_lset_without_default("ping_variables_prefix") + grid
+        zgrid_id = "TBD : Should create zonal grid for CMIP6 standard grid %s" % grid
+    grid_label, grid_resolution, grid_description = DR_grid_to_grid_atts(grid, is_dev=(grid == "native" and
+                                                                                       sv.type == "dev"))
 
     if table.endswith("Z"):  # e.g. 'AERmonZ','EmonZ', 'EdayZ'
         grid_label += "z"
@@ -705,8 +704,9 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
     # Write XIOS field entry
     # including CF field attributes
     # --------------------------------------------------------------------
-    end_field = create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_defs, domain_defs, scalar_defs,
-                                           dummies, context, target_hgrid_id, zgrid_id, pingvars)
+    (end_field, target_hgrid_id) = create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_defs,
+                                                              domain_defs, scalar_defs, dummies, context,
+                                                              target_hgrid_id, zgrid_id, pingvars)
     xml_file.append(end_field)
     if sv.spatial_shp[0:4] == 'XY-A' or sv.spatial_shp[0:3] == 'S-A':  # includes half-level cases
         # create a field_def entry for surface pressure
@@ -716,10 +716,11 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
         if sv_psol:
             # if not sv_psol.cell_measures : sv_psol.cell_measures = "cell measure is not specified in DR "+
             # get_DR_version()
-            psol_field = create_xios_aux_elmts_defs(sv_psol,
-                                                    get_variable_from_lset_without_default("ping_variables_prefix")
-                                                    + "ps", table, field_defs, axis_defs, grid_defs, domain_defs,
-                                                    scalar_defs, dummies, context, target_hgrid_id, zgrid_id, pingvars)
+            psol_field, _ = create_xios_aux_elmts_defs(sv_psol,
+                                                       get_variable_from_lset_without_default("ping_variables_prefix")
+                                                       + "ps", table, field_defs, axis_defs, grid_defs, domain_defs,
+                                                       scalar_defs, dummies, context, target_hgrid_id, zgrid_id,
+                                                       pingvars)
             xml_file.append(psol_field)
         else:
             logger.warning("Warning: Cannot complement model levels with psol for variable %s and table %s" %
@@ -795,24 +796,28 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
 
     if sv.type in ["dev", ]:
         alias_ping = alias
+        (source_grid, target_hgrid) = sv.description.split("|")
+        sv.description = None
+        if target_hgrid.lower() in ["none", "native"]:
+            target_hgrid_id = ""
+        elif target_hgrid in grid_defs:
+            target_hgrid_id = grid_defs[target_hgrid].attrib["id"]
+        elif target_hgrid in context_index:
+            target_hgrid_id = context_index[target_hgrid].attrib["id"]
+        else:
+            raise Dr2xmlError("Target horizontal grid %s is not defined" % target_hgrid)
         if alias_ping in context_index:
             grid_id_in_ping = id2gridid(alias_ping, context_index)
-            sv.description = None
         else:
-            (grid_id, grid_ref) = sv.description.split("|")
-            sv.description = None
             field_dict = OrderedDict()
             field_dict["id"] = alias_ping
             field_dict["long_name"] = sv.long_name
             field_dict["standard_name"] = sv.stdname
             field_dict["unit"] = sv.units
-            if grid_ref == "native":
-                grid_ref = ""
-            else:
-                field_dict["grid_ref"] = grid_ref
+            field_dict["grid_ref"] = source_grid
             field_def = create_xml_element(tag="field", attrib=field_dict)
             field_defs[alias_ping] = field_def
-            grid_id_in_ping = context_index[grid_id].attrib["id"]
+            grid_id_in_ping = context_index[source_grid].attrib["id"]
     elif sv.type in ["perso", ]:
         alias_ping = sv.label
         grid_id_in_ping = id2gridid(alias_ping, context_index)
@@ -897,16 +902,13 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
     # Change horizontal grid if requested
     # --------------------------------------------------------------------
     #
-    if target_hgrid_id:
-        # This does not apply for a series of shapes
-        if ssh[0:2] == 'Y-' or ssh == 'na-na' or ssh == 'TR-na' or ssh == 'TRS-na' or ssh[
-                                                                                      0:3] == 'YB-' or ssh == 'na-A':
-            pass
-        else:
-            if target_hgrid_id == cfsites_domain_id:
-                add_cfsites_in_defs(grid_defs, domain_defs)
-            # Apply DR required remapping, either toward cfsites grid or a regular grid
-            last_grid_id = change_domain_in_grid(target_hgrid_id, grid_defs, src_grid_id=last_grid_id)
+    # This does not apply for a series of shapes
+    if target_hgrid_id and ssh not in ["na-na", "TR-na", "TRS-na", "na-A"] and not ssh.startswith("Y-") \
+            and not ssh.startswith("YB-"):
+        if target_hgrid_id == cfsites_domain_id:
+            add_cfsites_in_defs(grid_defs, domain_defs)
+        # Apply DR required remapping, either toward cfsites grid or a regular grid
+        last_grid_id = change_domain_in_grid(target_hgrid_id, grid_defs, src_grid_id=last_grid_id)
     #
     # --------------------------------------------------------------------
     # Change axes in grid to CMIP6-compliant ones
@@ -1068,7 +1070,7 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
     # mpmoine_note: 'missing_value(s)' normalement plus necessaire, a verifier
     # TBS rep.append(wrv("missing_values", sv.missing, num_type="double"))
     #
-    return rep
+    return rep, target_hgrid_id
 
 
 def process_singleton(sv, alias, pingvars, field_defs, grid_defs, scalar_defs, table, last_grid_id):
