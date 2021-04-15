@@ -1,5 +1,5 @@
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-#TYPE; VARNAME;   REALM;  FREQUENCY; TABLE;    TEMPORAL_SHP; SPATIAL_SHP; EXPNAME; MIP; UNITS;       LONG_NAME;                 STD_NAME;                  SOURCE_GRID; TARGET_GRID
+#TYPE; VARNAME;   REALM;  FREQUENCY; TABLE;    TEMPORAL_SHP; SPATIAL_SHP; EXPNAME; MIP; UNITS;       LONG_NAME;                 STD_NAME;                  SOURCE_GRID; TARGET_H_GRID
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # (e) requesting a totally new variable, that is NOT defined in the CMIP6 standards and which can be not defined in any other input file
 # To be used with XIOS, the variables must be implemented in the model in order to be output.
