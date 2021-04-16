@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!-- 
+Root XIOS configuration file for a CNRM-CM6 or CNRM-ESM2 run
+First version - 11/2016 - Stephane Senesi 
+Ref: 
+  - for XIOS : https://forge.ipsl.jussieu.fr/ioserver/wiki 
+  - for XIAS (implementation in Surfex and Arpege) : http://www.cnrm-game-meteo.fr/cm/spip.php?article60
+-->
+<simulation>
+
+  <!-- All stuff below is usually kept unchanged, and/or managed by ECLIS -->
+
+  <!-- Eclis will/has discard useless 'context' entries below -->
+  <context id="surfex" src="./arpsfx.xml" />
+  <context id="surfex" src="./ping_surfex.xml"/> 
+  <context id="surfex" src="./dr2xml_surfex.xml"/> 
+
+
+  <context id="trip"   src="./trip.xml" />
+  <context id="trip"   src="./ping_trip.xml"/> 
+  <context id="trip"   src="./dr2xml_trip.xml"/> 
+  
+  <context id="xios">
+    <variable_definition>
+      <variable id="recv_field_timeout" type="double">500</variable>
+      <variable id="min_buffer_size" type="int">1000000</variable>
+      <variable id="optimal_buffer_size" type="string">performance</variable>
+      <variable id="buffer_factor_size" type="double">0.8</variable> 
+      <variable id="activate_non_distributed_transformation" type="bool">true</variable>
+      
+      <variable_group id="parameters" >
+        <variable id="info_level"    type="int">100</variable>
+        <variable id="print_file"    type="bool">false</variable>
+        <variable id="ratio_server2" type="int">80</variable>
+        <variable id="using_server2" type="bool">true</variable>
+      </variable_group>
+      
+      <variable_group id="coupling">
+        <variable id="using_server" type="bool">true</variable>
+        <variable id="using_oasis" type="bool">true</variable>
+        <variable id="oasis_codes_id" type="string">trip,surfex</variable>
+      </variable_group>
+    </variable_definition>
+  </context>
+
+</simulation>
+

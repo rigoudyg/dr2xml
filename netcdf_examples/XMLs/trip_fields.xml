@@ -1,0 +1,59 @@
+
+<field_definition>  
+  <field_group prec="8" operation="instant" freq_op="1ts" detect_missing_value="true" default_value="1.e+20" >    
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <field_group id="trip_fix"	grid_ref="trip_Grid" >
+      <field id="areacellr" 	long_name="Cell area for River model grid" 	unit="m2" />
+    </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <field_group id="trip_group1"	grid_ref="trip_Grid" >
+      <field id="rivdis" 	long_name="River Outflow or discharge" 		unit="m3 s-1" />
+      <field id="wtd" 		long_name="Water Table Depth (+ downward)" 	unit="m" />
+      <field id="fwtd" 		long_name="grid-cell fraction allowing upward capillary fluxes from wtd " 		unit="-" />
+      <field id="fldf" 		long_name="grid-cell fraction of floodplains"                                           unit="-" />
+      <field id="tripwatbud" 	long_name="Total water budget as residue" 	unit="kg m-2" />
+    </field_group>   
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <field_group id="trip_group2"	grid_ref="trip_Grid" >
+      <field id="rivw" 		long_name="River water storage" 		unit="kg m-2" />
+      <field id="drivw" 	long_name="Change in river storage" 		unit="kg m-2" />
+      <field id="rivin" 	long_name="River Inflow" 			unit="m3 s-1" />
+      <field id="rivh" 		long_name="River height" 			unit="m" />
+      <field id="rivv" 		long_name="River velocity" 			unit="m s-1" />
+      <field id="gw" 		long_name="Groundwater storage" 		unit="kg m-2" />
+      <field id="dgw" 		long_name="Change in groundwater storage" 	unit="kg m-2" />
+      <field id="qgwr" 		long_name="Groundwater recharge from soil" 	unit="kg m-2 s-1" />
+      <field id="gwToriv" 	long_name="Groundwater-river exchange" 		unit="kg m-2 s-1" />
+      <field id="gwh" 		long_name="Groundwater height from 0 altitude" 	unit="m" />
+      <field id="fldw" 		long_name="Floodplain storage" 			unit="kg m-2" />
+      <field id="fldh" 		long_name="Floodplain depth" 			unit="m" />
+      <field id="RUNOFF" 	long_name="Input surface runoff" 		unit="kg m-2" />
+      <field id="DRAIN" 	long_name="Input drainage or recharge" 		unit="kg m-2" />
+      <field id="FSOURCE" 	long_name="Floodplains source (Pf-Ef-If)" 	unit="kg m-2" />
+     </field_group>   
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+     <field_group id="trip_carb"	grid_ref="trip_Grid" >
+      <field id="carbw" 	long_name="River carbon storage" 		unit="kgC m-2" />
+      <field id="carbdis" 	long_name="River carbon Outflow or discharge" 	unit="kgC s-1" />
+      <field id="carbin" 	long_name="River carbon inflow" 		unit="kgC s-1" />
+      <field id="DOCFLUX" 	long_name="Input dissolved organic carbon" 	unit="kgC m-2" />
+     </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+     <field_group id="trip_misc" 	grid_ref="trip_Grid" >
+      <field id="rivbud" 	long_name="River water budget" 			unit="kg m-2" />
+      <field id="gwbud" 	long_name="Groundwater budget" 			unit="kg m-2" />
+      <field id="gwd" 		long_name="Groundwater depth (- downward)" 	unit="m" />
+      <field id="gwfTocell" 	long_name="GW fluxes between adjacent cell" 	unit="kg m-2 s-1" />
+      <field id="gwh_less_rivh" long_name="Hground - Hriver" 			unit="m" />
+      <field id="dfldw" 	long_name="Change in floodplain storage" 	unit="kg m-2" />
+      <field id="fldbud" 	long_name="Floodplains budget" 			unit="kg m-2" />
+      <field id="fldToriv" 	long_name="fld-river exchange fluxes (+ in)" 	unit="kg m-2 s-1" />
+      <field id="fldv" 		long_name="floodplains-river exchange velocity" unit="m s-1" />
+      <field id="fldh_less_rivh" long_name="Hflood - Hriver" 			unit="m" />
+      <field id="fld_width" 	long_name="Flood width" 			unit="m" />
+      <field id="fld_length" 	long_name="Flood length" 			unit="m" />
+     </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+   </field_group> 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+</field_definition>
