@@ -153,7 +153,7 @@ def read_home_vars_list(hmv_file, expid, mips, path_extra_tables=None):
                     home_var.cell_methods = tcmName2tcmValue[home_var.temporal_shp]
                 home_var.label_without_psuffix = home_var.label
                 home_var.cell_measures = ""
-            if home_var.spatial_shp in ["XY-perso", ]:
+            if home_var.spatial_shp in ["XY-perso", "XY-HG"]:
                 home_var_sdims_info = get_variable_from_sset_with_default('perso_sdims_description', OrderedDict())
                 if home_var.label in home_var_sdims_info:
                     home_var_sdims = OrderedDict()

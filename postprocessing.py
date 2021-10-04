@@ -28,8 +28,8 @@ from xml_interface import create_string_from_xml_element, create_xml_element, cr
 from analyzer import cmip6_freq_to_xios_freq
 
 # Grids tools
-from grids import is_vert_dim, create_axis_def, create_grid_def, change_domain_in_grid, add_scalar_in_grid, \
-    change_axes_in_grid
+from grids import is_vert_dim, create_axis_def, create_grid_def, change_domain_in_grid, get_grid_def, \
+    add_scalar_in_grid, change_axes_in_grid
 
 # XIOS reading and writing tools
 from Xparse import id2grid
@@ -365,11 +365,89 @@ def process_levels_over_orog(sv, alias, pingvars, src_grid_id, field_defs, axis_
         grid_id = src_grid_id
     else:
         context_index = get_config_variable("context_index")
-        if "height_over_orog" not in context_index:
-            raise KeyError("height_over_orog must have been define in field_def")
+        # Check that the ping alias exists
         alias_in_ping = get_variable_from_lset_without_default("ping_variables_prefix") + sv.label_without_psuffix
         if alias_in_ping not in pingvars:  # e.g. alias_in_ping='CMIP6_hus'
             raise Dr2xmlError("Field id " + alias_in_ping + " expected in pingfile but not found.")
+        # Find out if the height over orog field is already defined
+        height_over_orog_field_name = get_variable_from_lset_with_default("height_over_orog_field_name",
+                                                                          "height_over_orog_field")
+        if height_over_orog_field_name not in context_index:
+            # Find out what is the name of the orography field and check that it is defined
+            orography_field_name = get_variable_from_lset_with_default("orography_field_name", "orog")
+            if orography_field_name not in context_index:
+                raise KeyError("%s must have been defined in field_def" % orography_field_name)
+            # Check if the orography field is 2D or 3D, create a 3D version of it if it is 2D
+            orography_grid_id = [elt for elt in context_index[orography_field_name][:] if isinstance(elt, DR2XMLGrid)]
+            if len(orography_grid_id) == 0:
+                raise KeyError("Could not find out the grid associated with orography")
+            elif len(orography_grid_id) > 1:
+                logger.warning("Get only the first grid of orography")
+            orography_grid_id = orography_grid_id[0]
+            orography_grid_def = get_grid_def(orography_grid_id, grid_defs)
+            orography_grid_scalar_id = [elt for elt in orography_grid_def if isinstance(elt, DR2XMLScalar)]
+            if len(orography_grid_scalar_id) == 0:
+                orography_with_scalar_id = "_".join([orography_grid_id, "scalar"])
+                if orography_with_scalar_id not in context_index:
+                    # Create new grid with scalar
+                    scalar_id = "orog_level"
+                    scalar_dict = OrderedDict()
+                    scalar_dict["id"] = scalar_id
+                    scalar_dict["value"] = "0"
+                    scalar_dict["unit"] = "m"
+                    scalar_dict["positive"] = "up"
+                    scalar_dict["axis_type"] = "Z"
+                    scalar_def = create_xml_element(tag="scalar", attrib=scalar_dict)
+                    scalar_defs[scalar_id] = scalar_def
+                    orography_scalar_grid_def = add_scalar_in_grid(orography_grid_def, orography_with_scalar_id,
+                                                                   scalar_id)
+                    grid_defs[orography_grid_scalar_id] = orography_scalar_grid_def
+                    field_dict = OrderedDict()
+                    field_dict["id"] = orography_with_scalar_id
+                    field_dict["grid_ref"] = orography_scalar_grid_def
+                    field_defs[orography_with_scalar_id] = create_xml_element(tag="field", attrib=field_dict,
+                                                                              text=orography_field_name)
+                orography_field_name = orography_with_scalar_id
+            hlev_grid_id = get_variable_from_lset_with_default("height_over_orog_level_grid_name", "FULL_hlev")
+            klev_grid_id = get_variable_from_lset_with_default("height_grid_name", "FULL_klev")
+            if klev_grid_id not in context_index:
+                raise KeyError("Could not find %s grid in context index." % klev_grid_id)
+            if hlev_grid_id not in context_index:
+                # Create hlev grid
+                hlev_axis = create_xml_element(tag="axis",
+                                               attrib=dict(
+                                                   axis_ref=[elt for elt in get_grid_def(klev_grid_id, grid_defs)
+                                                             if elt.tag in ["axis", ]][0]))
+                create_xml_sub_element(hlev_axis, tag="duplicate_scalar")
+                hlev_grid_id = create_grid_def(grid_defs, hlev_axis, None, klev_grid_id)
+            orog_with_duplicate_id = "_".join([orography_field_name, "duplicate"])
+            orog_with_duplicate_def_dict = OrderedDict()
+            orog_with_duplicate_def_dict["id"] = orog_with_duplicate_id
+            orog_with_duplicate_def_dict["grid_ref"] = hlev_grid_id
+            orog_with_duplicate_def_dict["field_ref"] = orography_field_name
+            orog_with_duplicate_def = create_xml_element(tag="field", attrib=orog_with_duplicate_def_dict)
+            field_defs[orog_with_duplicate_id] = orog_with_duplicate_def
+            zg_field_id = get_variable_from_lset_with_default("zg_field_name", "zg")
+            height_over_orog_field_def_dict = OrderedDict()
+            height_over_orog_field_def_dict["id"] = height_over_orog_field_name
+            height_over_orog_field_def_dict["grid_ref"] = klev_grid_id
+            height_over_orog_field_def = create_xml_element(tag="field", attrib=height_over_orog_field_def_dict,
+                                                            text="{} - {}".format(zg_field_id, orog_with_duplicate_id))
+            field_defs[height_over_orog_field_name] = height_over_orog_field_def
+        height_over_orog_axis_name = get_variable_from_lset_with_default("height_over_orog_axis_name",
+                                                                         "height_over_orog_axis")
+        if height_over_orog_axis_name not in context_index:
+            height_over_orog_axis_def_dict = OrderedDict()
+            height_over_orog_axis_def_dict["id"] = height_over_orog_axis_name
+            height_over_orog_axis_def_dict["unit"] = "m"
+            height_over_orog_axis_def_dict["name"] = "z"
+            height_over_orog_axis_def_dict["standard_name"] = "height_over_orog"
+            height_over_orog_axis_def_dict["positive"] = "up"
+            height_over_orog_axis_def = create_xml_element(tag="axis", attrib=height_over_orog_axis_def_dict)
+            create_xml_sub_element(height_over_orog_axis_def, tag="polynomial",
+                                   attrib=dict(coordinate=height_over_orog_field_name))
+            axis_defs[height_over_orog_axis_name] = height_over_orog_axis_def
+        # Create the new axis
         if sd.requested:
             glo_list = sd.requested.strip(" ").split()
         else:
@@ -380,7 +458,7 @@ def process_levels_over_orog(sv, alias, pingvars, src_grid_id, field_defs, axis_
         axis_dict = OrderedDict()
         axis_id = "_".join([sd.out_name, "hglev%s" % "-".join(sd.values)])
         axis_dict["id"] = axis_id
-        axis_dict["axis_ref"] = "height_over_orog"
+        axis_dict["axis_ref"] = height_over_orog_axis_name
         if n_glo > 1:
             # Case of a non-degenerated vertical dimension (not a singleton)
             axis_dict["n_glo"] = str(n_glo)
@@ -394,7 +472,7 @@ def process_levels_over_orog(sv, alias, pingvars, src_grid_id, field_defs, axis_
             axis_dict["value"] = '(0,0)[ {} ]'.format(sd.value)
         axis = create_xml_element(tag="axis", attrib=axis_dict)
         axis_defs[axis_id] = axis
-
+        # Create the new grid
         grid_id = create_grid_def(grid_defs, axis_defs[axis_id], sd.out_name, src_grid_id)
 
         field_dict = OrderedDict()
