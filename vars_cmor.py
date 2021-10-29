@@ -208,6 +208,7 @@ class SimpleCMORVar(object):
         self.prec = "float"
         self.missing = 1.e+20
         self.cmvar = None  # corresponding CMORvar, if any
+        self.ref_var = None
 
 
 class SimpleDim(object):

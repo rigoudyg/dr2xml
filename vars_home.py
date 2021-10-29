@@ -141,7 +141,11 @@ def read_home_vars_list(hmv_file, expid, mips, path_extra_tables=None):
             if "!" in home_var.label:
                 (label, label_ref) = home_var.label.split("!")
                 home_var.label = label
-                home_var.stdname = label_ref
+                home_var.ref_var = label_ref
+            else:
+                home_var.ref_var = home_var.label
+        else:
+            home_var.ref_var = home_var.label
         if hmv_type not in ['extra', ]:
             home_var.label_with_area = home_var.label
             if hmv_type in ['perso', ]:
@@ -210,6 +214,8 @@ def read_home_vars_list(hmv_file, expid, mips, path_extra_tables=None):
                 if var_found is None:
                     print("Warning: 'extra' variable %s not found in table %s" % (home_var.label, table))
                 else:
+                    if home_var.ref_var is not None:
+                        var_found.ref_var = home_var.ref_var
                     if home_var.mip in ["ANY", ] or home_var.mip in mips:
                         if home_var.experiment not in ["ANY", ]:
                             if expid in home_var.experiment:
@@ -354,7 +360,10 @@ def read_extra_table(path, table):
                 # Allow the user to put any additional vertical dimension name
                 # which syntax fits further tests, such as P8MINE
                 edim = drdims[19:]
-                extra_var.spatial_shp = 'XY-' + edim
+                if edim.startswith("height") and edim.endswith("m"):
+                    extra_var.spatial_shp = "XY-HG"
+                else:
+                    extra_var.spatial_shp = 'XY-' + edim
                 if edim not in dynamic_shapes:
                     dynamic_shapes[edim] = OrderedDict()
                 if v["out_name"] not in dynamic_shapes[edim]:

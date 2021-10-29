@@ -815,7 +815,7 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
                 target_hgrid_id = target_hgrid_id.get_attrib("domain_ref")
 
     if sv.spatial_shp in ["XY-HG", ]:
-        alias_ping = sv.stdname
+        alias_ping = sv.ref_var
     elif sv.type in ["dev", "perso"]:
         alias_ping = alias
     else:
@@ -858,7 +858,7 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
         grid_with_vertical_interpolation = True
     elif ssh in ["XY-HG", ]:
         # Handle interpolation on a height level over the ground
-        logger.info("Deal with XY-HG spatial shape for %s,%s" % (sv.label, sv.stdname))
+        logger.info("Deal with XY-HG spatial shape for %s,%s" % (sv.label, sv.ref_var))
         last_field_id, last_grid_id = process_levels_over_orog(sv, alias, pingvars, last_grid_id, field_defs, axis_defs,
                                                                grid_defs, domain_defs, scalar_defs, table)
 
