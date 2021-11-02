@@ -178,7 +178,7 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
     # We use a simple convention for variable names in ping files :
     if sv.type in ['perso', 'dev']:
         alias = sv.label
-        alias_ping = sv.label
+        alias_ping = sv.ref_var
     else:
         # MPM : si on a defini un label non ambigu alors on l'utilise comme alias (i.e. le field_ref)
         # et pour l'alias seulement (le nom de variable dans le nom de fichier restant svar.label)
@@ -187,8 +187,8 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
         else:
             # 'tau' is ambiguous in DR 01.00.18 : either a variable name (stress)
             # or a dimension name (optical thickness). We choose to rename the stress
-            if sv.label != "tau":
-                alias = get_variable_from_lset_without_default("ping_variables_prefix") + sv.label
+            if sv.ref_var != "tau":
+                alias = get_variable_from_lset_without_default("ping_variables_prefix") + sv.ref_var
             else:
                 alias = get_variable_from_lset_without_default("ping_variables_prefix") + "tau_stress"
         if sv.label in debug:
@@ -203,7 +203,7 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
             # Get alias without pressure_suffix but possibly with area_suffix
             alias_ping = ping_alias(sv, pingvars)
         else:
-            alias_ping = sv.label
+            alias_ping = sv.ref_var
     #
     # process only variables in pingvars except for dev variables
     # print(pingvars)
@@ -814,9 +814,7 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
             else:
                 target_hgrid_id = target_hgrid_id.get_attrib("domain_ref")
 
-    if sv.spatial_shp in ["XY-HG", ]:
-        alias_ping = sv.ref_var
-    elif sv.type in ["dev", "perso"]:
+    if sv.type in ["dev", "perso"]:
         alias_ping = alias
     else:
         alias_ping = ping_alias(sv, pingvars)
@@ -991,9 +989,6 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
                                                               get_variable_from_lset_with_default("too_long_periods",
                                                                                                   []))
                 # must set freq_op (this souldn't be necessary, but is needed with Xios 1442)
-                rep_dict["freq_op"] = longest_possible_period(cmip6_freq_to_xios_freq(sv.frequency, table),
-                                                              get_variable_from_lset_with_default("too_long_periods",
-                                                                                                  []))
     else:  # field has an expr, with an @
         # Cannot optimize
         if operation in ['instant', ]:

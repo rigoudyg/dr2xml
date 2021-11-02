@@ -310,6 +310,7 @@ def read_extra_table(path, table):
             extra_var.type = 'extra'
             extra_var.mip_era = mip_era
             extra_var.label = v["out_name"].strip(' ')
+            extra_var.ref_var = extra_var.label
             extra_var.mipVarLabel = extra_var.label
             extra_var.stdname = v.get("standard_name", "").strip(' ')
             extra_var.long_name = v["long_name"].strip(' ')
@@ -360,7 +361,7 @@ def read_extra_table(path, table):
                 # Allow the user to put any additional vertical dimension name
                 # which syntax fits further tests, such as P8MINE
                 edim = drdims[19:]
-                if edim.startswith("height") and edim.endswith("m"):
+                if any([d.startswith("height") and d.endswith("m") for d in edim.split("|")]):
                     extra_var.spatial_shp = "XY-HG"
                 else:
                     extra_var.spatial_shp = 'XY-' + edim
@@ -728,6 +729,8 @@ def complement_svar_using_cmorvar(svar, cmvar, sn_issues, debug=[], allow_pseudo
     svar.type = 'cmor'
     # mip_era='CMIP6' dans le cas CMORvar
     svar.mip_era = 'CMIP6'
+    # Fix ref_var
+    svar.ref_var = svar.label
     #
     return sn_issues
 

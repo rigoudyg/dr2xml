@@ -147,7 +147,7 @@ def ping_alias(svar, pingvars, error_on_fail=False):
     else:
         # print "+++ ambiguous", svar.label
         # Ping file may provide the variable on the relevant pressure level - e.g. CMIP6_rv850
-        alias_ping = pref + svar.label
+        alias_ping = pref + svar.ref_var
         if alias_ping not in pingvars:
             # if not, ping_alias is supposed to be without a pressure level suffix
             alias_ping = pref + svar.label_without_psuffix  # e.g. 'CMIP6_hus' and not 'CMIP6_hus7h'

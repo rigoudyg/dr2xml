@@ -367,7 +367,7 @@ def process_levels_over_orog(sv, alias, pingvars, src_grid_id, field_defs, axis_
     else:
         context_index = get_config_variable("context_index")
         # Check that the ping alias exists
-        alias_in_ping = get_variable_from_lset_without_default("ping_variables_prefix") + sv.stdname
+        alias_in_ping = get_variable_from_lset_without_default("ping_variables_prefix") + sv.ref_var
         if alias_in_ping not in pingvars:  # e.g. alias_in_ping='CMIP6_hus'
             raise Dr2xmlError("Field id " + alias_in_ping + " expected in pingfile but not found.")
         # Find out if the height over orog field is already defined
