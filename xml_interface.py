@@ -86,6 +86,15 @@ def dump_xml_element(xml_element):
     return xml_element.dump()
 
 
+def is_xml_element_to_parse(element):
+    """
+
+    :param element:
+    :return:
+    """
+    return isinstance(element, xml_writer.element.Element)
+
+
 def parse_xml_file(xml_file):
     """
 
