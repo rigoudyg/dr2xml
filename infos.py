@@ -8,6 +8,8 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 
 from collections import OrderedDict
 
+from logger import get_logger
+
 
 # mpmoine_petitplus: nouvelle fonction print_some_stats (plus d'info sur les skipped_vars, nbre de vars / (shape,freq) )
 # SS - non : gros plus
@@ -21,19 +23,20 @@ def print_some_stats(context, svars_per_table, skipped_vars_per_table, actually_
     :param extended:
     :return:
     """
+    logger = get_logger()
     if False:
         # --------------------------------------------------------------------
         # Print Summary: list of  considered variables per table
         # (i.e. not excuded_vars and not excluded_shapes)
         # --------------------------------------------------------------------
-        print("\nTables concerned by context %s : " % context, list(svars_per_table))
-        print("\nVariables per table :")
+        logger.info("\nTables concerned by context %s : " % context, list(svars_per_table))
+        logger.info("\nVariables per table :")
         for table in list(svars_per_table):
-            print("\n>>> TABLE:",)
-            print("%15s %02d ---->" % (table, len(svars_per_table[table])),)
+            logger.info("\n>>> TABLE:")
+            logger.info("%15s %02d ---->" % (table, len(svars_per_table[table])))
             for svar in svars_per_table[table]:
-                print(svar.label + "(" + str(svar.Priority) + ")",)
-        print()
+                logger.info("%s (%s)" % (svar.label, str(svar.Priority)))
+        logger.info("")
 
     if True:
         # --------------------------------------------------------------------
@@ -41,13 +44,13 @@ def print_some_stats(context, svars_per_table, skipped_vars_per_table, actually_
         # (i.e. not in the ping_file)
         # --------------------------------------------------------------------
         if skipped_vars_per_table:
-            print("\nSkipped variables (i.e. whose alias is not present in the pingfile):")
+            logger.info("\nSkipped variables (i.e. whose alias is not present in the pingfile):")
             for table, skipvars in skipped_vars_per_table.items():
-                print(">>> TABLE:", "%15s %02d/%02d ---->" % (table, len(skipvars), len(svars_per_table[table])),
-                      *skipvars)
+                logger.info(">>> TABLE: %15s %02d/%02d ----> %s" % (table, len(skipvars), len(svars_per_table[table]),
+                                                                    " ".join(skipvars)))
                 # TBS# print "\n\t",table ," ",len(skipvars),"--->",
-                print()
-            print()
+                logger.info("")
+            logger.info("")
 
         # --------------------------------------------------------------------
         # Print Summary: list of variables really written in the file_def
@@ -72,7 +75,7 @@ def print_some_stats(context, svars_per_table, skipped_vars_per_table, actually_
                     dic_freq.update({shp: dic_shp})
                     stats_out.update({freq: dic_freq})
 
-        print("\n\nSome Statistics on actually written variables per frequency+shape...")
+        logger.info("\n\nSome Statistics on actually written variables per frequency+shape...")
 
         #    ((sv.label,sv.table,sv.frequency,sv.Priority,sv.spatial_shp))
         dic = OrderedDict()
@@ -95,21 +98,20 @@ def print_some_stats(context, svars_per_table, skipped_vars_per_table, actually_
                     for Priority in dic[frequency][spatial_shp][table]:
                         list_priority = dic[frequency][spatial_shp][table][Priority]
                         tot_for_freq_and_shape_among_tables += len(list_priority)
-                        print("%10s" % " ", " %8s" % " ", "% 12s" % table, "P%1d" % Priority, "% 3d : " %
-                              len(list_priority), *list_priority)
-                print("%10s" % frequency, " %8s" % spatial_shp, "% 11s" % "--------", "---", "%3d" %
-                      tot_for_freq_and_shape_among_tables)
+                        logger.info("%10s %8s %12s P%1d %3d: %s" %(" ", " ", table, Priority, len(list_priority),
+                                                                   " ".join(list_priority)))
+                logger.info("%10s %8s %11s --- %3d" % (frequency, spatial_shp, "--------",
+                                                       tot_for_freq_and_shape_among_tables))
                 tot_for_freq_among_shapes += tot_for_freq_and_shape_among_tables
-                print()
-            print("%10s" % frequency, " %8s" % "--------", "% 11s" % "--------", "---", "%3d" %
-                  tot_for_freq_among_shapes)
+                logger.info("")
+            logger.info("%10s %8s %11s --- %3d" % (frequency, "--------", "--------", tot_for_freq_among_shapes))
             tot_among_freqs += tot_for_freq_among_shapes
-            print()
-            print()
-        print("%10s" % "----------", " %8s" % "--------", "% 11s" % "--------", "---", "%3d" % tot_among_freqs)
+            logger.info("")
+        logger.info("")
+        logger.info("%10s %8s %11s --- %3d" %("----------", "--------", "--------", tot_among_freqs))
 
         if extended:
-            print("\n\nSome Statistics on actually written variables per variable...")
+            logger.info("\n\nSome Statistics on actually written variables per variable...")
             dic = OrderedDict()
             dic_ln = OrderedDict()
             for label, long_name, table, frequency, Priority, spatial_shp in actually_written_vars:
@@ -120,13 +122,13 @@ def print_some_stats(context, svars_per_table, skipped_vars_per_table, actually_
 
             list_labels = list(dic)
             list_labels.sort()
-            print(">>> DBG >>>", *list_labels)
+            logger.info(">>> DBG >>> %s" % " ".join(list_labels))
 
             for label in list_labels:
-                print((14 + len(label)) * "-")
-                print("--- VARNAME: ", label, ":", dic_ln[label])
-                print((14 + len(label)) * "-")
+                logger.info((14 + len(label)) * "-")
+                logger.info("--- VARNAME: %s: %s" % (label, dic_ln[label]))
+                logger.info((14 + len(label)) * "-")
                 for val in dic[label]:
-                    print(14 * " " + "* %20s %s" % (val, label))
+                    logger.info(14 * " " + "* %20s %s" % (val, label))
 
         return True
