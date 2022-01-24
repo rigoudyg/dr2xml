@@ -15,8 +15,6 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 from collections import OrderedDict
 
 import os
-import os.path
-import sys
 import six
 
 # Interface to xml tools
@@ -61,30 +59,16 @@ def read_src(elt, path_parse, level=0, dont_read=list()):
             if not any([os.path.basename(filen).startswith(prefix) for prefix in dont_read]):
                 logger.debug(level * "\t" + "Reading %s" % filen)
                 et = get_root_of_xml_file(filen)
-                logger.debug(level * "\t" + "Reading %s, %s=%s" % (filen, et.tag, gattrib(et, 'id', 'no_id')))
-                for el in [el for el in et if getattr(el, "tag", None) is not None]:
+                logger.debug(level * "\t" + "Reading %s, %s=%s" % (filen, et.tag, et.attrib.get("id", "no_id")))
+                for el in [el for el in et if el.tag is not None]:
                     # Skip comments and header
                     logger.debug((level + 1) * "\t" + "Storing %s in %s id=%s" % (el.tag, child.tag,
-                                                                                  gattrib(child, 'id', 'no_id')))
+                                                                                  child.attrib.get('id', 'no_id')))
                     child.append(el)
             elt.replace(i - nb_remove_child, read_src(child, path_parse, level + 1, dont_read))
         else:
             elt.replace(i - nb_remove_child, read_src(child, path_parse, level + 1, dont_read))
     return elt
-
-
-def gattrib(e, attrib_name, default=None):
-    """
-    Get the value of an attribute of an element.
-    :param e: xml element
-    :param attrib_name: name of the attribute
-    :param default: default value if attribute is missing
-    :return: the value of the attribute or default
-    """
-    if attrib_name in e.attrib:
-        return e.attrib[attrib_name]
-    else:
-        return default
 
 
 def merge_sons(elt, level=0):

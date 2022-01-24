@@ -22,7 +22,8 @@ from config import get_config_variable
 # Interface to settings dictionaries
 from settings_interface import get_variable_from_lset_without_default, get_variable_from_lset_with_default
 # Interface to xml tools
-from xml_interface import create_string_from_xml_element, create_xml_element, create_xml_sub_element
+from xml_interface import create_string_from_xml_element, create_xml_element, create_xml_sub_element, \
+    find_rank_xml_subelement
 
 # Settings tools
 from analyzer import cmip6_freq_to_xios_freq
@@ -192,7 +193,7 @@ def process_zonal_mean(field_id, grid_id, target_hgrid_id, zgrid_id, field_defs,
     field_1_dict["field_ref"] = field_id
     field_1_dict["operation"] = operation
     field_defs[field1_id] = create_xml_element(tag="field", attrib=field_1_dict)
-    logger.debug("+++ field1 ", field1_id, "\n", create_string_from_xml_element(field_defs[field1_id]))
+    logger.debug("+++ field1 %s\n%s" % (field1_id, create_string_from_xml_element(field_defs[field1_id])))
     #
     # e.g. <field id="CMIP6_ua_plev39_average_1d" field_ref="CMIP6_ua_plev39_average" freq_op="1d" >
     #              @CMIP6_ua_plev39_average </field>
@@ -202,7 +203,7 @@ def process_zonal_mean(field_id, grid_id, target_hgrid_id, zgrid_id, field_defs,
     field_2_dict["field_ref"] = field1_id
     field_2_dict["freq_op"] = xios_freq
     field_defs[field2_id] = create_xml_element(tag="field", text="@{}".format(field1_id), attrib=field_2_dict)
-    logger.debug("+++ field2 ", field2_id, "\n", create_string_from_xml_element(field_defs[field2_id]))
+    logger.debug("+++ field2 %s\n%s" % (field2_id, create_string_from_xml_element(field_defs[field2_id])))
 
     if target_hgrid_id:  # case where an intermediate grid is needed
         # e.g. <field id="CMIP6_ua_plev39_average_1d_complete" field_ref="CMIP6_ua_plev39_average_1d"
@@ -211,16 +212,16 @@ def process_zonal_mean(field_id, grid_id, target_hgrid_id, zgrid_id, field_defs,
         # Must create and a use a grid similar to the last one defined
         # for that variable, except for a change in the hgrid/domain (=> complete)
         grid_id3 = change_domain_in_grid(target_hgrid_id, grid_defs, src_grid_id=grid_id)
-        logger.debug("+++ grid3 ", grid_id3, "\n", create_string_from_xml_element(grid_defs[grid_id3]))
+        logger.debug("+++ grid3 %s\n%s" % (create_string_from_xml_element(grid_id3, grid_defs[grid_id3])))
         field_3_dict = OrderedDict()
         field_3_dict["id"] = field3_id
         field_3_dict["field_ref"] = field2_id
         field_3_dict["grid_ref"] = grid_id3
         field_defs[field3_id] = create_xml_element(tag="field", attrib=field_3_dict)
-        logger.debug("+++ field3 ", field3_id, "\n", create_string_from_xml_element(field_defs[field3_id]))
+        logger.debug("+++ field3 %s\n%s" % (field3_id, create_string_from_xml_element(field_defs[field3_id])))
     else:
         # Case where the input field is already on a rectangular grid
-        logger.info('~~~~>', "no target_hgrid_id for field=", field_id, " grid=", grid_id)
+        logger.info("~~~~> no target_hgrid_id for field=%s grid=%s" % (field_id, grid_id))
         field3_id = field2_id
         grid_id3 = grid_id
 
@@ -233,14 +234,14 @@ def process_zonal_mean(field_id, grid_id, target_hgrid_id, zgrid_id, field_defs,
     #             grid_ref="FULL_klev_plev39_complete_glat" />
     field4_id = "_".join([field2_id, zgrid_id])
     grid4_id = change_domain_in_grid(zgrid_id, grid_defs, src_grid_id=grid_id3, turn_into_axis=True)
-    logger.debug("+++ grid4 ", grid4_id, "\n", create_string_from_xml_element(grid_defs[grid4_id]))
+    logger.debug("+++ grid4 %s\n%s" % (grid4_id, create_string_from_xml_element(grid_defs[grid4_id])))
 
     field_4_dict = OrderedDict()
     field_4_dict["id"] = field4_id
     field_4_dict["field_ref"] = field3_id
     field_4_dict["grid_ref"] = grid4_id
     field_defs[field4_id] = create_xml_element(tag="field", attrib=field_4_dict)
-    logger.debug("+++ field4 ", field4_id, "\n", create_string_from_xml_element(field_defs[field4_id]))
+    logger.debug("+++ field4 %s\n%s" % (field4_id, create_string_from_xml_element(field_defs[field4_id])))
 
     return field4_id, grid4_id
 
@@ -274,7 +275,7 @@ def process_diurnal_cycle(alias, field_defs, grid_defs, axis_defs):
     field_dict["operation"] = "average"
     field_defs[field_for_average_id] = create_xml_element(tag="field", attrib=field_dict)
 
-    logger.debug("***>", field_defs[field_for_average_id])
+    logger.debug("***> %s" % create_string_from_xml_element(field_defs[field_for_average_id]))
 
     # 1- create a grid composed of ALIAS's original grid extended by a scalar; id is <grid_id>_scalar_grid
     context_index = get_config_variable("context_index")
@@ -285,7 +286,7 @@ def process_diurnal_cycle(alias, field_defs, grid_defs, axis_defs):
     grid_scalar_id = grid_id + "_plus_scalar"
     grid_scalar.attrib["id"] = grid_scalar_id
     create_xml_sub_element(xml_element=grid_scalar, tag="scalar")
-    logger.debug("***>", create_string_from_xml_element(grid_scalar))
+    logger.debug("***> %s" % create_string_from_xml_element(grid_scalar))
     grid_defs[grid_scalar_id] = grid_scalar
 
     # 2- create a construct for re-gridding the field with operation average on that ,
@@ -297,7 +298,7 @@ def process_diurnal_cycle(alias, field_defs, grid_defs, axis_defs):
     averaged_field_dict["grid_ref"] = grid_scalar_id
     field_defs[averaged_field_id] = create_xml_element(tag="field", text="@{}".format(field_for_average_id),
                                                        attrib=averaged_field_dict)
-    logger.debug("***>", create_string_from_xml_element(field_defs[averaged_field_id]))
+    logger.debug("***> %s" % create_string_from_xml_element(field_defs[averaged_field_id]))
 
     # 3- create an axis of 24 values having sub-construct 'time splitting'; axis id is "24h_axis"
     axis_24h_id = "hour_in_diurnal_cycle"
@@ -312,7 +313,7 @@ def process_diurnal_cycle(alias, field_defs, grid_defs, axis_defs):
     axis_24h = create_xml_element(tag="axis", attrib=axis_24h_dict)
     create_xml_sub_element(xml_element=axis_24h, tag="temporal_splitting")
     axis_defs[axis_24h_id] = axis_24h
-    logger.debug("***>", create_string_from_xml_element(axis_24h))
+    logger.debug("***> %s" % create_string_from_xml_element(axis_24h))
 
     # 4- create a grid composed of ALIAS's original grid extended by that axis; id is <grid_id>_24h_grid
     grid_24h_id = grid_id + "_plus_axis24h"
@@ -326,7 +327,7 @@ def process_diurnal_cycle(alias, field_defs, grid_defs, axis_defs):
     grid_24h_dict["axis_type"] = "T"
     create_xml_sub_element(xml_element=grid_24h, tag="axis", attrib=grid_24h_dict)
     grid_defs[grid_24h_id] = grid_24h
-    logger.debug("***>", create_string_from_xml_element(grid_24h))
+    logger.debug("***> %s" % create_string_from_xml_element(grid_24h))
 
     # 5- create a construct for re-gridding ALIAS_SCALAR on that second grid; id is ALIAS_24hcycle, which is returned
     #        <field id="field_B"  grid_ref="grid_B" field_ref="field_As" />
@@ -337,7 +338,7 @@ def process_diurnal_cycle(alias, field_defs, grid_defs, axis_defs):
     alias_24h_dict["field_ref"] = averaged_field_id
     alias_24h = create_xml_element(tag="field", attrib=alias_24h_dict)
     field_defs[alias_24h_id] = alias_24h
-    logger.debug("***>", create_string_from_xml_element(alias_24h), "\n")
+    logger.debug("***> %s\n" % create_string_from_xml_element(alias_24h))
 
     return alias_24h_id, grid_24h_id
 
@@ -366,60 +367,74 @@ def process_levels_over_orog(sv, alias, pingvars, src_grid_id, field_defs, axis_
     else:
         context_index = get_config_variable("context_index")
         # Check that the ping alias exists
-        alias_in_ping = get_variable_from_lset_without_default("ping_variables_prefix") + sv.label_without_psuffix
+        alias_in_ping = get_variable_from_lset_without_default("ping_variables_prefix") + sv.stdname
         if alias_in_ping not in pingvars:  # e.g. alias_in_ping='CMIP6_hus'
             raise Dr2xmlError("Field id " + alias_in_ping + " expected in pingfile but not found.")
         # Find out if the height over orog field is already defined
-        height_over_orog_field_name = get_variable_from_lset_with_default("height_over_orog_field_name",
-                                                                          "height_over_orog_field")
+        height_over_orog_field_name = "height_over_orog"
         if height_over_orog_field_name not in context_index:
             # Find out what is the name of the orography field and check that it is defined
-            orography_field_name = get_variable_from_lset_with_default("orography_field_name", "orog")
+            orography_field_name = get_variable_from_lset_with_default("orography_field_name", "CMIP6_orog")
             if orography_field_name not in context_index:
                 raise KeyError("%s must have been defined in field_def" % orography_field_name)
+            orography_defs = context_index[orography_field_name]
             # Check if the orography field is 2D or 3D, create a 3D version of it if it is 2D
-            orography_grid_id = [elt for elt in context_index[orography_field_name][:] if isinstance(elt, DR2XMLGrid)]
-            if len(orography_grid_id) == 0:
+            orography_grid_id = orography_defs.get_attrib("grid_ref")
+            if orography_grid_id not in context_index:
                 raise KeyError("Could not find out the grid associated with orography")
-            elif len(orography_grid_id) > 1:
-                logger.warning("Get only the first grid of orography")
-            orography_grid_id = orography_grid_id[0]
             orography_grid_def = get_grid_def(orography_grid_id, grid_defs)
-            orography_grid_scalar_id = [elt for elt in orography_grid_def if isinstance(elt, DR2XMLScalar)]
-            if len(orography_grid_scalar_id) == 0:
-                orography_with_scalar_id = "_".join([orography_grid_id, "scalar"])
-                if orography_with_scalar_id not in context_index:
-                    # Create new grid with scalar
-                    scalar_id = "orog_level"
-                    scalar_dict = OrderedDict()
-                    scalar_dict["id"] = scalar_id
-                    scalar_dict["value"] = "0"
-                    scalar_dict["unit"] = "m"
-                    scalar_dict["positive"] = "up"
-                    scalar_dict["axis_type"] = "Z"
-                    scalar_def = create_xml_element(tag="scalar", attrib=scalar_dict)
-                    scalar_defs[scalar_id] = scalar_def
-                    orography_scalar_grid_def = add_scalar_in_grid(orography_grid_def, orography_with_scalar_id,
-                                                                   scalar_id)
-                    grid_defs[orography_grid_scalar_id] = orography_scalar_grid_def
-                    field_dict = OrderedDict()
-                    field_dict["id"] = orography_with_scalar_id
-                    field_dict["grid_ref"] = orography_scalar_grid_def
-                    field_defs[orography_with_scalar_id] = create_xml_element(tag="field", attrib=field_dict,
-                                                                              text=orography_field_name)
-                orography_field_name = orography_with_scalar_id
-            hlev_grid_id = get_variable_from_lset_with_default("height_over_orog_level_grid_name", "FULL_hlev")
-            klev_grid_id = get_variable_from_lset_with_default("height_grid_name", "FULL_klev")
-            if klev_grid_id not in context_index:
-                raise KeyError("Could not find %s grid in context index." % klev_grid_id)
+            if len(orography_grid_def) == 0:
+                raise Dr2xmlError("A grid should have at least one axis: %s" % orography_grid_def)
+            else:
+                orography_domain = find_rank_xml_subelement(orography_grid_def, tag="domain")
+                if len(orography_domain) != 1:
+                    raise Dr2xmlError("Orography must have exactly one domain defined: %s" % orography_grid_def)
+                else:
+                    orography_domain = orography_grid_def[orography_domain[0]]
+                    if "id" in orography_domain.attrib:
+                        orography_domain = orography_domain.attrib["id"]
+                    else:
+                        orography_domain = orography_domain.get_attrib("domain_ref")
+                    if len(orography_grid_def) == 1:
+                        # 2D case, add a scalar
+                        orography_grid_scalar_id = "_".join([orography_grid_id, "scalar"])
+                        scalar_id = "orog_level"
+                        scalar_def_dict = OrderedDict()
+                        scalar_def_dict["id"] = scalar_id
+                        scalar_def_dict["value"] = "0"
+                        scalar_def_dict["unit"] = "m"
+                        scalar_def_dict["positive"] = "up"
+                        scalar_def_dict["axis_type"] = "Z"
+                        scalar_def = create_xml_element(tag="scalar", attrib=scalar_def_dict)
+                        scalar_defs[scalar_id] = scalar_def
+                        orography_scalar_grid_def = add_scalar_in_grid(orography_grid_def, orography_grid_scalar_id,
+                                                                       scalar_id, scalar_id, True)
+                        grid_defs[orography_grid_scalar_id] = orography_scalar_grid_def
+                        orography_with_scalar_id = "_".join([orography_field_name, "scalar"])
+                        field_dict = OrderedDict()
+                        field_dict["id"] = orography_with_scalar_id
+                        field_dict["grid_ref"] = orography_grid_scalar_id
+                        field_defs[orography_with_scalar_id] = create_xml_element(tag="field", attrib=field_dict,
+                                                                                  text=orography_field_name)
+                        orography_field_name = orography_with_scalar_id
+                    elif len(orography_grid_def) == 2:
+                        # 3D case, nothing to do
+                        pass
+                    else:
+                        raise Dr2xmlError("Orography has more than 3 dimensions...: %s" % orography_grid_def)
+            height_axis_id = "hlev"
+            hlev_grid_id = "_".join([orography_domain, height_axis_id])
+            if src_grid_id not in context_index:
+                raise KeyError("Could not find %s grid in context index." % src_grid_id)
             if hlev_grid_id not in context_index:
                 # Create hlev grid
-                hlev_axis = create_xml_element(tag="axis",
-                                               attrib=dict(
-                                                   axis_ref=[elt for elt in get_grid_def(klev_grid_id, grid_defs)
-                                                             if elt.tag in ["axis", ]][0]))
+                hlev_axis_dict = OrderedDict()
+                hlev_axis_dict["id"] = height_axis_id
+                hlev_axis_dict["axis_ref"] = [elt for elt in get_grid_def(src_grid_id, grid_defs)
+                                              if elt.tag in ["axis", ]][0].attrib["axis_ref"]
+                hlev_axis = create_xml_element(tag="axis", attrib=hlev_axis_dict)
                 create_xml_sub_element(hlev_axis, tag="duplicate_scalar")
-                hlev_grid_id = create_grid_def(grid_defs, hlev_axis, None, klev_grid_id)
+                hlev_grid_id = create_grid_def(grid_defs, hlev_axis, None, src_grid_id)
             orog_with_duplicate_id = "_".join([orography_field_name, "duplicate"])
             orog_with_duplicate_def_dict = OrderedDict()
             orog_with_duplicate_def_dict["id"] = orog_with_duplicate_id
@@ -430,12 +445,11 @@ def process_levels_over_orog(sv, alias, pingvars, src_grid_id, field_defs, axis_
             zg_field_id = get_variable_from_lset_with_default("zg_field_name", "zg")
             height_over_orog_field_def_dict = OrderedDict()
             height_over_orog_field_def_dict["id"] = height_over_orog_field_name
-            height_over_orog_field_def_dict["grid_ref"] = klev_grid_id
+            height_over_orog_field_def_dict["grid_ref"] = src_grid_id
             height_over_orog_field_def = create_xml_element(tag="field", attrib=height_over_orog_field_def_dict,
                                                             text="{} - {}".format(zg_field_id, orog_with_duplicate_id))
             field_defs[height_over_orog_field_name] = height_over_orog_field_def
-        height_over_orog_axis_name = get_variable_from_lset_with_default("height_over_orog_axis_name",
-                                                                         "height_over_orog_axis")
+        height_over_orog_axis_name = "height_over_orog_axis"
         if height_over_orog_axis_name not in context_index:
             height_over_orog_axis_def_dict = OrderedDict()
             height_over_orog_axis_def_dict["id"] = height_over_orog_axis_name
@@ -444,8 +458,11 @@ def process_levels_over_orog(sv, alias, pingvars, src_grid_id, field_defs, axis_
             height_over_orog_axis_def_dict["standard_name"] = "height_over_orog"
             height_over_orog_axis_def_dict["positive"] = "up"
             height_over_orog_axis_def = create_xml_element(tag="axis", attrib=height_over_orog_axis_def_dict)
-            create_xml_sub_element(height_over_orog_axis_def, tag="polynomial",
-                                   attrib=dict(coordinate=height_over_orog_field_name))
+            sub_dict = OrderedDict()
+            sub_dict["type"] = "polynomial"
+            sub_dict["order"] = "2"
+            sub_dict["coordinate"] = height_over_orog_field_name
+            create_xml_sub_element(height_over_orog_axis_def, tag="interpolate_axis", attrib=sub_dict)
             axis_defs[height_over_orog_axis_name] = height_over_orog_axis_def
         # Create the new axis
         if sd.requested:
@@ -456,7 +473,7 @@ def process_levels_over_orog(sv, alias, pingvars, src_grid_id, field_defs, axis_
         glo_list_num.sort(reverse=True)
         n_glo = len(glo_list)
         axis_dict = OrderedDict()
-        axis_id = "_".join([sd.out_name, "hglev%s" % "-".join(sd.values)])
+        axis_id = "_".join([sd.out_name, "hglev%s" % "-".join(sd.value)])
         axis_dict["id"] = axis_id
         axis_dict["axis_ref"] = height_over_orog_axis_name
         if n_glo > 1:

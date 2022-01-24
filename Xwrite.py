@@ -35,7 +35,7 @@ from settings_interface import get_variable_from_lset_with_default, get_variable
 from dr_interface import get_DR_version
 
 from xml_interface import create_xml_element, create_xml_sub_element, create_string_from_xml_element, \
-    remove_subelement_in_xml_element, add_xml_comment_to_element, create_pretty_xml_doc
+    remove_subelement_in_xml_element, add_xml_comment_to_element, create_pretty_xml_doc, find_rank_xml_subelement
 
 # Settings tools
 from analyzer import DR_grid_to_grid_atts, analyze_cell_time_method, freq2datefmt, longest_possible_period, \
@@ -278,14 +278,15 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
         else:
             grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description = \
                 get_variable_from_lset_without_default('grids', grid_choice, context)
-    elif grid == 'cfsites':
-        target_hgrid_id = cfsites_domain_id
-        zgrid_id = None
     else:
-        target_hgrid_id = get_variable_from_lset_without_default("ping_variables_prefix") + grid
-        zgrid_id = "TBD : Should create zonal grid for CMIP6 standard grid %s" % grid
-    grid_label, grid_resolution, grid_description = DR_grid_to_grid_atts(grid, is_dev=(grid == "native" and
-                                                                                       sv.type == "dev"))
+        if grid == 'cfsites':
+            target_hgrid_id = cfsites_domain_id
+            zgrid_id = None
+        else:
+            target_hgrid_id = get_variable_from_lset_without_default("ping_variables_prefix") + grid
+            zgrid_id = "TBD : Should create zonal grid for CMIP6 standard grid %s" % grid
+        grid_label, grid_resolution, grid_description = DR_grid_to_grid_atts(grid, is_dev=(grid == "native" and
+                                                                                           sv.type == "dev"))
 
     if table.endswith("Z"):  # e.g. 'AERmonZ','EmonZ', 'EdayZ'
         grid_label += "z"
@@ -795,34 +796,41 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
     context_index = get_config_variable("context_index")
 
     if sv.type in ["dev", ]:
-        alias_ping = alias
-        (source_grid, target_hgrid) = sv.description.split("|")
+        (source_grid, target_grid) = sv.description.split("|")
         sv.description = None
-        if target_hgrid.lower() in ["none", "native"]:
+        if target_grid.lower() in ["none", "native"]:
             target_hgrid_id = ""
-        elif target_hgrid in grid_defs:
-            target_hgrid_id = grid_defs[target_hgrid].attrib["id"]
-        elif target_hgrid in context_index:
-            target_hgrid_id = context_index[target_hgrid].attrib["id"]
         else:
-            raise Dr2xmlError("Target horizontal grid %s is not defined" % target_hgrid)
-        if alias_ping in context_index:
-            grid_id_in_ping = id2gridid(alias_ping, context_index)
-        else:
-            field_dict = OrderedDict()
-            field_dict["id"] = alias_ping
-            field_dict["long_name"] = sv.long_name
-            field_dict["standard_name"] = sv.stdname
-            field_dict["unit"] = sv.units
-            field_dict["grid_ref"] = source_grid
-            field_def = create_xml_element(tag="field", attrib=field_dict)
-            field_defs[alias_ping] = field_def
-            grid_id_in_ping = context_index[source_grid].attrib["id"]
-    elif sv.type in ["perso", ]:
-        alias_ping = sv.label
-        grid_id_in_ping = id2gridid(alias_ping, context_index)
+            if target_grid in grid_defs:
+                target_grid_def = grid_defs[target_grid]
+            elif target_grid in context_index:
+                target_grid_def = context_index[target_grid]
+            else:
+                raise Dr2xmlError("Target horizontal is not defined in grid %s" % target_grid)
+            target_hgrid_id = find_rank_xml_subelement(target_grid_def, tag="domain")[0]
+            target_hgrid_id = target_grid_def[target_hgrid_id]
+            if "id" in target_hgrid_id.attrib:
+                target_hgrid_id = target_hgrid_id.attrib["id"]
+            else:
+                target_hgrid_id = target_hgrid_id.get_attrib("domain_ref")
+
+    if sv.spatial_shp in ["XY-HG", ]:
+        alias_ping = sv.stdname
+    elif sv.type in ["dev", "perso"]:
+        alias_ping = alias
     else:
         alias_ping = ping_alias(sv, pingvars)
+    if sv.type in ["dev", ] and alias_ping not in context_index:
+        field_dict = OrderedDict()
+        field_dict["id"] = alias_ping
+        field_dict["long_name"] = sv.long_name
+        field_dict["standard_name"] = sv.stdname
+        field_dict["unit"] = sv.units
+        field_dict["grid_ref"] = source_grid
+        field_def = create_xml_element(tag="field", attrib=field_dict)
+        field_defs[alias_ping] = field_def
+        grid_id_in_ping = context_index[source_grid].attrib["id"]
+    else:
         grid_id_in_ping = id2gridid(alias_ping, context_index)
     last_grid_id = grid_id_in_ping
     # last_grid_id=None
@@ -848,8 +856,9 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
                                                                      axis_defs, grid_defs, domain_defs, table)
         # If vertical interpolation is done, change the value of those boolean to modify the behaviour of dr2xml
         grid_with_vertical_interpolation = True
-    elif ssh[0:4] == "XY-HG":
+    elif ssh in ["XY-HG", ]:
         # Handle interpolation on a height level over the ground
+        logger.info("Deal with XY-HG spatial shape for %s,%s" % (sv.label, sv.stdname))
         last_field_id, last_grid_id = process_levels_over_orog(sv, alias, pingvars, last_grid_id, field_defs, axis_defs,
                                                                grid_defs, domain_defs, scalar_defs, table)
 
@@ -858,7 +867,7 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
     # Handle the case of singleton dimensions
     # --------------------------------------------------------------------
     #
-    if has_singleton(sv):
+    if has_singleton(sv) and ssh not in ["XY-HG", ]:
         last_field_id, last_grid_id = process_singleton(sv, last_field_id, pingvars, field_defs, grid_defs, scalar_defs,
                                                         table, grid_id_in_ping)
     #

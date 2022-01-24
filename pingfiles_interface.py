@@ -49,7 +49,7 @@ def read_pingfiles_variables(pingfiles, dummies):
             ping_refs = read_xml_elmt_or_attrib(pingfile, tag='field', attrib='field_ref')
             # ping_refs=read_xml_elmt_or_attrib(pingfile, tag='field')
             if ping_refs is None:
-                logger.error("Error: issue accessing pingfile " + pingfile)
+                logger.error("Error: issue accessing pingfile %s" % pingfile)
                 return
             all_ping_refs.update(ping_refs)
             if dummies == "include":
@@ -60,7 +60,7 @@ def read_pingfiles_variables(pingfiles, dummies):
                     if len(pingvars) != len(ping_refs):
                         for v in ping_refs:
                             if v not in pingvars:
-                                logger.info(v,)
+                                logger.info(v)
                         logger.info("")
                         raise Dr2xmlError("They are still dummies in %s , while option is 'forbid' :" % pingfile)
                     else:
@@ -68,7 +68,7 @@ def read_pingfiles_variables(pingfiles, dummies):
                 elif dummies == "skip":
                     pass
                 else:
-                    logger.error("Forbidden option for dummies : " + dummies)
+                    logger.error("Forbidden option for dummies : %s" % dummies)
                     sys.exit(1)
             all_pingvars.extend(pingvars)
         pingvars = all_pingvars
@@ -89,19 +89,19 @@ def read_xml_elmt_or_attrib(filename, tag='field', attrib=None):
     rep = OrderedDict()
     logger.info("processing file %s :" % filename,)
     if os.path.exists(filename):
-        logger.info("OK", filename)
+        logger.info("OK %s" % filename)
         root = get_root_of_xml_file(filename)
         defs = get_xml_childs(root, tag)
         if defs:
             for field in defs:
-                logger.info(".",)
+                logger.debug(".")
                 key = field.attrib['id']
                 if attrib is None:
                     value = field
                 else:
                     value = field.attrib.get(attrib, None)
                 rep[key] = value
-            logger.info("")
+            logger.debug("")
             return rep
     else:
         logger.info("No file ")
@@ -116,20 +116,13 @@ def get_xml_childs(elt, tag='field', groups=['context', 'field_group',
         which have tag TAG, by digging in sub-elements
         named as in GROUPS
         """
-    if getattr(elt, "tag", None):
-        if elt.tag in groups:
-            rep = []
-            for child in elt:
-                rep.extend(get_xml_childs(child, tag))
-            return rep
-        elif elt.tag == tag:
-            return [elt]
-        else:
-            # print 'Syntax error : tag %s not allowed'%elt.tag
-            # Case of an unkown tag : don't dig in
-            return []
-    else:
-        return []
+    rep = list()
+    if elt.tag in groups:
+        for child in elt:
+            rep.extend(get_xml_childs(child, tag))
+    elif elt.tag == tag:
+        rep.append(elt)
+    return rep
 
 
 def ping_file_for_realms_list(settings, context, lrealms, svars, path_special, dummy="field_atm",
@@ -298,8 +291,7 @@ def read_special_fields_defs(realms, path_special, printout=False):
             if subrealm in subrealms_seen:
                 continue
             subrealms_seen.append(subrealm)
-            d = read_xml_elmt_or_attrib(DX_defs_filename("field", subrealm, path_special), tag='field',
-                                        printout=printout)
+            d = read_xml_elmt_or_attrib(DX_defs_filename("field", subrealm, path_special), tag='field')
             if d:
                 special.update(d)
     rep = OrderedDict()
@@ -329,16 +321,17 @@ def highest_rank(svar):
                     shape = sp.label
                 except:
                     if print_DR_errors:
-                        logger.error("DR Error: issue with spid for " + st.label + " " + v.label + str(cvar.mipTable))
+                        logger.error("DR Error: issue with spid for %s %s %s" % (st.label, v.label, str(cvar.mipTable)))
                     # One known case in DR 1.0.2: hus in 6hPlev
                     shape = "XY"
                 if "odims" in st.__dict__:
                     try:
                         map(altdims.add, st.odims.split("|"))
                     except:
-                        logger.error("Issue with odims for " + v.label + " st=" + st.label)
+                        logger.error("Issue with odims for %s st=%s" % (v.label, st.label))
             except:
-                logger.error("DR Error: issue with stid for :" + v.label + " in table section :" + str(cvar.mipTableSection))
+                logger.error("DR Error: issue with stid for : %s in table section : %s" %
+                             (v.label, str(cvar.mipTableSection)))
                 shape = "?st"
         else:
             # Pour recuperer le spatial_shp pour le cas de variables qui n'ont

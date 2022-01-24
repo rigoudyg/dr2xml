@@ -188,3 +188,12 @@ def remove_subelement_in_xml_element(xml_element, tag=None, attrib=OrderedDict()
     for child_to_remove in children_to_remove:
         xml_element.remove(child_to_remove)
     return xml_element
+
+
+def find_rank_xml_subelement(xml_element, tag, attrib=None, values=list()):
+    if not is_xml_element_to_parse(xml_element):
+        raise ValueError("Could not deal with type %s" % type(xml_element))
+    else:
+        return [i for (i, elt) in enumerate(xml_element) if elt.tag in [tag, ] and
+                (attrib is None or (attrib is not None and attrib in elt.attrib and
+                                    (len(values) == 0 or (len(values) > 0 and elt.attrib[attrib] in values))))]

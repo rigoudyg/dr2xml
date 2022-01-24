@@ -137,6 +137,11 @@ def read_home_vars_list(hmv_file, expid, mips, path_extra_tables=None):
             for (key, value) in zip(home_attrs, line_to_treat):
                 setattr(home_var, key, value)
 
+        if home_var.spatial_shp in ["XY-HG", ]:
+            if "!" in home_var.label:
+                (label, label_ref) = home_var.label.split("!")
+                home_var.label = label
+                home_var.stdname = label_ref
         if hmv_type not in ['extra', ]:
             home_var.label_with_area = home_var.label
             if hmv_type in ['perso', ]:
@@ -454,7 +459,7 @@ def process_home_vars(mip_vars_list, mips, expid=False):
                 logger.warning("Error: %s HOMEVar announced as cmor but no corresponding CMORVar found "
                                "=> Not taken into account." % hv_info)
         elif hv.type in ['perso', ]:
-            # Check if HOME variable anounced as 'perso' is in fact 'cmor'
+            # Check if HOME variable announced as 'perso' is in fact 'cmor'
             is_cmor = get_corresp_cmor_var(hv)
             if hv.mipVarLabel is None:
                 hv.mipVarLabel = hv.label
@@ -465,17 +470,17 @@ def process_home_vars(mip_vars_list, mips, expid=False):
                 # has_cmor_varname=any(get_cmor_var_id_by_label(hv.label))
                 if has_cmor_varname:
                     raise VarsError("Error: %s "
-                                    "HOMEVar is anounced  as perso, is not a CMORVar, but has a cmor name. "
+                                    "HOMEVar is announced  as perso, is not a CMORVar, but has a cmor name. "
                                     "=> Not taken into account." % hv_info)
                 else:
                     logger.debug("Info: %s HOMEVar is purely personnal. => Taken into account." % hv_info)
                     mip_vars_list.append(hv)
             else:
                 raise VarsError("Error: %s "
-                                "HOMEVar is anounced as perso, but in reality is cmor => Not taken into account." %
+                                "HOMEVar is announced as perso, but in reality is cmor => Not taken into account." %
                                 hv_info)
         elif hv.type in ['dev', ]:
-            # Check if HOME variable anounced as 'dev' is in fact 'cmor'
+            # Check if HOME variable announced as 'dev' is in fact 'cmor'
             is_cmor = get_corresp_cmor_var(hv)
             if not is_cmor:
                 # Check if HOME variable differs from CMOR one only by shapes
@@ -484,7 +489,7 @@ def process_home_vars(mip_vars_list, mips, expid=False):
                 # has_cmor_varname=any(get_cmor_var_id_by_label(hv.label))
                 if has_cmor_varname:
                     raise VarsError("Warning: %s "
-                                    "HOMEVar is anounced  as dev, is not a CMORVar, but has a cmor name."
+                                    "HOMEVar is announced  as dev, is not a CMORVar, but has a cmor name."
                                     " => Not taken into account." % hv_info)
                 else:
                     logger.debug("Info: %s HOMEVar is purely dev. => Taken into account." % hv_info)

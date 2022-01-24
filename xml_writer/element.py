@@ -12,8 +12,6 @@ from collections import OrderedDict
 from copy import deepcopy, copy
 
 from xml_writer.beacon import Beacon
-from xml_writer.header import Header
-from xml_writer.comment import Comment
 from xml_writer.utils import encode_if_needed, decode_if_needed, _generic_dict_regexp, \
     _build_dict_attrib, print_if_needed
 
@@ -64,7 +62,7 @@ class Element(Beacon):
 
         :return:
         """
-        element = Element(tag=self.tag, text=self.text, attrib=deepcopy(self.attrib))
+        element = type(self).__call__(tag=self.tag, text=self.text, attrib=deepcopy(self.attrib))
         element.update_level(self.level)
         for child in self.children:
             element.children.append(copy(child))
@@ -126,7 +124,13 @@ class Element(Beacon):
         :param value:
         :return:
         """
-        self.children[key] = value
+        if value is not None:
+            if is_xml_element(value):
+                value.update_level(self.level + 1)
+                value.parent = self
+                self.children[key] = value
+            else:
+                raise TypeError("Could not set an element of type %s as an XML element child." % type(value))
 
     def __delitem__(self, key):
         """
@@ -146,6 +150,7 @@ class Element(Beacon):
             if not is_xml_element(element):
                 raise TypeError("Could not append an element of type %s to an XML element." % type(element))
             element.update_level(self.level + 1)
+            element.parent = self
             self.children.append(element)
 
     def extend(self, elements):
@@ -160,6 +165,7 @@ class Element(Beacon):
                     raise TypeError("Could not extend an XML element with elements of type %s." % type(element))
                 else:
                     elements[rank].update_level(self.level + 1)
+                    elements[rank].parent = self
             self.children.extend(elements)
 
     def insert(self, index, element):
@@ -173,6 +179,7 @@ class Element(Beacon):
             if not is_xml_element(element):
                 raise TypeError("Could not insert an element of type %s to an XML element." % type(element))
             element.update_level(self.level + 1)
+            element.parent = self
             self.children.insert(index, element)
 
     def replace(self, index, element):
@@ -187,6 +194,7 @@ class Element(Beacon):
                 raise TypeError("Could not replace and XML element by an element of type %s to an XML element." %
                                 type(element))
             element.update_level(self.level + 1)
+            element.parent = self
             self.children[index] = element
 
     def remove(self, element):
@@ -228,6 +236,14 @@ class Element(Beacon):
         :return:
         """
         return self.dump_dict(deepcopy(self.attrib), sort=sort)
+
+    def get_attrib(self, key, parent=True):
+        if key in self.attrib:
+            return self.attrib[key]
+        elif parent and self.parent is not None:
+            return self.parent.get_attrib(key, parent=parent)
+        else:
+            raise KeyError("Could not find a value for attribute %s" % key)
 
 
 #: XML single part regexp

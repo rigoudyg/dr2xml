@@ -18,7 +18,9 @@ class Beacon(object):
         """
 
         """
+        self.tag = None
         self.level = 0
+        self.parent = None
 
     def __str__(self):
         """
