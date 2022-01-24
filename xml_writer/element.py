@@ -7,13 +7,11 @@ Elements
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
-import re
 from collections import OrderedDict
 from copy import deepcopy, copy
 
 from xml_writer.beacon import Beacon
-from xml_writer.utils import encode_if_needed, decode_if_needed, _generic_dict_regexp, \
-    _build_dict_attrib, print_if_needed
+from xml_writer.utils import encode_if_needed, decode_if_needed
 
 
 class Element(Beacon):
@@ -237,89 +235,17 @@ class Element(Beacon):
         """
         return self.dump_dict(deepcopy(self.attrib), sort=sort)
 
-    def get_attrib(self, key, parent=True):
+    def get_attrib(self, key, parent=True, use_default=False, default=None):
         if key in self.attrib:
             return self.attrib[key]
-        elif parent and self.parent is not None:
-            return self.parent.get_attrib(key, parent=parent)
+        elif parent is True and self.parent is not None:
+            return self.parent.get_attrib(key, parent=parent, use_default=use_default, default=default)
+        elif parent in ["single", ] and self.parent is not None:
+            return self.parent.get_attrib(key, parent=False, use_default=use_default, default=default)
+        elif use_default:
+            return default
         else:
             raise KeyError("Could not find a value for attribute %s" % key)
-
-
-#: XML single part regexp
-_xml_single_part_element_regexp = re.compile(r'^\s?(?P<all><\s?(?P<tag>\w+)\s?{}\s?/>)\s?'.format(
-    _generic_dict_regexp))
-
-
-def _find_one_part_element(xml_string, verbose=False):
-    """
-
-    :param xml_string:
-    :param verbose:
-    :return:
-    """
-    print_if_needed("<<<find_one_part_element BEFORE>>>", len(xml_string), xml_string, verbose=verbose)
-    xml_string = xml_string.strip()
-    match_single_part = _xml_single_part_element_regexp.match(xml_string)
-    if match_single_part:
-        match_single_part = match_single_part.groupdict()
-        tag = match_single_part["tag"].strip()
-        attrib = _build_dict_attrib(match_single_part["attrib"])
-        element = Element(tag=tag, attrib=attrib)
-        xml_string = xml_string.replace(match_single_part["all"], "", 1)
-        print_if_needed("<<<find_one_part_element AFTER>>>", len(xml_string), xml_string, verbose=verbose)
-        return xml_string, element
-    else:
-        return xml_string, None
-
-
-#: XML two parts regexp
-_xml_string_first_element_replace = \
-    r'(?P<all_begin>\s?(?P<begin><\s?(?P<tag>{}){}\s?>)\s?)'.format('{}', _generic_dict_regexp)
-_xml_string_init_element_replace = r'^'+_xml_string_first_element_replace
-_xml_init_two_parts_element_regexp = re.compile(_xml_string_init_element_replace.format(r"\w+\s?"))
-_xml_string_end_element_replace = r'(?P<all_end>\s?(?P<end></\s?{}\s?>)\s?)'
-
-
-def _find_two_parts_element_init(xml_string, verbose=False):
-    """
-
-    :param xml_string:
-    :param verbose:
-    :return:
-    """
-    xml_string = xml_string.strip()
-    match = _xml_init_two_parts_element_regexp.match(xml_string)
-    if not match:
-        return xml_string, None
-    else:
-        match_group_dict = match.groupdict()
-        begin = match_group_dict["begin"]
-        tag = match_group_dict["tag"]
-        attrib = match_group_dict["attrib"]
-        attrib = _build_dict_attrib(attrib)
-        xml_string = xml_string.replace(begin, "", 1).strip()
-        elt = Element(tag=tag, attrib=attrib)
-        return xml_string, elt
-
-
-def _find_two_parts_element_end(xml_string, tag, verbose=False):
-    """
-
-    :param xml_string:
-    :param tag:
-    :param verbose:
-    :return:
-    """
-    xml_string = xml_string.strip()
-    match = re.compile(r"^" + _xml_string_end_element_replace.format(tag)).match(xml_string)
-    if not match:
-        return xml_string, None
-    else:
-        match_group_dict = match.groupdict()
-        end = match_group_dict["end"]
-        xml_string = xml_string.replace(end, "", 1).strip()
-        return xml_string, True
 
 
 def is_xml_element(element):

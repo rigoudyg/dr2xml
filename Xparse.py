@@ -12,13 +12,14 @@ Main useful functions :
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
-from collections import OrderedDict
+import pprint
+from collections import OrderedDict, defaultdict
 
 import os
 import six
 
 # Interface to xml tools
-from xml_interface import get_root_of_xml_file, is_xml_element_to_parse
+from xml_interface import get_root_of_xml_file, is_xml_element_to_parse, find_rank_xml_subelement, create_pretty_xml_doc
 
 # Logger
 from logger import get_logger
@@ -39,36 +40,26 @@ attributes['axis'] = ['axis_ref']
 # attributes['grid_definition'] = []  # attributes['calendar'] = []
 
 
-def read_src(elt, path_parse, level=0, dont_read=list()):
+def remove_non_xml_element(elt):
+    list_elt_to_remove = [e for e in elt if not is_xml_element_to_parse(e)]
+    for e in list_elt_to_remove:
+        elt.remove(e)
+    for i in range(len(elt)):
+        elt[i] = remove_non_xml_element(elt[i])
+    return elt
+
+
+def read_src(input_file, path_parse, dont_read=list()):
     """
     Recursively reads the subfiles indicated by tag 'src' in childs of ELT
     """
-    logger = get_logger()
-    nb_remove_child = 0
-    for i in range(len(elt)):
-        child = elt[i - nb_remove_child]
-        if not is_xml_element_to_parse(child):
-            elt.remove(child)
-            nb_remove_child += 1
-        elif 'src' in child.attrib:
-            src = child.attrib['src']
-            if not src.startswith(os.path.sep) and path_parse not in ["./", ]:
-                filen = os.path.sep.join([path_parse, src])
-            else:
-                filen = src
-            if not any([os.path.basename(filen).startswith(prefix) for prefix in dont_read]):
-                logger.debug(level * "\t" + "Reading %s" % filen)
-                et = get_root_of_xml_file(filen)
-                logger.debug(level * "\t" + "Reading %s, %s=%s" % (filen, et.tag, et.attrib.get("id", "no_id")))
-                for el in [el for el in et if el.tag is not None]:
-                    # Skip comments and header
-                    logger.debug((level + 1) * "\t" + "Storing %s in %s id=%s" % (el.tag, child.tag,
-                                                                                  child.attrib.get('id', 'no_id')))
-                    child.append(el)
-            elt.replace(i - nb_remove_child, read_src(child, path_parse, level + 1, dont_read))
-        else:
-            elt.replace(i - nb_remove_child, read_src(child, path_parse, level + 1, dont_read))
+    elt = get_root_of_xml_file(input_file, follow_src=True, path_parse=path_parse, dont_read=dont_read)
+    elt = remove_non_xml_element(elt)
     return elt
+
+
+tags_to_merge = ['context', 'file_definition', 'field_definition', 'axis_definition', 'grid_definition', 'calendar',
+                 'field', 'field_group', 'file_group']
 
 
 def merge_sons(elt, level=0):
@@ -79,9 +70,6 @@ def merge_sons(elt, level=0):
     logger = get_logger()
     # Using a dict with first instance of an elt for each tag (or tag+id)
     bytag = OrderedDict()
-    tags_to_merge = ['context', 'file_definition', 'field_definition',
-                     'axis_definition', 'grid_definition', 'calendar', 'field',
-                     'field_group', 'file_group']
     nb_child_remove = 0
     for i in range(len(elt)):
         child = elt[i - nb_child_remove]
@@ -124,28 +112,19 @@ def merge_sons(elt, level=0):
     return elt
 
 
-def solve_downward(attrib, elt, value=None, level=0):
+def solve_downward(attribs, elt):
     """ propagate attribute ATTRIB 's VALUE downward of ELT,
     setting recursively it for all childs to the parent value or
     to the value encountered in an intermediate node
     """
-    logger = get_logger()
     for i in range(len(elt)):
         child = elt[i]
-        value_down = value
-        logger.debug(level * "\t" + " solving on " + repr(child),)
-        if attrib in attributes.get(child.tag, list()):
-            if attrib in child.attrib:
-                value_down = child.attrib[attrib]
-                logger.debug(" get :" + value_down)
-            elif attrib not in child.attrib and value is not None:
-                child.attrib[attrib] = value
-                logger.debug(" set :" + value)
-            else:
-                logger.debug(" pass")
-        else:
-            logger.debug("")
-        elt.replace(i, solve_downward(attrib, child, value_down, level + 1))
+        for attrib in attribs:
+            if attrib in attributes.get(child.tag, list()):
+                value = child.get_attrib(key=attrib, parent="single", use_default=True, default=None)
+                if value is not None:
+                    elt[i].attrib[attrib] = value
+        elt[i] = solve_downward(attribs, child)
     return elt
 
 
@@ -165,7 +144,7 @@ def make_index(elt, index=None, level=0):
             logger.debug(" (merging)")
             # Update indexed object with current attributes
             index[the_id].attrib.update(child.attrib)
-            # Add child chidlren to indexed objects
+            # Add child children to indexed objects
             index[the_id].extend(child[:])
         else:
             logger.debug(" init index")
@@ -198,34 +177,17 @@ def attrib_by_ref(elt, attrib, index, level):
                 raise XparseError("Error : reference '%s' is invalid" % refid)
 
 
-def solve_by_ref(attrib, index, elt, level=0):
-    """
-    Solve remainig attributes by ref, otherwise by default value
-    """
-    logger = get_logger()
+def solve_by_ref(attribs, index, elt, level=0):
     got_one = 0
-    for child in [child for child in elt if not isinstance(child, six.string_types) and
-                                            child.tag not in ["variable", None]]:
-        if 'id' in child.attrib:
-            name = child.attrib['id']
-        else:
-            name = child.tag
-        logger.debug(level * "\t" + attrib + " by_ref on  " + name,)
-        #
-        if not(child.tag in attributes and attrib in attributes[child.tag]):
-            logger.debug(" : N/A")
-        else:
-            if attrib in child.attrib:
-                logger.debug(", already set : %s" % child.attrib[attrib])
-            else:
-                byref = attrib_by_ref(child, attrib, index, level)
-                if byref:
-                    # if printout : print ", setting byref to "+byref,
-                    child.attrib[attrib] = byref
+    for i in find_rank_xml_subelement(elt, not_tag=[None, "variable"]):
+        child = elt[i]
+        for attrib in attribs:
+            if child.tag in attributes and attrib in attributes[child.tag] and attrib not in child.attrib:
+                by_ref = attrib_by_ref(elt[i], attrib, index, level)
+                if by_ref:
+                    elt[i].attrib[attrib] = by_ref
                     got_one += 1
-                else:
-                    logger.debug("")
-            got_one += solve_by_ref(attrib, index, child, level + 1)
+        got_one += solve_by_ref(attribs, index, elt[i], level + 1)
     return got_one
 
 
@@ -236,9 +198,11 @@ def select_context(rootel, context_id):
     :param context_id: id of the context to find
     :return: context corresponding to context_id in rootel
     """
-    for context in rootel:
-        if 'id' in context.attrib and context.attrib['id'] == context_id:
-            return context
+    rank = find_rank_xml_subelement(rootel, tag="context", id=context_id)
+    if len(rank) > 0:
+        return rootel[rank[0]]
+    else:
+        return None
 
 
 def init_context(context_id, path_parse="./"):
@@ -252,24 +216,19 @@ def init_context(context_id, path_parse="./"):
     logger = get_logger()
     xmldef = path_parse + "iodef.xml"
     logger.debug("Parsing %s ..." % xmldef,)
-    rootel = get_root_of_xml_file(xmldef)
+    rootel = read_src(xmldef, path_parse, dont_read=["dr2xml_", ])
     logger.debug("sourcing files  ...",)
-    rootel = read_src(rootel, path_parse, dont_read=["dr2xml_"])
     rootel = merge_sons(rootel)
     rootel = select_context(rootel, context_id)
     if rootel is not None:
         refs = ["grid_ref", "domain_ref", "axis_ref", "field_ref"]
-        for ref in refs:
-            rootel = solve_downward(ref, rootel, None)
-        # ET.dump(rootel)
+        rootel = solve_downward(refs, rootel)
         index = make_index(rootel, None)
-        for ref in refs:
-            while True:
-                n = solve_by_ref(ref, index, rootel)
-                logger.debug("%d refs solved" % n)
-                if n == 0:
-                    break
-        # ET.dump(rootel)
+        while True:
+            n = solve_by_ref(refs, index, rootel)
+            logger.debug("%d refs solved" % n)
+            if n == 0:
+                break
         return index
     else:
         logger.warning("Xparse::init_context : context %s not found in %s" % (context_id, xmldef))

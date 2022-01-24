@@ -229,7 +229,7 @@ def change_domain_in_grid(domain_id, grid_defs, ping_alias=None, src_grid_id=Non
     else:
         src_grid = get_grid_def_with_lset(src_grid_id, grid_defs)
         # Find the domain rank in the grid definition
-        rank = find_rank_xml_subelement(src_grid, tag="domain", attrib="domain_ref")
+        rank = find_rank_xml_subelement(src_grid, tag="domain", domain_ref=None)
         if len(rank) > 0:
             rank = rank[0]
         else:
@@ -524,7 +524,7 @@ def add_scalar_in_grid(gridin_def, gridout_id, scalar_id, scalar_name, remove_ax
 
     """
     rep = gridin_def.copy()
-    rank_scalar = find_rank_xml_subelement(rep, tag="scalar", attrib="scalar_ref", values=[scalar_id, ])
+    rank_scalar = find_rank_xml_subelement(rep, tag="scalar", scalar_ref=[scalar_id, ])
     if len(rank_scalar) > 0:
         return rep
     else:
@@ -541,7 +541,8 @@ def add_scalar_in_grid(gridin_def, gridout_id, scalar_id, scalar_name, remove_ax
             scalar_dict = OrderedDict()
             scalar_dict["scalar_ref"] = scalar_id
             scalar_dict["name"] = scalar_name
-            create_xml_sub_element(xml_element=rep, tag="scalar", attrib=scalar_dict)        else:
+            create_xml_sub_element(xml_element=rep, tag="scalar", attrib=scalar_dict)
+        else:
             raise Dr2xmlError("No way to add scalar '%s' in grid '%s'" % (scalar_id, gridin_def))
         # Remove any axis if asked for
         if remove_axis:

@@ -13,13 +13,13 @@ from copy import copy
 
 from xml_writer.pre_treatment import _pre_xml_string_format, replace_char_at_pos_by_string, \
     iterate_on_characters_to_check
-from xml_writer.element import _find_one_part_element, is_xml_element
+from xml_writer.element import is_xml_element
 from xml_writer.comment import _find_xml_comment
 from xml_writer.header import _find_xml_header
 from xml_writer.beacon import Beacon
 from xml_writer.utils import _build_dict_attrib, _find_text, iterate_on_string
 from xml_writer.parser import generate_xml_tree_from_list, find_next_element, generate_list_from_xml_string, \
-    parse_xml_string_rewrite
+	parse_xml_string_rewrite, _find_one_part_element
 from xml_writer import Comment, Header, Element
 
 

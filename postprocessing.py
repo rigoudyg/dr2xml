@@ -491,7 +491,7 @@ def process_levels_over_orog(sv, alias, pingvars, src_grid_id, field_defs, axis_
         axis_defs[axis_id] = axis
         # Create the new grid
         grid_id = create_grid_def(grid_defs, axis_defs[axis_id], sd.out_name, src_grid_id)
-
+        # Build the field
         field_dict = OrderedDict()
         field_dict["id"] = field_id
         field_dict["field_ref"] = alias_in_ping

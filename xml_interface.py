@@ -190,10 +190,15 @@ def remove_subelement_in_xml_element(xml_element, tag=None, attrib=OrderedDict()
     return xml_element
 
 
-def find_rank_xml_subelement(xml_element, tag, attrib=None, values=list()):
+def find_rank_xml_subelement(xml_element, tag=list(), not_tag=list(), **keyval):
+    if not isinstance(tag, (list, tuple)):
+        tag = [tag, ]
+    if not isinstance(not_tag, (list, tuple)):
+        not_tag = [not_tag, ]
     if not is_xml_element_to_parse(xml_element):
         raise ValueError("Could not deal with type %s" % type(xml_element))
     else:
-        return [i for (i, elt) in enumerate(xml_element) if elt.tag in [tag, ] and
-                (attrib is None or (attrib is not None and attrib in elt.attrib and
-                                    (len(values) == 0 or (len(values) > 0 and elt.attrib[attrib] in values))))]
+        return [i for (i, elt) in enumerate(xml_element) if (len(tag) == 0 or elt.tag in tag) and
+                (len(not_tag) == 0 or elt.tag not in not_tag) and
+                (all([key in elt.attrib and (keyval[key] is None or elt.attrib[key] in keyval[key])
+                      for key in keyval]))]
