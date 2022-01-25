@@ -137,6 +137,7 @@ def create_axis_def(sdim, axis_defs, field_defs, pingvars):
 
     axis_dict = OrderedDict()
     axis_dict["id"] = sdim.label
+    axis_dict["positive"] = sdim.positive
     if not sdim.is_zoom_of:  # pure interpolation
         # Axis is not a zoom of another, write axis_def normally (with value, interpolate_axis,etc.)
         if n_glo > 1:
@@ -150,7 +151,6 @@ def create_axis_def(sdim, axis_defs, field_defs, pingvars):
             # Singleton case (degenerated vertical dimension)
             axis_dict["n_glo"] = str(n_glo)
             axis_dict["value"] = '(0,0)[ {} ]'.format(sdim.value)
-        axis_dict["positive"] = sdim.positive
         axis_dict['name'] = sdim.out_name
         axis_dict["standard_name"] = sdim.stdname
         axis_dict["long_name"] = sdim.long_name
@@ -174,8 +174,8 @@ def create_axis_def(sdim, axis_defs, field_defs, pingvars):
         coorddef_op_dict = OrderedDict()
         coorddef_op_dict["id"] = coordname_with_op
         coorddef_op_dict["field_ref"] = coordname
-        coorddef_op_dict["operation"] = operation
         coorddef_op_dict["detect_missing_value"] = "true"
+        coorddef_op_dict["operation"] = operation
         coorddef_op = create_xml_element(tag="field", attrib=coorddef_op_dict)
         field_defs[coordname_with_op] = coorddef_op
         #

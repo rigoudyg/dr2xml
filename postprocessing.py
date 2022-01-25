@@ -111,8 +111,8 @@ def process_vertical_interpolation(sv, alias, pingvars, src_grid_id, field_defs,
     sampled_field_dict = OrderedDict()
     sampled_field_dict["id"] = alias_sample
     sampled_field_dict["field_ref"] = alias_for_sampling
-    sampled_field_dict["freq_op"] = vert_freq
     sampled_field_dict["detect_missing_value"] = "true"
+    sampled_field_dict["freq_op"] = vert_freq
     field_defs[alias_sample] = create_xml_element(tag="field", text="@{}".format(alias_for_sampling),
                                                   attrib=sampled_field_dict)
 
@@ -212,7 +212,7 @@ def process_zonal_mean(field_id, grid_id, target_hgrid_id, zgrid_id, field_defs,
         # Must create and a use a grid similar to the last one defined
         # for that variable, except for a change in the hgrid/domain (=> complete)
         grid_id3 = change_domain_in_grid(target_hgrid_id, grid_defs, src_grid_id=grid_id)
-        logger.debug("+++ grid3 %s\n%s" % (create_string_from_xml_element(grid_id3, grid_defs[grid_id3])))
+        logger.debug("+++ grid3 %s\n%s" % (grid_id3, create_string_from_xml_element(grid_defs[grid_id3])))
         field_3_dict = OrderedDict()
         field_3_dict["id"] = field3_id
         field_3_dict["field_ref"] = field2_id
@@ -402,9 +402,9 @@ def process_levels_over_orog(sv, alias, pingvars, src_grid_id, field_defs, axis_
                         scalar_def_dict = OrderedDict()
                         scalar_def_dict["id"] = scalar_id
                         scalar_def_dict["value"] = "0"
-                        scalar_def_dict["unit"] = "m"
-                        scalar_def_dict["positive"] = "up"
                         scalar_def_dict["axis_type"] = "Z"
+                        scalar_def_dict["positive"] = "up"
+                        scalar_def_dict["unit"] = "m"
                         scalar_def = create_xml_element(tag="scalar", attrib=scalar_def_dict)
                         scalar_defs[scalar_id] = scalar_def
                         orography_scalar_grid_def = add_scalar_in_grid(orography_grid_def, orography_grid_scalar_id,
@@ -438,8 +438,8 @@ def process_levels_over_orog(sv, alias, pingvars, src_grid_id, field_defs, axis_
             orog_with_duplicate_id = "_".join([orography_field_name, "duplicate"])
             orog_with_duplicate_def_dict = OrderedDict()
             orog_with_duplicate_def_dict["id"] = orog_with_duplicate_id
-            orog_with_duplicate_def_dict["grid_ref"] = hlev_grid_id
             orog_with_duplicate_def_dict["field_ref"] = orography_field_name
+            orog_with_duplicate_def_dict["grid_ref"] = hlev_grid_id
             orog_with_duplicate_def = create_xml_element(tag="field", attrib=orog_with_duplicate_def_dict)
             field_defs[orog_with_duplicate_id] = orog_with_duplicate_def
             zg_field_id = get_variable_from_lset_with_default("zg_field_name", "zg")
@@ -453,10 +453,10 @@ def process_levels_over_orog(sv, alias, pingvars, src_grid_id, field_defs, axis_
         if height_over_orog_axis_name not in context_index:
             height_over_orog_axis_def_dict = OrderedDict()
             height_over_orog_axis_def_dict["id"] = height_over_orog_axis_name
-            height_over_orog_axis_def_dict["unit"] = "m"
+            height_over_orog_axis_def_dict["positive"] = "up"
             height_over_orog_axis_def_dict["name"] = "z"
             height_over_orog_axis_def_dict["standard_name"] = "height_over_orog"
-            height_over_orog_axis_def_dict["positive"] = "up"
+            height_over_orog_axis_def_dict["unit"] = "m"
             height_over_orog_axis_def = create_xml_element(tag="axis", attrib=height_over_orog_axis_def_dict)
             sub_dict = OrderedDict()
             sub_dict["type"] = "polynomial"

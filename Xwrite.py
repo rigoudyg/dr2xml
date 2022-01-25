@@ -815,7 +815,7 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
                 target_hgrid_id = target_hgrid_id.get_attrib("domain_ref")
 
     if sv.type in ["dev", "perso"]:
-        alias_ping = alias
+        alias_ping = sv.ref_var
     else:
         alias_ping = ping_alias(sv, pingvars)
     if sv.type in ["dev", ] and alias_ping not in context_index:

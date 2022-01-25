@@ -95,22 +95,23 @@ def is_xml_element_to_parse(element):
     return isinstance(element, xml_writer.element.Element)
 
 
-def parse_xml_file(xml_file):
+def parse_xml_file(xml_file, follow_src=False, path_parse="./", dont_read=list()):
     """
 
     :param xml_file:
     :return:
     """
-    return xml_writer.xml_file_parser(xml_file)
+    return xml_writer.xml_file_parser(xml_file, follow_src=follow_src, path_parse=path_parse, dont_read=dont_read)
 
 
-def get_root_of_xml_file(xml_file):
+def get_root_of_xml_file(xml_file, follow_src=False, path_parse="./", dont_read=list()):
     """
 
     :param xml_file:
     :return:
     """
-    text, comments, header, root_element = parse_xml_file(xml_file)
+    text, comments, header, root_element = parse_xml_file(xml_file, follow_src=follow_src, path_parse=path_parse,
+                                                          dont_read=dont_read)
     return root_element
 
 
