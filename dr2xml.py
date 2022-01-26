@@ -72,6 +72,9 @@ from config import get_config_variable, set_config_variable, initialize_config_v
 from settings_interface import initialize_dict, get_variable_from_lset_with_default, \
     get_variable_from_lset_without_default
 
+# Interface to xml
+from xml_interface import initialize_project_settings
+
 # Interface to Data Request
 from dr_interface import get_DR_version, get_uid, get_request_by_id_by_sect
 
@@ -596,6 +599,7 @@ def generate_file_defs(lset, sset, year, enddate, context, cvs_path, pingfiles=N
     # Initialize lset and sset variables for all functions
     initialize_config_variables()
     initialize_dict(lset, sset)
+    initialize_project_settings()
     generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingfiles=pingfiles,
                              dummies=dummies, dirname=dirname,
                              prefix=prefix, attributes=attributes, select=select)

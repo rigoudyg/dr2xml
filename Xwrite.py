@@ -34,8 +34,7 @@ from settings_interface import get_variable_from_lset_with_default, get_variable
 # Interface to Data Request
 from dr_interface import get_DR_version
 
-from xml_interface import create_xml_element, create_xml_sub_element, create_string_from_xml_element, \
-    remove_subelement_in_xml_element, add_xml_comment_to_element, create_pretty_xml_doc, find_rank_xml_subelement
+from xml_interface import DR2XMLElement, DR2XMLComment, create_pretty_xml_doc, find_rank_xml_subelement
 
 # Settings tools
 from analyzer import DR_grid_to_grid_atts, analyze_cell_time_method, freq2datefmt, longest_possible_period, \
@@ -121,10 +120,7 @@ def wr(out, key, dic_or_val=None, num_type="string", default=None):
             # CMIP6 spec : no more than 1024 char
             val = val[0:1024]
         if num_type not in ["string", ] or len(val) > 0:
-            attrib_dict = OrderedDict()
-            attrib_dict["name"] = key
-            attrib_dict["type"] = num_type
-            create_xml_sub_element(xml_element=out, tag="variable", text=val, attrib=attrib_dict)
+            out.append(DR2XMLElement(tag="variable", text=val, name=key, type=num_type))
 
 
 def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
@@ -434,24 +430,21 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
     # Write XIOS file node:
     # including global CMOR file attributes
     # --------------------------------------------------------------------
-    dict_file = OrderedDict()
-    dict_file["id"] = "_".join([sv.label, table, grid_label])
-    dict_file["name"] = filename
     freq = longest_possible_period(cmip6_freq_to_xios_freq(sv.frequency, table),
                                    get_variable_from_lset_with_default("too_long_periods", []))
-    dict_file["output_freq"] = freq
-    dict_file["append"] = "true"
-    dict_file["output_level"] = str(get_variable_from_lset_with_default("output_level", 10))
-    dict_file["compression_level"] = str(get_variable_from_lset_with_default("compression_level", 0))
+
+    split_freq_format = None
+    split_start_offset = None
+    split_end_offset = None
+    split_last_date = None
     if "fx" not in sv.frequency:
-        dict_file["split_freq"] = split_freq
-        dict_file["split_freq_format"] = date_format
+        split_freq_format = date_format
         #
         # Modifiers for date parts of the filename, due to silly KT conventions.
         if offset_begin is not False:
-            dict_file["split_start_offset"] = offset_begin
+            split_start_offset = offset_begin
         if offset_end is not False:
-            dict_file["split_end_offset"] = offset_end
+            split_end_offset = offset_end
         lastyear = None
         # Try to get enddate for the CMOR variable from the DR
         if sv.cmvar is not None:
@@ -467,9 +460,9 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
                     endyear = enddate[0:4]
                     endmonth = enddate[4:6]
                     endday = enddate[6:8]
-                    dict_file["split_last_date"] = "{}-{}-{} 00:00:00".format(endyear, endmonth, endday)
+                    split_last_date = "{}-{}-{} 00:00:00".format(endyear, endmonth, endday)
                 else:
-                    dict_file["split_last_date"] = "10000-01-01 00:00:00"
+                    split_last_date = "10000-01-01 00:00:00"
         else:
             # Use requestItems-based end date as the latest possible date when it is earlier than run end date
             if sv.label in debug:
@@ -483,20 +476,23 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
                     "settings file" % (lastyear, sv.label, table, year))
             endmonth = "01"
             endday = "01"
-            dict_file["split_last_date"] = "{}-{}-{} 00:00:00".format(endyear, endmonth, endday)
-    #
-    # dict_file["timeseries"] = "exclusive"
-    dict_file["time_units"] = "days"
-    dict_file["time_counter_name"] = "time"
-    dict_file["time_counter"] = "exclusive"
-    dict_file["time_stamp_name"] = "creation_date"
-    dict_file["time_stamp_format"] = "%Y-%m-%dT%H:%M:%SZ"
-    dict_file["uuid_name"] = "tracking_id"
-    dict_file["uuid_format"] = "hdl:{}/%uuid%".format(get_variable_from_sset_else_lset_with_default("HDL", "21.14100"))
-    dict_file["convention_str"] = get_config_variable("conventions")
+            split_last_date = "{}-{}-{} 00:00:00".format(endyear, endmonth, endday)
+    else:
+        split_freq = None
     # out.write(' description="A %s result for experiment %s of %s"'%
     #            (lset['source_id'],sset['experiment_id'],sset.get('project',"CMIP6")))
-    xml_file = create_xml_element(tag="file", attrib=dict_file)
+    xml_file = DR2XMLElement(tag="file", default_tag="file_output",
+                             id="_".join([sv.label, table, grid_label]), name=filename, output_freq=freq, append="true",
+                             output_level=str(get_variable_from_lset_with_default("output_level", 10)),
+                             compression_level=str(get_variable_from_lset_with_default("compression_level", 0)),
+                             split_freq=split_freq, split_freq_format=split_freq_format,
+                             split_start_offset=split_start_offset, split_end_offset=split_end_offset,
+                             split_last_date=split_last_date,
+                             time_units="days", time_counter_name="time", time_counter="exclusive",
+                             time_stamp_name="creation_date", time_stamp_format="%Y-%m-%dT%H:%M:%SZ",
+                             uuid_name="tracking_id",
+                             uuid_format="hdl:{}/%uuid%".format(get_variable_from_sset_else_lset_with_default("HDL", "21.14100")),
+                             convention_str=get_config_variable("conventions"))
     #
     if isinstance(activity_id, list):
         activity_idr = reduce(lambda x, y: x + " " + y, activity_id)
@@ -730,13 +726,13 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
     #
     names = OrderedDict()
     if sv.spatial_shp in ['XY-A', 'S-A']:
-        # add entries for auxilliary variables : ap, ap_bnds, b, b_bnds
+        # add entries for auxiliary variables : ap, ap_bnds, b, b_bnds
         names["ap"] = "vertical coordinate formula term: ap(k)"
         names["ap_bnds"] = "vertical coordinate formula term: ap(k+1/2)"
         names["b"] = "vertical coordinate formula term: b(k)"
         names["b_bnds"] = "vertical coordinate formula term: b(k+1/2)"
     elif sv.spatial_shp in ['XY-AH', 'S-AH']:
-        # add entries for auxilliary variables : ap, ap_bnds, b, b_bnds
+        # add entries for auxiliary variables : ap, ap_bnds, b, b_bnds
         names["ahp"] = "vertical coordinate formula term: ap(k)"
         names["ahp_bnds"] = "vertical coordinate formula term: ap(k+1/2)"
         names["bh"] = "vertical coordinate formula term: b(k)"
@@ -744,13 +740,8 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
 
     for tab in list(names):
         ping_variable_prefix = get_variable_from_lset_without_default("ping_variables_prefix")
-        attrib_dict = OrderedDict()
-        attrib_dict["field_ref"] = "".join([ping_variable_prefix, tab])
-        attrib_dict["name"] = tab.replace('h', '')
-        attrib_dict["long_name"] = names[tab]
-        attrib_dict["operation"] = "once"
-        attrib_dict["prec"] = "8"
-        create_xml_sub_element(xml_element=xml_file, tag="field", attrib=attrib_dict)
+        xml_file.append(DR2XMLElement(tag="field", field_ref="".join([ping_variable_prefix, tab]),
+                                      name=tab.replace('h', ''), long_name=names[tab], operation="once", prec="8"))
     actually_written_vars.append((sv.label, sv.long_name, sv.mipTable, sv.frequency, sv.Priority, sv.spatial_shp))
     # Add content to xml_file to out
     out.append(xml_file)
@@ -819,13 +810,8 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
     else:
         alias_ping = ping_alias(sv, pingvars)
     if sv.type in ["dev", ] and alias_ping not in context_index:
-        field_dict = OrderedDict()
-        field_dict["id"] = alias_ping
-        field_dict["long_name"] = sv.long_name
-        field_dict["standard_name"] = sv.stdname
-        field_dict["unit"] = sv.units
-        field_dict["grid_ref"] = source_grid
-        field_def = create_xml_element(tag="field", attrib=field_dict)
+        field_def = DR2XMLElement(tag="field", id=alias_ping, long_name=sv.long_name, standard_name=sv.stdname,
+                                  unit=sv.units, grid_ref=source_grid)
         field_defs[alias_ping] = field_def
         grid_id_in_ping = context_index[source_grid].attrib["id"]
     else:
@@ -899,11 +885,8 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
     #
     but_last_field_id = last_field_id
     last_field_id = last_field_id + "_" + operation
-    last_field_dict = OrderedDict()
-    last_field_dict["id"] = last_field_id
-    last_field_dict["field_ref"] = but_last_field_id
-    last_field_dict["operation"] = operation
-    field_defs[last_field_id] = create_xml_element(tag="field", attrib=last_field_dict)
+    field_defs[last_field_id] = DR2XMLElement(tag="field", id=last_field_id, field_ref=but_last_field_id,
+                                              operation=operation)
     #
     # --------------------------------------------------------------------
     # Change horizontal grid if requested
@@ -930,23 +913,26 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
     rep_dict = OrderedDict()
     rep_dict["field_ref"] = last_field_id
     if sv.label in ["tsland", ]:
-        rep_dict["name"] = "tsland"
+        name = "tsland"
     else:
-        rep_dict["name"] = sv.mipVarLabel
+        name = sv.mipVarLabel
     if last_grid_id != grid_id_in_ping:
-        rep_dict["grid_ref"] = last_grid_id
+        grid_ref = last_grid_id
+    else:
+        grid_ref = None
     #
     #
     # --------------------------------------------------------------------
     # Add offset if operation=instant for some specific variables defined in lab_settings
     # --------------------------------------------------------------------
     #
+    freq_offset = None
     if operation in ['instant', ]:
         for ts in get_variable_from_lset_with_default('special_timestep_vars', []):
             if sv.label in get_variable_from_lset_without_default('special_timestep_vars', ts):
                 xios_freq = cmip6_freq_to_xios_freq(sv.frequency, table)
                 # works only if units are different :
-                rep_dict["freq_offset"] = "-".join([xios_freq, ts])
+                freq_offset = "-".join([xios_freq, ts])
     #
     # --------------------------------------------------------------------
     # handle data type and missing value
@@ -963,31 +949,26 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
         missing_value = "0"  # 16384"
     else:
         raise Dr2xmlError("prec=%s for sv=%s" % (sv.prec, sv.label))
-    rep_dict["detect_missing_value"] = detect_missing
-    rep_dict["default_value"] = missing_value
-    rep_dict["prec"] = prec
     #
     # TBD : implement DR recommendation for cell_method : The syntax is to append, in brackets,
     # TBD    'interval: *amount* *units*', for example 'area: time: mean (interval: 1 hr)'.
     # TBD    The units must be valid UDUNITS, e.g. day or hr.
-    rep_dict["cell_methods"] = sv.cell_methods
-    rep_dict["cell_methods_mode"] = "overwrite"
     # --------------------------------------------------------------------
     # enforce time average before remapping (when there is one) except if there
     # is an expr, set in ping for the ping variable of that field, and which
     # involves time operation (using @)
     # --------------------------------------------------------------------
-    rep_dict["operation"] = operation
     #
+    freq_op = None
+    expr = None
     if not id_has_expr_with_at(alias, context_index):
         # either no expr, or expr without an @  ->
         # may use @ for optimizing operations order (average before re-gridding)
         if last_grid_id != grid_id_in_ping:
             if operation in ['average', 'instant']:
                 # do use @ for optimizing :
-                rep_dict["freq_op"] = longest_possible_period(cmip6_freq_to_xios_freq(sv.frequency, table),
-                                                              get_variable_from_lset_with_default("too_long_periods",
-                                                                                                  []))
+                freq_op = longest_possible_period(cmip6_freq_to_xios_freq(sv.frequency, table),
+                                                  get_variable_from_lset_with_default("too_long_periods", []))
                 # must set freq_op (this souldn't be necessary, but is needed with Xios 1442)
     else:  # field has an expr, with an @
         # Cannot optimize
@@ -995,22 +976,26 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
             # must reset expr (if any) if instant, for using arithm. operation defined in ping.
             # this allows that the type of operation applied is really 'instant', and not the one
             # that operands did inherit from ping_file
-            rep_dict["expr"] = "_reset_"
+            expr = "_reset_"
         if operation in ['average', ]:
             warnings_for_optimisation.append(alias)
-        rep_dict["freq_op"] = longest_possible_period(cmip6_freq_to_xios_freq(sv.frequency, table),
-                                                      get_variable_from_lset_with_default("too_long_periods", []))
+        freq_op = longest_possible_period(cmip6_freq_to_xios_freq(sv.frequency, table),
+                                          get_variable_from_lset_with_default("too_long_periods", []))
 
-    rep = create_xml_element(tag="field", attrib=rep_dict)
-
+    text = None
     if not id_has_expr_with_at(alias, context_index) and last_grid_id != grid_id_in_ping:
         # either no expr, or expr without an @  ->
         # may use @ for optimizing operations order (average before re-gridding)
-        if operation == 'average':
+        if operation in ['average', ]:
             # do use @ for optimizing :
-            rep.text = "@{}".format(last_field_id)
-        elif operation == 'instant' and get_variable_from_lset_with_default("useAtForInstant", False):
-            rep.text = "@{}".format(last_field_id)
+            text = "@{}".format(last_field_id)
+        elif operation in ['instant', ] and get_variable_from_lset_with_default("useAtForInstant", False):
+            text = "@{}".format(last_field_id)
+
+    rep = DR2XMLElement(tag="field", default_tag="field_output", field_ref=last_field_id, name=name, grid_ref=grid_ref,
+                        freq_offset=freq_offset, detect_missing_value=detect_missing, default_value=missing_value,
+                        prec=prec, cell_methods=sv.cell_methods, cell_methods_mode="overwrite", operation=operation,
+                        freq_op=freq_op, expr=expr, text=text)
     #
     # --------------------------------------------------------------------
     # Add Xios variables for creating NetCDF attributes matching CMIP6 specs
@@ -1117,54 +1102,59 @@ def process_singleton(sv, alias, pingvars, field_defs, grid_defs, scalar_defs, t
         # ambiguous w.r.t. a dr2xml suffix for interpolating to a single pressure level
         scalar_dict = OrderedDict()
         scalar_id = "Scal" + sdim.label
-        scalar_dict["id"] = scalar_id
         # These dimensions are shared by some variables with another sdim with same out_name ('type'):
         if sdim.label in ["typec3pft", "typec4pft"]:
             name = "pfttype"
         else:
             name = sdim.out_name
-        scalar_dict["name"] = name
-        #
         #
         if sdim.stdname.strip() != '' and sdim.label != "typewetla":
-            scalar_dict["standard_name"] = sdim.stdname
+            standard_name = sdim.stdname
+        else:
+            standard_name = None
         #
-        scalar_dict["long_name"] = sdim.title
+        long_name = sdim.title
         #
+        label = None
+        prec = None
+        value = None
         if sdim.type in ['character', ]:
-            scalar_dict["label"] = sdim.label
+            label = sdim.label
         else:
             types = {'double': '8', 'float': '4', 'integer': '2'}
-            scalar_dict["prec"] = types[sdim.type]
-            scalar_dict["value"] = sdim.value
+            prec = types[sdim.type]
+            value = sdim.value
         #
+        bounds_value = None
+        bounds_name = None
         if sdim.bounds in ["yes", ]:
             try:
                 bounds = sdim.boundsValues.split()
-                scalar_dict["bounds"] = "(0,1)[ {} {} ]".format(bounds[0], bounds[1])
-                scalar_dict["bounds_name"] = "{}_bounds".format(sdim.out_name)
+                bounds_value = "(0,1)[ {} {} ]".format(bounds[0], bounds[1])
+                bounds_name = "{}_bounds".format(sdim.out_name)
             except:
                 if sdim.label != "lambda550nm":
                     raise Dr2xmlError("Issue for var %s with dim %s bounds=%s" % (sv.label, sdim.label, bounds))
         #
+        axis_type = None
+        positive = None
         if isinstance(sdim.axis, six.string_types) and len(sdim.axis) > 0:
             # Space axis, probably Z
-            scalar_dict["axis_type"] = sdim.axis
+            axis_type = sdim.axis
             if sdim.positive:
-                scalar_dict["positive"] = sdim.positive
+                positive = sdim.positive
         #
-        if isinstance(sdim.units, six.string_types) and len(sdim.units) > 0:
-            scalar_dict["unit"] = sdim.units
-        #
-        scalar_def = create_xml_element(tag="scalar", attrib=scalar_dict)
+        scalar_def = DR2XMLElement(tag="scalar", id=scalar_id, name=name, standard_name=standard_name,
+                                   long_name=long_name, label=label, prec=prec, value=value, bounds=bounds_value,
+                                   bounds_name=bounds_name, axis_type=axis_type, positive=positive, unit=sdim.units)
         scalar_defs[scalar_id] = scalar_def
-        logger.debug("process_singleton : adding scalar %s" % create_string_from_xml_element(scalar_def))
+        logger.debug("process_singleton : adding scalar %s" % scalar_def)
         #
         # Create a grid with added (or changed) scalar
         glabel = further_grid_id + "_" + scalar_id
         further_grid_def = add_scalar_in_grid(further_grid_def, glabel, scalar_id, name,
                                               sdim.axis in ["Z", ] and further_grid_def not in ["NATURE_landuse", ])
-        logger.debug("process_singleton : adding grid %s" % create_string_from_xml_element(further_grid_def))
+        logger.debug("process_singleton : adding grid %s" % further_grid_def)
         grid_defs[glabel] = further_grid_def
         further_grid_id = glabel
 
@@ -1173,12 +1163,8 @@ def process_singleton(sv, alias, pingvars, field_defs, grid_defs, scalar_defs, t
         #  create derived_field through an Xios operation (apply all scalars at once)
         further_field_id = alias + "_" + further_grid_id.replace(input_grid_id + '_', '')
         # Must init operation and detect_missing when there is no field ref
-        field_def_dict = OrderedDict()
-        field_def_dict["id"] = further_field_id
-        field_def_dict["grid_ref"] = further_grid_id
-        field_def_dict["operation"] = "instant"
-        field_def_dict["detect_missing_value"] = "true"
-        field_def = create_xml_element(tag="field", text=alias, attrib=field_def_dict)
+        field_def = DR2XMLElement(tag="field", text=alias, id=further_field_id, grid_ref=further_grid_id,
+                                  operation="instant", detect_missing_value="true")
         field_defs[further_field_id] = field_def
         logger.debug("process_singleton : adding field %s" % field_def)
     return further_field_id, further_grid_id
@@ -1225,10 +1211,7 @@ def wrv(name, value, num_type="string"):
     if isinstance(value, str):
         value = value[0:1024]  # CMIP6 spec : no more than 1024 char
     # Format a 'variable' entry
-    attrib_dict = OrderedDict()
-    attrib_dict["name"] = name
-    attrib_dict["type"] = num_type
-    return create_xml_element(tag="variable", text=str(value), attrib=attrib_dict)
+    return DR2XMLElement(tag="variable", text=str(value), name=name, type=num_type)
 
 
 def make_source_string(sources, source_id):
@@ -1267,27 +1250,21 @@ def write_xios_file_def(filename, svars_per_table, year, lset, sset, cvs_path, f
     # file_definition node, including field child-nodes
     # --------------------------------------------------------------------
     # Create xml element for context
-    xml_context = create_xml_element(tag="context", attrib=OrderedDict(id=context))
+    xml_context = DR2XMLElement(tag="context", id=context)
     # Add all comments
-    add_xml_comment_to_element(element=xml_context, text="CMIP6 Data Request version {}".format(get_DR_version()))
-    add_xml_comment_to_element(element=xml_context, text="CMIP6-CV version {}".format("??"))
-    add_xml_comment_to_element(element=xml_context,
-                               text="CMIP6_conventions_version {}".format(
-                                   get_config_variable("CMIP6_conventions_version")))
-    add_xml_comment_to_element(element=xml_context, text="dr2xml version {}".format(get_config_variable("version")))
-    add_xml_comment_to_element(element=xml_context,
-                               text="\n".join(["Lab_and_model settings", format_dict_for_printing("lset")]))
-    add_xml_comment_to_element(element=xml_context,
-                               text="\n".join(["Simulation settings", format_dict_for_printing("sset")]))
-    add_xml_comment_to_element(element=xml_context, text="Year processed {}".format(year))
+    xml_context.append(DR2XMLComment(text="CMIP6 Data Request version {}".format(get_DR_version())))
+    xml_context.append(DR2XMLComment(text="CMIP6-CV version {}".format("??")))
+    xml_context.append(DR2XMLComment(text="CMIP6_conventions_version {}".format(
+        get_config_variable("CMIP6_conventions_version"))))
+    xml_context.append(DR2XMLComment(text="dr2xml version {}".format(get_config_variable("version"))))
+    xml_context.append(DR2XMLComment(text="\n".join(["Lab_and_model settings", format_dict_for_printing("lset")])))
+    xml_context.append(DR2XMLComment(text="\n".join(["Simulation settings", format_dict_for_printing("sset")])))
+    xml_context.append(DR2XMLComment(text="Year processed {}".format(year)))
     # Initialize some variables
     domain_defs = OrderedDict()
     foo, sourcetype = get_source_id_and_type()
     # Add xml_file_definition
-    xml_file_dict = OrderedDict()
-    xml_file_dict["type"] = "one_file"
-    xml_file_dict["enabled"] = "true"
-    xml_file_definition = create_xml_element(tag="file_definition", attrib=xml_file_dict)
+    xml_file_definition = DR2XMLElement(tag="file_definition", type="one_file", enabled="true")
     # Loop on values to fill the xml element
     for table in sorted(list(svars_per_table)):
         count = OrderedDict()
@@ -1324,14 +1301,11 @@ def write_xios_file_def(filename, svars_per_table, year, lset, sset, cvs_path, f
     # and domain_definition auxilliary nodes
     # --------------------------------------------------------------------
     # Write all domain, axis, field defs needed for these file_defs
-    xml_field_definition = create_xml_element(tag="field_definition")
+    xml_field_definition = DR2XMLElement(tag="field_definition")
     is_reset_field_group = get_variable_from_lset_with_default("nemo_sources_management_policy_master_of_the_world",
                                                                False) and context == 'nemo'
     if is_reset_field_group:
-        xml_field_group_dict = OrderedDict()
-        xml_field_group_dict["freq_op"] = "_reset_"
-        xml_field_group_dict["freq_offset"] = "_reset_"
-        xml_field_group = create_xml_element(tag="field_group", attrib=xml_field_group_dict)
+        xml_field_group = DR2XMLElement(tag="field_group", freq_op="_reset_", freq_offset="_reset_")
         for xml_field in list(field_defs):
             xml_field_group.append(field_defs[xml_field])
         xml_field_definition.append(xml_field_group)
@@ -1340,8 +1314,8 @@ def write_xios_file_def(filename, svars_per_table, year, lset, sset, cvs_path, f
             xml_field_definition.append(field_defs[xml_field])
     xml_context.append(xml_field_definition)
     #
-    xml_axis_definition = create_xml_element(tag="axis_definition")
-    xml_axis_group = create_xml_element(tag="axis_group", attrib=OrderedDict(prec="8"))
+    xml_axis_definition = DR2XMLElement(tag="axis_definition")
+    xml_axis_group = DR2XMLElement(tag="axis_group", prec="8")
     for xml_axis in list(axis_defs):
         xml_axis_group.append(axis_defs[xml_axis])
     if False and get_variable_from_lset_with_default('use_union_zoom', False):
@@ -1350,8 +1324,8 @@ def write_xios_file_def(filename, svars_per_table, year, lset, sset, cvs_path, f
     xml_axis_definition.append(xml_axis_group)
     xml_context.append(xml_axis_definition)
     #
-    xml_domain_definition = create_xml_element(tag="domain_definition")
-    xml_domain_group = create_xml_element(tag="domain_group", attrib=OrderedDict(prec="8"))
+    xml_domain_definition = DR2XMLElement(tag="domain_definition")
+    xml_domain_group = DR2XMLElement(tag="domain_group", prec="8")
     if get_variable_from_lset_without_default('grid_policy') != "native":
         create_standard_domains(domain_defs)
     for xml_domain in list(domain_defs):
@@ -1359,7 +1333,7 @@ def write_xios_file_def(filename, svars_per_table, year, lset, sset, cvs_path, f
     xml_domain_definition.append(xml_domain_group)
     xml_context.append(xml_domain_definition)
     #
-    xml_grid_definition = create_xml_element(tag="grid_definition")
+    xml_grid_definition = DR2XMLElement(tag="grid_definition")
     for xml_grid in list(grid_defs):
         xml_grid_definition.append(grid_defs[xml_grid])
     if False and get_variable_from_lset_with_default('use_union_zoom', False):
@@ -1367,7 +1341,7 @@ def write_xios_file_def(filename, svars_per_table, year, lset, sset, cvs_path, f
             xml_grid_definition.append(union_grid_defs[xml_grid])
     xml_context.append(xml_grid_definition)
     #
-    xml_scalar_definition = create_xml_element(tag="scalar_definition")
+    xml_scalar_definition = DR2XMLElement(tag="scalar_definition")
     for xml_scalar in list(scalar_defs):
         xml_scalar_definition.append(scalar_defs[xml_scalar])
     xml_context.append(xml_scalar_definition)

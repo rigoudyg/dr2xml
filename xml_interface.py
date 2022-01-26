@@ -7,83 +7,112 @@ Interface between xml module and dr2xml.
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
-from collections import OrderedDict
+from collections import OrderedDict, defaultdict
+from copy import copy, deepcopy
 from io import open
+import os
+import json
 
 from xml.dom import minidom
 
 import xml_writer
 from utils import decode_if_needed
+from logger import get_logger
+from settings_interface import get_variable_from_lset_with_default
 
 
-def create_xml_element(tag, attrib=OrderedDict(), text=None):
-    """
-
-    :param tag:
-    :param attrib:
-    :param text:
-    :return:
-    """
-    return xml_writer.Element(tag=tag, attrib=attrib, text=text)
+projects_settings = None
 
 
-def create_xml_sub_element(xml_element, tag, attrib=OrderedDict(), text=None):
-    """
-
-    :param xml_element:
-    :param tag:
-    :param attrib:
-    :param text:
-    :return:
-    """
-    subelement = xml_writer.Element(tag=tag, attrib=attrib, text=text)
-    xml_element.append(subelement)
-
-
-def create_xml_element_from_string(string):
-    """
-
-    :param string:
-    :return:
-    """
-    return xml_writer.parse_xml_string_rewrite(string)
+def reformat_constraints(dict_constraints, list_keys):
+    rep = defaultdict(dict)
+    for key in list_keys:
+        if key in dict_constraints:
+            rep[key]["skip_values"] = dict_constraints[key].get("skip_values", list())
+            if "authorized_types" in dict_constraints[key]:
+                val = [globals()["__builtins__"][val] for val in dict_constraints[key]["authorized_types"]]
+                if len(val) == 1:
+                    val = val[0]
+                rep[key]["authorized_types"] = val
+            else:
+                rep[key]["authorized_types"] = False
+        else:
+            rep[key]["skip_values"] = list()
+            rep[key]["authorized_types"] = False
+    return rep
 
 
-def create_string_from_xml_element(xml_element):
-    """
+def initialize_project_settings():
+    global projects_settings
+    logger = get_logger()
+    if projects_settings is None:
+        logger.debug("Initialize project_settings")
+        project_settings_filename = get_variable_from_lset_with_default("project_settings", None)
+        if project_settings_filename is not None:
+            # If the project's settings filename is provided
+            if os.path.isfile(project_settings_filename):
+                with open(project_settings_filename) as fp:
+                    projects_settings = json.load(fp)
+            else:
+                logger.error("Could not find the file containing the project's settings at %s" %
+                             project_settings_filename)
+                raise OSError("Could not find the file containing the project's settings at %s" %
+                              project_settings_filename)
+        else:
+            # Get the default project's settings file content
+            project = get_variable_from_lset_with_default("project", "CMIP6")
+            project_settings_filename = os.sep.join([os.path.dirname(os.path.abspath(__file__)), "projects",
+                                                     "{}.json".format(project)])
+            if os.path.isfile(project_settings_filename):
+                with open(project_settings_filename) as fp:
+                    projects_settings = json.load(fp)
+            else:
+                logger.error("Could not find the file containing the project's settings at %s" %
+                             project_settings_filename)
+                raise OSError("Could not find the file containing the project's settings at %s" %
+                              project_settings_filename)
+        for key in projects_settings:
+            projects_settings[key]["attrs_constraints"] = \
+                reformat_constraints(projects_settings[key]["attrs_constraints"], projects_settings[key]["attrs_list"])
 
-    :param xml_element:
-    :return:
-    """
-    return xml_element.dump()
+
+class DR2XMLComment(xml_writer.Comment):
+
+    def __init__(self, text):
+        super(DR2XMLComment, self).__init__(comment=text)
 
 
-def create_xml_comment(text):
-    """
+class DR2XMLElement(xml_writer.Element):
 
-    :param text:
-    :return:
-    """
-    return xml_writer.Comment(comment=text)
+    def __init__(self, tag, **kwargs):
+        default_tag = kwargs.get("default_tag", tag)
+        if "text" in kwargs:
+            text = kwargs.pop("text")
+        else:
+            text = None
+        tag_settings = projects_settings[default_tag]
+        list_attrs = tag_settings["attrs_list"]
+        attrs_constraints = tag_settings["attrs_constraints"]
+        attrib = OrderedDict()
+        for key in [key for key in list_attrs if key in kwargs]:
+            value = kwargs[key]
+            if (not(attrs_constraints[key]["authorized_types"]) or
+                    (attrs_constraints[key]["authorized_types"] and
+                     isinstance(value, attrs_constraints[key]["authorized_types"]))) and \
+                    str(value) not in attrs_constraints[key].get("skip_values", list()):
+                attrib[key] = kwargs[key]
+        super(DR2XMLElement, self).__init__(tag=tag, text=text, attrib=attrib)
 
+    def __copy__(self):
+        """
 
-def add_xml_comment_to_element(element, text):
-    """
-
-    :param element:
-    :param text:
-    :return:
-    """
-    element.append(create_xml_comment(text))
-
-
-def dump_xml_element(xml_element):
-    """
-
-    :param xml_element:
-    :return:
-    """
-    return xml_element.dump()
+        :return:
+        """
+        element = type(self).__call__(tag=self.tag, text=self.text, **deepcopy(self.attrib))
+        element.update_level(self.level)
+        for child in self.children:
+            element.children.append(copy(child))
+        return element
 
 
 def is_xml_element_to_parse(element):
@@ -115,24 +144,13 @@ def get_root_of_xml_file(xml_file, follow_src=False, path_parse="./", dont_read=
     return root_element
 
 
-def create_xml_string(tag, attrib=OrderedDict(), text=None):
-    """
-
-    :param tag:
-    :param attrib:
-    :param text:
-    :return:
-    """
-    return create_string_from_xml_element(create_xml_element(tag=tag, attrib=attrib, text=text))
-
-
 def create_pretty_string_from_xml_element(xml_element):
     """
 
     :param xml_element:
     :return:
     """
-    xml_str = create_string_from_xml_element(xml_element)
+    xml_str = str(xml_element)
     reparsed = minidom.parseString(xml_str)
     return reparsed.toprettyxml(indent="\t", newl="\n", encoding="utf-8")
 
@@ -160,35 +178,6 @@ def create_pretty_xml_doc(xml_element, filename):
         out.write(decode_if_needed(xml_header.dump()))
         out.write("\n")
         out.write(decode_if_needed(xml_element.dump()))
-
-
-def remove_subelement_in_xml_element(xml_element, tag=None, attrib=OrderedDict()):
-    """
-
-    :param xml_element:
-    :param tag:
-    :param attrib:
-    :return:
-    """
-    children_to_remove = list()
-    nb_conditions = len(attrib)
-    if tag is not None:
-        nb_conditions += 1
-    for (rank, child) in enumerate(xml_element):
-        to_remove = 0
-        if tag is not None:
-            if child.tag == tag:
-                to_remove += 1
-        for (key, value) in attrib.items():
-            if key in child.attrib and child.attrib[key] == value:
-                to_remove += 1
-        if to_remove == nb_conditions:
-            children_to_remove.append(child)
-        else:
-            xml_element[rank] = remove_subelement_in_xml_element(child, tag=tag, attrib=attrib)
-    for child_to_remove in children_to_remove:
-        xml_element.remove(child_to_remove)
-    return xml_element
 
 
 def find_rank_xml_subelement(xml_element, tag=list(), not_tag=list(), **keyval):
