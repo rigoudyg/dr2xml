@@ -1,15 +1,12 @@
 {
   "context": {
-    "attrs_list": ["id"],
-    "attrs_constraints": {}
+    "attrs_list": ["id"]
   },
   "file_definition": {
-    "attrs_list": ["type", "enabled"],
-    "attrs_constraints": {}
+    "attrs_list": ["type", "enabled"]
   },
   "file": {
-    "attrs_list": ["id", "name", "mode", "output_freq", "enabled"],
-    "attrs_constraints": {}
+    "attrs_list": ["id", "name", "mode", "output_freq", "enabled"]
   },
   "file_output": {
     "attrs_list": ["id", "name", "output_freq", "append", "output_level", "compression_level", "split_freq",
@@ -31,25 +28,42 @@
       },
       "split_last_date": {
         "skip_values": ["", "None"]
+      },
+      "append": {
+        "default_values": "true"
+      },
+      "time_units": {
+        "default_values": "days"
+      },
+      "time_counter_name": {
+        "default_values": "time"
+      },
+      "time_counter": {
+        "default_values": "exclusive"
+      },
+      "time_stamp_name": {
+        "default_values": "creation_date"
+      },
+      "time_stamp_format": {
+        "default_values": "%Y-%m-%dT%H:%M:%SZ"
+      },
+      "uuid_name": {
+        "default_values": "tracking_id"
       }
-    }
+    },
+    "vars_constraints": {}
   },
-  "field_definition": {
-    "attrs_list": [],
-    "attrs_constraints": {}
-  },
+  "field_definition": {},
   "field_group": {
-    "attrs_list": ["freq_op", "freq_offset"],
-    "attrs_constraints": {}
+    "attrs_list": ["freq_op", "freq_offset"]
   },
   "field": {
     "attrs_list": ["id", "field_ref", "name", "freq_op", "freq_offset", "grid_ref", "long_name", "standard_name",
-      "unit", "operation", "detect_missing_value", "prec"],
-    "attrs_constraints": {}
+      "unit", "operation", "detect_missing_value", "prec"]
   },
   "field_output": {
-    "attrs_list": ["field_ref", "name", "grid_ref", "freq_offset", "detect_missing", "detect_missing_value",
-      "default_value", "prec", "cell_methods", "cell_methods_mode", "operation", "freq_op", "expr"],
+    "attrs_list": ["field_ref", "name", "grid_ref", "freq_offset", "detect_missing_value", "default_value", "prec",
+      "cell_methods", "cell_methods_mode", "operation", "freq_op", "expr"],
     "attrs_constraints": {
       "grid_ref": {
         "skip_values": ["", "None"]
@@ -62,17 +76,16 @@
       },
       "expr": {
         "skip_values": ["", "None"]
+      },
+      "cell_methods_mode": {
+        "default_values": "overwrite"
       }
     }
   },
     "grid": {
-    "attrs_list": ["id"],
-    "attrs_constraints": {}
+    "attrs_list": ["id"]
   },
-  "grid_definition": {
-    "attrs_list": [],
-    "attrs_constraints": {}
-  },
+  "grid_definition": {},
   "axis": {
     "attrs_list": ["id", "positive", "n_glo", "value", "axis_ref", "name", "standard_name", "long_name", "prec", "unit",
       "value", "bounds", "dim_name", "label", "axis_type"],
@@ -120,37 +133,21 @@
       }
     }
   },
-  "axis_definition": {
-    "attrs_list": [],
-    "attrs_constraints": {}
-  },
+  "axis_definition": {},
   "axis_group": {
-    "attrs_list": ["prec"],
-    "attrs_constraints": {}
+    "attrs_list": ["prec"]
   },
-  "temporal_splitting": {
-    "attrs_list": [],
-    "attrs_constraints": {}
-  },
+  "temporal_splitting": {},
   "domain": {
-    "attrs_list": ["id", "ni_glo", "nj_glo", "type", "prec", "lat_name", "lon_name", "dim_i_name","domain_ref"],
-    "attrs_constraints": {}
+    "attrs_list": ["id", "ni_glo", "nj_glo", "type", "prec", "lat_name", "lon_name", "dim_i_name","domain_ref"]
   },
-  "generate_rectilinear_domain": {
-    "attrs_list": [],
-    "attrs_constraints": {}
-  },
+  "generate_rectilinear_domain": {},
   "interpolate_domain": {
-    "attrs_list": ["type", "order", "renormalize", "mode", "write_weight", "coordinate"],
-    "attrs_constraints": {}
+    "attrs_list": ["type", "order", "renormalize", "mode", "write_weight", "coordinate"]
   },
-  "domain_definition": {
-    "attrs_list": [],
-    "attrs_constraints": {}
-  },
+  "domain_definition": {},
   "domain_group": {
-    "attrs_list": ["prec"],
-    "attrs_constraints": {}
+    "attrs_list": ["prec"]
   },
   "scalar": {
     "attrs_list": ["id", "scalar_ref", "name", "standard_name", "long_name", "label", "prec", "value", "bounds",
@@ -159,42 +156,35 @@
       "standard_name": {
         "skip_values": ["", "None"]
       },
-        "axis_type": {
+      "axis_type": {
         "skip_values": ["", "None"]
       },
-        "unit": {
+      "unit": {
         "skip_values": ["", "None"]
       },
-        "label": {
+      "label": {
         "skip_values": ["", "None"]
       },
-        "bounds": {
+      "bounds": {
         "skip_values": ["", "None"]
       },
-        "bounds_name": {
+      "bounds_name": {
         "skip_values": ["", "None"]
       },
-        "prec": {
+      "prec": {
         "skip_values": ["", "None"]
       },
-        "value": {
+      "value": {
         "skip_values": ["", "None"]
       },
-        "positive": {
+      "positive": {
         "skip_values": ["", "None"]
       }
     }
   },
-  "duplicate_scalar": {
-    "attrs_list": [],
-    "attrs_constraints": {}
-  },
-  "scalar_definition": {
-    "attrs_list": [],
-    "attrs_constraints": {}
-  },
+  "duplicate_scalar": {},
+  "scalar_definition": {},
   "variable": {
-    "attrs_list": ["name", "type"],
-    "attrs_constraints": {}
+    "attrs_list": ["name", "type"]
   }
 }

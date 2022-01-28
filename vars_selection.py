@@ -160,7 +160,7 @@ def RequestItem_applies_for_exp_and_year(ri, experiment, year=None):
         logger.debug("%20s %s" % ("Mip case ", get_uid(item_exp.label).label))
         exps_id = get_request_by_id_by_sect(ri.esid, 'experiment')
         for e in [get_uid(eid) for eid in exps_id]:
-            logger.debug(e.label, ",",)
+            logger.debug(e.label + ",",)
             if e.label == experiment:
                 logger.debug(" OK for experiment based on mip %s" % item_exp.label)
                 ri_applies_to_experiment = True

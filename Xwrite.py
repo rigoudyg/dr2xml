@@ -34,7 +34,7 @@ from settings_interface import get_variable_from_lset_with_default, get_variable
 # Interface to Data Request
 from dr_interface import get_DR_version
 
-from xml_interface import DR2XMLElement, DR2XMLComment, create_pretty_xml_doc, find_rank_xml_subelement
+from xml_interface import DR2XMLElement, DR2XMLComment, create_pretty_xml_doc, find_rank_xml_subelement, wr, wrv
 
 # Settings tools
 from analyzer import DR_grid_to_grid_atts, analyze_cell_time_method, freq2datefmt, longest_possible_period, \
@@ -67,60 +67,6 @@ from file_splitting import split_frequency_for_variable
 
 
 warnings_for_optimisation = []
-
-
-def wr(out, key, dic_or_val=None, num_type="string", default=None):
-    """
-    Short cut for a repetitive pattern : add in 'out' a string variable name and value.
-    The value of the XML variable created is defined using the following algorithm:
-
-    - if ``dic_or_val`` is not ``None``:
-        - if  ``dic_or_val`` is a ``dict``:
-            - if ``key`` is in ``dic_or_val``:
-                - ``value=dic_or_val[key]``
-            - else if not ``default=False``:
-                - ``value=default``
-        - else if ``dic_or_val`` not ``None`` nor ``False``:
-            - ``dic_or_val=value``
-    - else use value of local variable ``key``
-
-    :param out: XML element to which the variable will be added
-    :param key: key to be put in variable
-    :param dic_or_val: value or dictionary containing the value of the variable
-    :param num_type: type of the value to be added (specfic requirements if string)
-    :param default: default value to be use
-    :return: Add an XML variable to ``out``.
-    """
-    logger = get_logger()
-    print_variables = get_variable_from_lset_with_default("print_variables", True)
-    if not print_variables:
-        return
-    elif isinstance(print_variables, list) and key not in print_variables:
-        return
-
-    val = None
-    if isinstance(dic_or_val, (dict, OrderedDict)):
-        if key in dic_or_val:
-            val = dic_or_val[key]
-        else:
-            if default is not None:
-                if default is not False:
-                    val = default
-            else:
-                logger.warning('warning: %s not in dic and default is None' % key)
-    else:
-        if dic_or_val is not None:
-            val = dic_or_val
-        else:
-            logger.error('error in wr,  no value provided for %s' % key)
-    if val:
-        if num_type in ["string", ]:
-            # val=val.replace(">","&gt").replace("<","&lt").replace("&","&amp").replace("'","&apos").replace('"',"&quot").strip()
-            val = val.replace(">", "&gt").replace("<", "&lt").strip()
-            # CMIP6 spec : no more than 1024 char
-            val = val[0:1024]
-        if num_type not in ["string", ] or len(val) > 0:
-            out.append(DR2XMLElement(tag="variable", text=val, name=key, type=num_type))
 
 
 def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
@@ -482,15 +428,12 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
     # out.write(' description="A %s result for experiment %s of %s"'%
     #            (lset['source_id'],sset['experiment_id'],sset.get('project',"CMIP6")))
     xml_file = DR2XMLElement(tag="file", default_tag="file_output",
-                             id="_".join([sv.label, table, grid_label]), name=filename, output_freq=freq, append="true",
+                             id="_".join([sv.label, table, grid_label]), name=filename, output_freq=freq,
                              output_level=str(get_variable_from_lset_with_default("output_level", 10)),
                              compression_level=str(get_variable_from_lset_with_default("compression_level", 0)),
                              split_freq=split_freq, split_freq_format=split_freq_format,
                              split_start_offset=split_start_offset, split_end_offset=split_end_offset,
                              split_last_date=split_last_date,
-                             time_units="days", time_counter_name="time", time_counter="exclusive",
-                             time_stamp_name="creation_date", time_stamp_format="%Y-%m-%dT%H:%M:%SZ",
-                             uuid_name="tracking_id",
                              uuid_format="hdl:{}/%uuid%".format(get_variable_from_sset_else_lset_with_default("HDL", "21.14100")),
                              convention_str=get_config_variable("conventions"))
     #
@@ -910,8 +853,6 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
     # Create <field> construct to be inserted in a file_def, which includes re-griding
     # --------------------------------------------------------------------
     #
-    rep_dict = OrderedDict()
-    rep_dict["field_ref"] = last_field_id
     if sv.label in ["tsland", ]:
         name = "tsland"
     else:
@@ -994,7 +935,7 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
 
     rep = DR2XMLElement(tag="field", default_tag="field_output", field_ref=last_field_id, name=name, grid_ref=grid_ref,
                         freq_offset=freq_offset, detect_missing_value=detect_missing, default_value=missing_value,
-                        prec=prec, cell_methods=sv.cell_methods, cell_methods_mode="overwrite", operation=operation,
+                        prec=prec, cell_methods=sv.cell_methods, operation=operation,
                         freq_op=freq_op, expr=expr, text=text)
     #
     # --------------------------------------------------------------------
@@ -1193,25 +1134,6 @@ def is_singleton(sdim):
         # Case of space dimension singletons. Should a 'value' and no 'requested'
         return ((sdim.value != '') and (sdim.requested.strip() == '')) \
                or (sdim.label == "typewetla")  # The latter is a bug in DR01.00.21 : typewetla has no value there
-
-
-def wrv(name, value, num_type="string"):
-    """
-    Create a string corresponding of a variable for Xios files.
-    :param name: name of the variable
-    :param value: value of the variable
-    :param num_type: type of the variable
-    :return: string corresponding to the xml variable
-    """
-    print_variables = get_variable_from_lset_with_default("print_variables", True)
-    if not print_variables:
-        return None
-    elif isinstance(print_variables, list) and name not in print_variables:
-        return None
-    if isinstance(value, str):
-        value = value[0:1024]  # CMIP6 spec : no more than 1024 char
-    # Format a 'variable' entry
-    return DR2XMLElement(tag="variable", text=str(value), name=name, type=num_type)
 
 
 def make_source_string(sources, source_id):
