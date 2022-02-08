@@ -1,3 +1,63 @@
 {
-  "parent_project_settings": "CMIP6"
+  "parent_project_settings": "CMIP6",
+  "file_output": {
+    "vars_list": ["activity_id", "contact", "data_specs_version", "dr2xml_version", "expid_in_filename", "description",
+      "title_desc", "experiment", "external_variables", "forcing_index", "frequency", "further_info_url", "grid",
+      "grid_label", "nominal_resolution", "comment", "history", "initialization_index", "CORDEX_domain",
+      "driving_model_id", "driving_model_ensemble_member", "driving_experiment_name", "driving_experiment",
+      "Lambert_conformal_longitude_of_central_meridian", "Lambert_conformal_standard_parallel",
+      "Lambert_conformal_latitude_of_projection_origin", "institution_id", "institution", "license", "mip_era",
+      "parent_experiment_id", "parent_mip_era", "parent_activity_id", "parent_source_id", "parent_time_units",
+      "parent_variant_label", "branch_method", "branch_time_in_parent", "branch_time_in_child", "physics_index",
+      "product", "realization_index", "reference", "realm", "source", "source_id", "source_type", "sub_experiment_id",
+      "sub_experiment", "table", "title", "variable_id", "variant_info", "variant_label"],
+    "vars_constraints": {
+      "institution_id": {
+        "output_key": "institute_id"
+      },
+      "CORDEX_domain": {
+        "default_values": ["CORDEX_domain.get(context))"]
+      },
+      "driving_model_id": {
+        "default_values": ["driving_model_id!:@simulation"],
+        "fatal": "True"
+      },
+      "driving_model_ensemble_member": {
+        "default_values": ["driving_model_ensemble_member!:@simulation"],
+        "fatal": "True"
+      },
+      "driving_experiment_name": {
+        "default_values": ["driving_experiment_name!:@simulation"],
+        "fatal": "True"
+      },
+      "driving_experiment": {
+        "default_values": ["driving_experiment!:@simulation"],
+        "fatal": "True"
+      },
+      "Lambert_conformal_longitude_of_central_meridian": {
+        "default_values": ["Lambert_conformal_longitude_of_central_meridian!:@simulation"],
+        "skip_values": ["", "None"],
+        "conditions": ["key:context==val:surfex"]
+      },
+      "Lambert_conformal_standard_parallel": {
+        "default_values": ["Lambert_conformal_standard_parallel!:@simulation"],
+        "skip_values": ["", "None"],
+        "conditions": ["key:context==val:surfex"]
+      },
+      "Lambert_conformal_latitude_of_projection_origin": {
+        "default_values": ["Lambert_conformal_latitude_of_projection_origin!:@simulation"],
+        "skip_values": ["", "None"],
+        "conditions": ["key:context==val:surfex"]
+      },
+      "product": {
+        "default_values": ["output"]
+      },
+      "source": {
+        "output_key": "project_id"
+      },
+      "source_id": {
+        "output_key": "model_id"
+      }
+    }
+  }
 }

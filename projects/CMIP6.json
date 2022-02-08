@@ -30,28 +30,162 @@
         "skip_values": ["", "None"]
       },
       "append": {
-        "default_values": "true"
+        "default_values": ["true"]
       },
       "time_units": {
-        "default_values": "days"
+        "default_values": ["days"]
       },
       "time_counter_name": {
-        "default_values": "time"
+        "default_values": ["time"]
       },
       "time_counter": {
-        "default_values": "exclusive"
+        "default_values": ["exclusive"]
       },
       "time_stamp_name": {
-        "default_values": "creation_date"
+        "default_values": ["creation_date"]
       },
       "time_stamp_format": {
-        "default_values": "%Y-%m-%dT%H:%M:%SZ"
+        "default_values": ["%Y-%m-%dT%H:%M:%SZ"]
       },
       "uuid_name": {
-        "default_values": "tracking_id"
+        "default_values": ["tracking_id"]
+      },
+      "uuid_format": {
+        "default_values": ["HDL:!@simulation!:@hdl:{}/%uuid%", "HDL:!@laboratory!:@hdl:{}/%uuid%",
+          "hdl:21.14100/%uuid%"]
+      },
+      "convention_str": {
+        "default_values": ["conventions!:@config"]
+      },
+      "output_level": {
+        "default_values": ["output_level!:@lab", "10"]
+      },
+      "compression_level": {
+        "default_values": ["compression_level!:@lab", "0"]
       }
     },
-    "vars_constraints": {}
+    "vars_list": ["activity_id", "contact", "data_specs_version", "dr2xml_version", "expid_in_filename", "description",
+      "title_desc", "experiment", "external_variables", "forcing_index", "frequency", "further_info_url", "grid",
+      "grid_label", "nominal_resolution", "comment", "history", "initialization_index", "institution_id",
+      "institution", "license", "mip_era", "parent_experiment_id", "parent_mip_era", "parent_activity_id",
+      "parent_source_id", "parent_time_units", "parent_variant_label", "branch_method", "branch_time_in_parent",
+      "branch_time_in_child", "physics_index", "product", "realization_index", "reference", "realm", "source",
+      "source_id", "source_type", "sub_experiment_id", "sub_experiment", "table", "title", "variable_id",
+      "variant_info", "variant_label"],
+    "vars_constraints": {
+      "contact": {
+        "default_values": ["contact!:@simulation", "contact!:@laboratory", "None"],
+        "skip_values": ["None", ""]
+      },
+      "data_specs_version": {
+        "default_values": ["!:@DR_version"]
+      },
+      "dr2xml_version": {
+        "default_values": ["version!:@config"]
+      },
+      "expid_in_filename": {
+        "output_key": "experiment_id"
+      },
+      "description": {
+        "skip_values": ["", "None"],
+        "conditions": ["experiment_id!=expid_in_filename"]
+      },
+      "title_desc": {
+        "skip_values": ["", "None"],
+        "output_key": "title",
+        "conditions": ["key:experiment_id!=key:expid_in_filename"]
+      },
+      "experiment": {
+        "skip_values": ["", "None"],
+        "conditions": ["key:experiment_id!=key:expid_in_filename"]
+      },
+      "external_variables": {
+        "skip_values": [""]
+      },
+      "forcing_index": {
+        "default_values": ["forcing_index!:@simulation", "1"],
+        "num_type": "int"
+      },
+      "further_info_url": {
+        "skip_values": ["", "None"]
+      },
+      "history": {
+        "default_values": ["history!:@simulation", "none"]
+      },
+      "initialization_index": {
+        "default_values": ["initialization_index!:@simulation", "1"],
+        "num_type": "int"
+      },
+      "institution_id": {
+        "default_values": ["institution_id!:@lset"],
+        "fatal": "True"
+      },
+      "parent_experiment_id": {
+        "conditions": ["key:parent_experiment_id!=val:no parent", "key:parent_experiment_id!=val:",
+          "key:parent_experiment_id!=val:None"]
+      },
+      "parent_mip_era": {
+        "conditions": ["key:parent_experiment_id!=val:no parent", "key:parent_experiment_id!=val:",
+          "key:parent_experiment_id!=val:None"],
+        "default_values": ["parent_mip_era!:@simulation", "mip_era!:@dict"]
+      },
+      "parent_activity_id": {
+        "conditions": ["key:parent_experiment_id!=val:no parent", "key:parent_experiment_id!=val:",
+          "key:parent_experiment_id!=val:None"]
+      },
+      "parent_source_id": {
+        "conditions": ["key:parent_experiment_id!=val:no parent", "key:parent_experiment_id!=val:",
+          "key:parent_experiment_id!=val:None"],
+        "default_values": ["parent_source_id!:@simulation", "source_id!:@dict"]
+      },
+      "parent_time_units": {
+        "conditions": ["key:parent_experiment_id!=val:no parent", "key:parent_experiment_id!=val:",
+          "key:parent_experiment_id!=val:None"],
+        "default_values": ["parent_time_units!:@simulation",
+          "parent_time_ref_year!:@simulation!:@days since {}-01-01 00:00:00", "days since 1850-01-01 00:00:00"]
+      },
+      "parent_variant_label": {
+        "conditions": ["key:parent_experiment_id!=val:no parent", "key:parent_experiment_id!=val:",
+          "key:parent_experiment_id!=val:None"],
+        "default_values": ["parent_variant_label!:@simulation", "variant_label!:@dict"]
+      },
+      "branch_time_in_parent": {
+        "conditions": ["key:parent_experiment_id!=val:no parent", "key:parent_experiment_id!=val:",
+          "key:parent_experiment_id!=val:None"],
+        "num_type": "double",
+        "skip_values": ["", "None"]
+      },
+      "branch_time_in_child": {
+        "conditions": ["key:parent_experiment_id!=val:no parent", "key:parent_experiment_id!=val:",
+          "key:parent_experiment_id!=val:None"],
+        "num_type": "double",
+        "skip_values": ["", "None"]
+      },
+      "physics_index": {
+        "default_values": ["physics_index!:@simulation", "1"],
+        "num_type": "int"
+      },
+      "product": {
+        "default_values": ["model-output"]
+      },
+      "realization_index": {
+        "default_values": ["realization_index!:@simulation", "1"],
+        "num_type": "int"
+      },
+      "references": {
+        "default_values": ["references!:@laboratory"]
+      },
+      "sub_experiment_id": {
+        "default_values": ["sub_experiment_id!:@simulation", "none"]
+      },
+      "sub_experiment": {
+        "default_values": ["sub_experiment!:@simulation", "none"]
+      },
+      "variant_info": {
+        "default_values": ["variant_info!:@simulation!:@{}. Information provided by this attribute may in some cases be flawed. Users can find more comprehensive and up-to-date documentation via the further_info_url global attribute.", "none"],
+        "skip_values": ["none", ". Information provided by this attribute may in some cases be flawed. Users can find more comprehensive and up-to-date documentation via the further_info_url global attribute."]
+      }
+    }
   },
   "field_definition": {},
   "field_group": {

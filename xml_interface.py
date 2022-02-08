@@ -9,6 +9,7 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 
 from collections import OrderedDict
 from copy import copy, deepcopy
+from functools import reduce
 from io import open
 import os
 import json
@@ -16,8 +17,11 @@ import re
 
 from xml.dom import minidom
 
+import six
+
 import xml_writer
 from config import get_config_variable
+from dr_interface import get_DR_version
 from utils import decode_if_needed
 from logger import get_logger
 from settings_interface import get_variable_from_lset_with_default, get_variable_from_sset_with_default
@@ -83,7 +87,9 @@ def reformat_settings(dict_settings):
     return dict_settings
 
 
-regexp_default = re.compile(r"^(?P<default_name>.*)!:@(?P<default_src>.*)$")
+regexp_default = re.compile(r"^(?P<default_name>.*)!:@(?P<default_src>.*)!:@(?P<format>.*)?$")
+eq_regexp = re.compile(r"(?P<type_key>(key|val)):(?P<key>.*)==(?P<type_val>(key|val)):(?P<val>.*)")
+neq_regexp = re.compile(r"(?P<type_key>(key|val)):(?P<key>.*)!=(?P<type_val>(key|val)):(?P<val>.*)")
 
 
 def reformat_default_values(default_list):
@@ -93,14 +99,22 @@ def reformat_default_values(default_list):
         if match is not None:
             default_name = match.groupdict()["default_name"]
             default_src = match.groupdict()["default_src"]
+            default_format = match.groupdict()["format"]
             if default_src in ["lab", "laboratory", "model"]:
                 elt = get_variable_from_lset_with_default(default_name)
             elif default_src in ["sim", "simulation"]:
                 elt = get_variable_from_sset_with_default(default_name)
             elif default_src in ["conf", "config", "configuration"]:
                 elt = get_config_variable(default_name)
+            elif default_src in ["DR_version", ]:
+                elt = get_DR_version()
+            elif default_src in ["dict"]:
+                # TODO: Must be treated while evaluating
+                pass
             else:
                 raise ValueError("Unknown source for %s and %s" % (default_src, default_name))
+            if default_format is not None:
+                elt = default_format.format(elt)
         rep.append(elt)
     return rep
 
@@ -136,8 +150,14 @@ def reformat_constraints(tag, dict_constraints, list_keys):
                     dict_constraints[key]["output_key"] = key
                 if "fatal" not in dict_constraints[key]:
                     dict_constraints[key]["fatal"] = False
+                elif dict_constraints[key]["fatal"] in ["True", ]:
+                    dict_constraints[key]["fatal"] = True
+                else:
+                    dict_constraints[key]["fatal"] = False
                 if "num_type" not in dict_constraints[key]:
                     dict_constraints[key]["num_type"] = "string"
+                if "conditions" not in dict_constraints[key]:
+                    dict_constraints[key]["conditions"] = list()
                 logger.debug("Constraints for tag %s and key %s: %s" % (tag, key, str(dict_constraints[key])))
             except:
                 logger.error("Issue with tag %s and key %s" % (tag, key))
@@ -200,7 +220,7 @@ class DR2XMLElement(xml_writer.Element):
         return is_valid
 
     def find_value(self, key, value, is_value=True, authorized_types=False, skip_values=list(), is_default=False,
-                   default_values=None, output_key=None, fatal=False, num_type="string"):
+                   default_values=None, output_key=None, fatal=False, num_type="string", conditions=list()):
         logger = get_logger()
         if is_value:
             is_valid = self.check_value(value, authorized_types, skip_values)
@@ -219,7 +239,7 @@ class DR2XMLElement(xml_writer.Element):
             logger.error("Could not find a proper value for attribute %s" % key)
             raise ValueError("Could not find a proper value for attribute %s" % key)
         else:
-            return is_valid, output_key, value, num_type
+            return is_valid, output_key, value, num_type, conditions
 
     def __init__(self, tag, **kwargs):
         default_tag = kwargs.get("default_tag", tag)
@@ -232,7 +252,7 @@ class DR2XMLElement(xml_writer.Element):
         attrs_constraints = tag_settings["attrs_constraints"]
         attrib = OrderedDict()
         for key in attrs_list:
-            is_valid, output_key, value, num_type = \
+            is_valid, output_key, value, num_type, conditions = \
                 self.find_value(key=key, value=kwargs.get(key), is_value=key in kwargs, **attrs_constraints[key])
             if is_valid:
                 attrib[output_key] = value
@@ -240,10 +260,44 @@ class DR2XMLElement(xml_writer.Element):
         vars_list = tag_settings["vars_list"]
         vars_constraints = tag_settings["vars_constraints"]
         for var in vars_list:
-            is_valid, output_var, value, num_type = \
+            is_valid, output_var, value, num_type, conditions = \
                 self.find_value(key=var, value=kwargs.get(var), is_value=var in kwargs, **vars_constraints[var])
-            if is_valid:
+            if is_valid and self.check_conditions(key, value, conditions, kwargs):
                 self.append(wrv(output_var, value, num_type))
+
+    def check_conditions(self, key, val, conditions, kwargs):
+        rep = all([self.interprete_conditions(key, val, cond, kwargs) for cond in conditions])
+        return rep
+
+    @staticmethod
+    def interprete_conditions(key, val, condition, kwargs):
+        rep = True
+        match = eq_regexp.match(condition)
+        if match:
+            type_key = match.groupdict()["type_key"]
+            key_match = match.groupdict()["key"]
+            type_val = match.groupdict()["type_val"]
+            val_match = match.groupdict()["val"]
+            if type_key in ["key"]:
+                key_match = kwargs[key_match]
+            if type_val in ["key"]:
+                val_match = kwargs[val_match]
+            if key_match != val_match:
+                rep = False
+        else:
+            match = neq_regexp.match(condition)
+            if match:
+                type_key = match.groupdict()["type_key"]
+                key_match = match.groupdict()["key"]
+                type_val = match.groupdict()["type_val"]
+                val_match = match.groupdict()["val"]
+                if type_key in ["key"]:
+                    key_match = kwargs[key_match]
+                if type_val in ["key"]:
+                    val_match = kwargs[val_match]
+                if key_match != val_match:
+                    rep = False
+        return rep
 
     def __copy__(self):
         """
@@ -403,7 +457,9 @@ def wrv(name, value, num_type="string"):
         return None
     elif isinstance(print_variables, list) and name not in print_variables:
         return None
-    if isinstance(value, str):
+    if isinstance(value, list):
+        value = reduce(lambda x, y: x + " " + y, value)
+    if isinstance(value, six.string_types):
         value = value[0:1024]  # CMIP6 spec : no more than 1024 char
     # Format a 'variable' entry
     return DR2XMLElement(tag="variable", text=str(value), name=name, type=num_type)

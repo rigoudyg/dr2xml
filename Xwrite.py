@@ -169,19 +169,9 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
     if get_variable_from_sset_with_default("CORDEX_data", False):
         driving_model_id = get_variable_from_sset_without_default('driving_model_id')
         driving_model_ensemble_member = get_variable_from_sset_without_default('driving_model_ensemble_member')
-        driving_experiment = get_variable_from_sset_without_default('driving_experiment')
-        driving_experiment_name = get_variable_from_sset_without_default('driving_experiment_name')
         CORDEX_domain = get_variable_from_sset_without_default('CORDEX_domain')
-        lambert_conformal_longitude_of_central_meridian = \
-            get_variable_from_sset_without_default('Lambert_conformal_longitude_of_central_meridian')
-        lambert_conformal_standard_parallel = \
-            get_variable_from_sset_without_default('Lambert_conformal_standard_parallel')
-        lambert_conformal_latitude_of_projection_origin = \
-            get_variable_from_sset_without_default('Lambert_conformal_latitude_of_projection_origin')
         rcm_version_id = get_variable_from_sset_without_default("rcm_version_id")
 
-    #
-    contact = get_variable_from_sset_else_lset_with_default('contact', default=None)
     #
     # Variant matters
     realization_index = get_variable_from_sset_with_default('realization_index', 1)
@@ -189,9 +179,6 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
     physics_index = get_variable_from_sset_with_default('physics_index', 1)
     forcing_index = get_variable_from_sset_with_default('forcing_index', 1)
     variant_label = "r%di%dp%df%d" % (realization_index, initialization_index, physics_index, forcing_index)
-    variant_info_warning = ". Information provided by this attribute may in some cases be flawed. " + \
-                           "Users can find more comprehensive and up-to-date documentation " \
-                           "via the further_info_url global attribute."
     #
     # WIP Draft 14 july 2016
     mip_era = get_variable_from_sset_else_lset_with_default("mip_era", default=sv.mip_era)
@@ -425,34 +412,6 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
             split_last_date = "{}-{}-{} 00:00:00".format(endyear, endmonth, endday)
     else:
         split_freq = None
-    # out.write(' description="A %s result for experiment %s of %s"'%
-    #            (lset['source_id'],sset['experiment_id'],sset.get('project',"CMIP6")))
-    xml_file = DR2XMLElement(tag="file", default_tag="file_output",
-                             id="_".join([sv.label, table, grid_label]), name=filename, output_freq=freq,
-                             output_level=str(get_variable_from_lset_with_default("output_level", 10)),
-                             compression_level=str(get_variable_from_lset_with_default("compression_level", 0)),
-                             split_freq=split_freq, split_freq_format=split_freq_format,
-                             split_start_offset=split_start_offset, split_end_offset=split_end_offset,
-                             split_last_date=split_last_date,
-                             uuid_format="hdl:{}/%uuid%".format(get_variable_from_sset_else_lset_with_default("HDL", "21.14100")),
-                             convention_str=get_config_variable("conventions"))
-    #
-    if isinstance(activity_id, list):
-        activity_idr = reduce(lambda x, y: x + " " + y, activity_id)
-    else:
-        activity_idr = activity_id
-    wr(xml_file, 'activity_id', activity_idr)
-    #
-    if contact and contact is not "":
-        wr(xml_file, 'contact', contact)
-    wr(xml_file, 'data_specs_version', get_DR_version())
-    wr(xml_file, 'dr2xml_version', get_config_variable("version"))
-    #
-    wr(xml_file, 'experiment_id', expid_in_filename)
-    if experiment_id == expid_in_filename:
-        wr(xml_file, 'description', description)
-        wr(xml_file, 'title', description)
-        wr(xml_file, 'experiment', experiment)
     #
     # Fixing cell_measures is done in vars.py
     #
@@ -478,40 +437,10 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
         external_variables += " " + re.sub(".*volume: ([^ ]*).*", r'\1', sv.cell_measures)
     # if 'fx' in table:
     #     external_variables = ""
-    if external_variables:
-        wr(xml_file, 'external_variables', external_variables)
     #
-    #
-    wr(xml_file, 'forcing_index', forcing_index, num_type="int")
-    wr(xml_file, 'frequency', sv.frequency)
-    #
-    if further_info_url:
-        wr(xml_file, 'further_info_url', further_info_url)
-    #
-    wr(xml_file, 'grid', grid_description)
-    wr(xml_file, 'grid_label', grid_label)
-    wr(xml_file, 'nominal_resolution', grid_resolution)
     comment = " ".join([get_variable_from_lset_with_default('comment', ''),
                         get_variable_from_sset_with_default('comment', ''),
                         dynamic_comment])
-    wr(xml_file, 'comment', comment)
-    wr(xml_file, 'history', sset, default='none')
-    wr(xml_file, "initialization_index", initialization_index, num_type="int")
-    if get_variable_from_sset_with_default("CORDEX_data", False):
-        wr(xml_file, "institute_id", institution_id)
-        wr(xml_file, "CORDEX_domain", CORDEX_domain.get(context))
-        wr(xml_file, "driving_model_id", driving_model_id)
-        wr(xml_file, "driving_model_ensemble_member", driving_model_ensemble_member)
-        wr(xml_file, "driving_experiment_name", driving_experiment_name)
-        wr(xml_file, "driving_experiment", driving_experiment)
-        if context in ["surfex", ]:
-            wr(xml_file, "Lambert_conformal_longitude_of_central_meridian",
-               lambert_conformal_longitude_of_central_meridian)
-            wr(xml_file, "Lambert_conformal_standard_parallel", lambert_conformal_standard_parallel)
-            wr(xml_file, "Lambert_conformal_latitude_of_projection_origin",
-               lambert_conformal_latitude_of_projection_origin)
-    else:
-        wr(xml_file, "institution_id", institution_id)
     if is_key_in_lset('institution'):
         inst = get_variable_from_lset_without_default('institution')
     else:
@@ -520,7 +449,6 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
                 inst = json.loads(json_fp.read())['institution_id'][institution_id]
             except:
                 raise Dr2xmlError("Fatal: Institution_id for %s not found in CMIP6_CV at %s" % (inst, cvspath))
-    wr(xml_file, "institution", inst)
     #
     with open(cvspath + project + "_license.json", "r") as json_fp:
         license = json.loads(json_fp.read())['license'][0]
@@ -530,24 +458,13 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
     license = license.replace("[NonCommercial-]", "NonCommercial-")
     license = license.replace("[ and at <some URL maintained by modeling group>]",
                               " and at " + get_variable_from_lset_without_default("info_url"))
-    wr(xml_file, "license", license)
-    wr(xml_file, 'mip_era', mip_era)
     #
+    if isinstance(parent_experiment_id, list):
+        parent_experiment_id = reduce(lambda x, y: x + " " + y, parent_experiment_id)
     if parent_experiment_id and parent_experiment_id != 'no parent' and parent_experiment_id != ['no parent']:
-        if isinstance(parent_experiment_id, list):
-            parent_experiment_id = reduce(lambda x, y: x + " " + y, parent_experiment_id)
-        wr(xml_file, 'parent_experiment_id', parent_experiment_id)
-        wr(xml_file, 'parent_mip_era', sset, default=mip_era)
-        if isinstance(parent_activity_id, list):
-            parent_activity_id = reduce(lambda x, y: x + " " + y, parent_activity_id)
-        wr(xml_file, 'parent_activity_id', parent_activity_id)
-        wr(xml_file, 'parent_source_id', sset, default=source_id)
         # TBD : syntaxe XIOS pour designer le time units de la simu courante
         parent_time_ref_year = get_variable_from_sset_with_default('parent_time_ref_year', "1850")
-        parent_time_units = "days since {}-01-01 00:00:00".format(parent_time_ref_year)
-        wr(xml_file, 'parent_time_units', sset, default=parent_time_units)
-        wr(xml_file, 'parent_variant_label', sset, default=variant_label)
-        wr(xml_file, 'branch_method', sset, default='standard')
+        branch_method = get_variable_from_sset_with_default("branch_method", "standard")
         # Use branch year in parent if available
         if is_key_in_sset("branch_year_in_parent") and source_id in get_variable_from_lset_without_default('branching'):
             if experiment_id in get_variable_from_lset_without_default('branching', source_id) and \
@@ -561,33 +478,27 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
                                             get_variable_from_sset_with_default("branch_month_in_parent", 1), 1)
             date_ref = datetime.datetime(int(parent_time_ref_year), 1, 1)
             nb_days = (date_branch - date_ref).days
-            wr(xml_file, 'branch_time_in_parent', "{}.0D".format(nb_days), "double")
+            branch_time_in_parent = "{}.0D".format(nb_days)
         else:
-            wr(xml_file, 'branch_time_in_parent', sset, "double")
+            branch_time_in_parent = get_variable_from_sset_with_default("branch_time_in_parent")
         # Use branch year in child if available
         if is_key_in_sset("branch_year_in_parent"):
             date_branch = datetime.datetime(get_variable_from_sset_without_default("branch_year_in_child"), 1, 1)
             date_ref = datetime.datetime(get_variable_from_sset_without_default("child_time_ref_year"), 1, 1)
             nb_days = (date_branch - date_ref).days
-            wr(xml_file, 'branch_time_in_child', "{}.0D".format(nb_days), "double")
+            branch_time_in_child = "{}.0D".format(nb_days)
         else:
-            wr(xml_file, 'branch_time_in_child', sset, "double")
+            branch_time_in_child = get_variable_from_sset_without_default("branch_time_in_child")
     else:
         # Only add branch method meta-data, which is needed for publication
-        wr(xml_file, 'branch_method', "no parent")
+        branch_method = "no parent"
+        branch_time_in_parent = None
+        branch_time_in_child = None
     #
-    wr(xml_file, "physics_index", physics_index, num_type="int")
-    if get_variable_from_sset_with_default("CORDEX_data", False):
-        wr(xml_file, "product", "output")
-    else:
-        wr(xml_file, 'product', 'model-output')
-    wr(xml_file, "realization_index", realization_index, num_type="int")
     # Patch for an issue id DR01.0021 -> 01.00.24
     crealm = sv.modeling_realm
     if crealm == "ocnBgChem":
         crealm = "ocnBgchem"
-    wr(xml_file, 'realm', crealm)
-    wr(xml_file, 'references', lset, default=False)
     #
     try:
         with open(cvspath + project + "_source_id.json", "r") as json_fp:
@@ -598,40 +509,38 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
             source = get_variable_from_lset_without_default('source')
         else:
             raise Dr2xmlError("Fatal: source for %s not found in CMIP6_CV at %s, nor in lset" % (source_id, cvspath))
-    if get_variable_from_sset_with_default("CORDEX_data", False):
-        wr(xml_file, 'project_id', source)
-        wr(xml_file, 'model_id', source_id)
+    #
+    if isinstance(activity_id, list):
+        activity_idr = reduce(lambda x, y: x + " " + y, activity_id)
     else:
-        wr(xml_file, 'source', source)
-        wr(xml_file, 'source_id', source_id)
-    if isinstance(source_type, list):
-        source_type = reduce(lambda x, y: x + " " + y, source_type)
-    wr(xml_file, 'source_type', source_type)
-    #
-    wr(xml_file, 'sub_experiment_id', sub_experiment_id)
-    wr(xml_file, 'sub_experiment', sset, default='none')
-    #
-    wr(xml_file, "table_id", table)
-    #
+        activity_idr = activity_id
     if not is_key_in_sset('expid_in_filename'):
-        wr(xml_file, "title", "{} model output prepared for {} / ".format(source_id, project) + activity_idr + " " +
-           experiment_id)
+        title = "{} model output prepared for {} / {} {}".format(source_id, project, activity_idr, experiment_id)
     else:
-        wr(xml_file, "title", "{} model output prepared for {} and ".format(source_id, project) + activity_idr + " / " +
-           expid_in_filename + " simulation")
+        title = "{} model output prepared for {} and {} / {} simulation".format(source_id, project, activity_idr, expid_in_filename)
     #
     # DR21 has a bug with tsland : the MIP variable is named "ts"
     if sv.label != "tsland":
-        wr(xml_file, "variable_id", sv.mipVarLabel)
+        variable_id = sv.mipVarLabel
     else:
-        wr(xml_file, "variable_id", "tsland")
+        variable_id = "tsland"
     #
-    variant_info = get_variable_from_sset_with_default('variant_info', "none")
-    if variant_info != "none" and variant_info != "":
-        variant_info += variant_info_warning
-    if variant_info != "":
-        wr(xml_file, "variant_info", variant_info)
-    wr(xml_file, "variant_label", variant_label)
+    xml_file = DR2XMLElement(tag="file", default_tag="file_output",
+                             id="_".join([sv.label, table, grid_label]), name=filename, output_freq=freq,
+                             split_freq=split_freq, split_freq_format=split_freq_format,
+                             split_start_offset=split_start_offset, split_end_offset=split_end_offset,
+                             split_last_date=split_last_date, activity_id=activity_id,
+                             expid_in_filename=expid_in_filename, description=description, title_desc=description,
+                             experiment=experiment, external_variables=external_variables, frequency=sv.frequency,
+                             further_info_url=further_info_url, grid=grid_description, grid_label=grid_label,
+                             nominal_resolution=grid_resolution, comment=comment, institution=inst, license=license,
+                             mip_era=mip_era, context=context, experiment_id=experiment_id,
+                             parent_experiment_id=parent_experiment_id, source_id=source_id,
+                             branch_method=branch_method, branch_time_in_parent=branch_time_in_parent,
+                             branch_time_in_child=branch_time_in_child, realm=crealm, source=source,
+                             source_type=source_type, table=table, title=title, variable_id=variable_id,
+                             variant_label=variant_label)
+    #
     for name, value in sorted(list(attributes)):
         wr(xml_file, name, value)
     non_stand_att = get_variable_from_lset_with_default("non_standard_attributes", OrderedDict())
