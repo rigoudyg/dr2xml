@@ -241,10 +241,6 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
         grid_label += "g"
     #
     with open(cvspath + project + "_experiment_id.json", "r") as json_fp:
-        CMIP6_CV_version_metadata = json.loads(json_fp.read())['version_metadata']
-        CMIP6_CV_latest_tag = CMIP6_CV_version_metadata.get('latest_tag_point', 'no more value in CMIP6_CV')
-    #
-    with open(cvspath + project + "_experiment_id.json", "r") as json_fp:
         CMIP6_experiments = json.loads(json_fp.read())['experiment_id']
         if get_variable_from_sset_without_default('experiment_id') not in CMIP6_experiments:
             raise Dr2xmlError("Issue getting experiment description in CMIP6 CV for %20s" % sset['experiment_id'])
@@ -253,19 +249,7 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
         if "_" in expid_in_filename:
             raise Dr2xmlError("Cannot use character '_' in expid_in_filename (%s)" % expid_in_filename)
         exp_entry = CMIP6_experiments[expid]
-        experiment = get_variable_from_sset_with_default("experiment", exp_entry["experiment"])
-        description = get_variable_from_sset_with_default("description", exp_entry['description'])
         activity_id = get_variable_from_sset_else_lset_with_default('activity_id', default=exp_entry['activity_id'])
-        if is_key_in_sset("parent_activity_id"):
-            parent_activity_id = get_variable_from_sset_without_default("parent_activity_id")
-        elif is_key_in_sset("activity_id"):
-            parent_activity_id = get_variable_from_sset_without_default("activity_id")
-        elif is_key_in_lset("parent_activity_id"):
-            parent_activity_id = get_variable_from_lset_without_default("parent_activity_id")
-        else:
-            parent_activity_id = get_variable_from_sset_with_default("activity_id", exp_entry["parent_activity_id"])
-        if isinstance(parent_activity_id, list):
-            parent_activity_id = reduce(lambda x, y: x+" "+y, parent_activity_id)
         parent_experiment_id = get_variable_from_sset_else_lset_with_default("parent_experiment_id",
                                                                              default=exp_entry['parent_experiment_id'])
         if isinstance(parent_experiment_id, list):
@@ -430,25 +414,14 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
     # CF rule : if the file variable has a cell_measures attribute, and
     # the corresponding 'measure' variable is not included in the file,
     # it must be quoted as external_variable
-    external_variables = ''
+    external_variables = list()
     if "area:" in sv.cell_measures:
-        external_variables += " " + re.sub(".*area: ([^ ]*).*", r'\1', sv.cell_measures)
+        external_variables.append(re.sub(".*area: ([^ ]*).*", r'\1', sv.cell_measures))
     if "volume:" in sv.cell_measures:
-        external_variables += " " + re.sub(".*volume: ([^ ]*).*", r'\1', sv.cell_measures)
+        external_variables.append(re.sub(".*volume: ([^ ]*).*", r'\1', sv.cell_measures))
+    external_variables = " ".join(external_variables)
     # if 'fx' in table:
     #     external_variables = ""
-    #
-    comment = " ".join([get_variable_from_lset_with_default('comment', ''),
-                        get_variable_from_sset_with_default('comment', ''),
-                        dynamic_comment])
-    if is_key_in_lset('institution'):
-        inst = get_variable_from_lset_without_default('institution')
-    else:
-        with open(cvspath + project + "_institution_id.json", "r") as json_fp:
-            try:
-                inst = json.loads(json_fp.read())['institution_id'][institution_id]
-            except:
-                raise Dr2xmlError("Fatal: Institution_id for %s not found in CMIP6_CV at %s" % (inst, cvspath))
     #
     with open(cvspath + project + "_license.json", "r") as json_fp:
         license = json.loads(json_fp.read())['license'][0]
@@ -459,8 +432,6 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
     license = license.replace("[ and at <some URL maintained by modeling group>]",
                               " and at " + get_variable_from_lset_without_default("info_url"))
     #
-    if isinstance(parent_experiment_id, list):
-        parent_experiment_id = reduce(lambda x, y: x + " " + y, parent_experiment_id)
     if parent_experiment_id and parent_experiment_id != 'no parent' and parent_experiment_id != ['no parent']:
         # TBD : syntaxe XIOS pour designer le time units de la simu courante
         parent_time_ref_year = get_variable_from_sset_with_default('parent_time_ref_year', "1850")
@@ -495,21 +466,6 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
         branch_time_in_parent = None
         branch_time_in_child = None
     #
-    # Patch for an issue id DR01.0021 -> 01.00.24
-    crealm = sv.modeling_realm
-    if crealm == "ocnBgChem":
-        crealm = "ocnBgchem"
-    #
-    try:
-        with open(cvspath + project + "_source_id.json", "r") as json_fp:
-            sources = json.loads(json_fp.read())['source_id']
-            source = make_source_string(sources, source_id)
-    except:
-        if is_key_in_lset('source'):
-            source = get_variable_from_lset_without_default('source')
-        else:
-            raise Dr2xmlError("Fatal: source for %s not found in CMIP6_CV at %s, nor in lset" % (source_id, cvspath))
-    #
     if isinstance(activity_id, list):
         activity_idr = reduce(lambda x, y: x + " " + y, activity_id)
     else:
@@ -529,17 +485,15 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
                              id="_".join([sv.label, table, grid_label]), name=filename, output_freq=freq,
                              split_freq=split_freq, split_freq_format=split_freq_format,
                              split_start_offset=split_start_offset, split_end_offset=split_end_offset,
-                             split_last_date=split_last_date, activity_id=activity_id,
-                             expid_in_filename=expid_in_filename, description=description, title_desc=description,
-                             experiment=experiment, external_variables=external_variables, frequency=sv.frequency,
+                             split_last_date=split_last_date,
+                             external_variables=external_variables,
                              further_info_url=further_info_url, grid=grid_description, grid_label=grid_label,
-                             nominal_resolution=grid_resolution, comment=comment, institution=inst, license=license,
-                             mip_era=mip_era, context=context, experiment_id=experiment_id,
-                             parent_experiment_id=parent_experiment_id, source_id=source_id,
+                             nominal_resolution=grid_resolution, dynamic_comment=dynamic_comment,
+                             license=license, variable=sv, context=context, experiment_id=experiment_id,
+                             source_id=source_id,
                              branch_method=branch_method, branch_time_in_parent=branch_time_in_parent,
-                             branch_time_in_child=branch_time_in_child, realm=crealm, source=source,
-                             source_type=source_type, table=table, title=title, variable_id=variable_id,
-                             variant_label=variant_label)
+                             branch_time_in_child=branch_time_in_child, source_type=source_type, table_id=table,
+                             title=title, variable_id=variable_id)
     #
     for name, value in sorted(list(attributes)):
         wr(xml_file, name, value)
@@ -725,11 +679,11 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
     # Build a construct for computing a climatology (if applicable)
     # --------------------------------------------------------------------
     if clim:
-        if sv.frequency == "1hrCM":
+        if sv.frequency in ["1hrCM", ]:
             last_field_id, last_grid_id = process_diurnal_cycle(last_field_id, field_defs, grid_defs, axis_defs)
         else:
-            raise Dr2xmlError("Cannot handle climatology cell_method for frequency %s and variable "
-                               % sv.frequency, sv.label)
+            raise Dr2xmlError("Cannot handle climatology cell_method for frequency %s and variable %s"
+                              % (sv.frequency, sv.label))
     #
     # --------------------------------------------------------------------
     # Create intermediate field_def for enforcing operation upstream
@@ -761,11 +715,6 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
     # --------------------------------------------------------------------
     # Create <field> construct to be inserted in a file_def, which includes re-griding
     # --------------------------------------------------------------------
-    #
-    if sv.label in ["tsland", ]:
-        name = "tsland"
-    else:
-        name = sv.mipVarLabel
     if last_grid_id != grid_id_in_ping:
         grid_ref = last_grid_id
     else:
@@ -783,22 +732,6 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
                 xios_freq = cmip6_freq_to_xios_freq(sv.frequency, table)
                 # works only if units are different :
                 freq_offset = "-".join([xios_freq, ts])
-    #
-    # --------------------------------------------------------------------
-    # handle data type and missing value
-    # --------------------------------------------------------------------
-    #
-    detect_missing = "True"
-    missing_value = "1.e+20"
-    if sv.prec.strip() in ["float", "real", ""]:
-        prec = "4"
-    elif sv.prec.strip() in ["double", ]:
-        prec = "8"
-    elif sv.prec.strip() in["integer", "int"]:
-        prec = "2"
-        missing_value = "0"  # 16384"
-    else:
-        raise Dr2xmlError("prec=%s for sv=%s" % (sv.prec, sv.label))
     #
     # TBD : implement DR recommendation for cell_method : The syntax is to append, in brackets,
     # TBD    'interval: *amount* *units*', for example 'area: time: mean (interval: 1 hr)'.
@@ -842,57 +775,10 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
         elif operation in ['instant', ] and get_variable_from_lset_with_default("useAtForInstant", False):
             text = "@{}".format(last_field_id)
 
-    rep = DR2XMLElement(tag="field", default_tag="field_output", field_ref=last_field_id, name=name, grid_ref=grid_ref,
-                        freq_offset=freq_offset, detect_missing_value=detect_missing, default_value=missing_value,
-                        prec=prec, cell_methods=sv.cell_methods, operation=operation,
-                        freq_op=freq_op, expr=expr, text=text)
     #
     # --------------------------------------------------------------------
     # Add Xios variables for creating NetCDF attributes matching CMIP6 specs
     # --------------------------------------------------------------------
-    comment = None
-    # Process experiment-specific comment for the variable
-    if sv.label in get_variable_from_sset_without_default('comments'):
-        comment = get_variable_from_sset_without_default('comments', sv.label)
-    else:  # Process lab-specific comment for the variable
-        if sv.label in get_variable_from_lset_without_default('comments'):
-            comment = get_variable_from_lset_without_default('comments', sv.label)
-    if comment:
-        rep.append(wrv('comment', comment))  # TBI
-    #
-    if sv.stdname:
-        rep.append(wrv("standard_name", sv.stdname))
-    #
-    desc = sv.description
-    # if desc :
-    # desc=desc.replace(">","&gt;").replace("<","&lt;").replace("&","&amp;").replace("'","&apos;").replace('"',"&quot;")
-    if desc is not None and desc:
-        desc = desc.replace(">", "&gt;").replace("<", "&lt;").strip()
-    rep.append(wrv("description", desc))
-    #
-    rep.append(wrv("long_name", sv.long_name))
-    if sv.positive != "None" and sv.positive != "":
-        rep.append(wrv("positive", sv.positive))
-    rep.append(wrv('history', 'none'))
-    if sv.units:
-        rep.append(wrv('units', sv.units))
-    if sv.cell_methods:
-        if get_variable_from_sset_with_default("CORDEX_data", False) and "area: time: mean" in sv.cell_methods:
-            rep.append(wrv("cell_methods", "time:mean"))
-        else:
-            rep.append(wrv('cell_methods', sv.cell_methods))
-    if sv.cell_measures:
-        rep.append(wrv('cell_measures', sv.cell_measures))
-    #
-    if sv.struct is not None:
-        fmeanings = sv.struct.flag_meanings
-        if fmeanings is not None and fmeanings.strip() != '':
-            rep.append(wrv('flag_meanings', fmeanings.strip()))
-        fvalues = sv.struct.flag_values
-        if fvalues is not None and fvalues.strip() != '':
-            rep.append(wrv('flag_values', fvalues.strip()))
-    if get_variable_from_sset_with_default("CORDEX_data", False) and context in ["surfex", ]:
-        rep.append(wrv('grid_mapping', "Lambert_Conformal"))
     #
     # We override the Xios value for interval_operation because it sets it to
     # the freq_output value with our settings (for complicated reasons)
@@ -903,9 +789,11 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
         grid_choice = get_variable_from_lset_without_default("grid_choice", source)
         interval_op = repr(int(get_variable_from_lset_without_default('sampling_timestep', grid_choice, context))) + \
                       " s"
-    if operation != 'once':
-        rep.append(wrv('interval_operation', interval_op))
 
+    rep = DR2XMLElement(tag="field", default_tag="field_output", field_ref=last_field_id, grid_ref=grid_ref,
+                        freq_offset=freq_offset, operation=operation,
+                        freq_op=freq_op, expr=expr, text=text, variable=sv,
+                        interval_operation=interval_op)
     # mpmoine_note: 'missing_value(s)' normalement plus necessaire, a verifier
     # TBS rep.append(wrv("missing_values", sv.missing, num_type="double"))
     #
@@ -1043,30 +931,6 @@ def is_singleton(sdim):
         # Case of space dimension singletons. Should a 'value' and no 'requested'
         return ((sdim.value != '') and (sdim.requested.strip() == '')) \
                or (sdim.label == "typewetla")  # The latter is a bug in DR01.00.21 : typewetla has no value there
-
-
-def make_source_string(sources, source_id):
-    """
-    From the dic of sources in CMIP6-CV, Creates the string representation of a
-    given model (source_id) according to doc on global_file_attributes, so :
-
-    <modified source_id> (<year>): atmosphere: <model_name> (<technical_name>, <resolution_and_levels>);
-    ocean: <model_name> (<technical_name>, <resolution_and_levels>); sea_ice: <model_name> (<technical_name>);
-    land: <model_name> (<technical_name>); aerosol: <model_name> (<technical_name>);
-    atmospheric_chemistry <model_name> (<technical_name>); ocean_biogeochemistry <model_name> (<technical_name>);
-    land_ice <model_name> (<technical_name>);
-
-    """
-    # mpmoine_correction:make_source_string: pour lire correctement le fichier 'CMIP6_source_id.json'
-    source = sources[source_id]
-    components = source['model_component']
-    rep = source_id + " (" + source['release_year'] + "): "
-    for realm in ["aerosol", "atmos", "atmosChem", "land", "ocean", "ocnBgchem", "seaIce"]:
-        component = components[realm]
-        description = component['description']
-        if description != "none":
-            rep = rep + "\n" + realm + ": " + description
-    return rep
 
 
 def write_xios_file_def(filename, svars_per_table, year, lset, sset, cvs_path, field_defs, axis_defs, grid_defs,

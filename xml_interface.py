@@ -7,199 +7,27 @@ Interface between xml module and dr2xml.
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+import copy
+import pprint
 from collections import OrderedDict
-from copy import copy, deepcopy
-from functools import reduce
-from io import open
-import os
-import json
-import re
-
-from xml.dom import minidom
-
 import six
 
 import xml_writer
-from config import get_config_variable
-from dr_interface import get_DR_version
-from utils import decode_if_needed
 from logger import get_logger
-from settings_interface import get_variable_from_lset_with_default, get_variable_from_sset_with_default
+from json_interface import setup_project_settings, find_value
+from settings_interface import get_variable_from_lset_with_default
+from utils import reduce_and_strip, decode_if_needed
 
 projects_settings = None
 
 
-def prepare_project_settings(dict_settings):
-    if "parent_project_settings" in dict_settings:
-        parent = dict_settings.pop("parent_project_settings")
-        parent_settings = read_project_settings(parent)
-        parent_settings = prepare_project_settings(parent_settings)
-        for tag in dict_settings:
-            if tag not in parent_settings:
-                parent_settings[tag] = dict_settings[tag]
-            else:
-                if "attrs_list" in dict_settings[tag]:
-                    parent_settings[tag]["attrs_list"] = dict_settings[tag]["attrs_list"]
-                if "attrs_constraints" in dict_settings[tag]:
-                    if "attrs_constraints" in parent_settings[tag]:
-                        for key in dict_settings[tag]["attrs_constraints"]:
-                            if key in parent_settings[tag]["attrs_constraints"]:
-                                parent_settings[tag]["attrs_constraints"][key].update(
-                                    dict_settings[tag]["attrs_constraints"][key]
-                                )
-                            else:
-                                parent_settings[tag]["attrs_constraints"][key] = \
-                                    dict_settings[tag]["attrs_constraints"][key]
-                    else:
-                        parent_settings[tag]["attrs_constraints"] = dict_settings[tag]["attrs_constraints"]
-                if "vars_list" in dict_settings[tag]:
-                    parent_settings[tag]["vars_list"] = dict_settings[tag]["vars_list"]
-                if "vars_constraints" in dict_settings[tag]:
-                    if "vars_constraints" in parent_settings[tag]:
-                        for key in dict_settings[tag]["vars_constraints"]:
-                            if key in parent_settings[tag]["vars_constraints"]:
-                                parent_settings[tag]["vars_constraints"][key].update(
-                                    dict_settings[tag]["vars_constraints"][key]
-                                )
-                            else:
-                                parent_settings[tag]["vars_constraints"][key] = \
-                                    dict_settings[tag]["vars_constraints"][key]
-                    else:
-                        parent_settings[tag]["vars_constraints"] = dict_settings[tag]["vars_constraints"]
-    else:
-        parent_settings = dict_settings
-    return parent_settings
-
-
-def reformat_settings(dict_settings):
-    dict_settings = prepare_project_settings(dict_settings)
-    for tag in dict_settings:
-        if "attrs_list" not in dict_settings[tag]:
-            dict_settings[tag]["attrs_list"] = list()
-        dict_settings[tag]["attrs_constraints"] = \
-            reformat_constraints(tag, dict_settings[tag].get("attrs_constraints", dict()),
-                                 dict_settings[tag]["attrs_list"])
-        if "vars_list" not in dict_settings[tag]:
-            dict_settings[tag]["vars_list"] = list()
-        dict_settings[tag]["vars_constraints"] = \
-            reformat_constraints(tag, dict_settings[tag].get("vars_constraints", dict()),
-                                 dict_settings[tag]["vars_list"])
-    return dict_settings
-
-
-regexp_default = re.compile(r"^(?P<default_name>.*)!:@(?P<default_src>.*)!:@(?P<format>.*)?$")
-eq_regexp = re.compile(r"(?P<type_key>(key|val)):(?P<key>.*)==(?P<type_val>(key|val)):(?P<val>.*)")
-neq_regexp = re.compile(r"(?P<type_key>(key|val)):(?P<key>.*)!=(?P<type_val>(key|val)):(?P<val>.*)")
-
-
-def reformat_default_values(default_list):
-    rep = list()
-    for elt in default_list:
-        match = regexp_default.match(elt)
-        if match is not None:
-            default_name = match.groupdict()["default_name"]
-            default_src = match.groupdict()["default_src"]
-            default_format = match.groupdict()["format"]
-            if default_src in ["lab", "laboratory", "model"]:
-                elt = get_variable_from_lset_with_default(default_name)
-            elif default_src in ["sim", "simulation"]:
-                elt = get_variable_from_sset_with_default(default_name)
-            elif default_src in ["conf", "config", "configuration"]:
-                elt = get_config_variable(default_name)
-            elif default_src in ["DR_version", ]:
-                elt = get_DR_version()
-            elif default_src in ["dict"]:
-                # TODO: Must be treated while evaluating
-                pass
-            else:
-                raise ValueError("Unknown source for %s and %s" % (default_src, default_name))
-            if default_format is not None:
-                elt = default_format.format(elt)
-        rep.append(elt)
-    return rep
-
-
-def reformat_constraints(tag, dict_constraints, list_keys):
-    logger = get_logger()
-    for key in list_keys:
-        if key in dict_constraints:
-            try:
-                if "skip_values" not in dict_constraints[key]:
-                    dict_constraints[key]["skip_values"] = list()
-                if "authorized_types" in dict_constraints[key]:
-                    if dict_constraints[key]["authorized_types"]:
-                        val = [globals()["__builtins__"][val] for val in dict_constraints[key]["authorized_types"]]
-                        if len(val) == 1:
-                            val = val[0]
-                        dict_constraints[key]["authorized_types"] = val
-                else:
-                    dict_constraints[key]["authorized_types"] = False
-                if "default_values" in dict_constraints[key]:
-                    if not isinstance(dict_constraints[key]["default_values"], list):
-                        dict_constraints[key]["default_values"] = [dict_constraints[key]["default_values"], ]
-                    dict_constraints[key]["default_values"] = \
-                        reformat_default_values(dict_constraints[key]["default_values"])
-                    if len(dict_constraints[key]["default_values"]) == 0:
-                        dict_constraints[key]["is_default"] = False
-                    elif "is_default" not in dict_constraints[key]:
-                        dict_constraints[key]["is_default"] = True
-                elif "default_values" not in dict_constraints[key]:
-                    dict_constraints[key]["default_values"] = list()
-                    dict_constraints[key]["is_default"] = False
-                if "output_key" not in dict_constraints[key]:
-                    dict_constraints[key]["output_key"] = key
-                if "fatal" not in dict_constraints[key]:
-                    dict_constraints[key]["fatal"] = False
-                elif dict_constraints[key]["fatal"] in ["True", ]:
-                    dict_constraints[key]["fatal"] = True
-                else:
-                    dict_constraints[key]["fatal"] = False
-                if "num_type" not in dict_constraints[key]:
-                    dict_constraints[key]["num_type"] = "string"
-                if "conditions" not in dict_constraints[key]:
-                    dict_constraints[key]["conditions"] = list()
-                logger.debug("Constraints for tag %s and key %s: %s" % (tag, key, str(dict_constraints[key])))
-            except:
-                logger.error("Issue with tag %s and key %s" % (tag, key))
-                raise
-        else:
-            dict_constraints[key] = dict(skip_values=list(), authorized_types=list(), default_values=None,
-                                         is_default=False, output_key=key, fatal=False, num_type="string")
-    return dict_constraints
-
-
-def read_project_settings(filename):
-    if not os.path.isfile(filename):
-        filename = os.sep.join([os.path.dirname(os.path.abspath(__file__)), "projects", "{}.json".format(filename)])
-    return read_json_content(filename)
-
-
-def read_json_content(filename):
-    logger = get_logger()
-    if os.path.isfile(filename):
-        with open(filename) as fp:
-            content = json.load(fp)
-            return content
-    else:
-        logger.error("Could not find the file containing the project's settings at %s" %
-                     filename)
-        raise OSError("Could not find the file containing the project's settings at %s" %
-                      filename)
-
-
-def initialize_project_settings():
+def initialize_project_settings(**kwargs):
     global projects_settings
     logger = get_logger()
-    if projects_settings is None:
-        logger.debug("Initialize project_settings")
-        project_settings_filename = get_variable_from_lset_with_default("project_settings", None)
-        if project_settings_filename is not None:
-            # If the project's settings filename is provided
-            projects_settings = read_project_settings(project_settings_filename)
-        else:
-            # Get the default project's settings file content
-            projects_settings = read_project_settings(get_variable_from_lset_with_default("project", "CMIP6"))
-        projects_settings = reformat_settings(projects_settings)
+    logger.debug("Initialize project_settings")
+    # If no filename is specified, get the one associated with the project
+    projects_settings = setup_project_settings(**kwargs)
+    pprint.pprint(projects_settings)
 
 
 class DR2XMLComment(xml_writer.Comment):
@@ -209,37 +37,6 @@ class DR2XMLComment(xml_writer.Comment):
 
 
 class DR2XMLElement(xml_writer.Element):
-
-    @staticmethod
-    def check_value(value, authorized_types, skip_values):
-        is_valid = True
-        if authorized_types and not isinstance(value, authorized_types):
-            is_valid = False
-        if is_valid and str(value) in skip_values:
-            is_valid = False
-        return is_valid
-
-    def find_value(self, key, value, is_value=True, authorized_types=False, skip_values=list(), is_default=False,
-                   default_values=None, output_key=None, fatal=False, num_type="string", conditions=list()):
-        logger = get_logger()
-        if is_value:
-            is_valid = self.check_value(value, authorized_types, skip_values)
-            logger.debug("Check value %s for key %s... is proper? %s" % (value, key, is_valid))
-        else:
-            is_valid = False
-            logger.debug("No specified value for key %s" % key)
-        if is_default:
-            i = 0
-            while not is_valid and i < len(default_values):
-                value = default_values[i]
-                is_valid = self.check_value(value, authorized_types, skip_values)
-                logger.debug("Check value %s for key %s... is proper? %s" % (value, key, is_valid))
-                i += 1
-        if not is_valid and fatal:
-            logger.error("Could not find a proper value for attribute %s" % key)
-            raise ValueError("Could not find a proper value for attribute %s" % key)
-        else:
-            return is_valid, output_key, value, num_type, conditions
 
     def __init__(self, tag, **kwargs):
         default_tag = kwargs.get("default_tag", tag)
@@ -251,63 +48,32 @@ class DR2XMLElement(xml_writer.Element):
         attrs_list = tag_settings["attrs_list"]
         attrs_constraints = tag_settings["attrs_constraints"]
         attrib = OrderedDict()
+        common_dict = projects_settings["__common_values__"]
         for key in attrs_list:
-            is_valid, output_key, value, num_type, conditions = \
-                self.find_value(key=key, value=kwargs.get(key), is_value=key in kwargs, **attrs_constraints[key])
-            if is_valid:
-                attrib[output_key] = value
+            test, value, output_dict = find_value(tag=tag, key=key, value=kwargs.get(key),
+                                                  is_default_value=key not in kwargs, common_dict=common_dict,
+                                                  additional_dict=kwargs, **attrs_constraints[key])
+            if test:
+                attrib[output_dict["output_key"]] = value
         super(DR2XMLElement, self).__init__(tag=tag, text=text, attrib=attrib)
         vars_list = tag_settings["vars_list"]
         vars_constraints = tag_settings["vars_constraints"]
         for var in vars_list:
-            is_valid, output_var, value, num_type, conditions = \
-                self.find_value(key=var, value=kwargs.get(var), is_value=var in kwargs, **vars_constraints[var])
-            if is_valid and self.check_conditions(key, value, conditions, kwargs):
-                self.append(wrv(output_var, value, num_type))
-
-    def check_conditions(self, key, val, conditions, kwargs):
-        rep = all([self.interprete_conditions(key, val, cond, kwargs) for cond in conditions])
-        return rep
-
-    @staticmethod
-    def interprete_conditions(key, val, condition, kwargs):
-        rep = True
-        match = eq_regexp.match(condition)
-        if match:
-            type_key = match.groupdict()["type_key"]
-            key_match = match.groupdict()["key"]
-            type_val = match.groupdict()["type_val"]
-            val_match = match.groupdict()["val"]
-            if type_key in ["key"]:
-                key_match = kwargs[key_match]
-            if type_val in ["key"]:
-                val_match = kwargs[val_match]
-            if key_match != val_match:
-                rep = False
-        else:
-            match = neq_regexp.match(condition)
-            if match:
-                type_key = match.groupdict()["type_key"]
-                key_match = match.groupdict()["key"]
-                type_val = match.groupdict()["type_val"]
-                val_match = match.groupdict()["val"]
-                if type_key in ["key"]:
-                    key_match = kwargs[key_match]
-                if type_val in ["key"]:
-                    val_match = kwargs[val_match]
-                if key_match != val_match:
-                    rep = False
-        return rep
+            test, value, output_dict = find_value(tag=tag, key=var, value=kwargs.get(var),
+                                                  is_default_value=var not in kwargs, common_dict=common_dict,
+                                                  additional_dict=kwargs, **vars_constraints[var])
+            if test:
+                self.append(wrv(output_dict["output_key"], value, output_dict["num_type"]))
 
     def __copy__(self):
         """
 
         :return:
         """
-        element = type(self).__call__(tag=self.tag, text=self.text, **deepcopy(self.attrib))
+        element = type(self).__call__(tag=self.tag, text=self.text, **copy.deepcopy(self.attrib))
         element.update_level(self.level)
         for child in self.children:
-            element.children.append(copy(child))
+            element.children.append(copy.copy(child))
         return element
 
 
@@ -338,17 +104,6 @@ def get_root_of_xml_file(xml_file, follow_src=False, path_parse="./", dont_read=
     text, comments, header, root_element = parse_xml_file(xml_file, follow_src=follow_src, path_parse=path_parse,
                                                           dont_read=dont_read)
     return root_element
-
-
-def create_pretty_string_from_xml_element(xml_element):
-    """
-
-    :param xml_element:
-    :return:
-    """
-    xml_str = str(xml_element)
-    reparsed = minidom.parseString(xml_str)
-    return reparsed.toprettyxml(indent="\t", newl="\n", encoding="utf-8")
 
 
 def create_header():
@@ -437,9 +192,11 @@ def wr(out, key, dic_or_val=None, num_type="string", default=None):
     if val:
         if num_type in ["string", ]:
             # val=val.replace(">","&gt").replace("<","&lt").replace("&","&amp").replace("'","&apos").replace('"',"&quot").strip()
-            val = val.replace(">", "&gt").replace("<", "&lt").strip()
+            val = val.replace(">", "&gt").replace("<", "&lt")
             # CMIP6 spec : no more than 1024 char
             val = val[0:1024]
+        if isinstance(val, six.string_types):
+            val = val.strip()
         if num_type not in ["string", ] or len(val) > 0:
             out.append(DR2XMLElement(tag="variable", text=val, name=key, type=num_type))
 
@@ -457,8 +214,7 @@ def wrv(name, value, num_type="string"):
         return None
     elif isinstance(print_variables, list) and name not in print_variables:
         return None
-    if isinstance(value, list):
-        value = reduce(lambda x, y: x + " " + y, value)
+    value = reduce_and_strip(value)
     if isinstance(value, six.string_types):
         value = value[0:1024]  # CMIP6 spec : no more than 1024 char
     # Format a 'variable' entry

@@ -1,5 +1,71 @@
 {
   "parent_project_settings": "CMIP6",
+  "__common_values__": {
+    "CORDEX_domain": {
+      "default_values": [
+        {
+          "key_type": "simulation",
+          "keys": "CORDEX_domain"
+        }
+      ]
+    },
+    "driving_model_id": {
+      "default_values": [
+        {
+          "key_type": "simulation",
+          "keys": "driving_model_id"
+        }
+      ]
+    },
+    "driving_model_ensemble_member": {
+      "default_values": [
+        {
+          "key_type": "simulation",
+          "keys": "driving_model_ensemble_member"
+        }
+      ]
+    },
+    "driving_experiment_name": {
+      "default_values": [
+        {
+          "key_type": "simulation",
+          "keys": "driving_experiment_name"
+        }
+      ]
+    },
+    "driving_experiment": {
+      "default_values": [
+        {
+          "key_type": "simulation",
+          "keys": "driving_experiment"
+        }
+      ]
+    },
+    "Lambert_conformal_longitude_of_central_meridian": {
+      "default_values": [
+        {
+          "key_type": "simulation",
+          "keys": "Lambert_conformal_longitude_of_central_meridian"
+        }
+      ]
+    },
+    "Lambert_conformal_standard_parallel": {
+      "default_values": [
+        {
+          "key_type": "simulation",
+          "keys": "Lambert_conformal_standard_parallel"
+        }
+      ]
+    },
+    "Lambert_conformal_latitude_of_projection_origin": {
+      "default_values": [
+        {
+          "key_type": "simulation",
+          "keys": "Lambert_conformal_latitude_of_projection_origin"
+        }
+      ]
+    }
+  },
   "file_output": {
     "vars_list": ["activity_id", "contact", "data_specs_version", "dr2xml_version", "expid_in_filename", "description",
       "title_desc", "experiment", "external_variables", "forcing_index", "frequency", "further_info_url", "grid",
@@ -9,54 +75,154 @@
       "Lambert_conformal_latitude_of_projection_origin", "institution_id", "institution", "license", "mip_era",
       "parent_experiment_id", "parent_mip_era", "parent_activity_id", "parent_source_id", "parent_time_units",
       "parent_variant_label", "branch_method", "branch_time_in_parent", "branch_time_in_child", "physics_index",
-      "product", "realization_index", "reference", "realm", "source", "source_id", "source_type", "sub_experiment_id",
-      "sub_experiment", "table", "title", "variable_id", "variant_info", "variant_label"],
+      "product", "realization_index", "realm", "reference", "source", "source_id", "source_type", "sub_experiment_id",
+      "sub_experiment", "table_id", "title", "variable_id", "variant_info", "variant_label"],
     "vars_constraints": {
       "institution_id": {
         "output_key": "institute_id"
       },
       "CORDEX_domain": {
-        "default_values": ["CORDEX_domain.get(context))"]
+        "default_values": [
+          {
+            "key_type": "common",
+            "keys": [
+              "CORDEX_domain",
+              {
+                "key_type": "dict",
+                "keys": "context"
+              }
+            ]
+          }
+        ]
       },
       "driving_model_id": {
-        "default_values": ["driving_model_id!:@simulation"],
+        "default_values": [
+          {
+            "key_type": "common",
+            "keys": "driving_model_id"
+          }
+        ],
         "fatal": "True"
       },
       "driving_model_ensemble_member": {
-        "default_values": ["driving_model_ensemble_member!:@simulation"],
+        "default_values": [
+          {
+            "key_type": "common",
+            "keys": "driving_model_ensemble_member"
+          }
+        ],
         "fatal": "True"
       },
       "driving_experiment_name": {
-        "default_values": ["driving_experiment_name!:@simulation"],
+        "default_values": [
+          {
+            "key_type": "common",
+            "keys": "driving_experiment_name"
+          }
+        ],
         "fatal": "True"
       },
       "driving_experiment": {
-        "default_values": ["driving_experiment!:@simulation"],
+        "default_values": [
+          {
+            "key_type": "common",
+            "keys": "driving_experiment"
+          }
+        ],
         "fatal": "True"
       },
       "Lambert_conformal_longitude_of_central_meridian": {
-        "default_values": ["Lambert_conformal_longitude_of_central_meridian!:@simulation"],
+        "default_values": [
+          {
+            "key_type": "common",
+            "keys": "Lambert_conformal_longitude_of_central_meridian"
+          }
+        ],
         "skip_values": ["", "None"],
-        "conditions": ["key:context==val:surfex"]
+        "conditions": [
+          [{
+            "key_type": "dict",
+            "keys": "context"
+          },
+            "eq",
+            "surfex"]
+        ]
       },
       "Lambert_conformal_standard_parallel": {
-        "default_values": ["Lambert_conformal_standard_parallel!:@simulation"],
+        "default_values": [
+          {
+            "key_type": "common",
+            "keys": "Lambert_conformal_standard_parallel"
+          }
+        ],
         "skip_values": ["", "None"],
-        "conditions": ["key:context==val:surfex"]
+        "conditions": [
+          [{
+            "key_type": "dict",
+            "keys": "context"
+          },
+            "eq",
+            "surfex"]
+        ]
       },
       "Lambert_conformal_latitude_of_projection_origin": {
-        "default_values": ["Lambert_conformal_latitude_of_projection_origin!:@simulation"],
+        "default_values": [
+          {
+            "key_type": "common",
+            "keys": "Lambert_conformal_latitude_of_projection_origin"
+          }
+        ],
         "skip_values": ["", "None"],
-        "conditions": ["key:context==val:surfex"]
+        "conditions": [
+          [{
+            "key_type": "dict",
+            "keys": "context"
+          },
+            "eq",
+            "surfex"]
+        ]
       },
       "product": {
-        "default_values": ["output"]
+        "default_values": [
+          "output"
+        ]
       },
       "source": {
         "output_key": "project_id"
       },
       "source_id": {
         "output_key": "model_id"
+      }
+    }
+  },
+  "field_output": {
+    "attrs_constraints": {
+      "cell_methods": {
+        "corrections": {
+          "area: time: mean": "time: mean"
+        }
+      }
+    },
+    "vars_list": ["comment", "standard_name", "description", "long_name", "positive", "history", "units",
+      "cell_methods", "cell_measures", "flag_meanings", "flag_values", "grid_mapping", "interval_operation"],
+    "vars_constraints": {
+      "grid_mapping": {
+        "default_values": [
+          "Lambert_Conformal"
+        ],
+        "conditions": [
+          [{
+            "key_type": "dict",
+            "keys": "context"
+          },
+            "eq",
+            "surfex"]
+        ]
+      },
+      "cell_methods": {
+        "corrections": {
+          "area: time: mean": "time: mean"
+        }
       }
     }
   }

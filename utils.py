@@ -9,6 +9,9 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 
 import sys
 from collections import OrderedDict
+from functools import reduce
+
+import six
 
 from logger import get_logger
 
@@ -129,3 +132,11 @@ def print_struct(struct, skip_sep=False, sort=False, back_line=False):
         return rep
     else:
         return "'{}'".format(struct)
+
+
+def reduce_and_strip(elt):
+    if isinstance(elt, list):
+        elt = reduce(lambda x, y: x + " " + y, elt)
+    if isinstance(elt, six.string_types):
+        elt = elt.strip()
+    return elt

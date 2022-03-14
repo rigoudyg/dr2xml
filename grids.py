@@ -91,6 +91,7 @@ def create_grid_def(grid_defs, axis_def, axis_name, src_grid_id):
     # Retrieve axis key and remove id= from axis definition
     new_axis_def = axis_def.copy()
     axis_key = new_axis_def.attrib.pop("id")
+    print("DEBUG", src_grid_id, axis_key, new_axis_def, axis_def)
     target_grid_id = src_grid_id + "_" + axis_key
     #
     # Change only first instance of axis_ref, which is assumed to match the vertical dimension

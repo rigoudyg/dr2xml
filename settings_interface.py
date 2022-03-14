@@ -164,6 +164,17 @@ def get_variable_from_lset_with_default(key, default=None):
     return lset.get(key, default)
 
 
+def get_variable_from_lset_with_default_in_lset(key, key_default, default=None):
+    """
+
+    :param key:
+    :param key_default:
+    :param default:
+    :return:
+    """
+    return lset.get(key, lset.get(key_default, default))
+
+
 def get_variable_from_lset_without_default(*args):
     """
 
@@ -241,7 +252,7 @@ def is_sset_not_None():
 
     :return:
     """
-    return sset
+    return sset is not None
 
 
 def get_lset_iteritems():

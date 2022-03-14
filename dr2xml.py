@@ -599,7 +599,7 @@ def generate_file_defs(lset, sset, year, enddate, context, cvs_path, pingfiles=N
     # Initialize lset and sset variables for all functions
     initialize_config_variables()
     initialize_dict(lset, sset)
-    initialize_project_settings()
+    initialize_project_settings(cvspath=cvs_path, context=context)
     generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingfiles=pingfiles,
                              dummies=dummies, dirname=dirname,
                              prefix=prefix, attributes=attributes, select=select)
