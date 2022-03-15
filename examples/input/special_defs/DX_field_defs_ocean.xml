@@ -1,0 +1,45 @@
+<field_definition>
+
+  <!-- Variables from DX_field_defs_ocean.xml -->
+
+  <!-- For some variables, the Data Request does not include the necessary
+  information on how to derive the variable from other ones, while
+  Xios can do that. So, we tell that in Xios syntax -->
+
+  <!-- section yet empty  -->
+
+  
+       
+  <!-- for variables in next group, dr2xml may at a later stage provide
+       a definition using standard operations -->
+
+  <field_group id="DX_later_ocean">
+    
+    <field_group id="DX_ocean_constants_0d" >
+      <field id="DX_areao"      field_ref="dummy_na" />
+      <field id="DX_cpocean"    field_ref="dummy_na" />
+      <field id="DX_rhozero"    field_ref="dummy_na" />
+    </field_group >
+    
+    <field_group id="DX_ocean_integrals_3d" >
+      <field id="DX_volo"       field_ref="dummy_na" />
+      <field id="DX_masso"	  field_ref="dummy_na" />
+    </field_group >
+    
+    <field_group id="DX_ocean_global_averages_2d" >
+      <field id="DX_zostoga"      field_ref="dummy_na"/>
+      <field id="DX_tosga"        field_ref="dummy_na"/>
+      <field id="DX_sosga"        field_ref="dummy_na"/>
+    </field_group >
+    
+    <field_group id="DX_ocean_global_averages_3d" >
+      <field id="DX_bigthetaoga" field_ref="dummy_na"/>
+      <field id="DX_thetaoga"    field_ref="dummy_na"/>
+      <field id="DX_soga"        field_ref="dummy_na"/>
+    </field_group >
+  </field_group >
+    
+  <!-- End of variables from DX_field_defs_ocean.xml -->
+    
+</field_definition>
+

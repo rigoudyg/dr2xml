@@ -5,7 +5,13 @@
       "default_values": [
         {
           "key_type": "simulation",
-          "keys": "CORDEX_domain"
+          "keys": [
+              "CORDEX_domain",
+              {
+                "key_type": "dict",
+                "keys": "context"
+              }
+            ]
         }
       ]
     },
@@ -64,9 +70,89 @@
           "keys": "Lambert_conformal_latitude_of_projection_origin"
         }
       ]
+    },
+    "rcm_version_id": {
+      "default_values": [
+        {
+          "key_type": "simulation",
+          "keys": "rcm_version_id"
+        }
+      ]
     }
   },
   "file_output": {
+        "attrs_constraints": {
+      "name":{
+        "default_values": [
+          {
+            "func": [
+              "CORDEX",
+              "build_filename",
+              {
+                "frequency": {
+                  "key_type": "variable",
+                  "keys": "frequency"
+                },
+                "prefix": {
+                  "key_type": "dict",
+                  "keys": "prefix"
+                },
+                "source_id": {
+                  "key_type": "dict",
+                  "keys": "source_id"
+                },
+                "expid_in_filename": {
+                  "key_type": "common",
+                  "keys": "expid_in_filename"
+                },
+                "date_range": {
+                  "key_type": "common",
+                  "keys": "date_range"
+                },
+                "var_type": {
+                  "key_type": "variable",
+                  "keys": "type"
+                },
+                "list_perso_dev_file":
+                {
+                  "key_type": "common",
+                  "keys": "list_perso_dev_file"
+                },
+                "label": {
+                  "key_type": "variable",
+                  "keys": "label"
+                },
+                "mipVarLabel": {
+                  "key_type": "variable",
+                  "keys": "mipVarLabel"
+                },
+                "use_cmorvar": {
+                  "key_type": "common",
+                  "keys": "use_cmorvar"
+                },
+                "CORDEX_domain": {
+                  "key_type": "common",
+                  "keys": "CORDEX_domain"
+                },
+                "driving_model_id": {
+                  "key_type": "common",
+                  "keys": "driving_model_id"
+                },
+                "driving_model_ensemble_member": {
+                  "key_type": "common",
+                  "keys": "driving_model_ensemble_member"
+                },
+                "rcm_version_id": {
+                  "key_type": "common",
+                  "keys": "rcm_version_id"
+                }
+              }
+            ]
+          }
+        ],
+        "fatal": "True"
+      }
+    },
     "vars_list": ["activity_id", "contact", "data_specs_version", "dr2xml_version", "expid_in_filename", "description",
       "title_desc", "experiment", "external_variables", "forcing_index", "frequency", "further_info_url", "grid",
       "grid_label", "nominal_resolution", "comment", "history", "initialization_index", "CORDEX_domain",
@@ -85,13 +171,7 @@
         "default_values": [
           {
             "key_type": "common",
-            "keys": [
-              "CORDEX_domain",
-              {
-                "key_type": "dict",
-                "keys": "context"
-              }
-            ]
+            "keys": "CORDEX_domain"
           }
         ]
       },

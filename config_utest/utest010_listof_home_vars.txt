@@ -1,7 +1,0 @@
---------------------------------------------------------------------------------------------------------------------------------------
-TYPE;    VARNAME;         REALM;     FREQUENCY;     TABLE;      TEMPORAL_SHP;         SPATIAL_SHP;       EXPNAME;            MIP
---------------------------------------------------------------------------------------------------------------------------------------
-perso;   hmv3;            ocean;     mon;           Omon;       time-point;           XY-na;             ANY;                DCPP
-perso;   hmv4;            atmos;     6hr;           6hrPlevpt;  time-point;           XY-na;             Forced-Atmos-Land;  HighResMIP
-perso;   hmv6;            ocean;     day;           day;        time-mean;            XY-na;             DCPP-C13;           DCPP
-cmor;    zos;             ocean;     mon;           Omon;       time-point;           XY-na;             ANY;                DCPP

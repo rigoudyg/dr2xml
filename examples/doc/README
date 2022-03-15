@@ -1,0 +1,14 @@
+A package for translating a CMIP Data Request to XIOS file_defs
+
+Introduction                     : see doc/dr2xml_principles.pdf 
+Pre-requisites                   : see prologue of dr2xml.py 
+How to use                       : see Notebooks DR2xml.ipynb and create_ping_files.ipynb
+                                   (or their python and html version in docs/)
+Product examples                 : see output_sample/
+How to add your own Data Request : see doc/listof_home_vars.help 
+                                   (and, in french, doc/dr2xml_home_variables.pdf)
+
+References :
+------------
+XIOS                             : https://forge.ipsl.jussieu.fr/ioserver/
+CMIP6 Data Request               : http://w3id.org/cmip6dr

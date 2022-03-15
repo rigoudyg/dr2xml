@@ -1,5 +1,27 @@
 {
   "__common_values__": {
+    "date_range": {
+      "default_values": ["%start_date%-%end_date%"]
+    },
+    "list_perso_dev_file": {
+      "default_values": ["dr2xml_list_perso_and_dev_file_names"]
+    },
+    "use_cmorvar": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "use_cmorvar_label_in_filename"
+        }
+      ]
+    },
+    "info_url": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "info_url"
+        }
+      ]
+    },
     "experiment_id": {
       "default_values": [
         {
@@ -872,18 +894,7 @@
             "key_type": "variable",
             "keys": "mipVarLabel"
           }
-        ],
-        "corrections": {
-          "ts": [
-            [[{
-                "key_type": "variable",
-                "keys": "label"
-              },
-              "eq",
-              "tsland"]],
-            "tsland"
-          ]
-        }
+        ]
       },
       "grid_ref": {
         "skip_values": ["", "None"]

@@ -1,0 +1,8 @@
+&param_toy
+ni_glo=10
+nj_glo=10
+llm=5
+timestep=1h
+duration=1d
+sypd=100000
+/

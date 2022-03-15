@@ -1,0 +1,5 @@
+# List of variable names that CNRM does not want to produce / publish for CMIP6
+
+
+lim
+

@@ -102,6 +102,31 @@
         }
       ]
     },
+    "license": {
+      "default_values": [
+        {
+          "key_type": "json",
+          "keys": [
+            "license",
+            0
+          ],
+          "src": {
+            "key_type": "combine",
+            "keys": [
+              {
+              "key_type": "dict",
+              "keys": "cvspath"
+              },
+              {
+              "key_type": "common",
+              "keys": "project"
+              }
+            ],
+            "fmt": "{}{}_license.json"
+          }
+        }
+      ]
+    },
     "parent_experiment_id": {
       "default_values": [
         {
@@ -143,6 +168,29 @@
           "fmt": "r{}i{}p{}f{}"
         }
       ]
+    },
+    "member_id": {
+      "default_values": [
+        {
+          "key_type": "combine",
+          "keys": [
+            {
+              "key_type": "common",
+              "keys": "sub_experiment_id"
+            },
+            {
+              "key_type": "common",
+              "keys": "variant_label"
+            }
+          ],
+          "fmt": "{}-{}"
+        },
+        {
+          "key_type": "common",
+          "keys": "variant_label"
+        }
+      ],
+      "forbidden_patterns": ["none-.*"]
     }
   },
   "file_output": {
@@ -150,6 +198,74 @@
       "split_freq_format", "split_start_offset", "split_end_offset", "split_last_date", "time_units",
       "time_counter_name", "time_counter", "time_stamp_name", "time_stamp_format", "uuid_name", "uuid_format",
       "convention_str"],
+    "attrs_constraints": {
+      "name":{
+        "default_values": [
+          {
+            "func": [
+              "CMIP6",
+              "build_filename",
+              {
+                "frequency": {
+                  "key_type": "variable",
+                  "keys": "frequency"
+                },
+                "prefix": {
+                  "key_type": "dict",
+                  "keys": "prefix"
+                },
+                "table": {
+                  "key_type": "dict",
+                  "keys": "table_id"
+                },
+                "source_id": {
+                  "key_type": "dict",
+                  "keys": "source_id"
+                },
+                "expid_in_filename": {
+                  "key_type": "common",
+                  "keys": "expid_in_filename"
+                },
+                "member_id": {
+                  "key_type": "common",
+                  "keys": "member_id"
+                },
+                "grid_label": {
+                  "key_type": "dict",
+                  "keys": "grid_label"
+                },
+                "date_range": {
+                  "key_type": "common",
+                  "keys": "date_range"
+                },
+                "var_type": {
+                  "key_type": "variable",
+                  "keys": "type"
+                },
+                "list_perso_dev_file":
+                {
+                  "key_type": "common",
+                  "keys": "list_perso_dev_file"
+                },
+                "label": {
+                  "key_type": "variable",
+                  "keys": "label"
+                },
+                "mipVarLabel": {
+                  "key_type": "variable",
+                  "keys": "mipVarLabel"
+                },
+                "use_cmorvar": {
+                  "key_type": "common",
+                  "keys": "use_cmorvar"
+                }
+              }
+            ]
+          }
+        ],
+        "fatal": "True"
+      }
+    },
     "vars_list": ["activity_id", "contact", "data_specs_version", "dr2xml_version", "expid_in_filename", "description",
       "title_desc", "experiment", "external_variables", "forcing_index", "frequency", "further_info_url", "grid",
       "grid_label", "nominal_resolution", "comment", "history", "initialization_index", "institution_id",
@@ -159,6 +275,25 @@
       "source_id", "source_type", "sub_experiment_id", "sub_experiment", "table_id", "title", "variable_id",
       "variant_info", "variant_label"],
     "vars_constraints": {
+      "variable_id": {
+        "default_values": [
+          {
+            "key_type": "variable",
+            "keys": "mipVarLabel"
+        }
+        ],
+        "corrections": {
+          "ts": [
+            [[{
+                "key_type": "variable",
+                "keys": "label"
+              },
+              "eq",
+              "tsland"]],
+            "tsland"
+          ]
+        }
+      },
       "description": {
         "skip_values": ["", "None"],
         "default_values": [
@@ -286,12 +421,101 @@
           }
         ],
         "fatal": "True"
+      },
+      "further_info_url": {
+        "default_values": [
+          {
+            "key_type": "combine",
+            "keys": [
+              {
+                "key_type": "common",
+                "keys": "mip_era"
+              },
+              {
+                "key_type": "common",
+                "keys": "institution_id"
+              },
+              {
+                "key_type": "dict",
+                "keys": "source_id"
+              },
+              {
+                "key_type": "common",
+                "keys": "expid_in_filename"
+              },
+              {
+                "key_type": "common",
+                "keys": "sub_experiment_id"
+              },
+              {
+                "key_type": "common",
+                "keys": "variant_label"
+              }
+            ],
+            "fmt": "https://furtherinfo.es-doc.org/{}.{}.{}.{}.{}.{}"
+          }
+        ],
+        "conditions": [
+          [
+            {
+              "key_type": "laboratory",
+              "keys": "mip_era"
+            },
+            "eq",
+            []
+          ],
+          [
+            {
+              "key_type": "simulation",
+              "keys": "mip_era"
+            },
+            "eq",
+            []
+          ]
+        ]
+      },
+      "license": {
+        "default_values": [
+          {
+            "key_type": "common",
+            "keys": "license",
+            "func": [
+              "CMIP6",
+              "fill_license",
+              {
+                "institution_id": {
+                  "key_type": "common",
+                  "keys": "institution_id"
+                },
+                "info_url": {
+                  "key_type": "common",
+                  "keys": "info_url"
+                }
+              }
+            ]
+          }
+        ]
       }
     }
   },
   "field_output": {
     "attrs_list": ["field_ref", "name", "grid_ref", "freq_offset", "detect_missing_value", "default_value", "prec",
       "cell_methods", "cell_methods_mode", "operation", "freq_op", "expr"],
+    "attrs_constraints": {
+      "name": {
+        "corrections": {
+          "ts": [
+            [[{
+                "key_type": "variable",
+                "keys": "label"
+              },
+              "eq",
+              "tsland"]],
+            "tsland"
+          ]
+        }
+      }
+    },
     "vars_list": ["comment", "standard_name", "description", "long_name", "positive", "history", "units",
       "cell_methods", "cell_measures", "flag_meanings", "flag_values", "interval_operation"]
   }

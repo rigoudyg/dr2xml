@@ -21,15 +21,45 @@ def make_source_string(source, source_id):
 
     """
     # mpmoine_correction:make_source_string: pour lire correctement le fichier 'CMIP6_source_id.json'
-    print("<<<", source)
-    print("<<<", source_id)
     components = source['model_component']
     rep = source_id + " (" + source['release_year'] + "): "
     for realm in ["aerosol", "atmos", "atmosChem", "land", "ocean", "ocnBgchem", "seaIce"]:
-        print("<<<", realm)
         component = components[realm]
         description = component['description']
         if description != "none":
             rep = rep + "\n" + realm + ": " + description
-    print("<<<", rep)
     return rep
+
+
+def build_filename(frequency, prefix, table, source_id, expid_in_filename, member_id, grid_label, date_range,
+                   var_type, list_perso_dev_file, label, mipVarLabel, use_cmorvar=False):
+    if "fx" in frequency:
+        varname_for_filename = label
+    else:
+        if use_cmorvar:
+            varname_for_filename = label
+        else:
+            varname_for_filename = mipVarLabel
+        # DR21 has a bug with tsland : the MIP variable is named "ts"
+        if label in ["tsland", ]:
+            varname_for_filename = "tsland"
+    filename = "_".join(([varname_for_filename, table, source_id, expid_in_filename, member_id, grid_label]))
+    if var_type in ["perso", "dev"]:
+        with open(list_perso_dev_file, mode="a", encoding="utf-8") as list_perso_and_dev:
+            list_perso_and_dev.write(".*{}.*\n".format(filename))
+    filename = prefix + filename
+    if "fx" not in frequency:
+        if frequency in ["1hrCM", "monC"]:
+            suffix = "-clim"
+        else:
+            suffix = ""
+        filename = "_".join([filename, date_range + suffix])
+    return filename
+
+
+def fill_license(value, institution_id, info_url):
+    value = value.replace("<Your Centre Name>", institution_id)
+    # TODO: Adapt next line
+    value = value.replace("[NonCommercial-]", "NonCommercial-")
+    value = value.replace("[ and at <some URL maintained by modeling group>]", " and at " + info_url)
+    return value

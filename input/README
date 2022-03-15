@@ -1,7 +1,0 @@
-DX_field_defs_<realm>.xml : some xml entries for deriving some fields
-    from other ones in a model-independant way ; prefix "DX_ " used
-    there will be automatically replaced by laboratory's preferred
-    prefix when generating ping_files
-
-non_published_variables.txt : an example for a list of DR variables that
-    a lab want to exclude from its outputs

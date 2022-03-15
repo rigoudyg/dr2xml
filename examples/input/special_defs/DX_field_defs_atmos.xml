@@ -1,0 +1,59 @@
+<field_definition>
+  <!-- Variables from DX_field_defs_atmos.xml -->
+  
+  <!-- For some variables, the Data Request may miss the necessary
+       information on how to derive the variable from other ones,
+       while Xios can do that. So, we tell that in Xios syntax
+  -->
+  
+  <field id="DX_tas_max" field_ref="DX_tas" operation="maximum" />
+  <field id="DX_tasmax" field_ref="DX_tas_max" freq_op="1d" operation="average"> @DX_tas_max </field>
+
+  <field id="DX_tas_min" field_ref="DX_tas" operation="minimum" />
+  <field id="DX_tasmin" field_ref="DX_tas_min" freq_op="1d"  operation="average"> @DX_tas_min </field>
+
+  <field id="DX_hurs_max" field_ref="DX_hurs" operation="maximum" />
+  <field id="DX_hursmax" field_ref="DX_hurs_max" freq_op="1d"  operation="average"> @DX_hurs_max </field>
+
+  <field id="DX_sfcWind_max" field_ref="DX_sfcWind" operation="maximum" />
+  <field id="DX_sfcWindmax" field_ref="DX_sfcWind_max" freq_op="1d"  operation="average"> @DX_sfcWind_max </field>
+
+  <!-- You may define some fields on singleton level as being provided
+       by the model rather than by an Xios vertical interpolation  -->
+  <!-- field id="DX_rv850" field_ref="dummy_XY"  -->
+
+  <!-- for variables in next group, dr2xml may at a later stage provide
+       a definition using standard operations -->
+  
+  <field_group id="DX_later_atmos">
+
+      <field_group id="DX_GHG_integrals" >
+	<field id="DX_co2mass"      field_ref="dummy_na" />
+	<field id="DX_n2oglobal"    field_ref="dummy_na" />
+	<field id="DX_cfc11global"  field_ref="dummy_na" />
+	<field id="DX_ch4global"    field_ref="dummy_na" />
+	<field id="DX_hcfc22global" field_ref="dummy_na" />
+	<field id="DX_cfc113global" field_ref="dummy_na" />
+	<field id="DX_cfc12global"  field_ref="dummy_na" />
+      </field_group >
+
+      <field_group id="DX_ISMIP_integrals" >
+	<field id="DX_lim"	      field_ref="dummy_na" />
+	<field id="DX_limnsw"     field_ref="dummy_na" />
+	<field id="DX_iareagr"    field_ref="dummy_na" />
+	<field id="DX_iareafl"    field_ref="dummy_na" />
+	<field id="DX_tendlicalvf" field_ref="dummy_na" />
+	<field id="DX_tendacabf"  field_ref="dummy_na" />
+	<field id="DX_tendlibmassbf" field_ref="dummy_na" />
+      </field_group >
+      
+      <field_group id="DX_atmos_not_much_clear" >
+	<field id="DX_spectupper" field_ref="dummy_na" />
+	<field id="DX_spectlower" field_ref="dummy_na" />
+      </field_group >
+      
+    </field_group >
+    
+  <!-- End of variables from DX_field_defs_atmos.xml -->
+</field_definition>
+
