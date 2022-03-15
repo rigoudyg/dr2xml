@@ -19,7 +19,8 @@ from config import get_config_variable
 from dr_interface import get_DR_version
 from logger import get_logger
 from settings_interface import get_variable_from_lset_with_default_in_lset, is_key_in_lset, \
-    get_variable_from_lset_without_default, is_key_in_sset, get_variable_from_sset_without_default
+    get_variable_from_lset_without_default, is_key_in_sset, get_variable_from_sset_without_default, \
+    get_variable_from_lset_with_default
 from utils import Dr2xmlError
 from importlib.machinery import SourceFileLoader
 
@@ -33,6 +34,9 @@ def setup_project_settings(**kwargs):
     project_settings = merge_project_settings(project_filename, project_settings)
     # Reformat
     project_settings = reformat_settings(project_settings)
+    # If asked, save the settings into a dedicated file
+    if get_variable_from_lset_with_default("save_project_settings", None) is not None:
+        write_json_content(get_variable_from_lset_without_default("save_project_settings"), project_settings)
     # Evaluate common values
     project_settings["__common_values__"] = evaluate_common_values(project_settings["__common_values__"],
                                                                    additional_kwargs=kwargs)
@@ -62,6 +66,11 @@ def read_json_content(filename):
                      filename)
         raise OSError("Could not find the file containing the project's settings at %s" %
                       filename)
+
+
+def write_json_content(filename, settings):
+    with open(filename, "w") as fp:
+        json.dump(settings, fp)
 
 
 # Functions to load project additional functions
@@ -242,67 +251,83 @@ def get_key_value(key_value, common_dict=dict(), additional_dict=dict()):
     if isinstance(key_value, dict):
         # Find elements about key_value
         key_type = key_value.get("key_type", None)
-        if key_type is None:
-            raise ValueError("key_type must be defined")
         keys = key_value.get("keys", None)
         fmt = key_value.get("fmt", None)
         src = key_value.get("src", None)
         func = key_value.get("func", None)
         # Resolve key_value
-        if isinstance(keys, list):
-            keys_resolve = [get_key_value(key_value=key, common_dict=common_dict, additional_dict=additional_dict)
-                            for key in keys]
-            keys_found = [elt[0] for elt in keys_resolve]
-            keys_values = [elt[1] for elt in keys_resolve]
-            found = all(keys_found)
-            if found:
-                if key_type in ["combine", ]:
-                    value = fmt.format(*keys_values)
-                else:
-                    if len(keys_values) > 0:
-                        key = keys_values[0]
-                        keys_values = keys_values[1:]
+        if keys is not None:
+            if key_type is None:
+                raise ValueError("key_type must be defined")
+            if isinstance(keys, list):
+                keys_resolve = [get_key_value(key_value=key, common_dict=common_dict, additional_dict=additional_dict)
+                                for key in keys]
+                keys_found = [elt[0] for elt in keys_resolve]
+                keys_values = [elt[1] for elt in keys_resolve]
+                found = all(keys_found)
+                if found:
+                    if key_type in ["combine", ]:
+                        value = fmt.format(*keys_values)
                     else:
-                        key = None
-                    found, value = get_value(key_type=key_type, key=key, src=src, common_dict=common_dict,
-                                             additional_dict=additional_dict)
-                    i = 0
-                    while found and i < len(keys_values):
-                        if value is None:
-                            found = False
-                        elif isinstance(value, dict) and keys_values[i] in value:
-                            value = value[keys_values[i]]
-                        elif not isinstance(value, dict) and keys_values[i] in value.__dict__:
-                            value = value.__getattribute__(keys_values[i])
+                        if len(keys_values) > 0:
+                            key = keys_values[0]
+                            keys_values = keys_values[1:]
                         else:
-                            found = False
-                        i += 1
+                            key = None
+                        found, value = get_value(key_type=key_type, key=key, src=src, common_dict=common_dict,
+                                                 additional_dict=additional_dict)
+                        i = 0
+                        while found and i < len(keys_values):
+                            if value is None:
+                                found = False
+                            elif isinstance(value, list):
+                                value = value[keys_values[i]]
+                            elif isinstance(value, dict) and keys_values[i] in value:
+                                value = value[keys_values[i]]
+                            elif not isinstance(value, dict) and keys_values[i] in value.__dict__:
+                                value = value.__getattribute__(keys_values[i])
+                            else:
+                                found = False
+                            i += 1
+                else:
+                    value = None
+            else:
+                found, value = get_value(key_type=key_type, key=keys, src=src, common_dict=common_dict,
+                                         additional_dict=additional_dict)
+            # Take into account format
+            if found and key_type not in ["combine", ]:
+                if fmt is None and isinstance(value, list):
+                    value = value[0]
+                elif fmt is not None and isinstance(value, list):
+                    value = fmt.format(*value)
+                elif fmt is not None:
+                    value = fmt.format(value)
+            if found and isinstance(value, six.string_types):
+                value = value.strip()
+            if found and func is not None:
+                value = apply_function(is_value=True, value=value, *func, additional_dict=additional_dict,
+                                       common_dict=common_dict)
+        else:
+            if func is not None:
+                value = apply_function(*func, value=None, is_value=False, additional_dict=additional_dict,
+                                       common_dict=common_dict)
+                found = True
             else:
                 value = None
-        else:
-            found, value = get_value(key_type=key_type, key=keys, src=src, common_dict=common_dict,
-                                     additional_dict=additional_dict)
-        # Take into account format
-        if found and key_type not in ["combine", ]:
-            if fmt is None:
-                if isinstance(value, list) and key_type in ["combine", ]:
-                    raise ValueError("If combine, fmt must be defined")
-                elif isinstance(value, list):
+                found = False
+            if found:
+                if fmt is None and isinstance(value, list):
                     value = value[0]
-            elif isinstance(value, list):
-                value = fmt.format(*value)
-            else:
-                value = fmt.format(value)
-        if found and isinstance(value, six.string_types):
-            value = value.strip()
-        if found and func is not None:
-            value = apply_function(value, *func, additional_dict=additional_dict, common_dict=common_dict)
+                elif fmt is not None and isinstance(value, list):
+                    value = fmt.format(*value)
+                elif fmt is not None:
+                    value = fmt.format(value)
         return found, value
     else:
         return True, key_value
 
 
-def apply_function(value, mod, func, options, additional_dict=dict(), common_dict=dict()):
+def apply_function(mod, func, options, value=None, is_value=False, additional_dict=dict(), common_dict=dict()):
     func = get_func_from_add_module(mod, func)
     for key in sorted(list(options)):
         test, val = get_key_value(options[key], additional_dict=additional_dict, common_dict=common_dict)
@@ -310,38 +335,62 @@ def apply_function(value, mod, func, options, additional_dict=dict(), common_dic
             options[key] = val
         else:
             del options[key]
-    value = func(value, **options)
+    if is_value:
+        value = func(value, **options)
+    else:
+        value = func(**options)
     return value
 
 
-def check_conditions(conditions, common_dict=dict(), additional_dict=dict()):
+def check_conditions(conditions, common_dict=dict(), additional_dict=dict(), keep_not_found=False):
     if isinstance(conditions, bool):
         relevant = True
         test = conditions
     else:
+        conditions_checked = [check_condition(conditions[i], common_dict=common_dict, additional_dict=additional_dict)
+                              for i in range(len(conditions))]
+        relevant_checked = [elt[0] for elt in conditions_checked]
+        conditions_checked = [elt[1] for elt in conditions_checked]
+        if all(relevant_checked):
+            relevant = True
+            test = all(conditions_checked)
+        elif keep_not_found:
+            relevant = False
+            i = 0
+            for c in range(conditions_checked.count(True)):
+                i = conditions_checked.index(True, i + 1)
+                conditions_checked[i] = conditions[i]
+            test = conditions_checked
+        else:
+            relevant = False
+            test = False
+    return relevant, test
+
+
+def check_condition(condition, common_dict=dict(), additional_dict=dict()):
+    if isinstance(condition, bool):
+        relevant = True
+        test = condition
+    else:
         test = True
         relevant = True
-        i = 0
-        while test and relevant and i < len(conditions):
-            condition = conditions[i]
-            first_val, check, second_val = condition
-            found_first, first_val = get_key_value(first_val, common_dict=common_dict, additional_dict=additional_dict)
-            if not isinstance(second_val, list):
-                second_val = [second_val, ]
-            second_val = [get_key_value(val, common_dict=common_dict, additional_dict=additional_dict)
-                          for val in second_val]
-            found_second = all([elt[0] for elt in second_val])
-            second_val = [elt[1] for elt in second_val]
-            if found_first and found_second:
-                if check in ["eq", ]:
-                    test = test and first_val in second_val
-                elif check in ["neq", ]:
-                    test = test and first_val not in second_val
-                else:
-                    raise ValueError("Conditions can have 'eq' or 'neq' as operator, found: %s" % check)
+        first_val, check, second_val = condition
+        found_first, first_val = get_key_value(first_val, common_dict=common_dict, additional_dict=additional_dict)
+        if not isinstance(second_val, list):
+            second_val = [second_val, ]
+        second_val = [get_key_value(val, common_dict=common_dict, additional_dict=additional_dict)
+                      for val in second_val]
+        found_second = all([elt[0] for elt in second_val])
+        second_val = [elt[1] for elt in second_val]
+        if found_first and found_second:
+            if check in ["eq", ]:
+                test = test and first_val in second_val
+            elif check in ["neq", ]:
+                test = test and first_val not in second_val
             else:
-                relevant = False
-            i += 1
+                raise ValueError("Conditions can have 'eq' or 'neq' as operator, found: %s" % check)
+        else:
+            relevant = False
     return relevant, test
 
 
@@ -380,9 +429,8 @@ def evaluate_tag_values(tag, tag_dict, common_dict=dict(), additional_dict=dict(
     for section in ["attrs_constraints", "vars_constraints"]:
         for item in sorted(list(tag_dict[section])):
             found, conditions = check_conditions(tag_dict[section][item]["conditions"], common_dict=common_dict,
-                                                 additional_dict=additional_dict)
-            if found:
-                tag_dict[section][item]["conditions"] = conditions
+                                                 additional_dict=additional_dict, keep_not_found=True)
+            tag_dict[section][item]["conditions"] = conditions
             for (i, value) in enumerate(list(tag_dict[section][item]["default_values"])):
                 found, value, _ = find_value(tag=tag, key=item, is_default_value=False, fatal=False,
                                              conditions=list(), value=value, default_values=list(),

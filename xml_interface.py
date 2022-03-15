@@ -44,7 +44,7 @@ class DR2XMLElement(xml_writer.Element):
             text = kwargs.pop("text")
         else:
             text = None
-        tag_settings = projects_settings[default_tag]
+        tag_settings = copy.deepcopy(projects_settings[default_tag])
         attrs_list = tag_settings["attrs_list"]
         attrs_constraints = tag_settings["attrs_constraints"]
         attrib = OrderedDict()
@@ -145,62 +145,6 @@ def find_rank_xml_subelement(xml_element, tag=list(), not_tag=list(), **keyval):
                       for key in keyval]))]
 
 
-def wr(out, key, dic_or_val=None, num_type="string", default=None):
-    """
-    Short cut for a repetitive pattern : add in 'out' a string variable name and value.
-    The value of the XML variable created is defined using the following algorithm:
-
-    - if ``dic_or_val`` is not ``None``:
-        - if  ``dic_or_val`` is a ``dict``:
-            - if ``key`` is in ``dic_or_val``:
-                - ``value=dic_or_val[key]``
-            - else if not ``default=False``:
-                - ``value=default``
-        - else if ``dic_or_val`` not ``None`` nor ``False``:
-            - ``dic_or_val=value``
-    - else use value of local variable ``key``
-
-    :param out: XML element to which the variable will be added
-    :param key: key to be put in variable
-    :param dic_or_val: value or dictionary containing the value of the variable
-    :param num_type: type of the value to be added (specfic requirements if string)
-    :param default: default value to be use
-    :return: Add an XML variable to ``out``.
-    """
-    logger = get_logger()
-    print_variables = get_variable_from_lset_with_default("print_variables", True)
-    if not print_variables:
-        return
-    elif isinstance(print_variables, list) and key not in print_variables:
-        return
-
-    val = None
-    if isinstance(dic_or_val, (dict, OrderedDict)):
-        if key in dic_or_val:
-            val = dic_or_val[key]
-        else:
-            if default is not None:
-                if default is not False:
-                    val = default
-            else:
-                logger.warning('warning: %s not in dic and default is None' % key)
-    else:
-        if dic_or_val is not None:
-            val = dic_or_val
-        else:
-            logger.error('error in wr,  no value provided for %s' % key)
-    if val:
-        if num_type in ["string", ]:
-            # val=val.replace(">","&gt").replace("<","&lt").replace("&","&amp").replace("'","&apos").replace('"',"&quot").strip()
-            val = val.replace(">", "&gt").replace("<", "&lt")
-            # CMIP6 spec : no more than 1024 char
-            val = val[0:1024]
-        if isinstance(val, six.string_types):
-            val = val.strip()
-        if num_type not in ["string", ] or len(val) > 0:
-            out.append(DR2XMLElement(tag="variable", text=val, name=key, type=num_type))
-
-
 def wrv(name, value, num_type="string"):
     """
     Create a string corresponding of a variable for Xios files.
@@ -214,8 +158,11 @@ def wrv(name, value, num_type="string"):
         return None
     elif isinstance(print_variables, list) and name not in print_variables:
         return None
-    value = reduce_and_strip(value)
-    if isinstance(value, six.string_types):
-        value = value[0:1024]  # CMIP6 spec : no more than 1024 char
-    # Format a 'variable' entry
-    return DR2XMLElement(tag="variable", text=str(value), name=name, type=num_type)
+    else:
+        value = reduce_and_strip(value)
+        if isinstance(value, six.string_types):
+            value = value.replace(">", "&gt").replace("<", "&lt")
+            value = value[0:1024]  # CMIP6 spec : no more than 1024 char
+            value = value.strip()
+        # Format a 'variable' entry
+        return DR2XMLElement(tag="variable", text=str(value), name=name, type=num_type)

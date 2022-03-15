@@ -600,8 +600,7 @@ def generate_file_defs(lset, sset, year, enddate, context, cvs_path, pingfiles=N
     initialize_config_variables()
     initialize_dict(lset, sset)
     initialize_project_settings(cvspath=cvs_path, context=context)
-    generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingfiles=pingfiles,
-                             dummies=dummies, dirname=dirname,
+    generate_file_defs_inner(year, enddate, context, cvs_path, pingfiles=pingfiles, dummies=dummies, dirname=dirname,
                              prefix=prefix, attributes=attributes, select=select)
     # pr.disable()
     # if python_version == "python2":
@@ -615,9 +614,8 @@ def generate_file_defs(lset, sset, year, enddate, context, cvs_path, pingfiles=N
     # print s.getvalue()
 
 
-def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingfiles=None,
-                             dummies='include', dirname="./", prefix="",
-                             attributes=list(), select="on_expt_and_year"):
+def generate_file_defs_inner(year, enddate, context, cvs_path, pingfiles=None, dummies='include', dirname="./",
+                             prefix="", attributes=list(), select="on_expt_and_year"):
     """
     Using the DR module, a dict of lab settings ``lset``, and a dict
     of simulation settings ``sset``, generate an XIOS file_defs 'file' for a
@@ -627,10 +625,7 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
     Structure of the two dicts is documented elsewhere. It includes the
     correspondance between a context and a few realms
 
-    :param dict lset: dictionary of laboratory settings
-    :param dict sset: dictionary of simulation settings
-    :param int year: year considered for the launch
-    :param six.string_types enddate: enddate of the simulation
+on
     :param six.string_types context: XIOS context considered for the launch
     :param six.string_types cvs_path: path to controlled vocabulary to be used
     :param six.string_types pingfiles: files which are analysed to find variables with a different name between model
@@ -735,9 +730,9 @@ def generate_file_defs_inner(lset, sset, year, enddate, context, cvs_path, pingf
     # --------------------------------------------------------------------
     # filename=dirname+"filedefs_%s.xml"%context
     filename = dirname + "dr2xml_%s.xml" % context
-    write_xios_file_def(filename, svars_per_table, year, lset, sset, cvs_path, field_defs, axis_defs, grid_defs,
-                        scalar_defs, file_defs, dummies, skipped_vars_per_table, actually_written_vars, prefix, context,
-                        pingvars, enddate, attributes)
+    write_xios_file_def(filename, svars_per_table, year, cvs_path, field_defs, axis_defs, grid_defs, scalar_defs,
+                        file_defs, dummies, skipped_vars_per_table, actually_written_vars, prefix, context, pingvars,
+                        enddate, attributes)
     logger.info("\nfile_def written as %s" % filename)
 
     #

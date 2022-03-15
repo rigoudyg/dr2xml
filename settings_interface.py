@@ -255,22 +255,6 @@ def is_sset_not_None():
     return sset is not None
 
 
-def get_lset_iteritems():
-    """
-
-    :return:
-    """
-    return lset.items()
-
-
-def get_sset_iteritems():
-    """
-
-    :return:
-    """
-    return sset.items()
-
-
 def get_source_id_and_type():
     """
 

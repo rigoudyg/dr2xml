@@ -30,11 +30,11 @@ from config import get_config_variable
 # Interface to settings dictionaries
 from settings_interface import get_variable_from_lset_with_default, get_variable_from_lset_without_default, \
     get_variable_from_sset_with_default, get_source_id_and_type, get_variable_from_sset_without_default, \
-    get_variable_from_sset_else_lset_with_default, is_key_in_lset, is_key_in_sset, format_dict_for_printing
+    get_variable_from_sset_else_lset_with_default, is_key_in_sset, format_dict_for_printing
 # Interface to Data Request
 from dr_interface import get_DR_version
 
-from xml_interface import DR2XMLElement, DR2XMLComment, create_pretty_xml_doc, find_rank_xml_subelement, wr, wrv
+from xml_interface import DR2XMLElement, DR2XMLComment, create_pretty_xml_doc, find_rank_xml_subelement, wrv
 
 # Settings tools
 from analyzer import DR_grid_to_grid_atts, analyze_cell_time_method, freq2datefmt, longest_possible_period, \
@@ -69,11 +69,9 @@ from file_splitting import split_frequency_for_variable
 warnings_for_optimisation = []
 
 
-def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
-                                 field_defs, axis_defs, grid_defs, domain_defs, scalar_defs, file_defs,
-                                 dummies, skipped_vars_per_table, actually_written_vars,
-                                 prefix, context, grid, pingvars=None, enddate=None,
-                                 attributes=[], debug=[]):
+def write_xios_file_def_for_svar(sv, year, table, out, cvspath, field_defs, axis_defs, grid_defs, domain_defs,
+                                 scalar_defs, file_defs, dummies, skipped_vars_per_table, actually_written_vars, prefix,
+                                 context, grid, pingvars=None, enddate=None, attributes=[], debug=[]):
     """
     Generate an XIOS file_def entry in out for :
       - a dict for laboratory settings
@@ -165,30 +163,6 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
     project = get_variable_from_sset_with_default('project', "CMIP6")
     source_id, source_type = get_source_id_and_type()
     experiment_id = get_variable_from_sset_without_default('experiment_id')
-    institution_id = get_variable_from_lset_without_default('institution_id')
-    if get_variable_from_sset_with_default("CORDEX_data", False):
-        driving_model_id = get_variable_from_sset_without_default('driving_model_id')
-        driving_model_ensemble_member = get_variable_from_sset_without_default('driving_model_ensemble_member')
-        CORDEX_domain = get_variable_from_sset_without_default('CORDEX_domain')
-        rcm_version_id = get_variable_from_sset_without_default("rcm_version_id")
-
-    #
-    # Variant matters
-    realization_index = get_variable_from_sset_with_default('realization_index', 1)
-    initialization_index = get_variable_from_sset_with_default('initialization_index', 1)
-    physics_index = get_variable_from_sset_with_default('physics_index', 1)
-    forcing_index = get_variable_from_sset_with_default('forcing_index', 1)
-    variant_label = "r%di%dp%df%d" % (realization_index, initialization_index, physics_index, forcing_index)
-    #
-    # WIP Draft 14 july 2016
-    mip_era = get_variable_from_sset_else_lset_with_default("mip_era", default=sv.mip_era)
-    #
-    # WIP doc v 6.2.0 - dec 2016
-    # <variable_id>_<table_id>_<source_id>_<experiment_id >_<member_id>_<grid_label>[_<time_range>].nc
-    member_id = variant_label
-    sub_experiment_id = get_variable_from_sset_with_default('sub_experiment_id', 'none')
-    if sub_experiment_id != 'none':
-        member_id = sub_experiment_id + "-" + member_id
     #
     # --------------------------------------------------------------------
     # Set grid info
@@ -243,7 +217,8 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
     with open(cvspath + project + "_experiment_id.json", "r") as json_fp:
         CMIP6_experiments = json.loads(json_fp.read())['experiment_id']
         if get_variable_from_sset_without_default('experiment_id') not in CMIP6_experiments:
-            raise Dr2xmlError("Issue getting experiment description in CMIP6 CV for %20s" % sset['experiment_id'])
+            raise Dr2xmlError("Issue getting experiment description in CMIP6 CV for %20s" %
+                              get_variable_from_sset_without_default('experiment_id'))
         expid = get_variable_from_sset_without_default('experiment_id')
         expid_in_filename = get_variable_from_sset_with_default('expid_in_filename', expid)
         if "_" in expid_in_filename:
@@ -279,52 +254,9 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
     # Set NetCDF output file name according to the DRS
     # --------------------------------------------------------------------
     #
-    date_range = "%start_date%-%end_date%"  # XIOS syntax
     operation, detect_missing, _ = analyze_cell_time_method(sv.cell_methods, sv.label, table)
     # print "--> ",sv.label, sv.frequency, table
     date_format, offset_begin, offset_end = freq2datefmt(sv.frequency, operation, table)
-    #
-    if "fx" in sv.frequency:
-        if get_variable_from_sset_with_default("CORDEX_data", False):
-            filename = "_".join(([prefix + sv.label, CORDEX_domain.get(context), driving_model_id, expid_in_filename,
-                                  driving_model_ensemble_member, source_id, rcm_version_id, sv.frequency]))
-        else:
-            filename = "_".join(([prefix + sv.label, table, source_id, expid_in_filename, member_id, grid_label]))
-        varname_for_filename = sv.label
-    else:
-        varname_for_filename = sv.mipVarLabel
-        if get_variable_from_lset_with_default('use_cmorvar_label_in_filename', False):
-            varname_for_filename = sv.label
-        # DR21 has a bug with tsland : the MIP variable is named "ts"
-        if sv.label == "tsland":
-            varname_for_filename = "tsland"
-        # WIP doc v6.2.3 : a suffix "-clim" should be added if climatology
-        # if False and "Clim" in sv.frequency: suffix="-clim"
-        if sv.frequency in ["1hrCM", "monC"]:
-            suffix = "-clim"
-        else:
-            suffix = ""
-        if get_variable_from_sset_with_default("CORDEX_data", False):
-            liste_attributes = [prefix + varname_for_filename, CORDEX_domain.get(context), driving_model_id,
-                                expid_in_filename, driving_model_ensemble_member, source_id, rcm_version_id, sv.frequency, date_range +
-                                suffix]
-            filename = "_".join([attribute for attribute in liste_attributes if attribute != ""])
-        else:
-            filename = "_".join([prefix + varname_for_filename, table, source_id, expid_in_filename, member_id,
-                                 grid_label, date_range + suffix])
-    # Create an other file which will contain the list of file names of perso and dev variables
-    list_perso_and_dev_file_name = "dr2xml_list_perso_and_dev_file_names"
-    if sv.type in ["perso", "dev"]:
-        with open(list_perso_and_dev_file_name, mode="a", encoding="utf-8") as list_perso_and_dev:
-            list_perso_and_dev.write(".*{}.*\n".format("_".join([varname_for_filename, table, source_id,
-                                                                 expid_in_filename, member_id, grid_label])))
-    #
-    if not (is_key_in_lset('mip_era') or is_key_in_sset("mip_era")):
-        further_info_url = "https://furtherinfo.es-doc.org/%s.%s.%s.%s.%s.%s" % (
-            mip_era, institution_id, source_id, expid_in_filename,
-            sub_experiment_id, variant_label)
-    else:
-        further_info_url = ""
     #
     # --------------------------------------------------------------------
     # Compute XIOS split frequency
@@ -423,15 +355,6 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
     # if 'fx' in table:
     #     external_variables = ""
     #
-    with open(cvspath + project + "_license.json", "r") as json_fp:
-        license = json.loads(json_fp.read())['license'][0]
-    # mpmoine_cmor_update: 'licence' est trop long... passe pas le CMIP6-Checker
-    # => 'institution_id' au lieu de inst='institution'
-    license = license.replace("<Your Centre Name>", institution_id)
-    license = license.replace("[NonCommercial-]", "NonCommercial-")
-    license = license.replace("[ and at <some URL maintained by modeling group>]",
-                              " and at " + get_variable_from_lset_without_default("info_url"))
-    #
     if parent_experiment_id and parent_experiment_id != 'no parent' and parent_experiment_id != ['no parent']:
         # TBD : syntaxe XIOS pour designer le time units de la simu courante
         parent_time_ref_year = get_variable_from_sset_with_default('parent_time_ref_year', "1850")
@@ -475,31 +398,25 @@ def write_xios_file_def_for_svar(sv, year, table, lset, sset, out, cvspath,
     else:
         title = "{} model output prepared for {} and {} / {} simulation".format(source_id, project, activity_idr, expid_in_filename)
     #
-    # DR21 has a bug with tsland : the MIP variable is named "ts"
-    if sv.label != "tsland":
-        variable_id = sv.mipVarLabel
-    else:
-        variable_id = "tsland"
-    #
     xml_file = DR2XMLElement(tag="file", default_tag="file_output",
-                             id="_".join([sv.label, table, grid_label]), name=filename, output_freq=freq,
+                             id="_".join([sv.label, table, grid_label]), output_freq=freq,
                              split_freq=split_freq, split_freq_format=split_freq_format,
                              split_start_offset=split_start_offset, split_end_offset=split_end_offset,
                              split_last_date=split_last_date,
                              external_variables=external_variables,
-                             further_info_url=further_info_url, grid=grid_description, grid_label=grid_label,
+                             grid=grid_description, grid_label=grid_label,
                              nominal_resolution=grid_resolution, dynamic_comment=dynamic_comment,
-                             license=license, variable=sv, context=context, experiment_id=experiment_id,
+                             variable=sv, context=context, experiment_id=experiment_id,
                              source_id=source_id,
                              branch_method=branch_method, branch_time_in_parent=branch_time_in_parent,
                              branch_time_in_child=branch_time_in_child, source_type=source_type, table_id=table,
-                             title=title, variable_id=variable_id)
+                             title=title, prefix=prefix)
     #
     for name, value in sorted(list(attributes)):
-        wr(xml_file, name, value)
+        xml_file.append(wrv(name, value))
     non_stand_att = get_variable_from_lset_with_default("non_standard_attributes", OrderedDict())
     for name in sorted(list(non_stand_att)):
-        wr(xml_file, name, non_stand_att[name])
+        xml_file.append(wrv(name, non_stand_att[name]))
     #
     # --------------------------------------------------------------------
     # Build all XIOS auxiliary elements (end_file_defs, field_defs, domain_defs, grid_defs, axis_defs)
@@ -933,8 +850,8 @@ def is_singleton(sdim):
                or (sdim.label == "typewetla")  # The latter is a bug in DR01.00.21 : typewetla has no value there
 
 
-def write_xios_file_def(filename, svars_per_table, year, lset, sset, cvs_path, field_defs, axis_defs, grid_defs,
-                        scalar_defs, file_defs, dummies, skipped_vars_per_table, actually_written_vars, prefix, context,
+def write_xios_file_def(filename, svars_per_table, year, cvs_path, field_defs, axis_defs, grid_defs, scalar_defs,
+                        file_defs, dummies, skipped_vars_per_table, actually_written_vars, prefix, context,
                         pingvars=None, enddate=None, attributes=[]):
     """
     Write XIOS file_def.
@@ -975,10 +892,10 @@ def write_xios_file_def(filename, svars_per_table, year, lset, sset, cvs_path, f
                 for grid in svar.grids:
                     a, hgrid, b, c, d = get_variable_from_lset_without_default('grids', get_grid_choice(), context)
                     check_for_file_input(svar, hgrid, pingvars, field_defs, grid_defs, domain_defs, file_defs)
-                    write_xios_file_def_for_svar(svar, year, table, lset, sset, xml_file_definition, cvs_path,
-                                                 field_defs, axis_defs, grid_defs, domain_defs, scalar_defs, file_defs,
-                                                 dummies, skipped_vars_per_table, actually_written_vars,
-                                                 prefix, context, grid, pingvars, enddate, attributes)
+                    write_xios_file_def_for_svar(svar, year, table, xml_file_definition, cvs_path, field_defs,
+                                                 axis_defs, grid_defs, domain_defs, scalar_defs, file_defs, dummies,
+                                                 skipped_vars_per_table, actually_written_vars, prefix, context, grid,
+                                                 pingvars, enddate, attributes)
             else:
                 logger.warning("Duplicate variable %s,%s in table %s is skipped, preferred is %s" %
                                (svar.label, svar.mipVarLabel, table, count[svar.mipVarLabel].label))

@@ -12,11 +12,7 @@ Main useful functions :
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
-import pprint
-from collections import OrderedDict, defaultdict
-
-import os
-import six
+from collections import OrderedDict
 
 # Interface to xml tools
 from xml_interface import get_root_of_xml_file, is_xml_element_to_parse, find_rank_xml_subelement, create_pretty_xml_doc
