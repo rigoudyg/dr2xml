@@ -1,5 +1,25 @@
 {
   "__common_values__": {
+    "prefix": {
+      "default_values": [
+        {
+          "key_type": "dict",
+          "keys": "prefix"
+        }
+      ]
+    },
+    "description": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "description"
+        },
+        {
+          "key_type": "simulation",
+          "keys": "description"
+        }
+      ]
+    },
     "date_range": {
       "default_values": ["%start_date%-%end_date%"]
     },
@@ -345,6 +365,56 @@
           "key_type": "DR_version"
         }
       ]
+    },
+    "source_id": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": [
+            "configurations",
+            {
+              "key_type": "simulation",
+              "keys": "configuration"
+            },
+            0
+          ]
+        },
+        {
+          "key_type": "simulation",
+          "keys": "source_id"
+        }
+      ],
+      "fatal": "True"
+    },
+    "source_type": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": [
+            "configurations",
+            {
+              "key_type": "simulation",
+              "keys": "configuration"
+            },
+            1
+          ]
+        },
+        {
+          "key_type": "simulation",
+          "keys": "source_type"
+        },
+        {
+          "key_type": "laboratory",
+          "keys": [
+            "source_types",
+            {
+              "key_type": "common",
+              "keys": "source_id"
+            }
+          ]
+        }
+      ],
+      "fatal": "True"
     }
   },
   "context": {
@@ -686,7 +756,7 @@
             "keys": "parent_source_id"
           },
           {
-            "key_type": "dict",
+            "key_type": "common",
             "keys": "source_id"
           }
         ]
@@ -871,6 +941,22 @@
           {
             "key_type": "common",
             "keys": "source"
+          }
+        ]
+      },
+      "source_id": {
+        "default_values": [
+          {
+            "key_type": "common",
+            "keys": "source_id"
+          }
+        ]
+      },
+      "source_type": {
+        "default_values": [
+          {
+            "key_type": "common",
+            "keys": "source_type"
           }
         ]
       }

@@ -81,7 +81,7 @@
     }
   },
   "file_output": {
-        "attrs_constraints": {
+    "attrs_constraints": {
       "name":{
         "default_values": [
           {
@@ -94,11 +94,11 @@
                   "keys": "frequency"
                 },
                 "prefix": {
-                  "key_type": "dict",
+                  "key_type": "common",
                   "keys": "prefix"
                 },
                 "source_id": {
-                  "key_type": "dict",
+                  "key_type": "common",
                   "keys": "source_id"
                 },
                 "expid_in_filename": {

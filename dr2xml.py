@@ -599,9 +599,9 @@ def generate_file_defs(lset, sset, year, enddate, context, cvs_path, pingfiles=N
     # Initialize lset and sset variables for all functions
     initialize_config_variables()
     initialize_dict(lset, sset)
-    initialize_project_settings(cvspath=cvs_path, context=context)
+    initialize_project_settings(cvspath=cvs_path, context=context, prefix=prefix)
     generate_file_defs_inner(year, enddate, context, cvs_path, pingfiles=pingfiles, dummies=dummies, dirname=dirname,
-                             prefix=prefix, attributes=attributes, select=select)
+                             attributes=attributes, select=select)
     # pr.disable()
     # if python_version == "python2":
     #     s = io.BytesIO()
@@ -615,7 +615,7 @@ def generate_file_defs(lset, sset, year, enddate, context, cvs_path, pingfiles=N
 
 
 def generate_file_defs_inner(year, enddate, context, cvs_path, pingfiles=None, dummies='include', dirname="./",
-                             prefix="", attributes=list(), select="on_expt_and_year"):
+                             attributes=list(), select="on_expt_and_year"):
     """
     Using the DR module, a dict of lab settings ``lset``, and a dict
     of simulation settings ``sset``, generate an XIOS file_defs 'file' for a
@@ -731,8 +731,8 @@ on
     # filename=dirname+"filedefs_%s.xml"%context
     filename = dirname + "dr2xml_%s.xml" % context
     write_xios_file_def(filename, svars_per_table, year, cvs_path, field_defs, axis_defs, grid_defs, scalar_defs,
-                        file_defs, dummies, skipped_vars_per_table, actually_written_vars, prefix, context, pingvars,
-                        enddate, attributes)
+                        file_defs, dummies, skipped_vars_per_table, actually_written_vars, context, pingvars, enddate,
+                        attributes)
     logger.info("\nfile_def written as %s" % filename)
 
     #

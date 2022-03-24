@@ -280,7 +280,7 @@ def get_key_value(key_value, common_dict=dict(), additional_dict=dict()):
                         while found and i < len(keys_values):
                             if value is None:
                                 found = False
-                            elif isinstance(value, list):
+                            elif isinstance(value, (list, tuple)):
                                 value = value[keys_values[i]]
                             elif isinstance(value, dict) and keys_values[i] in value:
                                 value = value[keys_values[i]]
@@ -308,13 +308,16 @@ def get_key_value(key_value, common_dict=dict(), additional_dict=dict()):
                 value = apply_function(is_value=True, value=value, *func, additional_dict=additional_dict,
                                        common_dict=common_dict)
         else:
+            if key_type is not None:
+                found, value = get_value(key_type, key=None, src=None, common_dict=common_dict,
+                                         additional_dict=additional_dict)
+            else:
+                found = False
+                value = None
             if func is not None:
                 value = apply_function(*func, value=None, is_value=False, additional_dict=additional_dict,
                                        common_dict=common_dict)
                 found = True
-            else:
-                value = None
-                found = False
             if found:
                 if fmt is None and isinstance(value, list):
                     value = value[0]
@@ -354,12 +357,15 @@ def check_conditions(conditions, common_dict=dict(), additional_dict=dict(), kee
         if all(relevant_checked):
             relevant = True
             test = all(conditions_checked)
-        elif keep_not_found:
+        elif keep_not_found and any(relevant_checked):
             relevant = False
             i = 0
-            for c in range(conditions_checked.count(True)):
-                i = conditions_checked.index(True, i + 1)
-                conditions_checked[i] = conditions[i]
+            for c in range(relevant_checked.count(True)):
+                i = relevant_checked.index(True, i + 1)
+                conditions[i] = conditions_checked[i]
+            test = conditions
+        elif keep_not_found:
+            relevant = False
             test = conditions_checked
         else:
             relevant = False
@@ -400,6 +406,7 @@ def evaluate_common_values(common_dict=dict(), additional_kwargs=dict()):
     test = True
     while len(items_to_treat) > 0 and test:
         for item in items_to_treat:
+            print(item)
             found, value, _ = find_value(tag="__common_values__", key=item, value=None, is_default_value=True,
                                          fatal=False, conditions=common_dict[item]["conditions"],
                                          skip_values=common_dict[item]["skip_values"],

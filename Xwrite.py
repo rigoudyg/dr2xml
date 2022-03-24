@@ -70,7 +70,7 @@ warnings_for_optimisation = []
 
 
 def write_xios_file_def_for_svar(sv, year, table, out, cvspath, field_defs, axis_defs, grid_defs, domain_defs,
-                                 scalar_defs, file_defs, dummies, skipped_vars_per_table, actually_written_vars, prefix,
+                                 scalar_defs, file_defs, dummies, skipped_vars_per_table, actually_written_vars,
                                  context, grid, pingvars=None, enddate=None, attributes=[], debug=[]):
     """
     Generate an XIOS file_def entry in out for :
@@ -407,10 +407,9 @@ def write_xios_file_def_for_svar(sv, year, table, out, cvspath, field_defs, axis
                              grid=grid_description, grid_label=grid_label,
                              nominal_resolution=grid_resolution, dynamic_comment=dynamic_comment,
                              variable=sv, context=context, experiment_id=experiment_id,
-                             source_id=source_id,
                              branch_method=branch_method, branch_time_in_parent=branch_time_in_parent,
-                             branch_time_in_child=branch_time_in_child, source_type=source_type, table_id=table,
-                             title=title, prefix=prefix)
+                             branch_time_in_child=branch_time_in_child, table_id=table,
+                             title=title)
     #
     for name, value in sorted(list(attributes)):
         xml_file.append(wrv(name, value))
@@ -851,8 +850,8 @@ def is_singleton(sdim):
 
 
 def write_xios_file_def(filename, svars_per_table, year, cvs_path, field_defs, axis_defs, grid_defs, scalar_defs,
-                        file_defs, dummies, skipped_vars_per_table, actually_written_vars, prefix, context,
-                        pingvars=None, enddate=None, attributes=[]):
+                        file_defs, dummies, skipped_vars_per_table, actually_written_vars, context, pingvars=None,
+                        enddate=None, attributes=[]):
     """
     Write XIOS file_def.
     """
@@ -894,8 +893,8 @@ def write_xios_file_def(filename, svars_per_table, year, cvs_path, field_defs, a
                     check_for_file_input(svar, hgrid, pingvars, field_defs, grid_defs, domain_defs, file_defs)
                     write_xios_file_def_for_svar(svar, year, table, xml_file_definition, cvs_path, field_defs,
                                                  axis_defs, grid_defs, domain_defs, scalar_defs, file_defs, dummies,
-                                                 skipped_vars_per_table, actually_written_vars, prefix, context, grid,
-                                                 pingvars, enddate, attributes)
+                                                 skipped_vars_per_table, actually_written_vars, context, grid, pingvars,
+                                                 enddate, attributes)
             else:
                 logger.warning("Duplicate variable %s,%s in table %s is skipped, preferred is %s" %
                                (svar.label, svar.mipVarLabel, table, count[svar.mipVarLabel].label))

@@ -47,7 +47,11 @@
         {
           "key_type": "json",
           "keys": [
-            "source_id"
+            "source_id",
+            {
+              "key_type": "common",
+              "keys": "source_id"
+            }
           ],
           "src": {
             "key_type": "combine",
@@ -62,7 +66,17 @@
               }
             ],
             "fmt": "{}{}_source_id.json"
-          }
+          },
+          "func": [
+            "CMIP6",
+            "make_source_string",
+            {
+              "source_id": {
+                "key_type": "common",
+                "keys": "source_id"
+              }
+            }
+          ]
         },
         {
           "key_type": "laboratory",
@@ -211,7 +225,7 @@
                   "keys": "frequency"
                 },
                 "prefix": {
-                  "key_type": "dict",
+                  "key_type": "common",
                   "keys": "prefix"
                 },
                 "table": {
@@ -219,7 +233,7 @@
                   "keys": "table_id"
                 },
                 "source_id": {
-                  "key_type": "dict",
+                  "key_type": "common",
                   "keys": "source_id"
                 },
                 "expid_in_filename": {
@@ -397,26 +411,6 @@
         "default_values": [
           {
             "key_type": "common",
-            "keys": [
-              "source",
-              {
-                "key_type": "dict",
-                "keys": "source_id"
-              }
-            ],
-            "func": [
-              "CMIP6",
-              "make_source_string",
-              {
-                "source_id": {
-                  "key_type": "dict",
-                  "keys": "source_id"
-                }
-              }
-            ]
-          },
-          {
-            "key_type": "laboratory",
             "keys": "source"
           }
         ],
@@ -428,7 +422,7 @@
             "key_type": "combine",
             "keys": [
               {
-                "key_type": "common",
+                "key_type": "variable",
                 "keys": "mip_era"
               },
               {
@@ -436,7 +430,7 @@
                 "keys": "institution_id"
               },
               {
-                "key_type": "dict",
+                "key_type": "common",
                 "keys": "source_id"
               },
               {
