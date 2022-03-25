@@ -1,5 +1,70 @@
 {
   "__common_values__": {
+    "required_model_components": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": [
+            "required_model_components",
+            {
+              "key_type": "common",
+              "keys": "source_id"
+            }
+          ]
+        }
+      ]
+    },
+    "additional_allowed_model_components": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": [
+            "additional_allowed_model_components",
+            {
+              "key_type": "common",
+              "keys": "source_id"
+            }
+          ]
+        }
+      ]
+    },
+    "branch_year_in_parent": {
+      "default_values": [
+        {
+          "key_type": "simulation",
+          "keys": "branch_year_in_parent"
+        }
+      ],
+      "authorized_values": {
+        "key_type": "laboratory",
+        "keys": [
+          "branching",
+          {
+            "key_type": "common",
+            "keys": "source_id"
+          },
+          {
+            "key_type": "common",
+            "keys": "experiment_id"
+          },
+          1
+        ]
+      }
+    },
+    "grid_choice": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": [
+            "grid_choice",
+            {
+              "key_type": "common",
+              "keys": "source_id"
+            }
+          ]
+        }
+      ]
+    },
     "prefix": {
       "default_values": [
         {
@@ -98,6 +163,15 @@
         "1"
       ]
     },
+    "branch_method": {
+      "default_values": [
+        {
+          "key_type": "simulation",
+          "keys": "branch_method"
+        },
+        "standard"
+      ]
+    },
     "parent_mip_era": {
       "default_values": [
         {
@@ -129,6 +203,15 @@
           "keys": "parent_time_ref_year"
         },
         "1850"
+      ]
+    },
+    "branch_month_in_parent": {
+      "default_values": [
+        {
+          "key_type": "simulation",
+          "keys": "branch_month_in_parent"
+        },
+        "1"
       ]
     },
     "parent_variant_label": {
@@ -433,19 +516,61 @@
       "convention_str"],
     "attrs_constraints":{
       "split_freq": {
-        "skip_values": ["", "None"]
+        "skip_values": ["", "None"],
+        "conditions": [
+          [
+            {
+              "key_type": "variable",
+              "keys": "frequency"
+            },
+            "nmatch",
+            ".*fx.*"
+          ]
+        ]
       },
       "split_freq_format": {
-        "skip_values": ["", "None"]
+        "skip_values": ["", "None"],
+        "conditions": [[
+          {
+            "key_type": "variable",
+            "keys": "frequency"
+          },
+          "nmatch",
+          ".*fx.*"
+        ]]
       },
       "split_start_offset": {
-        "skip_values": ["", "None"]
+        "skip_values": ["", "None", "False"],
+        "conditions": [[
+          {
+            "key_type": "variable",
+            "keys": "frequency"
+          },
+          "nmatch",
+          ".*fx.*"
+        ]]
       },
       "split_end_offset": {
-        "skip_values": ["", "None"]
+        "skip_values": ["", "None", "False"],
+        "conditions": [[
+          {
+            "key_type": "variable",
+            "keys": "frequency"
+          },
+          "nmatch",
+          ".*fx.*"
+        ]]
       },
       "split_last_date": {
-        "skip_values": ["", "None"]
+        "skip_values": ["", "None"],
+        "conditions": [[
+          {
+            "key_type": "variable",
+            "keys": "frequency"
+          },
+          "nmatch",
+          ".*fx.*"
+        ]]
       },
       "append": {
         "default_values": [
@@ -624,7 +749,18 @@
         ]
       },
       "external_variables": {
-        "skip_values": [""]
+        "skip_values": [""],
+        "default_values": [
+          {
+            "key_type": "variable",
+            "keys": "cell_measures",
+            "func": [
+              "basics",
+              "build_external_variables",
+              {}
+            ]
+          }
+        ]
       },
       "forcing_index": {
         "default_values": [
@@ -789,7 +925,8 @@
             "keys": "parent_experiment_id"
           },
             "neq",
-            ["no parent", "", "None"]]
+            ["no parent", "", "None"]
+          ]
         ],
         "default_values": [
           {
@@ -812,7 +949,33 @@
             ["no parent", "", "None"]]
         ],
         "num_type": "double",
-        "skip_values": ["", "None"]
+        "skip_values": ["", "None"],
+        "default_values": [
+          {
+            "func": [
+              "basics",
+              "compute_nb_days",
+              {
+                "year_ref": {
+                  "key_type": "common",
+                  "keys": "parent_time_ref_year"
+                },
+                "year_branch": {
+                  "key_type": "common",
+                  "keys": "branch_year_in_parent"
+                },
+                "month_branch": {
+                  "key_type": "common",
+                  "keys": "branch_month_in_parent"
+                }
+              }
+            ]
+          },
+          {
+            "key_type": "simulation",
+            "keys": "branch_time_in_parent"
+          }
+        ]
       },
       "branch_time_in_child": {
         "conditions": [
@@ -824,7 +987,53 @@
             ["no parent", "", "None"]]
         ],
         "num_type": "double",
-        "skip_values": ["", "None"]
+        "skip_values": ["", "None"],
+        "default_values": [
+          {
+            "func": [
+              "basics",
+              "compute_nb_days",
+              {
+                "year_branch": {
+                  "key_type": "simulation",
+                  "keys": "branch_year_in_child"
+                },
+                "year_ref": {
+                  "key_type": "simulation",
+                  "keys": "child_time_ref_year"
+                }
+              }
+            ]
+          },
+          {
+            "key_type": "simulation",
+            "keys": "branch_time_in_child"
+          }
+        ]
+      },
+      "branch_method": {
+        "cases": [
+          [
+            [
+              [
+                {
+                  "key_type": "common",
+                  "keys": "parent_experiment_id"
+                },
+                "neq",
+                ["no parent", "", "None"]
+              ]
+            ],
+            {
+              "key_type": "common",
+              "keys": "branch_method"
+            }
+          ],
+          [
+            "True",
+            "no parent"
+          ]
+        ]
       },
       "physics_index": {
         "default_values": [
@@ -910,13 +1119,9 @@
               {
                 "key_type": "common",
                 "keys": "comment_sim"
-              },
-              {
-                "key_type": "dict",
-                "keys": "dynamic_comment"
               }
             ],
-            "fmt": "{}{}{}"
+            "fmt": "{}{}"
           }
         ]
       },
@@ -957,6 +1162,54 @@
           {
             "key_type": "common",
             "keys": "source_type"
+          }
+        ]
+      },
+      "title": {
+        "default_values": [
+          {
+            "key_type": "combine",
+            "keys": [
+              {
+                "key_type": "common",
+                "keys": "source_id"
+              },
+              {
+                "key_type": "common",
+                "keys": "project"
+              },
+              {
+                "key_type": "common",
+                "keys": "activity_id"
+              },
+              {
+                "key_type": "simulation",
+                "keys": "expid_in_filename"
+              }
+            ],
+            "fmt": "{} model output prepared for {} and {} / {} simulation"
+          },
+          {
+            "key_type": "combine",
+            "keys": [
+              {
+                "key_type": "common",
+                "keys": "source_id"
+              },
+              {
+                "key_type": "common",
+                "keys": "project"
+              },
+              {
+                "key_type": "common",
+                "keys": "activity_id"
+              },
+              {
+                "key_type": "common",
+                "keys": "experiment_id"
+              }
+            ],
+            "fmt": "{} model output prepared for {} / {} {}"
           }
         ]
       }

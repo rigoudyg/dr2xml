@@ -30,6 +30,27 @@ def initialize_project_settings(**kwargs):
     pprint.pprint(projects_settings)
 
 
+def get_project_settings(*args, is_default=False, default=None):
+    if len(args) == 0:
+        return projects_settings
+    else:
+        val = projects_settings
+        test = True
+        i = 0
+        while test and i < len(args):
+            if args[i] in val:
+                val = val[args[i]]
+                i += 1
+            else:
+                test = False
+        if test:
+            return val
+        elif not is_default:
+            raise ValueError("Could not find a proper value: %s not in %s" % (args[i], val))
+        else:
+            return default
+
+
 class DR2XMLComment(xml_writer.Comment):
 
     def __init__(self, text):

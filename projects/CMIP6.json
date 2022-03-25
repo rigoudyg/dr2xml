@@ -1,6 +1,68 @@
 {
   "parent_project_settings": "basic",
   "__common_values__": {
+    "required_model_components": {
+      "default_values": [
+        {
+          "key_type": "common",
+          "keys": [
+            "CV_experiment",
+            "required_model_components"
+          ]
+        }
+      ]
+    },
+    "additional_allowed_model_components": {
+      "default_values": [
+        {
+          "key_type": "common",
+          "keys": [
+            "CV_experiment",
+            "additional_allowed_model_components"
+          ]
+        }
+      ]
+    },
+    "activity_id": {
+      "default_values": [
+        {
+          "key_type": "simulation",
+          "keys": "activity_id"
+        },
+        {
+          "key_type": "laboratory",
+          "keys": "activity_id"
+        },
+        {
+          "key_type": "common",
+          "keys": ["CV_experiment", "activity_id"]
+        }
+      ]
+    },
+    "parent_activity_id": {
+      "default_values": [
+        {
+          "key_type": "simulation",
+          "keys": "parent_activity_id"
+        },
+        {
+          "key_type": "simulation",
+          "keys": "activity_id"
+        },
+        {
+          "key_type": "laboratory",
+          "keys": "parent_activity_id"
+        },
+        {
+          "key_type": "laboratory",
+          "keys": "activity_id"
+        },
+        {
+          "key_type": "common",
+          "keys": ["CV_experiment", "parent_activity_id"]
+        }
+      ]
+    },
     "HDL": {
       "default_values": [
         {
@@ -289,24 +351,77 @@
       "source_id", "source_type", "sub_experiment_id", "sub_experiment", "table_id", "title", "variable_id",
       "variant_info", "variant_label"],
     "vars_constraints": {
+      "comment": {
+        "skip_values": [""],
+        "cases": [
+          [
+            [
+              [
+                {
+                  "key_type": "variable",
+                  "keys": "modeling_realm"
+                },
+                "eq",
+                "seaIce"
+              ],
+              [
+                {
+                  "key_type": "variable",
+                  "keys": "cell_measures"
+                },
+                "match",
+                ".*areacella.*"
+              ],
+              [
+                {
+                  "key_type": "variable",
+                  "keys": "label"
+                },
+                "neq",
+                "siconca"
+              ]
+            ],
+            {
+              "key_type": "combine",
+              "keys": [
+                {
+                  "key_type": "common",
+                  "keys": "comment_lab"
+                },
+                {
+                  "key_type": "common",
+                  "keys": "comment_sim"
+                }
+              ],
+              "fmt": "{}{}"
+            }
+          ]
+        ],
+        "default_values": [
+          {
+            "key_type": "combine",
+            "keys": [
+              {
+                "key_type": "common",
+                "keys": "comment_lab"
+              },
+              {
+                "key_type": "common",
+                "keys": "comment_sim"
+              },
+              ". Due an error in DR01.00.21 and to technical constraints, this variable may have attribute cell_measures set to area: areacella, while it actually is area: areacello"
+            ],
+            "fmt": "{}{}{}"
+          }
+        ]
+      },
       "variable_id": {
         "default_values": [
           {
             "key_type": "variable",
             "keys": "mipVarLabel"
         }
-        ],
-        "corrections": {
-          "ts": [
-            [[{
-                "key_type": "variable",
-                "keys": "label"
-              },
-              "eq",
-              "tsland"]],
-            "tsland"
-          ]
-        }
+        ]
       },
       "description": {
         "skip_values": ["", "None"],
@@ -361,17 +476,8 @@
           {
             "key_type": "common",
             "keys": "parent_activity_id"
-          },
-          {
-            "key_type": "common",
-            "keys": ["CV_experiment", "parent_activity_id"]
           }
         ]
-      },
-      "realm": {
-        "corrections": {
-          "ocnBgChem": "ocnBgchem"
-        }
       },
       "CMIP6_CV_latest_tag": {
         "default_values": [
@@ -400,10 +506,6 @@
           {
             "key_type": "common",
             "keys": "activity_id"
-          },
-          {
-            "key_type": "common",
-            "keys": ["CV_experiment", "activity_id"]
           }
         ]
       },
@@ -495,21 +597,6 @@
   "field_output": {
     "attrs_list": ["field_ref", "name", "grid_ref", "freq_offset", "detect_missing_value", "default_value", "prec",
       "cell_methods", "cell_methods_mode", "operation", "freq_op", "expr"],
-    "attrs_constraints": {
-      "name": {
-        "corrections": {
-          "ts": [
-            [[{
-                "key_type": "variable",
-                "keys": "label"
-              },
-              "eq",
-              "tsland"]],
-            "tsland"
-          ]
-        }
-      }
-    },
     "vars_list": ["comment", "standard_name", "description", "long_name", "positive", "history", "units",
       "cell_methods", "cell_measures", "flag_meanings", "flag_values", "interval_operation"]
   }

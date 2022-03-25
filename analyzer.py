@@ -41,11 +41,12 @@ def freq2datefmt(in_freq, operation, table):
     :return:
     """
     # WIP doc v6.2.3 - Apr. 2017: <time_range> format is frequency-dependant
+    too_long_periods = get_variable_from_lset_with_default("too_long_periods", [])
     datefmt = False
     offset = None
     freq = in_freq
     if freq in ["dec", "10y"]:
-        if not any("dec" in f for f in get_variable_from_lset_with_default("too_long_periods", [])):
+        if not any("dec" in f for f in too_long_periods):
             datefmt = "%y"
             if operation in ["average", "minimum", "maximum"]:
                 offset = "5y"
@@ -54,7 +55,7 @@ def freq2datefmt(in_freq, operation, table):
         else:
             freq = "yr"  # Ensure dates in filenames are consistent with content, even if not as required
     if freq in ["yr", "yrPt", "1y"]:
-        if not any("yr" in f for f in get_variable_from_lset_with_default("too_long_periods", [])):
+        if not any("yr" in f for f in too_long_periods):
             datefmt = "%y"
             if operation in ["average", "minimum", "maximum"]:
                 offset = False
@@ -88,7 +89,7 @@ def freq2datefmt(in_freq, operation, table):
             offset = "5d"
     elif freq in ["6hr", "6hrPt", "3hr", "3hrPt", "3hrClim", "1hr", "1hrPt", "hr", "6h", "3h", "1h"]:
         datefmt = "%y%mo%d%h%mi"
-        if freq == "6hr" or freq == "6hrPt" or freq == "6h":
+        if freq in ["6hr", "6hrPt", "6h"]:
             if operation in ["average", "minimum", "maximum"]:
                 offset = "3h"
             else:

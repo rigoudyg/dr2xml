@@ -51,6 +51,7 @@ Rather look at git log for identifying further changes and contributors....
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+import os
 import sys
 
 import cProfile
@@ -599,8 +600,9 @@ def generate_file_defs(lset, sset, year, enddate, context, cvs_path, pingfiles=N
     # Initialize lset and sset variables for all functions
     initialize_config_variables()
     initialize_dict(lset, sset)
-    initialize_project_settings(cvspath=cvs_path, context=context, prefix=prefix)
-    generate_file_defs_inner(year, enddate, context, cvs_path, pingfiles=pingfiles, dummies=dummies, dirname=dirname,
+    initialize_project_settings(cvspath=cvs_path, context=context, prefix=prefix,
+                                root=os.path.basename(os.path.abspath(__file__)))
+    generate_file_defs_inner(year, enddate, context, pingfiles=pingfiles, dummies=dummies, dirname=dirname,
                              attributes=attributes, select=select)
     # pr.disable()
     # if python_version == "python2":
@@ -614,8 +616,8 @@ def generate_file_defs(lset, sset, year, enddate, context, cvs_path, pingfiles=N
     # print s.getvalue()
 
 
-def generate_file_defs_inner(year, enddate, context, cvs_path, pingfiles=None, dummies='include', dirname="./",
-                             attributes=list(), select="on_expt_and_year"):
+def generate_file_defs_inner(year, enddate, context, pingfiles=None, dummies='include', dirname="./", attributes=list(),
+                             select="on_expt_and_year"):
     """
     Using the DR module, a dict of lab settings ``lset``, and a dict
     of simulation settings ``sset``, generate an XIOS file_defs 'file' for a
@@ -627,8 +629,7 @@ def generate_file_defs_inner(year, enddate, context, cvs_path, pingfiles=None, d
 
 on
     :param six.string_types context: XIOS context considered for the launch
-    :param six.string_types cvs_path: path to controlled vocabulary to be used
-    :param six.string_types pingfiles: files which are analysed to find variables with a different name between model
+es with a different name between model
                                        and Data Request
     :param six.string_types dummies: specify how to treat dummy variables among:
 
@@ -730,9 +731,8 @@ on
     # --------------------------------------------------------------------
     # filename=dirname+"filedefs_%s.xml"%context
     filename = dirname + "dr2xml_%s.xml" % context
-    write_xios_file_def(filename, svars_per_table, year, cvs_path, field_defs, axis_defs, grid_defs, scalar_defs,
-                        file_defs, dummies, skipped_vars_per_table, actually_written_vars, context, pingvars, enddate,
-                        attributes)
+    write_xios_file_def(filename, svars_per_table, year, field_defs, axis_defs, grid_defs, scalar_defs, file_defs,
+                        dummies, skipped_vars_per_table, actually_written_vars, context, pingvars, enddate, attributes)
     logger.info("\nfile_def written as %s" % filename)
 
     #

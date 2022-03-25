@@ -24,6 +24,8 @@ from settings_interface import get_variable_from_lset_with_default_in_lset, is_k
 from utils import Dr2xmlError
 from importlib.machinery import SourceFileLoader
 
+from vars_selection import get_sc
+
 
 def setup_project_settings(**kwargs):
     # Read content from json file
@@ -122,7 +124,7 @@ def reformat_settings(dict_settings):
 def reformat_constraints(key, dict_settings):
     logger = get_logger()
     # Create default types
-    for attr in [att for att in ["skip_values", "forbidden_patterns", "conditions", "default_values"]
+    for attr in [att for att in ["skip_values", "forbidden_patterns", "conditions", "default_values", "cases"]
                  if att not in dict_settings]:
         dict_settings[attr] = list()
     for attr in [att for att in ["authorized_types", "authorized_values"] if att not in dict_settings]:
@@ -194,11 +196,16 @@ def update_settings(current_settings, new_settings):
 
 
 def check_value(value, skip_values=list(), authorized_types=False, authorized_values=False, forbidden_patterns=list(),
-                conditions=False):
+                conditions=False, common_dict=dict(), additional_dict=dict()):
     is_allowed = str(value) not in skip_values
     if is_allowed and authorized_types:
         is_allowed = isinstance(value, authorized_types)
     if is_allowed and authorized_values:
+        if isinstance(authorized_values, dict):
+            authorized_values = get_key_value(authorized_values, common_dict=common_dict,
+                                              additional_dict=additional_dict)
+        if not isinstance(authorized_values, list):
+            authorized_values = [authorized_values, ]
         is_allowed = value in authorized_values
     if is_allowed:
         is_allowed = not(any([re.compile(pattern).match(value) for pattern in forbidden_patterns]))
@@ -224,6 +231,13 @@ def get_value(key_type, key, src, common_dict=dict(), additional_dict=dict()):
     elif key_type in ["DR_version", ]:
         value = get_DR_version()
         found = True
+    elif key_type in ["scope", ]:
+        value = get_sc()
+        found = True
+        if key is not None and key in value.__dict__:
+            value = value.__getattribute__(key)
+        elif key is not None:
+            found = False
     elif key_type in ["variable", ] and "variable" in additional_dict and \
             key in additional_dict["variable"].__dict__:
         value = additional_dict["variable"].__getattribute__(key)
@@ -296,17 +310,17 @@ def get_key_value(key_value, common_dict=dict(), additional_dict=dict()):
                                          additional_dict=additional_dict)
             # Take into account format
             if found and key_type not in ["combine", ]:
-                if fmt is None and isinstance(value, list):
-                    value = value[0]
-                elif fmt is not None and isinstance(value, list):
+                if fmt is not None and isinstance(value, list):
                     value = fmt.format(*value)
+                elif isinstance(value, list) and len(value) == 1:
+                    value = value[0]
                 elif fmt is not None:
                     value = fmt.format(value)
             if found and isinstance(value, six.string_types):
                 value = value.strip()
             if found and func is not None:
-                value = apply_function(is_value=True, value=value, *func, additional_dict=additional_dict,
-                                       common_dict=common_dict)
+                found, value = apply_function(is_value=True, value=value, *func, additional_dict=additional_dict,
+                                              common_dict=common_dict)
         else:
             if key_type is not None:
                 found, value = get_value(key_type, key=None, src=None, common_dict=common_dict,
@@ -315,8 +329,8 @@ def get_key_value(key_value, common_dict=dict(), additional_dict=dict()):
                 found = False
                 value = None
             if func is not None:
-                value = apply_function(*func, value=None, is_value=False, additional_dict=additional_dict,
-                                       common_dict=common_dict)
+                found, value = apply_function(*func, value=None, is_value=False, additional_dict=additional_dict,
+                                              common_dict=common_dict)
                 found = True
             if found:
                 if fmt is None and isinstance(value, list):
@@ -331,6 +345,7 @@ def get_key_value(key_value, common_dict=dict(), additional_dict=dict()):
 
 
 def apply_function(mod, func, options, value=None, is_value=False, additional_dict=dict(), common_dict=dict()):
+    test = True
     func = get_func_from_add_module(mod, func)
     for key in sorted(list(options)):
         test, val = get_key_value(options[key], additional_dict=additional_dict, common_dict=common_dict)
@@ -338,17 +353,26 @@ def apply_function(mod, func, options, value=None, is_value=False, additional_di
             options[key] = val
         else:
             del options[key]
-    if is_value:
-        value = func(value, **options)
-    else:
-        value = func(**options)
-    return value
+    try:
+        if is_value:
+            value = func(value, **options)
+        else:
+            value = func(**options)
+    except:
+        test = False
+    return test, value
 
 
 def check_conditions(conditions, common_dict=dict(), additional_dict=dict(), keep_not_found=False):
     if isinstance(conditions, bool):
         relevant = True
         test = conditions
+    elif isinstance(conditions, six.string_types) and conditions in ["True", ]:
+        relevant = True
+        test = True
+    elif isinstance(conditions, six.string_types) and conditions in ["False", ]:
+        relevant = True
+        test = False
     else:
         conditions_checked = [check_condition(conditions[i], common_dict=common_dict, additional_dict=additional_dict)
                               for i in range(len(conditions))]
@@ -377,6 +401,12 @@ def check_condition(condition, common_dict=dict(), additional_dict=dict()):
     if isinstance(condition, bool):
         relevant = True
         test = condition
+    elif isinstance(condition, six.string_types) and condition in ["True", ]:
+        relevant = True
+        test = True
+    elif isinstance(condition, six.string_types) and condition in ["False", ]:
+        relevant = True
+        test = False
     else:
         test = True
         relevant = True
@@ -393,6 +423,10 @@ def check_condition(condition, common_dict=dict(), additional_dict=dict()):
                 test = test and first_val in second_val
             elif check in ["neq", ]:
                 test = test and first_val not in second_val
+            elif check in ["match", ]:
+                test = test and all([re.compile(val).match(str(first_val)) is not None for val in second_val])
+            elif check in ["nmatch", ]:
+                test = test and not any([re.compile(val).match(str(first_val)) is not None for val in second_val])
             else:
                 raise ValueError("Conditions can have 'eq' or 'neq' as operator, found: %s" % check)
         else:
@@ -406,7 +440,6 @@ def evaluate_common_values(common_dict=dict(), additional_kwargs=dict()):
     test = True
     while len(items_to_treat) > 0 and test:
         for item in items_to_treat:
-            print(item)
             found, value, _ = find_value(tag="__common_values__", key=item, value=None, is_default_value=True,
                                          fatal=False, conditions=common_dict[item]["conditions"],
                                          skip_values=common_dict[item]["skip_values"],
@@ -415,6 +448,7 @@ def evaluate_common_values(common_dict=dict(), additional_kwargs=dict()):
                                          forbidden_patterns=common_dict[item]["forbidden_patterns"],
                                          default_values=common_dict[item]["default_values"],
                                          corrections=common_dict[item]["corrections"],
+                                         cases=common_dict[item]["cases"],
                                          common_dict=rep, additional_dict=additional_kwargs, is_default=True)
             if found:
                 rep[item] = value
@@ -446,6 +480,7 @@ def evaluate_tag_values(tag, tag_dict, common_dict=dict(), additional_dict=dict(
                                              authorized_values=tag_dict[section][item]["authorized_values"],
                                              forbidden_patterns=tag_dict[section][item]["forbidden_patterns"],
                                              corrections=tag_dict[section][item]["corrections"],
+                                             cases=tag_dict[section][item]["cases"],
                                              common_dict=common_dict, additional_dict=additional_dict, is_default=False)
                 if found:
                     tag_dict[section][item]["default_values"][i] = value
@@ -477,7 +512,8 @@ def correct_value(value, corrections=list(), additional_dict=dict(), common_dict
 
 def find_value(tag, key, value, is_default_value=True, conditions=list(), skip_values=list(), authorized_types=False,
                authorized_values=False, forbidden_patterns=list(), default_values=list(), fatal=False, is_default=False,
-               common_dict=dict(), additional_dict=dict(), corrections=list(), output_key=None, num_type="str"):
+               common_dict=dict(), additional_dict=dict(), corrections=list(), cases=list(), output_key=None,
+               num_type="str"):
     output_dict = dict(output_key=output_key, num_type=num_type)
     found, conditions = check_conditions(conditions, common_dict=common_dict, additional_dict=additional_dict)
     if found:
@@ -486,9 +522,18 @@ def find_value(tag, key, value, is_default_value=True, conditions=list(), skip_v
                                   common_dict=common_dict)
             found = check_value(value, skip_values=skip_values, authorized_types=authorized_types,
                                 authorized_values=authorized_values, forbidden_patterns=forbidden_patterns,
-                                conditions=conditions)
+                                conditions=conditions, common_dict=common_dict, additional_dict=additional_dict)
         else:
             found = False
+        if not found and len(cases) > 0:
+            i = 0
+            while not found and i < len(cases):
+                condition, value = cases[i]
+                found, condition = check_conditions(condition, common_dict=common_dict, additional_dict=additional_dict)
+                if found:
+                    found, value = get_key_value(value, common_dict=common_dict, additional_dict=additional_dict)
+                if not found:
+                    i += 1
         if not found and is_default:
             i = 0
             while not found and i < len(default_values):
@@ -499,9 +544,13 @@ def find_value(tag, key, value, is_default_value=True, conditions=list(), skip_v
                                           common_dict=common_dict)
                     found = check_value(value, skip_values=skip_values, authorized_types=authorized_types,
                                         authorized_values=authorized_values, forbidden_patterns=forbidden_patterns,
-                                        conditions=conditions)
+                                        conditions=conditions, common_dict=common_dict, additional_dict=additional_dict)
                 i += 1
-    if fatal and not found:
-        raise Dr2xmlError("Could not find a proper value for tag %s and key %s (values tested: %s)"
-                          % (tag, key, " ".join([str(value), str(default_values)])))
+        if fatal and conditions and not found:
+            raise Dr2xmlError("Could not find a proper value for tag %s and key %s (values tested: %s)"
+                              % (tag, key, " ".join([str(value), str(default_values)])))
+    else:
+        if fatal:
+            raise Dr2xmlError("Could not find a proper value for tag %s and key %s (values tested: %s)"
+                              % (tag, key, " ".join([str(value), str(default_values)])))
     return found, value, output_dict

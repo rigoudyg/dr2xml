@@ -21,7 +21,7 @@ from settings_interface import get_variable_from_sset_else_lset_without_default,
     is_key_in_sset, is_sset_not_None, get_variable_from_sset_with_default_in_sset, \
     get_variable_from_sset_with_default, is_key_in_lset, get_variable_from_sset_else_lset_with_default
 # Interface to Data Request
-from dr_interface import get_request_by_id_by_sect, get_uid, get_experiment_label, initialize_sc
+from dr_interface import get_request_by_id_by_sect, get_uid, get_experiment_label, initialize_sc, get_DR_version
 
 # Grids tools
 from grids_selection import decide_for_grids
@@ -619,7 +619,27 @@ def gather_AllSimpleVars(year=False, select="on_expt_and_year"):
                                           expid=exp)
     else:
         logger.info("Info: No HOMEvars list provided.")
+    mip_vars_list = correct_DR_variables(mip_vars_list)
     return mip_vars_list
+
+
+def correct_DR_variables(mip_var_list):
+    for (i, var) in enumerate(mip_var_list):
+        if var.label in ["tsland", ]:
+            var.mipVarLabel = "tsland"
+        if var.modeling_realm in ["ocnBgChem", ]:
+            var.modeling_realm = "ocnBgchem"
+        # Put a warning for field attributes that shouldn't be empty strings
+        if not var.long_name:
+            var.long_name = "empty in DR " + get_DR_version()
+        if not var.units:
+            var.units = "empty in DR " + get_DR_version()
+        # 'tau' is ambiguous in DR 01.00.18 : either a variable name (stress)
+        # or a dimension name (optical thickness). We choose to rename the stress
+        if var.ref_var in ["tau", ]:
+            var.ref_var = "tau_stress"
+        mip_var_list[i] = var
+    return mip_var_list
 
 
 def select_variables_to_be_processed(year, context, select):

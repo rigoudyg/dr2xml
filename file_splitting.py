@@ -7,7 +7,7 @@ Tools to compute split frequencies.
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
-from collections import OrderedDict
+from collections import OrderedDict, defaultdict
 from io import open
 
 # Utilities
@@ -29,9 +29,7 @@ def read_splitfreqs():
     """
     splitfreqs = get_config_variable("splitfreqs", to_change=True)
     # No need to reread or try for ever
-    if splitfreqs is not None:
-        return
-    else:
+    if splitfreqs is None:
         splitfile = get_variable_from_sset_else_lset_with_default(key_sset="split_frequencies",
                                                                   key_lset="split_frequencies",
                                                                   default="splitfreqs.dat")
@@ -40,20 +38,16 @@ def read_splitfreqs():
             print("Reading split_freqs from file %s" % splitfile)
             lines = freq.readlines()
             freq.close()
-            splitfreqs = OrderedDict()
-            for line in lines:
-                if not line.startswith('#'):
-                    (varlabel, table, freq) = line.split()[0:3]
-                    if varlabel not in splitfreqs:
-                        splitfreqs[varlabel] = OrderedDict()
-                    # Keep smallest factor for each variable label
-                    if table not in splitfreqs[varlabel]:
-                        splitfreqs[varlabel][table] = freq
+            splitfreqs = defaultdict(lambda: OrderedDict)
+            for line in [l for l in lines if not l.startswith("#")]:
+                (varlabel, table, freq) = line.split()[0:3]
+                # Keep smallest factor for each variable label
+                if table not in splitfreqs[varlabel]:
+                    splitfreqs[varlabel][table] = freq
             set_config_variable("splitfreqs", splitfreqs)
         except:
             splitfreqs = False
             set_config_variable("splitfreqs", splitfreqs)
-            return
 
 
 def read_compression_factors():
@@ -73,15 +67,9 @@ def read_compression_factors():
         try:
             fact = open("compression_factors.dat", "r")
             lines = fact.readlines()
-            compression_factor = OrderedDict()
-            for line in lines:
-                if line[0] == '#':
-                    continue
-                varlabel = line.split()[0]
-                table = line.split()[1]
-                factor = float(line.split()[2])
-                if varlabel not in compression_factor:
-                    compression_factor[varlabel] = OrderedDict()
+            compression_factor = defaultdict(lambda : OrderedDict)
+            for line in [l for l in lines if not l.startswith("#")]:
+                varlabel, table, factor = line.split()[0:3]
                 # Keep smallest factor for each variablelabel
                 if table not in compression_factor[varlabel] or \
                         compression_factor[varlabel][table] > factor:
@@ -193,26 +181,26 @@ def timesteps_per_freq_and_duration(freq, nbdays, sampling_tstep):
     # This function returns the number of records within nbdays
     duration = 0.
     # Translate freq strings to duration in days
-    if freq == "3hr" or freq == "3hrPt" or freq == "3h":
+    if freq in ["3hr", "3hrPt", "3h"]:
         duration = 1. / 8
-    elif freq == "6hr" or freq == "6hrPt" or freq == "6h":
+    elif freq in ["6hr", "6hrPt", "6h"]:
         duration = 1. / 4
-    elif freq == "day" or freq == "1d":
+    elif freq in ["day", "1d"]:
         duration = 1.
-    elif freq == "5day" or freq == "5d":
+    elif freq in ["5day", "5d"]:
         duration = 5.
-    elif freq == "10day" or freq == "10d":
+    elif freq in ["10day", "10d"]:
         duration = 10.
-    elif freq == "1hr" or freq == "hr" or freq == "1hrPt" or freq == "1h":
+    elif freq in ["1hr", "hr", "1hrPt", "1h"]:
         duration = 1. / 24
-    elif freq == "mon" or freq == "monPt" or freq == "monC" or freq == "1mo":
+    elif freq in ["mon", "monPt", "monC", "1mo"]:
         duration = 31.
-    elif freq == "yr" or freq == "yrPt" or freq == "1y":
+    elif freq in ["yr", "yrPt", "1y"]:
         duration = 365.
     # TBD ; use setting's value for CFsubhr_frequency
-    elif freq == "subhr" or freq == "subhrPt" or freq == "1ts":
+    elif freq in ["subhr", "subhrPt", "1ts"]:
         duration = 1. / (86400. / sampling_tstep)
-    elif freq == "dec" or freq == "10y":
+    elif freq in ["dec", "10y"]:
         duration = 10. * 365
     #
     # If freq actually translate to a duration, return
@@ -229,7 +217,7 @@ def timesteps_per_freq_and_duration(freq, nbdays, sampling_tstep):
     elif freq == "1hrCM":
         return (int(float(nbdays) / 31) + 1) * 24.
     else:
-        raise (Dr2xmlGridError("Frequency %s is not handled" % freq))
+        raise Dr2xmlGridError("Frequency %s is not handled" % freq)
 
 
 def field_size(svar, mcfg):
