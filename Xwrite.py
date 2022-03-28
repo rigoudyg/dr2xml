@@ -23,11 +23,11 @@ from config import get_config_variable
 
 # Interface to settings dictionaries
 from settings_interface import get_variable_from_lset_with_default, get_variable_from_lset_without_default, \
-    get_variable_from_sset_with_default, get_source_id_and_type, format_dict_for_printing
+    get_variable_from_sset_with_default, get_source_id_and_type
 # Interface to Data Request
 from dr_interface import get_DR_version
 
-from xml_interface import DR2XMLElement, DR2XMLComment, create_pretty_xml_doc, find_rank_xml_subelement, wrv, \
+from xml_interface import DR2XMLElement, create_pretty_xml_doc, find_rank_xml_subelement, wrv, \
     get_project_settings
 
 # Settings tools
@@ -65,7 +65,7 @@ warnings_for_optimisation = []
 
 def write_xios_file_def_for_svar(sv, year, table, out, field_defs, axis_defs, grid_defs, domain_defs, scalar_defs,
                                  dummies, skipped_vars_per_table, actually_written_vars, context, grid, pingvars=None,
-                                 enddate=None, attributes=[], debug=[]):
+                                 enddate=None, attributes=[], debug=[], common_values=dict()):
     """
     Generate an XIOS file_def entry in out for :
       - a dict for laboratory settings
@@ -105,9 +105,9 @@ def write_xios_file_def_for_svar(sv, year, table, out, field_defs, axis_defs, gr
         # MPM : si on a defini un label non ambigu alors on l'utilise comme alias (i.e. le field_ref)
         # et pour l'alias seulement (le nom de variable dans le nom de fichier restant svar.label)
         if sv.label_non_ambiguous:
-            alias = get_variable_from_lset_without_default("ping_variables_prefix") + sv.label_non_ambiguous
+            alias = common_values["ping_variables_prefix"] + sv.label_non_ambiguous
         else:
-            alias = get_variable_from_lset_without_default("ping_variables_prefix") + sv.ref_var
+            alias = common_values["ping_variables_prefix"] + sv.ref_var
         if sv.label in debug:
             logger.debug("write_xios_file_def_for_svar ... processing %s, alias=%s" % (sv.label, alias))
 
@@ -137,36 +137,41 @@ def write_xios_file_def_for_svar(sv, year, table, out, field_defs, axis_defs, gr
     # Set global CMOR file attributes
     # --------------------------------------------------------------------
     #
-    source_id = get_project_settings("__common_values__", "source_id")
-    source_type = get_project_settings("__common_values__", "source_type")
-    experiment_id = get_project_settings("__common_values__", "experiment_id")
+    source_id = common_values["source_id"]
+    source_type = common_values["source_type"]
+    experiment_id = common_values["experiment_id"]
     #
     # --------------------------------------------------------------------
     # Set grid info
     # --------------------------------------------------------------------
+    grid_choice = common_values["grid_choice"]
     if grid in ["", ]:
         # either native or close-to-native
-        grid_choice = get_variable_from_lset_without_default('grid_choice', source_id)
         if sv.type in ["dev", ]:
             target_grid = sv.description.split('|')[1]
             if target_grid in ["native", ]:
-                grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description = \
-                    get_variable_from_lset_without_default('grids_dev', sv.label, grid_choice, context)
+                grids_dev = common_values["grids_dev"]
+                if sv.label not in grids_dev or (sv.label in grids_dev and
+                                                 (grid_choice not in grids_dev[sv.label] or
+                                                  (grid_choice in grids_dev[sv.label]
+                                                   and context not in grids_dev[sv.label][grid_choice]))):
+                    raise KeyError("Could not find the grid description for variable %s, grid_choice %s and context %s"
+                                   " in entry grids_dev: %s" % (sv.label, grid_choice, context, str(grids_dev)))
+                else:
+                    grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description = \
+                        grids_dev[sv.label][grid_choice][context]
             else:
-                grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description = \
-                    get_variable_from_lset_without_default('grids', grid_choice, context)
+                grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description = common_values["grids"]
         else:
-            grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description = \
-                get_variable_from_lset_without_default('grids', grid_choice, context)
+            grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description = common_values["grids"]
     else:
         if grid in ['cfsites', ]:
             target_hgrid_id = cfsites_domain_id
             zgrid_id = None
         else:
-            target_hgrid_id = get_variable_from_lset_without_default("ping_variables_prefix") + grid
+            target_hgrid_id = common_values["ping_variables_prefix"] + grid
             zgrid_id = "TBD : Should create zonal grid for CMIP6 standard grid %s" % grid
-        grid_label, grid_resolution, grid_description = DR_grid_to_grid_atts(grid, is_dev=(grid == "native" and
-                                                                                           sv.type == "dev"))
+        grid_label, grid_resolution, grid_description = DR_grid_to_grid_atts(grid)
 
     if table.endswith("Z"):  # e.g. 'AERmonZ','EmonZ', 'EdayZ'
         grid_label += "z"
@@ -177,12 +182,10 @@ def write_xios_file_def_for_svar(sv, year, table, out, field_defs, axis_defs, gr
         grid_label += "g"
     #
     # Check model components re. CV components
-    required_components = get_project_settings("__common_values__", "required_model_components", is_default=True,
-                                               default=list())
+    required_components = common_values["required_model_components"]
     if not isinstance(required_components, list):
         required_components = [required_components, ]
-    allowed_components = get_project_settings("__common_values__", "additional_allowed_model_components",
-                                              is_default=True, default=list())
+    allowed_components = common_values["additional_allowed_model_components"]
     if not isinstance(allowed_components, list):
         allowed_components = [allowed_components, ]
     actual_components = source_type.split(" ")
@@ -213,13 +216,10 @@ def write_xios_file_def_for_svar(sv, year, table, out, field_defs, axis_defs, gr
     # Compute XIOS split frequency
     # --------------------------------------------------------------------
     sc = get_sc()
-    resolution = get_variable_from_lset_without_default('grid_choice', source_id)
-    split_freq = split_frequency_for_variable(sv, resolution, sc.mcfg, context)
+    split_freq = split_frequency_for_variable(sv, grid_choice, sc.mcfg, context)
     # Cap split_freq by setting max_split_freq (if expressed in years)
     if split_freq[-1] == 'y':
-        max_split_freq = get_variable_from_sset_with_default('max_split_freq', None)
-        if max_split_freq is None:
-            max_split_freq = get_variable_from_lset_with_default('max_split_freq', None)
+        max_split_freq = common_values['max_split_freq']
         if max_split_freq is not None:
             if max_split_freq[0:-1] != "y":
                 Dr2xmlError("max_split_freq must end with an 'y' (%s)" % max_split_freq)
@@ -230,8 +230,7 @@ def write_xios_file_def_for_svar(sv, year, table, out, field_defs, axis_defs, gr
     # Write XIOS file node:
     # including global CMOR file attributes
     # --------------------------------------------------------------------
-    freq = longest_possible_period(cmip6_freq_to_xios_freq(sv.frequency, table),
-                                   get_variable_from_lset_with_default("too_long_periods", []))
+    freq = longest_possible_period(cmip6_freq_to_xios_freq(sv.frequency, table), common_values["too_long_periods"])
 
     split_freq_format = None
     split_start_offset = None
@@ -253,7 +252,7 @@ def write_xios_file_def_for_svar(sv, year, table, out, field_defs, axis_defs, gr
             # print "lastyear=",lastyear," enddate=",enddate
         if lastyear is None or (enddate is not None and lastyear >= int(enddate[0:4])):
             # DR doesn't specify an end date for that var, or a very late one
-            if get_variable_from_lset_with_default('dr2xml_manages_enddate', True):
+            if common_values['dr2xml_manages_enddate']:
                 # Use run end date as the latest possible date
                 # enddate must be 20140101 , rather than 20131231
                 if enddate is not None:
@@ -292,7 +291,7 @@ def write_xios_file_def_for_svar(sv, year, table, out, field_defs, axis_defs, gr
     #
     for name, value in sorted(list(attributes)):
         xml_file.append(wrv(name, value))
-    non_stand_att = get_variable_from_lset_with_default("non_standard_attributes", OrderedDict())
+    non_stand_att = common_values["non_standard_attributes"]
     for name in sorted(list(non_stand_att)):
         xml_file.append(wrv(name, non_stand_att[name]))
     #
@@ -315,10 +314,9 @@ def write_xios_file_def_for_svar(sv, year, table, out, field_defs, axis_defs, gr
             # if not sv_psol.cell_measures : sv_psol.cell_measures = "cell measure is not specified in DR "+
             # get_DR_version()
             psol_field, _ = create_xios_aux_elmts_defs(sv_psol,
-                                                       get_variable_from_lset_without_default("ping_variables_prefix")
-                                                       + "ps", table, field_defs, axis_defs, grid_defs, domain_defs,
-                                                       scalar_defs, dummies, context, target_hgrid_id, zgrid_id,
-                                                       pingvars)
+                                                       common_values["ping_variables_prefix"] + "ps", table,
+                                                       field_defs, axis_defs, grid_defs, domain_defs, scalar_defs,
+                                                       dummies, context, target_hgrid_id, zgrid_id, pingvars)
             xml_file.append(psol_field)
         else:
             logger.warning("Warning: Cannot complement model levels with psol for variable %s and table %s" %
@@ -735,34 +733,23 @@ def write_xios_file_def(filename, svars_per_table, year, field_defs, axis_defs, 
     Write XIOS file_def.
     """
     logger = get_logger()
+    common_values = get_project_settings("__common_values__")
     # --------------------------------------------------------------------
     # Start writing XIOS file_def file:
     # file_definition node, including field child-nodes
     # --------------------------------------------------------------------
     # Create xml element for context
-    xml_context = DR2XMLElement(tag="context", id=context)
-    # Add all comments
-    xml_context.append(DR2XMLComment(text="CMIP6 Data Request version {}".format(get_DR_version())))
-    xml_context.append(DR2XMLComment(text="CMIP6-CV version {}".format("??")))
-    xml_context.append(DR2XMLComment(text="CMIP6_conventions_version {}".format(
-        get_config_variable("CMIP6_conventions_version"))))
-    xml_context.append(DR2XMLComment(text="dr2xml version {}".format(get_config_variable("version"))))
-    xml_context.append(DR2XMLComment(text="\n".join(["Lab_and_model settings", format_dict_for_printing("lset")])))
-    xml_context.append(DR2XMLComment(text="\n".join(["Simulation settings", format_dict_for_printing("sset")])))
-    xml_context.append(DR2XMLComment(text="Year processed {}".format(year)))
+    xml_context = DR2XMLElement(tag="context")
     # Initialize some variables
     domain_defs = OrderedDict()
-    foo, sourcetype = get_source_id_and_type()
     # Add xml_file_definition
-    xml_file_definition = DR2XMLElement(tag="file_definition", type="one_file", enabled="true")
+    xml_file_definition = DR2XMLElement(tag="file_definition")
     # Loop on values to fill the xml element
     for table in sorted(list(svars_per_table)):
         count = OrderedDict()
         for svar in sorted(svars_per_table[table], key=lambda x: (x.label + "_" + table)):
-            if get_variable_from_lset_with_default("allow_duplicates_in_same_table", False) \
-                    or svar.mipVarLabel not in count:
-                if not get_variable_from_lset_with_default("use_cmorvar_label_in_filename", False) \
-                        and svar.mipVarLabel in count:
+            if common_values["allow_duplicates_in_same_table"] or svar.mipVarLabel not in count:
+                if not common_values["use_cmorvar_label_in_filename"] and svar.mipVarLabel in count:
                     form = "If you really want to actually produce both %s and %s in table %s, " + \
                            "you must set 'use_cmorvar_label_in_filename' to True in lab settings"
                     raise Dr2xmlError(form % (svar.label, count[svar.mipVarLabel].label, table))
@@ -772,7 +759,8 @@ def write_xios_file_def(filename, svars_per_table, year, field_defs, axis_defs, 
                     check_for_file_input(svar, hgrid, pingvars, field_defs, grid_defs, domain_defs, file_defs)
                     write_xios_file_def_for_svar(svar, year, table, xml_file_definition, field_defs, axis_defs,
                                                  grid_defs, domain_defs, scalar_defs, dummies, skipped_vars_per_table,
-                                                 actually_written_vars, context, grid, pingvars, enddate, attributes)
+                                                 actually_written_vars, context, grid, pingvars, enddate, attributes,
+                                                 common_values=common_values)
             else:
                 logger.warning("Duplicate variable %s,%s in table %s is skipped, preferred is %s" %
                                (svar.label, svar.mipVarLabel, table, count[svar.mipVarLabel].label))
@@ -791,8 +779,7 @@ def write_xios_file_def(filename, svars_per_table, year, field_defs, axis_defs, 
     # --------------------------------------------------------------------
     # Write all domain, axis, field defs needed for these file_defs
     xml_field_definition = DR2XMLElement(tag="field_definition")
-    is_reset_field_group = get_variable_from_lset_with_default("nemo_sources_management_policy_master_of_the_world",
-                                                               False) and context == 'nemo'
+    is_reset_field_group = common_values["nemo_sources_management_policy_master_of_the_world"] and context in ['nemo', ]
     if is_reset_field_group:
         xml_field_group = DR2XMLElement(tag="field_group", freq_op="_reset_", freq_offset="_reset_")
         for xml_field in list(field_defs):
@@ -804,18 +791,18 @@ def write_xios_file_def(filename, svars_per_table, year, field_defs, axis_defs, 
     xml_context.append(xml_field_definition)
     #
     xml_axis_definition = DR2XMLElement(tag="axis_definition")
-    xml_axis_group = DR2XMLElement(tag="axis_group", prec="8")
+    xml_axis_group = DR2XMLElement(tag="axis_group")
     for xml_axis in list(axis_defs):
         xml_axis_group.append(axis_defs[xml_axis])
-    if False and get_variable_from_lset_with_default('use_union_zoom', False):
+    if False and common_values['use_union_zoom']:
         for xml_axis in list(union_axis_defs):
             xml_axis_group.append(union_axis_defs[xml_axis])
     xml_axis_definition.append(xml_axis_group)
     xml_context.append(xml_axis_definition)
     #
     xml_domain_definition = DR2XMLElement(tag="domain_definition")
-    xml_domain_group = DR2XMLElement(tag="domain_group", prec="8")
-    if get_variable_from_lset_without_default('grid_policy') != "native":
+    xml_domain_group = DR2XMLElement(tag="domain_group")
+    if common_values['grid_policy'] not in ["native", ]:
         create_standard_domains(domain_defs)
     for xml_domain in list(domain_defs):
         xml_domain_group.append(domain_defs[xml_domain])
@@ -825,7 +812,7 @@ def write_xios_file_def(filename, svars_per_table, year, field_defs, axis_defs, 
     xml_grid_definition = DR2XMLElement(tag="grid_definition")
     for xml_grid in list(grid_defs):
         xml_grid_definition.append(grid_defs[xml_grid])
-    if False and get_variable_from_lset_with_default('use_union_zoom', False):
+    if False and common_values['use_union_zoom']:
         for xml_grid in list(union_grid_defs):
             xml_grid_definition.append(union_grid_defs[xml_grid])
     xml_context.append(xml_grid_definition)

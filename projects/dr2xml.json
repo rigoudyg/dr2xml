@@ -1,0 +1,305 @@
+{
+  "__common_values__": {
+    "prefix": {
+      "default_values": [
+        {
+          "key_type": "dict",
+          "keys": "prefix"
+        }
+      ],
+      "fatal": "True"
+    },
+    "year": {
+      "default_values": [
+        {
+          "key_type": "dict",
+          "keys": "year"
+        }
+      ],
+      "fatal": "True"
+    },
+    "context": {
+      "default_values": [
+        {
+          "key_type": "dict",
+          "keys": "context"
+        }
+      ],
+      "fatal": "True"
+    },
+    "root": {
+      "default_values": [
+        {
+          "key_type": "dict",
+          "keys": "root"
+        }
+      ],
+      "fatal": "True"
+    },
+
+    "allow_duplicates_in_same_table": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "allow_duplicates_in_same_table"
+        },
+        "False"
+      ],
+      "fatal": "True"
+    },
+    "use_cmorvar_label_in_filename": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "use_cmorvar_label_in_filename"
+        },
+        "False"
+      ],
+      "fatal": "True"
+    },
+    "nemo_sources_management_policy_master_of_the_world": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "nemo_sources_management_policy_master_of_the_world"
+        },
+        "False"
+      ],
+      "fatal": "True"
+    },
+    "use_union_zoom": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "use_union_zoom"
+        },
+        "False"
+      ],
+      "fatal": "True"
+    },
+    "grid_policy": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "grid_policy"
+        },
+        "False"
+      ],
+      "fatal": "True"
+    },
+    "ping_variables_prefix": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "ping_variables_prefix"
+        }
+      ],
+      "fatal": "True"
+    },
+    "source_id": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": [
+            "configurations",
+            {
+              "key_type": "simulation",
+              "keys": "configuration"
+            },
+            0
+          ]
+        },
+        {
+          "key_type": "simulation",
+          "keys": "source_id"
+        }
+      ],
+      "fatal": "True"
+    },
+    "source_type": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": [
+            "configurations",
+            {
+              "key_type": "simulation",
+              "keys": "configuration"
+            },
+            1
+          ]
+        },
+        {
+          "key_type": "simulation",
+          "keys": "source_type"
+        },
+        {
+          "key_type": "laboratory",
+          "keys": [
+            "source_types",
+            {
+              "key_type": "common",
+              "keys": "source_id"
+            }
+          ]
+        }
+      ],
+      "fatal": "True"
+    },
+    "experiment_id": {
+      "default_values": [
+        {
+          "key_type": "simulation",
+          "keys": "experiment_id"
+        }
+      ],
+      "fatal": "True"
+    },
+    "grid_choice": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": [
+            "grid_choice",
+            {
+              "key_type": "common",
+              "keys": "source_id"
+            }
+          ]
+        }
+      ],
+      "fatal": "True"
+    },
+    "grids": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": [
+            "grids",
+            {
+              "key_type": "common",
+              "keys": "grid_choice"
+            },
+            {
+              "key_type": "common",
+              "keys": "context"
+            }
+          ]
+        }
+      ],
+      "fatal": "True"
+    },
+    "grids_dev": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "grids_dev"
+        },
+        "dict()"
+      ],
+      "fatal": "True"
+    },
+    "required_model_components": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": [
+            "required_model_components",
+            {
+              "key_type": "common",
+              "keys": "source_id"
+            }
+          ]
+        },
+        "list()"
+      ],
+      "fatal": "True"
+    },
+    "additional_allowed_model_components": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": [
+            "additional_allowed_model_components",
+            {
+              "key_type": "common",
+              "keys": "source_id"
+            }
+          ]
+        },
+        "list()"
+      ],
+      "fatal": "True"
+    },
+    "max_split_freq": {
+      "default_values": [
+        {
+          "key_type": "simulation",
+          "keys": "max_split_freq"
+        },
+        {
+          "key_type": "laboratory",
+          "keys": "max_split_freq"
+        },
+        "None"
+      ],
+      "fatal": "True"
+    },
+    "too_long_periods": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "too_long_periods"
+        },
+        "list()"
+      ],
+      "fatal": "True"
+    },
+    "dr2xml_manages_enddate": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "dr2xml_manages_enddate"
+        },
+        "True"
+      ],
+      "fatal": "True"
+    },
+    "non_standard_attributes": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "non_standard_attributes"
+        },
+        "dict()"
+      ]
+    }
+  },
+  "context": {},
+  "file_definition": {},
+  "file": {},
+  "file_output": {},
+  "field_definition": {},
+  "field_group": {},
+  "field": {},
+  "field_output": {},
+  "grid": {},
+  "grid_definition": {},
+  "axis": {},
+  "zoom_axis": {},
+  "interpolate_axis": {},
+  "axis_definition": {},
+  "axis_group": {},
+  "temporal_splitting": {},
+  "domain": {},
+  "generate_rectilinear_domain": {},
+  "interpolate_domain": {},
+  "domain_definition": {},
+  "domain_group": {},
+  "scalar": {},
+  "duplicate_scalar": {},
+  "scalar_definition": {},
+  "variable": {
+    "attrs_list": ["name", "type"]
+  }
+}

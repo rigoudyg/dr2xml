@@ -7,9 +7,9 @@
     In particular:
 
     Provide frequencies for a table name - Both in XIOS syntax and in CMIP6_CV
-    and also split_frequencies for the files hodling the whole of a table's variables
+    and also split_frequencies for the files holding the whole of a table's variables
 
-    Rationale: Because CMIP6_CV does not (yet) provide the correspondance between a table name
+    Rationale: Because CMIP6_CV does not (yet) provide the correspondence between a table name
     and the corresponding frequency (albeit this is instrumental in DRS), and because
     we need to translate anyway to XIOS syntax
 """
@@ -460,16 +460,42 @@ def guess_freq_from_table_name(table):
 
 def longest_possible_period(freq, too_long_periods):
     """
-    Returns the longest period/frequency acessible given the value of too_long_periods
+    Returns the longest period/frequency accessible given the value of too_long_periods
     Input and output freqs follow Xios syntax
     Too_long_periods follow CMIP6 syntax (i.e.  : dec, "yr" )
     """
-    if freq == "10y" and any(['dec' in f for f in too_long_periods]):
+    if freq in ["10y", ] and any(['dec' in f for f in too_long_periods]):
         return longest_possible_period("1y", too_long_periods)
-    elif freq == "1y" and any(['yr' in f for f in too_long_periods]):
+    elif freq in ["1y", ] and any(['yr' in f for f in too_long_periods]):
         return longest_possible_period("1mo", too_long_periods)
     else:
         return freq
+
+
+cellmethod2area_dict = {
+    "where ice_free_sea over sea ": "ifs",
+    "where land": "land",
+    "where floating_ice_shelf": "fisf",
+    "where land over all_area_types": "loaat",
+    "where landuse over all_area_types": "luoaat",
+    "where sea": "sea",
+    "where sea_ice": "si",
+    "where sea_ice_over_sea": "sios",
+    "where snow over sea_ice": "sosi",
+    "where grounded_ice_shelf": "gisf",
+    "where snow": "snow",
+    "where cloud": "cloud",
+    "where crops": "crops",
+    "where grounded_ice_sheet": "gist",
+    "ice_sheet": "ist",
+    "where landuse": "lu",
+    "where natural_grasses": "ngrass",
+    "where sea_ice_melt_ponds": "simp",
+    "where shrubs": "shrubs",
+    "where trees": "trees",
+    "where vegetation": "veg",
+    "where ice_shelf": "isf"
+}
 
 
 def cellmethod2area(method):
@@ -479,64 +505,27 @@ def cellmethod2area(method):
     """
     if method is None:
         return None
-    if "where ice_free_sea over sea " in method:
-        return "ifs"
-    if "where land" in method:
-        return "land"
-    if "where floating_ice_shelf" in method:
-        return "fisf"
-    if "where land over all_area_types" in method:
-        return "loaat"  #
-    if "where landuse over all_area_types" in method:
-        return "luoaat"  #
-    if "where sea" in method:
-        return "sea"
-    if "where sea_ice" in method:
-        return "si"
-    if "where sea_ice_over_sea" in method:
-        return "sios"  #
-    if "where snow over sea_ice" in method:
-        return "sosi"
-    if "where grounded_ice_shelf" in method:
-        return "gisf"  #
-    if "where snow" in method:
-        return "snow"
-    if "where cloud" in method:
-        return "cloud"
-    if "where crops" in method:
-        return "crops"  #
-    if "where grounded_ice_sheet" in method:
-        return "gist"  #
-    if "ice_sheet" in method:
-        return "ist"  #
-    if "where landuse" in method:
-        return "lu"
-    if "where natural_grasses" in method:
-        return "ngrass"  #
-    if "where sea_ice_melt_ponds" in method:
-        return "simp"  #
-    if "where shrubs" in method:
-        return "shrubs"  #
-    if "where trees" in method:
-        return "trees"  #
-    if "where vegetation" in method:
-        return "veg"  #
-    if "where ice_shelf" in method:
-        return "isf"
+    else:
+        rep = [cellmethod2area_dict[key] for key in cellmethod2area_dict if key in method]
+        if len(rep) > 0:
+            return rep[0]
+        else:
+            return None
 
 
-def DR_grid_to_grid_atts(grid, is_dev=False):
+DR_grid_to_grid_atts_dict = {
+    "cfsites": ("gn", "100 km", "data sampled in model native grid by nearest neighbour method "),
+    "1deg": ("gr1", "1x1 degree", "data regridded to a CMIP6 standard 1x1 degree latxlon grid from the native grid"),
+    "2deg": ("gr2", "2x2 degree", "data regridded to a CMIP6 standard 2x2 degree latxlon grid from the native grid"),
+    "100km": ("gr3", "100 km", "data regridded to a CMIP6 standard 100 km resol grid from the native grid"),
+    "50km": ("gr4", "50 km", "data regridded to a CMIP6 standard 50 km resol grid from the native grid"),
+    "25km": ("gr5", "25 km", "data regridded to a CMIP6 standard 25 km resol grid from the native grid"),
+    "default": ["grx", "?x? degree", "grid has no description - please fix DR_grid_to_grid_atts for grid %s"]
+}
+
+
+def DR_grid_to_grid_atts(grid):
     """ Returns label, resolution, description for a DR grid name"""
-    if grid == "cfsites":
-        return "gn", "100 km", "data sampled in model native grid by nearest neighbour method "
-    if grid == "1deg":
-        return "gr1", "1x1 degree", "data regridded to a CMIP6 standard 1x1 degree latxlon grid from the native grid"
-    if grid == "2deg":
-        return "gr2", "2x2 degree", "data regridded to a CMIP6 standard 2x2 degree latxlon grid from the native grid"
-    if grid == "100km":
-        return "gr3", "100 km", "data regridded to a CMIP6 standard 100 km resol grid from the native grid"
-    if grid == "50km":
-        return "gr4", "50 km", "data regridded to a CMIP6 standard 50 km resol grid from the native grid"
-    if grid == "25km":
-        return "gr5", "25 km", "data regridded to a CMIP6 standard 25 km resol grid from the native grid"
-    return "grx", "?x? degree", "grid has no description- please fix DR_grid_to_grid_atts for grid %s" % grid
+    default = DR_grid_to_grid_atts_dict["default"]
+    default[-1] = default[-1] % grid
+    return DR_grid_to_grid_atts_dict.get(grid, default)

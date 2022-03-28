@@ -77,6 +77,14 @@ class DR2XMLElement(xml_writer.Element):
             if test:
                 attrib[output_dict["output_key"]] = value
         super(DR2XMLElement, self).__init__(tag=tag, text=text, attrib=attrib)
+        comments_list = tag_settings["comments_list"]
+        comments_constraints = tag_settings["comments_constraints"]
+        for comment in comments_list:
+            test, value, _ = find_value(tag=tag, key=comment, value=kwargs.get(comment),
+                                        is_default_value=comment not in kwargs, common_dict=common_dict,
+                                        additional_dict=kwargs, **comments_constraints[comment])
+            if test:
+                self.append(DR2XMLComment(text=value))
         vars_list = tag_settings["vars_list"]
         vars_constraints = tag_settings["vars_constraints"]
         for var in vars_list:

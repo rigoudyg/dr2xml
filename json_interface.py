@@ -20,7 +20,7 @@ from dr_interface import get_DR_version
 from logger import get_logger
 from settings_interface import get_variable_from_lset_with_default_in_lset, is_key_in_lset, \
     get_variable_from_lset_without_default, is_key_in_sset, get_variable_from_sset_without_default, \
-    get_variable_from_lset_with_default
+    get_variable_from_lset_with_default, format_dict_for_printing
 from utils import Dr2xmlError
 from importlib.machinery import SourceFileLoader
 
@@ -103,7 +103,7 @@ def reformat_settings(dict_settings):
     for key in dict_settings["__common_values__"]:
         dict_settings["__common_values__"][key] = reformat_constraints(key, dict_settings["__common_values__"][key])
     for tag in [tag for tag in dict_settings if tag not in ["__common_values__", ]]:
-        for att in ["vars", "attrs"]:
+        for att in ["vars", "attrs", "comments"]:
             att_list = "{}_list".format(att)
             att_constraints = "{}_constraints".format(att)
             if att_list not in dict_settings[tag]:
@@ -182,10 +182,10 @@ def update_settings(current_settings, new_settings):
     for tag in [tag for tag in new_settings if tag not in ["__common_values__", ]]:
         if tag not in current_settings:
             current_settings[tag] = dict()
-        for att in ["attrs_list", "vars_list"]:
+        for att in ["attrs_list", "vars_list", "comments_list"]:
             if att in new_settings[tag]:
                 current_settings[tag][att] = new_settings[tag][att]
-        for att in ["attrs_constraints", "vars_constraints"]:
+        for att in ["attrs_constraints", "vars_constraints", "comments_constraints"]:
             if att in new_settings[tag]:
                 if att not in current_settings[tag]:
                     current_settings[tag][att] = dict()
@@ -202,11 +202,13 @@ def check_value(value, skip_values=list(), authorized_types=False, authorized_va
         is_allowed = isinstance(value, authorized_types)
     if is_allowed and authorized_values:
         if isinstance(authorized_values, dict):
-            authorized_values = get_key_value(authorized_values, common_dict=common_dict,
-                                              additional_dict=additional_dict)
-        if not isinstance(authorized_values, list):
+            found, authorized_values = get_key_value(authorized_values, common_dict=common_dict,
+                                                     additional_dict=additional_dict)
+        else:
+            found = True
+        if found and not isinstance(authorized_values, list):
             authorized_values = [authorized_values, ]
-        is_allowed = value in authorized_values
+            is_allowed = str(value) in authorized_values
     if is_allowed:
         is_allowed = not(any([re.compile(pattern).match(value) for pattern in forbidden_patterns]))
     is_allowed = is_allowed and conditions
@@ -242,12 +244,20 @@ def get_value(key_type, key, src, common_dict=dict(), additional_dict=dict()):
             key in additional_dict["variable"].__dict__:
         value = additional_dict["variable"].__getattribute__(key)
         found = True
-    elif key_type in ["laboratory", ] and is_key_in_lset(key):
-        value = get_variable_from_lset_without_default(key)
-        found = True
-    elif key_type in ["simulation", ] and is_key_in_sset(key):
-        value = get_variable_from_sset_without_default(key)
-        found = True
+    elif key_type in ["laboratory", ]:
+        if key is None:
+            value = format_dict_for_printing("lset")
+            found = True
+        elif is_key_in_lset(key):
+            value = get_variable_from_lset_without_default(key)
+            found = True
+    elif key_type in ["simulation", ]:
+        if key is None:
+            value = format_dict_for_printing("sset")
+            found = True
+        elif is_key_in_sset(key):
+            value = get_variable_from_sset_without_default(key)
+            found = True
     elif key_type in ["json", ]:
         found, value = get_key_value(key_value=src, common_dict=common_dict, additional_dict=additional_dict)
         if found:
@@ -319,7 +329,7 @@ def get_key_value(key_value, common_dict=dict(), additional_dict=dict()):
             if found and isinstance(value, six.string_types):
                 value = value.strip()
             if found and func is not None:
-                found, value = apply_function(is_value=True, value=value, *func, additional_dict=additional_dict,
+                found, value = apply_function(*func, is_value=True, value=value, additional_dict=additional_dict,
                                               common_dict=common_dict)
         else:
             if key_type is not None:
@@ -340,6 +350,16 @@ def get_key_value(key_value, common_dict=dict(), additional_dict=dict()):
                 elif fmt is not None:
                     value = fmt.format(value)
         return found, value
+    elif isinstance(key_value, six.string_types) and key_value in ["True", ]:
+        return True, True
+    elif isinstance(key_value, six.string_types) and key_value in ["False", ]:
+        return True, False
+    elif isinstance(key_value, six.string_types) and key_value in ["dict()", ]:
+        return True, dict()
+    elif isinstance(key_value, six.string_types) and key_value in ["list()", ]:
+        return True, list()
+    elif isinstance(key_value, six.string_types) and key_value in ["None", ]:
+        return True, None
     else:
         return True, key_value
 
@@ -348,8 +368,8 @@ def apply_function(mod, func, options, value=None, is_value=False, additional_di
     test = True
     func = get_func_from_add_module(mod, func)
     for key in sorted(list(options)):
-        test, val = get_key_value(options[key], additional_dict=additional_dict, common_dict=common_dict)
-        if test:
+        key_test, val = get_key_value(options[key], additional_dict=additional_dict, common_dict=common_dict)
+        if key_test:
             options[key] = val
         else:
             del options[key]
@@ -417,12 +437,12 @@ def check_condition(condition, common_dict=dict(), additional_dict=dict()):
         second_val = [get_key_value(val, common_dict=common_dict, additional_dict=additional_dict)
                       for val in second_val]
         found_second = all([elt[0] for elt in second_val])
-        second_val = [elt[1] for elt in second_val]
+        second_val = [str(elt[1]) for elt in second_val]
         if found_first and found_second:
             if check in ["eq", ]:
-                test = test and first_val in second_val
+                test = test and str(first_val) in second_val
             elif check in ["neq", ]:
-                test = test and first_val not in second_val
+                test = test and str(first_val) not in second_val
             elif check in ["match", ]:
                 test = test and all([re.compile(val).match(str(first_val)) is not None for val in second_val])
             elif check in ["nmatch", ]:

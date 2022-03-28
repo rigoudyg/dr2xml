@@ -601,7 +601,7 @@ def generate_file_defs(lset, sset, year, enddate, context, cvs_path, pingfiles=N
     initialize_config_variables()
     initialize_dict(lset, sset)
     initialize_project_settings(cvspath=cvs_path, context=context, prefix=prefix,
-                                root=os.path.basename(os.path.abspath(__file__)))
+                                root=os.path.basename(os.path.abspath(__file__)), year=year)
     generate_file_defs_inner(year, enddate, context, pingfiles=pingfiles, dummies=dummies, dirname=dirname,
                              attributes=attributes, select=select)
     # pr.disable()

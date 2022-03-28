@@ -10,7 +10,7 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 import datetime
 import re
 
-from utils import Dr2xmlError
+import six
 
 
 def build_external_variables(cell_measures):
@@ -27,6 +27,18 @@ def build_external_variables(cell_measures):
 
 
 def compute_nb_days(year_ref, year_branch, month_ref=1, month_branch=1, day_ref=1, day_branch=1):
+	if isinstance(year_ref, six.string_types):
+		year_ref = int(year_ref)
+	if isinstance(month_ref, six.string_types):
+		month_ref = int(month_ref)
+	if isinstance(day_ref, six.string_types):
+		day_ref = int(day_ref)
+	if isinstance(year_branch, six.string_types):
+		year_branch = int(year_branch)
+	if isinstance(month_branch, six.string_types):
+		month_branch = int(month_branch)
+	if isinstance(day_branch, six.string_types):
+		day_branch = int(day_branch)
 	date_ref = datetime.datetime(year_ref, month_ref, day_ref)
 	date_branch = datetime.datetime(year_branch, month_branch, day_branch)
 	nb_days = (date_branch - date_ref).days

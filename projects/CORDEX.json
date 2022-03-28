@@ -8,7 +8,7 @@
           "keys": [
               "CORDEX_domain",
               {
-                "key_type": "dict",
+                "key_type": "common",
                 "keys": "context"
               }
             ]
@@ -221,7 +221,7 @@
         "skip_values": ["", "None"],
         "conditions": [
           [{
-            "key_type": "dict",
+            "key_type": "common",
             "keys": "context"
           },
             "eq",
@@ -238,7 +238,7 @@
         "skip_values": ["", "None"],
         "conditions": [
           [{
-            "key_type": "dict",
+            "key_type": "common",
             "keys": "context"
           },
             "eq",
@@ -255,7 +255,7 @@
         "skip_values": ["", "None"],
         "conditions": [
           [{
-            "key_type": "dict",
+            "key_type": "common",
             "keys": "context"
           },
             "eq",
@@ -292,7 +292,7 @@
         ],
         "conditions": [
           [{
-            "key_type": "dict",
+            "key_type": "common",
             "keys": "context"
           },
             "eq",

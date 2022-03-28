@@ -12,6 +12,14 @@
         }
       ]
     },
+    "conventions_version": {
+      "default_values": [
+        {
+          "key_type": "config",
+          "keys": "CMIP6_conventions_version"
+        }
+      ]
+    },
     "additional_allowed_model_components": {
       "default_values": [
         {
@@ -267,6 +275,25 @@
         }
       ],
       "forbidden_patterns": ["none-.*"]
+    }
+  },
+  "context": {
+    "attrs_list": ["id"],
+    "comments_list": ["DR_version", "CV_version", "conventions_version", "dr2xml_version", "lab_settings",
+      "simulation_settings", "year"],
+    "comments_constraints": {
+      "CV_version": {
+        "default_values": ["CMIP6-CV version ??"]
+      },
+      "conventions_version": {
+        "default_values": [
+          {
+            "key_type": "common",
+            "keys": "conventions_version",
+            "fmt": "CMIP6_conventions_version {}"
+          }
+        ]
+      }
     }
   },
   "file_output": {

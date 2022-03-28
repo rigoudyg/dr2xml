@@ -1,33 +1,6 @@
 {
+  "parent_project_settings": "dr2xml",
   "__common_values__": {
-    "required_model_components": {
-      "default_values": [
-        {
-          "key_type": "laboratory",
-          "keys": [
-            "required_model_components",
-            {
-              "key_type": "common",
-              "keys": "source_id"
-            }
-          ]
-        }
-      ]
-    },
-    "additional_allowed_model_components": {
-      "default_values": [
-        {
-          "key_type": "laboratory",
-          "keys": [
-            "additional_allowed_model_components",
-            {
-              "key_type": "common",
-              "keys": "source_id"
-            }
-          ]
-        }
-      ]
-    },
     "branch_year_in_parent": {
       "default_values": [
         {
@@ -35,6 +8,7 @@
           "keys": "branch_year_in_parent"
         }
       ],
+      "skip_values": ["None", "", "N/A"],
       "authorized_values": {
         "key_type": "laboratory",
         "keys": [
@@ -50,28 +24,6 @@
           1
         ]
       }
-    },
-    "grid_choice": {
-      "default_values": [
-        {
-          "key_type": "laboratory",
-          "keys": [
-            "grid_choice",
-            {
-              "key_type": "common",
-              "keys": "source_id"
-            }
-          ]
-        }
-      ]
-    },
-    "prefix": {
-      "default_values": [
-        {
-          "key_type": "dict",
-          "keys": "prefix"
-        }
-      ]
     },
     "description": {
       "default_values": [
@@ -104,14 +56,6 @@
         {
           "key_type": "laboratory",
           "keys": "info_url"
-        }
-      ]
-    },
-    "experiment_id": {
-      "default_values": [
-        {
-          "key_type": "simulation",
-          "keys": "experiment_id"
         }
       ]
     },
@@ -425,7 +369,6 @@
         }
       ]
     },
-
     "convention_str": {
       "default_values": [
         {
@@ -448,63 +391,77 @@
           "key_type": "DR_version"
         }
       ]
-    },
-    "source_id": {
-      "default_values": [
-        {
-          "key_type": "laboratory",
-          "keys": [
-            "configurations",
-            {
-              "key_type": "simulation",
-              "keys": "configuration"
-            },
-            0
-          ]
-        },
-        {
-          "key_type": "simulation",
-          "keys": "source_id"
-        }
-      ],
-      "fatal": "True"
-    },
-    "source_type": {
-      "default_values": [
-        {
-          "key_type": "laboratory",
-          "keys": [
-            "configurations",
-            {
-              "key_type": "simulation",
-              "keys": "configuration"
-            },
-            1
-          ]
-        },
-        {
-          "key_type": "simulation",
-          "keys": "source_type"
-        },
-        {
-          "key_type": "laboratory",
-          "keys": [
-            "source_types",
-            {
-              "key_type": "common",
-              "keys": "source_id"
-            }
-          ]
-        }
-      ],
-      "fatal": "True"
     }
   },
   "context": {
-    "attrs_list": ["id"]
+    "attrs_list": ["id"],
+    "attrs_constraints": {
+      "id": {
+        "default_values": [
+          {
+            "key_type": "common",
+            "keys": "context"
+          }
+        ]
+      }
+    },
+    "comments_list": ["DR_version", "dr2xml_version", "lab_settings", "simulation_settings", "year"],
+    "comments_constraints": {
+      "DR_version": {
+        "default_values": [
+          {
+            "key_type": "common",
+            "keys": "data_specs_version",
+            "fmt": "CMIP6 Data Request version {}"
+          }
+        ]
+      },
+      "dr2xml_version": {
+        "default_values": [
+          {
+            "key_type": "common",
+            "keys": "dr2xml_version",
+            "fmt": "dr2xml version {}"
+          }
+        ]
+      },
+      "lab_settings": {
+        "default_values": [
+          {
+            "key_type": "laboratory",
+            "fmt": "Lab_and_model settings\n{}"
+          }
+        ]
+      },
+      "simulation_settings": {
+        "default_values": [
+          {
+            "key_type": "simulation",
+            "fmt": "Simulation settings\n{}"
+          }
+        ]
+      },
+      "year": {
+        "default_values": [
+          {
+            "key_type": "common",
+            "keys": "year",
+            "fmt": "Year processed {}"
+          }
+        ]
+      }
+    }
   },
   "file_definition": {
-    "attrs_list": ["type", "enabled"]
+    "attrs_list": ["type", "enabled"],
+    "attrs_constraints": {
+      "type": {
+        "default_values": ["one_file"]
+      },
+      "enabled": {
+        "default_values": ["true"]
+      }
+    }
   },
   "file": {
     "attrs_list": ["id", "name", "mode", "output_freq", "enabled"]
@@ -515,6 +472,13 @@
       "time_counter_name", "time_counter", "time_stamp_name", "time_stamp_format", "uuid_name", "uuid_format",
       "convention_str"],
     "attrs_constraints":{
+      "output_freq": {
+        "default_values": [
+          {
+
+          }
+        ]
+      },
       "split_freq": {
         "skip_values": ["", "None"],
         "conditions": [
@@ -1215,7 +1179,6 @@
       }
     }
   },
-  "field_definition": {},
   "field_group": {
     "attrs_list": ["freq_op", "freq_offset"]
   },
@@ -1422,10 +1385,9 @@
       }
     }
   },
-    "grid": {
+  "grid": {
     "attrs_list": ["id"]
   },
-  "grid_definition": {},
   "axis": {
     "attrs_list": ["id", "positive", "n_glo", "value", "axis_ref", "name", "standard_name", "long_name", "prec", "unit",
       "value", "bounds", "dim_name", "label", "axis_type"],
@@ -1473,21 +1435,27 @@
       }
     }
   },
-  "axis_definition": {},
   "axis_group": {
-    "attrs_list": ["prec"]
+    "attrs_list": ["prec"],
+    "attrs_constraints": {
+      "prec": {
+        "default_values": ["8"]
+      }
+    }
   },
-  "temporal_splitting": {},
   "domain": {
     "attrs_list": ["id", "ni_glo", "nj_glo", "type", "prec", "lat_name", "lon_name", "dim_i_name","domain_ref"]
   },
-  "generate_rectilinear_domain": {},
   "interpolate_domain": {
     "attrs_list": ["type", "order", "renormalize", "mode", "write_weight", "coordinate"]
   },
-  "domain_definition": {},
   "domain_group": {
-    "attrs_list": ["prec"]
+    "attrs_list": ["prec"],
+    "attrs_constraints": {
+      "prec": {
+        "default_values": ["8"]
+      }
+    }
   },
   "scalar": {
     "attrs_list": ["id", "scalar_ref", "name", "standard_name", "long_name", "label", "prec", "value", "bounds",
@@ -1521,10 +1489,5 @@
         "skip_values": ["", "None"]
       }
     }
-  },
-  "duplicate_scalar": {},
-  "scalar_definition": {},
-  "variable": {
-    "attrs_list": ["name", "type"]
   }
 }
