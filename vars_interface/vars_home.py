@@ -30,8 +30,8 @@ from dr_interface import get_list_of_elements_by_id, get_element_uid, get_cmor_v
 from settings_interface import get_variable_from_sset_else_lset_with_default, get_variable_from_lset_with_default, \
     get_variable_from_lset_without_default, get_variable_from_sset_with_default
 
-from vars_cmor import get_cmor_var, get_spatial_and_temporal_shapes, analyze_ambiguous_mip_varnames, SimpleCMORVar, \
-    SimpleDim
+from .vars_cmor import get_cmor_var, get_spatial_and_temporal_shapes, analyze_ambiguous_mip_varnames
+from .definitions import SimpleDim, SimpleCMORVar
 from analyzer import guess_freq_from_table_name, cellmethod2area
 from utils import VarsError
 

@@ -28,8 +28,9 @@ from dr_interface import get_request_by_id_by_sect, get_element_uid, get_experim
 from grids_selection import decide_for_grids
 
 # Variables tools
-from vars_home import complement_svar_using_cmorvar, process_home_vars
-from vars_cmor import analyze_priority, SimpleCMORVar
+from .vars_home import complement_svar_using_cmorvar, process_home_vars
+from .vars_cmor import analyze_priority
+from .definitions import SimpleCMORVar
 
 
 print_multiple_grids = False

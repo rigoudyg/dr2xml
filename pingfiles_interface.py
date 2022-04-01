@@ -31,7 +31,7 @@ from dr_interface import get_DR_version, get_list_of_elements_by_id, get_element
 from xml_interface import get_root_of_xml_file, DR2XMLElement
 
 # Variables tools
-from vars_selection import get_grid_choice
+from vars_interface.vars_selection import get_grid_choice
 
 
 def read_pingfiles_variables(pingfiles, dummies):

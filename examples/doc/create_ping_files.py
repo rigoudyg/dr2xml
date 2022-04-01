@@ -7,7 +7,7 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 
 # from dr2xml import select_cmor_vars_for_lab, ping_file_for_realms_list
 from pingfiles_interface import ping_file_for_realms_list
-from vars_selection import gather_all_simple_vars
+from vars_interface.vars_selection import gather_all_simple_vars
 
 # In[ ]:
 

@@ -7,7 +7,7 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 from settings import lab_and_model_settings, simulation_settings, my_cvspath
 from dr2xml import generate_file_defs
 from pingfiles_interface import ping_file_for_realms_list
-from vars_selection import select_cmor_vars_for_lab
+from vars_interface.vars_selection import select_cmor_vars_for_lab
 from settings_interface import initialize_dict
 
 #

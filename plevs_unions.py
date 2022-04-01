@@ -23,7 +23,7 @@ from settings_interface import get_variable_from_lset_without_default
 from grids import create_axis_def, create_grid_def
 
 # Variables tools
-from vars_cmor import SimpleDim
+from vars_interface.definitions import SimpleDim
 
 # XIOS reading and writing tools
 from Xparse import id2gridid
