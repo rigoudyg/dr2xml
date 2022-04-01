@@ -26,7 +26,7 @@ from config import get_config_variable
 # Interface to settings dictionaries
 from settings_interface import get_variable_from_lset_with_default, get_variable_from_lset_without_default
 # Interface to Data Request
-from dr_interface import get_DR_version, get_collection, get_uid, print_DR_errors
+from dr_interface import get_DR_version, get_list_of_elements_by_id, get_element_uid, print_DR_errors
 # Interface to xml tools
 from xml_interface import get_root_of_xml_file, DR2XMLElement
 
@@ -310,13 +310,13 @@ def highest_rank(svar):
     mipvarlabel = svar.label_without_psuffix
     shapes = []
     altdims = set()
-    for cvar in get_collection('CMORvar').items:
-        v = get_uid(cvar.vid)
+    for cvar in get_list_of_elements_by_id('CMORvar').items:
+        v = get_element_uid(cvar.vid)
         if v.label == mipvarlabel:
             try:
-                st = get_uid(cvar.stid)
+                st = get_element_uid(cvar.stid)
                 try:
-                    sp = get_uid(st.spid)
+                    sp = get_element_uid(st.spid)
                     shape = sp.label
                 except:
                     if print_DR_errors:

@@ -18,7 +18,7 @@ from logger import get_logger
 # Interface to settings dictionaries
 from settings_interface import get_variable_from_lset_without_default
 # Interface to Data Request
-from dr_interface import get_collection, get_uid, get_request_by_id_by_sect, print_DR_errors
+from dr_interface import get_list_of_elements_by_id, get_element_uid, get_request_by_id_by_sect, print_DR_errors
 
 # Settings tools
 from analyzer import cellmethod2area
@@ -29,7 +29,7 @@ def get_cmor_var(label, table):
     Returns CMOR variable for a given label in a given table
     (could be optimized using inverse index)
     """
-    collect = get_collection('CMORvar')
+    collect = get_list_of_elements_by_id('CMORvar')
     thevar = None
     for cmvar in collect.items:
         if cmvar.mipTable == table and cmvar.label == label:
@@ -50,9 +50,9 @@ def get_spatial_and_temporal_shapes(cmvar):
             logger.warning("Warning: stid for %s in table %s is a broken link to structure in DR: %s" %
                            (cmvar.label, cmvar.mipTable, cmvar.stid))
     else:
-        struct = get_uid(cmvar.stid)
-        spatial_shape = get_uid(struct.spid).label
-        temporal_shape = get_uid(struct.tmid).label
+        struct = get_element_uid(cmvar.stid)
+        spatial_shape = get_element_uid(struct.spid).label
+        temporal_shape = get_element_uid(struct.tmid).label
     if print_DR_errors:
         if not spatial_shape:
             logger.warning("Warning: spatial shape for %s in table %s not found in DR." % (cmvar.label, cmvar.mipTable))
@@ -71,16 +71,16 @@ def analyze_ambiguous_mip_varnames(debug=[]):
     # of CMORvars items for the varname
     logger = get_logger()
     d = OrderedDict()
-    for v in get_collection('var').items:
+    for v in get_list_of_elements_by_id('var').items:
         if v.label not in d:
             d[v.label] = []
             if v.label in debug:
                 logger.debug("Adding %s" % v.label)
         refs = get_request_by_id_by_sect(v.uid, 'CMORvar')
         for r in refs:
-            d[v.label].append(get_uid(r))
+            d[v.label].append(get_element_uid(r))
             if v.label in debug:
-                logger.debug("Adding CmorVar %s(%s) for %s" % (v.label, get_uid(r).mipTable, get_uid(r).label))
+                logger.debug("Adding CmorVar %s(%s) for %s" % (v.label, get_element_uid(r).mipTable, get_element_uid(r).label))
 
     # Replace dic values by dic of area portion of cell_methods
     for vlabel in d:
@@ -88,10 +88,10 @@ def analyze_ambiguous_mip_varnames(debug=[]):
             cvl = d[vlabel]
             d[vlabel] = OrderedDict()
             for cv in cvl:
-                st = get_uid(cv.stid)
+                st = get_element_uid(cv.stid)
                 cm = None
                 try:
-                    cm = get_uid(st.cmid).cell_methods
+                    cm = get_element_uid(st.cmid).cell_methods
                 except:
                     # pass
                     logger.warning("No cell method for %-15s %s(%s)" % (st.label, cv.label, cv.mipTable))
@@ -167,8 +167,8 @@ def analyze_priority(cmvar, lmips):
     prio = cmvar.defaultPriority
     rv_ids = get_request_by_id_by_sect(cmvar.uid, 'requestVar')
     for rv_id in rv_ids:
-        rv = get_uid(rv_id)
-        vg = get_uid(rv.vgid)
+        rv = get_element_uid(rv_id)
+        vg = get_element_uid(rv.vgid)
         if vg.mip in lmips:
             if rv.priority < prio:
                 prio = rv.priority

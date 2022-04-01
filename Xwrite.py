@@ -25,7 +25,7 @@ from config import get_config_variable
 from settings_interface import get_variable_from_lset_with_default, get_variable_from_lset_without_default, \
     get_variable_from_sset_with_default, get_source_id_and_type
 # Interface to Data Request
-from dr_interface import get_DR_version
+from dr_interface import get_scope
 
 from xml_interface import DR2XMLElement, create_pretty_xml_doc, find_rank_xml_subelement, wrv, \
     get_project_settings
@@ -47,7 +47,7 @@ from grids import change_domain_in_grid, change_axes_in_grid, get_grid_def_with_
 # Variables tools
 from vars_cmor import ping_alias
 from vars_home import get_simplevar
-from vars_selection import get_sc, endyear_for_CMORvar, get_grid_choice
+from vars_selection import endyear_for_CMORvar, get_grid_choice
 
 # Post-processing tools
 from postprocessing import process_vertical_interpolation, process_zonal_mean, process_diurnal_cycle, \
@@ -215,7 +215,7 @@ def write_xios_file_def_for_svar(sv, year, table, out, field_defs, axis_defs, gr
     # --------------------------------------------------------------------
     # Compute XIOS split frequency
     # --------------------------------------------------------------------
-    sc = get_sc()
+    sc = get_scope()
     split_freq = split_frequency_for_variable(sv, grid_choice, sc.mcfg, context)
     # Cap split_freq by setting max_split_freq (if expressed in years)
     if split_freq[-1] == 'y':

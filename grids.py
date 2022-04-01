@@ -27,7 +27,7 @@ from config import get_config_variable
 from settings_interface import get_variable_from_lset_without_default, get_variable_from_lset_with_default, \
     is_key_in_lset
 # Interface to Data Request
-from dr_interface import get_collection, get_uid
+from dr_interface import get_list_of_elements_by_id, get_element_uid
 # Interface to xml tools
 from xml_interface import find_rank_xml_subelement, DR2XMLElement
 
@@ -269,7 +269,7 @@ def change_axes_in_grid(grid_id, grid_defs, axis_defs):
     if is_key_in_lset('sectors'):
         sectors = get_variable_from_lset_without_default('sectors')
     else:
-        sectors = [dim.label for dim in get_collection('grids').items if dim.type in ['character', ]
+        sectors = [dim.label for dim in get_list_of_elements_by_id('grids').items if dim.type in ['character', ]
                    and dim.value in ['', ]]
     sectors = sorted(list(set(sectors) - set(["typewetla", ]))) # Error in DR 01.00.21
     for sector in sectors:
@@ -300,9 +300,9 @@ def change_axes_in_grid(grid_id, grid_defs, axis_defs):
                 #
                 dim_id = 'dim:{}'.format(dr_axis_id)
                 # print "in change_axis for %s %s"%(grid_id,dim_id)
-                if dim_id not in get_uid():  # This should be a dimension !
+                if dim_id not in get_element_uid():  # This should be a dimension !
                     raise Dr2xmlError("Value %s in 'non_standard_axes' is not a DR dimension id" % dr_axis_id)
-                dim = get_uid(dim_id)
+                dim = get_element_uid(dim_id)
                 # We don't process scalars here
                 if dim.value in ['', ] or dim.label in ["scatratio", ]:
                     axis_id, axis_name = create_axis_from_dim(dim, alt_labels, axis_ref, axis_defs)
@@ -389,7 +389,7 @@ def scalar_vertical_dimension(sv):
     Return the altLabel attribute if it is a vertical dimension, else None.
     """
     if 'cids' in sv.struct.__dict__:
-        cid = get_uid(sv.struct.cids[0])
+        cid = get_element_uid(sv.struct.cids[0])
         if cid.axis in ['Z', ]:
             return cid.altLabel
     return None

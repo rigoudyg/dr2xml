@@ -7,6 +7,9 @@ Several tools used in dr2xml.
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+import json
+import os
+
 import sys
 from collections import OrderedDict
 from functools import reduce
@@ -140,3 +143,21 @@ def reduce_and_strip(elt):
     if isinstance(elt, six.string_types):
         elt = elt.strip()
     return elt
+
+
+def read_json_content(filename):
+    logger = get_logger()
+    if os.path.isfile(filename):
+        with open(filename) as fp:
+            content = json.load(fp)
+            return content
+    else:
+        logger.error("Could not find the file containing the project's settings at %s" %
+                     filename)
+        raise OSError("Could not find the file containing the project's settings at %s" %
+                      filename)
+
+
+def write_json_content(filename, settings):
+    with open(filename, "w") as fp:
+        json.dump(settings, fp)

@@ -8,7 +8,6 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 
 
 # Generic setup function
-import json
 import os
 import re
 from collections import OrderedDict
@@ -16,15 +15,13 @@ from collections import OrderedDict
 import six
 
 from config import get_config_variable
-from dr_interface import get_DR_version
+from dr_interface import get_DR_version, get_scope
 from logger import get_logger
 from settings_interface import get_variable_from_lset_with_default_in_lset, is_key_in_lset, \
     get_variable_from_lset_without_default, is_key_in_sset, get_variable_from_sset_without_default, \
     get_variable_from_lset_with_default, format_dict_for_printing
-from utils import Dr2xmlError
+from utils import Dr2xmlError, read_json_content, write_json_content
 from importlib.machinery import SourceFileLoader
-
-from vars_selection import get_sc
 
 
 def setup_project_settings(**kwargs):
@@ -55,24 +52,6 @@ def read_project_settings(filename):
     if not os.path.isfile(filename):
         filename = os.sep.join([os.path.dirname(os.path.abspath(__file__)), "projects", "{}.json".format(filename)])
     return filename, read_json_content(filename)
-
-
-def read_json_content(filename):
-    logger = get_logger()
-    if os.path.isfile(filename):
-        with open(filename) as fp:
-            content = json.load(fp)
-            return content
-    else:
-        logger.error("Could not find the file containing the project's settings at %s" %
-                     filename)
-        raise OSError("Could not find the file containing the project's settings at %s" %
-                      filename)
-
-
-def write_json_content(filename, settings):
-    with open(filename, "w") as fp:
-        json.dump(settings, fp)
 
 
 # Functions to load project additional functions
@@ -234,7 +213,7 @@ def get_value(key_type, key, src, common_dict=dict(), additional_dict=dict()):
         value = get_DR_version()
         found = True
     elif key_type in ["scope", ]:
-        value = get_sc()
+        value = get_scope()
         found = True
         if key is not None and key in value.__dict__:
             value = value.__getattribute__(key)

@@ -24,7 +24,7 @@ from logger import get_logger
 from config import get_config_variable, set_config_variable
 
 # DR interface
-from dr_interface import get_collection, get_uid, get_cmor_var_id_by_label, print_DR_stdname_errors, print_DR_errors
+from dr_interface import get_list_of_elements_by_id, get_element_uid, get_cmor_var_id_by_label, print_DR_stdname_errors, print_DR_errors
 
 # Settings dictionaries interface
 from settings_interface import get_variable_from_sset_else_lset_with_default, get_variable_from_lset_with_default, \
@@ -246,7 +246,7 @@ def read_extra_table(path, table):
     #
     logger = get_logger()
     if not dims2shape:
-        for sshp in get_collection('spatialShape').items:
+        for sshp in get_list_of_elements_by_id('spatialShape').items:
             dims2shape[sshp.dimensions] = sshp.label
         # mpmoine_future_modif:dims2shape: ajout a la main des correpondances dims->shapes Primavera qui ne sont pas
         # couvertes par la DR
@@ -274,16 +274,16 @@ def read_extra_table(path, table):
         dims2shape['longitude|latitude|plev200'] = 'XY-P200HM'
     #
     if not dim2dimid:
-        for g in get_collection('grids').items:
+        for g in get_list_of_elements_by_id('grids').items:
             dim2dimid[g.label] = g.uid
     #
     if not dr_single_levels:
-        for struct in get_collection('structure').items:
-            spshp = get_uid(struct.spid)
+        for struct in get_list_of_elements_by_id('structure').items:
+            spshp = get_element_uid(struct.spid)
             if spshp.label in ["XY-na", ] and 'cids' in struct.__dict__:
                 if isinstance(struct.cids[0], six.string_types) and len(struct.cids[0]) > 0:
                     # this line is needed prior to version 01.00.08.
-                    c = get_uid(struct.cids[0])
+                    c = get_element_uid(struct.cids[0])
                     # if c.axis == 'Z': # mpmoine_note: non car je veux dans dr_single_levels toutes les dimensions
                     # singletons (ex. 'typenatgr'), par seulement les niveaux
                     dr_single_levels.append(c.label)
@@ -476,7 +476,7 @@ def process_home_vars(mip_vars_list, mips, expid=False):
             if not is_cmor:
                 # Check if HOME variable differs from CMOR one only by shapes
                 has_cmor_varname = any([cmvar.label == hv.label for
-                                        cmvar in get_collection('CMORvar').items])
+                                        cmvar in get_list_of_elements_by_id('CMORvar').items])
                 # has_cmor_varname=any(get_cmor_var_id_by_label(hv.label))
                 if has_cmor_varname:
                     raise VarsError("Error: %s "
@@ -495,7 +495,7 @@ def process_home_vars(mip_vars_list, mips, expid=False):
             if not is_cmor:
                 # Check if HOME variable differs from CMOR one only by shapes
                 has_cmor_varname = any([cmvar.label == hv.label for
-                                        cmvar in get_collection('CMORvar').items])
+                                        cmvar in get_list_of_elements_by_id('CMORvar').items])
                 # has_cmor_varname=any(get_cmor_var_id_by_label(hv.label))
                 if has_cmor_varname:
                     raise VarsError("Warning: %s "
@@ -527,7 +527,7 @@ def get_corresp_cmor_var(hmvar):
     count = 0
     empty_table = (hmvar.mipTable in ['NONE', ]) or (hmvar.mipTable.startswith("None"))
     for cmvarid in get_cmor_var_id_by_label(hmvar.label):
-        cmvar = get_uid(cmvarid)
+        cmvar = get_element_uid(cmvarid)
         logger.debug("get_corresp, checking %s vs %s in %s" % (hmvar.label, cmvar.label, cmvar.mipTable))
         #
         # Consider case where no modeling_realm associated to the
@@ -604,7 +604,7 @@ def complement_svar_using_cmorvar(svar, cmvar, sn_issues, debug=[], allow_pseudo
     svar.cmvar = cmvar
 
     # Get information from MIPvar
-    mipvar = get_uid(cmvar.vid)
+    mipvar = get_element_uid(cmvar.vid)
     svar.mipVarLabel = mipvar.label.rstrip(' ')
     svar.long_name = cmvar.title.rstrip(' ')
     if cmvar.description:
@@ -615,7 +615,7 @@ def complement_svar_using_cmorvar(svar, cmvar, sn_issues, debug=[], allow_pseudo
     #
     # see https://github.com/cmip6dr/CMIP6_DataRequest_VariableDefinitions/issues/279
     svar.stdname = ''
-    sn = get_uid(mipvar.sn)  # None
+    sn = get_element_uid(mipvar.sn)  # None
     if sn._h.label == 'standardname':
         svar.stdname = sn.uid.strip()
         # svar.units = sn.units
@@ -632,7 +632,7 @@ def complement_svar_using_cmorvar(svar, cmvar, sn_issues, debug=[], allow_pseudo
     # Get information form Structure
     st = None
     try:
-        st = get_uid(cmvar.stid)
+        st = get_element_uid(cmvar.stid)
     except:
         if print_DR_errors:
             logger.error("DR Error: issue with stid for %s in Table %s  "
@@ -640,8 +640,8 @@ def complement_svar_using_cmorvar(svar, cmvar, sn_issues, debug=[], allow_pseudo
     if st is not None:
         svar.struct = st
         try:
-            svar.cm = get_uid(st.cmid).cell_methods
-            methods = get_uid(st.cmid).cell_methods.rstrip(' ')
+            svar.cm = get_element_uid(st.cmid).cell_methods
+            methods = get_element_uid(st.cmid).cell_methods.rstrip(' ')
             methods = methods.replace("mask=siconc or siconca", "mask=siconc")
             # Fix for emulating DR01.00.22 from content of DR01.00.21
             if "SoilPools" in svar.label:
@@ -652,7 +652,7 @@ def complement_svar_using_cmorvar(svar, cmvar, sn_issues, debug=[], allow_pseudo
                 logger.error("DR Error: issue with cell_method for %s" % st.label)
             # TBS# svar.cell_methods=None
         try:
-            svar.cell_measures = get_uid(cmvar.stid).cell_measures.rstrip(' ')
+            svar.cell_measures = get_element_uid(cmvar.stid).cell_measures.rstrip(' ')
         except:
             if print_DR_errors:
                 logger.error("DR Error: Issue with cell_measures for %s" % repr(cmvar))
@@ -681,7 +681,7 @@ def complement_svar_using_cmorvar(svar, cmvar, sn_issues, debug=[], allow_pseudo
         product_of_other_dims = 1
         all_dimids = list()
         if svar.spatial_shp not in ["na-na", ]:
-            spid = get_uid(svar.struct.spid)
+            spid = get_element_uid(svar.struct.spid)
             all_dimids += spid.dimids
         if 'cids' in svar.struct.__dict__:
             cids = svar.struct.cids
@@ -741,7 +741,7 @@ def get_simple_dim_from_dim_id(dimid):
     """
     logger = get_logger()
     sdim = SimpleDim()
-    d = get_uid(dimid)
+    d = get_element_uid(dimid)
     sdim.label = d.label
     sdim.positive = d.positive
     sdim.requested = d.requested
@@ -756,7 +756,7 @@ def get_simple_dim_from_dim_id(dimid):
     #
     sdim.value = d.value
     try:
-        sdim.stdname = get_uid(d.standardName).uid
+        sdim.stdname = get_element_uid(d.standardName).uid
     except:
         if print_DR_stdname_errors:
             logger.error("Issue with standardname for dimid %s" % dimid)
@@ -827,5 +827,5 @@ def get_simplevar(label, table, freq=None):
 
 
 # def hasCMORVarName(hmvar):
-#    for cmvar in get_collection('CMORvar').items:
+#    for cmvar in get_list_of_elements_by_id('CMORvar').items:
 #        if (cmvar.label==hmvar.label): return True

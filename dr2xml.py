@@ -54,10 +54,6 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 import os
 import sys
 
-import cProfile
-import pstats
-import io
-
 from collections import OrderedDict
 
 # Utilities
@@ -73,24 +69,6 @@ from config import get_config_variable, set_config_variable, initialize_config_v
 from settings_interface import initialize_dict, get_variable_from_lset_with_default, \
     get_variable_from_lset_without_default
 
-# Interface to xml
-from xml_interface import initialize_project_settings
-
-# Interface to Data Request
-from dr_interface import get_DR_version, get_uid, get_request_by_id_by_sect
-
-
-print("\n", 50 * "*", "\n*")
-print("* %29s" % "dr2xml version: ", get_config_variable("version"))
-
-print("* %29s" % "CMIP6 conventions version: ", get_config_variable("CMIP6_conventions_version"))
-
-# mpmoine_merge_dev2_v0.12: posixpath.dirname ne marche pas chez moi
-# TBS# from os import path as os_path
-# TBS# prog_path=os_path.abspath(os_path.split(__file__)[0])
-
-print("* %29s" % "CMIP6 Data Request version: ", get_DR_version())
-print("\n*\n", 50 * "*")
 
 """ An example/template  of settings for a lab and a model"""
 example_lab_and_model_settings = {
@@ -600,6 +578,8 @@ def generate_file_defs(lset, sset, year, enddate, context, cvs_path, pingfiles=N
     # Initialize lset and sset variables for all functions
     initialize_config_variables()
     initialize_dict(lset, sset)
+    # Interface to xml
+    from xml_interface import initialize_project_settings
     initialize_project_settings(cvspath=cvs_path, context=context, prefix=prefix,
                                 root=os.path.basename(os.path.abspath(__file__)), year=year)
     generate_file_defs_inner(year, enddate, context, pingfiles=pingfiles, dummies=dummies, dirname=dirname,
@@ -652,6 +632,9 @@ es with a different name between model
     :return: An output file named dirname/filedefs_context.xml. It has a CMIP6 compliant name, with prepended prefix.
 
     """
+    # Interface to Data Request
+    from dr_interface import get_DR_version
+
     # Tools to deal with ping files
     from pingfiles_interface import read_pingfiles_variables
 
@@ -668,6 +651,18 @@ es with a different name between model
 
     # Info printing tools
     from infos import print_some_stats
+
+    print("\n {}\n*".format(50 * "*"))
+    print("* %29s" % "dr2xml version: ", get_config_variable("version"))
+
+    print("* %29s" % "CMIP6 conventions version: ", get_config_variable("CMIP6_conventions_version"))
+
+    # mpmoine_merge_dev2_v0.12: posixpath.dirname ne marche pas chez moi
+    # TBS# from os import path as os_path
+    # TBS# prog_path=os_path.abspath(os_path.split(__file__)[0])
+
+    print("* %29s" % "CMIP6 Data Request version: ", get_DR_version())
+    print("\n*\n {}".format(50 * "*"))
 
     logger = get_logger()
     #
@@ -759,55 +754,3 @@ es with a different name between model
         for w in warnings_for_optimisation:
             logger.warning(w.replace(get_variable_from_lset_without_default('ping_variables_prefix'), ""))
         print()
-
-
-def request_item_include(ri, var_label, freq):
-    """
-    test if a variable is requested by a requestItem at a given freq
-    """
-    var_group = get_uid(get_uid(ri.rlid).refid)
-    req_vars = get_request_by_id_by_sect(var_group.uid, 'requestVar')
-    cm_vars = [get_uid(get_uid(reqvar).vid) for reqvar in req_vars]
-    return any([cmv.label == var_label and cmv.frequency == freq for cmv in cm_vars])
-
-
-def realm_is_processed(realm, source_type):
-    """
-    Tells if a realm is definitely not processed by a source type
-
-    list of source-types : AGCM BGC AER CHEM LAND OGCM AOGCM
-    list of known realms : 'seaIce', '', 'land', 'atmos atmosChem', 'landIce', 'ocean seaIce',
-                           'landIce land', 'ocean', 'atmosChem', 'seaIce ocean', 'atmos',
-                           'aerosol', 'atmos land', 'land landIce', 'ocnBgChem'
-    """
-    components = source_type.split(" ")
-    rep = True
-    #
-    if realm == "atmosChem" and 'CHEM' not in components:
-        return False
-    if realm == "aerosol" and 'AER' not in components:
-        return False
-    if realm == "ocnBgChem" and 'BGC' not in components:
-        return False
-    #
-    with_ocean = ('OGCM' in components or 'AOGCM' in components)
-    if 'seaIce' in realm and not with_ocean:
-        return False
-    if 'ocean' in realm and not with_ocean:
-        return False
-    #
-    with_atmos = ('AGCM' in components or 'AOGCM' in components)
-    if 'atmos' in realm and not with_atmos:
-        return False
-    if 'atmosChem' in realm and not with_atmos:
-        return False
-    if realm == '' and not with_atmos:  # In DR 01.00.15 : some atmos variables have realm=''
-        return False
-    #
-    with_land = with_atmos or ('LAND' in components)
-    if 'land' in realm and not with_land:
-        return False
-    #
-    return rep
-
-

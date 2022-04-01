@@ -24,7 +24,7 @@ from utils import Dr2xmlError
 # Interface to settings dictionaries
 from settings_interface import get_variable_from_lset_with_default
 # Interface to Data Request
-from dr_interface import get_uid
+from dr_interface import get_element_uid
 
 
 def normalize(grid):
@@ -95,9 +95,9 @@ def CNRM_grid_policy(cmvarid, grids):  # TBD
     """
     See doc of lab_adhoc_grid_policy
     """
-    if get_uid(cmvarid).label in ["sos"]:
+    if get_element_uid(cmvarid).label in ["sos"]:
         return [g for g in grids if g in ["", "1deg"]]
-    elif get_uid(cmvarid).label in ["tos"] and (get_uid(cmvarid).mipTable not in ["3hr"] or
+    elif get_element_uid(cmvarid).label in ["tos"] and (get_element_uid(cmvarid).mipTable not in ["3hr"] or
                                                 get_variable_from_lset_with_default("allow_tos_3hr_1deg", True)):
         if get_variable_from_lset_with_default("adhoc_policy_do_add_1deg_grid_for_tos", False):
             list_grids = list()

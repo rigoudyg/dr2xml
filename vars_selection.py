@@ -21,7 +21,8 @@ from settings_interface import get_variable_from_sset_else_lset_without_default,
     is_key_in_sset, is_sset_not_None, get_variable_from_sset_with_default_in_sset, \
     get_variable_from_sset_with_default, is_key_in_lset, get_variable_from_sset_else_lset_with_default
 # Interface to Data Request
-from dr_interface import get_request_by_id_by_sect, get_uid, get_experiment_label, initialize_sc, get_DR_version
+from dr_interface import get_request_by_id_by_sect, get_element_uid, get_experiment_label, get_scope, get_DR_version, \
+    set_scope
 
 # Grids tools
 from grids_selection import decide_for_grids
@@ -40,7 +41,6 @@ grid_choice = None
 # It is set in select_CMORvars_for_lab and used in endyear_for_CMORvar
 global_rls = None
 rls_for_all_experiments = None
-sc = None
 
 sn_issues = OrderedDict()
 
@@ -58,13 +58,6 @@ def initialize_sn_issues(init):
     """
     global sn_issues
     sn_issues = init
-
-
-def get_sc():
-    """
-    Return the value of global variable sc
-    """
-    return sc
 
 
 def endyear_for_CMORvar(cv, expt, year):
@@ -86,29 +79,29 @@ def endyear_for_CMORvar(cv, expt, year):
 
     # 1- Get the RequestItems which apply to CmorVar
     rVarsUid = get_request_by_id_by_sect(cv.uid, 'requestVar')
-    rVars = [get_uid(uid) for uid in rVarsUid if get_uid(uid).priority <= pmax]
+    rVars = [get_element_uid(uid) for uid in rVarsUid if get_element_uid(uid).priority <= pmax]
     logger.debug("les requestVars: %s" % " ".join([rVar.title for rVar in rVars]))
-    VarGroups = [get_uid(rv.vgid) for rv in rVars]
+    VarGroups = [get_element_uid(rv.vgid) for rv in rVars]
     logger.debug("les requestVars groups: %s" % " ".join([rVg.label for rVg in VarGroups]))
     RequestLinksId = list()
     for vg in VarGroups:
         RequestLinksId.extend(get_request_by_id_by_sect(vg.uid, 'requestLink'))
     FilteredRequestLinks = list()
     for rlid in RequestLinksId:
-        rl = get_uid(rlid)
+        rl = get_element_uid(rlid)
         if rl in global_rls:
             FilteredRequestLinks.append(rl)
-    logger.debug("les requestlinks: %s" % " ".join([get_uid(rlid).label for rlid in RequestLinksId]))
+    logger.debug("les requestlinks: %s" % " ".join([get_element_uid(rlid).label for rlid in RequestLinksId]))
     logger.debug("les FilteredRequestlinks: %s" % " ".join([rl.label for rl in FilteredRequestLinks]))
     RequestItems = list()
     for rl in FilteredRequestLinks:
         RequestItems.extend(get_request_by_id_by_sect(rl.uid, 'requestItem'))
-    logger.debug("les requestItems: %s" % " ".join([get_uid(riid).label for riid in RequestItems]))
+    logger.debug("les requestItems: %s" % " ".join([get_element_uid(riid).label for riid in RequestItems]))
 
     # 2- Select those request links which include expt and year
     larger = None
     for riid in RequestItems:
-        ri = get_uid(riid)
+        ri = get_element_uid(riid)
         applies, endyear = RequestItem_applies_for_exp_and_year(ri, expt, year)
         logger.debug("For var and freq selected for debug and year %s, for ri %s, applies=%s, endyear=%s" %
                      (str(year), ri.title, str(applies), str(endyear)))
@@ -140,7 +133,7 @@ def RequestItem_applies_for_exp_and_year(ri, experiment, year=None):
     # if ri.title=='CFMIP, CFMIP.CFsubhr, amip' : debug=True
     logger = get_logger()
     logger.debug("In RIapplies.. Checking % 15s" % ri.title)
-    item_exp = get_uid(ri.esid)
+    item_exp = get_element_uid(ri.esid)
     ri_applies_to_experiment = False
     endyear = None
     # esid can link to an experiment or an experiment group
@@ -152,14 +145,14 @@ def RequestItem_applies_for_exp_and_year(ri, experiment, year=None):
     elif item_exp._h.label in ['exptgroup', ]:
         logger.debug("%20s %s" % ("Expt Group case ", item_exp.label))
         exps_id = get_request_by_id_by_sect(ri.esid, 'experiment')
-        for e in [get_uid(eid) for eid in exps_id]:
+        for e in [get_element_uid(eid) for eid in exps_id]:
             if e.label in [experiment, ]:
                 logger.debug(" OK for experiment based on group %s" % item_exp.label)
                 ri_applies_to_experiment = True
     elif item_exp._h.label in ['mip', ]:
-        logger.debug("%20s %s" % ("Mip case ", get_uid(item_exp.label).label))
+        logger.debug("%20s %s" % ("Mip case ", get_element_uid(item_exp.label).label))
         exps_id = get_request_by_id_by_sect(ri.esid, 'experiment')
-        for e in [get_uid(eid) for eid in exps_id]:
+        for e in [get_element_uid(eid) for eid in exps_id]:
             logger.debug(e.label + ",",)
             if e.label == experiment:
                 logger.debug(" OK for experiment based on mip %s" % item_exp.label)
@@ -182,7 +175,7 @@ def RequestItem_applies_for_exp_and_year(ri, experiment, year=None):
             logger.debug(" ..applies because arg year is None")
         else:
             year = int(year)
-            exp = get_uid(get_experiment_label(experiment))
+            exp = get_element_uid(get_experiment_label(experiment))
             rep, endyear = year_in_ri(ri, exp, year)
             logger.debug(" ..year in ri returns : %s %s" % (rep, endyear))
             # if (ri.label=="AerchemmipAermonthly3d") :
@@ -269,7 +262,7 @@ def year_in_ri_tslice(ri, exp, year):
     #
     relevant = False
     endyear = None
-    tslice = get_uid(ri.tslice)
+    tslice = get_element_uid(ri.tslice)
     logger.debug("tslice label/type is %s/%s for reqItem %s " % (tslice.label, tslice.type, ri.title))
     if tslice.type in ["relativeRange", ]:  # e.g. _slice_abrupt30
         first_year = experiment_start_year(exp)
@@ -402,35 +395,34 @@ def select_CMORvars_for_lab(sset=False, year=None):
     logger = get_logger()
     #
     # From MIPS set to Request links
-    global sc, global_rls, grid_choice, rls_for_all_experiments, sn_issues
+    global global_rls, grid_choice, rls_for_all_experiments, sn_issues
     if sset:
         tierMax = get_variable_from_sset_else_lset_without_default('tierMax')
     else:
         tierMax = get_variable_from_lset_without_default('tierMax')
-    if sc is None:
-        sc = initialize_sc(tierMax)
+    sc = get_scope(tierMax)
 
     # Set sizes for lab settings, if available (or use CNRM-CM6-1 defaults)
-    mcfg = namedtuple('mcfg', ['nho', 'nlo', 'nha', 'nla', 'nlas', 'nls', 'nh1'])
     if sset:
         source, source_type = get_source_id_and_type()
         grid_choice = get_variable_from_lset_without_default("grid_choice", source)
         mips_list = set(get_variable_from_lset_without_default('mips', grid_choice))
         sizes = get_variable_from_lset_without_default("sizes", grid_choice)
         # sizes=get_variable_from_lset_with_default("sizes",[259200,60,64800,40,20,5,100])
-        sc.mcfg = mcfg._make(sizes)._asdict()
+        sc.mcfg = sc.build_mcfg(sizes)
     else:
         mips_list = set()
         for grid in get_variable_from_lset_without_default('mips'):
             mips_list = mips_list.union(set(get_variable_from_lset_without_default('mips', grid)))
         grid_choice = "LR"
+    set_scope(sc)
     # Sort mip_list for reproducibility
     mips_list = list(mips_list)
     mips_list.sort()
     #
     if rls_for_all_experiments is None:
         # Because scope do not accept list types
-        rls_for_mips = sorted(list(sc.getRequestLinkByMip(set(mips_list))), key=lambda x: x.label)
+        rls_for_mips = sorted(list(sc.get_request_link_by_mip(set(mips_list))), key=lambda x: x.label)
         logger.info("Number of Request Links which apply to MIPS %s  is: %d" %
                     (print_struct(mips_list), len(rls_for_mips)))
         #
@@ -458,7 +450,7 @@ def select_CMORvars_for_lab(sset=False, year=None):
     #
     if sset:
         experiment_id = get_variable_from_sset_with_default_in_sset('experiment_for_requests', 'experiment_id')
-        exp = get_uid(get_experiment_label(experiment_id))
+        exp = get_element_uid(get_experiment_label(experiment_id))
         logger.info("Filtering for experiment %s, covering years [ %s , %s ] in DR" %
                     (experiment_id, exp.starty, exp.endy))
         # print "Request links before filter :"+`[ rl.label for rl in rls_for_mips ]`
@@ -467,7 +459,7 @@ def select_CMORvars_for_lab(sset=False, year=None):
             # Access all requesItems ids which refer to this RequestLink
             ri_ids = get_request_by_id_by_sect(rl.uid, 'requestItem')
             for ri_id in ri_ids:
-                ri = get_uid(ri_id)
+                ri = get_element_uid(ri_id)
                 # debug=(ri.label=='C4mipC4mipLandt2')
                 logger.debug("Checking requestItem %s" % ri.title,)
                 applies, endyear = RequestItem_applies_for_exp_and_year(ri, experiment_id, year)
@@ -497,24 +489,24 @@ def select_CMORvars_for_lab(sset=False, year=None):
     miprl_vars_grids = []
     for rl in rls:
         logger.debug("processing RequestLink %s" % rl.title)
-        rl_vars = sc.varsByRql([rl.uid], pmax=pmax)
+        rl_vars = sc.get_vars_by_request_link(rl.uid, pmax=pmax)
         for v in rl_vars:
             # The requested grid is given by the RequestLink except if spatial shape matches S-*
             gr = rl.grid
-            cmvar = get_uid(v)
-            st = get_uid(cmvar.stid)
-            sp = get_uid(st.spid)
+            cmvar = get_element_uid(v)
+            st = get_element_uid(cmvar.stid)
+            sp = get_element_uid(st.spid)
             if sp.label[0:2] == "S-":
                 gr = 'cfsites'
             if (v, gr) not in miprl_vars_grids:
                 miprl_vars_grids.append((v, gr))
-                # if 'ua' in cmvar.label : print "adding %s %s"%(cmvar.label,get_uid(cmvar.vid).label)
+                # if 'ua' in cmvar.label : print "adding %s %s"%(cmvar.label,get_element_uid(cmvar.vid).label)
             # else:
             #    print "Duplicate pair var/grid : ",cmvar.label,cmvar.mipTable,gr
     logger.info('Number of (CMOR variable, grid) pairs for these requestLinks is :%s' % len(miprl_vars_grids))
 
     # for (v,g) in miprl_vars_grids :
-    #    if get_uid(v).label=="ps" : print "step 1 : ps in table",get_uid(v).mipTable,g
+    #    if get_element_uid(v).label=="ps" : print "step 1 : ps in table",get_element_uid(v).mipTable,g
 
     #
     if sset:
@@ -543,9 +535,9 @@ def select_CMORvars_for_lab(sset=False, year=None):
 
     filtered_vars = list()
     for (v, g) in miprl_vars_grids:
-        cmvar = get_uid(v)
-        ttable = get_uid(cmvar.mtid)
-        mipvar = get_uid(cmvar.vid)
+        cmvar = get_element_uid(v)
+        ttable = get_element_uid(cmvar.mtid)
+        mipvar = get_element_uid(cmvar.vid)
         if ((len(incvars) == 0 and mipvar.label not in excvars) or (len(incvars) > 0 and mipvar.label in incvars))\
                 and ((len(inctab) > 0 and ttable.label in inctab) or (len(inctab) == 0 and ttable.label not in exctab))\
                 and ((mipvar.label, ttable.label) not in excpairs):
@@ -566,7 +558,7 @@ def select_CMORvars_for_lab(sset=False, year=None):
     for v in d:
         d[v] = decide_for_grids(v, d[v])
         if len(d[v]) > 1:
-            multiple_grids.append(get_uid(v).label)
+            multiple_grids.append(get_element_uid(v).label)
             if print_multiple_grids:
                 logger.info("\tVariable %s will be processed with multiple grids : %s"
                             % (multiple_grids[-1], repr(d[v])))
@@ -575,18 +567,18 @@ def select_CMORvars_for_lab(sset=False, year=None):
                     "(rerun with print_multiple_grids set to True for details) : %s" % repr(multiple_grids.sort()))
     #
     # Print a count of distinct var labels
-    logger.info('Number of distinct var labels is : %d' % len(set([get_uid(v).label for v in d])))
+    logger.info('Number of distinct var labels is : %d' % len(set([get_element_uid(v).label for v in d])))
 
     # Translate CMORvars to a list of simplified CMORvar objects
     simplified_vars = []
     allow_pseudo = get_variable_from_lset_with_default('allow_pseudo_standard_names', False)
     for v in d:
         svar = SimpleCMORVar()
-        cmvar = get_uid(v)
+        cmvar = get_element_uid(v)
         sn_issues = complement_svar_using_cmorvar(svar, cmvar, sn_issues, [], allow_pseudo)
         svar.Priority = analyze_priority(cmvar, mips_list)
         svar.grids = d[v]
-        if get_uid(v).label in ["tas", ]:
+        if get_element_uid(v).label in ["tas", ]:
             logger.debug("When complementing, tas is included , grids are %s" % svar.grids)
         simplified_vars.append(svar)
     logger.info('Number of simplified vars is : %d' % len(simplified_vars))
