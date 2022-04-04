@@ -642,8 +642,9 @@ es with a different name between model
     from plevs_unions import create_xios_axis_and_grids_for_plevs_unions
 
     # Variables tools
-    from vars_interface.vars_home import multi_plev_suffixes, single_plev_suffixes
-    from vars_interface.vars_selection import initialize_sn_issues, select_variables_to_be_processed
+    from vars_interface.vars_type.generic import multi_plev_suffixes, single_plev_suffixes
+    from vars_interface.selection import select_variables_to_be_processed
+    from vars_interface.generic_data_request import initialize_sn_issues
 
     # XIOS reading and writing tools
     from Xparse import init_context

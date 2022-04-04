@@ -119,6 +119,9 @@ def correct_data_request_dim(dim):
 
 def correct_data_request_variable(variable):
     if variable.label is not None:
+        # DR21 has a bug with tsland : the MIP variable is named "ts"
+        if variable.label in ["tsland", ]:
+            variable.mipVarLabel = "tsland"
         # Fix for emulating DR01.00.22 from content of DR01.00.21
         if "SoilPools" in variable.label:
             variable.frequency = "mon"

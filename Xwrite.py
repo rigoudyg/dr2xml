@@ -45,9 +45,8 @@ from grids import change_domain_in_grid, change_axes_in_grid, get_grid_def_with_
     add_scalar_in_grid
 
 # Variables tools
-from vars_interface.vars_cmor import ping_alias
-from vars_interface.vars_home import get_simplevar
-from vars_interface.vars_selection import endyear_for_CMORvar, get_grid_choice
+from vars_interface.vars_type.cmor import ping_alias, get_simplevar
+from vars_interface.generic_data_request import endyear_for_CMORvar, get_grid_choice
 
 # Post-processing tools
 from postprocessing import process_vertical_interpolation, process_zonal_mean, process_diurnal_cycle, \

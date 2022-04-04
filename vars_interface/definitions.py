@@ -99,9 +99,6 @@ class SimpleCMORVar(SimpleObject):
     def correct_data_request(self):
         correct_data_request_variable(self)
 
-    def __str__(self):
-        return "%".join([str(self.label), str(self.type), str(self.grids), str(self.frequency), str(self.ref_var)])
-
 
 class SimpleDim(SimpleObject):
     """
@@ -128,9 +125,6 @@ class SimpleDim(SimpleObject):
         self.title = title
         self.is_union_for = is_union_for
         super(SimpleDim, self).__init__(**kwargs)
-
-    def __str__(self):
-        return "%".join([str(self.label), str(self.type), str(self.axis)])
 
     def correct_data_request(self):
         correct_data_request_dim(self)

@@ -1,6 +1,11 @@
 {
   "parent_project_settings": "CMIP6",
   "__common_values__": {
+    "required_model_components": {
+      "default_values": [
+        "list()"
+      ]
+    },
     "CORDEX_domain": {
       "default_values": [
         {
@@ -13,6 +18,11 @@
               }
             ]
         }
+      ]
+    },
+    "additional_allowed_model_components": {
+      "default_values": [
+        "list()"
       ]
     },
     "driving_model_id": {
