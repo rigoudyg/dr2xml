@@ -4,7 +4,7 @@ run_mode=${1:-"test"} # "ref" or "test"
 to_compare=${2:-"no"} # "changes" or "python" or "no"
 add_coverage=${3:-"no"} # "yes" or "no"
 add_profile=${4:-"no"} # "yes" or "no"
-simulations_to_test="a4SST aladin levels"
+simulations_to_test="a4SST aladin levels aladin_nodr"
 
 if [ "${add_coverage}" = "yes" ]; then
   # Remove old results

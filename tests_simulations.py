@@ -38,6 +38,16 @@ def find_data(simulation):
         from tests.test_AAD50_641.input.config import simulation as simulation_aladin
         from tests.test_AAD50_641.input.config import contexts as contexts_aladin
         return (config_dict_aladin, sset_aladin, lset_aladin, simulation_aladin, contexts_aladin)
+    elif simulation in ["aladin_nodr", ]:
+        # Tests AAD50-641 no dr
+        # TODO: Update data
+        from tests.test_AAD50_641_nodr.input.config import config as config_dict_aladin_nodr
+        from tests.test_AAD50_641_nodr.input.simulation_settings import simulation_settings as sset_aladin_nodr
+        from tests.test_AAD50_641_nodr.input.lab_and_model_settings import lab_and_model_settings as lset_aladin_nodr
+        from tests.test_AAD50_641_nodr.input.config import simulation as simulation_aladin_nodr
+        from tests.test_AAD50_641_nodr.input.config import contexts as contexts_aladin_nodr
+        return (config_dict_aladin_nodr, sset_aladin_nodr, lset_aladin_nodr, simulation_aladin_nodr,
+                contexts_aladin_nodr)
     elif simulation in ["levels", ]:
         # Tests levels
         from tests.test_levels.input.config import config as config_dict_levels
