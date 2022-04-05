@@ -3,8 +3,11 @@
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+import cProfile
+import io
 import os
 import glob
+import pstats
 import shutil
 import sys
 import codecs
@@ -47,7 +50,7 @@ def find_data(simulation):
         raise ValueError("Unknown simulation %s" % simulation)
 
 
-def test_function(simulation, run_mode, python_version, config_dict, contexts, lset, sset):
+def test_function(simulation, run_mode, python_version, config_dict, contexts, lset, sset, add_profile):
     print("Test simulation:", simulation)
     output_directory = os.sep.join([os.sep.join(os.path.abspath(__file__).split(os.sep)[:-1]), "tests",
                                     "test_{}".format(simulation), "output_{}_{}".format(run_mode, python_version)])
@@ -64,7 +67,20 @@ def test_function(simulation, run_mode, python_version, config_dict, contexts, l
             print("Execute context %s" % context)
             start_time = time.time()
             sys.stdout = logfile
+            if add_profile in ["yes", ]:
+                pr = cProfile.Profile()
+                pr.enable()
             generate_file_defs(context=context, lset=lset, sset=sset, **config_dict)
+            if add_profile in ["yes", ]:
+                pr.disable()
+                if python_version in ["python2", ]:
+                    s = io.BytesIO()
+                else:
+                    s = io.StringIO()
+                sortby = 'cumulative'
+                ps = pstats.Stats(pr, stream=s).sort_stats(sortby)
+                ps.print_stats()
+                print(s.getvalue())
             sys.stdout = old_stdout
             print("It took %d s" % (time.time() - start_time))
 
@@ -92,14 +108,18 @@ if __name__ == "__main__":
                         help="Run mode")
     parser.add_argument("--to_compare", choices=["python", "changes", "no"], default="no",
                         help="Should a comparison be done?")
+    parser.add_argument("--add_profile", choices=["yes", "no"], default="no", help="Should profiling be done?")
     args = parser.parse_args()
 
     simulation = args.simulation
     run_mode = args.run_mode
     to_compare = args.to_compare
+    add_profile = args.add_profile
+    if add_profile in ["yes", ] and to_compare not in ["no", ]:
+        raise ValueError("If profiling is on, comparison will fail.")
 
     (config_dict, sset, lset, simulation_name, contexts) = find_data(simulation)
-    test_function(simulation_name, run_mode, python_version, config_dict, contexts, lset, sset)
+    test_function(simulation_name, run_mode, python_version, config_dict, contexts, lset, sset, add_profile)
 
     if run_mode in ["test", ] and to_compare not in ["no", ]:
         output_dir = os.sep.join([os.sep.join(os.path.abspath(__file__).split(os.sep)[:-1]), "tests",

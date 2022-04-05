@@ -5,6 +5,7 @@ from tests.tests_config import path_xml
 
 lab_and_model_settings = {
     'path_to_parse': '{}/'.format(path_xml),
+    'save_project_settings': 'dr2xml_project_settings.json',
     'comment': '',
     'tierMax': 1,
     'references': 'http://www.umr-cnrm.fr/cmip6/references',

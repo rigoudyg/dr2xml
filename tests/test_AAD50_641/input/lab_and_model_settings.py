@@ -18,7 +18,7 @@ path_xml_aladin = "/".join([path_xml, "../xml_files_Aladin"])
 
 lab_and_model_settings={
     'path_to_parse' : '{}/'.format(path_xml_aladin),
-    
+    'save_project_settings': 'dr2xml_project_settings.json',
     'institution_id': "CNRM", # institution full description will be read in CMIP6_CV
     'institution': "CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France)", 
     
@@ -421,7 +421,7 @@ lab_and_model_settings={
         },
 
     # For an extended printout of selected CMOR variables, grouped by variable label
-    'print_stats_per_var_label' : True,
+    'print_stats_per_var_label': True,
 
     # When using select='no', Xios may enter an endless loop, which is solved if next setting is False
     'allow_tos_3hr_1deg' : True,
