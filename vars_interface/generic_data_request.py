@@ -90,8 +90,14 @@ def select_data_request_CMORvars_for_lab(sset=False, year=None):
     if sset:
         experiment_id = internal_settings["experiment_for_requests"]
         exp = get_element_uid(get_experiment_label(experiment_id))
+        if exp is not None:
+            starty = exp.starty
+            endy = exp.endy
+        else:
+            starty = "??"
+            endy = "??"
         logger.info("Filtering for experiment %s, covering years [ %s , %s ] in DR" %
-                    (experiment_id, exp.starty, exp.endy))
+                    (experiment_id, starty, endy))
         # print "Request links before filter :"+`[ rl.label for rl in rls_for_mips ]`
         filtered_rls = []
         for rl in rls_for_mips:

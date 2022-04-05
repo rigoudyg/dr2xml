@@ -24,3 +24,20 @@ class Scope(object):
 
 	def get_vars_by_request_link(self, request_link, pmax):
 		return list()
+
+
+class ListWithItems(list):
+
+	def __init__(self):
+		self.items = self.build_content()
+
+	def build_content(self):
+		return self[:]
+
+	def __setitem__(self, key, value):
+		super(ListWithItems, self).__setitem__(key, value)
+		self.items = self.build_content()
+
+	def __delitem__(self, key):
+		super(ListWithItems, self).__delitem__(key)
+		self.items = self.build_content()

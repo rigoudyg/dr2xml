@@ -44,7 +44,7 @@ def decode_strings(struct):
     logger = get_logger()
     if isinstance(struct, (int, float)):
         return struct
-    elif isinstance(struct, string_types):
+    elif isinstance(struct, (string_types, type(None))):
         struct = str(struct)
         struct = decode_if_needed(struct)
         return struct

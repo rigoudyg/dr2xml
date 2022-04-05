@@ -65,6 +65,7 @@ def initialize_dim_variables():
     global dims2shape, dim2dimid, dr_single_levels
     if dims2shape is None:
         dims2shape = OrderedDict()
+        dims2shape["longitude|latitude"] = "XY-na"
         for sshp in get_list_of_elements_by_id('spatialShape').items:
             dims2shape[sshp.dimensions] = sshp.label
         # mpmoine_future_modif:dims2shape: ajout a la main des correpondances dims->shapes Primavera qui ne sont pas
@@ -96,6 +97,7 @@ def initialize_dim_variables():
         dim2dimid = OrderedDict()
         for g in get_list_of_elements_by_id('grids').items:
             dim2dimid[g.label] = g.uid
+            print(g.__dict__)
     #
     if dr_single_levels is None:
         dr_single_levels = list()
@@ -176,7 +178,11 @@ def read_extra_table(path, table):
                     extra_dim = get_simple_dim_from_dim_id(dim2dimid[d])
                     extra_var.update_attributes(sdims={extra_dim.label: extra_dim})
                 else:
-                    extra_dim_info = read_json_content(json_coordinate)["axis_entry"][d]
+                    extra_dim_info = read_json_content(json_coordinate)["axis_entry"]
+                    if d in extra_dim_info:
+                        extra_dim_info = extra_dim_info[d]
+                    else:
+                        raise KeyError("Could not find the dimension definition for %s in %s" % (d, json_coordinate))
                     extra_dim = SimpleDim(label=d, axis=extra_dim_info["axis"], stdname=extra_dim_info["standard_name"],
                                           units=extra_dim_info["units"], long_name=extra_dim_info["long_name"],
                                           out_name=extra_dim_info["out_name"], positive=extra_dim_info["positive"],

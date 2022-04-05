@@ -7,11 +7,11 @@ Interface if no data request should be used.
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
-from dr_interface.definition import Scope
+from dr_interface.definition import Scope, ListWithItems
 
 
-print_DR_errors = True
-print_DR_stdnames_errors = False
+print_DR_errors = False
+print_DR_stdname_errors = False
 scope = Scope()
 
 
@@ -22,8 +22,9 @@ def get_DR_version():
     return "No data request"
 
 
-def get_scope():
+def get_scope(tierMax=None):
     return scope
+
 
 def set_scope(sc):
     if sc is not None:
@@ -35,7 +36,7 @@ def get_list_of_elements_by_id(id):
     """
     Get the list of elements corresponding to the id.
     """
-    return list()
+    return ListWithItems()
 
 
 def get_element_uid(id=None):
@@ -49,7 +50,7 @@ def get_element_uid(id=None):
 
 
 def get_experiment_label(experiment):
-    return None
+    return ""
 
 
 def get_request_by_id_by_sect(id, request):

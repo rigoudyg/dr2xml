@@ -255,7 +255,7 @@ def field_size(svar, mcfg):
         siz = (atm_nblev + 1) * atm_grid_size
     elif s in ["na-AH", ]:  # profile on model atmosphere half-levels
         siz = atm_nblev + 1
-    elif s.stratswith("XY-P"):  # Global field (pressure levels)
+    elif s.startswith("XY-P"):  # Global field (pressure levels)
         if "jpdftaure" in svar.label:
             siz = atm_grid_size
         else:
@@ -288,7 +288,7 @@ def field_size(svar, mcfg):
         siz = atm_grid_size
     elif s in ["XY-O", ]:  # Global ocean field on model levels
         siz = oce_nblev * oce_grid_size
-    elif s == ["XY-na", ]:  # Global field (single level)
+    elif s in ["XY-na", ]:  # Global field (single level)
         siz = atm_grid_size
         if svar.modeling_realm in ['ocean', 'seaIce', 'ocean seaIce', 'ocnBgchem', 'seaIce ocean']:
             siz = oce_grid_size
