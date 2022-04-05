@@ -1,22 +1,34 @@
 {
-  "__common_values__": {
-    "prefix": {
+  "__internal_values__": {
+    "debug_parsing": {
       "default_values": [
         {
-          "key_type": "dict",
-          "keys": "prefix"
-        }
-      ],
-      "fatal": "True"
+          "key_type": "laboratory",
+          "keys": "debug_parsing"
+        },
+        "False"
+      ]
     },
-    "year": {
+    "project": {
       "default_values": [
         {
-          "key_type": "dict",
-          "keys": "year"
+          "key_type": "laboratory",
+          "keys": "project"
+        },
+        "CMIP6"
+      ]
+    },
+    "project_settings": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "project_settings"
+        },
+        {
+          "key_type": "internal",
+          "keys": "project"
         }
-      ],
-      "fatal": "True"
+      ]
     },
     "context": {
       "default_values": [
@@ -27,16 +39,677 @@
       ],
       "fatal": "True"
     },
-    "root": {
+    "path_to_parse": {
       "default_values": [
         {
-          "key_type": "dict",
-          "keys": "root"
+          "key_type": "laboratory",
+          "keys": "path_to_parse"
+        },
+        "./"
+      ]
+    },
+    "use_union_zoom": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "use_union_zoom"
+        },
+        "False"
+      ]
+    },
+    "print_stats_per_var_label": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "print_stats_per_var_label"
+        },
+        "False"
+      ]
+    },
+    "ping_variables_prefix": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "ping_variables_prefix"
         }
       ],
       "fatal": "True"
     },
-
+    "split_frequencies": {
+      "default_values": [
+        {
+          "key_type": "simulation",
+          "keys": "split_frequencies"
+        },
+        {
+          "key_type": "laboratory",
+          "keys": "split_frequencies"
+        },
+        "splitfreqs.dat"
+      ]
+    },
+    "max_file_size_in_floats": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "max_file_size_in_floats"
+        },
+        500000000.0
+      ]
+    },
+    "bytes_per_float": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "bytes_per_float"
+        },
+        2
+      ]
+    },
+    "sampling_timestep": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "sampling_timestep"
+        }
+      ],
+      "fatal": "True"
+    },
+    "tierMax_lset": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "tierMax"
+        }
+      ],
+      "fatal": "True"
+    },
+    "tierMax": {
+      "default_values": [
+        {
+          "key_type": "simulation",
+          "keys": "tierMax"
+        },
+        {
+          "key_type": "internal",
+          "keys": "tierMax_lset"
+        }
+      ],
+      "fatal": "True"
+    },
+    "max_priority_lset": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "max_priority"
+        }
+      ],
+      "fatal": "True"
+    },
+    "max_priority": {
+      "default_values": [
+        {
+          "key_type": "simulation",
+          "keys": "max_priority"
+        },
+        {
+          "key_type": "internal",
+          "keys": "max_priority_lset"
+        }
+      ],
+      "fatal": "True"
+    },
+    "grid_choice": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": [
+            "grid_choice",
+            {
+              "key_type": "internal",
+              "keys": "source_id"
+            }
+          ]
+        }
+      ],
+      "fatal": "True"
+    },
+    "configuration": {
+      "default_values": [
+        {
+          "key_type": "simulation",
+          "keys": "configuration"
+        }
+      ],
+      "fatal": "True"
+    },
+    "source_id": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": [
+            "configurations",
+            {
+              "key_type": "simulation",
+              "keys": "configuration"
+            },
+            0
+          ]
+        },
+        {
+          "key_type": "simulation",
+          "keys": "source_id"
+        }
+      ],
+      "fatal": "True"
+    },
+    "sizes": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": [
+            "sizes",
+            {
+              "key_type": "internal",
+              "keys": "grid_choice"
+            }
+          ]
+        }
+      ],
+      "fatal": "True"
+    },
+    "mips": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "mips"
+        }
+      ],
+      "fatal":"True"
+    },
+    "excluded_request_links": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "excluded_request_links"
+        },
+        "list()"
+      ]
+    },
+    "included_request_links": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "included_request_links"
+        },
+        "list()"
+      ]
+    },
+    "excluded_tables_lset": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "excluded_tables"
+        },
+        "list()"
+      ]
+    },
+    "excluded_tables_sset": {
+      "default_values": [
+        {
+          "key_type": "simulation",
+          "keys": "excluded_tables"
+        },
+        "list()"
+      ]
+    },
+    "excluded_spshapes_lset": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "excluded_spshapes"
+        },
+        "list()"
+      ]
+    },
+    "excluded_vars_lset": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "excluded_vars"
+        },
+        "list()"
+      ]
+    },
+    "excluded_vars_sset": {
+      "default_values": [
+        {
+          "key_type": "simulation",
+          "keys": "excluded_vars"
+        },
+        "list()"
+      ]
+    },
+    "excluded_pairs_lset": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "excluded_pairs"
+        },
+        "list()"
+      ]
+    },
+    "excluded_pairs_sset": {
+      "default_values": [
+        {
+          "key_type": "simulation",
+          "keys": "excluded_pairs"
+        },
+        "list()"
+      ]
+    },
+    "included_tables_lset": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "included_tables"
+        },
+        "list()"
+      ]
+    },
+    "included_tables": {
+      "default_values": [
+        {
+          "key_type": "simulation",
+          "keys": "included_tables"
+        },
+        {
+          "key_type": "internal",
+          "keys": "included_tables_lset"
+        }
+      ]
+    },
+    "included_vars": {
+      "default_values": [
+        {
+          "key_type": "simulation",
+          "keys": "included_vars"
+        },
+        {
+          "key_type": "internal",
+          "keys": "included_vars_lset"
+        }
+      ]
+    },
+    "included_vars_lset": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "included_vars"
+        },
+        "list()"
+      ]
+    },
+    "excluded_vars_per_config": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": [
+            "excluded_vars_per_config",
+            {
+              "key_type": "internal",
+              "keys": "configuration"
+            }
+          ]
+        },
+        "list()"
+      ]
+    },
+    "experiment_id": {
+      "default_values": [
+        {
+          "key_type": "simulation",
+          "keys": "experiment_id"
+        }
+      ],
+      "fatal": "True"
+    },
+    "experiment_for_requests": {
+      "default_values": [
+        {
+          "key_type": "simulation",
+          "keys": "experiment_for_requests"
+        },
+        {
+          "key_type": "internal",
+          "keys": "experiment_id"
+        }
+      ],
+      "fatal": "True"
+    },
+    "branching": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": [
+            "branching",
+            {
+              "key_type": "internal",
+              "keys": "source_id"
+            }
+          ]
+        }
+      ]
+    },
+    "branch_year_in_child": {
+      "default_values": [
+        {
+          "key_type": "simulation",
+          "keys": "branch_year_in_child"
+        }
+      ]
+    },
+    "end_year": {
+      "default_values": [
+        {
+          "key_type": "simulation",
+          "keys": "end_year"
+        }
+      ]
+    },
+    "allow_pseudo_standard_names": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "allow_pseudo_standard_names"
+        },
+        "False"
+      ]
+    },
+    "realization_index": {
+      "default_values": [
+        {
+          "key_type": "simulation",
+          "keys": "realization_index"
+        },
+        "1"
+      ]
+    },
+    "filter_on_realization": {
+      "default_values": [
+        {
+          "key_type": "simulation",
+          "keys": "filter_on_realization"
+        },
+        {
+          "key_type": "laboratory",
+          "keys": "filter_on_realization"
+        },
+        "True"
+      ]
+    },
+    "listof_home_vars": {
+      "default_values": [
+        {
+          "key_type": "simulation",
+          "keys": "listof_home_vars"
+        },
+        {
+          "key_type": "laboratory",
+          "keys": "listof_home_vars"
+        },
+        "None"
+      ]
+    },
+    "path_extra_tables": {
+      "default_values": [
+        {
+          "key_type": "simulation",
+          "keys": "path_extra_tables"
+        },
+        {
+          "key_type": "laboratory",
+          "keys": "path_extra_tables"
+        },
+        "None"
+      ]
+    },
+    "allow_duplicates": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "allow_duplicates"
+        },
+        "True"
+      ]
+    },
+    "orphan_variables": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "orphan_variables"
+        }
+      ],
+      "fatal": "True"
+    },
+    "too_long_periods": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "too_long_periods"
+        },
+        "list()"
+      ],
+      "fatal": "True"
+    },
+    "CFsubhr_frequency": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "CFsubhr_frequency"
+        },
+        "1ts"
+      ]
+    },
+    "simple_domain_grid_regexp": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "simple_domain_grid_regexp"
+        }
+      ]
+    },
+    "vertical_interpolation_operation": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "vertical_interpolation_operation"
+        },
+        "instant"
+      ]
+    },
+    "vertical_interpolation_sample_freq": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "vertical_interpolation_sample_freq"
+        }
+      ]
+    },
+    "sectors": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "sectors"
+        }
+      ]
+    },
+    "non_standard_axes": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "non_standard_axes"
+        },
+        "dict()"
+      ]
+    },
+    "add_Gibraltar": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "add_Gibraltar"
+        },
+        "False"
+      ]
+    },
+    "grid_policy": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "grid_policy"
+        },
+        "False"
+      ],
+      "fatal": "True"
+    },
+    "allow_tos_3hr_1deg": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "allow_tos_3hr_1deg"
+        },
+        "True"
+      ]
+    },
+    "adhoc_policy_do_add_1deg_grid_for_tos": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "adhoc_policy_do_add_1deg_grid_for_tos"
+        },
+        "False"
+      ]
+    },
+    "fx_from_file": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "fx_from_file"
+        },
+        "list()"
+      ]
+    },
+    "orography_field_name": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "orography_field_name"
+        },
+        "CMIP6_orog"
+      ]
+    },
+    "zg_field_name": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "zg_field_name"
+        },
+        "zg"
+      ]
+    },
+    "print_variables": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "print_variables"
+        },
+        "True"
+      ]
+    },
+    "grids_dev": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "grids_dev"
+        },
+        "dict()"
+      ],
+      "fatal": "True"
+    },
+    "grids": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "grids"
+        }
+      ],
+      "fatal": "True"
+    },
+    "required_model_components": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": [
+            "required_model_components",
+            {
+              "key_type": "internal",
+              "keys": "source_id"
+            }
+          ]
+        },
+        "list()"
+      ],
+      "fatal": "True"
+    },
+    "additional_allowed_model_components": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": [
+            "additional_allowed_model_components",
+            {
+              "key_type": "internal",
+              "keys": "source_id"
+            }
+          ]
+        },
+        "list()"
+      ],
+      "fatal": "True"
+    },
+    "max_split_freq": {
+      "default_values": [
+        {
+          "key_type": "simulation",
+          "keys": "max_split_freq"
+        },
+        {
+          "key_type": "laboratory",
+          "keys": "max_split_freq"
+        },
+        "None"
+      ],
+      "fatal": "True"
+    },
+    "dr2xml_manages_enddate": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "dr2xml_manages_enddate"
+        },
+        "True"
+      ],
+      "fatal": "True"
+    },
+    "non_standard_attributes": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "non_standard_attributes"
+        },
+        "dict()"
+      ]
+    },
     "allow_duplicates_in_same_table": {
       "default_values": [
         {
@@ -67,51 +740,71 @@
       ],
       "fatal": "True"
     },
-    "use_union_zoom": {
+    "special_timestep_vars": {
       "default_values": [
         {
           "key_type": "laboratory",
-          "keys": "use_union_zoom"
+          "keys": "special_timestep_vars"
+        },
+        "list()"
+      ]
+    },
+    "useAtForInstant": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "useAtForInstant"
         },
         "False"
-      ],
-      "fatal": "True"
+      ]
     },
-    "grid_policy": {
+    "bypass_CV_components": {
       "default_values": [
         {
-          "key_type": "laboratory",
-          "keys": "grid_policy"
+          "key_type": "simulation",
+          "keys": "bypass_CV_components"
         },
         "False"
-      ],
-      "fatal": "True"
+      ]
     },
-    "ping_variables_prefix": {
+    "data_request_used": {
       "default_values": [
         {
           "key_type": "laboratory",
-          "keys": "ping_variables_prefix"
-        }
-      ],
-      "fatal": "True"
+          "keys": "data_request_used"
+        },
+        "CMIP6"
+      ]
     },
-    "source_id": {
+    "save_project_settings": {
+      "default_values": [
+        {
+          "key_type": "laboratory",
+          "keys": "save_project_settings"
+        },
+        "None"
+      ]
+    },
+    "perso_sdims_description": {
+      "default_values": [
+        {
+          "key_type": "simulation",
+          "keys": "perso_sdims_description"
+        },
+        "dict()"
+      ]
+    },
+    "realms_per_context": {
       "default_values": [
         {
           "key_type": "laboratory",
           "keys": [
-            "configurations",
+            "realms_per_context",
             {
-              "key_type": "simulation",
-              "keys": "configuration"
-            },
-            0
+              "key_type": "internal",
+              "keys": "context"
+            }
           ]
-        },
-        {
-          "key_type": "simulation",
-          "keys": "source_id"
         }
       ],
       "fatal": "True"
@@ -123,7 +816,7 @@
           "keys": [
             "configurations",
             {
-              "key_type": "simulation",
+              "key_type": "internal",
               "keys": "configuration"
             },
             1
@@ -138,141 +831,42 @@
           "keys": [
             "source_types",
             {
-              "key_type": "common",
+              "key_type": "internal",
               "keys": "source_id"
             }
           ]
         }
       ],
       "fatal": "True"
-    },
-    "experiment_id": {
+    }
+  },
+  "__common_values__": {
+    "prefix": {
       "default_values": [
         {
-          "key_type": "simulation",
-          "keys": "experiment_id"
+          "key_type": "dict",
+          "keys": "prefix"
         }
       ],
       "fatal": "True"
     },
-    "grid_choice": {
+    "year": {
       "default_values": [
         {
-          "key_type": "laboratory",
-          "keys": [
-            "grid_choice",
-            {
-              "key_type": "common",
-              "keys": "source_id"
-            }
-          ]
+          "key_type": "dict",
+          "keys": "year"
         }
       ],
       "fatal": "True"
     },
-    "grids": {
+    "root": {
       "default_values": [
         {
-          "key_type": "laboratory",
-          "keys": [
-            "grids",
-            {
-              "key_type": "common",
-              "keys": "grid_choice"
-            },
-            {
-              "key_type": "common",
-              "keys": "context"
-            }
-          ]
+          "key_type": "dict",
+          "keys": "root"
         }
       ],
       "fatal": "True"
-    },
-    "grids_dev": {
-      "default_values": [
-        {
-          "key_type": "laboratory",
-          "keys": "grids_dev"
-        },
-        "dict()"
-      ],
-      "fatal": "True"
-    },
-    "required_model_components": {
-      "default_values": [
-        {
-          "key_type": "laboratory",
-          "keys": [
-            "required_model_components",
-            {
-              "key_type": "common",
-              "keys": "source_id"
-            }
-          ]
-        },
-        "list()"
-      ],
-      "fatal": "True"
-    },
-    "additional_allowed_model_components": {
-      "default_values": [
-        {
-          "key_type": "laboratory",
-          "keys": [
-            "additional_allowed_model_components",
-            {
-              "key_type": "common",
-              "keys": "source_id"
-            }
-          ]
-        },
-        "list()"
-      ],
-      "fatal": "True"
-    },
-    "max_split_freq": {
-      "default_values": [
-        {
-          "key_type": "simulation",
-          "keys": "max_split_freq"
-        },
-        {
-          "key_type": "laboratory",
-          "keys": "max_split_freq"
-        },
-        "None"
-      ],
-      "fatal": "True"
-    },
-    "too_long_periods": {
-      "default_values": [
-        {
-          "key_type": "laboratory",
-          "keys": "too_long_periods"
-        },
-        "list()"
-      ],
-      "fatal": "True"
-    },
-    "dr2xml_manages_enddate": {
-      "default_values": [
-        {
-          "key_type": "laboratory",
-          "keys": "dr2xml_manages_enddate"
-        },
-        "True"
-      ],
-      "fatal": "True"
-    },
-    "non_standard_attributes": {
-      "default_values": [
-        {
-          "key_type": "laboratory",
-          "keys": "non_standard_attributes"
-        },
-        "dict()"
-      ]
     }
   },
   "context": {},

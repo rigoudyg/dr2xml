@@ -1,9 +1,63 @@
 {
-  "parent_project_settings": "CMIP6",
-  "__common_values__": {
+  "parent_project_settings": "basic",
+  "__internal_values__": {
     "required_model_components": {
       "default_values": [
         "list()"
+      ]
+    },
+    "additional_allowed_model_components": {
+      "default_values": [
+        "list()"
+      ]
+    }
+  },
+  "__common_values__": {
+    "conventions_version": {
+      "default_values": [
+        {
+          "key_type": "config",
+          "keys": "CMIP6_conventions_version"
+        }
+      ]
+    },
+    "HDL": {
+      "default_values": [
+        {
+          "key_type": "simulation",
+          "keys": "HDL"
+        },
+        {
+          "key_type": "laboratory",
+          "keys": "HDL"
+        },
+        "21.14103"
+      ]
+    },
+    "variant_label": {
+      "default_values": [
+        {
+          "key_type": "combine",
+          "keys": [
+            {
+              "key_type": "internal",
+              "keys": "realization_index"
+            },
+            {
+              "key_type": "common",
+              "keys": "initialization_index"
+            },
+            {
+              "key_type": "common",
+              "keys": "physics_index"
+            },
+            {
+              "key_type": "common",
+              "keys": "forcing_index"
+            }
+          ],
+          "fmt": "r{}i{}p{}f{}"
+        }
       ]
     },
     "CORDEX_domain": {
@@ -13,16 +67,11 @@
           "keys": [
               "CORDEX_domain",
               {
-                "key_type": "common",
+                "key_type": "internal",
                 "keys": "context"
               }
             ]
         }
-      ]
-    },
-    "additional_allowed_model_components": {
-      "default_values": [
-        "list()"
       ]
     },
     "driving_model_id": {
@@ -90,7 +139,30 @@
       ]
     }
   },
+  "context": {
+    "attrs_list": ["id"],
+    "comments_list": ["DR_version", "CV_version", "conventions_version", "dr2xml_version", "lab_settings",
+      "simulation_settings", "year"],
+    "comments_constraints": {
+      "CV_version": {
+        "default_values": ["CMIP6-CV version ??"]
+      },
+      "conventions_version": {
+        "default_values": [
+          {
+            "key_type": "common",
+            "keys": "conventions_version",
+            "fmt": "CMIP6_conventions_version {}"
+          }
+        ]
+      }
+    }
+  },
   "file_output": {
+    "attrs_list": ["id", "name", "output_freq", "append", "output_level", "compression_level", "split_freq",
+      "split_freq_format", "split_start_offset", "split_end_offset", "split_last_date", "time_units",
+      "time_counter_name", "time_counter", "time_stamp_name", "time_stamp_format", "uuid_name", "uuid_format",
+      "convention_str"],
     "attrs_constraints": {
       "name":{
         "default_values": [
@@ -108,7 +180,7 @@
                   "keys": "prefix"
                 },
                 "source_id": {
-                  "key_type": "common",
+                  "key_type": "internal",
                   "keys": "source_id"
                 },
                 "expid_in_filename": {
@@ -163,17 +235,119 @@
         "fatal": "True"
       }
     },
-    "vars_list": ["activity_id", "contact", "data_specs_version", "dr2xml_version", "expid_in_filename", "description",
-      "title_desc", "experiment", "external_variables", "forcing_index", "frequency", "further_info_url", "grid",
-      "grid_label", "nominal_resolution", "comment", "history", "initialization_index", "CORDEX_domain",
-      "driving_model_id", "driving_model_ensemble_member", "driving_experiment_name", "driving_experiment",
+    "vars_list": ["activity_id", "contact", "data_specs_version", "dr2xml_version", "expid_in_filename",
+      "frequency", "grid", "grid_label", "nominal_resolution", "comment", "history", "CORDEX_domain",
+      "driving_model_id", "driving_experiment_name", "driving_experiment",
       "Lambert_conformal_longitude_of_central_meridian", "Lambert_conformal_standard_parallel",
-      "Lambert_conformal_latitude_of_projection_origin", "institution_id", "institution", "license", "mip_era",
+      "Lambert_conformal_latitude_of_projection_origin", "institution_id", "institution",
       "parent_experiment_id", "parent_mip_era", "parent_activity_id", "parent_source_id", "parent_time_units",
-      "parent_variant_label", "branch_method", "branch_time_in_parent", "branch_time_in_child", "physics_index",
-      "product", "realization_index", "realm", "reference", "source", "source_id", "source_type", "sub_experiment_id",
-      "sub_experiment", "table_id", "title", "variable_id", "variant_info", "variant_label"],
+      "parent_variant_label", "branch_method", "branch_time_in_parent", "branch_time_in_child",
+      "product", "realization_index", "realm", "source", "source_id", "sub_experiment_id",
+      "sub_experiment", "table_id", "title", "variable_id"],
     "vars_constraints": {
+      "comment": {
+        "skip_values": [""],
+        "cases": [
+          [
+            [
+              [
+                {
+                  "key_type": "variable",
+                  "keys": "comments"
+                },
+                "neq",
+                "None"
+              ]
+            ],
+            {
+              "key_type": "combine",
+              "keys": [
+                {
+                  "key_type": "common",
+                  "keys": "comment_lab"
+                },
+                {
+                  "key_type": "common",
+                  "keys": "comment_sim"
+                },
+                {
+                  "key_type": "variable",
+                  "keys": "comments"
+                }
+              ],
+              "fmt": "{}{}{}"
+            }
+          ]
+        ],
+        "default_values": [
+          {
+            "key_type": "combine",
+            "keys": [
+              {
+                "key_type": "common",
+                "keys": "comment_lab"
+              },
+              {
+                "key_type": "common",
+                "keys": "comment_sim"
+              }
+            ],
+            "fmt": "{}{}"
+          }
+        ]
+      },
+      "variable_id": {
+        "default_values": [
+          {
+            "key_type": "variable",
+            "keys": "mipVarLabel"
+        }
+        ]
+      },
+      "description": {
+        "skip_values": ["", "None"],
+        "default_values": [
+          {
+            "key_type": "common",
+            "keys": "description"
+          }
+        ]
+      },
+      "title_desc": {
+        "skip_values": ["", "None"],
+        "output_key": "title",
+        "default_values": [
+          {
+            "key_type": "common",
+            "keys": "description"
+          }
+        ]
+      },
+      "experiment": {
+        "skip_values": ["", "None"],
+        "default_values": [
+          {
+            "key_type": "common",
+            "keys": "experiment"
+          }
+        ]
+      },
+      "parent_experiment_id": {
+        "default_values": [
+          {
+            "key_type": "common",
+            "keys": "parent_experiment_id"
+          }
+        ]
+      },
+      "parent_activity_id": {
+        "default_values": [
+          {
+            "key_type": "common",
+            "keys": "parent_activity_id"
+          }
+        ]
+      },
       "institution_id": {
         "output_key": "institute_id"
       },
@@ -231,7 +405,7 @@
         "skip_values": ["", "None"],
         "conditions": [
           [{
-            "key_type": "common",
+            "key_type": "internal",
             "keys": "context"
           },
             "eq",
@@ -248,7 +422,7 @@
         "skip_values": ["", "None"],
         "conditions": [
           [{
-            "key_type": "common",
+            "key_type": "internal",
             "keys": "context"
           },
             "eq",
@@ -265,7 +439,7 @@
         "skip_values": ["", "None"],
         "conditions": [
           [{
-            "key_type": "common",
+            "key_type": "internal",
             "keys": "context"
           },
             "eq",
@@ -286,6 +460,8 @@
     }
   },
   "field_output": {
+    "attrs_list": ["field_ref", "name", "grid_ref", "freq_offset", "detect_missing_value", "default_value", "prec",
+      "cell_methods", "cell_methods_mode", "operation", "freq_op", "expr"],
     "attrs_constraints": {
       "cell_methods": {
         "corrections": {
@@ -302,7 +478,7 @@
         ],
         "conditions": [
           [{
-            "key_type": "common",
+            "key_type": "internal",
             "keys": "context"
           },
             "eq",

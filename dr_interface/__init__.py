@@ -7,9 +7,9 @@ Interface between data request and dr2xml
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
-from settings_interface import get_variable_from_lset_with_default
+from settings_interface import get_settings_values
 
-data_request_version = get_variable_from_lset_with_default("data_request_used", "CMIP6")
+data_request_version = get_settings_values("internal", "data_request_used")
 
 
 if data_request_version in ["CMIP6", ]:

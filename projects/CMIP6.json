@@ -1,10 +1,10 @@
 {
   "parent_project_settings": "basic",
-  "__common_values__": {
+  "__internal_values__": {
     "required_model_components": {
       "default_values": [
         {
-          "key_type": "common",
+          "key_type": "internal",
           "keys": [
             "CV_experiment",
             "required_model_components"
@@ -12,22 +12,52 @@
         }
       ]
     },
+    "additional_allowed_model_components": {
+      "default_values": [
+        {
+          "key_type": "internal",
+          "keys": [
+            "CV_experiment",
+            "additional_allowed_model_components"
+          ]
+        }
+      ]
+    },
+    "CV_experiment": {
+      "default_values": [
+        {
+          "key_type": "json",
+          "keys": [
+            "experiment_id",
+            {
+              "key_type": "internal",
+              "keys": "experiment_id"
+            }
+          ],
+          "src": {
+            "key_type": "combine",
+            "keys": [
+              {
+              "key_type": "dict",
+              "keys": "cvspath"
+              },
+              {
+              "key_type": "internal",
+              "keys": "project"
+              }
+            ],
+            "fmt": "{}{}_experiment_id.json"
+          }
+        }
+      ]
+    }
+  },
+  "__common_values__": {
     "conventions_version": {
       "default_values": [
         {
           "key_type": "config",
           "keys": "CMIP6_conventions_version"
-        }
-      ]
-    },
-    "additional_allowed_model_components": {
-      "default_values": [
-        {
-          "key_type": "common",
-          "keys": [
-            "CV_experiment",
-            "additional_allowed_model_components"
-          ]
         }
       ]
     },
@@ -42,7 +72,7 @@
           "keys": "activity_id"
         },
         {
-          "key_type": "common",
+          "key_type": "internal",
           "keys": ["CV_experiment", "activity_id"]
         }
       ]
@@ -66,7 +96,7 @@
           "keys": "activity_id"
         },
         {
-          "key_type": "common",
+          "key_type": "internal",
           "keys": ["CV_experiment", "parent_activity_id"]
         }
       ]
@@ -84,34 +114,6 @@
         "21.14100"
       ]
     },
-    "CV_experiment": {
-      "default_values": [
-        {
-          "key_type": "json",
-          "keys": [
-            "experiment_id",
-            {
-              "key_type": "common",
-              "keys": "experiment_id"
-            }
-          ],
-          "src": {
-            "key_type": "combine",
-            "keys": [
-              {
-              "key_type": "dict",
-              "keys": "cvspath"
-              },
-              {
-              "key_type": "common",
-              "keys": "project"
-              }
-            ],
-            "fmt": "{}{}_experiment_id.json"
-          }
-        }
-      ]
-    },
     "source": {
       "default_values": [
         {
@@ -119,7 +121,7 @@
           "keys": [
             "source_id",
             {
-              "key_type": "common",
+              "key_type": "internal",
               "keys": "source_id"
             }
           ],
@@ -131,7 +133,7 @@
               "keys": "cvspath"
               },
               {
-              "key_type": "common",
+              "key_type": "internal",
               "keys": "project"
               }
             ],
@@ -142,7 +144,7 @@
             "make_source_string",
             {
               "source_id": {
-                "key_type": "common",
+                "key_type": "internal",
                 "keys": "source_id"
               }
             }
@@ -177,7 +179,7 @@
               "keys": "cvspath"
               },
               {
-              "key_type": "common",
+              "key_type": "internal",
               "keys": "project"
               }
             ],
@@ -202,7 +204,7 @@
               "keys": "cvspath"
               },
               {
-              "key_type": "common",
+              "key_type": "internal",
               "keys": "project"
               }
             ],
@@ -222,7 +224,7 @@
           "keys": "parent_experiment_id"
         },
         {
-          "key_type": "common",
+          "key_type": "internal",
           "keys": ["CV_experiment", "parent_experiment_id"]
         }
       ]
@@ -233,7 +235,7 @@
           "key_type": "combine",
           "keys": [
             {
-              "key_type": "common",
+              "key_type": "internal",
               "keys": "realization_index"
             },
             {
@@ -322,7 +324,7 @@
                   "keys": "table_id"
                 },
                 "source_id": {
-                  "key_type": "common",
+                  "key_type": "internal",
                   "keys": "source_id"
                 },
                 "expid_in_filename": {
@@ -386,26 +388,10 @@
               [
                 {
                   "key_type": "variable",
-                  "keys": "modeling_realm"
-                },
-                "eq",
-                "seaIce"
-              ],
-              [
-                {
-                  "key_type": "variable",
-                  "keys": "cell_measures"
-                },
-                "match",
-                ".*areacella.*"
-              ],
-              [
-                {
-                  "key_type": "variable",
-                  "keys": "label"
+                  "keys": "comments"
                 },
                 "neq",
-                "siconca"
+                "None"
               ]
             ],
             {
@@ -418,9 +404,13 @@
                 {
                   "key_type": "common",
                   "keys": "comment_sim"
+                },
+                {
+                  "key_type": "variable",
+                  "keys": "comments"
                 }
               ],
-              "fmt": "{}{}"
+              "fmt": "{}{}{}"
             }
           ]
         ],
@@ -435,10 +425,9 @@
               {
                 "key_type": "common",
                 "keys": "comment_sim"
-              },
-              ". Due an error in DR01.00.21 and to technical constraints, this variable may have attribute cell_measures set to area: areacella, while it actually is area: areacello"
+              }
             ],
-            "fmt": "{}{}{}"
+            "fmt": "{}{}"
           }
         ]
       },
@@ -458,7 +447,7 @@
             "keys": "description"
           },
           {
-            "key_type": "common",
+            "key_type": "internal",
             "keys": ["CV_experiment", "description"]
           }
         ]
@@ -472,7 +461,7 @@
             "keys": "description"
           },
           {
-            "key_type": "common",
+            "key_type": "internal",
             "keys": ["CV_experiment", "description"]
           }
         ]
@@ -485,7 +474,7 @@
             "keys": "experiment"
           },
           {
-            "key_type": "common",
+            "key_type": "internal",
             "keys": ["CV_experiment", "experiment"]
           }
         ]
@@ -519,7 +508,7 @@
                   "keys": "cvspath"
                 },
                 {
-                  "key_type": "common",
+                  "key_type": "internal",
                   "keys": "project"
                 }
               ],
@@ -559,7 +548,7 @@
                 "keys": "institution_id"
               },
               {
-                "key_type": "common",
+                "key_type": "internal",
                 "keys": "source_id"
               },
               {

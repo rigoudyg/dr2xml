@@ -8,6 +8,8 @@ Interface between the CMIP6 Data Request and dr2xml.
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+import re
+
 from dr_interface.definition import Scope as ScopeBasic
 
 
@@ -152,3 +154,11 @@ def correct_data_request_variable(variable):
         variable.cell_measures = ''
     elif variable.cell_measures in ['--OPT', ]:
         variable.cell_measures = ''
+    if variable.long_name is None:
+        variable.long_name = "empty in DR %s" % get_DR_version()
+    if variable.units is None:
+        variable.units = "empty in DR %s" % get_DR_version()
+    if variable.modeling_realm in ["seaIce", ] and re.match(".*areacella.*", str(variable.cell_measures)) \
+            and variable.label not in ["siconca", ]:
+        variable.comments = ". Due an error in DR01.00.21 and to technical constraints, this variable may have " \
+                            "attribute cell_measures set to area: areacella, while it actually is area: areacello"

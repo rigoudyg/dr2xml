@@ -7,10 +7,8 @@ Postprocessing functions
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
-import re
-from collections import OrderedDict
-
 # Utilities
+from settings_interface import get_settings_values
 from utils import Dr2xmlError
 
 # Logger
@@ -19,8 +17,6 @@ from logger import get_logger
 # Global variables and configuration tools
 from config import get_config_variable
 
-# Interface to settings dictionaries
-from settings_interface import get_variable_from_lset_without_default, get_variable_from_lset_with_default
 # Interface to xml tools
 from xml_interface import find_rank_xml_subelement, DR2XMLElement
 
@@ -29,7 +25,7 @@ from analyzer import cmip6_freq_to_xios_freq
 
 # Grids tools
 from grids import is_vert_dim, create_axis_def, create_grid_def, change_domain_in_grid, get_grid_def, \
-    add_scalar_in_grid, change_axes_in_grid
+    add_scalar_in_grid
 
 # XIOS reading and writing tools
 from Xparse import id2grid
@@ -49,6 +45,7 @@ def process_vertical_interpolation(sv, alias, pingvars, src_grid_id, field_defs,
     vertical axis a zoom of the union axis)
     """
     #
+    internal_dict = get_settings_values("internal")
     logger = get_logger()
     vdims = [sd for sd in sv.sdims.values() if is_vert_dim(sd)]
     logger.debug("Check if there is a vertical dimension for %s" % sv.label)
@@ -77,7 +74,7 @@ def process_vertical_interpolation(sv, alias, pingvars, src_grid_id, field_defs,
         return src_grid_id, alias_with_levels
         # raise Dr2xmlError("Finding an alias with levels (%s) in pingfile is unexpected")
     #
-    prefix = get_variable_from_lset_without_default("ping_variables_prefix")
+    prefix = internal_dict["ping_variables_prefix"]
     lwps = sv.label_without_psuffix
     if sv.type in ["perso", "dev"]:
         alias_in_ping = sv.label
@@ -87,13 +84,13 @@ def process_vertical_interpolation(sv, alias, pingvars, src_grid_id, field_defs,
             raise Dr2xmlError("Field id " + alias_in_ping + " expected in pingfile but not found.")
     #
     # Create field alias_for_sampling for enforcing the operation before time sampling
-    operation = get_variable_from_lset_with_default("vertical_interpolation_operation", "instant")
+    operation = internal_dict["vertical_interpolation_operation"]
     alias_for_sampling = alias_in_ping + "_with_" + operation
     # <field id="CMIP6_hus_instant" field_ref="CMIP6_hus" operation="instant" />
     field_defs[alias_for_sampling] = DR2XMLElement(tag="field", id=alias_for_sampling, field_ref=alias_in_ping,
                                                    operation=operation)
     #
-    vert_freq = get_variable_from_lset_without_default("vertical_interpolation_sample_freq")
+    vert_freq = internal_dict["vertical_interpolation_sample_freq"]
     #
     # Construct an axis for interpolating to this vertical dimension
     # e.g. for zoom_case :
@@ -290,6 +287,7 @@ def process_diurnal_cycle(alias, field_defs, grid_defs, axis_defs):
 
 def process_levels_over_orog(sv, alias, pingvars, src_grid_id, field_defs, axis_defs, grid_defs, domain_defs,
                              scalar_defs, table):
+    internal_dict = get_settings_values("internal")
     logger = get_logger()
     vdims = [sd for sd in sv.sdims.values() if is_vert_dim(sd)]
     if len(vdims) == 1:
@@ -312,14 +310,14 @@ def process_levels_over_orog(sv, alias, pingvars, src_grid_id, field_defs, axis_
     else:
         context_index = get_config_variable("context_index")
         # Check that the ping alias exists
-        alias_in_ping = get_variable_from_lset_without_default("ping_variables_prefix") + sv.ref_var
+        alias_in_ping = internal_dict["ping_variables_prefix"] + sv.ref_var
         if alias_in_ping not in pingvars:  # e.g. alias_in_ping='CMIP6_hus'
             raise Dr2xmlError("Field id " + alias_in_ping + " expected in pingfile but not found.")
         # Find out if the height over orog field is already defined
         height_over_orog_field_name = "height_over_orog"
         if height_over_orog_field_name not in context_index:
             # Find out what is the name of the orography field and check that it is defined
-            orography_field_name = get_variable_from_lset_with_default("orography_field_name", "CMIP6_orog")
+            orography_field_name = internal_dict["orography_field_name"]
             if orography_field_name not in context_index:
                 raise KeyError("%s must have been defined in field_def" % orography_field_name)
             orography_defs = context_index[orography_field_name]
@@ -375,7 +373,7 @@ def process_levels_over_orog(sv, alias, pingvars, src_grid_id, field_defs, axis_
             orog_with_duplicate_def = DR2XMLElement(tag="field", id=orog_with_duplicate_id,
                                                     field_ref=orography_field_name, grid_ref=hlev_grid_id)
             field_defs[orog_with_duplicate_id] = orog_with_duplicate_def
-            zg_field_id = get_variable_from_lset_with_default("zg_field_name", "zg")
+            zg_field_id = internal_dict["zg_field_name"]
             height_over_orog_field_def = DR2XMLElement(tag="field",
                                                        text="{} - {}".format(zg_field_id, orog_with_duplicate_id),
                                                        id=height_over_orog_field_name, grid_ref=src_grid_id)

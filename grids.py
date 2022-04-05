@@ -7,14 +7,12 @@ Grids general tools.
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
-from six import string_types
 from functools import reduce
-from collections import OrderedDict
 
 import re
-import six
 
 # Utilities
+from settings_interface import get_settings_values
 from utils import Dr2xmlError
 
 # Logger
@@ -23,9 +21,6 @@ from logger import get_logger
 # Global variables and configuration tools
 from config import get_config_variable
 
-# Interface to settings dictionaries
-from settings_interface import get_variable_from_lset_without_default, get_variable_from_lset_with_default, \
-    is_key_in_lset
 # Interface to Data Request
 from dr_interface import get_list_of_elements_by_id, get_element_uid
 # Interface to xml tools
@@ -64,7 +59,7 @@ def guess_simple_domain_grid_def(grid_id):
     domain_name in grid_id. Second item is group number
     """
     logger = get_logger()
-    regexp = get_variable_from_lset_without_default("simple_domain_grid_regexp")
+    regexp = get_settings_values("internal", "simple_domain_grid_regexp")
     domain_id, n = re.subn(regexp[0], r'\%d' % regexp[1], grid_id)
     if n != 1:
         raise Dr2xmlError("Cannot identify domain name in grid_id %s using regexp %s" % (grid_id, regexp[0]))
@@ -123,7 +118,8 @@ def create_axis_def(sdim, axis_defs, field_defs, pingvars):
 
     """
     logger = get_logger()
-    prefix = get_variable_from_lset_without_default("ping_variables_prefix")
+    internal_dict = get_settings_values("internal")
+    prefix = internal_dict["ping_variables_prefix"]
     # nbre de valeurs de l'axe determine aussi si on est en dim singleton
     if sdim.requested:
         glo_list = sdim.requested.strip(" ").split()
@@ -158,14 +154,14 @@ def create_axis_def(sdim, axis_defs, field_defs, pingvars):
             raise Dr2xmlError("Could not find coordinate variable %s in pingfile." % coordname)
         #
         # Create an intermediate field for coordinate , just adding time sampling
-        operation = get_variable_from_lset_with_default("vertical_interpolation_operation", "instant")
+        operation = internal_dict["vertical_interpolation_operation"]
         coordname_with_op = coordname + "_" + operation  # e.g. CMIP6_pfull_instant
         coorddef_op = DR2XMLElement(tag="field", id=coordname_with_op, field_ref=coordname, detect_missing_value="true",
                                     operation=operation)
         field_defs[coordname_with_op] = coorddef_op
         #
         # Create and store a definition for time-sampled field for the vertical coordinate
-        vert_frequency = get_variable_from_lset_without_default("vertical_interpolation_sample_freq")
+        vert_frequency = internal_dict["vertical_interpolation_sample_freq"]
         coordname_sampled = coordname_with_op + "_sampled_" + vert_frequency  # e.g. CMIP6_pfull_instant_sampled_3h
         axis_xml.append(DR2XMLElement(tag="interpolate_axis", type="polynomial", order="1",
                                       coordinate=coordname_sampled))
@@ -252,6 +248,7 @@ def change_axes_in_grid(grid_id, grid_defs, axis_defs):
     Stores the definitions in GRID_DEFS and AXIS_DEFS
     Returns the new grid_id
     """
+    internal_dict = get_settings_values("internal")
     global axis_count
     logger = get_logger()
     grid_def_init = get_grid_def(grid_id, grid_defs)
@@ -261,15 +258,12 @@ def change_axes_in_grid(grid_id, grid_defs, axis_defs):
     # print "in change_axis for %s "%(grid_id)
 
     # Get settings info about axes normalization
-    aliases = get_variable_from_lset_with_default('non_standard_axes', OrderedDict())
+    aliases = internal_dict['non_standard_axes']
 
     # Add cases where dim name 'sector' should be used,if needed
     # sectors = dims which have type charcter and are not scalar
-    if is_key_in_lset('sectors'):
-        sectors = get_variable_from_lset_without_default('sectors')
-    else:
-        sectors = [dim.label for dim in get_list_of_elements_by_id('grids').items if dim.type in ['character', ]
-                   and dim.value in ['', ]]
+    sectors = internal_dict.get("sectors", [dim.label for dim in get_list_of_elements_by_id('grids').items
+                                            if dim.type in ['character', ] and dim.value in ['', ]])
     sectors = sorted(list(set(sectors) - set(["typewetla", ]))) # Error in DR 01.00.21
     for sector in sectors:
         if not any([sector in [aliases[aid], aliases[aid][0]] for aid in aliases]):
@@ -352,7 +346,7 @@ def create_axis_from_dim(dim, labels, axis_ref, axis_defs):
         dim_name = dim.altLabel
         if labels is None:
             labels = dim.requested
-        if dim.label == "oline" and get_variable_from_lset_with_default('add_Gibraltar', False):
+        if dim.label == "oline" and get_settings_values("internal", 'add_Gibraltar'):
             labels += " gibraltar"
         labels = labels.replace(', ', ' ').replace(',', ' ')
         length = len(labels.split())

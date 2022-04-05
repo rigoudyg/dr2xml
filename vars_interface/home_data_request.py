@@ -12,7 +12,7 @@ from collections import defaultdict
 
 from config import get_config_variable, set_config_variable
 from logger import get_logger
-from settings_interface import get_variable_from_sset_else_lset_with_default
+from settings_interface import get_settings_values
 from utils import VarsError
 from vars_interface.vars_type.cmor import read_home_var_cmor, check_cmor_variable
 from vars_interface.vars_type.dev import read_home_var_dev, check_dev_variable
@@ -98,9 +98,10 @@ def process_home_vars(mip_vars_list, mips, expid="False"):
 	:return:
 	"""
 	logger = get_logger()
+	internal_dict = get_settings_values("internal")
 	# Read HOME variables
-	homevars = get_variable_from_sset_else_lset_with_default('listof_home_vars', default=None)
-	path_extra_tables = get_variable_from_sset_else_lset_with_default('path_extra_tables', default=None)
+	homevars = internal_dict['listof_home_vars']
+	path_extra_tables = internal_dict['path_extra_tables']
 	logger.info("homevars file: %s" % homevars)
 	home_vars_list = read_home_vars_list(homevars, expid, mips, path_extra_tables)
 	logger.info("homevars list: %s" % " ".join([sv.label for sv in home_vars_list]))

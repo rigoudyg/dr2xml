@@ -11,14 +11,13 @@ from collections import OrderedDict, defaultdict
 from io import open
 
 # Utilities
+from settings_interface import get_settings_values
 from utils import Dr2xmlGridError
 
 # Logger
 from logger import get_logger
 
-# Interface to settings dictionaries
-from settings_interface import get_variable_from_lset_with_default, get_variable_from_lset_without_default, \
-    get_variable_from_sset_else_lset_with_default
+# Interface to configuration
 from config import get_config_variable, set_config_variable
 
 
@@ -30,9 +29,7 @@ def read_splitfreqs():
     splitfreqs = get_config_variable("splitfreqs", to_change=True)
     # No need to reread or try for ever
     if splitfreqs is None:
-        splitfile = get_variable_from_sset_else_lset_with_default(key_sset="split_frequencies",
-                                                                  key_lset="split_frequencies",
-                                                                  default="splitfreqs.dat")
+        splitfile = get_settings_values("internal", "split_frequencies")
         try:
             freq = open(splitfile, "r")
             print("Reading split_freqs from file %s" % splitfile)
@@ -92,6 +89,7 @@ def split_frequency_for_variable(svar, grid, mcfg, context):
 
     """
     logger = get_logger()
+    internal_settings = get_settings_values("internal")
     splitfreqs = get_config_variable("splitfreqs")
     if splitfreqs is None:
         read_splitfreqs()
@@ -100,10 +98,10 @@ def split_frequency_for_variable(svar, grid, mcfg, context):
         return splitfreqs[svar.label][svar.mipTable]
     else:
         #
-        max_size = get_variable_from_lset_with_default("max_file_size_in_floats", 500 * 1.e6)
+        max_size = internal_settings["max_file_size_in_floats"]
         #
         compression_factor = get_config_variable("compression_factor")
-        size = field_size(svar, mcfg) * get_variable_from_lset_with_default("bytes_per_float", 2)
+        size = field_size(svar, mcfg) * internal_settings["bytes_per_float"]
         if compression_factor is None:
             read_compression_factors()
             compression_factor = get_config_variable("compression_factor")
@@ -120,7 +118,7 @@ def split_frequency_for_variable(svar, grid, mcfg, context):
 
         if size != 0:
             freq = svar.frequency
-            sts = get_variable_from_lset_without_default("sampling_timestep", grid, context)
+            sts = internal_settings["sampling_timestep"][grid][context]
             # Try by years first
             size_per_year = size * timesteps_per_freq_and_duration(freq, 365, sts)
             nbyears = max_size / float(size_per_year)
@@ -209,12 +207,12 @@ def timesteps_per_freq_and_duration(freq, nbdays, sampling_tstep):
     if duration != 0.:
         return float(nbdays) / duration
     # Otherwise , return a sensible value
-    elif freq == "fx":
+    elif freq in ["fx", ]:
         return 1.
     # elif freq=="monClim" : return (int(float(nbdays)/365) + 1)* 12.
     # elif freq=="dayClim" : return (int(float(nbdays)/365) + 1)* 365.
     # elif freq=="1hrClimMon" : return (int(float(nbdays)/31) + 1) * 24.
-    elif freq == "1hrCM":
+    elif freq in ["1hrCM", ]:
         return (int(float(nbdays) / 31) + 1) * 24.
     else:
         raise Dr2xmlGridError("Frequency %s is not handled" % freq)
@@ -251,81 +249,63 @@ def field_size(svar, mcfg):
     #
     siz = 0
     s = svar.spatial_shp
-    if s == "XY-A":  # Global field on model atmosphere levels
+    if s in ["XY-A", ]:  # Global field on model atmosphere levels
         siz = atm_nblev * atm_grid_size
-    elif s == "XY-AH":  # Global field on model atmosphere half-levels
+    elif s in ["XY-AH", ]:  # Global field on model atmosphere half-levels
         siz = (atm_nblev + 1) * atm_grid_size
-    elif s == "na-AH":  # profile on model atmosphere half-levels
+    elif s in ["na-AH", ]:  # profile on model atmosphere half-levels
         siz = atm_nblev + 1
-    elif s[0:4] == "XY-P":  # Global field (pressure levels)
+    elif s.stratswith("XY-P"):  # Global field (pressure levels)
         if "jpdftaure" in svar.label:
             siz = atm_grid_size
         else:
             siz = atm_grid_size * svar.other_dims_size
-    elif s[0:4] in ["XY-H", "XY-HG"]:  # Global field (altitudes)
+    elif s.startswith("XY-H") or s.startswith("XY-HG"):  # Global field (altitudes)
         siz = atm_grid_size * svar.other_dims_size
-    elif s == "S-AH":  # Atmospheric profiles (half levels) at specified sites
+    elif s in ["S-AH", ]:  # Atmospheric profiles (half levels) at specified sites
         siz = (atm_nblev + 1) * nb_cosp_sites
-    elif s == "S-A":  # Atmospheric profiles at specified sites
+    elif s in ["S-A", ]:  # Atmospheric profiles at specified sites
         siz = atm_nblev * nb_cosp_sites
-    elif s == "S-na":  # Site (129 specified sites)
+    elif s in ["S-na", ]:  # Site (129 specified sites)
         siz = nb_cosp_sites
-
-    elif s == "L-na":  # COSP curtain
+    elif s in ["L-na", ]:  # COSP curtain
         siz = nb_curtain_sites
-    elif s == "L-H40":  # Site profile (at 40 altitudes)
+    elif s in ["L-H40", ]:  # Site profile (at 40 altitudes)
         siz = nb_curtain_sites * svar.other_dims_size
-
-    elif s == "Y-P19":  # Atmospheric Zonal Mean (on 19 pressure levels)
+    elif s in ["Y-P19", "Y-P39"]:  # Atmospheric Zonal Mean (on ... pressure levels)
         siz = nb_lat * svar.other_dims_size
-    elif s == "Y-P39":  # Atmospheric Zonal Mean (on 39 pressure levels)
-        siz = nb_lat * svar.other_dims_size
-
-    elif s == "Y-A":  # Zonal mean (on model levels)
+    elif s in ["Y-A", ]:  # Zonal mean (on model levels)
         siz = nb_lat * atm_nblev
-    elif s == "Y-na":  # Zonal mean (on surface)
+    elif s in ["Y-na", ]:  # Zonal mean (on surface)
         siz = nb_lat
-    elif s == "na-A":  # Atmospheric profile (model levels)
+    elif s in ["na-A", ]:  # Atmospheric profile (model levels)
         # mpmoine_correction:field_size: 'na-A' s'applique a des dims (alevel)+spectband mais aussi a (alevel,site)
         # => *nb_cosp_sites
         siz = atm_nblev * nb_cosp_sites
-
-    elif s == "XY-S":  # Global field on soil levels
+    elif s in ["XY-S", ]:  # Global field on soil levels
         siz = soil_nblev * atm_grid_size
-
-    elif s == "XY-SN":  # TBD : restore correct size for fields on snow levels (was supposed to be size 1, for tsnl)
+    elif s in ["XY-SN", ]:  # TBD : restore correct size for fields on snow levels (was supposed to be size 1, for tsnl)
         siz = atm_grid_size
-
-    elif s == "XY-O":  # Global ocean field on model levels
+    elif s in ["XY-O", ]:  # Global ocean field on model levels
         siz = oce_nblev * oce_grid_size
-
-    elif s == "XY-na":  # Global field (single level)
+    elif s == ["XY-na", ]:  # Global field (single level)
         siz = atm_grid_size
         if svar.modeling_realm in ['ocean', 'seaIce', 'ocean seaIce', 'ocnBgchem', 'seaIce ocean']:
             siz = oce_grid_size
         siz *= svar.other_dims_size
-    elif s == "XY-temp":  # Global field (lidar_temp)
+    elif s in ["XY-temp", ]:  # Global field (lidar_temp)
         siz = atm_grid_size * nb_lidar_temp
-    elif s == "XY-sza5":  # Global field (parasol_refl)
+    elif s in ["XY-sza5", ]:  # Global field (parasol_refl)
         siz = atm_grid_size * nb_parasol_refl
-    elif s == "XY-tau|plev7c":  # Global field (isccp_tau x isccp_pc)
+    elif s in ["XY-tau|plev7c", ]:  # Global field (isccp_tau x isccp_pc)
         siz = atm_grid_size * nb_isccp_tau * nb_isccp_pc
-
-    elif s == "YB-R":  # Ocean Basin Meridional Section (on density surfaces)
+    elif s in ["YB-R", "YB-O", "GYB-O"]:  # Ocean Basin Meridional Section (on density surfaces for first one)
         siz = oce_nblev * nb_lat_ocean
-    elif s == "YB-O":  # Ocean Basin Meridional Section
-        siz = oce_nblev * nb_lat_ocean
-    elif s == "GYB-O":  # Ocean Basin Meridional Section
-        siz = oce_nblev * nb_lat_ocean
-    elif s == "YB-na":  # Ocean Basin Zonal Mean
+    elif s in ["YB-na", ]:  # Ocean Basin Zonal Mean
         siz = nb_lat_ocean
-
-    elif s == "TR-na":  # Ocean Transect
+    elif s in ["TR-na", "TRS-na"]:  # Ocean Transect or Sea-ice ocean transect
         siz = svar.other_dims_size
-    elif s == "TRS-na":  # Sea-ice ocean transect
-        siz = svar.other_dims_size
-
-    elif s == "na-na":  # Global mean/constant
+    elif s in ["na-na", ]:  # Global mean/constant
         siz = 1
 
     if siz == 0:

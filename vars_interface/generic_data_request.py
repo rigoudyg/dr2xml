@@ -12,10 +12,8 @@ from collections import defaultdict, OrderedDict
 from dr_interface import get_scope, get_element_uid, get_experiment_label, get_request_by_id_by_sect
 from grids_selection import decide_for_grids
 from logger import get_logger
-from settings_interface import get_variable_from_sset_else_lset_without_default, get_variable_from_lset_without_default, \
-    get_source_id_and_type, get_variable_from_lset_with_default, get_variable_from_sset_with_default_in_sset, \
-    get_variable_from_sset_without_default, get_variable_from_sset_else_lset_with_default, \
-    get_variable_from_sset_with_default, is_key_in_lset, is_key_in_sset, is_sset_not_None
+from settings_interface import get_settings_values
+from settings_interface.py_settings_interface import is_sset_not_None
 from utils import print_struct, Dr2xmlError
 from vars_interface.definitions import SimpleCMORVar
 from vars_interface.vars_type.generic import complement_svar_using_cmorvar
@@ -24,7 +22,6 @@ from vars_interface.vars_type.generic import complement_svar_using_cmorvar
 rls_for_all_experiments = None
 global_rls = None
 sn_issues = OrderedDict()
-
 
 
 def select_data_request_CMORvars_for_lab(sset=False, year=None):
@@ -47,22 +44,22 @@ def select_data_request_CMORvars_for_lab(sset=False, year=None):
 
     """
     logger = get_logger()
+    internal_settings = get_settings_values("internal")
     # From MIPS set to Request links
     global global_rls, grid_choice, rls_for_all_experiments, sn_issues
     if sset:
-        tierMax = get_variable_from_sset_else_lset_without_default('tierMax')
+        tierMax = internal_settings['tierMax']
     else:
-        tierMax = get_variable_from_lset_without_default('tierMax')
+        tierMax = internal_settings['tierMax_lset']
     sc = get_scope(tierMax)
     # Set sizes for lab settings, if available (or use CNRM-CM6-1 defaults)
     if sset:
-        source, source_type = get_source_id_and_type()
-        grid_choice = get_variable_from_lset_without_default("grid_choice", source)
-        mips_list = set(get_variable_from_lset_without_default('mips', grid_choice))
-        sizes = get_variable_from_lset_without_default("sizes", grid_choice)
+        grid_choice = internal_settings["grid_choice"]
+        mips_list = set(internal_settings['mips'][grid_choice])
+        sizes = internal_settings["sizes"]
         sc.mcfg = sc.build_mcfg(sizes)
     else:
-        mip_list_by_grid = get_variable_from_lset_without_default('mips')
+        mip_list_by_grid = internal_settings["mips"]
         mips_list = set().union(*[set(mip_list_by_grid[grid]) for grid in mip_list_by_grid])
         grid_choice = "LR"
     # Sort mip_list for reproducibility
@@ -74,11 +71,11 @@ def select_data_request_CMORvars_for_lab(sset=False, year=None):
         logger.info("Number of Request Links which apply to MIPS %s  is: %d" %
                     (print_struct(mips_list), len(rls_for_mips)))
         #
-        excluded_links = get_variable_from_lset_with_default("excluded_request_links", [])
+        excluded_links = internal_settings["excluded_request_links"]
         rls_for_mips = [rl for rl in rls_for_mips  if is_elt_applicable(rl, attribute="label", excluded=excluded_links)]
         logger.info("Number of Request Links after filtering by excluded_request_links is: %d" % len(rls_for_mips))
         #
-        inclinks = get_variable_from_lset_with_default("included_request_links", [])
+        inclinks = internal_settings["included_request_links"]
         if len(inclinks) > 0:
             excluded_rls = [rl for rl in rls_for_mips
                             if not is_elt_applicable(rl, attribute="label", included=inclinks)]
@@ -91,7 +88,7 @@ def select_data_request_CMORvars_for_lab(sset=False, year=None):
         rls_for_mips = sorted(rls_for_all_experiments, key=lambda x: x.label)
     #
     if sset:
-        experiment_id = get_variable_from_sset_with_default_in_sset('experiment_for_requests', 'experiment_id')
+        experiment_id = internal_settings["experiment_for_requests"]
         exp = get_element_uid(get_experiment_label(experiment_id))
         logger.info("Filtering for experiment %s, covering years [ %s , %s ] in DR" %
                     (experiment_id, exp.starty, exp.endy))
@@ -106,7 +103,7 @@ def select_data_request_CMORvars_for_lab(sset=False, year=None):
 
         rls = filtered_rls
         logger.info("Number of Request Links which apply to experiment %s member %s and MIPs %s is: %d" %
-                    (experiment_id, get_variable_from_sset_without_default('realization_index'),
+                    (experiment_id, internal_settings['realization_index'],
                      print_struct(mips_list), len(rls)))
     # print "Request links that apply :"+`[ rl.label for rl in filtered_rls ]`
     else:
@@ -119,9 +116,9 @@ def select_data_request_CMORvars_for_lab(sset=False, year=None):
     # miprl_vars=sc.varsByRql(miprl_ids, pmax=lset['max_priority'])
 
     if sset:
-        pmax = get_variable_from_sset_else_lset_without_default('max_priority')
+        pmax = internal_settings['max_priority']
     else:
-        pmax = get_variable_from_lset_without_default('max_priority')
+        pmax = internal_settings['max_priority_lset']
 
     miprl_vars_grids = set()
 
@@ -142,22 +139,42 @@ def select_data_request_CMORvars_for_lab(sset=False, year=None):
     miprl_vars_grids = sorted(list(miprl_vars_grids))
     logger.info('Number of (CMOR variable, grid) pairs for these requestLinks is :%s' % len(miprl_vars_grids))
 
-    exctab = get_variable_from_lset_with_default("excluded_tables", list())
-    excvars = get_variable_from_lset_with_default('excluded_vars', list())
-    excpairs = get_variable_from_lset_with_default('excluded_pairs', list())
+    exctab = internal_settings["excluded_tables_lset"]
+    if not isinstance(exctab, list):
+        exctab = [exctab, ]
+    excvars = internal_settings['excluded_vars_lset']
+    if not isinstance(excvars, list):
+        excvars = [excvars, ]
+    excpairs = internal_settings['excluded_pairs_lset']
+    if not isinstance(excpairs, list):
+        excpairs = [excpairs, ]
     if sset:
-        inctab = get_variable_from_sset_else_lset_with_default("included_tables", default=list())
-        exctab.extend(get_variable_from_sset_with_default("excluded_tables", list()))
-        incvars = get_variable_from_sset_else_lset_with_default("included_vars", default=list())
-        excvars.extend(get_variable_from_sset_with_default('excluded_vars', list()))
-        config = get_variable_from_sset_without_default('configuration')
-        if (is_key_in_lset('excluded_vars_per_config')) and \
-                (config in get_variable_from_lset_without_default('excluded_vars_per_config')):
-            excvars.extend(get_variable_from_lset_without_default('excluded_vars_per_config', config))
-        excpairs.extend(get_variable_from_sset_with_default('excluded_pairs', list()))
+        inctab = internal_settings["included_tables"]
+        if not isinstance(inctab, list):
+            inctab = [inctab, ]
+        exctab.extend(internal_settings["excluded_tables_sset"])
+        incvars = internal_settings["included_vars"]
+        if not isinstance(incvars, list):
+            incvars = [incvars, ]
+        excvars_sset = internal_settings['excluded_vars_sset']
+        if not isinstance(excvars_sset, list):
+            excvars_sset = [excvars_sset, ]
+        excvars.extend(excvars_sset)
+        excvars_config = internal_settings['excluded_vars_per_config']
+        if not isinstance(excvars_config, list):
+            excvars_config = [excvars_config, ]
+        excvars.extend(excvars_config)
+        excpairs_sset = internal_settings['excluded_pairs_sset']
+        if not isinstance(excpairs_sset, list):
+            excpairs_sset = [excpairs_sset, ]
+        excpairs.extend(excpairs_sset)
     else:
-        inctab = get_variable_from_lset_with_default("included_tables", list())
-        incvars = get_variable_from_lset_with_default('included_vars', list())
+        inctab = internal_settings["included_tables_lset"]
+        if not isinstance(inctab, list):
+            inctab = [inctab, ]
+        incvars = internal_settings['included_vars_lset']
+        if not isinstance(incvars, list):
+            incvars = [incvars, ]
 
     filtered_vars = list()
     for (v, g) in miprl_vars_grids:
@@ -195,7 +212,7 @@ def select_data_request_CMORvars_for_lab(sset=False, year=None):
 
     # Translate CMORvars to a list of simplified CMORvar objects
     simplified_vars = []
-    allow_pseudo = get_variable_from_lset_with_default('allow_pseudo_standard_names', False)
+    allow_pseudo = internal_settings['allow_pseudo_standard_names']
     for v in d:
         svar = SimpleCMORVar()
         cmvar = get_element_uid(v)
@@ -243,6 +260,7 @@ def RequestItem_applies_for_exp_and_year(ri, experiment, year=None):
     # if (ri.label=='C4mipC4mipLandt2') : debug=True
     # if ri.title=='AerChemMIP, AERmon-3d, piControl' : debug=True
     # if ri.title=='CFMIP, CFMIP.CFsubhr, amip' : debug=True
+    internal_dict = get_settings_values("internal")
     logger = get_logger()
     logger.debug("In RIapplies.. Checking % 15s" % ri.title)
     item_exp = get_element_uid(ri.esid)
@@ -274,9 +292,9 @@ def RequestItem_applies_for_exp_and_year(ri, experiment, year=None):
     # print "ri=%s"%ri.title,
     # if year is not None :
     #    print "Filtering for year %d"%year
-    filter_on_realization = get_variable_from_sset_else_lset_with_default("filter_on_realization", default=True)
+    filter_on_realization = internal_dict["filter_on_realization"]
     if filter_on_realization:
-        if ri.nenmax != -1 and (get_variable_from_sset_without_default("realization_index") > ri.nenmax):
+        if ri.nenmax != -1 and (internal_dict["realization_index"] > ri.nenmax):
             ri_applies_to_experiment = False
 
     if ri_applies_to_experiment:
@@ -380,6 +398,7 @@ def year_in_ri_tslice(ri, exp, year):
       the whole experiment duration)
     """
     logger = get_logger()
+    internal_dict = get_settings_values("internal")
     if 'tslice' not in ri.__dict__:
         logger.debug("No tslice for reqItem %s -> OK for any year" % ri.title)
         return True, None
@@ -419,10 +438,10 @@ def year_in_ri_tslice(ri, exp, year):
         relevant = (year >= tslice.start and year <= tslice.end)
         endyear = tslice.end
     elif tslice.type in ["branchedYears", ]:  # e.g. _slice_piControl020
-        source, source_type = get_source_id_and_type()
-        if tslice.child in get_variable_from_lset_without_default("branching", source):
+        branching = internal_dict["branching"]
+        if tslice.child in branching:
             endyear = False
-            (refyear, starts) = get_variable_from_lset_without_default("branching", source, tslice.child)
+            (refyear, starts) = branching[tslice.child]
             for start in starts:
                 if ((year - start >= tslice.start - refyear) and
                         (year - start < tslice.start - refyear + tslice.nyears)):
@@ -465,8 +484,9 @@ def experiment_start_year(exp):
     :param debug: boolean for debug verbose level activation
     :return: start year of an experiment
     """
-    if is_key_in_sset("branch_year_in_child"):
-        return get_variable_from_sset_without_default("branch_year_in_child")
+    internal_dict = get_settings_values("internal")
+    if "branch_year_in_child" in internal_dict:
+        return internal_dict["branch_year_in_child"]
     else:
         starty = experiment_start_year_without_sset(exp)
         if starty is None:
@@ -494,8 +514,9 @@ def experiment_end_year_from_sset(exp):
     :param exp: experiment
     :return: end year of the experiment
     """
-    if is_key_in_sset("end_year"):
-        return get_variable_from_sset_without_default("end_year")
+    internal_dict = get_settings_values("internal")
+    if "end_year" in internal_dict:
+        return internal_dict["end_year"]
     else:
         return experiment_end_year(exp)
 
@@ -512,13 +533,14 @@ def endyear_for_CMORvar(cv, expt, year):
     # 1- Get the RequestItems which apply to CmorVar
     # 2- Select those requestItems which include expt,
     #    and retain their endyear if larger than former one
+    internal_dict = get_settings_values("internal")
 
     global global_rls
 
     # Some debug material
     logger = get_logger()
     logger.debug("In end_year for %s %s" % (cv.label, cv.mipTable))
-    pmax = get_variable_from_sset_else_lset_without_default('max_priority')
+    pmax = internal_dict['max_priority']
 
     # 1- Get the RequestItems which apply to CmorVar
     rVarsUid = get_request_by_id_by_sect(cv.uid, 'requestVar')

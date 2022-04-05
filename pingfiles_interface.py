@@ -15,6 +15,7 @@ import os
 import sys
 
 # Utilities
+from settings_interface import get_settings_values
 from utils import Dr2xmlError
 
 # Logger
@@ -23,8 +24,6 @@ from logger import get_logger
 # Global variables and configuration tools
 from config import get_config_variable
 
-# Interface to settings dictionaries
-from settings_interface import get_variable_from_lset_with_default, get_variable_from_lset_without_default
 # Interface to Data Request
 from dr_interface import get_DR_version, get_list_of_elements_by_id, get_element_uid, print_DR_errors
 # Interface to xml tools
@@ -445,11 +444,12 @@ def check_for_file_input(sv, hgrid, pingvars, field_defs, grid_defs, domain_defs
     Add an entry in pingvars
     """
     logger = get_logger()
-    externs = get_variable_from_lset_with_default('fx_from_file', [])
+    internal_dict = get_settings_values("internal")
+    externs = internal_dict['fx_from_file']
     # print "/// sv.label=%s"%sv.label, sv.label in externs ,"hgrid=",hgrid
     if sv.label in externs and \
             any([d == hgrid for d in externs[sv.label]]):
-        pingvar = get_variable_from_lset_without_default('ping_variables_prefix') + sv.label
+        pingvar = internal_dict['ping_variables_prefix'] + sv.label
         pingvars.append(pingvar)
         # Add a grid made of domain hgrid only
         grid_id = "grid_" + hgrid

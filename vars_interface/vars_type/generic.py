@@ -16,7 +16,7 @@ from analyzer import cellmethod2area
 from dr_interface import print_DR_stdname_errors, get_element_uid, get_cmor_var_id_by_label, get_list_of_elements_by_id, \
     get_request_by_id_by_sect, print_DR_errors
 from logger import get_logger
-from settings_interface import get_variable_from_sset_with_default, get_variable_from_lset_with_default
+from settings_interface import get_settings_values
 from utils import VarsError, Dr2xmlError
 from vars_interface.definitions import SimpleCMORVar, SimpleDim
 
@@ -67,7 +67,7 @@ def read_home_var(line_split, list_attrs):
 def fill_homevar(home_var):
     logger = get_logger()
     if home_var.spatial_shp in ["XY-perso", "XY-HG"]:
-        home_var_sdims_info = get_variable_from_sset_with_default('perso_sdims_description', OrderedDict())
+        home_var_sdims_info = get_settings_values("internal", 'perso_sdims_description')
         if home_var.label in home_var_sdims_info:
             home_var_sdims = OrderedDict()
             for home_var_dim in home_var_sdims_info[home_var.label]:
@@ -171,8 +171,6 @@ def get_correspond_cmor_var(homevar):
 
         matching = (match_label and (match_freq or empty_table) and (match_table or empty_table) and
                     (match_realm or empty_realm))
-        #print("DBG!!! label %s freq %s table %s realm %s empty realm %s matching %s" %
-        #      (match_label, match_freq, match_table, match_realm, empty_realm, matching))
         if matching:
             logger.debug("matches")
             same_shapes = (get_spatial_and_temporal_shapes(cmvar) == [homevar.spatial_shp, homevar.temporal_shp])
@@ -195,7 +193,7 @@ def get_correspond_cmor_var(homevar):
         # empty table means that the frequency is changed (but the variable exists in another frequency cmor table
         if empty_table:
             var_freq_asked = homevar.frequency
-        allow_pseudo = get_variable_from_lset_with_default('allow_pseudo_standard_names', False)
+        allow_pseudo = get_settings_values("internal", 'allow_pseudo_standard_names')
         global sn_issues_home
         sn_issues_home = complement_svar_using_cmorvar(homevar, cmvar_found, sn_issues_home, [], allow_pseudo)
         if empty_table:

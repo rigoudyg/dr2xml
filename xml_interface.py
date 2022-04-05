@@ -8,47 +8,13 @@ Interface between xml module and dr2xml.
 from __future__ import print_function, division, absolute_import, unicode_literals
 
 import copy
-import pprint
 from collections import OrderedDict
 import six
 
 import xml_writer
-from logger import get_logger
-from json_interface import setup_project_settings, find_value
-from settings_interface import get_variable_from_lset_with_default
+from settings_interface import get_settings_values
+from settings_interface.common_json_project_interface import find_value
 from utils import reduce_and_strip, decode_if_needed
-
-projects_settings = None
-
-
-def initialize_project_settings(**kwargs):
-    global projects_settings
-    logger = get_logger()
-    logger.debug("Initialize project_settings")
-    # If no filename is specified, get the one associated with the project
-    projects_settings = setup_project_settings(**kwargs)
-    pprint.pprint(projects_settings)
-
-
-def get_project_settings(*args, is_default=False, default=None):
-    if len(args) == 0:
-        return projects_settings
-    else:
-        val = projects_settings
-        test = True
-        i = 0
-        while test and i < len(args):
-            if args[i] in val:
-                val = val[args[i]]
-                i += 1
-            else:
-                test = False
-        if test:
-            return val
-        elif not is_default:
-            raise ValueError("Could not find a proper value: %s not in %s" % (args[i], val))
-        else:
-            return default
 
 
 class DR2XMLComment(xml_writer.Comment):
@@ -65,15 +31,17 @@ class DR2XMLElement(xml_writer.Element):
             text = kwargs.pop("text")
         else:
             text = None
-        tag_settings = copy.deepcopy(projects_settings[default_tag])
+        tag_settings = get_settings_values("project", default_tag, must_copy=True)
         attrs_list = tag_settings["attrs_list"]
         attrs_constraints = tag_settings["attrs_constraints"]
         attrib = OrderedDict()
-        common_dict = projects_settings["__common_values__"]
+        common_dict = get_settings_values("common")
+        internal_dict = get_settings_values("internal")
         for key in attrs_list:
             test, value, output_dict = find_value(tag=tag, key=key, value=kwargs.get(key),
                                                   is_default_value=key not in kwargs, common_dict=common_dict,
-                                                  additional_dict=kwargs, **attrs_constraints[key])
+                                                  additional_dict=kwargs, internal_dict=internal_dict,
+                                                  **attrs_constraints[key])
             if test:
                 attrib[output_dict["output_key"]] = value
         super(DR2XMLElement, self).__init__(tag=tag, text=text, attrib=attrib)
@@ -90,7 +58,8 @@ class DR2XMLElement(xml_writer.Element):
         for var in vars_list:
             test, value, output_dict = find_value(tag=tag, key=var, value=kwargs.get(var),
                                                   is_default_value=var not in kwargs, common_dict=common_dict,
-                                                  additional_dict=kwargs, **vars_constraints[var])
+                                                  additional_dict=kwargs, internal_dict=internal_dict,
+                                                  **vars_constraints[var])
             if test:
                 self.append(wrv(output_dict["output_key"], value, output_dict["num_type"]))
 
@@ -182,7 +151,7 @@ def wrv(name, value, num_type="string"):
     :param num_type: type of the variable
     :return: string corresponding to the xml variable
     """
-    print_variables = get_variable_from_lset_with_default("print_variables", True)
+    print_variables = get_settings_values("internal", "print_variables")
     if not print_variables:
         return None
     elif isinstance(print_variables, list) and name not in print_variables:

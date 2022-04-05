@@ -17,7 +17,7 @@ from config import get_config_variable
 from logger import get_logger
 
 # Interface to settings dictionaries
-from settings_interface import get_variable_from_lset_without_default
+from settings_interface import get_settings_values
 
 # Grids tools
 from grids import create_axis_def, create_grid_def
@@ -48,7 +48,7 @@ def create_xios_axis_and_grids_for_plevs_unions(svars, plev_sfxs, dummies, axis_
     """
     #
     logger = get_logger()
-    prefix = get_variable_from_lset_without_default("ping_variables_prefix")
+    prefix = get_settings_values("internal", "ping_variables_prefix")
     # First, search plev unions for each label_without_psuffix and build dict_plevs
     dict_plevs = OrderedDict()
     for sv in svars:

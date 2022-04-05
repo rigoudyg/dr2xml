@@ -7,6 +7,7 @@ Several tools used in dr2xml.
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+import copy
 import json
 import os
 
@@ -158,6 +159,18 @@ def read_json_content(filename):
                       filename)
 
 
+def format_json_before_writing(settings):
+    if isinstance(settings, (dict, OrderedDict)):
+        for key in list(settings):
+            settings[key] = format_json_before_writing(settings[key])
+    elif isinstance(settings, (list, tuple)):
+        for i in range(len(settings)):
+            settings[i] = format_json_before_writing(settings[i])
+    elif isinstance(settings, type):
+        settings = str(settings)
+    return settings
+
+
 def write_json_content(filename, settings):
     with open(filename, "w") as fp:
-        json.dump(settings, fp)
+        json.dump(format_json_before_writing(copy.deepcopy(settings)), fp)

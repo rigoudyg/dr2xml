@@ -9,7 +9,7 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 
 from dr_interface import get_list_of_elements_by_id
 from logger import get_logger
-from settings_interface import get_variable_from_lset_without_default
+from settings_interface import get_settings_values
 from utils import Dr2xmlError
 from vars_interface.definitions import SimpleCMORVar
 from vars_interface.vars_type.generic import read_home_var, fill_homevar, check_homevar, get_correspond_cmor_var, \
@@ -70,7 +70,7 @@ def ping_alias(svar, pingvars, error_on_fail=False):
     par ailleurs, si on a defini un label non ambigu alors on l'utilise
     comme ping_alias (i.e. le field_ref)
     """
-    pref = get_variable_from_lset_without_default("ping_variables_prefix")
+    pref = get_settings_values("internal", "ping_variables_prefix")
     if svar.label_non_ambiguous:
         # print "+++ non ambiguous", svar.label,svar.label_non_ambiguous
         alias_ping = pref + svar.label_non_ambiguous  # e.g. 'CMIP6_tsn_land' and not 'CMIP6_tsn'
@@ -98,7 +98,7 @@ def get_simplevar(label, table, freq=None):
     psvar = get_cmor_var(label, table)
     #
     # Try to get a var for 'ps' when table is only in Home DR
-    if psvar is None and label == "ps" and freq is not None:
+    if psvar is None and label in ["ps", ] and freq is not None:
         # print "\tSearching for alternate ps "
         if freq in ["3h", "3hr", "3hrPt"]:
             psvar = get_cmor_var('ps', 'E3hrPt')

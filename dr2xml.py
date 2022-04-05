@@ -57,6 +57,7 @@ import sys
 from collections import OrderedDict
 
 # Utilities
+from settings_interface import initialize_settings
 from utils import print_struct
 
 # Logger
@@ -64,10 +65,6 @@ from logger import initialize_logger, get_logger, change_log_level
 
 # Global variables and configuration tools
 from config import get_config_variable, set_config_variable, initialize_config_variables
-
-# Interface to settings dictionaries
-from settings_interface import initialize_dict, get_variable_from_lset_with_default, \
-    get_variable_from_lset_without_default
 
 
 """ An example/template  of settings for a lab and a model"""
@@ -577,11 +574,8 @@ def generate_file_defs(lset, sset, year, enddate, context, cvs_path, pingfiles=N
     # pr.enable()
     # Initialize lset and sset variables for all functions
     initialize_config_variables()
-    initialize_dict(lset, sset)
-    # Interface to xml
-    from xml_interface import initialize_project_settings
-    initialize_project_settings(cvspath=cvs_path, context=context, prefix=prefix,
-                                root=os.path.basename(os.path.abspath(__file__)), year=year)
+    initialize_settings(lset=lset, sset=sset, cvspath=cvs_path, context=context, prefix=prefix,
+                        root=os.path.basename(os.path.abspath(__file__)), year=year)
     generate_file_defs_inner(year, enddate, context, pingfiles=pingfiles, dummies=dummies, dirname=dirname,
                              attributes=attributes, select=select)
     # pr.disable()
@@ -653,6 +647,10 @@ es with a different name between model
     # Info printing tools
     from infos import print_some_stats
 
+    from settings_interface import get_settings_values
+
+    internal_settings = get_settings_values("internal")
+
     print("\n {}\n*".format(50 * "*"))
     print("* %29s" % "dr2xml version: ", get_config_variable("version"))
 
@@ -681,11 +679,10 @@ es with a different name between model
     print(50 * "*")
     print()
     default_log_level = logger.level
-    if get_variable_from_lset_with_default("debug_parsing", False):
+    if internal_settings["debug_parsing"]:
         change_log_level("debug")
-    set_config_variable("context_index",
-                        init_context(context, get_variable_from_lset_with_default("path_to_parse", "./")))
-    if get_variable_from_lset_with_default("debug_parsing", False):
+    set_config_variable("context_index", init_context(context, internal_settings["path_to_parse"]))
+    if internal_settings["debug_parsing"]:
         change_log_level(default_log_level)
     if get_config_variable("context_index") is None:
         logger.error("Variable 'context_index' is not set.")
@@ -715,7 +712,7 @@ es with a different name between model
     # --------------------------------------------------------------------
     # Build all plev union axis and grids
     # --------------------------------------------------------------------
-    if get_variable_from_lset_with_default('use_union_zoom', False):
+    if internal_settings["use_union_zoom"]:
         svars_full_list = list()
         for svl in svars_per_table.values():
             svars_full_list.extend(svl)
@@ -738,7 +735,7 @@ es with a different name between model
     # mpmoine_petitplus:generate_file_defs: pour sortir des stats sur ce que l'on sort reelement
     # SS - non : gros plus
     print_some_stats(context, svars_per_table, skipped_vars_per_table,
-                     actually_written_vars, get_variable_from_lset_with_default("print_stats_per_var_label", False))
+                     actually_written_vars, internal_settings["print_stats_per_var_label"])
 
     warn = OrderedDict()
     for warning, label, table in get_config_variable("cell_method_warnings", to_change=True):
@@ -753,5 +750,5 @@ es with a different name between model
         logger.warning("Warning for fields which cannot be optimised (i.e. average before remap)"
                        " because of an expr with @\n\t",)
         for w in warnings_for_optimisation:
-            logger.warning(w.replace(get_variable_from_lset_without_default('ping_variables_prefix'), ""))
+            logger.warning(w.replace(internal_settings['ping_variables_prefix'], ""))
         print()

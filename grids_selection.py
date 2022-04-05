@@ -19,10 +19,9 @@ dr2xml allows for the lab to choose among various policy  :
 from __future__ import print_function, division, absolute_import, unicode_literals
 
 # Utilities
+from settings_interface import get_settings_values
 from utils import Dr2xmlError
 
-# Interface to settings dictionaries
-from settings_interface import get_variable_from_lset_with_default
 # Interface to Data Request
 from dr_interface import get_element_uid
 
@@ -55,7 +54,7 @@ def decide_for_grids(cmvarid, grids):
         sgrids.add(g)
     ngrids = list(sgrids)
     #
-    policy = get_variable_from_lset_with_default("grid_policy")
+    policy = get_settings_values("internal", "grid_policy")
     if policy is None or policy == "DR":  # Follow DR spec
         return ngrids
     elif policy == "native":  # Follow lab grids choice (gr or gn depending on context - see lset['grids"])
@@ -95,11 +94,12 @@ def CNRM_grid_policy(cmvarid, grids):  # TBD
     """
     See doc of lab_adhoc_grid_policy
     """
+    internal_dict = get_settings_values("internal")
     if get_element_uid(cmvarid).label in ["sos"]:
         return [g for g in grids if g in ["", "1deg"]]
     elif get_element_uid(cmvarid).label in ["tos"] and (get_element_uid(cmvarid).mipTable not in ["3hr"] or
-                                                get_variable_from_lset_with_default("allow_tos_3hr_1deg", True)):
-        if get_variable_from_lset_with_default("adhoc_policy_do_add_1deg_grid_for_tos", False):
+                                                        internal_dict["allow_tos_3hr_1deg"]):
+        if internal_dict["adhoc_policy_do_add_1deg_grid_for_tos"]:
             list_grids = list()
             if "" in grids:
                 list_grids.append("")

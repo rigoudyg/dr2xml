@@ -10,15 +10,11 @@
       ],
       "skip_values": ["None", "", "N/A"],
       "authorized_values": {
-        "key_type": "laboratory",
+        "key_type": "internal",
         "keys": [
           "branching",
           {
-            "key_type": "common",
-            "keys": "source_id"
-          },
-          {
-            "key_type": "common",
+            "key_type": "internal",
             "keys": "experiment_id"
           },
           1
@@ -66,7 +62,7 @@
           "keys": "expid_in_filename"
         },
         {
-          "key_type": "common",
+          "key_type": "internal",
           "keys": "experiment_id"
         }
       ],
@@ -171,24 +167,6 @@
         {
           "key_type": "simulation",
           "keys": "physics_index"
-        },
-        "1"
-      ]
-    },
-    "project": {
-      "default_values": [
-        {
-          "key_type": "simulation",
-          "keys": "project"
-        },
-        "CMIP6"
-      ]
-    },
-    "realization_index": {
-      "default_values": [
-        {
-          "key_type": "simulation",
-          "keys": "realization_index"
         },
         "1"
       ]
@@ -399,7 +377,7 @@
       "id": {
         "default_values": [
           {
-            "key_type": "common",
+            "key_type": "internal",
             "keys": "context"
           }
         ]
@@ -655,7 +633,7 @@
         "skip_values": ["", "None"],
         "conditions": [
           [{
-            "key_type": "common",
+            "key_type": "internal",
             "keys": "experiment_id"
           },
             "eq",
@@ -676,7 +654,7 @@
         "output_key": "title",
         "conditions": [
           [{
-            "key_type": "common",
+            "key_type": "internal",
             "keys": "experiment_id"
           },
             "eq",
@@ -696,7 +674,7 @@
         "skip_values": ["", "None"],
         "conditions": [
           [{
-            "key_type": "common",
+            "key_type": "internal",
             "keys": "experiment_id"
           },
             "eq",
@@ -856,7 +834,7 @@
             "keys": "parent_source_id"
           },
           {
-            "key_type": "common",
+            "key_type": "internal",
             "keys": "source_id"
           }
         ]
@@ -959,7 +937,7 @@
               "compute_nb_days",
               {
                 "year_branch": {
-                  "key_type": "simulation",
+                  "key_type": "internal",
                   "keys": "branch_year_in_child"
                 },
                 "year_ref": {
@@ -1014,7 +992,7 @@
       "realization_index": {
         "default_values": [
           {
-            "key_type": "common",
+            "key_type": "internal",
             "keys": "realization_index"
           }
         ],
@@ -1116,7 +1094,7 @@
       "source_id": {
         "default_values": [
           {
-            "key_type": "common",
+            "key_type": "internal",
             "keys": "source_id"
           }
         ]
@@ -1124,7 +1102,7 @@
       "source_type": {
         "default_values": [
           {
-            "key_type": "common",
+            "key_type": "internal",
             "keys": "source_type"
           }
         ]
@@ -1135,11 +1113,11 @@
             "key_type": "combine",
             "keys": [
               {
-                "key_type": "common",
+                "key_type": "internal",
                 "keys": "source_id"
               },
               {
-                "key_type": "common",
+                "key_type": "internal",
                 "keys": "project"
               },
               {
@@ -1157,11 +1135,11 @@
             "key_type": "combine",
             "keys": [
               {
-                "key_type": "common",
+                "key_type": "internal",
                 "keys": "source_id"
               },
               {
-                "key_type": "common",
+                "key_type": "internal",
                 "keys": "project"
               },
               {
@@ -1169,7 +1147,7 @@
                 "keys": "activity_id"
               },
               {
-                "key_type": "common",
+                "key_type": "internal",
                 "keys": "experiment_id"
               }
             ],

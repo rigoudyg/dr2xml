@@ -18,6 +18,7 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 import sys
 
 # Utilities
+from settings_interface import get_settings_values
 from utils import Dr2xmlError
 
 # Logger
@@ -26,8 +27,6 @@ from logger import get_logger
 # Global variables and configuration tools
 from config import add_value_in_list_config_variable
 
-# Interface to settings dictionaries
-from settings_interface import get_variable_from_lset_with_default
 # Interface to Data Request
 from dr_interface import print_DR_errors
 
@@ -40,8 +39,9 @@ def freq2datefmt(in_freq, operation, table):
     :param table:
     :return:
     """
+    internal_dict = get_settings_values("internal")
     # WIP doc v6.2.3 - Apr. 2017: <time_range> format is frequency-dependant
-    too_long_periods = get_variable_from_lset_with_default("too_long_periods", [])
+    too_long_periods = internal_dict["too_long_periods"]
     datefmt = False
     offset = None
     freq = in_freq
@@ -116,7 +116,7 @@ def freq2datefmt(in_freq, operation, table):
         else:
             offset = "1ts"
             if "subhr" in freq and "CFsubhr" in table:
-                offset = get_variable_from_lset_with_default("CFsubhr_frequency", "1ts")
+                offset = internal_dict["CFsubhr_frequency"]
     elif "fx" in freq:
         pass  # WIP doc v6.2.3 - Apr. 2017: if frequency="fx", [_<time_range>] is ommitted
     if freq in ["1hrClimMon", "1hrCM"]:
@@ -142,7 +142,7 @@ def analyze_cell_time_method(cm, label, table):
     Depending on cell method string CM, tells / returns
     - which time operation should be done
     - if missing value detection should be set
-    - if some cimatology has to be done (and its name - e.g. )
+    - if some climatology has to be done (and its name - e.g. )
 
     We rely on the missing value detection to match the requirements like
     "where sea-ice", "where cloud" since we suppose fields required in this way
@@ -386,7 +386,7 @@ def cmip6_freq_to_xios_freq(freq, table):
     logger = get_logger()
     if freq in ["subhr", "subhrPt"]:
         if table == "CFsubhr":
-            rep = get_variable_from_lset_with_default("CFsubhr_frequency", "1ts")
+            rep = get_settings_values("internal", "CFsubhr_frequency")
         elif table is None:
             logger.error("Issue in dr2xml with table None and freq=%s" % freq)
             sys.exit(0)

@@ -15,7 +15,7 @@ import six
 from analyzer import guess_freq_from_table_name
 from dr_interface import get_list_of_elements_by_id, get_element_uid
 from logger import get_logger
-from settings_interface import get_variable_from_lset_without_default
+from settings_interface import get_settings_values
 from utils import VarsError, read_json_content
 from vars_interface.definitions import SimpleCMORVar, SimpleDim
 from vars_interface.vars_type.generic import read_home_var, multi_plev_suffixes, single_plev_suffixes, remove_p_suffix, \
@@ -192,7 +192,6 @@ def read_extra_table(path, table):
                                                                            single_plev_suffixes,
                                                                            realms=["atmos", "aerosol", "atmosChem"]))
             extra_var.set_attributes(ref_var=extra_var.label_without_psuffix)
-            print("DBG!!!", extra_var.label, extra_var.label_without_psuffix, extra_var.ref_var)
             extravars.append(extra_var)
     logger.info("For extra table %s (which has %d variables): " % (table, len(extravars)))
     logger.info("\tVariables which dim was found in extra coordinates table:\n%s" %
@@ -206,7 +205,7 @@ def read_extra_table(path, table):
 
 def check_extra_variable(home_var, hv_info):
     logger = get_logger()
-    if home_var.Priority <= get_variable_from_lset_without_default("max_priority"):
+    if home_var.Priority <= get_settings_values("internal", "max_priority"):
         logger.debug("Info: %s HOMEVar is read in an extra Table with priority %s => Taken into account." %
                      (hv_info, home_var.Priority))
         return home_var

@@ -10,10 +10,9 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 from collections import defaultdict
 
 from logger import get_logger
-from settings_interface import get_variable_from_lset_with_default, get_variable_from_lset_without_default, \
-    get_variable_from_sset_else_lset_with_default, get_variable_from_sset_with_default_in_sset
+from settings_interface import get_settings_values
 from utils import print_struct, Dr2xmlError
-from vars_interface.generic_data_request import select_data_request_CMORvars_for_lab, grid_choice, get_grid_choice
+from vars_interface.generic_data_request import select_data_request_CMORvars_for_lab, get_grid_choice
 from vars_interface.home_data_request import process_home_vars
 
 
@@ -42,6 +41,7 @@ def select_variables_to_be_processed(year, context, select):
     """
     Return the list of variables to be processed.
     """
+    internal_dict = get_settings_values("internal")
     logger = get_logger()
     #
     # --------------------------------------------------------------------
@@ -56,7 +56,7 @@ def select_variables_to_be_processed(year, context, select):
             add = not any([test_variables_similar(svar, ovar) for ovar in svars_per_realm[realm]])
             # Settings may allow for duplicate var in two tables.
             # In DR01.00.21, this actually applies to very few fields (ps-Aermon, tas-ImonAnt, areacellg)
-            if get_variable_from_lset_with_default('allow_duplicates', True) or add:
+            if internal_dict['allow_duplicates'] or add:
                 svars_per_realm[realm].append(svar)
             else:
                 logger.warning("Not adding duplicate %s (from %s) for realm %s" % (svar.label, svar.mipTable, realm))
@@ -68,22 +68,22 @@ def select_variables_to_be_processed(year, context, select):
     # Select on context realms, grouping by table
     # Excluding 'excluded_vars' and 'excluded_spshapes' lists
     # --------------------------------------------------------------------
-    context_realms = get_variable_from_lset_without_default('realms_per_context', context)
+    context_realms = internal_dict['realms_per_context']
     processed_realms = sorted(list(set(context_realms) & set(list(svars_per_realm))))
     non_processed_realms = sorted(list(set(context_realms) - set(list(svars_per_realm))))
     for realm in non_processed_realms:
         print("Processing realm '%s' of context '%s' -- no variable asked (skip)" % (realm, context))
     svars_per_table = defaultdict(list)
-    excluded_vars = defaultdict(list)
     for realm in processed_realms:
         print("Processing realm '%s' of context '%s'" % (realm, context))
+        excluded_vars = defaultdict(list)
         for svar in svars_per_realm[realm]:
             # exclusion de certaines spatial shapes (ex. Polar Stereograpic Antarctic/Groenland)
             test, reason = check_exclusion(svar,
-                                           ("label", get_variable_from_lset_without_default("excluded_vars"),
+                                           ("label", internal_dict["excluded_vars_lset"],
                                             "They are in exclusion list"),
                                            ("spatial_shp", [None, False], "They have no spatial shape"),
-                                           ("spatial_shp", get_variable_from_lset_without_default("excluded_spshapes"),
+                                           ("spatial_shp", internal_dict["excluded_spshapes_lset"],
                                             "They have excluded spatial shape : %s" % svar.spatial_shp))
             if test:
                 excluded_vars[reason].append((svar.label, svar.mipTable))
@@ -99,12 +99,13 @@ def select_variables_to_be_processed(year, context, select):
     # --------------------------------------------------------------------
     # Add svars belonging to the orphan list
     # --------------------------------------------------------------------
-    if context in get_variable_from_lset_without_default('orphan_variables'):
-        orphans = get_variable_from_lset_without_default('orphan_variables', context)
+    orphan_variables = internal_dict["orphan_variables"]
+    if context in orphan_variables:
+        orphans = orphan_variables[context]
         for svar in [svar for svar in mip_vars_list if svar.label in orphans]:
-            test, reason = check_exclusion(svar, ("label", get_variable_from_lset_without_default("excluded_vars"), ""),
+            test, reason = check_exclusion(svar, ("label", internal_dict["excluded_vars_lset"], ""),
                                            ("spatial_shp", [None, False], ""),
-                                           ("spatial_shp", get_variable_from_lset_without_default("excluded_spshapes"),
+                                           ("spatial_shp", internal_dict["excluded_spshapes_lset"],
                                             ""))
             if not test:
                 svars_per_table[svar.mipTable].append(svar)
@@ -112,10 +113,10 @@ def select_variables_to_be_processed(year, context, select):
     # --------------------------------------------------------------------
     # Remove svars belonging to other contexts' orphan lists
     # --------------------------------------------------------------------
-    other_contexts = sorted(list(set(get_variable_from_lset_without_default('orphan_variables')) - set([context, ])))
+    other_contexts = sorted(list(set(orphan_variables) - set([context, ])))
     orphans = list()
     for other_context in other_contexts:
-        orphans.extend(get_variable_from_lset_without_default('orphan_variables', other_context))
+        orphans.extend(orphan_variables[other_context])
     orphans = sorted(list(set(orphans)))
     for table in svars_per_table:
         svars_per_table[table] = [svar for svar in svars_per_table[table] if svar.label not in orphans]
@@ -130,6 +131,7 @@ def gather_AllSimpleVars(year=False, select="on_expt_and_year"):
     :return: list of mip variables
     """
     logger = get_logger()
+    internal_dict = get_settings_values("internal")
     if select in ["on_expt_and_year", ""]:
         mip_vars_list = select_data_request_CMORvars_for_lab(True, year)
     elif select in ["on_expt", ]:
@@ -140,11 +142,9 @@ def gather_AllSimpleVars(year=False, select="on_expt_and_year"):
         logger.error("Choice %s is not allowed for arg 'select'" % select)
         raise Dr2xmlError("Choice %s is not allowed for arg 'select'" % select)
     #
-    if get_variable_from_sset_else_lset_with_default('listof_home_vars', 'listof_home_vars', None):
-        exp = get_variable_from_sset_with_default_in_sset('experiment_for_requests', 'experiment_id')
-        mip_vars_list = process_home_vars(mip_vars_list, get_variable_from_lset_without_default("mips",
-                                                                                                get_grid_choice()),
-                                          expid=exp)
+    if internal_dict['listof_home_vars']:
+        exp = internal_dict['experiment_for_requests']
+        mip_vars_list = process_home_vars(mip_vars_list, internal_dict["mips"][get_grid_choice()], expid=exp)
     else:
         logger.info("Info: No HOMEvars list provided.")
     return mip_vars_list
