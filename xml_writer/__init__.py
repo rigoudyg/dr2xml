@@ -9,12 +9,12 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 
 import os
 
-from xml_writer.beacon import Beacon
-from xml_writer.element import Element
-from xml_writer.header import Header
-from xml_writer.comment import Comment
-from xml_writer.parser import xml_file_parser, parse_xml_string_rewrite
-from xml_writer.utils import encode_if_needed, decode_if_needed
+from .beacon import Beacon
+from .element import Element
+from .header import Header
+from .comment import Comment
+from .parser import xml_file_parser, parse_xml_string_rewrite
+from .utils import encode_if_needed, decode_if_needed
 
 if __name__ == "__main__":
     dr2xml_tests_dir = os.sep.join([os.sep.join(os.path.abspath(__file__).split(os.sep)[:-1]), "tests"])

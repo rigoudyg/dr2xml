@@ -10,8 +10,8 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 from collections import OrderedDict
 from copy import deepcopy, copy
 
-from xml_writer.beacon import Beacon
-from xml_writer.utils import encode_if_needed, decode_if_needed
+from .beacon import Beacon
+from .utils import encode_if_needed, decode_if_needed
 
 
 class Element(Beacon):

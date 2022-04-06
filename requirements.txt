@@ -1,4 +1,5 @@
 sphinx
+sphinx_rtd_theme
 # Need either dreq and scope or dreqPy (users can modify the requirements file according to the choice made)
 # dreq
 # scope
@@ -6,3 +7,4 @@ dreqPy
 coverage
 xlsxwriter
 six
+importlib

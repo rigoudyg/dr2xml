@@ -11,11 +11,11 @@ import os
 import re
 from io import open
 
-from xml_writer import Element
-from xml_writer.comment import _find_xml_comment
-from xml_writer.header import _find_xml_header
-from xml_writer.pre_treatment import _pre_xml_string_format
-from xml_writer.utils import _find_text, print_if_needed, iterate_on_string, _generic_dict_regexp, _build_dict_attrib
+from .element import Element
+from .comment import _find_xml_comment
+from .header import _find_xml_header
+from .pre_treatment import _pre_xml_string_format
+from .utils import _find_text, print_if_needed, iterate_on_string, _generic_dict_regexp, _build_dict_attrib
 
 
 def xml_file_parser(xml_file, verbose=False, follow_src=False, path_parse="./", dont_read=list()):

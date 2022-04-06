@@ -9,8 +9,8 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 
 import re
 
-from xml_writer.beacon import Beacon
-from xml_writer.utils import encode_if_needed, print_if_needed
+from .beacon import Beacon
+from .utils import encode_if_needed, print_if_needed
 
 
 class Comment(Beacon):
@@ -54,7 +54,7 @@ class Comment(Beacon):
         return encode_if_needed(rep)
 
     def _dump_attrib(self, sort=False):
-        return NotImplementedError()
+        raise NotImplementedError()
 
 
 #: XML comment regexp

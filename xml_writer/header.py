@@ -11,8 +11,8 @@ import re
 from collections import OrderedDict
 from copy import deepcopy
 
-from xml_writer.beacon import Beacon
-from xml_writer.utils import encode_if_needed, _generic_dict_regexp, _build_dict_attrib
+from .beacon import Beacon
+from .utils import encode_if_needed, _generic_dict_regexp, _build_dict_attrib
 
 
 class Header(Beacon):

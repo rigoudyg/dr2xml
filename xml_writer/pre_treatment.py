@@ -10,7 +10,7 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 import re
 import six
 
-from xml_writer.utils import print_if_needed, iterate_on_string
+from .utils import print_if_needed, iterate_on_string
 
 
 def iterate_on_characters_to_check(xml_string, verbose=False):
