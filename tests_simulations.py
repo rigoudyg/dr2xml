@@ -17,7 +17,7 @@ import argparse
 
 
 from dr2xml import generate_file_defs
-from config import python_version
+from dr2xml.config import python_version
 
 
 def find_data(simulation):

@@ -26,7 +26,7 @@ if [ "${add_coverage}" = "yes" ]; then
   firefox file://$PWD/tests/htmlcov/index.html
 else
   for simulation in $simulations_to_test; do
-    python3 tests_simulations.py --simulation=$simulation --run_mode=$run_mode --to_compare=$to_compare --add_profile=$add_profile
+    python tests_simulations.py --simulation=$simulation --run_mode=$run_mode --to_compare=$to_compare --add_profile=$add_profile
       if [ ! $? -eq 0 ] ; then
           exit 1
       fi
