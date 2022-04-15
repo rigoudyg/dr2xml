@@ -523,7 +523,8 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
                 # works only if units are different :
                 freq_offset = "-".join([xios_freq, ts])
     #
-    # TBD : implement DR recommendation for cell_method : The syntax is to append, in brackets,
+    # TBD : implement DR recommendation for cell_method : The syntax is to append, in bra
+    # ckets,
     # TBD    'interval: *amount* *units*', for example 'area: time: mean (interval: 1 hr)'.
     # TBD    The units must be valid UDUNITS, e.g. day or hr.
     # --------------------------------------------------------------------

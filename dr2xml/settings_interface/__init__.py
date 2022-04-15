@@ -8,6 +8,7 @@ Interface to get and set laboratory and simulations dictionaries.
 from __future__ import print_function, division, absolute_import, unicode_literals
 
 import copy
+import pprint
 
 from logger import get_logger
 
@@ -25,18 +26,20 @@ def initialize_settings(lset=None, sset=None, **kwargs):
 	from .py_settings_interface import initialize_dict
 	initialize_dict(new_lset=lset, new_sset=sset)
 	# Read, merge and format complete settings linked to project
-	from .general_json_project_interface import initialize_json_settings
-	internal_settings, common_settings, project_settings = initialize_json_settings()
+	from .json_project_interface import initialize_project_settings, solve_values, solve_settings
+	internal_settings, common_settings, project_settings = initialize_project_settings()
 	# Solve internal settings
-	from .internal_json_project_interface import solve_internal_settings
-	internal_settings = solve_internal_settings(internal_settings, additional_kwargs=kwargs)
+	internal_settings = solve_values("internal", internal_dict=internal_settings, additional_dict=kwargs,
+	                                 allow_additional_keytypes=False)
 	# Solve common settings
-	from .common_json_project_interface import solve_common_settings, solve_project_settings
-	common_settings = solve_common_settings(common_settings, internal_settings=internal_settings,
-	                                        additional_kwargs=kwargs)
+	common_settings = solve_values("common", common_dict=common_settings, internal_dict=internal_settings,
+	                               additional_dict=kwargs)
+	pprint.pprint(internal_settings)
+	pprint.pprint(common_settings)
 	# Solve project_settings
-	project_settings = solve_project_settings(project_settings, internal_settings=internal_settings,
-	                                          common_settings=common_settings)
+	project_settings = solve_settings(project_settings, internal_dict=internal_settings,
+	                                  common_dict=common_settings, additional_dict=kwargs)
+	pprint.pprint(project_settings)
 
 
 def get_settings_values(*args, **kwargs):

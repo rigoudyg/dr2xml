@@ -13,7 +13,6 @@ import six
 
 import xml_writer
 from .settings_interface import get_settings_values
-from .settings_interface.common_json_project_interface import find_value
 from .utils import reduce_and_strip, decode_if_needed
 
 
@@ -32,36 +31,45 @@ class DR2XMLElement(xml_writer.Element):
         else:
             text = None
         tag_settings = get_settings_values("project", default_tag, must_copy=True)
-        attrs_list = tag_settings["attrs_list"]
-        attrs_constraints = tag_settings["attrs_constraints"]
+        attrs_list = tag_settings.attrs_list
+        attrs_constraints = tag_settings.attrs_constraints
         attrib = OrderedDict()
         common_dict = get_settings_values("common")
         internal_dict = get_settings_values("internal")
         for key in attrs_list:
-            test, value, output_dict = find_value(tag=tag, key=key, value=kwargs.get(key),
-                                                  is_default_value=key not in kwargs, common_dict=common_dict,
-                                                  additional_dict=kwargs, internal_dict=internal_dict,
-                                                  **attrs_constraints[key])
+            print(key)
+            test, value = attrs_constraints[key].find_value(is_value=key in kwargs, value=kwargs.get(key),
+                                                            common_dict=common_dict, internal_dict=internal_dict,
+                                                            additional_dict=kwargs)
+            output_key = attrs_constraints[key].output_key
+            if output_key is None:
+                output_key = key
             if test:
-                attrib[output_dict["output_key"]] = value
+                attrib[output_key] = value
         super(DR2XMLElement, self).__init__(tag=tag, text=text, attrib=attrib)
-        comments_list = tag_settings["comments_list"]
-        comments_constraints = tag_settings["comments_constraints"]
+        comments_list = tag_settings.comments_list
+        comments_constraints = tag_settings.comments_constraints
         for comment in comments_list:
-            test, value, _ = find_value(tag=tag, key=comment, value=kwargs.get(comment),
-                                        is_default_value=comment not in kwargs, common_dict=common_dict,
-                                        additional_dict=kwargs, **comments_constraints[comment])
+            print(comment)
+            test, value = comments_constraints[comment].find_value(is_value=comment in kwargs,
+                                                                   value=kwargs.get(comment),
+                                                                   common_dict=common_dict, internal_dict=internal_dict,
+                                                                   additional_dict=kwargs)
             if test:
                 self.append(DR2XMLComment(text=value))
-        vars_list = tag_settings["vars_list"]
-        vars_constraints = tag_settings["vars_constraints"]
+        vars_list = tag_settings.vars_list
+        vars_constraints = tag_settings.vars_constraints
         for var in vars_list:
-            test, value, output_dict = find_value(tag=tag, key=var, value=kwargs.get(var),
-                                                  is_default_value=var not in kwargs, common_dict=common_dict,
-                                                  additional_dict=kwargs, internal_dict=internal_dict,
-                                                  **vars_constraints[var])
+            print(var)
+            test, value = vars_constraints[var].find_value(is_value=var in kwargs, value=kwargs.get(var),
+                                                           common_dict=common_dict, internal_dict=internal_dict,
+                                                           additional_dict=kwargs)
+            output_key = vars_constraints[var].output_key
+            if output_key is None:
+                output_key = var
+            num_type = vars_constraints[var].num_type
             if test:
-                self.append(wrv(output_dict["output_key"], value, output_dict["num_type"]))
+                self.append(wrv(output_key, value, num_type))
 
     def __copy__(self):
         """
