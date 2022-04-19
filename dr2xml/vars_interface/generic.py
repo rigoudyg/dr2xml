@@ -13,8 +13,8 @@ from collections import OrderedDict
 import six
 
 from dr2xml.analyzer import cellmethod2area
-from dr2xml.dr_interface import print_DR_stdname_errors, get_element_uid, get_cmor_var_id_by_label, get_list_of_elements_by_id, \
-    get_request_by_id_by_sect, print_DR_errors
+from dr2xml.dr_interface import print_DR_stdname_errors, get_element_uid, get_cmor_var_id_by_label, \
+    get_list_of_elements_by_id, get_request_by_id_by_sect, print_DR_errors
 from logger import get_logger
 from dr2xml.settings_interface import get_settings_values
 from dr2xml.utils import VarsError, Dr2xmlError
@@ -340,7 +340,8 @@ def analyze_ambiguous_mip_varnames(debug=[]):
         for r in refs:
             d[v.label].append(get_element_uid(r))
             if v.label in debug:
-                logger.debug("Adding CmorVar %s(%s) for %s" % (v.label, get_element_uid(r).mipTable, get_element_uid(r).label))
+                logger.debug("Adding CmorVar %s(%s) for %s" % (v.label, get_element_uid(r).mipTable,
+                                                               get_element_uid(r).label))
 
     # Replace dic values by dic of area portion of cell_methods
     for vlabel in d:

@@ -264,7 +264,7 @@ def change_axes_in_grid(grid_id, grid_defs, axis_defs):
     # sectors = dims which have type charcter and are not scalar
     sectors = internal_dict.get("sectors", [dim.label for dim in get_list_of_elements_by_id('grids').items
                                             if dim.type in ['character', ] and dim.value in ['', ]])
-    sectors = sorted(list(set(sectors) - set(["typewetla", ]))) # Error in DR 01.00.21
+    sectors = sorted(list(set(sectors) - set(["typewetla", ])))  # Error in DR 01.00.21
     for sector in sectors:
         if not any([sector in [aliases[aid], aliases[aid][0]] for aid in aliases]):
             # print "\nadding sector : %s"%sector

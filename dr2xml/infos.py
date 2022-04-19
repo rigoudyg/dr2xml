@@ -98,8 +98,8 @@ def print_some_stats(context, svars_per_table, skipped_vars_per_table, actually_
                     for Priority in dic[frequency][spatial_shp][table]:
                         list_priority = dic[frequency][spatial_shp][table][Priority]
                         tot_for_freq_and_shape_among_tables += len(list_priority)
-                        logger.info("%10s %8s %12s P%1d %3d: %s" %(" ", " ", table, Priority, len(list_priority),
-                                                                   " ".join(list_priority)))
+                        logger.info("%10s %8s %12s P%1d %3d: %s" % (" ", " ", table, Priority, len(list_priority),
+                                                                    " ".join(list_priority)))
                 logger.info("%10s %8s %11s --- %3d" % (frequency, spatial_shp, "--------",
                                                        tot_for_freq_and_shape_among_tables))
                 tot_for_freq_among_shapes += tot_for_freq_and_shape_among_tables
@@ -108,7 +108,7 @@ def print_some_stats(context, svars_per_table, skipped_vars_per_table, actually_
             tot_among_freqs += tot_for_freq_among_shapes
             logger.info("")
         logger.info("")
-        logger.info("%10s %8s %11s --- %3d" %("----------", "--------", "--------", tot_among_freqs))
+        logger.info("%10s %8s %11s --- %3d" % ("----------", "--------", "--------", tot_among_freqs))
 
         if extended:
             logger.info("\n\nSome Statistics on actually written variables per variable...")

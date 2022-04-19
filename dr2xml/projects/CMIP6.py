@@ -72,25 +72,25 @@ def fill_license(value, institution_id, info_url):
 
 internal_values = dict(
     required_model_components=ParameterSettings(
-		default_values=[
-			ValueSettings(
-				key_type="internal",
-				keys=["CV_experiment", "required_model_components"]
-			)
-		]
-	),
+        default_values=[
+            ValueSettings(
+                key_type="internal",
+                keys=["CV_experiment", "required_model_components"]
+            )
+        ]
+    ),
     additional_allowed_model_components=ParameterSettings(
-		default_values=[
-			ValueSettings(
-				key_type="internal",
-				keys=["CV_experiment", "additional_allowed_model_components"]
-			)
-		]
-	),
+        default_values=[
+            ValueSettings(
+                key_type="internal",
+                keys=["CV_experiment", "additional_allowed_model_components"]
+            )
+        ]
+    ),
     CV_experiment=ParameterSettings(
-		default_values=[
-			ValueSettings(
-				key_type="json",
+        default_values=[
+            ValueSettings(
+                key_type="json",
                 keys=[
                     "experiment_id",
                     ValueSettings(key_type="internal", keys="experiment_id")
@@ -103,43 +103,42 @@ internal_values = dict(
                     ],
                     fmt="{}{}_experiment_id.json"
                 )
-			)
-		]
-	)
+            )
+        ]
+    )
 )
 
-
 common_values = dict(
-	conventions_version=ParameterSettings(
-		default_values=[
-			ValueSettings(key_type="config", keys="CMIP6_conventions_version")
-		]
+    conventions_version=ParameterSettings(
+        default_values=[
+            ValueSettings(key_type="config", keys="CMIP6_conventions_version")
+        ]
     ),
-	activity_id=ParameterSettings(
-		default_values=[
-			ValueSettings(key_type="simulation", keys="activity_id"),
-			ValueSettings(key_type="laboratory", keys="activity_id"),
-			ValueSettings(key_type="internal", keys=["CV_experiment", "activity_id"])
-		]
+    activity_id=ParameterSettings(
+        default_values=[
+            ValueSettings(key_type="simulation", keys="activity_id"),
+            ValueSettings(key_type="laboratory", keys="activity_id"),
+            ValueSettings(key_type="internal", keys=["CV_experiment", "activity_id"])
+        ]
     ),
-	parent_activity_id=ParameterSettings(
-		default_values=[
-			ValueSettings(key_type="simulation", keys="parent_activity_id"),
-			ValueSettings(key_type="simulation", keys="activity_id"),
-			ValueSettings(key_type="laboratory", keys="parent_activity_id"),
-			ValueSettings(key_type="laboratory", keys="activity_id"),
-			ValueSettings(key_type="internal", keys=["CV_experiment", "parent_activity_id"])
-		]
-	),
-	HDL=ParameterSettings(
-		default_values=[
-			ValueSettings(key_type="simulation", keys="HDL"),
-			ValueSettings(key_type="laboratory", keys="HDL"),
+    parent_activity_id=ParameterSettings(
+        default_values=[
+            ValueSettings(key_type="simulation", keys="parent_activity_id"),
+            ValueSettings(key_type="simulation", keys="activity_id"),
+            ValueSettings(key_type="laboratory", keys="parent_activity_id"),
+            ValueSettings(key_type="laboratory", keys="activity_id"),
+            ValueSettings(key_type="internal", keys=["CV_experiment", "parent_activity_id"])
+        ]
+    ),
+    HDL=ParameterSettings(
+        default_values=[
+            ValueSettings(key_type="simulation", keys="HDL"),
+            ValueSettings(key_type="laboratory", keys="HDL"),
             "21.14100"
-		]
-	),
-	source=ParameterSettings(
-		default_values=[
+        ]
+    ),
+    source=ParameterSettings(
+        default_values=[
             ValueSettings(
                 key_type="json",
                 keys=[
@@ -159,11 +158,11 @@ common_values = dict(
                     options=dict(source_id=ValueSettings(key_type="internal", keys="source_id"))
                 )
             ),
-			ValueSettings(key_type="laboratory", keys="source")
-		]
-	),
-	institution=ParameterSettings(
-		default_values=[
+            ValueSettings(key_type="laboratory", keys="source")
+        ]
+    ),
+    institution=ParameterSettings(
+        default_values=[
             ValueSettings(key_type="laboratory", keys="institution"),
             ValueSettings(
                 key_type="json",
@@ -180,10 +179,10 @@ common_values = dict(
                     fmt="{}{}_institution_id.json"
                 )
             )
-		]
-	),
-	license=ParameterSettings(
-		default_values=[
+        ]
+    ),
+    license=ParameterSettings(
+        default_values=[
             ValueSettings(
                 key_type="json",
                 keys=["license", 0],
@@ -196,17 +195,17 @@ common_values = dict(
                     fmt="{}{}_license.json"
                 )
             )
-		]
-	),
-	parent_experiment_id=ParameterSettings(
-		default_values=[
-			ValueSettings(key_type="simulation", keys="parent_experiment_id"),
-			ValueSettings(key_type="laboratory", keys="parent_experiment_id"),
+        ]
+    ),
+    parent_experiment_id=ParameterSettings(
+        default_values=[
+            ValueSettings(key_type="simulation", keys="parent_experiment_id"),
+            ValueSettings(key_type="laboratory", keys="parent_experiment_id"),
             ValueSettings(key_type="internal", keys=["CV_experiment", "parent_experiment_id"])
-		]
-	),
-	variant_label=ParameterSettings(
-		default_values=[
+        ]
+    ),
+    variant_label=ParameterSettings(
+        default_values=[
             ValueSettings(
                 key_type="combine",
                 keys=[
@@ -217,10 +216,10 @@ common_values = dict(
                 ],
                 fmt="r{}i{}p{}f{}"
             )
-		]
-	),
-	member_id=ParameterSettings(
-		default_values=[
+        ]
+    ),
+    member_id=ParameterSettings(
+        default_values=[
             ValueSettings(
                 key_type="combine",
                 keys=[
@@ -230,27 +229,26 @@ common_values = dict(
                 fmt="{}-{}"
             ),
             ValueSettings(key_type="common", keys="variant_label")
-		],
+        ],
         forbidden_patterns=["none-.*", ]
-	)
+    )
 )
 
-
 project_settings = dict(
-	context=TagSettings(
-		comments_list=["DR_version", "CV_version", "conventions_version", "dr2xml_version", "lab_settings",
+    context=TagSettings(
+        comments_list=["DR_version", "CV_version", "conventions_version", "dr2xml_version", "lab_settings",
                        "simulation_settings", "year"],
-		comments_constraints=dict(
-			CV_version=ParameterSettings(
-				default_values=["CMIP6-CV version ??", ]
-			),
-			conventions_version=ParameterSettings(
-				default_values=[
-					ValueSettings(key_type="common", keys="conventions_version", fmt="CMIP6_conventions_version {}")
-				]
-			)
-		)
-	),
+        comments_constraints=dict(
+            CV_version=ParameterSettings(
+                default_values=["CMIP6-CV version ??", ]
+            ),
+            conventions_version=ParameterSettings(
+                default_values=[
+                    ValueSettings(key_type="common", keys="conventions_version", fmt="CMIP6_conventions_version {}")
+                ]
+            )
+        )
+    ),
     file_output=TagSettings(
         attrs_constraints=dict(
             name=ParameterSettings(
@@ -283,27 +281,27 @@ project_settings = dict(
                     ValueSettings(key_type="variable", keys="mipVarLabel")
                 ]
             ),
-			description=ParameterSettings(
-				default_values=[
-					ValueSettings(key_type="common", keys="description"),
+            description=ParameterSettings(
+                default_values=[
+                    ValueSettings(key_type="common", keys="description"),
                     ValueSettings(key_type="internal", keys=["CV_experiment", "description"])
-				]
-			),
-			title_desc=ParameterSettings(
-				default_values=[
-					ValueSettings(key_type="common", keys="description"),
+                ]
+            ),
+            title_desc=ParameterSettings(
+                default_values=[
+                    ValueSettings(key_type="common", keys="description"),
                     ValueSettings(key_type="internal", keys=["CV_experiment", "description"])
-				]
-			),
-			experiment=ParameterSettings(
-				default_values=[
-					ValueSettings(key_type="common", keys="experiment"),
+                ]
+            ),
+            experiment=ParameterSettings(
+                default_values=[
+                    ValueSettings(key_type="common", keys="experiment"),
                     ValueSettings(key_type="internal", keys=["CV_experiment", "experiment"])
-				]
-			),
-			CMIP6_CV_latest_tag=ParameterSettings(
-				default_values=[
-					ValueSettings(
+                ]
+            ),
+            CMIP6_CV_latest_tag=ParameterSettings(
+                default_values=[
+                    ValueSettings(
                         key_type="json",
                         keys=["version_metadata", "latest_tag_metadata"],
                         src=ValueSettings(
@@ -316,8 +314,8 @@ project_settings = dict(
                         )
                     ),
                     "no more value in CMIP6_CV"
-				]
-			),
+                ]
+            ),
             source=ParameterSettings(
                 fatal=True
             ),

@@ -72,7 +72,7 @@ def select_data_request_CMORvars_for_lab(sset=False, year=None):
                     (print_struct(mips_list), len(rls_for_mips)))
         #
         excluded_links = internal_settings["excluded_request_links"]
-        rls_for_mips = [rl for rl in rls_for_mips  if is_elt_applicable(rl, attribute="label", excluded=excluded_links)]
+        rls_for_mips = [rl for rl in rls_for_mips if is_elt_applicable(rl, attribute="label", excluded=excluded_links)]
         logger.info("Number of Request Links after filtering by excluded_request_links is: %d" % len(rls_for_mips))
         #
         inclinks = internal_settings["included_request_links"]

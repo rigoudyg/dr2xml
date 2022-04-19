@@ -64,7 +64,7 @@ def read_compression_factors():
         try:
             fact = open("compression_factors.dat", "r")
             lines = fact.readlines()
-            compression_factor = defaultdict(lambda : OrderedDict)
+            compression_factor = defaultdict(lambda: OrderedDict)
             for line in [l for l in lines if not l.startswith("#")]:
                 varlabel, table, factor = line.split()[0:3]
                 # Keep smallest factor for each variablelabel

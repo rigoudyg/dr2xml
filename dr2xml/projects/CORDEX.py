@@ -7,8 +7,8 @@ CORDEX python tools
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
-from dr2xml.projects.projects_interface_definitions import ParameterSettings, ValueSettings, TagSettings, FunctionSettings, \
-    ConditionSettings
+from dr2xml.projects.projects_interface_definitions import ParameterSettings, ValueSettings, TagSettings, \
+    FunctionSettings, ConditionSettings
 
 
 def build_filename(frequency, prefix, source_id, expid_in_filename, date_range, var_type, list_perso_dev_file, label,
@@ -25,7 +25,8 @@ def build_filename(frequency, prefix, source_id, expid_in_filename, date_range, 
         if label in ["tsland", ]:
             varname_for_filename = "tsland"
     filename = "_".join(([elt for elt in [varname_for_filename, CORDEX_domain, driving_model_id, expid_in_filename,
-                          driving_model_ensemble_member, source_id, rcm_version_id, frequency] if len(str(elt)) > 0]))
+                                          driving_model_ensemble_member, source_id, rcm_version_id, frequency] if
+                          len(str(elt)) > 0]))
     if var_type in ["perso", "dev"]:
         with open(list_perso_dev_file, mode="a", encoding="utf-8") as list_perso_and_dev:
             list_perso_and_dev.write(".*{}.*\n".format(filename))
@@ -41,35 +42,34 @@ def build_filename(frequency, prefix, source_id, expid_in_filename, date_range, 
 
 parent_project_settings = "basics"
 
-
 internal_values = dict(
     required_model_components=ParameterSettings(
-		default_values=[
-			list()
-		]
-	),
+        default_values=[
+            list()
+        ]
+    ),
     additional_allowed_model_components=ParameterSettings(
-		default_values=[
-			list()
-		]
-	)
+        default_values=[
+            list()
+        ]
+    )
 )
 
 common_values = dict(
-	conventions_version=ParameterSettings(
-		default_values=[
-			ValueSettings(key_type="config", keys="CMIP6_conventions_version")
-		]
+    conventions_version=ParameterSettings(
+        default_values=[
+            ValueSettings(key_type="config", keys="CMIP6_conventions_version")
+        ]
     ),
-	HDL=ParameterSettings(
-		default_values=[
-			ValueSettings(key_type="simulation", keys="HDL"),
-			ValueSettings(key_type="laboratory", keys="HDL"),
+    HDL=ParameterSettings(
+        default_values=[
+            ValueSettings(key_type="simulation", keys="HDL"),
+            ValueSettings(key_type="laboratory", keys="HDL"),
             "21.14103"
-		]
-	),
-	variant_label=ParameterSettings(
-		default_values=[
+        ]
+    ),
+    variant_label=ParameterSettings(
+        default_values=[
             ValueSettings(
                 key_type="combine",
                 keys=[
@@ -80,10 +80,10 @@ common_values = dict(
                 ],
                 fmt="r{}i{}p{}f{}"
             )
-		]
-	),
-	CORDEX_domain=ParameterSettings(
-		default_values=[
+        ]
+    ),
+    CORDEX_domain=ParameterSettings(
+        default_values=[
             ValueSettings(
                 key_type="simulation",
                 keys=[
@@ -91,90 +91,89 @@ common_values = dict(
                     ValueSettings(key_type="internal", keys="context")
                 ]
             )
-		]
-	),
-	driving_model_id=ParameterSettings(
-		default_values=[
+        ]
+    ),
+    driving_model_id=ParameterSettings(
+        default_values=[
             ValueSettings(
                 key_type="simulation",
                 keys="driving_model_id"
             )
-		]
-	),
-	driving_model_ensemble_member=ParameterSettings(
-		default_values=[
+        ]
+    ),
+    driving_model_ensemble_member=ParameterSettings(
+        default_values=[
             ValueSettings(
                 key_type="simulation",
                 keys="driving_model_ensemble_member"
             )
-		]
-	),
-	driving_experiment_name=ParameterSettings(
-		default_values=[
+        ]
+    ),
+    driving_experiment_name=ParameterSettings(
+        default_values=[
             ValueSettings(
                 key_type="simulation",
                 keys="driving_experiment_name"
             )
-		]
-	),
-	driving_experiment=ParameterSettings(
-		default_values=[
+        ]
+    ),
+    driving_experiment=ParameterSettings(
+        default_values=[
             ValueSettings(
                 key_type="simulation",
                 keys="driving_experiment"
             )
-		]
-	),
-	Lambert_conformal_longitude_of_central_meridian=ParameterSettings(
-		default_values=[
+        ]
+    ),
+    Lambert_conformal_longitude_of_central_meridian=ParameterSettings(
+        default_values=[
             ValueSettings(
                 key_type="simulation",
                 keys="Lambert_conformal_longitude_of_central_meridian"
             )
-		]
-	),
-	Lambert_conformal_standard_parallel=ParameterSettings(
-		default_values=[
+        ]
+    ),
+    Lambert_conformal_standard_parallel=ParameterSettings(
+        default_values=[
             ValueSettings(
                 key_type="simulation",
                 keys="Lambert_conformal_standard_parallel"
             )
-		]
-	),
-	Lambert_conformal_latitude_of_projection_origin=ParameterSettings(
-		default_values=[
+        ]
+    ),
+    Lambert_conformal_latitude_of_projection_origin=ParameterSettings(
+        default_values=[
             ValueSettings(
                 key_type="simulation",
                 keys="Lambert_conformal_latitude_of_projection_origin"
             )
-		]
-	),
-	rcm_version_id=ParameterSettings(
-		default_values=[
+        ]
+    ),
+    rcm_version_id=ParameterSettings(
+        default_values=[
             ValueSettings(
                 key_type="simulation",
                 keys="rcm_version_id"
             )
-		]
-	)
+        ]
+    )
 )
 
-
 project_settings = dict(
-	context=TagSettings(
-		comments_list=["DR_version", "CV_version", "conventions_version", "dr2xml_version", "lab_settings",
+    context=TagSettings(
+        comments_list=["DR_version", "CV_version", "conventions_version", "dr2xml_version", "lab_settings",
                        "simulation_settings", "year"],
-		comments_constraints=dict(
-			CV_version=ParameterSettings(
-				default_values=["CMIP6-CV version ??", ]
-			),
-			conventions_version=ParameterSettings(
-				default_values=[
-					ValueSettings(key_type="common", keys="conventions_version", fmt="CMIP6_conventions_version {}")
-				]
-			)
-		)
-	),
+        comments_constraints=dict(
+            CV_version=ParameterSettings(
+                default_values=["CMIP6-CV version ??", ]
+            ),
+            conventions_version=ParameterSettings(
+                default_values=[
+                    ValueSettings(key_type="common", keys="conventions_version", fmt="CMIP6_conventions_version {}")
+                ]
+            )
+        )
+    ),
     file_output=TagSettings(
         attrs_constraints=dict(
             name=ParameterSettings(
@@ -194,7 +193,8 @@ project_settings = dict(
                             use_cmorvar=ValueSettings(key_type="internal", keys="use_cmorvar_label_in_filename"),
                             CORDEX_domain=ValueSettings(key_type="common", keys="CORDEX_domain"),
                             driving_model_id=ValueSettings(key_type="common", keys="driving_model_id"),
-                            driving_model_ensemble_member=ValueSettings(key_type="common", keys="driving_model_ensemble_member"),
+                            driving_model_ensemble_member=ValueSettings(key_type="common",
+                                                                        keys="driving_model_ensemble_member"),
                             rcm_version_id=ValueSettings(key_type="common", keys="rcm_version_id")
                         )
                     ))
@@ -295,30 +295,30 @@ project_settings = dict(
             source_id=ParameterSettings(
                 output_key="model_id"
             ),
-			title=ParameterSettings(
-				default_values=[
-					ValueSettings(
-						key_type="combine",
-						keys=[
-							ValueSettings(key_type="internal", keys="source_id"),
-							"CMIP6",
-							ValueSettings(key_type="common", keys="activity_id"),
-							ValueSettings(key_type="simulation", keys="expid_in_filename")
-						],
-						fmt="{} model output prepared for {} and {} / {} simulation"
-					),
-					ValueSettings(
-						key_type="combine",
-						keys=[
-							ValueSettings(key_type="internal", keys="source_id"),
-							"CMIP6",
-							ValueSettings(key_type="common", keys="activity_id"),
-							ValueSettings(key_type="internal", keys="experiment_id")
-						],
-						fmt="{} model output prepared for {} / {} {}"
-					)
-				]
-			)
+            title=ParameterSettings(
+                default_values=[
+                    ValueSettings(
+                        key_type="combine",
+                        keys=[
+                            ValueSettings(key_type="internal", keys="source_id"),
+                            "CMIP6",
+                            ValueSettings(key_type="common", keys="activity_id"),
+                            ValueSettings(key_type="simulation", keys="expid_in_filename")
+                        ],
+                        fmt="{} model output prepared for {} and {} / {} simulation"
+                    ),
+                    ValueSettings(
+                        key_type="combine",
+                        keys=[
+                            ValueSettings(key_type="internal", keys="source_id"),
+                            "CMIP6",
+                            ValueSettings(key_type="common", keys="activity_id"),
+                            ValueSettings(key_type="internal", keys="experiment_id")
+                        ],
+                        fmt="{} model output prepared for {} / {} {}"
+                    )
+                ]
+            )
         )
     ),
     field_output=TagSettings(
@@ -348,4 +348,3 @@ project_settings = dict(
         )
     )
 )
-

@@ -168,7 +168,7 @@ def analyze_cell_time_method(cm, label, table):
                                           ('Cannot yet handle time: mean (with samples weighted by snow mass)',
                                            label, table))
         logger.info("Will not explicitly handle time: mean (with samples weighted by snow mass) for "
-                  "%15s in table %s -> averaging" % (label, table))
+                    "%15s in table %s -> averaging" % (label, table))
         operation = "average"
     # ----------------------------------------------------------------------------------------------------------------
     elif "time: mean where cloud" in cm:
@@ -333,7 +333,7 @@ def analyze_cell_time_method(cm, label, table):
         add_value_in_list_config_variable("cell_method_warnings",
                                           ('Cannot yet compute maximum hourly rate', label, table))
         logger.info("TBD: Cannot yet compute maximum hourly rate for %15s in table %s -> averaging" % (label, table))
-            # Could output a time average of 24 hourly fields at 01 UTC, 2UTC ...
+        # Could output a time average of 24 hourly fields at 01 UTC, 2UTC ...
         operation = "average"
     # ----------------------------------------------------------------------------------------------------------------
     elif "time: minimum" in cm:

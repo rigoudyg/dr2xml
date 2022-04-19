@@ -17,31 +17,31 @@ home_attrs = ['type', 'label', 'modeling_realm', 'frequency', 'mipTable', 'tempo
 
 
 def read_home_var_perso(line_split, mips, expid):
-	home_var = read_home_var(line_split, home_attrs)
-	home_var.set_attributes(label_with_area=home_var.label, mip_era="PERSO", label_without_psuffix=home_var.label,
-	                        cell_measures="",
-	                        cell_methods=tcmName2tcmValue[home_var.temporal_shp])
-	home_var = fill_homevar(home_var)
-	if check_homevar(home_var, mips, expid):
-		return home_var
-	else:
-		return None
+    home_var = read_home_var(line_split, home_attrs)
+    home_var.set_attributes(label_with_area=home_var.label, mip_era="PERSO", label_without_psuffix=home_var.label,
+                            cell_measures="",
+                            cell_methods=tcmName2tcmValue[home_var.temporal_shp])
+    home_var = fill_homevar(home_var)
+    if check_homevar(home_var, mips, expid):
+        return home_var
+    else:
+        return None
 
 
 def check_perso_variable(home_var, hv_info):
-	logger = get_logger()
-	is_cmor = get_correspond_cmor_var(home_var)
-	if not is_cmor:
-		if home_var.mipVarLabel is None:
-			home_var.set_attributes(mipVarLabel=home_var.label)
-		if any([cmvar.label == home_var.label for cmvar in get_list_of_elements_by_id("CMORvar").items]):
-			raise VarsError("Error: %s "
-			                "HOMEVar is announced  as perso, is not a CMORVar, but has a cmor name. "
-			                "=> Not taken into account." % hv_info)
-		else:
-			logger.debug("Info: %s HOMEVar is purely personnal. => Taken into account." % hv_info)
-			return home_var
-	else:
-		raise VarsError("Error: %s "
-		                "HOMEVar is announced as perso, but in reality is cmor => Not taken into account." %
-		                hv_info)
+    logger = get_logger()
+    is_cmor = get_correspond_cmor_var(home_var)
+    if not is_cmor:
+        if home_var.mipVarLabel is None:
+            home_var.set_attributes(mipVarLabel=home_var.label)
+        if any([cmvar.label == home_var.label for cmvar in get_list_of_elements_by_id("CMORvar").items]):
+            raise VarsError("Error: %s "
+                            "HOMEVar is announced  as perso, is not a CMORVar, but has a cmor name. "
+                            "=> Not taken into account." % hv_info)
+        else:
+            logger.debug("Info: %s HOMEVar is purely personnal. => Taken into account." % hv_info)
+            return home_var
+    else:
+        raise VarsError("Error: %s "
+                        "HOMEVar is announced as perso, but in reality is cmor => Not taken into account." %
+                        hv_info)

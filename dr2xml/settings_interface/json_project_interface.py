@@ -122,7 +122,7 @@ def solve_values(values, internal_dict=dict(), common_dict=dict(), additional_di
 
 
 def solve_settings(settings, internal_dict=dict(), common_dict=dict(), additional_dict=dict(),
-                 allow_additional_keytypes=True):
+                   allow_additional_keytypes=True):
     for tag in settings:
         settings[tag].complete_and_clean()
     return settings

@@ -36,8 +36,8 @@ class SimpleObject(object):
         self._format_dict_()
 
     def update_attributes(self, **kwargs):
-        for kwarg in [kw for kw in kwargs if kw in self.__dict__ and
-                                             isinstance(self.__dict__[kw], (dict, OrderedDict))]:
+        for kwarg in [kw for kw in kwargs
+                      if kw in self.__dict__ and isinstance(self.__dict__[kw], (dict, OrderedDict))]:
             self.__dict__[kwarg].update(kwargs[kwarg])
         self.correct_data_request()
         self._format_dict_()

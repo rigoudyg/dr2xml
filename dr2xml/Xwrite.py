@@ -157,9 +157,11 @@ def write_xios_file_def_for_svar(sv, year, table, out, field_defs, axis_defs, gr
                     grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description = \
                         grids_dev[sv.label][grid_choice][context]
             else:
-                grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description = internal_dict["grids"][grid_choice][context]
+                grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description = \
+                    internal_dict["grids"][grid_choice][context]
         else:
-            grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description = internal_dict["grids"][grid_choice][context]
+            grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description = \
+                internal_dict["grids"][grid_choice][context]
     else:
         if grid in ['cfsites', ]:
             target_hgrid_id = cfsites_domain_id
@@ -577,8 +579,7 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
         interval_op = internal_dict["vertical_interpolation_sample_freq"]
     else:
         grid_choice = internal_dict["grid_choice"]
-        interval_op = repr(int(internal_dict['sampling_timestep'][grid_choice][context])) + \
-                      " s"
+        interval_op = repr(int(internal_dict['sampling_timestep'][grid_choice][context])) + " s"
 
     rep = DR2XMLElement(tag="field", default_tag="field_output", field_ref=last_field_id, grid_ref=grid_ref,
                         freq_offset=freq_offset, operation=operation,

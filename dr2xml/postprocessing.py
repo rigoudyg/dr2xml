@@ -24,7 +24,8 @@ from .xml_interface import find_rank_xml_subelement, DR2XMLElement
 from .analyzer import cmip6_freq_to_xios_freq
 
 # Grids tools
-from .grids import is_vert_dim, create_axis_def, create_grid_def, change_domain_in_grid, get_grid_def, add_scalar_in_grid
+from .grids import is_vert_dim, create_axis_def, create_grid_def, change_domain_in_grid, get_grid_def, \
+    add_scalar_in_grid
 
 # XIOS reading and writing tools
 from .Xparse import id2grid
@@ -66,7 +67,7 @@ def process_vertical_interpolation(sv, alias, pingvars, src_grid_id, field_defs,
     #
     #
     # sd=vdims[0]
-    alias_with_levels = "_".join([alias, sd.label]) # e.g. 'CMIP6_hus7h_plev7h'
+    alias_with_levels = "_".join([alias, sd.label])  # e.g. 'CMIP6_hus7h_plev7h'
     logger.debug("Alias with levels for sd is %s" % alias_with_levels)
     if alias_with_levels in pingvars:
         logger.warning("No vertical interpolation for %s because the pingfile provides it" % alias_with_levels)
@@ -98,7 +99,7 @@ def process_vertical_interpolation(sv, alias, pingvars, src_grid_id, field_defs,
 
     # Create field 'alias_sample' which time-samples the field at required freq
     # before vertical interpolation
-    alias_sample = "_".join([alias_in_ping, "sampled", vert_freq]) # e.g.  CMIP6_zg_sampled_3h
+    alias_sample = "_".join([alias_in_ping, "sampled", vert_freq])  # e.g.  CMIP6_zg_sampled_3h
     # <field id="CMIP6_hus_sampled_3h" field_ref="CMIP6_hus_instant" freq_op="3h" expr="@CMIP6_hus_instant"/>
     field_defs[alias_sample] = DR2XMLElement(tag="field", text="@{}".format(alias_for_sampling), id=alias_sample,
                                              field_ref=alias_for_sampling, detect_missing_value="true",
@@ -194,7 +195,7 @@ def process_zonal_mean(field_id, grid_id, target_hgrid_id, zgrid_id, field_defs,
 
     if not zgrid_id:
         raise Dr2xmlError("Must provide zgrid_id in lab_settings, the id of a latitude axis which has (initialized) "
-                           "latitude values equals to those of the rectangular grid used")
+                          "latitude values equals to those of the rectangular grid used")
 
     # And then regrid to final grid
     # e.g. <field id="CMIP6_ua_plev39_average_1d_glat" field_ref="CMIP6_ua_plev39_average_1d_complete"
@@ -379,8 +380,8 @@ def process_levels_over_orog(sv, alias, pingvars, src_grid_id, field_defs, axis_
             field_defs[height_over_orog_field_name] = height_over_orog_field_def
         height_over_orog_axis_name = "height_over_orog_axis"
         if height_over_orog_axis_name not in context_index:
-            height_over_orog_axis_def = DR2XMLElement(tag="axis", id=height_over_orog_axis_name, positive="up", name="z",
-                                                      standard_name="height_over_orog", unit="m")
+            height_over_orog_axis_def = DR2XMLElement(tag="axis", id=height_over_orog_axis_name, positive="up",
+                                                      name="z", standard_name="height_over_orog", unit="m")
             height_over_orog_axis_def.append(DR2XMLElement(tag="interpolate_axis", type="polynomial", order="2",
                                                            coordinate=height_over_orog_field_name))
             axis_defs[height_over_orog_axis_name] = height_over_orog_axis_def

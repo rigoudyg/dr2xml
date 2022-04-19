@@ -150,7 +150,8 @@ def generate_xml_tree_from_list(list_of_elements, verbose=False):
     return list_of_elements, current_elts, list_of_texts, list_of_comments, list_of_headers
 
 
-def find_next_element(xml_string, level=0, tag=None, verbose=False, follow_src=False, path_parse="./", dont_read=list()):
+def find_next_element(xml_string, level=0, tag=None, verbose=False, follow_src=False, path_parse="./",
+                      dont_read=list()):
     """
 
     :param xml_string:
