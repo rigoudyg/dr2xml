@@ -26,7 +26,7 @@ def initialize_settings(lset=None, sset=None, **kwargs):
     from .py_settings_interface import initialize_dict
     initialize_dict(new_lset=lset, new_sset=sset)
     # Read, merge and format complete settings linked to project
-    from .json_project_interface import initialize_project_settings, solve_values, solve_settings
+    from .py_project_interface import initialize_project_settings, solve_values, solve_settings
     internal_settings, common_settings, project_settings = initialize_project_settings()
     # Solve internal settings
     internal_settings = solve_values("internal", internal_dict=internal_settings, additional_dict=kwargs,
