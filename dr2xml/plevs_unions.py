@@ -29,7 +29,7 @@ from .vars_interface.definitions import SimpleDim
 from .Xparse import id2gridid
 
 
-def create_xios_axis_and_grids_for_plevs_unions(svars, plev_sfxs, dummies, axis_defs, grid_defs, field_defs, ping_refs):
+def create_xios_axis_and_grids_for_plevs_unions(svars, plev_sfxs, dummies):
     """
     Objective of this function is to optimize Xios vertical interpolation requested in pressure levels.
     Process in 2 steps:
@@ -46,8 +46,10 @@ def create_xios_axis_and_grids_for_plevs_unions(svars, plev_sfxs, dummies, axis_
         }
     * Second, create create all of the Xios union axis (axis id: union_plevs_<label_without_psuffix>)
     """
+    # TODO : correct this function
     #
     logger = get_logger()
+    ping_refs = get_config_variable("ping_refs")
     prefix = get_settings_values("internal", "ping_variables_prefix")
     # First, search plev unions for each label_without_psuffix and build dict_plevs
     dict_plevs = OrderedDict()
@@ -98,8 +100,6 @@ def create_xios_axis_and_grids_for_plevs_unions(svars, plev_sfxs, dummies, axis_
     # Second, create xios axis for union of plevs
     union_axis_defs = axis_defs
     union_grid_defs = grid_defs
-    # union_axis_defs={}
-    # union_grid_defs={}
     for lwps in list(dict_plevs):
         sdim_union = SimpleDim()
         plevs_union_xios = ""
@@ -149,8 +149,7 @@ def create_xios_axis_and_grids_for_plevs_unions(svars, plev_sfxs, dummies, axis_
         if len(list_plevs_union) == 1:
             sdim_union.value = plevs_union_xios
         logger.info("creating axis def for union :%s" % sdim_union.label)
-        axis_def = create_axis_def(sdim_union, union_axis_defs, field_defs, ping_refs)
-        create_grid_def(union_grid_defs, axis_def, sdim_union.out_name,
-                        id2gridid(prefix + lwps, get_config_variable("context_index")))
+        axis_def = create_axis_def(sdim_union)
+        create_grid_def(axis_def, sdim_union.out_name, id2gridid(prefix + lwps, get_config_variable("context_index")))
     #
     # return (union_axis_defs,union_grid_defs)

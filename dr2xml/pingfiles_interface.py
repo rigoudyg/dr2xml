@@ -22,7 +22,8 @@ from .utils import Dr2xmlError
 from logger import get_logger
 
 # Global variables and configuration tools
-from .config import get_config_variable
+from .config import get_config_variable, add_value_in_dict_config_variable, set_config_variable, \
+    add_value_in_list_config_variable
 
 # Interface to Data Request
 from .dr_interface import get_DR_version, get_list_of_elements_by_id, get_element_uid, print_DR_errors
@@ -70,7 +71,8 @@ def read_pingfiles_variables(pingfiles, dummies):
                     sys.exit(1)
             all_pingvars.extend(pingvars)
         pingvars = all_pingvars
-    return pingvars, all_ping_refs
+    set_config_variable("pingvars", pingvars)
+    set_config_variable("ping_refs", all_ping_refs)
 
 
 def read_xml_elmt_or_attrib(filename, tag='field', attrib=None):
@@ -437,10 +439,8 @@ def DX_defs_filename(obj, realm, path_special):
     return path_special + "/DX_%s_defs_%s.xml" % (obj, realm)
 
 
-def check_for_file_input(sv, hgrid, pingvars, field_defs, grid_defs, domain_defs, file_defs):
+def check_for_file_input(sv, hgrid):
     """
-
-
     Add an entry in pingvars
     """
     logger = get_logger()
@@ -450,7 +450,7 @@ def check_for_file_input(sv, hgrid, pingvars, field_defs, grid_defs, domain_defs
     if sv.label in externs and \
             any([d == hgrid for d in externs[sv.label]]):
         pingvar = internal_dict['ping_variables_prefix'] + sv.label
-        pingvars.append(pingvar)
+        add_value_in_list_config_variable(variable="pingvars", value=pingvar)
         # Add a grid made of domain hgrid only
         grid_id = "grid_" + hgrid
         grid_def = DR2XMLElement(tag="grid", id=grid_id)
@@ -460,13 +460,13 @@ def check_for_file_input(sv, hgrid, pingvars, field_defs, grid_defs, domain_defs
         file_domain_id = "remapped_%s_file_domain" % sv.label
         domain_def = DR2XMLElement(tag="domain", id=file_domain_id, type="rectilinear")
         domain_def.append(DR2XMLElement(tag="generate_rectilinear_domain"))
-        domain_defs[file_domain_id] = domain_def
+        add_value_in_dict_config_variable(variable="domain_defs", key=file_domain_id, value=domain_def)
         file_grid_id = "remapped_{}_file_grid".format(sv.label)
         remap_grid_def = DR2XMLElement(tag="grid", id=file_grid_id)
         remap_grid_def.append(DR2XMLElement(tag="domain", domain_ref=file_domain_id))
-        grid_defs[file_grid_id] = remap_grid_def
-        logger.info(domain_defs[file_domain_id])
-        logger.info(grid_defs[file_grid_id])
+        add_value_in_dict_config_variable(variable="grid_defs", key=file_grid_id, value=remap_grid_def)
+        logger.info(domain_def)
+        logger.info(remap_grid_def)
 
         # Create xml for reading the variable
         filename = externs[sv.label][hgrid][get_grid_choice()]
@@ -476,14 +476,14 @@ def check_for_file_input(sv, hgrid, pingvars, field_defs, grid_defs, domain_defs
         file_def = DR2XMLElement(tag="file", id=file_id, name=filename, mode="read", output_freq="1ts", enabled="true")
         file_def.append(DR2XMLElement(tag="field", id=field_in_file_id, name=sv.label, operation="instant",
                                       freq_op="1ts", freq_offset="1ts", grid_ref=file_grid_id))
-        file_defs[file_id] = file_def
-        logger.info(file_defs[file_id])
+        add_value_in_dict_config_variable(variable="file_defs", key=file_id, value=file_def)
+        logger.info(file_def)
         #
         # field_def='<field id="%s" grid_ref="%s" operation="instant" >%s</field>'%\
         field_def = DR2XMLElement(tag="field", id=pingvar, grid_ref=grid_id, field_ref=field_in_file_id,
                                   operation="instant", freq_op="1ts", freq_offset="0ts")
-        field_defs[field_in_file_id] = field_def
+        add_value_in_dict_config_variable(variable="field_defs", key=field_in_file_id, value=field_def)
         context_index = get_config_variable("context_index", to_change=True)
         context_index[pingvar] = field_def
 
-        logger.info(field_defs[field_in_file_id])
+        logger.info(field_def)

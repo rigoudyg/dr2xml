@@ -10,7 +10,7 @@ grid which is composed of CF sites
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
-
+from .config import add_value_in_dict_config_variable
 from .xml_interface import DR2XMLElement
 
 
@@ -34,17 +34,17 @@ def cfsites_input_filedef():
     return file_xml
 
 
-def add_cfsites_in_defs(grid_defs, domain_defs):
+def add_cfsites_in_defs():
     """
     Add grid_definition and domain_definition for cfsites in relevant dicts
     """
     grid_xml = DR2XMLElement(tag="grid", id=cfsites_grid_id)
     grid_xml.append(DR2XMLElement(tag="domain", domain_ref=cfsites_domain_id))
-    grid_defs[cfsites_grid_id] = grid_xml
+    add_value_in_dict_config_variable(variable="grid_defs", key=cfsites_grid_id, value=grid_xml)
 
     domain_xml = DR2XMLElement(tag="domain", id=cfsites_domain_id, type="unstructured", prec="8", lat_name="latitude",
                                lon_name="longitude", dim_i_name="site")
     domain_xml.append(DR2XMLElement(tag="generate_rectilinear_domain"))
     domain_xml.append(DR2XMLElement(tag="interpolate_domain", order="1", renormalize="true", mode="read_or_compute",
                                     write_weight="true"))
-    domain_defs[cfsites_radix] = domain_xml
+    add_value_in_dict_config_variable(variable="domain_defs", key=cfsites_radix, value=domain_xml)

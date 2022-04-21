@@ -82,6 +82,17 @@ def get_list_of_elements_by_id(collection):
     return dq.coll[collection]
 
 
+def get_sectors_list():
+    """
+    Get the sectors list.
+    :return:
+    """
+    rep = [dim.label for dim in get_list_of_elements_by_id('grids').items
+           if dim.type in ['character', ] and dim.value in ['', ]]
+    # Error in DR 01.00.21
+    return sorted(list(set(rep) - {"typewetla"}))
+
+
 def get_element_uid(id=None):
     """
     Get the uid of an element if precised, else the list of all elements.
@@ -113,10 +124,21 @@ def get_cmor_var_id_by_label(label):
     return dq.inx.CMORvar.label[label]
 
 
+def normalize_grid(grid):
+    """ in DR 1.0.2, values are :
+    ['', 'model grid', '100km', '50km or smaller', 'cfsites', '1deg', '2deg', '25km or smaller', 'native']
+    """
+    if grid in ["native", "model grid", ""]:
+        return ""
+    return grid.replace(" or smaller", "")
+
+
 def correct_data_request_dim(dim):
     # because value is unset in DR01.00.18
     if dim.label in ["misrBands", ]:
         dim.dimsize = 16
+    if dim.type in ["character", ]:
+        dim.altLabel = "sector"
 
 
 def correct_data_request_variable(variable):
@@ -137,6 +159,8 @@ def correct_data_request_variable(variable):
         elif variable.cell_measures in ['area: areacella', ] and \
                 variable.label in ['tos', 't20d', 'thetaot700', 'thetaot2000', 'thetaot300', 'mlotst']:
             variable.cell_measures = 'area: areacello'
+        if variable.label in ["jpdftaure", ]:
+            variable.spatial_shape = "XY-na"
     if variable.modeling_realm is not None:
         # Because wrong in DR01.00.20
         if variable.modeling_realm.startswith("zoo"):

@@ -208,11 +208,6 @@ common_values = dict(
             ""
         ]
     ),
-    institution_id=ParameterSettings(
-        default_values=[
-            ValueSettings(key_type="laboratory", keys="institution_id")
-        ]
-    ),
     references=ParameterSettings(
         default_values=[
             ValueSettings(key_type="laboratory", keys="references")
@@ -536,7 +531,7 @@ project_settings = dict(
             ),
             institution_id=ParameterSettings(
                 default_values=[
-                    ValueSettings(key_type="common", keys="institution_id")
+                    ValueSettings(key_type="internal", keys="institution_id")
                 ],
                 fatal=True
             ),

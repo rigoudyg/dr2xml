@@ -9,19 +9,21 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 
 from collections import defaultdict, OrderedDict
 
-from dr2xml.dr_interface import get_scope, get_element_uid, get_experiment_label, get_request_by_id_by_sect
-from dr2xml.grids_selection import decide_for_grids
+from dr2xml.dr_interface import get_scope, get_element_uid, get_experiment_label, get_request_by_id_by_sect, \
+    normalize_grid
 from logger import get_logger
 from dr2xml.settings_interface import get_settings_values
 from dr2xml.settings_interface.py_settings_interface import is_sset_not_None
 from dr2xml.utils import print_struct, Dr2xmlError
 from .definitions import SimpleCMORVar
 from .generic import complement_svar_using_cmorvar
-
+from dr2xml.laboratories import lab_adhoc_grid_policy
 
 rls_for_all_experiments = None
 global_rls = None
 sn_issues = OrderedDict()
+print_multiple_grids = False
+grid_choice = None
 
 
 def select_data_request_CMORvars_for_lab(sset=False, year=None):
@@ -527,9 +529,6 @@ def experiment_end_year_from_sset(exp):
         return experiment_end_year(exp)
 
 
-print_multiple_grids = False
-
-
 def endyear_for_CMORvar(cv, expt, year):
     """
     For a CMORvar, returns the largest year in the time slice(s)
@@ -594,11 +593,43 @@ def initialize_sn_issues(init):
     sn_issues = init
 
 
-grid_choice = None
-
-
 def get_grid_choice():
     """
     Get the value of global variable grid_choice
     """
     return grid_choice
+
+
+def decide_for_grids(cmvarid, grids):
+    """
+    Decide which set of grids a given variable should be produced on
+
+    CMVARID is uid of the CMORvar
+    GRIDS is a list of strings for grid as specified in requestLink
+    LSET is the laboratory settings dictionary. It carries a policy re. grids
+
+    Returns a list of grid strings (with some normalization) (see below)
+
+    TBD : use Martin's acronyms for grid policy
+    """
+    # Normalize and remove duplicates in grids list
+    ngrids = map(normalize_grid, grids)
+    ngrids = sorted(list(set(ngrids)))
+    #
+    policy = get_settings_values("internal", "grid_policy")
+    if policy in [None, "DR"]:  # Follow DR spec
+        return ngrids
+    elif policy in ["native", ]:  # Follow lab grids choice (gr or gn depending on context - see lset['grids"])
+        if ngrids == ['cfsites']:
+            return ngrids
+        else:
+            return ["", ]
+    elif policy in ["native+DR", ]:  # Produce both in 'native' and DR grid
+        if ngrids == ['cfsites']:
+            return ngrids
+        else:
+            return sorted(list(set(ngrids) | {''}))
+    elif policy in ["adhoc", ]:
+        return lab_adhoc_grid_policy(cmvarid, ngrids)
+    else:
+        Dr2xmlError("Invalid grid policy %s" % policy)

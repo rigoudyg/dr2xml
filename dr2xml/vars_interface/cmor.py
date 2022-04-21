@@ -14,6 +14,7 @@ from dr2xml.utils import Dr2xmlError
 from .definitions import SimpleCMORVar
 from .generic import read_home_var, fill_homevar, check_homevar, get_correspond_cmor_var, \
     complement_svar_using_cmorvar
+from .. import get_config_variable
 
 home_attrs = ['type', 'label', 'modeling_realm', 'frequency', 'mipTable', 'temporal_shp', 'spatial_shp',
               'experiment', 'mip']
@@ -60,7 +61,7 @@ def get_cmor_var(label, table):
         return None
 
 
-def ping_alias(svar, pingvars, error_on_fail=False):
+def ping_alias(svar, error_on_fail=False):
     """
     Dans le pingfile, grace a la gestion des interpolations
     verticales, on n'attend pas forcement les alias complets des
@@ -70,6 +71,7 @@ def ping_alias(svar, pingvars, error_on_fail=False):
     par ailleurs, si on a defini un label non ambigu alors on l'utilise
     comme ping_alias (i.e. le field_ref)
     """
+    pingvars = get_config_variable("pingvars")
     pref = get_settings_values("internal", "ping_variables_prefix")
     if svar.label_non_ambiguous:
         # print "+++ non ambiguous", svar.label,svar.label_non_ambiguous

@@ -20,7 +20,7 @@ from .utils import Dr2xmlError
 from logger import get_logger
 
 # Global variables and configuration tools
-from .config import get_config_variable
+from .config import get_config_variable, set_config_variable, add_value_in_dict_config_variable
 
 # Interface to Data Request
 from .dr_interface import get_scope
@@ -59,9 +59,8 @@ from .file_splitting import split_frequency_for_variable
 warnings_for_optimisation = []
 
 
-def write_xios_file_def_for_svar(sv, year, table, out, field_defs, axis_defs, grid_defs, domain_defs, scalar_defs,
-                                 dummies, skipped_vars_per_table, actually_written_vars, context, grid, pingvars=None,
-                                 enddate=None, attributes=[], debug=[]):
+def write_xios_file_def_for_svar(sv, year, table, out, dummies, skipped_vars_per_table, actually_written_vars, context,
+                                 grid, enddate=None, attributes=[], debug=[]):
     """
     Generate an XIOS file_def entry in out for :
       - a dict for laboratory settings
@@ -70,7 +69,7 @@ def write_xios_file_def_for_svar(sv, year, table, out, field_defs, axis_defs, gr
       - which all belong to given table
       - a path 'cvs' for Controlled Vocabulary
 
-    Lenghty code, but not longer than the corresponding specification document
+    Lengthy code, but not longer than the corresponding specification document
 
     1- After a prologue, attributes valid for all variables are
     written as file-level metadata, in the same order than in
@@ -113,17 +112,13 @@ def write_xios_file_def_for_svar(sv, year, table, out, field_defs, axis_defs, gr
         # Du coup, les simus avec constance des GHG (picontrol) sont traitees comme celles avec variation
         split_alias = alias.split("Clim")
         alias = split_alias[0]
-        if pingvars is not None:
-            # Get alias without pressure_suffix but possibly with area_suffix
-            alias_ping = ping_alias(sv, pingvars)
-        else:
-            alias_ping = sv.ref_var
+        alias_ping = ping_alias(sv)
     #
     # process only variables in pingvars except for dev variables
     # print(pingvars)
     # print("+++ =>>>>>>>>>>>", alias_ping, " ", sv.label)
     # print(alias_ping, "in pingvars?", alias_ping in pingvars)
-    if alias_ping not in pingvars and sv.type not in ["dev", "perso"]:
+    if alias_ping not in get_config_variable("pingvars") and sv.type not in ["dev", "perso"]:
         table = sv.mipTable
         if table not in skipped_vars_per_table:
             skipped_vars_per_table[table] = []
@@ -299,9 +294,8 @@ def write_xios_file_def_for_svar(sv, year, table, out, field_defs, axis_defs, gr
     # Write XIOS field entry
     # including CF field attributes
     # --------------------------------------------------------------------
-    (end_field, target_hgrid_id) = create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_defs,
-                                                              domain_defs, scalar_defs, dummies, context,
-                                                              target_hgrid_id, zgrid_id, pingvars)
+    (end_field, target_hgrid_id) = create_xios_aux_elmts_defs(sv, alias, table, dummies, context, target_hgrid_id,
+                                                              zgrid_id)
     xml_file.append(end_field)
     if sv.spatial_shp[0:4] == 'XY-A' or sv.spatial_shp[0:3] == 'S-A':  # includes half-level cases
         # create a field_def entry for surface pressure
@@ -311,10 +305,8 @@ def write_xios_file_def_for_svar(sv, year, table, out, field_defs, axis_defs, gr
         if sv_psol:
             # if not sv_psol.cell_measures : sv_psol.cell_measures = "cell measure is not specified in DR "+
             # get_DR_version()
-            psol_field, _ = create_xios_aux_elmts_defs(sv_psol,
-                                                       internal_dict["ping_variables_prefix"] + "ps", table,
-                                                       field_defs, axis_defs, grid_defs, domain_defs, scalar_defs,
-                                                       dummies, context, target_hgrid_id, zgrid_id, pingvars)
+            psol_field, _ = create_xios_aux_elmts_defs(sv_psol, internal_dict["ping_variables_prefix"] + "ps", table,
+                                                       dummies, context, target_hgrid_id, zgrid_id)
             xml_file.append(psol_field)
         else:
             logger.warning("Warning: Cannot complement model levels with psol for variable %s and table %s" %
@@ -344,8 +336,7 @@ def write_xios_file_def_for_svar(sv, year, table, out, field_defs, axis_defs, gr
     out.append(xml_file)
 
 
-def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_defs, domain_defs, scalar_defs, dummies,
-                               context, target_hgrid_id, zgrid_id, pingvars):
+def create_xios_aux_elmts_defs(sv, alias, table, dummies, context, target_hgrid_id, zgrid_id):
     """
     Create a field_ref string for a simplified variable object sv (with
     lab prefix for the variable name) and returns it
@@ -390,6 +381,7 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
         if target_grid.lower() in ["none", "native"]:
             target_hgrid_id = ""
         else:
+            grid_defs = get_config_variable("grid_defs")
             if target_grid in grid_defs:
                 target_grid_def = grid_defs[target_grid]
             elif target_grid in context_index:
@@ -406,11 +398,11 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
     if sv.type in ["dev", "perso"]:
         alias_ping = sv.ref_var
     else:
-        alias_ping = ping_alias(sv, pingvars)
+        alias_ping = ping_alias(sv)
     if sv.type in ["dev", ] and alias_ping not in context_index:
         field_def = DR2XMLElement(tag="field", id=alias_ping, long_name=sv.long_name, standard_name=sv.stdname,
                                   unit=sv.units, grid_ref=source_grid)
-        field_defs[alias_ping] = field_def
+        add_value_in_dict_config_variable(variable="field_defs", key=alias_ping, value=field_def)
         grid_id_in_ping = context_index[source_grid].attrib["id"]
     else:
         grid_id_in_ping = id2gridid(alias_ping, context_index)
@@ -429,20 +421,19 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
     # if ssh[0:4] in ['XY-H','XY-P'] or ssh[0:3] == 'Y-P' or \
     # must exclude COSP outputs which are already interpolated to height or P7 levels
     logger.debug("Deal with %s, %s, %s" % (sv.label, prefix + sv.label, sv.label_without_psuffix))
+    pingvars = get_config_variable("pingvars")
     if (ssh[0:4] == 'XY-P' and ssh != 'XY-P7') or \
             ssh[0:3] == 'Y-P' or (ssh == "XY-perso" and prefix + sv.label not in pingvars) or \
             ((ssh[0:5] == 'XY-na' or ssh[0:4] == 'Y-na') and
              prefix + sv.label not in pingvars and sv.label_without_psuffix != sv.label):
         # TBD check - last case is for singleton
-        last_grid_id, last_field_id = process_vertical_interpolation(sv, alias, pingvars, last_grid_id, field_defs,
-                                                                     axis_defs, grid_defs, domain_defs, table)
+        last_grid_id, last_field_id = process_vertical_interpolation(sv, alias, last_grid_id)
         # If vertical interpolation is done, change the value of those boolean to modify the behaviour of dr2xml
         grid_with_vertical_interpolation = True
     elif ssh in ["XY-HG", ]:
         # Handle interpolation on a height level over the ground
         logger.info("Deal with XY-HG spatial shape for %s,%s" % (sv.label, sv.ref_var))
-        last_field_id, last_grid_id = process_levels_over_orog(sv, alias, pingvars, last_grid_id, field_defs, axis_defs,
-                                                               grid_defs, domain_defs, scalar_defs, table)
+        last_field_id, last_grid_id = process_levels_over_orog(sv, alias, last_grid_id)
 
     #
     # --------------------------------------------------------------------
@@ -450,8 +441,7 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
     # --------------------------------------------------------------------
     #
     if has_singleton(sv) and ssh not in ["XY-HG", ]:
-        last_field_id, last_grid_id = process_singleton(sv, last_field_id, pingvars, field_defs, grid_defs, scalar_defs,
-                                                        table, grid_id_in_ping)
+        last_field_id, last_grid_id = process_singleton(sv, last_field_id, grid_id_in_ping)
     #
     # TBD : handle explicitly the case of scalars (global means, shape na-na) :
     # enforce <scalar name="sector" standard_name="region" label="global" >, or , better,
@@ -463,8 +453,7 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
     #
     if ssh[0:2] == 'Y-':  # zonal mean and atm zonal mean on pressure levels
         last_field_id, last_grid_id = \
-            process_zonal_mean(last_field_id, last_grid_id, target_hgrid_id, zgrid_id, field_defs, axis_defs, grid_defs,
-                               domain_defs, operation, sv.frequency)
+            process_zonal_mean(last_field_id, last_grid_id, target_hgrid_id, zgrid_id, operation, sv.frequency)
 
     #
     # --------------------------------------------------------------------
@@ -472,7 +461,7 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
     # --------------------------------------------------------------------
     if clim:
         if sv.frequency in ["1hrCM", ]:
-            last_field_id, last_grid_id = process_diurnal_cycle(last_field_id, field_defs, grid_defs, axis_defs)
+            last_field_id, last_grid_id = process_diurnal_cycle(last_field_id)
         else:
             raise Dr2xmlError("Cannot handle climatology cell_method for frequency %s and variable %s"
                               % (sv.frequency, sv.label))
@@ -483,8 +472,9 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
     #
     but_last_field_id = last_field_id
     last_field_id = last_field_id + "_" + operation
-    field_defs[last_field_id] = DR2XMLElement(tag="field", id=last_field_id, field_ref=but_last_field_id,
-                                              operation=operation)
+    add_value_in_dict_config_variable(variable="field_defs", key=last_field_id,
+                                      value=DR2XMLElement(tag="field", id=last_field_id, field_ref=but_last_field_id,
+                                                          operation=operation))
     #
     # --------------------------------------------------------------------
     # Change horizontal grid if requested
@@ -494,15 +484,15 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
     if target_hgrid_id and ssh not in ["na-na", "TR-na", "TRS-na", "na-A"] and not ssh.startswith("Y-") \
             and not ssh.startswith("YB-"):
         if target_hgrid_id == cfsites_domain_id:
-            add_cfsites_in_defs(grid_defs, domain_defs)
+            add_cfsites_in_defs()
         # Apply DR required remapping, either toward cfsites grid or a regular grid
-        last_grid_id = change_domain_in_grid(target_hgrid_id, grid_defs, src_grid_id=last_grid_id)
+        last_grid_id = change_domain_in_grid(target_hgrid_id, src_grid_id=last_grid_id)
     #
     # --------------------------------------------------------------------
     # Change axes in grid to CMIP6-compliant ones
     # --------------------------------------------------------------------
     #
-    last_grid_id = change_axes_in_grid(last_grid_id, grid_defs, axis_defs)
+    last_grid_id = change_axes_in_grid(last_grid_id)
     #
     # --------------------------------------------------------------------
     # Create <field> construct to be inserted in a file_def, which includes re-griding
@@ -591,7 +581,7 @@ def create_xios_aux_elmts_defs(sv, alias, table, field_defs, axis_defs, grid_def
     return rep, target_hgrid_id
 
 
-def process_singleton(sv, alias, pingvars, field_defs, grid_defs, scalar_defs, table, last_grid_id):
+def process_singleton(sv, alias, last_grid_id):
     """
     Based on singleton dimensions of variable SV, and assuming that this/these dimension(s)
     is/are not yet represented by a scalar Xios construct in corresponding field's grid,
@@ -613,9 +603,9 @@ def process_singleton(sv, alias, pingvars, field_defs, grid_defs, scalar_defs, t
         alias_ping = sv.label
         input_grid_id = id2gridid(alias_ping, context_index)
     else:
-        alias_ping = ping_alias(sv, pingvars)
+        alias_ping = ping_alias(sv)
         input_grid_id = id2gridid(alias_ping, context_index)
-    input_grid_def = get_grid_def_with_lset(input_grid_id, grid_defs)
+    input_grid_def = get_grid_def_with_lset(input_grid_id)
     logger.debug("process_singleton : processing %s with grid %s " % (alias, input_grid_id))
     #
     further_field_id = alias
@@ -676,7 +666,7 @@ def process_singleton(sv, alias, pingvars, field_defs, grid_defs, scalar_defs, t
         scalar_def = DR2XMLElement(tag="scalar", id=scalar_id, name=name, standard_name=standard_name,
                                    long_name=long_name, label=label, prec=prec, value=value, bounds=bounds_value,
                                    bounds_name=bounds_name, axis_type=axis_type, positive=positive, unit=sdim.units)
-        scalar_defs[scalar_id] = scalar_def
+        add_value_in_dict_config_variable(variable="scalar_defs", key=scalar_id, value=scalar_def)
         logger.debug("process_singleton : adding scalar %s" % scalar_def)
         #
         # Create a grid with added (or changed) scalar
@@ -684,7 +674,7 @@ def process_singleton(sv, alias, pingvars, field_defs, grid_defs, scalar_defs, t
         further_grid_def = add_scalar_in_grid(further_grid_def, glabel, scalar_id, name,
                                               sdim.axis in ["Z", ] and further_grid_def not in ["NATURE_landuse", ])
         logger.debug("process_singleton : adding grid %s" % further_grid_def)
-        grid_defs[glabel] = further_grid_def
+        add_value_in_dict_config_variable(variable="grid_defs", key=glabel, value=further_grid_def)
         further_grid_id = glabel
 
     # Compare grid definition (in case the input_grid already had correct ref to scalars)
@@ -694,7 +684,7 @@ def process_singleton(sv, alias, pingvars, field_defs, grid_defs, scalar_defs, t
         # Must init operation and detect_missing when there is no field ref
         field_def = DR2XMLElement(tag="field", text=alias, id=further_field_id, grid_ref=further_grid_id,
                                   operation="instant", detect_missing_value="true")
-        field_defs[further_field_id] = field_def
+        add_value_in_dict_config_variable(variable="field_defs", key=further_field_id, value=field_def)
         logger.debug("process_singleton : adding field %s" % field_def)
     return further_field_id, further_grid_id
 
@@ -724,9 +714,8 @@ def is_singleton(sdim):
                or (sdim.label == "typewetla")  # The latter is a bug in DR01.00.21 : typewetla has no value there
 
 
-def write_xios_file_def(filename, svars_per_table, year, field_defs, axis_defs, grid_defs, scalar_defs, file_defs,
-                        dummies, skipped_vars_per_table, actually_written_vars, context, pingvars=None, enddate=None,
-                        attributes=[]):
+def write_xios_file_def(filename, svars_per_table, year, dummies, skipped_vars_per_table, actually_written_vars,
+                        context, enddate=None, attributes=[]):
     """
     Write XIOS file_def.
     """
@@ -739,7 +728,7 @@ def write_xios_file_def(filename, svars_per_table, year, field_defs, axis_defs, 
     # Create xml element for context
     xml_context = DR2XMLElement(tag="context")
     # Initialize some variables
-    domain_defs = OrderedDict()
+    set_config_variable("domain_defs", OrderedDict())
     # Add xml_file_definition
     xml_file_definition = DR2XMLElement(tag="file_definition")
     # Loop on values to fill the xml element
@@ -754,17 +743,19 @@ def write_xios_file_def(filename, svars_per_table, year, field_defs, axis_defs, 
                 count[svar.mipVarLabel] = svar
                 for grid in svar.grids:
                     a, hgrid, b, c, d = internal_dict['grids'][get_grid_choice()][context]
-                    check_for_file_input(svar, hgrid, pingvars, field_defs, grid_defs, domain_defs, file_defs)
-                    write_xios_file_def_for_svar(svar, year, table, xml_file_definition, field_defs, axis_defs,
-                                                 grid_defs, domain_defs, scalar_defs, dummies, skipped_vars_per_table,
-                                                 actually_written_vars, context, grid, pingvars, enddate, attributes)
+                    check_for_file_input(svar, hgrid)
+                    write_xios_file_def_for_svar(svar, year, table, xml_file_definition, dummies,
+                                                 skipped_vars_per_table, actually_written_vars, context, grid, enddate,
+                                                 attributes)
             else:
                 logger.warning("Duplicate variable %s,%s in table %s is skipped, preferred is %s" %
                                (svar.label, svar.mipVarLabel, table, count[svar.mipVarLabel].label))
+    grid_defs = get_config_variable("grid_defs")
     # Add cfsites if needed
     if cfsites_grid_id in grid_defs:
         xml_file_definition.append(cfsites_input_filedef())
     # Add other file definitions
+    file_defs = get_config_variable("file_defs")
     for file_def in file_defs:
         xml_file_definition.append(file_defs[file_def])
     xml_context.append(xml_file_definition)
@@ -777,6 +768,7 @@ def write_xios_file_def(filename, svars_per_table, year, field_defs, axis_defs, 
     # Write all domain, axis, field defs needed for these file_defs
     xml_field_definition = DR2XMLElement(tag="field_definition")
     is_reset_field_group = internal_dict["nemo_sources_management_policy_master_of_the_world"] and context in ['nemo', ]
+    field_defs = get_config_variable("field_defs")
     if is_reset_field_group:
         xml_field_group = DR2XMLElement(tag="field_group", freq_op="_reset_", freq_offset="_reset_")
         for xml_field in list(field_defs):
@@ -789,9 +781,11 @@ def write_xios_file_def(filename, svars_per_table, year, field_defs, axis_defs, 
     #
     xml_axis_definition = DR2XMLElement(tag="axis_definition")
     xml_axis_group = DR2XMLElement(tag="axis_group")
+    axis_defs = get_config_variable("axis_defs")
     for xml_axis in list(axis_defs):
         xml_axis_group.append(axis_defs[xml_axis])
     if False and internal_dict['use_union_zoom']:
+        union_axis_defs = get_config_variable("union_axis_defs")
         for xml_axis in list(union_axis_defs):
             xml_axis_group.append(union_axis_defs[xml_axis])
     xml_axis_definition.append(xml_axis_group)
@@ -799,6 +793,7 @@ def write_xios_file_def(filename, svars_per_table, year, field_defs, axis_defs, 
     #
     xml_domain_definition = DR2XMLElement(tag="domain_definition")
     xml_domain_group = DR2XMLElement(tag="domain_group")
+    domain_defs = get_config_variable("domain_defs")
     if internal_dict['grid_policy'] not in ["native", ]:
         create_standard_domains(domain_defs)
     for xml_domain in list(domain_defs):
@@ -810,11 +805,13 @@ def write_xios_file_def(filename, svars_per_table, year, field_defs, axis_defs, 
     for xml_grid in list(grid_defs):
         xml_grid_definition.append(grid_defs[xml_grid])
     if False and internal_dict['use_union_zoom']:
+        union_grid_defs = get_config_variable("union_grid_defs")
         for xml_grid in list(union_grid_defs):
             xml_grid_definition.append(union_grid_defs[xml_grid])
     xml_context.append(xml_grid_definition)
     #
     xml_scalar_definition = DR2XMLElement(tag="scalar_definition")
+    scalar_defs = get_config_variable("scalar_defs")
     for xml_scalar in list(scalar_defs):
         xml_scalar_definition.append(scalar_defs[xml_scalar])
     xml_context.append(xml_scalar_definition)

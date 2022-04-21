@@ -146,7 +146,7 @@ def analyze_cell_time_method(cm, label, table):
 
     We rely on the missing value detection to match the requirements like
     "where sea-ice", "where cloud" since we suppose fields required in this way
-    are physically undefined oustide of "where something".
+    are physically undefined except on "where something".
     """
     logger = get_logger()
     operation = None

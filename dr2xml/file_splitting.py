@@ -7,10 +7,13 @@ Tools to compute split frequencies.
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+import re
 from collections import OrderedDict, defaultdict
 from io import open
 
 # Utilities
+import six
+
 from .settings_interface import get_settings_values
 from .utils import Dr2xmlGridError
 
@@ -31,10 +34,9 @@ def read_splitfreqs():
     if splitfreqs is None:
         splitfile = get_settings_values("internal", "split_frequencies")
         try:
-            freq = open(splitfile, "r")
-            print("Reading split_freqs from file %s" % splitfile)
-            lines = freq.readlines()
-            freq.close()
+            with open(splitfile, "r") as freq:
+                print("Reading split_freqs from file %s" % splitfile)
+                lines = freq.readlines()
             splitfreqs = defaultdict(lambda: OrderedDict)
             for line in [l for l in lines if not l.startswith("#")]:
                 (varlabel, table, freq) = line.split()[0:3]
@@ -62,8 +64,8 @@ def read_compression_factors():
         return
     else:
         try:
-            fact = open("compression_factors.dat", "r")
-            lines = fact.readlines()
+            with open("compression_factors.dat", "r") as fact:
+                lines = fact.readlines()
             compression_factor = defaultdict(lambda: OrderedDict)
             for line in [l for l in lines if not l.startswith("#")]:
                 varlabel, table, factor = line.split()[0:3]
@@ -168,54 +170,46 @@ def split_frequency_for_variable(svar, grid, mcfg, context):
                 "Warning: field_size returns 0 for var %s, cannot compute split frequency." % svar.label)
 
 
+freq_regexp = re.compile(r"(?P<len>\d*)(?P<type>(hr|h|day|d|mon|mo|yr|y|dec))(?P<suffix>(Pt|C|CM)?)")
+freq_type_dict = dict(hr=1 / 24., h=1 / 24., day=1., d=1., mon=31., mo=31., yr=365., y=365., dec=10 * 365.)
+
+
 def timesteps_per_freq_and_duration(freq, nbdays, sampling_tstep):
     """
-
+    This function returns the number of records within nbdays
     :param freq:
     :param nbdays:
     :param sampling_tstep:
     :return:
     """
-    # This function returns the number of records within nbdays
-    duration = 0.
-    # Translate freq strings to duration in days
-    if freq in ["3hr", "3hrPt", "3h"]:
-        duration = 1. / 8
-    elif freq in ["6hr", "6hrPt", "6h"]:
-        duration = 1. / 4
-    elif freq in ["day", "1d"]:
-        duration = 1.
-    elif freq in ["5day", "5d"]:
-        duration = 5.
-    elif freq in ["10day", "10d"]:
-        duration = 10.
-    elif freq in ["1hr", "hr", "1hrPt", "1h"]:
-        duration = 1. / 24
-    elif freq in ["mon", "monPt", "monC", "1mo"]:
-        duration = 31.
-    elif freq in ["yr", "yrPt", "1y"]:
-        duration = 365.
-    # TBD ; use setting's value for CFsubhr_frequency
-    elif freq in ["subhr", "subhrPt", "1ts"]:
-        duration = 1. / (86400. / sampling_tstep)
-    elif freq in ["dec", "10y"]:
-        duration = 10. * 365
-    #
-    # If freq actually translate to a duration, return
-    # number of timesteps for number of days
-    #
-    if duration != 0.:
-        return float(nbdays) / duration
-    # Otherwise , return a sensible value
-    elif freq in ["fx", ]:
+    if freq in ["fx", ]:
         return 1.
-    # elif freq=="monClim" : return (int(float(nbdays)/365) + 1)* 12.
-    # elif freq=="dayClim" : return (int(float(nbdays)/365) + 1)* 365.
-    # elif freq=="1hrClimMon" : return (int(float(nbdays)/31) + 1) * 24.
-    elif freq in ["1hrCM", ]:
-        return (int(float(nbdays) / 31) + 1) * 24.
     else:
-        raise Dr2xmlGridError("Frequency %s is not handled" % freq)
+        # If freq actually translate to a duration, return number of timesteps for number of days
+        freq_type_dict['subhr'] = 1 / (86400. / sampling_tstep)
+        duration = 0.
+        ndays = float(nbdays)
+        # Translate freq strings to duration in days
+        if isinstance(freq, six.string_types):
+            freq_match = freq_regexp.match(freq)
+            if freq_match:
+                freq_type = freq_match.groupdict()["type"]
+                freq_len = freq_match.groupdict()["len"]
+                freq_suffix = freq_match.groupdict()["suffix"]
+                if freq_suffix in ["CM", ]:
+                    ndays = (int(float(nbdays) / 31) + 1)
+                if freq_len in ["", None]:
+                    freq_len = 1.
+                else:
+                    freq_len = float(freq_len)
+                duration = freq_len * freq_type_dict.get(freq_type, 0.)
+        if duration != 0.:
+            return ndays / duration
+        else:
+            raise Dr2xmlGridError("Frequency %s is not handled" % freq)
+
+
+spatial_shape_regexp = re.compile(r"(?P<hdim>\w+)-(?P<vdim>\w+)(?P<other>(\|\w+)?)")
 
 
 def field_size(svar, mcfg):
@@ -249,64 +243,48 @@ def field_size(svar, mcfg):
     #
     siz = 0
     s = svar.spatial_shp
-    if s in ["XY-A", ]:  # Global field on model atmosphere levels
-        siz = atm_nblev * atm_grid_size
-    elif s in ["XY-AH", ]:  # Global field on model atmosphere half-levels
-        siz = (atm_nblev + 1) * atm_grid_size
-    elif s in ["na-AH", ]:  # profile on model atmosphere half-levels
-        siz = atm_nblev + 1
-    elif s.startswith("XY-P"):  # Global field (pressure levels)
-        if "jpdftaure" in svar.label:
-            siz = atm_grid_size
-        else:
-            siz = atm_grid_size * svar.other_dims_size
-    elif s.startswith("XY-H") or s.startswith("XY-HG"):  # Global field (altitudes)
-        siz = atm_grid_size * svar.other_dims_size
-    elif s in ["S-AH", ]:  # Atmospheric profiles (half levels) at specified sites
-        siz = (atm_nblev + 1) * nb_cosp_sites
-    elif s in ["S-A", ]:  # Atmospheric profiles at specified sites
-        siz = atm_nblev * nb_cosp_sites
-    elif s in ["S-na", ]:  # Site (129 specified sites)
-        siz = nb_cosp_sites
-    elif s in ["L-na", ]:  # COSP curtain
-        siz = nb_curtain_sites
-    elif s in ["L-H40", ]:  # Site profile (at 40 altitudes)
-        siz = nb_curtain_sites * svar.other_dims_size
-    elif s in ["Y-P19", "Y-P39"]:  # Atmospheric Zonal Mean (on ... pressure levels)
-        siz = nb_lat * svar.other_dims_size
-    elif s in ["Y-A", ]:  # Zonal mean (on model levels)
-        siz = nb_lat * atm_nblev
-    elif s in ["Y-na", ]:  # Zonal mean (on surface)
-        siz = nb_lat
-    elif s in ["na-A", ]:  # Atmospheric profile (model levels)
-        # mpmoine_correction:field_size: 'na-A' s'applique a des dims (alevel)+spectband mais aussi a (alevel,site)
-        # => *nb_cosp_sites
-        siz = atm_nblev * nb_cosp_sites
-    elif s in ["XY-S", ]:  # Global field on soil levels
-        siz = soil_nblev * atm_grid_size
-    elif s in ["XY-SN", ]:  # TBD : restore correct size for fields on snow levels (was supposed to be size 1, for tsnl)
-        siz = atm_grid_size
-    elif s in ["XY-O", ]:  # Global ocean field on model levels
-        siz = oce_nblev * oce_grid_size
-    elif s in ["XY-na", ]:  # Global field (single level)
-        siz = atm_grid_size
-        if svar.modeling_realm in ['ocean', 'seaIce', 'ocean seaIce', 'ocnBgchem', 'seaIce ocean']:
-            siz = oce_grid_size
-        siz *= svar.other_dims_size
-    elif s in ["XY-temp", ]:  # Global field (lidar_temp)
-        siz = atm_grid_size * nb_lidar_temp
-    elif s in ["XY-sza5", ]:  # Global field (parasol_refl)
-        siz = atm_grid_size * nb_parasol_refl
-    elif s in ["XY-tau|plev7c", ]:  # Global field (isccp_tau x isccp_pc)
-        siz = atm_grid_size * nb_isccp_tau * nb_isccp_pc
-    elif s in ["YB-R", "YB-O", "GYB-O"]:  # Ocean Basin Meridional Section (on density surfaces for first one)
-        siz = oce_nblev * nb_lat_ocean
-    elif s in ["YB-na", ]:  # Ocean Basin Zonal Mean
-        siz = nb_lat_ocean
-    elif s in ["TR-na", "TRS-na"]:  # Ocean Transect or Sea-ice ocean transect
-        siz = svar.other_dims_size
-    elif s in ["na-na", ]:  # Global mean/constant
-        siz = 1
+    s_match = spatial_shape_regexp.match(s)
+    if s_match:
+        s_hdim = s_match.groupdict()["hdim"]
+        s_vdim = s_match.groupdict()["vdim"]
+        s_other = s_match.groupdict()["other"]
+
+        if s_hdim in ["XY", ]:
+            if s_vdim in ["O", ] or svar.modeling_realm in ['ocean', 'seaIce', 'ocean seaIce', 'ocnBgchem',
+                                                            'seaIce ocean']:
+                siz = oce_grid_size
+            else:
+                siz = atm_grid_size
+        elif s_hdim in ["na", "TR", "TRS"]:
+            siz = 1
+        elif s_hdim in ["S", ]:
+            siz = nb_cosp_sites
+        elif s_hdim in ["L", ]:
+            siz = nb_curtain_sites
+        elif s_hdim in ["Y", ]:
+            siz = nb_lat
+        elif s_hdim in ["YB", "GYB"]:
+            siz = nb_lat_ocean
+
+        if s_vdim in ["A", ]:
+            siz *= atm_nblev
+        elif s_vdim in ["AH", ]:
+            siz *= (atm_nblev + 1)
+        elif s_vdim.startswith("H") or s_vdim.startswith("P") or (s_vdim in ["na", ] and s_hdim in ["XY", "TR", "TRS"]):
+            siz *= svar.other_dims_size
+        elif s_vdim in ["S", ]:
+            siz *= soil_nblev
+        elif s_vdim in ["O", "R"]:
+            siz *= oce_nblev
+        elif s_vdim in ["temp", ]:
+            siz *= nb_lidar_temp
+        elif s_vdim in ["sza5", ]:
+            siz *= nb_parasol_refl
+        elif s_vdim in ["tau", ]:
+            siz *= nb_isccp_tau
+
+        if s_other in ["plev7c", ]:
+            siz *= nb_isccp_pc
 
     if siz == 0:
         raise Dr2xmlGridError("Cannot compute field_size for var %s and shape %s" % (svar.label, s))

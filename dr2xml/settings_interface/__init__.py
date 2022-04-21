@@ -31,15 +31,15 @@ def initialize_settings(lset=None, sset=None, **kwargs):
     # Solve internal settings
     internal_settings = solve_values("internal", internal_dict=internal_settings, additional_dict=kwargs,
                                      allow_additional_keytypes=False)
+    # Initialize laboratory sources
+    from dr2xml.laboratories import initialize_laboratory_settings
+    initialize_laboratory_settings()
     # Solve common settings
     common_settings = solve_values("common", common_dict=common_settings, internal_dict=internal_settings,
                                    additional_dict=kwargs)
-    pprint.pprint(internal_settings)
-    pprint.pprint(common_settings)
     # Solve project_settings
     project_settings = solve_settings(project_settings, internal_dict=internal_settings,
                                       common_dict=common_settings, additional_dict=kwargs)
-    pprint.pprint(project_settings)
 
 
 def get_settings_values(*args, **kwargs):

@@ -31,6 +31,11 @@ internal_values = dict(
 			ValueSettings(key_type="internal", keys="project")
 		]
 	),
+    institution_id=ParameterSettings(
+        default_values=[
+            ValueSettings(key_type="laboratory", keys="institution_id")
+        ]
+    ),
 	context=ParameterSettings(
 		default_values=[
 			ValueSettings(key_type="dict", keys="context")
@@ -523,6 +528,12 @@ internal_values = dict(
 		default_values=[
 			ValueSettings(key_type="laboratory", keys="data_request_used"),
 			"CMIP6"
+		]
+	),
+	laboratory_used=ParameterSettings(
+		default_values=[
+			ValueSettings(key_type="laboratory", keys="laboratory_used"),
+			None
 		]
 	),
 	save_project_settings=ParameterSettings(

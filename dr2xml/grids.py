@@ -19,10 +19,10 @@ from .utils import Dr2xmlError
 from logger import get_logger
 
 # Global variables and configuration tools
-from .config import get_config_variable
+from .config import get_config_variable, add_value_in_dict_config_variable
 
 # Interface to Data Request
-from .dr_interface import get_list_of_elements_by_id, get_element_uid
+from .dr_interface import get_element_uid, get_sectors_list
 # Interface to xml tools
 from .xml_interface import find_rank_xml_subelement, DR2XMLElement
 
@@ -36,11 +36,12 @@ from .cfsites import cfsites_grid_id, add_cfsites_in_defs, cfsites_domain_id
 axis_count = 0
 
 
-def get_grid_def(grid_id, grid_defs):
+def get_grid_def(grid_id):
     """
     Get the grid definition corresponding to grid_id from the context_index or the list of grid definitions.
     """
     context_index = get_config_variable("context_index")
+    grid_defs = get_config_variable("grid_defs")
     if grid_id in grid_defs:
         # Simple case : already stored
         grid_def = grid_defs[grid_id]
@@ -70,7 +71,7 @@ def guess_simple_domain_grid_def(grid_id):
     return grid_def
 
 
-def create_grid_def(grid_defs, axis_def, axis_name, src_grid_id):
+def create_grid_def(axis_def, axis_name, src_grid_id):
     """
     Create and store a grid definition by changing in SRC_GRID_ID grid def
     its only axis member (either def or ref) with AXIS_DEF (where any id
@@ -81,7 +82,7 @@ def create_grid_def(grid_defs, axis_def, axis_name, src_grid_id):
     raises error if there is not exactly one axis def or reg in input grid
 
     """
-    src_grid_def = get_grid_def(src_grid_id, grid_defs)
+    src_grid_def = get_grid_def(src_grid_id)
     #
     # Retrieve axis key and remove id= from axis definition
     new_axis_def = axis_def.copy()
@@ -97,11 +98,11 @@ def create_grid_def(grid_defs, axis_def, axis_name, src_grid_id):
     else:
         raise Dr2xmlError("Fatal: cannot find an axis ref in grid %s : %s " % (src_grid_id, target_grid_def))
     target_grid_def.attrib["id"] = target_grid_id
-    grid_defs[target_grid_id] = target_grid_def
+    add_value_in_dict_config_variable(variable="grid_defs", key=target_grid_id, value=target_grid_def)
     return target_grid_id
 
 
-def create_axis_def(sdim, axis_defs, field_defs, pingvars):
+def create_axis_def(sdim):
     """
 
     From a simplified Dim object SDIM representing a vertical dimension,
@@ -150,7 +151,7 @@ def create_axis_def(sdim, axis_defs, field_defs, pingvars):
             coordname = prefix + "zg"
         else:
             coordname = prefix + sdim.label
-        if coordname not in pingvars:
+        if coordname not in get_config_variable("pingvars"):
             raise Dr2xmlError("Could not find coordinate variable %s in pingfile." % coordname)
         #
         # Create an intermediate field for coordinate , just adding time sampling
@@ -158,7 +159,7 @@ def create_axis_def(sdim, axis_defs, field_defs, pingvars):
         coordname_with_op = coordname + "_" + operation  # e.g. CMIP6_pfull_instant
         coorddef_op = DR2XMLElement(tag="field", id=coordname_with_op, field_ref=coordname, detect_missing_value="true",
                                     operation=operation)
-        field_defs[coordname_with_op] = coorddef_op
+        add_value_in_dict_config_variable(variable="field_defs", key=coordname_with_op, value=coorddef_op)
         #
         # Create and store a definition for time-sampled field for the vertical coordinate
         vert_frequency = internal_dict["vertical_interpolation_sample_freq"]
@@ -166,15 +167,16 @@ def create_axis_def(sdim, axis_defs, field_defs, pingvars):
         axis_xml.append(DR2XMLElement(tag="interpolate_axis", type="polynomial", order="1",
                                       coordinate=coordname_sampled))
         # Store definition for the new axis
-        axis_defs[sdim.label] = axis_xml
+        add_value_in_dict_config_variable(variable="axis_defs", key=sdim.label, value=axis_xml)
         coorddef = DR2XMLElement(tag="field", text="@{}".format(coordname), id=coordname_sampled,
                                  field_ref=coordname_with_op, freq_op=vert_frequency, detect_missing_value="true")
-        field_defs[coordname_sampled] = coorddef
+        add_value_in_dict_config_variable(variable="field_defs", key=coordname_sampled, value=coorddef)
     else:  # zoom case
         # Axis is subset of another, write it as a zoom_axis
         axis_xml = DR2XMLElement(tag="axis", id=sdim.zoom_label, axis_ref=sdim.zoom_of, name="plev",
                                  axis_type=sdim.axis)
-        values = re.sub(r'.*\[ *(.*) *\].*', r'\1', axis_defs[sdim.is_zoom_of].attrib["value"])
+        values = get_config_variable("axis_defs", keys=sdim.is_zoom_of).attrib["value"]
+        values = re.sub(r'.*\[ *(.*) *\].*', r'\1', values)
         values = values.split("\n")[0]
         union_vals = values.strip(" ").split()
         union_vals_num = [float(v) for v in union_vals]
@@ -182,11 +184,11 @@ def create_axis_def(sdim, axis_defs, field_defs, pingvars):
                                               " ".join([str(union_vals_num.index(val)) for val in glo_list_num]))
         axis_xml.append(DR2XMLElement(tag="zoom_axis", index=index_values))
         # Store definition for the new axis
-        axis_defs[sdim.zoom_label] = axis_xml
+        add_value_in_dict_config_variable(variable="axis_defs", key=sdim.zoom_label, value=axis_xml)
     return axis_xml
 
 
-def change_domain_in_grid(domain_id, grid_defs, ping_alias=None, src_grid_id=None, turn_into_axis=False):
+def change_domain_in_grid(domain_id, src_grid_id=None, turn_into_axis=False):
     """
     Provided with a grid id SRC_GRID_ID or alternatively a variable name (ALIAS),
     (SRC_GRID)
@@ -196,7 +198,7 @@ def change_domain_in_grid(domain_id, grid_defs, ping_alias=None, src_grid_id=Non
     if src_grid_id is None:
         raise Dr2xmlError("deprecated")
     else:
-        src_grid = get_grid_def_with_lset(src_grid_id, grid_defs)
+        src_grid = get_grid_def_with_lset(src_grid_id)
         # Find the domain rank in the grid definition
         rank = find_rank_xml_subelement(src_grid, tag="domain", domain_ref=None)
         if len(rank) > 0:
@@ -223,24 +225,24 @@ def change_domain_in_grid(domain_id, grid_defs, ping_alias=None, src_grid_id=Non
             else:
                 target_grid_xml[rank].attrib["domain_ref"] = domain_id
             target_grid_xml.attrib["id"] = target_grid_id
-            grid_defs[target_grid_id] = target_grid_xml
+            add_value_in_dict_config_variable(variable="grid_defs", key=target_grid_id, value=target_grid_xml)
             # print "target_grid_id=%s : %s"%(target_grid_id,target_grid_string)
             return target_grid_id
 
 
-def get_grid_def_with_lset(grid_id, grid_defs):
+def get_grid_def_with_lset(grid_id):
     """
     Get the grid definition corresponding to grid_id.
     """
     try:
-        grid_def = get_grid_def(grid_id, grid_defs)
+        grid_def = get_grid_def(grid_id)
     except:
         grid_def = guess_simple_domain_grid_def(grid_id)
-        grid_defs[grid_id] = grid_def
+        add_value_in_dict_config_variable(variable="grid_defs", key=grid_id, value=grid_def)
     return grid_def
 
 
-def change_axes_in_grid(grid_id, grid_defs, axis_defs):
+def change_axes_in_grid(grid_id):
     """
     Create a new grid based on GRID_ID def by changing all its axis references to newly created
     axis which implement CMIP6 axis attributes
@@ -251,7 +253,7 @@ def change_axes_in_grid(grid_id, grid_defs, axis_defs):
     internal_dict = get_settings_values("internal")
     global axis_count
     logger = get_logger()
-    grid_def_init = get_grid_def(grid_id, grid_defs)
+    grid_def_init = get_grid_def(grid_id)
     grid_def = grid_def_init.copy()
     output_grid_id = grid_id
     axes_to_change = list()
@@ -261,10 +263,8 @@ def change_axes_in_grid(grid_id, grid_defs, axis_defs):
     aliases = internal_dict['non_standard_axes']
 
     # Add cases where dim name 'sector' should be used,if needed
-    # sectors = dims which have type charcter and are not scalar
-    sectors = internal_dict.get("sectors", [dim.label for dim in get_list_of_elements_by_id('grids').items
-                                            if dim.type in ['character', ] and dim.value in ['', ]])
-    sectors = sorted(list(set(sectors) - set(["typewetla", ])))  # Error in DR 01.00.21
+    # sectors = dims which have type character and are not scalar
+    sectors = internal_dict.get("sectors", get_sectors_list())
     for sector in sectors:
         if not any([sector in [aliases[aid], aliases[aid][0]] for aid in aliases]):
             # print "\nadding sector : %s"%sector
@@ -298,7 +298,7 @@ def change_axes_in_grid(grid_id, grid_defs, axis_defs):
                 dim = get_element_uid(dim_id)
                 # We don't process scalars here
                 if dim.value in ['', ] or dim.label in ["scatratio", ]:
-                    axis_id, axis_name = create_axis_from_dim(dim, alt_labels, axis_ref, axis_defs)
+                    axis_id, axis_name = create_axis_from_dim(dim, alt_labels, axis_ref)
                     # cannot use ET library which does not guarantee the ordering of axes
                     changed_done = True
                     axis_count += 1
@@ -312,21 +312,18 @@ def change_axes_in_grid(grid_id, grid_defs, axis_defs):
         return grid_id
     else:
         grid_def.attrib["id"] = output_grid_id
-        grid_defs[output_grid_id] = grid_def
+        add_value_in_dict_config_variable(variable="grid_defs", key=output_grid_id, value=grid_def)
         return output_grid_id
 
 
-def create_axis_from_dim(dim, labels, axis_ref, axis_defs):
+def create_axis_from_dim(dim, labels, axis_ref):
     """
     Create an axis definition by translating all DR dimension attributes to XIos
     constructs generating CMIP6 requested attributes
     """
     axis_id = "DR_" + dim.label + "_" + axis_ref
-    if dim.type == "character":
-        axis_name = "sector"
-    else:
-        axis_name = dim.altLabel
-    if axis_id in axis_defs:
+    axis_name = dim.altLabel
+    if axis_id in get_config_variable("axis_defs"):
         return axis_id, axis_name
     #
     prec_dict = dict(double="8", integer="2", int="2", float="4")
@@ -338,15 +335,15 @@ def create_axis_from_dim(dim, labels, axis_ref, axis_defs):
         if dim.requested not in ['', ]:
             nb = len(dim.requested.split())
             value = "(0,{})[ {} ]".format(nb, dim.requested.strip())
-        if isinstance(dim.boundsRequested, list):
-            vals = " ".join([str(v) for v in dim.boundsRequested])
-            valsr = reduce(lambda x, y: x + y, vals)
-            bounds = "(0,1)x(0,{})[ {} ]".format(nb - 1, valsr)
+            if isinstance(dim.boundsRequested, list):
+                vals = " ".join([str(v) for v in dim.boundsRequested])
+                valsr = reduce(lambda x, y: x + y, vals)
+                bounds = "(0,1)x(0,{})[ {} ]".format(nb - 1, valsr)
     else:
         dim_name = dim.altLabel
         if labels is None:
             labels = dim.requested
-        if dim.label == "oline" and get_settings_values("internal", 'add_Gibraltar'):
+        if dim.label in ["oline", ] and get_settings_values("internal", 'add_Gibraltar'):
             labels += " gibraltar"
         labels = labels.replace(', ', ' ').replace(',', ' ')
         length = len(labels.split())
@@ -359,7 +356,7 @@ def create_axis_from_dim(dim, labels, axis_ref, axis_defs):
     rep = DR2XMLElement(tag="axis", id=axis_id, name=axis_name, axis_ref=axis_ref, standard_name=dim.standardName,
                         long_name=dim.title, prec=prec_dict.get(dim.type), unit=dim.units, value=value, bounds=bounds,
                         dim_name=dim_name, label=label, axis_type=dim.axis)
-    axis_defs[axis_id] = rep
+    add_value_in_dict_config_variable(variable="axis_defs", key=axis_id, value=rep)
     # print "new DR_axis :  %s "%rep
     return axis_id, axis_name
 
@@ -383,7 +380,7 @@ def scalar_vertical_dimension(sv):
     """
     if 'cids' in sv.struct.__dict__:
         cid = get_element_uid(sv.struct.cids[0])
-        if cid.axis in ['Z', ]:
+        if is_vert_dim(cid):
             return cid.altLabel
     return None
 
@@ -402,17 +399,17 @@ def create_output_grid(ssh, grid_defs, domain_defs, target_hgrid_id, margs):
     elif ssh in ['S-na', ]:
         # COSP sites. Input field may have a singleton dimension (XIOS scalar component)
         grid_ref = cfsites_grid_id
-        add_cfsites_in_defs(grid_defs, domain_defs)
+        add_cfsites_in_defs()
         #
     elif ssh[0:3] in ['XY-', 'S-A']:
         # this includes 'XY-AH' and 'S-AH' : model half-levels
         if ssh[0:3] in ['S-A', ]:
-            add_cfsites_in_defs(grid_defs, domain_defs)
+            add_cfsites_in_defs()
             target_hgrid_id = cfsites_domain_id
         if target_hgrid_id:
             # Must create and a use a grid similar to the last one defined
             # for that variable, except for a change in the hgrid/domain
-            grid_ref = change_domain_in_grid(target_hgrid_id, grid_defs)
+            grid_ref = change_domain_in_grid(target_hgrid_id)
             if grid_ref is False or grid_ref is None:
                 raise Dr2xmlError("Fatal: cannot create grid_def for %s with hgrid=%s" % (alias, target_hgrid_id))
     elif ssh in ['TR-na', 'TRS-na']:  # transects,   oce or SI
@@ -431,7 +428,7 @@ def create_output_grid(ssh, grid_defs, domain_defs, target_hgrid_id, margs):
 
 def create_standard_domains(domain_defs):
     """
-    Add to dictionnary domain_defs the Xios string representation for DR-standard horizontal grids, such as '1deg'
+    Add to dictionary domain_defs the Xios string representation for DR-standard horizontal grids, such as '1deg'
 
     """
     # Next definition is just for letting the workflow work when using option dummy='include'

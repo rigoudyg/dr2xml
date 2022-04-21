@@ -39,6 +39,10 @@ def get_list_of_elements_by_id(id):
     return ListWithItems()
 
 
+def get_sectors_list():
+    return get_list_of_elements_by_id("grids")
+
+
 def get_element_uid(id=None):
     """
     Get the uid of an element if precised, else the list of all elements.
@@ -59,6 +63,10 @@ def get_request_by_id_by_sect(id, request):
 
 def get_cmor_var_id_by_label(label):
     return None
+
+
+def normalize_grid(grid):
+    return grid
 
 
 def correct_data_request_dim(dim):

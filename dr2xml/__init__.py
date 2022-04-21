@@ -701,13 +701,7 @@ es with a different name between model
     # --------------------------------------------------------------------
     # Read ping_file defined variables
     # --------------------------------------------------------------------
-    pingvars, all_ping_refs = read_pingfiles_variables(pingfiles, dummies)
-    #
-    field_defs = OrderedDict()
-    axis_defs = OrderedDict()
-    grid_defs = OrderedDict()
-    file_defs = OrderedDict()
-    scalar_defs = OrderedDict()
+    read_pingfiles_variables(pingfiles, dummies)
     #
     # --------------------------------------------------------------------
     # Build all plev union axis and grids
@@ -717,15 +711,15 @@ es with a different name between model
         for svl in svars_per_table.values():
             svars_full_list.extend(svl)
         create_xios_axis_and_grids_for_plevs_unions(svars_full_list, multi_plev_suffixes.union(single_plev_suffixes),
-                                                    dummies, axis_defs, grid_defs, field_defs, all_ping_refs)
+                                                    dummies)
     #
     # --------------------------------------------------------------------
     # Write XIOS file_def
     # --------------------------------------------------------------------
     # filename=dirname+"filedefs_%s.xml"%context
     filename = dirname + "dr2xml_%s.xml" % context
-    write_xios_file_def(filename, svars_per_table, year, field_defs, axis_defs, grid_defs, scalar_defs, file_defs,
-                        dummies, skipped_vars_per_table, actually_written_vars, context, pingvars, enddate, attributes)
+    write_xios_file_def(filename, svars_per_table, year, dummies, skipped_vars_per_table, actually_written_vars,
+                        context, enddate, attributes)
     logger.info("\nfile_def written as %s" % filename)
 
     #
