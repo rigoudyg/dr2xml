@@ -55,7 +55,15 @@ def find_data(simulation):
         from tests.test_levels.input.lab_and_model_settings import lab_and_model_settings as lset_levels
         from tests.test_levels.input.config import simulation as simulation_levels
         from tests.test_levels.input.config import contexts as contexts_levels
-        return (config_dict_levels, sset_levels, lset_levels, simulation_levels, contexts_levels)
+        return config_dict_levels, sset_levels, lset_levels, simulation_levels, contexts_levels
+    elif simulation in ["C3S-SF", ]:
+        # Tests levels
+        from tests.test_C3S_SF.input.config import config as config_dict_C3SSF
+        from tests.test_C3S_SF.input.simulation_settings import simulation_settings as sset_C3SSF
+        from tests.test_C3S_SF.input.lab_and_model_settings import lab_and_model_settings as lset_C3SSF
+        from tests.test_C3S_SF.input.config import simulation as simulation_C3SSF
+        from tests.test_C3S_SF.input.config import contexts as contexts_C3SSF
+        return config_dict_C3SSF, sset_C3SSF, lset_C3SSF, simulation_C3SSF, contexts_C3SSF
     else:
         raise ValueError("Unknown simulation %s" % simulation)
 
