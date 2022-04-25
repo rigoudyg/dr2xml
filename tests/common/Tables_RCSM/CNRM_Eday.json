@@ -1,0 +1,35 @@
+{
+    "Header": {
+        "data_specs_version": "01.00.21",
+        "table_id": "Table CNRM_HOMALday",
+        "realm": "atmos land aerosol",
+        "cmor_version": "3.2",
+        "table_date": "27 Feb 2018",
+        "missing_value": "1e20",
+        "product": "model-output",
+        "approx_interval": "0.250000",
+        "generic_levels": "",
+        "mip_era": "CMIP6",
+        "Conventions": "CF-1.7 CMIP-6.0"
+    },
+    "variable_entry": {
+        "tsland": {
+            "frequency": "day",
+            "modeling_realm": "land",
+            "units": "K",
+            "cell_methods": "area: mean where land time: mean",
+            "cell_measures": "area: areacella",
+            "long_name": "Surface Temperature",
+            "comment": "",
+            "dimensions": "longitude latitude time",
+            "out_name": "tsland",
+            "type": "real",
+            "positive": "",
+            "valid_min": "",
+            "valid_max": "",
+            "ok_min_mean_abs": "",
+            "ok_max_mean_abs": "",
+            "cnrm_priority": "1"
+        }
+    }
+}

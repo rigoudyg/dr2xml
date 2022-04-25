@@ -23,49 +23,51 @@ from dr2xml.config import python_version
 def find_data(simulation):
     if simulation in ["a4SST", ]:
         # Tests a4SST_AGCM_1960
-        from tests.test_a4SST_AGCM_1960.input.config import config as config_dict_a4SST
-        from tests.test_a4SST_AGCM_1960.input.simulation_settings import simulation_settings as sset_a4SST
-        from tests.test_a4SST_AGCM_1960.input.lab_and_model_settings import lab_and_model_settings as lset_a4SST
-        from tests.test_a4SST_AGCM_1960.input.config import simulation as simulation_a4SST
-        from tests.test_a4SST_AGCM_1960.input.config import contexts as contexts_a4SST
-        return (config_dict_a4SST, sset_a4SST, lset_a4SST, simulation_a4SST, contexts_a4SST)
+        from tests.test_a4SST_AGCM_1960.input.config import config
+        from tests.test_a4SST_AGCM_1960.input.simulation_settings import simulation_settings
+        from tests.test_a4SST_AGCM_1960.input.lab_and_model_settings import lab_and_model_settings
+        from tests.test_a4SST_AGCM_1960.input.config import simulation
+        from tests.test_a4SST_AGCM_1960.input.config import contexts
     elif simulation in ["aladin", ]:
         # Tests AAD50-641
         # TODO: Update data
-        from tests.test_AAD50_641.input.config import config as config_dict_aladin
-        from tests.test_AAD50_641.input.simulation_settings import simulation_settings as sset_aladin
-        from tests.test_AAD50_641.input.lab_and_model_settings import lab_and_model_settings as lset_aladin
-        from tests.test_AAD50_641.input.config import simulation as simulation_aladin
-        from tests.test_AAD50_641.input.config import contexts as contexts_aladin
-        return (config_dict_aladin, sset_aladin, lset_aladin, simulation_aladin, contexts_aladin)
+        from tests.test_AAD50_641.input.config import config
+        from tests.test_AAD50_641.input.simulation_settings import simulation_settings
+        from tests.test_AAD50_641.input.lab_and_model_settings import lab_and_model_settings
+        from tests.test_AAD50_641.input.config import simulation
+        from tests.test_AAD50_641.input.config import contexts
     elif simulation in ["aladin_nodr", ]:
         # Tests AAD50-641 no dr
         # TODO: Update data
-        from tests.test_AAD50_641_nodr.input.config import config as config_dict_aladin_nodr
-        from tests.test_AAD50_641_nodr.input.simulation_settings import simulation_settings as sset_aladin_nodr
-        from tests.test_AAD50_641_nodr.input.lab_and_model_settings import lab_and_model_settings as lset_aladin_nodr
-        from tests.test_AAD50_641_nodr.input.config import simulation as simulation_aladin_nodr
-        from tests.test_AAD50_641_nodr.input.config import contexts as contexts_aladin_nodr
-        return (config_dict_aladin_nodr, sset_aladin_nodr, lset_aladin_nodr, simulation_aladin_nodr,
-                contexts_aladin_nodr)
+        from tests.test_AAD50_641_nodr.input.config import config
+        from tests.test_AAD50_641_nodr.input.simulation_settings import simulation_settings
+        from tests.test_AAD50_641_nodr.input.lab_and_model_settings import lab_and_model_settings
+        from tests.test_AAD50_641_nodr.input.config import simulation
+        from tests.test_AAD50_641_nodr.input.config import contexts
     elif simulation in ["levels", ]:
         # Tests levels
-        from tests.test_levels.input.config import config as config_dict_levels
-        from tests.test_levels.input.simulation_settings import simulation_settings as sset_levels
-        from tests.test_levels.input.lab_and_model_settings import lab_and_model_settings as lset_levels
-        from tests.test_levels.input.config import simulation as simulation_levels
-        from tests.test_levels.input.config import contexts as contexts_levels
-        return config_dict_levels, sset_levels, lset_levels, simulation_levels, contexts_levels
+        from tests.test_levels.input.config import config
+        from tests.test_levels.input.simulation_settings import simulation_settings
+        from tests.test_levels.input.lab_and_model_settings import lab_and_model_settings
+        from tests.test_levels.input.config import simulation
+        from tests.test_levels.input.config import contexts
     elif simulation in ["C3S-SF", ]:
         # Tests levels
-        from tests.test_C3S_SF.input.config import config as config_dict_C3SSF
-        from tests.test_C3S_SF.input.simulation_settings import simulation_settings as sset_C3SSF
-        from tests.test_C3S_SF.input.lab_and_model_settings import lab_and_model_settings as lset_C3SSF
-        from tests.test_C3S_SF.input.config import simulation as simulation_C3SSF
-        from tests.test_C3S_SF.input.config import contexts as contexts_C3SSF
-        return config_dict_C3SSF, sset_C3SSF, lset_C3SSF, simulation_C3SSF, contexts_C3SSF
+        from tests.test_C3S_SF.input.config import config
+        from tests.test_C3S_SF.input.simulation_settings import simulation_settings
+        from tests.test_C3S_SF.input.lab_and_model_settings import lab_and_model_settings
+        from tests.test_C3S_SF.input.config import simulation
+        from tests.test_C3S_SF.input.config import contexts
+    elif simulation in ["RCSM6_HIS", ]:
+        # Tests RCSM6_HIS
+        from tests.test_RCSM6_HIS.input.config import config
+        from tests.test_RCSM6_HIS.input.simulation_settings import simulation_settings
+        from tests.test_RCSM6_HIS.input.lab_and_model_settings import lab_and_model_settings
+        from tests.test_RCSM6_HIS.input.config import simulation
+        from tests.test_RCSM6_HIS.input.config import contexts
     else:
         raise ValueError("Unknown simulation %s" % simulation)
+    return config, simulation_settings, lab_and_model_settings, simulation, contexts
 
 
 def test_function(simulation, run_mode, python_version, config_dict, contexts, lset, sset, add_profile):
