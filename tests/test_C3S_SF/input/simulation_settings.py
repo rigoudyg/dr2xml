@@ -1,6 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+import os
+
 from tests.tests_config import path_table, path_homedr
 
 simulation_settings = {'comment': 'Run by CNRM at Meteo-France HPC facilities',
@@ -9,7 +11,7 @@ simulation_settings = {'comment': 'Run by CNRM at Meteo-France HPC facilities',
                        'branch_method': 'standard',
                        'child_time_ref_year': 1850,
                        'variant_info': '',
-                       'path_extra_tables': path_table,
+                       'path_extra_tables': os.sep.join([path_table, "..", "Tables_C3SSF"]),
                        'realization_index': 1,
                        'comments': {},
                        'parent_time_ref_year': 1850,
@@ -17,11 +19,12 @@ simulation_settings = {'comment': 'Run by CNRM at Meteo-France HPC facilities',
                        'initialization_index': 1,
                        'sub_experiment_id': 'none',
                        'experiment_id': 'a4SST',
+                       'expid_in_filename': 'H2010E001',
                        'physics_index': 1,
                        'branch_year_in_parent': 1960,
                        'branch_year_in_child': 1960,
                        'excluded_vars': [],
-                       'configuration': 'AGCM',
+                       'configuration': 'AOGCM',
                        'excluded_tables': [],
                        'history': 'none',
                        'grid_mapping': 'hcrs',

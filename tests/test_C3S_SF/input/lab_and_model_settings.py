@@ -1,14 +1,20 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+from __future__ import print_function, division, absolute_import, unicode_literals
+
+import os
+
 from tests.tests_config import path_xml
 
+
 lab_and_model_settings = {
-    'path_to_parse': '{}/'.format(path_xml),
+    'included_vars': ["", ],
+    'data_request_used': 'no',
+    'path_to_parse': '{}/'.format(os.sep.join([path_xml, "..", "xml_files_C3SSF"])),
     'convention_str': 'CF-1.6 C3S-0.1',
     'project': 'C3S Seasonal Forecast',
     'project_settings': 'C3S-SF',
-    'comment': 'Created by xios',
     'tierMax': 1,
     'references': 'http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf',
     'excluded_tables': ['Eyr', 'Oyr', 'Odec', 'IfxAnt', 'ImonAnt'],
@@ -128,7 +134,7 @@ lab_and_model_settings = {
     'excluded_vars': ['pfull', 'phalf', 'n2oClim', 'ch4globalClim', 'co2massClim', 'n2oglobalClim', 'ch4Clim', 'o3Clim',
                       'co2Clim'],
     'too_long_periods': ['dec', 'yr'],
-    'ping_variables_prefix': 'CMIP6_',
+    'ping_variables_prefix': 'C3S_',
     'debug_parsing': False,
     'comments': {
         'htovovrt': 'This variable has an axis labelled j-mean, while CMIP6 calls for an axis labelled latitude. We want here to pinpoint that we provide values which are averaged over the X-axis of our tripolar grid, along which latitude do vary. This axis begins South.Please refer to the lat/lon coordinate variables in this file for further details.',
@@ -185,10 +191,9 @@ lab_and_model_settings = {
     'excluded_spshapes': ['XYA-na', 'XYG-na', 'na-A'],
     'mips':
         {
-            'HR': set(['OMIP', 'CMIP', 'CMIP6', 'ScenarioMIP']),
-            'LR': set(
-                ['C4MIP', 'DCPP', 'CORDEX', 'ISMIP6', 'GMMIP', 'RFMIP', 'LUMIP', 'OMIP', 'CMIP6', 'SIMIP', 'DAMIP',
-                 'AerChemMIP', 'FAFMIP', 'PMIP', 'CFMIP', 'ScenarioMIP', 'LS3MIP', 'CMIP', 'GeoMIP', 'HighResMIP'])
+            'HR': {'OMIP', 'CMIP', 'CMIP6', 'ScenarioMIP'},
+            'LR': {'C4MIP', 'DCPP', 'CORDEX', 'ISMIP6', 'GMMIP', 'RFMIP', 'LUMIP', 'OMIP', 'CMIP6', 'SIMIP', 'DAMIP',
+                   'AerChemMIP', 'FAFMIP', 'PMIP', 'CFMIP', 'ScenarioMIP', 'LS3MIP', 'CMIP', 'GeoMIP', 'HighResMIP'}
         },
     'non_standard_axes': {
         'siline': 'siline',

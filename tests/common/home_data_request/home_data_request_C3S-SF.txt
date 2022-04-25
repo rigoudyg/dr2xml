@@ -1,13 +1,11 @@
 #------------------------------------------------------------------------------------------------------------------------------------------------------
 #TYPE;    VARNAME;         REALM;     FREQUENCY;     TABLE;                     TEMPORAL_SHP;         SPATIAL_SHP;       EXPNAME;            MIP
 #------------------------------------------------------------------------------------------------------------------------------------------------------
-cmor;    orog;            land;      fx;              CMIP_fx;              None;                    XY-na;             ANY;                ANY
-cmor;    sftlf;           atmos;     fx;              CMIP_fx;              None;                    XY-na;             ANY;                ANY
 
 #perso;   mlotstheta001;  ocean;     mon;             NONE;                 time-point;              XY-na;             ANY;                ANY
 #perso;   mlotstheta003;  ocean;     mon;             NONE;                 time-point;              XY-na;             ANY;                ANY
-cmor;     sithick;        seaIce;    mon;             CMIP_SImon;           time-mean;               XY-na;             ANY;                ANY
-cmor;     sos;            ocean;     mon;             NONE;                 time-mean;               XY-na;             ANY;                ANY
+#cmor;     sithick;        seaIce;    mon;             CMIP_SImon;           time-mean;               XY-na;             ANY;                ANY
+#cmor;     sos;            ocean;     mon;             NONE;                 time-mean;               XY-na;             ANY;                ANY
 #perso;   sot300;         ocean;     mon;             NONE;                 time-point;              XY-na;             ANY;                ANY
 #perso;   t14d;           ocean;     mon;             NONE;                 time-point;              XY-na;             ANY;                ANY
 #perso;   t17d;           ocean;     mon;             NONE;                 time-point;              XY-na;             ANY;                ANY
@@ -15,12 +13,12 @@ cmor;     sos;            ocean;     mon;             NONE;                 time
 #perso;   t26d;           ocean;     mon;             NONE;                 time-point;              XY-na;             ANY;                ANY
 #perso;   t28d;           ocean;     mon;             NONE;                 time-point;              XY-na;             ANY;                ANY
 #perso;   thetaot300;     ocean;     mon;             NONE;                 time-point;              XY-na;             ANY;                ANY
-cmor;     zos;            ocean;     mon;             NONE;                 time-mean;               XY-na;             ANY;                ANY
+#cmor;     zos;            ocean;     mon;             NONE;                 time-mean;               XY-na;             ANY;                ANY
 
-cmor;    clivi;           atmos;     day;             NONE;                 time-point;              XY-na;             ANY;                ANY
+#cmor;    clivi;           atmos;     day;             NONE;                 time-point;              XY-na;             ANY;                ANY
 #perso;   cllvi;           atmos;     day;             NONE;                 time-point;              XY-na;             ANY;                ANY
-cmor;    hfls;            atmos;     day;             CMIP_day;             time-mean;               XY-na;             ANY;                ANY
-cmor;    hfss;            atmos;     day;             CMIP_day;             time-mean;               XY-na;             ANY;                ANY
+#cmor;    hfls;            atmos;     day;             CMIP_day;             time-mean;               XY-na;             ANY;                ANY
+#cmor;    hfss;            atmos;     day;             CMIP_day;             time-mean;               XY-na;             ANY;                ANY
 #perso;   lwee;           atmos;     day;             NONE;                 time-point;              XY-na;             ANY;                ANY
 #perso;   lwepr;          atmos;     day;             NONE;                 time-point;              XY-na;             ANY;                ANY
 #perso;   lweprc;         atmos;     day;             NONE;                 time-point;              XY-na;             ANY;                ANY
@@ -29,34 +27,31 @@ cmor;    hfss;            atmos;     day;             CMIP_day;             time
 #perso;   mrlsl;          atmos;     day;             NONE;                 time-point;              XY-na;             ANY;                ANY
 #perso;   mrroab;         atmos;     day;             NONE;                 time-point;              XY-na;             ANY;                ANY
 #perso;   mrroas;         atmos;     day;             NONE;                 time-point;              XY-na;             ANY;                ANY
-cmor;     prw;            atmos;     day;             CMIP_Eday;            time-mean;               XY-na;             ANY;                ANY
+#cmor;     prw;            atmos;     day;             CMIP_Eday;            time-mean;               XY-na;             ANY;                ANY
 #perso;   rhosn;          atmos;     day;             NONE;                 time-point;              XY-na;             ANY;                ANY
-cmor;     rlds;           atmos;     day;             NONE;                 time-mean;               XY-na;             ANY;                ANY
+#cmor;     rlds;           atmos;     day;             NONE;                 time-mean;               XY-na;             ANY;                ANY
 #perso;   rls;            atmos;     day;             NONE;                 time-point;              XY-na;             ANY;                ANY
 #perso;   rlt;            atmos;     day;             NONE;                 time-point;              XY-na;             ANY;                ANY
-cmor;     rsds;           atmos;     day;             CMIP_day;             time-mean;               XY-na;             ANY;                ANY
-cmor;     rsdt;           atmos;     day;             NONE;                 time-mean;               XY-na;             ANY;                ANY
+#cmor;     rsds;           atmos;     day;             CMIP_day;             time-mean;               XY-na;             ANY;                ANY
+#cmor;     rsdt;           atmos;     day;             NONE;                 time-mean;               XY-na;             ANY;                ANY
 #perso;   rss;            atmos;     day;             NONE;                 time-point;              XY-na;             ANY;                ANY
 #perso;   rst;            atmos;     day;             NONE;                 time-point;              XY-na;             ANY;                ANY
-cmor;     tasmax;         atmos;     day;             CMIP_day;             time-mean;               XY-na;             ANY;                ANY
-cmor;     tasmin;         atmos;     day;             CMIP_day;             time-mean;               XY-na;             ANY;                ANY
-cmor;     tauu;           atmos;     day;             NONE;                 time-mean;               XY-na;             ANY;                ANY
-cmor;     tauv;           atmos;     day;             NONE;                 time-mean;               XY-na;             ANY;                ANY
+#cmor;     tasmax;         atmos;     day;             CMIP_day;             time-mean;               XY-na;             ANY;                ANY
+#cmor;     tasmin;         atmos;     day;             CMIP_day;             time-mean;               XY-na;             ANY;                ANY
+#cmor;     tauu;           atmos;     day;             NONE;                 time-mean;               XY-na;             ANY;                ANY
+#cmor;     tauv;           atmos;     day;             NONE;                 time-mean;               XY-na;             ANY;                ANY
 #perso;   wsgmax;         atmos;     day;             NONE;                 time-point;              XY-na;             ANY;                ANY
-cmor;    sic|siconc;      seaIce;    day;             NONE;                 time-mean;               XY-na;             ANY;                ANY
+#cmor;    sic|siconc;      seaIce;    day;             NONE;                 time-mean;               XY-na;             ANY;                ANY
 
-cmor;    hus;             atmos;     12hrPt;          NONE;                 time-point;              XY-P19;            ANY;                ANY
-cmor;    ta;              atmos;     12hrPt;          NONE;                 time-point;              XY-P19;            ANY;                ANY
-cmor;    ua;              atmos;     12hrPt;          NONE;                 time-point;              XY-P19;            ANY;                ANY
-cmor;    va;              atmos;     12hrPt;          NONE;                 time-point;              XY-P19;            ANY;                ANY
-cmor;    zg;              atmos;     12hrPt;          NONE;                 time-point;              XY-P19;            ANY;                ANY
+# Pour les suivantes, dimension verticale particulière à définir dans table perso
+#cmor;    hus;             atmos;     12hrPt;          NONE;                 time-point;              XY-P19;            ANY;                ANY
+#cmor;    ta;              atmos;     12hrPt;          NONE;                 time-point;              XY-P19;            ANY;                ANY
+#cmor;    ua;              atmos;     12hrPt;          NONE;                 time-point;              XY-P19;            ANY;                ANY
+#cmor;    va;              atmos;     12hrPt;          NONE;                 time-point;              XY-P19;            ANY;                ANY
+#cmor;    zg;              atmos;     12hrPt;          NONE;                 time-point;              XY-P19;            ANY;                ANY
 
-cmor;    clt;             atmos;     6hrPt;           NONE;                 time-point;              XY-na;             ANY;                ANY
-cmor;    psl;             atmos;     6hrPt;           NONE;                 time-point;              XY-na;             ANY;                ANY
-cmor;    tas;             atmos;     6hrPt;           NONE;                 time-point;              XY-na;             ANY;                ANY
-#perso;   tdps;             atmos;     6hrPt;           NONE;                 time-point;              XY-na;             ANY;                ANY
-cmor;    tsl|tsland;      atmos;     6hrPt;           NONE;                 time-point;              XY-na;             ANY;                ANY
-cmor;    uas;             atmos;     6hrPt;           NONE;                 time-point;              XY-na;             ANY;                ANY
-cmor;    vas;             atmos;     6hrPt;           NONE;                 time-point;              XY-na;             ANY;                ANY
-cmor;    sitemptop;       seaIce;    6hr;             NONE;                 time-mean;               XY-na;             ANY;                ANY
+extra;   ANY;             NONE;      NONE;            CNRM_HOM;             NONE;                    ANY;               ANY;                ANY
+# Ajouter dans les tables, n'existe qu'en time-mean dans la DR CMIP6 + dimension vertiale particuliere
+#cmor;    tsl!tsland;      atmos;     6hrPt;           NONE;                 time-point;              XY-na;             ANY;                ANY
+#cmor;    sitemptop;       seaIce;    6hr;             NONE;                 time-mean;               XY-na;             ANY;                ANY
 #perso;   tso;            ocean;     6hrPt;           NONE;                 time-point;              XY-na;             ANY;                ANY
