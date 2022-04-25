@@ -58,7 +58,7 @@ class SimpleCMORVar(SimpleObject):
                  description=None, stdname=None, units=None, long_name=None, struct=None, other_dims_size=1,
                  cell_methods=None, cell_measures=None, spatial_shp=None, temporal_shp=None, experiment=None,
                  Priority=1, mip_era=False, prec="float", missing=1.e+20, cmvar=None, ref_var=None, mip=None,
-                 sdims=dict(), comments=None, **kwargs):
+                 sdims=dict(), comments=None, coordinates=None, **kwargs):
         self.type = type
         self.modeling_realm = modeling_realm
         self.grids = grids
@@ -90,6 +90,7 @@ class SimpleCMORVar(SimpleObject):
         self.cmvar = cmvar  # corresponding CMORvar, if any
         self.ref_var = ref_var
         self.comments = comments
+        self.coordinates = coordinates
         super(SimpleCMORVar, self).__init__(**kwargs)
 
     def __eq__(self, other):

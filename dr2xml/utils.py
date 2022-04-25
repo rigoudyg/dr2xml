@@ -153,10 +153,8 @@ def read_json_content(filename):
             content = json.load(fp)
             return content
     else:
-        logger.error("Could not find the file containing the project's settings at %s" %
-                     filename)
-        raise OSError("Could not find the file containing the project's settings at %s" %
-                      filename)
+        logger.error("Could not find the json file at %s" % filename)
+        raise OSError("Could not find the json file at %s" % filename)
 
 
 def format_json_before_writing(settings):

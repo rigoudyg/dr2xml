@@ -62,7 +62,7 @@ def get_request_by_id_by_sect(id, request):
 
 
 def get_cmor_var_id_by_label(label):
-    return None
+    return list()
 
 
 def normalize_grid(grid):

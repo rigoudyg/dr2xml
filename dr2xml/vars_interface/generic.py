@@ -20,7 +20,7 @@ from dr2xml.settings_interface import get_settings_values
 from dr2xml.utils import VarsError, Dr2xmlError
 from .definitions import SimpleCMORVar, SimpleDim
 
-tcmName2tcmValue = {"time-mean": "time: mean", "time-point": "time: point"}
+tcmName2tcmValue = {"time-mean": "time: mean", "time-point": "time: point", "None": None}
 
 # List of multi and single pressure level suffixes for which we want the union/zoom axis mecanism turned on
 # For not using union/zoom, set 'use_union_zoom' to False in lab settings
@@ -153,14 +153,14 @@ def get_correspond_cmor_var(homevar):
     logger = get_logger()
     count = 0
     empty_table = (homevar.mipTable in ['NONE', ]) or (homevar.mipTable.startswith("None"))
-    for cmvarid in get_cmor_var_id_by_label(homevar.label):
+    for cmvarid in get_cmor_var_id_by_label(homevar.ref_var):
         cmvar = get_element_uid(cmvarid)
         logger.debug("get_corresp, checking %s vs %s in %s" % (homevar.label, cmvar.label, cmvar.mipTable))
         #
         # Consider case where no modeling_realm associated to the
         # current CMORvar as matching anyway.
         # mpmoine_TBD: A mieux gerer avec les orphan_variables ?
-        match_label = (cmvar.label == homevar.label)
+        match_label = (cmvar.label == homevar.ref_var)
         match_freq = (cmvar.frequency == homevar.frequency) or \
                      ("SoilPools" in homevar.label and homevar.frequency in ["mon", ] and
                       cmvar.frequency in ["monPt", ])

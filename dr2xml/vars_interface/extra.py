@@ -134,14 +134,17 @@ def read_extra_table(path, table):
     else:
         tdata = read_json_content(json_table)
         for k, v in tdata["variable_entry"].items():
+            if "frequency" in v:
+                freq = v["frequency"]
+            else:
+                freq = guess_freq_from_table_name(tbl)
             extra_var = SimpleCMORVar(type="extra", mip_era=mip_era, label=v["out_name"],
                                       mipVarLabel=v["out_name"], stdname=v.get("standard_name", ""),
                                       long_name=v["long_name"], units=v["units"], modeling_realm=v["modeling_realm"],
-                                      frequency=v.get("frequency", guess_freq_from_table_name(tbl)), mipTable=tbl,
-                                      cell_methods=v["cell_methods"], cell_measures=v["cell_measures"],
-                                      positive=v["positive"], Priority=float(v[mip_era.lower() + "_priority"]),
-                                      label_without_psuffix=v["out_name"])
-            # TODO: for frequency, get from file if existing (as for CORDEX)
+                                      frequency=freq, mipTable=tbl, cell_methods=v["cell_methods"],
+                                      cell_measures=v["cell_measures"], positive=v["positive"],
+                                      Priority=float(v[mip_era.lower() + "_priority"]),
+                                      label_without_psuffix=v["out_name"], coordinates=v.get("dimensions", None))
             dims = v["dimensions"].split(" ")
             # get the index of time dimension to supress, if any
             dr_dims = list()
@@ -167,6 +170,8 @@ def read_extra_table(path, table):
                     extra_var.set_attributes(spatial_shp='XY-' + edim)
                 if v["out_name"] not in dynamic_shapes[edim]:
                     dynamic_shapes[edim][v["out_name"]] = extra_var.spatial_shp
+            elif "spatial_shp" in v:
+                extra_var.set_attributes(spatial_shp=v["spatial_shp"])
             else:
                 logger.warning("spatial shape corresponding to %s for variable %s in Table %s not found in DR."
                                % (drdims, v["out_name"], table))
