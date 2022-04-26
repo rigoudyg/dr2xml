@@ -8,7 +8,7 @@
 from tests.tests_config import path_homedr, path_table
 import os
 
-aladin_path_table = "/".join([path_table, "../Tables_RCSM"])
+aladin_path_table = "/".join([path_table, "..", "Tables_RCSM"])
 
 simulation_settings = {
 	'listof_home_vars': '{}/home_data_request_aladin_RCM.SP.txt {}/home_data_request_aladin_aerosols_RCM.SP.txt '
@@ -19,6 +19,7 @@ simulation_settings = {
 	'driving_model_id': 'CNRM-ESM2-1',
 	'driving_experiment': 'CNRM-ESM2-1, historical, r1i1p1f2',
 	'Lambert_conformal_latitude_of_projection_origin': '37.f',
+	'rcm_version_id': 'V1',
 	'variant_info': '',
 	'excluded_pairs': [
 		('ua', '6hrPlevPt'),
@@ -53,5 +54,6 @@ simulation_settings = {
 	'initialization_index': 1,
 	'experiment_id': 'historical',
 	'branch_year_in_parent': 'N/A',
-	'history': 'none'
+	'history': 'none',
+	'max_split_freq': "1m"
 }

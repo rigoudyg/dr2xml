@@ -15,8 +15,9 @@ contexts = ["nemo", "surfex", "trip"]
 config = dict(
     year="1949",
     enddate="19490901",
-    pingfiles="",
-    printout=False,
+    pingfiles="{}/ping_nemo.xml {}/ping_surfex.xml {}/ping_trip.xml".format(path_xml_aladin, path_xml_aladin,
+                                                                            path_xml_aladin),
+    printout=True,
     cvs_path=path_cv,
     dummies="skip",
     dirname="./",

@@ -149,7 +149,6 @@ lab_and_model_settings = {
                       ],
     'too_long_periods': ['dec', 'yr'],
     'ping_variables_prefix': 'CMIP6_',
-    'debug_parsing': True,
     'comments': {
         'htovovrt': j_mean_comment,
         'tpf': 'Region where always 0m correspond to none-permafrost areas',
