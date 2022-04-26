@@ -53,8 +53,7 @@ from .postprocessing import process_vertical_interpolation, process_zonal_mean, 
 from .Xparse import id2gridid, id_has_expr_with_at
 
 # File splitting tools
-from .file_splitting import split_frequency_for_variable
-
+from .file_splitting import split_frequency_for_variable, determine_split_freq
 
 warnings_for_optimisation = []
 
@@ -211,12 +210,7 @@ def write_xios_file_def_for_svar(sv, year, table, out, dummies, skipped_vars_per
     sc = get_scope()
     split_freq = split_frequency_for_variable(sv, grid_choice, sc.mcfg, context)
     # Cap split_freq by setting max_split_freq (if expressed in years)
-    if split_freq[-1] == 'y':
-        max_split_freq = internal_dict['max_split_freq']
-        if max_split_freq is not None:
-            if max_split_freq[0:-1] != "y":
-                Dr2xmlError("max_split_freq must end with an 'y' (%s)" % max_split_freq)
-            split_freq = "{}y".format(min(int(max_split_freq[0:-1]), int(split_freq[0:-1])))
+    split_freq = determine_split_freq(split_freq)
     # print "split_freq: %-25s %-10s %-8s"%(sv.label,sv.mipTable,split_freq)
     #
     # --------------------------------------------------------------------

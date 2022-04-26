@@ -72,6 +72,7 @@ def fill_license(value, institution_id, info_url):
 
 internal_values = dict(
     required_model_components=ParameterSettings(
+        key="required_model_components",
         default_values=[
             ValueSettings(
                 key_type="internal",
@@ -80,6 +81,7 @@ internal_values = dict(
         ]
     ),
     additional_allowed_model_components=ParameterSettings(
+        key="additional_allowed_model_components",
         default_values=[
             ValueSettings(
                 key_type="internal",
@@ -88,6 +90,7 @@ internal_values = dict(
         ]
     ),
     CV_experiment=ParameterSettings(
+        key="CV_experiment",
         default_values=[
             ValueSettings(
                 key_type="json",
@@ -110,11 +113,13 @@ internal_values = dict(
 
 common_values = dict(
     conventions_version=ParameterSettings(
+        key="conventions_version",
         default_values=[
             ValueSettings(key_type="config", keys="CMIP6_conventions_version")
         ]
     ),
     activity_id=ParameterSettings(
+        key="activity_id",
         default_values=[
             ValueSettings(key_type="simulation", keys="activity_id"),
             ValueSettings(key_type="laboratory", keys="activity_id"),
@@ -122,6 +127,7 @@ common_values = dict(
         ]
     ),
     parent_activity_id=ParameterSettings(
+        key="parent_activity_id",
         default_values=[
             ValueSettings(key_type="simulation", keys="parent_activity_id"),
             ValueSettings(key_type="simulation", keys="activity_id"),
@@ -131,6 +137,7 @@ common_values = dict(
         ]
     ),
     HDL=ParameterSettings(
+        key="HDL",
         default_values=[
             ValueSettings(key_type="simulation", keys="HDL"),
             ValueSettings(key_type="laboratory", keys="HDL"),
@@ -138,6 +145,7 @@ common_values = dict(
         ]
     ),
     source=ParameterSettings(
+        key="source",
         default_values=[
             ValueSettings(
                 key_type="json",
@@ -162,6 +170,7 @@ common_values = dict(
         ]
     ),
     institution=ParameterSettings(
+        key="institution",
         default_values=[
             ValueSettings(key_type="laboratory", keys="institution"),
             ValueSettings(
@@ -182,6 +191,7 @@ common_values = dict(
         ]
     ),
     license=ParameterSettings(
+        key="license",
         default_values=[
             ValueSettings(
                 key_type="json",
@@ -198,6 +208,7 @@ common_values = dict(
         ]
     ),
     parent_experiment_id=ParameterSettings(
+        key="parent_experiment_id",
         default_values=[
             ValueSettings(key_type="simulation", keys="parent_experiment_id"),
             ValueSettings(key_type="laboratory", keys="parent_experiment_id"),
@@ -205,6 +216,7 @@ common_values = dict(
         ]
     ),
     variant_label=ParameterSettings(
+        key="variant_label",
         default_values=[
             ValueSettings(
                 key_type="combine",
@@ -219,6 +231,7 @@ common_values = dict(
         ]
     ),
     member_id=ParameterSettings(
+        key="member_id",
         default_values=[
             ValueSettings(
                 key_type="combine",
@@ -240,9 +253,11 @@ project_settings = dict(
                        "simulation_settings", "year"],
         comments_constraints=dict(
             CV_version=ParameterSettings(
+                key="CV_version",
                 default_values=["CMIP6-CV version ??", ]
             ),
             conventions_version=ParameterSettings(
+                key="conventions_version",
                 default_values=[
                     ValueSettings(key_type="common", keys="conventions_version", fmt="CMIP6_conventions_version {}")
                 ]
@@ -252,6 +267,7 @@ project_settings = dict(
     file_output=TagSettings(
         attrs_constraints=dict(
             name=ParameterSettings(
+                key="name",
                 default_values=[
                     ValueSettings(func=FunctionSettings(
                         func=build_filename,
@@ -277,29 +293,34 @@ project_settings = dict(
         ),
         vars_constraints=dict(
             variable_id=ParameterSettings(
+                key="variable_id",
                 default_values=[
                     ValueSettings(key_type="variable", keys="mipVarLabel")
                 ]
             ),
             description=ParameterSettings(
+                key="description",
                 default_values=[
                     ValueSettings(key_type="common", keys="description"),
                     ValueSettings(key_type="internal", keys=["CV_experiment", "description"])
                 ]
             ),
             title_desc=ParameterSettings(
+                key="title_desc",
                 default_values=[
                     ValueSettings(key_type="common", keys="description"),
                     ValueSettings(key_type="internal", keys=["CV_experiment", "description"])
                 ]
             ),
             experiment=ParameterSettings(
+                key="experiment",
                 default_values=[
                     ValueSettings(key_type="common", keys="experiment"),
                     ValueSettings(key_type="internal", keys=["CV_experiment", "experiment"])
                 ]
             ),
             CMIP6_CV_latest_tag=ParameterSettings(
+                key="CMIP6_CV_latest_tag",
                 default_values=[
                     ValueSettings(
                         key_type="json",
@@ -317,9 +338,11 @@ project_settings = dict(
                 ]
             ),
             source=ParameterSettings(
+                key="source",
                 fatal=True
             ),
             further_info_url=ParameterSettings(
+                key="further_info_url",
                 default_values=[
                     ValueSettings(
                         key_type="combine",
@@ -342,6 +365,7 @@ project_settings = dict(
                 ]
             ),
             license=ParameterSettings(
+                key="license",
                 default_values=[
                     ValueSettings(
                         key_type="common",

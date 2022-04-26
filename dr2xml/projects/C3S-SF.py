@@ -52,38 +52,45 @@ internal_values = dict()
 
 common_values = dict(
     grid_mapping=ParameterSettings(
+        key="grid_mapping",
         default_values=[
             ValueSettings(key_type="simulation", keys="grid_mapping")
         ]
     ),
     forecast_reference_time=ParameterSettings(
+        key="forecast_reference_time",
         default_values=[
             ValueSettings(key_type="simulation", keys="forecast_reference_time")
         ]
     ),
     forecast_type=ParameterSettings(
+        key="forecast_type",
         default_values=[
             ValueSettings(key_type="simulation", keys="forecast_type")
         ]
     ),
     convention_str=ParameterSettings(
+        key="convention_str",
         default_values=[
             ValueSettings(key_type="laboratory", keys="convention_str")
         ]
     ),
     commit=ParameterSettings(
+        key="commit",
         default_values=[
             ValueSettings(key_type="simulation", keys="commit"),
             ValueSettings(key_type="laboratory", keys="commit")
         ]
     ),
     summary=ParameterSettings(
+        key="summary",
         default_values=[
             ValueSettings(key_type="simulation", keys="summary"),
             ValueSettings(key_type="laboratory", keys="summary")
         ]
     ),
     keywords=ParameterSettings(
+        key="keywords",
         default_values=[
             ValueSettings(key_type="simulation", keys="keywords",
                           func=FunctionSettings(func=build_string_from_list)),
@@ -97,6 +104,7 @@ project_settings = dict(
     file_output=TagSettings(
         attrs_constraints=dict(
             name=ParameterSettings(
+                key="name",
                 default_values=[
                     ValueSettings(func=FunctionSettings(
                         func=build_filename,
@@ -116,9 +124,11 @@ project_settings = dict(
                 fatal=True
             ),
             uuid_name=ParameterSettings(
+                key="uuid_name",
                 default_values=["uuid", ]
             ),
             uuid_format=ParameterSettings(
+                key="uuid_format",
                 default_values=["%uuid%", ]
             )
         ),
@@ -127,35 +137,42 @@ project_settings = dict(
                    "keywords", "forecast_reference_time"],
         vars_constraints=dict(
             institution_id=ParameterSettings(
+                key="institution_id",
                 output_key="institute_id"
             ),
             forecast_type=ParameterSettings(
+                key="forecast_type",
                 default_values=[
                     ValueSettings(key_type="common", keys="forecast_type")
                 ]
             ),
             realm=ParameterSettings(
+                key="realm",
                 output_key="modeling_realm",
                 default_values=[
                     ValueSettings(key_type="variable", keys="modeling_realm", func=FunctionSettings(func=convert_realm))
                 ]
             ),
             level_type=ParameterSettings(
+                key="level_type",
                 default_values=[
                     ValueSettings(key_tyoe="variable", keys="level_type")
                 ]
             ),
             commit=ParameterSettings(
+                key="commit",
                 default_values=[
                     ValueSettings(key_type="common", keys="commit")
                 ]
             ),
             summary=ParameterSettings(
+                key="summary",
                 default_values=[
                     ValueSettings(key_type="common", keys="summary")
                 ]
             ),
             forecast_reference_time=ParameterSettings(
+                key="forecast_reference_time",
                 default_values=[
                     ValueSettings(key_type="common", keys="forecast_reference_time")
                 ]
@@ -166,11 +183,13 @@ project_settings = dict(
         vars_list=["standard_name", "long_name", "coordinates", "grid_mapping", "units"],
         vars_constraints=dict(
             grid_mapping=ParameterSettings(
+                key="grid_mapping",
                 default_values=[
                     ValueSettings(key_type="common", keys="grid_mapping")
                 ]
             ),
             coordinates=ParameterSettings(
+                key="coordinates",
                 default_values=[
                     ValueSettings(key_type="variable", keys="coordinates")
                 ]

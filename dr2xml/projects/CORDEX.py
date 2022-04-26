@@ -44,11 +44,13 @@ parent_project_settings = "basics"
 
 internal_values = dict(
     required_model_components=ParameterSettings(
+        key="required_model_components",
         default_values=[
             list()
         ]
     ),
     additional_allowed_model_components=ParameterSettings(
+        key="additional_allowed_model_components",
         default_values=[
             list()
         ]
@@ -57,11 +59,13 @@ internal_values = dict(
 
 common_values = dict(
     conventions_version=ParameterSettings(
+        key="conventions_version",
         default_values=[
             ValueSettings(key_type="config", keys="CMIP6_conventions_version")
         ]
     ),
     HDL=ParameterSettings(
+        key="HDL",
         default_values=[
             ValueSettings(key_type="simulation", keys="HDL"),
             ValueSettings(key_type="laboratory", keys="HDL"),
@@ -69,6 +73,7 @@ common_values = dict(
         ]
     ),
     variant_label=ParameterSettings(
+        key="variant_label",
         default_values=[
             ValueSettings(
                 key_type="combine",
@@ -83,6 +88,7 @@ common_values = dict(
         ]
     ),
     CORDEX_domain=ParameterSettings(
+        key="CORDEX_domain",
         default_values=[
             ValueSettings(
                 key_type="simulation",
@@ -94,6 +100,7 @@ common_values = dict(
         ]
     ),
     driving_model_id=ParameterSettings(
+        key="driving_model_id",
         default_values=[
             ValueSettings(
                 key_type="simulation",
@@ -102,6 +109,7 @@ common_values = dict(
         ]
     ),
     driving_model_ensemble_member=ParameterSettings(
+        key="driving_model_ensemble_member",
         default_values=[
             ValueSettings(
                 key_type="simulation",
@@ -110,6 +118,7 @@ common_values = dict(
         ]
     ),
     driving_experiment_name=ParameterSettings(
+        key="driving_experiment_name",
         default_values=[
             ValueSettings(
                 key_type="simulation",
@@ -118,6 +127,7 @@ common_values = dict(
         ]
     ),
     driving_experiment=ParameterSettings(
+        key="driving_experiment",
         default_values=[
             ValueSettings(
                 key_type="simulation",
@@ -126,6 +136,7 @@ common_values = dict(
         ]
     ),
     Lambert_conformal_longitude_of_central_meridian=ParameterSettings(
+        key="Lambert_conformal_longitude_of_central_meridian",
         default_values=[
             ValueSettings(
                 key_type="simulation",
@@ -134,6 +145,7 @@ common_values = dict(
         ]
     ),
     Lambert_conformal_standard_parallel=ParameterSettings(
+        key="Lambert_conformal_standard_parallel",
         default_values=[
             ValueSettings(
                 key_type="simulation",
@@ -142,6 +154,7 @@ common_values = dict(
         ]
     ),
     Lambert_conformal_latitude_of_projection_origin=ParameterSettings(
+        key="Lambert_conformal_latitude_of_projection_origin",
         default_values=[
             ValueSettings(
                 key_type="simulation",
@@ -150,6 +163,7 @@ common_values = dict(
         ]
     ),
     rcm_version_id=ParameterSettings(
+        key="rcm_version_id",
         default_values=[
             ValueSettings(
                 key_type="simulation",
@@ -165,9 +179,11 @@ project_settings = dict(
                        "simulation_settings", "year"],
         comments_constraints=dict(
             CV_version=ParameterSettings(
+                key="CV_version",
                 default_values=["CMIP6-CV version ??", ]
             ),
             conventions_version=ParameterSettings(
+                key="conventions_version",
                 default_values=[
                     ValueSettings(key_type="common", keys="conventions_version", fmt="CMIP6_conventions_version {}")
                 ]
@@ -177,6 +193,7 @@ project_settings = dict(
     file_output=TagSettings(
         attrs_constraints=dict(
             name=ParameterSettings(
+                key="name",
                 default_values=[
                     ValueSettings(func=FunctionSettings(
                         func=build_filename,
@@ -213,43 +230,51 @@ project_settings = dict(
                    "sub_experiment_id", "sub_experiment", "table_id", "title", "variable_id"],
         vars_constraints=dict(
             variable_id=ParameterSettings(
+                key="variable_id",
                 default_values=[
                     ValueSettings(key_type="variable", keys="mipVarLabel")
                 ]
             ),
             institution_id=ParameterSettings(
+                key="institution_id",
                 output_key="institute_id"
             ),
             CORDEX_domain=ParameterSettings(
+                key="CORDEX_domain",
                 default_values=[
                     ValueSettings(key_type="common", keys="CORDEX_domain")
                 ]
             ),
             driving_model_id=ParameterSettings(
+                key="driving_model_id",
                 default_values=[
                     ValueSettings(key_type="common", keys="driving_model_id")
                 ],
                 fatal=True
             ),
             driving_model_ensemble_member=ParameterSettings(
+                key="driving_model_ensemble_member",
                 default_values=[
                     ValueSettings(key_type="common", keys="driving_model_ensemble_member")
                 ],
                 fatal=True
             ),
             driving_experiment_name=ParameterSettings(
+                key="driving_experiment_name",
                 default_values=[
                     ValueSettings(key_type="common", keys="driving_experiment_name")
                 ],
                 fatal=True
             ),
             driving_experiment=ParameterSettings(
+                key="driving_experiment",
                 default_values=[
                     ValueSettings(key_type="common", keys="driving_experiment")
                 ],
                 fatal=True
             ),
             Lambert_conformal_longitude_of_central_meridian=ParameterSettings(
+                key="Lambert_conformal_longitude_of_central_meridian",
                 default_values=[
                     ValueSettings(key_type="common", keys="Lambert_conformal_longitude_of_central_meridian")
                 ],
@@ -262,6 +287,7 @@ project_settings = dict(
                 ]
             ),
             Lambert_conformal_standard_parallel=ParameterSettings(
+                key="Lambert_conformal_standard_parallel",
                 default_values=[
                     ValueSettings(key_type="common", keys="Lambert_conformal_standard_parallel")
                 ],
@@ -274,6 +300,7 @@ project_settings = dict(
                 ]
             ),
             Lambert_conformal_latitude_of_projection_origin=ParameterSettings(
+                key="Lambert_conformal_latitude_of_projection_origin",
                 default_values=[
                     ValueSettings(key_type="common", keys="Lambert_conformal_latitude_of_projection_origin")
                 ],
@@ -286,16 +313,20 @@ project_settings = dict(
                 ]
             ),
             product=ParameterSettings(
+                key="product",
                 default_values=["output", ]
             ),
             source=ParameterSettings(
+                key="source",
                 fatal=True,
                 output_key="project_id"
             ),
             source_id=ParameterSettings(
+                key="source_id",
                 output_key="model_id"
             ),
             title=ParameterSettings(
+                key="title",
                 default_values=[
                     ValueSettings(
                         key_type="combine",
@@ -324,6 +355,7 @@ project_settings = dict(
     field_output=TagSettings(
         attrs_constraints=dict(
             cell_methods=ParameterSettings(
+                key="cell_methods",
                 corrections={
                     "area: time: mean": "time: mean"
                 }
@@ -334,6 +366,7 @@ project_settings = dict(
                    "interval_operation"],
         vars_constraints=dict(
             grid_mapping=ParameterSettings(
+                key="grid_mapping",
                 default_values=["Lambert_Conformal", ],
                 conditions=[
                     ConditionSettings(check_value=ValueSettings(key_type="internal", keys="context"),
@@ -341,6 +374,7 @@ project_settings = dict(
                 ]
             ),
             cell_methods=ParameterSettings(
+                key="cell_methods",
                 corrections={
                     "area: time: mean": "time: mean"
                 }

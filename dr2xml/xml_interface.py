@@ -41,8 +41,6 @@ class DR2XMLElement(xml_writer.Element):
                                                             common_dict=common_dict, internal_dict=internal_dict,
                                                             additional_dict=kwargs)
             output_key = attrs_constraints[key].output_key
-            if output_key is None:
-                output_key = key
             if test:
                 attrib[output_key] = value
         super(DR2XMLElement, self).__init__(tag=tag, text=text, attrib=attrib)
@@ -62,8 +60,6 @@ class DR2XMLElement(xml_writer.Element):
                                                            common_dict=common_dict, internal_dict=internal_dict,
                                                            additional_dict=kwargs)
             output_key = vars_constraints[var].output_key
-            if output_key is None:
-                output_key = var
             num_type = vars_constraints[var].num_type
             if test:
                 self.append(wrv(output_key, value, num_type))

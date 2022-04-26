@@ -15,7 +15,7 @@ from io import open
 import six
 
 from .settings_interface import get_settings_values
-from .utils import Dr2xmlGridError
+from .utils import Dr2xmlGridError, Dr2xmlError
 
 # Logger
 from logger import get_logger
@@ -290,3 +290,38 @@ def field_size(svar, mcfg):
         raise Dr2xmlGridError("Cannot compute field_size for var %s and shape %s" % (svar.label, s))
 
     return siz
+
+
+split_freq_units_list = ["d", "mo", "m", "y", "dec"]
+units_dict = dict(m="mo")
+regexp_split_freq = re.compile(r"(?P<length>\d+)(?P<units>({}))".format("|".join(split_freq_units_list)))
+
+
+def evaluate_split_freq_value(split_freq):
+    split_freq_match = regexp_split_freq.match(split_freq)
+    if split_freq_match is None:
+        raise ValueError("Unknown format for split_freq value %s" % split_freq)
+    else:
+        split_freq_units = split_freq_match.groupdict()["units"]
+        split_freq_units = units_dict.get(split_freq_units, split_freq_units)
+        split_freq_length = int(split_freq_match.groupdict()["length"])
+        return split_freq_units, split_freq_length
+
+
+def determine_split_freq(split_freq):
+    max_split_freq = get_settings_values("internal", "max_split_freq")
+    if max_split_freq is not None:
+        split_freq_units, split_freq_length = evaluate_split_freq_value(split_freq)
+        max_split_freq_units, max_split_freq_length = evaluate_split_freq_value(max_split_freq)
+        if max_split_freq_units == split_freq_units:
+            length = min(split_freq_length, max_split_freq_length)
+            units = max_split_freq_units
+        else:
+            units = split_freq_units_list[min(split_freq_units_list.index(split_freq_units),
+                                              split_freq_units_list.index(max_split_freq_units))]
+            if units == split_freq_units:
+                length = split_freq_length
+            else:
+                length = max_split_freq_length
+        split_freq = "{}{}".format(length, units)
+    return split_freq

@@ -54,6 +54,7 @@ internal_values = dict()
 
 common_values = dict(
     branch_year_in_parent=ParameterSettings(
+        key="branch_year_in_parent",
         cases=[
             CaseSettings(
                 conditions=[
@@ -88,23 +89,28 @@ common_values = dict(
         skip_values=[None, "None", "", "N/A"]
     ),
     description=ParameterSettings(
+        key="description",
         default_values=[
             ValueSettings(key_type="simulation", keys="description"),
             ValueSettings(key_type="laboratory", keys="description")
         ]
     ),
     date_range=ParameterSettings(
+        key="date_range",
         default_values=["%start_date%-%end_date%", ]
     ),
     list_perso_dev_file=ParameterSettings(
+        key="list_perso_dev_file",
         default_values=["dr2xml_list_perso_and_dev_file_names", ]
     ),
     info_url=ParameterSettings(
+        key="info_url",
         default_values=[
             ValueSettings(key_type="laboratory", keys="info_url")
         ]
     ),
     expid_in_filename=ParameterSettings(
+        key="expid_in_filename",
         default_values=[
             ValueSettings(key_type="simulation", keys="expid_in_filename"),
             ValueSettings(key_type="internal", keys="experiment_id")
@@ -112,130 +118,153 @@ common_values = dict(
         forbidden_patterns=[".*_.*", ]
     ),
     experiment=ParameterSettings(
+        key="experiment",
         default_values=[
             ValueSettings(key_type="simulation", keys="experiment")
         ]
     ),
     forcing_index=ParameterSettings(
+        key="forcing_index",
         default_values=[
             ValueSettings(key_type="simulation", keys="forcing_index"),
             "1"
         ]
     ),
     history=ParameterSettings(
+        key="history",
         default_values=[
             ValueSettings(key_type="simulation", keys="history"),
             "none"
         ]
     ),
     initialization_index=ParameterSettings(
+        key="initialization_index",
         default_values=[
             ValueSettings(key_type="simulation", keys="initialization_index"),
             "1"
         ]
     ),
     branch_method=ParameterSettings(
+        key="branch_method",
         default_values=[
             ValueSettings(key_type="simulation", keys="branch_method"),
             "standard"
         ]
     ),
     parent_mip_era=ParameterSettings(
+        key="parent_mip_era",
         default_values=[
             ValueSettings(key_type="simulation", keys="parent_mip_era")
         ]
     ),
     parent_source_id=ParameterSettings(
+        key="parent_source_id",
         default_values=[
             ValueSettings(key_type="simulation", keys="parent_source_id")
         ]
     ),
     parent_time_units=ParameterSettings(
+        key="parent_time_units",
         default_values=[
             ValueSettings(key_type="simulation", keys="parent_time_units")
         ]
     ),
     parent_time_ref_year=ParameterSettings(
+        key="parent_time_ref_year",
         default_values=[
             ValueSettings(key_type="simulation", keys="parent_time_ref_year"),
             "1850"
         ]
     ),
     branch_month_in_parent=ParameterSettings(
+        key="branch_month_in_parent",
         default_values=[
             ValueSettings(key_type="simulation", keys="branch_month_in_parent"),
             "1"
         ]
     ),
     parent_variant_label=ParameterSettings(
+        key="parent_variant_label",
         default_values=[
             ValueSettings(key_type="simulation", keys="parent_variant_label")
         ]
     ),
     physics_index=ParameterSettings(
+        key="physics_index",
         default_values=[
             ValueSettings(key_type="simulation", keys="physics_index"),
             "1"
         ]
     ),
     sub_experiment_id=ParameterSettings(
+        key="sub_experiment_id",
         default_values=[
             ValueSettings(key_type="simulation", keys="sub_experiment_id"),
             "none"
         ]
     ),
     sub_experiment=ParameterSettings(
+        key="sub_experiment",
         default_values=[
             ValueSettings(key_type="simulation", keys="sub_experiment"),
             "none"
         ]
     ),
     variant_info=ParameterSettings(
+        key="variant_info",
         default_values=[
             ValueSettings(key_type="simulation", keys="variant_info")
         ],
         skip_values=["", ]
     ),
     comment_sim=ParameterSettings(
+        key="comment_sim",
         default_values=[
             ValueSettings(key_type="simulation", keys="comment"),
             ""
         ]
     ),
     comment_lab=ParameterSettings(
+        key="comment_lab",
         default_values=[
             ValueSettings(key_type="laboratory", keys="comment"),
             ""
         ]
     ),
     references=ParameterSettings(
+        key="references",
         default_values=[
             ValueSettings(key_type="laboratory", keys="references")
         ]
     ),
     compression_level=ParameterSettings(
+        key="compression_level",
         default_values=[
             ValueSettings(key_type="laboratory", keys="compression_level"),
             "0"
         ]
     ),
     output_level=ParameterSettings(
+        key="output_level",
         default_values=[
             ValueSettings(key_type="laboratory", keys="output_level"),
             "10"
         ]
     ),
     source=ParameterSettings(
+        key="source",
         default_values=[
             ValueSettings(key_type="laboratory", keys="source")
         ]
     ),
     institution=ParameterSettings(
+        key="institution",
         default_values=[
             ValueSettings(key_type="laboratory", keys="institution")
         ]
     ),
     contact=ParameterSettings(
+        key="contact",
         default_values=[
             ValueSettings(key_type="simulation", keys="contact"),
             ValueSettings(key_type="laboratory", keys="contact"),
@@ -243,24 +272,28 @@ common_values = dict(
         ]
     ),
     HDL=ParameterSettings(
+        key="HDL",
         default_values=[
             ValueSettings(key_type="simulation", keys="HDL"),
             ValueSettings(key_type="laboratory", keys="HDL")
         ]
     ),
     mip_era=ParameterSettings(
+        key="mip_era",
         default_values=[
             ValueSettings(key_type="simulation", keys="mip_era"),
             ValueSettings(key_type="laboratory", keys="mip_era")
         ]
     ),
     activity_id=ParameterSettings(
+        key="activity_id",
         default_values=[
             ValueSettings(key_type="simulation", keys="activity_id"),
             ValueSettings(key_type="laboratory", keys="activity_id")
         ]
     ),
     parent_activity_id=ParameterSettings(
+        key="parent_activity_id",
         default_values=[
             ValueSettings(key_type="simulation", keys="parent_activity_id"),
             ValueSettings(key_type="simulation", keys="activity_id"),
@@ -269,22 +302,26 @@ common_values = dict(
         ]
     ),
     parent_experiment_id=ParameterSettings(
+        key="parent_experiment_id",
         default_values=[
             ValueSettings(key_type="simulation", keys="parent_experiment_id"),
             ValueSettings(key_type="laboratory", keys="parent_experiment_id")
         ]
     ),
     convention_str=ParameterSettings(
+        key="convention_str",
         default_values=[
             ValueSettings(key_type="config", keys="conventions")
         ]
     ),
     dr2xml_version=ParameterSettings(
+        key="dr2xml_version",
         default_values=[
             ValueSettings(key_type="config", keys="version")
         ]
     ),
     data_specs_version=ParameterSettings(
+        key="data_specs_version",
         default_values=[
             ValueSettings(key_type="DR_version")
         ]
@@ -296,6 +333,7 @@ project_settings = dict(
         attrs_list=["id", ],
         attrs_constraints=dict(
             id=ParameterSettings(
+                key="id",
                 default_values=[
                     ValueSettings(key_type="internal", keys="context")
                 ]
@@ -304,26 +342,31 @@ project_settings = dict(
         comments_list=["DR_version", "dr2xml_version", "lab_settings", "simulation_settings", "year"],
         comments_constraints=dict(
             DR_version=ParameterSettings(
+                key="DR_version",
                 default_values=[
                     ValueSettings(key_type="common", keys="data_specs_version", fmt="CMIP6 Data Request version {}")
                 ]
             ),
             dr2xml_version=ParameterSettings(
+                key="dr2xml_version",
                 default_values=[
                     ValueSettings(key_type="common", keys="dr2xml_version", fmt="dr2xml version {}")
                 ]
             ),
             lab_settings=ParameterSettings(
+                key="lab_settings",
                 default_values=[
                     ValueSettings(key_type="laboratory", fmt="Lab_and_model settings\n{}")
                 ]
             ),
             simulation_settings=ParameterSettings(
+                key="simulation_settings",
                 default_values=[
                     ValueSettings(key_type="simulation", fmt="Simulation settings\n{}")
                 ]
             ),
             year=ParameterSettings(
+                key="year",
                 default_values=[
                     ValueSettings(key_type="common", keys="year", fmt="Year processed {}")
                 ]
@@ -334,9 +377,11 @@ project_settings = dict(
         attrs_list=["type", "enabled"],
         attrs_constraints=dict(
             type=ParameterSettings(
+                key="type",
                 default_values=["one_file", ]
             ),
             enabled=ParameterSettings(
+                key="enabled",
                 default_values=["true", ]
             )
         )
@@ -351,6 +396,7 @@ project_settings = dict(
                     "uuid_format", "convention_str"],
         attrs_constraints=dict(
             split_freq=ParameterSettings(
+                key="split_freq",
                 skip_values=["", "None", None],
                 conditions=[
                     ConditionSettings(check_value=ValueSettings(key_type="variable", keys="frequency"),
@@ -358,6 +404,7 @@ project_settings = dict(
                 ]
             ),
             split_freq_format=ParameterSettings(
+                key="split_freq_format",
                 skip_values=["", "None", None],
                 conditions=[
                     ConditionSettings(check_value=ValueSettings(key_type="variable", keys="frequency"),
@@ -365,6 +412,7 @@ project_settings = dict(
                 ]
             ),
             split_start_offset=ParameterSettings(
+                key="split_start_offset",
                 skip_values=["", "None", "False", None, False],
                 conditions=[
                     ConditionSettings(check_value=ValueSettings(key_type="variable", keys="frequency"),
@@ -372,6 +420,7 @@ project_settings = dict(
                 ]
             ),
             split_end_offset=ParameterSettings(
+                key="split_end_offset",
                 skip_values=["", "None", "False", None, False],
                 conditions=[
                     ConditionSettings(check_value=ValueSettings(key_type="variable", keys="frequency"),
@@ -379,6 +428,7 @@ project_settings = dict(
                 ]
             ),
             split_last_date=ParameterSettings(
+                key="split_last_date",
                 skip_values=["", "None", None],
                 conditions=[
                     ConditionSettings(check_value=ValueSettings(key_type="variable", keys="frequency"),
@@ -386,44 +436,55 @@ project_settings = dict(
                 ]
             ),
             append=ParameterSettings(
+                key="append",
                 default_values=["true", ]
             ),
             time_units=ParameterSettings(
+                key="time_units",
                 default_values=["days", ]
             ),
             time_counter_name=ParameterSettings(
+                key="time_counter_name",
                 default_values=["time", ]
             ),
             time_counter=ParameterSettings(
+                key="time_counter",
                 default_values=["exclusive", ]
             ),
             time_stamp_name=ParameterSettings(
+                key="time_stamp_name",
                 default_values=["creation_date", ]
             ),
             time_stamp_format=ParameterSettings(
+                key="time_stamp_format",
                 default_values=["%Y-%m-%dT%H:%M:%SZ", ]
             ),
             uuid_name=ParameterSettings(
+                key="uuid_name",
                 default_values=["tracking_id", ]
             ),
             uuid_format=ParameterSettings(
+                key="uuid_format",
                 default_values=[
                     ValueSettings(key_type="common", keys="HDL", fmt="hdl:{}/%uuid%")
                 ],
                 skip_values=["None", "", None]
             ),
             convention_str=ParameterSettings(
+                key="convention_str",
                 default_values=[
                     ValueSettings(key_type="common", keys="convention_str")
                 ]
             ),
             output_level=ParameterSettings(
+                key="output_level",
                 default_values=[
                     ValueSettings(key_type="common", keys="output_level")
                 ],
                 skip_values=["None", "", None]
             ),
             compression_level=ParameterSettings(
+                key="compression_level",
                 default_values=[
                     ValueSettings(key_type="common", keys="compression_level")
                 ],
@@ -441,28 +502,33 @@ project_settings = dict(
                    "variant_label"],
         vars_constraints=dict(
             contact=ParameterSettings(
+                key="contact",
                 default_values=[
                     ValueSettings(key_type="common", keys="contact")
                 ],
                 skip_values=["None", "", None]
             ),
             data_specs_version=ParameterSettings(
+                key="data_specs_version",
                 default_values=[
                     ValueSettings(key_type="common", keys="data_specs_version")
                 ]
             ),
             dr2xml_version=ParameterSettings(
+                key="dr2xml_version",
                 default_values=[
                     ValueSettings(key_type="common", keys="dr2xml_version")
                 ]
             ),
             expid_in_filename=ParameterSettings(
+                key="expid_in_filename",
                 output_key="experiment_id",
                 default_values=[
                     ValueSettings(key_type="common", keys="expid_in_filename")
                 ]
             ),
             description=ParameterSettings(
+                key="description",
                 skip_values=["", "None", None],
                 conditions=[
                     ConditionSettings(check_value=ValueSettings(key_type="internal", keys="experiment_id"),
@@ -474,6 +540,7 @@ project_settings = dict(
                 ]
             ),
             title_desc=ParameterSettings(
+                key="title_desc",
                 output_key="title",
                 skip_values=["", "None", None],
                 conditions=[
@@ -486,6 +553,7 @@ project_settings = dict(
                 ]
             ),
             experiment=ParameterSettings(
+                key="experiment",
                 skip_values=["", "None", None],
                 conditions=[
                     ConditionSettings(check_value=ValueSettings(key_type="internal", keys="experiment_id"),
@@ -497,6 +565,7 @@ project_settings = dict(
                 ]
             ),
             external_variables=ParameterSettings(
+                key="external_variables",
                 skip_values=["", ],
                 default_values=[
                     ValueSettings(key_type="variable", keys="cell_measures",
@@ -504,44 +573,52 @@ project_settings = dict(
                 ]
             ),
             forcing_index=ParameterSettings(
+                key="forcing_index",
                 default_values=[
                     ValueSettings(key_type="common", keys="forcing_index")
                 ],
                 num_type="int"
             ),
             further_info_url=ParameterSettings(
+                key="further_info_url",
                 skip_values=["", "None", None]
             ),
             history=ParameterSettings(
+                key="history",
                 default_values=[
                     ValueSettings(key_type="common", keys="history")
                 ]
             ),
             initialization_index=ParameterSettings(
+                key="initialization_index",
                 default_values=[
                     ValueSettings(key_type="common", keys="initialization_index")
                 ],
                 num_type="int"
             ),
             institution=ParameterSettings(
+                key="institution",
                 default_values=[
                     ValueSettings(key_type="common", keys="institution")
                 ],
                 fatal=True
             ),
             institution_id=ParameterSettings(
+                key="institution_id",
                 default_values=[
                     ValueSettings(key_type="internal", keys="institution_id")
                 ],
                 fatal=True
             ),
             mip_era=ParameterSettings(
+                key="mip_era",
                 default_values=[
                     ValueSettings(key_type="common", keys="mip_era"),
                     ValueSettings(key_type="variable", keys="mip_era")
                 ]
             ),
             parent_experiment_id=ParameterSettings(
+                key="parent_experiment_id",
                 conditions=[
                     ConditionSettings(check_value=ValueSettings(key_type="common", keys="parent_experiment_id"),
                                       check_to_do="neq", reference_values=["no parent", "", "None"])
@@ -551,6 +628,7 @@ project_settings = dict(
                 ]
             ),
             parent_mip_era=ParameterSettings(
+                key="parent_mip_era",
                 conditions=[
                     ConditionSettings(check_value=ValueSettings(key_type="common", keys="parent_experiment_id"),
                                       check_to_do="neq", reference_values=["no parent", "", "None"])
@@ -562,6 +640,7 @@ project_settings = dict(
                 ]
             ),
             parent_activity_id=ParameterSettings(
+                key="parent_activity_id",
                 conditions=[
                     ConditionSettings(check_value=ValueSettings(key_type="common", keys="parent_experiment_id"),
                                       check_to_do="neq", reference_values=["no parent", "", "None"])
@@ -571,6 +650,7 @@ project_settings = dict(
                 ]
             ),
             parent_source_id=ParameterSettings(
+                key="parent_source_id",
                 conditions=[
                     ConditionSettings(check_value=ValueSettings(key_type="common", keys="parent_experiment_id"),
                                       check_to_do="neq", reference_values=["no parent", "", "None"])
@@ -581,6 +661,7 @@ project_settings = dict(
                 ]
             ),
             parent_time_units=ParameterSettings(
+                key="parent_time_units",
                 conditions=[
                     ConditionSettings(check_value=ValueSettings(key_type="common", keys="parent_experiment_id"),
                                       check_to_do="neq", reference_values=["no parent", "", "None"])
@@ -591,6 +672,7 @@ project_settings = dict(
                 ]
             ),
             parent_variant_label=ParameterSettings(
+                key="parent_variant_label",
                 conditions=[
                     ConditionSettings(check_value=ValueSettings(key_type="common", keys="parent_experiment_id"),
                                       check_to_do="neq", reference_values=["no parent", "", "None"])
@@ -601,6 +683,7 @@ project_settings = dict(
                 ]
             ),
             branch_time_in_parent=ParameterSettings(
+                key="branch_time_in_parent",
                 conditions=[
                     ConditionSettings(check_value=ValueSettings(key_type="common", keys="parent_experiment_id"),
                                       check_to_do="neq", reference_values=["no parent", "", "None"])
@@ -619,6 +702,7 @@ project_settings = dict(
                 ]
             ),
             branch_time_in_child=ParameterSettings(
+                key="branch_time_in_child",
                 conditions=[
                     ConditionSettings(check_value=ValueSettings(key_type="common", keys="parent_experiment_id"),
                                       check_to_do="neq", reference_values=["no parent", "", "None"])
@@ -636,6 +720,7 @@ project_settings = dict(
                 ]
             ),
             branch_method=ParameterSettings(
+                key="branch_method",
                 cases=[
                     CaseSettings(
                         conditions=[
@@ -648,36 +733,43 @@ project_settings = dict(
                 ]
             ),
             physics_index=ParameterSettings(
+                key="physics_index",
                 default_values=[
                     ValueSettings(key_type="common", keys="physics_index")
                 ],
                 num_type="int"
             ),
             product=ParameterSettings(
+                key="product",
                 default_values=["model-output", ]
             ),
             realization_index=ParameterSettings(
+                key="realization_index",
                 default_values=[
                     ValueSettings(key_type="internal", keys="realization_index")
                 ],
                 num_type="int"
             ),
             references=ParameterSettings(
+                key="references",
                 default_values=[
                     ValueSettings(key_type="common", keys="references")
                 ]
             ),
             sub_experiment_id=ParameterSettings(
+                key="sub_experiment_id",
                 default_values=[
                     ValueSettings(key_type="common", keys="sub_experiment_id")
                 ]
             ),
             sub_experiment=ParameterSettings(
+                key="sub_experiment",
                 default_values=[
                     ValueSettings(key_type="common", keys="sub_experiment")
                 ]
             ),
             variant_info=ParameterSettings(
+                key="variant_info",
                 default_values=[
                     ValueSettings(key_type="common", keys="variant_info",
                                   fmt=". Information provided by this attribute may in some cases be flawed. "
@@ -686,16 +778,19 @@ project_settings = dict(
                 ]
             ),
             realm=ParameterSettings(
+                key="realm",
                 default_values=[
                     ValueSettings(key_type="variable", keys="modeling_realm")
                 ]
             ),
             frequency=ParameterSettings(
+                key="frequency",
                 default_values=[
                     ValueSettings(key_type="variable", keys="frequency")
                 ]
             ),
             comment=ParameterSettings(
+                key="comment",
                 skip_values=["", ],
                 cases=[
                     CaseSettings(
@@ -746,31 +841,37 @@ project_settings = dict(
                 ]
             ),
             variant_label=ParameterSettings(
+                key="variant_label",
                 default_values=[
                     ValueSettings(key_type="common", keys="variant_label")
                 ]
             ),
             activity_id=ParameterSettings(
+                key="activity_id",
                 default_values=[
                     ValueSettings(key_type="common", keys="activity_id")
                 ]
             ),
             source=ParameterSettings(
+                key="source",
                 default_values=[
                     ValueSettings(key_type="common", keys="source")
                 ]
             ),
             source_id=ParameterSettings(
+                key="source_id",
                 default_values=[
                     ValueSettings(key_type="internal", keys="source_id")
                 ]
             ),
             source_type=ParameterSettings(
+                key="source_type",
                 default_values=[
                     ValueSettings(key_type="internal", keys="source_type")
                 ]
             ),
             title=ParameterSettings(
+                key="title",
                 default_values=[
                     ValueSettings(
                         key_type="combine",
@@ -808,31 +909,39 @@ project_settings = dict(
                     "cell_methods", "cell_methods_mode", "operation", "freq_op", "expr"],
         attrs_constraints=dict(
             name=ParameterSettings(
+                key="name",
                 default_values=[
                     ValueSettings(key_type="variable", keys="mipVarLabel")
                 ]
             ),
             grid_ref=ParameterSettings(
+                key="grid_ref",
                 skip_values=["", "None", None]
             ),
             freq_offset=ParameterSettings(
+                key="freq_offset",
                 skip_values=["", "None", None]
             ),
             freq_op=ParameterSettings(
+                key="freq_op",
                 skip_values=["", "None", None]
             ),
             expr=ParameterSettings(
+                key="expr",
                 skip_values=["", "None", None]
             ),
             cell_methods_mode=ParameterSettings(
+                key="cell_methods_mode",
                 default_values=["overwrite", ]
             ),
             cell_methods=ParameterSettings(
+                key="cell_methods",
                 default_values=[
                     ValueSettings(key_type="variable", keys="cell_methods")
                 ]
             ),
             prec=ParameterSettings(
+                key="prec",
                 default_values=[
                     ValueSettings(key_type="variable", keys="prec")
                 ],
@@ -848,6 +957,7 @@ project_settings = dict(
                 fatal=True
             ),
             default_value=ParameterSettings(
+                key="default_value",
                 default_values=[
                     ValueSettings(key_type="variable", keys="prec")
                 ],
@@ -863,6 +973,7 @@ project_settings = dict(
                 fatal=True
             ),
             detect_missing_value=ParameterSettings(
+                key="detect_missing_value",
                 default_values=["True", ]
             )
         ),
@@ -870,12 +981,14 @@ project_settings = dict(
                    "cell_methods", "cell_measures", "flag_meanings", "flag_values", "interval_operation"],
         vars_constraints=dict(
             standard_name=ParameterSettings(
+                key="standard_name",
                 default_values=[
                     ValueSettings(key_type="variable", keys="stdname")
                 ],
                 skip_values=["", "None", None]
             ),
             description=ParameterSettings(
+                key="description",
                 default_values=[
                     ValueSettings(key_type="variable", keys="description"),
                     "None"
@@ -883,16 +996,19 @@ project_settings = dict(
                 skip_values=["", ]
             ),
             long_name=ParameterSettings(
+                key="long_name",
                 default_values=[
                     ValueSettings(key_type="variable", keys="long_name")
                 ]
             ),
             history=ParameterSettings(
+                key="history",
                 default_values=[
                     ValueSettings(key_type="common", keys="history")
                 ]
             ),
             comment=ParameterSettings(
+                key="comment",
                 default_values=[
                     ValueSettings(
                         key_type="simulation",
@@ -912,45 +1028,53 @@ project_settings = dict(
                 skip_values=["", "None", None]
             ),
             positive=ParameterSettings(
+                key="positive",
                 default_values=[
                     ValueSettings(key_type="variable", keys="positive")
                 ],
                 skip_values=["", "None", None]
             ),
             detect_missing_value=ParameterSettings(
+                key="detect_missing_value",
                 default_values=["none", ]
             ),
             units=ParameterSettings(
+                key="units",
                 default_values=[
                     ValueSettings(key_type="variable", keys="units")
                 ],
                 skip_values=["", "None", None]
             ),
             cell_methods=ParameterSettings(
+                key="cell_methods",
                 default_values=[
                     ValueSettings(key_type="variable", keys="cell_methods")
                 ],
                 skip_values=["", "None", None]
             ),
             cell_measures=ParameterSettings(
+                key="cell_measures",
                 default_values=[
                     ValueSettings(key_type="variable", keys="cell_measures")
                 ],
                 skip_values=["", "None", None]
             ),
             flag_meanings=ParameterSettings(
+                key="flag_meanings",
                 default_values=[
                     ValueSettings(key_type="variable", keys=["struct", "flag_meanings"])
                 ],
                 skip_values=["", "None", None]
             ),
             flag_values=ParameterSettings(
+                key="flag_values",
                 default_values=[
                     ValueSettings(key_type="variable", keys=["struct", "flag_values"])
                 ],
                 skip_values=["", "None", None]
             ),
             interval_operation=ParameterSettings(
+                key="interval_operation",
                 conditions=[
                     ConditionSettings(check_value=ValueSettings(key_type="dict", keys="operation"),
                                       check_to_do="neq", reference_values="once")
@@ -966,28 +1090,36 @@ project_settings = dict(
                     "unit", "value", "bounds", "dim_name", "label", "axis_type"],
         attrs_constraints=dict(
             axis_type=ParameterSettings(
+                key="axis_type",
                 skip_values=["", "None", None]
             ),
             standard_name=ParameterSettings(
+                key="standard_name",
                 skip_values=["", "None", None],
                 authorized_types=[str, ]
             ),
             prec=ParameterSettings(
+                key="prec",
                 skip_values=["", "None", None]
             ),
             unit=ParameterSettings(
+                key="unit",
                 skip_values=["", "None", None]
             ),
             bounds=ParameterSettings(
+                key="bounds",
                 skip_values=["", "None", None]
             ),
             dim_name=ParameterSettings(
+                key="dim_name",
                 skip_values=["", "None", None]
             ),
             label=ParameterSettings(
+                key="label",
                 skip_values=["", "None", None]
             ),
             value=ParameterSettings(
+                key="value",
                 skip_values=["", "None", None]
             )
         )
@@ -1002,6 +1134,7 @@ project_settings = dict(
         attrs_list=["prec", ],
         attrs_constraints=dict(
             prec=ParameterSettings(
+                key="prec",
                 default_values=["8", ]
             )
         )
@@ -1016,6 +1149,7 @@ project_settings = dict(
         attrs_list=["prec", ],
         attrs_constraints=dict(
             prec=ParameterSettings(
+                key="prec",
                 default_values=["8", ]
             )
         )
@@ -1025,30 +1159,39 @@ project_settings = dict(
                     "bounds_name", "axis_type", "positive", "unit"],
         attrs_constraints=dict(
             standard_name=ParameterSettings(
+                key="standard_name",
                 skip_values=["", "None", None]
             ),
             axis_type=ParameterSettings(
+                key="axis_type",
                 skip_values=["", "None", None]
             ),
             unit=ParameterSettings(
+                key="unit",
                 skip_values=["", "None", None]
             ),
             label=ParameterSettings(
+                key="label",
                 skip_values=["", "None", None]
             ),
             bounds=ParameterSettings(
+                key="bounds",
                 skip_values=["", "None", None]
             ),
             bounds_name=ParameterSettings(
+                key="bounds_name",
                 skip_values=["", "None", None]
             ),
             prec=ParameterSettings(
+                key="prec",
                 skip_values=["", "None", None]
             ),
             value=ParameterSettings(
+                key="value",
                 skip_values=["", "None", None]
             ),
             positive=ParameterSettings(
+                key="positive",
                 skip_values=["", "None", None]
             )
         )

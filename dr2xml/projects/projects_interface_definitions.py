@@ -228,10 +228,14 @@ class ParameterSettings(Settings):
     def init_dict_default(self):
         return dict(skip_values=list(), forbidden_patterns=list(), conditions=list(), default_values=list(),
                     cases=list(), authorized_values=list(), authorized_types=list(), corrections=dict(),
-                    output_key=None, num_type="string", is_default=False, fatal=False)
+                    output_key=None, num_type="string", is_default=False, fatal=False, key=None)
 
     def __init__(self, *args, **kwargs):
         super(ParameterSettings, self).__init__(*args, **kwargs)
+        if self.key is None:
+            raise ValueError("Attribute 'key' must not be None")
+        if self.output_key is None:
+            self.output_key = self.key
         if not self.is_default and len(self.default_values) > 0:
             self.is_default = True
             self.updated.add("is_default")
@@ -361,7 +365,7 @@ class ParameterSettings(Settings):
             if not test:
                 i += 1
         if not test and self.fatal and raise_on_error:
-            raise ValueError("Could not find a proper value")
+            raise ValueError("Could not find a proper value for %s" % self.key)
         return test, value
 
 
@@ -389,15 +393,15 @@ class TagSettings(Settings):
 
     def complete_and_clean(self):
         for attr in [attr for attr in self.attrs_list if attr not in self.attrs_constraints]:
-            self.attrs_constraints[attr] = ParameterSettings()
+            self.attrs_constraints[attr] = ParameterSettings(key=attr)
         for attr in [attr for attr in self.attrs_constraints if attr not in self.attrs_list]:
             del self.attrs_constraints[attr]
         for comment in [comment for comment in self.comments_list if comment not in self.comments_constraints]:
-            self.comments_constraints[comment] = ParameterSettings()
+            self.comments_constraints[comment] = ParameterSettings(key=comment)
         for comment in [comment for comment in self.comments_constraints if comment not in self.comments_list]:
             del self.comments_constraints[comment]
         for var in [var for var in self.vars_list if var not in self.vars_constraints]:
-            self.vars_constraints[var] = ParameterSettings()
+            self.vars_constraints[var] = ParameterSettings(key=var)
         for var in [var for var in self.vars_constraints if var not in self.vars_list]:
             del self.vars_constraints[var]
 
