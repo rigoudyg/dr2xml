@@ -20,7 +20,7 @@ def initialize_laboratory_settings():
         from dr2xml.settings_interface import get_settings_values
         internal_dict = get_settings_values("internal")
         institution_id = internal_dict["institution_id"]
-        if institution_id in ["CNRM-CERFACS", "CNRM"]:
+        if institution_id in ["CNRM-CERFACS", "CNRM", "lfpw"]:
             from . import CNRM_CERFACS
             laboratory_source = CNRM_CERFACS
         else:
@@ -29,6 +29,8 @@ def initialize_laboratory_settings():
                 if os.path.isfile(laboratory_used):
                     laboratory_source = SourceFileLoader(os.path.basename(laboratory_used),
                                                          laboratory_used).load_module(os.path.basename(laboratory_used))
+            if laboratory_source is None:
+                raise ValueError("Could not find the laboratory source module for %s" % institution_id)
 
 
 def lab_adhoc_grid_policy(cmvarid, grids):

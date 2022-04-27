@@ -587,7 +587,7 @@ def generate_file_defs(lset, sset, year, enddate, context, cvs_path, pingfiles=N
     # ps = pstats.Stats(pr, stream=s).sort_stats(sortby)
     # ps.print_stats()
     # Just un-comment next line to get the profile on stdout
-    # print s.getvalue()
+    # print(s.getvalue())
 
 
 def generate_file_defs_inner(year, enddate, context, pingfiles=None, dummies='include', dirname="./", attributes=list(),
