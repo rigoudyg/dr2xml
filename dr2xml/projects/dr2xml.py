@@ -13,6 +13,14 @@ from dr2xml.projects.projects_interface_definitions import ValueSettings, Parame
 parent_project_settings = None
 
 internal_values = dict(
+	grouped_vars_per_file=ParameterSettings(
+		key="grouped_vars_per_file",
+		default_values=[
+			ValueSettings(key_type="simulation", keys="grouped_vars_per_file"),
+			ValueSettings(key_type="laboratory", keys="grouped_vars_per_file"),
+			list()
+		]
+	),
 	debug_parsing=ParameterSettings(
         key="debug_parsing",
 		default_values=[

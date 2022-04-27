@@ -395,6 +395,20 @@ project_settings = dict(
                     "time_counter_name", "time_counter", "time_stamp_name", "time_stamp_format", "uuid_name",
                     "uuid_format", "convention_str"],
         attrs_constraints=dict(
+            id=ParameterSettings(
+                key="id",
+                default_values=[
+                    ValueSettings(
+                        key_type="combine",
+                        keys=[
+                            ValueSettings(key_type="variable", keys="label"),
+                            ValueSettings(key_type="dict", keys="table_id"),
+                            ValueSettings(key_type="dict", keys="grid_label")
+                        ],
+                        fmt="{}_{}_{}"
+                    )
+                ]
+            ),
             split_freq=ParameterSettings(
                 key="split_freq",
                 skip_values=["", "None", None],

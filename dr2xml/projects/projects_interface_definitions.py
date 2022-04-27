@@ -133,7 +133,10 @@ def determine_value(key_type=None, keys=list(), func=None, fmt=None, src=None, c
                 value = get_scope().__dict__
                 found = True
             elif key_type in ["variable", ] and "variable" in additional_dict:
-                value = additional_dict["variable"].__dict__
+                value = additional_dict["variable"]
+                if isinstance(value, list):
+                    value = value[0]
+                value = value.__dict__
                 found = True
             else:
                 value = None
@@ -425,7 +428,8 @@ class FunctionSettings(Settings):
                 del self.options[key]
         try:
             value = self.func(*args, **self.options)
-        except:
+        except BaseException as e:
+            # print(e)
             value = None
             test = False
         return test, value

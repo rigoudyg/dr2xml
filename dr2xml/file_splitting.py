@@ -308,7 +308,8 @@ def evaluate_split_freq_value(split_freq):
         return split_freq_units, split_freq_length
 
 
-def determine_split_freq(split_freq):
+def determine_split_freq(svar, grid_choice, mcfg, context):
+    split_freq = split_frequency_for_variable(svar, grid_choice, mcfg, context)
     max_split_freq = get_settings_values("internal", "max_split_freq")
     if max_split_freq is not None:
         split_freq_units, split_freq_length = evaluate_split_freq_value(split_freq)

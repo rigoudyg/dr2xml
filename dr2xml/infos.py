@@ -122,7 +122,8 @@ def print_some_stats(context, svars_per_table, skipped_vars_per_table, actually_
 
             list_labels = list(dic)
             list_labels.sort()
-            logger.info(">>> DBG >>> %s" % " ".join(list_labels))
+            if len(list_labels) > 0:
+                logger.info(">>> DBG >>> %s" % " ".join(list_labels))
 
             for label in list_labels:
                 logger.info((14 + len(label)) * "-")

@@ -8,11 +8,12 @@ XIOS writing files tools.
 from __future__ import print_function, division, absolute_import, unicode_literals
 
 # To have ordered dictionaries
-from collections import OrderedDict
+from collections import OrderedDict, defaultdict, namedtuple
 
 import six
 
 # Utilities
+from .file_splitting import determine_split_freq
 from .settings_interface import get_settings_values
 from .utils import Dr2xmlError
 
@@ -52,285 +53,10 @@ from .postprocessing import process_vertical_interpolation, process_zonal_mean, 
 # XIOS tools
 from .Xparse import id2gridid, id_has_expr_with_at
 
-# File splitting tools
-from .file_splitting import split_frequency_for_variable, determine_split_freq
-
 warnings_for_optimisation = []
 
 
-def write_xios_file_def_for_svar(sv, year, table, out, dummies, skipped_vars_per_table, actually_written_vars, context,
-                                 grid, enddate=None, attributes=[], debug=[]):
-    """
-    Generate an XIOS file_def entry in out for :
-      - a dict for laboratory settings
-      - a dict of simulation settings
-      - a 'simplifed CMORvar' sv
-      - which all belong to given table
-      - a path 'cvs' for Controlled Vocabulary
-
-    Lengthy code, but not longer than the corresponding specification document
-
-    1- After a prologue, attributes valid for all variables are
-    written as file-level metadata, in the same order than in
-    WIP document;
-    2- Next, field-level metadata are written
-    3- For 3D variables in model levels or half-levels, also write the auxilliary
-    variables requested by CF convention (e.g. for hybrid coordinate, surface_pressure field
-    plus AP and B arrays and their bounds, and lev + lev_bnds with formula attribute)
-    """
-    internal_dict = get_settings_values("internal")
-    logger = get_logger()
-    #
-    # If list of included vars has size 1, activate debug on the corresponding variable
-    inc = internal_dict['included_vars_lset']
-    if len(inc) == 1:
-        debug = inc
-
-    # --------------------------------------------------------------------
-    # Define alias for field_ref in file-def file
-    # - may be replaced by alias1 later
-    # - this is not necessarily the alias used in ping file because of
-    #   intermediate field id(s) due to union/zoom
-    # --------------------------------------------------------------------
-    # We use a simple convention for variable names in ping files :
-    if sv.type in ['perso', 'dev']:
-        alias = sv.label
-        alias_ping = sv.ref_var
-    else:
-        # MPM : si on a defini un label non ambigu alors on l'utilise comme alias (i.e. le field_ref)
-        # et pour l'alias seulement (le nom de variable dans le nom de fichier restant svar.label)
-        if sv.label_non_ambiguous:
-            alias = internal_dict["ping_variables_prefix"] + sv.label_non_ambiguous
-        else:
-            alias = internal_dict["ping_variables_prefix"] + sv.ref_var
-        if sv.label in debug:
-            logger.debug("write_xios_file_def_for_svar ... processing %s, alias=%s" % (sv.label, alias))
-
-        # suppression des terminaisons en "Clim" pour l'alias : elles concernent uniquement les cas
-        # d'absence de variation inter-annuelle sur les GHG. Peut-etre genant pour IPSL ?
-        # Du coup, les simus avec constance des GHG (picontrol) sont traitees comme celles avec variation
-        split_alias = alias.split("Clim")
-        alias = split_alias[0]
-        alias_ping = ping_alias(sv)
-    #
-    # process only variables in pingvars except for dev variables
-    # print(pingvars)
-    # print("+++ =>>>>>>>>>>>", alias_ping, " ", sv.label)
-    # print(alias_ping, "in pingvars?", alias_ping in pingvars)
-    if alias_ping not in get_config_variable("pingvars") and sv.type not in ["dev", "perso"]:
-        table = sv.mipTable
-        if table not in skipped_vars_per_table:
-            skipped_vars_per_table[table] = []
-        skipped_vars_per_table[table].append(sv.label + "(" + str(sv.Priority) + ")")
-        return
-    #
-    # --------------------------------------------------------------------
-    # Set global CMOR file attributes
-    # --------------------------------------------------------------------
-    #
-    source_type = internal_dict["source_type"]
-    experiment_id = internal_dict["experiment_id"]
-    #
-    # --------------------------------------------------------------------
-    # Set grid info
-    # --------------------------------------------------------------------
-    grid_choice = internal_dict["grid_choice"]
-    if grid in ["", ]:
-        # either native or close-to-native
-        if sv.type in ["dev", ]:
-            target_grid = sv.description.split('|')[1]
-            if target_grid in ["native", ]:
-                grids_dev = internal_dict["grids_dev"]
-                if sv.label not in grids_dev or (sv.label in grids_dev and
-                                                 (grid_choice not in grids_dev[sv.label] or
-                                                  (grid_choice in grids_dev[sv.label]
-                                                   and context not in grids_dev[sv.label][grid_choice]))):
-                    raise KeyError("Could not find the grid description for variable %s, grid_choice %s and context %s"
-                                   " in entry grids_dev: %s" % (sv.label, grid_choice, context, str(grids_dev)))
-                else:
-                    grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description = \
-                        grids_dev[sv.label][grid_choice][context]
-            else:
-                grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description = \
-                    internal_dict["grids"][grid_choice][context]
-        else:
-            grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description = \
-                internal_dict["grids"][grid_choice][context]
-    else:
-        if grid in ['cfsites', ]:
-            target_hgrid_id = cfsites_domain_id
-            zgrid_id = None
-        else:
-            target_hgrid_id = internal_dict["ping_variables_prefix"] + grid
-            zgrid_id = "TBD : Should create zonal grid for CMIP6 standard grid %s" % grid
-        grid_label, grid_resolution, grid_description = DR_grid_to_grid_atts(grid)
-
-    if table.endswith("Z"):  # e.g. 'AERmonZ','EmonZ', 'EdayZ'
-        grid_label += "z"
-
-    if "Ant" in table:
-        grid_label += "a"
-    if "Gre" in table:
-        grid_label += "g"
-    #
-    # Check model components re. CV components
-    required_components = internal_dict["required_model_components"]
-    if not isinstance(required_components, list):
-        required_components = [required_components, ]
-    allowed_components = internal_dict["additional_allowed_model_components"]
-    if not isinstance(allowed_components, list):
-        allowed_components = [allowed_components, ]
-    actual_components = source_type.split(" ")
-    ok = True
-    for c in required_components:
-        if c not in actual_components:
-            ok = False
-            logger.warning("Model component %s is required by CMIP6 CV for experiment %s and not present "
-                           "(present=%s)" % (c, experiment_id, repr(actual_components)))
-    if len(allowed_components) > 0:
-        for c in actual_components:
-            if c not in allowed_components and c not in required_components:
-                ok = False or internal_dict['bypass_CV_components']
-                logger.warning("Warning: Model component %s is present but not required nor allowed (%s)" %
-                               (c, repr(allowed_components)))
-    if not ok:
-        raise Dr2xmlError("Issue with model components")
-    #
-    # --------------------------------------------------------------------
-    # Set NetCDF output file name according to the DRS
-    # --------------------------------------------------------------------
-    #
-    operation, detect_missing, _ = analyze_cell_time_method(sv.cell_methods, sv.label, table)
-    # print "--> ",sv.label, sv.frequency, table
-    date_format, offset_begin, offset_end = freq2datefmt(sv.frequency, operation, table)
-    #
-    # --------------------------------------------------------------------
-    # Compute XIOS split frequency
-    # --------------------------------------------------------------------
-    sc = get_scope()
-    split_freq = split_frequency_for_variable(sv, grid_choice, sc.mcfg, context)
-    # Cap split_freq by setting max_split_freq (if expressed in years)
-    split_freq = determine_split_freq(split_freq)
-    # print "split_freq: %-25s %-10s %-8s"%(sv.label,sv.mipTable,split_freq)
-    #
-    # --------------------------------------------------------------------
-    # Write XIOS file node:
-    # including global CMOR file attributes
-    # --------------------------------------------------------------------
-    freq = longest_possible_period(cmip6_freq_to_xios_freq(sv.frequency, table), internal_dict["too_long_periods"])
-
-    split_freq_format = None
-    split_start_offset = None
-    split_end_offset = None
-    split_last_date = None
-    if "fx" not in sv.frequency:
-        split_freq_format = date_format
-        #
-        # Modifiers for date parts of the filename, due to silly KT conventions.
-        if offset_begin is not False:
-            split_start_offset = offset_begin
-        if offset_end is not False:
-            split_end_offset = offset_end
-        lastyear = None
-        # Try to get enddate for the CMOR variable from the DR
-        if sv.cmvar is not None:
-            # print "calling endyear_for... for %s, with year="%(sv.label), year
-            lastyear = endyear_for_CMORvar(sv.cmvar, experiment_id, year)
-            # print "lastyear=",lastyear," enddate=",enddate
-        if lastyear is None or (enddate is not None and lastyear >= int(enddate[0:4])):
-            # DR doesn't specify an end date for that var, or a very late one
-            if internal_dict['dr2xml_manages_enddate']:
-                # Use run end date as the latest possible date
-                # enddate must be 20140101 , rather than 20131231
-                if enddate is not None:
-                    endyear = enddate[0:4]
-                    endmonth = enddate[4:6]
-                    endday = enddate[6:8]
-                    split_last_date = "{}-{}-{} 00:00:00".format(endyear, endmonth, endday)
-                else:
-                    split_last_date = "10000-01-01 00:00:00"
-        else:
-            # Use requestItems-based end date as the latest possible date when it is earlier than run end date
-            if sv.label in debug:
-                logger.debug("split_last_date year %d derived from DR for variable %s in table %s for year %d" %
-                             (lastyear, sv.label, table, year))
-            endyear = "{:04d}".format(lastyear + 1)
-            if lastyear < 1000:
-                Dr2xmlError(
-                    "split_last_date year %d derived from DR for variable %s in table %s for year %d does not make "
-                    "sense except maybe for paleo runs; please set the right value for 'end_year' in experiment's "
-                    "settings file" % (lastyear, sv.label, table, year))
-            endmonth = "01"
-            endday = "01"
-            split_last_date = "{}-{}-{} 00:00:00".format(endyear, endmonth, endday)
-    else:
-        split_freq = None
-    #
-    xml_file = DR2XMLElement(tag="file", default_tag="file_output",
-                             id="_".join([sv.label, table, grid_label]), output_freq=freq,
-                             split_freq=split_freq, split_freq_format=split_freq_format,
-                             split_start_offset=split_start_offset, split_end_offset=split_end_offset,
-                             split_last_date=split_last_date,
-                             grid=grid_description, grid_label=grid_label,
-                             nominal_resolution=grid_resolution,
-                             variable=sv, context=context, experiment_id=experiment_id,
-                             table_id=table)
-    #
-    for name, value in sorted(list(attributes)):
-        xml_file.append(wrv(name, value))
-    non_stand_att = internal_dict["non_standard_attributes"]
-    for name in sorted(list(non_stand_att)):
-        xml_file.append(wrv(name, non_stand_att[name]))
-    #
-    # --------------------------------------------------------------------
-    # Build all XIOS auxiliary elements (end_file_defs, field_defs, domain_defs, grid_defs, axis_defs)
-    # ---
-    # Write XIOS field entry
-    # including CF field attributes
-    # --------------------------------------------------------------------
-    (end_field, target_hgrid_id) = create_xios_aux_elmts_defs(sv, alias, table, dummies, context, target_hgrid_id,
-                                                              zgrid_id)
-    xml_file.append(end_field)
-    if sv.spatial_shp[0:4] == 'XY-A' or sv.spatial_shp[0:3] == 'S-A':  # includes half-level cases
-        # create a field_def entry for surface pressure
-        # print "Searching for ps for var %s, freq %s="%(alias,freq)
-        sv_psol = get_simplevar("ps", table, sv.frequency)
-
-        if sv_psol:
-            # if not sv_psol.cell_measures : sv_psol.cell_measures = "cell measure is not specified in DR "+
-            # get_DR_version()
-            psol_field, _ = create_xios_aux_elmts_defs(sv_psol, internal_dict["ping_variables_prefix"] + "ps", table,
-                                                       dummies, context, target_hgrid_id, zgrid_id)
-            xml_file.append(psol_field)
-        else:
-            logger.warning("Warning: Cannot complement model levels with psol for variable %s and table %s" %
-                           (sv.label, sv.frequency))
-
-    #
-    names = OrderedDict()
-    if sv.spatial_shp in ['XY-A', 'S-A']:
-        # add entries for auxiliary variables : ap, ap_bnds, b, b_bnds
-        names["ap"] = "vertical coordinate formula term: ap(k)"
-        names["ap_bnds"] = "vertical coordinate formula term: ap(k+1/2)"
-        names["b"] = "vertical coordinate formula term: b(k)"
-        names["b_bnds"] = "vertical coordinate formula term: b(k+1/2)"
-    elif sv.spatial_shp in ['XY-AH', 'S-AH']:
-        # add entries for auxiliary variables : ap, ap_bnds, b, b_bnds
-        names["ahp"] = "vertical coordinate formula term: ap(k)"
-        names["ahp_bnds"] = "vertical coordinate formula term: ap(k+1/2)"
-        names["bh"] = "vertical coordinate formula term: b(k)"
-        names["bh_bnds"] = "vertical coordinate formula term: b(k+1/2)"
-
-    for tab in list(names):
-        ping_variable_prefix = internal_dict["ping_variables_prefix"]
-        xml_file.append(DR2XMLElement(tag="field", field_ref="".join([ping_variable_prefix, tab]),
-                                      name=tab.replace('h', ''), long_name=names[tab], operation="once", prec="8"))
-    actually_written_vars.append((sv.label, sv.long_name, sv.mipTable, sv.frequency, sv.Priority, sv.spatial_shp))
-    # Add content to xml_file to out
-    out.append(xml_file)
-
-
-def create_xios_aux_elmts_defs(sv, alias, table, dummies, context, target_hgrid_id, zgrid_id):
+def create_xios_aux_elmts_defs(sv, alias, table, context, target_hgrid_id, zgrid_id, alias_ping):
     """
     Create a field_ref string for a simplified variable object sv (with
     lab prefix for the variable name) and returns it
@@ -369,31 +95,8 @@ def create_xios_aux_elmts_defs(sv, alias, table, dummies, context, target_hgrid_
 
     context_index = get_config_variable("context_index")
 
-    if sv.type in ["dev", ]:
-        (source_grid, target_grid) = sv.description.split("|")
-        sv.description = None
-        if target_grid.lower() in ["none", "native"]:
-            target_hgrid_id = ""
-        else:
-            grid_defs = get_config_variable("grid_defs")
-            if target_grid in grid_defs:
-                target_grid_def = grid_defs[target_grid]
-            elif target_grid in context_index:
-                target_grid_def = context_index[target_grid]
-            else:
-                raise Dr2xmlError("Target horizontal is not defined in grid %s" % target_grid)
-            target_hgrid_id = find_rank_xml_subelement(target_grid_def, tag="domain")[0]
-            target_hgrid_id = target_grid_def[target_hgrid_id]
-            if "id" in target_hgrid_id.attrib:
-                target_hgrid_id = target_hgrid_id.attrib["id"]
-            else:
-                target_hgrid_id = target_hgrid_id.get_attrib("domain_ref")
-
-    if sv.type in ["dev", "perso"]:
-        alias_ping = sv.ref_var
-    else:
-        alias_ping = ping_alias(sv)
     if sv.type in ["dev", ] and alias_ping not in context_index:
+        source_grid, _ = sv.description.split("|")
         field_def = DR2XMLElement(tag="field", id=alias_ping, long_name=sv.long_name, standard_name=sv.stdname,
                                   unit=sv.units, grid_ref=source_grid)
         add_value_in_dict_config_variable(variable="field_defs", key=alias_ping, value=field_def)
@@ -572,7 +275,7 @@ def create_xios_aux_elmts_defs(sv, alias, table, dummies, context, target_hgrid_
     # mpmoine_note: 'missing_value(s)' normalement plus necessaire, a verifier
     # TBS rep.append(wrv("missing_values", sv.missing, num_type="double"))
     #
-    return rep, target_hgrid_id
+    return rep
 
 
 def process_singleton(sv, alias, last_grid_id):
@@ -715,6 +418,38 @@ def write_xios_file_def(filename, svars_per_table, year, dummies, skipped_vars_p
     """
     logger = get_logger()
     internal_dict = get_settings_values("internal")
+    # If list of included vars has size 1, activate debug on the corresponding variable
+    inc = internal_dict['included_vars_lset']
+    if len(inc) == 1:
+        debug = inc
+    else:
+        debug = list()
+    # --------------------------------------------------------------------
+    # Check required and allowed components
+    # --------------------------------------------------------------------
+    source_type = internal_dict["source_type"]
+    experiment_id = internal_dict["experiment_id"]
+    required_components = internal_dict["required_model_components"]
+    if not isinstance(required_components, list):
+        required_components = [required_components, ]
+    allowed_components = internal_dict["additional_allowed_model_components"]
+    if not isinstance(allowed_components, list):
+        allowed_components = [allowed_components, ]
+    actual_components = source_type.split(" ")
+    ok = True
+    for c in required_components:
+        if c not in actual_components:
+            ok = False
+            logger.warning("Model component %s is required by CMIP6 CV for experiment %s and not present "
+                           "(present=%s)" % (c, experiment_id, repr(actual_components)))
+    if len(allowed_components) > 0:
+        for c in actual_components:
+            if c not in allowed_components and c not in required_components:
+                ok = False or internal_dict['bypass_CV_components']
+                logger.warning("Warning: Model component %s is present but not required nor allowed (%s)" %
+                               (c, repr(allowed_components)))
+    if not ok:
+        raise Dr2xmlError("Issue with model components")
     # --------------------------------------------------------------------
     # Start writing XIOS file_def file:
     # file_definition node, including field child-nodes
@@ -725,25 +460,13 @@ def write_xios_file_def(filename, svars_per_table, year, dummies, skipped_vars_p
     set_config_variable("domain_defs", OrderedDict())
     # Add xml_file_definition
     xml_file_definition = DR2XMLElement(tag="file_definition")
-    # Loop on values to fill the xml element
-    for table in sorted(list(svars_per_table)):
-        count = OrderedDict()
-        for svar in sorted(svars_per_table[table], key=lambda x: (x.label + "_" + table)):
-            if internal_dict["allow_duplicates_in_same_table"] or svar.mipVarLabel not in count:
-                if not internal_dict["use_cmorvar_label_in_filename"] and svar.mipVarLabel in count:
-                    form = "If you really want to actually produce both %s and %s in table %s, " + \
-                           "you must set 'use_cmorvar_label_in_filename' to True in lab settings"
-                    raise Dr2xmlError(form % (svar.label, count[svar.mipVarLabel].label, table))
-                count[svar.mipVarLabel] = svar
-                for grid in svar.grids:
-                    a, hgrid, b, c, d = internal_dict['grids'][get_grid_choice()][context]
-                    check_for_file_input(svar, hgrid)
-                    write_xios_file_def_for_svar(svar, year, table, xml_file_definition, dummies,
-                                                 skipped_vars_per_table, actually_written_vars, context, grid, enddate,
-                                                 attributes)
-            else:
-                logger.warning("Duplicate variable %s,%s in table %s is skipped, preferred is %s" %
-                               (svar.label, svar.mipVarLabel, table, count[svar.mipVarLabel].label))
+    _, hgrid, _, _, _ = internal_dict['grids'][get_grid_choice()][context]
+    files_list = determine_files_list(svars_per_table, enddate, year, debug)
+    for file_dict in files_list:
+        write_xios_file_def_for_svars_list(hgrid=hgrid, xml_file_definition=xml_file_definition, dummies=dummies,
+                                           skipped_vars_per_table=skipped_vars_per_table,
+                                           actually_written_vars=actually_written_vars,
+                                           attributes=attributes, **file_dict)
     grid_defs = get_config_variable("grid_defs")
     # Add cfsites if needed
     if cfsites_grid_id in grid_defs:
@@ -811,3 +534,299 @@ def write_xios_file_def(filename, svars_per_table, year, dummies, skipped_vars_p
     xml_context.append(xml_scalar_definition)
     # Write the xml element to the dedicated file
     create_pretty_xml_doc(xml_element=xml_context, filename=filename)
+
+
+def write_xios_file_def_for_svars_list(vars_list, hgrid, xml_file_definition, freq, split_freq, split_freq_format,
+                                       split_start_offset, split_end_offset, split_last_date, grid_description,
+                                       grid_label, grid_resolution, table, skipped_vars_per_table, dummies,
+                                       target_hgrid_id, zgrid_id, actually_written_vars, attributes=list(), debug=list()):
+    logger = get_logger()
+    internal_dict = get_settings_values("internal")
+    context = internal_dict["context"]
+    prefix = internal_dict["ping_variables_prefix"]
+    # Initialize xml file
+    xml_file = DR2XMLElement(tag="file", default_tag="file_output",
+                             output_freq=freq, split_freq=split_freq,
+                             split_freq_format=split_freq_format, split_start_offset=split_start_offset,
+                             split_end_offset=split_end_offset, split_last_date=split_last_date, grid=grid_description,
+                             grid_label=grid_label, nominal_resolution=grid_resolution, variable=vars_list,
+                             context=context, table_id=table)
+    # Add several attributes
+    for name, value in sorted(list(attributes)):
+        xml_file.append(wrv(name, value))
+    non_stand_att = internal_dict["non_standard_attributes"]
+    for name in sorted(list(non_stand_att)):
+        xml_file.append(wrv(name, non_stand_att[name]))
+    # For each variable, add the elements about the variable
+    found = False
+    found_A = False
+    found_AH = False
+    found_begin_A = False
+    for svar in sorted(vars_list):
+        rep = find_alias(svar, skipped_vars_per_table, debug)
+        if rep is not None:
+            alias, alias_ping = rep
+            found = True
+            if svar.spatial_shp.startswith("XY-A") or svar.spatial_shp.startswith("S-A"):
+                found_begin_A = True
+                if svar.spatial_shp in ["XY-A", "S-A"]:
+                    found_A = True
+                elif svar.spatial_shp in ["XY-AH", "S-AH"]:
+                    found_AH = True
+            check_for_file_input(svar, hgrid)
+            end_field = create_xios_aux_elmts_defs(sv=svar, alias=alias, table=table, context=context,
+                                                   target_hgrid_id=target_hgrid_id, zgrid_id=zgrid_id,
+                                                   alias_ping=alias_ping)
+            xml_file.append(end_field)
+            actually_written_vars.append((svar.label, svar.long_name, svar.mipTable, svar.frequency, svar.Priority,
+                                          svar.spatial_shp))
+    # Add content to xml_file to out
+    if found:
+        if found_begin_A:
+            # create a field_def entry for surface pressure
+            # print "Searching for ps for var %s, freq %s="%(alias,freq)
+            sv_psol = get_simplevar("ps", table, freq)
+
+            if sv_psol:
+                # if not sv_psol.cell_measures : sv_psol.cell_measures = "cell measure is not specified in DR "+
+                # get_DR_version()
+                psol_field = create_xios_aux_elmts_defs(sv=sv_psol, alias=prefix + "ps", table=table, context=context,
+                                                        target_hgrid_id=target_hgrid_id, zgrid_id=zgrid_id,
+                                                        alias_ping=ping_alias(sv_psol))
+                xml_file.append(psol_field)
+            else:
+                logger.warning("Warning: Cannot complement model levels with psol for table %s for frequency %s" %
+                               (table, freq))
+        names = OrderedDict()
+        if found_A and found_AH:
+            raise ValueError("Could not have both 'XY-A'/'S-A' shape and 'XY-AH'/'S-AH' shape in the same file")
+        elif found_A:
+            # add entries for auxiliary variables : ap, ap_bnds, b, b_bnds
+            names["ap"] = "vertical coordinate formula term: ap(k)"
+            names["ap_bnds"] = "vertical coordinate formula term: ap(k+1/2)"
+            names["b"] = "vertical coordinate formula term: b(k)"
+            names["b_bnds"] = "vertical coordinate formula term: b(k+1/2)"
+        elif found_AH:
+            # add entries for auxiliary variables : ap, ap_bnds, b, b_bnds
+            names["ahp"] = "vertical coordinate formula term: ap(k)"
+            names["ahp_bnds"] = "vertical coordinate formula term: ap(k+1/2)"
+            names["bh"] = "vertical coordinate formula term: b(k)"
+            names["bh_bnds"] = "vertical coordinate formula term: b(k+1/2)"
+        for tab in list(names):
+            ping_variable_prefix = internal_dict["ping_variables_prefix"]
+            xml_file.append(DR2XMLElement(tag="field", field_ref="".join([ping_variable_prefix, tab]),
+                                          name=tab.replace('h', ''), long_name=names[tab], operation="once",
+                                          prec="8"))
+        xml_file_definition.append(xml_file)
+
+
+def determine_files_list(svars_per_table, enddate, year, debug):
+    # Determine which variable go in which file if multiply variables per file is allowed
+    # Only variables in the same table, at the same frequency and on the same grid can be put together
+    logger = get_logger()
+    files_dict = defaultdict(list)
+    internal_dict = get_settings_values("internal")
+    grouped_vars_per_file = internal_dict["grouped_vars_per_file"]
+    allow_duplicates_in_same_table = internal_dict["allow_duplicates_in_same_table"]
+    use_cmorvar_label_in_filename = internal_dict["use_cmorvar_label_in_filename"]
+    too_long_periods = internal_dict["too_long_periods"]
+    svar_tuple = namedtuple("svar_tuple", ["freq", "table", "grid_label", "split_freq", "split_freq_format",
+                                           "split_last_date", "split_start_offset", "split_end_offset",
+                                           "grid_description", "grid_resolution", "target_hgrid_id", "zgrid_id"])
+    # Loop on values to fill the xml element
+    for table in sorted(list(svars_per_table)):
+        count = OrderedDict()
+        for svar in sorted(svars_per_table[table], key=lambda x: (x.label + "_" + table)):
+            if allow_duplicates_in_same_table or svar.mipVarLabel not in count:
+                if not use_cmorvar_label_in_filename and svar.mipVarLabel in count:
+                    form = "If you really want to actually produce both %s and %s in table %s, " + \
+                           "you must set 'use_cmorvar_label_in_filename' to True in lab settings"
+                    raise Dr2xmlError(form % (svar.label, count[svar.mipVarLabel].label, table))
+                count[svar.mipVarLabel] = svar
+                freq = longest_possible_period(cmip6_freq_to_xios_freq(svar.frequency, table), too_long_periods)
+                split_freq_format, split_last_date, split_start_offset, split_end_offset, split_freq = \
+                    get_split_info(svar, table, enddate, year, debug)
+                for grid in svar.grids:
+                    grid_label, grid_description, grid_resolution, target_hgrid_id, zgrid_id = \
+                        get_grid_info(svar, grid, table)
+                    files_dict[svar_tuple(freq=freq, split_freq_format=split_freq_format,
+                                          split_last_date=split_last_date, split_start_offset=split_start_offset,
+                                          split_end_offset=split_end_offset, grid_label=grid_label,
+                                          grid_description=grid_description, zgrid_id=zgrid_id,
+                                          grid_resolution=grid_resolution, target_hgrid_id=target_hgrid_id,
+                                          split_freq=split_freq, table=table)].append(svar)
+            else:
+                logger.warning("Duplicate variable %s,%s in table %s is skipped, preferred is %s" %
+                               (svar.label, svar.mipVarLabel, table, count[svar.mipVarLabel].label))
+    files_list = list()
+    for elts in sorted(list(files_dict), key=lambda x: str(x)):
+        vars_list = files_dict[elts]
+        elts = elts._asdict()
+        grouped_vars = defaultdict(list)
+        for var in vars_list:
+            found = [var in list_elts for list_elts in grouped_vars_per_file]
+            if True in found:
+                # Take into account the first one only
+                grouped_vars[found.index(True)].append(var)
+            else:
+                grouped_vars[var.label + "_" + elts["table"]].append(var)
+        for i in sorted(list(grouped_vars)):
+            files_list.append(dict(vars_list=grouped_vars[i], **elts))
+    return files_list
+
+
+def find_alias(sv, skipped_vars_per_table, debug=list()):
+    internal_dict = get_settings_values("internal")
+    logger = get_logger()
+    # We use a simple convention for variable names in ping files :
+    if sv.type in ['perso', 'dev']:
+        alias = sv.label
+        alias_ping = sv.ref_var
+    else:
+        # MPM : si on a defini un label non ambigu alors on l'utilise comme alias (i.e. le field_ref)
+        # et pour l'alias seulement (le nom de variable dans le nom de fichier restant svar.label)
+        if sv.label_non_ambiguous:
+            alias = internal_dict["ping_variables_prefix"] + sv.label_non_ambiguous
+        else:
+            alias = internal_dict["ping_variables_prefix"] + sv.ref_var
+        if sv.label in debug:
+            logger.debug("write_xios_file_def_for_svar ... processing %s, alias=%s" % (sv.label, alias))
+
+        # suppression des terminaisons en "Clim" pour l'alias : elles concernent uniquement les cas
+        # d'absence de variation inter-annuelle sur les GHG. Peut-etre genant pour IPSL ?
+        # Du coup, les simus avec constance des GHG (picontrol) sont traitees comme celles avec variation
+        split_alias = alias.split("Clim")
+        alias = split_alias[0]
+        alias_ping = ping_alias(sv)
+
+    if alias_ping not in get_config_variable("pingvars") and sv.type not in ["dev", "perso"]:
+        table = sv.mipTable
+        if table not in skipped_vars_per_table:
+            skipped_vars_per_table[table] = []
+        skipped_vars_per_table[table].append(sv.label + "(" + str(sv.Priority) + ")")
+        return
+    else:
+        return alias, alias_ping
+
+
+def get_split_info(sv, table, enddate, year, debug):
+    logger = get_logger()
+    internal_dict = get_settings_values("internal")
+    experiment_id = internal_dict["experiment_id"]
+    context = internal_dict["context"]
+    grid_choice = internal_dict["grid_choice"]
+    operation, detect_missing, _ = analyze_cell_time_method(sv.cell_methods, sv.label, table)
+    date_format, offset_begin, offset_end = freq2datefmt(sv.frequency, operation, table)
+    split_freq_format = None
+    split_start_offset = None
+    split_end_offset = None
+    split_last_date = None
+    split_freq = None
+    if "fx" not in sv.frequency:
+        split_freq_format = date_format
+        #
+        # Modifiers for date parts of the filename, due to silly KT conventions.
+        if offset_begin is not False:
+            split_start_offset = offset_begin
+        if offset_end is not False:
+            split_end_offset = offset_end
+        lastyear = None
+        # Try to get enddate for the CMOR variable from the DR
+        if sv.cmvar is not None:
+            # print "calling endyear_for... for %s, with year="%(sv.label), year
+            lastyear = endyear_for_CMORvar(sv.cmvar, experiment_id, year)
+            # print "lastyear=",lastyear," enddate=",enddate
+        if lastyear is None or (enddate is not None and lastyear >= int(enddate[0:4])):
+            # DR doesn't specify an end date for that var, or a very late one
+            if internal_dict['dr2xml_manages_enddate']:
+                # Use run end date as the latest possible date
+                # enddate must be 20140101 , rather than 20131231
+                if enddate is not None:
+                    endyear = enddate[0:4]
+                    endmonth = enddate[4:6]
+                    endday = enddate[6:8]
+                    split_last_date = "{}-{}-{} 00:00:00".format(endyear, endmonth, endday)
+                else:
+                    split_last_date = "10000-01-01 00:00:00"
+        else:
+            # Use requestItems-based end date as the latest possible date when it is earlier than run end date
+            if sv.label in debug:
+                logger.debug("split_last_date year %d derived from DR for variable %s in table %s for year %d" %
+                             (lastyear, sv.label, table, year))
+            endyear = "{:04d}".format(lastyear + 1)
+            if lastyear < 1000:
+                Dr2xmlError(
+                    "split_last_date year %d derived from DR for variable %s in table %s for year %d does not make "
+                    "sense except maybe for paleo runs; please set the right value for 'end_year' in experiment's "
+                    "settings file" % (lastyear, sv.label, table, year))
+            endmonth = "01"
+            endday = "01"
+            split_last_date = "{}-{}-{} 00:00:00".format(endyear, endmonth, endday)
+        sc = get_scope()
+        split_freq = determine_split_freq(sv, grid_choice, sc.mcfg, context)
+    return split_freq_format, split_last_date, split_start_offset, split_end_offset, split_freq
+
+
+def get_grid_info(sv, grid, table):
+    internal_dict = get_settings_values("internal")
+    context = internal_dict["context"]
+    grid_choice = internal_dict["grid_choice"]
+    context_index = get_config_variable("context_index")
+    if grid in ["", ]:
+        # either native or close-to-native
+        if sv.type in ["dev", ]:
+            target_grid = sv.description.split('|')[1]
+            if target_grid in ["native", ]:
+                grids_dev = internal_dict["grids_dev"]
+                if sv.label not in grids_dev or (sv.label in grids_dev and
+                                                 (grid_choice not in grids_dev[sv.label] or
+                                                  (grid_choice in grids_dev[sv.label]
+                                                   and context not in grids_dev[sv.label][grid_choice]))):
+                    raise KeyError("Could not find the grid description for variable %s, grid_choice %s and context %s"
+                                   " in entry grids_dev: %s" % (sv.label, grid_choice, context, str(grids_dev)))
+                else:
+                    grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description = \
+                        grids_dev[sv.label][grid_choice][context]
+            else:
+                grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description = \
+                    internal_dict["grids"][grid_choice][context]
+        else:
+            grid_label, target_hgrid_id, zgrid_id, grid_resolution, grid_description = \
+                internal_dict["grids"][grid_choice][context]
+    else:
+        if grid in ['cfsites', ]:
+            target_hgrid_id = cfsites_domain_id
+            zgrid_id = None
+        else:
+            target_hgrid_id = internal_dict["ping_variables_prefix"] + grid
+            zgrid_id = "TBD : Should create zonal grid for CMIP6 standard grid %s" % grid
+        grid_label, grid_resolution, grid_description = DR_grid_to_grid_atts(grid)
+
+    if sv.type in ["dev", ]:
+        (source_grid, target_grid) = sv.description.split("|")
+        sv.description = None
+        if target_grid.lower() in ["none", "native"]:
+            target_hgrid_id = ""
+        else:
+            grid_defs = get_config_variable("grid_defs")
+            if target_grid in grid_defs:
+                target_grid_def = grid_defs[target_grid]
+            elif target_grid in context_index:
+                target_grid_def = context_index[target_grid]
+            else:
+                raise Dr2xmlError("Target horizontal is not defined in grid %s" % target_grid)
+            target_hgrid_id = find_rank_xml_subelement(target_grid_def, tag="domain")[0]
+            target_hgrid_id = target_grid_def[target_hgrid_id]
+            if "id" in target_hgrid_id.attrib:
+                target_hgrid_id = target_hgrid_id.attrib["id"]
+            else:
+                target_hgrid_id = target_hgrid_id.get_attrib("domain_ref")
+
+    if table.endswith("Z"):  # e.g. 'AERmonZ','EmonZ', 'EdayZ'
+        grid_label += "z"
+
+    if "Ant" in table:
+        grid_label += "a"
+    if "Gre" in table:
+        grid_label += "g"
+    return grid_label, grid_description, grid_resolution, target_hgrid_id, zgrid_id
