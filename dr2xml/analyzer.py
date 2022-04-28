@@ -526,6 +526,9 @@ DR_grid_to_grid_atts_dict = {
 
 def DR_grid_to_grid_atts(grid):
     """ Returns label, resolution, description for a DR grid name"""
-    default = DR_grid_to_grid_atts_dict["default"]
-    default[-1] = default[-1] % grid
-    return DR_grid_to_grid_atts_dict.get(grid, default)
+    if grid in DR_grid_to_grid_atts_dict:
+        return DR_grid_to_grid_atts_dict[grid]
+    else:
+        default = DR_grid_to_grid_atts_dict["default"]
+        default[-1] = default[-1] % grid
+        return default

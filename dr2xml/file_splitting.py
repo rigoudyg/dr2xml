@@ -170,7 +170,7 @@ def split_frequency_for_variable(svar, grid, mcfg, context):
                 "Warning: field_size returns 0 for var %s, cannot compute split frequency." % svar.label)
 
 
-freq_regexp = re.compile(r"(?P<len>\d*)(?P<type>(hr|h|day|d|mon|mo|yr|y|dec))(?P<suffix>(Pt|C|CM)?)")
+freq_regexp = re.compile(r"(?P<len>\d*)(?P<type>(subhr|hr|h|day|d|mon|mo|yr|y|dec))(?P<suffix>(Pt|C|CM)?)")
 freq_type_dict = dict(hr=1 / 24., h=1 / 24., day=1., d=1., mon=31., mo=31., yr=365., y=365., dec=10 * 365.)
 
 
