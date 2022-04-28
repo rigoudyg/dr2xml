@@ -28,6 +28,20 @@ def find_data(simulation):
         from tests.test_a4SST_AGCM_1960.input.lab_and_model_settings import lab_and_model_settings
         from tests.test_a4SST_AGCM_1960.input.config import simulation
         from tests.test_a4SST_AGCM_1960.input.config import contexts
+    elif simulation in ["amip", ]:
+        # Tests amip-hist_AGCM_1870_r10
+        from tests.test_amip_hist_AGCM_1870_r10.input.config import config
+        from tests.test_amip_hist_AGCM_1870_r10.input.simulation_settings import simulation_settings
+        from tests.test_amip_hist_AGCM_1870_r10.input.lab_and_model_settings import lab_and_model_settings
+        from tests.test_amip_hist_AGCM_1870_r10.input.config import simulation
+        from tests.test_amip_hist_AGCM_1870_r10.input.config import contexts
+    elif simulation in ["land", ]:
+        # Tests land-hist_LGCM
+        from tests.test_land_hist_LGCM.input.config import config
+        from tests.test_land_hist_LGCM.input.simulation_settings import simulation_settings
+        from tests.test_land_hist_LGCM.input.lab_and_model_settings import lab_and_model_settings
+        from tests.test_land_hist_LGCM.input.config import simulation
+        from tests.test_land_hist_LGCM.input.config import contexts
     elif simulation in ["aladin", ]:
         # Tests AAD50-641
         # TODO: Update data
@@ -36,6 +50,41 @@ def find_data(simulation):
         from tests.test_AAD50_641.input.lab_and_model_settings import lab_and_model_settings
         from tests.test_AAD50_641.input.config import simulation
         from tests.test_AAD50_641.input.config import contexts
+    elif simulation in ["1pctCO2", ]:
+        # Tests AOESM_1pctCO2_rad_CM6_r1
+        from tests.test_AOESM_1pctCO2_rad_CM6_r1.input.config import config
+        from tests.test_AOESM_1pctCO2_rad_CM6_r1.input.simulation_settings import simulation_settings
+        from tests.test_AOESM_1pctCO2_rad_CM6_r1.input.lab_and_model_settings import lab_and_model_settings
+        from tests.test_AOESM_1pctCO2_rad_CM6_r1.input.config import simulation
+        from tests.test_AOESM_1pctCO2_rad_CM6_r1.input.config import contexts
+    elif simulation in ["piNTCF", ]:
+        # Tests AOESM_hist_piNTCF_r3bfx
+        from tests.test_AOESM_hist_piNTCF_r3bfx.input.config import config
+        from tests.test_AOESM_hist_piNTCF_r3bfx.input.simulation_settings import simulation_settings
+        from tests.test_AOESM_hist_piNTCF_r3bfx.input.lab_and_model_settings import lab_and_model_settings
+        from tests.test_AOESM_hist_piNTCF_r3bfx.input.config import simulation
+        from tests.test_AOESM_hist_piNTCF_r3bfx.input.config import contexts
+    elif simulation in ["piControl", ]:
+        # Tests AOESM_piControl_CM6_r1_v2
+        from tests.test_AOESM_piControl_CM6_r1_v2.input.config import config
+        from tests.test_AOESM_piControl_CM6_r1_v2.input.simulation_settings import simulation_settings
+        from tests.test_AOESM_piControl_CM6_r1_v2.input.lab_and_model_settings import lab_and_model_settings
+        from tests.test_AOESM_piControl_CM6_r1_v2.input.config import simulation
+        from tests.test_AOESM_piControl_CM6_r1_v2.input.config import contexts
+    elif simulation in ["ssp585", ]:
+        # Tests AOESM_ssp585_CM6_r3
+        from tests.test_AOESM_ssp585_CM6_r3.input.config import config
+        from tests.test_AOESM_ssp585_CM6_r3.input.simulation_settings import simulation_settings
+        from tests.test_AOESM_ssp585_CM6_r3.input.lab_and_model_settings import lab_and_model_settings
+        from tests.test_AOESM_ssp585_CM6_r3.input.config import simulation
+        from tests.test_AOESM_ssp585_CM6_r3.input.config import contexts
+    elif simulation in ["piClim", ]:
+        # Tests piClim_anthro_AGCM_r1
+        from tests.test_piClim_anthro_AGCM_r1.input.config import config
+        from tests.test_piClim_anthro_AGCM_r1.input.simulation_settings import simulation_settings
+        from tests.test_piClim_anthro_AGCM_r1.input.lab_and_model_settings import lab_and_model_settings
+        from tests.test_piClim_anthro_AGCM_r1.input.config import simulation
+        from tests.test_piClim_anthro_AGCM_r1.input.config import contexts
     elif simulation in ["aladin_nodr", ]:
         # Tests AAD50-641 no dr
         # TODO: Update data
