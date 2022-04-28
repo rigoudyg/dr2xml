@@ -78,6 +78,13 @@ def find_data(simulation):
         from tests.test_AOESM_ssp585_CM6_r3.input.lab_and_model_settings import lab_and_model_settings
         from tests.test_AOESM_ssp585_CM6_r3.input.config import simulation
         from tests.test_AOESM_ssp585_CM6_r3.input.config import contexts
+    elif simulation in ["hist_aer", ]:
+        # Tests
+        from tests.test_hist_aer_CM6_r4.input.config import config
+        from tests.test_hist_aer_CM6_r4.input.simulation_settings import simulation_settings
+        from tests.test_hist_aer_CM6_r4.input.lab_and_model_settings import lab_and_model_settings
+        from tests.test_hist_aer_CM6_r4.input.config import simulation
+        from tests.test_hist_aer_CM6_r4.input.config import contexts
     elif simulation in ["piClim", ]:
         # Tests piClim_anthro_AGCM_r1
         from tests.test_piClim_anthro_AGCM_r1.input.config import config
