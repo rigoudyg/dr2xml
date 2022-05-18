@@ -56,7 +56,7 @@ from .Xparse import id2gridid, id_has_expr_with_at
 warnings_for_optimisation = []
 
 
-def create_xios_aux_elmts_defs(sv, alias, table, context, target_hgrid_id, zgrid_id, alias_ping):
+def create_xios_aux_elmts_defs(sv, alias, table, context, target_hgrid_id, zgrid_id, alias_ping, source_grid):
     """
     Create a field_ref string for a simplified variable object sv (with
     lab prefix for the variable name) and returns it
@@ -96,7 +96,6 @@ def create_xios_aux_elmts_defs(sv, alias, table, context, target_hgrid_id, zgrid
     context_index = get_config_variable("context_index")
 
     if sv.type in ["dev", ] and alias_ping not in context_index:
-        source_grid, _ = sv.description.split("|")
         field_def = DR2XMLElement(tag="field", id=alias_ping, long_name=sv.long_name, standard_name=sv.stdname,
                                   unit=sv.units, grid_ref=source_grid)
         add_value_in_dict_config_variable(variable="field_defs", key=alias_ping, value=field_def)
@@ -539,7 +538,8 @@ def write_xios_file_def(filename, svars_per_table, year, dummies, skipped_vars_p
 def write_xios_file_def_for_svars_list(vars_list, hgrid, xml_file_definition, freq, split_freq, split_freq_format,
                                        split_start_offset, split_end_offset, split_last_date, grid_description,
                                        grid_label, grid_resolution, table, skipped_vars_per_table, dummies,
-                                       target_hgrid_id, zgrid_id, actually_written_vars, attributes=list(), debug=list()):
+                                       target_hgrid_id, zgrid_id, source_grid, actually_written_vars, attributes=list(),
+                                       debug=list()):
     logger = get_logger()
     internal_dict = get_settings_values("internal")
     context = internal_dict["context"]
@@ -576,7 +576,7 @@ def write_xios_file_def_for_svars_list(vars_list, hgrid, xml_file_definition, fr
             check_for_file_input(svar, hgrid)
             end_field = create_xios_aux_elmts_defs(sv=svar, alias=alias, table=table, context=context,
                                                    target_hgrid_id=target_hgrid_id, zgrid_id=zgrid_id,
-                                                   alias_ping=alias_ping)
+                                                   alias_ping=alias_ping, source_grid=source_grid)
             xml_file.append(end_field)
             actually_written_vars.append((svar.label, svar.long_name, svar.mipTable, svar.frequency, svar.Priority,
                                           svar.spatial_shp))
@@ -632,7 +632,8 @@ def determine_files_list(svars_per_table, enddate, year, debug):
     too_long_periods = internal_dict["too_long_periods"]
     svar_tuple = namedtuple("svar_tuple", ["freq", "table", "grid_label", "split_freq", "split_freq_format",
                                            "split_last_date", "split_start_offset", "split_end_offset",
-                                           "grid_description", "grid_resolution", "target_hgrid_id", "zgrid_id"])
+                                           "grid_description", "grid_resolution", "target_hgrid_id", "zgrid_id",
+                                           "source_grid"])
     # Loop on values to fill the xml element
     for table in sorted(list(svars_per_table)):
         count = OrderedDict()
@@ -647,14 +648,14 @@ def determine_files_list(svars_per_table, enddate, year, debug):
                 split_freq_format, split_last_date, split_start_offset, split_end_offset, split_freq = \
                     get_split_info(svar, table, enddate, year, debug)
                 for grid in svar.grids:
-                    grid_label, grid_description, grid_resolution, target_hgrid_id, zgrid_id = \
+                    grid_label, grid_description, grid_resolution, target_hgrid_id, zgrid_id, source_grid = \
                         get_grid_info(svar, grid, table)
                     files_dict[svar_tuple(freq=freq, split_freq_format=split_freq_format,
                                           split_last_date=split_last_date, split_start_offset=split_start_offset,
                                           split_end_offset=split_end_offset, grid_label=grid_label,
                                           grid_description=grid_description, zgrid_id=zgrid_id,
                                           grid_resolution=grid_resolution, target_hgrid_id=target_hgrid_id,
-                                          split_freq=split_freq, table=table)].append(svar)
+                                          source_grid=source_grid, split_freq=split_freq, table=table)].append(svar)
             else:
                 logger.warning("Duplicate variable %s,%s in table %s is skipped, preferred is %s" %
                                (svar.label, svar.mipVarLabel, table, count[svar.mipVarLabel].label))
@@ -815,12 +816,18 @@ def get_grid_info(sv, grid, table):
                 target_grid_def = context_index[target_grid]
             else:
                 raise Dr2xmlError("Target horizontal is not defined in grid %s" % target_grid)
-            target_hgrid_id = find_rank_xml_subelement(target_grid_def, tag="domain")[0]
+            target_hgrid_id = find_rank_xml_subelement(target_grid_def, tag="domain")
+            if len(target_hgrid_id) == 0:
+                raise KeyError("Could not find any domain in target_grid_def %s" % target_grid_def)
+            else:
+                target_hgrid_id = target_hgrid_id[0]
             target_hgrid_id = target_grid_def[target_hgrid_id]
             if "id" in target_hgrid_id.attrib:
                 target_hgrid_id = target_hgrid_id.attrib["id"]
             else:
                 target_hgrid_id = target_hgrid_id.get_attrib("domain_ref")
+    else:
+        source_grid = None
 
     if table.endswith("Z"):  # e.g. 'AERmonZ','EmonZ', 'EdayZ'
         grid_label += "z"
@@ -829,4 +836,4 @@ def get_grid_info(sv, grid, table):
         grid_label += "a"
     if "Gre" in table:
         grid_label += "g"
-    return grid_label, grid_description, grid_resolution, target_hgrid_id, zgrid_id
+    return grid_label, grid_description, grid_resolution, target_hgrid_id, zgrid_id, source_grid
