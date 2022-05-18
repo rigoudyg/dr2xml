@@ -6,4 +6,4 @@
 #
 # (e1) output a variable which is present in the field def but nowhere else on a defined grid
 dev;   wg_patch1; atmos;  day;       CNRM_day; time-mean;    XY-na;       ANY;     ANY;  m3 m-3;     soil liquid water content by patch over land; soil liquid water; NATURE_glayers;    NONE
-dev;   wg_patch2; atmos;  day;       CNRM_day; time-mean;    XY-na;       ANY;     ANY;  m3 m-3;     soil liquid water content by patch over land; soil liquid water; NATURE_glayers;    FULL
+dev;   wg_patch2; atmos;  day;       CNRM_day; time-mean;    XY-na;       ANY;     ANY;  m3 m-3;     soil liquid water content by patch over land; soil liquid water; NATURE_glayers;    FULL_grid
