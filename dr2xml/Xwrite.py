@@ -592,7 +592,7 @@ def write_xios_file_def_for_svars_list(vars_list, hgrid, xml_file_definition, fr
                 # get_DR_version()
                 psol_field = create_xios_aux_elmts_defs(sv=sv_psol, alias=prefix + "ps", table=table, context=context,
                                                         target_hgrid_id=target_hgrid_id, zgrid_id=zgrid_id,
-                                                        alias_ping=ping_alias(sv_psol))
+                                                        alias_ping=ping_alias(sv_psol), source_grid=source_grid)
                 xml_file.append(psol_field)
             else:
                 logger.warning("Warning: Cannot complement model levels with psol for table %s for frequency %s" %
