@@ -1,0 +1,288 @@
+ <context id="nemo" >
+    
+    <!-- $id$ -->
+    <variable_definition>
+	<!-- Year of time origin for NetCDF files; defaults to 1850 -->
+	<variable id="ref_year" type="int"> 1850 </variable>
+	<!-- Reference sea water density for Boussinesq approximation -->
+	<variable id="rau0" type="float" > 1.0E+20 </variable>
+	<!-- Specific heat of sea water -->
+    	<variable id="rcp" type="float" > 1.0E+20 </variable>
+	<!-- Conversion factor for salinity into PSU ( 35. / 35.16504 ) -->
+    	<variable id="convSpsu" type="float" > 0.9953067 </variable>
+    </variable_definition> 
+
+    <field_definition src="./nemo_fields.xml"/>
+    
+    <!-- 
+============================================================================================================
+= grid definition = = DO NOT CHANGE =
+============================================================================================================
+    -->
+    
+   <axis_definition>  
+      <axis id="deptht" long_name="Vertical T levels" unit="m" positive="down" name="lev" prec="8"/>
+      <axis id="deptht0" axis_ref="deptht" name="lev">
+         <zoom_axis begin="0" n="1" />
+      </axis>
+      <axis id="deptht300" axis_ref="deptht" name="lev">
+         <zoom_axis begin="0" n="35" />
+      </axis>
+      <axis id="deptht700" axis_ref="deptht" name="lev">
+         <zoom_axis begin="0" n="43" />
+      </axis>
+      <axis id="deptht2000" axis_ref="deptht" name="lev">
+         <zoom_axis begin="0" n="54" />
+      </axis>
+      <axis id="depthu" long_name="Vertical U levels" unit="m" positive="down" name="lev" prec="8"/>
+      <axis id="depthu0" axis_ref="depthu" name="lev">
+         <zoom_axis begin="0" n="1" />
+      </axis>
+      <axis id="depthv" long_name="Vertical V levels" unit="m" positive="down" name="lev" prec="8"/>
+      <axis id="depthv0" axis_ref="depthv" name="lev">
+         <zoom_axis begin="0" n="1" />
+      </axis>
+      <axis id="depthw" long_name="Vertical W levels" unit="m" positive="down" name="lev" prec="8"/>
+      <axis id="nfloat" long_name="Float number"      unit="-"                 />
+      <axis id="icbcla"  long_name="Iceberg class"      unit="1"               />
+      <axis id="ncatice" long_name="Ice category"       unit="1"               />
+      <axis id="iax_20C" long_name="20 degC isotherm"   unit="degC"            />
+      <axis id="iax_28C" long_name="28 degC isotherm"   unit="degC"            />
+      <axis id="allbasin"   long_name="Sub-basin mask (1=Global 2=Atlantic 3=Indo-Pacific 4=Indian, 5=Pacific)"  unit="1" />
+      <axis id="basin" axis_ref="allbasin" long_name="Sub-basin mask (1=Global 2=Atlantic 3=Indo-Pacific)" >
+         <zoom_axis begin="0" n="3" />
+      </axis>
+      <axis id="oline"   long_name="Sections"           unit="-"               />
+      <axis id="siline"  long_name="Ice Sections"       unit="-"               />
+      <axis id="jmean"  />
+      <axis id="j-mean"  axis_ref="jmean" long_name="Ocean grid longitude mean" unit="-">
+         <reduce_domain direction="iDir" operation="average" />
+      </axis>
+      <!-- axis id="nlevice" long_name="Ice level"       	unit="1"               -->
+   </axis_definition> 
+   
+   <domain_definition src="./nemo_domains.xml"/>
+  
+    <grid_definition>
+        <!--  -->
+       <grid id="grid_T_2D" >
+         <domain domain_ref="grid_T" />
+       </grid>
+        <!--  -->
+       <grid id="grid_T_3D_ncatice" >
+         <domain domain_ref="grid_T" />
+         <axis axis_ref="ncatice" />
+       </grid>
+        <!--  -->
+       <!--grid id="grid_T_3D_nlevice" >
+         <domain domain_ref="grid_T" />
+         <axis axis_ref="nlevice" />
+       </grid -->
+        <!--  -->
+       <grid id="grid_T_3D" >
+         <domain domain_ref="grid_T" />
+         <axis axis_ref="deptht" name="lev"/>
+       </grid>
+        <!--  -->
+       <grid id="grid_U_2D" >
+         <domain domain_ref="grid_U" />
+       </grid>
+        <!--  -->
+       <grid id="grid_U_3D" >
+         <domain domain_ref="grid_U" />
+         <axis axis_ref="depthu" name="lev"/>
+       </grid>
+        <!--  -->
+       <grid id="grid_V_2D" >
+         <domain domain_ref="grid_V" />
+       </grid>
+        <!--  -->
+       <grid id="grid_V_3D" >
+         <domain domain_ref="grid_V" />
+         <axis axis_ref="depthv" name="lev"/>
+       </grid>
+        <!--  -->
+       <grid id="grid_W_2D" >
+         <domain domain_ref="grid_W" />
+       </grid>
+        <!--  -->
+       <grid id="grid_W_3D" >
+         <domain domain_ref="grid_W" />
+         <axis axis_ref="depthw" name="lev"/>
+       </grid>
+        <!--  -->
+       <grid id="grid_T_nfloat" >
+         <domain domain_ref="grid_T" />
+         <axis axis_ref="nfloat" />
+       </grid>
+        <!--  -->
+       <grid id="grid_EqT" >
+         <domain domain_ref="EqT" />
+       </grid>
+        <!--  -->
+
+      <!-- <grid id="scalarpoint">  -->
+      <!--  <scalar name="location"                        label="unspecified" /> -->
+      <!-- </grid> -->
+      
+      <grid id="scalarglob"> 
+       <scalar name="sector" standard_name="region" label="global" />
+      </grid>
+      
+      <!-- <grid id="scalarNH">  -->
+      <!--  <scalar name="sector"                               label="northern_hemisphere" /> -->
+      <!-- </grid> -->
+      
+      <!-- <grid id="scalarSH">  -->
+      <!--  <scalar name="sector"                               label="southern_hemisphere" /> -->
+      <!-- </grid> -->
+      
+      <grid id="grid_TRO"> 
+         <axis axis_ref="oline" />
+      </grid>
+
+      <grid id="grid_TRI"> 
+         <axis axis_ref="siline" />
+      </grid>
+
+      <grid id="grid_T_3basin">
+       <domain domain_ref="grid_T" />
+         <axis axis_ref="basin" />
+      </grid>
+
+      <grid id="grid_T_basin">
+       <domain domain_ref="grid_T" />
+         <axis axis_ref="allbasin" />
+      </grid>
+
+      <grid id="grid_W_basin_3D">
+       <domain domain_ref="grid_W" />
+         <axis axis_ref="depthw" name="lev"/>
+         <axis axis_ref="allbasin" />
+      </grid>
+
+      <grid id="grid_znl_3basin">
+         <axis axis_ref="j-mean" />
+         <axis axis_ref="basin" />
+      </grid>
+
+      <grid id="grid_znl_basin">
+         <axis axis_ref="j-mean" />
+         <axis axis_ref="allbasin"/>
+      </grid>
+
+      <grid id="grid_znl_basin_2D">
+         <axis axis_ref="j-mean" />
+         <axis axis_ref="depthw" name="lev"/>
+         <axis axis_ref="allbasin" />
+      </grid>
+
+      <grid id="grid_znl_3basin_2D">
+         <axis axis_ref="j-mean"/>
+         <axis axis_ref="depthw" name="lev"/>
+         <axis axis_ref="basin" />
+      </grid>
+
+      <grid id="grid_znl">
+         <axis axis_ref="j-mean" />
+      </grid>
+
+
+       <grid id="grid_T_2D_SFC">
+         <domain domain_ref="grid_T" />
+         <scalar>
+	   <extract_axis position="0" />
+         </scalar>
+       </grid>
+
+       <grid id="grid_U_2D_SFC">
+         <domain domain_ref="grid_U" />
+         <scalar>
+	   <extract_axis position="0" />
+         </scalar>
+       </grid>
+
+       <grid id="grid_V_2D_SFC">
+         <domain domain_ref="grid_V" />
+         <scalar>
+	   <extract_axis position="0" />
+         </scalar>
+       </grid>
+
+
+       <grid id="vert_sum">
+         <domain domain_ref="grid_T"/>
+         <scalar name="depth_layer"  label="whole_ocean_depth">
+            <reduce_axis operation="sum" />
+         </scalar>
+       </grid>
+
+       <grid id="zoom_300">
+         <domain domain_ref="grid_T" />
+         <axis axis_ref="deptht300" name="lev"/>
+       </grid>
+
+       <grid id="zoom_300_sum">
+         <domain domain_ref="grid_T" />
+         <scalar name="depth_layer"  label="0-300m">
+            <reduce_axis operation="sum" />
+         </scalar>
+       </grid>
+
+       <grid id="zoom_700">
+         <domain domain_ref="grid_T" />
+         <axis axis_ref="deptht700" name="lev"/>
+       </grid>
+
+       <grid id="zoom_700_sum">
+         <domain domain_ref="grid_T" />
+         <scalar name="depth_layer"  label="0-700m">
+            <reduce_axis operation="sum" />
+         </scalar>
+       </grid>
+
+       <grid id="zoom_2000">
+         <domain domain_ref="grid_T" />
+         <axis axis_ref="deptht2000" name="lev"/>
+       </grid>
+
+       <grid id="zoom_2000_sum">
+         <domain domain_ref="grid_T" />
+         <scalar name="depth_layer"  label="0-2000m">
+            <reduce_axis operation="sum" />
+         </scalar>
+       </grid>
+
+       <grid id="grid_T_SFC">
+         <domain domain_ref="grid_T" />
+         <scalar>
+            <reduce_axis operation="sum" />
+         </scalar>
+       </grid>
+
+       <grid id="grid_U_SFC">
+         <domain domain_ref="grid_U" />
+         <scalar>
+            <reduce_axis operation="sum" />
+         </scalar>
+       </grid>
+
+       <grid id="grid_V_SFC">
+         <domain domain_ref="grid_V" />
+         <scalar>
+            <reduce_axis operation="sum" />
+         </scalar>
+       </grid>
+
+       <grid id="horiz_sum_T">
+	 <scalar name="sector" standard_name="region" label="global" >
+            <reduce_domain operation="sum" />
+         </scalar>
+	 <axis axis_ref="deptht" name="lev"/>
+       </grid>
+
+    </grid_definition>
+
+  </context>
+  
+
