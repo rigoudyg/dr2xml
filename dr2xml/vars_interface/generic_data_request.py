@@ -145,7 +145,7 @@ def select_data_request_CMORvars_for_lab(sset=False, year=None):
         # else:
         #    print "Duplicate pair var/grid : ",cmvar.label,cmvar.mipTable,gr
     miprl_vars_grids = sorted(list(miprl_vars_grids))
-    logger.info('Number of (CMOR variable, grid) pairs for these requestLinks is :%s' % len(miprl_vars_grids))
+    logger.info('Number of (CMOR variable, grid) pairs for these requestLinks is: %s' % len(miprl_vars_grids))
 
     exctab = internal_settings["excluded_tables_lset"]
     if not isinstance(exctab, list):
@@ -195,28 +195,28 @@ def select_data_request_CMORvars_for_lab(sset=False, year=None):
             filtered_vars.append((v, g))
             logger.debug("adding var %s, grid=%s, ttable=%s=" % (cmvar.label, g, ttable.label))  # ,exctab,excvars
 
-    logger.info('Number once filtered by excluded/included vars and tables and spatial shapes is : %s'
+    logger.info('Number once filtered by excluded/included vars and tables and spatial shapes is: %s'
                 % len(filtered_vars))
 
     # Filter the list of grids requested for each variable based on lab policy
     d = defaultdict(set)
     for (v, g) in filtered_vars:
         d[v].add(g)
-    logger.info('Number of distinct CMOR variables (whatever the grid) : %d' % len(d))
+    logger.info('Number of distinct CMOR variables (whatever the grid): %d' % len(d))
     multiple_grids = list()
     for v in d:
         d[v] = decide_for_grids(v, d[v])
         if len(d[v]) > 1:
             multiple_grids.append(get_element_uid(v).label)
             if print_multiple_grids:
-                logger.info("\tVariable %s will be processed with multiple grids : %s"
+                logger.info("\tVariable %s will be processed with multiple grids: %s"
                             % (multiple_grids[-1], repr(d[v])))
     if not print_multiple_grids and multiple_grids is not None and len(multiple_grids) > 0:
         logger.info("\tThese variables will be processed with multiple grids "
-                    "(rerun with print_multiple_grids set to True for details) : %s" % repr(multiple_grids.sort()))
+                    "(rerun with print_multiple_grids set to True for details): %s" % repr(multiple_grids.sort()))
     #
     # Print a count of distinct var labels
-    logger.info('Number of distinct var labels is : %d' % len(set([get_element_uid(v).label for v in d])))
+    logger.info('Number of distinct var labels is: %d' % len(set([get_element_uid(v).label for v in d])))
 
     # Translate CMORvars to a list of simplified CMORvar objects
     simplified_vars = []
@@ -230,8 +230,8 @@ def select_data_request_CMORvars_for_lab(sset=False, year=None):
         if get_element_uid(v).label in ["tas", ]:
             logger.debug("When complementing, tas is included , grids are %s" % svar.grids)
         simplified_vars.append(svar)
-    logger.info('Number of simplified vars is : %d' % len(simplified_vars))
-    logger.info("Issues with standard names are : %s" % print_struct(sorted(list(sn_issues))))
+    logger.info('Number of simplified vars is: %d' % len(simplified_vars))
+    logger.info("Issues with standard names are: %s" % print_struct(sorted(list(sn_issues))))
 
     return simplified_vars
 
@@ -296,7 +296,7 @@ def RequestItem_applies_for_exp_and_year(ri, experiment, year=None):
                 logger.debug(" OK for experiment based on mip %s" % item_exp.label)
                 ri_applies_to_experiment = True
     else:
-        logger.debug("Error on esid link for ri : %s uid=%s %s" % (ri.title, ri.uid, item_exp._h.label))
+        logger.debug("Error on esid link for ri: %s uid=%s %s" % (ri.title, ri.uid, item_exp._h.label))
     # print "ri=%s"%ri.title,
     # if year is not None :
     #    print "Filtering for year %d"%year
@@ -315,7 +315,7 @@ def RequestItem_applies_for_exp_and_year(ri, experiment, year=None):
             year = int(year)
             exp = get_element_uid(get_experiment_label(experiment))
             rep, endyear = year_in_ri(ri, exp, year)
-            logger.debug(" ..year in ri returns : %s %s" % (rep, endyear))
+            logger.debug(" ..year in ri returns: %s %s" % (rep, endyear))
             # if (ri.label=="AerchemmipAermonthly3d") :
             #    print "reqItem=%s,experiment=%s,year=%d,rep=%s,"%(ri.label,experiment,year,rep)
         # print " rep=",rep
@@ -368,17 +368,17 @@ def year_in_ri(ri, exp, year):
     actual_end_year = experiment_end_year_from_sset(exp)  # = the end year requested by the user if any
     DR_first_year = experiment_start_year_without_sset(exp)
     DR_end_year = experiment_end_year(exp)
-    logger.debug("year_in_ri : start DR : %s actual : %s | end DR : %s actual : %s | ny=%d" %
+    logger.debug("year_in_ri: start DR: %s actual: %s | end DR: %s actual: %s | ny=%d" %
                  (DR_first_year, actual_first_year, DR_end_year, actual_end_year, ny))
     #
     ri_is_for_all_experiment = False
     if ny <= 0:
         ri_is_for_all_experiment = True
-        logger.debug("year_in_ri : RI applies systematically")
+        logger.debug("year_in_ri: RI applies systematically")
     else:
         if DR_first_year and DR_end_year and ny == (DR_end_year - DR_first_year + 1):
             ri_is_for_all_experiment = True
-            logger.debug("year_in_ri : RI applies because ny=end-start")
+            logger.debug("year_in_ri: RI applies because ny=end-start")
     if ri_is_for_all_experiment:
         return True, None
     #
@@ -388,11 +388,11 @@ def year_in_ri(ri, exp, year):
     # So, we add to ny the difference between DR and actual start_years, if the DR value is meaningful
     if DR_first_year:
         ny += DR_first_year - actual_first_year  # Will be 0 if end is defined in DR and not by the user
-        logger.debug("year_in_ri : compensating ny for diff in first year")
+        logger.debug("year_in_ri: compensating ny for diff in first year")
     RI_end_year = actual_first_year + ny - 1
     # For these kind of requestItem of limited duration, no need to extend it, whatever the actual end date
     applies = (year <= RI_end_year)
-    logger.debug("year_in_ri : returning %s %s" % (applies, RI_end_year))
+    logger.debug("year_in_ri: returning %s %s" % (applies, RI_end_year))
     return applies, RI_end_year
 
 
@@ -481,7 +481,7 @@ def experiment_start_year_without_sset(exp):
     try:
         return int(float(exp.starty))
     except:
-        logger.debug("start_year : starty=%s" % exp.starty)
+        logger.debug("start_year: starty=%s" % exp.starty)
         return None
 
 
@@ -498,7 +498,7 @@ def experiment_start_year(exp):
     else:
         starty = experiment_start_year_without_sset(exp)
         if starty is None:
-            form = "Cannot guess first year for experiment %s : DR says :'%s' "
+            form = "Cannot guess first year for experiment %s: DR says:'%s' "
             if is_sset_not_None():
                 form += "and 'branch_year_in_child' is not provided in experiment's settings"
             raise Dr2xmlError(form % (exp.label, exp.starty))

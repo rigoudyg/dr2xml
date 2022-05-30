@@ -26,9 +26,6 @@ from .dr_interface import get_element_uid, get_sectors_list
 # Interface to xml tools
 from .xml_interface import find_rank_xml_subelement, DR2XMLElement
 
-# CFsites tools
-from .cfsites import cfsites_grid_id, add_cfsites_in_defs, cfsites_domain_id
-
 
 # Next variable is used to circumvent an Xios 1270 shortcoming. Xios
 # should read that value in the datafile. Actually, it did, in some
@@ -256,7 +253,6 @@ def change_axes_in_grid(grid_id):
     grid_def_init = get_grid_def(grid_id)
     grid_def = grid_def_init.copy()
     output_grid_id = grid_id
-    axes_to_change = list()
     # print "in change_axis for %s "%(grid_id)
 
     # Get settings info about axes normalization
@@ -293,9 +289,9 @@ def change_axes_in_grid(grid_id):
                 #
                 dim_id = 'dim:{}'.format(dr_axis_id)
                 # print "in change_axis for %s %s"%(grid_id,dim_id)
-                if dim_id not in get_element_uid():  # This should be a dimension !
-                    raise Dr2xmlError("Value %s in 'non_standard_axes' is not a DR dimension id" % dr_axis_id)
-                dim = get_element_uid(dim_id)
+                # dim_id should be a dimension !
+                dim = get_element_uid(dim_id,
+                                      error_msg="Value %s in 'non_standard_axes' is not a DR dimension id" % dr_axis_id)
                 # We don't process scalars here
                 if dim.value in ['', ] or dim.label in ["scatratio", ]:
                     axis_id, axis_name = create_axis_from_dim(dim, alt_labels, axis_ref)
@@ -383,47 +379,6 @@ def scalar_vertical_dimension(sv):
         if is_vert_dim(cid):
             return cid.altLabel
     return None
-
-
-def create_output_grid(ssh, grid_defs, domain_defs, target_hgrid_id, margs):
-    """
-    Build output grid (stored in grid_defs) by analyzing the spatial shape
-    Including horizontal operations. Can include horiz re-gridding specification
-    """
-    grid_ref = None
-
-    # Compute domain name, define it if needed
-    if ssh[0:2] in ['Y-', ]:  # zonal mean and atm zonal mean on pressure levels
-        # Grid normally has already been created upstream
-        grid_ref = margs['src_grid_id']
-    elif ssh in ['S-na', ]:
-        # COSP sites. Input field may have a singleton dimension (XIOS scalar component)
-        grid_ref = cfsites_grid_id
-        add_cfsites_in_defs()
-        #
-    elif ssh[0:3] in ['XY-', 'S-A']:
-        # this includes 'XY-AH' and 'S-AH' : model half-levels
-        if ssh[0:3] in ['S-A', ]:
-            add_cfsites_in_defs()
-            target_hgrid_id = cfsites_domain_id
-        if target_hgrid_id:
-            # Must create and a use a grid similar to the last one defined
-            # for that variable, except for a change in the hgrid/domain
-            grid_ref = change_domain_in_grid(target_hgrid_id)
-            if grid_ref is False or grid_ref is None:
-                raise Dr2xmlError("Fatal: cannot create grid_def for %s with hgrid=%s" % (alias, target_hgrid_id))
-    elif ssh in ['TR-na', 'TRS-na']:  # transects,   oce or SI
-        pass
-    elif ssh[0:3] in ['YB-', ]:  # basin zonal mean or section
-        pass
-    elif ssh in ['na-na', ]:  # TBD ? global means or constants - spatial integration is not handled
-        pass
-    elif ssh in ['na-A', ]:  # only used for rlu, rsd, rsu ... in Efx ????
-        pass
-    else:
-        raise Dr2xmlError(
-            "Fatal: Issue with un-managed spatial shape %s for variable %s in table %s" % (ssh, sv.label, table))
-    return grid_ref
 
 
 def create_standard_domains(domain_defs):

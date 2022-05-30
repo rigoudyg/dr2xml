@@ -176,7 +176,7 @@ def analyze_cell_time_method(cm, label, table):
         # albisccp et pctisccp, en emDay et emMon)
         add_value_in_list_config_variable("cell_method_warnings",
                                           ('Will not explicitly handle time: mean where cloud', label, table))
-        logger.info("Note : assuming that for %15s in table %s is well handled by 'detect_missing'" % (label, table))
+        logger.info("Note: assuming that for %15s in table %s is well handled by 'detect_missing'" % (label, table))
         operation = "average"
         detect_missing = True
     # -------------------------------------------------------------------------------------
@@ -185,7 +185,7 @@ def analyze_cell_time_method(cm, label, table):
         # variables en SImon)
         add_value_in_list_config_variable("cell_method_warnings",
                                           ('time: mean where sea_ice_melt_pound', label, table))
-        logger.info("Note : assuming that 'time: mean where sea_ice_melt_pound' "
+        logger.info("Note: assuming that 'time: mean where sea_ice_melt_pound' "
                     " for %15s in table %s is well handled by 'detect_missing'" % (label, table))
         operation = "average"
         detect_missing = True
@@ -195,7 +195,7 @@ def analyze_cell_time_method(cm, label, table):
         # variables en SImon, sauf sispeed et sithick en SIday)
         add_value_in_list_config_variable("cell_method_warnings",
                                           ('time: mean where sea_ice', label, table))
-        logger.info("Note : assuming that 'time: mean where sea_ice' "
+        logger.info("Note: assuming that 'time: mean where sea_ice' "
                     " for %15s in table %s is well handled by 'detect_missing'" % (label, table))
         operation = "average"
         detect_missing = True
@@ -212,7 +212,7 @@ def analyze_cell_time_method(cm, label, table):
         # variables en Imon, Iyr, sauf sftflt en LImon !?)
         add_value_in_list_config_variable("cell_method_warnings",
                                           ('time: mean where floating_ice_shelf', label, table))
-        logger.info("Note : assuming that 'time: mean where floating_ice_shelf' "
+        logger.info("Note: assuming that 'time: mean where floating_ice_shelf' "
                     " for %15s in table %s is well handled by 'detect_missing'" % (label, table))
         operation = "average"
         detect_missing = True
@@ -222,7 +222,7 @@ def analyze_cell_time_method(cm, label, table):
         # variables en Imon, Iyr)
         add_value_in_list_config_variable("cell_method_warnings",
                                           ('time: mean where grounded_ice_sheet', label, table))
-        logger.info("Note : assuming that 'time: mean where grounded_ice_sheet' "
+        logger.info("Note: assuming that 'time: mean where grounded_ice_sheet' "
                     " for %15s in table %s is well handled by 'detect_missing'" % (label, table))
         operation = "average"
         detect_missing = True
@@ -232,7 +232,7 @@ def analyze_cell_time_method(cm, label, table):
         # variables en Imon, Iyr)
         add_value_in_list_config_variable("cell_method_warnings",
                                           ('time: mean where ice_sheet', label, table))
-        logger.info("Note : assuming that 'time: mean where ice_sheet' "
+        logger.info("Note: assuming that 'time: mean where ice_sheet' "
                     " for %15s in table %s is well handled by 'detect_missing'" % (label, table))
         operation = "average"
         detect_missing = True
@@ -242,7 +242,7 @@ def analyze_cell_time_method(cm, label, table):
         # variables suffixees en 'Lut')
         add_value_in_list_config_variable("cell_method_warnings",
                                           ('time: mean where land_use', label, table))
-        logger.info("Note : assuming that 'time: mean where landuse' "
+        logger.info("Note: assuming that 'time: mean where landuse' "
                     " for %15s in table %s is well handled by 'detect_missing'" % (label, table))
         operation = "average"
         detect_missing = True
@@ -252,7 +252,7 @@ def analyze_cell_time_method(cm, label, table):
         # variables suffixees en 'Crop')
         add_value_in_list_config_variable("cell_method_warnings",
                                           ('time: mean where crops', label, table))
-        logger.info("Note : assuming that 'time: mean where crops' "
+        logger.info("Note: assuming that 'time: mean where crops' "
                     " for %15s in table %s is well handled by 'detect_missing'" % (label, table))
         operation = "average"
         detect_missing = True
@@ -262,7 +262,7 @@ def analyze_cell_time_method(cm, label, table):
         # variables suffixees en 'Grass')
         add_value_in_list_config_variable("cell_method_warnings",
                                           ('time: mean where natural_grasses', label, table))
-        logger.info("Note : assuming that 'time: mean where natural_grasses' "
+        logger.info("Note: assuming that 'time: mean where natural_grasses' "
                     " for %15s in table %s is well handled by 'detect_missing'" % (label, table))
         operation = "average"
         detect_missing = True
@@ -272,7 +272,7 @@ def analyze_cell_time_method(cm, label, table):
         # variables suffixees en 'Shrub')
         add_value_in_list_config_variable("cell_method_warnings",
                                           ('time: mean where shrubs', label, table))
-        logger.info("Note : assuming that 'time: mean where shrubs' " 
+        logger.info("Note: assuming that 'time: mean where shrubs' " 
                     " for %15s in table %s is well handled by 'detect_missing'" % (label, table))
         operation = "average"
         detect_missing = True
@@ -282,7 +282,7 @@ def analyze_cell_time_method(cm, label, table):
         # variables suffixees en 'Tree')
         add_value_in_list_config_variable("cell_method_warnings",
                                           ('time: mean where trees', label, table))
-        logger.info("Note : assuming that 'time: mean where trees' "
+        logger.info("Note: assuming that 'time: mean where trees' "
                     " for %15s in table %s is well handled by 'detect_missing'" % (label, table))
         operation = "average"
         detect_missing = True
@@ -291,7 +291,7 @@ def analyze_cell_time_method(cm, label, table):
         # [amv-twm]: Weighted Time Mean on Vegetation (pas de variables concernees)
         add_value_in_list_config_variable("cell_method_warnings",
                                           ('time: mean where vegetation', label, table))
-        logger.info("Note : assuming that 'time: mean where vegetation' "
+        logger.info("Note: assuming that 'time: mean where vegetation' "
                     " for %15s in table %s is well handled by 'detect_missing'" % (label, table))
         operation = "average"
         detect_missing = True

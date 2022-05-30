@@ -401,13 +401,12 @@ def is_singleton(sdim):
     :param sdim: dimensions characteristics
     :return: boolean indicating whether sdim corresponds to a singleton or not
     """
-    if sdim.axis == '':
+    if sdim.axis in ['', ]:
         # Case of non-spatial dims. Singleton only have a 'value' (except Scatratio has a lot (in DR01.00.21))
-        return sdim.value != '' and len(sdim.value.strip().split(" ")) == 1
+        return sdim.value not in ['', ] and " " not in sdim.value.strip()
     else:
         # Case of space dimension singletons. Should a 'value' and no 'requested'
-        return ((sdim.value != '') and (sdim.requested.strip() == '')) \
-               or (sdim.label == "typewetla")  # The latter is a bug in DR01.00.21 : typewetla has no value there
+        return sdim.value not in ['', ] and sdim.requested.strip() in ['', ]
 
 
 def write_xios_file_def(filename, svars_per_table, year, dummies, skipped_vars_per_table, actually_written_vars,
@@ -562,6 +561,7 @@ def write_xios_file_def_for_svars_list(vars_list, hgrid, xml_file_definition, fr
     found_A = False
     found_AH = False
     found_begin_A = False
+    freq_ps = vars_list[0].frequency
     for svar in sorted(vars_list):
         rep = find_alias(svar, skipped_vars_per_table, debug)
         if rep is not None:
@@ -585,7 +585,7 @@ def write_xios_file_def_for_svars_list(vars_list, hgrid, xml_file_definition, fr
         if found_begin_A:
             # create a field_def entry for surface pressure
             # print "Searching for ps for var %s, freq %s="%(alias,freq)
-            sv_psol = get_simplevar("ps", table, freq)
+            sv_psol = get_simplevar("ps", table, freq_ps)
 
             if sv_psol:
                 # if not sv_psol.cell_measures : sv_psol.cell_measures = "cell measure is not specified in DR "+

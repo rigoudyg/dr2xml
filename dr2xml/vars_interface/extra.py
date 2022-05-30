@@ -205,10 +205,10 @@ def read_extra_table(path, table):
             extravars.append(extra_var)
     logger.info("For extra table %s (which has %d variables): " % (table, len(extravars)))
     logger.info("\tVariables which dim was found in extra coordinates table:\n%s" %
-                "\n".join(["\t\t%20s : %s\n" % (d, " ".join(sorted(dim_from_extra[d])))
+                "\n".join(["\t\t%20s: %s\n" % (d, " ".join(sorted(dim_from_extra[d])))
                            for d in sorted(list(dim_from_extra))]))
     logger.info("\tDynamical XY-xxx spatial shapes (shapes not found in DR):\n%s" %
-                "\n".join(["\t\t%20s : %s\n" % (("XY-" + d), " ".join(sorted(dynamic_shapes[d])))
+                "\n".join(["\t\t%20s: %s\n" % (("XY-" + d), " ".join(sorted(dynamic_shapes[d])))
                            for d in sorted(list(dynamic_shapes))]))
     return extravars
 

@@ -220,14 +220,14 @@ project_settings = dict(
             )
         ),
         vars_list=["activity_id", "contact", "data_specs_version", "dr2xml_version", "expid_in_filename",
-                   "frequency", "grid", "grid_label", "nominal_resolution", "comment", "history", "CORDEX_domain",
-                   "driving_model_id", "driving_experiment_name", "driving_experiment",
-                   "Lambert_conformal_longitude_of_central_meridian", "Lambert_conformal_standard_parallel",
-                   "Lambert_conformal_latitude_of_projection_origin", "institution_id", "institution",
-                   "parent_experiment_id", "parent_mip_era", "parent_activity_id", "parent_source_id",
-                   "parent_time_units", "parent_variant_label", "branch_method", "branch_time_in_parent",
-                   "branch_time_in_child", "product", "realization_index", "realm", "source", "source_id",
-                   "sub_experiment_id", "sub_experiment", "table_id", "title", "variable_id"],
+                   "external_variables", "frequency", "grid", "grid_label", "nominal_resolution", "comment", "history",
+                   "institution_id", "CORDEX_domain", "driving_model_id", "driving_model_ensemble_member",
+                   "driving_experiment_name", "driving_experiment", "Lambert_conformal_longitude_of_central_meridian",
+                   "Lambert_conformal_standard_parallel", "Lambert_conformal_latitude_of_projection_origin",
+                   "institution", "parent_experiment_id", "parent_mip_era", "parent_activity_id", "parent_source_id",
+                   "parent_time_units", "parent_variant_label", "branch_time_in_parent", "branch_time_in_child",
+                   "product", "realization_index", "realm", "references", "source", "source_id", "table_id", "title",
+                   "variable_id"],
         vars_constraints=dict(
             variable_id=ParameterSettings(
                 key="variable_id",
@@ -361,9 +361,8 @@ project_settings = dict(
                 }
             )
         ),
-        vars_list=["comment", "standard_name", "description", "long_name", "positive", "history", "units",
-                   "cell_methods", "cell_measures", "flag_meanings", "flag_values", "grid_mapping",
-                   "interval_operation"],
+        vars_list=["comment", "standard_name", "description", "long_name", "history", "units",
+                   "cell_methods", "cell_measures", "flag_meanings", "flag_values", "grid_mapping"],
         vars_constraints=dict(
             grid_mapping=ParameterSettings(
                 key="grid_mapping",

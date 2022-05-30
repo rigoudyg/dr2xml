@@ -14,7 +14,7 @@ from dr2xml.utils import Dr2xmlError
 from .definitions import SimpleCMORVar
 from .generic import read_home_var, fill_homevar, check_homevar, get_correspond_cmor_var, \
     complement_svar_using_cmorvar
-from .. import get_config_variable
+from dr2xml.config import get_config_variable
 
 home_attrs = ['type', 'label', 'modeling_realm', 'frequency', 'mipTable', 'temporal_shp', 'spatial_shp',
               'experiment', 'mip']
@@ -106,11 +106,11 @@ def get_simplevar(label, table, freq=None):
             psvar = get_cmor_var('ps', 'E3hrPt')
         elif freq in ["6h", "6hr"]:
             psvar = get_cmor_var('ps', '6hrLev')
-        elif freq in ["day"]:
+        elif freq in ["day", ]:
             psvar = get_cmor_var('ps', 'CFday')
         elif freq in ["mon", "1mo"]:
             psvar = get_cmor_var('ps', 'Emon')
-        elif freq in ["subhr"]:
+        elif freq in ["subhr", ]:
             if table in ["CFsubhr", ]:
                 psvar = get_cmor_var('ps', 'CFsubhr')
             else:

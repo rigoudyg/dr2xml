@@ -34,30 +34,18 @@ class Dr2xmlError(Exception):
     # """ just for test"""
 
 
-class Dr2xmlGridError(Exception):
+class Dr2xmlGridError(Dr2xmlError):
     """
     Dr2xml grids specific exceptions.
     """
-    def __init__(self, valeur):
-        self.valeur = valeur
-
-    def __str__(self):
-        logger = get_logger()
-        logger.error(repr(self.valeur))
-        return repr(self.valeur)
+    pass
 
 
-class VarsError(Exception):
+class VarsError(Dr2xmlError):
     """
     Vars specific exceptions.
     """
-    def __init__(self, valeur):
-        self.valeur = valeur
-
-    def __str__(self):
-        logger = get_logger()
-        logger.error(repr(self.valeur))
-        return "\n\n" + repr(self.valeur) + "\n\n"
+    pass
 
 
 def encode_if_needed(a_string, encoding="utf-8"):

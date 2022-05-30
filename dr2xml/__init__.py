@@ -739,7 +739,7 @@ es with a different name between model
     if len(warn) > 0:
         logger.warning("\nWarnings about cell methods (with var list)")
         for w in warn:
-            logger.warning("\t%s for vars : %s" % (w, print_struct(warn[w])))
+            logger.warning("\t%s for vars: %s" % (w, print_struct(warn[w])))
     if len(warnings_for_optimisation) > 0:
         logger.warning("Warning for fields which cannot be optimised (i.e. average before remap)"
                        " because of an expr with @\n\t",)

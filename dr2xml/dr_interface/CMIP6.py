@@ -10,8 +10,9 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 
 import re
 
+from logger import get_logger
 from .definition import Scope as ScopeBasic
-
+from ..utils import Dr2xmlError
 
 try:
     import dreq
@@ -93,14 +94,29 @@ def get_sectors_list():
     return sorted(list(set(rep) - {"typewetla"}))
 
 
-def get_element_uid(id=None):
+def get_element_uid(id=None, error_msg=None, raise_on_error=False, check_print_DR_errors=True,
+                    check_print_stdnames_error=False):
     """
     Get the uid of an element if precised, else the list of all elements.
     """
+    logger = get_logger()
     if id is None:
         return dq.inx.uid
-    else:
+    elif id in dq.inx.uid:
         return dq.inx.uid[id]
+    else:
+        if error_msg is None:
+            error_msg = "DR Error: issue with %s" % id
+        if raise_on_error:
+            raise Dr2xmlError(error_msg)
+        elif check_print_DR_errors and print_DR_errors:
+            logger.error(error_msg)
+            return None
+        elif check_print_stdnames_error and print_DR_stdname_errors:
+            logger.error(error_msg)
+            return None
+        else:
+            return None
 
 
 def get_experiment_label(experiment):
@@ -139,9 +155,13 @@ def correct_data_request_dim(dim):
         dim.dimsize = 16
     if dim.type in ["character", ]:
         dim.altLabel = "sector"
+    # The latter is a bug in DR01.00.21 : typewetla has no value there
+    if dim.label in ["typewetla", ]:
+        dim.value = "wetland"
 
 
 def correct_data_request_variable(variable):
+    logger = get_logger()
     if variable.label is not None:
         # DR21 has a bug with tsland : the MIP variable is named "ts"
         if variable.label in ["tsland", ]:

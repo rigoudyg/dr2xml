@@ -13,7 +13,7 @@ from collections import OrderedDict
 import six
 
 from dr2xml.analyzer import cellmethod2area
-from dr2xml.dr_interface import print_DR_stdname_errors, get_element_uid, get_cmor_var_id_by_label, \
+from dr2xml.dr_interface import get_element_uid, get_cmor_var_id_by_label, \
     get_list_of_elements_by_id, get_request_by_id_by_sect, print_DR_errors
 from logger import get_logger
 from dr2xml.settings_interface import get_settings_values
@@ -130,14 +130,13 @@ def get_simple_dim_from_dim_id(dimid):
     """
     Build a simple_Dim object which characteristics fit with dimid.
     """
-    logger = get_logger()
     d = get_element_uid(dimid)
     #
-    try:
-        stdname = get_element_uid(d.standardName).uid
-    except:
-        if print_DR_stdname_errors:
-            logger.error("Issue with standardname for dimid %s" % dimid)
+    stdname = get_element_uid(d.standardName, check_print_stdnames_error=True,
+                              error_msg="Issue with standardname for dimid %s" % dimid)
+    if stdname is not None:
+        stdname = stdname.uid
+    else:
         stdname = ""
     #
     sdim = SimpleDim(label=d.label, positive=d.positive, requested=d.requested, value=d.value, stdname=stdname,
@@ -246,28 +245,22 @@ def complement_svar_using_cmorvar(svar, cmvar, sn_issues, debug=[], allow_pseudo
     svar.set_attributes(mipVarLabel=mipvar.label, units=mipvar.units, stdname=stdname)
     #
     # Get information form Structure
-    st = None
-    try:
-        st = get_element_uid(cmvar.stid)
-    except:
-        if print_DR_errors:
-            logger.error("DR Error: issue with stid for %s in Table %s  "
-                         "=> no cell_methods, cell_measures, dimids and sdims derived." % (svar.label, svar.mipTable))
+    st = get_element_uid(cmvar.stid,
+                         error_msg="DR Error: issue with stid for %s in Table %s  "
+                                   "=> no cell_methods, cell_measures, dimids and sdims derived." %
+                                   (svar.label, svar.mipTable))
     if st is not None:
         svar.set_attributes(struct=st)
-        try:
-            methods = get_element_uid(st.cmid).cell_methods
-            methods = methods.replace("mask=siconc or siconca", "mask=siconc")
-            svar.set_attributes(cm=get_element_uid(st.cmid).cell_methods, cell_methods=methods)
-        except:
-            if print_DR_errors:
-                logger.error("DR Error: issue with cell_method for %s" % st.label)
-            # TBS# svar.cell_methods=None
-        try:
-            svar.set_attributes(cell_measures=get_element_uid(cmvar.stid).cell_measures)
-        except:
-            if print_DR_errors:
-                logger.error("DR Error: Issue with cell_measures for %s" % repr(cmvar))
+        methods = get_element_uid(st.cmid, error_msg="DR Error: issue with cell_method for %s" % st.label)
+        if methods is not None:
+            methods = methods.cell_methods
+            new_methods = methods.replace("mask=siconc or siconca", "mask=siconc")
+            svar.set_attributes(cm=methods, cell_methods=new_methods)
+        #
+        measures = get_element_uid(cmvar.stid, error_msg="DR Error: Issue with cell_measures for %s" % repr(cmvar))
+        if measures is not None:
+            measures = measures.cell_measures
+            svar.set_attributes(cell_measures=measures)
         #
         product_of_other_dims = 1
         all_dimids = list()
@@ -350,12 +343,11 @@ def analyze_ambiguous_mip_varnames(debug=[]):
             d[vlabel] = OrderedDict()
             for cv in cvl:
                 st = get_element_uid(cv.stid)
-                cm = None
-                try:
-                    cm = get_element_uid(st.cmid).cell_methods
-                except:
-                    # pass
-                    logger.warning("No cell method for %-15s %s(%s)" % (st.label, cv.label, cv.mipTable))
+                cm = get_element_uid(st.cmid, check_print_DR_errors=False,
+                                     error_msg="No cell method for %-15s %s(%s)"
+                                               % (st.label, cv.label, cv.mipTable))
+                if cm is not None:
+                    cm = cm.cell_methods
                 if cm is not None:
                     area = cellmethod2area(cm)
                     realm = cv.modeling_realm
@@ -396,20 +388,22 @@ def get_spatial_and_temporal_shapes(cmvar):
     Get the spatial et temporal shape of a CMOR variable from the DR.
     """
     logger = get_logger()
-    spatial_shape = False
-    temporal_shape = False
     if cmvar.stid == "__struct_not_found_001__":
         if print_DR_errors:
             logger.warning("Warning: stid for %s in table %s is a broken link to structure in DR: %s" %
                            (cmvar.label, cmvar.mipTable, cmvar.stid))
+        spatial_shape = False
+        temporal_shape = False
     else:
         struct = get_element_uid(cmvar.stid)
-        spatial_shape = get_element_uid(struct.spid).label
-        temporal_shape = get_element_uid(struct.tmid).label
-    if print_DR_errors:
-        if not spatial_shape:
-            logger.warning("Warning: spatial shape for %s in table %s not found in DR." % (cmvar.label, cmvar.mipTable))
-        if not temporal_shape:
-            logger.warning("Warning: temporal shape for %s in table %s not found in DR." %
-                           (cmvar.label, cmvar.mipTable))
+        spatial_shape = get_element_uid(struct.spid,
+                                        error_msg="Warning: spatial shape for %s in table %s not found in DR." %
+                                                  (cmvar.label, cmvar.mipTable))
+        if spatial_shape is not None:
+            spatial_shape = spatial_shape.label
+        temporal_shape = get_element_uid(struct.tmid,
+                                         error_msg="Warning: temporal shape for %s in table %s not found in DR." %
+                                                   (cmvar.label, cmvar.mipTable))
+        if temporal_shape is not None:
+            temporal_shape = temporal_shape.label
     return [spatial_shape, temporal_shape]

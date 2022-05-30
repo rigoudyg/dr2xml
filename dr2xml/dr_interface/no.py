@@ -43,7 +43,8 @@ def get_sectors_list():
     return get_list_of_elements_by_id("grids")
 
 
-def get_element_uid(id=None):
+def get_element_uid(id=None, error_msg=None, raise_on_error=False, check_print_DR_errors=True,
+                    check_print_stdnames_error=False):
     """
     Get the uid of an element if precised, else the list of all elements.
     """

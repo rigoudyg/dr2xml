@@ -160,7 +160,7 @@ def wrv(name, value, num_type="string"):
     else:
         value = reduce_and_strip(value)
         if isinstance(value, six.string_types):
-            value = value.replace(">", "&gt").replace("<", "&lt")
+            value = value.replace(">", "&gt;").replace("<", "&lt;")
             value = value[0:1024]  # CMIP6 spec : no more than 1024 char
             value = value.strip()
         # Format a 'variable' entry

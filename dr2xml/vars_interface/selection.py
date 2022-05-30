@@ -62,7 +62,7 @@ def select_variables_to_be_processed(year, context, select):
                 logger.warning("Not adding duplicate %s (from %s) for realm %s" % (svar.label, svar.mipTable, realm))
         else:
             logger.warning("Duplicate svar %s %s" % (svar.label, svar.grid))
-    logger.info("\nRealms for these CMORvars : %s" % " ".join(sorted(list(svars_per_realm))))
+    logger.info("\nRealms for these CMORvars: %s" % " ".join(sorted(list(svars_per_realm))))
     #
     # --------------------------------------------------------------------
     # Select on context realms, grouping by table
