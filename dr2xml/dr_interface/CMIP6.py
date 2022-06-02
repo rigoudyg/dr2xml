@@ -95,15 +95,15 @@ def get_sectors_list():
 
 
 def get_element_uid(id=None, error_msg=None, raise_on_error=False, check_print_DR_errors=True,
-                    check_print_stdnames_error=False):
+                    check_print_stdnames_error=False, elt_type=None):
     """
     Get the uid of an element if precised, else the list of all elements.
     """
     logger = get_logger()
     if id is None:
-        return dq.inx.uid
+        rep = dq.inx.uid
     elif id in dq.inx.uid:
-        return dq.inx.uid[id]
+        rep = dq.inx.uid[id]
     else:
         if error_msg is None:
             error_msg = "DR Error: issue with %s" % id
@@ -111,12 +111,15 @@ def get_element_uid(id=None, error_msg=None, raise_on_error=False, check_print_D
             raise Dr2xmlError(error_msg)
         elif check_print_DR_errors and print_DR_errors:
             logger.error(error_msg)
-            return None
         elif check_print_stdnames_error and print_DR_stdname_errors:
             logger.error(error_msg)
-            return None
-        else:
-            return None
+        rep = None
+    if rep is not None:
+        if elt_type in ["variable", ]:
+            pass
+        elif elt_type in ["dim", ]:
+            correct_data_request_dim(rep)
+    return rep
 
 
 def get_experiment_label(experiment):
@@ -154,7 +157,9 @@ def correct_data_request_dim(dim):
     if dim.label in ["misrBands", ]:
         dim.dimsize = 16
     if dim.type in ["character", ]:
-        dim.altLabel = "sector"
+        dim.name = "sector"
+    else:
+        dim.name = dim.altLabel
     # The latter is a bug in DR01.00.21 : typewetla has no value there
     if dim.label in ["typewetla", ]:
         dim.value = "wetland"

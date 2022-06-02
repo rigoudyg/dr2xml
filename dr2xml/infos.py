@@ -6,7 +6,7 @@ Tools to print statistics
 """
 from __future__ import print_function, division, absolute_import, unicode_literals
 
-from collections import OrderedDict
+from collections import OrderedDict, defaultdict
 
 from logger import get_logger
 
@@ -113,12 +113,14 @@ def print_some_stats(context, svars_per_table, skipped_vars_per_table, actually_
         if extended:
             logger.info("\n\nSome Statistics on actually written variables per variable...")
             dic = OrderedDict()
-            dic_ln = OrderedDict()
+            dic_ln = defaultdict(set)
             for label, long_name, table, frequency, Priority, spatial_shp in actually_written_vars:
+                dic_ln[label].add(long_name)
                 if label not in dic:
-                    dic[label] = []
-                    dic_ln.update({label: long_name})
+                    dic[label] = list()
                 dic[label].append(frequency + '_' + table + '_' + spatial_shp + '_' + str(Priority))
+            for label in dic_ln:
+                dic_ln[label] = sorted(list(dic_ln[label]))
 
             list_labels = list(dic)
             list_labels.sort()
@@ -127,9 +129,13 @@ def print_some_stats(context, svars_per_table, skipped_vars_per_table, actually_
 
             for label in list_labels:
                 logger.info((14 + len(label)) * "-")
-                logger.info("--- VARNAME: %s: %s" % (label, dic_ln[label]))
+                logger.info("--- VARNAME: %s: %s" % (label, dic_ln[label][0]))
                 logger.info((14 + len(label)) * "-")
                 for val in dic[label]:
                     logger.info(14 * " " + "* %20s %s" % (val, label))
+                if len(dic_ln[label]) > 1:
+                    logger.warning(14 * " " + "Warning: several long names are available:")
+                    for long_name in dic_ln[label]:
+                        logger.warning(18 * " " + "- %s" % long_name)
 
         return True

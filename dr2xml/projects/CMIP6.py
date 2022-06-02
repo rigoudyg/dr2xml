@@ -379,6 +379,12 @@ project_settings = dict(
                         )
                     )
                 ]
+            ),
+            realm=ParameterSettings(
+                key="realm",
+                corrections=dict(
+                    ocnBgChem="ocnBgchem"
+                )
             )
         )
     )

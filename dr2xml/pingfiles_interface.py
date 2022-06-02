@@ -310,8 +310,8 @@ def check_for_file_input(sv, hgrid):
         remap_grid_def = DR2XMLElement(tag="grid", id=file_grid_id)
         remap_grid_def.append(DR2XMLElement(tag="domain", domain_ref=file_domain_id))
         add_value_in_dict_config_variable(variable="grid_defs", key=file_grid_id, value=remap_grid_def)
-        logger.info(domain_def)
-        logger.info(remap_grid_def)
+        logger.debug(domain_def)
+        logger.debug(remap_grid_def)
 
         # Create xml for reading the variable
         filename = externs[sv.label][hgrid][get_grid_choice()]
@@ -322,7 +322,7 @@ def check_for_file_input(sv, hgrid):
         file_def.append(DR2XMLElement(tag="field", id=field_in_file_id, name=sv.label, operation="instant",
                                       freq_op="1ts", freq_offset="1ts", grid_ref=file_grid_id))
         add_value_in_dict_config_variable(variable="file_defs", key=file_id, value=file_def)
-        logger.info(file_def)
+        logger.debug(file_def)
         #
         # field_def='<field id="%s" grid_ref="%s" operation="instant" >%s</field>'%\
         field_def = DR2XMLElement(tag="field", id=pingvar, grid_ref=grid_id, field_ref=field_in_file_id,
@@ -331,4 +331,4 @@ def check_for_file_input(sv, hgrid):
         context_index = get_config_variable("context_index", to_change=True)
         context_index[pingvar] = field_def
 
-        logger.info(field_def)
+        logger.debug(field_def)

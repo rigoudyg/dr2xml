@@ -132,7 +132,7 @@ def get_simple_dim_from_dim_id(dimid):
     """
     d = get_element_uid(dimid)
     #
-    stdname = get_element_uid(d.standardName, check_print_stdnames_error=True,
+    stdname = get_element_uid(d.standardName, check_print_stdnames_error=True, check_print_DR_errors=False,
                               error_msg="Issue with standardname for dimid %s" % dimid)
     if stdname is not None:
         stdname = stdname.uid

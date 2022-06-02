@@ -34,6 +34,7 @@ def check_exclusion(var, *exclusions):
         reasons = ". ".join(reasons).strip()
         if len(reasons) == 0:
             reasons = "Unknown reason."
+        reasons = "    " + reasons
     return tests, reasons
 
 
@@ -90,7 +91,7 @@ def select_variables_to_be_processed(year, context, select):
             else:
                 svars_per_table[svar.mipTable].append(svar)
         if len(excluded_vars) > 0:
-            logger.info("The following pairs (variable,table) have been excluded for these reasons :\n%s" %
+            logger.info("The following pairs (variable,table) have been excluded for these reasons:\n%s" %
                         "\n".join(["%s: %s" % (reason, print_struct(excluded_vars[reason], skip_sep=True, sort=True))
                                    for reason in sorted(list(excluded_vars))]))
     for table in sorted(list(svars_per_table)):

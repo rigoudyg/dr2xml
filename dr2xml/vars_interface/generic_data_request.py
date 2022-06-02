@@ -213,7 +213,7 @@ def select_data_request_CMORvars_for_lab(sset=False, year=None):
                             % (multiple_grids[-1], repr(d[v])))
     if not print_multiple_grids and multiple_grids is not None and len(multiple_grids) > 0:
         logger.info("\tThese variables will be processed with multiple grids "
-                    "(rerun with print_multiple_grids set to True for details): %s" % repr(multiple_grids.sort()))
+                    "(rerun with print_multiple_grids set to True for details): %s" % repr(sorted(multiple_grids)))
     #
     # Print a count of distinct var labels
     logger.info('Number of distinct var labels is: %d' % len(set([get_element_uid(v).label for v in d])))

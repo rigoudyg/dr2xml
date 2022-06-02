@@ -450,6 +450,8 @@ class ConditionSettings(Settings):
                                              additional_dict=additional_dict,
                                              allow_additional_keytypes=allow_additional_keytypes)
         if relevant:
+            if isinstance(check_value, list) and len(check_value) == 1:
+                check_value = check_value[0]
             reference_values = [return_value(reference_value, common_dict=common_dict, internal_dict=internal_dict,
                                              additional_dict=additional_dict,
                                              allow_additional_keytypes=allow_additional_keytypes)

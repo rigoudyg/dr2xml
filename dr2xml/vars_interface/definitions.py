@@ -108,8 +108,9 @@ class SimpleDim(SimpleObject):
     """
     def __init__(self, label=False, zoom_label=False, stdname=False, long_name=False, positive=False, requested="",
                  value=False, out_name=False, units=False, is_zoom_of=False, bounds=False, boundsValues=False,
-                 axis=False, type=False, coords=False, title=False, is_union_for=list(), **kwargs):
+                 axis=False, type=False, coords=False, title=False, name=None, is_union_for=list(), **kwargs):
         self.label = label
+        self.altLabel = self.label
         self.zoom_label = zoom_label
         self.stdname = stdname
         self.long_name = long_name
@@ -126,6 +127,7 @@ class SimpleDim(SimpleObject):
         self.coords = coords
         self.title = title
         self.is_union_for = is_union_for
+        self.name = name
         super(SimpleDim, self).__init__(**kwargs)
 
     def correct_data_request(self):
@@ -134,3 +136,5 @@ class SimpleDim(SimpleObject):
             self.dimsize = max(len(self.requested.split(" ")), 1)
         else:
             self.dimsize = 1
+        if self.altLabel != self.label:
+            self.altLabel = self.label

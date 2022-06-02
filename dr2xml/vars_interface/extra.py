@@ -203,7 +203,7 @@ def read_extra_table(path, table):
                                                                            realms=["atmos", "aerosol", "atmosChem"]))
             extra_var.set_attributes(ref_var=extra_var.label_without_psuffix)
             extravars.append(extra_var)
-    logger.info("For extra table %s (which has %d variables): " % (table, len(extravars)))
+    logger.info("For extra table %s (which has %d variables):" % (table, len(extravars)))
     logger.info("\tVariables which dim was found in extra coordinates table:\n%s" %
                 "\n".join(["\t\t%20s: %s\n" % (d, " ".join(sorted(dim_from_extra[d])))
                            for d in sorted(list(dim_from_extra))]))
