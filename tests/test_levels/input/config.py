@@ -13,7 +13,7 @@ contexts = ["surfex", "trip"]
 
 config = dict(
     year="1960",
-    enddate= "19610101",
+    enddate="19610101",
     pingfiles="{}/ping_surfex.xml {}/ping_trip.xml".format(path_xml, path_xml),
     printout="1",
     cvs_path=path_cv,

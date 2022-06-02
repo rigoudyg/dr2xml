@@ -22,7 +22,6 @@ simulation_settings = {
     "driving_experiment": "ERA-INTERIM, evaluation, r1i1p1",
     "driving_model_ensemble_member": "r1i1p1",
     "driving_experiment_name": "evaluation",
-    "CORDEX_domain": "MED-44",
     "Lambert_conformal_longitude_of_central_meridian": "10.f",
     "Lambert_conformal_standard_parallel": "37.f",
     "Lambert_conformal_latitude_of_projection_origin": "37.f",
@@ -76,7 +75,7 @@ simulation_settings = {
     },
 
     # 'parent_variant_label' :""  #Default to 'same as child'. Other cases should be exceptional
-    # "parent_mip_era"       : 'CMIP5'   # set it only in special cases (e.g. PMIP warm start from CMIP5/PMIP3 experiment)
+    # "parent_mip_era": 'CMIP5'   # set it only in special cases (e.g. PMIP warm start from CMIP5/PMIP3 experiment)
     # 'parent_source_id'     : 'CNRM-CM5.1' # set it only in special cases, where parent model is not the same model
     'bypass_CV_components': True,
     'CORDEX_data': True,

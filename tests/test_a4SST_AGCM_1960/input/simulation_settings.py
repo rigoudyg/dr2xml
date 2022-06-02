@@ -3,7 +3,7 @@
 
 from tests.tests_config import path_table, path_homedr
 
-simulation_settings = {'comment': 'Simulation a4SST (after a 10-yr spin up) et test accents en tout genre',# éèêë',
+simulation_settings = {'comment': 'Simulation a4SST (after a 10-yr spin up) et test accents en tout genre',  # éèêë',
                        'listof_home_vars': '{}/home_data_request_arpege_GCM.txt '
                                            '{}/home_data_request_surfex_GCM.txt '
                                            '{}/home_data_request_trip_GCM.txt '

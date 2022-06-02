@@ -14,7 +14,7 @@ contexts = ["surfex", "trip"]
 
 config = dict(
     year="2003",
-    enddate= "20030201",
+    enddate="20030201",
     pingfiles="{}/ping_surfex.xml {}/ping_trip.xml".format(path_xml_aladin, path_xml_aladin),
     printout="1",
     cvs_path=path_cv,
@@ -22,8 +22,6 @@ config = dict(
     dirname="./",
     prefix="IOXDIR",
     attributes=[("EXPID", "AAD50_641"),
-                ("CMIP6_CV_version", "cv=6.2.3.0-7-g2019642"),
-                ("dr2xml_md5sum","7040f60f6bf3118dc6c58b9fb8727d87")
                 ],
     select="on_expt"
 )

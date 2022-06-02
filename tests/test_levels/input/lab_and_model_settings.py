@@ -101,16 +101,18 @@ lab_and_model_settings = {
             {
                 'nemo': ['gn', '', '', '25 km', 'native ocean tri-polar grid with 1.47 M ocean cells'],
                 'surfex': ['gr', 'complete', 'glat', '50 km',
-                           'data regridded to a 359 gaussian grid (360x720 latlon) from a native atmosphere T359l reduced gaussian grid'],
-                #"surfex" : [ "gn", "", "" , "250 km", "native T127 reduced gaussian grid"] ,
+                           'data regridded to a 359 gaussian grid (360x720 latlon) from a native atmosphere T359l '
+                           'reduced gaussian grid'],
+                # "surfex" : [ "gn", "", "" , "250 km", "native T127 reduced gaussian grid"] ,
                 'trip': ['gn', '', '', '50 km', 'regular 1/2 deg lat-lon grid']
             },
         'LR':
             {
                 'nemo': ['gn', '', '', '100 km', 'native ocean tri-polar grid with 105 k ocean cells'],
                 'surfex': ['gr', 'complete', 'glat', '250 km',
-                           'data regridded to a T127 gaussian grid (128x256 latlon) from a native atmosphere T127l reduced gaussian grid'],
-                #"surfex" : [ "gn", "", "" , "250 km", "native T127 reduced gaussian grid"] ,
+                           'data regridded to a T127 gaussian grid (128x256 latlon) from a native atmosphere T127l '
+                           'reduced gaussian grid'],
+                # "surfex" : [ "gn", "", "" , "250 km", "native T127 reduced gaussian grid"] ,
                 'trip': ['gn', '', '', '50 km', 'regular 1/2 deg lat-lon grid']
             }
     },
@@ -123,39 +125,81 @@ lab_and_model_settings = {
     'ping_variables_prefix': 'CMIP6_',
     'debug_parsing': False,
     'comments': {
-        'htovovrt': 'This variable has an axis labelled j-mean, while CMIP6 calls for an axis labelled latitude. We want here to pinpoint that we provide values which are averaged over the X-axis of our tripolar grid, along which latitude do vary. This axis begins South.Please refer to the lat/lon coordinate variables in this file for further details.',
+        'htovovrt': 'This variable has an axis labelled j-mean, while CMIP6 calls for an axis labelled latitude. '
+                    'We want here to pinpoint that we provide values which are averaged over the X-axis of our tripolar'
+                    ' grid, along which latitude do vary. This axis begins South. Please refer to the lat/lon '
+                    'coordinate variables in this file for further details.',
         'tpf': 'Region where always 0m correspond to none-permafrost areas',
         'sivols': 'The sector attribute is erroneous, this variable is indeed integrated over the southern hemisphere.',
-        'snc': 'ISBA snow cover over bare ground comparable with stallite data (Psng in equation C1 in Decharme et al. 2016)',
-        'siextentn': 'The sector attribute is erroneous, this variable is indeed integrated over the northern hemisphere.',
-        'rivi': 'CTRIP river grid-cell inflow considering upstream grdi-cell water fluxes and total runoff input (mrro) from ISBA',
-        'snovols': 'The sector attribute is erroneous, this variable is indeed integrated over the southern hemisphere.',
-        'snovoln': 'The sector attribute is erroneous, this variable is indeed integrated over the northern hemisphere.',
-        'hfbasinpmad': 'This variable has an axis labelled j-mean, while CMIP6 calls for an axis labelled latitude. We want here to pinpoint that we provide values which are averaged over the X-axis of our tripolar grid, along which latitude do vary. This axis begins South.Please refer to the lat/lon coordinate variables in this file for further details.',
+        'snc': 'ISBA snow cover over bare ground comparable with stallite data '
+               '(Psng in equation C1 in Decharme et al. 2016)',
+        'siextentn': 'The sector attribute is erroneous, this variable is indeed integrated over the northern '
+                     'hemisphere.',
+        'rivi': 'CTRIP river grid-cell inflow considering upstream grdi-cell water fluxes and total runoff input '
+                '(mrro) from ISBA',
+        'snovols': 'The sector attribute is erroneous, this variable is indeed integrated over the southern '
+                   'hemisphere.',
+        'snovoln': 'The sector attribute is erroneous, this variable is indeed integrated over the northern '
+                   'hemisphere.',
+        'hfbasinpmad': 'This variable has an axis labelled j-mean, while CMIP6 calls for an axis labelled latitude. '
+                       'We want here to pinpoint that we provide values which are averaged over the X-axis of our '
+                       'tripolar grid, along which latitude do vary. This axis begins South. Please refer to the '
+                       'lat/lon coordinate variables in this file for further details.',
         'dgw': 'CTRIP river water budget = (drivw+dgw)/dt - (rivi-rivo)*1000/areacellr - qgwr',
-        'dcw': 'ISBA land water budget = (dslw+dcw+dsn+dsw)/dt - (pr-et-mrro) ; dt is given by netcdf attribute : interval_operation',
-        'siextents': 'The sector attribute is erroneous, this variable is indeed integrated over the southern hemisphere.',
+        'dcw': 'ISBA land water budget = (dslw+dcw+dsn+dsw)/dt - (pr-et-mrro) ; dt is given by netcdf attribute : '
+               'interval_operation',
+        'siextents': 'The sector attribute is erroneous, this variable is indeed integrated over the southern '
+                     'hemisphere.',
         'sivoln': 'The sector attribute is erroneous, this variable is indeed integrated over the northern hemisphere.',
-        'zomsf_3bsn': 'This variable has an axis labelled j-mean, while CMIP6 calls for an axis labelled latitude. We want here to pinpoint that we provide values which are averaged over the X-axis of our tripolar grid, along which latitude do vary. This axis begins South.Please refer to the lat/lon coordinate variables in this file for further details.',
-        'hfbasin': 'This variable has an axis labelled j-mean, while CMIP6 calls for an axis labelled latitude. We want here to pinpoint that we provide values which are averaged over the X-axis of our tripolar grid, along which latitude do vary. This axis begins South.Please refer to the lat/lon coordinate variables in this file for further details.',
-        'sltbasin': 'This variable has an axis labelled j-mean, while CMIP6 calls for an axis labelled latitude. We want here to pinpoint that we provide values which are averaged over the X-axis of our tripolar grid, along which latitude do vary. This axis begins South.Please refer to the lat/lon coordinate variables in this file for further details.',
-        'dslw': 'ISBA land water budget = (dslw+dcw+dsn+dsw)/dt - (pr-et-mrro) ; dt is given by netcdf attribute : interval_operation',
-        'dtes': 'ISBA land energy budget = (dtes+dtesn)/dt + hfmlt - hfdsl ; dt is given by netcdf attribute : interval_operation',
-        'htovgyre  ': 'This variable has an axis labelled j-mean, while CMIP6 calls for an axis labelled latitude. We want here to pinpoint that we provide values which are averaged over the X-axis of our tripolar grid, along which latitude do vary. This axis begins South.Please refer to the lat/lon coordinate variables in this file for further details.',
+        'zomsf_3bsn': 'This variable has an axis labelled j-mean, while CMIP6 calls for an axis labelled latitude. '
+                      'We want here to pinpoint that we provide values which are averaged over the X-axis of our '
+                      'tripolar grid, along which latitude do vary. This axis begins South. Please refer to the '
+                      'lat/lon coordinate variables in this file for further details.',
+        'hfbasin': 'This variable has an axis labelled j-mean, while CMIP6 calls for an axis labelled latitude. '
+                   'We want here to pinpoint that we provide values which are averaged over the X-axis of our tripolar '
+                   'grid, along which latitude do vary. This axis begins South. Please refer to the lat/lon coordinate '
+                   'variables in this file for further details.',
+        'sltbasin': 'This variable has an axis labelled j-mean, while CMIP6 calls for an axis labelled latitude. '
+                    'We want here to pinpoint that we provide values which are averaged over the X-axis of our '
+                    'tripolar grid, along which latitude do vary. This axis begins South. Please refer to the lat/lon '
+                    'coordinate variables in this file for further details.',
+        'dslw': 'ISBA land water budget = (dslw+dcw+dsn+dsw)/dt - (pr-et-mrro) ; dt is given by netcdf attribute : '
+                'interval_operation',
+        'dtes': 'ISBA land energy budget = (dtes+dtesn)/dt + hfmlt - hfdsl ; dt is given by netcdf attribute : '
+                'interval_operation',
+        'htovgyre  ': 'This variable has an axis labelled j-mean, while CMIP6 calls for an axis labelled latitude. '
+                      'We want here to pinpoint that we provide values which are averaged over the X-axis of our '
+                      'tripolar grid, along which latitude do vary. This axis begins South.Please refer to the lat/lon '
+                      'coordinate variables in this file for further details.',
         'fldcapacity': '100 * ISBA Field Capacity in m3/m3',
-        'sltovovrt': 'This variable has an axis labelled j-mean, while CMIP6 calls for an axis labelled latitude. We want here to pinpoint that we provide values which are averaged over the X-axis of our tripolar grid, along which latitude do vary. This axis begins South.Please refer to the lat/lon coordinate variables in this file for further details.',
-        'dsw': 'Change in floodplains water ; ISBA land water budget = (dslw+dcw+dsn+dsw)/dt - (pr-et-mrro) ; dt is given by netcdf attribute : interval_operation',
+        'sltovovrt': 'This variable has an axis labelled j-mean, while CMIP6 calls for an axis labelled latitude. '
+                     'We want here to pinpoint that we provide values which are averaged over the X-axis of our '
+                     'tripolar grid, along which latitude do vary. This axis begins South.Please refer to the lat/lon '
+                     'coordinate variables in this file for further details.',
+        'dsw': 'Change in floodplains water ; ISBA land water budget = (dslw+dcw+dsn+dsw)/dt - (pr-et-mrro) ; '
+               'dt is given by netcdf attribute : interval_operation',
         'sw': 'Surface floodplains water storage (e.g. Decharme et al. 2018)',
-        'siareas': 'The sector attribute is erroneous, this variable is indeed integrated over the southern hemisphere.',
-        'siarean': 'The sector attribute is erroneous, this variable is indeed integrated over the northern hemisphere.',
+        'siareas': 'The sector attribute is erroneous, this variable is indeed integrated over the southern '
+                   'hemisphere.',
+        'siarean': 'The sector attribute is erroneous, this variable is indeed integrated over the northern '
+                   'hemisphere.',
         'wilt': '100 * ISBA Wilting Point in m3/m3',
         'eow': 'Liquid water evaporation from floodplains (e.g. Decharme et al. 2018)',
         'prsnsn': 'In ISBA, prsnsn is always 1 because all snowfall falls onto snowpack',
-        'dtesn': 'ISBA land energy budget = (dtes+dtesn)/dt + hfmlt - hfdsl ; dt is given by netcdf attribute : interval_operation',
-        'sltnortha': 'This variable has an axis labelled j-mean, while CMIP6 calls for an axis labelled latitude. We want here to pinpoint that we provide values which are averaged over the X-axis of our tripolar grid, along which latitude do vary. This axis begins South.Please refer to the lat/lon coordinate variables in this file for further details.',
-        'mrtws': 'ISBA-CTRIP total water storage (soil+canopy+snow+rivers+groundwater+floodplains; e.g. Decharme et al. 2018)',
-        'sltovgyre': 'This variable has an axis labelled j-mean, while CMIP6 calls for an axis labelled latitude. We want here to pinpoint that we provide values which are averaged over the X-axis of our tripolar grid, along which latitude do vary. This axis begins South.Please refer to the lat/lon coordinate variables in this file for further details.',
-        'dsn': 'ISBA land water budget = (dslw+dcw+dsn+dsw)/dt - (pr-et-mrro) ; dt is given by netcdf attribute : interval_operation',
+        'dtesn': 'ISBA land energy budget = (dtes+dtesn)/dt + hfmlt - hfdsl ; dt is given by netcdf attribute : '
+                 'interval_operation',
+        'sltnortha': 'This variable has an axis labelled j-mean, while CMIP6 calls for an axis labelled latitude. '
+                     'We want here to pinpoint that we provide values which are averaged over the X-axis of our '
+                     'tripolar grid, along which latitude do vary. This axis begins South.Please refer to the lat/lon '
+                     'coordinate variables in this file for further details.',
+        'mrtws': 'ISBA-CTRIP total water storage (soil+canopy+snow+rivers+groundwater+floodplains; '
+                 'e.g. Decharme et al. 2018)',
+        'sltovgyre': 'This variable has an axis labelled j-mean, while CMIP6 calls for an axis labelled latitude. '
+                     'We want here to pinpoint that we provide values which are averaged over the X-axis of our '
+                     'tripolar grid, along which latitude do vary. This axis begins South.Please refer to the lat/lon '
+                     'coordinate variables in this file for further details.',
+        'dsn': 'ISBA land water budget = (dslw+dcw+dsn+dsw)/dt - (pr-et-mrro) ; dt is given by netcdf attribute : '
+               'interval_operation',
         'dmlt': 'Region where always 12m correspond to none-permafrost areas',
         'drivw': 'CTRIP river water budget = (drivw+dgw)/dt - (rivi-rivo)*1000/areacellr - qgwr'
     },
@@ -193,7 +237,10 @@ lab_and_model_settings = {
         'soil_carbon_pools': ('soilpools', 'fast medium slow'),
         'effectRadL': 'effectRadL',
         'vegtype': ('vegtype',
-                    'Bare_soil Rock Permanent_snow Temperate_broad-leaved_decidus Boreal_needleaf_evergreen Tropical_broad-leaved_evergreen C3_crop C4_crop Irrigated_crop C3_grass C4_grass Wetland Tropical_broad-leaved_decidus Temperate_broad-leaved_evergreen Temperate_needleaf_evergreen Boreal_broad-leaved_decidus Boreal_needleaf_decidus Tundra_grass Shrub'),
+                    'Bare_soil Rock Permanent_snow Temperate_broad-leaved_decidus Boreal_needleaf_evergreen '
+                    'Tropical_broad-leaved_evergreen C3_crop C4_crop Irrigated_crop C3_grass C4_grass Wetland '
+                    'Tropical_broad-leaved_decidus Temperate_broad-leaved_evergreen Temperate_needleaf_evergreen '
+                    'Boreal_broad-leaved_decidus Boreal_needleaf_decidus Tundra_grass Shrub'),
         'sza5': 'sza5',
         'effectRadIc': 'effectRadIc',
         'oline': 'oline',

@@ -3,7 +3,7 @@
 
 from tests.tests_config import path_table, path_homedr
 
-simulation_settings = {'comment': 'Simulation a4SST (after a 10-yr spin up) et test accents en tout genre',# éèêë',
+simulation_settings = {'comment': 'Simulation a4SST (after a 10-yr spin up) et test accents en tout genre',  # éèêë',
                        'listof_home_vars': '{}/home_data_request_levels.txt '.format(path_homedr),
                        'sub_experiment': 'none',
                        'branch_method': 'standard',
@@ -24,13 +24,13 @@ simulation_settings = {'comment': 'Simulation a4SST (after a 10-yr spin up) et t
                        'configuration': 'AGCM',
                        'excluded_tables': [],
                        'history': 'none',
-                       'perso_sdims_description':{
-                           'zg50':{
-                               'HG50':{
-                                   'value':'50',
-                                   'axis':"Z",
-                                   'positive':'true',
-                                   'out_name':'HG50'
+                       'perso_sdims_description': {
+                           'zg50': {
+                               'HG50': {
+                                   'value': '50',
+                                   'axis': "Z",
+                                   'positive': 'true',
+                                   'out_name': 'HG50'
                                }
                            }
                        },
