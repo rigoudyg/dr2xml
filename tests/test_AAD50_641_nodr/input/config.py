@@ -22,8 +22,6 @@ config = dict(
     dirname="./",
     prefix="IOXDIR",
     attributes=[("EXPID", "AAD50_641"),
-                ("CMIP6_CV_version", "cv=6.2.3.0-7-g2019642"),
-                ("dr2xml_md5sum", "7040f60f6bf3118dc6c58b9fb8727d87")
                 ],
     select="on_expt"
 )

@@ -94,17 +94,6 @@ lab_and_model_settings = {
         'CNRM-ESM2-1-HR': 'AOGCM BGC AER',
         'CNRM-RCSM6': 'AORCM AER'
     },
-    'print_variables': ['activity_id', 'description', 'comment', 'contact', 'Conventions', 'creation_date',
-                        'data_specs_version', 'dr2xml_version', 'experiment_id', 'EXPID', 'external_variables',
-                        'frequency', 'grid', 'grid_label', 'history', 'institution', 'institute_id',
-                        'nominal_resolution', 'product', 'project_id', 'model_id', 'rcm_version_id',
-                        'realization_index', 'realm', 'references', 'table_id', 'title', 'tracking_id', 'variable_id',
-                        'xios_commit', 'standard_name', 'long_name', 'units', 'cell_methods', 'cell_measures',
-                        'driving_experiment', 'driving_experiment_name', 'driving_model_id',
-                        'driving_model_ensemble_member', 'CORDEX_domain', 'grid_mapping',
-                        'Lambert_conformal_longitude_of_central_meridian', 'Lambert_conformal_standard_parallel',
-                        'Lambert_conformal_latitude_of_projection_origin'
-                        ],
     'configurations': {
         'LESM': ('CNRM-ESM2-1', 'LAND BGC', ['nemo']),
         'AGCM': ('CNRM-CM6-1', 'AGCM', ['nemo']),
@@ -189,8 +178,8 @@ lab_and_model_settings = {
     'max_file_size_in_floats': 4000000000.0,
     'non_standard_attributes': {
         'xios_commit': '1442-shuffle',
-        'nemo_gelato_commit': '49095b3accd5d4c_6524fe19b00467a',
-        'arpege_minor_version': '6.4.1'
+        #'nemo_gelato_commit': '49095b3accd5d4c_6524fe19b00467a',
+        #'arpege_minor_version': '6.4.1'
     },
     'special_timestep_vars': {
         '60mi': ['cllcalipso', 'clmcalipso', 'clhcalipso', 'cltcalipso', 'cllcalipsoice', 'clmcalipsoice',

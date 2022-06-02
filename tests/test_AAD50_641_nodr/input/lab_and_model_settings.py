@@ -32,7 +32,7 @@ lab_and_model_settings={
                            "CNRM-ALADIN6"  : "ARCM AER",
                            "CNRM-RCSM6"    : "AORCM AER",
                            "CNRM-CM6-1"    : "AOGCM",
-                           "CNRM-CM6-1-HR" : "AOGCM", 
+                           "CNRM-CM6-1-HR" : "AOGCM",
                            "CNRM-ESM2-1"   : "AOGCM BGC AER CHEM"  ,
                            "CNRM-ESM2-1-HR": "AOGCM BGC AER" },
 
@@ -117,7 +117,7 @@ lab_and_model_settings={
     # The list of CMIP6 tables is at http://clipc-services.ceda.ac.uk/dreq/index/miptable.html
     # For test purpose, you may exclude some tables, using entry "excluded_tables", or alternatively specify 
     # an inclusive list of tables to process, using entry "included_tables"
-    #"excluded_tables"  : [ "Eyr", "Oyr", "Odec", "IfxAnt", "ImonAnt" ],    
+    #"excluded_tables"  : [ "Eyr", "Oyr", "Odec", "IfxAnt", "ImonAnt" ],
     "included_tables"  : [ "Amon" ],    # This entry has precedence over excluded_tables. Used for debug
     
     # When atmospheric vertical coordinate implies putting psol in model-level output files, we
@@ -126,23 +126,23 @@ lab_and_model_settings={
     # We choose to describe such fields as a list of vars dependant on the model configuration
     # because the DR is not in a good enough shape about realms for this purpose
     "excluded_vars_per_config" : {
-        "ARCM":  [ "ch4", "co2", "co", "h2o", "hcho", "hcl", 
-                   "hno3", "n2o", "no2", "no", "o3Clim", "o3loss", "o3prod", "oh", 
-                   "fco2antt", "fco2fos", "fco2nat", 
+        "ARCM":  [ "ch4", "co2", "co", "h2o", "hcho", "hcl",
+                   "hno3", "n2o", "no2", "no", "o3Clim", "o3loss", "o3prod", "oh",
+                   "fco2antt", "fco2fos", "fco2nat",
                    'oxloss', 'oxprod', 'vmrox', 'bry', 'cly', 'ho2', 'meanage', 'noy','cLand',
                    'cSoil', 'fAnthDisturb', 'fDeforestToProduct', 'fFireNat', 'fLuc', 'fProductDecomp',
                    'netAtmosLandCO2Flux', 'burntFractionAll', 'cLitter', 'cProduct', 'cVeg', 'fFire', 'fLitterSoil',
                    'fVegLitter', 'nbp', 'shrubFrac' ],
-        "AORCM":  [ "ch4", "co2", "co", "h2o", "hcho", "hcl", 
-                   "hno3", "n2o", "no2", "no", "o3Clim", "o3loss", "o3prod", "oh", 
-                   "fco2antt", "fco2fos", "fco2nat", 
+        "AORCM":  [ "ch4", "co2", "co", "h2o", "hcho", "hcl",
+                   "hno3", "n2o", "no2", "no", "o3Clim", "o3loss", "o3prod", "oh",
+                   "fco2antt", "fco2fos", "fco2nat",
                    'oxloss', 'oxprod', 'vmrox', 'bry', 'cly', 'ho2', 'meanage', 'noy','cLand',
                    'cSoil', 'fAnthDisturb', 'fDeforestToProduct', 'fFireNat', 'fLuc', 'fProductDecomp',
                    'netAtmosLandCO2Flux', 'burntFractionAll', 'cLitter', 'cProduct', 'cVeg', 'fFire', 'fLitterSoil',
                    'fVegLitter', 'nbp', 'shrubFrac' ],
-        "AGCM":  [ "ch4", "co2", "co", "concdust", "ec550aer", "h2o", "hcho", "hcl", 
-                   "hno3", "mmrbc", "mmrdust", "mmroa", "mmrso4", "mmrss", 
-                   "n2o", "no2", "no", "o3Clim", "o3loss", "o3prod", "oh", "so2", "mmrpm1", 
+        "AGCM":  [ "ch4", "co2", "co", "concdust", "ec550aer", "h2o", "hcho", "hcl",
+                   "hno3", "mmrbc", "mmrdust", "mmroa", "mmrso4", "mmrss",
+                   "n2o", "no2", "no", "o3Clim", "o3loss", "o3prod", "oh", "so2", "mmrpm1",
                    "fco2antt", "fco2fos", "fco2nat", "loadbc", "loaddust", "loadoa", "loadso4", "loadss",
                    'oxloss', 'oxprod', 'vmrox', 'bry', 'cly', 'ho2', 'meanage', 'noy', 'drybc', 'drydust',
                    'dryoa', 'dryso2', 'dryso4', 'dryss', 'emibc', 'emidust', 'emioa', 'emiso2', 'emiso4',
@@ -151,9 +151,9 @@ lab_and_model_settings={
                    'netAtmosLandCO2Flux', 'od443dust', 'od865dust', 'sconcdust', 'sconcso4', 'sconcss',
                    'sedustCI', 'burntFractionAll', 'cLitter', 'cProduct', 'cVeg', 'fFire', 'fLitterSoil',
                    'fVegLitter', 'nbp', 'shrubFrac' ],
-        "AOGCM": [ "ch4", "co2", "co", "concdust", "ec550aer", "h2o", "hcho", "hcl", 
-                    "hno3", "mmrbc", "mmrdust", "mmroa", "mmrso4", "mmrss", 
-                    "n2o", "no2", "no", "o3Clim", "o3loss", "o3prod", "oh", "so2", "mmrpm1", 
+        "AOGCM": [ "ch4", "co2", "co", "concdust", "ec550aer", "h2o", "hcho", "hcl",
+                    "hno3", "mmrbc", "mmrdust", "mmroa", "mmrso4", "mmrss",
+                    "n2o", "no2", "no", "o3Clim", "o3loss", "o3prod", "oh", "so2", "mmrpm1",
                     "fco2antt", "fco2fos", "fco2nat", "loadbc", "loaddust", "loadoa", "loadso4", "loadss",
                    'oxloss', 'oxprod', 'vmrox', 'bry', 'cly', 'ho2', 'meanage', 'noy', 'drybc', 'drydust',
                    'dryoa', 'dryso2', 'dryso4', 'dryss', 'emibc', 'emidust', 'emioa', 'emiso2', 'emiso4',
@@ -166,12 +166,12 @@ lab_and_model_settings={
         "AOESM": [ 'co2mass', 'ch4global', 'n2oglobal' ],
         "LGCM":  ['ch4', 'co2', 'hur', 'hus', 'n2o', 'o3', 'ta', 'ua', 'va', 'wap', 'zg', 'clt',
                   'ccb', 'cct', 'ci', 'clivi', 'clt', 'clwvi', 'evspsbl', 'fco2antt', 'fco2fos',
-                  'pr', 'prc', 'prsn', 'prw', 'ps', 'psl', 'rldscs','rlut', 'rlutcs', 'rsdscs', 
+                  'pr', 'prc', 'prsn', 'prw', 'ps', 'psl', 'rldscs','rlut', 'rlutcs', 'rsdscs',
                   'rsdt', 'rsuscs', 'rsut', 'rsutcs','ch4global', 'co2mass', 'n2oglobal','mc',
                    'cl', 'cli', 'clw'],
         "LESM":  ['ch4', 'co2', 'hur', 'hus', 'n2o', 'o3', 'ta', 'ua', 'va', 'wap', 'zg', 'clt',
                   'ccb', 'cct', 'ci', 'clivi', 'clt', 'clwvi', 'evspsbl', 'fco2antt', 'fco2fos',
-                  'pr', 'prc', 'prsn', 'prw', 'ps', 'psl', 'rldscs','rlut', 'rlutcs', 'rsdscs', 
+                  'pr', 'prc', 'prsn', 'prw', 'ps', 'psl', 'rldscs','rlut', 'rlutcs', 'rsdscs',
                   'rsdt', 'rsuscs', 'rsut', 'rsutcs','ch4global', 'co2mass', 'n2oglobal','mc',
                    'cl', 'cli', 'clw'],
         },
@@ -179,7 +179,7 @@ lab_and_model_settings={
     # Handling field shapes
     "excluded_spshapes": ["XYA-na","XYG-na", # GreenLand and Antarctic grids we do not want to produce
                           "na-A",            # RFMIP.OfflineRad : rld, rlu, rsd, rsu in table Efx ?????
-                          #"Y-P19","Y-P39", "Y-A","Y-na" 
+                          #"Y-P19","Y-P39", "Y-A","Y-na"
                           ],
 
     # Each DR RequestLink links a set of variables with a set of experiments
@@ -222,7 +222,7 @@ lab_and_model_settings={
     #              - Xios id for the latitude axis used for zonal means (mist match latitudes for grid above)
     #              - resolution of the production grid (using CMIP6 conventions),
     #              - grid description
-    "grids" : { 
+    "grids" : {
       "REG"    : {
           "surfex" : [ "gn", "C", "glat","50 km", "regional zone C "] ,
           #"surfex" : [ "gn", "" , "250 km", "native T127 reduced gaussian grid"] ,
@@ -247,7 +247,7 @@ lab_and_model_settings={
     "sampling_timestep" : {
               "REG"   : { "surfex":900., "nemo":1800., "trip":1800. },
               "LR"    : { "surfex":900., "nemo":1800., "trip":1800. },
-              "HR"    : { "surfex":900., "nemo":1800., "trip":1800. }, 
+              "HR"    : { "surfex":900., "nemo":1800., "trip":1800. },
     },
 
     # CFMIP has an elaborated requirement for defining subhr frequency; by default, dr2xml uses 1 time step
@@ -258,7 +258,7 @@ lab_and_model_settings={
                              'surfex' : ['atmos', 'atmos atmosChem', 'atmosChem', 'aerosol', 'atmos land', 'land',
                                          'landIce land',  'aerosol','land landIce',  'landIce', ],
                              'trip'   : [],
-                          }, 
+                          },
     # Some variables, while belonging to a realm, may fall in another XIOS context than the 
     # context which hanldes that realm
     'orphan_variables' : { 'nemo'   : [''],
@@ -291,9 +291,11 @@ lab_and_model_settings={
     "too_long_periods" : ["dec", "yr" ],
 
     # You may add a series of NetCDF attributes in all files for this simulation
-    "non_standard_attributes" : { "arpege_minor_version" : "6.4.1" ,
-                                  "nemo_gelato_commit" : "49095b3accd5d4c_6524fe19b00467a",
-                                  "xios_commit" : "1442-shuffle",},
+    "non_standard_attributes": {
+        #"arpege_minor_version": "6.4.1",
+        #"nemo_gelato_commit": "49095b3accd5d4c_6524fe19b00467a",
+        "xios_commit": "1442-shuffle"
+    },
 
     # If your model has some axis which does not have all its attributes
     # as in DR, and you want dr2xml to fix that it, give here
@@ -365,7 +367,7 @@ lab_and_model_settings={
     # For an extended printout of selected CMOR variables, grouped by variable label
     'print_stats_per_var_label' : False,
 
-    # The ping file defines variable names, which are constructed using CMIP6 
+    # The ping file defines variable names, which are constructed using CMIP6
     # "MIPvarnames" and a prefix which must be set here
     "ping_variables_prefix" : "CMIP6_",
 
@@ -429,15 +431,6 @@ lab_and_model_settings={
     # When not using CMIP6_CV
     'source' : 'CORDEX',
     # Select the attributes to write
-    'print_variables': ['activity_id', 'description', 'comment', 'contact', 'Conventions', 'creation_date',
-                        'data_specs_version', 'dr2xml_version', 'experiment_id', 'EXPID', 'frequency', 'grid',
-                        'grid_label', 'history', 'institution', 'institute_id', 'nominal_resolution', 'product',
-                        'realization_index', 'realm', 'references', 'project_id', 'model_id', 'table_id', 'title',
-                        'tracking_id', 'variable_id', 'xios_commit', 'standard_name', 'long_name', 'units',
-                        'cell_methods', 'cell_measures', 'driving_experiment', 'driving_experiment_name',
-                        'driving_model_id', 'driving_model_ensemble', 'CORDEX_domain', 'grid_mapping',
-                        'Lambert_conformal_longitude_of_central_meridian', 'Lambert_conformal_standard_parallel',
-                        'Lambert_conformal_latitude_of_projection_origin'],
     'project': "CORDEX"
 
 }
