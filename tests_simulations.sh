@@ -4,7 +4,7 @@ run_mode=${1:-"test"} # "ref" or "test"
 to_compare=${2:-"no"} # "changes" or "python" or "no"
 add_coverage=${3:-"no"} # "yes" or "no"
 add_profile=${4:-"no"} # "yes" or "no"
-simulations_to_test=${5:-"a4SST amip land 1pctCO2 piNTCF piControl ssp585 hist_aer piClim aladin levels aladin_nodr C3S-SF RCSM6_HIS"}
+simulations_to_test=${5:-"a4SST amip land 1pctCO2 piNTCF piControl ssp585 hist_aer piClim aladin levels aladin_nodr C3S-SF RCSM6_HIS amip_ESM"}
 
 if [ "${add_coverage}" = "yes" ]; then
   # Remove old results

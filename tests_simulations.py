@@ -121,6 +121,13 @@ def find_data(simulation):
         from tests.test_RCSM6_HIS.input.lab_and_model_settings import lab_and_model_settings
         from tests.test_RCSM6_HIS.input.config import simulation
         from tests.test_RCSM6_HIS.input.config import contexts
+    elif simulation in ["amip_ESM", ]:
+        # Tests RCSM6_HIS
+        from tests.test_amip_ESM.input.config import config
+        from tests.test_amip_ESM.input.simulation_settings import simulation_settings
+        from tests.test_amip_ESM.input.lab_and_model_settings import lab_and_model_settings
+        from tests.test_amip_ESM.input.config import simulation
+        from tests.test_amip_ESM.input.config import contexts
     else:
         raise ValueError("Unknown simulation %s" % simulation)
     return config, simulation_settings, lab_and_model_settings, simulation, contexts
