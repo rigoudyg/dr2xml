@@ -269,7 +269,7 @@ def process_diurnal_cycle(alias):
 
     grid_scalar_id = grid_id + "_plus_scalar"
     grid_scalar.attrib["id"] = grid_scalar_id
-    grid_scalar.append(DR2XMLElement, tag="scalar")
+    grid_scalar.append(DR2XMLElement(tag="scalar"))
     logger.debug("***> %s" % grid_scalar)
     add_value_in_dict_config_variable(variable="grid_defs", key=grid_scalar_id, value=grid_scalar)
 
