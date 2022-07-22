@@ -128,12 +128,16 @@ def read_extra_table(path, table):
     mip_era, tbl = table.split('_')
     json_table = path + "/" + table + ".json"
     json_coordinate = path + "/" + mip_era + "_coordinate.json"
+    #
+    add_single_plevs_suffixes = set()
+    add_multi_plevs_suffixes = set()
     if not os.path.exists(json_table):
         logger.error("Abort: file for extra Table does not exist: " + json_table)
         raise VarsError("Abort: file for extra Table does not exist: " + json_table)
     else:
         tdata = read_json_content(json_table)
         for k, v in tdata["variable_entry"].items():
+            new_plev_suffix = None
             if "frequency" in v:
                 freq = v["frequency"]
             else:
@@ -166,6 +170,9 @@ def read_extra_table(path, table):
                 edim = drdims.replace("longitude|latitude|", "", 1)
                 if any([d.startswith("height") and d.endswith("m") for d in edim.split("|")]):
                     extra_var.set_attributes(spatial_shp="XY-HG")
+                elif any([d.startswith("plev") for d in edim.split("|")]):
+                    extra_var.set_attributes(spatial_shp="XY-" + edim.replace("plev", "P", 1).upper())
+                    new_plev_suffix = extra_var.spatial_shp.replace("XY-P", "", 1)
                 else:
                     extra_var.set_attributes(spatial_shp='XY-' + edim)
                 if v["out_name"] not in dynamic_shapes[edim]:
@@ -198,9 +205,18 @@ def read_extra_table(path, table):
                     extra_var.update_attributes(sdims={extra_dim.label: extra_dim})
                     if v["out_name"] not in dim_from_extra:
                         dim_from_extra[d][v["out_name"]] = (extra_dim.stdname, extra_dim.requested)
-            extra_var.set_attributes(label_without_psuffix=remove_p_suffix(extra_var, multi_plev_suffixes,
-                                                                           single_plev_suffixes,
-                                                                           realms=["atmos", "aerosol", "atmosChem"]))
+                    if extra_var.spatial_shp.startswith("XY-P") and not extra_var.spatial_shp.endswith("HM") and \
+                            len(extra_dim.value) > 0 and len(extra_dim.requested) == 0:
+                        extra_var.set_attributes(spatial_shp=extra_var.spatial_shp + "HM")
+            if new_plev_suffix is not None:
+                if extra_var.spatial_shp.endswith("HM"):
+                    add_single_plevs_suffixes.add(new_plev_suffix)
+                else:
+                    add_multi_plevs_suffixes.add(new_plev_suffix)
+            extra_var.set_attributes(
+                label_without_psuffix=remove_p_suffix(extra_var, multi_plev_suffixes | add_multi_plevs_suffixes,
+                                                      single_plev_suffixes | add_single_plevs_suffixes,
+                                                      realms=["atmos", "aerosol", "atmosChem"]))
             extra_var.set_attributes(ref_var=extra_var.label_without_psuffix)
             extravars.append(extra_var)
     logger.info("For extra table %s (which has %d variables):" % (table, len(extravars)))
