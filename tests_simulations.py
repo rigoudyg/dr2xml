@@ -121,8 +121,15 @@ def find_data(simulation):
         from tests.test_RCSM6_HIS.input.lab_and_model_settings import lab_and_model_settings
         from tests.test_RCSM6_HIS.input.config import simulation
         from tests.test_RCSM6_HIS.input.config import contexts
-    elif simulation in ["amip_ESM", ]:
+    elif simulation in ["RCSM6_HIS_light", ]:
         # Tests RCSM6_HIS
+        from tests.test_RCSM6_HIS_light.input.config import config
+        from tests.test_RCSM6_HIS_light.input.simulation_settings import simulation_settings
+        from tests.test_RCSM6_HIS_light.input.lab_and_model_settings import lab_and_model_settings
+        from tests.test_RCSM6_HIS_light.input.config import simulation
+        from tests.test_RCSM6_HIS_light.input.config import contexts
+    elif simulation in ["amip_ESM", ]:
+        # Tests amip_ESM
         from tests.test_amip_ESM.input.config import config
         from tests.test_amip_ESM.input.simulation_settings import simulation_settings
         from tests.test_amip_ESM.input.lab_and_model_settings import lab_and_model_settings

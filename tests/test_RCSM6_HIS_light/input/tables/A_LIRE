@@ -1,0 +1,6 @@
+Les tables CNRM_* sont dans PATH_EXTRA_TABLES=~sevault/run_couple_med12/xios/RCSM6.1_HIS/dr2xml
+
+
+home_data_request_nemomed12.core.txt: que les monthly, et 2D daily
+home_data_request_nemomed12.tier1.txt: tos 1hr, 3D daily
+home_data_request_nemomed12.tier2.txt: les 2D en 3h

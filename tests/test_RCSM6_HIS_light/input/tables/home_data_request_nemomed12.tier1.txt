@@ -1,0 +1,24 @@
+#------------------------------------------------------------------------------------------------------------------------------------------------------
+#TYPE;    VARNAME;         REALM;     FREQUENCY;     TABLE;                     TEMPORAL_SHP;         SPATIAL_SHP;       EXPNAME;            MIP
+#------------------------------------------------------------------------------------------------------------------------------------------------------
+cmor;    tos;             ocean;     1hr;          NONE;                      time-mean;            XY-na;             ANY;                ANY
+extra;   tml;             ocean;     day;          CNRM_HOMOday;              time-mean;            XY-na;             ANY;                ANY
+extra;   tmltot;          ocean;     day;          CNRM_HOMOday;              time-mean;            XY-na;             ANY;                ANY
+extra;   tmlres;          ocean;     day;          CNRM_HOMOday;              time-mean;            XY-na;             ANY;                ANY
+extra;   tmlxad;          ocean;     day;          CNRM_HOMOday;              time-mean;            XY-na;             ANY;                ANY
+extra;   tmlyad;          ocean;     day;          CNRM_HOMOday;              time-mean;            XY-na;             ANY;                ANY
+extra;   tmlzad;          ocean;     day;          CNRM_HOMOday;              time-mean;            XY-na;             ANY;                ANY
+extra;   tmlldf;          ocean;     day;          CNRM_HOMOday;              time-mean;            XY-na;             ANY;                ANY
+extra;   tmlfor;          ocean;     day;          CNRM_HOMOday;              time-mean;            XY-na;             ANY;                ANY
+extra;   tmlzdf;          ocean;     day;          CNRM_HOMOday;              time-mean;            XY-na;             ANY;                ANY
+extra;   tmlatf;          ocean;     day;          CNRM_HOMOday;              time-mean;            XY-na;             ANY;                ANY
+cmor;    thetao;          ocean;     day;          NONE;                      time-mean;            XY-O;              ANY;                ANY
+cmor;    so;              ocean;     day;          NONE;                      time-mean;            XY-O;              ANY;                ANY
+cmor;    uo;              ocean;     day;          NONE;                      time-mean;            XY-O;              ANY;                ANY
+cmor;    vo;              ocean;     day;          NONE;                      time-mean;            XY-O;              ANY;                ANY
+cmor;    wo;              ocean;     day;          NONE;                      time-mean;            XY-O;              ANY;                ANY
+extra;   rhop;            ocean;     day;          CNRM_HOMOday;              time-mean;            XY-O;              ANY;                ANY
+extra;   votkeavt;        ocean;     day;          CNRM_HOMOday;              time-mean;            XY-O;              ANY;                ANY
+extra;   votke;           ocean;     day;          CNRM_HOMOday;              time-mean;            XY-O;              ANY;                ANY
+extra;   diftrxylo2d;     ocean;     day;          CNRM_HOMOday;              time-mean;            XY-na;             ANY;                ANY
+extra;   diftrblo2d;      ocean;     day;          CNRM_HOMOday;              time-mean;            XY-na;             ANY;                ANY
