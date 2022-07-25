@@ -116,7 +116,7 @@ def create_xios_aux_elmts_defs(sv, alias, table, context, target_hgrid_id, zgrid
     #
     # if ssh[0:4] in ['XY-H','XY-P'] or ssh[0:3] == 'Y-P' or \
     # must exclude COSP outputs which are already interpolated to height or P7 levels
-    logger.info("Deal with %s, %s, %s" % (sv.label, prefix + sv.label, sv.label_without_psuffix))
+    logger.debug("Deal with %s, %s, %s" % (sv.label, prefix + sv.label, sv.label_without_psuffix))
     pingvars = get_config_variable("pingvars")
     if (ssh.startswith('XY-P') and ssh not in ['XY-P7', ]) or \
             ssh.startswith('Y-P') or (ssh in ["XY-perso", ] and prefix + sv.label not in pingvars) or \
@@ -128,7 +128,7 @@ def create_xios_aux_elmts_defs(sv, alias, table, context, target_hgrid_id, zgrid
         grid_with_vertical_interpolation = True
     elif ssh in ["XY-HG", ]:
         # Handle interpolation on a height level over the ground
-        logger.info("Deal with XY-HG spatial shape for %s,%s" % (sv.label, sv.ref_var))
+        logger.debug("Deal with XY-HG spatial shape for %s,%s" % (sv.label, sv.ref_var))
         last_field_id, last_grid_id = process_levels_over_orog(sv, alias, last_grid_id)
 
     #
@@ -578,8 +578,8 @@ def write_xios_file_def_for_svars_list(vars_list, hgrid, xml_file_definition, fr
                                                    target_hgrid_id=target_hgrid_id, zgrid_id=zgrid_id,
                                                    alias_ping=alias_ping, source_grid=source_grid)
             xml_file.append(end_field)
-            actually_written_vars.append((svar.label, svar.long_name, svar.mipTable, svar.frequency, svar.Priority,
-                                          svar.spatial_shp))
+            actually_written_vars.append((svar.label, svar.long_name, svar.stdname, svar.mipTable, svar.frequency,
+                                          svar.Priority, svar.spatial_shp))
     # Add content to xml_file to out
     if found:
         if found_begin_A:

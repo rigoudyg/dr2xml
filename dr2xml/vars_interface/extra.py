@@ -68,30 +68,6 @@ def initialize_dim_variables():
         dims2shape["longitude|latitude"] = "XY-na"
         for sshp in get_list_of_elements_by_id('spatialShape').items:
             dims2shape[sshp.dimensions] = sshp.label
-        # mpmoine_future_modif:dims2shape: ajout a la main des correpondances dims->shapes Primavera qui ne sont pas
-        # couvertes par la DR
-        # mpmoine_note: attention, il faut mettre a jour dim2shape a chaque fois qu'une nouvelle correpondance
-        # est introduite
-        # mpmoine_note: attention, dans les extra-Tables
-        dims2shape['longitude|latitude|height100m'] = 'XY-na'
-        # mpmoine_note: provisoire, XY-P12 juste pour exemple
-        dims2shape['longitude|latitude|plev12'] = 'XY-P12'
-        # mpmoine_zoom_modif:dims2shape:: ajout de XY-P23 qui a disparu de la DR-00.00.04 mais est demande dans les
-        # tables Primavera
-        dims2shape['longitude|latitude|plev23'] = 'XY-P23'
-        # mpmoine_zoom_modif:dims2shape:: ajout de XY-P10 qui n'est pas dans la DR mais demande dans les tables
-        # Primavera
-        dims2shape['longitude|latitude|plev10'] = 'XY-P10'
-        # David : test
-        dims2shape['longitude|latitude|plev7hm'] = 'XY-P7HM'
-        # Romain
-        dims2shape['longitude|latitude|plev19hm'] = 'XY-P19HM'
-        # By level for CORDEX
-        dims2shape['longitude|latitude|plev925'] = 'XY-P925HM'
-        dims2shape['longitude|latitude|plev850'] = 'XY-P850HM'
-        dims2shape['longitude|latitude|plev700'] = 'XY-P700HM'
-        dims2shape['longitude|latitude|plev500'] = 'XY-P500HM'
-        dims2shape['longitude|latitude|plev200'] = 'XY-P200HM'
     #
     if dim2dimid is None:
         dim2dimid = OrderedDict()
@@ -171,7 +147,9 @@ def read_extra_table(path, table):
                 if any([d.startswith("height") and d.endswith("m") for d in edim.split("|")]):
                     extra_var.set_attributes(spatial_shp="XY-HG")
                 elif any([d.startswith("plev") for d in edim.split("|")]):
-                    extra_var.set_attributes(spatial_shp="XY-" + edim.replace("plev", "P", 1).upper())
+                    new_edim = "|".join([d.replace("plev", "P", 1).upper() if d.startswith("plev") else d
+                                         for d in edim.split("|")])
+                    extra_var.set_attributes(spatial_shp="XY-" + new_edim)
                     new_plev_suffix = extra_var.spatial_shp.replace("XY-P", "", 1)
                 else:
                     extra_var.set_attributes(spatial_shp='XY-' + edim)

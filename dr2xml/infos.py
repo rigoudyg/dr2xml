@@ -79,7 +79,7 @@ def print_some_stats(context, svars_per_table, skipped_vars_per_table, actually_
 
         #    ((sv.label,sv.table,sv.frequency,sv.Priority,sv.spatial_shp))
         dic = OrderedDict()
-        for label, long_name, table, frequency, Priority, spatial_shp in actually_written_vars:
+        for label, long_name, stdname, table, frequency, Priority, spatial_shp in actually_written_vars:
             if frequency not in dic:
                 dic[frequency] = OrderedDict()
             if spatial_shp not in dic[frequency]:
@@ -114,28 +114,31 @@ def print_some_stats(context, svars_per_table, skipped_vars_per_table, actually_
             logger.info("\n\nSome Statistics on actually written variables per variable...")
             dic = OrderedDict()
             dic_ln = defaultdict(set)
-            for label, long_name, table, frequency, Priority, spatial_shp in actually_written_vars:
+            dic_sn = defaultdict(set)
+            for label, long_name, stdname, table, frequency, Priority, spatial_shp in actually_written_vars:
                 dic_ln[label].add(long_name)
+                dic_sn[label].add(stdname)
                 if label not in dic:
                     dic[label] = list()
                 dic[label].append(frequency + '_' + table + '_' + spatial_shp + '_' + str(Priority))
-            for label in dic_ln:
-                dic_ln[label] = sorted(list(dic_ln[label]))
 
-            list_labels = list(dic)
-            list_labels.sort()
-            if len(list_labels) > 0:
-                logger.info(">>> DBG >>> %s" % " ".join(list_labels))
+            list_labels = sorted(list(dic))
 
             for label in list_labels:
+                ln = sorted(list(dic_ln[label]))
+                sn = sorted(list(dic_sn[label]))
                 logger.info((14 + len(label)) * "-")
-                logger.info("--- VARNAME: %s: %s" % (label, dic_ln[label][0]))
+                logger.info("--- VARNAME: %s: %s" % (label, ln[0]))
                 logger.info((14 + len(label)) * "-")
                 for val in dic[label]:
                     logger.info(14 * " " + "* %20s %s" % (val, label))
-                if len(dic_ln[label]) > 1:
+                if len(ln) > 1:
                     logger.warning(14 * " " + "Warning: several long names are available:")
-                    for long_name in dic_ln[label]:
+                    for long_name in ln:
                         logger.warning(18 * " " + "- %s" % long_name)
+                if len(sn) > 1:
+                    logger.warning(14 * " " + "Warning: several standard names are available:")
+                    for stdname in sn:
+                        logger.warning(18 * " " + "- %s" % stdname)
 
         return True
