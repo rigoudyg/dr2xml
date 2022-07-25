@@ -199,6 +199,7 @@
    <field id="CMIP6_smkrfrluscs"   field_ref="smkrfrluscs" />
    <field id="CMIP6_icod"          field_ref="icod" />
    <field id="CMIP6_lcod"          field_ref="lcod" /> 
+   <field id="CMIP6_reffclw"       field_ref="reffclw" />
    <field id="CMIP6_reffclwtopcnrm" field_ref="reffclwtop" />
    <field id="CMIP6_reffclitop"    field_ref="reffclitop" />
    <field id="CMIP6_cdnctop"       field_ref="cdnctop" />

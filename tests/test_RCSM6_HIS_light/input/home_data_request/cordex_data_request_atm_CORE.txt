@@ -6,7 +6,7 @@ cmor;    sftlf;           atmos;     fx;           CMIP_fx;                   No
 cmor;    clt;             atmos;     mon;          CMIP_Amon;                 time-mean;            XY-na;             ANY;                ANY
 cmor;    evspsbl;         atmos;     mon;          CMIP_Amon;                 time-mean;            XY-na;             ANY;                ANY
 cmor;    hurs;            atmos;     mon;          CMIP_Amon;                 time-mean;            XY-na;             ANY;                ANY
-cmor;    huss;            atmos;     mon;          CMIP_Amon;                 time-mean;            xy-na;             any;                any
+cmor;    huss;            atmos;     mon;          CMIP_Amon;                 time-mean;            XY-na;             ANY;                ANY
 cmor;    pr;              atmos;     mon;          CMIP_Amon;                 time-mean;            XY-na;             ANY;                ANY
 cmor;    ps;              atmos;     mon;          CMIP_Amon;                 time-mean;            XY-na;             ANY;                ANY
 cmor;    psl;             atmos;     mon;          CMIP_Amon;                 time-mean;            XY-na;             ANY;                ANY

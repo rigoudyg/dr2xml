@@ -229,7 +229,7 @@
             "units": "kg m-3", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
-            "long_name": "Concentration of Dry Aerosol Organic Matter", 
+            "long_name": "Concentration of Organic Matter Aerosol", 
             "comment": "", 
             "dimensions": "longitude latitude alevel time", 
             "out_name": "concoa", 

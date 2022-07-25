@@ -286,7 +286,7 @@
             "units": "kg m-3", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
-            "long_name": "Concentration of Dry Aerosol Organic Matter", 
+            "long_name": "Concentration of Organic Matter Aerosol", 
             "comment": "", 
             "dimensions": "longitude latitude plev19aer time", 
             "out_name": "concoa", 
@@ -529,7 +529,7 @@
         "ext230ss": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea-salt_aerosol_particles", 
+            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea_salt_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -548,7 +548,7 @@
         "ext230ssbin1": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea-salt_bin1_aerosol_particles", 
+            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea_salt_bin1_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -567,7 +567,7 @@
         "ext230ssbin2": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea-salt_bin2_aerosol_particles", 
+            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea_salt_bin2_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -605,7 +605,7 @@
         "ext230dustbin1": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea-salt_bin1_aerosol_particles", 
+            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea_salt_bin1_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -624,7 +624,7 @@
         "ext230dustbin2": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea-salt_bin2_aerosol_particles", 
+            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea_salt_bin2_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -833,7 +833,7 @@
         "ext350ss": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea-salt_aerosol_particles", 
+            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea_salt_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -852,7 +852,7 @@
         "ext350ssbin1": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea-salt_bin1_aerosol_particles", 
+            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea_salt_bin1_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -871,7 +871,7 @@
         "ext350ssbin2": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea-salt_bin2_aerosol_particles", 
+            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea_salt_bin2_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -909,7 +909,7 @@
         "ext350dustbin1": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea-salt_bin1_aerosol_particles", 
+            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea_salt_bin1_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -928,7 +928,7 @@
         "ext350dustbin2": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea-salt_bin2_aerosol_particles", 
+            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea_salt_bin2_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -1441,7 +1441,7 @@
         "ext1000ss": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea-salt_aerosol_particles", 
+            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea_salt_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -1460,7 +1460,7 @@
         "ext1000ssbin1": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea-salt_bin1_aerosol_particles", 
+            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea_salt_bin1_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -1479,7 +1479,7 @@
         "ext1000ssbin2": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea-salt_bin2_aerosol_particles", 
+            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea_salt_bin2_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -1517,7 +1517,7 @@
         "ext1000dustbin1": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea-salt_bin1_aerosol_particles", 
+            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea_salt_bin1_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -1536,7 +1536,7 @@
         "ext1000dustbin2": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea-salt_bin2_aerosol_particles", 
+            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea_salt_bin2_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -1745,7 +1745,7 @@
         "ext1780ss": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea-salt_aerosol_particles", 
+            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea_salt_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -1764,7 +1764,7 @@
         "ext1780ssbin1": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea-salt_bin1_aerosol_particles", 
+            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea_salt_bin1_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -1783,7 +1783,7 @@
         "ext1780ssbin2": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea-salt_bin2_aerosol_particles", 
+            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea_salt_bin2_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -1821,7 +1821,7 @@
         "ext1780dustbin1": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea-salt_bin1_aerosol_particles", 
+            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea_salt_bin1_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -1840,7 +1840,7 @@
         "ext1780dustbin2": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea-salt_bin2_aerosol_particles", 
+            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea_salt_bin2_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -2049,7 +2049,7 @@
         "ext3125ss": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea-salt_aerosol_particles", 
+            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea_salt_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -2068,7 +2068,7 @@
         "ext3125ssbin1": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea-salt_bin1_aerosol_particles", 
+            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea_salt_bin1_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -2087,7 +2087,7 @@
         "ext3125ssbin2": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea-salt_bin2_aerosol_particles", 
+            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea_salt_bin2_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -2125,7 +2125,7 @@
         "ext3125dustbin1": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea-salt_bin1_aerosol_particles", 
+            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea_salt_bin1_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -2144,7 +2144,7 @@
         "ext3125dustbin2": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea-salt_bin2_aerosol_particles", 
+            "standard_name" : "volume_extinction_coefficient_in_air_due_to_sea_salt_bin2_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -2371,7 +2371,7 @@
         "scat230ss": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea-salt_aerosol_particles", 
+            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea_salt_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -2390,7 +2390,7 @@
         "scat230ssbin1": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea-salt_bin1_aerosol_particles", 
+            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea_salt_bin1_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -2409,7 +2409,7 @@
         "scat230ssbin2": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea-salt_bin2_aerosol_particles", 
+            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea_salt_bin2_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -2447,7 +2447,7 @@
         "scat230dustbin1": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea-salt_bin1_aerosol_particles", 
+            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea_salt_bin1_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -2466,7 +2466,7 @@
         "scat230dustbin2": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea-salt_bin2_aerosol_particles", 
+            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea_salt_bin2_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -2675,7 +2675,7 @@
         "scat350ss": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea-salt_aerosol_particles", 
+            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea_salt_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -2694,7 +2694,7 @@
         "scat350ssbin1": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea-salt_bin1_aerosol_particles", 
+            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea_salt_bin1_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -2713,7 +2713,7 @@
         "scat350ssbin2": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea-salt_bin2_aerosol_particles", 
+            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea_salt_bin2_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -2751,7 +2751,7 @@
         "scat350dustbin1": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea-salt_bin1_aerosol_particles", 
+            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea_salt_bin1_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -2770,7 +2770,7 @@
         "scat350dustbin2": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea-salt_bin2_aerosol_particles", 
+            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea_salt_bin2_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -2979,7 +2979,7 @@
         "scat550ss": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea-salt_aerosol_particles", 
+            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea_salt_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -2998,7 +2998,7 @@
         "scat550ssbin1": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea-salt_bin1_aerosol_particles", 
+            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea_salt_bin1_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -3017,7 +3017,7 @@
         "scat550ssbin2": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea-salt_bin2_aerosol_particles", 
+            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea_salt_bin2_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -3055,7 +3055,7 @@
         "scat550dustbin1": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea-salt_bin1_aerosol_particles", 
+            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea_salt_bin1_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -3074,7 +3074,7 @@
         "scat550dustbin2": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea-salt_bin2_aerosol_particles", 
+            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea_salt_bin2_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -3283,7 +3283,7 @@
         "scat1000ss": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea-salt_aerosol_particles", 
+            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea_salt_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -3302,7 +3302,7 @@
         "scat1000ssbin1": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea-salt_bin1_aerosol_particles", 
+            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea_salt_bin1_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -3321,7 +3321,7 @@
         "scat1000ssbin2": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea-salt_bin2_aerosol_particles", 
+            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea_salt_bin2_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -3359,7 +3359,7 @@
         "scat1000dustbin1": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea-salt_bin1_aerosol_particles", 
+            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea_salt_bin1_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -3378,7 +3378,7 @@
         "scat1000dustbin2": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea-salt_bin2_aerosol_particles", 
+            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea_salt_bin2_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -3587,7 +3587,7 @@
         "scat1780ss": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea-salt_aerosol_particles", 
+            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea_salt_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -3606,7 +3606,7 @@
         "scat1780ssbin1": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea-salt_bin1_aerosol_particles", 
+            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea_salt_bin1_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -3625,7 +3625,7 @@
         "scat1780ssbin2": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea-salt_bin2_aerosol_particles", 
+            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea_salt_bin2_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -3663,7 +3663,7 @@
         "scat1780dustbin1": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea-salt_bin1_aerosol_particles", 
+            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea_salt_bin1_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -3682,7 +3682,7 @@
         "scat1780dustbin2": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea-salt_bin2_aerosol_particles", 
+            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea_salt_bin2_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -3891,7 +3891,7 @@
         "scat3125ss": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea-salt_aerosol_particles", 
+            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea_salt_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -3910,7 +3910,7 @@
         "scat3125ssbin1": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea-salt_bin1_aerosol_particles", 
+            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea_salt_bin1_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -3929,7 +3929,7 @@
         "scat3125ssbin2": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea-salt_bin2_aerosol_particles", 
+            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea_salt_bin2_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -3967,7 +3967,7 @@
         "scat3125dustbin1": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea-salt_bin1_aerosol_particles", 
+            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea_salt_bin1_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -3986,7 +3986,7 @@
         "scat3125dustbin2": {
             "frequency": "mon", 
             "modeling_realm": "aerosol",
-            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea-salt_bin2_aerosol_particles", 
+            "standard_name" : "volume_scattering_coefficient_in_air_due_to_sea_salt_bin2_aerosol_particles", 
             "units": "m-1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 

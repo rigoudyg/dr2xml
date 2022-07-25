@@ -128,7 +128,6 @@ cmor;    prsn;            atmos;     1hr;          NONE;                      ti
 cmor;    prw;             atmos;     1hrPt;        NONE;                      time-point;           XY-na;             ANY;                ANY
 cmor;    rlus;            atmos;     1hr;          NONE;                      time-mean;            XY-na;             ANY;                ANY
 cmor;    rlut;            atmos;     1hr;          NONE;                      time-mean;            XY-na;             ANY;                ANY
-cmor;    rsds;            atmos;     1hr;          NONE;                      time-mean;            XY-na;             ANY;                ANY
 extra;   rsdsdir;         atmos;     1hr;          CNRM_HOMAL1hr;             time-mean;            XY-na;             ANY;                ANY
 cmor;    rsdt;            atmos;     1hr;          NONE;                      time-mean;            XY-na;             ANY;                ANY
 cmor;    rsus;            atmos;     1hr;          NONE;                      time-mean;            XY-na;             ANY;                ANY

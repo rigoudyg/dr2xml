@@ -5,7 +5,17 @@ from .config import path_table, path_homedr
 
 simulation_settings = {
 	'comment': '',
-	'listof_home_vars': '{}/my_home_data_request.txt'.format(path_homedr),
+	'listof_home_vars': '{}/cordex_data_request_atm_CORE.txt {}/cordex_data_request_aero_CORE.txt '
+	                    '{}/cordex_data_request_atm_Tier1_mon.txt {}/cordex_data_request_atm_Tier1_day_hr.txt '
+	                    '{}/cordex_data_request_atm_Tier2_mon.txt {}/cordex_data_request_atm_Tier2_day_hr.txt '
+	                    '{}/cordex_data_request_aero_Tier1_mon.txt {}/cordex_data_request_aero_Tier1_day_hr.txt '
+	                    '{}/cordex_data_request_aero_Tier2_mon.txt '
+	                    '{}/cordex_data_request_aero_Tier2_day_hr.txt '
+	                    '{}/home_data_request_aladin_cordex_atm.txt '
+	                    '{}/home_data_request_aladin_cordex_aero.txt'.format(
+		path_homedr, path_homedr, path_homedr, path_homedr, path_homedr, path_homedr, path_homedr, path_homedr,
+		path_homedr, path_homedr, path_homedr, path_homedr
+	),
 	'activity_id': 'CORDEX',
 	'bypass_CV_components': True,
 	'expid_in_filename': 'historical',

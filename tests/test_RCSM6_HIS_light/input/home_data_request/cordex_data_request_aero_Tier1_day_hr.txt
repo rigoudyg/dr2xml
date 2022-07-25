@@ -95,14 +95,9 @@ extra;   scat550aer;      aerosol;   3hrPt;        CNRM_HOMP19AER3hrPt;       ti
 extra;   sconcbc;         aerosol;   1hrPt;        CNRM_HOMAER1hrPt;          time-point;           XY-na;             ANY;                ANY
 extra;   sconcoa;         aerosol;   1hrPt;        CNRM_HOMAER1hrPt;          time-point;           XY-na;             ANY;                ANY
 extra;   sconcss;         aerosol;   1hrPt;        CNRM_HOMAER1hrPt;          time-point;           XY-na;             ANY;                ANY
-extra;   sconcssbin1;     aerosol;   1hrPt;        CNRM_HOMAER1hrPt;          time-point;           XY-na;             ANY;                ANY
-extra;   sconcssbin2;     aerosol;   1hrPt;        CNRM_HOMAER1hrPt;          time-point;           XY-na;             ANY;                ANY
 extra;   sconcdust;       aerosol;   1hrPt;        CNRM_HOMAER1hrPt;          time-point;           XY-na;             ANY;                ANY
-extra;   sconcdustbin1;   aerosol;   1hrPt;        CNRM_HOMAER1hrPt;          time-point;           XY-na;             ANY;                ANY
-extra;   sconcdustbin2;   aerosol;   1hrPt;        CNRM_HOMAER1hrPt;          time-point;           XY-na;             ANY;                ANY
 extra;   sconcso4;        aerosol;   1hrPt;        CNRM_HOMAER1hrPt;          time-point;           XY-na;             ANY;                ANY
 extra;   sconcno3;        aerosol;   1hrPt;        CNRM_HOMAER1hrPt;          time-point;           XY-na;             ANY;                ANY
-extra;   sconcno3bin1;    aerosol;   1hrPt;        CNRM_HOMAER1hrPt;          time-point;           XY-na;             ANY;                ANY
 extra;   sconcnh4;        aerosol;   1hrPt;        CNRM_HOMAER1hrPt;          time-point;           XY-na;             ANY;                ANY
 extra;   seddust;         aerosol;   1hr;          CNRM_HOMAER1hr;            time-mean;            XY-na;             ANY;                ANY
 extra;   sedno3;          aerosol;   1hr;          CNRM_HOMAER1hr;            time-mean;            XY-na;             ANY;                ANY

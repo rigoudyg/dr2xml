@@ -111,7 +111,7 @@
         "abs230ss": {
             "frequency": "1hr", 
             "modeling_realm": "aerosol", 
-            "standard_name" : "atmosphere_absorption_optical_thickness_due_to_particulate_sea-salt_ambient_aerosol", 
+            "standard_name" : "atmosphere_absorption_optical_thickness_due_to_particulate_sea_salt_ambient_aerosol", 
             "units": "1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -130,7 +130,7 @@
         "abs230ssbin1": {
             "frequency": "1hr", 
             "modeling_realm": "aerosol", 
-            "standard_name" : "atmosphere_absorption_optical_thickness_due_to_particulate_sea-salt_bin1_ambient_aerosol", 
+            "standard_name" : "atmosphere_absorption_optical_thickness_due_to_particulate_sea_salt_bin1_ambient_aerosol", 
             "units": "1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -149,7 +149,7 @@
         "abs230ssbin2": {
             "frequency": "1hr", 
             "modeling_realm": "aerosol", 
-            "standard_name" : "atmosphere_absorption_optical_thickness_due_to_particulate_sea-salt_bin2_ambient_aerosol", 
+            "standard_name" : "atmosphere_absorption_optical_thickness_due_to_particulate_sea_salt_bin2_ambient_aerosol", 
             "units": "1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -415,7 +415,7 @@
         "abs350ss": {
             "frequency": "1hr", 
             "modeling_realm": "aerosol", 
-            "standard_name" : "atmosphere_absorption_optical_thickness_due_to_particulate_sea-salt_ambient_aerosol", 
+            "standard_name" : "atmosphere_absorption_optical_thickness_due_to_particulate_sea_salt_ambient_aerosol", 
             "units": "1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -434,7 +434,7 @@
         "abs350ssbin1": {
             "frequency": "1hr", 
             "modeling_realm": "aerosol", 
-            "standard_name" : "atmosphere_absorption_optical_thickness_due_to_particulate_sea-salt_bin1_ambient_aerosol", 
+            "standard_name" : "atmosphere_absorption_optical_thickness_due_to_particulate_sea_salt_bin1_ambient_aerosol", 
             "units": "1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -453,7 +453,7 @@
         "abs350ssbin2": {
             "frequency": "1hr", 
             "modeling_realm": "aerosol", 
-            "standard_name" : "atmosphere_absorption_optical_thickness_due_to_particulate_sea-salt_bin2_ambient_aerosol", 
+            "standard_name" : "atmosphere_absorption_optical_thickness_due_to_particulate_sea_salt_bin2_ambient_aerosol", 
             "units": "1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -700,7 +700,7 @@
         "abs550ss": {
             "frequency": "1hr", 
             "modeling_realm": "aerosol", 
-            "standard_name" : "atmosphere_absorption_optical_thickness_due_to_particulate_sea-salt_ambient_aerosol", 
+            "standard_name" : "atmosphere_absorption_optical_thickness_due_to_particulate_sea_salt_ambient_aerosol", 
             "units": "1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -719,7 +719,7 @@
         "abs550ssbin1": {
             "frequency": "1hr", 
             "modeling_realm": "aerosol", 
-            "standard_name" : "atmosphere_absorption_optical_thickness_due_to_particulate_sea-salt_bin1_ambient_aerosol", 
+            "standard_name" : "atmosphere_absorption_optical_thickness_due_to_particulate_sea_salt_bin1_ambient_aerosol", 
             "units": "1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -738,7 +738,7 @@
         "abs550ssbin2": {
             "frequency": "1hr", 
             "modeling_realm": "aerosol", 
-            "standard_name" : "atmosphere_absorption_optical_thickness_due_to_particulate_sea-salt_bin2_ambient_aerosol", 
+            "standard_name" : "atmosphere_absorption_optical_thickness_due_to_particulate_sea_salt_bin2_ambient_aerosol", 
             "units": "1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -1004,7 +1004,7 @@
         "abs1000ss": {
             "frequency": "1hr", 
             "modeling_realm": "aerosol", 
-            "standard_name" : "atmosphere_absorption_optical_thickness_due_to_particulate_sea-salt_ambient_aerosol", 
+            "standard_name" : "atmosphere_absorption_optical_thickness_due_to_particulate_sea_salt_ambient_aerosol", 
             "units": "1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -1023,7 +1023,7 @@
         "abs1000ssbin1": {
             "frequency": "1hr", 
             "modeling_realm": "aerosol", 
-            "standard_name" : "atmosphere_absorption_optical_thickness_due_to_particulate_sea-salt_bin1_ambient_aerosol", 
+            "standard_name" : "atmosphere_absorption_optical_thickness_due_to_particulate_sea_salt_bin1_ambient_aerosol", 
             "units": "1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -1042,7 +1042,7 @@
         "abs1000ssbin2": {
             "frequency": "1hr", 
             "modeling_realm": "aerosol", 
-            "standard_name" : "atmosphere_absorption_optical_thickness_due_to_particulate_sea-salt_bin2_ambient_aerosol", 
+            "standard_name" : "atmosphere_absorption_optical_thickness_due_to_particulate_sea_salt_bin2_ambient_aerosol", 
             "units": "1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -1308,7 +1308,7 @@
         "abs1780ss": {
             "frequency": "1hr", 
             "modeling_realm": "aerosol", 
-            "standard_name" : "atmosphere_absorption_optical_thickness_due_to_particulate_sea-salt_ambient_aerosol", 
+            "standard_name" : "atmosphere_absorption_optical_thickness_due_to_particulate_sea_salt_ambient_aerosol", 
             "units": "1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -1327,7 +1327,7 @@
         "abs1780ssbin1": {
             "frequency": "1hr", 
             "modeling_realm": "aerosol", 
-            "standard_name" : "atmosphere_absorption_optical_thickness_due_to_particulate_sea-salt_bin1_ambient_aerosol", 
+            "standard_name" : "atmosphere_absorption_optical_thickness_due_to_particulate_sea_salt_bin1_ambient_aerosol", 
             "units": "1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -1346,7 +1346,7 @@
         "abs1780ssbin2": {
             "frequency": "1hr", 
             "modeling_realm": "aerosol", 
-            "standard_name" : "atmosphere_absorption_optical_thickness_due_to_particulate_sea-salt_bin2_ambient_aerosol", 
+            "standard_name" : "atmosphere_absorption_optical_thickness_due_to_particulate_sea_salt_bin2_ambient_aerosol", 
             "units": "1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -1612,7 +1612,7 @@
         "abs3125ss": {
             "frequency": "1hr", 
             "modeling_realm": "aerosol", 
-            "standard_name" : "atmosphere_absorption_optical_thickness_due_to_particulate_sea-salt_ambient_aerosol", 
+            "standard_name" : "atmosphere_absorption_optical_thickness_due_to_particulate_sea_salt_ambient_aerosol", 
             "units": "1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -1631,7 +1631,7 @@
         "abs3125ssbin1": {
             "frequency": "1hr", 
             "modeling_realm": "aerosol", 
-            "standard_name" : "atmosphere_absorption_optical_thickness_due_to_particulate_sea-salt_bin1_ambient_aerosol", 
+            "standard_name" : "atmosphere_absorption_optical_thickness_due_to_particulate_sea_salt_bin1_ambient_aerosol", 
             "units": "1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -1650,7 +1650,7 @@
         "abs3125ssbin2": {
             "frequency": "1hr", 
             "modeling_realm": "aerosol", 
-            "standard_name" : "atmosphere_absorption_optical_thickness_due_to_particulate_sea-salt_bin2_ambient_aerosol", 
+            "standard_name" : "atmosphere_absorption_optical_thickness_due_to_particulate_sea_salt_bin2_ambient_aerosol", 
             "units": "1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -4689,7 +4689,7 @@
         "od230ss": {
             "frequency": "1hr", 
             "modeling_realm": "aerosol", 
-            "standard_name" : "atmosphere_optical_thickness_due_to_particulate_sea-salt_ambient_aerosol", 
+            "standard_name" : "atmosphere_optical_thickness_due_to_particulate_sea_salt_ambient_aerosol", 
             "units": "1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -4708,7 +4708,7 @@
         "od230ssbin1": {
             "frequency": "1hr", 
             "modeling_realm": "aerosol", 
-            "standard_name" : "atmosphere_optical_thickness_due_to_particulate_sea-salt_bin1_ambient_aerosol", 
+            "standard_name" : "atmosphere_optical_thickness_due_to_particulate_sea_salt_bin1_ambient_aerosol", 
             "units": "1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -4727,7 +4727,7 @@
         "od230ssbin2": {
             "frequency": "1hr", 
             "modeling_realm": "aerosol", 
-            "standard_name" : "atmosphere_optical_thickness_due_to_particulate_sea-salt_bin2_ambient_aerosol", 
+            "standard_name" : "atmosphere_optical_thickness_due_to_particulate_sea_salt_bin2_ambient_aerosol", 
             "units": "1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -4802,7 +4802,7 @@
         "od350ss": {
             "frequency": "1hr", 
             "modeling_realm": "aerosol", 
-            "standard_name" : "atmosphere_optical_thickness_due_to_particulate_sea-salt_ambient_aerosol", 
+            "standard_name" : "atmosphere_optical_thickness_due_to_particulate_sea_salt_ambient_aerosol", 
             "units": "1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -4821,7 +4821,7 @@
         "od350ssbin1": {
             "frequency": "1hr", 
             "modeling_realm": "aerosol", 
-            "standard_name" : "atmosphere_optical_thickness_due_to_particulate_sea-salt_bin1_ambient_aerosol", 
+            "standard_name" : "atmosphere_optical_thickness_due_to_particulate_sea_salt_bin1_ambient_aerosol", 
             "units": "1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -4840,7 +4840,7 @@
         "od350ssbin2": {
             "frequency": "1hr", 
             "modeling_realm": "aerosol", 
-            "standard_name" : "atmosphere_optical_thickness_due_to_particulate_sea-salt_bin2_ambient_aerosol", 
+            "standard_name" : "atmosphere_optical_thickness_due_to_particulate_sea_salt_bin2_ambient_aerosol", 
             "units": "1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -5390,7 +5390,7 @@
         "od1000ss": {
             "frequency": "1hr", 
             "modeling_realm": "aerosol", 
-            "standard_name" : "atmosphere_optical_thickness_due_to_particulate_sea-salt_ambient_aerosol", 
+            "standard_name" : "atmosphere_optical_thickness_due_to_particulate_sea_salt_ambient_aerosol", 
             "units": "1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -5409,7 +5409,7 @@
         "od1000ssbin1": {
             "frequency": "1hr", 
             "modeling_realm": "aerosol", 
-            "standard_name" : "atmosphere_optical_thickness_due_to_particulate_sea-salt_bin1_ambient_aerosol", 
+            "standard_name" : "atmosphere_optical_thickness_due_to_particulate_sea_salt_bin1_ambient_aerosol", 
             "units": "1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -5428,7 +5428,7 @@
         "od1000ssbin2": {
             "frequency": "1hr", 
             "modeling_realm": "aerosol", 
-            "standard_name" : "atmosphere_optical_thickness_due_to_particulate_sea-salt_bin2_ambient_aerosol", 
+            "standard_name" : "atmosphere_optical_thickness_due_to_particulate_sea_salt_bin2_ambient_aerosol", 
             "units": "1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -5712,7 +5712,7 @@
         "od1780ss": {
             "frequency": "1hr", 
             "modeling_realm": "aerosol", 
-            "standard_name" : "atmosphere_optical_thickness_due_to_particulate_sea-salt_ambient_aerosol", 
+            "standard_name" : "atmosphere_optical_thickness_due_to_particulate_sea_salt_ambient_aerosol", 
             "units": "1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -5731,7 +5731,7 @@
         "od1780ssbin1": {
             "frequency": "1hr", 
             "modeling_realm": "aerosol", 
-            "standard_name" : "atmosphere_optical_thickness_due_to_particulate_sea-salt_bin1_ambient_aerosol", 
+            "standard_name" : "atmosphere_optical_thickness_due_to_particulate_sea_salt_bin1_ambient_aerosol", 
             "units": "1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -5750,7 +5750,7 @@
         "od1780ssbin2": {
             "frequency": "1hr", 
             "modeling_realm": "aerosol", 
-            "standard_name" : "atmosphere_optical_thickness_due_to_particulate_sea-salt_bin2_ambient_aerosol", 
+            "standard_name" : "atmosphere_optical_thickness_due_to_particulate_sea_salt_bin2_ambient_aerosol", 
             "units": "1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -6034,7 +6034,7 @@
         "od3125ss": {
             "frequency": "1hr", 
             "modeling_realm": "aerosol", 
-            "standard_name" : "atmosphere_optical_thickness_due_to_particulate_sea-salt_ambient_aerosol", 
+            "standard_name" : "atmosphere_optical_thickness_due_to_particulate_sea_salt_ambient_aerosol", 
             "units": "1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -6053,7 +6053,7 @@
         "od3125ssbin1": {
             "frequency": "1hr", 
             "modeling_realm": "aerosol", 
-            "standard_name" : "atmosphere_optical_thickness_due_to_particulate_sea-salt_bin1_ambient_aerosol", 
+            "standard_name" : "atmosphere_optical_thickness_due_to_particulate_sea_salt_bin1_ambient_aerosol", 
             "units": "1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -6072,7 +6072,7 @@
         "od3125ssbin2": {
             "frequency": "1hr", 
             "modeling_realm": "aerosol", 
-            "standard_name" : "atmosphere_optical_thickness_due_to_particulate_sea-salt_bin2_ambient_aerosol", 
+            "standard_name" : "atmosphere_optical_thickness_due_to_particulate_sea_salt_bin2_ambient_aerosol", 
             "units": "1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
@@ -6361,7 +6361,7 @@
             "units": "1",
             "cell_methods": "area: time: mean",
             "cell_measures": "area: areacella",
-            "long_name": "Ambient Aerosol Aerosol Thickness at 550nm as Seen in the Radiative Scheme",
+            "long_name": "Ambient Aerosol Absorption Optical Thickness at 550nm as Seen in the Radiative Scheme",
             "comment": "",
             "dimensions": "longitude latitude time",
             "out_name": "RADabs550aer",
@@ -6532,7 +6532,7 @@
             "units": "kg m-3", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
-            "long_name": "Surface Concentration of Dry Aerosol Organic Matter", 
+            "long_name": "Surface Concentration of Organic Matter Aerosol", 
             "comment": "", 
             "dimensions": "longitude latitude time", 
             "out_name": "sconcoa", 
@@ -7976,7 +7976,7 @@
             "units": "1", 
             "cell_methods": "area: time: mean", 
             "cell_measures": "area: areacella", 
-            "long_name": "Ambient Aerosol Aerosol Thickness at 550nm in the aerosol scheme", 
+            "long_name": "Ambient Aerosol Absorption Optical Thickness at 550nm in the aerosol scheme", 
             "comment": "", 
             "dimensions": "longitude latitude time", 
             "out_name": "TACabs550aer", 
