@@ -140,7 +140,7 @@ def find_data(simulation):
     return config, simulation_settings, lab_and_model_settings, simulation, contexts
 
 
-def test_function(simulation, run_mode, python_version, config_dict, contexts, lset, sset, add_profile):
+def test_function(simulation, run_mode, python_version, config_dict, contexts, lset, sset, add_profile, check_time_file):
     print("Test simulation:", simulation)
     output_directory = os.sep.join([os.sep.join(os.path.abspath(__file__).split(os.sep)[:-1]), "tests",
                                     "test_{}".format(simulation), "output_{}_{}".format(run_mode, python_version)])
@@ -152,6 +152,7 @@ def test_function(simulation, run_mode, python_version, config_dict, contexts, l
         os.mkdir(output_directory)
 
     old_stdout = sys.stdout
+    time_stats = dict()
     with codecs.open("dr2xml_log".format(run_mode), 'w', encoding="utf-8") as logfile:
         for context in contexts:
             print("Execute context %s" % context)
@@ -172,7 +173,12 @@ def test_function(simulation, run_mode, python_version, config_dict, contexts, l
                 ps.print_stats()
                 print(s.getvalue())
             sys.stdout = old_stdout
-            print("It took %d s" % (time.time() - start_time))
+            time_stats[context] = time.time() - start_time
+            print("It took %d s" % time_stats[context])
+    if check_time_file not in ["no", ]:
+        dr2xml_version = "TODO: dr2xml version"
+        with open(check_time_file, "a") as check_time_fic:
+            check_time_fic.writelines(["%s;%s;%s;%s%s" % (dr2xml_version, simulation, context, time_stats[context], os.linesep) for context in contexts])
 
     files_to_move = glob.glob(os.sep.join([os.getcwd(), "dr2xml_*"]))
     for file_to_move in files_to_move:
@@ -199,17 +205,19 @@ if __name__ == "__main__":
     parser.add_argument("--to_compare", choices=["python", "changes", "no"], default="no",
                         help="Should a comparison be done?")
     parser.add_argument("--add_profile", choices=["yes", "no"], default="no", help="Should profiling be done?")
+    parser.add_argument("--check_time_file", default="no", help="File in which the time statistics should be written")
     args = parser.parse_args()
 
     simulation = args.simulation
     run_mode = args.run_mode
     to_compare = args.to_compare
     add_profile = args.add_profile
+    check_time_file = args.check_time_file
     if add_profile in ["yes", ] and to_compare not in ["no", ]:
         raise ValueError("If profiling is on, comparison will fail.")
 
     (config_dict, sset, lset, simulation_name, contexts) = find_data(simulation)
-    test_function(simulation_name, run_mode, python_version, config_dict, contexts, lset, sset, add_profile)
+    test_function(simulation_name, run_mode, python_version, config_dict, contexts, lset, sset, add_profile, check_time_file)
 
     if run_mode in ["test", ] and to_compare not in ["no", ]:
         output_dir = os.sep.join([os.sep.join(os.path.abspath(__file__).split(os.sep)[:-1]), "tests",
