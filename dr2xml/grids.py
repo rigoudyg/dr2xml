@@ -82,8 +82,13 @@ def create_grid_def(axis_def, axis_name, src_grid_id):
     src_grid_def = get_grid_def(src_grid_id)
     #
     # Retrieve axis key and remove id= from axis definition
-    new_axis_def = axis_def.copy()
-    axis_key = new_axis_def.attrib.pop("id")
+    xios_version = get_settings_values("internal")["xios_version"]
+    if xios_version <= 2:
+        new_axis_def = axis_def.copy()
+        axis_key = new_axis_def.attrib.pop("id")
+    else:
+        axis_key = axis_def.attrib["id"]
+        new_axis_def = DR2XMLElement(tag="axis", axis_ref=axis_key)
     target_grid_id = src_grid_id + "_" + axis_key
     #
     # Change only first instance of axis_ref, which is assumed to match the vertical dimension

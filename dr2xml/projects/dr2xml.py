@@ -13,6 +13,13 @@ from dr2xml.projects.projects_interface_definitions import ValueSettings, Parame
 parent_project_settings = None
 
 internal_values = dict(
+	xios_version=ParameterSettings(
+		key="xios_version",
+		default_values=[
+			ValueSettings(key_type="laboratory", keys="xios_version"),
+			2
+		]
+	),
 	grouped_vars_per_file=ParameterSettings(
 		key="grouped_vars_per_file",
 		default_values=[
