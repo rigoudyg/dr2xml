@@ -7,7 +7,7 @@ CMOR variables
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
-from dr2xml.dr_interface import get_list_of_elements_by_id
+from dr2xml.dr_interface import get_data_request
 from logger import get_logger
 from dr2xml.settings_interface import get_settings_values
 from dr2xml.utils import Dr2xmlError
@@ -53,7 +53,8 @@ def get_cmor_var(label, table):
     Returns CMOR variable for a given label in a given table
     (could be optimized using inverse index)
     """
-    cmvar = [cmvar for cmvar in get_list_of_elements_by_id("CMORvar").items
+    data_request = get_data_request()
+    cmvar = [cmvar for cmvar in data_request.get_list_by_id("CMORvar").items
              if cmvar.mipTable == table and cmvar.label == label]
     if len(cmvar) > 0:
         return cmvar[0]

@@ -22,7 +22,7 @@ from logger import get_logger
 from .config import get_config_variable, add_value_in_dict_config_variable
 
 # Interface to Data Request
-from .dr_interface import get_element_uid, get_sectors_list
+from .dr_interface import get_data_request
 # Interface to xml tools
 from .xml_interface import find_rank_xml_subelement, DR2XMLElement
 
@@ -253,6 +253,7 @@ def change_axes_in_grid(grid_id):
     Returns the new grid_id
     """
     internal_dict = get_settings_values("internal")
+    data_request = get_data_request()
     global axis_count
     logger = get_logger()
     grid_def_init = get_grid_def(grid_id)
@@ -265,7 +266,7 @@ def change_axes_in_grid(grid_id):
 
     # Add cases where dim name 'sector' should be used,if needed
     # sectors = dims which have type character and are not scalar
-    sectors = internal_dict.get("sectors", get_sectors_list())
+    sectors = internal_dict.get("sectors", data_request.get_sectors_list())
     for sector in sectors:
         if not any([sector in [aliases[aid], aliases[aid][0]] for aid in aliases]):
             # print "\nadding sector : %s"%sector
@@ -295,8 +296,9 @@ def change_axes_in_grid(grid_id):
                 dim_id = 'dim:{}'.format(dr_axis_id)
                 # print "in change_axis for %s %s"%(grid_id,dim_id)
                 # dim_id should be a dimension !
-                dim = get_element_uid(dim_id, elt_type="dim",
-                                      error_msg="Value %s in 'non_standard_axes' is not a DR dimension id" % dr_axis_id)
+                dim = data_request.get_element_uid(dim_id, elt_type="dim",
+                                                   error_msg="Value %s in 'non_standard_axes' is not a DR dimension id"
+                                                             % dr_axis_id)
                 # We don't process scalars here
                 if dim.value in ['', ] or dim.label in ["scatratio", ]:
                     axis_id, axis_name = create_axis_from_dim(dim, alt_labels, axis_ref)
@@ -380,7 +382,7 @@ def scalar_vertical_dimension(sv):
     Return the altLabel attribute if it is a vertical dimension, else None.
     """
     if 'cids' in sv.struct.__dict__:
-        cid = get_element_uid(sv.struct.cids[0], elt_type="dim")
+        cid = get_data_request().get_element_uid(sv.struct.cids[0], elt_type="dim")
         if is_vert_dim(cid):
             return cid.altLabel
     return None

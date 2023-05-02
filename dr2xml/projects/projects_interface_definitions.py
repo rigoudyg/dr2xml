@@ -124,13 +124,13 @@ def determine_value(key_type=None, keys=list(), func=None, fmt=None, src=None, c
             else:
                 value = None
         elif allow_additional_keytypes:
-            if key_type in ["DR_version", ] and allow_additional_keytypes:
-                from dr2xml.dr_interface import get_DR_version
-                value = get_DR_version()
-                found = True
-            elif key_type in ["scope", ] and allow_additional_keytypes:
+            if key_type in ["scope", ] and allow_additional_keytypes:
                 from dr2xml.dr_interface import get_scope
-                value = get_scope().__dict__
+                value = get_scope()
+                found = True
+            elif key_type in ["data_request", ] and allow_additional_keytypes:
+                from dr2xml.dr_interface import get_data_request
+                value = get_data_request()
                 found = True
             elif key_type in ["variable", ] and "variable" in additional_dict:
                 value = additional_dict["variable"]
@@ -162,7 +162,10 @@ def determine_value(key_type=None, keys=list(), func=None, fmt=None, src=None, c
                             i_keys += 1
                         else:
                             found = False
-                    elif value is not None and key in value.__dict__:
+                    elif value is not None and key in ["__call__", ]:
+                        value = value.__call__()
+                        i_keys += 1
+                    elif value is not None and key in value.__dir__():
                         value = value.__getattribute__(key)
                         i_keys += 1
                     else:

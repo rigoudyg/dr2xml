@@ -12,6 +12,7 @@ import re
 
 from logger import get_logger
 from .definition import Scope as ScopeBasic
+from .definition import DataRequest as DataRequestBasic
 from ..utils import Dr2xmlError
 
 try:
@@ -23,12 +24,6 @@ try:
     from scope import dreqQuery
 except ImportError:
     from dreqPy.scope import dreqQuery
-
-
-dq = dreq.loadDreq()
-
-print_DR_errors = True
-print_DR_stdname_errors = False
 
 
 class Scope(ScopeBasic):
@@ -46,20 +41,81 @@ class Scope(ScopeBasic):
         return self.scope.varsByRql(request_link, pmax)
 
 
+class DataRequest(DataRequestBasic):
+
+    def get_version(self):
+        return self.data_request.version
+
+    def get_list_by_id(self, collection):
+        return self.data_request.coll[collection]
+
+    def get_sectors_list(self):
+        """
+        Get the sectors list.
+        :return:
+        """
+        rep = super().get_sectors_list()
+        rep = [dim.label for dim in rep.items if dim.type in ['character', ] and dim.value in ['', ]]
+        # Error in DR 01.00.21
+        return sorted(list(set(rep) - {"typewetla"}))
+
+    def get_experiment_label(self, experiment):
+        return self.data_request.inx.experiment.label[experiment][0]
+
+    def get_element_uid(self, id=None, error_msg=None, raise_on_error=False, check_print_DR_errors=True,
+                        check_print_stdnames_error=False, elt_type=None):
+        logger = get_logger()
+        if id is None:
+            rep = self.data_request.inx.uid
+        elif id in self.data_request.inx.uid:
+            rep = self.data_request.inx.uid[id]
+        else:
+            if error_msg is None:
+                error_msg = "DR Error: issue with %s" % id
+            if raise_on_error:
+                raise Dr2xmlError(error_msg)
+            elif check_print_DR_errors and self.print_DR_errors:
+                logger.error(error_msg)
+            elif check_print_stdnames_error and self.print_DR_stdname_errors:
+                logger.error(error_msg)
+            rep = None
+        if rep is not None:
+            if elt_type in ["variable", ]:
+                pass
+            elif elt_type in ["dim", ]:
+                correct_data_request_dim(rep)
+        return rep
+
+    def get_request_by_id_by_sect(self, id, request):
+        return self.data_request.inx.iref_by_sect[id].a[request]
+
+    def get_cmor_var_id_by_label(self, label):
+        return self.data_request.inx.CMORvar.label[label]
+
+
 scope = None
+data_request = None
 
 
-def get_DR_version():
-    """
-    Get the version of the DR
-    """
-    return dq.version
+def initialize_data_request():
+    global data_request
+    if data_request is None:
+        data_request = DataRequest(data_request=dreq.loadDreq(), print_DR_errors=True, print_DR_stdname_errors=False)
+    return data_request
+
+
+def get_data_request():
+    if data_request is None:
+        return initialize_data_request()
+    else:
+        return data_request
 
 
 def initialize_scope(tier_max):
     global scope
+    dq = get_data_request()
     if scope is None:
-        scope = Scope(dreqQuery(dq=dq, tierMax=tier_max))
+        scope = Scope(dreqQuery(dq=dq.data_request, tierMax=tier_max))
     return scope
 
 
@@ -74,73 +130,6 @@ def set_scope(sc):
     if sc is not None:
         global scope
         scope = sc
-
-
-def get_list_of_elements_by_id(collection):
-    """
-    Get the collection corresponding to the collection id.
-    """
-    return dq.coll[collection]
-
-
-def get_sectors_list():
-    """
-    Get the sectors list.
-    :return:
-    """
-    rep = [dim.label for dim in get_list_of_elements_by_id('grids').items
-           if dim.type in ['character', ] and dim.value in ['', ]]
-    # Error in DR 01.00.21
-    return sorted(list(set(rep) - {"typewetla"}))
-
-
-def get_element_uid(id=None, error_msg=None, raise_on_error=False, check_print_DR_errors=True,
-                    check_print_stdnames_error=False, elt_type=None):
-    """
-    Get the uid of an element if precised, else the list of all elements.
-    """
-    logger = get_logger()
-    if id is None:
-        rep = dq.inx.uid
-    elif id in dq.inx.uid:
-        rep = dq.inx.uid[id]
-    else:
-        if error_msg is None:
-            error_msg = "DR Error: issue with %s" % id
-        if raise_on_error:
-            raise Dr2xmlError(error_msg)
-        elif check_print_DR_errors and print_DR_errors:
-            logger.error(error_msg)
-        elif check_print_stdnames_error and print_DR_stdname_errors:
-            logger.error(error_msg)
-        rep = None
-    if rep is not None:
-        if elt_type in ["variable", ]:
-            pass
-        elif elt_type in ["dim", ]:
-            correct_data_request_dim(rep)
-    return rep
-
-
-def get_experiment_label(experiment):
-    """
-    Get the experiment from its label.
-    """
-    return dq.inx.experiment.label[experiment][0]
-
-
-def get_request_by_id_by_sect(id, request):
-    """
-    Get the attribute request of the element id.
-    """
-    return dq.inx.iref_by_sect[id].a[request]
-
-
-def get_cmor_var_id_by_label(label):
-    """
-    Get the id of the CMOR var corresponding to label.
-    """
-    return dq.inx.CMORvar.label[label]
 
 
 def normalize_grid(grid):
@@ -204,9 +193,9 @@ def correct_data_request_variable(variable):
     elif variable.cell_measures in ['--OPT', ]:
         variable.cell_measures = ''
     if variable.long_name is None:
-        variable.long_name = "empty in DR %s" % get_DR_version()
+        variable.long_name = "empty in DR %s" % data_request.get_version()
     if variable.units is None:
-        variable.units = "empty in DR %s" % get_DR_version()
+        variable.units = "empty in DR %s" % data_request.get_version()
     if variable.modeling_realm in ["seaIce", ] and re.match(".*areacella.*", str(variable.cell_measures)) \
             and variable.label not in ["siconca", ]:
         variable.comments = ". Due an error in DR01.00.21 and to technical constraints, this variable may have " \

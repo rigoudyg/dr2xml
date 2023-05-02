@@ -2,12 +2,14 @@
 # -*- coding: utf-8 -*-
 
 """
-Interface if no data request should be used.
+Interface between the C3S data request (C3S_DR.py) and dr2xml.
 """
-
 from __future__ import print_function, division, absolute_import, unicode_literals
 
-from .definition import Scope, ListWithItems
+
+from .C3S_DR import c3s_nc_dims, c3s_nc_coords, c3s_nc_comvars, c3s_nc_vars
+from .definition import ListWithItems
+from .definition import Scope as ScopeBasic
 from .definition import DataRequest as DataRequestBasic
 
 
@@ -38,6 +40,18 @@ class DataRequest(DataRequestBasic):
             return None
 
     def get_request_by_id_by_sect(self, id, request):
+        return list()
+
+
+class Scope(ScopeBasic):
+
+    def __init__(self, scope=None):
+        super().__init__(scope=scope)
+
+    def get_request_link_by_mip(self, mips_list):
+        return list()
+
+    def get_vars_by_request_link(self, request_link, pmax):
         return list()
 
 

@@ -25,7 +25,7 @@ from .config import get_config_variable, add_value_in_dict_config_variable, set_
     add_value_in_list_config_variable
 
 # Interface to Data Request
-from .dr_interface import get_list_of_elements_by_id, get_element_uid
+from .dr_interface import get_data_request
 # Interface to xml tools
 from .xml_interface import get_root_of_xml_file, DR2XMLElement
 
@@ -155,18 +155,18 @@ def highest_rank(svar):
     mipvarlabel = svar.label_without_psuffix
     shapes = []
     altdims = set()
-    for cvar in get_list_of_elements_by_id('CMORvar').items:
-        v = get_element_uid(cvar.vid)
+    data_request = get_data_request()
+    for cvar in data_request.get_list_by_id('CMORvar').items:
+        v = data_request.get_element_uid(cvar.vid)
         if v.label == mipvarlabel:
-            st = get_element_uid(cvar.stid, check_print_DR_errors=False,
-                                 error_msg="DR Error: issue with stid for : %s in table section : %s" %
-                                           (v.label, str(cvar.mipTableSection)))
+            st = data_request.get_element_uid(cvar.stid, check_print_DR_errors=False,
+                                              error_msg="DR Error: issue with stid for : %s in table section : %s" %
+                                                        (v.label, str(cvar.mipTableSection)))
             if st is None:
                 shape = "?st"
             else:
-                sp = get_element_uid(st.spid,
-                                     error_msg="DR Error: issue with spid for %s %s %s" %
-                                               (st.label, v.label, str(cvar.mipTable)))
+                sp = data_request.get_element_uid(st.spid, error_msg="DR Error: issue with spid for %s %s %s" %
+                                                                     (st.label, v.label, str(cvar.mipTable)))
                 if sp is None:
                     # One known case in DR 1.0.2: hus in 6hPlev
                     shape = "XY"

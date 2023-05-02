@@ -323,8 +323,9 @@ common_values = dict(
     data_specs_version=ParameterSettings(
         key="data_specs_version",
         default_values=[
-            ValueSettings(key_type="DR_version")
-        ]
+            ValueSettings(key_type="data_request", keys=["get_version", "__call__"])
+        ],
+        fatal=True
     )
 )
 

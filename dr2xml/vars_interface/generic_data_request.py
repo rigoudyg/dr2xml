@@ -9,8 +9,7 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 
 from collections import defaultdict, OrderedDict
 
-from dr2xml.dr_interface import get_scope, get_element_uid, get_experiment_label, get_request_by_id_by_sect, \
-    normalize_grid
+from dr2xml.dr_interface import get_scope, get_data_request, normalize_grid
 from logger import get_logger
 from dr2xml.settings_interface import get_settings_values
 from dr2xml.settings_interface.py_settings_interface import is_sset_not_None
@@ -47,6 +46,7 @@ def select_data_request_CMORvars_for_lab(sset=False, year=None):
     """
     logger = get_logger()
     internal_settings = get_settings_values("internal")
+    data_request = get_data_request()
     # From MIPS set to Request links
     global global_rls, grid_choice, rls_for_all_experiments, sn_issues
     if sset:
@@ -91,7 +91,7 @@ def select_data_request_CMORvars_for_lab(sset=False, year=None):
     #
     if sset:
         experiment_id = internal_settings["experiment_for_requests"]
-        exp = get_element_uid(get_experiment_label(experiment_id))
+        exp = data_request.get_element_uid(data_request.get_experiment_label(experiment_id))
         if exp is not None:
             starty = exp.starty
             endy = exp.endy
@@ -104,8 +104,8 @@ def select_data_request_CMORvars_for_lab(sset=False, year=None):
         filtered_rls = []
         for rl in rls_for_mips:
             # Access all requesItems ids which refer to this RequestLink
-            rl_req_items = get_request_by_id_by_sect(rl.uid, 'requestItem')
-            if any([RequestItem_applies_for_exp_and_year(get_element_uid(ri_id), experiment_id, year)[0]
+            rl_req_items = data_request.get_request_by_id_by_sect(rl.uid, 'requestItem')
+            if any([RequestItem_applies_for_exp_and_year(data_request.get_element_uid(ri_id), experiment_id, year)[0]
                     for ri_id in rl_req_items]):
                 filtered_rls.append(rl)
 
@@ -135,9 +135,9 @@ def select_data_request_CMORvars_for_lab(sset=False, year=None):
         for v in sc.get_vars_by_request_link(request_link=rl.uid, pmax=pmax):
             # The requested grid is given by the RequestLink except if spatial shape matches S-*
             gr = rl.grid
-            cmvar = get_element_uid(v)
-            st = get_element_uid(cmvar.stid)
-            sp = get_element_uid(st.spid)
+            cmvar = data_request.get_element_uid(v)
+            st = data_request.get_element_uid(cmvar.stid)
+            sp = data_request.get_element_uid(st.spid)
             if sp.label.startswith("S-"):
                 gr = 'cfsites'
             miprl_vars_grids.add((v, gr))
@@ -186,9 +186,9 @@ def select_data_request_CMORvars_for_lab(sset=False, year=None):
 
     filtered_vars = list()
     for (v, g) in miprl_vars_grids:
-        cmvar = get_element_uid(v)
-        ttable = get_element_uid(cmvar.mtid)
-        mipvar = get_element_uid(cmvar.vid)
+        cmvar = data_request.get_element_uid(v)
+        ttable = data_request.get_element_uid(cmvar.mtid)
+        mipvar = data_request.get_element_uid(cmvar.vid)
         if is_elt_applicable(mipvar, attribute="label", excluded=excvars, included=incvars) and \
             is_elt_applicable(ttable, attribute="label", excluded=exctab, included=inctab) and \
                 is_elt_applicable((mipvar, ttable), attribute="label", excluded=excpairs):
@@ -207,7 +207,7 @@ def select_data_request_CMORvars_for_lab(sset=False, year=None):
     for v in d:
         d[v] = decide_for_grids(v, d[v])
         if len(d[v]) > 1:
-            multiple_grids.append(get_element_uid(v).label)
+            multiple_grids.append(data_request.get_element_uid(v).label)
             if print_multiple_grids:
                 logger.info("\tVariable %s will be processed with multiple grids: %s"
                             % (multiple_grids[-1], repr(d[v])))
@@ -216,18 +216,18 @@ def select_data_request_CMORvars_for_lab(sset=False, year=None):
                     "(rerun with print_multiple_grids set to True for details): %s" % repr(sorted(multiple_grids)))
     #
     # Print a count of distinct var labels
-    logger.info('Number of distinct var labels is: %d' % len(set([get_element_uid(v).label for v in d])))
+    logger.info('Number of distinct var labels is: %d' % len(set([data_request.get_element_uid(v).label for v in d])))
 
     # Translate CMORvars to a list of simplified CMORvar objects
     simplified_vars = []
     allow_pseudo = internal_settings['allow_pseudo_standard_names']
     for v in d:
         svar = SimpleCMORVar()
-        cmvar = get_element_uid(v)
+        cmvar = data_request.get_element_uid(v)
         sn_issues = complement_svar_using_cmorvar(svar, cmvar, sn_issues, [], allow_pseudo)
         svar.Priority = analyze_priority(cmvar, mips_list)
         svar.grids = d[v]
-        if get_element_uid(v).label in ["tas", ]:
+        if data_request.get_element_uid(v).label in ["tas", ]:
             logger.debug("When complementing, tas is included , grids are %s" % svar.grids)
         simplified_vars.append(svar)
     logger.info('Number of simplified vars is: %d' % len(simplified_vars))
@@ -269,9 +269,10 @@ def RequestItem_applies_for_exp_and_year(ri, experiment, year=None):
     # if ri.title=='AerChemMIP, AERmon-3d, piControl' : debug=True
     # if ri.title=='CFMIP, CFMIP.CFsubhr, amip' : debug=True
     internal_dict = get_settings_values("internal")
+    data_request = get_data_request()
     logger = get_logger()
     logger.debug("In RIapplies.. Checking % 15s" % ri.title)
-    item_exp = get_element_uid(ri.esid)
+    item_exp = data_request.get_element_uid(ri.esid)
     ri_applies_to_experiment = False
     endyear = None
     # esid can link to an experiment or an experiment group
@@ -282,15 +283,15 @@ def RequestItem_applies_for_exp_and_year(ri, experiment, year=None):
             ri_applies_to_experiment = True
     elif item_exp._h.label in ['exptgroup', ]:
         logger.debug("%20s %s" % ("Expt Group case ", item_exp.label))
-        exps_id = get_request_by_id_by_sect(ri.esid, 'experiment')
-        for e in [get_element_uid(eid) for eid in exps_id]:
+        exps_id = data_request.get_request_by_id_by_sect(ri.esid, 'experiment')
+        for e in [data_request.get_element_uid(eid) for eid in exps_id]:
             if e.label in [experiment, ]:
                 logger.debug(" OK for experiment based on group %s" % item_exp.label)
                 ri_applies_to_experiment = True
     elif item_exp._h.label in ['mip', ]:
-        logger.debug("%20s %s" % ("Mip case ", get_element_uid(item_exp.label).label))
-        exps_id = get_request_by_id_by_sect(ri.esid, 'experiment')
-        for e in [get_element_uid(eid) for eid in exps_id]:
+        logger.debug("%20s %s" % ("Mip case ", data_request.get_element_uid(item_exp.label).label))
+        exps_id = data_request.get_request_by_id_by_sect(ri.esid, 'experiment')
+        for e in [data_request.get_element_uid(eid) for eid in exps_id]:
             logger.debug(e.label + ",",)
             if e.label == experiment:
                 logger.debug(" OK for experiment based on mip %s" % item_exp.label)
@@ -313,7 +314,7 @@ def RequestItem_applies_for_exp_and_year(ri, experiment, year=None):
             logger.debug(" ..applies because arg year is None")
         else:
             year = int(year)
-            exp = get_element_uid(get_experiment_label(experiment))
+            exp = data_request.get_element_uid(data_request.get_experiment_label(experiment))
             rep, endyear = year_in_ri(ri, exp, year)
             logger.debug(" ..year in ri returns: %s %s" % (rep, endyear))
             # if (ri.label=="AerchemmipAermonthly3d") :
@@ -329,11 +330,12 @@ def analyze_priority(cmvar, lmips):
     """
     Returns the max priority of the CMOR variable, for a set of mips
     """
+    data_request = get_data_request()
     prio = cmvar.defaultPriority
-    rv_ids = get_request_by_id_by_sect(cmvar.uid, 'requestVar')
+    rv_ids = data_request.get_request_by_id_by_sect(cmvar.uid, 'requestVar')
     for rv_id in rv_ids:
-        rv = get_element_uid(rv_id)
-        vg = get_element_uid(rv.vgid)
+        rv = data_request.get_element_uid(rv_id)
+        vg = data_request.get_element_uid(rv.vgid)
         if vg.mip in lmips:
             if rv.priority < prio:
                 prio = rv.priority
@@ -407,6 +409,7 @@ def year_in_ri_tslice(ri, exp, year):
     """
     logger = get_logger()
     internal_dict = get_settings_values("internal")
+    data_request = get_data_request()
     if 'tslice' not in ri.__dict__:
         logger.debug("No tslice for reqItem %s -> OK for any year" % ri.title)
         return True, None
@@ -416,7 +419,7 @@ def year_in_ri_tslice(ri, exp, year):
     #
     relevant = False
     endyear = None
-    tslice = get_element_uid(ri.tslice)
+    tslice = data_request.get_element_uid(ri.tslice)
     logger.debug("tslice label/type is %s/%s for reqItem %s " % (tslice.label, tslice.type, ri.title))
     if tslice.type in ["relativeRange", ]:  # e.g. _slice_abrupt30
         first_year = experiment_start_year(exp)
@@ -539,6 +542,7 @@ def endyear_for_CMORvar(cv, expt, year):
     # 2- Select those requestItems which include expt,
     #    and retain their endyear if larger than former one
     internal_dict = get_settings_values("internal")
+    data_request = get_data_request()
 
     global global_rls
 
@@ -548,30 +552,32 @@ def endyear_for_CMORvar(cv, expt, year):
     pmax = internal_dict['max_priority']
 
     # 1- Get the RequestItems which apply to CmorVar
-    rVarsUid = get_request_by_id_by_sect(cv.uid, 'requestVar')
-    rVars = [get_element_uid(uid) for uid in rVarsUid if get_element_uid(uid).priority <= pmax]
+    rVarsUid = data_request.get_request_by_id_by_sect(cv.uid, 'requestVar')
+    rVars = [data_request.get_element_uid(uid) for uid in rVarsUid
+             if data_request.get_element_uid(uid).priority <= pmax]
     logger.debug("les requestVars: %s" % " ".join([rVar.title for rVar in rVars]))
-    VarGroups = [get_element_uid(rv.vgid) for rv in rVars]
+    VarGroups = [data_request.get_element_uid(rv.vgid) for rv in rVars]
     logger.debug("les requestVars groups: %s" % " ".join([rVg.label for rVg in VarGroups]))
     RequestLinksId = list()
     for vg in VarGroups:
-        RequestLinksId.extend(get_request_by_id_by_sect(vg.uid, 'requestLink'))
+        RequestLinksId.extend(data_request.get_request_by_id_by_sect(vg.uid, 'requestLink'))
     FilteredRequestLinks = list()
     for rlid in RequestLinksId:
-        rl = get_element_uid(rlid)
+        rl = data_request.get_element_uid(rlid)
         if rl in global_rls:
             FilteredRequestLinks.append(rl)
-    logger.debug("les requestlinks: %s" % " ".join([get_element_uid(rlid).label for rlid in RequestLinksId]))
+    logger.debug("les requestlinks: %s" % " ".join([data_request.get_element_uid(rlid).label
+                                                    for rlid in RequestLinksId]))
     logger.debug("les FilteredRequestlinks: %s" % " ".join([rl.label for rl in FilteredRequestLinks]))
     RequestItems = list()
     for rl in FilteredRequestLinks:
-        RequestItems.extend(get_request_by_id_by_sect(rl.uid, 'requestItem'))
-    logger.debug("les requestItems: %s" % " ".join([get_element_uid(riid).label for riid in RequestItems]))
+        RequestItems.extend(data_request.get_request_by_id_by_sect(rl.uid, 'requestItem'))
+    logger.debug("les requestItems: %s" % " ".join([data_request.get_element_uid(riid).label for riid in RequestItems]))
 
     # 2- Select those request links which include expt and year
     larger = None
     for riid in RequestItems:
-        ri = get_element_uid(riid)
+        ri = data_request.get_element_uid(riid)
         applies, endyear = RequestItem_applies_for_exp_and_year(ri, expt, year)
         logger.debug("For var and freq selected for debug and year %s, for ri %s, applies=%s, endyear=%s" %
                      (str(year), ri.title, str(applies), str(endyear)))

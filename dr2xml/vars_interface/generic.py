@@ -13,8 +13,7 @@ from collections import OrderedDict
 import six
 
 from dr2xml.analyzer import cellmethod2area
-from dr2xml.dr_interface import get_element_uid, get_cmor_var_id_by_label, \
-    get_list_of_elements_by_id, get_request_by_id_by_sect, print_DR_errors
+from dr2xml.dr_interface import get_data_request
 from logger import get_logger
 from dr2xml.settings_interface import get_settings_values
 from dr2xml.utils import VarsError, Dr2xmlError
@@ -130,10 +129,11 @@ def get_simple_dim_from_dim_id(dimid):
     """
     Build a simple_Dim object which characteristics fit with dimid.
     """
-    d = get_element_uid(dimid)
+    data_request = get_data_request()
+    d = data_request.get_element_uid(dimid)
     #
-    stdname = get_element_uid(d.standardName, check_print_stdnames_error=True, check_print_DR_errors=False,
-                              error_msg="Issue with standardname for dimid %s" % dimid)
+    stdname = data_request.get_element_uid(d.standardName, check_print_stdnames_error=True, check_print_DR_errors=False,
+                                           error_msg="Issue with standardname for dimid %s" % dimid)
     if stdname is not None:
         stdname = stdname.uid
     else:
@@ -150,10 +150,11 @@ def get_correspond_cmor_var(homevar):
         For a home variable, find the CMOR var which corresponds.
         """
     logger = get_logger()
+    data_request = get_data_request()
     count = 0
     empty_table = (homevar.mipTable in ['NONE', ]) or (homevar.mipTable.startswith("None"))
-    for cmvarid in get_cmor_var_id_by_label(homevar.ref_var):
-        cmvar = get_element_uid(cmvarid)
+    for cmvarid in data_request.get_cmor_var_id_by_label(homevar.ref_var):
+        cmvar = data_request.get_element_uid(cmvarid)
         logger.debug("get_corresp, checking %s vs %s in %s" % (homevar.label, cmvar.label, cmvar.mipTable))
         #
         # Consider case where no modeling_realm associated to the
@@ -212,6 +213,7 @@ def complement_svar_using_cmorvar(svar, cmvar, sn_issues, debug=[], allow_pseudo
 
     """
     logger = get_logger()
+    data_request = get_data_request()
     global ambiguous_mipvarnames
     if ambiguous_mipvarnames is None:
         ambiguous_mipvarnames = analyze_ambiguous_mip_varnames()
@@ -229,10 +231,10 @@ def complement_svar_using_cmorvar(svar, cmvar, sn_issues, debug=[], allow_pseudo
 
     # Get information from MIPvar
     # In case no unit is found with stdname
-    mipvar = get_element_uid(cmvar.vid)
+    mipvar = data_request.get_element_uid(cmvar.vid)
     # see https://github.com/cmip6dr/CMIP6_DataRequest_VariableDefinitions/issues/279
     stdname = ''
-    sn = get_element_uid(mipvar.sn)  # None
+    sn = data_request.get_element_uid(mipvar.sn)  # None
     if sn._h.label in ['standardname', ]:
         stdname = sn.uid
     else:
@@ -245,19 +247,19 @@ def complement_svar_using_cmorvar(svar, cmvar, sn_issues, debug=[], allow_pseudo
     svar.set_attributes(mipVarLabel=mipvar.label, units=mipvar.units, stdname=stdname)
     #
     # Get information form Structure
-    st = get_element_uid(cmvar.stid,
+    st = data_request.get_element_uid(cmvar.stid,
                          error_msg="DR Error: issue with stid for %s in Table %s  "
                                    "=> no cell_methods, cell_measures, dimids and sdims derived." %
                                    (svar.label, svar.mipTable))
     if st is not None:
         svar.set_attributes(struct=st)
-        methods = get_element_uid(st.cmid, error_msg="DR Error: issue with cell_method for %s" % st.label)
+        methods = data_request.get_element_uid(st.cmid, error_msg="DR Error: issue with cell_method for %s" % st.label)
         if methods is not None:
             methods = methods.cell_methods
             new_methods = methods.replace("mask=siconc or siconca", "mask=siconc")
             svar.set_attributes(cm=methods, cell_methods=new_methods)
         #
-        measures = get_element_uid(cmvar.stid, error_msg="DR Error: Issue with cell_measures for %s" % repr(cmvar))
+        measures = data_request.get_element_uid(cmvar.stid, error_msg="DR Error: Issue with cell_measures for %s" % repr(cmvar))
         if measures is not None:
             measures = measures.cell_measures
             svar.set_attributes(cell_measures=measures)
@@ -265,7 +267,7 @@ def complement_svar_using_cmorvar(svar, cmvar, sn_issues, debug=[], allow_pseudo
         product_of_other_dims = 1
         all_dimids = list()
         if spatial_shp not in ["na-na", ]:
-            spid = get_element_uid(st.spid)
+            spid = data_request.get_element_uid(st.spid)
             all_dimids.extend(spid.dimids)
         if 'cids' in st.__dict__:
             cids = st.cids
@@ -324,17 +326,18 @@ def analyze_ambiguous_mip_varnames(debug=[]):
     # of CMORvars items for the varname
     logger = get_logger()
     d = OrderedDict()
-    for v in get_list_of_elements_by_id('var').items:
+    data_request = get_data_request()
+    for v in data_request.get_list_by_id('var').items:
         if v.label not in d:
             d[v.label] = []
             if v.label in debug:
                 logger.debug("Adding %s" % v.label)
-        refs = get_request_by_id_by_sect(v.uid, 'CMORvar')
+        refs = data_request.get_request_by_id_by_sect(v.uid, 'CMORvar')
         for r in refs:
-            d[v.label].append(get_element_uid(r))
+            ref = data_request.get_element_uid(r)
+            d[v.label].append(ref)
             if v.label in debug:
-                logger.debug("Adding CmorVar %s(%s) for %s" % (v.label, get_element_uid(r).mipTable,
-                                                               get_element_uid(r).label))
+                logger.debug("Adding CmorVar %s(%s) for %s" % (v.label, ref.mipTable, ref.label))
 
     # Replace dic values by dic of area portion of cell_methods
     for vlabel in d:
@@ -342,10 +345,10 @@ def analyze_ambiguous_mip_varnames(debug=[]):
             cvl = d[vlabel]
             d[vlabel] = OrderedDict()
             for cv in cvl:
-                st = get_element_uid(cv.stid)
-                cm = get_element_uid(st.cmid, check_print_DR_errors=False,
-                                     error_msg="No cell method for %-15s %s(%s)"
-                                               % (st.label, cv.label, cv.mipTable))
+                st = data_request.get_element_uid(cv.stid)
+                cm = data_request.get_element_uid(st.cmid, check_print_DR_errors=False,
+                                                  error_msg="No cell method for %-15s %s(%s)"
+                                                            % (st.label, cv.label, cv.mipTable))
                 if cm is not None:
                     cm = cm.cell_methods
                 if cm is not None:
@@ -388,22 +391,23 @@ def get_spatial_and_temporal_shapes(cmvar):
     Get the spatial et temporal shape of a CMOR variable from the DR.
     """
     logger = get_logger()
+    data_request = get_data_request()
     if cmvar.stid == "__struct_not_found_001__":
-        if print_DR_errors:
+        if data_request.print_DR_errors:
             logger.warning("Warning: stid for %s in table %s is a broken link to structure in DR: %s" %
                            (cmvar.label, cmvar.mipTable, cmvar.stid))
         spatial_shape = False
         temporal_shape = False
     else:
-        struct = get_element_uid(cmvar.stid)
-        spatial_shape = get_element_uid(struct.spid,
-                                        error_msg="Warning: spatial shape for %s in table %s not found in DR." %
-                                                  (cmvar.label, cmvar.mipTable))
+        struct = data_request.get_element_uid(cmvar.stid)
+        spatial_shape = data_request.get_element_uid(struct.spid,
+                                                     error_msg="Warning: spatial shape for %s in table %s not found"
+                                                               " in DR." % (cmvar.label, cmvar.mipTable))
         if spatial_shape is not None:
             spatial_shape = spatial_shape.label
-        temporal_shape = get_element_uid(struct.tmid,
-                                         error_msg="Warning: temporal shape for %s in table %s not found in DR." %
-                                                   (cmvar.label, cmvar.mipTable))
+        temporal_shape = data_request.get_element_uid(struct.tmid,
+                                                      error_msg="Warning: temporal shape for %s in table %s not found"
+                                                                " in DR." % (cmvar.label, cmvar.mipTable))
         if temporal_shape is not None:
             temporal_shape = temporal_shape.label
     return [spatial_shape, temporal_shape]

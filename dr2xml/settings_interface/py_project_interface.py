@@ -27,8 +27,12 @@ def initialize_project_settings():
 
 
 def write_project_content(target, internal_values, common_values, project_settings):
-    print("Writing project content is not yet implemented")
-    pass
+    with open(target, "w") as target_fic:
+        target_fic.write(os.linesep.join([
+            "from dr2xml.projects.projects_interface_definitions import *",
+            "internal_values = %s" % internal_values,
+            "common_values = %s" % common_values,
+            "project_settings = %s" % project_settings]))
 
 
 def merge_project_settings(project_filename):
