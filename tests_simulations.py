@@ -9,6 +9,7 @@ import os
 import glob
 import pstats
 import shutil
+import subprocess
 import sys
 import codecs
 from io import open
@@ -140,10 +141,8 @@ def find_data(simulation):
     return config, simulation_settings, lab_and_model_settings, simulation, contexts
 
 
-def test_function(simulation, run_mode, python_version, config_dict, contexts, lset, sset, add_profile, check_time_file):
+def test_function(simulation, run_mode, python_version, config_dict, contexts, lset, sset, add_profile, check_time_file, output_directory):
     print("Test simulation:", simulation)
-    output_directory = os.sep.join([os.sep.join(os.path.abspath(__file__).split(os.sep)[:-1]), "tests",
-                                    "test_{}".format(simulation), "output_{}_{}".format(run_mode, python_version)])
     if os.path.isdir(output_directory):
         files_to_remove = glob.glob(os.sep.join([output_directory, "*"]))
         for file_to_remove in files_to_remove:
@@ -151,38 +150,39 @@ def test_function(simulation, run_mode, python_version, config_dict, contexts, l
     else:
         os.mkdir(output_directory)
 
-    old_stdout = sys.stdout
-    time_stats = dict()
-    with codecs.open("dr2xml_log".format(run_mode), 'w', encoding="utf-8") as logfile:
-        for context in contexts:
-            print("Execute context %s" % context)
-            start_time = time.time()
-            sys.stdout = logfile
-            if add_profile in ["yes", ]:
-                pr = cProfile.Profile()
-                pr.enable()
-            generate_file_defs(context=context, lset=lset, sset=sset, **config_dict)
-            if add_profile in ["yes", ]:
-                pr.disable()
-                if python_version in ["python2", ]:
-                    s = io.BytesIO()
-                else:
-                    s = io.StringIO()
-                sortby = 'cumulative'
-                ps = pstats.Stats(pr, stream=s).sort_stats(sortby)
-                ps.print_stats()
-                print(s.getvalue())
-            sys.stdout = old_stdout
-            time_stats[context] = time.time() - start_time
-            print("It took %d s" % time_stats[context])
-    if check_time_file not in ["no", ]:
-        dr2xml_version = "TODO: dr2xml version"
-        with open(check_time_file, "a") as check_time_fic:
-            check_time_fic.writelines(["%s;%s;%s;%s%s" % (dr2xml_version, simulation, context, time_stats[context], os.linesep) for context in contexts])
-
-    files_to_move = glob.glob(os.sep.join([os.getcwd(), "dr2xml_*"]))
-    for file_to_move in files_to_move:
-        shutil.move(file_to_move, output_directory)
+    try:
+        old_stdout = sys.stdout
+        time_stats = dict()
+        with codecs.open("dr2xml_log".format(run_mode), 'w', encoding="utf-8") as logfile:
+            for context in contexts:
+                print("Execute context %s" % context)
+                start_time = time.time()
+                sys.stdout = logfile
+                if add_profile in ["yes", ]:
+                    pr = cProfile.Profile()
+                    pr.enable()
+                generate_file_defs(context=context, lset=lset, sset=sset, **config_dict)
+                if add_profile in ["yes", ]:
+                    pr.disable()
+                    if python_version in ["python2", ]:
+                        s = io.BytesIO()
+                    else:
+                        s = io.StringIO()
+                    sortby = 'cumulative'
+                    ps = pstats.Stats(pr, stream=s).sort_stats(sortby)
+                    ps.print_stats()
+                    print(s.getvalue())
+                sys.stdout = old_stdout
+                time_stats[context] = time.time() - start_time
+                print("It took %d s" % time_stats[context])
+        if check_time_file not in ["no", ]:
+            dr2xml_version = subprocess.check_output('git log -n 1 --pretty=format:"%H"', shell=True)
+            with open(check_time_file, "a") as check_time_fic:
+                check_time_fic.writelines(["%s;%s;%s;%s%s" % (str(dr2xml_version), simulation, context, time_stats[context], os.linesep) for context in contexts])
+    finally:
+        files_to_move = glob.glob(os.sep.join([os.getcwd(), "dr2xml_*"]))
+        for file_to_move in files_to_move:
+            shutil.move(file_to_move, output_directory)
 
 
 def read_and_check_files_content(file_1, file_2):
@@ -217,12 +217,13 @@ if __name__ == "__main__":
         raise ValueError("If profiling is on, comparison will fail.")
 
     (config_dict, sset, lset, simulation_name, contexts) = find_data(simulation)
-    test_function(simulation_name, run_mode, python_version, config_dict, contexts, lset, sset, add_profile, check_time_file)
+    output_dir = os.sep.join([os.sep.join(os.path.abspath(__file__).split(os.sep)[:-1]), "tests",
+                              "test_{}".format(simulation_name), "output_{}_{}"])
+    outputs_test = output_dir.format(run_mode, python_version)
+
+    test_function(simulation_name, run_mode, python_version, config_dict, contexts, lset, sset, add_profile, check_time_file, outputs_test)
 
     if run_mode in ["test", ] and to_compare not in ["no", ]:
-        output_dir = os.sep.join([os.sep.join(os.path.abspath(__file__).split(os.sep)[:-1]), "tests",
-                                  "test_{}".format(simulation_name), "output_{}_{}"])
-        outputs_test = output_dir.format("test", python_version)
         if to_compare in ["changes", ]:
             outputs_ref = output_dir.format("ref", python_version)
         elif to_compare in ["python", ] and python_version in ["python2", ]:
