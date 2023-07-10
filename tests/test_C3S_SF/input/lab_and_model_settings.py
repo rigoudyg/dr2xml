@@ -1,17 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from __future__ import print_function, division, absolute_import, unicode_literals
-
-import os
-
-from tests.tests_config import path_xml
-
 
 lab_and_model_settings = {
     'included_vars': ["", ],
     'data_request_used': 'no',
-    'path_to_parse': '{}/'.format(os.sep.join([path_xml, "..", "xml_files_C3SSF"])),
+    'path_to_parse': '{path_xml}/',
     'convention_str': 'CF-1.6 C3S-0.1',
     'project': 'C3S Seasonal Forecast',
     'project_settings': 'C3S-SF',

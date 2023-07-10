@@ -1,10 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from tests.tests_config import path_xml
 
 lab_and_model_settings = {
-    'path_to_parse': '{}/'.format(path_xml),
+    'path_to_parse': '{path_xml}/',
     'save_project_settings': 'dr2xml_project_settings.py',
     'comment': '',
     'tierMax': 1,

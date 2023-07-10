@@ -1,19 +1,17 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from tests.tests_config import path_table, path_homedr
 
 simulation_settings = {'comment': 'Simulation a4SST (after a 10-yr spin up) et test accents en tout genre',  # éèêë',
-                       'listof_home_vars': '{}/home_data_request_arpege_GCM.txt '
-                                           '{}/home_data_request_surfex_GCM.txt '
-                                           '{}/home_data_request_trip_GCM.txt '
-                                           '{}/home_data_request_perso.txt'.format(path_homedr, path_homedr,
-                                                                                   path_homedr, path_homedr),
+                       'listof_home_vars': '{path_homedr}/home_data_request_arpege_GCM.txt '
+                                           '{path_homedr}/home_data_request_surfex_GCM.txt '
+                                           '{path_homedr}/home_data_request_trip_GCM.txt '
+                                           '{path_homedr}/home_data_request_perso.txt',
                        'sub_experiment': 'none',
                        'branch_method': 'standard',
                        'child_time_ref_year': 1850,
                        'variant_info': '',
-                       'path_extra_tables': path_table,
+                       'path_extra_tables': "{path_tables}",
                        'realization_index': 1,
                        'comments': {},
                        'parent_time_ref_year': 1850,

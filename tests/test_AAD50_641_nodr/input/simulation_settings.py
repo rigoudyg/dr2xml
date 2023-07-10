@@ -5,15 +5,12 @@
 # for laboratory and model settings
 # See refs at bottom
 
-from tests.tests_config import path_homedr, path_table
-
-aladin_path_table = "/".join([path_table, "../Tables_Aladin_nodr"])
 
 simulation_settings = {
 
     "configuration": "ARCM",
-    "listof_home_vars": '{}/home_data_request_nodr.txt'.format(path_homedr),
-    "path_extra_tables": aladin_path_table,
+    "listof_home_vars": '{path_homedr}/home_data_request_nodr.txt',
+    "path_extra_tables": '{path_tables}',
     # DR experiment name to process. See http://clipc-services.ceda.ac.uk/dreq/index/experiment.html
     "activity_id": "CORDEX",
     "experiment_id": "amip",

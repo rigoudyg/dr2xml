@@ -1,10 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from tests.tests_config import path_xml
 
 lab_and_model_settings = {
-    'path_to_parse': '{}/'.format(path_xml),
+    'path_to_parse': '{path_xml}/',
     'comment': '',
     'tierMax': 1,
     'references': 'http://www.umr-cnrm.fr/cmip6/references',
@@ -12,7 +11,8 @@ lab_and_model_settings = {
     'realms_per_context': {
         'nemo': ['seaIce', 'ocean', 'ocean seaIce', 'ocnBgChem', 'seaIce ocean'],
         'surfex': ['atmos', 'atmos atmosChem', 'atmosChem', 'aerosol', 'atmos land', 'land', 'landIce land', 'aerosol',
-                   'land landIce', 'landIce'], 'trip': []
+                   'land landIce', 'landIce'],
+        'trip': []
     },
     'fx_from_file': {
         'areacella': {
@@ -32,10 +32,10 @@ lab_and_model_settings = {
     'vertical_interpolation_sample_freq': '3h',
     'vertical_interpolation_operation': 'instant',
     'orphan_variables': {
-        'nemo': [''], 'surfex': ['siconca'],
+        'nemo': [''],
+        'surfex': ['siconca'],
         'trip': ['areacellr', 'dgw', 'drivw', 'qgwr', 'rivi', 'rivo', 'waterDpth', 'wtd', 'fwtd', 'fldf', 'carbw',
-                 'carbdis', 'carbin'
-                 ]
+                 'carbdis', 'carbin']
     },
     'excluded_request_links': ['RFMIP-AeroIrf'],
     'max_priority': 1,
@@ -47,7 +47,8 @@ lab_and_model_settings = {
         'HR': {
             'nemo': 1800.0,
             'surfex': 900.0,
-            'trip': 1800.0},
+            'trip': 1800.0
+        },
         'LR': {
             'nemo': 1800.0,
             'surfex': 900.0,
@@ -82,21 +83,16 @@ lab_and_model_settings = {
     },
     'grids': {
         'HR': {
-            'nemo': ['gn', '', '', '25 km',
-                     'native ocean tri-polar grid with 1.47 M ocean cells'],
-            #"surfex" : [ "gn", "", "" , "250 km", "native T127 reduced gaussian grid"] ,
-            'surfex': ['gr', 'complete', 'glat', '50 km',
-                       'data regridded to a 359 gaussian grid (360x720 latlon) from a native atmosphere T359l reduced gaussian grid'],
-            'trip': ['gn', '', '', '50 km',
-                     'regular 1/2 deg lat-lon grid']},
+            'nemo': ['gn', '', '', '25 km', 'native ocean tri-polar grid with 1.47 M ocean cells'],
+            'surfex': ['gr', 'complete', 'glat', '50 km', 'data regridded to a 359 gaussian grid (360x720 latlon) from a native atmosphere T359l reduced gaussian grid'],
+            'trip': ['gn', '', '', '50 km', 'regular 1/2 deg lat-lon grid']
+        },
         'LR': {
-            'nemo': ['gn', '', '', '100 km',
-                     'native ocean tri-polar grid with 105 k ocean cells'],
-            #"surfex" : [ "gn", "", "" , "250 km", "native T127 reduced gaussian grid"] ,
-            'surfex': ['gr', 'complete', 'glat', '250 km',
-                       'data regridded to a T127 gaussian grid (128x256 latlon) from a native atmosphere T127l reduced gaussian grid'],
-            'trip': ['gn', '', '', '50 km',
-                     'regular 1/2 deg lat-lon grid']}},
+            'nemo': ['gn', '', '', '100 km', 'native ocean tri-polar grid with 105 k ocean cells'],
+            'surfex': ['gr', 'complete', 'glat', '250 km', 'data regridded to a T127 gaussian grid (128x256 latlon) from a native atmosphere T127l reduced gaussian grid'],
+            'trip': ['gn', '', '', '50 km', 'regular 1/2 deg lat-lon grid']
+        }
+    },
     'grids_dev': {
         'albsnfree': {
             'LR': {
@@ -163,7 +159,9 @@ lab_and_model_settings = {
                  'cltisccp', 'pctisccp', 'tauisccp', 'albisccp', 'meantbisccp', 'meantbclrisccp', 'clisccp', 'cltmodis',
                  'clwmodis', 'climodis', 'clhmodis', 'clmmodis', 'cllmodis', 'tautmodis', 'tauwmodis', 'tauimodis',
                  'reffclwmodis', 'reffclimodis', 'pctmodis', 'lwpmodis', 'iwpmodis', 'clmodis', 'jpdftaureliqmodis',
-                 'jpdftaureicemodis', 'clmisr']}, 'institution_id': 'CNRM-CERFACS',
+                 'jpdftaureicemodis', 'clmisr']
+    },
+    'institution_id': 'CNRM-CERFACS',
     'excluded_spshapes': ['XYA-na', 'XYG-na', 'na-A'],
     'mips': {
         'HR': set(['OMIP', 'CMIP', 'CMIP6', 'ScenarioMIP']),
@@ -176,8 +174,7 @@ lab_and_model_settings = {
         'klev': 'alevel',
         'soil_carbon_pools': ('soilpools', 'fast medium slow'),
         'effectRadL': 'effectRadL',
-        'vegtype': ('vegtype',
-                    'Bare_soil Rock Permanent_snow Temperate_broad-leaved_decidus Boreal_needleaf_evergreen Tropical_broad-leaved_evergreen C3_crop C4_crop Irrigated_crop C3_grass C4_grass Wetland Tropical_broad-leaved_decidus Temperate_broad-leaved_evergreen Temperate_needleaf_evergreen Boreal_broad-leaved_decidus Boreal_needleaf_decidus Tundra_grass Shrub'),
+        'vegtype': ('vegtype', 'Bare_soil Rock Permanent_snow Temperate_broad-leaved_decidus Boreal_needleaf_evergreen Tropical_broad-leaved_evergreen C3_crop C4_crop Irrigated_crop C3_grass C4_grass Wetland Tropical_broad-leaved_decidus Temperate_broad-leaved_evergreen Temperate_needleaf_evergreen Boreal_broad-leaved_decidus Boreal_needleaf_decidus Tundra_grass Shrub'),
         'sza5': 'sza5',
         'effectRadIc': 'effectRadIc',
         'oline': 'oline',

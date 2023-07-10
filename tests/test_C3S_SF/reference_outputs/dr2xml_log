@@ -1,0 +1,231 @@
+
+ **************************************************
+*
+*              dr2xml version:  3.0
+*   CMIP6 conventions version:  v6.2.4
+*  CMIP6 Data Request version:  No Data Request
+
+*
+ **************************************************
+
+**************************************************
+
+Processing context  surfex
+
+**************************************************
+
+Number of Request Links which apply to MIPS ['AerChemMIP', 'C4MIP', 'CFMIP', 'CMIP', 'CMIP6', 'CORDEX', 'DAMIP', 'DCPP', 'FAFMIP', 'GMMIP', 'GeoMIP', 'HighResMIP', 'ISMIP6', 'LS3MIP', 'LUMIP', 'OMIP', 'PMIP', 'RFMIP', 'SIMIP', 'ScenarioMIP']  is: 0
+Number of Request Links after filtering by excluded_request_links is: 0
+Number of Request Links after filtering by included_request_links is: 0
+Filtering for experiment a4SST, covering years [ ?? , ?? ] in DR
+Number of Request Links which apply to experiment a4SST member 1 and MIPs ['AerChemMIP', 'C4MIP', 'CFMIP', 'CMIP', 'CMIP6', 'CORDEX', 'DAMIP', 'DCPP', 'FAFMIP', 'GMMIP', 'GeoMIP', 'HighResMIP', 'ISMIP6', 'LS3MIP', 'LUMIP', 'OMIP', 'PMIP', 'RFMIP', 'SIMIP', 'ScenarioMIP'] is: 0
+Number of (CMOR variable, grid) pairs for these requestLinks is: 0
+Number once filtered by excluded/included vars and tables and spatial shapes is: 0
+Number of distinct CMOR variables (whatever the grid): 0
+Number of distinct var labels is: 0
+Number of simplified vars is: 0
+Issues with standard names are: []
+homevars file: current_directory/test_C3S_SF/input/home_data_request/home_data_request_C3S-SF.txt
+For extra table CNRM_HOM (which has 8 variables):
+	Variables which dim was found in extra coordinates table:
+		           height_2m: tas tdas uas vas
+
+		                 lat: clt orog psl sftlf tas tdas uas vas
+
+		                 lon: clt orog psl sftlf tas tdas uas vas
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+
+Number of 'cmor', 'dev' and 'perso' among home variables: 0
+Number of 'extra' among home variables: 8
+homevars list: psl clt tas tdas uas vas orog sftlf
+
+Realms for these CMORvars: atmos land
+Processing realm 'aerosol' of context 'surfex' -- no variable asked (skip)
+Processing realm 'atmos atmosChem' of context 'surfex' -- no variable asked (skip)
+Processing realm 'atmos land' of context 'surfex' -- no variable asked (skip)
+Processing realm 'atmosChem' of context 'surfex' -- no variable asked (skip)
+Processing realm 'land landIce' of context 'surfex' -- no variable asked (skip)
+Processing realm 'landIce' of context 'surfex' -- no variable asked (skip)
+Processing realm 'landIce land' of context 'surfex' -- no variable asked (skip)
+Processing realm 'atmos' of context 'surfex'
+Processing realm 'land' of context 'surfex'
+processing file current_directory/test_C3S_SF/input/xml/ping_surfex.xml:
+OK current_directory/test_C3S_SF/input/xml/ping_surfex.xml
+processing file current_directory/test_C3S_SF/input/xml/ping_nemo.xml:
+OK current_directory/test_C3S_SF/input/xml/ping_nemo.xml
+processing file current_directory/test_C3S_SF/input/xml/ping_trip.xml:
+OK current_directory/test_C3S_SF/input/xml/ping_trip.xml
+Warning: issue when analyzing cell_time_method None for            orog in table HOM, assuming it is once
+Warning: issue when analyzing cell_time_method None for           sftlf in table HOM, assuming it is once
+Warning: issue when analyzing cell_time_method None for            orog in table HOM, assuming it is once
+Warning: issue when analyzing cell_time_method None for           sftlf in table HOM, assuming it is once
+
+file_def written as current_directory/test_C3S_SF/test_outputs/dr2xml_surfex.xml
+
+
+Some Statistics on actually written variables per frequency+shape...
+                             HOM P1   2: orog sftlf
+        fx    XY-na    -------- ---   2
+
+        fx --------    -------- ---   2
+
+                             HOM P1   6: clt psl tas tdas uas vas
+     6hrPt    XY-na    -------- ---   6
+
+     6hrPt --------    -------- ---   6
+
+
+---------- --------    -------- ---   8
+
+
+Some Statistics on actually written variables per variable...
+-----------------
+--- VARNAME: clt: Cloud Area Fraction
+-----------------
+              *  6hrPt_HOM_XY-na_1.0 clt
+------------------
+--- VARNAME: orog: Surface Altitude
+------------------
+              *     fx_HOM_XY-na_1.0 orog
+-----------------
+--- VARNAME: psl: Sea Level Pressure
+-----------------
+              *  6hrPt_HOM_XY-na_1.0 psl
+-------------------
+--- VARNAME: sftlf: Land Area Fraction
+-------------------
+              *     fx_HOM_XY-na_1.0 sftlf
+-----------------
+--- VARNAME: tas: Near-Surface Air Temperature
+-----------------
+              *  6hrPt_HOM_XY-na_1.0 tas
+------------------
+--- VARNAME: tdas: 2m Dewpoint Temperature
+------------------
+              *  6hrPt_HOM_XY-na_1.0 tdas
+-----------------
+--- VARNAME: uas: Eastward Near-Surface Wind
+-----------------
+              *  6hrPt_HOM_XY-na_1.0 uas
+-----------------
+--- VARNAME: vas: Northward Near-Surface Wind
+-----------------
+              *  6hrPt_HOM_XY-na_1.0 vas
+
+ **************************************************
+*
+*              dr2xml version:  3.0
+*   CMIP6 conventions version:  v6.2.4
+*  CMIP6 Data Request version:  No Data Request
+
+*
+ **************************************************
+
+**************************************************
+
+Processing context  nemo
+
+**************************************************
+
+Filtering for experiment a4SST, covering years [ ?? , ?? ] in DR
+Number of Request Links which apply to experiment a4SST member 1 and MIPs ['AerChemMIP', 'C4MIP', 'CFMIP', 'CMIP', 'CMIP6', 'CORDEX', 'DAMIP', 'DCPP', 'FAFMIP', 'GMMIP', 'GeoMIP', 'HighResMIP', 'ISMIP6', 'LS3MIP', 'LUMIP', 'OMIP', 'PMIP', 'RFMIP', 'SIMIP', 'ScenarioMIP'] is: 0
+Number of (CMOR variable, grid) pairs for these requestLinks is: 0
+Number once filtered by excluded/included vars and tables and spatial shapes is: 0
+Number of distinct CMOR variables (whatever the grid): 0
+Number of distinct var labels is: 0
+Number of simplified vars is: 0
+Issues with standard names are: []
+homevars file: current_directory/test_C3S_SF/input/home_data_request/home_data_request_C3S-SF.txt
+For extra table CNRM_HOM (which has 8 variables):
+	Variables which dim was found in extra coordinates table:
+		           height_2m: tas tdas uas vas
+
+		                 lat: clt orog psl sftlf tas tdas uas vas
+
+		                 lon: clt orog psl sftlf tas tdas uas vas
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+
+Number of 'cmor', 'dev' and 'perso' among home variables: 0
+Number of 'extra' among home variables: 8
+homevars list: psl clt tas tdas uas vas orog sftlf
+
+Realms for these CMORvars: atmos land
+Processing realm 'ocean' of context 'nemo' -- no variable asked (skip)
+Processing realm 'ocean seaIce' of context 'nemo' -- no variable asked (skip)
+Processing realm 'ocnBgChem' of context 'nemo' -- no variable asked (skip)
+Processing realm 'seaIce' of context 'nemo' -- no variable asked (skip)
+Processing realm 'seaIce ocean' of context 'nemo' -- no variable asked (skip)
+processing file current_directory/test_C3S_SF/input/xml/ping_surfex.xml:
+OK current_directory/test_C3S_SF/input/xml/ping_surfex.xml
+processing file current_directory/test_C3S_SF/input/xml/ping_nemo.xml:
+OK current_directory/test_C3S_SF/input/xml/ping_nemo.xml
+processing file current_directory/test_C3S_SF/input/xml/ping_trip.xml:
+OK current_directory/test_C3S_SF/input/xml/ping_trip.xml
+
+file_def written as current_directory/test_C3S_SF/test_outputs/dr2xml_nemo.xml
+
+
+Some Statistics on actually written variables per frequency+shape...
+
+---------- --------    -------- ---   0
+
+
+Some Statistics on actually written variables per variable...
+
+ **************************************************
+*
+*              dr2xml version:  3.0
+*   CMIP6 conventions version:  v6.2.4
+*  CMIP6 Data Request version:  No Data Request
+
+*
+ **************************************************
+
+**************************************************
+
+Processing context  trip
+
+**************************************************
+
+Filtering for experiment a4SST, covering years [ ?? , ?? ] in DR
+Number of Request Links which apply to experiment a4SST member 1 and MIPs ['AerChemMIP', 'C4MIP', 'CFMIP', 'CMIP', 'CMIP6', 'CORDEX', 'DAMIP', 'DCPP', 'FAFMIP', 'GMMIP', 'GeoMIP', 'HighResMIP', 'ISMIP6', 'LS3MIP', 'LUMIP', 'OMIP', 'PMIP', 'RFMIP', 'SIMIP', 'ScenarioMIP'] is: 0
+Number of (CMOR variable, grid) pairs for these requestLinks is: 0
+Number once filtered by excluded/included vars and tables and spatial shapes is: 0
+Number of distinct CMOR variables (whatever the grid): 0
+Number of distinct var labels is: 0
+Number of simplified vars is: 0
+Issues with standard names are: []
+homevars file: current_directory/test_C3S_SF/input/home_data_request/home_data_request_C3S-SF.txt
+For extra table CNRM_HOM (which has 8 variables):
+	Variables which dim was found in extra coordinates table:
+		           height_2m: tas tdas uas vas
+
+		                 lat: clt orog psl sftlf tas tdas uas vas
+
+		                 lon: clt orog psl sftlf tas tdas uas vas
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+
+Number of 'cmor', 'dev' and 'perso' among home variables: 0
+Number of 'extra' among home variables: 8
+homevars list: psl clt tas tdas uas vas orog sftlf
+
+Realms for these CMORvars: atmos land
+processing file current_directory/test_C3S_SF/input/xml/ping_surfex.xml:
+OK current_directory/test_C3S_SF/input/xml/ping_surfex.xml
+processing file current_directory/test_C3S_SF/input/xml/ping_nemo.xml:
+OK current_directory/test_C3S_SF/input/xml/ping_nemo.xml
+processing file current_directory/test_C3S_SF/input/xml/ping_trip.xml:
+OK current_directory/test_C3S_SF/input/xml/ping_trip.xml
+
+file_def written as current_directory/test_C3S_SF/test_outputs/dr2xml_trip.xml
+
+
+Some Statistics on actually written variables per frequency+shape...
+
+---------- --------    -------- ---   0
+
+
+Some Statistics on actually written variables per variable...

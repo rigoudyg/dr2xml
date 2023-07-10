@@ -1,20 +1,6 @@
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# This file is used for telling dr2xml a number of parameters that are dependant on the
-# laboratory and models, and the default value for parameters that are dependant on the
-# experiment (and which may be changed in a companion file 'experiment_settings.py'
-
-# The plain user will usually not change anything here; the CMIP6 expert will, in
-# agreement with the lab's CMIP6 point(s) of contact
-
-# The reference documents are listed in top level document :https://pcmdi.llnl.gov/CMIP6/Guide/
-# Of interest :
-#   - paragraph 5 of https://pcmdi.llnl.gov/CMIP6/Guide/modelers.html
-#   - CMIP6 Data Request , in browsable format: http://clipc-services.ceda.ac.uk/dreq/index.html
-
-
-from tests.tests_config import path_xml
-path_xml_aladin = "/".join([path_xml, "../xml_files_RCSM6_HIS"])
 
 j_mean_comment = "This variable has an axis labelled j-mean, while CMIP6 calls for an axis labelled latitude. " \
                  "We want here to pinpoint that we provide values which are averaged over the X-axis of our tripolar " \
@@ -33,7 +19,8 @@ ISBA_lwb = 'ISBA land water budget = (dslw+dcw+dsn+dsw)/dt - (pr-et-mrro) ; dt i
            'interval_operation'
 
 lab_and_model_settings = {
-    'path_to_parse': '{}/'.format(path_xml_aladin),
+    'source': 'CORDEX',
+    'path_to_parse': '{path_xml}/',
     'comment': '',
     'tierMax': 1,
     'references': 'http://www.umr-cnrm.fr/',
@@ -43,21 +30,24 @@ lab_and_model_settings = {
                    'land landIce', 'landIce'],
         'trip': []
     },
-    'source': 'CORDEX',
     'fx_from_file': {
-        'areacella': {'complete': {
-            'HR': 'areacella_complete_CMIP6_tl359',
-            'LR': 'areacella_complete_CMIP6_tl127'
-        }},
-        'C': {'REG': 'areacella_zoneC'}
+        'areacella': {
+            'complete': {
+                'HR': 'areacella_complete_CMIP6_tl359',
+                'LR': 'areacella_complete_CMIP6_tl127'
+            }
+        },
+        'C': {
+            'REG': 'areacella_zoneC'
+        }
     },
     'grid_choice': {
-        'CNRM-ESM2-1': 'LR',
-        'CNRM-CM6-1': 'LR',
-        'CNRM-CM6-1-HR': 'HR',
         'CNRM-ALADIN64': 'REG',
+        'CNRM-RCSM6': 'REG',
+        'CNRM-ESM2-1': 'LR',
         'CNRM-ESM2-1-HR': 'HR',
-        'CNRM-RCSM6': 'REG'
+        'CNRM-CM6-1': 'LR',
+        'CNRM-CM6-1-HR': 'HR'
     },
     'print_stats_per_var_label': True,
     'vertical_interpolation_sample_freq': '1h',
@@ -74,12 +64,23 @@ lab_and_model_settings = {
     'info_url': 'http://www.umr-cnrm.fr/',
     'use_cmorvar_label_in_filename': False,
     'allow_duplicates_in_same_table': False,
-    'institution': 'CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France)',
     'allow_pseudo_standard_names': True,
     'sampling_timestep': {
-        'HR': {'nemo': 1800.0, 'surfex': 900.0, 'trip': 1800.0},
-        'LR': {'nemo': 1800.0, 'surfex': 900.0, 'trip': 1800.0},
-        'REG': {'nemo': 1800.0, 'surfex': 900.0, 'trip': 1800.0}
+        'REG': {
+            'surfex': 900.0,
+            'nemo': 1800.0,
+            'trip': 1800.0
+        },
+        'HR': {
+            'surfex': 900.0,
+            'nemo': 1800.0,
+            'trip': 1800.0
+        },
+        'LR': {
+            'surfex': 900.0,
+            'nemo': 1800.0,
+            'trip': 1800.0
+        }
     },
     'sizes': {
         'HR': [1514100, 75, 259200, 91, 30, 14, 128],
@@ -87,55 +88,53 @@ lab_and_model_settings = {
         'REG': [106428, 75, 23040, 91, 30, 14, 128]
     },
     'source_types': {
-        'CNRM-ESM2-1': 'AOGCM BGC AER CHEM',
-        'CNRM-CM6-1': 'AOGCM',
-        'CNRM-CM6-1-HR': 'AOGCM',
         'CNRM-ALADIN64': 'ARCM AER',
+        'CNRM-RCSM6': 'AORCM AER',
+        'CNRM-ESM2-1': 'AOGCM BGC AER CHEM',
         'CNRM-ESM2-1-HR': 'AOGCM BGC AER',
-        'CNRM-RCSM6': 'AORCM AER'
+        'CNRM-CM6-1': 'AOGCM',
+        'CNRM-CM6-1-HR': 'AOGCM'
     },
     'configurations': {
+        'ARCM': ('CNRM-ALADIN64', 'ARCM AER', ['nemo']),
+        'AORCM': ('CNRM-RCSM6', 'AORCM AER', []),
+        'AOESMHR': ('CNRM-ESM2-1-HR', 'AOGCM BGC AER', []),
+        'AESM': ('CNRM-ESM2-1', 'AGCM BGC AER CHEM', ['nemo']),
+        'OESMHR': ('CNRM-ESM2-1-HR', 'OGCM BGC', ['surfex', 'trip']),
+        'AOESM': ('CNRM-ESM2-1', 'AOGCM BGC AER CHEM', []),
         'LESM': ('CNRM-ESM2-1', 'LAND BGC', ['nemo']),
         'AGCM': ('CNRM-CM6-1', 'AGCM', ['nemo']),
         'OGCMHR': ('CNRM-CM6-1-HR', 'OGCM', ['surfex', 'trip']),
         'AOGCMHR': ('CNRM-CM6-1-HR', 'AOGCM', []),
         'AGCMAER': ('CNRM-CM6-1', 'AGCM AER', ['nemo']),
-        'AOESMHR': ('CNRM-ESM2-1-HR', 'AOGCM BGC AER', []),
-        'AESM': ('CNRM-ESM2-1', 'AGCM BGC AER CHEM', ['nemo']),
-        'AORCM': ('CNRM-RCSM6', 'AORCM AER', []),
         'AGCMHR': ('CNRM-CM6-1-HR', 'AGCM', ['nemo']),
-        'OESMHR': ('CNRM-ESM2-1-HR', 'OGCM BGC', ['surfex', 'trip']),
         'OESM': ('CNRM-ESM2-1', 'OGCM BGC', ['surfex', 'trip']),
         'AESMHR': ('CNRM-ESM2-1-HR', 'AGCM BGC AER', []),
         'AGCMHRAER': ('CNRM-CM6-1-HR', 'AGCM AER', ['nemo']),
         'AOGCM': ('CNRM-CM6-1', 'AOGCM', []),
         'LGCM': ('CNRM-CM6-1', 'LAND', ['nemo']),
-        'AOESM': ('CNRM-ESM2-1', 'AOGCM BGC AER CHEM', []),
-        'ARCM': ('CNRM-ALADIN64', 'ARCM AER', ['nemo']),
         'OGCM': ('CNRM-CM6-1', 'OGCM', ['surfex', 'trip'])
     },
     'grids': {
-        'HR': {'nemo': ['gn', '', '', '25 km', 'native ocean tri-polar grid with 1.47 M ocean cells'],
-               'surfex': ['gr', 'complete', 'glat', '50 km', 'data regridded to a 359 gaussian grid (360x720 latlon)'
-                                                             ' from a native atmosphere T359l reduced gaussian grid'],
-               'trip': ['gn', '', '', '50 km', 'regular 1/2 deg lat-lon grid']
-               },
-        'LR': {
-            'nemo': ['gn', '', '', '100 km', 'native ocean tri-polar grid with 105 k ocean cells'],
-            'surfex': ['gr', 'complete', 'glat', '250 km', 'data regridded to a T127 gaussian grid (128x256 latlon) '
-                                                           'from a native atmosphere T127l reduced gaussian grid'],
+        'REG': {
+            'surfex': ['gn', 'C', 'glat', '50 km', 'regional zone C '],
+            'trip': ['gn', '', '', '50 km', 'regular 1/2 deg lat-lon grid'],
+            'nemo': ['gn', '', '', '8 km', 'native ocean tri-polar grid']
+        },
+        'HR': {
+            'nemo': ['gn', '', '', '25 km', 'native ocean tri-polar grid with 1.47 M ocean cells'],
+            'surfex': ['gr', 'complete', 'glat', '50 km', 'data regridded to a 359 gaussian grid (360x720 latlon) from a native atmosphere T359l reduced gaussian grid'],
             'trip': ['gn', '', '', '50 km', 'regular 1/2 deg lat-lon grid']
         },
-        'REG': {
-            'nemo': ['gn', '', '', '8 km', 'native ocean tri-polar grid'],
-            'surfex': ['gn', 'C', 'glat', '50 km', 'regional zone C '],
+        'LR': {
+            'nemo': ['gn', '', '', '100 km', 'native ocean tri-polar grid with 105 k ocean cells'],
+            'surfex': ['gr', 'complete', 'glat', '250 km', 'data regridded to a T127 gaussian grid (128x256 latlon) from a native atmosphere T127l reduced gaussian grid'],
             'trip': ['gn', '', '', '50 km', 'regular 1/2 deg lat-lon grid']
         }
     },
     'dr2xml_manages_enddate': True,
     'excluded_vars': ['pfull', 'phalf', 'n2oClim', 'ch4globalClim', 'co2massClim', 'n2oglobalClim', 'ch4Clim', 'o3Clim',
-                      'co2Clim'
-                      ],
+                      'co2Clim'],
     'too_long_periods': ['dec', 'yr'],
     'ping_variables_prefix': 'CMIP6_',
     'comments': {
@@ -163,7 +162,8 @@ lab_and_model_settings = {
         'dsw': 'Change in floodplains water ; ISBA land water budget = (dslw+dcw+dsn+dsw)/dt - (pr-et-mrro) ; dt is given by netcdf attribute : interval_operation',
         'sw': 'Surface floodplains water storage (e.g. Decharme et al. 2018)',
         'siareas': sectors_comment_south,
-        'siarean': sectors_comment_north, 'wilt': '100 * ISBA Wilting Point in m3/m3',
+        'siarean': sectors_comment_north,
+        'wilt': '100 * ISBA Wilting Point in m3/m3',
         'eow': 'Liquid water evaporation from floodplains (e.g. Decharme et al. 2018)',
         'prsnsn': 'In ISBA, prsnsn is always 1 because all snowfall falls onto snowpack',
         'dtesn': 'ISBA land energy budget = (dtes+dtesn)/dt + hfmlt - hfdsl ; dt is given by netcdf attribute : interval_operation',
@@ -177,9 +177,7 @@ lab_and_model_settings = {
     'included_tables': ['Amon'],
     'max_file_size_in_floats': 4000000000.0,
     'non_standard_attributes': {
-        'xios_commit': '1442-shuffle',
-        #'nemo_gelato_commit': '49095b3accd5d4c_6524fe19b00467a',
-        #'arpege_minor_version': '6.4.1'
+        'xios_commit': '1442-shuffle'
     },
     'special_timestep_vars': {
         '60mi': ['cllcalipso', 'clmcalipso', 'clhcalipso', 'cltcalipso', 'cllcalipsoice', 'clmcalipsoice',
@@ -193,12 +191,14 @@ lab_and_model_settings = {
                  'jpdftaureicemodis', 'clmisr']
     },
     'institution_id': 'CNRM',
+    'institution': 'CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France)',
     'excluded_spshapes': ['XYA-na', 'XYG-na', 'na-A'],
     'mips': {
-        'HR': {'ScenarioMIP', 'CMIP', 'CMIP6', 'OMIP'},
-        'LR': {'C4MIP', 'DCPP', 'CORDEX', 'ISMIP6', 'GMMIP', 'RFMIP', 'LUMIP', 'CFMIP', 'FAFMIP', 'DAMIP', 'AerChemMIP',
-               'SIMIP', 'CMIP', 'PMIP', 'CMIP6', 'ScenarioMIP', 'LS3MIP', 'OMIP', 'GeoMIP', 'HighResMIP'},
-        'REG': {'CORDEX'}
+        'HR': set(['ScenarioMIP', 'CMIP', 'CMIP6', 'OMIP']),
+        'LR': set(['C4MIP', 'DCPP', 'CORDEX', 'ISMIP6', 'GMMIP', 'RFMIP', 'LUMIP', 'CFMIP', 'FAFMIP', 'DAMIP',
+                   'AerChemMIP', 'SIMIP', 'CMIP', 'PMIP', 'CMIP6', 'ScenarioMIP', 'LS3MIP', 'OMIP', 'GeoMIP',
+                   'HighResMIP']),
+        'REG': set(['CORDEX', ])
     },
     'non_standard_axes': {
         'siline': 'siline',
@@ -206,11 +206,7 @@ lab_and_model_settings = {
         'klev': 'alevel',
         'soil_carbon_pools': ('soilpools', 'fast medium slow'),
         'effectRadL': 'effectRadL',
-        'vegtype': ('vegtype', 'Bare_soil Rock Permanent_snow Temperate_broad-leaved_decidus Boreal_needleaf_evergreen '
-                               'Tropical_broad-leaved_evergreen C3_crop C4_crop Irrigated_crop C3_grass C4_grass '
-                               'Wetland Tropical_broad-leaved_decidus Temperate_broad-leaved_evergreen '
-                               'Temperate_needleaf_evergreen Boreal_broad-leaved_decidus Boreal_needleaf_decidus '
-                               'Tundra_grass Shrub'),
+        'vegtype': ('vegtype', 'Bare_soil Rock Permanent_snow Temperate_broad-leaved_decidus Boreal_needleaf_evergreen Tropical_broad-leaved_evergreen C3_crop C4_crop Irrigated_crop C3_grass C4_grass Wetland Tropical_broad-leaved_decidus Temperate_broad-leaved_evergreen Temperate_needleaf_evergreen Boreal_broad-leaved_decidus Boreal_needleaf_decidus Tundra_grass Shrub'),
         'sza5': 'sza5',
         'effectRadIc': 'effectRadIc',
         'oline': 'oline',
@@ -218,19 +214,27 @@ lab_and_model_settings = {
         'klev_half': 'alevel'
     },
     'branching': {
-        'CNRM-ESM2-1': {'historical': (1850, [1850, 1883, 1941])},
-        'CNRM-CM6-1': {'historical': (1850, [1850, 1883, 1941, 1960, 1990, 2045, 2079, 2108, 2214, 2269])},
-        'CNRM-CM6-1-HR': {'historical': (1850, [1850, 1883, 1941])}
+        'CNRM-ESM2-1': {
+            'historical': (1850, [1850, 1883, 1941])
+        },
+        'CNRM-CM6-1': {
+            'historical': (1850, [1850, 1883, 1941, 1960, 1990, 2045, 2079, 2108, 2214, 2269])
+        },
+        'CNRM-CM6-1-HR': {
+            'historical': (1850, [1850, 1883, 1941])
+        }
     },
     'excluded_vars_per_config': {
-        'LESM': ['ch4', 'co2', 'hur', 'hus', 'n2o', 'o3', 'ta', 'ua', 'va', 'wap', 'zg', 'clt', 'ccb', 'cct', 'ci',
-                 'clivi', 'clt', 'clwvi', 'evspsbl', 'fco2antt', 'fco2fos', 'pr', 'prc', 'prsn', 'prw', 'ps', 'psl',
-                 'rldscs', 'rlut', 'rlutcs', 'rsdscs', 'rsdt', 'rsuscs', 'rsut', 'rsutcs', 'ch4global', 'co2mass',
-                 'n2oglobal', 'mc', 'cl', 'cli', 'clw'],
-        'LGCM': ['ch4', 'co2', 'hur', 'hus', 'n2o', 'o3', 'ta', 'ua', 'va', 'wap', 'zg', 'clt', 'ccb', 'cct', 'ci',
-                 'clivi', 'clt', 'clwvi', 'evspsbl', 'fco2antt', 'fco2fos', 'pr', 'prc', 'prsn', 'prw', 'ps', 'psl',
-                 'rldscs', 'rlut', 'rlutcs', 'rsdscs', 'rsdt', 'rsuscs', 'rsut', 'rsutcs', 'ch4global', 'co2mass',
-                 'n2oglobal', 'mc', 'cl', 'cli', 'clw'],
+        'ARCM': ['ch4', 'co2', 'co', 'h2o', 'hcho', 'hcl', 'hno3', 'n2o', 'no2', 'no', 'o3Clim', 'o3loss', 'o3prod',
+                 'oh', 'fco2antt', 'fco2fos', 'fco2nat', 'oxloss', 'oxprod', 'vmrox', 'bry', 'cly', 'ho2', 'meanage',
+                 'noy', 'cLand', 'cSoil', 'fAnthDisturb', 'fDeforestToProduct', 'fFireNat', 'fLuc', 'fProductDecomp',
+                 'netAtmosLandCO2Flux', 'burntFractionAll', 'cLitter', 'cProduct', 'cVeg', 'fFire', 'fLitterSoil',
+                 'fVegLitter', 'nbp', 'shrubFrac'],
+        'AORCM': ['ch4', 'co2', 'co', 'h2o', 'hcho', 'hcl', 'hno3', 'n2o', 'no2', 'no', 'o3Clim', 'o3loss', 'o3prod',
+                  'oh', 'fco2antt', 'fco2fos', 'fco2nat', 'oxloss', 'oxprod', 'vmrox', 'bry', 'cly', 'ho2', 'meanage',
+                  'noy', 'cLand', 'cSoil', 'fAnthDisturb', 'fDeforestToProduct', 'fFireNat', 'fLuc', 'fProductDecomp',
+                  'netAtmosLandCO2Flux', 'burntFractionAll', 'cLitter', 'cProduct', 'cVeg', 'fFire', 'fLitterSoil',
+                  'fVegLitter', 'nbp', 'shrubFrac'],
         'AGCMHRAER': ['ch4', 'co2', 'co', 'h2o', 'hcho', 'hcl', 'hno3', 'n2o', 'no2', 'no', 'o3Clim', 'o3loss',
                       'o3prod', 'oh', 'fco2antt', 'fco2fos', 'fco2nat', 'oxloss', 'oxprod', 'vmrox', 'bry', 'cly',
                       'ho2', 'meanage', 'noy', 'cLand', 'cSoil', 'fAnthDisturb', 'fDeforestToProduct', 'fFireNat',
@@ -245,6 +249,7 @@ lab_and_model_settings = {
                  'fFireNat', 'fLuc', 'fProductDecomp', 'netAtmosLandCO2Flux', 'od443dust', 'od865dust', 'sconcdust',
                  'sconcso4', 'sconcss', 'sedustCI', 'burntFractionAll', 'cLitter', 'cProduct', 'cVeg', 'fFire',
                  'fLitterSoil', 'fVegLitter', 'nbp', 'shrubFrac'],
+        'AESM': ['co2mass', 'ch4global', 'n2oglobal'],
         'AOGCM': ['ch4', 'co2', 'co', 'concdust', 'ec550aer', 'h2o', 'hcho', 'hcl', 'hno3', 'mmrbc', 'mmrdust', 'mmroa',
                   'mmrso4', 'mmrss', 'n2o', 'no2', 'no', 'o3Clim', 'o3loss', 'o3prod', 'oh', 'so2', 'mmrpm1',
                   'fco2antt', 'fco2fos', 'fco2nat', 'loadbc', 'loaddust', 'loadoa', 'loadso4', 'loadss', 'oxloss',
@@ -254,28 +259,25 @@ lab_and_model_settings = {
                   'fDeforestToProduct', 'fFireNat', 'fLuc', 'fProductDecomp', 'netAtmosLandCO2Flux', 'od443dust',
                   'od865dust', 'sconcdust', 'sconcso4', 'sconcss', 'sedustCI', 'burntFractionAll', 'cLitter',
                   'cProduct', 'cVeg', 'fFire', 'fLitterSoil', 'fVegLitter', 'nbp', 'shrubFrac'],
+        'LGCM': ['ch4', 'co2', 'hur', 'hus', 'n2o', 'o3', 'ta', 'ua', 'va', 'wap', 'zg', 'clt', 'ccb', 'cct', 'ci',
+                 'clivi', 'clt', 'clwvi', 'evspsbl', 'fco2antt', 'fco2fos', 'pr', 'prc', 'prsn', 'prw', 'ps', 'psl',
+                 'rldscs', 'rlut', 'rlutcs', 'rsdscs', 'rsdt', 'rsuscs', 'rsut', 'rsutcs', 'ch4global', 'co2mass',
+                 'n2oglobal', 'mc', 'cl', 'cli', 'clw'],
         'AGCMAER': ['ch4', 'co2', 'co', 'h2o', 'hcho', 'hcl', 'hno3', 'n2o', 'no2', 'no', 'o3Clim', 'o3loss', 'o3prod',
                     'oh', 'fco2antt', 'fco2fos', 'fco2nat', 'oxloss', 'oxprod', 'vmrox', 'bry', 'cly', 'ho2', 'meanage',
                     'noy', 'cLand', 'cSoil', 'fAnthDisturb', 'fDeforestToProduct', 'fFireNat', 'fLuc', 'fProductDecomp',
                     'netAtmosLandCO2Flux', 'burntFractionAll', 'cLitter', 'cProduct', 'cVeg', 'fFire', 'fLitterSoil',
                     'fVegLitter', 'nbp', 'shrubFrac'],
         'AOESM': ['co2mass', 'ch4global', 'n2oglobal'],
-        'ARCM': ['ch4', 'co2', 'co', 'h2o', 'hcho', 'hcl', 'hno3', 'n2o', 'no2', 'no', 'o3Clim', 'o3loss', 'o3prod',
-                 'oh', 'fco2antt', 'fco2fos', 'fco2nat', 'oxloss', 'oxprod', 'vmrox', 'bry', 'cly', 'ho2', 'meanage',
-                 'noy', 'cLand', 'cSoil', 'fAnthDisturb', 'fDeforestToProduct', 'fFireNat', 'fLuc', 'fProductDecomp',
-                 'netAtmosLandCO2Flux', 'burntFractionAll', 'cLitter', 'cProduct', 'cVeg', 'fFire', 'fLitterSoil',
-                 'fVegLitter', 'nbp', 'shrubFrac'],
-        'AESM': ['co2mass', 'ch4global', 'n2oglobal'],
-        'AORCM': ['ch4', 'co2', 'co', 'h2o', 'hcho', 'hcl', 'hno3', 'n2o', 'no2', 'no', 'o3Clim', 'o3loss', 'o3prod',
-                  'oh', 'fco2antt', 'fco2fos', 'fco2nat', 'oxloss', 'oxprod', 'vmrox', 'bry', 'cly', 'ho2', 'meanage',
-                  'noy', 'cLand', 'cSoil', 'fAnthDisturb', 'fDeforestToProduct', 'fFireNat', 'fLuc', 'fProductDecomp',
-                  'netAtmosLandCO2Flux', 'burntFractionAll', 'cLitter', 'cProduct', 'cVeg', 'fFire', 'fLitterSoil',
-                  'fVegLitter', 'nbp', 'shrubFrac']
+        'LESM': ['ch4', 'co2', 'hur', 'hus', 'n2o', 'o3', 'ta', 'ua', 'va', 'wap', 'zg', 'clt', 'ccb', 'cct', 'ci',
+                 'clivi', 'clt', 'clwvi', 'evspsbl', 'fco2antt', 'fco2fos', 'pr', 'prc', 'prsn', 'prw', 'ps', 'psl',
+                 'rldscs', 'rlut', 'rlutcs', 'rsdscs', 'rsdt', 'rsuscs', 'rsut', 'rsutcs', 'ch4global', 'co2mass',
+                 'n2oglobal', 'mc', 'cl', 'cli', 'clw']
     },
     'allow_tos_3hr_1deg': True,
     'contact': 'contact.aladin-cordex@meteo.fr',
     'compression_level': 0,
     'grid_policy': 'adhoc',
     'bytes_per_float': 2.4,
-    'project': "CORDEX"
+    'project': 'CORDEX'
 }

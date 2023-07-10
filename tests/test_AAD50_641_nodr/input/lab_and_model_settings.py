@@ -13,16 +13,12 @@
 #   - CMIP6 Data Request , in browsable format: http://clipc-services.ceda.ac.uk/dreq/index.html
 
 
-from tests.tests_config import path_xml
-path_xml_aladin = "/".join([path_xml, "../xml_files_Aladin"])
-
 lab_and_model_settings = {
-    'path_to_parse': '{}/'.format(path_xml_aladin),
+    'path_to_parse': '{path_xml}/',
     'save_project_settings': 'dr2xml_project_settings.json',
     'data_request_used': None,
     'institution_id': "CNRM",  # institution full description will be read in CMIP6_CV
-    'institution': "CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France)", 
-    
+    'institution': "CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France)",
     # We describe the "CMIP6 source type" (i.e. components assembly) which is the default
     # for each model. This value can be changed on a per experiment basis, in experiment_settings file
     # However, using a 'configuration' is finer (see below)
@@ -501,4 +497,3 @@ lab_and_model_settings = {
     'project': "CORDEX"
 
 }
-
