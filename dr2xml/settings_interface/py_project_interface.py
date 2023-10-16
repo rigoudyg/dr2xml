@@ -13,7 +13,7 @@ from .py_settings_interface import get_variable_from_lset_with_default_in_lset, 
 from dr2xml.projects.projects_interface_definitions import ParameterSettings
 
 
-def initialize_project_settings():
+def initialize_project_settings(dirname):
     # Read content from json file
     project_filename = get_variable_from_lset_with_default_in_lset(key="project_settings", key_default="project",
                                                                    default="CMIP6")
@@ -22,12 +22,12 @@ def initialize_project_settings():
     # If asked, save the settings into a dedicated file
     save_project_settings = get_variable_from_lset_with_default("save_project_settings", None)
     if save_project_settings is not None:
-        write_project_content(save_project_settings, internal_values, common_values, project_settings)
+        write_project_content(save_project_settings, internal_values, common_values, project_settings, dirname)
     return internal_values, common_values, project_settings
 
 
-def write_project_content(target, internal_values, common_values, project_settings):
-    with open(target, "w") as target_fic:
+def write_project_content(target, internal_values, common_values, project_settings, dirname):
+    with open(os.sep.join([dirname, target]), "w") as target_fic:
         target_fic.write(os.linesep.join([
             "from dr2xml.projects.projects_interface_definitions import *",
             "internal_values = %s" % internal_values,

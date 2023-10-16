@@ -575,7 +575,7 @@ def generate_file_defs(lset, sset, year, enddate, context, cvs_path, pingfiles=N
     # Initialize lset and sset variables for all functions
     initialize_config_variables()
     initialize_settings(lset=lset, sset=sset, cvspath=cvs_path, context=context, prefix=prefix,
-                        root=os.path.basename(os.path.abspath(__file__)), year=year)
+                        root=os.path.basename(os.path.abspath(__file__)), year=year, dirname=dirname)
     generate_file_defs_inner(year, enddate, context, pingfiles=pingfiles, dummies=dummies, dirname=dirname,
                              attributes=attributes, select=select)
     # pr.disable()
@@ -717,6 +717,7 @@ es with a different name between model
     # Write XIOS file_def
     # --------------------------------------------------------------------
     # filename=dirname+"filedefs_%s.xml"%context
+    os.chdir(dirname)
     filename = dirname + "dr2xml_%s.xml" % context
     write_xios_file_def(filename, svars_per_table, year, dummies, skipped_vars_per_table, actually_written_vars,
                         context, enddate, attributes)
