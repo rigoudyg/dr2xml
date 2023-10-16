@@ -15,6 +15,7 @@
 """
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+import copy
 import sys
 
 # Utilities
@@ -529,6 +530,6 @@ def DR_grid_to_grid_atts(grid):
     if grid in DR_grid_to_grid_atts_dict:
         return DR_grid_to_grid_atts_dict[grid]
     else:
-        default = DR_grid_to_grid_atts_dict["default"]
+        default = copy.deepcopy(DR_grid_to_grid_atts_dict["default"])
         default[-1] = default[-1] % grid
         return default

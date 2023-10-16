@@ -440,10 +440,14 @@ def write_xios_file_def(filename, svars_per_table, year, dummies, skipped_vars_p
             ok = False
             logger.warning("Model component %s is required by CMIP6 CV for experiment %s and not present "
                            "(present=%s)" % (c, experiment_id, repr(actual_components)))
-    if len(allowed_components) > 0:
-        for c in actual_components:
-            if c not in allowed_components and c not in required_components:
-                ok = False or internal_dict['bypass_CV_components']
+    if internal_dict["bypass_CV_components"]:
+        ok = True
+    elif len(allowed_components) > 0:
+        not_allowed_components = [c for c in actual_components if c not in allowed_components and
+                                  c not in required_components]
+        if len(not_allowed_components) > 0:
+            ok = False
+            for c in not_allowed_components:
                 logger.warning("Warning: Model component %s is present but not required nor allowed (%s)" %
                                (c, repr(allowed_components)))
     if not ok:

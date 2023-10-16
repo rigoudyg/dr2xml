@@ -559,7 +559,7 @@ example_simulation_settings = {
 
 def generate_file_defs(lset, sset, year, enddate, context, cvs_path, pingfiles=None,
                        dummies='include', printout=False, dirname="./", prefix="", attributes=list(),
-                       select="on_expt_and_year", debug=False):
+                       select="on_expt_and_year", debug=False, force_reset=False):
     """
     A wrapper for profiling top-level function : generate_file_defs_inner
     """
@@ -575,7 +575,8 @@ def generate_file_defs(lset, sset, year, enddate, context, cvs_path, pingfiles=N
     # Initialize lset and sset variables for all functions
     initialize_config_variables()
     initialize_settings(lset=lset, sset=sset, cvspath=cvs_path, context=context, prefix=prefix,
-                        root=os.path.basename(os.path.abspath(__file__)), year=year, dirname=dirname)
+                        root=os.path.basename(os.path.abspath(__file__)), year=year, dirname=dirname,
+                        force_reset=force_reset)
     generate_file_defs_inner(year, enddate, context, pingfiles=pingfiles, dummies=dummies, dirname=dirname,
                              attributes=attributes, select=select)
     # pr.disable()

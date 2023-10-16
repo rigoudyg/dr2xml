@@ -35,7 +35,7 @@ def check_perso_variable(home_var, hv_info):
         if home_var.mipVarLabel is None:
             home_var.set_attributes(mipVarLabel=home_var.label)
         data_request = get_data_request()
-        if any([cmvar.label == home_var.label for cmvar in data_request.get_list_of_elements_by_id("CMORvar").items]):
+        if any([cmvar.label == home_var.label for cmvar in data_request.get_list_by_id("CMORvar").items]):
             raise VarsError("Error: %s "
                             "HOMEVar is announced  as perso, is not a CMORVar, but has a cmor name. "
                             "=> Not taken into account." % hv_info)

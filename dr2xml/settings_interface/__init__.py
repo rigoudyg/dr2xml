@@ -20,8 +20,12 @@ common_settings = None
 project_settings = None
 
 
-def initialize_settings(lset=None, sset=None, **kwargs):
+def initialize_settings(lset=None, sset=None, force_reset=False, **kwargs):
     global internal_settings, common_settings, project_settings
+    if force_reset:
+        internal_settings = None
+        common_settings = None
+        project_settings = None
     # Initialize python settings dictionaries
     from .py_settings_interface import initialize_dict
     initialize_dict(new_lset=lset, new_sset=sset)
@@ -31,6 +35,8 @@ def initialize_settings(lset=None, sset=None, **kwargs):
     # Solve internal settings
     internal_settings = solve_values("internal", internal_dict=internal_settings, additional_dict=kwargs,
                                      allow_additional_keytypes=False)
+    from dr2xml.dr_interface import load_correct_dr
+    load_correct_dr()
     # Initialize laboratory sources
     from dr2xml.laboratories import initialize_laboratory_settings
     initialize_laboratory_settings()
