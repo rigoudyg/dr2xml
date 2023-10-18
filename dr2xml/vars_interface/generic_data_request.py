@@ -135,10 +135,9 @@ def select_data_request_CMORvars_for_lab(sset=False, year=None):
         for v in sc.get_vars_by_request_link(request_link=rl.uid, pmax=pmax):
             # The requested grid is given by the RequestLink except if spatial shape matches S-*
             gr = rl.grid
-            cmvar = data_request.get_element_uid(v)
-            st = data_request.get_element_uid(cmvar.stid)
-            sp = data_request.get_element_uid(st.spid)
-            if sp.label.startswith("S-"):
+            cmvar = data_request.get_element_uid(v, elt_type="variable")
+            sp = cmvar.spatial_shp
+            if sp.startswith("S-"):
                 gr = 'cfsites'
             miprl_vars_grids.add((v, gr))
             # if 'ua' in cmvar.label : print "adding %s %s"%(cmvar.label,get_element_uid(cmvar.vid).label)
@@ -186,14 +185,12 @@ def select_data_request_CMORvars_for_lab(sset=False, year=None):
 
     filtered_vars = list()
     for (v, g) in miprl_vars_grids:
-        cmvar = data_request.get_element_uid(v)
-        ttable = data_request.get_element_uid(cmvar.mtid)
-        mipvar = data_request.get_element_uid(cmvar.vid)
-        if is_elt_applicable(mipvar, attribute="label", excluded=excvars, included=incvars) and \
-            is_elt_applicable(ttable, attribute="label", excluded=exctab, included=inctab) and \
-                is_elt_applicable((mipvar, ttable), attribute="label", excluded=excpairs):
+        cmvar = data_request.get_element_uid(v, elt_type="variable")
+        if is_elt_applicable(cmvar.mipVarLabel, excluded=excvars, included=incvars) and \
+            is_elt_applicable(cmvar.mipTable, excluded=exctab, included=inctab) and \
+                is_elt_applicable((cmvar.mipVarLabel, cmvar.mipTable), excluded=excpairs):
             filtered_vars.append((v, g))
-            logger.debug("adding var %s, grid=%s, ttable=%s=" % (cmvar.label, g, ttable.label))  # ,exctab,excvars
+            logger.debug("adding var %s, grid=%s, ttable=%s=" % (cmvar.label, g, cmvar.mipTable))  # ,exctab,excvars
 
     logger.info('Number once filtered by excluded/included vars and tables and spatial shapes is: %s'
                 % len(filtered_vars))
@@ -223,11 +220,12 @@ def select_data_request_CMORvars_for_lab(sset=False, year=None):
     allow_pseudo = internal_settings['allow_pseudo_standard_names']
     for v in d:
         svar = SimpleCMORVar()
-        cmvar = data_request.get_element_uid(v)
-        sn_issues = complement_svar_using_cmorvar(svar, cmvar, sn_issues, [], allow_pseudo)
-        svar.Priority = analyze_priority(cmvar, mips_list)
+        cmvar = data_request.get_element_uid(v, elt_type="variable", sn_issues=sn_issues, allow_pseudo=allow_pseudo,
+                                             mip_list=mips_list)
+        complement_svar_using_cmorvar(svar, cmvar, [])
+        svar.Priority = cmvar.Priority
         svar.grids = d[v]
-        if data_request.get_element_uid(v).label in ["tas", ]:
+        if data_request.get_element_uid(v, elt_type="variable").label in ["tas", ]:
             logger.debug("When complementing, tas is included , grids are %s" % svar.grids)
         simplified_vars.append(svar)
     logger.info('Number of simplified vars is: %d' % len(simplified_vars))
@@ -324,22 +322,6 @@ def RequestItem_applies_for_exp_and_year(ri, experiment, year=None):
     else:
         # print
         return False, None
-
-
-def analyze_priority(cmvar, lmips):
-    """
-    Returns the max priority of the CMOR variable, for a set of mips
-    """
-    data_request = get_data_request()
-    prio = cmvar.defaultPriority
-    rv_ids = data_request.get_request_by_id_by_sect(cmvar.uid, 'requestVar')
-    for rv_id in rv_ids:
-        rv = data_request.get_element_uid(rv_id)
-        vg = data_request.get_element_uid(rv.vgid)
-        if vg.mip in lmips:
-            if rv.priority < prio:
-                prio = rv.priority
-    return prio
 
 
 def year_in_ri(ri, exp, year):
@@ -552,7 +534,7 @@ def endyear_for_CMORvar(cv, expt, year):
     pmax = internal_dict['max_priority']
 
     # 1- Get the RequestItems which apply to CmorVar
-    rVarsUid = data_request.get_request_by_id_by_sect(cv.uid, 'requestVar')
+    rVarsUid = data_request.get_request_by_id_by_sect(cv.id, 'requestVar')
     rVars = [data_request.get_element_uid(uid) for uid in rVarsUid
              if data_request.get_element_uid(uid).priority <= pmax]
     logger.debug("les requestVars: %s" % " ".join([rVar.title for rVar in rVars]))

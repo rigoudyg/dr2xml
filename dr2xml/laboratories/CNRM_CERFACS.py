@@ -15,7 +15,7 @@ def lab_grid_policy(cmvarid, grids):  # TBD
     See doc of lab_adhoc_grid_policy
     """
     internal_dict = get_settings_values("internal")
-    cmvar_uid = get_data_request().get_element_uid(cmvarid)
+    cmvar_uid = get_data_request().get_element_uid(cmvarid, elt_type="variable")
     if cmvar_uid is not None and cmvar_uid.label in ["sos"]:
         return [g for g in grids if g in ["", "1deg"]]
     elif cmvar_uid is not None and cmvar_uid.label in ["tos"] and (cmvar_uid.mipTable not in ["3hr"] or

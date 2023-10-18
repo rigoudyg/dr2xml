@@ -13,11 +13,10 @@ from collections import OrderedDict
 import six
 
 from dr2xml.analyzer import cellmethod2area
-from dr2xml.dr_interface import get_data_request
+from dr2xml.dr_interface import get_data_request, SimpleCMORVar, SimpleDim
 from logger import get_logger
 from dr2xml.settings_interface import get_settings_values
 from dr2xml.utils import VarsError, Dr2xmlError
-from .definitions import SimpleCMORVar, SimpleDim
 
 tcmName2tcmValue = {"time-mean": "time: mean", "time-point": "time: point", "None": None}
 
@@ -125,26 +124,6 @@ def remove_p_suffix(svar, mlev_sfxs, slev_sfxs, realms):
     return label_out
 
 
-def get_simple_dim_from_dim_id(dimid):
-    """
-    Build a simple_Dim object which characteristics fit with dimid.
-    """
-    data_request = get_data_request()
-    d = data_request.get_element_uid(dimid)
-    #
-    stdname = data_request.get_element_uid(d.standardName, check_print_stdnames_error=True, check_print_DR_errors=False,
-                                           error_msg="Issue with standardname for dimid %s" % dimid)
-    if stdname is not None:
-        stdname = stdname.uid
-    else:
-        stdname = ""
-    #
-    sdim = SimpleDim(label=d.label, positive=d.positive, requested=d.requested, value=d.value, stdname=stdname,
-                     long_name=d.title, out_name=d.altLabel, units=d.units, bounds=d.bounds,
-                     boundsValues=d.boundsValues, axis=d.axis, coords=d.coords, title=d.title, type=d.type)
-    return sdim
-
-
 def get_correspond_cmor_var(homevar):
     """
         For a home variable, find the CMOR var which corresponds.
@@ -153,8 +132,11 @@ def get_correspond_cmor_var(homevar):
     data_request = get_data_request()
     count = 0
     empty_table = (homevar.mipTable in ['NONE', ]) or (homevar.mipTable.startswith("None"))
+    allow_pseudo = get_settings_values("internal", 'allow_pseudo_standard_names')
+    global sn_issues_home
     for cmvarid in data_request.get_cmor_var_id_by_label(homevar.ref_var):
-        cmvar = data_request.get_element_uid(cmvarid)
+        cmvar = data_request.get_element_uid(cmvarid, elt_type="variable", sn_issues=sn_issues_home,
+                                             allow_pseudo=allow_pseudo)
         logger.debug("get_corresp, checking %s vs %s in %s" % (homevar.label, cmvar.label, cmvar.mipTable))
         #
         # Consider case where no modeling_realm associated to the
@@ -173,7 +155,7 @@ def get_correspond_cmor_var(homevar):
                     (match_realm or empty_realm))
         if matching:
             logger.debug("matches")
-            same_shapes = (get_spatial_and_temporal_shapes(cmvar) == [homevar.spatial_shp, homevar.temporal_shp])
+            same_shapes = ([cmvar.spatial_shp, cmvar.temporal_shp] == [homevar.spatial_shp, homevar.temporal_shp])
             if same_shapes:
                 count += 1
                 cmvar_found = cmvar
@@ -183,7 +165,7 @@ def get_correspond_cmor_var(homevar):
                     logger.error("(%s %s) HOMEVar: Spatial and Temporal Shapes specified DO NOT match CMORvar ones. "
                                  "-> Provided: (%s, %s) Expected: (%s, %s)"
                                  % (homevar.label, homevar.mipTable, homevar.spatial_shp, homevar.temporal_shp,
-                                    *get_spatial_and_temporal_shapes(cmvar)))
+                                    cmvar.spatial_shp, cmvar.temporal_shp))
         else:
             logger.debug("doesn't match %s %s %s %s %s %s %s %s" % (match_label, match_freq, cmvar.frequency,
                                                                     homevar.frequency, match_table, match_realm,
@@ -193,9 +175,7 @@ def get_correspond_cmor_var(homevar):
         # empty table means that the frequency is changed (but the variable exists in another frequency cmor table
         if empty_table:
             var_freq_asked = homevar.frequency
-        allow_pseudo = get_settings_values("internal", 'allow_pseudo_standard_names')
-        global sn_issues_home
-        sn_issues_home = complement_svar_using_cmorvar(homevar, cmvar_found, sn_issues_home, [], allow_pseudo)
+        complement_svar_using_cmorvar(homevar, cmvar_found, [])
         if empty_table:
             homevar.frequency = var_freq_asked
             homevar.mipTable = "None" + homevar.frequency
@@ -204,7 +184,7 @@ def get_correspond_cmor_var(homevar):
         return False
 
 
-def complement_svar_using_cmorvar(svar, cmvar, sn_issues, debug=[], allow_pseudo=False):
+def complement_svar_using_cmorvar(svar, cmvar, debug=[]):
     """
     SVAR will have an attribute label_non_ambiguous suffixed by an
     area name if the MIPvarname is ambiguous for that
@@ -213,85 +193,18 @@ def complement_svar_using_cmorvar(svar, cmvar, sn_issues, debug=[], allow_pseudo
 
     """
     logger = get_logger()
-    data_request = get_data_request()
     global ambiguous_mipvarnames
     if ambiguous_mipvarnames is None:
         ambiguous_mipvarnames = analyze_ambiguous_mip_varnames()
 
     # Get information form CMORvar
-    spatial_shp, temporal_shp = get_spatial_and_temporal_shapes(cmvar)
-    if cmvar.description:
-        description = cmvar.description.rstrip(' ')
-    else:
-        description = cmvar.title
-    svar.set_attributes(prec=cmvar.type, frequency=cmvar.frequency, mipTable=cmvar.mipTable,
-                        Priority=cmvar.defaultPriority, positive=cmvar.positive, modeling_realm=cmvar.modeling_realm,
-                        label=cmvar.label, spatial_shp=spatial_shp, temporal_shp=temporal_shp, cmvar=cmvar,
-                        long_name=cmvar.title, description=description, ref_var=cmvar.label)
-
-    # Get information from MIPvar
-    # In case no unit is found with stdname
-    mipvar = data_request.get_element_uid(cmvar.vid)
-    # see https://github.com/cmip6dr/CMIP6_DataRequest_VariableDefinitions/issues/279
-    stdname = ''
-    sn = data_request.get_element_uid(mipvar.sn)  # None
-    if sn._h.label in ['standardname', ]:
-        stdname = sn.uid
-    else:
-        if allow_pseudo:
-            stdname = sn.uid
-        if sn_issues is not None:
-            if stdname not in sn_issues:
-                sn_issues[svar.label] = set()
-            sn_issues[svar.label].add(svar.mipTable)
-    svar.set_attributes(mipVarLabel=mipvar.label, units=mipvar.units, stdname=stdname)
-    #
-    # Get information form Structure
-    st = data_request.get_element_uid(cmvar.stid,
-                         error_msg="DR Error: issue with stid for %s in Table %s  "
-                                   "=> no cell_methods, cell_measures, dimids and sdims derived." %
-                                   (svar.label, svar.mipTable))
-    if st is not None:
-        svar.set_attributes(struct=st)
-        methods = data_request.get_element_uid(st.cmid, error_msg="DR Error: issue with cell_method for %s" % st.label)
-        if methods is not None:
-            methods = methods.cell_methods
-            new_methods = methods.replace("mask=siconc or siconca", "mask=siconc")
-            svar.set_attributes(cm=methods, cell_methods=new_methods)
-        #
-        measures = data_request.get_element_uid(cmvar.stid, error_msg="DR Error: Issue with cell_measures for %s" % repr(cmvar))
-        if measures is not None:
-            measures = measures.cell_measures
-            svar.set_attributes(cell_measures=measures)
-        #
-        product_of_other_dims = 1
-        all_dimids = list()
-        if spatial_shp not in ["na-na", ]:
-            spid = data_request.get_element_uid(st.spid)
-            all_dimids.extend(spid.dimids)
-        if 'cids' in st.__dict__:
-            cids = st.cids
-            # when cids not empty, cids=('dim:p850',) or ('dim:typec4pft', 'dim:typenatgr') for e.g.;
-            # when empty , cids=('',).
-            if cids[0] not in ['', ]:  # this line is needed prior to version 01.00.08.
-                all_dimids.extend(cids)
-            # if (svar.label=="rv850") : print "rv850 has cids %s"%cids
-        if 'dids' in st.__dict__:
-            dids = st.dids
-            if dids[0] not in ['', ]:
-                all_dimids.extend(dids)
-        sdims_dict = dict()
-        for dimid in all_dimids:
-            sdim = get_simple_dim_from_dim_id(dimid)
-            if sdim.dimsize > 1:
-                # print "for var % 15s and dim % 15s, size=%3d"%(svar.label,dimid,dimsize)
-                pass
-            product_of_other_dims *= sdim.dimsize
-            sdims_dict[sdim.label] = sdim
-        svar.update_attributes(sdims=sdims_dict)
-        if product_of_other_dims > 1:
-            # print 'for % 20s'%svar.label,' product_of_other_dims=',product_of_other_dims
-            svar.set_attributes(other_dims_size=product_of_other_dims)
+    svar.set_attributes(prec=cmvar.prec, frequency=cmvar.frequency, mipTable=cmvar.mipTable,
+                        Priority=cmvar.Priority, positive=cmvar.positive, modeling_realm=cmvar.modeling_realm,
+                        label=cmvar.label, spatial_shp=cmvar.spatial_shp, temporal_shp=cmvar.temporal_shp, cmvar=cmvar,
+                        long_name=cmvar.long_name, description=cmvar.description, ref_var=cmvar.label,
+                        mipVarLabel=cmvar.mipVarLabel, units=cmvar.units, stdname=cmvar.stdname, struct=cmvar.struct,
+                        cm=cmvar.cm, cell_methods=cmvar.cell_methods, cell_measures=cmvar.cell_measures,
+                        sdims=cmvar.sdims, other_dims_size=cmvar.other_dims_size, mip_era=cmvar.mip_era)
     area = cellmethod2area(svar.cell_methods)
     if svar.label in debug:
         logger.debug("complement_svar ... processing %s, area=%s" % (svar.label, str(area)))
@@ -310,11 +223,11 @@ def complement_svar_using_cmorvar(svar, cmvar, sn_issues, debug=[], allow_pseudo
     # removing pressure suffix must occur after resolving ambiguities (add of area suffix)
     # because this 2 processes cannot be cumulate at this stage.
     # this is acceptable since none of the variables requested on pressure levels have ambiguous names.
-    svar.set_attributes(type="cmor", mip_era="CMIP6", ref_var=svar.label,
-                        label_without_psuffix=remove_p_suffix(svar, multi_plev_suffixes, single_plev_suffixes,
-                                                              realms=["atmos", "aerosol", "atmosChem"]))
+    svar.set_attributes(ref_var=svar.label, label_without_psuffix=remove_p_suffix(svar, multi_plev_suffixes,
+                                                                                  single_plev_suffixes,
+                                                                                  realms=["atmos", "aerosol",
+                                                                                          "atmosChem"]))
     #
-    return sn_issues
 
 
 def analyze_ambiguous_mip_varnames(debug=[]):
@@ -334,7 +247,7 @@ def analyze_ambiguous_mip_varnames(debug=[]):
                 logger.debug("Adding %s" % v.label)
         refs = data_request.get_request_by_id_by_sect(v.uid, 'CMORvar')
         for r in refs:
-            ref = data_request.get_element_uid(r)
+            ref = data_request.get_element_uid(r, elt_type="variable")
             d[v.label].append(ref)
             if v.label in debug:
                 logger.debug("Adding CmorVar %s(%s) for %s" % (v.label, ref.mipTable, ref.label))
@@ -345,12 +258,7 @@ def analyze_ambiguous_mip_varnames(debug=[]):
             cvl = d[vlabel]
             d[vlabel] = OrderedDict()
             for cv in cvl:
-                st = data_request.get_element_uid(cv.stid)
-                cm = data_request.get_element_uid(st.cmid, check_print_DR_errors=False,
-                                                  error_msg="No cell method for %-15s %s(%s)"
-                                                            % (st.label, cv.label, cv.mipTable))
-                if cm is not None:
-                    cm = cm.cell_methods
+                cm = cv.cell_methods
                 if cm is not None:
                     area = cellmethod2area(cm)
                     realm = cv.modeling_realm
@@ -384,30 +292,3 @@ def analyze_ambiguous_mip_varnames(debug=[]):
             for r in d:
                 logger.debug("\t %s %s" % (r, d[r]))
     return ambiguous
-
-
-def get_spatial_and_temporal_shapes(cmvar):
-    """
-    Get the spatial et temporal shape of a CMOR variable from the DR.
-    """
-    logger = get_logger()
-    data_request = get_data_request()
-    if cmvar.stid == "__struct_not_found_001__":
-        if data_request.print_DR_errors:
-            logger.warning("Warning: stid for %s in table %s is a broken link to structure in DR: %s" %
-                           (cmvar.label, cmvar.mipTable, cmvar.stid))
-        spatial_shape = False
-        temporal_shape = False
-    else:
-        struct = data_request.get_element_uid(cmvar.stid)
-        spatial_shape = data_request.get_element_uid(struct.spid,
-                                                     error_msg="Warning: spatial shape for %s in table %s not found"
-                                                               " in DR." % (cmvar.label, cmvar.mipTable))
-        if spatial_shape is not None:
-            spatial_shape = spatial_shape.label
-        temporal_shape = data_request.get_element_uid(struct.tmid,
-                                                      error_msg="Warning: temporal shape for %s in table %s not found"
-                                                                " in DR." % (cmvar.label, cmvar.mipTable))
-        if temporal_shape is not None:
-            temporal_shape = temporal_shape.label
-    return [spatial_shape, temporal_shape]

@@ -29,7 +29,8 @@ def request_item_include(ri, var_label, freq):
     data_request = get_data_request()
     var_group = data_request.get_element_uid(data_request.get_element_uid(ri.rlid).refid)
     req_vars = data_request.get_request_by_id_by_sect(var_group.uid, 'requestVar')
-    cm_vars = [data_request.get_element_uid(data_request.get_element_uid(reqvar).vid) for reqvar in req_vars]
+    cm_vars = [data_request.get_element_uid(data_request.get_element_uid(reqvar).vid, elt_type="variable")
+               for reqvar in req_vars]
     return any([cmv.label == var_label and cmv.frequency == freq for cmv in cm_vars])
 
 

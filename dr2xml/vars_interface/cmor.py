@@ -7,11 +7,10 @@ CMOR variables
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
-from dr2xml.dr_interface import get_data_request
+from dr2xml.dr_interface import get_data_request, SimpleCMORVar
 from logger import get_logger
 from dr2xml.settings_interface import get_settings_values
 from dr2xml.utils import Dr2xmlError
-from .definitions import SimpleCMORVar
 from .generic import read_home_var, fill_homevar, check_homevar, get_correspond_cmor_var, \
     complement_svar_using_cmorvar
 from dr2xml.config import get_config_variable
@@ -54,10 +53,11 @@ def get_cmor_var(label, table):
     (could be optimized using inverse index)
     """
     data_request = get_data_request()
-    cmvar = [cmvar for cmvar in data_request.get_list_by_id("CMORvar").items
+    cmvar = [cmvar for cmvar in data_request.get_list_by_id("CMORvar", elt_type="variable").items
              if cmvar.mipTable == table and cmvar.label == label]
     if len(cmvar) > 0:
-        return cmvar[0]
+        cmvar = cmvar[0]
+        return SimpleCMORVar.get_from_dr(cmvar, id=cmvar.uid)
     else:
         return None
 
@@ -117,5 +117,5 @@ def get_simplevar(label, table, freq=None):
             else:
                 psvar = get_cmor_var('ps', 'Esubhr')
     if psvar:
-        complement_svar_using_cmorvar(svar, psvar, None, [], False)
+        complement_svar_using_cmorvar(svar, psvar, [])
         return svar

@@ -10,16 +10,13 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 import os
 from collections import OrderedDict, defaultdict
 
-import six
-
 from dr2xml.analyzer import guess_freq_from_table_name
 from dr2xml.dr_interface import get_data_request
 from logger import get_logger
 from dr2xml.settings_interface import get_settings_values
 from dr2xml.utils import VarsError, read_json_content
 from .definitions import SimpleCMORVar, SimpleDim
-from .generic import read_home_var, multi_plev_suffixes, single_plev_suffixes, remove_p_suffix, \
-    get_simple_dim_from_dim_id
+from .generic import read_home_var, multi_plev_suffixes, single_plev_suffixes, remove_p_suffix
 
 home_attrs = ['type', 'label', 'modeling_realm', 'frequency', 'mipTable', 'temporal_shp', 'spatial_shp',
               'experiment', 'mip']
@@ -65,27 +62,15 @@ def initialize_dim_variables():
     global dims2shape, dim2dimid, dr_single_levels
     data_request = get_data_request()
     if dims2shape is None:
-        dims2shape = OrderedDict()
-        dims2shape["longitude|latitude"] = "XY-na"
-        for sshp in data_request.get_list_by_id('spatialShape').items:
-            dims2shape[sshp.dimensions] = sshp.label
+        dims2shape = data_request.get_dimensions_dict()
+        if "longitude|latitude" not in dims2shape:
+            dims2shape["longitude|latitude"] = "XY-na"
     #
     if dim2dimid is None:
-        dim2dimid = OrderedDict()
-        for g in data_request.get_list_by_id('grids').items:
-            dim2dimid[g.label] = g.uid
+        dim2dimid = data_request.get_grids_dict()
     #
     if dr_single_levels is None:
-        dr_single_levels = list()
-        for struct in data_request.get_list_by_id('structure').items:
-            spshp = data_request.get_element_uid(struct.spid)
-            if spshp.label in ["XY-na", ] and 'cids' in struct.__dict__:
-                if isinstance(struct.cids[0], six.string_types) and len(struct.cids[0]) > 0:
-                    # this line is needed prior to version 01.00.08.
-                    c = data_request.get_element_uid(struct.cids[0])
-                    # if c.axis == 'Z': # mpmoine_note: non car je veux dans dr_single_levels toutes les dimensions
-                    # singletons (ex. 'typenatgr'), par seulement les niveaux
-                    dr_single_levels.append(c.label)
+        dr_single_levels = data_request.get_single_levels_list()
         # other single levels in extra Tables, not in DR
         # mpmoine: les ajouts ici correspondent  aux single levels Primavera.
         other_single_levels = ['height50m', 'p100']
@@ -162,10 +147,11 @@ def read_extra_table(path, table):
                 logger.warning("spatial shape corresponding to %s for variable %s in Table %s not found in DR."
                                % (drdims, v["out_name"], table))
             dr_dimids = list()
+            data_request = get_data_request()
             for d in all_dr_dims:
                 if d in dim2dimid:
                     dr_dimids.append(dim2dimid[d])
-                    extra_dim = get_simple_dim_from_dim_id(dim2dimid[d])
+                    extra_dim = data_request.get_element_uid(dim2dimid[d], elt_type="dim")
                     extra_var.update_attributes(sdims={extra_dim.label: extra_dim})
                 else:
                     extra_dim_info = read_json_content(json_coordinate)["axis_entry"]

@@ -7,8 +7,13 @@ Interface if no data request should be used.
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+from collections import OrderedDict
+
 from .definition import Scope, ListWithItems
 from .definition import DataRequest as DataRequestBasic
+from .definition import SimpleObject
+from .definition import SimpleCMORVar as SimpleCMORVarBasic
+from .definition import SimpleDim as SimpleDimBasic
 
 
 scope = None
@@ -19,7 +24,7 @@ class DataRequest(DataRequestBasic):
     def get_version(self):
         return "No Data Request"
 
-    def get_list_by_id(self, collection):
+    def get_list_by_id(self, collection, **kwargs):
         return ListWithItems()
 
     def get_sectors_list(self):
@@ -39,6 +44,15 @@ class DataRequest(DataRequestBasic):
 
     def get_request_by_id_by_sect(self, id, request):
         return list()
+
+    def get_single_levels_list(self):
+        return list()
+
+    def get_grids_dict(self):
+        return OrderedDict()
+
+    def get_dimensions_dict(self):
+        return OrderedDict()
 
 
 def initialize_data_request():
@@ -80,9 +94,13 @@ def normalize_grid(grid):
     return grid
 
 
-def correct_data_request_dim(dim):
-    pass
+class SimpleCMORVar(SimpleCMORVarBasic):
+    @classmethod
+    def get_from_dr(cls, input_var):
+        return input_var
 
 
-def correct_data_request_variable(variable):
-    pass
+class SimpleDim(SimpleDimBasic):
+    @classmethod
+    def get_from_dr(cls, input_dim):
+        return input_dim

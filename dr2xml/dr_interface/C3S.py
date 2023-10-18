@@ -6,11 +6,15 @@ Interface between the C3S data request (C3S_DR.py) and dr2xml.
 """
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+from collections import OrderedDict
 
 from .C3S_DR import c3s_nc_dims, c3s_nc_coords, c3s_nc_comvars, c3s_nc_vars
 from .definition import ListWithItems
 from .definition import Scope as ScopeBasic
 from .definition import DataRequest as DataRequestBasic
+from .definition import SimpleObject
+from .definition import SimpleCMORVar as SimpleCMORVarBasic
+from .definition import SimpleDim as SimpleDimBasic
 
 
 scope = None
@@ -21,7 +25,7 @@ class DataRequest(DataRequestBasic):
     def get_version(self):
         return "No Data Request"
 
-    def get_list_by_id(self, collection):
+    def get_list_by_id(self, collection, **kwargs):
         return ListWithItems()
 
     def get_sectors_list(self):
@@ -41,6 +45,15 @@ class DataRequest(DataRequestBasic):
 
     def get_request_by_id_by_sect(self, id, request):
         return list()
+
+    def get_single_levels_list(self):
+        return list()
+
+    def get_grids_dict(self):
+        return OrderedDict()
+
+    def get_dimensions_dict(self):
+        return OrderedDict()
 
 
 class Scope(ScopeBasic):
@@ -94,9 +107,14 @@ def normalize_grid(grid):
     return grid
 
 
-def correct_data_request_dim(dim):
-    pass
+class SimpleCMORVar(SimpleCMORVarBasic):
+    @classmethod
+    def get_from_dr(cls, input_var):
+        return input_var
 
 
-def correct_data_request_variable(variable):
-    pass
+class SimpleDim(SimpleDimBasic):
+    @classmethod
+    def get_from_dr(cls, input_dim):
+        return input_dim
+

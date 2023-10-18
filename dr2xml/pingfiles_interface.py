@@ -157,7 +157,7 @@ def highest_rank(svar):
     altdims = set()
     data_request = get_data_request()
     for cvar in data_request.get_list_by_id('CMORvar').items:
-        v = data_request.get_element_uid(cvar.vid)
+        v = data_request.get_element_uid(cvar.vid, elt_type="variable")
         if v.label == mipvarlabel:
             st = data_request.get_element_uid(cvar.stid, check_print_DR_errors=False,
                                               error_msg="DR Error: issue with stid for : %s in table section : %s" %

@@ -28,22 +28,22 @@ initialize_scope = defaultfunction
 get_scope = defaultfunction
 set_scope = defaultfunction
 normalize_grid = defaultfunction
-correct_data_request_dim = defaultfunction
-correct_data_request_variable = defaultfunction
+SimpleObject = DefaultClass
+SimpleCMORVar = DefaultClass
+SimpleDim = DefaultClass
 
 
 def load_correct_dr():
     global scope, data_request, DataRequest, initialize_data_request, get_data_request, initialize_scope, get_scope, \
-        set_scope, normalize_grid, correct_data_request_dim, correct_data_request_variable
+        set_scope, normalize_grid, SimpleDim, SimpleObject, SimpleCMORVar
 
     data_request_version = get_settings_values("internal", "data_request_used")
 
     if data_request_version in ["CMIP6", ]:
         from .CMIP6 import scope, data_request, DataRequest, initialize_data_request, get_data_request, \
-            initialize_scope, get_scope, set_scope, normalize_grid, correct_data_request_dim, \
-            correct_data_request_variable
+            initialize_scope, get_scope, set_scope, normalize_grid, SimpleDim, SimpleObject, SimpleCMORVar
     elif data_request_version in ["no", "none", "None", None]:
         from .no import scope, data_request, DataRequest, initialize_data_request, get_data_request, initialize_scope, \
-            get_scope, set_scope, normalize_grid, correct_data_request_dim, correct_data_request_variable
+            get_scope, set_scope, normalize_grid, SimpleDim, SimpleObject, SimpleCMORVar
     else:
         raise ValueError("The data request specified (%s) is not known." % data_request_version)
