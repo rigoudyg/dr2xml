@@ -18,7 +18,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from tests.tools_for_tests import TestSimulation, create_config_elements
 
 
-# @unittest.skipUnless(False, "OK")
+# @unittest.skipUnless(False, "Ok")
 class TestA4SST(unittest.TestCase, TestSimulation):
     """
     Test output generation for a4SST_AGCM_1960
@@ -159,7 +159,7 @@ class TestPiNTCF(unittest.TestCase, TestSimulation):
             setattr(self, elt, copy.deepcopy(config[elt]))
 
 
-# @unittest.skipUnless(False, "To be corrected")
+# @unittest.skipUnless(False, "Ok")
 class TestPiControl(unittest.TestCase, TestSimulation):
     """
     Test output generation for AOESM_piControl_CM6_r1_v2
@@ -180,7 +180,7 @@ class TestPiControl(unittest.TestCase, TestSimulation):
             setattr(self, elt, copy.deepcopy(config[elt]))
 
 
-# @unittest.skipUnless(False, "To be corrected")
+# @unittest.skipUnless(False, "Ok")
 class TestSsp585(unittest.TestCase, TestSimulation):
     """
     Test output generation for AOESM_ssp585_CM6_r3
@@ -201,7 +201,7 @@ class TestSsp585(unittest.TestCase, TestSimulation):
             setattr(self, elt, copy.deepcopy(config[elt]))
 
 
-# @unittest.skipUnless(False, "To be corrected")
+# @unittest.skipUnless(False, "Ok")
 class TestC3SSF(unittest.TestCase, TestSimulation):
     """
     Test output generation for C3S_SF
@@ -219,7 +219,7 @@ class TestC3SSF(unittest.TestCase, TestSimulation):
             setattr(self, elt, copy.deepcopy(config[elt]))
 
 
-# @unittest.skipUnless(False, "To be corrected")
+# @unittest.skipUnless(False, "Ok")
 class TestHistAer(unittest.TestCase, TestSimulation):
     """
     Test output generation for hist_aer_CM6_r4
@@ -280,7 +280,7 @@ class TestLevels(unittest.TestCase, TestSimulation):
             setattr(self, elt, copy.deepcopy(config[elt]))
 
 
-# @unittest.skipUnless(False, "To be corrected")
+# @unittest.skipUnless(False, "Ok")
 class TestPiClim(unittest.TestCase, TestSimulation):
     """
     Test output generation for piClim_anthro_AGCM_r1
@@ -300,7 +300,7 @@ class TestPiClim(unittest.TestCase, TestSimulation):
             setattr(self, elt, copy.deepcopy(config[elt]))
 
 
-# @unittest.skipUnless(False, "To be corrected")
+# @unittest.skipUnless(False, "Ok")
 class TestCTL(unittest.TestCase, TestSimulation):
     """
     Test output generation for RCSM6_CTL
@@ -320,7 +320,7 @@ class TestCTL(unittest.TestCase, TestSimulation):
             setattr(self, elt, copy.deepcopy(config[elt]))
 
 
-# @unittest.skipUnless(False, "To be corrected")
+# @unittest.skipUnless(False, "Ok")
 class TestHIS(unittest.TestCase, TestSimulation):
     """
     Test output generation for RCSM6_HIS
@@ -338,7 +338,7 @@ class TestHIS(unittest.TestCase, TestSimulation):
             setattr(self, elt, copy.deepcopy(config[elt]))
 
 
-# @unittest.skipUnless(False, "To be corrected")
+# @unittest.skipUnless(False, "Ok")
 class TestHISLight(unittest.TestCase, TestSimulation):
     """
     Test output generation for RCSM6_HIS_light
