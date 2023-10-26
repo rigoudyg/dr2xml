@@ -965,7 +965,7 @@ project_settings = dict(
                     "": "4",
                     "float": "4",
                     "real": "4",
-                    "double": "2",
+                    "double": "8",
                     "integer": "2",
                     "int": "2"
                 },
@@ -1077,14 +1077,14 @@ project_settings = dict(
             flag_meanings=ParameterSettings(
                 key="flag_meanings",
                 default_values=[
-                    ValueSettings(key_type="variable", keys=["struct", "flag_meanings"])
+                    ValueSettings(key_type="variable", keys="flag_meanings")
                 ],
                 skip_values=["", "None", None]
             ),
             flag_values=ParameterSettings(
                 key="flag_values",
                 default_values=[
-                    ValueSettings(key_type="variable", keys=["struct", "flag_values"])
+                    ValueSettings(key_type="variable", keys="flag_values")
                 ],
                 skip_values=["", "None", None]
             ),
@@ -1115,7 +1115,16 @@ project_settings = dict(
             ),
             prec=ParameterSettings(
                 key="prec",
-                skip_values=["", "None", None]
+                skip_values=["", "None", None],
+                authorized_values=["2", "4", "8"],
+                corrections={
+                    "": "4",
+                    "float": "4",
+                    "real": "4",
+                    "double": "8",
+                    "integer": "2",
+                    "int": "2"
+                },
             ),
             unit=ParameterSettings(
                 key="unit",
@@ -1150,7 +1159,16 @@ project_settings = dict(
         attrs_constraints=dict(
             prec=ParameterSettings(
                 key="prec",
-                default_values=["8", ]
+                default_values=["8", ],
+                authorized_values=["2", "4", "8"],
+                corrections={
+                    "": "4",
+                    "float": "4",
+                    "real": "4",
+                    "double": "8",
+                    "integer": "2",
+                    "int": "2"
+                },
             )
         )
     ),
@@ -1165,7 +1183,16 @@ project_settings = dict(
         attrs_constraints=dict(
             prec=ParameterSettings(
                 key="prec",
-                default_values=["8", ]
+                default_values=["8", ],
+                authorized_values=["2", "4", "8"],
+                corrections={
+                    "": "4",
+                    "float": "4",
+                    "real": "4",
+                    "double": "8",
+                    "integer": "2",
+                    "int": "2"
+                },
             )
         )
     ),
@@ -1199,7 +1226,16 @@ project_settings = dict(
             ),
             prec=ParameterSettings(
                 key="prec",
-                skip_values=["", "None", None]
+                skip_values=["", "None", None],
+                authorized_values=["2", "4", "8"],
+                corrections={
+                    "": "4",
+                    "float": "4",
+                    "real": "4",
+                    "double": "8",
+                    "integer": "2",
+                    "int": "2"
+                },
             ),
             value=ParameterSettings(
                 key="value",

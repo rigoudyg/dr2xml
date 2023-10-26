@@ -53,11 +53,10 @@ def get_cmor_var(label, table):
     (could be optimized using inverse index)
     """
     data_request = get_data_request()
-    cmvar = [cmvar for cmvar in data_request.get_list_by_id("CMORvar", elt_type="variable").items
+    cmvar = [cmvar for cmvar in data_request.get_list_by_id("CMORvar", elt_type="variable")
              if cmvar.mipTable == table and cmvar.label == label]
     if len(cmvar) > 0:
-        cmvar = cmvar[0]
-        return SimpleCMORVar.get_from_dr(cmvar, id=cmvar.uid)
+        return cmvar[0]
     else:
         return None
 

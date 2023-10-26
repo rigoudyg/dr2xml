@@ -11,6 +11,9 @@ from collections import namedtuple, OrderedDict
 
 import six
 
+from dr2xml.settings_interface.py_settings_interface import is_sset_not_None
+from dr2xml.utils import convert_string_to_year, Dr2xmlError
+
 
 class Scope(object):
     def __init__(self, scope=None):
@@ -22,6 +25,10 @@ class Scope(object):
         return mcfg._make(value)._asdict()
 
     def get_request_link_by_mip(self, mips_list):
+        return list()
+
+    def get_filtered_request_links_by_mip_included_excluded(self, mips_list, included_request_links=None,
+                                                            excluded_request_links=None):
         return list()
 
     def get_vars_by_request_link(self, request_link, pmax):
@@ -55,6 +62,18 @@ class DataRequest(object):
         Get the experiment from its label.
         """
         raise NotImplementedError()
+
+    def get_experiment_label_start_end_years(self, experiment):
+        """
+        Get the experiment start and end years
+        """
+        return None, "??", "??"
+
+    def filter_request_link_by_experiment_and_year(self, request_links, experiment_id, year, **kwargs):
+        return list()
+
+    def check_requestitem_for_exp_and_year(self, ri, experiment, year, **kwargs):
+        return False, None
 
     def get_cmor_var_id_by_label(self, label):
         """
@@ -104,6 +123,42 @@ class DataRequest(object):
         """
         raise NotImplementedError()
 
+    def get_year_for_cmorvar(self, **kwargs):
+        return None
+
+    @staticmethod
+    def find_exp_start_year(exp_label, exp_startyear, branch_year_in_child=None):
+        """
+        Find star year of an experiment
+        :param exp_label: experiment label
+        :param exp_startyear: experiment start year for data request
+        :return: start year of an experiment
+        """
+        if branch_year_in_child is not None:
+            return branch_year_in_child
+        else:
+            starty = convert_string_to_year(exp_startyear)
+            if starty is None:
+                form = "Cannot guess first year for experiment %s: DR says:'%s' "
+                if is_sset_not_None():
+                    form += "and 'branch_year_in_child' is not provided in experiment's settings"
+                raise Dr2xmlError(form % (exp_label, exp_startyear))
+            else:
+                return starty
+
+    @staticmethod
+    def find_exp_end_year(exp_endyear, end_year=False):
+        """
+        Find the end year of an experiment
+        :param exp_endyear: experiment endyear
+        :param end_year: specified end year
+        :return: end year of the experiment
+        """
+        if end_year is not False:
+            return end_year
+        else:
+            return convert_string_to_year(exp_endyear)
+
 
 class ListWithItems(list):
 
@@ -125,8 +180,9 @@ class ListWithItems(list):
 
 class SimpleObject(object):
 
-    def __init__(self, **kwargs):
-        self.correct_data_request()
+    def __init__(self, from_dr=False, **kwargs):
+        if from_dr:
+            self.correct_data_request()
         self._format_dict_()
 
     def _format_dict_(self):
@@ -164,10 +220,11 @@ class SimpleCMORVar(SimpleObject):
     """
     def __init__(self, type=False, modeling_realm=None, grids=[""], label=None, mipVarLabel=None,
                  label_without_psuffix=None, label_non_ambiguous=None, frequency=None, mipTable=None, positive=None,
-                 description=None, stdname=None, units=None, long_name=None, struct=None, other_dims_size=1,
+                 description=None, stdname=None, units=None, long_name=None, other_dims_size=1,
                  cell_methods=None, cell_measures=None, spatial_shp=None, temporal_shp=None, experiment=None,
                  Priority=1, mip_era=False, prec="float", missing=1.e+20, cmvar=None, ref_var=None, mip=None,
-                 sdims=dict(), comments=None, coordinates=None, cm=False, id=None, **kwargs):
+                 sdims=dict(), comments=None, coordinates=None, cm=False, id=None, flag_meanings=None, flag_values=None,
+                 **kwargs):
         self.type = type
         self.modeling_realm = modeling_realm
         self.grids = grids
@@ -182,7 +239,6 @@ class SimpleCMORVar(SimpleObject):
         self.stdname = stdname
         self.units = units
         self.long_name = long_name
-        self.struct = struct
         self.sdims = OrderedDict()
         self.sdims.update(sdims)
         self.other_dims_size = other_dims_size
@@ -202,6 +258,8 @@ class SimpleCMORVar(SimpleObject):
         self.comments = comments
         self.coordinates = coordinates
         self.id = id
+        self.flag_meanings = flag_meanings
+        self.flag_values = flag_values
         super(SimpleCMORVar, self).__init__(**kwargs)
 
     def __eq__(self, other):
@@ -215,6 +273,18 @@ class SimpleCMORVar(SimpleObject):
     @classmethod
     def get_from_dr(cls, input_var, **kwargs):
         raise NotImplementedError()
+
+    @classmethod
+    def get_from_extra(cls, input_var, mip_era=None, freq=None, table=None, **kwargs):
+        input_var_dict = dict(type="extra", mip_era=mip_era, label=input_var["out_name"],
+                              mipVarLabel=input_var["out_name"], stdname=input_var.get("standard_name", ""),
+                              long_name=input_var["long_name"], units=input_var["units"],
+                              modeling_realm=input_var["modeling_realm"], frequency=freq, mipTable=table,
+                              cell_methods=input_var["cell_methods"], cell_measures=input_var["cell_measures"],
+                              positive=input_var["positive"], Priority=float(input_var[mip_era.lower() + "_priority"]),
+                              label_without_psuffix=input_var["out_name"],
+                              coordinates=input_var.get("dimensions", None))
+        return cls(**input_var_dict)
 
 
 class SimpleDim(SimpleObject):
@@ -262,3 +332,13 @@ class SimpleDim(SimpleObject):
     @classmethod
     def get_from_dr(cls, input_dim, **kwargs):
         raise NotImplementedError()
+
+    @classmethod
+    def get_from_extra(cls, input_dim, label=None, **kwargs):
+        input_dim_dict = dict(label=label, axis=input_dim["axis"], stdname=input_dim["standard_name"],
+                              units=input_dim["units"], long_name=input_dim["long_name"],
+                              out_name=input_dim["out_name"], positive=input_dim["positive"],
+                              title=input_dim.get("title", input_dim["long_name"]),
+                              requested=" ".join([ilev for ilev in input_dim["requested"]]).rstrip(),
+                              value=input_dim["value"], type=input_dim["type"])
+        return cls(**input_dim_dict)

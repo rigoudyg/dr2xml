@@ -331,8 +331,9 @@ internal_values = dict(
 				keys=[
 					"branching",
 					ValueSettings(key_type="internal", keys="source_id")
-				]
-			)
+				],
+			),
+			dict()
 		]
 	),
 	branch_year_in_child=ParameterSettings(
@@ -344,7 +345,8 @@ internal_values = dict(
 	end_year=ParameterSettings(
         key="end_year",
 		default_values=[
-			ValueSettings(key_type="simulation", keys="end_year")
+			ValueSettings(key_type="simulation", keys="end_year"),
+			False
 		]
 	),
 	allow_pseudo_standard_names=ParameterSettings(

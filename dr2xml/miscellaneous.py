@@ -7,6 +7,7 @@ Miscellaneous functions
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+import os
 from collections import OrderedDict
 from io import open
 
@@ -15,104 +16,8 @@ from six import string_types
 from logger import get_logger
 from . import get_config_variable
 
-from .cfsites import cfsites_grid_id, add_cfsites_in_defs, cfsites_domain_id
 from .dr_interface import get_data_request
-from .grids import change_domain_in_grid
-from .pingfiles_interface import read_special_fields_defs, highest_rank, copy_obj_from_DX_file
-from .utils import Dr2xmlError
-
-
-def request_item_include(ri, var_label, freq):
-    """
-    test if a variable is requested by a requestItem at a given freq
-    """
-    data_request = get_data_request()
-    var_group = data_request.get_element_uid(data_request.get_element_uid(ri.rlid).refid)
-    req_vars = data_request.get_request_by_id_by_sect(var_group.uid, 'requestVar')
-    cm_vars = [data_request.get_element_uid(data_request.get_element_uid(reqvar).vid, elt_type="variable")
-               for reqvar in req_vars]
-    return any([cmv.label == var_label and cmv.frequency == freq for cmv in cm_vars])
-
-
-def realm_is_processed(realm, source_type):
-    """
-    Tells if a realm is definitely not processed by a source type
-
-    list of source-types : AGCM BGC AER CHEM LAND OGCM AOGCM
-    list of known realms : 'seaIce', '', 'land', 'atmos atmosChem', 'landIce', 'ocean seaIce',
-                           'landIce land', 'ocean', 'atmosChem', 'seaIce ocean', 'atmos',
-                           'aerosol', 'atmos land', 'land landIce', 'ocnBgChem'
-    """
-    components = source_type.split(" ")
-    rep = True
-    #
-    if realm == "atmosChem" and 'CHEM' not in components:
-        return False
-    if realm == "aerosol" and 'AER' not in components:
-        return False
-    if realm == "ocnBgChem" and 'BGC' not in components:
-        return False
-    #
-    with_ocean = ('OGCM' in components or 'AOGCM' in components)
-    if 'seaIce' in realm and not with_ocean:
-        return False
-    if 'ocean' in realm and not with_ocean:
-        return False
-    #
-    with_atmos = ('AGCM' in components or 'AOGCM' in components)
-    if 'atmos' in realm and not with_atmos:
-        return False
-    if 'atmosChem' in realm and not with_atmos:
-        return False
-    if realm == '' and not with_atmos:  # In DR 01.00.15 : some atmos variables have realm=''
-        return False
-    #
-    with_land = with_atmos or ('LAND' in components)
-    if 'land' in realm and not with_land:
-        return False
-    #
-    return rep
-
-
-def create_output_grid(ssh, target_hgrid_id, margs):
-    """
-    Build output grid (stored in grid_defs) by analyzing the spatial shape
-    Including horizontal operations. Can include horiz re-gridding specification
-    """
-    grid_ref = None
-
-    # Compute domain name, define it if needed
-    if ssh[0:2] in ['Y-', ]:  # zonal mean and atm zonal mean on pressure levels
-        # Grid normally has already been created upstream
-        grid_ref = margs['src_grid_id']
-    elif ssh in ['S-na', ]:
-        # COSP sites. Input field may have a singleton dimension (XIOS scalar component)
-        grid_ref = cfsites_grid_id
-        add_cfsites_in_defs()
-        #
-    elif ssh[0:3] in ['XY-', 'S-A']:
-        # this includes 'XY-AH' and 'S-AH' : model half-levels
-        if ssh[0:3] in ['S-A', ]:
-            add_cfsites_in_defs()
-            target_hgrid_id = cfsites_domain_id
-        if target_hgrid_id:
-            # Must create and a use a grid similar to the last one defined
-            # for that variable, except for a change in the hgrid/domain
-            grid_ref = change_domain_in_grid(target_hgrid_id)
-            if grid_ref is False or grid_ref is None:
-                raise Dr2xmlError("Fatal: cannot create grid_def for %s with hgrid=%s" % (alias, target_hgrid_id))
-    elif ssh in ['TR-na', 'TRS-na']:  # transects,   oce or SI
-        pass
-    elif ssh[0:3] in ['YB-', ]:  # basin zonal mean or section
-        pass
-    elif ssh in ['na-na', ]:  # TBD ? global means or constants - spatial integration is not handled
-        pass
-    elif ssh in ['na-A', ]:  # only used for rlu, rsd, rsu ... in Efx ????
-        pass
-    else:
-        raise Dr2xmlError(
-            "Fatal: Issue with un-managed spatial shape %s for variable %s in table %s" % (ssh, sv.label, table))
-    return grid_ref
+from .pingfiles_interface import read_xml_elmt_or_attrib
 
 
 def ping_file_for_realms_list(settings, context, lrealms, svars, path_special, dummy="field_atm",
@@ -268,3 +173,163 @@ def ping_file_for_realms_list(settings, context, lrealms, svars, path_special, d
             for obj in ["axis", "domain", "grid", "field"]:
                 copy_obj_from_DX_file(fp, obj, prefix, lrealms, path_special)
         fp.write('</context>\n')
+
+
+def read_special_fields_defs(realms, path_special, printout=False):
+    """
+    Read external files and return a dictionary containing the fields.
+    """
+    special = OrderedDict()
+    subrealms_seen = []
+    for realm in realms:
+        for subrealm in realm.split():
+            if subrealm in subrealms_seen:
+                continue
+            subrealms_seen.append(subrealm)
+            d = read_xml_elmt_or_attrib(DX_defs_filename("field", subrealm, path_special), tag='field')
+            if d:
+                special.update(d)
+    rep = OrderedDict()
+    # Use raw label as key
+    for r in special:
+        rep[r.replace("DX_", "")] = special[r]
+    return rep
+
+
+def highest_rank(svar):
+    """Returns the shape with the highest needed rank among the CMORvars
+    referencing a MIPvar with this label
+    This, assuming dr2xml would handle all needed shape reductions
+    """
+    # mipvarlabel=svar.label_without_area
+    logger = get_logger()
+    mipvarlabel = svar.label_without_psuffix
+    shapes = []
+    altdims = set()
+    data_request = get_data_request()
+    for cvar in data_request.get_list_by_id('CMORvar', elt_type="variable"):
+        v = data_request.get_element_uid(cvar.vid, elt_type="variable")
+        if v.label == mipvarlabel:
+            st = data_request.get_element_uid(cvar.stid, check_print_DR_errors=False,
+                                              error_msg="DR Error: issue with stid for : %s in table section : %s" %
+                                                        (v.label, str(cvar.mipTableSection)))
+            if st is None:
+                shape = "?st"
+            else:
+                sp = data_request.get_element_uid(st.spid, error_msg="DR Error: issue with spid for %s %s %s" %
+                                                                     (st.label, v.label, str(cvar.mipTable)))
+                if sp is None:
+                    # One known case in DR 1.0.2: hus in 6hPlev
+                    shape = "XY"
+                else:
+                    shape = sp.label
+                if "odims" in st.__dict__:
+                    try:
+                        map(altdims.add, st.odims.split("|"))
+                    except:
+                        logger.error("Issue with odims for %s st=%s" % (v.label, st.label))
+
+        else:
+            # Pour recuperer le spatial_shp pour le cas de variables qui n'ont
+            # pas un label CMORvar de la DR (ex. HOMEvar ou EXTRAvar)
+            shape = svar.spatial_shp
+        if shape:
+            shapes.append(shape)
+    # if not shapes : shape="??"
+    if len(shapes) == 0:
+        shape = "XY"
+    elif any(["XY-A" in s for s in shapes]):
+        shape = "XYA"
+    elif any(["XY-O" in s for s in shapes]):
+        shape = "XYO"
+    elif any(["XY-AH" in s for s in shapes]):
+        shape = "XYAh"  # Zhalf
+    elif any(["XY-SN" in s for s in shapes]):
+        shape = "XYSn"  # snow levels
+    elif any(["XY-S" in s for s in shapes]):
+        shape = "XYSo"  # soil levels
+    elif any(["XY-P" in s for s in shapes]):
+        shape = "XYA"
+    elif any(["XY-H" in s for s in shapes]):
+        shape = "XYA"
+    elif any(["XY-HG" in s for s in shapes]):
+        shape = "XYA"
+    #
+    elif any(["XY-na" in s for s in shapes]):
+        shape = "XY"  # analyser realm, pb possible sur ambiguite singleton
+    #
+    elif any(["YB-na" in s for s in shapes]):
+        shape = "basin_zonal_mean"
+    elif any(["YB-O" in s for s in shapes]):
+        shape = "basin_merid_section"
+    elif any(["YB-R" in s for s in shapes]):
+        shape = "basin_merid_section_density"
+    elif any(["S-A" in s for s in shapes]):
+        shape = "COSP-A"
+    elif any(["S-AH" in s for s in shapes]):
+        shape = "COSP-AH"
+    elif any(["na-A" in s for s in shapes]):
+        shape = "site-A"
+    elif any(["Y-A" in s for s in shapes]):
+        shape = "XYA"  # lat-A
+    elif any(["Y-P" in s for s in shapes]):
+        shape = "XYA"  # lat-P
+    elif any(["Y-na" in s for s in shapes]):
+        shape = "lat"
+    elif any(["TRS-na" in s for s in shapes]):
+        shape = "TRS"
+    elif any(["TR-na" in s for s in shapes]):
+        shape = "TR"
+    elif any(["L-na" in s for s in shapes]):
+        shape = "COSPcurtain"
+    elif any(["L-H40" in s for s in shapes]):
+        shape = "COSPcurtainH40"
+    elif any(["S-na" in s for s in shapes]):
+        shape = "XY"  # fine once remapped
+    elif any(["na-na" in s for s in shapes]):
+        shape = "0d"  # analyser realm
+    # else : shape="??"
+    else:
+        shape = "XY"
+    #
+    for d in altdims:
+        dims = d.split(' ')
+        for dim in dims:
+            shape += "_" + dim
+    #
+    return shape
+
+
+def copy_obj_from_DX_file(fp, obj, prefix, lrealms, path_special):
+    """
+    Insert content of DX_<obj>_defs files (changing prefix)
+    """
+    # print "copying %s defs :"%obj,
+    logger = get_logger()
+    subrealms_seen = []
+    for realm in lrealms:
+        for subrealm in realm.split():
+            if subrealm in subrealms_seen:
+                continue
+            subrealms_seen.append(subrealm)
+            # print "\tand realm %s"%subrealm,
+            defs = DX_defs_filename(obj, subrealm, path_special)
+            if os.path.exists(defs):
+                with open(defs, "r") as fields:
+                    # print "from %s"%defs
+                    fp.write("\n<%s_definition>\n" % obj)
+                    lines = fields.readlines()
+                    for line in lines:
+                        if not obj + "_definition" in line:
+                            fp.write(line.replace("DX_", prefix))
+                    fp.write("</%s_definition>\n" % obj)
+            else:
+                logger.info(" no file :%s " % defs)
+
+
+def DX_defs_filename(obj, realm, path_special):
+    """
+    Return the path of the DX file.
+    """
+    # TBS# return prog_path+"/inputs/DX_%s_defs_%s.xml"%(obj,realm)
+    return path_special + "/DX_%s_defs_%s.xml" % (obj, realm)

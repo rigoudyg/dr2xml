@@ -20,7 +20,7 @@ from .definition import DataRequest as DataRequestBasic
 from .definition import SimpleObject
 from .definition import SimpleDim as SimpleDimBasic
 from .definition import SimpleCMORVar as SimpleCMORVarBasic
-from ..utils import Dr2xmlError
+from ..utils import Dr2xmlError, print_struct, is_elt_applicable, convert_string_to_year
 
 try:
     import dreq
@@ -42,6 +42,24 @@ class Scope(ScopeBasic):
     def get_request_link_by_mip(self, mips_list):
         return sorted(list(self.scope.getRequestLinkByMip(set(mips_list))), key=lambda x: x.label)
 
+    def get_filtered_request_links_by_mip_included_excluded(self, mips_list, included_request_links=None,
+                                                            excluded_request_links=None):
+        logger = get_logger()
+        rep = self.get_request_link_by_mip(mips_list)
+        logger.info("Number of Request Links which apply to MIPS %s  is: %d" %
+                    (print_struct(mips_list), len(rep)))
+        rep = [rl for rl in rep if is_elt_applicable(rl, attribute="label", excluded=excluded_request_links)]
+        logger.info("Number of Request Links after filtering by excluded_request_links is: %d" % len(rep))
+        if included_request_links is not None and len(included_request_links) > 0:
+            excluded_rls = [rl for rl in rep if not is_elt_applicable(rl, attribute="label",
+                                                                      included=included_request_links)]
+            for rl in excluded_rls:
+                logger.critical("RequestLink %s is not included" % rl.label)
+                rep.remove(rl)
+        logger.info("Number of Request Links after filtering by included_request_links is: %d" % len(rep))
+
+        return rep
+
     def get_vars_by_request_link(self, request_link, pmax):
         if not isinstance(request_link, list):
             request_link = [request_link, ]
@@ -53,8 +71,11 @@ class DataRequest(DataRequestBasic):
     def get_version(self):
         return self.data_request.version
 
-    def get_list_by_id(self, collection, **kwargs):
-        return self.data_request.coll[collection]
+    def get_list_by_id(self, collection, elt_type=None, **kwargs):
+        rep = self.data_request.coll[collection]
+        if elt_type in ["variable", ]:
+            rep = [SimpleCMORVar.get_from_dr(elt, id=elt.uid) for elt in rep.items]
+        return rep
 
     def get_sectors_list(self):
         """
@@ -68,6 +89,289 @@ class DataRequest(DataRequestBasic):
 
     def get_experiment_label(self, experiment):
         return self.data_request.inx.experiment.label[experiment][0]
+
+    def get_experiment_label_start_end_years(self, experiment):
+        exp = self.get_element_uid(self.get_experiment_label(experiment))
+        if exp is not None:
+            return exp.label, exp.starty, exp.endy
+        else:
+            return super().get_experiment_label_start_end_years(experiment)
+
+    def filter_request_link_by_experiment_and_year(self, request_links, experiment_id, year,
+                                                   filter_on_realization=False, realization_index=1, branching=dict(),
+                                                   branch_year_in_child=None, endyear=False):
+        logger = get_logger()
+        _, starty, endy = self.get_experiment_label_start_end_years(experiment_id)
+        logger.info("Filtering for experiment %s, covering years [ %s , %s ] in DR" %
+                    (experiment_id, starty, endy))
+        # print "Request links before filter :"+`[ rl.label for rl in rls_for_mips ]`
+        rep = []
+        for rl in request_links:
+            # Access all requesItems ids which refer to this RequestLink
+            rl_req_items = self.get_request_by_id_by_sect(rl.uid, 'requestItem')
+            if any([self.check_requestitem_for_exp_and_year(self.get_element_uid(ri_id), experiment_id, year,
+                                                            filter_on_realization, endyear, realization_index,
+                                                            branching, branch_year_in_child)[0]
+                    for ri_id in rl_req_items]):
+                rep.append(rl)
+        return rep
+
+    def check_requestitem_for_exp_and_year(self, ri, experiment, year, filter_on_realization=False, endyear=False,
+                                           realization_index=1, branching=dict(), branch_year_in_child=None):
+        """
+        Returns True if requestItem 'ri' in data request is relevant
+        for a given 'experiment' and 'year'. Toggle 'debug' allow some printouts
+        """
+        # Returns a couple : relevant, endyear.
+        # RELEVANT is True if requestItem RI applies to EXPERIMENT and
+        #   has a timeslice wich includes YEAR, either implicitly or explicitly
+        # ENDYEAR is meaningful if RELEVANT is True, and is the
+        #   last year in the timeslice (or None if timeslice ==
+        #   the whole experiment duration)
+
+        # Acces experiment or experiment group for the RequestItem
+        # if (ri.label=='C4mipC4mipLandt2') : debug=True
+        # if ri.title=='AerChemMIP, AERmon-3d, piControl' : debug=True
+        # if ri.title=='CFMIP, CFMIP.CFsubhr, amip' : debug=True
+        logger = get_logger()
+        logger.debug("In RIapplies.. Checking % 15s" % ri.title)
+        item_exp = self.get_element_uid(ri.esid)
+        ri_applies_to_experiment = False
+        # esid can link to an experiment or an experiment group
+        if item_exp._h.label in ['experiment', ]:
+            logger.debug("%20s %s" % ("Simple Expt case", item_exp.label))
+            if item_exp.label in [experiment, ]:
+                logger.debug(" OK", )
+                ri_applies_to_experiment = True
+        elif item_exp._h.label in ['exptgroup', ]:
+            logger.debug("%20s %s" % ("Expt Group case ", item_exp.label))
+            exps_id = self.get_request_by_id_by_sect(ri.esid, 'experiment')
+            for e in [self.get_element_uid(eid) for eid in exps_id]:
+                if e.label in [experiment, ]:
+                    logger.debug(" OK for experiment based on group %s" % item_exp.label)
+                    ri_applies_to_experiment = True
+        elif item_exp._h.label in ['mip', ]:
+            logger.debug("%20s %s" % ("Mip case ", self.get_element_uid(item_exp.label).label))
+            exps_id = self.get_request_by_id_by_sect(ri.esid, 'experiment')
+            for e in [self.get_element_uid(eid) for eid in exps_id]:
+                logger.debug(e.label + ",", )
+                if e.label == experiment:
+                    logger.debug(" OK for experiment based on mip %s" % item_exp.label)
+                    ri_applies_to_experiment = True
+        else:
+            logger.debug("Error on esid link for ri: %s uid=%s %s" % (ri.title, ri.uid, item_exp._h.label))
+        # print "ri=%s"%ri.title,
+        # if year is not None :
+        #    print "Filtering for year %d"%year
+        if filter_on_realization:
+            if ri.nenmax != -1 and (realization_index > ri.nenmax):
+                ri_applies_to_experiment = False
+
+        if ri_applies_to_experiment:
+            logger.debug("Year considered: %s %s" % (year, type(year)))
+            if year is None:
+                rep = True
+                endyear = None
+                logger.debug(" ..applies because arg year is None")
+            else:
+                year = int(year)
+                rep, endyear = self.is_year_in_requestitem(ri, experiment, year, branching, branch_year_in_child,
+                                                           endyear)
+                logger.debug(" ..year in ri returns: %s %s" % (rep, endyear))
+                # if (ri.label=="AerchemmipAermonthly3d") :
+                #    print "reqItem=%s,experiment=%s,year=%d,rep=%s,"%(ri.label,experiment,year,rep)
+            # print " rep=",rep
+            return rep, endyear
+        else:
+            # print
+            return False, None
+
+    def is_year_in_requestitem(self, ri, exp, year, branching=dict(), branch_year_in_child=None, endyear=False):
+        """
+        :param ri: request item
+        :param exp: experiment
+        :param year: year to treat
+        :return: a tuple which contains a boolean indicated whether the year has to be treated and the last year to treat
+        """
+        logger = get_logger()
+        exp_label, exp_startyear, exp_endyear = self.get_experiment_label_start_end_years(exp)
+        if ri.label in ["CfmipCf3hrSimNew", ]:
+            return (year == 2008), 2008
+        if "HighResMIP, HighResMIP-6hrPlevExtr, amip" in ri.title:
+            return True, 2018
+        if 'tslice' in ri.__dict__:
+            logger.debug("calling year_in_ri_tslice")
+            rep, endyear = self.is_year_in_requestitem_tslice(ri, exp_label, exp_startyear, year, branching,
+                                                              branch_year_in_child)
+            return rep, endyear
+        try:
+            ny = int(ri.nymax)
+        except:
+            logger.warning("Cannot tell if reqItem %s applies to year %d  (ny=%s) -> assumes yes" % (ri.title, year,
+                                                                                                     repr(ny)))
+            return True, None
+        #
+        # From now, this the case of a RequestItem which starts from experiment's start
+        actual_first_year = self.find_exp_start_year(exp_label, exp_startyear, branch_year_in_child)  # The start year, possibly fixed by the user
+        actual_end_year = self.find_exp_end_year(exp_endyear, endyear)  # = the end year requested by the user if any
+        DR_first_year = convert_string_to_year(exp_startyear)
+        DR_end_year = convert_string_to_year(exp_endyear)
+        logger.debug("year_in_ri: start DR: %s actual: %s | end DR: %s actual: %s | ny=%d" %
+                     (DR_first_year, actual_first_year, DR_end_year, actual_end_year, ny))
+        #
+        ri_is_for_all_experiment = False
+        if ny <= 0:
+            ri_is_for_all_experiment = True
+            logger.debug("year_in_ri: RI applies systematically")
+        else:
+            if DR_first_year and DR_end_year and ny == (DR_end_year - DR_first_year + 1):
+                ri_is_for_all_experiment = True
+                logger.debug("year_in_ri: RI applies because ny=end-start")
+        if ri_is_for_all_experiment:
+            return True, None
+        #
+        # From now, we know that requestItem duration is less than experiment duration, or that
+        # experiment duration is not known
+        # We may have errors in requestItem duration ny, because of an error in DR for start year
+        # So, we add to ny the difference between DR and actual start_years, if the DR value is meaningful
+        if DR_first_year:
+            ny += DR_first_year - actual_first_year  # Will be 0 if end is defined in DR and not by the user
+            logger.debug("year_in_ri: compensating ny for diff in first year")
+        RI_end_year = actual_first_year + ny - 1
+        # For these kind of requestItem of limited duration, no need to extend it, whatever the actual end date
+        applies = (year <= RI_end_year)
+        logger.debug("year_in_ri: returning %s %s" % (applies, RI_end_year))
+        return applies, RI_end_year
+
+    def is_year_in_requestitem_tslice(self, ri, exp_label, exp_startyear, year, branching=dict(),
+                                      branch_year_in_child=None):
+        """
+        Returns a couple : relevant, endyear.
+        RELEVANT is True if requestItem RI applies to
+          YEAR, either implicitly or explicitly (e.g. timeslice)
+        ENDYEAR, which is meaningful if RELEVANT is True, and is the
+          last year in the timeslice (or None if timeslice ==
+          the whole experiment duration)
+        """
+        logger = get_logger()
+        if 'tslice' not in ri.__dict__:
+            logger.debug("No tslice for reqItem %s -> OK for any year" % ri.title)
+            return True, None
+        if ri.tslice in ['__unset__', ]:
+            logger.debug("tslice is unset for reqItem %s " % ri.title)
+            return True, None
+        #
+        relevant = False
+        endyear = None
+        tslice = self.get_element_uid(ri.tslice)
+        logger.debug("tslice label/type is %s/%s for reqItem %s " % (tslice.label, tslice.type, ri.title))
+        if tslice.type in ["relativeRange", ]:  # e.g. _slice_abrupt30
+            first_year = self.find_exp_start_year(exp_label, exp_startyear, branch_year_in_child=branch_year_in_child)
+            # first_year = sset["branch_year_in_child"]
+            relevant = (year >= tslice.start + first_year - 1 and year <= tslice.end + first_year - 1)
+            endyear = first_year + tslice.end - 1
+        elif tslice.type in ["simpleRange", ]:  # e.g. _slice_DAMIP20
+            relevant = (year >= tslice.start and year <= tslice.end)
+            endyear = tslice.end
+        elif tslice.type in ["sliceList", ]:  # e.g. _slice_DAMIP40
+            for start in range(tslice.start, int(tslice.end - tslice.sliceLen + 2), int(tslice.step)):
+                if year >= start and year < start + tslice.sliceLen:
+                    relevant = True
+                    endyear = start + tslice.sliceLen - 1
+        elif tslice.type in ["dayList", ]:  # e.g. _slice_RFMIP2
+            # e.g. startList[i]: [1980, 1, 1, 1980, 4, 1, 1980, 7, 1, 1980, 10, 1, 1992, 1, 1, 1992, 4, 1]
+            years = [tslice.startList[3 * i] for i in range(len(tslice.startList) / 3)]
+            if year in years:
+                relevant = True
+                endyear = year
+        elif tslice.type in ["startRange", ]:  # e.g. _slice_VolMIP3
+            # used only for VolMIP : _slice_VolMIP3
+            start_year = self.find_exp_start_year(exp_label, exp_startyear, branch_year_in_child=branch_year_in_child)
+            relevant = (year >= start_year and year < start_year + nyear)
+            endyear = start_year + nyear - 1
+        elif tslice.type in ["monthlyClimatology", ]:  # e.g. _slice_clim20
+            relevant = (year >= tslice.start and year <= tslice.end)
+            endyear = tslice.end
+        elif tslice.type in ["branchedYears", ]:  # e.g. _slice_piControl020
+            if len(branching) == 0:
+                pass
+            elif tslice.child in branching:
+                endyear = False
+                (refyear, starts) = branching[tslice.child]
+                for start in starts:
+                    if ((year - start >= tslice.start - refyear) and
+                            (year - start < tslice.start - refyear + tslice.nyears)):
+                        relevant = True
+                        lastyear = start + tslice.start - refyear + tslice.nyears - 1
+                        if endyear is False:
+                            endyear = lastyear
+                        else:
+                            endyear = max(endyear, lastyear)
+                        logger.debug(
+                            "slice OK: year=%d, start=%d tslice.start=%d refyear=%d tslice.nyears=%d lastyear=%d" %
+                            (year, start, tslice.start, refyear, tslice.nyears, lastyear))
+            else:
+                raise Dr2xmlError("For tslice %s, child %s start year is not documented" % (tslice.title, tslice.child))
+        else:
+            raise Dr2xmlError("type %s for time slice %s is not handled" % (tslice.type, tslice.title))
+        logger.debug("for year %d and experiment %s, relevant is %s for tslice %s of type %s, endyear=%s" %
+                     (year, exp_label, repr(relevant), ri.title, tslice.type, repr(endyear)))
+        return relevant, endyear
+
+    def get_requestitems_for_cmorvar(self, cmorvar_id, pmax, global_rls):
+        logger = get_logger()
+
+        rVarsUid = self.get_request_by_id_by_sect(cmorvar_id, 'requestVar')
+        rVars = [self.get_element_uid(uid) for uid in rVarsUid
+                 if self.get_element_uid(uid).priority <= pmax]
+        logger.debug("les requestVars: %s" % " ".join([rVar.title for rVar in rVars]))
+        VarGroups = [self.get_element_uid(rv.vgid) for rv in rVars]
+        logger.debug("les requestVars groups: %s" % " ".join([rVg.label for rVg in VarGroups]))
+        RequestLinksId = list()
+        for vg in VarGroups:
+            RequestLinksId.extend(self.get_request_by_id_by_sect(vg.uid, 'requestLink'))
+        FilteredRequestLinks = list()
+        for rlid in RequestLinksId:
+            rl = self.get_element_uid(rlid)
+            if rl in global_rls:
+                FilteredRequestLinks.append(rl)
+        logger.debug("les requestlinks: %s" % " ".join([self.get_element_uid(rlid).label
+                                                        for rlid in RequestLinksId]))
+        logger.debug("les FilteredRequestlinks: %s" % " ".join([rl.label for rl in FilteredRequestLinks]))
+        RequestItems = list()
+        for rl in FilteredRequestLinks:
+            RequestItems.extend(self.get_request_by_id_by_sect(rl.uid, 'requestItem'))
+        logger.debug(
+            "les requestItems: %s" % " ".join([self.get_element_uid(riid).label for riid in RequestItems]))
+        return RequestItems
+
+    def get_endyear_for_cmorvar(self, cmorvar, experiment, year, internal_dict, global_rls):
+        logger = get_logger()
+        logger.debug("In end_year for %s %s" % (cmorvar.label, cmorvar.mipTable))
+        # 1- Get the RequestItems which apply to CmorVar
+        request_items = self.get_requestitems_for_cmorvar(cmorvar.id, internal_dict["max_priority"], global_rls)
+
+        # 2- Select those request links which include expt and year
+        larger = None
+        for riid in request_items:
+            ri = self.get_element_uid(riid)
+            applies, endyear = self.check_requestitem_for_exp_and_year(ri, experiment, year,
+                                                                       internal_dict["filter_on_realization"],
+                                                                       internal_dict["end_year"],
+                                                                       internal_dict["realization_index"],
+                                                                       internal_dict["branching"],
+                                                                       internal_dict["branch_year_in_child"])
+            logger.debug("For var and freq selected for debug and year %s, for ri %s, applies=%s, endyear=%s" %
+                         (str(year), ri.title, str(applies), str(endyear)))
+            if applies:
+                if endyear is None:
+                    return None  # One of the timeslices cover the whole expt
+                if larger is None:
+                    larger = endyear
+                else:
+                    larger = max(larger, endyear)
+        return larger
+
 
     def get_element_uid(self, id=None, error_msg=None, raise_on_error=False, check_print_DR_errors=True,
                         check_print_stdnames_error=False, elt_type=None, **kwargs):
@@ -118,7 +422,7 @@ class DataRequest(DataRequestBasic):
             if spshp.label in ["XY-na", ] and 'cids' in struct.__dict__:
                 if isinstance(struct.cids[0], six.string_types) and len(struct.cids[0]) > 0:
                     # this line is needed prior to version 01.00.08.
-                    c = data_request.get_element_uid(struct.cids[0])
+                    c = self.get_element_uid(struct.cids[0])
                     # if c.axis == 'Z': # mpmoine_note: non car je veux dans dr_single_levels toutes les dimensions
                     # singletons (ex. 'typenatgr'), par seulement les niveaux
                     rep.append(c.label)
@@ -210,7 +514,7 @@ class SimpleDim(SimpleDimBasic):
         else:
             stdname = ""
         input_dim_dict["stdname"] = stdname
-        return cls(**input_dim_dict)
+        return cls(from_dr=True, **input_dim_dict)
 
 
 class SimpleCMORVar(SimpleCMORVarBasic):
@@ -369,4 +673,7 @@ class SimpleCMORVar(SimpleCMORVarBasic):
         input_var_dict["type"] = "cmor"
         input_var_dict["mip_era"] = "CMIP6"
         input_var_dict["prec"] = input_var.type
-        return cls(**input_var_dict)
+        if struct is not None:
+            input_var_dict["flag_meanings"] = struct.flag_meanings
+            input_var_dict["flag_values"] = struct.flag_values
+        return cls(from_dr=True, **input_var_dict)

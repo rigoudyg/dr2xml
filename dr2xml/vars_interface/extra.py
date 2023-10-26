@@ -11,11 +11,10 @@ import os
 from collections import OrderedDict, defaultdict
 
 from dr2xml.analyzer import guess_freq_from_table_name
-from dr2xml.dr_interface import get_data_request
+from dr2xml.dr_interface import get_data_request, SimpleCMORVar, SimpleDim
 from logger import get_logger
 from dr2xml.settings_interface import get_settings_values
 from dr2xml.utils import VarsError, read_json_content
-from .definitions import SimpleCMORVar, SimpleDim
 from .generic import read_home_var, multi_plev_suffixes, single_plev_suffixes, remove_p_suffix
 
 home_attrs = ['type', 'label', 'modeling_realm', 'frequency', 'mipTable', 'temporal_shp', 'spatial_shp',
@@ -88,8 +87,8 @@ def read_extra_table(path, table):
     dynamic_shapes = defaultdict(OrderedDict)
     #
     mip_era, tbl = table.split('_')
-    json_table = path + "/" + table + ".json"
-    json_coordinate = path + "/" + mip_era + "_coordinate.json"
+    json_table = os.sep.join([path, table + ".json"])
+    json_coordinate = os.sep.join([path, mip_era + "_coordinate.json"])
     #
     add_single_plevs_suffixes = set()
     add_multi_plevs_suffixes = set()
@@ -104,13 +103,7 @@ def read_extra_table(path, table):
                 freq = v["frequency"]
             else:
                 freq = guess_freq_from_table_name(tbl)
-            extra_var = SimpleCMORVar(type="extra", mip_era=mip_era, label=v["out_name"],
-                                      mipVarLabel=v["out_name"], stdname=v.get("standard_name", ""),
-                                      long_name=v["long_name"], units=v["units"], modeling_realm=v["modeling_realm"],
-                                      frequency=freq, mipTable=tbl, cell_methods=v["cell_methods"],
-                                      cell_measures=v["cell_measures"], positive=v["positive"],
-                                      Priority=float(v[mip_era.lower() + "_priority"]),
-                                      label_without_psuffix=v["out_name"], coordinates=v.get("dimensions", None))
+            extra_var = SimpleCMORVar.get_from_extra(input_var=v, mip_era=mip_era, freq=freq, table=tbl)
             dims = v["dimensions"].split(" ")
             # get the index of time dimension to supress, if any
             dr_dims = list()
@@ -152,27 +145,18 @@ def read_extra_table(path, table):
                 if d in dim2dimid:
                     dr_dimids.append(dim2dimid[d])
                     extra_dim = data_request.get_element_uid(dim2dimid[d], elt_type="dim")
-                    extra_var.update_attributes(sdims={extra_dim.label: extra_dim})
                 else:
                     extra_dim_info = read_json_content(json_coordinate)["axis_entry"]
                     if d in extra_dim_info:
-                        extra_dim_info = extra_dim_info[d]
+                        extra_dim = SimpleDim.get_from_extra(label=d, input_dim=extra_dim_info[d])
                     else:
                         raise KeyError("Could not find the dimension definition for %s in %s" % (d, json_coordinate))
-                    extra_dim = SimpleDim(label=d, axis=extra_dim_info["axis"], stdname=extra_dim_info["standard_name"],
-                                          units=extra_dim_info["units"], long_name=extra_dim_info["long_name"],
-                                          out_name=extra_dim_info["out_name"], positive=extra_dim_info["positive"],
-                                          title=extra_dim_info.get("title", extra_dim_info["long_name"]),
-                                          # values of multi vertical levels
-                                          requested=" ".join([ilev for ilev in extra_dim_info["requested"]]).rstrip(),
-                                          value=extra_dim_info["value"],  # value of single vertical level
-                                          type=extra_dim_info["type"])  # axis type
-                    extra_var.update_attributes(sdims={extra_dim.label: extra_dim})
                     if v["out_name"] not in dim_from_extra:
                         dim_from_extra[d][v["out_name"]] = (extra_dim.stdname, extra_dim.requested)
                     if extra_var.spatial_shp.startswith("XY-P") and not extra_var.spatial_shp.endswith("HM") and \
                             len(extra_dim.value) > 0 and len(extra_dim.requested) == 0:
                         extra_var.set_attributes(spatial_shp=extra_var.spatial_shp + "HM")
+                extra_var.update_attributes(sdims={extra_dim.label: extra_dim})
             if new_plev_suffix is not None:
                 if extra_var.spatial_shp.endswith("HM"):
                     add_single_plevs_suffixes.add(new_plev_suffix)

@@ -202,9 +202,10 @@ def complement_svar_using_cmorvar(svar, cmvar, debug=[]):
                         Priority=cmvar.Priority, positive=cmvar.positive, modeling_realm=cmvar.modeling_realm,
                         label=cmvar.label, spatial_shp=cmvar.spatial_shp, temporal_shp=cmvar.temporal_shp, cmvar=cmvar,
                         long_name=cmvar.long_name, description=cmvar.description, ref_var=cmvar.label,
-                        mipVarLabel=cmvar.mipVarLabel, units=cmvar.units, stdname=cmvar.stdname, struct=cmvar.struct,
+                        mipVarLabel=cmvar.mipVarLabel, units=cmvar.units, stdname=cmvar.stdname,
                         cm=cmvar.cm, cell_methods=cmvar.cell_methods, cell_measures=cmvar.cell_measures,
-                        sdims=cmvar.sdims, other_dims_size=cmvar.other_dims_size, mip_era=cmvar.mip_era)
+                        sdims=cmvar.sdims, other_dims_size=cmvar.other_dims_size, mip_era=cmvar.mip_era,
+                        flag_meanings=cmvar.flag_meanings, flag_values=cmvar.flag_values)
     area = cellmethod2area(svar.cell_methods)
     if svar.label in debug:
         logger.debug("complement_svar ... processing %s, area=%s" % (svar.label, str(area)))

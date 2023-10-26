@@ -329,7 +329,6 @@ def create_axis_from_dim(dim, labels, axis_ref):
     if axis_id in get_config_variable("axis_defs"):
         return axis_id, axis_name
     #
-    prec_dict = dict(double="8", integer="2", int="2", float="4")
     value = None
     bounds = None
     dim_name = None
@@ -357,7 +356,7 @@ def create_axis_from_dim(dim, labels, axis_ref):
         if length > 0:
             label = "(0,{})[ {} ]".format(length - 1, strings)
     rep = DR2XMLElement(tag="axis", id=axis_id, name=axis_name, axis_ref=axis_ref, standard_name=dim.stdname,
-                        long_name=dim.title, prec=prec_dict.get(dim.type), unit=dim.units, value=value, bounds=bounds,
+                        long_name=dim.title, prec=dim.type, unit=dim.units, value=value, bounds=bounds,
                         dim_name=dim_name, label=label, axis_type=dim.axis)
     add_value_in_dict_config_variable(variable="axis_defs", key=axis_id, value=rep)
     # print "new DR_axis :  %s "%rep
@@ -375,17 +374,6 @@ def is_vert_dim(sdim):
     # test=(sdim.stdname=='air_pressure' or sdim.stdname=='altitude') and (sdim.value == "")
     test = (sdim.axis in ['Z', ])
     return test
-
-
-def scalar_vertical_dimension(sv):
-    """
-    Return the altLabel attribute if it is a vertical dimension, else None.
-    """
-    if 'cids' in sv.struct.__dict__:
-        cid = get_data_request().get_element_uid(sv.struct.cids[0], elt_type="dim")
-        if is_vert_dim(cid):
-            return cid.altLabel
-    return None
 
 
 def create_standard_domains(domain_defs):
