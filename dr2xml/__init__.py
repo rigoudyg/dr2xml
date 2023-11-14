@@ -639,7 +639,6 @@ es with a different name between model
     # Variables tools
     from .vars_interface.generic import multi_plev_suffixes, single_plev_suffixes
     from .vars_interface.selection import select_variables_to_be_processed
-    from .vars_interface.generic_data_request import initialize_sn_issues
 
     # XIOS reading and writing tools
     from .Xparse import init_context
@@ -690,7 +689,6 @@ es with a different name between model
         sys.exit(1)
     set_config_variable("cell_method_warnings", list())
     warnings_for_optimisation = list()
-    initialize_sn_issues(OrderedDict())
     #
     # --------------------------------------------------------------------
     # Select variables that should be processed

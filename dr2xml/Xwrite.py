@@ -44,7 +44,7 @@ from .grids import change_domain_in_grid, change_axes_in_grid, get_grid_def_with
 
 # Variables tools
 from .vars_interface.cmor import ping_alias, get_simplevar
-from .vars_interface.generic_data_request import endyear_for_CMORvar, get_grid_choice
+from .vars_interface.generic_data_request import endyear_for_CMORvar
 
 # Post-processing tools
 from .postprocessing import process_vertical_interpolation, process_zonal_mean, process_diurnal_cycle, \
@@ -462,7 +462,7 @@ def write_xios_file_def(filename, svars_per_table, year, dummies, skipped_vars_p
     set_config_variable("domain_defs", OrderedDict())
     # Add xml_file_definition
     xml_file_definition = DR2XMLElement(tag="file_definition")
-    _, hgrid, _, _, _ = internal_dict['grids'][get_grid_choice()][context]
+    _, hgrid, _, _, _ = internal_dict['grids'][get_settings_values("internal_values", "grid_choice")][context]
     files_list = determine_files_list(svars_per_table, enddate, year, debug)
     for file_dict in files_list:
         write_xios_file_def_for_svars_list(hgrid=hgrid, xml_file_definition=xml_file_definition, dummies=dummies,

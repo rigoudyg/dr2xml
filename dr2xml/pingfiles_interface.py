@@ -27,9 +27,6 @@ from .config import get_config_variable, add_value_in_dict_config_variable, set_
 # Interface to xml tools
 from .xml_interface import get_root_of_xml_file, DR2XMLElement
 
-# Variables tools
-from .vars_interface.generic_data_request import get_grid_choice
-
 
 def read_pingfiles_variables(pingfiles, dummies):
     """
@@ -152,7 +149,7 @@ def check_for_file_input(sv, hgrid):
         logger.debug(remap_grid_def)
 
         # Create xml for reading the variable
-        filename = externs[sv.label][hgrid][get_grid_choice()]
+        filename = externs[sv.label][hgrid][get_settings_values("internal_values", "grid_choice")]
         file_id = "remapped_{}_file".format(sv.label)
         field_in_file_id = "_".join([sv.label, hgrid])
         # field_in_file_id=sv.label

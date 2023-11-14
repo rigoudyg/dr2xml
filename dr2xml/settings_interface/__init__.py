@@ -8,7 +8,7 @@ Interface to get and set laboratory and simulations dictionaries.
 from __future__ import print_function, division, absolute_import, unicode_literals
 
 import copy
-import pprint
+from collections import OrderedDict
 
 from logger import get_logger
 
@@ -18,6 +18,8 @@ internal_settings = None
 common_settings = None
 # Project settings
 project_settings = None
+# Internal values used everywhere in dr2xml
+internal_values = None
 
 
 def initialize_settings(lset=None, sset=None, force_reset=False, **kwargs):
@@ -46,6 +48,34 @@ def initialize_settings(lset=None, sset=None, force_reset=False, **kwargs):
     # Solve project_settings
     project_settings = solve_settings(project_settings, internal_dict=internal_settings,
                                       common_dict=common_settings, additional_dict=kwargs)
+    # Initialize internal values
+    initialize_internal_values()
+
+
+def initialize_internal_values():
+    set_internal_value(key="rls_for_all_experiments", value=None)
+    set_internal_value(key="global_rls", value=None)
+    set_internal_value(key="sn_issues", value=OrderedDict())
+    set_internal_value(key="print_multiple_grids", value=False)
+    set_internal_value(key="grid_choice", value=None)
+
+
+def set_internal_value(key, value, action=False):
+    global internal_values
+    if not isinstance(internal_values, dict):
+        internal_values = dict()
+    if action in ["append", ]:
+        if key in internal_values:
+            internal_values[key].append(copy.deepcopy(value))
+        else:
+            internal_values[key] = [copy.deepcopy(value), ]
+    elif action in ["update", ]:
+        if key in internal_values:
+            internal_values[key].update(copy.deepcopy(value))
+        else:
+            internal_values[key] = copy.deepcopy(value)
+    else:
+        internal_values[key] = copy.deepcopy(value)
 
 
 def get_settings_values(*args, **kwargs):
@@ -64,6 +94,8 @@ def get_settings_values(*args, **kwargs):
         settings = common_settings
     elif setting in ["project", ]:
         settings = project_settings
+    elif setting in ["internal_values", ]:
+        settings = internal_values
     else:
         logger.error("Unknown settings %s" % setting)
         raise ValueError("Unknown settings %s" % setting)
