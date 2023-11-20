@@ -11,7 +11,7 @@ import os
 from collections import OrderedDict, defaultdict
 
 from dr2xml.analyzer import guess_freq_from_table_name
-from dr2xml.dr_interface import get_data_request, SimpleCMORVar, SimpleDim
+from dr2xml.dr_interface import get_dr_object
 from logger import get_logger
 from dr2xml.settings_interface import get_settings_values
 from dr2xml.utils import VarsError, read_json_content
@@ -59,7 +59,7 @@ def read_home_var_extra(line_split, expid, mips, path_extra_tables=None, extra_v
 
 def initialize_dim_variables():
     global dims2shape, dim2dimid, dr_single_levels
-    data_request = get_data_request()
+    data_request = get_dr_object("get_data_request")
     if dims2shape is None:
         dims2shape = data_request.get_dimensions_dict()
         if "longitude|latitude" not in dims2shape:
@@ -103,7 +103,8 @@ def read_extra_table(path, table):
                 freq = v["frequency"]
             else:
                 freq = guess_freq_from_table_name(tbl)
-            extra_var = SimpleCMORVar.get_from_extra(input_var=v, mip_era=mip_era, freq=freq, table=tbl)
+            extra_var = get_dr_object("SimpleCMORVar").get_from_extra(input_var=v, mip_era=mip_era, freq=freq,
+                                                                      table=tbl)
             dims = v["dimensions"].split(" ")
             # get the index of time dimension to supress, if any
             dr_dims = list()
@@ -140,15 +141,16 @@ def read_extra_table(path, table):
                 logger.warning("spatial shape corresponding to %s for variable %s in Table %s not found in DR."
                                % (drdims, v["out_name"], table))
             dr_dimids = list()
-            data_request = get_data_request()
+            data_request = get_dr_object("get_data_request")
             for d in all_dr_dims:
                 if d in dim2dimid:
-                    dr_dimids.append(dim2dimid[d])
                     extra_dim = data_request.get_element_uid(dim2dimid[d], elt_type="dim")
-                else:
+                    if extra_dim is not None:
+                        dr_dimids.append(dim2dimid[d])
+                if d not in dim2dimid or extra_dim is None:
                     extra_dim_info = read_json_content(json_coordinate)["axis_entry"]
                     if d in extra_dim_info:
-                        extra_dim = SimpleDim.get_from_extra(label=d, input_dim=extra_dim_info[d])
+                        extra_dim = get_dr_object("SimpleDim").get_from_extra(label=d, input_dim=extra_dim_info[d])
                     else:
                         raise KeyError("Could not find the dimension definition for %s in %s" % (d, json_coordinate))
                     if v["out_name"] not in dim_from_extra:

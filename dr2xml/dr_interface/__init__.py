@@ -33,6 +33,21 @@ SimpleCMORVar = DefaultClass
 SimpleDim = DefaultClass
 
 
+def get_dr_object(key):
+    if key in ["get_data_request", ]:
+        return get_data_request()
+    elif key in ["get_scope", ]:
+        return get_scope()
+    elif key in ["normalize_grid", ]:
+        return normalize_grid
+    elif key in ["SimpleCMORVar", ]:
+        return SimpleCMORVar()
+    elif key in ["SimpleDim", ]:
+        return SimpleDim()
+    else:
+        raise ValueError("Unknown data request object %s from interface" % key)
+
+
 def load_correct_dr():
     global scope, data_request, DataRequest, initialize_data_request, get_data_request, initialize_scope, get_scope, \
         set_scope, normalize_grid, SimpleDim, SimpleObject, SimpleCMORVar

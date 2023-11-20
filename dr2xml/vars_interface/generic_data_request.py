@@ -7,13 +7,10 @@ Generic data request tools
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
-from collections import defaultdict, OrderedDict
-
-from dr2xml.dr_interface import get_scope, get_data_request, normalize_grid
+from dr2xml.dr_interface import get_dr_object
 from logger import get_logger
 from dr2xml.settings_interface import get_settings_values, set_internal_value
-from dr2xml.utils import print_struct, Dr2xmlError, is_elt_applicable
-from .definitions import SimpleCMORVar
+from dr2xml.utils import print_struct, Dr2xmlError, check_objects_equals
 from .generic import complement_svar_using_cmorvar
 from dr2xml.laboratories import lab_adhoc_grid_policy
 
@@ -39,83 +36,9 @@ def select_data_request_CMORvars_for_lab(sset=False, year=None):
     """
     logger = get_logger()
     internal_settings = get_settings_values("internal")
-    data_request = get_data_request()
-    # From MIPS set to Request links
-    if sset:
-        tierMax = internal_settings['tierMax']
-    else:
-        tierMax = internal_settings['tierMax_lset']
-    sc = get_scope(tierMax)
+    data_request = get_dr_object("get_data_request")
     # Set sizes for lab settings, if available (or use CNRM-CM6-1 defaults)
-    if sset:
-        grid_choice = internal_settings["grid_choice"]
-        mips_list = set(internal_settings['mips'][grid_choice])
-        sizes = internal_settings["sizes"]
-        sc.mcfg = sc.build_mcfg(sizes)
-    else:
-        mip_list_by_grid = internal_settings["mips"]
-        mips_list = set().union(*[set(mip_list_by_grid[grid]) for grid in mip_list_by_grid])
-        grid_choice = "LR"
-    set_internal_value("grid_choice", grid_choice)
-    # Sort mip_list for reproducibility
-    mips_list = sorted(list(mips_list))
-    #
-    rls_for_all_experiments = get_settings_values("internal_values", "rls_for_all_experiments")
-    if rls_for_all_experiments is None:
-        inclinks = internal_settings["included_request_links"]
-        excluded_links = internal_settings["excluded_request_links"]
-        rls_for_mips = sc.get_filtered_request_links_by_mip_included_excluded(mips_list=mips_list,
-                                                                              included_request_links=inclinks,
-                                                                              excluded_request_links=excluded_links)
-        set_internal_value("rls_for_all_experiments", [rl for rl in rls_for_mips])
-    else:
-        rls_for_mips = sorted(rls_for_all_experiments, key=lambda x: x.label)
-    #
-    if sset:
-        experiment_id = internal_settings["experiment_for_requests"]
-
-        rls = data_request.filter_request_link_by_experiment_and_year(rls_for_mips, experiment_id, year,
-                                                                      internal_settings["filter_on_realization"],
-                                                                      internal_settings["realization_index"],
-                                                                      internal_settings["branching"],
-                                                                      internal_settings["branch_year_in_child"],
-                                                                      internal_settings["end_year"])
-        logger.info("Number of Request Links which apply to experiment %s member %s and MIPs %s is: %d" %
-                    (experiment_id, internal_settings['realization_index'],
-                     print_struct(mips_list), len(rls)))
-    # print "Request links that apply :"+`[ rl.label for rl in filtered_rls ]`
-    else:
-        rls = rls_for_mips
-
-    set_internal_value("global_rls", rls)
-
-    # From Request links to CMOR vars + grid
-    # miprl_ids=[ rl.uid for rl in rls ]
-    # miprl_vars=sc.varsByRql(miprl_ids, pmax=lset['max_priority'])
-
-    if sset:
-        pmax = internal_settings['max_priority']
-    else:
-        pmax = internal_settings['max_priority_lset']
-
-    miprl_vars_grids = set()
-
-    for rl in rls:
-        logger.debug("processing RequestLink %s" % rl.title)
-        for v in sc.get_vars_by_request_link(request_link=rl.uid, pmax=pmax):
-            # The requested grid is given by the RequestLink except if spatial shape matches S-*
-            gr = rl.grid
-            cmvar = data_request.get_element_uid(v, elt_type="variable")
-            sp = cmvar.spatial_shp
-            if sp.startswith("S-"):
-                gr = 'cfsites'
-            miprl_vars_grids.add((v, gr))
-            # if 'ua' in cmvar.label : print "adding %s %s"%(cmvar.label,get_element_uid(cmvar.vid).label)
-        # else:
-        #    print "Duplicate pair var/grid : ",cmvar.label,cmvar.mipTable,gr
-    miprl_vars_grids = sorted(list(miprl_vars_grids))
-    logger.info('Number of (CMOR variable, grid) pairs for these requestLinks is: %s' % len(miprl_vars_grids))
-
+    mip_list_by_grid = internal_settings["mips"]
     exctab = internal_settings["excluded_tables_lset"]
     if not isinstance(exctab, list):
         exctab = [exctab, ]
@@ -126,6 +49,21 @@ def select_data_request_CMORvars_for_lab(sset=False, year=None):
     if not isinstance(excpairs, list):
         excpairs = [excpairs, ]
     if sset:
+        tierMax = internal_settings['tierMax']
+        grid_choice = internal_settings["grid_choice"]
+        mips_list = set(mip_list_by_grid[grid_choice])
+        sizes = internal_settings["sizes"]
+        inclinks = internal_settings["included_request_links"]
+        excluded_links = internal_settings["excluded_request_links"]
+        experiment_id = internal_settings["experiment_for_requests"]
+        experiment_filter = dict(experiment_id=experiment_id,
+                                 year=year,
+                                 filter_on_realization=internal_settings["filter_on_realization"],
+                                 realization_index=internal_settings["realization_index"],
+                                 branching=internal_settings["branching"],
+                                 branch_year_in_child=internal_settings["branch_year_in_child"],
+                                 endyear=internal_settings["end_year"])
+        pmax = internal_settings['max_priority']
         inctab = internal_settings["included_tables"]
         if not isinstance(inctab, list):
             inctab = [inctab, ]
@@ -146,29 +84,40 @@ def select_data_request_CMORvars_for_lab(sset=False, year=None):
             excpairs_sset = [excpairs_sset, ]
         excpairs.extend(excpairs_sset)
     else:
+        tierMax = internal_settings['tierMax_lset']
+        mips_list = set().union(*[set(mip_list_by_grid[grid]) for grid in mip_list_by_grid])
+        grid_choice = "LR"
+        sizes = None
+        inclinks = None
+        excluded_links = None
+        experiment_filter = False
+        pmax = internal_settings['max_priority_lset']
         inctab = internal_settings["included_tables_lset"]
         if not isinstance(inctab, list):
             inctab = [inctab, ]
         incvars = internal_settings['included_vars_lset']
         if not isinstance(incvars, list):
             incvars = [incvars, ]
+    mips_list = sorted(list(mips_list))
 
-    filtered_vars = list()
-    for (v, g) in miprl_vars_grids:
-        cmvar = data_request.get_element_uid(v, elt_type="variable")
-        if is_elt_applicable(cmvar.mipVarLabel, excluded=excvars, included=incvars) and \
-            is_elt_applicable(cmvar.mipTable, excluded=exctab, included=inctab) and \
-                is_elt_applicable((cmvar.mipVarLabel, cmvar.mipTable), excluded=excpairs):
-            filtered_vars.append((v, g))
-            logger.debug("adding var %s, grid=%s, ttable=%s=" % (cmvar.label, g, cmvar.mipTable))  # ,exctab,excvars
+    set_internal_value("grid_choice", grid_choice)
 
-    logger.info('Number once filtered by excluded/included vars and tables and spatial shapes is: %s'
-                % len(filtered_vars))
-
-    # Filter the list of grids requested for each variable based on lab policy
-    d = defaultdict(set)
-    for (v, g) in filtered_vars:
-        d[v].add(g)
+    last_filter_options = get_settings_values("internal_values", "initial_selection_configuration")
+    filter_options = dict(tierMax=tierMax, mips_list=mips_list, included_request_links=inclinks,
+                          excluded_request_links=excluded_links, max_priority=pmax, included_vars=incvars,
+                          excluded_vars=excvars, included_tables=inctab, excluded_tables=exctab,
+                          excluded_pairs=excpairs, experiment_filter=experiment_filter, sizes=sizes)
+    if check_objects_equals(filter_options, last_filter_options):
+        d = get_settings_values("internal_values", "cmor_vars")
+    else:
+        d, rls = data_request.get_cmorvars_list(tierMax=tierMax, mips_list=mips_list, included_request_links=inclinks,
+                                                excluded_request_links=excluded_links, max_priority=pmax,
+                                                included_vars=incvars, excluded_vars=excvars, included_tables=inctab,
+                                                excluded_tables=exctab, excluded_pairs=excpairs,
+                                                experiment_filter=experiment_filter, sizes=sizes)
+        set_internal_value("global_rls", rls)
+        set_internal_value("cmor_vars", d)
+        set_internal_value("initial_selection_configuration", filter_options, action="update")
     logger.info('Number of distinct CMOR variables (whatever the grid): %d' % len(d))
     multiple_grids = list()
     print_multiple_grids = get_settings_values("internal_values", "print_multiple_grids")
@@ -191,14 +140,12 @@ def select_data_request_CMORvars_for_lab(sset=False, year=None):
     allow_pseudo = internal_settings['allow_pseudo_standard_names']
     sn_issues = get_settings_values("internal_values", "sn_issues")
     for v in d:
-        svar = SimpleCMORVar()
+        svar = get_dr_object("SimpleCMORVar")
         cmvar = data_request.get_element_uid(v, elt_type="variable", sn_issues=sn_issues, allow_pseudo=allow_pseudo,
                                              mip_list=mips_list)
         complement_svar_using_cmorvar(svar, cmvar, [])
         svar.Priority = cmvar.Priority
         svar.grids = d[v]
-        if data_request.get_element_uid(v, elt_type="variable").label in ["tas", ]:
-            logger.debug("When complementing, tas is included , grids are %s" % svar.grids)
         simplified_vars.append(svar)
     set_internal_value("sn_issues", sn_issues)
     logger.info('Number of simplified vars is: %d' % len(simplified_vars))
@@ -217,7 +164,7 @@ def endyear_for_CMORvar(cv, expt, year):
     # 2- Select those requestItems which include expt,
     #    and retain their endyear if larger than former one
     internal_dict = get_settings_values("internal")
-    data_request = get_data_request()
+    data_request = get_dr_object("get_data_request")
 
     # Some debug material
     larger = data_request.get_endyear_for_cmorvar(cv, expt, year, internal_dict,
@@ -238,7 +185,7 @@ def decide_for_grids(cmvarid, grids):
     TBD : use Martin's acronyms for grid policy
     """
     # Normalize and remove duplicates in grids list
-    ngrids = map(normalize_grid, grids)
+    ngrids = map(get_dr_object("normalize_grid"), grids)
     ngrids = sorted(list(set(ngrids)))
     #
     policy = get_settings_values("internal", "grid_policy")
@@ -250,7 +197,7 @@ def decide_for_grids(cmvarid, grids):
         else:
             return ["", ]
     elif policy in ["native+DR", ]:  # Produce both in 'native' and DR grid
-        if ngrids == ['cfsites']:
+        if ngrids == ['cfsites', ]:
             return ngrids
         else:
             return sorted(list(set(ngrids) | {''}))

@@ -12,7 +12,7 @@ from functools import reduce
 import re
 
 # Utilities
-from .settings_interface import get_settings_values
+from .settings_interface import get_settings_values, set_internal_value
 from .utils import Dr2xmlError
 
 # Logger
@@ -22,15 +22,9 @@ from logger import get_logger
 from .config import get_config_variable, add_value_in_dict_config_variable
 
 # Interface to Data Request
-from .dr_interface import get_data_request
+from .dr_interface import get_dr_object
 # Interface to xml tools
 from .xml_interface import find_rank_xml_subelement, DR2XMLElement
-
-
-# Next variable is used to circumvent an Xios 1270 shortcoming. Xios
-# should read that value in the datafile. Actually, it did, in some
-# earlier version ...
-axis_count = 0
 
 
 def get_grid_def(grid_id):
@@ -253,8 +247,7 @@ def change_axes_in_grid(grid_id):
     Returns the new grid_id
     """
     internal_dict = get_settings_values("internal")
-    data_request = get_data_request()
-    global axis_count
+    data_request = get_dr_object("get_data_request")
     logger = get_logger()
     grid_def_init = get_grid_def(grid_id)
     grid_def = grid_def_init.copy()
@@ -304,7 +297,8 @@ def change_axes_in_grid(grid_id):
                     axis_id, axis_name = create_axis_from_dim(dim, alt_labels, axis_ref)
                     # cannot use ET library which does not guarantee the ordering of axes
                     changed_done = True
-                    axis_count += 1
+                    axis_count = get_settings_values("internal_values", "axis_count") + 1
+                    set_internal_value("axis_count", axis_count)
                     grid_def[i].attrib = dict(axis_ref=axis_id, name=axis_name,
                                               id="ref_to_{}_{}".format(axis_id, axis_count))
                     output_grid_id += "_" + dim.label

@@ -10,7 +10,7 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 
 import copy
 import re
-from collections import OrderedDict
+from collections import OrderedDict, defaultdict
 
 import six
 
@@ -105,7 +105,7 @@ class DataRequest(DataRequestBasic):
         logger.info("Filtering for experiment %s, covering years [ %s , %s ] in DR" %
                     (experiment_id, starty, endy))
         # print "Request links before filter :"+`[ rl.label for rl in rls_for_mips ]`
-        rep = []
+        rep = list()
         for rl in request_links:
             # Access all requesItems ids which refer to this RequestLink
             rl_req_items = self.get_request_by_id_by_sect(rl.uid, 'requestItem')
@@ -372,7 +372,6 @@ class DataRequest(DataRequestBasic):
                     larger = max(larger, endyear)
         return larger
 
-
     def get_element_uid(self, id=None, error_msg=None, raise_on_error=False, check_print_DR_errors=True,
                         check_print_stdnames_error=False, elt_type=None, **kwargs):
         logger = get_logger()
@@ -427,6 +426,59 @@ class DataRequest(DataRequestBasic):
                     # singletons (ex. 'typenatgr'), par seulement les niveaux
                     rep.append(c.label)
         return rep
+
+    def get_cmorvars_list(self, tierMax, mips_list, included_request_links, excluded_request_links, max_priority,
+                          included_vars, excluded_vars, included_tables, excluded_tables, excluded_pairs,
+                          experiment_filter=False, sizes=None):
+        logger = get_logger()
+        sc = get_scope(tierMax)
+        if sizes is not None:
+            sc.update_mcfg(sizes)
+        # Get the request links for all experiments filtered by MIPs
+        rls_for_mips = sc.get_filtered_request_links_by_mip_included_excluded(
+            mips_list=mips_list, included_request_links=included_request_links,
+            excluded_request_links=excluded_request_links
+        )
+        rls_for_mips = sorted(rls_for_mips, key=lambda x: x.label)
+        # Filter by experiment if needed
+        if experiment_filter:
+            rls = self.filter_request_link_by_experiment_and_year(rls_for_mips, **experiment_filter)
+            logger.info("Number of Request Links which apply to experiment %s member %s and MIPs %s is: %d" %
+                        (experiment_filter["experiment_id"], experiment_filter['realization_index'],
+                         print_struct(mips_list), len(rls)))
+        else:
+            rls = rls_for_mips
+        # Get variables and grids by mips
+        miprl_vars_grids = set()
+        for rl in rls:
+            logger.debug("processing RequestLink %s" % rl.title)
+            for v in sc.get_vars_by_request_link(request_link=rl.uid, pmax=max_priority):
+                # The requested grid is given by the RequestLink except if spatial shape matches S-*
+                gr = rl.grid
+                cmvar = self.get_element_uid(v, elt_type="variable")
+                sp = cmvar.spatial_shp
+                if sp.startswith("S-"):
+                    gr = 'cfsites'
+                miprl_vars_grids.add((v, gr))
+        miprl_vars_grids = sorted(list(miprl_vars_grids))
+        logger.info('Number of (CMOR variable, grid) pairs for these requestLinks is: %s' % len(miprl_vars_grids))
+        # Filter variables
+        filtered_vars = list()
+        for (v, g) in miprl_vars_grids:
+            cmvar = self.get_element_uid(v, elt_type="variable")
+            if is_elt_applicable(cmvar.mipVarLabel, excluded=excluded_vars, included=included_vars) and \
+                    is_elt_applicable(cmvar.mipTable, excluded=excluded_tables, included=included_tables) and \
+                    is_elt_applicable((cmvar.mipVarLabel, cmvar.mipTable), excluded=excluded_pairs):
+                filtered_vars.append((v, g))
+                logger.debug("adding var %s, grid=%s, ttable=%s=" % (cmvar.label, g, cmvar.mipTable))
+
+        logger.info('Number once filtered by excluded/included vars and tables and spatial shapes is: %s'
+                    % len(filtered_vars))
+
+        filtered_vars_with_grids = defaultdict(set)
+        for (v, g) in filtered_vars:
+            filtered_vars_with_grids[v].add(g)
+        return filtered_vars_with_grids, rls
 
 
 scope = None

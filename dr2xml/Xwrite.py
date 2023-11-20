@@ -24,7 +24,7 @@ from logger import get_logger
 from .config import get_config_variable, set_config_variable, add_value_in_dict_config_variable
 
 # Interface to Data Request
-from .dr_interface import get_scope
+from .dr_interface import get_dr_object
 
 from .xml_interface import DR2XMLElement, create_pretty_xml_doc, find_rank_xml_subelement, wrv
 
@@ -767,7 +767,7 @@ def get_split_info(sv, table, enddate, year, debug):
             endmonth = "01"
             endday = "01"
             split_last_date = "{}-{}-{} 00:00:00".format(endyear, endmonth, endday)
-        sc = get_scope()
+        sc = get_dr_object("get_scope")
         split_freq = determine_split_freq(sv, grid_choice, sc.mcfg, context)
     return split_freq_format, split_last_date, split_start_offset, split_end_offset, split_freq
 

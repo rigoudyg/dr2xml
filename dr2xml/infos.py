@@ -128,7 +128,7 @@ def print_some_stats(context, svars_per_table, skipped_vars_per_table, actually_
                 ln = sorted(list(dic_ln[label]))
                 sn = sorted(list(dic_sn[label]))
                 logger.info((14 + len(label)) * "-")
-                logger.info("--- VARNAME: %s: %s" % (label, ln[0]))
+                logger.info("--- VARNAME: {}: {}".format(label, ln[0]).strip())
                 logger.info((14 + len(label)) * "-")
                 for val in dic[label]:
                     logger.info(14 * " " + "* %20s %s" % (val, label))

@@ -29,7 +29,7 @@ from logger import get_logger
 from .config import add_value_in_list_config_variable
 
 # Interface to Data Request
-from .dr_interface import get_data_request
+from .dr_interface import get_dr_object
 
 
 def freq2datefmt(in_freq, operation, table):
@@ -159,7 +159,7 @@ def analyze_cell_time_method(cm, label, table):
             # Case of fixed fields required by home data request
             operation = "once"
         else:
-            if get_data_request().print_DR_errors:
+            if get_dr_object("get_data_request").print_DR_errors:
                 logger.error("DR Error: cell_time_method is None for %15s in table %s, averaging" % (label, table))
             operation = "average"
     # ----------------------------------------------------------------------------------------------------------------

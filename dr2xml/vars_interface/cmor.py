@@ -7,7 +7,7 @@ CMOR variables
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
-from dr2xml.dr_interface import get_data_request, SimpleCMORVar
+from dr2xml.dr_interface import get_dr_object
 from logger import get_logger
 from dr2xml.settings_interface import get_settings_values
 from dr2xml.utils import Dr2xmlError
@@ -52,7 +52,7 @@ def get_cmor_var(label, table):
     Returns CMOR variable for a given label in a given table
     (could be optimized using inverse index)
     """
-    data_request = get_data_request()
+    data_request = get_dr_object("get_data_request")
     cmvar = [cmvar for cmvar in data_request.get_list_by_id("CMORvar", elt_type="variable")
              if cmvar.mipTable == table and cmvar.label == label]
     if len(cmvar) > 0:
@@ -96,7 +96,7 @@ def get_simplevar(label, table, freq=None):
     """
     Returns 'simplified variable' for a given CMORvar label and table
     """
-    svar = SimpleCMORVar()
+    svar = get_dr_object("SimpleCMORVar")
     psvar = get_cmor_var(label, table)
     #
     # Try to get a var for 'ps' when table is only in Home DR

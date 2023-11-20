@@ -24,6 +24,8 @@ internal_values = None
 
 def initialize_settings(lset=None, sset=None, force_reset=False, **kwargs):
     global internal_settings, common_settings, project_settings
+    # Initialize settings and internal values
+    initialize_internal_values(force_reset=force_reset)
     if force_reset:
         internal_settings = None
         common_settings = None
@@ -48,13 +50,16 @@ def initialize_settings(lset=None, sset=None, force_reset=False, **kwargs):
     # Solve project_settings
     project_settings = solve_settings(project_settings, internal_dict=internal_settings,
                                       common_dict=common_settings, additional_dict=kwargs)
-    # Initialize internal values
-    initialize_internal_values()
 
 
-def initialize_internal_values():
-    set_internal_value(key="rls_for_all_experiments", value=None)
-    set_internal_value(key="global_rls", value=None)
+def initialize_internal_values(force_reset=False):
+    internal_values = get_settings_values("internal_values")
+    if force_reset or internal_values is None or "initial_selection_configuration" not in internal_values:
+        set_internal_value(key="initial_selection_configuration", value=dict())
+    if force_reset:
+        set_internal_value(key="global_rls", value=list())
+        set_internal_value(key="cmor_vars", value=list())
+        set_internal_value(key="axis_count", value=0)
     set_internal_value(key="sn_issues", value=OrderedDict())
     set_internal_value(key="print_multiple_grids", value=False)
     set_internal_value(key="grid_choice", value=None)

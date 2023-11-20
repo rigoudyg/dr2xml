@@ -24,6 +24,9 @@ class Scope(object):
         mcfg = namedtuple('mcfg', ['nho', 'nlo', 'nha', 'nla', 'nlas', 'nls', 'nh1'])
         return mcfg._make(value)._asdict()
 
+    def update_mcfg(self, value):
+        self.mcfg = self.build_mcfg(value)
+
     def get_request_link_by_mip(self, mips_list):
         return list()
 
@@ -158,6 +161,9 @@ class DataRequest(object):
             return end_year
         else:
             return convert_string_to_year(exp_endyear)
+
+    def get_cmorvars_list(self, **kwargs):
+        return dict(), list()
 
 
 class ListWithItems(list):

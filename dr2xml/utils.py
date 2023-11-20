@@ -10,7 +10,7 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 import copy
 import json
 import os
-
+from deepdiff import DeepDiff
 import sys
 from collections import OrderedDict
 from functools import reduce
@@ -185,3 +185,11 @@ def convert_string_to_year(data):
         logger = get_logger()
         logger.debug("Input data to convert to float: %s" % data)
         return None
+
+
+def check_objects_equals(obj1, obj2):
+    rep = DeepDiff(obj1, obj2, ignore_order=True)
+    if not rep:
+        return True
+    else:
+        return False

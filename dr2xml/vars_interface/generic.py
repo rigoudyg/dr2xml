@@ -13,7 +13,7 @@ from collections import OrderedDict
 import six
 
 from dr2xml.analyzer import cellmethod2area
-from dr2xml.dr_interface import get_data_request, SimpleCMORVar, SimpleDim
+from dr2xml.dr_interface import get_dr_object
 from logger import get_logger
 from dr2xml.settings_interface import get_settings_values
 from dr2xml.utils import VarsError, Dr2xmlError
@@ -40,7 +40,7 @@ sn_issues_home = OrderedDict()
 def read_home_var(line_split, list_attrs):
     logger = get_logger()
     # Initialize the home variable
-    home_var = SimpleCMORVar()
+    home_var = get_dr_object("SimpleCMORVar")
     # Set values to the different attributes
     home_var.set_attributes(**{key: value for (key, value) in zip(list_attrs, line_split)})
     # Update table
@@ -69,7 +69,7 @@ def fill_homevar(home_var):
         if home_var.label in home_var_sdims_info:
             home_var_sdims = OrderedDict()
             for home_var_dim in home_var_sdims_info[home_var.label]:
-                home_var_sdim = SimpleDim()
+                home_var_sdim = get_dr_object("SimpleDim")
                 home_var_sdim.label = home_var_dim
                 for sdim_key in ["zoom_label", "stdname", "long_name", "positive", "requested", "value",
                                  "out_name", "units", "is_zoom_of", "bounds", "boundsValue", "axis", "type",
@@ -129,7 +129,7 @@ def get_correspond_cmor_var(homevar):
         For a home variable, find the CMOR var which corresponds.
         """
     logger = get_logger()
-    data_request = get_data_request()
+    data_request = get_dr_object("get_data_request")
     count = 0
     empty_table = (homevar.mipTable in ['NONE', ]) or (homevar.mipTable.startswith("None"))
     allow_pseudo = get_settings_values("internal", 'allow_pseudo_standard_names')
@@ -240,7 +240,7 @@ def analyze_ambiguous_mip_varnames(debug=[]):
     # of CMORvars items for the varname
     logger = get_logger()
     d = OrderedDict()
-    data_request = get_data_request()
+    data_request = get_dr_object("get_data_request")
     for v in data_request.get_list_by_id('var').items:
         if v.label not in d:
             d[v.label] = []
