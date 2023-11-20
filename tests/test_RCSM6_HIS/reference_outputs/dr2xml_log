@@ -25,8 +25,8 @@ Number of distinct CMOR variables (whatever the grid): 0
 Number of distinct var labels is: 0
 Number of simplified vars is: 0
 Issues with standard names are: []
-homevars file: /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/common/home_data_request/home_data_request_aladin_RCM.SP.txt /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/common/home_data_request/home_data_request_aladin_aerosols_RCM.SP.txt /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/common/home_data_request/home_data_request_trip_RCM.SP.txt /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/common/home_data_request/home_data_request_nemomed12.txt
-For extra table CNRM_HOMALmon (which has 579 variables):
+homevars file: current_directory/test_RCSM6_HIS/input/home_data_request/home_data_request_aladin_RCM.SP.txt current_directory/test_RCSM6_HIS/input/home_data_request/home_data_request_aladin_aerosols_RCM.SP.txt current_directory/test_RCSM6_HIS/input/home_data_request/home_data_request_trip_RCM.SP.txt current_directory/test_RCSM6_HIS/input/home_data_request/home_data_request_nemomed12.txt
+For extra table CNRM_HOMALmon (which has 158 variables):
 	Variables which dim was found in extra coordinates table:
 		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
 
@@ -89,12 +89,12 @@ Processing realm 'seaIce ocean' of context 'nemo' -- no variable asked (skip)
 Processing realm 'ocean' of context 'nemo'
 Processing realm 'ocean seaIce' of context 'nemo'
 Processing realm 'seaIce' of context 'nemo'
-processing file /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/common/xml_files/../xml_files_RCSM6_HIS/ping_nemo.xml:
-OK /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/common/xml_files/../xml_files_RCSM6_HIS/ping_nemo.xml
-processing file /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/common/xml_files/../xml_files_RCSM6_HIS/ping_surfex.xml:
-OK /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/common/xml_files/../xml_files_RCSM6_HIS/ping_surfex.xml
-processing file /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/common/xml_files/../xml_files_RCSM6_HIS/ping_trip.xml:
-OK /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/common/xml_files/../xml_files_RCSM6_HIS/ping_trip.xml
+processing file current_directory/test_RCSM6_HIS/input/xml/ping_nemo.xml:
+OK current_directory/test_RCSM6_HIS/input/xml/ping_nemo.xml
+processing file current_directory/test_RCSM6_HIS/input/xml/ping_surfex.xml:
+OK current_directory/test_RCSM6_HIS/input/xml/ping_surfex.xml
+processing file current_directory/test_RCSM6_HIS/input/xml/ping_trip.xml:
+OK current_directory/test_RCSM6_HIS/input/xml/ping_trip.xml
 Cannot normalize an axis in grid grid_T_3D: no axis_ref for axis 				<axis id="deptht"/>
 Cannot normalize an axis in grid grid_T_3D: no axis_ref for axis 				<axis id="deptht"/>
 Cannot normalize an axis in grid grid_W_3D: no axis_ref for axis 				<axis id="depthw"/>
@@ -147,7 +147,7 @@ Cannot normalize an axis in grid grid_V_3D: no axis_ref for axis 				<axis id="d
 Cannot normalize an axis in grid grid_W_3D: no axis_ref for axis 				<axis id="depthw"/>
 Cannot normalize an axis in grid grid_W_3D: no axis_ref for axis 				<axis id="depthw"/>
 
-file_def written as ./dr2xml_nemo.xml
+file_def written as current_directory/test_RCSM6_HIS/test_outputs/dr2xml_nemo.xml
 
 
 Some Statistics on actually written variables per frequency+shape...
@@ -510,16 +510,12 @@ Processing context  surfex
 
 **************************************************
 
-Filtering for experiment historical, covering years [  ,  ] in DR
-Number of Request Links which apply to experiment historical member 1 and MIPs ['CORDEX'] is: 4
-Number of (CMOR variable, grid) pairs for these requestLinks is: 32
-Number once filtered by excluded/included vars and tables and spatial shapes is: 0
 Number of distinct CMOR variables (whatever the grid): 0
 Number of distinct var labels is: 0
 Number of simplified vars is: 0
 Issues with standard names are: []
 homevars file: current_directory/test_RCSM6_HIS/input/home_data_request/home_data_request_aladin_RCM.SP.txt current_directory/test_RCSM6_HIS/input/home_data_request/home_data_request_aladin_aerosols_RCM.SP.txt current_directory/test_RCSM6_HIS/input/home_data_request/home_data_request_trip_RCM.SP.txt current_directory/test_RCSM6_HIS/input/home_data_request/home_data_request_nemomed12.txt
-For extra table CNRM_HOMALmon (which has 579 variables):
+For extra table CNRM_HOMALmon (which has 158 variables):
 	Variables which dim was found in extra coordinates table:
 		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
 
@@ -586,6 +582,8 @@ Processing realm 'atmos land' of context 'surfex'
 Processing realm 'land' of context 'surfex'
 Processing realm 'land landIce' of context 'surfex'
 Processing realm 'landIce land' of context 'surfex'
+processing file current_directory/test_RCSM6_HIS/input/xml/ping_nemo.xml:
+OK current_directory/test_RCSM6_HIS/input/xml/ping_nemo.xml
 processing file current_directory/test_RCSM6_HIS/input/xml/ping_surfex.xml:
 OK current_directory/test_RCSM6_HIS/input/xml/ping_surfex.xml
 processing file current_directory/test_RCSM6_HIS/input/xml/ping_trip.xml:
@@ -642,7 +640,7 @@ Some Statistics on actually written variables per frequency+shape...
 
 Some Statistics on actually written variables per variable...
 --------------------------
---- VARNAME: RADabs550aer: Absorption Aerosol Optical Depth at 550nm as Seen in the Radiative Scheme
+--- VARNAME: RADabs550aer: Absorption Aerosol Optical Depth at 550nm as seen in the radiative scheme
 --------------------------
               * mon_HOMALmon_XY-na_1.0 RADabs550aer
 --------------------------
@@ -650,7 +648,7 @@ Some Statistics on actually written variables per variable...
 --------------------------
               * mon_HOMALmon_XY-na_1.0 RADasy550aer
 -------------------------
---- VARNAME: RADod550aer: Aerosol Optical Depth at 550nm as Seen in the Radiative Scheme
+--- VARNAME: RADod550aer: Aerosol Optical Depth at 550nm as seen in the radiative scheme
 -------------------------
               * mon_HOMALmon_XY-na_1.0 RADod550aer
 --------------------------
@@ -670,7 +668,7 @@ Some Statistics on actually written variables per variable...
 ------------------
               *    mon_AERmon_XY-A_1 cdnc
 ---------------------
---- VARNAME: cdnctop: Cloud Liquid Droplet Number Concentration at Cloud Top
+--- VARNAME: cdnctop: Liquid Cloud Droplet Number Concentration at Cloud Top
 ---------------------
               * mon_HOMALmon_XY-na_1.0 cdnctop
 -------------------
@@ -810,11 +808,11 @@ Some Statistics on actually written variables per variable...
 -----------------------
               *   mon_AERmon_XY-na_1 od550dust
 ---------------------------
---- VARNAME: od550dustbin1: Dust Bin1 Aerosol Optical Depth at 550 nm
+--- VARNAME: od550dustbin1: Dust Bin 1 Aerosol Optical Depth at 550 nm
 ---------------------------
               * mon_HOMALmon_XY-na_1.0 od550dustbin1
 ---------------------------
---- VARNAME: od550dustbin2: Dust Bin2 Aerosol Optical Depth at 550 nm
+--- VARNAME: od550dustbin2: Dust Bin 2 Aerosol Optical Depth at 550 nm
 ---------------------------
               * mon_HOMALmon_XY-na_1.0 od550dustbin2
 ----------------------
@@ -826,7 +824,7 @@ Some Statistics on actually written variables per variable...
 ----------------------
               *   mon_AERmon_XY-na_1 od550no3
 --------------------------
---- VARNAME: od550no3bin1: Nitrate Bin1 Aerosol Optical Depth at 550 nm
+--- VARNAME: od550no3bin1: Nitrate Bin 1 Aerosol Optical Depth at 550 nm
 --------------------------
               * mon_HOMALmon_XY-na_1.0 od550no3bin1
 ---------------------
@@ -842,11 +840,11 @@ Some Statistics on actually written variables per variable...
 ---------------------
               *   mon_AERmon_XY-na_1 od550ss
 -------------------------
---- VARNAME: od550ssbin1: Sea-Salt Bin1 Aerosol Optical Depth at 550 nm
+--- VARNAME: od550ssbin1: Sea-salt Bin 1 Aerosol Optical Depth at 550 nm
 -------------------------
               * mon_HOMALmon_XY-na_1.0 od550ssbin1
 -------------------------
---- VARNAME: od550ssbin2: Sea-Salt Bin2 Aerosol Optical Depth at 550 nm
+--- VARNAME: od550ssbin2: Sea-salt Bin 2 Aerosol Optical Depth at 550 nm
 -------------------------
               * mon_HOMALmon_XY-na_1.0 od550ssbin2
 ------------------
@@ -890,7 +888,7 @@ Some Statistics on actually written variables per variable...
 ------------------
               *     mon_Amon_XY-na_1 rlds
 --------------------
---- VARNAME: rldsaf: Surface Downwelling Aerosol-Free Longwave Radiation
+--- VARNAME: rldsaf: Surface Aerosol-Free Downwelling Longwave Radiation
 --------------------
               * mon_HOMALmon_XY-na_1.0 rldsaf
 --------------------
@@ -898,7 +896,7 @@ Some Statistics on actually written variables per variable...
 --------------------
               *     mon_Amon_XY-na_1 rldscs
 ----------------------
---- VARNAME: rldscsaf: Surface Downwelling Clear-Sky, Aerosol-Free Longwave Radiation
+--- VARNAME: rldscsaf: Surface Clear-Sky Aerosol-Free Downwelling Longwave Radiation
 ----------------------
               * mon_HOMALmon_XY-na_1.0 rldscsaf
 ------------------
@@ -906,15 +904,15 @@ Some Statistics on actually written variables per variable...
 ------------------
               *     mon_Amon_XY-na_1 rlus
 --------------------
---- VARNAME: rlusaf: Surface Upwelling Aerosol-Free Longwave Radiation
+--- VARNAME: rlusaf: Surface Aerosol-Free Upwelling Longwave Radiation
 --------------------
               * mon_HOMALmon_XY-na_1.0 rlusaf
 --------------------
---- VARNAME: rluscs: Surface Upwelling Clear-Sky Longwave Radiation
+--- VARNAME: rluscs: Surface Upwelling Longwave Flux in Air Assuming Clear Sky
 --------------------
               * mon_HOMALmon_XY-na_1.0 rluscs
 ----------------------
---- VARNAME: rluscsaf: Surface Upwelling Clear-Sky, Aerosol-Free Longwave Radiation
+--- VARNAME: rluscsaf: Surface Clear-Sky Aerosol-Free Upwelling Longwave Radiation
 ----------------------
               * mon_HOMALmon_XY-na_1.0 rluscsaf
 ------------------
@@ -942,7 +940,7 @@ Some Statistics on actually written variables per variable...
 ------------------
               *     mon_Amon_XY-na_1 rsds
 --------------------
---- VARNAME: rsdsaf: Surface Downwelling Aerosol-Free Shortwave Radiation
+--- VARNAME: rsdsaf: Surface Aerosol-Free Downwelling Shortwave Radiation
 --------------------
               * mon_HOMALmon_XY-na_1.0 rsdsaf
 --------------------
@@ -950,7 +948,7 @@ Some Statistics on actually written variables per variable...
 --------------------
               *     mon_Amon_XY-na_1 rsdscs
 ----------------------
---- VARNAME: rsdscsaf: Surface Downwelling Clear-Sky, Aerosol-Free Shortwave Radiation
+--- VARNAME: rsdscsaf: Surface Clear-Sky Aerosol-Free Downwelling Shortwave Radiation
 ----------------------
               * mon_HOMALmon_XY-na_1.0 rsdscsaf
 ------------------
@@ -962,7 +960,7 @@ Some Statistics on actually written variables per variable...
 ------------------
               *     mon_Amon_XY-na_1 rsus
 --------------------
---- VARNAME: rsusaf: Surface Upwelling Aerosol-Free Shortwave Radiation
+--- VARNAME: rsusaf: Surface Aerosol-Free Upwelling Shortwave Radiation
 --------------------
               * mon_HOMALmon_XY-na_1.0 rsusaf
 --------------------
@@ -970,7 +968,7 @@ Some Statistics on actually written variables per variable...
 --------------------
               *     mon_Amon_XY-na_1 rsuscs
 ----------------------
---- VARNAME: rsuscsaf: Surface Upwelling Clear-Sky, Aerosol-Free Shortwave Radiation
+--- VARNAME: rsuscsaf: Surface Clear-Sky Aerosol-Free Upwelling Shortwave Radiation
 ----------------------
               * mon_HOMALmon_XY-na_1.0 rsuscsaf
 ------------------
@@ -1228,16 +1226,12 @@ Processing context  trip
 
 **************************************************
 
-Filtering for experiment historical, covering years [  ,  ] in DR
-Number of Request Links which apply to experiment historical member 1 and MIPs ['CORDEX'] is: 4
-Number of (CMOR variable, grid) pairs for these requestLinks is: 32
-Number once filtered by excluded/included vars and tables and spatial shapes is: 0
 Number of distinct CMOR variables (whatever the grid): 0
 Number of distinct var labels is: 0
 Number of simplified vars is: 0
 Issues with standard names are: []
 homevars file: current_directory/test_RCSM6_HIS/input/home_data_request/home_data_request_aladin_RCM.SP.txt current_directory/test_RCSM6_HIS/input/home_data_request/home_data_request_aladin_aerosols_RCM.SP.txt current_directory/test_RCSM6_HIS/input/home_data_request/home_data_request_trip_RCM.SP.txt current_directory/test_RCSM6_HIS/input/home_data_request/home_data_request_nemomed12.txt
-For extra table CNRM_HOMALmon (which has 579 variables):
+For extra table CNRM_HOMALmon (which has 158 variables):
 	Variables which dim was found in extra coordinates table:
 		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
 
@@ -1294,7 +1288,9 @@ Number of 'cmor', 'dev' and 'perso' among home variables: 112
 Number of 'extra' among home variables: 127
 homevars list: areacella mrsofc orog rootd sftgif sftlf agesno cdnc clivi clt cltc clwvi evspsbl hfls hfss hur hurs hus lwp mrfso mrro mrros mrso mrtws od550aer od550ss od550dust od550so4 od550bc od550oa pr prc prsn prw ps psl rlds rlus rldscs rlut rlutcs rlutaf rlutcsaf rsds rsus rsdscs rsuscs rsdt rsut rsutcs rsutaf rsutcsaf sfcWind sfcWindmax siconca snc snd snm snw ta tas tasmax tasmin tauu tauv toz ts tsland tsns ua uas va vas wap zg od550dust od550no3 od550oa od550so4 od550ss wtd rivo tos sos zos rsntds hfds wfo friver wfonocorr sfdsi thetao so uo vo wo tos tos sos zos rsntds hfds wfo friver wfonocorr sfdsi thetao so uo vo wo obvfsq cdnctop cltl cltm clth hur925 hur850 hur700 hur500 hur200 husll hus925 hus850 hus700 hus500 hus200 RADasy550aer RADssa550aer RADod550aer RADabs550aer reffclitop reffclwtopcnrm rluscs rldsaf rlusaf rldscsaf rluscsaf rsdsaf rsusaf rsdscsaf rsuscsaf snct tall ta925 ta850 ta700 ta500 ta200 tssea uall ua925 ua850 ua700 ua500 ua200 vall va925 va850 va700 va500 va200 wap925 wap850 wap700 wap500 wap200 zg925 zg850 zg700 zg500 zg200 od550dustbin1 od550dustbin2 od550no3bin1 od550nh4 od550ssbin1 od550ssbin2 fldf fwtd rhop somixhgt mxldepth tml tmltot tmlres tmlyad tmlzad tmlldf tmlfor tmlzdf tmlatf rhop votkeavt votke diftrxylo2d diftrblo2d voavtbn2 ttrdxad ttrdyad ttrdzad ttrdsad ttrdldf ttrdzdf ttrdqns ttrdqsr ttrdatf ttrdtot strdxad strdyad strdzad strdsad strdldf strdzdf strdcdt strdatf strdtot utrdhpg utrdspg utrdkeg utrdrvo utrdpvo utrdzad utrdldf utrdzdf utrdtau utrdbfr utrdtot vtrdhpg vtrdspg vtrdkeg vtrdrvo vtrdpvo vtrdzad vtrdldf vtrdzdf vtrdtau vtrdbfr vtrdtot
 
-Realms for these CMORvars: aerosol atmos atmos atmosChem atmos land land land landIce landIce landIce land ocean ocean seaIce seaIce
+Realms for these CMORvars: aerosol atmos atmos land land land landIce landIce land ocean ocean seaIce seaIce
+processing file current_directory/test_RCSM6_HIS/input/xml/ping_nemo.xml:
+OK current_directory/test_RCSM6_HIS/input/xml/ping_nemo.xml
 processing file current_directory/test_RCSM6_HIS/input/xml/ping_surfex.xml:
 OK current_directory/test_RCSM6_HIS/input/xml/ping_surfex.xml
 processing file current_directory/test_RCSM6_HIS/input/xml/ping_trip.xml:

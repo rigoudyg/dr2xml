@@ -660,10 +660,6 @@ Processing context  surfex
 
 **************************************************
 
-Filtering for experiment 1pctCO2-rad, covering years [ 1850.0 , 1989.0 ] in DR
-Number of Request Links which apply to experiment 1pctCO2-rad member 1 and MIPs ['AerChemMIP', 'C4MIP', 'CFMIP', 'CMIP', 'CMIP6', 'CORDEX', 'DAMIP', 'DCPP', 'FAFMIP', 'GMMIP', 'GeoMIP', 'HighResMIP', 'ISMIP6', 'LS3MIP', 'LUMIP', 'OMIP', 'PMIP', 'RFMIP', 'SIMIP', 'ScenarioMIP'] is: 23
-Number of (CMOR variable, grid) pairs for these requestLinks is: 371
-Number once filtered by excluded/included vars and tables and spatial shapes is: 350
 Number of distinct CMOR variables (whatever the grid): 350
 Number of distinct var labels is: 336
 Number of simplified vars is: 350
@@ -1993,10 +1989,6 @@ Processing context  trip
 
 **************************************************
 
-Filtering for experiment 1pctCO2-rad, covering years [ 1850.0 , 1989.0 ] in DR
-Number of Request Links which apply to experiment 1pctCO2-rad member 1 and MIPs ['AerChemMIP', 'C4MIP', 'CFMIP', 'CMIP', 'CMIP6', 'CORDEX', 'DAMIP', 'DCPP', 'FAFMIP', 'GMMIP', 'GeoMIP', 'HighResMIP', 'ISMIP6', 'LS3MIP', 'LUMIP', 'OMIP', 'PMIP', 'RFMIP', 'SIMIP', 'ScenarioMIP'] is: 23
-Number of (CMOR variable, grid) pairs for these requestLinks is: 371
-Number once filtered by excluded/included vars and tables and spatial shapes is: 350
 Number of distinct CMOR variables (whatever the grid): 350
 Number of distinct var labels is: 336
 Number of simplified vars is: 350

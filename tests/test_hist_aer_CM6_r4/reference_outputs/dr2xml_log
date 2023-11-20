@@ -417,10 +417,6 @@ Processing context  surfex
 
 **************************************************
 
-Filtering for experiment hist-aer, covering years [ 1850.0 , 2020.0 ] in DR
-Number of Request Links which apply to experiment hist-aer member 4 and MIPs ['AerChemMIP', 'C4MIP', 'CFMIP', 'CMIP', 'CMIP6', 'CORDEX', 'DAMIP', 'DCPP', 'FAFMIP', 'GMMIP', 'GeoMIP', 'HighResMIP', 'ISMIP6', 'LS3MIP', 'LUMIP', 'OMIP', 'PMIP', 'RFMIP', 'SIMIP', 'ScenarioMIP'] is: 1
-Number of (CMOR variable, grid) pairs for these requestLinks is: 27
-Number once filtered by excluded/included vars and tables and spatial shapes is: 19
 Number of distinct CMOR variables (whatever the grid): 19
 Number of distinct var labels is: 19
 Number of simplified vars is: 19
@@ -1010,10 +1006,6 @@ Processing context  trip
 
 **************************************************
 
-Filtering for experiment hist-aer, covering years [ 1850.0 , 2020.0 ] in DR
-Number of Request Links which apply to experiment hist-aer member 4 and MIPs ['AerChemMIP', 'C4MIP', 'CFMIP', 'CMIP', 'CMIP6', 'CORDEX', 'DAMIP', 'DCPP', 'FAFMIP', 'GMMIP', 'GeoMIP', 'HighResMIP', 'ISMIP6', 'LS3MIP', 'LUMIP', 'OMIP', 'PMIP', 'RFMIP', 'SIMIP', 'ScenarioMIP'] is: 1
-Number of (CMOR variable, grid) pairs for these requestLinks is: 27
-Number once filtered by excluded/included vars and tables and spatial shapes is: 19
 Number of distinct CMOR variables (whatever the grid): 19
 Number of distinct var labels is: 19
 Number of simplified vars is: 19

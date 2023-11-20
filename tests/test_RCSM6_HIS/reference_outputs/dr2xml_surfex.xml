@@ -2953,7 +2953,7 @@
 			<field field_ref="CMIP6_RADabs550aer_average" name="RADabs550aer" grid_ref="FULL_grid_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">				@CMIP6_RADabs550aer_average
 				<variable name="standard_name" type="string"> atmosphere_absorption_optical_thickness_due_to_ambient_aerosol_particles </variable>
 				<variable name="description" type="string"> None </variable>
-				<variable name="long_name" type="string"> Absorption Aerosol Optical Depth at 550nm as Seen in the Radiative Scheme </variable>
+				<variable name="long_name" type="string"> Absorption Aerosol Optical Depth at 550nm as seen in the radiative scheme </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> 1 </variable>
 				<variable name="cell_methods" type="string"> time: mean </variable>
@@ -3039,9 +3039,9 @@
 			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
 			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
 			<field field_ref="CMIP6_RADod550aer_average" name="RADod550aer" grid_ref="FULL_grid_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">				@CMIP6_RADod550aer_average
-				<variable name="standard_name" type="string"> atmosphere_optical_thickness_due_to_ambient_aerosol_particles </variable>
+				<variable name="standard_name" type="string"> atmosphere_optical_thickness_due_to_particulate_ambient_aerosol </variable>
 				<variable name="description" type="string"> None </variable>
-				<variable name="long_name" type="string"> Aerosol Optical Depth at 550nm as Seen in the Radiative Scheme </variable>
+				<variable name="long_name" type="string"> Aerosol Optical Depth at 550nm as seen in the radiative scheme </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> 1 </variable>
 				<variable name="cell_methods" type="string"> time: mean </variable>
@@ -3127,9 +3127,9 @@
 			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
 			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
 			<field field_ref="CMIP6_cdnctop_average" name="cdnctop" grid_ref="FULL_grid_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">				@CMIP6_cdnctop_average
-				<variable name="standard_name" type="string"> number_concentration_of_cloud_liquid_water_particles_in_air_at_cloud_top </variable>
+				<variable name="standard_name" type="string"> number_concentration_of_cloud_liquid_water_particles_at_cloud_top </variable>
 				<variable name="description" type="string"> None </variable>
-				<variable name="long_name" type="string"> Cloud Liquid Droplet Number Concentration at Cloud Top </variable>
+				<variable name="long_name" type="string"> Liquid Cloud Droplet Number Concentration at Cloud Top </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> m-3 </variable>
 				<variable name="cell_methods" type="string"> time: mean </variable>
@@ -3171,7 +3171,6 @@
 			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
 			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
 			<field field_ref="CMIP6_clth_average" name="clth" grid_ref="FULL_grid_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">				@CMIP6_clth_average
-				<variable name="standard_name" type="string"> high_type_cloud_area_fraction </variable>
 				<variable name="description" type="string"> None </variable>
 				<variable name="long_name" type="string"> High Troposphere Cloud Area Fraction </variable>
 				<variable name="history" type="string"> none </variable>
@@ -3215,7 +3214,6 @@
 			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
 			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
 			<field field_ref="CMIP6_cltl_average" name="cltl" grid_ref="FULL_grid_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">				@CMIP6_cltl_average
-				<variable name="standard_name" type="string"> low_type_cloud_area_fraction </variable>
 				<variable name="description" type="string"> None </variable>
 				<variable name="long_name" type="string"> Low Troposphere Cloud Area Fraction </variable>
 				<variable name="history" type="string"> none </variable>
@@ -3259,7 +3257,6 @@
 			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
 			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
 			<field field_ref="CMIP6_cltm_average" name="cltm" grid_ref="FULL_grid_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">				@CMIP6_cltm_average
-				<variable name="standard_name" type="string"> medium_type_cloud_area_fraction </variable>
 				<variable name="description" type="string"> None </variable>
 				<variable name="long_name" type="string"> Mid Troposphere Cloud Area Fraction </variable>
 				<variable name="history" type="string"> none </variable>
@@ -3347,9 +3344,9 @@
 			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
 			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
 			<field field_ref="CMIP6_od550dustbin1_average" name="od550dustbin1" grid_ref="FULL_grid_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">				@CMIP6_od550dustbin1_average
-				<variable name="standard_name" type="string"> atmosphere_optical_thickness_due_to_dust_bin1_ambient_aerosol_particles </variable>
+				<variable name="standard_name" type="string"> atmosphere_optical_thickness_due_to_particulate_dust_bin1_ambient_aerosol </variable>
 				<variable name="description" type="string"> None </variable>
-				<variable name="long_name" type="string"> Dust Bin1 Aerosol Optical Depth at 550 nm </variable>
+				<variable name="long_name" type="string"> Dust Bin 1 Aerosol Optical Depth at 550 nm </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> 1 </variable>
 				<variable name="cell_methods" type="string"> time: mean </variable>
@@ -3391,9 +3388,9 @@
 			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
 			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
 			<field field_ref="CMIP6_od550dustbin2_average" name="od550dustbin2" grid_ref="FULL_grid_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">				@CMIP6_od550dustbin2_average
-				<variable name="standard_name" type="string"> atmosphere_optical_thickness_due_to_dust_bin2_ambient_aerosol_particles </variable>
+				<variable name="standard_name" type="string"> atmosphere_optical_thickness_due_to_particulate_dust_bin2_ambient_aerosol </variable>
 				<variable name="description" type="string"> None </variable>
-				<variable name="long_name" type="string"> Dust Bin2 Aerosol Optical Depth at 550 nm </variable>
+				<variable name="long_name" type="string"> Dust Bin 2 Aerosol Optical Depth at 550 nm </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> 1 </variable>
 				<variable name="cell_methods" type="string"> time: mean </variable>
@@ -3435,7 +3432,7 @@
 			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
 			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
 			<field field_ref="CMIP6_od550nh4_average" name="od550nh4" grid_ref="FULL_grid_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">				@CMIP6_od550nh4_average
-				<variable name="standard_name" type="string"> atmosphere_optical_thickness_due_to_ammonium_ambient_aerosol_particles </variable>
+				<variable name="standard_name" type="string"> atmosphere_optical_thickness_due_to_particulate_ammonium_ambient_aerosol </variable>
 				<variable name="description" type="string"> None </variable>
 				<variable name="long_name" type="string"> Ammonium Aerosol Optical Depth at 550 nm </variable>
 				<variable name="history" type="string"> none </variable>
@@ -3479,9 +3476,9 @@
 			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
 			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
 			<field field_ref="CMIP6_od550no3bin1_average" name="od550no3bin1" grid_ref="FULL_grid_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">				@CMIP6_od550no3bin1_average
-				<variable name="standard_name" type="string"> atmosphere_optical_thickness_due_to_nitrate_bin1_ambient_aerosol_particles </variable>
+				<variable name="standard_name" type="string"> atmosphere_optical_thickness_due_to_particulate_nitrate_bin1_ambient_aerosol </variable>
 				<variable name="description" type="string"> None </variable>
-				<variable name="long_name" type="string"> Nitrate Bin1 Aerosol Optical Depth at 550 nm </variable>
+				<variable name="long_name" type="string"> Nitrate Bin 1 Aerosol Optical Depth at 550 nm </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> 1 </variable>
 				<variable name="cell_methods" type="string"> time: mean </variable>
@@ -3523,9 +3520,9 @@
 			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
 			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
 			<field field_ref="CMIP6_od550ssbin1_average" name="od550ssbin1" grid_ref="FULL_grid_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">				@CMIP6_od550ssbin1_average
-				<variable name="standard_name" type="string"> atmosphere_optical_thickness_due_to_sea_salt_bin1_ambient_aerosol_particles </variable>
+				<variable name="standard_name" type="string"> atmosphere_optical_thickness_due_to_particulate_sea-salt_bin1_ambient_aerosol </variable>
 				<variable name="description" type="string"> None </variable>
-				<variable name="long_name" type="string"> Sea-Salt Bin1 Aerosol Optical Depth at 550 nm </variable>
+				<variable name="long_name" type="string"> Sea-salt Bin 1 Aerosol Optical Depth at 550 nm </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> 1 </variable>
 				<variable name="cell_methods" type="string"> time: mean </variable>
@@ -3567,9 +3564,9 @@
 			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
 			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
 			<field field_ref="CMIP6_od550ssbin2_average" name="od550ssbin2" grid_ref="FULL_grid_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">				@CMIP6_od550ssbin2_average
-				<variable name="standard_name" type="string"> atmosphere_optical_thickness_due_to_sea_salt_bin2_ambient_aerosol_particles </variable>
+				<variable name="standard_name" type="string"> atmosphere_optical_thickness_due_to_particulate_sea-salt_bin2_ambient_aerosol </variable>
 				<variable name="description" type="string"> None </variable>
-				<variable name="long_name" type="string"> Sea-Salt Bin2 Aerosol Optical Depth at 550 nm </variable>
+				<variable name="long_name" type="string"> Sea-salt Bin 2 Aerosol Optical Depth at 550 nm </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> 1 </variable>
 				<variable name="cell_methods" type="string"> time: mean </variable>
@@ -3611,7 +3608,7 @@
 			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
 			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
 			<field field_ref="CMIP6_reffclitop_average" name="reffclitop" grid_ref="FULL_grid_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">				@CMIP6_reffclitop_average
-				<variable name="standard_name" type="string"> effective_radius_of_cloud_ice_particles_at_cloud_top </variable>
+				<variable name="standard_name" type="string"> effective_radius_of_cloud_ice_water_particle_at_ice_cloud_top </variable>
 				<variable name="description" type="string"> None </variable>
 				<variable name="long_name" type="string"> Ice Cloud Droplet Effective Radius </variable>
 				<variable name="history" type="string"> none </variable>
@@ -3655,7 +3652,7 @@
 			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
 			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
 			<field field_ref="CMIP6_reffclwtopcnrm_average" name="reffclwtopcnrm" grid_ref="FULL_grid_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">				@CMIP6_reffclwtopcnrm_average
-				<variable name="standard_name" type="string"> effective_radius_of_cloud_liquid_water_particles_at_cloud_top </variable>
+				<variable name="standard_name" type="string"> effective_radius_of_cloud_liquid_water_particle_at_liquid_water_cloud_top </variable>
 				<variable name="description" type="string"> None </variable>
 				<variable name="long_name" type="string"> Liquid Cloud Droplet Effective Radius </variable>
 				<variable name="history" type="string"> none </variable>
@@ -3699,9 +3696,8 @@
 			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
 			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
 			<field field_ref="CMIP6_rldsaf_average" name="rldsaf" grid_ref="FULL_grid_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">				@CMIP6_rldsaf_average
-				<variable name="standard_name" type="string"> surface_downwelling_longwave_flux_in_air_assuming_no_aerosol </variable>
 				<variable name="description" type="string"> None </variable>
-				<variable name="long_name" type="string"> Surface Downwelling Aerosol-Free Longwave Radiation </variable>
+				<variable name="long_name" type="string"> Surface Aerosol-Free Downwelling Longwave Radiation </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> W m-2 </variable>
 				<variable name="cell_methods" type="string"> time: mean </variable>
@@ -3743,9 +3739,8 @@
 			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
 			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
 			<field field_ref="CMIP6_rldscsaf_average" name="rldscsaf" grid_ref="FULL_grid_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">				@CMIP6_rldscsaf_average
-				<variable name="standard_name" type="string"> surface_downwelling_longwave_flux_in_air_assuming_clear_sky_and_no_aerosol </variable>
 				<variable name="description" type="string"> None </variable>
-				<variable name="long_name" type="string"> Surface Downwelling Clear-Sky, Aerosol-Free Longwave Radiation </variable>
+				<variable name="long_name" type="string"> Surface Clear-Sky Aerosol-Free Downwelling Longwave Radiation </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> W m-2 </variable>
 				<variable name="cell_methods" type="string"> time: mean </variable>
@@ -3787,9 +3782,8 @@
 			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
 			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
 			<field field_ref="CMIP6_rlusaf_average" name="rlusaf" grid_ref="FULL_grid_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">				@CMIP6_rlusaf_average
-				<variable name="standard_name" type="string"> surface_upwelling_longwave_flux_in_air_assuming_no_aerosol </variable>
 				<variable name="description" type="string"> None </variable>
-				<variable name="long_name" type="string"> Surface Upwelling Aerosol-Free Longwave Radiation </variable>
+				<variable name="long_name" type="string"> Surface Aerosol-Free Upwelling Longwave Radiation </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> W m-2 </variable>
 				<variable name="cell_methods" type="string"> time: mean </variable>
@@ -3833,7 +3827,7 @@
 			<field field_ref="CMIP6_rluscs_average" name="rluscs" grid_ref="FULL_grid_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">				@CMIP6_rluscs_average
 				<variable name="standard_name" type="string"> surface_upwelling_longwave_flux_in_air_assuming_clear_sky </variable>
 				<variable name="description" type="string"> None </variable>
-				<variable name="long_name" type="string"> Surface Upwelling Clear-Sky Longwave Radiation </variable>
+				<variable name="long_name" type="string"> Surface Upwelling Longwave Flux in Air Assuming Clear Sky </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> W m-2 </variable>
 				<variable name="cell_methods" type="string"> time: mean </variable>
@@ -3875,9 +3869,8 @@
 			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
 			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
 			<field field_ref="CMIP6_rluscsaf_average" name="rluscsaf" grid_ref="FULL_grid_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">				@CMIP6_rluscsaf_average
-				<variable name="standard_name" type="string"> surface_upwelling_longwave_flux_in_air_assuming_clear_sky_and_no_aerosol </variable>
 				<variable name="description" type="string"> None </variable>
-				<variable name="long_name" type="string"> Surface Upwelling Clear-Sky, Aerosol-Free Longwave Radiation </variable>
+				<variable name="long_name" type="string"> Surface Clear-Sky Aerosol-Free Upwelling Longwave Radiation </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> W m-2 </variable>
 				<variable name="cell_methods" type="string"> time: mean </variable>
@@ -3919,9 +3912,8 @@
 			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
 			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
 			<field field_ref="CMIP6_rsdsaf_average" name="rsdsaf" grid_ref="FULL_grid_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">				@CMIP6_rsdsaf_average
-				<variable name="standard_name" type="string"> surface_downwelling_shortwave_flux_in_air_assuming_no_aerosol </variable>
 				<variable name="description" type="string"> None </variable>
-				<variable name="long_name" type="string"> Surface Downwelling Aerosol-Free Shortwave Radiation </variable>
+				<variable name="long_name" type="string"> Surface Aerosol-Free Downwelling Shortwave Radiation </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> W m-2 </variable>
 				<variable name="cell_methods" type="string"> time: mean </variable>
@@ -3963,9 +3955,8 @@
 			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
 			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
 			<field field_ref="CMIP6_rsdscsaf_average" name="rsdscsaf" grid_ref="FULL_grid_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">				@CMIP6_rsdscsaf_average
-				<variable name="standard_name" type="string"> surface_downwelling_shortwave_flux_in_air_assuming_clear_sky_and_no_aerosol </variable>
 				<variable name="description" type="string"> None </variable>
-				<variable name="long_name" type="string"> Surface Downwelling Clear-Sky, Aerosol-Free Shortwave Radiation </variable>
+				<variable name="long_name" type="string"> Surface Clear-Sky Aerosol-Free Downwelling Shortwave Radiation </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> W m-2 </variable>
 				<variable name="cell_methods" type="string"> time: mean </variable>
@@ -4007,9 +3998,8 @@
 			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
 			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
 			<field field_ref="CMIP6_rsusaf_average" name="rsusaf" grid_ref="FULL_grid_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">				@CMIP6_rsusaf_average
-				<variable name="standard_name" type="string"> surface_upwelling_shortwave_flux_in_air_assuming_no_aerosol </variable>
 				<variable name="description" type="string"> None </variable>
-				<variable name="long_name" type="string"> Surface Upwelling Aerosol-Free Shortwave Radiation </variable>
+				<variable name="long_name" type="string"> Surface Aerosol-Free Upwelling Shortwave Radiation </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> W m-2 </variable>
 				<variable name="cell_methods" type="string"> time: mean </variable>
@@ -4051,9 +4041,8 @@
 			<variable name="EXPID" type="string"> RCSM6.1_HIS_SP0 </variable>
 			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
 			<field field_ref="CMIP6_rsuscsaf_average" name="rsuscsaf" grid_ref="FULL_grid_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">				@CMIP6_rsuscsaf_average
-				<variable name="standard_name" type="string"> surface_upwelling_shortwave_flux_in_air_assuming_clear_sky_and_no_aerosol </variable>
 				<variable name="description" type="string"> None </variable>
-				<variable name="long_name" type="string"> Surface Upwelling Clear-Sky, Aerosol-Free Shortwave Radiation </variable>
+				<variable name="long_name" type="string"> Surface Clear-Sky Aerosol-Free Upwelling Shortwave Radiation </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> W m-2 </variable>
 				<variable name="cell_methods" type="string"> time: mean </variable>

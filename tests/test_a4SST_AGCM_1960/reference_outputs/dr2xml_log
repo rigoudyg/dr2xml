@@ -775,10 +775,6 @@ Processing context  trip
 
 **************************************************
 
-Filtering for experiment a4SST, covering years [ As above , As above ] in DR
-Number of Request Links which apply to experiment a4SST member 1 and MIPs ['AerChemMIP', 'C4MIP', 'CFMIP', 'CMIP', 'CMIP6', 'CORDEX', 'DAMIP', 'DCPP', 'FAFMIP', 'GMMIP', 'GeoMIP', 'HighResMIP', 'ISMIP6', 'LS3MIP', 'LUMIP', 'OMIP', 'PMIP', 'RFMIP', 'SIMIP', 'ScenarioMIP'] is: 9
-Number of (CMOR variable, grid) pairs for these requestLinks is: 166
-Number once filtered by excluded/included vars and tables and spatial shapes is: 149
 Number of distinct CMOR variables (whatever the grid): 149
 Number of distinct var labels is: 116
 Number of simplified vars is: 149

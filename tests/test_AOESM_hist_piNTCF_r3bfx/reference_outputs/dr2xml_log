@@ -562,10 +562,6 @@ Processing context  surfex
 
 **************************************************
 
-Filtering for experiment hist-piNTCF, covering years [ 1850.0 , 2014.0 ] in DR
-Number of Request Links which apply to experiment hist-piNTCF member 3 and MIPs ['AerChemMIP', 'C4MIP', 'CFMIP', 'CMIP', 'CMIP6', 'CORDEX', 'DAMIP', 'DCPP', 'FAFMIP', 'GMMIP', 'GeoMIP', 'HighResMIP', 'ISMIP6', 'LS3MIP', 'LUMIP', 'OMIP', 'PMIP', 'RFMIP', 'SIMIP', 'ScenarioMIP'] is: 11
-Number of (CMOR variable, grid) pairs for these requestLinks is: 507
-Number once filtered by excluded/included vars and tables and spatial shapes is: 477
 Number of distinct CMOR variables (whatever the grid): 477
 Number of distinct var labels is: 366
 Number of simplified vars is: 477
@@ -2154,10 +2150,6 @@ Processing context  trip
 
 **************************************************
 
-Filtering for experiment hist-piNTCF, covering years [ 1850.0 , 2014.0 ] in DR
-Number of Request Links which apply to experiment hist-piNTCF member 3 and MIPs ['AerChemMIP', 'C4MIP', 'CFMIP', 'CMIP', 'CMIP6', 'CORDEX', 'DAMIP', 'DCPP', 'FAFMIP', 'GMMIP', 'GeoMIP', 'HighResMIP', 'ISMIP6', 'LS3MIP', 'LUMIP', 'OMIP', 'PMIP', 'RFMIP', 'SIMIP', 'ScenarioMIP'] is: 11
-Number of (CMOR variable, grid) pairs for these requestLinks is: 507
-Number once filtered by excluded/included vars and tables and spatial shapes is: 477
 Number of distinct CMOR variables (whatever the grid): 477
 Number of distinct var labels is: 366
 Number of simplified vars is: 477

@@ -97,10 +97,6 @@ Processing context  trip
 
 **************************************************
 
-Filtering for experiment land-hist, covering years [ 1850.0 , 2014.0 ] in DR
-Number of Request Links which apply to experiment land-hist member 1 and MIPs ['AerChemMIP', 'C4MIP', 'CFMIP', 'CMIP', 'CMIP6', 'CORDEX', 'DAMIP', 'DCPP', 'FAFMIP', 'GMMIP', 'GeoMIP', 'HighResMIP', 'ISMIP6', 'LS3MIP', 'LUMIP', 'OMIP', 'PMIP', 'RFMIP', 'SIMIP', 'ScenarioMIP'] is: 21
-Number of (CMOR variable, grid) pairs for these requestLinks is: 426
-Number once filtered by excluded/included vars and tables and spatial shapes is: 0
 Number of distinct CMOR variables (whatever the grid): 0
 Number of distinct var labels is: 0
 Number of simplified vars is: 0

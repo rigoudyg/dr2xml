@@ -1349,10 +1349,6 @@ Processing context  trip
 
 **************************************************
 
-Filtering for experiment amip, covering years [  ,  ] in DR
-Number of Request Links which apply to experiment amip member 1 and MIPs ['CORDEX'] is: 0
-Number of (CMOR variable, grid) pairs for these requestLinks is: 0
-Number once filtered by excluded/included vars and tables and spatial shapes is: 0
 Number of distinct CMOR variables (whatever the grid): 0
 Number of distinct var labels is: 0
 Number of simplified vars is: 0

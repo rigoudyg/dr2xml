@@ -8,7 +8,6 @@ Tests for xml_writer module
 from __future__ import division, print_function, unicode_literals, absolute_import
 
 import copy
-import pprint
 import unittest
 import sys
 import os
@@ -209,7 +208,7 @@ class TestC3SSF(unittest.TestCase, TestSimulation):
     def setUp(self):
         config = create_config_elements(
             simulation="C3S_SF",
-            contexts=["nemo", "surfex", "trip"],
+            contexts=["surfex", "nemo", "trip"],
             year="2010",
             enddate="2011",
             pingfiles="{path_xml}/ping_surfex.xml {path_xml}/ping_nemo.xml {path_xml}/ping_trip.xml",
@@ -328,10 +327,10 @@ class TestHIS(unittest.TestCase, TestSimulation):
     def setUp(self):
         config = create_config_elements(
             simulation="RCSM6_HIS",
-            contexts=["surfex", "trip"],
+            contexts=["nemo", "surfex", "trip"],
             year="1949",
             enddate="19490901",
-            pingfiles="{path_xml}/ping_surfex.xml {path_xml}/ping_trip.xml",
+            pingfiles="{path_xml}/ping_nemo.xml {path_xml}/ping_surfex.xml {path_xml}/ping_trip.xml",
             attributes=[("EXPID", "RCSM6.1_HIS_SP0")]
         )
         for elt in config:
@@ -348,7 +347,7 @@ class TestHISLight(unittest.TestCase, TestSimulation):
             simulation="RCSM6_HIS_light",
             contexts=["nemo", "surfex", "trip"],
             year="1949",
-            enddate="19490901",
+            enddate="19491001",
             pingfiles="{path_xml}/ping_nemo.xml {path_xml}/ping_surfex.xml {path_xml}/ping_trip.xml",
             attributes=[("EXPID", "RCSM6_HIS_light")]
         )

@@ -66,7 +66,8 @@ def test_reference_simulation(simulation, config_dict, contexts, lset, sset, add
 						pr = cProfile.Profile()
 						pr.enable()
 					start_time = time.time()
-					generate_file_defs(context=context, lset=lset, sset=sset, force_reset=True, **config_dict)
+					generate_file_defs(context=context, lset=lset, sset=sset, force_reset=context == contexts[0],
+					                   **config_dict)
 					end_time = time.time()
 					if add_profile:
 						pr.disable()
@@ -80,6 +81,7 @@ def test_reference_simulation(simulation, config_dict, contexts, lset, sset, add
 						ps.print_stats()
 						print(s.getvalue())
 					time_stats[context] = total_time
+					sys.stdout = old_stdout
 
 		if check_time_file is not None:
 			dr2xml_version = subprocess.check_output('git log -n 1 --pretty=format:"%H"', shell=True)
