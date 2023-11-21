@@ -4,7 +4,7 @@
 
 lab_and_model_settings = {
     'included_vars': ["", ],
-    'data_request_used': 'no',
+    'data_request_used': 'C3S',
     'path_to_parse': '{path_xml}/',
     'convention_str': 'CF-1.6 C3S-0.1',
     'project': 'C3S Seasonal Forecast',

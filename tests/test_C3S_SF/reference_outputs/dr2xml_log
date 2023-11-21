@@ -14,26 +14,13 @@ Processing context  surfex
 
 **************************************************
 
-Number of distinct CMOR variables (whatever the grid): 0
-Number of distinct var labels is: 0
-Number of simplified vars is: 0
+Number of distinct CMOR variables (whatever the grid): 40
+Number of distinct var labels is: 40
+Number of simplified vars is: 40
 Issues with standard names are: []
-homevars file: current_directory/test_C3S_SF/input/home_data_request/home_data_request_C3S-SF.txt
-For extra table CNRM_HOM (which has 8 variables):
-	Variables which dim was found in extra coordinates table:
-		           height_2m: tas tdas uas vas
+Info: No HOMEvars list provided.
 
-		                 lat: clt orog psl sftlf tas tdas uas vas
-
-		                 lon: clt orog psl sftlf tas tdas uas vas
-
-	Dynamical XY-xxx spatial shapes (shapes not found in DR):
-
-Number of 'cmor', 'dev' and 'perso' among home variables: 0
-Number of 'extra' among home variables: 8
-homevars list: psl clt tas tdas uas vas orog sftlf
-
-Realms for these CMORvars: atmos land
+Realms for these CMORvars: atmos land ocean seaIce soil
 Processing realm 'aerosol' of context 'surfex' -- no variable asked (skip)
 Processing realm 'atmos atmosChem' of context 'surfex' -- no variable asked (skip)
 Processing realm 'atmos land' of context 'surfex' -- no variable asked (skip)
@@ -49,62 +36,129 @@ processing file current_directory/test_C3S_SF/input/xml/ping_nemo.xml:
 OK current_directory/test_C3S_SF/input/xml/ping_nemo.xml
 processing file current_directory/test_C3S_SF/input/xml/ping_trip.xml:
 OK current_directory/test_C3S_SF/input/xml/ping_trip.xml
-Warning: issue when analyzing cell_time_method None for            orog in table HOM, assuming it is once
-Warning: issue when analyzing cell_time_method None for           sftlf in table HOM, assuming it is once
-Warning: issue when analyzing cell_time_method None for            orog in table HOM, assuming it is once
-Warning: issue when analyzing cell_time_method None for           sftlf in table HOM, assuming it is once
+Warning: Cannot complement model levels with psol for table C3S for frequency 12h
+Warning: Cannot complement model levels with psol for table C3S for frequency 12h
+Warning: Cannot complement model levels with psol for table C3S for frequency 12h
+Warning: Cannot complement model levels with psol for table C3S for frequency 12h
+Warning: Cannot complement model levels with psol for table C3S for frequency 12h
 
 file_def written as current_directory/test_C3S_SF/test_outputs/dr2xml_surfex.xml
 
+Skipped variables (i.e. whose alias is not present in the pingfile):
+>>> TABLE:             C3S 14/36 ----> rlt(1) rst(1) wsgmax(1) lwee(1) lwepr(1) lweprc(1) lweprs(1) lweprsn(1) lwesnw(1) mrroa(1) mrroab(1) mrroas(1) rhosn(1) tdps(1)
+
+
+
 
 Some Statistics on actually written variables per frequency+shape...
-                             HOM P1   2: orog sftlf
-        fx    XY-na    -------- ---   2
+                             C3S P1   5: hus ta ua va zg
+      12hr     XY-A    -------- ---   5
 
-        fx --------    -------- ---   2
+      12hr --------    -------- ---   5
 
-                             HOM P1   6: clt psl tas tdas uas vas
-     6hrPt    XY-na    -------- ---   6
+                             C3S P1  11: hfls hfss rlds rls rsds rsdt rss tasmax tasmin tauu tauv
+       day    XY-na    -------- ---  11
 
-     6hrPt --------    -------- ---   6
+       day --------    -------- ---  11
+
+                             C3S P1   6: clt psl tas tsl uas vas
+       6hr    XY-na    -------- ---   6
+
+       6hr --------    -------- ---   6
 
 
----------- --------    -------- ---   8
+---------- --------    -------- ---  22
 
 
 Some Statistics on actually written variables per variable...
 -----------------
---- VARNAME: clt: Cloud Area Fraction
+--- VARNAME: clt: Total Cloud Fraction
 -----------------
-              *  6hrPt_HOM_XY-na_1.0 clt
+              *      6hr_C3S_XY-na_1 clt
 ------------------
---- VARNAME: orog: Surface Altitude
+--- VARNAME: hfls: Surface Upward Latent Heat Flux
 ------------------
-              *     fx_HOM_XY-na_1.0 orog
+              *      day_C3S_XY-na_1 hfls
+------------------
+--- VARNAME: hfss: Surface Upward Sensible Heat Flux
+------------------
+              *      day_C3S_XY-na_1 hfss
+-----------------
+--- VARNAME: hus: Specific Humidity
+-----------------
+              *      12hr_C3S_XY-A_1 hus
 -----------------
 --- VARNAME: psl: Sea Level Pressure
 -----------------
-              *  6hrPt_HOM_XY-na_1.0 psl
--------------------
---- VARNAME: sftlf: Land Area Fraction
--------------------
-              *     fx_HOM_XY-na_1.0 sftlf
+              *      6hr_C3S_XY-na_1 psl
+------------------
+--- VARNAME: rlds: Surface Downwelling Longwave Radiation
+------------------
+              *      day_C3S_XY-na_1 rlds
+-----------------
+--- VARNAME: rls: Net Longwave Surface Radiation
+-----------------
+              *      day_C3S_XY-na_1 rls
+------------------
+--- VARNAME: rsds: Surface Downwelling Shortwave Radiation
+------------------
+              *      day_C3S_XY-na_1 rsds
+------------------
+--- VARNAME: rsdt: TOA Incident Shortwave Radiation
+------------------
+              *      day_C3S_XY-na_1 rsdt
+-----------------
+--- VARNAME: rss: Net Shortwave Surface Radiation
+-----------------
+              *      day_C3S_XY-na_1 rss
+----------------
+--- VARNAME: ta: Air Temperature
+----------------
+              *      12hr_C3S_XY-A_1 ta
 -----------------
 --- VARNAME: tas: Near-Surface Air Temperature
 -----------------
-              *  6hrPt_HOM_XY-na_1.0 tas
+              *      6hr_C3S_XY-na_1 tas
+--------------------
+--- VARNAME: tasmax: Daily Maximum Near-Surface Air Temperature
+--------------------
+              *      day_C3S_XY-na_1 tasmax
+--------------------
+--- VARNAME: tasmin: Daily Minimum Near-Surface Air Temperature
+--------------------
+              *      day_C3S_XY-na_1 tasmin
 ------------------
---- VARNAME: tdas: 2m Dewpoint Temperature
+--- VARNAME: tauu: Surface Downward Eastward Wind Stress
 ------------------
-              *  6hrPt_HOM_XY-na_1.0 tdas
+              *      day_C3S_XY-na_1 tauu
+------------------
+--- VARNAME: tauv: Surface Downward Northward Wind Stress
+------------------
+              *      day_C3S_XY-na_1 tauv
+-----------------
+--- VARNAME: tsl: Temperature of Soil
+-----------------
+              *      6hr_C3S_XY-na_1 tsl
+----------------
+--- VARNAME: ua: Eastward Wind
+----------------
+              *      12hr_C3S_XY-A_1 ua
 -----------------
 --- VARNAME: uas: Eastward Near-Surface Wind
 -----------------
-              *  6hrPt_HOM_XY-na_1.0 uas
+              *      6hr_C3S_XY-na_1 uas
+----------------
+--- VARNAME: va: Northward Wind
+----------------
+              *      12hr_C3S_XY-A_1 va
 -----------------
 --- VARNAME: vas: Northward Near-Surface Wind
 -----------------
-              *  6hrPt_HOM_XY-na_1.0 vas
+              *      6hr_C3S_XY-na_1 vas
+----------------
+--- VARNAME: zg: Geopotential Height
+----------------
+              *      12hr_C3S_XY-A_1 zg
 
  **************************************************
 *
@@ -121,31 +175,18 @@ Processing context  nemo
 
 **************************************************
 
-Number of distinct CMOR variables (whatever the grid): 0
-Number of distinct var labels is: 0
-Number of simplified vars is: 0
+Number of distinct CMOR variables (whatever the grid): 40
+Number of distinct var labels is: 40
+Number of simplified vars is: 40
 Issues with standard names are: []
-homevars file: current_directory/test_C3S_SF/input/home_data_request/home_data_request_C3S-SF.txt
-For extra table CNRM_HOM (which has 8 variables):
-	Variables which dim was found in extra coordinates table:
-		           height_2m: tas tdas uas vas
+Info: No HOMEvars list provided.
 
-		                 lat: clt orog psl sftlf tas tdas uas vas
-
-		                 lon: clt orog psl sftlf tas tdas uas vas
-
-	Dynamical XY-xxx spatial shapes (shapes not found in DR):
-
-Number of 'cmor', 'dev' and 'perso' among home variables: 0
-Number of 'extra' among home variables: 8
-homevars list: psl clt tas tdas uas vas orog sftlf
-
-Realms for these CMORvars: atmos land
-Processing realm 'ocean' of context 'nemo' -- no variable asked (skip)
+Realms for these CMORvars: atmos land ocean seaIce soil
 Processing realm 'ocean seaIce' of context 'nemo' -- no variable asked (skip)
 Processing realm 'ocnBgChem' of context 'nemo' -- no variable asked (skip)
-Processing realm 'seaIce' of context 'nemo' -- no variable asked (skip)
 Processing realm 'seaIce ocean' of context 'nemo' -- no variable asked (skip)
+Processing realm 'ocean' of context 'nemo'
+Processing realm 'seaIce' of context 'nemo'
 processing file current_directory/test_C3S_SF/input/xml/ping_surfex.xml:
 OK current_directory/test_C3S_SF/input/xml/ping_surfex.xml
 processing file current_directory/test_C3S_SF/input/xml/ping_nemo.xml:
@@ -154,6 +195,11 @@ processing file current_directory/test_C3S_SF/input/xml/ping_trip.xml:
 OK current_directory/test_C3S_SF/input/xml/ping_trip.xml
 
 file_def written as current_directory/test_C3S_SF/test_outputs/dr2xml_nemo.xml
+
+Skipped variables (i.e. whose alias is not present in the pingfile):
+>>> TABLE:             C3S 03/03 ----> sic(1) sitemptop(1) tso(1)
+
+
 
 
 Some Statistics on actually written variables per frequency+shape...
@@ -178,26 +224,13 @@ Processing context  trip
 
 **************************************************
 
-Number of distinct CMOR variables (whatever the grid): 0
-Number of distinct var labels is: 0
-Number of simplified vars is: 0
+Number of distinct CMOR variables (whatever the grid): 40
+Number of distinct var labels is: 40
+Number of simplified vars is: 40
 Issues with standard names are: []
-homevars file: current_directory/test_C3S_SF/input/home_data_request/home_data_request_C3S-SF.txt
-For extra table CNRM_HOM (which has 8 variables):
-	Variables which dim was found in extra coordinates table:
-		           height_2m: tas tdas uas vas
+Info: No HOMEvars list provided.
 
-		                 lat: clt orog psl sftlf tas tdas uas vas
-
-		                 lon: clt orog psl sftlf tas tdas uas vas
-
-	Dynamical XY-xxx spatial shapes (shapes not found in DR):
-
-Number of 'cmor', 'dev' and 'perso' among home variables: 0
-Number of 'extra' among home variables: 8
-homevars list: psl clt tas tdas uas vas orog sftlf
-
-Realms for these CMORvars: atmos land
+Realms for these CMORvars: atmos land ocean seaIce soil
 processing file current_directory/test_C3S_SF/input/xml/ping_surfex.xml:
 OK current_directory/test_C3S_SF/input/xml/ping_surfex.xml
 processing file current_directory/test_C3S_SF/input/xml/ping_nemo.xml:

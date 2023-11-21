@@ -4,7 +4,7 @@
 
 simulation_settings = {
     'comment': 'Run by CNRM at Meteo-France HPC facilities',
-    'listof_home_vars': '{path_homedr}/home_data_request_C3S-SF.txt ',
+    #'listof_home_vars': '{path_homedr}/home_data_request_C3S-SF.txt ',
     'sub_experiment': 'none',
     'branch_method': 'standard',
     'excluded_vars': [],
