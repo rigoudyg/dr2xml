@@ -124,7 +124,7 @@ def select_data_request_CMORvars_for_lab(sset=False, year=None):
     for v in d:
         d[v] = decide_for_grids(v, d[v])
         if len(d[v]) > 1:
-            multiple_grids.append(data_request.get_element_uid(v).label)
+            multiple_grids.append(data_request.get_element_uid(v, elt_type="variable").label)
             if print_multiple_grids:
                 logger.info("\tVariable %s will be processed with multiple grids: %s"
                             % (multiple_grids[-1], repr(d[v])))
@@ -133,7 +133,7 @@ def select_data_request_CMORvars_for_lab(sset=False, year=None):
                     "(rerun with print_multiple_grids set to True for details): %s" % repr(sorted(multiple_grids)))
     #
     # Print a count of distinct var labels
-    logger.info('Number of distinct var labels is: %d' % len(set([data_request.get_element_uid(v).label for v in d])))
+    logger.info('Number of distinct var labels is: %d' % len(set([data_request.get_element_uid(v, elt_type="variable").label for v in d])))
 
     # Translate CMORvars to a list of simplified CMORvar objects
     simplified_vars = []
@@ -167,8 +167,8 @@ def endyear_for_CMORvar(cv, expt, year):
     data_request = get_dr_object("get_data_request")
 
     # Some debug material
-    larger = data_request.get_endyear_for_cmorvar(cv, expt, year, internal_dict,
-                                                  get_settings_values("internal_values", "global_rls"))
+    larger = data_request.get_endyear_for_cmorvar(cmorvar=cv, experiment=expt, year=year, internal_dict=internal_dict,
+                                                  global_rls=get_settings_values("internal_values", "global_rls"))
     return larger
 
 

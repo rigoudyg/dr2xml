@@ -126,7 +126,7 @@ class DataRequest(object):
         """
         raise NotImplementedError()
 
-    def get_year_for_cmorvar(self, **kwargs):
+    def get_endyear_for_cmorvar(self, **kwargs):
         return None
 
     @staticmethod
@@ -300,8 +300,7 @@ class SimpleDim(SimpleObject):
     def __init__(self, label=False, zoom_label=False, stdname=False, long_name=False, positive=False, requested="",
                  value=False, out_name=False, units=False, is_zoom_of=False, bounds=False, boundsValues=False,
                  axis=False, type=False, coords=False, title=False, name=None, is_union_for=list(), altLabel=False,
-                 boundsRequested=False,
-                 **kwargs):
+                 boundsRequested=False, **kwargs):
         self.label = label
         if altLabel is False:
             self.altLabel = self.label

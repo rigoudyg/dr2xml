@@ -688,9 +688,6 @@ class SimpleCMORVar(SimpleCMORVarBasic):
         sdims_dict = dict()
         for dimid in all_dimids:
             sdim = data_request.get_element_uid(dimid, elt_type="dim")
-            if sdim.dimsize > 1:
-                # print "for var % 15s and dim % 15s, size=%3d"%(svar.label,dimid,dimsize)
-                pass
             product_of_other_dims *= sdim.dimsize
             sdims_dict[sdim.label] = sdim
         input_var_dict["sdims"] = copy.deepcopy(sdims_dict)

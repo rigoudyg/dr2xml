@@ -16,6 +16,7 @@ from dr2xml.config import get_config_variable
 from dr2xml.settings_interface.py_settings_interface import format_dict_for_printing, is_key_in_lset, \
     get_variable_from_lset_without_default, is_key_in_sset, get_variable_from_sset_without_default
 from dr2xml.utils import Dr2xmlError, read_json_content
+from logger import get_logger
 
 
 def return_value(value, common_dict=dict(), internal_dict=dict(), additional_dict=dict(),
@@ -31,6 +32,7 @@ def return_value(value, common_dict=dict(), internal_dict=dict(), additional_dic
 
 def determine_value(key_type=None, keys=list(), func=None, fmt=None, src=None, common_dict=dict(), internal_dict=dict(),
                     additional_dict=dict(), allow_additional_keytypes=True):
+    logger = get_logger()
     if key_type in ["combine", ] or (key_type is None and func is not None):
         keys = [return_value(key, common_dict=common_dict, internal_dict=internal_dict,
                              additional_dict=additional_dict, allow_additional_keytypes=allow_additional_keytypes)
@@ -58,6 +60,7 @@ def determine_value(key_type=None, keys=list(), func=None, fmt=None, src=None, c
                         value = func(*keys)
                         found = True
                     except:
+                        logger.debug("Issue calling func %s with arguments %s" % (str(func), str(keys)))
                         value = None
                         found = False
                 if found and fmt is not None:
@@ -421,6 +424,7 @@ class FunctionSettings(Settings):
 
     def __call__(self, *args, additional_dict=dict(), internal_dict=dict(), common_dict=dict(),
                  allow_additional_keytypes=True):
+        logger = get_logger()
         test = True
         for key in sorted(list(self.options)):
             key_test, val = return_value(self.options[key], common_dict=common_dict, internal_dict=internal_dict,
@@ -433,7 +437,7 @@ class FunctionSettings(Settings):
         try:
             value = self.func(*args, **self.options)
         except BaseException as e:
-            # print(e)
+            logger.debug("Issue calling %s with arguments %s and options %s" % (str(self.func), str(args), str(self.options)))
             value = None
             test = False
         return test, value

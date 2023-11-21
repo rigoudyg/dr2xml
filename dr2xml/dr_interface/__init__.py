@@ -60,5 +60,8 @@ def load_correct_dr():
     elif data_request_version in ["no", "none", "None", None]:
         from .no import scope, data_request, DataRequest, initialize_data_request, get_data_request, initialize_scope, \
             get_scope, set_scope, normalize_grid, SimpleDim, SimpleObject, SimpleCMORVar
+    elif data_request_version in ["C3S", ]:
+        from .C3S import scope, data_request, DataRequest, initialize_data_request, get_data_request, initialize_scope,\
+            get_scope, set_scope, normalize_grid, SimpleDim, SimpleObject, SimpleCMORVar
     else:
         raise ValueError("The data request specified (%s) is not known." % data_request_version)

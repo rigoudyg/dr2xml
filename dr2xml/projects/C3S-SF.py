@@ -14,6 +14,8 @@ parent_project_settings = "basics"
 
 
 def build_filename(expid_in_filename, realm, frequency, label, date_range, var_type, list_perso_dev_file):
+    if isinstance(realm, (list, tuple)):
+        realm = realm[0]
     filename = "_".join(([expid_in_filename, realm, frequency, label]))
     if var_type in ["perso", "dev"]:
         with open(list_perso_dev_file, mode="a", encoding="utf-8") as list_perso_and_dev:
