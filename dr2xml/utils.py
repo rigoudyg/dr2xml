@@ -10,7 +10,6 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 import copy
 import json
 import os
-from deepdiff import DeepDiff
 import sys
 from collections import OrderedDict
 from functools import reduce
@@ -188,8 +187,12 @@ def convert_string_to_year(data):
 
 
 def check_objects_equals(obj1, obj2):
-    rep = DeepDiff(obj1, obj2, ignore_order=True)
-    if not rep:
-        return True
-    else:
-        return False
+    rep = isinstance(obj1, type(obj2))
+    if rep:
+        if isinstance(obj1, (list, tuple, set)):
+            rep = sorted(list(obj1)) == sorted(list(obj2))
+        elif isinstance(obj1, (dict, OrderedDict)):
+            rep = check_objects_equals(list(obj1), list(obj2)) and all(obj1[elt] == obj2[elt] for elt in list(obj1))
+        else:
+            rep = obj1 == obj2
+    return rep
