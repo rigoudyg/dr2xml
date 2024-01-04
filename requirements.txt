@@ -3,7 +3,7 @@ sphinx_rtd_theme
 # Need either dreq and scope or dreqPy (users can modify the requirements file according to the choice made)
 # dreq
 # scope
-dreqPy
+dreqPy==1.0.21.post1
 coverage
 xlsxwriter
 six
