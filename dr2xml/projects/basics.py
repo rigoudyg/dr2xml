@@ -394,7 +394,7 @@ project_settings = dict(
         attrs_list=["id", "name", "output_freq", "append", "output_level", "compression_level", "split_freq",
                     "split_freq_format", "split_start_offset", "split_end_offset", "split_last_date", "time_units",
                     "time_counter_name", "time_counter", "time_stamp_name", "time_stamp_format", "uuid_name",
-                    "uuid_format", "convention_str"],
+                    "uuid_format", "convention_str", "synchronisation_frequency"],
         attrs_constraints=dict(
             id=ParameterSettings(
                 key="id",
@@ -482,6 +482,13 @@ project_settings = dict(
                 key="uuid_format",
                 default_values=[
                     ValueSettings(key_type="common", keys="HDL", fmt="hdl:{}/%uuid%")
+                ],
+                skip_values=["None", "", None]
+            ),
+            synchronisation_frequency=ParameterSettings(
+                key="synchronisation_frequency",
+                default_values=[
+                    ValueSettings(key_type="internal", keys="synchronisation_frequency")
                 ],
                 skip_values=["None", "", None]
             ),
