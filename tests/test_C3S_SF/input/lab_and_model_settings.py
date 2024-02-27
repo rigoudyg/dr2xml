@@ -108,11 +108,11 @@ lab_and_model_settings = {
     'grids': {
         'HR':
             {
-                'nemo': ['gn', '', '', '25 km', 'native ocean tri-polar grid with 1.47 M ocean cells'],
-                'surfex': ['gr', 'complete', 'glat', '50 km',
-                           'data regridded to a 359 gaussian grid (360x720 latlon) from a native atmosphere T359l reduced gaussian grid'],
+                'nemo': ['gr', 'C3S_1deg', '', '100 km', 'regular 1 deg lat-lon grid'],
+                'surfex': ['gr', 'C3S_1deg', 'glat', '100 km',
+                           'data regridded to a regular 1 deg lat-lon grid from a native atmosphere T359l reduced gaussian grid'],
                 #"surfex" : [ "gn", "", "" , "250 km", "native T127 reduced gaussian grid"] ,
-                'trip': ['gn', '', '', '50 km', 'regular 1/2 deg lat-lon grid']
+                'trip': ['gr', 'C3S_1deg', '', '100 km', 'regular 1 deg lat-lon grid']
             },
         'LR':
             {

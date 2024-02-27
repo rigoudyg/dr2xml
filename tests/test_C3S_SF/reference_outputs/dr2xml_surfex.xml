@@ -23,12 +23,12 @@
 'excluded_request_links' = ['RFMIP-AeroIrf'],
 'excluded_spshapes' = ['XYA-na', 'XYG-na', 'na-A'],
 'excluded_tables' = ['Eyr', 'Oyr', 'Odec', 'IfxAnt', 'ImonAnt'],
-'excluded_vars' = ['pfull', 'phalf', 'n2oClim', 'ch4globalClim', 'co2massClim', 'n2oglobalClim', 'ch4Clim', 'o3Clim', 'co2Clim', 'ch4', 'co2', 'co', 'concdust', 'ec550aer', 'h2o', 'hcho', 'hcl', 'hno3', 'mmrbc', 'mmrdust', 'mmroa', 'mmrso4', 'mmrss', 'n2o', 'no2', 'no', 'o3Clim', 'o3loss', 'o3prod', 'oh', 'so2', 'mmrpm1', 'fco2antt', 'fco2fos', 'fco2nat', 'loadbc', 'loaddust', 'loadoa', 'loadso4', 'loadss', 'oxloss', 'oxprod', 'vmrox', 'bry', 'cly', 'ho2', 'meanage', 'noy', 'drybc', 'drydust', 'dryoa', 'dryso2', 'dryso4', 'dryss', 'emibc', 'emidust', 'emioa', 'emiso2', 'emiso4', 'emiss', 'od440aer', 'od870aer', 'od550lt1aer', 'wetbc', 'wetdust', 'wetoa', 'wetso4', 'wetss', 'cLand', 'cSoil', 'fAnthDisturb', 'fDeforestToProduct', 'fFireNat', 'fLuc', 'fProductDecomp', 'netAtmosLandCO2Flux', 'od443dust', 'od865dust', 'sconcdust', 'sconcso4', 'sconcss', 'sedustCI', 'burntFractionAll', 'cLitter', 'cProduct', 'cVeg', 'fFire', 'fLitterSoil', 'fVegLitter', 'nbp', 'shrubFrac'],
+'excluded_vars' = ['pfull', 'phalf', 'n2oClim', 'ch4globalClim', 'co2massClim', 'n2oglobalClim', 'ch4Clim', 'o3Clim', 'co2Clim'],
 'excluded_vars_per_config' = {'AESM' = ['co2mass', 'ch4global', 'n2oglobal'], 'AGCM' = ['ch4', 'co2', 'co', 'concdust', 'ec550aer', 'h2o', 'hcho', 'hcl', 'hno3', 'mmrbc', 'mmrdust', 'mmroa', 'mmrso4', 'mmrss', 'n2o', 'no2', 'no', 'o3Clim', 'o3loss', 'o3prod', 'oh', 'so2', 'mmrpm1', 'fco2antt', 'fco2fos', 'fco2nat', 'loadbc', 'loaddust', 'loadoa', 'loadso4', 'loadss', 'oxloss', 'oxprod', 'vmrox', 'bry', 'cly', 'ho2', 'meanage', 'noy', 'drybc', 'drydust', 'dryoa', 'dryso2', 'dryso4', 'dryss', 'emibc', 'emidust', 'emioa', 'emiso2', 'emiso4', 'emiss', 'od440aer', 'od870aer', 'od550lt1aer', 'wetbc', 'wetdust', 'wetoa', 'wetso4', 'wetss', 'cLand', 'cSoil', 'fAnthDisturb', 'fDeforestToProduct', 'fFireNat', 'fLuc', 'fProductDecomp', 'netAtmosLandCO2Flux', 'od443dust', 'od865dust', 'sconcdust', 'sconcso4', 'sconcss', 'sedustCI', 'burntFractionAll', 'cLitter', 'cProduct', 'cVeg', 'fFire', 'fLitterSoil', 'fVegLitter', 'nbp', 'shrubFrac'], 'AOESM' = ['co2mass', 'ch4global', 'n2oglobal'], 'AOGCM' = ['ch4', 'co2', 'co', 'concdust', 'ec550aer', 'h2o', 'hcho', 'hcl', 'hno3', 'mmrbc', 'mmrdust', 'mmroa', 'mmrso4', 'mmrss', 'n2o', 'no2', 'no', 'o3Clim', 'o3loss', 'o3prod', 'oh', 'so2', 'mmrpm1', 'fco2antt', 'fco2fos', 'fco2nat', 'loadbc', 'loaddust', 'loadoa', 'loadso4', 'loadss', 'oxloss', 'oxprod', 'vmrox', 'bry', 'cly', 'ho2', 'meanage', 'noy', 'drybc', 'drydust', 'dryoa', 'dryso2', 'dryso4', 'dryss', 'emibc', 'emidust', 'emioa', 'emiso2', 'emiso4', 'emiss', 'od440aer', 'od870aer', 'od550lt1aer', 'wetbc', 'wetdust', 'wetoa', 'wetso4', 'wetss', 'cLand', 'cSoil', 'fAnthDisturb', 'fDeforestToProduct', 'fFireNat', 'fLuc', 'fProductDecomp', 'netAtmosLandCO2Flux', 'od443dust', 'od865dust', 'sconcdust', 'sconcso4', 'sconcss', 'sedustCI', 'burntFractionAll', 'cLitter', 'cProduct', 'cVeg', 'fFire', 'fLitterSoil', 'fVegLitter', 'nbp', 'shrubFrac'], 'LESM' = ['ch4', 'co2', 'hur', 'hus', 'n2o', 'o3', 'ta', 'ua', 'va', 'wap', 'zg', 'clt', 'ccb', 'cct', 'ci', 'clivi', 'clt', 'clwvi', 'evspsbl', 'fco2antt', 'fco2fos', 'pr', 'prc', 'prsn', 'prw', 'ps', 'psl', 'rldscs', 'rlut', 'rlutcs', 'rsdscs', 'rsdt', 'rsuscs', 'rsut', 'rsutcs', 'ch4global', 'co2mass', 'n2oglobal', 'mc', 'cl', 'cli', 'clw'], 'LGCM' = ['ch4', 'co2', 'hur', 'hus', 'n2o', 'o3', 'ta', 'ua', 'va', 'wap', 'zg', 'clt', 'ccb', 'cct', 'ci', 'clivi', 'clt', 'clwvi', 'evspsbl', 'fco2antt', 'fco2fos', 'pr', 'prc', 'prsn', 'prw', 'ps', 'psl', 'rldscs', 'rlut', 'rlutcs', 'rsdscs', 'rsdt', 'rsuscs', 'rsut', 'rsutcs', 'ch4global', 'co2mass', 'n2oglobal', 'mc', 'cl', 'cli', 'clw']},
 'fx_from_file' = {'areacella' = {'complete' = {'HR' = 'areacella_complete_CMIP6_tl359', 'LR' = 'areacella_complete_CMIP6_tl127'}}},
 'grid_choice' = {'CNRM-CM6-1' = 'LR', 'CNRM-CM6-1-HR' = 'HR', 'CNRM-ESM2-1' = 'LR', 'CNRM-ESM2-1-HR' = 'HR'},
 'grid_policy' = 'adhoc',
-'grids' = {'HR' = {'nemo' = ['gn', '', '', '25 km', 'native ocean tri-polar grid with 1.47 M ocean cells'], 'surfex' = ['gr', 'complete', 'glat', '50 km', 'data regridded to a 359 gaussian grid (360x720 latlon) from a native atmosphere T359l reduced gaussian grid'], 'trip' = ['gn', '', '', '50 km', 'regular 1/2 deg lat-lon grid']}, 'LR' = {'nemo' = ['gn', '', '', '100 km', 'native ocean tri-polar grid with 105 k ocean cells'], 'surfex' = ['gr', 'complete', 'glat', '250 km', 'data regridded to a T127 gaussian grid (128x256 latlon) from a native atmosphere T127l reduced gaussian grid'], 'trip' = ['gn', '', '', '50 km', 'regular 1/2 deg lat-lon grid']}},
+'grids' = {'HR' = {'nemo' = ['gr', 'C3S_1deg', '', '100 km', 'regular 1 deg lat-lon grid'], 'surfex' = ['gr', 'C3S_1deg', 'glat', '100 km', 'data regridded to a regular 1 deg lat-lon grid from a native atmosphere T359l reduced gaussian grid'], 'trip' = ['gr', 'C3S_1deg', '', '100 km', 'regular 1 deg lat-lon grid']}, 'LR' = {'nemo' = ['gn', '', '', '100 km', 'native ocean tri-polar grid with 105 k ocean cells'], 'surfex' = ['gr', 'complete', 'glat', '250 km', 'data regridded to a T127 gaussian grid (128x256 latlon) from a native atmosphere T127l reduced gaussian grid'], 'trip' = ['gn', '', '', '50 km', 'regular 1/2 deg lat-lon grid']}},
 'included_vars' = [''],
 'info_url' = 'http://www.umr-cnrm.fr/cmip6/',
 'institution' = 'Meteo-France, Toulouse, France',
@@ -64,7 +64,7 @@
 'child_time_ref_year' = '1850',
 'comment' = 'Run by CNRM at Meteo-France HPC facilities',
 'comments' = {},
-'configuration' = 'AOGCM',
+'configuration' = 'AOGCMHR',
 'excluded_tables' = [],
 'excluded_vars' = [],
 'experiment_id' = 'a4SST',
@@ -84,7 +84,7 @@
 'variant_info' = ''}-->
 	<!--Year processed 2010-->
 	<file_definition type="one_file" enabled="true">
-		<file id="hus_C3S_grx" name="H2010E001_atmos_12hourly_hus_%start_date%-%end_date%.nc" output_freq="12h" append="true" output_level="10" compression_level="4" split_freq="6mo" split_freq_format="%y%mo%d%h%mi" split_start_offset="12h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="hus_C3S_gr" name="H2010E001_atmos_12hourly_hus_%start_date%-%end_date%.nc" output_freq="12h" append="true" output_level="10" compression_level="4" split_freq="1mo" split_freq_format="%y%mo%d%h%mi" split_start_offset="12h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -110,7 +110,7 @@
 			<field field_ref="C3S_b" name="b" long_name="vertical coordinate formula term: b(k)" operation="once" prec="8"/>
 			<field field_ref="C3S_b_bnds" name="b_bnds" long_name="vertical coordinate formula term: b(k+1/2)" operation="once" prec="8"/>
 		</file>
-		<file id="ta_C3S_grx" name="H2010E001_atmos_12hourly_ta_%start_date%-%end_date%.nc" output_freq="12h" append="true" output_level="10" compression_level="4" split_freq="6mo" split_freq_format="%y%mo%d%h%mi" split_start_offset="12h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="ta_C3S_gr" name="H2010E001_atmos_12hourly_ta_%start_date%-%end_date%.nc" output_freq="12h" append="true" output_level="10" compression_level="4" split_freq="1mo" split_freq_format="%y%mo%d%h%mi" split_start_offset="12h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -136,7 +136,7 @@
 			<field field_ref="C3S_b" name="b" long_name="vertical coordinate formula term: b(k)" operation="once" prec="8"/>
 			<field field_ref="C3S_b_bnds" name="b_bnds" long_name="vertical coordinate formula term: b(k+1/2)" operation="once" prec="8"/>
 		</file>
-		<file id="ua_C3S_grx" name="H2010E001_atmos_12hourly_ua_%start_date%-%end_date%.nc" output_freq="12h" append="true" output_level="10" compression_level="4" split_freq="6mo" split_freq_format="%y%mo%d%h%mi" split_start_offset="12h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="ua_C3S_gr" name="H2010E001_atmos_12hourly_ua_%start_date%-%end_date%.nc" output_freq="12h" append="true" output_level="10" compression_level="4" split_freq="1mo" split_freq_format="%y%mo%d%h%mi" split_start_offset="12h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -162,7 +162,7 @@
 			<field field_ref="C3S_b" name="b" long_name="vertical coordinate formula term: b(k)" operation="once" prec="8"/>
 			<field field_ref="C3S_b_bnds" name="b_bnds" long_name="vertical coordinate formula term: b(k+1/2)" operation="once" prec="8"/>
 		</file>
-		<file id="va_C3S_grx" name="H2010E001_atmos_12hourly_va_%start_date%-%end_date%.nc" output_freq="12h" append="true" output_level="10" compression_level="4" split_freq="6mo" split_freq_format="%y%mo%d%h%mi" split_start_offset="12h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="va_C3S_gr" name="H2010E001_atmos_12hourly_va_%start_date%-%end_date%.nc" output_freq="12h" append="true" output_level="10" compression_level="4" split_freq="1mo" split_freq_format="%y%mo%d%h%mi" split_start_offset="12h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -188,7 +188,7 @@
 			<field field_ref="C3S_b" name="b" long_name="vertical coordinate formula term: b(k)" operation="once" prec="8"/>
 			<field field_ref="C3S_b_bnds" name="b_bnds" long_name="vertical coordinate formula term: b(k+1/2)" operation="once" prec="8"/>
 		</file>
-		<file id="zg_C3S_grx" name="H2010E001_atmos_12hourly_zg_%start_date%-%end_date%.nc" output_freq="12h" append="true" output_level="10" compression_level="4" split_freq="6mo" split_freq_format="%y%mo%d%h%mi" split_start_offset="12h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="zg_C3S_gr" name="H2010E001_atmos_12hourly_zg_%start_date%-%end_date%.nc" output_freq="12h" append="true" output_level="10" compression_level="4" split_freq="1mo" split_freq_format="%y%mo%d%h%mi" split_start_offset="12h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -214,7 +214,7 @@
 			<field field_ref="C3S_b" name="b" long_name="vertical coordinate formula term: b(k)" operation="once" prec="8"/>
 			<field field_ref="C3S_b_bnds" name="b_bnds" long_name="vertical coordinate formula term: b(k+1/2)" operation="once" prec="8"/>
 		</file>
-		<file id="hfls_C3S_grx" name="H2010E001_atmos_daily_hfls_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="hfls_C3S_gr" name="H2010E001_atmos_daily_hfls_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -236,7 +236,7 @@
 				<variable name="units" type="string"> W m-2 </variable>
 			</field>
 		</file>
-		<file id="hfss_C3S_grx" name="H2010E001_atmos_daily_hfss_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="hfss_C3S_gr" name="H2010E001_atmos_daily_hfss_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -258,7 +258,7 @@
 				<variable name="units" type="string"> W m-2 </variable>
 			</field>
 		</file>
-		<file id="rlds_C3S_grx" name="H2010E001_atmos_daily_rlds_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="rlds_C3S_gr" name="H2010E001_atmos_daily_rlds_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -280,7 +280,7 @@
 				<variable name="units" type="string"> W m-2 </variable>
 			</field>
 		</file>
-		<file id="rls_C3S_grx" name="H2010E001_atmos_daily_rls_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="rls_C3S_gr" name="H2010E001_atmos_daily_rls_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -302,7 +302,7 @@
 				<variable name="units" type="string"> W m-2 </variable>
 			</field>
 		</file>
-		<file id="rlt_C3S_grx" name="H2010E001_atmos_daily_rlt_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="rlt_C3S_gr" name="H2010E001_atmos_daily_rlt_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -324,7 +324,7 @@
 				<variable name="units" type="string"> W m-2 </variable>
 			</field>
 		</file>
-		<file id="rsds_C3S_grx" name="H2010E001_atmos_daily_rsds_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="rsds_C3S_gr" name="H2010E001_atmos_daily_rsds_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -346,7 +346,7 @@
 				<variable name="units" type="string"> W m-2 </variable>
 			</field>
 		</file>
-		<file id="rsdt_C3S_grx" name="H2010E001_atmos_daily_rsdt_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="rsdt_C3S_gr" name="H2010E001_atmos_daily_rsdt_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -368,7 +368,7 @@
 				<variable name="units" type="string"> W m-2 </variable>
 			</field>
 		</file>
-		<file id="rss_C3S_grx" name="H2010E001_atmos_daily_rss_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="rss_C3S_gr" name="H2010E001_atmos_daily_rss_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -390,7 +390,7 @@
 				<variable name="units" type="string"> W m-2 </variable>
 			</field>
 		</file>
-		<file id="rst_C3S_grx" name="H2010E001_atmos_daily_rst_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="rst_C3S_gr" name="H2010E001_atmos_daily_rst_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -412,7 +412,7 @@
 				<variable name="units" type="string"> W m-2 </variable>
 			</field>
 		</file>
-		<file id="tasmax_C3S_grx" name="H2010E001_atmos_daily_tasmax_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="tasmax_C3S_gr" name="H2010E001_atmos_daily_tasmax_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -434,7 +434,7 @@
 				<variable name="units" type="string"> K </variable>
 			</field>
 		</file>
-		<file id="tasmin_C3S_grx" name="H2010E001_atmos_daily_tasmin_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="tasmin_C3S_gr" name="H2010E001_atmos_daily_tasmin_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -456,7 +456,7 @@
 				<variable name="units" type="string"> K </variable>
 			</field>
 		</file>
-		<file id="tauu_C3S_grx" name="H2010E001_atmos_daily_tauu_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="tauu_C3S_gr" name="H2010E001_atmos_daily_tauu_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -478,7 +478,7 @@
 				<variable name="units" type="string"> Pa </variable>
 			</field>
 		</file>
-		<file id="tauv_C3S_grx" name="H2010E001_atmos_daily_tauv_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="tauv_C3S_gr" name="H2010E001_atmos_daily_tauv_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -500,7 +500,7 @@
 				<variable name="units" type="string"> Pa </variable>
 			</field>
 		</file>
-		<file id="wsgmax_C3S_grx" name="H2010E001_atmos_daily_wsgmax_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="wsgmax_C3S_gr" name="H2010E001_atmos_daily_wsgmax_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -522,7 +522,7 @@
 				<variable name="units" type="string"> m s-1 </variable>
 			</field>
 		</file>
-		<file id="lwee_C3S_grx" name="H2010E001_atmo_daily_lwee_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="1d" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="lwee_C3S_gr" name="H2010E001_atmo_daily_lwee_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="1d" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -544,7 +544,7 @@
 				<variable name="units" type="string"> m </variable>
 			</field>
 		</file>
-		<file id="lwepr_C3S_grx" name="H2010E001_atmos_daily_lwepr_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="1d" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="lwepr_C3S_gr" name="H2010E001_atmos_daily_lwepr_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="1d" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -566,7 +566,7 @@
 				<variable name="units" type="string"> m </variable>
 			</field>
 		</file>
-		<file id="lweprc_C3S_grx" name="H2010E001_atmos_daily_lweprc_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="1d" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="lweprc_C3S_gr" name="H2010E001_atmos_daily_lweprc_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="1d" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -588,7 +588,7 @@
 				<variable name="units" type="string"> m </variable>
 			</field>
 		</file>
-		<file id="lweprsn_C3S_grx" name="H2010E001_atmos_daily_lweprsn_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="1d" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="lweprsn_C3S_gr" name="H2010E001_atmos_daily_lweprsn_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="1d" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -610,7 +610,7 @@
 				<variable name="units" type="string"> m </variable>
 			</field>
 		</file>
-		<file id="lwesnw_C3S_grx" name="H2010E001_atmo_daily_lwesnw_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="1d" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="lwesnw_C3S_gr" name="H2010E001_atmo_daily_lwesnw_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="1d" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -632,7 +632,7 @@
 				<variable name="units" type="string"> m </variable>
 			</field>
 		</file>
-		<file id="mrroab_C3S_grx" name="H2010E001_atmo_daily_mrroab_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="1d" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="mrroab_C3S_gr" name="H2010E001_atmo_daily_mrroab_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="1d" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -654,7 +654,7 @@
 				<variable name="units" type="string"> kg m-2 </variable>
 			</field>
 		</file>
-		<file id="mrroas_C3S_grx" name="H2010E001_atmo_daily_mrroas_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="1d" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="mrroas_C3S_gr" name="H2010E001_atmo_daily_mrroas_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="1d" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -676,7 +676,7 @@
 				<variable name="units" type="string"> kg m-2 </variable>
 			</field>
 		</file>
-		<file id="rhosn_C3S_grx" name="H2010E001_atmo_daily_rhosn_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="1d" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="rhosn_C3S_gr" name="H2010E001_atmo_daily_rhosn_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="1d" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -698,7 +698,7 @@
 				<variable name="units" type="string"> kg m-3 </variable>
 			</field>
 		</file>
-		<file id="clt_C3S_grx" name="H2010E001_atmos_6hourly_clt_%start_date%-%end_date%.nc" output_freq="6h" append="true" output_level="10" compression_level="4" split_freq="25y" split_freq_format="%y%mo%d%h%mi" split_start_offset="6h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="clt_C3S_gr" name="H2010E001_atmos_6hourly_clt_%start_date%-%end_date%.nc" output_freq="6h" append="true" output_level="10" compression_level="4" split_freq="2y" split_freq_format="%y%mo%d%h%mi" split_start_offset="6h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -720,7 +720,7 @@
 				<variable name="units" type="string"> 1 </variable>
 			</field>
 		</file>
-		<file id="psl_C3S_grx" name="H2010E001_atmos_6hourly_psl_%start_date%-%end_date%.nc" output_freq="6h" append="true" output_level="10" compression_level="4" split_freq="25y" split_freq_format="%y%mo%d%h%mi" split_start_offset="6h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="psl_C3S_gr" name="H2010E001_atmos_6hourly_psl_%start_date%-%end_date%.nc" output_freq="6h" append="true" output_level="10" compression_level="4" split_freq="2y" split_freq_format="%y%mo%d%h%mi" split_start_offset="6h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -742,7 +742,7 @@
 				<variable name="units" type="string"> Pa </variable>
 			</field>
 		</file>
-		<file id="tas_C3S_grx" name="H2010E001_atmos_6hourly_tas_%start_date%-%end_date%.nc" output_freq="6h" append="true" output_level="10" compression_level="4" split_freq="25y" split_freq_format="%y%mo%d%h%mi" split_start_offset="6h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="tas_C3S_gr" name="H2010E001_atmos_6hourly_tas_%start_date%-%end_date%.nc" output_freq="6h" append="true" output_level="10" compression_level="4" split_freq="2y" split_freq_format="%y%mo%d%h%mi" split_start_offset="6h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -764,7 +764,7 @@
 				<variable name="units" type="string"> K </variable>
 			</field>
 		</file>
-		<file id="tdps_C3S_grx" name="H2010E001_atmos_6hourly_tdps_%start_date%-%end_date%.nc" output_freq="6h" append="true" output_level="10" compression_level="4" split_freq="25y" split_freq_format="%y%mo%d%h%mi" split_start_offset="6h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="tdps_C3S_gr" name="H2010E001_atmos_6hourly_tdps_%start_date%-%end_date%.nc" output_freq="6h" append="true" output_level="10" compression_level="4" split_freq="2y" split_freq_format="%y%mo%d%h%mi" split_start_offset="6h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -786,7 +786,7 @@
 				<variable name="units" type="string"> K </variable>
 			</field>
 		</file>
-		<file id="tsl_C3S_grx" name="H2010E001_atmo_6hourly_tsl_%start_date%-%end_date%.nc" output_freq="6h" append="true" output_level="10" compression_level="4" split_freq="25y" split_freq_format="%y%mo%d%h%mi" split_start_offset="6h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="tsl_C3S_gr" name="H2010E001_atmo_6hourly_tsl_%start_date%-%end_date%.nc" output_freq="6h" append="true" output_level="10" compression_level="4" split_freq="2y" split_freq_format="%y%mo%d%h%mi" split_start_offset="6h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -808,7 +808,7 @@
 				<variable name="units" type="string"> K </variable>
 			</field>
 		</file>
-		<file id="uas_C3S_grx" name="H2010E001_atmos_6hourly_uas_%start_date%-%end_date%.nc" output_freq="6h" append="true" output_level="10" compression_level="4" split_freq="25y" split_freq_format="%y%mo%d%h%mi" split_start_offset="6h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="uas_C3S_gr" name="H2010E001_atmos_6hourly_uas_%start_date%-%end_date%.nc" output_freq="6h" append="true" output_level="10" compression_level="4" split_freq="2y" split_freq_format="%y%mo%d%h%mi" split_start_offset="6h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -830,7 +830,7 @@
 				<variable name="units" type="string"> m s-1 </variable>
 			</field>
 		</file>
-		<file id="vas_C3S_grx" name="H2010E001_atmos_6hourly_vas_%start_date%-%end_date%.nc" output_freq="6h" append="true" output_level="10" compression_level="4" split_freq="25y" split_freq_format="%y%mo%d%h%mi" split_start_offset="6h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="vas_C3S_gr" name="H2010E001_atmos_6hourly_vas_%start_date%-%end_date%.nc" output_freq="6h" append="true" output_level="10" compression_level="4" split_freq="2y" split_freq_format="%y%mo%d%h%mi" split_start_offset="6h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
