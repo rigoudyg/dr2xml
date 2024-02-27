@@ -26,11 +26,9 @@ def build_filename(expid_in_filename, realm, frequency, label, date_range, var_t
 
 def convert_frequency(freq):
     if freq.endswith("hr"):
-        freq.rstrip("hr")
-        freq += "hourly"
+        freq = freq.replace("hr", "hourly")
     elif freq.endswith("h"):
-        freq.rstrip("h")
-        freq += "hourly"
+        freq = freq.replace("h", "hourly")
     elif freq in ["day", ]:
         freq = "daily"
     elif freq in ["mon", ]:
