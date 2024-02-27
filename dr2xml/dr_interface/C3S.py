@@ -89,7 +89,8 @@ class DataRequest(DataRequestBasic):
             sc.update_mcfg(sizes)
         rep = defaultdict(set)
         for id in self.get_element_uid(elt_type="variable"):
-            rep[id].add(self.get_element_uid(id=id, elt_type="variable").spatial_shp)
+            for grid in self.get_element_uid(id=id, elt_type="variable").grids:
+                rep[id].add(grid)
         return rep, list()
 
 
