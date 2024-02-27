@@ -1,5 +1,6 @@
-<field_definition>
-  <field_group prec="8" operation="instant" freq_op="1ts" detect_missing_value="true" default_value="1.e+20" >
+
+<field_definition>  
+  <field_group prec="8" operation="instant" freq_op="1ts" detect_missing_value="true" default_value="1.e+20" >    
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
     <field_group id="trip_fix"	grid_ref="trip_Grid" >
       <field id="areacellr" 	long_name="Cell area for River model grid" 	unit="m2" />
@@ -11,7 +12,7 @@
       <field id="fwtd" 		long_name="grid-cell fraction allowing upward capillary fluxes from wtd " 		unit="-" />
       <field id="fldf" 		long_name="grid-cell fraction of floodplains"                                           unit="-" />
       <field id="tripwatbud" 	long_name="Total water budget as residue" 	unit="kg m-2" />
-    </field_group>
+    </field_group>   
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
     <field_group id="trip_group2"	grid_ref="trip_Grid" >
       <field id="rivw" 		long_name="River water storage" 		unit="kg m-2" />
@@ -29,7 +30,7 @@
       <field id="RUNOFF" 	long_name="Input surface runoff" 		unit="kg m-2" />
       <field id="DRAIN" 	long_name="Input drainage or recharge" 		unit="kg m-2" />
       <field id="FSOURCE" 	long_name="Floodplains source (Pf-Ef-If)" 	unit="kg m-2" />
-     </field_group>
+     </field_group>   
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
      <field_group id="trip_carb"	grid_ref="trip_Grid" >
       <field id="carbw" 	long_name="River carbon storage" 		unit="kgC m-2" />
@@ -53,6 +54,6 @@
       <field id="fld_length" 	long_name="Flood length" 			unit="m" />
      </field_group>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-   </field_group>
+   </field_group> 
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 </field_definition>

@@ -1,29 +1,29 @@
-<!--
+<!-- 
 Example of XIOS-2.0 xml sub-file for Surfex + Arpege
-First version - 08/2016 - Stephane Senesi
+First version - 08/2016 - Stephane Senesi 
 
 This file must be sourced by main XIOS xml file (iodef.xml) , using a
-tag 'context id=surfex'
+tag 'context id=surfex' 
 
 It references a series of other files, one per topic
 
-Ref:
-  - for XIOS : https://forge.ipsl.jussieu.fr/ioserver/wiki
+Ref: 
+  - for XIOS : https://forge.ipsl.jussieu.fr/ioserver/wiki 
   - for XIAS (implementation in Surfex and Arpege) : http://www.cnrm-game-meteo.fr/cm/spip.php?article60
 -->
 
 <context id="surfex">
-
+  
   <variable_definition>
     <!-- Year of time origin for NetCDF files; defaults to 1850 -->
     <variable id="ref_year" type="int"> 1992 </variable>
-
+   
     <!-- Next default value applies when field have no freq_op -->
     <variable id="timesteps_between_samples" type="int"> 1 </variable>
 
     <!-- Option for inverting atmospheric levels -->
     <variable id="invert_levels" type="bool"> true </variable>
-
+    
     <!-- A few variables used for unit conversion -->
     <!-- overwritten in mse_xios_setup_aro.F90 -->
     <!-- gravit -->
@@ -32,22 +32,22 @@ Ref:
     <variable id="gravit"   type="float"> 1.0E+20 </variable>
     <variable id="timestep" type="float"> 1.0E+20 </variable>
     <variable id="ndlon"    type="float"> 1.0E+20 </variable>
-  </variable_definition>
+  </variable_definition> 
 
-  <!--
-       Note on references to other configuration files
-       With Eclis you can either :
+  <!-- 
+       Note on references to other configuration files 
+       With Eclis you can either : 
 	 - quote a full pathname
          - or use pattern "./file.xml" and quote the corresponding file
-	 full pathname in OTHER_FILES (with same basename); ECLIS
-	 will then bring the files in the rundir   -->
+	 full pathname in OTHER_FILES (with same basename); ECLIS 
+	 will then bring the files in the rundir   --> 
 
-  <!-- On purpose, we define and source a cascade of secondary files
+  <!-- On purpose, we define and source a cascade of secondary files 
        for the sake of modularity (but at the expense of scattering
        the material -->
 
-  <!-- First, we insert a 'stable' file which complements
-       declarations of fields done by Surfex code
+  <!-- First, we insert a 'stable' file which complements 
+       declarations of fields done by Surfex code 
        This allow to reference all fields in all cases, avoiding crashes -->
   <field_definition  src="./surfex_fields.xml"/>
 
@@ -72,7 +72,7 @@ Ref:
   </domain_definition>
 
   <scalar_definition>
-    <scalar id="SCALAR" name="sector" standard_name="region" label="global" />
+    <scalar id="SCALAR" name="sector" standard_name="region" label="global" /> 
   </scalar_definition>
 
   <grid_definition>
@@ -180,7 +180,7 @@ Ref:
     <grid id="zonal2D_pstd0"><axis axis_ref="glat"/> <axis axis_ref="pstd0"/>   </grid>
 
   </grid_definition>
-
+  
   <axis_definition>
     <axis_group prec="8" >
       <!-- Arpege -->
@@ -196,7 +196,7 @@ Ref:
       </axis>
       <axis id="klev_ll" />
       <axis id="bnds" n_glo="2"/>
-
+      
       <!-- Generic pressure axis -->
       <axis id="paxis" unit="Pa" name="p" standard_name="pressure" positive="down"   >
 	<interpolate_axis type="polynomial" order="1" coordinate="pa"/>
@@ -226,7 +226,7 @@ Ref:
       <axis id="thetaaxis" unit="K" name="theta" standard_name="potential_temperature" positive="up"   >
 	<interpolate_axis type="polynomial" order="1" coordinate="pot_temp"/>
       </axis>
-
+      
       <!-- Surfex -->
       <axis id="patch"        			/>
       <axis id="soil_patches" 			/>
@@ -240,7 +240,7 @@ Ref:
       <axis id="vegtype" 			/>
       <axis id="snow_patch" 			/>
       <axis id="seaice_layer" 			/>
-
+    
       <!-- COSP -->
       <axis id="alt40"  	/>
       <axis id="column"  	/>
@@ -258,9 +258,9 @@ Ref:
         <reduce_domain direction="idir" operation="average" />
       </axis>
 
-    </axis_group>
+    </axis_group>  
   </axis_definition>
-
+  
   <grid_definition>
     <grid id="FULL_alt40">                    <domain domain_ref="FULL"/>     <axis axis_ref="alt40"/>   </grid>
     <grid id="FULL_column">                   <domain domain_ref="FULL"/>     <axis axis_ref="column"/>  </grid>
@@ -277,7 +277,7 @@ Ref:
     <grid id="grid_complete_column">          <domain domain_ref="complete"/> <axis axis_ref="column"/>  </grid>
     <grid id="grid_complete_klev_column">     <domain domain_ref="complete"/> <axis axis_ref="klev" name="lev"/>    <axis axis_ref="column"/>    </grid>
     <grid id="grid_complete_alt40_scatratio"> <domain domain_ref="complete"/> <axis axis_ref="alt40"/>   <axis axis_ref="scatratio"/> </grid>
-    <grid id="grid_complete_temp">            <domain domain_ref="complete"/> <axis axis_ref="temp"/>    </grid>
+    <grid id="grid_complete_temp">            <domain domain_ref="complete"/> <axis axis_ref="temp"/>    </grid> 
     <grid id="grid_complete_sza5">            <domain domain_ref="complete"/> <axis axis_ref="sza5"/>    </grid>
     <grid id="grid_complete_alt40_dbze">      <domain domain_ref="complete"/> <axis axis_ref="alt40"/>   <axis axis_ref="dbze"/>      </grid>
     <grid id="grid_complete_plev7_tau">       <domain domain_ref="complete"/> <axis axis_ref="plev7"/>   <axis axis_ref="tau"/>       </grid>

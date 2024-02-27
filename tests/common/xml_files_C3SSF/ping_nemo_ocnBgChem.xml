@@ -5,13 +5,14 @@
  realms_per_context : {'nemo': ['seaIce', 'ocean', 'ocean seaIce', 'ocnBgchem', 'seaIce ocean'], 'surfex': ['atmos', 'atmos atmosChem', 'atmosChem', 'aerosol', 'atmos land', 'land', 'landIce land', 'aerosol', 'land landIce', 'landIce'], 'trip': []}
  max_priority : 3
  ping_variables_prefix : C3S_
+ mips : {'HR': set(['OMIP', 'CMIP', 'CMIP6', 'ScenarioMIP']), 'LR': set(['C4MIP', 'DCPP', 'CORDEX', 'ISMIP6', 'GMMIP', 'RFMIP', 'LUMIP', 'OMIP', 'CMIP6', 'SIMIP', 'DAMIP', 'AerChemMIP', 'FAFMIP', 'PMIP', 'CFMIP', 'ScenarioMIP', 'LS3MIP', 'CMIP', 'GeoMIP', 'HighResMIP'])}
  excluded_vars : []
  orphan_variables : {'nemo': [''], 'surfex': [], 'trip': ['dgw', 'drivw', 'fCLandToOcean', 'qgwr', 'rivi', 'rivo', 'waterDpth', 'wtd']}
 --> 
 
 <context id="nemo">
 <field_definition>
-<!-- C3SMAISON - ESM -->
+<!-- CMIP6MAISON - ESM -->
    <field id="C3S_xfracal"        field_ref="xfracal" />
    <field id="C3S_GRAZ1"          field_ref="GRAZ1" />
    <field id="C3S_GRAZ2"          field_ref="GRAZ2" />
@@ -37,7 +38,7 @@
    <field id="C3S_INTdtDIN"       field_ref="INTdtDIN" />
    <field id="C3S_INTdtDIP"       field_ref="INTdtDIP" />
    <field id="C3S_INTdtSil"       field_ref="INTdtSil" />
-<!-- C3SMAISON END -->
+<!-- CMIP6MAISON END -->
    <field id="C3S_arag"          field_ref="dummy_XYO"        /> <!-- P2 (mol m-3) mole_concentration_of_aragonite_expressed_as_carbon_in_sea_water : sum of particulate aragonite components (e.g. Phytoplankton, Detrital, etc.) -->
    <field id="C3S_bacc"          field_ref="dummy_XYO"        /> <!-- P2 (mol m-3) mole_concentration_of_bacteria_expressed_as_carbon_in_sea_water : sum of bacterial carbon component concentrations -->
    <field id="C3S_bddtalk"       field_ref="dummy_XYO"        /> <!-- P3 (mol m-3 s-1) tendency_of_sea_water_alkalinity_expressed_as_mole_equivalent_due_to_biological_processes : Net of biological terms in time rate of change of alkalinity -->
@@ -141,7 +142,7 @@
    <field id="C3S_intpbn"        field_ref="dummy_XY"         /> <!-- P3 (mol m-2 s-1) tendency_of_ocean_mole_content_of_nitrogen_due_to_biological_production : Vertically integrated biogenic nitrogen production -->
    <field id="C3S_intpbp"        field_ref="dummy_XY"         /> <!-- P3 (mol m-2 s-1) tendency_of_ocean_mole_content_of_phosphorus_due_to_biological_production : Vertically integrated biogenic phosphorus production -->
    <field id="C3S_intpbsi"       field_ref="INTPBSI"         /> <!-- P3 (mol m-2 s-1) tendency_of_ocean_mole_content_of_silicon_due_to_biological_production : Vertically integrated biogenic silica production -->
-   <field id="C3S_intpcalcite"   field_ref="dummy_XY"         /> <!-- P3 (mol m-2 s-1) tendency_of_ocean_mole_content_of_calcite_expressed_as_carbon_due_to_biological_production : Vertically integrated calcite production -->
+   <field id="C3S_intpcalcite"   field_ref="INTPCAL"         /> <!-- P3 (mol m-2 s-1) tendency_of_ocean_mole_content_of_calcite_expressed_as_carbon_due_to_biological_production : Vertically integrated calcite production -->
    <field id="C3S_intpn2"        field_ref="INTNFIX"         /> <!-- P3 (mol m-2 s-1) tendency_of_ocean_mole_content_of_elemental_nitrogen_due_to_fixation : Vertically integrated nitrogen fixation -->
    <field id="C3S_intpoc"        field_ref="INTPOC"         /> <!-- P2 (kg m-2) ocean_mass_content_of_particulate_organic_matter_expressed_as_carbon : Vertically integrated POC -->
    <field id="C3S_intpp"         field_ref="INTPP"         /> <!-- P1 (mol m-2 s-1) net_primary_mole_productivity_of_biomass_expressed_as_carbon_by_phytoplankton : Vertically integrated total primary (organic carbon) production by phytoplankton.  This should equal the sum of intpdiat+intpphymisc, but those individual components may be unavailable in some models. -->

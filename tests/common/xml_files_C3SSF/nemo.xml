@@ -1,5 +1,5 @@
  <context id="nemo" >
-
+    
     <!-- $id$ -->
     <variable_definition>
 	<!-- Year of time origin for NetCDF files; defaults to 1850 -->
@@ -10,17 +10,17 @@
     	<variable id="rcp" type="float" > 1.0E+20 </variable>
 	<!-- Conversion factor for salinity into PSU ( 35. / 35.16504 ) -->
     	<variable id="convSpsu" type="float" > 0.9953067 </variable>
-    </variable_definition>
+    </variable_definition> 
 
     <field_definition src="./nemo_fields.xml"/>
-
-    <!--
+    
+    <!-- 
 ============================================================================================================
 = grid definition = = DO NOT CHANGE =
 ============================================================================================================
     -->
-
-   <axis_definition>
+    
+   <axis_definition>  
       <axis id="deptht" long_name="Vertical T levels" unit="m" positive="down" name="lev" prec="8"/>
       <axis id="deptht0" axis_ref="deptht" name="lev">
          <zoom_axis begin="0" n="1" />
@@ -60,10 +60,10 @@
 	 <reduce_axis operation="sum"/>
       </axis>
       <!-- axis id="nlevice" long_name="Ice level"       	unit="1"               -->
-   </axis_definition>
-
+   </axis_definition> 
+   
    <domain_definition src="./nemo_domains.xml"/>
-
+  
     <grid_definition>
         <!--  -->
        <grid id="grid_1deg">
@@ -126,15 +126,15 @@
        </grid>
         <!--  -->
 
-      <grid id="scalarglob">
+      <grid id="scalarglob"> 
        <scalar name="sector" standard_name="region" label="global" />
       </grid>
-
-      <grid id="grid_TRO">
+      
+      <grid id="grid_TRO"> 
          <axis axis_ref="oline" />
       </grid>
 
-      <grid id="grid_TRI">
+      <grid id="grid_TRI"> 
          <axis axis_ref="siline" />
       </grid>
 
@@ -209,7 +209,7 @@
             <reduce_axis operation="sum" />
          </scalar>
        </grid>
-
+       
        <grid id="vert_sum_U">
          <domain domain_ref="grid_U"/>
          <scalar>
@@ -299,3 +299,5 @@
     </grid_definition>
 
   </context>
+  
+

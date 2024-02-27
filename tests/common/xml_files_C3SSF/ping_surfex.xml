@@ -5,15 +5,15 @@
  realms_per_context : {'nemo': ['seaIce', 'ocean', 'ocean seaIce', 'ocnBgchem', 'seaIce ocean'], 'surfex': ['atmos', 'atmos atmosChem', 'atmosChem', 'aerosol', 'atmos land', 'land', 'landIce land', 'aerosol', 'land landIce', 'landIce'], 'trip': []}
  max_priority : 3
  ping_variables_prefix : C3S_
+ mips : {'HR': set(['OMIP', 'CMIP', 'CMIP6', 'ScenarioMIP']), 'LR': set(['C4MIP', 'DCPP', 'CORDEX', 'ISMIP6', 'GMMIP', 'RFMIP', 'LUMIP', 'OMIP', 'CMIP6', 'SIMIP', 'DAMIP', 'AerChemMIP', 'FAFMIP', 'PMIP', 'CFMIP', 'ScenarioMIP', 'LS3MIP', 'CMIP', 'GeoMIP', 'HighResMIP'])}
  excluded_vars : []
  orphan_variables : {'nemo': [''], 'surfex': [], 'trip': ['dgw', 'drivw', 'fCLandToOcean', 'qgwr', 'rivi', 'rivo', 'waterDpth', 'wtd']}
 --> 
 
 <context id="surfex">
 <field_definition>
-<!-- C3SMAISON -->
+<!-- CMIP6MAISON -->
    <field id="C3S_albsrfc"       field_ref="albsrfc" />
-   <field id="sftlakef"            field_ref="sftlaf" unit="%" >  sftlaf * 100  </field>
    <field id="C3S_cltl"          field_ref="cltl100" />
    <field id="C3S_cltm"          field_ref="cltm100" />
    <field id="C3S_clth"          field_ref="clth100" />
@@ -34,6 +34,27 @@
    <field id="C3S_rlusaf"        field_ref="rluscln" />
    <field id="C3S_rldscsaf"      field_ref="rldscscln" />   
    <field id="C3S_rluscsaf"      field_ref="rluscscln" />
+   <field id="C3S_rstbis"        field_ref="rstbis" />
+   <field id="C3S_rsutbis"        field_ref="rsutbis" />
+   <field id="C3S_rlutbis"        field_ref="rlutbis" />
+   <field id="C3S_rlt"           field_ref="rlut" />
+   <field id="C3S_rst"           field_ref="rst" />
+   <field id="C3S_wsgmax"           field_ref="wsgmax" />
+   <field id="C3S_rstcsbis"      field_ref="rstcsbis" />   
+   <field id="C3S_rsutcsbis"      field_ref="rsutcsbis" />
+   <field id="C3S_rlutcsbis"      field_ref="rlutcsbis" />
+   <field id="C3S_rssbis"        field_ref="rssbis" />
+   <field id="C3S_rsdsbis"        field_ref="rsdsbis" />
+   <field id="C3S_rsusbis"        field_ref="rsusbis" />
+   <field id="C3S_rlsbis"        field_ref="rlsbis" />
+   <field id="C3S_rldsbis"        field_ref="rldsbis" />
+   <field id="C3S_rlusbis"        field_ref="rlusbis" />
+   <field id="C3S_rsscsbis"      field_ref="rsscsbis" />   
+   <field id="C3S_rsdscsbis"      field_ref="rsdscsbis" />   
+   <field id="C3S_rsuscsbis"      field_ref="rsuscsbis" />
+   <field id="C3S_rlscsbis"      field_ref="rlscsbis" />   
+   <field id="C3S_rldscsbis"      field_ref="rldscsbis" />   
+   <field id="C3S_rluscsbis"      field_ref="rluscsbis" />
    <field id="C3S_icod"          field_ref="icod" />
    <field id="C3S_lcod"          field_ref="lcod" /> 
    <field id="C3S_reffclwtopcnrm" field_ref="reffclwtop" />
@@ -51,13 +72,33 @@
    <field id="C3S_od550ssbin2"  field_ref="TACod550ss_bin2" />
    <field id="C3S_od550dustbin1" field_ref="TACod550dust_bin1" />
    <field id="C3S_od550dustbin2" field_ref="TACod550dust_bin2" />
+   <field id="C3S_od550nh4"      field_ref="TACod550nh4" />
+   <field id="C3S_od550no3bin1"  field_ref="TACod550no3_bin1" />
+   <field id="C3S_od550dustbin3" field_ref="TACod550dust_bin3" />
+   <field id="C3S_od550dustbin4" field_ref="TACod550dust_bin4" />
+   <field id="C3S_od550dustbin5" field_ref="TACod550dust_bin5" />
+   <field id="C3S_od550dustbin6" field_ref="TACod550dust_bin6" />
    <field id="C3S_sconcbc"       field_ref="TACconcbc_ll_2D" />
    <field id="C3S_sconcoa"       field_ref="TACconcoa_ll_2D" />
+   <field id="C3S_sconcno3"       field_ref="TACconcno3_ll" />
+   <field id="C3S_sconcnh4"       field_ref="TACconcnh4_ll" />
    <field id="C3S_ext550ss"      field_ref="TACext550ss" />
    <field id="C3S_ext550dust"    field_ref="TACext550dust" />
    <field id="C3S_ext550so4"     field_ref="TACext550so4" />
    <field id="C3S_ext550bc"      field_ref="TACext550bc" />
    <field id="C3S_ext550oa"      field_ref="TACext550oa" />
+   <field id="C3S_ext550no3"      field_ref="TACext550no3" />
+   <field id="C3S_ext550nh4"      field_ref="TACext550nh4" />
+   <field id="C3S_emino3"      field_ref="TACemino3" />
+   <field id="C3S_eminh4"      field_ref="TACeminh4" />
+   <field id="C3S_dryno3"      field_ref="TACdryno3" />
+   <field id="C3S_sedbc"      field_ref="TACsedbc" />
+   <field id="C3S_seddust"      field_ref="TACseddust" />
+   <field id="C3S_sedoa"      field_ref="TACsedoa" />
+   <field id="C3S_sedso4"      field_ref="TACsedso4" />
+   <field id="C3S_sedss"      field_ref="TACsedss" />
+   <field id="C3S_sedno3"      field_ref="TACsedno3" />
+   <field id="C3S_sednh4"      field_ref="TACsednh4" />
    <field id="C3S_cllcalipsoice"      field_ref="cllcalipsoice" />
    <field id="C3S_clmcalipsoice"      field_ref="clmcalipsoice" />
    <field id="C3S_clhcalipsoice"      field_ref="clhcalipsoice" />
@@ -92,13 +133,14 @@
    <field id="C3S_lwpmodis"           field_ref="lwpmodis" />
    <field id="C3S_iwpmodis"           field_ref="iwpmodis" />
    <field id="C3S_clmodis"            field_ref="clmodis" />
-<!-- C3SMAISON - ESM -->
+<!-- CMIP6MAISON - ESM -->
    <field id="C3S_necb"          field_ref="necb" />
    <field id="C3S_fDeforestToL"  field_ref="fDeforestToL" />
    <field id="C3S_fRegrowth"     field_ref="fRegrowth" />
    <field id="C3S_burntArea"     field_ref="burntArea" />
-   <field id="C3S_fFireBCarb"    field_ref="necb" />
-<!-- C3SMAISON END -->
+   <field id="C3S_fFireBCarb"    field_ref="fFireBCarb" />
+   <field id="C3S_fCLeach"       field_ref="fCLeach" />
+<!-- CMIP6MAISON END -->
 <!-- for variables which realm equals one of _atmos_atmos%atmosChem_atmosChem_aerosol_atmos%land_land_landIce%land_aerosol_land%landIce_landIce-->
    <field id="C3S_H2p"           field_ref="dummy_D-1" 	 /> <!-- P1 () missing : 2H in total precipitation -->
    <field id="C3S_H2s"           field_ref="dummy_D-1" 	 /> <!-- P1 () missing : 2H in solid precipitation -->
@@ -265,8 +307,8 @@
    <field id="C3S_dms"           field_ref="dummy_D-1" 	 /> <!-- P1 (mol mol-1) mole_fraction_of_dimethyl_sulfide_in_air : DMS volume mixing ratio -->
    <field id="C3S_drybc"         field_ref="TACdrybc" 	 /> <!-- P1 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_elemental_carbon_dry_aerosol_particles_due_to_dry_deposition : Dry deposition includes gravitational settling, impact scavenging, and turbulent deposition. -->
    <field id="C3S_drydust"       field_ref="TACdrydust" 	 /> <!-- P1 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_dust_dry_aerosol_particles_due_to_dry_deposition : Dry deposition includes gravitational settling, impact scavenging, and turbulent deposition. -->
-   <field id="C3S_drynh3"        field_ref="dummy_D-1" 	 /> <!-- P1 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_ammonia_due_to_dry_deposition : dry deposition includes gravitational settling, impact scavenging, and turbulent deposition -->
-   <field id="C3S_drynh4"        field_ref="dummy_D-1" 	 /> <!-- P1 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_ammonium_dry_aerosol_particles_due_to_dry_deposition : dry deposition includes gravitational settling, impact scavenging, and turbulent deposition -->
+   <field id="C3S_drynh3"        field_ref="TACdrynh3" 	 /> <!-- P1 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_ammonia_due_to_dry_deposition : dry deposition includes gravitational settling, impact scavenging, and turbulent deposition -->
+   <field id="C3S_drynh4"        field_ref="TACdrynh4" 	 /> <!-- P1 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_ammonium_dry_aerosol_particles_due_to_dry_deposition : dry deposition includes gravitational settling, impact scavenging, and turbulent deposition -->
    <field id="C3S_drynoy"        field_ref="dummy_D-1" 	 /> <!-- P1 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_noy_expressed_as_nitrogen_due_to_dry_deposition : NOy is the sum of all simulated oxidized nitrogen species out of NO, NO2, HNO3, HNO4, NO3aerosol, NO3(radical), N2O5, PAN, other organic nitrates. Dry deposition includes gravitational settling, impact scavenging, and turbulent deposition. -->
    <field id="C3S_dryo3"         field_ref="dummy_D-1" 	 /> <!-- P1 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_ozone_due_to_dry_deposition : dry deposition includes gravitational settling, impact scavenging, and turbulent deposition. -->
    <field id="C3S_dryoa"         field_ref="TACdryoa" 	 /> <!-- P1 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_particles_due_to_dry_deposition : dry deposition rate of dry aerosol total organic matter -->
@@ -293,7 +335,7 @@
    <field id="C3S_emidust"       field_ref="TACemidust" 	 /> <!-- P1 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_dust_dry_aerosol_particles_due_to_emission : total emission rate of dust -->
    <field id="C3S_emiisop"       field_ref="dummy_D-1" 	 /> <!-- P1 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_isoprene_due_to_emission : Integrate 3D emission field vertically to 2d field -->
    <field id="C3S_emilnox"       field_ref="dummy_D-1" 	 /> <!-- P1 (mol s-1) tendency_of_atmosphere_moles_of_nox_expressed_as_nitrogen : Integrate the NOx production for lightning over model layer. proposed name: tendency_of_atmosphere_mass_content_of_nox_from_lightning -->
-   <field id="C3S_eminh3"        field_ref="dummy_D-1" 	 /> <!-- P1 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_ammonia_due_to_emission : Integrate 3D emission field vertically to 2d field. -->
+   <field id="C3S_eminh3"        field_ref="TACeminh3" 	 /> <!-- P1 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_ammonia_due_to_emission : Integrate 3D emission field vertically to 2d field. -->
    <field id="C3S_eminox"        field_ref="dummy_D-1" 	 /> <!-- P1 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_nox_expressed_as_nitrogen_due_to_emission : Store flux as Nitrogen. NOx=NO+NO2. Integrate 3D emission field vertically to 2d field. -->
    <field id="C3S_emioa"         field_ref="TACemioa" 	 /> <!-- P1 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_particles_due_to_net_chemical_production_and_emission : This is the sum of total emission of POA and total production of SOA (emipoa+chepsoa). ""Mass"" refers to the mass of organic matter, not mass of organic carbon alone. We recommend a scale factor of POM=1.4*OC, unless your model has more detailed info available.  Integrate 3D chemical production and emission field vertically to 2d field. -->
    <field id="C3S_emiso2"        field_ref="TACemiso2" 	 /> <!-- P1 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_sulfur_dioxide_due_to_emission : Integrate 3D emission field vertically to 2d field. -->
@@ -307,6 +349,7 @@
    <field id="C3S_esn"           field_ref="dummy_D0"		 /> <!-- P1 (kg m-2 s-1) liquid_water_evaporation_flux_from_surface_snow : liquid_water_evaporation_flux_from_surface_snow -->
    <field id="C3S_et"            field_ref="et" 		 /> <!-- P1 (kg m-2 s-1) surface_evapotranspiration : surface_evapotranspiration -->
    <field id="C3S_evspsbl"       field_ref="evspsbl" 		 /> <!-- P1 (kg m-2 s-1) water_evaporation_flux : at surface; flux of water into the atmosphere due to conversion of both liquid and solid phases to vapor (from underlying surface and vegetation) -->
+   <field id="C3S_lwee"       field_ref="evspsbl" 		 /> <!-- P1 (kg m-2 s-1) water_evaporation_flux : at surface; flux of water into the atmosphere due to conversion of both liquid and solid phases to vapor (from underlying surface and vegetation) -->
    <field id="C3S_evspsblpot"    field_ref="potet" 		 /> <!-- P1 (kg m-2 s-1) water_potential_evaporation_flux : Potential Evapotranspiration -->
    <field id="C3S_evspsblsoi"    field_ref="evspsblsoi" 	 /> <!-- P1 (kg m-2 s-1) water_evaporation_flux_from_soil : includes sublimation. -->
    <field id="C3S_evspsblveg"    field_ref="evspsblveg" 	 /> <!-- P1 (kg m-2 s-1) water_evaporation_flux_from_canopy : the canopy evaporation+sublimation (if present in model). -->
@@ -488,7 +531,9 @@
    <field id="C3S_mrroLi"        field_ref="dummy_D-1" 	 /> <!-- P1 (kg m-2 s-1) land_ice_runoff_flux : Land Ice Runoff Flux -->
    <field id="C3S_mrroLut"       field_ref="mrroLut" 		 /> <!-- P1 (kg m-2 s-1) runoff_flux : Total runoff from land use tile -->
    <field id="C3S_mrrob"         field_ref="mrrob" 		 /> <!-- P1 (kg m-2 s-1) subsurface_runoff_flux : subsurface_runoff_flux -->
+   <field id="C3S_mrroab"         field_ref="mrrob" 		 /> <!-- P1 (kg m-2 s-1) subsurface_runoff_flux : subsurface_runoff_flux -->
    <field id="C3S_mrros"         field_ref="mrros" 		 /> <!-- P1 (kg m-2 s-1) surface_runoff_flux : the total surface runoff leaving the land portion of the grid cell. -->
+   <field id="C3S_mrroas"         field_ref="mrros" 		 /> <!-- P1 (kg m-2 s-1) surface_runoff_flux : the total surface runoff leaving the land portion of the grid cell. -->
    <field id="C3S_mrsfl"         field_ref="mrsfl" 		 /> <!-- P1 (kg m-2) frozen_moisture_content_of_soil_layer : Frozen water content of soil layer -->
    <field id="C3S_mrsll"         field_ref="mrsll" 		 /> <!-- P1 (kg m-2) liquid_moisture_content_of_soil_layer : Liquid water content of soil layer -->
    <field id="C3S_mrso"          field_ref="mrso" 		 /> <!-- P1 (kg m-2) soil_moisture_content : the mass per unit area  (summed over all soil layers) of water in all phases. -->
@@ -553,7 +598,7 @@
    <field id="C3S_od550csaer"    field_ref="dummy_D0" 	 /> <!-- P1 (1.0) atmosphere_optical_thickness_due_to_ambient_aerosol_particles : AOD from the ambient aerosols in clear skies if od550aer is for all-sky (i.e., includes aerosol water).  Does not include AOD from stratospheric aerosols if these are prescribed but includes other possible background aerosol types. Needs a comment attribute "wavelength: 550 nm" -->
    <field id="C3S_od550dust"     field_ref="TACod550dust" 	 /> <!-- P1 (1.0) atmosphere_optical_thickness_due_to_dust_ambient_aerosol : dust aod@550nm -->
    <field id="C3S_od550lt1aer"   field_ref="TACod550lt1aer" 	 /> <!-- P1 (1.0) atmosphere_optical_thickness_due_to_pm1_ambient_aerosol : od550 due to particles with wet diameter less than 1 um  (""ambient"" means ""wetted""). When models do not include explicit size information, it can be assumed that all anthropogenic aerosols and natural secondary aerosols have diameter less than 1 um. -->
-   <field id="C3S_od550no3"      field_ref="dummy_D-1" 	 /> <!-- P1 (1.0) atmosphere_optical_thickness_due_to_nitrate_ambient_aerosol : nitrate aod@550nm -->
+   <field id="C3S_od550no3"      field_ref="TACod550no3" 	 /> <!-- P1 (1.0) atmosphere_optical_thickness_due_to_nitrate_ambient_aerosol : nitrate aod@550nm -->
    <field id="C3S_od550oa"       field_ref="TACod550oa" 	 /> <!-- P1 (1.0) atmosphere_optical_thickness_due_to_particulate_organic_matter_ambient_aerosol : total organic aerosol AOD, comprises all organic aerosols, primary + secondary ; natural + anthropogenic including biomasss burning organic aerosol -->
    <field id="C3S_od550so4"      field_ref="TACod550so4" 	 /> <!-- P1 (1.0) atmosphere_optical_thickness_due_to_sulfate_ambient_aerosol : sulfate aod@550nm -->
    <field id="C3S_od550so4so"    field_ref="dummy_D-1" 	 /> <!-- P1 (1.0) missing : Stratospheric Optical depth at 550 nm (sulphate only) 2D-field (here we limit the computation of OD to the stratosphere only) -->
@@ -578,8 +623,9 @@
    <field id="C3S_phalf"         field_ref="pah" 		 /> <!-- P1 (Pa) air_pressure : Pressure on Model Half-Levels -->
    <field id="C3S_photo1d"       field_ref="dummy_D0" 	 /> <!-- P1 (s-1) photolysis_rate_of_ozone_to_1D_oxygen_atom : photolysis rate of O3 to O1d -->
    <field id="C3S_pod0"          field_ref="dummy_D-1" 	 /> <!-- P1 (mol m-2 s-1) pending_CF_name : Accumulated stomatal ozone flux over the threshold of 0 mol m-2 s-1; Computation: Time Integral of (hourly above canopy ozone concentration * stomatal conductance * Rc/(Rb+Rc) ) -->
-   <field id="C3S_pr"            field_ref="pr" 		 /> <!-- P1 (kg m-2 s-1) precipitation_flux : at surface; includes both liquid and solid phases from all types of clouds (both large-scale and convective) -->
+   <field id="C3S_lwepr"            field_ref="pr" 		 /> <!-- P1 (kg m-2 s-1) precipitation_flux : at surface; includes both liquid and solid phases from all types of clouds (both large-scale and convective) -->
    <field id="C3S_prc"           field_ref="prc" 		 /> <!-- P1 (kg m-2 s-1) convective_precipitation_flux : at surface; includes both liquid and solid phases. -->
+   <field id="C3S_lweprc"           field_ref="prc" 		 /> <!-- P1 (kg m-2 s-1) convective_precipitation_flux : at surface; includes both liquid and solid phases. -->
    <field id="C3S_prcprof"       field_ref="prcrf" 		 /> <!-- P2 (kg m-2 s-1) convective_rainfall_flux : Convective Rainfall Flux -->
    <field id="C3S_prcsh"         field_ref="dummy_D-1" 	 /> <!-- P1 (kg m-2 s-1) shallow_convective_precipitation_flux : Shallow convection precipitation flux -->
    <field id="C3S_prhmax"        field_ref="dummy_D0"	 	 /> <!-- P1 (kg m-2 s-1) precipitation_flux : Maximum Hourly Precipitation Rate -->
@@ -594,6 +640,7 @@
    <field id="C3S_prrc_land"     field_ref="dummy_D-1" 	 /> <!-- P1 (kg m-2 s-1) convective_rainfall_flux : convective_rainfall_flux -->
    <field id="C3S_prrsn"         field_ref="prrsn" 		 /> <!-- P1 (1) mass_fraction_of_rainfall_onto_snow : mass_fraction_of_rainfall_onto_snow -->
    <field id="C3S_prsn"          field_ref="prsn" 		 /> <!-- P1 (kg m-2 s-1) snowfall_flux : at surface; includes precipitation of all forms of water in the solid phase -->
+   <field id="C3S_lweprsn"          field_ref="prsn" 		 /> <!-- P1 (kg m-2 s-1) snowfall_flux : at surface; includes precipitation of all forms of water in the solid phase -->
    <field id="C3S_prsn_ist"      field_ref="dummy_D-1" 	 /> <!-- P1 (kg m-2 s-1) snowfall_flux : quantity averaged over ice sheet (grounded ice sheet and floating ice shelf) only. Needed to analyse the impact of downscaling methods -->
    <field id="C3S_prsn_ifs"      field_ref="dummy_D-1" 	 /> <!-- P1 (kg m-2 s-1) snowfall_flux : computed as the total mass per unit time of solid-phase precipitation falling into the ice-free portion of the ocean divided by the area of the ocean portion of the grid cell.   (Snowfall flux includes all types of solid-phase precipitation.) -->
    <field id="C3S_prsnIs"        field_ref="dummy_D-1" 	 /> <!-- P1 (kg m-2 s-1) snowfall_flux : quantity averaged over ice_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost) -->
@@ -754,6 +801,7 @@
    <field id="C3S_snowmxrat"     field_ref="dummy_D0" 	 /> <!-- P2 (1.0) mass_fraction_of_snow_in_air : snow_mixing_ratio -->
    <field id="C3S_snrefr"        field_ref="snrefr" 		 /> <!-- P1 (kg m-2 s-1) surface_snow_and_ice_refreezing_flux : surface_snow_and_ice_refreezing_flux -->
    <field id="C3S_snw"           field_ref="snw" 		 /> <!-- P3 (kg m-2) surface_snow_amount : Surface Snow Amount -->
+   <field id="C3S_lwesnw"           field_ref="snw" 		 /> <!-- P3 (kg m-2) surface_snow_amount : Surface Snow Amount -->
    <field id="C3S_snw_land"      field_ref="snw" 		 /> <!-- P1 (kg m-2) surface_snow_amount : Computed as the mass of surface snow on the land portion of the grid cell divided by the land area in the grid cell; reported as missing where the land fraction is 0; excluded is snow on vegetation canopy or on sea ice. -->
    <field id="C3S_snwc"          field_ref="dummy_D-1" 	 /> <!-- P1 (kg m-2) canopy_snow_amount : canopy_snow_amount -->
    <field id="C3S_so2"           field_ref="TACmmrso2mol" 	 /> <!-- P1 (mol mol-1) mole_fraction_of_sulfur_dioxide_in_air : SO2 volume mixing ratio -->
@@ -771,7 +819,6 @@
    <field id="C3S_tSoilPools"    field_ref="tSoilPools" 	 /> <!-- P2 (s-1) soil_carbon_turnover_rate_by_pool : turnover rate of each model soil carbon pool -->
    <field id="C3S_ta"            field_ref="ta" 		 /> <!-- P1 (K) air_temperature : Model levels or plev_27 -->
    <field id="C3S_tas"           field_ref="tas" 		 /> <!-- P1 (K) air_temperature : This is sampled synoptically. -->
-   <field id="C3S_tdas"           field_ref="tdas" 		 /> <!-- P1 (K) dew_point_temperature : This is sampled synoptically. -->
    <field id="C3S_tas_ist"       field_ref="dummy_D-1" 	 /> <!-- P1 (K) air_temperature : quantity averaged over ice sheet (grounded ice sheet and floating ice shelf) only. Needed to analyse the impact of downscaling methods -->
    <field id="C3S_tasIs"         field_ref="dummy_D-1" 	 /> <!-- P1 (K) air_temperature : quantity averaged over ice_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost) -->
    <field id="C3S_tasLut"        field_ref="tasLut" 		 /> <!-- P1 (K) air_temperature : near-surface air temperature (2m above displacement height, i.e. t_ref) on land use tile -->
@@ -782,7 +829,7 @@
    <field id="C3S_tauu"          field_ref="tauu" > -1.0*tauu </field> <!-- P1 (Pa) surface_downward_eastward_stress : Surface Downward Eastward Wind Stress -->
    <field id="C3S_tauv"          field_ref="tauv" > -1.0*tauv </field> <!-- P1 (Pa) surface_downward_northward_stress : Surface Downward Northward Wind Stress -->
    <field id="C3S_tcs"           field_ref="dummy_D-1" 	 /> <!-- P1 (K) canopy_temperature : Vegetation Canopy Temperature -->
-   <field id="C3S_tdps"          field_ref="dummy_D0" 	 /> <!-- P1 (K) dew_point_temperature : 2m dewpoint temperature -->
+   <field id="C3S_tdps"          field_ref="tdas" 	 /> <!-- P1 (K) dew_point_temperature : 2m dewpoint temperature -->
    <field id="C3S_tendacabf"     field_ref="dummy_na" 	 /> <!-- P3 (kg s-1) tendency_of_land_ice_mass_due_to_surface_mass_balance : Greenland -->
    <field id="C3S_tendlibmassbf" field_ref="dummy_D0" 	 /> <!-- P3 (kg s-1) tendency_of_land_ice_mass_due_to_basal_mass_balance : Antarctica -->
    <field id="C3S_tendlicalvf"   field_ref="dummy_D0"	         /> <!-- P3 (kg s-1) tendency_of_land_ice_mass_due_to_calving : Antarctica -->
@@ -832,6 +879,7 @@
    <field id="C3S_tslsi"         field_ref="tslsi" 		 /> <!-- P1 (K) surface_temperature : Surface temperature of all surfaces except open ocean. -->
    <field id="C3S_tslsiLut"      field_ref="tslsiLut" 	 /> <!-- P1 (K) surface_temperature : Surface Temperature on Landuse Tile -->
    <field id="C3S_tsn_land"      field_ref="tsn" 		 /> <!-- P1 (K) temperature_in_surface_snow : This temperature is averaged over all the snow in the grid cell that rests on land or land ice.  When computing the time-mean here, the time samples, weighted by the mass of snow on the land portion of the grid cell, are accumulated and then divided by the sum of the weights.   Reported as "missing in regions free of snow on land. -->
+   <field id="C3S_rhosn"      field_ref="sn_dens" 		 /> <!-- TODO -->
    <field id="C3S_tsn_ist"       field_ref="dummy_D-1" 	 /> <!-- P1 (K) temperature_in_surface_snow : quantity averaged over ice sheet (grounded ice sheet and floating ice shelf) only. Needed to analyse the impact of downscaling methods -->
    <field id="C3S_tsnIs"         field_ref="dummy_D-1" 	 /> <!-- P1 (K) temperature_in_surface_snow : quantity averaged over ice_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost) -->
    <field id="C3S_tsnl"          field_ref="tsn" 		 /> <!-- P1 (K) snow_temperature : Density-weighted averagte temperature of the snow -->
@@ -875,8 +923,8 @@
    <field id="C3S_wetlandCH4cons" field_ref="dummy_D-1" 	 /> <!-- P2 (kg m-2 s-1) wetland_methane_consumption : Grid averaged methane consuption (methanotrophy) from wetlands -->
    <field id="C3S_wetlandCH4prod" field_ref="dummy_D-1" 	 /> <!-- P2 (kg m-2 s-1) wetland_methane_production : Grid averaged methane production (methanogenesis) from wetlands -->
    <field id="C3S_wetlandFrac"   field_ref="dummy_D-1" 	 /> <!-- P2 (%) wetland_fraction : Fraction of a grid cell covered by wetland. -->
-   <field id="C3S_wetnh3"        field_ref="dummy_D-1" 	 /> <!-- P1 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_ammonia_due_to_wet_deposition : wet deposition rate of nh3 -->
-   <field id="C3S_wetnh4"        field_ref="dummy_D-1" 	 /> <!-- P1 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_ammonium_dry_aerosol_particles_due_to_wet_deposition : wet deposition rate of nh4 -->
+   <field id="C3S_wetnh3"        field_ref="TACwetnh3" 	 /> <!-- P1 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_ammonia_due_to_wet_deposition : wet deposition rate of nh3 -->
+   <field id="C3S_wetnh4"        field_ref="TACwetnh4" 	 /> <!-- P1 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_ammonium_dry_aerosol_particles_due_to_wet_deposition : wet deposition rate of nh4 -->
    <field id="C3S_wetnoy"        field_ref="dummy_D-1" 	 /> <!-- P1 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_noy_expressed_as_nitrogen_due_to_wet_deposition : NOy is the sum of all simulated oxidized nitrogen species, out of NO, NO2, HNO3, HNO4, NO3aerosol, NO3(radical), N2O5, PAN, other organic nitrates. -->
    <field id="C3S_wetoa"         field_ref="TACwetoa" 	 /> <!-- P1 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_particles_due_to_wet_deposition : wet deposition rate of dry aerosol total organic matter -->
    <field id="C3S_wetso2"        field_ref="dummy_D-1" 	 /> <!-- P1 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_sulfur_dioxide_due_to_wet_deposition : wet deposition rate of so2 -->

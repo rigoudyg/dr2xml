@@ -90,23 +90,23 @@
 	</axis_definition>
 	<domain_definition>
 		<domain_group prec="8">
-			<domain id="CMIP6_25km" ni_glo="1440" nj_glo="720" type="rectilinear" prec="8">
+			<domain id="C3S_25km" ni_glo="1440" nj_glo="720" type="rectilinear" prec="8">
 				<generate_rectilinear_domain/>
 				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
 			</domain>
-			<domain id="CMIP6_50km" ni_glo="720" nj_glo="360" type="rectilinear" prec="8">
+			<domain id="C3S_50km" ni_glo="720" nj_glo="360" type="rectilinear" prec="8">
 				<generate_rectilinear_domain/>
 				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
 			</domain>
-			<domain id="CMIP6_100km" ni_glo="360" nj_glo="180" type="rectilinear" prec="8">
+			<domain id="C3S_100km" ni_glo="360" nj_glo="180" type="rectilinear" prec="8">
 				<generate_rectilinear_domain/>
 				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
 			</domain>
-			<domain id="CMIP6_1deg" ni_glo="360" nj_glo="180" type="rectilinear" prec="8">
+			<domain id="C3S_1deg" ni_glo="360" nj_glo="180" type="rectilinear" prec="8">
 				<generate_rectilinear_domain/>
 				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
 			</domain>
-			<domain id="CMIP6_2deg" ni_glo="180" nj_glo="90" type="rectilinear" prec="8">
+			<domain id="C3S_2deg" ni_glo="180" nj_glo="90" type="rectilinear" prec="8">
 				<generate_rectilinear_domain/>
 				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
 			</domain>

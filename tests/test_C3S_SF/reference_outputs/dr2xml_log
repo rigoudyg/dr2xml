@@ -45,7 +45,7 @@ Warning: Cannot complement model levels with psol for table C3S for frequency 12
 file_def written as current_directory/test_C3S_SF/test_outputs/dr2xml_surfex.xml
 
 Skipped variables (i.e. whose alias is not present in the pingfile):
->>> TABLE:             C3S 14/36 ----> rlt(1) rst(1) wsgmax(1) lwee(1) lwepr(1) lweprc(1) lweprs(1) lweprsn(1) lwesnw(1) mrroa(1) mrroab(1) mrroas(1) rhosn(1) tdps(1)
+>>> TABLE:             C3S 02/36 ----> lweprs(1) mrroa(1)
 
 
 
@@ -56,18 +56,18 @@ Some Statistics on actually written variables per frequency+shape...
 
       12hr --------    -------- ---   5
 
-                             C3S P1  11: hfls hfss rlds rls rsds rsdt rss tasmax tasmin tauu tauv
-       day    XY-na    -------- ---  11
+                             C3S P1  22: hfls hfss rlds rls rlt rsds rsdt rss rst tasmax tasmin tauu tauv wsgmax lwee lwepr lweprc lweprsn lwesnw mrroab mrroas rhosn
+       day    XY-na    -------- ---  22
 
-       day --------    -------- ---  11
+       day --------    -------- ---  22
 
-                             C3S P1   6: clt psl tas tsl uas vas
-       6hr    XY-na    -------- ---   6
+                             C3S P1   7: clt psl tas tdps tsl uas vas
+       6hr    XY-na    -------- ---   7
 
-       6hr --------    -------- ---   6
+       6hr --------    -------- ---   7
 
 
----------- --------    -------- ---  22
+---------- --------    -------- ---  34
 
 
 Some Statistics on actually written variables per variable...
@@ -87,10 +87,42 @@ Some Statistics on actually written variables per variable...
 --- VARNAME: hus: Specific Humidity
 -----------------
               *      12hr_C3S_XY-A_1 hus
+------------------
+--- VARNAME: lwee: Liquid Water Equivalent Thickness of Evaporation Amount
+------------------
+              *      day_C3S_XY-na_1 lwee
+-------------------
+--- VARNAME: lwepr: Liquid Water Equivalent Thickness of Total Precipitation Amount
+-------------------
+              *      day_C3S_XY-na_1 lwepr
+--------------------
+--- VARNAME: lweprc: Liquid Water Equivalent Thickness of Convective Precipitation Amount
+--------------------
+              *      day_C3S_XY-na_1 lweprc
+---------------------
+--- VARNAME: lweprsn: Liquid Water Equivalent Thickness of Snowfall Amount
+---------------------
+              *      day_C3S_XY-na_1 lweprsn
+--------------------
+--- VARNAME: lwesnw: Liquid Water Equivalent Thickness of Surface Snow Amount
+--------------------
+              *      day_C3S_XY-na_1 lwesnw
+--------------------
+--- VARNAME: mrroab: Subsurface Run-off Amount
+--------------------
+              *      day_C3S_XY-na_1 mrroab
+--------------------
+--- VARNAME: mrroas: Surface Run-off Amount
+--------------------
+              *      day_C3S_XY-na_1 mrroas
 -----------------
 --- VARNAME: psl: Sea Level Pressure
 -----------------
               *      6hr_C3S_XY-na_1 psl
+-------------------
+--- VARNAME: rhosn: Snow Density
+-------------------
+              *      day_C3S_XY-na_1 rhosn
 ------------------
 --- VARNAME: rlds: Surface Downwelling Longwave Radiation
 ------------------
@@ -99,6 +131,10 @@ Some Statistics on actually written variables per variable...
 --- VARNAME: rls: Net Longwave Surface Radiation
 -----------------
               *      day_C3S_XY-na_1 rls
+-----------------
+--- VARNAME: rlt: TOA Net Longwave Radiation
+-----------------
+              *      day_C3S_XY-na_1 rlt
 ------------------
 --- VARNAME: rsds: Surface Downwelling Shortwave Radiation
 ------------------
@@ -111,6 +147,10 @@ Some Statistics on actually written variables per variable...
 --- VARNAME: rss: Net Shortwave Surface Radiation
 -----------------
               *      day_C3S_XY-na_1 rss
+-----------------
+--- VARNAME: rst: TOA Net Shortwave Radiation
+-----------------
+              *      day_C3S_XY-na_1 rst
 ----------------
 --- VARNAME: ta: Air Temperature
 ----------------
@@ -135,6 +175,10 @@ Some Statistics on actually written variables per variable...
 --- VARNAME: tauv: Surface Downward Northward Wind Stress
 ------------------
               *      day_C3S_XY-na_1 tauv
+------------------
+--- VARNAME: tdps: 2m Dewpoint Temperature
+------------------
+              *      6hr_C3S_XY-na_1 tdps
 -----------------
 --- VARNAME: tsl: Temperature of Soil
 -----------------
@@ -155,6 +199,10 @@ Some Statistics on actually written variables per variable...
 --- VARNAME: vas: Northward Near-Surface Wind
 -----------------
               *      6hr_C3S_XY-na_1 vas
+--------------------
+--- VARNAME: wsgmax: Maximum Wind Speed of Gust
+--------------------
+              *      day_C3S_XY-na_1 wsgmax
 ----------------
 --- VARNAME: zg: Geopotential Height
 ----------------
@@ -197,17 +245,26 @@ OK current_directory/test_C3S_SF/input/xml/ping_trip.xml
 file_def written as current_directory/test_C3S_SF/test_outputs/dr2xml_nemo.xml
 
 Skipped variables (i.e. whose alias is not present in the pingfile):
->>> TABLE:             C3S 03/03 ----> sic(1) sitemptop(1) tso(1)
+>>> TABLE:             C3S 02/03 ----> sic(1) sitemptop(1)
 
 
 
 
 Some Statistics on actually written variables per frequency+shape...
+                             C3S P1   1: tso
+       6hr    XY-na    -------- ---   1
 
----------- --------    -------- ---   0
+       6hr --------    -------- ---   1
+
+
+---------- --------    -------- ---   1
 
 
 Some Statistics on actually written variables per variable...
+-----------------
+--- VARNAME: tso: Sea Surface Temperature
+-----------------
+              *      6hr_C3S_XY-na_1 tso
 
  **************************************************
 *
