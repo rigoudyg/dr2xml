@@ -238,7 +238,7 @@ class ParameterSettings(Settings):
     def init_dict_default(self):
         return dict(skip_values=list(), forbidden_patterns=list(), conditions=list(), default_values=list(),
                     cases=list(), authorized_values=list(), authorized_types=list(), corrections=dict(),
-                    output_key=None, num_type="string", is_default=False, fatal=False, key=None)
+                    output_key=None, num_type="string", is_default=False, fatal=False, key=None, help="TODO")
 
     def __init__(self, *args, **kwargs):
         super(ParameterSettings, self).__init__(*args, **kwargs)
