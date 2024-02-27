@@ -624,6 +624,13 @@ internal_values = dict(
 			"CMIP6"
 		]
 	),
+	data_request_path=ParameterSettings(
+        key="data_request_path",
+		default_values=[
+			ValueSettings(key_type="laboratory", keys="data_request_path"),
+			None
+		]
+	),
 	laboratory_used=ParameterSettings(
         key="laboratory_used",
 		default_values=[
