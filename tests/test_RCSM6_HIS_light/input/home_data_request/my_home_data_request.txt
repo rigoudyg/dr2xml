@@ -1,0 +1,7 @@
+#------------------------------------------------------------------------------------------------------------------------------------------------------
+#TYPE;    VARNAME;         REALM;     FREQUENCY;     TABLE;                     TEMPORAL_SHP;         SPATIAL_SHP;       EXPNAME;            MIP
+#------------------------------------------------------------------------------------------------------------------------------------------------------
+extra;   ta500;           atmos;     mon;          CNRM_HOMP1Amon;            time-mean;            XY-P500HM;         ANY;                ANY
+extra;   ta400;           atmos;     mon;          CNRM_HOMP1Amon;            time-mean;            XY-P400HM;         ANY;                ANY
+extra;   cdnc;            aerosol;   mon;          CNRM_HOMP19AERmon;         time-mean;            XY-P19AER;         ANY;                ANY
+cmor;    hus;             atmos;     mon;          CMIP_Amon;                 time-mean;            XY-P19;            ANY;                ANY

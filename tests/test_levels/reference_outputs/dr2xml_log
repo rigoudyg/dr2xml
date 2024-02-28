@@ -1,0 +1,116 @@
+
+ **************************************************
+*
+*              dr2xml version:  3.0
+*   CMIP6 conventions version:  v6.2.4
+*  CMIP6 Data Request version:  01.00.21.post1
+
+*
+ **************************************************
+
+**************************************************
+
+Processing context  surfex
+
+**************************************************
+
+Number of Request Links which apply to MIPS ['AerChemMIP', 'C4MIP', 'CFMIP', 'CMIP', 'CMIP6', 'CORDEX', 'DAMIP', 'DCPP', 'FAFMIP', 'GMMIP', 'GeoMIP', 'HighResMIP', 'ISMIP6', 'LS3MIP', 'LUMIP', 'OMIP', 'PMIP', 'RFMIP', 'SIMIP', 'ScenarioMIP']  is: 268
+Number of Request Links after filtering by excluded_request_links is: 267
+Number of Request Links after filtering by included_request_links is: 267
+Filtering for experiment a4SST, covering years [ As above , As above ] in DR
+Number of Request Links which apply to experiment a4SST member 1 and MIPs ['AerChemMIP', 'C4MIP', 'CFMIP', 'CMIP', 'CMIP6', 'CORDEX', 'DAMIP', 'DCPP', 'FAFMIP', 'GMMIP', 'GeoMIP', 'HighResMIP', 'ISMIP6', 'LS3MIP', 'LUMIP', 'OMIP', 'PMIP', 'RFMIP', 'SIMIP', 'ScenarioMIP'] is: 9
+Number of (CMOR variable, grid) pairs for these requestLinks is: 166
+Number once filtered by excluded/included vars and tables and spatial shapes is: 0
+Number of distinct CMOR variables (whatever the grid): 0
+Number of distinct var labels is: 0
+Number of simplified vars is: 0
+Issues with standard names are: []
+homevars file: current_directory/test_levels/input/home_data_request/home_data_request_levels.txt
+Number of 'cmor', 'dev' and 'perso' among home variables: 2
+Number of 'extra' among home variables: 0
+homevars list: zg zg50
+(zg50 day) HOMEVar: Spatial and Temporal Shapes specified DO NOT match CMORvar ones. -> Provided: (XY-HG, time-mean) Expected: (XY-P8, time-mean)
+
+Realms for these CMORvars: atmos
+Processing realm 'aerosol' of context 'surfex' -- no variable asked (skip)
+Processing realm 'atmos atmosChem' of context 'surfex' -- no variable asked (skip)
+Processing realm 'atmos land' of context 'surfex' -- no variable asked (skip)
+Processing realm 'atmosChem' of context 'surfex' -- no variable asked (skip)
+Processing realm 'land' of context 'surfex' -- no variable asked (skip)
+Processing realm 'land landIce' of context 'surfex' -- no variable asked (skip)
+Processing realm 'landIce' of context 'surfex' -- no variable asked (skip)
+Processing realm 'landIce land' of context 'surfex' -- no variable asked (skip)
+Processing realm 'atmos' of context 'surfex'
+processing file current_directory/test_levels/input/xml/ping_surfex.xml:
+OK current_directory/test_levels/input/xml/ping_surfex.xml
+processing file current_directory/test_levels/input/xml/ping_trip.xml:
+OK current_directory/test_levels/input/xml/ping_trip.xml
+
+file_def written as current_directory/test_levels/test_outputs/dr2xml_surfex.xml
+
+
+Some Statistics on actually written variables per frequency+shape...
+                             day P1   1: zg50
+       day    XY-HG    -------- ---   1
+
+       day --------    -------- ---   1
+
+                            Amon P1   1: zg
+       mon   XY-P19    -------- ---   1
+
+       mon --------    -------- ---   1
+
+
+---------- --------    -------- ---   2
+
+
+Some Statistics on actually written variables per variable...
+----------------
+--- VARNAME: zg: Geopotential Height
+----------------
+              *    mon_Amon_XY-P19_1 zg
+------------------
+--- VARNAME: zg50: empty in DR 01.00.21.post1
+------------------
+              *      day_day_XY-HG_1 zg50
+
+ **************************************************
+*
+*              dr2xml version:  3.0
+*   CMIP6 conventions version:  v6.2.4
+*  CMIP6 Data Request version:  01.00.21.post1
+
+*
+ **************************************************
+
+**************************************************
+
+Processing context  trip
+
+**************************************************
+
+Number of distinct CMOR variables (whatever the grid): 0
+Number of distinct var labels is: 0
+Number of simplified vars is: 0
+Issues with standard names are: []
+homevars file: current_directory/test_levels/input/home_data_request/home_data_request_levels.txt
+Number of 'cmor', 'dev' and 'perso' among home variables: 2
+Number of 'extra' among home variables: 0
+homevars list: zg zg50
+(zg50 day) HOMEVar: Spatial and Temporal Shapes specified DO NOT match CMORvar ones. -> Provided: (XY-HG, time-mean) Expected: (XY-P8, time-mean)
+
+Realms for these CMORvars: atmos
+processing file current_directory/test_levels/input/xml/ping_surfex.xml:
+OK current_directory/test_levels/input/xml/ping_surfex.xml
+processing file current_directory/test_levels/input/xml/ping_trip.xml:
+OK current_directory/test_levels/input/xml/ping_trip.xml
+
+file_def written as current_directory/test_levels/test_outputs/dr2xml_trip.xml
+
+
+Some Statistics on actually written variables per frequency+shape...
+
+---------- --------    -------- ---   0
+
+
+Some Statistics on actually written variables per variable...

@@ -1,0 +1,606 @@
+<!--
+XIOS-2.0 xml sub-file for Surfex + Arpege
+
+This file defines some output files
+
+It must be sourced by another XIOS xml file as by
+   <file_definition  src="./arpsfx_files.xml"/>
+
+Ref:
+  - for XIOS : https://forge.ipsl.jussieu.fr/ioserver/wiki
+  - for XIAS (implementation in Surfex and Arpege) : http://www.cnrm-game-meteo.fr/cm/spip.php?article60
+-->
+
+<context id="surfex">
+
+  <axis_definition>
+    <axis_group prec="8" >
+
+      <!-- C3S Standard pressure levels sets -->
+      <axis id="ppstd" axis_ref="ppaxis" n_glo="12"
+        value="(0,11)[ 100000. 92500. 85000. 70000. 50000. 40000. 30000. 20000. 10000. 5000. 3000. 1000. ]"
+      />
+
+    </axis_group>
+  </axis_definition>
+
+<file_definition type="one_file">
+
+  <file_group time_units="days" timeseries="exclusive" append="true" compression_level="1" time_stamp_name="creation_date"  time_stamp_format="%Y-%m-%dT%H:%M:%SZ">
+
+<!-- --------------------------- -->
+<!-- frequency=1ts | realm=atmos -->
+<!-- --------------------------- -->
+    <file ts_prefix="@IOXDIR@/@EXPID@_arpsfx_1ts" name="@EXPID@_arpsfx_1ts" output_freq="1ts" split_freq="1mo" enabled="true" >
+
+<!-- Global attributes : debut -->
+     <variable name="Conventions"  type="string" > CF-1.6 C3S-0.1 </variable>
+     <variable name="title"  type="string" > Meteo-France seasonal forecast model output prepared for C3S </variable>
+     <variable name="source"  type="string" > System8-v20210101:atmos ARPEGEv6.4.2(cy37t1,Tl359L137); ocean NEMOv3.6 (ORCA025 L75); sea-ice GELATOv6; land surface SURFEXv8.0; coupler OASIS MCT v3.0; river routing CTRIP </variable>
+     <variable name="institute_id"  type="string" > lfpw </variable>
+     <variable name="institution"  type="string" > Meteo-France, Toulouse, France </variable>
+     <variable name="contact"  type="string" > http://copernicus-support.ecmwf.int </variable>
+     <variable name="project"  type="string" > C3S Seasonal Forecast </variable>
+     <variable name="comment"  type="string" > Run by CNRM at Meteo-France HPC facilities </variable>
+     <variable name="forecast_type"  type="string" > hindcast </variable>
+     <variable name="modeling_realm"  type="string" > atmos </variable>
+     <variable name="frequency"  type="string" > fix </variable>
+     <variable name="level_type"  type="string" > surface </variable>
+     <variable name="history"  type="string" > none </variable>
+     <variable name="references"  type="string" > http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+     <variable name="commit"  type="string" > 2021-01-01T00:00:00Z http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+     <variable name="summary"  type="string" > Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
+     <variable name="keywords"  type="string" > Seasonal Forecasts, C3S, ECMWF, Copernicus, Climate Change, Climate Services, Earth Science Services, Environmental Advisories, Climate Advisories </variable>
+     <variable name="forecast_reference_time"  type="string" > 1992-12-17T00:00:00Z </variable>
+<!-- Global attributes : fin-->
+
+      <field_group enabled="true" operation="once" expr="@this" default_value="1.e+20" ts_split_freq="1y" ts_enabled="true" >
+        <field_group grid_ref="grid_1deg" >
+          <field field_ref="sftsf" name="sftlf" >
+              <variable name="standard_name" type="string" > land_area_fraction </variable>
+              <variable name="long_name" type="string" > Land Area Fraction </variable>
+              <variable name="coordinates" type="string" > lat lon </variable>
+              <variable name="grid_mapping" type="string" > hcrs </variable>
+              <variable name="units" type="string" > 1 </variable>
+              1-sftsf
+          </field>
+          <field field_ref="orog" name="orog" >
+              <variable name="standard_name" type="string" > surface_altitude </variable>
+              <variable name="long_name" type="string" > Surface Altitude </variable>
+              <variable name="coordinates" type="string" > lat lon </variable>
+              <variable name="grid_mapping" type="string" > hcrs </variable>
+              <variable name="units" type="string" > m </variable>
+          </field>
+        </field_group>
+      </field_group>
+    </file>
+
+<!-- -------------------------- -->
+<!-- frequency=6hr | realm=land -->
+<!-- -------------------------- -->
+    <file ts_prefix="@IOXDIR@/@EXPID@_arpsfx_6hourly" name="@EXPID@_arpsfx_6hourly" output_freq="6h" split_freq="1mo" enabled="true" >
+
+<!-- Global attributes : debut -->
+     <variable name="Conventions"  type="string" > CF-1.6 C3S-0.1 </variable>
+     <variable name="title"  type="string" > Meteo-France seasonal forecast model output prepared for C3S </variable>
+     <variable name="source"  type="string" > System8-v20210101:atmos ARPEGEv6.4.2(cy37t1,Tl359L137); ocean NEMOv3.6 (ORCA025 L75); sea-ice GELATOv6; land surface SURFEXv8.0; coupler OASIS MCT v3.0; river routing CTRIP </variable>
+     <variable name="institute_id"  type="string" > lfpw </variable>
+     <variable name="institution"  type="string" > Meteo-France, Toulouse, France </variable>
+     <variable name="contact"  type="string" > http://copernicus-support.ecmwf.int </variable>
+     <variable name="project"  type="string" > C3S Seasonal Forecast </variable>
+     <variable name="comment"  type="string" > Run by CNRM at Meteo-France HPC facilities </variable>
+     <variable name="forecast_type"  type="string" > hindcast </variable>
+     <variable name="modeling_realm"  type="string" > land </variable>
+     <variable name="frequency"  type="string" > 6hr </variable>
+     <variable name="level_type"  type="string" > surface </variable>
+     <variable name="history"  type="string" > none </variable>
+     <variable name="references"  type="string" > http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+     <variable name="commit"  type="string" > 2021-01-01T00:00:00Z http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+     <variable name="summary"  type="string" > Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
+     <variable name="keywords"  type="string" > Seasonal Forecasts, C3S, ECMWF, Copernicus, Climate Change, Climate Services, Earth Science Services, Environmental Advisories, Climate Advisories </variable>
+     <variable name="forecast_reference_time"  type="string" > 1992-12-17T00:00:00Z </variable>
+<!-- Global attributes : fin-->
+
+<!-- Instantaneous data : operation="instant"-->
+      <field_group enabled="true" operation="instant" expr="@this" default_value="1.e+20" ts_split_freq="1y" ts_enabled="true" >
+        <field_group grid_ref="grid_1deg" >
+          <field field_ref="ts_land" name="tsl" >
+              <variable name="standard_name" type="string" > soil_temperature </variable>
+              <variable name="long_name" type="string" > Temperature of Soil </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime lat lon </variable>
+              <variable name="grid_mapping" type="string" > hcrs </variable>
+          </field>
+        </field_group>
+      </field_group>
+    </file>
+
+
+<!-- --------------------------- -->
+<!-- frequency=6hr | realm=atmos -->
+<!-- --------------------------- -->
+    <file ts_prefix="@IOXDIR@/@EXPID@_arpsfx_6hourly" name="@EXPID@_arpsfx_6hourly" output_freq="6h" split_freq="1mo" enabled="true" >
+
+<!-- Global attributes : debut -->
+     <variable name="Conventions"  type="string" > CF-1.6 C3S-0.1 </variable>
+     <variable name="title"  type="string" > Meteo-France seasonal forecast model output prepared for C3S </variable>
+     <variable name="source"  type="string" > System8-v20210101:atmos ARPEGEv6.4.2(cy37t1,Tl359L137); ocean NEMOv3.6 (ORCA025 L75); sea-ice GELATOv6; land surface SURFEXv8.0; coupler OASIS MCT v3.0; river routing CTRIP </variable>
+     <variable name="institute_id"  type="string" > lfpw </variable>
+     <variable name="institution"  type="string" > Meteo-France, Toulouse, France </variable>
+     <variable name="contact"  type="string" > http://copernicus-support.ecmwf.int </variable>
+     <variable name="project"  type="string" > C3S Seasonal Forecast </variable>
+     <variable name="comment"  type="string" > Run by CNRM at Meteo-France HPC facilities </variable>
+     <variable name="forecast_type"  type="string" > hindcast </variable>
+     <variable name="modeling_realm"  type="string" > atmos </variable>
+     <variable name="frequency"  type="string" > 6hr </variable>
+     <variable name="level_type"  type="string" > surface </variable>
+     <variable name="history"  type="string" > none </variable>
+     <variable name="references"  type="string" > http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+     <variable name="commit"  type="string" > 2021-01-01T00:00:00Z http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+     <variable name="summary"  type="string" > Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
+     <variable name="keywords"  type="string" > Seasonal Forecasts, C3S, ECMWF, Copernicus, Climate Change, Climate Services, Earth Science Services, Environmental Advisories, Climate Advisories </variable>
+     <variable name="forecast_reference_time"  type="string" > 1992-12-17T00:00:00Z </variable>
+<!-- Global attributes : fin-->
+
+<!-- Instantaneous data : operation="instant"-->
+      <field_group enabled="true" operation="instant" expr="@this" default_value="1.e+20" ts_split_freq="1y" ts_enabled="true" >
+        <field_group grid_ref="grid_1deg" >
+          <field field_ref="psl" name="psl" >
+              <variable name="standard_name" type="string" > air_pressure_at_sea_level </variable>
+              <variable name="long_name" type="string" > Sea Level Pressure </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime lat lon </variable>
+              <variable name="grid_mapping" type="string" > hcrs </variable>
+          </field>
+          <field field_ref="clt" name="clt" >
+              <variable name="standard_name" type="string" > cloud_area_fraction </variable>
+              <variable name="long_name" type="string" > Total Cloud Fraction </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime lat lon </variable>
+              <variable name="grid_mapping" type="string" > hcrs </variable>
+          </field>
+          <field field_ref="tas" name="tas" >
+              <variable name="standard_name" type="string" > air_temperature </variable>
+              <variable name="long_name" type="string" > Near-Surface Air Temperature </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime height lat lon </variable>
+              <variable name="grid_mapping" type="string" > hcrs </variable>
+          </field>
+          <field field_ref="tdas" name="tdps" >
+              <variable name="standard_name" type="string" > dew_point_temperature </variable>
+              <variable name="long_name" type="string" > 2m Dewpoint Temperature </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime height lat lon </variable>
+              <variable name="grid_mapping" type="string" > hcrs </variable>
+          </field>
+          <field field_ref="uas" name="uas" >
+              <variable name="standard_name" type="string" > x_wind </variable>
+              <variable name="long_name" type="string" > Eastward Near-Surface Wind </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime height lat lon </variable>
+              <variable name="grid_mapping" type="string" > hcrs </variable>
+          </field>
+          <field field_ref="vas" name="vas" >
+              <variable name="standard_name" type="string" > y_wind </variable>
+              <variable name="long_name" type="string" > Northward Near-Surface Wind </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime height lat lon </variable>
+              <variable name="grid_mapping" type="string" > hcrs </variable>
+          </field>
+        </field_group>
+      </field_group>
+    </file>
+
+<!-- ---------------------------- -->
+<!-- frequency=12hr | realm=atmos -->
+<!-- ---------------------------- -->
+    <file ts_prefix="@IOXDIR@/@EXPID@_arpsfx_12hourly" name="@EXPID@_arpsfx_12hourly" output_freq="12h" split_freq="1mo" enabled="true" >
+
+<!-- Global attributes : debut -->
+     <variable name="Conventions"  type="string" > CF-1.6 C3S-0.1 </variable>
+     <variable name="title"  type="string" > Meteo-France seasonal forecast model output prepared for C3S </variable>
+     <variable name="source"  type="string" > System8-v20210101:atmos ARPEGEv6.4.2(cy37t1,Tl359L137); ocean NEMOv3.6 (ORCA025 L75); sea-ice GELATOv6; land surface SURFEXv8.0; coupler OASIS MCT v3.0; river routing CTRIP </variable>
+     <variable name="institute_id"  type="string" > lfpw </variable>
+     <variable name="institution"  type="string" > Meteo-France, Toulouse, France </variable>
+     <variable name="contact"  type="string" > http://copernicus-support.ecmwf.int </variable>
+     <variable name="project"  type="string" > C3S Seasonal Forecast </variable>
+     <variable name="comment"  type="string" > Run by CNRM at Meteo-France HPC facilities </variable>
+     <variable name="forecast_type"  type="string" > hindcast </variable>
+     <variable name="modeling_realm"  type="string" > atmos </variable>
+     <variable name="frequency"  type="string" > 12hr </variable>
+     <variable name="level_type"  type="string" > pressure </variable>
+     <variable name="history"  type="string" > none </variable>
+     <variable name="references"  type="string" > http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+     <variable name="commit"  type="string" > 2021-01-01T00:00:00Z http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+     <variable name="summary"  type="string" > Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
+     <variable name="keywords"  type="string" > Seasonal Forecasts, C3S, ECMWF, Copernicus, Climate Change, Climate Services, Earth Science Services, Environmental Advisories, Climate Advisories </variable>
+     <variable name="forecast_reference_time"  type="string" > 1992-12-17T00:00:00Z </variable>
+<!-- Global attributes : fin-->
+
+<!-- Instantaneous data : operation="instant"-->
+      <field_group enabled="true" operation="instant" expr="@this" default_value="1.e+20" ts_split_freq="1y" ts_enabled="true" >
+        <field_group grid_ref="grid_1deg_ppstd" >
+	  <field field_ref="ta_pp"  name="ta" >
+              <variable name="standard_name" type="string" > air_temperature </variable>
+              <variable name="long_name" type="string" > Air Temperature </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime plev lat lon </variable>
+          </field>
+	  <field field_ref="ua_pp"  name="ua" >
+              <variable name="standard_name" type="string" > x_wind </variable>
+              <variable name="long_name" type="string" > Eastward Wind </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime plev lat lon </variable>
+          </field>
+	  <field field_ref="va_pp"  name="va" >
+              <variable name="standard_name" type="string" > y_wind </variable>
+              <variable name="long_name" type="string" > Northward Wind </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime plev lat lon </variable>
+          </field>
+	  <field field_ref="zg_pp"  name="zg" >
+              <variable name="standard_name" type="string" > geopotential_height </variable>
+              <variable name="long_name" type="string" > Geopotential Height </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime plev lat lon </variable>
+          </field>
+	  <field field_ref="hus_pp" name="hus" >
+              <variable name="standard_name" type="string" > specific_humidity </variable>
+              <variable name="long_name" type="string" > Specific Humidity </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime plev lat lon </variable>
+          </field>
+        </field_group>
+      </field_group>
+    </file>
+
+<!-- -------------------------- -->
+<!-- frequency=day | realm=land -->
+<!-- -------------------------- -->
+    <file ts_prefix="@IOXDIR@/@EXPID@_arpsfx_daily" name="@EXPID@_arpsfx_daily" output_freq="1d" split_freq="1mo" enabled="true" >
+
+<!-- Global attributes : debut -->
+     <variable name="Conventions"  type="string" > CF-1.6 C3S-0.1 </variable>
+     <variable name="title"  type="string" > Meteo-France seasonal forecast model output prepared for C3S </variable>
+     <variable name="source"  type="string" > System8-v20210101:atmos ARPEGEv6.4.2(cy37t1,Tl359L137); ocean NEMOv3.6 (ORCA025 L75); sea-ice GELATOv6; land surface SURFEXv8.0; coupler OASIS MCT v3.0; river routing CTRIP </variable>
+     <variable name="institute_id"  type="string" > lfpw </variable>
+     <variable name="institution"  type="string" > Meteo-France, Toulouse, France </variable>
+     <variable name="contact"  type="string" > http://copernicus-support.ecmwf.int </variable>
+     <variable name="project"  type="string" > C3S Seasonal Forecast </variable>
+     <variable name="comment"  type="string" > Run by CNRM at Meteo-France HPC facilities </variable>
+     <variable name="forecast_type"  type="string" > hindcast </variable>
+     <variable name="modeling_realm"  type="string" > land </variable>
+     <variable name="frequency"  type="string" > day </variable>
+     <variable name="level_type"  type="string" > surface </variable>
+     <variable name="history"  type="string" > none </variable>
+     <variable name="references"  type="string" > http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+     <variable name="commit"  type="string" > 2021-01-01T00:00:00Z http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+     <variable name="summary"  type="string" > Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
+     <variable name="keywords"  type="string" > Seasonal Forecasts, C3S, ECMWF, Copernicus, Climate Change, Climate Services, Earth Science Services, Environmental Advisories, Climate Advisories </variable>
+     <variable name="forecast_reference_time"  type="string" > 1992-12-17T00:00:00Z </variable>
+<!-- Global attributes : fin-->
+
+<!-- Time aggregated data : operation="average"-->
+      <field_group enabled="true" operation="average" expr="@this" default_value="1.e+20" ts_split_freq="1y" ts_enabled="true" >
+        <field_group grid_ref="grid_1deg" >
+	  <field field_ref="evspsbl" name="lwee" >
+              <variable name="standard_name" type="string" > lwe_thickness_of_water_evaporation_amount </variable>
+              <variable name="long_name" type="string" > Liquid Water Equivalent Thickness of Evaporation Amount </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime lat lon </variable>
+              <variable name="grid_mapping" type="string" > hcrs </variable>
+              <variable name="units" type="string" > m </variable>
+              evspsbl*(-86.4)
+          </field>
+	  <field field_ref="mrros" name="mrroas" >
+              <variable name="standard_name" type="string" > surface_runoff_amount </variable>
+              <variable name="long_name" type="string" > Surface Run-off Amount </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime lat lon </variable>
+              <variable name="grid_mapping" type="string" > hcrs </variable>
+              <variable name="units" type="string" > kg m-2 </variable>
+              mrros*86400
+          </field>
+	  <field field_ref="mrrob" name="mrroab" >
+              <variable name="standard_name" type="string" > subsurface_runoff_amount </variable>
+              <variable name="long_name" type="string" > Subsurface Run-off Amount </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime lat lon </variable>
+              <variable name="grid_mapping" type="string" > hcrs </variable>
+              <variable name="units" type="string" > kg m-2 </variable>
+              mrrob*86400
+          </field>
+        </field_group>
+      </field_group>
+<!-- Instantaneous data : operation="instant"-->
+      <field_group enabled="true" operation="instant" expr="@this" default_value="1.e+20" ts_split_freq="1y" ts_enabled="true" >
+        <field_group grid_ref="grid_1deg" >
+          <field field_ref="sn_dens" name="rhosn" >
+              <variable name="standard_name" type="string" > snow_density </variable>
+              <variable name="long_name" type="string" > Snow Density </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime lat lon </variable>
+              <variable name="grid_mapping" type="string" > hcrs </variable>
+              <variable name="units" type="string" > kg m-3 </variable>
+          </field>
+          <field field_ref="snw" name="lwesnw">
+              <variable name="standard_name" type="string" > lwe_thickness_of_surface_snow_amount </variable>
+              <variable name="long_name" type="string" > Liquid Water Equivalent Thickness of Surface Snow Amount </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime lat lon </variable>
+              <variable name="grid_mapping" type="string" > hcrs </variable>
+              <variable name="units" type="string" > m </variable>
+              snw/1000
+          </field>
+          <field field_ref="prw" name="prw" >
+              <variable name="standard_name" type="string" > atmosphere_mass_content_of_water_vapor </variable>
+              <variable name="long_name" type="string" > Water Vapor Path </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime lat lon </variable>
+              <variable name="grid_mapping" type="string" > hcrs </variable>
+          </field>
+          <field field_ref="lwp" name="cllvi" >
+              <variable name="standard_name" type="string" > atmosphere_mass_content_of_cloud_liquid_water </variable>
+              <variable name="long_name" type="string" > Liquid Water Path </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime lat lon </variable>
+              <variable name="grid_mapping" type="string" > hcrs </variable>
+          </field>
+          <field field_ref="iwp" name="clivi" >
+              <variable name="standard_name" type="string" > atmosphere_mass_content_of_cloud_ice </variable>
+              <variable name="long_name" type="string" > Ice Water Path </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime lat lon </variable>
+              <variable name="grid_mapping" type="string" > hcrs </variable>
+          </field>
+        </field_group>
+      </field_group>
+    </file>
+<!-- -------------------------------------------- -->
+<!-- frequency=day | realm=land | level-type=soil -->
+<!-- -------------------------------------------- -->
+    <file ts_prefix="@IOXDIR@/@EXPID@_arpsfx_daily" name="@EXPID@_arpsfx_daily" output_freq="1d" split_freq="1mo" enabled="true" >
+
+<!-- Global attributes : debut -->
+     <variable name="Conventions"  type="string" > CF-1.6 C3S-0.1 </variable>
+     <variable name="title"  type="string" > Meteo-France seasonal forecast model output prepared for C3S </variable>
+     <variable name="source"  type="string" > System8-v20210101:atmos ARPEGEv6.4.2(cy37t1,Tl359L137); ocean NEMOv3.6 (ORCA025 L75); sea-ice GELATOv6; land surface SURFEXv8.0; coupler OASIS MCT v3.0; river routing CTRIP </variable>
+     <variable name="institute_id"  type="string" > lfpw </variable>
+     <variable name="institution"  type="string" > Meteo-France, Toulouse, France </variable>
+     <variable name="contact"  type="string" > http://copernicus-support.ecmwf.int </variable>
+     <variable name="project"  type="string" > C3S Seasonal Forecast </variable>
+     <variable name="comment"  type="string" > Run by CNRM at Meteo-France HPC facilities </variable>
+     <variable name="forecast_type"  type="string" > hindcast </variable>
+     <variable name="modeling_realm"  type="string" > land </variable>
+     <variable name="frequency"  type="string" > day </variable>
+     <variable name="level_type"  type="string" > soil </variable>
+     <variable name="history"  type="string" > none </variable>
+     <variable name="references"  type="string" > http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+     <variable name="commit"  type="string" > 2021-01-01T00:00:00Z http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+     <variable name="summary"  type="string" > Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
+     <variable name="keywords"  type="string" > Seasonal Forecasts, C3S, ECMWF, Copernicus, Climate Change, Climate Services, Earth Science Services, Environmental Advisories, Climate Advisories </variable>
+     <variable name="forecast_reference_time"  type="string" > 1992-12-17T00:00:00Z </variable>
+<!-- Global attributes : fin-->
+
+<!-- Time aggregated data : operation="average"-->
+      <field_group enabled="true" operation="average" expr="@this" default_value="1.e+20" ts_split_freq="1y" ts_enabled="true" >
+        <field_group grid_ref="grid_1deg_glayers" >
+          <field field_ref="mrsol" name="mrlsl" >
+              <variable name="standard_name" type="string" > moisture_content_of_soil_layer </variable>
+              <variable name="long_name" type="string" > Water Content per Unit Area of Soil Layers </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime depth lat lon </variable>
+              <variable name="grid_mapping" type="string" > hcrs </variable>
+              <variable name="units" type="string" > kg m-2 </variable>
+          </field>
+        </field_group>
+      </field_group>
+    </file>
+
+<!-- ---------------------------- -->
+<!-- frequency=day | realm=atmos -->
+<!-- ---------------------------- -->
+    <file ts_prefix="@IOXDIR@/@EXPID@_arpsfx_daily" name="@EXPID@_arpsfx_daily" output_freq="1d" split_freq="1mo" enabled="true" >
+
+<!-- Global attributes : debut -->
+     <variable name="Conventions"  type="string" > CF-1.6 C3S-0.1 </variable>
+     <variable name="title"  type="string" > Meteo-France seasonal forecast model output prepared for C3S </variable>
+     <variable name="source"  type="string" > System8-v20210101:atmos ARPEGEv6.4.2(cy37t1,Tl359L137); ocean NEMOv3.6 (ORCA025 L75); sea-ice GELATOv6; land surface SURFEXv8.0; coupler OASIS MCT v3.0; river routing CTRIP </variable>
+     <variable name="institute_id"  type="string" > lfpw </variable>
+     <variable name="institution"  type="string" > Meteo-France, Toulouse, France </variable>
+     <variable name="contact"  type="string" > http://copernicus-support.ecmwf.int </variable>
+     <variable name="project"  type="string" > C3S Seasonal Forecast </variable>
+     <variable name="comment"  type="string" > Run by CNRM at Meteo-France HPC facilities </variable>
+     <variable name="forecast_type"  type="string" > hindcast </variable>
+     <variable name="modeling_realm"  type="string" > atmos </variable>
+     <variable name="frequency"  type="string" > day </variable>
+     <variable name="level_type"  type="string" > surface </variable>
+     <variable name="history"  type="string" > none </variable>
+     <variable name="references"  type="string" > http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+     <variable name="commit"  type="string" > 2021-01-01T00:00:00Z http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+     <variable name="summary"  type="string" > Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
+     <variable name="keywords"  type="string" > Seasonal Forecasts, C3S, ECMWF, Copernicus, Climate Change, Climate Services, Earth Science Services, Environmental Advisories, Climate Advisories </variable>
+     <variable name="forecast_reference_time"  type="string" > 1992-12-17T00:00:00Z </variable>
+<!-- Global attributes : fin-->
+
+<!-- Time aggregated data : operation="average"-->
+      <field_group enabled="true" operation="average" expr="@this" default_value="1.e+20" ts_split_freq="1y" ts_enabled="true" >
+        <field_group grid_ref="grid_1deg" >
+          <field field_ref="tas_min" name="tasmin" >
+              <variable name="standard_name" type="string" > air_temperature </variable>
+              <variable name="long_name" type="string" > Daily Minimum Near-Surface Air Temperature </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime height lat lon </variable>
+              <variable name="grid_mapping" type="string" > hcrs </variable>
+          </field>
+          <field field_ref="tas_max" name="tasmax" >
+              <variable name="standard_name" type="string" > air_temperature </variable>
+              <variable name="long_name" type="string" > Daily Maximum Near-Surface Air Temperature </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime height lat lon </variable>
+              <variable name="grid_mapping" type="string" > hcrs </variable>
+          </field>
+          <field field_ref="hfss" name="hfss" >
+              <variable name="standard_name" type="string" > surface_upward_sensible_heat_flux </variable>
+              <variable name="long_name" type="string" > Surface Upward Sensible Heat Flux </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime lat lon </variable>
+              <variable name="grid_mapping" type="string" > hcrs </variable>
+          </field>
+          <field field_ref="hfls" name="hfls" >
+              <variable name="standard_name" type="string" > surface_upward_latent_heat_flux </variable>
+              <variable name="long_name" type="string" > Surface Upward Latent Heat Flux </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime lat lon </variable>
+              <variable name="grid_mapping" type="string" > hcrs </variable>
+          </field>
+          <field field_ref="rsds" name="rsds" >
+              <variable name="standard_name" type="string" > surface_downwelling_shortwave_flux_in_air </variable>
+              <variable name="long_name" type="string" > Surface Downwelling Shortwave Radiation </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime lat lon </variable>
+              <variable name="grid_mapping" type="string" > hcrs </variable>
+          </field>
+          <field field_ref="rlds" name="rlds" >
+              <variable name="standard_name" type="string" > surface_downwelling_longwave_flux_in_air </variable>
+              <variable name="long_name" type="string" > Surface Downwelling Longwave Radiation </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime lat lon </variable>
+              <variable name="grid_mapping" type="string" > hcrs </variable>
+          </field>
+          <field field_ref="rss" name="rss" >
+              <variable name="standard_name" type="string" > surface_net_downward_shortwave_flux </variable>
+              <variable name="long_name" type="string" > Net Shortwave Surface Radiation </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime lat lon </variable>
+              <variable name="grid_mapping" type="string" > hcrs </variable>
+          </field>
+          <field field_ref="rls" name="rls" >
+              <variable name="standard_name" type="string" > surface_net_downward_longwave_flux </variable>
+              <variable name="long_name" type="string" > Net Longwave Surface Radiation </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime lat lon </variable>
+              <variable name="grid_mapping" type="string" > hcrs </variable>
+          </field>
+          <field field_ref="rlut" name="rlt" >
+              <variable name="standard_name" type="string" > toa_net_downward_longwave_flux </variable>
+              <variable name="long_name" type="string" > TOA Net Longwave Radiation </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime lat lon </variable>
+              <variable name="grid_mapping" type="string" > hcrs </variable>
+          </field>
+	  <field field_ref="rst" name="rst" >
+              <variable name="standard_name" type="string" > toa_net_downward_shortwave_flux </variable>
+              <variable name="long_name" type="string" > TOA Net Shortwave Radiation </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime lat lon </variable>
+              <variable name="grid_mapping" type="string" > hcrs </variable>
+          </field>
+	  <field field_ref="rsdt" name="rsdt" >
+              <variable name="standard_name" type="string" > toa_incoming_shortwave_flux </variable>
+              <variable name="long_name" type="string" > TOA Incident Shortwave Radiation </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime lat lon </variable>
+              <variable name="grid_mapping" type="string" > hcrs </variable>
+          </field>
+	  <field field_ref="tauu" name="tauu" >
+              <variable name="standard_name" type="string" > surface_downward_eastward_stress </variable>
+              <variable name="long_name" type="string" > Surface Downward Eastward Wind Stress </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime lat lon </variable>
+              <variable name="grid_mapping" type="string" > hcrs </variable>
+          </field>
+	  <field field_ref="tauv" name="tauv" >
+              <variable name="standard_name" type="string" > surface_downward_northward_stress </variable>
+              <variable name="long_name" type="string" > Surface Downward Northward Wind Stress </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime lat lon </variable>
+              <variable name="grid_mapping" type="string" > hcrs </variable>
+          </field>
+          <field field_ref="wsgmax" name="wsgmax" >
+              <variable name="standard_name" type="string" > wind_speed_of_gust </variable>
+              <variable name="long_name" type="string" > Maximum Wind Speed of Gust </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime height lat lon </variable>
+              <variable name="grid_mapping" type="string" > hcrs </variable>
+          </field>
+	  <field field_ref="pr" name="lwepr" >
+              <variable name="standard_name" type="string" > lwe_thickness_of_precipitation_amount </variable>
+              <variable name="long_name" type="string" > Liquid Water Equivalent Thickness of Total Precipitation Amount </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime lat lon </variable>
+              <variable name="grid_mapping" type="string" > hcrs </variable>
+              <variable name="units" type="string" > m </variable>
+              pr*86400/1000
+          </field>
+	  <field field_ref="prc" name="lweprc" >
+              <variable name="standard_name" type="string" > lwe_thickness_of_convective_precipitation_amount </variable>
+              <variable name="long_name" type="string" > Liquid Water Equivalent Thickness of Convective Precipitation Amount </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime lat lon </variable>
+              <variable name="grid_mapping" type="string" > hcrs </variable>
+              <variable name="units" type="string" > m </variable>
+              prc*86400/1000
+          </field>
+          <field field_ref="prsn" name="lweprsn" >
+              <variable name="standard_name" type="string" > lwe_thickness_of_snowfall_amount </variable>
+              <variable name="long_name" type="string" > Liquid Water Equivalent Thickness of Snowfall Amount </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime lat lon </variable>
+              <variable name="grid_mapping" type="string" > hcrs </variable>
+              <variable name="units" type="string" > m </variable>
+              prsn*86400/1000
+          </field>
+        </field_group>
+      </field_group>
+    </file>
+<!-- ---------------------------------------------- -->
+<!-- For PASTEL : frequency=6hr | realm=atmos ----- -->
+<!-- ---------------------------------------------- -->
+    <file ts_prefix="@IOXDIR@/PASTEL_@EXPID@_arpsfx_6hourly" name="PASTEL_@EXPID@_arpsfx_6hourly" output_freq="6h" split_freq="1mo" enabled="true" >
+
+
+<!-- Instantaneous data : operation="instant"-->
+      <field_group enabled="true" operation="instant" expr="@this" default_value="1.e+20" ts_split_freq="1y" ts_enabled="true" >
+        <field_group grid_ref="grid_1deg" >
+          <field field_ref="ts" name="ts" >
+              <variable name="standard_name" type="string" > total_surface_temperature </variable>
+              <variable name="long_name" type="string" > Total Surface Temperature </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime lat lon </variable>
+              <variable name="grid_mapping" type="string" > hcrs </variable>
+          </field>
+        </field_group>
+      </field_group>
+    </file>
+<!-- ------------------------------------- -->
+<!-- For PASTEL frequency=day ------------ -->
+<!-- ------------------------------------- -->
+    <file ts_prefix="@IOXDIR@/PASTEL_@EXPID@_arpsfx_daily" name="PASTEL_@EXPID@_arpsfx_daily" output_freq="1d" split_freq="1mo" enabled="true" >
+
+<!-- Instantaneous data : operation="instant"-->
+      <field_group enabled="true" operation="instant" expr="@this" default_value="1.e+20" ts_split_freq="1y" ts_enabled="true" >
+        <field_group grid_ref="grid_1deg" >
+          <field field_ref="mrsow" name="mrsow" >
+              <variable name="standard_name" type="string" > total_soil_wetness_over_land </variable>
+              <variable name="long_name" type="string" > Total Soil Wetness Over Land </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime lat lon </variable>
+              <variable name="grid_mapping" type="string" > hcrs </variable>
+              <variable name="units" type="string" > - </variable>
+          </field>
+          <field field_ref="rzwc" name="rzwc" >
+              <variable name="standard_name" type="string" > root_zone_soil_moisture_over_land </variable>
+              <variable name="long_name" type="string" > Root Zone Soil Moisture Over Land </variable>
+              <variable name="coordinates" type="string" > reftime realization time leadtime lat lon </variable>
+              <variable name="grid_mapping" type="string" > hcrs </variable>
+              <variable name="units" type="string" > kg m-2 </variable>
+          </field>
+        </field_group>
+      </field_group>
+
+<!-- Time aggregated data : operation="average"-->
+      <field_group enabled="true" operation="average" expr="@this" default_value="1.e+20" ts_split_freq="1y" ts_enabled="true" >
+        <field_group grid_ref="grid_1deg_tlayers" >
+          <field field_ref="tsl" name="st" >
+              <variable name="standard_name" type="string" > soil_temperature </variable>
+          </field>
+        </field_group>
+      </field_group>
+    </file>
+<!-- ---------------------------------------------- -->
+<!-- For GMME/TROPICS : frequency=day | realm=atmos -->
+<!-- ---------------------------------------------- -->
+    <file ts_prefix="@IOXDIR@/GMME_TROPICS_@EXPID@_arpsfx_daily" name="GMME_TROPICS_@EXPID@_arpsfx_daily" output_freq="1d" split_freq="1mo" enabled="true" >
+
+<!-- Global attributes : debut -->
+     <variable name="Conventions"  type="string" > CF-1.6 C3S-0.1 </variable>
+     <variable name="title"  type="string" > Meteo-France seasonal forecast model output prepared for C3S </variable>
+     <variable name="source"  type="string" > System8-v20210101:atmos ARPEGEv6.4.2(cy37t1,Tl359L137); ocean NEMOv3.6 (ORCA025 L75); sea-ice GELATOv6; land surface SURFEXv8.0; coupler OASIS MCT v3.0; river routing CTRIP </variable>
+     <variable name="institution"  type="string" > Meteo-France, Toulouse, France </variable>
+     <variable name="project"  type="string" > C3S Seasonal Forecast </variable>
+     <variable name="comment"  type="string" > Run by CNRM at Meteo-France HPC facilities </variable>
+     <variable name="forecast_type"  type="string" > hindcast </variable>
+     <variable name="modeling_realm"  type="string" > atmos </variable>
+     <variable name="frequency"  type="string" > day </variable>
+     <variable name="level_type"  type="string" > surface </variable>
+     <variable name="history"  type="string" > none </variable>
+     <variable name="references"  type="string" > http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+     <variable name="commit"  type="string" > 2021-01-01T00:00:00Z http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+<!-- Global attributes : fin-->
+
+<!-- Time aggregated data : operation="average"-->
+      <field_group enabled="true" operation="average" expr="@this" default_value="1.e+20" ts_split_freq="1y" ts_enabled="true" >
+        <field_group grid_ref="grid_1deg" >
+          <field field_ref="prw" name="prw" >
+              <variable name="standard_name" type="string" > precipitable_water </variable>
+              <variable name="long_name" type="string" > Precipitable Water </variable>
+          </field>
+        </field_group>
+      </field_group>
+    </file>
+
+  </file_group>
+</file_definition>
+
+</context>

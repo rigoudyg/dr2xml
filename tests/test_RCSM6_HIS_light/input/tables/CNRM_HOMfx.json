@@ -1,0 +1,36 @@
+{
+    "Header": {
+        "data_specs_version": "01.00.21",
+        "table_id": "Table CNRM_HOMfx",
+        "realm": "atmos land aerosol",
+        "cmor_version": "3.2",
+        "table_date": "27 Feb 2018",
+        "missing_value": "1e20",
+        "product": "model-output",
+        "approx_interval": "0.250000",
+        "generic_levels": "",
+        "mip_era": "CMIP6",
+        "Conventions": "CF-1.7 CMIP-6.0"
+    },
+    "variable_entry": {
+        "sftlaf": {
+            "frequency": "mon",
+            "modeling_realm": "land",
+            "standard_name": "lake_area_fraction",
+            "units": "%",
+            "cell_methods": "area: mean",
+            "cell_measures": "area: areacella",
+            "long_name": "Percentage of the Grid Cell Occupied by Lake",
+            "comment": "",
+            "dimensions": "longitude latitude",
+            "out_name": "sftlaf",
+            "type": "real",
+            "positive": "",
+            "valid_min": "0.0",
+            "valid_max": "1.0",
+            "ok_min_mean_abs": "",
+            "ok_max_mean_abs": "",
+            "cnrm_priority": "1"
+        }
+    }
+}

@@ -1,0 +1,2421 @@
+
+ **************************************************
+*
+*              dr2xml version:  3.0
+*   CMIP6 conventions version:  v6.2.4
+*  CMIP6 Data Request version:  01.00.21.post1
+
+*
+ **************************************************
+
+**************************************************
+
+Processing context  nemo
+
+**************************************************
+
+Number of Request Links which apply to MIPS ['AerChemMIP', 'C4MIP', 'CFMIP', 'CMIP', 'CMIP6', 'CORDEX', 'DAMIP', 'DCPP', 'FAFMIP', 'GMMIP', 'GeoMIP', 'HighResMIP', 'ISMIP6', 'LS3MIP', 'LUMIP', 'OMIP', 'PMIP', 'RFMIP', 'SIMIP', 'ScenarioMIP']  is: 268
+Number of Request Links after filtering by excluded_request_links is: 267
+Number of Request Links after filtering by included_request_links is: 267
+Filtering for experiment ssp585, covering years [ 2015.0 , 2100.0 ] in DR
+Number of Request Links which apply to experiment ssp585 member 3 and MIPs ['AerChemMIP', 'C4MIP', 'CFMIP', 'CMIP', 'CMIP6', 'CORDEX', 'DAMIP', 'DCPP', 'FAFMIP', 'GMMIP', 'GeoMIP', 'HighResMIP', 'ISMIP6', 'LS3MIP', 'LUMIP', 'OMIP', 'PMIP', 'RFMIP', 'SIMIP', 'ScenarioMIP'] is: 18
+Number of (CMOR variable, grid) pairs for these requestLinks is: 270
+Number once filtered by excluded/included vars and tables and spatial shapes is: 230
+Number of distinct CMOR variables (whatever the grid): 209
+Number of distinct var labels is: 195
+Number of simplified vars is: 209
+Issues with standard names are: ['cLand', 'cTotFireLut', 'fAnthDisturb', 'fBNF', 'fCLandToOcean', 'fDeforestToProduct', 'fFireNat', 'fHarvestToProduct', 'fLulccAtmLut', 'fLulccProductLut', 'fN2O', 'fNAnthDisturb', 'fNLandToOcean', 'fNLitterSoil', 'fNProduct', 'fNVegLitter', 'fNVegSoil', 'fNdep', 'fNfert', 'fNgas', 'fNleach', 'fNloss', 'fNnetmin', 'fNup', 'fProductDecomp', 'fProductDecompLut', 'irrLut', 'laiLut', 'mrlso', 'mrsfl', 'mrsll', 'nLand', 'nLitter', 'nMineral', 'nProduct', 'nSoil', 'nVeg', 'nwdFracLut', 'sitimefrac', 'sweLut']
+homevars file: current_directory/test_AOESM_ssp585_CM6_r3/input/home_data_request/home_data_request_arpege_GCM.txt current_directory/test_AOESM_ssp585_CM6_r3/input/home_data_request/home_data_request_surfex_GCM.txt current_directory/test_AOESM_ssp585_CM6_r3/input/home_data_request/home_data_request_trip_GCM.txt current_directory/test_AOESM_ssp585_CM6_r3/input/home_data_request/home_data_request_nemo_GCM.txt current_directory/test_AOESM_ssp585_CM6_r3/input/home_data_request/home_data_request_arpege_ESM_AddOn.txt current_directory/test_AOESM_ssp585_CM6_r3/input/home_data_request/home_data_request_surfex_ESM_AddOn.txt current_directory/test_AOESM_ssp585_CM6_r3/input/home_data_request/home_data_request_trip_ESM_AddOn.txt current_directory/test_AOESM_ssp585_CM6_r3/input/home_data_request/home_data_request_nemo_ESM_AddOn.txt
+For extra table CNRM_HOMEPmon (which has 9 variables):
+	Variables which dim was found in extra coordinates table:
+		            Plev39hm: co no2 o3
+
+		             plev7hm: hus ta ua va wap zg
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		         XY-Plev39hm: co no2 o3
+
+		          XY-plev7hm: hus ta ua va wap zg
+
+For extra table CNRM_HOMALmon (which has 93 variables):
+	Variables which dim was found in extra coordinates table:
+		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		             XY-sza5: parasolCRefl
+
+		       XY-tau|plev7c: clmodis
+
+		             XY-temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+For extra table CNRM_HOMAL3hrPt (which has 93 variables):
+	Variables which dim was found in extra coordinates table:
+		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		             XY-sza5: parasolCRefl
+
+		       XY-tau|plev7c: clmodis
+
+		             XY-temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+For extra table CNRM_HOMOImon (which has 103 variables):
+	Variables which dim was found in extra coordinates table:
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+
+Number of 'cmor', 'dev' and 'perso' among home variables: 344
+Number of 'extra' among home variables: 142
+homevars list: psl ps pr prsn prc rsdscs rsuscs rldscs rsdt rsut rsutcs rsutaf rsutcsaf rlut rlutcs rlutaf rlutcsaf prw clt clwvi clivi intuaw intvaw intuadse intvadse toz ta ua va zg hus hur wap ztp ptp tas rsds rsus rlds rlus mrso mrsos mrfso mrros mrro tsl snd snw snc lwsnl mrtws dmlt prveg gpp npp ts evspsbl evspsblpot sbl hfls hfss tasmin tasmax hfdsl albsn cw rzwc mrsow et uas vas sfcWind sfcWindmax hurs huss tauu tauv wtd rivo areacello tos zos sos rsntds hfds hfx hfy wfo friver ficeberg2d tauuo tauvo t20d mlotst mlotstmin hcont300 bigthetao bigthetaoga so soga sosga uo vo wo umo vmo wmo thkcello mfo msftyz htovgyre htovovrt zostoga siconc sivol sithick sisnthick sitemptop siu siv sisaltmass sitempsnic sihc sisnhc sidmassth sidmassdyn sivoln sivols siextentn siextents siage siareaacrossline siarean siareas sicompstren sidconcdyn sidconcth sidmassdyn sidmassevapsubl sidmassgrowthbot sidmassgrowthwat sidmasslat sidmassmeltbot sidmassmelttop sidmasssi sidmassth sidmasstranx sidmasstrany sidragbot sifb siflcondbot siflcondtop siflfwbot siflfwdrain sifllatstop sifllwutop siflsensupbot siflswdbot siflswutop sihc simassacrossline sipr sisnhc sistrxdtop sistrxubot sistrydtop sistryubot sitempbot sitempsnic sndmassdyn sndmassmelt sndmasssi sndmasssnf sndmasssubl sndmasswindrif snmassacrossline od550aer od550ss od550dust od550so4 od550bc od550oa abs550aer emiso2 emiss emidust emiso4 emibc emioa dryso2 dryss drydust dryso4 drybc dryoa wetss wetdust wetso4 wetbc wetoa sconcss sconcdust sconcso4 bry ch4 cly h2o hcl hno3 ho2 meanage n2o noy o3 oh co23D co2s lai gppGrass gppTree ra raGrass raTree rh rhSoil rhLitter rhGrass rhTree nppGrass nppTree nep cVeg cVegGrass cVegTree cLitter cSoil cSoilFast cSoilSlow cSoilGrass cSoilTree cSoilMedium cProduct cLand cLeaf cStem cWood cRoot cLitterSurf cLitterSubSurf cLitterBelow cLitterGrass cLitterTree fVegLitter fLitterSoil burntFractionAll fFireNat fFireAll fVegFire fDeforestToAtmos fDeforestToProduct fProductDecomp fLuc nbp cSoilPools tSoilPools chlos dfe dissic dpco2 epc100 epcalc100 epsi100 fgco2 fgo2 intdic intdoc intpp no3 o2 ph po4 remoc si spco2 talk bfe bsi calc chldiat chlmisc co3 co3satcalc dcalc detoc dissoc dmso expfe fric intpoc intppdiat intppnitrate limfediat limfemisc limirrdiat limirrmisc limndiat limnmisc nh4 pcalc phyc phycos phydiat phyfe phymisc physi pp zmeso zmicro zooc bfeos bsios chldiatos chlmiscos dmsos dpo2 epfe100 fescav fgdms fsfe fsn graz icfriver intpbfe intpbsi intpcalcite intpn2 intppmisc ocfriver phyfeos physios ppdiat ppmisc zo2min zsatcalc ta ua va zg hus wap cltl cltm clth rluscs rsdsaf rsusaf rldsaf rlusaf rldscsaf rluscsaf rsdscsaf rsuscsaf lcod icod reffclwtopcnrm reffclitop cdnctop RADasy550aer RADssa550aer RADod550aer RADabs550aer albsrfc vegstress snct fsat albsrfcLa sndLa icedLa tsLa tmxlLa fldf fwtd heatc hc700 hc2000 rhop somematr sozomatr ssh sialb sisnvol sitimefrac15 sits dfwnt dhcicea dhciced dhcicel dhcicet sidmassr dmsalt efhfso evapice flnsduo flnsdusi flswdso flswdssi flswduo flswdusi hfdssi hfoi ialb nsftdso nsftdssi rfhfso rfhfssi rhosn sfhfso sfhfssi sidhci sifliendbot siflnsntop siflrentop siflsaltbot siflsentop sipro sisnalb sndmasslat sndmassr sndmassth subL subO subTot vsfsub vsflml vsfsal vsfhsi vsfsni wai wao wiov snovols snovoln o3 co no2 asy550aer ssa550aer od550acldaer od550ssbin1 od550ssbin2 od550dustbin1 od550dustbin2 TACabs550aer sconcbc sconcoa ext550ss ext550dust ext550so4 ext550bc ext550oa necb fDeforestToL fRegrowth burntArea fFireBCarb carbw carbdis carbin xfracal GRAZ1 GRAZ2 Nfix MuN MuD LBDMS FeP pdust Totlig Biron Dpn2o Heup N2O N2Oflx SCquotan SCquotad Yield
+
+Realms for these CMORvars: aerosol atmos atmos atmosChem land land landIce landIce landIce land ocean ocnBgChem ocnBgchem seaIce seaIce ocean
+Processing realm 'ocean seaIce' of context 'nemo' -- no variable asked (skip)
+Processing realm 'ocean' of context 'nemo'
+Processing realm 'ocnBgChem' of context 'nemo'
+Processing realm 'seaIce' of context 'nemo'
+Processing realm 'seaIce ocean' of context 'nemo'
+processing file current_directory/test_AOESM_ssp585_CM6_r3/input/xml/ping_surfex.xml:
+OK current_directory/test_AOESM_ssp585_CM6_r3/input/xml/ping_surfex.xml
+processing file current_directory/test_AOESM_ssp585_CM6_r3/input/xml/ping_nemo.xml:
+OK current_directory/test_AOESM_ssp585_CM6_r3/input/xml/ping_nemo.xml
+processing file current_directory/test_AOESM_ssp585_CM6_r3/input/xml/ping_nemo_gelato.xml:
+OK current_directory/test_AOESM_ssp585_CM6_r3/input/xml/ping_nemo_gelato.xml
+processing file current_directory/test_AOESM_ssp585_CM6_r3/input/xml/ping_nemo_ocnBgChem.xml:
+OK current_directory/test_AOESM_ssp585_CM6_r3/input/xml/ping_nemo_ocnBgChem.xml
+processing file current_directory/test_AOESM_ssp585_CM6_r3/input/xml/ping_trip.xml:
+OK current_directory/test_AOESM_ssp585_CM6_r3/input/xml/ping_trip.xml
+Cannot yet compute annual climatology for          zfullo in table Oclim -> averaging
+Cannot yet compute annual climatology for          zhalfo in table Oclim -> averaging
+Note: assuming that 'time: mean where sea_ice'  for       sisnthick in table SIday is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for         sispeed in table SIday is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for       sitemptop in table SIday is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for         sithick in table SIday is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for             siu in table SIday is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for             siv in table SIday is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for           siage in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for     sicompstren in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for       sidragbot in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for            sifb in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for     siflcondbot in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for     siflcondtop in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for       siflfwbot in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for     siflfwdrain in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for     sifllatstop in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for      sifllwutop in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for   siflsensupbot in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for      siflswdbot in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for      siflswutop in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for            sipr in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for        sisnconc in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for          sisnhc in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for        sisnmass in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for       sisnthick in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for         sispeed in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for      sistrxdtop in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for      sistrxubot in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for      sistrydtop in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for      sistryubot in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for       sitempbot in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for      sitempsnic in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for       sitemptop in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for         sithick in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for             siu in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for             siv in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for       sisnthick in table SIday is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for         sispeed in table SIday is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for       sitemptop in table SIday is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for         sithick in table SIday is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for             siu in table SIday is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for             siv in table SIday is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for           siage in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for     sicompstren in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for       sidragbot in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for            sifb in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for     siflcondbot in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for     siflcondtop in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for       siflfwbot in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for     siflfwdrain in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for     sifllatstop in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for      sifllwutop in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for   siflsensupbot in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for      siflswdbot in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for      siflswutop in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for            sipr in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for        sisnconc in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for          sisnhc in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for        sisnmass in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for       sisnthick in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for         sispeed in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for      sistrxdtop in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for      sistrxubot in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for      sistrydtop in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for      sistryubot in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for       sitempbot in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for      sitempsnic in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for       sitemptop in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for         sithick in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for             siu in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for             siv in table SImon is well handled by 'detect_missing'
+
+file_def written as current_directory/test_AOESM_ssp585_CM6_r3/test_outputs/dr2xml_nemo.xml
+
+Skipped variables (i.e. whose alias is not present in the pingfile):
+>>> TABLE:           Oclim 02/02 ----> zfullo(1) zhalfo(1)
+
+>>> TABLE:            Omon 01/32 ----> fgcfc12(1)
+
+>>> TABLE:           SImon 01/63 ----> sndmasswindrif(2)
+
+
+
+
+Some Statistics on actually written variables per frequency+shape...
+                             Ofx P1   1: areacello
+        fx    XY-na    -------- ---   1
+
+        fx --------    -------- ---   1
+
+                           SIday P1   8: siconc sisnthick sispeed sitemptop sithick sitimefrac siu siv
+       day    XY-na    -------- ---   8
+
+       day --------    -------- ---   8
+
+                            Emon P1   2: hcont300 t20d
+                        HOMOImon P1  60: Dpn2o Heup N2Oflx dfwnt dhcicea dhciced dhcicel dhcicet dmsalt efhfso evapice flnsduo flnsdusi flswdso flswdssi flswduo flswdusi hc2000 hc700 heatc hfdssi hfoi ialb nsftdso nsftdssi rfhfso rfhfssi rhosn sfhfso sfhfssi sialb sidhci sidmassr sifliendbot siflnsntop siflrentop siflsaltbot siflsentop sipro sisnalb sisnvol sitimefrac15 sits sndmasslat sndmassr sndmassth somematr sozomatr ssh subL subO subTot vsfhsi vsflml vsfsal vsfsni vsfsub wai wao wiov
+                            Omon P2   5: ficeberg2d friver hfx hfy rsntds
+                            Omon P1   9: hfds mlotst mlotstmin sos tauuo tauvo tos wfo zos
+                           SImon P2  39: siage sicompstren sidconcdyn sidconcth sidmassdyn sidmassevapsubl sidmassgrowthbot sidmassgrowthwat sidmasslat sidmassmeltbot sidmassmelttop sidmasssi sidmassth sidmasstranx sidmasstrany sifb siflcondbot siflcondtop siflfwbot siflfwdrain sifllatstop sifllwutop siflsensupbot siflswdbot siflswutop sihc sipr sisnhc sistrxdtop sistrxubot sistrydtop sistryubot sitempbot sitempsnic sndmassdyn sndmassmelt sndmasssi sndmasssnf sndmasssubl
+                           SImon P1  12: siconc simass sisnconc sisnmass sisnthick sispeed sitemptop sithick sitimefrac siu siv sivol
+                           SImon P3   2: sidragbot sisaltmass
+       mon    XY-na    -------- --- 129
+
+                        HOMOImon P1  16: Biron FeP GRAZ1 GRAZ2 LBDMS MuD MuN N2O Nfix SCquotad SCquotan Totlig Yield pdust rhop xfracal
+                            Omon P1   9: bigthetao so thkcello umo uo vmo vo wmo wo
+       mon     XY-O    -------- ---  25
+
+                        HOMOImon P1   2: snovoln snovols
+                            Omon P1   4: bigthetaoga soga sosga zostoga
+                           SImon P2   6: siarean siareas siextentn siextents sivoln sivols
+       mon    na-na    -------- ---  12
+
+                            Omon P2   2: htovgyre htovovrt
+       mon    YB-na    -------- ---   2
+
+                            Omon P2   1: mfo
+       mon    TR-na    -------- ---   1
+
+                            Omon P1   1: msftyz
+       mon     YB-O    -------- ---   1
+
+                           SImon P2   3: siareaacrossline simassacrossline snmassacrossline
+       mon   TRS-na    -------- ---   3
+
+       mon --------    -------- --- 173
+
+
+---------- --------    -------- --- 182
+
+
+Some Statistics on actually written variables per variable...
+-------------------
+--- VARNAME: Biron: Bioavailable iron
+-------------------
+              * mon_HOMOImon_XY-O_1.0 Biron
+-------------------
+--- VARNAME: Dpn2o: surface_nitrous_oxide_partial_pressure_difference_between_sea_water_and_air
+-------------------
+              * mon_HOMOImon_XY-na_1.0 Dpn2o
+-----------------
+--- VARNAME: FeP: Precipitated Iron III
+-----------------
+              * mon_HOMOImon_XY-O_1.0 FeP
+-------------------
+--- VARNAME: GRAZ1: Grazing by microzooplankton
+-------------------
+              * mon_HOMOImon_XY-O_1.0 GRAZ1
+-------------------
+--- VARNAME: GRAZ2: Grazing by mesozooplankton
+-------------------
+              * mon_HOMOImon_XY-O_1.0 GRAZ2
+------------------
+--- VARNAME: Heup: Euphotic_layer_depth
+------------------
+              * mon_HOMOImon_XY-na_1.0 Heup
+-------------------
+--- VARNAME: LBDMS: DMS limitation term in Bacterial consumption
+-------------------
+              * mon_HOMOImon_XY-O_1.0 LBDMS
+-----------------
+--- VARNAME: MuD: Realized growth rate for diatoms
+-----------------
+              * mon_HOMOImon_XY-O_1.0 MuD
+-----------------
+--- VARNAME: MuN: Realized growth rate for nanophytoplankton
+-----------------
+              * mon_HOMOImon_XY-O_1.0 MuN
+-----------------
+--- VARNAME: N2O: nitrous_oxide_concentration
+-----------------
+              * mon_HOMOImon_XY-O_1.0 N2O
+--------------------
+--- VARNAME: N2Oflx: surface_upward_mole_flux_of_nitrous_oxide
+--------------------
+              * mon_HOMOImon_XY-na_1.0 N2Oflx
+------------------
+--- VARNAME: Nfix: Nitrogen fixation
+------------------
+              * mon_HOMOImon_XY-O_1.0 Nfix
+----------------------
+--- VARNAME: SCquotad: Sulfur to carbon quota for diatoms
+----------------------
+              * mon_HOMOImon_XY-O_1.0 SCquotad
+----------------------
+--- VARNAME: SCquotan: Sulfur to carbon quota for nanophytoplankton
+----------------------
+              * mon_HOMOImon_XY-O_1.0 SCquotan
+--------------------
+--- VARNAME: Totlig: Total ligand concentation
+--------------------
+              * mon_HOMOImon_XY-O_1.0 Totlig
+-------------------
+--- VARNAME: Yield: Production term of DMSp by phytoplankton
+-------------------
+              * mon_HOMOImon_XY-O_1.0 Yield
+-----------------------
+--- VARNAME: areacello: Grid-Cell Area
+-----------------------
+              *       fx_Ofx_XY-na_1 areacello
+-----------------------
+--- VARNAME: bigthetao: Sea Water Convervative Temperature
+-----------------------
+              *      mon_Omon_XY-O_1 bigthetao
+-------------------------
+--- VARNAME: bigthetaoga: Global Average Sea Water Conservative Temperature
+-------------------------
+              *     mon_Omon_na-na_1 bigthetaoga
+-------------------
+--- VARNAME: dfwnt: Total Fresh Water Input Rate
+-------------------
+              * mon_HOMOImon_XY-na_1.0 dfwnt
+---------------------
+--- VARNAME: dhcicea: Rate of Change of Sea Ice Total Heat Content due to Advection
+---------------------
+              * mon_HOMOImon_XY-na_1.0 dhcicea
+---------------------
+--- VARNAME: dhciced: Rate of Change of Sea Ice Total Heat Content due to Damping
+---------------------
+              * mon_HOMOImon_XY-na_1.0 dhciced
+---------------------
+--- VARNAME: dhcicel: Rate of Change of Ice Heat Content due to lead sea ice formation
+---------------------
+              * mon_HOMOImon_XY-na_1.0 dhcicel
+---------------------
+--- VARNAME: dhcicet: Rate of Change of Sea Ice Total Heat Content due to Thermodynamics
+---------------------
+              * mon_HOMOImon_XY-na_1.0 dhcicet
+--------------------
+--- VARNAME: dmsalt: Salt Mass in Sea Ice Rate
+--------------------
+              * mon_HOMOImon_XY-na_1.0 dmsalt
+--------------------
+--- VARNAME: efhfso: Surface Heat Flux due to Evaporated Water over Leads
+--------------------
+              * mon_HOMOImon_XY-na_1.0 efhfso
+---------------------
+--- VARNAME: evapice: Water Evaporation Flux from Sea Ice
+---------------------
+              * mon_HOMOImon_XY-na_1.0 evapice
+------------------------
+--- VARNAME: ficeberg2d: Water Flux into Sea Water From Icebergs
+------------------------
+              *     mon_Omon_XY-na_2 ficeberg2d
+---------------------
+--- VARNAME: flnsduo: Downward Non Solar Heat Flux Under Leads
+---------------------
+              * mon_HOMOImon_XY-na_1.0 flnsduo
+----------------------
+--- VARNAME: flnsdusi: Heat Flux into Sea Water due to Sea Ice Thermodynamics per Grid Area
+----------------------
+              * mon_HOMOImon_XY-na_1.0 flnsdusi
+---------------------
+--- VARNAME: flswdso: Net Downward Shortwave Radiation at Leads Surface
+---------------------
+              * mon_HOMOImon_XY-na_1.0 flswdso
+----------------------
+--- VARNAME: flswdssi: Net Downward Shortwave Radiation at Sea Ice Surface
+----------------------
+              * mon_HOMOImon_XY-na_1.0 flswdssi
+---------------------
+--- VARNAME: flswduo: Downward Shortwave Flux under Leads
+---------------------
+              * mon_HOMOImon_XY-na_1.0 flswduo
+----------------------
+--- VARNAME: flswdusi: Net Shortwave Flux under Sea Ice
+----------------------
+              * mon_HOMOImon_XY-na_1.0 flswdusi
+--------------------
+--- VARNAME: friver: Water Flux into Sea Water From Rivers
+--------------------
+              *     mon_Omon_XY-na_2 friver
+--------------------
+--- VARNAME: hc2000: integral_of_sea_water_potential_temperature_wrt_depth_expressed_as_heat_content
+--------------------
+              * mon_HOMOImon_XY-na_1.0 hc2000
+-------------------
+--- VARNAME: hc700: integral_of_sea_water_potential_temperature_wrt_depth_expressed_as_heat_content
+-------------------
+              * mon_HOMOImon_XY-na_1.0 hc700
+----------------------
+--- VARNAME: hcont300: Heat content of upper 300 meters
+----------------------
+              *     mon_Emon_XY-na_1 hcont300
+-------------------
+--- VARNAME: heatc: Heat content vertically integrated
+-------------------
+              * mon_HOMOImon_XY-na_1.0 heatc
+------------------
+--- VARNAME: hfds: Downward Heat Flux at Sea Water Surface
+------------------
+              *     mon_Omon_XY-na_1 hfds
+--------------------
+--- VARNAME: hfdssi: Downward Heat Flux at Sea Ice Surface
+--------------------
+              * mon_HOMOImon_XY-na_1.0 hfdssi
+------------------
+--- VARNAME: hfoi: Ocean Heat Flux to Sea Ice
+------------------
+              * mon_HOMOImon_XY-na_1.0 hfoi
+-----------------
+--- VARNAME: hfx: Ocean Heat X Transport
+-----------------
+              *     mon_Omon_XY-na_2 hfx
+-----------------
+--- VARNAME: hfy: Ocean Heat Y Transport
+-----------------
+              *     mon_Omon_XY-na_2 hfy
+----------------------
+--- VARNAME: htovgyre: Northward Ocean Heat Transport due to Gyre
+----------------------
+              *     mon_Omon_YB-na_2 htovgyre
+----------------------
+--- VARNAME: htovovrt: Northward Ocean Heat Transport due to Overturning
+----------------------
+              *     mon_Omon_YB-na_2 htovovrt
+------------------
+--- VARNAME: ialb: Bare Sea Ice Albedo
+------------------
+              * mon_HOMOImon_XY-na_1.0 ialb
+-----------------
+--- VARNAME: mfo: Sea Water Transport
+-----------------
+              *     mon_Omon_TR-na_2 mfo
+--------------------
+--- VARNAME: mlotst: Ocean Mixed Layer Thickness Defined by Sigma T
+--------------------
+              *     mon_Omon_XY-na_1 mlotst
+-----------------------
+--- VARNAME: mlotstmin: Minimum Ocean Mixed Layer Thickness Defined by Sigma T
+-----------------------
+              *     mon_Omon_XY-na_1 mlotstmin
+--------------------
+--- VARNAME: msftyz: Ocean Y Overturning Mass Streamfunction
+--------------------
+              *      mon_Omon_YB-O_1 msftyz
+---------------------
+--- VARNAME: nsftdso: Net Downward Non-Solar Radiation at Leads Surface
+---------------------
+              * mon_HOMOImon_XY-na_1.0 nsftdso
+----------------------
+--- VARNAME: nsftdssi: Net Downward Non-Solar Radiation at Sea Ice Surface
+----------------------
+              * mon_HOMOImon_XY-na_1.0 nsftdssi
+-------------------
+--- VARNAME: pdust: dust concentration
+-------------------
+              * mon_HOMOImon_XY-O_1.0 pdust
+--------------------
+--- VARNAME: rfhfso: Surface Heat Flux due to Rainfalls over Leads
+--------------------
+              * mon_HOMOImon_XY-na_1.0 rfhfso
+---------------------
+--- VARNAME: rfhfssi: Surface Heat Flux due to Rainfalls over Sea Ice
+---------------------
+              * mon_HOMOImon_XY-na_1.0 rfhfssi
+------------------
+--- VARNAME: rhop: potential density (sigma0)
+------------------
+              * mon_HOMOImon_XY-O_1.0 rhop
+-------------------
+--- VARNAME: rhosn: Snow Layer Density
+-------------------
+              * mon_HOMOImon_XY-na_1.0 rhosn
+--------------------
+--- VARNAME: rsntds: Net Downward Shortwave Radiation at Sea Water Surface
+--------------------
+              *     mon_Omon_XY-na_2 rsntds
+--------------------
+--- VARNAME: sfhfso: Surface Heat Flux due to Snowfalls over Leads
+--------------------
+              * mon_HOMOImon_XY-na_1.0 sfhfso
+---------------------
+--- VARNAME: sfhfssi: Surface Heat Flux due to Snowfalls over Sea Ice
+---------------------
+              * mon_HOMOImon_XY-na_1.0 sfhfssi
+-------------------
+--- VARNAME: siage: Age of sea ice
+-------------------
+              *    mon_SImon_XY-na_2 siage
+-------------------
+--- VARNAME: sialb: Sea-ice or snow albedo
+-------------------
+              * mon_HOMOImon_XY-na_1.0 sialb
+------------------------------
+--- VARNAME: siareaacrossline: Sea ice area flux through straits
+------------------------------
+              *   mon_SImon_TRS-na_2 siareaacrossline
+---------------------
+--- VARNAME: siarean: Sea ice area North
+---------------------
+              *    mon_SImon_na-na_2 siarean
+---------------------
+--- VARNAME: siareas: Sea ice area South
+---------------------
+              *    mon_SImon_na-na_2 siareas
+-------------------------
+--- VARNAME: sicompstren: Compressive sea ice strength
+-------------------------
+              *    mon_SImon_XY-na_2 sicompstren
+--------------------
+--- VARNAME: siconc: Sea Ice Area Fraction (Ocean Grid)
+--------------------
+              *    day_SIday_XY-na_1 siconc
+              *    mon_SImon_XY-na_1 siconc
+------------------------
+--- VARNAME: sidconcdyn: sea-ice area fraction change from dynamics
+------------------------
+              *    mon_SImon_XY-na_2 sidconcdyn
+-----------------------
+--- VARNAME: sidconcth: sea-ice area fraction change from thermodynamics
+-----------------------
+              *    mon_SImon_XY-na_2 sidconcth
+--------------------
+--- VARNAME: sidhci: Rate of Change of Sea Ice Heat Content due to Thermodynamics
+--------------------
+              * mon_HOMOImon_XY-na_1.0 sidhci
+------------------------
+--- VARNAME: sidmassdyn: sea-ice mass change from dynamics
+------------------------
+              *    mon_SImon_XY-na_2 sidmassdyn
+-----------------------------
+--- VARNAME: sidmassevapsubl: sea-ice mass change through evaporation and sublimation
+-----------------------------
+              *    mon_SImon_XY-na_2 sidmassevapsubl
+------------------------------
+--- VARNAME: sidmassgrowthbot: sea-ice mass change through basal growth
+------------------------------
+              *    mon_SImon_XY-na_2 sidmassgrowthbot
+------------------------------
+--- VARNAME: sidmassgrowthwat: sea-ice mass change through growth in supercooled open water (aka frazil)
+------------------------------
+              *    mon_SImon_XY-na_2 sidmassgrowthwat
+------------------------
+--- VARNAME: sidmasslat: Lateral sea ice melt rate
+------------------------
+              *    mon_SImon_XY-na_2 sidmasslat
+----------------------------
+--- VARNAME: sidmassmeltbot: sea-ice mass change through bottom melting
+----------------------------
+              *    mon_SImon_XY-na_2 sidmassmeltbot
+----------------------------
+--- VARNAME: sidmassmelttop: sea-ice mass change through surface melting
+----------------------------
+              *    mon_SImon_XY-na_2 sidmassmelttop
+----------------------
+--- VARNAME: sidmassr: Sea Ice Mass Rate Due to Redistribution
+----------------------
+              * mon_HOMOImon_XY-na_1.0 sidmassr
+-----------------------
+--- VARNAME: sidmasssi: sea-ice mass change through snow-to-ice conversion
+-----------------------
+              *    mon_SImon_XY-na_2 sidmasssi
+-----------------------
+--- VARNAME: sidmassth: sea-ice mass change from thermodynamics
+-----------------------
+              *    mon_SImon_XY-na_2 sidmassth
+--------------------------
+--- VARNAME: sidmasstranx: X-component of sea-ice mass transport
+--------------------------
+              *    mon_SImon_XY-na_2 sidmasstranx
+--------------------------
+--- VARNAME: sidmasstrany: Y-component of sea-ice mass transport
+--------------------------
+              *    mon_SImon_XY-na_2 sidmasstrany
+-----------------------
+--- VARNAME: sidragbot: Ocean drag coefficient
+-----------------------
+              *    mon_SImon_XY-na_3 sidragbot
+-----------------------
+--- VARNAME: siextentn: Sea ice extent North
+-----------------------
+              *    mon_SImon_na-na_2 siextentn
+-----------------------
+--- VARNAME: siextents: Sea ice extent South
+-----------------------
+              *    mon_SImon_na-na_2 siextents
+------------------
+--- VARNAME: sifb: Sea-ice freeboard
+------------------
+              *    mon_SImon_XY-na_2 sifb
+-------------------------
+--- VARNAME: siflcondbot: Net conductive heat fluxes in ice at the bottom
+-------------------------
+              *    mon_SImon_XY-na_2 siflcondbot
+-------------------------
+--- VARNAME: siflcondtop: Net conductive heat flux in ice at the surface
+-------------------------
+              *    mon_SImon_XY-na_2 siflcondtop
+-----------------------
+--- VARNAME: siflfwbot: Freshwater flux from sea ice
+-----------------------
+              *    mon_SImon_XY-na_2 siflfwbot
+-------------------------
+--- VARNAME: siflfwdrain: Freshwater flux from sea-ice surface
+-------------------------
+              *    mon_SImon_XY-na_2 siflfwdrain
+-------------------------
+--- VARNAME: sifliendbot: Heat Flux into Sea Water due to Sea Ice Thermodynamics per Sea Ice Area
+-------------------------
+              * mon_HOMOImon_XY-na_1.0 sifliendbot
+-------------------------
+--- VARNAME: sifllatstop: Net latent heat flux over sea ice
+-------------------------
+              *    mon_SImon_XY-na_2 sifllatstop
+------------------------
+--- VARNAME: sifllwutop: Upwelling Longwave Flux over Sea Ice
+------------------------
+              *    mon_SImon_XY-na_2 sifllwutop
+------------------------
+--- VARNAME: siflnsntop: Net non-solar flux over sea ice
+------------------------
+              * mon_HOMOImon_XY-na_1.0 siflnsntop
+------------------------
+--- VARNAME: siflrentop: Surface Heat Flux due to Rainfalls over Sea Ice
+------------------------
+              * mon_HOMOImon_XY-na_1.0 siflrentop
+-------------------------
+--- VARNAME: siflsaltbot: Salt flux from sea ice
+-------------------------
+              * mon_HOMOImon_XY-na_1.0 siflsaltbot
+---------------------------
+--- VARNAME: siflsensupbot: __unset__
+---------------------------
+              *    mon_SImon_XY-na_2 siflsensupbot
+------------------------
+--- VARNAME: siflsentop: Surface Heat Flux due to Snowfalls over Sea Ice
+------------------------
+              * mon_HOMOImon_XY-na_1.0 siflsentop
+------------------------
+--- VARNAME: siflswdbot: Downwelling shortwave flux under sea ice
+------------------------
+              *    mon_SImon_XY-na_2 siflswdbot
+------------------------
+--- VARNAME: siflswutop: Upwelling Shortwave Flux over Sea Ice
+------------------------
+              *    mon_SImon_XY-na_2 siflswutop
+------------------
+--- VARNAME: sihc: Sea-ice heat content per unit area
+------------------
+              *    mon_SImon_XY-na_2 sihc
+--------------------
+--- VARNAME: simass: Sea-ice mass per area
+--------------------
+              *    mon_SImon_XY-na_1 simass
+------------------------------
+--- VARNAME: simassacrossline: Sea mass area flux through straits
+------------------------------
+              *   mon_SImon_TRS-na_2 simassacrossline
+------------------
+--- VARNAME: sipr: Rainfall rate over sea ice
+------------------
+              *    mon_SImon_XY-na_2 sipr
+-------------------
+--- VARNAME: sipro: Rate of rainfall over sea ice transfered to the ocean
+-------------------
+              * mon_HOMOImon_XY-na_1.0 sipro
+------------------------
+--- VARNAME: sisaltmass: Mass of salt in sea ice per area
+------------------------
+              *    mon_SImon_XY-na_3 sisaltmass
+---------------------
+--- VARNAME: sisnalb: Weighted Albedo of Snow Over Sea Ice
+---------------------
+              * mon_HOMOImon_XY-na_1.0 sisnalb
+----------------------
+--- VARNAME: sisnconc: Snow area fraction
+----------------------
+              *    mon_SImon_XY-na_1 sisnconc
+--------------------
+--- VARNAME: sisnhc: Snow-heat content per unit area
+--------------------
+              *    mon_SImon_XY-na_2 sisnhc
+----------------------
+--- VARNAME: sisnmass: Snow mass per area
+----------------------
+              *    mon_SImon_XY-na_1 sisnmass
+-----------------------
+--- VARNAME: sisnthick: Snow thickness
+-----------------------
+              *    day_SIday_XY-na_1 sisnthick
+              *    mon_SImon_XY-na_1 sisnthick
+---------------------
+--- VARNAME: sisnvol: Snow volume per area
+---------------------
+              * mon_HOMOImon_XY-na_1.0 sisnvol
+---------------------
+--- VARNAME: sispeed: Sea-ice speed
+---------------------
+              *    day_SIday_XY-na_1 sispeed
+              *    mon_SImon_XY-na_1 sispeed
+------------------------
+--- VARNAME: sistrxdtop: X-component of atmospheric stress on sea ice
+------------------------
+              *    mon_SImon_XY-na_2 sistrxdtop
+------------------------
+--- VARNAME: sistrxubot: X-component of ocean stress on sea ice
+------------------------
+              *    mon_SImon_XY-na_2 sistrxubot
+------------------------
+--- VARNAME: sistrydtop: Y-component of atmospheric stress on sea ice
+------------------------
+              *    mon_SImon_XY-na_2 sistrydtop
+------------------------
+--- VARNAME: sistryubot: Y-component of ocean stress on sea ice
+------------------------
+              *    mon_SImon_XY-na_2 sistryubot
+-----------------------
+--- VARNAME: sitempbot: Temperature at ice-ocean interface
+-----------------------
+              *    mon_SImon_XY-na_2 sitempbot
+------------------------
+--- VARNAME: sitempsnic: Temperature at snow-ice interface
+------------------------
+              *    mon_SImon_XY-na_2 sitempsnic
+-----------------------
+--- VARNAME: sitemptop: Surface temperature of sea ice
+-----------------------
+              *    day_SIday_XY-na_1 sitemptop
+              *    mon_SImon_XY-na_1 sitemptop
+---------------------
+--- VARNAME: sithick: Sea Ice Thickness
+---------------------
+              *    day_SIday_XY-na_1 sithick
+              *    mon_SImon_XY-na_1 sithick
+------------------------
+--- VARNAME: sitimefrac: Fraction of time steps with sea ice
+------------------------
+              *    day_SIday_XY-na_1 sitimefrac
+              *    mon_SImon_XY-na_1 sitimefrac
+--------------------------
+--- VARNAME: sitimefrac15: Fraction of time steps with sea ice greater than 15 percent
+--------------------------
+              * mon_HOMOImon_XY-na_1.0 sitimefrac15
+------------------
+--- VARNAME: sits: surface temperature
+------------------
+              * mon_HOMOImon_XY-na_1.0 sits
+-----------------
+--- VARNAME: siu: X-component of sea ice velocity
+-----------------
+              *    day_SIday_XY-na_1 siu
+              *    mon_SImon_XY-na_1 siu
+-----------------
+--- VARNAME: siv: Y-component of sea ice velocity
+-----------------
+              *    day_SIday_XY-na_1 siv
+              *    mon_SImon_XY-na_1 siv
+-------------------
+--- VARNAME: sivol: Sea-ice volume per area
+-------------------
+              *    mon_SImon_XY-na_1 sivol
+--------------------
+--- VARNAME: sivoln: Sea ice volume North
+--------------------
+              *    mon_SImon_na-na_2 sivoln
+--------------------
+--- VARNAME: sivols: Sea ice volume South
+--------------------
+              *    mon_SImon_na-na_2 sivols
+------------------------
+--- VARNAME: sndmassdyn: Snow Mass Rate of Change through Avection by Sea-ice Dynamics
+------------------------
+              *    mon_SImon_XY-na_2 sndmassdyn
+------------------------
+--- VARNAME: sndmasslat: Snow melt rate due to lateral ice erosion
+------------------------
+              * mon_HOMOImon_XY-na_1.0 sndmasslat
+-------------------------
+--- VARNAME: sndmassmelt: Snow Mass Rate of Change through Melt
+-------------------------
+              *    mon_SImon_XY-na_2 sndmassmelt
+----------------------
+--- VARNAME: sndmassr: Snow Ice Mass Rate Due to Redistribution
+----------------------
+              * mon_HOMOImon_XY-na_1.0 sndmassr
+-----------------------
+--- VARNAME: sndmasssi: Snow Mass Rate of Change through Snow-to-Ice Conversion
+-----------------------
+              *    mon_SImon_XY-na_2 sndmasssi
+------------------------
+--- VARNAME: sndmasssnf: snow mass change through snow fall
+------------------------
+              *    mon_SImon_XY-na_2 sndmasssnf
+-------------------------
+--- VARNAME: sndmasssubl: Snow Mass Rate of Change through Evaporation or Sublimation
+-------------------------
+              *    mon_SImon_XY-na_2 sndmasssubl
+-----------------------
+--- VARNAME: sndmassth: Snow Mass over Sea Ice Rate due to Sea Ice Thermodynamics
+-----------------------
+              * mon_HOMOImon_XY-na_1.0 sndmassth
+------------------------------
+--- VARNAME: snmassacrossline: Snow mass flux through straits
+------------------------------
+              *   mon_SImon_TRS-na_2 snmassacrossline
+---------------------
+--- VARNAME: snovoln: Snow Volume North
+---------------------
+              * mon_HOMOImon_na-na_1.0 snovoln
+---------------------
+--- VARNAME: snovols: Snow Volume South
+---------------------
+              * mon_HOMOImon_na-na_1.0 snovols
+----------------
+--- VARNAME: so: Sea Water Salinity
+----------------
+              *      mon_Omon_XY-O_1 so
+------------------
+--- VARNAME: soga: Global Mean Sea Water Salinity
+------------------
+              *     mon_Omon_na-na_1 soga
+----------------------
+--- VARNAME: somematr: vertical_integral_of_ocean_mass_y_transport
+----------------------
+              * mon_HOMOImon_XY-na_1.0 somematr
+-----------------
+--- VARNAME: sos: Sea Surface Salinity
+-----------------
+              *     mon_Omon_XY-na_1 sos
+-------------------
+--- VARNAME: sosga: Global Average Sea Surface Salinity
+-------------------
+              *     mon_Omon_na-na_1 sosga
+----------------------
+--- VARNAME: sozomatr: vertical_integral_of_ocean_mass_x_transport
+----------------------
+              * mon_HOMOImon_XY-na_1.0 sozomatr
+-----------------
+--- VARNAME: ssh: sea surface height
+-----------------
+              * mon_HOMOImon_XY-na_1.0 ssh
+------------------
+--- VARNAME: subL: Sublimation over Leads
+------------------
+              * mon_HOMOImon_XY-na_1.0 subL
+------------------
+--- VARNAME: subO: Sublimation over Ocean
+------------------
+              * mon_HOMOImon_XY-na_1.0 subO
+--------------------
+--- VARNAME: subTot: Sublimation
+--------------------
+              * mon_HOMOImon_XY-na_1.0 subTot
+------------------
+--- VARNAME: t20d: 20C isotherm depth
+------------------
+              *     mon_Emon_XY-na_1 t20d
+-------------------
+--- VARNAME: tauuo: Surface Downward X Stress
+-------------------
+              *     mon_Omon_XY-na_1 tauuo
+-------------------
+--- VARNAME: tauvo: Surface Downward Y Stress
+-------------------
+              *     mon_Omon_XY-na_1 tauvo
+----------------------
+--- VARNAME: thkcello: Ocean Model Cell Thickness
+----------------------
+              *      mon_Omon_XY-O_1 thkcello
+-----------------
+--- VARNAME: tos: Sea Surface Temperature
+-----------------
+              *     mon_Omon_XY-na_1 tos
+-----------------
+--- VARNAME: umo: Ocean Mass X Transport
+-----------------
+              *      mon_Omon_XY-O_1 umo
+----------------
+--- VARNAME: uo: Sea Water X Velocity
+----------------
+              *      mon_Omon_XY-O_1 uo
+-----------------
+--- VARNAME: vmo: Ocean Mass Y Transport
+-----------------
+              *      mon_Omon_XY-O_1 vmo
+----------------
+--- VARNAME: vo: Sea Water Y Velocity
+----------------
+              *      mon_Omon_XY-O_1 vo
+--------------------
+--- VARNAME: vsfhsi: Dilution flux due to change of ice depth
+--------------------
+              * mon_HOMOImon_XY-na_1.0 vsfhsi
+--------------------
+--- VARNAME: vsflml: Dilution flux due to lateral melting of ice
+--------------------
+              * mon_HOMOImon_XY-na_1.0 vsflml
+--------------------
+--- VARNAME: vsfsal: Dilution flux due to salt exchanges
+--------------------
+              * mon_HOMOImon_XY-na_1.0 vsfsal
+--------------------
+--- VARNAME: vsfsni: Dilution flux due to conversion of snow to ice
+--------------------
+              * mon_HOMOImon_XY-na_1.0 vsfsni
+--------------------
+--- VARNAME: vsfsub: Dilution flux due to ice sublimation
+--------------------
+              * mon_HOMOImon_XY-na_1.0 vsfsub
+-----------------
+--- VARNAME: wai: Real Water Flux From Atmosphere to Ice
+-----------------
+              * mon_HOMOImon_XY-na_1.0 wai
+-----------------
+--- VARNAME: wao: Real Water Flux From Atmosphere to Ocean
+-----------------
+              * mon_HOMOImon_XY-na_1.0 wao
+-----------------
+--- VARNAME: wfo: Water Flux into Sea Water
+-----------------
+              *     mon_Omon_XY-na_1 wfo
+------------------
+--- VARNAME: wiov: Virtual Water Flux From Sea Ice to Ocean due to Salt Transfer
+------------------
+              * mon_HOMOImon_XY-na_1.0 wiov
+-----------------
+--- VARNAME: wmo: Upward Ocean Mass Transport
+-----------------
+              *      mon_Omon_XY-O_1 wmo
+----------------
+--- VARNAME: wo: Sea Water Z Velocity
+----------------
+              *      mon_Omon_XY-O_1 wo
+---------------------
+--- VARNAME: xfracal: Calcifying fraction
+---------------------
+              * mon_HOMOImon_XY-O_1.0 xfracal
+-----------------
+--- VARNAME: zos: Sea Surface Height Above Geoid
+-----------------
+              *     mon_Omon_XY-na_1 zos
+---------------------
+--- VARNAME: zostoga: Global Average Thermosteric Sea Level Change
+---------------------
+              *     mon_Omon_na-na_1 zostoga
+
+Warnings about cell methods (with var list)
+	Cannot yet compute annual climatology - must do it as a postpro for vars: {'zfullo', 'zhalfo'}
+	time: mean where sea_ice for vars: {'siage', 'sicompstren', 'sidragbot', 'sifb', 'siflcondbot', 'siflcondtop', 'siflfwbot', 'siflfwdrain', 'sifllatstop', 'sifllwutop', 'siflsensupbot', 'siflswdbot', 'siflswutop', 'sipr', 'sisnconc', 'sisnhc', 'sisnmass', 'sisnthick', 'sispeed', 'sistrxdtop', 'sistrxubot', 'sistrydtop', 'sistryubot', 'sitempbot', 'sitempsnic', 'sitemptop', 'sithick', 'siu', 'siv'}
+
+ **************************************************
+*
+*              dr2xml version:  3.0
+*   CMIP6 conventions version:  v6.2.4
+*  CMIP6 Data Request version:  01.00.21.post1
+
+*
+ **************************************************
+
+**************************************************
+
+Processing context  surfex
+
+**************************************************
+
+Number of distinct CMOR variables (whatever the grid): 209
+Number of distinct var labels is: 195
+Number of simplified vars is: 209
+Issues with standard names are: ['cLand', 'cTotFireLut', 'fAnthDisturb', 'fBNF', 'fCLandToOcean', 'fDeforestToProduct', 'fFireNat', 'fHarvestToProduct', 'fLulccAtmLut', 'fLulccProductLut', 'fN2O', 'fNAnthDisturb', 'fNLandToOcean', 'fNLitterSoil', 'fNProduct', 'fNVegLitter', 'fNVegSoil', 'fNdep', 'fNfert', 'fNgas', 'fNleach', 'fNloss', 'fNnetmin', 'fNup', 'fProductDecomp', 'fProductDecompLut', 'irrLut', 'laiLut', 'mrlso', 'mrsfl', 'mrsll', 'nLand', 'nLitter', 'nMineral', 'nProduct', 'nSoil', 'nVeg', 'nwdFracLut', 'sitimefrac', 'sweLut']
+homevars file: current_directory/test_AOESM_ssp585_CM6_r3/input/home_data_request/home_data_request_arpege_GCM.txt current_directory/test_AOESM_ssp585_CM6_r3/input/home_data_request/home_data_request_surfex_GCM.txt current_directory/test_AOESM_ssp585_CM6_r3/input/home_data_request/home_data_request_trip_GCM.txt current_directory/test_AOESM_ssp585_CM6_r3/input/home_data_request/home_data_request_nemo_GCM.txt current_directory/test_AOESM_ssp585_CM6_r3/input/home_data_request/home_data_request_arpege_ESM_AddOn.txt current_directory/test_AOESM_ssp585_CM6_r3/input/home_data_request/home_data_request_surfex_ESM_AddOn.txt current_directory/test_AOESM_ssp585_CM6_r3/input/home_data_request/home_data_request_trip_ESM_AddOn.txt current_directory/test_AOESM_ssp585_CM6_r3/input/home_data_request/home_data_request_nemo_ESM_AddOn.txt
+For extra table CNRM_HOMEPmon (which has 9 variables):
+	Variables which dim was found in extra coordinates table:
+		            Plev39hm: co no2 o3
+
+		             plev7hm: hus ta ua va wap zg
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		         XY-Plev39hm: co no2 o3
+
+		          XY-plev7hm: hus ta ua va wap zg
+
+For extra table CNRM_HOMALmon (which has 93 variables):
+	Variables which dim was found in extra coordinates table:
+		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		             XY-sza5: parasolCRefl
+
+		       XY-tau|plev7c: clmodis
+
+		             XY-temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+For extra table CNRM_HOMAL3hrPt (which has 93 variables):
+	Variables which dim was found in extra coordinates table:
+		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		             XY-sza5: parasolCRefl
+
+		       XY-tau|plev7c: clmodis
+
+		             XY-temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+For extra table CNRM_HOMOImon (which has 103 variables):
+	Variables which dim was found in extra coordinates table:
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+
+Number of 'cmor', 'dev' and 'perso' among home variables: 344
+Number of 'extra' among home variables: 142
+homevars list: psl ps pr prsn prc rsdscs rsuscs rldscs rsdt rsut rsutcs rsutaf rsutcsaf rlut rlutcs rlutaf rlutcsaf prw clt clwvi clivi intuaw intvaw intuadse intvadse toz ta ua va zg hus hur wap ztp ptp tas rsds rsus rlds rlus mrso mrsos mrfso mrros mrro tsl snd snw snc lwsnl mrtws dmlt prveg gpp npp ts evspsbl evspsblpot sbl hfls hfss tasmin tasmax hfdsl albsn cw rzwc mrsow et uas vas sfcWind sfcWindmax hurs huss tauu tauv wtd rivo areacello tos zos sos rsntds hfds hfx hfy wfo friver ficeberg2d tauuo tauvo t20d mlotst mlotstmin hcont300 bigthetao bigthetaoga so soga sosga uo vo wo umo vmo wmo thkcello mfo msftyz htovgyre htovovrt zostoga siconc sivol sithick sisnthick sitemptop siu siv sisaltmass sitempsnic sihc sisnhc sidmassth sidmassdyn sivoln sivols siextentn siextents siage siareaacrossline siarean siareas sicompstren sidconcdyn sidconcth sidmassdyn sidmassevapsubl sidmassgrowthbot sidmassgrowthwat sidmasslat sidmassmeltbot sidmassmelttop sidmasssi sidmassth sidmasstranx sidmasstrany sidragbot sifb siflcondbot siflcondtop siflfwbot siflfwdrain sifllatstop sifllwutop siflsensupbot siflswdbot siflswutop sihc simassacrossline sipr sisnhc sistrxdtop sistrxubot sistrydtop sistryubot sitempbot sitempsnic sndmassdyn sndmassmelt sndmasssi sndmasssnf sndmasssubl sndmasswindrif snmassacrossline od550aer od550ss od550dust od550so4 od550bc od550oa abs550aer emiso2 emiss emidust emiso4 emibc emioa dryso2 dryss drydust dryso4 drybc dryoa wetss wetdust wetso4 wetbc wetoa sconcss sconcdust sconcso4 bry ch4 cly h2o hcl hno3 ho2 meanage n2o noy o3 oh co23D co2s lai gppGrass gppTree ra raGrass raTree rh rhSoil rhLitter rhGrass rhTree nppGrass nppTree nep cVeg cVegGrass cVegTree cLitter cSoil cSoilFast cSoilSlow cSoilGrass cSoilTree cSoilMedium cProduct cLand cLeaf cStem cWood cRoot cLitterSurf cLitterSubSurf cLitterBelow cLitterGrass cLitterTree fVegLitter fLitterSoil burntFractionAll fFireNat fFireAll fVegFire fDeforestToAtmos fDeforestToProduct fProductDecomp fLuc nbp cSoilPools tSoilPools chlos dfe dissic dpco2 epc100 epcalc100 epsi100 fgco2 fgo2 intdic intdoc intpp no3 o2 ph po4 remoc si spco2 talk bfe bsi calc chldiat chlmisc co3 co3satcalc dcalc detoc dissoc dmso expfe fric intpoc intppdiat intppnitrate limfediat limfemisc limirrdiat limirrmisc limndiat limnmisc nh4 pcalc phyc phycos phydiat phyfe phymisc physi pp zmeso zmicro zooc bfeos bsios chldiatos chlmiscos dmsos dpo2 epfe100 fescav fgdms fsfe fsn graz icfriver intpbfe intpbsi intpcalcite intpn2 intppmisc ocfriver phyfeos physios ppdiat ppmisc zo2min zsatcalc ta ua va zg hus wap cltl cltm clth rluscs rsdsaf rsusaf rldsaf rlusaf rldscsaf rluscsaf rsdscsaf rsuscsaf lcod icod reffclwtopcnrm reffclitop cdnctop RADasy550aer RADssa550aer RADod550aer RADabs550aer albsrfc vegstress snct fsat albsrfcLa sndLa icedLa tsLa tmxlLa fldf fwtd heatc hc700 hc2000 rhop somematr sozomatr ssh sialb sisnvol sitimefrac15 sits dfwnt dhcicea dhciced dhcicel dhcicet sidmassr dmsalt efhfso evapice flnsduo flnsdusi flswdso flswdssi flswduo flswdusi hfdssi hfoi ialb nsftdso nsftdssi rfhfso rfhfssi rhosn sfhfso sfhfssi sidhci sifliendbot siflnsntop siflrentop siflsaltbot siflsentop sipro sisnalb sndmasslat sndmassr sndmassth subL subO subTot vsfsub vsflml vsfsal vsfhsi vsfsni wai wao wiov snovols snovoln o3 co no2 asy550aer ssa550aer od550acldaer od550ssbin1 od550ssbin2 od550dustbin1 od550dustbin2 TACabs550aer sconcbc sconcoa ext550ss ext550dust ext550so4 ext550bc ext550oa necb fDeforestToL fRegrowth burntArea fFireBCarb carbw carbdis carbin xfracal GRAZ1 GRAZ2 Nfix MuN MuD LBDMS FeP pdust Totlig Biron Dpn2o Heup N2O N2Oflx SCquotan SCquotad Yield
+
+Realms for these CMORvars: aerosol atmos atmos atmosChem land land landIce landIce landIce land ocean ocnBgChem ocnBgchem seaIce seaIce ocean
+Processing realm 'atmos land' of context 'surfex' -- no variable asked (skip)
+Processing realm 'atmosChem' of context 'surfex' -- no variable asked (skip)
+Processing realm 'aerosol' of context 'surfex'
+Processing realm 'atmos' of context 'surfex'
+The following pairs (variable,table) have been excluded for these reasons:
+    They are in exclusion list: ('co2Clim', 'Amon')
+Processing realm 'atmos atmosChem' of context 'surfex'
+The following pairs (variable,table) have been excluded for these reasons:
+    They are in exclusion list: ('ch4Clim', 'Amon'), ('n2oClim', 'Amon'), ('o3Clim', 'Amon')
+Processing realm 'land' of context 'surfex'
+Processing realm 'land landIce' of context 'surfex'
+Processing realm 'landIce' of context 'surfex'
+Processing realm 'landIce land' of context 'surfex'
+processing file current_directory/test_AOESM_ssp585_CM6_r3/input/xml/ping_surfex.xml:
+OK current_directory/test_AOESM_ssp585_CM6_r3/input/xml/ping_surfex.xml
+processing file current_directory/test_AOESM_ssp585_CM6_r3/input/xml/ping_nemo.xml:
+OK current_directory/test_AOESM_ssp585_CM6_r3/input/xml/ping_nemo.xml
+processing file current_directory/test_AOESM_ssp585_CM6_r3/input/xml/ping_nemo_gelato.xml:
+OK current_directory/test_AOESM_ssp585_CM6_r3/input/xml/ping_nemo_gelato.xml
+processing file current_directory/test_AOESM_ssp585_CM6_r3/input/xml/ping_nemo_ocnBgChem.xml:
+OK current_directory/test_AOESM_ssp585_CM6_r3/input/xml/ping_nemo_ocnBgChem.xml
+processing file current_directory/test_AOESM_ssp585_CM6_r3/input/xml/ping_trip.xml:
+OK current_directory/test_AOESM_ssp585_CM6_r3/input/xml/ping_trip.xml
+Note: assuming that 'time: mean where natural_grasses'  for    cLitterGrass in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where trees'  for     cLitterTree in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where natural_grasses'  for      cSoilGrass in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where trees'  for       cSoilTree in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for     cTotFireLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where natural_grasses'  for       cVegGrass in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where trees'  for        cVegTree in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for    fLulccAtmLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for fLulccProductLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for fLulccResidueLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for fProductDecompLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for          fahLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where natural_grasses'  for        gppGrass in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for          gppLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where trees'  for         gppTree in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for         hflsLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for         hfssLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for         hussLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for          irrLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for          laiLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for         mrroLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for         mrsoLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for        mrsosLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for         necbLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where natural_grasses'  for        nppGrass in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for          nppLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where trees'  for         nppTree in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where natural_grasses'  for         raGrass in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for           raLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where trees'  for          raTree in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where natural_grasses'  for         rhGrass in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for           rhLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where trees'  for          rhTree in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for         rlusLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for         rsusLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for          sweLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for          tasLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for        tslsiLut in table Emon is well handled by 'detect_missing'
+Will not explicitly handle time: mean (with samples weighted by snow mass) for          agesno in table LImon -> averaging
+Will not explicitly handle time: mean (with samples weighted by snow mass) for             tsn in table LImon -> averaging
+Note: assuming that 'time: mean where natural_grasses'  for    cLitterGrass in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where trees'  for     cLitterTree in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where natural_grasses'  for      cSoilGrass in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where trees'  for       cSoilTree in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for     cTotFireLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where natural_grasses'  for       cVegGrass in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where trees'  for        cVegTree in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for    fLulccAtmLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for fLulccProductLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for fLulccResidueLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for fProductDecompLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where natural_grasses'  for        gppGrass in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for          gppLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where trees'  for         gppTree in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for         hflsLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for         hfssLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for         hussLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for          laiLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for         mrroLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for         mrsoLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for        mrsosLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for         necbLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where natural_grasses'  for        nppGrass in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for          nppLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where trees'  for         nppTree in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where natural_grasses'  for         raGrass in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for           raLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where trees'  for          raTree in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where natural_grasses'  for         rhGrass in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for           rhLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where trees'  for          rhTree in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for         rlusLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for         rsusLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for          sweLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for          tasLut in table Emon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where landuse'  for        tslsiLut in table Emon is well handled by 'detect_missing'
+Will not explicitly handle time: mean (with samples weighted by snow mass) for          agesno in table LImon -> averaging
+Will not explicitly handle time: mean (with samples weighted by snow mass) for             tsn in table LImon -> averaging
+
+file_def written as current_directory/test_AOESM_ssp585_CM6_r3/test_outputs/dr2xml_surfex.xml
+
+Skipped variables (i.e. whose alias is not present in the pingfile):
+>>> TABLE:            Amon 02/59 ----> rtmt(1) sci(1)
+
+>>> TABLE:            Emon 31/110 ----> cSoilAbove1m(1) cSoilBelow1m(1) fBNF(1) fCLandToOcean(1) fHarvestToProduct(1) fN2O(1) fNAnthDisturb(1) fNLandToOcean(1) fNLitterSoil(1) fNProduct(1) fNVegLitter(1) fNVegSoil(1) fNdep(1) fNfert(1) fNgas(1) fNleach(1) fNloss(1) fNnetmin(1) fNup(1) fahLut(1) irrLut(1) nLand(1) nLitter(1) nMineral(1) nProduct(1) nSoil(1) nVeg(1) treeFracBdlDcd(1) treeFracBdlEvg(1) treeFracNdlDcd(1) treeFracNdlEvg(1)
+
+>>> TABLE:            Lmon 03/36 ----> fVegSoil(1) pastureFrac(1) shrubFrac(1)
+
+
+
+
+Some Statistics on actually written variables per frequency+shape...
+                            Eday P1   1: lai
+                           SIday P1   1: siconca
+       day    XY-na    -------- ---   2
+
+                            Eday P1   3: mrsfl mrsll mrsol
+       day     XY-S    -------- ---   3
+
+       day --------    -------- ---   5
+
+                          AERmon P1  31: abs550aer drybc drydust dryoa dryso2 dryso4 dryss emibc emidust emioa emiso2 emiso4 emiss od550aer od550bc od550dust od550oa od550so4 od550ss ptp rlutaf rlutcsaf rsutaf rsutcsaf toz wetbc wetdust wetoa wetso4 wetss ztp
+                            Amon P1  42: ccb cct ci clivi clt clwvi evspsbl fco2antt fco2fos fco2nat hfls hfss hurs huss pr prc prsn prw ps psl rlds rldscs rlus rlut rlutcs rsds rsdscs rsdt rsus rsuscs rsut rsutcs sbl sfcWind tas tasmax tasmin tauu tauv ts uas vas
+                            Emon P1  48: cLand cSoil cTotFireLut cropFracC3 cropFracC4 evspsblpot fAnthDisturb fDeforestToProduct fFireNat fLuc fLulccAtmLut fLulccProductLut fLulccResidueLut fProductDecompLut fProductDecomp fracLut gppLut grassFracC3 grassFracC4 hflsLut hfssLut hussLut intuadse intuaw intvadse intvaw laiLut mrlso mrroLut mrsoLut mrsosLut necbLut nep netAtmosLandCO2Flux nppLut nwdFracLut raLut rhLut rlusLut rsusLut sconcdust sconcso4 sconcss sfcWindmax sweLut tasLut tslsiLut vegFrac
+                            Emon P2  27: cLitterGrass cLitterSubSurf cLitterSurf cLitterTree cSoilGrass cSoilPools cSoilTree cStem cVegGrass cVegTree cWood co2s fDeforestToAtmos fFireAll fVegFire gppGrass gppTree mrtws nppGrass nppTree raGrass raTree rhGrass rhLitter rhSoil rhTree tSoilPools
+                        HOMALmon P1  45: RADabs550aer RADasy550aer RADod550aer RADssa550aer TACabs550aer albsrfcLa albsrfc asy550aer burntArea cdnctop clth cltl cltm fDeforestToL fFireBCarb fRegrowth fsat icedLa icod lcod necb od550acldaer od550dustbin1 od550dustbin2 od550ssbin1 od550ssbin2 reffclitop reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf sconcbc sconcoa snct sndLa ssa550aer tmxlLa tsLa vegstress
+                           LImon P1   8: agesno hfdsn sbl snc snd snm snw tsn
+                           LImon P2   1: lwsnl
+                            Lmon P1  25: baresoilFrac burntFractionAll cLitter cProduct cVeg cropFrac evspsblsoi evspsblveg fLitterSoil fVegLitter gpp grassFrac lai mrfso mrro mrros mrso mrsos nbp npp ra residualFrac rh tran treeFrac
+                            Lmon P2   7: cLeaf cLitterBelow cRoot cSoilFast cSoilMedium cSoilSlow prveg
+                         Nonemon P1   7: albsn cw dmlt et hfdsl mrsow rzwc
+                           SImon P1   1: siconca
+       mon    XY-na    -------- --- 242
+
+                         AERmonZ P1  12: bry ch4 cly h2o hcl hno3 ho2 meanage n2o noy o3 oh
+       mon    Y-P39    -------- ---  12
+
+                            Amon P1  11: ch4 co2 hur hus n2o o3 ta ua va wap zg
+                        HOMALmon P1   5: ext550bc ext550dust ext550oa ext550so4 ext550ss
+       mon   XY-P19    -------- ---  16
+
+                            Amon P1   3: cl cli clw
+                            Emon P2   1: co23D
+       mon     XY-A    -------- ---   4
+
+                            Amon P1   1: mc
+       mon    XY-AH    -------- ---   1
+
+                            Emon P1   3: mrsfl mrsll mrsol
+                            Lmon P2   1: tsl
+       mon     XY-S    -------- ---   4
+
+                        HOMEPmon P1   3: co no2 o3
+       mon XY-Plev39hm    -------- ---   3
+
+                        HOMEPmon P1   6: hus ta ua va wap zg
+       mon  XY-P7HM    -------- ---   6
+
+       mon --------    -------- --- 288
+
+
+---------- --------    -------- --- 293
+
+
+Some Statistics on actually written variables per variable...
+--------------------------
+--- VARNAME: RADabs550aer: Absorption Aerosol Optical Depth at 550nm as seen in the radiative scheme
+--------------------------
+              * mon_HOMALmon_XY-na_1.0 RADabs550aer
+--------------------------
+--- VARNAME: RADasy550aer: Asymmetry parameter at 550nm as seen in the radiative scheme
+--------------------------
+              * mon_HOMALmon_XY-na_1.0 RADasy550aer
+-------------------------
+--- VARNAME: RADod550aer: Aerosol Optical Depth at 550nm as seen in the radiative scheme
+-------------------------
+              * mon_HOMALmon_XY-na_1.0 RADod550aer
+--------------------------
+--- VARNAME: RADssa550aer: Single Scattering Albedo at 550nm as seen in the radiative scheme
+--------------------------
+              * mon_HOMALmon_XY-na_1.0 RADssa550aer
+--------------------------
+--- VARNAME: TACabs550aer: Absorption Aerosol Optical Depth at 550nm in the aerosol scheme
+--------------------------
+              * mon_HOMALmon_XY-na_1.0 TACabs550aer
+-----------------------
+--- VARNAME: abs550aer: ambient aerosol absorption optical thickness at 550 nm
+-----------------------
+              *   mon_AERmon_XY-na_1 abs550aer
+--------------------
+--- VARNAME: agesno: Snow Age
+--------------------
+              *    mon_LImon_XY-na_1 agesno
+-------------------
+--- VARNAME: albsn: Snow Albedo
+-------------------
+              *  mon_Nonemon_XY-na_1 albsn
+---------------------
+--- VARNAME: albsrfc: Surface albedo
+---------------------
+              * mon_HOMALmon_XY-na_1.0 albsrfc
+-----------------------
+--- VARNAME: albsrfcLa: Albedo over Lakes
+-----------------------
+              * mon_HOMALmon_XY-na_1.0 albsrfcLa
+-----------------------
+--- VARNAME: asy550aer: Aerosol Asymmetry Parameter at 550 nm
+-----------------------
+              * mon_HOMALmon_XY-na_1.0 asy550aer
+--------------------------
+--- VARNAME: baresoilFrac: Bare Soil Fraction
+--------------------------
+              *     mon_Lmon_XY-na_1 baresoilFrac
+-----------------
+--- VARNAME: bry: Total inorganic bromine volume mixing ratio
+-----------------
+              *  mon_AERmonZ_Y-P39_1 bry
+-----------------------
+--- VARNAME: burntArea: natural burnt area fraction
+-----------------------
+              * mon_HOMALmon_XY-na_1.0 burntArea
+------------------------------
+--- VARNAME: burntFractionAll: Percentage of Entire Grid cell  that is Covered by Burnt Vegetation (All Classes)
+------------------------------
+              *     mon_Lmon_XY-na_1 burntFractionAll
+-------------------
+--- VARNAME: cLand: Total Carbon in All Terrestrial Carbon Pools
+-------------------
+              *     mon_Emon_XY-na_1 cLand
+-------------------
+--- VARNAME: cLeaf: Carbon Mass in Leaves
+-------------------
+              *     mon_Lmon_XY-na_2 cLeaf
+---------------------
+--- VARNAME: cLitter: Carbon Mass in Litter Pool
+---------------------
+              *     mon_Lmon_XY-na_1 cLitter
+--------------------------
+--- VARNAME: cLitterBelow: Carbon Mass in Below-Ground Litter
+--------------------------
+              *     mon_Lmon_XY-na_2 cLitterBelow
+--------------------------
+--- VARNAME: cLitterGrass: Carbon mass in litter on grass tiles
+--------------------------
+              *     mon_Emon_XY-na_2 cLitterGrass
+----------------------------
+--- VARNAME: cLitterSubSurf: Carbon Mass in Below-Ground Litter
+----------------------------
+              *     mon_Emon_XY-na_2 cLitterSubSurf
+-------------------------
+--- VARNAME: cLitterSurf: Carbon Mass in Above-Ground Litter
+-------------------------
+              *     mon_Emon_XY-na_2 cLitterSurf
+-------------------------
+--- VARNAME: cLitterTree: Carbon mass in litter on tree tiles
+-------------------------
+              *     mon_Emon_XY-na_2 cLitterTree
+----------------------
+--- VARNAME: cProduct: Carbon Mass in Products of Land Use Change
+----------------------
+              *     mon_Lmon_XY-na_1 cProduct
+-------------------
+--- VARNAME: cRoot: Carbon Mass in Roots
+-------------------
+              *     mon_Lmon_XY-na_2 cRoot
+-------------------
+--- VARNAME: cSoil: Carbon Mass in Soil Pool
+-------------------
+              *     mon_Emon_XY-na_1 cSoil
+-----------------------
+--- VARNAME: cSoilFast: Carbon Mass in Fast Soil Pool
+-----------------------
+              *     mon_Lmon_XY-na_2 cSoilFast
+------------------------
+--- VARNAME: cSoilGrass: Carbon mass in soil on grass tiles
+------------------------
+              *     mon_Emon_XY-na_2 cSoilGrass
+-------------------------
+--- VARNAME: cSoilMedium: Carbon Mass in Medium Soil Pool
+-------------------------
+              *     mon_Lmon_XY-na_2 cSoilMedium
+------------------------
+--- VARNAME: cSoilPools: Carbon mass in each model soil pool (summed over vertical levels)
+------------------------
+              *     mon_Emon_XY-na_2 cSoilPools
+-----------------------
+--- VARNAME: cSoilSlow: Carbon Mass in Slow Soil Pool
+-----------------------
+              *     mon_Lmon_XY-na_2 cSoilSlow
+-----------------------
+--- VARNAME: cSoilTree: Carbon mass in soil on tree tiles
+-----------------------
+              *     mon_Emon_XY-na_2 cSoilTree
+-------------------
+--- VARNAME: cStem: Carbon Mass in Stem
+-------------------
+              *     mon_Emon_XY-na_2 cStem
+-------------------------
+--- VARNAME: cTotFireLut: Total carbon loss from natural and managed fire on land use tile, including deforestation fires
+-------------------------
+              *     mon_Emon_XY-na_1 cTotFireLut
+------------------
+--- VARNAME: cVeg: Carbon Mass in Vegetation
+------------------
+              *     mon_Lmon_XY-na_1 cVeg
+-----------------------
+--- VARNAME: cVegGrass: Carbon mass in vegetation on grass tiles
+-----------------------
+              *     mon_Emon_XY-na_2 cVegGrass
+----------------------
+--- VARNAME: cVegTree: Carbon mass in vegetation on tree tiles
+----------------------
+              *     mon_Emon_XY-na_2 cVegTree
+-------------------
+--- VARNAME: cWood: Carbon Mass in Wood
+-------------------
+              *     mon_Emon_XY-na_2 cWood
+-----------------
+--- VARNAME: ccb: Air Pressure at Convective Cloud Base
+-----------------
+              *     mon_Amon_XY-na_1 ccb
+-----------------
+--- VARNAME: cct: Air Pressure at Convective Cloud Top
+-----------------
+              *     mon_Amon_XY-na_1 cct
+---------------------
+--- VARNAME: cdnctop: Liquid Cloud Droplet Number Concentration at Cloud Top
+---------------------
+              * mon_HOMALmon_XY-na_1.0 cdnctop
+-----------------
+--- VARNAME: ch4: CH4 volume mixing ratio
+-----------------
+              *  mon_AERmonZ_Y-P39_1 ch4
+              *    mon_Amon_XY-P19_1 ch4
+              Warning: several long names are available:
+                  - CH4 volume mixing ratio
+                  - Mole Fraction of CH4
+----------------
+--- VARNAME: ci: Fraction of Time Convection Occurs
+----------------
+              *     mon_Amon_XY-na_1 ci
+----------------
+--- VARNAME: cl: Cloud Area Fraction
+----------------
+              *      mon_Amon_XY-A_1 cl
+-----------------
+--- VARNAME: cli: Mass Fraction of Cloud Ice
+-----------------
+              *      mon_Amon_XY-A_1 cli
+-------------------
+--- VARNAME: clivi: Ice Water Path
+-------------------
+              *     mon_Amon_XY-na_1 clivi
+-----------------
+--- VARNAME: clt: Total Cloud Fraction
+-----------------
+              *     mon_Amon_XY-na_1 clt
+------------------
+--- VARNAME: clth: High Troposphere Cloud Area Fraction
+------------------
+              * mon_HOMALmon_XY-na_1.0 clth
+------------------
+--- VARNAME: cltl: Low Troposphere Cloud Area Fraction
+------------------
+              * mon_HOMALmon_XY-na_1.0 cltl
+------------------
+--- VARNAME: cltm: Mid Troposphere Cloud Area Fraction
+------------------
+              * mon_HOMALmon_XY-na_1.0 cltm
+-----------------
+--- VARNAME: clw: Mass Fraction of Cloud Liquid Water
+-----------------
+              *      mon_Amon_XY-A_1 clw
+-------------------
+--- VARNAME: clwvi: Condensed Water Path
+-------------------
+              *     mon_Amon_XY-na_1 clwvi
+-----------------
+--- VARNAME: cly: Total inorganic chlorine volume mixing ratio
+-----------------
+              *  mon_AERmonZ_Y-P39_1 cly
+----------------
+--- VARNAME: co: CO volume mixing ratio
+----------------
+              * mon_HOMEPmon_XY-Plev39hm_1.0 co
+-----------------
+--- VARNAME: co2: Mole Fraction of CO2
+-----------------
+              *    mon_Amon_XY-P19_1 co2
+-------------------
+--- VARNAME: co23D: 3D field of transported CO2
+-------------------
+              *      mon_Emon_XY-A_2 co23D
+------------------
+--- VARNAME: co2s: Atmosphere CO2
+------------------
+              *     mon_Emon_XY-na_2 co2s
+----------------------
+--- VARNAME: cropFrac: Crop Fraction
+----------------------
+              *     mon_Lmon_XY-na_1 cropFrac
+------------------------
+--- VARNAME: cropFracC3: Percentage Cover by C3 Crops
+------------------------
+              *     mon_Emon_XY-na_1 cropFracC3
+------------------------
+--- VARNAME: cropFracC4: Percentage Cover by C4 Crops
+------------------------
+              *     mon_Emon_XY-na_1 cropFracC4
+----------------
+--- VARNAME: cw: Total Canopy Water Storage
+----------------
+              *  mon_Nonemon_XY-na_1 cw
+------------------
+--- VARNAME: dmlt: Depth to soil thaw
+------------------
+              *  mon_Nonemon_XY-na_1 dmlt
+-------------------
+--- VARNAME: drybc: dry deposition rate of black carbon aerosol mass
+-------------------
+              *   mon_AERmon_XY-na_1 drybc
+---------------------
+--- VARNAME: drydust: dry deposition rate of dust
+---------------------
+              *   mon_AERmon_XY-na_1 drydust
+-------------------
+--- VARNAME: dryoa: dry deposition rate of dry aerosol total organic matter
+-------------------
+              *   mon_AERmon_XY-na_1 dryoa
+--------------------
+--- VARNAME: dryso2: dry deposition rate of so2
+--------------------
+              *   mon_AERmon_XY-na_1 dryso2
+--------------------
+--- VARNAME: dryso4: dry deposition rate of so4
+--------------------
+              *   mon_AERmon_XY-na_1 dryso4
+-------------------
+--- VARNAME: dryss: dry deposition rate of seasalt
+-------------------
+              *   mon_AERmon_XY-na_1 dryss
+-------------------
+--- VARNAME: emibc: emission rate of black carbon aerosol mass
+-------------------
+              *   mon_AERmon_XY-na_1 emibc
+---------------------
+--- VARNAME: emidust: total emission rate of dust
+---------------------
+              *   mon_AERmon_XY-na_1 emidust
+-------------------
+--- VARNAME: emioa: primary emission and chemical production of dry aerosol organic matter
+-------------------
+              *   mon_AERmon_XY-na_1 emioa
+--------------------
+--- VARNAME: emiso2: total emission rate of so2
+--------------------
+              *   mon_AERmon_XY-na_1 emiso2
+--------------------
+--- VARNAME: emiso4: total direct emission rate of so4
+--------------------
+              *   mon_AERmon_XY-na_1 emiso4
+-------------------
+--- VARNAME: emiss: total emission rate of seasalt
+-------------------
+              *   mon_AERmon_XY-na_1 emiss
+----------------
+--- VARNAME: et: Total Evapotranspiration
+----------------
+              *  mon_Nonemon_XY-na_1 et
+---------------------
+--- VARNAME: evspsbl: Evaporation
+---------------------
+              *     mon_Amon_XY-na_1 evspsbl
+------------------------
+--- VARNAME: evspsblpot: Potential Evapotranspiration
+------------------------
+              *     mon_Emon_XY-na_1 evspsblpot
+------------------------
+--- VARNAME: evspsblsoi: Water Evaporation from Soil
+------------------------
+              *     mon_Lmon_XY-na_1 evspsblsoi
+------------------------
+--- VARNAME: evspsblveg: Evaporation from Canopy
+------------------------
+              *     mon_Lmon_XY-na_1 evspsblveg
+----------------------
+--- VARNAME: ext550bc: Black Carbon Aerosol Extinction Coefficient at 550 nm
+----------------------
+              * mon_HOMALmon_XY-P19_1.0 ext550bc
+------------------------
+--- VARNAME: ext550dust: Dust Aerosol Extinction Coefficient at 550 nm
+------------------------
+              * mon_HOMALmon_XY-P19_1.0 ext550dust
+----------------------
+--- VARNAME: ext550oa: Organic Matter Aerosol Extinction Coefficient at 550 nm
+----------------------
+              * mon_HOMALmon_XY-P19_1.0 ext550oa
+-----------------------
+--- VARNAME: ext550so4: Sulfate Aerosol Extinction Coefficient at 550 nm
+-----------------------
+              * mon_HOMALmon_XY-P19_1.0 ext550so4
+----------------------
+--- VARNAME: ext550ss: Sea-Salt Aerosol Extinction Coefficient at 550 nm
+----------------------
+              * mon_HOMALmon_XY-P19_1.0 ext550ss
+--------------------------
+--- VARNAME: fAnthDisturb: carbon mass flux into atmosphere due to any human activity
+--------------------------
+              *     mon_Emon_XY-na_1 fAnthDisturb
+------------------------------
+--- VARNAME: fDeforestToAtmos: Deforested biomass that goes into atmosphere as a result of anthropogenic land use change
+------------------------------
+              *     mon_Emon_XY-na_2 fDeforestToAtmos
+--------------------------
+--- VARNAME: fDeforestToL: carbon transferred to soil or litter pools due to lulucf processes
+--------------------------
+              * mon_HOMALmon_XY-na_1.0 fDeforestToL
+--------------------------------
+--- VARNAME: fDeforestToProduct: Deforested biomass that goes into product pool as a result of anthropogenic land use change
+--------------------------------
+              *     mon_Emon_XY-na_1 fDeforestToProduct
+----------------------
+--- VARNAME: fFireAll: Carbon Mass Flux into Atmosphere due to CO2 emissions from Fire resulting from all sources including natural, anthropogenic and land use change.
+----------------------
+              *     mon_Emon_XY-na_2 fFireAll
+------------------------
+--- VARNAME: fFireBCarb: Black Carbon Flux into Atmosphere due to Emission from natural Fire
+------------------------
+              * mon_HOMALmon_XY-na_1.0 fFireBCarb
+----------------------
+--- VARNAME: fFireNat: Carbon Mass Flux into Atmosphere due to CO2 Emission from natural Fire
+----------------------
+              *     mon_Emon_XY-na_1 fFireNat
+-------------------------
+--- VARNAME: fLitterSoil: Total Carbon Mass Flux from Litter to Soil
+-------------------------
+              *     mon_Lmon_XY-na_1 fLitterSoil
+------------------
+--- VARNAME: fLuc: Net Carbon Mass Flux into Atmosphere due to Land Use Change
+------------------
+              *     mon_Emon_XY-na_1 fLuc
+--------------------------
+--- VARNAME: fLulccAtmLut: carbon transferred directly to atmosphere due to any land-use or land-cover change activities including deforestation or agricultural fire
+--------------------------
+              *     mon_Emon_XY-na_1 fLulccAtmLut
+------------------------------
+--- VARNAME: fLulccProductLut: carbon harvested due to land-use or land-cover change process that enters anthropogenic product pools on tile
+------------------------------
+              *     mon_Emon_XY-na_1 fLulccProductLut
+------------------------------
+--- VARNAME: fLulccResidueLut: carbon transferred to soil or litter pools due to land-use or land-cover change processes on tile
+------------------------------
+              *     mon_Emon_XY-na_1 fLulccResidueLut
+----------------------------
+--- VARNAME: fProductDecomp: decomposition out of product pools to CO2 in atmos
+----------------------------
+              *     mon_Emon_XY-na_1 fProductDecomp
+-------------------------------
+--- VARNAME: fProductDecompLut: flux from wood and agricultural product pools on land use tile into atmosphere
+-------------------------------
+              *     mon_Emon_XY-na_1 fProductDecompLut
+-----------------------
+--- VARNAME: fRegrowth: carbon flux due to plant regrowth related to land-use or land-cover change processes
+-----------------------
+              * mon_HOMALmon_XY-na_1.0 fRegrowth
+----------------------
+--- VARNAME: fVegFire: Carbon Mass Flux from Vegetation into Atmosphere due to CO2 Emission from all Fire
+----------------------
+              *     mon_Emon_XY-na_2 fVegFire
+------------------------
+--- VARNAME: fVegLitter: Total Carbon Mass Flux from Vegetation to Litter
+------------------------
+              *     mon_Lmon_XY-na_1 fVegLitter
+----------------------
+--- VARNAME: fco2antt: Carbon Mass Flux into Atmosphere Due to All Anthropogenic Emissions of CO2
+----------------------
+              *     mon_Amon_XY-na_1 fco2antt
+---------------------
+--- VARNAME: fco2fos: Carbon Mass Flux into Atmosphere Due to Fossil Fuel Emissions of CO2
+---------------------
+              *     mon_Amon_XY-na_1 fco2fos
+---------------------
+--- VARNAME: fco2nat: Surface Carbon Mass Flux into the Atmosphere Due to Natural Sources
+---------------------
+              *     mon_Amon_XY-na_1 fco2nat
+---------------------
+--- VARNAME: fracLut: fraction of grid cell for each land use tile
+---------------------
+              *     mon_Emon_XY-na_1 fracLut
+------------------
+--- VARNAME: fsat: soil saturated fraction
+------------------
+              * mon_HOMALmon_XY-na_1.0 fsat
+-----------------
+--- VARNAME: gpp: Carbon Mass Flux out of Atmosphere due to Gross Primary Production on Land
+-----------------
+              *     mon_Lmon_XY-na_1 gpp
+----------------------
+--- VARNAME: gppGrass: gross primary production on grass tiles
+----------------------
+              *     mon_Emon_XY-na_2 gppGrass
+--------------------
+--- VARNAME: gppLut: gross primary productivity on land use tile
+--------------------
+              *     mon_Emon_XY-na_1 gppLut
+---------------------
+--- VARNAME: gppTree: gross primary production on tree tiles
+---------------------
+              *     mon_Emon_XY-na_2 gppTree
+-----------------------
+--- VARNAME: grassFrac: Natural Grass Fraction
+-----------------------
+              *     mon_Lmon_XY-na_1 grassFrac
+-------------------------
+--- VARNAME: grassFracC3: C3 grass Area Percentage
+-------------------------
+              *     mon_Emon_XY-na_1 grassFracC3
+-------------------------
+--- VARNAME: grassFracC4: C4 grass Area Percentage
+-------------------------
+              *     mon_Emon_XY-na_1 grassFracC4
+-----------------
+--- VARNAME: h2o: Mass Fraction of Water
+-----------------
+              *  mon_AERmonZ_Y-P39_1 h2o
+-----------------
+--- VARNAME: hcl: HCl volume mixing ratio
+-----------------
+              *  mon_AERmonZ_Y-P39_1 hcl
+-------------------
+--- VARNAME: hfdsl: Downward Heat Flux at Land Surface
+-------------------
+              *  mon_Nonemon_XY-na_1 hfdsl
+-------------------
+--- VARNAME: hfdsn: Downward Heat Flux into Snow Where Land over Land
+-------------------
+              *    mon_LImon_XY-na_1 hfdsn
+------------------
+--- VARNAME: hfls: Surface Upward Latent Heat Flux
+------------------
+              *     mon_Amon_XY-na_1 hfls
+---------------------
+--- VARNAME: hflsLut: latent heat flux on land use tile
+---------------------
+              *     mon_Emon_XY-na_1 hflsLut
+------------------
+--- VARNAME: hfss: Surface Upward Sensible Heat Flux
+------------------
+              *     mon_Amon_XY-na_1 hfss
+---------------------
+--- VARNAME: hfssLut: sensible heat flux on land use tile
+---------------------
+              *     mon_Emon_XY-na_1 hfssLut
+------------------
+--- VARNAME: hno3: HNO3 volume mixing ratio
+------------------
+              *  mon_AERmonZ_Y-P39_1 hno3
+-----------------
+--- VARNAME: ho2: HO2 volume mixing ratio
+-----------------
+              *  mon_AERmonZ_Y-P39_1 ho2
+-----------------
+--- VARNAME: hur: Relative Humidity
+-----------------
+              *    mon_Amon_XY-P19_1 hur
+------------------
+--- VARNAME: hurs: Near-Surface Relative Humidity
+------------------
+              *     mon_Amon_XY-na_1 hurs
+-----------------
+--- VARNAME: hus: Specific Humidity
+-----------------
+              *    mon_Amon_XY-P19_1 hus
+              * mon_HOMEPmon_XY-P7HM_1.0 hus
+------------------
+--- VARNAME: huss: Near-Surface Specific Humidity
+------------------
+              *     mon_Amon_XY-na_1 huss
+---------------------
+--- VARNAME: hussLut: near-surface specific humidity on land use tile
+---------------------
+              *     mon_Emon_XY-na_1 hussLut
+--------------------
+--- VARNAME: icedLa: ice thickness over lake
+--------------------
+              * mon_HOMALmon_XY-na_1.0 icedLa
+------------------
+--- VARNAME: icod: Ice_Cloud_Optical_Depth
+------------------
+              * mon_HOMALmon_XY-na_1.0 icod
+----------------------
+--- VARNAME: intuadse: Vertically integrated Eastward dry transport (cp.T +zg).u (Mass_weighted_vertical integral of the product of northward wind by dry static_energy per mass unit)
+----------------------
+              *     mon_Emon_XY-na_1 intuadse
+--------------------
+--- VARNAME: intuaw: Vertically integrated Eastward moisture transport (Mass_weighted_vertical integral of the product of eastward wind by total water mass per unit mass)
+--------------------
+              *     mon_Emon_XY-na_1 intuaw
+----------------------
+--- VARNAME: intvadse: Vertically integrated Northward dry transport (cp.T +zg).v (Mass_weighted_vertical integral of the product of northward wind by dry static_energy per mass unit)
+----------------------
+              *     mon_Emon_XY-na_1 intvadse
+--------------------
+--- VARNAME: intvaw: Vertically integrated Northward moisture transport (Mass_weighted_vertical integral of the product of northward wind by total water mass per unit mass)
+--------------------
+              *     mon_Emon_XY-na_1 intvaw
+-----------------
+--- VARNAME: lai: Leaf Area Index
+-----------------
+              *     day_Eday_XY-na_1 lai
+              *     mon_Lmon_XY-na_1 lai
+--------------------
+--- VARNAME: laiLut: Leaf Area Index on Land Use Tile
+--------------------
+              *     mon_Emon_XY-na_1 laiLut
+------------------
+--- VARNAME: lcod: Liquid Cloud Optical Depth
+------------------
+              * mon_HOMALmon_XY-na_1.0 lcod
+-------------------
+--- VARNAME: lwsnl: Liquid Water Content of Snow Layer
+-------------------
+              *    mon_LImon_XY-na_2 lwsnl
+----------------
+--- VARNAME: mc: Convective Mass Flux
+----------------
+              *     mon_Amon_XY-AH_1 mc
+---------------------
+--- VARNAME: meanage: Mean Age of Stratospheric Air
+---------------------
+              *  mon_AERmonZ_Y-P39_1 meanage
+-------------------
+--- VARNAME: mrfso: Soil Frozen Water Content
+-------------------
+              *     mon_Lmon_XY-na_1 mrfso
+-------------------
+--- VARNAME: mrlso: Soil Liquid Water Content
+-------------------
+              *     mon_Emon_XY-na_1 mrlso
+------------------
+--- VARNAME: mrro: Total Runoff
+------------------
+              *     mon_Lmon_XY-na_1 mrro
+---------------------
+--- VARNAME: mrroLut: Total runoff from land use tile
+---------------------
+              *     mon_Emon_XY-na_1 mrroLut
+-------------------
+--- VARNAME: mrros: Surface Runoff
+-------------------
+              *     mon_Lmon_XY-na_1 mrros
+-------------------
+--- VARNAME: mrsfl: Frozen water content of soil layer
+-------------------
+              *      day_Eday_XY-S_1 mrsfl
+              *      mon_Emon_XY-S_1 mrsfl
+-------------------
+--- VARNAME: mrsll: Liquid water content of soil layer
+-------------------
+              *      day_Eday_XY-S_1 mrsll
+              *      mon_Emon_XY-S_1 mrsll
+------------------
+--- VARNAME: mrso: Total Soil Moisture Content
+------------------
+              *     mon_Lmon_XY-na_1 mrso
+---------------------
+--- VARNAME: mrsoLut: Total soil moisture
+---------------------
+              *     mon_Emon_XY-na_1 mrsoLut
+-------------------
+--- VARNAME: mrsol: Total water content of soil layer
+-------------------
+              *      day_Eday_XY-S_1 mrsol
+              *      mon_Emon_XY-S_1 mrsol
+-------------------
+--- VARNAME: mrsos: Moisture in Upper Portion of Soil Column
+-------------------
+              *     mon_Lmon_XY-na_1 mrsos
+----------------------
+--- VARNAME: mrsosLut: Moisture in Upper Portion of Soil Column of land use tile
+----------------------
+              *     mon_Emon_XY-na_1 mrsosLut
+-------------------
+--- VARNAME: mrsow: Total Soil Wetness
+-------------------
+              *  mon_Nonemon_XY-na_1 mrsow
+-------------------
+--- VARNAME: mrtws: Total water storage in a grid cell
+-------------------
+              *     mon_Emon_XY-na_2 mrtws
+-----------------
+--- VARNAME: n2o: Mole Fraction of N2O
+-----------------
+              *  mon_AERmonZ_Y-P39_1 n2o
+              *    mon_Amon_XY-P19_1 n2o
+              Warning: several long names are available:
+                  - Mole Fraction of N2O
+                  - N2O volume mixing ratio
+-----------------
+--- VARNAME: nbp: Carbon Mass Flux out of Atmosphere due to Net Biospheric Production on Land
+-----------------
+              *     mon_Lmon_XY-na_1 nbp
+------------------
+--- VARNAME: necb: net rate of C accumulation (or loss)
+------------------
+              * mon_HOMALmon_XY-na_1.0 necb
+---------------------
+--- VARNAME: necbLut: net rate of C accumulation (or loss) on land use tile
+---------------------
+              *     mon_Emon_XY-na_1 necbLut
+-----------------
+--- VARNAME: nep: Net Carbon Mass Flux out of Atmophere due to Net Ecosystem Productivity on Land.
+-----------------
+              *     mon_Emon_XY-na_1 nep
+---------------------------------
+--- VARNAME: netAtmosLandCO2Flux: Net flux of CO2 between atmosphere and land (positive into land) as a result of all processes.
+---------------------------------
+              *     mon_Emon_XY-na_1 netAtmosLandCO2Flux
+-----------------
+--- VARNAME: no2: NO2 volume mixing ratio
+-----------------
+              * mon_HOMEPmon_XY-Plev39hm_1.0 no2
+-----------------
+--- VARNAME: noy: Total reactive nitrogen volume mixing ratio
+-----------------
+              *  mon_AERmonZ_Y-P39_1 noy
+-----------------
+--- VARNAME: npp: Carbon Mass Flux out of Atmosphere due to Net Primary Production on Land
+-----------------
+              *     mon_Lmon_XY-na_1 npp
+----------------------
+--- VARNAME: nppGrass: net primary production on grass tiles
+----------------------
+              *     mon_Emon_XY-na_2 nppGrass
+--------------------
+--- VARNAME: nppLut: net primary productivity on land use tile
+--------------------
+              *     mon_Emon_XY-na_1 nppLut
+---------------------
+--- VARNAME: nppTree: net primary production on tree tiles
+---------------------
+              *     mon_Emon_XY-na_2 nppTree
+------------------------
+--- VARNAME: nwdFracLut: fraction of land use tile tile that is non-woody vegetation ( e.g. herbaceous crops)
+------------------------
+              *     mon_Emon_XY-na_1 nwdFracLut
+----------------
+--- VARNAME: o3: Mole Fraction of O3
+----------------
+              *  mon_AERmonZ_Y-P39_1 o3
+              *    mon_Amon_XY-P19_1 o3
+              * mon_HOMEPmon_XY-Plev39hm_1.0 o3
+              Warning: several long names are available:
+                  - Mole Fraction of O3
+                  - Ozone volume mixing ratio
+--------------------------
+--- VARNAME: od550acldaer: Above-cloud Aerosol Optical Depth at 550 nm
+--------------------------
+              * mon_HOMALmon_XY-na_1.0 od550acldaer
+----------------------
+--- VARNAME: od550aer: ambient aerosol optical thickness at 550 nm
+----------------------
+              *   mon_AERmon_XY-na_1 od550aer
+---------------------
+--- VARNAME: od550bc: black carbon aod@550nm
+---------------------
+              *   mon_AERmon_XY-na_1 od550bc
+-----------------------
+--- VARNAME: od550dust: dust aod@550nm
+-----------------------
+              *   mon_AERmon_XY-na_1 od550dust
+---------------------------
+--- VARNAME: od550dustbin1: Dust Bin 1 Aerosol Optical Depth at 550 nm
+---------------------------
+              * mon_HOMALmon_XY-na_1.0 od550dustbin1
+---------------------------
+--- VARNAME: od550dustbin2: Dust Bin 2 Aerosol Optical Depth at 550 nm
+---------------------------
+              * mon_HOMALmon_XY-na_1.0 od550dustbin2
+---------------------
+--- VARNAME: od550oa: total organic aerosol aod@550nm
+---------------------
+              *   mon_AERmon_XY-na_1 od550oa
+----------------------
+--- VARNAME: od550so4: sulfate aod@550nm
+----------------------
+              *   mon_AERmon_XY-na_1 od550so4
+---------------------
+--- VARNAME: od550ss: sea salt aod@550nm
+---------------------
+              *   mon_AERmon_XY-na_1 od550ss
+-------------------------
+--- VARNAME: od550ssbin1: Sea-salt Bin 1 Aerosol Optical Depth at 550 nm
+-------------------------
+              * mon_HOMALmon_XY-na_1.0 od550ssbin1
+-------------------------
+--- VARNAME: od550ssbin2: Sea-salt Bin 2 Aerosol Optical Depth at 550 nm
+-------------------------
+              * mon_HOMALmon_XY-na_1.0 od550ssbin2
+----------------
+--- VARNAME: oh: OH volume mixing ratio
+----------------
+              *  mon_AERmonZ_Y-P39_1 oh
+----------------
+--- VARNAME: pr: Precipitation
+----------------
+              *     mon_Amon_XY-na_1 pr
+-----------------
+--- VARNAME: prc: Convective Precipitation
+-----------------
+              *     mon_Amon_XY-na_1 prc
+------------------
+--- VARNAME: prsn: Snowfall Flux
+------------------
+              *     mon_Amon_XY-na_1 prsn
+-------------------
+--- VARNAME: prveg: Precipitation onto Canopy
+-------------------
+              *     mon_Lmon_XY-na_2 prveg
+-----------------
+--- VARNAME: prw: Water Vapor Path
+-----------------
+              *     mon_Amon_XY-na_1 prw
+----------------
+--- VARNAME: ps: Surface Air Pressure
+----------------
+              *     mon_Amon_XY-na_1 ps
+-----------------
+--- VARNAME: psl: Sea Level Pressure
+-----------------
+              *     mon_Amon_XY-na_1 psl
+-----------------
+--- VARNAME: ptp: Tropopause Air Pressure
+-----------------
+              *   mon_AERmon_XY-na_1 ptp
+----------------
+--- VARNAME: ra: Carbon Mass Flux into Atmosphere due to Autotrophic (Plant) Respiration on Land
+----------------
+              *     mon_Lmon_XY-na_1 ra
+---------------------
+--- VARNAME: raGrass: autotrophic respiration on grass tiles
+---------------------
+              *     mon_Emon_XY-na_2 raGrass
+-------------------
+--- VARNAME: raLut: plant respiration on land use tile
+-------------------
+              *     mon_Emon_XY-na_1 raLut
+--------------------
+--- VARNAME: raTree: autotrophic respiration on tree tiles
+--------------------
+              *     mon_Emon_XY-na_2 raTree
+------------------------
+--- VARNAME: reffclitop: Ice Cloud Droplet Effective Radius
+------------------------
+              * mon_HOMALmon_XY-na_1.0 reffclitop
+----------------------------
+--- VARNAME: reffclwtopcnrm: Liquid Cloud Droplet Effective Radius
+----------------------------
+              * mon_HOMALmon_XY-na_1.0 reffclwtopcnrm
+--------------------------
+--- VARNAME: residualFrac: Fraction of Grid Cell that is Land but Neither Vegetation-Covered nor Bare Soil
+--------------------------
+              *     mon_Lmon_XY-na_1 residualFrac
+----------------
+--- VARNAME: rh: Carbon Mass Flux into Atmosphere due to Heterotrophic Respiration on Land
+----------------
+              *     mon_Lmon_XY-na_1 rh
+---------------------
+--- VARNAME: rhGrass: heterotrophic respiration on grass tiles
+---------------------
+              *     mon_Emon_XY-na_2 rhGrass
+----------------------
+--- VARNAME: rhLitter: Carbon Mass Flux into Atmosphere due to Heterotrophic Respiration from Litter on Land
+----------------------
+              *     mon_Emon_XY-na_2 rhLitter
+-------------------
+--- VARNAME: rhLut: soil heterotrophic respiration on land use tile
+-------------------
+              *     mon_Emon_XY-na_1 rhLut
+--------------------
+--- VARNAME: rhSoil: Carbon Mass Flux into Atmosphere due to Heterotrophic Respiration from Soil on Land
+--------------------
+              *     mon_Emon_XY-na_2 rhSoil
+--------------------
+--- VARNAME: rhTree: heterotrophic respiration on tree tiles
+--------------------
+              *     mon_Emon_XY-na_2 rhTree
+------------------
+--- VARNAME: rlds: Surface Downwelling Longwave Radiation
+------------------
+              *     mon_Amon_XY-na_1 rlds
+--------------------
+--- VARNAME: rldsaf: Surface Aerosol-Free Downwelling Longwave Radiation
+--------------------
+              * mon_HOMALmon_XY-na_1.0 rldsaf
+--------------------
+--- VARNAME: rldscs: Surface Downwelling Clear-Sky Longwave Radiation
+--------------------
+              *     mon_Amon_XY-na_1 rldscs
+----------------------
+--- VARNAME: rldscsaf: Surface Clear-Sky Aerosol-Free Downwelling Longwave Radiation
+----------------------
+              * mon_HOMALmon_XY-na_1.0 rldscsaf
+------------------
+--- VARNAME: rlus: Surface Upwelling Longwave Radiation
+------------------
+              *     mon_Amon_XY-na_1 rlus
+---------------------
+--- VARNAME: rlusLut: Surface Upwelling Longwave on Land Use Tile
+---------------------
+              *     mon_Emon_XY-na_1 rlusLut
+--------------------
+--- VARNAME: rlusaf: Surface Aerosol-Free Upwelling Longwave Radiation
+--------------------
+              * mon_HOMALmon_XY-na_1.0 rlusaf
+--------------------
+--- VARNAME: rluscs: Surface Upwelling Longwave Flux in Air Assuming Clear Sky
+--------------------
+              * mon_HOMALmon_XY-na_1.0 rluscs
+----------------------
+--- VARNAME: rluscsaf: Surface Clear-Sky Aerosol-Free Upwelling Longwave Radiation
+----------------------
+              * mon_HOMALmon_XY-na_1.0 rluscsaf
+------------------
+--- VARNAME: rlut: TOA Outgoing Longwave Radiation
+------------------
+              *     mon_Amon_XY-na_1 rlut
+--------------------
+--- VARNAME: rlutaf: TOA Outgoing Aerosol-Free Longwave Radiation
+--------------------
+              *   mon_AERmon_XY-na_1 rlutaf
+--------------------
+--- VARNAME: rlutcs: TOA Outgoing Clear-Sky Longwave Radiation
+--------------------
+              *     mon_Amon_XY-na_1 rlutcs
+----------------------
+--- VARNAME: rlutcsaf: TOA Outgoing Clear-Sky, Aerosol-Free Longwave Radiation
+----------------------
+              *   mon_AERmon_XY-na_1 rlutcsaf
+------------------
+--- VARNAME: rsds: Surface Downwelling Shortwave Radiation
+------------------
+              *     mon_Amon_XY-na_1 rsds
+--------------------
+--- VARNAME: rsdsaf: Surface Aerosol-Free Downwelling Shortwave Radiation
+--------------------
+              * mon_HOMALmon_XY-na_1.0 rsdsaf
+--------------------
+--- VARNAME: rsdscs: Surface Downwelling Clear-Sky Shortwave Radiation
+--------------------
+              *     mon_Amon_XY-na_1 rsdscs
+----------------------
+--- VARNAME: rsdscsaf: Surface Clear-Sky Aerosol-Free Downwelling Shortwave Radiation
+----------------------
+              * mon_HOMALmon_XY-na_1.0 rsdscsaf
+------------------
+--- VARNAME: rsdt: TOA Incident Shortwave Radiation
+------------------
+              *     mon_Amon_XY-na_1 rsdt
+------------------
+--- VARNAME: rsus: Surface Upwelling Shortwave Radiation
+------------------
+              *     mon_Amon_XY-na_1 rsus
+---------------------
+--- VARNAME: rsusLut: Surface Upwelling Shortwave  on Land Use Tile
+---------------------
+              *     mon_Emon_XY-na_1 rsusLut
+--------------------
+--- VARNAME: rsusaf: Surface Aerosol-Free Upwelling Shortwave Radiation
+--------------------
+              * mon_HOMALmon_XY-na_1.0 rsusaf
+--------------------
+--- VARNAME: rsuscs: Surface Upwelling Clear-Sky Shortwave Radiation
+--------------------
+              *     mon_Amon_XY-na_1 rsuscs
+----------------------
+--- VARNAME: rsuscsaf: Surface Clear-Sky Aerosol-Free Upwelling Shortwave Radiation
+----------------------
+              * mon_HOMALmon_XY-na_1.0 rsuscsaf
+------------------
+--- VARNAME: rsut: TOA Outgoing Shortwave Radiation
+------------------
+              *     mon_Amon_XY-na_1 rsut
+--------------------
+--- VARNAME: rsutaf: toa outgoing shortwave radiation
+--------------------
+              *   mon_AERmon_XY-na_1 rsutaf
+--------------------
+--- VARNAME: rsutcs: TOA Outgoing Clear-Sky Shortwave Radiation
+--------------------
+              *     mon_Amon_XY-na_1 rsutcs
+----------------------
+--- VARNAME: rsutcsaf: toa outgoing clear-sky shortwave radiation
+----------------------
+              *   mon_AERmon_XY-na_1 rsutcsaf
+------------------
+--- VARNAME: rzwc: Root zone soil moisture
+------------------
+              *  mon_Nonemon_XY-na_1 rzwc
+-----------------
+--- VARNAME: sbl: Surface Snow and Ice Sublimation Flux
+-----------------
+              *     mon_Amon_XY-na_1 sbl
+              *    mon_LImon_XY-na_1 sbl
+---------------------
+--- VARNAME: sconcbc: Surface Concentration of Black Carbon
+---------------------
+              * mon_HOMALmon_XY-na_1.0 sconcbc
+-----------------------
+--- VARNAME: sconcdust: Surface Concentration of Dust
+-----------------------
+              *     mon_Emon_XY-na_1 sconcdust
+---------------------
+--- VARNAME: sconcoa: Surface Concentration of Organic Matter
+---------------------
+              * mon_HOMALmon_XY-na_1.0 sconcoa
+----------------------
+--- VARNAME: sconcso4: Surface Concentration of SO4
+----------------------
+              *     mon_Emon_XY-na_1 sconcso4
+---------------------
+--- VARNAME: sconcss: Surface Concentration of Seasalt
+---------------------
+              *     mon_Emon_XY-na_1 sconcss
+---------------------
+--- VARNAME: sfcWind: Near-Surface Wind Speed
+---------------------
+              *     mon_Amon_XY-na_1 sfcWind
+------------------------
+--- VARNAME: sfcWindmax: Mean Daily Maximum Near-Surface Wind Speed
+------------------------
+              *     mon_Emon_XY-na_1 sfcWindmax
+---------------------
+--- VARNAME: siconca: Sea Ice Area Fraction (Atmospheric Grid)
+---------------------
+              *    day_SIday_XY-na_1 siconca
+              *    mon_SImon_XY-na_1 siconca
+-----------------
+--- VARNAME: snc: Snow Area Fraction
+-----------------
+              *    mon_LImon_XY-na_1 snc
+------------------
+--- VARNAME: snct: Snow Covered Fraction including vegetation masking over land
+------------------
+              * mon_HOMALmon_XY-na_1.0 snct
+-----------------
+--- VARNAME: snd: Snow Depth
+-----------------
+              *    mon_LImon_XY-na_1 snd
+-------------------
+--- VARNAME: sndLa: surface snow thickness over lake
+-------------------
+              * mon_HOMALmon_XY-na_1.0 sndLa
+-----------------
+--- VARNAME: snm: Surface Snow Melt
+-----------------
+              *    mon_LImon_XY-na_1 snm
+-----------------
+--- VARNAME: snw: Surface Snow Amount
+-----------------
+              *    mon_LImon_XY-na_1 snw
+-----------------------
+--- VARNAME: ssa550aer: Aerosol Single Scattering Albedo at 550 nm
+-----------------------
+              * mon_HOMALmon_XY-na_1.0 ssa550aer
+--------------------
+--- VARNAME: sweLut: snow water equivalent on land use tile
+--------------------
+              *     mon_Emon_XY-na_1 sweLut
+------------------------
+--- VARNAME: tSoilPools: turnover rate of each model soil carbon pool
+------------------------
+              *     mon_Emon_XY-na_2 tSoilPools
+----------------
+--- VARNAME: ta: Air Temperature
+----------------
+              *    mon_Amon_XY-P19_1 ta
+              * mon_HOMEPmon_XY-P7HM_1.0 ta
+-----------------
+--- VARNAME: tas: Near-Surface Air Temperature
+-----------------
+              *     mon_Amon_XY-na_1 tas
+--------------------
+--- VARNAME: tasLut: near-surface air temperature (2m above displacement height, i.e. t_ref) on land use tile
+--------------------
+              *     mon_Emon_XY-na_1 tasLut
+--------------------
+--- VARNAME: tasmax: Daily Maximum Near-Surface Air Temperature
+--------------------
+              *     mon_Amon_XY-na_1 tasmax
+--------------------
+--- VARNAME: tasmin: Daily Minimum Near-Surface Air Temperature
+--------------------
+              *     mon_Amon_XY-na_1 tasmin
+------------------
+--- VARNAME: tauu: Surface Downward Eastward Wind Stress
+------------------
+              *     mon_Amon_XY-na_1 tauu
+------------------
+--- VARNAME: tauv: Surface Downward Northward Wind Stress
+------------------
+              *     mon_Amon_XY-na_1 tauv
+--------------------
+--- VARNAME: tmxlLa: Lake Mixed Layer Temperature
+--------------------
+              * mon_HOMALmon_XY-na_1.0 tmxlLa
+-----------------
+--- VARNAME: toz: Total Ozone Column
+-----------------
+              *   mon_AERmon_XY-na_1 toz
+------------------
+--- VARNAME: tran: Transpiration
+------------------
+              *     mon_Lmon_XY-na_1 tran
+----------------------
+--- VARNAME: treeFrac: Tree Cover Fraction
+----------------------
+              *     mon_Lmon_XY-na_1 treeFrac
+----------------
+--- VARNAME: ts: Surface Temperature
+----------------
+              *     mon_Amon_XY-na_1 ts
+------------------
+--- VARNAME: tsLa: Surface Temperature over Lake
+------------------
+              * mon_HOMALmon_XY-na_1.0 tsLa
+-----------------
+--- VARNAME: tsl: Temperature of Soil
+-----------------
+              *      mon_Lmon_XY-S_2 tsl
+----------------------
+--- VARNAME: tslsiLut: Surface Temperature on Landuse Tile
+----------------------
+              *     mon_Emon_XY-na_1 tslsiLut
+-----------------
+--- VARNAME: tsn: Snow Internal Temperature
+-----------------
+              *    mon_LImon_XY-na_1 tsn
+----------------
+--- VARNAME: ua: Eastward Wind
+----------------
+              *    mon_Amon_XY-P19_1 ua
+              * mon_HOMEPmon_XY-P7HM_1.0 ua
+-----------------
+--- VARNAME: uas: Eastward Near-Surface Wind
+-----------------
+              *     mon_Amon_XY-na_1 uas
+----------------
+--- VARNAME: va: Northward Wind
+----------------
+              *    mon_Amon_XY-P19_1 va
+              * mon_HOMEPmon_XY-P7HM_1.0 va
+-----------------
+--- VARNAME: vas: Northward Near-Surface Wind
+-----------------
+              *     mon_Amon_XY-na_1 vas
+---------------------
+--- VARNAME: vegFrac: Total vegetated fraction
+---------------------
+              *     mon_Emon_XY-na_1 vegFrac
+-----------------------
+--- VARNAME: vegstress: Soil Water Stress Index for Plant Transpiration over Land
+-----------------------
+              * mon_HOMALmon_XY-na_1.0 vegstress
+-----------------
+--- VARNAME: wap: omega (=dp/dt)
+-----------------
+              *    mon_Amon_XY-P19_1 wap
+              * mon_HOMEPmon_XY-P7HM_1.0 wap
+-------------------
+--- VARNAME: wetbc: wet deposition rate of black carbon aerosol mass
+-------------------
+              *   mon_AERmon_XY-na_1 wetbc
+---------------------
+--- VARNAME: wetdust: wet deposition rate of dust
+---------------------
+              *   mon_AERmon_XY-na_1 wetdust
+-------------------
+--- VARNAME: wetoa: wet deposition rate of dry aerosol total organic matter
+-------------------
+              *   mon_AERmon_XY-na_1 wetoa
+--------------------
+--- VARNAME: wetso4: wet deposition rate of so4
+--------------------
+              *   mon_AERmon_XY-na_1 wetso4
+-------------------
+--- VARNAME: wetss: wet deposition rate of seasalt
+-------------------
+              *   mon_AERmon_XY-na_1 wetss
+----------------
+--- VARNAME: zg: Geopotential Height
+----------------
+              *    mon_Amon_XY-P19_1 zg
+              * mon_HOMEPmon_XY-P7HM_1.0 zg
+-----------------
+--- VARNAME: ztp: Tropopause Altitude above Geoid
+-----------------
+              *   mon_AERmon_XY-na_1 ztp
+
+Warnings about cell methods (with var list)
+	time: mean where natural_grasses for vars: {'cLitterGrass', 'cSoilGrass', 'cVegGrass', 'gppGrass', 'nppGrass', 'raGrass', 'rhGrass'}
+	time: mean where trees for vars: {'cLitterTree', 'cSoilTree', 'cVegTree', 'gppTree', 'nppTree', 'raTree', 'rhTree'}
+	time: mean where land_use for vars: {'cTotFireLut', 'fLulccAtmLut', 'fLulccProductLut', 'fLulccResidueLut', 'fProductDecompLut', 'fahLut', 'gppLut', 'hflsLut', 'hfssLut', 'hussLut', 'irrLut', 'laiLut', 'mrroLut', 'mrsoLut', 'mrsosLut', 'necbLut', 'nppLut', 'raLut', 'rhLut', 'rlusLut', 'rsusLut', 'sweLut', 'tasLut', 'tslsiLut'}
+	Cannot yet handle time: mean (with samples weighted by snow mass) for vars: {'agesno', 'tsn'}
+
+ **************************************************
+*
+*              dr2xml version:  3.0
+*   CMIP6 conventions version:  v6.2.4
+*  CMIP6 Data Request version:  01.00.21.post1
+
+*
+ **************************************************
+
+**************************************************
+
+Processing context  trip
+
+**************************************************
+
+Number of distinct CMOR variables (whatever the grid): 209
+Number of distinct var labels is: 195
+Number of simplified vars is: 209
+Issues with standard names are: ['cLand', 'cTotFireLut', 'fAnthDisturb', 'fBNF', 'fCLandToOcean', 'fDeforestToProduct', 'fFireNat', 'fHarvestToProduct', 'fLulccAtmLut', 'fLulccProductLut', 'fN2O', 'fNAnthDisturb', 'fNLandToOcean', 'fNLitterSoil', 'fNProduct', 'fNVegLitter', 'fNVegSoil', 'fNdep', 'fNfert', 'fNgas', 'fNleach', 'fNloss', 'fNnetmin', 'fNup', 'fProductDecomp', 'fProductDecompLut', 'irrLut', 'laiLut', 'mrlso', 'mrsfl', 'mrsll', 'nLand', 'nLitter', 'nMineral', 'nProduct', 'nSoil', 'nVeg', 'nwdFracLut', 'sitimefrac', 'sweLut']
+homevars file: current_directory/test_AOESM_ssp585_CM6_r3/input/home_data_request/home_data_request_arpege_GCM.txt current_directory/test_AOESM_ssp585_CM6_r3/input/home_data_request/home_data_request_surfex_GCM.txt current_directory/test_AOESM_ssp585_CM6_r3/input/home_data_request/home_data_request_trip_GCM.txt current_directory/test_AOESM_ssp585_CM6_r3/input/home_data_request/home_data_request_nemo_GCM.txt current_directory/test_AOESM_ssp585_CM6_r3/input/home_data_request/home_data_request_arpege_ESM_AddOn.txt current_directory/test_AOESM_ssp585_CM6_r3/input/home_data_request/home_data_request_surfex_ESM_AddOn.txt current_directory/test_AOESM_ssp585_CM6_r3/input/home_data_request/home_data_request_trip_ESM_AddOn.txt current_directory/test_AOESM_ssp585_CM6_r3/input/home_data_request/home_data_request_nemo_ESM_AddOn.txt
+For extra table CNRM_HOMEPmon (which has 9 variables):
+	Variables which dim was found in extra coordinates table:
+		            Plev39hm: co no2 o3
+
+		             plev7hm: hus ta ua va wap zg
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		         XY-Plev39hm: co no2 o3
+
+		          XY-plev7hm: hus ta ua va wap zg
+
+For extra table CNRM_HOMALmon (which has 93 variables):
+	Variables which dim was found in extra coordinates table:
+		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		             XY-sza5: parasolCRefl
+
+		       XY-tau|plev7c: clmodis
+
+		             XY-temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+For extra table CNRM_HOMAL3hrPt (which has 93 variables):
+	Variables which dim was found in extra coordinates table:
+		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		             XY-sza5: parasolCRefl
+
+		       XY-tau|plev7c: clmodis
+
+		             XY-temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+For extra table CNRM_HOMOImon (which has 103 variables):
+	Variables which dim was found in extra coordinates table:
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+
+Number of 'cmor', 'dev' and 'perso' among home variables: 344
+Number of 'extra' among home variables: 142
+homevars list: psl ps pr prsn prc rsdscs rsuscs rldscs rsdt rsut rsutcs rsutaf rsutcsaf rlut rlutcs rlutaf rlutcsaf prw clt clwvi clivi intuaw intvaw intuadse intvadse toz ta ua va zg hus hur wap ztp ptp tas rsds rsus rlds rlus mrso mrsos mrfso mrros mrro tsl snd snw snc lwsnl mrtws dmlt prveg gpp npp ts evspsbl evspsblpot sbl hfls hfss tasmin tasmax hfdsl albsn cw rzwc mrsow et uas vas sfcWind sfcWindmax hurs huss tauu tauv wtd rivo areacello tos zos sos rsntds hfds hfx hfy wfo friver ficeberg2d tauuo tauvo t20d mlotst mlotstmin hcont300 bigthetao bigthetaoga so soga sosga uo vo wo umo vmo wmo thkcello mfo msftyz htovgyre htovovrt zostoga siconc sivol sithick sisnthick sitemptop siu siv sisaltmass sitempsnic sihc sisnhc sidmassth sidmassdyn sivoln sivols siextentn siextents siage siareaacrossline siarean siareas sicompstren sidconcdyn sidconcth sidmassdyn sidmassevapsubl sidmassgrowthbot sidmassgrowthwat sidmasslat sidmassmeltbot sidmassmelttop sidmasssi sidmassth sidmasstranx sidmasstrany sidragbot sifb siflcondbot siflcondtop siflfwbot siflfwdrain sifllatstop sifllwutop siflsensupbot siflswdbot siflswutop sihc simassacrossline sipr sisnhc sistrxdtop sistrxubot sistrydtop sistryubot sitempbot sitempsnic sndmassdyn sndmassmelt sndmasssi sndmasssnf sndmasssubl sndmasswindrif snmassacrossline od550aer od550ss od550dust od550so4 od550bc od550oa abs550aer emiso2 emiss emidust emiso4 emibc emioa dryso2 dryss drydust dryso4 drybc dryoa wetss wetdust wetso4 wetbc wetoa sconcss sconcdust sconcso4 bry ch4 cly h2o hcl hno3 ho2 meanage n2o noy o3 oh co23D co2s lai gppGrass gppTree ra raGrass raTree rh rhSoil rhLitter rhGrass rhTree nppGrass nppTree nep cVeg cVegGrass cVegTree cLitter cSoil cSoilFast cSoilSlow cSoilGrass cSoilTree cSoilMedium cProduct cLand cLeaf cStem cWood cRoot cLitterSurf cLitterSubSurf cLitterBelow cLitterGrass cLitterTree fVegLitter fLitterSoil burntFractionAll fFireNat fFireAll fVegFire fDeforestToAtmos fDeforestToProduct fProductDecomp fLuc nbp cSoilPools tSoilPools chlos dfe dissic dpco2 epc100 epcalc100 epsi100 fgco2 fgo2 intdic intdoc intpp no3 o2 ph po4 remoc si spco2 talk bfe bsi calc chldiat chlmisc co3 co3satcalc dcalc detoc dissoc dmso expfe fric intpoc intppdiat intppnitrate limfediat limfemisc limirrdiat limirrmisc limndiat limnmisc nh4 pcalc phyc phycos phydiat phyfe phymisc physi pp zmeso zmicro zooc bfeos bsios chldiatos chlmiscos dmsos dpo2 epfe100 fescav fgdms fsfe fsn graz icfriver intpbfe intpbsi intpcalcite intpn2 intppmisc ocfriver phyfeos physios ppdiat ppmisc zo2min zsatcalc ta ua va zg hus wap cltl cltm clth rluscs rsdsaf rsusaf rldsaf rlusaf rldscsaf rluscsaf rsdscsaf rsuscsaf lcod icod reffclwtopcnrm reffclitop cdnctop RADasy550aer RADssa550aer RADod550aer RADabs550aer albsrfc vegstress snct fsat albsrfcLa sndLa icedLa tsLa tmxlLa fldf fwtd heatc hc700 hc2000 rhop somematr sozomatr ssh sialb sisnvol sitimefrac15 sits dfwnt dhcicea dhciced dhcicel dhcicet sidmassr dmsalt efhfso evapice flnsduo flnsdusi flswdso flswdssi flswduo flswdusi hfdssi hfoi ialb nsftdso nsftdssi rfhfso rfhfssi rhosn sfhfso sfhfssi sidhci sifliendbot siflnsntop siflrentop siflsaltbot siflsentop sipro sisnalb sndmasslat sndmassr sndmassth subL subO subTot vsfsub vsflml vsfsal vsfhsi vsfsni wai wao wiov snovols snovoln o3 co no2 asy550aer ssa550aer od550acldaer od550ssbin1 od550ssbin2 od550dustbin1 od550dustbin2 TACabs550aer sconcbc sconcoa ext550ss ext550dust ext550so4 ext550bc ext550oa necb fDeforestToL fRegrowth burntArea fFireBCarb carbw carbdis carbin xfracal GRAZ1 GRAZ2 Nfix MuN MuD LBDMS FeP pdust Totlig Biron Dpn2o Heup N2O N2Oflx SCquotan SCquotad Yield
+
+Realms for these CMORvars: aerosol atmos atmos atmosChem land land landIce landIce landIce land ocean ocnBgChem ocnBgchem seaIce seaIce ocean
+processing file current_directory/test_AOESM_ssp585_CM6_r3/input/xml/ping_surfex.xml:
+OK current_directory/test_AOESM_ssp585_CM6_r3/input/xml/ping_surfex.xml
+processing file current_directory/test_AOESM_ssp585_CM6_r3/input/xml/ping_nemo.xml:
+OK current_directory/test_AOESM_ssp585_CM6_r3/input/xml/ping_nemo.xml
+processing file current_directory/test_AOESM_ssp585_CM6_r3/input/xml/ping_nemo_gelato.xml:
+OK current_directory/test_AOESM_ssp585_CM6_r3/input/xml/ping_nemo_gelato.xml
+processing file current_directory/test_AOESM_ssp585_CM6_r3/input/xml/ping_nemo_ocnBgChem.xml:
+OK current_directory/test_AOESM_ssp585_CM6_r3/input/xml/ping_nemo_ocnBgChem.xml
+processing file current_directory/test_AOESM_ssp585_CM6_r3/input/xml/ping_trip.xml:
+OK current_directory/test_AOESM_ssp585_CM6_r3/input/xml/ping_trip.xml
+
+file_def written as current_directory/test_AOESM_ssp585_CM6_r3/test_outputs/dr2xml_trip.xml
+
+
+Some Statistics on actually written variables per frequency+shape...
+                            Eday P1   1: rivo
+       day    XY-na    -------- ---   1
+
+       day --------    -------- ---   1
+
+                            Emon P2   1: wtd
+                        HOMALmon P1   5: carbdis carbin carbw fldf fwtd
+       mon    XY-na    -------- ---   6
+
+       mon --------    -------- ---   6
+
+
+---------- --------    -------- ---   7
+
+
+Some Statistics on actually written variables per variable...
+---------------------
+--- VARNAME: carbdis: River carbon Outflow or discharge
+---------------------
+              * mon_HOMALmon_XY-na_1.0 carbdis
+--------------------
+--- VARNAME: carbin: River carbon inflow
+--------------------
+              * mon_HOMALmon_XY-na_1.0 carbin
+-------------------
+--- VARNAME: carbw: River carbon storage
+-------------------
+              * mon_HOMALmon_XY-na_1.0 carbw
+------------------
+--- VARNAME: fldf: floodplain fraction over land
+------------------
+              * mon_HOMALmon_XY-na_1.0 fldf
+------------------
+--- VARNAME: fwtd: grid-cell fraction allowing upward capillary fluxes from wtd
+------------------
+              * mon_HOMALmon_XY-na_1.0 fwtd
+------------------
+--- VARNAME: rivo: River Discharge
+------------------
+              *     day_Eday_XY-na_1 rivo
+-----------------
+--- VARNAME: wtd: Water table depth from surface.
+-----------------
+              *     mon_Emon_XY-na_2 wtd

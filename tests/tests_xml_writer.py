@@ -10,17 +10,20 @@ from __future__ import division, print_function, unicode_literals, absolute_impo
 import unittest
 from collections import OrderedDict
 from copy import copy
+import sys
+import os
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from xml_writer.pre_treatment import _pre_xml_string_format, replace_char_at_pos_by_string, \
     iterate_on_characters_to_check
-from xml_writer.element import is_xml_element
-from xml_writer.comment import _find_xml_comment
-from xml_writer.header import _find_xml_header
+from xml_writer.element import is_xml_element, Element
+from xml_writer.comment import _find_xml_comment, Comment
+from xml_writer.header import _find_xml_header, Header
 from xml_writer.beacon import Beacon
 from xml_writer.utils import _build_dict_attrib, _find_text, iterate_on_string
 from xml_writer.parser import generate_xml_tree_from_list, find_next_element, generate_list_from_xml_string, \
-	parse_xml_string_rewrite, _find_one_part_element
-from xml_writer import Comment, Header, Element
+    parse_xml_string_rewrite, _find_one_part_element
 
 
 class TestNonSpecificMethods(unittest.TestCase):

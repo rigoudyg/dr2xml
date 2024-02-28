@@ -1,0 +1,1550 @@
+
+ **************************************************
+*
+*              dr2xml version:  3.0
+*   CMIP6 conventions version:  v6.2.4
+*  CMIP6 Data Request version:  01.00.21.post1
+
+*
+ **************************************************
+
+**************************************************
+
+Processing context  surfex
+
+**************************************************
+
+Number of Request Links which apply to MIPS ['CORDEX']  is: 4
+Number of Request Links after filtering by excluded_request_links is: 4
+Number of Request Links after filtering by included_request_links is: 4
+Filtering for experiment amip, covering years [  ,  ] in DR
+Number of Request Links which apply to experiment amip member 1 and MIPs ['CORDEX'] is: 0
+Number of (CMOR variable, grid) pairs for these requestLinks is: 0
+Number once filtered by excluded/included vars and tables and spatial shapes is: 0
+Number of distinct CMOR variables (whatever the grid): 0
+Number of distinct var labels is: 0
+Number of simplified vars is: 0
+Issues with standard names are: []
+homevars file: current_directory/test_AAD50_641/input/home_data_request/home_data_request_aladin_RCM.txt current_directory/test_AAD50_641/input/home_data_request/home_data_request_aladin_aerosols_RCM.txt current_directory/test_AAD50_641/input/home_data_request/home_data_request_trip_RCM.txt
+For extra table CNRM_HOMALmon (which has 116 variables):
+	Variables which dim was found in extra coordinates table:
+		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		             XY-sza5: parasolCRefl
+
+		       XY-tau|plev7c: clmodis
+
+		             XY-temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+For extra table CNRM_HOMEPmon (which has 44 variables):
+	Variables which dim was found in extra coordinates table:
+		            Plev39hm: co no2 o3
+
+		             plev200: hur200 hus200 ta200 ua200 va200 wap200 zg200
+
+		             plev500: hur500 hus500 ta500 ua500 va500 wap500 zg500
+
+		             plev700: hur700 hus700 ta700 ua700 va700 wap700 zg700
+
+		             plev7hm: hus ta ua va wap zg
+
+		             plev850: hur850 hus850 ta850 ua850 va850 wap850 zg850
+
+		             plev925: hur925 hus925 ta925 ua925 va925 wap925 zg925
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		         XY-Plev39hm: co no2 o3
+
+		          XY-plev200: hur200 hus200 ta200 ua200 va200 wap200 zg200
+
+		          XY-plev500: hur500 hus500 ta500 ua500 va500 wap500 zg500
+
+		          XY-plev700: hur700 hus700 ta700 ua700 va700 wap700 zg700
+
+		          XY-plev7hm: hus ta ua va wap zg
+
+		          XY-plev850: hur850 hus850 ta850 ua850 va850 wap850 zg850
+
+		          XY-plev925: hur925 hus925 ta925 ua925 va925 wap925 zg925
+
+For extra table CNRM_HOMALday (which has 116 variables):
+	Variables which dim was found in extra coordinates table:
+		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		             XY-sza5: parasolCRefl
+
+		       XY-tau|plev7c: clmodis
+
+		             XY-temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+For extra table CNRM_HOMEPday (which has 44 variables):
+	Variables which dim was found in extra coordinates table:
+		            Plev39hm: co no2 o3
+
+		             plev200: hur200 hus200 ta200 ua200 va200 wap200 zg200
+
+		             plev500: hur500 hus500 ta500 ua500 va500 wap500 zg500
+
+		             plev700: hur700 hus700 ta700 ua700 va700 wap700 zg700
+
+		             plev7hm: hus ta ua va wap zg
+
+		             plev850: hur850 hus850 ta850 ua850 va850 wap850 zg850
+
+		             plev925: hur925 hus925 ta925 ua925 va925 wap925 zg925
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		         XY-Plev39hm: co no2 o3
+
+		          XY-plev200: hur200 hus200 ta200 ua200 va200 wap200 zg200
+
+		          XY-plev500: hur500 hus500 ta500 ua500 va500 wap500 zg500
+
+		          XY-plev700: hur700 hus700 ta700 ua700 va700 wap700 zg700
+
+		          XY-plev7hm: hus ta ua va wap zg
+
+		          XY-plev850: hur850 hus850 ta850 ua850 va850 wap850 zg850
+
+		          XY-plev925: hur925 hus925 ta925 ua925 va925 wap925 zg925
+
+For extra table CNRM_HOMAL6hr (which has 99 variables):
+	Variables which dim was found in extra coordinates table:
+		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		             XY-sza5: parasolCRefl
+
+		       XY-tau|plev7c: clmodis
+
+		             XY-temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+For extra table CNRM_HOME6hrPlevPt (which has 44 variables):
+	Variables which dim was found in extra coordinates table:
+		            Plev39hm: co no2 o3
+
+		             plev200: hur200 hus200 ta200 ua200 va200 wap200 zg200
+
+		             plev500: hur500 hus500 ta500 ua500 va500 wap500 zg500
+
+		             plev700: hur700 hus700 ta700 ua700 va700 wap700 zg700
+
+		             plev7hm: hus ta ua va wap zg
+
+		             plev850: hur850 hus850 ta850 ua850 va850 wap850 zg850
+
+		             plev925: hur925 hus925 ta925 ua925 va925 wap925 zg925
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		         XY-Plev39hm: co no2 o3
+
+		          XY-plev200: hur200 hus200 ta200 ua200 va200 wap200 zg200
+
+		          XY-plev500: hur500 hus500 ta500 ua500 va500 wap500 zg500
+
+		          XY-plev700: hur700 hus700 ta700 ua700 va700 wap700 zg700
+
+		          XY-plev7hm: hus ta ua va wap zg
+
+		          XY-plev850: hur850 hus850 ta850 ua850 va850 wap850 zg850
+
+		          XY-plev925: hur925 hus925 ta925 ua925 va925 wap925 zg925
+
+For extra table CNRM_HOMAL1hrPt (which has 111 variables):
+	Variables which dim was found in extra coordinates table:
+		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		             XY-sza5: parasolCRefl
+
+		       XY-tau|plev7c: clmodis
+
+		             XY-temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+For extra table CNRM_HOMAL1hr (which has 112 variables):
+	Variables which dim was found in extra coordinates table:
+		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		             XY-sza5: parasolCRefl
+
+		       XY-tau|plev7c: clmodis
+
+		             XY-temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+Number of 'cmor', 'dev' and 'perso' among home variables: 244
+Number of 'extra' among home variables: 173
+homevars list: areacella mrsofc orog rootd sftgif sftlf cdnc clivi clt cltc clwvi evspsbl hfls hfss hur hurs hus lwp mrfso mrro mrros mrso od550aer od550ss od550dust od550so4 od550bc od550oa pr prc prsn prw ps psl rlds rlus rldscs rlut rlutcs rlutaf rlutcsaf rsds rsus rsdscs rsuscs rsdt rsut rsutcs rsutaf rsutcsaf sfcWind sfcWindmax siconca snc snd snm snw ta tas tasmax tasmin tauu tauv toz ts tsland ua uas va vas wap zg clt clivi clwvi evspsbl hfls hfss hur hurs hus huss lwp mrfso mrro mrros mrso pr prc prhmax prsn prw ps psl rlds rldscs rlus rlut rlutcs rlutaf rlutcsaf rsds rsdscs rsus rsuscs rsdt rsut rsutcs rsutaf rsutcsaf sfcWind sfcWindmax siconca snc snd snm snw ta tas tasmax tasmin tauu tauv ts tsland ua uas va vas wap zg clivi clwvi evspsbl mrro mrros rsdt rlut rsut snc snd snm snw tauu tauv ts uas vas clt hfls hfss hurs huss pr prc prsn ps psl rlds rlus rsds rsus sfcWind tas uas vas evspsbl hfls hfss hurs huss pr psl rlds rlus rsds rsus sfcWind tas tauu tauv uas vas abs550aer drybc drydust drynh3 drynh4 dryoa dryso2 dryss dryso4 emibc emidust eminh3 emioa emiso2 emiso4 emiss od440aer od550aer od550ss od550dust od550so4 od550bc od550oa od550no3 od870aer sconcss sconcdust sconcso4 wetbc wetdust wetnh4 wetoa wetso4 wetss abs550aer emiss emidust od550aer od550ss od550dust od550so4 od550bc od550oa od550no3 sconcss sconcdust sconcso4 drybc drydust drynh4 dryoa dryss dryso4 wetbc wetdust wetnh4 wetoa wetss wetso4 wtd rivo cdnctop cltl cltm clth hur925 hur850 hur700 hur500 hur200 husll hus925 hus850 hus700 hus500 hus200 RADasy550aer RADssa550aer RADod550aer RADabs550aer reffclitop reffclwtopcnrm rluscs rldsaf rlusaf rldscsaf rluscsaf rsdsaf rsusaf rsdscsaf rsuscsaf tall ta925 ta850 ta700 ta500 ta200 tssea uall ua925 ua850 ua700 ua500 ua200 vall va925 va850 va700 va500 va200 wap925 wap850 wap700 wap500 wap200 zg925 zg850 zg700 zg500 zg200 cltl cltm clth husll hus925 hus850 hus700 hus500 hus200 rluscs rldsaf rlusaf rldscsaf rluscsaf rsdsaf rsusaf rsdscsaf rsuscsaf tall ta925 ta850 ta700 ta500 ta200 tssea uall ua925 ua850 ua700 ua500 ua200 vall va925 va850 va700 va500 va200 zg925 zg850 zg700 zg500 zg200 cltl cltm clth hus925 hus850 hus700 hus500 hus200 mrfso mrso ta925 ta850 ta700 ta500 ta200 ua925 ua850 ua700 ua500 ua200 va925 va850 va700 va500 va200 zg925 zg850 zg700 zg500 zg200 tssea asy550aer dryno3 eminh4 emino3 ext550bc ext550dust ext550nh4 ext550no3 ext550oa ext550so4 ext550ss od550ssbin1 od550ssbin2 od550dustbin1 od550dustbin2 od550no3bin1 od550nh4 sconcbc sconcoa sconcno3 sconcnh4 seddust sedno3 sedss ssa550aer TACabs550aer wetno3 asy550aer od550nh4 sconcbc sconcoa sconcno3 sconcnh4 ssa550aer dryno3 seddust sedno3 sedss wetno3 fldf fwtd
+
+Realms for these CMORvars: aerosol atmos atmos land land land landIce landIce land seaIce
+Processing realm 'atmos atmosChem' of context 'surfex' -- no variable asked (skip)
+Processing realm 'atmosChem' of context 'surfex' -- no variable asked (skip)
+Processing realm 'landIce' of context 'surfex' -- no variable asked (skip)
+Processing realm 'aerosol' of context 'surfex'
+Processing realm 'atmos' of context 'surfex'
+Processing realm 'atmos land' of context 'surfex'
+Processing realm 'land' of context 'surfex'
+Processing realm 'land landIce' of context 'surfex'
+Processing realm 'landIce land' of context 'surfex'
+processing file current_directory/test_AAD50_641/input/xml/ping_surfex.xml:
+OK current_directory/test_AAD50_641/input/xml/ping_surfex.xml
+processing file current_directory/test_AAD50_641/input/xml/ping_trip.xml:
+OK current_directory/test_AAD50_641/input/xml/ping_trip.xml
+TBD: Cannot yet compute maximum hourly rate for          prhmax in table Eday -> averaging
+TBD: Cannot yet compute maximum hourly rate for          prhmax in table Eday -> averaging
+
+file_def written as current_directory/test_AAD50_641/test_outputs/dr2xml_surfex.xml
+
+Skipped variables (i.e. whose alias is not present in the pingfile):
+>>> TABLE:        HOMAL1hr 01/05 ----> wetno3(1.0)
+
+>>> TABLE:        HOMALmon 01/51 ----> wetno3(1.0)
+
+
+
+
+Some Statistics on actually written variables per frequency+shape...
+                          AERday P1   1: od550aer
+                            Eday P1   6: mrros prhmax prw snm ts tsland
+                            Eday P3   1: snd
+                        HOMALday P1  24: asy550aer clth cltl cltm husll od550nh4 rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf sconcbc sconcnh4 sconcno3 sconcoa ssa550aer tall tssea uall vall
+                         Noneday P1  29: abs550aer clivi clwvi emidust emiss evspsbl lwp mrfso od550bc od550dust od550no3 od550oa od550so4 od550ss ps rldscs rlutaf rlutcsaf rsdscs rsdt rsuscs rsut rsutaf rsutcs rsutcsaf sconcdust sconcso4 sconcss tauv
+                         Noneday P2   1: rlutcs
+                         Noneday P3   1: tauu
+                           SIday P1   1: siconca
+                             day P1  25: clt hfls hfss hurs huss mrro mrso pr prc prsn psl rlds rlus rlut rsds rsus sfcWind sfcWindmax snc snw tas tasmax tasmin uas vas
+       day    XY-na    -------- ---  89
+
+                        HOMEPday P1   5: hus200 ta200 ua200 va200 zg200
+       day XY-P200HM    -------- ---   5
+
+                        HOMEPday P1   5: hus500 ta500 ua500 va500 zg500
+       day XY-P500HM    -------- ---   5
+
+                        HOMEPday P1   5: hus700 ta700 ua700 va700 zg700
+       day XY-P700HM    -------- ---   5
+
+                        HOMEPday P1   5: hus850 ta850 ua850 va850 zg850
+       day XY-P850HM    -------- ---   5
+
+                        HOMEPday P1   5: hus925 ta925 ua925 va925 zg925
+       day XY-P925HM    -------- ---   5
+
+                             day P1   6: hur hus ta ua va wap
+                             day P2   1: zg
+       day    XY-P8    -------- ---   7
+
+       day --------    -------- --- 121
+
+                              fx P1   6: areacella mrsofc orog rootd sftgif sftlf
+        fx    XY-na    -------- ---   6
+
+        fx --------    -------- ---   6
+
+                            E1hr P3   1: psl
+                       None1hrPt P1   5: hurs huss sfcWind uas vas
+                       None1hrPt P3   1: tas
+     1hrPt    XY-na    -------- ---   7
+
+     1hrPt --------    -------- ---   7
+
+                            E1hr P1   1: pr
+                        HOMAL1hr P1   4: dryno3 seddust sedno3 sedss
+                      HOMAL1hrPt P1   1: tssea
+                         None1hr P1  20: drybc drydust drynh4 dryoa dryso4 dryss evspsbl hfls hfss rlds rlus rsds rsus tauv wetbc wetdust wetnh4 wetoa wetso4 wetss
+                         None1hr P3   1: tauu
+       1hr    XY-na    -------- ---  27
+
+       1hr --------    -------- ---  27
+
+                          AERmon P1  38: abs550aer cltc drybc drydust drynh3 drynh4 dryoa dryso2 dryso4 dryss emibc emidust eminh3 emioa emiso2 emiso4 emiss lwp od440aer od550aer od550bc od550dust od550no3 od550oa od550so4 od550ss od870aer rlutaf rlutcsaf rsutaf rsutcsaf toz wetbc wetdust wetnh4 wetoa wetso4 wetss
+                            Amon P1  34: clivi clt clwvi evspsbl hfls hfss hurs pr prc prsn prw ps psl rlds rldscs rlus rlut rlutcs rsds rsdscs rsdt rsus rsuscs rsut rsutcs sfcWind tas tasmax tasmin tauu tauv ts uas vas
+                            Emon P1   4: sconcdust sconcso4 sconcss sfcWindmax
+                        HOMALmon P1  43: RADabs550aer RADasy550aer RADod550aer RADssa550aer TACabs550aer asy550aer cdnctop clth cltl cltm dryno3 eminh4 emino3 husll od550dustbin1 od550dustbin2 od550nh4 od550no3bin1 od550ssbin1 od550ssbin2 reffclitop reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf sconcbc sconcnh4 sconcno3 sconcoa seddust sedno3 sedss ssa550aer tall tssea uall vall
+                           LImon P1   4: snc snd snm snw
+                            Lmon P1   4: mrfso mrro mrros mrso
+                         Nonemon P1   1: tsland
+                           SImon P1   1: siconca
+       mon    XY-na    -------- --- 129
+
+                          AERmon P1   1: cdnc
+       mon     XY-A    -------- ---   1
+
+                            Amon P1   7: hur hus ta ua va wap zg
+                        HOMALmon P1   7: ext550bc ext550dust ext550nh4 ext550no3 ext550oa ext550so4 ext550ss
+       mon   XY-P19    -------- ---  14
+
+                        HOMEPmon P1   7: hur200 hus200 ta200 ua200 va200 wap200 zg200
+       mon XY-P200HM    -------- ---   7
+
+                        HOMEPmon P1   7: hur500 hus500 ta500 ua500 va500 wap500 zg500
+       mon XY-P500HM    -------- ---   7
+
+                        HOMEPmon P1   7: hur700 hus700 ta700 ua700 va700 wap700 zg700
+       mon XY-P700HM    -------- ---   7
+
+                        HOMEPmon P1   7: hur850 hus850 ta850 ua850 va850 wap850 zg850
+       mon XY-P850HM    -------- ---   7
+
+                        HOMEPmon P1   7: hur925 hus925 ta925 ua925 va925 wap925 zg925
+       mon XY-P925HM    -------- ---   7
+
+       mon --------    -------- --- 179
+
+                             3hr P1   5: huss ps tas uas vas
+                       None3hrPt P1   3: hurs psl sfcWind
+     3hrPt    XY-na    -------- ---   8
+
+     3hrPt --------    -------- ---   8
+
+                             3hr P1  10: clt hfls hfss pr prc prsn rlds rlus rsds rsus
+       3hr    XY-na    -------- ---  10
+
+       3hr --------    -------- ---  10
+
+                       6hrPlevPt P3   1: ts
+                       6hrPlevPt P1   2: uas vas
+                        HOMAL6hr P1   2: mrfso mrso
+                       None6hrPt P1   2: clivi clwvi
+     6hrPt    XY-na    -------- ---   7
+
+     6hrPt --------    -------- ---   7
+
+                        HOMAL6hr P1   3: clth cltl cltm
+                         None6hr P1  10: evspsbl mrro mrros rsdt rsut snc snd snm snw tauv
+                         None6hr P2   1: rlut
+                         None6hr P3   1: tauu
+       6hr    XY-na    -------- ---  15
+
+                    HOME6hrPlevPt P1   5: hus200 ta200 ua200 va200 zg200
+       6hr XY-P200HM    -------- ---   5
+
+                    HOME6hrPlevPt P1   5: hus500 ta500 ua500 va500 zg500
+       6hr XY-P500HM    -------- ---   5
+
+                    HOME6hrPlevPt P1   5: hus700 ta700 ua700 va700 zg700
+       6hr XY-P700HM    -------- ---   5
+
+                    HOME6hrPlevPt P1   5: hus850 ta850 ua850 va850 zg850
+       6hr XY-P850HM    -------- ---   5
+
+                    HOME6hrPlevPt P1   5: hus925 ta925 ua925 va925 zg925
+       6hr XY-P925HM    -------- ---   5
+
+       6hr --------    -------- ---  40
+
+
+---------- --------    -------- --- 405
+
+
+Some Statistics on actually written variables per variable...
+--------------------------
+--- VARNAME: RADabs550aer: Absorption Aerosol Optical Depth at 550nm as seen in the radiative scheme
+--------------------------
+              * mon_HOMALmon_XY-na_1.0 RADabs550aer
+--------------------------
+--- VARNAME: RADasy550aer: Asymmetry parameter at 550nm as seen in the radiative scheme
+--------------------------
+              * mon_HOMALmon_XY-na_1.0 RADasy550aer
+-------------------------
+--- VARNAME: RADod550aer: Aerosol Optical Depth at 550nm as seen in the radiative scheme
+-------------------------
+              * mon_HOMALmon_XY-na_1.0 RADod550aer
+--------------------------
+--- VARNAME: RADssa550aer: Single Scattering Albedo at 550nm as seen in the radiative scheme
+--------------------------
+              * mon_HOMALmon_XY-na_1.0 RADssa550aer
+--------------------------
+--- VARNAME: TACabs550aer: Absorption Aerosol Optical Depth at 550nm in the aerosol scheme
+--------------------------
+              * mon_HOMALmon_XY-na_1.0 TACabs550aer
+-----------------------
+--- VARNAME: abs550aer: ambient aerosol absorption optical thickness at 550 nm
+-----------------------
+              *  day_Noneday_XY-na_1 abs550aer
+              *   mon_AERmon_XY-na_1 abs550aer
+-----------------------
+--- VARNAME: areacella: Grid-Cell Area for Atmospheric Variables
+-----------------------
+              *        fx_fx_XY-na_1 areacella
+-----------------------
+--- VARNAME: asy550aer: Aerosol Asymmetry Parameter at 550 nm
+-----------------------
+              * day_HOMALday_XY-na_1.0 asy550aer
+              * mon_HOMALmon_XY-na_1.0 asy550aer
+------------------
+--- VARNAME: cdnc: Cloud Liquid Droplet Number Concentration
+------------------
+              *    mon_AERmon_XY-A_1 cdnc
+---------------------
+--- VARNAME: cdnctop: Liquid Cloud Droplet Number Concentration at Cloud Top
+---------------------
+              * mon_HOMALmon_XY-na_1.0 cdnctop
+-------------------
+--- VARNAME: clivi: Ice Water Path
+-------------------
+              *  day_Noneday_XY-na_1 clivi
+              *     mon_Amon_XY-na_1 clivi
+              * 6hrPt_None6hrPt_XY-na_1 clivi
+-----------------
+--- VARNAME: clt: Total Cloud Fraction
+-----------------
+              *      day_day_XY-na_1 clt
+              *     mon_Amon_XY-na_1 clt
+              *      3hr_3hr_XY-na_1 clt
+------------------
+--- VARNAME: cltc: Convective Cloud Area Fraction
+------------------
+              *   mon_AERmon_XY-na_1 cltc
+------------------
+--- VARNAME: clth: High Troposphere Cloud Area Fraction
+------------------
+              * day_HOMALday_XY-na_1.0 clth
+              * mon_HOMALmon_XY-na_1.0 clth
+              * 6hr_HOMAL6hr_XY-na_1.0 clth
+------------------
+--- VARNAME: cltl: Low Troposphere Cloud Area Fraction
+------------------
+              * day_HOMALday_XY-na_1.0 cltl
+              * mon_HOMALmon_XY-na_1.0 cltl
+              * 6hr_HOMAL6hr_XY-na_1.0 cltl
+------------------
+--- VARNAME: cltm: Mid Troposphere Cloud Area Fraction
+------------------
+              * day_HOMALday_XY-na_1.0 cltm
+              * mon_HOMALmon_XY-na_1.0 cltm
+              * 6hr_HOMAL6hr_XY-na_1.0 cltm
+-------------------
+--- VARNAME: clwvi: Condensed Water Path
+-------------------
+              *  day_Noneday_XY-na_1 clwvi
+              *     mon_Amon_XY-na_1 clwvi
+              * 6hrPt_None6hrPt_XY-na_1 clwvi
+-------------------
+--- VARNAME: drybc: dry deposition rate of black carbon aerosol mass
+-------------------
+              *  1hr_None1hr_XY-na_1 drybc
+              *   mon_AERmon_XY-na_1 drybc
+---------------------
+--- VARNAME: drydust: dry deposition rate of dust
+---------------------
+              *  1hr_None1hr_XY-na_1 drydust
+              *   mon_AERmon_XY-na_1 drydust
+--------------------
+--- VARNAME: drynh3: dry deposition rate of nh3
+--------------------
+              *   mon_AERmon_XY-na_1 drynh3
+--------------------
+--- VARNAME: drynh4: dry deposition rate of nh4
+--------------------
+              *  1hr_None1hr_XY-na_1 drynh4
+              *   mon_AERmon_XY-na_1 drynh4
+--------------------
+--- VARNAME: dryno3: dry deposition rate of nitrate aerosol
+--------------------
+              * 1hr_HOMAL1hr_XY-na_1.0 dryno3
+              * mon_HOMALmon_XY-na_1.0 dryno3
+-------------------
+--- VARNAME: dryoa: dry deposition rate of dry aerosol total organic matter
+-------------------
+              *  1hr_None1hr_XY-na_1 dryoa
+              *   mon_AERmon_XY-na_1 dryoa
+--------------------
+--- VARNAME: dryso2: dry deposition rate of so2
+--------------------
+              *   mon_AERmon_XY-na_1 dryso2
+--------------------
+--- VARNAME: dryso4: dry deposition rate of so4
+--------------------
+              *  1hr_None1hr_XY-na_1 dryso4
+              *   mon_AERmon_XY-na_1 dryso4
+-------------------
+--- VARNAME: dryss: dry deposition rate of seasalt
+-------------------
+              *  1hr_None1hr_XY-na_1 dryss
+              *   mon_AERmon_XY-na_1 dryss
+-------------------
+--- VARNAME: emibc: emission rate of black carbon aerosol mass
+-------------------
+              *   mon_AERmon_XY-na_1 emibc
+---------------------
+--- VARNAME: emidust: total emission rate of dust
+---------------------
+              *  day_Noneday_XY-na_1 emidust
+              *   mon_AERmon_XY-na_1 emidust
+--------------------
+--- VARNAME: eminh3: total emission rate of nh3
+--------------------
+              *   mon_AERmon_XY-na_1 eminh3
+--------------------
+--- VARNAME: eminh4: total production rate of ammonium aerosol
+--------------------
+              * mon_HOMALmon_XY-na_1.0 eminh4
+--------------------
+--- VARNAME: emino3: total production rate of nitrate aerosol
+--------------------
+              * mon_HOMALmon_XY-na_1.0 emino3
+-------------------
+--- VARNAME: emioa: primary emission and chemical production of dry aerosol organic matter
+-------------------
+              *   mon_AERmon_XY-na_1 emioa
+--------------------
+--- VARNAME: emiso2: total emission rate of so2
+--------------------
+              *   mon_AERmon_XY-na_1 emiso2
+--------------------
+--- VARNAME: emiso4: total direct emission rate of so4
+--------------------
+              *   mon_AERmon_XY-na_1 emiso4
+-------------------
+--- VARNAME: emiss: total emission rate of seasalt
+-------------------
+              *  day_Noneday_XY-na_1 emiss
+              *   mon_AERmon_XY-na_1 emiss
+---------------------
+--- VARNAME: evspsbl: Evaporation
+---------------------
+              *  day_Noneday_XY-na_1 evspsbl
+              *  1hr_None1hr_XY-na_1 evspsbl
+              *     mon_Amon_XY-na_1 evspsbl
+              *  6hr_None6hr_XY-na_1 evspsbl
+----------------------
+--- VARNAME: ext550bc: Black Carbon Aerosol Extinction Coefficient at 550 nm
+----------------------
+              * mon_HOMALmon_XY-P19_1.0 ext550bc
+------------------------
+--- VARNAME: ext550dust: Dust Aerosol Extinction Coefficient at 550 nm
+------------------------
+              * mon_HOMALmon_XY-P19_1.0 ext550dust
+-----------------------
+--- VARNAME: ext550nh4: Ammonium Aerosol Extinction Coefficient at 550 nm
+-----------------------
+              * mon_HOMALmon_XY-P19_1.0 ext550nh4
+-----------------------
+--- VARNAME: ext550no3: Nitrate Aerosol Extinction Coefficient at 550 nm
+-----------------------
+              * mon_HOMALmon_XY-P19_1.0 ext550no3
+----------------------
+--- VARNAME: ext550oa: Organic Matter Aerosol Extinction Coefficient at 550 nm
+----------------------
+              * mon_HOMALmon_XY-P19_1.0 ext550oa
+-----------------------
+--- VARNAME: ext550so4: Sulfate Aerosol Extinction Coefficient at 550 nm
+-----------------------
+              * mon_HOMALmon_XY-P19_1.0 ext550so4
+----------------------
+--- VARNAME: ext550ss: Sea-Salt Aerosol Extinction Coefficient at 550 nm
+----------------------
+              * mon_HOMALmon_XY-P19_1.0 ext550ss
+------------------
+--- VARNAME: hfls: Surface Upward Latent Heat Flux
+------------------
+              *      day_day_XY-na_1 hfls
+              *  1hr_None1hr_XY-na_1 hfls
+              *     mon_Amon_XY-na_1 hfls
+              *      3hr_3hr_XY-na_1 hfls
+------------------
+--- VARNAME: hfss: Surface Upward Sensible Heat Flux
+------------------
+              *      day_day_XY-na_1 hfss
+              *  1hr_None1hr_XY-na_1 hfss
+              *     mon_Amon_XY-na_1 hfss
+              *      3hr_3hr_XY-na_1 hfss
+-----------------
+--- VARNAME: hur: Relative Humidity
+-----------------
+              *      day_day_XY-P8_1 hur
+              *    mon_Amon_XY-P19_1 hur
+--------------------
+--- VARNAME: hur200: Relative Humidity
+--------------------
+              * mon_HOMEPmon_XY-P200HM_1.0 hur200
+--------------------
+--- VARNAME: hur500: Relative Humidity
+--------------------
+              * mon_HOMEPmon_XY-P500HM_1.0 hur500
+--------------------
+--- VARNAME: hur700: Relative Humidity
+--------------------
+              * mon_HOMEPmon_XY-P700HM_1.0 hur700
+--------------------
+--- VARNAME: hur850: Relative Humidity
+--------------------
+              * mon_HOMEPmon_XY-P850HM_1.0 hur850
+--------------------
+--- VARNAME: hur925: Relative Humidity
+--------------------
+              * mon_HOMEPmon_XY-P925HM_1.0 hur925
+------------------
+--- VARNAME: hurs: Near-Surface Relative Humidity
+------------------
+              *      day_day_XY-na_1 hurs
+              * 1hrPt_None1hrPt_XY-na_1 hurs
+              *     mon_Amon_XY-na_1 hurs
+              * 3hrPt_None3hrPt_XY-na_1 hurs
+-----------------
+--- VARNAME: hus: Specific Humidity
+-----------------
+              *      day_day_XY-P8_1 hus
+              *    mon_Amon_XY-P19_1 hus
+--------------------
+--- VARNAME: hus200: Specific Humidity
+--------------------
+              * day_HOMEPday_XY-P200HM_1.0 hus200
+              * mon_HOMEPmon_XY-P200HM_1.0 hus200
+              * 6hr_HOME6hrPlevPt_XY-P200HM_1.0 hus200
+--------------------
+--- VARNAME: hus500: Specific Humidity
+--------------------
+              * day_HOMEPday_XY-P500HM_1.0 hus500
+              * mon_HOMEPmon_XY-P500HM_1.0 hus500
+              * 6hr_HOME6hrPlevPt_XY-P500HM_1.0 hus500
+--------------------
+--- VARNAME: hus700: Specific Humidity
+--------------------
+              * day_HOMEPday_XY-P700HM_1.0 hus700
+              * mon_HOMEPmon_XY-P700HM_1.0 hus700
+              * 6hr_HOME6hrPlevPt_XY-P700HM_1.0 hus700
+--------------------
+--- VARNAME: hus850: Specific Humidity
+--------------------
+              * day_HOMEPday_XY-P850HM_1.0 hus850
+              * mon_HOMEPmon_XY-P850HM_1.0 hus850
+              * 6hr_HOME6hrPlevPt_XY-P850HM_1.0 hus850
+--------------------
+--- VARNAME: hus925: Specific Humidity
+--------------------
+              * day_HOMEPday_XY-P925HM_1.0 hus925
+              * mon_HOMEPmon_XY-P925HM_1.0 hus925
+              * 6hr_HOME6hrPlevPt_XY-P925HM_1.0 hus925
+-------------------
+--- VARNAME: husll: Specific Humidity at Lowest Level
+-------------------
+              * day_HOMALday_XY-na_1.0 husll
+              * mon_HOMALmon_XY-na_1.0 husll
+------------------
+--- VARNAME: huss: Near-Surface Specific Humidity
+------------------
+              *      day_day_XY-na_1 huss
+              * 1hrPt_None1hrPt_XY-na_1 huss
+              *    3hrPt_3hr_XY-na_1 huss
+-----------------
+--- VARNAME: lwp: liquid water path
+-----------------
+              *  day_Noneday_XY-na_1 lwp
+              *   mon_AERmon_XY-na_1 lwp
+-------------------
+--- VARNAME: mrfso: Soil Frozen Water Content
+-------------------
+              *  day_Noneday_XY-na_1 mrfso
+              *     mon_Lmon_XY-na_1 mrfso
+              * 6hrPt_HOMAL6hr_XY-na_1.0 mrfso
+------------------
+--- VARNAME: mrro: Total Runoff
+------------------
+              *      day_day_XY-na_1 mrro
+              *     mon_Lmon_XY-na_1 mrro
+              *  6hr_None6hr_XY-na_1 mrro
+-------------------
+--- VARNAME: mrros: Surface Runoff
+-------------------
+              *     day_Eday_XY-na_1 mrros
+              *     mon_Lmon_XY-na_1 mrros
+              *  6hr_None6hr_XY-na_1 mrros
+------------------
+--- VARNAME: mrso: Total Soil Moisture Content
+------------------
+              *      day_day_XY-na_1 mrso
+              *     mon_Lmon_XY-na_1 mrso
+              * 6hrPt_HOMAL6hr_XY-na_1.0 mrso
+              Warning: several standard names are available:
+                  - mass_content_of_water_in_soil
+                  - soil_moisture_content
+--------------------
+--- VARNAME: mrsofc: Capacity of Soil to Store Water
+--------------------
+              *        fx_fx_XY-na_1 mrsofc
+----------------------
+--- VARNAME: od440aer: ambient aerosol optical thickness at 440 nm
+----------------------
+              *   mon_AERmon_XY-na_1 od440aer
+----------------------
+--- VARNAME: od550aer: ambient aerosol optical thickness at 550 nm
+----------------------
+              *   day_AERday_XY-na_1 od550aer
+              *   mon_AERmon_XY-na_1 od550aer
+---------------------
+--- VARNAME: od550bc: black carbon aod@550nm
+---------------------
+              *  day_Noneday_XY-na_1 od550bc
+              *   mon_AERmon_XY-na_1 od550bc
+-----------------------
+--- VARNAME: od550dust: dust aod@550nm
+-----------------------
+              *  day_Noneday_XY-na_1 od550dust
+              *   mon_AERmon_XY-na_1 od550dust
+---------------------------
+--- VARNAME: od550dustbin1: Dust Bin 1 Aerosol Optical Depth at 550 nm
+---------------------------
+              * mon_HOMALmon_XY-na_1.0 od550dustbin1
+---------------------------
+--- VARNAME: od550dustbin2: Dust Bin 2 Aerosol Optical Depth at 550 nm
+---------------------------
+              * mon_HOMALmon_XY-na_1.0 od550dustbin2
+----------------------
+--- VARNAME: od550nh4: Ammonium Aerosol Optical Depth at 550 nm
+----------------------
+              * day_HOMALday_XY-na_1.0 od550nh4
+              * mon_HOMALmon_XY-na_1.0 od550nh4
+----------------------
+--- VARNAME: od550no3: nitrate aod@550nm
+----------------------
+              *  day_Noneday_XY-na_1 od550no3
+              *   mon_AERmon_XY-na_1 od550no3
+--------------------------
+--- VARNAME: od550no3bin1: Nitrate Bin 1 Aerosol Optical Depth at 550 nm
+--------------------------
+              * mon_HOMALmon_XY-na_1.0 od550no3bin1
+---------------------
+--- VARNAME: od550oa: total organic aerosol aod@550nm
+---------------------
+              *  day_Noneday_XY-na_1 od550oa
+              *   mon_AERmon_XY-na_1 od550oa
+----------------------
+--- VARNAME: od550so4: sulfate aod@550nm
+----------------------
+              *  day_Noneday_XY-na_1 od550so4
+              *   mon_AERmon_XY-na_1 od550so4
+---------------------
+--- VARNAME: od550ss: sea salt aod@550nm
+---------------------
+              *  day_Noneday_XY-na_1 od550ss
+              *   mon_AERmon_XY-na_1 od550ss
+-------------------------
+--- VARNAME: od550ssbin1: Sea-salt Bin 1 Aerosol Optical Depth at 550 nm
+-------------------------
+              * mon_HOMALmon_XY-na_1.0 od550ssbin1
+-------------------------
+--- VARNAME: od550ssbin2: Sea-salt Bin 2 Aerosol Optical Depth at 550 nm
+-------------------------
+              * mon_HOMALmon_XY-na_1.0 od550ssbin2
+----------------------
+--- VARNAME: od870aer: ambient aerosol optical thickness at 870 nm
+----------------------
+              *   mon_AERmon_XY-na_1 od870aer
+------------------
+--- VARNAME: orog: Surface Altitude
+------------------
+              *        fx_fx_XY-na_1 orog
+----------------
+--- VARNAME: pr: Precipitation
+----------------
+              *      day_day_XY-na_1 pr
+              *     1hr_E1hr_XY-na_1 pr
+              *     mon_Amon_XY-na_1 pr
+              *      3hr_3hr_XY-na_1 pr
+-----------------
+--- VARNAME: prc: Convective Precipitation
+-----------------
+              *      day_day_XY-na_1 prc
+              *     mon_Amon_XY-na_1 prc
+              *      3hr_3hr_XY-na_1 prc
+--------------------
+--- VARNAME: prhmax: Maximum Hourly Precipitation Rate
+--------------------
+              *     day_Eday_XY-na_1 prhmax
+------------------
+--- VARNAME: prsn: Snowfall Flux
+------------------
+              *      day_day_XY-na_1 prsn
+              *     mon_Amon_XY-na_1 prsn
+              *      3hr_3hr_XY-na_1 prsn
+-----------------
+--- VARNAME: prw: Water Vapor Path
+-----------------
+              *     day_Eday_XY-na_1 prw
+              *     mon_Amon_XY-na_1 prw
+----------------
+--- VARNAME: ps: Surface Air Pressure
+----------------
+              *  day_Noneday_XY-na_1 ps
+              *     mon_Amon_XY-na_1 ps
+              *    3hrPt_3hr_XY-na_1 ps
+              Warning: several long names are available:
+                  - Surface Air Pressure
+                  - Surface Pressure
+-----------------
+--- VARNAME: psl: Sea Level Pressure
+-----------------
+              *      day_day_XY-na_1 psl
+              *   1hrPt_E1hr_XY-na_3 psl
+              *     mon_Amon_XY-na_1 psl
+              * 3hrPt_None3hrPt_XY-na_1 psl
+------------------------
+--- VARNAME: reffclitop: Ice Cloud Droplet Effective Radius
+------------------------
+              * mon_HOMALmon_XY-na_1.0 reffclitop
+----------------------------
+--- VARNAME: reffclwtopcnrm: Liquid Cloud Droplet Effective Radius
+----------------------------
+              * mon_HOMALmon_XY-na_1.0 reffclwtopcnrm
+------------------
+--- VARNAME: rlds: Surface Downwelling Longwave Radiation
+------------------
+              *      day_day_XY-na_1 rlds
+              *  1hr_None1hr_XY-na_1 rlds
+              *     mon_Amon_XY-na_1 rlds
+              *      3hr_3hr_XY-na_1 rlds
+--------------------
+--- VARNAME: rldsaf: Surface Aerosol-Free Downwelling Longwave Radiation
+--------------------
+              * day_HOMALday_XY-na_1.0 rldsaf
+              * mon_HOMALmon_XY-na_1.0 rldsaf
+--------------------
+--- VARNAME: rldscs: Surface Downwelling Clear-Sky Longwave Radiation
+--------------------
+              *  day_Noneday_XY-na_1 rldscs
+              *     mon_Amon_XY-na_1 rldscs
+----------------------
+--- VARNAME: rldscsaf: Surface Clear-Sky Aerosol-Free Downwelling Longwave Radiation
+----------------------
+              * day_HOMALday_XY-na_1.0 rldscsaf
+              * mon_HOMALmon_XY-na_1.0 rldscsaf
+------------------
+--- VARNAME: rlus: Surface Upwelling Longwave Radiation
+------------------
+              *      day_day_XY-na_1 rlus
+              *  1hr_None1hr_XY-na_1 rlus
+              *     mon_Amon_XY-na_1 rlus
+              *      3hr_3hr_XY-na_1 rlus
+--------------------
+--- VARNAME: rlusaf: Surface Aerosol-Free Upwelling Longwave Radiation
+--------------------
+              * day_HOMALday_XY-na_1.0 rlusaf
+              * mon_HOMALmon_XY-na_1.0 rlusaf
+--------------------
+--- VARNAME: rluscs: Surface Upwelling Longwave Flux in Air Assuming Clear Sky
+--------------------
+              * day_HOMALday_XY-na_1.0 rluscs
+              * mon_HOMALmon_XY-na_1.0 rluscs
+----------------------
+--- VARNAME: rluscsaf: Surface Clear-Sky Aerosol-Free Upwelling Longwave Radiation
+----------------------
+              * day_HOMALday_XY-na_1.0 rluscsaf
+              * mon_HOMALmon_XY-na_1.0 rluscsaf
+------------------
+--- VARNAME: rlut: TOA Outgoing Longwave Radiation
+------------------
+              *      day_day_XY-na_1 rlut
+              *     mon_Amon_XY-na_1 rlut
+              *  6hr_None6hr_XY-na_2 rlut
+--------------------
+--- VARNAME: rlutaf: TOA Outgoing Aerosol-Free Longwave Radiation
+--------------------
+              *  day_Noneday_XY-na_1 rlutaf
+              *   mon_AERmon_XY-na_1 rlutaf
+--------------------
+--- VARNAME: rlutcs: TOA Outgoing Clear-Sky Longwave Radiation
+--------------------
+              *  day_Noneday_XY-na_2 rlutcs
+              *     mon_Amon_XY-na_1 rlutcs
+              Warning: several long names are available:
+                  - TOA Outgoing Clear-Sky Longwave Radiation
+                  - TOA Outgoing Clear-sky Longwave Radiation
+----------------------
+--- VARNAME: rlutcsaf: TOA Outgoing Clear-Sky, Aerosol-Free Longwave Radiation
+----------------------
+              *  day_Noneday_XY-na_1 rlutcsaf
+              *   mon_AERmon_XY-na_1 rlutcsaf
+-------------------
+--- VARNAME: rootd: Maximum Root Depth
+-------------------
+              *        fx_fx_XY-na_1 rootd
+------------------
+--- VARNAME: rsds: Surface Downwelling Shortwave Radiation
+------------------
+              *      day_day_XY-na_1 rsds
+              *  1hr_None1hr_XY-na_1 rsds
+              *     mon_Amon_XY-na_1 rsds
+              *      3hr_3hr_XY-na_1 rsds
+--------------------
+--- VARNAME: rsdsaf: Surface Aerosol-Free Downwelling Shortwave Radiation
+--------------------
+              * day_HOMALday_XY-na_1.0 rsdsaf
+              * mon_HOMALmon_XY-na_1.0 rsdsaf
+--------------------
+--- VARNAME: rsdscs: Surface Downwelling Clear-Sky Shortwave Radiation
+--------------------
+              *  day_Noneday_XY-na_1 rsdscs
+              *     mon_Amon_XY-na_1 rsdscs
+----------------------
+--- VARNAME: rsdscsaf: Surface Clear-Sky Aerosol-Free Downwelling Shortwave Radiation
+----------------------
+              * day_HOMALday_XY-na_1.0 rsdscsaf
+              * mon_HOMALmon_XY-na_1.0 rsdscsaf
+------------------
+--- VARNAME: rsdt: TOA Incident Shortwave Radiation
+------------------
+              *  day_Noneday_XY-na_1 rsdt
+              *     mon_Amon_XY-na_1 rsdt
+              *  6hr_None6hr_XY-na_1 rsdt
+------------------
+--- VARNAME: rsus: Surface Upwelling Shortwave Radiation
+------------------
+              *      day_day_XY-na_1 rsus
+              *  1hr_None1hr_XY-na_1 rsus
+              *     mon_Amon_XY-na_1 rsus
+              *      3hr_3hr_XY-na_1 rsus
+--------------------
+--- VARNAME: rsusaf: Surface Aerosol-Free Upwelling Shortwave Radiation
+--------------------
+              * day_HOMALday_XY-na_1.0 rsusaf
+              * mon_HOMALmon_XY-na_1.0 rsusaf
+--------------------
+--- VARNAME: rsuscs: Surface Upwelling Clear-Sky Shortwave Radiation
+--------------------
+              *  day_Noneday_XY-na_1 rsuscs
+              *     mon_Amon_XY-na_1 rsuscs
+----------------------
+--- VARNAME: rsuscsaf: Surface Clear-Sky Aerosol-Free Upwelling Shortwave Radiation
+----------------------
+              * day_HOMALday_XY-na_1.0 rsuscsaf
+              * mon_HOMALmon_XY-na_1.0 rsuscsaf
+------------------
+--- VARNAME: rsut: TOA Outgoing Shortwave Radiation
+------------------
+              *  day_Noneday_XY-na_1 rsut
+              *     mon_Amon_XY-na_1 rsut
+              *  6hr_None6hr_XY-na_1 rsut
+--------------------
+--- VARNAME: rsutaf: toa outgoing shortwave radiation
+--------------------
+              *  day_Noneday_XY-na_1 rsutaf
+              *   mon_AERmon_XY-na_1 rsutaf
+--------------------
+--- VARNAME: rsutcs: TOA Outgoing Clear-Sky Shortwave Radiation
+--------------------
+              *  day_Noneday_XY-na_1 rsutcs
+              *     mon_Amon_XY-na_1 rsutcs
+----------------------
+--- VARNAME: rsutcsaf: toa outgoing clear-sky shortwave radiation
+----------------------
+              *  day_Noneday_XY-na_1 rsutcsaf
+              *   mon_AERmon_XY-na_1 rsutcsaf
+---------------------
+--- VARNAME: sconcbc: Surface Concentration of Black Carbon
+---------------------
+              * day_HOMALday_XY-na_1.0 sconcbc
+              * mon_HOMALmon_XY-na_1.0 sconcbc
+-----------------------
+--- VARNAME: sconcdust: Surface Concentration of Dust
+-----------------------
+              *  day_Noneday_XY-na_1 sconcdust
+              *     mon_Emon_XY-na_1 sconcdust
+----------------------
+--- VARNAME: sconcnh4: Surface Concentration of Ammonium
+----------------------
+              * day_HOMALday_XY-na_1.0 sconcnh4
+              * mon_HOMALmon_XY-na_1.0 sconcnh4
+----------------------
+--- VARNAME: sconcno3: Surface Concentration of Nitrate
+----------------------
+              * day_HOMALday_XY-na_1.0 sconcno3
+              * mon_HOMALmon_XY-na_1.0 sconcno3
+---------------------
+--- VARNAME: sconcoa: Surface Concentration of Organic Matter
+---------------------
+              * day_HOMALday_XY-na_1.0 sconcoa
+              * mon_HOMALmon_XY-na_1.0 sconcoa
+----------------------
+--- VARNAME: sconcso4: Surface Concentration of SO4
+----------------------
+              *  day_Noneday_XY-na_1 sconcso4
+              *     mon_Emon_XY-na_1 sconcso4
+---------------------
+--- VARNAME: sconcss: Surface Concentration of Seasalt
+---------------------
+              *  day_Noneday_XY-na_1 sconcss
+              *     mon_Emon_XY-na_1 sconcss
+---------------------
+--- VARNAME: seddust: sedimentation rate of dust aerosol
+---------------------
+              * 1hr_HOMAL1hr_XY-na_1.0 seddust
+              * mon_HOMALmon_XY-na_1.0 seddust
+--------------------
+--- VARNAME: sedno3: sedimentation rate of nitrate aerosol
+--------------------
+              * 1hr_HOMAL1hr_XY-na_1.0 sedno3
+              * mon_HOMALmon_XY-na_1.0 sedno3
+-------------------
+--- VARNAME: sedss: sedimentation rate of sea salt aerosol
+-------------------
+              * 1hr_HOMAL1hr_XY-na_1.0 sedss
+              * mon_HOMALmon_XY-na_1.0 sedss
+---------------------
+--- VARNAME: sfcWind: Daily-Mean Near-Surface Wind Speed
+---------------------
+              *      day_day_XY-na_1 sfcWind
+              * 1hrPt_None1hrPt_XY-na_1 sfcWind
+              *     mon_Amon_XY-na_1 sfcWind
+              * 3hrPt_None3hrPt_XY-na_1 sfcWind
+              Warning: several long names are available:
+                  - Daily-Mean Near-Surface Wind Speed
+                  - Near-Surface Wind Speed
+------------------------
+--- VARNAME: sfcWindmax: Daily Maximum Near-Surface Wind Speed
+------------------------
+              *      day_day_XY-na_1 sfcWindmax
+              *     mon_Emon_XY-na_1 sfcWindmax
+              Warning: several long names are available:
+                  - Daily Maximum Near-Surface Wind Speed
+                  - Mean Daily Maximum Near-Surface Wind Speed
+--------------------
+--- VARNAME: sftgif: Fraction of Grid Cell Covered with Glacier
+--------------------
+              *        fx_fx_XY-na_1 sftgif
+-------------------
+--- VARNAME: sftlf: Land Area Fraction
+-------------------
+              *        fx_fx_XY-na_1 sftlf
+---------------------
+--- VARNAME: siconca: Sea Ice Area Fraction (Atmospheric Grid)
+---------------------
+              *    day_SIday_XY-na_1 siconca
+              *    mon_SImon_XY-na_1 siconca
+-----------------
+--- VARNAME: snc: Snow Area Fraction
+-----------------
+              *      day_day_XY-na_1 snc
+              *    mon_LImon_XY-na_1 snc
+              *  6hr_None6hr_XY-na_1 snc
+-----------------
+--- VARNAME: snd: Snow Depth
+-----------------
+              *     day_Eday_XY-na_3 snd
+              *    mon_LImon_XY-na_1 snd
+              *  6hr_None6hr_XY-na_1 snd
+-----------------
+--- VARNAME: snm: Surface Snow Melt
+-----------------
+              *     day_Eday_XY-na_1 snm
+              *    mon_LImon_XY-na_1 snm
+              *  6hr_None6hr_XY-na_1 snm
+-----------------
+--- VARNAME: snw: Surface Snow Amount
+-----------------
+              *      day_day_XY-na_1 snw
+              *    mon_LImon_XY-na_1 snw
+              *  6hr_None6hr_XY-na_1 snw
+-----------------------
+--- VARNAME: ssa550aer: Aerosol Single Scattering Albedo at 550 nm
+-----------------------
+              * day_HOMALday_XY-na_1.0 ssa550aer
+              * mon_HOMALmon_XY-na_1.0 ssa550aer
+----------------
+--- VARNAME: ta: Air Temperature
+----------------
+              *      day_day_XY-P8_1 ta
+              *    mon_Amon_XY-P19_1 ta
+-------------------
+--- VARNAME: ta200: Air Temperature
+-------------------
+              * day_HOMEPday_XY-P200HM_1.0 ta200
+              * mon_HOMEPmon_XY-P200HM_1.0 ta200
+              * 6hr_HOME6hrPlevPt_XY-P200HM_1.0 ta200
+-------------------
+--- VARNAME: ta500: Air Temperature
+-------------------
+              * day_HOMEPday_XY-P500HM_1.0 ta500
+              * mon_HOMEPmon_XY-P500HM_1.0 ta500
+              * 6hr_HOME6hrPlevPt_XY-P500HM_1.0 ta500
+-------------------
+--- VARNAME: ta700: Air Temperature
+-------------------
+              * day_HOMEPday_XY-P700HM_1.0 ta700
+              * mon_HOMEPmon_XY-P700HM_1.0 ta700
+              * 6hr_HOME6hrPlevPt_XY-P700HM_1.0 ta700
+-------------------
+--- VARNAME: ta850: Air Temperature
+-------------------
+              * day_HOMEPday_XY-P850HM_1.0 ta850
+              * mon_HOMEPmon_XY-P850HM_1.0 ta850
+              * 6hr_HOME6hrPlevPt_XY-P850HM_1.0 ta850
+-------------------
+--- VARNAME: ta925: Air Temperature
+-------------------
+              * day_HOMEPday_XY-P925HM_1.0 ta925
+              * mon_HOMEPmon_XY-P925HM_1.0 ta925
+              * 6hr_HOME6hrPlevPt_XY-P925HM_1.0 ta925
+------------------
+--- VARNAME: tall: Temperature at Lowest Level
+------------------
+              * day_HOMALday_XY-na_1.0 tall
+              * mon_HOMALmon_XY-na_1.0 tall
+-----------------
+--- VARNAME: tas: Near-Surface Air Temperature
+-----------------
+              *      day_day_XY-na_1 tas
+              * 1hrPt_None1hrPt_XY-na_3 tas
+              *     mon_Amon_XY-na_1 tas
+              *    3hrPt_3hr_XY-na_1 tas
+              Warning: several long names are available:
+                  - Near-Surface Air Temperature
+                  - Surface Air Temperature
+--------------------
+--- VARNAME: tasmax: Daily Maximum Near-Surface Air Temperature
+--------------------
+              *      day_day_XY-na_1 tasmax
+              *     mon_Amon_XY-na_1 tasmax
+--------------------
+--- VARNAME: tasmin: Daily Minimum Near-Surface Air Temperature
+--------------------
+              *      day_day_XY-na_1 tasmin
+              *     mon_Amon_XY-na_1 tasmin
+------------------
+--- VARNAME: tauu: Surface Downward Eastward Wind Stress
+------------------
+              *  day_Noneday_XY-na_3 tauu
+              *  1hr_None1hr_XY-na_3 tauu
+              *     mon_Amon_XY-na_1 tauu
+              *  6hr_None6hr_XY-na_3 tauu
+------------------
+--- VARNAME: tauv: Surface Downward Northward Wind Stress
+------------------
+              *  day_Noneday_XY-na_1 tauv
+              *  1hr_None1hr_XY-na_1 tauv
+              *     mon_Amon_XY-na_1 tauv
+              *  6hr_None6hr_XY-na_1 tauv
+-----------------
+--- VARNAME: toz: Total Ozone Column
+-----------------
+              *   mon_AERmon_XY-na_1 toz
+----------------
+--- VARNAME: ts: Surface Temperature
+----------------
+              *     day_Eday_XY-na_1 ts
+              *     mon_Amon_XY-na_1 ts
+              * 6hrPt_6hrPlevPt_XY-na_3 ts
+--------------------
+--- VARNAME: tsland: Surface Temperature
+--------------------
+              *     day_Eday_XY-na_1 tsland
+              *  mon_Nonemon_XY-na_1 tsland
+-------------------
+--- VARNAME: tssea: Sea Surface Temperature
+-------------------
+              * day_HOMALday_XY-na_1.0 tssea
+              * 1hr_HOMAL1hrPt_XY-na_1.0 tssea
+              * mon_HOMALmon_XY-na_1.0 tssea
+----------------
+--- VARNAME: ua: Eastward Wind
+----------------
+              *      day_day_XY-P8_1 ua
+              *    mon_Amon_XY-P19_1 ua
+-------------------
+--- VARNAME: ua200: Eastward Wind
+-------------------
+              * day_HOMEPday_XY-P200HM_1.0 ua200
+              * mon_HOMEPmon_XY-P200HM_1.0 ua200
+              * 6hr_HOME6hrPlevPt_XY-P200HM_1.0 ua200
+-------------------
+--- VARNAME: ua500: Eastward Wind
+-------------------
+              * day_HOMEPday_XY-P500HM_1.0 ua500
+              * mon_HOMEPmon_XY-P500HM_1.0 ua500
+              * 6hr_HOME6hrPlevPt_XY-P500HM_1.0 ua500
+-------------------
+--- VARNAME: ua700: Eastward Wind
+-------------------
+              * day_HOMEPday_XY-P700HM_1.0 ua700
+              * mon_HOMEPmon_XY-P700HM_1.0 ua700
+              * 6hr_HOME6hrPlevPt_XY-P700HM_1.0 ua700
+-------------------
+--- VARNAME: ua850: Eastward Wind
+-------------------
+              * day_HOMEPday_XY-P850HM_1.0 ua850
+              * mon_HOMEPmon_XY-P850HM_1.0 ua850
+              * 6hr_HOME6hrPlevPt_XY-P850HM_1.0 ua850
+-------------------
+--- VARNAME: ua925: Eastward Wind
+-------------------
+              * day_HOMEPday_XY-P925HM_1.0 ua925
+              * mon_HOMEPmon_XY-P925HM_1.0 ua925
+              * 6hr_HOME6hrPlevPt_XY-P925HM_1.0 ua925
+------------------
+--- VARNAME: uall: Eastward Wind at Lowest Level
+------------------
+              * day_HOMALday_XY-na_1.0 uall
+              * mon_HOMALmon_XY-na_1.0 uall
+-----------------
+--- VARNAME: uas: Eastward Near-Surface Wind
+-----------------
+              *      day_day_XY-na_1 uas
+              * 1hrPt_None1hrPt_XY-na_1 uas
+              *     mon_Amon_XY-na_1 uas
+              *    3hrPt_3hr_XY-na_1 uas
+              * 6hrPt_6hrPlevPt_XY-na_1 uas
+              Warning: several long names are available:
+                  - Eastward Near-Surface Wind
+                  - Eastward Near-Surface Wind Speed
+----------------
+--- VARNAME: va: Northward Wind
+----------------
+              *      day_day_XY-P8_1 va
+              *    mon_Amon_XY-P19_1 va
+-------------------
+--- VARNAME: va200: Northward Wind
+-------------------
+              * day_HOMEPday_XY-P200HM_1.0 va200
+              * mon_HOMEPmon_XY-P200HM_1.0 va200
+              * 6hr_HOME6hrPlevPt_XY-P200HM_1.0 va200
+-------------------
+--- VARNAME: va500: Northward Wind
+-------------------
+              * day_HOMEPday_XY-P500HM_1.0 va500
+              * mon_HOMEPmon_XY-P500HM_1.0 va500
+              * 6hr_HOME6hrPlevPt_XY-P500HM_1.0 va500
+-------------------
+--- VARNAME: va700: Northward Wind
+-------------------
+              * day_HOMEPday_XY-P700HM_1.0 va700
+              * mon_HOMEPmon_XY-P700HM_1.0 va700
+              * 6hr_HOME6hrPlevPt_XY-P700HM_1.0 va700
+-------------------
+--- VARNAME: va850: Northward Wind
+-------------------
+              * day_HOMEPday_XY-P850HM_1.0 va850
+              * mon_HOMEPmon_XY-P850HM_1.0 va850
+              * 6hr_HOME6hrPlevPt_XY-P850HM_1.0 va850
+-------------------
+--- VARNAME: va925: Northward Wind
+-------------------
+              * day_HOMEPday_XY-P925HM_1.0 va925
+              * mon_HOMEPmon_XY-P925HM_1.0 va925
+              * 6hr_HOME6hrPlevPt_XY-P925HM_1.0 va925
+------------------
+--- VARNAME: vall: Northward Wind at Lowest Level
+------------------
+              * day_HOMALday_XY-na_1.0 vall
+              * mon_HOMALmon_XY-na_1.0 vall
+-----------------
+--- VARNAME: vas: Northward Near-Surface Wind
+-----------------
+              *      day_day_XY-na_1 vas
+              * 1hrPt_None1hrPt_XY-na_1 vas
+              *     mon_Amon_XY-na_1 vas
+              *    3hrPt_3hr_XY-na_1 vas
+              * 6hrPt_6hrPlevPt_XY-na_1 vas
+              Warning: several long names are available:
+                  - Northward Near-Surface Wind
+                  - Northward Near-Surface Wind Speed
+-----------------
+--- VARNAME: wap: omega (=dp/dt)
+-----------------
+              *      day_day_XY-P8_1 wap
+              *    mon_Amon_XY-P19_1 wap
+--------------------
+--- VARNAME: wap200: omega (=dp/dt)
+--------------------
+              * mon_HOMEPmon_XY-P200HM_1.0 wap200
+--------------------
+--- VARNAME: wap500: omega (=dp/dt)
+--------------------
+              * mon_HOMEPmon_XY-P500HM_1.0 wap500
+--------------------
+--- VARNAME: wap700: omega (=dp/dt)
+--------------------
+              * mon_HOMEPmon_XY-P700HM_1.0 wap700
+--------------------
+--- VARNAME: wap850: omega (=dp/dt)
+--------------------
+              * mon_HOMEPmon_XY-P850HM_1.0 wap850
+--------------------
+--- VARNAME: wap925: omega (=dp/dt)
+--------------------
+              * mon_HOMEPmon_XY-P925HM_1.0 wap925
+-------------------
+--- VARNAME: wetbc: wet deposition rate of black carbon aerosol mass
+-------------------
+              *  1hr_None1hr_XY-na_1 wetbc
+              *   mon_AERmon_XY-na_1 wetbc
+---------------------
+--- VARNAME: wetdust: wet deposition rate of dust
+---------------------
+              *  1hr_None1hr_XY-na_1 wetdust
+              *   mon_AERmon_XY-na_1 wetdust
+--------------------
+--- VARNAME: wetnh4: wet deposition rate of nh4
+--------------------
+              *  1hr_None1hr_XY-na_1 wetnh4
+              *   mon_AERmon_XY-na_1 wetnh4
+-------------------
+--- VARNAME: wetoa: wet deposition rate of dry aerosol total organic matter
+-------------------
+              *  1hr_None1hr_XY-na_1 wetoa
+              *   mon_AERmon_XY-na_1 wetoa
+--------------------
+--- VARNAME: wetso4: wet deposition rate of so4
+--------------------
+              *  1hr_None1hr_XY-na_1 wetso4
+              *   mon_AERmon_XY-na_1 wetso4
+-------------------
+--- VARNAME: wetss: wet deposition rate of seasalt
+-------------------
+              *  1hr_None1hr_XY-na_1 wetss
+              *   mon_AERmon_XY-na_1 wetss
+----------------
+--- VARNAME: zg: Geopotential Height
+----------------
+              *      day_day_XY-P8_2 zg
+              *    mon_Amon_XY-P19_1 zg
+-------------------
+--- VARNAME: zg200: Geopotential Height
+-------------------
+              * day_HOMEPday_XY-P200HM_1.0 zg200
+              * mon_HOMEPmon_XY-P200HM_1.0 zg200
+              * 6hr_HOME6hrPlevPt_XY-P200HM_1.0 zg200
+-------------------
+--- VARNAME: zg500: Geopotential Height
+-------------------
+              * day_HOMEPday_XY-P500HM_1.0 zg500
+              * mon_HOMEPmon_XY-P500HM_1.0 zg500
+              * 6hr_HOME6hrPlevPt_XY-P500HM_1.0 zg500
+-------------------
+--- VARNAME: zg700: Geopotential Height
+-------------------
+              * day_HOMEPday_XY-P700HM_1.0 zg700
+              * mon_HOMEPmon_XY-P700HM_1.0 zg700
+              * 6hr_HOME6hrPlevPt_XY-P700HM_1.0 zg700
+-------------------
+--- VARNAME: zg850: Geopotential Height
+-------------------
+              * day_HOMEPday_XY-P850HM_1.0 zg850
+              * mon_HOMEPmon_XY-P850HM_1.0 zg850
+              * 6hr_HOME6hrPlevPt_XY-P850HM_1.0 zg850
+-------------------
+--- VARNAME: zg925: Geopotential Height
+-------------------
+              * day_HOMEPday_XY-P925HM_1.0 zg925
+              * mon_HOMEPmon_XY-P925HM_1.0 zg925
+              * 6hr_HOME6hrPlevPt_XY-P925HM_1.0 zg925
+
+Warnings about cell methods (with var list)
+	Cannot yet compute maximum hourly rate for vars: {'prhmax'}
+
+ **************************************************
+*
+*              dr2xml version:  3.0
+*   CMIP6 conventions version:  v6.2.4
+*  CMIP6 Data Request version:  01.00.21.post1
+
+*
+ **************************************************
+
+**************************************************
+
+Processing context  trip
+
+**************************************************
+
+Number of distinct CMOR variables (whatever the grid): 0
+Number of distinct var labels is: 0
+Number of simplified vars is: 0
+Issues with standard names are: []
+homevars file: current_directory/test_AAD50_641/input/home_data_request/home_data_request_aladin_RCM.txt current_directory/test_AAD50_641/input/home_data_request/home_data_request_aladin_aerosols_RCM.txt current_directory/test_AAD50_641/input/home_data_request/home_data_request_trip_RCM.txt
+For extra table CNRM_HOMALmon (which has 116 variables):
+	Variables which dim was found in extra coordinates table:
+		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		             XY-sza5: parasolCRefl
+
+		       XY-tau|plev7c: clmodis
+
+		             XY-temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+For extra table CNRM_HOMEPmon (which has 44 variables):
+	Variables which dim was found in extra coordinates table:
+		            Plev39hm: co no2 o3
+
+		             plev200: hur200 hus200 ta200 ua200 va200 wap200 zg200
+
+		             plev500: hur500 hus500 ta500 ua500 va500 wap500 zg500
+
+		             plev700: hur700 hus700 ta700 ua700 va700 wap700 zg700
+
+		             plev7hm: hus ta ua va wap zg
+
+		             plev850: hur850 hus850 ta850 ua850 va850 wap850 zg850
+
+		             plev925: hur925 hus925 ta925 ua925 va925 wap925 zg925
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		         XY-Plev39hm: co no2 o3
+
+		          XY-plev200: hur200 hus200 ta200 ua200 va200 wap200 zg200
+
+		          XY-plev500: hur500 hus500 ta500 ua500 va500 wap500 zg500
+
+		          XY-plev700: hur700 hus700 ta700 ua700 va700 wap700 zg700
+
+		          XY-plev7hm: hus ta ua va wap zg
+
+		          XY-plev850: hur850 hus850 ta850 ua850 va850 wap850 zg850
+
+		          XY-plev925: hur925 hus925 ta925 ua925 va925 wap925 zg925
+
+For extra table CNRM_HOMALday (which has 116 variables):
+	Variables which dim was found in extra coordinates table:
+		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		             XY-sza5: parasolCRefl
+
+		       XY-tau|plev7c: clmodis
+
+		             XY-temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+For extra table CNRM_HOMEPday (which has 44 variables):
+	Variables which dim was found in extra coordinates table:
+		            Plev39hm: co no2 o3
+
+		             plev200: hur200 hus200 ta200 ua200 va200 wap200 zg200
+
+		             plev500: hur500 hus500 ta500 ua500 va500 wap500 zg500
+
+		             plev700: hur700 hus700 ta700 ua700 va700 wap700 zg700
+
+		             plev7hm: hus ta ua va wap zg
+
+		             plev850: hur850 hus850 ta850 ua850 va850 wap850 zg850
+
+		             plev925: hur925 hus925 ta925 ua925 va925 wap925 zg925
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		         XY-Plev39hm: co no2 o3
+
+		          XY-plev200: hur200 hus200 ta200 ua200 va200 wap200 zg200
+
+		          XY-plev500: hur500 hus500 ta500 ua500 va500 wap500 zg500
+
+		          XY-plev700: hur700 hus700 ta700 ua700 va700 wap700 zg700
+
+		          XY-plev7hm: hus ta ua va wap zg
+
+		          XY-plev850: hur850 hus850 ta850 ua850 va850 wap850 zg850
+
+		          XY-plev925: hur925 hus925 ta925 ua925 va925 wap925 zg925
+
+For extra table CNRM_HOMAL6hr (which has 99 variables):
+	Variables which dim was found in extra coordinates table:
+		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		             XY-sza5: parasolCRefl
+
+		       XY-tau|plev7c: clmodis
+
+		             XY-temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+For extra table CNRM_HOME6hrPlevPt (which has 44 variables):
+	Variables which dim was found in extra coordinates table:
+		            Plev39hm: co no2 o3
+
+		             plev200: hur200 hus200 ta200 ua200 va200 wap200 zg200
+
+		             plev500: hur500 hus500 ta500 ua500 va500 wap500 zg500
+
+		             plev700: hur700 hus700 ta700 ua700 va700 wap700 zg700
+
+		             plev7hm: hus ta ua va wap zg
+
+		             plev850: hur850 hus850 ta850 ua850 va850 wap850 zg850
+
+		             plev925: hur925 hus925 ta925 ua925 va925 wap925 zg925
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		         XY-Plev39hm: co no2 o3
+
+		          XY-plev200: hur200 hus200 ta200 ua200 va200 wap200 zg200
+
+		          XY-plev500: hur500 hus500 ta500 ua500 va500 wap500 zg500
+
+		          XY-plev700: hur700 hus700 ta700 ua700 va700 wap700 zg700
+
+		          XY-plev7hm: hus ta ua va wap zg
+
+		          XY-plev850: hur850 hus850 ta850 ua850 va850 wap850 zg850
+
+		          XY-plev925: hur925 hus925 ta925 ua925 va925 wap925 zg925
+
+For extra table CNRM_HOMAL1hrPt (which has 111 variables):
+	Variables which dim was found in extra coordinates table:
+		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		             XY-sza5: parasolCRefl
+
+		       XY-tau|plev7c: clmodis
+
+		             XY-temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+For extra table CNRM_HOMAL1hr (which has 112 variables):
+	Variables which dim was found in extra coordinates table:
+		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		             XY-sza5: parasolCRefl
+
+		       XY-tau|plev7c: clmodis
+
+		             XY-temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+Number of 'cmor', 'dev' and 'perso' among home variables: 244
+Number of 'extra' among home variables: 173
+homevars list: areacella mrsofc orog rootd sftgif sftlf cdnc clivi clt cltc clwvi evspsbl hfls hfss hur hurs hus lwp mrfso mrro mrros mrso od550aer od550ss od550dust od550so4 od550bc od550oa pr prc prsn prw ps psl rlds rlus rldscs rlut rlutcs rlutaf rlutcsaf rsds rsus rsdscs rsuscs rsdt rsut rsutcs rsutaf rsutcsaf sfcWind sfcWindmax siconca snc snd snm snw ta tas tasmax tasmin tauu tauv toz ts tsland ua uas va vas wap zg clt clivi clwvi evspsbl hfls hfss hur hurs hus huss lwp mrfso mrro mrros mrso pr prc prhmax prsn prw ps psl rlds rldscs rlus rlut rlutcs rlutaf rlutcsaf rsds rsdscs rsus rsuscs rsdt rsut rsutcs rsutaf rsutcsaf sfcWind sfcWindmax siconca snc snd snm snw ta tas tasmax tasmin tauu tauv ts tsland ua uas va vas wap zg clivi clwvi evspsbl mrro mrros rsdt rlut rsut snc snd snm snw tauu tauv ts uas vas clt hfls hfss hurs huss pr prc prsn ps psl rlds rlus rsds rsus sfcWind tas uas vas evspsbl hfls hfss hurs huss pr psl rlds rlus rsds rsus sfcWind tas tauu tauv uas vas abs550aer drybc drydust drynh3 drynh4 dryoa dryso2 dryss dryso4 emibc emidust eminh3 emioa emiso2 emiso4 emiss od440aer od550aer od550ss od550dust od550so4 od550bc od550oa od550no3 od870aer sconcss sconcdust sconcso4 wetbc wetdust wetnh4 wetoa wetso4 wetss abs550aer emiss emidust od550aer od550ss od550dust od550so4 od550bc od550oa od550no3 sconcss sconcdust sconcso4 drybc drydust drynh4 dryoa dryss dryso4 wetbc wetdust wetnh4 wetoa wetss wetso4 wtd rivo cdnctop cltl cltm clth hur925 hur850 hur700 hur500 hur200 husll hus925 hus850 hus700 hus500 hus200 RADasy550aer RADssa550aer RADod550aer RADabs550aer reffclitop reffclwtopcnrm rluscs rldsaf rlusaf rldscsaf rluscsaf rsdsaf rsusaf rsdscsaf rsuscsaf tall ta925 ta850 ta700 ta500 ta200 tssea uall ua925 ua850 ua700 ua500 ua200 vall va925 va850 va700 va500 va200 wap925 wap850 wap700 wap500 wap200 zg925 zg850 zg700 zg500 zg200 cltl cltm clth husll hus925 hus850 hus700 hus500 hus200 rluscs rldsaf rlusaf rldscsaf rluscsaf rsdsaf rsusaf rsdscsaf rsuscsaf tall ta925 ta850 ta700 ta500 ta200 tssea uall ua925 ua850 ua700 ua500 ua200 vall va925 va850 va700 va500 va200 zg925 zg850 zg700 zg500 zg200 cltl cltm clth hus925 hus850 hus700 hus500 hus200 mrfso mrso ta925 ta850 ta700 ta500 ta200 ua925 ua850 ua700 ua500 ua200 va925 va850 va700 va500 va200 zg925 zg850 zg700 zg500 zg200 tssea asy550aer dryno3 eminh4 emino3 ext550bc ext550dust ext550nh4 ext550no3 ext550oa ext550so4 ext550ss od550ssbin1 od550ssbin2 od550dustbin1 od550dustbin2 od550no3bin1 od550nh4 sconcbc sconcoa sconcno3 sconcnh4 seddust sedno3 sedss ssa550aer TACabs550aer wetno3 asy550aer od550nh4 sconcbc sconcoa sconcno3 sconcnh4 ssa550aer dryno3 seddust sedno3 sedss wetno3 fldf fwtd
+
+Realms for these CMORvars: aerosol atmos atmos land land land landIce landIce land seaIce
+processing file current_directory/test_AAD50_641/input/xml/ping_surfex.xml:
+OK current_directory/test_AAD50_641/input/xml/ping_surfex.xml
+processing file current_directory/test_AAD50_641/input/xml/ping_trip.xml:
+OK current_directory/test_AAD50_641/input/xml/ping_trip.xml
+
+file_def written as current_directory/test_AAD50_641/test_outputs/dr2xml_trip.xml
+
+
+Some Statistics on actually written variables per frequency+shape...
+                            Eday P1   1: rivo
+       day    XY-na    -------- ---   1
+
+       day --------    -------- ---   1
+
+                            Emon P2   1: wtd
+                        HOMALmon P1   2: fldf fwtd
+       mon    XY-na    -------- ---   3
+
+       mon --------    -------- ---   3
+
+
+---------- --------    -------- ---   4
+
+
+Some Statistics on actually written variables per variable...
+------------------
+--- VARNAME: fldf: floodplain fraction over land
+------------------
+              * mon_HOMALmon_XY-na_1.0 fldf
+------------------
+--- VARNAME: fwtd: grid-cell fraction allowing upward capillary fluxes from wtd
+------------------
+              * mon_HOMALmon_XY-na_1.0 fwtd
+------------------
+--- VARNAME: rivo: River Discharge
+------------------
+              *     day_Eday_XY-na_1 rivo
+-----------------
+--- VARNAME: wtd: Water table depth from surface.
+-----------------
+              *     mon_Emon_XY-na_2 wtd
