@@ -5,14 +5,14 @@
 realms_per_context : {'nemo': ['seaIce', 'ocean', 'ocean seaIce', 'ocnBgchem', 'seaIce ocean'], 'surfex': ['atmos', 'atmos atmosChem', 'atmosChem', 'aerosol', 'atmos land', 'land', 'landIce land', 'aerosol', 'land landIce', 'landIce'], 'trip': []}
 max_priority : 3
 ping_variables_prefix : C3S_
-mips : {'HR': set(['OMIP', 'CMIP', 'C3S', 'ScenarioMIP']), 'LR': set(['C4MIP', 'DCPP', 'CORDEX', 'ISMIP6', 'GMMIP', 'RFMIP', 'LUMIP', 'OMIP', 'C3S', 'SIMIP', 'DAMIP', 'AerChemMIP', 'FAFMIP', 'PMIP', 'CFMIP', 'ScenarioMIP', 'LS3MIP', 'CMIP', 'GeoMIP', 'HighResMIP'])}
+mips : {'HR': set(['OMIP', 'CMIP', 'CMIP6', 'ScenarioMIP']), 'LR': set(['C4MIP', 'DCPP', 'CORDEX', 'ISMIP6', 'GMMIP', 'RFMIP', 'LUMIP', 'OMIP', 'CMIP6', 'SIMIP', 'DAMIP', 'AerChemMIP', 'FAFMIP', 'PMIP', 'CFMIP', 'ScenarioMIP', 'LS3MIP', 'CMIP', 'GeoMIP', 'HighResMIP'])}
 excluded_vars : []
 orphan_variables : {'nemo': [''], 'surfex': [], 'trip': ['dgw', 'drivw', 'fCLandToOcean', 'qgwr', 'rivi', 'rivo', 'waterDpth', 'wtd']}
 -->
 
 <context id="nemo">
   <field_definition>
-<!-- C3SMAISON BEGIN -->
+<!-- CMIP6MAISON BEGIN -->
    <field id="C3S_delta"         field_ref="delta" 	 	 />
    <field id="C3S_dfwnt"         field_ref="dfwnt" 	 	 />
    <field id="C3S_dhcicea"       field_ref="dhcicea" 	 	 />
@@ -21,7 +21,7 @@ orphan_variables : {'nemo': [''], 'surfex': [], 'trip': ['dgw', 'drivw', 'fCLand
    <field id="C3S_dhcicet"       field_ref="dhcicet" 	 	 />
    <field id="C3S_sidmassr"      field_ref="sidmassr"	 	 />
    <field id="C3S_dmsalt"        field_ref="dmsalt" 	 	 />
-   <field id="C3S_dmwice"        field_ref="dummy_XY"	 	 />
+   <field id="C3S_dmwice"        field_ref="dmwice" 	 	 />
    <field id="C3S_efhfso"        field_ref="efhfso" 	 	 />
    <field id="C3S_evapice"       field_ref="evap_ice"	 	 />
    <field id="C3S_flnsduo"       field_ref="flnsduo"	 	 />
@@ -47,7 +47,7 @@ orphan_variables : {'nemo': [''], 'surfex': [], 'trip': ['dgw', 'drivw', 'fCLand
    <field id="C3S_siflrentop"    field_ref="siflrentop" 	expr="@siflrentop_siconci/@siconcim"	 />
    <field id="C3S_siflsaltbot"   field_ref="siflsaltbot" 	expr="@siflsaltbot_siconc/@siconcm"	 />
    <field id="C3S_siflsentop"    field_ref="siflsentop" 	expr="@siflsentop_siconci/@siconcim"	 />
-   <field id="C3S_siflswntop"    field_ref="dummy_XY"   	 /> <!--expr="@siflswntop_siconci/@siconcim -->
+   <field id="C3S_siflswntop"    field_ref="siflswntop" 	expr="@siflswntop_siconci/@siconcim"	 />
    <field id="C3S_sipro"         field_ref="sipro"	 	 />
    <field id="C3S_sisnalb"       field_ref="sisnalb"	 	 />
    <field id="C3S_sisnvol"       field_ref="sisnvol"	 	 />
@@ -69,7 +69,7 @@ orphan_variables : {'nemo': [''], 'surfex': [], 'trip': ['dgw', 'drivw', 'fCLand
    <field id="C3S_wai"	   field_ref="wai"	 	 />
    <field id="C3S_wao"	   field_ref="wao"	 	 />
    <field id="C3S_wiov"	   field_ref="wiov"	 	 />
-<!-- C3SMAISON END -->
+<!-- CMIP6MAISON END -->
     <!-- for variables which realm equals one of _seaIce-->
     <field id="C3S_fsitherm" 	   field_ref="dummy_XY" 	 /> <!-- P1 (kg m-2 s-1) water_flux_into_sea_water_due_to_sea_ice_thermodynamics : computed as the sea ice thermodynamic water flux into the ocean divided by the area of the ocean portion of the grid cell. -->
     <field id="C3S_hfsifrazil"   field_ref="dummy_XYO" 	 /> <!-- P1 (W m-2) heat_flux_into_sea_water_due_to_freezing_of_frazil_ice : Heat Flux into Sea Water due to Frazil Ice Formation -->
@@ -80,6 +80,7 @@ orphan_variables : {'nemo': [''], 'surfex': [], 'trip': ['dgw', 'drivw', 'fCLand
     <field id="C3S_siareas" 	   field_ref="siareas" 		 /> <!-- P2 (1e6 km2) sea_ice_area : Sea ice area South -->
     <field id="C3S_sicompstren"  field_ref="sicompstren" expr="@sicompstren_siconc/@siconcm" /> <!-- P2 (N m-1) compressive_strength_of_sea_ice : Compressive sea ice strength -->
     <field id="C3S_siconc" 	   field_ref="siconc" 		 /> <!-- P1 (%) sea_ice_area_fraction : Sea Ice Area Fraction (Ocean Grid) -->
+    <field id="C3S_sic" 	   field_ref="siconc" 		 /> <!-- P1 (%) sea_ice_area_fraction : Sea Ice Area Fraction (Ocean Grid) -->
     <field id="C3S_sidconcdyn"   field_ref="sidconcdyn" 	 /> <!-- P2 (s-1) tendency_of_sea_ice_area_fraction_due_to_dynamics : sea-ice area fraction change from dynamics -->
     <field id="C3S_sidconcth"    field_ref="sidconcth" 	 /> <!-- P2 (s-1) tendency_of_sea_ice_area_fraction_due_to_thermodynamics : sea-ice area fraction change from thermodynamics -->
     <field id="C3S_sidhci"	   field_ref="sidhci" expr="@sidhci_siconci/@siconcim" />
@@ -160,7 +161,7 @@ orphan_variables : {'nemo': [''], 'surfex': [], 'trip': ['dgw', 'drivw', 'fCLand
     <field id="C3S_sndmasssi"    field_ref="sndmasssi" 	 /> <!-- P2 (kg m-2 s-1) tendency_of_surface_snow_amount_due_to_conversion_of_snow_to_sea_ice : Snow Mass Rate of Change through Snow-to-Ice Conversion -->
     <field id="C3S_sndmasssnf"   field_ref="sndmasssnf" 	 /> <!-- P1 (kg m-2 s-1) snowfall_flux : snow mass change through snow fall -->
     <field id="C3S_sndmasssubl"  field_ref="sndmasssubl" 	 /> <!-- P2 (kg m-2 s-1) surface_snow_sublimation_flux : Snow Mass Rate of Change through Evaporation or Sublimation -->
-    <field id="C3S_sndmasswindrif" field_ref="dummy_XY"        /> <!-- P2 (kg m-2 s-1) tendency_of_snow_mass_due_to_drifting_snow : Snow Mass Rate of Change through Wind Drift of Snow -->
+    <field id="C3S_sndmasswindrif" field_ref="sndmasswindrif"  /> <!-- P2 (kg m-2 s-1) tendency_of_snow_mass_due_to_drifting_snow : Snow Mass Rate of Change through Wind Drift of Snow -->
     <field id="C3S_snmassacrossline" field_ref="mfs" 	 	 /> <!-- P2 (kg s-1) snow_mass_transport_across_line : Flux across 4 straits -->
     <field id="C3S_vsfsit" 	   field_ref="dummy_XY" 	 /> <!-- P2 (kg m-2 s-1) virtual_salt_flux_into_sea_water_due_to_sea_ice_thermodynamics : This variable measures the virtual salt flux into sea water due to the melting of sea ice. It is set to zero in models which receive a real water flux. -->
   </field_definition>

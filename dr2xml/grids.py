@@ -388,8 +388,9 @@ def create_standard_domain(resol, ni, nj):
     """
     Create a xml like string corresponding to the domain using resol, ni and nj.
     """
-    rep = DR2XMLElement(tag="domain", id="CMIP6_{}".format(resol), ni_glo=str(ni), nj_glo=str(nj), type="rectilinear",
-                        prec="8")
+    grid_prefix = get_settings_values("internal", "grid_prefix")
+    rep = DR2XMLElement(tag="domain", id="{}{}".format(grid_prefix, resol), ni_glo=str(ni), nj_glo=str(nj),
+                        type="rectilinear", prec="8")
     rep.append(DR2XMLElement(tag="generate_rectilinear_domain"))
     rep.append(DR2XMLElement(tag="interpolate_domain", order="1", renormalize="true", mode="read_or_compute",
                              write_weight="true"))

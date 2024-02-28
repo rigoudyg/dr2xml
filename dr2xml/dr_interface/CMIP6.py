@@ -10,6 +10,7 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 
 import copy
 import re
+import sys
 from collections import OrderedDict, defaultdict
 
 import six
@@ -21,6 +22,11 @@ from .definition import SimpleObject
 from .definition import SimpleDim as SimpleDimBasic
 from .definition import SimpleCMORVar as SimpleCMORVarBasic
 from ..utils import Dr2xmlError, print_struct, is_elt_applicable, convert_string_to_year
+from dr2xml.settings_interface import get_settings_values
+
+data_request_path = get_settings_values("internal", "data_request_path")
+if data_request_path is not None:
+    sys.path.insert(0, data_request_path)
 
 try:
     import dreq

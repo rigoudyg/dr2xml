@@ -1,3 +1,4 @@
+
    <domain_definition>
      <domain id="1deg" ni_glo="360" nj_glo="180" type="rectilinear"  prec="8"> <generate_rectilinear_domain lon_start="0.5" lon_end="359.5" lat_start="-89.5" lat_end="89.5" /> <interpolate_domain order="1" renormalize="true"  mode="read_or_compute" write_weight="true" /> </domain>
 
@@ -163,8 +164,8 @@
          <domain id="grid_U" long_name="grid U"/>
          <!--   Eq section   -->
          <domain id="EqU" domain_ref="grid_U" >
-	   <zoom_domain id="EqU" ibegin="1" jbegin="0000" ni="0000" nj="1" />
-	 </domain>
+	   <zoom_domain id="EqU" ibegin="1" jbegin="0000" ni="0000" nj="1" /> 
+	 </domain>    
       </domain_group>
 
       <domain id="grid_V" long_name="grid V" lon_name='lon' lat_name='lat'/>
@@ -174,11 +175,12 @@
          <!--   Eq section   -->
          <domain id="EqW" domain_ref="grid_W" >
 	   <zoom_domain id="EqW" ibegin="1" jbegin="0000" ni="0000" nj="1" />
-	 </domain>
+	 </domain>   
       </domain_group>
 
       <domain_group id="scalarpoint">
          <domain id="scalarpoint" long_name="scalar"/>
       </domain_group>
 
-   </domain_definition>
+   </domain_definition>    
+ 

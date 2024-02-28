@@ -90,6 +90,14 @@ internal_values = dict(
 		],
 		fatal=True
 	),
+	grid_prefix=ParameterSettings(
+        key="grid_prefix",
+		default_values=[
+			ValueSettings(key_type="laboratory", keys="grid_prefix"),
+			ValueSettings(key_type="internal", keys="ping_variables_prefix")
+		],
+		fatal=True
+	),
 	split_frequencies=ParameterSettings(
         key="split_frequencies",
 		default_values=[
@@ -622,6 +630,13 @@ internal_values = dict(
 		default_values=[
 			ValueSettings(key_type="laboratory", keys="data_request_used"),
 			"CMIP6"
+		]
+	),
+	data_request_path=ParameterSettings(
+        key="data_request_path",
+		default_values=[
+			ValueSettings(key_type="laboratory", keys="data_request_path"),
+			None
 		]
 	),
 	laboratory_used=ParameterSettings(

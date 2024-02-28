@@ -1,11 +1,11 @@
 <!--
 XIOS-2.0 xml sub-file for Surfex + Arpege
 
-Ref:
-  - for XIOS : https://forge.ipsl.jussieu.fr/ioserver/wiki
+Ref: 
+  - for XIOS : https://forge.ipsl.jussieu.fr/ioserver/wiki 
   - for XIAS (implementation in Surfex and Arpege) : http://www.cnrm-game-meteo.fr/cm/spip.php?article60
 
-Declaration of a number of Surfex diags
+Declaration of a number of Surfex diags 
 
      Useful in order that XIOS does not complain even if some field is
      - not declared in another sourced xml file AND
@@ -14,13 +14,13 @@ Declaration of a number of Surfex diags
      Useful also to set attribute 'operation' to 'average', or to set
      the freq_op (sampling period)
 
-     Field long name and units are not systematically declared here
+     Field long name and units are not systematically declared here 
      because they should be declared by Surfex itself : the code is
      the best place for this type of metadata / documentation
 
-     1st version : S.Senesi - 05/2016 :
+     1st version : S.Senesi - 05/2016 : 
        derived form climate type runs without TEB, and with
-       LALLOW_ADD_DIM=true/false ; Defines what is needed for typical CMIP5
+       LALLOW_ADD_DIM=true/false ; Defines what is needed for typical CMIP5 
        Data Request
 
 >> plusieurs groupes thématiques avec distinction des grilles
@@ -79,7 +79,7 @@ Declaration of a number of Surfex diags
       <field id="rootd"    	long_name="Maximum Root Depth excluding non-vegetated area"    			unit="m" />
       <field id="mrsofc"    	long_name="Capacity of Soil to Store Water"    					unit="kg m-2" />
     </field_group>
-<!-- Deplaces -->
+<!-- Deplaces --> 
      <field_group id="sfx_fix_z" grid_ref="NATURE_glayers" >
       <field id="slthick"    	long_name="Thickness of Soil Layers"    					unit="m" />
       <field id="rzd2sl"    	long_name="Root Distribution over the grid-cell or rzd2"    			unit="-" />
@@ -176,6 +176,7 @@ Declaration of a number of Surfex diags
       <field id="nrjbuds_isba"  long_name="Surface energy budget as residue over land"    			unit="W m-2" />
       <field id="tau_land"    	long_name="wind stress over land"    						unit="Pa" />
       <field id="tsn"    	long_name="snow internal temperature over land"    				unit="K" />
+      <field id="sn_dens"    	long_name="Snow Density"                         				unit="kg m-3" />
       <field id="ts_land"    	long_name="surface temperature over land"    					unit="K" />
       <field id="tr_land"    	long_name="radiative surface temperature over land"    				unit="K" />
       <field id="tgs"    	long_name="surface ground temperature over land"    				unit="K" />
@@ -505,47 +506,47 @@ Declaration of a number of Surfex diags
 <!-- Land/Continental fields per land-use tiles (patch aggregation = 3d fields) -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
     <field_group id="sfx_land_lut" grid_ref="NATURE_landuse" >
-      <field id="fracLut"    	long_name="fraction of land-use tile"    						unit="%" />
+      <field id="fracLut"    	long_name="fraction of land-use tile"    								unit="%" />
       <field id="tasLut"    	long_name="near-surface air temperature 2m above displacement height, i.e. t_ref on land-use tile"	unit="K" />
       <field id="hussLut"    	long_name="near-surface air specific humidty 2m above displacement height, i.e. t_ref on land-use tile" unit="-" />
-      <field id="rsusLut"    	long_name="short wave upward radiation on land-use tile"    				unit="W m-2" />
-      <field id="rlusLut"    	long_name="long wave upward radiation on land-use tile"    				unit="W m-2" />
-      <field id="rsdsLut"    	long_name="short wave upward radiation on land-use tile"    				unit="W m-2" />
-      <field id="rldsLut"   	long_name="long wave upward radiation on land-use tile"   				unit="W m-2" />
-      <field id="hfssLut"    	long_name="Sensible heat flux on land-use tile"    					unit="W m-2" />
-      <field id="hflsLut"    	long_name="Sensible heat flux on land-use tile"    					unit="W m-2" />
-      <field id="nrjbudLut"    	long_name="Energy budget as residue on land-use tile"    				unit="W m-2" />
-      <field id="tslsiLut"    	long_name="skin temperature on land-use tile"    					unit="K" />
-      <field id="mrsosLut"    	long_name="top soil moisture over 10cm on land-use tile"   				unit="kg m-2" />
-      <field id="rzwcLut"    	long_name="root zone soil moisture on land-use tile"    				unit="kg m-2" />
-      <field id="mrsoLut"    	long_name="total soil moisture on land-use tile"    					unit="kg m-2" />
-      <field id="sweLut"    	long_name="snow water equivalent on land-use tile"    					unit="kg m-2" />
-      <field id="mrsowLut"    	long_name="total soil wetness on land-use tile"    					unit="-" />
-      <field id="mrroLut"    	long_name="total runoff on land-use tile"    						unit="kg m-2 s-1" />
-      <field id="cncLut"    	long_name="canopy covered fraction on land-use tile"    				unit="-" />
-      <field id="laiLut"    	long_name="leaf area index on land-use tile"    					unit="-" />
+      <field id="rsusLut"    	long_name="short wave upward radiation on land-use tile"    						unit="W m-2" />
+      <field id="rlusLut"    	long_name="long wave upward radiation on land-use tile"    						unit="W m-2" />
+      <field id="rsdsLut"    	long_name="short wave upward radiation on land-use tile"    						unit="W m-2" />
+      <field id="rldsLut"   	long_name="long wave upward radiation on land-use tile"   						unit="W m-2" />
+      <field id="hfssLut"    	long_name="Sensible heat flux on land-use tile"    							unit="W m-2" />
+      <field id="hflsLut"    	long_name="Sensible heat flux on land-use tile"    							unit="W m-2" />
+      <field id="nrjbudLut"    	long_name="Energy budget as residue on land-use tile"    						unit="W m-2" />
+      <field id="tslsiLut"    	long_name="skin temperature on land-use tile"    							unit="K" />
+      <field id="mrsosLut"    	long_name="top soil moisture over 10cm on land-use tile"   						unit="kg m-2" />
+      <field id="rzwcLut"    	long_name="root zone soil moisture on land-use tile"    						unit="kg m-2" />
+      <field id="mrsoLut"    	long_name="total soil moisture on land-use tile"    							unit="kg m-2" />
+      <field id="sweLut"    	long_name="snow water equivalent on land-use tile"    							unit="kg m-2" />
+      <field id="mrsowLut"    	long_name="total soil wetness on land-use tile"    							unit="-" />
+      <field id="mrroLut"    	long_name="total runoff on land-use tile"    								unit="kg m-2 s-1" />
+      <field id="cncLut"    	long_name="canopy covered fraction on land-use tile"    						unit="-" />
+      <field id="laiLut"    	long_name="leaf area index on land-use tile"    							unit="-" />
     </field_group>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!-- Land/Continental carbon fields per land-use tiles (patch aggregation = 3d fields) -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
     <field_group id="sfx_carbon_lut" grid_ref="NATURE_landuse" >
-      <field id="gppLut"    	long_name="gross primary productivity of carbon on land-use tile"    			unit="kgC m-2 s-1" />
-      <field id="raLut"    	long_name="plant respiration carbon flux on land-use tile"    				unit="kgC m-2 s-1" />
-      <field id="rhLut"    	long_name="heterotrophic respiration carbon flux on land-use tile"    			unit="kgC m-2 s-1" />
-      <field id="nppLut"    	long_name="net primary productivity of carbon on land-use tile"    			unit="kgC m-2 s-1" />
+      <field id="gppLut"    	long_name="gross primary productivity of carbon on land-use tile"    					unit="kgC m-2 s-1" />
+      <field id="raLut"    	long_name="plant respiration carbon flux on land-use tile"    						unit="kgC m-2 s-1" />
+      <field id="rhLut"    	long_name="heterotrophic respiration carbon flux on land-use tile"    					unit="kgC m-2 s-1" />
+      <field id="nppLut"    	long_name="net primary productivity of carbon on land-use tile"    					unit="kgC m-2 s-1" />
       <field id="nbpLut"    	long_name="Carbon Mass Flux out of Atmosphere due to Net Biospheric Production on land-use tile"    	unit="kgC m-2 s-1" />
-      <field id="necbLut"    	long_name="net rate of carbon accumulation or loss on land-use tile"    		unit="kgC m-2 s-1" />
-      <field id="cVegLut"   	long_name="Carbon Mass in vegetation on land-use tile"    				unit="kgC m-2" />
-      <field id="cLitterLut"    long_name="litter carbon content on land-use tile"    					unit="kgC m-2" />
-      <field id="cSoilLut"    	long_name="soil carbon content on land-use tile"    					unit="kgC m-2 s-1" />
-      <field id="fCLeachLut"    long_name="leaching carbon runoff from soil to river on land-use tile"    		unit="kgC m-2 s-1" />
-      <field id="cTotFireLut"   long_name="total carbon loss from natural and managed fire on land-use tile"    	unit="kgC m-2 s-1" />
+      <field id="necbLut"    	long_name="net rate of carbon accumulation or loss on land-use tile"    				unit="kgC m-2 s-1" />
+      <field id="cVegLut"   	long_name="Carbon Mass in vegetation on land-use tile"    						unit="kgC m-2" />
+      <field id="cLitterLut"    long_name="litter carbon content on land-use tile"    							unit="kgC m-2" />
+      <field id="cSoilLut"    	long_name="soil carbon content on land-use tile"    							unit="kgC m-2 s-1" />
+      <field id="fCLeachLut"    long_name="leaching carbon runoff from soil to river on land-use tile"    				unit="kgC m-2 s-1" />
+      <field id="cTotFireLut"   long_name="total carbon loss from natural and managed fire on land-use tile"    			unit="kgC m-2 s-1" />
       <field id="fDeforestLut"  long_name="Deforested biomass as a result of anthropogenic land-use change on land-use tile"    	unit="kgC m-2 s-1" />
       <field id="fLulccAtmLut"  long_name="carbon mass flux into atmosphere due to any human activity on land-use tile"    		unit="kgC m-2 s-1" />
       <field id="fLulccProLut"  long_name="carbon harvested that enters anthropogenic product pools on land-use tile"   		unit="kgC m-2 s-1" />
-      <field id="fLulccResLut"  long_name="carbon transferred to soil or litter pools on land-use tile"    		unit="kgC m-2 s-1" />
+      <field id="fLulccResLut"  long_name="carbon transferred to soil or litter pools on land-use tile"    				unit="kgC m-2 s-1" />
       <field id="fProdDecoLut"  long_name="decomposition out of product pools to CO2 in atmosphere on land-use tile"    		unit="kgC m-2 s-1" />
-      <field id="fRegrowthLut"  long_name="carbon flux due to plant regrowth on land-use tile"    			unit="kgC m-2 s-1" />
+      <field id="fRegrowthLut"  long_name="carbon flux due to plant regrowth on land-use tile"    					unit="kgC m-2 s-1" />
       <field id="cProductLut"   long_name="carbon content of products of anthropogenic land-use change on land-use tile"    		unit="kgC m-2" />
     </field_group>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -612,3 +613,4 @@ Declaration of a number of Surfex diags
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
   </field_group>
 </field_definition>
+

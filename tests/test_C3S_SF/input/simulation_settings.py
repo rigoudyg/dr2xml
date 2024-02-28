@@ -22,7 +22,7 @@ simulation_settings = {
     'physics_index': 1,
     'branch_year_in_parent': 1960,
     'branch_year_in_child': 1960,
-    'configuration': 'AOGCM',
+    'configuration': 'AOGCMHR',
     'excluded_tables': [],
     'history': 'none',
     'grid_mapping': 'hcrs',

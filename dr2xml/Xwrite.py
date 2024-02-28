@@ -803,7 +803,7 @@ def get_grid_info(sv, grid, table):
             target_hgrid_id = cfsites_domain_id
             zgrid_id = None
         else:
-            target_hgrid_id = internal_dict["ping_variables_prefix"] + grid
+            target_hgrid_id = internal_dict["grid_prefix"] + grid
             zgrid_id = "TBD : Should create zonal grid for CMIP6 standard grid %s" % grid
         grid_label, grid_resolution, grid_description = DR_grid_to_grid_atts(grid)
 

@@ -23,12 +23,12 @@
 'excluded_request_links' = ['RFMIP-AeroIrf'],
 'excluded_spshapes' = ['XYA-na', 'XYG-na', 'na-A'],
 'excluded_tables' = ['Eyr', 'Oyr', 'Odec', 'IfxAnt', 'ImonAnt'],
-'excluded_vars' = ['pfull', 'phalf', 'n2oClim', 'ch4globalClim', 'co2massClim', 'n2oglobalClim', 'ch4Clim', 'o3Clim', 'co2Clim', 'ch4', 'co2', 'co', 'concdust', 'ec550aer', 'h2o', 'hcho', 'hcl', 'hno3', 'mmrbc', 'mmrdust', 'mmroa', 'mmrso4', 'mmrss', 'n2o', 'no2', 'no', 'o3Clim', 'o3loss', 'o3prod', 'oh', 'so2', 'mmrpm1', 'fco2antt', 'fco2fos', 'fco2nat', 'loadbc', 'loaddust', 'loadoa', 'loadso4', 'loadss', 'oxloss', 'oxprod', 'vmrox', 'bry', 'cly', 'ho2', 'meanage', 'noy', 'drybc', 'drydust', 'dryoa', 'dryso2', 'dryso4', 'dryss', 'emibc', 'emidust', 'emioa', 'emiso2', 'emiso4', 'emiss', 'od440aer', 'od870aer', 'od550lt1aer', 'wetbc', 'wetdust', 'wetoa', 'wetso4', 'wetss', 'cLand', 'cSoil', 'fAnthDisturb', 'fDeforestToProduct', 'fFireNat', 'fLuc', 'fProductDecomp', 'netAtmosLandCO2Flux', 'od443dust', 'od865dust', 'sconcdust', 'sconcso4', 'sconcss', 'sedustCI', 'burntFractionAll', 'cLitter', 'cProduct', 'cVeg', 'fFire', 'fLitterSoil', 'fVegLitter', 'nbp', 'shrubFrac'],
+'excluded_vars' = ['pfull', 'phalf', 'n2oClim', 'ch4globalClim', 'co2massClim', 'n2oglobalClim', 'ch4Clim', 'o3Clim', 'co2Clim'],
 'excluded_vars_per_config' = {'AESM' = ['co2mass', 'ch4global', 'n2oglobal'], 'AGCM' = ['ch4', 'co2', 'co', 'concdust', 'ec550aer', 'h2o', 'hcho', 'hcl', 'hno3', 'mmrbc', 'mmrdust', 'mmroa', 'mmrso4', 'mmrss', 'n2o', 'no2', 'no', 'o3Clim', 'o3loss', 'o3prod', 'oh', 'so2', 'mmrpm1', 'fco2antt', 'fco2fos', 'fco2nat', 'loadbc', 'loaddust', 'loadoa', 'loadso4', 'loadss', 'oxloss', 'oxprod', 'vmrox', 'bry', 'cly', 'ho2', 'meanage', 'noy', 'drybc', 'drydust', 'dryoa', 'dryso2', 'dryso4', 'dryss', 'emibc', 'emidust', 'emioa', 'emiso2', 'emiso4', 'emiss', 'od440aer', 'od870aer', 'od550lt1aer', 'wetbc', 'wetdust', 'wetoa', 'wetso4', 'wetss', 'cLand', 'cSoil', 'fAnthDisturb', 'fDeforestToProduct', 'fFireNat', 'fLuc', 'fProductDecomp', 'netAtmosLandCO2Flux', 'od443dust', 'od865dust', 'sconcdust', 'sconcso4', 'sconcss', 'sedustCI', 'burntFractionAll', 'cLitter', 'cProduct', 'cVeg', 'fFire', 'fLitterSoil', 'fVegLitter', 'nbp', 'shrubFrac'], 'AOESM' = ['co2mass', 'ch4global', 'n2oglobal'], 'AOGCM' = ['ch4', 'co2', 'co', 'concdust', 'ec550aer', 'h2o', 'hcho', 'hcl', 'hno3', 'mmrbc', 'mmrdust', 'mmroa', 'mmrso4', 'mmrss', 'n2o', 'no2', 'no', 'o3Clim', 'o3loss', 'o3prod', 'oh', 'so2', 'mmrpm1', 'fco2antt', 'fco2fos', 'fco2nat', 'loadbc', 'loaddust', 'loadoa', 'loadso4', 'loadss', 'oxloss', 'oxprod', 'vmrox', 'bry', 'cly', 'ho2', 'meanage', 'noy', 'drybc', 'drydust', 'dryoa', 'dryso2', 'dryso4', 'dryss', 'emibc', 'emidust', 'emioa', 'emiso2', 'emiso4', 'emiss', 'od440aer', 'od870aer', 'od550lt1aer', 'wetbc', 'wetdust', 'wetoa', 'wetso4', 'wetss', 'cLand', 'cSoil', 'fAnthDisturb', 'fDeforestToProduct', 'fFireNat', 'fLuc', 'fProductDecomp', 'netAtmosLandCO2Flux', 'od443dust', 'od865dust', 'sconcdust', 'sconcso4', 'sconcss', 'sedustCI', 'burntFractionAll', 'cLitter', 'cProduct', 'cVeg', 'fFire', 'fLitterSoil', 'fVegLitter', 'nbp', 'shrubFrac'], 'LESM' = ['ch4', 'co2', 'hur', 'hus', 'n2o', 'o3', 'ta', 'ua', 'va', 'wap', 'zg', 'clt', 'ccb', 'cct', 'ci', 'clivi', 'clt', 'clwvi', 'evspsbl', 'fco2antt', 'fco2fos', 'pr', 'prc', 'prsn', 'prw', 'ps', 'psl', 'rldscs', 'rlut', 'rlutcs', 'rsdscs', 'rsdt', 'rsuscs', 'rsut', 'rsutcs', 'ch4global', 'co2mass', 'n2oglobal', 'mc', 'cl', 'cli', 'clw'], 'LGCM' = ['ch4', 'co2', 'hur', 'hus', 'n2o', 'o3', 'ta', 'ua', 'va', 'wap', 'zg', 'clt', 'ccb', 'cct', 'ci', 'clivi', 'clt', 'clwvi', 'evspsbl', 'fco2antt', 'fco2fos', 'pr', 'prc', 'prsn', 'prw', 'ps', 'psl', 'rldscs', 'rlut', 'rlutcs', 'rsdscs', 'rsdt', 'rsuscs', 'rsut', 'rsutcs', 'ch4global', 'co2mass', 'n2oglobal', 'mc', 'cl', 'cli', 'clw']},
 'fx_from_file' = {'areacella' = {'complete' = {'HR' = 'areacella_complete_CMIP6_tl359', 'LR' = 'areacella_complete_CMIP6_tl127'}}},
 'grid_choice' = {'CNRM-CM6-1' = 'LR', 'CNRM-CM6-1-HR' = 'HR', 'CNRM-ESM2-1' = 'LR', 'CNRM-ESM2-1-HR' = 'HR'},
 'grid_policy' = 'adhoc',
-'grids' = {'HR' = {'nemo' = ['gn', '', '', '25 km', 'native ocean tri-polar grid with 1.47 M ocean cells'], 'surfex' = ['gr', 'complete', 'glat', '50 km', 'data regridded to a 359 gaussian grid (360x720 latlon) from a native atmosphere T359l reduced gaussian grid'], 'trip' = ['gn', '', '', '50 km', 'regular 1/2 deg lat-lon grid']}, 'LR' = {'nemo' = ['gn', '', '', '100 km', 'native ocean tri-polar grid with 105 k ocean cells'], 'surfex' = ['gr', 'complete', 'glat', '250 km', 'data regridded to a T127 gaussian grid (128x256 latlon) from a native atmosphere T127l reduced gaussian grid'], 'trip' = ['gn', '', '', '50 km', 'regular 1/2 deg lat-lon grid']}},
+'grids' = {'HR' = {'nemo' = ['gr', 'C3S_1deg', '', '100 km', 'regular 1 deg lat-lon grid'], 'surfex' = ['gr', 'C3S_1deg', 'glat', '100 km', 'data regridded to a regular 1 deg lat-lon grid from a native atmosphere T359l reduced gaussian grid'], 'trip' = ['gr', 'C3S_1deg', '', '100 km', 'regular 1 deg lat-lon grid']}, 'LR' = {'nemo' = ['gn', '', '', '100 km', 'native ocean tri-polar grid with 105 k ocean cells'], 'surfex' = ['gr', 'complete', 'glat', '250 km', 'data regridded to a T127 gaussian grid (128x256 latlon) from a native atmosphere T127l reduced gaussian grid'], 'trip' = ['gn', '', '', '50 km', 'regular 1/2 deg lat-lon grid']}},
 'included_vars' = [''],
 'info_url' = 'http://www.umr-cnrm.fr/cmip6/',
 'institution' = 'Meteo-France, Toulouse, France',
@@ -64,7 +64,7 @@
 'child_time_ref_year' = '1850',
 'comment' = 'Run by CNRM at Meteo-France HPC facilities',
 'comments' = {},
-'configuration' = 'AOGCM',
+'configuration' = 'AOGCMHR',
 'excluded_tables' = [],
 'excluded_vars' = [],
 'experiment_id' = 'a4SST',
@@ -84,7 +84,7 @@
 'variant_info' = ''}-->
 	<!--Year processed 2010-->
 	<file_definition type="one_file" enabled="true">
-		<file id="hus_C3S_grx" name="H2010E001_atmos_12hrhourly_hus_%start_date%-%end_date%.nc" output_freq="12h" append="true" output_level="10" compression_level="4" split_freq="6mo" split_freq_format="%y%mo%d%h%mi" split_start_offset="12h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="hus_C3S_gr" name="H2010E001_atmos_12hourly_hus_%start_date%-%end_date%.nc" output_freq="12h" append="true" output_level="10" compression_level="4" split_freq="1mo" split_freq_format="%y%mo%d%h%mi" split_start_offset="12h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -98,7 +98,7 @@
 			<variable name="summary" type="string"> Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
 			<variable name="forecast_reference_time" type="string"> 1992-12-17T00:00:00Z </variable>
 			<variable name="EXPID" type="string"> H2010E001 </variable>
-			<field field_ref="C3S_hus_Scallat_Scalleadtime_Scallon_Scalplev_instant" name="hus" grid_ref="FULL_klev_Scallat_Scalleadtime_Scallon_Scalplev_C3S_XY-A" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: point" cell_methods_mode="overwrite" operation="instant" freq_op="12h">
+			<field field_ref="C3S_hus_Scallat_Scalleadtime_Scallon_Scalplev_instant" name="hus" grid_ref="FULL_klev_Scallat_Scalleadtime_Scallon_Scalplev_C3S_1deg" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: point" cell_methods_mode="overwrite" operation="instant" freq_op="12h">
 				<variable name="standard_name" type="string"> specific_humidity </variable>
 				<variable name="long_name" type="string"> Specific Humidity </variable>
 				<variable name="coordinates" type="string"> None </variable>
@@ -110,7 +110,7 @@
 			<field field_ref="C3S_b" name="b" long_name="vertical coordinate formula term: b(k)" operation="once" prec="8"/>
 			<field field_ref="C3S_b_bnds" name="b_bnds" long_name="vertical coordinate formula term: b(k+1/2)" operation="once" prec="8"/>
 		</file>
-		<file id="ta_C3S_grx" name="H2010E001_atmos_12hrhourly_ta_%start_date%-%end_date%.nc" output_freq="12h" append="true" output_level="10" compression_level="4" split_freq="6mo" split_freq_format="%y%mo%d%h%mi" split_start_offset="12h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="ta_C3S_gr" name="H2010E001_atmos_12hourly_ta_%start_date%-%end_date%.nc" output_freq="12h" append="true" output_level="10" compression_level="4" split_freq="1mo" split_freq_format="%y%mo%d%h%mi" split_start_offset="12h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -124,7 +124,7 @@
 			<variable name="summary" type="string"> Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
 			<variable name="forecast_reference_time" type="string"> 1992-12-17T00:00:00Z </variable>
 			<variable name="EXPID" type="string"> H2010E001 </variable>
-			<field field_ref="C3S_ta_Scallat_Scalleadtime_Scallon_Scalplev_instant" name="ta" grid_ref="FULL_klev_Scallat_Scalleadtime_Scallon_Scalplev_C3S_XY-A" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: point" cell_methods_mode="overwrite" operation="instant" freq_op="12h">
+			<field field_ref="C3S_ta_Scallat_Scalleadtime_Scallon_Scalplev_instant" name="ta" grid_ref="FULL_klev_Scallat_Scalleadtime_Scallon_Scalplev_C3S_1deg" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: point" cell_methods_mode="overwrite" operation="instant" freq_op="12h">
 				<variable name="standard_name" type="string"> air_temperature </variable>
 				<variable name="long_name" type="string"> Air Temperature </variable>
 				<variable name="coordinates" type="string"> None </variable>
@@ -136,7 +136,7 @@
 			<field field_ref="C3S_b" name="b" long_name="vertical coordinate formula term: b(k)" operation="once" prec="8"/>
 			<field field_ref="C3S_b_bnds" name="b_bnds" long_name="vertical coordinate formula term: b(k+1/2)" operation="once" prec="8"/>
 		</file>
-		<file id="ua_C3S_grx" name="H2010E001_atmos_12hrhourly_ua_%start_date%-%end_date%.nc" output_freq="12h" append="true" output_level="10" compression_level="4" split_freq="6mo" split_freq_format="%y%mo%d%h%mi" split_start_offset="12h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="ua_C3S_gr" name="H2010E001_atmos_12hourly_ua_%start_date%-%end_date%.nc" output_freq="12h" append="true" output_level="10" compression_level="4" split_freq="1mo" split_freq_format="%y%mo%d%h%mi" split_start_offset="12h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -150,7 +150,7 @@
 			<variable name="summary" type="string"> Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
 			<variable name="forecast_reference_time" type="string"> 1992-12-17T00:00:00Z </variable>
 			<variable name="EXPID" type="string"> H2010E001 </variable>
-			<field field_ref="C3S_ua_Scallat_Scalleadtime_Scallon_Scalplev_instant" name="ua" grid_ref="FULL_klev_Scallat_Scalleadtime_Scallon_Scalplev_C3S_XY-A" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: point" cell_methods_mode="overwrite" operation="instant" freq_op="12h">
+			<field field_ref="C3S_ua_Scallat_Scalleadtime_Scallon_Scalplev_instant" name="ua" grid_ref="FULL_klev_Scallat_Scalleadtime_Scallon_Scalplev_C3S_1deg" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: point" cell_methods_mode="overwrite" operation="instant" freq_op="12h">
 				<variable name="standard_name" type="string"> x_wind </variable>
 				<variable name="long_name" type="string"> Eastward Wind </variable>
 				<variable name="coordinates" type="string"> None </variable>
@@ -162,7 +162,7 @@
 			<field field_ref="C3S_b" name="b" long_name="vertical coordinate formula term: b(k)" operation="once" prec="8"/>
 			<field field_ref="C3S_b_bnds" name="b_bnds" long_name="vertical coordinate formula term: b(k+1/2)" operation="once" prec="8"/>
 		</file>
-		<file id="va_C3S_grx" name="H2010E001_atmos_12hrhourly_va_%start_date%-%end_date%.nc" output_freq="12h" append="true" output_level="10" compression_level="4" split_freq="6mo" split_freq_format="%y%mo%d%h%mi" split_start_offset="12h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="va_C3S_gr" name="H2010E001_atmos_12hourly_va_%start_date%-%end_date%.nc" output_freq="12h" append="true" output_level="10" compression_level="4" split_freq="1mo" split_freq_format="%y%mo%d%h%mi" split_start_offset="12h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -176,7 +176,7 @@
 			<variable name="summary" type="string"> Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
 			<variable name="forecast_reference_time" type="string"> 1992-12-17T00:00:00Z </variable>
 			<variable name="EXPID" type="string"> H2010E001 </variable>
-			<field field_ref="C3S_va_Scallat_Scalleadtime_Scallon_Scalplev_instant" name="va" grid_ref="FULL_klev_Scallat_Scalleadtime_Scallon_Scalplev_C3S_XY-A" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: point" cell_methods_mode="overwrite" operation="instant" freq_op="12h">
+			<field field_ref="C3S_va_Scallat_Scalleadtime_Scallon_Scalplev_instant" name="va" grid_ref="FULL_klev_Scallat_Scalleadtime_Scallon_Scalplev_C3S_1deg" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: point" cell_methods_mode="overwrite" operation="instant" freq_op="12h">
 				<variable name="standard_name" type="string"> y_wind </variable>
 				<variable name="long_name" type="string"> Northward Wind </variable>
 				<variable name="coordinates" type="string"> None </variable>
@@ -188,7 +188,7 @@
 			<field field_ref="C3S_b" name="b" long_name="vertical coordinate formula term: b(k)" operation="once" prec="8"/>
 			<field field_ref="C3S_b_bnds" name="b_bnds" long_name="vertical coordinate formula term: b(k+1/2)" operation="once" prec="8"/>
 		</file>
-		<file id="zg_C3S_grx" name="H2010E001_atmos_12hrhourly_zg_%start_date%-%end_date%.nc" output_freq="12h" append="true" output_level="10" compression_level="4" split_freq="6mo" split_freq_format="%y%mo%d%h%mi" split_start_offset="12h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="zg_C3S_gr" name="H2010E001_atmos_12hourly_zg_%start_date%-%end_date%.nc" output_freq="12h" append="true" output_level="10" compression_level="4" split_freq="1mo" split_freq_format="%y%mo%d%h%mi" split_start_offset="12h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -202,7 +202,7 @@
 			<variable name="summary" type="string"> Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
 			<variable name="forecast_reference_time" type="string"> 1992-12-17T00:00:00Z </variable>
 			<variable name="EXPID" type="string"> H2010E001 </variable>
-			<field field_ref="C3S_zg_Scallat_Scalleadtime_Scallon_Scalplev_instant" name="zg" grid_ref="FULL_klev_Scallat_Scalleadtime_Scallon_Scalplev_C3S_XY-A" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: point" cell_methods_mode="overwrite" operation="instant" freq_op="12h">
+			<field field_ref="C3S_zg_Scallat_Scalleadtime_Scallon_Scalplev_instant" name="zg" grid_ref="FULL_klev_Scallat_Scalleadtime_Scallon_Scalplev_C3S_1deg" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: point" cell_methods_mode="overwrite" operation="instant" freq_op="12h">
 				<variable name="standard_name" type="string"> geopotential_height </variable>
 				<variable name="long_name" type="string"> Geopotential Height </variable>
 				<variable name="coordinates" type="string"> None </variable>
@@ -214,7 +214,7 @@
 			<field field_ref="C3S_b" name="b" long_name="vertical coordinate formula term: b(k)" operation="once" prec="8"/>
 			<field field_ref="C3S_b_bnds" name="b_bnds" long_name="vertical coordinate formula term: b(k+1/2)" operation="once" prec="8"/>
 		</file>
-		<file id="hfls_C3S_grx" name="H2010E001_atmos_daily_hfls_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="hfls_C3S_gr" name="H2010E001_atmos_daily_hfls_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -228,7 +228,7 @@
 			<variable name="summary" type="string"> Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
 			<variable name="forecast_reference_time" type="string"> 1992-12-17T00:00:00Z </variable>
 			<variable name="EXPID" type="string"> H2010E001 </variable>
-			<field field_ref="C3S_hfls_Scallat_Scalleadtime_Scallon_average" name="hfls" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon_C3S_XY-na" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: mean (interval: 7.50 minutes)" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@C3S_hfls_Scallat_Scalleadtime_Scallon_average
+			<field field_ref="C3S_hfls_Scallat_Scalleadtime_Scallon_average" name="hfls" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon_C3S_1deg" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: mean (interval: 7.50 minutes)" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@C3S_hfls_Scallat_Scalleadtime_Scallon_average
 				<variable name="standard_name" type="string"> surface_upward_latent_heat_flux </variable>
 				<variable name="long_name" type="string"> Surface Upward Latent Heat Flux </variable>
 				<variable name="coordinates" type="string"> None </variable>
@@ -236,7 +236,7 @@
 				<variable name="units" type="string"> W m-2 </variable>
 			</field>
 		</file>
-		<file id="hfss_C3S_grx" name="H2010E001_atmos_daily_hfss_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="hfss_C3S_gr" name="H2010E001_atmos_daily_hfss_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -250,7 +250,7 @@
 			<variable name="summary" type="string"> Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
 			<variable name="forecast_reference_time" type="string"> 1992-12-17T00:00:00Z </variable>
 			<variable name="EXPID" type="string"> H2010E001 </variable>
-			<field field_ref="C3S_hfss_Scallat_Scalleadtime_Scallon_average" name="hfss" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon_C3S_XY-na" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: mean (interval: 7.50 minutes)" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@C3S_hfss_Scallat_Scalleadtime_Scallon_average
+			<field field_ref="C3S_hfss_Scallat_Scalleadtime_Scallon_average" name="hfss" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon_C3S_1deg" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: mean (interval: 7.50 minutes)" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@C3S_hfss_Scallat_Scalleadtime_Scallon_average
 				<variable name="standard_name" type="string"> surface_upward_sensible_heat_flux </variable>
 				<variable name="long_name" type="string"> Surface Upward Sensible Heat Flux </variable>
 				<variable name="coordinates" type="string"> None </variable>
@@ -258,7 +258,7 @@
 				<variable name="units" type="string"> W m-2 </variable>
 			</field>
 		</file>
-		<file id="rlds_C3S_grx" name="H2010E001_atmos_daily_rlds_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="rlds_C3S_gr" name="H2010E001_atmos_daily_rlds_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -272,7 +272,7 @@
 			<variable name="summary" type="string"> Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
 			<variable name="forecast_reference_time" type="string"> 1992-12-17T00:00:00Z </variable>
 			<variable name="EXPID" type="string"> H2010E001 </variable>
-			<field field_ref="C3S_rlds_Scallat_Scalleadtime_Scallon_average" name="rlds" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon_C3S_XY-na" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: mean (interval: 7.50 minutes)" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@C3S_rlds_Scallat_Scalleadtime_Scallon_average
+			<field field_ref="C3S_rlds_Scallat_Scalleadtime_Scallon_average" name="rlds" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon_C3S_1deg" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: mean (interval: 7.50 minutes)" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@C3S_rlds_Scallat_Scalleadtime_Scallon_average
 				<variable name="standard_name" type="string"> surface_downwelling_longwave_flux_in_air </variable>
 				<variable name="long_name" type="string"> Surface Downwelling Longwave Radiation </variable>
 				<variable name="coordinates" type="string"> None </variable>
@@ -280,7 +280,7 @@
 				<variable name="units" type="string"> W m-2 </variable>
 			</field>
 		</file>
-		<file id="rls_C3S_grx" name="H2010E001_atmos_daily_rls_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="rls_C3S_gr" name="H2010E001_atmos_daily_rls_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -294,7 +294,7 @@
 			<variable name="summary" type="string"> Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
 			<variable name="forecast_reference_time" type="string"> 1992-12-17T00:00:00Z </variable>
 			<variable name="EXPID" type="string"> H2010E001 </variable>
-			<field field_ref="C3S_rls_Scallat_Scalleadtime_Scallon_average" name="rls" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon_C3S_XY-na" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: mean (interval: 7.50 minutes)" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@C3S_rls_Scallat_Scalleadtime_Scallon_average
+			<field field_ref="C3S_rls_Scallat_Scalleadtime_Scallon_average" name="rls" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon_C3S_1deg" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: mean (interval: 7.50 minutes)" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@C3S_rls_Scallat_Scalleadtime_Scallon_average
 				<variable name="standard_name" type="string"> surface_net_downward_longwave_flux </variable>
 				<variable name="long_name" type="string"> Net Longwave Surface Radiation </variable>
 				<variable name="coordinates" type="string"> None </variable>
@@ -302,7 +302,7 @@
 				<variable name="units" type="string"> W m-2 </variable>
 			</field>
 		</file>
-		<file id="rsds_C3S_grx" name="H2010E001_atmos_daily_rsds_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="rlt_C3S_gr" name="H2010E001_atmos_daily_rlt_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -316,7 +316,29 @@
 			<variable name="summary" type="string"> Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
 			<variable name="forecast_reference_time" type="string"> 1992-12-17T00:00:00Z </variable>
 			<variable name="EXPID" type="string"> H2010E001 </variable>
-			<field field_ref="C3S_rsds_Scallat_Scalleadtime_Scallon_average" name="rsds" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon_C3S_XY-na" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: mean (interval: 7.50 minutes)" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@C3S_rsds_Scallat_Scalleadtime_Scallon_average
+			<field field_ref="C3S_rlt_Scallat_Scalleadtime_Scallon_average" name="rlt" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon_C3S_1deg" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: mean (interval: 7.50 minutes)" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@C3S_rlt_Scallat_Scalleadtime_Scallon_average
+				<variable name="standard_name" type="string"> toa_net_downward_longwave_flux </variable>
+				<variable name="long_name" type="string"> TOA Net Longwave Radiation </variable>
+				<variable name="coordinates" type="string"> None </variable>
+				<variable name="grid_mapping" type="string"> hcrs </variable>
+				<variable name="units" type="string"> W m-2 </variable>
+			</field>
+		</file>
+		<file id="rsds_C3S_gr" name="H2010E001_atmos_daily_rsds_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+			<variable name="institute_id" type="string"> lfpw </variable>
+			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
+			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
+			<variable name="comment" type="string"> Run by CNRM at Meteo-France HPC facilities </variable>
+			<variable name="forecast_type" type="string"> hindcast </variable>
+			<variable name="modeling_realm" type="string"> atmos </variable>
+			<variable name="frequency" type="string"> day </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="references" type="string"> http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+			<variable name="commit" type="string"> 2021-01-01T00:00:00Z http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+			<variable name="summary" type="string"> Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
+			<variable name="forecast_reference_time" type="string"> 1992-12-17T00:00:00Z </variable>
+			<variable name="EXPID" type="string"> H2010E001 </variable>
+			<field field_ref="C3S_rsds_Scallat_Scalleadtime_Scallon_average" name="rsds" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon_C3S_1deg" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: mean (interval: 7.50 minutes)" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@C3S_rsds_Scallat_Scalleadtime_Scallon_average
 				<variable name="standard_name" type="string"> surface_downwelling_shortwave_flux_in_air </variable>
 				<variable name="long_name" type="string"> Surface Downwelling Shortwave Radiation </variable>
 				<variable name="coordinates" type="string"> None </variable>
@@ -324,7 +346,7 @@
 				<variable name="units" type="string"> W m-2 </variable>
 			</field>
 		</file>
-		<file id="rsdt_C3S_grx" name="H2010E001_atmos_daily_rsdt_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="rsdt_C3S_gr" name="H2010E001_atmos_daily_rsdt_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -338,7 +360,7 @@
 			<variable name="summary" type="string"> Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
 			<variable name="forecast_reference_time" type="string"> 1992-12-17T00:00:00Z </variable>
 			<variable name="EXPID" type="string"> H2010E001 </variable>
-			<field field_ref="C3S_rsdt_Scallat_Scalleadtime_Scallon_average" name="rsdt" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon_C3S_XY-na" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: mean (interval 0.75 hour)" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@C3S_rsdt_Scallat_Scalleadtime_Scallon_average
+			<field field_ref="C3S_rsdt_Scallat_Scalleadtime_Scallon_average" name="rsdt" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon_C3S_1deg" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: mean (interval 0.75 hour)" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@C3S_rsdt_Scallat_Scalleadtime_Scallon_average
 				<variable name="standard_name" type="string"> toa_incoming_shortwave_flux </variable>
 				<variable name="long_name" type="string"> TOA Incident Shortwave Radiation </variable>
 				<variable name="coordinates" type="string"> None </variable>
@@ -346,7 +368,7 @@
 				<variable name="units" type="string"> W m-2 </variable>
 			</field>
 		</file>
-		<file id="rss_C3S_grx" name="H2010E001_atmos_daily_rss_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="rss_C3S_gr" name="H2010E001_atmos_daily_rss_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -360,7 +382,7 @@
 			<variable name="summary" type="string"> Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
 			<variable name="forecast_reference_time" type="string"> 1992-12-17T00:00:00Z </variable>
 			<variable name="EXPID" type="string"> H2010E001 </variable>
-			<field field_ref="C3S_rss_Scallat_Scalleadtime_Scallon_average" name="rss" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon_C3S_XY-na" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: mean (interval: 7.50 minutes)" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@C3S_rss_Scallat_Scalleadtime_Scallon_average
+			<field field_ref="C3S_rss_Scallat_Scalleadtime_Scallon_average" name="rss" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon_C3S_1deg" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: mean (interval: 7.50 minutes)" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@C3S_rss_Scallat_Scalleadtime_Scallon_average
 				<variable name="standard_name" type="string"> surface_net_downward_shortwave_flux </variable>
 				<variable name="long_name" type="string"> Net Shortwave Surface Radiation </variable>
 				<variable name="coordinates" type="string"> None </variable>
@@ -368,7 +390,7 @@
 				<variable name="units" type="string"> W m-2 </variable>
 			</field>
 		</file>
-		<file id="tasmax_C3S_grx" name="H2010E001_atmos_daily_tasmax_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="rst_C3S_gr" name="H2010E001_atmos_daily_rst_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -382,7 +404,29 @@
 			<variable name="summary" type="string"> Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
 			<variable name="forecast_reference_time" type="string"> 1992-12-17T00:00:00Z </variable>
 			<variable name="EXPID" type="string"> H2010E001 </variable>
-			<field field_ref="C3S_tasmax_Scalheight_2.0_Scallat_Scalleadtime_Scallon_maximum" name="tasmax" grid_ref="FULL_grid_Scalheight_2.0_Scallat_Scalleadtime_Scallon_C3S_XY-na" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: maximum" cell_methods_mode="overwrite" operation="maximum">
+			<field field_ref="C3S_rst_Scallat_Scalleadtime_Scallon_average" name="rst" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon_C3S_1deg" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: mean (interval: 7.50 minutes)" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@C3S_rst_Scallat_Scalleadtime_Scallon_average
+				<variable name="standard_name" type="string"> toa_net_downward_shortwave_flux </variable>
+				<variable name="long_name" type="string"> TOA Net Shortwave Radiation </variable>
+				<variable name="coordinates" type="string"> None </variable>
+				<variable name="grid_mapping" type="string"> hcrs </variable>
+				<variable name="units" type="string"> W m-2 </variable>
+			</field>
+		</file>
+		<file id="tasmax_C3S_gr" name="H2010E001_atmos_daily_tasmax_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+			<variable name="institute_id" type="string"> lfpw </variable>
+			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
+			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
+			<variable name="comment" type="string"> Run by CNRM at Meteo-France HPC facilities </variable>
+			<variable name="forecast_type" type="string"> hindcast </variable>
+			<variable name="modeling_realm" type="string"> atmos </variable>
+			<variable name="frequency" type="string"> day </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="references" type="string"> http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+			<variable name="commit" type="string"> 2021-01-01T00:00:00Z http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+			<variable name="summary" type="string"> Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
+			<variable name="forecast_reference_time" type="string"> 1992-12-17T00:00:00Z </variable>
+			<variable name="EXPID" type="string"> H2010E001 </variable>
+			<field field_ref="C3S_tasmax_Scalheight_2.0_Scallat_Scalleadtime_Scallon_maximum" name="tasmax" grid_ref="FULL_grid_Scalheight_2.0_Scallat_Scalleadtime_Scallon_C3S_1deg" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: maximum" cell_methods_mode="overwrite" operation="maximum">
 				<variable name="standard_name" type="string"> air_temperature </variable>
 				<variable name="long_name" type="string"> Daily Maximum Near-Surface Air Temperature </variable>
 				<variable name="coordinates" type="string"> None </variable>
@@ -390,7 +434,7 @@
 				<variable name="units" type="string"> K </variable>
 			</field>
 		</file>
-		<file id="tasmin_C3S_grx" name="H2010E001_atmos_daily_tasmin_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="tasmin_C3S_gr" name="H2010E001_atmos_daily_tasmin_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -404,7 +448,7 @@
 			<variable name="summary" type="string"> Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
 			<variable name="forecast_reference_time" type="string"> 1992-12-17T00:00:00Z </variable>
 			<variable name="EXPID" type="string"> H2010E001 </variable>
-			<field field_ref="C3S_tasmin_Scalheight_2.0_Scallat_Scalleadtime_Scallon_minimum" name="tasmin" grid_ref="FULL_grid_Scalheight_2.0_Scallat_Scalleadtime_Scallon_C3S_XY-na" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: minimum" cell_methods_mode="overwrite" operation="minimum">
+			<field field_ref="C3S_tasmin_Scalheight_2.0_Scallat_Scalleadtime_Scallon_minimum" name="tasmin" grid_ref="FULL_grid_Scalheight_2.0_Scallat_Scalleadtime_Scallon_C3S_1deg" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: minimum" cell_methods_mode="overwrite" operation="minimum">
 				<variable name="standard_name" type="string"> air_temperature </variable>
 				<variable name="long_name" type="string"> Daily Minimum Near-Surface Air Temperature </variable>
 				<variable name="coordinates" type="string"> None </variable>
@@ -412,7 +456,7 @@
 				<variable name="units" type="string"> K </variable>
 			</field>
 		</file>
-		<file id="tauu_C3S_grx" name="H2010E001_atmos_daily_tauu_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="tauu_C3S_gr" name="H2010E001_atmos_daily_tauu_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -426,7 +470,7 @@
 			<variable name="summary" type="string"> Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
 			<variable name="forecast_reference_time" type="string"> 1992-12-17T00:00:00Z </variable>
 			<variable name="EXPID" type="string"> H2010E001 </variable>
-			<field field_ref="C3S_tauu_Scallat_Scalleadtime_Scallon_average" name="tauu" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon_C3S_XY-na" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: mean (interval: 7.50 minutes)" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@C3S_tauu_Scallat_Scalleadtime_Scallon_average
+			<field field_ref="C3S_tauu_Scallat_Scalleadtime_Scallon_average" name="tauu" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon_C3S_1deg" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: mean (interval: 7.50 minutes)" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@C3S_tauu_Scallat_Scalleadtime_Scallon_average
 				<variable name="standard_name" type="string"> surface_downward_eastward_stress </variable>
 				<variable name="long_name" type="string"> Surface Downward Eastward Wind Stress </variable>
 				<variable name="coordinates" type="string"> None </variable>
@@ -434,7 +478,7 @@
 				<variable name="units" type="string"> Pa </variable>
 			</field>
 		</file>
-		<file id="tauv_C3S_grx" name="H2010E001_atmos_daily_tauv_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="tauv_C3S_gr" name="H2010E001_atmos_daily_tauv_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -448,7 +492,7 @@
 			<variable name="summary" type="string"> Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
 			<variable name="forecast_reference_time" type="string"> 1992-12-17T00:00:00Z </variable>
 			<variable name="EXPID" type="string"> H2010E001 </variable>
-			<field field_ref="C3S_tauv_Scallat_Scalleadtime_Scallon_average" name="tauv" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon_C3S_XY-na" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: mean (interval: 7.50 minutes)" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@C3S_tauv_Scallat_Scalleadtime_Scallon_average
+			<field field_ref="C3S_tauv_Scallat_Scalleadtime_Scallon_average" name="tauv" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon_C3S_1deg" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: mean (interval: 7.50 minutes)" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@C3S_tauv_Scallat_Scalleadtime_Scallon_average
 				<variable name="standard_name" type="string"> surface_downward_northward_stress </variable>
 				<variable name="long_name" type="string"> Surface Downward Northward Wind Stress </variable>
 				<variable name="coordinates" type="string"> None </variable>
@@ -456,7 +500,205 @@
 				<variable name="units" type="string"> Pa </variable>
 			</field>
 		</file>
-		<file id="clt_C3S_grx" name="H2010E001_atmos_6hrhourly_clt_%start_date%-%end_date%.nc" output_freq="6h" append="true" output_level="10" compression_level="4" split_freq="25y" split_freq_format="%y%mo%d%h%mi" split_start_offset="6h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="wsgmax_C3S_gr" name="H2010E001_atmos_daily_wsgmax_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+			<variable name="institute_id" type="string"> lfpw </variable>
+			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
+			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
+			<variable name="comment" type="string"> Run by CNRM at Meteo-France HPC facilities </variable>
+			<variable name="forecast_type" type="string"> hindcast </variable>
+			<variable name="modeling_realm" type="string"> atmos </variable>
+			<variable name="frequency" type="string"> day </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="references" type="string"> http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+			<variable name="commit" type="string"> 2021-01-01T00:00:00Z http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+			<variable name="summary" type="string"> Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
+			<variable name="forecast_reference_time" type="string"> 1992-12-17T00:00:00Z </variable>
+			<variable name="EXPID" type="string"> H2010E001 </variable>
+			<field field_ref="C3S_wsgmax_Scalheight_10.0_Scallat_Scalleadtime_Scallon_maximum" name="wsgmax" grid_ref="FULL_grid_Scalheight_10.0_Scallat_Scalleadtime_Scallon_C3S_1deg" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: maximum" cell_methods_mode="overwrite" operation="maximum">
+				<variable name="standard_name" type="string"> wind_speed_of_gust </variable>
+				<variable name="long_name" type="string"> Maximum Wind Speed of Gust </variable>
+				<variable name="coordinates" type="string"> None </variable>
+				<variable name="grid_mapping" type="string"> hcrs </variable>
+				<variable name="units" type="string"> m s-1 </variable>
+			</field>
+		</file>
+		<file id="lwee_C3S_gr" name="H2010E001_atmo_daily_lwee_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="1d" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+			<variable name="institute_id" type="string"> lfpw </variable>
+			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
+			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
+			<variable name="comment" type="string"> Run by CNRM at Meteo-France HPC facilities </variable>
+			<variable name="forecast_type" type="string"> hindcast </variable>
+			<variable name="modeling_realm" type="string"> atmo </variable>
+			<variable name="frequency" type="string"> day </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="references" type="string"> http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+			<variable name="commit" type="string"> 2021-01-01T00:00:00Z http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+			<variable name="summary" type="string"> Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
+			<variable name="forecast_reference_time" type="string"> 1992-12-17T00:00:00Z </variable>
+			<variable name="EXPID" type="string"> H2010E001 </variable>
+			<field field_ref="C3S_lwee_Scallat_Scalleadtime_Scallon_accumulate" name="lwee" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon_C3S_1deg" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: sum" cell_methods_mode="overwrite" operation="accumulate">
+				<variable name="standard_name" type="string"> lwe_thickness_of_water_evaporation_amount </variable>
+				<variable name="long_name" type="string"> Liquid Water Equivalent Thickness of Evaporation Amount </variable>
+				<variable name="coordinates" type="string"> None </variable>
+				<variable name="grid_mapping" type="string"> hcrs </variable>
+				<variable name="units" type="string"> m </variable>
+			</field>
+		</file>
+		<file id="lwepr_C3S_gr" name="H2010E001_atmos_daily_lwepr_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="1d" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+			<variable name="institute_id" type="string"> lfpw </variable>
+			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
+			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
+			<variable name="comment" type="string"> Run by CNRM at Meteo-France HPC facilities </variable>
+			<variable name="forecast_type" type="string"> hindcast </variable>
+			<variable name="modeling_realm" type="string"> atmos </variable>
+			<variable name="frequency" type="string"> day </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="references" type="string"> http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+			<variable name="commit" type="string"> 2021-01-01T00:00:00Z http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+			<variable name="summary" type="string"> Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
+			<variable name="forecast_reference_time" type="string"> 1992-12-17T00:00:00Z </variable>
+			<variable name="EXPID" type="string"> H2010E001 </variable>
+			<field field_ref="C3S_lwepr_Scallat_Scalleadtime_Scallon_accumulate" name="lwepr" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon_C3S_1deg" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: sum" cell_methods_mode="overwrite" operation="accumulate">
+				<variable name="standard_name" type="string"> lwe_thickness_of_precipitation_amount </variable>
+				<variable name="long_name" type="string"> Liquid Water Equivalent Thickness of Total Precipitation Amount </variable>
+				<variable name="coordinates" type="string"> None </variable>
+				<variable name="grid_mapping" type="string"> hcrs </variable>
+				<variable name="units" type="string"> m </variable>
+			</field>
+		</file>
+		<file id="lweprc_C3S_gr" name="H2010E001_atmos_daily_lweprc_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="1d" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+			<variable name="institute_id" type="string"> lfpw </variable>
+			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
+			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
+			<variable name="comment" type="string"> Run by CNRM at Meteo-France HPC facilities </variable>
+			<variable name="forecast_type" type="string"> hindcast </variable>
+			<variable name="modeling_realm" type="string"> atmos </variable>
+			<variable name="frequency" type="string"> day </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="references" type="string"> http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+			<variable name="commit" type="string"> 2021-01-01T00:00:00Z http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+			<variable name="summary" type="string"> Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
+			<variable name="forecast_reference_time" type="string"> 1992-12-17T00:00:00Z </variable>
+			<variable name="EXPID" type="string"> H2010E001 </variable>
+			<field field_ref="C3S_lweprc_Scallat_Scalleadtime_Scallon_accumulate" name="lweprc" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon_C3S_1deg" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: sum" cell_methods_mode="overwrite" operation="accumulate">
+				<variable name="standard_name" type="string"> lwe_thickness_of_convective_precipitation_amount </variable>
+				<variable name="long_name" type="string"> Liquid Water Equivalent Thickness of Convective Precipitation Amount </variable>
+				<variable name="coordinates" type="string"> None </variable>
+				<variable name="grid_mapping" type="string"> hcrs </variable>
+				<variable name="units" type="string"> m </variable>
+			</field>
+		</file>
+		<file id="lweprsn_C3S_gr" name="H2010E001_atmos_daily_lweprsn_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="1d" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+			<variable name="institute_id" type="string"> lfpw </variable>
+			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
+			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
+			<variable name="comment" type="string"> Run by CNRM at Meteo-France HPC facilities </variable>
+			<variable name="forecast_type" type="string"> hindcast </variable>
+			<variable name="modeling_realm" type="string"> atmos </variable>
+			<variable name="frequency" type="string"> day </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="references" type="string"> http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+			<variable name="commit" type="string"> 2021-01-01T00:00:00Z http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+			<variable name="summary" type="string"> Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
+			<variable name="forecast_reference_time" type="string"> 1992-12-17T00:00:00Z </variable>
+			<variable name="EXPID" type="string"> H2010E001 </variable>
+			<field field_ref="C3S_lweprsn_Scallat_Scalleadtime_Scallon_accumulate" name="lweprsn" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon_C3S_1deg" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: sum" cell_methods_mode="overwrite" operation="accumulate">
+				<variable name="standard_name" type="string"> lwe_thickness_of_snowfall_amount </variable>
+				<variable name="long_name" type="string"> Liquid Water Equivalent Thickness of Snowfall Amount </variable>
+				<variable name="coordinates" type="string"> None </variable>
+				<variable name="grid_mapping" type="string"> hcrs </variable>
+				<variable name="units" type="string"> m </variable>
+			</field>
+		</file>
+		<file id="lwesnw_C3S_gr" name="H2010E001_atmo_daily_lwesnw_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="1d" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+			<variable name="institute_id" type="string"> lfpw </variable>
+			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
+			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
+			<variable name="comment" type="string"> Run by CNRM at Meteo-France HPC facilities </variable>
+			<variable name="forecast_type" type="string"> hindcast </variable>
+			<variable name="modeling_realm" type="string"> atmo </variable>
+			<variable name="frequency" type="string"> day </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="references" type="string"> http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+			<variable name="commit" type="string"> 2021-01-01T00:00:00Z http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+			<variable name="summary" type="string"> Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
+			<variable name="forecast_reference_time" type="string"> 1992-12-17T00:00:00Z </variable>
+			<variable name="EXPID" type="string"> H2010E001 </variable>
+			<field field_ref="C3S_lwesnw_Scallat_Scalleadtime_Scallon_instant" name="lwesnw" grid_ref="NATURE_grid_Scallat_Scalleadtime_Scallon_C3S_1deg" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: point" cell_methods_mode="overwrite" operation="instant" freq_op="1d">
+				<variable name="standard_name" type="string"> lwe_thickness_of_surface_snow_amount </variable>
+				<variable name="long_name" type="string"> Liquid Water Equivalent Thickness of Surface Snow Amount </variable>
+				<variable name="coordinates" type="string"> None </variable>
+				<variable name="grid_mapping" type="string"> hcrs </variable>
+				<variable name="units" type="string"> m </variable>
+			</field>
+		</file>
+		<file id="mrroab_C3S_gr" name="H2010E001_atmo_daily_mrroab_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="1d" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+			<variable name="institute_id" type="string"> lfpw </variable>
+			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
+			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
+			<variable name="comment" type="string"> Run by CNRM at Meteo-France HPC facilities </variable>
+			<variable name="forecast_type" type="string"> hindcast </variable>
+			<variable name="modeling_realm" type="string"> atmo </variable>
+			<variable name="frequency" type="string"> day </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="references" type="string"> http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+			<variable name="commit" type="string"> 2021-01-01T00:00:00Z http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+			<variable name="summary" type="string"> Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
+			<variable name="forecast_reference_time" type="string"> 1992-12-17T00:00:00Z </variable>
+			<variable name="EXPID" type="string"> H2010E001 </variable>
+			<field field_ref="C3S_mrroab_Scallat_Scalleadtime_Scallon_accumulate" name="mrroab" grid_ref="NATURE_grid_Scallat_Scalleadtime_Scallon_C3S_1deg" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: sum" cell_methods_mode="overwrite" operation="accumulate">
+				<variable name="standard_name" type="string"> subsurface_runoff_amount </variable>
+				<variable name="long_name" type="string"> Subsurface Run-off Amount </variable>
+				<variable name="coordinates" type="string"> None </variable>
+				<variable name="grid_mapping" type="string"> hcrs </variable>
+				<variable name="units" type="string"> kg m-2 </variable>
+			</field>
+		</file>
+		<file id="mrroas_C3S_gr" name="H2010E001_atmo_daily_mrroas_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="1d" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+			<variable name="institute_id" type="string"> lfpw </variable>
+			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
+			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
+			<variable name="comment" type="string"> Run by CNRM at Meteo-France HPC facilities </variable>
+			<variable name="forecast_type" type="string"> hindcast </variable>
+			<variable name="modeling_realm" type="string"> atmo </variable>
+			<variable name="frequency" type="string"> day </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="references" type="string"> http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+			<variable name="commit" type="string"> 2021-01-01T00:00:00Z http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+			<variable name="summary" type="string"> Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
+			<variable name="forecast_reference_time" type="string"> 1992-12-17T00:00:00Z </variable>
+			<variable name="EXPID" type="string"> H2010E001 </variable>
+			<field field_ref="C3S_mrroas_Scallat_Scalleadtime_Scallon_accumulate" name="mrroas" grid_ref="NATURE_grid_Scallat_Scalleadtime_Scallon_C3S_1deg" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: sum" cell_methods_mode="overwrite" operation="accumulate">
+				<variable name="standard_name" type="string"> surface_runoff_amount </variable>
+				<variable name="long_name" type="string"> Surface Run-off Amount </variable>
+				<variable name="coordinates" type="string"> None </variable>
+				<variable name="grid_mapping" type="string"> hcrs </variable>
+				<variable name="units" type="string"> kg m-2 </variable>
+			</field>
+		</file>
+		<file id="rhosn_C3S_gr" name="H2010E001_atmo_daily_rhosn_%start_date%-%end_date%.nc" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="1d" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+			<variable name="institute_id" type="string"> lfpw </variable>
+			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
+			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
+			<variable name="comment" type="string"> Run by CNRM at Meteo-France HPC facilities </variable>
+			<variable name="forecast_type" type="string"> hindcast </variable>
+			<variable name="modeling_realm" type="string"> atmo </variable>
+			<variable name="frequency" type="string"> day </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="references" type="string"> http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+			<variable name="commit" type="string"> 2021-01-01T00:00:00Z http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+			<variable name="summary" type="string"> Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
+			<variable name="forecast_reference_time" type="string"> 1992-12-17T00:00:00Z </variable>
+			<variable name="EXPID" type="string"> H2010E001 </variable>
+			<field field_ref="C3S_rhosn_Scallat_Scalleadtime_Scallon_instant" name="rhosn" grid_ref="NATURE_grid_Scallat_Scalleadtime_Scallon_C3S_1deg" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: point" cell_methods_mode="overwrite" operation="instant" freq_op="1d">
+				<variable name="standard_name" type="string"> snow_density </variable>
+				<variable name="long_name" type="string"> Snow Density </variable>
+				<variable name="coordinates" type="string"> None </variable>
+				<variable name="grid_mapping" type="string"> hcrs </variable>
+				<variable name="units" type="string"> kg m-3 </variable>
+			</field>
+		</file>
+		<file id="clt_C3S_gr" name="H2010E001_atmos_6hourly_clt_%start_date%-%end_date%.nc" output_freq="6h" append="true" output_level="10" compression_level="4" split_freq="2y" split_freq_format="%y%mo%d%h%mi" split_start_offset="6h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -470,7 +712,7 @@
 			<variable name="summary" type="string"> Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
 			<variable name="forecast_reference_time" type="string"> 1992-12-17T00:00:00Z </variable>
 			<variable name="EXPID" type="string"> H2010E001 </variable>
-			<field field_ref="C3S_clt_Scallat_Scalleadtime_Scallon_instant" name="clt" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon_C3S_XY-na" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: point" cell_methods_mode="overwrite" operation="instant" freq_op="6h">
+			<field field_ref="C3S_clt_Scallat_Scalleadtime_Scallon_instant" name="clt" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon_C3S_1deg" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: point" cell_methods_mode="overwrite" operation="instant" freq_op="6h">
 				<variable name="standard_name" type="string"> cloud_area_fraction </variable>
 				<variable name="long_name" type="string"> Total Cloud Fraction </variable>
 				<variable name="coordinates" type="string"> None </variable>
@@ -478,7 +720,7 @@
 				<variable name="units" type="string"> 1 </variable>
 			</field>
 		</file>
-		<file id="psl_C3S_grx" name="H2010E001_atmos_6hrhourly_psl_%start_date%-%end_date%.nc" output_freq="6h" append="true" output_level="10" compression_level="4" split_freq="25y" split_freq_format="%y%mo%d%h%mi" split_start_offset="6h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="psl_C3S_gr" name="H2010E001_atmos_6hourly_psl_%start_date%-%end_date%.nc" output_freq="6h" append="true" output_level="10" compression_level="4" split_freq="2y" split_freq_format="%y%mo%d%h%mi" split_start_offset="6h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -492,7 +734,7 @@
 			<variable name="summary" type="string"> Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
 			<variable name="forecast_reference_time" type="string"> 1992-12-17T00:00:00Z </variable>
 			<variable name="EXPID" type="string"> H2010E001 </variable>
-			<field field_ref="C3S_psl_Scallat_Scalleadtime_Scallon_instant" name="psl" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon_C3S_XY-na" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: point" cell_methods_mode="overwrite" operation="instant" freq_op="6h">
+			<field field_ref="C3S_psl_Scallat_Scalleadtime_Scallon_instant" name="psl" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon_C3S_1deg" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: point" cell_methods_mode="overwrite" operation="instant" freq_op="6h">
 				<variable name="standard_name" type="string"> air_pressure_at_sea_level </variable>
 				<variable name="long_name" type="string"> Sea Level Pressure </variable>
 				<variable name="coordinates" type="string"> None </variable>
@@ -500,7 +742,7 @@
 				<variable name="units" type="string"> Pa </variable>
 			</field>
 		</file>
-		<file id="tas_C3S_grx" name="H2010E001_atmos_6hrhourly_tas_%start_date%-%end_date%.nc" output_freq="6h" append="true" output_level="10" compression_level="4" split_freq="25y" split_freq_format="%y%mo%d%h%mi" split_start_offset="6h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="tas_C3S_gr" name="H2010E001_atmos_6hourly_tas_%start_date%-%end_date%.nc" output_freq="6h" append="true" output_level="10" compression_level="4" split_freq="2y" split_freq_format="%y%mo%d%h%mi" split_start_offset="6h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -514,7 +756,7 @@
 			<variable name="summary" type="string"> Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
 			<variable name="forecast_reference_time" type="string"> 1992-12-17T00:00:00Z </variable>
 			<variable name="EXPID" type="string"> H2010E001 </variable>
-			<field field_ref="C3S_tas_Scalheight_2.0_Scallat_Scalleadtime_Scallon_instant" name="tas" grid_ref="FULL_grid_Scalheight_2.0_Scallat_Scalleadtime_Scallon_C3S_XY-na" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: point" cell_methods_mode="overwrite" operation="instant" freq_op="6h">
+			<field field_ref="C3S_tas_Scalheight_2.0_Scallat_Scalleadtime_Scallon_instant" name="tas" grid_ref="FULL_grid_Scalheight_2.0_Scallat_Scalleadtime_Scallon_C3S_1deg" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: point" cell_methods_mode="overwrite" operation="instant" freq_op="6h">
 				<variable name="standard_name" type="string"> air_temperature </variable>
 				<variable name="long_name" type="string"> Near-Surface Air Temperature </variable>
 				<variable name="coordinates" type="string"> None </variable>
@@ -522,7 +764,29 @@
 				<variable name="units" type="string"> K </variable>
 			</field>
 		</file>
-		<file id="tsl_C3S_grx" name="H2010E001_atmo_6hrhourly_tsl_%start_date%-%end_date%.nc" output_freq="6h" append="true" output_level="10" compression_level="4" split_freq="25y" split_freq_format="%y%mo%d%h%mi" split_start_offset="6h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="tdps_C3S_gr" name="H2010E001_atmos_6hourly_tdps_%start_date%-%end_date%.nc" output_freq="6h" append="true" output_level="10" compression_level="4" split_freq="2y" split_freq_format="%y%mo%d%h%mi" split_start_offset="6h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+			<variable name="institute_id" type="string"> lfpw </variable>
+			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
+			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
+			<variable name="comment" type="string"> Run by CNRM at Meteo-France HPC facilities </variable>
+			<variable name="forecast_type" type="string"> hindcast </variable>
+			<variable name="modeling_realm" type="string"> atmos </variable>
+			<variable name="frequency" type="string"> 6hr </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="references" type="string"> http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+			<variable name="commit" type="string"> 2021-01-01T00:00:00Z http://www.umr-cnrm.fr/IMG/pdf/system8-technical.pdf </variable>
+			<variable name="summary" type="string"> Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
+			<variable name="forecast_reference_time" type="string"> 1992-12-17T00:00:00Z </variable>
+			<variable name="EXPID" type="string"> H2010E001 </variable>
+			<field field_ref="C3S_tdps_Scalheight_2.0_Scallat_Scalleadtime_Scallon_instant" name="tdps" grid_ref="FULL_grid_Scalheight_2.0_Scallat_Scalleadtime_Scallon_C3S_1deg" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: point" cell_methods_mode="overwrite" operation="instant" freq_op="6h">
+				<variable name="standard_name" type="string"> dew_point_temperature </variable>
+				<variable name="long_name" type="string"> 2m Dewpoint Temperature </variable>
+				<variable name="coordinates" type="string"> None </variable>
+				<variable name="grid_mapping" type="string"> hcrs </variable>
+				<variable name="units" type="string"> K </variable>
+			</field>
+		</file>
+		<file id="tsl_C3S_gr" name="H2010E001_atmo_6hourly_tsl_%start_date%-%end_date%.nc" output_freq="6h" append="true" output_level="10" compression_level="4" split_freq="2y" split_freq_format="%y%mo%d%h%mi" split_start_offset="6h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -536,7 +800,7 @@
 			<variable name="summary" type="string"> Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
 			<variable name="forecast_reference_time" type="string"> 1992-12-17T00:00:00Z </variable>
 			<variable name="EXPID" type="string"> H2010E001 </variable>
-			<field field_ref="C3S_tsl_Scallat_Scalleadtime_Scallon_instant" name="tsl" grid_ref="NATURE_tlayers_Scallat_Scalleadtime_Scallon_C3S_XY-na" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: point" cell_methods_mode="overwrite" operation="instant" freq_op="6h">
+			<field field_ref="C3S_tsl_Scallat_Scalleadtime_Scallon_instant" name="tsl" grid_ref="NATURE_tlayers_Scallat_Scalleadtime_Scallon_C3S_1deg" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: point" cell_methods_mode="overwrite" operation="instant" freq_op="6h">
 				<variable name="standard_name" type="string"> soil_temperature </variable>
 				<variable name="long_name" type="string"> Temperature of Soil </variable>
 				<variable name="coordinates" type="string"> None </variable>
@@ -544,7 +808,7 @@
 				<variable name="units" type="string"> K </variable>
 			</field>
 		</file>
-		<file id="uas_C3S_grx" name="H2010E001_atmos_6hrhourly_uas_%start_date%-%end_date%.nc" output_freq="6h" append="true" output_level="10" compression_level="4" split_freq="25y" split_freq_format="%y%mo%d%h%mi" split_start_offset="6h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="uas_C3S_gr" name="H2010E001_atmos_6hourly_uas_%start_date%-%end_date%.nc" output_freq="6h" append="true" output_level="10" compression_level="4" split_freq="2y" split_freq_format="%y%mo%d%h%mi" split_start_offset="6h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -558,7 +822,7 @@
 			<variable name="summary" type="string"> Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
 			<variable name="forecast_reference_time" type="string"> 1992-12-17T00:00:00Z </variable>
 			<variable name="EXPID" type="string"> H2010E001 </variable>
-			<field field_ref="C3S_uas_Scalheight_10.0_Scallat_Scalleadtime_Scallon_instant" name="uas" grid_ref="FULL_grid_Scalheight_10.0_Scallat_Scalleadtime_Scallon_C3S_XY-na" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: point" cell_methods_mode="overwrite" operation="instant" freq_op="6h">
+			<field field_ref="C3S_uas_Scalheight_10.0_Scallat_Scalleadtime_Scallon_instant" name="uas" grid_ref="FULL_grid_Scalheight_10.0_Scallat_Scalleadtime_Scallon_C3S_1deg" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: point" cell_methods_mode="overwrite" operation="instant" freq_op="6h">
 				<variable name="standard_name" type="string"> x_wind </variable>
 				<variable name="long_name" type="string"> Eastward Near-Surface Wind </variable>
 				<variable name="coordinates" type="string"> None </variable>
@@ -566,7 +830,7 @@
 				<variable name="units" type="string"> m s-1 </variable>
 			</field>
 		</file>
-		<file id="vas_C3S_grx" name="H2010E001_atmos_6hrhourly_vas_%start_date%-%end_date%.nc" output_freq="6h" append="true" output_level="10" compression_level="4" split_freq="25y" split_freq_format="%y%mo%d%h%mi" split_start_offset="6h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
+		<file id="vas_C3S_gr" name="H2010E001_atmos_6hourly_vas_%start_date%-%end_date%.nc" output_freq="6h" append="true" output_level="10" compression_level="4" split_freq="2y" split_freq_format="%y%mo%d%h%mi" split_start_offset="6h" split_end_offset="0s" split_last_date="2011-- 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="uuid" uuid_format="%uuid%" convention_str="CF-1.6 C3S-0.1">
 			<variable name="institute_id" type="string"> lfpw </variable>
 			<variable name="institution" type="string"> Meteo-France, Toulouse, France </variable>
 			<variable name="contact" type="string"> http://copernicus-support.ecmwf.int </variable>
@@ -580,7 +844,7 @@
 			<variable name="summary" type="string"> Seasonal Forecast data produced by Meteo-France as its contribution to the seasonal forecast activity of the Copernicus Climate Change Service (C3S). The data has global coverage with a 1-degree horizontal resolution and spans for around 6 months since the start date </variable>
 			<variable name="forecast_reference_time" type="string"> 1992-12-17T00:00:00Z </variable>
 			<variable name="EXPID" type="string"> H2010E001 </variable>
-			<field field_ref="C3S_vas_Scalheight_10.0_Scallat_Scalleadtime_Scallon_instant" name="vas" grid_ref="FULL_grid_Scalheight_10.0_Scallat_Scalleadtime_Scallon_C3S_XY-na" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: point" cell_methods_mode="overwrite" operation="instant" freq_op="6h">
+			<field field_ref="C3S_vas_Scalheight_10.0_Scallat_Scalleadtime_Scallon_instant" name="vas" grid_ref="FULL_grid_Scalheight_10.0_Scallat_Scalleadtime_Scallon_C3S_1deg" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="leadtime: point" cell_methods_mode="overwrite" operation="instant" freq_op="6h">
 				<variable name="standard_name" type="string"> y_wind </variable>
 				<variable name="long_name" type="string"> Northward Near-Surface Wind </variable>
 				<variable name="coordinates" type="string"> None </variable>
@@ -608,12 +872,16 @@
 		<field id="C3S_rlds_Scallat_Scalleadtime_Scallon_average" field_ref="C3S_rlds_Scallat_Scalleadtime_Scallon" operation="average"/>
 		<field id="C3S_rls_Scallat_Scalleadtime_Scallon" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon" operation="instant" detect_missing_value="true"> C3S_rls </field>
 		<field id="C3S_rls_Scallat_Scalleadtime_Scallon_average" field_ref="C3S_rls_Scallat_Scalleadtime_Scallon" operation="average"/>
+		<field id="C3S_rlt_Scallat_Scalleadtime_Scallon" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon" operation="instant" detect_missing_value="true"> C3S_rlt </field>
+		<field id="C3S_rlt_Scallat_Scalleadtime_Scallon_average" field_ref="C3S_rlt_Scallat_Scalleadtime_Scallon" operation="average"/>
 		<field id="C3S_rsds_Scallat_Scalleadtime_Scallon" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon" operation="instant" detect_missing_value="true"> C3S_rsds </field>
 		<field id="C3S_rsds_Scallat_Scalleadtime_Scallon_average" field_ref="C3S_rsds_Scallat_Scalleadtime_Scallon" operation="average"/>
 		<field id="C3S_rsdt_Scallat_Scalleadtime_Scallon" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon" operation="instant" detect_missing_value="true"> C3S_rsdt </field>
 		<field id="C3S_rsdt_Scallat_Scalleadtime_Scallon_average" field_ref="C3S_rsdt_Scallat_Scalleadtime_Scallon" operation="average"/>
 		<field id="C3S_rss_Scallat_Scalleadtime_Scallon" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon" operation="instant" detect_missing_value="true"> C3S_rss </field>
 		<field id="C3S_rss_Scallat_Scalleadtime_Scallon_average" field_ref="C3S_rss_Scallat_Scalleadtime_Scallon" operation="average"/>
+		<field id="C3S_rst_Scallat_Scalleadtime_Scallon" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon" operation="instant" detect_missing_value="true"> C3S_rst </field>
+		<field id="C3S_rst_Scallat_Scalleadtime_Scallon_average" field_ref="C3S_rst_Scallat_Scalleadtime_Scallon" operation="average"/>
 		<field id="C3S_tasmax_Scalheight_2.0_Scallat_Scalleadtime_Scallon" grid_ref="FULL_grid_Scalheight_2.0_Scallat_Scalleadtime_Scallon" operation="instant" detect_missing_value="true"> C3S_tasmax </field>
 		<field id="C3S_tasmax_Scalheight_2.0_Scallat_Scalleadtime_Scallon_maximum" field_ref="C3S_tasmax_Scalheight_2.0_Scallat_Scalleadtime_Scallon" operation="maximum"/>
 		<field id="C3S_tasmin_Scalheight_2.0_Scallat_Scalleadtime_Scallon" grid_ref="FULL_grid_Scalheight_2.0_Scallat_Scalleadtime_Scallon" operation="instant" detect_missing_value="true"> C3S_tasmin </field>
@@ -622,12 +890,32 @@
 		<field id="C3S_tauu_Scallat_Scalleadtime_Scallon_average" field_ref="C3S_tauu_Scallat_Scalleadtime_Scallon" operation="average"/>
 		<field id="C3S_tauv_Scallat_Scalleadtime_Scallon" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon" operation="instant" detect_missing_value="true"> C3S_tauv </field>
 		<field id="C3S_tauv_Scallat_Scalleadtime_Scallon_average" field_ref="C3S_tauv_Scallat_Scalleadtime_Scallon" operation="average"/>
+		<field id="C3S_wsgmax_Scalheight_10.0_Scallat_Scalleadtime_Scallon" grid_ref="FULL_grid_Scalheight_10.0_Scallat_Scalleadtime_Scallon" operation="instant" detect_missing_value="true"> C3S_wsgmax </field>
+		<field id="C3S_wsgmax_Scalheight_10.0_Scallat_Scalleadtime_Scallon_maximum" field_ref="C3S_wsgmax_Scalheight_10.0_Scallat_Scalleadtime_Scallon" operation="maximum"/>
+		<field id="C3S_lwee_Scallat_Scalleadtime_Scallon" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon" operation="instant" detect_missing_value="true"> C3S_lwee </field>
+		<field id="C3S_lwee_Scallat_Scalleadtime_Scallon_accumulate" field_ref="C3S_lwee_Scallat_Scalleadtime_Scallon" operation="accumulate"/>
+		<field id="C3S_lwepr_Scallat_Scalleadtime_Scallon" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon" operation="instant" detect_missing_value="true"> C3S_lwepr </field>
+		<field id="C3S_lwepr_Scallat_Scalleadtime_Scallon_accumulate" field_ref="C3S_lwepr_Scallat_Scalleadtime_Scallon" operation="accumulate"/>
+		<field id="C3S_lweprc_Scallat_Scalleadtime_Scallon" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon" operation="instant" detect_missing_value="true"> C3S_lweprc </field>
+		<field id="C3S_lweprc_Scallat_Scalleadtime_Scallon_accumulate" field_ref="C3S_lweprc_Scallat_Scalleadtime_Scallon" operation="accumulate"/>
+		<field id="C3S_lweprsn_Scallat_Scalleadtime_Scallon" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon" operation="instant" detect_missing_value="true"> C3S_lweprsn </field>
+		<field id="C3S_lweprsn_Scallat_Scalleadtime_Scallon_accumulate" field_ref="C3S_lweprsn_Scallat_Scalleadtime_Scallon" operation="accumulate"/>
+		<field id="C3S_lwesnw_Scallat_Scalleadtime_Scallon" grid_ref="NATURE_grid_Scallat_Scalleadtime_Scallon" operation="instant" detect_missing_value="true"> C3S_lwesnw </field>
+		<field id="C3S_lwesnw_Scallat_Scalleadtime_Scallon_instant" field_ref="C3S_lwesnw_Scallat_Scalleadtime_Scallon" operation="instant"/>
+		<field id="C3S_mrroab_Scallat_Scalleadtime_Scallon" grid_ref="NATURE_grid_Scallat_Scalleadtime_Scallon" operation="instant" detect_missing_value="true"> C3S_mrroab </field>
+		<field id="C3S_mrroab_Scallat_Scalleadtime_Scallon_accumulate" field_ref="C3S_mrroab_Scallat_Scalleadtime_Scallon" operation="accumulate"/>
+		<field id="C3S_mrroas_Scallat_Scalleadtime_Scallon" grid_ref="NATURE_grid_Scallat_Scalleadtime_Scallon" operation="instant" detect_missing_value="true"> C3S_mrroas </field>
+		<field id="C3S_mrroas_Scallat_Scalleadtime_Scallon_accumulate" field_ref="C3S_mrroas_Scallat_Scalleadtime_Scallon" operation="accumulate"/>
+		<field id="C3S_rhosn_Scallat_Scalleadtime_Scallon" grid_ref="NATURE_grid_Scallat_Scalleadtime_Scallon" operation="instant" detect_missing_value="true"> C3S_rhosn </field>
+		<field id="C3S_rhosn_Scallat_Scalleadtime_Scallon_instant" field_ref="C3S_rhosn_Scallat_Scalleadtime_Scallon" operation="instant"/>
 		<field id="C3S_clt_Scallat_Scalleadtime_Scallon" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon" operation="instant" detect_missing_value="true"> C3S_clt </field>
 		<field id="C3S_clt_Scallat_Scalleadtime_Scallon_instant" field_ref="C3S_clt_Scallat_Scalleadtime_Scallon" operation="instant"/>
 		<field id="C3S_psl_Scallat_Scalleadtime_Scallon" grid_ref="FULL_grid_Scallat_Scalleadtime_Scallon" operation="instant" detect_missing_value="true"> C3S_psl </field>
 		<field id="C3S_psl_Scallat_Scalleadtime_Scallon_instant" field_ref="C3S_psl_Scallat_Scalleadtime_Scallon" operation="instant"/>
 		<field id="C3S_tas_Scalheight_2.0_Scallat_Scalleadtime_Scallon" grid_ref="FULL_grid_Scalheight_2.0_Scallat_Scalleadtime_Scallon" operation="instant" detect_missing_value="true"> C3S_tas </field>
 		<field id="C3S_tas_Scalheight_2.0_Scallat_Scalleadtime_Scallon_instant" field_ref="C3S_tas_Scalheight_2.0_Scallat_Scalleadtime_Scallon" operation="instant"/>
+		<field id="C3S_tdps_Scalheight_2.0_Scallat_Scalleadtime_Scallon" grid_ref="FULL_grid_Scalheight_2.0_Scallat_Scalleadtime_Scallon" operation="instant" detect_missing_value="true"> C3S_tdps </field>
+		<field id="C3S_tdps_Scalheight_2.0_Scallat_Scalleadtime_Scallon_instant" field_ref="C3S_tdps_Scalheight_2.0_Scallat_Scalleadtime_Scallon" operation="instant"/>
 		<field id="C3S_tsl_Scallat_Scalleadtime_Scallon" grid_ref="NATURE_tlayers_Scallat_Scalleadtime_Scallon" operation="instant" detect_missing_value="true"> C3S_tsl </field>
 		<field id="C3S_tsl_Scallat_Scalleadtime_Scallon_instant" field_ref="C3S_tsl_Scallat_Scalleadtime_Scallon" operation="instant"/>
 		<field id="C3S_uas_Scalheight_10.0_Scallat_Scalleadtime_Scallon" grid_ref="FULL_grid_Scalheight_10.0_Scallat_Scalleadtime_Scallon" operation="instant" detect_missing_value="true"> C3S_uas </field>
@@ -640,23 +928,23 @@
 	</axis_definition>
 	<domain_definition>
 		<domain_group prec="8">
-			<domain id="CMIP6_25km" ni_glo="1440" nj_glo="720" type="rectilinear" prec="8">
+			<domain id="C3S_25km" ni_glo="1440" nj_glo="720" type="rectilinear" prec="8">
 				<generate_rectilinear_domain/>
 				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
 			</domain>
-			<domain id="CMIP6_50km" ni_glo="720" nj_glo="360" type="rectilinear" prec="8">
+			<domain id="C3S_50km" ni_glo="720" nj_glo="360" type="rectilinear" prec="8">
 				<generate_rectilinear_domain/>
 				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
 			</domain>
-			<domain id="CMIP6_100km" ni_glo="360" nj_glo="180" type="rectilinear" prec="8">
+			<domain id="C3S_100km" ni_glo="360" nj_glo="180" type="rectilinear" prec="8">
 				<generate_rectilinear_domain/>
 				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
 			</domain>
-			<domain id="CMIP6_1deg" ni_glo="360" nj_glo="180" type="rectilinear" prec="8">
+			<domain id="C3S_1deg" ni_glo="360" nj_glo="180" type="rectilinear" prec="8">
 				<generate_rectilinear_domain/>
 				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
 			</domain>
-			<domain id="CMIP6_2deg" ni_glo="180" nj_glo="90" type="rectilinear" prec="8">
+			<domain id="C3S_2deg" ni_glo="180" nj_glo="90" type="rectilinear" prec="8">
 				<generate_rectilinear_domain/>
 				<interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true"/>
 			</domain>
@@ -688,8 +976,8 @@
 			<scalar scalar_ref="Scallon" name="False"/>
 			<scalar scalar_ref="Scalplev" name="False"/>
 		</grid>
-		<grid id="FULL_klev_Scallat_Scalleadtime_Scallon_Scalplev_C3S_XY-A">
-			<domain domain_ref="C3S_XY-A"/>
+		<grid id="FULL_klev_Scallat_Scalleadtime_Scallon_Scalplev_C3S_1deg">
+			<domain domain_ref="C3S_1deg"/>
 			<scalar scalar_ref="Scallat" name="False"/>
 			<scalar scalar_ref="Scalleadtime" name="False"/>
 			<scalar scalar_ref="Scallon" name="False"/>
@@ -710,8 +998,8 @@
 			<scalar scalar_ref="Scalleadtime" name="False"/>
 			<scalar scalar_ref="Scallon" name="False"/>
 		</grid>
-		<grid id="FULL_grid_Scallat_Scalleadtime_Scallon_C3S_XY-na">
-			<domain domain_ref="C3S_XY-na"/>
+		<grid id="FULL_grid_Scallat_Scalleadtime_Scallon_C3S_1deg">
+			<domain domain_ref="C3S_1deg"/>
 			<scalar scalar_ref="Scallat" name="False"/>
 			<scalar scalar_ref="Scalleadtime" name="False"/>
 			<scalar scalar_ref="Scallon" name="False"/>
@@ -738,34 +1026,9 @@
 			<scalar scalar_ref="Scalleadtime" name="False"/>
 			<scalar scalar_ref="Scallon" name="False"/>
 		</grid>
-		<grid id="FULL_grid_Scalheight_2.0_Scallat_Scalleadtime_Scallon_C3S_XY-na">
-			<domain domain_ref="C3S_XY-na"/>
+		<grid id="FULL_grid_Scalheight_2.0_Scallat_Scalleadtime_Scallon_C3S_1deg">
+			<domain domain_ref="C3S_1deg"/>
 			<scalar scalar_ref="Scalheight_2.0" name="False"/>
-			<scalar scalar_ref="Scallat" name="False"/>
-			<scalar scalar_ref="Scalleadtime" name="False"/>
-			<scalar scalar_ref="Scallon" name="False"/>
-		</grid>
-		<grid id="NATURE_tlayers_Scallat">
-			<domain domain_ref="NATURE"/>
-			<axis axis_ref="ground_layer_for_temperature" name="sdepth"/>
-			<scalar scalar_ref="Scallat" name="False"/>
-		</grid>
-		<grid id="NATURE_tlayers_Scallat_Scalleadtime">
-			<domain domain_ref="NATURE"/>
-			<axis axis_ref="ground_layer_for_temperature" name="sdepth"/>
-			<scalar scalar_ref="Scallat" name="False"/>
-			<scalar scalar_ref="Scalleadtime" name="False"/>
-		</grid>
-		<grid id="NATURE_tlayers_Scallat_Scalleadtime_Scallon">
-			<domain domain_ref="NATURE"/>
-			<axis axis_ref="ground_layer_for_temperature" name="sdepth"/>
-			<scalar scalar_ref="Scallat" name="False"/>
-			<scalar scalar_ref="Scalleadtime" name="False"/>
-			<scalar scalar_ref="Scallon" name="False"/>
-		</grid>
-		<grid id="NATURE_tlayers_Scallat_Scalleadtime_Scallon_C3S_XY-na">
-			<domain domain_ref="C3S_XY-na"/>
-			<axis axis_ref="ground_layer_for_temperature" name="sdepth"/>
 			<scalar scalar_ref="Scallat" name="False"/>
 			<scalar scalar_ref="Scalleadtime" name="False"/>
 			<scalar scalar_ref="Scallon" name="False"/>
@@ -792,9 +1055,55 @@
 			<scalar scalar_ref="Scalleadtime" name="False"/>
 			<scalar scalar_ref="Scallon" name="False"/>
 		</grid>
-		<grid id="FULL_grid_Scalheight_10.0_Scallat_Scalleadtime_Scallon_C3S_XY-na">
-			<domain domain_ref="C3S_XY-na"/>
+		<grid id="FULL_grid_Scalheight_10.0_Scallat_Scalleadtime_Scallon_C3S_1deg">
+			<domain domain_ref="C3S_1deg"/>
 			<scalar scalar_ref="Scalheight_10.0" name="False"/>
+			<scalar scalar_ref="Scallat" name="False"/>
+			<scalar scalar_ref="Scalleadtime" name="False"/>
+			<scalar scalar_ref="Scallon" name="False"/>
+		</grid>
+		<grid id="NATURE_grid_Scallat">
+			<domain domain_ref="NATURE"/>
+			<scalar scalar_ref="Scallat" name="False"/>
+		</grid>
+		<grid id="NATURE_grid_Scallat_Scalleadtime">
+			<domain domain_ref="NATURE"/>
+			<scalar scalar_ref="Scallat" name="False"/>
+			<scalar scalar_ref="Scalleadtime" name="False"/>
+		</grid>
+		<grid id="NATURE_grid_Scallat_Scalleadtime_Scallon">
+			<domain domain_ref="NATURE"/>
+			<scalar scalar_ref="Scallat" name="False"/>
+			<scalar scalar_ref="Scalleadtime" name="False"/>
+			<scalar scalar_ref="Scallon" name="False"/>
+		</grid>
+		<grid id="NATURE_grid_Scallat_Scalleadtime_Scallon_C3S_1deg">
+			<domain domain_ref="C3S_1deg"/>
+			<scalar scalar_ref="Scallat" name="False"/>
+			<scalar scalar_ref="Scalleadtime" name="False"/>
+			<scalar scalar_ref="Scallon" name="False"/>
+		</grid>
+		<grid id="NATURE_tlayers_Scallat">
+			<domain domain_ref="NATURE"/>
+			<axis axis_ref="ground_layer_for_temperature" name="sdepth"/>
+			<scalar scalar_ref="Scallat" name="False"/>
+		</grid>
+		<grid id="NATURE_tlayers_Scallat_Scalleadtime">
+			<domain domain_ref="NATURE"/>
+			<axis axis_ref="ground_layer_for_temperature" name="sdepth"/>
+			<scalar scalar_ref="Scallat" name="False"/>
+			<scalar scalar_ref="Scalleadtime" name="False"/>
+		</grid>
+		<grid id="NATURE_tlayers_Scallat_Scalleadtime_Scallon">
+			<domain domain_ref="NATURE"/>
+			<axis axis_ref="ground_layer_for_temperature" name="sdepth"/>
+			<scalar scalar_ref="Scallat" name="False"/>
+			<scalar scalar_ref="Scalleadtime" name="False"/>
+			<scalar scalar_ref="Scallon" name="False"/>
+		</grid>
+		<grid id="NATURE_tlayers_Scallat_Scalleadtime_Scallon_C3S_1deg">
+			<domain domain_ref="C3S_1deg"/>
+			<axis axis_ref="ground_layer_for_temperature" name="sdepth"/>
 			<scalar scalar_ref="Scallat" name="False"/>
 			<scalar scalar_ref="Scalleadtime" name="False"/>
 			<scalar scalar_ref="Scallon" name="False"/>

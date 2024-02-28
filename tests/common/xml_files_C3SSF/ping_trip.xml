@@ -5,6 +5,7 @@
 realms_per_context : {'nemo': ['seaIce', 'ocean', 'ocean seaIce', 'ocnBgchem', 'seaIce ocean'], 'surfex': ['atmos', 'atmos atmosChem', 'atmosChem', 'aerosol', 'atmos land', 'land', 'landIce land', 'aerosol', 'land landIce', 'landIce'], 'trip': []}
 max_priority : 3
 ping_variables_prefix : C3S_
+mips : {'HR': set(['OMIP', 'CMIP', 'CMIP6', 'ScenarioMIP']), 'LR': set(['C4MIP', 'DCPP', 'CORDEX', 'ISMIP6', 'GMMIP', 'RFMIP', 'LUMIP', 'OMIP', 'CMIP6', 'SIMIP', 'DAMIP', 'AerChemMIP', 'FAFMIP', 'PMIP', 'CFMIP', 'ScenarioMIP', 'LS3MIP', 'CMIP', 'GeoMIP', 'HighResMIP'])}
 excluded_vars : []
 orphan_variables : {'nemo': [''], 'surfex': [], 'trip': ['dgw', 'drivw', 'fCLandToOcean', 'qgwr', 'rivi', 'rivo', 'waterDpth', 'wtd']}
 -->
@@ -12,14 +13,14 @@ orphan_variables : {'nemo': [''], 'surfex': [], 'trip': ['dgw', 'drivw', 'fCLand
 <context id="trip">
 <field_definition>
 <!-- for variables which realm equals one of -->
-<!-- C3SMAISON -->
+<!-- CMIP6MAISON -->
    <field id="C3S_fwtd"       field_ref="fwtd" />
    <field id="C3S_fldf"       field_ref="fldf" />
-<!-- C3SMAISON - ESM -->
+<!-- CMIP6MAISON - ESM -->
    <field id="C3S_carbw"      field_ref="carbw" />
    <field id="C3S_carbdis"    field_ref="carbdis" />
    <field id="C3S_carbin"     field_ref="carbin" />
-<!-- C3SMAISON END -->
+<!-- CMIP6MAISON END -->
    <field id="C3S_areacellr"  field_ref="areacellr" /> <!-- P1 (m2) cell_area : Cell areas for any grid used to report river model variables (may be the same as for atmospheric variables). These cell areas should be defined to enable exact calculation of area integrals (e.g., of vertical fluxes of energy at the surface and top of the atmosphere). -->
    <field id="C3S_dgw"        field_ref="dgw" /> <!-- P1 (kg m-2) change_over_time_in_groundwater : change_over_time_in_groundwater -->
    <field id="C3S_drivw"      field_ref="drivw" /> <!-- P1 (kg m-2) change_over_time_in_river_water_amount : change_over_time_in_river_water_amount -->
