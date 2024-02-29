@@ -14,7 +14,6 @@ import os
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
-from tests.basic_configuration_for_tests import *
 from tests.tools_for_tests import TestSimulation, create_config_elements
 
 
@@ -23,10 +22,9 @@ class TestCTL(unittest.TestCase, TestSimulation):
     Test output generation for RCSM6_CTL
     """
     def setUp(self):
-        path_xml_aladin = "/".join([path_xml, "../xml_files_Aladin"])
         config = create_config_elements(
             simulation="RCSM6_CTL",
-            contexts=["nemo", "surfex", "trip"],
+            contexts=["surfex", "trip"],
             year="2009",
             enddate="20210101",
             pingfiles="{path_xml}/ping_surfex.xml {path_xml}/ping_trip.xml",

@@ -14,7 +14,6 @@ import os
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
-from tests.basic_configuration_for_tests import *
 from tests.tools_for_tests import TestSimulation, create_config_elements
 
 
@@ -27,7 +26,7 @@ class TestHISLight(unittest.TestCase, TestSimulation):
             simulation="RCSM6_HIS_light",
             contexts=["nemo", "surfex", "trip"],
             year="1949",
-            enddate="19490901",
+            enddate="19491001",
             pingfiles="{path_xml}/ping_nemo.xml {path_xml}/ping_surfex.xml {path_xml}/ping_trip.xml",
             attributes=[("EXPID", "RCSM6_HIS_light")]
         )

@@ -14,7 +14,6 @@ import os
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
-from tests.basic_configuration_for_tests import *
 from tests.tools_for_tests import TestSimulation, create_config_elements
 
 
