@@ -3,7 +3,7 @@
 	<!--CMIP6 Data Request version No Data Request-->
 	<!--CMIP6-CV version ??-->
 	<!--CMIP6_conventions_version v6.2.4-->
-	<!--dr2xml version 3.0-->
+	<!--dr2xml version current_version-->
 	<!--Lab_and_model settings
 {'CFsubhr_frequency' = '2ts',
 'allow_duplicates_in_same_table' = 'False',
@@ -95,7 +95,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -139,7 +139,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -183,7 +183,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -227,7 +227,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -272,7 +272,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -316,7 +316,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -360,7 +360,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -404,7 +404,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -449,7 +449,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -493,7 +493,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -537,7 +537,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -581,7 +581,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -625,7 +625,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -669,7 +669,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -714,7 +714,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -759,7 +759,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -804,7 +804,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -849,7 +849,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -894,7 +894,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -939,7 +939,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -984,7 +984,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -1029,7 +1029,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -1074,7 +1074,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -1119,7 +1119,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -1164,7 +1164,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -1209,7 +1209,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -1254,7 +1254,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -1299,7 +1299,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -1344,7 +1344,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -1389,7 +1389,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -1434,7 +1434,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -1479,7 +1479,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -1524,7 +1524,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -1569,7 +1569,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -1614,7 +1614,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -1659,7 +1659,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -1704,7 +1704,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -1749,7 +1749,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -1794,7 +1794,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -1839,7 +1839,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -1884,7 +1884,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -1929,7 +1929,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -1974,7 +1974,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> 1hr </variable>
@@ -2019,7 +2019,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -2064,7 +2064,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -2109,7 +2109,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -2154,7 +2154,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -2199,7 +2199,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -2244,7 +2244,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -2288,7 +2288,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -2332,7 +2332,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -2376,7 +2376,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -2421,7 +2421,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -2466,7 +2466,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -2511,7 +2511,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -2555,7 +2555,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -2599,7 +2599,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -2643,7 +2643,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -2688,7 +2688,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -2732,7 +2732,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -2776,7 +2776,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -2820,7 +2820,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -2864,7 +2864,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -2908,7 +2908,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -2953,7 +2953,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -2998,7 +2998,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -3043,7 +3043,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -3088,7 +3088,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -3133,7 +3133,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -3178,7 +3178,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -3223,7 +3223,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -3268,7 +3268,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -3313,7 +3313,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -3358,7 +3358,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -3403,7 +3403,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -3448,7 +3448,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -3493,7 +3493,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -3538,7 +3538,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -3583,7 +3583,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -3628,7 +3628,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -3673,7 +3673,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -3718,7 +3718,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -3763,7 +3763,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -3808,7 +3808,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -3853,7 +3853,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -3898,7 +3898,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -3943,7 +3943,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -3988,7 +3988,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -4033,7 +4033,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -4078,7 +4078,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -4123,7 +4123,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -4168,7 +4168,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -4213,7 +4213,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -4258,7 +4258,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -4303,7 +4303,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -4348,7 +4348,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -4393,7 +4393,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -4438,7 +4438,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -4483,7 +4483,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -4528,7 +4528,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -4573,7 +4573,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -4618,7 +4618,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -4663,7 +4663,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> 6hr </variable>
@@ -4707,7 +4707,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> 6hr </variable>
@@ -4751,7 +4751,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> 6hr </variable>
@@ -4795,7 +4795,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> 6hrPt </variable>
@@ -4840,7 +4840,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> 6hrPt </variable>
@@ -4885,7 +4885,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> 6hr </variable>
@@ -4930,7 +4930,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> 6hr </variable>
@@ -4975,7 +4975,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> 6hr </variable>
@@ -5020,7 +5020,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> 6hr </variable>
@@ -5065,7 +5065,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> 6hr </variable>
@@ -5110,7 +5110,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> 6hr </variable>
@@ -5155,7 +5155,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> 6hr </variable>
@@ -5200,7 +5200,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> 6hr </variable>
@@ -5245,7 +5245,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> 6hr </variable>
@@ -5290,7 +5290,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> 6hr </variable>
@@ -5335,7 +5335,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> 6hr </variable>
@@ -5380,7 +5380,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> 6hr </variable>
@@ -5425,7 +5425,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> 6hr </variable>
@@ -5470,7 +5470,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> 6hr </variable>
@@ -5515,7 +5515,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> 6hr </variable>
@@ -5560,7 +5560,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> 6hr </variable>
@@ -5605,7 +5605,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> 6hr </variable>
@@ -5650,7 +5650,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> 6hr </variable>
@@ -5695,7 +5695,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> 6hr </variable>
@@ -5740,7 +5740,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> 6hr </variable>
@@ -5785,7 +5785,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> 6hr </variable>
@@ -5830,7 +5830,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> 6hr </variable>
@@ -5875,7 +5875,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> 6hr </variable>
@@ -5920,7 +5920,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> 6hr </variable>
@@ -5965,7 +5965,7 @@
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> No Data Request </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> evaluation </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="frequency" type="string"> 6hr </variable>

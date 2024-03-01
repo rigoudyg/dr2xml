@@ -25,6 +25,7 @@ import six
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from dr2xml import generate_file_defs
+from dr2xml.config import version
 
 
 def format_with_values(rep, **kwargs):
@@ -104,6 +105,8 @@ def read_file_content(filename, anonymize=dict()):
 def list_comparison_to_do(test, reference):
 	print("Compare test %s against reference %s" % (test, reference))
 	list_references = os.listdir(reference)
+	if len(list_references) == 0:
+		raise ValueError("Should be at least one comparison to do, none found")
 	list_tests = os.listdir(test)
 	rep = list()
 	for f in list_references:
@@ -178,7 +181,7 @@ class TestSimulation(object):
 		                          sset=self.simulation_settings, add_profile=self.add_profile,
 		                          check_time_file=self.check_time_file)
 		to_compare = list_comparison_to_do(test=self.config["dirname"], reference=self.reference_directory)
-		anonymize_dict = dict(current_directory=current_directory)
+		anonymize_dict = dict(current_directory=current_directory, current_version=version)
 		for (reference_file, test_file) in to_compare:
 			reference_content = read_file_content(reference_file, anonymize=anonymize_dict)
 			test_content = read_file_content(test_file, anonymize=anonymize_dict)

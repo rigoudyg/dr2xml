@@ -3,7 +3,7 @@
 	<!--CMIP6 Data Request version 01.00.21.post1-->
 	<!--CMIP6-CV version ??-->
 	<!--CMIP6_conventions_version v6.2.4-->
-	<!--dr2xml version 3.0-->
+	<!--dr2xml version current_version-->
 	<!--Lab_and_model settings
 {'allow_duplicates_in_same_table' = 'False',
 'allow_pseudo_standard_names' = 'True',
@@ -77,7 +77,7 @@
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -145,7 +145,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -214,7 +214,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -283,7 +283,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -352,7 +352,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -421,7 +421,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -489,7 +489,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -557,7 +557,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -625,7 +625,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -693,7 +693,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -761,7 +761,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -829,7 +829,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -897,7 +897,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -965,7 +965,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -1033,7 +1033,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -1101,7 +1101,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -1169,7 +1169,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -1237,7 +1237,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -1305,7 +1305,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -1374,7 +1374,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -1443,7 +1443,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -1511,7 +1511,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -1579,7 +1579,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -1647,7 +1647,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -1715,7 +1715,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -1783,7 +1783,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -1851,7 +1851,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -1919,7 +1919,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -1987,7 +1987,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -2056,7 +2056,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -2125,7 +2125,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -2194,7 +2194,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -2263,7 +2263,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -2332,7 +2332,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -2401,7 +2401,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -2470,7 +2470,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -2539,7 +2539,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -2608,7 +2608,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -2677,7 +2677,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -2746,7 +2746,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -2815,7 +2815,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -2883,7 +2883,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -2951,7 +2951,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -3019,7 +3019,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -3087,7 +3087,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -3155,7 +3155,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -3224,7 +3224,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -3293,7 +3293,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -3361,7 +3361,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -3429,7 +3429,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -3497,7 +3497,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -3565,7 +3565,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -3633,7 +3633,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -3701,7 +3701,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -3769,7 +3769,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -3837,7 +3837,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -3906,7 +3906,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -3974,7 +3974,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -4042,7 +4042,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -4109,7 +4109,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -4176,7 +4176,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -4243,7 +4243,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -4310,7 +4310,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -4377,7 +4377,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -4445,7 +4445,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -4512,7 +4512,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -4579,7 +4579,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -4646,7 +4646,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -4713,7 +4713,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -4780,7 +4780,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -4847,7 +4847,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -4914,7 +4914,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -4981,7 +4981,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -5048,7 +5048,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -5115,7 +5115,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -5182,7 +5182,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -5249,7 +5249,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -5316,7 +5316,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -5384,7 +5384,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -5451,7 +5451,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -5518,7 +5518,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -5585,7 +5585,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -5652,7 +5652,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -5719,7 +5719,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -5786,7 +5786,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -5853,7 +5853,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -5920,7 +5920,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -5987,7 +5987,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -6054,7 +6054,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -6122,7 +6122,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -6190,7 +6190,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -6258,7 +6258,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -6326,7 +6326,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -6394,7 +6394,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -6462,7 +6462,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -6530,7 +6530,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -6599,7 +6599,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -6667,7 +6667,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -6735,7 +6735,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -6803,7 +6803,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -6871,7 +6871,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -6939,7 +6939,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -7007,7 +7007,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -7075,7 +7075,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -7143,7 +7143,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -7211,7 +7211,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -7279,7 +7279,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -7347,7 +7347,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -7415,7 +7415,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -7483,7 +7483,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -7552,7 +7552,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -7620,7 +7620,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -7688,7 +7688,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -7757,7 +7757,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -7825,7 +7825,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -7893,7 +7893,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -7961,7 +7961,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -8030,7 +8030,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -8098,7 +8098,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -8167,7 +8167,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>
@@ -8235,7 +8235,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> DAMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> hist-aer </variable>
 			<variable name="description" type="string"> Historical anthropogenic-Aerosols-only run </variable>
 			<variable name="title" type="string"> Historical anthropogenic-Aerosols-only run </variable>

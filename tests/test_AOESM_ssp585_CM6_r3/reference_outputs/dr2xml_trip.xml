@@ -3,7 +3,7 @@
 	<!--CMIP6 Data Request version 01.00.21.post1-->
 	<!--CMIP6-CV version ??-->
 	<!--CMIP6_conventions_version v6.2.4-->
-	<!--dr2xml version 3.0-->
+	<!--dr2xml version current_version-->
 	<!--Lab_and_model settings
 {'CFsubhr_frequency' = '2ts',
 'allow_duplicates_in_same_table' = 'False',
@@ -78,7 +78,7 @@
 			<variable name="activity_id" type="string"> ScenarioMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> ssp585 </variable>
 			<variable name="description" type="string"> Future scenario with high radiative forcing by the end of century. Following approximately RCP8.5 global forcing pathway but with new forcing based on SSP5. Concentration-driven. As a tier 2 option, this simulation should be extended to year 2300 </variable>
 			<variable name="title" type="string"> Future scenario with high radiative forcing by the end of century. Following approximately RCP8.5 global forcing pathway but with new forcing based on SSP5. Concentration-driven. As a tier 2 option, this simulation should be extended to year 2300 </variable>
@@ -147,7 +147,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> ScenarioMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> ssp585 </variable>
 			<variable name="description" type="string"> Future scenario with high radiative forcing by the end of century. Following approximately RCP8.5 global forcing pathway but with new forcing based on SSP5. Concentration-driven. As a tier 2 option, this simulation should be extended to year 2300 </variable>
 			<variable name="title" type="string"> Future scenario with high radiative forcing by the end of century. Following approximately RCP8.5 global forcing pathway but with new forcing based on SSP5. Concentration-driven. As a tier 2 option, this simulation should be extended to year 2300 </variable>
@@ -216,7 +216,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> ScenarioMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> ssp585 </variable>
 			<variable name="description" type="string"> Future scenario with high radiative forcing by the end of century. Following approximately RCP8.5 global forcing pathway but with new forcing based on SSP5. Concentration-driven. As a tier 2 option, this simulation should be extended to year 2300 </variable>
 			<variable name="title" type="string"> Future scenario with high radiative forcing by the end of century. Following approximately RCP8.5 global forcing pathway but with new forcing based on SSP5. Concentration-driven. As a tier 2 option, this simulation should be extended to year 2300 </variable>
@@ -284,7 +284,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> ScenarioMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> ssp585 </variable>
 			<variable name="description" type="string"> Future scenario with high radiative forcing by the end of century. Following approximately RCP8.5 global forcing pathway but with new forcing based on SSP5. Concentration-driven. As a tier 2 option, this simulation should be extended to year 2300 </variable>
 			<variable name="title" type="string"> Future scenario with high radiative forcing by the end of century. Following approximately RCP8.5 global forcing pathway but with new forcing based on SSP5. Concentration-driven. As a tier 2 option, this simulation should be extended to year 2300 </variable>
@@ -352,7 +352,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> ScenarioMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> ssp585 </variable>
 			<variable name="description" type="string"> Future scenario with high radiative forcing by the end of century. Following approximately RCP8.5 global forcing pathway but with new forcing based on SSP5. Concentration-driven. As a tier 2 option, this simulation should be extended to year 2300 </variable>
 			<variable name="title" type="string"> Future scenario with high radiative forcing by the end of century. Following approximately RCP8.5 global forcing pathway but with new forcing based on SSP5. Concentration-driven. As a tier 2 option, this simulation should be extended to year 2300 </variable>
@@ -420,7 +420,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> ScenarioMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> ssp585 </variable>
 			<variable name="description" type="string"> Future scenario with high radiative forcing by the end of century. Following approximately RCP8.5 global forcing pathway but with new forcing based on SSP5. Concentration-driven. As a tier 2 option, this simulation should be extended to year 2300 </variable>
 			<variable name="title" type="string"> Future scenario with high radiative forcing by the end of century. Following approximately RCP8.5 global forcing pathway but with new forcing based on SSP5. Concentration-driven. As a tier 2 option, this simulation should be extended to year 2300 </variable>
@@ -488,7 +488,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> ScenarioMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.0 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> ssp585 </variable>
 			<variable name="description" type="string"> Future scenario with high radiative forcing by the end of century. Following approximately RCP8.5 global forcing pathway but with new forcing based on SSP5. Concentration-driven. As a tier 2 option, this simulation should be extended to year 2300 </variable>
 			<variable name="title" type="string"> Future scenario with high radiative forcing by the end of century. Following approximately RCP8.5 global forcing pathway but with new forcing based on SSP5. Concentration-driven. As a tier 2 option, this simulation should be extended to year 2300 </variable>

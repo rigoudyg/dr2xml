@@ -1,7 +1,7 @@
 
  **************************************************
 *
-*              dr2xml version:  3.0
+*              dr2xml version:  current_version
 *   CMIP6 conventions version:  v6.2.4
 *  CMIP6 Data Request version:  01.00.21.post1
 
@@ -549,7 +549,7 @@ Warnings about cell methods (with var list)
 
  **************************************************
 *
-*              dr2xml version:  3.0
+*              dr2xml version:  current_version
 *   CMIP6 conventions version:  v6.2.4
 *  CMIP6 Data Request version:  01.00.21.post1
 
@@ -2137,7 +2137,7 @@ Warnings about cell methods (with var list)
 
  **************************************************
 *
-*              dr2xml version:  3.0
+*              dr2xml version:  current_version
 *   CMIP6 conventions version:  v6.2.4
 *  CMIP6 Data Request version:  01.00.21.post1
 
