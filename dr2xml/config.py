@@ -20,7 +20,7 @@ import copy
 python_version = "python" + sys.version[0]
 
 # General variables
-version = "3.0"  # dr2xml version
+version = "3.1"  # dr2xml version
 
 # CMIP6 variables
 conventions = "CF-1.7 CMIP-6.2"
