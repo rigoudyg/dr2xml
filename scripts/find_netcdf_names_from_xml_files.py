@@ -8,10 +8,11 @@ Take in entry xml files designed for xios and return the list of netcdf file nam
 from __future__ import print_function, division, absolute_import, unicode_literals
 
 import os
-from argparse import ArgumentParser
+import sys
 
-from xml_writer.utils import decode_if_needed
-from check_outputs_produced import find_netcdf_filenames_from_xmls, parse_args
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from check_outputs_produced import find_netcdf_filenames_from_xmls, parse_args, decode_if_needed
 
 
 dict_opts = parse_args()

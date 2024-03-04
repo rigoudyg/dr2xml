@@ -557,42 +557,30 @@ example_simulation_settings = {
 }
 
 
-def generate_file_defs(lset, sset, year, enddate, context, cvs_path, pingfiles=None,
-                       dummies='include', printout=False, dirname="./", prefix="", attributes=list(),
-                       select="on_expt_and_year", debug=False, force_reset=False):
-    """
-    A wrapper for profiling top-level function : generate_file_defs_inner
-    """
-    if debug:
-        default_level = "debug"
-    elif printout:
-        default_level = "info"
-    else:
-        default_level = "warning"
-    initialize_logger(default=True, level=default_level)
-    # pr = cProfile.Profile()
-    # pr.enable()
-    # Initialize lset and sset variables for all functions
-    initialize_config_variables()
-    initialize_settings(lset=lset, sset=sset, cvspath=cvs_path, context=context, prefix=prefix,
-                        root=os.path.basename(os.path.abspath(__file__)), year=year, dirname=dirname,
-                        force_reset=force_reset)
-    generate_file_defs_inner(year, enddate, context, pingfiles=pingfiles, dummies=dummies, dirname=dirname,
-                             attributes=attributes, select=select)
-    # pr.disable()
-    # if python_version == "python2":
-    #     s = io.BytesIO()
-    # else:
-    #     s = io.StringIO()
-    # sortby = 'cumulative'
-    # ps = pstats.Stats(pr, stream=s).sort_stats(sortby)
-    # ps.print_stats()
-    # Just un-comment next line to get the profile on stdout
-    # print(s.getvalue())
+def configuration_init(func):
+    def make_configuration(lset, sset, cvs_path=None, printout=False, prefix="", debug=False, force_reset=False,
+                           **kwargs):
+        year = kwargs.get("year", 0)
+        context = kwargs.get("context")
+        dirname = kwargs.get("dirname")
+        if debug:
+            default_level = "debug"
+        elif printout:
+            default_level = "info"
+        else:
+            default_level = "warning"
+        initialize_logger(default=True, level=default_level)
+        initialize_config_variables()
+        initialize_settings(lset=lset, sset=sset, cvspath=cvs_path, context=context, prefix=prefix,
+                            root=os.path.basename(os.path.abspath(__file__)), year=year, dirname=dirname,
+                            force_reset=force_reset)
+        return func(**kwargs)
+    return make_configuration
 
 
-def generate_file_defs_inner(year, enddate, context, pingfiles=None, dummies='include', dirname="./", attributes=list(),
-                             select="on_expt_and_year"):
+@configuration_init
+def generate_file_defs(year, enddate, context, pingfiles=None, dummies='include', dirname="./", attributes=list(),
+                       select="on_expt_and_year"):
     """
     Using the DR module, a dict of lab settings ``lset``, and a dict
     of simulation settings ``sset``, generate an XIOS file_defs 'file' for a
@@ -746,3 +734,24 @@ es with a different name between model
         for w in warnings_for_optimisation:
             logger.warning(w.replace(internal_settings['ping_variables_prefix'], ""))
         print()
+
+
+@configuration_init
+def create_ping_files(context, path_special, dummy="field_atm", dummy_with_shape=False, exact=False, comments=False,
+                      filename=None, debug=list(), by_realm=False):
+    from .settings_interface import get_settings_values
+    from .vars_interface.selection import select_variables_to_be_processed
+    from .pingfiles_interface import ping_file_for_realms_list
+
+    considered_realms = get_settings_values("internal", "realms_per_context")
+    svars = select_variables_to_be_processed(None, context, "no")
+    if by_realm:
+        for realm in considered_realms:
+            ping_file_for_realms_list(context=context, svars=svars, lrealms=[realm, ], path_special=path_special,
+                                      dummy=dummy, dummy_with_shape=dummy_with_shape, exact=exact, comments=comments,
+                                      debug=debug, filename=filename % realm)
+    else:
+        ping_file_for_realms_list(context=context, svars=svars, lrealms=considered_realms, path_special=path_special,
+                                  dummy=dummy, dummy_with_shape=dummy_with_shape, exact=exact, comments=comments,
+                                  filename=filename, debug=debug)
+

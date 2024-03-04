@@ -10,7 +10,11 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 import copy
 import os
 import re
+import sys
 from argparse import ArgumentParser
+
+sys.path.append(os.path.abspath(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+
 from xml_writer.utils import decode_if_needed
 from xml_writer.element import Element
 from xml_writer.parser import xml_file_parser
