@@ -308,7 +308,7 @@ class ParameterSettings(Settings):
             if authorized_values is not None:
                 test = relevant and value in authorized_values
         if test:
-            test = not (any([re.compile(pattern).match(value) for pattern in self.forbidden_patterns]))
+            test = not (any([re.compile(pattern).match(str(value)) for pattern in self.forbidden_patterns]))
         return relevant, test
 
     def correct_value(self, value, internal_values=dict(), common_values=dict(), additional_dict=dict(),

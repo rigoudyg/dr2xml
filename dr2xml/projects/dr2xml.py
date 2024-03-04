@@ -53,7 +53,8 @@ internal_values = dict(
         key="institution_id",
         default_values=[
             ValueSettings(key_type="laboratory", keys="institution_id")
-        ]
+        ],
+	    fatal=True
     ),
 	context=ParameterSettings(
         key="context",

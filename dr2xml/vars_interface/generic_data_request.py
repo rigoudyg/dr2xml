@@ -7,6 +7,8 @@ Generic data request tools
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+from collections import OrderedDict
+
 from dr2xml.dr_interface import get_dr_object
 from logger import get_logger
 from dr2xml.settings_interface import get_settings_values, set_internal_value
@@ -85,7 +87,10 @@ def select_data_request_CMORvars_for_lab(sset=False, year=None):
         excpairs.extend(excpairs_sset)
     else:
         tierMax = internal_settings['tierMax_lset']
-        mips_list = set().union(*[set(mip_list_by_grid[grid]) for grid in mip_list_by_grid])
+        if isinstance(mip_list_by_grid, (dict, OrderedDict)):
+            mips_list = set().union(*[set(mip_list_by_grid[grid]) for grid in mip_list_by_grid])
+        else:
+            mips_list = mip_list_by_grid
         grid_choice = "LR"
         sizes = None
         inclinks = None
@@ -204,4 +209,4 @@ def decide_for_grids(cmvarid, grids):
     elif policy in ["adhoc", ]:
         return lab_adhoc_grid_policy(cmvarid, ngrids)
     else:
-        Dr2xmlError("Invalid grid policy %s" % policy)
+        raise Dr2xmlError("Invalid grid policy %s" % policy)

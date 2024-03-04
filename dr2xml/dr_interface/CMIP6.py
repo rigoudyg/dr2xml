@@ -530,9 +530,10 @@ def normalize_grid(grid):
     """ in DR 1.0.2, values are :
     ['', 'model grid', '100km', '50km or smaller', 'cfsites', '1deg', '2deg', '25km or smaller', 'native']
     """
-    if grid in ["native", "model grid", ""]:
+    if grid in ["native", "model grid", "", None]:
         return ""
-    return grid.replace(" or smaller", "")
+    else:
+        return grid.replace(" or smaller", "")
 
 
 class SimpleDim(SimpleDimBasic):
