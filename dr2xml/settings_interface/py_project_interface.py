@@ -9,11 +9,12 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 import os
 from importlib.machinery import SourceFileLoader
 
-from .py_settings_interface import get_variable_from_lset_with_default_in_lset, get_variable_from_lset_with_default
+from .py_settings_interface import get_variable_from_lset_with_default_in_lset, get_variable_from_lset_with_default, \
+    get_variable_from_lset_without_default
 from dr2xml.projects.projects_interface_definitions import ParameterSettings
 
 
-def initialize_project_settings(dirname):
+def initialize_project_settings(dirname, doc_writer=False):
     # Read content from json file
     project_filename = get_variable_from_lset_with_default_in_lset(key="project_settings", key_default="project",
                                                                    default="CMIP6")
@@ -23,7 +24,41 @@ def initialize_project_settings(dirname):
     save_project_settings = get_variable_from_lset_with_default("save_project_settings", None)
     if save_project_settings is not None:
         write_project_content(save_project_settings, internal_values, common_values, project_settings, dirname)
+    if doc_writer:
+        write_project_documentation(internal_values, common_values, project_settings, dirname,
+                                    get_variable_from_lset_without_default("project"))
     return internal_values, common_values, project_settings
+
+
+def write_project_documentation(internal_values, common_values, project_settings, dirname, project):
+    target_filename = os.sep.join([dirname, project + ".rst"])
+    content = list()
+    content.append("Parameters available for project %s" % project)
+    content.append("=" * len(content[0]))
+    content.append("")
+    content.append("Internal values")
+    content.append("---------------")
+    content.append(".. glossary::")
+    content.append("   :sorted:")
+    content.append("   ")
+    for value in sorted(list(internal_values)):
+        content.extend(internal_values[value].dump_doc())
+    content.append("Common values")
+    content.append("-------------")
+    content.append(".. glossary::")
+    content.append("   :sorted:")
+    content.append("   ")
+    for value in sorted(list(common_values)):
+        content.extend(common_values[value].dump_doc())
+    content.append("Project settings")
+    content.append("----------------")
+    content.append(".. glossary::")
+    content.append("   :sorted:")
+    content.append("   ")
+    for value in sorted(list(project_settings)):
+        content.extend(project_settings[value].dump_doc())
+    with open(target_filename, "w") as fic:
+        fic.write(os.linesep.join(content))
 
 
 def write_project_content(target, internal_values, common_values, project_settings, dirname):

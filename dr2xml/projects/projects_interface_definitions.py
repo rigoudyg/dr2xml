@@ -6,7 +6,6 @@ Interface to project settings
 """
 from __future__ import print_function, division, absolute_import, unicode_literals
 
-import copy
 import re
 from collections import OrderedDict
 
@@ -221,6 +220,40 @@ class Settings(object):
     def __repr__(self):
         return self.__str__()
 
+    def dump_doc(self, force_void=False):
+        return [str(self), ]
+
+    def dump_doc_inner(self, value, force_void=False, format_list=True):
+        if isinstance(value, Settings):
+            return value.dump_doc(force_void=force_void)
+        elif isinstance(value, (list, set)):
+            rep = list()
+            if len(value) == 0 and force_void:
+                rep.append(list())
+            elif format_list:
+                rep.append("   ")
+                for elt in value:
+                    rep.extend(["   - %s" % subelt for subelt in self.dump_doc_inner(elt, force_void=force_void)])
+            else:
+                for elt in value:
+                    rep.extend(self.dump_doc_inner(elt, force_void=force_void))
+            return rep
+        elif isinstance(value, (dict, OrderedDict)):
+            rep = list()
+            if len(value) == 0 and force_void:
+                rep.append(type(value).__call__())
+            else:
+                rep.append("   ")
+                for elt in value:
+                    rep.append("   %s: " % elt)
+                    rep.append("   ")
+                    rep.extend(["      " + val for val in self.dump_doc_inner(value[elt], force_void=force_void)])
+            return rep
+        elif isinstance(value, six.string_types):
+            return ["'%s'" % value, ]
+        else:
+            return [value, ]
+
 
 class ValueSettings(Settings):
 
@@ -232,6 +265,41 @@ class ValueSettings(Settings):
         if "keys" in self.updated and not isinstance(self.keys, list):
             self.keys = [self.keys, ]
 
+    def dump_doc(self, force_void=False):
+        rep = list()
+        output_keys = ["fmt", "src", "func"]
+        key_type = self.__getattribute__("key_type")
+        if key_type in ["laboratory", "simulation", "dict", "internal", "common"]:
+            tmp_rep = "%s" % key_type
+            keys_values = self.dump_doc_inner(self.__getattribute__("keys"), format_list=False)
+            for key_value in keys_values:
+                tmp_rep += "[%s]" % key_value
+            for key in output_keys:
+                key_value = self.__getattribute__(key)
+                if key_value is not None:
+                    key_value = self.dump_doc_inner(key_value)
+                    tmp_rep += "{%s: %s}" % (key, key_value)
+            rep.append(tmp_rep)
+        elif key_type in ["data_request", ]:
+            tmp_rep = "%s" % key_type
+            keys_values = self.dump_doc_inner(self.__getattribute__("keys"), format_list=False)
+            for key_value in keys_values:
+                if isinstance(key_value, six.string_types):
+                    key_value = key_value.strip("'").strip('"').strip("'")
+                if key_value in ["__call__", ]:
+                    tmp_rep += "()"
+                else:
+                    tmp_rep += ".%s" % key_value
+            for key in output_keys:
+                key_value = self.__getattribute__(key)
+                if key_value is not None:
+                    key_value = self.dump_doc_inner(key_value)
+                    tmp_rep += "{%s: %s}" % (key, key_value)
+            rep.append(tmp_rep)
+        else:
+            rep.append(str(self))
+        return rep
+
 
 class ParameterSettings(Settings):
 
@@ -239,6 +307,36 @@ class ParameterSettings(Settings):
         return dict(skip_values=list(), forbidden_patterns=list(), conditions=list(), default_values=list(),
                     cases=list(), authorized_values=list(), authorized_types=list(), corrections=dict(),
                     output_key=None, num_type="string", is_default=False, fatal=False, key=None, help="TODO")
+
+    def dump_doc(self, force_void=False):
+        rep = list()
+        rep.append("   %s" % self.key)
+        fmt = "      %s"
+        rep.append(fmt % "")
+        rep.append(fmt % self.help)
+        rep.append(fmt % "")
+        output_keys = ["fatal", "default_values", "skip_values", "authorized_values", "authorized_types",
+                      "forbidden_patterns", "conditions", "cases", "corrections", "num_type"]
+        if self.__getattribute__("output_key") != self.key:
+            output_keys.insert(0, "output_key")
+        for key in output_keys:
+            value = self.__getattribute__(key)
+            value = self.dump_doc_inner(value, force_void=force_void or key in ["default_values", ])
+            add = False
+            key = key.replace("_", " ")
+            if len(value) == 1:
+                value = "%s" % value[0]
+                value = value.strip()
+                if len(value) > 0:
+                    rep.append(fmt % ("%s: %s" % (key, value)))
+                    add = True
+            elif len(value) > 1:
+                rep.append(fmt % ("%s:" % key))
+                rep.extend(fmt % elt for elt in value)
+                add = True
+            if add:
+                rep.append(fmt % "")
+        return rep
 
     def __init__(self, *args, **kwargs):
         super(ParameterSettings, self).__init__(*args, **kwargs)
