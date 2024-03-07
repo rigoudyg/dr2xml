@@ -62,7 +62,8 @@ common_values = dict(
         key="conventions_version",
         default_values=[
             ValueSettings(key_type="config", keys="CMIP6_conventions_version")
-        ]
+        ],
+        help="Version of the conventions used."
     ),
     HDL=ParameterSettings(
         key="HDL",
@@ -85,7 +86,8 @@ common_values = dict(
                 ],
                 fmt="r{}i{}p{}f{}"
             )
-        ]
+        ],
+        help="Label of the variant done."
     ),
     CORDEX_domain=ParameterSettings(
         key="CORDEX_domain",
@@ -97,7 +99,8 @@ common_values = dict(
                     ValueSettings(key_type="internal", keys="context")
                 ]
             )
-        ]
+        ],
+        help="Dictionary which contains, for each context, the associated CORDEX domain."
     ),
     driving_model_id=ParameterSettings(
         key="driving_model_id",
@@ -106,7 +109,8 @@ common_values = dict(
                 key_type="simulation",
                 keys="driving_model_id"
             )
-        ]
+        ],
+        help="Id of the driving model."
     ),
     driving_model_ensemble_member=ParameterSettings(
         key="driving_model_ensemble_member",
@@ -115,7 +119,8 @@ common_values = dict(
                 key_type="simulation",
                 keys="driving_model_ensemble_member"
             )
-        ]
+        ],
+        help="Member of the simulation which drives the simulation."
     ),
     driving_experiment_name=ParameterSettings(
         key="driving_experiment_name",
@@ -124,7 +129,8 @@ common_values = dict(
                 key_type="simulation",
                 keys="driving_experiment_name"
             )
-        ]
+        ],
+        help="Name of the experiment which drives the current simulation."
     ),
     driving_experiment=ParameterSettings(
         key="driving_experiment",
@@ -133,7 +139,8 @@ common_values = dict(
                 key_type="simulation",
                 keys="driving_experiment"
             )
-        ]
+        ],
+        help="Id of the experiment which drives the current simulation."
     ),
     Lambert_conformal_longitude_of_central_meridian=ParameterSettings(
         key="Lambert_conformal_longitude_of_central_meridian",
@@ -142,7 +149,8 @@ common_values = dict(
                 key_type="simulation",
                 keys="Lambert_conformal_longitude_of_central_meridian"
             )
-        ]
+        ],
+        help="Longitude of central meridian of the Lambert conformal projection."
     ),
     Lambert_conformal_standard_parallel=ParameterSettings(
         key="Lambert_conformal_standard_parallel",
@@ -151,7 +159,8 @@ common_values = dict(
                 key_type="simulation",
                 keys="Lambert_conformal_standard_parallel"
             )
-        ]
+        ],
+        help="Standard parallel of the Lambert conformal projection."
     ),
     Lambert_conformal_latitude_of_projection_origin=ParameterSettings(
         key="Lambert_conformal_latitude_of_projection_origin",
@@ -160,7 +169,8 @@ common_values = dict(
                 key_type="simulation",
                 keys="Lambert_conformal_latitude_of_projection_origin"
             )
-        ]
+        ],
+        help="Latitude of central meridian of the Lambert conformal projection."
     ),
     rcm_version_id=ParameterSettings(
         key="rcm_version_id",
@@ -169,7 +179,8 @@ common_values = dict(
                 key_type="simulation",
                 keys="rcm_version_id"
             )
-        ]
+        ],
+        help="Version id of the regional model used."
     )
 )
 

@@ -47,9 +47,6 @@ def initialize_settings(lset=None, sset=None, force_reset=False, **kwargs):
     # Solve common settings
     common_settings = solve_values("common", common_dict=common_settings, internal_dict=internal_settings,
                                    additional_dict=kwargs)
-    # Solve project_settings
-    project_settings = solve_settings(project_settings, internal_dict=internal_settings,
-                                      common_dict=common_settings, additional_dict=kwargs)
 
 
 def initialize_internal_values(force_reset=False):

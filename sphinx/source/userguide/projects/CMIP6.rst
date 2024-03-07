@@ -8,1117 +8,1085 @@ Internal values
    
    CFsubhr_frequency
       
-      TODO
+      CFMIP has an elaborated requirement for defining subhr frequency; by default, dr2xml uses 1 time step.
       
       fatal: False
       
       default values:
          
-         - laboratory['CFsubhr_frequency']
+         - laboratory[CFsubhr_frequency]
          - '1ts'
       
       num type: 'string'
       
    CV_experiment
       
-      TODO
+      Controlled vocabulary file containing experiment characteristics.
       
       fatal: False
       
-      default values:
-         
-         - ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'json', 'keys': ['experiment_id', ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['experiment_id'], 'fmt': None, 'src': None, 'func': None})], 'fmt': None, 'src': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'combine', 'keys': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'dict', 'keys': ['cvspath'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['project'], 'fmt': None, 'src': None, 'func': None})], 'fmt': '{}{}_experiment_id.json', 'src': None, 'func': None}), 'func': None})
+      default values: ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'json', 'keys': ['experiment_id', ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['experiment_id'], 'fmt': None, 'src': None, 'func': None})], 'fmt': None, 'src': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'combine', 'keys': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'dict', 'keys': ['cvspath'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['project'], 'fmt': None, 'src': None, 'func': None})], 'fmt': '{}{}_experiment_id.json', 'src': None, 'func': None}), 'func': None})
       
       num type: 'string'
       
    add_Gibraltar
       
-      TODO
+      DR01.00.21 does not include Gibraltar strait, which is requested by OMIP. Can include it, if model provides it as last value of array.
       
       fatal: False
       
       default values:
          
-         - laboratory['add_Gibraltar']
+         - laboratory[add_Gibraltar]
          - False
       
       num type: 'string'
       
    additional_allowed_model_components
       
-      TODO
+      Dictionary which contains, for each model, the list of components whih can be used in addition to the declared ones.
       
       fatal: True
       
-      default values:
-         
-         - internal['CV_experiment']['additional_allowed_model_components']
+      default values: internal[CV_experiment][additional_allowed_model_components]
       
       num type: 'string'
       
    adhoc_policy_do_add_1deg_grid_for_tos
       
-      TODO
+      Some scenario experiment in DR 01.00.21 do not request tos on 1 degree grid, while other do. If you use grid_policy=adhoc and had not changed the mapping of function. grids.lab_adhoc_grid_policy to grids.CNRM_grid_policy, next setting can force any tos request to also produce tos on a 1 degree grid.
       
       fatal: False
       
       default values:
          
-         - laboratory['adhoc_policy_do_add_1deg_grid_for_tos']
+         - laboratory[adhoc_policy_do_add_1deg_grid_for_tos]
          - False
       
       num type: 'string'
       
    allow_duplicates
       
-      TODO
+      Should we allow for duplicate vars: two vars with same frequency, shape and realm, which differ only by the table. In DR01.00.21, this actually applies to very few fields (ps-Aermon, tas-ImonAnt, areacellg-IfxAnt).
       
       fatal: False
       
       default values:
          
-         - laboratory['allow_duplicates']
+         - laboratory[allow_duplicates]
          - True
       
       num type: 'string'
       
    allow_duplicates_in_same_table
       
-      TODO
+      Should we allow for another type of duplicate vars : two vars with same name in same table (usually with different shapes). This applies to e.g. CMOR vars 'ua' and 'ua7h' in 6hPlevPt. Default to False, because CMIP6 rules does not allow to name output files differently in that case. If set to True, you should also set 'use_cmorvar_label_in_filename' to True to overcome the said rule.
       
       fatal: True
       
       default values:
          
-         - laboratory['allow_duplicates_in_same_table']
+         - laboratory[allow_duplicates_in_same_table]
          - False
       
       num type: 'string'
       
    allow_pseudo_standard_names
       
-      TODO
+      DR has sn attributes for MIP variables. They can be real,CF-compliant, standard_names or pseudo_standard_names, i.e. not yet approved labels. Default is to use only CF ones.
       
       fatal: False
       
       default values:
          
-         - laboratory['allow_pseudo_standard_names']
+         - laboratory[allow_pseudo_standard_names]
          - False
       
       num type: 'string'
       
    allow_tos_3hr_1deg
       
-      TODO
+      When using select='no', Xios may enter an endless loop, which is solved if next setting is False.
       
       fatal: False
       
       default values:
          
-         - laboratory['allow_tos_3hr_1deg']
+         - laboratory[allow_tos_3hr_1deg]
          - True
       
       num type: 'string'
       
    branch_year_in_child
       
-      TODO
+      In some instances, the experiment start year is not explicit or is doubtful in DR. See file doc/some_experiments_starty_in_DR01.00.21. You should then specify it, using next setting in order that requestItems analysis work in all cases. In some other cases, DR requestItems which apply to the experiment form its start does not cover its whole duration and have a wrong duration (computed based on a wrong start year); They necessitate to fix the start year.
       
       fatal: False
       
-      default values:
-         
-         - simulation['branch_year_in_child']
+      default values: simulation[branch_year_in_child]
       
       num type: 'string'
       
    branching
       
-      TODO
+       Describe the branching scheme for experiments involved in some 'branchedYears type' tslice (for details, see: http://clipc-services.ceda.ac.uk/dreq/index/Slice.html ). Just put the as key the common start year in child and as value the list of start years in parent for all members.A dictionary with models name as key and dictionary containing experiment,(branch year in child, list of branch year in parent) key values.
       
       fatal: False
       
       default values:
          
-         - laboratory['branching'][internal['source_id']]
+         - laboratory[branching][internal[source_id]]
          - {}
       
       num type: 'string'
       
    bypass_CV_components
       
-      TODO
+      If the CMIP6 Controlled Vocabulary doesn't allow all the components you activate, you can set next toggle to True
       
       fatal: False
       
       default values:
          
-         - laboratory['bypass_CV_components']
+         - laboratory[bypass_CV_components]
          - False
       
       num type: 'string'
       
    bytes_per_float
       
-      TODO
+      Estimate of number of bytes per floating value, given the chosen :term:`compression_level`.
       
       fatal: False
       
       default values:
          
-         - laboratory['bytes_per_float']
+         - laboratory[bytes_per_float]
          - 2
       
       num type: 'string'
       
    configuration
       
-      TODO
+      Configuration used for this experiment. If there is no configuration in lab_settings which matches you case, please rather use next or next two entries: :term:`source_id` and, if needed, :term:`source_type`.
       
       fatal: True
       
-      default values:
-         
-         - simulation['configuration']
+      default values: simulation[configuration]
       
       num type: 'string'
       
    context
       
-      TODO
+      Context associated with the xml file produced.
       
       fatal: True
       
-      default values:
-         
-         - dict['context']
+      default values: dict[context]
       
       num type: 'string'
       
    data_request_path
       
-      TODO
+      Path where the data request used is placed.
       
       fatal: False
       
       default values:
          
-         - laboratory['data_request_path']
+         - laboratory[data_request_path]
          - None
       
       num type: 'string'
       
    data_request_used
       
-      TODO
+      Version of the data request used.
       
       fatal: False
       
       default values:
          
-         - laboratory['data_request_used']
+         - laboratory[data_request_used]
          - 'CMIP6'
       
       num type: 'string'
       
    debug_parsing
       
-      TODO
+      In order to identify which xml files generates a problem, you can use this flag.
       
       fatal: False
       
       default values:
          
-         - laboratory['debug_parsing']
+         - laboratory[debug_parsing]
          - False
       
       num type: 'string'
       
    dr2xml_manages_enddate
       
-      TODO
+      A smart workflow will allow you to extend a simulation during it course and to complement the output files accordingly, by managing the 'end date' part in filenames. You can then set next setting to False.
       
       fatal: True
       
       default values:
          
-         - laboratory['dr2xml_manages_enddate']
+         - laboratory[dr2xml_manages_enddate]
          - True
       
       num type: 'string'
       
    end_year
       
-      TODO
+      If you want to carry on the experiment beyond the duration set in DR, and that all requestItems that apply to DR end year also apply later on, set 'end_year' You can also set it if you don't know if DR has a wrong value
       
       fatal: False
       
       default values:
          
-         - simulation['end_year']
+         - simulation[end_year]
          - False
       
       num type: 'string'
       
    excluded_pairs_lset
       
-      TODO
+      You can exclude some (variable, table) pairs from outputs. A list of tuple (variable, table) to be excluded from laboratory settings.
       
       fatal: False
       
       default values:
          
-         - laboratory['excluded_pairs']
+         - laboratory[excluded_pairs]
          - []
       
       num type: 'string'
       
    excluded_pairs_sset
       
-      TODO
+      You can exclude some (variable, table) pairs from outputs. A list of tuple (variable, table) to be excluded from simulation settings.
       
       fatal: False
       
       default values:
          
-         - simulation['excluded_pairs']
+         - simulation[excluded_pairs]
          - []
       
       num type: 'string'
       
    excluded_request_links
       
-      TODO
+      List of links un data request that should not been followed (those request are not taken into account).
       
       fatal: False
       
       default values:
          
-         - laboratory['excluded_request_links']
+         - laboratory[excluded_request_links]
          - []
       
       num type: 'string'
       
    excluded_spshapes_lset
       
-      TODO
+      The list of shapes that should be excluded (all variables in those shapes will be excluded from outputs).
       
       fatal: False
       
       default values:
          
-         - laboratory['excluded_spshapes']
+         - laboratory[excluded_spshapes]
          - []
       
       num type: 'string'
       
    excluded_tables_lset
       
-      TODO
+      List of the tables that will be excluded from outputs from laboratory settings.
       
       fatal: False
       
       default values:
          
-         - laboratory['excluded_tables']
+         - laboratory[excluded_tables]
          - []
       
       num type: 'string'
       
    excluded_tables_sset
       
-      TODO
+      List of the tables that will be excluded from outputs from simulation settings.
       
       fatal: False
       
       default values:
          
-         - simulation['excluded_tables']
+         - simulation[excluded_tables]
          - []
       
       num type: 'string'
       
    excluded_vars_lset
       
-      TODO
+      List of CMOR variables to exclude from the result based on previous Data Request extraction from laboratory settings.
       
       fatal: False
       
       default values:
          
-         - laboratory['excluded_vars']
+         - laboratory[excluded_vars]
          - []
       
       num type: 'string'
       
    excluded_vars_per_config
       
-      TODO
+      A dictionary which keys are configurations and values the list of variables that must be excluded for each configuration.
       
       fatal: False
       
       default values:
          
-         - laboratory['excluded_vars_per_config'][internal['configuration']]
+         - laboratory[excluded_vars_per_config][internal[configuration]]
          - []
       
       num type: 'string'
       
    excluded_vars_sset
       
-      TODO
+      List of CMOR variables to exclude from the result based on previous Data Request extraction from simulation settings.
       
       fatal: False
       
       default values:
          
-         - simulation['excluded_vars']
+         - simulation[excluded_vars]
          - []
       
       num type: 'string'
       
    experiment_for_requests
       
-      TODO
+      Experiment id to use for driving the use of the Data Request.
       
       fatal: True
       
       default values:
          
-         - simulation['experiment_for_requests']
-         - internal['experiment_id']
+         - simulation[experiment_for_requests]
+         - internal[experiment_id]
       
       num type: 'string'
       
    experiment_id
       
-      TODO
+      Root experiment identifier.
       
       fatal: True
       
-      default values:
-         
-         - simulation['experiment_id']
+      default values: simulation[experiment_id]
       
       num type: 'string'
       
    filter_on_realization
       
-      TODO
+      If you want to produce the same variables set for all members, set this parameter to False.
       
       fatal: False
       
       default values:
          
-         - simulation['filter_on_realization']
-         - laboratory['filter_on_realization']
+         - simulation[filter_on_realization]
+         - laboratory[filter_on_realization]
          - True
       
       num type: 'string'
       
    fx_from_file
       
-      TODO
+      You may provide some variables already horizontally remapped to some grid (i.e. Xios domain) in external files. The varname in file must match the referenced id in pingfile. Tested only for fixed fields. A dictionary with variable id as key and a dictionary as value: the key must be the grid id, the value a dictionary with the file for each resolution.
       
       fatal: False
       
       default values:
          
-         - laboratory['fx_from_file']
+         - laboratory[fx_from_file]
          - []
       
       num type: 'string'
       
    grid_choice
       
-      TODO
+      A dictionary which keys are models name and values the corresponding resolution.
       
       fatal: True
       
-      default values:
-         
-         - laboratory['grid_choice'][internal['source_id']]
+      default values: laboratory[grid_choice][internal[source_id]]
       
       num type: 'string'
       
    grid_policy
       
-      TODO
+      The grid choice policy for output files.
       
       fatal: True
       
       default values:
          
-         - laboratory['grid_policy']
+         - laboratory[grid_policy]
          - False
       
       num type: 'string'
       
    grid_prefix
       
-      TODO
+      Prefix of the dr2xml generated grid named to be used.
       
       fatal: True
       
       default values:
          
-         - laboratory['grid_prefix']
-         - internal['ping_variables_prefix']
+         - laboratory[grid_prefix]
+         - internal[ping_variables_prefix]
       
       num type: 'string'
       
    grids
       
-      TODO
+      Grids : per model resolution and per context :- CMIP6 qualifier (i.e. 'gn' or 'gr') for the main grid chosen (because you  may choose has main production grid a regular one, when the native grid is e.g. unstructured)- Xios id for the production grid (if it is not the native grid),- Xios id for the latitude axis used for zonal means (mist match latitudes for grid above)- resolution of the production grid (using CMIP6 conventions),- grid description
       
       fatal: True
       
-      default values:
-         
-         - laboratory['grids']
+      default values: laboratory[grids]
       
       num type: 'string'
       
    grids_dev
       
-      TODO
+      Grids definition for dev variables.
       
       fatal: True
       
       default values:
          
-         - laboratory['grids_dev']
+         - laboratory[grids_dev]
          - {}
       
       num type: 'string'
       
    grouped_vars_per_file
       
-      TODO
+      Variables to be grouped in the same output file (provided additional conditions are filled).
       
       fatal: False
       
       default values:
          
-         - simulation['grouped_vars_per_file']
-         - laboratory['grouped_vars_per_file']
+         - simulation[grouped_vars_per_file]
+         - laboratory[grouped_vars_per_file]
          - []
       
       num type: 'string'
       
    included_request_links
       
-      TODO
+      List of the request links that will be processed (all others will not).
       
       fatal: False
       
       default values:
          
-         - laboratory['included_request_links']
+         - laboratory[included_request_links]
          - []
       
       num type: 'string'
       
    included_tables
       
-      TODO
+      List of tables that will be processed (all others will not).
       
       fatal: False
       
       default values:
          
-         - simulation['included_tables']
-         - internal['included_tables_lset']
+         - simulation[included_tables]
+         - internal[included_tables_lset]
       
       num type: 'string'
       
    included_tables_lset
       
-      TODO
+      List of tables that will be processed (all others will not) from laboratory settings.
       
       fatal: False
       
       default values:
          
-         - laboratory['included_tables']
+         - laboratory[included_tables]
          - []
       
       num type: 'string'
       
    included_vars
       
-      TODO
+      Variables to be considered from the Data Request (all others will not)
       
       fatal: False
       
       default values:
          
-         - simulation['included_vars']
-         - internal['included_vars_lset']
+         - simulation[included_vars]
+         - internal[included_vars_lset]
       
       num type: 'string'
       
    included_vars_lset
       
-      TODO
+      Variables to be considered from the Data Request (all others will not) from laboratory settings.
       
       fatal: False
       
       default values:
          
-         - laboratory['included_vars']
+         - laboratory[included_vars]
          - []
       
       num type: 'string'
       
    institution_id
       
-      TODO
+      Institution identifier.
       
       fatal: True
       
-      default values:
-         
-         - laboratory['institution_id']
+      default values: laboratory[institution_id]
       
       num type: 'string'
       
    laboratory_used
       
-      TODO
+      File which contains the settings to be used for a specific laboratory which is not present by default in dr2xml. Must contains at least the `lab_grid_policy` function.
       
       fatal: False
       
       default values:
          
-         - laboratory['laboratory_used']
+         - laboratory[laboratory_used]
          - None
       
       num type: 'string'
       
    listof_home_vars
       
-      TODO
+      Full path to the file which contains the list of home variables to be taken into account, in addition to the Data Request.
       
       fatal: False
       
       default values:
          
-         - simulation['listof_home_vars']
-         - laboratory['listof_home_vars']
+         - simulation[listof_home_vars]
+         - laboratory[listof_home_vars]
          - None
       
       num type: 'string'
       
    max_file_size_in_floats
       
-      TODO
+      The maximum size of generated files in number of floating values.
       
       fatal: False
       
       default values:
          
-         - laboratory['max_file_size_in_floats']
+         - laboratory[max_file_size_in_floats]
          - 500000000.0
       
       num type: 'string'
       
    max_priority
       
-      TODO
+      Max variable priority level to be output (you may set 3 when creating ping_files while being more restrictive at run time).
       
       fatal: True
       
       default values:
          
-         - simulation['max_priority']
-         - internal['max_priority_lset']
+         - simulation[max_priority]
+         - internal[max_priority_lset]
       
       num type: 'string'
       
    max_priority_lset
       
-      TODO
+      Max variable priority level to be output (you may set 3 when creating ping_files while being more restrictive at run time) from lab settings.
       
       fatal: True
       
-      default values:
-         
-         - laboratory['max_priority']
+      default values: laboratory[max_priority]
       
       num type: 'string'
       
    max_split_freq
       
-      TODO
+      The maximum number of years that should be putted in a single file.
       
       fatal: True
       
       default values:
          
-         - simulation['max_split_freq']
-         - laboratory['max_split_freq']
+         - simulation[max_split_freq]
+         - laboratory[max_split_freq]
          - None
       
       num type: 'string'
       
    mips
       
-      TODO
+      A dictionary in which keys are grid and values a set of strings corresponding to MIPs names.
       
       fatal: True
       
-      default values:
-         
-         - laboratory['mips']
+      default values: laboratory[mips]
       
       num type: 'string'
       
    nemo_sources_management_policy_master_of_the_world
       
-      TODO
+      Set that to True if you use a context named 'nemo' and the corresponding model unduly sets a general freq_op AT THE FIELD_DEFINITION GROUP LEVEL. Due to Xios rules for inheritance, that behavior prevents inheriting specific freq_ops by reference from dr2xml generated field_definitions.
       
       fatal: True
       
       default values:
          
-         - laboratory['nemo_sources_management_policy_master_of_the_world']
+         - laboratory[nemo_sources_management_policy_master_of_the_world]
          - False
       
       num type: 'string'
       
    non_standard_attributes
       
-      TODO
+      You may add a series of NetCDF attributes in all files for this simulation
       
       fatal: False
       
       default values:
          
-         - laboratory['non_standard_attributes']
+         - laboratory[non_standard_attributes]
          - {}
       
       num type: 'string'
       
    non_standard_axes
       
-      TODO
+      If your model has some axis which does not have all its attributes as in DR, and you want dr2xml to fix that it, give here the correspondence from model axis id to DR dim/grid id. For label dimensions you should provide the  list of labels, ordered as in your model, as second element of a pair. Label-type axes will be processed even if not quoted. Scalar dimensions are not concerned by this feature. A dictionary with (axis_id, axis_correct_id) or (axis_id, tuple of labels) as key, values.
       
       fatal: False
       
       default values:
          
-         - laboratory['non_standard_axes']
+         - laboratory[non_standard_axes]
          - {}
       
       num type: 'string'
       
    orography_field_name
       
-      TODO
+      Name of the orography field name to be used to compute height over orog fields.
       
       fatal: False
       
       default values:
          
-         - laboratory['orography_field_name']
-         - 'CMIP6_orog'
+         - laboratory[orography_field_name]
+         - 'orog'
       
       num type: 'string'
       
    orphan_variables
       
-      TODO
+      A dictionary with (context name, list of variables) as (key,value) pairs, where the list indicates the variables to be re-affected to the key-context (initially affected to a realm falling in another context)
       
       fatal: True
       
-      default values:
-         
-         - laboratory['orphan_variables']
+      default values: laboratory[orphan_variables]
       
       num type: 'string'
       
    path_extra_tables
       
-      TODO
+      Full path of the directory which contains extra tables.
       
       fatal: False
       
       default values:
          
-         - simulation['path_extra_tables']
-         - laboratory['path_extra_tables']
+         - simulation[path_extra_tables]
+         - laboratory[path_extra_tables]
          - None
       
       num type: 'string'
       
    path_to_parse
       
-      TODO
+      The path of the directory which, at run time, contains the root XML file (iodef.xml).
       
       fatal: False
       
       default values:
          
-         - laboratory['path_to_parse']
+         - laboratory[path_to_parse]
          - './'
       
       num type: 'string'
       
    perso_sdims_description
       
-      TODO
+      A dictionary containing, for each perso or dev variables with a XY-perso shape, and for each vertical coordinate associated, the main attributes of the dimension.
       
       fatal: False
       
       default values:
          
-         - simulation['perso_sdims_description']
+         - simulation[perso_sdims_description]
          - {}
       
       num type: 'string'
       
    ping_variables_prefix
       
-      TODO
+      The tag used to prefix the variables in the ‘field id’ namespaces of the ping file; may be an empty string.
       
       fatal: True
       
-      default values:
-         
-         - laboratory['ping_variables_prefix']
+      default values: laboratory[ping_variables_prefix]
+      
+      num type: 'string'
+      
+   prefixed_orography_field_name
+      
+      Name of the orography field name to be used to compute height over orog fields prefixed with :term:`ping_variable_prefix`.
+      
+      fatal: False
+      
+      default values: '{}{}'.format(internal[ping_variables_prefix], internal[orography_field_name])
       
       num type: 'string'
       
    print_stats_per_var_label
       
-      TODO
+      For an extended printout of selected CMOR variables, grouped by variable label.
       
       fatal: False
       
       default values:
          
-         - laboratory['print_stats_per_var_label']
+         - laboratory[print_stats_per_var_label]
          - False
       
       num type: 'string'
       
    print_variables
       
-      TODO
+      If the value is a list, only the file/field variables listed here will be put in output files. If boolean, tell if the file/field variables should be put in output files.
       
       fatal: False
       
       default values:
          
-         - laboratory['print_variables']
+         - laboratory[print_variables]
          - True
       
       num type: 'string'
       
    project
       
-      TODO
+      Project associated with the simulation.
       
       fatal: False
       
       default values:
          
-         - laboratory['project']
+         - laboratory[project]
          - 'CMIP6'
       
       num type: 'string'
       
    project_settings
       
-      TODO
+      Project settings definition file to be used.
       
       fatal: False
       
       default values:
          
-         - laboratory['project_settings']
-         - internal['project']
+         - laboratory[project_settings]
+         - internal[project]
       
       num type: 'string'
       
    realization_index
       
-      TODO
+      Realization number.
       
       fatal: False
       
       default values:
          
-         - simulation['realization_index']
+         - simulation[realization_index]
          - '1'
       
       num type: 'string'
       
    realms_per_context
       
-      TODO
+      A dictionary which keys are context names and values the lists of realms associated with each context
       
       fatal: True
       
-      default values:
-         
-         - laboratory['realms_per_context'][internal['context']]
+      default values: laboratory[realms_per_context][internal[context]]
       
       num type: 'string'
       
    required_model_components
       
-      TODO
+      Dictionary which gives, for each model name, the components that must be present.
       
       fatal: True
       
-      default values:
-         
-         - internal['CV_experiment']['required_model_components']
+      default values: internal[CV_experiment][required_model_components]
       
       num type: 'string'
       
    sampling_timestep
       
-      TODO
+      Basic sampling timestep set in your field definition (used to feed metadata 'interval_operation'). Should be a dictionary which keys are resolutions and values a context/timestep dictionary.
       
       fatal: True
       
-      default values:
-         
-         - laboratory['sampling_timestep']
+      default values: laboratory[sampling_timestep]
       
       num type: 'string'
       
    save_project_settings
       
-      TODO
+      The path of the file where the complete project settings will be written, if needed.
       
       fatal: False
       
       default values:
          
-         - laboratory['save_project_settings']
+         - laboratory[save_project_settings]
          - None
       
       num type: 'string'
       
    sectors
       
-      TODO
+      List of the sectors to be considered.
       
       fatal: False
       
-      default values:
-         
-         - laboratory['sectors']
+      default values: laboratory[sectors]
       
       num type: 'string'
       
    simple_domain_grid_regexp
       
-      TODO
+      If some grid is not defined in xml but by API, and is referenced by a field which is considered by the DR as having a singleton dimension, then: 1) it must be a grid which has only a domain 2) the domain name must be extractable from the grid_id using a regexp and a group number Example: using a pattern that returns full id except for a '_grid' suffix
       
       fatal: False
       
-      default values:
-         
-         - laboratory['simple_domain_grid_regexp']
+      default values: laboratory[simple_domain_grid_regexp]
       
       num type: 'string'
       
    sizes
       
-      TODO
+      A dictionary which keys are resolution and values the associated grid size for atmosphere and ocean grids. The grid size looks like : ['nho', 'nlo', 'nha', 'nla', 'nlas', 'nls', 'nh1']. Used to compute file split frequency.
       
       fatal: True
       
-      default values:
-         
-         - laboratory['sizes'][internal['grid_choice']]
+      default values: laboratory[sizes][internal[grid_choice]]
       
       num type: 'string'
       
    source_id
       
-      TODO
+      Name of the model used.
       
       fatal: True
       
       default values:
          
-         - laboratory['configurations'][internal['configuration']][0]
-         - simulation['source_id']
+         - laboratory[configurations][internal[configuration]][0]
+         - simulation[source_id]
       
       num type: 'string'
       
    source_type
       
-      TODO
+      If the default source-type value for your source (:term:`source_types` from :term:`lab_and_model_settings`) does not fit, you may change it here. This should describe the model most directly responsible for the output. Sometimes it is appropriate to list two (or more) model types here, among AER, AGCM, AOGCM, BGC, CHEM, ISM, LAND, OGCM, RAD, SLAB e.g. amip , run with CNRM-CM6-1, should quote "AGCM AER". Also see note 14 of https://docs.google.com/document/d/1h0r8RZr_f3-8egBMMh7aqLwy3snpD6_MrDz1q8n5XUk/edit
       
       fatal: True
       
       default values:
          
-         - laboratory['configurations'][internal['configuration']][1]
-         - simulation['source_type']
-         - laboratory['source_types'][internal['source_id']]
+         - laboratory[configurations][internal[configuration]][1]
+         - simulation[source_type]
+         - laboratory[source_types][internal[source_id]]
       
       num type: 'string'
       
    special_timestep_vars
       
-      TODO
+      This variable is used when some variables are computed with a period which is not the basic timestep. A dictionary which keys are non standard timestep and values the list of variables which are computed at this timestep.
       
       fatal: False
       
       default values:
          
-         - laboratory['special_timestep_vars']
+         - laboratory[special_timestep_vars]
          - []
       
       num type: 'string'
       
    split_frequencies
       
-      TODO
+      Path to the split frequencies file to be used.
       
       fatal: False
       
       default values:
          
-         - simulation['split_frequencies']
-         - laboratory['split_frequencies']
+         - simulation[split_frequencies]
+         - laboratory[split_frequencies]
          - 'splitfreqs.dat'
       
       num type: 'string'
       
    tierMax
       
-      TODO
+      Number indicating the maximum tier to consider for experiments.
       
       fatal: True
       
       default values:
          
-         - simulation['tierMax']
-         - internal['tierMax_lset']
+         - simulation[tierMax]
+         - internal[tierMax_lset]
       
       num type: 'string'
       
    tierMax_lset
       
-      TODO
+      Number indicating the maximum tier to consider for experiments from lab settings.
       
       fatal: True
       
-      default values:
-         
-         - laboratory['tierMax']
+      default values: laboratory[tierMax]
       
       num type: 'string'
       
    too_long_periods
       
-      TODO
+      The CMIP6 frequencies that are unreachable for a single model run. Datafiles will be labelled with dates consistent with content (but not with CMIP6 requirements). Allowed values are only 'dec' and 'yr'.
       
       fatal: True
       
       default values:
          
-         - laboratory['too_long_periods']
+         - laboratory[too_long_periods]
          - []
       
       num type: 'string'
       
    useAtForInstant
       
-      TODO
+      Should xml output files use the `@` symbol for definitions for instant variables?
       
       fatal: False
       
       default values:
          
-         - laboratory['useAtForInstant']
+         - laboratory[useAtForInstant]
          - False
       
       num type: 'string'
       
    use_cmorvar_label_in_filename
       
-      TODO
+      CMIP6 rule is that filenames includes the variable label, and that this variable label is not the CMORvar label, but 'MIPvar' label. This may lead to conflicts, e.g. for 'ua' and 'ua7h' in table 6hPlevPt; allows to avoid that, if set to True.
       
       fatal: True
       
       default values:
          
-         - laboratory['use_cmorvar_label_in_filename']
+         - laboratory[use_cmorvar_label_in_filename]
          - False
       
       num type: 'string'
       
    use_union_zoom
       
-      TODO
+      Say if you want to use XIOS union/zoom axis to optimize vertical interpolation requested by the DR.
       
       fatal: False
       
       default values:
          
-         - laboratory['use_union_zoom']
+         - laboratory[use_union_zoom]
          - False
       
       num type: 'string'
       
    vertical_interpolation_operation
       
-      TODO
+      Operation done for vertical interpolation.
       
       fatal: False
       
       default values:
          
-         - laboratory['vertical_interpolation_operation']
+         - laboratory[vertical_interpolation_operation]
          - 'instant'
       
       num type: 'string'
       
    vertical_interpolation_sample_freq
       
-      TODO
+      Time frequency of vertical interpolation.
       
       fatal: False
       
-      default values:
-         
-         - laboratory['vertical_interpolation_sample_freq']
+      default values: laboratory[vertical_interpolation_sample_freq]
       
       num type: 'string'
       
    xios_version
       
-      TODO
+      Version of XIOS used.
       
       fatal: False
       
       default values:
          
-         - laboratory['xios_version']
+         - laboratory[xios_version]
          - 2
       
       num type: 'string'
       
    zg_field_name
       
-      TODO
+      Name of the geopotential height field name to be used to compute height over orog fields.
       
       fatal: False
       
       default values:
          
-         - laboratory['zg_field_name']
+         - laboratory[zg_field_name]
          - 'zg'
       
       num type: 'string'
@@ -1130,61 +1098,61 @@ Common values
    
    HDL
       
-      TODO
+      HDL associated with the project.
       
       fatal: False
       
       default values:
          
-         - simulation['HDL']
-         - laboratory['HDL']
+         - simulation[HDL]
+         - laboratory[HDL]
          - '21.14100'
       
       num type: 'string'
       
    activity_id
       
-      TODO
+      MIP(s) name(s).
       
       fatal: False
       
       default values:
          
-         - simulation['activity_id']
-         - laboratory['activity_id']
-         - internal['CV_experiment']['activity_id']
+         - simulation[activity_id]
+         - laboratory[activity_id]
+         - internal[CV_experiment][activity_id]
       
       num type: 'string'
       
    branch_method
       
-      TODO
+      Branching procedure.
       
       fatal: False
       
       default values:
          
-         - simulation['branch_method']
+         - simulation[branch_method]
          - 'standard'
       
       num type: 'string'
       
    branch_month_in_parent
       
-      TODO
+      Branch month in parent simulation with respect to its time axis.
       
       fatal: False
       
       default values:
          
-         - simulation['branch_month_in_parent']
+         - simulation[branch_month_in_parent]
          - '1'
       
       num type: 'string'
       
    branch_year_in_parent
       
-      TODO
+      Branch year in parent simulation with respect to its time axis.
       
       fatal: False
       
@@ -1198,514 +1166,493 @@ Common values
          - 'N/A'
       
       cases:
+         Case:
          
-         - CaseSettings({'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['experiment_id'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'eq', 'reference_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['branching'], 'fmt': None, 'src': None, 'func': None})]}), ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'simulation', 'keys': ['branch_year_in_parent'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'eq', 'reference_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['branching', ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['experiment_id'], 'fmt': None, 'src': None, 'func': None}), 1], 'fmt': None, 'src': None, 'func': None})]})], 'value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'simulation', 'keys': ['branch_year_in_parent'], 'fmt': None, 'src': None, 'func': None})})
-         - CaseSettings({'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['experiment_id'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'neq', 'reference_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['branching'], 'fmt': None, 'src': None, 'func': None})]})], 'value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'simulation', 'keys': ['branch_year_in_parent'], 'fmt': None, 'src': None, 'func': None})})
+            conditions:
+                  Condition:
+                  
+                     check value: internal[experiment_id]
+                     
+                     check to do: 'eq'
+                     
+                     reference values: internal[branching]
+                     
+                  Condition:
+                  
+                     check value: simulation[branch_year_in_parent]
+                     
+                     check to do: 'eq'
+                     
+                     reference values: internal[branching][internal[experiment_id]][1]
+                     
+            
+            value: simulation[branch_year_in_parent]
+            
+         Case:
+         
+            conditions:
+                  Condition:
+                  
+                     check value: internal[experiment_id]
+                     
+                     check to do: 'neq'
+                     
+                     reference values: internal[branching]
+                     
+            
+            value: simulation[branch_year_in_parent]
+            
       
       num type: 'string'
       
    comment_lab
       
-      TODO
+      A character string containing additional information about the models from laboratory settings. Will be complemented with the experiment's specific comment string.
       
       fatal: False
       
       default values:
          
-         - laboratory['comment']
+         - laboratory[comment]
          - ''
       
       num type: 'string'
       
    comment_sim
       
-      TODO
+      A character string containing additional information about the models from simulation settings. Will be complemented with the experiment's specific comment string.
       
       fatal: False
       
       default values:
          
-         - simulation['comment']
+         - simulation[comment]
          - ''
       
       num type: 'string'
       
    compression_level
       
-      TODO
+      The compression level to be applied to NetCDF output files.
       
       fatal: False
       
       default values:
          
-         - laboratory['compression_level']
+         - laboratory[compression_level]
          - '0'
       
       num type: 'string'
       
    contact
       
-      TODO
+      Email address of the data producer.
       
       fatal: False
       
       default values:
          
-         - simulation['contact']
-         - laboratory['contact']
+         - simulation[contact]
+         - laboratory[contact]
          - 'None'
       
       num type: 'string'
       
    convention_str
       
-      TODO
+      Version of the conventions used.
       
       fatal: False
       
-      default values:
-         
-         - ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'config', 'keys': ['conventions'], 'fmt': None, 'src': None, 'func': None})
+      default values: dr2xml.config.conventions
       
       num type: 'string'
       
    conventions_version
       
-      TODO
+      Version of the conventions used.
       
       fatal: False
       
-      default values:
-         
-         - ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'config', 'keys': ['CMIP6_conventions_version'], 'fmt': None, 'src': None, 'func': None})
+      default values: dr2xml.config.CMIP6_conventions_version
       
       num type: 'string'
       
    data_specs_version
       
-      TODO
+      Version of the data request used.
       
       fatal: True
       
-      default values:
-         
-         - data_request.get_version()
+      default values: data_request.get_version()
       
       num type: 'string'
       
    date_range
       
-      TODO
+      Date range format to be used in file definition names.
       
       fatal: False
       
-      default values:
-         
-         - '%start_date%-%end_date%'
+      default values: '%start_date%-%end_date%'
       
       num type: 'string'
       
    description
       
-      TODO
+      Description of the simulation.
       
       fatal: False
       
       default values:
          
-         - simulation['description']
-         - laboratory['description']
+         - simulation[description]
+         - laboratory[description]
       
       num type: 'string'
       
    dr2xml_version
       
-      TODO
+      Version of dr2xml used.
       
       fatal: False
       
-      default values:
-         
-         - ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'config', 'keys': ['version'], 'fmt': None, 'src': None, 'func': None})
+      default values: dr2xml.config.version
       
       num type: 'string'
       
    experiment
       
-      TODO
+      Name of the experiment.
       
       fatal: False
       
-      default values:
-         
-         - simulation['experiment']
+      default values: simulation[experiment]
       
       num type: 'string'
       
    expid_in_filename
       
-      TODO
+      Experiment label to use in file names and attribute.
       
       fatal: False
       
       default values:
          
-         - simulation['expid_in_filename']
-         - internal['experiment_id']
+         - simulation[expid_in_filename]
+         - internal[experiment_id]
       
-      forbidden patterns:
-         
-         - '.*_.*'
+      forbidden patterns: '.*_.*'
       
       num type: 'string'
       
    forcing_index
       
-      TODO
+      Index for variant of forcing.
       
       fatal: False
       
       default values:
          
-         - simulation['forcing_index']
+         - simulation[forcing_index]
          - '1'
       
       num type: 'string'
       
    history
       
-      TODO
+      In case of replacement of previously produced data, description of any changes in the production chain.
       
       fatal: False
       
       default values:
          
-         - simulation['history']
+         - simulation[history]
          - 'none'
       
       num type: 'string'
       
    info_url
       
-      TODO
+      Location of documentation.
       
       fatal: False
       
-      default values:
-         
-         - laboratory['info_url']
+      default values: laboratory[info_url]
       
       num type: 'string'
       
    initialization_index
       
-      TODO
+      Index for variant of initialization method.
       
       fatal: False
       
       default values:
          
-         - simulation['initialization_index']
+         - simulation[initialization_index]
          - '1'
       
       num type: 'string'
       
    institution
       
-      TODO
+      Full name of the institution of the data producer.
       
       fatal: False
       
       default values:
          
-         - laboratory['institution']
+         - laboratory[institution]
          - ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'json', 'keys': ['institution_id', ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['institution_id'], 'fmt': None, 'src': None, 'func': None})], 'fmt': None, 'src': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'combine', 'keys': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'dict', 'keys': ['cvspath'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['project'], 'fmt': None, 'src': None, 'func': None})], 'fmt': '{}{}_institution_id.json', 'src': None, 'func': None}), 'func': None})
       
       num type: 'string'
       
    license
       
-      TODO
+      File where the license associated with the produced output files can be found.
       
       fatal: False
       
-      default values:
-         
-         - ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'json', 'keys': ['license', 0], 'fmt': None, 'src': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'combine', 'keys': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'dict', 'keys': ['cvspath'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['project'], 'fmt': None, 'src': None, 'func': None})], 'fmt': '{}{}_license.json', 'src': None, 'func': None}), 'func': None})
+      default values: ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'json', 'keys': ['license', 0], 'fmt': None, 'src': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'combine', 'keys': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'dict', 'keys': ['cvspath'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['project'], 'fmt': None, 'src': None, 'func': None})], 'fmt': '{}{}_license.json', 'src': None, 'func': None}), 'func': None})
       
       num type: 'string'
       
    list_perso_dev_file
       
-      TODO
+      Name of the file which will contain the list of the patterns of perso and dev output file definition.
       
       fatal: False
       
-      default values:
-         
-         - 'dr2xml_list_perso_and_dev_file_names'
+      default values: 'dr2xml_list_perso_and_dev_file_names'
       
       num type: 'string'
       
    member_id
       
-      TODO
+      Id of the member done.
       
       fatal: False
       
       default values:
          
-         - ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'combine', 'keys': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['sub_experiment_id'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['variant_label'], 'fmt': None, 'src': None, 'func': None})], 'fmt': '{}-{}', 'src': None, 'func': None})
-         - common['variant_label']
+         - '{}-{}'.format(common[sub_experiment_id], common[variant_label])
+         - common[variant_label]
       
-      forbidden patterns:
-         
-         - 'none-.*'
+      forbidden patterns: 'none-.*'
       
       num type: 'string'
       
    mip_era
       
-      TODO
+      MIP associated with the simulation.
       
       fatal: False
       
       default values:
          
-         - simulation['mip_era']
-         - laboratory['mip_era']
+         - simulation[mip_era]
+         - laboratory[mip_era]
       
       num type: 'string'
       
    output_level
       
-      TODO
+      We can control the max output level set for all output files.
       
       fatal: False
       
       default values:
          
-         - laboratory['output_level']
+         - laboratory[output_level]
          - '10'
       
       num type: 'string'
       
    parent_activity_id
       
-      TODO
+      Description of sub-experiment.
       
       fatal: False
       
       default values:
          
-         - simulation['parent_activity_id']
-         - simulation['activity_id']
-         - laboratory['parent_activity_id']
-         - laboratory['activity_id']
-         - internal['CV_experiment']['parent_activity_id']
+         - simulation[parent_activity_id]
+         - simulation[activity_id]
+         - laboratory[parent_activity_id]
+         - laboratory[activity_id]
+         - internal[CV_experiment][parent_activity_id]
       
       num type: 'string'
       
    parent_experiment_id
       
-      TODO
+      Parent experiment identifier.
       
       fatal: False
       
       default values:
          
-         - simulation['parent_experiment_id']
-         - laboratory['parent_experiment_id']
-         - internal['CV_experiment']['parent_experiment_id']
+         - simulation[parent_experiment_id]
+         - laboratory[parent_experiment_id]
+         - internal[CV_experiment][parent_experiment_id]
       
       num type: 'string'
       
    parent_mip_era
       
-      TODO
+      Parent’s associated MIP cycle.
       
       fatal: False
       
-      default values:
-         
-         - simulation['parent_mip_era']
+      default values: simulation[parent_mip_era]
       
       num type: 'string'
       
    parent_source_id
       
-      TODO
+      Parent model identifier.
       
       fatal: False
       
-      default values:
-         
-         - simulation['parent_source_id']
+      default values: simulation[parent_source_id]
       
       num type: 'string'
       
    parent_time_ref_year
       
-      TODO
+      Reference year in parent simulation.
       
       fatal: False
       
       default values:
          
-         - simulation['parent_time_ref_year']
+         - simulation[parent_time_ref_year]
          - '1850'
       
       num type: 'string'
       
    parent_time_units
       
-      TODO
+      Time units used in parent.
       
       fatal: False
       
-      default values:
-         
-         - simulation['parent_time_units']
+      default values: simulation[parent_time_units]
       
       num type: 'string'
       
    parent_variant_label
       
-      TODO
+      Parent variant label.
       
       fatal: False
       
-      default values:
-         
-         - simulation['parent_variant_label']
+      default values: simulation[parent_variant_label]
       
       num type: 'string'
       
    physics_index
       
-      TODO
+      Index for model physics variant.
       
       fatal: False
       
       default values:
          
-         - simulation['physics_index']
+         - simulation[physics_index]
          - '1'
       
       num type: 'string'
       
    prefix
       
-      TODO
+      Prefix to be used for each file definition.
       
       fatal: True
       
-      default values:
-         
-         - dict['prefix']
+      default values: dict[prefix]
       
       num type: 'string'
       
    references
       
-      TODO
+      References associated with the simulation.
       
       fatal: False
       
-      default values:
-         
-         - laboratory['references']
-      
-      num type: 'string'
-      
-   root
-      
-      TODO
-      
-      fatal: True
-      
-      default values:
-         
-         - dict['root']
+      default values: laboratory[references]
       
       num type: 'string'
       
    source
       
-      TODO
+      Name of the model.
       
       fatal: False
       
       default values:
          
-         - ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'json', 'keys': ['source_id', ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['source_id'], 'fmt': None, 'src': None, 'func': None})], 'fmt': None, 'src': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'combine', 'keys': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'dict', 'keys': ['cvspath'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['project'], 'fmt': None, 'src': None, 'func': None})], 'fmt': '{}{}_source_id.json', 'src': None, 'func': None}), 'func': FunctionSettings({'func': <function make_source_string at 0x7f5c343b0700>, 'options': {'source_id': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['source_id'], 'fmt': None, 'src': None, 'func': None})}})})
-         - laboratory['source']
+         - ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'json', 'keys': ['source_id', ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['source_id'], 'fmt': None, 'src': None, 'func': None})], 'fmt': None, 'src': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'combine', 'keys': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'dict', 'keys': ['cvspath'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['project'], 'fmt': None, 'src': None, 'func': None})], 'fmt': '{}{}_source_id.json', 'src': None, 'func': None}), 'func': FunctionSettings({'func': <function make_source_string at 0x7f01718929d0>, 'options': {'source_id': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['source_id'], 'fmt': None, 'src': None, 'func': None})}})})
+         - laboratory[source]
       
       num type: 'string'
       
    sub_experiment
       
-      TODO
+      Sub-experiment name.
       
       fatal: False
       
       default values:
          
-         - simulation['sub_experiment']
+         - simulation[sub_experiment]
          - 'none'
       
       num type: 'string'
       
    sub_experiment_id
       
-      TODO
+      Sub-experiment identifier.
       
       fatal: False
       
       default values:
          
-         - simulation['sub_experiment_id']
+         - simulation[sub_experiment_id]
          - 'none'
       
       num type: 'string'
       
    variant_info
       
-      TODO
+      It is recommended that some description be included to help identify major differences among variants, but care should be taken to record correct information.  dr2xml will add in all cases: 'Information provided by this attribute may in some cases be flawed. Users can find more comprehensive and up-to-date documentation via the further_info_url global attribute.'
       
       fatal: False
       
-      default values:
-         
-         - simulation['variant_info']
+      default values: simulation[variant_info]
       
-      skip values:
-         
-         - ''
+      skip values: ''
       
       num type: 'string'
       
    variant_label
       
-      TODO
+      Label of the variant done.
       
       fatal: False
       
-      default values:
-         
-         - ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'combine', 'keys': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['realization_index'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['initialization_index'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['physics_index'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['forcing_index'], 'fmt': None, 'src': None, 'func': None})], 'fmt': 'r{}i{}p{}f{}', 'src': None, 'func': None})
+      default values: 'r{}i{}p{}f{}'.format(internal[realization_index], common[initialization_index], common[physics_index], common[forcing_index])
       
       num type: 'string'
       
    year
       
-      TODO
+      Year associated with the launch of dr2xml.
       
       fatal: True
       
-      default values:
-         
-         - dict['year']
+      default values: dict[year]
       
       num type: 'string'
       
@@ -1714,28 +1661,2565 @@ Project settings
 .. glossary::
    :sorted:
    
-TagSettings({'dict_default': {'attrs_list': [], 'attrs_constraints': {'axis_type': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'axis_type', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'axis_type', 'help': 'TODO'}), 'standard_name': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': <class 'str'>, 'corrections': {}, 'output_key': 'standard_name', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'standard_name', 'help': 'TODO'}), 'prec': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': ['2', '4', '8'], 'authorized_types': [], 'corrections': {'': '4', 'float': '4', 'real': '4', 'double': '8', 'integer': '2', 'int': '2'}, 'output_key': 'prec', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'prec', 'help': 'TODO'}), 'unit': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'unit', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'unit', 'help': 'TODO'}), 'bounds': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'bounds', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'bounds', 'help': 'TODO'}), 'dim_name': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'dim_name', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'dim_name', 'help': 'TODO'}), 'label': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'label', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'label', 'help': 'TODO'}), 'value': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'value', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'value', 'help': 'TODO'})}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}}, 'attrs_list': ['id', 'positive', 'n_glo', 'value', 'axis_ref', 'name', 'standard_name', 'long_name', 'prec', 'unit', 'value', 'bounds', 'dim_name', 'label', 'axis_type'], 'attrs_constraints': {'axis_type': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'axis_type', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'axis_type', 'help': 'TODO'}), 'standard_name': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': <class 'str'>, 'corrections': {}, 'output_key': 'standard_name', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'standard_name', 'help': 'TODO'}), 'prec': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': ['2', '4', '8'], 'authorized_types': [], 'corrections': {'': '4', 'float': '4', 'real': '4', 'double': '8', 'integer': '2', 'int': '2'}, 'output_key': 'prec', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'prec', 'help': 'TODO'}), 'unit': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'unit', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'unit', 'help': 'TODO'}), 'bounds': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'bounds', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'bounds', 'help': 'TODO'}), 'dim_name': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'dim_name', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'dim_name', 'help': 'TODO'}), 'label': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'label', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'label', 'help': 'TODO'}), 'value': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'value', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'value', 'help': 'TODO'})}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}})
-TagSettings({'dict_default': {'attrs_list': [], 'attrs_constraints': {}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}}, 'attrs_list': [], 'attrs_constraints': {}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}})
-TagSettings({'dict_default': {'attrs_list': [], 'attrs_constraints': {'prec': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': ['8'], 'cases': [], 'authorized_values': ['2', '4', '8'], 'authorized_types': [], 'corrections': {'': '4', 'float': '4', 'real': '4', 'double': '8', 'integer': '2', 'int': '2'}, 'output_key': 'prec', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'prec', 'help': 'TODO'})}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}}, 'attrs_list': ['prec'], 'attrs_constraints': {'prec': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': ['8'], 'cases': [], 'authorized_values': ['2', '4', '8'], 'authorized_types': [], 'corrections': {'': '4', 'float': '4', 'real': '4', 'double': '8', 'integer': '2', 'int': '2'}, 'output_key': 'prec', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'prec', 'help': 'TODO'})}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}})
-TagSettings({'dict_default': {'attrs_list': [], 'attrs_constraints': {'id': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['context'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'id', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'id', 'help': 'TODO'})}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {'DR_version': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['data_specs_version'], 'fmt': 'CMIP6 Data Request version {}', 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'DR_version', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'DR_version', 'help': 'TODO'}), 'dr2xml_version': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['dr2xml_version'], 'fmt': 'dr2xml version {}', 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'dr2xml_version', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'dr2xml_version', 'help': 'TODO'}), 'lab_settings': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'laboratory', 'keys': [], 'fmt': 'Lab_and_model settings\n{}', 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'lab_settings', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'lab_settings', 'help': 'TODO'}), 'simulation_settings': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'simulation', 'keys': [], 'fmt': 'Simulation settings\n{}', 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'simulation_settings', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'simulation_settings', 'help': 'TODO'}), 'year': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['year'], 'fmt': 'Year processed {}', 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'year', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'year', 'help': 'TODO'}), 'CV_version': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': ['CMIP6-CV version ??'], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'CV_version', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'CV_version', 'help': 'TODO'}), 'conventions_version': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['conventions_version'], 'fmt': 'CMIP6_conventions_version {}', 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'conventions_version', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'conventions_version', 'help': 'TODO'})}}, 'attrs_list': ['id'], 'attrs_constraints': {'id': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['context'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'id', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'id', 'help': 'TODO'})}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': ['DR_version', 'CV_version', 'conventions_version', 'dr2xml_version', 'lab_settings', 'simulation_settings', 'year'], 'comments_constraints': {'DR_version': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['data_specs_version'], 'fmt': 'CMIP6 Data Request version {}', 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'DR_version', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'DR_version', 'help': 'TODO'}), 'dr2xml_version': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['dr2xml_version'], 'fmt': 'dr2xml version {}', 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'dr2xml_version', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'dr2xml_version', 'help': 'TODO'}), 'lab_settings': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'laboratory', 'keys': [], 'fmt': 'Lab_and_model settings\n{}', 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'lab_settings', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'lab_settings', 'help': 'TODO'}), 'simulation_settings': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'simulation', 'keys': [], 'fmt': 'Simulation settings\n{}', 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'simulation_settings', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'simulation_settings', 'help': 'TODO'}), 'year': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['year'], 'fmt': 'Year processed {}', 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'year', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'year', 'help': 'TODO'}), 'CV_version': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': ['CMIP6-CV version ??'], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'CV_version', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'CV_version', 'help': 'TODO'}), 'conventions_version': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['conventions_version'], 'fmt': 'CMIP6_conventions_version {}', 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'conventions_version', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'conventions_version', 'help': 'TODO'})}})
-TagSettings({'dict_default': {'attrs_list': [], 'attrs_constraints': {}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}}, 'attrs_list': ['id', 'ni_glo', 'nj_glo', 'type', 'prec', 'lat_name', 'lon_name', 'dim_i_name', 'domain_ref'], 'attrs_constraints': {}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}})
-TagSettings({'dict_default': {'attrs_list': [], 'attrs_constraints': {}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}}, 'attrs_list': [], 'attrs_constraints': {}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}})
-TagSettings({'dict_default': {'attrs_list': [], 'attrs_constraints': {'prec': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': ['8'], 'cases': [], 'authorized_values': ['2', '4', '8'], 'authorized_types': [], 'corrections': {'': '4', 'float': '4', 'real': '4', 'double': '8', 'integer': '2', 'int': '2'}, 'output_key': 'prec', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'prec', 'help': 'TODO'})}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}}, 'attrs_list': ['prec'], 'attrs_constraints': {'prec': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': ['8'], 'cases': [], 'authorized_values': ['2', '4', '8'], 'authorized_types': [], 'corrections': {'': '4', 'float': '4', 'real': '4', 'double': '8', 'integer': '2', 'int': '2'}, 'output_key': 'prec', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'prec', 'help': 'TODO'})}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}})
-TagSettings({'dict_default': {'attrs_list': [], 'attrs_constraints': {}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}}, 'attrs_list': [], 'attrs_constraints': {}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}})
-TagSettings({'dict_default': {'attrs_list': [], 'attrs_constraints': {}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}}, 'attrs_list': ['id', 'field_ref', 'name', 'freq_op', 'freq_offset', 'grid_ref', 'long_name', 'standard_name', 'unit', 'operation', 'detect_missing_value', 'prec'], 'attrs_constraints': {}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}})
-TagSettings({'dict_default': {'attrs_list': [], 'attrs_constraints': {}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}}, 'attrs_list': [], 'attrs_constraints': {}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}})
-TagSettings({'dict_default': {'attrs_list': [], 'attrs_constraints': {}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}}, 'attrs_list': ['freq_op', 'freq_offset'], 'attrs_constraints': {}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}})
-TagSettings({'dict_default': {'attrs_list': [], 'attrs_constraints': {'name': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['mipVarLabel'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'name', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'name', 'help': 'TODO'}), 'grid_ref': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'grid_ref', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'grid_ref', 'help': 'TODO'}), 'freq_offset': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'freq_offset', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'freq_offset', 'help': 'TODO'}), 'freq_op': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'freq_op', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'freq_op', 'help': 'TODO'}), 'expr': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'expr', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'expr', 'help': 'TODO'}), 'cell_methods_mode': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': ['overwrite'], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'cell_methods_mode', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'cell_methods_mode', 'help': 'TODO'}), 'cell_methods': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['cell_methods'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'cell_methods', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'cell_methods', 'help': 'TODO'}), 'prec': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['prec'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': ['2', '4', '8'], 'authorized_types': [], 'corrections': {'': '4', 'float': '4', 'real': '4', 'double': '8', 'integer': '2', 'int': '2'}, 'output_key': 'prec', 'num_type': 'string', 'is_default': True, 'fatal': True, 'key': 'prec', 'help': 'TODO'}), 'default_value': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['prec'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': ['0', '1.e+20'], 'authorized_types': [], 'corrections': {'': '1.e+20', 'float': '1.e+20', 'real': '1.e+20', 'double': '1.e+20', 'integer': '0', 'int': '0'}, 'output_key': 'default_value', 'num_type': 'string', 'is_default': True, 'fatal': True, 'key': 'default_value', 'help': 'TODO'}), 'detect_missing_value': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': ['True'], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'detect_missing_value', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'detect_missing_value', 'help': 'TODO'})}, 'vars_list': [], 'vars_constraints': {'standard_name': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['stdname'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'standard_name', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'standard_name', 'help': 'TODO'}), 'description': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [''], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['description'], 'fmt': None, 'src': None, 'func': None}), 'None'], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'description', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'description', 'help': 'TODO'}), 'long_name': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['long_name'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'long_name', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'long_name', 'help': 'TODO'}), 'history': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['history'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'history', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'history', 'help': 'TODO'}), 'comment': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'simulation', 'keys': ['comments', ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['label'], 'fmt': None, 'src': None, 'func': None})], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'laboratory', 'keys': ['comments', ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['label'], 'fmt': None, 'src': None, 'func': None})], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'comment', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'comment', 'help': 'TODO'}), 'positive': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['positive'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'positive', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'positive', 'help': 'TODO'}), 'detect_missing_value': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': ['none'], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'detect_missing_value', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'detect_missing_value', 'help': 'TODO'}), 'units': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['units'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'units', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'units', 'help': 'TODO'}), 'cell_methods': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['cell_methods'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'cell_methods', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'cell_methods', 'help': 'TODO'}), 'cell_measures': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['cell_measures'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'cell_measures', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'cell_measures', 'help': 'TODO'}), 'flag_meanings': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['flag_meanings'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'flag_meanings', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'flag_meanings', 'help': 'TODO'}), 'flag_values': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['flag_values'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'flag_values', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'flag_values', 'help': 'TODO'}), 'interval_operation': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'dict', 'keys': ['operation'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'neq', 'reference_values': ['once']})], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'interval_operation', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'interval_operation', 'help': 'TODO'})}, 'comments_list': [], 'comments_constraints': {}}, 'attrs_list': ['field_ref', 'name', 'grid_ref', 'freq_offset', 'detect_missing_value', 'default_value', 'prec', 'cell_methods', 'cell_methods_mode', 'operation', 'freq_op', 'expr'], 'attrs_constraints': {'name': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['mipVarLabel'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'name', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'name', 'help': 'TODO'}), 'grid_ref': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'grid_ref', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'grid_ref', 'help': 'TODO'}), 'freq_offset': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'freq_offset', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'freq_offset', 'help': 'TODO'}), 'freq_op': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'freq_op', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'freq_op', 'help': 'TODO'}), 'expr': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'expr', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'expr', 'help': 'TODO'}), 'cell_methods_mode': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': ['overwrite'], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'cell_methods_mode', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'cell_methods_mode', 'help': 'TODO'}), 'cell_methods': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['cell_methods'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'cell_methods', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'cell_methods', 'help': 'TODO'}), 'prec': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['prec'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': ['2', '4', '8'], 'authorized_types': [], 'corrections': {'': '4', 'float': '4', 'real': '4', 'double': '8', 'integer': '2', 'int': '2'}, 'output_key': 'prec', 'num_type': 'string', 'is_default': True, 'fatal': True, 'key': 'prec', 'help': 'TODO'}), 'default_value': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['prec'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': ['0', '1.e+20'], 'authorized_types': [], 'corrections': {'': '1.e+20', 'float': '1.e+20', 'real': '1.e+20', 'double': '1.e+20', 'integer': '0', 'int': '0'}, 'output_key': 'default_value', 'num_type': 'string', 'is_default': True, 'fatal': True, 'key': 'default_value', 'help': 'TODO'}), 'detect_missing_value': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': ['True'], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'detect_missing_value', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'detect_missing_value', 'help': 'TODO'})}, 'vars_list': ['comment', 'standard_name', 'description', 'long_name', 'positive', 'history', 'units', 'cell_methods', 'cell_measures', 'flag_meanings', 'flag_values', 'interval_operation'], 'vars_constraints': {'standard_name': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['stdname'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'standard_name', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'standard_name', 'help': 'TODO'}), 'description': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [''], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['description'], 'fmt': None, 'src': None, 'func': None}), 'None'], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'description', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'description', 'help': 'TODO'}), 'long_name': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['long_name'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'long_name', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'long_name', 'help': 'TODO'}), 'history': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['history'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'history', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'history', 'help': 'TODO'}), 'comment': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'simulation', 'keys': ['comments', ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['label'], 'fmt': None, 'src': None, 'func': None})], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'laboratory', 'keys': ['comments', ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['label'], 'fmt': None, 'src': None, 'func': None})], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'comment', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'comment', 'help': 'TODO'}), 'positive': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['positive'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'positive', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'positive', 'help': 'TODO'}), 'detect_missing_value': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': ['none'], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'detect_missing_value', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'detect_missing_value', 'help': 'TODO'}), 'units': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['units'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'units', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'units', 'help': 'TODO'}), 'cell_methods': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['cell_methods'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'cell_methods', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'cell_methods', 'help': 'TODO'}), 'cell_measures': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['cell_measures'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'cell_measures', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'cell_measures', 'help': 'TODO'}), 'flag_meanings': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['flag_meanings'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'flag_meanings', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'flag_meanings', 'help': 'TODO'}), 'flag_values': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['flag_values'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'flag_values', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'flag_values', 'help': 'TODO'}), 'interval_operation': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'dict', 'keys': ['operation'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'neq', 'reference_values': ['once']})], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'interval_operation', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'interval_operation', 'help': 'TODO'})}, 'comments_list': [], 'comments_constraints': {}})
-TagSettings({'dict_default': {'attrs_list': [], 'attrs_constraints': {}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}}, 'attrs_list': ['id', 'name', 'mode', 'output_freq', 'enabled'], 'attrs_constraints': {}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}})
-TagSettings({'dict_default': {'attrs_list': [], 'attrs_constraints': {'type': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': ['one_file'], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'type', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'type', 'help': 'TODO'}), 'enabled': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': ['true'], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'enabled', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'enabled', 'help': 'TODO'})}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}}, 'attrs_list': ['type', 'enabled'], 'attrs_constraints': {'type': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': ['one_file'], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'type', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'type', 'help': 'TODO'}), 'enabled': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': ['true'], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'enabled', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'enabled', 'help': 'TODO'})}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}})
-TagSettings({'dict_default': {'attrs_list': [], 'attrs_constraints': {'id': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'combine', 'keys': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['label'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'dict', 'keys': ['table_id'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'dict', 'keys': ['grid_label'], 'fmt': None, 'src': None, 'func': None})], 'fmt': '{}_{}_{}', 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'id', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'id', 'help': 'TODO'}), 'split_freq': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['frequency'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'nmatch', 'reference_values': ['.*fx.*']})], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'split_freq', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'split_freq', 'help': 'TODO'}), 'split_freq_format': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['frequency'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'nmatch', 'reference_values': ['.*fx.*']})], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'split_freq_format', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'split_freq_format', 'help': 'TODO'}), 'split_start_offset': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', 'False', None, False], 'forbidden_patterns': [], 'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['frequency'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'nmatch', 'reference_values': ['.*fx.*']})], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'split_start_offset', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'split_start_offset', 'help': 'TODO'}), 'split_end_offset': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', 'False', None, False], 'forbidden_patterns': [], 'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['frequency'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'nmatch', 'reference_values': ['.*fx.*']})], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'split_end_offset', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'split_end_offset', 'help': 'TODO'}), 'split_last_date': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['frequency'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'nmatch', 'reference_values': ['.*fx.*']})], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'split_last_date', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'split_last_date', 'help': 'TODO'}), 'append': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': ['true'], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'append', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'append', 'help': 'TODO'}), 'time_units': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': ['days'], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'time_units', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'time_units', 'help': 'TODO'}), 'time_counter_name': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': ['time'], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'time_counter_name', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'time_counter_name', 'help': 'TODO'}), 'time_counter': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': ['exclusive'], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'time_counter', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'time_counter', 'help': 'TODO'}), 'time_stamp_name': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': ['creation_date'], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'time_stamp_name', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'time_stamp_name', 'help': 'TODO'}), 'time_stamp_format': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': ['%Y-%m-%dT%H:%M:%SZ'], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'time_stamp_format', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'time_stamp_format', 'help': 'TODO'}), 'uuid_name': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': ['tracking_id'], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'uuid_name', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'uuid_name', 'help': 'TODO'}), 'uuid_format': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['None', '', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['HDL'], 'fmt': 'hdl:{}/%uuid%', 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'uuid_format', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'uuid_format', 'help': 'TODO'}), 'convention_str': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['convention_str'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'convention_str', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'convention_str', 'help': 'TODO'}), 'output_level': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['None', '', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['output_level'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'output_level', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'output_level', 'help': 'TODO'}), 'compression_level': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['None', '', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['compression_level'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'compression_level', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'compression_level', 'help': 'TODO'}), 'name': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': FunctionSettings({'func': <function build_filename at 0x7f5c343b0670>, 'options': {'frequency': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['frequency'], 'fmt': None, 'src': None, 'func': None}), 'prefix': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['prefix'], 'fmt': None, 'src': None, 'func': None}), 'table': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'dict', 'keys': ['table_id'], 'fmt': None, 'src': None, 'func': None}), 'source_id': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['source_id'], 'fmt': None, 'src': None, 'func': None}), 'expid_in_filename': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['expid_in_filename'], 'fmt': None, 'src': None, 'func': None}), 'member_id': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['member_id'], 'fmt': None, 'src': None, 'func': None}), 'grid_label': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'dict', 'keys': ['grid_label'], 'fmt': None, 'src': None, 'func': None}), 'date_range': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['date_range'], 'fmt': None, 'src': None, 'func': None}), 'var_type': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['type'], 'fmt': None, 'src': None, 'func': None}), 'list_perso_dev_file': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['list_perso_dev_file'], 'fmt': None, 'src': None, 'func': None}), 'label': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['label'], 'fmt': None, 'src': None, 'func': None}), 'mipVarLabel': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['mipVarLabel'], 'fmt': None, 'src': None, 'func': None}), 'use_cmorvar': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['use_cmorvar_label_in_filename'], 'fmt': None, 'src': None, 'func': None})}})})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'name', 'num_type': 'string', 'is_default': True, 'fatal': True, 'key': 'name', 'help': 'TODO'})}, 'vars_list': [], 'vars_constraints': {'contact': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['None', '', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['contact'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'contact', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'contact', 'help': 'TODO'}), 'data_specs_version': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['data_specs_version'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'data_specs_version', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'data_specs_version', 'help': 'TODO'}), 'dr2xml_version': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['dr2xml_version'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'dr2xml_version', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'dr2xml_version', 'help': 'TODO'}), 'expid_in_filename': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['expid_in_filename'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'experiment_id', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'expid_in_filename', 'help': 'TODO'}), 'description': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['experiment_id'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'eq', 'reference_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['expid_in_filename'], 'fmt': None, 'src': None, 'func': None})]})], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['description'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['CV_experiment', 'description'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'description', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'description', 'help': 'TODO'}), 'title_desc': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['experiment_id'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'eq', 'reference_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['expid_in_filename'], 'fmt': None, 'src': None, 'func': None})]})], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['description'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['CV_experiment', 'description'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'title', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'title_desc', 'help': 'TODO'}), 'experiment': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['experiment_id'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'eq', 'reference_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['expid_in_filename'], 'fmt': None, 'src': None, 'func': None})]})], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['experiment'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['CV_experiment', 'experiment'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'experiment', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'experiment', 'help': 'TODO'}), 'external_variables': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [''], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['cell_measures'], 'fmt': None, 'src': None, 'func': FunctionSettings({'func': <function build_external_variables at 0x7f5c343b04c0>, 'options': {}})})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'external_variables', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'external_variables', 'help': 'TODO'}), 'forcing_index': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['forcing_index'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'forcing_index', 'num_type': 'int', 'is_default': True, 'fatal': False, 'key': 'forcing_index', 'help': 'TODO'}), 'further_info_url': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'laboratory', 'keys': ['mip_era'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'eq', 'reference_values': []}), ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'simulation', 'keys': ['mip_era'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'eq', 'reference_values': []})], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'combine', 'keys': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['mip_era'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['institution_id'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['source_id'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['expid_in_filename'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['sub_experiment_id'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['variant_label'], 'fmt': None, 'src': None, 'func': None})], 'fmt': 'https://furtherinfo.es-doc.org/{}.{}.{}.{}.{}.{}', 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'further_info_url', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'further_info_url', 'help': 'TODO'}), 'history': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['history'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'history', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'history', 'help': 'TODO'}), 'initialization_index': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['initialization_index'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'initialization_index', 'num_type': 'int', 'is_default': True, 'fatal': False, 'key': 'initialization_index', 'help': 'TODO'}), 'institution': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['institution'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'institution', 'num_type': 'string', 'is_default': True, 'fatal': True, 'key': 'institution', 'help': 'TODO'}), 'institution_id': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['institution_id'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'institution_id', 'num_type': 'string', 'is_default': True, 'fatal': True, 'key': 'institution_id', 'help': 'TODO'}), 'mip_era': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['mip_era'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['mip_era'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'mip_era', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'mip_era', 'help': 'TODO'}), 'parent_experiment_id': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['parent_experiment_id'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'neq', 'reference_values': ['no parent', '', 'None']})], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['parent_experiment_id'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'parent_experiment_id', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'parent_experiment_id', 'help': 'TODO'}), 'parent_mip_era': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['parent_experiment_id'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'neq', 'reference_values': ['no parent', '', 'None']})], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['parent_mip_era'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['mip_era'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['mip_era'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'parent_mip_era', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'parent_mip_era', 'help': 'TODO'}), 'parent_activity_id': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['parent_experiment_id'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'neq', 'reference_values': ['no parent', '', 'None']})], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['parent_activity_id'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'parent_activity_id', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'parent_activity_id', 'help': 'TODO'}), 'parent_source_id': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['parent_experiment_id'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'neq', 'reference_values': ['no parent', '', 'None']})], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['parent_source_id'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['source_id'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'parent_source_id', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'parent_source_id', 'help': 'TODO'}), 'parent_time_units': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['parent_experiment_id'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'neq', 'reference_values': ['no parent', '', 'None']})], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['parent_time_units'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['parent_time_ref_year'], 'fmt': 'days since {}-01-01 00:00:00', 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'parent_time_units', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'parent_time_units', 'help': 'TODO'}), 'parent_variant_label': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['parent_experiment_id'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'neq', 'reference_values': ['no parent', '', 'None']})], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['parent_variant_label'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['variant_label'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'parent_variant_label', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'parent_variant_label', 'help': 'TODO'}), 'branch_time_in_parent': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['parent_experiment_id'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'neq', 'reference_values': ['no parent', '', 'None']})], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': FunctionSettings({'func': <function compute_nb_days at 0x7f5c343b0430>, 'options': {'year_ref': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['parent_time_ref_year'], 'fmt': None, 'src': None, 'func': None}), 'year_branch': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['branch_year_in_parent'], 'fmt': None, 'src': None, 'func': None}), 'month_branch': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['branch_month_in_parent'], 'fmt': None, 'src': None, 'func': None})}})}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'simulation', 'keys': ['branch_time_in_parent'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'branch_time_in_parent', 'num_type': 'double', 'is_default': True, 'fatal': False, 'key': 'branch_time_in_parent', 'help': 'TODO'}), 'branch_time_in_child': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['parent_experiment_id'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'neq', 'reference_values': ['no parent', '', 'None']})], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': FunctionSettings({'func': <function compute_nb_days at 0x7f5c343b0430>, 'options': {'year_ref': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'simulation', 'keys': ['child_time_ref_year'], 'fmt': None, 'src': None, 'func': None}), 'year_branch': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'simulation', 'keys': ['branch_year_in_child'], 'fmt': None, 'src': None, 'func': None})}})}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'simulation', 'keys': ['branch_time_in_child'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'branch_time_in_child', 'num_type': 'double', 'is_default': True, 'fatal': False, 'key': 'branch_time_in_child', 'help': 'TODO'}), 'branch_method': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [CaseSettings({'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['parent_experiment_id'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'neq', 'reference_values': ['no parent', '', 'None']})], 'value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['branch_method'], 'fmt': None, 'src': None, 'func': None})}), CaseSettings({'conditions': [True], 'value': 'no parent'})], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'branch_method', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'branch_method', 'help': 'TODO'}), 'physics_index': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['physics_index'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'physics_index', 'num_type': 'int', 'is_default': True, 'fatal': False, 'key': 'physics_index', 'help': 'TODO'}), 'product': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': ['model-output'], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'product', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'product', 'help': 'TODO'}), 'realization_index': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['realization_index'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'realization_index', 'num_type': 'int', 'is_default': True, 'fatal': False, 'key': 'realization_index', 'help': 'TODO'}), 'references': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['references'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'references', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'references', 'help': 'TODO'}), 'sub_experiment_id': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['sub_experiment_id'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'sub_experiment_id', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'sub_experiment_id', 'help': 'TODO'}), 'sub_experiment': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['sub_experiment'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'sub_experiment', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'sub_experiment', 'help': 'TODO'}), 'variant_info': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['variant_info'], 'fmt': '. Information provided by this attribute may in some cases be flawed. Users can find more comprehensive and up-to-date documentation via the further_info_url global attribute.', 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'variant_info', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'variant_info', 'help': 'TODO'}), 'realm': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {'ocnBgChem': 'ocnBgchem'}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['modeling_realm'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {'ocnBgChem': 'ocnBgchem'}, 'output_key': 'realm', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'realm', 'help': 'TODO'}), 'frequency': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['frequency'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'frequency', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'frequency', 'help': 'TODO'}), 'comment': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [''], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [CaseSettings({'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['comments'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'neq', 'reference_values': ['', 'None', None]})], 'value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'combine', 'keys': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['comment_lab'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['comment_sim'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['comments'], 'fmt': None, 'src': None, 'func': None})], 'fmt': '{}{}{}', 'src': None, 'func': None})}), CaseSettings({'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['comment_sim'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'neq', 'reference_values': ['', 'None', None]}), ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['comment_lab'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'neq', 'reference_values': ['', 'None', None]})], 'value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'combine', 'keys': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['comment_lab'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['comment_sim'], 'fmt': None, 'src': None, 'func': None})], 'fmt': '{}{}', 'src': None, 'func': None})}), CaseSettings({'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['comment_sim'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'neq', 'reference_values': ['', 'None', None]})], 'value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['comment_sim'], 'fmt': None, 'src': None, 'func': None})}), CaseSettings({'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['comment_lab'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'neq', 'reference_values': ['', 'None', None]})], 'value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['comment_lab'], 'fmt': None, 'src': None, 'func': None})})], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'comment', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'comment', 'help': 'TODO'}), 'variant_label': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['variant_label'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'variant_label', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'variant_label', 'help': 'TODO'}), 'activity_id': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['activity_id'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'activity_id', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'activity_id', 'help': 'TODO'}), 'source': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['source'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'source', 'num_type': 'string', 'is_default': True, 'fatal': True, 'key': 'source', 'help': 'TODO'}), 'source_id': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['source_id'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'source_id', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'source_id', 'help': 'TODO'}), 'source_type': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['source_type'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'source_type', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'source_type', 'help': 'TODO'}), 'title': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'combine', 'keys': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['source_id'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['project'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['activity_id'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'simulation', 'keys': ['expid_in_filename'], 'fmt': None, 'src': None, 'func': None})], 'fmt': '{} model output prepared for {} and {} / {} simulation', 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'combine', 'keys': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['source_id'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['project'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['activity_id'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['experiment_id'], 'fmt': None, 'src': None, 'func': None})], 'fmt': '{} model output prepared for {} / {} {}', 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'title', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'title', 'help': 'TODO'}), 'variable_id': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['mipVarLabel'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'variable_id', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'variable_id', 'help': 'TODO'}), 'CMIP6_CV_latest_tag': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'json', 'keys': ['version_metadata', 'latest_tag_metadata'], 'fmt': None, 'src': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'combine', 'keys': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'dict', 'keys': ['cvspath'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['project'], 'fmt': None, 'src': None, 'func': None})], 'fmt': '{}{}_experiment_id.json', 'src': None, 'func': None}), 'func': None}), 'no more value in CMIP6_CV'], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'CMIP6_CV_latest_tag', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'CMIP6_CV_latest_tag', 'help': 'TODO'}), 'license': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['license'], 'fmt': None, 'src': None, 'func': FunctionSettings({'func': <function fill_license at 0x7f5c343b05e0>, 'options': {'institution_id': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['institution_id'], 'fmt': None, 'src': None, 'func': None}), 'info_url': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['info_url'], 'fmt': None, 'src': None, 'func': None})}})})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'license', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'license', 'help': 'TODO'})}, 'comments_list': [], 'comments_constraints': {}}, 'attrs_list': ['id', 'name', 'output_freq', 'append', 'output_level', 'compression_level', 'split_freq', 'split_freq_format', 'split_start_offset', 'split_end_offset', 'split_last_date', 'time_units', 'time_counter_name', 'time_counter', 'time_stamp_name', 'time_stamp_format', 'uuid_name', 'uuid_format', 'convention_str'], 'attrs_constraints': {'id': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'combine', 'keys': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['label'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'dict', 'keys': ['table_id'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'dict', 'keys': ['grid_label'], 'fmt': None, 'src': None, 'func': None})], 'fmt': '{}_{}_{}', 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'id', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'id', 'help': 'TODO'}), 'split_freq': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['frequency'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'nmatch', 'reference_values': ['.*fx.*']})], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'split_freq', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'split_freq', 'help': 'TODO'}), 'split_freq_format': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['frequency'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'nmatch', 'reference_values': ['.*fx.*']})], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'split_freq_format', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'split_freq_format', 'help': 'TODO'}), 'split_start_offset': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', 'False', None, False], 'forbidden_patterns': [], 'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['frequency'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'nmatch', 'reference_values': ['.*fx.*']})], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'split_start_offset', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'split_start_offset', 'help': 'TODO'}), 'split_end_offset': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', 'False', None, False], 'forbidden_patterns': [], 'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['frequency'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'nmatch', 'reference_values': ['.*fx.*']})], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'split_end_offset', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'split_end_offset', 'help': 'TODO'}), 'split_last_date': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['frequency'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'nmatch', 'reference_values': ['.*fx.*']})], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'split_last_date', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'split_last_date', 'help': 'TODO'}), 'append': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': ['true'], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'append', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'append', 'help': 'TODO'}), 'time_units': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': ['days'], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'time_units', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'time_units', 'help': 'TODO'}), 'time_counter_name': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': ['time'], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'time_counter_name', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'time_counter_name', 'help': 'TODO'}), 'time_counter': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': ['exclusive'], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'time_counter', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'time_counter', 'help': 'TODO'}), 'time_stamp_name': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': ['creation_date'], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'time_stamp_name', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'time_stamp_name', 'help': 'TODO'}), 'time_stamp_format': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': ['%Y-%m-%dT%H:%M:%SZ'], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'time_stamp_format', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'time_stamp_format', 'help': 'TODO'}), 'uuid_name': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': ['tracking_id'], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'uuid_name', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'uuid_name', 'help': 'TODO'}), 'uuid_format': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['None', '', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['HDL'], 'fmt': 'hdl:{}/%uuid%', 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'uuid_format', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'uuid_format', 'help': 'TODO'}), 'convention_str': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['convention_str'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'convention_str', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'convention_str', 'help': 'TODO'}), 'output_level': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['None', '', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['output_level'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'output_level', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'output_level', 'help': 'TODO'}), 'compression_level': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['None', '', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['compression_level'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'compression_level', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'compression_level', 'help': 'TODO'}), 'name': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': FunctionSettings({'func': <function build_filename at 0x7f5c343b0670>, 'options': {'frequency': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['frequency'], 'fmt': None, 'src': None, 'func': None}), 'prefix': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['prefix'], 'fmt': None, 'src': None, 'func': None}), 'table': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'dict', 'keys': ['table_id'], 'fmt': None, 'src': None, 'func': None}), 'source_id': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['source_id'], 'fmt': None, 'src': None, 'func': None}), 'expid_in_filename': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['expid_in_filename'], 'fmt': None, 'src': None, 'func': None}), 'member_id': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['member_id'], 'fmt': None, 'src': None, 'func': None}), 'grid_label': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'dict', 'keys': ['grid_label'], 'fmt': None, 'src': None, 'func': None}), 'date_range': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['date_range'], 'fmt': None, 'src': None, 'func': None}), 'var_type': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['type'], 'fmt': None, 'src': None, 'func': None}), 'list_perso_dev_file': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['list_perso_dev_file'], 'fmt': None, 'src': None, 'func': None}), 'label': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['label'], 'fmt': None, 'src': None, 'func': None}), 'mipVarLabel': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['mipVarLabel'], 'fmt': None, 'src': None, 'func': None}), 'use_cmorvar': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['use_cmorvar_label_in_filename'], 'fmt': None, 'src': None, 'func': None})}})})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'name', 'num_type': 'string', 'is_default': True, 'fatal': True, 'key': 'name', 'help': 'TODO'})}, 'vars_list': ['activity_id', 'contact', 'data_specs_version', 'dr2xml_version', 'expid_in_filename', 'description', 'title_desc', 'experiment', 'external_variables', 'forcing_index', 'frequency', 'further_info_url', 'grid', 'grid_label', 'nominal_resolution', 'comment', 'history', 'initialization_index', 'institution_id', 'institution', 'license', 'mip_era', 'parent_experiment_id', 'parent_mip_era', 'parent_activity_id', 'parent_source_id', 'parent_time_units', 'parent_variant_label', 'branch_method', 'branch_time_in_parent', 'branch_time_in_child', 'physics_index', 'product', 'realization_index', 'realm', 'references', 'source', 'source_id', 'source_type', 'sub_experiment_id', 'sub_experiment', 'table_id', 'title', 'variable_id', 'variant_info', 'variant_label'], 'vars_constraints': {'contact': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['None', '', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['contact'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'contact', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'contact', 'help': 'TODO'}), 'data_specs_version': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['data_specs_version'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'data_specs_version', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'data_specs_version', 'help': 'TODO'}), 'dr2xml_version': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['dr2xml_version'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'dr2xml_version', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'dr2xml_version', 'help': 'TODO'}), 'expid_in_filename': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['expid_in_filename'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'experiment_id', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'expid_in_filename', 'help': 'TODO'}), 'description': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['experiment_id'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'eq', 'reference_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['expid_in_filename'], 'fmt': None, 'src': None, 'func': None})]})], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['description'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['CV_experiment', 'description'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'description', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'description', 'help': 'TODO'}), 'title_desc': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['experiment_id'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'eq', 'reference_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['expid_in_filename'], 'fmt': None, 'src': None, 'func': None})]})], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['description'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['CV_experiment', 'description'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'title', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'title_desc', 'help': 'TODO'}), 'experiment': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['experiment_id'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'eq', 'reference_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['expid_in_filename'], 'fmt': None, 'src': None, 'func': None})]})], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['experiment'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['CV_experiment', 'experiment'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'experiment', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'experiment', 'help': 'TODO'}), 'external_variables': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [''], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['cell_measures'], 'fmt': None, 'src': None, 'func': FunctionSettings({'func': <function build_external_variables at 0x7f5c343b04c0>, 'options': {}})})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'external_variables', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'external_variables', 'help': 'TODO'}), 'forcing_index': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['forcing_index'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'forcing_index', 'num_type': 'int', 'is_default': True, 'fatal': False, 'key': 'forcing_index', 'help': 'TODO'}), 'further_info_url': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'laboratory', 'keys': ['mip_era'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'eq', 'reference_values': []}), ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'simulation', 'keys': ['mip_era'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'eq', 'reference_values': []})], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'combine', 'keys': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['mip_era'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['institution_id'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['source_id'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['expid_in_filename'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['sub_experiment_id'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['variant_label'], 'fmt': None, 'src': None, 'func': None})], 'fmt': 'https://furtherinfo.es-doc.org/{}.{}.{}.{}.{}.{}', 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'further_info_url', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'further_info_url', 'help': 'TODO'}), 'history': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['history'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'history', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'history', 'help': 'TODO'}), 'initialization_index': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['initialization_index'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'initialization_index', 'num_type': 'int', 'is_default': True, 'fatal': False, 'key': 'initialization_index', 'help': 'TODO'}), 'institution': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['institution'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'institution', 'num_type': 'string', 'is_default': True, 'fatal': True, 'key': 'institution', 'help': 'TODO'}), 'institution_id': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['institution_id'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'institution_id', 'num_type': 'string', 'is_default': True, 'fatal': True, 'key': 'institution_id', 'help': 'TODO'}), 'mip_era': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['mip_era'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['mip_era'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'mip_era', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'mip_era', 'help': 'TODO'}), 'parent_experiment_id': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['parent_experiment_id'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'neq', 'reference_values': ['no parent', '', 'None']})], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['parent_experiment_id'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'parent_experiment_id', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'parent_experiment_id', 'help': 'TODO'}), 'parent_mip_era': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['parent_experiment_id'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'neq', 'reference_values': ['no parent', '', 'None']})], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['parent_mip_era'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['mip_era'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['mip_era'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'parent_mip_era', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'parent_mip_era', 'help': 'TODO'}), 'parent_activity_id': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['parent_experiment_id'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'neq', 'reference_values': ['no parent', '', 'None']})], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['parent_activity_id'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'parent_activity_id', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'parent_activity_id', 'help': 'TODO'}), 'parent_source_id': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['parent_experiment_id'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'neq', 'reference_values': ['no parent', '', 'None']})], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['parent_source_id'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['source_id'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'parent_source_id', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'parent_source_id', 'help': 'TODO'}), 'parent_time_units': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['parent_experiment_id'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'neq', 'reference_values': ['no parent', '', 'None']})], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['parent_time_units'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['parent_time_ref_year'], 'fmt': 'days since {}-01-01 00:00:00', 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'parent_time_units', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'parent_time_units', 'help': 'TODO'}), 'parent_variant_label': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['parent_experiment_id'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'neq', 'reference_values': ['no parent', '', 'None']})], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['parent_variant_label'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['variant_label'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'parent_variant_label', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'parent_variant_label', 'help': 'TODO'}), 'branch_time_in_parent': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['parent_experiment_id'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'neq', 'reference_values': ['no parent', '', 'None']})], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': FunctionSettings({'func': <function compute_nb_days at 0x7f5c343b0430>, 'options': {'year_ref': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['parent_time_ref_year'], 'fmt': None, 'src': None, 'func': None}), 'year_branch': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['branch_year_in_parent'], 'fmt': None, 'src': None, 'func': None}), 'month_branch': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['branch_month_in_parent'], 'fmt': None, 'src': None, 'func': None})}})}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'simulation', 'keys': ['branch_time_in_parent'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'branch_time_in_parent', 'num_type': 'double', 'is_default': True, 'fatal': False, 'key': 'branch_time_in_parent', 'help': 'TODO'}), 'branch_time_in_child': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['parent_experiment_id'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'neq', 'reference_values': ['no parent', '', 'None']})], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': FunctionSettings({'func': <function compute_nb_days at 0x7f5c343b0430>, 'options': {'year_ref': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'simulation', 'keys': ['child_time_ref_year'], 'fmt': None, 'src': None, 'func': None}), 'year_branch': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'simulation', 'keys': ['branch_year_in_child'], 'fmt': None, 'src': None, 'func': None})}})}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'simulation', 'keys': ['branch_time_in_child'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'branch_time_in_child', 'num_type': 'double', 'is_default': True, 'fatal': False, 'key': 'branch_time_in_child', 'help': 'TODO'}), 'branch_method': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [CaseSettings({'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['parent_experiment_id'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'neq', 'reference_values': ['no parent', '', 'None']})], 'value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['branch_method'], 'fmt': None, 'src': None, 'func': None})}), CaseSettings({'conditions': [True], 'value': 'no parent'})], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'branch_method', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'branch_method', 'help': 'TODO'}), 'physics_index': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['physics_index'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'physics_index', 'num_type': 'int', 'is_default': True, 'fatal': False, 'key': 'physics_index', 'help': 'TODO'}), 'product': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': ['model-output'], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'product', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'product', 'help': 'TODO'}), 'realization_index': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['realization_index'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'realization_index', 'num_type': 'int', 'is_default': True, 'fatal': False, 'key': 'realization_index', 'help': 'TODO'}), 'references': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['references'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'references', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'references', 'help': 'TODO'}), 'sub_experiment_id': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['sub_experiment_id'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'sub_experiment_id', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'sub_experiment_id', 'help': 'TODO'}), 'sub_experiment': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['sub_experiment'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'sub_experiment', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'sub_experiment', 'help': 'TODO'}), 'variant_info': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['variant_info'], 'fmt': '. Information provided by this attribute may in some cases be flawed. Users can find more comprehensive and up-to-date documentation via the further_info_url global attribute.', 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'variant_info', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'variant_info', 'help': 'TODO'}), 'realm': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {'ocnBgChem': 'ocnBgchem'}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['modeling_realm'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {'ocnBgChem': 'ocnBgchem'}, 'output_key': 'realm', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'realm', 'help': 'TODO'}), 'frequency': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['frequency'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'frequency', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'frequency', 'help': 'TODO'}), 'comment': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [''], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [CaseSettings({'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['comments'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'neq', 'reference_values': ['', 'None', None]})], 'value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'combine', 'keys': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['comment_lab'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['comment_sim'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['comments'], 'fmt': None, 'src': None, 'func': None})], 'fmt': '{}{}{}', 'src': None, 'func': None})}), CaseSettings({'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['comment_sim'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'neq', 'reference_values': ['', 'None', None]}), ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['comment_lab'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'neq', 'reference_values': ['', 'None', None]})], 'value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'combine', 'keys': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['comment_lab'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['comment_sim'], 'fmt': None, 'src': None, 'func': None})], 'fmt': '{}{}', 'src': None, 'func': None})}), CaseSettings({'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['comment_sim'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'neq', 'reference_values': ['', 'None', None]})], 'value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['comment_sim'], 'fmt': None, 'src': None, 'func': None})}), CaseSettings({'conditions': [ConditionSettings({'check_value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['comment_lab'], 'fmt': None, 'src': None, 'func': None}), 'check_to_do': 'neq', 'reference_values': ['', 'None', None]})], 'value': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['comment_lab'], 'fmt': None, 'src': None, 'func': None})})], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'comment', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'comment', 'help': 'TODO'}), 'variant_label': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['variant_label'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'variant_label', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'variant_label', 'help': 'TODO'}), 'activity_id': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['activity_id'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'activity_id', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'activity_id', 'help': 'TODO'}), 'source': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['source'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'source', 'num_type': 'string', 'is_default': True, 'fatal': True, 'key': 'source', 'help': 'TODO'}), 'source_id': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['source_id'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'source_id', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'source_id', 'help': 'TODO'}), 'source_type': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['source_type'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'source_type', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'source_type', 'help': 'TODO'}), 'title': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'combine', 'keys': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['source_id'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['project'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['activity_id'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'simulation', 'keys': ['expid_in_filename'], 'fmt': None, 'src': None, 'func': None})], 'fmt': '{} model output prepared for {} and {} / {} simulation', 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'combine', 'keys': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['source_id'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['project'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['activity_id'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['experiment_id'], 'fmt': None, 'src': None, 'func': None})], 'fmt': '{} model output prepared for {} / {} {}', 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'title', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'title', 'help': 'TODO'}), 'variable_id': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['mipVarLabel'], 'fmt': None, 'src': None, 'func': None})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'variable_id', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'variable_id', 'help': 'TODO'}), 'CMIP6_CV_latest_tag': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'json', 'keys': ['version_metadata', 'latest_tag_metadata'], 'fmt': None, 'src': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'combine', 'keys': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'dict', 'keys': ['cvspath'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['project'], 'fmt': None, 'src': None, 'func': None})], 'fmt': '{}{}_experiment_id.json', 'src': None, 'func': None}), 'func': None}), 'no more value in CMIP6_CV'], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'CMIP6_CV_latest_tag', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'CMIP6_CV_latest_tag', 'help': 'TODO'}), 'license': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['license'], 'fmt': None, 'src': None, 'func': FunctionSettings({'func': <function fill_license at 0x7f5c343b05e0>, 'options': {'institution_id': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['institution_id'], 'fmt': None, 'src': None, 'func': None}), 'info_url': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['info_url'], 'fmt': None, 'src': None, 'func': None})}})})], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'license', 'num_type': 'string', 'is_default': True, 'fatal': False, 'key': 'license', 'help': 'TODO'})}, 'comments_list': [], 'comments_constraints': {}})
-TagSettings({'dict_default': {'attrs_list': [], 'attrs_constraints': {}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}}, 'attrs_list': [], 'attrs_constraints': {}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}})
-TagSettings({'dict_default': {'attrs_list': [], 'attrs_constraints': {}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}}, 'attrs_list': ['id'], 'attrs_constraints': {}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}})
-TagSettings({'dict_default': {'attrs_list': [], 'attrs_constraints': {}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}}, 'attrs_list': [], 'attrs_constraints': {}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}})
-TagSettings({'dict_default': {'attrs_list': [], 'attrs_constraints': {}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}}, 'attrs_list': ['type', 'order', 'coordinate'], 'attrs_constraints': {}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}})
-TagSettings({'dict_default': {'attrs_list': [], 'attrs_constraints': {}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}}, 'attrs_list': ['type', 'order', 'renormalize', 'mode', 'write_weight', 'coordinate'], 'attrs_constraints': {}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}})
-TagSettings({'dict_default': {'attrs_list': [], 'attrs_constraints': {'standard_name': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'standard_name', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'standard_name', 'help': 'TODO'}), 'axis_type': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'axis_type', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'axis_type', 'help': 'TODO'}), 'unit': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'unit', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'unit', 'help': 'TODO'}), 'label': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'label', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'label', 'help': 'TODO'}), 'bounds': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'bounds', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'bounds', 'help': 'TODO'}), 'bounds_name': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'bounds_name', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'bounds_name', 'help': 'TODO'}), 'prec': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': ['2', '4', '8'], 'authorized_types': [], 'corrections': {'': '4', 'float': '4', 'real': '4', 'double': '8', 'integer': '2', 'int': '2'}, 'output_key': 'prec', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'prec', 'help': 'TODO'}), 'value': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'value', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'value', 'help': 'TODO'}), 'positive': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'positive', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'positive', 'help': 'TODO'})}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}}, 'attrs_list': ['id', 'scalar_ref', 'name', 'standard_name', 'long_name', 'label', 'prec', 'value', 'bounds', 'bounds_name', 'axis_type', 'positive', 'unit'], 'attrs_constraints': {'standard_name': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'standard_name', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'standard_name', 'help': 'TODO'}), 'axis_type': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'axis_type', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'axis_type', 'help': 'TODO'}), 'unit': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'unit', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'unit', 'help': 'TODO'}), 'label': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'label', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'label', 'help': 'TODO'}), 'bounds': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'bounds', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'bounds', 'help': 'TODO'}), 'bounds_name': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'bounds_name', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'bounds_name', 'help': 'TODO'}), 'prec': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': ['2', '4', '8'], 'authorized_types': [], 'corrections': {'': '4', 'float': '4', 'real': '4', 'double': '8', 'integer': '2', 'int': '2'}, 'output_key': 'prec', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'prec', 'help': 'TODO'}), 'value': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'value', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'value', 'help': 'TODO'}), 'positive': ParameterSettings({'dict_default': {'skip_values': [], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': None, 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': None, 'help': 'TODO'}, 'skip_values': ['', 'None', None], 'forbidden_patterns': [], 'conditions': [], 'default_values': [], 'cases': [], 'authorized_values': [], 'authorized_types': [], 'corrections': {}, 'output_key': 'positive', 'num_type': 'string', 'is_default': False, 'fatal': False, 'key': 'positive', 'help': 'TODO'})}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}})
-TagSettings({'dict_default': {'attrs_list': [], 'attrs_constraints': {}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}}, 'attrs_list': [], 'attrs_constraints': {}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}})
-TagSettings({'dict_default': {'attrs_list': [], 'attrs_constraints': {}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}}, 'attrs_list': [], 'attrs_constraints': {}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}})
-TagSettings({'dict_default': {'attrs_list': [], 'attrs_constraints': {}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}}, 'attrs_list': ['name', 'type'], 'attrs_constraints': {}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}})
-TagSettings({'dict_default': {'attrs_list': [], 'attrs_constraints': {}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}}, 'attrs_list': ['index'], 'attrs_constraints': {}, 'vars_list': [], 'vars_constraints': {}, 'comments_list': [], 'comments_constraints': {}})
+   axis
+      
+      XIOS axis beacon
+      
+      Attributes:
+         id
+            
+            Id of the axis.
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         positive
+            
+            How is the axis oriented?
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         n_glo
+            
+            TODO
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         value
+            
+            Value of the axis.
+            
+            fatal: False
+            
+            default values: []
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            num type: 'string'
+            
+         axis_ref
+            
+            TODO
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         name
+            
+            TODO
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         standard_name
+            
+            Standard name of the axis.
+            
+            fatal: False
+            
+            default values: []
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            authorized types: <class 'str'>
+            
+            num type: 'string'
+            
+         long_name
+            
+            TODO
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         prec
+            
+            Precision of the axis.
+            
+            fatal: False
+            
+            default values: []
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            authorized values:
+               
+               - '2'
+               - '4'
+               - '8'
+            
+            corrections:
+               
+               - '': '4'
+               - 'float': '4'
+               - 'real': '4'
+               - 'double': '8'
+               - 'integer': '2'
+               - 'int': '2'
+            
+            num type: 'string'
+            
+         unit
+            
+            Unit of the axis.
+            
+            fatal: False
+            
+            default values: []
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            num type: 'string'
+            
+         value
+            
+            Value of the axis.
+            
+            fatal: False
+            
+            default values: []
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            num type: 'string'
+            
+         bounds
+            
+            Bounds of the axis.
+            
+            fatal: False
+            
+            default values: []
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            num type: 'string'
+            
+         dim_name
+            
+            Name dimension of the axis.
+            
+            fatal: False
+            
+            default values: []
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            num type: 'string'
+            
+         label
+            
+            Label of the axis.
+            
+            fatal: False
+            
+            default values: []
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            num type: 'string'
+            
+         axis_type
+            
+            Axis type.
+            
+            fatal: False
+            
+            default values: []
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            num type: 'string'
+            
+   axis_definition
+      
+      XIOS axis_definition beacon
+   axis_group
+      
+      XIOS axis_group beacon
+      
+      Attributes:
+         prec
+            
+            Precision associated with the axis group.
+            
+            fatal: False
+            
+            default values: '8'
+            
+            authorized values:
+               
+               - '2'
+               - '4'
+               - '8'
+            
+            corrections:
+               
+               - '': '4'
+               - 'float': '4'
+               - 'real': '4'
+               - 'double': '8'
+               - 'integer': '2'
+               - 'int': '2'
+            
+            num type: 'string'
+            
+   context
+      
+      XIOS context beacon
+      
+      Comments:
+         DR_version
+            
+            Version of the Data Request used
+            
+            fatal: False
+            
+            default values: 'CMIP6 Data Request version {}'.format(common[data_specs_version])
+            
+            num type: 'string'
+            
+         CV_version
+            
+            TODO
+            
+            fatal: False
+            
+            default values: 'CMIP6-CV version ??'
+            
+            num type: 'string'
+            
+         conventions_version
+            
+            TODO
+            
+            fatal: False
+            
+            default values: 'CMIP6_conventions_version {}'.format(common[conventions_version])
+            
+            num type: 'string'
+            
+         dr2xml_version
+            
+            Version of dr2xml used
+            
+            fatal: False
+            
+            default values: 'dr2xml version {}'.format(common[dr2xml_version])
+            
+            num type: 'string'
+            
+         lab_settings
+            
+            Laboratory settings used
+            
+            fatal: False
+            
+            default values: 'Lab_and_model settings***newline***{}'.format(laboratory)
+            
+            num type: 'string'
+            
+         simulation_settings
+            
+            Simulation_settings used
+            
+            fatal: False
+            
+            default values: 'Simulation settings***newline***{}'.format(simulation)
+            
+            num type: 'string'
+            
+         year
+            
+            Year used for the dr2xml's launch
+            
+            fatal: False
+            
+            default values: 'Year processed {}'.format(common[year])
+            
+            num type: 'string'
+            
+      
+      Attributes:
+         id
+            
+            Id of the context
+            
+            fatal: False
+            
+            default values: internal[context]
+            
+            num type: 'string'
+            
+   domain
+      
+      XIOS domain beacon
+      
+      Attributes:
+         id
+            
+            Id of the domain.
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         ni_glo
+            
+            TODO
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         nj_glo
+            
+            TODO
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         type
+            
+            Type of the domain.
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         prec
+            
+            Precision of the domain.
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         lat_name
+            
+            Latitude axis name.
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         lon_name
+            
+            Longitude axis name.
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         dim_i_name
+            
+            TODO
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         domain_ref
+            
+            Reference domain.
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+   domain_definition
+      
+      XIOS domain_definition beacon
+   domain_group
+      
+      XIOS domain_group beacon
+      
+      Attributes:
+         prec
+            
+            Precision associated with the domain group.
+            
+            fatal: False
+            
+            default values: '8'
+            
+            authorized values:
+               
+               - '2'
+               - '4'
+               - '8'
+            
+            corrections:
+               
+               - '': '4'
+               - 'float': '4'
+               - 'real': '4'
+               - 'double': '8'
+               - 'integer': '2'
+               - 'int': '2'
+            
+            num type: 'string'
+            
+   duplicate_scalar
+      
+      XIOS duplicate_scalar beacon
+   field
+      
+      XIOS field beacon (except for output fields)
+      
+      Attributes:
+         id
+            
+            Id of the field.
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         field_ref
+            
+            Id of the reference field.
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         name
+            
+            Name of the field.
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         freq_op
+            
+            Frequency of the operation done on the field.
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         freq_offset
+            
+            Offset to be applied on operations on the field.
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         grid_ref
+            
+            Reference grid of the field.
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         long_name
+            
+            Long name of the field.
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         standard_name
+            
+            Standard name of the field.
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         unit
+            
+            Unit of the field.
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         operation
+            
+            Operation done on the field.
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         detect_missing_value
+            
+            TODO
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         prec
+            
+            Precision of the field.
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+   field_definition
+      
+      XIOS field_definition beacon
+   field_group
+      
+      XIOS field_group beacon
+      
+      Attributes:
+         freq_op
+            
+            Frequency of the operation done on the field.
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         freq_offset
+            
+            Offset to be applied on operations on the field.
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+   field_output
+      
+      XIOS field beacon (only for output fields)
+      
+      Attributes:
+         field_ref
+            
+            TODO
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         name
+            
+            Name of the field.
+            
+            fatal: False
+            
+            default values: variable.mipVarLabel
+            
+            num type: 'string'
+            
+         grid_ref
+            
+            Reference grid of the field.
+            
+            fatal: False
+            
+            default values: []
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            num type: 'string'
+            
+         freq_offset
+            
+            Offset to be applied on operations on the field.
+            
+            fatal: False
+            
+            default values: []
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            num type: 'string'
+            
+         detect_missing_value
+            
+            Should missing values of the field be detected by XIOS.
+            
+            fatal: False
+            
+            default values: 'True'
+            
+            num type: 'string'
+            
+         default_value
+            
+            Default value associated with the field.
+            
+            fatal: True
+            
+            default values: variable.prec
+            
+            authorized values:
+               
+               - '0'
+               - '1.e+20'
+            
+            corrections:
+               
+               - '': '1.e+20'
+               - 'float': '1.e+20'
+               - 'real': '1.e+20'
+               - 'double': '1.e+20'
+               - 'integer': '0'
+               - 'int': '0'
+            
+            num type: 'string'
+            
+         prec
+            
+            Precision of the field.
+            
+            fatal: True
+            
+            default values: variable.prec
+            
+            authorized values:
+               
+               - '2'
+               - '4'
+               - '8'
+            
+            corrections:
+               
+               - '': '4'
+               - 'float': '4'
+               - 'real': '4'
+               - 'double': '8'
+               - 'integer': '2'
+               - 'int': '2'
+            
+            num type: 'string'
+            
+         cell_methods
+            
+            Cell method associated with the field.
+            
+            fatal: False
+            
+            default values: variable.cell_methods
+            
+            num type: 'string'
+            
+         cell_methods_mode
+            
+            Mode associated with the cell method of the field.
+            
+            fatal: False
+            
+            default values: 'overwrite'
+            
+            num type: 'string'
+            
+         operation
+            
+            TODO
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         freq_op
+            
+            Frequency of the operation done on the field.
+            
+            fatal: False
+            
+            default values: []
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            num type: 'string'
+            
+         expr
+            
+            Expression used to compute the field.
+            
+            fatal: False
+            
+            default values: []
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            num type: 'string'
+            
+      
+      Variables
+         comment
+            
+            Comment associated with the field.
+            
+            fatal: False
+            
+            default values:
+               
+               - simulation[comments][variable.label]
+               - laboratory[comments][variable.label]
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            num type: 'string'
+            
+         standard_name
+            
+            Standard name of the field.
+            
+            fatal: False
+            
+            default values: variable.stdname
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            num type: 'string'
+            
+         description
+            
+            Description associated with the field.
+            
+            fatal: False
+            
+            default values:
+               
+               - variable.description
+               - 'None'
+            
+            skip values: ''
+            
+            num type: 'string'
+            
+         long_name
+            
+            Long name of the field.
+            
+            fatal: False
+            
+            default values: variable.long_name
+            
+            num type: 'string'
+            
+         positive
+            
+            Way the field should be interpreted.
+            
+            fatal: False
+            
+            default values: variable.positive
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            num type: 'string'
+            
+         history
+            
+            History associated with the field.
+            
+            fatal: False
+            
+            default values: common[history]
+            
+            num type: 'string'
+            
+         units
+            
+            Units associated with the field.
+            
+            fatal: False
+            
+            default values: variable.units
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            num type: 'string'
+            
+         cell_methods
+            
+            Cell method associated with the field.
+            
+            fatal: False
+            
+            default values: variable.cell_methods
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            num type: 'string'
+            
+         cell_measures
+            
+            Cell measures associated with the field.
+            
+            fatal: False
+            
+            default values: variable.cell_measures
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            num type: 'string'
+            
+         flag_meanings
+            
+            Flag meanings associated with the field.
+            
+            fatal: False
+            
+            default values: variable.flag_meanings
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            num type: 'string'
+            
+         flag_values
+            
+            Flag values associated with the field.
+            
+            fatal: False
+            
+            default values: variable.flag_values
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            num type: 'string'
+            
+         interval_operation
+            
+            Interval associated with the operation done on the field.
+            
+            fatal: False
+            
+            default values: []
+            
+            conditions:
+               Condition:
+               
+                  check value: dict[operation]
+                  
+                  check to do: 'neq'
+                  
+                  reference values: 'once'
+                  
+            
+            num type: 'string'
+            
+   file
+      
+      XIOS file beacon (except for output files)
+      
+      Attributes:
+         id
+            
+            Id of the file.
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         name
+            
+            File name.
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         mode
+            
+            Mode in which the file will be open.
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         output_freq
+            
+            Frequency of the outputs contained in the file.
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         enabled
+            
+            Should the file be considered by XIOS.
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+   file_definition
+      
+      XIOS file_definition beacon
+      
+      Attributes:
+         type
+            
+            Type of file to be produced
+            
+            fatal: False
+            
+            default values: 'one_file'
+            
+            num type: 'string'
+            
+         enabled
+            
+            Should the file_definition be considered by XIOS
+            
+            fatal: False
+            
+            default values: 'true'
+            
+            num type: 'string'
+            
+   file_output
+      
+      XIOS file beacon (only for output files)
+      
+      Attributes:
+         id
+            
+            Id of the output file
+            
+            fatal: False
+            
+            default values: '{}_{}_{}'.format(variable.label, dict[table_id], dict[grid_label])
+            
+            num type: 'string'
+            
+         name
+            
+            File name.
+            
+            fatal: True
+            
+            default values: ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': FunctionSettings({'func': <function build_filename at 0x7f0171892940>, 'options': {'frequency': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['frequency'], 'fmt': None, 'src': None, 'func': None}), 'prefix': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['prefix'], 'fmt': None, 'src': None, 'func': None}), 'table': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'dict', 'keys': ['table_id'], 'fmt': None, 'src': None, 'func': None}), 'source_id': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['source_id'], 'fmt': None, 'src': None, 'func': None}), 'expid_in_filename': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['expid_in_filename'], 'fmt': None, 'src': None, 'func': None}), 'member_id': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['member_id'], 'fmt': None, 'src': None, 'func': None}), 'grid_label': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'dict', 'keys': ['grid_label'], 'fmt': None, 'src': None, 'func': None}), 'date_range': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['date_range'], 'fmt': None, 'src': None, 'func': None}), 'var_type': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['type'], 'fmt': None, 'src': None, 'func': None}), 'list_perso_dev_file': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['list_perso_dev_file'], 'fmt': None, 'src': None, 'func': None}), 'label': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['label'], 'fmt': None, 'src': None, 'func': None}), 'mipVarLabel': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['mipVarLabel'], 'fmt': None, 'src': None, 'func': None}), 'use_cmorvar': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['use_cmorvar_label_in_filename'], 'fmt': None, 'src': None, 'func': None})}})})
+            
+            num type: 'string'
+            
+         output_freq
+            
+            Frequency of the outputs contained in the file.
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         append
+            
+            Should the data be append to the file?
+            
+            fatal: False
+            
+            default values: 'true'
+            
+            num type: 'string'
+            
+         output_level
+            
+            Output level of the file.
+            
+            fatal: False
+            
+            default values: common[output_level]
+            
+            skip values:
+               
+               - 'None'
+               - ''
+               - None
+            
+            num type: 'string'
+            
+         compression_level
+            
+            Compression level of the file.
+            
+            fatal: False
+            
+            default values: common[compression_level]
+            
+            skip values:
+               
+               - 'None'
+               - ''
+               - None
+            
+            num type: 'string'
+            
+         split_freq
+            
+            Splitting frequency of the file.
+            
+            fatal: False
+            
+            default values: []
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            conditions:
+               Condition:
+               
+                  check value: variable.frequency
+                  
+                  check to do: 'nmatch'
+                  
+                  reference values: '.*fx.*'
+                  
+            
+            num type: 'string'
+            
+         split_freq_format
+            
+            Splitting frequency format of the file.
+            
+            fatal: False
+            
+            default values: []
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            conditions:
+               Condition:
+               
+                  check value: variable.frequency
+                  
+                  check to do: 'nmatch'
+                  
+                  reference values: '.*fx.*'
+                  
+            
+            num type: 'string'
+            
+         split_start_offset
+            
+            Splitting start offset of the file
+            
+            fatal: False
+            
+            default values: []
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - 'False'
+               - None
+               - False
+            
+            conditions:
+               Condition:
+               
+                  check value: variable.frequency
+                  
+                  check to do: 'nmatch'
+                  
+                  reference values: '.*fx.*'
+                  
+            
+            num type: 'string'
+            
+         split_end_offset
+            
+            Splitting end offset of the file
+            
+            fatal: False
+            
+            default values: []
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - 'False'
+               - None
+               - False
+            
+            conditions:
+               Condition:
+               
+                  check value: variable.frequency
+                  
+                  check to do: 'nmatch'
+                  
+                  reference values: '.*fx.*'
+                  
+            
+            num type: 'string'
+            
+         split_last_date
+            
+            Splitting last date of the file
+            
+            fatal: False
+            
+            default values: []
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            conditions:
+               Condition:
+               
+                  check value: variable.frequency
+                  
+                  check to do: 'nmatch'
+                  
+                  reference values: '.*fx.*'
+                  
+            
+            num type: 'string'
+            
+         time_units
+            
+            Time units of the file.
+            
+            fatal: False
+            
+            default values: 'days'
+            
+            num type: 'string'
+            
+         time_counter_name
+            
+            Time counter name.
+            
+            fatal: False
+            
+            default values: 'time'
+            
+            num type: 'string'
+            
+         time_counter
+            
+            Time counter type.
+            
+            fatal: False
+            
+            default values: 'exclusive'
+            
+            num type: 'string'
+            
+         time_stamp_name
+            
+            Time stamp name.
+            
+            fatal: False
+            
+            default values: 'creation_date'
+            
+            num type: 'string'
+            
+         time_stamp_format
+            
+            Time stamp format.
+            
+            fatal: False
+            
+            default values: '%Y-%m-%dT%H:%M:%SZ'
+            
+            num type: 'string'
+            
+         uuid_name
+            
+            Unique identifier of the file name.
+            
+            fatal: False
+            
+            default values: 'tracking_id'
+            
+            num type: 'string'
+            
+         uuid_format
+            
+            Unique identifier of the file format.
+            
+            fatal: False
+            
+            default values: 'hdl:{}/%uuid%'.format(common[HDL])
+            
+            skip values:
+               
+               - 'None'
+               - ''
+               - None
+            
+            num type: 'string'
+            
+         convention_str
+            
+            Convention used for the file.
+            
+            fatal: False
+            
+            default values: common[convention_str]
+            
+            num type: 'string'
+            
+      
+      Variables
+         activity_id
+            
+            Activity id associated with the simulation.
+            
+            fatal: False
+            
+            default values: common[activity_id]
+            
+            num type: 'string'
+            
+         contact
+            
+            Contact email.
+            
+            fatal: False
+            
+            default values: common[contact]
+            
+            skip values:
+               
+               - 'None'
+               - ''
+               - None
+            
+            num type: 'string'
+            
+         data_specs_version
+            
+            Version of the Data Request used.
+            
+            fatal: False
+            
+            default values: common[data_specs_version]
+            
+            num type: 'string'
+            
+         dr2xml_version
+            
+            Version of dr2xml used.
+            
+            fatal: False
+            
+            default values: common[dr2xml_version]
+            
+            num type: 'string'
+            
+         expid_in_filename
+            
+            Experiment id to be used in file name.
+            
+            output key: 'experiment_id'
+            
+            fatal: False
+            
+            default values: common[expid_in_filename]
+            
+            num type: 'string'
+            
+         description
+            
+            Description of the file.
+            
+            fatal: False
+            
+            default values:
+               
+               - common[description]
+               - internal[CV_experiment][description]
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            conditions:
+               Condition:
+               
+                  check value: internal[experiment_id]
+                  
+                  check to do: 'eq'
+                  
+                  reference values: common[expid_in_filename]
+                  
+            
+            num type: 'string'
+            
+         title_desc
+            
+            Title of the file.
+            
+            output key: 'title'
+            
+            fatal: False
+            
+            default values:
+               
+               - common[description]
+               - internal[CV_experiment][description]
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            conditions:
+               Condition:
+               
+                  check value: internal[experiment_id]
+                  
+                  check to do: 'eq'
+                  
+                  reference values: common[expid_in_filename]
+                  
+            
+            num type: 'string'
+            
+         experiment
+            
+            Experiment associated with the simulation.
+            
+            fatal: False
+            
+            default values:
+               
+               - common[experiment]
+               - internal[CV_experiment][experiment]
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            conditions:
+               Condition:
+               
+                  check value: internal[experiment_id]
+                  
+                  check to do: 'eq'
+                  
+                  reference values: common[expid_in_filename]
+                  
+            
+            num type: 'string'
+            
+         external_variables
+            
+            External variables associated with the file.
+            
+            fatal: False
+            
+            default values: variable.cell_measures{func: ['build_external_variables()']}
+            
+            skip values: ''
+            
+            num type: 'string'
+            
+         forcing_index
+            
+            Forcing index associated with the simulation.
+            
+            fatal: False
+            
+            default values: common[forcing_index]
+            
+            num type: 'int'
+            
+         frequency
+            
+            Frequency associated with the file.
+            
+            fatal: False
+            
+            default values: variable.frequency
+            
+            num type: 'string'
+            
+         further_info_url
+            
+            Url to obtain further information associated with the simulation.
+            
+            fatal: False
+            
+            default values: 'https://furtherinfo.es-doc.org/{}.{}.{}.{}.{}.{}'.format(variable.mip_era, internal[institution_id], internal[source_id], common[expid_in_filename], common[sub_experiment_id], common[variant_label])
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            conditions:
+               Condition:
+               
+                  check value: laboratory[mip_era]
+                  
+                  check to do: 'eq'
+                  
+               Condition:
+               
+                  check value: simulation[mip_era]
+                  
+                  check to do: 'eq'
+                  
+            
+            num type: 'string'
+            
+         grid
+            
+            TODO
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         grid_label
+            
+            TODO
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         nominal_resolution
+            
+            TODO
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         comment
+            
+            Comment associated with the file.
+            
+            fatal: False
+            
+            default values: []
+            
+            skip values: ''
+            
+            cases:
+               Case:
+               
+                  conditions:
+                        Condition:
+                        
+                           check value: variable.comments
+                           
+                           check to do: 'neq'
+                           
+                           reference values:
+                                 
+                                 - ''
+                                 - 'None'
+                                 - None
+                           
+                  
+                  value: '{}{}{}'.format(common[comment_lab], common[comment_sim], variable.comments)
+                  
+               Case:
+               
+                  conditions:
+                        Condition:
+                        
+                           check value: common[comment_sim]
+                           
+                           check to do: 'neq'
+                           
+                           reference values:
+                                 
+                                 - ''
+                                 - 'None'
+                                 - None
+                           
+                        Condition:
+                        
+                           check value: common[comment_lab]
+                           
+                           check to do: 'neq'
+                           
+                           reference values:
+                                 
+                                 - ''
+                                 - 'None'
+                                 - None
+                           
+                  
+                  value: '{}{}'.format(common[comment_lab], common[comment_sim])
+                  
+               Case:
+               
+                  conditions:
+                        Condition:
+                        
+                           check value: common[comment_sim]
+                           
+                           check to do: 'neq'
+                           
+                           reference values:
+                                 
+                                 - ''
+                                 - 'None'
+                                 - None
+                           
+                  
+                  value: common[comment_sim]
+                  
+               Case:
+               
+                  conditions:
+                        Condition:
+                        
+                           check value: common[comment_lab]
+                           
+                           check to do: 'neq'
+                           
+                           reference values:
+                                 
+                                 - ''
+                                 - 'None'
+                                 - None
+                           
+                  
+                  value: common[comment_lab]
+                  
+            
+            num type: 'string'
+            
+         history
+            
+            History associated with the file.
+            
+            fatal: False
+            
+            default values: common[history]
+            
+            num type: 'string'
+            
+         initialization_index
+            
+            Initialization index associated with the simulation.
+            
+            fatal: False
+            
+            default values: common[initialization_index]
+            
+            num type: 'int'
+            
+         institution_id
+            
+            Institution id associated with the simulation.
+            
+            fatal: True
+            
+            default values: internal[institution_id]
+            
+            num type: 'string'
+            
+         institution
+            
+            Institution associated with the simulation.
+            
+            fatal: True
+            
+            default values: common[institution]
+            
+            num type: 'string'
+            
+         license
+            
+            TODO
+            
+            fatal: False
+            
+            default values: common[license]{func: ["fill_license('institution_id'= internal[institution_id], 'info_url'= common[info_url])"]}
+            
+            num type: 'string'
+            
+         mip_era
+            
+            MIP associated with the simulation.
+            
+            fatal: False
+            
+            default values:
+               
+               - common[mip_era]
+               - variable.mip_era
+            
+            num type: 'string'
+            
+         parent_experiment_id
+            
+            Parent experiment id associated with the simulation.
+            
+            fatal: False
+            
+            default values: common[parent_experiment_id]
+            
+            conditions:
+               Condition:
+               
+                  check value: common[parent_experiment_id]
+                  
+                  check to do: 'neq'
+                  
+                  reference values:
+                        
+                        - 'no parent'
+                        - ''
+                        - 'None'
+                  
+            
+            num type: 'string'
+            
+         parent_mip_era
+            
+            MIP associated with the parent experiment.
+            
+            fatal: False
+            
+            default values:
+               
+               - common[parent_mip_era]
+               - common[mip_era]
+               - variable.mip_era
+            
+            conditions:
+               Condition:
+               
+                  check value: common[parent_experiment_id]
+                  
+                  check to do: 'neq'
+                  
+                  reference values:
+                        
+                        - 'no parent'
+                        - ''
+                        - 'None'
+                  
+            
+            num type: 'string'
+            
+         parent_activity_id
+            
+            Activity id associated with the parent experiment.
+            
+            fatal: False
+            
+            default values: common[parent_activity_id]
+            
+            conditions:
+               Condition:
+               
+                  check value: common[parent_experiment_id]
+                  
+                  check to do: 'neq'
+                  
+                  reference values:
+                        
+                        - 'no parent'
+                        - ''
+                        - 'None'
+                  
+            
+            num type: 'string'
+            
+         parent_source_id
+            
+            Model id of the parent experiment.
+            
+            fatal: False
+            
+            default values:
+               
+               - common[parent_source_id]
+               - internal[source_id]
+            
+            conditions:
+               Condition:
+               
+                  check value: common[parent_experiment_id]
+                  
+                  check to do: 'neq'
+                  
+                  reference values:
+                        
+                        - 'no parent'
+                        - ''
+                        - 'None'
+                  
+            
+            num type: 'string'
+            
+         parent_time_units
+            
+            Time units of the parent experiment.
+            
+            fatal: False
+            
+            default values:
+               
+               - common[parent_time_units]
+               - 'days since {}-01-01 00:00:00'.format(common[parent_time_ref_year])
+            
+            conditions:
+               Condition:
+               
+                  check value: common[parent_experiment_id]
+                  
+                  check to do: 'neq'
+                  
+                  reference values:
+                        
+                        - 'no parent'
+                        - ''
+                        - 'None'
+                  
+            
+            num type: 'string'
+            
+         parent_variant_label
+            
+            Variant label of the parent experiment.
+            
+            fatal: False
+            
+            default values:
+               
+               - common[parent_variant_label]
+               - common[variant_label]
+            
+            conditions:
+               Condition:
+               
+                  check value: common[parent_experiment_id]
+                  
+                  check to do: 'neq'
+                  
+                  reference values:
+                        
+                        - 'no parent'
+                        - ''
+                        - 'None'
+                  
+            
+            num type: 'string'
+            
+         branch_method
+            
+            Branch method of the simulation.
+            
+            fatal: False
+            
+            default values: []
+            
+            cases:
+               Case:
+               
+                  conditions:
+                        Condition:
+                        
+                           check value: common[parent_experiment_id]
+                           
+                           check to do: 'neq'
+                           
+                           reference values:
+                                 
+                                 - 'no parent'
+                                 - ''
+                                 - 'None'
+                           
+                  
+                  value: common[branch_method]
+                  
+               Case:
+               
+                  conditions: True
+                  
+                  value: 'no parent'
+                  
+            
+            num type: 'string'
+            
+         branch_time_in_parent
+            
+            Branch time of the simulation in the parent's one.
+            
+            fatal: False
+            
+            default values:
+               
+               - ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': FunctionSettings({'func': <function compute_nb_days at 0x7f0171892d30>, 'options': {'year_ref': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['parent_time_ref_year'], 'fmt': None, 'src': None, 'func': None}), 'year_branch': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['branch_year_in_parent'], 'fmt': None, 'src': None, 'func': None}), 'month_branch': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['branch_month_in_parent'], 'fmt': None, 'src': None, 'func': None})}})})
+               - simulation[branch_time_in_parent]
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            conditions:
+               Condition:
+               
+                  check value: common[parent_experiment_id]
+                  
+                  check to do: 'neq'
+                  
+                  reference values:
+                        
+                        - 'no parent'
+                        - ''
+                        - 'None'
+                  
+            
+            num type: 'double'
+            
+         branch_time_in_child
+            
+            Branch time of the simulation in the child's one.
+            
+            fatal: False
+            
+            default values:
+               
+               - ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': FunctionSettings({'func': <function compute_nb_days at 0x7f0171892d30>, 'options': {'year_ref': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'simulation', 'keys': ['child_time_ref_year'], 'fmt': None, 'src': None, 'func': None}), 'year_branch': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'simulation', 'keys': ['branch_year_in_child'], 'fmt': None, 'src': None, 'func': None})}})})
+               - simulation[branch_time_in_child]
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            conditions:
+               Condition:
+               
+                  check value: common[parent_experiment_id]
+                  
+                  check to do: 'neq'
+                  
+                  reference values:
+                        
+                        - 'no parent'
+                        - ''
+                        - 'None'
+                  
+            
+            num type: 'double'
+            
+         physics_index
+            
+            Physics index associated with the simulation.
+            
+            fatal: False
+            
+            default values: common[physics_index]
+            
+            num type: 'int'
+            
+         product
+            
+            Type of content of the file.
+            
+            fatal: False
+            
+            default values: 'model-output'
+            
+            num type: 'string'
+            
+         realization_index
+            
+            Realization index associated with the simulation.
+            
+            fatal: False
+            
+            default values: internal[realization_index]
+            
+            num type: 'int'
+            
+         realm
+            
+            Realm associated with the file.
+            
+            fatal: False
+            
+            default values: variable.modeling_realm
+            
+            corrections:
+               
+               - 'ocnBgChem': 'ocnBgchem'
+            
+            num type: 'string'
+            
+         references
+            
+            References associated with the simulation.
+            
+            fatal: False
+            
+            default values: common[references]
+            
+            num type: 'string'
+            
+         source
+            
+            Model associated with the simulation.
+            
+            fatal: True
+            
+            default values: common[source]
+            
+            num type: 'string'
+            
+         source_id
+            
+            Model id associated with the simulation.
+            
+            fatal: False
+            
+            default values: internal[source_id]
+            
+            num type: 'string'
+            
+         source_type
+            
+            Model type associated with the simulation.
+            
+            fatal: False
+            
+            default values: internal[source_type]
+            
+            num type: 'string'
+            
+         sub_experiment_id
+            
+            Id of the sub experiment associated with the simulation.
+            
+            fatal: False
+            
+            default values: common[sub_experiment_id]
+            
+            num type: 'string'
+            
+         sub_experiment
+            
+            Name of the sub experiment associated with the simulation.
+            
+            fatal: False
+            
+            default values: common[sub_experiment]
+            
+            num type: 'string'
+            
+         table_id
+            
+            TODO
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         title
+            
+            Title of the file.
+            
+            fatal: False
+            
+            default values:
+               
+               - '{} model output prepared for {} and {} / {} simulation'.format(internal[source_id], internal[project], common[activity_id], simulation[expid_in_filename])
+               - '{} model output prepared for {} / {} {}'.format(internal[source_id], internal[project], common[activity_id], internal[experiment_id])
+            
+            num type: 'string'
+            
+         variable_id
+            
+            TODO
+            
+            fatal: False
+            
+            default values: variable.mipVarLabel
+            
+            num type: 'string'
+            
+         variant_info
+            
+            Variant information associated with the simulation.
+            
+            fatal: False
+            
+            default values: '. Information provided by this attribute may in some cases be flawed. Users can find more comprehensive and up-to-date documentation via the further_info_url global attribute.'.format(common[variant_info])
+            
+            num type: 'string'
+            
+         variant_label
+            
+            Variant label associated with the simulation.
+            
+            fatal: False
+            
+            default values: common[variant_label]
+            
+            num type: 'string'
+            
+   generate_rectilinear_domain
+      
+      XIOS generate_rectilinear_domain beacon
+   grid
+      
+      XIOS grid beacon
+      
+      Attributes:
+         id
+            
+            Id of the grid.
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+   grid_definition
+      
+      XIOS grid_definition beacon
+   interpolate_axis
+      
+      XIOS interpolate_axis beacon
+      
+      Attributes:
+         type
+            
+            Type of the interpolated axis.
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         order
+            
+            Order of the interpolated axis.
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         coordinate
+            
+            Coordinate of the interpolated axis.
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+   interpolate_domain
+      
+      XIOS interpolate_domain beacon
+      
+      Attributes:
+         type
+            
+            Type of the interpolated domain.
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         order
+            
+            Order of the interpolation.
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         renormalize
+            
+            Should the interpolated domain be renormalized?
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         mode
+            
+            TODO
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         write_weight
+            
+            Should interpolation weights be written?
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         coordinate
+            
+            Coordinate of the interpolated domain.
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+   scalar
+      
+      XIOS scalar beacon
+      
+      Attributes:
+         id
+            
+            Id of the scalar.
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         scalar_ref
+            
+            TODO
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         name
+            
+            TODO
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         standard_name
+            
+            Standard name of the scalar.
+            
+            fatal: False
+            
+            default values: []
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            num type: 'string'
+            
+         long_name
+            
+            TODO
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         label
+            
+            Label of the scalar.
+            
+            fatal: False
+            
+            default values: []
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            num type: 'string'
+            
+         prec
+            
+            Precision of the scalar.
+            
+            fatal: False
+            
+            default values: []
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            authorized values:
+               
+               - '2'
+               - '4'
+               - '8'
+            
+            corrections:
+               
+               - '': '4'
+               - 'float': '4'
+               - 'real': '4'
+               - 'double': '8'
+               - 'integer': '2'
+               - 'int': '2'
+            
+            num type: 'string'
+            
+         value
+            
+            Value of the scalar.
+            
+            fatal: False
+            
+            default values: []
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            num type: 'string'
+            
+         bounds
+            
+            Bounds of the scalar.
+            
+            fatal: False
+            
+            default values: []
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            num type: 'string'
+            
+         bounds_name
+            
+            Bounds name of the scalar.
+            
+            fatal: False
+            
+            default values: []
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            num type: 'string'
+            
+         axis_type
+            
+            Axis type of the scalar.
+            
+            fatal: False
+            
+            default values: []
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            num type: 'string'
+            
+         positive
+            
+            Orientation of the scalar.
+            
+            fatal: False
+            
+            default values: []
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            num type: 'string'
+            
+         unit
+            
+            Unit of the scalar.
+            
+            fatal: False
+            
+            default values: []
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            num type: 'string'
+            
+   scalar_definition
+      
+      XIOS scalar_definition beacon
+   temporal_splitting
+      
+      XIOS temporal_splitting beacon
+   variable
+      
+      XIOS variable beacon
+      
+      Attributes:
+         name
+            
+            Content of the variable
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+         type
+            
+            Encoding type of the variable's content.
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            
+   zoom_axis
+      
+      XIOS zoom_axis beacon
+      
+      Attributes:
+         index
+            
+            Index of the zoomed axis.
+            
+            fatal: False
+            
+            default values: []
+            
+            num type: 'string'
+            

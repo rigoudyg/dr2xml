@@ -588,8 +588,7 @@ def configuration_init(func):
         initialize_logger(default=True, level=default_level)
         initialize_config_variables()
         initialize_settings(lset=lset, sset=sset, cvspath=cvs_path, context=context, prefix=prefix,
-                            root=os.path.basename(os.path.abspath(__file__)), year=year, dirname=dirname,
-                            force_reset=force_reset)
+                            year=year, dirname=dirname, force_reset=force_reset)
         return func(**kwargs)
     return make_configuration
 

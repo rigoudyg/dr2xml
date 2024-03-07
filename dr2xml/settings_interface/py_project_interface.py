@@ -20,6 +20,8 @@ def initialize_project_settings(dirname, doc_writer=False):
                                                                    default="CMIP6")
     # Merge with parent if needed
     project_filename, internal_values, common_values, project_settings = merge_project_settings(project_filename)
+    # Complete and clean project settings
+    project_settings = solve_settings(project_settings)
     # If asked, save the settings into a dedicated file
     save_project_settings = get_variable_from_lset_with_default("save_project_settings", None)
     if save_project_settings is not None:
@@ -160,8 +162,7 @@ def solve_values(values, internal_dict=dict(), common_dict=dict(), additional_di
     return rep
 
 
-def solve_settings(settings, internal_dict=dict(), common_dict=dict(), additional_dict=dict(),
-                   allow_additional_keytypes=True):
+def solve_settings(settings):
     for tag in settings:
         settings[tag].complete_and_clean()
     return settings
