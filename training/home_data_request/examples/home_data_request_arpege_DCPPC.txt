@@ -1,0 +1,26 @@
+#------------------------------------------------------------------------------------------------------------------------------------------------------
+#TYPE;    VARNAME;         REALM;     FREQUENCY;     TABLE;                     TEMPORAL_SHP;         SPATIAL_SHP;       EXPNAME;            MIP
+#------------------------------------------------------------------------------------------------------------------------------------------------------
+#--- Requested by PRIMAVERA WP5 minDR or WP10/11 but missing in CMIP6/DCPPC DR
+cmor;      huss;           atmos;     day;           CMIP6_day;                 time-mean;            XY-na;             ANY;                ANY
+extra;     mrso;           atmos;     day;           PRIMAVERA_Primday;         time-mean;            XY-na;             ANY;                ANY
+cmor;      ps;             atmos;     day;           CMIP6_CFday;               time-mean;            XY-na;             ANY;                ANY
+extra;     rsds;           atmos;     6hr;           PRIMAVERA_Prim6hr;         time-mean;            XY-na;             ANY;                ANY
+extra;     rsdsdiff;       atmos;     6hr;           PRIMAVERA_Prim6hr;         time-mean;            XY-na;             ANY;                ANY
+cmor;      ta;             atmos;     day;           CMIP6_day;                 time-mean;            XY-P8;             ANY;                ANY
+#cmor;      ua;             atmos;     6hrPt;         CMIP6_6hrPlevPt;           time-point;           XY-P3;             ANY;                ANY
+cmor;      ua;             atmos;     day;           CMIP6_day;                 time-mean;            XY-P8;             ANY;                ANY
+cmor;      uas;            atmos;     3hrPt;         CMIP6_3hr;                 time-point;           XY-na;             ANY;                ANY
+#cmor;      va;             atmos;     6hrPt;         CMIP6_6hrPlevPt;           time-point;           XY-P3;             ANY;                ANY
+cmor;      va;             atmos;     day;           CMIP6_day;                 time-mean;            XY-P8;             ANY;                ANY
+cmor;      vas;            atmos;     3hrPt;         CMIP6_3hr;                 time-point;           XY-na;             ANY;                ANY
+#not cmor???# cmor;      zg500;          atmos;     6hr;           CMIP6_6hrPlev;           time-point;           XY-na;             ANY;                ANY
+cmor;      zg7h;           atmos;     6hrPt;         CMIP6_6hrPlevPt;           time-point;           XY-P7T;            ANY;                ANY
+cmor;      zg;             atmos;     day;           CMIP6_day;                 time-mean;            XY-P8;             ANY;                ANY
+#--- Emilia's DR
+cmor;      ua7h;           atmos;     6hrPt;         CMIP6_6hrPlevPt;           time-point;           XY-P7T;            ANY;                ANY
+cmor;      va7h;           atmos;     6hrPt;         CMIP6_6hrPlevPt;           time-point;           XY-P7T;            ANY;                ANY
+cmor;      ta7h;           atmos;     6hrPt;         CMIP6_6hrPlevPt;           time-point;           XY-P7T;            ANY;                ANY
+cmor;      hfls;           atmos;     day;          CMIP6_day;                 time-mean;            XY-na;             ANY;                ANY
+cmor;      hfss;           atmos;     day;          CMIP6_day;                 time-mean;            XY-na;             ANY;                ANY
+cmor;      ts;             atmos;     day;           CMIP6_Eday;                time-mean;            XY-na;             ANY;                ANY

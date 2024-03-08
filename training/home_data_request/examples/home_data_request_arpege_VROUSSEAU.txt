@@ -1,0 +1,10 @@
+#------------------------------------------------------------------------------------------------------------------------------------------------------
+#TYPE;    VARNAME;         REALM;     FREQUENCY;     TABLE;                     TEMPORAL_SHP;         SPATIAL_SHP;       EXPNAME;            MIP
+#------------------------------------------------------------------------------------------------------------------------------------------------------
+extra;  pblh;             atmos;       mon;         CERFACS_VRmon;           ANY;                  ANY;               ANY;                ANY
+extra;  pblh;             atmos;       day;         CERFACS_VRday;           ANY;                  ANY;               ANY;                ANY
+extra;  pblh;             atmos;       6hrPt;       CERFACS_VR6hrPt;         ANY;                  ANY;               ANY;                ANY
+extra;  drhdzpblh;        atmos;       mon;         CERFACS_VRmon;           ANY;                  ANY;               ANY;                ANY
+extra;  drhdzpblh;        atmos;       day;         CERFACS_VRday;           ANY;                  ANY;               ANY;                ANY
+extra;  drhdzpblh;        atmos;       6hrPt;       CERFACS_VR6hrPt;         ANY;                  ANY;               ANY;                ANY
+extra;  wap;              atmos;       6hrPt;       CERFACS_VR6hrPlevPt;     ANY;                  ANY;               ANY;                ANY

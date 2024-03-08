@@ -23,7 +23,7 @@ from .settings_interface import get_settings_values
 from .grids import create_axis_def, create_grid_def
 
 # Variables tools
-from .vars_interface.definitions import SimpleDim
+from .dr_interface import get_dr_object
 
 # XIOS reading and writing tools
 from .Xparse import id2gridid
@@ -101,7 +101,7 @@ def create_xios_axis_and_grids_for_plevs_unions(svars, plev_sfxs, dummies):
     union_axis_defs = axis_defs
     union_grid_defs = grid_defs
     for lwps in list(dict_plevs):
-        sdim_union = SimpleDim()
+        sdim_union = get_dr_object("SimpleDim")
         plevs_union_xios = ""
         plevs_union = set()
         for plev in list(dict_plevs[lwps]):

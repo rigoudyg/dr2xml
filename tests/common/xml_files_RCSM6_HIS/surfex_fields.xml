@@ -1,0 +1,615 @@
+<!--
+XIOS-2.0 xml sub-file for Surfex + Arpege
+
+Ref: 
+  - for XIOS : https://forge.ipsl.jussieu.fr/ioserver/wiki 
+  - for XIAS (implementation in Surfex and Arpege) : http://www.cnrm-game-meteo.fr/cm/spip.php?article60
+
+Declaration of a number of Surfex diags 
+
+     Useful in order that XIOS does not complain even if some field is
+     - not declared in another sourced xml file AND
+     - is referenced in some other xml file
+
+     Useful also to set attribute 'operation' to 'average', or to set
+     the freq_op (sampling period)
+
+     Field long name and units are not systematically declared here 
+     because they should be declared by Surfex itself : the code is
+     the best place for this type of metadata / documentation
+
+     1st version : S.Senesi - 05/2016 : 
+       derived form climate type runs without TEB, and with
+       LALLOW_ADD_DIM=true/false ; Defines what is needed for typical CMIP5 
+       Data Request
+
+>> plusieurs groupes thématiques avec distinction des grilles
+   pour une utilisation souple dans le arpsfx_file (exemple ci-dessous)
+
+	  SURFEX 2D basic fields
+          <field_group group_ref="sfx_fix"	operation="once"	enabled="true" />
+          <field_group group_ref="sfx_global"				enabled="true" />
+          <field_group group_ref="sfx_land"				enabled="true" />
+          <field_group group_ref="sfx_sea"				enabled="true" />
+          <field_group group_ref="sfx_lake"				enabled="true" />
+
+          SURFEX 3D land fields
+          <field_group group_ref="sfx_land_tlayers"			enabled="true" />
+          <field_group group_ref="sfx_land_snlayers"			enabled="true" />
+          <field_group group_ref="sfx_land_glayers"			enabled="true" />
+
+	  SURFEX carbon fields
+      	  <field_group group_ref="sfx_global_carbon"  			enabled="true" />
+	  <field_group group_ref="sfx_carbon"  				enabled="true" />
+	  <field_group group_ref="sfx_carbon_soilcpools"  		enabled="true" />
+	  <field_group group_ref="sfx_tiles"  				enabled="true" />
+
+          SURFEX landuse fields
+	  <field_group group_ref="sfx_land_lut"  			enabled="true" />
+	  <field_group group_ref="sfx_carbon_lut"  			enabled="true" />
+
+          SURFEX nudging fields
+	  <field_group group_ref="sfx_nudging_glayers" 			enabled="true" />
+	  <field_group group_ref="sfx_nudging_patches"			enabled="true" />
+
+
+
+
+-->
+
+<field_definition>
+  <field_group prec="4" operation="instant" freq_op="1ts" detect_missing_value="true" default_value="1.e+20" >
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- Fixed values -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <field_group id="sfx_fix" grid_ref="FULL_grid" >
+      <field id="orog"    	long_name="surface altitude"    			unit="m" />
+      <field id="areacella"    	long_name="area of grid cell"    			unit="m2" />
+      <field id="sftlf"    	long_name="fraction of the grid cell occupied by land"  unit="-" />
+      <field id="sftsf"    	long_name="fraction of the grid cell occupied by sea"   unit="-" />
+      <field id="sftlaf"    	long_name="fraction of the grid cell occupied by lake"  unit="-" />
+     </field_group>
+      <!-- Deplaces -->
+     <field_group id="sfx_fix2" grid_ref="NATURE_grid" >
+      <field id="clayFrac"    	long_name="Clay Fraction over land"    						unit="-" />
+      <field id="sandFrac"    	long_name="Sand Fraction over land"    						unit="-" />
+      <field id="siltFrac"    	long_name="Silt Fraction over land"    						unit="-" />
+      <field id="soild"    	long_name="Soil Hydrological Depth"    						unit="m" />
+      <field id="rzd2"    	long_name="Root Zone Depth equivalent to D2 in force-restore scheme (m)"    	unit="m" />
+      <field id="rootd"    	long_name="Maximum Root Depth excluding non-vegetated area"    			unit="m" />
+      <field id="mrsofc"    	long_name="Capacity of Soil to Store Water"    					unit="kg m-2" />
+    </field_group>
+<!-- Deplaces --> 
+     <field_group id="sfx_fix_z" grid_ref="NATURE_glayers" >
+      <field id="slthick"    	long_name="Thickness of Soil Layers"    					unit="m" />
+      <field id="rzd2sl"    	long_name="Root Distribution over the grid-cell or rzd2"    			unit="-" />
+      <field id="rootdsl"    	long_name="Root Distribution excluding non-vegetated area"    			unit="-" />
+      <field id="ksat"    	long_name="Saturated Hydraulic Conductivity over land"    			unit="1e-6 m s-1" />
+      <field id="soilsat"    	long_name="soil saturation over land"    					unit="m3 m-3" />
+      <field id="fldcapacity"   long_name="Field Capacity over land"    					unit="m3 m-3" />
+      <field id="wilt"    	long_name="Wilting Point over land"    						unit="m3 m-3" />
+     </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- Global fields -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <field_group id="sfx_global" grid_ref="FULL_grid" >
+      <field id="ts"    	long_name="total surface temperature"    			unit="K" />
+      <field id="tr"    	long_name="total radiative surface temperature"    		unit="K" />
+      <field id="tslsi"    	long_name="skin temperature of all surfaces except open ocean"	unit="K" />
+      <field id="tas"    	long_name="near-surface air temperature at 2m"    		unit="K" />
+      <field id="huss"    	long_name="near-surface specific humidity at 2m"    		unit="kg kg-1" />
+      <field id="hurs"    	long_name="near-surface relative humidity at 2m"    		unit="-" />
+      <field id="uas"    	long_name="Eastward component of the near-surface (10 m) wind"  unit="m s-1" />
+      <field id="vas"    	long_name="Northward component of the near-surface (10 m) wind" unit="m s-1" />
+      <field id="sfcWind"    	long_name="Near-surface (10m) Wind Speed"    		        unit="m s-1" />
+      <field id="rss"    	long_name="Net downward shortwave radiation at surface" 	unit="W m-2" />
+      <field id="rsds"    	long_name="Downward shortwave radiation at surface"		unit="W m-2" />
+      <field id="rsdsdiff"    	long_name="Diffuse downward shorwave radiation at surface"	unit="W m-2" />
+      <field id="rsdsdir"    	long_name="Direct downward shorwave radiation at surface"	unit="W m-2" > rsds - rsdsdiff </field>
+      <field id="rsus"    	long_name="Upward shortwave radiation at surface"		unit="W m-2" />
+      <field id="rls"    	long_name="Net downward longwave radiation at surface"		unit="W m-2" />
+      <field id="rlds"    	long_name="Downward longwave radiation at surface"		unit="W m-2" />
+      <field id="rlus"    	long_name="Upward longwave radiation at surface"		unit="W m-2" />
+      <field id="albsrfc"    	long_name="surface albedo"    					unit="-" />
+      <field id="hfls"    	long_name="total latent heat flux"    				unit="W m-2" />
+      <field id="hfsbl"    	long_name="energy of sublimation solid to vapor over land"    	unit="W m-2" />
+      <field id="hfss"    	long_name="Sensible heat flux"    				unit="W m-2" />
+      <field id="tauu"    	long_name="Surface Downward Eastward Wind Stress"    		unit="Pa" />
+      <field id="tauv"    	long_name="Surface Downward Northward Wind Stress"    		unit="Pa" />
+      <field id="tau"    	long_name="Surface Downward Wind Stress"    			unit="Pa" />
+      <field id="evspsbl"   	long_name="water evaporation flux including sublimation"    	unit="kg m-2 s-1" />
+      <field id="sbl"    	long_name="surface snow and ice sublimation flux"    		unit="kg m-2 s-1" />
+      <!-- derived -->
+      <field id="tmin"		field_ref="tas"		operation="minimum" />
+      <field id="tas_min"	field_ref="tmin" 	operation="average" freq_op="1d"> @tmin </field>
+      <field id="tmax"		field_ref="tas" 	operation="maximum" />
+      <field id="tas_max"	field_ref="tmax" 	operation="average" freq_op="1d"> @tmax </field>
+      <field id="sfcWindmax"	field_ref="sfcWind" 	operation="maximum" />
+      <field id="sfcWind_max"	field_ref="sfcWindmax" 	operation="average" freq_op="1d"> @sfcWindmax </field>
+    </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <field_group id="sfx_global_swband" grid_ref="FULL_swband" >
+      <field id="albdirbnd"    	long_name="Direct surface albedo for each band"    	        unit="-" />
+      <field id="albdiffbnd"    long_name="diffuse surface albedo for each band"    	        unit="-" />
+    </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- Global fields for carbon/chemistry -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <field_group id="sfx_global_carbon" grid_ref="FULL_grid" >
+      <field id="fco2all"    	long_name="Surface Carbon Mass Flux into the Atmosphere"    			unit="kg m-2 s-1" />
+      <field id="fco2nat"    	long_name="Carbon Mass Flux into the Atmosphere Due to Natural Sources"    	unit="kg m-2 s-1" />
+      <field id="fco2antt"    	long_name="Carbon Mass Flux into the Atmosphere Due to anthropogenic Sources"   unit="kg m-2 s-1" />
+      <field id="fco2fos"    	long_name="Carbon Mass Flux into Atmosphere Due to Fossil Fuel Emissions only"  unit="kg m-2 s-1" />
+    </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- Land/Continental fields -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <field_group id="sfx_land" grid_ref="NATURE_grid" >
+<!-- land energy/thermodynamics -->
+      <field id="tas_land"    	long_name="near-surface air temperature at 2m over land"    			unit="K" />
+      <field id="huss_land"    	long_name="near-surface specific humidity at 2m over land"    			unit="kg kg-1" />
+      <field id="hurs_land"    	long_name="near-surface relative humidity at 2m over land"    			unit="-" />
+      <field id="sfcWind_land"  long_name="near-surface near surface at 10m over land"    			unit="m s-1" />
+      <field id="ares_land"    	long_name="aerodynamic_resistance over land"    				unit="s m-1" />
+      <field id="rsds_land"    	long_name="short wave downward radiation over land"    				unit="W m-2" />
+      <field id="rlds_land"    	long_name="long wave downward radiation over land"    				unit="W m-2" />
+      <field id="rsus_land"    	long_name="short wave upward radiation over land"    				unit="W m-2" />
+      <field id="rlus_land"    	long_name="long wave upward radiation over land"    				unit="W m-2" />
+      <field id="rss_land"    	long_name="net short wave radiation over land"    				unit="W m-2" />
+      <field id="rls_land"    	long_name="net long wave radiation over land"    				unit="W m-2" />
+      <field id="rss_ns"    	long_name="snow-free net short wave radiation over land"    			unit="W m-2" />
+      <field id="hfls_land"    	long_name="total latent heat flux over land"    				unit="W m-2" />
+      <field id="hfsbl_land"    long_name="energy of sublimation solid to vapor over land"    			unit="W m-2" />
+      <field id="hfss_land"    	long_name="Sensible heat flux over land"    					unit="W m-2" />
+      <field id="hfdsl"         long_name="Downward Heat Flux over land"    					unit="W m-2" />
+      <field id="hfdsl_sfc"    	long_name="Ground heat flux surface to sub-surface over land"    		unit="W m-2" />
+      <field id="hfdsn"    	long_name="Snow heat flux over land"    					unit="W m-2" />
+      <field id="hfdsn_sfc"    	long_name="Snow heat flux surface to sub-surface over land"    			unit="W m-2" />
+      <field id="hfdsnb"    	long_name="Heat flux from snow into the ice or land under the snow"    		unit="W m-2" />
+      <field id="hfmlt"    	long_name="energy of fusion solid to liquid over land"    			unit="W m-2" />
+      <field id="hfmlt_sfc"    	long_name="energy of fusion solid to liquid of surface layer over land"    	unit="W m-2" />
+      <field id="dtes"    	long_name="Change in soil surface heat storage over land"    			unit="J m-2" />
+      <field id="dtes_sfc"    	long_name="Change in first soil surface layer heat storage over land"    	unit="J m-2" />
+      <field id="dtesn"    	long_name="Change in snow heat storage over land"    				unit="J m-2" />
+      <field id="dtesn_sfc"    	long_name="Change in first snow surface layer heat storage over land"    	unit="J m-2" />
+      <field id="nrjbud_isba"   long_name="Energy budget as residue over land"    				unit="W m-2" />
+      <field id="nrjbuds_isba"  long_name="Surface energy budget as residue over land"    			unit="W m-2" />
+      <field id="tau_land"    	long_name="wind stress over land"    						unit="Pa" />
+      <field id="tsn"    	long_name="snow internal temperature over land"    				unit="K" />
+      <field id="ts_land"    	long_name="surface temperature over land"    					unit="K" />
+      <field id="tr_land"    	long_name="radiative surface temperature over land"    				unit="K" />
+      <field id="tgs"    	long_name="surface ground temperature over land"    				unit="K" />
+      <field id="tsns"    	long_name="surface snow temperature over land"    				unit="K" />
+      <field id="albsrfc_land"  long_name="surface albedo over land"    					unit="-" />
+      <field id="albsn"    	long_name="surface snow albedo over land"    					unit="-" />
+      <field id="alb_ns"    	long_name="surface snow-free albedo over land"    				unit="-" />
+<!-- land hydrology -->
+      <field id="pr_land"    	long_name="Precipitation rate over land"    					unit="kg m-2 s-1" />
+      <field id="prra_land"    	long_name="rainfall rate over land"    						unit="kg m-2 s-1" />
+      <field id="prsn_land"    	long_name="snowfall rate over land"    						unit="kg m-2 s-1" />
+      <field id="prveg"    	long_name="Precipitation onto canopy over land"    				unit="kg m-2 s-1" />
+      <field id="potet"    	long_name="Potential Evapotranspiration over land"    				unit="kg m-2 s-1" />
+      <field id="et"    	long_name="total evapotranspiration over land"    				unit="kg m-2 s-1" />
+      <field id="tran"    	long_name="plant transpiration over land"    					unit="kg m-2 s-1" />
+      <field id="evspsblveg"    long_name="water evaporation from Canopy including sublimation over land"	unit="kg m-2 s-1" />
+      <field id="evspsblsoi"    long_name="water evaporation from soil including sublimation over land"    	unit="kg m-2 s-1" />
+      <field id="evspsblfld"    long_name="water evaporation from floodplains including sublimation over land"  unit="kg m-2 s-1" />
+      <field id="sbl_land"    	long_name="surface snow and ice sublimation flux over land"    			unit="kg m-2 s-1" />
+      <field id="sblnosn"    	long_name="sublimation from snow-free area over land"    			unit="kg m-2 s-1" />
+      <field id="ec"    	long_name="liquid water evaporation from Canopy over land"    			unit="kg m-2 s-1" />
+      <field id="es"    	long_name="liquid water evaporation from soil over land"    			unit="kg m-2 s-1" />
+      <field id="eow"    	long_name="liquid water evaporation from open water over land"  		unit="kg m-2 s-1" />
+      <field id="esn"    	long_name="liquid water evaporation from snow over land"    			unit="kg m-2 s-1" />
+      <field id="mrro"    	long_name="total runoff over land"    						unit="kg m-2 s-1" />
+      <field id="mrros"    	long_name="surface runoff over land"    					unit="kg m-2 s-1" />
+      <field id="mrrob"    	long_name="subsurface runoff over land"    					unit="kg m-2 s-1" />
+      <field id="iceberg"    	long_name="iceberg calving flux over land"    					unit="kg m-2 s-1" />
+      <field id="pfld"    	long_name="floodplains precipitation interception over land"    		unit="kg m-2 s-1" />
+      <field id="ifld"    	long_name="floodplains infiltration into the soil over land"    		unit="kg m-2 s-1" />
+      <field id="snrefr"    	long_name="refreezing of water in the snowpack over land"    			unit="kg m-2 s-1" />
+      <field id="snmtot"    	long_name="snowmelt over the entire snowpack over land"    			unit="kg m-2 s-1" />
+      <field id="snm"    	long_name="snowmelt over land" 							unit="kg m-2 s-1" />
+      <field id="snmsl"    	long_name="surface snowmalt flux into soil layer"    				unit="kg m-2 s-1" />
+      <field id="dslw"   	long_name="change in soil moisture over land"    				unit="kg m-2" />
+      <field id="dsn"    	long_name="change in snow water equivalent over land"    			unit="kg m-2" />
+      <field id="dcw"    	long_name="change in interception storage over land"    			unit="kg m-2" />
+      <field id="dsw"    	long_name="change in surface water storage over land"    			unit="kg m-2" />
+      <field id="watbud_isba"   long_name="land water budget as residue over land"    				unit="kg m-2" />
+      <field id="cw"    	long_name="canopy water amount over land"    					unit="kg m-2" />
+      <field id="mrsos"    	long_name="top soil moisture over 10cm over land"    				unit="kg m-2" />
+      <field id="rzwc"    	long_name="root zone soil moisture over land"    				unit="kg m-2" />
+      <field id="mrso"    	long_name="total soil moisture over land"    					unit="kg m-2" />
+      <field id="mrlso"    	long_name="Soil Liquid Water Content over land"    				unit="kg m-2" />
+      <field id="mrfso"    	long_name="Soil Frozen Water Content over land"    				unit="kg m-2" />
+      <field id="sw"    	long_name="surface water storage over land"    					unit="kg m-2" />
+      <field id="tws"    	long_name="terrestrial water storage over land"    				unit="kg m-2" />
+      <field id="snw"    	long_name="total snow water equivalent over land"    				unit="kg m-2" />
+      <field id="snd"    	long_name="surface snow thickness over land"    				unit="m" />
+      <field id="lwsnl"   	long_name="total liquid water in snow pack over land"    			unit="kg m-2" />
+<!-- land mics -->
+      <field id="lai"    	long_name="leaf area index over land"    					unit="-" />
+      <field id="cnc"    	long_name="Canopy covered or veg fraction"    					unit="-" />
+      <field id="mrsow"    	long_name="total soil wetness over land"    					unit="-" />
+      <field id="vegstress"    	long_name="soil water stress index for plant transpiration over land"		unit="-" />
+      <field id="prrsn"    	long_name="fraction of rainfall on snow over land"    				unit="-" />
+      <field id="prsnsn"    	long_name="fraction of snowfall on snow over land"    				unit="-" />
+      <field id="sncg"    	long_name="snow covered fraction over bare land"    				unit="-" />
+      <field id="sncv"    	long_name="snow covered fraction over veg"                              	unit="-" />
+      <field id="snct"    	long_name="total snow covered fraction including vegetation masking over land"	unit="-" />
+      <field id="agesno"    	long_name="snow age over land"    						unit="day" />
+      <field id="fsat"    	long_name="soil saturated fraction"    						unit="-" />
+      <field id="fldplainfrac"  long_name="floodplain fraction see by isba over land"    			unit="-" />
+      <field id="wtd_isba"    	long_name="water table depth see by isba over land"    				unit="m" />
+      <field id="wtdf_isba"    	long_name="grid-cell fraction of water table to rise sees by isba over land"	unit="-"/>
+      <field id="dmlt"    	long_name="depth to soil thaw active layer thickess over land" 			unit="m" />
+      <field id="dfr"    	long_name="frozen soil depth over land"    					unit="m" />
+      <field id="tpf"    	long_name="permafrost layer thickness over land"    				unit="m" />
+      <field id="pflw"    	long_name="liquid water content of permafrost layer over land"  		unit="kg m-2" />
+      <field id="nudgincsm"    	long_name="Nudging Increment of Water in Soil Moisture over land"		unit="kg m-2" />
+      <field id="nudgincswe"    long_name="Nudging Increment of Snow over land"    				unit="kg m-2"/>
+<!-- land physio/sbc -->
+      <field id="treeFrac"    	long_name="Tree Cover Fraction over land"   					unit="%" />
+      <field id="shrubFrac"    	long_name="Shrub Cover Fraction over land"    					unit="%" />
+      <field id="grassFrac"    	long_name="Grass Cover Fraction over land"    					unit="%" />
+      <field id="grassFracC3"   long_name="C3 Grass Cover Fraction over land"    				unit="%" />
+      <field id="grassFracC4"   long_name="C4 Grass Cover Fraction over land"    				unit="%" />
+      <field id="cropFrac"    	long_name="Crop Cover Fraction over land"    					unit="%" />
+      <field id="cropFracC3"    long_name="C3 Crop Cover Fraction over land"    				unit="%" />
+      <field id="cropFracC4"    long_name="C4 Crop Cover Fraction over land"   					unit="%" />
+      <field id="vegFrac"    	long_name="Total vegetated fraction"    					unit="%" />
+      <field id="baresoilFrac"  long_name="Baresoil and rock cover Fraction over land"    			unit="%" />
+      <field id="residualFrac"  long_name="Residual Cover Fraction over land"    				unit="%" />
+      <field id="sftgif"    	long_name="Fraction of Grid Cell Covered with Glacier over land"		unit="%" />
+      <field id="c3PftFrac"    	long_name="Percentage of entire grid cell that is covered by C3 PFTs"   	unit="%" />
+      <field id="c4PftFrac"    	long_name="Percentage of entire grid cell that is covered by C4 PFTs"   	unit="%" />
+      <field id="nwdFracLut"    long_name="fraction of land use tile tile that is non-woody vegetation"    	unit="-" />
+    </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <field_group id="sfx_land_tlayers" grid_ref="NATURE_tlayers" >
+      <field id="tsl"    	long_name="Soil temperature by layer over land"    				unit="K" />
+    </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <field_group id="sfx_land_snlayers" grid_ref="NATURE_snlayers" >
+      <field id="tsnl"    	long_name="Snow temperature by layer over land"    				unit="K" />
+      <field id="snwl"    	long_name="snow water equivalent by layer over land"    			unit="kg m-2" />
+      <field id="sndl"    	long_name="snow depth by layer over land"    					unit="m" />
+      <field id="lwsnll"    	long_name="liquid water in snow by layer over land"    				unit="kg m-2" />
+    </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <field_group id="sfx_land_glayers" grid_ref="NATURE_glayers" >
+      <field id="mrsol"    	long_name="Total water content of soil layer over land"    			    unit="kg m-2" />
+      <field id="mrsll"    	long_name="Liquid water content of soil layer over land"    			    unit="kg m-2" />
+      <field id="mrsfl"    	long_name="Frozen water content of soil layer over land"    			    unit="kg m-2" />
+      <field id="wg"    	long_name="Liquid water content of soil layer over land"    			    unit="m3 m-3" />
+      <field id="wgi"    	long_name="Frozen water content of soil layer over land"    			    unit="m3 m-3" />
+      <field id="mrlqso"    	long_name="average layer fraction of liquid moisture over land" 		    unit="-" />
+      <field id="mrfsofr"    	long_name="average layer fraction of frozen moisture over land" 		    unit="-" />
+      <field id="nudgincsml"   long_name="Nudging Increment of Water in Soil Moisture per layer over land"       unit="kg m-2" />
+    </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <field_group id="sfx_land_vegtype" grid_ref="NATURE_vegtype" >
+      <field id="lCoverFrac"    long_name="Plant Functional Type Grid Fraction over land"    			unit="%" />
+    </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- Sea Surface fields -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <field_group id="sfx_sea" grid_ref="SEA_grid" >
+      <field id="tas_sea"    	long_name="near-surface air temperature at 2m over sea"    			unit="K" />
+      <field id="huss_sea"    	long_name="near-surface specific humidity at 2m over sea"    			unit="kg kg-1" />
+      <field id="hurs_sea"    	long_name="near-surface relative humidity at 2m over sea"    			unit="-" />
+      <field id="sfcWind_sea"   long_name="near-surface near surface at 10m over sea"    			unit="m s-1" />
+      <field id="rsds_sea"    	long_name="short wave downward radiation over sea"    				unit="W m-2" />
+      <field id="rlds_sea"    	long_name="long wave downward radiation over sea"    				unit="W m-2" />
+      <field id="rsus_sea"    	long_name="short wave upward radiation over sea"    				unit="W m-2" />
+      <field id="rlus_sea"    	long_name="long wave upward radiation over sea"    				unit="W m-2" />
+      <field id="rss_sea"    	long_name="net short wave radiation over sea"    				unit="W m-2" />
+      <field id="rls_sea"    	long_name="net long wave radiation over sea"    				unit="W m-2" />
+      <field id="hfls_sea"    	long_name="latent heat flux over sea"    					unit="W m-2" />
+      <field id="hfss_sea"    	long_name="sensible heat flux over sea"    					unit="W m-2" />
+      <field id="hfsbl_sea"    	long_name="energy of sublimation solid to vapor over sea"    			unit="W m-2" />
+      <field id="tau_sea"    	long_name="wind stress over sea"    						unit="Pa" />
+      <field id="ts_sea"    	long_name="surface temperature over sea"    					unit="K" />
+      <field id="tr_sea"    	long_name="radiative surface temperature over sea including seaice"    		unit="K" />
+      <field id="sitemptop"    	long_name="sea-ice surface temperature over sea"    				unit="K" />
+      <field id="albsrfc_sea"   long_name="surface albedo over sea"    						unit="-" />
+      <field id="sialb"    	long_name="sea-ice albedo including snow over sea"    				unit="-" />
+      <field id="evspsbl_sea"   long_name="water evaporation flux including sublimation over sea"    		unit="kg m-2 s-1" />
+      <field id="sbl_sea"    	long_name="surface snow and ice sublimation flux over sea"    			unit="kg m-2 s-1" />
+      <field id="sic"    	long_name="sea-ice cover fraction over sea"    					unit="-" />
+      <field id="sithick"    	long_name="sea-ice thickness over sea"    					unit="m" />
+      <field id="sisnthick"    	long_name="sea-ice snow depth over sea"    					unit="m" />
+    </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- Lake Surface fields -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <field_group id="sfx_lake" grid_ref="WATER_grid" >
+      <field id="tasLa"   	long_name="near-surface air temperature at 2m over lake"    			unit="K" />
+      <field id="hussLa"    	long_name="near-surface specific humidity at 2m over lake"    			unit="kg kg-1" />
+      <field id="hursLa"    	long_name="near-surface relative humidity at 2m over lake"    			unit="-" />
+      <field id="sfcWindLa"    	long_name="near-surface near surface at 10m over lake"    			unit="m s-1" />
+      <field id="rsdsLa"    	long_name="short wave downward radiation over lake"    				unit="W m-2" />
+      <field id="rldsLa"    	long_name="long wave downward radiation over lake"    				unit="W m-2" />
+      <field id="rsusLa"    	long_name="short wave upward radiation over lake"    				unit="W m-2" />
+      <field id="rlusLa"    	long_name="long wave upward radiation over lake"    				unit="W m-2" />
+      <field id="rssLa"    	long_name="net short wave radiation over lake"    				unit="W m-2" />
+      <field id="rlsLa"    	long_name="net long wave radiation over lake"    				unit="W m-2" />
+      <field id="hflsLa"    	long_name="latent heat flux over lake"    					unit="W m-2" />
+      <field id="hfssLa"    	long_name="sensible heat flux over lake"    					unit="W m-2" />
+      <field id="hfsblLa"    	long_name="energy of sublimation solid to vapor over lake"    			unit="W m-2" />
+      <field id="tauLa"    	long_name="wind stress over lake"    						unit="Pa" />
+      <field id="tsLa"    	long_name="surface temperature over lake"    					unit="K" />
+      <field id="tsnLa"    	long_name="Temperature at the air-snow interface over lake"    			unit="K" />
+      <field id="ticeLa"    	long_name="Temperature at the snow-ice or air-ice interface over lake"    	unit="K" />
+      <field id="tmxlLa"    	long_name="mixed-layer temperature over lake"    				unit="K" />
+      <field id="tbottomLa"    	long_name="Temperature at the water-bottom sediment over lake"    		unit="K" />
+      <field id="tmeanLa"   	long_name="mean temperature over lake"    					unit="K" />
+      <field id="albsrfcLa"    	long_name="surface albedo over lake"    					unit="-" />
+      <field id="evspsblLa"    	long_name="water evaporation flux including sublimation over lake"    		unit="kg m-2 s-1" />
+      <field id="sblLa"    	long_name="surface snow and ice sublimation flux over lake"    			unit="kg m-2 s-1" />
+      <field id="sndLa"    	long_name="surface snow thickness over lake"   					unit="m" />
+      <field id="icedLa"    	long_name="ice thickness over lake"    						unit="m" />
+      <field id="mxldLa"    	long_name="mixed-layer thickness over lake"    					unit="m" />
+    </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- Land/Continental carbon fields -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <field_group id="sfx_carbon" grid_ref="NATURE_grid" >
+      <field id="gpp"    	long_name="gross primary productivity of carbon"    				unit="kgC m-2 s-1" />
+      <field id="ra"    	long_name="plant respiration carbon flux"    					unit="kgC m-2 s-1" />
+      <field id="rh"    	long_name="heterotrophic respiration carbon flux"    				unit="kgC m-2 s-1" />
+      <field id="rhSoil"    	long_name="heterotrophic respiration carbon flux from soil carbon"    		unit="kgC m-2 s-1" />
+      <field id="rhLitter"    	long_name="heterotrophic respiration carbon flux from litter"    		unit="kgC m-2 s-1" />
+      <field id="npp"    	long_name="net primary productivity of carbon"    				unit="kgC m-2 s-1" />
+      <field id="nep"    	long_name="net ecosystem productivity of carbon"    				unit="kgC m-2 s-1" />
+      <field id="cVeg"    	long_name="Carbon Mass in vegetation"    					unit="kgC m-2" />
+      <field id="cLitter"    	long_name="litter carbon content"    						unit="kgC m-2" />
+      <field id="cSoil"    	long_name="soil carbon content"    						unit="kgC m-2 s-1" />
+      <field id="cProduct"    	long_name="carbon_content_of_products_of_anthropogenic_land_use_change"    	unit="kgC m-2" />
+      <field id="cLand"    	long_name="Carbon Mass over land"    						unit="kgC m-2" />
+      <field id="cLeaf"    	long_name="Carbon Mass in Leaf"    						unit="kgC m-2" />
+      <field id="cStem"    	long_name="Carbon Mass in Stem"   						unit="kgC m-2" />
+      <field id="cWood"    	long_name="Carbon Mass in Wood"    						unit="kgC m-2" />
+      <field id="cRoot"    	long_name="Carbon Mass in Root"   						unit="kgC m-2" />
+      <field id="cLitterSurf"   long_name="surface litter carbon content"    					unit="kgC m-2" />
+      <field id="cLitterSub"    long_name="subsurface litter carbon content"    				unit="kgC m-2" />
+      <field id="cSoilFast"    	long_name="fast soil pool carbon content"    					unit="kgC m-2 s-1" />
+      <field id="cSoilMedium"   long_name="medium soil pool carbon content"    					unit="kgC m-2 s-1" />
+      <field id="cSoilSlow"    	long_name="slow soil pool carbon content"    					unit="kgC m-2 s-1" />
+      <field id="fVegLitter"    long_name="total Carbon Mass Flux from Vegetation to Litter"    		unit="kgC m-2 s-1" />
+      <field id="fLitterSoil"   long_name="total Carbon Mass Flux from Litter to Soil"    			unit="kgC m-2 s-1" />
+      <field id="fCLeach"    	long_name="leaching carbon runoff from soil to river"    			unit="kgC m-2 s-1" />
+      <field id="burntFracAll"  long_name="natural and anthropogenic burnt area fraction"    			unit="-" />
+      <field id="burntArea"    	long_name="natural burnt area fraction"    					unit="%" />
+      <field id="fFire"    	long_name="Carbon Mass Flux into Atmosphere due to CO2 Emission from all Fire"  unit="kgC m-2 s-1" />
+      <field id="fFireNat"    	long_name="Carbon Mass Flux into Atmosphere due to CO2 Emission from natural Fire"	unit="kgC m-2 s-1" />
+      <field id="fFireBCarb"    long_name="Black Carbon Flux into Atmosphere due to Emission from natural Fire" unit="kgC m-2 s-1" />
+      <field id="fireVegToLit"  long_name="transfer of biomass to litter due to fire"    			unit="kgC m-2 s-1" />
+      <field id="fireIndex"     long_name="fire index"    							unit="-" />
+      <field id="fireFromLit"   long_name="litter content governing fire occurence"    				unit="kgC m-2 s-1" />
+      <field id="fDeforest"    	long_name="Deforested biomass as a result of anthropogenic land use change"    	unit="kgC m-2 s-1" />
+      <field id="fDeforestToA"  long_name="carbon mass flux into atmosphere due to any human activity"    	unit="kgC m-2 s-1" />
+      <field id="fDeforestToP"  long_name="Deforested biomass into product pool as a result of anthropogenic land use change"	unit="kgC m-2 s-1" />
+      <field id="fDeforestToL"  long_name="carbon transferred to soil or litter pools due to lulucf processes"  unit="kgC m-2 s-1" />
+      <field id="fProdDecomp"   long_name="decomposition out of product pools to CO2 in atmosphere"    		unit="kgC m-2 s-1" />
+      <field id="fRegrowth"    	long_name="carbon flux due to plant regrowth related to land-use or land-cover change processes"	unit="kgC m-2 s-1" />
+      <field id="fLuc"    	long_name="Net Carbon Mass Flux into Atmosphere due to Land Use Change"    	unit="kgC m-2 s-1" />
+      <field id="nbp"    	long_name="surface net downward mass flux of carbon due to all land processes"  unit="kgC m-2 s-1" />
+      <field id="necb"    	long_name="net rate of carbon accumulation or loss"    				unit="kgC m-2 s-1" />
+    </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <field_group id="sfx_carbon_soilcpools" grid_ref="NATURE_soilcpools" >
+      <field id="cSoilPools"    long_name="soil pools carbon content"    					unit="kgC m-2 s-1" />
+      <field id="tSoilPools"    long_name="turnover rate of each model soil carbon pool"    			unit="s-1" />
+    </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- Land/Continental fields aggregated by tiles (Tree, grass, crop, bare soil, permanent ice)-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <field_group id="sfx_tiles" grid_ref="NATURE_grid" >
+<!-- Over Trees  -->
+<!-- land carbon -->
+      <field id="gppTree"   		long_name="gross primary productivity of carbon"    			unit="kgC m-2 s-1" />
+      <field id="raTree"    		long_name="plant respiration carbon flux"    				unit="kgC m-2 s-1" />
+      <field id="rhTree"    		long_name="heterotrophic respiration carbon flux"    			unit="kgC m-2 s-1" />
+      <field id="rhSoilTree"   		long_name="heterotrophic respiration carbon flux from soil carbon"    	unit="kgC m-2 s-1" />
+      <field id="rhLitterTree" 		long_name="heterotrophic respiration carbon flux from litter"    	unit="kgC m-2 s-1" />
+      <field id="nppTree"    		long_name="net primary productivity of carbon"    			unit="kgC m-2 s-1" />
+      <field id="nepTree"    		long_name="net ecosystem productivity of carbon"    			unit="kgC m-2 s-1" />
+      <field id="cVegTree"    		long_name="Carbon Mass in vegetation"    				unit="kgC m-2" />
+      <field id="cLitterTree"  		long_name="litter carbon content"    					unit="kgC m-2" />
+      <field id="cSoilTree"    		long_name="soil carbon content"    					unit="kgC m-2 s-1" />
+      <field id="cProductTree" 		long_name="carbon_content_of_products_of_anthropogenic_land_use_change" unit="kgC m-2" />
+      <field id="cLandTree"    		long_name="Carbon Mass over land"    					unit="kgC m-2" />
+<!-- land mics -->
+      <field id="laiTree"    		long_name="leaf area index over land"    				unit="-" />
+      <field id="cncTree"    		long_name="Canopy covered or veg fraction"    				unit="-" />
+      <field id="vegstressTree"		long_name="soil water stress index for plant transpiration over land"   unit="-" />
+      <field id="dmltTree"    		long_name="depth to soil thaw active layer thickess over land"    	unit="m" />
+<!-- Over grasses  -->
+<!-- land carbon -->
+      <field id="gppGrass"    		long_name="gross primary productivity of carbon"    			unit="kgC m-2 s-1" />
+      <field id="raGrass"    		long_name="plant respiration carbon flux"    				unit="kgC m-2 s-1" />
+      <field id="rhGrass"    		long_name="heterotrophic respiration carbon flux"    			unit="kgC m-2 s-1" />
+      <field id="rhSoilGrass"  		long_name="heterotrophic respiration carbon flux from soil carbon"    	unit="kgC m-2 s-1" />
+      <field id="rhLitterGrass"		long_name="heterotrophic respiration carbon flux from litter"    	unit="kgC m-2 s-1" />
+      <field id="nppGrass"    		long_name="net primary productivity of carbon"    			unit="kgC m-2 s-1" />
+      <field id="nepGrass"    		long_name="net ecosystem productivity of carbon"    			unit="kgC m-2 s-1" />
+      <field id="cVegGrass"    		long_name="Carbon Mass in vegetation"    				unit="kgC m-2" />
+      <field id="cLitterGrass" 		long_name="litter carbon content"    					unit="kgC m-2" />
+      <field id="cSoilGrass"   		long_name="soil carbon content"    					unit="kgC m-2 s-1" />
+      <field id="cProductGrass"		long_name="carbon_content_of_products_of_anthropogenic_land_use_change" unit="kgC m-2" />
+      <field id="cLandGrass"   		long_name="Carbon Mass over land"    					unit="kgC m-2" />
+<!-- land mics -->
+      <field id="laiGrass"    		long_name="leaf area index over land"    				unit="-" />
+      <field id="cncGrass"    		long_name="Canopy covered or veg fraction"    				unit="-" />
+      <field id="vegstressGrass"	long_name="soil water stress index for plant transpiration over land"   unit="-" />
+      <field id="dmltGrass"    		long_name="depth to soil thaw active layer thickess over land"    	unit="m" />
+<!-- Over crops  -->
+<!-- land carbon -->
+      <field id="gppCrop"    		long_name="gross primary productivity of carbon"    			unit="kgC m-2 s-1" />
+      <field id="raCrop"    		long_name="plant respiration carbon flux"    				unit="kgC m-2 s-1" />
+      <field id="rhCrop"    		long_name="heterotrophic respiration carbon flux"    			unit="kgC m-2 s-1" />
+      <field id="rhSoilCrop"   		long_name="heterotrophic respiration carbon flux from soil carbon"    	unit="kgC m-2 s-1" />
+      <field id="rhLitterCrop" 		long_name="heterotrophic respiration carbon flux from litter"    	unit="kgC m-2 s-1" />
+      <field id="nppCrop"    		long_name="net primary productivity of carbon"    			unit="kgC m-2 s-1" />
+      <field id="nepCrop"    		long_name="net ecosystem productivity of carbon"    			unit="kgC m-2 s-1" />
+      <field id="cVegCrop"    		long_name="Carbon Mass in vegetation"    				unit="kgC m-2" />
+      <field id="cLitterCrop"  		long_name="litter carbon content"    					unit="kgC m-2" />
+      <field id="cSoilCrop"    		long_name="soil carbon content"    					unit="kgC m-2 s-1" />
+      <field id="cProductCrop" 		long_name="carbon_content_of_products_of_anthropogenic_land_use_change" unit="kgC m-2" />
+      <field id="cLandCrop"    		long_name="Carbon Mass over land"    					unit="kgC m-2" />
+<!-- land mics -->
+      <field id="laiCrop"    		long_name="leaf area index over land"    				unit="-" />
+      <field id="cncCrop"    		long_name="Canopy covered or veg fraction"    				unit="-" />
+      <field id="vegstressCrop"		long_name="soil water stress index for plant transpiration over land"   unit="-" />
+      <field id="dmltCrop"    		long_name="depth to soil thaw active layer thickess over land"    	unit="m" />
+<!-- Over bare soil  -->
+<!-- land carbon -->
+      <field id="gppBsoil"    		long_name="gross primary productivity of carbon"    			unit="kgC m-2 s-1" />
+      <field id="raBsoil"    		long_name="plant respiration carbon flux"    				unit="kgC m-2 s-1" />
+      <field id="rhBsoil"    		long_name="heterotrophic respiration carbon flux"    			unit="kgC m-2 s-1" />
+      <field id="rhSoilBsoil"   	long_name="heterotrophic respiration carbon flux from soil carbon"    	unit="kgC m-2 s-1" />
+      <field id="rhLitterBsoil"	        long_name="heterotrophic respiration carbon flux from litter"    	unit="kgC m-2 s-1" />
+      <field id="nppBsoil"    		long_name="net primary productivity of carbon"    			unit="kgC m-2 s-1" />
+      <field id="nepBsoil"    		long_name="net ecosystem productivity of carbon"    			unit="kgC m-2 s-1" />
+      <field id="cVegBsoil"    	        long_name="Carbon Mass in vegetation"    				unit="kgC m-2" />
+      <field id="cLitterBsoil"  	long_name="litter carbon content"    					unit="kgC m-2" />
+      <field id="cSoilBsoil"    	long_name="soil carbon content"    					unit="kgC m-2 s-1" />
+      <field id="cProductBsoil" 	long_name="carbon_content_of_products_of_anthropogenic_land_use_change" unit="kgC m-2" />
+      <field id="cLandBsoil"    	long_name="Carbon Mass over land"    					unit="kgC m-2" />
+<!-- land mics -->
+      <field id="laiBsoil"    		long_name="leaf area index over land"    				unit="-" />
+      <field id="cncBsoil"    		long_name="Canopy covered or veg fraction"    				unit="-" />
+      <field id="vegstressBsoil"	long_name="soil water stress index for plant transpiration over land"   unit="-" />
+      <field id="dmltBsoil"     	long_name="depth to soil thaw active layer thickess over land"    	unit="m" />
+<!-- Over permanent snow and ice  -->
+<!-- land carbon -->
+      <field id="gppIs"    		long_name="gross primary productivity of carbon"    			unit="kgC m-2 s-1" />
+      <field id="raIs"    		long_name="plant respiration carbon flux"    				unit="kgC m-2 s-1" />
+      <field id="rhIs"    		long_name="heterotrophic respiration carbon flux"    			unit="kgC m-2 s-1" />
+      <field id="rhSoilIs"    		long_name="heterotrophic respiration carbon flux from soil carbon"    	unit="kgC m-2 s-1" />
+      <field id="rhLitterIs"    	long_name="heterotrophic respiration carbon flux from litter"    	unit="kgC m-2 s-1" />
+      <field id="nppIs"    		long_name="net primary productivity of carbon"    			unit="kgC m-2 s-1" />
+      <field id="nepIs"    		long_name="net ecosystem productivity of carbon"   			unit="kgC m-2 s-1" />
+      <field id="cVegIs"    		long_name="Carbon Mass in vegetation"    				unit="kgC m-2" />
+      <field id="cLitterIs"     	long_name="litter carbon content"    					unit="kgC m-2" />
+      <field id="cSoilIs"    		long_name="soil carbon content"    					unit="kgC m-2 s-1" />
+      <field id="cProductIs"    	long_name="carbon_content_of_products_of_anthropogenic_land_use_change" unit="kgC m-2" />
+      <field id="cLandIs"    		long_name="Carbon Mass over land"    					unit="kgC m-2" />
+<!-- land mics -->
+      <field id="laiIs"    		long_name="leaf area index over land"    				unit="-" />
+      <field id="cncIs"    		long_name="Canopy covered or veg fraction"    				unit="-" />
+      <field id="vegstressIs"   	long_name="soil water stress index for plant transpiration over land"   unit="-" />
+      <field id="dmltIs"    		long_name="depth to soil thaw active layer thickess over land"    	unit="m" />
+    </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- Land/Continental fields per land-use tiles (patch aggregation = 3d fields) -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <field_group id="sfx_land_lut" grid_ref="NATURE_landuse" >
+      <field id="fracLut"    	long_name="fraction of land-use tile"    								unit="%" />
+      <field id="tasLut"    	long_name="near-surface air temperature 2m above displacement height, i.e. t_ref on land-use tile"	unit="K" />
+      <field id="hussLut"    	long_name="near-surface air specific humidty 2m above displacement height, i.e. t_ref on land-use tile" unit="-" />
+      <field id="rsusLut"    	long_name="short wave upward radiation on land-use tile"    						unit="W m-2" />
+      <field id="rlusLut"    	long_name="long wave upward radiation on land-use tile"    						unit="W m-2" />
+      <field id="rsdsLut"    	long_name="short wave upward radiation on land-use tile"    						unit="W m-2" />
+      <field id="rldsLut"   	long_name="long wave upward radiation on land-use tile"   						unit="W m-2" />
+      <field id="hfssLut"    	long_name="Sensible heat flux on land-use tile"    							unit="W m-2" />
+      <field id="hflsLut"    	long_name="Sensible heat flux on land-use tile"    							unit="W m-2" />
+      <field id="nrjbudLut"    	long_name="Energy budget as residue on land-use tile"    						unit="W m-2" />
+      <field id="tslsiLut"    	long_name="skin temperature on land-use tile"    							unit="K" />
+      <field id="mrsosLut"    	long_name="top soil moisture over 10cm on land-use tile"   						unit="kg m-2" />
+      <field id="rzwcLut"    	long_name="root zone soil moisture on land-use tile"    						unit="kg m-2" />
+      <field id="mrsoLut"    	long_name="total soil moisture on land-use tile"    							unit="kg m-2" />
+      <field id="sweLut"    	long_name="snow water equivalent on land-use tile"    							unit="kg m-2" />
+      <field id="mrsowLut"    	long_name="total soil wetness on land-use tile"    							unit="-" />
+      <field id="mrroLut"    	long_name="total runoff on land-use tile"    								unit="kg m-2 s-1" />
+      <field id="cncLut"    	long_name="canopy covered fraction on land-use tile"    						unit="-" />
+      <field id="laiLut"    	long_name="leaf area index on land-use tile"    							unit="-" />
+    </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- Land/Continental carbon fields per land-use tiles (patch aggregation = 3d fields) -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <field_group id="sfx_carbon_lut" grid_ref="NATURE_landuse" >
+      <field id="gppLut"    	long_name="gross primary productivity of carbon on land-use tile"    					unit="kgC m-2 s-1" />
+      <field id="raLut"    	long_name="plant respiration carbon flux on land-use tile"    						unit="kgC m-2 s-1" />
+      <field id="rhLut"    	long_name="heterotrophic respiration carbon flux on land-use tile"    					unit="kgC m-2 s-1" />
+      <field id="nppLut"    	long_name="net primary productivity of carbon on land-use tile"    					unit="kgC m-2 s-1" />
+      <field id="nbpLut"    	long_name="Carbon Mass Flux out of Atmosphere due to Net Biospheric Production on land-use tile"    	unit="kgC m-2 s-1" />
+      <field id="necbLut"    	long_name="net rate of carbon accumulation or loss on land-use tile"    				unit="kgC m-2 s-1" />
+      <field id="cVegLut"   	long_name="Carbon Mass in vegetation on land-use tile"    						unit="kgC m-2" />
+      <field id="cLitterLut"    long_name="litter carbon content on land-use tile"    							unit="kgC m-2" />
+      <field id="cSoilLut"    	long_name="soil carbon content on land-use tile"    							unit="kgC m-2 s-1" />
+      <field id="fCLeachLut"    long_name="leaching carbon runoff from soil to river on land-use tile"    				unit="kgC m-2 s-1" />
+      <field id="cTotFireLut"   long_name="total carbon loss from natural and managed fire on land-use tile"    			unit="kgC m-2 s-1" />
+      <field id="fDeforestLut"  long_name="Deforested biomass as a result of anthropogenic land-use change on land-use tile"    	unit="kgC m-2 s-1" />
+      <field id="fLulccAtmLut"  long_name="carbon mass flux into atmosphere due to any human activity on land-use tile"    		unit="kgC m-2 s-1" />
+      <field id="fLulccProLut"  long_name="carbon harvested that enters anthropogenic product pools on land-use tile"   		unit="kgC m-2 s-1" />
+      <field id="fLulccResLut"  long_name="carbon transferred to soil or litter pools on land-use tile"    				unit="kgC m-2 s-1" />
+      <field id="fProdDecoLut"  long_name="decomposition out of product pools to CO2 in atmosphere on land-use tile"    		unit="kgC m-2 s-1" />
+      <field id="fRegrowthLut"  long_name="carbon flux due to plant regrowth on land-use tile"    					unit="kgC m-2 s-1" />
+      <field id="cProductLut"   long_name="carbon content of products of anthropogenic land-use change on land-use tile"    		unit="kgC m-2" />
+    </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- Land/Continental hydrology fields per patch (nudging purpose) -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <field_group id="sfx_wg_glayers_p" grid_ref="NATURE_glayers" >
+      <field id="wg_patch1"    	long_name="soil liquid water content by patch over land"	unit="m3 m-3" />
+      <field id="wg_patch2"    	long_name="soil liquid water content by patch over land"    	unit="m3 m-3" />
+      <field id="wg_patch3"    	long_name="soil liquid water content by patch over land"    	unit="m3 m-3" />
+      <field id="wg_patch4"    	long_name="soil liquid water content by patch over land"    	unit="m3 m-3" />
+      <field id="wg_patch5"    	long_name="soil liquid water content by patch over land"    	unit="m3 m-3" />
+      <field id="wg_patch6"    	long_name="soil liquid water content by patch over land"    	unit="m3 m-3" />
+      <field id="wg_patch7"    	long_name="soil liquid water content by patch over land"    	unit="m3 m-3" />
+      <field id="wg_patch8"    	long_name="soil liquid water content by patch over land"    	unit="m3 m-3" />
+      <field id="wg_patch9"    	long_name="soil liquid water content by patch over land"    	unit="m3 m-3" />
+      <field id="wg_patch10"    long_name="soil liquid water content by patch over land"   	unit="m3 m-3" />
+      <field id="wg_patch11"    long_name="soil liquid water content by patch over land"   	unit="m3 m-3" />
+      <field id="wg_patch12"    long_name="soil liquid water content by patch over land"   	unit="m3 m-3" />
+      <field id="wgi_patch1"    long_name="soil solid water content by patch over land"    	unit="m3 m-3" />
+      <field id="wgi_patch2"    long_name="soil solid water content by patch over land"    	unit="m3 m-3" />
+      <field id="wgi_patch3"    long_name="soil solid water content by patch over land"    	unit="m3 m-3" />
+      <field id="wgi_patch4"    long_name="soil solid water content by patch over land"    	unit="m3 m-3" />
+      <field id="wgi_patch5"    long_name="soil solid water content by patch over land"    	unit="m3 m-3" />
+      <field id="wgi_patch6"    long_name="soil solid water content by patch over land"    	unit="m3 m-3" />
+      <field id="wgi_patch7"    long_name="soil solid water content by patch over land"    	unit="m3 m-3" />
+      <field id="wgi_patch8"    long_name="soil solid water content by patch over land"    	unit="m3 m-3" />
+      <field id="wgi_patch9"    long_name="soil solid water content by patch over land"    	unit="m3 m-3" />
+      <field id="wgi_patch10"   long_name="soil solid water content by patch over land"   	unit="m3 m-3" />
+      <field id="wgi_patch11"   long_name="soil solid water content by patch over land"   	unit="m3 m-3" />
+      <field id="wgi_patch12"   long_name="soil solid water content by patch over land"   	unit="m3 m-3" />
+     </field_group>
+     <field_group id="sfx_nudgincsm_glayers_p" grid_ref="NATURE_glayers" >
+      <field id="nudgincsml_p1"    long_name="Nudging Increment of Water in Soil Moisture per patch over land"       unit="kg m-2" />
+      <field id="nudgincsml_p2"    long_name="Nudging Increment of Water in Soil Moisture per patch over land"       unit="kg m-2" />
+      <field id="nudgincsml_p3"    long_name="Nudging Increment of Water in Soil Moisture per patch over land"       unit="kg m-2" />
+      <field id="nudgincsml_p4"    long_name="Nudging Increment of Water in Soil Moisture per patch over land"       unit="kg m-2" />
+      <field id="nudgincsml_p5"    long_name="Nudging Increment of Water in Soil Moisture per patch over land"       unit="kg m-2" />
+      <field id="nudgincsml_p6"    long_name="Nudging Increment of Water in Soil Moisture per patch over land"       unit="kg m-2" />
+      <field id="nudgincsml_p7"    long_name="Nudging Increment of Water in Soil Moisture per patch over land"       unit="kg m-2" />
+      <field id="nudgincsml_p8"    long_name="Nudging Increment of Water in Soil Moisture per patch over land"       unit="kg m-2" />
+      <field id="nudgincsml_p9"    long_name="Nudging Increment of Water in Soil Moisture per patch over land"       unit="kg m-2" />
+      <field id="nudgincsml_p10"   long_name="Nudging Increment of Water in Soil Moisture per patch over land"       unit="kg m-2" />
+      <field id="nudgincsml_p11"   long_name="Nudging Increment of Water in Soil Moisture per patch over land"       unit="kg m-2" />
+      <field id="nudgincsml_p12"   long_name="Nudging Increment of Water in Soil Moisture per patch over land"       unit="kg m-2" />
+    </field_group>
+    <field_group id="sfx_tg_tlayers_p" grid_ref="NATURE_tlayers" >
+      <field id="tg_patch1"    	long_name="Temperature by patch over land"	unit="K" />
+      <field id="tg_patch2"    	long_name="Temperature by patch over land"    	unit="K" />
+      <field id="tg_patch3"    	long_name="Temperature by patch over land"    	unit="K" />
+      <field id="tg_patch4"    	long_name="Temperature by patch over land"    	unit="K" />
+      <field id="tg_patch5"    	long_name="Temperature by patch over land"    	unit="K" />
+      <field id="tg_patch6"    	long_name="Temperature by patch over land"    	unit="K" />
+      <field id="tg_patch7"    	long_name="Temperature by patch over land"    	unit="K" />
+      <field id="tg_patch8"    	long_name="Temperature by patch over land"    	unit="K" />
+      <field id="tg_patch9"    	long_name="Temperature by patch over land"    	unit="K" />
+      <field id="tg_patch10"    long_name="Temperature by patch over land"   	unit="K" />
+      <field id="tg_patch11"    long_name="Temperature by patch over land"   	unit="K" />
+      <field id="tg_patch12"    long_name="Temperature by patch over land"   	unit="K" />
+     </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <field_group id="sfx_sn_nudging" grid_ref="NATURE_patches" >
+      <field id="swe_patch"    	long_name="snow water equivalent by patch over land"        	unit="kg m-2" />
+    </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+  </field_group>
+</field_definition>
+

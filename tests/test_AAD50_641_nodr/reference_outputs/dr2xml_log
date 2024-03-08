@@ -1,0 +1,932 @@
+
+ **************************************************
+*
+*              dr2xml version:  current_version
+*   CMIP6 conventions version:  v6.2.4
+*  CMIP6 Data Request version:  No Data Request
+
+*
+ **************************************************
+
+**************************************************
+
+Processing context  surfex
+
+**************************************************
+
+Number of distinct CMOR variables (whatever the grid): 0
+Number of distinct var labels is: 0
+Number of simplified vars is: 0
+Issues with standard names are: []
+homevars file: current_directory/test_AAD50_641_nodr/input/home_data_request/home_data_request_nodr.txt
+For extra table CNRM_HOMALmon (which has 116 variables):
+	Variables which dim was found in extra coordinates table:
+		               alt40: clcalipsoun
+
+		            latitude: RADabs550aer RADasy550aer RADod550aer RADssa550aer TACabs550aer albsrfc albsrfcLa asy550aer burntArea cSoilPools carbdis carbin carbw cdnc cdnctop clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun clcalipsoun clhcalipsoice clhcalipsoliq clhcalipsoun clhmodis cllcalipsoice cllcalipsoliq cllcalipsoun cllmodis clmcalipsoice clmcalipsoliq clmcalipsoun clmmodis clmodis cltcalipsoice cltcalipsoliq cltcalipsoun clth cltl cltlidarradar cltm dryno3 eminh4 emino3 ext550bc ext550dust ext550nh4 ext550no3 ext550oa ext550so4 ext550ss fDeforestToL fFireBCarb fRegrowth fco2all fldf fsat fwtd husll icedLa icod iwpmodis lcod lwpmodis meantbclrisccp meantbisccp necb od550acldaer od550dustbin1 od550dustbin2 od550nh4 od550no3bin1 od550ssbin1 od550ssbin2 parasolCRefl pctmodis reffclimodis reffclitop reffclwmodis reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf sconcbc sconcnh4 sconcno3 sconcoa sedbc seddust sednh4 sedno3 sedoa sedso4 sedss snct sndLa soild ssa550aer tSoilPools tall tauimodis tauisccp tautmodis tauwmodis tmxlLa tsLa tssea uall vall vegstress wetno3
+
+		           longitude: RADabs550aer RADasy550aer RADod550aer RADssa550aer TACabs550aer albsrfc albsrfcLa asy550aer burntArea cSoilPools carbdis carbin carbw cdnc cdnctop clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun clcalipsoun clhcalipsoice clhcalipsoliq clhcalipsoun clhmodis cllcalipsoice cllcalipsoliq cllcalipsoun cllmodis clmcalipsoice clmcalipsoliq clmcalipsoun clmmodis clmodis cltcalipsoice cltcalipsoliq cltcalipsoun clth cltl cltlidarradar cltm dryno3 eminh4 emino3 ext550bc ext550dust ext550nh4 ext550no3 ext550oa ext550so4 ext550ss fDeforestToL fFireBCarb fRegrowth fco2all fldf fsat fwtd husll icedLa icod iwpmodis lcod lwpmodis meantbclrisccp meantbisccp necb od550acldaer od550dustbin1 od550dustbin2 od550nh4 od550no3bin1 od550ssbin1 od550ssbin2 parasolCRefl pctmodis reffclimodis reffclitop reffclwmodis reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf sconcbc sconcnh4 sconcno3 sconcoa sedbc seddust sednh4 sedno3 sedoa sedso4 sedss snct sndLa soild ssa550aer tSoilPools tall tauimodis tauisccp tautmodis tauwmodis tmxlLa tsLa tssea uall vall vegstress wetno3
+
+		                p220: clhcalipsoice clhcalipsoliq clhcalipsoun
+
+		                p560: clmcalipsoice clmcalipsoliq clmcalipsoun
+
+		                p840: cllcalipsoice cllcalipsoliq cllcalipsoun
+
+		              plev19: cdnc ext550bc ext550dust ext550nh4 ext550no3 ext550oa ext550so4 ext550ss
+
+		              plev7c: clmodis
+
+		                sza5: parasolCRefl
+
+		                 tau: clmodis
+
+		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		             XY-sza5: parasolCRefl
+
+		       XY-tau|plev7c: clmodis
+
+		             XY-temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+For extra table CNRM_HOMEPmon (which has 44 variables):
+	Variables which dim was found in extra coordinates table:
+		            Plev39hm: co no2 o3
+
+		            latitude: co hur200 hur500 hur700 hur850 hur925 hus hus200 hus500 hus700 hus850 hus925 no2 o3 ta ta200 ta500 ta700 ta850 ta925 ua ua200 ua500 ua700 ua850 ua925 va va200 va500 va700 va850 va925 wap wap200 wap500 wap700 wap850 wap925 zg zg200 zg500 zg700 zg850 zg925
+
+		           longitude: co hur200 hur500 hur700 hur850 hur925 hus hus200 hus500 hus700 hus850 hus925 no2 o3 ta ta200 ta500 ta700 ta850 ta925 ua ua200 ua500 ua700 ua850 ua925 va va200 va500 va700 va850 va925 wap wap200 wap500 wap700 wap850 wap925 zg zg200 zg500 zg700 zg850 zg925
+
+		             plev200: hur200 hus200 ta200 ua200 va200 wap200 zg200
+
+		             plev500: hur500 hus500 ta500 ua500 va500 wap500 zg500
+
+		             plev700: hur700 hus700 ta700 ua700 va700 wap700 zg700
+
+		             plev7hm: hus ta ua va wap zg
+
+		             plev850: hur850 hus850 ta850 ua850 va850 wap850 zg850
+
+		             plev925: hur925 hus925 ta925 ua925 va925 wap925 zg925
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		         XY-Plev39hm: co no2 o3
+
+		          XY-plev200: hur200 hus200 ta200 ua200 va200 wap200 zg200
+
+		          XY-plev500: hur500 hus500 ta500 ua500 va500 wap500 zg500
+
+		          XY-plev700: hur700 hus700 ta700 ua700 va700 wap700 zg700
+
+		          XY-plev7hm: hus ta ua va wap zg
+
+		          XY-plev850: hur850 hus850 ta850 ua850 va850 wap850 zg850
+
+		          XY-plev925: hur925 hus925 ta925 ua925 va925 wap925 zg925
+
+For extra table CNRM_HOMALday (which has 116 variables):
+	Variables which dim was found in extra coordinates table:
+		               alt40: clcalipsoun
+
+		            latitude: RADabs550aer RADasy550aer RADod550aer RADssa550aer TACabs550aer albsrfc albsrfcLa asy550aer burntArea cSoilPools carbdis carbin carbw cdnc cdnctop clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun clcalipsoun clhcalipsoice clhcalipsoliq clhcalipsoun clhmodis cllcalipsoice cllcalipsoliq cllcalipsoun cllmodis clmcalipsoice clmcalipsoliq clmcalipsoun clmmodis clmodis cltcalipsoice cltcalipsoliq cltcalipsoun clth cltl cltlidarradar cltm dryno3 eminh4 emino3 ext550bc ext550dust ext550nh4 ext550no3 ext550oa ext550so4 ext550ss fDeforestToL fFireBCarb fRegrowth fco2all fldf fsat fwtd husll icedLa icod iwpmodis lcod lwpmodis meantbclrisccp meantbisccp necb od550acldaer od550dustbin1 od550dustbin2 od550nh4 od550no3bin1 od550ssbin1 od550ssbin2 parasolCRefl pctmodis reffclimodis reffclitop reffclwmodis reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf sconcbc sconcnh4 sconcno3 sconcoa sedbc seddust sednh4 sedno3 sedoa sedso4 sedss snct sndLa soild ssa550aer tSoilPools tall tauimodis tauisccp tautmodis tauwmodis tmxlLa tsLa tssea uall vall vegstress wetno3
+
+		           longitude: RADabs550aer RADasy550aer RADod550aer RADssa550aer TACabs550aer albsrfc albsrfcLa asy550aer burntArea cSoilPools carbdis carbin carbw cdnc cdnctop clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun clcalipsoun clhcalipsoice clhcalipsoliq clhcalipsoun clhmodis cllcalipsoice cllcalipsoliq cllcalipsoun cllmodis clmcalipsoice clmcalipsoliq clmcalipsoun clmmodis clmodis cltcalipsoice cltcalipsoliq cltcalipsoun clth cltl cltlidarradar cltm dryno3 eminh4 emino3 ext550bc ext550dust ext550nh4 ext550no3 ext550oa ext550so4 ext550ss fDeforestToL fFireBCarb fRegrowth fco2all fldf fsat fwtd husll icedLa icod iwpmodis lcod lwpmodis meantbclrisccp meantbisccp necb od550acldaer od550dustbin1 od550dustbin2 od550nh4 od550no3bin1 od550ssbin1 od550ssbin2 parasolCRefl pctmodis reffclimodis reffclitop reffclwmodis reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf sconcbc sconcnh4 sconcno3 sconcoa sedbc seddust sednh4 sedno3 sedoa sedso4 sedss snct sndLa soild ssa550aer tSoilPools tall tauimodis tauisccp tautmodis tauwmodis tmxlLa tsLa tssea uall vall vegstress wetno3
+
+		                p220: clhcalipsoice clhcalipsoliq clhcalipsoun
+
+		                p560: clmcalipsoice clmcalipsoliq clmcalipsoun
+
+		                p840: cllcalipsoice cllcalipsoliq cllcalipsoun
+
+		              plev19: cdnc ext550bc ext550dust ext550nh4 ext550no3 ext550oa ext550so4 ext550ss
+
+		              plev7c: clmodis
+
+		                sza5: parasolCRefl
+
+		                 tau: clmodis
+
+		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		             XY-sza5: parasolCRefl
+
+		       XY-tau|plev7c: clmodis
+
+		             XY-temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+For extra table CNRM_HOMEPday (which has 44 variables):
+	Variables which dim was found in extra coordinates table:
+		            Plev39hm: co no2 o3
+
+		            latitude: co hur200 hur500 hur700 hur850 hur925 hus hus200 hus500 hus700 hus850 hus925 no2 o3 ta ta200 ta500 ta700 ta850 ta925 ua ua200 ua500 ua700 ua850 ua925 va va200 va500 va700 va850 va925 wap wap200 wap500 wap700 wap850 wap925 zg zg200 zg500 zg700 zg850 zg925
+
+		           longitude: co hur200 hur500 hur700 hur850 hur925 hus hus200 hus500 hus700 hus850 hus925 no2 o3 ta ta200 ta500 ta700 ta850 ta925 ua ua200 ua500 ua700 ua850 ua925 va va200 va500 va700 va850 va925 wap wap200 wap500 wap700 wap850 wap925 zg zg200 zg500 zg700 zg850 zg925
+
+		             plev200: hur200 hus200 ta200 ua200 va200 wap200 zg200
+
+		             plev500: hur500 hus500 ta500 ua500 va500 wap500 zg500
+
+		             plev700: hur700 hus700 ta700 ua700 va700 wap700 zg700
+
+		             plev7hm: hus ta ua va wap zg
+
+		             plev850: hur850 hus850 ta850 ua850 va850 wap850 zg850
+
+		             plev925: hur925 hus925 ta925 ua925 va925 wap925 zg925
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		         XY-Plev39hm: co no2 o3
+
+		          XY-plev200: hur200 hus200 ta200 ua200 va200 wap200 zg200
+
+		          XY-plev500: hur500 hus500 ta500 ua500 va500 wap500 zg500
+
+		          XY-plev700: hur700 hus700 ta700 ua700 va700 wap700 zg700
+
+		          XY-plev7hm: hus ta ua va wap zg
+
+		          XY-plev850: hur850 hus850 ta850 ua850 va850 wap850 zg850
+
+		          XY-plev925: hur925 hus925 ta925 ua925 va925 wap925 zg925
+
+For extra table CNRM_HOMAL6hr (which has 99 variables):
+	Variables which dim was found in extra coordinates table:
+		               alt40: clcalipsoun
+
+		            latitude: RADabs550aer RADasy550aer RADod550aer RADssa550aer TACabs550aer albsrfc albsrfcLa asy550aer burntArea cSoilPools carbdis carbw cdnctop clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun clcalipsoun clhcalipsoice clhcalipsoliq clhcalipsoun clhmodis cllcalipsoice cllcalipsoliq cllcalipsoun cllmodis clmcalipsoice clmcalipsoliq clmcalipsoun clmmodis clmodis cltcalipsoice cltcalipsoliq cltcalipsoun clth cltl cltlidarradar cltm eminh4 ext550bc ext550dust ext550oa ext550so4 ext550ss fDeforestToL fFireBCarb fRegrowth fco2all fldf fsat fwtd icedLa icod iwpmodis lcod lwpmodis meantbclrisccp meantbisccp mrfso mrso necb od550acldaer od550dustbin1 od550dustbin2 od550nh4 od550ssbin1 od550ssbin2 parasolCRefl pctmodis reffclimodis reffclitop reffclwmodis reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf sconcbc sconcnh4 sconcno3 sconcoa snct sndLa soild ssa550aer tSoilPools tauimodis tauisccp tautmodis tauwmodis tmxlLa tsLa vegstress
+
+		           longitude: RADabs550aer RADasy550aer RADod550aer RADssa550aer TACabs550aer albsrfc albsrfcLa asy550aer burntArea cSoilPools carbdis carbw cdnctop clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun clcalipsoun clhcalipsoice clhcalipsoliq clhcalipsoun clhmodis cllcalipsoice cllcalipsoliq cllcalipsoun cllmodis clmcalipsoice clmcalipsoliq clmcalipsoun clmmodis clmodis cltcalipsoice cltcalipsoliq cltcalipsoun clth cltl cltlidarradar cltm eminh4 ext550bc ext550dust ext550oa ext550so4 ext550ss fDeforestToL fFireBCarb fRegrowth fco2all fldf fsat fwtd icedLa icod iwpmodis lcod lwpmodis meantbclrisccp meantbisccp mrfso mrso necb od550acldaer od550dustbin1 od550dustbin2 od550nh4 od550ssbin1 od550ssbin2 parasolCRefl pctmodis reffclimodis reffclitop reffclwmodis reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf sconcbc sconcnh4 sconcno3 sconcoa snct sndLa soild ssa550aer tSoilPools tauimodis tauisccp tautmodis tauwmodis tmxlLa tsLa vegstress
+
+		                p220: clhcalipsoice clhcalipsoliq clhcalipsoun
+
+		                p560: clmcalipsoice clmcalipsoliq clmcalipsoun
+
+		                p840: cllcalipsoice cllcalipsoliq cllcalipsoun
+
+		              plev19: ext550bc ext550dust ext550oa ext550so4 ext550ss
+
+		              plev7c: clmodis
+
+		                sza5: parasolCRefl
+
+		                 tau: clmodis
+
+		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		             XY-sza5: parasolCRefl
+
+		       XY-tau|plev7c: clmodis
+
+		             XY-temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+For extra table CNRM_HOME6hrPlevPt (which has 44 variables):
+	Variables which dim was found in extra coordinates table:
+		            Plev39hm: co no2 o3
+
+		            latitude: co hur200 hur500 hur700 hur850 hur925 hus hus200 hus500 hus700 hus850 hus925 no2 o3 ta ta200 ta500 ta700 ta850 ta925 ua ua200 ua500 ua700 ua850 ua925 va va200 va500 va700 va850 va925 wap wap200 wap500 wap700 wap850 wap925 zg zg200 zg500 zg700 zg850 zg925
+
+		           longitude: co hur200 hur500 hur700 hur850 hur925 hus hus200 hus500 hus700 hus850 hus925 no2 o3 ta ta200 ta500 ta700 ta850 ta925 ua ua200 ua500 ua700 ua850 ua925 va va200 va500 va700 va850 va925 wap wap200 wap500 wap700 wap850 wap925 zg zg200 zg500 zg700 zg850 zg925
+
+		             plev200: hur200 hus200 ta200 ua200 va200 wap200 zg200
+
+		             plev500: hur500 hus500 ta500 ua500 va500 wap500 zg500
+
+		             plev700: hur700 hus700 ta700 ua700 va700 wap700 zg700
+
+		             plev7hm: hus ta ua va wap zg
+
+		             plev850: hur850 hus850 ta850 ua850 va850 wap850 zg850
+
+		             plev925: hur925 hus925 ta925 ua925 va925 wap925 zg925
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		         XY-Plev39hm: co no2 o3
+
+		          XY-plev200: hur200 hus200 ta200 ua200 va200 wap200 zg200
+
+		          XY-plev500: hur500 hus500 ta500 ua500 va500 wap500 zg500
+
+		          XY-plev700: hur700 hus700 ta700 ua700 va700 wap700 zg700
+
+		          XY-plev7hm: hus ta ua va wap zg
+
+		          XY-plev850: hur850 hus850 ta850 ua850 va850 wap850 zg850
+
+		          XY-plev925: hur925 hus925 ta925 ua925 va925 wap925 zg925
+
+For extra table CNRM_HOMAL1hrPt (which has 111 variables):
+	Variables which dim was found in extra coordinates table:
+		               alt40: clcalipsoun
+
+		            latitude: RADabs550aer RADasy550aer RADod550aer RADssa550aer TACabs550aer albsrfc albsrfcLa asy550aer burntArea cSoilPools carbdis carbin carbw cdnc cdnctop clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun clcalipsoun clhcalipsoice clhcalipsoliq clhcalipsoun clhmodis cllcalipsoice cllcalipsoliq cllcalipsoun cllmodis clmcalipsoice clmcalipsoliq clmcalipsoun clmmodis clmodis cltcalipsoice cltcalipsoliq cltcalipsoun clth cltl cltlidarradar cltm dryno3 eminh4 emino3 ext550bc ext550dust ext550nh4 ext550no3 ext550oa ext550so4 ext550ss fDeforestToL fFireBCarb fRegrowth fco2all fldf fsat fwtd icedLa icod iwpmodis lcod lwpmodis meantbclrisccp meantbisccp necb od550acldaer od550dustbin1 od550dustbin2 od550nh4 od550no3bin1 od550ssbin1 od550ssbin2 parasolCRefl pctmodis reffclimodis reffclitop reffclwmodis reffclwtopcnrm rldsaf rldscsaf rlusaf rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf sconcbc sconcnh4 sconcno3 sconcoa sedbc seddust sednh4 sedno3 sedoa sedso4 sedss snct sndLa soild ssa550aer tSoilPools tauimodis tauisccp tautmodis tauwmodis tmxlLa tsLa tssea vegstress wetno3
+
+		           longitude: RADabs550aer RADasy550aer RADod550aer RADssa550aer TACabs550aer albsrfc albsrfcLa asy550aer burntArea cSoilPools carbdis carbin carbw cdnc cdnctop clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun clcalipsoun clhcalipsoice clhcalipsoliq clhcalipsoun clhmodis cllcalipsoice cllcalipsoliq cllcalipsoun cllmodis clmcalipsoice clmcalipsoliq clmcalipsoun clmmodis clmodis cltcalipsoice cltcalipsoliq cltcalipsoun clth cltl cltlidarradar cltm dryno3 eminh4 emino3 ext550bc ext550dust ext550nh4 ext550no3 ext550oa ext550so4 ext550ss fDeforestToL fFireBCarb fRegrowth fco2all fldf fsat fwtd icedLa icod iwpmodis lcod lwpmodis meantbclrisccp meantbisccp necb od550acldaer od550dustbin1 od550dustbin2 od550nh4 od550no3bin1 od550ssbin1 od550ssbin2 parasolCRefl pctmodis reffclimodis reffclitop reffclwmodis reffclwtopcnrm rldsaf rldscsaf rlusaf rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf sconcbc sconcnh4 sconcno3 sconcoa sedbc seddust sednh4 sedno3 sedoa sedso4 sedss snct sndLa soild ssa550aer tSoilPools tauimodis tauisccp tautmodis tauwmodis tmxlLa tsLa tssea vegstress wetno3
+
+		                p220: clhcalipsoice clhcalipsoliq clhcalipsoun
+
+		                p560: clmcalipsoice clmcalipsoliq clmcalipsoun
+
+		                p840: cllcalipsoice cllcalipsoliq cllcalipsoun
+
+		              plev19: cdnc ext550bc ext550dust ext550nh4 ext550no3 ext550oa ext550so4 ext550ss
+
+		              plev7c: clmodis
+
+		                sza5: parasolCRefl
+
+		                 tau: clmodis
+
+		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		             XY-sza5: parasolCRefl
+
+		       XY-tau|plev7c: clmodis
+
+		             XY-temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+Number of 'cmor', 'dev' and 'perso' among home variables: 0
+Number of 'extra' among home variables: 132
+homevars list: cdnctop cltl cltm clth hur925 hur850 hur700 hur500 hur200 husll hus925 hus850 hus700 hus500 hus200 RADasy550aer RADssa550aer RADod550aer RADabs550aer reffclitop reffclwtopcnrm rluscs rldsaf rlusaf rldscsaf rluscsaf rsdsaf rsusaf rsdscsaf rsuscsaf tall ta925 ta850 ta700 ta500 ta200 tssea uall ua925 ua850 ua700 ua500 ua200 vall va925 va850 va700 va500 va200 wap925 wap850 wap700 wap500 wap200 zg925 zg850 zg700 zg500 zg200 cltl cltm clth husll hus925 hus850 hus700 hus500 hus200 rluscs rldsaf rlusaf rldscsaf rluscsaf rsdsaf rsusaf rsdscsaf rsuscsaf tall ta925 ta850 ta700 ta500 ta200 tssea uall ua925 ua850 ua700 ua500 ua200 vall va925 va850 va700 va500 va200 zg925 zg850 zg700 zg500 zg200 cltl cltm clth hus925 hus850 hus700 hus500 hus200 mrfso mrso ta925 ta850 ta700 ta500 ta200 ua925 ua850 ua700 ua500 ua200 va925 va850 va700 va500 va200 zg925 zg850 zg700 zg500 zg200 tssea
+
+Realms for these CMORvars: aerosol atmos land
+Processing realm 'atmos atmosChem' of context 'surfex' -- no variable asked (skip)
+Processing realm 'atmos land' of context 'surfex' -- no variable asked (skip)
+Processing realm 'atmosChem' of context 'surfex' -- no variable asked (skip)
+Processing realm 'land landIce' of context 'surfex' -- no variable asked (skip)
+Processing realm 'landIce' of context 'surfex' -- no variable asked (skip)
+Processing realm 'landIce land' of context 'surfex' -- no variable asked (skip)
+Processing realm 'aerosol' of context 'surfex'
+Processing realm 'atmos' of context 'surfex'
+Processing realm 'land' of context 'surfex'
+processing file current_directory/test_AAD50_641_nodr/input/xml/ping_surfex.xml:
+OK current_directory/test_AAD50_641_nodr/input/xml/ping_surfex.xml
+processing file current_directory/test_AAD50_641_nodr/input/xml/ping_trip.xml:
+OK current_directory/test_AAD50_641_nodr/input/xml/ping_trip.xml
+
+file_def written as current_directory/test_AAD50_641_nodr/test_outputs/dr2xml_surfex.xml
+
+
+Some Statistics on actually written variables per frequency+shape...
+                        HOMALday P1  17: clth cltl cltm husll rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf tall tssea uall vall
+       day    XY-na    -------- ---  17
+
+                        HOMEPday P1   5: hus200 ta200 ua200 va200 zg200
+       day XY-P200HM    -------- ---   5
+
+                        HOMEPday P1   5: hus500 ta500 ua500 va500 zg500
+       day XY-P500HM    -------- ---   5
+
+                        HOMEPday P1   5: hus700 ta700 ua700 va700 zg700
+       day XY-P700HM    -------- ---   5
+
+                        HOMEPday P1   5: hus850 ta850 ua850 va850 zg850
+       day XY-P850HM    -------- ---   5
+
+                        HOMEPday P1   5: hus925 ta925 ua925 va925 zg925
+       day XY-P925HM    -------- ---   5
+
+       day --------    -------- ---  42
+
+                      HOMAL1hrPt P1   1: tssea
+       1hr    XY-na    -------- ---   1
+
+       1hr --------    -------- ---   1
+
+                        HOMALmon P1  24: RADabs550aer RADasy550aer RADod550aer RADssa550aer cdnctop clth cltl cltm husll reffclitop reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf tall tssea uall vall
+       mon    XY-na    -------- ---  24
+
+                        HOMEPmon P1   7: hur200 hus200 ta200 ua200 va200 wap200 zg200
+       mon XY-P200HM    -------- ---   7
+
+                        HOMEPmon P1   7: hur500 hus500 ta500 ua500 va500 wap500 zg500
+       mon XY-P500HM    -------- ---   7
+
+                        HOMEPmon P1   7: hur700 hus700 ta700 ua700 va700 wap700 zg700
+       mon XY-P700HM    -------- ---   7
+
+                        HOMEPmon P1   7: hur850 hus850 ta850 ua850 va850 wap850 zg850
+       mon XY-P850HM    -------- ---   7
+
+                        HOMEPmon P1   7: hur925 hus925 ta925 ua925 va925 wap925 zg925
+       mon XY-P925HM    -------- ---   7
+
+       mon --------    -------- ---  59
+
+                        HOMAL6hr P1   3: clth cltl cltm
+       6hr    XY-na    -------- ---   3
+
+                    HOME6hrPlevPt P1   5: hus200 ta200 ua200 va200 zg200
+       6hr XY-P200HM    -------- ---   5
+
+                    HOME6hrPlevPt P1   5: hus500 ta500 ua500 va500 zg500
+       6hr XY-P500HM    -------- ---   5
+
+                    HOME6hrPlevPt P1   5: hus700 ta700 ua700 va700 zg700
+       6hr XY-P700HM    -------- ---   5
+
+                    HOME6hrPlevPt P1   5: hus850 ta850 ua850 va850 zg850
+       6hr XY-P850HM    -------- ---   5
+
+                    HOME6hrPlevPt P1   5: hus925 ta925 ua925 va925 zg925
+       6hr XY-P925HM    -------- ---   5
+
+       6hr --------    -------- ---  28
+
+                        HOMAL6hr P1   2: mrfso mrso
+     6hrPt    XY-na    -------- ---   2
+
+     6hrPt --------    -------- ---   2
+
+
+---------- --------    -------- --- 132
+
+
+Some Statistics on actually written variables per variable...
+--------------------------
+--- VARNAME: RADabs550aer: Absorption Aerosol Optical Depth at 550nm as seen in the radiative scheme
+--------------------------
+              * mon_HOMALmon_XY-na_1.0 RADabs550aer
+--------------------------
+--- VARNAME: RADasy550aer: Asymmetry parameter at 550nm as seen in the radiative scheme
+--------------------------
+              * mon_HOMALmon_XY-na_1.0 RADasy550aer
+-------------------------
+--- VARNAME: RADod550aer: Aerosol Optical Depth at 550nm as seen in the radiative scheme
+-------------------------
+              * mon_HOMALmon_XY-na_1.0 RADod550aer
+--------------------------
+--- VARNAME: RADssa550aer: Single Scattering Albedo at 550nm as seen in the radiative scheme
+--------------------------
+              * mon_HOMALmon_XY-na_1.0 RADssa550aer
+---------------------
+--- VARNAME: cdnctop: Liquid Cloud Droplet Number Concentration at Cloud Top
+---------------------
+              * mon_HOMALmon_XY-na_1.0 cdnctop
+------------------
+--- VARNAME: clth: High Troposphere Cloud Area Fraction
+------------------
+              * day_HOMALday_XY-na_1.0 clth
+              * mon_HOMALmon_XY-na_1.0 clth
+              * 6hr_HOMAL6hr_XY-na_1.0 clth
+------------------
+--- VARNAME: cltl: Low Troposphere Cloud Area Fraction
+------------------
+              * day_HOMALday_XY-na_1.0 cltl
+              * mon_HOMALmon_XY-na_1.0 cltl
+              * 6hr_HOMAL6hr_XY-na_1.0 cltl
+------------------
+--- VARNAME: cltm: Mid Troposphere Cloud Area Fraction
+------------------
+              * day_HOMALday_XY-na_1.0 cltm
+              * mon_HOMALmon_XY-na_1.0 cltm
+              * 6hr_HOMAL6hr_XY-na_1.0 cltm
+--------------------
+--- VARNAME: hur200: Relative Humidity
+--------------------
+              * mon_HOMEPmon_XY-P200HM_1.0 hur200
+--------------------
+--- VARNAME: hur500: Relative Humidity
+--------------------
+              * mon_HOMEPmon_XY-P500HM_1.0 hur500
+--------------------
+--- VARNAME: hur700: Relative Humidity
+--------------------
+              * mon_HOMEPmon_XY-P700HM_1.0 hur700
+--------------------
+--- VARNAME: hur850: Relative Humidity
+--------------------
+              * mon_HOMEPmon_XY-P850HM_1.0 hur850
+--------------------
+--- VARNAME: hur925: Relative Humidity
+--------------------
+              * mon_HOMEPmon_XY-P925HM_1.0 hur925
+--------------------
+--- VARNAME: hus200: Specific Humidity
+--------------------
+              * day_HOMEPday_XY-P200HM_1.0 hus200
+              * mon_HOMEPmon_XY-P200HM_1.0 hus200
+              * 6hr_HOME6hrPlevPt_XY-P200HM_1.0 hus200
+--------------------
+--- VARNAME: hus500: Specific Humidity
+--------------------
+              * day_HOMEPday_XY-P500HM_1.0 hus500
+              * mon_HOMEPmon_XY-P500HM_1.0 hus500
+              * 6hr_HOME6hrPlevPt_XY-P500HM_1.0 hus500
+--------------------
+--- VARNAME: hus700: Specific Humidity
+--------------------
+              * day_HOMEPday_XY-P700HM_1.0 hus700
+              * mon_HOMEPmon_XY-P700HM_1.0 hus700
+              * 6hr_HOME6hrPlevPt_XY-P700HM_1.0 hus700
+--------------------
+--- VARNAME: hus850: Specific Humidity
+--------------------
+              * day_HOMEPday_XY-P850HM_1.0 hus850
+              * mon_HOMEPmon_XY-P850HM_1.0 hus850
+              * 6hr_HOME6hrPlevPt_XY-P850HM_1.0 hus850
+--------------------
+--- VARNAME: hus925: Specific Humidity
+--------------------
+              * day_HOMEPday_XY-P925HM_1.0 hus925
+              * mon_HOMEPmon_XY-P925HM_1.0 hus925
+              * 6hr_HOME6hrPlevPt_XY-P925HM_1.0 hus925
+-------------------
+--- VARNAME: husll: Specific Humidity at Lowest Level
+-------------------
+              * day_HOMALday_XY-na_1.0 husll
+              * mon_HOMALmon_XY-na_1.0 husll
+-------------------
+--- VARNAME: mrfso: Soil Frozen Water Content
+-------------------
+              * 6hrPt_HOMAL6hr_XY-na_1.0 mrfso
+------------------
+--- VARNAME: mrso: Total Soil Moisture Content
+------------------
+              * 6hrPt_HOMAL6hr_XY-na_1.0 mrso
+------------------------
+--- VARNAME: reffclitop: Ice Cloud Droplet Effective Radius
+------------------------
+              * mon_HOMALmon_XY-na_1.0 reffclitop
+----------------------------
+--- VARNAME: reffclwtopcnrm: Liquid Cloud Droplet Effective Radius
+----------------------------
+              * mon_HOMALmon_XY-na_1.0 reffclwtopcnrm
+--------------------
+--- VARNAME: rldsaf: Surface Aerosol-Free Downwelling Longwave Radiation
+--------------------
+              * day_HOMALday_XY-na_1.0 rldsaf
+              * mon_HOMALmon_XY-na_1.0 rldsaf
+----------------------
+--- VARNAME: rldscsaf: Surface Clear-Sky Aerosol-Free Downwelling Longwave Radiation
+----------------------
+              * day_HOMALday_XY-na_1.0 rldscsaf
+              * mon_HOMALmon_XY-na_1.0 rldscsaf
+--------------------
+--- VARNAME: rlusaf: Surface Aerosol-Free Upwelling Longwave Radiation
+--------------------
+              * day_HOMALday_XY-na_1.0 rlusaf
+              * mon_HOMALmon_XY-na_1.0 rlusaf
+--------------------
+--- VARNAME: rluscs: Surface Upwelling Longwave Flux in Air Assuming Clear Sky
+--------------------
+              * day_HOMALday_XY-na_1.0 rluscs
+              * mon_HOMALmon_XY-na_1.0 rluscs
+----------------------
+--- VARNAME: rluscsaf: Surface Clear-Sky Aerosol-Free Upwelling Longwave Radiation
+----------------------
+              * day_HOMALday_XY-na_1.0 rluscsaf
+              * mon_HOMALmon_XY-na_1.0 rluscsaf
+--------------------
+--- VARNAME: rsdsaf: Surface Aerosol-Free Downwelling Shortwave Radiation
+--------------------
+              * day_HOMALday_XY-na_1.0 rsdsaf
+              * mon_HOMALmon_XY-na_1.0 rsdsaf
+----------------------
+--- VARNAME: rsdscsaf: Surface Clear-Sky Aerosol-Free Downwelling Shortwave Radiation
+----------------------
+              * day_HOMALday_XY-na_1.0 rsdscsaf
+              * mon_HOMALmon_XY-na_1.0 rsdscsaf
+--------------------
+--- VARNAME: rsusaf: Surface Aerosol-Free Upwelling Shortwave Radiation
+--------------------
+              * day_HOMALday_XY-na_1.0 rsusaf
+              * mon_HOMALmon_XY-na_1.0 rsusaf
+----------------------
+--- VARNAME: rsuscsaf: Surface Clear-Sky Aerosol-Free Upwelling Shortwave Radiation
+----------------------
+              * day_HOMALday_XY-na_1.0 rsuscsaf
+              * mon_HOMALmon_XY-na_1.0 rsuscsaf
+-------------------
+--- VARNAME: ta200: Air Temperature
+-------------------
+              * day_HOMEPday_XY-P200HM_1.0 ta200
+              * mon_HOMEPmon_XY-P200HM_1.0 ta200
+              * 6hr_HOME6hrPlevPt_XY-P200HM_1.0 ta200
+-------------------
+--- VARNAME: ta500: Air Temperature
+-------------------
+              * day_HOMEPday_XY-P500HM_1.0 ta500
+              * mon_HOMEPmon_XY-P500HM_1.0 ta500
+              * 6hr_HOME6hrPlevPt_XY-P500HM_1.0 ta500
+-------------------
+--- VARNAME: ta700: Air Temperature
+-------------------
+              * day_HOMEPday_XY-P700HM_1.0 ta700
+              * mon_HOMEPmon_XY-P700HM_1.0 ta700
+              * 6hr_HOME6hrPlevPt_XY-P700HM_1.0 ta700
+-------------------
+--- VARNAME: ta850: Air Temperature
+-------------------
+              * day_HOMEPday_XY-P850HM_1.0 ta850
+              * mon_HOMEPmon_XY-P850HM_1.0 ta850
+              * 6hr_HOME6hrPlevPt_XY-P850HM_1.0 ta850
+-------------------
+--- VARNAME: ta925: Air Temperature
+-------------------
+              * day_HOMEPday_XY-P925HM_1.0 ta925
+              * mon_HOMEPmon_XY-P925HM_1.0 ta925
+              * 6hr_HOME6hrPlevPt_XY-P925HM_1.0 ta925
+------------------
+--- VARNAME: tall: Temperature at Lowest Level
+------------------
+              * day_HOMALday_XY-na_1.0 tall
+              * mon_HOMALmon_XY-na_1.0 tall
+-------------------
+--- VARNAME: tssea: Sea Surface Temperature
+-------------------
+              * day_HOMALday_XY-na_1.0 tssea
+              * 1hr_HOMAL1hrPt_XY-na_1.0 tssea
+              * mon_HOMALmon_XY-na_1.0 tssea
+-------------------
+--- VARNAME: ua200: Eastward Wind
+-------------------
+              * day_HOMEPday_XY-P200HM_1.0 ua200
+              * mon_HOMEPmon_XY-P200HM_1.0 ua200
+              * 6hr_HOME6hrPlevPt_XY-P200HM_1.0 ua200
+-------------------
+--- VARNAME: ua500: Eastward Wind
+-------------------
+              * day_HOMEPday_XY-P500HM_1.0 ua500
+              * mon_HOMEPmon_XY-P500HM_1.0 ua500
+              * 6hr_HOME6hrPlevPt_XY-P500HM_1.0 ua500
+-------------------
+--- VARNAME: ua700: Eastward Wind
+-------------------
+              * day_HOMEPday_XY-P700HM_1.0 ua700
+              * mon_HOMEPmon_XY-P700HM_1.0 ua700
+              * 6hr_HOME6hrPlevPt_XY-P700HM_1.0 ua700
+-------------------
+--- VARNAME: ua850: Eastward Wind
+-------------------
+              * day_HOMEPday_XY-P850HM_1.0 ua850
+              * mon_HOMEPmon_XY-P850HM_1.0 ua850
+              * 6hr_HOME6hrPlevPt_XY-P850HM_1.0 ua850
+-------------------
+--- VARNAME: ua925: Eastward Wind
+-------------------
+              * day_HOMEPday_XY-P925HM_1.0 ua925
+              * mon_HOMEPmon_XY-P925HM_1.0 ua925
+              * 6hr_HOME6hrPlevPt_XY-P925HM_1.0 ua925
+------------------
+--- VARNAME: uall: Eastward Wind at Lowest Level
+------------------
+              * day_HOMALday_XY-na_1.0 uall
+              * mon_HOMALmon_XY-na_1.0 uall
+-------------------
+--- VARNAME: va200: Northward Wind
+-------------------
+              * day_HOMEPday_XY-P200HM_1.0 va200
+              * mon_HOMEPmon_XY-P200HM_1.0 va200
+              * 6hr_HOME6hrPlevPt_XY-P200HM_1.0 va200
+-------------------
+--- VARNAME: va500: Northward Wind
+-------------------
+              * day_HOMEPday_XY-P500HM_1.0 va500
+              * mon_HOMEPmon_XY-P500HM_1.0 va500
+              * 6hr_HOME6hrPlevPt_XY-P500HM_1.0 va500
+-------------------
+--- VARNAME: va700: Northward Wind
+-------------------
+              * day_HOMEPday_XY-P700HM_1.0 va700
+              * mon_HOMEPmon_XY-P700HM_1.0 va700
+              * 6hr_HOME6hrPlevPt_XY-P700HM_1.0 va700
+-------------------
+--- VARNAME: va850: Northward Wind
+-------------------
+              * day_HOMEPday_XY-P850HM_1.0 va850
+              * mon_HOMEPmon_XY-P850HM_1.0 va850
+              * 6hr_HOME6hrPlevPt_XY-P850HM_1.0 va850
+-------------------
+--- VARNAME: va925: Northward Wind
+-------------------
+              * day_HOMEPday_XY-P925HM_1.0 va925
+              * mon_HOMEPmon_XY-P925HM_1.0 va925
+              * 6hr_HOME6hrPlevPt_XY-P925HM_1.0 va925
+------------------
+--- VARNAME: vall: Northward Wind at Lowest Level
+------------------
+              * day_HOMALday_XY-na_1.0 vall
+              * mon_HOMALmon_XY-na_1.0 vall
+--------------------
+--- VARNAME: wap200: omega (=dp/dt)
+--------------------
+              * mon_HOMEPmon_XY-P200HM_1.0 wap200
+--------------------
+--- VARNAME: wap500: omega (=dp/dt)
+--------------------
+              * mon_HOMEPmon_XY-P500HM_1.0 wap500
+--------------------
+--- VARNAME: wap700: omega (=dp/dt)
+--------------------
+              * mon_HOMEPmon_XY-P700HM_1.0 wap700
+--------------------
+--- VARNAME: wap850: omega (=dp/dt)
+--------------------
+              * mon_HOMEPmon_XY-P850HM_1.0 wap850
+--------------------
+--- VARNAME: wap925: omega (=dp/dt)
+--------------------
+              * mon_HOMEPmon_XY-P925HM_1.0 wap925
+-------------------
+--- VARNAME: zg200: Geopotential Height
+-------------------
+              * day_HOMEPday_XY-P200HM_1.0 zg200
+              * mon_HOMEPmon_XY-P200HM_1.0 zg200
+              * 6hr_HOME6hrPlevPt_XY-P200HM_1.0 zg200
+-------------------
+--- VARNAME: zg500: Geopotential Height
+-------------------
+              * day_HOMEPday_XY-P500HM_1.0 zg500
+              * mon_HOMEPmon_XY-P500HM_1.0 zg500
+              * 6hr_HOME6hrPlevPt_XY-P500HM_1.0 zg500
+-------------------
+--- VARNAME: zg700: Geopotential Height
+-------------------
+              * day_HOMEPday_XY-P700HM_1.0 zg700
+              * mon_HOMEPmon_XY-P700HM_1.0 zg700
+              * 6hr_HOME6hrPlevPt_XY-P700HM_1.0 zg700
+-------------------
+--- VARNAME: zg850: Geopotential Height
+-------------------
+              * day_HOMEPday_XY-P850HM_1.0 zg850
+              * mon_HOMEPmon_XY-P850HM_1.0 zg850
+              * 6hr_HOME6hrPlevPt_XY-P850HM_1.0 zg850
+-------------------
+--- VARNAME: zg925: Geopotential Height
+-------------------
+              * day_HOMEPday_XY-P925HM_1.0 zg925
+              * mon_HOMEPmon_XY-P925HM_1.0 zg925
+              * 6hr_HOME6hrPlevPt_XY-P925HM_1.0 zg925
+
+ **************************************************
+*
+*              dr2xml version:  current_version
+*   CMIP6 conventions version:  v6.2.4
+*  CMIP6 Data Request version:  No Data Request
+
+*
+ **************************************************
+
+**************************************************
+
+Processing context  trip
+
+**************************************************
+
+Number of distinct CMOR variables (whatever the grid): 0
+Number of distinct var labels is: 0
+Number of simplified vars is: 0
+Issues with standard names are: []
+homevars file: current_directory/test_AAD50_641_nodr/input/home_data_request/home_data_request_nodr.txt
+For extra table CNRM_HOMALmon (which has 116 variables):
+	Variables which dim was found in extra coordinates table:
+		               alt40: clcalipsoun
+
+		            latitude: RADabs550aer RADasy550aer RADod550aer RADssa550aer TACabs550aer albsrfc albsrfcLa asy550aer burntArea cSoilPools carbdis carbin carbw cdnc cdnctop clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun clcalipsoun clhcalipsoice clhcalipsoliq clhcalipsoun clhmodis cllcalipsoice cllcalipsoliq cllcalipsoun cllmodis clmcalipsoice clmcalipsoliq clmcalipsoun clmmodis clmodis cltcalipsoice cltcalipsoliq cltcalipsoun clth cltl cltlidarradar cltm dryno3 eminh4 emino3 ext550bc ext550dust ext550nh4 ext550no3 ext550oa ext550so4 ext550ss fDeforestToL fFireBCarb fRegrowth fco2all fldf fsat fwtd husll icedLa icod iwpmodis lcod lwpmodis meantbclrisccp meantbisccp necb od550acldaer od550dustbin1 od550dustbin2 od550nh4 od550no3bin1 od550ssbin1 od550ssbin2 parasolCRefl pctmodis reffclimodis reffclitop reffclwmodis reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf sconcbc sconcnh4 sconcno3 sconcoa sedbc seddust sednh4 sedno3 sedoa sedso4 sedss snct sndLa soild ssa550aer tSoilPools tall tauimodis tauisccp tautmodis tauwmodis tmxlLa tsLa tssea uall vall vegstress wetno3
+
+		           longitude: RADabs550aer RADasy550aer RADod550aer RADssa550aer TACabs550aer albsrfc albsrfcLa asy550aer burntArea cSoilPools carbdis carbin carbw cdnc cdnctop clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun clcalipsoun clhcalipsoice clhcalipsoliq clhcalipsoun clhmodis cllcalipsoice cllcalipsoliq cllcalipsoun cllmodis clmcalipsoice clmcalipsoliq clmcalipsoun clmmodis clmodis cltcalipsoice cltcalipsoliq cltcalipsoun clth cltl cltlidarradar cltm dryno3 eminh4 emino3 ext550bc ext550dust ext550nh4 ext550no3 ext550oa ext550so4 ext550ss fDeforestToL fFireBCarb fRegrowth fco2all fldf fsat fwtd husll icedLa icod iwpmodis lcod lwpmodis meantbclrisccp meantbisccp necb od550acldaer od550dustbin1 od550dustbin2 od550nh4 od550no3bin1 od550ssbin1 od550ssbin2 parasolCRefl pctmodis reffclimodis reffclitop reffclwmodis reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf sconcbc sconcnh4 sconcno3 sconcoa sedbc seddust sednh4 sedno3 sedoa sedso4 sedss snct sndLa soild ssa550aer tSoilPools tall tauimodis tauisccp tautmodis tauwmodis tmxlLa tsLa tssea uall vall vegstress wetno3
+
+		                p220: clhcalipsoice clhcalipsoliq clhcalipsoun
+
+		                p560: clmcalipsoice clmcalipsoliq clmcalipsoun
+
+		                p840: cllcalipsoice cllcalipsoliq cllcalipsoun
+
+		              plev19: cdnc ext550bc ext550dust ext550nh4 ext550no3 ext550oa ext550so4 ext550ss
+
+		              plev7c: clmodis
+
+		                sza5: parasolCRefl
+
+		                 tau: clmodis
+
+		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		             XY-sza5: parasolCRefl
+
+		       XY-tau|plev7c: clmodis
+
+		             XY-temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+For extra table CNRM_HOMEPmon (which has 44 variables):
+	Variables which dim was found in extra coordinates table:
+		            Plev39hm: co no2 o3
+
+		            latitude: co hur200 hur500 hur700 hur850 hur925 hus hus200 hus500 hus700 hus850 hus925 no2 o3 ta ta200 ta500 ta700 ta850 ta925 ua ua200 ua500 ua700 ua850 ua925 va va200 va500 va700 va850 va925 wap wap200 wap500 wap700 wap850 wap925 zg zg200 zg500 zg700 zg850 zg925
+
+		           longitude: co hur200 hur500 hur700 hur850 hur925 hus hus200 hus500 hus700 hus850 hus925 no2 o3 ta ta200 ta500 ta700 ta850 ta925 ua ua200 ua500 ua700 ua850 ua925 va va200 va500 va700 va850 va925 wap wap200 wap500 wap700 wap850 wap925 zg zg200 zg500 zg700 zg850 zg925
+
+		             plev200: hur200 hus200 ta200 ua200 va200 wap200 zg200
+
+		             plev500: hur500 hus500 ta500 ua500 va500 wap500 zg500
+
+		             plev700: hur700 hus700 ta700 ua700 va700 wap700 zg700
+
+		             plev7hm: hus ta ua va wap zg
+
+		             plev850: hur850 hus850 ta850 ua850 va850 wap850 zg850
+
+		             plev925: hur925 hus925 ta925 ua925 va925 wap925 zg925
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		         XY-Plev39hm: co no2 o3
+
+		          XY-plev200: hur200 hus200 ta200 ua200 va200 wap200 zg200
+
+		          XY-plev500: hur500 hus500 ta500 ua500 va500 wap500 zg500
+
+		          XY-plev700: hur700 hus700 ta700 ua700 va700 wap700 zg700
+
+		          XY-plev7hm: hus ta ua va wap zg
+
+		          XY-plev850: hur850 hus850 ta850 ua850 va850 wap850 zg850
+
+		          XY-plev925: hur925 hus925 ta925 ua925 va925 wap925 zg925
+
+For extra table CNRM_HOMALday (which has 116 variables):
+	Variables which dim was found in extra coordinates table:
+		               alt40: clcalipsoun
+
+		            latitude: RADabs550aer RADasy550aer RADod550aer RADssa550aer TACabs550aer albsrfc albsrfcLa asy550aer burntArea cSoilPools carbdis carbin carbw cdnc cdnctop clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun clcalipsoun clhcalipsoice clhcalipsoliq clhcalipsoun clhmodis cllcalipsoice cllcalipsoliq cllcalipsoun cllmodis clmcalipsoice clmcalipsoliq clmcalipsoun clmmodis clmodis cltcalipsoice cltcalipsoliq cltcalipsoun clth cltl cltlidarradar cltm dryno3 eminh4 emino3 ext550bc ext550dust ext550nh4 ext550no3 ext550oa ext550so4 ext550ss fDeforestToL fFireBCarb fRegrowth fco2all fldf fsat fwtd husll icedLa icod iwpmodis lcod lwpmodis meantbclrisccp meantbisccp necb od550acldaer od550dustbin1 od550dustbin2 od550nh4 od550no3bin1 od550ssbin1 od550ssbin2 parasolCRefl pctmodis reffclimodis reffclitop reffclwmodis reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf sconcbc sconcnh4 sconcno3 sconcoa sedbc seddust sednh4 sedno3 sedoa sedso4 sedss snct sndLa soild ssa550aer tSoilPools tall tauimodis tauisccp tautmodis tauwmodis tmxlLa tsLa tssea uall vall vegstress wetno3
+
+		           longitude: RADabs550aer RADasy550aer RADod550aer RADssa550aer TACabs550aer albsrfc albsrfcLa asy550aer burntArea cSoilPools carbdis carbin carbw cdnc cdnctop clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun clcalipsoun clhcalipsoice clhcalipsoliq clhcalipsoun clhmodis cllcalipsoice cllcalipsoliq cllcalipsoun cllmodis clmcalipsoice clmcalipsoliq clmcalipsoun clmmodis clmodis cltcalipsoice cltcalipsoliq cltcalipsoun clth cltl cltlidarradar cltm dryno3 eminh4 emino3 ext550bc ext550dust ext550nh4 ext550no3 ext550oa ext550so4 ext550ss fDeforestToL fFireBCarb fRegrowth fco2all fldf fsat fwtd husll icedLa icod iwpmodis lcod lwpmodis meantbclrisccp meantbisccp necb od550acldaer od550dustbin1 od550dustbin2 od550nh4 od550no3bin1 od550ssbin1 od550ssbin2 parasolCRefl pctmodis reffclimodis reffclitop reffclwmodis reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf sconcbc sconcnh4 sconcno3 sconcoa sedbc seddust sednh4 sedno3 sedoa sedso4 sedss snct sndLa soild ssa550aer tSoilPools tall tauimodis tauisccp tautmodis tauwmodis tmxlLa tsLa tssea uall vall vegstress wetno3
+
+		                p220: clhcalipsoice clhcalipsoliq clhcalipsoun
+
+		                p560: clmcalipsoice clmcalipsoliq clmcalipsoun
+
+		                p840: cllcalipsoice cllcalipsoliq cllcalipsoun
+
+		              plev19: cdnc ext550bc ext550dust ext550nh4 ext550no3 ext550oa ext550so4 ext550ss
+
+		              plev7c: clmodis
+
+		                sza5: parasolCRefl
+
+		                 tau: clmodis
+
+		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		             XY-sza5: parasolCRefl
+
+		       XY-tau|plev7c: clmodis
+
+		             XY-temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+For extra table CNRM_HOMEPday (which has 44 variables):
+	Variables which dim was found in extra coordinates table:
+		            Plev39hm: co no2 o3
+
+		            latitude: co hur200 hur500 hur700 hur850 hur925 hus hus200 hus500 hus700 hus850 hus925 no2 o3 ta ta200 ta500 ta700 ta850 ta925 ua ua200 ua500 ua700 ua850 ua925 va va200 va500 va700 va850 va925 wap wap200 wap500 wap700 wap850 wap925 zg zg200 zg500 zg700 zg850 zg925
+
+		           longitude: co hur200 hur500 hur700 hur850 hur925 hus hus200 hus500 hus700 hus850 hus925 no2 o3 ta ta200 ta500 ta700 ta850 ta925 ua ua200 ua500 ua700 ua850 ua925 va va200 va500 va700 va850 va925 wap wap200 wap500 wap700 wap850 wap925 zg zg200 zg500 zg700 zg850 zg925
+
+		             plev200: hur200 hus200 ta200 ua200 va200 wap200 zg200
+
+		             plev500: hur500 hus500 ta500 ua500 va500 wap500 zg500
+
+		             plev700: hur700 hus700 ta700 ua700 va700 wap700 zg700
+
+		             plev7hm: hus ta ua va wap zg
+
+		             plev850: hur850 hus850 ta850 ua850 va850 wap850 zg850
+
+		             plev925: hur925 hus925 ta925 ua925 va925 wap925 zg925
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		         XY-Plev39hm: co no2 o3
+
+		          XY-plev200: hur200 hus200 ta200 ua200 va200 wap200 zg200
+
+		          XY-plev500: hur500 hus500 ta500 ua500 va500 wap500 zg500
+
+		          XY-plev700: hur700 hus700 ta700 ua700 va700 wap700 zg700
+
+		          XY-plev7hm: hus ta ua va wap zg
+
+		          XY-plev850: hur850 hus850 ta850 ua850 va850 wap850 zg850
+
+		          XY-plev925: hur925 hus925 ta925 ua925 va925 wap925 zg925
+
+For extra table CNRM_HOMAL6hr (which has 99 variables):
+	Variables which dim was found in extra coordinates table:
+		               alt40: clcalipsoun
+
+		            latitude: RADabs550aer RADasy550aer RADod550aer RADssa550aer TACabs550aer albsrfc albsrfcLa asy550aer burntArea cSoilPools carbdis carbw cdnctop clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun clcalipsoun clhcalipsoice clhcalipsoliq clhcalipsoun clhmodis cllcalipsoice cllcalipsoliq cllcalipsoun cllmodis clmcalipsoice clmcalipsoliq clmcalipsoun clmmodis clmodis cltcalipsoice cltcalipsoliq cltcalipsoun clth cltl cltlidarradar cltm eminh4 ext550bc ext550dust ext550oa ext550so4 ext550ss fDeforestToL fFireBCarb fRegrowth fco2all fldf fsat fwtd icedLa icod iwpmodis lcod lwpmodis meantbclrisccp meantbisccp mrfso mrso necb od550acldaer od550dustbin1 od550dustbin2 od550nh4 od550ssbin1 od550ssbin2 parasolCRefl pctmodis reffclimodis reffclitop reffclwmodis reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf sconcbc sconcnh4 sconcno3 sconcoa snct sndLa soild ssa550aer tSoilPools tauimodis tauisccp tautmodis tauwmodis tmxlLa tsLa vegstress
+
+		           longitude: RADabs550aer RADasy550aer RADod550aer RADssa550aer TACabs550aer albsrfc albsrfcLa asy550aer burntArea cSoilPools carbdis carbw cdnctop clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun clcalipsoun clhcalipsoice clhcalipsoliq clhcalipsoun clhmodis cllcalipsoice cllcalipsoliq cllcalipsoun cllmodis clmcalipsoice clmcalipsoliq clmcalipsoun clmmodis clmodis cltcalipsoice cltcalipsoliq cltcalipsoun clth cltl cltlidarradar cltm eminh4 ext550bc ext550dust ext550oa ext550so4 ext550ss fDeforestToL fFireBCarb fRegrowth fco2all fldf fsat fwtd icedLa icod iwpmodis lcod lwpmodis meantbclrisccp meantbisccp mrfso mrso necb od550acldaer od550dustbin1 od550dustbin2 od550nh4 od550ssbin1 od550ssbin2 parasolCRefl pctmodis reffclimodis reffclitop reffclwmodis reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf sconcbc sconcnh4 sconcno3 sconcoa snct sndLa soild ssa550aer tSoilPools tauimodis tauisccp tautmodis tauwmodis tmxlLa tsLa vegstress
+
+		                p220: clhcalipsoice clhcalipsoliq clhcalipsoun
+
+		                p560: clmcalipsoice clmcalipsoliq clmcalipsoun
+
+		                p840: cllcalipsoice cllcalipsoliq cllcalipsoun
+
+		              plev19: ext550bc ext550dust ext550oa ext550so4 ext550ss
+
+		              plev7c: clmodis
+
+		                sza5: parasolCRefl
+
+		                 tau: clmodis
+
+		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		             XY-sza5: parasolCRefl
+
+		       XY-tau|plev7c: clmodis
+
+		             XY-temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+For extra table CNRM_HOME6hrPlevPt (which has 44 variables):
+	Variables which dim was found in extra coordinates table:
+		            Plev39hm: co no2 o3
+
+		            latitude: co hur200 hur500 hur700 hur850 hur925 hus hus200 hus500 hus700 hus850 hus925 no2 o3 ta ta200 ta500 ta700 ta850 ta925 ua ua200 ua500 ua700 ua850 ua925 va va200 va500 va700 va850 va925 wap wap200 wap500 wap700 wap850 wap925 zg zg200 zg500 zg700 zg850 zg925
+
+		           longitude: co hur200 hur500 hur700 hur850 hur925 hus hus200 hus500 hus700 hus850 hus925 no2 o3 ta ta200 ta500 ta700 ta850 ta925 ua ua200 ua500 ua700 ua850 ua925 va va200 va500 va700 va850 va925 wap wap200 wap500 wap700 wap850 wap925 zg zg200 zg500 zg700 zg850 zg925
+
+		             plev200: hur200 hus200 ta200 ua200 va200 wap200 zg200
+
+		             plev500: hur500 hus500 ta500 ua500 va500 wap500 zg500
+
+		             plev700: hur700 hus700 ta700 ua700 va700 wap700 zg700
+
+		             plev7hm: hus ta ua va wap zg
+
+		             plev850: hur850 hus850 ta850 ua850 va850 wap850 zg850
+
+		             plev925: hur925 hus925 ta925 ua925 va925 wap925 zg925
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		         XY-Plev39hm: co no2 o3
+
+		          XY-plev200: hur200 hus200 ta200 ua200 va200 wap200 zg200
+
+		          XY-plev500: hur500 hus500 ta500 ua500 va500 wap500 zg500
+
+		          XY-plev700: hur700 hus700 ta700 ua700 va700 wap700 zg700
+
+		          XY-plev7hm: hus ta ua va wap zg
+
+		          XY-plev850: hur850 hus850 ta850 ua850 va850 wap850 zg850
+
+		          XY-plev925: hur925 hus925 ta925 ua925 va925 wap925 zg925
+
+For extra table CNRM_HOMAL1hrPt (which has 111 variables):
+	Variables which dim was found in extra coordinates table:
+		               alt40: clcalipsoun
+
+		            latitude: RADabs550aer RADasy550aer RADod550aer RADssa550aer TACabs550aer albsrfc albsrfcLa asy550aer burntArea cSoilPools carbdis carbin carbw cdnc cdnctop clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun clcalipsoun clhcalipsoice clhcalipsoliq clhcalipsoun clhmodis cllcalipsoice cllcalipsoliq cllcalipsoun cllmodis clmcalipsoice clmcalipsoliq clmcalipsoun clmmodis clmodis cltcalipsoice cltcalipsoliq cltcalipsoun clth cltl cltlidarradar cltm dryno3 eminh4 emino3 ext550bc ext550dust ext550nh4 ext550no3 ext550oa ext550so4 ext550ss fDeforestToL fFireBCarb fRegrowth fco2all fldf fsat fwtd icedLa icod iwpmodis lcod lwpmodis meantbclrisccp meantbisccp necb od550acldaer od550dustbin1 od550dustbin2 od550nh4 od550no3bin1 od550ssbin1 od550ssbin2 parasolCRefl pctmodis reffclimodis reffclitop reffclwmodis reffclwtopcnrm rldsaf rldscsaf rlusaf rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf sconcbc sconcnh4 sconcno3 sconcoa sedbc seddust sednh4 sedno3 sedoa sedso4 sedss snct sndLa soild ssa550aer tSoilPools tauimodis tauisccp tautmodis tauwmodis tmxlLa tsLa tssea vegstress wetno3
+
+		           longitude: RADabs550aer RADasy550aer RADod550aer RADssa550aer TACabs550aer albsrfc albsrfcLa asy550aer burntArea cSoilPools carbdis carbin carbw cdnc cdnctop clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun clcalipsoun clhcalipsoice clhcalipsoliq clhcalipsoun clhmodis cllcalipsoice cllcalipsoliq cllcalipsoun cllmodis clmcalipsoice clmcalipsoliq clmcalipsoun clmmodis clmodis cltcalipsoice cltcalipsoliq cltcalipsoun clth cltl cltlidarradar cltm dryno3 eminh4 emino3 ext550bc ext550dust ext550nh4 ext550no3 ext550oa ext550so4 ext550ss fDeforestToL fFireBCarb fRegrowth fco2all fldf fsat fwtd icedLa icod iwpmodis lcod lwpmodis meantbclrisccp meantbisccp necb od550acldaer od550dustbin1 od550dustbin2 od550nh4 od550no3bin1 od550ssbin1 od550ssbin2 parasolCRefl pctmodis reffclimodis reffclitop reffclwmodis reffclwtopcnrm rldsaf rldscsaf rlusaf rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf sconcbc sconcnh4 sconcno3 sconcoa sedbc seddust sednh4 sedno3 sedoa sedso4 sedss snct sndLa soild ssa550aer tSoilPools tauimodis tauisccp tautmodis tauwmodis tmxlLa tsLa tssea vegstress wetno3
+
+		                p220: clhcalipsoice clhcalipsoliq clhcalipsoun
+
+		                p560: clmcalipsoice clmcalipsoliq clmcalipsoun
+
+		                p840: cllcalipsoice cllcalipsoliq cllcalipsoun
+
+		              plev19: cdnc ext550bc ext550dust ext550nh4 ext550no3 ext550oa ext550so4 ext550ss
+
+		              plev7c: clmodis
+
+		                sza5: parasolCRefl
+
+		                 tau: clmodis
+
+		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		             XY-sza5: parasolCRefl
+
+		       XY-tau|plev7c: clmodis
+
+		             XY-temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+
+Number of 'cmor', 'dev' and 'perso' among home variables: 0
+Number of 'extra' among home variables: 132
+homevars list: cdnctop cltl cltm clth hur925 hur850 hur700 hur500 hur200 husll hus925 hus850 hus700 hus500 hus200 RADasy550aer RADssa550aer RADod550aer RADabs550aer reffclitop reffclwtopcnrm rluscs rldsaf rlusaf rldscsaf rluscsaf rsdsaf rsusaf rsdscsaf rsuscsaf tall ta925 ta850 ta700 ta500 ta200 tssea uall ua925 ua850 ua700 ua500 ua200 vall va925 va850 va700 va500 va200 wap925 wap850 wap700 wap500 wap200 zg925 zg850 zg700 zg500 zg200 cltl cltm clth husll hus925 hus850 hus700 hus500 hus200 rluscs rldsaf rlusaf rldscsaf rluscsaf rsdsaf rsusaf rsdscsaf rsuscsaf tall ta925 ta850 ta700 ta500 ta200 tssea uall ua925 ua850 ua700 ua500 ua200 vall va925 va850 va700 va500 va200 zg925 zg850 zg700 zg500 zg200 cltl cltm clth hus925 hus850 hus700 hus500 hus200 mrfso mrso ta925 ta850 ta700 ta500 ta200 ua925 ua850 ua700 ua500 ua200 va925 va850 va700 va500 va200 zg925 zg850 zg700 zg500 zg200 tssea
+
+Realms for these CMORvars: aerosol atmos land
+processing file current_directory/test_AAD50_641_nodr/input/xml/ping_surfex.xml:
+OK current_directory/test_AAD50_641_nodr/input/xml/ping_surfex.xml
+processing file current_directory/test_AAD50_641_nodr/input/xml/ping_trip.xml:
+OK current_directory/test_AAD50_641_nodr/input/xml/ping_trip.xml
+
+file_def written as current_directory/test_AAD50_641_nodr/test_outputs/dr2xml_trip.xml
+
+
+Some Statistics on actually written variables per frequency+shape...
+
+---------- --------    -------- ---   0
+
+
+Some Statistics on actually written variables per variable...

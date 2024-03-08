@@ -12,7 +12,7 @@ from functools import reduce
 import re
 
 # Utilities
-from .settings_interface import get_settings_values
+from .settings_interface import get_settings_values, set_internal_value
 from .utils import Dr2xmlError
 
 # Logger
@@ -22,15 +22,9 @@ from logger import get_logger
 from .config import get_config_variable, add_value_in_dict_config_variable
 
 # Interface to Data Request
-from .dr_interface import get_element_uid, get_sectors_list
+from .dr_interface import get_dr_object
 # Interface to xml tools
 from .xml_interface import find_rank_xml_subelement, DR2XMLElement
-
-
-# Next variable is used to circumvent an Xios 1270 shortcoming. Xios
-# should read that value in the datafile. Actually, it did, in some
-# earlier version ...
-axis_count = 0
 
 
 def get_grid_def(grid_id):
@@ -82,8 +76,13 @@ def create_grid_def(axis_def, axis_name, src_grid_id):
     src_grid_def = get_grid_def(src_grid_id)
     #
     # Retrieve axis key and remove id= from axis definition
-    new_axis_def = axis_def.copy()
-    axis_key = new_axis_def.attrib.pop("id")
+    xios_version = get_settings_values("internal")["xios_version"]
+    if xios_version <= 2:
+        new_axis_def = axis_def.copy()
+        axis_key = new_axis_def.attrib.pop("id")
+    else:
+        axis_key = axis_def.attrib["id"]
+        new_axis_def = DR2XMLElement(tag="axis", axis_ref=axis_key)
     target_grid_id = src_grid_id + "_" + axis_key
     #
     # Change only first instance of axis_ref, which is assumed to match the vertical dimension
@@ -248,7 +247,7 @@ def change_axes_in_grid(grid_id):
     Returns the new grid_id
     """
     internal_dict = get_settings_values("internal")
-    global axis_count
+    data_request = get_dr_object("get_data_request")
     logger = get_logger()
     grid_def_init = get_grid_def(grid_id)
     grid_def = grid_def_init.copy()
@@ -260,7 +259,7 @@ def change_axes_in_grid(grid_id):
 
     # Add cases where dim name 'sector' should be used,if needed
     # sectors = dims which have type character and are not scalar
-    sectors = internal_dict.get("sectors", get_sectors_list())
+    sectors = internal_dict.get("sectors", data_request.get_sectors_list())
     for sector in sectors:
         if not any([sector in [aliases[aid], aliases[aid][0]] for aid in aliases]):
             # print "\nadding sector : %s"%sector
@@ -290,14 +289,16 @@ def change_axes_in_grid(grid_id):
                 dim_id = 'dim:{}'.format(dr_axis_id)
                 # print "in change_axis for %s %s"%(grid_id,dim_id)
                 # dim_id should be a dimension !
-                dim = get_element_uid(dim_id, elt_type="dim",
-                                      error_msg="Value %s in 'non_standard_axes' is not a DR dimension id" % dr_axis_id)
+                dim = data_request.get_element_uid(dim_id, elt_type="dim",
+                                                   error_msg="Value %s in 'non_standard_axes' is not a DR dimension id"
+                                                             % dr_axis_id)
                 # We don't process scalars here
                 if dim.value in ['', ] or dim.label in ["scatratio", ]:
                     axis_id, axis_name = create_axis_from_dim(dim, alt_labels, axis_ref)
                     # cannot use ET library which does not guarantee the ordering of axes
                     changed_done = True
-                    axis_count += 1
+                    axis_count = get_settings_values("internal_values", "axis_count") + 1
+                    set_internal_value("axis_count", axis_count)
                     grid_def[i].attrib = dict(axis_ref=axis_id, name=axis_name,
                                               id="ref_to_{}_{}".format(axis_id, axis_count))
                     output_grid_id += "_" + dim.label
@@ -322,7 +323,6 @@ def create_axis_from_dim(dim, labels, axis_ref):
     if axis_id in get_config_variable("axis_defs"):
         return axis_id, axis_name
     #
-    prec_dict = dict(double="8", integer="2", int="2", float="4")
     value = None
     bounds = None
     dim_name = None
@@ -349,8 +349,8 @@ def create_axis_from_dim(dim, labels, axis_ref):
             strings += "%s " % s
         if length > 0:
             label = "(0,{})[ {} ]".format(length - 1, strings)
-    rep = DR2XMLElement(tag="axis", id=axis_id, name=axis_name, axis_ref=axis_ref, standard_name=dim.standardName,
-                        long_name=dim.title, prec=prec_dict.get(dim.type), unit=dim.units, value=value, bounds=bounds,
+    rep = DR2XMLElement(tag="axis", id=axis_id, name=axis_name, axis_ref=axis_ref, standard_name=dim.stdname,
+                        long_name=dim.title, prec=dim.type, unit=dim.units, value=value, bounds=bounds,
                         dim_name=dim_name, label=label, axis_type=dim.axis)
     add_value_in_dict_config_variable(variable="axis_defs", key=axis_id, value=rep)
     # print "new DR_axis :  %s "%rep
@@ -368,17 +368,6 @@ def is_vert_dim(sdim):
     # test=(sdim.stdname=='air_pressure' or sdim.stdname=='altitude') and (sdim.value == "")
     test = (sdim.axis in ['Z', ])
     return test
-
-
-def scalar_vertical_dimension(sv):
-    """
-    Return the altLabel attribute if it is a vertical dimension, else None.
-    """
-    if 'cids' in sv.struct.__dict__:
-        cid = get_element_uid(sv.struct.cids[0], elt_type="dim")
-        if is_vert_dim(cid):
-            return cid.altLabel
-    return None
 
 
 def create_standard_domains(domain_defs):
@@ -399,8 +388,9 @@ def create_standard_domain(resol, ni, nj):
     """
     Create a xml like string corresponding to the domain using resol, ni and nj.
     """
-    rep = DR2XMLElement(tag="domain", id="CMIP6_{}".format(resol), ni_glo=str(ni), nj_glo=str(nj), type="rectilinear",
-                        prec="8")
+    grid_prefix = get_settings_values("internal", "grid_prefix")
+    rep = DR2XMLElement(tag="domain", id="{}{}".format(grid_prefix, resol), ni_glo=str(ni), nj_glo=str(nj),
+                        type="rectilinear", prec="8")
     rep.append(DR2XMLElement(tag="generate_rectilinear_domain"))
     rep.append(DR2XMLElement(tag="interpolate_domain", order="1", renormalize="true", mode="read_or_compute",
                              write_weight="true"))

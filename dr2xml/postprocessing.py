@@ -269,7 +269,7 @@ def process_diurnal_cycle(alias):
 
     grid_scalar_id = grid_id + "_plus_scalar"
     grid_scalar.attrib["id"] = grid_scalar_id
-    grid_scalar.append(DR2XMLElement, tag="scalar")
+    grid_scalar.append(DR2XMLElement(tag="scalar"))
     logger.debug("***> %s" % grid_scalar)
     add_value_in_dict_config_variable(variable="grid_defs", key=grid_scalar_id, value=grid_scalar)
 
@@ -340,7 +340,7 @@ def process_levels_over_orog(sv, alias, src_grid_id):
         height_over_orog_field_name = "height_over_orog"
         if height_over_orog_field_name not in context_index:
             # Find out what is the name of the orography field and check that it is defined
-            orography_field_name = internal_dict["orography_field_name"]
+            orography_field_name = internal_dict["prefixed_orography_field_name"]
             if orography_field_name not in context_index:
                 raise KeyError("%s must have been defined in field_def" % orography_field_name)
             orography_defs = context_index[orography_field_name]

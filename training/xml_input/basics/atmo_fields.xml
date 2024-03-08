@@ -1,0 +1,1169 @@
+<!-- Declaration of ARPEGE fields
+
+>> 4 grands groupes de variables que l'on distingue par la fréquence d'échantillonage
+   plusieurs sous-groupes thématiques à l'intérieur de ces grands groupes
+   avec distinction des grilles
+   pour une utilisation souple dans le arpsfx_file (exemple ci-dessous)
+
+	ARPEGE_2D_instant_variables
+        <field_group group_ref="atmo_2D_instant_misc_variables"			enabled="false" />
+        <field_group group_ref="atmo_2D_instant_cloud_variables"		enabled="false" />
+
+	ARPEGE_2D_avg_variables
+      	<field_group group_ref="atmo_2D_avg_misc_variables"			enabled="false" />
+      	<field_group group_ref="atmo_2D_avg_radiative_variables"		enabled="false" />
+      	<field_group group_ref="atmo_2D_avg_precipitation_variables"		enabled="false" />
+      	<field_group group_ref="atmo_2D_avg_cloud_variables"			enabled="false" />
+      	<field_group group_ref="atmo_2D_avg_vertic_integrated_fluxes"		enabled="false" />
+      	<field_group group_ref="atmo_2D_avg_radiative_clean_variables"		enabled="false" />
+      	<field_group group_ref="atmo_2D_avg_radiative_bis_variables"		enabled="false" />
+        <field_group group_ref="atmo_2D_avg_radiative_cotra_radf_variables"	enabled="false" />
+        <field_group group_ref="atmo_2D_avg_radiative_cotra_radfchem_variables"	enabled="false" />
+      	<field_group group_ref="atmo_2D_avg_radiative_4xc_variables"		enabled="false" />
+        <field_group group_ref="atmo_2D_avg_radiative_fluxes_without_aerosols_variables" enabled="false" />
+        <field_group group_ref="atmo_2D_avg_aerosol_radiative_forcing_variables" enabled="false" />
+
+	ARPEGE_3D_instant_variables
+      	<field_group group_ref="atmo_3D_instant_mlev_standard"			enabled="false" />
+        <field_group group_ref="atmo_3D_instant_mlevh_standard"			enabled="false" />
+      	<field_group group_ref="atmo_3D_instant_plev_standard"			enabled="false" />
+      	<field_group group_ref="atmo_3D_instant_zlev_standard"			enabled="false" />
+      	<field_group group_ref="atmo_3D_instant_mlev_misc"			enabled="false" />
+      	<field_group group_ref="atmo_3D_instant_mlev_t0"			enabled="false" />
+      	<field_group group_ref="atmo_3D_instant_plev_misc"			enabled="false" />
+      	<field_group group_ref="atmo_3D_instant_zlev_misc"			enabled="false" />
+      	<field_group group_ref="atmo_3D_instant_mlev_cloud"			enabled="false" />
+      	<field_group group_ref="atmo_3D_instant_plev_cloud"			enabled="false" />
+      	<field_group group_ref="atmo_3D_instant_zlev_cloud"			enabled="false" />
+
+	ARPEGE_3D_avg_variables
+        <field_group group_ref="atmo_3D_avg_mlevh_convection"			enabled="false" />
+        <field_group group_ref="atmo_3D_avg_mlevh_precipitation"		enabled="false" />
+      	<field_group group_ref="atmo_3D_avg_mlev_tendencies"			enabled="false" />
+      	<field_group group_ref="atmo_3D_avg_plev_tendencies"			enabled="false" />
+      	<field_group group_ref="atmo_3D_avg_zlev_tendencies"			enabled="false" />
+      	<field_group group_ref="atmo_3D_avg_mlevh_radiation"			enabled="false" />
+      	<field_group group_ref="atmo_3D_avg_mlevh_radiation_cln"		enabled="false" />
+      	<field_group group_ref="atmo_3D_avg_mlevh_radiation_4co2"		enabled="false" />
+      	<field_group group_ref="atmo_3D_avg_mlevh_radiation_rt"			enabled="false" />
+
+	ARPEGE_4D_avg_variables
+        <field_group group_ref="atmo_4D_avg_mlevh_radiation" 			enabled="false" />
+        <field_group group_ref="atmo_4D_avg_mlevh_radiation_cln"		enabled="false" />
+        <field_group group_ref="atmo_4D_avg_mlevh_radiation_4co2"		enabled="false" />
+        <field_group group_ref="atmo_4D_avg_mlevh_radiation_rt"			enabled="false" />
+
+	ARPEGE_COSP_variables
+        <field_group group_ref="atmo_calipso_2D"				enabled="false" />
+        <field_group group_ref="atmo_calipso_3D_alt40"				enabled="false" />
+        <field_group group_ref="atmo_calipso_3D_mlev"				enabled="false" />
+        <field_group group_ref="atmo_calipso_3D_temp"				enabled="false" />
+        <field_group group_ref="atmo_calipso_4D_mlev_col" 			enabled="false" />
+        <field_group group_ref="atmo_calipso_4D_alt40_scatratio"		enabled="false" />
+        <field_group group_ref="atmo_parasol_3D_sza5"				enabled="false" />
+        <field_group group_ref="atmo_radar_4D_mlev_col"				enabled="false" />
+        <field_group group_ref="atmo_radar_4D_alt40_dbze"			enabled="false" />
+        <field_group group_ref="atmo_lidarradar_2D"				enabled="false" />
+        <field_group group_ref="atmo_lidarradar_3D_alt40"			enabled="false" />
+        <field_group group_ref="atmo_isccp_2D" 					enabled="false" />
+        <field_group group_ref="atmo_isccp_3D_col" 				enabled="false" />
+        <field_group group_ref="atmo_isccp_4D_plev7_tau"			enabled="false" />
+        <field_group group_ref="atmo_modis_2D"					enabled="false" />
+        <field_group group_ref="atmo_modis_4D_plev7_tau"			enabled="false" />
+        <field_group group_ref="atmo_modis_4D_reffIce_tau"			enabled="false" />
+        <field_group group_ref="atmo_modis_4D_reffLiq_tau"			enabled="false" />
+        <field_group group_ref="atmo_misr_4D_cth16_tau"				enabled="false" />
+
+-->
+<field_definition>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+  <field_group prec="4" detect_missing_value="true" default_value="1.e+20" >
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- Scalar ARPEGE fields : instantaneous sampling                                                                          -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <field_group grid_ref="SCALAR_grid" operation="instant" freq_op="1ts" >
+      <field id="co2mass"    	long_name="total_atmospheric_mass_of_carbon_dioxide"	unit="kg"/>
+      <field id="ch4global"  	long_name="global_mean_mole_fraction_of_CH4"		unit="ppbv"/>
+      <field id="n2oglobal"  	long_name="global_mean_mole_fraction_of_N2O"		unit="ppbv"/>
+    </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- 2D ARPEGE fields : instantaneous sampling                                                                          -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <field_group grid_ref="FULL_grid" operation="instant" freq_op="1ts" >
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->	    
+      <field_group id="atmo_2D_instant_test_variables" >
+	<field id="field_2D_aplpar"	long_name="field_2D_send_in_aplpar"	unit="-"/>
+	<field id="field_2D_pos"	long_name="field_2D_send_in_pos"	unit="-"/>	
+        <field id="field_2D_radlsw"	long_name="field_2D_send_in_radlsw"	unit="-"/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->	    
+      <field_group id="atmo_2D_instant_misc_variables" >
+        <field id="psl"     	long_name="air_pressure_at_sea_level"			unit="Pa"/>
+        <field id="ps"      	long_name="surface_air_pressure"			unit="Pa"/>
+	<field id="airmass" 	long_name="atmosphere_mass_of_air_per_unit_area"	unit="kg m-2"> ps / $gravit </field>
+        <field id="ptp"		long_name="tropopause_air_pressure"			unit="Pa"/>
+        <field id="tatp"	long_name="tropopause_air_temperature"			unit="K"/>
+        <field id="ztp"		long_name="tropopause_altitude"				unit="m"/>
+        <field id="nogwduflx_rand"	long_name="absolute_launched_momentum_flux_random_part"		unit="Pa"/>
+        <field id="nogwduflx_prec"	long_name="absolute_launched_momentum_flux_convective_part"	unit="Pa"/>
+        <field id="nogwduflx_back"	long_name="absolute_launched_momentum_flux_background_part"	unit="Pa"/>
+        <field id="nogwduflx_fron"	long_name="absolute_launched_momentum_flux_frontal_part"    	unit="Pa"/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_2D_instant_cloud_variables" >
+        <field id="lcod"    	long_name="liquid_cloud_optical_depth"								unit="1"/>
+        <field id="icod"    	long_name="ice_cloud_optical_depth"								unit="1"/>
+	<field id="cod"     	long_name="cloud_optical_depth"									unit="1"> lcod + icod </field>
+        <field id="ptop"	long_name="pressure_at_cloud_top"								unit="Pa"/>
+        <field id="ttop"	long_name="temperature_at_cloud_top"								unit="K"/>
+        <field id="frtop"	long_name="cloud_fraction_at_cloud_top"								unit="1"/>
+        <field id="reffclwtop"	long_name="effective_radius_of_cloud_liquid_water_particle_at_cloud_top"			unit="m"/>
+        <field id="reffclitop"	long_name="effective_radius_of_cloud_ice_particle_at_cloud_top"					unit="m"/>
+        <field id="cdnctop"	long_name="number_concentration_of_cloud_liquid_water_particles_in_air_at_cloud_top"		unit="m-3"/>
+        <field id="cdncvi"	long_name="column_integrated_number_concentration_of_cloud_liquid_water_particles_in_air"	unit="m-2"/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->   
+    </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- 2D ARPEGE fields : averaged sampling                                                                               -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <field_group grid_ref="FULL_grid" operation="average" freq_op="1ts" >
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->	    
+      <field_group id="atmo_2D_avg_misc_variables" >
+        <field id="toz"		long_name="ozone total"								unit="Dbs"/>
+        <field id="tauupbl"	long_name="surface_downward_eastward_stress_due_to_planetary_boundary_layer"	unit="Pa"/>
+        <field id="tauvpbl"	long_name="surface_downward_northward_stress_due_to_planetary_boundary_layer"	unit="Pa"/>
+        <field id="ci"		long_name="convection_time_fraction"					 	unit="1"/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_2D_avg_radiative_variables" >
+        <field id="sza"		long_name="solar zenith angle"								unit="degree" />
+        <field id="rtmt"	long_name="Net radiation at the top of the model"					unit="W m-2"> rst - rlut </field>
+        <field id="rst"		long_name="Net shortwave radiation at TOA"						unit="W m-2"/>
+        <field id="rsdt"	long_name="Solar incoming radiation at TOA"						unit="W m-2"/>
+        <field id="rsut"	long_name="Upward shortwave radiation at TOA"						unit="W m-2"> rsdt - rst </field>
+        <field id="rstcs"	long_name="Net shortwave radiation at TOA assuming clear-sky conditions"		unit="W m-2"/>
+        <field id="rsutcs"	long_name="Upward shortwave radiation at TOA assuming clear-sky conditions"		unit="W m-2"> rsdt - rstcs </field>
+        <field id="rlut"	long_name="Upward longwave radiation at TOA"						unit="W m-2"/>
+        <field id="rlutcs"	long_name="Upward longwave radiation at TOA assuming clear-sky conditions"		unit="W m-2"/>
+        <field id="rlscs"	long_name="Net longwave radiation at surface assuming clear-sky conditions"		unit="W m-2"/>
+        <field id="rldscs"	long_name="Downward longwave radiation at surface assuming clear-sky conditions"	unit="W m-2"/>
+        <field id="rluscs"	long_name="Upward longwave raddiation at surface assuming clear-sky conditions"		unit="W m-2"> rldscs - rlscs </field>
+        <field id="rsscs"	long_name="Net shortwave radiation at surface assuming clear-sky conditions"		unit="W m-2"/>
+        <field id="rsdscs"	long_name="Downward shortwave radiation at surface assuming clear-sky conditions"	unit="W m-2"/>
+        <field id="rsuscs"	long_name="Upward shortwave radiation at surface assuming clear-sky conditions"		unit="W m-2"> rsdscs - rsscs </field>
+        <field id="rsscor"	long_name="Net surface shortwave radiation correction"					unit="W m-2"/>
+        <field id="rlscor"	long_name="Net surface longwave radiation correction"					unit="W m-2"/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_2D_avg_precipitation_variables" >
+        <field id="prlic"	long_name="convective liquid precipitation"				unit="kg m-2 s-1"/>
+        <field id="prsnc"	long_name="convective solid precipitation"				unit="kg m-2 s-1"/>
+        <field id="prlils"	long_name="large scale liquid precipitation"				unit="kg m-2 s-1"/>
+        <field id="prsnls"	long_name="large scale solid precipitation"				unit="kg m-2 s-1"/>
+        <field id="prli"	long_name="liquid precipitation"					unit="kg m-2 s-1"> prlic + prlils </field>
+        <field id="prsn"	long_name="solid precipitation"						unit="kg m-2 s-1"> prsnc + prsnls </field>
+        <field id="prc"		long_name="convective precipitation"					unit="kg m-2 s-1"> prlic + prsnc  </field>
+        <field id="prls"	long_name="large scale precipitation"					unit="kg m-2 s-1"> prlils + prsnls </field>
+        <field id="pr"		long_name="total precipitation"						unit="kg m-2 s-1"> prc + prls </field>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_2D_avg_cloud_variables" >
+        <field id="clt"		long_name="cloud_area_fraction" 					unit="1"/>
+        <field id="clt100"	long_name="cloud_area_fraction"						unit="%" > clt * 100 </field>
+        <field id="cltc"	long_name="convective_cloud_area_fraction"				unit="1"/>
+        <field id="cltc100"	long_name="convective_cloud_area_fraction"				unit="%" > cltc * 100 </field>
+        <field id="clth"	long_name="cloud_area_fraction_in_atmosphere_layer_high"		unit="1"/>
+        <field id="clth100"	long_name="cloud_area_fraction_in_atmosphere_layer_high"		unit="%" > clth * 100 </field>
+	<field id="cltm"	long_name="cloud_area_fraction_in_atmosphere_layer_middle"		unit="1"/>
+        <field id="cltm100"	long_name="cloud_area_fraction_in_atmosphere_layer_middle"		unit="%" > cltm * 100 </field>
+        <field id="cltl"	long_name="cloud_area_fraction_in_atmosphere_layer_low"			unit="1"/>
+        <field id="cltl100"	long_name="cloud_area_fraction_in_atmosphere_layer_low"			unit="%" > cltl * 100 </field>
+        <field id="lwp"		long_name="atmosphere_mass_content_of_cloud_liquid_water"		unit="kg m-2"/>
+        <field id="iwp"		long_name="atmosphere_mass_content_of_cloud_ice_water"			unit="kg m-2"/>
+        <field id="lwpc"	long_name="atmosphere_mass_content_of_convective_cloud_liquid_water"	unit="kg m-2"/>
+        <field id="iwpc"	long_name="atmosphere_mass_content_of_convective_cloud_ice_water"	unit="kg m-2"/>
+        <field id="lwps"	long_name="atmosphere_mass_content_of_stratiform_cloud_liquid_water"	unit="kg m-2"/>
+        <field id="iwps"	long_name="atmosphere_mass_content_of_stratiform_cloud_ice_water"	unit="kg m-2"/>
+        <field id="prw"		long_name="precipitable_water"						unit="kg m-2"/>
+        <field id="cwp"		long_name="condensed_water_path"					unit="kg m-2" > lwp + iwp </field>
+        <field id="cwpc"	long_name="convective_condensed_water_path"				unit="kg m-2" > lwpc + iwpc </field>
+        <field id="cwps"	long_name="stratiform_condensed_water_path"				unit="kg m-2" > lwps + iwps </field>
+        <field id="ccb"		long_name="air_pressure_at_convective_cloud_base"			unit="Pa"/>
+        <field id="cct"		long_name="air_pressure_at_convective_cloud_top"			unit="Pa"/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_2D_avg_vertic_integrated_fluxes" >
+        <field id="intuaw"	long_name="vertical_integral_eastward_wind_by_total_water"		unit="kg m-1 s-1" />
+        <field id="intvaw"	long_name="vertical_integral_northward_wind_by_total_water"		unit="kg m-1 s-1" />
+        <field id="intuadse"	long_name="vertical_integral_eastward_wind_by_dry_static_energy"	unit="J m-1 s-1"  />
+        <field id="intvadse"	long_name="vertical_integral_northward_wind_by_dry_static_energy"	unit="J m-1 s-1"  />
+        <field id="intuadseMJ"	long_name="vertical_integral_eastward_wind_by_dry_static_energy"	unit="1.e6 J m-1 s-1" > intuadse * 0.000001 </field>
+        <field id="intvadseMJ"	long_name="vertical_integral_northward_wind_by_dry_static_energy"	unit="1.e6 J m-1 s-1" > intvadse * 0.000001 </field>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_2D_avg_radiative_clean_variables" >
+        <field id="rstcln"	long_name="Net downward shortwave radiation at TOA assuming clean-sky conditions"		unit="W m-2"/>
+        <field id="rsutcln"	long_name="Upward shortwave radiation at TOA assuming clean-sky conditions"			unit="W m-2" > rsdt - rstcln </field>
+        <field id="rstcscln"	long_name="Net downward shortwave radiation at TOA assuming clear and clean-sky conditions"	unit="W m-2"/>
+        <field id="rsutcscln"	long_name="Upward shortwave radiation at TOA assuming clear and clean-sky conditions"		unit="W m-2" > rsdt - rstcscln </field>
+        <field id="rlutcln"	long_name="Upward longwave radiation at TOA assuming clean-sky conditions"			unit="W m-2"/>
+        <field id="rlutcscln"	long_name="Upward longwave radiation at TOA assuming clear and clean-sky conditions"		unit="W m-2"/>
+        <field id="rsscln"	long_name="Net downward shortwave radiation at surface assuming clean-sky conditions"		unit="W m-2"/>
+        <field id="rsdscln"	long_name="Downward shortwave radiation at surface assuming clean-sky conditions"		unit="W m-2"/>
+        <field id="rsuscln"	long_name="Upward shortwave radiation at surface assuming clean-sky conditions"	         	unit="W m-2"> rsdscln - rsscln </field>
+        <field id="rsscscln"	long_name="Net downward shortwave radiation at surface assuming clear and clean-sky conditions"	unit="W m-2"/>
+        <field id="rsdscscln"	long_name="Downward shortwave radiation at surface assuming clear and clean-sky conditions" 	unit="W m-2"/>
+        <field id="rsuscscln"	long_name="Upward shortwave radiation at surface assuming clear and clean-sky conditions"	unit="W m-2"> rsdscscln - rsscscln </field>
+        <field id="rlscln"	long_name="Net downward longwave radiation at surface assuming clean-sky conditions"		unit="W m-2"/>
+        <field id="rldscln"	long_name="Downward longwave radiation at surface assuming clean-sky conditions"		unit="W m-2"/>
+        <field id="rluscln"	long_name="Upward longwave radiation at surface assuming clean-sky conditions"	         	unit="W m-2"> rldscln - rlscln </field>
+        <field id="rlscscln"	long_name="Net downward longwave radiation at surface assuming clear and clean-sky conditions"	unit="W m-2"/>
+        <field id="rldscscln"	long_name="Downward longwave radiation at surface assuming clear and clean-sky conditions"	unit="W m-2"/>
+        <field id="rluscscln"	long_name="Upward longwave radiation at surface assuming clear and clean-sky conditions"	unit="W m-2"> rldscscln - rlscscln </field>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_2D_avg_radiative_bis_variables" >
+        <field id="rstbis"	long_name="Net downward shortwave radiation at TOA for second aerosol climatology"					unit="W m-2"/>
+        <field id="rsutbis"	long_name="Upward shortwave radiation at TOA for second aerosol climatology"						unit="W m-2" > rsdt - rstbis </field>
+        <field id="rstcsbis"	long_name="Net downward shortwave radiation at TOA assuming clear-sky conditions for second aerosol climatology"	unit="W m-2"/>
+        <field id="rsutcsbis"	long_name="Upward shortwave radiation at TOA assuming clear-sky conditions for second aerosol climatology"		unit="W m-2" > rsdt - rstcsbis </field>
+        <field id="rlutbis"	long_name="Upward longwave radiation at TOA for second aerosol climatology"						unit="W m-2"/>
+        <field id="rlutcsbis"	long_name="Upward longwave radiation at TOA assuming clear-sky conditions for second aerosol climatology"		unit="W m-2"/>
+        <field id="rssbis"	long_name="Net downward shortwave radiation at surface for second aerosol climatology"					unit="W m-2"/>
+        <field id="rsdsbis"	long_name="Downward shortwave radiation at surface for second aerosol climatology"					unit="W m-2"/>
+        <field id="rsusbis"	long_name="Upward shortwave radiation at surface for second aerosol climatology"	         			unit="W m-2"> rsdsbis - rssbis </field>
+        <field id="rsscsbis"	long_name="Net downward shortwave radiation at surface assuming clear-sky conditions for second aerosol climatology"	unit="W m-2"/>
+        <field id="rsdscsbis"	long_name="Downward shortwave radiation at surface assuming clear-sky conditions for second aerosol climatology" 	unit="W m-2"/>
+        <field id="rsuscsbis"	long_name="Upward shortwave radiation at surface assuming clear-sky conditions for second aerosol climatology"		unit="W m-2"> rsdscsbis - rsscsbis </field>
+        <field id="rlsbis"	long_name="Net downward longwave radiation at surface for second aerosol climatology"					unit="W m-2"/>
+        <field id="rldsbis"	long_name="Downward longwave radiation at surface for second aerosol climatology"					unit="W m-2"/>
+        <field id="rlusbis"	long_name="Upward longwave radiation at surface for second aerosol climatology"	         				unit="W m-2"> rldsbis - rlsbis </field>
+        <field id="rlscsbis"	long_name="Net downward longwave radiation at surface assuming clear-sky conditions for second aerosol climatology"	unit="W m-2"/>
+        <field id="rldscsbis"	long_name="Downward longwave radiation at surface assuming clear-sky conditions for second aerosol climatology"		unit="W m-2"/>
+        <field id="rluscsbis"	long_name="Upward longwave radiation at surface assuming clear-sky conditions for second aerosol climatology"		unit="W m-2"> rldscsbis - rlscsbis </field>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_2D_avg_radiative_cotra_radf_variables" >
+        <field id="rstcotra"	long_name="Net downward shortwave radiation at TOA for contrail case"					unit="W m-2"/>
+        <field id="rsutcotra"	long_name="Upward shortwave radiation at TOA for contrail case"						unit="W m-2" > rsdt - rstcotra </field>
+        <field id="rstcscotra"	long_name="Net downward shortwave radiation at TOA assuming clear-sky conditions for contrail case"	unit="W m-2"/>
+        <field id="rsutcscotra"	long_name="Upward shortwave radiation at TOA assuming clear-sky conditions for contrail case"		unit="W m-2" > rsdt - rstcscotra </field>
+        <field id="rlutcotra"	long_name="Upward longwave radiation at TOA for contrail case"						unit="W m-2"/>
+        <field id="rlutcscotra"	long_name="Upward longwave radiation at TOA assuming clear-sky conditions for contrail case"		unit="W m-2"/>
+        <field id="rsscotra"	long_name="Net downward shortwave radiation at surface for contrail case"				unit="W m-2"/>
+        <field id="rsdscotra"	long_name="Downward shortwave radiation at surface for contrail case"					unit="W m-2"/>
+        <field id="rsuscotra"	long_name="Upward shortwave radiation at surface for contrail case"	         			unit="W m-2"> rsdscotra - rsscotra </field>
+        <field id="rsscscotra"	long_name="Net downward shortwave radiation at surface assuming clear-sky conditions for contrail case"	unit="W m-2"/>
+        <field id="rsdscscotra"	long_name="Downward shortwave radiation at surface assuming clear-sky conditions for contrail case" 	unit="W m-2"/>
+        <field id="rsuscscotra"	long_name="Upward shortwave radiation at surface assuming clear-sky conditions for contrail case"	unit="W m-2"> rsdscscotra - rsscscotra </field>
+        <field id="rlscotra"	long_name="Net downward longwave radiation at surface for contrail case"				unit="W m-2"/>
+        <field id="rldscotra"	long_name="Downward longwave radiation at surface for contrail case"					unit="W m-2"/>
+        <field id="rluscotra"	long_name="Upward longwave radiation at surface for contrail case"	         			unit="W m-2"> rldscotra - rlscotra </field>
+        <field id="rlscscotra"	long_name="Net downward longwave radiation at surface assuming clear-sky conditions for contrail case"	unit="W m-2"/>
+        <field id="rldscscotra"	long_name="Downward longwave radiation at surface assuming clear-sky conditions for contrail case"	unit="W m-2"/>
+        <field id="rluscscotra"	long_name="Upward longwave radiation at surface assuming clear-sky conditions for contrail case"	unit="W m-2"> rldscscotra - rlscscotra </field>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_2D_avg_radiative_cotra_radfchem_variables" >
+        <field id="rstcotrac"		long_name="Net downward shortwave radiation at TOA for contrail case (chemistry active)"					unit="W m-2"/>
+        <field id="rsutcotrac"		long_name="Upward shortwave radiation at TOA for contrail case (chemistry active)"						unit="W m-2" > rsdt - rstcotrac </field>
+        <field id="rstcscotrac"		long_name="Net downward shortwave radiation at TOA assuming clear-sky conditions for contrail case (chemistry active)"		unit="W m-2"/>
+        <field id="rsutcscotrac"	long_name="Upward shortwave radiation at TOA assuming clear-sky conditions for contrail case (chemistry active)"		unit="W m-2" > rsdt - rstcscotrac </field>
+        <field id="rlutcotrac"		long_name="Upward longwave radiation at TOA for contrail case (chemistry active)"						unit="W m-2"/>
+        <field id="rlutcscotrac"	long_name="Upward longwave radiation at TOA assuming clear-sky conditions for contrail case (chemistry active)"			unit="W m-2"/>
+        <field id="rsscotrac"		long_name="Net downward shortwave radiation at surface for contrail case (chemistry active)"					unit="W m-2"/>
+        <field id="rsdscotrac"		long_name="Downward shortwave radiation at surface for contrail case (chemistry active)"					unit="W m-2"/>
+        <field id="rsuscotrac"		long_name="Upward shortwave radiation at surface for contrail case (chemistry active)"	         				unit="W m-2"> rsdscotrac - rsscotrac </field>
+        <field id="rsscscotrac"		long_name="Net downward shortwave radiation at surface assuming clear-sky conditions for contrail case (chemistry active)"	unit="W m-2"/>
+        <field id="rsdscscotrac"	long_name="Downward shortwave radiation at surface assuming clear-sky conditions for contrail case (chemistry active)" 		unit="W m-2"/>
+        <field id="rsuscscotrac"	long_name="Upward shortwave radiation at surface assuming clear-sky conditions for contrail case (chemistry active)"		unit="W m-2"> rsdscscotrac - rsscscotrac </field>
+        <field id="rlscotrac"		long_name="Net downward longwave radiation at surface for contrail case (chemistry active)"					unit="W m-2"/>
+        <field id="rldscotrac"		long_name="Downward longwave radiation at surface for contrail case (chemistry active)"						unit="W m-2"/>
+        <field id="rluscotrac"		long_name="Upward longwave radiation at surface for contrail case (chemistry active)"	         				unit="W m-2"> rldscotrac - rlscotrac </field>
+        <field id="rlscscotrac"		long_name="Net downward longwave radiation at surface assuming clear-sky conditions for contrail case (chemistry active)"	unit="W m-2"/>
+        <field id="rldscscotrac"	long_name="Downward longwave radiation at surface assuming clear-sky conditions for contrail case (chemistry active)"		unit="W m-2"/>
+        <field id="rluscscotrac"	long_name="Upward longwave radiation at surface assuming clear-sky conditions for contrail case (chemistry active)"		unit="W m-2"> rldscscotrac - rlscscotrac </field>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_2D_avg_radiative_4xc_variables" >
+        <field id="rst4co2"	long_name="Net downward shortwave radiation at TOA using carbon dioxide concentrations increased fourfold"					unit="W m-2"/>
+        <field id="rsut4co2"	long_name="Upward shortwave radiation at TOA using carbon dioxide concentrations increased fourfold"						unit="W m-2" > rsdt - rst4co2 </field>
+        <field id="rstcs4co2"	long_name="Net downward shortwave radiation at TOA assuming clear-sky conditions using carbon dioxide concentrations increased fourfold"	unit="W m-2"/>
+        <field id="rsutcs4co2"	long_name="Upward shortwave radiation at TOA assuming clear-sky conditions using carbon dioxide concentrations increased fourfold"		unit="W m-2" > rsdt - rstcs4co2 </field>
+        <field id="rlut4co2"	long_name="Upward longwave radiation at TOA using carbon dioxide concentrations increased fourfold"						unit="W m-2"/>
+        <field id="rlutcs4co2"	long_name="Upward longwave radiation at TOA assuming clear-sky conditions using carbon dioxide concentrations increased fourfold"		unit="W m-2"/>
+        <field id="rss4co2"	long_name="Net downward shortwave radiation at surface using carbon dioxide concentrations increased fourfold"					unit="W m-2"/>
+        <field id="rsds4co2"	long_name="Downward shortwave radiation at surface using carbon dioxide concentrations increased fourfold"					unit="W m-2"/>
+        <field id="rsus4co2"	long_name="Upward shortwave radiation at surface using carbon dioxide concentrations increased fourfold"	         			unit="W m-2"> rsds4co2 - rss4co2 </field>
+        <field id="rsscs4co2"	long_name="Net downward shortwave radiation at surface assuming clear-sky conditions using carbon dioxide concentrations increased fourfold"	unit="W m-2"/>
+        <field id="rsdscs4co2"	long_name="Downward shortwave radiation at surface assuming clear-sky conditions using carbon dioxide concentrations increased fourfold" 	unit="W m-2"/>
+        <field id="rsuscs4co2"	long_name="Upward shortwave radiation at surface assuming clear-sky conditions using carbon dioxide concentrations increased fourfold"		unit="W m-2"> rsdscs4co2 - rsscs4co2 </field>
+        <field id="rls4co2"	long_name="Net downward longwave radiation at surface using carbon dioxide concentrations increased fourfold"					unit="W m-2"/>
+        <field id="rlds4co2"	long_name="Downward longwave radiation at surface using carbon dioxide concentrations increased fourfold"					unit="W m-2"/>
+        <field id="rlus4co2"	long_name="Upward longwave radiation at surface using carbon dioxide concentrations increased fourfold"	         				unit="W m-2"> rlds4co2 - rls4co2 </field>
+        <field id="rlscs4co2"	long_name="Net downward longwave radiation at surface assuming clear-sky conditions using carbon dioxide concentrations increased fourfold"	unit="W m-2"/>
+        <field id="rldscs4co2"	long_name="Downward longwave radiation at surface assuming clear-sky conditions using carbon dioxide concentrations increased fourfold"		unit="W m-2"/>
+        <field id="rluscs4co2"	long_name="Upward longwave radiation at surface assuming clear-sky conditions using carbon dioxide concentrations increased fourfold"		unit="W m-2"> rldscs4co2 - rlscs4co2 </field>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_2D_avg_radiative_fluxes_without_aerosols_variables" >
+        <field id="rstnoaerc1"	  long_name="Net downward shortwave radiation at TOA assuming no aerosols of type 1"		   unit="W m-2"/>
+        <field id="rsutnoaerc1"	  long_name="Upward shortwave radiation at TOA assuming no aerosols of type 1"			   unit="W m-2" > rsdt - rstnoaerc1 </field>
+        <field id="rstcsnoaerc1"  long_name="Net downward shortwave radiation at TOA assuming clear and no aerosols of type 1"	   unit="W m-2"/>
+        <field id="rsutcsnoaerc1" long_name="Upward shortwave radiation at TOA assuming clear and no aerosols of type 1"	   unit="W m-2" > rsdt - rstcsnoaerc1 </field>
+        <field id="rlutnoaerc1"	  long_name="Upward longwave radiation at TOA assuming no aerosols of type 1"			   unit="W m-2"/>
+        <field id="rlutcsnoaerc1" long_name="Upward longwave radiation at TOA assuming clear and no aerosols of type 1"		   unit="W m-2"/>
+        <field id="rssnoaerc1"	  long_name="Net downward shortwave radiation at surface assuming no aerosols of type 1"	   unit="W m-2"/>
+        <field id="rsdsnoaerc1"	  long_name="Downward shortwave radiation at surface assuming no aerosols of type 1"		   unit="W m-2"/>
+        <field id="rsusnoaerc1"	  long_name="Upward shortwave radiation at surface assuming no aerosols of type 1"	       	   unit="W m-2"> rsdsnoaerc1 - rssnoaerc1 </field>
+        <field id="rsscsnoaerc1"  long_name="Net downward shortwave radiation at surface assuming clear and no aerosols of type 1" unit="W m-2"/>
+        <field id="rsdscsnoaerc1" long_name="Downward shortwave radiation at surface assuming clear and no aerosols of type 1" 	   unit="W m-2"/>
+        <field id="rsuscsnoaerc1" long_name="Upward shortwave radiation at surface assuming clear and no aerosols of type 1"	   unit="W m-2"> rsdscsnoaerc1 - rsscsnoaerc1 </field>
+        <field id="rlsnoaerc1"	  long_name="Net downward longwave radiation at surface assuming no aerosols of type 1"		   unit="W m-2"/>
+        <field id="rldsnoaerc1"	  long_name="Downward longwave radiation at surface assuming no aerosols of type 1"		   unit="W m-2"/>
+        <field id="rlusnoaerc1"	  long_name="Upward longwave radiation at surface assuming no aerosols of type 1"	           unit="W m-2"> rldsnoaerc1 - rlsnoaerc1 </field>
+        <field id="rlscsnoaerc1"  long_name="Net downward longwave radiation at surface assuming clear and no aerosols of type 1"  unit="W m-2"/>
+        <field id="rldscsnoaerc1" long_name="Downward longwave radiation at surface assuming clear and no aerosols of type 1"	   unit="W m-2"/>
+        <field id="rluscsnoaerc1" long_name="Upward longwave radiation at surface assuming clear and no aerosols of type 1"	   unit="W m-2"> rldscsnoaerc1 - rlscsnoaerc1 </field>
+        <field id="rstnoaerc2"	  long_name="Net downward shortwave radiation at TOA assuming no aerosols of type 2"		   unit="W m-2"/>
+        <field id="rsutnoaerc2"	  long_name="Upward shortwave radiation at TOA assuming no aerosols of type 2"			   unit="W m-2" > rsdt - rstnoaerc2 </field>
+        <field id="rstcsnoaerc2"  long_name="Net downward shortwave radiation at TOA assuming clear and no aerosols of type 2"	   unit="W m-2"/>
+        <field id="rsutcsnoaerc2" long_name="Upward shortwave radiation at TOA assuming clear and no aerosols of type 2"	   unit="W m-2" > rsdt - rstcsnoaerc2 </field>
+        <field id="rlutnoaerc2"	  long_name="Upward longwave radiation at TOA assuming no aerosols of type 2"			   unit="W m-2"/>
+        <field id="rlutcsnoaerc2" long_name="Upward longwave radiation at TOA assuming clear and no aerosols of type 2"		   unit="W m-2"/>
+        <field id="rssnoaerc2"	  long_name="Net downward shortwave radiation at surface assuming no aerosols of type 2"	   unit="W m-2"/>
+        <field id="rsdsnoaerc2"	  long_name="Downward shortwave radiation at surface assuming no aerosols of type 2"		   unit="W m-2"/>
+        <field id="rsusnoaerc2"	  long_name="Upward shortwave radiation at surface assuming no aerosols of type 2"	       	   unit="W m-2"> rsdsnoaerc2 - rssnoaerc2 </field>
+        <field id="rsscsnoaerc2"  long_name="Net downward shortwave radiation at surface assuming clear and no aerosols of type 2" unit="W m-2"/>
+        <field id="rsdscsnoaerc2" long_name="Downward shortwave radiation at surface assuming clear and no aerosols of type 2" 	   unit="W m-2"/>
+        <field id="rsuscsnoaerc2" long_name="Upward shortwave radiation at surface assuming clear and no aerosols of type 2"	   unit="W m-2"> rsdscsnoaerc2 - rsscsnoaerc2 </field>
+        <field id="rlsnoaerc2"	  long_name="Net downward longwave radiation at surface assuming no aerosols of type 2"		   unit="W m-2"/>
+        <field id="rldsnoaerc2"	  long_name="Downward longwave radiation at surface assuming no aerosols of type 2"		   unit="W m-2"/>
+        <field id="rlusnoaerc2"	  long_name="Upward longwave radiation at surface assuming no aerosols of type 2"	           unit="W m-2"> rldsnoaerc2 - rlsnoaerc2 </field>
+        <field id="rlscsnoaerc2"  long_name="Net downward longwave radiation at surface assuming clear and no aerosols of type 2"  unit="W m-2"/>
+        <field id="rldscsnoaerc2" long_name="Downward longwave radiation at surface assuming clear and no aerosols of type 2"	   unit="W m-2"/>
+        <field id="rluscsnoaerc2" long_name="Upward longwave radiation at surface assuming clear and no aerosols of type 2"	   unit="W m-2"> rldscsnoaerc2 - rlscsnoaerc2 </field>
+        <field id="rstnoaerc3"	  long_name="Net downward shortwave radiation at TOA assuming no aerosols of type 3"		   unit="W m-2"/>
+        <field id="rsutnoaerc3"	  long_name="Upward shortwave radiation at TOA assuming no aerosols of type 3"			   unit="W m-2" > rsdt - rstnoaerc3 </field>
+        <field id="rstcsnoaerc3"  long_name="Net downward shortwave radiation at TOA assuming clear and no aerosols of type 3"	   unit="W m-2"/>
+        <field id="rsutcsnoaerc3" long_name="Upward shortwave radiation at TOA assuming clear and no aerosols of type 3"	   unit="W m-2" > rsdt - rstcsnoaerc3 </field>
+        <field id="rlutnoaerc3"	  long_name="Upward longwave radiation at TOA assuming no aerosols of type 3"			   unit="W m-2"/>
+        <field id="rlutcsnoaerc3" long_name="Upward longwave radiation at TOA assuming clear and no aerosols of type 3"		   unit="W m-2"/>
+        <field id="rssnoaerc3"	  long_name="Net downward shortwave radiation at surface assuming no aerosols of type 3"	   unit="W m-2"/>
+        <field id="rsdsnoaerc3"	  long_name="Downward shortwave radiation at surface assuming no aerosols of type 3"		   unit="W m-2"/>
+        <field id="rsusnoaerc3"	  long_name="Upward shortwave radiation at surface assuming no aerosols of type 3"	       	   unit="W m-2"> rsdsnoaerc3 - rssnoaerc3 </field>
+        <field id="rsscsnoaerc3"  long_name="Net downward shortwave radiation at surface assuming clear and no aerosols of type 3" unit="W m-2"/>
+        <field id="rsdscsnoaerc3" long_name="Downward shortwave radiation at surface assuming clear and no aerosols of type 3" 	   unit="W m-2"/>
+        <field id="rsuscsnoaerc3" long_name="Upward shortwave radiation at surface assuming clear and no aerosols of type 3"	   unit="W m-2"> rsdscsnoaerc3 - rsscsnoaerc3 </field>
+        <field id="rlsnoaerc3"	  long_name="Net downward longwave radiation at surface assuming no aerosols of type 3"		   unit="W m-2"/>
+        <field id="rldsnoaerc3"	  long_name="Downward longwave radiation at surface assuming no aerosols of type 3"		   unit="W m-2"/>
+        <field id="rlusnoaerc3"	  long_name="Upward longwave radiation at surface assuming no aerosols of type 3"	           unit="W m-2"> rldsnoaerc3 - rlsnoaerc3 </field>
+        <field id="rlscsnoaerc3"  long_name="Net downward longwave radiation at surface assuming clear and no aerosols of type 3"  unit="W m-2"/>
+        <field id="rldscsnoaerc3" long_name="Downward longwave radiation at surface assuming clear and no aerosols of type 3"	   unit="W m-2"/>
+        <field id="rluscsnoaerc3" long_name="Upward longwave radiation at surface assuming clear and no aerosols of type 3"	   unit="W m-2"> rldscsnoaerc3 - rlscsnoaerc3 </field>
+        <field id="rstnoaerc4"	  long_name="Net downward shortwave radiation at TOA assuming no aerosols of type 4"		   unit="W m-2"/>
+        <field id="rsutnoaerc4"	  long_name="Upward shortwave radiation at TOA assuming no aerosols of type 4"			   unit="W m-2" > rsdt - rstnoaerc4 </field>
+        <field id="rstcsnoaerc4"  long_name="Net downward shortwave radiation at TOA assuming clear and no aerosols of type 4"	   unit="W m-2"/>
+        <field id="rsutcsnoaerc4" long_name="Upward shortwave radiation at TOA assuming clear and no aerosols of type 4"	   unit="W m-2" > rsdt - rstcsnoaerc4 </field>
+        <field id="rlutnoaerc4"	  long_name="Upward longwave radiation at TOA assuming no aerosols of type 4"			   unit="W m-2"/>
+        <field id="rlutcsnoaerc4" long_name="Upward longwave radiation at TOA assuming clear and no aerosols of type 4"		   unit="W m-2"/>
+        <field id="rssnoaerc4"	  long_name="Net downward shortwave radiation at surface assuming no aerosols of type 4"	   unit="W m-2"/>
+        <field id="rsdsnoaerc4"	  long_name="Downward shortwave radiation at surface assuming no aerosols of type 4"		   unit="W m-2"/>
+        <field id="rsusnoaerc4"	  long_name="Upward shortwave radiation at surface assuming no aerosols of type 4"	       	   unit="W m-2"> rsdsnoaerc4 - rssnoaerc4 </field>
+        <field id="rsscsnoaerc4"  long_name="Net downward shortwave radiation at surface assuming clear and no aerosols of type 4" unit="W m-2"/>
+        <field id="rsdscsnoaerc4" long_name="Downward shortwave radiation at surface assuming clear and no aerosols of type 4" 	   unit="W m-2"/>
+        <field id="rsuscsnoaerc4" long_name="Upward shortwave radiation at surface assuming clear and no aerosols of type 4"	   unit="W m-2"> rsdscsnoaerc4 - rsscsnoaerc4 </field>
+        <field id="rlsnoaerc4"	  long_name="Net downward longwave radiation at surface assuming no aerosols of type 4"		   unit="W m-2"/>
+        <field id="rldsnoaerc4"	  long_name="Downward longwave radiation at surface assuming no aerosols of type 4"		   unit="W m-2"/>
+        <field id="rlusnoaerc4"	  long_name="Upward longwave radiation at surface assuming no aerosols of type 4"	           unit="W m-2"> rldsnoaerc4 - rlsnoaerc4 </field>
+        <field id="rlscsnoaerc4"  long_name="Net downward longwave radiation at surface assuming clear and no aerosols of type 4"  unit="W m-2"/>
+        <field id="rldscsnoaerc4" long_name="Downward longwave radiation at surface assuming clear and no aerosols of type 4"	   unit="W m-2"/>
+        <field id="rluscsnoaerc4" long_name="Upward longwave radiation at surface assuming clear and no aerosols of type 4"	   unit="W m-2"> rldscsnoaerc4 - rlscsnoaerc4 </field>
+        <field id="rstnoaerc5"	  long_name="Net downward shortwave radiation at TOA assuming no aerosols of type 5"		   unit="W m-2"/>
+        <field id="rsutnoaerc5"	  long_name="Upward shortwave radiation at TOA assuming no aerosols of type 5"			   unit="W m-2" > rsdt - rstnoaerc5 </field>
+        <field id="rstcsnoaerc5"  long_name="Net downward shortwave radiation at TOA assuming clear and no aerosols of type 5"	   unit="W m-2"/>
+        <field id="rsutcsnoaerc5" long_name="Upward shortwave radiation at TOA assuming clear and no aerosols of type 5"	   unit="W m-2" > rsdt - rstcsnoaerc5 </field>
+        <field id="rlutnoaerc5"	  long_name="Upward longwave radiation at TOA assuming no aerosols of type 5"			   unit="W m-2"/>
+        <field id="rlutcsnoaerc5" long_name="Upward longwave radiation at TOA assuming clear and no aerosols of type 5"		   unit="W m-2"/>
+        <field id="rssnoaerc5"	  long_name="Net downward shortwave radiation at surface assuming no aerosols of type 5"	   unit="W m-2"/>
+        <field id="rsdsnoaerc5"	  long_name="Downward shortwave radiation at surface assuming no aerosols of type 5"		   unit="W m-2"/>
+        <field id="rsusnoaerc5"	  long_name="Upward shortwave radiation at surface assuming no aerosols of type 5"	       	   unit="W m-2"> rsdsnoaerc5 - rssnoaerc5 </field>
+        <field id="rsscsnoaerc5"  long_name="Net downward shortwave radiation at surface assuming clear and no aerosols of type 5" unit="W m-2"/>
+        <field id="rsdscsnoaerc5" long_name="Downward shortwave radiation at surface assuming clear and no aerosols of type 5" 	   unit="W m-2"/>
+        <field id="rsuscsnoaerc5" long_name="Upward shortwave radiation at surface assuming clear and no aerosols of type 5"	   unit="W m-2"> rsdscsnoaerc5 - rsscsnoaerc5 </field>
+        <field id="rlsnoaerc5"	  long_name="Net downward longwave radiation at surface assuming no aerosols of type 5"		   unit="W m-2"/>
+        <field id="rldsnoaerc5"	  long_name="Downward longwave radiation at surface assuming no aerosols of type 5"		   unit="W m-2"/>
+        <field id="rlusnoaerc5"	  long_name="Upward longwave radiation at surface assuming no aerosols of type 5"	           unit="W m-2"> rldsnoaerc5 - rlsnoaerc5 </field>
+        <field id="rlscsnoaerc5"  long_name="Net downward longwave radiation at surface assuming clear and no aerosols of type 5"  unit="W m-2"/>
+        <field id="rldscsnoaerc5" long_name="Downward longwave radiation at surface assuming clear and no aerosols of type 5"	   unit="W m-2"/>
+        <field id="rluscsnoaerc5" long_name="Upward longwave radiation at surface assuming clear and no aerosols of type 5"	   unit="W m-2"> rldscsnoaerc5 - rlscsnoaerc5 </field>
+        <field id="rstnoaerc6"	  long_name="Net downward shortwave radiation at TOA assuming no aerosols of type 6"		   unit="W m-2"/>
+        <field id="rsutnoaerc6"	  long_name="Upward shortwave radiation at TOA assuming no aerosols of type 6"			   unit="W m-2" > rsdt - rstnoaerc6 </field>
+        <field id="rstcsnoaerc6"  long_name="Net downward shortwave radiation at TOA assuming clear and no aerosols of type 6"	   unit="W m-2"/>
+        <field id="rsutcsnoaerc6" long_name="Upward shortwave radiation at TOA assuming clear and no aerosols of type 6"	   unit="W m-2" > rsdt - rstcsnoaerc6 </field>
+        <field id="rlutnoaerc6"	  long_name="Upward longwave radiation at TOA assuming no aerosols of type 6"			   unit="W m-2"/>
+        <field id="rlutcsnoaerc6" long_name="Upward longwave radiation at TOA assuming clear and no aerosols of type 6"		   unit="W m-2"/>
+        <field id="rssnoaerc6"	  long_name="Net downward shortwave radiation at surface assuming no aerosols of type 6"	   unit="W m-2"/>
+        <field id="rsdsnoaerc6"	  long_name="Downward shortwave radiation at surface assuming no aerosols of type 6"		   unit="W m-2"/>
+        <field id="rsusnoaerc6"	  long_name="Upward shortwave radiation at surface assuming no aerosols of type 6"	       	   unit="W m-2"> rsdsnoaerc6 - rssnoaerc6 </field>
+        <field id="rsscsnoaerc6"  long_name="Net downward shortwave radiation at surface assuming clear and no aerosols of type 6" unit="W m-2"/>
+        <field id="rsdscsnoaerc6" long_name="Downward shortwave radiation at surface assuming clear and no aerosols of type 6" 	   unit="W m-2"/>
+        <field id="rsuscsnoaerc6" long_name="Upward shortwave radiation at surface assuming clear and no aerosols of type 6"	   unit="W m-2"> rsdscsnoaerc6 - rsscsnoaerc6 </field>
+        <field id="rlsnoaerc6"	  long_name="Net downward longwave radiation at surface assuming no aerosols of type 6"		   unit="W m-2"/>
+        <field id="rldsnoaerc6"	  long_name="Downward longwave radiation at surface assuming no aerosols of type 6"		   unit="W m-2"/>
+        <field id="rlusnoaerc6"	  long_name="Upward longwave radiation at surface assuming no aerosols of type 6"	           unit="W m-2"> rldsnoaerc6 - rlsnoaerc6 </field>
+        <field id="rlscsnoaerc6"  long_name="Net downward longwave radiation at surface assuming clear and no aerosols of type 6"  unit="W m-2"/>
+        <field id="rldscsnoaerc6" long_name="Downward longwave radiation at surface assuming clear and no aerosols of type 6"	   unit="W m-2"/>
+        <field id="rluscsnoaerc6" long_name="Upward longwave radiation at surface assuming clear and no aerosols of type 6"	   unit="W m-2"> rldscsnoaerc6 - rlscsnoaerc6 </field>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_2D_avg_aerosol_radiative_forcing_variables" >
+        <field id="aerrf1rst"	  long_name="Aerosol type 1 radiative forcing in Net downward shortwave radiation at TOA "	 unit="W m-2" > rst - rstnoaerc1         </field>
+        <field id="aerrf1rsut"	  long_name="Aerosol type 1 radiative forcing in Upward shortwave radiation at TOA "		 unit="W m-2" > rsut - rsutnoaerc1       </field>
+        <field id="aerrf1rstcs"   long_name="Aerosol type 1 radiative forcing in Net downward shortwave radiation at TOA "	 unit="W m-2" > rstcs - rstcsnoaerc1     </field>
+        <field id="aerrf1rsutcs"  long_name="Aerosol type 1 radiative forcing in Upward shortwave radiation at TOA "		 unit="W m-2" > rsutcs - rsutcsnoaerc1   </field>  
+        <field id="aerrf1rlut"	  long_name="Aerosol type 1 radiative forcing in Upward longwave radiation at TOA "		 unit="W m-2" > rlut - rlutnoaerc1       </field>
+        <field id="aerrf1rlutcs"  long_name="Aerosol type 1 radiative forcing in Upward longwave radiation at TOA "		 unit="W m-2" > rlutcs - rlutcsnoaerc1   </field>
+        <field id="aerrf1rss"	  long_name="Aerosol type 1 radiative forcing in Net downward shortwave radiation at surface "	 unit="W m-2" > rss - rssnoaerc1         </field>
+        <field id="aerrf1rsds"	  long_name="Aerosol type 1 radiative forcing in Downward shortwave radiation at surface "	 unit="W m-2" > rsds - rsdsnoaerc1       </field>
+        <field id="aerrf1rsus"	  long_name="Aerosol type 1 radiative forcing in Upward shortwave radiation at surface "	 unit="W m-2" > rsus - rsusnoaerc1       </field> 
+        <field id="aerrf1rsscs"   long_name="Aerosol type 1 radiative forcing in Net downward shortwave radiation at surface " 	 unit="W m-2" > rsscs - rsscsnoaerc1     </field>
+        <field id="aerrf1rsdscs"  long_name="Aerosol type 1 radiative forcing in Downward shortwave radiation at surface " 	 unit="W m-2" > rsdscs - rsdscsnoaerc1   </field>
+        <field id="aerrf1rsuscs"  long_name="Aerosol type 1 radiative forcing in Upward shortwave radiation at surface "	 unit="W m-2" > rsuscs - rsuscsnoaerc1   </field> 
+        <field id="aerrf1rls"	  long_name="Aerosol type 1 radiative forcing in Net downward longwave radiation at surface "	 unit="W m-2" > rls - rlsnoaerc1         </field>
+        <field id="aerrf1rlds"	  long_name="Aerosol type 1 radiative forcing in Downward longwave radiation at surface "	 unit="W m-2" > rlds - rldsnoaerc1       </field>
+        <field id="aerrf1rlus"	  long_name="Aerosol type 1 radiative forcing in Upward longwave radiation at surface "	         unit="W m-2" > rlus - rlusnoaerc1       </field> 
+        <field id="aerrf1rlscs"   long_name="Aerosol type 1 radiative forcing in Net downward longwave radiation at surface "    unit="W m-2" > rlscs - rlscsnoaerc1     </field>
+        <field id="aerrf1rldscs"  long_name="Aerosol type 1 radiative forcing in Downward longwave radiation at surface "	 unit="W m-2" > rldscs - rldscsnoaerc1   </field>
+        <field id="aerrf1rluscs"  long_name="Aerosol type 1 radiative forcing in Upward longwave radiation at surface "	   	 unit="W m-2" > rluscs - rluscsnoaerc1   </field> 
+        <field id="aerrf2rst"	  long_name="Aerosol type 2 radiative forcing in Net downward shortwave radiation at TOA "	 unit="W m-2" > rst - rstnoaerc2         </field>
+        <field id="aerrf2rsut"	  long_name="Aerosol type 2 radiative forcing in Upward shortwave radiation at TOA "		 unit="W m-2" > rsut - rsutnoaerc2       </field>
+        <field id="aerrf2rstcs"   long_name="Aerosol type 2 radiative forcing in Net downward shortwave radiation at TOA "	 unit="W m-2" > rstcs - rstcsnoaerc2     </field>
+        <field id="aerrf2rsutcs"  long_name="Aerosol type 2 radiative forcing in Upward shortwave radiation at TOA "		 unit="W m-2" > rsutcs - rsutcsnoaerc2   </field>  
+        <field id="aerrf2rlut"	  long_name="Aerosol type 2 radiative forcing in Upward longwave radiation at TOA "		 unit="W m-2" > rlut - rlutnoaerc2       </field>
+        <field id="aerrf2rlutcs"  long_name="Aerosol type 2 radiative forcing in Upward longwave radiation at TOA "		 unit="W m-2" > rlutcs - rlutcsnoaerc2   </field>
+        <field id="aerrf2rss"	  long_name="Aerosol type 2 radiative forcing in Net downward shortwave radiation at surface "	 unit="W m-2" > rss - rssnoaerc2         </field>
+        <field id="aerrf2rsds"	  long_name="Aerosol type 2 radiative forcing in Downward shortwave radiation at surface "	 unit="W m-2" > rsds - rsdsnoaerc2       </field>
+        <field id="aerrf2rsus"	  long_name="Aerosol type 2 radiative forcing in Upward shortwave radiation at surface "	 unit="W m-2" > rsus - rsusnoaerc2       </field> 
+        <field id="aerrf2rsscs"   long_name="Aerosol type 2 radiative forcing in Net downward shortwave radiation at surface " 	 unit="W m-2" > rsscs - rsscsnoaerc2     </field>
+        <field id="aerrf2rsdscs"  long_name="Aerosol type 2 radiative forcing in Downward shortwave radiation at surface " 	 unit="W m-2" > rsdscs - rsdscsnoaerc2   </field>
+        <field id="aerrf2rsuscs"  long_name="Aerosol type 2 radiative forcing in Upward shortwave radiation at surface "	 unit="W m-2" > rsuscs - rsuscsnoaerc2   </field> 
+        <field id="aerrf2rls"	  long_name="Aerosol type 2 radiative forcing in Net downward longwave radiation at surface "	 unit="W m-2" > rls - rlsnoaerc2         </field>
+        <field id="aerrf2rlds"	  long_name="Aerosol type 2 radiative forcing in Downward longwave radiation at surface "	 unit="W m-2" > rlds - rldsnoaerc2       </field>
+        <field id="aerrf2rlus"	  long_name="Aerosol type 2 radiative forcing in Upward longwave radiation at surface "	         unit="W m-2" > rlus - rlusnoaerc2       </field> 
+        <field id="aerrf2rlscs"   long_name="Aerosol type 2 radiative forcing in Net downward longwave radiation at surface "    unit="W m-2" > rlscs - rlscsnoaerc2     </field>
+        <field id="aerrf2rldscs"  long_name="Aerosol type 2 radiative forcing in Downward longwave radiation at surface "	 unit="W m-2" > rldscs - rldscsnoaerc2   </field>
+        <field id="aerrf2rluscs"  long_name="Aerosol type 2 radiative forcing in Upward longwave radiation at surface "	   	 unit="W m-2" > rluscs - rluscsnoaerc2   </field> 
+        <field id="aerrf3rst"	  long_name="Aerosol type 3 radiative forcing in Net downward shortwave radiation at TOA "	 unit="W m-2" > rst - rstnoaerc3         </field>
+        <field id="aerrf3rsut"	  long_name="Aerosol type 3 radiative forcing in Upward shortwave radiation at TOA "		 unit="W m-2" > rsut - rsutnoaerc3       </field>
+        <field id="aerrf3rstcs"   long_name="Aerosol type 3 radiative forcing in Net downward shortwave radiation at TOA "	 unit="W m-2" > rstcs - rstcsnoaerc3     </field>
+        <field id="aerrf3rsutcs"  long_name="Aerosol type 3 radiative forcing in Upward shortwave radiation at TOA "		 unit="W m-2" > rsutcs - rsutcsnoaerc3   </field>  
+        <field id="aerrf3rlut"	  long_name="Aerosol type 3 radiative forcing in Upward longwave radiation at TOA "		 unit="W m-2" > rlut - rlutnoaerc3       </field>
+        <field id="aerrf3rlutcs"  long_name="Aerosol type 3 radiative forcing in Upward longwave radiation at TOA "		 unit="W m-2" > rlutcs - rlutcsnoaerc3   </field>
+        <field id="aerrf3rss"	  long_name="Aerosol type 3 radiative forcing in Net downward shortwave radiation at surface "	 unit="W m-2" > rss - rssnoaerc3         </field>
+        <field id="aerrf3rsds"	  long_name="Aerosol type 3 radiative forcing in Downward shortwave radiation at surface "	 unit="W m-2" > rsds - rsdsnoaerc3       </field>
+        <field id="aerrf3rsus"	  long_name="Aerosol type 3 radiative forcing in Upward shortwave radiation at surface "	 unit="W m-2" > rsus - rsusnoaerc3       </field> 
+        <field id="aerrf3rsscs"   long_name="Aerosol type 3 radiative forcing in Net downward shortwave radiation at surface " 	 unit="W m-2" > rsscs - rsscsnoaerc3     </field>
+        <field id="aerrf3rsdscs"  long_name="Aerosol type 3 radiative forcing in Downward shortwave radiation at surface " 	 unit="W m-2" > rsdscs - rsdscsnoaerc3   </field>
+        <field id="aerrf3rsuscs"  long_name="Aerosol type 3 radiative forcing in Upward shortwave radiation at surface "	 unit="W m-2" > rsuscs - rsuscsnoaerc3   </field> 
+        <field id="aerrf3rls"	  long_name="Aerosol type 3 radiative forcing in Net downward longwave radiation at surface "	 unit="W m-2" > rls - rlsnoaerc3         </field>
+        <field id="aerrf3rlds"	  long_name="Aerosol type 3 radiative forcing in Downward longwave radiation at surface "	 unit="W m-2" > rlds - rldsnoaerc3       </field>
+        <field id="aerrf3rlus"	  long_name="Aerosol type 3 radiative forcing in Upward longwave radiation at surface "	         unit="W m-2" > rlus - rlusnoaerc3       </field> 
+        <field id="aerrf3rlscs"   long_name="Aerosol type 3 radiative forcing in Net downward longwave radiation at surface "    unit="W m-2" > rlscs - rlscsnoaerc3     </field>
+        <field id="aerrf3rldscs"  long_name="Aerosol type 3 radiative forcing in Downward longwave radiation at surface "	 unit="W m-2" > rldscs - rldscsnoaerc3   </field>
+        <field id="aerrf3rluscs"  long_name="Aerosol type 3 radiative forcing in Upward longwave radiation at surface "	   	 unit="W m-2" > rluscs - rluscsnoaerc3   </field> 
+        <field id="aerrf4rst"	  long_name="Aerosol type 4 radiative forcing in Net downward shortwave radiation at TOA "	 unit="W m-2" > rst - rstnoaerc4         </field>
+        <field id="aerrf4rsut"	  long_name="Aerosol type 4 radiative forcing in Upward shortwave radiation at TOA "		 unit="W m-2" > rsut - rsutnoaerc4       </field>
+        <field id="aerrf4rstcs"   long_name="Aerosol type 4 radiative forcing in Net downward shortwave radiation at TOA "	 unit="W m-2" > rstcs - rstcsnoaerc4     </field>
+        <field id="aerrf4rsutcs"  long_name="Aerosol type 4 radiative forcing in Upward shortwave radiation at TOA "		 unit="W m-2" > rsutcs - rsutcsnoaerc4   </field>  
+        <field id="aerrf4rlut"	  long_name="Aerosol type 4 radiative forcing in Upward longwave radiation at TOA "		 unit="W m-2" > rlut - rlutnoaerc4       </field>
+        <field id="aerrf4rlutcs"  long_name="Aerosol type 4 radiative forcing in Upward longwave radiation at TOA "		 unit="W m-2" > rlutcs - rlutcsnoaerc4   </field>
+        <field id="aerrf4rss"	  long_name="Aerosol type 4 radiative forcing in Net downward shortwave radiation at surface "	 unit="W m-2" > rss - rssnoaerc4         </field>
+        <field id="aerrf4rsds"	  long_name="Aerosol type 4 radiative forcing in Downward shortwave radiation at surface "	 unit="W m-2" > rsds - rsdsnoaerc4       </field>
+        <field id="aerrf4rsus"	  long_name="Aerosol type 4 radiative forcing in Upward shortwave radiation at surface "	 unit="W m-2" > rsus - rsusnoaerc4       </field> 
+        <field id="aerrf4rsscs"   long_name="Aerosol type 4 radiative forcing in Net downward shortwave radiation at surface " 	 unit="W m-2" > rsscs - rsscsnoaerc4     </field>
+        <field id="aerrf4rsdscs"  long_name="Aerosol type 4 radiative forcing in Downward shortwave radiation at surface " 	 unit="W m-2" > rsdscs - rsdscsnoaerc4   </field>
+        <field id="aerrf4rsuscs"  long_name="Aerosol type 4 radiative forcing in Upward shortwave radiation at surface "	 unit="W m-2" > rsuscs - rsuscsnoaerc4   </field> 
+        <field id="aerrf4rls"	  long_name="Aerosol type 4 radiative forcing in Net downward longwave radiation at surface "	 unit="W m-2" > rls - rlsnoaerc4         </field>
+        <field id="aerrf4rlds"	  long_name="Aerosol type 4 radiative forcing in Downward longwave radiation at surface "	 unit="W m-2" > rlds - rldsnoaerc4       </field>
+        <field id="aerrf4rlus"	  long_name="Aerosol type 4 radiative forcing in Upward longwave radiation at surface "	         unit="W m-2" > rlus - rlusnoaerc4       </field> 
+        <field id="aerrf4rlscs"   long_name="Aerosol type 4 radiative forcing in Net downward longwave radiation at surface "    unit="W m-2" > rlscs - rlscsnoaerc4     </field>
+        <field id="aerrf4rldscs"  long_name="Aerosol type 4 radiative forcing in Downward longwave radiation at surface "	 unit="W m-2" > rldscs - rldscsnoaerc4   </field>
+        <field id="aerrf4rluscs"  long_name="Aerosol type 4 radiative forcing in Upward longwave radiation at surface "	   	 unit="W m-2" > rluscs - rluscsnoaerc4   </field> 
+        <field id="aerrf5rst"	  long_name="Aerosol type 5 radiative forcing in Net downward shortwave radiation at TOA "	 unit="W m-2" > rst - rstnoaerc5         </field>
+        <field id="aerrf5rsut"	  long_name="Aerosol type 5 radiative forcing in Upward shortwave radiation at TOA "		 unit="W m-2" > rsut - rsutnoaerc5       </field>
+        <field id="aerrf5rstcs"   long_name="Aerosol type 5 radiative forcing in Net downward shortwave radiation at TOA "	 unit="W m-2" > rstcs - rstcsnoaerc5     </field>
+        <field id="aerrf5rsutcs"  long_name="Aerosol type 5 radiative forcing in Upward shortwave radiation at TOA "		 unit="W m-2" > rsutcs - rsutcsnoaerc5   </field>  
+        <field id="aerrf5rlut"	  long_name="Aerosol type 5 radiative forcing in Upward longwave radiation at TOA "		 unit="W m-2" > rlut - rlutnoaerc5       </field>
+        <field id="aerrf5rlutcs"  long_name="Aerosol type 5 radiative forcing in Upward longwave radiation at TOA "		 unit="W m-2" > rlutcs - rlutcsnoaerc5   </field>
+        <field id="aerrf5rss"	  long_name="Aerosol type 5 radiative forcing in Net downward shortwave radiation at surface "	 unit="W m-2" > rss - rssnoaerc5         </field>
+        <field id="aerrf5rsds"	  long_name="Aerosol type 5 radiative forcing in Downward shortwave radiation at surface "	 unit="W m-2" > rsds - rsdsnoaerc5       </field>
+        <field id="aerrf5rsus"	  long_name="Aerosol type 5 radiative forcing in Upward shortwave radiation at surface "	 unit="W m-2" > rsus - rsusnoaerc5       </field> 
+        <field id="aerrf5rsscs"   long_name="Aerosol type 5 radiative forcing in Net downward shortwave radiation at surface " 	 unit="W m-2" > rsscs - rsscsnoaerc5     </field>
+        <field id="aerrf5rsdscs"  long_name="Aerosol type 5 radiative forcing in Downward shortwave radiation at surface " 	 unit="W m-2" > rsdscs - rsdscsnoaerc5   </field>
+        <field id="aerrf5rsuscs"  long_name="Aerosol type 5 radiative forcing in Upward shortwave radiation at surface "	 unit="W m-2" > rsuscs - rsuscsnoaerc5   </field> 
+        <field id="aerrf5rls"	  long_name="Aerosol type 5 radiative forcing in Net downward longwave radiation at surface "	 unit="W m-2" > rls - rlsnoaerc5         </field>
+        <field id="aerrf5rlds"	  long_name="Aerosol type 5 radiative forcing in Downward longwave radiation at surface "	 unit="W m-2" > rlds - rldsnoaerc5       </field>
+        <field id="aerrf5rlus"	  long_name="Aerosol type 5 radiative forcing in Upward longwave radiation at surface "	         unit="W m-2" > rlus - rlusnoaerc5       </field> 
+        <field id="aerrf5rlscs"   long_name="Aerosol type 5 radiative forcing in Net downward longwave radiation at surface "    unit="W m-2" > rlscs - rlscsnoaerc5     </field>
+        <field id="aerrf5rldscs"  long_name="Aerosol type 5 radiative forcing in Downward longwave radiation at surface "	 unit="W m-2" > rldscs - rldscsnoaerc5   </field>
+        <field id="aerrf5rluscs"  long_name="Aerosol type 5 radiative forcing in Upward longwave radiation at surface "	   	 unit="W m-2" > rluscs - rluscsnoaerc5   </field> 
+        <field id="aerrf6rst"	  long_name="Aerosol type 6 radiative forcing in Net downward shortwave radiation at TOA "	 unit="W m-2" > rst - rstnoaerc6         </field>
+        <field id="aerrf6rsut"	  long_name="Aerosol type 6 radiative forcing in Upward shortwave radiation at TOA "		 unit="W m-2" > rsut - rsutnoaerc6       </field>
+        <field id="aerrf6rstcs"   long_name="Aerosol type 6 radiative forcing in Net downward shortwave radiation at TOA "	 unit="W m-2" > rstcs - rstcsnoaerc6     </field>
+        <field id="aerrf6rsutcs"  long_name="Aerosol type 6 radiative forcing in Upward shortwave radiation at TOA "		 unit="W m-2" > rsutcs - rsutcsnoaerc6   </field>  
+        <field id="aerrf6rlut"	  long_name="Aerosol type 6 radiative forcing in Upward longwave radiation at TOA "		 unit="W m-2" > rlut - rlutnoaerc6       </field>
+        <field id="aerrf6rlutcs"  long_name="Aerosol type 6 radiative forcing in Upward longwave radiation at TOA "		 unit="W m-2" > rlutcs - rlutcsnoaerc6   </field>
+        <field id="aerrf6rss"	  long_name="Aerosol type 6 radiative forcing in Net downward shortwave radiation at surface "	 unit="W m-2" > rss - rssnoaerc6         </field>
+        <field id="aerrf6rsds"	  long_name="Aerosol type 6 radiative forcing in Downward shortwave radiation at surface "	 unit="W m-2" > rsds - rsdsnoaerc6       </field>
+        <field id="aerrf6rsus"	  long_name="Aerosol type 6 radiative forcing in Upward shortwave radiation at surface "	 unit="W m-2" > rsus - rsusnoaerc6       </field> 
+        <field id="aerrf6rsscs"   long_name="Aerosol type 6 radiative forcing in Net downward shortwave radiation at surface " 	 unit="W m-2" > rsscs - rsscsnoaerc6     </field>
+        <field id="aerrf6rsdscs"  long_name="Aerosol type 6 radiative forcing in Downward shortwave radiation at surface " 	 unit="W m-2" > rsdscs - rsdscsnoaerc6   </field>
+        <field id="aerrf6rsuscs"  long_name="Aerosol type 6 radiative forcing in Upward shortwave radiation at surface "	 unit="W m-2" > rsuscs - rsuscsnoaerc6   </field> 
+        <field id="aerrf6rls"	  long_name="Aerosol type 6 radiative forcing in Net downward longwave radiation at surface "	 unit="W m-2" > rls - rlsnoaerc6         </field>
+        <field id="aerrf6rlds"	  long_name="Aerosol type 6 radiative forcing in Downward longwave radiation at surface "	 unit="W m-2" > rlds - rldsnoaerc6       </field>
+        <field id="aerrf6rlus"	  long_name="Aerosol type 6 radiative forcing in Upward longwave radiation at surface "	         unit="W m-2" > rlus - rlusnoaerc6       </field> 
+        <field id="aerrf6rlscs"   long_name="Aerosol type 6 radiative forcing in Net downward longwave radiation at surface "    unit="W m-2" > rlscs - rlscsnoaerc6     </field>
+        <field id="aerrf6rldscs"  long_name="Aerosol type 6 radiative forcing in Downward longwave radiation at surface "	 unit="W m-2" > rldscs - rldscsnoaerc6   </field>
+        <field id="aerrf6rluscs"  long_name="Aerosol type 6 radiative forcing in Upward longwave radiation at surface "	   	 unit="W m-2" > rluscs - rluscsnoaerc6   </field> 
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- 3D ARPEGE fields : instantaneous sampling                                                                          -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~--> 
+    <field_group operation="instant" freq_op="1ts" >
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_3D_instant_mlev_test" 	grid_ref="FULL_klev" >
+	<field id="field_3D_aplpar"	name="field_3D_aplpar_m"	long_name="field_3D_send_in_aplpar"	unit="-"/>
+	<field id="field_3D_pos"	name="field_3D_pos_m"		long_name="field_3D_send_in_pos"	unit="-"/>
+	<field id="field_3D_radlsw"	name="field_3D_radlsw_m"	long_name="field_3D_send_in_radlsw"	unit="-"/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_3D_instant_mlev_standard" 	grid_ref="FULL_klev" >
+        <field id="pa"		name="pa_m"  		long_name="pressure" 						unit="Pa"/>
+        <field id="zg"   	name="zg_m"  		long_name="geopotential height" 				unit="m"> this/$gravit </field>
+        <field id="ta"   	name="ta_m"  		long_name="air_temperature" 					unit="K"/>
+        <field id="ua"   	name="ua_m"  		long_name="eastward_wind" 					unit="m s-1"/>
+	<field id="va"   	name="va_m"  		long_name="northward_wind"					unit="m s-1"/>
+	<field id="hus"  	name="hus_m" 		long_name="specific_humidity" 					unit="1"/>
+	<field id="hur"  	name="hur_m" 		long_name="relative_humidity" 					unit="1"/>
+        <field id="wap"		name="wap_m"		long_name="lagrangian_tendency_of_air_pressure" 		unit="Pa s-1"/>	
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_3D_instant_mlevh_standard" 	grid_ref="FULL_klev_half" >
+        <field id="pah"  	name="pah_m"  		long_name="pressure_on_half_level" 				unit="Pa"/>
+        <field id="zgh"  	name="zgh_m"  		long_name="geopotential_height_on_half_level"			unit="m"> this/$gravit </field>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_3D_instant_plev_test"  	grid_ref="FULL_pstd" >
+	<field id="field_3D_aplpar_p"	field_ref="field_3D_aplpar"	name="field_3D_aplpar"/>
+        <field id="field_3D_pos_p"	field_ref="field_3D_pos"	name="field_3D_pos"/>
+        <field id="field_3D_radlsw_p"	field_ref="field_3D_radlsw"	name="field_3D_radlsw"/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_3D_instant_plev_standard"  	grid_ref="FULL_pstd" >
+        <field id="zg_p"  	field_ref="zg"		name="zg" />
+        <field id="ta_p"  	field_ref="ta"		name="ta" />
+        <field id="ua_p"  	field_ref="ua"		name="ua" />
+        <field id="va_p"  	field_ref="va"		name="va" />
+        <field id="hus_p"	field_ref="hus"		name="hus" />
+        <field id="hur_p"	field_ref="hur"		name="hur" />
+        <field id="wap_p"	field_ref="wap"		name="wap" />
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_3D_instant_zlev_standard"  	grid_ref="FULL_zstd" >
+        <field id="pa_z"  	field_ref="pa"		name="pa" />
+        <field id="ta_z"  	field_ref="ta"		name="ta" />
+        <field id="ua_z"  	field_ref="ua"		name="ua" />
+        <field id="va_z"  	field_ref="va"		name="va" />
+        <field id="hus_z"	field_ref="hus"		name="hus" />
+        <field id="hur_z"	field_ref="hur"		name="hur" />
+        <field id="wap_z"	field_ref="wap"		name="wap" />
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_3D_instant_mlev_misc" 	grid_ref="FULL_klev" >
+        <field id="div"  	name="div_m" 	 	long_name="divergence" 							unit="s-1"/>
+        <field id="vort" 	name="vort_m" 	 	long_name="vorticity" 							unit="s-1"/>
+        <field id="abs_vort" 	name="abs_vort_m"  	long_name="absolute_vorticity" 						unit="s-1"/>
+        <field id="pot_vort" 	name="pot_vort_m"  	long_name="potential_vorticity" 					unit="K m2 kg-1 s-1"/>
+        <field id="etadot" 	name="etadot_m"  	long_name="etadot"							unit="-"/>
+        <field id="O_3"         name="o3_m"             long_name="mole_fraction_of_ozone_in_air"                               unit="mol mol-1"/>   
+        <field id="nogwdu"	name="nogwdu_m"	 	long_name="eastward_non_orographic_gravity_wave_drag"			unit="m s-2"/>
+        <field id="nogwdv"	name="nogwdv_m"	 	long_name="northward_non_orographic_gravity_wave_drag"			unit="m s-2"/>
+	<field id="nogwduflx_net"	name="nogwduflx_net_m"	 	long_name="net_eastward_non_orographic_gravity_wave_flux"		unit="Pa"/>
+        <field id="nogwduflx_abs"	name="nogwduflx_abs_m"	 	long_name="absolute_eastward_non_orographic_gravity_wave_flux"		unit="Pa"/>
+        <field id="dal"		name="dal_m"	 	long_name="downdraft_mesh_fraction"					unit="1"/>
+        <field id="dom"		name="dom_m"	 	long_name="downdraft_vertical_velocity"					unit="Pa s-1"/>
+        <field id="ual"		name="ual_m"	 	long_name="updraft_mesh_fraction"					unit="1"/>
+        <field id="uom"		name="uom_m"	 	long_name="updraft_vertical_velocity"					unit="Pa s-1"/>
+        <field id="uen"		name="uen_m"	 	long_name="updraft_entrainment"						unit="tbd"/>     
+	<field id="tke"		name="tke_m"	 	long_name="turbulent_kinetic_energy"					unit="m2 s-2"/>
+        <field id="Rgas" 	name="Rgas_m"  	 	long_name="gas_constant_for_air"					unit="J kg-1"/>
+        <field id="Cp"   	name="Cp_m"    	 	long_name="heat_capacity_at_constant_pressure"            		unit="J kg-1 K-1"/>
+        <field id="rho"  	name="rho_m"   	 	long_name="volumic_mass_of_air"                           		unit="kg m-3"> pa / (Rgas * ta) </field>
+        <field id="thetapw" 	name="thetapw_m" 	long_name="wet-bulb_potential_temperature"				unit="K"/>
+        <field id="wa"   	name="wa_m"    	 	long_name="vertical_velocity"                             		unit="m s-1"> wap*-1 / (rho * $gravit) </field>
+        <field id="t2"   	name="t2_m"    	 	long_name="square_of_temperature"                         		unit="K2"> ta * ta </field>
+        <field id="ut"   	name="ut_m"    	 	long_name="product_of_eastward_wind_and_air_temperature"  		unit="K m s-1"> ta * ua </field>
+        <field id="vt"   	name="vt_m"    	 	long_name="product_of_northard_wind_and_air_temperature"  		unit="K m s-1"> ta * va </field>
+        <field id="twap" 	name="twap_m"  	 	long_name="product_of_omega_and_air_temperature"          		unit="K Pa s-1"> ta * wap </field>
+        <field id="u2"   	name="u2_m"    	 	long_name="square_of_eastward_wind"                       		unit="m2 s-2"> ua * ua </field>
+        <field id="v2"   	name="v2_m"    	 	long_name="square_of_northward_wind"                      		unit="m2 s-2"> va * va </field>
+        <field id="wap2" 	name="wap2_m"  	 	long_name="square_of_lagrangian_tendency_of_air_pressure" 		unit="Pa2 s-2"> wap * wap </field>
+        <field id="uv"   	name="uv_m"    	 	long_name="product_of_eastward_wind_and_northward_wind"   		unit="m2 s-2"> ua * va </field>
+        <field id="uwap" 	name="uwap_m"  	 	long_name="product_of_eastward_wind_and_omega"            		unit="Pa m s-2"> ua * wap </field>
+        <field id="vwap" 	name="vwap_m"  		long_name="product_of_northward_wind_and_omega"           		unit="Pa m s-2"> va * wap </field>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_3D_instant_mlev_t0" 	grid_ref="FULL_klev" >
+        <field id="ua0"   	name="ua0_m"		long_name="eastward_wind_at_timestep_beginning"				unit="m s-1"/>
+	<field id="va0"   	name="va0_m"  		long_name="northward_wind_at_timestep_beginning"			unit="m s-1"/>
+        <field id="wap0" 	name="wap0_m" 	 	long_name="lagrangian_tendency_of_air_pressure_at_timestep_beginning" 	unit="Pa s-1"/>
+        <field id="ta0"   	name="ta0_m"  		long_name="air_temperature_at_timestep_beginning" 			unit="K"/>
+	<field id="hus0"  	name="hus0_m" 		long_name="specific_humidity_at_timestep_beginning"			unit="1"/>
+        <field id="ql0"   	name="ql0_m"  		long_name="liquid_water_at_timestep_beginning" 				unit="kg/kg"/>
+        <field id="qi0"   	name="qi0_m"  		long_name="ice_water_at_timestep_beginning" 				unit="kg/kg"/>
+        <field id="qr0"   	name="qr0_m"  		long_name="rain_at_timestep_beginning" 					unit="kg/kg"/>
+        <field id="qs0"   	name="qs0_m"  		long_name="snow_at_timestep_beginning"	 				unit="kg/kg"/>
+        <field id="qlc0"   	name="qlc0_m"  		long_name="convective_liquid_water_at_timestep_beginning"		unit="kg/kg"/>
+        <field id="qic0"   	name="qic0_m"  		long_name="convective_ice_water_at_timestep_beginning"			unit="kg/kg"/>
+        <field id="qrc0"   	name="qrc0_m"  		long_name="convective_rain_at_timestep_beginning" 			unit="kg/kg"/>
+        <field id="qsc0"   	name="qsc0_m"  		long_name="convective_snow_at_timestep_beginning"			unit="kg/kg"/>
+        <field id="qt0"  	name="qt0_m"   	 	long_name="total_water_at_timestep_beginning"             		unit="kg/kg"> hus0 + ql0 + qi0 + qr0 + qs0 + qlc0 + qic0 + qrc0 + qsc0 </field>
+        <field id="Rgas0" 	name="Rgas0_m"   	long_name="gas_constant_for_air_at_timestep_beginning"			unit="J kg-1"/>
+        <field id="Cp0"   	name="Cp0_m"     	long_name="heat_capacity_at_constant_pressure_at_timestep_beginning"	unit="J kg-1 K-1"/>
+        <field id="dse0" 	name="dse0_m"  	 	long_name="dry_static_energy_at_timestep_beginning"			unit="J kg-1"/>
+        <field id="rho0" 	name="rho0_m"  	 	long_name="volumic_mass_of_air_at_timestep_beginning"			unit="kg m-3"/>
+        <field id="Tpw0" 	name="Tpw0_m"    	long_name="wet-bulb_temperature_at_timestep_beginning"			unit="K"/>
+        <field id="thetapw0" 	name="thetapw0_m" 	long_name="wet-bulb_potential_temperature_at_timestep_beginning"	unit="K"/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_3D_instant_plev_misc" 	grid_ref="FULL_pstd" >
+        <field id="wap0_p"	field_ref="wap0"	name="wap0"	/>
+        <field id="etadot_p"	field_ref="etadot"	name="etadot"	/>
+        <field id="o3_p"	field_ref="O_3"		name="o3"	/>
+        <field id="qt0_p"	field_ref="qt0"		name="qt0" 	/>
+        <field id="Cp_p"	field_ref="Cp"		name="Cp" 	/>
+        <field id="dse0_p"	field_ref="dse0"	name="dse0" 	/>
+        <field id="nogwdu_p"	field_ref="nogwdu"	name="nogwdu" 	/>
+        <field id="nogwdv_p"	field_ref="nogwdv"	name="nogwdv" 	/>
+	<field id="nogwduflx_net_p"	field_ref="nogwduflx_net"	name="nogwduflx_net" 	/>
+        <field id="nogwduflx_abs_p"	field_ref="nogwduflx_abs"	name="nogwduflx_abs" 	/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_3D_instant_zlev_misc" 	grid_ref="FULL_zstd" >
+        <field id="wap0_z"	field_ref="wap0"	name="wap0"	/>
+        <field id="etadot_z"	field_ref="etadot"	name="etadot"	/>
+        <field id="o3_z"	field_ref="O_3"		name="o3"	/>
+        <field id="qt0_z"	field_ref="qt0"		name="qt0" 	/>
+        <field id="Cp_z"	field_ref="Cp"		name="Cp" 	/>
+        <field id="dse0_z"	field_ref="dse0"	name="dse0" 	/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_3D_instant_mlev_cloud" 	grid_ref="FULL_klev" >
+        <field id="qlrad"   	name="qlrad_m" 	 	long_name="radiative_liquid_water" 					unit="kg/kg"/>
+        <field id="qirad"   	name="qirad_m" 	 	long_name="radiative_ice_water" 					unit="kg/kg"/>
+        <field id="rliq" 	name="rliq_m"  	 	long_name="radiative_liquid_water_mixing_ratio"           		unit="kg/kg"> qlrad / (1 - qlrad) </field>
+        <field id="rice" 	name="rice_m"  	 	long_name="radiative_ice_water_mixing_ratio"              		unit="kg/kg"> qirad / (1 - qirad) </field>
+        <field id="cl"		name="cl_m"	 	long_name="cloud_fraction" 						unit="1"/>
+        <field id="clc"		name="clc_m"	 	long_name="convective_cloud_fraction" 					unit="1"/>
+        <field id="cls"		name="cls_m"	 	long_name="stratiform_cloud_fraction" 					unit="1"/>
+        <field id="cl100"	name="cl100_m"	 	long_name="cloud_fraction" 						unit="%"> cl * 100 </field>
+        <field id="clc100"	name="clc100_m"	 	long_name="convective_cloud_fraction" 					unit="%"> clc * 100 </field>
+        <field id="cls100"	name="cls100_m"	 	long_name="stratiform_cloud_fraction" 					unit="%"> cls * 100 </field>
+	<field id="clwc"	name="clwc_m"	 	long_name="radiative_convective_convective_liquid_water"		unit="kg/kg"/>
+	<field id="clic"	name="clic_m"	 	long_name="radiative_convective_convective_ice_water"			unit="kg/kg"/>
+	<field id="clws"	name="clws_m"	 	long_name="radiative_stratiform_convective_liquid_water"		unit="kg/kg"/>
+	<field id="clis"	name="clis_m"	 	long_name="radiative_stratiform_convective_ice_water"		 	unit="kg/kg"/>
+        <field id="ql"   	name="ql_m"  	 	long_name="stratiform_liquid_water" 					unit="kg/kg"/>
+        <field id="qi"   	name="qi_m"  	 	long_name="stratiform_ice_water"					unit="kg/kg"/>
+        <field id="qr"   	name="qr_m"  	 	long_name="stratiform_rain" 						unit="kg/kg"/>
+        <field id="qs"   	name="qs_m"  	 	long_name="stratifom_snow"	 					unit="kg/kg"/>
+        <field id="qlc"   	name="qlc_m"  	 	long_name="convective_liquid_water"					unit="kg/kg"/>
+        <field id="qic"   	name="qic_m"  	 	long_name="convective_ice_water"					unit="kg/kg"/>
+        <field id="qrc"   	name="qrc_m"  	 	long_name="convective_rain" 						unit="kg/kg"/>
+	<field id="qsc"   	name="qsc_m"  	 	long_name="convective_snow"						unit="kg/kg"/>
+        <field id="qltot"   	name="qltot_m" 	 	long_name="liquid_water"	  					unit="kg/kg"> ql + qlc </field>
+        <field id="qitot"   	name="qitot_m" 	 	long_name="ice_water"							unit="kg/kg"> qi + qic </field>
+        <field id="qrtot"   	name="qrtot_m" 	 	long_name="rain" 							unit="kg/kg"> qr + qrc </field>
+	<field id="qsto"   	name="qstot_m" 	 	long_name="snow"							unit="kg/kg"> qs + qsc </field>
+        <field id="qt"  	name="qt_m"   	 	long_name="total_water"				             		unit="kg/kg"> hus + ql + qi + qr + qs + qlc + qic + qrc + qsc </field>
+	<field id="graupel"	name="graupel_m" 	long_name="graupel"							unit="kg/kg"/>
+	<field id="hail"	name="hail_m"	 	long_name="hail"							unit="kg/kg"/>
+        <field id="cdnc"	name="cdnc_m"		long_name="number_concentration_of_cloud_liquid_water_particles_in_air"	unit="m-3" />
+        <field id="reffclw"	name="reffclw_m"	long_name="effective_radius_of_cloud_liquid_water_particle"		unit="m" />
+        <field id="reffcli"	name="reffcli_m"	long_name="effective_radius_of_cloud_ice_particle"			unit="m" />
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_3D_instant_plev_cloud" 	grid_ref="FULL_pstd" >
+        <field id="cl_p"	field_ref="cl"		name="cl"  	/>
+        <field id="clc_p"	field_ref="clc"		name="clc"  	/>
+        <field id="cls_p"	field_ref="cls"		name="cls"  	/>
+        <field id="cl100_p"	field_ref="cl100"	name="cl100"  	/>
+        <field id="clc100_p"	field_ref="clc100"	name="clc100"  	/>
+        <field id="cls100_p"	field_ref="cls100"	name="cls100"  	/>
+        <field id="ql_p"	field_ref="ql"		name="ql"  	/>
+        <field id="qi_p"	field_ref="qi"		name="qi"  	/>
+        <field id="qr_p"	field_ref="qr"		name="qr"  	/>
+        <field id="qs_p"	field_ref="qs"		name="qs"  	/>
+        <field id="qlc_p"	field_ref="qlc"		name="qlc"  	/>
+        <field id="qic_p"	field_ref="qic"		name="qic"  	/>
+        <field id="qrc_p"	field_ref="qrc"		name="qrc"  	/>
+        <field id="qsc_p"	field_ref="qsc"		name="qsc"  	/>
+        <field id="qlrad_p"	field_ref="qlrad"	name="qlrad"  	/>
+        <field id="qirad_p"	field_ref="qirad"	name="qirad"  	/>
+        <field id="rliq_p"	field_ref="rliq"	name="rliq"  	/>
+        <field id="rice_p"	field_ref="rice"	name="rice"  	/>
+        <field id="cdnc_p"	field_ref="cdnc" 	name="cdnc"     />
+        <field id="reffclw_p"	field_ref="reffclw"	name="reffclw"  />
+        <field id="reffcli_p"	field_ref="reffcli"	name="reffcli"  />
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_3D_instant_zlev_cloud" 	grid_ref="FULL_zstd" >
+        <field id="cl_z"	field_ref="cl"		name="cl"  	/>
+        <field id="clc_z"	field_ref="clc"		name="clc"  	/>
+        <field id="cls_z"	field_ref="cls"		name="cls"  	/>
+        <field id="cl100_z"	field_ref="cl100"	name="cl100"  	/>
+        <field id="clc100_z"	field_ref="clc100"	name="clc100"  	/>
+        <field id="cls100_z"	field_ref="cls100"	name="cls100"  	/>
+        <field id="ql_z"	field_ref="ql"		name="ql"  	/>
+        <field id="qi_z"	field_ref="qi"		name="qi"  	/>
+        <field id="qr_z"	field_ref="qr"		name="qr"  	/>
+        <field id="qs_z"	field_ref="qs"		name="qs"  	/>
+        <field id="qlc_z"	field_ref="qlc"		name="qlc"  	/>
+        <field id="qic_z"	field_ref="qic"		name="qic"  	/>
+        <field id="qrc_z"	field_ref="qrc"		name="qrc"  	/>
+        <field id="qsc_z"	field_ref="qsc"		name="qsc"  	/>
+        <field id="qlrad_z"	field_ref="qlrad"	name="qlrad"  	/>
+        <field id="qirad_z"	field_ref="qirad"	name="qirad"  	/>
+        <field id="rliq_z"	field_ref="rliq"	name="rliq"  	/>
+        <field id="rice_z"	field_ref="rice"	name="rice"  	/>
+        <field id="cdnc_z"	field_ref="cdnc" 	name="cdnc"     />
+        <field id="reffclw_z"	field_ref="reffclw"	name="reffclw"  />
+        <field id="reffcli_z"	field_ref="reffcli"	name="reffcli"  />
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- 3D ARPEGE fields : averaged sampling										-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->  
+    <field_group operation="average" freq_op="1ts" >
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_3D_avg_mlevh_precipitation" 	grid_ref="FULL_klev_half" >
+        <field id="prcrf"	long_name="convective_rainfall_flux"      unit="kg m-2 s-1"/>
+        <field id="prcsf"	long_name="convective_snowfall_flux"      unit="kg m-2 s-1"/>
+        <field id="prlrf"	long_name="large_scale_rainfall_flux" 	  unit="kg m-2 s-1"/>
+        <field id="prlsf"	long_name="large_scale_snowfall_flux" 	  unit="kg m-2 s-1"/>
+      </field_group>	
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_3D_avg_mlevh_convection" 	grid_ref="FULL_klev_half" >
+        <field id="mcu"		long_name="atmosphere_updraft_convective_mass_flux"      unit="kg m-2 s-1"/>
+        <field id="mcd"		long_name="atmosphere_downdraft_convective_mass_flux"    unit="kg m-2 s-1"/>
+        <field id="mc"		long_name="atmosphere_net_upward_convective_mass_flux"   unit="kg m-2 s-1"> mcu - mcd </field>
+      </field_group>		
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_3D_avg_mlev_tendencies" 	grid_ref="FULL_klev" >
+        <field id="tntmp"	name="tntmp_m"		long_name="tendency_of_air_temperature_due_to_model_physics" 							unit="K s-1"/>
+        <field id="tntr"	name="tntr_m"		long_name="tendency_of_air_temperature_due_to_radiative_heating" 						unit="K s-1"/>
+        <field id="tntrcs"	name="tntrcs_m"		long_name="tendency_of_air_temperature_due_to_radiative_heating_assuming_clear_sky" 				unit="K s-1"/>
+        <field id="tntrsw"	name="tntrsw_m"		long_name="tendency_of_air_temperature_due_to_shortwave_heating" 						unit="K s-1"/>
+        <field id="tntrlw"	name="tntrlw_m"		long_name="tendency_of_air_temperature_due_to_longwave_heating"	 						unit="K s-1"/>
+        <field id="tntrswcs"	name="tntrswcs_m"	long_name="tendency_of_air_temperature_due_to_shortwave_heating_assuming_clear_sky" 				unit="K s-1"/>
+        <field id="tntrlwcs"	name="tntrlwcs_m"	long_name="tendency_of_air_temperature_due_to_longwave_heating_assuming_clear_sky" 				unit="K s-1"/>
+        <field id="tntrcln"	name="tntrcln_m"	long_name="tendency_of_air_temperature_due_to_radiative_heating_assuming_clean_sky" 				unit="K s-1"/>
+        <field id="tntrclncs"	name="tntrclncs_m"	long_name="tendency_of_air_temperature_due_to_radiative_heating_assuming_clean_clear_sky" 			unit="K s-1"/>
+        <field id="tntrswcln"	name="tntrswcln_m"	long_name="tendency_of_air_temperature_due_to_shortwave_heating_assuming_clean_sky" 				unit="K s-1"/>
+        <field id="tntrlwcln"	name="tntrlwcln_m"	long_name="tendency_of_air_temperature_due_to_longwave_heating_assuming_clean_sky" 				unit="K s-1"/>
+        <field id="tntrswclncs"	name="tntrswclncs_m"	long_name="tendency_of_air_temperature_due_to_shortwave_heating_assuming_clean_clear_sky" 			unit="K s-1"/>
+        <field id="tntrlwclncs"	name="tntrlwclncs_m"	long_name="tendency_of_air_temperature_due_to_longwave_heating_assuming_clean_clear_sky"			unit="K s-1"/>
+        <field id="tntrbis"	name="tntrbis_m"	long_name="tendency_of_air_temperature_due_to_radiative_heating_assuming_2nd_aerosol_dataset" 			unit="K s-1"/>
+        <field id="tntrbiscs"	name="tntrbiscs_m"	long_name="tendency_of_air_temperature_due_to_radiative_heating_assuming_clear_sky_and_2nd_aerosol_dataset" 	unit="K s-1"/>
+        <field id="tntrswbis"	name="tntrswbis_m"	long_name="tendency_of_air_temperature_due_to_shortwave_heating_assuming_2nd_aerosol_dataset" 			unit="K s-1"/>
+        <field id="tntrlwbis"	name="tntrlwbis_m"	long_name="tendency_of_air_temperature_due_to_longwave_heating_assuming_2nd_aerosol_dataset" 			unit="K s-1"/>
+        <field id="tntrswbiscs"	name="tntrswbiscs_m"	long_name="tendency_of_air_temperature_due_to_shortwave_heating_assuming_clear_sky_and_2nd_aerosol_dataset" 	unit="K s-1"/>
+        <field id="tntrlwbiscs"	name="tntrlwbiscs_m"	long_name="tendency_of_air_temperature_due_to_longwave_heating_assuming_clear_sky_and_2nd_aerosol_dataset" 	unit="K s-1"/>
+        <field id="tntcas"	name="tntcas_m"		long_name="tendency_of_air_temperature_due_to_dry_convection_adjustment"					unit="K s-1"/>
+        <field id="tntc"	name="tntc_m"		long_name="tendency_of_air_temperature_due_to_convection"							unit="K s-1"/>
+        <field id="tntturb"	name="tntturb_m"	long_name="tendency_of_air_temperature_due_to_turbulent_mixing" 						unit="K s-1"/>
+        <field id="tntlscp"	name="tntlscp_m"	long_name="tendency_of_air_temperature_due_to_stratiform_condensation_and_microphysics"				unit="K s-1"/>
+        <field id="tntm"	name="tntm_m"		long_name="tendency_of_air_temperature_due_to_mesospheric_drag" 						unit="K s-1"/>
+        <field id="tntqng"	name="tntqng_m"		long_name="tendency_of_air_temperature_due_to_negative_moisture" 						unit="K s-1"/>
+        <field id="tntlscpturb"	name="tntlscpturb_m"	long_name="tendency_of_air_temperature_due_to_stratiform_clouds_and_precipitation_and_turbulent_mixing" 	unit="K s-1"> tntturb + tntlscp </field>
+<!--====================================================================================================================-->
+        <field id="Q2"		name="Q2_m"		long_name="apparent_moisture_sink" 										unit="K s-1"/>
+        <field id="tnhusmp"	name="tnhusmp_m"	long_name="tendency_of_specific_humidity_due_to_model_physics" 							unit="s-1"/>
+        <field id="tnhusc"	name="tnhusc_m"		long_name="tendency_of_specific_humidity_due_to_convection" 							unit="s-1"/>
+        <field id="tnhusturb"	name="tnhusturb_m"	long_name="tendency_of_specific_humidity_due_to_turbulent_mixing" 						unit="s-1"/>
+        <field id="tnhuslscp"	name="tnhuslscp_m"	long_name="tendency_of_specific_humidity_due_to_stratiform_condensation_and_microphysics"			unit="s-1"/>
+        <field id="tnhusm"	name="tnhusm_m"		long_name="tendency_of_specific_humidity_due_to_mesospheric_drag" 						unit="s-1"/> 
+        <field id="tnhusqng"	name="tnhusqng_m"	long_name="tendency_of_specific_humidity_due_to_negative_moisture" 						unit="s-1"/> 
+	<field id="tnhuslscpturb" name="tnhuslscpturb_m" long_name="tendency_of_specific_humidity_due_to_stratiform_clouds_and_precipitation_and_turbulent_mixing" 	unit="s-1"> tnhusturb + tnhuslscp </field>
+        <field id="tnuamp"	name="tnuamp_m"		long_name="tendency_of_zonal_wind_due_to_model_physics" 							unit="m s-2"/>
+        <field id="tnuac"	name="tnuac_m"		long_name="tendency_of_zonal_wind_due_to_convection" 								unit="m s-2"/>
+        <field id="tnuaturb"	name="tnuaturb_m"	long_name="tendency_of_zonal_wind_due_to_turbulent_mixing"	 						unit="m s-2"/>
+        <field id="tnuagw"	name="tnuagw_m"		long_name="tendency_of_zonal_wind_due_to_orographic_gravity_wave_drag" 						unit="m s-2"/>
+        <field id="tnuanogw"	name="tnuanogw_m"	long_name="tendency_of_zonal_wind_due_to_non-orographic_gravity_wave_drag" 					unit="m s-2"/>
+	<field id="tnuam"	name="tnuam_m"		long_name="tendency_of_zonal_wind_due_to_mesospheric_drag" 							unit="m s-2"/>
+<!--====================================================================================================================-->
+        <field id="tnvamp"	name="tnvamp_m"		long_name="tendency_of_meridional_wind_due_to_model_physics" 							unit="m s-2"/>
+        <field id="tnvac"	name="tnvac_m"		long_name="tendency_of_meridional_wind_due_to_convection" 							unit="m s-2"/>
+        <field id="tnvaturb"	name="tnvaturb_m"	long_name="tendency_of_meridional_wind_due_to_turbulent_mixing" 						unit="m s-2"/>
+        <field id="tnvagw"	name="tnvagw_m"		long_name="tendency_of_meridional_wind_due_to_orographic_gravity_wave_drag" 					unit="m s-2"/>
+        <field id="tnvanogw"	name="tnvanogw_m"	long_name="tendency_of_meridional_wind_due_to_non-orographic_gravity_wave_drag" 				unit="m s-2"/>
+        <field id="tnvam"	name="tnvam_m"		long_name="tendency_of_meridional_wind_due_to_mesospheric_drag" 						unit="m s-2"/>
+<!--====================================================================================================================-->
+        <field id="tnqlmp"	name="tnqlmp_m"		long_name="tendency_of_liquid_water_due_to_model_physics" 							unit="s-1"/>
+        <field id="tnqimp"	name="tnqimp_m"		long_name="tendency_of_ice_water_due_to_model_physics" 								unit="s-1"/>
+        <field id="tnqrmp"	name="tnqrmp_m"		long_name="tendency_of_rain_due_to_model_physics" 								unit="s-1"/>
+        <field id="tnqsnmp"	name="tnqsnmp_m"	long_name="tendency_of_snow_due_to_model_physics" 								unit="s-1"/>
+        <field id="tnqlcmp"	name="tnqlcmp_m"	long_name="tendency_of_convective_liquid_water_due_to_model_physics" 						unit="s-1"/>
+        <field id="tnqicmp"	name="tnqicmp_m"	long_name="tendency_of_convective_ice_water_due_to_model_physics" 						unit="s-1"/>
+        <field id="tnqrcmp"	name="tnqrcmp_m"	long_name="tendency_of_convective_rain_due_to_model_physics" 							unit="s-1"/>
+	<field id="tnqsncmp"	name="tnqsncmp_m"	long_name="tendency_of_convective_snow_due_to_model_physics" 							unit="s-1"/>
+<!--====================================================================================================================-->	
+        <field id="tnt"		name="tnt_m"		long_name="tendency_of_air_temperature"										unit="K s-1"> (ta - ta0) / $timestep </field>
+        <field id="tnhus"	name="tnhus_m"		long_name="tendency_of_specific_humidity"									unit="s-1"> (hus - hus0) / $timestep </field>
+        <field id="tnua"	name="tnua_m"		long_name="tendency_of_zonal_wind"										unit="m s-2"> (ua - ua0) / $timestep </field>
+        <field id="tnva"	name="tnva_m"		long_name="tendency_of_meridional_wind"										unit="m s-2"> (va - va0) / $timestep </field>
+        <field id="tnql"	name="tnql_m"		long_name="tendency_of_liquid_water"										unit="s-1">   (ql - ql0) / $timestep </field>
+        <field id="tnqi"	name="tnqi_m"		long_name="tendency_of_ice_water"										unit="s-1">   (qi - qi0) / $timestep </field>
+        <field id="tnqr"	name="tnqr_m"		long_name="tendency_of_rain"											unit="s-1">   (qr - qr0) / $timestep </field>
+        <field id="tnqsn"	name="tnqsn_m"		long_name="tendency_of_snow"											unit="s-1">   (qs - qs0) / $timestep </field>
+        <field id="tnqlc"	name="tnqlc_m"		long_name="tendency_of_convective_liquid_water"									unit="s-1"> (qlc - qlc0) / $timestep </field>
+        <field id="tnqic"	name="tnqic_m"		long_name="tendency_of_convective_ice_water"									unit="s-1"> (qic - qic0) / $timestep </field>
+        <field id="tnqrc"	name="tnqrc_m"		long_name="tendency_of_convective_rain"										unit="s-1"> (qrc - qrc0) / $timestep </field>
+	<field id="tnqsnc"	name="tnqsnc_m"		long_name="tendency_of_convective_snow"										unit="s-1"> (qsc - qsc0) / $timestep </field>
+	<field id="tnta"	name="tnta_m"		long_name="tendency_of_air_temperature_due_to_advection"  							unit="K s-1"> tnt - tntmp            </field>
+        <field id="tnhusa"	name="tnhusa_m"		long_name="tendency_of_specific_humidity_due_to_advection"  							unit="s1">  tnhus - tnhusmp          </field>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_3D_avg_plev_tendencies" grid_ref="FULL_pstd" >
+        <field id="tnta_p"     field_ref="tnta"     name="tnta"     />
+        <field id="tntmp_p"    field_ref="tntmp"    name="tntmp"    />
+        <field id="tntr_p"     field_ref="tntr"     name="tntr"     />
+        <field id="tntrcs_p"   field_ref="tntrcs"   name="tntrcs"   />
+        <field id="tntrsw_p"   field_ref="tntrsw"   name="tntrsw"   />
+        <field id="tntrlw_p"   field_ref="tntrlw"   name="tntrlw"   />
+        <field id="tntrswcs_p" field_ref="tntrswcs" name="tntrswcs" />
+        <field id="tntrlwcs_p" field_ref="tntrlwcs" name="tntrlwcs" />
+        <field id="tntcas_p"   field_ref="tntcas"   name="tntcas"   />
+        <field id="tntc_p"     field_ref="tntc"     name="tntc"     />
+        <field id="tntturb_p"  field_ref="tntturb"  name="tntturb"  />
+        <field id="tntlscp_p"  field_ref="tntlscp"  name="tntlscp"  />
+        <field id="tntm_p"     field_ref="tntm"     name="tntm"     />
+        <field id="tntqng_p"   field_ref="tntqng"   name="tntqng"   />
+        <field id="Q2_p"       field_ref="Q2"       name="Q2"       />
+        <field id="tnhusa_p"   field_ref="tnhusa"   name="tnhusa"   />
+        <field id="tnhusmp_p"  field_ref="tnhusmp"  name="tnhusmp"  />
+        <field id="tnhusc_p"   field_ref="tnhusc"   name="tnhusc"   />
+        <field id="tnhusturb_p" field_ref="tnhusturb" name="tnhusturb" />
+        <field id="tnhuslscp_p" field_ref="tnhuslscp" name="tnhuslscp" />
+        <field id="tnhusm_p"   field_ref="tnhusm"   name="tnhusm"   /> 
+        <field id="tnhusqng_p" field_ref="tnhusqng" name="tnhusqng" /> 
+        <field id="tnuamp_p"   field_ref="tnuamp"   name="tnuamp"   />
+        <field id="tnuac_p"    field_ref="tnuac"    name="tnuac"    />
+        <field id="tnuaturb_p" field_ref="tnuaturb" name="tnuaturb" />
+        <field id="tnuagw_p"   field_ref="tnuagw"   name="tnuagw"   />
+        <field id="tnuanogw_p" field_ref="tnuanogw" name="tnuanogw" />
+        <field id="tnuam_p"    field_ref="tnuam"    name="tnuam"    />
+        <field id="tnvamp_p"   field_ref="tnvamp"   name="tnvamp"   />
+        <field id="tnvac_p"    field_ref="tnvac"    name="tnvac"    />
+        <field id="tnvaturb_p" field_ref="tnvaturb" name="tnvaturb" />
+        <field id="tnvagw_p"   field_ref="tnvagw"   name="tnvagw"   />
+        <field id="tnvanogw_p" field_ref="tnvanogw" name="tnvanogw" />
+        <field id="tnvam_p"    field_ref="tnvam"    name="tnvam"    />
+        <field id="tnqlmp_p"   field_ref="tnqlmp"   name="tnqlmp"   />
+        <field id="tnqimp_p"   field_ref="tnqimp"   name="tnqimp"   />
+        <field id="tnqrmp_p"   field_ref="tnqrmp"   name="tnqrmp"   />
+        <field id="tnqsnmp_p"  field_ref="tnqsnmp"  name="tnqsnmp"  />
+        <field id="tnqlcmp_p"  field_ref="tnqlcmp"  name="tnqlcmp"  />
+        <field id="tnqicmp_p"  field_ref="tnqicmp"  name="tnqicmp"  />
+        <field id="tnqrcmp_p"  field_ref="tnqrcmp"  name="tnqrcmp"  />
+        <field id="tnqsncmp_p" field_ref="tnqsncmp" name="tnqsncmp" />
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_3D_avg_zlev_tendencies" grid_ref="FULL_zstd" >
+        <field id="tnta_z"     field_ref="tnta"     name="tnta"     />
+        <field id="tntmp_z"    field_ref="tntmp"    name="tntmp"    />
+        <field id="tntr_z"     field_ref="tntr"     name="tntr"     />
+        <field id="tntrcs_z"   field_ref="tntrcs"   name="tntrcs"   />
+        <field id="tntrsw_z"   field_ref="tntrsw"   name="tntrsw"   />
+        <field id="tntrlw_z"   field_ref="tntrlw"   name="tntrlw"   />
+        <field id="tntrswcs_z" field_ref="tntrswcs" name="tntrswcs" />
+        <field id="tntrlwcs_z" field_ref="tntrlwcs" name="tntrlwcs" />
+        <field id="tntcas_z"   field_ref="tntcas"   name="tntcas"   />
+        <field id="tntc_z"     field_ref="tntc"     name="tntc"     />
+        <field id="tntturb_z"  field_ref="tntturb"  name="tntturb"  />
+        <field id="tntlscp_z"  field_ref="tntlscp"  name="tntlscp"  />
+        <field id="tntm_z"     field_ref="tntm"     name="tntm"     />
+        <field id="tntqng_z"   field_ref="tntqng"   name="tntqng"   />
+        <field id="Q2_z"       field_ref="Q2"       name="Q2"       />
+        <field id="tnhusa_z"   field_ref="tnhusa"   name="tnhusa"   />
+        <field id="tnhusmp_z"  field_ref="tnhusmp"  name="tnhusmp"  />
+        <field id="tnhusc_z"   field_ref="tnhusc"   name="tnhusc"   />
+        <field id="tnhusturb_z" field_ref="tnhusturb" name="tnhusturb" />
+        <field id="tnhuslscp_z" field_ref="tnhuslscp" name="tnhuslscp" />
+        <field id="tnhusm_z"   field_ref="tnhusm"   name="tnhusm"   /> 
+        <field id="tnhusqng_z" field_ref="tnhusqng" name="tnhusqng" /> 
+        <field id="tnuamp_z"   field_ref="tnuamp"   name="tnuamp"   />
+        <field id="tnuac_z"    field_ref="tnuac"    name="tnuac"    />
+        <field id="tnuaturb_z" field_ref="tnuaturb" name="tnuaturb" />
+        <field id="tnuagw_z"   field_ref="tnuagw"   name="tnuagw"   />
+        <field id="tnuanogw_z" field_ref="tnuanogw" name="tnuanogw" />
+        <field id="tnuam_z"    field_ref="tnuam"    name="tnuam"    />
+        <field id="tnvamp_z"   field_ref="tnvamp"   name="tnvamp"   />
+        <field id="tnvac_z"    field_ref="tnvac"    name="tnvac"    />
+        <field id="tnvaturb_z" field_ref="tnvaturb" name="tnvaturb" />
+        <field id="tnvagw_z"   field_ref="tnvagw"   name="tnvagw"   />
+        <field id="tnvanogw_z" field_ref="tnvanogw" name="tnvanogw" />
+        <field id="tnvam_z"    field_ref="tnvam"    name="tnvam"    />
+        <field id="tnqlmp_z"   field_ref="tnqlmp"   name="tnqlmp"   />
+        <field id="tnqimp_z"   field_ref="tnqimp"   name="tnqimp"   />
+        <field id="tnqrmp_z"   field_ref="tnqrmp"   name="tnqrmp"   />
+        <field id="tnqsnmp_z"  field_ref="tnqsnmp"  name="tnqsnmp"  />
+        <field id="tnqlcmp_z"  field_ref="tnqlcmp"  name="tnqlcmp"  />
+        <field id="tnqicmp_z"  field_ref="tnqicmp"  name="tnqicmp"  />
+        <field id="tnqrcmp_z"  field_ref="tnqrcmp"  name="tnqrcmp"  />
+        <field id="tnqsncmp_z" field_ref="tnqsncmp" name="tnqsncmp" />
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_3D_avg_mlevh_radiation" 	grid_ref="FULL_klev_half">
+        <field id="LWup"        long_name="LWup"        unit="W m-2"/>
+        <field id="LWdn"        long_name="LWdn"        unit="W m-2"/>
+        <field id="LWupcs"      long_name="LWupcs"      unit="W m-2"/>
+        <field id="LWdncs"      long_name="LWdncs"      unit="W m-2"/>
+        <field id="LWnet"       long_name="LWnet"       unit="W m-2"/>
+        <field id="LWnetcs"     long_name="LWnetcs"     unit="W m-2"/>
+        <field id="SWup"        long_name="SWup"        unit="W m-2"/>
+        <field id="SWdn"        long_name="SWdn"        unit="W m-2"/>
+        <field id="SWupcs"      long_name="SWupcs"      unit="W m-2"/>
+        <field id="SWdncs"      long_name="SWdncs"      unit="W m-2"/>
+        <field id="SWnet"       long_name="SWnet"       unit="W m-2"/>
+        <field id="SWnetcs"     long_name="SWnetcs"     unit="W m-2"/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_3D_avg_mlevh_radiation_cln" grid_ref="FULL_klev_half">
+        <field id="LWupcln"        long_name="LWupcln"        unit="W m-2"/>
+        <field id="LWdncln"        long_name="LWdncln"        unit="W m-2"/>
+        <field id="LWupcscln"      long_name="LWupcscln"      unit="W m-2"/>
+        <field id="LWdncscln"      long_name="LWdncscln"      unit="W m-2"/>
+        <field id="LWnetcln"       long_name="LWnetcln"       unit="W m-2"/>
+        <field id="LWnetcscln"     long_name="LWnetcscln"     unit="W m-2"/>
+        <field id="SWupcln"        long_name="SWupcln"        unit="W m-2"/>
+        <field id="SWdncln"        long_name="SWdncln"        unit="W m-2"/>
+        <field id="SWupcscln"      long_name="SWupcscln"      unit="W m-2"/>
+        <field id="SWdncscln"      long_name="SWdncscln"      unit="W m-2"/>
+        <field id="SWnetcln"       long_name="SWnetcln"       unit="W m-2"/>
+        <field id="SWnetcscln"     long_name="SWnetcscln"     unit="W m-2"/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_3D_avg_mlevh_radiation_4co2" grid_ref="FULL_klev_half">
+        <field id="LWup4co2"        long_name="LWup4co2"        unit="W m-2"/>
+        <field id="LWdn4co2"        long_name="LWdn4co2"        unit="W m-2"/>
+        <field id="LWupcs4co2"      long_name="LWupcs4co2"      unit="W m-2"/>
+        <field id="LWdncs4co2"      long_name="LWdncs4co2"      unit="W m-2"/>
+        <field id="LWnet4co2"       long_name="LWnet4co2"       unit="W m-2"/>
+        <field id="LWnetcs4co2"     long_name="LWnetcs4co2"     unit="W m-2"/>
+        <field id="SWup4co2"        long_name="SWup4co2"        unit="W m-2"/>
+        <field id="SWdn4co2"        long_name="SWdn4co2"        unit="W m-2"/>
+        <field id="SWupcs4co2"      long_name="SWupcs4co2"      unit="W m-2"/>
+        <field id="SWdncs4co2"      long_name="SWdncs4co2"      unit="W m-2"/>
+        <field id="SWnet4co2"       long_name="SWnet4co2"       unit="W m-2"/>
+        <field id="SWnetcs4co2"     long_name="SWnetcs4co2"     unit="W m-2"/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_4D_avg_mlevh_radiation" 	grid_ref="FULL_klev_half_sw" >
+        <field id="SWupcsb"     long_name="SWupcsb"     unit="W m-2"/>
+        <field id="SWdncsb"     long_name="SWdncsb"     unit="W m-2"/>
+        <field id="SWupdif"     long_name="SWupdif"     unit="W m-2"/>
+        <field id="SWdndif"     long_name="SWdndif"     unit="W m-2"/>
+        <field id="SWupdir"     long_name="SWupdir"     unit="W m-2"/>
+        <field id="SWdndir"     long_name="SWdndir"     unit="W m-2"/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_2D_avg_swbnd_radiation" 	grid_ref="FULL_swband" >
+        <field id="rsuscsbnd"   long_name="Surface upwelling clear-sky shortwave radiation for each band"     unit="W m-2"/>
+        <field id="rsdscsbnd"   long_name="Surface downwelling clear-sky shortwave radiation for each band"   unit="W m-2"/>
+        <field id="rsutcsbnd"   long_name="TOA outgoing clear-sky shortwave radiation for each band"          unit="W m-2"/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_4D_avg_mlevh_radiation_cln"	grid_ref="FULL_klev_half_sw" >
+        <field id="SWupcsbcln"     long_name="SWupcsbcln"     unit="W m-2"/>
+        <field id="SWdncsbcln"     long_name="SWdncsbcln"     unit="W m-2"/>
+        <field id="SWupdifcln"     long_name="SWupdifcln"     unit="W m-2"/>
+        <field id="SWdndifcln"     long_name="SWdndifcln"     unit="W m-2"/>
+        <field id="SWupdircln"     long_name="SWupdircln"     unit="W m-2"/>
+	<field id="SWdndircln"     long_name="SWdndircln"     unit="W m-2"/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_2D_avg_swbnd_radiation_cln"	grid_ref="FULL_swband" >
+        <field id="rsuscsclnbnd"   long_name="Surface upwelling clean-sky shortwave radiation for each band"     unit="W m-2"/>
+        <field id="rsdscsclnbnd"   long_name="Surface downwelling clean-sky shortwave radiation for each band"   unit="W m-2"/>
+        <field id="rsutcsclnbnd"   long_name="TOA outgoing clean-sky shortwave radiation for each band"          unit="W m-2"/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_4D_avg_mlevh_radiation_4co2"	grid_ref="FULL_klev_half_sw" >
+        <field id="SWupcsb4co2"     long_name="SWupcsb4co2"     unit="W m-2"/>
+        <field id="SWdncsb4co2"     long_name="SWdncsb4co2"     unit="W m-2"/>
+        <field id="SWupdif4co2"     long_name="SWupdif4co2"     unit="W m-2"/>
+        <field id="SWdndif4co2"     long_name="SWdndif4co2"     unit="W m-2"/>
+        <field id="SWupdir4co2"     long_name="SWupdir4co2"     unit="W m-2"/>
+        <field id="SWdndir4co2"     long_name="SWdndir4co2"     unit="W m-2"/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- Radiation fields just after radiation call (in radlsw) -->
+      <field_group id="atmo_3D_avg_mlevh_radiation_rt" 	grid_ref="FULL_klev_half">
+        <field id="LWup_rt"     long_name="LWup_rt"     unit="W m-2"/>
+        <field id="LWdn_rt"     long_name="LWdn_rt"     unit="W m-2"/>
+        <field id="LWupcs_rt"   long_name="LWupcs_rt"   unit="W m-2"/>
+        <field id="LWdncs_rt"   long_name="LWdncs_rt"   unit="W m-2"/>
+        <field id="LWnet_rt"    long_name="LWnet_rt"    unit="W m-2"/>
+        <field id="LWnetcs_rt"  long_name="LWnetcs_rt"  unit="W m-2"/>
+        <field id="SWup_rt"     long_name="SWup_rt"     unit="W m-2"/>
+        <field id="SWdn_rt"     long_name="SWdn_rt"     unit="W m-2"/>
+        <field id="SWupcs_rt"   long_name="SWupcs_rt"   unit="W m-2"/>
+        <field id="SWdncs_rt"   long_name="SWdncs_rt"   unit="W m-2"/>
+        <field id="SWnet_rt"    long_name="SWnet_rt"    unit="W m-2"/>
+        <field id="SWnetcs_rt"  long_name="SWnetcs_rt"  unit="W m-2"/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- Radiation fields just after radiation call (in radlsw) -->
+      <field_group id="atmo_4D_avg_mlevh_radiation_rt" 	grid_ref="FULL_klev_half_sw" >
+        <field id="SWupdif_rt"  long_name="SWupdif_rt"  unit="W m-2"/>
+        <field id="SWdndif_rt"  long_name="SWdndif_rt"  unit="W m-2"/>
+        <field id="SWupdir_rt"  long_name="SWupdir_rt"  unit="W m-2"/>
+        <field id="SWdndir_rt"  long_name="SWdndir_rt"  unit="W m-2"/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- COSP ARPEGE fields : instantaneous sampling									-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <field_group operation="instant" freq_op="1ts" >  
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_calipso_2D" grid_ref="FULL_grid">
+        <field id="cllcalipso"        	long_name="calipso_low_cloud_fraction"      				       	unit="%" />
+        <field id="clmcalipso"        	long_name="calipso_mid_cloud_fraction"        				     	unit="%" />
+        <field id="clhcalipso"          long_name="calipso_high_cloud_fraction"      				     	unit="%" />
+        <field id="cltcalipso"          long_name="calipso_total_cloud_fraction"     				      	unit="%" />
+        <field id="cllcalipsoice"       long_name="calipso_ice_low_cloud_fraction"   				      	unit="%" />
+        <field id="clmcalipsoice"       long_name="calipso_ice_mid_cloud_fraction"    				     	unit="%" />
+        <field id="clhcalipsoice"       long_name="calipso_ice_high_cloud_fraction"    				    	unit="%" />
+        <field id="cltcalipsoice"       long_name="calipso_ice_total_cloud_fraction"  	 			    	unit="%" />
+        <field id="cllcalipsoliq"       long_name="calipso_liq_low_cloud_fraction"      			  	unit="%" />
+        <field id="clmcalipsoliq"       long_name="calipso_liq_mid_cloud_fraction"      			   	unit="%" />
+        <field id="clhcalipsoliq"       long_name="calipso_liq_high_cloud_fraction"      			  	unit="%" />
+        <field id="cltcalipsoliq"       long_name="calipso_liq_total_cloud_fraction"      			 	unit="%" />
+        <field id="cllcalipsoun"        long_name="calipso_undefined_low_cloud_fraction"  			 	unit="%" />
+        <field id="clmcalipsoun"        long_name="calipso_undefined_mid_cloud_fraction"   				unit="%" />
+        <field id="clhcalipsoun"        long_name="calipso_undefined_high_cloud_fraction"  				unit="%" />
+        <field id="cltcalipsoun"        long_name="calipso_undefined_total_cloud_fraction" 				unit="%" />
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_calipso_3D_alt40" grid_ref="FULL_alt40" >
+        <field id="clcalipso"           long_name="calipso_cloud_fraction"                	 			unit="%"/>
+        <field id="clcalipsoice"        long_name="calipso_ice_cloud_fraction"             				unit="%"/>
+        <field id="clcalipsoliq"        long_name="calipso_liq_cloud_fraction"             				unit="%"/>
+        <field id="clcalipsoun"         long_name="calipso_unclassified_cloud_fraction"    				unit="%"/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_calipso_3D_mlev" grid_ref="FULL_klev" >
+        <field id="lidarBetaMol532"     long_name="calipso_lidarBetaMol532"                				unit="m-1 sr-1"/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_calipso_3D_temp" grid_ref="FULL_temp" >
+        <field id="clcalipsotmp"        long_name="calipso_cloud_fraction"                 				unit="%"/>
+        <field id="clcalipsotmpice"     long_name="calipso_ice_cloud_fraction"            				unit="%"/>
+        <field id="clcalipsotmpliq"     long_name="calipso_liq_cloud_fraction"             				unit="%"/>
+        <field id="clcalipsotmpun"      long_name="calipso_unclassified_cloud_fraction"    				unit="%"/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_calipso_4D_mlev_col" grid_ref="FULL_klev_column" >
+        <field id="atb532"              long_name="atb532"                                 				unit="m-1 sr-1"/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_calipso_4D_alt40_scatratio" grid_ref="FULL_alt40_scatratio" >
+        <field id="cfadLidarsr532"      long_name="cfadLidarsr532"                     					unit="1"/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_parasol_3D_sza5" grid_ref="FULL_sza5" >
+        <field id="parasolRefl"     	long_name="parasol_reflectance"                 				unit="1"/>
+        <field id="parasolCRefl"     	long_name="parasol_cloud_reflectance"                 				unit="1"/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_radar_4D_mlev_col" grid_ref="FULL_klev_column" >
+        <field id="dbze94"         	long_name="dbze94"      							unit="1"/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_radar_4D_alt40_dbze" grid_ref="FULL_alt40_dbze" >
+        <field id="cfadDbze94"     	long_name="cfadDbze94"  							unit="1"/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_lidarradar_2D" grid_ref="FULL_grid" >
+        <field id="cltlidarradar"       long_name="cltlidarradar"  							unit="%"/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_lidarradar_3D_alt40" grid_ref="FULL_alt40" >
+        <field id="clcalipso2"     	long_name="clcalipso2"     							unit="%"/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_isccp_2D"	grid_ref="FULL_grid" >
+        <field id="cltisccp"            long_name="ISCCP_total_cloud_cover_percentage"                    		unit="%"/>
+        <field id="pctisccp"            long_name="ISCCP_mean_cloud_top_pressure"                         		unit="Pa"/>
+        <field id="tauisccp"            long_name="ISCCP_mean_cloud_optical_thickness"                    		unit="1"/>
+        <field id="albisccp"            long_name="ISCCP_mean_cloud_albedo"                               		unit="1"/>
+        <field id="meantbisccp"         long_name="ISCCP_mean_brightness_temperature"                    		unit="K"/>
+        <field id="meantbclrisccp"      long_name="ISCCP_mean_brightness_temperature_assuming_clear_sky"  		unit="K"/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_isccp_3D_col" grid_ref="FULL_column" >
+        <field id="boxtauisccp"    	long_name="boxtauisccp"                                           		unit="1"/>
+        <field id="boxptopisccp"   	long_name="boxptopisccp"                                          		unit="Pa"/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_isccp_4D_plev7_tau" grid_ref="FULL_plev7_tau" >
+        <field id="clisccp"        	long_name="ISCCP_cloud_area_fraction"                          			unit="%"/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_modis_2D"	grid_ref="FULL_grid" >
+        <field id="cltmodis"            long_name="MODIS_total_cloud_cover_percentage"                     		unit="%"/>
+        <field id="clwmodis"            long_name="MODIS_liquid_cloud_cover_percentage"                    		unit="%"/>
+        <field id="climodis"            long_name="MODIS_ice_cloud_cover_percentage"                       		unit="%"/>
+        <field id="clhmodis"            long_name="MODIS_high_level_cloud_cover_percentage"                		unit="%"/>
+        <field id="clmmodis"            long_name="MODIS_mid_level_cloud_cover_percentage"                 		unit="%"/>
+        <field id="cllmodis"            long_name="MODIS_low_level_cloud_cover_percentage"                 		unit="%"/>
+        <field id="tautmodis"           long_name="MODIS_total_cloud_optical_thickness"                    		unit="1"/>
+        <field id="tauwmodis"           long_name="MODIS_liquid_cloud_optical_thickness"                   		unit="1"/>
+        <field id="tauimodis"           long_name="MODIS_ice_cloud_optical_thickness"                      		unit="1"/>
+        <field id="tautlogmodis"        long_name="MODIS_total_cloud_optical_thickness_logarithm"         		unit="1"/>
+        <field id="tauwlogmodis"        long_name="MODIS_liquid_cloud_optical_thickness_logarithm"         		unit="1"/>
+        <field id="tauilogmodis"        long_name="MODIS_ice_cloud_optical_thickness_logarithm"            		unit="1"/>
+        <field id="reffclwmodis"        long_name="MODIS_effective_hydrometeor_radius_at_liquid_cloud_top" 		unit="m"/>
+        <field id="reffclimodis"        long_name="MODIS_effective_hydrometeor_radius_at_ice_cloud_top"    		unit="m"/>
+        <field id="pctmodis"            long_name="MODIS_cloud_top_pressure"                              		unit="Pa"/>
+        <field id="lwpmodis"            long_name="MODIS_liquid_water_path"                                		unit="kg m-2"/>
+        <field id="iwpmodis"            long_name="MODIS_ice_water_path"                                   		unit="kg m-2"/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_modis_4D_plev7_tau" grid_ref="FULL_plev7_tau" >
+        <field id="clmodis"        	long_name="MODIS_cloud_area_fraction"                              		unit="%"/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_modis_4D_reffIce_tau" grid_ref="FULL_reffIce_tau" >
+        <field id="crimodis"       	long_name="MODIS Optical Thickness-Particle Size joint distribution, ice"  	unit="%"/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_modis_4D_reffLiq_tau" grid_ref="FULL_reffLiq_tau" >
+        <field id="crlmodis"       	long_name="MODIS Optical Thickness-Particle Size joint distribution, liquid"  	unit="%"/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="atmo_misr_4D_cth16_tau" grid_ref="FULL_cth16_tau" >
+        <field id="clmisr"         	long_name="Percentage_cloud_cover_as_calculated_by_the_MISR_simulator"   	unit="%"/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+  </field_group>
+</field_definition>

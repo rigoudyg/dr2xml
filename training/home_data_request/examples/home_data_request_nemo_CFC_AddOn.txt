@@ -1,0 +1,7 @@
+#------------------------------------------------------------------------------------------------------------------------------------------------------
+#TYPE;    VARNAME;         REALM;     FREQUENCY;     TABLE;                     TEMPORAL_SHP;         SPATIAL_SHP;       EXPNAME;            MIP
+#------------------------------------------------------------------------------------------------------------------------------------------------------
+cmor;    cfc12;             ocean;     mon;           CMIP_Omon;                 time-mean;             XY-O;              ANY;                ANY
+cmor;    sf6;               ocean;     mon;           CMIP_Omon;                 time-mean;             XY-O;              ANY;                ANY
+cmor;    fgcfc12;           ocean;     mon;           CMIP_Omon;                 time-mean;             XY-na;              ANY;               ANY
+cmor;    fgsf6;             ocean;     mon;           CMIP_Omon;                 time-mean;             XY-na;              ANY;               ANY

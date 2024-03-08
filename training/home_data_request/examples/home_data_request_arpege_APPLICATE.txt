@@ -1,0 +1,21 @@
+#------------------------------------------------------------------------------------------------------------------------------------------------------
+#TYPE;    VARNAME;         REALM;     FREQUENCY;     TABLE;                     TEMPORAL_SHP;         SPATIAL_SHP;       EXPNAME;            MIP
+#------------------------------------------------------------------------------------------------------------------------------------------------------
+extra;      ua;           atmos;      6hrPt;          APPLICATE_Appl6hrPlevPt;   time-point;           XY-P23;            ANY;                ANY
+extra;      va;           atmos;      6hrPt;          APPLICATE_Appl6hrPlevPt;   time-point;           XY-P23;            ANY;                ANY
+extra;      ta;           atmos;      6hrPt;          APPLICATE_Appl6hrPlevPt;   time-point;           XY-P23;            ANY;                ANY
+extra;     wap;           atmos;      6hrPt;          APPLICATE_Appl6hrPlevPt;   time-point;           XY-P23;            ANY;                ANY
+extra;      zg;           atmos;      6hrPt;          APPLICATE_Appl6hrPlevPt;   time-point;           XY-P23;            ANY;                ANY
+cmor;     hfss;           atmos;        day;          CMIP6_day;                 time-mean;            XY-na;             ANY;                ANY
+cmor;     hfls;           atmos;        day;          CMIP6_day;                 time-mean;            XY-na;             ANY;                ANY
+cmor;       ts;           atmos;        day;          CMIP6_Eday;                time-mean;            XY-na;             ANY;                ANY
+cmor;     huss;           atmos;        day;          CMIP6_day;                 time-mean;            XY-na;             ANY;                ANY
+cmor;     mrso;           land;         day;          CMIP6_day;                 time-mean;            XY-na;             ANY;                ANY
+cmor;       ps;           atmos;        day;          CMIP6_CFday;               time-mean;            XY-na;             ANY;                ANY
+extra;   uqint;           atmos;        day;          APPLICATE_Applday;         time-mean;            XY-na;             ANY;                ANY
+extra;   vqint;           atmos;        day;          APPLICATE_Applday;         time-mean;            XY-na;             ANY;                ANY
+extra;      ua;           atmos;        day;          APPLICATE_AppldayPlev;     time-mean;            XY-P23;            ANY;                ANY
+extra;      va;           atmos;        day;          APPLICATE_AppldayPlev;     time-mean;            XY-P23;            ANY;                ANY
+extra;      ta;           atmos;        day;          APPLICATE_AppldayPlev;     time-mean;            XY-P23;            ANY;                ANY
+extra;     wap;           atmos;        day;          APPLICATE_AppldayPlev;     time-mean;            XY-P23;            ANY;                ANY
+extra;      zg;           atmos;        day;          APPLICATE_AppldayPlev;     time-mean;            XY-P23;            ANY;                ANY

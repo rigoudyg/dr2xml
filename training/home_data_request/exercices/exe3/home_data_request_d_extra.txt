@@ -1,0 +1,5 @@
+#------------------------------------------------------------------------------------------------------------------------------------------------------
+#TYPE;    VARNAME;         REALM;     FREQUENCY;     TABLE;                     TEMPORAL_SHP;         SPATIAL_SHP;       EXPNAME;            MIP
+#------------------------------------------------------------------------------------------------------------------------------------------------------
+# (d) requesting a totally new variable, that is NOT defined in the CMIP6 standards
+extra;  pblh;             atmos;      mon;           TRAINING_monExe3;           ANY;                  ANY;               ANY;                ANY

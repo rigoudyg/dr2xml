@@ -1,0 +1,11 @@
+#------------------------------------------------------------------------------------------------------------------------------------------------------
+#TYPE;    VARNAME;         REALM;     FREQUENCY;     TABLE;                     TEMPORAL_SHP;         SPATIAL_SHP;       EXPNAME;                  MIP
+#------------------------------------------------------------------------------------------------------------------------------------------------------
+extra;   ANY;             ANY;       ANY;           PRIMAVERA_Prim3hr;         ANY;                  ANY;               ANY;                HighResMIP
+extra;   ANY;             ANY;       ANY;           PRIMAVERA_Prim6hrPt;       ANY;                  ANY;               ANY;                HighResMIP
+extra;   ANY;             ANY;       ANY;           PRIMAVERA_PrimOday;        ANY;                  ANY;               ANY;                HighResMIP
+extra;   ANY;             ANY;       ANY;           PRIMAVERA_PrimOmon;        ANY;                  ANY;               ANY;                HighResMIP
+extra;   ANY;             ANY;       ANY;           PRIMAVERA_PrimSIday;       ANY;                  ANY;               ANY;                HighResMIP
+extra;   ANY;             ANY;       ANY;           PRIMAVERA_Primday;         ANY;                  ANY;               ANY;                HighResMIP
+extra;   ANY;             ANY;       ANY;           PRIMAVERA_PrimdayPt;       ANY;                  ANY;               ANY;                HighResMIP
+extra;   ANY;             ANY;       ANY;           PRIMAVERA_Primmon;         ANY;                  ANY;               ANY;                HighResMIP

@@ -10,7 +10,6 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 import copy
 import json
 import os
-
 import sys
 from collections import OrderedDict
 from functools import reduce
@@ -160,3 +159,40 @@ def format_json_before_writing(settings):
 def write_json_content(filename, settings):
     with open(filename, "w") as fp:
         json.dump(format_json_before_writing(copy.deepcopy(settings)), fp)
+
+
+def is_elt_applicable(elt, attribute=None, included=None, excluded=None):
+    if attribute is not None:
+        if isinstance(elt, tuple):
+            attr = tuple([e.__getattribute__(attribute) for e in elt])
+        else:
+            attr = elt.__getattribute__(attribute)
+    else:
+        attr = elt
+    test = True
+    if test and excluded is not None and len(excluded) > 0 and attr in excluded:
+        test = False
+    if test and included is not None and len(included) > 0 and attr not in included:
+        test = False
+    return test
+
+
+def convert_string_to_year(data):
+    try:
+        return int(float(data))
+    except:
+        logger = get_logger()
+        logger.debug("Input data to convert to float: %s" % data)
+        return None
+
+
+def check_objects_equals(obj1, obj2):
+    rep = isinstance(obj1, type(obj2))
+    if rep:
+        if isinstance(obj1, (list, tuple, set)):
+            rep = sorted(list(obj1)) == sorted(list(obj2))
+        elif isinstance(obj1, (dict, OrderedDict)):
+            rep = check_objects_equals(list(obj1), list(obj2)) and all(obj1[elt] == obj2[elt] for elt in list(obj1))
+        else:
+            rep = obj1 == obj2
+    return rep

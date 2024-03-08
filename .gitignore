@@ -4,6 +4,8 @@
 /spare.py
 *~
 *.pyc
+__pycache__
+.ipynb_checkpoints
 .ipynb_checkpoints/*
 toy/
 old/
@@ -28,3 +30,8 @@ create_file_defs.sh
 tests/htmlcov
 tests/test*/output_*
 /sphinx/build/
+/dr2xml_list_perso_and_dev_file_names
+dr2xml_output/dr2xml_*.xml
+dr2xml_output/exercices/*/dr2xml_*.xml
+*.pyc
+/scripts/output_labs/

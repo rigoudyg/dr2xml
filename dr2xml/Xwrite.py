@@ -24,7 +24,7 @@ from logger import get_logger
 from .config import get_config_variable, set_config_variable, add_value_in_dict_config_variable
 
 # Interface to Data Request
-from .dr_interface import get_scope
+from .dr_interface import get_dr_object
 
 from .xml_interface import DR2XMLElement, create_pretty_xml_doc, find_rank_xml_subelement, wrv
 
@@ -44,7 +44,7 @@ from .grids import change_domain_in_grid, change_axes_in_grid, get_grid_def_with
 
 # Variables tools
 from .vars_interface.cmor import ping_alias, get_simplevar
-from .vars_interface.generic_data_request import endyear_for_CMORvar, get_grid_choice
+from .vars_interface.generic_data_request import endyear_for_CMORvar
 
 # Post-processing tools
 from .postprocessing import process_vertical_interpolation, process_zonal_mean, process_diurnal_cycle, \
@@ -118,9 +118,9 @@ def create_xios_aux_elmts_defs(sv, alias, table, context, target_hgrid_id, zgrid
     # must exclude COSP outputs which are already interpolated to height or P7 levels
     logger.debug("Deal with %s, %s, %s" % (sv.label, prefix + sv.label, sv.label_without_psuffix))
     pingvars = get_config_variable("pingvars")
-    if (ssh[0:4] == 'XY-P' and ssh != 'XY-P7') or \
-            ssh[0:3] == 'Y-P' or (ssh == "XY-perso" and prefix + sv.label not in pingvars) or \
-            ((ssh[0:5] == 'XY-na' or ssh[0:4] == 'Y-na') and
+    if (ssh.startswith('XY-P') and ssh not in ['XY-P7', ]) or \
+            ssh.startswith('Y-P') or (ssh in ["XY-perso", ] and prefix + sv.label not in pingvars) or \
+            ((ssh.startswith('XY-na') or ssh.startswith('Y-na')) and
              prefix + sv.label not in pingvars and sv.label_without_psuffix != sv.label):
         # TBD check - last case is for singleton
         last_grid_id, last_field_id = process_vertical_interpolation(sv, alias, last_grid_id)
@@ -128,7 +128,7 @@ def create_xios_aux_elmts_defs(sv, alias, table, context, target_hgrid_id, zgrid
         grid_with_vertical_interpolation = True
     elif ssh in ["XY-HG", ]:
         # Handle interpolation on a height level over the ground
-        logger.info("Deal with XY-HG spatial shape for %s,%s" % (sv.label, sv.ref_var))
+        logger.debug("Deal with XY-HG spatial shape for %s,%s" % (sv.label, sv.ref_var))
         last_field_id, last_grid_id = process_levels_over_orog(sv, alias, last_grid_id)
 
     #
@@ -440,10 +440,14 @@ def write_xios_file_def(filename, svars_per_table, year, dummies, skipped_vars_p
             ok = False
             logger.warning("Model component %s is required by CMIP6 CV for experiment %s and not present "
                            "(present=%s)" % (c, experiment_id, repr(actual_components)))
-    if len(allowed_components) > 0:
-        for c in actual_components:
-            if c not in allowed_components and c not in required_components:
-                ok = False or internal_dict['bypass_CV_components']
+    if internal_dict["bypass_CV_components"]:
+        ok = True
+    elif len(allowed_components) > 0:
+        not_allowed_components = [c for c in actual_components if c not in allowed_components and
+                                  c not in required_components]
+        if len(not_allowed_components) > 0:
+            ok = False
+            for c in not_allowed_components:
                 logger.warning("Warning: Model component %s is present but not required nor allowed (%s)" %
                                (c, repr(allowed_components)))
     if not ok:
@@ -458,7 +462,7 @@ def write_xios_file_def(filename, svars_per_table, year, dummies, skipped_vars_p
     set_config_variable("domain_defs", OrderedDict())
     # Add xml_file_definition
     xml_file_definition = DR2XMLElement(tag="file_definition")
-    _, hgrid, _, _, _ = internal_dict['grids'][get_grid_choice()][context]
+    _, hgrid, _, _, _ = internal_dict['grids'][get_settings_values("internal_values", "grid_choice")][context]
     files_list = determine_files_list(svars_per_table, enddate, year, debug)
     for file_dict in files_list:
         write_xios_file_def_for_svars_list(hgrid=hgrid, xml_file_definition=xml_file_definition, dummies=dummies,
@@ -578,8 +582,8 @@ def write_xios_file_def_for_svars_list(vars_list, hgrid, xml_file_definition, fr
                                                    target_hgrid_id=target_hgrid_id, zgrid_id=zgrid_id,
                                                    alias_ping=alias_ping, source_grid=source_grid)
             xml_file.append(end_field)
-            actually_written_vars.append((svar.label, svar.long_name, svar.mipTable, svar.frequency, svar.Priority,
-                                          svar.spatial_shp))
+            actually_written_vars.append((svar.label, svar.long_name, svar.stdname, svar.mipTable, svar.frequency,
+                                          svar.Priority, svar.spatial_shp))
     # Add content to xml_file to out
     if found:
         if found_begin_A:
@@ -763,7 +767,7 @@ def get_split_info(sv, table, enddate, year, debug):
             endmonth = "01"
             endday = "01"
             split_last_date = "{}-{}-{} 00:00:00".format(endyear, endmonth, endday)
-        sc = get_scope()
+        sc = get_dr_object("get_scope")
         split_freq = determine_split_freq(sv, grid_choice, sc.mcfg, context)
     return split_freq_format, split_last_date, split_start_offset, split_end_offset, split_freq
 
@@ -799,7 +803,7 @@ def get_grid_info(sv, grid, table):
             target_hgrid_id = cfsites_domain_id
             zgrid_id = None
         else:
-            target_hgrid_id = internal_dict["ping_variables_prefix"] + grid
+            target_hgrid_id = internal_dict["grid_prefix"] + grid
             zgrid_id = "TBD : Should create zonal grid for CMIP6 standard grid %s" % grid
         grid_label, grid_resolution, grid_description = DR_grid_to_grid_atts(grid)
 

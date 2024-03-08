@@ -15,7 +15,9 @@
 """
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+import copy
 import sys
+import re
 
 # Utilities
 from .settings_interface import get_settings_values
@@ -28,7 +30,27 @@ from logger import get_logger
 from .config import add_value_in_list_config_variable
 
 # Interface to Data Request
-from .dr_interface import print_DR_errors
+from .dr_interface import get_dr_object
+
+
+def get_info_from_freq(freq):
+    freq_regexp = re.compile(r"(?P<period>\d*)(?P<frequency>[a-zA-Z]+)")
+    freq_match = freq_regexp.match(freq)
+    if freq_match is None:
+        raise ValueError("Unknown frequency given %s" % freq)
+    else:
+        period = freq_match.groupdict()["period"]
+        if period is None or len(period) == 0:
+            period = "1"
+        frequency = freq_match.groupdict()["frequency"]
+        if frequency.endswith("Pt"):
+            time_point = True
+            frequency = frequency[:-2]
+        else:
+            time_point = False
+        conversion_dict = dict(hr="h", day="d", mon="mo", monC="mo", hrCM="mo", yr="y")
+        frequency = conversion_dict.get(frequency, frequency)
+    return period, frequency, time_point
 
 
 def freq2datefmt(in_freq, operation, table):
@@ -45,80 +67,68 @@ def freq2datefmt(in_freq, operation, table):
     datefmt = False
     offset = None
     freq = in_freq
-    if freq in ["dec", "10y"]:
+    period, frequency, _ = get_info_from_freq(in_freq)
+    period = int(period)
+    frequencies_list = ["s", "mi", "h", "d", "mo", "y"]
+    frequencies_len = [60, 60, 24, 30, 12, 10]
+    frequencies_datefmt = ["%y%mo%d%h%mi%s", "%y%mo%d%h%mi%s", "%y%mo%d%h%mi", "%y%mo%d", "%y%mo%d", "%y%mo"]
+    if frequency in ["dec", ] or (frequency in ["y", ] and period >= 10):
+        datefmt = "%y"
+        frequency = "y"
         if not any("dec" in f for f in too_long_periods):
-            datefmt = "%y"
-            if operation in ["average", "minimum", "maximum"]:
-                offset = "5y"
-            else:
-                offset = "10y"
+            period = 10
         else:
-            freq = "yr"  # Ensure dates in filenames are consistent with content, even if not as required
-    if freq in ["yr", "yrPt", "1y"]:
-        if not any("yr" in f for f in too_long_periods):
+            period = 1
+    if frequency in ["y", ] and period < 10:
+        if not any("y" in f for f in too_long_periods):
             datefmt = "%y"
-            if operation in ["average", "minimum", "maximum"]:
-                offset = False
-            else:
-                offset = "1y"
+            frequency = "y"
+            period = 1
         else:
-            freq = "mon"  # Ensure dates in filenames are consistent with content, even if not as required
-    if freq in ["mon", "monC", "monPt", "1mo"]:
+            frequency = "mo"
+    if frequency in ["fx", ]:
+        pass
+    elif freq in ["1hrClimMon", "1hrCM"]:
+        datefmt = "%y%mo%d%h%mi"
+        offset = "s"
+        period = 0
+    elif frequency in ["subhr", "ts"]:
+        datefmt = "%y%mo%d%h%mi%s"
+        offset = "ts"
+        if frequency in ["subhr", ] and "CFsubhr" in table:
+            period, offset, _ = get_info_from_freq(internal_dict["CFsubhr_frequency"])
+        elif operation in ["average", "minimum", "maximum"]:
+            # Does it make sense ??
+            # assume that 'subhr' means every timestep
+            period = period / 2
+    elif frequency in ["d", ] and period == 10:
+        datefmt = "%y%mo%d"
+        if operation in ["average", "minimum", "maximum"]:
+            offset = "h"
+            period = 10
+        else:
+            period = 2.5
+            offset = frequency
+    elif (frequency in ["y", ] and period < 10) or frequency in ["mo", ]:
         datefmt = "%y%mo"
         if operation in ["average", "minimum", "maximum"]:
             offset = False
         else:
-            offset = "1mo"
-    elif freq in ["day", "1d"]:
-        datefmt = "%y%mo%d"
+            offset = frequency
+    elif (frequency in ["y", ] and period == 10) or frequency in ["d", "h"]:
+        datefmt = frequencies_datefmt[frequencies_list.index(frequency)]
         if operation in ["average", "minimum", "maximum"]:
-            offset = "12h"
-        else:
-            offset = "1d"
-    elif freq in ["10day", "10d"]:
-        datefmt = "%y%mo%d"
-        if operation in ["average", "minimum", "maximum"]:
-            offset = "30h"
-        else:
-            offset = "2.5d"
-    elif freq in ["5day", "5d"]:
-        datefmt = "%y%mo%d"
-        if operation in ["average", "minimum", "maximum"]:
-            offset = "60h"
-        else:
-            offset = "5d"
-    elif freq in ["6hr", "6hrPt", "3hr", "3hrPt", "3hrClim", "1hr", "1hrPt", "hr", "6h", "3h", "1h"]:
-        datefmt = "%y%mo%d%h%mi"
-        if freq in ["6hr", "6hrPt", "6h"]:
-            if operation in ["average", "minimum", "maximum"]:
-                offset = "3h"
+            if period % 2 == 0:
+                period = period // 2
+                offset = frequency
             else:
-                offset = "6h"
-        elif freq in ["3hr", "3hrPt", "3hrClim", "3h"]:
-            if operation in ["average", "minimum", "maximum"]:
-                offset = "90mi"
-            else:
-                offset = "3h"
-        elif freq in ["1hr", "1h", "hr", "1hrPt"]:
-            if operation in ["average", "minimum", "maximum"]:
-                offset = "30mi"
-            else:
-                offset = "1h"
-    elif freq in ["1hrClimMon", "1hrCM"]:
-        datefmt = "%y%mo%d%h%mi"
-        offset = "0s"
-    elif freq in ["subhr", "subhrPt", "1ts"]:
-        datefmt = "%y%mo%d%h%mi%s"
-        if operation in ["average", "minimum", "maximum"]:
-            # Does it make sense ??
-            # assume that 'subhr' means every timestep
-            offset = "0.5ts"
+                period = frequencies_len[frequencies_list.index(frequency) - 1] * period // 2
+                offset = frequencies_list[frequencies_list.index(frequency) - 1]
         else:
-            offset = "1ts"
-            if "subhr" in freq and "CFsubhr" in table:
-                offset = internal_dict["CFsubhr_frequency"]
-    elif "fx" in freq:
-        pass  # WIP doc v6.2.3 - Apr. 2017: if frequency="fx", [_<time_range>] is ommitted
+            offset = frequency
+    if offset:
+        offset = str(period) + offset
+
     if freq in ["1hrClimMon", "1hrCM"]:
         offset_end = "0s"
     elif offset is not None:
@@ -158,7 +168,7 @@ def analyze_cell_time_method(cm, label, table):
             # Case of fixed fields required by home data request
             operation = "once"
         else:
-            if print_DR_errors:
+            if get_dr_object("get_data_request").print_DR_errors:
                 logger.error("DR Error: cell_time_method is None for %15s in table %s, averaging" % (label, table))
             operation = "average"
     # ----------------------------------------------------------------------------------------------------------------
@@ -199,10 +209,6 @@ def analyze_cell_time_method(cm, label, table):
                     " for %15s in table %s is well handled by 'detect_missing'" % (label, table))
         operation = "average"
         detect_missing = True
-    elif "time: mean where sea" in cm:  # [amnesi-tmn]:
-        # Area Mean of Ext. Prop. on Sea Ice : pas utilisee
-        logger.warning("time: mean where sea is not supposed to be used (%s,%s)" % (label, table))
-    # -------------------------------------------------------------------------------------
     elif "time: mean where sea" in cm:  # [amnesi-tmn]:
         # Area Mean of Ext. Prop. on Sea Ice : pas utilisee
         logger.warning("time: mean where sea is not supposed to be used (%s,%s)" % (label, table))
@@ -384,7 +390,8 @@ def cmip6_freq_to_xios_freq(freq, table):
     :return:
     """
     logger = get_logger()
-    if freq in ["subhr", "subhrPt"]:
+    period, frequency, _ = get_info_from_freq(freq)
+    if frequency in ["subhr", ]:
         if table == "CFsubhr":
             rep = get_settings_values("internal", "CFsubhr_frequency")
         elif table is None:
@@ -393,33 +400,9 @@ def cmip6_freq_to_xios_freq(freq, table):
         else:
             rep = "1ts"
     else:
-        corresp = {
-            "1hr": "1h",
-            "1hrPt": "1h",
-            "hr": "1h",
-            "3hr": "3h",
-            "3hrPt": "3h",
-            "6hr": "6h",
-            "6hrPt": "6h",
-            #
-            "day": "1d",
-            "5day": "5d",
-            "10day": "10d",
-            #
-            "mon": "1mo",
-            "monPt": "1mo",
-            #
-            "yr": "1y",
-            "yrPt": "1y",
-            #
-            "dec": "10y",
-            #
-            "fx": "1d",
-            #
-            "monC": "1mo",
-            "1hrCM": "1mo",
-        }
-        rep = corresp[freq]
+        if frequency in ["fx", ]:
+            frequency = "d"
+        rep = period + frequency
     return rep
 
 
@@ -529,6 +512,6 @@ def DR_grid_to_grid_atts(grid):
     if grid in DR_grid_to_grid_atts_dict:
         return DR_grid_to_grid_atts_dict[grid]
     else:
-        default = DR_grid_to_grid_atts_dict["default"]
+        default = copy.deepcopy(DR_grid_to_grid_atts_dict["default"])
         default[-1] = default[-1] % grid
         return default

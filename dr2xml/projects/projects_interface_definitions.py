@@ -6,6 +6,7 @@ Interface to project settings
 """
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+import os
 import re
 from collections import OrderedDict
 
@@ -15,6 +16,7 @@ from dr2xml.config import get_config_variable
 from dr2xml.settings_interface.py_settings_interface import format_dict_for_printing, is_key_in_lset, \
     get_variable_from_lset_without_default, is_key_in_sset, get_variable_from_sset_without_default
 from dr2xml.utils import Dr2xmlError, read_json_content
+from logger import get_logger
 
 
 def return_value(value, common_dict=dict(), internal_dict=dict(), additional_dict=dict(),
@@ -30,6 +32,7 @@ def return_value(value, common_dict=dict(), internal_dict=dict(), additional_dic
 
 def determine_value(key_type=None, keys=list(), func=None, fmt=None, src=None, common_dict=dict(), internal_dict=dict(),
                     additional_dict=dict(), allow_additional_keytypes=True):
+    logger = get_logger()
     if key_type in ["combine", ] or (key_type is None and func is not None):
         keys = [return_value(key, common_dict=common_dict, internal_dict=internal_dict,
                              additional_dict=additional_dict, allow_additional_keytypes=allow_additional_keytypes)
@@ -57,6 +60,7 @@ def determine_value(key_type=None, keys=list(), func=None, fmt=None, src=None, c
                         value = func(*keys)
                         found = True
                     except:
+                        logger.debug("Issue calling func %s with arguments %s" % (str(func), str(keys)))
                         value = None
                         found = False
                 if found and fmt is not None:
@@ -124,13 +128,13 @@ def determine_value(key_type=None, keys=list(), func=None, fmt=None, src=None, c
             else:
                 value = None
         elif allow_additional_keytypes:
-            if key_type in ["DR_version", ] and allow_additional_keytypes:
-                from dr2xml.dr_interface import get_DR_version
-                value = get_DR_version()
+            if key_type in ["scope", ] and allow_additional_keytypes:
+                from dr2xml.dr_interface import get_dr_object
+                value = get_dr_object("get_scope")
                 found = True
-            elif key_type in ["scope", ] and allow_additional_keytypes:
-                from dr2xml.dr_interface import get_scope
-                value = get_scope().__dict__
+            elif key_type in ["data_request", ] and allow_additional_keytypes:
+                from dr2xml.dr_interface import get_dr_object
+                value = get_dr_object("get_data_request")
                 found = True
             elif key_type in ["variable", ] and "variable" in additional_dict:
                 value = additional_dict["variable"]
@@ -162,7 +166,10 @@ def determine_value(key_type=None, keys=list(), func=None, fmt=None, src=None, c
                             i_keys += 1
                         else:
                             found = False
-                    elif value is not None and key in value.__dict__:
+                    elif value is not None and key in ["__call__", ]:
+                        value = value.__call__()
+                        i_keys += 1
+                    elif value is not None and key in value.__dir__():
                         value = value.__getattribute__(key)
                         i_keys += 1
                     else:
@@ -214,6 +221,67 @@ class Settings(object):
     def __repr__(self):
         return self.__str__()
 
+    def dump_doc(self, force_void=False):
+        raise NotImplementedError("Dump documentation is not implemented for class %s" % type(self))
+
+    def dump_doc_inner(self, value, force_void=False, format_struct=True, remove_new_lines=False):
+        if isinstance(value, Settings):
+            rep = value.dump_doc(force_void=force_void)
+        elif isinstance(value, (list, set)):
+            rep = list()
+            if len(value) == 0 and force_void:
+                rep.append(list())
+            elif len(value) == 1:
+                rep.extend(self.dump_doc_inner(value[0], force_void=force_void, format_struct=format_struct))
+            elif format_struct:
+                rep.append("   ")
+                for elt in value:
+                    rep.extend(["   - %s" % subelt for subelt in self.dump_doc_inner(elt, force_void=force_void,
+                                                                                     format_struct=format_struct)])
+            else:
+                for elt in value:
+                    rep.extend(self.dump_doc_inner(elt, force_void=force_void, format_struct=format_struct))
+        elif isinstance(value, (dict, OrderedDict)):
+            rep = list()
+            if len(value) == 0 and force_void:
+                rep.append(type(value).__call__())
+            else:
+                if format_struct:
+                    rep.append("   ")
+                for elt in value:
+                    if format_struct:
+                        tmp_rep = "   - %s: %s"
+                    else:
+                        tmp_rep = "%s= %s"
+                    val = self.dump_doc_inner(value[elt], force_void=force_void)
+                    elt = self.dump_doc_inner(elt, force_void=force_void)
+                    if len(val) == 1:
+                        tmp_rep = tmp_rep % (elt[0], val[0])
+                        rep.append(tmp_rep)
+                    else:
+                        tmp_rep = tmp_rep % (elt[0], "")
+                        rep.append(tmp_rep)
+                        rep.append("   ")
+                        rep.extend(["      %s" % v for v in val])
+        elif isinstance(value, six.string_types):
+            if format_struct:
+                rep = ["'%s'" % value, ]
+            else:
+                rep = ["%s" % value, ]
+        elif isinstance(value, type(return_value)):
+            rep = ["%s()" % value.__name__, ]
+        else:
+            rep = [value, ]
+        if remove_new_lines:
+            new_rep = list()
+            for elt in rep:
+                if isinstance(elt, six.string_types):
+                    new_rep.append(elt.replace(os.linesep, "***newline***"))
+                else:
+                    new_rep.append(elt)
+            rep = new_rep
+        return rep
+
 
 class ValueSettings(Settings):
 
@@ -225,13 +293,85 @@ class ValueSettings(Settings):
         if "keys" in self.updated and not isinstance(self.keys, list):
             self.keys = [self.keys, ]
 
+    def dump_doc(self, force_void=False):
+        rep = list()
+        tmp_rep = ""
+        key_type = self.key_type
+        if key_type in ["laboratory", "simulation", "dict", "internal", "common", "json"]:
+            if key_type in ["json", ]:
+                tmp_rep = "read_json_file(%s)"
+                tmp_rep = tmp_rep % self.dump_doc_inner(self.src, format_struct=False)[0]
+            else:
+                tmp_rep = "%s" % key_type
+            keys_values = self.dump_doc_inner(self.keys, format_struct=False)
+            for key_value in keys_values:
+                tmp_rep += "[%s]" % key_value
+        elif key_type in ["combine", ]:
+            tmp_rep = ", ".join(self.dump_doc_inner(self.keys, format_struct=False))
+        elif key_type in ["data_request", ]:
+            tmp_rep = "%s" % key_type
+            keys_values = self.dump_doc_inner(self.keys, format_struct=False)
+            for key_value in keys_values:
+                if key_value in ["__call__", ]:
+                    tmp_rep += "()"
+                else:
+                    tmp_rep += ".%s" % key_value
+        elif key_type in ["config", "variable"]:
+            tmp_rep = "%s" % key_type
+            if key_type in ["config", ]:
+                tmp_rep = "dr2xml." + tmp_rep
+            keys_values = self.dump_doc_inner(self.keys, format_struct=False)
+            for key_value in keys_values:
+                tmp_rep += ".%s" % key_value
+        if self.func is not None:
+            tmp_rep += self.dump_doc_inner(self.func, format_struct=False)[0]
+        if self.fmt is not None:
+            tmp_rep = self.dump_doc_inner(self.fmt, force_void=force_void, remove_new_lines=True)[0] + \
+                      ".format(%s)" % tmp_rep
+        if len(tmp_rep) == 0:
+            rep.extend(super().dump_doc(force_void=force_void))
+        else:
+            rep.append(tmp_rep)
+        return rep
+
 
 class ParameterSettings(Settings):
 
     def init_dict_default(self):
         return dict(skip_values=list(), forbidden_patterns=list(), conditions=list(), default_values=list(),
                     cases=list(), authorized_values=list(), authorized_types=list(), corrections=dict(),
-                    output_key=None, num_type="string", is_default=False, fatal=False, key=None)
+                    output_key=None, num_type="string", is_default=False, fatal=False, key=None, help="TODO")
+
+    def dump_doc(self, force_void=False):
+        rep = list()
+        rep.append("   %s" % self.key)
+        fmt = "      %s"
+        rep.append(fmt % "")
+        rep.append(fmt % self.help)
+        rep.append(fmt % "")
+        output_keys = ["fatal", "default_values", "skip_values", "authorized_values", "authorized_types",
+                      "forbidden_patterns", "conditions", "cases", "corrections", "num_type"]
+        if self.__getattribute__("output_key") != self.key:
+            output_keys.insert(0, "output_key")
+        for key in output_keys:
+            value = self.__getattribute__(key)
+            value = self.dump_doc_inner(value, force_void=force_void or key in ["default_values", ],
+                                        format_struct=key not in ["cases", "conditions"])
+            add = False
+            key = key.replace("_", " ")
+            if len(value) == 1:
+                value = "%s" % value[0]
+                value = value.strip()
+                if len(value) > 0:
+                    rep.append(fmt % ("%s: %s" % (key, value)))
+                    add = True
+            elif len(value) > 1:
+                rep.append(fmt % ("%s:" % key))
+                rep.extend(fmt % elt for elt in value)
+                add = True
+            if add:
+                rep.append(fmt % "")
+        return rep
 
     def __init__(self, *args, **kwargs):
         super(ParameterSettings, self).__init__(*args, **kwargs)
@@ -301,7 +441,7 @@ class ParameterSettings(Settings):
             if authorized_values is not None:
                 test = relevant and value in authorized_values
         if test:
-            test = not (any([re.compile(pattern).match(value) for pattern in self.forbidden_patterns]))
+            test = not (any([re.compile(pattern).match(str(value)) for pattern in self.forbidden_patterns]))
         return relevant, test
 
     def correct_value(self, value, internal_values=dict(), common_values=dict(), additional_dict=dict(),
@@ -376,7 +516,30 @@ class TagSettings(Settings):
 
     def init_dict_default(self):
         return dict(attrs_list=list(), attrs_constraints=dict(), vars_list=list(), vars_constraints=dict(),
-                    comments_list=list(), comments_constraints=dict())
+                    comments_list=list(), comments_constraints=dict(), help="TODO", key="TODO")
+
+    def dump_doc(self, force_void=False):
+        rep = list()
+        rep.append("   %s" % self.key)
+        fmt = "      %s"
+        rep.append(fmt % "")
+        rep.append(fmt % self.help)
+        if len(self.comments_list) > 0:
+            rep.append(fmt % "")
+            rep.append(fmt % "Comments:")
+            for comment in self.comments_list:
+                rep.extend([fmt % elt for elt in self.comments_constraints[comment].dump_doc(force_void=force_void)])
+        if len(self.attrs_list) > 0:
+            rep.append(fmt % "")
+            rep.append(fmt % "Attributes:")
+            for attr in self.attrs_list:
+                rep.extend([fmt % elt for elt in self.attrs_constraints[attr].dump_doc(force_void=force_void)])
+        if len(self.vars_list) > 0:
+            rep.append(fmt % "")
+            rep.append(fmt % "Variables")
+            for var in self.vars_list:
+                rep.extend([fmt % elt for elt in self.vars_constraints[var].dump_doc(force_void=force_void)])
+        return rep
 
     def update(self, other):
         super(TagSettings, self).update(other)
@@ -415,8 +578,17 @@ class FunctionSettings(Settings):
         self.func = func
         self.options = options
 
+    def dump_doc(self, force_void=False):
+        rep = list()
+        tmp_rep = self.func.__name__ + "(%s)"
+        options = self.dump_doc_inner(self.options, force_void=force_void, format_struct=False)
+        tmp_rep = tmp_rep % ", ".join(options)
+        rep.append(tmp_rep)
+        return rep
+
     def __call__(self, *args, additional_dict=dict(), internal_dict=dict(), common_dict=dict(),
                  allow_additional_keytypes=True):
+        logger = get_logger()
         test = True
         for key in sorted(list(self.options)):
             key_test, val = return_value(self.options[key], common_dict=common_dict, internal_dict=internal_dict,
@@ -429,7 +601,7 @@ class FunctionSettings(Settings):
         try:
             value = self.func(*args, **self.options)
         except BaseException as e:
-            # print(e)
+            logger.debug("Issue calling %s with arguments %s and options %s" % (str(self.func), str(args), str(self.options)))
             value = None
             test = False
         return test, value
@@ -443,6 +615,31 @@ class ConditionSettings(Settings):
         if not isinstance(reference_values, list):
             reference_values = [reference_values, ]
         self.reference_values = reference_values
+
+    def dump_doc(self, force_void=False):
+        rep = list()
+        rep.append("   Condition:")
+        rep.append("   ")
+        fmt = "      %s"
+        output_keys = ["check_value", "check_to_do", "reference_values"]
+        for key in output_keys:
+            value = self.__getattribute__(key)
+            value = self.dump_doc_inner(value, force_void=force_void)
+            add = False
+            key = key.replace("_", " ")
+            if len(value) == 1:
+                value = "%s" % value[0]
+                value = value.strip()
+                if len(value) > 0:
+                    rep.append(fmt % ("%s: %s" % (key, value)))
+                    add = True
+            elif len(value) > 1:
+                rep.append(fmt % ("%s:" % key))
+                rep.extend("   " + fmt % elt for elt in value)
+                add = True
+            if add:
+                rep.append(fmt % "")
+        return rep
 
     def check(self, common_dict=dict(), internal_dict=dict(), additional_dict=dict(), allow_additional_keytypes=True):
         test = False
@@ -482,6 +679,31 @@ class CaseSettings(Settings):
             conditions = [conditions, ]
         self.conditions = conditions
         self.value = value
+
+    def dump_doc(self, force_void=False):
+        rep = list()
+        rep.append("   Case:")
+        rep.append("   ")
+        fmt = "      %s"
+        output_keys = ["conditions", "value"]
+        for key in output_keys:
+            value = self.__getattribute__(key)
+            value = self.dump_doc_inner(value, force_void=force_void, format_struct=key not in ["conditions", ])
+            add = False
+            key = key.replace("_", " ")
+            if len(value) == 1:
+                value = "%s" % value[0]
+                value = value.strip()
+                if len(value) > 0:
+                    rep.append(fmt % ("%s: %s" % (key, value)))
+                    add = True
+            elif len(value) > 1:
+                rep.append(fmt % ("%s:" % key))
+                rep.extend("   " + fmt % elt for elt in value)
+                add = True
+            if add:
+                rep.append(fmt % "")
+        return rep
 
     def check(self, common_dict=dict(), internal_dict=dict(), additional_dict=dict(), allow_additional_keytypes=True):
         test, value = return_value(self.value, common_dict=common_dict, additional_dict=additional_dict,

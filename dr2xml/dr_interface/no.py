@@ -7,23 +7,87 @@ Interface if no data request should be used.
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+from collections import OrderedDict
+
 from .definition import Scope, ListWithItems
+from .definition import DataRequest as DataRequestBasic
+from .definition import SimpleObject
+from .definition import SimpleCMORVar as SimpleCMORVarBasic
+from .definition import SimpleDim as SimpleDimBasic
 
 
-print_DR_errors = False
-print_DR_stdname_errors = False
-scope = Scope()
+scope = None
+data_request = None
 
 
-def get_DR_version():
-    """
-    Get the version of the DR
-    """
-    return "No data request"
+class DataRequest(DataRequestBasic):
+    def get_version(self):
+        return "No Data Request"
+
+    def get_list_by_id(self, collection, **kwargs):
+        return ListWithItems()
+
+    def get_sectors_list(self):
+        return self.get_list_by_id("grids")
+
+    def get_experiment_label(self, experiment):
+        return ""
+
+    def get_cmor_var_id_by_label(self, label):
+        return list()
+
+    def get_element_uid(self, id=None, **kwargs):
+        if id is None:
+            return list()
+        else:
+            return None
+
+    def get_request_by_id_by_sect(self, id, request):
+        return list()
+
+    def get_single_levels_list(self):
+        return list()
+
+    def get_grids_dict(self):
+        return OrderedDict()
+
+    def get_dimensions_dict(self):
+        return OrderedDict()
+
+    def get_cmorvars_list(self, sizes=None, **kwargs):
+        if sizes is not None:
+            sc = get_scope()
+            sc.update_mcfg(sizes)
+        return dict(), list()
 
 
-def get_scope(tierMax=None):
+def initialize_data_request():
+    global data_request
+    if data_request is None:
+        data_request = DataRequest(print_DR_errors=False, print_DR_stdname_errors=False)
+    return data_request
+
+
+def get_data_request():
+    if data_request is None:
+        return initialize_data_request()
+    else:
+        return data_request
+
+
+def initialize_scope(tier_max):
+    global scope
+    dq = get_data_request()
+    if scope is None:
+        scope = Scope()
     return scope
+
+
+def get_scope(tier_max=None):
+    if scope is None:
+        return initialize_scope(tier_max)
+    else:
+        return scope
 
 
 def set_scope(sc):
@@ -32,47 +96,17 @@ def set_scope(sc):
         scope = sc
 
 
-def get_list_of_elements_by_id(id):
-    """
-    Get the list of elements corresponding to the id.
-    """
-    return ListWithItems()
-
-
-def get_sectors_list():
-    return get_list_of_elements_by_id("grids")
-
-
-def get_element_uid(id=None, error_msg=None, raise_on_error=False, check_print_DR_errors=True,
-                    check_print_stdnames_error=False):
-    """
-    Get the uid of an element if precised, else the list of all elements.
-    """
-    if id is None:
-        return list()
-    else:
-        return None
-
-
-def get_experiment_label(experiment):
-    return ""
-
-
-def get_request_by_id_by_sect(id, request):
-    return list()
-
-
-def get_cmor_var_id_by_label(label):
-    return list()
-
-
 def normalize_grid(grid):
     return grid
 
 
-def correct_data_request_dim(dim):
-    pass
+class SimpleCMORVar(SimpleCMORVarBasic):
+    @classmethod
+    def get_from_dr(cls, input_var):
+        return cls()
 
 
-def correct_data_request_variable(variable):
-    pass
+class SimpleDim(SimpleDimBasic):
+    @classmethod
+    def get_from_dr(cls, input_dim):
+        return cls()

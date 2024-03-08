@@ -12,7 +12,7 @@ from collections import defaultdict
 from logger import get_logger
 from dr2xml.settings_interface import get_settings_values
 from dr2xml.utils import print_struct, Dr2xmlError
-from .generic_data_request import select_data_request_CMORvars_for_lab, get_grid_choice
+from .generic_data_request import select_data_request_CMORvars_for_lab
 from .home_data_request import process_home_vars
 
 
@@ -145,7 +145,7 @@ def gather_AllSimpleVars(year=False, select="on_expt_and_year"):
     #
     if internal_dict['listof_home_vars']:
         exp = internal_dict['experiment_for_requests']
-        mip_vars_list = process_home_vars(mip_vars_list, internal_dict["mips"][get_grid_choice()], expid=exp)
+        mip_vars_list = process_home_vars(mip_vars_list, internal_dict["mips"][get_settings_values("internal_values", "grid_choice")], expid=exp)
     else:
         logger.info("Info: No HOMEvars list provided.")
     return mip_vars_list

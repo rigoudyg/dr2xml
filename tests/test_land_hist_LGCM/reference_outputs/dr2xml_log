@@ -1,0 +1,123 @@
+
+ **************************************************
+*
+*              dr2xml version:  current_version
+*   CMIP6 conventions version:  v6.2.4
+*  CMIP6 Data Request version:  01.00.21.post1
+
+*
+ **************************************************
+
+**************************************************
+
+Processing context  surfex
+
+**************************************************
+
+Number of Request Links which apply to MIPS ['AerChemMIP', 'C4MIP', 'CFMIP', 'CMIP', 'CMIP6', 'CORDEX', 'DAMIP', 'DCPP', 'FAFMIP', 'GMMIP', 'GeoMIP', 'HighResMIP', 'ISMIP6', 'LS3MIP', 'LUMIP', 'OMIP', 'PMIP', 'RFMIP', 'SIMIP', 'ScenarioMIP']  is: 268
+Number of Request Links after filtering by excluded_request_links is: 267
+Number of Request Links after filtering by included_request_links is: 267
+Filtering for experiment land-hist, covering years [ 1850.0 , 2014.0 ] in DR
+Number of Request Links which apply to experiment land-hist member 1 and MIPs ['AerChemMIP', 'C4MIP', 'CFMIP', 'CMIP', 'CMIP6', 'CORDEX', 'DAMIP', 'DCPP', 'FAFMIP', 'GMMIP', 'GeoMIP', 'HighResMIP', 'ISMIP6', 'LS3MIP', 'LUMIP', 'OMIP', 'PMIP', 'RFMIP', 'SIMIP', 'ScenarioMIP'] is: 21
+Number of (CMOR variable, grid) pairs for these requestLinks is: 426
+Number once filtered by excluded/included vars and tables and spatial shapes is: 0
+Number of distinct CMOR variables (whatever the grid): 0
+Number of distinct var labels is: 0
+Number of simplified vars is: 0
+Issues with standard names are: []
+homevars file: current_directory/test_land_hist_LGCM/input/home_data_request/home_data_request_perso.txt
+Number of 'cmor', 'dev' and 'perso' among home variables: 3
+Number of 'extra' among home variables: 0
+homevars list: CMIP6_albsrfc sftlakef cltcalipso
+
+Realms for these CMORvars: atmos land
+Processing realm 'aerosol' of context 'surfex' -- no variable asked (skip)
+Processing realm 'atmos atmosChem' of context 'surfex' -- no variable asked (skip)
+Processing realm 'atmos land' of context 'surfex' -- no variable asked (skip)
+Processing realm 'atmosChem' of context 'surfex' -- no variable asked (skip)
+Processing realm 'land landIce' of context 'surfex' -- no variable asked (skip)
+Processing realm 'landIce' of context 'surfex' -- no variable asked (skip)
+Processing realm 'landIce land' of context 'surfex' -- no variable asked (skip)
+Processing realm 'atmos' of context 'surfex'
+Processing realm 'land' of context 'surfex'
+processing file current_directory/test_land_hist_LGCM/input/xml/ping_surfex.xml:
+OK current_directory/test_land_hist_LGCM/input/xml/ping_surfex.xml
+processing file current_directory/test_land_hist_LGCM/input/xml/ping_trip.xml:
+OK current_directory/test_land_hist_LGCM/input/xml/ping_trip.xml
+
+file_def written as current_directory/test_land_hist_LGCM/test_outputs/dr2xml_surfex.xml
+
+
+Some Statistics on actually written variables per frequency+shape...
+                             day P1   1: CMIP6_albsrfc
+       day    XY-na    -------- ---   1
+
+       day --------    -------- ---   1
+
+                              fx P1   1: sftlakef
+        fx    XY-na    -------- ---   1
+
+        fx --------    -------- ---   1
+
+                          E3hrPt P1   1: cltcalipso
+     3hrPt    XY-na    -------- ---   1
+
+     3hrPt --------    -------- ---   1
+
+
+---------- --------    -------- ---   3
+
+
+Some Statistics on actually written variables per variable...
+---------------------------
+--- VARNAME: CMIP6_albsrfc: albedo
+---------------------------
+              *      day_day_XY-na_1 CMIP6_albsrfc
+------------------------
+--- VARNAME: cltcalipso: CALIPSO Total Cloud Fraction
+------------------------
+              * 3hrPt_E3hrPt_XY-na_1 cltcalipso
+----------------------
+--- VARNAME: sftlakef: % of the grid cell occupied by lake
+----------------------
+              *        fx_fx_XY-na_1 sftlakef
+
+ **************************************************
+*
+*              dr2xml version:  current_version
+*   CMIP6 conventions version:  v6.2.4
+*  CMIP6 Data Request version:  01.00.21.post1
+
+*
+ **************************************************
+
+**************************************************
+
+Processing context  trip
+
+**************************************************
+
+Number of distinct CMOR variables (whatever the grid): 0
+Number of distinct var labels is: 0
+Number of simplified vars is: 0
+Issues with standard names are: []
+homevars file: current_directory/test_land_hist_LGCM/input/home_data_request/home_data_request_perso.txt
+Number of 'cmor', 'dev' and 'perso' among home variables: 3
+Number of 'extra' among home variables: 0
+homevars list: CMIP6_albsrfc sftlakef cltcalipso
+
+Realms for these CMORvars: atmos land
+processing file current_directory/test_land_hist_LGCM/input/xml/ping_surfex.xml:
+OK current_directory/test_land_hist_LGCM/input/xml/ping_surfex.xml
+processing file current_directory/test_land_hist_LGCM/input/xml/ping_trip.xml:
+OK current_directory/test_land_hist_LGCM/input/xml/ping_trip.xml
+
+file_def written as current_directory/test_land_hist_LGCM/test_outputs/dr2xml_trip.xml
+
+
+Some Statistics on actually written variables per frequency+shape...
+
+---------- --------    -------- ---   0
+
+
+Some Statistics on actually written variables per variable...

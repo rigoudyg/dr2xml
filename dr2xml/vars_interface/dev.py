@@ -7,7 +7,7 @@ Dev variables
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
-from dr2xml.dr_interface import get_list_of_elements_by_id
+from dr2xml.dr_interface import get_dr_object
 from logger import get_logger
 from dr2xml.utils import VarsError
 from .generic import read_home_var, fill_homevar, check_homevar, tcmName2tcmValue, get_correspond_cmor_var
@@ -43,7 +43,8 @@ def check_dev_variable(home_var, hv_info):
     if not is_cmor:
         if home_var.mipVarLabel is None:
             home_var.set_attributes(mipVarLabel=home_var.label)
-        if any([cmvar.label == home_var.label for cmvar in get_list_of_elements_by_id("CMORvar").items]):
+        data_request = get_dr_object("get_data_request")
+        if any([cmvar.label == home_var.label for cmvar in data_request.get_list_by_id("CMORvar", elt_type="variable")]):
             raise VarsError("Error: %s "
                             "HOMEVar is announced  as dev, is not a CMORVar, but has a cmor name. "
                             "=> Not taken into account." % hv_info)
