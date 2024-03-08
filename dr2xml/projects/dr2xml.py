@@ -20,6 +20,14 @@ internal_values = dict(
 			2
 		]
 	),
+	synchronisation_frequency=ParameterSettings(
+		key="synchronisation_frequency",
+		default_value=[
+			ValueSettings(key_type="simulation", keys="synchronisation_frequency"),
+			ValueSettings(key_type="laboratory", keys="synchronisation_frequency"),
+			None
+		]
+	),
 	grouped_vars_per_file=ParameterSettings(
 		key="grouped_vars_per_file",
 		default_values=[
