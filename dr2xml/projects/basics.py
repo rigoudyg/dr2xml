@@ -613,6 +613,30 @@ project_settings = dict(
                    "sub_experiment_id", "sub_experiment", "table_id", "title", "variable_id", "variant_info",
                    "variant_label"],
         vars_constraints=dict(
+            grid=ParameterSettings(
+                key="grid",
+                help="Id of the grid used in the file."
+            ),
+            grid_label=ParameterSettings(
+                key="grid_label",
+                help="Label of the grid used in the file."
+            ),
+            nominal_resolution=ParameterSettings(
+                key="nominal_resolution",
+                help="Nominal resolution of the grid used in the file."
+            ),
+            license=ParameterSettings(
+                key="license",
+                help="License associated with the file."
+            ),
+            table_id=ParameterSettings(
+                key="table_id",
+                help="Id of the table associated with the file."
+            ),
+            variable_id=ParameterSettings(
+                key="variable_id",
+                help="Id of the variable contained in the file."
+            ),
             contact=ParameterSettings(
                 key="contact",
                 help="Contact email.",
@@ -1106,7 +1130,7 @@ project_settings = dict(
                 key="operation",
                 help="Operation done on the field."
             ),
-            detect_missing_vallue=ParameterSettings(
+            detect_missing_value=ParameterSettings(
                 key="detect_missing_value",
                 help="Should missing values of the field be detected by XIOS."
             ),
@@ -1126,6 +1150,14 @@ project_settings = dict(
                 default_values=[
                     ValueSettings(key_type="variable", keys="mipVarLabel")
                 ]
+            ),
+            field_ref=ParameterSettings(
+                key="field_ref",
+                help="Reference field."
+            ),
+            operation=ParameterSettings(
+                key="operation",
+                help="Operation performed on the field."
             ),
             grid_ref=ParameterSettings(
                 key="grid_ref",
@@ -1338,6 +1370,22 @@ project_settings = dict(
                 key="positive",
                 help="How is the axis oriented?"
             ),
+            n_glo=ParameterSettings(
+                key="n_glo",
+                help="Number of values of this axis."
+            ),
+            axis_ref=ParameterSettings(
+                key="axis_ref",
+                help="Reference axis."
+            ),
+            name=ParameterSettings(
+                key="name",
+                help="Name of this axis."
+            ),
+            long_name=ParameterSettings(
+                key="long_name",
+                help="Long name of this axis."
+            ),
             axis_type=ParameterSettings(
                 key="axis_type",
                 help="Axis type.",
@@ -1443,10 +1491,12 @@ project_settings = dict(
                 help="Id of the domain."
             ),
             ni_glo=ParameterSettings(
-                key="ni_glo"
+                key="ni_glo",
+                help="Number of points on i dimension."
             ),
             nj_glo=ParameterSettings(
-                key="nj_glo"
+                key="nj_glo",
+                help="Number of points on j dimension."
             ),
             type=ParameterSettings(
                 key="type",
@@ -1465,7 +1515,8 @@ project_settings = dict(
                 help="Longitude axis name."
             ),
             dim_i_name=ParameterSettings(
-                key="dim_i_name"
+                key="dim_i_name",
+                help="Name of the i dimension."
             ),
             domain_ref=ParameterSettings(
                 key="domain_ref",
@@ -1489,7 +1540,8 @@ project_settings = dict(
                 help="Should the interpolated domain be renormalized?"
             ),
             mode=ParameterSettings(
-                key="mode"
+                key="mode",
+                help="Mode used for the interpolation."
             ),
             write_weight=ParameterSettings(
                 key="write_weight",
@@ -1527,6 +1579,18 @@ project_settings = dict(
             id=ParameterSettings(
                 key="id",
                 help="Id of the scalar."
+            ),
+            scalar_ref=ParameterSettings(
+                key="scalar_ref",
+                help="Reference scalar."
+            ),
+            name=ParameterSettings(
+                key="name",
+                help="Name of the scalar."
+            ),
+            long_name=ParameterSettings(
+                key="long_name",
+                help="Long name of the scalar."
             ),
             standard_name=ParameterSettings(
                 key="standard_name",

@@ -25,7 +25,7 @@ Internal values
       
       fatal: False
       
-      default values: ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'json', 'keys': ['experiment_id', ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['experiment_id'], 'fmt': None, 'src': None, 'func': None})], 'fmt': None, 'src': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'combine', 'keys': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'dict', 'keys': ['cvspath'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['project'], 'fmt': None, 'src': None, 'func': None})], 'fmt': '{}{}_experiment_id.json', 'src': None, 'func': None}), 'func': None})
+      default values: read_json_file('{}{}_experiment_id.json'.format(dict[cvspath], internal[project]))[experiment_id][internal[experiment_id]]
       
       num type: 'string'
       
@@ -1404,7 +1404,7 @@ Common values
       default values:
          
          - laboratory[institution]
-         - ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'json', 'keys': ['institution_id', ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['institution_id'], 'fmt': None, 'src': None, 'func': None})], 'fmt': None, 'src': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'combine', 'keys': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'dict', 'keys': ['cvspath'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['project'], 'fmt': None, 'src': None, 'func': None})], 'fmt': '{}{}_institution_id.json', 'src': None, 'func': None}), 'func': None})
+         - read_json_file('{}{}_institution_id.json'.format(dict[cvspath], internal[project]))[institution_id][internal[institution_id]]
       
       num type: 'string'
       
@@ -1414,7 +1414,7 @@ Common values
       
       fatal: False
       
-      default values: ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'json', 'keys': ['license', 0], 'fmt': None, 'src': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'combine', 'keys': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'dict', 'keys': ['cvspath'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['project'], 'fmt': None, 'src': None, 'func': None})], 'fmt': '{}{}_license.json', 'src': None, 'func': None}), 'func': None})
+      default values: read_json_file('{}{}_license.json'.format(dict[cvspath], internal[project]))[license][0]
       
       num type: 'string'
       
@@ -1593,7 +1593,7 @@ Common values
       
       default values:
          
-         - ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'json', 'keys': ['source_id', ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['source_id'], 'fmt': None, 'src': None, 'func': None})], 'fmt': None, 'src': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'combine', 'keys': [ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'dict', 'keys': ['cvspath'], 'fmt': None, 'src': None, 'func': None}), ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['project'], 'fmt': None, 'src': None, 'func': None})], 'fmt': '{}{}_source_id.json', 'src': None, 'func': None}), 'func': FunctionSettings({'func': <function make_source_string at 0x7f01718929d0>, 'options': {'source_id': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['source_id'], 'fmt': None, 'src': None, 'func': None})}})})
+         - read_json_file('{}{}_source_id.json'.format(dict[cvspath], internal[project]))[source_id][internal[source_id]]make_source_string('source_id'= internal[source_id])
          - laboratory[source]
       
       num type: 'string'
@@ -1688,7 +1688,7 @@ Project settings
             
          n_glo
             
-            TODO
+            Number of values of this axis.
             
             fatal: False
             
@@ -1714,7 +1714,7 @@ Project settings
             
          axis_ref
             
-            TODO
+            Reference axis.
             
             fatal: False
             
@@ -1724,7 +1724,7 @@ Project settings
             
          name
             
-            TODO
+            Name of this axis.
             
             fatal: False
             
@@ -1752,7 +1752,7 @@ Project settings
             
          long_name
             
-            TODO
+            Long name of this axis.
             
             fatal: False
             
@@ -1937,7 +1937,7 @@ Project settings
             
          CV_version
             
-            TODO
+            Controled vocabulary version used.
             
             fatal: False
             
@@ -1947,7 +1947,7 @@ Project settings
             
          conventions_version
             
-            TODO
+            Conventions version used.
             
             fatal: False
             
@@ -2024,7 +2024,7 @@ Project settings
             
          ni_glo
             
-            TODO
+            Number of points on i dimension.
             
             fatal: False
             
@@ -2034,7 +2034,7 @@ Project settings
             
          nj_glo
             
-            TODO
+            Number of points on j dimension.
             
             fatal: False
             
@@ -2084,7 +2084,7 @@ Project settings
             
          dim_i_name
             
-            TODO
+            Name of the i dimension.
             
             fatal: False
             
@@ -2245,7 +2245,7 @@ Project settings
             
          detect_missing_value
             
-            TODO
+            Should missing values of the field be detected by XIOS.
             
             fatal: False
             
@@ -2298,7 +2298,7 @@ Project settings
       Attributes:
          field_ref
             
-            TODO
+            Reference field.
             
             fatal: False
             
@@ -2429,7 +2429,7 @@ Project settings
             
          operation
             
-            TODO
+            Operation performed on the field.
             
             fatal: False
             
@@ -2758,7 +2758,7 @@ Project settings
             
             fatal: True
             
-            default values: ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': FunctionSettings({'func': <function build_filename at 0x7f0171892940>, 'options': {'frequency': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['frequency'], 'fmt': None, 'src': None, 'func': None}), 'prefix': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['prefix'], 'fmt': None, 'src': None, 'func': None}), 'table': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'dict', 'keys': ['table_id'], 'fmt': None, 'src': None, 'func': None}), 'source_id': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['source_id'], 'fmt': None, 'src': None, 'func': None}), 'expid_in_filename': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['expid_in_filename'], 'fmt': None, 'src': None, 'func': None}), 'member_id': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['member_id'], 'fmt': None, 'src': None, 'func': None}), 'grid_label': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'dict', 'keys': ['grid_label'], 'fmt': None, 'src': None, 'func': None}), 'date_range': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['date_range'], 'fmt': None, 'src': None, 'func': None}), 'var_type': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['type'], 'fmt': None, 'src': None, 'func': None}), 'list_perso_dev_file': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['list_perso_dev_file'], 'fmt': None, 'src': None, 'func': None}), 'label': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['label'], 'fmt': None, 'src': None, 'func': None}), 'mipVarLabel': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['mipVarLabel'], 'fmt': None, 'src': None, 'func': None}), 'use_cmorvar': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['use_cmorvar_label_in_filename'], 'fmt': None, 'src': None, 'func': None})}})})
+            default values: build_filename('frequency'= variable.frequency, 'prefix'= common[prefix], 'table'= dict[table_id], 'source_id'= internal[source_id], 'expid_in_filename'= common[expid_in_filename], 'member_id'= common[member_id], 'grid_label'= dict[grid_label], 'date_range'= common[date_range], 'var_type'= variable.type, 'list_perso_dev_file'= common[list_perso_dev_file], 'label'= variable.label, 'mipVarLabel'= variable.mipVarLabel, 'use_cmorvar'= internal[use_cmorvar_label_in_filename])
             
             num type: 'string'
             
@@ -3189,7 +3189,7 @@ Project settings
             
             fatal: False
             
-            default values: variable.cell_measures{func: ['build_external_variables()']}
+            default values: variable.cell_measuresbuild_external_variables()
             
             skip values: ''
             
@@ -3247,7 +3247,7 @@ Project settings
             
          grid
             
-            TODO
+            Id of the grid used in the file.
             
             fatal: False
             
@@ -3257,7 +3257,7 @@ Project settings
             
          grid_label
             
-            TODO
+            Label of the grid used in the file.
             
             fatal: False
             
@@ -3267,7 +3267,7 @@ Project settings
             
          nominal_resolution
             
-            TODO
+            Nominal resolution of the grid used in the file.
             
             fatal: False
             
@@ -3415,11 +3415,11 @@ Project settings
             
          license
             
-            TODO
+            License associated with the file.
             
             fatal: False
             
-            default values: common[license]{func: ["fill_license('institution_id'= internal[institution_id], 'info_url'= common[info_url])"]}
+            default values: common[license]fill_license('institution_id'= internal[institution_id], 'info_url'= common[info_url])
             
             num type: 'string'
             
@@ -3637,7 +3637,7 @@ Project settings
             
             default values:
                
-               - ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': FunctionSettings({'func': <function compute_nb_days at 0x7f0171892d30>, 'options': {'year_ref': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['parent_time_ref_year'], 'fmt': None, 'src': None, 'func': None}), 'year_branch': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['branch_year_in_parent'], 'fmt': None, 'src': None, 'func': None}), 'month_branch': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['branch_month_in_parent'], 'fmt': None, 'src': None, 'func': None})}})})
+               - compute_nb_days('year_ref'= common[parent_time_ref_year], 'year_branch'= common[branch_year_in_parent], 'month_branch'= common[branch_month_in_parent])
                - simulation[branch_time_in_parent]
             
             skip values:
@@ -3670,7 +3670,7 @@ Project settings
             
             default values:
                
-               - ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': FunctionSettings({'func': <function compute_nb_days at 0x7f0171892d30>, 'options': {'year_ref': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'simulation', 'keys': ['child_time_ref_year'], 'fmt': None, 'src': None, 'func': None}), 'year_branch': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'simulation', 'keys': ['branch_year_in_child'], 'fmt': None, 'src': None, 'func': None})}})})
+               - compute_nb_days('year_ref'= simulation[child_time_ref_year], 'year_branch'= simulation[branch_year_in_child])
                - simulation[branch_time_in_child]
             
             skip values:
@@ -3801,7 +3801,7 @@ Project settings
             
          table_id
             
-            TODO
+            Id of the table associated with the file.
             
             fatal: False
             
@@ -3824,7 +3824,7 @@ Project settings
             
          variable_id
             
-            TODO
+            Id of the variable contained in the file.
             
             fatal: False
             
@@ -3945,7 +3945,7 @@ Project settings
             
          mode
             
-            TODO
+            Mode used for the interpolation.
             
             fatal: False
             
@@ -3990,7 +3990,7 @@ Project settings
             
          scalar_ref
             
-            TODO
+            Reference scalar.
             
             fatal: False
             
@@ -4000,7 +4000,7 @@ Project settings
             
          name
             
-            TODO
+            Name of the scalar.
             
             fatal: False
             
@@ -4026,7 +4026,7 @@ Project settings
             
          long_name
             
-            TODO
+            Long name of the scalar.
             
             fatal: False
             

@@ -259,10 +259,12 @@ project_settings = dict(
         comments_constraints=dict(
             CV_version=ParameterSettings(
                 key="CV_version",
+                help="Controled vocabulary version used.",
                 default_values=["CMIP6-CV version ??", ]
             ),
             conventions_version=ParameterSettings(
                 key="conventions_version",
+                help="Conventions version used.",
                 default_values=[
                     ValueSettings(key_type="common", keys="conventions_version", fmt="CMIP6_conventions_version {}")
                 ]

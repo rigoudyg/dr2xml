@@ -222,7 +222,7 @@ class Settings(object):
         return self.__str__()
 
     def dump_doc(self, force_void=False):
-        return [str(self), ]
+        raise NotImplementedError("Dump documentation is not implemented for class %s" % type(self))
 
     def dump_doc_inner(self, value, force_void=False, format_struct=True, remove_new_lines=False):
         if isinstance(value, Settings):
@@ -268,6 +268,8 @@ class Settings(object):
                 rep = ["'%s'" % value, ]
             else:
                 rep = ["%s" % value, ]
+        elif isinstance(value, type(return_value)):
+            rep = ["%s()" % value.__name__, ]
         else:
             rep = [value, ]
         if remove_new_lines:
@@ -293,26 +295,19 @@ class ValueSettings(Settings):
 
     def dump_doc(self, force_void=False):
         rep = list()
-        output_keys = ["src", "func"]
+        tmp_rep = ""
         key_type = self.key_type
-        if key_type in ["laboratory", "simulation", "dict", "internal", "common"]:
-            tmp_rep = "%s" % key_type
+        if key_type in ["laboratory", "simulation", "dict", "internal", "common", "json"]:
+            if key_type in ["json", ]:
+                tmp_rep = "read_json_file(%s)"
+                tmp_rep = tmp_rep % self.dump_doc_inner(self.src, format_struct=False)[0]
+            else:
+                tmp_rep = "%s" % key_type
             keys_values = self.dump_doc_inner(self.keys, format_struct=False)
             for key_value in keys_values:
                 tmp_rep += "[%s]" % key_value
-            if self.fmt is not None:
-                tmp_rep = self.dump_doc_inner(self.fmt, force_void=force_void, remove_new_lines=True)[0] + \
-                          ".format(%s)" % tmp_rep
-            for key in output_keys:
-                key_value = self.__getattribute__(key)
-                if key_value is not None:
-                    key_value = self.dump_doc_inner(key_value)
-                    tmp_rep += "{%s: %s}" % (key, key_value)
-            rep.append(tmp_rep)
         elif key_type in ["combine", ]:
-            tmp_rep = self.dump_doc_inner(self.fmt, force_void=force_void, remove_new_lines=True)[0] + ".format(%s)"
-            tmp_rep = tmp_rep % (", ".join(self.dump_doc_inner(self.keys, format_struct=False)))
-            rep.append(tmp_rep)
+            tmp_rep = ", ".join(self.dump_doc_inner(self.keys, format_struct=False))
         elif key_type in ["data_request", ]:
             tmp_rep = "%s" % key_type
             keys_values = self.dump_doc_inner(self.keys, format_struct=False)
@@ -321,15 +316,6 @@ class ValueSettings(Settings):
                     tmp_rep += "()"
                 else:
                     tmp_rep += ".%s" % key_value
-            if self.fmt is not None:
-                tmp_rep = self.dump_doc_inner(self.fmt, force_void=force_void, remove_new_lines=True)[0] + \
-                          ".format(%s)" % tmp_rep
-            for key in output_keys:
-                key_value = self.__getattribute__(key)
-                if key_value is not None:
-                    key_value = self.dump_doc_inner(key_value)
-                    tmp_rep += "{%s: %s}" % (key, key_value)
-            rep.append(tmp_rep)
         elif key_type in ["config", "variable"]:
             tmp_rep = "%s" % key_type
             if key_type in ["config", ]:
@@ -337,17 +323,15 @@ class ValueSettings(Settings):
             keys_values = self.dump_doc_inner(self.keys, format_struct=False)
             for key_value in keys_values:
                 tmp_rep += ".%s" % key_value
-            if self.fmt is not None:
-                tmp_rep = self.dump_doc_inner(self.fmt, force_void=force_void, remove_new_lines=True)[0] + \
-                          ".format(%s)" % tmp_rep
-            for key in output_keys:
-                key_value = self.__getattribute__(key)
-                if key_value is not None:
-                    key_value = self.dump_doc_inner(key_value)
-                    tmp_rep += "{%s: %s}" % (key, key_value)
-            rep.append(tmp_rep)
-        else:
+        if self.func is not None:
+            tmp_rep += self.dump_doc_inner(self.func, format_struct=False)[0]
+        if self.fmt is not None:
+            tmp_rep = self.dump_doc_inner(self.fmt, force_void=force_void, remove_new_lines=True)[0] + \
+                      ".format(%s)" % tmp_rep
+        if len(tmp_rep) == 0:
             rep.extend(super().dump_doc(force_void=force_void))
+        else:
+            rep.append(tmp_rep)
         return rep
 
 

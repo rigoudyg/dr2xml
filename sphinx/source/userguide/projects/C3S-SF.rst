@@ -1440,8 +1440,8 @@ Common values
       
       default values:
          
-         - simulation[keywords]{func: ['build_string_from_list()']}
-         - laboratory[summary]{func: ['build_string_from_list()']}
+         - simulation[keywords]build_string_from_list()
+         - laboratory[summary]build_string_from_list()
       
       num type: 'string'
       
@@ -1698,7 +1698,7 @@ Project settings
             
          n_glo
             
-            TODO
+            Number of values of this axis.
             
             fatal: False
             
@@ -1724,7 +1724,7 @@ Project settings
             
          axis_ref
             
-            TODO
+            Reference axis.
             
             fatal: False
             
@@ -1734,7 +1734,7 @@ Project settings
             
          name
             
-            TODO
+            Name of this axis.
             
             fatal: False
             
@@ -1762,7 +1762,7 @@ Project settings
             
          long_name
             
-            TODO
+            Long name of this axis.
             
             fatal: False
             
@@ -2014,7 +2014,7 @@ Project settings
             
          ni_glo
             
-            TODO
+            Number of points on i dimension.
             
             fatal: False
             
@@ -2024,7 +2024,7 @@ Project settings
             
          nj_glo
             
-            TODO
+            Number of points on j dimension.
             
             fatal: False
             
@@ -2074,7 +2074,7 @@ Project settings
             
          dim_i_name
             
-            TODO
+            Name of the i dimension.
             
             fatal: False
             
@@ -2235,7 +2235,7 @@ Project settings
             
          detect_missing_value
             
-            TODO
+            Should missing values of the field be detected by XIOS.
             
             fatal: False
             
@@ -2288,7 +2288,7 @@ Project settings
       Attributes:
          field_ref
             
-            TODO
+            Reference field.
             
             fatal: False
             
@@ -2419,7 +2419,7 @@ Project settings
             
          operation
             
-            TODO
+            Operation performed on the field.
             
             fatal: False
             
@@ -2489,7 +2489,7 @@ Project settings
             
          coordinates
             
-            TODO
+            Coordinates of the output field.
             
             fatal: False
             
@@ -2499,7 +2499,7 @@ Project settings
             
          grid_mapping
             
-            TODO
+            Grid mapping associated with the field.
             
             fatal: False
             
@@ -2624,7 +2624,7 @@ Project settings
             
             fatal: True
             
-            default values: ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': FunctionSettings({'func': <function build_filename at 0x7f0171892670>, 'options': {'frequency': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['frequency'], 'fmt': None, 'src': None, 'func': FunctionSettings({'func': <function convert_frequency at 0x7f01718925e0>, 'options': {}})}), 'expid_in_filename': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['expid_in_filename'], 'fmt': None, 'src': None, 'func': None}), 'date_range': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['date_range'], 'fmt': None, 'src': None, 'func': None}), 'list_perso_dev_file': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['list_perso_dev_file'], 'fmt': None, 'src': None, 'func': None}), 'var_type': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['type'], 'fmt': None, 'src': None, 'func': None}), 'label': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['label'], 'fmt': None, 'src': None, 'func': None}), 'realm': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['modeling_realm'], 'fmt': None, 'src': None, 'func': FunctionSettings({'func': <function convert_realm at 0x7f0171892550>, 'options': {}})})}})})
+            default values: build_filename('frequency'= variable.frequencyconvert_frequency(), 'expid_in_filename'= common[expid_in_filename], 'date_range'= common[date_range], 'list_perso_dev_file'= common[list_perso_dev_file], 'var_type'= variable.type, 'label'= variable.label, 'realm'= variable.modeling_realmconvert_realm())
             
             num type: 'string'
             
@@ -2991,7 +2991,7 @@ Project settings
             
          project
             
-            TODO
+            Project associated with the file.
             
             fatal: False
             
@@ -3099,7 +3099,7 @@ Project settings
             
          forecast_type
             
-            TODO
+            Forecast type associated with the file.
             
             fatal: False
             
@@ -3115,7 +3115,7 @@ Project settings
             
             fatal: False
             
-            default values: variable.modeling_realm{func: ['convert_realm()']}
+            default values: variable.modeling_realmconvert_realm()
             
             num type: 'string'
             
@@ -3131,11 +3131,11 @@ Project settings
             
          level_type
             
-            TODO
+            Level type associated with the file.
             
             fatal: False
             
-            default values: ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': None, 'keys': ['level_type'], 'fmt': None, 'src': None, 'func': None})
+            default values: variable.level_type
             
             num type: 'string'
             
@@ -3161,7 +3161,7 @@ Project settings
             
          commit
             
-            TODO
+            Commit associated with the file.
             
             fatal: False
             
@@ -3171,7 +3171,7 @@ Project settings
             
          summary
             
-            TODO
+            Summary associated with the file.
             
             fatal: False
             
@@ -3181,7 +3181,7 @@ Project settings
             
          keywords
             
-            TODO
+            Keywords associated with the file.
             
             fatal: False
             
@@ -3191,7 +3191,7 @@ Project settings
             
          forecast_reference_time
             
-            TODO
+            Forecast reference time associated with the file.
             
             fatal: False
             
@@ -3292,7 +3292,7 @@ Project settings
             
          mode
             
-            TODO
+            Mode used for the interpolation.
             
             fatal: False
             
@@ -3337,7 +3337,7 @@ Project settings
             
          scalar_ref
             
-            TODO
+            Reference scalar.
             
             fatal: False
             
@@ -3347,7 +3347,7 @@ Project settings
             
          name
             
-            TODO
+            Name of the scalar.
             
             fatal: False
             
@@ -3373,7 +3373,7 @@ Project settings
             
          long_name
             
-            TODO
+            Long name of the scalar.
             
             fatal: False
             

@@ -1734,7 +1734,7 @@ Project settings
             
          n_glo
             
-            TODO
+            Number of values of this axis.
             
             fatal: False
             
@@ -1760,7 +1760,7 @@ Project settings
             
          axis_ref
             
-            TODO
+            Reference axis.
             
             fatal: False
             
@@ -1770,7 +1770,7 @@ Project settings
             
          name
             
-            TODO
+            Name of this axis.
             
             fatal: False
             
@@ -1798,7 +1798,7 @@ Project settings
             
          long_name
             
-            TODO
+            Long name of this axis.
             
             fatal: False
             
@@ -1983,7 +1983,7 @@ Project settings
             
          CV_version
             
-            TODO
+            Controled vocabulary version used.
             
             fatal: False
             
@@ -1993,7 +1993,7 @@ Project settings
             
          conventions_version
             
-            TODO
+            Conventions version used.
             
             fatal: False
             
@@ -2070,7 +2070,7 @@ Project settings
             
          ni_glo
             
-            TODO
+            Number of points on i dimension.
             
             fatal: False
             
@@ -2080,7 +2080,7 @@ Project settings
             
          nj_glo
             
-            TODO
+            Number of points on j dimension.
             
             fatal: False
             
@@ -2130,7 +2130,7 @@ Project settings
             
          dim_i_name
             
-            TODO
+            Name of the i dimension.
             
             fatal: False
             
@@ -2291,7 +2291,7 @@ Project settings
             
          detect_missing_value
             
-            TODO
+            Should missing values of the field be detected by XIOS.
             
             fatal: False
             
@@ -2344,7 +2344,7 @@ Project settings
       Attributes:
          field_ref
             
-            TODO
+            Reference field.
             
             fatal: False
             
@@ -2479,7 +2479,7 @@ Project settings
             
          operation
             
-            TODO
+            Operation performed on the field.
             
             fatal: False
             
@@ -2677,7 +2677,7 @@ Project settings
             
          grid_mapping
             
-            TODO
+            Grid mapping associated with the file.
             
             fatal: False
             
@@ -2796,7 +2796,7 @@ Project settings
             
             fatal: True
             
-            default values: ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': FunctionSettings({'func': <function build_filename at 0x7f0171892f70>, 'options': {'frequency': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['frequency'], 'fmt': None, 'src': None, 'func': None}), 'prefix': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['prefix'], 'fmt': None, 'src': None, 'func': None}), 'source_id': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['source_id'], 'fmt': None, 'src': None, 'func': None}), 'expid_in_filename': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['expid_in_filename'], 'fmt': None, 'src': None, 'func': None}), 'date_range': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['date_range'], 'fmt': None, 'src': None, 'func': None}), 'var_type': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['type'], 'fmt': None, 'src': None, 'func': None}), 'list_perso_dev_file': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['list_perso_dev_file'], 'fmt': None, 'src': None, 'func': None}), 'label': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['label'], 'fmt': None, 'src': None, 'func': None}), 'mipVarLabel': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'variable', 'keys': ['mipVarLabel'], 'fmt': None, 'src': None, 'func': None}), 'use_cmorvar': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'internal', 'keys': ['use_cmorvar_label_in_filename'], 'fmt': None, 'src': None, 'func': None}), 'CORDEX_domain': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['CORDEX_domain'], 'fmt': None, 'src': None, 'func': None}), 'driving_model_id': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['driving_model_id'], 'fmt': None, 'src': None, 'func': None}), 'driving_model_ensemble_member': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['driving_model_ensemble_member'], 'fmt': None, 'src': None, 'func': None}), 'rcm_version_id': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['rcm_version_id'], 'fmt': None, 'src': None, 'func': None})}})})
+            default values: build_filename('frequency'= variable.frequency, 'prefix'= common[prefix], 'source_id'= internal[source_id], 'expid_in_filename'= common[expid_in_filename], 'date_range'= common[date_range], 'var_type'= variable.type, 'list_perso_dev_file'= common[list_perso_dev_file], 'label'= variable.label, 'mipVarLabel'= variable.mipVarLabel, 'use_cmorvar'= internal[use_cmorvar_label_in_filename], 'CORDEX_domain'= common[CORDEX_domain], 'driving_model_id'= common[driving_model_id], 'driving_model_ensemble_member'= common[driving_model_ensemble_member], 'rcm_version_id'= common[rcm_version_id])
             
             num type: 'string'
             
@@ -3138,7 +3138,7 @@ Project settings
             
             fatal: False
             
-            default values: variable.cell_measures{func: ['build_external_variables()']}
+            default values: variable.cell_measuresbuild_external_variables()
             
             skip values: ''
             
@@ -3156,7 +3156,7 @@ Project settings
             
          grid
             
-            TODO
+            Id of the grid used in the file.
             
             fatal: False
             
@@ -3166,7 +3166,7 @@ Project settings
             
          grid_label
             
-            TODO
+            Label of the grid used in the file.
             
             fatal: False
             
@@ -3176,7 +3176,7 @@ Project settings
             
          nominal_resolution
             
-            TODO
+            Nominal resolution of the grid used in the file.
             
             fatal: False
             
@@ -3306,7 +3306,7 @@ Project settings
             
          CORDEX_domain
             
-            TODO
+            Dictionary which contains, for each context, the associated CORDEX domain.
             
             fatal: False
             
@@ -3316,7 +3316,7 @@ Project settings
             
          driving_model_id
             
-            TODO
+            Id of the driving model.
             
             fatal: True
             
@@ -3326,7 +3326,7 @@ Project settings
             
          driving_model_ensemble_member
             
-            TODO
+            Member of the simulation which drives the simulation.
             
             fatal: True
             
@@ -3336,7 +3336,7 @@ Project settings
             
          driving_experiment_name
             
-            TODO
+            Name of the experiment which drives the current simulation.
             
             fatal: True
             
@@ -3346,7 +3346,7 @@ Project settings
             
          driving_experiment
             
-            TODO
+            Id of the experiment which drives the current simulation.
             
             fatal: True
             
@@ -3356,7 +3356,7 @@ Project settings
             
          Lambert_conformal_longitude_of_central_meridian
             
-            TODO
+            Longitude of central meridian of the Lambert conformal projection.
             
             fatal: False
             
@@ -3382,7 +3382,7 @@ Project settings
             
          Lambert_conformal_standard_parallel
             
-            TODO
+            Standard parallel of the Lambert conformal projection.
             
             fatal: False
             
@@ -3408,7 +3408,7 @@ Project settings
             
          Lambert_conformal_latitude_of_projection_origin
             
-            TODO
+            Latitude of central meridian of the Lambert conformal projection.
             
             fatal: False
             
@@ -3607,7 +3607,7 @@ Project settings
             
             default values:
                
-               - ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': FunctionSettings({'func': <function compute_nb_days at 0x7f0171a4c820>, 'options': {'year_ref': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['parent_time_ref_year'], 'fmt': None, 'src': None, 'func': None}), 'year_branch': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['branch_year_in_parent'], 'fmt': None, 'src': None, 'func': None}), 'month_branch': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['branch_month_in_parent'], 'fmt': None, 'src': None, 'func': None})}})})
+               - compute_nb_days('year_ref'= common[parent_time_ref_year], 'year_branch'= common[branch_year_in_parent], 'month_branch'= common[branch_month_in_parent])
                - simulation[branch_time_in_parent]
             
             skip values:
@@ -3640,7 +3640,7 @@ Project settings
             
             default values:
                
-               - ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': FunctionSettings({'func': <function compute_nb_days at 0x7f0171a4c820>, 'options': {'year_ref': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'simulation', 'keys': ['child_time_ref_year'], 'fmt': None, 'src': None, 'func': None}), 'year_branch': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'simulation', 'keys': ['branch_year_in_child'], 'fmt': None, 'src': None, 'func': None})}})})
+               - compute_nb_days('year_ref'= simulation[child_time_ref_year], 'year_branch'= simulation[branch_year_in_child])
                - simulation[branch_time_in_child]
             
             skip values:
@@ -3731,7 +3731,7 @@ Project settings
             
          table_id
             
-            TODO
+            Id of the table associated with the file.
             
             fatal: False
             
@@ -3754,7 +3754,7 @@ Project settings
             
          variable_id
             
-            TODO
+            Id of the variable contained in the file.
             
             fatal: False
             
@@ -3855,7 +3855,7 @@ Project settings
             
          mode
             
-            TODO
+            Mode used for the interpolation.
             
             fatal: False
             
@@ -3900,7 +3900,7 @@ Project settings
             
          scalar_ref
             
-            TODO
+            Reference scalar.
             
             fatal: False
             
@@ -3910,7 +3910,7 @@ Project settings
             
          name
             
-            TODO
+            Name of the scalar.
             
             fatal: False
             
@@ -3936,7 +3936,7 @@ Project settings
             
          long_name
             
-            TODO
+            Long name of the scalar.
             
             fatal: False
             

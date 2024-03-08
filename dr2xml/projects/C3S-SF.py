@@ -146,8 +146,17 @@ project_settings = dict(
                 key="institution_id",
                 output_key="institute_id"
             ),
+            project=ParameterSettings(
+                key="project",
+                help="Project associated with the file."
+            ),
+            keywords=ParameterSettings(
+                key="keywords",
+                help="Keywords associated with the file."
+            ),
             forecast_type=ParameterSettings(
                 key="forecast_type",
+                help="Forecast type associated with the file.",
                 default_values=[
                     ValueSettings(key_type="common", keys="forecast_type")
                 ]
@@ -161,24 +170,28 @@ project_settings = dict(
             ),
             level_type=ParameterSettings(
                 key="level_type",
+                help="Level type associated with the file.",
                 default_values=[
-                    ValueSettings(key_tyoe="variable", keys="level_type")
+                    ValueSettings(key_type="variable", keys="level_type")
                 ]
             ),
             commit=ParameterSettings(
                 key="commit",
+                help="Commit associated with the file.",
                 default_values=[
                     ValueSettings(key_type="common", keys="commit")
                 ]
             ),
             summary=ParameterSettings(
                 key="summary",
+                help="Summary associated with the file.",
                 default_values=[
                     ValueSettings(key_type="common", keys="summary")
                 ]
             ),
             forecast_reference_time=ParameterSettings(
                 key="forecast_reference_time",
+                help="Forecast reference time associated with the file.",
                 default_values=[
                     ValueSettings(key_type="common", keys="forecast_reference_time")
                 ]
@@ -190,12 +203,14 @@ project_settings = dict(
         vars_constraints=dict(
             grid_mapping=ParameterSettings(
                 key="grid_mapping",
+                help="Grid mapping associated with the field.",
                 default_values=[
                     ValueSettings(key_type="common", keys="grid_mapping")
                 ]
             ),
             coordinates=ParameterSettings(
                 key="coordinates",
+                help="Coordinates of the output field.",
                 default_values=[
                     ValueSettings(key_type="variable", keys="coordinates")
                 ]

@@ -1629,7 +1629,7 @@ Project settings
             
          n_glo
             
-            TODO
+            Number of values of this axis.
             
             fatal: False
             
@@ -1655,7 +1655,7 @@ Project settings
             
          axis_ref
             
-            TODO
+            Reference axis.
             
             fatal: False
             
@@ -1665,7 +1665,7 @@ Project settings
             
          name
             
-            TODO
+            Name of this axis.
             
             fatal: False
             
@@ -1693,7 +1693,7 @@ Project settings
             
          long_name
             
-            TODO
+            Long name of this axis.
             
             fatal: False
             
@@ -1945,7 +1945,7 @@ Project settings
             
          ni_glo
             
-            TODO
+            Number of points on i dimension.
             
             fatal: False
             
@@ -1955,7 +1955,7 @@ Project settings
             
          nj_glo
             
-            TODO
+            Number of points on j dimension.
             
             fatal: False
             
@@ -2005,7 +2005,7 @@ Project settings
             
          dim_i_name
             
-            TODO
+            Name of the i dimension.
             
             fatal: False
             
@@ -2166,7 +2166,7 @@ Project settings
             
          detect_missing_value
             
-            TODO
+            Should missing values of the field be detected by XIOS.
             
             fatal: False
             
@@ -2219,7 +2219,7 @@ Project settings
       Attributes:
          field_ref
             
-            TODO
+            Reference field.
             
             fatal: False
             
@@ -2350,7 +2350,7 @@ Project settings
             
          operation
             
-            TODO
+            Operation performed on the field.
             
             fatal: False
             
@@ -3101,7 +3101,7 @@ Project settings
             
             fatal: False
             
-            default values: variable.cell_measures{func: ['build_external_variables()']}
+            default values: variable.cell_measuresbuild_external_variables()
             
             skip values: ''
             
@@ -3145,7 +3145,7 @@ Project settings
             
          grid
             
-            TODO
+            Id of the grid used in the file.
             
             fatal: False
             
@@ -3155,7 +3155,7 @@ Project settings
             
          grid_label
             
-            TODO
+            Label of the grid used in the file.
             
             fatal: False
             
@@ -3165,7 +3165,7 @@ Project settings
             
          nominal_resolution
             
-            TODO
+            Nominal resolution of the grid used in the file.
             
             fatal: False
             
@@ -3313,7 +3313,7 @@ Project settings
             
          license
             
-            TODO
+            License associated with the file.
             
             fatal: False
             
@@ -3535,7 +3535,7 @@ Project settings
             
             default values:
                
-               - ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': FunctionSettings({'func': <function compute_nb_days at 0x7f0171892a60>, 'options': {'year_ref': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['parent_time_ref_year'], 'fmt': None, 'src': None, 'func': None}), 'year_branch': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['branch_year_in_parent'], 'fmt': None, 'src': None, 'func': None}), 'month_branch': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'common', 'keys': ['branch_month_in_parent'], 'fmt': None, 'src': None, 'func': None})}})})
+               - compute_nb_days('year_ref'= common[parent_time_ref_year], 'year_branch'= common[branch_year_in_parent], 'month_branch'= common[branch_month_in_parent])
                - simulation[branch_time_in_parent]
             
             skip values:
@@ -3568,7 +3568,7 @@ Project settings
             
             default values:
                
-               - ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': FunctionSettings({'func': <function compute_nb_days at 0x7f0171892a60>, 'options': {'year_ref': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'simulation', 'keys': ['child_time_ref_year'], 'fmt': None, 'src': None, 'func': None}), 'year_branch': ValueSettings({'dict_default': {'key_type': None, 'keys': [], 'fmt': None, 'src': None, 'func': None}, 'key_type': 'simulation', 'keys': ['branch_year_in_child'], 'fmt': None, 'src': None, 'func': None})}})})
+               - compute_nb_days('year_ref'= simulation[child_time_ref_year], 'year_branch'= simulation[branch_year_in_child])
                - simulation[branch_time_in_child]
             
             skip values:
@@ -3695,7 +3695,7 @@ Project settings
             
          table_id
             
-            TODO
+            Id of the table associated with the file.
             
             fatal: False
             
@@ -3718,7 +3718,7 @@ Project settings
             
          variable_id
             
-            TODO
+            Id of the variable contained in the file.
             
             fatal: False
             
@@ -3839,7 +3839,7 @@ Project settings
             
          mode
             
-            TODO
+            Mode used for the interpolation.
             
             fatal: False
             
@@ -3884,7 +3884,7 @@ Project settings
             
          scalar_ref
             
-            TODO
+            Reference scalar.
             
             fatal: False
             
@@ -3894,7 +3894,7 @@ Project settings
             
          name
             
-            TODO
+            Name of the scalar.
             
             fatal: False
             
@@ -3920,7 +3920,7 @@ Project settings
             
          long_name
             
-            TODO
+            Long name of the scalar.
             
             fatal: False
             
