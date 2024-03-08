@@ -584,7 +584,8 @@ project_settings = dict(
                 default_values=[
                     ValueSettings(key_type="internal", keys="synchronisation_frequency")
                 ],
-                skip_values=["None", "", None]
+                skip_values=["None", "", None],
+                help="Frequency at which the synchornisation between buffer and filesystem is done."
             ),
             convention_str=ParameterSettings(
                 key="convention_str",

@@ -963,6 +963,16 @@ Internal values
       
       num type: 'string'
       
+   synchronisation_frequency
+      
+      Frequency at which the synchornisation between buffer and filesystem is done.
+      
+      fatal: False
+      
+      default values: []
+      
+      num type: 'string'
+      
    tierMax
       
       Number indicating the maximum tier to consider for experiments.

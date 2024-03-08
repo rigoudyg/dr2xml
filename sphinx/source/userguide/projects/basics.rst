@@ -963,6 +963,16 @@ Internal values
       
       num type: 'string'
       
+   synchronisation_frequency
+      
+      Frequency at which the synchornisation between buffer and filesystem is done.
+      
+      fatal: False
+      
+      default values: []
+      
+      num type: 'string'
+      
    tierMax
       
       Number indicating the maximum tier to consider for experiments.
@@ -2952,6 +2962,22 @@ Project settings
             fatal: False
             
             default values: common[convention_str]
+            
+            num type: 'string'
+            
+         synchronisation_frequency
+            
+            Frequency at which the synchornisation between buffer and filesystem is done.
+            
+            fatal: False
+            
+            default values: internal[synchronisation_frequency]
+            
+            skip values:
+               
+               - 'None'
+               - ''
+               - None
             
             num type: 'string'
             
