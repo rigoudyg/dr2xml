@@ -558,6 +558,22 @@ example_simulation_settings = {
 
 
 def configuration_init(func):
+    """
+    This function is a configurator for others entry points into dr2xml.
+    :param func: Function to be decorated
+    :param dict lset: dictionary containing lab and model related settings
+    :param dict sset: dictionary containing simulation related settings
+    :param six.string_types cvs_path: path where controled vocabulary can be found
+    :param bool printout: print infos
+    :param six.string_types prefix: prefix used for each file definition
+    :param bool debug: Turn on debug mode to have more information during the run.
+    :param bool force_reset: Should the internal values be emptied during to related runs on the same python sequence?
+                             If False (default), save time by not reading once again Data Request but can cause filter
+                             issues if some things should be different (not the case for most usages).
+                             Else, the run is a little longer but all changes are taken into account.
+
+    :return: The initial function with initialized environment to use dr2xml.
+    """
     def make_configuration(lset, sset, cvs_path=None, printout=False, prefix="", debug=False, force_reset=False,
                            **kwargs):
         year = kwargs.get("year", 0)
@@ -572,8 +588,7 @@ def configuration_init(func):
         initialize_logger(default=True, level=default_level)
         initialize_config_variables()
         initialize_settings(lset=lset, sset=sset, cvspath=cvs_path, context=context, prefix=prefix,
-                            root=os.path.basename(os.path.abspath(__file__)), year=year, dirname=dirname,
-                            force_reset=force_reset)
+                            year=year, dirname=dirname, force_reset=force_reset)
         return func(**kwargs)
     return make_configuration
 
@@ -591,18 +606,19 @@ def generate_file_defs(year, enddate, context, pingfiles=None, dummies='include'
     correspondance between a context and a few realms
 
 on
-    :param six.string_types context: XIOS context considered for the launch
-es with a different name between model
+    :param six.string_types year: year associated with the launch of dr2xml
+    :param six.string_types enddate: enddate of the current launch of dr2xml
+    :param six.string_types context: XIOS context considered for the launches with a different name between model
                                        and Data Request
+    :param None or list of six.string_types pingfiles: Ping files which define for a given Data Request variable
+                                                       the associated model variable.
     :param six.string_types dummies: specify how to treat dummy variables among:
 
         - "include": include dummy refs in file_def (useful for demonstration run)
         - "skip": don't write field with a ref to a dummy (useful until ping_file is fully completed)
         - "forbid": stop if any dummy (useful for production run)
 
-    :param bool printout: print infos
     :param six.string_types dirname: directory in which outputs will be created
-    :param six.string_types prefix: prefix used for each file definition
     :param list attributes: list of (name,value) pairs which are to be inserted as
                             additional file-level attributes. They are complemented with entry
                             "non_standard__attributes" of dict sset
