@@ -72,12 +72,6 @@ class DataRequest(object):
         """
         return None, "??", "??"
 
-    def filter_request_link_by_experiment_and_year(self, request_links, experiment_id, year, **kwargs):
-        return list()
-
-    def check_requestitem_for_exp_and_year(self, ri, experiment, year, **kwargs):
-        return False, None
-
     def get_cmor_var_id_by_label(self, label):
         """
         Get the id of the CMOR var corresponding to label.
@@ -111,18 +105,6 @@ class DataRequest(object):
     def get_single_levels_list(self):
         """
         Get single levels defined in Data Request
-        """
-        raise NotImplementedError()
-
-    def convert_DR_variable_to_dr2xml_variable(self, input_variable):
-        """
-        Convert a variable from the DR used to the dr2xml template variable.
-        """
-        raise NotImplementedError()
-
-    def convert_DR_dimension_to_dr2xml_dimension(self, input_dimension):
-        """
-        Convert a dimension from the DR used to the dr2xml template dimension.
         """
         raise NotImplementedError()
 

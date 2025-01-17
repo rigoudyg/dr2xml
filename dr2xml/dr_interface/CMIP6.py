@@ -103,9 +103,9 @@ class DataRequest(DataRequestBasic):
         else:
             return super().get_experiment_label_start_end_years(experiment)
 
-    def filter_request_link_by_experiment_and_year(self, request_links, experiment_id, year,
-                                                   filter_on_realization=False, realization_index=1, branching=dict(),
-                                                   branch_year_in_child=None, endyear=False):
+    def _filter_request_link_by_experiment_and_year(self, request_links, experiment_id, year,
+                                                    filter_on_realization=False, realization_index=1, branching=dict(),
+                                                    branch_year_in_child=None, endyear=False):
         logger = get_logger()
         _, starty, endy = self.get_experiment_label_start_end_years(experiment_id)
         logger.info("Filtering for experiment %s, covering years [ %s , %s ] in DR" %
@@ -115,15 +115,15 @@ class DataRequest(DataRequestBasic):
         for rl in request_links:
             # Access all requesItems ids which refer to this RequestLink
             rl_req_items = self.get_request_by_id_by_sect(rl.uid, 'requestItem')
-            if any([self.check_requestitem_for_exp_and_year(self.get_element_uid(ri_id), experiment_id, year,
-                                                            filter_on_realization, endyear, realization_index,
-                                                            branching, branch_year_in_child)[0]
+            if any([self._check_requestitem_for_exp_and_year(self.get_element_uid(ri_id), experiment_id, year,
+                                                             filter_on_realization, endyear, realization_index,
+                                                             branching, branch_year_in_child)[0]
                     for ri_id in rl_req_items]):
                 rep.append(rl)
         return rep
 
-    def check_requestitem_for_exp_and_year(self, ri, experiment, year, filter_on_realization=False, endyear=False,
-                                           realization_index=1, branching=dict(), branch_year_in_child=None):
+    def _check_requestitem_for_exp_and_year(self, ri, experiment, year, filter_on_realization=False, endyear=False,
+                                            realization_index=1, branching=dict(), branch_year_in_child=None):
         """
         Returns True if requestItem 'ri' in data request is relevant
         for a given 'experiment' and 'year'. Toggle 'debug' allow some printouts
@@ -181,8 +181,8 @@ class DataRequest(DataRequestBasic):
                 logger.debug(" ..applies because arg year is None")
             else:
                 year = int(year)
-                rep, endyear = self.is_year_in_requestitem(ri, experiment, year, branching, branch_year_in_child,
-                                                           endyear)
+                rep, endyear = self._is_year_in_requestitem(ri, experiment, year, branching, branch_year_in_child,
+                                                            endyear)
                 logger.debug(" ..year in ri returns: %s %s" % (rep, endyear))
                 # if (ri.label=="AerchemmipAermonthly3d") :
                 #    print "reqItem=%s,experiment=%s,year=%d,rep=%s,"%(ri.label,experiment,year,rep)
@@ -192,7 +192,7 @@ class DataRequest(DataRequestBasic):
             # print
             return False, None
 
-    def is_year_in_requestitem(self, ri, exp, year, branching=dict(), branch_year_in_child=None, endyear=False):
+    def _is_year_in_requestitem(self, ri, exp, year, branching=dict(), branch_year_in_child=None, endyear=False):
         """
         :param ri: request item
         :param exp: experiment
@@ -207,8 +207,8 @@ class DataRequest(DataRequestBasic):
             return True, 2018
         if 'tslice' in ri.__dict__:
             logger.debug("calling year_in_ri_tslice")
-            rep, endyear = self.is_year_in_requestitem_tslice(ri, exp_label, exp_startyear, year, branching,
-                                                              branch_year_in_child)
+            rep, endyear = self._is_year_in_requestitem_tslice(ri, exp_label, exp_startyear, year, branching,
+                                                               branch_year_in_child)
             return rep, endyear
         try:
             ny = int(ri.nymax)
@@ -249,8 +249,8 @@ class DataRequest(DataRequestBasic):
         logger.debug("year_in_ri: returning %s %s" % (applies, RI_end_year))
         return applies, RI_end_year
 
-    def is_year_in_requestitem_tslice(self, ri, exp_label, exp_startyear, year, branching=dict(),
-                                      branch_year_in_child=None):
+    def _is_year_in_requestitem_tslice(self, ri, exp_label, exp_startyear, year, branching=dict(),
+                                       branch_year_in_child=None):
         """
         Returns a couple : relevant, endyear.
         RELEVANT is True if requestItem RI applies to
@@ -324,7 +324,7 @@ class DataRequest(DataRequestBasic):
                      (year, exp_label, repr(relevant), ri.title, tslice.type, repr(endyear)))
         return relevant, endyear
 
-    def get_requestitems_for_cmorvar(self, cmorvar_id, pmax, global_rls):
+    def _get_requestitems_for_cmorvar(self, cmorvar_id, pmax, global_rls):
         logger = get_logger()
 
         rVarsUid = self.get_request_by_id_by_sect(cmorvar_id, 'requestVar')
@@ -355,18 +355,18 @@ class DataRequest(DataRequestBasic):
         logger = get_logger()
         logger.debug("In end_year for %s %s" % (cmorvar.label, cmorvar.mipTable))
         # 1- Get the RequestItems which apply to CmorVar
-        request_items = self.get_requestitems_for_cmorvar(cmorvar.id, internal_dict["max_priority"], global_rls)
+        request_items = self._get_requestitems_for_cmorvar(cmorvar.id, internal_dict["max_priority"], global_rls)
 
         # 2- Select those request links which include expt and year
         larger = None
         for riid in request_items:
             ri = self.get_element_uid(riid)
-            applies, endyear = self.check_requestitem_for_exp_and_year(ri, experiment, year,
-                                                                       internal_dict["filter_on_realization"],
-                                                                       internal_dict["end_year"],
-                                                                       internal_dict["realization_index"],
-                                                                       internal_dict["branching"],
-                                                                       internal_dict["branch_year_in_child"])
+            applies, endyear = self._check_requestitem_for_exp_and_year(ri, experiment, year,
+                                                                        internal_dict["filter_on_realization"],
+                                                                        internal_dict["end_year"],
+                                                                        internal_dict["realization_index"],
+                                                                        internal_dict["branching"],
+                                                                        internal_dict["branch_year_in_child"])
             logger.debug("For var and freq selected for debug and year %s, for ri %s, applies=%s, endyear=%s" %
                          (str(year), ri.title, str(applies), str(endyear)))
             if applies:
@@ -448,7 +448,7 @@ class DataRequest(DataRequestBasic):
         rls_for_mips = sorted(rls_for_mips, key=lambda x: x.label)
         # Filter by experiment if needed
         if experiment_filter:
-            rls = self.filter_request_link_by_experiment_and_year(rls_for_mips, **experiment_filter)
+            rls = self._filter_request_link_by_experiment_and_year(rls_for_mips, **experiment_filter)
             logger.info("Number of Request Links which apply to experiment %s member %s and MIPs %s is: %d" %
                         (experiment_filter["experiment_id"], experiment_filter['realization_index'],
                          print_struct(mips_list), len(rls)))
