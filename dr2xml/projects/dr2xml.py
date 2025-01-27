@@ -1167,7 +1167,7 @@ internal_values = dict(
 			ValueSettings(key_type="laboratory", keys="data_request_used"),
 			"CMIP6"
 		],
-		help="Version of the data request used."
+		help="The Data Request infrastructure type which should be used."
 	),
 	data_request_path=ParameterSettings(
         key="data_request_path",
@@ -1175,7 +1175,41 @@ internal_values = dict(
 			ValueSettings(key_type="laboratory", keys="data_request_path"),
 			None
 		],
-		help="Path where the data request used is placed."
+		help="Path where the data request API used is placed."
+	),
+	data_request_content_version=ParameterSettings(
+		key="data_request_content_version",
+		default_values=[
+			ValueSettings(key_type="laboratory", keys="data_request_content_version"),
+			"latest_stable"
+		],
+		help="Version of the data request content to be used"
+	),
+	data_request_content_directory=ParameterSettings(
+		key="data_request_content_directory",
+		default_values=[
+			ValueSettings(key_type="laboratory", keys="data_request_content_directory"),
+			None
+		],
+		help="Version of the data request content to be used"
+	),
+	data_request_content_export=ParameterSettings(
+		key="data_request_content_export",
+		default_values=[
+			ValueSettings(key_type="laboratory", keys="data_request_content_export"),
+			"release"
+		],
+		authorized_values=["raw", "release"],
+		help="Version of the export of the data request content to be used"
+	),
+	data_request_content_consolidation=ParameterSettings(
+		key="data_request_content_consolidation",
+		default_values=[
+			ValueSettings(key_type="laboratory", keys="data_request_content_consolidation"),
+			False
+		],
+		authorized_types=[bool, ],
+		help="Should consolidation of the data request content be applied?"
 	),
 	laboratory_used=ParameterSettings(
         key="laboratory_used",
