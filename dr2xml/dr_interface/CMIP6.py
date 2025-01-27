@@ -22,7 +22,7 @@ from .definition import SimpleObject
 from .definition import SimpleDim as SimpleDimBasic
 from .definition import SimpleCMORVar as SimpleCMORVarBasic
 from ..utils import Dr2xmlError, print_struct, is_elt_applicable, convert_string_to_year
-from dr2xml.settings_interface import get_settings_values
+from dr2xml.settings_interface import get_settings_values, get_values_from_internal_settings
 
 data_request_path = get_settings_values("internal", "data_request_path")
 if data_request_path is not None:
@@ -355,7 +355,8 @@ class DataRequest(DataRequestBasic):
         logger = get_logger()
         logger.debug("In end_year for %s %s" % (cmorvar.label, cmorvar.mipTable))
         # 1- Get the RequestItems which apply to CmorVar
-        request_items = self._get_requestitems_for_cmorvar(cmorvar.id, internal_dict["max_priority"], global_rls)
+        max_priority = get_values_from_internal_settings("max_priority", "max_priority_lset", merge=False)
+        request_items = self._get_requestitems_for_cmorvar(cmorvar.id, max_priority, global_rls)
 
         # 2- Select those request links which include expt and year
         larger = None

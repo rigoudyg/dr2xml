@@ -793,8 +793,6 @@ homevars list: psl ps pr prsn prc rsdscs rsuscs rldscs rsdt rsut rsutcs rsutaf r
 
 Realms for these CMORvars: aerosol atmos atmos atmosChem atmos land atmosChem land land landIce landIce landIce land ocean ocean seaIce ocnBgChem ocnBgchem seaIce seaIce ocean
 Processing realm 'aerosol' of context 'surfex'
-The following pairs (variable,table) have been excluded for these reasons:
-    They are in exclusion list: ('rldsaf', 'HOMALmon'), ('rldscsaf', 'HOMALmon'), ('rlusaf', 'HOMALmon'), ('rluscsaf', 'HOMALmon'), ('rlutaf', 'AERmon'), ('rlutcsaf', 'AERmon'), ('rsdsaf', 'HOMALmon'), ('rsdscsaf', 'HOMALmon'), ('rsusaf', 'HOMALmon'), ('rsuscsaf', 'HOMALmon'), ('rsutaf', 'AERmon'), ('rsutcsaf', 'AERmon')
 Processing realm 'atmos' of context 'surfex'
 The following pairs (variable,table) have been excluded for these reasons:
     They are in exclusion list: ('co2Clim', 'Amon')
@@ -883,7 +881,7 @@ Skipped variables (i.e. whose alias is not present in the pingfile):
 
 >>> TABLE:          IfxGre 01/01 ----> areacellg(1)
 
->>> TABLE:          AERmon 55/120 ----> aoanh(1) c2h2(1) c2h6(1) c3h6(1) c3h8(1) ch3coch3(1) cheaqpso4(1) chegpso4(1) dms(1) emilnox(1) isop(1) jno2(1) lossch4(1) lossco(1) lossn2o(1) mmraerh2o(1) mmrnh4(1) mmrno3(1) mmrpm10(1) mmrpm2p5(1) mmrsoa(1) nh50(1) o3ste(1) pan(1) photo1d(1) bldep(1) ccn(1) chepasoa(1) chepsoa(1) drynh3(1) drynh4(1) drynoy(1) dryo3(1) emiaco(1) emianox(1) emiaoa(1) emibvoc(1) emico(1) emidms(1) emiisop(1) eminh3(1) eminox(1) emivoc(1) od550aerh2o(1) od550bb(1) od550csaer(1) od550no3(1) od550soa(1) pod0(1) reffclwtop(1) tropoz(1) wetnh3(1) wetnh4(1) wetnoy(1) wetso2(1)
+>>> TABLE:          AERmon 55/124 ----> aoanh(1) c2h2(1) c2h6(1) c3h6(1) c3h8(1) ch3coch3(1) cheaqpso4(1) chegpso4(1) dms(1) emilnox(1) isop(1) jno2(1) lossch4(1) lossco(1) lossn2o(1) mmraerh2o(1) mmrnh4(1) mmrno3(1) mmrpm10(1) mmrpm2p5(1) mmrsoa(1) nh50(1) o3ste(1) pan(1) photo1d(1) bldep(1) ccn(1) chepasoa(1) chepsoa(1) drynh3(1) drynh4(1) drynoy(1) dryo3(1) emiaco(1) emianox(1) emiaoa(1) emibvoc(1) emico(1) emidms(1) emiisop(1) eminh3(1) eminox(1) emivoc(1) od550aerh2o(1) od550bb(1) od550csaer(1) od550no3(1) od550soa(1) pod0(1) reffclwtop(1) tropoz(1) wetnh3(1) wetnh4(1) wetnoy(1) wetso2(1)
 
 >>> TABLE:            Amon 02/59 ----> rtmt(1) sci(1)
 
@@ -941,18 +939,18 @@ Some Statistics on actually written variables per frequency+shape...
                             Emon P1   8: concdust ec550aer tnhuspbl tnhusscp tntpbl tntrlcs tntrscs tntscp
        mon     XY-A    -------- ---  57
 
-                          AERmon P1  36: abs550aer cltc cod drybc drydust dryoa dryso2 dryso4 dryss emibc emidust emioa emiso2 emiso4 emiss lwp od440aer od550aer od550bc od550dust od550lt1aer od550oa od550so4 od550ss od870aer ps ptp tatp toz ttop wetbc wetdust wetoa wetso4 wetss ztp
+                          AERmon P1  40: abs550aer cltc cod drybc drydust dryoa dryso2 dryso4 dryss emibc emidust emioa emiso2 emiso4 emiss lwp od440aer od550aer od550bc od550dust od550lt1aer od550oa od550so4 od550ss od870aer ps ptp rlutaf rlutcsaf rsutaf rsutcsaf tatp toz ttop wetbc wetdust wetoa wetso4 wetss ztp
                             Amon P1  42: ccb cct ci clivi clt clwvi evspsbl fco2antt fco2fos fco2nat hfls hfss hurs huss pr prc prsn prw ps psl rlds rldscs rlus rlut rlutcs rsds rsdscs rsdt rsus rsuscs rsut rsutcs sbl sfcWind tas tasmax tasmin tauu tauv ts uas vas
                             Emon P1  37: cLand cSoil clwvic cropFracC3 cropFracC4 evspsblpot fAnthDisturb fDeforestToProduct fFireNat fLuc fProductDecomp grassFracC3 grassFracC4 intuadse intuaw intvadse intvaw loaddust loadso4 loadss mrlso nep netAtmosLandCO2Flux od443dust od865dust orog rls rsdsdiff rss sconcdust sconcso4 sconcss sedustCI sfcWindmax uqint vegFrac vqint
                             Emon P2  27: cLitterGrass cLitterSubSurf cLitterSurf cLitterTree cSoilGrass cSoilPools cSoilTree cStem cVegGrass cVegTree cWood co2s fDeforestToAtmos fFireAll fVegFire gppGrass gppTree mrtws nppGrass nppTree raGrass raTree rhGrass rhLitter rhSoil rhTree tSoilPools
-                        HOMALmon P1  37: RADabs550aer RADasy550aer RADod550aer RADssa550aer TACabs550aer albsrfcLa albsrfc asy550aer burntArea cdnctop clth cltl cltm fDeforestToL fFireBCarb fRegrowth fsat icedLa icod lcod necb od550acldaer od550dustbin1 od550dustbin2 od550ssbin1 od550ssbin2 reffclitop reffclwtopcnrm rluscs sconcbc sconcoa snct sndLa ssa550aer tmxlLa tsLa vegstress
+                        HOMALmon P1  45: RADabs550aer RADasy550aer RADod550aer RADssa550aer TACabs550aer albsrfcLa albsrfc asy550aer burntArea cdnctop clth cltl cltm fDeforestToL fFireBCarb fRegrowth fsat icedLa icod lcod necb od550acldaer od550dustbin1 od550dustbin2 od550ssbin1 od550ssbin2 reffclitop reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf sconcbc sconcoa snct sndLa ssa550aer tmxlLa tsLa vegstress
                            LImon P1  11: agesno hfdsn sbl sftgif sftgrf snc snd snm snw tpf tsn
                            LImon P2   1: lwsnl
                             Lmon P1  29: baresoilFrac burntFractionAll c3PftFrac c4PftFrac cLitter cProduct cVeg cropFrac evspsblsoi evspsblveg fFire fLitterSoil fVegLitter gpp grassFrac lai landCoverFrac mrfso mrro mrros mrso mrsos nbp npp ra residualFrac rh tran treeFrac
                             Lmon P2   7: cLeaf cLitterBelow cRoot cSoilFast cSoilMedium cSoilSlow prveg
                          Nonemon P1   7: albsn cw dmlt et hfdsl mrsow rzwc
                            SImon P1   1: siconca
-       mon    XY-na    -------- --- 235
+       mon    XY-na    -------- --- 247
 
                          AERmonZ P1  16: bry ch4 cly h2o hcl hno3 ho2 meanage n2o noy o3 oh ta ua va zg
                            EmonZ P1   4: oxloss oxprod vmrox zmtnt
@@ -983,10 +981,10 @@ Some Statistics on actually written variables per frequency+shape...
                         HOMEPmon P1   6: hus ta ua va wap zg
        mon  XY-P7HM    -------- ---   6
 
-       mon --------    -------- --- 357
+       mon --------    -------- --- 369
 
 
----------- --------    -------- --- 429
+---------- --------    -------- --- 441
 
 
 Some Statistics on actually written variables per variable...
@@ -1967,9 +1965,17 @@ Some Statistics on actually written variables per variable...
               *      day_day_XY-na_1 rlds
               *     mon_Amon_XY-na_1 rlds
 --------------------
+--- VARNAME: rldsaf: Surface Aerosol-Free Downwelling Longwave Radiation
+--------------------
+              * mon_HOMALmon_XY-na_1.0 rldsaf
+--------------------
 --- VARNAME: rldscs: Surface Downwelling Clear-Sky Longwave Radiation
 --------------------
               *     mon_Amon_XY-na_1 rldscs
+----------------------
+--- VARNAME: rldscsaf: Surface Clear-Sky Aerosol-Free Downwelling Longwave Radiation
+----------------------
+              * mon_HOMALmon_XY-na_1.0 rldscsaf
 -----------------
 --- VARNAME: rls: Net Longwave Surface Radiation
 -----------------
@@ -1988,18 +1994,34 @@ Some Statistics on actually written variables per variable...
               *      day_day_XY-na_1 rlus
               *     mon_Amon_XY-na_1 rlus
 --------------------
+--- VARNAME: rlusaf: Surface Aerosol-Free Upwelling Longwave Radiation
+--------------------
+              * mon_HOMALmon_XY-na_1.0 rlusaf
+--------------------
 --- VARNAME: rluscs: Surface Upwelling Longwave Flux in Air Assuming Clear Sky
 --------------------
               * mon_HOMALmon_XY-na_1.0 rluscs
+----------------------
+--- VARNAME: rluscsaf: Surface Clear-Sky Aerosol-Free Upwelling Longwave Radiation
+----------------------
+              * mon_HOMALmon_XY-na_1.0 rluscsaf
 ------------------
 --- VARNAME: rlut: TOA Outgoing Longwave Radiation
 ------------------
               *      day_day_XY-na_1 rlut
               *     mon_Amon_XY-na_1 rlut
 --------------------
+--- VARNAME: rlutaf: TOA Outgoing Aerosol-Free Longwave Radiation
+--------------------
+              *   mon_AERmon_XY-na_1 rlutaf
+--------------------
 --- VARNAME: rlutcs: TOA Outgoing Clear-Sky Longwave Radiation
 --------------------
               *     mon_Amon_XY-na_1 rlutcs
+----------------------
+--- VARNAME: rlutcsaf: TOA Outgoing Clear-Sky, Aerosol-Free Longwave Radiation
+----------------------
+              *   mon_AERmon_XY-na_1 rlutcsaf
 -------------------
 --- VARNAME: rootd: Maximum Root Depth
 -------------------
@@ -2018,9 +2040,17 @@ Some Statistics on actually written variables per variable...
               *      day_day_XY-na_1 rsds
               *     mon_Amon_XY-na_1 rsds
 --------------------
+--- VARNAME: rsdsaf: Surface Aerosol-Free Downwelling Shortwave Radiation
+--------------------
+              * mon_HOMALmon_XY-na_1.0 rsdsaf
+--------------------
 --- VARNAME: rsdscs: Surface Downwelling Clear-Sky Shortwave Radiation
 --------------------
               *     mon_Amon_XY-na_1 rsdscs
+----------------------
+--- VARNAME: rsdscsaf: Surface Clear-Sky Aerosol-Free Downwelling Shortwave Radiation
+----------------------
+              * mon_HOMALmon_XY-na_1.0 rsdscsaf
 ----------------------
 --- VARNAME: rsdsdiff: Surface Diffuse Downwelling Shortwave Radiation
 ----------------------
@@ -2048,17 +2078,33 @@ Some Statistics on actually written variables per variable...
               *      day_day_XY-na_1 rsus
               *     mon_Amon_XY-na_1 rsus
 --------------------
+--- VARNAME: rsusaf: Surface Aerosol-Free Upwelling Shortwave Radiation
+--------------------
+              * mon_HOMALmon_XY-na_1.0 rsusaf
+--------------------
 --- VARNAME: rsuscs: Surface Upwelling Clear-Sky Shortwave Radiation
 --------------------
               *     mon_Amon_XY-na_1 rsuscs
+----------------------
+--- VARNAME: rsuscsaf: Surface Clear-Sky Aerosol-Free Upwelling Shortwave Radiation
+----------------------
+              * mon_HOMALmon_XY-na_1.0 rsuscsaf
 ------------------
 --- VARNAME: rsut: TOA Outgoing Shortwave Radiation
 ------------------
               *     mon_Amon_XY-na_1 rsut
 --------------------
+--- VARNAME: rsutaf: toa outgoing shortwave radiation
+--------------------
+              *   mon_AERmon_XY-na_1 rsutaf
+--------------------
 --- VARNAME: rsutcs: TOA Outgoing Clear-Sky Shortwave Radiation
 --------------------
               *     mon_Amon_XY-na_1 rsutcs
+----------------------
+--- VARNAME: rsutcsaf: toa outgoing clear-sky shortwave radiation
+----------------------
+              *   mon_AERmon_XY-na_1 rsutcsaf
 ------------------
 --- VARNAME: rzwc: Root zone soil moisture
 ------------------

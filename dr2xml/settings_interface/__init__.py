@@ -10,6 +10,7 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 import copy
 from collections import OrderedDict
 
+from dr2xml.utils import Dr2xmlError
 from logger import get_logger
 
 # Internal settings for dr2xml
@@ -120,3 +121,39 @@ def get_settings_values(*args, **kwargs):
         raise ValueError("Could not find a proper value: %s not in %s" % (args[i], settings))
     else:
         return default
+
+
+def get_values_from_internal_settings(*args, **kwargs):
+    internal_settings = get_settings_values("internal")
+    merge = kwargs.get("merge", False)
+    default = kwargs.get("default", list())
+    if merge:
+        rep = list()
+        for arg in args:
+            if isinstance(arg, tuple):
+                is_relevant, key = arg
+            else:
+                is_relevant = True
+                key = arg
+            if is_relevant and key is not None:
+                rep.extend(internal_settings.get(key, list()))
+            elif key is None:
+                raise Dr2xmlError("Unable to get values from settings with None key")
+    else:
+        rep = default
+        i = 0
+        test = False
+        while not test and i < len(args):
+            if isinstance(args[i], tuple):
+                is_relevant, key = args[i]
+            else:
+                is_relevant = True
+                key = args[i]
+            if is_relevant and key is not None and key in internal_settings:
+                rep = internal_settings[key]
+                test = True
+            elif key is None:
+                raise Dr2xmlError("Unable to get values from settings with None key")
+            else:
+                i += 1
+    return rep

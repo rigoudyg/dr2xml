@@ -11,7 +11,7 @@ from collections import OrderedDict
 
 from dr2xml.dr_interface import get_dr_object
 from logger import get_logger
-from dr2xml.settings_interface import get_settings_values, set_internal_value
+from dr2xml.settings_interface import get_settings_values, set_internal_value, get_values_from_internal_settings
 from dr2xml.utils import print_struct, Dr2xmlError, check_objects_equals
 from .generic import complement_svar_using_cmorvar
 from dr2xml.laboratories import lab_adhoc_grid_policy
@@ -40,23 +40,21 @@ def select_data_request_CMORvars_for_lab(sset=False, year=None):
     internal_settings = get_settings_values("internal")
     data_request = get_dr_object("get_data_request")
     # Set sizes for lab settings, if available (or use CNRM-CM6-1 defaults)
-    mip_list_by_grid = internal_settings["mips"]
-    exctab = internal_settings["excluded_tables_lset"]
-    if not isinstance(exctab, list):
-        exctab = [exctab, ]
-    excvars = internal_settings['excluded_vars_lset']
-    if not isinstance(excvars, list):
-        excvars = [excvars, ]
-    excpairs = internal_settings['excluded_pairs_lset']
-    if not isinstance(excpairs, list):
-        excpairs = [excpairs, ]
+    mip_list_by_grid = get_values_from_internal_settings("mips")
+    grid_choice = get_values_from_internal_settings((sset, "grid_choice"), default="LR", merge=False)
+    sizes = get_values_from_internal_settings((sset, "sizes"), default=None, merge=False)
+    tierMax = get_values_from_internal_settings((sset, "tierMax"), "tierMax_lset", merge=False)
+    excvars = get_values_from_internal_settings("excluded_vars_lset", (sset, "excluded_vars_sset"),
+                                                (sset, "excluded_vars_per_config"), merge=True)
+    exctab = get_values_from_internal_settings("excluded_tables_lset", (sset, "excluded_tables_sset"), merge=True)
+    excpairs = get_values_from_internal_settings("excluded_pairs_lset", (sset, "excluded_pairs_sset"), merge=True)
+    incvars = get_values_from_internal_settings((sset, "included_vars"), "excluded_vars_lset", merge=False)
+    inctab = get_values_from_internal_settings((sset, "included_tables"), "excluded_tables_lset", merge=False)
+    inclinks = get_values_from_internal_settings((sset, "included_request_links"), default=None, merge=False)
+    excluded_links = get_values_from_internal_settings((sset, "excluded_request_links"), default=None, merge=False)
+    pmax = get_values_from_internal_settings((sset, "max_priority"), "max_priority_lset", merge=False)
     if sset:
-        tierMax = internal_settings['tierMax']
-        grid_choice = internal_settings["grid_choice"]
         mips_list = set(mip_list_by_grid[grid_choice])
-        sizes = internal_settings["sizes"]
-        inclinks = internal_settings["included_request_links"]
-        excluded_links = internal_settings["excluded_request_links"]
         experiment_id = internal_settings["experiment_for_requests"]
         experiment_filter = dict(experiment_id=experiment_id,
                                  year=year,
@@ -65,44 +63,12 @@ def select_data_request_CMORvars_for_lab(sset=False, year=None):
                                  branching=internal_settings["branching"],
                                  branch_year_in_child=internal_settings["branch_year_in_child"],
                                  endyear=internal_settings["end_year"])
-        pmax = internal_settings['max_priority']
-        inctab = internal_settings["included_tables"]
-        if not isinstance(inctab, list):
-            inctab = [inctab, ]
-        exctab.extend(internal_settings["excluded_tables_sset"])
-        incvars = internal_settings["included_vars"]
-        if not isinstance(incvars, list):
-            incvars = [incvars, ]
-        excvars_sset = internal_settings['excluded_vars_sset']
-        if not isinstance(excvars_sset, list):
-            excvars_sset = [excvars_sset, ]
-        excvars.extend(excvars_sset)
-        excvars_config = internal_settings['excluded_vars_per_config']
-        if not isinstance(excvars_config, list):
-            excvars_config = [excvars_config, ]
-        excvars.extend(excvars_config)
-        excpairs_sset = internal_settings['excluded_pairs_sset']
-        if not isinstance(excpairs_sset, list):
-            excpairs_sset = [excpairs_sset, ]
-        excpairs.extend(excpairs_sset)
     else:
-        tierMax = internal_settings['tierMax_lset']
         if isinstance(mip_list_by_grid, (dict, OrderedDict)):
             mips_list = set().union(*[set(mip_list_by_grid[grid]) for grid in mip_list_by_grid])
         else:
             mips_list = mip_list_by_grid
-        grid_choice = "LR"
-        sizes = None
-        inclinks = None
-        excluded_links = None
         experiment_filter = False
-        pmax = internal_settings['max_priority_lset']
-        inctab = internal_settings["included_tables_lset"]
-        if not isinstance(inctab, list):
-            inctab = [inctab, ]
-        incvars = internal_settings['included_vars_lset']
-        if not isinstance(incvars, list):
-            incvars = [incvars, ]
     mips_list = sorted(list(mips_list))
 
     set_internal_value("grid_choice", grid_choice)

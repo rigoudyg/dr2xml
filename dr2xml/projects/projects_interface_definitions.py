@@ -340,7 +340,8 @@ class ParameterSettings(Settings):
     def init_dict_default(self):
         return dict(skip_values=list(), forbidden_patterns=list(), conditions=list(), default_values=list(),
                     cases=list(), authorized_values=list(), authorized_types=list(), corrections=dict(),
-                    output_key=None, num_type="string", is_default=False, fatal=False, key=None, help="TODO")
+                    output_key=None, num_type="string", is_default=False, fatal=False, key=None, help="TODO",
+                    target_type=None)
 
     def dump_doc(self, force_void=False):
         rep = list()
@@ -387,6 +388,8 @@ class ParameterSettings(Settings):
             self.updated.add("is_default")
         if isinstance(self.authorized_types, list) and len(self.authorized_types) == 1:
             self.authorized_types = self.authorized_types[0]
+        if not self.target_type in ["list", "set", "str", None]:
+            raise ValueError("Target type must have a value among 'str', 'set', 'list', None.")
 
     def update(self, other):
         super(ParameterSettings, self).update(other)
@@ -507,9 +510,34 @@ class ParameterSettings(Settings):
                 test = test and relevant
             if not test:
                 i += 1
-        if not test and self.fatal and raise_on_error:
+        if test:
+            value = self.correct_target_type(value)
+        elif not test and self.fatal and raise_on_error:
             raise ValueError("Could not find a proper value for %s" % self.key)
         return test, value
+
+    def correct_target_type(self, value):
+        target_type = self.target_type
+        if target_type in ["list", ]:
+            if isinstance(value, set):
+                value = list(value)
+            elif isinstance(value, six.string_types):
+                value = [value, ]
+            elif not isinstance(value, list):
+                raise ValueError(f"Unable to transform {type(value)} into {target_type}.")
+        elif target_type in ["set", ]:
+            if isinstance(value, list):
+                value = set(value)
+            elif isinstance(value, six.string_types):
+                value = set([value, ])
+            elif not isinstance(value, set):
+                raise ValueError(f"Unable to transform {type(value)} into {target_type}.")
+        elif target_type in ["str", ]:
+            if isinstance(value, (list, set)) and len(value) == 1:
+                value = self.correct_target_type(value[0])
+            elif not isinstance(value, six.string_types):
+                value = str(value)
+        return value
 
 
 class TagSettings(Settings):

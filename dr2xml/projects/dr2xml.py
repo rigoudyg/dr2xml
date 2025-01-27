@@ -260,6 +260,7 @@ internal_values = dict(
 			ValueSettings(key_type="laboratory", keys="excluded_request_links"),
 			list()
 		],
+		target_type="list",
 		help="List of links un data request that should not been followed (those request are not taken into account)."
 	),
 	included_request_links=ParameterSettings(
@@ -268,6 +269,7 @@ internal_values = dict(
 			ValueSettings(key_type="laboratory", keys="included_request_links"),
 			list()
 		],
+		target_type="list",
 		help="List of the request links that will be processed (all others will not)."
 	),
 	excluded_tables_lset=ParameterSettings(
@@ -276,6 +278,7 @@ internal_values = dict(
 			ValueSettings(key_type="laboratory", keys="excluded_tables"),
 			list()
 		],
+		target_type="list",
 		help="List of the tables that will be excluded from outputs from laboratory settings."
 	),
 	excluded_tables_sset=ParameterSettings(
@@ -284,6 +287,7 @@ internal_values = dict(
 			ValueSettings(key_type="simulation", keys="excluded_tables"),
 			list()
 		],
+		target_type="list",
 		help="List of the tables that will be excluded from outputs from simulation settings."
 	),
 	excluded_spshapes_lset=ParameterSettings(
@@ -292,6 +296,7 @@ internal_values = dict(
 			ValueSettings(key_type="laboratory", keys="excluded_spshapes"),
 			list()
 		],
+		target_type="list",
 		help="The list of shapes that should be excluded (all variables in those shapes will be excluded from outputs)."
 	),
 	excluded_vars_lset=ParameterSettings(
@@ -300,6 +305,7 @@ internal_values = dict(
 			ValueSettings(key_type="laboratory", keys="excluded_vars"),
 			list()
 		],
+		target_type="list",
 		help="List of CMOR variables to exclude from the result based on previous Data Request extraction from "
 		     "laboratory settings."
 	),
@@ -309,6 +315,7 @@ internal_values = dict(
 			ValueSettings(key_type="simulation", keys="excluded_vars"),
 			list()
 		],
+		target_type="list",
 		help="List of CMOR variables to exclude from the result based on previous Data Request extraction from "
 		     "simulation settings."
 	),
@@ -318,6 +325,7 @@ internal_values = dict(
 			ValueSettings(key_type="laboratory", keys="excluded_pairs"),
 			list()
 		],
+		target_type="list",
 		help="You can exclude some (variable, table) pairs from outputs. "
 		     "A list of tuple (variable, table) to be excluded from laboratory settings."
 	),
@@ -327,6 +335,7 @@ internal_values = dict(
 			ValueSettings(key_type="simulation", keys="excluded_pairs"),
 			list()
 		],
+		target_type="list",
 		help="You can exclude some (variable, table) pairs from outputs. "
 		     "A list of tuple (variable, table) to be excluded from simulation settings."
 	),
@@ -336,6 +345,7 @@ internal_values = dict(
 			ValueSettings(key_type="laboratory", keys="included_tables"),
 			list()
 		],
+		target_type="list",
 		help="List of tables that will be processed (all others will not) from laboratory settings."
 	),
 	included_tables=ParameterSettings(
@@ -344,6 +354,7 @@ internal_values = dict(
 			ValueSettings(key_type="simulation", keys="included_tables"),
 			ValueSettings(key_type="internal", keys="included_tables_lset")
 		],
+		target_type="list",
 		help="List of tables that will be processed (all others will not)."
 	),
 	included_vars_lset=ParameterSettings(
@@ -352,6 +363,7 @@ internal_values = dict(
 			ValueSettings(key_type="laboratory", keys="included_vars"),
 			list()
 		],
+		target_type="list",
 		help="Variables to be considered from the Data Request (all others will not) from laboratory settings."
 	),
 	included_vars=ParameterSettings(
@@ -360,6 +372,7 @@ internal_values = dict(
 			ValueSettings(key_type="simulation", keys="included_vars"),
 			ValueSettings(key_type="internal", keys="included_vars_lset")
 		],
+		target_type="list",
 		help="Variables to be considered from the Data Request (all others will not)"
 	),
 	excluded_vars_per_config=ParameterSettings(
