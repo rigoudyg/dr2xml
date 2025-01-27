@@ -1,0 +1,9 @@
+[run]
+branch = True
+command_line = -m unittest
+source =
+    cfsites
+    dr2xml
+    scripts
+    xml_writer
+    logger.py

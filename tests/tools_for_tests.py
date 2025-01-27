@@ -56,7 +56,7 @@ def test_reference_simulation(simulation, config_dict, contexts, lset, sset, add
 	try:
 		dirname = config_dict["dirname"]
 		log = os.path.sep.join([dirname, "dr2xml_log"])
-		stats = os.path.sep.join([dirname, "dr2xml_stats"])
+		stats = os.path.sep.join([dirname, "..", "dr2xml_stats"])
 		time_stats = dict()
 		with codecs.open(log, 'w', encoding="utf-8") as logfile:
 			with codecs.open(stats, "w", encoding="utf-8") as statfile:
