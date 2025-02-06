@@ -18,7 +18,7 @@ from .settings_interface import get_settings_values
 from .utils import Dr2xmlGridError, Dr2xmlError
 
 # Logger
-from logger import get_logger
+from utilities.logger import get_logger
 
 # Interface to configuration
 from .config import get_config_variable, set_config_variable

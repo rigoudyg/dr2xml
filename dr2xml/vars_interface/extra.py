@@ -12,9 +12,10 @@ from collections import OrderedDict, defaultdict
 
 from dr2xml.analyzer import guess_freq_from_table_name
 from dr2xml.dr_interface import get_dr_object
-from logger import get_logger
+from utilities.logger import get_logger
 from dr2xml.settings_interface import get_values_from_internal_settings
-from dr2xml.utils import VarsError, read_json_content
+from dr2xml.utils import VarsError
+from utilities.json_tools import read_json_content
 from .generic import read_home_var, multi_plev_suffixes, single_plev_suffixes, remove_p_suffix
 
 home_attrs = ['type', 'label', 'modeling_realm', 'frequency', 'mipTable', 'temporal_shp', 'spatial_shp',

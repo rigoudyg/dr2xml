@@ -61,7 +61,7 @@ from .settings_interface import initialize_settings
 from .utils import print_struct
 
 # Logger
-from logger import initialize_logger, get_logger, change_log_level
+from utilities.logger import initialize_logger, get_logger, change_log_level
 
 # Global variables and configuration tools
 from .config import get_config_variable, set_config_variable, initialize_config_variables

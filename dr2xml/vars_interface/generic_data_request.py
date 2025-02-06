@@ -10,7 +10,7 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 from collections import OrderedDict
 
 from dr2xml.dr_interface import get_dr_object
-from logger import get_logger
+from utilities.logger import get_logger
 from dr2xml.settings_interface import get_settings_values, set_internal_value, get_values_from_internal_settings
 from dr2xml.utils import print_struct, Dr2xmlError, check_objects_equals
 from .generic import complement_svar_using_cmorvar

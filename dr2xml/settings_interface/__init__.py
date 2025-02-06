@@ -11,7 +11,7 @@ import copy
 from collections import OrderedDict
 
 from dr2xml.utils import Dr2xmlError
-from logger import get_logger
+from utilities.logger import get_logger
 
 # Internal settings for dr2xml
 internal_settings = None

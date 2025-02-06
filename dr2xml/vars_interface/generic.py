@@ -14,7 +14,7 @@ import six
 
 from dr2xml.analyzer import cellmethod2area
 from dr2xml.dr_interface import get_dr_object
-from logger import get_logger
+from utilities.logger import get_logger
 from dr2xml.settings_interface import get_settings_values
 from dr2xml.utils import VarsError, Dr2xmlError
 

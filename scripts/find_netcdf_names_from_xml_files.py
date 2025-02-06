@@ -9,14 +9,22 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 
 import os
 import sys
+import tempfile
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from check_outputs_produced import find_netcdf_filenames_from_xmls, parse_args, decode_if_needed
+from check_outputs_produced import find_netcdf_filenames_from_xmls, parse_args
+from utilities.encoding_tools import decode_if_needed
 
-
-dict_opts = parse_args()
+dict_opts = parse_args(required_iox_dir=False)
 output = dict_opts.pop("out")
+if dict_opts["ioxdir"] is None:
+	dict_opts["ioxdir"] = ""
+del dict_opts["fatal"]
 
-with open(output, "w", encoding="utf-8") as out:
-	out.write(decode_if_needed(os.linesep.join(find_netcdf_filenames_from_xmls(**dict_opts))))
+if output in ["test", ]:
+	with tempfile.TemporaryFile("w", encoding="utf-8") as tmp:
+		tmp.write(decode_if_needed(os.linesep.join(find_netcdf_filenames_from_xmls(**dict_opts))))
+else:
+	with open(output, "w", encoding="utf-8") as out:
+		out.write(decode_if_needed(os.linesep.join(find_netcdf_filenames_from_xmls(**dict_opts))))

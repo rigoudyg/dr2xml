@@ -8,44 +8,7 @@ Utilities used by xml_writer.
 from __future__ import print_function, division, absolute_import, unicode_literals
 
 import re
-import sys
 from collections import OrderedDict
-
-
-python_version = sys.version[0]
-
-
-def encode_if_needed(a_string, encoding="utf-8"):
-    """
-    If needed, encode the python string ``a_string`` into the encoding specify by ``encoding``.
-
-    :param six.string_types a_string: the string to encode
-    :param six.string_types encoding: the encoding to be used
-    :return: a string encoded if needed
-    """
-    if python_version in ["2", ]:
-        return a_string.encode(encoding)
-    elif python_version in ["3", ]:
-        return a_string
-    else:
-        raise OSError("Unknown Python version %s", python_version)
-
-
-def decode_if_needed(a_string, encoding="utf-8"):
-    """
-    If needed, decode the python string ``a_string`` into the encoding specify by ``encoding``.
-
-    :param six.string_types a_string: the string to decode
-    :param six.string_types encoding: the encoding to be used
-    :return: a string decoded if needed
-    """
-    if python_version == "2":
-        return a_string.decode(encoding)
-    elif python_version == "3":
-        return a_string
-    else:
-        raise OSError("Unknown Python version %s", sys.version.split()[0])
-
 
 #: XML dict regexp
 _generic_dict_regexp = r'(?P<attrib>(\s(\w+\s?=\s?"([^"])*"\s?))*)'

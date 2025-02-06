@@ -15,7 +15,7 @@ from collections import OrderedDict, defaultdict
 
 import six
 
-from logger import get_logger
+from utilities.logger import get_logger
 from .definition import Scope as ScopeBasic
 from .definition import DataRequest as DataRequestBasic
 from .definition import SimpleObject

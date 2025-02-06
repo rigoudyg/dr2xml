@@ -8,7 +8,7 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 
 from collections import OrderedDict, defaultdict
 
-from logger import get_logger
+from utilities.logger import get_logger
 
 
 # mpmoine_petitplus: nouvelle fonction print_some_stats (plus d'info sur les skipped_vars, nbre de vars / (shape,freq) )

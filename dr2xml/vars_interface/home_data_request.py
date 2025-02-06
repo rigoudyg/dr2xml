@@ -11,7 +11,7 @@ import os
 from collections import defaultdict
 
 from dr2xml.config import get_config_variable, set_config_variable
-from logger import get_logger
+from utilities.logger import get_logger
 from dr2xml.settings_interface import get_settings_values
 from dr2xml.utils import VarsError
 from .cmor import read_home_var_cmor, check_cmor_variable

@@ -12,10 +12,12 @@ import os
 import re
 import sys
 from argparse import ArgumentParser
+import tempfile
 
 sys.path.append(os.path.abspath(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
-from xml_writer.utils import decode_if_needed
+from utilities.logger import get_logger
+from utilities.encoding_tools import decode_if_needed
 from xml_writer.element import Element
 from xml_writer.parser import xml_file_parser
 
@@ -72,34 +74,51 @@ def list_content(target_dir):
 	return content
 
 
-def parse_args():
+def parse_args(required_iox_dir=True):
 	parser = ArgumentParser()
 	parser.add_argument("xml_files", nargs="+", help="XML input files to parse")
 	parser.add_argument("--out", required=True, help="Output filename")
-	parser.add_argument("--ioxdir", required=True,
+	parser.add_argument("--ioxdir", required=required_iox_dir,
 	                    help="Directory in which outputs can be found (can be a directory in which there is only "
 	                         "subdirectories, in this case each subdirectory will be checked).")
 	parser.add_argument("--ioxdir_pattern", default="IOXDIR", help="Pattern for ioxdir in filename")
 	parser.add_argument("--start_date_pattern", default="%start_date%", help="Pattern for start date in filename")
 	parser.add_argument("--end_date_pattern", default="%end_date%", help="Pattern for end date in filename")
-	return parser.parse_args().__dict__
+	parser.add_argument("--fatal", default=True, type=int, help="Should an error be raised if inconsistency found?")
+	args = parser.parse_args().__dict__
+	args["fatal"] = bool(args["fatal"])
+	return args
 
 
-def make_check(find_dict, ioxdir, output):
+def make_check(find_dict, ioxdir, out, fatal=True):
 	dr2xml_netcdf_filenames_list = find_netcdf_filenames_from_xmls(**find_dict)
 	dr2xml_netcdf_filenames_list = [os.path.basename(elt) for elt in dr2xml_netcdf_filenames_list]
 
 	rep = True
 
-	with open(output, "w", encoding="utf-8") as out:
-		if not os.path.isdir(ioxdir):
-			raise OSError("IOX directory %s does not exist" % ioxdir)
+	if not os.path.isdir(ioxdir):
+		raise OSError("IOX directory %s does not exist" % ioxdir)
+	else:
+		output_list = list_content(ioxdir)
+		is_output_here = len(output_list) > 0
+		if is_output_here:
+			out.write(decode_if_needed("Deal with directory %s\n" % ioxdir))
+			rep2, dr2xml_not_found, outputs_not_found = check_consistency(output_list, copy.deepcopy(dr2xml_netcdf_filenames_list))
+			if not rep2:
+				if len(dr2xml_not_found) > 0:
+					out.write(decode_if_needed("The following dr2xml patterns were not found in directory:\n%s\n" % os.linesep.join(dr2xml_not_found)))
+				if len(outputs_not_found) > 0:
+					out.write(decode_if_needed("The following files were not found in dr2xml patterns:\n%s\n" % os.linesep.join(outputs_not_found)))
+			else:
+				out.write(decode_if_needed("All match\n"))
+			rep = rep and rep2
 		else:
-			output_list = list_content(ioxdir)
-			is_output_here = len(output_list) > 0
-			if is_output_here:
-				out.write(decode_if_needed("Deal with directory %s\n" % ioxdir))
-				rep2, dr2xml_not_found, outputs_not_found = check_consistency(output_list, copy.deepcopy(dr2xml_netcdf_filenames_list))
+			for d in sorted([elt for elt in os.listdir(ioxdir) if os.path.isdir(os.path.sep.join([ioxdir, elt]))]):
+				current_dir = os.path.sep.join([ioxdir, d])
+				out.write(decode_if_needed("Deal with directory %s\n" % current_dir))
+				output_list = list_content(current_dir)
+				rep2, dr2xml_not_found, outputs_not_found = check_consistency(output_list, copy.deepcopy(
+					dr2xml_netcdf_filenames_list))
 				if not rep2:
 					if len(dr2xml_not_found) > 0:
 						out.write(decode_if_needed("The following dr2xml patterns were not found in directory:\n%s\n" % os.linesep.join(dr2xml_not_found)))
@@ -108,24 +127,13 @@ def make_check(find_dict, ioxdir, output):
 				else:
 					out.write(decode_if_needed("All match\n"))
 				rep = rep and rep2
-			else:
-				for d in sorted([elt for elt in os.listdir(ioxdir) if os.path.isdir(os.path.sep.join([ioxdir, elt]))]):
-					current_dir = os.path.sep.join([ioxdir, d])
-					out.write(decode_if_needed("Deal with directory %s\n" % current_dir))
-					output_list = list_content(current_dir)
-					rep2, dr2xml_not_found, outputs_not_found = check_consistency(output_list, copy.deepcopy(
-						dr2xml_netcdf_filenames_list))
-					if not rep2:
-						if len(dr2xml_not_found) > 0:
-							out.write(decode_if_needed("The following dr2xml patterns were not found in directory:\n%s\n" % os.linesep.join(dr2xml_not_found)))
-						if len(outputs_not_found) > 0:
-							out.write(decode_if_needed("The following files were not found in dr2xml patterns:\n%s\n" % os.linesep.join(outputs_not_found)))
-					else:
-						out.write(decode_if_needed("All match\n"))
-					rep = rep and rep2
 
 	if not rep:
-		raise ValueError("The dr2xml and directory contents does not match")
+		if fatal:
+			raise ValueError("The dr2xml and directory contents does not match")
+		else:
+			logger = get_logger()
+			logger.error("The dr2xml and directory contents does not match")
 
 
 if __name__ == "__main__":
@@ -133,4 +141,10 @@ if __name__ == "__main__":
 	output = find_dict.pop("out")
 	ioxdir = find_dict["ioxdir"]
 	find_dict["ioxdir"] = ""
-	make_check(find_dict, ioxdir, output)
+	fatal = find_dict.pop("fatal")
+	if output in ["test", ]:
+		with tempfile.TemporaryFile("w", encoding="utf-8") as tmp:
+			make_check(find_dict, ioxdir, tmp, fatal=fatal)
+	else:
+		with open(output, "w", encoding="utf-8") as out:
+			make_check(find_dict, ioxdir, out, fatal=fatal)

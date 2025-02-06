@@ -14,7 +14,7 @@ from collections import OrderedDict
 from .config import get_config_variable
 
 # Logger
-from logger import get_logger
+from utilities.logger import get_logger
 
 # Interface to settings dictionaries
 from .settings_interface import get_settings_values

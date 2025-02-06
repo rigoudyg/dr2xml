@@ -15,8 +15,9 @@ import six
 from dr2xml.config import get_config_variable
 from dr2xml.settings_interface.py_settings_interface import format_dict_for_printing, is_key_in_lset, \
     get_variable_from_lset_without_default, is_key_in_sset, get_variable_from_sset_without_default
-from dr2xml.utils import Dr2xmlError, read_json_content
-from logger import get_logger
+from dr2xml.utils import Dr2xmlError
+from utilities.json_tools import read_json_content
+from utilities.logger import get_logger
 
 
 def return_value(value, common_dict=dict(), internal_dict=dict(), additional_dict=dict(),

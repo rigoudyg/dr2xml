@@ -24,7 +24,7 @@ from .settings_interface import get_settings_values
 from .utils import Dr2xmlError
 
 # Logger
-from logger import get_logger
+from utilities.logger import get_logger
 
 # Global variables and configuration tools
 from .config import add_value_in_list_config_variable

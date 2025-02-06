@@ -9,7 +9,7 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 
 from collections import defaultdict
 
-from logger import get_logger
+from utilities.logger import get_logger
 from dr2xml.settings_interface import get_settings_values
 from dr2xml.utils import print_struct, Dr2xmlError
 from .generic_data_request import select_data_request_CMORvars_for_lab
