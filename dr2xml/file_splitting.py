@@ -14,6 +14,7 @@ from io import open
 # Utilities
 import six
 
+from .dr_interface import get_dr_object
 from .settings_interface import get_settings_values
 from .utils import Dr2xmlGridError, Dr2xmlError
 
@@ -80,7 +81,7 @@ def read_compression_factors():
             return
 
 
-def split_frequency_for_variable(svar, grid, mcfg, context):
+def split_frequency_for_variable(svar, grid, context):
     """
     Compute variable level split_freq and returns it as a string
 
@@ -103,7 +104,7 @@ def split_frequency_for_variable(svar, grid, mcfg, context):
         max_size = internal_settings["max_file_size_in_floats"]
         #
         compression_factor = get_config_variable("compression_factor")
-        size = field_size(svar, mcfg) * internal_settings["bytes_per_float"]
+        size = field_size(svar) * internal_settings["bytes_per_float"]
         if compression_factor is None:
             read_compression_factors()
             compression_factor = get_config_variable("compression_factor")
@@ -212,11 +213,10 @@ def timesteps_per_freq_and_duration(freq, nbdays, sampling_tstep):
 spatial_shape_regexp = re.compile(r"(?P<hdim>\w+)-(?P<vdim>\w+)(?P<other>(\|\w+)?)")
 
 
-def field_size(svar, mcfg):
+def field_size(svar):
     """
 
     :param svar:
-    :param mcfg:
     :return:
     """
     # COmputing field size is basee on the fact that sptial dimensions
@@ -225,21 +225,21 @@ def field_size(svar, mcfg):
     # of the non-spatial dimensions sizes
 
     # ['nho','nlo','nha','nla','nlas','nls','nh1'] / nz = sc.mcfg['nlo']
-
-    nb_lat = mcfg['nh1']
-    nb_lat_ocean = mcfg['nh1']
-    atm_grid_size = mcfg['nha']
-    atm_nblev = mcfg['nla']
-    soil_nblev = mcfg['nls']
-    oce_nblev = mcfg['nlo']
-    oce_grid_size = mcfg['nho']
+    sc = get_dr_object("get_scope")
+    nb_lat = sc.mcfg['nh1']
+    nb_lat_ocean = sc.mcfg['nh1']
+    atm_grid_size = sc.mcfg['nha']
+    atm_nblev = sc.mcfg['nla']
+    soil_nblev = sc.mcfg['nls']
+    oce_nblev = sc.mcfg['nlo']
+    oce_grid_size = sc.mcfg['nho']
     # TBD : dimension sizes below should be derived from DR query
-    nb_cosp_sites = 129
-    nb_lidar_temp = 40
-    nb_parasol_refl = 5
-    nb_isccp_tau = 7
-    nb_isccp_pc = 7
-    nb_curtain_sites = 1000
+    nb_cosp_sites = sc.mcfg["nb_cosp_sites"]
+    nb_lidar_temp = sc.mcfg["nb_lidar_temp"]
+    nb_parasol_refl = sc.mcfg["nb_parasol_refl"]
+    nb_isccp_tau = sc.mcfg["nb_isccp_tau"]
+    nb_isccp_pc = sc.mcfg["nb_isccp_pc"]
+    nb_curtain_sites = sc.mcfg["nb_curtain_sites"]
     #
     siz = 0
     s = svar.spatial_shp
@@ -308,8 +308,8 @@ def evaluate_split_freq_value(split_freq):
         return split_freq_units, split_freq_length
 
 
-def determine_split_freq(svar, grid_choice, mcfg, context):
-    split_freq = split_frequency_for_variable(svar, grid_choice, mcfg, context)
+def determine_split_freq(svar, grid_choice, context):
+    split_freq = split_frequency_for_variable(svar, grid_choice, context)
     max_split_freq = get_settings_values("internal", "max_split_freq")
     if max_split_freq is not None:
         split_freq_units, split_freq_length = evaluate_split_freq_value(split_freq)

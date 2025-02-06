@@ -767,8 +767,7 @@ def get_split_info(sv, table, enddate, year, debug):
             endmonth = "01"
             endday = "01"
             split_last_date = "{}-{}-{} 00:00:00".format(endyear, endmonth, endday)
-        sc = get_dr_object("get_scope")
-        split_freq = determine_split_freq(sv, grid_choice, sc.mcfg, context)
+        split_freq = determine_split_freq(sv, grid_choice, context)
     return split_freq_format, split_last_date, split_start_offset, split_end_offset, split_freq
 
 

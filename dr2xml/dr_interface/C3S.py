@@ -84,9 +84,6 @@ class DataRequest(DataRequestBasic):
         return OrderedDict()
 
     def get_cmorvars_list(self, sizes=None, **kwargs):
-        if sizes is not None:
-            sc = get_scope()
-            sc.update_mcfg(sizes)
         rep = defaultdict(set)
         for id in self.get_element_uid(elt_type="variable"):
             for grid in self.get_element_uid(id=id, elt_type="variable").grids:

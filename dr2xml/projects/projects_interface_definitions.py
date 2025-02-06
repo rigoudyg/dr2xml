@@ -631,6 +631,7 @@ class FunctionSettings(Settings):
             value = self.func(*args, **self.options)
         except BaseException as e:
             logger.debug("Issue calling %s with arguments %s and options %s" % (str(self.func), str(args), str(self.options)))
+            logger.debug(str(e))
             value = None
             test = False
         return test, value

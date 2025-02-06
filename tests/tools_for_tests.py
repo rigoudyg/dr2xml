@@ -119,7 +119,7 @@ def list_comparison_to_do(test, reference):
 
 def create_config_elements(simulation="my_simulation", contexts=list(), add_profile=False, check_time_file=None,
                            dummies="skip", prefix="IOXDIR", select="on_expt", attributes=list(),
-                           year="1980", enddate="19800131", pingfiles="", printout="1"):
+                           year="1980", enddate="19800131", pingfiles="", printout="1", debug=False):
 	current_dir = os.path.dirname(os.path.abspath(__file__))
 	simulation_dir = os.path.sep.join([current_dir, "test_{}".format(simulation)])
 	inputs_dir = os.path.sep.join([simulation_dir, "input"])
@@ -144,7 +144,8 @@ def create_config_elements(simulation="my_simulation", contexts=list(), add_prof
 			year=year,
 			enddate=enddate,
 			pingfiles=pingfiles,
-			printout=printout
+			printout=printout,
+			debug=debug
 		),
 		lab_and_model_settings=read_element_from_python_file(element="lab_and_model_settings", simulation=simulation,
 		                                                     current_dir=current_dir),

@@ -54,12 +54,6 @@ class DataRequest(DataRequestBasic):
     def get_dimensions_dict(self):
         return OrderedDict()
 
-    def get_cmorvars_list(self, sizes=None, **kwargs):
-        if sizes is not None:
-            sc = get_scope()
-            sc.update_mcfg(sizes)
-        return dict(), list()
-
 
 def initialize_data_request():
     global data_request

@@ -39,7 +39,6 @@ def select_data_request_CMORvars_for_lab(sset=False, year=None):
     logger = get_logger()
     internal_settings = get_settings_values("internal")
     data_request = get_dr_object("get_data_request")
-    # Set sizes for lab settings, if available (or use CNRM-CM6-1 defaults)
     mip_list_by_grid = get_values_from_internal_settings("mips")
     grid_choice = get_values_from_internal_settings((sset, "grid_choice"), default="LR", merge=False)
     sizes = get_values_from_internal_settings((sset, "sizes"), default=None, merge=False)

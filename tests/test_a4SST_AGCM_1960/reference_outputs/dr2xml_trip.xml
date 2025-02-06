@@ -43,7 +43,7 @@
 'references' = 'http://www.umr-cnrm.fr/cmip6/references',
 'sampling_timestep' = {'HR' = {'nemo' = '1800.0', 'surfex' = '900.0', 'trip' = '1800.0'}, 'LR' = {'nemo' = '1800.0', 'surfex' = '900.0', 'trip' = '1800.0'}},
 'save_project_settings' = 'dr2xml_project_settings.py',
-'sizes' = {'HR' = ['1514100', '75', '259200', '91', '30', '14', '128'], 'LR' = ['106428', '75', '32768', '91', '30', '14', '128']},
+'sizes' = {'HR' = {'nh1' = '128', 'nha' = '259200', 'nho' = '1514100', 'nla' = '91', 'nlas' = '30', 'nlo' = '75', 'nls' = '14'}, 'LR' = {'nh1' = '128', 'nha' = '32768', 'nho' = '106428', 'nla' = '91', 'nlas' = '30', 'nlo' = '75', 'nls' = '14'}},
 'source_types' = {'CNRM-CM6-1' = 'AOGCM', 'CNRM-CM6-1-HR' = 'AOGCM', 'CNRM-ESM2-1' = 'AOGCM BGC AER CHEM', 'CNRM-ESM2-1-HR' = 'AOGCM BGC AER'},
 'special_timestep_vars' = {'60mi' = ['cllcalipso', 'clmcalipso', 'clhcalipso', 'cltcalipso', 'cllcalipsoice', 'clmcalipsoice', 'clhcalipsoice', 'cltcalipsoice', 'cllcalipsoliq', 'clmcalipsoliq', 'clhcalipsoliq', 'cltcalipsoliq', 'cllcalipsoun', 'clmcalipsoun', 'clhcalipsoun', 'cltcalipsoun', 'clcalipso', 'clcalipsoice', 'clcalipsoliq', 'clcalipsoun', 'clcalipsotmp', 'clcalipsotmpice', 'clcalipsotmpliq', 'clcalipsotmpun', 'cfadLidarsr532', 'parasolRefl', 'parasolCRefl', 'cltlidarradar', 'clcalipso2', 'cfadDbze94', 'cltisccp', 'pctisccp', 'tauisccp', 'albisccp', 'meantbisccp', 'meantbclrisccp', 'clisccp', 'cltmodis', 'clwmodis', 'climodis', 'clhmodis', 'clmmodis', 'cllmodis', 'tautmodis', 'tauwmodis', 'tauimodis', 'reffclwmodis', 'reffclimodis', 'pctmodis', 'lwpmodis', 'iwpmodis', 'clmodis', 'jpdftaureliqmodis', 'jpdftaureicemodis', 'clmisr']},
 'tierMax' = '1',

@@ -7,25 +7,23 @@ Definitions of objects for DR interface
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
-from collections import namedtuple, OrderedDict
+from collections import OrderedDict
 
 import six
 
+from dr2xml.settings_interface import get_settings_values
 from dr2xml.settings_interface.py_settings_interface import is_sset_not_None
 from dr2xml.utils import convert_string_to_year, Dr2xmlError
+from dr2xml.projects.dr2xml import format_sizes
 
 
 class Scope(object):
     def __init__(self, scope=None):
         self.scope = scope
-        self.mcfg = self.build_mcfg([None, None, None, None, None, None, None])
-
-    def build_mcfg(self, value):
-        mcfg = namedtuple('mcfg', ['nho', 'nlo', 'nha', 'nla', 'nlas', 'nls', 'nh1'])
-        return mcfg._make(value)._asdict()
+        self.mcfg = get_settings_values('internal', 'sizes')
 
     def update_mcfg(self, value):
-        self.mcfg = self.build_mcfg(value)
+        self.mcfg = format_sizes(value)
 
     def get_request_link_by_mip(self, mips_list):
         return list()
