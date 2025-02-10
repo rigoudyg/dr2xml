@@ -134,11 +134,7 @@ def determine_value(key_type=None, keys=list(), func=None, fmt=None, src=None, c
             else:
                 value = None
         elif allow_additional_keytypes:
-            if key_type in ["scope", ] and allow_additional_keytypes:
-                from dr2xml.dr_interface import get_dr_object
-                value = get_dr_object("get_scope")
-                found = True
-            elif key_type in ["data_request", ] and allow_additional_keytypes:
+            if key_type in ["data_request", ] and allow_additional_keytypes:
                 from dr2xml.dr_interface import get_dr_object
                 value = get_dr_object("get_data_request")
                 found = True

@@ -9,14 +9,13 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 
 from collections import OrderedDict
 
-from .definition import Scope, ListWithItems
+from .definition import ListWithItems
 from .definition import DataRequest as DataRequestBasic
 from .definition import SimpleObject
 from .definition import SimpleCMORVar as SimpleCMORVarBasic
 from .definition import SimpleDim as SimpleDimBasic
 
 
-scope = None
 data_request = None
 
 
@@ -67,27 +66,6 @@ def get_data_request():
         return initialize_data_request()
     else:
         return data_request
-
-
-def initialize_scope(tier_max):
-    global scope
-    dq = get_data_request()
-    if scope is None:
-        scope = Scope()
-    return scope
-
-
-def get_scope(tier_max=None):
-    if scope is None:
-        return initialize_scope(tier_max)
-    else:
-        return scope
-
-
-def set_scope(sc):
-    if sc is not None:
-        global scope
-        scope = sc
 
 
 def normalize_grid(grid):

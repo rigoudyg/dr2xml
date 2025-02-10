@@ -16,11 +16,11 @@ from collections import OrderedDict, defaultdict
 import six
 
 from utilities.logger import get_logger
-from .definition import Scope as ScopeBasic
 from .definition import DataRequest as DataRequestBasic
 from .definition import SimpleObject
 from .definition import SimpleDim as SimpleDimBasic
 from .definition import SimpleCMORVar as SimpleCMORVarBasic
+from ..projects.dr2xml import format_sizes
 from ..utils import Dr2xmlError, print_struct, is_elt_applicable, convert_string_to_year
 from dr2xml.settings_interface import get_settings_values, get_values_from_internal_settings
 
@@ -39,40 +39,15 @@ except ImportError:
     from dreqPy.scope import dreqQuery
 
 
-class Scope(ScopeBasic):
-
-    def __init__(self, scope=None):
-        super(Scope, self).__init__(scope=scope)
-        self.mcfg = self.scope.mcfg
-
-    def get_request_link_by_mip(self, mips_list):
-        return sorted(list(self.scope.getRequestLinkByMip(set(mips_list))), key=lambda x: x.label)
-
-    def get_filtered_request_links_by_mip_included_excluded(self, mips_list, included_request_links=None,
-                                                            excluded_request_links=None):
-        logger = get_logger()
-        rep = self.get_request_link_by_mip(mips_list)
-        logger.info("Number of Request Links which apply to MIPS %s  is: %d" %
-                    (print_struct(mips_list), len(rep)))
-        rep = [rl for rl in rep if is_elt_applicable(rl, attribute="label", excluded=excluded_request_links)]
-        logger.info("Number of Request Links after filtering by excluded_request_links is: %d" % len(rep))
-        if included_request_links is not None and len(included_request_links) > 0:
-            excluded_rls = [rl for rl in rep if not is_elt_applicable(rl, attribute="label",
-                                                                      included=included_request_links)]
-            for rl in excluded_rls:
-                logger.critical("RequestLink %s is not included" % rl.label)
-                rep.remove(rl)
-        logger.info("Number of Request Links after filtering by included_request_links is: %d" % len(rep))
-
-        return rep
-
-    def get_vars_by_request_link(self, request_link, pmax):
-        if not isinstance(request_link, list):
-            request_link = [request_link, ]
-        return self.scope.varsByRql(request_link, pmax)
-
-
 class DataRequest(DataRequestBasic):
+    def set_mcfg(self):
+        self.scope = dreqQuery(dq=self.data_request, tierMax=get_settings_values("internal", "select_tierMax"))
+        self.mcfg = format_sizes(self.scope.mcfg)
+
+    def update_mcfg(self):
+        mcfg = get_settings_values('internal', 'select_sizes')
+        if mcfg is not None:
+            self.mcfg = mcfg
 
     def get_version(self):
         return self.data_request.version
@@ -437,13 +412,11 @@ class DataRequest(DataRequestBasic):
     def get_cmorvars_list(self, select_tierMax, select_mips, select_included_request_links,
                           select_excluded_request_links, select_max_priority, select_included_vars,
                           select_excluded_vars, select_included_tables, select_excluded_tables, select_excluded_pairs,
-                          experiment_filter=False, select_sizes=None, **kwargs):
+                          experiment_filter=False, **kwargs):
         logger = get_logger()
-        sc = get_scope(select_tierMax)
-        if select_sizes is not None:
-            sc.update_mcfg(select_sizes)
+        self.update_mcfg()
         # Get the request links for all experiments filtered by MIPs
-        rls_for_mips = sc.get_filtered_request_links_by_mip_included_excluded(
+        rls_for_mips = self._get_filtered_request_links_by_mip_included_excluded(
             mips_list=select_mips, included_request_links=select_included_request_links,
             excluded_request_links=select_excluded_request_links
         )
@@ -460,7 +433,7 @@ class DataRequest(DataRequestBasic):
         miprl_vars_grids = set()
         for rl in rls:
             logger.debug("processing RequestLink %s" % rl.title)
-            for v in sc.get_vars_by_request_link(request_link=rl.uid, pmax=select_max_priority):
+            for v in self._get_vars_by_request_link(request_link=rl.uid, pmax=select_max_priority):
                 # The requested grid is given by the RequestLink except if spatial shape matches S-*
                 gr = rl.grid
                 cmvar = self.get_element_uid(v, elt_type="variable")
@@ -488,8 +461,33 @@ class DataRequest(DataRequestBasic):
             filtered_vars_with_grids[v].add(g)
         return filtered_vars_with_grids, rls
 
+    def _get_request_link_by_mip(self, mips_list):
+        return sorted(list(self.scope.getRequestLinkByMip(set(mips_list))), key=lambda x: x.label)
 
-scope = None
+    def _get_filtered_request_links_by_mip_included_excluded(self, mips_list, included_request_links=None,
+                                                            excluded_request_links=None):
+        logger = get_logger()
+        rep = self._get_request_link_by_mip(mips_list)
+        logger.info("Number of Request Links which apply to MIPS %s  is: %d" %
+                    (print_struct(mips_list), len(rep)))
+        rep = [rl for rl in rep if is_elt_applicable(rl, attribute="label", excluded=excluded_request_links)]
+        logger.info("Number of Request Links after filtering by excluded_request_links is: %d" % len(rep))
+        if included_request_links is not None and len(included_request_links) > 0:
+            excluded_rls = [rl for rl in rep if not is_elt_applicable(rl, attribute="label",
+                                                                      included=included_request_links)]
+            for rl in excluded_rls:
+                logger.critical("RequestLink %s is not included" % rl.label)
+                rep.remove(rl)
+        logger.info("Number of Request Links after filtering by included_request_links is: %d" % len(rep))
+
+        return rep
+
+    def _get_vars_by_request_link(self, request_link, pmax):
+        if not isinstance(request_link, list):
+            request_link = [request_link, ]
+        return self.scope.varsByRql(request_link, pmax)
+
+
 data_request = None
 
 
@@ -505,27 +503,6 @@ def get_data_request():
         return initialize_data_request()
     else:
         return data_request
-
-
-def initialize_scope(tier_max):
-    global scope
-    dq = get_data_request()
-    if scope is None:
-        scope = Scope(dreqQuery(dq=dq.data_request, tierMax=tier_max))
-    return scope
-
-
-def get_scope(tier_max=None):
-    if scope is None:
-        return initialize_scope(tier_max)
-    else:
-        return scope
-
-
-def set_scope(sc):
-    if sc is not None:
-        global scope
-        scope = sc
 
 
 def normalize_grid(grid):

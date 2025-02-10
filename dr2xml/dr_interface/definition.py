@@ -14,26 +14,6 @@ import six
 from dr2xml.settings_interface import get_settings_values
 from dr2xml.settings_interface.py_settings_interface import is_sset_not_None
 from dr2xml.utils import convert_string_to_year, Dr2xmlError
-from dr2xml.projects.dr2xml import format_sizes
-
-
-class Scope(object):
-    def __init__(self, scope=None):
-        self.scope = scope
-        self.mcfg = get_settings_values('internal', 'sizes')
-
-    def update_mcfg(self, value):
-        self.mcfg = format_sizes(value)
-
-    def get_request_link_by_mip(self, mips_list):
-        return list()
-
-    def get_filtered_request_links_by_mip_included_excluded(self, mips_list, included_request_links=None,
-                                                            excluded_request_links=None):
-        return list()
-
-    def get_vars_by_request_link(self, request_link, pmax):
-        return list()
 
 
 class DataRequest(object):
@@ -42,6 +22,14 @@ class DataRequest(object):
         self.data_request = data_request
         self.print_DR_errors = print_DR_errors
         self.print_DR_stdname_errors = print_DR_stdname_errors
+        self.mcfg = None
+        self.set_mcfg()
+
+    def set_mcfg(self):
+        self.mcfg = get_settings_values('internal', 'select_sizes')
+
+    def update_mcfg(self):
+        raise NotImplementedError()
 
     def get_version(self):
         """

@@ -225,21 +225,21 @@ def field_size(svar):
     # of the non-spatial dimensions sizes
 
     # ['nho','nlo','nha','nla','nlas','nls','nh1'] / nz = sc.mcfg['nlo']
-    sc = get_dr_object("get_scope")
-    nb_lat = sc.mcfg['nh1']
-    nb_lat_ocean = sc.mcfg['nh1']
-    atm_grid_size = sc.mcfg['nha']
-    atm_nblev = sc.mcfg['nla']
-    soil_nblev = sc.mcfg['nls']
-    oce_nblev = sc.mcfg['nlo']
-    oce_grid_size = sc.mcfg['nho']
+    dr = get_dr_object("get_data_request")
+    nb_lat = dr.mcfg['nh1']
+    nb_lat_ocean = dr.mcfg['nh1']
+    atm_grid_size = dr.mcfg['nha']
+    atm_nblev = dr.mcfg['nla']
+    soil_nblev = dr.mcfg['nls']
+    oce_nblev = dr.mcfg['nlo']
+    oce_grid_size = dr.mcfg['nho']
     # TBD : dimension sizes below should be derived from DR query
-    nb_cosp_sites = sc.mcfg["nb_cosp_sites"]
-    nb_lidar_temp = sc.mcfg["nb_lidar_temp"]
-    nb_parasol_refl = sc.mcfg["nb_parasol_refl"]
-    nb_isccp_tau = sc.mcfg["nb_isccp_tau"]
-    nb_isccp_pc = sc.mcfg["nb_isccp_pc"]
-    nb_curtain_sites = sc.mcfg["nb_curtain_sites"]
+    nb_cosp_sites = dr.mcfg["nb_cosp_sites"]
+    nb_lidar_temp = dr.mcfg["nb_lidar_temp"]
+    nb_parasol_refl = dr.mcfg["nb_parasol_refl"]
+    nb_isccp_tau = dr.mcfg["nb_isccp_tau"]
+    nb_isccp_pc = dr.mcfg["nb_isccp_pc"]
+    nb_curtain_sites = dr.mcfg["nb_curtain_sites"]
     #
     siz = 0
     s = svar.spatial_shp
