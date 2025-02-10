@@ -34,7 +34,7 @@ def return_value(value, common_dict=dict(), internal_dict=dict(), additional_dic
 def determine_value(key_type=None, keys=list(), func=None, fmt=None, src=None, common_dict=dict(), internal_dict=dict(),
                     additional_dict=dict(), allow_additional_keytypes=True):
     logger = get_logger()
-    if key_type in ["combine", ] or (key_type is None and func is not None):
+    if key_type in ["combine", "merge"] or (key_type is None and func is not None):
         keys = [return_value(key, common_dict=common_dict, internal_dict=internal_dict,
                              additional_dict=additional_dict, allow_additional_keytypes=allow_additional_keytypes)
                 for key in keys]
@@ -52,6 +52,10 @@ def determine_value(key_type=None, keys=list(), func=None, fmt=None, src=None, c
             if key_type in ["combine", ]:
                 keys = [",".join(key) if isinstance(key, (list, tuple)) else key for key in keys]
                 value = fmt.format(*keys)
+            elif key_type in ["merge", ]:
+                value = list()
+                for key in keys:
+                    value.extend(key)
             else:
                 if isinstance(func, FunctionSettings):
                     found, value = func(*keys, additional_dict=additional_dict, internal_dict=internal_dict,
@@ -60,8 +64,9 @@ def determine_value(key_type=None, keys=list(), func=None, fmt=None, src=None, c
                     try:
                         value = func(*keys)
                         found = True
-                    except:
+                    except BaseException as e:
                         logger.debug("Issue calling func %s with arguments %s" % (str(func), str(keys)))
+                        logger.debug(str(e))
                         value = None
                         found = False
                 if found and fmt is not None:
@@ -185,7 +190,8 @@ def determine_value(key_type=None, keys=list(), func=None, fmt=None, src=None, c
                 try:
                     value = func(*value)
                     found = True
-                except:
+                except Exception as e:
+                    logger.debug(str(e))
                     value = None
                     found = False
         if found and fmt is not None:
@@ -487,7 +493,8 @@ class ParameterSettings(Settings):
                                               allow_additional_keytypes=allow_additional_keytypes)
             if test:
                 test, value = self.correct_value(value, internal_values=internal_dict, common_values=common_dict,
-                                                 additional_dict=dict(), allow_additional_keytypes=True)
+                                                 additional_dict=dict(),
+                                                 allow_additional_keytypes=allow_additional_keytypes)
             if test:
                 relevant, test = self.check_value(value, internal_dict=internal_dict, common_dict=common_dict,
                                                   additional_dict=additional_dict,

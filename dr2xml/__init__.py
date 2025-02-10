@@ -575,7 +575,7 @@ def configuration_init(func):
     :return: The initial function with initialized environment to use dr2xml.
     """
     def make_configuration(lset, sset, cvs_path=None, printout=False, prefix="", debug=False, force_reset=False,
-                           **kwargs):
+                           select="on_expt_and_year", **kwargs):
         year = kwargs.get("year", 0)
         context = kwargs.get("context")
         dirname = kwargs.get("dirname")
@@ -588,8 +588,8 @@ def configuration_init(func):
         initialize_logger(default=True, level=default_level)
         initialize_config_variables()
         initialize_settings(lset=lset, sset=sset, cvspath=cvs_path, context=context, prefix=prefix,
-                            year=year, dirname=dirname, force_reset=force_reset)
-        return func(**kwargs)
+                            year=year, dirname=dirname, force_reset=force_reset, select=select)
+        return func(select=select, **kwargs)
     return make_configuration
 
 

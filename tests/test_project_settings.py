@@ -57,7 +57,7 @@ class TestProjectSettings(unittest.TestCase):
 		}
 		sset = dict()
 		config = dict(context="arpsfx", dirname=None, prefix="CMIP6_", year=0, root="__init__.py")
-		initialize_settings(lset=lset, sset=sset, **config)
+		initialize_settings(lset=lset, sset=sset, select="no", **config)
 		internal = get_settings_values("internal")
 		ref_internal = {'CFsubhr_frequency': '1ts',
 		                'add_Gibraltar': False,
@@ -132,6 +132,24 @@ class TestProjectSettings(unittest.TestCase):
 		                'required_model_components': [],
 		                'sampling_timestep': None,
 		                'save_project_settings': None,
+		                'select': 'no',
+		                'select_excluded_pairs': [],
+		                'select_excluded_request_links': None,
+		                'select_excluded_tables': [],
+		                'select_excluded_vars': [],
+		                'select_grid_choice': 'LR',
+		                'select_included_request_links': None,
+		                'select_included_tables': [],
+		                'select_included_vars': [],
+		                'select_max_priority': 3,
+		                'select_mips': ['AerChemMIP', 'C4MIP', 'CCMI', 'CFMIP', 'CMIP', 'CMIP5', 'CMIP6', 'CORDEX',
+		                                'DAMIP', 'DCPP', 'DECK', 'DynVar', 'FAFMIP', 'GMMIP', 'GeoMIP', 'HighResMIP',
+		                                'ISMIP6', 'LS3MIP', 'LUMIP', 'OMIP', 'PDRMIP', 'PMIP', 'RFMIP', 'SIMIP',
+		                                'SPECS', 'ScenarioMIP', 'SolarMIP', 'VIACSAB', 'VolMIP'],
+		                'select_on_expt': False,
+		                'select_on_year': False,
+		                'select_sizes': None,
+		                'select_tierMax': 3,
 		                'sizes': None,
 		                'source_id': None,
 		                'source_type': None,

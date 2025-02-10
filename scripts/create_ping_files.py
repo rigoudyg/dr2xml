@@ -129,7 +129,8 @@ if args.out in ["test", ]:
             create_ping_files(context=my_context, lset=settings, sset=dict(),
                               path_special=settings["path_special_defs"],
                               comments=True, exact=False, dummy=True,
-                              filename=os.sep.join([output_dir, f"ping_{my_context}.xml"]), dummy_with_shape=True)
+                              filename=os.sep.join([output_dir, f"ping_{my_context}.xml"]), dummy_with_shape=True,
+                              year=None, select="no")
 
         # ! head -n 5 output_sample/ping_nemo.xml
 
@@ -139,7 +140,7 @@ if args.out in ["test", ]:
                               path_special=settings["path_special_defs"],
                               comments=True, exact=False, dummy=True,
                               filename=os.sep.join([output_dir, f"ping_{my_context}_%s.xml"]), dummy_with_shape=True,
-                              by_realm=True)
+                              by_realm=True, year=None, select="no")
 else:
     output_dir = args.out
     if os.path.exists(output_dir):
@@ -150,7 +151,7 @@ else:
     for my_context in settings["realms_per_context"].keys():
         print("=== CREATING PINGFILE FOR CONTEXT", my_context)
         create_ping_files(context=my_context, lset=settings, sset=dict(), path_special=settings["path_special_defs"],
-                          comments=True, exact=False, dummy=True,
+                          comments=True, exact=False, dummy=True, year=None, select="no",
                           filename=os.sep.join([output_dir, f"ping_{my_context}.xml"]), dummy_with_shape=True)
 
     # ! head -n 5 output_sample/ping_nemo.xml
@@ -158,6 +159,6 @@ else:
     # Generate one ping file per realm:
     for my_context in settings["realms_per_context"].keys():
         create_ping_files(context=my_context, lset=settings, sset=dict(), path_special=settings["path_special_defs"],
-                          comments=True, exact=False, dummy=True,
+                          comments=True, exact=False, dummy=True, year=None, select="no",
                           filename=os.sep.join([output_dir, f"ping_{my_context}_%s.xml"]), dummy_with_shape=True,
                           by_realm=True)

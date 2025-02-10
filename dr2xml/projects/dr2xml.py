@@ -8,8 +8,8 @@ dr2xml specific project settings
 from __future__ import print_function, division, absolute_import, unicode_literals
 
 
-from dr2xml.projects.projects_interface_definitions import ValueSettings, ParameterSettings, TagSettings,\
-	FunctionSettings
+from dr2xml.projects.projects_interface_definitions import ValueSettings, ParameterSettings, TagSettings, \
+	FunctionSettings, CaseSettings, ConditionSettings
 from utilities.logger import get_logger
 
 parent_project_settings = None
@@ -39,7 +39,7 @@ def format_sizes(*sizes):
 	rep = dict(nho=None, nlo=None, nha=None, nla=None, nlas=None, nls=None, nh1=None,
 	           nb_cosp_sites=129, nb_lidar_temp=40, nb_parasol_refl=5, nb_isccp_tau=7, nb_isccp_pc=7,
 	           nb_curtain_sites=1000)
-	if isinstance(sizes, (list, tuple)) and len(sizes) == 1 and isinstance(sizes[0], dict):
+	if isinstance(sizes, (list, tuple)) and len(sizes) == 1 and isinstance(sizes[0], (dict, list, tuple)):
 		sizes = sizes[0]
 	if isinstance(sizes, (list, tuple)):
 		mcfg = dict()
@@ -56,6 +56,18 @@ def format_sizes(*sizes):
 		logger.error(f"The values provided by sizes must not be None, issues with {issues_values}.")
 		raise ValueError(f"The values provided by sizes must not be None, issues with {issues_values}.")
 	return rep
+
+
+def sort_mips(*mips):
+	if isinstance(mips, (list, tuple)) and len(mips) == 1 and isinstance(mips[0], (dict, set, list)):
+		mips = mips[0]
+	rep = set()
+	if isinstance(mips, dict):
+		for grid in mips:
+			rep = rep | mips[grid]
+	else:
+		rep = mips
+	return sorted(list(rep))
 
 
 internal_values = dict(
@@ -124,6 +136,299 @@ internal_values = dict(
 		],
 		fatal=True,
 		help="Context associated with the xml file produced."
+	),
+	select=ParameterSettings(
+        key="select",
+		default_values=[
+			ValueSettings(key_type="dict", keys="select")
+		],
+		authorized_values=["on_expt_and_year", "on_expt", "no"],
+		fatal=True,
+		help="Selection strategy for variables."
+	),
+	select_on_expt=ParameterSettings(
+		key="select_on_expt",
+		cases=[
+			CaseSettings(
+				conditions=ConditionSettings(check_value=ValueSettings(key_type="internal", keys="select"),
+				                             check_to_do="eq",
+				                             reference_values=["on_expt_and_year", "on_expt"]),
+				value=True
+			),
+			CaseSettings(
+				conditions=ConditionSettings(check_value=ValueSettings(key_type="internal", keys="select"),
+				                             check_to_do="eq",
+				                             reference_values=["no", ]),
+				value=False
+			)
+		],
+		fatal=True,
+		help="Should data be selected on experiment?"
+	),
+	select_on_year=ParameterSettings(
+		key="select_on_year",
+		cases=[
+			CaseSettings(
+				conditions=ConditionSettings(check_value=ValueSettings(key_type="internal", keys="select"),
+				                             check_to_do="eq",
+				                             reference_values=["on_expt_and_year", ]),
+				value=True
+			),
+			CaseSettings(
+				conditions=ConditionSettings(check_value=ValueSettings(key_type="internal", keys="select"),
+				                             check_to_do="eq",
+				                             reference_values=["no", "on_expt"]),
+				value=False
+			)
+		],
+		fatal=True,
+		help="Should data be selected on year?"
+	),
+	select_grid_choice=ParameterSettings(
+		key="select_grid_choice",
+		cases=[
+			CaseSettings(
+				conditions=ConditionSettings(check_value=ValueSettings(key_type="internal", keys="select_on_expt"),
+				                             check_to_do="eq",
+				                             reference_values=True),
+				value=ValueSettings(key_type="internal", keys="grid_choice")
+			),
+			CaseSettings(
+				conditions=ConditionSettings(check_value=ValueSettings(key_type="internal", keys="select_on_expt"),
+				                             check_to_do="eq",
+				                             reference_values=False),
+				value="LR"
+			)
+		],
+		fatal=True,
+		help="Grid choice for variable selection."
+	),
+	select_sizes=ParameterSettings(
+		key="select_sizes",
+		cases=[
+			CaseSettings(
+				conditions=ConditionSettings(check_value=ValueSettings(key_type="internal", keys="select_on_expt"),
+				                             check_to_do="eq",
+				                             reference_values=True),
+				value=ValueSettings(key_type="internal", keys="sizes")
+			),
+			CaseSettings(
+				conditions=ConditionSettings(check_value=ValueSettings(key_type="internal", keys="select_on_expt"),
+				                             check_to_do="eq",
+				                             reference_values=False),
+				value=None
+			)
+		],
+		fatal=True,
+		help="Sizes for variable selection."
+	),
+	select_max_priority=ParameterSettings(
+		key="select_max_priority",
+		cases=[
+			CaseSettings(
+				conditions=ConditionSettings(check_value=ValueSettings(key_type="internal", keys="select_on_expt"),
+				                             check_to_do="eq",
+				                             reference_values=True),
+				value=ValueSettings(key_type="internal", keys="max_priority")
+			),
+			CaseSettings(
+				conditions=ConditionSettings(check_value=ValueSettings(key_type="internal", keys="select_on_expt"),
+				                             check_to_do="eq",
+				                             reference_values=False),
+				value=ValueSettings(key_type="internal", keys="max_priority_lset")
+			)
+		],
+		fatal=True,
+		help="Max priority for variable selection."
+	),
+	select_tierMax=ParameterSettings(
+		key="select_tierMax",
+		cases=[
+			CaseSettings(
+				conditions=ConditionSettings(check_value=ValueSettings(key_type="internal", keys="select_on_expt"),
+				                             check_to_do="eq",
+				                             reference_values=True),
+				value=ValueSettings(key_type="internal", keys="tierMax")
+			),
+			CaseSettings(
+				conditions=ConditionSettings(check_value=ValueSettings(key_type="internal", keys="select_on_expt"),
+				                             check_to_do="eq",
+				                             reference_values=False),
+				value=ValueSettings(key_type="internal", keys="tierMax_lset")
+			)
+		],
+		fatal=True,
+		help="tierMax for variable selection."
+	),
+	select_included_vars=ParameterSettings(
+		key="select_included_vars",
+		cases=[
+			CaseSettings(
+				conditions=ConditionSettings(check_value=ValueSettings(key_type="internal", keys="select_on_expt"),
+				                             check_to_do="eq",
+				                             reference_values=True),
+				value=ValueSettings(key_type="internal", keys="included_vars")
+			),
+			CaseSettings(
+				conditions=ConditionSettings(check_value=ValueSettings(key_type="internal", keys="select_on_expt"),
+				                             check_to_do="eq",
+				                             reference_values=False),
+				value=ValueSettings(key_type="internal", keys="included_vars_lset")
+			)
+		],
+		fatal=True,
+		help="Included variables for variable selection."
+	),
+	select_included_tables=ParameterSettings(
+		key="select_included_tables",
+		cases=[
+			CaseSettings(
+				conditions=ConditionSettings(check_value=ValueSettings(key_type="internal", keys="select_on_expt"),
+				                             check_to_do="eq",
+				                             reference_values=True),
+				value=ValueSettings(key_type="internal", keys="included_tables")
+			),
+			CaseSettings(
+				conditions=ConditionSettings(check_value=ValueSettings(key_type="internal", keys="select_on_expt"),
+				                             check_to_do="eq",
+				                             reference_values=False),
+				value=ValueSettings(key_type="internal", keys="included_tables_lset")
+			)
+		],
+		fatal=True,
+		help="Included tables for variable selection."
+	),
+	select_included_request_links=ParameterSettings(
+		key="select_included_request_links",
+		cases=[
+			CaseSettings(
+				conditions=ConditionSettings(check_value=ValueSettings(key_type="internal", keys="select_on_expt"),
+				                             check_to_do="eq",
+				                             reference_values=True),
+				value=ValueSettings(key_type="internal", keys="included_request_links")
+			),
+			CaseSettings(
+				conditions=ConditionSettings(check_value=ValueSettings(key_type="internal", keys="select_on_expt"),
+				                             check_to_do="eq",
+				                             reference_values=False),
+				value=None
+			)
+		],
+		fatal=True,
+		help="Included request links for variable selection."
+	),
+	select_excluded_request_links=ParameterSettings(
+		key="select_excluded_request_links",
+		cases=[
+			CaseSettings(
+				conditions=ConditionSettings(check_value=ValueSettings(key_type="internal", keys="select_on_expt"),
+				                             check_to_do="eq",
+				                             reference_values=True),
+				value=ValueSettings(key_type="internal", keys="excluded_request_links")
+			),
+			CaseSettings(
+				conditions=ConditionSettings(check_value=ValueSettings(key_type="internal", keys="select_on_expt"),
+				                             check_to_do="eq",
+				                             reference_values=False),
+				value=None
+			)
+		],
+		fatal=True,
+		help="Excluded request links for variable selection."
+	),
+	select_excluded_vars=ParameterSettings(
+		key="select_excluded_vars",
+		cases=[
+			CaseSettings(
+				conditions=ConditionSettings(check_value=ValueSettings(key_type="internal", keys="select_on_expt"),
+				                             check_to_do="eq",
+				                             reference_values=True),
+				value=ValueSettings(key_type="merge",
+				                    keys=[
+					                    ValueSettings(key_type="internal", keys="excluded_vars_lset"),
+					                    ValueSettings(key_type="internal", keys="excluded_vars_sset"),
+					                    ValueSettings(key_type="internal", keys="excluded_vars_per_config")
+				                    ])
+			),
+			CaseSettings(
+				conditions=ConditionSettings(check_value=ValueSettings(key_type="internal", keys="select_on_expt"),
+				                             check_to_do="eq",
+				                             reference_values=False),
+				value=ValueSettings(key_type="internal", keys="excluded_vars_lset")
+			)
+		],
+		fatal=True,
+		help="Excluded variables for variable selection."
+	),
+	select_excluded_tables=ParameterSettings(
+		key="select_excluded_tables",
+		cases=[
+			CaseSettings(
+				conditions=ConditionSettings(check_value=ValueSettings(key_type="internal", keys="select_on_expt"),
+				                             check_to_do="eq",
+				                             reference_values=True),
+				value=ValueSettings(key_type="merge",
+				                    keys=[
+					                    ValueSettings(key_type="internal", keys="excluded_tables_lset"),
+					                    ValueSettings(key_type="internal", keys="excluded_tables_sset")
+				                    ])
+			),
+			CaseSettings(
+				conditions=ConditionSettings(check_value=ValueSettings(key_type="internal", keys="select_on_expt"),
+				                             check_to_do="eq",
+				                             reference_values=False),
+				value=ValueSettings(key_type="internal", keys="excluded_tables_lset")
+			)
+		],
+		fatal=True,
+		help="Excluded tables for variable selection."
+	),
+	select_excluded_pairs=ParameterSettings(
+		key="select_excluded_pairs",
+		cases=[
+			CaseSettings(
+				conditions=ConditionSettings(check_value=ValueSettings(key_type="internal", keys="select_on_expt"),
+				                             check_to_do="eq",
+				                             reference_values=True),
+				value=ValueSettings(key_type="merge",
+				                    keys=[
+					                    ValueSettings(key_type="internal", keys="excluded_pairs_lset"),
+					                    ValueSettings(key_type="internal", keys="excluded_pairs_sset")
+				                    ])
+			),
+			CaseSettings(
+				conditions=ConditionSettings(check_value=ValueSettings(key_type="internal", keys="select_on_expt"),
+				                             check_to_do="eq",
+				                             reference_values=False),
+				value=ValueSettings(key_type="internal", keys="excluded_pairs_lset")
+			)
+		],
+		fatal=True,
+		help="Excluded pairs for variable selection."
+	),
+	select_mips=ParameterSettings(
+        key="select_mips",
+		cases=[
+			CaseSettings(
+				conditions=ConditionSettings(check_value=ValueSettings(key_type="internal", keys="select_on_expt"),
+				                             check_to_do="eq",
+				                             reference_values=True),
+				value=ValueSettings(key_type="internal",
+				                    keys=[
+					                    "mips",
+					                    ValueSettings(key_type="internal", keys="select_grid_choice")
+				                    ],
+				                    func=sort_mips)
+			),
+			CaseSettings(
+				conditions=ConditionSettings(check_value=ValueSettings(key_type="internal", keys="select_on_expt"),
+				                             check_to_do="eq",
+				                             reference_values=False),
+				value=ValueSettings(key_type="internal", keys="mips", func=sort_mips)
+			)
+		],
+		fatal=True,
+		help="MIPs for variable selection."
 	),
 	path_to_parse=ParameterSettings(
         key="path_to_parse",
