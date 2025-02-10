@@ -104,43 +104,43 @@ Some Statistics on actually written variables per frequency+shape...
 
        day --------    -------- ---   7
 
-                          AERmon P1  14: abs550aer od550aer od550bc od550dust od550oa od550so4 od550ss ptp rlutaf rlutcsaf rsutaf rsutcsaf toz ztp
-                            Amon P1  39: ccb cct ci clivi clt clwvi evspsbl hfls hfss hurs huss pr prc prsn prw ps psl rlds rldscs rlus rlut rlutcs rsds rsdscs rsdt rsus rsuscs rsut rsutcs sbl sfcWind tas tasmax tasmin tauu tauv ts uas vas
-                           CFmon P1   7: albisccp clhcalipso cllcalipso clmcalipso cltcalipso cltisccp pctisccp
-                            Emon P1   7: evspsblpot intuadse intuaw intvadse intvaw nep sfcWindmax
-                            Emon P2   1: mrtws
-                        HOMALmon P1  30: RADabs550aer RADasy550aer RADod550aer RADssa550aer albsrfcLa albsrfc cdnctop clth cltl cltm fsat icedLa icod lcod reffclitop reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf snct sndLa tmxlLa tsLa vegstress
-                           LImon P2   1: lwsnl
-                           LImon P1   3: snc snd snw
-                            Lmon P1  18: baresoilFrac cropFrac evspsblsoi evspsblveg gpp grassFrac lai mrfso mrro mrros mrso mrsos npp ra residualFrac rh tran treeFrac
-                            Lmon P2   1: prveg
-                         Nonemon P1   7: albsn cw dmlt et hfdsl mrsow rzwc
-       mon    XY-na    -------- --- 128
-
-                            Amon P1   8: hur hus o3 ta ua va wap zg
-       mon   XY-P19    -------- ---   8
-
                             Amon P1   3: cl cli clw
        mon     XY-A    -------- ---   3
 
                             Amon P1   1: mc
        mon    XY-AH    -------- ---   1
 
-                            Amon P1   3: ch4global co2mass n2oglobal
-       mon    na-na    -------- ---   3
-
                            CFmon P1   1: clcalipso
        mon   XY-H40    -------- ---   1
 
+                            Amon P1   8: hur hus o3 ta ua va wap zg
+       mon   XY-P19    -------- ---   8
+
                            CFmon P1   1: clisccp
        mon    XY-P7    -------- ---   1
+
+                        HOMEPmon P1   6: hus ta ua va wap zg
+       mon  XY-P7HM    -------- ---   6
 
                             Emon P1   1: mrsol
                             Lmon P2   1: tsl
        mon     XY-S    -------- ---   2
 
-                        HOMEPmon P1   6: hus ta ua va wap zg
-       mon  XY-P7HM    -------- ---   6
+                          AERmon P1  14: abs550aer od550aer od550bc od550dust od550oa od550so4 od550ss ptp rlutaf rlutcsaf rsutaf rsutcsaf toz ztp
+                            Amon P1  39: ccb cct ci clivi clt clwvi evspsbl hfls hfss hurs huss pr prc prsn prw ps psl rlds rldscs rlus rlut rlutcs rsds rsdscs rsdt rsus rsuscs rsut rsutcs sbl sfcWind tas tasmax tasmin tauu tauv ts uas vas
+                           CFmon P1   7: albisccp clhcalipso cllcalipso clmcalipso cltcalipso cltisccp pctisccp
+                            Emon P1   7: evspsblpot intuadse intuaw intvadse intvaw nep sfcWindmax
+                            Emon P2   1: mrtws
+                        HOMALmon P1  30: RADabs550aer RADasy550aer RADod550aer RADssa550aer albsrfcLa albsrfc cdnctop clth cltl cltm fsat icedLa icod lcod reffclitop reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf snct sndLa tmxlLa tsLa vegstress
+                           LImon P1   3: snc snd snw
+                           LImon P2   1: lwsnl
+                            Lmon P1  18: baresoilFrac cropFrac evspsblsoi evspsblveg gpp grassFrac lai mrfso mrro mrros mrso mrsos npp ra residualFrac rh tran treeFrac
+                            Lmon P2   1: prveg
+                         Nonemon P1   7: albsn cw dmlt et hfdsl mrsow rzwc
+       mon    XY-na    -------- --- 128
+
+                            Amon P1   3: ch4global co2mass n2oglobal
+       mon    na-na    -------- ---   3
 
        mon --------    -------- --- 153
 

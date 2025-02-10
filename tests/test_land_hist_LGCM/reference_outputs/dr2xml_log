@@ -49,6 +49,11 @@ file_def written as current_directory/test_land_hist_LGCM/test_outputs/dr2xml_su
 
 
 Some Statistics on actually written variables per frequency+shape...
+                          E3hrPt P1   1: cltcalipso
+     3hrPt    XY-na    -------- ---   1
+
+     3hrPt --------    -------- ---   1
+
                              day P1   1: CMIP6_albsrfc
        day    XY-na    -------- ---   1
 
@@ -58,11 +63,6 @@ Some Statistics on actually written variables per frequency+shape...
         fx    XY-na    -------- ---   1
 
         fx --------    -------- ---   1
-
-                          E3hrPt P1   1: cltcalipso
-     3hrPt    XY-na    -------- ---   1
-
-     3hrPt --------    -------- ---   1
 
 
 ---------- --------    -------- ---   3

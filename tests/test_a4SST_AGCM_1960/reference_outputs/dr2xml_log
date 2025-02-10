@@ -95,11 +95,19 @@ Skipped variables (i.e. whose alias is not present in the pingfile):
 
 
 Some Statistics on actually written variables per frequency+shape...
-                             day P1  30: CMIP6_albsrfc clt hfls hfss hurs hursmax hursmin huss mrro mrso mrsos pr prc prsn psl rlds rlus rlut rsds rsus sfcWind sfcWindmax snc snw tas tasmax tasmin tslsi uas vas
-       day    XY-na    -------- ---  30
+                          E3hrPt P1   1: cltcalipso
+     3hrPt    XY-na    -------- ---   1
+
+                      HOMAL3hrPt P1   1: parasolCRefl
+     3hrPt  XY-sza5    -------- ---   1
+
+     3hrPt --------    -------- ---   2
 
                              day P1   6: hur hus ta ua va wap
        day    XY-P8    -------- ---   6
+
+                             day P1  30: CMIP6_albsrfc clt hfls hfss hurs hursmax hursmin huss mrro mrso mrsos pr prc prsn psl rlds rlus rlut rsds rsus sfcWind sfcWindmax snc snw tas tasmax tasmin tslsi uas vas
+       day    XY-na    -------- ---  30
 
        day --------    -------- ---  36
 
@@ -112,43 +120,35 @@ Some Statistics on actually written variables per frequency+shape...
                             Amon P1   3: cl cli clw
        mon     XY-A    -------- ---   4
 
-                          AERmon P1   9: abs550aer od550aer ptp rlutaf rlutcsaf rsutaf rsutcsaf toz ztp
-                            Amon P1  39: ccb cct ci clivi clt clwvi evspsbl hfls hfss hurs huss pr prc prsn prw ps psl rlds rldscs rlus rlut rlutcs rsds rsdscs rsdt rsus rsuscs rsut rsutcs sbl sfcWind tas tasmax tasmin tauu tauv ts uas vas
-                            Emon P1   6: evspsblpot intuadse intuaw intvadse intvaw sfcWindmax
-                            Emon P2   1: mrtws
-                        HOMALmon P1  30: RADabs550aer RADasy550aer RADod550aer RADssa550aer albsrfcLa albsrfc cdnctop clth cltl cltm fsat icedLa icod lcod reffclitop reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf snct sndLa tmxlLa tsLa vegstress
-                           LImon P2   1: lwsnl
-                           LImon P1   3: snc snd snw
-                            Lmon P1  15: baresoilFrac cropFrac evspsblsoi evspsblveg gpp grassFrac mrfso mrro mrros mrso mrsos npp residualFrac tran treeFrac
-                            Lmon P2   1: prveg
-                         Nonemon P1   7: albsn cw dmlt et hfdsl mrsow rzwc
-       mon    XY-na    -------- --- 112
+                            Amon P1   1: mc
+       mon    XY-AH    -------- ---   1
 
                             Amon P1   8: hur hus o3 ta ua va wap zg
        mon   XY-P19    -------- ---   8
 
-                            Amon P1   1: mc
-       mon    XY-AH    -------- ---   1
-
-                            Amon P1   3: ch4global co2mass n2oglobal
-       mon    na-na    -------- ---   3
+                        HOMEPmon P1   6: hus ta ua va wap zg
+       mon  XY-P7HM    -------- ---   6
 
                             Emon P1   1: mrsol
                             Lmon P2   1: tsl
        mon     XY-S    -------- ---   2
 
-                        HOMEPmon P1   6: hus ta ua va wap zg
-       mon  XY-P7HM    -------- ---   6
+                          AERmon P1   9: abs550aer od550aer ptp rlutaf rlutcsaf rsutaf rsutcsaf toz ztp
+                            Amon P1  39: ccb cct ci clivi clt clwvi evspsbl hfls hfss hurs huss pr prc prsn prw ps psl rlds rldscs rlus rlut rlutcs rsds rsdscs rsdt rsus rsuscs rsut rsutcs sbl sfcWind tas tasmax tasmin tauu tauv ts uas vas
+                            Emon P1   6: evspsblpot intuadse intuaw intvadse intvaw sfcWindmax
+                            Emon P2   1: mrtws
+                        HOMALmon P1  30: RADabs550aer RADasy550aer RADod550aer RADssa550aer albsrfcLa albsrfc cdnctop clth cltl cltm fsat icedLa icod lcod reffclitop reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf snct sndLa tmxlLa tsLa vegstress
+                           LImon P1   3: snc snd snw
+                           LImon P2   1: lwsnl
+                            Lmon P1  15: baresoilFrac cropFrac evspsblsoi evspsblveg gpp grassFrac mrfso mrro mrros mrso mrsos npp residualFrac tran treeFrac
+                            Lmon P2   1: prveg
+                         Nonemon P1   7: albsn cw dmlt et hfdsl mrsow rzwc
+       mon    XY-na    -------- --- 112
+
+                            Amon P1   3: ch4global co2mass n2oglobal
+       mon    na-na    -------- ---   3
 
        mon --------    -------- --- 136
-
-                          E3hrPt P1   1: cltcalipso
-     3hrPt    XY-na    -------- ---   1
-
-                      HOMAL3hrPt P1   1: parasolCRefl
-     3hrPt  XY-sza5    -------- ---   1
-
-     3hrPt --------    -------- ---   2
 
 
 ---------- --------    -------- --- 178

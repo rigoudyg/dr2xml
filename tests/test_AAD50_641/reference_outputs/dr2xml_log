@@ -206,6 +206,83 @@ Skipped variables (i.e. whose alias is not present in the pingfile):
 
 
 Some Statistics on actually written variables per frequency+shape...
+                            E1hr P1   1: pr
+                        HOMAL1hr P1   4: dryno3 seddust sedno3 sedss
+                      HOMAL1hrPt P1   1: tssea
+                         None1hr P1  20: drybc drydust drynh4 dryoa dryso4 dryss evspsbl hfls hfss rlds rlus rsds rsus tauv wetbc wetdust wetnh4 wetoa wetso4 wetss
+                         None1hr P3   1: tauu
+       1hr    XY-na    -------- ---  27
+
+       1hr --------    -------- ---  27
+
+                            E1hr P3   1: psl
+                       None1hrPt P1   5: hurs huss sfcWind uas vas
+                       None1hrPt P3   1: tas
+     1hrPt    XY-na    -------- ---   7
+
+     1hrPt --------    -------- ---   7
+
+                             3hr P1  10: clt hfls hfss pr prc prsn rlds rlus rsds rsus
+       3hr    XY-na    -------- ---  10
+
+       3hr --------    -------- ---  10
+
+                             3hr P1   5: huss ps tas uas vas
+                       None3hrPt P1   3: hurs psl sfcWind
+     3hrPt    XY-na    -------- ---   8
+
+     3hrPt --------    -------- ---   8
+
+                    HOME6hrPlevPt P1   5: hus200 ta200 ua200 va200 zg200
+       6hr XY-P200HM    -------- ---   5
+
+                    HOME6hrPlevPt P1   5: hus500 ta500 ua500 va500 zg500
+       6hr XY-P500HM    -------- ---   5
+
+                    HOME6hrPlevPt P1   5: hus700 ta700 ua700 va700 zg700
+       6hr XY-P700HM    -------- ---   5
+
+                    HOME6hrPlevPt P1   5: hus850 ta850 ua850 va850 zg850
+       6hr XY-P850HM    -------- ---   5
+
+                    HOME6hrPlevPt P1   5: hus925 ta925 ua925 va925 zg925
+       6hr XY-P925HM    -------- ---   5
+
+                        HOMAL6hr P1   3: clth cltl cltm
+                         None6hr P1  10: evspsbl mrro mrros rsdt rsut snc snd snm snw tauv
+                         None6hr P2   1: rlut
+                         None6hr P3   1: tauu
+       6hr    XY-na    -------- ---  15
+
+       6hr --------    -------- ---  40
+
+                       6hrPlevPt P1   2: uas vas
+                       6hrPlevPt P3   1: ts
+                        HOMAL6hr P1   2: mrfso mrso
+                       None6hrPt P1   2: clivi clwvi
+     6hrPt    XY-na    -------- ---   7
+
+     6hrPt --------    -------- ---   7
+
+                        HOMEPday P1   5: hus200 ta200 ua200 va200 zg200
+       day XY-P200HM    -------- ---   5
+
+                        HOMEPday P1   5: hus500 ta500 ua500 va500 zg500
+       day XY-P500HM    -------- ---   5
+
+                        HOMEPday P1   5: hus700 ta700 ua700 va700 zg700
+       day XY-P700HM    -------- ---   5
+
+                             day P1   6: hur hus ta ua va wap
+                             day P2   1: zg
+       day    XY-P8    -------- ---   7
+
+                        HOMEPday P1   5: hus850 ta850 ua850 va850 zg850
+       day XY-P850HM    -------- ---   5
+
+                        HOMEPday P1   5: hus925 ta925 ua925 va925 zg925
+       day XY-P925HM    -------- ---   5
+
                           AERday P1   1: od550aer
                             Eday P1   6: mrros prhmax prw snm ts tsland
                             Eday P3   1: snd
@@ -217,57 +294,12 @@ Some Statistics on actually written variables per frequency+shape...
                              day P1  25: clt hfls hfss hurs huss mrro mrso pr prc prsn psl rlds rlus rlut rsds rsus sfcWind sfcWindmax snc snw tas tasmax tasmin uas vas
        day    XY-na    -------- ---  89
 
-                        HOMEPday P1   5: hus200 ta200 ua200 va200 zg200
-       day XY-P200HM    -------- ---   5
-
-                        HOMEPday P1   5: hus500 ta500 ua500 va500 zg500
-       day XY-P500HM    -------- ---   5
-
-                        HOMEPday P1   5: hus700 ta700 ua700 va700 zg700
-       day XY-P700HM    -------- ---   5
-
-                        HOMEPday P1   5: hus850 ta850 ua850 va850 zg850
-       day XY-P850HM    -------- ---   5
-
-                        HOMEPday P1   5: hus925 ta925 ua925 va925 zg925
-       day XY-P925HM    -------- ---   5
-
-                             day P1   6: hur hus ta ua va wap
-                             day P2   1: zg
-       day    XY-P8    -------- ---   7
-
        day --------    -------- --- 121
 
                               fx P1   6: areacella mrsofc orog rootd sftgif sftlf
         fx    XY-na    -------- ---   6
 
         fx --------    -------- ---   6
-
-                            E1hr P3   1: psl
-                       None1hrPt P1   5: hurs huss sfcWind uas vas
-                       None1hrPt P3   1: tas
-     1hrPt    XY-na    -------- ---   7
-
-     1hrPt --------    -------- ---   7
-
-                            E1hr P1   1: pr
-                        HOMAL1hr P1   4: dryno3 seddust sedno3 sedss
-                      HOMAL1hrPt P1   1: tssea
-                         None1hr P1  20: drybc drydust drynh4 dryoa dryso4 dryss evspsbl hfls hfss rlds rlus rsds rsus tauv wetbc wetdust wetnh4 wetoa wetso4 wetss
-                         None1hr P3   1: tauu
-       1hr    XY-na    -------- ---  27
-
-       1hr --------    -------- ---  27
-
-                          AERmon P1  38: abs550aer cltc drybc drydust drynh3 drynh4 dryoa dryso2 dryso4 dryss emibc emidust eminh3 emioa emiso2 emiso4 emiss lwp od440aer od550aer od550bc od550dust od550no3 od550oa od550so4 od550ss od870aer rlutaf rlutcsaf rsutaf rsutcsaf toz wetbc wetdust wetnh4 wetoa wetso4 wetss
-                            Amon P1  34: clivi clt clwvi evspsbl hfls hfss hurs pr prc prsn prw ps psl rlds rldscs rlus rlut rlutcs rsds rsdscs rsdt rsus rsuscs rsut rsutcs sfcWind tas tasmax tasmin tauu tauv ts uas vas
-                            Emon P1   4: sconcdust sconcso4 sconcss sfcWindmax
-                        HOMALmon P1  43: RADabs550aer RADasy550aer RADod550aer RADssa550aer TACabs550aer asy550aer cdnctop clth cltl cltm dryno3 eminh4 emino3 husll od550dustbin1 od550dustbin2 od550nh4 od550no3bin1 od550ssbin1 od550ssbin2 reffclitop reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf sconcbc sconcnh4 sconcno3 sconcoa seddust sedno3 sedss ssa550aer tall tssea uall vall
-                           LImon P1   4: snc snd snm snw
-                            Lmon P1   4: mrfso mrro mrros mrso
-                         Nonemon P1   1: tsland
-                           SImon P1   1: siconca
-       mon    XY-na    -------- --- 129
 
                           AERmon P1   1: cdnc
        mon     XY-A    -------- ---   1
@@ -291,49 +323,17 @@ Some Statistics on actually written variables per frequency+shape...
                         HOMEPmon P1   7: hur925 hus925 ta925 ua925 va925 wap925 zg925
        mon XY-P925HM    -------- ---   7
 
+                          AERmon P1  38: abs550aer cltc drybc drydust drynh3 drynh4 dryoa dryso2 dryso4 dryss emibc emidust eminh3 emioa emiso2 emiso4 emiss lwp od440aer od550aer od550bc od550dust od550no3 od550oa od550so4 od550ss od870aer rlutaf rlutcsaf rsutaf rsutcsaf toz wetbc wetdust wetnh4 wetoa wetso4 wetss
+                            Amon P1  34: clivi clt clwvi evspsbl hfls hfss hurs pr prc prsn prw ps psl rlds rldscs rlus rlut rlutcs rsds rsdscs rsdt rsus rsuscs rsut rsutcs sfcWind tas tasmax tasmin tauu tauv ts uas vas
+                            Emon P1   4: sconcdust sconcso4 sconcss sfcWindmax
+                        HOMALmon P1  43: RADabs550aer RADasy550aer RADod550aer RADssa550aer TACabs550aer asy550aer cdnctop clth cltl cltm dryno3 eminh4 emino3 husll od550dustbin1 od550dustbin2 od550nh4 od550no3bin1 od550ssbin1 od550ssbin2 reffclitop reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf sconcbc sconcnh4 sconcno3 sconcoa seddust sedno3 sedss ssa550aer tall tssea uall vall
+                           LImon P1   4: snc snd snm snw
+                            Lmon P1   4: mrfso mrro mrros mrso
+                         Nonemon P1   1: tsland
+                           SImon P1   1: siconca
+       mon    XY-na    -------- --- 129
+
        mon --------    -------- --- 179
-
-                             3hr P1   5: huss ps tas uas vas
-                       None3hrPt P1   3: hurs psl sfcWind
-     3hrPt    XY-na    -------- ---   8
-
-     3hrPt --------    -------- ---   8
-
-                             3hr P1  10: clt hfls hfss pr prc prsn rlds rlus rsds rsus
-       3hr    XY-na    -------- ---  10
-
-       3hr --------    -------- ---  10
-
-                       6hrPlevPt P3   1: ts
-                       6hrPlevPt P1   2: uas vas
-                        HOMAL6hr P1   2: mrfso mrso
-                       None6hrPt P1   2: clivi clwvi
-     6hrPt    XY-na    -------- ---   7
-
-     6hrPt --------    -------- ---   7
-
-                        HOMAL6hr P1   3: clth cltl cltm
-                         None6hr P1  10: evspsbl mrro mrros rsdt rsut snc snd snm snw tauv
-                         None6hr P2   1: rlut
-                         None6hr P3   1: tauu
-       6hr    XY-na    -------- ---  15
-
-                    HOME6hrPlevPt P1   5: hus200 ta200 ua200 va200 zg200
-       6hr XY-P200HM    -------- ---   5
-
-                    HOME6hrPlevPt P1   5: hus500 ta500 ua500 va500 zg500
-       6hr XY-P500HM    -------- ---   5
-
-                    HOME6hrPlevPt P1   5: hus700 ta700 ua700 va700 zg700
-       6hr XY-P700HM    -------- ---   5
-
-                    HOME6hrPlevPt P1   5: hus850 ta850 ua850 va850 zg850
-       6hr XY-P850HM    -------- ---   5
-
-                    HOME6hrPlevPt P1   5: hus925 ta925 ua925 va925 zg925
-       6hr XY-P925HM    -------- ---   5
-
-       6hr --------    -------- ---  40
 
 
 ---------- --------    -------- --- 405

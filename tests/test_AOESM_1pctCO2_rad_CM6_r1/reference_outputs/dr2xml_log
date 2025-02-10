@@ -121,11 +121,11 @@ Note: assuming that 'time: mean where sea_ice'  for             siv in table SIm
 file_def written as current_directory/test_AOESM_1pctCO2_rad_CM6_r1/test_outputs/dr2xml_nemo.xml
 
 Skipped variables (i.e. whose alias is not present in the pingfile):
->>> TABLE:             Ofx 01/02 ----> volcello(1)
-
 >>> TABLE:            Emon 01/04 ----> O18sw(1)
 
->>> TABLE:            Omon 23/71 ----> zfullo(1) zhalfo(1) fsitherm(1) hfbasinpadv(1) hfbasinpmdiff(1) hfbasinpsmadv(1) hfcorr(0) hfsifrazil2d(1) msftbarot(1) msftmrho(1) msftmrhompa(1) msftmz(1) msftmzmpa(1) msftmzsmpa(1) msftyrho(1) msftyrhompa(1) msftyzmpa(1) msftyzsmpa(1) pso(1) sfriver(1) tauucorr(1) tauvcorr(1) wfcorr(0)
+>>> TABLE:             Ofx 01/02 ----> volcello(1)
+
+>>> TABLE:            Omon 23/71 ----> fsitherm(1) hfbasinpadv(1) hfbasinpmdiff(1) hfbasinpsmadv(1) hfcorr(0) hfsifrazil2d(1) msftbarot(1) msftmrho(1) msftmrhompa(1) msftmz(1) msftmzmpa(1) msftmzsmpa(1) msftyrho(1) msftyrhompa(1) msftyzmpa(1) msftyzsmpa(1) pso(1) sfriver(1) tauucorr(1) tauvcorr(1) wfcorr(0) zfullo(1) zhalfo(1)
 
 >>> TABLE:           SImon 02/34 ----> sifllwdtop(1) siflsenstop(1)
 
@@ -138,37 +138,37 @@ Some Statistics on actually written variables per frequency+shape...
 
         fx --------    -------- ---   1
 
+                            Omon P2   1: mfo
+       mon    TR-na    -------- ---   1
+
+                           SImon P1   1: simassacrossline
+       mon   TRS-na    -------- ---   1
+
+                        HOMOImon P1  16: Biron FeP GRAZ1 GRAZ2 LBDMS MuD MuN N2O Nfix SCquotad SCquotan Totlig Yield pdust rhop xfracal
+                            Omon P1  13: agessc bigthetao masscello obvfsq so thetao thkcello umo uo vmo vo wmo wo
+       mon     XY-O    -------- ---  29
+
                             Emon P1   3: hcont300 t20d thetaot
                         HOMOImon P1  13: Dpn2o Heup N2Oflx hc2000 hc700 heatc sialb sisnvol sitimefrac15 sits somematr sozomatr ssh
-                            Omon P2   5: ficeberg2d friver hfx hfy rsntds
                             Omon P1  15: hfds mlotst mlotstmax mlotstmin pbo sfdsi sob sos tauuo tauvo tob tos wfo wfonocorr zos
+                            Omon P2   5: ficeberg2d friver hfx hfy rsntds
                            SImon P1  21: siage siconc sidmassevapsubl sidmassmeltbot sidmassmelttop sifllatstop sifllwutop siflswdtop siflswutop simass sipr sisali sisnconc sisnthick sitemptop sithick siu siv sivol sndmassmelt sndmasssnf
                            SImon P2   5: sidmassdyn sidmassth sihc sisnhc sitempsnic
                            SImon P3   1: sisaltmass
        mon    XY-na    -------- ---  63
+
+                            Omon P1   1: msftyz
+       mon     YB-O    -------- ---   1
 
                            EmonZ P1   2: sltbasin sltnortha
                             Omon P1   2: hfbasin hfbasinpmadv
                             Omon P2   2: htovgyre htovovrt
        mon    YB-na    -------- ---   6
 
-                        HOMOImon P1  16: Biron FeP GRAZ1 GRAZ2 LBDMS MuD MuN N2O Nfix SCquotad SCquotan Totlig Yield pdust rhop xfracal
-                            Omon P1  13: agessc bigthetao masscello obvfsq so thetao thkcello umo uo vmo vo wmo wo
-       mon     XY-O    -------- ---  29
-
                         HOMOImon P1   2: snovoln snovols
                             Omon P1   8: bigthetaoga masso soga sosga thetaoga tosga volo zostoga
                            SImon P2   4: siextentn siextents sivoln sivols
        mon    na-na    -------- ---  14
-
-                            Omon P2   1: mfo
-       mon    TR-na    -------- ---   1
-
-                            Omon P1   1: msftyz
-       mon     YB-O    -------- ---   1
-
-                           SImon P1   1: simassacrossline
-       mon   TRS-na    -------- ---   1
 
        mon --------    -------- --- 115
 
@@ -768,11 +768,11 @@ Will not explicitly handle time: mean (with samples weighted by snow mass) for  
 file_def written as current_directory/test_AOESM_1pctCO2_rad_CM6_r1/test_outputs/dr2xml_surfex.xml
 
 Skipped variables (i.e. whose alias is not present in the pingfile):
->>> TABLE:            Eday 02/09 ----> prhmax(1) zmla(1)
-
 >>> TABLE:            Amon 02/59 ----> rtmt(1) sci(1)
 
->>> TABLE:            Emon 54/114 ----> H2wv(1) O17wv(1) O18wv(1) md(1) H2p(1) H2s(1) O17p(1) O17s(1) O18p(1) O18s(1) cSoilAbove1m(1) cSoilBelow1m(1) depdust(1) fBNF(1) fCLandToOcean(1) fHarvestToProduct(1) fN2O(1) fNAnthDisturb(1) fNLandToOcean(1) fNLitterSoil(1) fNProduct(1) fNVegLitter(1) fNVegSoil(1) fNdep(1) fNfert(1) fNgas(1) fNleach(1) fNloss(1) fNnetmin(1) fNup(1) flashrate(1) lwsrfasdust(1) lwsrfcsdust(1) lwtoaasdust(1) lwtoacsaer(1) lwtoacsdust(1) mmrno3(1) nLand(1) nLitter(1) nMineral(1) nProduct(1) nSoil(1) nVeg(1) od550aerso(1) od550so4so(1) swsrfasdust(1) swsrfcsdust(1) swtoaasdust(1) swtoacsdust(1) tdps(1) treeFracBdlDcd(1) treeFracBdlEvg(1) treeFracNdlDcd(1) treeFracNdlEvg(1)
+>>> TABLE:            Eday 02/09 ----> prhmax(1) zmla(1)
+
+>>> TABLE:            Emon 54/114 ----> H2p(1) H2s(1) H2wv(1) O17p(1) O17s(1) O17wv(1) O18p(1) O18s(1) O18wv(1) cSoilAbove1m(1) cSoilBelow1m(1) depdust(1) fBNF(1) fCLandToOcean(1) fHarvestToProduct(1) fN2O(1) fNAnthDisturb(1) fNLandToOcean(1) fNLitterSoil(1) fNProduct(1) fNVegLitter(1) fNVegSoil(1) fNdep(1) fNfert(1) fNgas(1) fNleach(1) fNloss(1) fNnetmin(1) fNup(1) flashrate(1) lwsrfasdust(1) lwsrfcsdust(1) lwtoaasdust(1) lwtoacsaer(1) lwtoacsdust(1) md(1) mmrno3(1) nLand(1) nLitter(1) nMineral(1) nProduct(1) nSoil(1) nVeg(1) od550aerso(1) od550so4so(1) swsrfasdust(1) swsrfcsdust(1) swtoaasdust(1) swtoacsdust(1) tdps(1) treeFracBdlDcd(1) treeFracBdlEvg(1) treeFracNdlDcd(1) treeFracNdlEvg(1)
 
 >>> TABLE:            Lmon 03/40 ----> fVegSoil(1) pastureFrac(1) shrubFrac(1)
 
@@ -780,13 +780,13 @@ Skipped variables (i.e. whose alias is not present in the pingfile):
 
 
 Some Statistics on actually written variables per frequency+shape...
+                            Eday P1   3: mrsfl mrsll mrsol
+       day     XY-S    -------- ---   3
+
                           AERday P1   1: zg500
                             Eday P1   4: hus850 lai ta500 ta850
                              day P1   9: hurs hursmax hursmin pr sfcWindmax tas tasmax tasmin tslsi
        day    XY-na    -------- ---  14
-
-                            Eday P1   3: mrsfl mrsll mrsol
-       day     XY-S    -------- ---   3
 
        day --------    -------- ---  17
 
@@ -794,6 +794,23 @@ Some Statistics on actually written variables per frequency+shape...
                             Amon P1   3: cl cli clw
                             Emon P1   1: concdust
        mon     XY-A    -------- ---   9
+
+                            Amon P1   1: mc
+       mon    XY-AH    -------- ---   1
+
+                            Amon P1  11: ch4 co2 hur hus n2o o3 ta ua va wap zg
+                        HOMALmon P1   5: ext550bc ext550dust ext550oa ext550so4 ext550ss
+       mon   XY-P19    -------- ---  16
+
+                        HOMEPmon P1   6: hus ta ua va wap zg
+       mon  XY-P7HM    -------- ---   6
+
+                        HOMEPmon P1   3: co no2 o3
+       mon XY-Plev39hm    -------- ---   3
+
+                            Emon P1   3: mrsfl mrsll mrsol
+                            Lmon P1   1: tsl
+       mon     XY-S    -------- ---   4
 
                           AERmon P1  32: abs550aer drybc drydust dryoa dryso2 dryso4 dryss emibc emidust emioa emiso2 emiso4 emiss lwp od550aer od550bc od550dust od550oa od550so4 od550ss ptp rlutaf rlutcsaf rsutaf rsutcsaf toz wetbc wetdust wetoa wetso4 wetss ztp
                             Amon P1  42: ccb cct ci clivi clt clwvi evspsbl fco2antt fco2fos fco2nat hfls hfss hurs huss pr prc prsn prw ps psl rlds rldscs rlus rlut rlutcs rsds rsdscs rsdt rsus rsuscs rsut rsutcs sbl sfcWind tas tasmax tasmin tauu tauv ts uas vas
@@ -809,23 +826,6 @@ Some Statistics on actually written variables per frequency+shape...
 
                          AERmonZ P1  12: bry ch4 cly h2o hcl hno3 ho2 meanage n2o noy o3 oh
        mon    Y-P39    -------- ---  12
-
-                            Amon P1  11: ch4 co2 hur hus n2o o3 ta ua va wap zg
-                        HOMALmon P1   5: ext550bc ext550dust ext550oa ext550so4 ext550ss
-       mon   XY-P19    -------- ---  16
-
-                            Amon P1   1: mc
-       mon    XY-AH    -------- ---   1
-
-                            Emon P1   3: mrsfl mrsll mrsol
-                            Lmon P1   1: tsl
-       mon     XY-S    -------- ---   4
-
-                        HOMEPmon P1   3: co no2 o3
-       mon XY-Plev39hm    -------- ---   3
-
-                        HOMEPmon P1   6: hus ta ua va wap zg
-       mon  XY-P7HM    -------- ---   6
 
        mon --------    -------- --- 279
 

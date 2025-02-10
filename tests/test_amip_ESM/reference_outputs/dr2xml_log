@@ -154,19 +154,21 @@ file_def written as current_directory/test_amip_ESM/test_outputs/dr2xml_surfex.x
 Skipped variables (i.e. whose alias is not present in the pingfile):
 >>> TABLE:          AERday 03/11 ----> maxpblz(1) minpblz(1) sfo3max(1)
 
->>> TABLE:            Eday 13/32 ----> ccldncl(1) cldnci(1) cldnvi(1) loadnh4(1) loadno3(1) loadpoa(1) loadsoa(1) prhmax(1) reffcclwtop(1) reffsclwtop(1) rsdscsdiff(1) scldncl(1) zmla(1)
-
->>> TABLE:          IfxGre 01/01 ----> areacellg(1)
-
->>> TABLE:          AERmon 55/124 ----> aoanh(1) c2h2(1) c2h6(1) c3h6(1) c3h8(1) ch3coch3(1) cheaqpso4(1) chegpso4(1) dms(1) emilnox(1) isop(1) jno2(1) lossch4(1) lossco(1) lossn2o(1) mmraerh2o(1) mmrnh4(1) mmrno3(1) mmrpm10(1) mmrpm2p5(1) mmrsoa(1) nh50(1) o3ste(1) pan(1) photo1d(1) bldep(1) ccn(1) chepasoa(1) chepsoa(1) drynh3(1) drynh4(1) drynoy(1) dryo3(1) emiaco(1) emianox(1) emiaoa(1) emibvoc(1) emico(1) emidms(1) emiisop(1) eminh3(1) eminox(1) emivoc(1) od550aerh2o(1) od550bb(1) od550csaer(1) od550no3(1) od550soa(1) pod0(1) reffclwtop(1) tropoz(1) wetnh3(1) wetnh4(1) wetnoy(1) wetso2(1)
+>>> TABLE:          AERmon 55/124 ----> aoanh(1) bldep(1) c2h2(1) c2h6(1) c3h6(1) c3h8(1) ccn(1) ch3coch3(1) cheaqpso4(1) chegpso4(1) chepasoa(1) chepsoa(1) dms(1) drynh3(1) drynh4(1) drynoy(1) dryo3(1) emiaco(1) emianox(1) emiaoa(1) emibvoc(1) emico(1) emidms(1) emiisop(1) emilnox(1) eminh3(1) eminox(1) emivoc(1) isop(1) jno2(1) lossch4(1) lossco(1) lossn2o(1) mmraerh2o(1) mmrnh4(1) mmrno3(1) mmrpm10(1) mmrpm2p5(1) mmrsoa(1) nh50(1) o3ste(1) od550aerh2o(1) od550bb(1) od550csaer(1) od550no3(1) od550soa(1) pan(1) photo1d(1) pod0(1) reffclwtop(1) tropoz(1) wetnh3(1) wetnh4(1) wetnoy(1) wetso2(1)
 
 >>> TABLE:            Amon 02/59 ----> rtmt(1) sci(1)
 
 >>> TABLE:           CFmon 03/54 ----> edt(1) evu(1) tnhusd(1)
 
->>> TABLE:            Emon 57/144 ----> diabdrag(1) H2wv(1) O17wv(1) O18wv(1) md(1) tntd(1) H2p(1) H2s(1) O17p(1) O17s(1) O18p(1) O18s(1) cSoilAbove1m(1) cSoilBelow1m(1) depdust(1) fBNF(1) fCLandToOcean(1) fHarvestToProduct(1) fN2O(1) fNAnthDisturb(1) fNLandToOcean(1) fNLitterSoil(1) fNProduct(1) fNVegLitter(1) fNVegSoil(1) fNdep(1) fNfert(1) fNgas(1) fNleach(1) fNloss(1) fNnetmin(1) fNup(1) flashrate(1) lwsrfasdust(1) lwsrfcsdust(1) lwtoaasdust(1) lwtoacsaer(1) lwtoacsdust(1) mmrno3(1) nLand(1) nLitter(1) nMineral(1) nProduct(1) nSoil(1) nVeg(1) od550aerso(1) od550so4so(1) swsrfasdust(1) swsrfcsdust(1) swtoaasdust(1) swtoacsdust(1) tdps(1) treeFracBdlDcd(1) treeFracBdlEvg(1) treeFracNdlDcd(1) treeFracNdlEvg(1) vegHeight(1)
+>>> TABLE:            Eday 13/32 ----> ccldncl(1) cldnci(1) cldnvi(1) loadnh4(1) loadno3(1) loadpoa(1) loadsoa(1) prhmax(1) reffcclwtop(1) reffsclwtop(1) rsdscsdiff(1) scldncl(1) zmla(1)
+
+>>> TABLE:            Emon 57/144 ----> H2p(1) H2s(1) H2wv(1) O17p(1) O17s(1) O17wv(1) O18p(1) O18s(1) O18wv(1) cSoilAbove1m(1) cSoilBelow1m(1) depdust(1) diabdrag(1) fBNF(1) fCLandToOcean(1) fHarvestToProduct(1) fN2O(1) fNAnthDisturb(1) fNLandToOcean(1) fNLitterSoil(1) fNProduct(1) fNVegLitter(1) fNVegSoil(1) fNdep(1) fNfert(1) fNgas(1) fNleach(1) fNloss(1) fNnetmin(1) fNup(1) flashrate(1) lwsrfasdust(1) lwsrfcsdust(1) lwtoaasdust(1) lwtoacsaer(1) lwtoacsdust(1) md(1) mmrno3(1) nLand(1) nLitter(1) nMineral(1) nProduct(1) nSoil(1) nVeg(1) od550aerso(1) od550so4so(1) swsrfasdust(1) swsrfcsdust(1) swtoaasdust(1) swtoacsdust(1) tdps(1) tntd(1) treeFracBdlDcd(1) treeFracBdlEvg(1) treeFracNdlDcd(1) treeFracNdlEvg(1) vegHeight(1)
 
 >>> TABLE:           EmonZ 07/11 ----> epfy(1) epfz(1) jo2(1) jo3(1) utendepfd(1) vtem(1) wtem(1)
+
+>>> TABLE:          Esubhr 01/07 ----> tntd(1)
+
+>>> TABLE:          IfxGre 01/01 ----> areacellg(1)
 
 >>> TABLE:         ImonGre 01/01 ----> tas(1)
 
@@ -174,17 +176,48 @@ Skipped variables (i.e. whose alias is not present in the pingfile):
 
 >>> TABLE:            Lmon 05/42 ----> fGrazing(1) fHarvest(1) fVegSoil(1) pastureFrac(1) shrubFrac(1)
 
->>> TABLE:          Esubhr 01/07 ----> tntd(1)
-
 
 
 
 Some Statistics on actually written variables per frequency+shape...
-                          AERday P1   8: cod od550aer toz ua10 zg1000 zg100 zg10 zg500
-                           CFday P1  21: albisccp ccb cct clhcalipso clivi cllcalipso clmcalipso cltcalipso cltisccp clwvi pctisccp ps rldscs rlutcs rsdscs rsdt rsuscs rsut rsutcs ta700 wap500
-                            Eday P1  15: clivic clwvic hus850 loadbc loaddust loadoa loadso4 loadss rsdsdiff ta500 ta850 tauu tauv ts parasolRefl
-                             day P1  29: clt hfls hfss hurs hursmax hursmin huss mrro mrso mrsos pr prc prsn psl rlds rlus rlut rsds rsus sfcWind sfcWindmax snc snw tas tasmax tasmin tslsi uas vas
-       day    XY-na    -------- ---  73
+                     E1hrClimMon P1   5: rlut rlutcs rsdt rsut rsutcs
+     1hrCM    XY-na    -------- ---   5
+
+     1hrCM --------    -------- ---   5
+
+                           CF3hr P2   8: clc clic clis cls clwc clws ta zfull
+                          E3hrPt P1   1: hus
+                       None3hrPt P1   2: ua va
+                       None3hrPt P3   1: wap
+     3hrPt     XY-A    -------- ---  12
+
+                           CF3hr P2   5: prcprof prlsns prlsprof prsnc zhalf
+     3hrPt    XY-AH    -------- ---   5
+
+                          E3hrPt P1   1: clmisr
+     3hrPt   XY-H16    -------- ---   1
+
+                          E3hrPt P1   4: cfadDbze94 cfadLidarsr532 clcalipso2 clcalipso
+                      HOMAL3hrPt P1   1: clcalipsoun
+     3hrPt   XY-H40    -------- ---   5
+
+                          E3hrPt P1   3: jpdftaureicemodis jpdftaureliqmodis clisccp
+     3hrPt    XY-P7    -------- ---   3
+
+                          E3hrPt P1   5: clhcalipso cllcalipso clmcalipso cltcalipso parasolRefl
+                      HOMAL3hrPt P1  27: clhcalipsoice clhcalipsoliq clhcalipsoun clhmodis cllcalipsoice cllcalipsoliq cllcalipsoun cllmodis clmcalipsoice clmcalipsoliq clmcalipsoun clmmodis cltcalipsoice cltcalipsoliq cltcalipsoun cltlidarradar iwpmodis lwpmodis meantbclrisccp meantbisccp pctmodis reffclimodis reffclwmodis tauimodis tauisccp tautmodis tauwmodis
+     3hrPt    XY-na    -------- ---  32
+
+                      HOMAL3hrPt P1   1: parasolCRefl
+     3hrPt  XY-sza5    -------- ---   1
+
+                      HOMAL3hrPt P1   1: clmodis
+     3hrPt XY-tau|P7C    -------- ---   1
+
+                      HOMAL3hrPt P1   4: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+     3hrPt  XY-temp    -------- ---   4
+
+     3hrPt --------    -------- ---  64
 
                            CFday P1  10: cl cli clw hur hus ta ua va wap zg
        day     XY-A    -------- ---  10
@@ -195,21 +228,27 @@ Some Statistics on actually written variables per frequency+shape...
                            CFday P1   1: clcalipso
        day   XY-H40    -------- ---   1
 
+                            Eday P1   2: ua va
+       day   XY-P19    -------- ---   2
+
                            CFday P1   1: clisccp
                             Eday P1   2: jpdftaureicemodis jpdftaureliqmodis
        day    XY-P7    -------- ---   3
 
-                            Eday P1   2: ua va
-       day   XY-P19    -------- ---   2
+                             day P1   6: hur hus ta ua va wap
+       day    XY-P8    -------- ---   6
+
+                          AERday P1   8: cod od550aer toz ua10 zg1000 zg100 zg10 zg500
+                           CFday P1  21: albisccp ccb cct clhcalipso clivi cllcalipso clmcalipso cltcalipso cltisccp clwvi pctisccp ps rldscs rlutcs rsdscs rsdt rsuscs rsut rsutcs ta700 wap500
+                            Eday P1  15: clivic clwvic hus850 loadbc loaddust loadoa loadso4 loadss rsdsdiff ta500 ta850 tauu tauv ts parasolRefl
+                             day P1  29: clt hfls hfss hurs hursmax hursmin huss mrro mrso mrsos pr prc prsn psl rlds rlus rlut rsds rsus sfcWind sfcWindmax snc snw tas tasmax tasmin tslsi uas vas
+       day    XY-na    -------- ---  73
 
                            EdayZ P1   4: hus ta va zg
        day    Y-P19    -------- ---   4
 
                            EdayZ P1   1: ua
        day    Y-P39    -------- ---   1
-
-                             day P1   6: hur hus ta ua va wap
-       day    XY-P8    -------- ---   6
 
        day --------    -------- --- 101
 
@@ -226,6 +265,41 @@ Some Statistics on actually written variables per frequency+shape...
                             Emon P1   7: concdust tnhuspbl tnhusscp tntpbl tntrlcs tntrscs tntscp
        mon     XY-A    -------- ---  59
 
+                            Amon P1   1: mc
+                           CFmon P1  17: mcu rld4co2 rld rldcs4co2 rldcs rlu4co2 rlu rlucs4co2 rlucs rsd4co2 rsd rsdcs4co2 rsdcs rsu4co2 rsu rsucs4co2 rsucs
+                           CFmon P2   1: mcd
+       mon    XY-AH    -------- ---  19
+
+                            Emon P1   1: clmisr
+       mon   XY-H16    -------- ---   1
+
+                           CFmon P1   1: clcalipso
+                            Emon P1   4: clcalipsoice clcalipsoliq cfadDbze94 cfadLidarsr532
+                        HOMALmon P1   1: clcalipsoun
+       mon   XY-H40    -------- ---   6
+
+                            Amon P1  11: ch4 co2 hur hus n2o o3 ta ua va wap zg
+                            Emon P1   2: utendnogw utendogw
+                        HOMALmon P1   5: ext550bc ext550dust ext550oa ext550so4 ext550ss
+       mon   XY-P19    -------- ---  18
+
+                           CFmon P1   1: clisccp
+                            Emon P1   2: jpdftaureicemodis jpdftaureliqmodis
+       mon    XY-P7    -------- ---   3
+
+                        HOMEPmon P1   6: hus ta ua va wap zg
+       mon  XY-P7HM    -------- ---   6
+
+                            Emon P1   3: hus ua va
+       mon   XY-P7T    -------- ---   3
+
+                        HOMEPmon P1   3: co no2 o3
+       mon XY-Plev39hm    -------- ---   3
+
+                            Emon P1   3: mrsfl mrsll mrsol
+                            Lmon P1   1: tsl
+       mon     XY-S    -------- ---   4
+
                           AERmon P1  40: abs550aer cltc cod drybc drydust dryoa dryso2 dryso4 dryss emibc emidust emioa emiso2 emiso4 emiss lwp od440aer od550aer od550bc od550dust od550lt1aer od550oa od550so4 od550ss od870aer ps ptp rlutaf rlutcsaf rsutaf rsutcsaf tatp toz ttop wetbc wetdust wetoa wetso4 wetss ztp
                             Amon P1  42: ccb cct ci clivi clt clwvi evspsbl fco2antt fco2fos fco2nat hfls hfss hurs huss pr prc prsn prw ps psl rlds rldscs rlus rlut rlutcs rsds rsdscs rsdt rsus rsuscs rsut rsutcs sbl sfcWind tas tasmax tasmin tauu tauv ts uas vas
                            CFmon P1  11: albisccp clhcalipso cllcalipso clmcalipso cltcalipso cltisccp pctisccp rlut4co2 rlutcs4co2 rsut4co2 rsutcs4co2
@@ -240,6 +314,15 @@ Some Statistics on actually written variables per frequency+shape...
                            SImon P1   1: siconca
        mon    XY-na    -------- --- 286
 
+                        HOMALmon P1   1: parasolCRefl
+       mon  XY-sza5    -------- ---   1
+
+                        HOMALmon P1   1: clmodis
+       mon XY-tau|P7C    -------- ---   1
+
+                        HOMALmon P1   4: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
+       mon  XY-temp    -------- ---   4
+
                          AERmonZ P1  16: bry ch4 cly h2o hcl hno3 ho2 meanage n2o noy o3 oh ta ua va zg
                            EmonZ P1   4: oxloss oxprod vmrox zmtnt
        mon    Y-P39    -------- ---  20
@@ -247,95 +330,12 @@ Some Statistics on actually written variables per frequency+shape...
                          AERmonZ P1   1: vt100
        mon     Y-na    -------- ---   1
 
-                            Amon P1  11: ch4 co2 hur hus n2o o3 ta ua va wap zg
-                            Emon P1   2: utendnogw utendogw
-                        HOMALmon P1   5: ext550bc ext550dust ext550oa ext550so4 ext550ss
-       mon   XY-P19    -------- ---  18
-
-                            Amon P1   1: mc
-                           CFmon P2   1: mcd
-                           CFmon P1  17: mcu rld4co2 rld rldcs4co2 rldcs rlu4co2 rlu rlucs4co2 rlucs rsd4co2 rsd rsdcs4co2 rsdcs rsu4co2 rsu rsucs4co2 rsucs
-       mon    XY-AH    -------- ---  19
-
-                           CFmon P1   1: clcalipso
-                            Emon P1   4: clcalipsoice clcalipsoliq cfadDbze94 cfadLidarsr532
-                        HOMALmon P1   1: clcalipsoun
-       mon   XY-H40    -------- ---   6
-
-                           CFmon P1   1: clisccp
-                            Emon P1   2: jpdftaureicemodis jpdftaureliqmodis
-       mon    XY-P7    -------- ---   3
-
-                            Emon P1   3: mrsfl mrsll mrsol
-                            Lmon P1   1: tsl
-       mon     XY-S    -------- ---   4
-
-                            Emon P1   1: clmisr
-       mon   XY-H16    -------- ---   1
-
-                            Emon P1   3: hus ua va
-       mon   XY-P7T    -------- ---   3
-
-                        HOMALmon P1   4: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
-       mon  XY-temp    -------- ---   4
-
-                        HOMALmon P1   1: clmodis
-       mon XY-tau|P7C    -------- ---   1
-
-                        HOMALmon P1   1: parasolCRefl
-       mon  XY-sza5    -------- ---   1
-
-                        HOMEPmon P1   3: co no2 o3
-       mon XY-Plev39hm    -------- ---   3
-
-                        HOMEPmon P1   6: hus ta ua va wap zg
-       mon  XY-P7HM    -------- ---   6
-
        mon --------    -------- --- 435
-
-                     E1hrClimMon P1   5: rlut rlutcs rsdt rsut rsutcs
-     1hrCM    XY-na    -------- ---   5
-
-     1hrCM --------    -------- ---   5
 
                           Esubhr P1   6: tnhuspbl tnhusscp tntpbl tntrlcs tntrscs tntscp
    subhrPt      S-A    -------- ---   6
 
    subhrPt --------    -------- ---   6
-
-                           CF3hr P2   8: clc clic clis cls clwc clws ta zfull
-                          E3hrPt P1   1: hus
-                       None3hrPt P1   2: ua va
-                       None3hrPt P3   1: wap
-     3hrPt     XY-A    -------- ---  12
-
-                           CF3hr P2   5: prcprof prlsns prlsprof prsnc zhalf
-     3hrPt    XY-AH    -------- ---   5
-
-                          E3hrPt P1   5: clhcalipso cllcalipso clmcalipso cltcalipso parasolRefl
-                      HOMAL3hrPt P1  27: clhcalipsoice clhcalipsoliq clhcalipsoun clhmodis cllcalipsoice cllcalipsoliq cllcalipsoun cllmodis clmcalipsoice clmcalipsoliq clmcalipsoun clmmodis cltcalipsoice cltcalipsoliq cltcalipsoun cltlidarradar iwpmodis lwpmodis meantbclrisccp meantbisccp pctmodis reffclimodis reffclwmodis tauimodis tauisccp tautmodis tauwmodis
-     3hrPt    XY-na    -------- ---  32
-
-                          E3hrPt P1   4: cfadDbze94 cfadLidarsr532 clcalipso2 clcalipso
-                      HOMAL3hrPt P1   1: clcalipsoun
-     3hrPt   XY-H40    -------- ---   5
-
-                          E3hrPt P1   3: jpdftaureicemodis jpdftaureliqmodis clisccp
-     3hrPt    XY-P7    -------- ---   3
-
-                          E3hrPt P1   1: clmisr
-     3hrPt   XY-H16    -------- ---   1
-
-                      HOMAL3hrPt P1   1: parasolCRefl
-     3hrPt  XY-sza5    -------- ---   1
-
-                      HOMAL3hrPt P1   1: clmodis
-     3hrPt XY-tau|P7C    -------- ---   1
-
-                      HOMAL3hrPt P1   4: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
-     3hrPt  XY-temp    -------- ---   4
-
-     3hrPt --------    -------- ---  64
 
 
 ---------- --------    -------- --- 618

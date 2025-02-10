@@ -250,6 +250,12 @@ class SimpleCMORVar(SimpleObject):
                self.frequency == other.frequency and self.mipTable == other.mipTable and \
                self.temporal_shp == other.temporal_shp and self.spatial_shp == other.spatial_shp
 
+    def __lt__(self, other):
+        return self.label < other.label
+
+    def __gt__(self, other):
+        return self.label > other.label
+
     def correct_data_request(self):
         pass
 
