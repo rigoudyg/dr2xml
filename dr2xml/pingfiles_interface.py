@@ -149,7 +149,7 @@ def check_for_file_input(sv, hgrid):
         logger.debug(remap_grid_def)
 
         # Create xml for reading the variable
-        filename = externs[sv.label][hgrid][get_settings_values("internal_values", "grid_choice")]
+        filename = externs[sv.label][hgrid][internal_dict["select_grid_choice"]]
         file_id = "remapped_{}_file".format(sv.label)
         field_in_file_id = "_".join([sv.label, hgrid])
         # field_in_file_id=sv.label

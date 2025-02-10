@@ -172,13 +172,13 @@ internal_values = dict(
 				conditions=ConditionSettings(check_value=ValueSettings(key_type="internal", keys="select"),
 				                             check_to_do="eq",
 				                             reference_values=["on_expt_and_year", ]),
-				value=True
+				value=ValueSettings(key_type="internal", keys="year")
 			),
 			CaseSettings(
 				conditions=ConditionSettings(check_value=ValueSettings(key_type="internal", keys="select"),
 				                             check_to_do="eq",
 				                             reference_values=["no", "on_expt"]),
-				value=False
+				value=None
 			)
 		],
 		fatal=True,
@@ -1245,6 +1245,14 @@ internal_values = dict(
 		     "Sometimes it is appropriate to list two (or more) model types here, among AER, AGCM, AOGCM, BGC, CHEM, "
 		     "ISM, LAND, OGCM, RAD, SLAB e.g. amip , run with CNRM-CM6-1, should quote \"AGCM AER\". "
 		     "Also see note 14 of https://docs.google.com/document/d/1h0r8RZr_f3-8egBMMh7aqLwy3snpD6_MrDz1q8n5XUk/edit"
+	),
+	year=ParameterSettings(
+        key="year",
+		default_values=[
+			ValueSettings(key_type="dict", keys="year")
+		],
+		fatal=True,
+		help="Year associated with the launch of dr2xml."
 	)
 )
 
@@ -1256,14 +1264,6 @@ common_values = dict(
 		],
 		fatal=True,
 		help="Prefix to be used for each file definition."
-	),
-	year=ParameterSettings(
-        key="year",
-		default_values=[
-			ValueSettings(key_type="dict", keys="year")
-		],
-		fatal=True,
-		help="Year associated with the launch of dr2xml."
 	)
 )
 

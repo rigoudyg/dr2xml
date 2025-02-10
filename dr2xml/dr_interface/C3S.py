@@ -83,7 +83,7 @@ class DataRequest(DataRequestBasic):
     def get_dimensions_dict(self):
         return OrderedDict()
 
-    def get_cmorvars_list(self, sizes=None, **kwargs):
+    def get_cmorvars_list(self, **kwargs):
         rep = defaultdict(set)
         for id in self.get_element_uid(elt_type="variable"):
             for grid in self.get_element_uid(id=id, elt_type="variable").grids:

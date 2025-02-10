@@ -417,7 +417,7 @@ project_settings = dict(
                 key="year",
                 help="Year used for the dr2xml's launch",
                 default_values=[
-                    ValueSettings(key_type="common", keys="year", fmt="Year processed {}")
+                    ValueSettings(key_type="internal", keys="year", fmt="Year processed {}")
                 ]
             )
         )

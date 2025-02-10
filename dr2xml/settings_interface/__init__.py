@@ -62,7 +62,6 @@ def initialize_internal_values(force_reset=False):
         set_internal_value(key="cmor_vars", value=list())
     set_internal_value(key="sn_issues", value=OrderedDict())
     set_internal_value(key="print_multiple_grids", value=False)
-    set_internal_value(key="grid_choice", value=None)
 
 
 def set_internal_value(key, value, action=False):

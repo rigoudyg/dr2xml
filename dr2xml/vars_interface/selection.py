@@ -38,17 +38,18 @@ def check_exclusion(var, *exclusions):
     return tests, reasons
 
 
-def select_variables_to_be_processed(year, context, select):
+def select_variables_to_be_processed():
     """
     Return the list of variables to be processed.
     """
     internal_dict = get_settings_values("internal")
+    context = internal_dict["context"]
     logger = get_logger()
     #
     # --------------------------------------------------------------------
     # Extract CMOR variables for the experiment and year and lab settings
     # --------------------------------------------------------------------
-    mip_vars_list = gather_AllSimpleVars(year, select)
+    mip_vars_list = gather_AllSimpleVars()
     # Group vars per realm
     svars_per_realm = defaultdict(list)
     for svar in mip_vars_list:
@@ -124,28 +125,18 @@ def select_variables_to_be_processed(year, context, select):
     return svars_per_table
 
 
-def gather_AllSimpleVars(year=False, select="on_expt_and_year"):
+def gather_AllSimpleVars():
     """
     List of mip variables asked
-    :param year: year when the variables are created
-    :param select: selection criteria
     :return: list of mip variables
     """
     logger = get_logger()
     internal_dict = get_settings_values("internal")
-    if select in ["on_expt_and_year", ""]:
-        mip_vars_list = select_data_request_CMORvars_for_lab(True, year)
-    elif select in ["on_expt", ]:
-        mip_vars_list = select_data_request_CMORvars_for_lab(True, None)
-    elif select in ["no", ]:
-        mip_vars_list = select_data_request_CMORvars_for_lab(False, None)
-    else:
-        logger.error("Choice %s is not allowed for arg 'select'" % select)
-        raise Dr2xmlError("Choice %s is not allowed for arg 'select'" % select)
+    mip_vars_list = select_data_request_CMORvars_for_lab()
     #
     if internal_dict['listof_home_vars']:
         exp = internal_dict['experiment_for_requests']
-        mip_vars_list = process_home_vars(mip_vars_list, internal_dict["mips"][get_settings_values("internal_values", "grid_choice")], expid=exp)
+        mip_vars_list = process_home_vars(mip_vars_list, internal_dict["select_mips"], expid=exp)
     else:
         logger.info("Info: No HOMEvars list provided.")
     return mip_vars_list

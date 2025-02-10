@@ -462,7 +462,7 @@ def write_xios_file_def(filename, svars_per_table, year, dummies, skipped_vars_p
     set_config_variable("domain_defs", OrderedDict())
     # Add xml_file_definition
     xml_file_definition = DR2XMLElement(tag="file_definition")
-    _, hgrid, _, _, _ = internal_dict['grids'][get_settings_values("internal_values", "grid_choice")][context]
+    _, hgrid, _, _, _ = internal_dict['grids'][internal_dict["select_grid_choice"]][context]
     files_list = determine_files_list(svars_per_table, enddate, year, debug)
     for file_dict in files_list:
         write_xios_file_def_for_svars_list(hgrid=hgrid, xml_file_definition=xml_file_definition, dummies=dummies,

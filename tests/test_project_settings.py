@@ -147,7 +147,7 @@ class TestProjectSettings(unittest.TestCase):
 		                                'ISMIP6', 'LS3MIP', 'LUMIP', 'OMIP', 'PDRMIP', 'PMIP', 'RFMIP', 'SIMIP',
 		                                'SPECS', 'ScenarioMIP', 'SolarMIP', 'VIACSAB', 'VolMIP'],
 		                'select_on_expt': False,
-		                'select_on_year': False,
+		                'select_on_year': None,
 		                'select_sizes': None,
 		                'select_tierMax': 3,
 		                'sizes': None,
@@ -163,6 +163,7 @@ class TestProjectSettings(unittest.TestCase):
 		                'use_union_zoom': False,
 		                'vertical_interpolation_operation': 'instant',
 		                'xios_version': 2,
+		                'year': 0,
 		                'zg_field_name': 'zg'}
 		self.assertDictEqual(internal, ref_internal)
 		common = get_settings_values("common")
@@ -186,7 +187,6 @@ class TestProjectSettings(unittest.TestCase):
 		              'physics_index': '1',
 		              'prefix': 'CMIP6_',
 		              'sub_experiment': 'none',
-		              'sub_experiment_id': 'none',
-		              'year': 0}
+		              'sub_experiment_id': 'none'}
 		self.assertDictEqual(common, ref_common)
 

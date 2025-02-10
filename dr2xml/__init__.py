@@ -589,13 +589,12 @@ def configuration_init(func):
         initialize_config_variables()
         initialize_settings(lset=lset, sset=sset, cvspath=cvs_path, context=context, prefix=prefix,
                             year=year, dirname=dirname, force_reset=force_reset, select=select)
-        return func(select=select, **kwargs)
+        return func(**kwargs)
     return make_configuration
 
 
 @configuration_init
-def generate_file_defs(year, enddate, context, pingfiles=None, dummies='include', dirname="./", attributes=list(),
-                       select="on_expt_and_year"):
+def generate_file_defs(year, enddate, context, pingfiles=None, dummies='include', dirname="./", attributes=list()):
     """
     Using the DR module, a dict of lab settings ``lset``, and a dict
     of simulation settings ``sset``, generate an XIOS file_defs 'file' for a
@@ -699,7 +698,7 @@ on
     # --------------------------------------------------------------------
     skipped_vars_per_table = OrderedDict()
     actually_written_vars = list()
-    svars_per_table = select_variables_to_be_processed(year, context, select)
+    svars_per_table = select_variables_to_be_processed()
     #
     # --------------------------------------------------------------------
     # Read ping_file defined variables
@@ -760,7 +759,7 @@ def create_ping_files(context, path_special, dummy="field_atm", dummy_with_shape
     from .pingfiles_interface import ping_file_for_realms_list
 
     considered_realms = get_settings_values("internal", "realms_per_context")
-    svars = select_variables_to_be_processed(None, context, "no")
+    svars = select_variables_to_be_processed()
     if by_realm:
         for realm in considered_realms:
             ping_file_for_realms_list(context=context, svars=svars, lrealms=[realm, ], path_special=path_special,

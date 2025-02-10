@@ -434,17 +434,18 @@ class DataRequest(DataRequestBasic):
                     rep.append(c.label)
         return rep
 
-    def get_cmorvars_list(self, tierMax, mips_list, included_request_links, excluded_request_links, max_priority,
-                          included_vars, excluded_vars, included_tables, excluded_tables, excluded_pairs,
-                          experiment_filter=False, sizes=None):
+    def get_cmorvars_list(self, select_tierMax, select_mips, select_included_request_links,
+                          select_excluded_request_links, select_max_priority, select_included_vars,
+                          select_excluded_vars, select_included_tables, select_excluded_tables, select_excluded_pairs,
+                          experiment_filter=False, select_sizes=None, **kwargs):
         logger = get_logger()
-        sc = get_scope(tierMax)
-        if sizes is not None:
-            sc.update_mcfg(sizes)
+        sc = get_scope(select_tierMax)
+        if select_sizes is not None:
+            sc.update_mcfg(select_sizes)
         # Get the request links for all experiments filtered by MIPs
         rls_for_mips = sc.get_filtered_request_links_by_mip_included_excluded(
-            mips_list=mips_list, included_request_links=included_request_links,
-            excluded_request_links=excluded_request_links
+            mips_list=select_mips, included_request_links=select_included_request_links,
+            excluded_request_links=select_excluded_request_links
         )
         rls_for_mips = sorted(rls_for_mips, key=lambda x: x.label)
         # Filter by experiment if needed
@@ -452,14 +453,14 @@ class DataRequest(DataRequestBasic):
             rls = self._filter_request_link_by_experiment_and_year(rls_for_mips, **experiment_filter)
             logger.info("Number of Request Links which apply to experiment %s member %s and MIPs %s is: %d" %
                         (experiment_filter["experiment_id"], experiment_filter['realization_index'],
-                         print_struct(mips_list), len(rls)))
+                         print_struct(select_mips), len(rls)))
         else:
             rls = rls_for_mips
         # Get variables and grids by mips
         miprl_vars_grids = set()
         for rl in rls:
             logger.debug("processing RequestLink %s" % rl.title)
-            for v in sc.get_vars_by_request_link(request_link=rl.uid, pmax=max_priority):
+            for v in sc.get_vars_by_request_link(request_link=rl.uid, pmax=select_max_priority):
                 # The requested grid is given by the RequestLink except if spatial shape matches S-*
                 gr = rl.grid
                 cmvar = self.get_element_uid(v, elt_type="variable")
@@ -473,9 +474,9 @@ class DataRequest(DataRequestBasic):
         filtered_vars = list()
         for (v, g) in miprl_vars_grids:
             cmvar = self.get_element_uid(v, elt_type="variable")
-            if is_elt_applicable(cmvar.mipVarLabel, excluded=excluded_vars, included=included_vars) and \
-                    is_elt_applicable(cmvar.mipTable, excluded=excluded_tables, included=included_tables) and \
-                    is_elt_applicable((cmvar.mipVarLabel, cmvar.mipTable), excluded=excluded_pairs):
+            if is_elt_applicable(cmvar.mipVarLabel, excluded=select_excluded_vars, included=select_included_vars) and \
+                    is_elt_applicable(cmvar.mipTable, excluded=select_excluded_tables, included=select_included_tables) and \
+                    is_elt_applicable((cmvar.mipVarLabel, cmvar.mipTable), excluded=select_excluded_pairs):
                 filtered_vars.append((v, g))
                 logger.debug("adding var %s, grid=%s, ttable=%s=" % (cmvar.label, g, cmvar.mipTable))
 

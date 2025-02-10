@@ -7,8 +7,6 @@ Generic data request tools
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
-from collections import OrderedDict
-
 from dr2xml.dr_interface import get_dr_object
 from utilities.logger import get_logger
 from dr2xml.settings_interface import get_settings_values, set_internal_value, get_values_from_internal_settings
@@ -17,20 +15,12 @@ from .generic import complement_svar_using_cmorvar
 from dr2xml.laboratories import lab_adhoc_grid_policy
 
 
-def select_data_request_CMORvars_for_lab(sset=False, year=None):
+def select_data_request_CMORvars_for_lab():
     """
     A function to list CMOR variables relevant for a lab (and also,
     optionally for an experiment and a year)
     The variables relative to the laboratory settings are get using the dict_interface module:
     list of MIPS, max Tier, list of excluded variables names
-
-    Args:
-      sset (boolean): should simulation settings be used
-                      the parameter taken here are: source_type,
-                      max priority (and all for filtering on the simulation)
-                      If sset is False, use union of mips among all grid choices
-      year (int,optional) : simulation year - used when sset is not None,
-                   to additionally filter on year
 
     Returns:
       A list of 'simplified CMOR variables'
@@ -39,52 +29,26 @@ def select_data_request_CMORvars_for_lab(sset=False, year=None):
     logger = get_logger()
     internal_settings = get_settings_values("internal")
     data_request = get_dr_object("get_data_request")
-    mip_list_by_grid = get_values_from_internal_settings("mips")
-    grid_choice = get_values_from_internal_settings((sset, "grid_choice"), default="LR", merge=False)
-    sizes = get_values_from_internal_settings((sset, "sizes"), default=None, merge=False)
-    tierMax = get_values_from_internal_settings((sset, "tierMax"), "tierMax_lset", merge=False)
-    excvars = get_values_from_internal_settings("excluded_vars_lset", (sset, "excluded_vars_sset"),
-                                                (sset, "excluded_vars_per_config"), merge=True)
-    exctab = get_values_from_internal_settings("excluded_tables_lset", (sset, "excluded_tables_sset"), merge=True)
-    excpairs = get_values_from_internal_settings("excluded_pairs_lset", (sset, "excluded_pairs_sset"), merge=True)
-    incvars = get_values_from_internal_settings((sset, "included_vars"), "excluded_vars_lset", merge=False)
-    inctab = get_values_from_internal_settings((sset, "included_tables"), "excluded_tables_lset", merge=False)
-    inclinks = get_values_from_internal_settings((sset, "included_request_links"), default=None, merge=False)
-    excluded_links = get_values_from_internal_settings((sset, "excluded_request_links"), default=None, merge=False)
-    pmax = get_values_from_internal_settings((sset, "max_priority"), "max_priority_lset", merge=False)
-    if sset:
-        mips_list = set(mip_list_by_grid[grid_choice])
+    mips_list = internal_settings["select_mips"]
+    if internal_settings["select_on_expt"]:
         experiment_id = internal_settings["experiment_for_requests"]
         experiment_filter = dict(experiment_id=experiment_id,
-                                 year=year,
+                                 year=internal_settings["select_on_year"],
                                  filter_on_realization=internal_settings["filter_on_realization"],
                                  realization_index=internal_settings["realization_index"],
                                  branching=internal_settings["branching"],
                                  branch_year_in_child=internal_settings["branch_year_in_child"],
                                  endyear=internal_settings["end_year"])
     else:
-        if isinstance(mip_list_by_grid, (dict, OrderedDict)):
-            mips_list = set().union(*[set(mip_list_by_grid[grid]) for grid in mip_list_by_grid])
-        else:
-            mips_list = mip_list_by_grid
         experiment_filter = False
-    mips_list = sorted(list(mips_list))
-
-    set_internal_value("grid_choice", grid_choice)
 
     last_filter_options = get_settings_values("internal_values", "initial_selection_configuration")
-    filter_options = dict(tierMax=tierMax, mips_list=mips_list, included_request_links=inclinks,
-                          excluded_request_links=excluded_links, max_priority=pmax, included_vars=incvars,
-                          excluded_vars=excvars, included_tables=inctab, excluded_tables=exctab,
-                          excluded_pairs=excpairs, experiment_filter=experiment_filter, sizes=sizes)
+    filter_options = {key: internal_settings[key] for key in list(internal_settings) if key.startswith("select")}
+    filter_options["experiment_filter"] = experiment_filter
     if check_objects_equals(filter_options, last_filter_options):
         d = get_settings_values("internal_values", "cmor_vars")
     else:
-        d, rls = data_request.get_cmorvars_list(tierMax=tierMax, mips_list=mips_list, included_request_links=inclinks,
-                                                excluded_request_links=excluded_links, max_priority=pmax,
-                                                included_vars=incvars, excluded_vars=excvars, included_tables=inctab,
-                                                excluded_tables=exctab, excluded_pairs=excpairs,
-                                                experiment_filter=experiment_filter, sizes=sizes)
+        d, rls = data_request.get_cmorvars_list(**filter_options)
         set_internal_value("global_rls", rls)
         set_internal_value("cmor_vars", d)
         set_internal_value("initial_selection_configuration", filter_options, action="update")
