@@ -56,8 +56,6 @@ def initialize_internal_values(force_reset=False):
         set_internal_value(key="initial_selection_configuration", value=dict())
     if force_reset or get_settings_values("internal_values", "axis_count", default=None, is_default=True) is None:
         set_internal_value(key="axis_count", value=0)
-    if force_reset or get_settings_values("internal_values", "global_rls", default=None, is_default=True) is None:
-        set_internal_value(key="global_rls", value=list())
     if force_reset or get_settings_values("internal_values", "cmor_vars", default=None, is_default=True) is None:
         set_internal_value(key="cmor_vars", value=list())
     set_internal_value(key="sn_issues", value=OrderedDict())

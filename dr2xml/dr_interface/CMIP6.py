@@ -38,6 +38,8 @@ try:
 except ImportError:
     from dreqPy.scope import dreqQuery
 
+rls = None
+
 
 class DataRequest(DataRequestBasic):
     def set_mcfg(self):
@@ -299,7 +301,7 @@ class DataRequest(DataRequestBasic):
                      (year, exp_label, repr(relevant), ri.title, tslice.type, repr(endyear)))
         return relevant, endyear
 
-    def _get_requestitems_for_cmorvar(self, cmorvar_id, pmax, global_rls):
+    def _get_requestitems_for_cmorvar(self, cmorvar_id, pmax):
         logger = get_logger()
 
         rVarsUid = self.get_request_by_id_by_sect(cmorvar_id, 'requestVar')
@@ -311,13 +313,9 @@ class DataRequest(DataRequestBasic):
         RequestLinksId = list()
         for vg in VarGroups:
             RequestLinksId.extend(self.get_request_by_id_by_sect(vg.uid, 'requestLink'))
-        FilteredRequestLinks = list()
-        for rlid in RequestLinksId:
-            rl = self.get_element_uid(rlid)
-            if rl in global_rls:
-                FilteredRequestLinks.append(rl)
-        logger.debug("les requestlinks: %s" % " ".join([self.get_element_uid(rlid).label
-                                                        for rlid in RequestLinksId]))
+        RequestLinksId = sorted([self.get_element_uid(rlid) for rlid in RequestLinksId], key=lambda x: x.label)
+        FilteredRequestLinks = sorted(list(set(RequestLinksId) & set(rls)), key=lambda x: x.label)
+        logger.debug("les requestlinks: %s" % " ".join([rl.label for rl in RequestLinksId]))
         logger.debug("les FilteredRequestlinks: %s" % " ".join([rl.label for rl in FilteredRequestLinks]))
         RequestItems = list()
         for rl in FilteredRequestLinks:
@@ -326,12 +324,12 @@ class DataRequest(DataRequestBasic):
             "les requestItems: %s" % " ".join([self.get_element_uid(riid).label for riid in RequestItems]))
         return RequestItems
 
-    def get_endyear_for_cmorvar(self, cmorvar, experiment, year, internal_dict, global_rls):
+    def get_endyear_for_cmorvar(self, cmorvar, experiment, year, internal_dict):
         logger = get_logger()
         logger.debug("In end_year for %s %s" % (cmorvar.label, cmorvar.mipTable))
         # 1- Get the RequestItems which apply to CmorVar
         max_priority = get_values_from_internal_settings("max_priority", "max_priority_lset", merge=False)
-        request_items = self._get_requestitems_for_cmorvar(cmorvar.id, max_priority, global_rls)
+        request_items = self._get_requestitems_for_cmorvar(cmorvar.id, max_priority)
 
         # 2- Select those request links which include expt and year
         larger = None
@@ -413,6 +411,7 @@ class DataRequest(DataRequestBasic):
                           select_excluded_request_links, select_max_priority, select_included_vars,
                           select_excluded_vars, select_included_tables, select_excluded_tables, select_excluded_pairs,
                           experiment_filter=False, **kwargs):
+        global rls
         logger = get_logger()
         self.update_mcfg()
         # Get the request links for all experiments filtered by MIPs
@@ -459,7 +458,7 @@ class DataRequest(DataRequestBasic):
         filtered_vars_with_grids = defaultdict(set)
         for (v, g) in filtered_vars:
             filtered_vars_with_grids[v].add(g)
-        return filtered_vars_with_grids, rls
+        return filtered_vars_with_grids
 
     def _get_request_link_by_mip(self, mips_list):
         return sorted(list(self.scope.getRequestLinkByMip(set(mips_list))), key=lambda x: x.label)

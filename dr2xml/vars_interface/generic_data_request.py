@@ -48,8 +48,7 @@ def select_data_request_CMORvars_for_lab():
     if check_objects_equals(filter_options, last_filter_options):
         d = get_settings_values("internal_values", "cmor_vars")
     else:
-        d, rls = data_request.get_cmorvars_list(**filter_options)
-        set_internal_value("global_rls", rls)
+        d = data_request.get_cmorvars_list(**filter_options)
         set_internal_value("cmor_vars", d)
         set_internal_value("initial_selection_configuration", filter_options, action="update")
     logger.info('Number of distinct CMOR variables (whatever the grid): %d' % len(d))
@@ -101,8 +100,7 @@ def endyear_for_CMORvar(cv, expt, year):
     data_request = get_dr_object("get_data_request")
 
     # Some debug material
-    larger = data_request.get_endyear_for_cmorvar(cmorvar=cv, experiment=expt, year=year, internal_dict=internal_dict,
-                                                  global_rls=get_settings_values("internal_values", "global_rls"))
+    larger = data_request.get_endyear_for_cmorvar(cmorvar=cv, experiment=expt, year=year, internal_dict=internal_dict)
     return larger
 
 

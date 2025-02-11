@@ -687,20 +687,20 @@ Skipped variables (i.e. whose alias is not present in the pingfile):
 
 
 Some Statistics on actually written variables per frequency+shape...
-                          AERday P1   8: cod od550aer toz ua10 zg1000 zg100 zg10 zg500
+                          AERday P1   8: cod od550aer toz ua10 zg10 zg100 zg1000 zg500
                            CFday P1   2: ps rsdscs
                              day P1   9: pr rlds rlus rsds tas tasmax tasmin uas vas
        day    XY-na    -------- ---  19
 
        day --------    -------- ---  19
 
-                          AERmon P1  29: airmass cdnc ch4 co2 co h2o hcho hcl hno3 mmrbc mmrdust mmroa mmrpm1 mmrso4 mmrss n2o no2 no o3 o3loss o3prod oh so2 tntrl tntrs ua va wa zg
+                          AERmon P1  29: airmass cdnc ch4 co co2 h2o hcho hcl hno3 mmrbc mmrdust mmroa mmrpm1 mmrso4 mmrss n2o no no2 o3 o3loss o3prod oh so2 tntrl tntrs ua va wa zg
                             Amon P1   3: cl cli clw
                            CFmon P1  15: clc hur hus ta tnhus tnhusa tnhusc tnhusmp tnhusscpbl tnt tnta tntc tntmp tntr tntscpbl
        mon     XY-A    -------- ---  47
 
                             Amon P1   1: mc
-                           CFmon P1  17: mcu rld4co2 rld rldcs4co2 rldcs rlu4co2 rlu rlucs4co2 rlucs rsd4co2 rsd rsdcs4co2 rsdcs rsu4co2 rsu rsucs4co2 rsucs
+                           CFmon P1  17: mcu rld rld4co2 rldcs rldcs4co2 rlu rlu4co2 rlucs rlucs4co2 rsd rsd4co2 rsdcs rsdcs4co2 rsu rsu4co2 rsucs rsucs4co2
        mon    XY-AH    -------- ---  18
 
                            CFmon P1   1: clcalipso
@@ -728,7 +728,7 @@ Some Statistics on actually written variables per frequency+shape...
                            CFmon P1  11: albisccp clhcalipso cllcalipso clmcalipso cltcalipso cltisccp pctisccp rlut4co2 rlutcs4co2 rsut4co2 rsutcs4co2
                             Emon P1  16: cLand cSoil evspsblpot fDeforestToProduct fFireNat fLuc fProductDecomp intuadse intuaw intvadse intvaw nep sconcdust sconcso4 sconcss sfcWindmax
                             Emon P2  26: cLitterGrass cLitterSubSurf cLitterSurf cLitterTree cSoilGrass cSoilPools cSoilTree cStem cVegGrass cVegTree cWood fDeforestToAtmos fFireAll fVegFire gppGrass gppTree mrtws nppGrass nppTree raGrass raTree rhGrass rhLitter rhSoil rhTree tSoilPools
-                        HOMALmon P1  45: RADabs550aer RADasy550aer RADod550aer RADssa550aer TACabs550aer albsrfcLa albsrfc asy550aer burntArea cdnctop clth cltl cltm fDeforestToL fFireBCarb fRegrowth fsat icedLa icod lcod necb od550acldaer od550dustbin1 od550dustbin2 od550ssbin1 od550ssbin2 reffclitop reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf sconcbc sconcoa snct sndLa ssa550aer tmxlLa tsLa vegstress
+                        HOMALmon P1  45: RADabs550aer RADasy550aer RADod550aer RADssa550aer TACabs550aer albsrfc albsrfcLa asy550aer burntArea cdnctop clth cltl cltm fDeforestToL fFireBCarb fRegrowth fsat icedLa icod lcod necb od550acldaer od550dustbin1 od550dustbin2 od550ssbin1 od550ssbin2 reffclitop reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf sconcbc sconcoa snct sndLa ssa550aer tmxlLa tsLa vegstress
                            LImon P1   3: snc snd snw
                            LImon P2   1: lwsnl
                             Lmon P1  26: baresoilFrac burntFractionAll cLitter cProduct cVeg cropFrac evspsblsoi evspsblveg fFire fLitterSoil fVegLitter gpp grassFrac lai mrfso mrro mrros mrso mrsos nbp npp ra residualFrac rh tran treeFrac

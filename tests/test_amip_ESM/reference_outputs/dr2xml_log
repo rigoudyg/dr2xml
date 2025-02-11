@@ -197,11 +197,11 @@ Some Statistics on actually written variables per frequency+shape...
                           E3hrPt P1   1: clmisr
      3hrPt   XY-H16    -------- ---   1
 
-                          E3hrPt P1   4: cfadDbze94 cfadLidarsr532 clcalipso2 clcalipso
+                          E3hrPt P1   4: cfadDbze94 cfadLidarsr532 clcalipso clcalipso2
                       HOMAL3hrPt P1   1: clcalipsoun
      3hrPt   XY-H40    -------- ---   5
 
-                          E3hrPt P1   3: jpdftaureicemodis jpdftaureliqmodis clisccp
+                          E3hrPt P1   3: clisccp jpdftaureicemodis jpdftaureliqmodis
      3hrPt    XY-P7    -------- ---   3
 
                           E3hrPt P1   5: clhcalipso cllcalipso clmcalipso cltcalipso parasolRefl
@@ -238,9 +238,9 @@ Some Statistics on actually written variables per frequency+shape...
                              day P1   6: hur hus ta ua va wap
        day    XY-P8    -------- ---   6
 
-                          AERday P1   8: cod od550aer toz ua10 zg1000 zg100 zg10 zg500
+                          AERday P1   8: cod od550aer toz ua10 zg10 zg100 zg1000 zg500
                            CFday P1  21: albisccp ccb cct clhcalipso clivi cllcalipso clmcalipso cltcalipso cltisccp clwvi pctisccp ps rldscs rlutcs rsdscs rsdt rsuscs rsut rsutcs ta700 wap500
-                            Eday P1  15: clivic clwvic hus850 loadbc loaddust loadoa loadso4 loadss rsdsdiff ta500 ta850 tauu tauv ts parasolRefl
+                            Eday P1  15: clivic clwvic hus850 loadbc loaddust loadoa loadso4 loadss parasolRefl rsdsdiff ta500 ta850 tauu tauv ts
                              day P1  29: clt hfls hfss hurs hursmax hursmin huss mrro mrso mrsos pr prc prsn psl rlds rlus rlut rsds rsus sfcWind sfcWindmax snc snw tas tasmax tasmin tslsi uas vas
        day    XY-na    -------- ---  73
 
@@ -258,7 +258,7 @@ Some Statistics on actually written variables per frequency+shape...
 
         fx --------    -------- ---   7
 
-                          AERmon P1  29: airmass cdnc ch4 co2 co h2o hcho hcl hno3 mmrbc mmrdust mmroa mmrpm1 mmrso4 mmrss n2o no2 no o3 o3loss o3prod oh so2 tntrl tntrs ua va wa zg
+                          AERmon P1  29: airmass cdnc ch4 co co2 h2o hcho hcl hno3 mmrbc mmrdust mmroa mmrpm1 mmrso4 mmrss n2o no no2 o3 o3loss o3prod oh so2 tntrl tntrs ua va wa zg
                             Amon P1   3: cl cli clw
                            CFmon P1  16: clc cls hur hus ta tnhus tnhusa tnhusc tnhusmp tnhusscpbl tnt tnta tntc tntmp tntr tntscpbl
                            CFmon P2   4: clic clis clwc clws
@@ -266,7 +266,7 @@ Some Statistics on actually written variables per frequency+shape...
        mon     XY-A    -------- ---  59
 
                             Amon P1   1: mc
-                           CFmon P1  17: mcu rld4co2 rld rldcs4co2 rldcs rlu4co2 rlu rlucs4co2 rlucs rsd4co2 rsd rsdcs4co2 rsdcs rsu4co2 rsu rsucs4co2 rsucs
+                           CFmon P1  17: mcu rld rld4co2 rldcs rldcs4co2 rlu rlu4co2 rlucs rlucs4co2 rsd rsd4co2 rsdcs rsdcs4co2 rsu rsu4co2 rsucs rsucs4co2
                            CFmon P2   1: mcd
        mon    XY-AH    -------- ---  19
 
@@ -274,7 +274,7 @@ Some Statistics on actually written variables per frequency+shape...
        mon   XY-H16    -------- ---   1
 
                            CFmon P1   1: clcalipso
-                            Emon P1   4: clcalipsoice clcalipsoliq cfadDbze94 cfadLidarsr532
+                            Emon P1   4: cfadDbze94 cfadLidarsr532 clcalipsoice clcalipsoliq
                         HOMALmon P1   1: clcalipsoun
        mon   XY-H40    -------- ---   6
 
@@ -305,7 +305,7 @@ Some Statistics on actually written variables per frequency+shape...
                            CFmon P1  11: albisccp clhcalipso cllcalipso clmcalipso cltcalipso cltisccp pctisccp rlut4co2 rlutcs4co2 rsut4co2 rsutcs4co2
                             Emon P1  39: cLand cSoil climodis cltmodis clwmodis clwvic cropFracC3 cropFracC4 evspsblpot fAnthDisturb fDeforestToProduct fFireNat fLuc fProductDecomp grassFracC3 grassFracC4 intuadse intuaw intvadse intvaw loaddust mrlso nep netAtmosLandCO2Flux od443dust od865dust orog parasolRefl rls rsdsdiff rss sconcdust sconcso4 sconcss sedustCI sfcWindmax uqint vegFrac vqint
                             Emon P2  26: cLitterGrass cLitterSubSurf cLitterSurf cLitterTree cSoilGrass cSoilPools cSoilTree cStem cVegGrass cVegTree cWood fDeforestToAtmos fFireAll fVegFire gppGrass gppTree mrtws nppGrass nppTree raGrass raTree rhGrass rhLitter rhSoil rhTree tSoilPools
-                        HOMALmon P1  72: RADabs550aer RADasy550aer RADod550aer RADssa550aer TACabs550aer albsrfcLa albsrfc asy550aer burntArea cdnctop clhcalipsoice clhcalipsoliq clhcalipsoun clhmodis cllcalipsoice cllcalipsoliq cllcalipsoun cllmodis clmcalipsoice clmcalipsoliq clmcalipsoun clmmodis cltcalipsoice cltcalipsoliq cltcalipsoun clth cltl cltlidarradar cltm fDeforestToL fFireBCarb fRegrowth fsat icedLa icod iwpmodis lcod lwpmodis meantbclrisccp meantbisccp necb od550acldaer od550dustbin1 od550dustbin2 od550ssbin1 od550ssbin2 pctmodis reffclimodis reffclitop reffclwmodis reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf sconcbc sconcoa snct sndLa ssa550aer tauimodis tauisccp tautmodis tauwmodis tmxlLa tsLa vegstress
+                        HOMALmon P1  72: RADabs550aer RADasy550aer RADod550aer RADssa550aer TACabs550aer albsrfc albsrfcLa asy550aer burntArea cdnctop clhcalipsoice clhcalipsoliq clhcalipsoun clhmodis cllcalipsoice cllcalipsoliq cllcalipsoun cllmodis clmcalipsoice clmcalipsoliq clmcalipsoun clmmodis cltcalipsoice cltcalipsoliq cltcalipsoun clth cltl cltlidarradar cltm fDeforestToL fFireBCarb fRegrowth fsat icedLa icod iwpmodis lcod lwpmodis meantbclrisccp meantbisccp necb od550acldaer od550dustbin1 od550dustbin2 od550ssbin1 od550ssbin2 pctmodis reffclimodis reffclitop reffclwmodis reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf sconcbc sconcoa snct sndLa ssa550aer tauimodis tauisccp tautmodis tauwmodis tmxlLa tsLa vegstress
                            LImon P1  11: agesno hfdsn sbl sftgif sftgrf snc snd snm snw tpf tsn
                            LImon P2   1: lwsnl
                             Lmon P1  29: baresoilFrac burntFractionAll c3PftFrac c4PftFrac cLitter cProduct cVeg cropFrac evspsblsoi evspsblveg fFire fLitterSoil fVegLitter gpp grassFrac lai landCoverFrac mrfso mrro mrros mrso mrsos nbp npp ra residualFrac rh tran treeFrac

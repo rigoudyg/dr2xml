@@ -131,7 +131,7 @@ Some Statistics on actually written variables per frequency+shape...
                            CFmon P1   7: albisccp clhcalipso cllcalipso clmcalipso cltcalipso cltisccp pctisccp
                             Emon P1   7: evspsblpot intuadse intuaw intvadse intvaw nep sfcWindmax
                             Emon P2   1: mrtws
-                        HOMALmon P1  30: RADabs550aer RADasy550aer RADod550aer RADssa550aer albsrfcLa albsrfc cdnctop clth cltl cltm fsat icedLa icod lcod reffclitop reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf snct sndLa tmxlLa tsLa vegstress
+                        HOMALmon P1  30: RADabs550aer RADasy550aer RADod550aer RADssa550aer albsrfc albsrfcLa cdnctop clth cltl cltm fsat icedLa icod lcod reffclitop reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf snct sndLa tmxlLa tsLa vegstress
                            LImon P1   3: snc snd snw
                            LImon P2   1: lwsnl
                             Lmon P1  18: baresoilFrac cropFrac evspsblsoi evspsblveg gpp grassFrac lai mrfso mrro mrros mrso mrsos npp ra residualFrac rh tran treeFrac

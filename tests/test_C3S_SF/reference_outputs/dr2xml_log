@@ -61,7 +61,7 @@ Some Statistics on actually written variables per frequency+shape...
 
        6hr --------    -------- ---   7
 
-                             C3S P1  22: hfls hfss rlds rls rlt rsds rsdt rss rst tasmax tasmin tauu tauv wsgmax lwee lwepr lweprc lweprsn lwesnw mrroab mrroas rhosn
+                             C3S P1  22: hfls hfss lwee lwepr lweprc lweprsn lwesnw mrroab mrroas rhosn rlds rls rlt rsds rsdt rss rst tasmax tasmin tauu tauv wsgmax
        day    XY-na    -------- ---  22
 
        day --------    -------- ---  22

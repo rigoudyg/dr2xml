@@ -127,6 +127,43 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
+		<file id="prw_Eday_gn" name="IOXDIRprw_Eday_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+			<variable name="activity_id" type="string"> CORDEX </variable>
+			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
+			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
+			<variable name="experiment_id" type="string"> historical </variable>
+			<variable name="description" type="string"> CMIP6 historical </variable>
+			<variable name="title" type="string"> CMIP6 historical </variable>
+			<variable name="frequency" type="string"> day </variable>
+			<variable name="grid" type="string"> regional zone C </variable>
+			<variable name="grid_label" type="string"> gn </variable>
+			<variable name="nominal_resolution" type="string"> 50 km </variable>
+			<variable name="comment" type="string"> CORDEX MED-11 CNRM-ALADIN 6.3 L91. Reference : Daniel M., Lemonsu A., Deque M., Somot S., Alias A., Masson V. (2018) Benefits of explicit urban parametrization in regional climate modelling to study climate and city interactions. Climate Dynamics, 1-20, doi:10.1007/s00382-018-4289-x </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="institution_id" type="string"> CNRM </variable>
+			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
+			<variable name="product" type="string"> model-output </variable>
+			<variable name="realization_index" type="int"> 1 </variable>
+			<variable name="realm" type="string"> atmos </variable>
+			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
+			<variable name="source" type="string"> CORDEX </variable>
+			<variable name="source_id" type="string"> CNRM-RCSM6 </variable>
+			<variable name="table_id" type="string"> Eday </variable>
+			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
+			<variable name="variable_id" type="string"> prw </variable>
+			<variable name="EXPID" type="string"> RCSM6-CTL.3 </variable>
+			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
+			<field field_ref="CMIP6_prw_average" name="prw" grid_ref="FULL_grid_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@CMIP6_prw_average
+				<variable name="standard_name" type="string"> atmosphere_water_vapor_content </variable>
+				<variable name="description" type="string"> Water Vapor Path </variable>
+				<variable name="long_name" type="string"> Water Vapor Path </variable>
+				<variable name="history" type="string"> none </variable>
+				<variable name="units" type="string"> kg m-2 </variable>
+				<variable name="cell_methods" type="string"> area: time: mean </variable>
+				<variable name="cell_measures" type="string"> area: areacella </variable>
+			</field>
+		</file>
 		<file id="mrros_Eday_gn" name="IOXDIRmrros_Eday_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
@@ -198,43 +235,6 @@
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> kg m-2 s-1 </variable>
 				<variable name="cell_methods" type="string"> area: mean time: mean within hours time: maximum over hours </variable>
-				<variable name="cell_measures" type="string"> area: areacella </variable>
-			</field>
-		</file>
-		<file id="prw_Eday_gn" name="IOXDIRprw_Eday_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CORDEX </variable>
-			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> current_version </variable>
-			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="frequency" type="string"> day </variable>
-			<variable name="grid" type="string"> regional zone C </variable>
-			<variable name="grid_label" type="string"> gn </variable>
-			<variable name="nominal_resolution" type="string"> 50 km </variable>
-			<variable name="comment" type="string"> CORDEX MED-11 CNRM-ALADIN 6.3 L91. Reference : Daniel M., Lemonsu A., Deque M., Somot S., Alias A., Masson V. (2018) Benefits of explicit urban parametrization in regional climate modelling to study climate and city interactions. Climate Dynamics, 1-20, doi:10.1007/s00382-018-4289-x </variable>
-			<variable name="history" type="string"> none </variable>
-			<variable name="institution_id" type="string"> CNRM </variable>
-			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
-			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> 1 </variable>
-			<variable name="realm" type="string"> atmos </variable>
-			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
-			<variable name="source" type="string"> CORDEX </variable>
-			<variable name="source_id" type="string"> CNRM-RCSM6 </variable>
-			<variable name="table_id" type="string"> Eday </variable>
-			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
-			<variable name="variable_id" type="string"> prw </variable>
-			<variable name="EXPID" type="string"> RCSM6-CTL.3 </variable>
-			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="CMIP6_prw_average" name="prw" grid_ref="FULL_grid_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@CMIP6_prw_average
-				<variable name="standard_name" type="string"> atmosphere_water_vapor_content </variable>
-				<variable name="description" type="string"> Water Vapor Path </variable>
-				<variable name="long_name" type="string"> Water Vapor Path </variable>
-				<variable name="history" type="string"> none </variable>
-				<variable name="units" type="string"> kg m-2 </variable>
-				<variable name="cell_methods" type="string"> area: time: mean </variable>
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
@@ -3372,7 +3372,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="clt_day_gn" name="IOXDIRclt_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="clt_day_gn" name="IOXDIRclt_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
@@ -3405,6 +3405,339 @@
 				<variable name="long_name" type="string"> Total Cloud Fraction </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> % </variable>
+				<variable name="cell_methods" type="string"> area: time: mean </variable>
+				<variable name="cell_measures" type="string"> area: areacella </variable>
+			</field>
+		</file>
+		<file id="hurs_day_gn" name="IOXDIRhurs_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+			<variable name="activity_id" type="string"> CORDEX </variable>
+			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
+			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
+			<variable name="experiment_id" type="string"> historical </variable>
+			<variable name="description" type="string"> CMIP6 historical </variable>
+			<variable name="title" type="string"> CMIP6 historical </variable>
+			<variable name="frequency" type="string"> day </variable>
+			<variable name="grid" type="string"> regional zone C </variable>
+			<variable name="grid_label" type="string"> gn </variable>
+			<variable name="nominal_resolution" type="string"> 50 km </variable>
+			<variable name="comment" type="string"> CORDEX MED-11 CNRM-ALADIN 6.3 L91. Reference : Daniel M., Lemonsu A., Deque M., Somot S., Alias A., Masson V. (2018) Benefits of explicit urban parametrization in regional climate modelling to study climate and city interactions. Climate Dynamics, 1-20, doi:10.1007/s00382-018-4289-x </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="institution_id" type="string"> CNRM </variable>
+			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
+			<variable name="product" type="string"> model-output </variable>
+			<variable name="realization_index" type="int"> 1 </variable>
+			<variable name="realm" type="string"> atmos </variable>
+			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
+			<variable name="source" type="string"> CORDEX </variable>
+			<variable name="source_id" type="string"> CNRM-RCSM6 </variable>
+			<variable name="table_id" type="string"> day </variable>
+			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
+			<variable name="variable_id" type="string"> hurs </variable>
+			<variable name="EXPID" type="string"> RCSM6-CTL.3 </variable>
+			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
+			<field field_ref="CMIP6_hurs_Scalheight2m_average" name="hurs" grid_ref="FULL_grid_Scalheight2m_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@CMIP6_hurs_Scalheight2m_average
+				<variable name="standard_name" type="string"> relative_humidity </variable>
+				<variable name="description" type="string"> This is the relative humidity with respect to liquid water for T&gt; 0 C, and with respect to ice for T&lt;0 C. </variable>
+				<variable name="long_name" type="string"> Near-Surface Relative Humidity </variable>
+				<variable name="history" type="string"> none </variable>
+				<variable name="units" type="string"> % </variable>
+				<variable name="cell_methods" type="string"> area: time: mean </variable>
+				<variable name="cell_measures" type="string"> area: areacella </variable>
+			</field>
+		</file>
+		<file id="huss_day_gn" name="IOXDIRhuss_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+			<variable name="activity_id" type="string"> CORDEX </variable>
+			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
+			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
+			<variable name="experiment_id" type="string"> historical </variable>
+			<variable name="description" type="string"> CMIP6 historical </variable>
+			<variable name="title" type="string"> CMIP6 historical </variable>
+			<variable name="frequency" type="string"> day </variable>
+			<variable name="grid" type="string"> regional zone C </variable>
+			<variable name="grid_label" type="string"> gn </variable>
+			<variable name="nominal_resolution" type="string"> 50 km </variable>
+			<variable name="comment" type="string"> CORDEX MED-11 CNRM-ALADIN 6.3 L91. Reference : Daniel M., Lemonsu A., Deque M., Somot S., Alias A., Masson V. (2018) Benefits of explicit urban parametrization in regional climate modelling to study climate and city interactions. Climate Dynamics, 1-20, doi:10.1007/s00382-018-4289-x </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="institution_id" type="string"> CNRM </variable>
+			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
+			<variable name="product" type="string"> model-output </variable>
+			<variable name="realization_index" type="int"> 1 </variable>
+			<variable name="realm" type="string"> atmos </variable>
+			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
+			<variable name="source" type="string"> CORDEX </variable>
+			<variable name="source_id" type="string"> CNRM-RCSM6 </variable>
+			<variable name="table_id" type="string"> day </variable>
+			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
+			<variable name="variable_id" type="string"> huss </variable>
+			<variable name="EXPID" type="string"> RCSM6-CTL.3 </variable>
+			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
+			<field field_ref="CMIP6_huss_Scalheight2m_average" name="huss" grid_ref="FULL_grid_Scalheight2m_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@CMIP6_huss_Scalheight2m_average
+				<variable name="standard_name" type="string"> specific_humidity </variable>
+				<variable name="description" type="string"> Near-Surface Specific Humidity </variable>
+				<variable name="long_name" type="string"> Near-Surface Specific Humidity </variable>
+				<variable name="history" type="string"> none </variable>
+				<variable name="units" type="string"> 1 </variable>
+				<variable name="cell_methods" type="string"> area: time: mean </variable>
+				<variable name="cell_measures" type="string"> area: areacella </variable>
+			</field>
+		</file>
+		<file id="pr_day_gn" name="IOXDIRpr_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+			<variable name="activity_id" type="string"> CORDEX </variable>
+			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
+			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
+			<variable name="experiment_id" type="string"> historical </variable>
+			<variable name="description" type="string"> CMIP6 historical </variable>
+			<variable name="title" type="string"> CMIP6 historical </variable>
+			<variable name="frequency" type="string"> day </variable>
+			<variable name="grid" type="string"> regional zone C </variable>
+			<variable name="grid_label" type="string"> gn </variable>
+			<variable name="nominal_resolution" type="string"> 50 km </variable>
+			<variable name="comment" type="string"> CORDEX MED-11 CNRM-ALADIN 6.3 L91. Reference : Daniel M., Lemonsu A., Deque M., Somot S., Alias A., Masson V. (2018) Benefits of explicit urban parametrization in regional climate modelling to study climate and city interactions. Climate Dynamics, 1-20, doi:10.1007/s00382-018-4289-x </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="institution_id" type="string"> CNRM </variable>
+			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
+			<variable name="product" type="string"> model-output </variable>
+			<variable name="realization_index" type="int"> 1 </variable>
+			<variable name="realm" type="string"> atmos </variable>
+			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
+			<variable name="source" type="string"> CORDEX </variable>
+			<variable name="source_id" type="string"> CNRM-RCSM6 </variable>
+			<variable name="table_id" type="string"> day </variable>
+			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
+			<variable name="variable_id" type="string"> pr </variable>
+			<variable name="EXPID" type="string"> RCSM6-CTL.3 </variable>
+			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
+			<field field_ref="CMIP6_pr_average" name="pr" grid_ref="FULL_grid_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@CMIP6_pr_average
+				<variable name="standard_name" type="string"> precipitation_flux </variable>
+				<variable name="description" type="string"> at surface; includes both liquid and solid phases from all types of clouds (both large-scale and convective) </variable>
+				<variable name="long_name" type="string"> Precipitation </variable>
+				<variable name="history" type="string"> none </variable>
+				<variable name="units" type="string"> kg m-2 s-1 </variable>
+				<variable name="cell_methods" type="string"> area: time: mean </variable>
+				<variable name="cell_measures" type="string"> area: areacella </variable>
+			</field>
+		</file>
+		<file id="psl_day_gn" name="IOXDIRpsl_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+			<variable name="activity_id" type="string"> CORDEX </variable>
+			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
+			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
+			<variable name="experiment_id" type="string"> historical </variable>
+			<variable name="description" type="string"> CMIP6 historical </variable>
+			<variable name="title" type="string"> CMIP6 historical </variable>
+			<variable name="frequency" type="string"> day </variable>
+			<variable name="grid" type="string"> regional zone C </variable>
+			<variable name="grid_label" type="string"> gn </variable>
+			<variable name="nominal_resolution" type="string"> 50 km </variable>
+			<variable name="comment" type="string"> CORDEX MED-11 CNRM-ALADIN 6.3 L91. Reference : Daniel M., Lemonsu A., Deque M., Somot S., Alias A., Masson V. (2018) Benefits of explicit urban parametrization in regional climate modelling to study climate and city interactions. Climate Dynamics, 1-20, doi:10.1007/s00382-018-4289-x </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="institution_id" type="string"> CNRM </variable>
+			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
+			<variable name="product" type="string"> model-output </variable>
+			<variable name="realization_index" type="int"> 1 </variable>
+			<variable name="realm" type="string"> atmos </variable>
+			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
+			<variable name="source" type="string"> CORDEX </variable>
+			<variable name="source_id" type="string"> CNRM-RCSM6 </variable>
+			<variable name="table_id" type="string"> day </variable>
+			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
+			<variable name="variable_id" type="string"> psl </variable>
+			<variable name="EXPID" type="string"> RCSM6-CTL.3 </variable>
+			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
+			<field field_ref="CMIP6_psl_average" name="psl" grid_ref="FULL_grid_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@CMIP6_psl_average
+				<variable name="standard_name" type="string"> air_pressure_at_sea_level </variable>
+				<variable name="description" type="string"> Sea Level Pressure </variable>
+				<variable name="long_name" type="string"> Sea Level Pressure </variable>
+				<variable name="history" type="string"> none </variable>
+				<variable name="units" type="string"> Pa </variable>
+				<variable name="cell_methods" type="string"> area: time: mean </variable>
+				<variable name="cell_measures" type="string"> area: areacella </variable>
+			</field>
+		</file>
+		<file id="tas_day_gn" name="IOXDIRtas_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+			<variable name="activity_id" type="string"> CORDEX </variable>
+			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
+			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
+			<variable name="experiment_id" type="string"> historical </variable>
+			<variable name="description" type="string"> CMIP6 historical </variable>
+			<variable name="title" type="string"> CMIP6 historical </variable>
+			<variable name="frequency" type="string"> day </variable>
+			<variable name="grid" type="string"> regional zone C </variable>
+			<variable name="grid_label" type="string"> gn </variable>
+			<variable name="nominal_resolution" type="string"> 50 km </variable>
+			<variable name="comment" type="string"> CORDEX MED-11 CNRM-ALADIN 6.3 L91. Reference : Daniel M., Lemonsu A., Deque M., Somot S., Alias A., Masson V. (2018) Benefits of explicit urban parametrization in regional climate modelling to study climate and city interactions. Climate Dynamics, 1-20, doi:10.1007/s00382-018-4289-x </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="institution_id" type="string"> CNRM </variable>
+			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
+			<variable name="product" type="string"> model-output </variable>
+			<variable name="realization_index" type="int"> 1 </variable>
+			<variable name="realm" type="string"> atmos </variable>
+			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
+			<variable name="source" type="string"> CORDEX </variable>
+			<variable name="source_id" type="string"> CNRM-RCSM6 </variable>
+			<variable name="table_id" type="string"> day </variable>
+			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
+			<variable name="variable_id" type="string"> tas </variable>
+			<variable name="EXPID" type="string"> RCSM6-CTL.3 </variable>
+			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
+			<field field_ref="CMIP6_tas_Scalheight2m_average" name="tas" grid_ref="FULL_grid_Scalheight2m_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@CMIP6_tas_Scalheight2m_average
+				<variable name="standard_name" type="string"> air_temperature </variable>
+				<variable name="description" type="string"> Near-Surface Air Temperature </variable>
+				<variable name="long_name" type="string"> Near-Surface Air Temperature </variable>
+				<variable name="history" type="string"> none </variable>
+				<variable name="units" type="string"> K </variable>
+				<variable name="cell_methods" type="string"> area: time: mean </variable>
+				<variable name="cell_measures" type="string"> area: areacella </variable>
+			</field>
+		</file>
+		<file id="tasmax_day_gn" name="IOXDIRtasmax_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+			<variable name="activity_id" type="string"> CORDEX </variable>
+			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
+			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
+			<variable name="experiment_id" type="string"> historical </variable>
+			<variable name="description" type="string"> CMIP6 historical </variable>
+			<variable name="title" type="string"> CMIP6 historical </variable>
+			<variable name="frequency" type="string"> day </variable>
+			<variable name="grid" type="string"> regional zone C </variable>
+			<variable name="grid_label" type="string"> gn </variable>
+			<variable name="nominal_resolution" type="string"> 50 km </variable>
+			<variable name="comment" type="string"> CORDEX MED-11 CNRM-ALADIN 6.3 L91. Reference : Daniel M., Lemonsu A., Deque M., Somot S., Alias A., Masson V. (2018) Benefits of explicit urban parametrization in regional climate modelling to study climate and city interactions. Climate Dynamics, 1-20, doi:10.1007/s00382-018-4289-x </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="institution_id" type="string"> CNRM </variable>
+			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
+			<variable name="product" type="string"> model-output </variable>
+			<variable name="realization_index" type="int"> 1 </variable>
+			<variable name="realm" type="string"> atmos </variable>
+			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
+			<variable name="source" type="string"> CORDEX </variable>
+			<variable name="source_id" type="string"> CNRM-RCSM6 </variable>
+			<variable name="table_id" type="string"> day </variable>
+			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
+			<variable name="variable_id" type="string"> tasmax </variable>
+			<variable name="EXPID" type="string"> RCSM6-CTL.3 </variable>
+			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
+			<field field_ref="CMIP6_tasmax_Scalheight2m_maximum" name="tasmax" grid_ref="FULL_grid_Scalheight2m_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean time: maximum" cell_methods_mode="overwrite" operation="maximum">
+				<variable name="standard_name" type="string"> air_temperature </variable>
+				<variable name="description" type="string"> Daily Maximum Near-Surface Air Temperature </variable>
+				<variable name="long_name" type="string"> Daily Maximum Near-Surface Air Temperature </variable>
+				<variable name="history" type="string"> none </variable>
+				<variable name="units" type="string"> K </variable>
+				<variable name="cell_methods" type="string"> area: mean time: maximum </variable>
+				<variable name="cell_measures" type="string"> area: areacella </variable>
+			</field>
+		</file>
+		<file id="tasmin_day_gn" name="IOXDIRtasmin_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+			<variable name="activity_id" type="string"> CORDEX </variable>
+			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
+			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
+			<variable name="experiment_id" type="string"> historical </variable>
+			<variable name="description" type="string"> CMIP6 historical </variable>
+			<variable name="title" type="string"> CMIP6 historical </variable>
+			<variable name="frequency" type="string"> day </variable>
+			<variable name="grid" type="string"> regional zone C </variable>
+			<variable name="grid_label" type="string"> gn </variable>
+			<variable name="nominal_resolution" type="string"> 50 km </variable>
+			<variable name="comment" type="string"> CORDEX MED-11 CNRM-ALADIN 6.3 L91. Reference : Daniel M., Lemonsu A., Deque M., Somot S., Alias A., Masson V. (2018) Benefits of explicit urban parametrization in regional climate modelling to study climate and city interactions. Climate Dynamics, 1-20, doi:10.1007/s00382-018-4289-x </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="institution_id" type="string"> CNRM </variable>
+			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
+			<variable name="product" type="string"> model-output </variable>
+			<variable name="realization_index" type="int"> 1 </variable>
+			<variable name="realm" type="string"> atmos </variable>
+			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
+			<variable name="source" type="string"> CORDEX </variable>
+			<variable name="source_id" type="string"> CNRM-RCSM6 </variable>
+			<variable name="table_id" type="string"> day </variable>
+			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
+			<variable name="variable_id" type="string"> tasmin </variable>
+			<variable name="EXPID" type="string"> RCSM6-CTL.3 </variable>
+			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
+			<field field_ref="CMIP6_tasmin_Scalheight2m_minimum" name="tasmin" grid_ref="FULL_grid_Scalheight2m_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean time: minimum" cell_methods_mode="overwrite" operation="minimum">
+				<variable name="standard_name" type="string"> air_temperature </variable>
+				<variable name="description" type="string"> Daily Minimum Near-Surface Air Temperature </variable>
+				<variable name="long_name" type="string"> Daily Minimum Near-Surface Air Temperature </variable>
+				<variable name="history" type="string"> none </variable>
+				<variable name="units" type="string"> K </variable>
+				<variable name="cell_methods" type="string"> area: mean time: minimum </variable>
+				<variable name="cell_measures" type="string"> area: areacella </variable>
+			</field>
+		</file>
+		<file id="uas_day_gn" name="IOXDIRuas_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+			<variable name="activity_id" type="string"> CORDEX </variable>
+			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
+			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
+			<variable name="experiment_id" type="string"> historical </variable>
+			<variable name="description" type="string"> CMIP6 historical </variable>
+			<variable name="title" type="string"> CMIP6 historical </variable>
+			<variable name="frequency" type="string"> day </variable>
+			<variable name="grid" type="string"> regional zone C </variable>
+			<variable name="grid_label" type="string"> gn </variable>
+			<variable name="nominal_resolution" type="string"> 50 km </variable>
+			<variable name="comment" type="string"> CORDEX MED-11 CNRM-ALADIN 6.3 L91. Reference : Daniel M., Lemonsu A., Deque M., Somot S., Alias A., Masson V. (2018) Benefits of explicit urban parametrization in regional climate modelling to study climate and city interactions. Climate Dynamics, 1-20, doi:10.1007/s00382-018-4289-x </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="institution_id" type="string"> CNRM </variable>
+			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
+			<variable name="product" type="string"> model-output </variable>
+			<variable name="realization_index" type="int"> 1 </variable>
+			<variable name="realm" type="string"> atmos </variable>
+			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
+			<variable name="source" type="string"> CORDEX </variable>
+			<variable name="source_id" type="string"> CNRM-RCSM6 </variable>
+			<variable name="table_id" type="string"> day </variable>
+			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
+			<variable name="variable_id" type="string"> uas </variable>
+			<variable name="EXPID" type="string"> RCSM6-CTL.3 </variable>
+			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
+			<field field_ref="CMIP6_uas_Scalheight10m_average" name="uas" grid_ref="FULL_grid_Scalheight10m_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@CMIP6_uas_Scalheight10m_average
+				<variable name="standard_name" type="string"> eastward_wind </variable>
+				<variable name="description" type="string"> Eastward Near-Surface Wind </variable>
+				<variable name="long_name" type="string"> Eastward Near-Surface Wind </variable>
+				<variable name="history" type="string"> none </variable>
+				<variable name="units" type="string"> m s-1 </variable>
+				<variable name="cell_methods" type="string"> area: time: mean </variable>
+				<variable name="cell_measures" type="string"> area: areacella </variable>
+			</field>
+		</file>
+		<file id="vas_day_gn" name="IOXDIRvas_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+			<variable name="activity_id" type="string"> CORDEX </variable>
+			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
+			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
+			<variable name="experiment_id" type="string"> historical </variable>
+			<variable name="description" type="string"> CMIP6 historical </variable>
+			<variable name="title" type="string"> CMIP6 historical </variable>
+			<variable name="frequency" type="string"> day </variable>
+			<variable name="grid" type="string"> regional zone C </variable>
+			<variable name="grid_label" type="string"> gn </variable>
+			<variable name="nominal_resolution" type="string"> 50 km </variable>
+			<variable name="comment" type="string"> CORDEX MED-11 CNRM-ALADIN 6.3 L91. Reference : Daniel M., Lemonsu A., Deque M., Somot S., Alias A., Masson V. (2018) Benefits of explicit urban parametrization in regional climate modelling to study climate and city interactions. Climate Dynamics, 1-20, doi:10.1007/s00382-018-4289-x </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="institution_id" type="string"> CNRM </variable>
+			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
+			<variable name="product" type="string"> model-output </variable>
+			<variable name="realization_index" type="int"> 1 </variable>
+			<variable name="realm" type="string"> atmos </variable>
+			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
+			<variable name="source" type="string"> CORDEX </variable>
+			<variable name="source_id" type="string"> CNRM-RCSM6 </variable>
+			<variable name="table_id" type="string"> day </variable>
+			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
+			<variable name="variable_id" type="string"> vas </variable>
+			<variable name="EXPID" type="string"> RCSM6-CTL.3 </variable>
+			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
+			<field field_ref="CMIP6_vas_Scalheight10m_average" name="vas" grid_ref="FULL_grid_Scalheight10m_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@CMIP6_vas_Scalheight10m_average
+				<variable name="standard_name" type="string"> northward_wind </variable>
+				<variable name="description" type="string"> Northward Near-Surface Wind </variable>
+				<variable name="long_name" type="string"> Northward Near-Surface Wind </variable>
+				<variable name="history" type="string"> none </variable>
+				<variable name="units" type="string"> m s-1 </variable>
 				<variable name="cell_methods" type="string"> area: time: mean </variable>
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
@@ -3483,80 +3816,6 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="hurs_day_gn" name="IOXDIRhurs_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CORDEX </variable>
-			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> current_version </variable>
-			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="frequency" type="string"> day </variable>
-			<variable name="grid" type="string"> regional zone C </variable>
-			<variable name="grid_label" type="string"> gn </variable>
-			<variable name="nominal_resolution" type="string"> 50 km </variable>
-			<variable name="comment" type="string"> CORDEX MED-11 CNRM-ALADIN 6.3 L91. Reference : Daniel M., Lemonsu A., Deque M., Somot S., Alias A., Masson V. (2018) Benefits of explicit urban parametrization in regional climate modelling to study climate and city interactions. Climate Dynamics, 1-20, doi:10.1007/s00382-018-4289-x </variable>
-			<variable name="history" type="string"> none </variable>
-			<variable name="institution_id" type="string"> CNRM </variable>
-			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
-			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> 1 </variable>
-			<variable name="realm" type="string"> atmos </variable>
-			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
-			<variable name="source" type="string"> CORDEX </variable>
-			<variable name="source_id" type="string"> CNRM-RCSM6 </variable>
-			<variable name="table_id" type="string"> day </variable>
-			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
-			<variable name="variable_id" type="string"> hurs </variable>
-			<variable name="EXPID" type="string"> RCSM6-CTL.3 </variable>
-			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="CMIP6_hurs_Scalheight2m_average" name="hurs" grid_ref="FULL_grid_Scalheight2m_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@CMIP6_hurs_Scalheight2m_average
-				<variable name="standard_name" type="string"> relative_humidity </variable>
-				<variable name="description" type="string"> This is the relative humidity with respect to liquid water for T&gt; 0 C, and with respect to ice for T&lt;0 C. </variable>
-				<variable name="long_name" type="string"> Near-Surface Relative Humidity </variable>
-				<variable name="history" type="string"> none </variable>
-				<variable name="units" type="string"> % </variable>
-				<variable name="cell_methods" type="string"> area: time: mean </variable>
-				<variable name="cell_measures" type="string"> area: areacella </variable>
-			</field>
-		</file>
-		<file id="huss_day_gn" name="IOXDIRhuss_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CORDEX </variable>
-			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> current_version </variable>
-			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="frequency" type="string"> day </variable>
-			<variable name="grid" type="string"> regional zone C </variable>
-			<variable name="grid_label" type="string"> gn </variable>
-			<variable name="nominal_resolution" type="string"> 50 km </variable>
-			<variable name="comment" type="string"> CORDEX MED-11 CNRM-ALADIN 6.3 L91. Reference : Daniel M., Lemonsu A., Deque M., Somot S., Alias A., Masson V. (2018) Benefits of explicit urban parametrization in regional climate modelling to study climate and city interactions. Climate Dynamics, 1-20, doi:10.1007/s00382-018-4289-x </variable>
-			<variable name="history" type="string"> none </variable>
-			<variable name="institution_id" type="string"> CNRM </variable>
-			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
-			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> 1 </variable>
-			<variable name="realm" type="string"> atmos </variable>
-			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
-			<variable name="source" type="string"> CORDEX </variable>
-			<variable name="source_id" type="string"> CNRM-RCSM6 </variable>
-			<variable name="table_id" type="string"> day </variable>
-			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
-			<variable name="variable_id" type="string"> huss </variable>
-			<variable name="EXPID" type="string"> RCSM6-CTL.3 </variable>
-			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="CMIP6_huss_Scalheight2m_average" name="huss" grid_ref="FULL_grid_Scalheight2m_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@CMIP6_huss_Scalheight2m_average
-				<variable name="standard_name" type="string"> specific_humidity </variable>
-				<variable name="description" type="string"> Near-Surface Specific Humidity </variable>
-				<variable name="long_name" type="string"> Near-Surface Specific Humidity </variable>
-				<variable name="history" type="string"> none </variable>
-				<variable name="units" type="string"> 1 </variable>
-				<variable name="cell_methods" type="string"> area: time: mean </variable>
-				<variable name="cell_measures" type="string"> area: areacella </variable>
-			</field>
-		</file>
 		<file id="mrro_day_gn" name="IOXDIRmrro_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
@@ -3631,43 +3890,6 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="pr_day_gn" name="IOXDIRpr_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CORDEX </variable>
-			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> current_version </variable>
-			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="frequency" type="string"> day </variable>
-			<variable name="grid" type="string"> regional zone C </variable>
-			<variable name="grid_label" type="string"> gn </variable>
-			<variable name="nominal_resolution" type="string"> 50 km </variable>
-			<variable name="comment" type="string"> CORDEX MED-11 CNRM-ALADIN 6.3 L91. Reference : Daniel M., Lemonsu A., Deque M., Somot S., Alias A., Masson V. (2018) Benefits of explicit urban parametrization in regional climate modelling to study climate and city interactions. Climate Dynamics, 1-20, doi:10.1007/s00382-018-4289-x </variable>
-			<variable name="history" type="string"> none </variable>
-			<variable name="institution_id" type="string"> CNRM </variable>
-			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
-			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> 1 </variable>
-			<variable name="realm" type="string"> atmos </variable>
-			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
-			<variable name="source" type="string"> CORDEX </variable>
-			<variable name="source_id" type="string"> CNRM-RCSM6 </variable>
-			<variable name="table_id" type="string"> day </variable>
-			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
-			<variable name="variable_id" type="string"> pr </variable>
-			<variable name="EXPID" type="string"> RCSM6-CTL.3 </variable>
-			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="CMIP6_pr_average" name="pr" grid_ref="FULL_grid_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@CMIP6_pr_average
-				<variable name="standard_name" type="string"> precipitation_flux </variable>
-				<variable name="description" type="string"> at surface; includes both liquid and solid phases from all types of clouds (both large-scale and convective) </variable>
-				<variable name="long_name" type="string"> Precipitation </variable>
-				<variable name="history" type="string"> none </variable>
-				<variable name="units" type="string"> kg m-2 s-1 </variable>
-				<variable name="cell_methods" type="string"> area: time: mean </variable>
-				<variable name="cell_measures" type="string"> area: areacella </variable>
-			</field>
-		</file>
 		<file id="prc_day_gn" name="IOXDIRprc_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
@@ -3738,43 +3960,6 @@
 				<variable name="long_name" type="string"> Snowfall Flux </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> kg m-2 s-1 </variable>
-				<variable name="cell_methods" type="string"> area: time: mean </variable>
-				<variable name="cell_measures" type="string"> area: areacella </variable>
-			</field>
-		</file>
-		<file id="psl_day_gn" name="IOXDIRpsl_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CORDEX </variable>
-			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> current_version </variable>
-			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="frequency" type="string"> day </variable>
-			<variable name="grid" type="string"> regional zone C </variable>
-			<variable name="grid_label" type="string"> gn </variable>
-			<variable name="nominal_resolution" type="string"> 50 km </variable>
-			<variable name="comment" type="string"> CORDEX MED-11 CNRM-ALADIN 6.3 L91. Reference : Daniel M., Lemonsu A., Deque M., Somot S., Alias A., Masson V. (2018) Benefits of explicit urban parametrization in regional climate modelling to study climate and city interactions. Climate Dynamics, 1-20, doi:10.1007/s00382-018-4289-x </variable>
-			<variable name="history" type="string"> none </variable>
-			<variable name="institution_id" type="string"> CNRM </variable>
-			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
-			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> 1 </variable>
-			<variable name="realm" type="string"> atmos </variable>
-			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
-			<variable name="source" type="string"> CORDEX </variable>
-			<variable name="source_id" type="string"> CNRM-RCSM6 </variable>
-			<variable name="table_id" type="string"> day </variable>
-			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
-			<variable name="variable_id" type="string"> psl </variable>
-			<variable name="EXPID" type="string"> RCSM6-CTL.3 </variable>
-			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="CMIP6_psl_average" name="psl" grid_ref="FULL_grid_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@CMIP6_psl_average
-				<variable name="standard_name" type="string"> air_pressure_at_sea_level </variable>
-				<variable name="description" type="string"> Sea Level Pressure </variable>
-				<variable name="long_name" type="string"> Sea Level Pressure </variable>
-				<variable name="history" type="string"> none </variable>
-				<variable name="units" type="string"> Pa </variable>
 				<variable name="cell_methods" type="string"> area: time: mean </variable>
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
@@ -4113,7 +4298,7 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="tas_day_gn" name="IOXDIRtas_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="hus_day_gn" name="IOXDIRhus_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
@@ -4137,20 +4322,20 @@
 			<variable name="source_id" type="string"> CNRM-RCSM6 </variable>
 			<variable name="table_id" type="string"> day </variable>
 			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
-			<variable name="variable_id" type="string"> tas </variable>
+			<variable name="variable_id" type="string"> hus </variable>
 			<variable name="EXPID" type="string"> RCSM6-CTL.3 </variable>
 			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="CMIP6_tas_Scalheight2m_average" name="tas" grid_ref="FULL_grid_Scalheight2m_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@CMIP6_tas_Scalheight2m_average
-				<variable name="standard_name" type="string"> air_temperature </variable>
-				<variable name="description" type="string"> Near-Surface Air Temperature </variable>
-				<variable name="long_name" type="string"> Near-Surface Air Temperature </variable>
+			<field field_ref="CMIP6_hus_plev8_average" name="hus" grid_ref="FULL_klev_plev8_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@CMIP6_hus_plev8_average
+				<variable name="standard_name" type="string"> specific_humidity </variable>
+				<variable name="description" type="string"> Specific Humidity </variable>
+				<variable name="long_name" type="string"> Specific Humidity </variable>
 				<variable name="history" type="string"> none </variable>
-				<variable name="units" type="string"> K </variable>
-				<variable name="cell_methods" type="string"> area: time: mean </variable>
+				<variable name="units" type="string"> 1 </variable>
+				<variable name="cell_methods" type="string"> time: mean </variable>
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="tasmax_day_gn" name="IOXDIRtasmax_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="ta_day_gn" name="IOXDIRta_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
@@ -4174,20 +4359,20 @@
 			<variable name="source_id" type="string"> CNRM-RCSM6 </variable>
 			<variable name="table_id" type="string"> day </variable>
 			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
-			<variable name="variable_id" type="string"> tasmax </variable>
+			<variable name="variable_id" type="string"> ta </variable>
 			<variable name="EXPID" type="string"> RCSM6-CTL.3 </variable>
 			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="CMIP6_tasmax_Scalheight2m_maximum" name="tasmax" grid_ref="FULL_grid_Scalheight2m_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean time: maximum" cell_methods_mode="overwrite" operation="maximum">
+			<field field_ref="CMIP6_ta_plev8_average" name="ta" grid_ref="FULL_klev_plev8_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@CMIP6_ta_plev8_average
 				<variable name="standard_name" type="string"> air_temperature </variable>
-				<variable name="description" type="string"> Daily Maximum Near-Surface Air Temperature </variable>
-				<variable name="long_name" type="string"> Daily Maximum Near-Surface Air Temperature </variable>
+				<variable name="description" type="string"> Air Temperature </variable>
+				<variable name="long_name" type="string"> Air Temperature </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> K </variable>
-				<variable name="cell_methods" type="string"> area: mean time: maximum </variable>
+				<variable name="cell_methods" type="string"> time: mean </variable>
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="tasmin_day_gn" name="IOXDIRtasmin_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="ua_day_gn" name="IOXDIRua_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
@@ -4211,57 +4396,20 @@
 			<variable name="source_id" type="string"> CNRM-RCSM6 </variable>
 			<variable name="table_id" type="string"> day </variable>
 			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
-			<variable name="variable_id" type="string"> tasmin </variable>
+			<variable name="variable_id" type="string"> ua </variable>
 			<variable name="EXPID" type="string"> RCSM6-CTL.3 </variable>
 			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="CMIP6_tasmin_Scalheight2m_minimum" name="tasmin" grid_ref="FULL_grid_Scalheight2m_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean time: minimum" cell_methods_mode="overwrite" operation="minimum">
-				<variable name="standard_name" type="string"> air_temperature </variable>
-				<variable name="description" type="string"> Daily Minimum Near-Surface Air Temperature </variable>
-				<variable name="long_name" type="string"> Daily Minimum Near-Surface Air Temperature </variable>
-				<variable name="history" type="string"> none </variable>
-				<variable name="units" type="string"> K </variable>
-				<variable name="cell_methods" type="string"> area: mean time: minimum </variable>
-				<variable name="cell_measures" type="string"> area: areacella </variable>
-			</field>
-		</file>
-		<file id="uas_day_gn" name="IOXDIRuas_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CORDEX </variable>
-			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> current_version </variable>
-			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="frequency" type="string"> day </variable>
-			<variable name="grid" type="string"> regional zone C </variable>
-			<variable name="grid_label" type="string"> gn </variable>
-			<variable name="nominal_resolution" type="string"> 50 km </variable>
-			<variable name="comment" type="string"> CORDEX MED-11 CNRM-ALADIN 6.3 L91. Reference : Daniel M., Lemonsu A., Deque M., Somot S., Alias A., Masson V. (2018) Benefits of explicit urban parametrization in regional climate modelling to study climate and city interactions. Climate Dynamics, 1-20, doi:10.1007/s00382-018-4289-x </variable>
-			<variable name="history" type="string"> none </variable>
-			<variable name="institution_id" type="string"> CNRM </variable>
-			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
-			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> 1 </variable>
-			<variable name="realm" type="string"> atmos </variable>
-			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
-			<variable name="source" type="string"> CORDEX </variable>
-			<variable name="source_id" type="string"> CNRM-RCSM6 </variable>
-			<variable name="table_id" type="string"> day </variable>
-			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
-			<variable name="variable_id" type="string"> uas </variable>
-			<variable name="EXPID" type="string"> RCSM6-CTL.3 </variable>
-			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="CMIP6_uas_Scalheight10m_average" name="uas" grid_ref="FULL_grid_Scalheight10m_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@CMIP6_uas_Scalheight10m_average
+			<field field_ref="CMIP6_ua_plev8_average" name="ua" grid_ref="FULL_klev_plev8_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@CMIP6_ua_plev8_average
 				<variable name="standard_name" type="string"> eastward_wind </variable>
-				<variable name="description" type="string"> Eastward Near-Surface Wind </variable>
-				<variable name="long_name" type="string"> Eastward Near-Surface Wind </variable>
+				<variable name="description" type="string"> Eastward Wind </variable>
+				<variable name="long_name" type="string"> Eastward Wind </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> m s-1 </variable>
-				<variable name="cell_methods" type="string"> area: time: mean </variable>
+				<variable name="cell_methods" type="string"> time: mean </variable>
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="vas_day_gn" name="IOXDIRvas_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="va_day_gn" name="IOXDIRva_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
@@ -4285,16 +4433,53 @@
 			<variable name="source_id" type="string"> CNRM-RCSM6 </variable>
 			<variable name="table_id" type="string"> day </variable>
 			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
-			<variable name="variable_id" type="string"> vas </variable>
+			<variable name="variable_id" type="string"> va </variable>
 			<variable name="EXPID" type="string"> RCSM6-CTL.3 </variable>
 			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="CMIP6_vas_Scalheight10m_average" name="vas" grid_ref="FULL_grid_Scalheight10m_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@CMIP6_vas_Scalheight10m_average
+			<field field_ref="CMIP6_va_plev8_average" name="va" grid_ref="FULL_klev_plev8_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@CMIP6_va_plev8_average
 				<variable name="standard_name" type="string"> northward_wind </variable>
-				<variable name="description" type="string"> Northward Near-Surface Wind </variable>
-				<variable name="long_name" type="string"> Northward Near-Surface Wind </variable>
+				<variable name="description" type="string"> Northward Wind </variable>
+				<variable name="long_name" type="string"> Northward Wind </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> m s-1 </variable>
-				<variable name="cell_methods" type="string"> area: time: mean </variable>
+				<variable name="cell_methods" type="string"> time: mean </variable>
+				<variable name="cell_measures" type="string"> area: areacella </variable>
+			</field>
+		</file>
+		<file id="zg_day_gn" name="IOXDIRzg_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+			<variable name="activity_id" type="string"> CORDEX </variable>
+			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
+			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
+			<variable name="experiment_id" type="string"> historical </variable>
+			<variable name="description" type="string"> CMIP6 historical </variable>
+			<variable name="title" type="string"> CMIP6 historical </variable>
+			<variable name="frequency" type="string"> day </variable>
+			<variable name="grid" type="string"> regional zone C </variable>
+			<variable name="grid_label" type="string"> gn </variable>
+			<variable name="nominal_resolution" type="string"> 50 km </variable>
+			<variable name="comment" type="string"> CORDEX MED-11 CNRM-ALADIN 6.3 L91. Reference : Daniel M., Lemonsu A., Deque M., Somot S., Alias A., Masson V. (2018) Benefits of explicit urban parametrization in regional climate modelling to study climate and city interactions. Climate Dynamics, 1-20, doi:10.1007/s00382-018-4289-x </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="institution_id" type="string"> CNRM </variable>
+			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
+			<variable name="product" type="string"> model-output </variable>
+			<variable name="realization_index" type="int"> 1 </variable>
+			<variable name="realm" type="string"> atmos </variable>
+			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
+			<variable name="source" type="string"> CORDEX </variable>
+			<variable name="source_id" type="string"> CNRM-RCSM6 </variable>
+			<variable name="table_id" type="string"> day </variable>
+			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
+			<variable name="variable_id" type="string"> zg </variable>
+			<variable name="EXPID" type="string"> RCSM6-CTL.3 </variable>
+			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
+			<field field_ref="CMIP6_zg_plev8_average" name="zg" grid_ref="FULL_klev_plev8_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@CMIP6_zg_plev8_average
+				<variable name="standard_name" type="string"> geopotential_height </variable>
+				<variable name="description" type="string"> Geopotential Height </variable>
+				<variable name="long_name" type="string"> Geopotential Height </variable>
+				<variable name="history" type="string"> none </variable>
+				<variable name="units" type="string"> m </variable>
+				<variable name="cell_methods" type="string"> time: mean </variable>
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
@@ -4335,154 +4520,6 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
-		<file id="hus_day_gn" name="IOXDIRhus_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CORDEX </variable>
-			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> current_version </variable>
-			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="frequency" type="string"> day </variable>
-			<variable name="grid" type="string"> regional zone C </variable>
-			<variable name="grid_label" type="string"> gn </variable>
-			<variable name="nominal_resolution" type="string"> 50 km </variable>
-			<variable name="comment" type="string"> CORDEX MED-11 CNRM-ALADIN 6.3 L91. Reference : Daniel M., Lemonsu A., Deque M., Somot S., Alias A., Masson V. (2018) Benefits of explicit urban parametrization in regional climate modelling to study climate and city interactions. Climate Dynamics, 1-20, doi:10.1007/s00382-018-4289-x </variable>
-			<variable name="history" type="string"> none </variable>
-			<variable name="institution_id" type="string"> CNRM </variable>
-			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
-			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> 1 </variable>
-			<variable name="realm" type="string"> atmos </variable>
-			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
-			<variable name="source" type="string"> CORDEX </variable>
-			<variable name="source_id" type="string"> CNRM-RCSM6 </variable>
-			<variable name="table_id" type="string"> day </variable>
-			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
-			<variable name="variable_id" type="string"> hus </variable>
-			<variable name="EXPID" type="string"> RCSM6-CTL.3 </variable>
-			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="CMIP6_hus_plev8_average" name="hus" grid_ref="FULL_klev_plev8_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@CMIP6_hus_plev8_average
-				<variable name="standard_name" type="string"> specific_humidity </variable>
-				<variable name="description" type="string"> Specific Humidity </variable>
-				<variable name="long_name" type="string"> Specific Humidity </variable>
-				<variable name="history" type="string"> none </variable>
-				<variable name="units" type="string"> 1 </variable>
-				<variable name="cell_methods" type="string"> time: mean </variable>
-				<variable name="cell_measures" type="string"> area: areacella </variable>
-			</field>
-		</file>
-		<file id="ta_day_gn" name="IOXDIRta_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CORDEX </variable>
-			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> current_version </variable>
-			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="frequency" type="string"> day </variable>
-			<variable name="grid" type="string"> regional zone C </variable>
-			<variable name="grid_label" type="string"> gn </variable>
-			<variable name="nominal_resolution" type="string"> 50 km </variable>
-			<variable name="comment" type="string"> CORDEX MED-11 CNRM-ALADIN 6.3 L91. Reference : Daniel M., Lemonsu A., Deque M., Somot S., Alias A., Masson V. (2018) Benefits of explicit urban parametrization in regional climate modelling to study climate and city interactions. Climate Dynamics, 1-20, doi:10.1007/s00382-018-4289-x </variable>
-			<variable name="history" type="string"> none </variable>
-			<variable name="institution_id" type="string"> CNRM </variable>
-			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
-			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> 1 </variable>
-			<variable name="realm" type="string"> atmos </variable>
-			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
-			<variable name="source" type="string"> CORDEX </variable>
-			<variable name="source_id" type="string"> CNRM-RCSM6 </variable>
-			<variable name="table_id" type="string"> day </variable>
-			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
-			<variable name="variable_id" type="string"> ta </variable>
-			<variable name="EXPID" type="string"> RCSM6-CTL.3 </variable>
-			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="CMIP6_ta_plev8_average" name="ta" grid_ref="FULL_klev_plev8_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@CMIP6_ta_plev8_average
-				<variable name="standard_name" type="string"> air_temperature </variable>
-				<variable name="description" type="string"> Air Temperature </variable>
-				<variable name="long_name" type="string"> Air Temperature </variable>
-				<variable name="history" type="string"> none </variable>
-				<variable name="units" type="string"> K </variable>
-				<variable name="cell_methods" type="string"> time: mean </variable>
-				<variable name="cell_measures" type="string"> area: areacella </variable>
-			</field>
-		</file>
-		<file id="ua_day_gn" name="IOXDIRua_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CORDEX </variable>
-			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> current_version </variable>
-			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="frequency" type="string"> day </variable>
-			<variable name="grid" type="string"> regional zone C </variable>
-			<variable name="grid_label" type="string"> gn </variable>
-			<variable name="nominal_resolution" type="string"> 50 km </variable>
-			<variable name="comment" type="string"> CORDEX MED-11 CNRM-ALADIN 6.3 L91. Reference : Daniel M., Lemonsu A., Deque M., Somot S., Alias A., Masson V. (2018) Benefits of explicit urban parametrization in regional climate modelling to study climate and city interactions. Climate Dynamics, 1-20, doi:10.1007/s00382-018-4289-x </variable>
-			<variable name="history" type="string"> none </variable>
-			<variable name="institution_id" type="string"> CNRM </variable>
-			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
-			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> 1 </variable>
-			<variable name="realm" type="string"> atmos </variable>
-			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
-			<variable name="source" type="string"> CORDEX </variable>
-			<variable name="source_id" type="string"> CNRM-RCSM6 </variable>
-			<variable name="table_id" type="string"> day </variable>
-			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
-			<variable name="variable_id" type="string"> ua </variable>
-			<variable name="EXPID" type="string"> RCSM6-CTL.3 </variable>
-			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="CMIP6_ua_plev8_average" name="ua" grid_ref="FULL_klev_plev8_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@CMIP6_ua_plev8_average
-				<variable name="standard_name" type="string"> eastward_wind </variable>
-				<variable name="description" type="string"> Eastward Wind </variable>
-				<variable name="long_name" type="string"> Eastward Wind </variable>
-				<variable name="history" type="string"> none </variable>
-				<variable name="units" type="string"> m s-1 </variable>
-				<variable name="cell_methods" type="string"> time: mean </variable>
-				<variable name="cell_measures" type="string"> area: areacella </variable>
-			</field>
-		</file>
-		<file id="va_day_gn" name="IOXDIRva_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CORDEX </variable>
-			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> current_version </variable>
-			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="frequency" type="string"> day </variable>
-			<variable name="grid" type="string"> regional zone C </variable>
-			<variable name="grid_label" type="string"> gn </variable>
-			<variable name="nominal_resolution" type="string"> 50 km </variable>
-			<variable name="comment" type="string"> CORDEX MED-11 CNRM-ALADIN 6.3 L91. Reference : Daniel M., Lemonsu A., Deque M., Somot S., Alias A., Masson V. (2018) Benefits of explicit urban parametrization in regional climate modelling to study climate and city interactions. Climate Dynamics, 1-20, doi:10.1007/s00382-018-4289-x </variable>
-			<variable name="history" type="string"> none </variable>
-			<variable name="institution_id" type="string"> CNRM </variable>
-			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
-			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> 1 </variable>
-			<variable name="realm" type="string"> atmos </variable>
-			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
-			<variable name="source" type="string"> CORDEX </variable>
-			<variable name="source_id" type="string"> CNRM-RCSM6 </variable>
-			<variable name="table_id" type="string"> day </variable>
-			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
-			<variable name="variable_id" type="string"> va </variable>
-			<variable name="EXPID" type="string"> RCSM6-CTL.3 </variable>
-			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="CMIP6_va_plev8_average" name="va" grid_ref="FULL_klev_plev8_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@CMIP6_va_plev8_average
-				<variable name="standard_name" type="string"> northward_wind </variable>
-				<variable name="description" type="string"> Northward Wind </variable>
-				<variable name="long_name" type="string"> Northward Wind </variable>
-				<variable name="history" type="string"> none </variable>
-				<variable name="units" type="string"> m s-1 </variable>
-				<variable name="cell_methods" type="string"> time: mean </variable>
-				<variable name="cell_measures" type="string"> area: areacella </variable>
-			</field>
-		</file>
 		<file id="wap_day_gn" name="IOXDIRwap_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
@@ -4516,43 +4553,6 @@
 				<variable name="long_name" type="string"> omega (=dp/dt) </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> Pa s-1 </variable>
-				<variable name="cell_methods" type="string"> time: mean </variable>
-				<variable name="cell_measures" type="string"> area: areacella </variable>
-			</field>
-		</file>
-		<file id="zg_day_gn" name="IOXDIRzg_day_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CORDEX </variable>
-			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> current_version </variable>
-			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="frequency" type="string"> day </variable>
-			<variable name="grid" type="string"> regional zone C </variable>
-			<variable name="grid_label" type="string"> gn </variable>
-			<variable name="nominal_resolution" type="string"> 50 km </variable>
-			<variable name="comment" type="string"> CORDEX MED-11 CNRM-ALADIN 6.3 L91. Reference : Daniel M., Lemonsu A., Deque M., Somot S., Alias A., Masson V. (2018) Benefits of explicit urban parametrization in regional climate modelling to study climate and city interactions. Climate Dynamics, 1-20, doi:10.1007/s00382-018-4289-x </variable>
-			<variable name="history" type="string"> none </variable>
-			<variable name="institution_id" type="string"> CNRM </variable>
-			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
-			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> 1 </variable>
-			<variable name="realm" type="string"> atmos </variable>
-			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
-			<variable name="source" type="string"> CORDEX </variable>
-			<variable name="source_id" type="string"> CNRM-RCSM6 </variable>
-			<variable name="table_id" type="string"> day </variable>
-			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
-			<variable name="variable_id" type="string"> zg </variable>
-			<variable name="EXPID" type="string"> RCSM6-CTL.3 </variable>
-			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="CMIP6_zg_plev8_average" name="zg" grid_ref="FULL_klev_plev8_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1d">				@CMIP6_zg_plev8_average
-				<variable name="standard_name" type="string"> geopotential_height </variable>
-				<variable name="description" type="string"> Geopotential Height </variable>
-				<variable name="long_name" type="string"> Geopotential Height </variable>
-				<variable name="history" type="string"> none </variable>
-				<variable name="units" type="string"> m </variable>
 				<variable name="cell_methods" type="string"> time: mean </variable>
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
@@ -13217,6 +13217,43 @@
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
 		</file>
+		<file id="psl_None3hrPt_gn" name="IOXDIRpsl_None3hrPt_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="3h" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d%h%mi" split_start_offset="3h" split_end_offset="0s" split_last_date="2015-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+			<variable name="activity_id" type="string"> CORDEX </variable>
+			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
+			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
+			<variable name="experiment_id" type="string"> historical </variable>
+			<variable name="description" type="string"> CMIP6 historical </variable>
+			<variable name="title" type="string"> CMIP6 historical </variable>
+			<variable name="frequency" type="string"> 3hrPt </variable>
+			<variable name="grid" type="string"> regional zone C </variable>
+			<variable name="grid_label" type="string"> gn </variable>
+			<variable name="nominal_resolution" type="string"> 50 km </variable>
+			<variable name="comment" type="string"> CORDEX MED-11 CNRM-ALADIN 6.3 L91. Reference : Daniel M., Lemonsu A., Deque M., Somot S., Alias A., Masson V. (2018) Benefits of explicit urban parametrization in regional climate modelling to study climate and city interactions. Climate Dynamics, 1-20, doi:10.1007/s00382-018-4289-x </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="institution_id" type="string"> CNRM </variable>
+			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
+			<variable name="product" type="string"> model-output </variable>
+			<variable name="realization_index" type="int"> 1 </variable>
+			<variable name="realm" type="string"> atmos </variable>
+			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
+			<variable name="source" type="string"> CORDEX </variable>
+			<variable name="source_id" type="string"> CNRM-RCSM6 </variable>
+			<variable name="table_id" type="string"> None3hrPt </variable>
+			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
+			<variable name="variable_id" type="string"> psl </variable>
+			<variable name="EXPID" type="string"> RCSM6-CTL.3 </variable>
+			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
+			<field field_ref="CMIP6_psl_instant" name="psl" grid_ref="FULL_grid_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean time: point" cell_methods_mode="overwrite" operation="instant" freq_op="3h">
+				<variable name="standard_name" type="string"> air_pressure_at_sea_level </variable>
+				<variable name="description" type="string"> Sea Level Pressure </variable>
+				<variable name="long_name" type="string"> Sea Level Pressure </variable>
+				<variable name="history" type="string"> none </variable>
+				<variable name="units" type="string"> Pa </variable>
+				<variable name="cell_methods" type="string"> area: mean time: point </variable>
+				<variable name="cell_measures" type="string"> area: areacella </variable>
+			</field>
+		</file>
 		<file id="hurs_None3hrPt_gn" name="IOXDIRhurs_None3hrPt_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="3h" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d%h%mi" split_start_offset="3h" split_end_offset="0s" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
@@ -13250,43 +13287,6 @@
 				<variable name="long_name" type="string"> Near-Surface Relative Humidity </variable>
 				<variable name="history" type="string"> none </variable>
 				<variable name="units" type="string"> % </variable>
-				<variable name="cell_methods" type="string"> area: mean time: point </variable>
-				<variable name="cell_measures" type="string"> area: areacella </variable>
-			</field>
-		</file>
-		<file id="psl_None3hrPt_gn" name="IOXDIRpsl_None3hrPt_CNRM-RCSM6_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="3h" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d%h%mi" split_start_offset="3h" split_end_offset="0s" split_last_date="2021-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CORDEX </variable>
-			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
-			<variable name="dr2xml_version" type="string"> current_version </variable>
-			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="frequency" type="string"> 3hrPt </variable>
-			<variable name="grid" type="string"> regional zone C </variable>
-			<variable name="grid_label" type="string"> gn </variable>
-			<variable name="nominal_resolution" type="string"> 50 km </variable>
-			<variable name="comment" type="string"> CORDEX MED-11 CNRM-ALADIN 6.3 L91. Reference : Daniel M., Lemonsu A., Deque M., Somot S., Alias A., Masson V. (2018) Benefits of explicit urban parametrization in regional climate modelling to study climate and city interactions. Climate Dynamics, 1-20, doi:10.1007/s00382-018-4289-x </variable>
-			<variable name="history" type="string"> none </variable>
-			<variable name="institution_id" type="string"> CNRM </variable>
-			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France) </variable>
-			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> 1 </variable>
-			<variable name="realm" type="string"> atmos </variable>
-			<variable name="references" type="string"> http://www.umr-cnrm.fr/ </variable>
-			<variable name="source" type="string"> CORDEX </variable>
-			<variable name="source_id" type="string"> CNRM-RCSM6 </variable>
-			<variable name="table_id" type="string"> None3hrPt </variable>
-			<variable name="title" type="string"> CNRM-RCSM6 model output prepared for CMIP6 and CORDEX / historical simulation </variable>
-			<variable name="variable_id" type="string"> psl </variable>
-			<variable name="EXPID" type="string"> RCSM6-CTL.3 </variable>
-			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="CMIP6_psl_instant" name="psl" grid_ref="FULL_grid_C" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean time: point" cell_methods_mode="overwrite" operation="instant" freq_op="3h">
-				<variable name="standard_name" type="string"> air_pressure_at_sea_level </variable>
-				<variable name="description" type="string"> Sea Level Pressure </variable>
-				<variable name="long_name" type="string"> Sea Level Pressure </variable>
-				<variable name="history" type="string"> none </variable>
-				<variable name="units" type="string"> Pa </variable>
 				<variable name="cell_methods" type="string"> area: mean time: point </variable>
 				<variable name="cell_measures" type="string"> area: areacella </variable>
 			</field>
@@ -15068,9 +15068,9 @@
 	</file_definition>
 	<field_definition>
 		<field id="CMIP6_od550aer_average" field_ref="CMIP6_od550aer" operation="average"/>
+		<field id="CMIP6_prw_average" field_ref="CMIP6_prw" operation="average"/>
 		<field id="CMIP6_mrros_average" field_ref="CMIP6_mrros" operation="average"/>
 		<field id="CMIP6_prhmax_average" field_ref="CMIP6_prhmax" operation="average"/>
-		<field id="CMIP6_prw_average" field_ref="CMIP6_prw" operation="average"/>
 		<field id="CMIP6_snd_average" field_ref="CMIP6_snd" operation="average"/>
 		<field id="CMIP6_snm_land_average" field_ref="CMIP6_snm_land" operation="average"/>
 		<field id="CMIP6_ts_average" field_ref="CMIP6_ts" operation="average"/>
@@ -15220,18 +15220,28 @@
 		<field id="CMIP6_siconca_Scaltypesi" grid_ref="SEA_grid_Scaltypesi" operation="instant" detect_missing_value="true"> CMIP6_siconca </field>
 		<field id="CMIP6_siconca_Scaltypesi_average" field_ref="CMIP6_siconca_Scaltypesi" operation="average"/>
 		<field id="CMIP6_clt_average" field_ref="CMIP6_clt" operation="average"/>
-		<field id="CMIP6_hfls_average" field_ref="CMIP6_hfls" operation="average"/>
-		<field id="CMIP6_hfss_average" field_ref="CMIP6_hfss" operation="average"/>
 		<field id="CMIP6_hurs_Scalheight2m" grid_ref="FULL_grid_Scalheight2m" operation="instant" detect_missing_value="true"> CMIP6_hurs </field>
 		<field id="CMIP6_hurs_Scalheight2m_average" field_ref="CMIP6_hurs_Scalheight2m" operation="average"/>
 		<field id="CMIP6_huss_Scalheight2m" grid_ref="FULL_grid_Scalheight2m" operation="instant" detect_missing_value="true"> CMIP6_huss </field>
 		<field id="CMIP6_huss_Scalheight2m_average" field_ref="CMIP6_huss_Scalheight2m" operation="average"/>
+		<field id="CMIP6_pr_average" field_ref="CMIP6_pr" operation="average"/>
+		<field id="CMIP6_psl_average" field_ref="CMIP6_psl" operation="average"/>
+		<field id="CMIP6_tas_Scalheight2m" grid_ref="FULL_grid_Scalheight2m" operation="instant" detect_missing_value="true"> CMIP6_tas </field>
+		<field id="CMIP6_tas_Scalheight2m_average" field_ref="CMIP6_tas_Scalheight2m" operation="average"/>
+		<field id="CMIP6_tasmax_Scalheight2m" grid_ref="FULL_grid_Scalheight2m" operation="instant" detect_missing_value="true"> CMIP6_tasmax </field>
+		<field id="CMIP6_tasmax_Scalheight2m_maximum" field_ref="CMIP6_tasmax_Scalheight2m" operation="maximum"/>
+		<field id="CMIP6_tasmin_Scalheight2m" grid_ref="FULL_grid_Scalheight2m" operation="instant" detect_missing_value="true"> CMIP6_tasmin </field>
+		<field id="CMIP6_tasmin_Scalheight2m_minimum" field_ref="CMIP6_tasmin_Scalheight2m" operation="minimum"/>
+		<field id="CMIP6_uas_Scalheight10m" grid_ref="FULL_grid_Scalheight10m" operation="instant" detect_missing_value="true"> CMIP6_uas </field>
+		<field id="CMIP6_uas_Scalheight10m_average" field_ref="CMIP6_uas_Scalheight10m" operation="average"/>
+		<field id="CMIP6_vas_Scalheight10m" grid_ref="FULL_grid_Scalheight10m" operation="instant" detect_missing_value="true"> CMIP6_vas </field>
+		<field id="CMIP6_vas_Scalheight10m_average" field_ref="CMIP6_vas_Scalheight10m" operation="average"/>
+		<field id="CMIP6_hfls_average" field_ref="CMIP6_hfls" operation="average"/>
+		<field id="CMIP6_hfss_average" field_ref="CMIP6_hfss" operation="average"/>
 		<field id="CMIP6_mrro_average" field_ref="CMIP6_mrro" operation="average"/>
 		<field id="CMIP6_mrso_average" field_ref="CMIP6_mrso" operation="average"/>
-		<field id="CMIP6_pr_average" field_ref="CMIP6_pr" operation="average"/>
 		<field id="CMIP6_prc_average" field_ref="CMIP6_prc" operation="average"/>
 		<field id="CMIP6_prsn_average" field_ref="CMIP6_prsn" operation="average"/>
-		<field id="CMIP6_psl_average" field_ref="CMIP6_psl" operation="average"/>
 		<field id="CMIP6_rlds_average" field_ref="CMIP6_rlds" operation="average"/>
 		<field id="CMIP6_rlus_average" field_ref="CMIP6_rlus" operation="average"/>
 		<field id="CMIP6_rlut_average" field_ref="CMIP6_rlut" operation="average"/>
@@ -15243,20 +15253,6 @@
 		<field id="CMIP6_sfcWindmax_Scalheight10m_maximum" field_ref="CMIP6_sfcWindmax_Scalheight10m" operation="maximum"/>
 		<field id="CMIP6_snc_average" field_ref="CMIP6_snc" operation="average"/>
 		<field id="CMIP6_snw_land_average" field_ref="CMIP6_snw_land" operation="average"/>
-		<field id="CMIP6_tas_Scalheight2m" grid_ref="FULL_grid_Scalheight2m" operation="instant" detect_missing_value="true"> CMIP6_tas </field>
-		<field id="CMIP6_tas_Scalheight2m_average" field_ref="CMIP6_tas_Scalheight2m" operation="average"/>
-		<field id="CMIP6_tasmax_Scalheight2m" grid_ref="FULL_grid_Scalheight2m" operation="instant" detect_missing_value="true"> CMIP6_tasmax </field>
-		<field id="CMIP6_tasmax_Scalheight2m_maximum" field_ref="CMIP6_tasmax_Scalheight2m" operation="maximum"/>
-		<field id="CMIP6_tasmin_Scalheight2m" grid_ref="FULL_grid_Scalheight2m" operation="instant" detect_missing_value="true"> CMIP6_tasmin </field>
-		<field id="CMIP6_tasmin_Scalheight2m_minimum" field_ref="CMIP6_tasmin_Scalheight2m" operation="minimum"/>
-		<field id="CMIP6_uas_Scalheight10m" grid_ref="FULL_grid_Scalheight10m" operation="instant" detect_missing_value="true"> CMIP6_uas </field>
-		<field id="CMIP6_uas_Scalheight10m_average" field_ref="CMIP6_uas_Scalheight10m" operation="average"/>
-		<field id="CMIP6_vas_Scalheight10m" grid_ref="FULL_grid_Scalheight10m" operation="instant" detect_missing_value="true"> CMIP6_vas </field>
-		<field id="CMIP6_vas_Scalheight10m_average" field_ref="CMIP6_vas_Scalheight10m" operation="average"/>
-		<field id="CMIP6_hur_with_instant" field_ref="CMIP6_hur" operation="instant"/>
-		<field id="CMIP6_hur_sampled_1h" field_ref="CMIP6_hur_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_hur_with_instant </field>
-		<field id="CMIP6_hur_plev8" field_ref="CMIP6_hur_sampled_1h" grid_ref="FULL_klev_plev8"/>
-		<field id="CMIP6_hur_plev8_average" field_ref="CMIP6_hur_plev8" operation="average"/>
 		<field id="CMIP6_hus_plev8" field_ref="CMIP6_hus_sampled_1h" grid_ref="FULL_klev_plev8"/>
 		<field id="CMIP6_hus_plev8_average" field_ref="CMIP6_hus_plev8" operation="average"/>
 		<field id="CMIP6_ta_plev8" field_ref="CMIP6_ta_sampled_1h" grid_ref="FULL_klev_plev8"/>
@@ -15265,12 +15261,16 @@
 		<field id="CMIP6_ua_plev8_average" field_ref="CMIP6_ua_plev8" operation="average"/>
 		<field id="CMIP6_va_plev8" field_ref="CMIP6_va_sampled_1h" grid_ref="FULL_klev_plev8"/>
 		<field id="CMIP6_va_plev8_average" field_ref="CMIP6_va_plev8" operation="average"/>
+		<field id="CMIP6_zg_plev8" field_ref="CMIP6_zg_sampled_1h" grid_ref="FULL_klev_plev8"/>
+		<field id="CMIP6_zg_plev8_average" field_ref="CMIP6_zg_plev8" operation="average"/>
+		<field id="CMIP6_hur_with_instant" field_ref="CMIP6_hur" operation="instant"/>
+		<field id="CMIP6_hur_sampled_1h" field_ref="CMIP6_hur_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_hur_with_instant </field>
+		<field id="CMIP6_hur_plev8" field_ref="CMIP6_hur_sampled_1h" grid_ref="FULL_klev_plev8"/>
+		<field id="CMIP6_hur_plev8_average" field_ref="CMIP6_hur_plev8" operation="average"/>
 		<field id="CMIP6_wap_with_instant" field_ref="CMIP6_wap" operation="instant"/>
 		<field id="CMIP6_wap_sampled_1h" field_ref="CMIP6_wap_with_instant" freq_op="1h" detect_missing_value="true"> @CMIP6_wap_with_instant </field>
 		<field id="CMIP6_wap_plev8" field_ref="CMIP6_wap_sampled_1h" grid_ref="FULL_klev_plev8"/>
 		<field id="CMIP6_wap_plev8_average" field_ref="CMIP6_wap_plev8" operation="average"/>
-		<field id="CMIP6_zg_plev8" field_ref="CMIP6_zg_sampled_1h" grid_ref="FULL_klev_plev8"/>
-		<field id="CMIP6_zg_plev8_average" field_ref="CMIP6_zg_plev8" operation="average"/>
 		<field id="CMIP6_areacella_once" field_ref="CMIP6_areacella" operation="once"/>
 		<field id="CMIP6_mrsofc_once" field_ref="CMIP6_mrsofc" operation="once"/>
 		<field id="CMIP6_orog_once" field_ref="CMIP6_orog" operation="once"/>

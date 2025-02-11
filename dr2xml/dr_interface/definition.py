@@ -131,7 +131,7 @@ class DataRequest(object):
             return convert_string_to_year(exp_endyear)
 
     def get_cmorvars_list(self, **kwargs):
-        return dict(), list()
+        return dict()
 
 
 class ListWithItems(list):

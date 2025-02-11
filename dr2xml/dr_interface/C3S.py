@@ -86,7 +86,7 @@ class DataRequest(DataRequestBasic):
         for id in self.get_element_uid(elt_type="variable"):
             for grid in self.get_element_uid(id=id, elt_type="variable").grids:
                 rep[id].add(grid)
-        return rep, list()
+        return rep
 
 
 def initialize_data_request():

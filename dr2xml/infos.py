@@ -89,7 +89,7 @@ def print_some_stats(context, svars_per_table, skipped_vars_per_table, actually_
                 tot_for_freq_and_shape_among_tables = 0
                 for table in sorted(list(dic[frequency][spatial_shp])):
                     for Priority in sorted(list(dic[frequency][spatial_shp][table])):
-                        list_priority = dic[frequency][spatial_shp][table][Priority]
+                        list_priority = sorted(dic[frequency][spatial_shp][table][Priority])
                         tot_for_freq_and_shape_among_tables += len(list_priority)
                         logger.info("%10s %8s %12s P%1d %3d: %s" % (" ", " ", table, Priority, len(list_priority),
                                                                     " ".join(list_priority)))
