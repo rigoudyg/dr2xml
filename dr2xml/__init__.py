@@ -753,7 +753,7 @@ on
 
 @configuration_init
 def create_ping_files(context, path_special, dummy="field_atm", dummy_with_shape=False, exact=False, comments=False,
-                      filename=None, debug=list(), by_realm=False):
+                      filename=None, debug=list(), by_realm=False, **kwargs):
     from .settings_interface import get_settings_values
     from .vars_interface.selection import select_variables_to_be_processed
     from .pingfiles_interface import ping_file_for_realms_list

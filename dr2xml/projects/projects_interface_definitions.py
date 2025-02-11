@@ -315,6 +315,8 @@ class ValueSettings(Settings):
                 tmp_rep += "[%s]" % key_value
         elif key_type in ["combine", ]:
             tmp_rep = ", ".join(self.dump_doc_inner(self.keys, format_struct=False))
+        elif key_type in ["merge", ]:
+            tmp_rep = str(self.dump_doc_inner(self.keys, format_struct=False))
         elif key_type in ["data_request", ]:
             tmp_rep = "%s" % key_type
             keys_values = self.dump_doc_inner(self.keys, format_struct=False)
