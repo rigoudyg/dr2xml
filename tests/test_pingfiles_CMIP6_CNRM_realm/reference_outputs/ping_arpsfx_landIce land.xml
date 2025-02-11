@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<context id="arpsfx">
+	<!--CMIP6 Data Request version 01.00.21.post1-->
+	<!--dr2xml version 3.1-->
+	<!--Lab_and_model settings
+{'excluded_vars' = [],
+'excluded_vars_file' = [],
+'institution_id' = 'CNRM-CERFACS',
+'listof_home_vars' = 'None',
+'max_priority' = '3',
+'mips' = {'AerChemMIP', 'C4MIP', 'CCMI', 'CFMIP', 'CMIP', 'CMIP5', 'CMIP6', 'CORDEX', 'DAMIP', 'DCPP', 'DECK', 'DynVar', 'FAFMIP', 'GMMIP', 'GeoMIP', 'HighResMIP', 'ISMIP6', 'LS3MIP', 'LUMIP', 'OMIP', 'PDRMIP', 'PMIP', 'RFMIP', 'SIMIP', 'SPECS', 'ScenarioMIP', 'SolarMIP', 'VIACSAB', 'VolMIP'},
+'path_extra_tables' = 'None',
+'path_special_defs' = './input/special_defs',
+'ping_variables_prefix' = 'CMIP6_',
+'project' = 'ping',
+'realms_per_context' = {'arpsfx' = ['atmos', 'atmos atmosChem', 'aerosol', 'atmos land', 'land', 'landIce land', 'aerosol land', 'land landIce', 'landIce'], 'nemo' = ['seaIce', 'ocean', 'ocean seaIce', 'ocnBgchem', 'seaIce ocean']},
+'tierMax' = '3'}-->
+	<!--Simulation settings
+{}-->
+	<!--Year processed None-->
+	<field_definition>
+		<field id="CMIP6_agesno" field_ref="?dummy_XY"/>
+		<!--P1 (day) age_of_surface_snow : age_of_surface_snow-->
+		<field id="CMIP6_hfdsn" field_ref="?dummy_XY"/>
+		<!--P1 (W m-2) surface_downward_heat_flux_in_snow : Downward heat flux at snow top-->
+		<field id="CMIP6_lwsnl" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2) liquid_water_content_of_snow_layer : liquid_water_content_of_snow_layer-->
+		<field id="CMIP6_pflw" field_ref="?dummy_XY"/>
+		<!--P3 (kg m-2) liquid_water_content_of_permafrost_layer : liquid_water_content_of_permafrost_layer-->
+		<field id="CMIP6_snc" field_ref="?dummy_XY"/>
+		<!--P1 (%) surface_snow_area_fraction : Snow Area Fraction-->
+		<field id="CMIP6_snc_ist" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P1 (%) surface_snow_area_fraction : quantity averaged over ice sheet (grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
+		<field id="CMIP6_snd" field_ref="?dummy_XY"/>
+		<!--P1 (m) surface_snow_thickness : Snow Depth-->
+		<field id="CMIP6_snm_land" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_snow_melt_flux : surface_snow_and_ice_melt_flux-->
+		<field id="CMIP6_snm_land" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_snow_melt_flux : surface_snow_and_ice_melt_flux-->
+		<field id="CMIP6_snm_ist" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P1 (kg m-2 s-1) surface_snow_melt_flux : Surface Snow Melt-->
+		<field id="CMIP6_snw" field_ref="?dummy_XY"/>
+		<!--P3 (kg m-2) surface_snow_amount : Surface Snow Amount-->
+		<field id="CMIP6_snw_land" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) surface_snow_amount : the mass of surface snow on the land portion of the grid cell divided by the land area in the grid cell; reported as missing where the land fraction is 0; excludes snow on vegetation canopy or on sea ice.-->
+		<field id="CMIP6_sootsn" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2) soot_content_of_surface_snow : soot_content_of_surface_snow-->
+		<field id="CMIP6_tpf" field_ref="?dummy_XY"/>
+		<!--P3 (m) permafrost_layer_thickness : permafrost_layer_thickness-->
+		<field id="CMIP6_tsn_ist" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P1 (K) temperature_in_surface_snow : quantity averaged over ice sheet (grounded ice sheet and floating ice shelf) only. Needed to analyse the impact of downscaling methods-->
+		<field id="CMIP6_tsn_ist" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P1 (K) temperature_in_surface_snow : quantity averaged over ice sheet (grounded ice sheet and floating ice shelf) only. Needed to analyse the impact of downscaling methods-->
+		<field id="CMIP6_tsn_land" field_ref="?dummy_XY"/>
+		<!--P1 (K) temperature_in_surface_snow : This temperature is averaged over all the snow in the grid cell that rests on land or land ice.  When computing the time-mean here, the time samples, weighted by the mass of snow on the land portion of the grid cell, are accumulated and then divided by the sum of the weights.   Reported as "missing in regions free of snow on land.-->
+	</field_definition>
+</context>

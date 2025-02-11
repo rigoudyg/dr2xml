@@ -118,6 +118,7 @@ class TestProjectSettings(unittest.TestCase):
 		                'orography_field_name': 'orog',
 		                'orphan_variables': [],
 		                'path_extra_tables': None,
+		                'path_special_defs': './input/special_defs',
 		                'path_to_parse': './',
 		                'perso_sdims_description': {},
 		                'ping_variables_prefix': 'CMIP6_',
