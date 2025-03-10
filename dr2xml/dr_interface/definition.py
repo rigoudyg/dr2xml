@@ -243,6 +243,24 @@ class SimpleCMORVar(SimpleObject):
         self.flag_meanings = flag_meanings
         self.flag_values = flag_values
         super(SimpleCMORVar, self).__init__(**kwargs)
+    
+    def set_attributes(self, **kwargs):
+        if "modeling_realm" in kwargs:
+            modeling_realm = kwargs["modeling_realm"]
+            if modeling_realm is not None and len(modeling_realm) == 0:
+                modeling_realm = None
+            if modeling_realm is None:
+                list_modeling_realms = list()
+            elif isinstance(modeling_realm, list):
+                list_modeling_realms = modeling_realm
+            else:
+                list_modeling_realms = [modeling_realm, ]
+            set_modeling_realms = set()
+            for realm in list_modeling_realms:
+                set_modeling_realms = set_modeling_realms | set(realm.split(" "))
+            kwargs["list_modeling_realms"] = list_modeling_realms
+            kwargs["set_modeling_realms"] = set_modeling_realms
+        super().set_attributes(**kwargs)
 
     def __eq__(self, other):
         return self.label == other.label and self.list_modeling_realms == other.list_modeling_realms and \
