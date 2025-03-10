@@ -37,10 +37,14 @@ def convert_frequency(freq):
 
 
 def convert_realm(realm):
-    if realm in ["ocean", "seaIce"]:
+    if "ocean" in realm or "seaIce" in realm:
         realm = "nemo",
-    if realm in ["land", ]:
+    elif "land" in realm:
         realm = "atmo"
+    elif len(realm) == 1:
+        realm = list(realm)[0]
+    else:
+        raise ValueError("Unable to figure out the realm to be used.")
     return realm
 
 
@@ -122,7 +126,7 @@ project_settings = dict(
                             list_perso_dev_file=ValueSettings(key_type="common", keys="list_perso_dev_file"),
                             var_type=ValueSettings(key_type="variable", keys="type"),
                             label=ValueSettings(key_type="variable", keys="label"),
-                            realm=ValueSettings(key_type="variable", keys="modeling_realm",
+                            realm=ValueSettings(key_type="variable", keys="list_modeling_realms",
                                                     func=FunctionSettings(func=convert_realm))
                         )
                     ))
@@ -165,7 +169,7 @@ project_settings = dict(
                 key="realm",
                 output_key="modeling_realm",
                 default_values=[
-                    ValueSettings(key_type="variable", keys="modeling_realm", func=FunctionSettings(func=convert_realm))
+                    ValueSettings(key_type="variable", keys="list_modeling_realms", func=FunctionSettings(func=convert_realm))
                 ]
             ),
             level_type=ParameterSettings(

@@ -197,7 +197,18 @@ class SimpleCMORVar(SimpleObject):
                  sdims=dict(), comments=None, coordinates=None, cm=False, id=None, flag_meanings=None, flag_values=None,
                  **kwargs):
         self.type = type
+        if modeling_realm is not None and len(modeling_realm) == 0:
+            modeling_realm = None
         self.modeling_realm = modeling_realm
+        if self.modeling_realm is None:
+            self.list_modeling_realms = list()
+        elif not isinstance(self.modeling_realm, list):
+            self.list_modeling_realms = [self.modeling_realm, ]
+        else:
+            self.list_modeling_realms = self.modeling_realm
+        self.set_modeling_realms = set()
+        for realm in self.list_modeling_realms:
+            self.set_modeling_realms = self.set_modeling_realms | set(realm.split(" "))
         self.grids = grids
         self.label = label  # taken equal to the CMORvar label
         self.mipVarLabel = mipVarLabel  # taken equal to MIPvar label
@@ -234,7 +245,7 @@ class SimpleCMORVar(SimpleObject):
         super(SimpleCMORVar, self).__init__(**kwargs)
 
     def __eq__(self, other):
-        return self.label == other.label and self.modeling_realm == other.modeling_realm and \
+        return self.label == other.label and self.list_modeling_realms == other.list_modeling_realms and \
                self.frequency == other.frequency and self.mipTable == other.mipTable and \
                self.temporal_shp == other.temporal_shp and self.spatial_shp == other.spatial_shp
 

@@ -218,16 +218,10 @@ def ping_file_for_realms_list(context, svars, lrealms, path_special, dummy="fiel
     for table in svars:
         for v in svars[table]:
             added = False
-            if exact:
-                if any([v.modeling_realm == r for r in lrealms]):
-                    lvars.append(v)
-                    added = True
-            else:
-                var_realms = v.modeling_realm.split(" ")
-                if any([v.modeling_realm == r or r in var_realms
-                        for r in lrealms]):
-                    lvars.append(v)
-                    added = True
+            if len(set(v.list_modeling_realms) & set(lrealms)) > 0 or \
+                    (not(exact) and len(set(lrealms) & v.set_modeling_realms) > 0):
+                lvars.append(v)
+                added = True
             if not added and context in internal_values['orphan_variables'] and \
                     v.label in internal_values['orphan_variables'][context]:
                 lvars.append(v)

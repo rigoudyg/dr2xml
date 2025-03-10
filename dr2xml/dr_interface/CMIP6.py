@@ -580,6 +580,8 @@ class SimpleCMORVar(SimpleCMORVarBasic):
             # Because wrong in DR01.00.20
             if self.modeling_realm.startswith("zoo"):
                 self.modeling_realm = "ocnBgChem"
+                self.list_modeling_realms = [self.modeling_realm, ]
+                self.set_modeling_realms = {self.modeling_realm, }
             # TBD : this cell_measure choice for seaice variables is specific to Nemo
             if "seaIce" in self.modeling_realm and self.cell_measures is not None and \
                     "areacella" in self.cell_measures:

@@ -112,7 +112,7 @@ def remove_p_suffix(svar, mlev_sfxs, slev_sfxs, realms):
     # suppression des terminaisons en "Clim" le cas echant
     label_out = svar.label.split("Clim")[0]
     #
-    svar_realms = set(svar.modeling_realm.split())
+    svar_realms = svar.set_modeling_realms
     valid_realms = set(realms)
     if svar_realms.intersection(valid_realms):
         mvl = r.match(label_out)
@@ -147,9 +147,9 @@ def get_correspond_cmor_var(homevar):
                      ("SoilPools" in homevar.label and homevar.frequency in ["mon", ] and
                       cmvar.frequency in ["monPt", ])
         match_table = (cmvar.mipTable == homevar.mipTable)
-        match_realm = (homevar.modeling_realm in cmvar.modeling_realm.split(' ')) or \
-                      (homevar.modeling_realm == cmvar.modeling_realm)
-        empty_realm = (cmvar.modeling_realm in ['', ])
+        empty_realm = len(cmvar.list_modeling_realms) == 0
+        match_realm = (not(empty_realm) and set(homevar.list_modeling_realms).issubset(cmvar.set_modeling_realms)) or \
+                      homevar.list_modeling_realms == cmvar.list_modeling_realms
 
         matching = (match_label and (match_freq or empty_table) and (match_table or empty_table) and
                     (match_realm or empty_realm))
@@ -205,18 +205,19 @@ def complement_svar_using_cmorvar(svar, cmvar, debug=[]):
                         mipVarLabel=cmvar.mipVarLabel, units=cmvar.units, stdname=cmvar.stdname,
                         cm=cmvar.cm, cell_methods=cmvar.cell_methods, cell_measures=cmvar.cell_measures,
                         sdims=cmvar.sdims, other_dims_size=cmvar.other_dims_size, mip_era=cmvar.mip_era,
-                        flag_meanings=cmvar.flag_meanings, flag_values=cmvar.flag_values)
+                        flag_meanings=cmvar.flag_meanings, flag_values=cmvar.flag_values,
+                        list_modeling_realms=cmvar.list_modeling_realms, set_modeling_realms=cmvar.set_modeling_realms)
     area = cellmethod2area(svar.cell_methods)
     if svar.label in debug:
         logger.debug("complement_svar ... processing %s, area=%s" % (svar.label, str(area)))
     if area:
-        ambiguous = any([svar.label == alabel and svar.modeling_realm == arealm
+        ambiguous = any([svar.label == alabel and arealm in svar.list_modeling_realms
                          for (alabel, (arealm, lmethod)) in ambiguous_mipvarnames])
         if svar.label in debug:
             logger.debug("complement_svar ... processing %s, ambiguous=%s" % (svar.label, repr(ambiguous)))
         if ambiguous:
             # Special case for a set of land variables
-            if not (svar.modeling_realm == 'land' and svar.label[0] == 'c'):
+            if not ('land' in svar.list_modeling_realms and svar.label[0] == 'c'):
                 svar.label_non_ambiguous = svar.label + "_" + area
     if svar.label in debug:
         logger.debug("complement_svar ... processing %s, label_non_ambiguous=%s" %
@@ -262,17 +263,16 @@ def analyze_ambiguous_mip_varnames(debug=[]):
                 cm = cv.cell_methods
                 if cm is not None:
                     area = cellmethod2area(cm)
-                    realm = cv.modeling_realm
-                    if area == 'sea' and realm == 'ocean':
+                    if area == 'sea' and 'ocean' in cv.list_modeling_realms:
                         area = None
-                    # realm=""
-                    if vlabel in debug:
-                        logger.debug("for %s 's CMORvar %s(%s), area=%s" % (vlabel, cv.label, cv.mipTable, area))
-                    if realm not in d[vlabel]:
-                        d[vlabel][realm] = OrderedDict()
-                    if area not in d[vlabel][realm]:
-                        d[vlabel][realm][area] = []
-                    d[vlabel][realm][area].append(cv.mipTable)
+                    for realm in cv.list_modeling_realms:
+                        if vlabel in debug:
+                            logger.debug("for %s 's CMORvar %s(%s), area=%s" % (vlabel, cv.label, cv.mipTable, area))
+                        if realm not in d[vlabel]:
+                            d[vlabel][realm] = OrderedDict()
+                        if area not in d[vlabel][realm]:
+                            d[vlabel][realm][area] = []
+                        d[vlabel][realm][area].append(cv.mipTable)
             if vlabel in debug:
                 print(vlabel, d[vlabel])
         else:

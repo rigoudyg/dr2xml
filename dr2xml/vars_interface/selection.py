@@ -53,18 +53,22 @@ def select_variables_to_be_processed():
     # Group vars per realm
     svars_per_realm = defaultdict(list)
     for svar in mip_vars_list:
-        realm = svar.modeling_realm
-        if svar not in svars_per_realm[realm]:
-            add = not any([test_variables_similar(svar, ovar) for ovar in svars_per_realm[realm]])
-            # Settings may allow for duplicate var in two tables.
-            # In DR01.00.21, this actually applies to very few fields (ps-Aermon, tas-ImonAnt, areacellg)
-            if internal_dict['allow_duplicates'] or add:
-                svars_per_realm[realm].append(svar)
+        for realm in svar.list_modeling_realms:
+            if svar not in svars_per_realm[realm]:
+                add = not any([test_variables_similar(svar, ovar) for ovar in svars_per_realm[realm]])
+                # Settings may allow for duplicate var in two tables.
+                # In DR01.00.21, this actually applies to very few fields (ps-Aermon, tas-ImonAnt, areacellg)
+                if internal_dict['allow_duplicates'] or add:
+                    svars_per_realm[realm].append(svar)
+                else:
+                    logger.warning("Not adding duplicate %s (from %s) for realm %s" % (svar.label, svar.mipTable, realm))
             else:
-                logger.warning("Not adding duplicate %s (from %s) for realm %s" % (svar.label, svar.mipTable, realm))
-        else:
-            logger.warning("Duplicate svar %s %s" % (svar.label, svar.grid))
-    logger.info("\nRealms for these CMORvars: %s" % " ".join(sorted(list(svars_per_realm))))
+                logger.warning("Duplicate svar %s %s" % (svar.label, svar.grid))
+    list_svars_per_realms = set(list(svars_per_realm))
+    if None in list_svars_per_realms:
+        list_svars_per_realms = list_svars_per_realms & {""} - {None}
+    list_svars_per_realms = sorted(list(list_svars_per_realms))
+    logger.info("\nRealms for these CMORvars: %s" % " ".join(list_svars_per_realms))
     #
     # --------------------------------------------------------------------
     # Select on context realms, grouping by table
