@@ -199,7 +199,7 @@ def complement_svar_using_cmorvar(svar, cmvar, debug=[]):
 
     # Get information form CMORvar
     svar.set_attributes(prec=cmvar.prec, frequency=cmvar.frequency, mipTable=cmvar.mipTable,
-                        Priority=cmvar.Priority, positive=cmvar.positive, modeling_realm=cmvar.modeling_realm,
+                        Priority=cmvar.Priority, positive=cmvar.positive,
                         label=cmvar.label, spatial_shp=cmvar.spatial_shp, temporal_shp=cmvar.temporal_shp, cmvar=cmvar,
                         long_name=cmvar.long_name, description=cmvar.description, ref_var=cmvar.label,
                         mipVarLabel=cmvar.mipVarLabel, units=cmvar.units, stdname=cmvar.stdname,

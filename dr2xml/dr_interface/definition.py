@@ -199,13 +199,12 @@ class SimpleCMORVar(SimpleObject):
         self.type = type
         if modeling_realm is not None and len(modeling_realm) == 0:
             modeling_realm = None
-        self.modeling_realm = modeling_realm
-        if self.modeling_realm is None:
+        if modeling_realm is None:
             self.list_modeling_realms = list()
-        elif not isinstance(self.modeling_realm, list):
-            self.list_modeling_realms = [self.modeling_realm, ]
+        elif not isinstance(modeling_realm, list):
+            self.list_modeling_realms = [modeling_realm, ]
         else:
-            self.list_modeling_realms = self.modeling_realm
+            self.list_modeling_realms = modeling_realm
         self.set_modeling_realms = set()
         for realm in self.list_modeling_realms:
             self.set_modeling_realms = self.set_modeling_realms | set(realm.split(" "))
@@ -255,10 +254,12 @@ class SimpleCMORVar(SimpleObject):
                 list_modeling_realms = modeling_realm
             else:
                 list_modeling_realms = [modeling_realm, ]
+            kwargs["list_modeling_realms"] = list_modeling_realms
+        if "list_modeling_realms" in kwargs:
+            list_modeling_realms = kwargs["list_modeling_realms"]
             set_modeling_realms = set()
             for realm in list_modeling_realms:
                 set_modeling_realms = set_modeling_realms | set(realm.split(" "))
-            kwargs["list_modeling_realms"] = list_modeling_realms
             kwargs["set_modeling_realms"] = set_modeling_realms
         super().set_attributes(**kwargs)
 

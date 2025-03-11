@@ -576,14 +576,14 @@ class SimpleCMORVar(SimpleCMORVarBasic):
                 self.cell_measures = 'area: areacello'
             if self.label in ["jpdftaure", ]:
                 self.spatial_shape = "XY-na"
-        if self.modeling_realm is not None:
+        if len(self.list_modeling_realms) > 0:
             # Because wrong in DR01.00.20
-            if self.modeling_realm.startswith("zoo"):
-                self.modeling_realm = "ocnBgChem"
-                self.list_modeling_realms = [self.modeling_realm, ]
-                self.set_modeling_realms = {self.modeling_realm, }
+            self.list_modeling_realms=["ocnBgChem" if elt.startswith("zoo") else elt for elt in self.list_modeling_realms]
+            self.set_modeling_realms = set()
+            for realm in self.list_modeling_realms:
+                self.set_modeling_realms = self.set_modeling_realms | set(realm.split(" "))
             # TBD : this cell_measure choice for seaice variables is specific to Nemo
-            if "seaIce" in self.modeling_realm and self.cell_measures is not None and \
+            if "seaIce" in self.set_modeling_realms and self.cell_measures is not None and \
                     "areacella" in self.cell_measures:
                 if self.label in ['siconca', ]:
                     self.cell_measures = 'area: areacella'
@@ -599,7 +599,7 @@ class SimpleCMORVar(SimpleCMORVarBasic):
             self.long_name = "empty in DR %s" % data_request.get_version()
         if self.units is None:
             self.units = "empty in DR %s" % data_request.get_version()
-        if self.modeling_realm in ["seaIce", ] and re.match(".*areacella.*", str(self.cell_measures)) \
+        if self.list_modeling_realms == ["seaIce", ] and re.match(".*areacella.*", str(self.cell_measures)) \
                 and self.label not in ["siconca", ]:
             self.comments = ". Due an error in DR01.00.21 and to technical constraints, this variable may have " \
                                 "attribute cell_measures set to area: areacella, while it actually is area: areacello"
