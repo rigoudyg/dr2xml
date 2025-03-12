@@ -250,7 +250,7 @@ def field_size(svar):
         s_other = s_match.groupdict()["other"]
 
         if s_hdim in ["XY", ]:
-            if s_vdim in ["O", ] or len(set(svar.list_modeling_realms) &
+            if s_vdim in ["O", ] or len(set(svar.modeling_realm) &
                                         {'ocean', 'seaIce', 'ocean seaIce', 'ocnBgchem', 'seaIce ocean'}) > 0:
                 siz = oce_grid_size
             else:

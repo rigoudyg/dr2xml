@@ -54,7 +54,7 @@ def create_xios_axis_and_grids_for_plevs_unions(svars, plev_sfxs, dummies):
     # First, search plev unions for each label_without_psuffix and build dict_plevs
     dict_plevs = OrderedDict()
     for sv in svars:
-        if len(sv.list_modeling_realms) == 0:
+        if len(sv.modeling_realm) == 0:
             logger.warning("Warning: no modeling_realm associated to: %s %s %s" % (sv.label, sv.mipTable, sv.mip_era))
         for sd in sv.sdims.values():
             # couvre les dimensions verticales de type 'plev7h' ou 'p850'

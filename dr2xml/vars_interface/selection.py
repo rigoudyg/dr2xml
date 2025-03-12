@@ -53,7 +53,7 @@ def select_variables_to_be_processed():
     # Group vars per realm
     svars_per_realm = defaultdict(list)
     for svar in mip_vars_list:
-        for realm in svar.list_modeling_realms:
+        for realm in svar.modeling_realm:
             if svar not in svars_per_realm[realm]:
                 add = not any([test_variables_similar(svar, ovar) for ovar in svars_per_realm[realm]])
                 # Settings may allow for duplicate var in two tables.
@@ -63,7 +63,7 @@ def select_variables_to_be_processed():
                 else:
                     logger.warning("Not adding duplicate %s (from %s) for realm %s" % (svar.label, svar.mipTable, realm))
             else:
-                logger.warning("Duplicate svar %s %s" % (svar.label, svar.grid))
+                logger.warning("Duplicate svar %s %s" % (svar.label, svar.grids))
     list_svars_per_realms = set(list(svars_per_realm))
     if None in list_svars_per_realms:
         list_svars_per_realms = list_svars_per_realms & {""} - {None}

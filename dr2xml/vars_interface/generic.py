@@ -147,9 +147,9 @@ def get_correspond_cmor_var(homevar):
                      ("SoilPools" in homevar.label and homevar.frequency in ["mon", ] and
                       cmvar.frequency in ["monPt", ])
         match_table = (cmvar.mipTable == homevar.mipTable)
-        empty_realm = len(cmvar.list_modeling_realms) == 0
-        match_realm = (not(empty_realm) and set(homevar.list_modeling_realms).issubset(cmvar.set_modeling_realms)) or \
-                      homevar.list_modeling_realms == cmvar.list_modeling_realms
+        empty_realm = len(cmvar.modeling_realm) == 0
+        match_realm = (not(empty_realm) and set(homevar.modeling_realm).issubset(cmvar.set_modeling_realms)) or \
+                      homevar.modeling_realm == cmvar.modeling_realm
 
         matching = (match_label and (match_freq or empty_table) and (match_table or empty_table) and
                     (match_realm or empty_realm))
@@ -206,18 +206,18 @@ def complement_svar_using_cmorvar(svar, cmvar, debug=[]):
                         cm=cmvar.cm, cell_methods=cmvar.cell_methods, cell_measures=cmvar.cell_measures,
                         sdims=cmvar.sdims, other_dims_size=cmvar.other_dims_size, mip_era=cmvar.mip_era,
                         flag_meanings=cmvar.flag_meanings, flag_values=cmvar.flag_values,
-                        list_modeling_realms=cmvar.list_modeling_realms, set_modeling_realms=cmvar.set_modeling_realms)
+                        modeling_realm=cmvar.modeling_realm, set_modeling_realms=cmvar.set_modeling_realms)
     area = cellmethod2area(svar.cell_methods)
     if svar.label in debug:
         logger.debug("complement_svar ... processing %s, area=%s" % (svar.label, str(area)))
     if area:
-        ambiguous = any([svar.label == alabel and arealm in svar.list_modeling_realms
+        ambiguous = any([svar.label == alabel and arealm in svar.modeling_realm
                          for (alabel, (arealm, lmethod)) in ambiguous_mipvarnames])
         if svar.label in debug:
             logger.debug("complement_svar ... processing %s, ambiguous=%s" % (svar.label, repr(ambiguous)))
         if ambiguous:
             # Special case for a set of land variables
-            if not ('land' in svar.list_modeling_realms and svar.label[0] == 'c'):
+            if not ('land' in svar.modeling_realm and svar.label[0] == 'c'):
                 svar.label_non_ambiguous = svar.label + "_" + area
     if svar.label in debug:
         logger.debug("complement_svar ... processing %s, label_non_ambiguous=%s" %
@@ -263,9 +263,9 @@ def analyze_ambiguous_mip_varnames(debug=[]):
                 cm = cv.cell_methods
                 if cm is not None:
                     area = cellmethod2area(cm)
-                    if area == 'sea' and 'ocean' in cv.list_modeling_realms:
+                    if area == 'sea' and 'ocean' in cv.modeling_realm:
                         area = None
-                    for realm in cv.list_modeling_realms:
+                    for realm in cv.modeling_realm:
                         if vlabel in debug:
                             logger.debug("for %s 's CMORvar %s(%s), area=%s" % (vlabel, cv.label, cv.mipTable, area))
                         if realm not in d[vlabel]:

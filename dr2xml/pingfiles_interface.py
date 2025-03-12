@@ -218,7 +218,7 @@ def ping_file_for_realms_list(context, svars, lrealms, path_special, dummy="fiel
     for table in svars:
         for v in svars[table]:
             added = False
-            if len(set(v.list_modeling_realms) & set(lrealms)) > 0 or \
+            if len(set(v.modeling_realm) & set(lrealms)) > 0 or \
                     (not(exact) and len(set(lrealms) & v.set_modeling_realms) > 0):
                 lvars.append(v)
                 added = True

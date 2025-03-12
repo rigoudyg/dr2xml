@@ -189,7 +189,7 @@ class SimpleCMORVar(SimpleObject):
     """
     A class for unifying CMOR vars and home variables
     """
-    def __init__(self, type=False, modeling_realm=None, grids=[""], label=None, mipVarLabel=None,
+    def __init__(self, type=False, modeling_realm=list(), grids=[""], label=None, mipVarLabel=None,
                  label_without_psuffix=None, label_non_ambiguous=None, frequency=None, mipTable=None, positive=None,
                  description=None, stdname=None, units=None, long_name=None, other_dims_size=1,
                  cell_methods=None, cell_measures=None, spatial_shp=None, temporal_shp=None, experiment=None,
@@ -197,16 +197,9 @@ class SimpleCMORVar(SimpleObject):
                  sdims=dict(), comments=None, coordinates=None, cm=False, id=None, flag_meanings=None, flag_values=None,
                  **kwargs):
         self.type = type
-        if modeling_realm is not None and len(modeling_realm) == 0:
-            modeling_realm = None
-        if modeling_realm is None:
-            self.list_modeling_realms = list()
-        elif not isinstance(modeling_realm, list):
-            self.list_modeling_realms = [modeling_realm, ]
-        else:
-            self.list_modeling_realms = modeling_realm
+        self.modeling_realm = modeling_realm
         self.set_modeling_realms = set()
-        for realm in self.list_modeling_realms:
+        for realm in self.modeling_realm:
             self.set_modeling_realms = self.set_modeling_realms | set(realm.split(" "))
         self.grids = grids
         self.label = label  # taken equal to the CMORvar label
@@ -245,26 +238,20 @@ class SimpleCMORVar(SimpleObject):
     
     def set_attributes(self, **kwargs):
         if "modeling_realm" in kwargs:
-            modeling_realm = kwargs["modeling_realm"]
-            if modeling_realm is not None and len(modeling_realm) == 0:
-                modeling_realm = None
-            if modeling_realm is None:
-                list_modeling_realms = list()
-            elif isinstance(modeling_realm, list):
-                list_modeling_realms = modeling_realm
-            else:
-                list_modeling_realms = [modeling_realm, ]
-            kwargs["list_modeling_realms"] = list_modeling_realms
-        if "list_modeling_realms" in kwargs:
-            list_modeling_realms = kwargs["list_modeling_realms"]
+            modeling_realms = kwargs["modeling_realm"]
+            if modeling_realms in ["", None]:
+                modeling_realms = list()
+            elif not isinstance(modeling_realms, list):
+                modeling_realms = [modeling_realms, ]
+            kwargs["modeling_realm"] = modeling_realms
             set_modeling_realms = set()
-            for realm in list_modeling_realms:
+            for realm in modeling_realms:
                 set_modeling_realms = set_modeling_realms | set(realm.split(" "))
             kwargs["set_modeling_realms"] = set_modeling_realms
         super().set_attributes(**kwargs)
 
     def __eq__(self, other):
-        return self.label == other.label and self.list_modeling_realms == other.list_modeling_realms and \
+        return self.label == other.label and self.modeling_realm == other.modeling_realm and \
                self.frequency == other.frequency and self.mipTable == other.mipTable and \
                self.temporal_shp == other.temporal_shp and self.spatial_shp == other.spatial_shp
 
@@ -286,7 +273,7 @@ class SimpleCMORVar(SimpleObject):
         input_var_dict = dict(type="extra", mip_era=mip_era, label=input_var["out_name"],
                               mipVarLabel=input_var["out_name"], stdname=input_var.get("standard_name", ""),
                               long_name=input_var["long_name"], units=input_var["units"],
-                              modeling_realm=input_var["modeling_realm"], frequency=freq, mipTable=table,
+                              modeling_realm=[input_var["modeling_realm"], ], frequency=freq, mipTable=table,
                               cell_methods=input_var["cell_methods"], cell_measures=input_var["cell_measures"],
                               positive=input_var["positive"], Priority=float(input_var[mip_era.lower() + "_priority"]),
                               label_without_psuffix=input_var["out_name"],

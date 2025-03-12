@@ -956,7 +956,7 @@ project_settings = dict(
                 key="realm",
                 help="Realm associated with the file.",
                 default_values=[
-                    ValueSettings(key_type="variable", keys="list_modeling_realms",
+                    ValueSettings(key_type="variable", keys="modeling_realm",
                                   func=lambda x: ",".join(x) if isinstance(x, list) else x)
                 ]
             ),

@@ -107,7 +107,7 @@ def process_home_vars(mip_vars_list, mips, expid="False"):
     logger.info("homevars list: %s" % " ".join([sv.label for sv in home_vars_list]))
     #
     for hv in home_vars_list:
-        hv_info = {"varname": hv.label, "realm": ",".join(hv.list_modeling_realms), "freq": hv.frequency,
+        hv_info = {"varname": hv.label, "realm": ",".join(hv.modeling_realm), "freq": hv.frequency,
                    "table": hv.mipTable}
         logger.debug(hv_info)
         if hv.type in ["cmor", ]:

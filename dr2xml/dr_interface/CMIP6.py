@@ -576,11 +576,11 @@ class SimpleCMORVar(SimpleCMORVarBasic):
                 self.cell_measures = 'area: areacello'
             if self.label in ["jpdftaure", ]:
                 self.spatial_shape = "XY-na"
-        if len(self.list_modeling_realms) > 0:
+        if len(self.modeling_realm) > 0:
             # Because wrong in DR01.00.20
-            self.list_modeling_realms=["ocnBgChem" if elt.startswith("zoo") else elt for elt in self.list_modeling_realms]
+            self.modeling_realm=["ocnBgChem" if elt.startswith("zoo") else elt for elt in self.modeling_realm]
             self.set_modeling_realms = set()
-            for realm in self.list_modeling_realms:
+            for realm in self.modeling_realm:
                 self.set_modeling_realms = self.set_modeling_realms | set(realm.split(" "))
             # TBD : this cell_measure choice for seaice variables is specific to Nemo
             if "seaIce" in self.set_modeling_realms and self.cell_measures is not None and \
@@ -599,7 +599,7 @@ class SimpleCMORVar(SimpleCMORVarBasic):
             self.long_name = "empty in DR %s" % data_request.get_version()
         if self.units is None:
             self.units = "empty in DR %s" % data_request.get_version()
-        if self.list_modeling_realms == ["seaIce", ] and re.match(".*areacella.*", str(self.cell_measures)) \
+        if self.modeling_realm == ["seaIce", ] and re.match(".*areacella.*", str(self.cell_measures)) \
                 and self.label not in ["siconca", ]:
             self.comments = ". Due an error in DR01.00.21 and to technical constraints, this variable may have " \
                                 "attribute cell_measures set to area: areacella, while it actually is area: areacello"
@@ -712,4 +712,10 @@ class SimpleCMORVar(SimpleCMORVarBasic):
         if struct is not None:
             input_var_dict["flag_meanings"] = struct.flag_meanings
             input_var_dict["flag_values"] = struct.flag_values
+        if "modeling_realm" in input_var_dict:
+            val = input_var_dict["modeling_realm"]
+            if val is None or len(val) == 0:
+                input_var_dict["modeling_realm"] = list()
+            elif not isinstance(val, list):
+                input_var_dict["modeling_realm"] = [val, ]
         return cls(from_dr=True, **input_var_dict)

@@ -128,7 +128,7 @@ project_settings = dict(
                             list_perso_dev_file=ValueSettings(key_type="common", keys="list_perso_dev_file"),
                             var_type=ValueSettings(key_type="variable", keys="type"),
                             label=ValueSettings(key_type="variable", keys="label"),
-                            realm=ValueSettings(key_type="variable", keys="list_modeling_realms",
+                            realm=ValueSettings(key_type="variable", keys="modeling_realm",
                                                     func=FunctionSettings(func=convert_realm))
                         )
                     ))
@@ -171,7 +171,7 @@ project_settings = dict(
                 key="realm",
                 output_key="modeling_realm",
                 default_values=[
-                    ValueSettings(key_type="variable", keys="list_modeling_realms", func=FunctionSettings(func=convert_realm))
+                    ValueSettings(key_type="variable", keys="modeling_realm", func=FunctionSettings(func=convert_realm))
                 ]
             ),
             level_type=ParameterSettings(
