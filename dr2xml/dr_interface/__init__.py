@@ -51,6 +51,9 @@ def load_correct_dr():
     if data_request_version in ["CMIP6", ]:
         from .CMIP6 import data_request, DataRequest, initialize_data_request, get_data_request, \
             normalize_grid, SimpleDim, SimpleObject, SimpleCMORVar
+    elif data_request_version in ["CMIP7", ]:
+        from .CMIP7 import data_request, DataRequest, initialize_data_request, get_data_request, \
+            normalize_grid, SimpleDim, SimpleObject, SimpleCMORVar
     elif data_request_version in ["no", "none", "None", None]:
         from .no import data_request, DataRequest, initialize_data_request, get_data_request, \
             normalize_grid, SimpleDim, SimpleObject, SimpleCMORVar

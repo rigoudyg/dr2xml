@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="utf-8"?>
+<context id="arpsfx">
+	<!--CMIP6 Data Request version Software 1.1.2 - Content latest_stable-->
+	<!--dr2xml version 3.1-->
+	<!--Lab_and_model settings
+{'data_request_content_consolidation' = 'False',
+'data_request_content_directory' = 'None',
+'data_request_content_export' = 'release',
+'data_request_content_version' = 'latest_stable',
+'data_request_path' = '/home/rigoudyg/dev/data_request/CMIP7_DReq_Software',
+'data_request_used' = 'CMIP7',
+'excluded_vars' = [],
+'excluded_vars_file' = [],
+'institution_id' = 'CNRM-CERFACS',
+'listof_home_vars' = 'None',
+'max_priority' = '3',
+'mips' = {'AerChemMIP', 'AerChemMIP2', 'C4MIP', 'CDRMIP', 'CERESMIP', 'CFMIP', 'CMIP', 'CORDEX', 'DAMIP', 'DCPP', 'DynVarMIP', 'FAFMIP', 'FireMIP', 'FishMIP', 'GeoMIP', 'HT-MIP/VolMIP', 'HighResMIP', 'ISIMIP', 'ISMIP7', 'LMIP', 'LUMIP', 'LongRunMIP', 'NAHosMIP', 'OMIP', 'Other', 'PAMIP', 'PMIP', 'RAMIP', 'RFMIP', 'SIMIP', 'SOFIAMIP', 'ScenarioMIP', 'TIPMIP', 'VIACSAB', 'VolMIP', 'WhatIfMIP'},
+'path_extra_tables' = 'None',
+'path_special_defs' = './input/special_defs',
+'ping_variables_prefix' = 'CMIP7_',
+'project' = 'ping',
+'realms_per_context' = {'arpsfx' = ['aerosol', 'atmos', 'atmosChem', 'land', 'landIce'], 'nemo' = ['ocean', 'ocnBgchem', 'seaIce']},
+'tierMax' = '3'}-->
+	<!--Simulation settings
+{}-->
+	<!--Year processed None-->
+	<field_definition>
+		<field id="CMIP7_agesno" field_ref="?dummy_XY"/>
+		<!--P1 (day) age_of_surface_snow : When computing the time-mean here, the time samples, weighted by the mass of snow on the land portion of the grid cell, are accumulated and then divided by the sum of the weights.  Reported as "missing in regions free of snow on land.-->
+		<field id="CMIP7_areacella" field_ref="?dummy_XY"/>
+		<!--P1 (m2) cell_area : Cell areas for any grid used to report atmospheric variables and any other variable using that grid (e.g., soil moisture content). These cell areas should be defined to enable exact calculation of global integrals (e.g., of vertical fluxes of energy at the surface and top of the atmosphere).-->
+		<field id="CMIP7_areacellg" field_ref="?dummy_XY"/>
+		<!--P1 (m2) cell_area : Cell areas any grid used to report ice sheet variables. These cell areas should be defined to enable exact calculation of area integrals (e.g., of vertical fluxes of energy at the surface and top of the atmosphere)-->
+		<field id="CMIP7_areacellr" field_ref="?dummy_XY"/>
+		<!--P1 (m2) cell_area : Cell areas for any grid used to report river model variables (may be the same as for atmospheric variables). These cell areas should be defined to enable exact calculation of area integrals (e.g., of vertical fluxes of energy at the surface and top of the atmosphere).-->
+		<field id="CMIP7_baresoilFrac" field_ref="?dummy_XY"/>
+		<!--P1 (%) area_fraction : Percentage of entire grid cell  that is covered by bare soil.-->
+		<field id="CMIP7_bldep" field_ref="?dummy_XY"/>
+		<!--P1 (m) atmosphere_boundary_layer_thickness : Boundary Layer Depth every 3 hours-->
+		<field id="CMIP7_burntFractionAll" field_ref="?dummy_XY"/>
+		<!--P1 (%) area_fraction : Percentage of grid cell burned due to all fires including natural and anthropogenic fires and those associated with anthropogenic land use change-->
+		<field id="CMIP7_cGeologicStorage" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) undef : Mass of carbon that has been intentionally sequestered in geologic storage. The definition of geologic storage here is that it be stored for periods of time that are long as compared to the simulation.-->
+		<field id="CMIP7_cLand" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) mass_content_of_carbon_in_vegetation_and_litter_and_soil_and_forestry_and_agricultural_products : Report missing data over ocean grid cells. For fractional land report value averaged over the land fraction.-->
+		<field id="CMIP7_cLeaf" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) leaf_mass_content_of_carbon : Carbon mass per unit area in leaves.-->
+		<field id="CMIP7_cLitter" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) litter_mass_content_of_carbon : "Litter" is dead plant material in or above the soil. It is distinct from coarse wood debris. The precise distinction between "fine" and "coarse" is model dependent. "Content" indicates a quantity per unit area. The sum of the quantities with standard names surface\_litter\_mass\_content\_of\_carbon and subsurface\_litter\_mass\_content\_of\_carbon has the standard name litter\_mass\_content\_of\_carbon.-->
+		<field id="CMIP7_cLitterCwd" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) wood_debris_mass_content_of_carbon : "Content" indicates a quantity per unit area. "Wood debris" means dead organic matter composed of coarse wood. It is distinct from fine litter. The precise distinction between "fine" and "coarse" is model dependent.-->
+		<field id="CMIP7_cLitterLut" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) litter_mass_content_of_carbon : end of year values (not annual mean)-->
+		<field id="CMIP7_cLitterSubSurf" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) subsurface_litter_mass_content_of_carbon : subsurface litter pool fed by root inputs.-->
+		<field id="CMIP7_cLitterSurf" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) surface_litter_mass_content_of_carbon : Surface or near-surface litter pool fed by leaf and above-ground litterfall-->
+		<field id="CMIP7_cOther" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) miscellaneous_living_matter_mass_content_of_carbon : E.g. fruits, seeds, etc.-->
+		<field id="CMIP7_cProduct" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) carbon_mass_content_of_forestry_and_agricultural_products : Carbon mass per unit area in that has been removed from the environment through  land use change.-->
+		<field id="CMIP7_cProductLut" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) carbon_mass_content_of_forestry_and_agricultural_products : Anthropogenic pools associated with land use tiles into which harvests and cleared carbon are deposited before release into atmosphere PLUS any remaining anthropogenic pools that may be associated with lands which were converted into land use tiles during reported period. Examples of products include paper, cardboard, timber for construction, and crop harvest for food or fuel. Does NOT include residue which is deposited into soil or litter; end of year values (not annual mean).-->
+		<field id="CMIP7_cRoot" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) root_mass_content_of_carbon : including fine and coarse roots.-->
+		<field id="CMIP7_cSoil" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) soil_mass_content_of_carbon : Carbon mass in the full depth of the soil model.-->
+		<field id="CMIP7_cSoilAbove1m" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) soil_mass_content_of_carbon : Report missing data over ocean grid cells. For fractional land report value averaged over the land fraction.-->
+		<field id="CMIP7_cSoilLevels" field_ref="?dummy_XYSo_sdepth"/>
+		<!--P1 (kg m-2) soil_mass_content_of_carbon : for models with vertically discretised soil carbon, report total soil carbon for each level-->
+		<field id="CMIP7_cSoilLut" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) soil_mass_content_of_carbon : end of year values (not annual mean)-->
+		<field id="CMIP7_cSoilPools" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) soil_mass_content_of_carbon : For models with multiple soil carbon pools, report each pool here. If models also have vertical discretisation these should be aggregated-->
+		<field id="CMIP7_cStem" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) stem_mass_content_of_carbon : including sapwood and hardwood.-->
+		<field id="CMIP7_cVeg" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) vegetation_carbon_content : Carbon mass per unit area in vegetation.-->
+		<field id="CMIP7_cVegGrass" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) vegetation_carbon_content : "Content" indicates a quantity per unit area. "Vegetation" means any plants e.g. trees, shrubs, grass. Plants are autotrophs i.e. "producers" of biomass using carbon obtained from carbon dioxide.-->
+		<field id="CMIP7_cVegLut" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) vegetation_carbon_content : end of year values (not annual mean)-->
+		<field id="CMIP7_cVegShrub" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) vegetation_carbon_content : "Content" indicates a quantity per unit area. "Vegetation" means any plants e.g. trees, shrubs, grass. Plants are autotrophs i.e. "producers" of biomass using carbon obtained from carbon dioxide.-->
+		<field id="CMIP7_cVegTree" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) vegetation_carbon_content : "Content" indicates a quantity per unit area. "Vegetation" means any plants e.g. trees, shrubs, grass. Plants are autotrophs i.e. "producers" of biomass using carbon obtained from carbon dioxide.-->
+		<field id="CMIP7_cWood" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) stem_mass_content_of_carbon : Carbon Mass in Wood-->
+		<field id="CMIP7_cropFrac" field_ref="?dummy_XY"/>
+		<!--P1 (%) area_fraction : Percentage of entire grid cell  that is covered by crop.-->
+		<field id="CMIP7_cropFracC3" field_ref="?dummy_XY"/>
+		<!--P1 (%) area_fraction : Percentage of entire grid cell covered by C3 crops-->
+		<field id="CMIP7_cropFracC4" field_ref="?dummy_XY"/>
+		<!--P1 (%) area_fraction : Percentage of entire grid cell covered by C4 crops-->
+		<field id="CMIP7_dcw" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) change_over_time_in_canopy_water_amount : change\_over\_time\_in\_canopy\_water\_amount-->
+		<field id="CMIP7_depthl" field_ref="?dummy_XY"/>
+		<!--P1 (m) depth : depth of a lake; this relates to variable fx.sftlkf and provides additional information of the vertical extent of a lake which will influence the heat capacity among other things. This variable identifies differences in details of the treatment of lakes in climate models.-->
+		<field id="CMIP7_depthsl" field_ref="?dummy_XY"/>
+		<!--P1 (m) depth : Total depth of soil, summed up over all soil layers. To enable identification of differences in treatment of soils across climate models.-->
+		<field id="CMIP7_dgw" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) change_over_time_in_groundwater_amount : change\_over\_time\_in\_groundwater-->
+		<field id="CMIP7_drivw" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) change_over_time_in_river_water_amount : undef-->
+		<field id="CMIP7_dslw" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) change_over_time_in_mass_content_of_water_in_soil : undef-->
+		<field id="CMIP7_dsn" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) change_over_time_in_amount_of_ice_and_snow_on_land : undef-->
+		<field id="CMIP7_dsw" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) change_over_time_in_land_water_amount : undef-->
+		<field id="CMIP7_esn" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) water_evapotranspiration_flux : liquid\_water\_evaporation\_flux\_from\_surface\_snow-->
+		<field id="CMIP7_evspsbl" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) water_evapotranspiration_flux : Evaporation at surface (also known as evapotranspiration): flux of water into the atmosphere due to conversion of both liquid and solid phases to vapor (from underlying surface and vegetation)-->
+		<field id="CMIP7_evspsblpot" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) water_potential_evaporation_flux : at surface; potential flux of water into the atmosphere due to conversion of both liquid and solid phases to vapor (from underlying surface and vegetation)-->
+		<field id="CMIP7_evspsblsoi" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) water_evaporation_flux_from_soil : Water evaporation flux from soil but for daily averages i.e., the evspsblsoi variable, which is only currently defined for monthly averages-->
+		<field id="CMIP7_evspsblveg" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) water_evaporation_flux_from_canopy : The same as the current variable evspsblveg but defined on daily timescales.-->
+		<field id="CMIP7_fAnthDisturb" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_carbon_dioxide_expressed_as_carbon_due_to_anthropogenic_emission : Anthropogenic flux of carbon as carbon dioxide into the atmosphere. That is, emissions influenced, caused, or created by human activity. Anthropogenic emission of carbon dioxide includes fossil fuel use, cement production, agricultural burning and sources associated with anthropogenic land use change, except forest regrowth.-->
+		<field id="CMIP7_fBNF" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) tendency_of_soil_and_vegetation_mass_content_of_nitrogen_compounds_expressed_as_nitrogen_due_to_fixation : The fixation (uptake of nitrogen gas directly from the atmosphere) of nitrogen due to biological processes.-->
+		<field id="CMIP7_fCLandToOcean" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) mass_flux_of_carbon_into_sea_water_from_rivers : leached carbon etc that goes into run off or river routing and finds its way into ocean should be reported here.-->
+		<field id="CMIP7_fDeforestToAtmos" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_net_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_emission_from_anthropogenic_land_use_change : When land use change results in deforestation of natural vegetation (trees or grasslands) then natural biomass is removed. The treatment of deforested biomass differs significantly across models, but it should be straight-forward to compare deforested biomass across models.-->
+		<field id="CMIP7_fDeforestToProduct" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) carbon_mass_flux_into_forestry_and_agricultural_products_due_to_anthropogenic_land_use_or_land_cover_change : When land use change results in deforestation of natural vegetation (trees or grasslands) then natural biomass is removed. The treatment of deforested biomass differs significantly across models, but it should be straight-forward to compare deforested biomass across models.-->
+		<field id="CMIP7_fFire" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_emission_from_fires_excluding_anthropogenic_land_use_change : CO2 emissions (expressed as a carbon mass flux) from natural fires + human ignition fires as calculated by the fire module of the DGVM, but excluding any CO2 flux from fire included in fLuc, defined below (CO2 Flux to Atmosphere from Land Use Change).-->
+		<field id="CMIP7_fFireAll" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_emission_from_fires : From all sources,  Including natural, anthropogenic and Land-use change. Only total fire emissions can be compared to observations.-->
+		<field id="CMIP7_fFireNat" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_emission_from_natural_fires : CO2 emissions from natural fires-->
+		<field id="CMIP7_fHarvestToAtmos" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_emission_from_crop_harvesting : any harvested carbon that is assumed to decompose immediately into the atmosphere is reported here-->
+		<field id="CMIP7_fHarvestToGeologicStorage" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) undef : Flux of carbon harvested from biomass that goes into geologic storage for the purposes of intentional carbon dioxide removal, via efforts such as bioenergy with carbon capture and storage (BECCS) or biomass removal and storage (BiCRS). The definition of geologic storage here is that the resulting carbon be  stored for a period of time that is long relative to that of the simulation.-->
+		<field id="CMIP7_fHarvestToProduct" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) mass_flux_of_carbon_into_forestry_and_agricultural_products_due_to_crop_harvesting : be it food or wood harvest, any carbon that is subsequently stored is reported here-->
+		<field id="CMIP7_fLitterFire" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_emission_from_litter_in_fires : Required for unambiguous separation of vegetation and soil + litter turnover times, since total fire flux draws from both sources-->
+		<field id="CMIP7_fLitterSoil" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) carbon_mass_flux_into_soil_from_litter : Carbon mass flux per unit area into soil from litter (dead plant material in or above the soil).-->
+		<field id="CMIP7_fLuc" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_net_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_emission_from_anthropogenic_land_use_change : Net Carbon Mass Flux into Atmosphere due to Land Use Change-->
+		<field id="CMIP7_fLulccAtmLut" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_anthropogenic_land_use_or_land_cover_change_excluding_forestry_and_agricultural_products : This annual mean flux refers to the transfer of carbon directly to the atmosphere due to any land-use or land-cover change activities.  Include carbon transferred due to deforestation or agricultural directly into atmosphere, and  emissions form anthropogenic pools into atmosphere-->
+		<field id="CMIP7_fN2O" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_upward_mass_flux_of_nitrous_oxide_expressed_as_nitrogen_out_of_vegetation_and_litter_and_soil : Surface upward flux of nitrous oxide (N2O) from vegetation (any living plants e.g. trees, shrubs, grass), litter (dead plant material in or above the soil), soil.-->
+		<field id="CMIP7_fNAnthDisturb" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_nitrogen_compounds_expressed_as_nitrogen_due_to_anthropogenic_emission : will require some careful definition to make sure we capture everything - any human activity that releases nitrogen from land  instead of into product pool goes here. E.g. Deforestation fire, harvest assumed to decompose straight away, grazing...-->
+		<field id="CMIP7_fNLandToOcean" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) mass_flux_of_nitrogen_compounds_expressed_as_nitrogen_into_sea_from_rivers : leached nitrogen etc that goes into run off or river routing and finds its way into ocean should be reported here.-->
+		<field id="CMIP7_fNLitterSoil" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) nitrogen_mass_flux_into_soil_from_litter : In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics. "Litter" is dead plant material in or above the soil.-->
+		<field id="CMIP7_fNOx" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_upward_mass_flux_of_nox_expressed_as_nitrogen_out_of_vegetation_and_litter_and_soil : The surface called "surface" means the lower boundary of the atmosphere. "Upward" indicates a vector component which is positive when directed upward (negative downward). In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics. The phrase "expressed\_as" is used in the construction A\_expressed\_as\_B, where B is a chemical constituent of A. It means that the quantity indicated by the standard name is calculated solely with respect to the B contained in A, neglecting all other chemical constituents of A. "Nox" means a combination of two radical species containing nitrogen and oxygen NO+NO2. "Vegetation" means any living plants e.g. trees, shrubs, grass. "Litter" is dead plant material in or above the soil.-->
+		<field id="CMIP7_fNProduct" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) nitrogen_mass_flux_into_forestry_and_agricultural_products_due_to_anthropogenic_land_use_or_land_cover_change : When land use change results in deforestation of natural vegetation (trees or grasslands) then natural biomass is removed. The treatment of deforested biomass differs significantly across models, but it should be straight-forward to compare deforested biomass across models.-->
+		<field id="CMIP7_fNVegLitter" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) nitrogen_mass_flux_into_litter_from_vegetation : In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics. "Litter" is dead plant material in or above the soil. "Vegetation" means any living plants e.g. trees, shrubs, grass.-->
+		<field id="CMIP7_fNVegSoil" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) nitrogen_mass_flux_into_soil_from_vegetation_excluding_litter : In some models part of nitrogen (e.g., root exudate) can go directly into the soil pool without entering litter.-->
+		<field id="CMIP7_fNdep" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) minus_tendency_of_atmosphere_mass_content_of_nitrogen_compounds_expressed_as_nitrogen_due_to_deposition : Surface deposition rate of nitrogen.-->
+		<field id="CMIP7_fNfert" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) tendency_of_soil_mass_content_of_nitrogen_compounds_expressed_as_nitrogen_due_to_fertilization : Total Nitrogen added for cropland fertilisation (artificial and manure). Relative to total land area of a grid cell, not relative to agricultural area-->
+		<field id="CMIP7_fNgas" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_upward_mass_flux_of_nitrogen_compounds_expressed_as_nitrogen : Total flux of Nitrogen from the land into the atmosphere.-->
+		<field id="CMIP7_fNgasFire" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_upward_mass_flux_of_nitrogen_compounds_expressed_as_nitrogen_due_to_emission_from_fires : Flux of Nitrogen from the land into the atmosphere due to fire-->
+		<field id="CMIP7_fNgasNonFire" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_upward_mass_flux_of_nitrogen_compounds_expressed_as_nitrogen_due_to_all_land_processes_excluding_fires : Flux of Nitrogen from the land into the atmosphere due to all processes other than fire-->
+		<field id="CMIP7_fNleach" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) mass_flux_of_carbon_out_of_soil_due_to_leaching_and_runoff : In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics. The specification of a physical process by the phrase "due\_to\_" process means that the quantity named is a single term in a sum of terms which together compose the general quantity named by omitting the phrase. "Leaching" means the loss of water soluble chemical species from soil. Runoff is the liquid water which drains from land. If not specified, "runoff" refers to the sum of surface runoff and subsurface drainage.-->
+		<field id="CMIP7_fNloss" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_upward_mass_flux_of_nitrogen_compounds_expressed_as_nitrogen_out_of_vegetation_and_litter_and_soil : Not all models split losses into gaseous and leaching-->
+		<field id="CMIP7_fNnetmin" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) mass_flux_of_nitrogen_compounds_expressed_as_nitrogen_out_of_litter_and_soil_due_to_immobilisation_and_remineralization : Loss of soil nitrogen through remineralization and immobilisation. Remineralization is the degradation of organic matter into inorganic forms of carbon, nitrogen, phosphorus and other micronutrients, which consumes oxygen and releases energy. Immobilisation of nitrogen refers to retention of nitrogen by micro-organisms under certain conditions, making it unavailable for plants.-->
+		<field id="CMIP7_fNup" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) tendency_of_vegetation_mass_content_of_nitrogen_compounds_expressed_as_nitrogen_due_to_fixation : The uptake of nitrogen by fixation: nitrogen fixation means the uptake of nitrogen gas directly from the atmosphere.-->
+		<field id="CMIP7_fProductDecomp" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_carbon_dioxide_expressed_as_carbon_due_to_emission_from_forestry_and_agricultural_products : Flux of CO2 from product pools into the atmosphere. Examples of "forestry and agricultural products" are paper, cardboard, furniture, timber for construction, biofuels and food for both humans and livestock. Models that simulate land use changes have one or more pools of carbon that represent these products in order to conserve carbon and allow its eventual release into the atmosphere, for example, when the products decompose in landfill sites.-->
+		<field id="CMIP7_fVegFire" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_emission_from_vegetation_in_fires : Required for unambiguous separation of vegetation and soil + litter turnover times, since total fire flux draws from both sources-->
+		<field id="CMIP7_fVegLitter" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) mass_flux_of_carbon_into_litter_from_vegetation : In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics. "Vegetation" means any living plants e.g. trees, shrubs, grass. "Litter" is dead plant material in or above the soil. It is distinct from coarse wood debris. The precise distinction between "fine" and "coarse" is model dependent. The sum of the quantities with standard names mass\_flux\_of\_carbon\_into\_litter\_from\_vegetation\_due\_to\_mortality and mass\_flux\_of\_carbon\_into\_litter\_from\_vegetation\_due\_to\_senescence is mass\_flux\_of\_carbon\_into\_litter\_from\_vegetation.-->
+		<field id="CMIP7_fVegLitterMortality" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) mass_flux_of_carbon_into_litter_from_vegetation_due_to_mortality : needed to separate changing vegetation C turnover times resulting from changing allocation versus changing mortality-->
+		<field id="CMIP7_fVegLitterSenescence" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) mass_flux_of_carbon_into_litter_from_vegetation_due_to_senescence : needed to separate changing vegetation C turnover times resulting from changing allocation versus changing mortality-->
+		<field id="CMIP7_fVegSoil" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) carbon_mass_flux_into_soil_from_vegetation_excluding_litter : In some models part of carbon (e.g., root exudate) can go directly into the soil pool without entering litter.-->
+		<field id="CMIP7_fVegSoilMortality" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) mass_flux_of_carbon_into_soil_from_vegetation_due_to_mortality : needed to separate changing vegetation C turnover times resulting from changing allocation versus changing mortality-->
+		<field id="CMIP7_fVegSoilSenescence" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) mass_flux_of_carbon_into_soil_from_vegetation_due_to_senescence : needed to separate changing vegetation C turnover times resulting from changing allocation versus changing mortality-->
+		<field id="CMIP7_fracInLut" field_ref="?dummy_XY"/>
+		<!--P1 (%) area_fraction : Cumulative percentage transitions over the year; note that percentage should be reported as a percentage of atmospheric grid cell-->
+		<field id="CMIP7_fracLut" field_ref="?dummy_XY"/>
+		<!--P1 (%) area_fraction : End of year values (not annual mean); note that percentage should be reported as percentage of land grid cell (example: frac\_lnd = 0.5, frac\_ocn = 0.5, frac\_crop\_lnd = 0.2 (of land portion of grid cell), then frac\_lut(crop) = 0.5\*0.2 = 0.1)-->
+		<field id="CMIP7_fracOutLut" field_ref="?dummy_XY"/>
+		<!--P1 (%) area_fraction : Cumulative percentage transitions over the year; note that percentage should be reported as percentage of atmospheric grid cell-->
+		<field id="CMIP7_gpp" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) gross_primary_productivity_of_biomass_expressed_as_carbon : The rate of synthesis of biomass from inorganic precursors by autotrophs ("producers") expressed as the mass of carbon which it contains. For example, photosynthesis in plants or phytoplankton. The producers also respire some of this biomass and the difference is referred to as the net primary production.-->
+		<field id="CMIP7_gppGrass" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) gross_primary_productivity_of_biomass_expressed_as_carbon : Total GPP of grass in the grid cell-->
+		<field id="CMIP7_gppLut" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) gross_primary_productivity_of_biomass_expressed_as_carbon : The rate of synthesis of biomass from inorganic precursors by autotrophs ("producers") expressed as the mass of carbon which it contains. For example, photosynthesis in plants or phytoplankton. The producers also respire some of this biomass and the difference is referred to as the net primary production. Reported on land-use tiles.-->
+		<field id="CMIP7_gppShrub" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) gross_primary_productivity_of_biomass_expressed_as_carbon : Total GPP of shrubs in the grid cell-->
+		<field id="CMIP7_gppTree" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) gross_primary_productivity_of_biomass_expressed_as_carbon : Total GPP of trees in the grid cell-->
+		<field id="CMIP7_gppVgt" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) gross_primary_productivity_of_biomass_expressed_as_carbon : The rate of synthesis of biomass from inorganic precursors by autotrophs ("producers") expressed as the mass of carbon which it contains. For example, photosynthesis in plants or phytoplankton. The producers also respire some of this biomass and the difference is referred to as the net primary production. Reported on land-use tiles.-->
+		<field id="CMIP7_grassFrac" field_ref="?dummy_XY"/>
+		<!--P1 (%) area_fraction : Percentage of entire grid cell that is covered by natural grass.-->
+		<field id="CMIP7_grassFracC3" field_ref="?dummy_XY"/>
+		<!--P1 (%) area_fraction : Percentage of entire grid cell covered by C3 natural grass.-->
+		<field id="CMIP7_grassFracC4" field_ref="?dummy_XY"/>
+		<!--P1 (%) area_fraction : Percentage of entire grid cell covered by C4 natural grass.-->
+		<field id="CMIP7_hfdsl" field_ref="?dummy_XY"/>
+		<!--P1 (W m-2) surface_downward_heat_flux_in_air : Ground heat flux at 3hr-->
+		<field id="CMIP7_hfdsn" field_ref="?dummy_XY"/>
+		<!--P1 (W m-2) surface_downward_heat_flux_in_snow : Downward heat flux at snow top-->
+		<field id="CMIP7_hfls" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P1 (W m-2) surface_upward_latent_heat_flux : The surface called "surface" means the lower boundary of the atmosphere. "Upward" indicates a vector component which is positive when directed upward (negative downward). The surface latent heat flux is the exchange of heat between the surface and the air on account of evaporation (including sublimation). In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.-->
+		<field id="CMIP7_hflsLut" field_ref="?dummy_XY"/>
+		<!--P1 (W m-2) surface_upward_latent_heat_flux : The surface called "surface" means the lower boundary of the atmosphere. "Upward" indicates a vector component which is positive when directed upward (negative downward). The surface latent heat flux is the exchange of heat between the surface and the air on account of evaporation (including sublimation). In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.-->
+		<field id="CMIP7_hfss" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P1 (W m-2) surface_upward_sensible_heat_flux : The surface sensible heat flux, also called turbulent heat flux, is the exchange of heat between the surface and the air by motion of air.-->
+		<field id="CMIP7_hfssLut" field_ref="?dummy_XY"/>
+		<!--P1 (W m-2) surface_upward_sensible_heat_flux : Upward sensible heat flux on land use tiles. The surface sensible heat flux, also called turbulent heat flux, is the exchange of heat between the surface and the air by motion of air.-->
+		<field id="CMIP7_irrLut" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_downward_mass_flux_of_water_due_to_irrigation : Mass flux of water due to irrigation.-->
+		<field id="CMIP7_lai" field_ref="?dummy_XY"/>
+		<!--P1 (1) leaf_area_index : A ratio obtained by dividing the total upper leaf surface area of vegetation by the (horizontal) surface area of the land on which it grows.-->
+		<field id="CMIP7_laiLut" field_ref="?dummy_XY"/>
+		<!--P1 (1) leaf_area_index : A ratio obtained by dividing the total upper leaf surface area of vegetation by the (horizontal) surface area of the land on which it grows.-->
+		<field id="CMIP7_laiVgt" field_ref="?dummy_XY"/>
+		<!--P1 (1) leaf_area_index : A ratio obtained by dividing the total upper leaf surface area of vegetation by the (horizontal) surface area of the land on which it grows.-->
+		<field id="CMIP7_landCoverFrac" field_ref="?dummy_XY"/>
+		<!--P1 (%) area_fraction : The categories may differ from model to model, depending on their  PFT definitions.   This may include natural PFTs, anthropogenic PFTs, bare soil, lakes, urban areas, etc.   Sum of all should equal the fraction of the grid-cell that is land.-->
+		<field id="CMIP7_lithk" field_ref="?dummy_XY"/>
+		<!--P1 (m) land_ice_thickness : This variable identifies the thickness of a prescribed ice sheet. This information is relevant to better understand how different models treat ice. For models where an ice sheet is just orography + an ice sheet mask, the value should be set to zero. For models that explicitly resolve an ice sheet thickness, the thickness of the ice sheet should be provided.-->
+		<field id="CMIP7_lwsnl" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) liquid_water_content_of_surface_snow : liquid\_water\_content\_of\_snow\_layer-->
+		<field id="CMIP7_mrfso" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) soil_frozen_water_content : the mass (summed over all all layers) of frozen water.-->
+		<field id="CMIP7_mrro" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) runoff_flux : computed as the total runoff (including "drainage" through the base of the soil model) leaving the land portion of the grid cell divided by the land area in the grid cell.-->
+		<field id="CMIP7_mrroLi" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P1 (kg m-2 s-1) land_ice_runoff_flux : Runoff flux over land ice is the difference between any available liquid water in the snowpack less any refreezing. Computed as the sum of rainfall and melt of snow or ice less any refreezing or water retained in the snowpack-->
+		<field id="CMIP7_mrrob" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) subsurface_runoff_flux : subsurface\_runoff\_flux-->
+		<field id="CMIP7_mrros" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_runoff_flux : surface\_runoff\_flux-->
+		<field id="CMIP7_mrsfl" field_ref="?dummy_XYSo_sdepth"/>
+		<!--P1 (kg m-2) frozen_water_content_of_soil_layer : in each soil layer, the mass of water in ice phase.  Reported as "missing" for grid cells occupied entirely by "sea"-->
+		<field id="CMIP7_mrsll" field_ref="?dummy_XYSo_sdepth"/>
+		<!--P1 (kg m-2) liquid_water_content_of_soil_layer : in each soil layer, the mass of water in liquid phase.  Reported as "missing" for grid cells occupied entirely by "sea"-->
+		<field id="CMIP7_mrso" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) mass_content_of_water_in_soil : the mass per unit area  (summed over all soil layers) of water in all phases.-->
+		<field id="CMIP7_mrso10" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) mass_content_of_water_in_soil_layer : Soil moisture in the top 10 cm of the soil column-->
+		<field id="CMIP7_mrsofc" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) soil_moisture_content_at_field_capacity : reported "where land": divide the total water holding capacity of all the soil in the grid cell by the land area in the grid cell;  reported as "missing" where the land fraction is 0.-->
+		<field id="CMIP7_mrsol" field_ref="?dummy_XYSo_sdepth"/>
+		<!--P1 (kg m-2) mass_content_of_water_in_soil_layer : in each soil layer, the mass of water in all phases, including ice.  Reported as "missing" for grid cells occupied entirely by "sea"-->
+		<field id="CMIP7_mrsos" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) mass_content_of_water_in_soil_layer : the mass of water in all phases in a thin surface soil layer.-->
+		<field id="CMIP7_mrsosLut" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) mass_content_of_water_in_soil_layer : the mass of water in all phases in a thin surface layer; integrate over uppermost 10cm-->
+		<field id="CMIP7_mrsow" field_ref="?dummy_XY"/>
+		<!--P1 (1) volume_fraction_of_condensed_water_in_soil_at_field_capacity : relative\_soil\_moisture\_content\_above\_field\_capacity-->
+		<field id="CMIP7_mrtws" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) land_water_amount : requested for C4MIP, OCMIP/OMIP, LUMIP, ScenarioMIP, DECK, DAMIP, GeoMIP, LS3MIP, ??-->
+		<field id="CMIP7_nLand" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) mass_content_of_nitrogen_in_vegetation_and_litter_and_soil_and_forestry_and_agricultural_products : Report missing data over ocean grid cells. For fractional land report value averaged over the land fraction.-->
+		<field id="CMIP7_nLeaf" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) leaf_mass_content_of_nitrogen : "Content" indicates a quantity per unit area.-->
+		<field id="CMIP7_nLitter" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) litter_mass_content_of_nitrogen : Report missing data over ocean grid cells. For fractional land report value averaged over the land fraction.-->
+		<field id="CMIP7_nLitterCwd" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) wood_debris_mass_content_of_nitrogen : "Content" indicates a quantity per unit area. "Wood debris" means dead organic matter composed of coarse wood. It is distinct from fine litter. The precise distinction between "fine" and "coarse" is model dependent. The sum of the quantities with standard names wood\_debris\_mass\_content\_of\_nitrogen, surface\_litter\_mass\_content\_of\_nitrogen and subsurface\_litter\_mass\_content\_of\_nitrogen is the total nitrogen mass content of dead plant material.-->
+		<field id="CMIP7_nLitterSubSurf" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) subsurface_litter_mass_content_of_nitrogen : "Content" indicates a quantity per unit area. "Litter" is dead plant material in or above the soil. It is distinct from coarse wood debris. The precise distinction between "fine" and "coarse" is model dependent. "Subsurface litter" means the part of the litter mixed within the soil below the surface. The sum of the quantities with standard names wood\_debris\_mass\_content\_of\_nitrogen, surface\_litter\_mass\_content\_of\_nitrogen and subsurface\_litter\_mass\_content\_of\_nitrogen is the total nitrogen mass content of dead plant material.-->
+		<field id="CMIP7_nLitterSurf" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) surface_litter_mass_content_of_nitrogen : "Content" indicates a quantity per unit area. "Litter" is dead plant material in or above the soil. It is distinct from coarse wood debris. The precise distinction between "fine" and "coarse" is model dependent. "Surface litter" means the part of the litter resting above the soil surface. The sum of the quantities with standard names wood\_debris\_mass\_content\_of\_nitrogen, surface\_litter\_mass\_content\_of\_nitrogen and subsurface\_litter\_mass\_content\_of\_nitrogen is the total nitrogen mass content of dead plant material.-->
+		<field id="CMIP7_nMineral" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) soil_mass_content_of_inorganic_nitrogen_expressed_as_nitrogen : SUM of ammonium, nitrite, nitrate, etc over all soil layers-->
+		<field id="CMIP7_nMineralNH4" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) soil_mass_content_of_inorganic_ammonium_expressed_as_nitrogen : SUM of ammonium over all soil layers-->
+		<field id="CMIP7_nMineralNO3" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) soil_mass_content_of_inorganic_nitrate_expressed_as_nitrogen : SUM of nitrate over all soil layers-->
+		<field id="CMIP7_nOther" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) miscellaneous_living_matter_mass_content_of_nitrogen : E.g. fruits, seeds, etc.-->
+		<field id="CMIP7_nProduct" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) nitrogen_mass_content_of_forestry_and_agricultural_products : Report missing data over ocean grid cells. For fractional land report value averaged over the land fraction.-->
+		<field id="CMIP7_nRoot" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) root_mass_content_of_nitrogen : including fine and coarse roots.-->
+		<field id="CMIP7_nSoil" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) soil_mass_content_of_nitrogen : Report missing data over ocean grid cells. For fractional land report value averaged over the land fraction.-->
+		<field id="CMIP7_nStem" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) stem_mass_content_of_nitrogen : including sapwood and hardwood.-->
+		<field id="CMIP7_nVeg" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) vegetation_mass_content_of_nitrogen : Report missing data over ocean grid cells. For fractional land report value averaged over the land fraction.-->
+		<field id="CMIP7_nbp" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_net_downward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_all_land_processes : This is the net mass flux of carbon between land and atmosphere calculated as photosynthesis MINUS the sum of  plant and soil respiration, carbonfluxes  from fire, harvest, grazing  and land use change. Positive flux  is into the land.-->
+		<field id="CMIP7_necbLut" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_net_downward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_all_land_processes : Computed as npp minus heterotrophic respiration minus fire minus C leaching minus harvesting/clearing. Positive rate is into the land, negative rate is from the land.  Do not include fluxes from anthropogenic product pools to atmosphere-->
+		<field id="CMIP7_nep" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_net_downward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_all_land_processes_excluding_anthropogenic_land_use_change : Net Ecosystem Exchange-->
+		<field id="CMIP7_netAtmosLandCO2Flux" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_net_downward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_all_land_processes : Flux of carbon as carbon dioxide into the land. This flux should be reproducible by differencing the sum of all carbon pools (cVeg, cLitter, cSoil, and cProducts or equivalently cLand) from one time step to the next, except in the case of lateral transfer of carbon due to harvest, riverine transport of dissolved organic and/or inorganic carbon, or any other process (in which case the lateral\_carbon\_transfer\_over\_land term, see below, will be zero data).-->
+		<field id="CMIP7_npp" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) net_primary_productivity_of_biomass_expressed_as_carbon : "Production of carbon" means the production of biomass expressed as the mass of carbon which it contains. Net primary production is the excess of gross primary production (rate of synthesis of biomass from inorganic precursors) by autotrophs ("producers"), for example, photosynthesis in plants or phytoplankton, over the rate at which the autotrophs themselves respire some of this biomass. "Productivity" means production per unit area. The phrase "expressed\_as" is used in the construction A\_expressed\_as\_B, where B is a chemical constituent of A. It means that the quantity indicated by the standard name is calculated solely with respect to the B contained in A, neglecting all other chemical constituents of A.-->
+		<field id="CMIP7_nppGrass" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) net_primary_productivity_of_biomass_expressed_as_carbon : Total NPP of grass in the grid cell-->
+		<field id="CMIP7_nppLeaf" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) net_primary_productivity_of_biomass_expressed_as_carbon_accumulated_in_leaves : This is the rate of carbon uptake by leaves due to NPP-->
+		<field id="CMIP7_nppLut" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) net_primary_productivity_of_biomass_expressed_as_carbon : "Production of carbon" means the production of biomass expressed as the mass of carbon which it contains. Net primary production is the excess of gross primary production (rate of synthesis of biomass from inorganic precursors) by autotrophs ("producers"), for example, photosynthesis in plants or phytoplankton, over the rate at which the autotrophs themselves respire some of this biomass. "Productivity" means production per unit area. The phrase "expressed\_as" is used in the construction A\_expressed\_as\_B, where B is a chemical constituent of A. It means that the quantity indicated by the standard name is calculated solely with respect to the B contained in A, neglecting all other chemical constituents of A.-->
+		<field id="CMIP7_nppOther" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) net_primary_productivity_of_biomass_expressed_as_carbon_accumulated_in_miscellaneous_living_matter : added for completeness with npp\_root-->
+		<field id="CMIP7_nppRoot" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) net_primary_productivity_of_biomass_expressed_as_carbon_accumulated_in_roots : This is the rate of carbon uptake by roots due to NPP-->
+		<field id="CMIP7_nppShrub" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) net_primary_productivity_of_biomass_expressed_as_carbon : Total NPP of shrubs in the grid cell-->
+		<field id="CMIP7_nppStem" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) net_primary_productivity_of_biomass_expressed_as_carbon_accumulated_in_stems : added for completeness with npp\_root-->
+		<field id="CMIP7_nppTree" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) net_primary_productivity_of_biomass_expressed_as_carbon : Total NPP of trees in the grid cell-->
+		<field id="CMIP7_nppVgt" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) net_primary_productivity_of_biomass_expressed_as_carbon : "Production of carbon" means the production of biomass expressed as the mass of carbon which it contains. Net primary production is the excess of gross primary production (rate of synthesis of biomass from inorganic precursors) by autotrophs ("producers"), for example, photosynthesis in plants or phytoplankton, over the rate at which the autotrophs themselves respire some of this biomass. "Productivity" means production per unit area. The phrase "expressed\_as" is used in the construction A\_expressed\_as\_B, where B is a chemical constituent of A. It means that the quantity indicated by the standard name is calculated solely with respect to the B contained in A, neglecting all other chemical constituents of A.-->
+		<field id="CMIP7_orog" field_ref="?dummy_XY"/>
+		<!--P1 (m) surface_altitude : height above the geoid; as defined here, "the geoid" is a surface of constant geopotential that, if the ocean were at rest, would coincide with mean sea level. Under this definition, the geoid changes as the mean volume of the ocean changes (e.g., due to glacial melt, or global warming of the ocean).  Reported here is the height above the present-day geoid (0.0 over ocean).-->
+		<field id="CMIP7_pastureFrac" field_ref="?dummy_XY"/>
+		<!--P1 (%) area_fraction : fraction of entire grid cell  that is covered by anthropogenic pasture.-->
+		<field id="CMIP7_pastureFracC3" field_ref="?dummy_XY"/>
+		<!--P1 (%) area_fraction : Percentage of entire grid cell covered by C3 pasture-->
+		<field id="CMIP7_pastureFracC4" field_ref="?dummy_XY"/>
+		<!--P1 (%) area_fraction : Percentage of entire grid cell covered by C4 pasture-->
+		<field id="CMIP7_pflw" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) liquid_water_content_of_permafrost_layer : liquid\_water\_content\_of\_permafrost\_layer-->
+		<field id="CMIP7_prra" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P1 (kg m-2 s-1) rainfall_flux : over Land Ice//quantity averaged over ice sheet (grounded ice sheet and floating ice shelf) only. Needed to analyse the impact of downscaling methods-->
+		<field id="CMIP7_prsn" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P1 (kg m-2 s-1) snowfall_flux : quantity averaged over ice sheet (grounded ice sheet and floating ice shelf) only. Needed to analyse the impact of downscaling methods-->
+		<field id="CMIP7_prveg" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) precipitation_flux_onto_canopy : the precipitation flux that is intercepted by the vegetation canopy (if present in model) before reaching the ground.-->
+		<field id="CMIP7_qgwr" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) downward_liquid_water_mass_flux_into_groundwater : water\_flux\_from\_soil\_layer\_to\_groundwater-->
+		<field id="CMIP7_ra" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_plant_respiration : Carbon mass flux per unit area into atmosphere due to autotrophic respiration on land (respiration by producers) [see rh for heterotrophic production]-->
+		<field id="CMIP7_raGrass" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_plant_respiration : Total RA of grass in the grid cell-->
+		<field id="CMIP7_raLeaf" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_plant_respiration_in_leaves : added for completeness with Ra\_root-->
+		<field id="CMIP7_raLut" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_plant_respiration : Carbon mass flux per unit area into atmosphere due to autotrophic respiration on land (respiration by producers) [see rh for heterotrophic production]. Calculated on land-use tiles.-->
+		<field id="CMIP7_raOther" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_plant_respiration_in_miscellaneous_living_matter : added for completeness with Ra\_root-->
+		<field id="CMIP7_raRoot" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_plant_respiration_in_roots : Total autotrophic respiration from all belowground plant parts.  This has benchmarking value because the sum of Rh and root respiration can be compared to observations of total soil respiration.-->
+		<field id="CMIP7_raShrub" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_plant_respiration : Total RA of shrubs in the grid cell-->
+		<field id="CMIP7_raStem" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_plant_respiration_in_stems : added for completeness with Ra\_root-->
+		<field id="CMIP7_raTree" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_plant_respiration : Total RA of trees in the grid cell-->
+		<field id="CMIP7_raVgt" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_plant_respiration : Carbon mass flux per unit area into atmosphere due to autotrophic respiration on land (respiration by producers) [see rh for heterotrophic production]. Calculated on vegetation type.-->
+		<field id="CMIP7_residualFrac" field_ref="?dummy_XY"/>
+		<!--P1 (%) area_fraction : Percentage of entire grid cell  that is land and is covered by  neither vegetation nor bare-soil (e.g., urban, ice, lakes, etc.)-->
+		<field id="CMIP7_rh" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_heterotrophic_respiration : Carbon mass flux per unit area into atmosphere due to heterotrophic respiration on land (respiration by consumers)-->
+		<field id="CMIP7_rhGrass" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_heterotrophic_respiration : Total RH of grass in the grid cell-->
+		<field id="CMIP7_rhLitter" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_due_to_heterotrophic_respiration_in_litter : Needed to calculate litter bulk turnover time. Includes respiration from CWD as well.-->
+		<field id="CMIP7_rhLut" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_heterotrophic_respiration : Carbon mass flux per unit area into atmosphere due to heterotrophic respiration on land (respiration by consumers), calculated on land-use tiles.-->
+		<field id="CMIP7_rhShrub" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_heterotrophic_respiration : Total RH of shrubs in the grid cell-->
+		<field id="CMIP7_rhSoil" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_due_to_heterotrophic_respiration_in_soil : Needed to calculate soil bulk turnover time-->
+		<field id="CMIP7_rhTree" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_heterotrophic_respiration : Total RH of trees in the grid cell-->
+		<field id="CMIP7_rhVgt" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_heterotrophic_respiration : Carbon mass flux per unit area into atmosphere due to heterotrophic respiration on land (respiration by consumers), calculated on vegetation type.-->
+		<field id="CMIP7_rivi" field_ref="?dummy_XY"/>
+		<!--P1 (m3 s-1) incoming_water_volume_transport_along_river_channel : water\_flux\_to\_downstream-->
+		<field id="CMIP7_rivo" field_ref="?dummy_XY"/>
+		<!--P1 (m3 s-1) outgoing_water_volume_transport_along_river_channel : water\_flux\_from\_upstream-->
+		<field id="CMIP7_rlds" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P1 (W m-2) surface_downwelling_longwave_flux_in_air : The surface called "surface" means the lower boundary of the atmosphere. "longwave" means longwave radiation. Downwelling radiation is radiation from above. It does not mean "net downward". When thought of as being incident on a surface, a radiative flux is sometimes called "irradiance". In addition, it is identical with the quantity measured by a cosine-collector light-meter and sometimes called "vector irradiance". In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.-->
+		<field id="CMIP7_rlus" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P1 (W m-2) surface_upwelling_longwave_flux_in_air : The surface called "surface" means the lower boundary of the atmosphere. "longwave" means longwave radiation. Upwelling radiation is radiation from below. It does not mean "net upward". When thought of as being incident on a surface, a radiative flux is sometimes called "irradiance". In addition, it is identical with the quantity measured by a cosine-collector light-meter and sometimes called "vector irradiance". In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.-->
+		<field id="CMIP7_rootd" field_ref="?dummy_XY"/>
+		<!--P1 (m) root_depth : report the maximum soil depth reachable by plant roots (if defined in model), i.e., the maximum soil depth from which they can extract moisture; report as "missing" where the land fraction is 0.-->
+		<field id="CMIP7_rsds" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P1 (W m-2) surface_downwelling_shortwave_flux_in_air : Surface solar irradiance for UV calculations.-->
+		<field id="CMIP7_rsdsis" field_ref="?dummy_XY"/>
+		<!--P1 (W m-2) surface_downwelling_shortwave_flux_in_air : surface downwelling shortwave radiation over land ice, computed as the average albedo of the land ice covered part of a grid cell (mask: fx.sftgif for models with fixed ice sheets, LImon.sftgif for models with dynamic ice sheets)-->
+		<field id="CMIP7_rsdslni" field_ref="?dummy_XY"/>
+		<!--P1 (W m-2) surface_downwelling_shortwave_flux_in_air : surface downwelling shortwave radiation over land, computed as the average albedo of the ice-free part of a grid cell-->
+		<field id="CMIP7_rsdss" field_ref="?dummy_XY"/>
+		<!--P1 (W m-2) surface_downwelling_shortwave_flux_in_air : surface downwelling shortwave radiation over snow covered surfaces, computed as the average albedo of the snow-covered part of a grid cell-->
+		<field id="CMIP7_rsus" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P1 (W m-2) surface_upwelling_shortwave_flux_in_air : The surface called "surface" means the lower boundary of the atmosphere. "shortwave" means shortwave radiation. Upwelling radiation is radiation from below. It does not mean "net upward". When thought of as being incident on a surface, a radiative flux is sometimes called "irradiance". In addition, it is identical with the quantity measured by a cosine-collector light-meter and sometimes called "vector irradiance". In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.-->
+		<field id="CMIP7_rsusis" field_ref="?dummy_XY"/>
+		<!--P1 (W m-2) surface_upwelling_shortwave_flux_in_air : surface upwelling shortwave radiation over land ice, computed as the average albedo of the land ice covered part of a grid cell (mask: fx.sftgif for models with fixed ice sheets, LImon.sftgif for models with dynamic ice sheets)-->
+		<field id="CMIP7_rsuslni" field_ref="?dummy_XY"/>
+		<!--P1 (W m-2) surface_upwelling_shortwave_flux_in_air : surface upwelling shortwave radiation over land, computed as the average albedo of the ice-free part of a grid cell-->
+		<field id="CMIP7_rsuss" field_ref="?dummy_XY"/>
+		<!--P1 (W m-2) surface_upwelling_shortwave_flux_in_air : surface upwelling shortwave radiation over snow covered surfaces, computed as the average albedo of the snow-covered part of a grid cell-->
+		<field id="CMIP7_rzwc" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) mass_content_of_water_in_soil_layer_defined_by_root_depth : water\_content\_of\_root\_zone-->
+		<field id="CMIP7_sftgif" field_ref="?dummy_XY"/>
+		<!--P1 (%) land_ice_area_fraction : fraction of grid cell occupied by "permanent" ice (i.e., glaciers).-->
+		<field id="CMIP7_sftlkf" field_ref="?dummy_XY"/>
+		<!--P1 (1) area_fraction : This variable describes the fraction of a land surface grid cell that is characterized as lake. It shall complement variable fx.sftlf that defines the fraction of land for a grid cell, while information of the lake fraction could only be indirectly derived (e.g. via LMon.LandCoverFrac). For grid cells fully covered by lake the value should be 1, for grid cells without lake coverage the value should be zero.-->
+		<field id="CMIP7_shrubFrac" field_ref="?dummy_XY"/>
+		<!--P1 (%) area_fraction : Percentage of entire grid cell  that is covered by shrub.-->
+		<field id="CMIP7_slthick" field_ref="?dummy_XYSo_sdepth"/>
+		<!--P1 (m) cell_thickness : Thickness of Soil Layers-->
+		<field id="CMIP7_snc" field_ref="?dummy_XY"/>
+		<!--P1 (%) surface_snow_area_fraction : Percentage of each grid cell that is occupied by snow that rests on land portion of cell.-->
+		<field id="CMIP7_snd" field_ref="?dummy_XY"/>
+		<!--P1 (m) surface_snow_thickness : where land over land, this is computed as the mean thickness of snow in the land portion of the grid cell (averaging over the entire land portion, including the snow-free fraction).  Reported as 0.0 where the land fraction is 0.-->
+		<field id="CMIP7_snm" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_snow_melt_flux : surface\_snow\_and\_ice\_melt\_flux-->
+		<field id="CMIP7_snw" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) surface_snow_amount : the mass of surface snow on the land portion of the grid cell divided by the land area in the grid cell; reported as missing where the land fraction is 0; excludes snow on vegetation canopy or on sea ice.-->
+		<field id="CMIP7_sootsn" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) soot_content_of_surface_snow : the entire land portion of the grid cell is considered, with snow soot content set to 0.0 in regions free of snow.-->
+		<field id="CMIP7_srfrad" field_ref="?dummy_XY"/>
+		<!--P1 (W m-2) surface_net_downward_radiative_flux : Net radiative flux at surface-->
+		<field id="CMIP7_sw" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) land_surface_liquid_water_amount : Total liquid water storage, other than soil, snow or interception storage (i.e. lakes, river channel or depression storage).-->
+		<field id="CMIP7_sweLut" field_ref="?dummy_XY"/>
+		<!--P1 (m) lwe_thickness_of_surface_snow_amount : The surface called "surface" means the lower boundary of the atmosphere. "lwe" means liquid water equivalent. "Amount" means mass per unit area. The construction lwe\_thickness\_of\_X\_amount or \_content means the vertical extent of a layer of liquid water having the same mass per unit area. Surface amount refers to the amount on the ground, excluding that on the plant or vegetation canopy.-->
+		<field id="CMIP7_tas" field_ref="?dummy_XY"/>
+		<!--P1 (K) air_temperature : Hourly Temperature at 2m above the surface-->
+		<field id="CMIP7_tasLut" field_ref="?dummy_XY"/>
+		<!--P1 (K) air_temperature : Air temperature is the bulk temperature of the air, not the surface (skin) temperature.-->
+		<field id="CMIP7_tpf" field_ref="?dummy_XY"/>
+		<!--P1 (m) permafrost_layer_thickness : permafrost\_layer\_thickness-->
+		<field id="CMIP7_tran" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) transpiration_flux : Transpiration-->
+		<field id="CMIP7_treeFrac" field_ref="?dummy_XY"/>
+		<!--P1 (%) area_fraction : Percentage of entire grid cell  that is covered by trees.-->
+		<field id="CMIP7_treeFracBdlDcd" field_ref="?dummy_XY"/>
+		<!--P1 (%) area_fraction : This is the percentage of the entire grid cell that is covered by broadleaf deciduous trees.-->
+		<field id="CMIP7_treeFracBdlEvg" field_ref="?dummy_XY"/>
+		<!--P1 (%) area_fraction : This is the percentage of the entire grid cell that is covered by broadleaf evergreen trees.-->
+		<field id="CMIP7_treeFracNdlDcd" field_ref="?dummy_XY"/>
+		<!--P1 (%) area_fraction : This is the percentage of the entire grid cell that is covered by needleleaf deciduous trees.-->
+		<field id="CMIP7_treeFracNdlEvg" field_ref="?dummy_XY"/>
+		<!--P1 (%) area_fraction : This is the percentage of the entire grid cell that is covered by needleleaf evergreen trees.-->
+		<field id="CMIP7_ts" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P1 (K) surface_temperature : quantity averaged over ice sheet (grounded ice sheet and floating ice shelf) only. Needed to analyse the impact of downscaling methods-->
+		<field id="CMIP7_tsl" field_ref="?dummy_XYSo_sdepth"/>
+		<!--P1 (K) soil_temperature : Temperature of each soil layer.  Reported as "missing" for grid cells occupied entirely by "sea".-->
+		<field id="CMIP7_tslsi" field_ref="?dummy_XY"/>
+		<!--P1 (K) surface_temperature : Surface temperature of all surfaces except open ocean.-->
+		<field id="CMIP7_tslsiLut" field_ref="?dummy_XY"/>
+		<!--P1 (K) surface_temperature : Surface temperature (i.e. temperature at which long-wave radiation emitted)-->
+		<field id="CMIP7_tsn" field_ref="?dummy_XY"/>
+		<!--P1 (K) temperature_in_surface_snow : This temperature is averaged over all the snow in the grid cell that rests on land or land ice.  When computing the time-mean here, the time samples, weighted by the mass of snow on the land portion of the grid cell, are accumulated and then divided by the sum of the weights.   Reported as "missing in regions free of snow on land.-->
+		<field id="CMIP7_vegFrac" field_ref="?dummy_XY"/>
+		<!--P1 (%) area_fraction : Percentage of grid cell that is covered by vegetation.This SHOULD be the sum of tree, grass (natural and pasture), crop and shrub fractions.-->
+		<field id="CMIP7_vegHeight" field_ref="?dummy_XY"/>
+		<!--P1 (m) canopy_height : Vegetation height averaged over all vegetation types and over the vegetated fraction of a grid cell.-->
+		<field id="CMIP7_vegHeightGrass" field_ref="?dummy_XY"/>
+		<!--P1 (m) canopy_height : Vegetation height averaged over the grass fraction of a grid cell.-->
+		<field id="CMIP7_vegHeightShrub" field_ref="?dummy_XY"/>
+		<!--P1 (m) canopy_height : Vegetation height averaged over the shrub fraction of a grid cell.-->
+		<field id="CMIP7_vegHeightTree" field_ref="?dummy_XY"/>
+		<!--P1 (m) canopy_height : Vegetation height averaged over the tree fraction of a grid cell.-->
+		<field id="CMIP7_wetlandCH4" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_net_upward_mass_flux_of_methane_due_to_emission_from_wetland_biological_processes : Net upward flux of methane (NH4) from wetlands (areas where water covers the soil, or is present either at or near the surface of the soil all year or for varying periods of time during the year, including during the growing season).-->
+		<field id="CMIP7_wetlandCH4cons" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_downward_mass_flux_of_methane_due_to_wetland_biological_consumption : Biological consumption (methanotrophy) of methane (NH4) by wetlands (areas where water covers the soil, or is present either at or near the surface of the soil all year or for varying periods of time during the year, including during the growing season).-->
+		<field id="CMIP7_wetlandCH4prod" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_upward_mass_flux_of_methane_due_to_emission_from_wetland_biological_production : Biological emissions (methanogenesis) of methane (NH4) from wetlands (areas where water covers the soil, or is present either at or near the surface of the soil all year or for varying periods of time during the year, including during the growing season).-->
+		<field id="CMIP7_wetlandFrac" field_ref="?dummy_XY"/>
+		<!--P1 (%) area_fraction : Percentage of grid cell covered by wetland. Report only one year if  fixed percentage is used, or time series if values are determined dynamically.-->
+		<field id="CMIP7_wtd" field_ref="?dummy_XY"/>
+		<!--P1 (m) water_table_depth : depth\_of\_soil\_moisture\_saturation-->
+	</field_definition>
+</context>

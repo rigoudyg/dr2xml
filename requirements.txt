@@ -4,6 +4,7 @@ sphinx_rtd_theme
 # dreq
 # scope
 dreqPy
+CMIP7_DReq_Software
 coverage
 xlsxwriter
 six

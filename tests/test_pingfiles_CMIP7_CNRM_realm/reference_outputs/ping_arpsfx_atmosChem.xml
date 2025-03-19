@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<context id="arpsfx">
+	<!--CMIP6 Data Request version Software 1.1.2 - Content latest_stable-->
+	<!--dr2xml version 3.1-->
+	<!--Lab_and_model settings
+{'data_request_content_consolidation' = 'False',
+'data_request_content_directory' = 'None',
+'data_request_content_export' = 'release',
+'data_request_content_version' = 'latest_stable',
+'data_request_path' = '/home/rigoudyg/dev/data_request/CMIP7_DReq_Software',
+'data_request_used' = 'CMIP7',
+'excluded_vars' = [],
+'excluded_vars_file' = [],
+'institution_id' = 'CNRM-CERFACS',
+'listof_home_vars' = 'None',
+'max_priority' = '3',
+'mips' = {'AerChemMIP', 'AerChemMIP2', 'C4MIP', 'CDRMIP', 'CERESMIP', 'CFMIP', 'CMIP', 'CORDEX', 'DAMIP', 'DCPP', 'DynVarMIP', 'FAFMIP', 'FireMIP', 'FishMIP', 'GeoMIP', 'HT-MIP/VolMIP', 'HighResMIP', 'ISIMIP', 'ISMIP7', 'LMIP', 'LUMIP', 'LongRunMIP', 'NAHosMIP', 'OMIP', 'Other', 'PAMIP', 'PMIP', 'RAMIP', 'RFMIP', 'SIMIP', 'SOFIAMIP', 'ScenarioMIP', 'TIPMIP', 'VIACSAB', 'VolMIP', 'WhatIfMIP'},
+'path_extra_tables' = 'None',
+'path_special_defs' = './input/special_defs',
+'ping_variables_prefix' = 'CMIP7_',
+'project' = 'ping',
+'realms_per_context' = {'arpsfx' = ['aerosol', 'atmos', 'atmosChem', 'land', 'landIce'], 'nemo' = ['ocean', 'ocnBgchem', 'seaIce']},
+'tierMax' = '3'}-->
+	<!--Simulation settings
+{}-->
+	<!--Year processed None-->
+	<field_definition>
+		<field id="CMIP7_cfc113global" field_ref="?dummy_0d"/>
+		<!--P1 (1E-12) mole_fraction_of_cfc113_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.  The chemical formula of CFC113 is CCl2FCClF2.  The IUPAC name for CFC113 is 1,1,2-trichloro-1,2,2-trifluoro-ethane.-->
+		<field id="CMIP7_cfc11global" field_ref="?dummy_0d"/>
+		<!--P1 (1E-12) mole_fraction_of_cfc11_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.  The chemical formula of CFC11 is CFCl3.  The IUPAC name for CFC11 is trichloro-fluoro-methane.-->
+		<field id="CMIP7_cfc12global" field_ref="?dummy_0d"/>
+		<!--P1 (1E-12) mole_fraction_of_cfc12_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.  The chemical formula of CFC12 is CF2Cl2.  The IUPAC name for CFC12 is dichloro-difluoro-methane.-->
+		<field id="CMIP7_ch4" field_ref="?dummy_XY_plev19"/>
+		<!--P1 (mol mol-1) mole_fraction_of_methane_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.-->
+		<field id="CMIP7_ch4global" field_ref="?dummy_0d"/>
+		<!--P1 (1E-09) mole_fraction_of_methane_in_air : Global Mean Mole Fraction of CH4-->
+		<field id="CMIP7_flashrate" field_ref="?dummy_XY"/>
+		<!--P1 (km-2 s-1) frequency_of_lightning_flashes_per_unit_area : Lightning Flash Rate-->
+		<field id="CMIP7_hcfc22global" field_ref="?dummy_0d"/>
+		<!--P1 (1E-12) mole_fraction_of_hcfc22_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.  A chemical species denoted by X may be described by a single term such as 'nitrogen' or a phrase such as 'nox\_expressed\_as\_nitrogen'. The chemical formula for HCFC22 is CHClF2.  The IUPAC name for HCFC22 is chloro-difluoro-methane.-->
+		<field id="CMIP7_n2o" field_ref="?dummy_XY_plev19"/>
+		<!--P1 (mol mol-1) mole_fraction_of_nitrous_oxide_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.   The chemical formula of  nitrous oxide is N2O.-->
+		<field id="CMIP7_n2oglobal" field_ref="?dummy_0d"/>
+		<!--P1 (1E-09) mole_fraction_of_nitrous_oxide_in_air : Global mean Nitrous Oxide (N2O)-->
+		<field id="CMIP7_o3" field_ref="?dummy_XY_plev19"/>
+		<!--P1 (mol mol-1) mole_fraction_of_ozone_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.-->
+		<field id="CMIP7_ap" field_ref="dummy_hyb"/>
+		<!--One of the hybrid coordinate arrays-->
+		<field id="CMIP7_ap_bnds" field_ref="dummy_hyb"/>
+		<!--One of the hybrid coordinate arrays-->
+		<field id="CMIP7_b" field_ref="dummy_hyb"/>
+		<!--One of the hybrid coordinate arrays-->
+		<field id="CMIP7_b_bnds" field_ref="dummy_hyb"/>
+		<!--One of the hybrid coordinate arrays-->
+	</field_definition>
+</context>

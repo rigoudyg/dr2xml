@@ -242,7 +242,7 @@ def analyze_ambiguous_mip_varnames(debug=[]):
     logger = get_logger()
     d = OrderedDict()
     data_request = get_dr_object("get_data_request")
-    for v in data_request.get_list_by_id('var').items:
+    for v in data_request.get_list_by_id('var'):
         if v.label not in d:
             d[v.label] = []
             if v.label in debug:

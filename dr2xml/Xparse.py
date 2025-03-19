@@ -169,7 +169,7 @@ def attrib_by_ref(elt, attrib, index, level):
             if rep:
                 return rep
         except:
-            if not refid.startswith("dummy_"):
+            if not "dummy" in refid:
                 raise XparseError("Error : reference '%s' is invalid" % refid)
 
 
