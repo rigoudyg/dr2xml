@@ -240,19 +240,8 @@ def analyze_ambiguous_mip_varnames(debug=[]):
     # Compute a dict which keys are MIP varnames and values = list
     # of CMORvars items for the varname
     logger = get_logger()
-    d = OrderedDict()
     data_request = get_dr_object("get_data_request")
-    for v in data_request.get_list_by_id('var'):
-        if v.label not in d:
-            d[v.label] = []
-            if v.label in debug:
-                logger.debug("Adding %s" % v.label)
-        refs = data_request.get_request_by_id_by_sect(v.uid, 'CMORvar')
-        for r in refs:
-            ref = data_request.get_element_uid(r, elt_type="variable")
-            d[v.label].append(ref)
-            if v.label in debug:
-                logger.debug("Adding CmorVar %s(%s) for %s" % (v.label, ref.mipTable, ref.label))
+    d = data_request.get_variables_per_label(debug=debug)
 
     # Replace dic values by dic of area portion of cell_methods
     for vlabel in d:

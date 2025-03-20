@@ -37,6 +37,9 @@ class DataRequest(object):
         """
         raise NotImplementedError()
 
+    def get_variables_per_label(self, debug=list()):
+        return OrderedDict()
+
     def get_list_by_id(self, collection, **kwargs):
         """
         Get the collection corresponding to the collection id.

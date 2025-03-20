@@ -663,7 +663,7 @@ on
     # TBS# from os import path as os_path
     # TBS# prog_path=os_path.abspath(os_path.split(__file__)[0])
 
-    print("* %29s" % "CMIP6 Data Request version: ", get_dr_object("get_data_request").get_version())
+    print("* %29s" % "{} Data Request version: ".format(internal_settings["data_request_used"]), get_dr_object("get_data_request").get_version())
     print("\n*\n {}".format(50 * "*"))
 
     logger = get_logger()

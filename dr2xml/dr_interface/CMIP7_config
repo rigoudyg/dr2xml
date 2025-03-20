@@ -1,0 +1,6 @@
+cache_dir: /home/rigoudyg/dev/DR2XML/CMIP7_data_request_cache
+consolidate: false
+export: release
+log_file: default
+log_level: info
+offline: true

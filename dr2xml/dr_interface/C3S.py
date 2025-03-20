@@ -35,7 +35,7 @@ data_request = None
 
 class DataRequest(DataRequestBasic):
     def get_version(self):
-        return "No Data Request"
+        return "undef"
 
     def get_list_by_id(self, collection, **kwargs):
         return ListWithItems()

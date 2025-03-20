@@ -60,6 +60,22 @@ class DataRequest(DataRequestBasic):
             rep = [SimpleCMORVar.get_from_dr(elt, id=elt.uid) for elt in rep.items]
         return rep
 
+    def get_variables_per_label(self, debug=list()):
+        logger = get_logger()
+        rep = OrderedDict()
+        for v in self.get_list_by_id("var").items:
+            if v.label not in rep:
+                rep[v.label] = []
+                if v.label in debug:
+                    logger.debug("Adding %s" % v.label)
+            refs = self.get_request_by_id_by_sect(v.uid, 'CMORvar')
+            for r in refs:
+                ref = self.get_element_uid(r, elt_type="variable")
+                rep[v.label].append(ref)
+                if v.label in debug:
+                    logger.debug("Adding CmorVar %s(%s) for %s" % (v.label, ref.mipTable, ref.label))
+        return rep
+
     def get_sectors_list(self):
         """
         Get the sectors list.
@@ -355,6 +371,8 @@ class DataRequest(DataRequestBasic):
     def get_element_uid(self, id=None, error_msg=None, raise_on_error=False, check_print_DR_errors=True,
                         check_print_stdnames_error=False, elt_type=None, **kwargs):
         logger = get_logger()
+        if elt_type in ["dim", ] and not id.startswith("dim:"):
+            id = 'dim:{}'.format(id)
         if id is None:
             rep = self.data_request.inx.uid
         elif id in self.data_request.inx.uid:

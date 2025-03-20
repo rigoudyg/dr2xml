@@ -6,9 +6,6 @@ lab_and_model_settings = {
     'data_request_used': 'CMIP7',
     'data_request_path': '/home/rigoudyg/dev/data_request/CMIP7_DReq_Software',
     'data_request_content_version': 'latest_stable',
-    'data_request_content_export': 'release',
-    'data_request_content_consolidation': False,
-    'data_request_content_directory': None,
     'project': 'CMIP7',
     'path_to_parse': '{path_xml}/',
     'comment': '',
@@ -16,9 +13,8 @@ lab_and_model_settings = {
     'references': 'http://www.umr-cnrm.fr/cmip6/references',
     # 'excluded_tables': ['Eyr', 'Oyr', 'Odec', 'IfxAnt', 'ImonAnt'],
     'realms_per_context': {
-        'nemo': ['seaIce', 'ocean', 'ocean seaIce', 'ocnBgChem', 'seaIce ocean'],
-        'surfex': ['atmos', 'atmos atmosChem', 'atmosChem', 'aerosol', 'atmos land', 'land', 'landIce land', 'aerosol',
-                   'land landIce', 'landIce'],
+        'nemo': ['seaIce', 'ocean', 'ocnBgChem'],
+        'surfex': ['atmos', 'atmosChem', 'aerosol', 'land', 'aerosol','landIce'],
         'trip': []
     },
     'fx_from_file': {

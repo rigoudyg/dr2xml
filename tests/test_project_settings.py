@@ -12,7 +12,8 @@ from copy import copy
 import sys
 import os
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+project_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(project_dir)
 
 from dr2xml.config import initialize_config_variables
 from dr2xml.settings_interface import initialize_settings, get_settings_values
@@ -72,9 +73,7 @@ class TestProjectSettings(unittest.TestCase):
 		                'bytes_per_float': 2,
 		                'configuration': None,
 		                'context': 'arpsfx',
-		                'data_request_content_consolidation': False,
-		                'data_request_content_directory': None,
-		                'data_request_content_export': 'release',
+		                'data_request_config': f'{project_dir}/dr2xml/dr_interface/CMIP7_config',
 		                'data_request_content_version': 'latest_stable',
 		                'data_request_path': None,
 		                'data_request_used': 'CMIP6',

@@ -7,6 +7,7 @@ dr2xml specific project settings
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+import os.path
 
 from dr2xml.projects.projects_interface_definitions import ValueSettings, ParameterSettings, TagSettings, \
 	FunctionSettings, CaseSettings, ConditionSettings
@@ -1185,31 +1186,13 @@ internal_values = dict(
 		],
 		help="Version of the data request content to be used"
 	),
-	data_request_content_directory=ParameterSettings(
-		key="data_request_content_directory",
+	data_request_config=ParameterSettings(
+		key="data_request_config",
 		default_values=[
-			ValueSettings(key_type="laboratory", keys="data_request_content_directory"),
-			None
+			ValueSettings(key_type="laboratory", keys="data_request_config"),
+			os.sep.join([os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "dr_interface", "CMIP7_config"])
 		],
-		help="Version of the data request content to be used"
-	),
-	data_request_content_export=ParameterSettings(
-		key="data_request_content_export",
-		default_values=[
-			ValueSettings(key_type="laboratory", keys="data_request_content_export"),
-			"release"
-		],
-		authorized_values=["raw", "release"],
-		help="Version of the export of the data request content to be used"
-	),
-	data_request_content_consolidation=ParameterSettings(
-		key="data_request_content_consolidation",
-		default_values=[
-			ValueSettings(key_type="laboratory", keys="data_request_content_consolidation"),
-			False
-		],
-		authorized_types=[bool, ],
-		help="Should consolidation of the data request content be applied?"
+		help="Configuration file of the data request content to be used"
 	),
 	laboratory_used=ParameterSettings(
         key="laboratory_used",

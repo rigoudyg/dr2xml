@@ -389,7 +389,9 @@ project_settings = dict(
                 key="DR_version",
                 help="Version of the Data Request used",
                 default_values=[
-                    ValueSettings(key_type="common", keys="data_specs_version", fmt="CMIP6 Data Request version {}")
+                    ValueSettings(key_type="combine", fmt="{} Data Request version {}",
+                                  keys=[ValueSettings(key_type="internal", keys="data_request_used"),
+                                        ValueSettings(key_type="common", keys="data_specs_version")])
                 ]
             ),
             dr2xml_version=ParameterSettings(
