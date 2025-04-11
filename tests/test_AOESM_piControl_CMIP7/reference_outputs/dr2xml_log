@@ -1,7 +1,7 @@
 
  **************************************************
 *
-*              dr2xml version:  3.1
+*              dr2xml version:  current_version
 *   CMIP6 conventions version:  v6.2.4
 *  CMIP7 Data Request version:  Software 1.1.2 - Content v1.1
 
@@ -24,12 +24,12 @@ Realms for these CMORvars: atmos land landIce ocean seaIce
 Processing realm 'ocnBgChem' of context 'nemo' -- no variable asked (skip)
 Processing realm 'ocean' of context 'nemo'
 Processing realm 'seaIce' of context 'nemo'
-processing file /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_piControl_CMIP7/input/xml/ping_surfex.xml:
-OK /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_piControl_CMIP7/input/xml/ping_surfex.xml
-processing file /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_piControl_CMIP7/input/xml/ping_trip.xml:
-OK /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_piControl_CMIP7/input/xml/ping_trip.xml
-processing file /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_piControl_CMIP7/input/xml/ping_nemo.xml:
-OK /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_piControl_CMIP7/input/xml/ping_nemo.xml
+processing file current_directory/test_AOESM_piControl_CMIP7/input/xml/ping_surfex.xml:
+OK current_directory/test_AOESM_piControl_CMIP7/input/xml/ping_surfex.xml
+processing file current_directory/test_AOESM_piControl_CMIP7/input/xml/ping_trip.xml:
+OK current_directory/test_AOESM_piControl_CMIP7/input/xml/ping_trip.xml
+processing file current_directory/test_AOESM_piControl_CMIP7/input/xml/ping_nemo.xml:
+OK current_directory/test_AOESM_piControl_CMIP7/input/xml/ping_nemo.xml
 Note: assuming that 'time: mean where sea_ice'  for       sisnthick in table SImon is well handled by 'detect_missing'
 Note: assuming that 'time: mean where sea_ice'  for       sitemptop in table SImon is well handled by 'detect_missing'
 Note: assuming that 'time: mean where sea_ice'  for         sithick in table SImon is well handled by 'detect_missing'
@@ -42,7 +42,7 @@ Note: assuming that 'time: mean where sea_ice'  for         sithick in table SIm
 Note: assuming that 'time: mean where sea_ice'  for             siu in table SImon is well handled by 'detect_missing'
 Note: assuming that 'time: mean where sea_ice'  for             siv in table SImon is well handled by 'detect_missing'
 
-file_def written as /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_piControl_CMIP7/test_outputs/dr2xml_nemo.xml
+file_def written as current_directory/test_AOESM_piControl_CMIP7/test_outputs/dr2xml_nemo.xml
 
 Skipped variables (i.e. whose alias is not present in the pingfile):
 >>> TABLE:             Ofx 01/07 ----> sftof(1)
@@ -218,7 +218,7 @@ Warnings about cell methods (with var list)
 
  **************************************************
 *
-*              dr2xml version:  3.1
+*              dr2xml version:  current_version
 *   CMIP6 conventions version:  v6.2.4
 *  CMIP7 Data Request version:  Software 1.1.2 - Content v1.1
 
@@ -243,12 +243,12 @@ Processing realm 'atmosChem' of context 'surfex' -- no variable asked (skip)
 Processing realm 'atmos' of context 'surfex'
 Processing realm 'land' of context 'surfex'
 Processing realm 'landIce' of context 'surfex'
-processing file /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_piControl_CMIP7/input/xml/ping_surfex.xml:
-OK /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_piControl_CMIP7/input/xml/ping_surfex.xml
-processing file /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_piControl_CMIP7/input/xml/ping_trip.xml:
-OK /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_piControl_CMIP7/input/xml/ping_trip.xml
-processing file /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_piControl_CMIP7/input/xml/ping_nemo.xml:
-OK /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_piControl_CMIP7/input/xml/ping_nemo.xml
+processing file current_directory/test_AOESM_piControl_CMIP7/input/xml/ping_surfex.xml:
+OK current_directory/test_AOESM_piControl_CMIP7/input/xml/ping_surfex.xml
+processing file current_directory/test_AOESM_piControl_CMIP7/input/xml/ping_trip.xml:
+OK current_directory/test_AOESM_piControl_CMIP7/input/xml/ping_trip.xml
+processing file current_directory/test_AOESM_piControl_CMIP7/input/xml/ping_nemo.xml:
+OK current_directory/test_AOESM_piControl_CMIP7/input/xml/ping_nemo.xml
 Duplicate variable snc,snc in table LImon is skipped, preferred is snc
 Duplicate variable snw,snw in table LImon is skipped, preferred is snw
 Duplicate variable mrfso,mrfso in table Lmon is skipped, preferred is mrfso
@@ -258,7 +258,7 @@ Warning: Cannot complement model levels with psol for table Amon for frequency 1
 Warning: Cannot complement model levels with psol for table Amon for frequency 1mo
 Warning: Cannot complement model levels with psol for table Amon for frequency 1mo
 
-file_def written as /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_piControl_CMIP7/test_outputs/dr2xml_surfex.xml
+file_def written as current_directory/test_AOESM_piControl_CMIP7/test_outputs/dr2xml_surfex.xml
 
 Skipped variables (i.e. whose alias is not present in the pingfile):
 >>> TABLE:            Amon 01/46 ----> rluscs(1)
@@ -604,7 +604,7 @@ Some Statistics on actually written variables per variable...
 
  **************************************************
 *
-*              dr2xml version:  3.1
+*              dr2xml version:  current_version
 *   CMIP6 conventions version:  v6.2.4
 *  CMIP7 Data Request version:  Software 1.1.2 - Content v1.1
 
@@ -624,14 +624,14 @@ Issues with standard names are: []
 Info: No HOMEvars list provided.
 
 Realms for these CMORvars: atmos land landIce ocean seaIce
-processing file /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_piControl_CMIP7/input/xml/ping_surfex.xml:
-OK /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_piControl_CMIP7/input/xml/ping_surfex.xml
-processing file /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_piControl_CMIP7/input/xml/ping_trip.xml:
-OK /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_piControl_CMIP7/input/xml/ping_trip.xml
-processing file /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_piControl_CMIP7/input/xml/ping_nemo.xml:
-OK /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_piControl_CMIP7/input/xml/ping_nemo.xml
+processing file current_directory/test_AOESM_piControl_CMIP7/input/xml/ping_surfex.xml:
+OK current_directory/test_AOESM_piControl_CMIP7/input/xml/ping_surfex.xml
+processing file current_directory/test_AOESM_piControl_CMIP7/input/xml/ping_trip.xml:
+OK current_directory/test_AOESM_piControl_CMIP7/input/xml/ping_trip.xml
+processing file current_directory/test_AOESM_piControl_CMIP7/input/xml/ping_nemo.xml:
+OK current_directory/test_AOESM_piControl_CMIP7/input/xml/ping_nemo.xml
 
-file_def written as /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_piControl_CMIP7/test_outputs/dr2xml_trip.xml
+file_def written as current_directory/test_AOESM_piControl_CMIP7/test_outputs/dr2xml_trip.xml
 
 
 Some Statistics on actually written variables per frequency+shape...

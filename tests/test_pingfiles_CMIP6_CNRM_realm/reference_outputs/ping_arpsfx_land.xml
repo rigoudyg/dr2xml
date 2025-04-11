@@ -34,7 +34,7 @@
 		<field id="CMIP6_ares" field_ref="?dummy_XY"/>
 		<!--P1 (s m-1) aerodynamic_resistance : aerodynamic_resistance-->
 		<field id="CMIP6_baresoilFrac" field_ref="?dummy_XY_typebare"/>
-		<!--P2 (%) area_fraction : Bare Soil Fraction-->
+		<!--P1 (%) area_fraction : fraction of entire grid cell  that is covered by bare soil.-->
 		<field id="CMIP6_burntFractionAll" field_ref="?dummy_XY_typeburnt"/>
 		<!--P1 (%) area_fraction : Percentage of grid cell burned due to all fires including natural and anthropogenic fires and those associated with anthropogenic land use change-->
 		<field id="CMIP6_c13Land" field_ref="?dummy_XY"/>
@@ -138,7 +138,7 @@
 		<field id="CMIP6_cnc" field_ref="?dummy_XY"/>
 		<!--P1 (%) vegetation_area_fraction : Canopy covered fraction-->
 		<field id="CMIP6_cropFrac" field_ref="?dummy_XY_typecrop"/>
-		<!--P2 (%) area_fraction : Crop Fraction-->
+		<!--P1 (%) area_fraction : fraction of entire grid cell  that is covered by crop.-->
 		<field id="CMIP6_cropFracC3" field_ref="?dummy_XY_typec3pft_typecrop"/>
 		<!--P1 (%) area_fraction : Percentage Cover by C3 Crops-->
 		<field id="CMIP6_cropFracC4" field_ref="?dummy_XY_typec4pft_typecrop"/>
@@ -294,7 +294,7 @@
 		<field id="CMIP6_gppc14" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2 s-1)  : Mass Flux of 14C out of Atmosphere due to Gross Primary Production on Land-->
 		<field id="CMIP6_grassFrac" field_ref="?dummy_XY_typenatgr"/>
-		<!--P2 (%) area_fraction : Natural Grass Fraction-->
+		<!--P1 (%) area_fraction : fraction of entire grid cell that is covered by natural grass.-->
 		<field id="CMIP6_grassFracC3" field_ref="?dummy_XY_typec3pft_typenatgr"/>
 		<!--P1 (%) area_fraction : C3 grass Area Percentage-->
 		<field id="CMIP6_grassFracC4" field_ref="?dummy_XY_typec4pft_typenatgr"/>
@@ -318,7 +318,7 @@
 		<field id="CMIP6_landCoverFrac" field_ref="?dummy_XY_vegtype"/>
 		<!--P1 (%) area_fraction : The categories may differ from model to model, depending on their  PFT definitions.   This may include natural PFTs, anthropogenic PFTs, bare soil, lakes, urban areas, etc.   Sum of all should equal the fraction of the grid-cell that is land.-->
 		<field id="CMIP6_lwsnl" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2) liquid_water_content_of_snow_layer : liquid_water_content_of_snow_layer-->
+		<!--P1 (kg m-2) liquid_water_content_of_snow_layer : where land over land: this is computed as the total mass of liquid water contained interstitially within the snow layer of the land portion of a grid cell divided by the area of the land portion of the cell.-->
 		<field id="CMIP6_mrfso" field_ref="?dummy_XY"/>
 		<!--P1 (kg m-2) soil_frozen_water_content : the mass (summed over all all layers) of frozen water.-->
 		<field id="CMIP6_mrfsofr" field_ref="?dummy_XYSo_sdepth"/>
@@ -345,16 +345,16 @@
 		<!--P1 (kg m-2) soil_moisture_content : Total soil moisture-->
 		<field id="CMIP6_mrsofc" field_ref="?dummy_XY"/>
 		<!--P1 (kg m-2) soil_moisture_content_at_field_capacity : reported "where land": divide the total water holding capacity of all the soil in the grid cell by the land area in the grid cell;  reported as "missing" where the land fraction is 0.-->
-		<field id="CMIP6_mrsol" field_ref="?dummy_XY_sdepth1"/>
-		<!--P3 (kg m-2) moisture_content_of_soil_layer : Water Content of Soil Layer-->
+		<field id="CMIP6_mrsol" field_ref="?dummy_XYSo_sdepth"/>
+		<!--P1 (kg m-2) moisture_content_of_soil_layer : Total water content of soil layer-->
 		<field id="CMIP6_mrsos" field_ref="?dummy_XY_sdepth1"/>
-		<!--P3 (kg m-2) moisture_content_of_soil_layer : Moisture in Upper Portion of Soil Column-->
+		<!--P1 (kg m-2) moisture_content_of_soil_layer : the mass of water in all phases in a thin surface soil layer.-->
 		<field id="CMIP6_mrsosLut" field_ref="?dummy_XY_landUse_sdepth1"/>
 		<!--P1 (kg m-2) moisture_content_of_soil_layer : Moisture in Upper Portion of Soil Column of land use tile-->
 		<field id="CMIP6_mrsow" field_ref="?dummy_XY"/>
 		<!--P1 (1) volume_fraction_of_condensed_water_in_soil_at_field_capacity : relative_soil_moisture_content_above_field_capacity-->
 		<field id="CMIP6_mrtws" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2)  : requested for C4MIP, OCMIP/OMIP, LUMIP, ScenarioMIP, DECK, DAMIP, GeoMIP, LS3MIP, ??-->
+		<!--P1 (kg m-2)  : canopy_and_surface_and_subsurface_water_amount-->
 		<field id="CMIP6_nLand" field_ref="?dummy_XY"/>
 		<!--P1 (kg m-2)  : Total nitrogen in all terrestrial nitrogen pools-->
 		<field id="CMIP6_nLeaf" field_ref="?dummy_XY"/>
@@ -434,9 +434,9 @@
 		<field id="CMIP6_pastureFracC4" field_ref="?dummy_XY_typec4pft_typepasture"/>
 		<!--P2 (%) area_fraction : C4 Pasture Area Percentage-->
 		<field id="CMIP6_pflw" field_ref="?dummy_XY"/>
-		<!--P3 (kg m-2) liquid_water_content_of_permafrost_layer : liquid_water_content_of_permafrost_layer-->
+		<!--P1 (kg m-2) liquid_water_content_of_permafrost_layer : "where land over land", i.e., this is the total mass of liquid water contained within the permafrost layer within the land portion of a grid cell divided by the area of the land portion of the cell.-->
 		<field id="CMIP6_prveg" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) precipitation_flux_onto_canopy : precipitation_flux_onto_canopy-->
+		<!--P1 (kg m-2 s-1) precipitation_flux_onto_canopy : the precipitation flux that is intercepted by the vegetation canopy (if present in model) before reaching the ground.-->
 		<field id="CMIP6_qgwr" field_ref="?dummy_XY"/>
 		<!--P1 (kg m-2 s-1)  : water_flux_from_soil_layer_to_groundwater-->
 		<field id="CMIP6_rGrowth" field_ref="?dummy_XY"/>
@@ -466,7 +466,7 @@
 		<field id="CMIP6_rac14" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2 s-1)  : Mass Flux of 14C into Atmosphere due to Autotrophic (Plant) Respiration on Land-->
 		<field id="CMIP6_residualFrac" field_ref="?dummy_XY_typeresidual"/>
-		<!--P2 (%) area_fraction : Fraction of Grid Cell that is Land but Neither Vegetation-Covered nor Bare Soil-->
+		<!--P1 (%) area_fraction : fraction of entire grid cell  that is land and is covered by "non-vegetation" and "non-bare-soil" (e.g., urban, ice, lakes, etc.)-->
 		<field id="CMIP6_rh" field_ref="?dummy_XY"/>
 		<!--P1 (kg m-2 s-1) heterotrophic_respiration_carbon_flux : only requested for DECK HIST, 1980-present-->
 		<field id="CMIP6_rhGrass" field_ref="?dummy_XY"/>
@@ -504,7 +504,7 @@
 		<field id="CMIP6_sftgif" field_ref="?dummy_XY_typeli"/>
 		<!--P1 (%) land_ice_area_fraction : fraction of grid cell occupied by "permanent" ice (i.e., glaciers).-->
 		<field id="CMIP6_shrubFrac" field_ref="?dummy_XY_typeshrub"/>
-		<!--P2 (%) area_fraction : Shrub Fraction-->
+		<!--P1 (%) area_fraction : fraction of entire grid cell  that is covered by shrub.-->
 		<field id="CMIP6_slthick" field_ref="?dummy_XYSo_sdepth"/>
 		<!--P1 (m)  : Thickness of Soil Layers-->
 		<field id="CMIP6_snc" field_ref="?dummy_XY"/>
@@ -519,12 +519,12 @@
 		<!--P1 (kg m-2 s-1) surface_snow_melt_flux : surface_snow_and_ice_melt_flux-->
 		<field id="CMIP6_snm_ist" field_ref="?dummy_XY_xgre_ygre"/>
 		<!--P1 (kg m-2 s-1) surface_snow_melt_flux : Surface Snow Melt-->
-		<field id="CMIP6_snw" field_ref="?dummy_XY"/>
-		<!--P3 (kg m-2) surface_snow_amount : Surface Snow Amount-->
+		<field id="CMIP6_snw_land" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) surface_snow_amount : the mass of surface snow on the land portion of the grid cell divided by the land area in the grid cell; reported as missing where the land fraction is 0; excludes snow on vegetation canopy or on sea ice.-->
 		<field id="CMIP6_snw_land" field_ref="?dummy_XY"/>
 		<!--P1 (kg m-2) surface_snow_amount : the mass of surface snow on the land portion of the grid cell divided by the land area in the grid cell; reported as missing where the land fraction is 0; excludes snow on vegetation canopy or on sea ice.-->
 		<field id="CMIP6_sootsn" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2) soot_content_of_surface_snow : soot_content_of_surface_snow-->
+		<!--P1 (kg m-2) soot_content_of_surface_snow : the entire land portion of the grid cell is considered, with snow soot content set to 0.0 in regions free of snow.-->
 		<field id="CMIP6_sw" field_ref="?dummy_XY"/>
 		<!--P1 (kg m-2)  : surface_water_amount_assuming_no_snow-->
 		<field id="CMIP6_sweLut" field_ref="?dummy_XY_landUse"/>
@@ -538,11 +538,11 @@
 		<field id="CMIP6_tgs" field_ref="?dummy_XY"/>
 		<!--P1 (K) surface_temperature : Temperature of bare soil-->
 		<field id="CMIP6_tpf" field_ref="?dummy_XY"/>
-		<!--P3 (m) permafrost_layer_thickness : permafrost_layer_thickness-->
+		<!--P1 (m) permafrost_layer_thickness : where land over land: This is the mean thickness of the permafrost layer in the land portion of the grid cell.  Reported as missing in permafrost-free regions.-->
 		<field id="CMIP6_tran" field_ref="?dummy_XY"/>
 		<!--P1 (kg m-2 s-1) transpiration_flux : Transpiration-->
 		<field id="CMIP6_treeFrac" field_ref="?dummy_XY_typetree"/>
-		<!--P2 (%) area_fraction : Tree Cover Fraction-->
+		<!--P1 (%) area_fraction : fraction of entire grid cell  that is covered by trees.-->
 		<field id="CMIP6_treeFracBdlDcd" field_ref="?dummy_XY_typetreebd"/>
 		<!--P1 (%) area_fraction : Broadleaf deciduous tree fraction-->
 		<field id="CMIP6_treeFracBdlEvg" field_ref="?dummy_XY_typetreebe"/>
@@ -559,8 +559,8 @@
 		<!--P1 (%) area_fraction : fraction of entire grid cell  that is covered by secondary deciduous trees.-->
 		<field id="CMIP6_treeFracSecEver" field_ref="?dummy_XY_typesever"/>
 		<!--P1 (%) area_fraction : fraction of entire grid cell  that is covered by secondary evergreen trees.-->
-		<field id="CMIP6_tsl" field_ref="?dummy_XYSo_sdepth"/>
-		<!--P2 (K) soil_temperature : Temperature of each soil layer.  Reported as "missing" for grid cells occupied entirely by "sea".-->
+		<field id="CMIP6_tsl" field_ref="?dummy_XY_sdepth1"/>
+		<!--P1 (K) soil_temperature : Temperature of single near-surface soil layer.  Reported as "missing" for grid cells occupied entirely by "sea".-->
 		<field id="CMIP6_tslsi" field_ref="?dummy_XY"/>
 		<!--P1 (K) surface_temperature : Surface temperature of all surfaces except open ocean.-->
 		<field id="CMIP6_tslsiLut" field_ref="?dummy_XY_landUse"/>
@@ -576,7 +576,7 @@
 		<field id="CMIP6_vegFrac" field_ref="?dummy_XY_typeveg"/>
 		<!--P1 (%) area_fraction : Total vegetated fraction-->
 		<field id="CMIP6_vegHeight" field_ref="?dummy_XY"/>
-		<!--P2 (m) canopy_height : Canopy height-->
+		<!--P1 (m) canopy_height : canopy height-->
 		<field id="CMIP6_vegHeightCrop" field_ref="?dummy_XY"/>
 		<!--P2 (m) canopy_height : Vegetation height averaged over the crop fraction of a grid cell.-->
 		<field id="CMIP6_vegHeightGrass" field_ref="?dummy_XY"/>
@@ -598,6 +598,6 @@
 		<field id="CMIP6_wilt" field_ref="?dummy_XYSo_sdepth"/>
 		<!--P1 (%)  : Wilting Point-->
 		<field id="CMIP6_wtd" field_ref="?dummy_XY"/>
-		<!--P2 (m)  : Water table depth from surface.-->
+		<!--P1 (m)  : depth_of_soil_moisture_saturation-->
 	</field_definition>
 </context>

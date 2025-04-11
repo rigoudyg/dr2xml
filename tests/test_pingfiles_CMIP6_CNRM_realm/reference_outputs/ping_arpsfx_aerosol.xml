@@ -26,7 +26,7 @@
 		<field id="CMIP6_aoanh" field_ref="?dummy_XYA_alevel"/>
 		<!--P1 (yr) tracer_lifetime : Fixed surface layer mixing ratio over 30o-50oN (0 ppbv), uniform fixed source (at all levels) everywhere else (source is unspecified but must be constant in space and time and documented). Note that the source could be 1yr/yr, so the tracer concentration provides mean age in years. For method using linearly increasing tracer include a method attribute: "linearly increasing tracer"For method using uniform source (1yr/yr) include a method attribute: "uniform source"-->
 		<field id="CMIP6_bldep" field_ref="?dummy_XY"/>
-		<!--P3 (m) atmosphere_boundary_layer_thickness : Boundary Layer Depth-->
+		<!--P1 (m) atmosphere_boundary_layer_thickness : Boundary Layer Depth-->
 		<field id="CMIP6_bry" field_ref="?dummy_XY_plev39"/>
 		<!--P1 (mol mol-1) mole_fraction_of_inorganic_bromine_in_air : Total family (the sum of all appropriate species in the model) ; list the species in the netCDF header, e.g. Bry = Br + BrO + HOBr + HBr + BrONO2 + BrCl Definition: Total inorganic bromine (e.g., HBr and inorganic bromine oxides and radicals (e.g., BrO, atomic bromine (Br), bromine nitrate (BrONO2)) resulting from degradation of bromine-containing organicsource gases (halons, methyl bromide, VSLS), and natural inorganic bromine sources (e.g., volcanoes, sea salt, and other aerosols) add comment attribute with detailed description about how the model calculates these fields-->
 		<field id="CMIP6_bs550aer" field_ref="?dummy_XYA_alevel"/>
@@ -279,10 +279,10 @@
 		<!--P1 (K) air_temperature : Air Temperature-->
 		<field id="CMIP6_tatp" field_ref="?dummy_XY"/>
 		<!--P1 (K) tropopause_air_temperature : 2D monthly mean thermal tropopause calculated using WMO tropopause definition on 3d temperature-->
-		<field id="CMIP6_tntrl" field_ref="?dummy_XY_plev39"/>
-		<!--P3 (K s-1) tendency_of_air_temperature_due_to_longwave_heating : zonal mean; hence YZT-->
-		<field id="CMIP6_tntrs" field_ref="?dummy_XY_plev39"/>
-		<!--P3 (K s-1) tendency_of_air_temperature_due_to_shortwave_heating : zonal mean; hence YZT-->
+		<field id="CMIP6_tntrl" field_ref="?dummy_XYA_alevel"/>
+		<!--P1 (K s-1) tendency_of_air_temperature_due_to_longwave_heating : longwave heating rates-->
+		<field id="CMIP6_tntrs" field_ref="?dummy_XYA_alevel"/>
+		<!--P1 (K s-1) tendency_of_air_temperature_due_to_shortwave_heating : shortwave heating rates-->
 		<field id="CMIP6_toz" field_ref="?dummy_XY"/>
 		<!--P1 (m) equivalent_thickness_at_stp_of_atmosphere_ozone_content : total ozone column in DU-->
 		<field id="CMIP6_tropoz" field_ref="?dummy_XY"/>

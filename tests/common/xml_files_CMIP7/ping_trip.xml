@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <context id="trip">
-	<!--CMIP6 Data Request version Software 1.1.2 - Content latest_stable-->
+	<!--CMIP7 Data Request version Software 1.1.2 - Content v1.1-->
 	<!--dr2xml version 3.1-->
 	<!--Lab_and_model settings
 {'data_request_content_consolidation' = 'False',
@@ -26,18 +26,18 @@
 	<!--Year processed None-->
 	<field_definition>
 		<field id="CMIP7_areacellr" field_ref="areacellr"/>
-		<!--P1 (m2) cell_area : Cell areas for any grid used to report river model variables (may be the same as for atmospheric variables). These cell areas should be defined to enable exact calculation of area integrals (e.g., of vertical fluxes of energy at the surface and top of the atmosphere).-->
+		<!--P2 (m2) cell_area : Cell areas for any grid used to report river model variables (may be the same as for atmospheric variables). These cell areas should be defined to enable exact calculation of area integrals (e.g., of vertical fluxes of energy at the surface and top of the atmosphere).-->
 		<field id="CMIP7_dgw" field_ref="dgw"/>
-		<!--P1 (kg m-2) change_over_time_in_groundwater_amount : change\_over\_time\_in\_groundwater-->
+		<!--P3 (kg m-2) change_over_time_in_groundwater_amount : change\_over\_time\_in\_groundwater-->
 		<field id="CMIP7_drivw" field_ref="drivw"/>
-		<!--P1 (kg m-2) change_over_time_in_river_water_amount : undef-->
+		<!--P3 (kg m-2) change_over_time_in_river_water_amount : undef-->
 		<field id="CMIP7_qgwr" field_ref="qgwr"/>
-		<!--P1 (kg m-2 s-1) downward_liquid_water_mass_flux_into_groundwater : water\_flux\_from\_soil\_layer\_to\_groundwater-->
+		<!--P3 (kg m-2 s-1) downward_liquid_water_mass_flux_into_groundwater : water\_flux\_from\_soil\_layer\_to\_groundwater-->
 		<field id="CMIP7_rivi" field_ref="rivin"/>
-		<!--P1 (m3 s-1) incoming_water_volume_transport_along_river_channel : water\_flux\_to\_downstream-->
+		<!--P2 (m3 s-1) incoming_water_volume_transport_along_river_channel : water\_flux\_to\_downstream-->
 		<field id="CMIP7_rivo" field_ref="rivdis"/>
-		<!--P1 (m3 s-1) outgoing_water_volume_transport_along_river_channel : water\_flux\_from\_upstream-->
+		<!--P2 (m3 s-1) outgoing_water_volume_transport_along_river_channel : water\_flux\_from\_upstream-->
 		<field id="CMIP7_wtd" field_ref="wtd"/>
-		<!--P1 (m) water_table_depth : depth\_of\_soil\_moisture\_saturation-->
+		<!--P2 (m) water_table_depth : depth\_of\_soil\_moisture\_saturation-->
 	</field_definition>
 </context>

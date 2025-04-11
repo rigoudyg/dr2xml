@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <context id="nemo">
-	<!--CMIP6 Data Request version Software 1.1.2 - Content latest_stable-->
-	<!--dr2xml version 3.1-->
+	<!--CMIP7 Data Request version Software 1.1.2 - Content v1.1-->
+	<!--dr2xml version current_version-->
 	<!--Lab_and_model settings
 {'data_request_content_consolidation' = 'False',
 'data_request_content_directory' = 'None',
 'data_request_content_export' = 'release',
 'data_request_content_version' = 'latest_stable',
-'data_request_path' = '/home/rigoudyg/dev/data_request/CMIP7_DReq_Software',
+'data_request_path' = 'current_data_request/CMIP7_DReq_Software',
 'data_request_used' = 'CMIP7',
 'excluded_vars' = [],
 'excluded_vars_file' = [],
@@ -26,204 +26,204 @@
 	<!--Year processed None-->
 	<field_definition>
 		<field id="CMIP7_fsitherm" field_ref="?dummy_XY"/>
-		<!--P1 (kg m-2 s-1) water_flux_into_sea_water_due_to_sea_ice_thermodynamics : computed as the sea ice thermodynamic water flux into the ocean divided by the area of the ocean portion of the grid cell.-->
+		<!--P3 (kg m-2 s-1) water_flux_into_sea_water_due_to_sea_ice_thermodynamics : computed as the sea ice thermodynamic water flux into the ocean divided by the area of the ocean portion of the grid cell.-->
 		<field id="CMIP7_sfdsi" field_ref="?dummy_XY"/>
-		<!--P1 (kg m-2 s-1) downward_sea_ice_basal_salt_flux : This field is physical, and it arises since sea ice has a nonzero salt content, so it exchanges salt with the liquid ocean upon melting and freezing.-->
+		<!--P3 (kg m-2 s-1) downward_sea_ice_basal_salt_flux : This field is physical, and it arises since sea ice has a nonzero salt content, so it exchanges salt with the liquid ocean upon melting and freezing.-->
 		<field id="CMIP7_siage" field_ref="?dummy_XY"/>
-		<!--P1 (s) age_of_sea_ice : Age of sea ice-->
+		<!--P2 (s) age_of_sea_ice : Age of sea ice-->
 		<field id="CMIP7_sialgc" field_ref="?dummy_XY"/>
-		<!--P1 (mol m-2) sea_ice_mole_content_of_ice_algae_expressed_as_carbon : Mole Concentration of Ice Algae Expressed as Carbon in Sea Ice-->
+		<!--P2 (mol m-2) sea_ice_mole_content_of_ice_algae_expressed_as_carbon : Mole Concentration of Ice Algae Expressed as Carbon in Sea Ice-->
 		<field id="CMIP7_siareaacrossline" field_ref="?dummy_TRS"/>
-		<!--P1 (m2 s-1) sea_ice_area_transport_across_line : Flux across 4 straits-->
+		<!--P2 (m2 s-1) sea_ice_area_transport_across_line : Flux across 4 straits-->
 		<field id="CMIP7_siarean" field_ref="?dummy_0d"/>
-		<!--P1 (1e6 km2) sea_ice_area : total area of sea ice in the Northern hemisphere-->
+		<!--P3 (1e6 km2) sea_ice_area : Total integrated area of sea ice in the Northern Hemisphere (where siconc > 0). Does not include grid cells partially covered by land.-->
 		<field id="CMIP7_siareas" field_ref="?dummy_0d"/>
-		<!--P1 (1e6 km2) sea_ice_area : total area of sea ice in the Southern hemisphere-->
+		<!--P3 (1e6 km2) sea_ice_area : Total integrated area of sea ice in the Southern Hemisphere (where siconc > 0). Does not include grid cells partially covered by land.-->
 		<field id="CMIP7_sichl" field_ref="?dummy_XY"/>
-		<!--P1 (kg m-2) sea_ice_mass_content_of_ice_algae_expressed_as_chlorophyll : Mass Concentration of Ice Algae Expressed as Chlorophyll in Sea Ice-->
+		<!--P2 (kg m-2) sea_ice_mass_content_of_ice_algae_expressed_as_chlorophyll : Mass Concentration of Ice Algae Expressed as Chlorophyll in Sea Ice-->
 		<field id="CMIP7_sicompstren" field_ref="?dummy_XY"/>
-		<!--P1 (N m-1) compressive_strength_of_sea_ice : Computed strength of the ice pack, defined as the energy (J m-2) dissipated per unit area removed from the ice pack under compression, and assumed proportional to the change in potential energy caused by ridging. For Hibler-type models, this is P (= P\*h exp(-C(1-A)) where P\* is compressive strength, h ice thickness, A compactness and C strength reduction constant).-->
+		<!--P3 (N m-1) compressive_strength_of_sea_ice : Computed strength of the ice pack, defined as the energy (J m-2) dissipated per unit area removed from the ice pack under compression, and assumed proportional to the change in potential energy caused by ridging. For Hibler-type models, this is P (= P\*h exp(-C(1-A)) where P\* is compressive strength, h ice thickness, A compactness and C strength reduction constant).-->
 		<field id="CMIP7_siconc" field_ref="?dummy_XY"/>
 		<!--P1 (1) sea_ice_area_fraction : Percentage of grid cell covered by sea ice-->
 		<field id="CMIP7_siconca" field_ref="?dummy_XY"/>
-		<!--P1 (1) sea_ice_area_fraction : Percentage of grid cell covered by sea ice-->
+		<!--P2 (1) sea_ice_area_fraction : Percentage of grid cell covered by sea ice-->
 		<field id="CMIP7_sidconcdyn" field_ref="?dummy_XY"/>
-		<!--P1 (s-1) tendency_of_sea_ice_area_fraction_due_to_dynamics : Total change in sea-ice area fraction through dynamics-related processes (advection, divergence...)-->
+		<!--P2 (s-1) tendency_of_sea_ice_area_fraction_due_to_dynamics : Total change in sea-ice area fraction through dynamics-related processes (advection, divergence...)-->
 		<field id="CMIP7_sidconcth" field_ref="?dummy_XY"/>
-		<!--P1 (s-1) tendency_of_sea_ice_area_fraction_due_to_thermodynamics : Total change in sea-ice area fraction through thermodynamic processes-->
+		<!--P2 (s-1) tendency_of_sea_ice_area_fraction_due_to_thermodynamics : Total change in sea-ice area fraction through thermodynamic processes-->
 		<field id="CMIP7_sidivvel" field_ref="?dummy_XY"/>
-		<!--P1 (s-1) divergence_of_sea_ice_velocity : Divergence of sea-ice velocity field (first shear strain invariant)-->
+		<!--P3 (s-1) divergence_of_sea_ice_velocity : Divergence of sea-ice velocity field (first shear strain invariant)-->
 		<field id="CMIP7_sidmassdyn" field_ref="?dummy_XY"/>
-		<!--P1 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_sea_ice_dynamics : Total change in sea-ice mass through dynamics-related processes (advection,...) divided by grid-cell area-->
+		<!--P2 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_sea_ice_dynamics : Total change in sea-ice mass through dynamics-related processes (advection,...) divided by grid-cell area-->
 		<field id="CMIP7_sidmassevapsubl" field_ref="?dummy_XY"/>
-		<!--P1 (kg m-2 s-1) water_evapotranspiration_flux : The rate of change of sea-ice mass change through evaporation and sublimation divided by grid-cell area-->
+		<!--P2 (kg m-2 s-1) water_evapotranspiration_flux : The rate of change of sea-ice mass change through evaporation and sublimation divided by grid-cell area-->
 		<field id="CMIP7_sidmassgrowthbot" field_ref="?dummy_XY"/>
-		<!--P1 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_congelation_ice_accumulation : The rate of change of sea ice mass due to vertical growth of existing sea ice at its base divided by grid-cell area.-->
+		<!--P2 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_congelation_ice_accumulation : The rate of change of sea ice mass due to vertical growth of existing sea ice at its base divided by grid-cell area.-->
 		<field id="CMIP7_sidmassgrowthsi" field_ref="?dummy_XY"/>
-		<!--P1 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_conversion_of_snow_to_sea_ice : The rate of change of sea ice mass due to transformation of snow to sea ice divided by grid-cell area-->
+		<!--P2 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_conversion_of_snow_to_sea_ice : The rate of change of sea ice mass due to transformation of snow to sea ice divided by grid-cell area-->
 		<field id="CMIP7_sidmassgrowthwat" field_ref="?dummy_XY"/>
-		<!--P1 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_frazil_ice_accumulation_in_leads : The rate of change of sea ice mass due to sea ice formation in supercooled water (often through frazil formation) divided by grid-cell area. Together, sidmassgrowthwat and sidmassgrowthbot should give total ice growth-->
+		<!--P2 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_frazil_ice_accumulation_in_leads : The rate of change of sea ice mass due to sea ice formation in supercooled water (often through frazil formation) divided by grid-cell area. Together, sidmassgrowthwat and sidmassgrowthbot should give total ice growth-->
 		<field id="CMIP7_sidmassmeltbot" field_ref="?dummy_XY"/>
-		<!--P1 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_basal_melting : The rate of change of sea ice mass through melting at the ice bottom divided by grid-cell area-->
+		<!--P2 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_basal_melting : The rate of change of sea ice mass through melting at the ice bottom divided by grid-cell area-->
 		<field id="CMIP7_sidmassmeltlat" field_ref="?dummy_XY"/>
-		<!--P1 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_lateral_melting : The rate of change of sea ice mass through lateral melting divided by grid-cell area (report 0 if not explicitly calculated thermodynamically)-->
+		<!--P2 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_lateral_melting : The rate of change of sea ice mass through lateral melting divided by grid-cell area (report 0 if not explicitly calculated thermodynamically)-->
 		<field id="CMIP7_sidmassmelttop" field_ref="?dummy_XY"/>
-		<!--P1 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_surface_melting : The rate of change of sea ice mass through melting at the ice surface divided by grid-cell area-->
+		<!--P2 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_surface_melting : The rate of change of sea ice mass through melting at the ice surface divided by grid-cell area-->
 		<field id="CMIP7_sidmassth" field_ref="?dummy_XY"/>
-		<!--P1 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_sea_ice_thermodynamics : Total change in sea-ice mass from thermodynamic processes divided by grid-cell area-->
+		<!--P2 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_sea_ice_thermodynamics : Total change in sea-ice mass from thermodynamic processes divided by grid-cell area-->
 		<field id="CMIP7_sidmasstranx" field_ref="?dummy_XY"/>
-		<!--P1 (kg s-1) sea_ice_x_transport : Includes transport of both sea ice and snow by advection-->
+		<!--P3 (kg s-1) sea_ice_x_transport : Includes transport of both sea ice and snow by advection-->
 		<field id="CMIP7_sidmasstrany" field_ref="?dummy_XY"/>
-		<!--P1 (kg s-1) sea_ice_y_transport : Includes transport of both sea ice and snow by advection-->
+		<!--P3 (kg s-1) sea_ice_y_transport : Includes transport of both sea ice and snow by advection-->
 		<field id="CMIP7_sidragbot" field_ref="?dummy_XY"/>
-		<!--P1 (1) sea_ice_basal_drag_coefficient_for_momentum_in_sea_water : Oceanic drag coefficient that is used to calculate the oceanic momentum drag on sea ice-->
+		<!--P3 (1) sea_ice_basal_drag_coefficient_for_momentum_in_sea_water : Oceanic drag coefficient that is used to calculate the oceanic momentum drag on sea ice-->
 		<field id="CMIP7_sidragtop" field_ref="?dummy_XY"/>
-		<!--P1 (1) surface_drag_coefficient_for_momentum_in_air : Atmospheric drag coefficient that is used to calculate the atmospheric momentum drag on sea ice-->
+		<!--P3 (1) surface_drag_coefficient_for_momentum_in_air : Atmospheric drag coefficient that is used to calculate the atmospheric momentum drag on sea ice-->
 		<field id="CMIP7_siextentn" field_ref="?dummy_0d"/>
-		<!--P1 (1e6 km2) sea_ice_extent : Total area of all Northern-Hemisphere grid cells that are covered by at least 15 % areal fraction of sea ice-->
+		<!--P3 (1e6 km2) sea_ice_extent : Total integrated area of all Northern Hemisphere grid cells that are covered by at least 15% areal fraction of sea ice (siconc >= 0.15). Does not include grid cells partially covered by land.-->
 		<field id="CMIP7_siextents" field_ref="?dummy_0d"/>
-		<!--P1 (1e6 km2) sea_ice_extent : Total area of all Southern-Hemisphere grid cells that are covered by at least 15 % areal fraction of sea ice-->
+		<!--P3 (1e6 km2) sea_ice_extent : Total integrated area of all Southern Hemisphere grid cells that are covered by at least 15% areal fraction of sea ice (siconc >= 0.15). Does not include grid cells partially covered by land.-->
 		<field id="CMIP7_sifb" field_ref="?dummy_XY"/>
-		<!--P1 (m) sea_ice_freeboard : Mean height of sea-ice surface (=snow-ice interface when snow covered) above sea level-->
+		<!--P3 (m) sea_ice_freeboard : Mean height of sea-ice surface (=snow-ice interface when snow covered) above sea level-->
 		<field id="CMIP7_siflcondbot" field_ref="?dummy_XY"/>
-		<!--P1 (W m-2) basal_downward_heat_flux_in_sea_ice : the net heat conduction flux at the ice base-->
+		<!--P2 (W m-2) basal_downward_heat_flux_in_sea_ice : the net heat conduction flux at the ice base-->
 		<field id="CMIP7_siflcondtop" field_ref="?dummy_XY"/>
-		<!--P1 (W m-2) surface_downward_heat_flux_in_sea_ice : the net heat conduction flux at the ice surface-->
+		<!--P2 (W m-2) surface_downward_heat_flux_in_sea_ice : the net heat conduction flux at the ice surface-->
 		<field id="CMIP7_siflfwbot" field_ref="?dummy_XY"/>
-		<!--P1 (kg m-2 s-1) water_flux_into_sea_water_due_to_sea_ice_thermodynamics : Total flux of fresh water from water into sea ice divided by grid-cell area; This flux is negative during ice growth (liquid water mass decreases, hence upward flux of freshwater), positive during ice melt (liquid water mass increases, hence downward flux of freshwater)-->
+		<!--P3 (kg m-2 s-1) water_flux_into_sea_water_due_to_sea_ice_thermodynamics : Total flux of fresh water from water into sea ice divided by grid-cell area; This flux is negative during ice growth (liquid water mass decreases, hence upward flux of freshwater), positive during ice melt (liquid water mass increases, hence downward flux of freshwater)-->
 		<field id="CMIP7_siflfwdrain" field_ref="?dummy_XY"/>
-		<!--P1 (kg m-2 s-1) water_flux_into_sea_water_due_to_surface_drainage : Total flux of fresh water from sea-ice surface into underlying ocean. This combines both surface melt water that drains directly into the ocean and the drainage of surface melt pond. By definition, this flux is always positive.-->
+		<!--P3 (kg m-2 s-1) water_flux_into_sea_water_due_to_surface_drainage : Total flux of fresh water from sea-ice surface into underlying ocean. This combines both surface melt water that drains directly into the ocean and the drainage of surface melt pond. By definition, this flux is always positive.-->
 		<field id="CMIP7_sifllattop" field_ref="?dummy_XY"/>
-		<!--P1 (W m-2) surface_downward_latent_heat_flux : the net latent heat flux over sea ice-->
+		<!--P2 (W m-2) surface_downward_latent_heat_flux : the net latent heat flux over sea ice-->
 		<field id="CMIP7_sifllwdtop" field_ref="?dummy_XY"/>
-		<!--P1 (W m-2) surface_downwelling_longwave_flux_in_air : the downwelling longwave flux over sea ice (always positive)-->
+		<!--P2 (W m-2) surface_downwelling_longwave_flux_in_air : the downwelling longwave flux over sea ice (always positive)-->
 		<field id="CMIP7_sifllwutop" field_ref="?dummy_XY"/>
-		<!--P1 (W m-2) surface_upwelling_longwave_flux_in_air : the upwelling longwave flux over sea ice (always negative)-->
+		<!--P2 (W m-2) surface_upwelling_longwave_flux_in_air : the upwelling longwave flux over sea ice (always negative)-->
 		<field id="CMIP7_siflsaltbot" field_ref="?dummy_XY"/>
-		<!--P1 (kg m-2 s-1) downward_sea_ice_basal_salt_flux : Total flux of salt from water into sea ice divided by grid-cell area; salt flux is upward (negative) during ice growth when salt is embedded into the ice and downward (positive) during melt when salt from sea ice is again released to the ocean.-->
+		<!--P3 (kg m-2 s-1) downward_sea_ice_basal_salt_flux : Total flux of salt from water into sea ice divided by grid-cell area; salt flux is upward (negative) during ice growth when salt is embedded into the ice and downward (positive) during melt when salt from sea ice is again released to the ocean.-->
 		<field id="CMIP7_siflsensbot" field_ref="?dummy_XY"/>
-		<!--P1 (W m-2) upward_sea_ice_basal_heat_flux : the net sensible heat flux under sea ice from the ocean-->
+		<!--P2 (W m-2) upward_sea_ice_basal_heat_flux : the net sensible heat flux under sea ice from the ocean-->
 		<field id="CMIP7_siflsenstop" field_ref="?dummy_XY"/>
-		<!--P1 (W m-2) surface_downward_sensible_heat_flux : the net sensible heat flux over sea ice-->
+		<!--P2 (W m-2) surface_downward_sensible_heat_flux : the net sensible heat flux over sea ice-->
 		<field id="CMIP7_siflswdbot" field_ref="?dummy_XY"/>
-		<!--P1 (W m-2) downwelling_shortwave_flux_in_sea_water_at_sea_ice_base : The downwelling shortwave flux underneath sea ice (always positive)-->
+		<!--P2 (W m-2) downwelling_shortwave_flux_in_sea_water_at_sea_ice_base : The downwelling shortwave flux underneath sea ice (always positive)-->
 		<field id="CMIP7_siflswdtop" field_ref="?dummy_XY"/>
-		<!--P1 (W m-2) surface_downwelling_shortwave_flux_in_air : The downwelling shortwave flux over sea ice (always positive by sign convention)-->
+		<!--P2 (W m-2) surface_downwelling_shortwave_flux_in_air : The downwelling shortwave flux over sea ice (always positive by sign convention)-->
 		<field id="CMIP7_siflswutop" field_ref="?dummy_XY"/>
-		<!--P1 (W m-2) surface_upwelling_shortwave_flux_in_air : The upwelling shortwave flux over sea ice (always negative)-->
+		<!--P2 (W m-2) surface_upwelling_shortwave_flux_in_air : The upwelling shortwave flux over sea ice (always negative)-->
 		<field id="CMIP7_siforcecoriolx" field_ref="?dummy_XY"/>
-		<!--P1 (N m-2) sea_ice_x_force_per_unit_area_due_to_coriolis_effect : X-component of force on sea ice caused by coriolis force-->
+		<!--P3 (N m-2) sea_ice_x_force_per_unit_area_due_to_coriolis_effect : X-component of force on sea ice caused by coriolis force-->
 		<field id="CMIP7_siforcecorioly" field_ref="?dummy_XY"/>
-		<!--P1 (N m-2) sea_ice_y_force_per_unit_area_due_to_coriolis_effect : Y-component of force on sea ice caused by coriolis force-->
+		<!--P3 (N m-2) sea_ice_y_force_per_unit_area_due_to_coriolis_effect : Y-component of force on sea ice caused by coriolis force-->
 		<field id="CMIP7_siforceintstrx" field_ref="?dummy_XY"/>
-		<!--P1 (N m-2) sea_ice_x_internal_stress : X-component of force on sea ice caused by internal stress (divergence of sigma)-->
+		<!--P3 (N m-2) sea_ice_x_internal_stress : X-component of force on sea ice caused by internal stress (divergence of sigma)-->
 		<field id="CMIP7_siforceintstry" field_ref="?dummy_XY"/>
-		<!--P1 (N m-2) sea_ice_y_internal_stress : Y-component of force on sea ice caused by internal stress (divergence of sigma)-->
+		<!--P3 (N m-2) sea_ice_y_internal_stress : Y-component of force on sea ice caused by internal stress (divergence of sigma)-->
 		<field id="CMIP7_siforcetiltx" field_ref="?dummy_XY"/>
-		<!--P1 (N m-2) sea_ice_x_force_per_unit_area_due_to_sea_surface_tilt : X-component of force on sea ice caused by sea-surface tilt-->
+		<!--P3 (N m-2) sea_ice_x_force_per_unit_area_due_to_sea_surface_tilt : X-component of force on sea ice caused by sea-surface tilt-->
 		<field id="CMIP7_siforcetilty" field_ref="?dummy_XY"/>
-		<!--P1 (N m-2) sea_ice_y_force_per_unit_area_due_to_sea_surface_tilt : Y-component of force on sea ice caused by sea-surface tilt-->
+		<!--P3 (N m-2) sea_ice_y_force_per_unit_area_due_to_sea_surface_tilt : Y-component of force on sea ice caused by sea-surface tilt-->
 		<field id="CMIP7_sigpp" field_ref="?dummy_XY"/>
-		<!--P1 (kg m-2 s-1) gross_primary_productivity_of_biomass_expressed_as_carbon_due_to_ice_algae_in_sea_ice : Total Gross Primary Production of  Ice Algae in Sea Ice-->
+		<!--P2 (kg m-2 s-1) gross_primary_productivity_of_biomass_expressed_as_carbon_due_to_ice_algae_in_sea_ice : Total Gross Primary Production of  Ice Algae in Sea Ice-->
 		<field id="CMIP7_sihc" field_ref="?dummy_XY"/>
-		<!--P1 (J m-2) sea_ice_temperature_expressed_as_heat_content : Heat content of all ice in grid cell divided by total grid-cell area. Water at 0 Celsius is assumed to have a heat content of 0 J.  Does not include heat content of snow, but does include heat content of brine. Heat content is always negative, since both the sensible and the latent heat content of ice are less than that of water-->
+		<!--P2 (J m-2) sea_ice_temperature_expressed_as_heat_content : Heat content of all ice in grid cell divided by total grid-cell area. Water at 0 Celsius is assumed to have a heat content of 0 J.  Does not include heat content of snow, but does include heat content of brine. Heat content is always negative, since both the sensible and the latent heat content of ice are less than that of water-->
 		<field id="CMIP7_siitdconc" field_ref="?dummy_XY"/>
-		<!--P1 (1) sea_ice_area_fraction : K=ice depth bands-->
+		<!--P3 (1) sea_ice_area_fraction : K=ice depth bands-->
 		<field id="CMIP7_siitdsnconc" field_ref="?dummy_XY"/>
-		<!--P1 (1) surface_snow_area_fraction : K=ice depth bands-->
+		<!--P3 (1) surface_snow_area_fraction : K=ice depth bands-->
 		<field id="CMIP7_siitdsnthick" field_ref="?dummy_XY"/>
-		<!--P1 (m) surface_snow_thickness : K=ice depth bands-->
+		<!--P3 (m) surface_snow_thickness : K=ice depth bands-->
 		<field id="CMIP7_siitdthick" field_ref="?dummy_XY"/>
-		<!--P1 (m) sea_ice_thickness : K=ice depth bands-->
+		<!--P3 (m) sea_ice_thickness : K=ice depth bands-->
 		<field id="CMIP7_simass" field_ref="?dummy_XY"/>
 		<!--P1 (kg m-2) sea_ice_amount : (in OImon, sim included snow and sea ice mass)-->
 		<field id="CMIP7_simassacrossline" field_ref="?dummy_TRS"/>
-		<!--P1 (kg s-1) sea_ice_transport_across_line : Flux across 4 straits-->
+		<!--P2 (kg s-1) sea_ice_transport_across_line : Flux across 4 straits-->
 		<field id="CMIP7_simpconc" field_ref="?dummy_XY"/>
-		<!--P1 (1) area_fraction : Percentage of sea ice, by area, which is covered by melt ponds, giving equal weight to every square metre of sea ice .-->
+		<!--P3 (1) area_fraction : Percentage of sea ice, by area, which is covered by melt ponds, giving equal weight to every square metre of sea ice .-->
 		<field id="CMIP7_simpeffconc" field_ref="?dummy_XY"/>
-		<!--P1 (1) area_fraction : Area fraction of sea-ice surface that is covered by open melt ponds, that is melt ponds that are not covered by snow or ice lids. This represents the effective (i.e. radiatively-active) melt pond area fraction.-->
+		<!--P3 (1) area_fraction : Area fraction of sea-ice surface that is covered by open melt ponds, that is melt ponds that are not covered by snow or ice lids. This represents the effective (i.e. radiatively-active) melt pond area fraction.-->
 		<field id="CMIP7_simprefrozen" field_ref="?dummy_XY"/>
-		<!--P1 (m) thickness_of_ice_on_sea_ice_melt_pond : Volume of refrozen ice on melt ponds divided by meltpond covered area-->
+		<!--P3 (m) thickness_of_ice_on_sea_ice_melt_pond : Volume of refrozen ice on melt ponds divided by meltpond covered area-->
 		<field id="CMIP7_simpthick" field_ref="?dummy_XY"/>
-		<!--P1 (m) sea_ice_melt_pond_thickness : Meltpond Depth-->
+		<!--P3 (m) sea_ice_melt_pond_thickness : Meltpond Depth-->
 		<field id="CMIP7_sino3" field_ref="?dummy_XY"/>
-		<!--P1 (mol m-2) sea_ice_mole_content_of_nitrate : Mole concentration means moles (amount of substance) per unit area-->
+		<!--P2 (mol m-2) sea_ice_mole_content_of_nitrate : Mole concentration means moles (amount of substance) per unit area-->
 		<field id="CMIP7_sipr" field_ref="?dummy_XY"/>
-		<!--P1 (kg m-2 s-1) rainfall_flux : mass of liquid precipitation falling onto sea ice divided by grid-cell area-->
+		<!--P2 (kg m-2 s-1) rainfall_flux : mass of liquid precipitation falling onto sea ice divided by grid-cell area-->
 		<field id="CMIP7_sirdgconc" field_ref="?dummy_XY"/>
-		<!--P1 (1) area_fraction : Fraction of sea ice, by area, which is covered by sea ice ridges, giving equal weight to every square metre of sea ice .-->
+		<!--P3 (1) area_fraction : Fraction of sea ice, by area, which is covered by sea ice ridges, giving equal weight to every square metre of sea ice .-->
 		<field id="CMIP7_sirdgthick" field_ref="?dummy_XY"/>
-		<!--P1 (m) sea_ice_thickness : Sea Ice Ridge Height (representing mean height over the ridged area)-->
+		<!--P3 (m) sea_ice_thickness : Sea Ice Ridge Height (representing mean height over the ridged area)-->
 		<field id="CMIP7_sisali" field_ref="?dummy_XY"/>
-		<!--P1 (1E-03) sea_ice_salinity : Mean sea-ice salinity of all sea ice in grid cell-->
+		<!--P3 (1E-03) sea_ice_salinity : Mean sea-ice salinity of all sea ice in grid cell-->
 		<field id="CMIP7_sisaltmass" field_ref="?dummy_XY"/>
-		<!--P1 (kg m-2) sea_ice_mass_content_of_salt : Total mass of all salt in sea ice divided by grid-cell area-->
+		<!--P3 (kg m-2) sea_ice_mass_content_of_salt : Total mass of all salt in sea ice divided by grid-cell area-->
 		<field id="CMIP7_sishearvel" field_ref="?dummy_XY"/>
-		<!--P1 (s-1) maximum_over_coordinate_rotation_of_sea_ice_horizontal_shear_strain_rate : Maximum shear of sea-ice velocity field (second shear strain invariant)-->
+		<!--P3 (s-1) maximum_over_coordinate_rotation_of_sea_ice_horizontal_shear_strain_rate : Maximum shear of sea-ice velocity field (second shear strain invariant)-->
 		<field id="CMIP7_sisi" field_ref="?dummy_XY"/>
-		<!--P1 (mol m-2) sea_ice_mole_content_of_silicon : Mole concentration means moles (amount of substance) per unit area-->
+		<!--P2 (mol m-2) sea_ice_mole_content_of_silicon : Mole concentration means moles (amount of substance) per unit area-->
 		<field id="CMIP7_sisnconc" field_ref="?dummy_XY"/>
-		<!--P1 (1) surface_snow_area_fraction : Percentage of sea ice, by area, which is covered by snow, giving equal weight to every square metre of sea ice . Exclude snow that lies on land or land ice.-->
+		<!--P2 (1) surface_snow_area_fraction : Percentage of sea ice, by area, which is covered by snow, giving equal weight to every square metre of sea ice . Exclude snow that lies on land or land ice.-->
 		<field id="CMIP7_sisndmassdyn" field_ref="?dummy_XY"/>
-		<!--P1 (kg m-2 s-1) tendency_of_surface_snow_amount_due_to_sea_ice_dynamics : The rate of change of snow mass through advection with sea ice divided by sea-ice area-->
+		<!--P2 (kg m-2 s-1) tendency_of_surface_snow_amount_due_to_sea_ice_dynamics : The rate of change of snow mass through advection with sea ice divided by sea-ice area-->
 		<field id="CMIP7_sisndmassmelt" field_ref="?dummy_XY"/>
-		<!--P1 (kg m-2 s-1) surface_snow_melt_flux : the rate of change of snow mass through melt divided by sea-ice area-->
+		<!--P2 (kg m-2 s-1) surface_snow_melt_flux : the rate of change of snow mass through melt divided by sea-ice area-->
 		<field id="CMIP7_sisndmasssi" field_ref="?dummy_XY"/>
-		<!--P1 (kg m-2 s-1) tendency_of_surface_snow_amount_due_to_conversion_of_snow_to_sea_ice : the rate of change of snow mass due to transformation of snow to sea ice divided by sea-ice area-->
+		<!--P2 (kg m-2 s-1) tendency_of_surface_snow_amount_due_to_conversion_of_snow_to_sea_ice : the rate of change of snow mass due to transformation of snow to sea ice divided by sea-ice area-->
 		<field id="CMIP7_sisndmasssnf" field_ref="?dummy_XY"/>
-		<!--P1 (kg m-2 s-1) snowfall_flux : mass of solid precipitation falling onto sea ice divided by sea-ice area-->
+		<!--P2 (kg m-2 s-1) snowfall_flux : mass of solid precipitation falling onto sea ice divided by sea-ice area-->
 		<field id="CMIP7_sisndmasssubl" field_ref="?dummy_XY"/>
-		<!--P1 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_water_vapor_due_to_sublimation_of_surface_snow_and_ice : the rate of change of snow mass through sublimation and evaporation divided by sea-ice area-->
+		<!--P2 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_water_vapor_due_to_sublimation_of_surface_snow_and_ice : the rate of change of snow mass through sublimation and evaporation divided by sea-ice area-->
 		<field id="CMIP7_sisndmasswind" field_ref="?dummy_XY"/>
-		<!--P1 (kg m-2 s-1) tendency_of_surface_snow_amount_due_to_drifting_into_sea : the rate of change of snow mass through wind drift of snow (from sea-ice into the sea) divided by sea-ice area-->
+		<!--P2 (kg m-2 s-1) tendency_of_surface_snow_amount_due_to_drifting_into_sea : the rate of change of snow mass through wind drift of snow (from sea-ice into the sea) divided by sea-ice area-->
 		<field id="CMIP7_sisnhc" field_ref="?dummy_XY"/>
-		<!--P1 (J m-2) thermal_energy_content_of_surface_snow : Heat-content of all snow in grid cell divided by total grid-cell area. Snow-water equivalent at 0 Celsius is assumed to have a heat content of 0 J.  Does not include heat content of sea ice.-->
+		<!--P2 (J m-2) thermal_energy_content_of_surface_snow : Heat-content of all snow in grid cell divided by total grid-cell area. Snow-water equivalent at 0 Celsius is assumed to have a heat content of 0 J.  Does not include heat content of sea ice.-->
 		<field id="CMIP7_sisnmass" field_ref="?dummy_XY"/>
-		<!--P1 (kg m-2) surface_snow_amount : (in OImon, sim included snow and sea ice mass)-->
+		<!--P2 (kg m-2) surface_snow_amount : (in OImon, sim included snow and sea ice mass)-->
 		<field id="CMIP7_sisnmassacrossline" field_ref="?dummy_TRS"/>
-		<!--P1 (kg s-1) snow_transport_across_line_due_to_sea_ice_dynamics : Flux across 4 straits-->
+		<!--P2 (kg s-1) snow_transport_across_line_due_to_sea_ice_dynamics : Flux across 4 straits-->
 		<field id="CMIP7_sisnmassn" field_ref="?dummy_0d"/>
-		<!--P1 (kg) surface_snow_mass : Total integrated mass of snow on sea ice in the Northern Hemisphere grid cells-->
+		<!--P3 (kg) surface_snow_mass : Total integrated mass of snow on sea ice in the Northern Hemisphere grid cells-->
 		<field id="CMIP7_sisnmasss" field_ref="?dummy_0d"/>
-		<!--P1 (kg) surface_snow_mass : Total integrated mass of snow on sea ice in the Southern Hemisphere grid cells-->
+		<!--P3 (kg) surface_snow_mass : Total integrated mass of snow on sea ice in the Southern Hemisphere grid cells-->
 		<field id="CMIP7_sisnthick" field_ref="?dummy_XY"/>
-		<!--P1 (m) surface_snow_thickness : (in OImon, snd was volume per entire cell area)-->
+		<!--P2 (m) surface_snow_thickness : Actual thickness of snow (snow volume divided by snow-covered area)-->
 		<field id="CMIP7_sispeed" field_ref="?dummy_XY"/>
-		<!--P1 (m s-1) sea_ice_speed : Speed of ice (i.e. mean absolute velocity) to account for back-and-forth movement of the ice-->
+		<!--P2 (m s-1) sea_ice_speed : Speed of ice (i.e. mean absolute velocity) to account for back-and-forth movement of the ice-->
 		<field id="CMIP7_sistressave" field_ref="?dummy_XY"/>
-		<!--P1 (N m-1) sea_ice_average_normal_horizontal_stress : Average normal stress in sea ice (first stress invariant)-->
+		<!--P2 (N m-1) sea_ice_average_normal_horizontal_stress : Average normal stress in sea ice (first stress invariant)-->
 		<field id="CMIP7_sistressmax" field_ref="?dummy_XY"/>
-		<!--P1 (N m-1) maximum_over_coordinate_rotation_of_sea_ice_horizontal_shear_stress : Maximum shear stress in sea ice (second stress invariant)-->
+		<!--P2 (N m-1) maximum_over_coordinate_rotation_of_sea_ice_horizontal_shear_stress : Maximum shear stress in sea ice (second stress invariant)-->
 		<field id="CMIP7_sistrxdtop" field_ref="?dummy_XY"/>
-		<!--P1 (N m-2) surface_downward_x_stress : X-component of atmospheric stress on sea ice-->
+		<!--P2 (N m-2) surface_downward_x_stress : X-component of atmospheric stress on sea ice-->
 		<field id="CMIP7_sistrxubot" field_ref="?dummy_XY"/>
-		<!--P1 (N m-2) upward_x_stress_at_sea_ice_base : X-component of ocean stress on sea ice-->
+		<!--P2 (N m-2) upward_x_stress_at_sea_ice_base : X-component of ocean stress on sea ice-->
 		<field id="CMIP7_sistrydtop" field_ref="?dummy_XY"/>
-		<!--P1 (N m-2) surface_downward_y_stress : Y-component of atmospheric stress on sea ice-->
+		<!--P2 (N m-2) surface_downward_y_stress : Y-component of atmospheric stress on sea ice-->
 		<field id="CMIP7_sistryubot" field_ref="?dummy_XY"/>
-		<!--P1 (N m-2) upward_y_stress_at_sea_ice_base : Y-component of ocean stress on sea ice-->
+		<!--P2 (N m-2) upward_y_stress_at_sea_ice_base : Y-component of ocean stress on sea ice-->
 		<field id="CMIP7_sitempbot" field_ref="?dummy_XY"/>
-		<!--P1 (K) sea_ice_basal_temperature : Report temperature at interface, NOT temperature within lowermost model layer-->
+		<!--P3 (K) sea_ice_basal_temperature : Report temperature at interface, NOT temperature within lowermost model layer-->
 		<field id="CMIP7_sitempsnic" field_ref="?dummy_XY"/>
-		<!--P1 (K) sea_ice_surface_temperature : Report surface temperature of ice where snow thickness is zero-->
+		<!--P2 (K) sea_ice_surface_temperature : Report surface temperature of ice where snow thickness is zero-->
 		<field id="CMIP7_sitemptop" field_ref="?dummy_XY"/>
-		<!--P1 (K) sea_ice_surface_temperature : Report surface temperature of snow where snow covers the sea ice.-->
+		<!--P2 (K) sea_ice_surface_temperature : Report surface temperature of snow where snow covers the sea ice.-->
 		<field id="CMIP7_sithick" field_ref="?dummy_XY"/>
-		<!--P1 (m) sea_ice_thickness : (in OImon, sit was volume per entire cell area)-->
+		<!--P2 (m) sea_ice_thickness : Actual (floe) thickness of sea ice (NOT volume divided by grid area as was done in CMIP5)-->
 		<field id="CMIP7_sitimefrac" field_ref="?dummy_XY"/>
-		<!--P1 (1) fraction_of_time_with_sea_ice_area_fraction_above_threshold : Fraction of time steps of the averaging period during which sea ice is present (siconc >0 ) in a grid cell-->
+		<!--P2 (1) fraction_of_time_with_sea_ice_area_fraction_above_threshold : Fraction of time steps of the averaging period during which sea ice is present (siconc >0 ) in a grid cell-->
 		<field id="CMIP7_siu" field_ref="?dummy_XY"/>
-		<!--P1 (m s-1) sea_ice_x_velocity : The x-velocity of ice on native model grid-->
+		<!--P2 (m s-1) sea_ice_x_velocity : The x-velocity of ice on native model grid-->
 		<field id="CMIP7_siv" field_ref="?dummy_XY"/>
-		<!--P1 (m s-1) sea_ice_y_velocity : The y-velocity of ice on native model grid-->
+		<!--P2 (m s-1) sea_ice_y_velocity : The y-velocity of ice on native model grid-->
 		<field id="CMIP7_sivol" field_ref="?dummy_XY"/>
-		<!--P1 (m) sea_ice_thickness : Total volume of sea ice divided by grid-cell area (this used to be called ice thickness in CMIP5)-->
+		<!--P2 (m) sea_ice_thickness : Total volume of sea ice divided by grid-cell area (this used to be called ice thickness in CMIP5)-->
 		<field id="CMIP7_sivoln" field_ref="?dummy_0d"/>
-		<!--P1 (1e3 km3) sea_ice_volume : total volume of sea ice in the Northern hemisphere-->
+		<!--P3 (1e3 km3) sea_ice_volume : Total integrated volume of sea ice in the Northern Hemisphere.-->
 		<field id="CMIP7_sivols" field_ref="?dummy_0d"/>
-		<!--P1 (1e3 km3) sea_ice_volume : total volume of sea ice in the Southern hemisphere-->
+		<!--P3 (1e3 km3) sea_ice_volume : Total integrated volume of sea ice in the Southern Hemisphere.-->
 		<field id="CMIP7_vsfsit" field_ref="?dummy_XY"/>
-		<!--P1 (kg m-2 s-1) virtual_salt_flux_into_sea_water_due_to_sea_ice_thermodynamics : This variable measures the virtual salt flux into sea water due to the melting of sea ice. It is set to zero in models which receive a real water flux.-->
+		<!--P3 (kg m-2 s-1) virtual_salt_flux_into_sea_water_due_to_sea_ice_thermodynamics : This variable measures the virtual salt flux into sea water due to the melting of sea ice. It is set to zero in models which receive a real water flux.-->
 	</field_definition>
 </context>

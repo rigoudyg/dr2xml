@@ -24,9 +24,9 @@
 		<field id="CMIP6_hfdsn" field_ref="?dummy_XY"/>
 		<!--P1 (W m-2) surface_downward_heat_flux_in_snow : Downward heat flux at snow top-->
 		<field id="CMIP6_lwsnl" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2) liquid_water_content_of_snow_layer : liquid_water_content_of_snow_layer-->
+		<!--P1 (kg m-2) liquid_water_content_of_snow_layer : where land over land: this is computed as the total mass of liquid water contained interstitially within the snow layer of the land portion of a grid cell divided by the area of the land portion of the cell.-->
 		<field id="CMIP6_pflw" field_ref="?dummy_XY"/>
-		<!--P3 (kg m-2) liquid_water_content_of_permafrost_layer : liquid_water_content_of_permafrost_layer-->
+		<!--P1 (kg m-2) liquid_water_content_of_permafrost_layer : "where land over land", i.e., this is the total mass of liquid water contained within the permafrost layer within the land portion of a grid cell divided by the area of the land portion of the cell.-->
 		<field id="CMIP6_snc" field_ref="?dummy_XY"/>
 		<!--P1 (%) surface_snow_area_fraction : Snow Area Fraction-->
 		<field id="CMIP6_snc_ist" field_ref="?dummy_XY_xgre_ygre"/>
@@ -39,14 +39,14 @@
 		<!--P1 (kg m-2 s-1) surface_snow_melt_flux : surface_snow_and_ice_melt_flux-->
 		<field id="CMIP6_snm_ist" field_ref="?dummy_XY_xgre_ygre"/>
 		<!--P1 (kg m-2 s-1) surface_snow_melt_flux : Surface Snow Melt-->
-		<field id="CMIP6_snw" field_ref="?dummy_XY"/>
-		<!--P3 (kg m-2) surface_snow_amount : Surface Snow Amount-->
+		<field id="CMIP6_snw_land" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) surface_snow_amount : the mass of surface snow on the land portion of the grid cell divided by the land area in the grid cell; reported as missing where the land fraction is 0; excludes snow on vegetation canopy or on sea ice.-->
 		<field id="CMIP6_snw_land" field_ref="?dummy_XY"/>
 		<!--P1 (kg m-2) surface_snow_amount : the mass of surface snow on the land portion of the grid cell divided by the land area in the grid cell; reported as missing where the land fraction is 0; excludes snow on vegetation canopy or on sea ice.-->
 		<field id="CMIP6_sootsn" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2) soot_content_of_surface_snow : soot_content_of_surface_snow-->
+		<!--P1 (kg m-2) soot_content_of_surface_snow : the entire land portion of the grid cell is considered, with snow soot content set to 0.0 in regions free of snow.-->
 		<field id="CMIP6_tpf" field_ref="?dummy_XY"/>
-		<!--P3 (m) permafrost_layer_thickness : permafrost_layer_thickness-->
+		<!--P1 (m) permafrost_layer_thickness : where land over land: This is the mean thickness of the permafrost layer in the land portion of the grid cell.  Reported as missing in permafrost-free regions.-->
 		<field id="CMIP6_tsn_ist" field_ref="?dummy_XY_xgre_ygre"/>
 		<!--P1 (K) temperature_in_surface_snow : quantity averaged over ice sheet (grounded ice sheet and floating ice shelf) only. Needed to analyse the impact of downscaling methods-->
 		<field id="CMIP6_tsn_ist" field_ref="?dummy_XY_xgre_ygre"/>

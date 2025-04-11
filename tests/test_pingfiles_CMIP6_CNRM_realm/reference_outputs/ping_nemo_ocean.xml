@@ -32,17 +32,17 @@
 		<field id="CMIP6_bigthetaoga" field_ref="?dummy_0d"/>
 		<!--P1 (degC) sea_water_conservative_temperature : Diagnostic should be contributed only for models using conservative temperature as prognostic field.-->
 		<field id="CMIP6_cfc11" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_cfc11_in_sea_water : Mole Concentration of CFC-11 in sea water-->
+		<!--P1 (mol m-3) mole_concentration_of_cfc11_in_sea_water : Moles Per Unit Mass of CFC-11 in sea water-->
 		<field id="CMIP6_cfc12" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_cfc12_in_sea_water : Moles Per Unit Mass of CFC-12 in sea water-->
+		<!--P1 (mol m-3) mole_concentration_of_cfc12_in_sea_water : Mole Concentration of CFC-12 in sea water-->
 		<field id="CMIP6_deptho" field_ref="?dummy_XY"/>
 		<!--P1 (m) sea_floor_depth_below_geoid : Ocean bathymetry. Reported here is the sea floor depth for present day relative to z=0 geoid. Reported as missing for land grid cells.-->
 		<field id="CMIP6_difmxybo" field_ref="?dummy_XYO"/>
-		<!--P3 (m4 s-1) ocean_momentum_xy_biharmonic_diffusivity : Ocean Momentum XY Biharmonic Diffusivity-->
+		<!--P2 (m4 s-1) ocean_momentum_xy_biharmonic_diffusivity : Lateral biharmonic viscosity applied to the momentum equations.-->
 		<field id="CMIP6_difmxybo2d" field_ref="?dummy_XY"/>
 		<!--P3 (m4 s-1) ocean_momentum_xy_biharmonic_diffusivity : Ocean Momentum XY Biharmonic Diffusivity-->
 		<field id="CMIP6_difmxylo" field_ref="?dummy_XYO"/>
-		<!--P3 (m2 s-1) ocean_momentum_xy_laplacian_diffusivity : Ocean Momentum XY Laplacian Diffusivity-->
+		<!--P2 (m2 s-1) ocean_momentum_xy_laplacian_diffusivity : Lateral Laplacian viscosity applied to the momentum equations.-->
 		<field id="CMIP6_difmxylo2d" field_ref="?dummy_XY"/>
 		<!--P3 (m2 s-1) ocean_momentum_xy_laplacian_diffusivity : Ocean Momentum XY Laplacian Diffusivity-->
 		<field id="CMIP6_diftrbbo" field_ref="?dummy_XYO"/>
@@ -50,7 +50,7 @@
 		<field id="CMIP6_diftrbbo2d" field_ref="?dummy_XY"/>
 		<!--P3 (m4 s-1) ocean_tracer_bolus_biharmonic_diffusivity : Ocean Tracer Bolus Biharmonic Diffusivity-->
 		<field id="CMIP6_diftrblo" field_ref="?dummy_XYO"/>
-		<!--P3 (m2 s-1) ocean_tracer_bolus_laplacian_diffusivity : Ocean Tracer Bolus Laplacian Diffusivity-->
+		<!--P1 (m2 s-1) ocean_tracer_bolus_laplacian_diffusivity : Ocean tracer diffusivity associated with parameterized eddy-induced advective transport. Sometimes this diffusivity is called the "thickness" diffusivity. For CMIP5, this diagnostic was called "ocean tracer bolus laplacian diffusivity".  The CMIP6 name is physically more relevant.-->
 		<field id="CMIP6_diftrblo2d" field_ref="?dummy_XY"/>
 		<!--P3 (m2 s-1) ocean_tracer_bolus_laplacian_diffusivity : Ocean Tracer Bolus Laplacian Diffusivity-->
 		<field id="CMIP6_diftrebo" field_ref="?dummy_XYO"/>
@@ -58,7 +58,7 @@
 		<field id="CMIP6_diftrebo2d" field_ref="?dummy_XY"/>
 		<!--P3 (m4 s-1) ocean_tracer_epineutral_biharmonic_diffusivity : Ocean Tracer Epineutral Biharmonic Diffusivity-->
 		<field id="CMIP6_diftrelo" field_ref="?dummy_XYO"/>
-		<!--P3 (m2 s-1) ocean_tracer_epineutral_laplacian_diffusivity : Ocean Tracer Epineutral Laplacian Diffusivity-->
+		<!--P1 (m2 s-1) ocean_tracer_epineutral_laplacian_diffusivity : Ocean tracer diffusivity associated with parameterized eddy-induced diffusive transport oriented along neutral or isopycnal directions. Sometimes this diffusivity is called the neutral diffusivity or isopycnal diffusivity or Redi diffusivity.-->
 		<field id="CMIP6_diftrelo2d" field_ref="?dummy_XY"/>
 		<!--P3 (m2 s-1) ocean_tracer_epineutral_laplacian_diffusivity : Ocean Tracer Epineutral Laplacian Diffusivity-->
 		<field id="CMIP6_diftrxybo" field_ref="?dummy_XYO"/>
@@ -87,8 +87,8 @@
 		<!--P1 (m2 s-1) ocean_vertical_tracer_diffusivity_due_to_tides : Ocean Vertical Tracer Diffusivity due to Tides-->
 		<field id="CMIP6_dispkevfo" field_ref="?dummy_XYO"/>
 		<!--P1 (W m-2) ocean_kinetic_energy_dissipation_per_unit_area_due_to_vertical_friction : Ocean Kinetic Energy Dissipation Per Unit Area due to Vertical Friction-->
-		<field id="CMIP6_dispkexyfo" field_ref="?dummy_XYO"/>
-		<!--P3 (W m-2) ocean_kinetic_energy_dissipation_per_unit_area_due_to_xy_friction : Ocean Kinetic Energy Dissipation Per Unit Area due to XY Friction-->
+		<field id="CMIP6_dispkexyfo" field_ref="?dummy_XY"/>
+		<!--P2 (W m-2) ocean_kinetic_energy_dissipation_per_unit_area_due_to_xy_friction : Depth integrated impacts on kinetic energy arising from lateral frictional dissipation associated with Laplacian and/or biharmonic viscosity. For CMIP5, this diagnostic was 3d, whereas the CMIP6 depth integrated diagnostic is sufficient for many purposes and reduces archive requirements.-->
 		<field id="CMIP6_dispkexyfo2d" field_ref="?dummy_XY"/>
 		<!--P3 (W m-2) ocean_kinetic_energy_dissipation_per_unit_area_due_to_xy_friction : Ocean Kinetic Energy Dissipation Per Unit Area due to XY Friction-->
 		<field id="CMIP6_evs" field_ref="?dummy_XY"/>
@@ -166,7 +166,7 @@
 		<field id="CMIP6_mfo" field_ref="?dummy_TR_oline"/>
 		<!--P1 (kg s-1) sea_water_transport_across_line : Sea Water Transport-->
 		<field id="CMIP6_mlotst" field_ref="?dummy_XY"/>
-		<!--P2 (m) ocean_mixed_layer_thickness_defined_by_sigma_t : Ocean Mixed Layer Thickness Defined by Sigma T-->
+		<!--P1 (m) ocean_mixed_layer_thickness_defined_by_sigma_t : Sigma T is potential density referenced to ocean surface.-->
 		<field id="CMIP6_mlotstmax" field_ref="?dummy_XY"/>
 		<!--P1 (m) ocean_mixed_layer_thickness_defined_by_sigma_t : Sigma T is potential density referenced to ocean surface.-->
 		<field id="CMIP6_mlotstmin" field_ref="?dummy_XY"/>
@@ -198,47 +198,47 @@
 		<field id="CMIP6_obvfsq" field_ref="?dummy_XYO"/>
 		<!--P1 (s-2) square_of_brunt_vaisala_frequency_in_sea_water : Square of Brunt Vaisala Frequency in Sea Water-->
 		<field id="CMIP6_ocontempdiff" field_ref="?dummy_XYO"/>
-		<!--P2 (W m-2) tendency_of_sea_water_conservative_temperature_expressed_as_heat_content_due_to_parameterized_eddy_dianeutral_mixing : tendency of sea water conservative temperature expressed as heat content due to parameterized dianeutral mixing-->
+		<!--P1 (W m-2) tendency_of_sea_water_conservative_temperature_expressed_as_heat_content_due_to_parameterized_eddy_dianeutral_mixing : Tendency of heat content for a grid cell from parameterized dianeutral mixing. Reported only for models that use conservative temperature as prognostic field.-->
 		<field id="CMIP6_ocontempmint" field_ref="?dummy_XY"/>
-		<!--P3 (degC kg m-2) integral_wrt_depth_of_product_of_sea_water_density_and_conservative_temperature : Full column sum of density*cell thickness*conservative temperature. If the model is Boussinesq, then use Boussinesq reference density for the density factor.-->
+		<!--P1 (degC kg m-2) integral_wrt_depth_of_product_of_sea_water_density_and_conservative_temperature : integral wrt depth of product of sea water density and conservative temperature-->
 		<field id="CMIP6_ocontemppadvect" field_ref="?dummy_XYO"/>
-		<!--P2 (W m-2) tendency_of_sea_water_conservative_temperature_expressed_as_heat_content_due_to_parameterized_eddy_advection : tendency of sea water conservative temperature expressed as heat content due to parameterized eddy advection-->
+		<!--P1 (W m-2) tendency_of_sea_water_conservative_temperature_expressed_as_heat_content_due_to_parameterized_eddy_advection : Tendency of heat content for a grid cell from parameterized eddy advection (all forms of eddy advection). Reported only for models that use conservative temperature as prognostic field.-->
 		<field id="CMIP6_ocontemppmdiff" field_ref="?dummy_XYO"/>
-		<!--P2 (W m-2) tendency_of_sea_water_conservative_temperature_expressed_as_heat_content_due_to_parameterized_mesoscale_eddy_diffusion : tendency of sea water conservative temperature expressed as heat content due to parameterized mesoscale diffusion-->
+		<!--P1 (W m-2) tendency_of_sea_water_conservative_temperature_expressed_as_heat_content_due_to_parameterized_mesoscale_eddy_diffusion : Tendency of heat content for a grid cell from parameterized mesoscale eddy diffusion. Reported only for models that use conservative temperature as prognostic field.-->
 		<field id="CMIP6_ocontemppsmadvect" field_ref="?dummy_XYO"/>
-		<!--P2 (W m-2) tendency_of_sea_water_conservative_temperature_expressed_as_heat_content_due_to_parameterized_submesoscale_eddy_advection : tendency of sea water conservative temperature expressed as heat content due to parameterized submesoscale advection-->
+		<!--P1 (W m-2) tendency_of_sea_water_conservative_temperature_expressed_as_heat_content_due_to_parameterized_submesoscale_eddy_advection : Tendency of heat content for a grid cell from parameterized submesoscale eddy advection. Reported only for models that use conservative temperature as prognostic field.-->
 		<field id="CMIP6_ocontemprmadvect" field_ref="?dummy_XYO"/>
-		<!--P2 (W m-2) tendency_of_sea_water_conservative_temperature_expressed_as_heat_content_due_to_residual_mean_advection : tendency of sea water conservative temperature expressed as heat content due to residual mean (sum of Eulerian + parameterized) advection-->
+		<!--P1 (W m-2) tendency_of_sea_water_conservative_temperature_expressed_as_heat_content_due_to_residual_mean_advection : Tendency of heat content for a grid cell from residual mean  (sum of Eulerian mean + parameterized eddy-induced) advection. Reported only for models that use conservative temperature as prognostic field.-->
 		<field id="CMIP6_ocontemptend" field_ref="?dummy_XYO"/>
-		<!--P2 (W m-2) tendency_of_sea_water_conservative_temperature_expressed_as_heat_content : tendency of sea water conservative temperature expressed as heat content-->
+		<!--P1 (W m-2) tendency_of_sea_water_conservative_temperature_expressed_as_heat_content : Tendency of heat content for a grid cell from all processes. Reported only for models that use conservative temperature as prognostic field.-->
 		<field id="CMIP6_omldamax" field_ref="?dummy_XY"/>
 		<!--P1 (m) ocean_mixed_layer_thickness_defined_by_mixing_scheme : Daily Maximum Ocean Mixed Layer Thickness Defined by Mixing Scheme-->
 		<field id="CMIP6_opottempdiff" field_ref="?dummy_XYO"/>
-		<!--P2 (W m-2) tendency_of_sea_water_potential_temperature_expressed_as_heat_content_due_to_parameterized_eddy_dianeutral_mixing : tendency of sea water potential temperature expressed as heat content due to parameterized dianeutral mixing-->
+		<!--P1 (W m-2) tendency_of_sea_water_potential_temperature_expressed_as_heat_content_due_to_parameterized_eddy_dianeutral_mixing : Tendency of heat content for a grid cell from parameterized dianeutral mixing. Reported only for models that use potential temperature as prognostic field.-->
 		<field id="CMIP6_opottempmint" field_ref="?dummy_XY"/>
-		<!--P3 (degC kg m-2) integral_wrt_depth_of_product_of_sea_water_density_and_potential_temperature : Full column sum of density*cell thickness*potential temperature. If the model is Boussinesq, then use Boussinesq reference density for the density factor.-->
+		<!--P1 (degC kg m-2) integral_wrt_depth_of_product_of_sea_water_density_and_potential_temperature : integral wrt depth of product of sea water density and potential temperature-->
 		<field id="CMIP6_opottemppadvect" field_ref="?dummy_XYO"/>
-		<!--P2 (W m-2) tendency_of_sea_water_potential_temperature_expressed_as_heat_content_due_to_parameterized_eddy_advection : tendency of sea water potential temperature expressed as heat content due to parameterized eddy advection-->
+		<!--P1 (W m-2) tendency_of_sea_water_potential_temperature_expressed_as_heat_content_due_to_parameterized_eddy_advection : Tendency of heat content for a grid cell from parameterized  eddy advection (all forms of eddy advection). Reported only for models that use potential temperature as prognostic field.-->
 		<field id="CMIP6_opottemppmdiff" field_ref="?dummy_XYO"/>
-		<!--P2 (W m-2) tendency_of_sea_water_potential_temperature_expressed_as_heat_content_due_to_parameterized_mesoscale_eddy_diffusion : tendency of sea water potential temperature expressed as heat content due to parameterized mesoscale diffusion-->
+		<!--P1 (W m-2) tendency_of_sea_water_potential_temperature_expressed_as_heat_content_due_to_parameterized_mesoscale_eddy_diffusion : Tendency of heat content for a grid cell from parameterized mesoscale eddy diffusion. Reported only for models that use potential temperature as prognostic field.-->
 		<field id="CMIP6_opottemppsmadvect" field_ref="?dummy_XYO"/>
-		<!--P2 (W m-2) tendency_of_sea_water_potential_temperature_expressed_as_heat_content_due_to_parameterized_submesoscale_eddy_advection : tendency of sea water potential temperature expressed as heat content due to parameterized submesoscale advection-->
+		<!--P1 (W m-2) tendency_of_sea_water_potential_temperature_expressed_as_heat_content_due_to_parameterized_submesoscale_eddy_advection : Tendency of heat content for a grid cell from parameterized submesoscale eddy advection. Reported only for models that use potential temperature as prognostic field.-->
 		<field id="CMIP6_opottemprmadvect" field_ref="?dummy_XYO"/>
-		<!--P2 (W m-2) tendency_of_sea_water_potential_temperature_expressed_as_heat_content_due_to_residual_mean_advection : tendency of sea water potential temperature expressed as heat content due to residual mean advection-->
+		<!--P1 (W m-2) tendency_of_sea_water_potential_temperature_expressed_as_heat_content_due_to_residual_mean_advection : Tendency of heat content for a grid cell from residual mean (sum of Eulerian mean + parameterized eddy-induced) advection. Reported only for models that use potential temperature as prognostic field.-->
 		<field id="CMIP6_opottemptend" field_ref="?dummy_XYO"/>
-		<!--P2 (W m-2) tendency_of_sea_water_potential_temperature_expressed_as_heat_content : tendency of sea water potential temperature expressed as heat content-->
+		<!--P1 (W m-2) tendency_of_sea_water_potential_temperature_expressed_as_heat_content : Tendency of heat content for a grid cell from all processes. Reported only for models that use potential temperature as prognostic field.-->
 		<field id="CMIP6_osaltdiff" field_ref="?dummy_XYO"/>
-		<!--P2 (kg m-2 s-1) tendency_of_sea_water_salinity_expressed_as_salt_content_due_to_parameterized_eddy_dianeutral_mixing : tendency of sea water salinity expressed as salt content due to parameterized dianeutral mixing-->
+		<!--P1 (kg m-2 s-1) tendency_of_sea_water_salinity_expressed_as_salt_content_due_to_parameterized_eddy_dianeutral_mixing : Tendency of salt content for a grid cell from parameterized dianeutral mixing.-->
 		<field id="CMIP6_osaltpadvect" field_ref="?dummy_XYO"/>
-		<!--P2 (kg m-2 s-1) tendency_of_sea_water_salinity_expressed_as_salt_content_due_to_parameterized_eddy_advection : tendency of sea water salinity expressed as salt content due to parameterized eddy advection-->
+		<!--P1 (kg m-2 s-1) tendency_of_sea_water_salinity_expressed_as_salt_content_due_to_parameterized_eddy_advection : Tendency of salt content for a grid cell from parameterized eddy advection (any form of eddy advection).-->
 		<field id="CMIP6_osaltpmdiff" field_ref="?dummy_XYO"/>
-		<!--P2 (kg m-2 s-1) tendency_of_sea_water_salinity_expressed_as_salt_content_due_to_parameterized_mesoscale_eddy_diffusion : tendency of sea water salinity expressed as salt content due to parameterized mesoscale diffusion-->
+		<!--P1 (kg m-2 s-1) tendency_of_sea_water_salinity_expressed_as_salt_content_due_to_parameterized_mesoscale_eddy_diffusion : Tendency of salt content for a grid cell from parameterized mesoscale eddy diffusion.-->
 		<field id="CMIP6_osaltpsmadvect" field_ref="?dummy_XYO"/>
-		<!--P2 (kg m-2 s-1) tendency_of_sea_water_salinity_expressed_as_salt_content_due_to_parameterized_submesoscale_eddy_advection : tendency of sea water salinity expressed as salt content due to parameterized submesoscale advection-->
+		<!--P1 (kg m-2 s-1) tendency_of_sea_water_salinity_expressed_as_salt_content_due_to_parameterized_submesoscale_eddy_advection : Tendency of salt content for a grid cell from parameterized submesoscale eddy advection.-->
 		<field id="CMIP6_osaltrmadvect" field_ref="?dummy_XYO"/>
-		<!--P2 (kg m-2 s-1) tendency_of_sea_water_salinity_expressed_as_salt_content_due_to_residual_mean_advection : tendency of sea water salinity expressed as salt content due to residual mean advection-->
+		<!--P1 (kg m-2 s-1) tendency_of_sea_water_salinity_expressed_as_salt_content_due_to_residual_mean_advection : Tendency of salt content for a grid cell from residual mean  (sum of Eulerian mean + parameterized eddy-induced)  advection.-->
 		<field id="CMIP6_osalttend" field_ref="?dummy_XYO"/>
-		<!--P2 (kg m-2 s-1) tendency_of_sea_water_salinity_expressed_as_salt_content : tendency of sea water salinity expressed as salt content-->
+		<!--P1 (kg m-2 s-1) tendency_of_sea_water_salinity_expressed_as_salt_content : Tendency of salt content for a grid cell from all processes.-->
 		<field id="CMIP6_pabigthetao" field_ref="?dummy_XYO"/>
 		<!--P1 (degC)  : Sea Water Added Conservative Temperature-->
 		<field id="CMIP6_pathetao" field_ref="?dummy_XYO"/>
@@ -256,7 +256,7 @@
 		<field id="CMIP6_rsdo" field_ref="?dummy_XYO"/>
 		<!--P1 (W m-2) downwelling_shortwave_flux_in_sea_water : Downwelling Shortwave Radiation in Sea Water-->
 		<field id="CMIP6_rsdoabsorb" field_ref="?dummy_XYO"/>
-		<!--P2 (W m-2) net_rate_of_absorption_of_shortwave_energy_in_ocean_layer : net rate of absorption of shortwave energy in ocean layer-->
+		<!--P1 (W m-2) net_rate_of_absorption_of_shortwave_energy_in_ocean_layer : Tendency of heat content for a grid cell from penetrative shortwave radiation within a grid cell.-->
 		<field id="CMIP6_rsntds" field_ref="?dummy_XY"/>
 		<!--P1 (W m-2) net_downward_shortwave_flux_at_sea_water_surface : This is the flux into the surface of liquid sea water only. This excludes shortwave flux absorbed by sea ice, but includes any light that passes through the ice and is absorbed by the ocean.-->
 		<field id="CMIP6_sf6" field_ref="?dummy_XYO"/>
@@ -284,15 +284,15 @@
 		<field id="CMIP6_soga" field_ref="?dummy_0d"/>
 		<!--P1 (0.001) sea_water_salinity : Global Mean Sea Water Salinity-->
 		<field id="CMIP6_somint" field_ref="?dummy_XY"/>
-		<!--P3 (1e-3 kg m-2) integral_wrt_depth_of_product_of_sea_water_density_and_salinity : Full column sum of density*cell thickness*salinity. If the model is Boussinesq, then use Boussinesq reference density for the density factor.-->
+		<!--P1 (1e-3 kg m-2) integral_wrt_depth_of_product_of_sea_water_density_and_salinity : integral wrt depth of product of sea water density and salinity-->
 		<field id="CMIP6_sos" field_ref="?dummy_XY"/>
-		<!--P3 (0.001) sea_surface_salinity : Sea Surface Salinity-->
+		<!--P1 (0.001) sea_surface_salinity : Sea Surface Salinity-->
 		<field id="CMIP6_sosga" field_ref="?dummy_0d"/>
 		<!--P1 (0.001) sea_surface_salinity : Global Average Sea Surface Salinity-->
 		<field id="CMIP6_sossq" field_ref="?dummy_XY"/>
 		<!--P3 (1e-06)  : Square of Sea Surface Salinity-->
 		<field id="CMIP6_t20d" field_ref="?dummy_XY"/>
-		<!--P2 (m) depth_of_isosurface_of_sea_water_potential_temperature : 20C isotherm depth-->
+		<!--P1 (m) depth_of_isosurface_of_sea_water_potential_temperature : 20C isotherm depth-->
 		<field id="CMIP6_tauucorr" field_ref="?dummy_XY"/>
 		<!--P1 (N m-2) surface_downward_x_stress_correction : This is the stress on the liquid ocean from overlying atmosphere, sea ice, ice shelf, etc.-->
 		<field id="CMIP6_tauuo" field_ref="?dummy_XY"/>
@@ -314,13 +314,13 @@
 		<field id="CMIP6_thetaot700" field_ref="?dummy_XY_depth700m"/>
 		<!--P1 (degC) sea_water_potential_temperature : Depth average potential temperature of upper 700m-->
 		<field id="CMIP6_thkcello" field_ref="?dummy_XYO"/>
-		<!--P2 (m) cell_thickness : Ocean Model Cell Thickness-->
-		<field id="CMIP6_tnkebto" field_ref="?dummy_XYO"/>
-		<!--P3 (W m-2) tendency_of_ocean_eddy_kinetic_energy_content_due_to_parameterized_eddy_advection : Tendency of Ocean Eddy Kinetic Energy Content due to Bolus Transport-->
+		<!--P1 (m) cell_thickness : Ocean Model Cell Thickness-->
+		<field id="CMIP6_tnkebto" field_ref="?dummy_XY"/>
+		<!--P2 (W m-2) tendency_of_ocean_eddy_kinetic_energy_content_due_to_parameterized_eddy_advection : Depth integrated impacts on kinetic energy arising from parameterized eddy-induced advection. For CMIP5, this diagnostic was 3d, whereas the CMIP6 depth integrated diagnostic is sufficient for many purposes and reduces archive requirements.-->
 		<field id="CMIP6_tnkebto2d" field_ref="?dummy_XY"/>
 		<!--P3 (W m-2) tendency_of_ocean_eddy_kinetic_energy_content_due_to_parameterized_eddy_advection : Tendency of Ocean Eddy Kinetic Energy Content due to Bolus Transport-->
-		<field id="CMIP6_tnpeo" field_ref="?dummy_XY"/>
-		<!--P2 (W m-2) tendency_of_ocean_potential_energy_content : Rate that work is done against vertical stratification, as measured by the vertical heat and salt diffusivity. Report here as depth integrated two-dimensional field.-->
+		<field id="CMIP6_tnpeo" field_ref="?dummy_XYO"/>
+		<!--P1 (W m-2) tendency_of_ocean_potential_energy_content : Tendency of Ocean Potential Energy Content-->
 		<field id="CMIP6_tnpeot" field_ref="?dummy_XYO"/>
 		<!--P1 (W m-2) tendency_of_ocean_potential_energy_content_due_to_tides : Tendency of Ocean Potential Energy Content due to Tides-->
 		<field id="CMIP6_tnpeotb" field_ref="?dummy_XYO"/>

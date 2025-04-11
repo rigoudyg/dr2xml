@@ -15407,7 +15407,7 @@ processing file ./input/special_defs/DX_field_defs_ocnBgchem.xml:
 No file 
 processing file ./input/special_defs/DX_field_defs_seaIce.xml:
 No file 
-342 variables written for /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_pingfiles_CMIP7_CNRM/test_outputs//ping_nemo.xml
+342 variables written for current_directory/test_pingfiles_CMIP7_CNRM_realm/test_outputs//ping_nemo.xml
 Number of distinct CMOR variables (whatever the grid): 1709
 Variable considered: AERmon.jno2
 Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654), priority_level: Low (id: 527f5c96-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 3, 4, 1])
@@ -25721,4 +25721,4 @@ processing file ./input/special_defs/DX_field_defs_land.xml:
 No file 
 processing file ./input/special_defs/DX_field_defs_landIce.xml:
 No file 
-722 variables written for /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_pingfiles_CMIP7_CNRM/test_outputs//ping_arpsfx.xml
+722 variables written for current_directory/test_pingfiles_CMIP7_CNRM/test_outputs//ping_arpsfx.xml

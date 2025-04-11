@@ -60,7 +60,7 @@
 		<field id="CMIP6_lithk_ist" field_ref="?dummy_XY_xgre_ygre"/>
 		<!--P2 (m) land_ice_thickness : This is needed in case ice sheet thickness changes in time-->
 		<field id="CMIP6_lwsnl" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2) liquid_water_content_of_snow_layer : liquid_water_content_of_snow_layer-->
+		<!--P1 (kg m-2) liquid_water_content_of_snow_layer : where land over land: this is computed as the total mass of liquid water contained interstitially within the snow layer of the land portion of a grid cell divided by the area of the land portion of the cell.-->
 		<field id="CMIP6_modelCellAreai" field_ref="?dummy_XY_xgre_ygre"/>
 		<!--P1 (m2) cell_area : When interpolated to a regular grid, it should be interpolated (not summed) with a conservative scheme to preserve total area-->
 		<field id="CMIP6_mrfso" field_ref="?dummy_XY"/>
@@ -70,7 +70,7 @@
 		<field id="CMIP6_orogIs" field_ref="?dummy_XY"/>
 		<!--P1 (m) surface_altitude : quantity averaged over ice_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
 		<field id="CMIP6_pflw" field_ref="?dummy_XY"/>
-		<!--P3 (kg m-2) liquid_water_content_of_permafrost_layer : liquid_water_content_of_permafrost_layer-->
+		<!--P1 (kg m-2) liquid_water_content_of_permafrost_layer : "where land over land", i.e., this is the total mass of liquid water contained within the permafrost layer within the land portion of a grid cell divided by the area of the land portion of the cell.-->
 		<field id="CMIP6_prraIs" field_ref="?dummy_XY"/>
 		<!--P1 (kg m-2 s-1) rainfall_flux : quantity averaged over ice_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
 		<field id="CMIP6_prsnIs" field_ref="?dummy_XY"/>
@@ -119,12 +119,12 @@
 		<!--P1 (kg m-2 s-1) surface_snow_melt_flux : Surface Snow Melt-->
 		<field id="CMIP6_snmIs" field_ref="?dummy_XY"/>
 		<!--P1 (kg m-2 s-1) surface_snow_melt_flux : Loss of snow mass resulting from surface melting. Computed as the surface melt water from snow on the ice sheet portion of the grid cell divided by the ice_sheet area in the grid cell; report as 0.0 for snow-free land_ice regions; report as missing where the land fraction is 0.-->
-		<field id="CMIP6_snw" field_ref="?dummy_XY"/>
-		<!--P3 (kg m-2) surface_snow_amount : Surface Snow Amount-->
+		<field id="CMIP6_snw_land" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) surface_snow_amount : the mass of surface snow on the land portion of the grid cell divided by the land area in the grid cell; reported as missing where the land fraction is 0; excludes snow on vegetation canopy or on sea ice.-->
 		<field id="CMIP6_snw_land" field_ref="?dummy_XY"/>
 		<!--P1 (kg m-2) surface_snow_amount : the mass of surface snow on the land portion of the grid cell divided by the land area in the grid cell; reported as missing where the land fraction is 0; excludes snow on vegetation canopy or on sea ice.-->
 		<field id="CMIP6_sootsn" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2) soot_content_of_surface_snow : soot_content_of_surface_snow-->
+		<!--P1 (kg m-2) soot_content_of_surface_snow : the entire land portion of the grid cell is considered, with snow soot content set to 0.0 in regions free of snow.-->
 		<field id="CMIP6_strbasemag" field_ref="?dummy_XY_xgre_ygre"/>
 		<!--P3 (Pa)  : Land Ice Basal Drag-->
 		<field id="CMIP6_tasIs" field_ref="?dummy_XY"/>
@@ -134,7 +134,7 @@
 		<field id="CMIP6_topg_ist" field_ref="?dummy_XY_xgre_ygre"/>
 		<!--P2 (m) bedrock_altitude : This is needed in case bed rock elevation changes in time-->
 		<field id="CMIP6_tpf" field_ref="?dummy_XY"/>
-		<!--P3 (m) permafrost_layer_thickness : permafrost_layer_thickness-->
+		<!--P1 (m) permafrost_layer_thickness : where land over land: This is the mean thickness of the permafrost layer in the land portion of the grid cell.  Reported as missing in permafrost-free regions.-->
 		<field id="CMIP6_tsIs" field_ref="?dummy_XY"/>
 		<!--P1 (K) surface_temperature : quantity averaged over ice_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
 		<field id="CMIP6_tsn_ist" field_ref="?dummy_XY_xgre_ygre"/>

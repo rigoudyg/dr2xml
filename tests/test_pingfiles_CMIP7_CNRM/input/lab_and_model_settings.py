@@ -18,7 +18,7 @@ lab_and_model_settings = {
              "TIPMIP", "DAMIP", "PMIP", "FAFMIP", "DCPP", "CDRMIP", "NAHosMIP", "ISMIP7", "CMIP", "ScenarioMIP",
              "HighResMIP", "LUMIP", "Other", "VolMIP", "DynVarMIP", "HT-MIP/VolMIP", "CORDEX", "CFMIP", "C4MIP",
              "WhatIfMIP", "VIACSAB", "FireMIP", "LongRunMIP", "FishMIP", "ISIMIP", "RAMIP"},
-    'max_priority': 3,
+    'max_priority': 4,
     'tierMax': 3,
     # Each XIOS  context does adress a number of realms
     'realms_per_context': {'nemo': ['ocean', 'ocnBgchem', 'seaIce'],

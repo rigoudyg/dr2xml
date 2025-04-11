@@ -264,6 +264,13 @@ class SimpleCMORVar(SimpleObject):
     def __gt__(self, other):
         return self.label > other.label
 
+    def __str__(self):
+        return (f"SimpleCMORVar {self.label} of priority {self.Priority} "
+                f"(with standard name {self.stdname} and units {self.units})")
+
+    def __repr__(self):
+        return str(self)
+
     def correct_data_request(self):
         pass
 

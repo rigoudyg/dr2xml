@@ -111,8 +111,8 @@ def test_reference_simulation(context, lset, sset, force_reset=False, **config_d
 def read_file_content(filename, anonymize=dict()):
 	with open(filename, "r", encoding="utf-8") as fic:
 		content = fic.read()
-	for elt in anonymize:
-		content = content.replace(anonymize[elt], elt)
+	for (elt, repl) in anonymize.items():
+		content = content.replace(repl, elt)
 	content = content.splitlines(keepends=True)
 	return content
 
@@ -140,6 +140,7 @@ def create_config_elements(simulation="my_simulation", contexts=list(), add_prof
                            year="1980", enddate="19800131", pingfiles="", printout="1", debug=False, is_ping=False,
                            filename="ping_{content}.xml", by_realm=False):
 	current_dir = os.path.dirname(os.path.abspath(__file__))
+	data_request_directory = os.sep.join([os.path.dirname(os.path.dirname(os.path.dirname(current_dir))), "data_request", "CMIP7_DReq_Software"])
 	simulation_dir = os.path.sep.join([current_dir, "test_{}".format(simulation)])
 	inputs_dir = os.path.sep.join([simulation_dir, "input"])
 	kwargs = dict(
@@ -157,7 +158,8 @@ def create_config_elements(simulation="my_simulation", contexts=list(), add_prof
 		lab_and_model_settings=read_element_from_python_file(element="lab_and_model_settings", simulation=simulation,
 		                                                     current_dir=current_dir),
 		reference_directory=os.path.sep.join([simulation_dir, "reference_outputs"]),
-		current_directory=current_dir
+		current_directory=current_dir,
+		current_data_request=data_request_directory
 	)
 	dirname = os.path.sep.join([simulation_dir, "test_outputs", ""])
 	if is_ping:
@@ -208,6 +210,7 @@ class TestRun(object):
 	simulation_settings = dict()
 	reference_directory = None
 	current_directory = None
+	current_data_request = None
 	launch_function = None
 
 	def test_simulation(self):
@@ -215,12 +218,14 @@ class TestRun(object):
 			shutil.rmtree(self.config["dirname"])
 		os.makedirs(self.config["dirname"])
 		current_directory = self.current_directory
+		data_request_directory = self.current_data_request
 		self.launch_function(simulation=self.simulation, config_dict=self.config,
 		                     contexts=self.contexts, lset=self.lab_and_model_settings,
 		                     sset=self.simulation_settings, add_profile=self.add_profile,
 		                     check_time_file=self.check_time_file)
 		to_compare = list_comparison_to_do(test=self.config["dirname"], reference=self.reference_directory)
-		anonymize_dict = dict(current_directory=current_directory, current_version=version)
+		anonymize_dict = dict(current_directory=current_directory, current_version=version,
+		                      current_data_request=data_request_directory)
 		for (reference_file, test_file) in to_compare:
 			reference_content = read_file_content(reference_file, anonymize=anonymize_dict)
 			test_content = read_file_content(test_file, anonymize=anonymize_dict)

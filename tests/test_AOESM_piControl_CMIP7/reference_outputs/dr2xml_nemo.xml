@@ -3,7 +3,7 @@
 	<!--CMIP7 Data Request version Software 1.1.2 - Content v1.1-->
 	<!--CMIP6-CV version ??-->
 	<!--CMIP6_conventions_version v6.2.4-->
-	<!--dr2xml version 3.1-->
+	<!--dr2xml version current_version-->
 	<!--Lab_and_model settings
 {'allow_duplicates_in_same_table' = 'False',
 'allow_pseudo_standard_names' = 'True',
@@ -16,7 +16,7 @@
 'configurations' = {'AESM' = ('CNRM-ESM2-1', 'AGCM BGC AER CHEM', ['nemo']), 'AESMHR' = ('CNRM-ESM2-1', 'AGCM BGC AER', []), 'AGCM' = ('CNRM-CM6-1', 'AGCM', ['nemo']), 'AGCMHR' = ('CNRM-CM6-1-HR', 'AGCM', ['nemo']), 'AOESM' = ('CNRM-ESM2-1', 'AOGCM BGC AER CHEM', []), 'AOESMHR' = ('CNRM-ESM2-1-HR', 'AOGCM BGC AER', []), 'AOGCM' = ('CNRM-CM6-1', 'AOGCM', []), 'AOGCMHR' = ('CNRM-CM6-1-HR', 'AOGCM', []), 'LESM' = ('CNRM-ESM2-1', 'LAND BGC', ['nemo']), 'LGCM' = ('CNRM-CM6-1', 'LAND', ['nemo']), 'OESM' = ('CNRM-ESM2-1', 'OGCM BGC', ['surfex', 'trip']), 'OESMHR' = ('CNRM-ESM2-1-HR', 'OGCM BGC', ['surfex', 'trip']), 'OGCM' = ('CNRM-CM6-1', 'OGCM', ['surfex', 'trip']), 'OGCMHR' = ('CNRM-CM6-1-HR', 'OGCM', ['surfex', 'trip'])},
 'contact' = 'contact.cmip@meteo.fr',
 'data_request_content_version' = 'latest_stable',
-'data_request_path' = '/home/rigoudyg/dev/data_request/CMIP7_DReq_Software',
+'data_request_path' = 'current_data_request/CMIP7_DReq_Software',
 'data_request_used' = 'CMIP7',
 'debug_parsing' = 'False',
 'dr2xml_manages_enddate' = 'True',
@@ -35,7 +35,7 @@
 'non_standard_attributes' = {'arpege_minor_version' = '6.3.2', 'nemo_gelato_commit' = '49095b3accd5d4c_6524fe19b00467a', 'xios_commit' = '1442-shuffle'},
 'non_standard_axes' = {'basin' = ('basin', 'global_ocean atlantic_arctic_ocean indian_pacific_ocean dummy dummy'), 'dbze' = 'dbze', 'effectRadIc' = 'effectRadIc', 'effectRadL' = 'effectRadL', 'klev' = 'alevel', 'klev_half' = 'alevel', 'oline' = 'oline', 'siline' = 'siline', 'soil_carbon_pools' = ('soilpools', 'fast medium slow'), 'sza5' = 'sza5', 'vegtype' = ('vegtype', 'Bare_soil Rock Permanent_snow Temperate_broad-leaved_decidus Boreal_needleaf_evergreen Tropical_broad-leaved_evergreen C3_crop C4_crop Irrigated_crop C3_grass C4_grass Wetland Tropical_broad-leaved_decidus Temperate_broad-leaved_evergreen Temperate_needleaf_evergreen Boreal_broad-leaved_decidus Boreal_needleaf_decidus Tundra_grass Shrub')},
 'orphan_variables' = {'nemo' = [''], 'surfex' = ['siconca'], 'trip' = ['areacellr', 'dgw', 'drivw', 'qgwr', 'rivi', 'rivo', 'waterDpth', 'wtd', 'fwtd', 'fldf', 'carbw', 'carbdis', 'carbin']},
-'path_to_parse' = '/home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_piControl_CMIP7/input/xml/',
+'path_to_parse' = 'current_directory/test_AOESM_piControl_CMIP7/input/xml/',
 'ping_variables_prefix' = 'CMIP7_',
 'print_stats_per_var_label' = 'True',
 'project' = 'CMIP7',
@@ -63,7 +63,7 @@
 'history' = 'none',
 'initialization_index' = '1',
 'parent_time_ref_year' = '1850',
-'path_extra_tables' = '/home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_piControl_CMIP7/input/tables',
+'path_extra_tables' = 'current_directory/test_AOESM_piControl_CMIP7/input/tables',
 'physics_index' = '1',
 'realization_index' = '1',
 'sub_experiment' = 'none',
@@ -75,7 +75,7 @@
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> Software 1.1.2 - Content v1.1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
 			<variable name="title" type="string"> DECK: control (emission-driven) </variable>
@@ -143,7 +143,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> Software 1.1.2 - Content v1.1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
 			<variable name="title" type="string"> DECK: control (emission-driven) </variable>
@@ -211,7 +211,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> Software 1.1.2 - Content v1.1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
 			<variable name="title" type="string"> DECK: control (emission-driven) </variable>
@@ -279,7 +279,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> Software 1.1.2 - Content v1.1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
 			<variable name="title" type="string"> DECK: control (emission-driven) </variable>
@@ -346,7 +346,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> Software 1.1.2 - Content v1.1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
 			<variable name="title" type="string"> DECK: control (emission-driven) </variable>
@@ -413,7 +413,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> Software 1.1.2 - Content v1.1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
 			<variable name="title" type="string"> DECK: control (emission-driven) </variable>
@@ -480,7 +480,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> Software 1.1.2 - Content v1.1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
 			<variable name="title" type="string"> DECK: control (emission-driven) </variable>
@@ -547,7 +547,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> Software 1.1.2 - Content v1.1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
 			<variable name="title" type="string"> DECK: control (emission-driven) </variable>
@@ -614,7 +614,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> Software 1.1.2 - Content v1.1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
 			<variable name="title" type="string"> DECK: control (emission-driven) </variable>
@@ -681,7 +681,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> Software 1.1.2 - Content v1.1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
 			<variable name="title" type="string"> DECK: control (emission-driven) </variable>
@@ -749,7 +749,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> Software 1.1.2 - Content v1.1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
 			<variable name="title" type="string"> DECK: control (emission-driven) </variable>
@@ -817,7 +817,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> Software 1.1.2 - Content v1.1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
 			<variable name="title" type="string"> DECK: control (emission-driven) </variable>
@@ -885,7 +885,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> Software 1.1.2 - Content v1.1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
 			<variable name="title" type="string"> DECK: control (emission-driven) </variable>
@@ -953,7 +953,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> Software 1.1.2 - Content v1.1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
 			<variable name="title" type="string"> DECK: control (emission-driven) </variable>
@@ -1021,7 +1021,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> Software 1.1.2 - Content v1.1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
 			<variable name="title" type="string"> DECK: control (emission-driven) </variable>
@@ -1089,7 +1089,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> Software 1.1.2 - Content v1.1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
 			<variable name="title" type="string"> DECK: control (emission-driven) </variable>
@@ -1157,7 +1157,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> Software 1.1.2 - Content v1.1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
 			<variable name="title" type="string"> DECK: control (emission-driven) </variable>
@@ -1225,7 +1225,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> Software 1.1.2 - Content v1.1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
 			<variable name="title" type="string"> DECK: control (emission-driven) </variable>
@@ -1293,7 +1293,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> Software 1.1.2 - Content v1.1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
 			<variable name="title" type="string"> DECK: control (emission-driven) </variable>
@@ -1361,7 +1361,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> Software 1.1.2 - Content v1.1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
 			<variable name="title" type="string"> DECK: control (emission-driven) </variable>
@@ -1429,7 +1429,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> Software 1.1.2 - Content v1.1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
 			<variable name="title" type="string"> DECK: control (emission-driven) </variable>
@@ -1497,7 +1497,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> Software 1.1.2 - Content v1.1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
 			<variable name="title" type="string"> DECK: control (emission-driven) </variable>
@@ -1565,7 +1565,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> Software 1.1.2 - Content v1.1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
 			<variable name="title" type="string"> DECK: control (emission-driven) </variable>
@@ -1633,7 +1633,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> Software 1.1.2 - Content v1.1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
 			<variable name="title" type="string"> DECK: control (emission-driven) </variable>
@@ -1701,7 +1701,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> Software 1.1.2 - Content v1.1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
 			<variable name="title" type="string"> DECK: control (emission-driven) </variable>
@@ -1769,7 +1769,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> Software 1.1.2 - Content v1.1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
 			<variable name="title" type="string"> DECK: control (emission-driven) </variable>
@@ -1837,7 +1837,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> Software 1.1.2 - Content v1.1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
 			<variable name="title" type="string"> DECK: control (emission-driven) </variable>
@@ -1905,7 +1905,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> Software 1.1.2 - Content v1.1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
 			<variable name="title" type="string"> DECK: control (emission-driven) </variable>
@@ -1973,7 +1973,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> Software 1.1.2 - Content v1.1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
 			<variable name="title" type="string"> DECK: control (emission-driven) </variable>
@@ -2041,7 +2041,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> Software 1.1.2 - Content v1.1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
 			<variable name="title" type="string"> DECK: control (emission-driven) </variable>
@@ -2109,7 +2109,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> Software 1.1.2 - Content v1.1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
 			<variable name="title" type="string"> DECK: control (emission-driven) </variable>
@@ -2177,7 +2177,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> Software 1.1.2 - Content v1.1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
 			<variable name="title" type="string"> DECK: control (emission-driven) </variable>
@@ -2245,7 +2245,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> Software 1.1.2 - Content v1.1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
 			<variable name="title" type="string"> DECK: control (emission-driven) </variable>
@@ -2313,7 +2313,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> Software 1.1.2 - Content v1.1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
 			<variable name="title" type="string"> DECK: control (emission-driven) </variable>
@@ -2380,7 +2380,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> Software 1.1.2 - Content v1.1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
 			<variable name="title" type="string"> DECK: control (emission-driven) </variable>
@@ -2448,7 +2448,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> Software 1.1.2 - Content v1.1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
 			<variable name="title" type="string"> DECK: control (emission-driven) </variable>
@@ -2516,7 +2516,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> Software 1.1.2 - Content v1.1 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
 			<variable name="title" type="string"> DECK: control (emission-driven) </variable>

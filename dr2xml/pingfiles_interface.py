@@ -236,8 +236,7 @@ def ping_file_for_realms_list(context, svars, lrealms, path_special, dummy="fiel
             best_prio[v.label_non_ambiguous].append(v)
         if v.label_without_psuffix is not None:
             best_prio[v.label_without_psuffix].append(v)
-    lvars = [sorted(list(best_prio[elt]), key=lambda x: x.Priority, reverse=True)[0] for elt in best_prio]
-
+    lvars = [sorted(best_prio[elt], key=lambda x: x.Priority)[0] for elt in best_prio]
     # lvars=uniques
     lvars.sort(key=lambda x: x.label_without_psuffix)
     #

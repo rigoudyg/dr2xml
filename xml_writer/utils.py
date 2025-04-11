@@ -7,6 +7,7 @@ Utilities used by xml_writer.
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+import os
 import re
 from collections import OrderedDict
 
@@ -84,7 +85,7 @@ def print_if_needed(*args, **kwargs):
         print(*args)
 
 
-def iterate_on_string(xml_string, separator="\n", verbose=False):
+def iterate_on_string(xml_string, separator=os.linesep, verbose=False):
     """
     Build an iterator by splitting ``xml_string`` at each ``separator`` and returning each one.
 

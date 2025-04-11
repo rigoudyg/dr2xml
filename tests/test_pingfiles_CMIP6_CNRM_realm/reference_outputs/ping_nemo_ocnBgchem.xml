@@ -36,11 +36,11 @@
 		<field id="CMIP6_bddtdisi" field_ref="?dummy_XYO"/>
 		<!--P1 (mol m-3 s-1) tendency_of_mole_concentration_of_dissolved_inorganic_silicon_in_sea_water_due_to_biological_processes : Net of biological terms in time rate of change of dissolved inorganic silicon-->
 		<field id="CMIP6_bfe" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_particulate_organic_matter_expressed_as_iron_in_sea_water : sum of particulate organic iron component concentrations-->
+		<!--P1 (mol m-3) mole_concentration_of_particulate_organic_matter_expressed_as_iron_in_sea_water : sum of particulate organic iron component concentrations-->
 		<field id="CMIP6_bfeos" field_ref="?dummy_XY_depth0m"/>
 		<!--P3 (mol m-3) mole_concentration_of_particulate_organic_matter_expressed_as_iron_in_sea_water : sum of particulate organic iron component concentrations-->
 		<field id="CMIP6_bsi" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_particulate_matter_expressed_as_silicon_in_sea_water : sum of particulate silica component concentrations-->
+		<!--P1 (mol m-3) mole_concentration_of_particulate_matter_expressed_as_silicon_in_sea_water : sum of particulate silica component concentrations-->
 		<field id="CMIP6_bsios" field_ref="?dummy_XY_depth0m"/>
 		<!--P3 (mol m-3) mole_concentration_of_particulate_organic_matter_expressed_as_silicon_in_sea_water : sum of particulate silica component concentrations-->
 		<field id="CMIP6_calc" field_ref="?dummy_XYO"/>
@@ -48,25 +48,25 @@
 		<field id="CMIP6_chl" field_ref="?dummy_XYO"/>
 		<!--P1 (kg m-3) mass_concentration_of_phytoplankton_expressed_as_chlorophyll_in_sea_water : sum of chlorophyll from all phytoplankton group concentrations.  In most models this is equal to chldiat+chlmisc, that is the sum of "Diatom Chlorophyll Mass Concentration" plus "Other Phytoplankton Chlorophyll Mass Concentration"-->
 		<field id="CMIP6_chlcalc" field_ref="?dummy_XYO"/>
-		<!--P2 (kg m-3) mass_concentration_of_calcareous_phytoplankton_expressed_as_chlorophyll_in_sea_water : chlorophyll concentration from the calcite-producing phytoplankton component alone-->
+		<!--P1 (kg m-3) mass_concentration_of_calcareous_phytoplankton_expressed_as_chlorophyll_in_sea_water : chlorophyll concentration from the calcite-producing phytoplankton component alone-->
 		<field id="CMIP6_chlcalcos" field_ref="?dummy_XY_depth0m"/>
 		<!--P3 (kg m-3) mass_concentration_of_calcareous_phytoplankton_expressed_as_chlorophyll_in_sea_water : chlorophyll concentration from the calcite-producing phytoplankton component alone-->
 		<field id="CMIP6_chldiat" field_ref="?dummy_XYO"/>
-		<!--P2 (kg m-3) mass_concentration_of_diatoms_expressed_as_chlorophyll_in_sea_water : chlorophyll from diatom phytoplankton component concentration alone-->
+		<!--P1 (kg m-3) mass_concentration_of_diatoms_expressed_as_chlorophyll_in_sea_water : chlorophyll from diatom phytoplankton component concentration alone-->
 		<field id="CMIP6_chldiatos" field_ref="?dummy_XY_depth0m"/>
 		<!--P3 (kg m-3) mass_concentration_of_diatoms_expressed_as_chlorophyll_in_sea_water : chlorophyll from diatom phytoplankton component concentration alone-->
 		<field id="CMIP6_chldiaz" field_ref="?dummy_XYO"/>
-		<!--P2 (kg m-3) mass_concentration_of_diazotrophs_expressed_as_chlorophyll_in_sea_water : chlorophyll concentration from the diazotrophic phytoplankton component alone-->
+		<!--P1 (kg m-3) mass_concentration_of_diazotrophs_expressed_as_chlorophyll_in_sea_water : chlorophyll concentration from the diazotrophic phytoplankton component alone-->
 		<field id="CMIP6_chldiazos" field_ref="?dummy_XY_depth0m"/>
 		<!--P3 (kg m-3) mass_concentration_of_diazotrophs_expressed_as_chlorophyll_in_sea_water : chlorophyll concentration from the diazotrophic phytoplankton component alone-->
 		<field id="CMIP6_chlmisc" field_ref="?dummy_XYO"/>
-		<!--P2 (kg m-3) mass_concentration_of_miscellaneous_phytoplankton_expressed_as_chlorophyll_in_sea_water : chlorophyll from additional phytoplankton component concentrations alone-->
+		<!--P1 (kg m-3) mass_concentration_of_miscellaneous_phytoplankton_expressed_as_chlorophyll_in_sea_water : chlorophyll from additional phytoplankton component concentrations alone-->
 		<field id="CMIP6_chlmiscos" field_ref="?dummy_XY_depth0m"/>
 		<!--P3 (kg m-3) mass_concentration_of_miscellaneous_phytoplankton_expressed_as_chlorophyll_in_sea_water : chlorophyll from additional phytoplankton component concentrations alone-->
 		<field id="CMIP6_chlos" field_ref="?dummy_XY"/>
 		<!--P1 (kg m-3) mass_concentration_of_phytoplankton_expressed_as_chlorophyll_in_sea_water : sum of chlorophyll from all phytoplankton group concentrations at the sea surface.  In most models this is equal to chldiat+chlmisc, that is the sum of "Diatom Chlorophyll Mass Concentration" plus "Other Phytoplankton Chlorophyll Mass Concentration"-->
 		<field id="CMIP6_chlpico" field_ref="?dummy_XYO"/>
-		<!--P2 (kg m-3) mass_concentration_of_picophytoplankton_expressed_as_chlorophyll_in_sea_water : chlorophyll concentration from the picophytoplankton (<2 um) component alone-->
+		<!--P1 (kg m-3) mass_concentration_of_picophytoplankton_expressed_as_chlorophyll_in_sea_water : chlorophyll concentration from the picophytoplankton (<2 um) component alone-->
 		<field id="CMIP6_chlpicoos" field_ref="?dummy_XY_depth0m"/>
 		<!--P3 (kg m-3) mass_concentration_of_picophytoplankton_expressed_as_chlorophyll_in_sea_water : chlorophyll concentration from the picophytoplankton (<2 um) component alone-->
 		<field id="CMIP6_co3" field_ref="?dummy_XYO"/>
@@ -90,13 +90,13 @@
 		<field id="CMIP6_dfeos" field_ref="?dummy_XY_depth0m"/>
 		<!--P1 (mol m-3) mole_concentration_of_dissolved_iron_in_sea_water : dissolved iron in sea water is meant to include both Fe2+ and Fe3+ ions (but not, e.g., particulate detrital iron)-->
 		<field id="CMIP6_dissi13c" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_dissolved_inorganic_carbon13_in_sea_water : Dissolved inorganic 14carbon (CO3+HCO3+H2CO3) concentration-->
+		<!--P1 (mol m-3) mole_concentration_of_dissolved_inorganic_carbon13_in_sea_water : Dissolved inorganic 14carbon (CO3+HCO3+H2CO3) concentration-->
 		<field id="CMIP6_dissi13cos" field_ref="?dummy_XY_depth0m"/>
 		<!--P1 (mol m-3) mole_concentration_of_dissolved_inorganic_carbon13_in_sea_water : Dissolved inorganic 14carbon (CO3+HCO3+H2CO3) concentration-->
 		<field id="CMIP6_dissi14c" field_ref="?dummy_XYO"/>
 		<!--P2 (mol m-3)  : Concentration of DI14C-->
 		<field id="CMIP6_dissi14cabio" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_dissolved_inorganic_carbon14_in_sea_water : Abiotic Dissolved inorganic 14carbon (CO3+HCO3+H2CO3) concentration-->
+		<!--P1 (mol m-3) mole_concentration_of_dissolved_inorganic_carbon14_in_sea_water : Abiotic Dissolved inorganic 14carbon (CO3+HCO3+H2CO3) concentration-->
 		<field id="CMIP6_dissi14cabioos" field_ref="?dummy_XY_depth0m"/>
 		<!--P1 (mol m-3) mole_concentration_of_dissolved_inorganic_carbon14_in_sea_water : Abiotic Dissolved inorganic 14carbon (CO3+HCO3+H2CO3) concentration-->
 		<field id="CMIP6_dissic" field_ref="?dummy_XYO"/>
@@ -106,13 +106,13 @@
 		<field id="CMIP6_dissicabioos" field_ref="?dummy_XY_depth0m"/>
 		<!--P1 (mol m-3) mole_concentration_of_dissolved_inorganic_carbon_abiotic_analogue_in_sea_water : Abiotic Dissolved inorganic carbon (CO3+HCO3+H2CO3) concentration-->
 		<field id="CMIP6_dissicnat" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_dissolved_inorganic_carbon_natural_analogue_in_sea_water : Dissolved inorganic carbon (CO3+HCO3+H2CO3) concentration at preindustrial atmospheric xCO2-->
+		<!--P1 (mol m-3) mole_concentration_of_dissolved_inorganic_carbon_natural_analogue_in_sea_water : Dissolved inorganic carbon (CO3+HCO3+H2CO3) concentration at preindustrial atmospheric xCO2-->
 		<field id="CMIP6_dissicnatos" field_ref="?dummy_XY_depth0m"/>
 		<!--P1 (mol m-3) mole_concentration_of_dissolved_inorganic_carbon_natural_analogue_in_sea_water : Dissolved inorganic carbon (CO3+HCO3+H2CO3) concentration at preindustrial atmospheric xCO2-->
 		<field id="CMIP6_dissoc" field_ref="?dummy_XYO"/>
 		<!--P2 (mol m-3) mole_concentration_of_dissolved_organic_carbon_in_sea_water : Sum of dissolved carbon component concentrations explicitly represented (i.e. not ~40 uM refractory unless explicit)-->
 		<field id="CMIP6_dmso" field_ref="?dummy_XYO"/>
-		<!--P3 (mol m-3) mole_concentration_of_dimethyl_sulfide_in_sea_water : Mole Concentration of Dimethyl Sulphide in sea water-->
+		<!--P1 (mol m-3) mole_concentration_of_dimethyl_sulfide_in_sea_water : Mole Concentration of Dimethyl Sulphide in sea water-->
 		<field id="CMIP6_dmsos" field_ref="?dummy_XY_depth0m"/>
 		<!--P3 (mol m-3) mole_concentration_of_dimethyl_sulfide_in_sea_water : Surface Mole Concentration of Dimethyl Sulphide in sea water-->
 		<field id="CMIP6_dpco2" field_ref="?dummy_XY_depth0m"/>
@@ -138,23 +138,23 @@
 		<field id="CMIP6_epsi100" field_ref="?dummy_XY_depth100m"/>
 		<!--P1 (mol m-2 s-1) sinking_mole_flux_of_particulate_silicon_in_sea_water : Downward Flux of Particulate Silica-->
 		<field id="CMIP6_exparag" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-2 s-1) sinking_mole_flux_of_aragonite_expressed_as_carbon_in_sea_water : Sinking Aragonite Flux-->
+		<!--P1 (mol m-2 s-1) sinking_mole_flux_of_aragonite_expressed_as_carbon_in_sea_water : Sinking Aragonite Flux-->
 		<field id="CMIP6_expc" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_matter_expressed_as_carbon_in_sea_water : Sinking Particulate Organic Carbon Flux-->
+		<!--P1 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_matter_expressed_as_carbon_in_sea_water : Sinking Particulate Organic Carbon Flux-->
 		<field id="CMIP6_expcalc" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-2 s-1) sinking_mole_flux_of_calcite_expressed_as_carbon_in_sea_water : Sinking Calcite Flux-->
+		<!--P1 (mol m-2 s-1) sinking_mole_flux_of_calcite_expressed_as_carbon_in_sea_water : Sinking Calcite Flux-->
 		<field id="CMIP6_expfe" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-2 s-1) sinking_mole_flux_of_particulate_iron_in_sea_water : Sinking Particulate Iron Flux-->
+		<!--P1 (mol m-2 s-1) sinking_mole_flux_of_particulate_iron_in_sea_water : Sinking Particulate Iron Flux-->
 		<field id="CMIP6_expn" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_nitrogen_in_sea_water : Sinking Particulate Organic Nitrogen Flux-->
+		<!--P1 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_nitrogen_in_sea_water : Sinking Particulate Organic Nitrogen Flux-->
 		<field id="CMIP6_expp" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_phosphorus_in_sea_water : Sinking Particulate Organic Phosphorus Flux-->
+		<!--P1 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_phosphorus_in_sea_water : Sinking Particulate Organic Phosphorus Flux-->
 		<field id="CMIP6_expsi" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-2 s-1) sinking_mole_flux_of_particulate_silicon_in_sea_water : Sinking Particulate Silica Flux-->
+		<!--P1 (mol m-2 s-1) sinking_mole_flux_of_particulate_silicon_in_sea_water : Sinking Particulate Silica Flux-->
 		<field id="CMIP6_fbddtalk" field_ref="?dummy_XY_olayer100m"/>
 		<!--P3 (mol m-2 s-1) integral_wrt_depth_of_tendency_of_sea_water_alkalinity_expressed_as_mole_equivalent_due_to_biological_processes : vertical integral of net biological terms in time rate of change of alkalinity-->
-		<field id="CMIP6_fbddtdic" field_ref="?dummy_XYO"/>
-		<!--P3 (mol m-2 s-1) tendency_of_ocean_mole_content_of_dissolved_inorganic_carbon_due_to_biological_processes : Rate of Change of Dissolved Inorganic Carbon due to Biological Activity-->
+		<field id="CMIP6_fbddtdic" field_ref="?dummy_XY_olayer100m"/>
+		<!--P1 (mol m-2 s-1) tendency_of_ocean_mole_content_of_dissolved_inorganic_carbon_due_to_biological_processes : vertical integral of net biological terms in time rate of change of dissolved inorganic carbon-->
 		<field id="CMIP6_fbddtdife" field_ref="?dummy_XY_olayer100m"/>
 		<!--P3 (mol m-2 s-1) tendency_of_ocean_mole_content_of_dissolved_inorganic_iron_due_to_biological_processes : vertical integral of net biological terms in time rate of change of dissolved inorganic iron-->
 		<field id="CMIP6_fbddtdin" field_ref="?dummy_XY_olayer100m"/>
@@ -163,10 +163,10 @@
 		<!--P3 (mol m-2 s-1) tendency_of_ocean_mole_content_of_dissolved_inorganic_phosphorus_due_to_biological_processes : vertical integral of net biological terms in time rate of change of phosphorus-->
 		<field id="CMIP6_fbddtdisi" field_ref="?dummy_XY_olayer100m"/>
 		<!--P3 (mol m-2 s-1) tendency_of_ocean_mole_content_of_dissolved_inorganic_silicon_due_to_biological_processes : vertical integral of net biological terms in time rate of change of dissolved inorganic silicon-->
-		<field id="CMIP6_fddtalk" field_ref="?dummy_XYO"/>
-		<!--P3 (mol m-2 s-1) integral_wrt_depth_of_tendency_of_sea_water_alkalinity_expressed_as_mole_equivalent : Rate of Change of Total Alkalinity-->
-		<field id="CMIP6_fddtdic" field_ref="?dummy_XYO"/>
-		<!--P3 (mol m-2 s-1) tendency_of_ocean_mole_content_of_dissolved_inorganic_carbon : Rate of Change of Net Dissolved Inorganic Carbon-->
+		<field id="CMIP6_fddtalk" field_ref="?dummy_XY_olayer100m"/>
+		<!--P1 (mol m-2 s-1) integral_wrt_depth_of_tendency_of_sea_water_alkalinity_expressed_as_mole_equivalent : vertical integral of net time rate of change of total alkalinity-->
+		<field id="CMIP6_fddtdic" field_ref="?dummy_XY_olayer100m"/>
+		<!--P1 (mol m-2 s-1) tendency_of_ocean_mole_content_of_dissolved_inorganic_carbon : Rate of Change of Net Dissolved Inorganic Carbon-->
 		<field id="CMIP6_fddtdife" field_ref="?dummy_XY_olayer100m"/>
 		<!--P3 (mol m-2 s-1) tendency_of_ocean_mole_content_of_dissolved_inorganic_iron : vertical integral of net time rate of change of dissolved inorganic iron-->
 		<field id="CMIP6_fddtdin" field_ref="?dummy_XY_olayer100m"/>
@@ -208,7 +208,7 @@
 		<field id="CMIP6_fsn" field_ref="?dummy_XY_depth0m"/>
 		<!--P1 (mol m-2 s-1) tendency_of_ocean_mole_content_of_elemental_nitrogen_due_to_deposition_and_fixation_and_runoff : Surface Downward Net Flux of Nitrogen-->
 		<field id="CMIP6_graz" field_ref="?dummy_XYO"/>
-		<!--P3 (mol m-3 s-1) tendency_of_mole_concentration_of_particulate_organic_matter_expressed_as_carbon_in_sea_water_due_to_grazing_of_phytoplankton : Total Grazing of Phytoplankton by Zooplankton-->
+		<!--P1 (mol m-3 s-1) tendency_of_mole_concentration_of_particulate_organic_matter_expressed_as_carbon_in_sea_water_due_to_grazing_of_phytoplankton : Total Grazing of Phytoplankton by Zooplankton-->
 		<field id="CMIP6_icfriver" field_ref="?dummy_XY_depth0m"/>
 		<!--P3 (mol m-2 s-1) tendency_of_ocean_mole_content_of_inorganic_carbon_due_to_runoff_and_sediment_dissolution : Inorganic Carbon supply to ocean through runoff (separate from gas exchange)-->
 		<field id="CMIP6_intdic" field_ref="?dummy_XY"/>
@@ -278,7 +278,7 @@
 		<field id="CMIP6_nh4" field_ref="?dummy_XYO"/>
 		<!--P2 (mol m-3) mole_concentration_of_ammonium_in_sea_water : Dissolved Ammonium Concentration-->
 		<field id="CMIP6_no3" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_nitrate_in_sea_water : Dissolved Nitrate Concentration-->
+		<!--P1 (mol m-3) mole_concentration_of_nitrate_in_sea_water : Dissolved Nitrate Concentration-->
 		<field id="CMIP6_no3os" field_ref="?dummy_XY_depth0m"/>
 		<!--P1 (mol m-3) mole_concentration_of_nitrate_in_sea_water : Surface Dissolved Nitrate Concentration-->
 		<field id="CMIP6_o2" field_ref="?dummy_XYO"/>
@@ -295,20 +295,20 @@
 		<!--P3 (mol m-2 s-1) tendency_of_ocean_mole_content_of_organic_carbon_due_to_runoff_and_sediment_dissolution : Organic Carbon supply to ocean through runoff (separate from gas exchange)-->
 		<field id="CMIP6_parag" field_ref="?dummy_XYO"/>
 		<!--P1 (mol m-3 s-1) tendency_of_mole_concentration_of_aragonite_expressed_as_carbon_in_sea_water_due_to_biological_production : Aragonite Production-->
-		<field id="CMIP6_pbfe" field_ref="?dummy_XY_depth0m"/>
-		<!--P2 (mol m-3 s-1) tendency_of_mole_concentration_of_iron_in_sea_water_due_to_biological_production : Biogenic Iron Production-->
-		<field id="CMIP6_pbsi" field_ref="?dummy_XY_depth0m"/>
-		<!--P2 (mol m-3 s-1) tendency_of_mole_concentration_of_silicon_in_sea_water_due_to_biological_production : Biogenic Silica Production-->
+		<field id="CMIP6_pbfe" field_ref="?dummy_XYO"/>
+		<!--P1 (mol m-3 s-1) tendency_of_mole_concentration_of_iron_in_sea_water_due_to_biological_production : Biogenic Iron Production-->
+		<field id="CMIP6_pbsi" field_ref="?dummy_XYO"/>
+		<!--P1 (mol m-3 s-1) tendency_of_mole_concentration_of_silicon_in_sea_water_due_to_biological_production : Biogenic Silica Production-->
 		<field id="CMIP6_pcalc" field_ref="?dummy_XYO"/>
 		<!--P1 (mol m-3 s-1) tendency_of_mole_concentration_of_calcite_expressed_as_carbon_in_sea_water_due_to_biological_production : Calcite Production-->
 		<field id="CMIP6_ph" field_ref="?dummy_XYO"/>
 		<!--P1 (1) sea_water_ph_reported_on_total_scale : negative log10 of hydrogen ion concentration with the concentration expressed as mol H kg-1.-->
 		<field id="CMIP6_phabio" field_ref="?dummy_XYO"/>
-		<!--P2 (1) sea_water_ph_abiotic_analogue_reported_on_total_scale : negative log10 of hydrogen ion concentration with the concentration expressed as mol H kg-1 (abiotic component)..-->
+		<!--P1 (1) sea_water_ph_abiotic_analogue_reported_on_total_scale : negative log10 of hydrogen ion concentration with the concentration expressed as mol H kg-1 (abiotic component)..-->
 		<field id="CMIP6_phabioos" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (1) sea_water_ph_abiotic_analogue_reported_on_total_scale : negative log10 of hydrogen ion concentration with the concentration expressed as mol H kg-1.-->
 		<field id="CMIP6_phnat" field_ref="?dummy_XYO"/>
-		<!--P2 (1) sea_water_ph_natural_analogue_reported_on_total_scale : negative log10 of hydrogen ion concentration with the concentration expressed as mol H kg-1 (natural component).-->
+		<!--P1 (1) sea_water_ph_natural_analogue_reported_on_total_scale : negative log10 of hydrogen ion concentration with the concentration expressed as mol H kg-1 (natural component).-->
 		<field id="CMIP6_phnatos" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (1) sea_water_ph_natural_analogue_reported_on_total_scale : negative log10 of hydrogen ion concentration with the concentration expressed as mol H kg-1.-->
 		<field id="CMIP6_phyc" field_ref="?dummy_XYO"/>
@@ -322,39 +322,39 @@
 		<field id="CMIP6_phydiaz" field_ref="?dummy_XYO"/>
 		<!--P2 (mol m-3) mole_concentration_of_diazotrophs_expressed_as_carbon_in_sea_water : carbon concentration from the diazotrophic phytoplankton component alone-->
 		<field id="CMIP6_phyfe" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_phytoplankton_expressed_as_iron_in_sea_water : sum of phytoplankton iron component concentrations-->
+		<!--P1 (mol m-3) mole_concentration_of_phytoplankton_expressed_as_iron_in_sea_water : sum of phytoplankton iron component concentrations-->
 		<field id="CMIP6_phyfeos" field_ref="?dummy_XY_depth0m"/>
 		<!--P3 (mol m-3) mole_concentration_of_phytoplankton_expressed_as_iron_in_sea_water : sum of phytoplankton iron component concentrations-->
 		<field id="CMIP6_phymisc" field_ref="?dummy_XYO"/>
 		<!--P2 (mol m-3) mole_concentration_of_miscellaneous_phytoplankton_expressed_as_carbon_in_sea_water : carbon concentration from additional phytoplankton component alone-->
 		<field id="CMIP6_phyn" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_phytoplankton_expressed_as_nitrogen_in_sea_water : sum of phytoplankton nitrogen component concentrations-->
+		<!--P1 (mol m-3) mole_concentration_of_phytoplankton_expressed_as_nitrogen_in_sea_water : sum of phytoplankton nitrogen component concentrations-->
 		<field id="CMIP6_phynos" field_ref="?dummy_XY_depth0m"/>
 		<!--P3 (mol m-3) mole_concentration_of_phytoplankton_expressed_as_nitrogen_in_sea_water : sum of phytoplankton nitrogen component concentrations-->
 		<field id="CMIP6_phyp" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_phytoplankton_expressed_as_phosphorus_in_sea_water : sum of phytoplankton phosphorus components-->
+		<!--P1 (mol m-3) mole_concentration_of_phytoplankton_expressed_as_phosphorus_in_sea_water : sum of phytoplankton phosphorus components-->
 		<field id="CMIP6_phypico" field_ref="?dummy_XYO"/>
 		<!--P1 (mol m-3) mole_concentration_of_picophytoplankton_expressed_as_carbon_in_sea_water : carbon concentration from the picophytoplankton (<2 um) component alone-->
 		<field id="CMIP6_phypos" field_ref="?dummy_XY_depth0m"/>
 		<!--P3 (mol m-3) mole_concentration_of_phytoplankton_expressed_as_phosphorus_in_sea_water : sum of phytoplankton phosphorus components-->
 		<field id="CMIP6_physi" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_phytoplankton_expressed_as_silicon_in_sea_water : sum of phytoplankton silica component concentrations-->
+		<!--P1 (mol m-3) mole_concentration_of_phytoplankton_expressed_as_silicon_in_sea_water : sum of phytoplankton silica component concentrations-->
 		<field id="CMIP6_physios" field_ref="?dummy_XY_depth0m"/>
 		<!--P3 (mol m-3) mole_concentration_of_phytoplankton_expressed_as_silicon_in_sea_water : sum of phytoplankton silica component concentrations-->
-		<field id="CMIP6_pnitrate" field_ref="?dummy_XY_depth0m"/>
-		<!--P2 (mol m-3 s-1) tendency_of_mole_concentration_of_particulate_organic_matter_expressed_as_carbon_in_sea_water_due_to_nitrate_utilization : Primary (organic carbon) production by phytoplankton due to nitrate uptake alone-->
+		<field id="CMIP6_pnitrate" field_ref="?dummy_XYO"/>
+		<!--P1 (mol m-3 s-1) tendency_of_mole_concentration_of_particulate_organic_matter_expressed_as_carbon_in_sea_water_due_to_nitrate_utilization : Primary (organic carbon) production by phytoplankton due to nitrate uptake alone-->
 		<field id="CMIP6_po4" field_ref="?dummy_XYO"/>
 		<!--P1 (mol m-3) mole_concentration_of_dissolved_inorganic_phosphorus_in_sea_water : Total Dissolved Inorganic Phosphorus Concentration-->
 		<field id="CMIP6_pon" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_particulate_organic_matter_expressed_as_nitrogen_in_sea_water : sum of particulate organic nitrogen component concentrations-->
+		<!--P1 (mol m-3) mole_concentration_of_particulate_organic_matter_expressed_as_nitrogen_in_sea_water : sum of particulate organic nitrogen component concentrations-->
 		<field id="CMIP6_ponos" field_ref="?dummy_XY_depth0m"/>
 		<!--P3 (mol m-3) mole_concentration_of_particulate_organic_matter_expressed_as_nitrogen_in_sea_water : sum of particulate organic nitrogen component concentrations-->
 		<field id="CMIP6_pop" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_particulate_organic_matter_expressed_as_phosphorus_in_sea_water : sum of particulate organic phosphorus component concentrations-->
+		<!--P1 (mol m-3) mole_concentration_of_particulate_organic_matter_expressed_as_phosphorus_in_sea_water : sum of particulate organic phosphorus component concentrations-->
 		<field id="CMIP6_popos" field_ref="?dummy_XY_depth0m"/>
 		<!--P3 (mol m-3) mole_concentration_of_particulate_organic_matter_expressed_as_phosphorus_in_sea_water : sum of particulate organic phosphorus component concentrations-->
 		<field id="CMIP6_pp" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3 s-1) tendency_of_mole_concentration_of_particulate_organic_matter_expressed_as_carbon_in_sea_water_due_to_net_primary_production : total primary (organic carbon) production by phytoplankton-->
+		<!--P1 (mol m-3 s-1) tendency_of_mole_concentration_of_particulate_organic_matter_expressed_as_carbon_in_sea_water_due_to_net_primary_production : total primary (organic carbon) production by phytoplankton-->
 		<field id="CMIP6_ppcalc" field_ref="?dummy_XYO"/>
 		<!--P3 (mol m-3 s-1) tendency_of_mole_concentration_of_particulate_organic_matter_expressed_as_carbon_in_sea_water_due_to_net_primary_production_by_calcareous_phytoplankton : Primary (organic carbon) production by calcareous phytoplankton components alone-->
 		<field id="CMIP6_ppdiat" field_ref="?dummy_XYO"/>
