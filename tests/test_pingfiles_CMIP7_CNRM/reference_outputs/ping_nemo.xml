@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <context id="nemo">
-	<!--CMIP7 Data Request version Software 1.1.2 - Content v1.1-->
+	<!--CMIP7 Data Request version Software 1.1.3.dev37+g18a9b7a - Content v1.2-->
 	<!--dr2xml version current_version-->
 	<!--Lab_and_model settings
-{'data_request_content_consolidation' = 'False',
-'data_request_content_directory' = 'None',
-'data_request_content_export' = 'release',
-'data_request_content_version' = 'latest_stable',
-'data_request_path' = 'current_data_request/CMIP7_DReq_Software',
+{'data_request_content_version' = 'v1.2',
+'data_request_path' = 'current_data_request',
 'data_request_used' = 'CMIP7',
 'excluded_vars' = [],
 'excluded_vars_file' = [],
 'institution_id' = 'CNRM-CERFACS',
 'listof_home_vars' = 'None',
-'max_priority' = '3',
+'max_priority' = '4',
 'mips' = {'AerChemMIP', 'AerChemMIP2', 'C4MIP', 'CDRMIP', 'CERESMIP', 'CFMIP', 'CMIP', 'CORDEX', 'DAMIP', 'DCPP', 'DynVarMIP', 'FAFMIP', 'FireMIP', 'FishMIP', 'GeoMIP', 'HT-MIP/VolMIP', 'HighResMIP', 'ISIMIP', 'ISMIP7', 'LMIP', 'LUMIP', 'LongRunMIP', 'NAHosMIP', 'OMIP', 'Other', 'PAMIP', 'PMIP', 'RAMIP', 'RFMIP', 'SIMIP', 'SOFIAMIP', 'ScenarioMIP', 'TIPMIP', 'VIACSAB', 'VolMIP', 'WhatIfMIP'},
 'path_extra_tables' = 'None',
 'path_special_defs' = './input/special_defs',
@@ -26,13 +23,17 @@
 	<!--Year processed None-->
 	<field_definition>
 		<field id="CMIP7_absscint" field_ref="?dummy_XY_swplayers"/>
-		<!--P2 (kg m-2) undef : This is a fundamental aspect of the changes in the hydrological cycle and their impact on the oceans, and due to new numerical schemes and vertical discretizations, it is important to calculate it consistently with the model formulation.-->
+		<!--P1 (kg m-2) integral_wrt_depth_of_sea_water_absolute_salinity_expressed_as_salt_mass_content : This is a fundamental aspect of the changes in the hydrological cycle and their impact on the oceans, and due to new numerical schemes and vertical discretizations, it is important to calculate it consistently with the model formulation.-->
 		<field id="CMIP7_agessc" field_ref="?dummy_XYO"/>
-		<!--P2 (yr) sea_water_age_since_surface_contact : Time elapsed since water was last in surface layer of the ocean.-->
+		<!--P1 (yr) sea_water_age_since_surface_contact : Time elapsed since water was last in surface layer of the ocean.-->
+		<field id="CMIP7_albsn" field_ref="?dummy_XY"/>
+		<!--P2 (1) surface_albedo : This is similar to Eday.albsn, but providing monthly averages-->
+		<field id="CMIP7_albsrfc" field_ref="?dummy_XY"/>
+		<!--P2 (1) surface_albedo : surface albedo at grid cell level (i.e. the albedo averaged over all potential subgrid-scale structures) over all wave-bands; this shall apply to all realms (land, ocean, sea ice, land ice)-->
 		<field id="CMIP7_arag" field_ref="?dummy_XYO"/>
-		<!--P3 (mol m-3) mole_concentration_of_aragonite_expressed_as_carbon_in_sea_water : sum of particulate aragonite components (e.g. Phytoplankton, Detrital, etc.)-->
+		<!--P2 (mol m-3) mole_concentration_of_aragonite_expressed_as_carbon_in_sea_water : sum of particulate aragonite components (e.g. Phytoplankton, Detrital, etc.)-->
 		<field id="CMIP7_aragos" field_ref="?dummy_XY"/>
-		<!--P3 (mol m-3) mole_concentration_of_aragonite_expressed_as_carbon_in_sea_water : sum of particulate aragonite components (e.g. Phytoplankton, Detrital, etc.)-->
+		<!--P2 (mol m-3) mole_concentration_of_aragonite_expressed_as_carbon_in_sea_water : sum of particulate aragonite components (e.g. Phytoplankton, Detrital, etc.)-->
 		<field id="CMIP7_areacello" field_ref="?dummy_XY"/>
 		<!--P1 (m2) cell_area : Cell areas for any grid used to report ocean variables and variables which are requested as used on the model ocean grid (e.g. hfsso, which is a downward heat flux from the atmosphere interpolated onto the ocean grid). These cell areas should be defined to enable exact calculation of global integrals (e.g., of vertical fluxes of energy at the surface and top of the atmosphere).-->
 		<field id="CMIP7_baccos" field_ref="?dummy_XY"/>
@@ -42,17 +43,17 @@
 		<field id="CMIP7_bigthetao" field_ref="?dummy_XYO"/>
 		<!--P1 (degC) sea_water_conservative_temperature : Diagnostic should be contributed only for models using conservative temperature as prognostic field.-->
 		<field id="CMIP7_bigthetaoga" field_ref="?dummy_XY"/>
-		<!--P2 (degC) sea_water_conservative_temperature : Diagnostic should be contributed only for models using conservative temperature as prognostic field.-->
+		<!--P1 (degC) sea_water_conservative_temperature : Diagnostic should be contributed only for models using conservative temperature as prognostic field.-->
 		<field id="CMIP7_calc" field_ref="?dummy_XYO"/>
-		<!--P3 (mol m-3) mole_concentration_of_calcite_expressed_as_carbon_in_sea_water : sum of particulate calcite component concentrations (e.g. Phytoplankton, Detrital, etc.)-->
+		<!--P2 (mol m-3) mole_concentration_of_calcite_expressed_as_carbon_in_sea_water : sum of particulate calcite component concentrations (e.g. Phytoplankton, Detrital, etc.)-->
 		<field id="CMIP7_calcos" field_ref="?dummy_XY"/>
 		<!--P2 (mol m-3) mole_concentration_of_calcite_expressed_as_carbon_in_sea_water : sum of particulate calcite component concentrations (e.g. Phytoplankton, Detrital, etc.)-->
 		<field id="CMIP7_chcint" field_ref="?dummy_XY_swplayers"/>
-		<!--P2 (J m-2) undef : This is the vertically-integrated heat content derived from conservative temperature (bigthetao).-->
+		<!--P1 (J m-2) integral_wrt_depth_of_sea_water_conservative_temperature_expressed_as_heat_content : This is the vertically-integrated heat content derived from conservative temperature (bigthetao).-->
 		<field id="CMIP7_chl" field_ref="?dummy_XYO"/>
-		<!--P2 (kg m-3) mass_concentration_of_phytoplankton_expressed_as_chlorophyll_in_sea_water : sum of chlorophyll from all phytoplankton group concentrations.  In most models this is equal to chldiat+chlmisc, that is the sum of "Diatom Chlorophyll Mass Concentration" plus "Other Phytoplankton Chlorophyll Mass Concentration"-->
+		<!--P1 (kg m-3) mass_concentration_of_phytoplankton_expressed_as_chlorophyll_in_sea_water : sum of chlorophyll from all phytoplankton group concentrations.  In most models this is equal to chldiat+chlmisc, that is the sum of "Diatom Chlorophyll Mass Concentration" plus "Other Phytoplankton Chlorophyll Mass Concentration"-->
 		<field id="CMIP7_chlcalc" field_ref="?dummy_XYO"/>
-		<!--P3 (kg m-3) mass_concentration_of_calcareous_phytoplankton_expressed_as_chlorophyll_in_sea_water : chlorophyll concentration from the calcite-producing phytoplankton component alone-->
+		<!--P2 (kg m-3) mass_concentration_of_calcareous_phytoplankton_expressed_as_chlorophyll_in_sea_water : chlorophyll concentration from the calcite-producing phytoplankton component alone-->
 		<field id="CMIP7_chlcalcos" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-3) mass_concentration_of_calcareous_phytoplankton_expressed_as_chlorophyll_in_sea_water : chlorophyll concentration from the calcite-producing phytoplankton component alone-->
 		<field id="CMIP7_chldiat" field_ref="?dummy_XYO"/>
@@ -68,145 +69,177 @@
 		<field id="CMIP7_chlmiscos" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-3) mass_concentration_of_miscellaneous_phytoplankton_expressed_as_chlorophyll_in_sea_water : chlorophyll from additional phytoplankton component concentrations alone-->
 		<field id="CMIP7_chlos" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-3) mass_concentration_of_phytoplankton_expressed_as_chlorophyll_in_sea_water : sum of chlorophyll from all phytoplankton group concentrations.  In most models this is equal to chldiat+chlmisc, that is the sum of "Diatom Chlorophyll Mass Concentration" plus "Other Phytoplankton Chlorophyll Mass Concentration"-->
+		<!--P1 (kg m-3) mass_concentration_of_phytoplankton_expressed_as_chlorophyll_in_sea_water : sum of chlorophyll from all phytoplankton group concentrations at the sea surface.  In most models this is equal to chldiat+chlmisc, that is the sum of "Diatom Chlorophyll Mass Concentration" plus "Other Phytoplankton Chlorophyll Mass Concentration"-->
 		<field id="CMIP7_chlpico" field_ref="?dummy_XYO"/>
 		<!--P2 (kg m-3) mass_concentration_of_picophytoplankton_expressed_as_chlorophyll_in_sea_water : chlorophyll concentration from the picophytoplankton (<2 um) component alone-->
 		<field id="CMIP7_chlpicoos" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-3) mass_concentration_of_picophytoplankton_expressed_as_chlorophyll_in_sea_water : chlorophyll concentration from the picophytoplankton (<2 um) component alone-->
 		<field id="CMIP7_co3" field_ref="?dummy_XY"/>
-		<!--P3 (mol m-3) mole_concentration_of_carbonate_expressed_as_carbon_in_sea_water : Mole concentration (number of moles per unit volume: molarity) of the carbonate anion (CO3).-->
+		<!--P1 (mol m-3) mole_concentration_of_carbonate_expressed_as_carbon_in_sea_water : Mole concentration (number of moles per unit volume: molarity) of the carbonate anion (CO3).-->
 		<field id="CMIP7_co3os" field_ref="?dummy_XY"/>
-		<!--P3 (mol m-3) mole_concentration_of_carbonate_expressed_as_carbon_in_sea_water : Near surface mole concentration (number of moles per unit volume: molarity) of the carbonate anion (CO3).-->
+		<!--P1 (mol m-3) mole_concentration_of_carbonate_expressed_as_carbon_in_sea_water : Near surface mole concentration (number of moles per unit volume: molarity) of the carbonate anion (CO3).-->
 		<field id="CMIP7_co3satarag" field_ref="?dummy_XY"/>
-		<!--P3 (mol m-3) mole_concentration_of_carbonate_expressed_as_carbon_at_equilibrium_with_pure_aragonite_in_sea_water : Mole concentration (number of moles per unit volume: molarity) of the carbonate anion (CO3) for sea water in equilibrium with pure Aragonite. Aragonite (CaCO3) is a mineral that is a polymorph of calcium carbonate.-->
+		<!--P1 (mol m-3) mole_concentration_of_carbonate_expressed_as_carbon_at_equilibrium_with_pure_aragonite_in_sea_water : Mole concentration (number of moles per unit volume: molarity) of the carbonate anion (CO3) for sea water in equilibrium with pure Aragonite. Aragonite (CaCO3) is a mineral that is a polymorph of calcium carbonate.-->
 		<field id="CMIP7_co3sataragos" field_ref="?dummy_XY"/>
-		<!--P3 (mol m-3) mole_concentration_of_carbonate_expressed_as_carbon_at_equilibrium_with_pure_aragonite_in_sea_water : Near surface mole concentration (number of moles per unit volume: molarity) of the carbonate anion (CO3) for sea water in equilibrium with pure Aragonite. Aragonite (CaCO3) is a mineral that is a polymorph of calcium carbonate.-->
-		<field id="CMIP7_deptho" field_ref="?dummy_XY"/>
+		<!--P1 (mol m-3) mole_concentration_of_carbonate_expressed_as_carbon_at_equilibrium_with_pure_aragonite_in_sea_water : Near surface mole concentration (number of moles per unit volume: molarity) of the carbonate anion (CO3) for sea water in equilibrium with pure Aragonite. Aragonite (CaCO3) is a mineral that is a polymorph of calcium carbonate.-->
+		<field id="CMIP7_deptho" field_ref="?dummy_XY_depthseafloor"/>
 		<!--P1 (m) sea_floor_depth_below_geoid : Ocean bathymetry. Reported here is the sea floor depth for present day relative to z=0 geoid. Reported as missing for land grid cells.-->
 		<field id="CMIP7_detoc" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_organic_detritus_expressed_as_carbon_in_sea_water : sum of detrital organic carbon component concentrations-->
+		<!--P1 (mol m-3) mole_concentration_of_organic_detritus_expressed_as_carbon_in_sea_water : sum of detrital organic carbon component concentrations-->
 		<field id="CMIP7_dfe" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_dissolved_iron_in_sea_water : dissolved iron in sea water is meant to include both Fe2+ and Fe3+ ions (but not, e.g., particulate detrital iron)-->
+		<!--P1 (mol m-3) mole_concentration_of_dissolved_iron_in_sea_water : dissolved iron in sea water is meant to include both Fe2+ and Fe3+ ions (but not, e.g., particulate detrital iron)-->
 		<field id="CMIP7_dfeos" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-3) mole_concentration_of_dissolved_iron_in_sea_water : dissolved iron in sea water is meant to include both Fe2+ and Fe3+ ions (but not, e.g., particulate detrital iron)-->
+		<!--P1 (mol m-3) mole_concentration_of_dissolved_iron_in_sea_water : dissolved iron in sea water is meant to include both Fe2+ and Fe3+ ions (but not, e.g., particulate detrital iron)-->
+		<field id="CMIP7_difmxybo" field_ref="?dummy_XYO"/>
+		<!--P1 (m4 s-1) ocean_momentum_xy_biharmonic_diffusivity : Lateral biharmonic viscosity applied to the momentum equations.-->
+		<field id="CMIP7_difmxylo" field_ref="?dummy_XYO"/>
+		<!--P1 (m2 s-1) ocean_momentum_xy_laplacian_diffusivity : Lateral Laplacian viscosity applied to the momentum equations.-->
+		<field id="CMIP7_diftrblo" field_ref="?dummy_XYO"/>
+		<!--P1 (m2 s-1) ocean_tracer_laplacian_diffusivity_due_to_parameterized_mesoscale_eddy_advection : Ocean tracer diffusivity associated with parameterized eddy-induced advective transport. Sometimes this diffusivity is called the "thickness" diffusivity. For CMIP5, this diagnostic was called "ocean tracer bolus laplacian diffusivity".  The CMIP6 name is physically more relevant.-->
+		<field id="CMIP7_diftrelo" field_ref="?dummy_XYO"/>
+		<!--P1 (m2 s-1) ocean_tracer_epineutral_laplacian_diffusivity : Ocean tracer diffusivity associated with parameterized eddy-induced diffusive transport oriented along neutral or isopycnal directions. Sometimes this diffusivity is called the neutral diffusivity or isopycnal diffusivity or Redi diffusivity.-->
+		<field id="CMIP7_difvho" field_ref="?dummy_XYO"/>
+		<!--P1 (m2 s-1) ocean_vertical_heat_diffusivity : Vertical/dianeutral diffusivity applied to prognostic temperature field.-->
+		<field id="CMIP7_difvso" field_ref="?dummy_XYO"/>
+		<!--P1 (m2 s-1) ocean_vertical_salt_diffusivity : Vertical/dianeutral diffusivity applied to prognostic salinity field.-->
+		<field id="CMIP7_dispkexyfo" field_ref="?dummy_XY"/>
+		<!--P1 (W m-2) ocean_kinetic_energy_dissipation_per_unit_area_due_to_xy_friction : Depth integrated impacts on kinetic energy arising from lateral frictional dissipation associated with Laplacian and/or biharmonic viscosity. For CMIP5, this diagnostic was 3d, whereas the CMIP6 depth integrated diagnostic is sufficient for many purposes and reduces archive requirements.-->
+		<field id="CMIP7_dissi13c" field_ref="?dummy_XYO"/>
+		<!--P2 (mol m-3) mole_concentration_of_dissolved_inorganic_13C_in_sea_water : Dissolved inorganic 14carbon (CO3+HCO3+H2CO3) concentration-->
+		<field id="CMIP7_dissi13cos" field_ref="?dummy_XY"/>
+		<!--P2 (mol m-3) mole_concentration_of_dissolved_inorganic_13C_in_sea_water : Dissolved inorganic 14carbon (CO3+HCO3+H2CO3) concentration-->
+		<field id="CMIP7_dissi14c" field_ref="?dummy_XYO"/>
+		<!--P2 (mol m-3) mole_concentration_of_dissolved_inorganic_14C_in_sea_water : Dissolved inorganic carbon-14 (CO3+HCO3+H2CO3) concentration-->
+		<field id="CMIP7_dissi14cabio" field_ref="?dummy_XYO"/>
+		<!--P2 (mol m-3) mole_concentration_of_dissolved_inorganic_14C_in_sea_water : Abiotic Dissolved inorganic 14carbon (CO3+HCO3+H2CO3) concentration-->
+		<field id="CMIP7_dissi14cabioos" field_ref="?dummy_XY"/>
+		<!--P2 (mol m-3) mole_concentration_of_dissolved_inorganic_14C_in_sea_water : Abiotic Dissolved inorganic 14carbon (CO3+HCO3+H2CO3) concentration-->
 		<field id="CMIP7_dissic" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_dissolved_inorganic_carbon_in_sea_water : Dissolved inorganic carbon (CO3+HCO3+H2CO3) concentration-->
+		<!--P1 (mol m-3) mole_concentration_of_dissolved_inorganic_carbon_in_sea_water : Dissolved inorganic carbon (CO3+HCO3+H2CO3) concentration-->
 		<field id="CMIP7_dissicos" field_ref="?dummy_XY"/>
 		<!--P2 (mol m-3) mole_concentration_of_dissolved_inorganic_carbon_in_sea_water : Dissolved inorganic carbon (CO3+HCO3+H2CO3) concentration-->
 		<field id="CMIP7_dissoc" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_dissolved_organic_carbon_in_sea_water : Sum of dissolved carbon component concentrations explicitly represented (i.e. not ~40 uM refractory unless explicit)-->
+		<!--P1 (mol m-3) mole_concentration_of_dissolved_organic_carbon_in_sea_water : Sum of dissolved carbon component concentrations explicitly represented (i.e. not ~40 uM refractory unless explicit)-->
 		<field id="CMIP7_dmso" field_ref="?dummy_XYO"/>
-		<!--P3 (mol m-3) mole_concentration_of_dimethyl_sulfide_in_sea_water : Mole concentration of dimethyl sulphide in water-->
+		<!--P2 (mol m-3) mole_concentration_of_dimethyl_sulfide_in_sea_water : Mole concentration of dimethyl sulphide in water-->
 		<field id="CMIP7_dmsos" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-3) mole_concentration_of_dimethyl_sulfide_in_sea_water : Mole concentration of dimethyl sulphide in water in the near surface layer-->
+		<!--P1 (mol m-3) mole_concentration_of_dimethyl_sulfide_in_sea_water : Mole concentration of dimethyl sulphide in water in the near surface layer-->
 		<field id="CMIP7_dpco2" field_ref="?dummy_XY"/>
-		<!--P2 (Pa) surface_carbon_dioxide_partial_pressure_difference_between_sea_water_and_air : Difference in partial pressure of carbon dioxide between sea water and air.  The partial pressure of a dissolved gas in sea water is the partial pressure in air with which it would be in equilibrium.-->
+		<!--P1 (Pa) surface_carbon_dioxide_partial_pressure_difference_between_sea_water_and_air : Difference in partial pressure of carbon dioxide between sea water and air.  The partial pressure of a dissolved gas in sea water is the partial pressure in air with which it would be in equilibrium.-->
 		<field id="CMIP7_dpo2" field_ref="?dummy_XY"/>
-		<!--P2 (Pa) surface_molecular_oxygen_partial_pressure_difference_between_sea_water_and_air : The partial pressure of a dissolved gas in sea water is the partial pressure in air with which it would be in equilibrium.  The partial pressure of a gaseous constituent of air is the pressure which it alone would exert with unchanged temperature and number of moles per unit volume.  The surface called "surface" means the lower boundary of the atmosphere.-->
+		<!--P1 (Pa) surface_molecular_oxygen_partial_pressure_difference_between_sea_water_and_air : The partial pressure of a dissolved gas in sea water is the partial pressure in air with which it would be in equilibrium.  The partial pressure of a gaseous constituent of air is the pressure which it alone would exert with unchanged temperature and number of moles per unit volume.  The surface called "surface" means the lower boundary of the atmosphere.-->
 		<field id="CMIP7_dxto" field_ref="?dummy_XY"/>
-		<!--P2 (m) undef : The width of the ocean model gridbox in at the t-point (dx)-->
+		<!--P1 (m) cell_x_length : The linear extent of the cell in the x direction of the horizontal grid centered at t-points (points for tracers such as temperature, salinity, etc.). Not applicable to unstructured grids.-->
 		<field id="CMIP7_dxuo" field_ref="?dummy_XY"/>
-		<!--P2 (m) undef : The width of the ocean model gridbox in at the u-point (dx)-->
+		<!--P1 (m) cell_x_length : The linear extent of the cell in the x direction of the horizontal grid centered at u-points (points for velocity in the x-direction). Not applicable to unstructured grids.-->
 		<field id="CMIP7_dxvo" field_ref="?dummy_XY"/>
-		<!--P2 (m) undef : The width of the ocean model gridbox in at the v-point (dx)-->
+		<!--P1 (m) cell_x_length : The linear extent of the cell in the x direction of the horizontal grid centered at v-points (points for velocity in the y-direction). Not applicable to unstructured grids.-->
 		<field id="CMIP7_dyto" field_ref="?dummy_XY"/>
-		<!--P2 (m) undef : The width of the ocean model gridbox in at the t-point (dy)-->
+		<!--P1 (m) cell_y_length : The linear extent of the cell in the y direction of the horizontal grid centered at t-points (points for tracers such as temperature, salinity, etc.). Not applicable to unstructured grids.-->
 		<field id="CMIP7_dyuo" field_ref="?dummy_XY"/>
-		<!--P2 (m) undef : The width of the ocean model gridbox in at the u-point (dy)-->
+		<!--P1 (m) cell_y_length : The linear extent of the cell in the y direction of the horizontal grid centered at u-points (points for velocity in the x-direction). Not applicable to unstructured grids.-->
 		<field id="CMIP7_dyvo" field_ref="?dummy_XY"/>
-		<!--P2 (m) undef : The width of the ocean model gridbox in at the v-point (dy)-->
+		<!--P1 (m) cell_y_length : The linear extent of the cell in the y direction of the horizontal grid centered at v-points (points for velocity in the y-direction). Not applicable to unstructured grids.-->
 		<field id="CMIP7_epc100" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_matter_expressed_as_carbon_in_sea_water : The phrase 'expressed\_as' is used in the construction A\_expressed\_as\_B, where B is a chemical constituent of A. It means that the quantity indicated by the standard name is calculated solely with respect to the B contained in A, neglecting all other chemical constituents of A. In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.   'Sinking' is the gravitational settling of particulate matter suspended in a liquid. A sinking flux is positive downwards and is calculated relative to the movement of the surrounding fluid.-->
+		<!--P1 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_matter_expressed_as_carbon_in_sea_water : The phrase 'expressed\_as' is used in the construction A\_expressed\_as\_B, where B is a chemical constituent of A. It means that the quantity indicated by the standard name is calculated solely with respect to the B contained in A, neglecting all other chemical constituents of A. In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.   'Sinking' is the gravitational settling of particulate matter suspended in a liquid. A sinking flux is positive downwards and is calculated relative to the movement of the surrounding fluid.-->
 		<field id="CMIP7_epc1000" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_matter_expressed_as_carbon_in_sea_water : The phrase 'expressed\_as' is used in the construction A\_expressed\_as\_B, where B is a chemical constituent of A. It means that the quantity indicated by the standard name is calculated solely with respect to the B contained in A, neglecting all other chemical constituents of A. In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.   'Sinking' is the gravitational settling of particulate matter suspended in a liquid. A sinking flux is positive downwards and is calculated relative to the movement of the surrounding fluid.-->
+		<!--P1 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_matter_expressed_as_carbon_in_sea_water : The phrase 'expressed\_as' is used in the construction A\_expressed\_as\_B, where B is a chemical constituent of A. It means that the quantity indicated by the standard name is calculated solely with respect to the B contained in A, neglecting all other chemical constituents of A. In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.   'Sinking' is the gravitational settling of particulate matter suspended in a liquid. A sinking flux is positive downwards and is calculated relative to the movement of the surrounding fluid.-->
 		<field id="CMIP7_epcalc100" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-2 s-1) sinking_mole_flux_of_calcite_expressed_as_carbon_in_sea_water : The phrase 'expressed\_as' is used in the construction A\_expressed\_as\_B, where B is a chemical constituent of A. It means that the quantity indicated by the standard name is calculated solely with respect to the B contained in A, neglecting all other chemical constituents of A. In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.   'Sinking' is the gravitational settling of particulate matter suspended in a liquid. A sinking flux is positive downwards and is calculated relative to the movement of the surrounding fluid. Calcite is a mineral that is a polymorph of calcium carbonate. The chemical formula of calcite is CaCO3. Standard names also exist for aragonite, another polymorph of calcium carbonate.-->
+		<!--P1 (mol m-2 s-1) sinking_mole_flux_of_calcite_expressed_as_carbon_in_sea_water : The phrase 'expressed\_as' is used in the construction A\_expressed\_as\_B, where B is a chemical constituent of A. It means that the quantity indicated by the standard name is calculated solely with respect to the B contained in A, neglecting all other chemical constituents of A. In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.   'Sinking' is the gravitational settling of particulate matter suspended in a liquid. A sinking flux is positive downwards and is calculated relative to the movement of the surrounding fluid. Calcite is a mineral that is a polymorph of calcium carbonate. The chemical formula of calcite is CaCO3. Standard names also exist for aragonite, another polymorph of calcium carbonate.-->
 		<field id="CMIP7_epcalc1000" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-2 s-1) sinking_mole_flux_of_calcite_expressed_as_carbon_in_sea_water : The phrase 'expressed\_as' is used in the construction A\_expressed\_as\_B, where B is a chemical constituent of A. It means that the quantity indicated by the standard name is calculated solely with respect to the B contained in A, neglecting all other chemical constituents of A. In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.   'Sinking' is the gravitational settling of particulate matter suspended in a liquid. A sinking flux is positive downwards and is calculated relative to the movement of the surrounding fluid. Calcite is a mineral that is a polymorph of calcium carbonate. The chemical formula of calcite is CaCO3. Standard names also exist for aragonite, another polymorph of calcium carbonate.-->
+		<!--P1 (mol m-2 s-1) sinking_mole_flux_of_calcite_expressed_as_carbon_in_sea_water : The phrase 'expressed\_as' is used in the construction A\_expressed\_as\_B, where B is a chemical constituent of A. It means that the quantity indicated by the standard name is calculated solely with respect to the B contained in A, neglecting all other chemical constituents of A. In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.   'Sinking' is the gravitational settling of particulate matter suspended in a liquid. A sinking flux is positive downwards and is calculated relative to the movement of the surrounding fluid. Calcite is a mineral that is a polymorph of calcium carbonate. The chemical formula of calcite is CaCO3. Standard names also exist for aragonite, another polymorph of calcium carbonate.-->
 		<field id="CMIP7_epn100" field_ref="?dummy_XY"/>
-		<!--P3 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_nitrogen_in_sea_water : In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.   'Sinking' is the gravitational settling of particulate matter suspended in a liquid. A sinking flux is positive downwards and is calculated relative to the movement of the surrounding fluid.-->
+		<!--P2 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_nitrogen_in_sea_water : In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.   'Sinking' is the gravitational settling of particulate matter suspended in a liquid. A sinking flux is positive downwards and is calculated relative to the movement of the surrounding fluid.-->
 		<field id="CMIP7_epp100" field_ref="?dummy_XY"/>
-		<!--P3 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_phosphorus_in_sea_water : In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.   'Sinking' is the gravitational settling of particulate matter suspended in a liquid. A sinking flux is positive downwards and is calculated relative to the movement of the surrounding fluid.-->
+		<!--P2 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_phosphorus_in_sea_water : In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.   'Sinking' is the gravitational settling of particulate matter suspended in a liquid. A sinking flux is positive downwards and is calculated relative to the movement of the surrounding fluid.-->
 		<field id="CMIP7_epsi100" field_ref="?dummy_XY"/>
-		<!--P3 (mol m-2 s-1) sinking_mole_flux_of_particulate_silicon_in_sea_water : In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.   'Sinking' is the gravitational settling of particulate matter suspended in a liquid. A sinking flux is positive downwards and is calculated relative to the movement of the surrounding fluid.-->
+		<!--P1 (mol m-2 s-1) sinking_mole_flux_of_particulate_silicon_in_sea_water : In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.   'Sinking' is the gravitational settling of particulate matter suspended in a liquid. A sinking flux is positive downwards and is calculated relative to the movement of the surrounding fluid.-->
 		<field id="CMIP7_evs" field_ref="?dummy_XY"/>
-		<!--P3 (kg m-2 s-1) water_evapotranspiration_flux : computed as the total mass of water vapor evaporating from the ice-free portion of the ocean  divided by the area of the ocean portion of the grid cell.-->
-		<field id="CMIP7_exparagob" field_ref="?dummy_XY"/>
-		<!--P3 (mol m-2 s-1) sinking_mole_flux_of_aragonite_expressed_as_carbon_in_sea_water : Downward sinking flux of aragonite at seafloor-->
+		<!--P1 (kg m-2 s-1) water_evapotranspiration_flux : computed as the total mass of water vapor evaporating from the ice-free portion of the ocean  divided by the area of the ocean portion of the grid cell.-->
+		<field id="CMIP7_exparagob" field_ref="?dummy_XY_depthseafloor"/>
+		<!--P1 (mol m-2 s-1) sinking_mole_flux_of_aragonite_expressed_as_carbon_in_sea_water : Downward sinking flux of aragonite at seafloor-->
 		<field id="CMIP7_expc" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_matter_expressed_as_carbon_in_sea_water : Downward flux of particulate organic carbon-->
+		<!--P1 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_matter_expressed_as_carbon_in_sea_water : Downward flux of particulate organic carbon-->
 		<field id="CMIP7_expcalc" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-2 s-1) sinking_mole_flux_of_calcite_expressed_as_carbon_in_sea_water : Downward flux of Calcite-->
-		<field id="CMIP7_expcalcob" field_ref="?dummy_XY"/>
-		<!--P3 (mol m-2 s-1) sinking_mole_flux_of_calcite_expressed_as_carbon_in_sea_water : Downward sinking flux of calcite at seafloor-->
-		<field id="CMIP7_expcob" field_ref="?dummy_XY"/>
-		<!--P3 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_matter_expressed_as_carbon_in_sea_water : Downward sinking flux of particulate organic carbon at seafloor-->
-		<field id="CMIP7_expfeob" field_ref="?dummy_XY"/>
-		<!--P3 (mol m-2 s-1) sinking_mole_flux_of_particulate_iron_in_sea_water : Downward sinking flux of particulate iron at seafloor-->
-		<field id="CMIP7_expnob" field_ref="?dummy_XY"/>
-		<!--P3 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_nitrogen_in_sea_water : Downward sinking flux of particulate organic nitrogen at seafloor-->
-		<field id="CMIP7_exppob" field_ref="?dummy_XY"/>
-		<!--P3 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_phosphorus_in_sea_water : Downward sinking flux of particulate organic phosphorus at seafloor-->
-		<field id="CMIP7_expsiob" field_ref="?dummy_XY"/>
-		<!--P3 (mol m-2 s-1) sinking_mole_flux_of_particulate_silicon_in_sea_water : Downward sinking flux of particulate silicon at seafloor-->
+		<!--P1 (mol m-2 s-1) sinking_mole_flux_of_calcite_expressed_as_carbon_in_sea_water : Downward flux of Calcite-->
+		<field id="CMIP7_expcalcob" field_ref="?dummy_XY_depthseafloor"/>
+		<!--P1 (mol m-2 s-1) sinking_mole_flux_of_calcite_expressed_as_carbon_in_sea_water : Downward sinking flux of calcite at seafloor-->
+		<field id="CMIP7_expcob" field_ref="?dummy_XY_depthseafloor"/>
+		<!--P1 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_matter_expressed_as_carbon_in_sea_water : Downward sinking flux of particulate organic carbon at seafloor-->
+		<field id="CMIP7_expfeob" field_ref="?dummy_XY_depthseafloor"/>
+		<!--P1 (mol m-2 s-1) sinking_mole_flux_of_particulate_iron_in_sea_water : Downward sinking flux of particulate iron at seafloor-->
+		<field id="CMIP7_expnob" field_ref="?dummy_XY_depthseafloor"/>
+		<!--P1 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_nitrogen_in_sea_water : Downward sinking flux of particulate organic nitrogen at seafloor-->
+		<field id="CMIP7_exppob" field_ref="?dummy_XY_depthseafloor"/>
+		<!--P1 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_phosphorus_in_sea_water : Downward sinking flux of particulate organic phosphorus at seafloor-->
+		<field id="CMIP7_expsiob" field_ref="?dummy_XY_depthseafloor"/>
+		<!--P1 (mol m-2 s-1) sinking_mole_flux_of_particulate_silicon_in_sea_water : Downward sinking flux of particulate silicon at seafloor-->
+		<field id="CMIP7_fg13co2" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) surface_downward_mass_flux_of_13C_dioxide_abiotic_analogue_expressed_as_13C : Gas exchange flux of abiotic 13CO2 (positive into ocean)-->
+		<field id="CMIP7_fg14co2" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) surface_downward_mass_flux_of_14C_dioxide_abiotic_analogue_expressed_as_carbon : Gas exchange flux of carbon-14 as CO2 (positive into ocean)-->
+		<field id="CMIP7_fg14co2abio" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) surface_downward_mass_flux_of_14C_dioxide_abiotic_analogue_expressed_as_carbon : Gas exchange flux of abiotic 14CO2 (positive into ocean)-->
 		<field id="CMIP7_fgco2" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) surface_downward_mass_flux_of_carbon_dioxide_expressed_as_carbon : Gas exchange flux of CO2 (positive into ocean)-->
+		<!--P1 (kg m-2 s-1) surface_downward_mass_flux_of_carbon_dioxide_expressed_as_carbon : Gas exchange flux of CO2 (positive into ocean)-->
 		<field id="CMIP7_fgdms" field_ref="?dummy_XY"/>
-		<!--P3 (mol m-2 s-1) surface_upward_mole_flux_of_dimethyl_sulfide : Gas exchange flux of DMS (positive into atmosphere)-->
+		<!--P2 (mol m-2 s-1) surface_upward_mole_flux_of_dimethyl_sulfide : Gas exchange flux of DMS (positive into atmosphere)-->
 		<field id="CMIP7_ficeberg" field_ref="?dummy_XYO"/>
-		<!--P2 (kg m-2 s-1) water_flux_into_sea_water_from_icebergs : computed as the iceberg melt water  flux into the ocean divided by the area of the ocean portion of the grid cell.-->
+		<!--P1 (kg m-2 s-1) water_flux_into_sea_water_from_icebergs : computed as the iceberg melt water  flux into the ocean divided by the area of the ocean portion of the grid cell.-->
 		<field id="CMIP7_flandice" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) water_flux_into_sea_water_from_land_ice : Computed as the water flux into the ocean due to land ice (runoff water from surface and base of land ice or melt from base of ice shelf or vertical ice front) into the ocean divided by the area ocean portion of the grid cell-->
+		<!--P1 (kg m-2 s-1) water_flux_into_sea_water_from_land_ice : Computed as the water flux into the ocean due to land ice (runoff water from surface and base of land ice or melt from base of ice shelf or vertical ice front) into the ocean divided by the area ocean portion of the grid cell-->
 		<field id="CMIP7_frfe" field_ref="?dummy_XY"/>
-		<!--P3 (mol m-2 s-1) minus_tendency_of_ocean_mole_content_of_iron_due_to_sedimentation : "Content" indicates a quantity per unit area.  The specification of a physical process by the phrase due\_to\_process means that the quantity named is a  single term in a sum of terms which together compose the general quantity  named by omitting the phrase.  "tendency\_of\_X" means derivative of X with respect to time.-->
-		<field id="CMIP7_fric" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-2 s-1) minus_tendency_of_ocean_mole_content_of_inorganic_carbon_due_to_sedimentation : Inorganic Carbon loss to sediments-->
+		<!--P1 (mol m-2 s-1) minus_tendency_of_ocean_mole_content_of_iron_due_to_sedimentation : "Content" indicates a quantity per unit area.  The specification of a physical process by the phrase due\_to\_process means that the quantity named is a  single term in a sum of terms which together compose the general quantity  named by omitting the phrase.  "tendency\_of\_X" means derivative of X with respect to time.-->
+		<field id="CMIP7_fric" field_ref="?dummy_XY_depthseafloor"/>
+		<!--P1 (mol m-2 s-1) minus_tendency_of_ocean_mole_content_of_inorganic_carbon_due_to_sedimentation : Inorganic Carbon loss to sediments-->
 		<field id="CMIP7_friver" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) water_flux_into_sea_water_from_rivers : computed as the river flux of water into the ocean divided by the area of the ocean portion of the grid cell.-->
+		<!--P1 (kg m-2 s-1) water_flux_into_sea_water_from_rivers : computed as the river flux of water into the ocean divided by the area of the ocean portion of the grid cell.-->
 		<field id="CMIP7_frn" field_ref="?dummy_XY"/>
-		<!--P3 (mol m-2 s-1) minus_tendency_of_ocean_mole_content_of_elemental_nitrogen_due_to_denitrification_and_sedimentation : "Content" indicates a quantity per unit area.  The specification of a physical process by the phrase due\_to\_process means that the quantity named is a single term in a sum of terms which together compose the general quantity  named by omitting the phrase. 'Denitrification' is the conversion of nitrate into gaseous compounds such as nitric oxide, nitrous oxide and molecular nitrogen which are then emitted to the atmosphere.  'Sedimentation' is the sinking of particulate matter to the floor of a body of water. "tendency\_of\_X" means derivative of X with respect to time.-->
-		<field id="CMIP7_froc" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-2 s-1) minus_tendency_of_ocean_mole_content_of_organic_carbon_due_to_sedimentation : Organic Carbon loss to sediments-->
+		<!--P1 (mol m-2 s-1) minus_tendency_of_ocean_mole_content_of_elemental_nitrogen_due_to_denitrification_and_sedimentation : "Content" indicates a quantity per unit area.  The specification of a physical process by the phrase due\_to\_process means that the quantity named is a single term in a sum of terms which together compose the general quantity  named by omitting the phrase. 'Denitrification' is the conversion of nitrate into gaseous compounds such as nitric oxide, nitrous oxide and molecular nitrogen which are then emitted to the atmosphere.  'Sedimentation' is the sinking of particulate matter to the floor of a body of water. "tendency\_of\_X" means derivative of X with respect to time.-->
+		<field id="CMIP7_froc" field_ref="?dummy_XY_depthseafloor"/>
+		<!--P1 (mol m-2 s-1) minus_tendency_of_ocean_mole_content_of_organic_carbon_due_to_sedimentation : Organic Carbon loss to sediments-->
 		<field id="CMIP7_fsfe" field_ref="?dummy_XY"/>
 		<!--P2 (mol m-2 s-1) tendency_of_ocean_mole_content_of_iron_due_to_deposition_and_runoff_and_sediment_dissolution : Iron supply through deposition flux onto sea surface, runoff, coasts, sediments, etc-->
 		<field id="CMIP7_fsitherm" field_ref="?dummy_XY"/>
-		<!--P3 (kg m-2 s-1) water_flux_into_sea_water_due_to_sea_ice_thermodynamics : computed as the sea ice thermodynamic water flux into the ocean divided by the area of the ocean portion of the grid cell.-->
+		<!--P1 (kg m-2 s-1) water_flux_into_sea_water_due_to_sea_ice_thermodynamics : computed as the sea ice thermodynamic water flux into the ocean divided by the area of the ocean portion of the grid cell.-->
 		<field id="CMIP7_fsn" field_ref="?dummy_XY"/>
 		<!--P2 (mol m-2 s-1) tendency_of_ocean_mole_content_of_elemental_nitrogen_due_to_deposition_and_fixation_and_runoff : Flux of nitrogen into the ocean due to deposition (sum of dry and wet deposition), fixation (the production of ammonia from nitrogen gas by diazotrophs) and runoff (liquid water which drains from land).-->
 		<field id="CMIP7_graz" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3 s-1) tendency_of_mole_concentration_of_particulate_organic_matter_expressed_as_carbon_in_sea_water_due_to_grazing_of_phytoplankton : Total grazing of phytoplankton by zooplankton defined as tendency of moles of carbon per cubic metre.-->
+		<!--P1 (mol m-3 s-1) tendency_of_mole_concentration_of_particulate_organic_matter_expressed_as_carbon_in_sea_water_due_to_grazing_of_phytoplankton : Total grazing of phytoplankton by zooplankton defined as tendency of moles of carbon per cubic metre.-->
+		<field id="CMIP7_hfacrossline" field_ref="?dummy_TR_oline"/>
+		<!--P1 (W) ocean_heat_transport_across_line : Depth-integrated total heat transport from resolved and parameterized processes across different lines on the Earth's surface (based on appendix J and table J1 of Griffies et al., 2016). Formally, this means the integral along the line of the normal component of the heat transport. Positive and negative numbers refer to total northward/eastward and southward/westward transports, respectively. The transport should be evaluated for the full depth of the ocean, except for the Pacific Equatorial Undercurrent, which is averaged from the surface to 350m. Use Celsius for temperature scale.-->
 		<field id="CMIP7_hfbasin" field_ref="?dummy_basin_zonal_mean"/>
-		<!--P2 (W) northward_ocean_heat_transport : Contains contributions from all physical processes affecting the northward heat transport, including resolved advection, parameterized advection, lateral diffusion, etc. Diagnosed here as a function of latitude and basin.   Use Celsius for temperature scale.-->
+		<!--P1 (W) northward_ocean_heat_transport : Contains contributions from all physical processes affecting the northward heat transport, including resolved advection, parameterized advection, lateral diffusion, etc. Diagnosed here as a function of latitude and basin.   Use Celsius for temperature scale.-->
 		<field id="CMIP7_hfbasinpadv" field_ref="?dummy_basin_zonal_mean"/>
-		<!--P2 (W) northward_ocean_heat_transport_due_to_parameterized_eddy_advection : Contributions to heat transport from parameterized eddy-induced advective transport due to any subgrid advective process. Diagnosed here as a function of latitude and basin.  Use Celsius for temperature scale.-->
+		<!--P1 (W) northward_ocean_heat_transport_due_to_parameterized_eddy_advection : Contributions to heat transport from parameterized eddy-induced advective transport due to any subgrid advective process. Diagnosed here as a function of latitude and basin.  Use Celsius for temperature scale.-->
 		<field id="CMIP7_hfbasinpmadv" field_ref="?dummy_basin_zonal_mean"/>
-		<!--P2 (W) northward_ocean_heat_transport_due_to_parameterized_mesoscale_eddy_advection : Contributions to heat transport from parameterized mesoscale eddy-induced advective transport. Diagnosed here as a function of latitude and basin.  Use Celsius for temperature scale.-->
+		<!--P1 (W) northward_ocean_heat_transport_due_to_parameterized_mesoscale_eddy_advection : Contributions to heat transport from parameterized mesoscale eddy-induced advective transport. Diagnosed here as a function of latitude and basin.  Use Celsius for temperature scale.-->
 		<field id="CMIP7_hfbasinpmdiff" field_ref="?dummy_basin_zonal_mean"/>
-		<!--P2 (W) northward_ocean_heat_transport_due_to_parameterized_mesoscale_eddy_diffusion : Contributions to heat transport from parameterized mesoscale eddy-induced diffusive transport (i.e., neutral diffusion). Diagnosed here as a function of latitude and basin.-->
+		<!--P1 (W) northward_ocean_heat_transport_due_to_parameterized_mesoscale_eddy_diffusion : Contributions to heat transport from parameterized mesoscale eddy-induced diffusive transport (i.e., neutral diffusion). Diagnosed here as a function of latitude and basin.-->
 		<field id="CMIP7_hfbasinpsmadv" field_ref="?dummy_basin_zonal_mean"/>
-		<!--P2 (W) northward_ocean_heat_transport_due_to_parameterized_submesoscale_eddy_advection : Contributions to heat transport from parameterized mesoscale eddy-induced advective transport. Diagnosed here as a function of latitude and basin.  Use Celsius for temperature scale.-->
+		<!--P1 (W) northward_ocean_heat_transport_due_to_parameterized_submesoscale_eddy_advection : Contributions to heat transport from parameterized mesoscale eddy-induced advective transport. Diagnosed here as a function of latitude and basin.  Use Celsius for temperature scale.-->
 		<field id="CMIP7_hfds" field_ref="?dummy_XY"/>
 		<!--P1 (W m-2) surface_downward_heat_flux_in_sea_water : This is the net flux of heat entering the liquid water column through its upper surface (excluding any "flux adjustment") .-->
 		<field id="CMIP7_hfevapds" field_ref="?dummy_XY"/>
-		<!--P3 (W m-2) temperature_flux_due_to_evaporation_expressed_as_heat_flux_out_of_sea_water : This is defined as "where ice\_free\_sea over sea"-->
-		<field id="CMIP7_hfgeou" field_ref="?dummy_XY"/>
+		<!--P1 (W m-2) temperature_flux_due_to_evaporation_expressed_as_heat_flux_out_of_sea_water : This is defined as "where ice\_free\_sea over sea"-->
+		<field id="CMIP7_hfgeou" field_ref="?dummy_XY_depthseafloor"/>
 		<!--P1 (W m-2) upward_geothermal_heat_flux_at_sea_floor : Upward geothermal heat flux per unit area on the sea floor-->
 		<field id="CMIP7_hfibthermds" field_ref="?dummy_XYO"/>
-		<!--P3 (W m-2) heat_flux_into_sea_water_due_to_iceberg_thermodynamics : undef-->
+		<!--P1 (W m-2) heat_flux_into_sea_water_due_to_iceberg_thermodynamics : undef-->
 		<field id="CMIP7_hfrainds" field_ref="?dummy_XY"/>
-		<!--P3 (W m-2) temperature_flux_due_to_rainfall_expressed_as_heat_flux_into_sea_water : This is defined as "where ice\_free\_sea over sea"; i.e., the total flux (considered here) entering the ice-free portion of the grid cell divided by the area of the ocean portion of the grid cell.  All such heat fluxes are computed based on Celsius scale.-->
+		<!--P1 (W m-2) temperature_flux_due_to_rainfall_expressed_as_heat_flux_into_sea_water : This is defined as "where ice\_free\_sea over sea"; i.e., the total flux (considered here) entering the ice-free portion of the grid cell divided by the area of the ocean portion of the grid cell.  All such heat fluxes are computed based on Celsius scale.-->
 		<field id="CMIP7_hfrunoffds" field_ref="?dummy_XYO"/>
-		<!--P2 (W m-2) temperature_flux_due_to_runoff_expressed_as_heat_flux_into_sea_water : Heat flux associated with liquid water which drains from land. It is calculated relative to the heat that would be transported by runoff water entering the sea at zero degrees Celsius.-->
+		<!--P1 (W m-2) temperature_flux_due_to_runoff_expressed_as_heat_flux_into_sea_water : Heat flux associated with liquid water which drains from land. It is calculated relative to the heat that would be transported by runoff water entering the sea at zero degrees Celsius.-->
 		<field id="CMIP7_hfsnthermds" field_ref="?dummy_XYO"/>
-		<!--P3 (W m-2) heat_flux_into_sea_water_due_to_snow_thermodynamics : In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.  The specification of a physical process by the phrase due\_to\_process means that the quantity named is a  single term in a sum of terms which together compose the general quantity  named by omitting the phrase.  "Snow thermodynamics" refers to the addition or subtraction of mass due to surface and basal fluxes, i.e., due to melting, sublimation and fusion.-->
+		<!--P1 (W m-2) heat_flux_into_sea_water_due_to_snow_thermodynamics : In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.  The specification of a physical process by the phrase due\_to\_process means that the quantity named is a  single term in a sum of terms which together compose the general quantity  named by omitting the phrase.  "Snow thermodynamics" refers to the addition or subtraction of mass due to surface and basal fluxes, i.e., due to melting, sublimation and fusion.-->
 		<field id="CMIP7_hfx" field_ref="?dummy_XYO"/>
-		<!--P2 (W) ocean_heat_x_transport : Contains all contributions to 'x-ward' heat transport from resolved and parameterized processes. Use Celsius for temperature scale-->
+		<!--P1 (W) ocean_heat_x_transport : Contains all contributions to 'x-ward' heat transport from resolved and parameterized processes. Use Celsius for temperature scale-->
 		<field id="CMIP7_hfy" field_ref="?dummy_XYO"/>
-		<!--P2 (W) ocean_heat_y_transport : Contains all contributions to "y-ward" heat transport from resolved and parameterized processes. Use Celsius for temperature scale.-->
+		<!--P1 (W) ocean_heat_y_transport : Contains all contributions to 'y-ward' heat transport from resolved and parameterized processes. Use Celsius for temperature scale.-->
 		<field id="CMIP7_htovgyre" field_ref="?dummy_basin_zonal_mean"/>
-		<!--P2 (W) northward_ocean_heat_transport_due_to_gyre : From all advective mass transport processes, resolved and parameterized.-->
+		<!--P1 (W) northward_ocean_heat_transport_due_to_gyre : From all advective mass transport processes, resolved and parameterized.-->
 		<field id="CMIP7_htovovrt" field_ref="?dummy_basin_zonal_mean"/>
-		<!--P2 (W) northward_ocean_heat_transport_due_to_overturning : From all advective mass transport processes, resolved and parameterized.-->
+		<!--P1 (W) northward_ocean_heat_transport_due_to_overturning : From all advective mass transport processes, resolved and parameterized.-->
 		<field id="CMIP7_icfriver" field_ref="?dummy_XY"/>
 		<!--P2 (mol m-2 s-1) tendency_of_ocean_mole_content_of_inorganic_carbon_due_to_runoff_and_sediment_dissolution : Inorganic Carbon supply to ocean through runoff (separate from gas exchange)-->
 		<field id="CMIP7_intdic" field_ref="?dummy_XY"/>
@@ -230,115 +263,181 @@
 		<field id="CMIP7_intpoc" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2) ocean_mass_content_of_particulate_organic_matter_expressed_as_carbon : Vertically integrated POC-->
 		<field id="CMIP7_intpp" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-2 s-1) net_primary_mole_productivity_of_biomass_expressed_as_carbon_by_phytoplankton : Vertically integrated total primary (organic carbon) production by phytoplankton.  This should equal the sum of intpdiat+intpphymisc, but those individual components may be unavailable in some models.-->
+		<!--P1 (mol m-2 s-1) net_primary_mole_productivity_of_biomass_expressed_as_carbon_by_phytoplankton : Vertically integrated total primary (organic carbon) production by phytoplankton. This should equal the sum of intpdiat+intpphymisc, but those individual components may be unavailable in some models.-->
 		<field id="CMIP7_intppcalc" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-2 s-1) net_primary_mole_productivity_of_biomass_expressed_as_carbon_by_calcareous_phytoplankton : Vertically integrated primary (organic carbon) production by the calcareous phytoplankton component alone-->
+		<!--P1 (mol m-2 s-1) net_primary_mole_productivity_of_biomass_expressed_as_carbon_by_calcareous_phytoplankton : Vertically integrated primary (organic carbon) production by the calcareous phytoplankton component alone-->
 		<field id="CMIP7_intppdiat" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-2 s-1) net_primary_mole_productivity_of_biomass_expressed_as_carbon_by_diatoms : Vertically integrated primary (organic carbon) production by the diatom phytoplankton component alone-->
+		<!--P1 (mol m-2 s-1) net_primary_mole_productivity_of_biomass_expressed_as_carbon_by_diatoms : Vertically integrated primary (organic carbon) production by the diatom phytoplankton component alone-->
 		<field id="CMIP7_intppdiaz" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-2 s-1) net_primary_mole_productivity_of_biomass_expressed_as_carbon_by_diazotrophic_phytoplankton : Vertically integrated primary (organic carbon) production by the diazotrophs alone-->
+		<!--P1 (mol m-2 s-1) net_primary_mole_productivity_of_biomass_expressed_as_carbon_by_diazotrophic_phytoplankton : Vertically integrated primary (organic carbon) production by the diazotrophs alone-->
 		<field id="CMIP7_intppmisc" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-2 s-1) net_primary_mole_productivity_of_biomass_expressed_as_carbon_by_miscellaneous_phytoplankton : Vertically integrated total primary (organic carbon) production by other phytoplankton components alone-->
+		<!--P1 (mol m-2 s-1) net_primary_mole_productivity_of_biomass_expressed_as_carbon_by_miscellaneous_phytoplankton : Vertically integrated total primary (organic carbon) production by other phytoplankton components alone-->
 		<field id="CMIP7_intppnano" field_ref="?dummy_XY"/>
-		<!--P3 (mol m-2 s-1) net_primary_mole_productivity_of_biomass_expressed_as_carbon_by_nanophytoplankton : Vertically integrated total primary (organic carbon) production by nanophytoplankton.-->
+		<!--P1 (mol m-2 s-1) net_primary_mole_productivity_of_biomass_expressed_as_carbon_by_nanophytoplankton : Vertically integrated total primary (organic carbon) production by nanophytoplankton.-->
 		<field id="CMIP7_intppnitrate" field_ref="?dummy_XY"/>
 		<!--P2 (mol m-2 s-1) net_primary_mole_productivity_of_biomass_expressed_as_carbon_due_to_nitrate_utilization : Vertically integrated primary (organic carbon) production by phytoplankton based on nitrate uptake alone-->
 		<field id="CMIP7_intpppico" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-2 s-1) net_primary_mole_productivity_of_biomass_expressed_as_carbon_by_picophytoplankton : Vertically integrated primary (organic carbon) production by the picophytoplankton component alone-->
+		<!--P1 (mol m-2 s-1) net_primary_mole_productivity_of_biomass_expressed_as_carbon_by_picophytoplankton : Vertically integrated primary (organic carbon) production by the picophytoplankton component alone-->
 		<field id="CMIP7_limfecalc" field_ref="?dummy_XY"/>
-		<!--P3 (1) iron_growth_limitation_of_calcareous_phytoplankton : "Calcareous phytoplankton" are phytoplankton that produce calcite. Calcite is a mineral that is a polymorph of calcium carbonate. The chemical formula of calcite is CaCO3. Phytoplankton are algae that grow where there is sufficient light to support photosynthesis. "Iron growth limitation" means the ratio of the growth rate of a species population in the environment (where there is a finite availability of iron) to the theoretical growth rate if there were no such limit on iron availability.-->
+		<!--P1 (1) iron_growth_limitation_of_calcareous_phytoplankton : "Calcareous phytoplankton" are phytoplankton that produce calcite. Calcite is a mineral that is a polymorph of calcium carbonate. The chemical formula of calcite is CaCO3. Phytoplankton are algae that grow where there is sufficient light to support photosynthesis. "Iron growth limitation" means the ratio of the growth rate of a species population in the environment (where there is a finite availability of iron) to the theoretical growth rate if there were no such limit on iron availability.-->
 		<field id="CMIP7_limfediat" field_ref="?dummy_XY"/>
-		<!--P3 (1) iron_growth_limitation_of_diatoms : Diatoms are phytoplankton with an external skeleton made of silica. Phytoplankton are algae that grow where there is sufficient light to support photosynthesis. "Iron growth limitation" means the ratio of the growth rate of a species population in the environment (where there is a finite availability of iron) to the theoretical growth rate if there were no such limit on iron availability.-->
+		<!--P1 (1) iron_growth_limitation_of_diatoms : Diatoms are phytoplankton with an external skeleton made of silica. Phytoplankton are algae that grow where there is sufficient light to support photosynthesis. "Iron growth limitation" means the ratio of the growth rate of a species population in the environment (where there is a finite availability of iron) to the theoretical growth rate if there were no such limit on iron availability.-->
 		<field id="CMIP7_limfediaz" field_ref="?dummy_XY"/>
-		<!--P3 (1) iron_growth_limitation_of_diazotrophic_phytoplankton : In ocean modelling, diazotrophs are phytoplankton of the phylum cyanobacteria distinct from other phytoplankton groups in their ability to fix nitrogen gas in addition to nitrate and ammonium. Phytoplankton are algae that grow where there is sufficient light to support photosynthesis. "Iron growth limitation" means the ratio of the growth rate of a species population in the environment (where there is a finite availability of iron) to the theoretical growth rate if there were no such limit on iron availability.-->
+		<!--P1 (1) iron_growth_limitation_of_diazotrophic_phytoplankton : In ocean modelling, diazotrophs are phytoplankton of the phylum cyanobacteria distinct from other phytoplankton groups in their ability to fix nitrogen gas in addition to nitrate and ammonium. Phytoplankton are algae that grow where there is sufficient light to support photosynthesis. "Iron growth limitation" means the ratio of the growth rate of a species population in the environment (where there is a finite availability of iron) to the theoretical growth rate if there were no such limit on iron availability.-->
 		<field id="CMIP7_limfemisc" field_ref="?dummy_XY"/>
-		<!--P3 (1) iron_growth_limitation_of_miscellaneous_phytoplankton : Phytoplankton are algae that grow where there is sufficient light to support photosynthesis. "Miscellaneous phytoplankton" are all those phytoplankton that are not diatoms, diazotrophs, calcareous phytoplankton, picophytoplankton or other separately named components of the phytoplankton population. "Iron growth limitation" means the ratio of the growth rate of a species population in the environment (where there is a finite availability of iron) to the theoretical growth rate if there were no such limit on iron availability.-->
+		<!--P1 (1) iron_growth_limitation_of_miscellaneous_phytoplankton : Phytoplankton are algae that grow where there is sufficient light to support photosynthesis. "Miscellaneous phytoplankton" are all those phytoplankton that are not diatoms, diazotrophs, calcareous phytoplankton, picophytoplankton or other separately named components of the phytoplankton population. "Iron growth limitation" means the ratio of the growth rate of a species population in the environment (where there is a finite availability of iron) to the theoretical growth rate if there were no such limit on iron availability.-->
 		<field id="CMIP7_limfepico" field_ref="?dummy_XY"/>
-		<!--P3 (1) iron_growth_limitation_of_picophytoplankton : Picophytoplankton are phytoplankton of less than 2 micrometers in size. Phytoplankton are algae that grow where there is sufficient light to support photosynthesis. "Iron growth limitation" means the ratio of the growth rate of a species population in the environment (where there is a finite availability of iron) to the theoretical growth rate if there were no such limit on iron availability.-->
+		<!--P1 (1) iron_growth_limitation_of_picophytoplankton : Picophytoplankton are phytoplankton of less than 2 micrometers in size. Phytoplankton are algae that grow where there is sufficient light to support photosynthesis. "Iron growth limitation" means the ratio of the growth rate of a species population in the environment (where there is a finite availability of iron) to the theoretical growth rate if there were no such limit on iron availability.-->
 		<field id="CMIP7_limirrcalc" field_ref="?dummy_XY"/>
-		<!--P3 (1) growth_limitation_of_calcareous_phytoplankton_due_to_solar_irradiance : Growth limitation of calcareous phytoplankton due to solar irradiance. "Growth limitation due to solar irradiance" means the ratio of the growth rate of a species population in the environment (where the amount of sunlight reaching a location may be limited) to the theoretical growth rate if there were no such limit on solar irradiance.-->
+		<!--P1 (1) growth_limitation_of_calcareous_phytoplankton_due_to_solar_irradiance : Growth limitation of calcareous phytoplankton due to solar irradiance. "Growth limitation due to solar irradiance" means the ratio of the growth rate of a species population in the environment (where the amount of sunlight reaching a location may be limited) to the theoretical growth rate if there were no such limit on solar irradiance.-->
 		<field id="CMIP7_limirrdiat" field_ref="?dummy_XY"/>
-		<!--P3 (1) growth_limitation_of_diatoms_due_to_solar_irradiance : Growth limitation of diatoms due to solar irradiance. "Growth limitation due to solar irradiance" means the ratio of the growth rate of a species population in the environment (where the amount of sunlight reaching a location may be limited) to the theoretical growth rate if there were no such limit on solar irradiance.-->
+		<!--P1 (1) growth_limitation_of_diatoms_due_to_solar_irradiance : Growth limitation of diatoms due to solar irradiance. "Growth limitation due to solar irradiance" means the ratio of the growth rate of a species population in the environment (where the amount of sunlight reaching a location may be limited) to the theoretical growth rate if there were no such limit on solar irradiance.-->
 		<field id="CMIP7_limirrdiaz" field_ref="?dummy_XY"/>
-		<!--P3 (1) growth_limitation_of_diazotrophic_phytoplankton_due_to_solar_irradiance : Growth limitation of diazotrophs due to solar irradiance. "Growth limitation due to solar irradiance" means the ratio of the growth rate of a species population in the environment (where the amount of sunlight reaching a location may be limited) to the theoretical growth rate if there were no such limit on solar irradiance.-->
+		<!--P1 (1) growth_limitation_of_diazotrophic_phytoplankton_due_to_solar_irradiance : Growth limitation of diazotrophs due to solar irradiance. "Growth limitation due to solar irradiance" means the ratio of the growth rate of a species population in the environment (where the amount of sunlight reaching a location may be limited) to the theoretical growth rate if there were no such limit on solar irradiance.-->
 		<field id="CMIP7_limirrmisc" field_ref="?dummy_XY"/>
-		<!--P3 (1) growth_limitation_of_miscellaneous_phytoplankton_due_to_solar_irradiance : Growth limitation of miscellaneous phytoplankton due to solar irradiance. "Growth limitation due to solar irradiance" means the ratio of the growth rate of a species population in the environment (where the amount of sunlight reaching a location may be limited) to the theoretical growth rate if there were no such limit on solar irradiance.-->
+		<!--P1 (1) growth_limitation_of_miscellaneous_phytoplankton_due_to_solar_irradiance : Growth limitation of miscellaneous phytoplankton due to solar irradiance. "Growth limitation due to solar irradiance" means the ratio of the growth rate of a species population in the environment (where the amount of sunlight reaching a location may be limited) to the theoretical growth rate if there were no such limit on solar irradiance.-->
 		<field id="CMIP7_limirrpico" field_ref="?dummy_XY"/>
-		<!--P3 (1) growth_limitation_of_picophytoplankton_due_to_solar_irradiance : Growth limitation of picophytoplankton due to solar irradiance. "Growth limitation due to solar irradiance" means the ratio of the growth rate of a species population in the environment (where the amount of sunlight reaching a location may be limited) to the theoretical growth rate if there were no such limit on solar irradiance.-->
+		<!--P1 (1) growth_limitation_of_picophytoplankton_due_to_solar_irradiance : Growth limitation of picophytoplankton due to solar irradiance. "Growth limitation due to solar irradiance" means the ratio of the growth rate of a species population in the environment (where the amount of sunlight reaching a location may be limited) to the theoretical growth rate if there were no such limit on solar irradiance.-->
 		<field id="CMIP7_limncalc" field_ref="?dummy_XY"/>
-		<!--P3 (1) nitrogen_growth_limitation_of_calcareous_phytoplankton : "Calcareous phytoplankton" are phytoplankton that produce calcite. Calcite is a mineral that is a polymorph of calcium carbonate. The chemical formula of calcite is CaCO3. Phytoplankton are algae that grow where there is sufficient light to support photosynthesis. "Nitrogen growth limitation" means the ratio of the growth rate of a species population in the environment (where there is a finite availability of nitrogen) to the theoretical growth rate if there were no such limit on nitrogen availability.-->
+		<!--P1 (1) nitrogen_growth_limitation_of_calcareous_phytoplankton : "Calcareous phytoplankton" are phytoplankton that produce calcite. Calcite is a mineral that is a polymorph of calcium carbonate. The chemical formula of calcite is CaCO3. Phytoplankton are algae that grow where there is sufficient light to support photosynthesis. "Nitrogen growth limitation" means the ratio of the growth rate of a species population in the environment (where there is a finite availability of nitrogen) to the theoretical growth rate if there were no such limit on nitrogen availability.-->
 		<field id="CMIP7_limndiat" field_ref="?dummy_XY"/>
-		<!--P3 (1) nitrogen_growth_limitation_of_diatoms : Diatoms are phytoplankton with an external skeleton made of silica. Phytoplankton are algae that grow where there is sufficient light to support photosynthesis. "Nitrogen growth limitation" means the ratio of the growth rate of a species population in the environment (where there is a finite availability of nitrogen) to the theoretical growth rate if there were no such limit on nitrogen availability.-->
+		<!--P1 (1) nitrogen_growth_limitation_of_diatoms : Diatoms are phytoplankton with an external skeleton made of silica. Phytoplankton are algae that grow where there is sufficient light to support photosynthesis. "Nitrogen growth limitation" means the ratio of the growth rate of a species population in the environment (where there is a finite availability of nitrogen) to the theoretical growth rate if there were no such limit on nitrogen availability.-->
 		<field id="CMIP7_limndiaz" field_ref="?dummy_XY"/>
-		<!--P3 (1) nitrogen_growth_limitation_of_diazotrophic_phytoplankton : In ocean modelling, diazotrophs are phytoplankton of the phylum cyanobacteria distinct from other phytoplankton groups in their ability to fix nitrogen gas in addition to nitrate and ammonium. Phytoplankton are algae that grow where there is sufficient light to support photosynthesis. "Nitrogen growth limitation" means the ratio of the growth rate of a species population in the environment (where there is a finite availability of nitrogen) to the theoretical growth rate if there were no such limit on nitrogen availability.-->
+		<!--P1 (1) nitrogen_growth_limitation_of_diazotrophic_phytoplankton : In ocean modelling, diazotrophs are phytoplankton of the phylum cyanobacteria distinct from other phytoplankton groups in their ability to fix nitrogen gas in addition to nitrate and ammonium. Phytoplankton are algae that grow where there is sufficient light to support photosynthesis. "Nitrogen growth limitation" means the ratio of the growth rate of a species population in the environment (where there is a finite availability of nitrogen) to the theoretical growth rate if there were no such limit on nitrogen availability.-->
 		<field id="CMIP7_limnmisc" field_ref="?dummy_XY"/>
-		<!--P3 (1) nitrogen_growth_limitation_of_miscellaneous_phytoplankton : Phytoplankton are algae that grow where there is sufficient light to support photosynthesis. "Miscellaneous phytoplankton" are all those phytoplankton that are not diatoms, diazotrophs, calcareous phytoplankton, picophytoplankton or other separately named components of the phytoplankton population. "Nitrogen growth limitation" means the ratio of the growth rate of a species population in the environment (where there is a finite availability of nitrogen) to the theoretical growth rate if there were no such limit on nitrogen availability.-->
+		<!--P1 (1) nitrogen_growth_limitation_of_miscellaneous_phytoplankton : Phytoplankton are algae that grow where there is sufficient light to support photosynthesis. "Miscellaneous phytoplankton" are all those phytoplankton that are not diatoms, diazotrophs, calcareous phytoplankton, picophytoplankton or other separately named components of the phytoplankton population. "Nitrogen growth limitation" means the ratio of the growth rate of a species population in the environment (where there is a finite availability of nitrogen) to the theoretical growth rate if there were no such limit on nitrogen availability.-->
 		<field id="CMIP7_limnpico" field_ref="?dummy_XY"/>
-		<!--P3 (1) nitrogen_growth_limitation_of_picophytoplankton : Picophytoplankton are phytoplankton of less than 2 micrometers in size. Phytoplankton are algae that grow where there is sufficient light to support photosynthesis. "Nitrogen growth limitation" means the ratio of the growth rate of a species population in the environment (where there is a finite availability of nitrogen) to the theoretical growth rate if there were no such limit on nitrogen availability.-->
+		<!--P1 (1) nitrogen_growth_limitation_of_picophytoplankton : Picophytoplankton are phytoplankton of less than 2 micrometers in size. Phytoplankton are algae that grow where there is sufficient light to support photosynthesis. "Nitrogen growth limitation" means the ratio of the growth rate of a species population in the environment (where there is a finite availability of nitrogen) to the theoretical growth rate if there were no such limit on nitrogen availability.-->
 		<field id="CMIP7_masscello" field_ref="?dummy_XYO"/>
 		<!--P1 (kg m-2) sea_water_mass_per_unit_area : For Boussinesq models, report this diagnostic as Boussinesq reference density times grid celll volume.-->
 		<field id="CMIP7_masso" field_ref="?dummy_0d"/>
-		<!--P2 (kg) sea_water_mass : Total mass of liquid sea water. For Boussinesq models, report this diagnostic as Boussinesq reference density times total volume.-->
+		<!--P1 (kg) sea_water_mass : Total mass of liquid sea water. For Boussinesq models, report this diagnostic as Boussinesq reference density times total volume.-->
 		<field id="CMIP7_mfo" field_ref="?dummy_TR_oline"/>
-		<!--P3 (kg s-1) sea_water_transport_across_line : Transport across\_line means that which crosses a particular line on the Earth's surface; formally this means the integral along the line of the normal component of the transport. The transport should be evaluated for the full depth of the ocean, except for the Pacific Equatorial Undercurrent, which is averaged from the surface to 350m.-->
+		<!--P1 (kg s-1) sea_water_transport_across_line : Transport across\_line means that which crosses a particular line on the Earth's surface (based on appendix J and table J1 of Griffies et al, 2016 (<https://doi.org/10.5194/gmd-9-3231-2016>). Formally this means the integral along the line of the normal component of the transport. The transport should be evaluated for the full depth of the ocean, except for the Pacific Equatorial Undercurrent, which is averaged from the surface to 350m.-->
 		<field id="CMIP7_mlotst" field_ref="?dummy_XY"/>
 		<!--P1 (m) ocean_mixed_layer_thickness_defined_by_sigma_t : Sigma T is potential density referenced to ocean surface. Defined by Sigma T of 0.03 kg m-3 wrt to model level closest to 10 m depth.-->
 		<field id="CMIP7_mlotstmax" field_ref="?dummy_XY"/>
-		<!--P2 (m) ocean_mixed_layer_thickness_defined_by_sigma_t : Sigma T is potential density referenced to ocean surface. Defined by Sigma T of 0.03 kg m-3 wrt to model level closest to 10 m depth.-->
+		<!--P1 (m) ocean_mixed_layer_thickness_defined_by_sigma_t : Sigma T is potential density referenced to ocean surface. Defined by Sigma T of 0.03 kg m-3 wrt to model level closest to 10 m depth.-->
 		<field id="CMIP7_mlotstmin" field_ref="?dummy_XY"/>
-		<!--P2 (m) ocean_mixed_layer_thickness_defined_by_sigma_t : Sigma T is potential density referenced to ocean surface. Defined by Sigma T of 0.03 kg m-3 wrt to model level closest to 10 m depth.-->
+		<!--P1 (m) ocean_mixed_layer_thickness_defined_by_sigma_t : Sigma T is potential density referenced to ocean surface. Defined by Sigma T of 0.03 kg m-3 wrt to model level closest to 10 m depth.-->
+		<field id="CMIP7_mlotstsq" field_ref="?dummy_XY"/>
+		<!--P1 (m2) square_of_ocean_mixed_layer_thickness_defined_by_sigma_t : The phrase "square\_of\_X" means X\*X. The ocean mixed layer is the upper part of the ocean, regarded as being well-mixed. The base of the mixed layer defined by "temperature", "sigma", "sigma\_theta", "sigma\_t" or vertical diffusivity is the level at which the quantity indicated differs from its surface value by a certain amount. A coordinate variable or scalar coordinate variable with standard name sea\_water\_sigma\_t\_difference can be used to specify the sigma\_t criterion that determines the layer thickness. Sigma-t of sea water is the density of water at atmospheric pressure (i.e. the surface) having the same temperature and salinity, minus 1000 kg m-3. "Thickness" means the vertical extent of a layer.-->
+		<field id="CMIP7_mpw" field_ref="?dummy_XY"/>
+		<!--P1 (s) sea_surface_wave_mean_period : Average wave period (i.e., time in-between two wave crests) across the entire two-dimensional wave spectrum, incorporating both wind-sea and swell waves. In spectral wind wave models, it is calculated using spectral moments, mathematical measures that describe the shape and characteristics of the wave spectrum.-->
+		<field id="CMIP7_mpwswell" field_ref="?dummy_XY"/>
+		<!--P1 (s) sea_surface_swell_wave_mean_period : Average wave period (i.e., time in-between two wave crests) of swell waves only (i.e., waves that have propagated away from their generation area). In spectral wind wave models, it is calculated using spectral moments, mathematical measures that describe the shape and characteristics of the wave spectrum.-->
+		<field id="CMIP7_mpwwindsea" field_ref="?dummy_XY"/>
+		<!--P1 (s) sea_surface_wind_wave_mean_period : Average wave period (i.e., time in-between two wave crests) of wind-sea waves only (i.e., local wind waves). In spectral wind wave models, it is calculated using spectral moments, mathematical measures that describe the shape and characteristics of the wave spectrum.-->
 		<field id="CMIP7_msftbarot" field_ref="?dummy_XY"/>
-		<!--P2 (kg s-1) ocean_barotropic_mass_streamfunction : Streamfunction or its approximation for free surface models. See OMDP document for details.-->
+		<!--P1 (kg s-1) ocean_barotropic_mass_streamfunction : Streamfunction or its approximation for free surface models. See OMDP document for details.-->
 		<field id="CMIP7_msftmrho" field_ref="?dummy_basin_merid_section_density_rho"/>
-		<!--P2 (kg s-1) ocean_meridional_overturning_mass_streamfunction : Overturning mass streamfunction arising from all advective mass transport processes, resolved and parameterized.-->
+		<!--P1 (kg s-1) ocean_meridional_overturning_mass_streamfunction : Overturning mass streamfunction arising from all advective mass transport processes, resolved and parameterized.-->
+		<field id="CMIP7_msftmrhompa" field_ref="?dummy_basin_merid_section_density_rho"/>
+		<!--P1 (kg s-1) ocean_meridional_overturning_mass_streamfunction_due_to_parameterized_mesoscale_eddy_advection : CMIP5 called this "due to Bolus Advection".  Name change respects the more general physics of the mesoscale parameterizations.-->
 		<field id="CMIP7_msftmz" field_ref="?dummy_basin_merid_section"/>
-		<!--P2 (kg s-1) ocean_meridional_overturning_mass_streamfunction : Overturning mass streamfunction arising from all advective mass transport processes, resolved and parameterized.-->
+		<!--P1 (kg s-1) ocean_meridional_overturning_mass_streamfunction : Overturning mass streamfunction arising from all advective mass transport processes, resolved and parameterized.-->
 		<field id="CMIP7_msftmzmpa" field_ref="?dummy_basin_merid_section"/>
-		<!--P3 (kg s-1) ocean_meridional_overturning_mass_streamfunction_due_to_parameterized_mesoscale_eddy_advection : CMIP5 called this "due to Bolus Advection".  Name change respects the more general physics of the mesoscale parameterizations.-->
+		<!--P1 (kg s-1) ocean_meridional_overturning_mass_streamfunction_due_to_parameterized_mesoscale_eddy_advection : CMIP5 called this "due to Bolus Advection".  Name change respects the more general physics of the mesoscale parameterizations.-->
+		<field id="CMIP7_msftmzsmpa" field_ref="?dummy_basin_merid_section"/>
+		<!--P1 (kg s-1) ocean_meridional_overturning_mass_streamfunction_due_to_parameterized_submesoscale_eddy_advection : Report only if there is a submesoscale eddy parameterization.-->
 		<field id="CMIP7_msftyrho" field_ref="?dummy_XY_gridlatitude_rho"/>
-		<!--P2 (kg s-1) ocean_y_overturning_mass_streamfunction : Overturning mass streamfunction arising from all advective mass transport processes, resolved and parameterized.-->
+		<!--P1 (kg s-1) ocean_y_overturning_mass_streamfunction : Overturning mass streamfunction arising from all advective mass transport processes, resolved and parameterized.-->
+		<field id="CMIP7_msftyrhompa" field_ref="?dummy_XY_gridlatitude_rho"/>
+		<!--P1 (kg s-1) ocean_y_overturning_mass_streamfunction_due_to_parameterized_mesoscale_eddy_advection : CMIP5 called this "due to Bolus Advection".  Name change respects the more general physics of the mesoscale parameterizations.-->
 		<field id="CMIP7_msftyz" field_ref="?dummy_XY_gridlatitude"/>
-		<!--P2 (kg s-1) ocean_y_overturning_mass_streamfunction : Overturning mass streamfunction arising from all advective mass transport processes, resolved and parameterized.-->
+		<!--P1 (kg s-1) ocean_y_overturning_mass_streamfunction : Overturning mass streamfunction arising from all advective mass transport processes, resolved and parameterized.-->
+		<field id="CMIP7_msftyzmpa" field_ref="?dummy_XY_gridlatitude"/>
+		<!--P1 (kg s-1) ocean_y_overturning_mass_streamfunction_due_to_parameterized_mesoscale_eddy_advection : CMIP5 called this "due to Bolus Advection".  Name change respects the more general physics of the mesoscale parameterizations.-->
 		<field id="CMIP7_nh4" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_ammonium_in_sea_water : Mole concentration means moles (amount of substance) per unit volume and is used in the construction mole\_concentration\_of\_X\_in\_Y, where X is a material constituent of Y.-->
+		<!--P1 (mol m-3) mole_concentration_of_ammonium_in_sea_water : Mole concentration means moles (amount of substance) per unit volume and is used in the construction mole\_concentration\_of\_X\_in\_Y, where X is a material constituent of Y.-->
 		<field id="CMIP7_nh4os" field_ref="?dummy_XY"/>
 		<!--P2 (mol m-3) mole_concentration_of_ammonium_in_sea_water : Mole concentration means moles (amount of substance) per unit volume and is used in the construction mole\_concentration\_of\_X\_in\_Y, where X is a material constituent of Y.-->
 		<field id="CMIP7_no3" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_nitrate_in_sea_water : Mole concentration means moles (amount of substance) per unit volume and is used in the construction mole\_concentration\_of\_X\_in\_Y, where X is a material constituent of Y.-->
+		<!--P1 (mol m-3) mole_concentration_of_nitrate_in_sea_water : Mole concentration means moles (amount of substance) per unit volume and is used in the construction mole\_concentration\_of\_X\_in\_Y, where X is a material constituent of Y.-->
 		<field id="CMIP7_no3os" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-3) mole_concentration_of_nitrate_in_sea_water : Mole concentration means moles (amount of substance) per unit volume and is used in the construction mole\_concentration\_of\_X\_in\_Y, where X is a material constituent of Y.-->
-		<field id="CMIP7_o2" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_dissolved_molecular_oxygen_in_sea_water : 'Mole concentration' means number of moles per unit volume, also called "molarity", and is used in the construction mole\_concentration\_of\_X\_in\_Y, where X is a material constituent of Y.  A chemical or biological species denoted by X may be described by a single term such as 'nitrogen' or a phrase such as 'nox\_expressed\_as\_nitrogen'.-->
+		<!--P1 (mol m-3) mole_concentration_of_nitrate_in_sea_water : Mole concentration means moles (amount of substance) per unit volume and is used in the construction mole\_concentration\_of\_X\_in\_Y, where X is a material constituent of Y.-->
+		<field id="CMIP7_o2" field_ref="?dummy_XY"/>
+		<!--P1 (mol m-3) mole_concentration_of_dissolved_molecular_oxygen_in_sea_water : 'Mole concentration' means number of moles per unit volume, also called "molarity", and is used in the construction mole\_concentration\_of\_X\_in\_Y, where X is a material constituent of Y. A chemical or biological species denoted by X may be described by a single term such as 'nitrogen' or a phrase such as 'nox\_expressed\_as\_nitrogen'.-->
+		<field id="CMIP7_o2min" field_ref="?dummy_XY"/>
+		<!--P2 (mol m-3) mole_concentration_of_dissolved_molecular_oxygen_in_sea_water_at_shallowest_local_minimum_in_vertical_profile : mole concentration of oxygen at the local minimum in the concentration profile that occurs closest to the sea surface.-->
 		<field id="CMIP7_o2os" field_ref="?dummy_XY"/>
-		<!--P3 (mol m-3) mole_concentration_of_dissolved_molecular_oxygen_in_sea_water : 'Mole concentration' means number of moles per unit volume, also called "molarity", and is used in the construction mole\_concentration\_of\_X\_in\_Y, where X is a material constituent of Y.  A chemical or biological species denoted by X may be described by a single term such as 'nitrogen' or a phrase such as 'nox\_expressed\_as\_nitrogen'.-->
+		<!--P1 (mol m-3) mole_concentration_of_dissolved_molecular_oxygen_in_sea_water : Near surface 'Mole concentration' means number of moles per unit volume, also called "molarity", and is used in the construction mole\_concentration\_of\_X\_in\_Y, where X is a material constituent of Y. A chemical or biological species denoted by X may be described by a single term such as 'nitrogen' or a phrase such as 'nox\_expressed\_as\_nitrogen'. The chemical formula for molecular oxygen is O2.-->
 		<field id="CMIP7_o2sat" field_ref="?dummy_XYO"/>
-		<!--P3 (mol m-3) mole_concentration_of_dissolved_molecular_oxygen_in_sea_water_at_saturation : "Mole concentration at saturation" means the mole concentration in a saturated solution. Mole concentration means number of moles per unit volume, also called "molarity", and is used in the construction "mole\_concentration\_of\_X\_in\_Y", where X is a material constituent of Y. A chemical or biological species denoted by X may be described by a single term such as "nitrogen" or a phrase such as "nox\_expressed\_as\_nitrogen".-->
+		<!--P1 (mol m-3) mole_concentration_of_dissolved_molecular_oxygen_in_sea_water_at_saturation : "Mole concentration at saturation" means the mole concentration in a saturated solution. Mole concentration means number of moles per unit volume, also called "molarity", and is used in the construction "mole\_concentration\_of\_X\_in\_Y", where X is a material constituent of Y. A chemical or biological species denoted by X may be described by a single term such as "nitrogen" or a phrase such as "nox\_expressed\_as\_nitrogen".-->
 		<field id="CMIP7_obvfsq" field_ref="?dummy_XYO"/>
-		<!--P2 (s-2) square_of_brunt_vaisala_frequency_in_sea_water : The phrase "square\_of\_X" means X\*X. Frequency is the number of oscillations of a wave per unit time. Brunt-Vaisala frequency is also sometimes called "buoyancy frequency" and is a measure of the vertical stratification of the medium.-->
+		<!--P1 (s-2) square_of_brunt_vaisala_frequency_in_sea_water : The phrase "square\_of\_X" means X\*X. Frequency is the number of oscillations of a wave per unit time. Brunt-Vaisala frequency is also sometimes called "buoyancy frequency" and is a measure of the vertical stratification of the medium.-->
 		<field id="CMIP7_ocfriver" field_ref="?dummy_XY"/>
 		<!--P2 (mol m-2 s-1) tendency_of_ocean_mole_content_of_organic_carbon_due_to_runoff_and_sediment_dissolution : Organic Carbon supply to ocean through runoff (separate from gas exchange)-->
+		<field id="CMIP7_ocontempdiff" field_ref="?dummy_XYO"/>
+		<!--P1 (W m-2) tendency_of_sea_water_conservative_temperature_expressed_as_heat_content_due_to_parameterized_dianeutral_mixing : Tendency of heat content for a grid cell from parameterized dianeutral mixing. Reported only for models that use conservative temperature as prognostic field.-->
+		<field id="CMIP7_ocontempmint" field_ref="?dummy_XY"/>
+		<!--P1 (degC kg m-2) integral_wrt_depth_of_product_of_conservative_temperature_and_sea_water_density : Full column sum of density\*cell thickness\*conservative temperature. If the model is Boussinesq, then use Boussinesq reference density for the density factor.-->
+		<field id="CMIP7_ocontemppadvect" field_ref="?dummy_XYO"/>
+		<!--P1 (W m-2) tendency_of_sea_water_conservative_temperature_expressed_as_heat_content_due_to_parameterized_eddy_advection : Tendency of heat content for a grid cell from parameterized eddy advection (all forms of eddy advection). Reported only for models that use conservative temperature as prognostic field.-->
+		<field id="CMIP7_ocontemppmdiff" field_ref="?dummy_XYO"/>
+		<!--P1 (W m-2) tendency_of_sea_water_conservative_temperature_expressed_as_heat_content_due_to_parameterized_mesoscale_eddy_diffusion : Tendency of heat content for a grid cell from parameterized mesoscale eddy diffusion. Reported only for models that use conservative temperature as prognostic field.-->
+		<field id="CMIP7_ocontemppsmadvect" field_ref="?dummy_XYO"/>
+		<!--P1 (W m-2) tendency_of_sea_water_conservative_temperature_expressed_as_heat_content_due_to_parameterized_submesoscale_eddy_advection : Tendency of heat content for a grid cell from parameterized submesoscale eddy advection. Reported only for models that use conservative temperature as prognostic field.-->
+		<field id="CMIP7_ocontemprmadvect" field_ref="?dummy_XYO"/>
+		<!--P1 (W m-2) tendency_of_sea_water_conservative_temperature_expressed_as_heat_content_due_to_residual_mean_advection : Tendency of heat content for a grid cell from residual mean  (sum of Eulerian mean + parameterized eddy-induced) advection. Reported only for models that use conservative temperature as prognostic field.-->
+		<field id="CMIP7_ocontemptend" field_ref="?dummy_XYO"/>
+		<!--P1 (W m-2) tendency_of_sea_water_conservative_temperature_expressed_as_heat_content : Tendency of heat content for a grid cell from all processes. Reported only for models that use conservative temperature as prognostic field.-->
+		<field id="CMIP7_opottempdiff" field_ref="?dummy_XYO"/>
+		<!--P1 (W m-2) tendency_of_sea_water_potential_temperature_expressed_as_heat_content_due_to_parameterized_dianeutral_mixing : Tendency of heat content for a grid cell from parameterized dianeutral mixing. Reported only for models that use potential temperature as prognostic field.-->
+		<field id="CMIP7_opottempmint" field_ref="?dummy_XY"/>
+		<!--P1 (degC kg m-2) integral_wrt_depth_of_product_of_potential_temperature_and_sea_water_density : Full column sum of density\*cell thickness\*potential temperature. If the model is Boussinesq, then use Boussinesq reference density for the density factor.-->
+		<field id="CMIP7_opottemppadvect" field_ref="?dummy_XYO"/>
+		<!--P1 (W m-2) tendency_of_sea_water_potential_temperature_expressed_as_heat_content_due_to_parameterized_eddy_advection : Tendency of heat content for a grid cell from parameterized  eddy advection (all forms of eddy advection). Reported only for models that use potential temperature as prognostic field.-->
+		<field id="CMIP7_opottemppmdiff" field_ref="?dummy_XYO"/>
+		<!--P1 (W m-2) tendency_of_sea_water_potential_temperature_expressed_as_heat_content_due_to_parameterized_mesoscale_eddy_diffusion : Tendency of heat content for a grid cell from parameterized mesoscale eddy diffusion. Reported only for models that use potential temperature as prognostic field.-->
+		<field id="CMIP7_opottemppsmadvect" field_ref="?dummy_XYO"/>
+		<!--P1 (W m-2) tendency_of_sea_water_potential_temperature_expressed_as_heat_content_due_to_parameterized_submesoscale_eddy_advection : Tendency of heat content for a grid cell from parameterized submesoscale eddy advection. Reported only for models that use potential temperature as prognostic field.-->
+		<field id="CMIP7_opottemprmadvect" field_ref="?dummy_XYO"/>
+		<!--P1 (W m-2) tendency_of_sea_water_potential_temperature_expressed_as_heat_content_due_to_residual_mean_advection : Tendency of heat content for a grid cell from residual mean (sum of Eulerian mean + parameterized eddy-induced) advection. Reported only for models that use potential temperature as prognostic field.-->
 		<field id="CMIP7_opottemptend" field_ref="?dummy_XYO"/>
-		<!--P2 (W m-2) tendency_of_sea_water_potential_temperature_expressed_as_heat_content : Tendency of heat content for a grid cell from all processes. Reported only for models that use potential temperature as prognostic field.-->
-		<field id="CMIP7_pbo" field_ref="?dummy_XY"/>
-		<!--P2 (Pa) sea_water_pressure_at_sea_floor : "Sea water pressure" is the pressure that exists in the medium of sea water.  It includes the pressure due to overlying sea water, sea ice, air and any other medium that may be present.-->
+		<!--P1 (W m-2) tendency_of_sea_water_potential_temperature_expressed_as_heat_content : Tendency of heat content for a grid cell from all processes. Reported only for models that use potential temperature as prognostic field.-->
+		<field id="CMIP7_osaltdiff" field_ref="?dummy_XYO"/>
+		<!--P1 (kg m-2 s-1) tendency_of_sea_water_salinity_expressed_as_salt_content_due_to_parameterized_dianeutral_mixing : Tendency of salt content for a grid cell from parameterized dianeutral mixing.-->
+		<field id="CMIP7_osaltpadvect" field_ref="?dummy_XYO"/>
+		<!--P1 (kg m-2 s-1) tendency_of_sea_water_salinity_expressed_as_salt_content_due_to_parameterized_eddy_advection : Tendency of salt content for a grid cell from parameterized eddy advection (any form of eddy advection).-->
+		<field id="CMIP7_osaltpmdiff" field_ref="?dummy_XYO"/>
+		<!--P1 (kg m-2 s-1) tendency_of_sea_water_salinity_expressed_as_salt_content_due_to_parameterized_mesoscale_eddy_diffusion : Tendency of salt content for a grid cell from parameterized mesoscale eddy diffusion.-->
+		<field id="CMIP7_osaltpsmadvect" field_ref="?dummy_XYO"/>
+		<!--P1 (kg m-2 s-1) tendency_of_sea_water_salinity_expressed_as_salt_content_due_to_parameterized_submesoscale_eddy_advection : Tendency of salt content for a grid cell from parameterized submesoscale eddy advection.-->
+		<field id="CMIP7_osaltrmadvect" field_ref="?dummy_XYO"/>
+		<!--P1 (kg m-2 s-1) tendency_of_sea_water_salinity_expressed_as_salt_content_due_to_residual_mean_advection : Tendency of salt content for a grid cell from residual mean  (sum of Eulerian mean + parameterized eddy-induced)  advection.-->
+		<field id="CMIP7_osalttend" field_ref="?dummy_XYO"/>
+		<!--P1 (kg m-2 s-1) tendency_of_sea_water_salinity_expressed_as_salt_content : Tendency of salt content for a grid cell from all processes.-->
+		<field id="CMIP7_pbo" field_ref="?dummy_XY_depthseafloor"/>
+		<!--P1 (Pa) sea_water_pressure_at_sea_floor : "Sea water pressure" is the pressure that exists in the medium of sea water.  It includes the pressure due to overlying sea water, sea ice, air and any other medium that may be present.-->
 		<field id="CMIP7_pfscint" field_ref="?dummy_XY_swplayers"/>
-		<!--P2 (kg m-2) undef : This is a fundamental aspect of the changes in the hydrological cycle and their impact on the oceans, and due to new numerical schemes and vertical discretizations, it is important to calculate it consistently with the model formulation.-->
-		<field id="CMIP7_ph" field_ref="?dummy_XYO"/>
-		<!--P2 (1) sea_water_ph_reported_on_total_scale : negative log10 of hydrogen ion concentration with the concentration expressed as mol H kg-1.-->
+		<!--P1 (kg m-2) integral_wrt_depth_of_sea_water_preformed_salinity_expressed_as_salt_mass_content : This is a fundamental aspect of the changes in the hydrological cycle and their impact on the oceans, and due to new numerical schemes and vertical discretizations, it is important to calculate it consistently with the model formulation.-->
+		<field id="CMIP7_ph" field_ref="?dummy_XY"/>
+		<!--P1 (1) sea_water_ph_reported_on_total_scale : negative log10 of hydrogen ion concentration with the concentration expressed as mol H kg-1.-->
 		<field id="CMIP7_phcint" field_ref="?dummy_XY_swplayers"/>
-		<!--P2 (J m-2) integral_wrt_depth_of_sea_water_potential_temperature_expressed_as_heat_content : This is the vertically-integrated heat content derived from potential temperature (thetao).-->
+		<!--P1 (J m-2) integral_wrt_depth_of_sea_water_potential_temperature_expressed_as_heat_content : This is the vertically-integrated heat content derived from potential temperature (thetao).-->
 		<field id="CMIP7_phos" field_ref="?dummy_XY"/>
-		<!--P2 (1) sea_water_ph_reported_on_total_scale : negative log10 of hydrogen ion concentration with the concentration expressed as mol H kg-1.-->
-		<field id="CMIP7_phyc" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_phytoplankton_expressed_as_carbon_in_sea_water : sum of phytoplankton carbon component concentrations.  In most (all?) cases this is the sum of phycdiat and phycmisc (i.e., "Diatom Carbon Concentration" and "Non-Diatom Phytoplankton Carbon Concentration"-->
+		<!--P1 (1) sea_water_ph_reported_on_total_scale : Near surface negative log10 of hydrogen ion concentration with the concentration expressed as mol H kg-1.-->
+		<field id="CMIP7_phyc" field_ref="?dummy_XY"/>
+		<!--P1 (mol m-3) mole_concentration_of_phytoplankton_expressed_as_carbon_in_sea_water : sum of phytoplankton carbon component concentrations. In most (all?) cases this is the sum of phycdiat and phycmisc (i.e., "Diatom Carbon Concentration" and "Non-Diatom Phytoplankton Carbon Concentration"-->
 		<field id="CMIP7_phycalc" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_calcareous_phytoplankton_expressed_as_carbon_in_sea_water : carbon concentration from calcareous (calcite-producing) phytoplankton component alone-->
+		<!--P1 (mol m-3) mole_concentration_of_calcareous_phytoplankton_expressed_as_carbon_in_sea_water : carbon concentration from calcareous (calcite-producing) phytoplankton component alone-->
 		<field id="CMIP7_phycalcos" field_ref="?dummy_XY"/>
 		<!--P2 (mol m-3) mole_concentration_of_calcareous_phytoplankton_expressed_as_carbon_in_sea_water : carbon concentration from calcareous (calcite-producing) phytoplankton component alone-->
+		<field id="CMIP7_phycdiat" field_ref="?dummy_XY"/>
+		<!--P2 (mol m-3) mole_concentration_of_diatoms_expressed_as_carbon_in_sea_water : Mole Concentration of Diatoms Expressed as Carbon in Sea Water-->
+		<field id="CMIP7_phycdiaz" field_ref="?dummy_XY"/>
+		<!--P2 (mol m-3) mole_concentration_of_diazotrophic_phytoplankton_expressed_as_carbon_in_sea_water : Mole Concentration of Diazotrophs Expressed as Carbon in Sea Water-->
+		<field id="CMIP7_phycmisc" field_ref="?dummy_XY"/>
+		<!--P2 (mol m-3) mole_concentration_of_miscellaneous_phytoplankton_expressed_as_carbon_in_sea_water : Mole Concentration of Miscellaneous Phytoplankton Expressed as Carbon in Sea Water-->
+		<field id="CMIP7_phycnano" field_ref="?dummy_XY"/>
+		<!--P2 (mol m-3) mole_concentration_of_nanophytoplankton_expressed_as_carbon_in_sea_water : Mole Concentration of Nanophytoplankton Expressed as Carbon in Sea Water-->
 		<field id="CMIP7_phycos" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-3) mole_concentration_of_phytoplankton_expressed_as_carbon_in_sea_water : sum of phytoplankton carbon component concentrations.  In most (all?) cases this is the sum of phycdiat and phycmisc (i.e., "Diatom Carbon Concentration" and "Non-Diatom Phytoplankton Carbon Concentration"-->
+		<!--P1 (mol m-3) mole_concentration_of_phytoplankton_expressed_as_carbon_in_sea_water : sum of phytoplankton organic carbon component concentrations at the sea surface-->
+		<field id="CMIP7_phycpico" field_ref="?dummy_XY"/>
+		<!--P2 (mol m-3) mole_concentration_of_picophytoplankton_expressed_as_carbon_in_sea_water : Mole Concentration of Picophytoplankton Expressed as Carbon in Sea Water-->
 		<field id="CMIP7_phydiat" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_diatoms_expressed_as_carbon_in_sea_water : carbon from the diatom phytoplankton component concentration alone-->
+		<!--P1 (mol m-3) mole_concentration_of_diatoms_expressed_as_carbon_in_sea_water : carbon from the diatom phytoplankton component concentration alone-->
 		<field id="CMIP7_phydiatos" field_ref="?dummy_XY"/>
 		<!--P2 (mol m-3) mole_concentration_of_diatoms_expressed_as_carbon_in_sea_water : carbon from the diatom phytoplankton component concentration alone-->
 		<field id="CMIP7_phydiaz" field_ref="?dummy_XYO"/>
@@ -346,277 +445,299 @@
 		<field id="CMIP7_phydiazos" field_ref="?dummy_XY"/>
 		<!--P2 (mol m-3) mole_concentration_of_diazotrophic_phytoplankton_expressed_as_carbon_in_sea_water : carbon concentration from the diazotrophic phytoplankton component alone-->
 		<field id="CMIP7_phymisc" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_miscellaneous_phytoplankton_expressed_as_carbon_in_sea_water : carbon concentration from additional phytoplankton component alone-->
+		<!--P1 (mol m-3) mole_concentration_of_miscellaneous_phytoplankton_expressed_as_carbon_in_sea_water : carbon concentration from additional phytoplankton component alone-->
 		<field id="CMIP7_phymiscos" field_ref="?dummy_XY"/>
 		<!--P2 (mol m-3) mole_concentration_of_miscellaneous_phytoplankton_expressed_as_carbon_in_sea_water : carbon concentration from additional phytoplankton component alone-->
 		<field id="CMIP7_phypico" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_picophytoplankton_expressed_as_carbon_in_sea_water : carbon concentration from the picophytoplankton (<2 um) component alone-->
+		<!--P1 (mol m-3) mole_concentration_of_picophytoplankton_expressed_as_carbon_in_sea_water : carbon concentration from the picophytoplankton (<2 um) component alone-->
 		<field id="CMIP7_phypicoos" field_ref="?dummy_XY"/>
 		<!--P2 (mol m-3) mole_concentration_of_picophytoplankton_expressed_as_carbon_in_sea_water : carbon concentration from the picophytoplankton (<2 um) component alone-->
 		<field id="CMIP7_po4" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_dissolved_inorganic_phosphorus_in_sea_water : Mole concentration means number of moles per unit volume, also called "molarity", and is used in the construction "mole\_concentration\_of\_X\_in\_Y", where X is a material constituent of Y. A chemical or biological species denoted by X may be described by a single term such as "nitrogen" or a phrase such as "nox\_expressed\_as\_nitrogen". "Dissolved inorganic phosphorus" means the sum of all inorganic phosphorus in solution (including phosphate, hydrogen phosphate, dihydrogen phosphate, and phosphoric acid).-->
+		<!--P1 (mol m-3) mole_concentration_of_dissolved_inorganic_phosphorus_in_sea_water : Mole concentration means number of moles per unit volume, also called "molarity", and is used in the construction "mole\_concentration\_of\_X\_in\_Y", where X is a material constituent of Y. A chemical or biological species denoted by X may be described by a single term such as "nitrogen" or a phrase such as "nox\_expressed\_as\_nitrogen". "Dissolved inorganic phosphorus" means the sum of all inorganic phosphorus in solution (including phosphate, hydrogen phosphate, dihydrogen phosphate, and phosphoric acid).-->
 		<field id="CMIP7_pp" field_ref="?dummy_XYO"/>
-		<!--P3 (mol m-3 s-1) tendency_of_mole_concentration_of_particulate_organic_matter_expressed_as_carbon_in_sea_water_due_to_net_primary_production : total primary (organic carbon) production by phytoplankton-->
+		<!--P1 (mol m-3 s-1) tendency_of_mole_concentration_of_particulate_organic_matter_expressed_as_carbon_in_sea_water_due_to_net_primary_production : total primary (organic carbon) production by phytoplankton-->
 		<field id="CMIP7_ppos" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-3 s-1) tendency_of_mole_concentration_of_particulate_organic_matter_expressed_as_carbon_in_sea_water_due_to_net_primary_production : total primary (organic carbon) production by phytoplankton-->
+		<!--P1 (mol m-3 s-1) tendency_of_mole_concentration_of_particulate_organic_matter_expressed_as_carbon_in_sea_water_due_to_net_primary_production : total primary (organic carbon) production by phytoplankton-->
 		<field id="CMIP7_pso" field_ref="?dummy_XY"/>
-		<!--P2 (Pa) sea_water_pressure_at_sea_water_surface : The surface called "surface" means the lower boundary of the atmosphere.  "Sea water pressure" is the pressure that exists in the medium of sea water.  It includes the pressure due to overlying sea water, sea ice, air and any other medium that may be present.-->
+		<!--P1 (Pa) sea_water_pressure_at_sea_water_surface : The surface called "surface" means the lower boundary of the atmosphere.  "Sea water pressure" is the pressure that exists in the medium of sea water.  It includes the pressure due to overlying sea water, sea ice, air and any other medium that may be present.-->
+		<field id="CMIP7_rsdo" field_ref="?dummy_XYO"/>
+		<!--P2 (W m-2) downwelling_shortwave_flux_in_sea_water : Downwelling Shortwave Radiation in Sea Water-->
+		<field id="CMIP7_rsdoabsorb" field_ref="?dummy_XYO"/>
+		<!--P1 (W m-2) net_rate_of_absorption_of_shortwave_energy_in_ocean_layer : Tendency of heat content for a grid cell from penetrative shortwave radiation within a grid cell.-->
 		<field id="CMIP7_rsdsoni" field_ref="?dummy_XY"/>
-		<!--P2 (W m-2) surface_downwelling_shortwave_flux_in_air : surface downwelling shortwave radiation over ocean without sea ice, computed as the average albedo of the ice-free part of a grid cell-->
+		<!--P2 (W m-2) surface_downwelling_shortwave_flux_in_air : Surface Downwelling Shortwave Radiation over the portion of an ocean grid cell not covered by sea ice. Can be used for computation of surface albedo.-->
 		<field id="CMIP7_rsdss" field_ref="?dummy_XY"/>
-		<!--P2 (W m-2) surface_downwelling_shortwave_flux_in_air : surface downwelling shortwave radiation over snow covered surfaces, computed as the average albedo of the snow-covered part of a grid cell-->
+		<!--P2 (W m-2) surface_downwelling_shortwave_flux_in_air : Surface Downwelling Shortwave Radiation over the portion of a land grid cell covered by snow but not by ice. Can be used for computation of surface albedo.-->
 		<field id="CMIP7_rsdssi" field_ref="?dummy_XY"/>
-		<!--P2 (W m-2) surface_downwelling_shortwave_flux_in_air : surface downwelling shortwave radiation over sea ice, computed as the average albedo of the sea ice covered part of a grid cell (mask: sea ice mask)-->
+		<!--P2 (W m-2) surface_downwelling_shortwave_flux_in_air : Surface Downwelling Shortwave Radiation over the portion of an ocean grid cell covered by sea ice, including snow. Can be used for computation of surface albedo.-->
 		<field id="CMIP7_rsntds" field_ref="?dummy_XY"/>
 		<!--P2 (W m-2) net_downward_shortwave_flux_at_sea_water_surface : The radiative flux into the surface of liquid sea water only. This excludes shortwave flux absorbed by sea ice, but includes any light that passes through the ice and is absorbed by the ocean.-->
 		<field id="CMIP7_rsusoni" field_ref="?dummy_XY"/>
-		<!--P2 (W m-2) surface_upwelling_shortwave_flux_in_air : surface upwelling shortwave radiation over ocean without sea ice, computed as the average albedo of the ice-free part of a grid cell-->
+		<!--P2 (W m-2) surface_upwelling_shortwave_flux_in_air : Surface Upwelling Shortwave Radiation over the portion of an ocean grid cell not covered by sea ice. Can be used for computation of surface albedo.-->
 		<field id="CMIP7_rsuss" field_ref="?dummy_XY"/>
-		<!--P2 (W m-2) surface_upwelling_shortwave_flux_in_air : surface upwelling shortwave radiation over snow covered surfaces, computed as the average albedo of the snow-covered part of a grid cell-->
+		<!--P2 (W m-2) surface_upwelling_shortwave_flux_in_air : Surface Upwelling Shortwave Radiation over the portion of a land grid cell covered by snow. Can be used for computation of surface albedo.-->
 		<field id="CMIP7_rsussi" field_ref="?dummy_XY"/>
-		<!--P2 (W m-2) surface_upwelling_shortwave_flux_in_air : surface upwelling shortwave radiation over sea ice, computed as the average albedo of the sea ice covered part of a grid cell (mask: sea ice mask)-->
+		<!--P2 (W m-2) surface_upwelling_shortwave_flux_in_air : Surface Upwelling Shortwave Radiation over the portion of an ocean grid cell covered by sea ice, including snow. Can be used for computation of surface albedo.-->
 		<field id="CMIP7_scint" field_ref="?dummy_XY_swplayers"/>
-		<!--P2 (kg m-2) undef : This is a fundamental aspect of the changes in the hydrological cycle and their impact on the oceans, and due to new numerical schemes and vertical discretizations, it is important to calculate it consistently with the model formulation.-->
+		<!--P1 (kg m-2) integral_wrt_depth_of_sea_water_practical_salinity_expressed_as_salt_mass_content : This is a fundamental aspect of the changes in the hydrological cycle and their impact on the oceans, and due to new numerical schemes and vertical discretizations, it is important to calculate it consistently with the model formulation.-->
+		<field id="CMIP7_sduo" field_ref="?dummy_XY"/>
+		<!--P1 (m s-1) sea_surface_wave_stokes_drift_eastward_velocity : The eastward component of the net drift velocity of ocean water caused by surface wind-sea waves. The Stokes drift velocity could be defined as the difference between the average Lagrangian flow velocity of a fluid parcel, and the average Eulerian flow velocity of the fluid at a fixed position.-->
+		<field id="CMIP7_sdvo" field_ref="?dummy_XY"/>
+		<!--P1 (m s-1) sea_surface_wave_stokes_drift_northward_velocity : The northward component of the net drift velocity of ocean water caused by surface wind-sea waves. The Stokes drift velocity could be defined as the difference between the average Lagrangian flow velocity of a fluid parcel, and the average Eulerian flow velocity of the fluid at a fixed position.-->
 		<field id="CMIP7_sf6" field_ref="?dummy_XYO"/>
-		<!--P3 (mol m-3) mole_concentration_of_sulfur_hexafluoride_in_sea_water : Mole concentration means number of moles per unit volume, also called "molarity", and is used in the construction "mole\_concentration\_of\_X\_in\_Y", where X is a material constituent of Y. A chemical or biological species denoted by X may be described by a single term such as "nitrogen" or a phrase such as "nox\_expressed\_as\_nitrogen". The chemical formula of sulfur hexafluoride is SF6.-->
+		<!--P2 (mol m-3) mole_concentration_of_sulfur_hexafluoride_in_sea_water : Mole concentration means number of moles per unit volume, also called "molarity", and is used in the construction "mole\_concentration\_of\_X\_in\_Y", where X is a material constituent of Y. A chemical or biological species denoted by X may be described by a single term such as "nitrogen" or a phrase such as "nox\_expressed\_as\_nitrogen". The chemical formula of sulfur hexafluoride is SF6.-->
+		<field id="CMIP7_sfacrossline" field_ref="?dummy_TR_oline"/>
+		<!--P1 (W) ocean_salt_transport_across_line : Depth-integrated total salt mass transport from resolved and parameterized processes across different lines on the Earth's surface (based on appendix J and table J1 of Griffies et al., 2016). Formally, this means the integral along the line of the normal component of the heat transport. Positive and negative numbers refer to total northward/eastward and southward/westward transports, respectively. The transport should be evaluated for the full depth of the ocean, except for the Pacific Equatorial Undercurrent, which is averaged from the surface to 350m.-->
 		<field id="CMIP7_sfdsi" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) downward_sea_ice_basal_salt_flux : This field is physical, and it arises since sea ice has a nonzero salt content, so it exchanges salt with the liquid ocean upon melting and freezing.-->
+		<!--P1 (kg m-2 s-1) downward_sea_ice_basal_salt_flux : This field is physical, and it arises since sea ice has a nonzero salt content, so it exchanges salt with the liquid ocean upon melting and freezing.-->
 		<field id="CMIP7_sfriver" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) salt_flux_into_sea_water_from_rivers : This field is physical, and it arises when rivers carry a nonzero salt content.  Often this is zero, with rivers assumed to be fresh.-->
+		<!--P1 (kg m-2 s-1) salt_flux_into_sea_water_from_rivers : This field is physical, and it arises when rivers carry a nonzero salt content.  Often this is zero, with rivers assumed to be fresh.-->
 		<field id="CMIP7_sftof" field_ref="?dummy_XY"/>
 		<!--P1 (%) sea_area_fraction : This is the area fraction at the ocean surface.-->
 		<field id="CMIP7_sfx" field_ref="?dummy_XYO"/>
-		<!--P2 (kg s-1) ocean_salt_x_transport : Contains all contributions to "x-ward" heat transport from resolved and parameterized processes.-->
+		<!--P1 (kg s-1) ocean_salt_x_transport : Contains all contributions to 'x-ward' salt mass transport from resolved and parameterized processes. Report on native horizontal grid.-->
 		<field id="CMIP7_sfy" field_ref="?dummy_XYO"/>
-		<!--P2 (kg s-1) ocean_salt_y_transport : Contains all contributions to 'y-ward' salt transport from resolved and parameterized processes.-->
+		<!--P1 (kg s-1) ocean_salt_y_transport : Contains all contributions to 'y-ward' salt mass transport from resolved and parameterized processes. Report on native horizontal grid.-->
 		<field id="CMIP7_si" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_dissolved_inorganic_silicon_in_sea_water : Mole concentration means number of moles per unit volume, also called "molarity", and is used in the construction "mole\_concentration\_of\_X\_in\_Y", where X is a material constituent of Y. A chemical or biological species denoted by X may be described by a single term such as "nitrogen" or a phrase such as "nox\_expressed\_as\_nitrogen". "Dissolved inorganic silicon" means the sum of all inorganic silicon in solution (including silicic acid and its first dissociated anion SiO(OH)3-).-->
+		<!--P1 (mol m-3) mole_concentration_of_dissolved_inorganic_silicon_in_sea_water : Mole concentration means number of moles per unit volume, also called "molarity", and is used in the construction "mole\_concentration\_of\_X\_in\_Y", where X is a material constituent of Y. A chemical or biological species denoted by X may be described by a single term such as "nitrogen" or a phrase such as "nox\_expressed\_as\_nitrogen". "Dissolved inorganic silicon" means the sum of all inorganic silicon in solution (including silicic acid and its first dissociated anion SiO(OH)3-).-->
 		<field id="CMIP7_siage" field_ref="?dummy_XY"/>
-		<!--P2 (s) age_of_sea_ice : Age of sea ice-->
+		<!--P1 (s) age_of_sea_ice : Age of sea ice since its formation in open water.-->
 		<field id="CMIP7_sialgc" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-2) sea_ice_mole_content_of_ice_algae_expressed_as_carbon : Mole Concentration of Ice Algae Expressed as Carbon in Sea Ice-->
+		<!--P1 (mol m-2) sea_ice_mole_content_of_ice_algae_expressed_as_carbon : Vertically-integrated content of carbon in ice algae, expressed as moles of carbon per square meter of sea ice.-->
 		<field id="CMIP7_siareaacrossline" field_ref="?dummy_TRS"/>
-		<!--P2 (m2 s-1) sea_ice_area_transport_across_line : Flux across 4 straits-->
+		<!--P1 (m2 s-1) sea_ice_area_transport_across_line : Net (sum of transport in all directions) sea ice area transport through the following four passages, positive into the Arctic Ocean. Note that the definitions of the passages are for SIMIP purposes just meant as default values as given by the physical ocean MIP described in Griffies et al. (2016). Individual models might chose slightly different definitions as given by their grid geometry. 1. Fram Strait: (11.5W,81.3N) to (10.5E,79.6N). 2. Canadian Arctic Archipelago: (128.2W,70.6N) to (59.3W,82.1N). 3. Barents Sea Opening: (16.8E,76.5N) to (19.2E,70.2N). 4. Bering Strait: (171W,66.2N) to (166W,65N).-->
 		<field id="CMIP7_siarean" field_ref="?dummy_0d"/>
-		<!--P2 (1e6 km2) sea_ice_area : total area of sea ice in the Northern hemisphere-->
+		<!--P1 (1e6 km2) sea_ice_area : Total integrated area of sea ice in the Northern Hemisphere (where siconc > 0). Does not include grid cells partially covered by land.-->
 		<field id="CMIP7_siareas" field_ref="?dummy_0d"/>
-		<!--P2 (1e6 km2) sea_ice_area : total area of sea ice in the Southern hemisphere-->
+		<!--P1 (1e6 km2) sea_ice_area : Total integrated area of sea ice in the Southern Hemisphere (where siconc > 0). Does not include grid cells partially covered by land.-->
 		<field id="CMIP7_sichl" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2) sea_ice_mass_content_of_ice_algae_expressed_as_chlorophyll : Mass Concentration of Ice Algae Expressed as Chlorophyll in Sea Ice-->
+		<!--P1 (kg m-2) sea_ice_mass_content_of_ice_algae_expressed_as_chlorophyll : Vertically-integrated content of Chl-a in ice algae, expressed as kg of Chl-a per square meter of sea ice.-->
 		<field id="CMIP7_sicompstren" field_ref="?dummy_XY"/>
-		<!--P3 (N m-1) compressive_strength_of_sea_ice : Computed strength of the ice pack, defined as the energy (J m-2) dissipated per unit area removed from the ice pack under compression, and assumed proportional to the change in potential energy caused by ridging. For Hibler-type models, this is P (= P\*h exp(-C(1-A)) where P\* is compressive strength, h ice thickness, A compactness and C strength reduction constant).-->
+		<!--P1 (N m-1) compressive_strength_of_sea_ice : Computed strength of the ice pack, defined as the energy (J m-2) dissipated per unit area removed from the ice pack under compression, and assumed proportional to the change in potential energy caused by ridging. For Hibler-type models, this is P = P\* h exp(-C(1-A)) where P\* is compressive strength, h is ice thickness, A is compactness and C is strength reduction constant.-->
 		<field id="CMIP7_siconc" field_ref="?dummy_XY"/>
-		<!--P1 (1) sea_ice_area_fraction : Percentage of grid cell covered by sea ice-->
+		<!--P1 (1) sea_ice_area_fraction : Areal fraction of a given grid cell that is covered by sea ice on the ocean grid, independent of the thickness of that ice.-->
 		<field id="CMIP7_siconca" field_ref="?dummy_XY"/>
-		<!--P2 (1) sea_ice_area_fraction : Percentage of grid cell covered by sea ice-->
+		<!--P1 (1) sea_ice_area_fraction : Areal fraction of a given grid cell that is covered by sea ice on the atmosphere grid, independent of the thickness of that ice.-->
 		<field id="CMIP7_sidconcdyn" field_ref="?dummy_XY"/>
-		<!--P2 (s-1) tendency_of_sea_ice_area_fraction_due_to_dynamics : Total change in sea-ice area fraction through dynamics-related processes (advection, divergence...)-->
+		<!--P1 (s-1) tendency_of_sea_ice_area_fraction_due_to_dynamics : Total change in sea-ice area fraction through dynamics-related processes (advection, divergence, etc.).-->
 		<field id="CMIP7_sidconcth" field_ref="?dummy_XY"/>
-		<!--P2 (s-1) tendency_of_sea_ice_area_fraction_due_to_thermodynamics : Total change in sea-ice area fraction through thermodynamic processes-->
+		<!--P1 (s-1) tendency_of_sea_ice_area_fraction_due_to_thermodynamics : Total change in sea-ice area fraction through thermodynamic processes.-->
 		<field id="CMIP7_sidivvel" field_ref="?dummy_XY"/>
-		<!--P3 (s-1) divergence_of_sea_ice_velocity : Divergence of sea-ice velocity field (first shear strain invariant)-->
+		<!--P1 (s-1) divergence_of_sea_ice_velocity : Divergence of sea-ice velocity field (first shear strain invariant). Requested as instantaneous value at the center of the month (i.e., first timestep of the 15th day of the month).-->
 		<field id="CMIP7_sidmassdyn" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_sea_ice_dynamics : Total change in sea-ice mass through dynamics-related processes (advection,...) divided by grid-cell area-->
+		<!--P1 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_sea_ice_dynamics : Total change in sea-ice mass through dynamics-related processes (advection, divergence, etc.) divided by grid-cell area.-->
 		<field id="CMIP7_sidmassevapsubl" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) water_evapotranspiration_flux : The rate of change of sea-ice mass change through evaporation and sublimation divided by grid-cell area-->
+		<!--P1 (kg m-2 s-1) water_evapotranspiration_flux : Rate of change of sea-ice mass change through evaporation and sublimation divided by grid-cell area. If a model does not differentiate between the sublimation of snow and sea ice, we recommend to report sidmassevapsubl as zero as long as the ice is snow covered, and to report any sublimation within the variable sisndmasssubl.-->
 		<field id="CMIP7_sidmassgrowthbot" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_congelation_ice_accumulation : The rate of change of sea ice mass due to vertical growth of existing sea ice at its base divided by grid-cell area.-->
+		<!--P1 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_congelation_ice_accumulation : Rate of change of sea-ice mass due to vertical growth of existing sea ice at its base divided by grid-cell area. Note that this number is always positive or zero since sea-ice melt is collected in sidmassmeltbot. This is to account for differential growth and melt in models with a sub-grid scale ice thickness distribution.-->
 		<field id="CMIP7_sidmassgrowthsi" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_conversion_of_snow_to_sea_ice : The rate of change of sea ice mass due to transformation of snow to sea ice divided by grid-cell area-->
+		<!--P1 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_conversion_of_snow_to_sea_ice : Rate of change of sea-ice mass due to transformation of snow to sea ice divided by grid-cell area. Always positive or zero.-->
 		<field id="CMIP7_sidmassgrowthwat" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_frazil_ice_accumulation_in_leads : The rate of change of sea ice mass due to sea ice formation in supercooled water (often through frazil formation) divided by grid-cell area. Together, sidmassgrowthwat and sidmassgrowthbot should give total ice growth-->
+		<!--P1 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_frazil_ice_accumulation_in_leads : Rate of change of sea-ice mass due to sea ice formation in supercooled water (often through frazil formation) divided by grid-cell area. Always positive or zero.-->
 		<field id="CMIP7_sidmassmeltbot" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_basal_melting : The rate of change of sea ice mass through melting at the ice bottom divided by grid-cell area-->
+		<!--P1 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_basal_melting : Rate of change of sea-ice mass through melting/dissolution at the ice bottom divided by grid-cell area. Note that this number is always zero or negative since sea-ice growth is collected in sidmassgrowthbot. This is to account for differential growth and melt in models with a sub-grid scale ice thickness distribution.-->
 		<field id="CMIP7_sidmassmeltlat" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_lateral_melting : The rate of change of sea ice mass through lateral melting divided by grid-cell area (report 0 if not explicitly calculated thermodynamically)-->
+		<!--P1 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_lateral_melting : Rate of change of sea-ice mass through lateral melting/dissolution divided by grid-cell area (report zero if not explicitly calculated thermodynamically). Always negative or zero.-->
 		<field id="CMIP7_sidmassmelttop" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_surface_melting : The rate of change of sea ice mass through melting at the ice surface divided by grid-cell area-->
+		<!--P1 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_surface_melting : Rate of change of sea-ice mass through melting at the ice surface divided by grid-cell area. This number is independent of the actual fate of the meltwater, and will hence include all sea-ice meltwater that drains into the ocean and all sea-ice meltwater that is collected by a melt-pond parameterisation. Always negative or zero.-->
 		<field id="CMIP7_sidmassth" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_sea_ice_thermodynamics : Total change in sea-ice mass from thermodynamic processes divided by grid-cell area-->
+		<!--P1 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_sea_ice_thermodynamics : Total change in sea-ice mass from thermodynamic processes divided by grid-cell area.-->
 		<field id="CMIP7_sidmasstranx" field_ref="?dummy_XY"/>
-		<!--P3 (kg s-1) sea_ice_x_transport : Includes transport of both sea ice and snow by advection-->
+		<!--P1 (kg s-1) sea_ice_x_transport : X-component of the sea-ice drift-induced transport of snow and sea ice mass.-->
 		<field id="CMIP7_sidmasstrany" field_ref="?dummy_XY"/>
-		<!--P3 (kg s-1) sea_ice_y_transport : Includes transport of both sea ice and snow by advection-->
+		<!--P1 (kg s-1) sea_ice_y_transport : Y-component of the sea-ice drift-induced transport of snow and sea ice mass.-->
 		<field id="CMIP7_sidragbot" field_ref="?dummy_XY"/>
-		<!--P3 (1) sea_ice_basal_drag_coefficient_for_momentum_in_sea_water : Oceanic drag coefficient that is used to calculate the oceanic momentum drag on sea ice-->
+		<!--P1 (1) sea_ice_basal_drag_coefficient_for_momentum_in_sea_water : Oceanic drag coefficient that is used to calculate the oceanic momentum drag on sea ice.-->
 		<field id="CMIP7_sidragtop" field_ref="?dummy_XY"/>
-		<!--P3 (1) surface_drag_coefficient_for_momentum_in_air : Atmospheric drag coefficient that is used to calculate the atmospheric momentum drag on sea ice-->
+		<!--P1 (1) surface_drag_coefficient_for_momentum_in_air : Atmospheric drag coefficient that is used to calculate the atmospheric momentum drag on sea ice.-->
 		<field id="CMIP7_siextentn" field_ref="?dummy_0d"/>
-		<!--P2 (1e6 km2) sea_ice_extent : Total area of all Northern-Hemisphere grid cells that are covered by at least 15 % areal fraction of sea ice-->
+		<!--P1 (1e6 km2) sea_ice_extent : Total integrated area of all Northern Hemisphere grid cells that are covered by at least 15% areal fraction of sea ice (siconc >= 0.15). Does not include grid cells partially covered by land.-->
 		<field id="CMIP7_siextents" field_ref="?dummy_0d"/>
-		<!--P2 (1e6 km2) sea_ice_extent : Total area of all Southern-Hemisphere grid cells that are covered by at least 15 % areal fraction of sea ice-->
+		<!--P1 (1e6 km2) sea_ice_extent : Total integrated area of all Southern Hemisphere grid cells that are covered by at least 15% areal fraction of sea ice (siconc >= 0.15). Does not include grid cells partially covered by land.-->
 		<field id="CMIP7_sifb" field_ref="?dummy_XY"/>
-		<!--P3 (m) sea_ice_freeboard : Mean height of sea-ice surface (=snow-ice interface when snow covered) above sea level-->
+		<!--P1 (m) sea_ice_freeboard : Mean height of sea-ice surface (i.e. snow-ice interface when snow covered) above sea level. This follows the classical definition of freeboard for in situ observations. In the satellite community, sometimes the total height of sea ice and snow above sea level is referred to as freeboard. This can easily be calculated by adding sisnthick to sifb.-->
 		<field id="CMIP7_siflcondbot" field_ref="?dummy_XY"/>
-		<!--P2 (W m-2) basal_downward_heat_flux_in_sea_ice : the net heat conduction flux at the ice base-->
+		<!--P1 (W m-2) basal_downward_heat_flux_in_sea_ice : Net heat conduction flux at the ice base, i.e. the conductive heat flux from the centre of the lowermost vertical sea-ice grid box to the base of the sea ice (energy flow per sea ice area). Positive for a downward heat flux.-->
 		<field id="CMIP7_siflcondtop" field_ref="?dummy_XY"/>
-		<!--P2 (W m-2) surface_downward_heat_flux_in_sea_ice : the net heat conduction flux at the ice surface-->
+		<!--P1 (W m-2) surface_downward_heat_flux_in_sea_ice : Net heat conduction flux at the ice surface, i.e. the conductive heat flux from the centre of the uppermost vertical sea-ice grid box to the surface of the sea ice (energy flow per sea ice area). Positive for a downward heat flux.-->
 		<field id="CMIP7_siflfwbot" field_ref="?dummy_XY"/>
-		<!--P3 (kg m-2 s-1) water_flux_into_sea_water_due_to_sea_ice_thermodynamics : Total flux of fresh water from water into sea ice divided by grid-cell area; This flux is negative during ice growth (liquid water mass decreases, hence upward flux of freshwater), positive during ice melt (liquid water mass increases, hence downward flux of freshwater)-->
+		<!--P1 (kg m-2 s-1) water_flux_into_sea_water_due_to_sea_ice_thermodynamics : Total flux of fresh water from water into sea ice divided by grid-cell area. This flux is positive when fresh water enters the ocean, and is therefore negative during ice growth and positive during ice melt.-->
 		<field id="CMIP7_siflfwdrain" field_ref="?dummy_XY"/>
-		<!--P3 (kg m-2 s-1) water_flux_into_sea_water_due_to_surface_drainage : Total flux of fresh water from sea-ice surface into underlying ocean. This combines both surface melt water that drains directly into the ocean and the drainage of surface melt pond. By definition, this flux is always positive.-->
+		<!--P1 (kg m-2 s-1) water_flux_into_sea_water_due_to_surface_drainage : Total flux of fresh water from sea-ice surface into underlying ocean divided by grid-cell area. This combines both surface meltwater that drains directly into the ocean and the drainage of surface melt ponds. By definition, this flux is always positive.-->
 		<field id="CMIP7_sifllattop" field_ref="?dummy_XY"/>
-		<!--P2 (W m-2) surface_downward_latent_heat_flux : the net latent heat flux over sea ice-->
+		<!--P1 (W m-2) surface_downward_latent_heat_flux : Net latent heat flux over sea ice (energy flow per sea ice area). Positive for a downward heat flux.-->
 		<field id="CMIP7_sifllwdtop" field_ref="?dummy_XY"/>
-		<!--P2 (W m-2) surface_downwelling_longwave_flux_in_air : the downwelling longwave flux over sea ice (always positive)-->
+		<!--P1 (W m-2) surface_downwelling_longwave_flux_in_air : Downwelling longwave flux from the atmosphere to the sea-ice surface (energy flow per sea ice area). Always positive or zero.-->
 		<field id="CMIP7_sifllwutop" field_ref="?dummy_XY"/>
-		<!--P2 (W m-2) surface_upwelling_longwave_flux_in_air : the upwelling longwave flux over sea ice (always negative)-->
+		<!--P1 (W m-2) surface_upwelling_longwave_flux_in_air : Upward longwave flux from the sea-ice surface to the atmosphere (energy flow per sea ice area). Always positive or zero.-->
 		<field id="CMIP7_siflsaltbot" field_ref="?dummy_XY"/>
-		<!--P3 (kg m-2 s-1) downward_sea_ice_basal_salt_flux : Total flux of salt from water into sea ice divided by grid-cell area; salt flux is upward (negative) during ice growth when salt is embedded into the ice and downward (positive) during melt when salt from sea ice is again released to the ocean.-->
+		<!--P1 (kg m-2 s-1) downward_sea_ice_basal_salt_flux : Total flux of salt from water into sea ice divided by grid-cell area. This flux is upward (negative) during ice growth when salt is embedded into the ice and downward (positive) during melt when salt from sea ice is again released to the ocean.-->
 		<field id="CMIP7_siflsensbot" field_ref="?dummy_XY"/>
-		<!--P2 (W m-2) upward_sea_ice_basal_heat_flux : the net sensible heat flux under sea ice from the ocean-->
+		<!--P1 (W m-2) upward_sea_ice_basal_heat_flux : Net sensible heat flux under sea ice from or to the ocean (energy flow per sea ice area). Per sign convention, heat from the ocean is counted as negative since it describes an upward heat flux.-->
 		<field id="CMIP7_siflsenstop" field_ref="?dummy_XY"/>
-		<!--P2 (W m-2) surface_downward_sensible_heat_flux : the net sensible heat flux over sea ice-->
+		<!--P1 (W m-2) surface_downward_sensible_heat_flux : Net sensible heat flux over sea ice (energy flow per sea ice area). Positive for a downward heat flux.-->
 		<field id="CMIP7_siflswdbot" field_ref="?dummy_XY"/>
-		<!--P2 (W m-2) downwelling_shortwave_flux_in_sea_water_at_sea_ice_base : The downwelling shortwave flux underneath sea ice (always positive)-->
+		<!--P1 (W m-2) downwelling_shortwave_flux_in_sea_water_at_sea_ice_base : Downwelling shortwave flux underneath sea ice, i.e. the amount of shortwave radiation that penetrates the sea ice and reaches the sea ice-ocean interface (energy flow per sea ice area). Always positive or zero.-->
 		<field id="CMIP7_siflswdtop" field_ref="?dummy_XY"/>
-		<!--P2 (W m-2) surface_downwelling_shortwave_flux_in_air : The downwelling shortwave flux over sea ice (always positive by sign convention)-->
+		<!--P1 (W m-2) surface_downwelling_shortwave_flux_in_air : Downwelling shortwave flux from the atmosphere to the sea-ice surface (energy flow per sea ice area). Always positive or zero.-->
 		<field id="CMIP7_siflswutop" field_ref="?dummy_XY"/>
-		<!--P2 (W m-2) surface_upwelling_shortwave_flux_in_air : The upwelling shortwave flux over sea ice (always negative)-->
+		<!--P1 (W m-2) surface_upwelling_shortwave_flux_in_air : Upward shortwave flux from the sea-ice surface to the atmosphere (energy flow per sea ice area). Always positive or zero.-->
 		<field id="CMIP7_siforcecoriolx" field_ref="?dummy_XY"/>
-		<!--P3 (N m-2) sea_ice_x_force_per_unit_area_due_to_coriolis_effect : X-component of force on sea ice caused by coriolis force-->
+		<!--P1 (N m-2) sea_ice_x_force_per_unit_area_due_to_coriolis_effect : X-component of the force on sea ice caused by the Coriolis force divided by grid-cell area.-->
 		<field id="CMIP7_siforcecorioly" field_ref="?dummy_XY"/>
-		<!--P3 (N m-2) sea_ice_y_force_per_unit_area_due_to_coriolis_effect : Y-component of force on sea ice caused by coriolis force-->
+		<!--P1 (N m-2) sea_ice_y_force_per_unit_area_due_to_coriolis_effect : Y-component of the force on sea ice caused by the Coriolis force divided by grid-cell area.-->
 		<field id="CMIP7_siforceintstrx" field_ref="?dummy_XY"/>
-		<!--P3 (N m-2) sea_ice_x_internal_stress : X-component of force on sea ice caused by internal stress (divergence of sigma)-->
+		<!--P1 (N m-2) sea_ice_x_internal_stress : X-component of the force on sea ice caused by internal stress (divergence of sigma) divided by grid-cell area.-->
 		<field id="CMIP7_siforceintstry" field_ref="?dummy_XY"/>
-		<!--P3 (N m-2) sea_ice_y_internal_stress : Y-component of force on sea ice caused by internal stress (divergence of sigma)-->
+		<!--P1 (N m-2) sea_ice_y_internal_stress : Y-component of the force on sea ice caused by internal stress (divergence of sigma) divided by grid-cell area.-->
 		<field id="CMIP7_siforcetiltx" field_ref="?dummy_XY"/>
-		<!--P3 (N m-2) sea_ice_x_force_per_unit_area_due_to_sea_surface_tilt : X-component of force on sea ice caused by sea-surface tilt-->
+		<!--P1 (N m-2) sea_ice_x_force_per_unit_area_due_to_sea_surface_tilt : X-component of the force on sea ice caused by sea-surface tilt divided by grid-cell area.-->
 		<field id="CMIP7_siforcetilty" field_ref="?dummy_XY"/>
-		<!--P3 (N m-2) sea_ice_y_force_per_unit_area_due_to_sea_surface_tilt : Y-component of force on sea ice caused by sea-surface tilt-->
+		<!--P1 (N m-2) sea_ice_y_force_per_unit_area_due_to_sea_surface_tilt : Y-component of the force on sea ice caused by sea-surface tilt divided by grid-cell area.-->
 		<field id="CMIP7_sigpp" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) gross_primary_productivity_of_biomass_expressed_as_carbon_due_to_ice_algae_in_sea_ice : Total Gross Primary Production of  Ice Algae in Sea Ice-->
+		<!--P1 (kg m-2 s-1) gross_primary_productivity_of_biomass_expressed_as_carbon_due_to_ice_algae_in_sea_ice : Change in ice algal carbon mass due to photosynthesis per sea ice unit area per unit time.-->
 		<field id="CMIP7_sihc" field_ref="?dummy_XY"/>
-		<!--P2 (J m-2) sea_ice_temperature_expressed_as_heat_content : Heat content of all ice in grid cell divided by total grid-cell area. Water at 0 Celsius is assumed to have a heat content of 0 J.  Does not include heat content of snow, but does include heat content of brine. Heat content is always negative, since both the sensible and the latent heat content of ice are less than that of water-->
+		<!--P1 (J m-2) sea_ice_enthalpy_content : Heat content of all ice in grid cell divided by grid-cell area. This includes both the latent and sensible heat content contributions. Water at 0C is assumed to have a heat content of 0 J. This variable does not include heat content of snow, but does include heat content of brine. Heat content is always negative since both the sensible and the latent heat content of ice are less than that of water. Note that the CF standard name is incorrect since heat content is not only function of temperature but also of salinity, plus the link with temperature is not linear. A new CF standard name is currently being proposed to address this issue (https://github.com/cf-convention/vocabularies/issues/253).-->
 		<field id="CMIP7_siitdconc" field_ref="?dummy_XY"/>
-		<!--P2 (1) sea_ice_area_fraction : K=ice depth bands-->
+		<!--P1 (1) sea_ice_area_fraction : Area fraction of grid cell covered by each ice thickness category (vector with one entry for each ice thickness category starting from the thinnest category, netcdf file should use thickness bounds of the categories as third coordinate axis).-->
 		<field id="CMIP7_siitdsnconc" field_ref="?dummy_XY"/>
-		<!--P2 (1) surface_snow_area_fraction : K=ice depth bands-->
+		<!--P1 (1) surface_snow_area_fraction : Area fraction of grid cell covered by snow in each ice thickness category (vector with one entry for each ice thickness category starting from the thinnest category, netcdf file should use thickness bounds of the categories as third coordinate axis).-->
 		<field id="CMIP7_siitdsnthick" field_ref="?dummy_XY"/>
-		<!--P2 (m) surface_snow_thickness : K=ice depth bands-->
+		<!--P1 (m) surface_snow_thickness : Actual thickness of snow in each ice thickness category, NOT snow volume divided by grid area (vector with one entry for each ice thickness category starting from the thinnest category, netcdf file should use thickness bounds of categories as third coordinate axis). It can also be derived by dividing the volume of snow by the area of snow in each thickness category.-->
 		<field id="CMIP7_siitdthick" field_ref="?dummy_XY"/>
-		<!--P2 (m) sea_ice_thickness : K=ice depth bands-->
+		<!--P1 (m) sea_ice_thickness : Actual (floe) thickness of sea ice in each ice thickness category, NOT volume divided by grid area (vector with one entry for each ice thickness category starting from the thinnest category, netcdf file should use thickness bounds of categories as third coordinate axis).-->
 		<field id="CMIP7_simass" field_ref="?dummy_XY"/>
-		<!--P1 (kg m-2) sea_ice_amount : (in OImon, sim included snow and sea ice mass)-->
+		<!--P1 (kg m-2) sea_ice_amount : Total mass of sea ice divided by grid-cell area.-->
 		<field id="CMIP7_simassacrossline" field_ref="?dummy_TRS"/>
-		<!--P2 (kg s-1) sea_ice_transport_across_line : Flux across 4 straits-->
+		<!--P1 (kg s-1) sea_ice_transport_across_line : Net (sum of transport in all directions) sea ice mass transport through the following four passages, positive into the Arctic Ocean. Note that the definitions of the passages are for SIMIP purposes just meant as default values as given by the physical ocean MIP described in Griffies et al. (2016). Individual models might chose slightly different definitions as given by their grid geometry. 1. Fram Strait: (11.5W,81.3N) to (10.5E,79.6N). 2. Canadian Arctic Archipelago: (128.2W,70.6N) to (59.3W,82.1N). 3. Barents Sea Opening: (16.8E,76.5N) to (19.2E,70.2N). 4. Bering Strait: (171W,66.2N) to (166W,65N).-->
 		<field id="CMIP7_simpconc" field_ref="?dummy_XY"/>
-		<!--P2 (1) area_fraction : Percentage of sea ice, by area, which is covered by melt ponds, giving equal weight to every square metre of sea ice .-->
+		<!--P1 (1) area_fraction : Area fraction of sea-ice surface that is covered by melt ponds.-->
 		<field id="CMIP7_simpeffconc" field_ref="?dummy_XY"/>
-		<!--P3 (1) area_fraction : Area fraction of sea-ice surface that is covered by open melt ponds, that is melt ponds that are not covered by snow or ice lids. This represents the effective (i.e. radiatively-active) melt pond area fraction.-->
+		<!--P1 (1) area_fraction : Area fraction of sea-ice surface that is covered by open melt ponds, that is melt ponds that are not covered by snow or ice lids. This represents the effective (i.e. radiatively-active) melt pond area fraction.-->
 		<field id="CMIP7_simprefrozen" field_ref="?dummy_XY"/>
-		<!--P3 (m) thickness_of_ice_on_sea_ice_melt_pond : Volume of refrozen ice on melt ponds divided by meltpond covered area-->
+		<!--P1 (m) thickness_of_ice_on_sea_ice_melt_pond : Volume of refrozen ice on melt ponds divided by melt pond covered area.-->
 		<field id="CMIP7_simpthick" field_ref="?dummy_XY"/>
-		<!--P3 (m) sea_ice_melt_pond_thickness : Meltpond Depth-->
+		<!--P1 (m) sea_ice_melt_pond_thickness : Average depth of melt ponds on sea ice, that is melt pond volume divided by melt pond area.-->
 		<field id="CMIP7_sino3" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-2) sea_ice_mole_content_of_nitrate : Mole concentration means moles (amount of substance) per unit area-->
+		<!--P1 (mol m-2) sea_ice_mole_content_of_nitrate : Vertically-integrated amount of nitrate in ice algae, expressed in moles of nitrogen per square meter of sea ice.-->
 		<field id="CMIP7_sios" field_ref="?dummy_XY"/>
-		<!--P3 (mol m-3) mole_concentration_of_dissolved_inorganic_silicon_in_sea_water : Mole concentration means number of moles per unit volume, also called "molarity", and is used in the construction "mole\_concentration\_of\_X\_in\_Y", where X is a material constituent of Y. A chemical or biological species denoted by X may be described by a single term such as "nitrogen" or a phrase such as "nox\_expressed\_as\_nitrogen". "Dissolved inorganic silicon" means the sum of all inorganic silicon in solution (including silicic acid and its first dissociated anion SiO(OH)3-).-->
+		<!--P1 (mol m-3) mole_concentration_of_dissolved_inorganic_silicon_in_sea_water : Mole concentration means number of moles per unit volume, also called "molarity", and is used in the construction "mole\_concentration\_of\_X\_in\_Y", where X is a material constituent of Y. A chemical or biological species denoted by X may be described by a single term such as "nitrogen" or a phrase such as "nox\_expressed\_as\_nitrogen". "Dissolved inorganic silicon" means the sum of all inorganic silicon in solution (including silicic acid and its first dissociated anion SiO(OH)3-).-->
 		<field id="CMIP7_sipr" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) rainfall_flux : mass of liquid precipitation falling onto sea ice divided by grid-cell area-->
+		<!--P1 (kg m-2 s-1) rainfall_flux : Mass of liquid precipitation falling onto sea ice divided by grid-cell area. If the rain is directly put into the ocean, it should not be counted towards sipr. Always positive or zero.-->
 		<field id="CMIP7_sirdgconc" field_ref="?dummy_XY"/>
-		<!--P2 (1) area_fraction : Fraction of sea ice, by area, which is covered by sea ice ridges, giving equal weight to every square metre of sea ice .-->
+		<!--P1 (1) area_fraction : Area fraction of sea-ice surface that is ridged sea ice.-->
 		<field id="CMIP7_sirdgthick" field_ref="?dummy_XY"/>
-		<!--P3 (m) sea_ice_thickness : Sea Ice Ridge Height (representing mean height over the ridged area)-->
+		<!--P1 (m) sea_ice_thickness : Total volume of ridged sea ice divided by area of ridges, i.e. mean thickness of ridged sea ice.-->
 		<field id="CMIP7_sisali" field_ref="?dummy_XY"/>
-		<!--P3 (1E-03) sea_ice_salinity : Mean sea-ice salinity of all sea ice in grid cell-->
+		<!--P1 (1E-03) sea_ice_salinity : Mean sea-ice salinity of all sea ice in grid cell. Sometimes, models implicitly or explicitly assume a different salinity of the ice for thermodynamic considerations than they do for closing the salt budget with the ocean. In these cases, the mean salinity used in the calculation of the salt budget should be reported.-->
 		<field id="CMIP7_sisaltmass" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2) sea_ice_mass_content_of_salt : Total mass of all salt in sea ice divided by grid-cell area-->
+		<!--P1 (kg m-2) sea_ice_mass_content_of_salt : Total mass of all salt in sea ice divided by grid-cell area. Sometimes, models implicitly or explicitly assume a different salinity of the ice for thermodynamic considerations than they do for closing the salt budget with the ocean. In these cases, the total mass of all salt in sea ice should be calculated from the salinity value used in the calculation of the salt budget.-->
 		<field id="CMIP7_sishearvel" field_ref="?dummy_XY"/>
-		<!--P3 (s-1) maximum_over_coordinate_rotation_of_sea_ice_horizontal_shear_strain_rate : Maximum shear of sea-ice velocity field (second shear strain invariant)-->
+		<!--P1 (s-1) maximum_over_coordinate_rotation_of_sea_ice_horizontal_shear_strain_rate : Maximum shear of sea-ice velocity field (second shear strain invariant). Requested as instantaneous value at the center of the month (i.e., first timestep of the 15th day of the month).-->
 		<field id="CMIP7_sisi" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-2) sea_ice_mole_content_of_silicon : Mole concentration means moles (amount of substance) per unit area-->
+		<!--P1 (mol m-2) sea_ice_mole_content_of_silicon : Vertically-integrated amount of silicate in ice algae, expressed in moles of silicon per square meter of sea ice.-->
 		<field id="CMIP7_sisnconc" field_ref="?dummy_XY"/>
-		<!--P2 (1) surface_snow_area_fraction : Percentage of sea ice, by area, which is covered by snow, giving equal weight to every square metre of sea ice . Exclude snow that lies on land or land ice.-->
+		<!--P1 (1) surface_snow_area_fraction : Area fraction of the sea-ice surface that is covered by snow. In many models that do not explicitly resolve an areal fraction of snow, this variable will always be either 0 or 1.-->
 		<field id="CMIP7_sisndmassdyn" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) tendency_of_surface_snow_amount_due_to_sea_ice_dynamics : The rate of change of snow mass through advection with sea ice divided by sea-ice area-->
+		<!--P1 (kg m-2 s-1) tendency_of_surface_snow_amount_due_to_sea_ice_dynamics : Rate of change of snow mass due to sea ice dynamics (advection, divergence, etc.) divided by grid-cell area.-->
 		<field id="CMIP7_sisndmassmelt" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) surface_snow_melt_flux : the rate of change of snow mass through melt divided by sea-ice area-->
+		<!--P1 (kg m-2 s-1) surface_snow_melt_flux : Rate of change of snow mass through melt divided by grid-cell area. Always negative or zero.-->
 		<field id="CMIP7_sisndmasssi" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) tendency_of_surface_snow_amount_due_to_conversion_of_snow_to_sea_ice : the rate of change of snow mass due to transformation of snow to sea ice divided by sea-ice area-->
+		<!--P1 (kg m-2 s-1) tendency_of_surface_snow_amount_due_to_conversion_of_snow_to_sea_ice : Rate of change of snow mass due to transformation of snow to sea ice divided by grid-cell area. Always negative or zero.-->
 		<field id="CMIP7_sisndmasssnf" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) snowfall_flux : mass of solid precipitation falling onto sea ice divided by sea-ice area-->
+		<!--P1 (kg m-2 s-1) snowfall_flux : Rate of change of snow mass due to solid precipitation (i.e. snowfall) falling onto sea ice divided by grid-cell area. Always positive or zero.-->
 		<field id="CMIP7_sisndmasssubl" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_water_vapor_due_to_sublimation_of_surface_snow_and_ice : the rate of change of snow mass through sublimation and evaporation divided by sea-ice area-->
+		<!--P1 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_water_vapor_due_to_sublimation_of_surface_snow_and_ice : Rate of change of snow mass through sublimation divided by grid-cell area. If a model does not differentiate between the sublimation of snow and sea ice, we recommend to report all sublimation within sisndmasssubl as long as the ice is snow covered.-->
 		<field id="CMIP7_sisndmasswind" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) tendency_of_surface_snow_amount_due_to_drifting_into_sea : the rate of change of snow mass through wind drift of snow (from sea-ice into the sea) divided by sea-ice area-->
+		<!--P1 (kg m-2 s-1) tendency_of_surface_snow_amount_due_to_drifting_into_sea : Rate of change of snow mass due to wind-driven transport into the ocean divided by grid-cell area.-->
 		<field id="CMIP7_sisnhc" field_ref="?dummy_XY"/>
-		<!--P2 (J m-2) thermal_energy_content_of_surface_snow : Heat-content of all snow in grid cell divided by total grid-cell area. Snow-water equivalent at 0 Celsius is assumed to have a heat content of 0 J.  Does not include heat content of sea ice.-->
+		<!--P1 (J m-2) thermal_energy_content_of_surface_snow : Heat content of all snow in grid cell divided by grid-cell area. This includes both the latent and sensible heat content contributions. Snow-water equivalent at 0 C is assumed to have a heat content of 0 J. Does not include the heat content of sea ice.-->
 		<field id="CMIP7_sisnmass" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2) surface_snow_amount : (in OImon, sim included snow and sea ice mass)-->
+		<!--P1 (kg m-2) surface_snow_amount : Total mass of snow on sea ice divided by grid-cell area. This then allows one to analyse the storage of latent heat in the snow, and to calculate the snow-water equivalent.-->
 		<field id="CMIP7_sisnmassacrossline" field_ref="?dummy_TRS"/>
-		<!--P2 (kg s-1) snow_transport_across_line_due_to_sea_ice_dynamics : Flux across 4 straits-->
+		<!--P1 (kg s-1) snow_transport_across_line_due_to_sea_ice_dynamics : Net (sum of transport in all directions) snow mass transport through the following four passages, positive into the Arctic Ocean. Note that the definitions of the passages are for SIMIP purposes just meant as default values as given by the physical ocean MIP described in Griffies et al. (2016). Individual models might chose slightly different definitions as given by their grid geometry. 1. Fram Strait: (11.5W,81.3N) to (10.5E,79.6N). 2. Canadian Arctic Archipelago: (128.2W,70.6N) to (59.3W,82.1N). 3. Barents Sea Opening: (16.8E,76.5N) to (19.2E,70.2N). 4. Bering Strait: (171W,66.2N) to (166W,65N).-->
 		<field id="CMIP7_sisnmassn" field_ref="?dummy_0d"/>
-		<!--P2 (kg) surface_snow_mass : Total integrated mass of snow on sea ice in the Northern Hemisphere grid cells-->
+		<!--P1 (kg) surface_snow_mass : Total integrated mass of snow on sea ice in the Northern Hemisphere.-->
 		<field id="CMIP7_sisnmasss" field_ref="?dummy_0d"/>
-		<!--P2 (kg) surface_snow_mass : Total integrated mass of snow on sea ice in the Southern Hemisphere grid cells-->
+		<!--P1 (kg) surface_snow_mass : Total integrated mass of snow on sea ice in the Southern Hemisphere.-->
 		<field id="CMIP7_sisnthick" field_ref="?dummy_XY"/>
-		<!--P1 (m) surface_snow_thickness : (in OImon, snd was volume per entire cell area)-->
+		<!--P1 (m) surface_snow_thickness : Actual thickness of snow averaged over the snow-covered part of the sea ice. This thickness is usually directly available within the model formulation. It can also be derived by dividing the total volume of snow by the area of the snow.-->
 		<field id="CMIP7_sispeed" field_ref="?dummy_XY"/>
-		<!--P2 (m s-1) sea_ice_speed : Speed of ice (i.e. mean absolute velocity) to account for back-and-forth movement of the ice-->
+		<!--P1 (m s-1) sea_ice_speed : Speed of ice (i.e. mean absolute velocity) to account for back-and-forth movement of the ice.-->
 		<field id="CMIP7_sistressave" field_ref="?dummy_XY"/>
-		<!--P2 (N m-1) sea_ice_average_normal_horizontal_stress : Average normal stress in sea ice (first stress invariant)-->
+		<!--P1 (N m-1) sea_ice_average_normal_horizontal_stress : Average normal stress in sea ice (first stress invariant). Requested as instantaneous value at the center of the month (i.e., first timestep of the 15th day of the month).-->
 		<field id="CMIP7_sistressmax" field_ref="?dummy_XY"/>
-		<!--P2 (N m-1) maximum_over_coordinate_rotation_of_sea_ice_horizontal_shear_stress : Maximum shear stress in sea ice (second stress invariant)-->
+		<!--P1 (N m-1) maximum_over_coordinate_rotation_of_sea_ice_horizontal_shear_stress : Maximum shear stress in sea ice (second stress invariant). Requested as instantaneous value at the center of the month (i.e., first timestep of the 15th day of the month).-->
 		<field id="CMIP7_sistrxdtop" field_ref="?dummy_XY"/>
-		<!--P2 (N m-2) surface_downward_x_stress : X-component of atmospheric stress on sea ice-->
+		<!--P1 (N m-2) surface_downward_x_stress : X-component of the atmospheric stress on the surface of sea ice divided by grid-cell area.-->
 		<field id="CMIP7_sistrxubot" field_ref="?dummy_XY"/>
-		<!--P2 (N m-2) upward_x_stress_at_sea_ice_base : X-component of ocean stress on sea ice-->
+		<!--P1 (N m-2) upward_x_stress_at_sea_ice_base : X-component of the ocean stress on the sea ice bottom divided by grid-cell area.-->
 		<field id="CMIP7_sistrydtop" field_ref="?dummy_XY"/>
-		<!--P2 (N m-2) surface_downward_y_stress : Y-component of atmospheric stress on sea ice-->
+		<!--P1 (N m-2) surface_downward_y_stress : Y-component of the atmospheric stress on the surface of sea ice divided by grid-cell area.-->
 		<field id="CMIP7_sistryubot" field_ref="?dummy_XY"/>
-		<!--P2 (N m-2) upward_y_stress_at_sea_ice_base : Y-component of ocean stress on sea ice-->
+		<!--P1 (N m-2) upward_y_stress_at_sea_ice_base : Y-component of the ocean stress on the sea ice bottom divided by grid-cell area.-->
 		<field id="CMIP7_sitempbot" field_ref="?dummy_XY"/>
-		<!--P3 (K) sea_ice_basal_temperature : Report temperature at interface, NOT temperature within lowermost model layer-->
+		<!--P1 (K) sea_ice_basal_temperature : Mean temperature at the base of the sea ice, NOT the temperature within lowermost sea-ice model layer.-->
 		<field id="CMIP7_sitempsnic" field_ref="?dummy_XY"/>
-		<!--P2 (K) sea_ice_surface_temperature : Report surface temperature of ice where snow thickness is zero-->
+		<!--P1 (K) sea_ice_surface_temperature : Mean temperature at the snow-ice interface. This is the surface temperature of ice where snow thickness is zero.-->
 		<field id="CMIP7_sitemptop" field_ref="?dummy_XY"/>
-		<!--P1 (K) sea_ice_surface_temperature : Report surface temperature of snow where snow covers the sea ice.-->
+		<!--P1 (K) sea_ice_surface_temperature : Mean surface temperature of the sea-ice covered part of the grid cell. Wherever snow covers the ice, the surface temperature of the snow is used for the averaging, otherwise the surface temperature of the ice is used.-->
 		<field id="CMIP7_sithick" field_ref="?dummy_XY"/>
-		<!--P1 (m) sea_ice_thickness : (in OImon, sit was volume per entire cell area)-->
+		<!--P1 (m) sea_ice_thickness : Actual (floe) thickness of sea ice averaged over the ice-covered part of a given grid cell, NOT volume divided by grid area.-->
 		<field id="CMIP7_sitimefrac" field_ref="?dummy_XY"/>
-		<!--P1 (1) fraction_of_time_with_sea_ice_area_fraction_above_threshold : Fraction of time steps of the averaging period during which sea ice is present (siconc >0 ) in a grid cell-->
+		<!--P1 (1) fraction_of_time_with_sea_ice_area_fraction_above_threshold : Fraction of time steps of the averaging period during which sea ice is present (siconc > 0) in a grid cell.-->
 		<field id="CMIP7_siu" field_ref="?dummy_XY"/>
-		<!--P1 (m s-1) sea_ice_x_velocity : The x-velocity of ice on native model grid-->
+		<!--P1 (m s-1) sea_ice_x_velocity : X-component of sea-ice velocity on native model grid.-->
 		<field id="CMIP7_siv" field_ref="?dummy_XY"/>
-		<!--P1 (m s-1) sea_ice_y_velocity : The y-velocity of ice on native model grid-->
+		<!--P1 (m s-1) sea_ice_y_velocity : Y-component of sea-ice velocity on native model grid.-->
 		<field id="CMIP7_sivol" field_ref="?dummy_XY"/>
-		<!--P2 (m) sea_ice_thickness : Total volume of sea ice divided by grid-cell area (this used to be called ice thickness in CMIP5)-->
+		<!--P1 (m) sea_ice_thickness : Total volume of sea ice divided by grid-cell area, also known as the equivalent thickness of sea ice.-->
 		<field id="CMIP7_sivoln" field_ref="?dummy_0d"/>
-		<!--P2 (1e3 km3) sea_ice_volume : total volume of sea ice in the Northern hemisphere-->
+		<!--P1 (1e3 km3) sea_ice_volume : Total integrated volume of sea ice in the Northern Hemisphere.-->
 		<field id="CMIP7_sivols" field_ref="?dummy_0d"/>
-		<!--P2 (1e3 km3) sea_ice_volume : total volume of sea ice in the Southern hemisphere-->
+		<!--P1 (1e3 km3) sea_ice_volume : Total integrated volume of sea ice in the Southern Hemisphere.-->
 		<field id="CMIP7_sltbasin" field_ref="?dummy_basin_zonal_mean"/>
-		<!--P2 (kg s-1) northward_ocean_salt_transport : This refers to the already available definitions of Omon.sltovgyre and Omon.sltovovrt, but should provide the total northward salt transport including all contributions (similar to heat transport, were a measure of the total transport exists via hfbasin); I believe that no cell measure apply and selected --Mod only since I was forced to select one of the options.-->
+		<!--P1 (kg s-1) northward_ocean_salt_transport : Northward Ocean Salt Transport from all physical processes affecting northward salt transport, resolved and parameterized. Diagnosed here as a function of latitude and basin.-->
 		<field id="CMIP7_sltovgyre" field_ref="?dummy_basin_zonal_mean"/>
-		<!--P2 (kg s-1) northward_ocean_salt_transport_due_to_gyre : From all advective mass transport processes, resolved and parameterized.-->
+		<!--P1 (kg s-1) northward_ocean_salt_transport_due_to_gyre : From all advective mass transport processes, resolved and parameterized.-->
 		<field id="CMIP7_sltovovrt" field_ref="?dummy_basin_zonal_mean"/>
-		<!--P2 (kg s-1) northward_ocean_salt_transport_due_to_overturning : From all advective mass transport processes, resolved and parameterized.-->
+		<!--P1 (kg s-1) northward_ocean_salt_transport_due_to_overturning : From all advective mass transport processes, resolved and parameterized.-->
 		<field id="CMIP7_so" field_ref="?dummy_XYO"/>
 		<!--P1 (1E-03) sea_water_salinity : Sea water salinity is the salt content of sea water, often on the Practical Salinity Scale of 1978. However, the unqualified term 'salinity' is generic and does not necessarily imply any particular method of calculation. The units of salinity are dimensionless and the units attribute should normally be given as 1e-3 or 0.001 i.e. parts per thousand.-->
-		<field id="CMIP7_sob" field_ref="?dummy_XY"/>
-		<!--P2 (1E-03) sea_water_salinity_at_sea_floor : Model prognostic salinity at bottom-most model grid cell-->
+		<field id="CMIP7_sob" field_ref="?dummy_XY_depthseafloor"/>
+		<!--P1 (1E-03) sea_water_salinity_at_sea_floor : Model prognostic salinity at bottom-most model grid cell-->
 		<field id="CMIP7_soga" field_ref="?dummy_XY"/>
-		<!--P2 (1E-03) sea_water_salinity : Sea water salinity is the salt content of sea water, often on the Practical Salinity Scale of 1978. However, the unqualified term 'salinity' is generic and does not necessarily imply any particular method of calculation. The units of salinity are dimensionless and the units attribute should normally be given as 1e-3 or 0.001 i.e. parts per thousand.-->
+		<!--P1 (1E-03) sea_water_salinity : Sea water salinity is the salt content of sea water, often on the Practical Salinity Scale of 1978. However, the unqualified term 'salinity' is generic and does not necessarily imply any particular method of calculation. The units of salinity are dimensionless and the units attribute should normally be given as 1e-3 or 0.001 i.e. parts per thousand.-->
+		<field id="CMIP7_somint" field_ref="?dummy_XY"/>
+		<!--P1 (g m-2) integral_wrt_depth_of_product_of_salinity_and_sea_water_density : Full column sum of density\*cell thickness\*salinity. If the model is Boussinesq, then use Boussinesq reference density for the density factor.-->
 		<field id="CMIP7_sos" field_ref="?dummy_XY"/>
 		<!--P1 (1E-03) sea_surface_salinity : Sea water salinity is the salt content of sea water, often on the Practical Salinity Scale of 1978. However, the unqualified term 'salinity' is generic and does not necessarily imply any particular method of calculation. The units of salinity are dimensionless and the units attribute should normally be given as 1e-3 or 0.001 i.e. parts per thousand.-->
 		<field id="CMIP7_sosga" field_ref="?dummy_0d"/>
-		<!--P2 (1E-03) sea_surface_salinity : Sea water salinity is the salt content of sea water, often on the Practical Salinity Scale of 1978. However, the unqualified term 'salinity' is generic and does not necessarily imply any particular method of calculation. The units of salinity are dimensionless and the units attribute should normally be given as 1e-3 or 0.001 i.e. parts per thousand.-->
+		<!--P1 (1E-03) sea_surface_salinity : Sea water salinity is the salt content of sea water, often on the Practical Salinity Scale of 1978. However, the unqualified term 'salinity' is generic and does not necessarily imply any particular method of calculation. The units of salinity are dimensionless and the units attribute should normally be given as 1e-3 or 0.001 i.e. parts per thousand.-->
+		<field id="CMIP7_sossq" field_ref="?dummy_XY"/>
+		<!--P1 (1E-06) square_of_sea_surface_salinity : Sea water salinity is the salt content of sea water, often on the Practical Salinity Scale of 1978. However, the unqualified term 'salinity' is generic and does not necessarily imply any particular method of calculation. The units of salinity are dimensionless and the units attribute should normally be given as 1e-3 or 0.001 i.e. parts per thousand.-->
 		<field id="CMIP7_spco2" field_ref="?dummy_XY"/>
-		<!--P2 (Pa) surface_partial_pressure_of_carbon_dioxide_in_sea_water : The surface called "surface" means the lower boundary of the atmosphere. The partial pressure of a dissolved gas in sea water is the partial pressure in air with which it would be in equilibrium. The partial pressure of a gaseous constituent of air is the pressure which it alone would exert with unchanged temperature and number of moles per unit volume. The chemical formula for carbon dioxide is CO2.-->
+		<!--P1 (Pa) surface_partial_pressure_of_carbon_dioxide_in_sea_water : The surface called "surface" means the lower boundary of the atmosphere. The partial pressure of a dissolved gas in sea water is the partial pressure in air with which it would be in equilibrium. The partial pressure of a gaseous constituent of air is the pressure which it alone would exert with unchanged temperature and number of moles per unit volume. The chemical formula for carbon dioxide is CO2.-->
 		<field id="CMIP7_sw17O" field_ref="?dummy_XYO"/>
 		<!--P2 (1) isotope_ratio_of_17O_to_16O_in_sea_water_excluding_solutes_and_solids : Ratio of abundance of oxygen-17 (17O) atoms to oxygen-16 (16O) atoms in sea water-->
 		<field id="CMIP7_sw18O" field_ref="?dummy_XYO"/>
 		<!--P2 (1) isotope_ratio_of_18O_to_16O_in_sea_water_excluding_solutes_and_solids : Ratio of abundance of oxygen-18 (18O) atoms to oxygen-16 (16O) atoms in sea water-->
 		<field id="CMIP7_sw2H" field_ref="?dummy_XYO"/>
-		<!--P2 (1) undef : Ratio of abundance of hydrogen-2 (2H) atoms to hydrogen-1 (1H) atoms in sea water-->
+		<!--P2 (1) isotope_ratio_of_2H_to_1H_in_sea_water_excluding_solutes_and_solids : Ratio of abundance of hydrogen-2 (2H) atoms to hydrogen-1 (1H) atoms in sea water-->
+		<field id="CMIP7_swh" field_ref="?dummy_XY"/>
+		<!--P1 (m) sea_surface_wave_significant_height : Average height of the highest one-third of waves present in the sea state, incorporating both wind-sea and swell waves. This is a key parameter for describing wave energy and is derived from the wave spectrum using spectral moments. Specifically, this parameter is four times the square root of the integral over all directions and all frequencies of the two-dimensional wave spectrum.-->
+		<field id="CMIP7_swhmax" field_ref="?dummy_XY"/>
+		<!--P1 (m) sea_surface_wave_significant_height : Highest value of the significant wave height simulated within a given time range (e.g., daily or monthly). The significant wave height (swh) is derived from the wave spectrum using spectral moments. Specifically, swh is four times the square root of the integral over all directions and all frequencies of the two-dimensional wave spectrum.-->
+		<field id="CMIP7_swhswell" field_ref="?dummy_XY"/>
+		<!--P1 (m) sea_surface_swell_wave_significant_height : Average height of the highest one-third of waves present in the sea state, incorporating just swell waves (i.e., waves that have propagated away from their generation area). This parameter is derived from all swell partitions of the wave spectrum using spectral moments. Specifically, this parameter is four times the square root of the integral over all directions and all frequencies of the components of the two-dimensional wave spectrum that are not under the influence of local wind.-->
+		<field id="CMIP7_swhwindsea" field_ref="?dummy_XY"/>
+		<!--P1 (m) sea_surface_wind_wave_significant_height : Average height of the highest one-third of waves present in the sea state, incorporating just wind-sea waves (i.e., local wind waves). It is derived from the wind-sea wave spectrum using spectral moments. Specifically, this parameter is four times the square root of the integral over all directions and all frequencies of the two-dimensional wind-sea wave spectrum.-->
 		<field id="CMIP7_t17d" field_ref="?dummy_XY"/>
-		<!--P3 (m) depth_of_isosurface_of_sea_water_potential_temperature : Monthly 17C isotherm depth-->
+		<!--P1 (m) depth_of_isosurface_of_sea_water_potential_temperature : Monthly 17C isotherm depth-->
 		<field id="CMIP7_t20d" field_ref="?dummy_XY"/>
-		<!--P2 (m) depth_of_isosurface_of_sea_water_potential_temperature : Monthly 20C isotherm depth-->
+		<!--P1 (m) depth_of_isosurface_of_sea_water_potential_temperature : Monthly 20C isotherm depth-->
 		<field id="CMIP7_talk" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) sea_water_alkalinity_expressed_as_mole_equivalent : total alkalinity equivalent concentration (including carbonate, borate, phosphorus, silicon, and nitrogen components)-->
+		<!--P1 (mol m-3) sea_water_alkalinity_expressed_as_mole_equivalent : total alkalinity equivalent concentration (including carbonate, borate, phosphorus, silicon, and nitrogen components)-->
 		<field id="CMIP7_tauuo" field_ref="?dummy_XY"/>
 		<!--P1 (N m-2) downward_x_stress_at_sea_water_surface : This is the stress on the liquid ocean from overlying atmosphere, sea ice, ice shelf, etc.-->
 		<field id="CMIP7_tauvo" field_ref="?dummy_XY"/>
@@ -624,89 +745,109 @@
 		<field id="CMIP7_thetao" field_ref="?dummy_XYO"/>
 		<!--P1 (degC) sea_water_potential_temperature : Diagnostic should be contributed even for models using conservative temperature as prognostic field.-->
 		<field id="CMIP7_thetaoga" field_ref="?dummy_XY"/>
-		<!--P2 (degC) sea_water_potential_temperature : Diagnostic should be contributed even for models using conservative temperature as prognostic field-->
+		<!--P1 (degC) sea_water_potential_temperature : Diagnostic should be contributed even for models using conservative temperature as prognostic field-->
 		<field id="CMIP7_thetaot" field_ref="?dummy_XY"/>
-		<!--P2 (degC) sea_water_potential_temperature : Vertically averaged ocean temperature-->
+		<!--P1 (degC) sea_water_potential_temperature : Vertically averaged ocean temperature-->
 		<field id="CMIP7_thetaot2000" field_ref="?dummy_XY"/>
-		<!--P2 (degC) sea_water_potential_temperature : Upper 2000m, 2D field-->
+		<!--P1 (degC) sea_water_potential_temperature : Upper 2000m, 2D field-->
 		<field id="CMIP7_thetaot300" field_ref="?dummy_XY"/>
-		<!--P2 (degC) sea_water_potential_temperature : Upper 300m, 2D field-->
+		<!--P1 (degC) sea_water_potential_temperature : Upper 300m, 2D field-->
 		<field id="CMIP7_thetaot700" field_ref="?dummy_XY"/>
-		<!--P2 (degC) sea_water_potential_temperature : Upper 700m, 2D field-->
+		<!--P1 (degC) sea_water_potential_temperature : Upper 700m, 2D field-->
 		<field id="CMIP7_thkcello" field_ref="?dummy_XYO"/>
-		<!--P1 (m) cell_thickness : "Thickness" means the vertical extent of a layer. "Cell" refers to a model grid-cell.-->
-		<field id="CMIP7_thkcelluo" field_ref="?dummy_XY"/>
-		<!--P2 (m) cell_thickness : The time varying thickness of the gridboxes computed on the u-points-->
+		<!--P1 (m) cell_thickness : The time varying thickness of ocean cells. "Thickness" means the vertical extent of a layer. "Cell" refers to a model grid-cell.-->
+		<field id="CMIP7_thkcelluo" field_ref="?dummy_XYO"/>
+		<!--P1 (m) cell_thickness : The time varying thickness of ocean cells centered at u-points (points for velocity in the x-direction). "Thickness" means the vertical extent of a layer. "Cell" refers to a model grid-cell.-->
 		<field id="CMIP7_thkcellvo" field_ref="?dummy_XYO"/>
-		<!--P2 (m) cell_thickness : The time varying thickness of the gridboxes computed on the v-points-->
+		<!--P1 (m) cell_thickness : The time varying thickness of ocean cells centered at v-points (points for velocity in the y-direction). "Thickness" means the vertical extent of a layer. "Cell" refers to a model grid-cell.-->
 		<field id="CMIP7_tnkebto" field_ref="?dummy_XY"/>
-		<!--P3 (W m-2) tendency_of_ocean_eddy_kinetic_energy_content_due_to_parameterized_eddy_advection : Depth integrated impacts on kinetic energy arising from parameterized eddy-induced advection. For CMIP5, this diagnostic was 3d, whereas the CMIP6 depth integrated diagnostic is sufficient for many purposes and reduces archive requirements.-->
-		<field id="CMIP7_tob" field_ref="?dummy_XY"/>
-		<!--P2 (degC) sea_water_potential_temperature_at_sea_floor : Potential temperature at the ocean bottom-most grid cell.-->
+		<!--P1 (W m-2) tendency_of_ocean_eddy_kinetic_energy_content_due_to_parameterized_eddy_advection : Depth integrated impacts on kinetic energy arising from parameterized eddy-induced advection. For CMIP5, this diagnostic was 3d, whereas the CMIP6 depth integrated diagnostic is sufficient for many purposes and reduces archive requirements.-->
+		<field id="CMIP7_tnpeo" field_ref="?dummy_XY"/>
+		<!--P1 (W m-2) tendency_of_ocean_potential_energy_content : Rate that work is done against vertical stratification, as measured by the vertical heat and salt diffusivity. Report here as depth integrated two-dimensional field.-->
+		<field id="CMIP7_tob" field_ref="?dummy_XY_depthseafloor"/>
+		<!--P1 (degC) sea_water_potential_temperature_at_sea_floor : Potential temperature at the ocean bottom-most grid cell.-->
 		<field id="CMIP7_tos" field_ref="?dummy_XY"/>
 		<!--P1 (degC) sea_surface_temperature : This may differ from "surface temperature" in regions of sea ice or floating ice shelves. For models using conservative temperature as the prognostic field, they should report the top ocean layer as surface potential temperature, which is the same as surface in situ temperature.-->
 		<field id="CMIP7_tosga" field_ref="?dummy_0d"/>
-		<!--P2 (degC) sea_surface_temperature : This may differ from "surface temperature" in regions of sea ice or floating ice shelves. For models using conservative temperature as the prognostic field, they should report the top ocean layer as surface potential temperature, which is the same as surface in situ temperature.-->
+		<!--P1 (degC) sea_surface_temperature : This may differ from "surface temperature" in regions of sea ice or floating ice shelves. For models using conservative temperature as the prognostic field, they should report the top ocean layer as surface potential temperature, which is the same as surface in situ temperature.-->
 		<field id="CMIP7_tossq" field_ref="?dummy_XY"/>
-		<!--P2 (degC2) square_of_sea_surface_temperature : Square of temperature of liquid ocean, averaged over the day.-->
+		<!--P1 (degC2) square_of_sea_surface_temperature : Square of temperature of liquid ocean, averaged over the day.-->
 		<field id="CMIP7_umo" field_ref="?dummy_XYO"/>
 		<!--P1 (kg s-1) ocean_mass_x_transport : X-ward mass transport from residual mean (resolved plus parameterized) advective transport.-->
 		<field id="CMIP7_uo" field_ref="?dummy_XYO"/>
 		<!--P1 (m s-1) sea_water_x_velocity : Prognostic x-ward velocity component resolved by the model.-->
 		<field id="CMIP7_uos" field_ref="?dummy_XY"/>
-		<!--P2 (m s-1) surface_sea_water_x_velocity : Daily surface prognostic x-ward velocity component resolved by the model.-->
+		<!--P1 (m s-1) surface_sea_water_x_velocity : Daily surface prognostic x-ward velocity component resolved by the model.-->
 		<field id="CMIP7_vmo" field_ref="?dummy_XYO"/>
 		<!--P1 (kg s-1) ocean_mass_y_transport : Y-ward mass transport from residual mean (resolved plus parameterized) advective transport.-->
 		<field id="CMIP7_vo" field_ref="?dummy_XYO"/>
 		<!--P1 (m s-1) sea_water_y_velocity : Prognostic y-ward velocity component resolved by the model.-->
 		<field id="CMIP7_volcello" field_ref="?dummy_XYO"/>
-		<!--P2 (m3) ocean_volume : For oceans with more than 1 mesh (e.g. staggered grids), report areas that apply to surface vertical fluxes of energy. If this field is time-dependent then save it instead as one of your Omon and Odec fields-->
+		<!--P1 (m3) ocean_volume : For oceans with more than 1 mesh (e.g. staggered grids), report areas that apply to surface vertical fluxes of energy. If this field is time-dependent then save it instead as one of your Omon and Odec fields-->
 		<field id="CMIP7_volo" field_ref="?dummy_0d"/>
-		<!--P2 (m3) sea_water_volume : Total volume of liquid sea water.-->
+		<!--P1 (m3) sea_water_volume : Total volume of liquid sea water.-->
 		<field id="CMIP7_vos" field_ref="?dummy_XY"/>
-		<!--P2 (m s-1) surface_sea_water_y_velocity : Daily surface prognostic y-ward velocity component resolved by the model.-->
+		<!--P1 (m s-1) surface_sea_water_y_velocity : Daily surface prognostic y-ward velocity component resolved by the model.-->
 		<field id="CMIP7_vsf" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) virtual_salt_flux_into_sea_water : It is set to zero in models which receive a real water flux.-->
+		<!--P1 (kg m-2 s-1) virtual_salt_flux_into_sea_water : It is set to zero in models which receive a real water flux.-->
 		<field id="CMIP7_vsfcorr" field_ref="?dummy_XY"/>
-		<!--P3 (kg m-2 s-1) virtual_salt_flux_correction : It is set to zero in models which receive a real water flux.-->
+		<!--P1 (kg m-2 s-1) virtual_salt_flux_correction : It is set to zero in models which receive a real water flux.-->
 		<field id="CMIP7_vsfevap" field_ref="?dummy_XY"/>
-		<!--P3 (kg m-2 s-1) virtual_salt_flux_into_sea_water_due_to_evaporation : zero for models using real water fluxes.-->
+		<!--P1 (kg m-2 s-1) virtual_salt_flux_into_sea_water_due_to_evaporation : zero for models using real water fluxes.-->
 		<field id="CMIP7_vsfpr" field_ref="?dummy_XY"/>
-		<!--P3 (kg m-2 s-1) virtual_salt_flux_into_sea_water_due_to_rainfall : zero for models using real water fluxes.-->
+		<!--P1 (kg m-2 s-1) virtual_salt_flux_into_sea_water_due_to_rainfall : zero for models using real water fluxes.-->
 		<field id="CMIP7_vsfriver" field_ref="?dummy_XY"/>
-		<!--P3 (kg m-2 s-1) virtual_salt_flux_into_sea_water_from_rivers : zero for models using real water fluxes.-->
+		<!--P1 (kg m-2 s-1) virtual_salt_flux_into_sea_water_from_rivers : zero for models using real water fluxes.-->
 		<field id="CMIP7_vsfsit" field_ref="?dummy_XY"/>
-		<!--P3 (kg m-2 s-1) virtual_salt_flux_into_sea_water_due_to_sea_ice_thermodynamics : This variable measures the virtual salt flux into sea water due to the melting of sea ice. It is set to zero in models which receive a real water flux.-->
+		<!--P1 (kg m-2 s-1) virtual_salt_flux_into_sea_water_due_to_sea_ice_thermodynamics : This variable measures the virtual salt flux into sea water due to the melting of sea ice. It is set to zero in models which receive a real water flux.-->
+		<field id="CMIP7_wdir" field_ref="?dummy_XY"/>
+		<!--P1 (degree) sea_surface_wave_from_direction : Mean direction of wave propagation (direction from which the wave is coming) derived from the total wave energy spectrum, incorporating both wind-sea and swell waves. This variable is usually expressed in degrees relative to true north.-->
+		<field id="CMIP7_wdirswell" field_ref="?dummy_XY"/>
+		<!--P1 (degree) sea_surface_swell_wave_from_direction : Mean direction of wave propagation (direction from which the wave is coming) derived from the swell component of the wave energy spectrum (i.e., waves that have propagated away from their generation area). This variable is usually expressed in degrees relative to true north.-->
+		<field id="CMIP7_wdirwindsea" field_ref="?dummy_XY"/>
+		<!--P1 (degree) sea_surface_wind_wave_from_direction : Mean direction of wave propagation (direction from which the wave is coming) derived from the wind-sea component of the wave energy spectrum (i.e., local wind waves). This variable is usually expressed in degrees relative to true north.-->
 		<field id="CMIP7_wfcorr" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) water_flux_correction : Computed as the water flux into the ocean due to flux correction divided by the area of the ocean portion of the grid cell.-->
+		<!--P1 (kg m-2 s-1) water_flux_correction : Computed as the water flux into the ocean due to flux correction divided by the area of the ocean portion of the grid cell.-->
 		<field id="CMIP7_wfo" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) water_flux_into_sea_water : Computed as the water flux into the ocean divided by the area of the ocean portion of the grid cell. This is the sum \*wfonocorr\* and \*wfcorr\*.-->
+		<!--P1 (kg m-2 s-1) water_flux_into_sea_water : Computed as the water flux into the ocean divided by the area of the ocean portion of the grid cell. This is the sum \*wfonocorr\* and \*wfcorr\*.-->
 		<field id="CMIP7_wmo" field_ref="?dummy_XYO"/>
 		<!--P1 (kg s-1) upward_ocean_mass_transport : Upward mass transport from residual mean (resolved plus parameterized) advective transport.-->
 		<field id="CMIP7_wo" field_ref="?dummy_XYO"/>
 		<!--P1 (m s-1) upward_sea_water_velocity : Prognostic z-ward velocity component resolved by the model.-->
+		<field id="CMIP7_wpdir" field_ref="?dummy_XY"/>
+		<!--P1 (degree) sea_surface_wave_from_direction_at_variance_spectral_density_maximum : Direction of wave propagation (direction from which the wave is coming) derived from the total wave energy spectrum, incorporating both wind-sea and swell waves, by identifying the direction associated with the peak (maximum) energy density. This variable is usually expressed in degrees relative to true north.-->
+		<field id="CMIP7_wpdirswell" field_ref="?dummy_XY"/>
+		<!--P1 (degree) sea_surface_swell_wave_from_direction_at_variance_spectral_density_maximum : Direction of wave propagation (direction from which the wave is coming) derived from the swell component of the wave energy spectrum (i.e., waves that have propagated away from their generation area), by identifying the direction associated with the peak (maximum) energy density. This variable is typically expressed in degrees relative to true north.-->
+		<field id="CMIP7_wpdirwindsea" field_ref="?dummy_XY"/>
+		<!--P1 (degree) sea_surface_wind_wave_from_direction_at_variance_spectral_density_maximum : Direction of wave propagation (direction from which the wave is coming) derived from the wind-sea component of the wave energy spectrum (i.e., local wind waves), by identifying the direction associated with the peak (maximum) energy density. This variable is typically expressed in degrees relative to true north.-->
+		<field id="CMIP7_wpp" field_ref="?dummy_XY"/>
+		<!--P1 (s) sea_surface_wave_period_at_variance_spectral_density_maximum : Wave period associated with the most energetic waves in total wave spectrum, incorporating both wind-sea and swell waves. In spectral wind wave models, this represents the spectral peak across the entire two-dimensional wave spectrum, incorporating both wind-sea and swell waves.-->
+		<field id="CMIP7_wppswell" field_ref="?dummy_XY"/>
+		<!--P1 (s) sea_surface_swell_wave_period_at_variance_spectral_density_maximum : Wave period associated with the most energetic swell waves (i.e., waves that have propagated away from their generation area). In spectral wind wave models, this represents the spectral peak across part of the two-dimensional wave spectrum, incorporating just swell waves.-->
+		<field id="CMIP7_wppwindsea" field_ref="?dummy_XY"/>
+		<!--P1 (s) sea_surface_wind_wave_period_at_variance_spectral_density_maximum : Wave period associated with the most energetic wind-sea waves (i.e., local wind waves). In spectral wind wave models, this represents the spectral peak across part of the two-dimensional wave spectrum, incorporating just wind-sea waves.-->
 		<field id="CMIP7_zfullo" field_ref="?dummy_XYO"/>
-		<!--P2 (m) depth_below_geoid : Depth below geoid-->
+		<!--P1 (m) depth_below_geoid : Depth below geoid-->
 		<field id="CMIP7_zmeso" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_mesozooplankton_expressed_as_carbon_in_sea_water : carbon  concentration from mesozooplankton (20-200 um) component alone-->
+		<!--P1 (mol m-3) mole_concentration_of_mesozooplankton_expressed_as_carbon_in_sea_water : carbon  concentration from mesozooplankton (20-200 um) component alone-->
 		<field id="CMIP7_zmesoos" field_ref="?dummy_XY"/>
 		<!--P2 (mol m-3) mole_concentration_of_mesozooplankton_expressed_as_carbon_in_sea_water : carbon  concentration from mesozooplankton (20-200 um) component alone-->
 		<field id="CMIP7_zmicro" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_microzooplankton_expressed_as_carbon_in_sea_water : carbon  concentration from the microzooplankton (<20 um) component alone-->
+		<!--P1 (mol m-3) mole_concentration_of_microzooplankton_expressed_as_carbon_in_sea_water : carbon  concentration from the microzooplankton (<20 um) component alone-->
 		<field id="CMIP7_zmicroos" field_ref="?dummy_XY"/>
 		<!--P2 (mol m-3) mole_concentration_of_microzooplankton_expressed_as_carbon_in_sea_water : carbon  concentration from the microzooplankton (<20 um) component alone-->
 		<field id="CMIP7_zmisc" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_miscellaneous_zooplankton_expressed_as_carbon_in_sea_water : carbon from additional zooplankton component concentrations alone (e.g. Micro, meso).  Since the models all have different numbers of components, this variable has been included to provide a check for intercomparison between models since some phytoplankton groups are supersets.-->
+		<!--P1 (mol m-3) mole_concentration_of_miscellaneous_zooplankton_expressed_as_carbon_in_sea_water : carbon from additional zooplankton component concentrations alone (e.g. Micro, meso).  Since the models all have different numbers of components, this variable has been included to provide a check for intercomparison between models since some phytoplankton groups are supersets.-->
 		<field id="CMIP7_zmiscos" field_ref="?dummy_XY"/>
 		<!--P2 (mol m-3) mole_concentration_of_miscellaneous_zooplankton_expressed_as_carbon_in_sea_water : carbon from additional zooplankton component concentrations alone (e.g. Micro, meso).  Since the models all have different numbers of components, this variable has been included to provide a check for intercomparison between models since some phytoplankton groups are supersets.-->
 		<field id="CMIP7_zooc" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_zooplankton_expressed_as_carbon_in_sea_water : sum of zooplankton carbon component concentrations-->
+		<!--P1 (mol m-3) mole_concentration_of_zooplankton_expressed_as_carbon_in_sea_water : sum of zooplankton carbon component concentrations-->
 		<field id="CMIP7_zoocos" field_ref="?dummy_XY"/>
 		<!--P2 (mol m-3) mole_concentration_of_zooplankton_expressed_as_carbon_in_sea_water : sum of zooplankton carbon component concentrations-->
 		<field id="CMIP7_zos" field_ref="?dummy_XY"/>
-		<!--P1 (m) sea_surface_height_above_geoid : This is the dynamic sea level, so should have zero global area mean. It should not include inverse barometer depressions from sea ice.-->
+		<!--P1 (m) sea_surface_height_above_geoid : This is the dynamic sea level, so should have zero global area mean. zos is the effective sea level as if sea ice (and snow) at a grid cell were converted to liquid seawater (Campin et al., 2008). For OMIP, do _not _record inverse barometer responses from sea-ice (and snow) loading in zos. See (Griffies et al, 2016, https://doi.org/10.5194/gmd-9-3231-2016).-->
 		<field id="CMIP7_zossq" field_ref="?dummy_XY"/>
-		<!--P2 (m2) square_of_sea_surface_height_above_geoid : Surface ocean geoid defines z=0.-->
+		<!--P1 (m2) square_of_sea_surface_height_above_geoid : Surface ocean geoid defines z=0.-->
 		<field id="CMIP7_zostoga" field_ref="?dummy_0d"/>
 		<!--P1 (m) global_average_thermosteric_sea_level_change : There is no CMIP6 request for zosga nor zossga.-->
 	</field_definition>

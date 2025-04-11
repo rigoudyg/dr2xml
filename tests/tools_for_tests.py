@@ -140,7 +140,7 @@ def create_config_elements(simulation="my_simulation", contexts=list(), add_prof
                            year="1980", enddate="19800131", pingfiles="", printout="1", debug=False, is_ping=False,
                            filename="ping_{content}.xml", by_realm=False):
 	current_dir = os.path.dirname(os.path.abspath(__file__))
-	data_request_directory = os.sep.join([os.path.dirname(os.path.dirname(os.path.dirname(current_dir))), "data_request", "CMIP7_DReq_Software"])
+	data_request_directory = os.sep.join([os.path.dirname(os.path.dirname(os.path.dirname(current_dir))), "data_request", "CMIP7_DReq_Software", "data_request_api"])
 	simulation_dir = os.path.sep.join([current_dir, "test_{}".format(simulation)])
 	inputs_dir = os.path.sep.join([simulation_dir, "input"])
 	kwargs = dict(

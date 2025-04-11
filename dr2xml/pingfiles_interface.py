@@ -98,7 +98,7 @@ def read_xml_elmt_or_attrib(filename, tag='field', attrib=None):
             logger.debug("")
             return rep
     else:
-        logger.info("No file ")
+        logger.info("No file")
         return None
 
 
@@ -281,7 +281,7 @@ def ping_file_for_realms_list(context, svars, lrealms, path_special, dummy="fiel
             if isinstance(comments, six.string_types):
                 xml_fields.append(DR2XMLComment(text=comments))
             xml_fields.append(DR2XMLComment(text="P%d (%s) %s : %s" %
-                                                 (v.Priority, v.units, v.stdname, v.description)))
+                                                 (v.Priority, v.units, v.stdname, v.description.replace(" \n", os.linesep))))
     if 'atmos' in lrealms or 'atmosChem' in lrealms or 'aerosol' in lrealms:
         for tab in ["ap", "ap_bnds", "b", "b_bnds"]:
             xml_fields.append(DR2XMLElement(tag="field", id="%s%s" % (prefix, tab), field_ref="dummy_hyb"))

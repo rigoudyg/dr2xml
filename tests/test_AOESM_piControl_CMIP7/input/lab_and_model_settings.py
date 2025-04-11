@@ -4,8 +4,8 @@
 
 lab_and_model_settings = {
     'data_request_used': 'CMIP7',
-    'data_request_path': '/home/rigoudyg/dev/data_request/CMIP7_DReq_Software',
-    'data_request_content_version': 'latest_stable',
+    'data_request_path': '/home/rigoudyg/dev/data_request/CMIP7_DReq_Software/data_request_api',
+    'data_request_content_version': 'v1.2',
     'project': 'CMIP7',
     'path_to_parse': '{path_xml}/',
     'comment': '',

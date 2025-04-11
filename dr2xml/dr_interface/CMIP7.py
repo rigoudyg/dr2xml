@@ -23,8 +23,8 @@ from ..utils import Dr2xmlError
 data_request_path = get_settings_values("internal", "data_request_path")
 sys.path.append(data_request_path)
 os.environ["CMIP7_DR_API_CONFIGFILE"] = get_settings_values("internal", "data_request_config")
-from data_request_api.stable.query.data_request import DataRequest as CMIP7DataRequest
-from data_request_api.stable.content.dump_transformation import get_transformed_content
+from data_request_api.query.data_request import DataRequest as CMIP7DataRequest
+from data_request_api.content.dump_transformation import get_transformed_content
 
 
 data_request = None
