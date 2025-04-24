@@ -11,10 +11,10 @@ lab_and_model_settings = {
     # 'mips' : {'AerChemMIP','C4MIP','CFMIP','DAMIP', 'FAFMIP' , 'GeoMIP','GMMIP','ISMIP6',\
     #                  'LS3MIP','LUMIP','OMIP','PMIP','RFMIP','ScenarioMIP','CORDEX','SIMIP'},
     # If you want to get comprehensive ping files; use :
-    'mips': {"CERESMIP", "PAMIP", "SIMIP", "OMIP", "SOFIAMIP", "LMIP", "RFMIP", "AerChemMIP2", "AerChemMIP", "GeoMIP",
-             "TIPMIP", "DAMIP", "PMIP", "FAFMIP", "DCPP", "CDRMIP", "NAHosMIP", "ISMIP7", "CMIP", "ScenarioMIP",
-             "HighResMIP", "LUMIP", "Other", "VolMIP", "DynVarMIP", "HT-MIP/VolMIP", "CORDEX", "CFMIP", "C4MIP",
-             "WhatIfMIP", "VIACSAB", "FireMIP", "LongRunMIP", "FishMIP", "ISIMIP", "RAMIP"},
+    'mips': {"CERESMIP", "PAMIP", "SIMIP", "OMIP", "SOFIAMIP", "LMIP", "RFMIP", "AerChemMIP2", "GeoMIP", "TIPMIP",
+             "DAMIP", "PMIP", "FAFMIP", "DCPP", "CDRMIP", "NAHosMIP", "ISMIP7", "CMIP", "ScenarioMIP", "HighResMIP",
+             "LUMIP", "Other", "VolMIP", "HT-MIP/VolMIP", "CORDEX", "CFMIP", "C4MIP", "WhatIfMIP", "VIACSAB", "RAMIP",
+             "FireMIP", "IRRMIP", "LongRunMIP", "MISOMIP2", "FishMIP", "ISIMIP"},
     'max_priority': 4,
     'tierMax': 3,
     # Each XIOS  context does adress a number of realms
