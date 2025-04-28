@@ -45,11 +45,11 @@
 		<field id="CMIP7_evs" field_ref="?dummy_XY"/>
 		<!--P3 (kg m-2 s-1) water_evapotranspiration_flux : computed as the total mass of water vapor evaporating from the ice-free portion of the ocean  divided by the area of the ocean portion of the grid cell.-->
 		<field id="CMIP7_ficeberg" field_ref="?dummy_XYO"/>
-		<!--P2 (kg m-2 s-1) water_flux_into_sea_water_from_icebergs : Computed as the iceberg melt water flux into the ocean divided by the area of the ocean portion of the grid cell.-->
+		<!--P2 (kg m-2 s-1) water_flux_into_sea_water_from_icebergs : computed as the iceberg melt water  flux into the ocean divided by the area of the ocean portion of the grid cell.-->
 		<field id="CMIP7_flandice" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) water_flux_into_sea_water_from_land_ice : Computed as the water flux into the ocean due to land ice (runoff water from surface and base of land ice or melt from base of ice shelf or vertical ice front) into the ocean divided by the area ocean portion of the grid cell.-->
+		<!--P2 (kg m-2 s-1) water_flux_into_sea_water_from_land_ice : Computed as the water flux into the ocean due to land ice (runoff water from surface and base of land ice or melt from base of ice shelf or vertical ice front) into the ocean divided by the area ocean portion of the grid cell-->
 		<field id="CMIP7_friver" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) water_flux_into_sea_water_from_rivers : Computed as the river flux of water into the ocean divided by the area of the ocean portion of the grid cell.-->
+		<!--P2 (kg m-2 s-1) water_flux_into_sea_water_from_rivers : computed as the river flux of water into the ocean divided by the area of the ocean portion of the grid cell.-->
 		<field id="CMIP7_fsitherm" field_ref="?dummy_XY"/>
 		<!--P3 (kg m-2 s-1) water_flux_into_sea_water_due_to_sea_ice_thermodynamics : computed as the sea ice thermodynamic water flux into the ocean divided by the area of the ocean portion of the grid cell.-->
 		<field id="CMIP7_hfacrossline" field_ref="?dummy_TR_oline"/>
@@ -87,7 +87,7 @@
 		<field id="CMIP7_htovovrt" field_ref="?dummy_basin_zonal_mean"/>
 		<!--P2 (W) northward_ocean_heat_transport_due_to_overturning : From all advective mass transport processes, resolved and parameterized.-->
 		<field id="CMIP7_masscello" field_ref="?dummy_XYO"/>
-		<!--P1 (kg m-2) sea_water_mass_per_unit_area : Tracer grid-cell mass per unit area used for computing tracer budgets. For Boussinesq models with static ocean grid cell thickness, masscello = rhozero\*thickcello, where thickcello is static cell thickness and rhozero is constant Boussinesq reference density. More generally, masscello is time dependent and reported as part of Omon.-->
+		<!--P1 (kg m-2) sea_water_mass_per_unit_area : For Boussinesq models, report this diagnostic as Boussinesq reference density times grid celll volume.-->
 		<field id="CMIP7_masso" field_ref="?dummy_0d"/>
 		<!--P2 (kg) sea_water_mass : Total mass of liquid sea water. For Boussinesq models, report this diagnostic as Boussinesq reference density times total volume.-->
 		<field id="CMIP7_mfo" field_ref="?dummy_TR_oline"/>
@@ -283,7 +283,7 @@
 		<field id="CMIP7_zfullo" field_ref="?dummy_XYO"/>
 		<!--P2 (m) depth_below_geoid : Depth below geoid-->
 		<field id="CMIP7_zos" field_ref="?dummy_XY"/>
-		<!--P1 (m) sea_surface_height_above_geoid : This is the dynamic sea level, so should have zero global area mean. zos is the effective sea level as if sea ice (and snow) at a grid cell were converted to liquid seawater (Campin et al., 2008). For OMIP, do _not _record inverse barometer responses from sea-ice (and snow) loading in zos. See (Griffies et al, 2016, https://doi.org/10.5194/gmd-9-3231-2016).-->
+		<!--P1 (m) sea_surface_height_above_geoid : This is the dynamic sea level, so should have zero global area mean. It should not include inverse barometer depressions from sea ice.-->
 		<field id="CMIP7_zossq" field_ref="?dummy_XY"/>
 		<!--P2 (m2) square_of_sea_surface_height_above_geoid : Surface ocean geoid defines z=0.-->
 		<field id="CMIP7_zostoga" field_ref="?dummy_0d"/>

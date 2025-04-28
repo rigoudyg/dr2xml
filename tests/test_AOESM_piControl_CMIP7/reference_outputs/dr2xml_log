@@ -3,7 +3,7 @@
 *
 *              dr2xml version:  current_version
 *   CMIP6 conventions version:  v6.2.4
-*  CMIP7 Data Request version:  Software 1.1.2 - Content v1.1
+*  CMIP7 Data Request version:  Software 1.1.3.dev47+g35c67bc - Content v1.2
 
 *
  **************************************************
@@ -14,9 +14,9 @@ Processing context  nemo
 
 **************************************************
 
-Number of distinct CMOR variables (whatever the grid): 139
-Number of distinct var labels is: 99
-Number of simplified vars is: 139
+Number of distinct CMOR variables (whatever the grid): 135
+Number of distinct var labels is: 95
+Number of simplified vars is: 135
 Issues with standard names are: []
 Info: No HOMEvars list provided.
 
@@ -60,8 +60,11 @@ Some Statistics on actually written variables per frequency+shape...
                              Ofx P1   2: masscello thkcello
         fx     XY-O    -------- ---   2
 
-                             Ofx P1   4: areacello basin deptho hfgeou
-        fx    XY-na    -------- ---   4
+                             Ofx P1   2: deptho hfgeou
+        fx    XY-SF    -------- ---   2
+
+                             Ofx P1   2: areacello basin
+        fx    XY-na    -------- ---   2
 
         fx --------    -------- ---   6
 
@@ -97,7 +100,7 @@ Some Statistics on actually written variables per variable...
 --------------------
 --- VARNAME: deptho: Sea Floor Depth Below Geoid
 --------------------
-              *       fx_Ofx_XY-na_1 deptho
+              *       fx_Ofx_XY-SF_1 deptho
 ------------------
 --- VARNAME: hfds: Downward Heat Flux at Sea Water Surface
 ------------------
@@ -105,7 +108,7 @@ Some Statistics on actually written variables per variable...
 --------------------
 --- VARNAME: hfgeou: Upward Geothermal Heat Flux at Sea Floor
 --------------------
-              *       fx_Ofx_XY-na_1 hfgeou
+              *       fx_Ofx_XY-SF_1 hfgeou
 -----------------------
 --- VARNAME: masscello: Ocean Grid-Cell Mass per Area
 -----------------------
@@ -220,7 +223,7 @@ Warnings about cell methods (with var list)
 *
 *              dr2xml version:  current_version
 *   CMIP6 conventions version:  v6.2.4
-*  CMIP7 Data Request version:  Software 1.1.2 - Content v1.1
+*  CMIP7 Data Request version:  Software 1.1.3.dev47+g35c67bc - Content v1.2
 
 *
  **************************************************
@@ -231,9 +234,9 @@ Processing context  surfex
 
 **************************************************
 
-Number of distinct CMOR variables (whatever the grid): 139
-Number of distinct var labels is: 99
-Number of simplified vars is: 139
+Number of distinct CMOR variables (whatever the grid): 135
+Number of distinct var labels is: 95
+Number of simplified vars is: 135
 Issues with standard names are: []
 Info: No HOMEvars list provided.
 
@@ -261,11 +264,7 @@ Warning: Cannot complement model levels with psol for table Amon for frequency 1
 file_def written as current_directory/test_AOESM_piControl_CMIP7/test_outputs/dr2xml_surfex.xml
 
 Skipped variables (i.e. whose alias is not present in the pingfile):
->>> TABLE:            Amon 01/46 ----> rluscs(1)
-
 >>> TABLE:             Efx 01/01 ----> slthick(1)
-
->>> TABLE:             day 04/22 ----> noaahi2m(1) noaahi2mmax(1) wbgt2m(1) wbgt2mmax(1)
 
 
 
@@ -311,15 +310,15 @@ Some Statistics on actually written variables per frequency+shape...
                             Amon P1   7: hur hus ta ua va wap zg
        mon   XY-P19    -------- ---   7
 
-                            Amon P1  35: clivi clt clwvi evspsbl hfls hfss hurs huss pr prc prsn prw ps psl rlds rldscs rlus rlut rlutcs rsds rsdscs rsdt rsus rsuscs rsut rsutcs sfcWind tas tasmax tasmin tauu tauv ts uas vas
+                            Amon P1  36: clivi clt clwvi evspsbl hfls hfss hurs huss pr prc prsn prw ps psl rlds rldscs rlus rluscs rlut rlutcs rsds rsdscs rsdt rsus rsuscs rsut rsutcs sfcWind tas tasmax tasmin tauu tauv ts uas vas
                            LImon P1   2: snc snw
                             Lmon P1   8: evspsblsoi evspsblveg lai mrfso mrro mrros mrso mrsos
-       mon    XY-na    -------- ---  45
+       mon    XY-na    -------- ---  46
 
-       mon --------    -------- ---  55
+       mon --------    -------- ---  56
 
 
----------- --------    -------- ---  95
+---------- --------    -------- ---  96
 
 
 Some Statistics on actually written variables per variable...
@@ -468,6 +467,10 @@ Some Statistics on actually written variables per variable...
 --- VARNAME: rlus: Surface Upwelling Longwave Radiation
 ------------------
               *     mon_Amon_XY-na_1 rlus
+--------------------
+--- VARNAME: rluscs: Surface Upwelling Longwave Radiation Clear Sky
+--------------------
+              *     mon_Amon_XY-na_1 rluscs
 ------------------
 --- VARNAME: rlut: TOA Outgoing Longwave Radiation
 ------------------
@@ -606,7 +609,7 @@ Some Statistics on actually written variables per variable...
 *
 *              dr2xml version:  current_version
 *   CMIP6 conventions version:  v6.2.4
-*  CMIP7 Data Request version:  Software 1.1.2 - Content v1.1
+*  CMIP7 Data Request version:  Software 1.1.3.dev47+g35c67bc - Content v1.2
 
 *
  **************************************************
@@ -617,9 +620,9 @@ Processing context  trip
 
 **************************************************
 
-Number of distinct CMOR variables (whatever the grid): 139
-Number of distinct var labels is: 99
-Number of simplified vars is: 139
+Number of distinct CMOR variables (whatever the grid): 135
+Number of distinct var labels is: 95
+Number of simplified vars is: 135
 Issues with standard names are: []
 Info: No HOMEvars list provided.
 

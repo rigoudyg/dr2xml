@@ -70,8 +70,8 @@
 		<!--P2 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_nitrate_dry_aerosol_particles_due_to_net_chemical_production : Net chemical production rate of nitrate aerosol in the atmosphere-->
 		<field id="CMIP7_co" field_ref="?dummy_XY"/>
 		<!--P2 (mol mol-1) mole_fraction_of_carbon_monoxide_in_air : This is the daily mean for CO volume mixing ratio in lowest model layer-->
-		<field id="CMIP7_conccn" field_ref="?dummy_XY_site"/>
-		<!--P2 (m-3) number_concentration_of_ambient_aerosol_particles_in_air : The variable represents the instantaneous Aerosol Number Concentration at CF sites, sampled every 3 hours-->
+		<field id="CMIP7_conccn" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (m-3) number_concentration_of_ambient_aerosol_particles_in_air : This is the number concentration of air particles in air-->
 		<field id="CMIP7_dms" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (mol mol-1) mole_fraction_of_dimethyl_sulfide_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.-->
 		<field id="CMIP7_do3chm" field_ref="?dummy_XYA_alevel"/>
@@ -138,24 +138,24 @@
 		<!--P2 (1E-12) mole_fraction_of_hcfc22_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.  A chemical species denoted by X may be described by a single term such as 'nitrogen' or a phrase such as 'nox\_expressed\_as\_nitrogen'. The chemical formula for HCFC22 is CHClF2.  The IUPAC name for HCFC22 is chloro-difluoro-methane.-->
 		<field id="CMIP7_meanage" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (yr) age_of_stratospheric_air : The mean age of air is defined as the mean time that a stratospheric air mass has been out of contact with the well-mixed troposphere.-->
-		<field id="CMIP7_mmraerh2o" field_ref="?dummy_XY_site"/>
-		<!--P2 (kg kg-1) mass_fraction_of_water_in_ambient_aerosol_particles_in_air : This variable represents the instantaneous surface aerosol water Mass Mixing Ratio at CF sites, sampled every 3 hours-->
-		<field id="CMIP7_mmrbc" field_ref="?dummy_XY_site"/>
-		<!--P2 (kg kg-1) mass_fraction_of_elemental_carbon_dry_aerosol_particles_in_air : This variable represents the instantaneous surface elemental carbon Aerosol Mass Mixing Ratio at CF sites, sampled every 3 hours-->
-		<field id="CMIP7_mmrdust" field_ref="?dummy_XY_site"/>
-		<!--P2 (kg kg-1) mass_fraction_of_dust_dry_aerosol_particles_in_air : This variable represents the instantaneous surface Dust Aerosol Mass Mixing Ratio at CF sites, sampled every 3 hours-->
-		<field id="CMIP7_mmrnh4" field_ref="?dummy_XY_site"/>
-		<!--P2 (kg kg-1) mass_fraction_of_ammonium_dry_aerosol_particles_in_air : This variable represents the instantaneous surface NH4 Aerosol Mass Mixing Ratio at CF sites, sampled every 3 hours-->
-		<field id="CMIP7_mmrno3" field_ref="?dummy_XY_site"/>
-		<!--P2 (kg kg-1) mass_fraction_of_nitrate_dry_aerosol_particles_in_air : This variable represents the instantaneous surface NO3 Aerosol Mass Mixing Ratio at CF sites, sampled every 3 hours-->
-		<field id="CMIP7_mmroa" field_ref="?dummy_XY_site"/>
-		<!--P2 (kg kg-1) mass_fraction_of_particulate_organic_matter_dry_aerosol_particles_in_air : This variable represents the instantaneous surface organic aerosol Mass Mixing Ratio at CF sites, sampled every 3 hours.-->
-		<field id="CMIP7_mmrso4" field_ref="?dummy_XY_site"/>
-		<!--P2 (kg kg-1) mass_fraction_of_sulfate_dry_aerosol_particles_in_air : This variable is for instantaneous surface mass mixing ratio of sulfate aerosol at CF sites, sampled every 3 hours-->
+		<field id="CMIP7_mmraerh2o" field_ref="?dummy_XY"/>
+		<!--P2 (kg kg-1) mass_fraction_of_water_in_ambient_aerosol_particles_in_air : Daily mean Aerosol water mass mixing ratio in lowest model layer-->
+		<field id="CMIP7_mmrbc" field_ref="?dummy_XY"/>
+		<!--P2 (kg kg-1) mass_fraction_of_elemental_carbon_dry_aerosol_particles_in_air : Daily mean elemental carbon mass mixing ratio in lowest model layer-->
+		<field id="CMIP7_mmrdust" field_ref="?dummy_XY"/>
+		<!--P2 (kg kg-1) mass_fraction_of_dust_dry_aerosol_particles_in_air : Daily mean dust aerosol mass mixing ratio in lowest model layer-->
+		<field id="CMIP7_mmrnh4" field_ref="?dummy_XY"/>
+		<!--P2 (kg kg-1) mass_fraction_of_ammonium_dry_aerosol_particles_in_air : Daily mean NH4 mass mixing ratio in lowest model layer-->
+		<field id="CMIP7_mmrno3" field_ref="?dummy_XY"/>
+		<!--P2 (kg kg-1) mass_fraction_of_nitrate_dry_aerosol_particles_in_air : Daily mean NO3 aerosol mass mixing ratio in lowest model layer-->
+		<field id="CMIP7_mmroa" field_ref="?dummy_XY"/>
+		<!--P2 (kg kg-1) mass_fraction_of_particulate_organic_matter_dry_aerosol_particles_in_air : Daily mean total organic aerosol mass mixing ratio in lowest model layer-->
+		<field id="CMIP7_mmrso4" field_ref="?dummy_XY"/>
+		<!--P2 (kg kg-1) mass_fraction_of_sulfate_dry_aerosol_particles_in_air : Daily mean sulfate aerosol mass mixing ratio in lowest model layer-->
 		<field id="CMIP7_mmrsoa" field_ref="?dummy_XY"/>
 		<!--P2 (kg kg-1) mass_fraction_of_secondary_particulate_organic_matter_dry_aerosol_particles_in_air : Daily mean secondary organic aerosol mass mixing ratio in lowest model layer-->
-		<field id="CMIP7_mmrss" field_ref="?dummy_XY_site"/>
-		<!--P2 (kg kg-1) mass_fraction_of_sea_salt_dry_aerosol_particles_in_air : This variable represents instantaneous surface sea salt aerosol mass mixing ratio at CF sites, sampled every 3 hours-->
+		<field id="CMIP7_mmrss" field_ref="?dummy_XY"/>
+		<!--P2 (kg kg-1) mass_fraction_of_sea_salt_dry_aerosol_particles_in_air : Daily mean Sea Salt mass mixing ratio in lowest model layer-->
 		<field id="CMIP7_n2o" field_ref="?dummy_XY_plev19"/>
 		<!--P2 (mol mol-1) mole_fraction_of_nitrous_oxide_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.   The chemical formula of  nitrous oxide is N2O.-->
 		<field id="CMIP7_n2oglobal" field_ref="?dummy_0d"/>
@@ -198,8 +198,8 @@
 		<!--P2 (kg kg-1) mass_fraction_of_pm10_ambient_aerosol_particles_in_air : Daily mean PM10 mass mixing ratio in lowest model layer-->
 		<field id="CMIP7_sfpm25" field_ref="?dummy_XY"/>
 		<!--P2 (kg kg-1) mass_fraction_of_pm2p5_ambient_aerosol_particles_in_air : Daily mean PM2.5 mass mixing ratio in lowest model layer-->
-		<field id="CMIP7_so2" field_ref="?dummy_XY_site"/>
-		<!--P2 (mol mol-1) mole_fraction_of_sulfur_dioxide_in_air : This variable represents the instantaneous surface so2 volume mixing ration at CF sites, sampled every 3 hours-->
+		<field id="CMIP7_so2" field_ref="?dummy_XY"/>
+		<!--P2 (mol mol-1) mole_fraction_of_sulfur_dioxide_in_air : Daily mean SO2 volume mixing ratio in lowest model layer-->
 		<field id="CMIP7_stratch4loss" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (mol m-3 s-1) tendency_of_atmosphere_mole_concentration_of_methane_due_to_chemical_destruction : This is the loss rate of stratospheric methane by all chemical destruction. The distinction between the stratosphere and troposphere should be consistent with the tropopause as used in the calculation of the tropopause pressure (ptp). It should have zero values in the troposphere.-->
 		<field id="CMIP7_tropch4loss" field_ref="?dummy_XYA_alevel"/>

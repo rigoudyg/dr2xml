@@ -73,7 +73,7 @@
 		<field id="CMIP7_lithk" field_ref="?dummy_XY"/>
 		<!--P2 (m) land_ice_thickness : This variable identifies the thickness of a prescribed ice sheet. This information is relevant to better understand how different models treat ice. For models where an ice sheet is just orography + an ice sheet mask, the value should be set to zero. For models that explicitly resolve an ice sheet thickness, the thickness of the ice sheet should be provided.-->
 		<field id="CMIP7_lwsnl" field_ref="?dummy_XY"/>
-		<!--P3 (kg m-2) liquid_water_content_of_surface_snow : where land over land: this is computed as the total mass of liquid water contained interstitially within the snow layer of the land portion of a grid cell divided by the area of the land portion of the cell.-->
+		<!--P3 (kg m-2) liquid_water_content_of_surface_snow : liquid\_water\_content\_of\_snow\_layer-->
 		<field id="CMIP7_modelCellAreai" field_ref="?dummy_XY_xgre_ygre"/>
 		<!--P3 (m2) cell_area : When interpolated to a regular grid, it should be interpolated (not summed) with a conservative scheme to preserve total area-->
 		<field id="CMIP7_mrfso" field_ref="?dummy_XY"/>

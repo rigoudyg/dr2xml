@@ -104,8 +104,8 @@
 		<!--P2 (mol mol-1) mole_fraction_of_carbon_dioxide_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.-->
 		<field id="CMIP7_cod" field_ref="?dummy_XY"/>
 		<!--P2 (1) atmosphere_optical_thickness_due_to_cloud : The optical thickness is the integral along the path of radiation of a volume scattering/absorption/attenuation coefficient. The radiative flux is reduced by a factor exp(-optical\_thickness) on traversing the path. A coordinate variable of radiation\_wavelength or radiation\_frequency can be specified to indicate that the optical thickness applies at specific wavelengths or frequencies. The atmosphere optical thickness applies to radiation passing through the entire atmosphere. "Cloud" means the component of extinction owing to the presence of liquid or ice water particles. The specification of a physical process by the phrase due\_to\_process means that the quantity named is a  single term in a sum of terms which together compose the general quantity named by omitting the phrase.-->
-		<field id="CMIP7_conccn" field_ref="?dummy_XY_site"/>
-		<!--P2 (m-3) number_concentration_of_ambient_aerosol_particles_in_air : The variable represents the instantaneous Aerosol Number Concentration at CF sites, sampled every 3 hours-->
+		<field id="CMIP7_conccn" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (m-3) number_concentration_of_ambient_aerosol_particles_in_air : This is the number concentration of air particles in air-->
 		<field id="CMIP7_depdust" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2 s-1) minus_tendency_of_atmosphere_mass_content_of_dust_dry_aerosol_particles_due_to_deposition : Fdry mass deposition rate of dust-->
 		<field id="CMIP7_dms" field_ref="?dummy_XYA_alevel"/>
@@ -252,7 +252,7 @@
 		<!--P2 (mol m-3 s-1) tendency_of_atmosphere_mole_concentration_of_nitrous_oxide_due_to_chemical_destruction : monthly averaged atmospheric loss-->
 		<field id="CMIP7_lwp" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2) atmosphere_mass_content_of_cloud_liquid_water : The total mass of liquid water in cloud per unit area.-->
-		<field id="CMIP7_meanage" field_ref="?dummy_XY_plev39"/>
+		<field id="CMIP7_meanage" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (yr) age_of_stratospheric_air : The mean age of air is defined as the mean time that a stratospheric air mass has been out of contact with the well-mixed troposphere.-->
 		<field id="CMIP7_mmraerh2o" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (kg kg-1) mass_fraction_of_water_in_ambient_aerosol_particles_in_air : Mass fraction is used in the construction mass\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y. It means the ratio of the mass of X to the mass of Y (including X). "Aerosol" means the system of suspended liquid or solid particles in air (except cloud droplets) and their carrier gas, the air itself. "Ambient\_aerosol" means that the aerosol is measured or modelled at the ambient state of pressure, temperature and relative humidity that exists in its immediate environment. "Ambient aerosol particles" are aerosol particles that have taken up ambient water through hygroscopic growth. The extent of hygroscopic growth depends on the relative humidity and the composition of the particles.-->
@@ -385,7 +385,7 @@
 		<field id="CMIP7_sfpm10" field_ref="?dummy_XY"/>
 		<!--P2 (kg kg-1) mass_fraction_of_pm10_ambient_aerosol_particles_in_air : Daily mean PM10 mass mixing ratio in lowest model layer-->
 		<field id="CMIP7_sfpm25" field_ref="?dummy_XY"/>
-		<!--P2 (kg kg-1) mass_fraction_of_pm2p5_ambient_aerosol_particles_in_air : Mass fraction of atmospheric particulate compounds with an aerodynamic diameter of less than or equal to 2.5 micrometers. To specify the relative humidity and temperature at which the particle size applies, provide scalar coordinate variables with the standard names of "relative\_humidity" and "air\_temperature".-->
+		<!--P2 (kg kg-1) mass_fraction_of_pm2p5_ambient_aerosol_particles_in_air : Daily mean PM2.5 mass mixing ratio in lowest model layer-->
 		<field id="CMIP7_so2" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (mol mol-1) mole_fraction_of_sulfur_dioxide_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.-->
 		<field id="CMIP7_stratch4loss" field_ref="?dummy_XYA_alevel"/>
@@ -397,7 +397,7 @@
 		<field id="CMIP7_tntrs" field_ref="?dummy_COSP-A_alevel_site"/>
 		<!--P2 (K s-1) tendency_of_air_temperature_due_to_shortwave_heating : alevel site time1-->
 		<field id="CMIP7_toz" field_ref="?dummy_XY"/>
-		<!--P2 (m) equivalent_thickness_at_stp_of_atmosphere_ozone_content : Total ozone column-->
+		<!--P2 (m) equivalent_thickness_at_stp_of_atmosphere_ozone_content : total ozone column in DU-->
 		<field id="CMIP7_tropch4loss" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (mol m-3 s-1) tendency_of_atmosphere_mole_concentration_of_methane_due_to_chemical_destruction : This is the loss rate of tropospheric methane by all chemical destruction. The distinction between stratosphere and troposphere should be consistent with the tropopause used in the calculation of the tropopause pressure (ptp).  It should have zero values in the stratosphere.-->
 		<field id="CMIP7_tropch4lossoh" field_ref="?dummy_XYA_alevel"/>

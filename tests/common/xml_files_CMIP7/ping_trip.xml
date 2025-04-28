@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <context id="trip">
-	<!--CMIP7 Data Request version Software 1.1.2 - Content v1.1-->
+	<!--CMIP7 Data Request version Software 1.1.3.dev37+g18a9b7a - Content v1.2-->
 	<!--dr2xml version 3.1-->
 	<!--Lab_and_model settings
-{'data_request_content_consolidation' = 'False',
-'data_request_content_directory' = 'None',
-'data_request_content_export' = 'release',
-'data_request_content_version' = 'latest_stable',
-'data_request_path' = '/home/rigoudyg/dev/data_request/CMIP7_DReq_Software',
+{'data_request_content_version' = 'v1.2',
+'data_request_path' = 'current_data_request',
 'data_request_used' = 'CMIP7',
 'excluded_vars' = [],
 'excluded_vars_file' = [],
 'institution_id' = 'CNRM-CERFACS',
 'listof_home_vars' = 'None',
-'max_priority' = '3',
+'max_priority' = '4',
 'mips' = {'AerChemMIP', 'AerChemMIP2', 'C4MIP', 'CDRMIP', 'CERESMIP', 'CFMIP', 'CMIP', 'CORDEX', 'DAMIP', 'DCPP', 'DynVarMIP', 'FAFMIP', 'FireMIP', 'FishMIP', 'GeoMIP', 'HT-MIP/VolMIP', 'HighResMIP', 'ISIMIP', 'ISMIP7', 'LMIP', 'LUMIP', 'LongRunMIP', 'NAHosMIP', 'OMIP', 'Other', 'PAMIP', 'PMIP', 'RAMIP', 'RFMIP', 'SIMIP', 'SOFIAMIP', 'ScenarioMIP', 'TIPMIP', 'VIACSAB', 'VolMIP', 'WhatIfMIP'},
 'path_extra_tables' = 'None',
 'path_special_defs' = './input/special_defs',

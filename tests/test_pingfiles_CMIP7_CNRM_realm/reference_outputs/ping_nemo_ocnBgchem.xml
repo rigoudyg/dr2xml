@@ -51,7 +51,7 @@
 		<field id="CMIP7_chlmiscos" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-3) mass_concentration_of_miscellaneous_phytoplankton_expressed_as_chlorophyll_in_sea_water : chlorophyll from additional phytoplankton component concentrations alone-->
 		<field id="CMIP7_chlos" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-3) mass_concentration_of_phytoplankton_expressed_as_chlorophyll_in_sea_water : sum of chlorophyll from all phytoplankton group concentrations at the sea surface.  In most models this is equal to chldiat+chlmisc, that is the sum of "Diatom Chlorophyll Mass Concentration" plus "Other Phytoplankton Chlorophyll Mass Concentration"-->
+		<!--P2 (kg m-3) mass_concentration_of_phytoplankton_expressed_as_chlorophyll_in_sea_water : sum of chlorophyll from all phytoplankton group concentrations.  In most models this is equal to chldiat+chlmisc, that is the sum of "Diatom Chlorophyll Mass Concentration" plus "Other Phytoplankton Chlorophyll Mass Concentration"-->
 		<field id="CMIP7_chlpico" field_ref="?dummy_XYO"/>
 		<!--P2 (kg m-3) mass_concentration_of_picophytoplankton_expressed_as_chlorophyll_in_sea_water : chlorophyll concentration from the picophytoplankton (<2 um) component alone-->
 		<field id="CMIP7_chlpicoos" field_ref="?dummy_XY"/>
@@ -157,7 +157,7 @@
 		<field id="CMIP7_intpoc" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2) ocean_mass_content_of_particulate_organic_matter_expressed_as_carbon : Vertically integrated POC-->
 		<field id="CMIP7_intpp" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-2 s-1) net_primary_mole_productivity_of_biomass_expressed_as_carbon_by_phytoplankton : Vertically integrated total primary (organic carbon) production by phytoplankton. This should equal the sum of intpdiat+intpphymisc, but those individual components may be unavailable in some models.-->
+		<!--P2 (mol m-2 s-1) net_primary_mole_productivity_of_biomass_expressed_as_carbon_by_phytoplankton : Vertically integrated total primary (organic carbon) production by phytoplankton.  This should equal the sum of intpdiat+intpphymisc, but those individual components may be unavailable in some models.-->
 		<field id="CMIP7_intppcalc" field_ref="?dummy_XY"/>
 		<!--P2 (mol m-2 s-1) net_primary_mole_productivity_of_biomass_expressed_as_carbon_by_calcareous_phytoplankton : Vertically integrated primary (organic carbon) production by the calcareous phytoplankton component alone-->
 		<field id="CMIP7_intppdiat" field_ref="?dummy_XY"/>
@@ -213,7 +213,7 @@
 		<field id="CMIP7_o2" field_ref="?dummy_XYO"/>
 		<!--P2 (mol m-3) mole_concentration_of_dissolved_molecular_oxygen_in_sea_water : 'Mole concentration' means number of moles per unit volume, also called "molarity", and is used in the construction mole\_concentration\_of\_X\_in\_Y, where X is a material constituent of Y.  A chemical or biological species denoted by X may be described by a single term such as 'nitrogen' or a phrase such as 'nox\_expressed\_as\_nitrogen'.-->
 		<field id="CMIP7_o2os" field_ref="?dummy_XY"/>
-		<!--P3 (mol m-3) mole_concentration_of_dissolved_molecular_oxygen_in_sea_water : Near surface 'Mole concentration' means number of moles per unit volume, also called "molarity", and is used in the construction mole\_concentration\_of\_X\_in\_Y, where X is a material constituent of Y. A chemical or biological species denoted by X may be described by a single term such as 'nitrogen' or a phrase such as 'nox\_expressed\_as\_nitrogen'. The chemical formula for molecular oxygen is O2.-->
+		<!--P3 (mol m-3) mole_concentration_of_dissolved_molecular_oxygen_in_sea_water : 'Mole concentration' means number of moles per unit volume, also called "molarity", and is used in the construction mole\_concentration\_of\_X\_in\_Y, where X is a material constituent of Y.  A chemical or biological species denoted by X may be described by a single term such as 'nitrogen' or a phrase such as 'nox\_expressed\_as\_nitrogen'.-->
 		<field id="CMIP7_o2sat" field_ref="?dummy_XYO"/>
 		<!--P3 (mol m-3) mole_concentration_of_dissolved_molecular_oxygen_in_sea_water_at_saturation : "Mole concentration at saturation" means the mole concentration in a saturated solution. Mole concentration means number of moles per unit volume, also called "molarity", and is used in the construction "mole\_concentration\_of\_X\_in\_Y", where X is a material constituent of Y. A chemical or biological species denoted by X may be described by a single term such as "nitrogen" or a phrase such as "nox\_expressed\_as\_nitrogen".-->
 		<field id="CMIP7_ocfriver" field_ref="?dummy_XY"/>

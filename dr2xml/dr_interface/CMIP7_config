@@ -1,4 +1,4 @@
-cache_dir: /home/rigoudyg/dev/DR2XML/CMIP7_data_request_cache
+cache_dir: /home/rigoudyg/dev/data_request/CMIP7_DReq_Software/data_request_api/data_request_api/content/dreq_api/dreq_res
 consolidate: false
 export: release
 log_file: default

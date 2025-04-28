@@ -159,14 +159,14 @@ lab_and_model_settings = {
     'institution_id': 'CNRM-CERFACS',
     # 'excluded_spshapes': ['XYA-na', 'XYG-na', 'na-A'],
     'mips': {
-        'HR': {"CERESMIP", "PAMIP", "SIMIP", "OMIP", "SOFIAMIP", "LMIP", "RFMIP", "AerChemMIP2", "AerChemMIP", "GeoMIP",
-             "TIPMIP", "DAMIP", "PMIP", "FAFMIP", "DCPP", "CDRMIP", "NAHosMIP", "ISMIP7", "CMIP", "ScenarioMIP",
-             "HighResMIP", "LUMIP", "Other", "VolMIP", "DynVarMIP", "HT-MIP/VolMIP", "CORDEX", "CFMIP", "C4MIP",
-             "WhatIfMIP", "VIACSAB", "FireMIP", "LongRunMIP", "FishMIP", "ISIMIP", "RAMIP"},
-        'LR': {"CERESMIP", "PAMIP", "SIMIP", "OMIP", "SOFIAMIP", "LMIP", "RFMIP", "AerChemMIP2", "AerChemMIP", "GeoMIP",
-             "TIPMIP", "DAMIP", "PMIP", "FAFMIP", "DCPP", "CDRMIP", "NAHosMIP", "ISMIP7", "CMIP", "ScenarioMIP",
-             "HighResMIP", "LUMIP", "Other", "VolMIP", "DynVarMIP", "HT-MIP/VolMIP", "CORDEX", "CFMIP", "C4MIP",
-             "WhatIfMIP", "VIACSAB", "FireMIP", "LongRunMIP", "FishMIP", "ISIMIP", "RAMIP"}
+        'HR': {"CERESMIP", "PAMIP", "SIMIP", "OMIP", "SOFIAMIP", "LMIP", "RFMIP", "AerChemMIP2", "GeoMIP", "TIPMIP",
+             "DAMIP", "PMIP", "FAFMIP", "DCPP", "CDRMIP", "NAHosMIP", "ISMIP7", "CMIP", "ScenarioMIP", "HighResMIP",
+             "LUMIP", "Other", "VolMIP", "HT-MIP/VolMIP", "CORDEX", "CFMIP", "C4MIP", "WhatIfMIP", "VIACSAB", "RAMIP",
+             "FireMIP", "IRRMIP", "LongRunMIP", "MISOMIP2", "FishMIP", "ISIMIP"},
+        'LR': {"CERESMIP", "PAMIP", "SIMIP", "OMIP", "SOFIAMIP", "LMIP", "RFMIP", "AerChemMIP2", "GeoMIP", "TIPMIP",
+             "DAMIP", "PMIP", "FAFMIP", "DCPP", "CDRMIP", "NAHosMIP", "ISMIP7", "CMIP", "ScenarioMIP", "HighResMIP",
+             "LUMIP", "Other", "VolMIP", "HT-MIP/VolMIP", "CORDEX", "CFMIP", "C4MIP", "WhatIfMIP", "VIACSAB", "RAMIP",
+             "FireMIP", "IRRMIP", "LongRunMIP", "MISOMIP2", "FishMIP", "ISIMIP"}
     },
     'non_standard_axes': {
         'siline': 'siline',

@@ -18,7 +18,7 @@ from .definition import SimpleObject
 from .definition import SimpleCMORVar as SimpleCMORVarBasic
 from .definition import SimpleDim as SimpleDimBasic
 from dr2xml.settings_interface import get_settings_values
-from ..utils import Dr2xmlError
+from ..utils import Dr2xmlError, is_elt_applicable
 
 data_request_path = get_settings_values("internal", "data_request_path")
 sys.path.append(data_request_path)
@@ -129,14 +129,22 @@ class DataRequest(DataRequestBasic):
             rep[new_dims] = spshp.name
         return rep
 
-    def get_cmorvars_list(self, select_mips, select_max_priority, **kwargs):
+    def get_cmorvars_list(self, select_mips, select_max_priority, select_included_vars, select_excluded_vars,
+                          select_included_tables, select_excluded_tables, select_excluded_pairs,
+                          experiment_filter=False, **kwargs):
         rep = defaultdict(set)
-        select_max_priority = self.data_request.find_element(element_type="max_priority_level",
-                                                             value=select_max_priority, key="value")
-        for var in self.data_request.find_variables(operation="all", skip_if_missing=False, # mips=select_mips,
-                                                    max_priority_level=select_max_priority):
+        var_list = self.data_request.filter_elements_per_request("variables", operation="all", skip_if_missing=False,
+                                                                 requests=dict(max_priority_level=select_max_priority))
+        if len(select_mips) > 0:
+            var_list = self.data_request.filter_elements_per_request(var_list, operation="any",
+                                                                     skip_if_missing=False,
+                                                                     requests=dict(mips=list(select_mips)))
+        for var in var_list:
             dr_var = SimpleCMORVar.get_from_dr(var, **kwargs)
-            rep[dr_var.id] = rep[dr_var.id] | set(dr_var.grids)
+            if is_elt_applicable(dr_var.mipTable, excluded=select_excluded_tables, included=select_included_tables) and\
+                    is_elt_applicable(dr_var.mipVarLabel, excluded=select_excluded_vars, included=select_included_vars) \
+                    and is_elt_applicable((dr_var.mipVarLabel, dr_var.mipTable), excluded=select_excluded_pairs):
+                rep[dr_var.id] = rep[dr_var.id] | set(dr_var.grids)
         return rep
 
 
@@ -192,7 +200,7 @@ class SimpleCMORVar(SimpleCMORVarBasic):
                    label_without_psuffix=str(input_var.physical_parameter.name),
                    label_non_ambiguous=str(input_var.name),
                    frequency=str(input_var.cmip7_frequency.name),
-                   mipTable=str(input_var.table_identifier.name),
+                   mipTable=str(input_var.cmip6_tables_identifier.name),
                    description=str(input_var.description),
                    stdname=str(input_var.physical_parameter.cf_standard_name.name),
                    units=str(input_var.physical_parameter.units),
