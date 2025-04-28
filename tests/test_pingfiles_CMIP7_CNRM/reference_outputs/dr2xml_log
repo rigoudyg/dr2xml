@@ -506,9 +506,6 @@ Priority_retain 3
 Variable considered: Eyr.cProductLut
 Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
 Priority_retain 3
-Variable considered: AERmon.ps
-Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
-Priority_retain 2
 Variable considered: Odec.masso
 Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
 Priority_retain 2
@@ -5342,9 +5339,6 @@ Priority_retain 3
 Variable considered: day.rls
 Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
 Priority_retain 3
-Variable considered: CFmon.ps
-Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
-Priority_retain 2
 Variable considered: Omon.pp
 Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
 Priority_retain 3
@@ -5600,7 +5594,7 @@ Priority_retain 2
 Variable considered: EmonZ.utendepfd
 Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([2, 3])
 Priority_retain 2
-Number of distinct CMOR variables (whatever the grid): 1865
+Number of distinct CMOR variables (whatever the grid): 1863
 Variable considered: AERmon.jno2
 Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
 Priority_retain 2
@@ -6102,9 +6096,6 @@ Priority_retain 3
 Variable considered: Eyr.cProductLut
 Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
 Priority_retain 3
-Variable considered: AERmon.ps
-Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
-Priority_retain 2
 Variable considered: Odec.masso
 Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
 Priority_retain 2
@@ -10938,9 +10929,6 @@ Priority_retain 3
 Variable considered: day.rls
 Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
 Priority_retain 3
-Variable considered: CFmon.ps
-Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
-Priority_retain 2
 Variable considered: Omon.pp
 Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
 Priority_retain 3
@@ -12202,12 +12190,6 @@ Priority_retain 3
 Variable considered: Eyr.cProductLut
 Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
 Priority_retain 3
-Variable considered: AERmon.ps
-Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
-Priority_retain 2
-Variable considered: AERmon.ps
-Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
-Priority_retain 2
 Variable considered: Odec.masso
 Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
 Priority_retain 2
@@ -21874,12 +21856,6 @@ Priority_retain 3
 Variable considered: day.rls
 Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
 Priority_retain 3
-Variable considered: CFmon.ps
-Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
-Priority_retain 2
-Variable considered: CFmon.ps
-Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
-Priority_retain 2
 Variable considered: Omon.pp
 Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
 Priority_retain 3
@@ -22888,9 +22864,6 @@ Priority_retain 3
 Variable considered: Eyr.cProductLut
 Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
 Priority_retain 3
-Variable considered: AERmon.ps
-Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
-Priority_retain 2
 Variable considered: Odec.masso
 Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
 Priority_retain 2
@@ -27724,9 +27697,6 @@ Priority_retain 3
 Variable considered: day.rls
 Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
 Priority_retain 3
-Variable considered: CFmon.ps
-Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
-Priority_retain 2
 Variable considered: Omon.pp
 Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
 Priority_retain 3
@@ -27982,7 +27952,7 @@ Priority_retain 2
 Variable considered: EmonZ.utendepfd
 Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([2, 3])
 Priority_retain 2
-Number of simplified vars is: 1865
+Number of simplified vars is: 1863
 Issues with standard names are: []
 Info: No HOMEvars list provided.
 
@@ -28010,7 +27980,7 @@ No file
 processing file ./input/special_defs/DX_field_defs_seaIce.xml:
 No file
 414 variables written for current_directory/test_pingfiles_CMIP7_CNRM/test_outputs//ping_nemo.xml
-Number of distinct CMOR variables (whatever the grid): 1865
+Number of distinct CMOR variables (whatever the grid): 1863
 Variable considered: AERmon.jno2
 Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
 Priority_retain 2
@@ -28512,9 +28482,6 @@ Priority_retain 3
 Variable considered: Eyr.cProductLut
 Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
 Priority_retain 3
-Variable considered: AERmon.ps
-Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
-Priority_retain 2
 Variable considered: Odec.masso
 Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
 Priority_retain 2
@@ -33348,9 +33315,6 @@ Priority_retain 3
 Variable considered: day.rls
 Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
 Priority_retain 3
-Variable considered: CFmon.ps
-Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
-Priority_retain 2
 Variable considered: Omon.pp
 Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
 Priority_retain 3
@@ -34108,9 +34072,6 @@ Priority_retain 3
 Variable considered: Eyr.cProductLut
 Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
 Priority_retain 3
-Variable considered: AERmon.ps
-Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
-Priority_retain 2
 Variable considered: Odec.masso
 Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
 Priority_retain 2
@@ -38944,9 +38905,6 @@ Priority_retain 3
 Variable considered: day.rls
 Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
 Priority_retain 3
-Variable considered: CFmon.ps
-Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
-Priority_retain 2
 Variable considered: Omon.pp
 Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
 Priority_retain 3
@@ -39202,7 +39160,7 @@ Priority_retain 2
 Variable considered: EmonZ.utendepfd
 Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([2, 3])
 Priority_retain 2
-Number of simplified vars is: 1865
+Number of simplified vars is: 1863
 Issues with standard names are: []
 Info: No HOMEvars list provided.
 
@@ -39221,12 +39179,12 @@ For table 6hrPlevPt: zg500 ta hus ta ua va rv850 zg psl zg925 zg700 vaUTLS va200
 For table AERday: toz cod zg10 ua10 wetnoy wetnh4 wetnh3 so2 sfpm25 sfpm10 sfpm1 mmrss mmrsoa mmrso4 mmroa mmrno3 mmrnh4 mmrdust mmrbc mmraerh2o drynoy drynh4 drynh3 co sfo3max od550aer zg500 maxpblz minpblz zg1000 wetnoy wetnh4 wetnh3 so2 sfpm25 sfpm10 sfpm1 mmrss mmrsoa mmrso4 mmroa mmrno3 mmrnh4 mmrdust mmrbc mmraerh2o drynoy drynh4 drynh3 co
 For table AERfx: o3ref o3ref ch4ref o3ref ch4ref
 For table AERhr: sfpm25 sfno2 sfo3 sfpm10 sfpm1 tas ps sfpm10 sfpm1
-For table AERmon: jno2 pod0 cltc pfull bldep phalf od550csaer od550soa c3h6 hcho wetnh4 c3h8 wetnh3 wetso2 wetso4 mmrpm1 photo1d no2 mmrno3 ch3coch3 cdnc emidust od550lt1aer c2h6 wetdust o3prod mmrpm2p5 emibc ttop od550bb mmrso4 wetnoy co2 dryo3 abs550aer od550ss o3loss mmrss chepsoa mmrdust o3 hcl emioa airmass od443aer wa reffclwtop emiso4 isop mmrsoa toz od550so4 oh mmrbc cod dryoa emiss wetoa emibvoc co dryso4 dryso2 wetbc lwp drybc hno3 chepasoa tatp drynh3 od550bc drynh4 od550dust emianox mmrnh4 so2 emiaoa emiaco chegpso4 emilnox eminox dms ch4 ua va n2o mmroa od550no3 drynoy emico no tropoz h2o mmrpm10 emidms dryss pan od550aer emiso2 cheaqpso4 od550aerh2o od550oa emiisop mmraerh2o od865aer ccn eminh3 wetss drydust emivoc nh50 aoanh rluscsaf hcfc22 hfc125 hfc134a cfc114 wetno3 wethno3 tropo3ste tropdo3chm tropch4lossoh tropch4loss stratch4loss rsuto3ref rsutcso3ref rsutcsch4ref rsutch4ref rluto3ref rlutcso3ref rlutcsch4ref rlutch4ref o3inst meanage h2prod h2loss h2 emilkch4 emih2 emich4 emich3oh emic4h10 emic3h8 emic3h6 emic2h6 emic2h5oh emic2h4 emibbvoc emibbso2 emibboa emibbnox emibbnh3 emibbdms emibbco emibbch4 emibbbc emiavnox emiach4 e90inst dryno3 dryhno3 dryh2 do3chm conccn chepno3 chepnh4 chegph2oo1d ch4losssoil ch3oh ccn02 ccn1 c4h10 c2h5oh c2h4 abs550ss abs550so4 abs550oa abs550no3 abs550dust abs550bc rsutcsaf rsutaf rlutaf rlutcsaf lossch4 lossco lossn2o tntrs tntrl ptp ztp zg ps dms wetno3 wethno3 tropo3ste tropdo3chm tropch4lossoh tropch4loss stratch4loss rsuto3ref rsutcso3ref rsutcsch4ref rsutch4ref rluto3ref rlutcso3ref rlutcsch4ref rlutch4ref o3inst meanage h2prod h2loss h2 emilkch4 emih2 emich4 emich3oh emic4h10 emic3h8 emic3h6 emic2h6 emic2h5oh emic2h4 emibbvoc emibbso2 emibboa emibbnox emibbnh3 emibbdms emibbco emibbch4 emibbbc emiavnox emiach4 e90inst dryno3 dryhno3 dryh2 do3chm conccn chepno3 chepnh4 chegph2oo1d ch4losssoil ch3oh ccn02 ccn1 c4h10 c2h5oh c2h4 abs550ss abs550so4 abs550oa abs550no3 abs550dust abs550bc o3ste
+For table AERmon: jno2 pod0 cltc pfull bldep phalf od550csaer od550soa c3h6 hcho wetnh4 c3h8 wetnh3 wetso2 wetso4 mmrpm1 photo1d no2 mmrno3 ch3coch3 cdnc emidust od550lt1aer c2h6 wetdust o3prod mmrpm2p5 emibc ttop od550bb mmrso4 wetnoy co2 dryo3 abs550aer od550ss o3loss mmrss chepsoa mmrdust o3 hcl emioa airmass od443aer wa reffclwtop emiso4 isop mmrsoa toz od550so4 oh mmrbc cod dryoa emiss wetoa emibvoc co dryso4 dryso2 wetbc lwp drybc hno3 chepasoa tatp drynh3 od550bc drynh4 od550dust emianox mmrnh4 so2 emiaoa emiaco chegpso4 emilnox eminox dms ch4 ua va n2o mmroa od550no3 drynoy emico no tropoz h2o mmrpm10 emidms dryss pan od550aer emiso2 cheaqpso4 od550aerh2o od550oa emiisop mmraerh2o od865aer ccn eminh3 wetss drydust emivoc nh50 aoanh rluscsaf hcfc22 hfc125 hfc134a cfc114 wetno3 wethno3 tropo3ste tropdo3chm tropch4lossoh tropch4loss stratch4loss rsuto3ref rsutcso3ref rsutcsch4ref rsutch4ref rluto3ref rlutcso3ref rlutcsch4ref rlutch4ref o3inst meanage h2prod h2loss h2 emilkch4 emih2 emich4 emich3oh emic4h10 emic3h8 emic3h6 emic2h6 emic2h5oh emic2h4 emibbvoc emibbso2 emibboa emibbnox emibbnh3 emibbdms emibbco emibbch4 emibbbc emiavnox emiach4 e90inst dryno3 dryhno3 dryh2 do3chm conccn chepno3 chepnh4 chegph2oo1d ch4losssoil ch3oh ccn02 ccn1 c4h10 c2h5oh c2h4 abs550ss abs550so4 abs550oa abs550no3 abs550dust abs550bc rsutcsaf rsutaf rlutaf rlutcsaf lossch4 lossco lossn2o tntrs tntrl ptp ztp zg dms wetno3 wethno3 tropo3ste tropdo3chm tropch4lossoh tropch4loss stratch4loss rsuto3ref rsutcso3ref rsutcsch4ref rsutch4ref rluto3ref rlutcso3ref rlutcsch4ref rlutch4ref o3inst meanage h2prod h2loss h2 emilkch4 emih2 emich4 emich3oh emic4h10 emic3h8 emic3h6 emic2h6 emic2h5oh emic2h4 emibbvoc emibbso2 emibboa emibbnox emibbnh3 emibbdms emibbco emibbch4 emibbbc emiavnox emiach4 e90inst dryno3 dryhno3 dryh2 do3chm conccn chepno3 chepnh4 chegph2oo1d ch4losssoil ch3oh ccn02 ccn1 c4h10 c2h5oh c2h4 abs550ss abs550so4 abs550oa abs550no3 abs550dust abs550bc o3ste
 For table AERmonZ: meanage va n2o vt100 bry oh noy hno3 h2o ch4 cly ho2 o3 hcl ua zg ta
 For table Amon: rluscs prra aod550volso4 co2 co2 ccb cct ci cl cli clivi clt clw clwvi co2 co2mass evspsbl fco2antt fco2fos fco2nat hfls hfss hur hurs hus huss mc pfull phalf pr prc prsn prw ps psl rlds rldscs rlus rlut rlutcs rsds rsdscs rsdt rsus rsuscs rsut rsutcs rtmt sci sfcWind ta tas tasmax tasmin tauu tauv ts ua uas va vas wap zg o3 o3 ch4 ch4 n2o n2o cfc113global cfc11global cfc12global ch4 ch4global hcfc22global n2o n2oglobal sbl
 For table CF3hr: ts clic clis clwc clws dtauc dtaus pfull reffclic reffclis reffclwc reffclws ta clivi clt clwvi pr prw rlds rldscs rlut rlutcs rsds rsdscs rsut rsutcs hurs
 For table CFday: clisccp hur700 albisccp ccb cct cl clcalipso clhcalipso cli clivi cllcalipso clmcalipso cltcalipso cltisccp clw clwvi hur hus mc pctisccp pfull phalf ps rldscs rlutcs rsdscs rsdt rsuscs rsut rsutcs ta700 ta ua va wap500 wap zg
-For table CFmon: clisccp clwvimodis cltmodis clmodisliquidReff clmodisliquid clmodisiceReff clivimodis clmodisice clmodis evu edt albisccp clc clcalipso clhcalipso clic clis cllcalipso clmcalipso cls cltcalipso cltisccp clwc clws dmc hur hus mcd mcu pctisccp rld4co2 rld rldcs4co2 rldcs rlu4co2 rlu rlucs4co2 rlucs rlut4co2 rlutcs4co2 rsd4co2 rsd rsdcs4co2 rsdcs rsu4co2 rsu rsucs4co2 rsucs rsut4co2 rsutcs4co2 smc ta tnhus tnhusa tnhusc tnhusd tnhusmp tnhusscpbl tnt tnta tntc tntmp tntr tntscpbl ps
+For table CFmon: clisccp clwvimodis cltmodis clmodisliquidReff clmodisliquid clmodisiceReff clivimodis clmodisice clmodis evu edt albisccp clc clcalipso clhcalipso clic clis cllcalipso clmcalipso cls cltcalipso cltisccp clwc clws dmc hur hus mcd mcu pctisccp rld4co2 rld rldcs4co2 rldcs rlu4co2 rlu rlucs4co2 rlucs rlut4co2 rlutcs4co2 rsd4co2 rsd rsdcs4co2 rsdcs rsu4co2 rsu rsucs4co2 rsucs rsut4co2 rsutcs4co2 smc ta tnhus tnhusa tnhusc tnhusd tnhusmp tnhusscpbl tnt tnta tntc tntmp tntr tntscpbl
 For table CFsubhr: tas ts psl ps uas vas sfcWind hurs huss pr prsn prc evspsbl tauu tauv hfls hfss rlds rlus rsds rsus rsdscs rsuscs rldscs rsdt rsut rlut rlutcs rsutcs prw clt clwvi clivi rtmt ccb cct ci sci fco2antt fco2fos fco2nat cl clw cli mc ta ua va hus hur wap zg rlu rsu rld rsd rlucs rsucs rldcs rsdcs tnt tnta tntmp tntscpbl tntr tntc tnhus tnhusa tnhusc tnhusd tnhusscpbl tnhusmp evu edt pfull phalf sbl
 For table E1hr: vas uas ts sfcWind rsus rsds rlus rlds ps hurs hfss hfls clt bldep rsdsdiff huss wsgmax10m wsgmax100m va100m ua100m pr psl tas
 For table E1hrClimMon: rsdt rsut rlut rsutcs rlutcs

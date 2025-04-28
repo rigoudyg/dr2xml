@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <context id="nemo">
-	<!--CMIP7 Data Request version Software 1.1.3.dev47+g35c67bc - Content v1.2-->
+	<!--CMIP7 Data Request version Software 1.1.3.dev47+g35c67bc - Content v1.2.1-->
 	<!--dr2xml version current_version-->
 	<!--Lab_and_model settings
-{'data_request_content_version' = 'v1.2',
+{'data_request_content_version' = 'v1.2.1',
 'data_request_path' = 'current_data_request',
 'data_request_used' = 'CMIP7',
 'excluded_vars' = [],
@@ -22,7 +22,7 @@
 {}-->
 	<!--Year processed None-->
 	<field_definition>
-		<field id="CMIP7_absscint" field_ref="?dummy_XY_swplayers"/>
+		<field id="CMIP7_absscint" field_ref="?dummy_XY_oplayer4"/>
 		<!--P2 (kg m-2) integral_wrt_depth_of_sea_water_absolute_salinity_expressed_as_salt_mass_content : This is a fundamental aspect of the changes in the hydrological cycle and their impact on the oceans, and due to new numerical schemes and vertical discretizations, it is important to calculate it consistently with the model formulation.-->
 		<field id="CMIP7_agessc" field_ref="?dummy_XYO"/>
 		<!--P2 (yr) sea_water_age_since_surface_contact : Time elapsed since water was last in surface layer of the ocean.-->
@@ -38,7 +38,7 @@
 		<!--P1 (degC) sea_water_conservative_temperature : Diagnostic should be contributed only for models using conservative temperature as prognostic field.-->
 		<field id="CMIP7_bigthetaoga" field_ref="?dummy_XY"/>
 		<!--P2 (degC) sea_water_conservative_temperature : Diagnostic should be contributed only for models using conservative temperature as prognostic field.-->
-		<field id="CMIP7_chcint" field_ref="?dummy_XY_swplayers"/>
+		<field id="CMIP7_chcint" field_ref="?dummy_XY_oplayer4"/>
 		<!--P2 (J m-2) integral_wrt_depth_of_sea_water_conservative_temperature_expressed_as_heat_content : This is the vertically-integrated heat content derived from conservative temperature (bigthetao).-->
 		<field id="CMIP7_deptho" field_ref="?dummy_XY_depthseafloor"/>
 		<!--P1 (m) sea_floor_depth_below_geoid : Ocean bathymetry. Reported here is the sea floor depth for present day relative to z=0 geoid. Reported as missing for land grid cells.-->
@@ -112,7 +112,7 @@
 		<!--P2 (kg s-1) ocean_meridional_overturning_mass_streamfunction : Overturning mass streamfunction arising from all advective mass transport processes, resolved and parameterized.-->
 		<field id="CMIP7_msftmzmpa" field_ref="?dummy_basin_merid_section"/>
 		<!--P3 (kg s-1) ocean_meridional_overturning_mass_streamfunction_due_to_parameterized_mesoscale_eddy_advection : CMIP5 called this "due to Bolus Advection".  Name change respects the more general physics of the mesoscale parameterizations.-->
-		<field id="CMIP7_msftyrho" field_ref="?dummy_XY_gridlatitude_rho"/>
+		<field id="CMIP7_msftyrho" field_ref="?dummy_XY_rho"/>
 		<!--P2 (kg s-1) ocean_y_overturning_mass_streamfunction : Overturning mass streamfunction arising from all advective mass transport processes, resolved and parameterized.-->
 		<field id="CMIP7_msftyz" field_ref="?dummy_XY_gridlatitude"/>
 		<!--P2 (kg s-1) ocean_y_overturning_mass_streamfunction : Overturning mass streamfunction arising from all advective mass transport processes, resolved and parameterized.-->
@@ -122,9 +122,9 @@
 		<!--P2 (W m-2) tendency_of_sea_water_potential_temperature_expressed_as_heat_content : Tendency of heat content for a grid cell from all processes. Reported only for models that use potential temperature as prognostic field.-->
 		<field id="CMIP7_pbo" field_ref="?dummy_XY_depthseafloor"/>
 		<!--P2 (Pa) sea_water_pressure_at_sea_floor : "Sea water pressure" is the pressure that exists in the medium of sea water.  It includes the pressure due to overlying sea water, sea ice, air and any other medium that may be present.-->
-		<field id="CMIP7_pfscint" field_ref="?dummy_XY_swplayers"/>
+		<field id="CMIP7_pfscint" field_ref="?dummy_XY_oplayer4"/>
 		<!--P2 (kg m-2) integral_wrt_depth_of_sea_water_preformed_salinity_expressed_as_salt_mass_content : This is a fundamental aspect of the changes in the hydrological cycle and their impact on the oceans, and due to new numerical schemes and vertical discretizations, it is important to calculate it consistently with the model formulation.-->
-		<field id="CMIP7_phcint" field_ref="?dummy_XY_swplayers"/>
+		<field id="CMIP7_phcint" field_ref="?dummy_XY_oplayer4"/>
 		<!--P2 (J m-2) integral_wrt_depth_of_sea_water_potential_temperature_expressed_as_heat_content : This is the vertically-integrated heat content derived from potential temperature (thetao).-->
 		<field id="CMIP7_pso" field_ref="?dummy_XY"/>
 		<!--P2 (Pa) sea_water_pressure_at_sea_water_surface : The surface called "surface" means the lower boundary of the atmosphere.  "Sea water pressure" is the pressure that exists in the medium of sea water.  It includes the pressure due to overlying sea water, sea ice, air and any other medium that may be present.-->
@@ -142,7 +142,7 @@
 		<!--P2 (W m-2) surface_upwelling_shortwave_flux_in_air : Surface Upwelling Shortwave Radiation over the portion of a land grid cell covered by snow. Can be used for computation of surface albedo.-->
 		<field id="CMIP7_rsussi" field_ref="?dummy_XY"/>
 		<!--P2 (W m-2) surface_upwelling_shortwave_flux_in_air : Surface Upwelling Shortwave Radiation over the portion of an ocean grid cell covered by sea ice, including snow. Can be used for computation of surface albedo.-->
-		<field id="CMIP7_scint" field_ref="?dummy_XY_swplayers"/>
+		<field id="CMIP7_scint" field_ref="?dummy_XY_oplayer4"/>
 		<!--P2 (kg m-2) integral_wrt_depth_of_sea_water_practical_salinity_expressed_as_salt_mass_content : This is a fundamental aspect of the changes in the hydrological cycle and their impact on the oceans, and due to new numerical schemes and vertical discretizations, it is important to calculate it consistently with the model formulation.-->
 		<field id="CMIP7_sduo" field_ref="?dummy_XY"/>
 		<!--P2 (m s-1) sea_surface_wave_stokes_drift_eastward_velocity : The eastward component of the net drift velocity of ocean water caused by surface wind-sea waves. The Stokes drift velocity could be defined as the difference between the average Lagrangian flow velocity of a fluid parcel, and the average Eulerian flow velocity of the fluid at a fixed position.-->

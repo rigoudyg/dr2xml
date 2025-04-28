@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <context id="arpsfx">
-	<!--CMIP7 Data Request version Software 1.1.3.dev47+g35c67bc - Content v1.2-->
+	<!--CMIP7 Data Request version Software 1.1.3.dev47+g35c67bc - Content v1.2.1-->
 	<!--dr2xml version current_version-->
 	<!--Lab_and_model settings
-{'data_request_content_version' = 'v1.2',
+{'data_request_content_version' = 'v1.2.1',
 'data_request_path' = 'current_data_request',
 'data_request_used' = 'CMIP7',
 'excluded_vars' = [],
@@ -47,7 +47,7 @@
 		<field id="CMIP7_albc" field_ref="?dummy_XY"/>
 		<!--P2 (1) canopy_albedo : Canopy Albedo-->
 		<field id="CMIP7_albisccp" field_ref="?dummy_XY"/>
-		<!--P2 (1) cloud_albedo : time-means weighted by the ISCCP Total Cloud Fraction - see <http://cfmip.metoffice.com/COSP.html>-->
+		<!--P2 (1) cloud_albedo : time-means weighted by the ISCCP Total Cloud Fraction - see <https://www.cfmip.org/tools-and-data/cosp>-->
 		<field id="CMIP7_albsn" field_ref="?dummy_XY"/>
 		<!--P2 (1) surface_albedo : This is similar to Eday.albsn, but providing monthly averages-->
 		<field id="CMIP7_albsrfc" field_ref="?dummy_XY"/>
@@ -189,7 +189,7 @@
 		<field id="CMIP7_ch4losssoil" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2 s-1) surface_downward_mass_flux_of_methane_due_to_soil_biological_consumption : Loss rate of methane from the atmosphere due to soil sink-->
 		<field id="CMIP7_ch4ref" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (W m-2) reference_mole_fraction_of_methane_in_air : This is the methane mole fraction that is used in a diagnostic call to the model's radiation scheme. It is only applicable when a methane double call is active in the model.-->
+		<!--P2 (mol mol-1) reference_mole_fraction_of_methane_in_air : This is the methane mole fraction that is used in a diagnostic call to the model's radiation scheme. It is only applicable when a methane double call is active in the model.-->
 		<field id="CMIP7_cheaqpso4" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_sulfate_dry_aerosol_particles_due_to_aqueous_phase_net_chemical_production : proposed name: tendency\_of\_atmosphere\_mass\_content\_of\_sulfate\_dry\_aerosol\_due\_to\_aqueous\_phase\_net\_chemical\_production-->
 		<field id="CMIP7_chegph2oo1d" field_ref="?dummy_XYA_alevel"/>
@@ -247,15 +247,15 @@
 		<field id="CMIP7_clmisr" field_ref="?dummy_XY_alt16"/>
 		<!--P2 (%) cloud_area_fraction_in_atmosphere_layer : MISR cloud area fraction-->
 		<field id="CMIP7_clmodis" field_ref="?dummy_XY_plev7c"/>
-		<!--P2 (1) modis_cloud_area_fraction : Percentage of total cloud cover in optical depth categories, as seen by the MODIS instrument simulator. Dimensions of tau (optical depth) and cloud-top pressure are the same used by the ISCCP instrument simulator. This is the equivalent MODIS version of the ISCCP _clisccp _variable.-->
+		<!--P2 (%) modis_cloud_area_fraction : Percentage of total cloud cover in optical depth categories, as seen by the MODIS instrument simulator. Dimensions of tau (optical depth) and cloud-top pressure are the same used by the ISCCP instrument simulator. This is the equivalent MODIS version of the ISCCP _clisccp _variable.-->
 		<field id="CMIP7_clmodisice" field_ref="?dummy_XY_plev7c"/>
-		<!--P2 (1) modis_ice_topped_cloud_area_fraction : Percentage ice-cloud cover in optical depth categories, as seen by the MODIS instrument simulator. Dimensions of tau (optical depth) and cloud-top pressure are the same as used by clisccp output from the ISCCP satellite simulator.-->
+		<!--P2 (%) modis_ice_topped_cloud_area_fraction : Percentage ice-cloud cover in optical depth categories, as seen by the MODIS instrument simulator. Dimensions of tau (optical depth) and cloud-top pressure are the same as used by clisccp output from the ISCCP satellite simulator.-->
 		<field id="CMIP7_clmodisiceReff" field_ref="?dummy_XY"/>
-		<!--P2 (1) modis_ice_topped_cloud_area_fraction : Percentage ice-cloud cover as seen by the MODIS instrument simulator. Dimensions of cloud IWP (cloud ice water path) and r\_eff (effective droplet size).-->
+		<!--P2 (%) modis_ice_topped_cloud_area_fraction : Percentage ice-cloud cover as seen by the MODIS instrument simulator. Dimensions of cloud IWP (cloud ice water path) and r\_eff (effective droplet size).-->
 		<field id="CMIP7_clmodisliquid" field_ref="?dummy_XY_plev7c"/>
-		<!--P2 (1) modis_liquid_topped_cloud_area_fraction : Percentage liquid-cloud cover in optical depth categories, as seen by the MODIS instrument simulator. Dimensions of tau (optical depth) and cloud-top pressure are the same used by clisccp (ISCCP simulator).-->
+		<!--P2 (%) modis_liquid_topped_cloud_area_fraction : Percentage liquid-cloud cover in optical depth categories, as seen by the MODIS instrument simulator. Dimensions of tau (optical depth) and cloud-top pressure are the same used by clisccp (ISCCP simulator).-->
 		<field id="CMIP7_clmodisliquidReff" field_ref="?dummy_XY"/>
-		<!--P2 (1) modis_liquid_topped_cloud_area_fraction : Percentage liquid-cloud cover as seen by the MODIS instrument simulator. Dimensions of LWP (cloud liquid water path) and r\_eff (droplet effective radius).-->
+		<!--P2 (%) modis_liquid_topped_cloud_area_fraction : Percentage liquid-cloud cover as seen by the MODIS instrument simulator. Dimensions of LWP (cloud liquid water path) and r\_eff (droplet effective radius).-->
 		<field id="CMIP7_cls" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (%) stratiform_cloud_area_fraction_in_atmosphere_layer : Cloud area fraction (reported as a percentage) for the whole atmospheric column due to stratiform clouds, as seen from the surface or the top of the atmosphere. Includes both large-scale and convective cloud.-->
 		<field id="CMIP7_clt" field_ref="?dummy_XY"/>
@@ -549,7 +549,7 @@
 		<field id="CMIP7_fracInLut" field_ref="?dummy_XY"/>
 		<!--P3 (%) area_fraction : Cumulative percentage transitions over the year; note that percentage should be reported as a percentage of atmospheric grid cell-->
 		<field id="CMIP7_fracLut" field_ref="?dummy_XY"/>
-		<!--P3 (%) area_fraction : End of year values (not annual mean); note that percentage should be reported as percentage of land grid cell (example: frac\_lnd = 0.5, frac\_ocn = 0.5, frac\_crop\_lnd = 0.2 (of land portion of grid cell), then frac\_lut(crop) = 0.5\*0.2 = 0.1)-->
+		<!--P3 (%) area_fraction : End of month values (not monthly mean); note that percentage should be reported as percentage of land grid cell (example: frac\_lnd = 0.5, frac\_ocn = 0.5, frac\_crop\_lnd = 0.2 (of land portion of grid cell), then frac\_lut(crop) = 0.5\*0.2 = 0.1)-->
 		<field id="CMIP7_fracOutLut" field_ref="?dummy_XY"/>
 		<!--P3 (%) area_fraction : Cumulative percentage transitions over the year; note that percentage should be reported as percentage of atmospheric grid cell-->
 		<field id="CMIP7_gpp" field_ref="?dummy_XY"/>
@@ -955,7 +955,7 @@ where T is 2 m temperature (degrees F), R is relative humidity (%)-->
 		<field id="CMIP7_pastureFracC4" field_ref="?dummy_XY"/>
 		<!--P3 (%) area_fraction : Percentage of entire grid cell covered by C4 pasture-->
 		<field id="CMIP7_pctisccp" field_ref="?dummy_XY"/>
-		<!--P2 (Pa) air_pressure_at_cloud_top : time-means weighted by the ISCCP Total Cloud Fraction - see <http://cfmip.metoffice.com/COSP.html>-->
+		<!--P2 (Pa) air_pressure_at_cloud_top : time-means weighted by the ISCCP Total Cloud Fraction - see <https://www.cfmip.org/tools-and-data/cosp>-->
 		<field id="CMIP7_pflw" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2) liquid_water_content_of_permafrost_layer : "where land over land", i.e., this is the total mass of liquid water contained within the permafrost layer within the land portion of a grid cell divided by the area of the land portion of the cell.-->
 		<field id="CMIP7_pfull" field_ref="?dummy_XYA_alevel"/>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <context id="nemo">
-	<!--CMIP7 Data Request version Software 1.1.3.dev47+g35c67bc - Content v1.2-->
+	<!--CMIP7 Data Request version Software 1.1.3.dev47+g35c67bc - Content v1.2.1-->
 	<!--dr2xml version current_version-->
 	<!--Lab_and_model settings
-{'data_request_content_version' = 'v1.2',
+{'data_request_content_version' = 'v1.2.1',
 'data_request_path' = 'current_data_request',
 'data_request_used' = 'CMIP7',
 'excluded_vars' = [],

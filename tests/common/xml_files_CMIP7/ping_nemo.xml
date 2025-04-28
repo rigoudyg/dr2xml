@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <context id="nemo">
-	<!--CMIP7 Data Request version Software 1.1.3.dev47+g35c67bc - Content v1.2-->
+	<!--CMIP7 Data Request version Software 1.1.3.dev47+g35c67bc - Content v1.2.1-->
 	<!--dr2xml version 3.1-->
 	<!--Lab_and_model settings
-{'data_request_content_version' = 'v1.2',
+{'data_request_content_version' = 'v1.2.1',
 'data_request_path' = 'current_data_request',
 'data_request_used' = 'CMIP7',
 'excluded_vars' = [],
@@ -22,7 +22,7 @@
 {}-->
 	<!--Year processed None-->
 	<field_definition>
-		<field id="CMIP7_absscint" field_ref="?dummy_XY_swplayers"/>
+		<field id="CMIP7_absscint" field_ref="?dummy_XY_oplayer4"/>
 		<!--P2 (kg m-2) integral_wrt_depth_of_sea_water_absolute_salinity_expressed_as_salt_mass_content : This is a fundamental aspect of the changes in the hydrological cycle and their impact on the oceans, and due to new numerical schemes and vertical discretizations, it is important to calculate it consistently with the model formulation.-->
 		<field id="CMIP7_agessc" expr="@Age_e3t/@e3t" field_ref="Age" > Age_e3t/e3t </field>
 		<!--P2 (yr) sea_water_age_since_surface_contact : Time elapsed since water was last in surface layer of the ocean.-->
@@ -44,7 +44,7 @@
 		<!--P3 (mol m-3) mole_concentration_of_calcite_expressed_as_carbon_in_sea_water : sum of particulate calcite component concentrations (e.g. Phytoplankton, Detrital, etc.)-->
 		<field id="CMIP7_calcos" field_ref="?dummy_XY"/>
 		<!--P2 (mol m-3) mole_concentration_of_calcite_expressed_as_carbon_in_sea_water : sum of particulate calcite component concentrations (e.g. Phytoplankton, Detrital, etc.)-->
-		<field id="CMIP7_chcint" field_ref="?dummy_XY_swplayers"/>
+		<field id="CMIP7_chcint" field_ref="?dummy_XY_oplayer4"/>
 		<!--P2 (J m-2) integral_wrt_depth_of_sea_water_conservative_temperature_expressed_as_heat_content : This is the vertically-integrated heat content derived from conservative temperature (bigthetao).-->
 		<field id="CMIP7_chl" field_ref="NCHL_E3T" expr="@NCHL_E3T / @e3t / 1e3 + @DCHL_E3T / @e3t / 1e3"/>
 		<!--P2 (kg m-3) mass_concentration_of_phytoplankton_expressed_as_chlorophyll_in_sea_water : sum of chlorophyll from all phytoplankton group concentrations.  In most models this is equal to chldiat+chlmisc, that is the sum of "Diatom Chlorophyll Mass Concentration" plus "Other Phytoplankton Chlorophyll Mass Concentration"-->
@@ -152,23 +152,23 @@
 		<!--P3 (mol m-2 s-1) sinking_mole_flux_of_particulate_silicon_in_sea_water : In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.   'Sinking' is the gravitational settling of particulate matter suspended in a liquid. A sinking flux is positive downwards and is calculated relative to the movement of the surrounding fluid.-->
 		<field id="CMIP7_evs" field_ref="evap_ao_cea"/>
 		<!--P3 (kg m-2 s-1) water_evapotranspiration_flux : computed as the total mass of water vapor evaporating from the ice-free portion of the ocean  divided by the area of the ocean portion of the grid cell.-->
-		<field id="CMIP7_exparagob" field_ref="?dummy_XY"/>
+		<field id="CMIP7_exparagob" field_ref="?dummy_XY_depthseafloor"/>
 		<!--P3 (mol m-2 s-1) sinking_mole_flux_of_aragonite_expressed_as_carbon_in_sea_water : Downward sinking flux of aragonite at seafloor-->
 		<field id="CMIP7_expc" field_ref="EXPC"/>
 		<!--P2 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_matter_expressed_as_carbon_in_sea_water : Downward flux of particulate organic carbon-->
 		<field id="CMIP7_expcalc" field_ref="EXPCAL"/>
 		<!--P2 (mol m-2 s-1) sinking_mole_flux_of_calcite_expressed_as_carbon_in_sea_water : Downward flux of Calcite-->
-		<field id="CMIP7_expcalcob" field_ref="?dummy_XY"/>
+		<field id="CMIP7_expcalcob" field_ref="?dummy_XY_depthseafloor"/>
 		<!--P3 (mol m-2 s-1) sinking_mole_flux_of_calcite_expressed_as_carbon_in_sea_water : Downward sinking flux of calcite at seafloor-->
-		<field id="CMIP7_expcob" field_ref="?dummy_XY"/>
+		<field id="CMIP7_expcob" field_ref="?dummy_XY_depthseafloor"/>
 		<!--P3 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_matter_expressed_as_carbon_in_sea_water : Downward sinking flux of particulate organic carbon at seafloor-->
-		<field id="CMIP7_expfeob" field_ref="?dummy_XY"/>
+		<field id="CMIP7_expfeob" field_ref="?dummy_XY_depthseafloor"/>
 		<!--P3 (mol m-2 s-1) sinking_mole_flux_of_particulate_iron_in_sea_water : Downward sinking flux of particulate iron at seafloor-->
-		<field id="CMIP7_expnob" field_ref="?dummy_XY"/>
+		<field id="CMIP7_expnob" field_ref="?dummy_XY_depthseafloor"/>
 		<!--P3 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_nitrogen_in_sea_water : Downward sinking flux of particulate organic nitrogen at seafloor-->
-		<field id="CMIP7_exppob" field_ref="?dummy_XY"/>
+		<field id="CMIP7_exppob" field_ref="?dummy_XY_depthseafloor"/>
 		<!--P3 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_phosphorus_in_sea_water : Downward sinking flux of particulate organic phosphorus at seafloor-->
-		<field id="CMIP7_expsiob" field_ref="?dummy_XY"/>
+		<field id="CMIP7_expsiob" field_ref="?dummy_XY_depthseafloor"/>
 		<!--P3 (mol m-2 s-1) sinking_mole_flux_of_particulate_silicon_in_sea_water : Downward sinking flux of particulate silicon at seafloor-->
 		<field id="CMIP7_fg13co2" field_ref="?dummy_XY"/>
 		<!--P4 (kg m-2 s-1) surface_downward_mass_flux_of_13C_dioxide_abiotic_analogue_expressed_as_13C : Gas exchange flux of abiotic 13CO2 (positive into ocean)-->
@@ -336,9 +336,9 @@
 		<!--P3 (kg s-1) ocean_meridional_overturning_mass_streamfunction_due_to_parameterized_mesoscale_eddy_advection : CMIP5 called this "due to Bolus Advection".  Name change respects the more general physics of the mesoscale parameterizations.-->
 		<field id="CMIP7_msftmzsmpa" field_ref="?dummy_basin_merid_section"/>
 		<!--P4 (kg s-1) ocean_meridional_overturning_mass_streamfunction_due_to_parameterized_submesoscale_eddy_advection : Report only if there is a submesoscale eddy parameterization.-->
-		<field id="CMIP7_msftyrho" field_ref="dummy_XY_gridlatitude_rho"/>
+		<field id="CMIP7_msftyrho" field_ref="dummy_XY_rho"/>
 		<!--P2 (kg s-1) ocean_y_overturning_mass_streamfunction : Overturning mass streamfunction arising from all advective mass transport processes, resolved and parameterized.-->
-		<field id="CMIP7_msftyrhompa" field_ref="?dummy_XY_gridlatitude_rho"/>
+		<field id="CMIP7_msftyrhompa" field_ref="?dummy_XY_rho"/>
 		<!--P4 (kg s-1) ocean_y_overturning_mass_streamfunction_due_to_parameterized_mesoscale_eddy_advection : CMIP5 called this "due to Bolus Advection".  Name change respects the more general physics of the mesoscale parameterizations.-->
 		<field id="CMIP7_msftyz" field_ref="zomsf_3bsn"> this * 1e6 * $rau0 </field>
 		<!--P2 (kg s-1) ocean_y_overturning_mass_streamfunction : Overturning mass streamfunction arising from all advective mass transport processes, resolved and parameterized.-->
@@ -406,11 +406,11 @@
 		<!--P4 (kg m-2 s-1) tendency_of_sea_water_salinity_expressed_as_salt_content : Tendency of salt content for a grid cell from all processes.-->
 		<field id="CMIP7_pbo" field_ref="botpres" > this * 1e4 </field>
 		<!--P2 (Pa) sea_water_pressure_at_sea_floor : "Sea water pressure" is the pressure that exists in the medium of sea water.  It includes the pressure due to overlying sea water, sea ice, air and any other medium that may be present.-->
-		<field id="CMIP7_pfscint" field_ref="?dummy_XY_swplayers"/>
+		<field id="CMIP7_pfscint" field_ref="?dummy_XY_oplayer4"/>
 		<!--P2 (kg m-2) integral_wrt_depth_of_sea_water_preformed_salinity_expressed_as_salt_mass_content : This is a fundamental aspect of the changes in the hydrological cycle and their impact on the oceans, and due to new numerical schemes and vertical discretizations, it is important to calculate it consistently with the model formulation.-->
 		<field id="CMIP7_ph" field_ref="PH"/>
 		<!--P2 (1) sea_water_ph_reported_on_total_scale : negative log10 of hydrogen ion concentration with the concentration expressed as mol H kg-1.-->
-		<field id="CMIP7_phcint" field_ref="?dummy_XY_swplayers"/>
+		<field id="CMIP7_phcint" field_ref="?dummy_XY_oplayer4"/>
 		<!--P2 (J m-2) integral_wrt_depth_of_sea_water_potential_temperature_expressed_as_heat_content : This is the vertically-integrated heat content derived from potential temperature (thetao).-->
 		<field id="CMIP7_phos" field_ref="?dummy_XY"/>
 		<!--P2 (1) sea_water_ph_reported_on_total_scale : negative log10 of hydrogen ion concentration with the concentration expressed as mol H kg-1.-->
@@ -474,7 +474,7 @@
 		<!--P2 (W m-2) surface_upwelling_shortwave_flux_in_air : Surface Upwelling Shortwave Radiation over the portion of a land grid cell covered by snow. Can be used for computation of surface albedo.-->
 		<field id="CMIP7_rsussi" field_ref="?dummy_XY"/>
 		<!--P2 (W m-2) surface_upwelling_shortwave_flux_in_air : Surface Upwelling Shortwave Radiation over the portion of an ocean grid cell covered by sea ice, including snow. Can be used for computation of surface albedo.-->
-		<field id="CMIP7_scint" field_ref="?dummy_XY_swplayers"/>
+		<field id="CMIP7_scint" field_ref="?dummy_XY_oplayer4"/>
 		<!--P2 (kg m-2) integral_wrt_depth_of_sea_water_practical_salinity_expressed_as_salt_mass_content : This is a fundamental aspect of the changes in the hydrological cycle and their impact on the oceans, and due to new numerical schemes and vertical discretizations, it is important to calculate it consistently with the model formulation.-->
 		<field id="CMIP7_sduo" field_ref="?dummy_XY"/>
 		<!--P2 (m s-1) sea_surface_wave_stokes_drift_eastward_velocity : The eastward component of the net drift velocity of ocean water caused by surface wind-sea waves. The Stokes drift velocity could be defined as the difference between the average Lagrangian flow velocity of a fluid parcel, and the average Eulerian flow velocity of the fluid at a fixed position.-->
@@ -752,7 +752,7 @@
 		<!--P2 (degC) sea_water_potential_temperature : Upper 700m, 2D field-->
 		<field id="CMIP7_thkcello" field_ref="e3t"/>
 		<!--P1 (m) cell_thickness : The time varying thickness of ocean cells. "Thickness" means the vertical extent of a layer. "Cell" refers to a model grid-cell.-->
-		<field id="CMIP7_thkcelluo" field_ref="?dummy_XY"/>
+		<field id="CMIP7_thkcelluo" field_ref="?dummy_XYO"/>
 		<!--P4 (m) cell_thickness : The time varying thickness of ocean cells centered at u-points (points for velocity in the x-direction). "Thickness" means the vertical extent of a layer. "Cell" refers to a model grid-cell.-->
 		<field id="CMIP7_thkcellvo" field_ref="?dummy_XYO"/>
 		<!--P4 (m) cell_thickness : The time varying thickness of ocean cells centered at v-points (points for velocity in the y-direction). "Thickness" means the vertical extent of a layer. "Cell" refers to a model grid-cell.-->
