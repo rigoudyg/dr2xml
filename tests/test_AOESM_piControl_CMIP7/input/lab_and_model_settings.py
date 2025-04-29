@@ -36,12 +36,12 @@ lab_and_model_settings = {
     'vertical_interpolation_operation': 'instant',
     'orphan_variables': {
         'nemo': [''],
-        'surfex': ['siconca'],
+        'surfex': ['siconca', "albsn", "albsrfc"],
         'trip': ['areacellr', 'dgw', 'drivw', 'qgwr', 'rivi', 'rivo', 'waterDpth', 'wtd', 'fwtd', 'fldf', 'carbw',
                  'carbdis', 'carbin']
     },
     'excluded_request_links': ['RFMIP-AeroIrf'],
-    'max_priority': 1, 'info_url': 'http://www.umr-cnrm.fr/cmip6/',
+    'max_priority': 2, 'info_url': 'http://www.umr-cnrm.fr/cmip6/',
     'use_cmorvar_label_in_filename': False,
     'allow_duplicates_in_same_table': False,
     'allow_pseudo_standard_names': True,
@@ -157,7 +157,7 @@ lab_and_model_settings = {
                  'jpdftaureicemodis', 'clmisr']
     },
     'institution_id': 'CNRM-CERFACS',
-    # 'excluded_spshapes': ['XYA-na', 'XYG-na', 'na-A'],
+    'excluded_spshapes': ['XYA-na', 'XYG-na', 'na-A'],
     'mips': {
         'HR': {"CERESMIP", "PAMIP", "SIMIP", "OMIP", "SOFIAMIP", "LMIP", "RFMIP", "AerChemMIP2", "GeoMIP", "TIPMIP",
              "DAMIP", "PMIP", "FAFMIP", "DCPP", "CDRMIP", "NAHosMIP", "ISMIP7", "CMIP", "ScenarioMIP", "HighResMIP",

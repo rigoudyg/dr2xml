@@ -156,7 +156,7 @@ def create_xios_aux_elmts_defs(sv, alias, table, context, target_hgrid_id, zgrid
     # Build a construct for computing a climatology (if applicable)
     # --------------------------------------------------------------------
     if clim:
-        if sv.frequency in ["1hrCM", ]:
+        if sv.frequency in ["1hrCM", "1hr"]:
             last_field_id, last_grid_id = process_diurnal_cycle(last_field_id)
         else:
             raise Dr2xmlError("Cannot handle climatology cell_method for frequency %s and variable %s"

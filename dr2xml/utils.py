@@ -24,7 +24,7 @@ class Dr2xmlError(Exception):
 
     def __str__(self):
         logger = get_logger()
-        logger.error(repr(self.valeur))
+        logger.error(repr(self.valeur), )
         return "\n\n" + repr(self.valeur) + "\n\n"
     # """ just for test"""
 

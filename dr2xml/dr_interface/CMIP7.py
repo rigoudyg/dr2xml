@@ -23,11 +23,25 @@ from ..utils import Dr2xmlError, is_elt_applicable
 data_request_path = get_settings_values("internal", "data_request_path")
 sys.path.append(data_request_path)
 os.environ["CMIP7_DR_API_CONFIGFILE"] = get_settings_values("internal", "data_request_config")
+from data_request_api.query.vocabulary_server import ConstantValueObj
 from data_request_api.query.data_request import DataRequest as CMIP7DataRequest
 from data_request_api.content.dump_transformation import get_transformed_content
 
 
 data_request = None
+
+
+def get_value_from_constant(value):
+    if isinstance(value, ConstantValueObj):
+        return value.value
+    elif isinstance(value, list):
+        return [get_value_from_constant(val) for val in value]
+    elif isinstance(value, set):
+        return set([get_value_from_constant(val) for val in value])
+    elif isinstance(value, tuple):
+        return tuple([get_value_from_constant(val) for val in value])
+    else:
+        return value
 
 
 class DataRequest(DataRequestBasic):
@@ -171,15 +185,20 @@ def normalize_grid(grid):
 
 
 class SimpleCMORVar(SimpleCMORVarBasic):
+    def __init__(self, **kwargs):
+        for (key, value) in kwargs.items():
+            kwargs[key] = get_value_from_constant(value)
+        super().__init__(**kwargs)
+
+
     @classmethod
     def get_from_dr(cls, input_var, **kwargs):
         sdims = OrderedDict()
         product_of_other_dims = 1
-        spatial_shape_dimensions = input_var.spatial_shape.dimensions
-        if not isinstance(spatial_shape_dimensions, list):
-            spatial_shape_dimensions = list()
-        for sdim in spatial_shape_dimensions:
-            sdim = SimpleDim.get_from_dr(sdim, **kwargs)
+        dimensions = str(input_var.dimensions).split(", ")
+        dimensions = [dim for dim in dimensions if "time" not in dim]
+        for sdim in dimensions:
+            sdim = SimpleDim.get_from_dr(data_request.data_request.find_element("coordinates_and_dimensions", sdim), **kwargs)
             sdims[sdim.name] = sdim
             product_of_other_dims *= sdim.dimsize
         cell_measures = input_var.cell_measures
@@ -189,29 +208,29 @@ class SimpleCMORVar(SimpleCMORVarBasic):
             cell_measures = [cell_measures, ]
         else:
             cell_measures = [cell_measures.name, ]
-        cell_methods = str(input_var.cell_methods.cell_methods)
+        cell_methods = input_var.cell_methods.cell_methods
         logger = get_logger()
         logger.debug(f"Variable considered: {input_var.name}")
         return cls(from_dr=True,
-                   type=str(input_var.type),
-                   modeling_realm=[str(realm.id) for realm in input_var.modelling_realm],
-                   label=str(input_var.physical_parameter.name),
-                   mipVarLabel=str(input_var.physical_parameter.name),
-                   label_without_psuffix=str(input_var.physical_parameter.name),
-                   label_non_ambiguous=str(input_var.name),
-                   frequency=str(input_var.cmip7_frequency.name),
-                   mipTable=str(input_var.cmip6_tables_identifier.name),
-                   description=str(input_var.description),
-                   stdname=str(input_var.physical_parameter.cf_standard_name.name),
-                   units=str(input_var.physical_parameter.units),
-                   long_name=str(input_var.physical_parameter.title),
+                   type=input_var.type,
+                   modeling_realm=[realm.id for realm in input_var.modelling_realm],
+                   label=input_var.physical_parameter.name,
+                   mipVarLabel=input_var.physical_parameter.name,
+                   label_without_psuffix=input_var.physical_parameter.name,
+                   label_non_ambiguous=input_var.name,
+                   frequency=input_var.cmip7_frequency.name,
+                   mipTable=input_var.cmip6_tables_identifier.name,
+                   description=input_var.description,
+                   stdname=input_var.physical_parameter.cf_standard_name.name,
+                   units=input_var.physical_parameter.units,
+                   long_name=input_var.physical_parameter.title,
                    sdims=sdims,
                    other_dims_size=product_of_other_dims,
                    cell_methods=cell_methods,
                    cm=input_var.cell_methods.cell_methods,
                    cell_measures=cell_measures,
-                   spatial_shp=str(input_var.spatial_shape.name),
-                   temporal_shp=str(input_var.temporal_shape.name),
+                   spatial_shp=input_var.spatial_shape.name,
+                   temporal_shp=input_var.temporal_shape.name,
                    id=input_var.id,
                    cmvar=input_var,
                    Priority=data_request.data_request.find_priority_per_variable(input_var)
@@ -219,22 +238,27 @@ class SimpleCMORVar(SimpleCMORVarBasic):
 
 
 class SimpleDim(SimpleDimBasic):
+    def __init__(self, **kwargs):
+        for (key, value) in kwargs.items():
+            kwargs[key] = get_value_from_constant(value)
+        super().__init__(**kwargs)
+
     @classmethod
     def get_from_dr(cls, input_dim, **kwargs):
         return cls(
             from_dr=True,
-            label=str(input_dim.name),
-            stdname=str(input_dim.cf_standard_name),
-            long_name=str(input_dim.title),
-            positive=str(input_dim.positive_direction),
-            requested=str(input_dim.requested_values),
-            value=str(input_dim.value),
-            out_name=str(input_dim.output_name),
-            units=str(input_dim.units),
+            label=input_dim.name,
+            stdname=input_dim.cf_standard_name,
+            long_name=input_dim.title,
+            positive=input_dim.positive_direction,
+            requested=input_dim.requested_values,
+            value=input_dim.value,
+            out_name=input_dim.output_name,
+            units=input_dim.units,
             boundsRequested=input_dim.requested_bounds,
-            axis=str(input_dim.axis_flag),
-            type=str(input_dim.type),
+            axis=input_dim.axis_flag,
+            type=input_dim.type,
             coords=input_dim,
-            title=str(input_dim.title),
-            name=str(input_dim.name)
+            title=input_dim.title,
+            name=input_dim.name
         )
