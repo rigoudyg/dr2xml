@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <context id="arpsfx">
-	<!--CMIP7 Data Request version Software 1.1.3.dev47+g35c67bc - Content v1.2.1-->
+	<!--CMIP7 Data Request version Software 1.2.1.dev10+g5f3dcc4.d20250515 - Content v1.2.1-->
 	<!--dr2xml version current_version-->
 	<!--Lab_and_model settings
 {'data_request_content_version' = 'v1.2.1',
@@ -22,19 +22,17 @@
 {}-->
 	<!--Year processed None-->
 	<field_definition>
-		<field id="CMIP7_abs550aer" field_ref="?dummy_XY"/>
-		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_ambient_aerosol_particles : Optical thickness of atmospheric aerosols at wavelength 550 nanometers.-->
-		<field id="CMIP7_abs550bc" field_ref="?dummy_XY"/>
-		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_black_carbon_ambient_aerosol : This is the black carbon aerosol optical depth at 550nm due to absorption-->
-		<field id="CMIP7_abs550dust" field_ref="?dummy_XY"/>
-		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_dust_ambient_aerosol_particles : This is the dust aerosol optical depth at 550nm due to absorption-->
-		<field id="CMIP7_abs550no3" field_ref="?dummy_XY"/>
-		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_nitrate_ambient_aerosol_particles : This is the nitrate aerosol optical depth at 550nm due to absorption-->
-		<field id="CMIP7_abs550oa" field_ref="?dummy_XY"/>
-		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_particulate_organic_matter_ambient_aerosol_particles : This is the particular organic matter aerosol optical depth at 550nm due to absorption-->
-		<field id="CMIP7_abs550so4" field_ref="?dummy_XY"/>
+		<field id="CMIP7_abs" field_ref="?dummy_XY_lambda550nm"/>
 		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_sulfate_ambient_aerosol_particles : This is the sulphate aerosol optical depth at 550nm due to absorption-->
-		<field id="CMIP7_abs550ss" field_ref="?dummy_XY"/>
+		<field id="CMIP7_abs550aer" field_ref="?dummy_XY_lambda550nm"/>
+		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_ambient_aerosol_particles : Optical thickness of atmospheric aerosols at wavelength 550 nanometers.-->
+		<field id="CMIP7_abs550bc" field_ref="?dummy_XY_lambda550nm"/>
+		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_black_carbon_ambient_aerosol : This is the black carbon aerosol optical depth at 550nm due to absorption-->
+		<field id="CMIP7_abs550dust" field_ref="?dummy_XY_lambda550nm"/>
+		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_dust_ambient_aerosol_particles : This is the dust aerosol optical depth at 550nm due to absorption-->
+		<field id="CMIP7_abs550oa" field_ref="?dummy_XY_lambda550nm"/>
+		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_particulate_organic_matter_ambient_aerosol_particles : This is the particular organic matter aerosol optical depth at 550nm due to absorption-->
+		<field id="CMIP7_abs550ss" field_ref="?dummy_XY_lambda550nm"/>
 		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_sea_salt_ambient_aerosol_particles : This is the sea salt aerosol optical depth at 550nm due to absorption-->
 		<field id="CMIP7_airmass" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (kg m-2) atmosphere_mass_of_air_per_unit_area : The mass of air in an atmospheric layer.-->
@@ -44,7 +42,7 @@
 		<!--P2 (m) atmosphere_boundary_layer_thickness : Boundary layer depth-->
 		<field id="CMIP7_bry" field_ref="?dummy_XY_plev39"/>
 		<!--P2 (mol mol-1) mole_fraction_of_inorganic_bromine_in_air : Total family (the sum of all appropriate species in the model) ; list the species in the netCDF header, e.g. Bry = Br + BrO + HOBr + HBr + BrONO2 + BrCl Definition: Total inorganic bromine (e.g., HBr and inorganic bromine oxides and radicals (e.g., BrO, atomic bromine (Br), bromine nitrate (BrONO2)) resulting from degradation of bromine-containing organicsource gases (halons, methyl bromide, VSLS), and natural inorganic bromine sources (e.g., volcanoes, sea salt, and other aerosols) add comment attribute with detailed description about how the model calculates these fields-->
-		<field id="CMIP7_bs550aer" field_ref="?dummy_XYA_alevel"/>
+		<field id="CMIP7_bs550aer" field_ref="?dummy_XYA_alevel_lambda550nm"/>
 		<!--P2 (m-1 sr-1) volume_scattering_function_of_radiative_flux_in_air_due_to_ambient_aerosol_particles : Aerosol  Backscatter at wavelength 550nm and scattering angle 180 degrees, computed from extinction and lidar ratio-->
 		<field id="CMIP7_c2h4" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (mol mol-1) mole_fraction_of_ethene_in_air : Mole fraction of ethene (C2H4) in air-->
@@ -62,9 +60,9 @@
 		<!--P2 (m-3) number_concentration_of_convective_cloud_liquid_water_particles_at_convective_liquid_water_cloud_top : Cloud Droplet Number Concentration of Convective Cloud Tops-->
 		<field id="CMIP7_ccn" field_ref="?dummy_XY"/>
 		<!--P2 (m-3) number_concentration_of_cloud_condensation_nuclei_at_stp_in_air : proposed name: number\_concentration\_of\_ambient\_aerosol\_in\_air\_at\_liquid\_water\_cloud\_top-->
-		<field id="CMIP7_ccn02" field_ref="?dummy_XYA_alevel"/>
+		<field id="CMIP7_ccn02" field_ref="?dummy_XYA_alevel_rh100p2pct"/>
 		<!--P2 (m-3) number_concentration_of_cloud_condensation_nuclei_assuming_reference_relative_humidity : This is the concentration of cloud condensation nuclei (CCN) at 0.2% supersaturation, based on aerosol chemical composition and size-->
-		<field id="CMIP7_ccn1" field_ref="?dummy_XYA_alevel"/>
+		<field id="CMIP7_ccn1" field_ref="?dummy_XYA_alevel_rh101pct"/>
 		<!--P2 (m-3) number_concentration_of_cloud_condensation_nuclei_assuming_reference_relative_humidity : This is the concentration of cloud condensation nuclei (CCN) at 1.0 percent supersaturation, based on aerosol chemical composition and size-->
 		<field id="CMIP7_cdnc" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (m-3) number_concentration_of_cloud_liquid_water_particles_in_air : Cloud Droplet Number Concentration in liquid water clouds.-->
@@ -140,7 +138,7 @@
 		<!--P2 (kg m-2 s-1) minus_tendency_of_atmosphere_mass_content_of_sea_salt_dry_aerosol_particles_due_to_dry_deposition : undef-->
 		<field id="CMIP7_e90inst" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (mol mol-1) mole_fraction_of_artificial_tracer_with_fixed_lifetime_in_air : Mole fraction of an artificial tracer with a 90-day lifetime (e90)-->
-		<field id="CMIP7_ec550aer" field_ref="?dummy_XYA_alevel"/>
+		<field id="CMIP7_ec550aer" field_ref="?dummy_XYA_alevel_lambda550nm"/>
 		<!--P2 (m-1) volume_extinction_coefficient_in_air_due_to_ambient_aerosol_particles : Aerosol Extinction at 550nm-->
 		<field id="CMIP7_emiach4" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_methane_due_to_emission : Anthropogenic emission rate of methane (CH4) into the atmosphere-->
@@ -298,33 +296,31 @@
 		<!--P2 (mol m-3 s-1) tendency_of_atmosphere_mole_concentration_of_ozone_due_to_chemical_production : ONLY provide the sum of all the HO2/RO2 + NO reactions (as k\*[HO2]\*[NO])-->
 		<field id="CMIP7_o3ref" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (mol mol-1) reference_mole_fraction_of_ozone_in_air : This is the ozone mole fraction that is used in a diagnostic call to the model's radiation scheme. It is only applicable when an ozone double call is active in the model.-->
-		<field id="CMIP7_od443aer" field_ref="?dummy_XY"/>
-		<!--P2 (1) atmosphere_optical_thickness_due_to_ambient_aerosol_particles : This is the aerosol optical depth (AOD) from the ambient aerosls (i.e., includes aerosol water).  Does not include AOD from stratospheric aerosols if these are prescribed but includes other possible background aerosol types. Needs a comment attribute "wavelength: 443 nm"-->
-		<field id="CMIP7_od550aer" field_ref="?dummy_XY"/>
-		<!--P2 (1) atmosphere_optical_thickness_due_to_ambient_aerosol_particles : AOD from ambient aerosols (i.e., includes aerosol water).  Does not include AOD from stratospheric aerosols if these are prescribed but includes other possible background aerosol types. Needs a comment attribute "wavelength: 550 nm"-->
-		<field id="CMIP7_od550aerh2o" field_ref="?dummy_XY"/>
-		<!--P2 (1) atmosphere_optical_thickness_due_to_water_in_ambient_aerosol_particles : proposed name: atmosphere\_optical\_thickness\_due\_to\_water\_ambient\_aerosol-->
-		<field id="CMIP7_od550bb" field_ref="?dummy_XY"/>
-		<!--P2 (1) atmosphere_optical_thickness_due_to_particulate_organic_matter_ambient_aerosol_particles : total organic aerosol AOD due to biomass burning (excluding so4, nitrate BB components)-->
-		<field id="CMIP7_od550bc" field_ref="?dummy_XY"/>
-		<!--P2 (1) atmosphere_optical_thickness_due_to_black_carbon_ambient_aerosol : Total aerosol AOD due to black carbon aerosol at a wavelength of 550 nanometres.-->
-		<field id="CMIP7_od550csaer" field_ref="?dummy_XY"/>
-		<!--P2 (1) atmosphere_optical_thickness_due_to_ambient_aerosol_particles : AOD from the ambient aerosols in clear skies if od550aer is for all-sky (i.e., includes aerosol water).  Does not include AOD from stratospheric aerosols if these are prescribed but includes other possible background aerosol types. Needs a comment attribute "wavelength: 550 nm"-->
-		<field id="CMIP7_od550dust" field_ref="?dummy_XY"/>
-		<!--P2 (1) atmosphere_optical_thickness_due_to_dust_ambient_aerosol_particles : Total aerosol AOD due to dust aerosol at a wavelength of 550 nanometres.-->
-		<field id="CMIP7_od550lt1aer" field_ref="?dummy_XY"/>
-		<!--P2 (1) atmosphere_optical_thickness_due_to_pm1_ambient_aerosol_particles : od550 due to particles with wet diameter less than 1 um  ("ambient" means "wetted"). When models do not include explicit size information, it can be assumed that all anthropogenic aerosols and natural secondary aerosols have diameter less than 1 um.-->
-		<field id="CMIP7_od550no3" field_ref="?dummy_XY"/>
-		<!--P2 (1) atmosphere_optical_thickness_due_to_nitrate_ambient_aerosol_particles : Total aerosol AOD due to nitrate aerosol at a wavelength of 550 nanometres.-->
-		<field id="CMIP7_od550oa" field_ref="?dummy_XY"/>
-		<!--P2 (1) atmosphere_optical_thickness_due_to_particulate_organic_matter_ambient_aerosol_particles : total organic aerosol AOD, comprises all organic aerosols, primary + secondary ; natural + anthropogenic including biomasss burning organic aerosol-->
-		<field id="CMIP7_od550so4" field_ref="?dummy_XY"/>
+		<field id="CMIP7_od" field_ref="?dummy_XY_lambda550nm"/>
 		<!--P2 (1) atmosphere_optical_thickness_due_to_sulfate_ambient_aerosol_particles : Total aerosol AOD due to sulfate aerosol at a wavelength of 550 nanometres.-->
-		<field id="CMIP7_od550soa" field_ref="?dummy_XY"/>
+		<field id="CMIP7_od443aer" field_ref="?dummy_XY_lambda443nm"/>
+		<!--P2 (1) atmosphere_optical_thickness_due_to_ambient_aerosol_particles : This is the aerosol optical depth (AOD) from the ambient aerosls (i.e., includes aerosol water).  Does not include AOD from stratospheric aerosols if these are prescribed but includes other possible background aerosol types. Needs a comment attribute "wavelength: 443 nm"-->
+		<field id="CMIP7_od550aer" field_ref="?dummy_XY_lambda550nm"/>
+		<!--P2 (1) atmosphere_optical_thickness_due_to_ambient_aerosol_particles : AOD from ambient aerosols (i.e., includes aerosol water).  Does not include AOD from stratospheric aerosols if these are prescribed but includes other possible background aerosol types. Needs a comment attribute "wavelength: 550 nm"-->
+		<field id="CMIP7_od550aerh2o" field_ref="?dummy_XY_lambda550nm"/>
+		<!--P2 (1) atmosphere_optical_thickness_due_to_water_in_ambient_aerosol_particles : proposed name: atmosphere\_optical\_thickness\_due\_to\_water\_ambient\_aerosol-->
+		<field id="CMIP7_od550bb" field_ref="?dummy_XY_lambda550nm"/>
+		<!--P2 (1) atmosphere_optical_thickness_due_to_particulate_organic_matter_ambient_aerosol_particles : total organic aerosol AOD due to biomass burning (excluding so4, nitrate BB components)-->
+		<field id="CMIP7_od550bc" field_ref="?dummy_XY_lambda550nm"/>
+		<!--P2 (1) atmosphere_optical_thickness_due_to_black_carbon_ambient_aerosol : Total aerosol AOD due to black carbon aerosol at a wavelength of 550 nanometres.-->
+		<field id="CMIP7_od550csaer" field_ref="?dummy_XY_lambda550nm"/>
+		<!--P2 (1) atmosphere_optical_thickness_due_to_ambient_aerosol_particles : AOD from the ambient aerosols in clear skies if od550aer is for all-sky (i.e., includes aerosol water).  Does not include AOD from stratospheric aerosols if these are prescribed but includes other possible background aerosol types. Needs a comment attribute "wavelength: 550 nm"-->
+		<field id="CMIP7_od550dust" field_ref="?dummy_XY_lambda550nm"/>
+		<!--P2 (1) atmosphere_optical_thickness_due_to_dust_ambient_aerosol_particles : Total aerosol AOD due to dust aerosol at a wavelength of 550 nanometres.-->
+		<field id="CMIP7_od550lt1aer" field_ref="?dummy_XY_lambda550nm"/>
+		<!--P2 (1) atmosphere_optical_thickness_due_to_pm1_ambient_aerosol_particles : od550 due to particles with wet diameter less than 1 um  ("ambient" means "wetted"). When models do not include explicit size information, it can be assumed that all anthropogenic aerosols and natural secondary aerosols have diameter less than 1 um.-->
+		<field id="CMIP7_od550oa" field_ref="?dummy_XY_lambda550nm"/>
+		<!--P2 (1) atmosphere_optical_thickness_due_to_particulate_organic_matter_ambient_aerosol_particles : total organic aerosol AOD, comprises all organic aerosols, primary + secondary ; natural + anthropogenic including biomasss burning organic aerosol-->
+		<field id="CMIP7_od550soa" field_ref="?dummy_XY_lambda550nm"/>
 		<!--P2 (1) atmosphere_optical_thickness_due_to_particulate_organic_matter_ambient_aerosol_particles : total organic aerosol AOD due to secondary aerosol formation-->
-		<field id="CMIP7_od550ss" field_ref="?dummy_XY"/>
+		<field id="CMIP7_od550ss" field_ref="?dummy_XY_lambda550nm"/>
 		<!--P2 (1) atmosphere_optical_thickness_due_to_sea_salt_ambient_aerosol_particles : Total aerosol AOD due to sea salt aerosol at a wavelength of 550 nanometres.-->
-		<field id="CMIP7_od865aer" field_ref="?dummy_XY"/>
+		<field id="CMIP7_od865aer" field_ref="?dummy_XY_lambda865nm"/>
 		<!--P2 (1) atmosphere_optical_thickness_due_to_ambient_aerosol_particles : AOD from the ambient aerosols (i.e., includes aerosol water).  Does not include AOD from stratospheric aerosols if these are prescribed but includes other possible background aerosol types. Needs a comment attribute "wavelength: 865 nm"-->
 		<field id="CMIP7_oh" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (mol mol-1) mole_fraction_of_hydroxyl_radical_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.-->
@@ -412,11 +408,9 @@
 		<!--P2 (K) air_temperature_at_cloud_top : cloud\_top refers to the top of the highest cloud. Air temperature is the bulk temperature of the air, not the surface (skin) temperature.-->
 		<field id="CMIP7_ua" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (m s-1) eastward_wind : Zonal wind (positive in a eastward direction).-->
-		<field id="CMIP7_ua10" field_ref="?dummy_XY"/>
-		<!--P2 (m s-1) eastward_wind : Zonal wind on the 10 hPa surface-->
 		<field id="CMIP7_va" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (m s-1) northward_wind : Meridional wind (positive in a northward direction).-->
-		<field id="CMIP7_vt100" field_ref="?dummy_lat"/>
+		<field id="CMIP7_vt" field_ref="?dummy_lat_p100"/>
 		<!--P2 (K m s-1) covariance_over_longitude_of_northward_wind_and_air_temperature : Zonally averaged eddy temperature flux at 100hPa as monthly means derived from daily (or higher frequency) fields.-->
 		<field id="CMIP7_wa" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (m s-1) upward_air_velocity : A velocity is a vector quantity. "Upward" indicates a vector component which is positive when directed upward (negative downward). Upward air velocity is the vertical component of the 3D air velocity vector. The standard name downward\_air\_velocity may be used for a vector component with the opposite sign convention.-->
@@ -442,10 +436,8 @@
 		<!--P2 (kg m-2 s-1) minus_tendency_of_atmosphere_mass_content_of_sulfate_dry_aerosol_particles_due_to_wet_deposition : proposed name: tendency\_of\_atmosphere\_mass\_content\_of\_sulfate\_dry\_aerosol\_due\_to\_wet\_deposition-->
 		<field id="CMIP7_wetss" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2 s-1) minus_tendency_of_atmosphere_mass_content_of_sea_salt_dry_aerosol_particles_due_to_wet_deposition : Deposition rate of sea salt aerosols (measured by the dry mass) due to wet processes-->
-		<field id="CMIP7_zg10" field_ref="?dummy_XY"/>
+		<field id="CMIP7_zg" field_ref="?dummy_XY_p10"/>
 		<!--P2 (m) geopotential_height : Geopotential height on the 10 hPa surface-->
-		<field id="CMIP7_zg500" field_ref="?dummy_XY"/>
-		<!--P2 (m) geopotential_height : geopotential height on the 500 hPa surface-->
 		<field id="CMIP7_ap" field_ref="dummy_hyb"/>
 		<!--One of the hybrid coordinate arrays-->
 		<field id="CMIP7_ap_bnds" field_ref="dummy_hyb"/>

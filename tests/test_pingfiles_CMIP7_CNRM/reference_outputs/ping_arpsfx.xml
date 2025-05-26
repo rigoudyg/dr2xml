@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <context id="arpsfx">
-	<!--CMIP7 Data Request version Software 1.1.3.dev47+g35c67bc - Content v1.2.1-->
+	<!--CMIP7 Data Request version Software 1.2.1.dev10+g5f3dcc4.d20250515 - Content v1.2.1-->
 	<!--dr2xml version current_version-->
 	<!--Lab_and_model settings
 {'data_request_content_version' = 'v1.2.1',
@@ -22,19 +22,17 @@
 {}-->
 	<!--Year processed None-->
 	<field_definition>
-		<field id="CMIP7_abs550aer" field_ref="?dummy_XY"/>
-		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_ambient_aerosol_particles : Optical thickness of atmospheric aerosols at wavelength 550 nanometers.-->
-		<field id="CMIP7_abs550bc" field_ref="?dummy_XY"/>
-		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_black_carbon_ambient_aerosol : This is the black carbon aerosol optical depth at 550nm due to absorption-->
-		<field id="CMIP7_abs550dust" field_ref="?dummy_XY"/>
-		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_dust_ambient_aerosol_particles : This is the dust aerosol optical depth at 550nm due to absorption-->
-		<field id="CMIP7_abs550no3" field_ref="?dummy_XY"/>
-		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_nitrate_ambient_aerosol_particles : This is the nitrate aerosol optical depth at 550nm due to absorption-->
-		<field id="CMIP7_abs550oa" field_ref="?dummy_XY"/>
-		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_particulate_organic_matter_ambient_aerosol_particles : This is the particular organic matter aerosol optical depth at 550nm due to absorption-->
-		<field id="CMIP7_abs550so4" field_ref="?dummy_XY"/>
+		<field id="CMIP7_abs" field_ref="?dummy_XY_lambda550nm"/>
 		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_sulfate_ambient_aerosol_particles : This is the sulphate aerosol optical depth at 550nm due to absorption-->
-		<field id="CMIP7_abs550ss" field_ref="?dummy_XY"/>
+		<field id="CMIP7_abs550aer" field_ref="?dummy_XY_lambda550nm"/>
+		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_ambient_aerosol_particles : Optical thickness of atmospheric aerosols at wavelength 550 nanometers.-->
+		<field id="CMIP7_abs550bc" field_ref="?dummy_XY_lambda550nm"/>
+		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_black_carbon_ambient_aerosol : This is the black carbon aerosol optical depth at 550nm due to absorption-->
+		<field id="CMIP7_abs550dust" field_ref="?dummy_XY_lambda550nm"/>
+		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_dust_ambient_aerosol_particles : This is the dust aerosol optical depth at 550nm due to absorption-->
+		<field id="CMIP7_abs550oa" field_ref="?dummy_XY_lambda550nm"/>
+		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_particulate_organic_matter_ambient_aerosol_particles : This is the particular organic matter aerosol optical depth at 550nm due to absorption-->
+		<field id="CMIP7_abs550ss" field_ref="?dummy_XY_lambda550nm"/>
 		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_sea_salt_ambient_aerosol_particles : This is the sea salt aerosol optical depth at 550nm due to absorption-->
 		<field id="CMIP7_acabf" field_ref="?dummy_XY_xgre_ygre"/>
 		<!--P3 (kg m-2 s-1) land_ice_surface_specific_mass_balance_flux : quantity averaged over ice sheet (grounded ice sheet and floating ice shelf) only. Needed to analyse the impact of downscaling methods, and as forcing for ISM-->
@@ -54,7 +52,7 @@
 		<!--P2 (1) surface_albedo : surface albedo at grid cell level (i.e. the albedo averaged over all potential subgrid-scale structures) over all wave-bands; this shall apply to all realms (land, ocean, sea ice, land ice)-->
 		<field id="CMIP7_aoanh" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (yr) tracer_lifetime : Fixed surface layer mixing ratio over 30o-50oN (0 ppbv), uniform fixed source (at all levels) everywhere else (source is unspecified but must be constant in space and time and documented). Note that the source could be 1yr/yr, so the tracer concentration provides mean age in years. For method using linearly increasing tracer include a method attribute: "linearly increasing tracer"For method using uniform source (1yr/yr) include a method attribute: "uniform source"-->
-		<field id="CMIP7_aod550volso4" field_ref="?dummy_XY"/>
+		<field id="CMIP7_aod" field_ref="?dummy_XY_lambda550nm"/>
 		<!--P2 (1E-09) stratosphere_optical_thickness_due_to_volcanic_ambient_aerosol_particles : This is the monthly averaged aerosol optical thickness at 550 nm due to stratospheric volcanic sulphate aerosols-->
 		<field id="CMIP7_areacella" field_ref="?dummy_XY"/>
 		<!--P1 (m2) cell_area : Cell areas for any grid used to report atmospheric variables and any other variable using that grid (e.g., soil moisture content). These cell areas should be defined to enable exact calculation of global integrals (e.g., of vertical fluxes of energy at the surface and top of the atmosphere).-->
@@ -62,15 +60,15 @@
 		<!--P3 (m2) cell_area : Cell areas any grid used to report ice sheet variables. These cell areas should be defined to enable exact calculation of area integrals (e.g., of vertical fluxes of energy at the surface and top of the atmosphere)-->
 		<field id="CMIP7_areacellr" field_ref="?dummy_XY"/>
 		<!--P2 (m2) cell_area : Cell areas for any grid used to report river model variables (may be the same as for atmospheric variables). These cell areas should be defined to enable exact calculation of area integrals (e.g., of vertical fluxes of energy at the surface and top of the atmosphere).-->
-		<field id="CMIP7_baresoilFrac" field_ref="?dummy_XY"/>
+		<field id="CMIP7_baresoilFrac" field_ref="?dummy_XY_typebare"/>
 		<!--P2 (%) area_fraction : Percentage of entire grid cell  that is covered by bare soil.-->
 		<field id="CMIP7_bldep" field_ref="?dummy_XY"/>
 		<!--P2 (m) atmosphere_boundary_layer_thickness : Boundary layer depth-->
 		<field id="CMIP7_bry" field_ref="?dummy_XY_plev39"/>
 		<!--P2 (mol mol-1) mole_fraction_of_inorganic_bromine_in_air : Total family (the sum of all appropriate species in the model) ; list the species in the netCDF header, e.g. Bry = Br + BrO + HOBr + HBr + BrONO2 + BrCl Definition: Total inorganic bromine (e.g., HBr and inorganic bromine oxides and radicals (e.g., BrO, atomic bromine (Br), bromine nitrate (BrONO2)) resulting from degradation of bromine-containing organicsource gases (halons, methyl bromide, VSLS), and natural inorganic bromine sources (e.g., volcanoes, sea salt, and other aerosols) add comment attribute with detailed description about how the model calculates these fields-->
-		<field id="CMIP7_bs550aer" field_ref="?dummy_XYA_alevel"/>
+		<field id="CMIP7_bs550aer" field_ref="?dummy_XYA_alevel_lambda550nm"/>
 		<!--P2 (m-1 sr-1) volume_scattering_function_of_radiative_flux_in_air_due_to_ambient_aerosol_particles : Aerosol  Backscatter at wavelength 550nm and scattering angle 180 degrees, computed from extinction and lidar ratio-->
-		<field id="CMIP7_burntFractionAll" field_ref="?dummy_XY"/>
+		<field id="CMIP7_burntFractionAll" field_ref="?dummy_XY_typeburnt"/>
 		<!--P2 (%) area_fraction : Percentage of grid cell burned due to all fires including natural and anthropogenic fires and those associated with anthropogenic land use change-->
 		<field id="CMIP7_c13Land" field_ref="?dummy_XY"/>
 		<!--P4 (kg m-2) mass_content_of_13C_in_vegetation_and_litter_and_soil_and_forestry_and_agricultural_products : Carbon-13 mass content per unit area in vegetation (any living plants e.g. trees, shrubs, grass), litter (dead plant material in or above the soil), soil, and forestry and agricultural products (e.g. paper, cardboard, furniture, timber for construction, biofuels and food for both humans and livestock).-->
@@ -94,13 +92,13 @@
 		<!--P2 (mol mol-1) mole_fraction_of_ethanol_in_air : Mole fraction of ethanol (C2H5OH) in air-->
 		<field id="CMIP7_c2h6" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (mol mol-1) mole_fraction_of_ethane_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.-->
-		<field id="CMIP7_c3PftFrac" field_ref="?dummy_XY"/>
+		<field id="CMIP7_c3PftFrac" field_ref="?dummy_XY_typec3pft"/>
 		<!--P4 (%) area_fraction : Percentage of entire grid cell  that is covered by C3 PFTs (including grass, crops, and trees).-->
 		<field id="CMIP7_c3h6" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (mol mol-1) mole_fraction_of_propene_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.-->
 		<field id="CMIP7_c3h8" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (mol mol-1) mole_fraction_of_propane_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.-->
-		<field id="CMIP7_c4PftFrac" field_ref="?dummy_XY"/>
+		<field id="CMIP7_c4PftFrac" field_ref="?dummy_XY_typec4pft"/>
 		<!--P4 (%) area_fraction : Percentage of entire grid cell  that is covered by C4 PFTs (including grass and crops).-->
 		<field id="CMIP7_c4h10" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (mol mol-1) mole_fraction_of_butane_in_air : Mole fraction of butane (C4H10) in air-->
@@ -114,7 +112,7 @@
 		<!--P2 (kg m-2) litter_mass_content_of_carbon : "Litter" is dead plant material in or above the soil. It is distinct from coarse wood debris. The precise distinction between "fine" and "coarse" is model dependent. "Content" indicates a quantity per unit area. The sum of the quantities with standard names surface\_litter\_mass\_content\_of\_carbon and subsurface\_litter\_mass\_content\_of\_carbon has the standard name litter\_mass\_content\_of\_carbon.-->
 		<field id="CMIP7_cLitterCwd" field_ref="?dummy_XY"/>
 		<!--P3 (kg m-2) wood_debris_mass_content_of_carbon : "Content" indicates a quantity per unit area. "Wood debris" means dead organic matter composed of coarse wood. It is distinct from fine litter. The precise distinction between "fine" and "coarse" is model dependent.-->
-		<field id="CMIP7_cLitterLut" field_ref="?dummy_XY"/>
+		<field id="CMIP7_cLitterLut" field_ref="?dummy_XY_landUse"/>
 		<!--P3 (kg m-2) litter_mass_content_of_carbon : end of year values (not annual mean)-->
 		<field id="CMIP7_cLitterSubSurf" field_ref="?dummy_XY"/>
 		<!--P3 (kg m-2) subsurface_litter_mass_content_of_carbon : subsurface litter pool fed by root inputs.-->
@@ -124,19 +122,19 @@
 		<!--P3 (kg m-2) miscellaneous_living_matter_mass_content_of_carbon : E.g. fruits, seeds, etc.-->
 		<field id="CMIP7_cProduct" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2) carbon_mass_content_of_forestry_and_agricultural_products : Carbon mass per unit area in that has been removed from the environment through  land use change.-->
-		<field id="CMIP7_cProductLut" field_ref="?dummy_XY"/>
+		<field id="CMIP7_cProductLut" field_ref="?dummy_XY_landUse"/>
 		<!--P3 (kg m-2) carbon_mass_content_of_forestry_and_agricultural_products : Anthropogenic pools associated with land use tiles into which harvests and cleared carbon are deposited before release into atmosphere PLUS any remaining anthropogenic pools that may be associated with lands which were converted into land use tiles during reported period. Examples of products include paper, cardboard, timber for construction, and crop harvest for food or fuel. Does NOT include residue which is deposited into soil or litter; end of year values (not annual mean).-->
 		<field id="CMIP7_cRoot" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2) root_mass_content_of_carbon : including fine and coarse roots.-->
 		<field id="CMIP7_cSoil" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2) soil_mass_content_of_carbon : Carbon mass in the full depth of the soil model.-->
-		<field id="CMIP7_cSoilAbove1m" field_ref="?dummy_XY"/>
+		<field id="CMIP7_cSoilAbove1m" field_ref="?dummy_XY_sdepth10"/>
 		<!--P2 (kg m-2) soil_mass_content_of_carbon : Report missing data over ocean grid cells. For fractional land report value averaged over the land fraction.-->
 		<field id="CMIP7_cSoilLevels" field_ref="?dummy_XYSo_sdepth"/>
 		<!--P2 (kg m-2) soil_mass_content_of_carbon : for models with vertically discretised soil carbon, report total soil carbon for each level-->
-		<field id="CMIP7_cSoilLut" field_ref="?dummy_XY"/>
+		<field id="CMIP7_cSoilLut" field_ref="?dummy_XY_landUse"/>
 		<!--P3 (kg m-2) soil_mass_content_of_carbon : end of year values (not annual mean)-->
-		<field id="CMIP7_cSoilPools" field_ref="?dummy_XY"/>
+		<field id="CMIP7_cSoilPools" field_ref="?dummy_XY_soilpools"/>
 		<!--P3 (kg m-2) soil_mass_content_of_carbon : For models with multiple soil carbon pools, report each pool here. If models also have vertical discretisation these should be aggregated-->
 		<field id="CMIP7_cStem" field_ref="?dummy_XY"/>
 		<!--P3 (kg m-2) stem_mass_content_of_carbon : including sapwood and hardwood.-->
@@ -144,7 +142,7 @@
 		<!--P2 (kg m-2) vegetation_carbon_content : Carbon mass per unit area in vegetation.-->
 		<field id="CMIP7_cVegGrass" field_ref="?dummy_XY"/>
 		<!--P3 (kg m-2) vegetation_carbon_content : "Content" indicates a quantity per unit area. "Vegetation" means any plants e.g. trees, shrubs, grass. Plants are autotrophs i.e. "producers" of biomass using carbon obtained from carbon dioxide.-->
-		<field id="CMIP7_cVegLut" field_ref="?dummy_XY"/>
+		<field id="CMIP7_cVegLut" field_ref="?dummy_XY_landUse"/>
 		<!--P3 (kg m-2) vegetation_carbon_content : end of year values (not annual mean)-->
 		<field id="CMIP7_cVegShrub" field_ref="?dummy_XY"/>
 		<!--P3 (kg m-2) vegetation_carbon_content : "Content" indicates a quantity per unit area. "Vegetation" means any plants e.g. trees, shrubs, grass. Plants are autotrophs i.e. "producers" of biomass using carbon obtained from carbon dioxide.-->
@@ -158,17 +156,17 @@
 		<!--P2 (m-3) number_concentration_of_convective_cloud_liquid_water_particles_at_convective_liquid_water_cloud_top : Cloud Droplet Number Concentration of Convective Cloud Tops-->
 		<field id="CMIP7_ccn" field_ref="?dummy_XY"/>
 		<!--P2 (m-3) number_concentration_of_cloud_condensation_nuclei_at_stp_in_air : proposed name: number\_concentration\_of\_ambient\_aerosol\_in\_air\_at\_liquid\_water\_cloud\_top-->
-		<field id="CMIP7_ccn02" field_ref="?dummy_XYA_alevel"/>
+		<field id="CMIP7_ccn02" field_ref="?dummy_XYA_alevel_rh100p2pct"/>
 		<!--P2 (m-3) number_concentration_of_cloud_condensation_nuclei_assuming_reference_relative_humidity : This is the concentration of cloud condensation nuclei (CCN) at 0.2% supersaturation, based on aerosol chemical composition and size-->
-		<field id="CMIP7_ccn1" field_ref="?dummy_XYA_alevel"/>
+		<field id="CMIP7_ccn1" field_ref="?dummy_XYA_alevel_rh101pct"/>
 		<!--P2 (m-3) number_concentration_of_cloud_condensation_nuclei_assuming_reference_relative_humidity : This is the concentration of cloud condensation nuclei (CCN) at 1.0 percent supersaturation, based on aerosol chemical composition and size-->
 		<field id="CMIP7_cct" field_ref="?dummy_XY"/>
 		<!--P2 (Pa) air_pressure_at_convective_cloud_top : Where convective cloud is present in the grid cell, the instantaneous cloud top altitude should be that of the top of the highest level containing convective cloud. Missing data should be reported in the absence of convective cloud. The time mean should be calculated from these quantities averaging over occasions when convective cloud is present only, and should contain missing data for occasions when no convective cloud is present during the meaning period.-->
 		<field id="CMIP7_cdnc" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (m-3) number_concentration_of_cloud_liquid_water_particles_in_air : Cloud Droplet Number Concentration in liquid water clouds.-->
-		<field id="CMIP7_cfadDbze94" field_ref="?dummy_XY_alt40"/>
+		<field id="CMIP7_cfadDbze94" field_ref="?dummy_XY_alt40_dbze"/>
 		<!--P2 (1) histogram_of_equivalent_reflectivity_factor_over_height_above_reference_ellipsoid : CloudSat Radar Reflectivity-->
-		<field id="CMIP7_cfadLidarsr532" field_ref="?dummy_XY_alt40"/>
+		<field id="CMIP7_cfadLidarsr532" field_ref="?dummy_XY_alt40_scatratio"/>
 		<!--P2 (1) histogram_of_backscattering_ratio_in_air_over_height_above_reference_ellipsoid : CALIPSO Scattering Ratio-->
 		<field id="CMIP7_cfc113global" field_ref="?dummy_0d"/>
 		<!--P2 (1E-12) mole_fraction_of_cfc113_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.  The chemical formula of CFC113 is CCl2FCClF2.  The IUPAC name for CFC113 is 1,1,2-trichloro-1,2,2-trifluoro-ethane.-->
@@ -222,7 +220,7 @@
 		<!--P2 (m-3) number_concentration_of_cloud_liquid_water_particles_in_air_at_liquid_water_cloud_top : Droplets are liquid only.  Report concentration 'as seen from space' over liquid cloudy portion of grid cell.  This is the value from uppermost model layer with liquid cloud or, if available, it is better to sum over all liquid cloud tops, no matter where they occur, as long as they are seen from the top of the atmosphere. Weight by total liquid cloud top fraction of  (as seen from TOA) each time sample when computing monthly mean.-->
 		<field id="CMIP7_cldnvi" field_ref="?dummy_XY"/>
 		<!--P2 (m-2) atmosphere_number_content_of_cloud_droplets : Droplets are liquid only.  Values are weighted by liquid cloud fraction in each layer when vertically integrating, and for monthly means the samples are weighted by total liquid cloud fraction (as seen from TOA).-->
-		<field id="CMIP7_clhcalipso" field_ref="?dummy_XY"/>
+		<field id="CMIP7_clhcalipso" field_ref="?dummy_XY_p220"/>
 		<!--P2 (%) cloud_area_fraction_in_atmosphere_layer : Percentage cloud cover in layer centred on 220hPa-->
 		<field id="CMIP7_cli" field_ref="?dummy_XYA_alevel"/>
 		<!--P1 (kg kg-1) mass_fraction_of_cloud_ice_in_air : Includes both large-scale and convective cloud.  This is calculated as the mass of cloud ice in the grid cell divided by the mass of air (including the water in all phases) in the grid cell. It includes precipitating hydrometeors ONLY if the precipitating hydrometeors affect the calculation of radiative transfer in model.-->
@@ -232,7 +230,7 @@
 		<!--P2 (%) modis_ice_topped_cloud_area_fraction : MODIS Ice Cloud Fraction-->
 		<field id="CMIP7_clis" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (1) mass_fraction_of_stratiform_cloud_ice_in_air : Calculated as the mass of stratiform cloud ice  in the grid cell divided by the mass of air (including the water in all phases) in the grid cell.  This includes precipitating hydrometeors ONLY if the precipitating hydrometeors affect the calculation of radiative transfer in model.-->
-		<field id="CMIP7_clisccp" field_ref="?dummy_XY_plev7c"/>
+		<field id="CMIP7_clisccp" field_ref="?dummy_XY_plev7c_tau"/>
 		<!--P2 (%) isccp_cloud_area_fraction : Percentage cloud cover in optical depth categories.-->
 		<field id="CMIP7_clivi" field_ref="?dummy_XY"/>
 		<!--P1 (kg m-2) atmosphere_mass_content_of_cloud_ice : mass of ice water in the column divided by the area of the column (not just the area of the cloudy portion of the column). Includes precipitating frozen hydrometeors ONLY if the precipitating hydrometeor affects the calculation of radiative transfer in model.-->
@@ -240,21 +238,21 @@
 		<!--P2 (kg m-2) atmosphere_mass_content_of_convective_cloud_ice : calculate mass of convective ice water in the column divided by the area of the column (not just the area of the cloudy portion of the column). This includes precipitating frozen hydrometeors ONLY if the precipitating hydrometeors affect the calculation of radiative transfer in model.-->
 		<field id="CMIP7_clivimodis" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2) atmosphere_mass_content_of_cloud_ice : Mass of ice water in the column divided by the area of the column (not just the area of the cloudy portion of the column) as seen by the MODIS instrument simulator.-->
-		<field id="CMIP7_cllcalipso" field_ref="?dummy_XY"/>
+		<field id="CMIP7_cllcalipso" field_ref="?dummy_XY_p840"/>
 		<!--P2 (%) cloud_area_fraction_in_atmosphere_layer : Percentage cloud cover in layer centred on 840hPa-->
-		<field id="CMIP7_clmcalipso" field_ref="?dummy_XY"/>
+		<field id="CMIP7_clmcalipso" field_ref="?dummy_XY_p560"/>
 		<!--P2 (%) cloud_area_fraction_in_atmosphere_layer : Percentage cloud cover in layer centred on 560hPa-->
-		<field id="CMIP7_clmisr" field_ref="?dummy_XY_alt16"/>
+		<field id="CMIP7_clmisr" field_ref="?dummy_XY_alt16_tau"/>
 		<!--P2 (%) cloud_area_fraction_in_atmosphere_layer : MISR cloud area fraction-->
-		<field id="CMIP7_clmodis" field_ref="?dummy_XY_plev7c"/>
+		<field id="CMIP7_clmodis" field_ref="?dummy_XY_plev7c_tau"/>
 		<!--P2 (%) modis_cloud_area_fraction : Percentage of total cloud cover in optical depth categories, as seen by the MODIS instrument simulator. Dimensions of tau (optical depth) and cloud-top pressure are the same used by the ISCCP instrument simulator. This is the equivalent MODIS version of the ISCCP _clisccp _variable.-->
-		<field id="CMIP7_clmodisice" field_ref="?dummy_XY_plev7c"/>
+		<field id="CMIP7_clmodisice" field_ref="?dummy_XY_plev7c_tau"/>
 		<!--P2 (%) modis_ice_topped_cloud_area_fraction : Percentage ice-cloud cover in optical depth categories, as seen by the MODIS instrument simulator. Dimensions of tau (optical depth) and cloud-top pressure are the same as used by clisccp output from the ISCCP satellite simulator.-->
-		<field id="CMIP7_clmodisiceReff" field_ref="?dummy_XY"/>
+		<field id="CMIP7_clmodisiceReff" field_ref="?dummy_XY_effectRadIc_tau"/>
 		<!--P2 (%) modis_ice_topped_cloud_area_fraction : Percentage ice-cloud cover as seen by the MODIS instrument simulator. Dimensions of cloud IWP (cloud ice water path) and r\_eff (effective droplet size).-->
-		<field id="CMIP7_clmodisliquid" field_ref="?dummy_XY_plev7c"/>
+		<field id="CMIP7_clmodisliquid" field_ref="?dummy_XY_plev7c_tau"/>
 		<!--P2 (%) modis_liquid_topped_cloud_area_fraction : Percentage liquid-cloud cover in optical depth categories, as seen by the MODIS instrument simulator. Dimensions of tau (optical depth) and cloud-top pressure are the same used by clisccp (ISCCP simulator).-->
-		<field id="CMIP7_clmodisliquidReff" field_ref="?dummy_XY"/>
+		<field id="CMIP7_clmodisliquidReff" field_ref="?dummy_XY_effectRadLi_tau"/>
 		<!--P2 (%) modis_liquid_topped_cloud_area_fraction : Percentage liquid-cloud cover as seen by the MODIS instrument simulator. Dimensions of LWP (cloud liquid water path) and r\_eff (droplet effective radius).-->
 		<field id="CMIP7_cls" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (%) stratiform_cloud_area_fraction_in_atmosphere_layer : Cloud area fraction (reported as a percentage) for the whole atmospheric column due to stratiform clouds, as seen from the surface or the top of the atmosphere. Includes both large-scale and convective cloud.-->
@@ -300,11 +298,11 @@
 		<!--P2 (1) atmosphere_optical_thickness_due_to_cloud : The optical thickness is the integral along the path of radiation of a volume scattering/absorption/attenuation coefficient. The radiative flux is reduced by a factor exp(-optical\_thickness) on traversing the path. A coordinate variable of radiation\_wavelength or radiation\_frequency can be specified to indicate that the optical thickness applies at specific wavelengths or frequencies. The atmosphere optical thickness applies to radiation passing through the entire atmosphere. "Cloud" means the component of extinction owing to the presence of liquid or ice water particles. The specification of a physical process by the phrase due\_to\_process means that the quantity named is a  single term in a sum of terms which together compose the general quantity named by omitting the phrase.-->
 		<field id="CMIP7_conccn" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (m-3) number_concentration_of_ambient_aerosol_particles_in_air : This is the number concentration of air particles in air-->
-		<field id="CMIP7_cropFrac" field_ref="?dummy_XY"/>
+		<field id="CMIP7_cropFrac" field_ref="?dummy_XY_typecrop"/>
 		<!--P2 (%) area_fraction : Percentage of entire grid cell  that is covered by crop.-->
-		<field id="CMIP7_cropFracC3" field_ref="?dummy_XY"/>
+		<field id="CMIP7_cropFracC3" field_ref="?dummy_XY_typec3crop"/>
 		<!--P3 (%) area_fraction : Percentage of entire grid cell covered by C3 crops-->
-		<field id="CMIP7_cropFracC4" field_ref="?dummy_XY"/>
+		<field id="CMIP7_cropFracC4" field_ref="?dummy_XY_typec4crop"/>
 		<!--P3 (%) area_fraction : Percentage of entire grid cell covered by C4 crops-->
 		<field id="CMIP7_dcw" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2) change_over_time_in_canopy_water_amount : change\_over\_time\_in\_canopy\_water\_amount-->
@@ -362,7 +360,7 @@
 		<!--P3 (1) atmosphere_optical_thickness_due_to_stratiform_cloud : This is the in-cloud optical depth obtained by considering only the cloudy portion of the grid cell.-->
 		<field id="CMIP7_e90inst" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (mol mol-1) mole_fraction_of_artificial_tracer_with_fixed_lifetime_in_air : Mole fraction of an artificial tracer with a 90-day lifetime (e90)-->
-		<field id="CMIP7_ec550aer" field_ref="?dummy_XYA_alevel"/>
+		<field id="CMIP7_ec550aer" field_ref="?dummy_XYA_alevel_lambda550nm"/>
 		<!--P2 (m-1) volume_extinction_coefficient_in_air_due_to_ambient_aerosol_particles : Aerosol Extinction at 550nm-->
 		<field id="CMIP7_edt" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (m2 s-1) atmosphere_heat_diffusivity : Vertical diffusion coefficient for temperature due to parametrised eddies-->
@@ -486,7 +484,7 @@
 		<!--P2 (kg m-2 s-1) carbon_mass_flux_into_soil_from_litter : Carbon mass flux per unit area into soil from litter (dead plant material in or above the soil).-->
 		<field id="CMIP7_fLuc" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2 s-1) surface_net_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_emission_from_anthropogenic_land_use_change : Net Carbon Mass Flux into Atmosphere due to Land Use Change-->
-		<field id="CMIP7_fLulccAtmLut" field_ref="?dummy_XY"/>
+		<field id="CMIP7_fLulccAtmLut" field_ref="?dummy_XY_landUse"/>
 		<!--P3 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_anthropogenic_land_use_or_land_cover_change_excluding_forestry_and_agricultural_products : This annual mean flux refers to the transfer of carbon directly to the atmosphere due to any land-use or land-cover change activities.  Include carbon transferred due to deforestation or agricultural directly into atmosphere, and  emissions form anthropogenic pools into atmosphere-->
 		<field id="CMIP7_fN2O" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2 s-1) surface_upward_mass_flux_of_nitrous_oxide_expressed_as_nitrogen_out_of_vegetation_and_litter_and_soil : Surface upward flux of nitrous oxide (N2O) from vegetation (any living plants e.g. trees, shrubs, grass), litter (dead plant material in or above the soil), soil.-->
@@ -546,33 +544,33 @@
 		<!--P2 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_emission_from_natural_sources : This is what the atmosphere sees (on its own grid).  This field should be equivalent to the combined natural fluxes of carbon (requested in the L\_mon and O\_mon tables) that account for natural exchanges between the atmosphere and land or ocean reservoirs (i.e., "net ecosystem biospheric productivity", for land, and "air to sea CO2 flux", for ocean.)-->
 		<field id="CMIP7_flashrate" field_ref="?dummy_XY"/>
 		<!--P3 (km-2 s-1) frequency_of_lightning_flashes_per_unit_area : Lightning Flash Rate-->
-		<field id="CMIP7_fracInLut" field_ref="?dummy_XY"/>
+		<field id="CMIP7_fracInLut" field_ref="?dummy_XY_landUse"/>
 		<!--P3 (%) area_fraction : Cumulative percentage transitions over the year; note that percentage should be reported as a percentage of atmospheric grid cell-->
-		<field id="CMIP7_fracLut" field_ref="?dummy_XY"/>
+		<field id="CMIP7_fracLut" field_ref="?dummy_XY_landUse"/>
 		<!--P3 (%) area_fraction : End of month values (not monthly mean); note that percentage should be reported as percentage of land grid cell (example: frac\_lnd = 0.5, frac\_ocn = 0.5, frac\_crop\_lnd = 0.2 (of land portion of grid cell), then frac\_lut(crop) = 0.5\*0.2 = 0.1)-->
-		<field id="CMIP7_fracOutLut" field_ref="?dummy_XY"/>
+		<field id="CMIP7_fracOutLut" field_ref="?dummy_XY_landUse"/>
 		<!--P3 (%) area_fraction : Cumulative percentage transitions over the year; note that percentage should be reported as percentage of atmospheric grid cell-->
 		<field id="CMIP7_gpp" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2 s-1) gross_primary_productivity_of_biomass_expressed_as_carbon : The rate of synthesis of biomass from inorganic precursors by autotrophs ("producers") expressed as the mass of carbon which it contains. For example, photosynthesis in plants or phytoplankton. The producers also respire some of this biomass and the difference is referred to as the net primary production.-->
 		<field id="CMIP7_gppGrass" field_ref="?dummy_XY"/>
 		<!--P3 (kg m-2 s-1) gross_primary_productivity_of_biomass_expressed_as_carbon : Total GPP of grass in the grid cell-->
-		<field id="CMIP7_gppLut" field_ref="?dummy_XY"/>
+		<field id="CMIP7_gppLut" field_ref="?dummy_XY_landUse"/>
 		<!--P3 (kg m-2 s-1) gross_primary_productivity_of_biomass_expressed_as_carbon : The rate of synthesis of biomass from inorganic precursors by autotrophs ("producers") expressed as the mass of carbon which it contains. For example, photosynthesis in plants or phytoplankton. The producers also respire some of this biomass and the difference is referred to as the net primary production. Reported on land-use tiles.-->
 		<field id="CMIP7_gppShrub" field_ref="?dummy_XY"/>
 		<!--P3 (kg m-2 s-1) gross_primary_productivity_of_biomass_expressed_as_carbon : Total GPP of shrubs in the grid cell-->
 		<field id="CMIP7_gppTree" field_ref="?dummy_XY"/>
 		<!--P3 (kg m-2 s-1) gross_primary_productivity_of_biomass_expressed_as_carbon : Total GPP of trees in the grid cell-->
-		<field id="CMIP7_gppVgt" field_ref="?dummy_XY"/>
+		<field id="CMIP7_gppVgt" field_ref="?dummy_XY_vegtype"/>
 		<!--P2 (kg m-2 s-1) gross_primary_productivity_of_biomass_expressed_as_carbon : The rate of synthesis of biomass from inorganic precursors by autotrophs ("producers") expressed as the mass of carbon which it contains. For example, photosynthesis in plants or phytoplankton. The producers also respire some of this biomass and the difference is referred to as the net primary production. Reported on land-use tiles.-->
 		<field id="CMIP7_gppc13" field_ref="?dummy_XY"/>
 		<!--P4 (kg m-2 s-1) gross_primary_productivity_of_biomass_expressed_as_13C : The rate of synthesis of carbon-13 in biomass from inorganic precursors by autotrophs ("producers") expressed as the mass of carbon which it contains. For example, photosynthesis in plants or phytoplankton. The producers also respire some of this biomass and the difference is referred to as the net primary production.-->
 		<field id="CMIP7_gppc14" field_ref="?dummy_XY"/>
 		<!--P4 (kg m-2 s-1) gross_primary_productivity_of_biomass_expressed_as_14C : The rate of synthesis of carbon-14 in biomass from inorganic precursors by autotrophs ("producers") expressed as the mass of carbon which it contains. For example, photosynthesis in plants or phytoplankton. The producers also respire some of this biomass and the difference is referred to as the net primary production.-->
-		<field id="CMIP7_grassFrac" field_ref="?dummy_XY"/>
+		<field id="CMIP7_grassFrac" field_ref="?dummy_XY_typenatgr"/>
 		<!--P2 (%) area_fraction : Percentage of entire grid cell that is covered by natural grass.-->
-		<field id="CMIP7_grassFracC3" field_ref="?dummy_XY"/>
+		<field id="CMIP7_grassFracC3" field_ref="?dummy_XY_typec3natg"/>
 		<!--P3 (%) area_fraction : Percentage of entire grid cell covered by C3 natural grass.-->
-		<field id="CMIP7_grassFracC4" field_ref="?dummy_XY"/>
+		<field id="CMIP7_grassFracC4" field_ref="?dummy_XY_typec4natg"/>
 		<!--P3 (%) area_fraction : Percentage of entire grid cell covered by C4 natural grass.-->
 		<field id="CMIP7_h2" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (mol mol-1) mole_fraction_of_molecular_hydrogen_in_air : This is the mole fraction of molecular hydrogen (H2) in air-->
@@ -606,13 +604,13 @@
 		<!--P1 (W m-2) surface_upward_latent_heat_flux : includes both evaporation and sublimation-->
 		<field id="CMIP7_hflsIs" field_ref="?dummy_XY"/>
 		<!--P2 (W m-2) surface_upward_latent_heat_flux : quantity averaged over ice\_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
-		<field id="CMIP7_hflsLut" field_ref="?dummy_XY"/>
+		<field id="CMIP7_hflsLut" field_ref="?dummy_XY_landUse"/>
 		<!--P3 (W m-2) surface_upward_latent_heat_flux : The surface called "surface" means the lower boundary of the atmosphere. "Upward" indicates a vector component which is positive when directed upward (negative downward). The surface latent heat flux is the exchange of heat between the surface and the air on account of evaporation (including sublimation). In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.-->
 		<field id="CMIP7_hfss" field_ref="?dummy_XY"/>
 		<!--P1 (W m-2) surface_upward_sensible_heat_flux : The surface sensible heat flux, also called turbulent heat flux, is the exchange of heat between the surface and the air by motion of air.-->
 		<field id="CMIP7_hfssIs" field_ref="?dummy_XY"/>
 		<!--P2 (W m-2) surface_upward_sensible_heat_flux : quantity averaged over ice\_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
-		<field id="CMIP7_hfssLut" field_ref="?dummy_XY"/>
+		<field id="CMIP7_hfssLut" field_ref="?dummy_XY_landUse"/>
 		<!--P3 (W m-2) surface_upward_sensible_heat_flux : Upward sensible heat flux on land use tiles. The surface sensible heat flux, also called turbulent heat flux, is the exchange of heat between the surface and the air by motion of air.-->
 		<field id="CMIP7_hno3" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (mol mol-1) mole_fraction_of_nitric_acid_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.-->
@@ -620,27 +618,19 @@
 		<!--P2 (mol mol-1) mole_fraction_of_hydroperoxyl_radical_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.  The chemical formula of hydroperoxyl radical is HO2.-->
 		<field id="CMIP7_hur" field_ref="?dummy_XY_plev19"/>
 		<!--P1 (%) relative_humidity : This is the relative humidity with respect to liquid water for T> 0 C, and with respect to ice for T<0 C.-->
-		<field id="CMIP7_hur100" field_ref="?dummy_XY"/>
-		<!--P3 (%) relative_humidity : Relative humidity at 100 hPa-->
-		<field id="CMIP7_hur500" field_ref="?dummy_XY"/>
-		<!--P3 (%) relative_humidity : Relative humidity at 500 hPa, 6 hourly instantaneous-->
-		<field id="CMIP7_hur700" field_ref="?dummy_XY"/>
-		<!--P3 (%) relative_humidity : Relative humidity at 700 hPa-->
-		<field id="CMIP7_hur850" field_ref="?dummy_XY"/>
-		<!--P3 (%) relative_humidity : Relative humidity at 850 hPa-->
-		<field id="CMIP7_hurs" field_ref="?dummy_XY"/>
+		<field id="CMIP7_hurs" field_ref="?dummy_XY_height2m"/>
 		<!--P1 (%) relative_humidity : This is the relative humidity with respect to liquid water for T> 0 C, and with respect to ice for T<0 C.-->
-		<field id="CMIP7_hursmax" field_ref="?dummy_XY"/>
+		<field id="CMIP7_hursmax" field_ref="?dummy_XY_height2m"/>
 		<!--P2 (%) relative_humidity : This is the relative humidity with respect to liquid water for T> 0 C, and with respect to ice for T<0 C.-->
-		<field id="CMIP7_hursmin" field_ref="?dummy_XY"/>
+		<field id="CMIP7_hursmin" field_ref="?dummy_XY_height2m"/>
 		<!--P2 (%) relative_humidity : This is the relative humidity with respect to liquid water for T> 0 C, and with respect to ice for T<0 C.-->
-		<field id="CMIP7_hursminCrop" field_ref="?dummy_XY"/>
+		<field id="CMIP7_hursminCrop" field_ref="?dummy_XY_height2m"/>
 		<!--P4 (%) relative_humidity : The relative humidity with respect to liquid water for T> 0 C, and with respect to ice for T<0 C.-->
 		<field id="CMIP7_hus" field_ref="?dummy_XY_plev19"/>
 		<!--P1 (1) specific_humidity : These are standard variables from CMIP5.-->
 		<field id="CMIP7_hus6" field_ref="?dummy_XY_plev6"/>
 		<!--P3 (1) specific_humidity : Specific humidity on 6 pressure levels in the lower troposphere-->
-		<field id="CMIP7_huss" field_ref="?dummy_XY"/>
+		<field id="CMIP7_huss" field_ref="?dummy_XY_height2m"/>
 		<!--P1 (1) specific_humidity : Near-surface (usually, 2 meter) specific humidity.-->
 		<field id="CMIP7_iareafl" field_ref="?dummy_0d"/>
 		<!--P3 (m2) floating_ice_shelf_area : Greenland-->
@@ -662,7 +652,7 @@
 		<!--P3 (kg m-2 s-1) surface_downward_mass_flux_of_water_due_to_irrigation : the total amount of irrigation water demand-->
 		<field id="CMIP7_irrGw" field_ref="?dummy_XY"/>
 		<!--P3 (kg m-2 s-1) surface_downward_mass_flux_of_water_due_to_irrigation : the amount of water withdrawal for irrigation from ground water, including deep soil water, confined and unconfined aquifer, etc-->
-		<field id="CMIP7_irrLut" field_ref="?dummy_XY"/>
+		<field id="CMIP7_irrLut" field_ref="?dummy_XY_landUse"/>
 		<!--P3 (kg m-2 s-1) surface_downward_mass_flux_of_water_due_to_irrigation : Mass flux of water due to irrigation.-->
 		<field id="CMIP7_irrSurf" field_ref="?dummy_XY"/>
 		<!--P3 (kg m-2 s-1) surface_downward_mass_flux_of_water_due_to_irrigation : the amount of water withdrawal for irrigation from surface water, including rivers, lakes, reservoirs, etc.)-->
@@ -670,17 +660,17 @@
 		<!--P2 (mol mol-1) mole_fraction_of_isoprene_in_air : Mole fraction of isoprene in air.-->
 		<field id="CMIP7_jno2" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (s-1) photolysis_rate_of_nitrogen_dioxide : Photolysis rate of nitrogen dioxide (NO2)-->
-		<field id="CMIP7_jpdftaureicemodis" field_ref="?dummy_XY"/>
+		<field id="CMIP7_jpdftaureicemodis" field_ref="?dummy_XY_effectRadIc_tau"/>
 		<!--P2 (%) modis_cloud_area_fraction : MODIS Optical Thickness-Particle Size joint distribution, ice-->
-		<field id="CMIP7_jpdftaureliqmodis" field_ref="?dummy_XY"/>
+		<field id="CMIP7_jpdftaureliqmodis" field_ref="?dummy_XY_effectRadLi_tau"/>
 		<!--P2 (%) modis_cloud_area_fraction : MODIS Optical Thickness-Particle Size joint distribution, liquid-->
 		<field id="CMIP7_lai" field_ref="?dummy_XY"/>
 		<!--P1 (1) leaf_area_index : A ratio obtained by dividing the total upper leaf surface area of vegetation by the (horizontal) surface area of the land on which it grows.-->
-		<field id="CMIP7_laiLut" field_ref="?dummy_XY"/>
+		<field id="CMIP7_laiLut" field_ref="?dummy_XY_landUse"/>
 		<!--P3 (1) leaf_area_index : A ratio obtained by dividing the total upper leaf surface area of vegetation by the (horizontal) surface area of the land on which it grows.-->
-		<field id="CMIP7_laiVgt" field_ref="?dummy_XY"/>
+		<field id="CMIP7_laiVgt" field_ref="?dummy_XY_vegtype"/>
 		<!--P2 (1) leaf_area_index : A ratio obtained by dividing the total upper leaf surface area of vegetation by the (horizontal) surface area of the land on which it grows.-->
-		<field id="CMIP7_landCoverFrac" field_ref="?dummy_XY"/>
+		<field id="CMIP7_landCoverFrac" field_ref="?dummy_XY_vegtype"/>
 		<!--P2 (%) area_fraction : The categories may differ from model to model, depending on their  PFT definitions.   This may include natural PFTs, anthropogenic PFTs, bare soil, lakes, urban areas, etc.   Sum of all should equal the fraction of the grid-cell that is land.-->
 		<field id="CMIP7_lat" field_ref="?dummy_XY_site"/>
 		<!--P2 (degrees_north) latitude : Latitude is positive northward; its units of degree\_north (or equivalent) indicate this explicitly. In a latitude-longitude system defined with respect to a rotated North Pole, the standard name of grid\_latitude should be used instead of latitude. Grid latitude is positive in the grid-northward direction, but its units should be plain degree.-->
@@ -774,11 +764,11 @@
 		<!--P2 (kg kg-1) mass_fraction_of_sea_salt_dry_aerosol_particles_in_air : Mass fraction in the atmosphere of sea salt aerosol (dry mass).-->
 		<field id="CMIP7_modelCellAreai" field_ref="?dummy_XY_xgre_ygre"/>
 		<!--P3 (m2) cell_area : When interpolated to a regular grid, it should be interpolated (not summed) with a conservative scheme to preserve total area-->
-		<field id="CMIP7_mpw" field_ref="?dummy_XY"/>
+		<field id="CMIP7_mpw" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (s) sea_surface_wave_mean_period : Average wave period (i.e., time in-between two wave crests) across the entire two-dimensional wave spectrum, incorporating both wind-sea and swell waves. In spectral wind wave models, it is calculated using spectral moments, mathematical measures that describe the shape and characteristics of the wave spectrum.-->
-		<field id="CMIP7_mpwswell" field_ref="?dummy_XY"/>
+		<field id="CMIP7_mpwswell" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (s) sea_surface_swell_wave_mean_period : Average wave period (i.e., time in-between two wave crests) of swell waves only (i.e., waves that have propagated away from their generation area). In spectral wind wave models, it is calculated using spectral moments, mathematical measures that describe the shape and characteristics of the wave spectrum.-->
-		<field id="CMIP7_mpwwindsea" field_ref="?dummy_XY"/>
+		<field id="CMIP7_mpwwindsea" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (s) sea_surface_wind_wave_mean_period : Average wave period (i.e., time in-between two wave crests) of wind-sea waves only (i.e., local wind waves). In spectral wind wave models, it is calculated using spectral moments, mathematical measures that describe the shape and characteristics of the wave spectrum.-->
 		<field id="CMIP7_mrfso" field_ref="?dummy_XY"/>
 		<!--P1 (kg m-2) soil_frozen_water_content : the mass (summed over all all layers) of frozen water.-->
@@ -798,15 +788,15 @@
 		<!--P2 (kg m-2) liquid_water_content_of_soil_layer : in each soil layer, the mass of water in liquid phase.  Reported as "missing" for grid cells occupied entirely by "sea"-->
 		<field id="CMIP7_mrso" field_ref="?dummy_XY"/>
 		<!--P1 (kg m-2) mass_content_of_water_in_soil : the mass per unit area  (summed over all soil layers) of water in all phases.-->
-		<field id="CMIP7_mrso10" field_ref="?dummy_XY"/>
+		<field id="CMIP7_mrso10" field_ref="?dummy_XY_sdepth10"/>
 		<!--P2 (kg m-2) mass_content_of_water_in_soil_layer : Soil moisture in the top 10 cm of the soil column-->
 		<field id="CMIP7_mrsofc" field_ref="?dummy_XY"/>
 		<!--P1 (kg m-2) soil_moisture_content_at_field_capacity : reported "where land": divide the total water holding capacity of all the soil in the grid cell by the land area in the grid cell;  reported as "missing" where the land fraction is 0.-->
 		<field id="CMIP7_mrsol" field_ref="?dummy_XYSo_sdepth"/>
 		<!--P2 (kg m-2) mass_content_of_water_in_soil_layer : in each soil layer, the mass of water in all phases, including ice.  Reported as "missing" for grid cells occupied entirely by "sea"-->
-		<field id="CMIP7_mrsos" field_ref="?dummy_XY"/>
+		<field id="CMIP7_mrsos" field_ref="?dummy_XY_sdepth1"/>
 		<!--P1 (kg m-2) mass_content_of_water_in_soil_layer : the mass of water in all phases in a thin surface soil layer.-->
-		<field id="CMIP7_mrsosLut" field_ref="?dummy_XY"/>
+		<field id="CMIP7_mrsosLut" field_ref="?dummy_XY_landUse_sdepth1"/>
 		<!--P3 (kg m-2) mass_content_of_water_in_soil_layer : the mass of water in all phases in a thin surface layer; integrate over uppermost 10cm-->
 		<field id="CMIP7_mrsow" field_ref="?dummy_XY"/>
 		<!--P2 (1) volume_fraction_of_condensed_water_in_soil_at_field_capacity : relative\_soil\_moisture\_content\_above\_field\_capacity-->
@@ -848,7 +838,7 @@
 		<!--P2 (kg m-2) vegetation_mass_content_of_nitrogen : Report missing data over ocean grid cells. For fractional land report value averaged over the land fraction.-->
 		<field id="CMIP7_nbp" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2 s-1) surface_net_downward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_all_land_processes : This is the net mass flux of carbon between land and atmosphere calculated as photosynthesis MINUS the sum of  plant and soil respiration, carbonfluxes  from fire, harvest, grazing  and land use change. Positive flux  is into the land.-->
-		<field id="CMIP7_necbLut" field_ref="?dummy_XY"/>
+		<field id="CMIP7_necbLut" field_ref="?dummy_XY_landUse"/>
 		<!--P3 (kg m-2 s-1) surface_net_downward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_all_land_processes : Computed as npp minus heterotrophic respiration minus fire minus C leaching minus harvesting/clearing. Positive rate is into the land, negative rate is from the land.  Do not include fluxes from anthropogenic product pools to atmosphere-->
 		<field id="CMIP7_nep" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2 s-1) surface_net_downward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_all_land_processes_excluding_anthropogenic_land_use_change : Net Ecosystem Exchange-->
@@ -864,13 +854,13 @@
 		<!--P2 (mol mol-1) mole_fraction_of_nitrogen_monoxide_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.-->
 		<field id="CMIP7_no2" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (mol mol-1) mole_fraction_of_nitrogen_dioxide_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.-->
-		<field id="CMIP7_noaahi2m" field_ref="?dummy_XY"/>
+		<field id="CMIP7_noaahi2m" field_ref="?dummy_XY_height2m"/>
 		<!--P3 (degC) heat_index_of_air_temperature : mean 2m daily NOAA heat index.
 The perceived air temperature when relative humidity is taken into consideration (which makes it feel hotter than the actual air temperature).
 The heat index is only defined when the ambient air temperature is at or above 299.817 K.
 NOAA heat index = -42.379 + 2.04901523(T) + 10.14333127(R) - 0.22475541(T)(R) - 6.83783e-3 sqr(T) - 5.481717e-2 sqr(R) + 1.22874e-3 sqr(T) (R) + 8.5282e-4 (T) sqr(R) - 1.99e-6 sqr(T) sqr(R)
 where T is 2 m temperature (degrees F), R is relative humidity (%)-->
-		<field id="CMIP7_noaahi2mmax" field_ref="?dummy_XY"/>
+		<field id="CMIP7_noaahi2mmax" field_ref="?dummy_XY_height2m"/>
 		<!--P3 (degC) heat_index_of_air_temperature : max 2m daily NOAA heat index
 The perceived air temperature when relative humidity is taken into consideration (which makes it feel hotter than the actual air temperature).
 The heat index is only defined when the ambient air temperature is at or above 299.817 K.
@@ -884,7 +874,7 @@ where T is 2 m temperature (degrees F), R is relative humidity (%)-->
 		<!--P3 (kg m-2 s-1) net_primary_productivity_of_biomass_expressed_as_carbon : Total NPP of grass in the grid cell-->
 		<field id="CMIP7_nppLeaf" field_ref="?dummy_XY"/>
 		<!--P3 (kg m-2 s-1) net_primary_productivity_of_biomass_expressed_as_carbon_accumulated_in_leaves : This is the rate of carbon uptake by leaves due to NPP-->
-		<field id="CMIP7_nppLut" field_ref="?dummy_XY"/>
+		<field id="CMIP7_nppLut" field_ref="?dummy_XY_landUse"/>
 		<!--P3 (kg m-2 s-1) net_primary_productivity_of_biomass_expressed_as_carbon : "Production of carbon" means the production of biomass expressed as the mass of carbon which it contains. Net primary production is the excess of gross primary production (rate of synthesis of biomass from inorganic precursors) by autotrophs ("producers"), for example, photosynthesis in plants or phytoplankton, over the rate at which the autotrophs themselves respire some of this biomass. "Productivity" means production per unit area. The phrase "expressed\_as" is used in the construction A\_expressed\_as\_B, where B is a chemical constituent of A. It means that the quantity indicated by the standard name is calculated solely with respect to the B contained in A, neglecting all other chemical constituents of A.-->
 		<field id="CMIP7_nppOther" field_ref="?dummy_XY"/>
 		<!--P3 (kg m-2 s-1) net_primary_productivity_of_biomass_expressed_as_carbon_accumulated_in_miscellaneous_living_matter : added for completeness with npp\_root-->
@@ -896,7 +886,7 @@ where T is 2 m temperature (degrees F), R is relative humidity (%)-->
 		<!--P3 (kg m-2 s-1) net_primary_productivity_of_biomass_expressed_as_carbon_accumulated_in_stems : added for completeness with npp\_root-->
 		<field id="CMIP7_nppTree" field_ref="?dummy_XY"/>
 		<!--P3 (kg m-2 s-1) net_primary_productivity_of_biomass_expressed_as_carbon : Total NPP of trees in the grid cell-->
-		<field id="CMIP7_nppVgt" field_ref="?dummy_XY"/>
+		<field id="CMIP7_nppVgt" field_ref="?dummy_XY_vegtype"/>
 		<!--P3 (kg m-2 s-1) net_primary_productivity_of_biomass_expressed_as_carbon : "Production of carbon" means the production of biomass expressed as the mass of carbon which it contains. Net primary production is the excess of gross primary production (rate of synthesis of biomass from inorganic precursors) by autotrophs ("producers"), for example, photosynthesis in plants or phytoplankton, over the rate at which the autotrophs themselves respire some of this biomass. "Productivity" means production per unit area. The phrase "expressed\_as" is used in the construction A\_expressed\_as\_B, where B is a chemical constituent of A. It means that the quantity indicated by the standard name is calculated solely with respect to the B contained in A, neglecting all other chemical constituents of A.-->
 		<field id="CMIP7_o3" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (mol mol-1) mole_fraction_of_ozone_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.-->
@@ -910,33 +900,31 @@ where T is 2 m temperature (degrees F), R is relative humidity (%)-->
 		<!--P2 (mol mol-1) reference_mole_fraction_of_ozone_in_air : This is the ozone mole fraction that is used in a diagnostic call to the model's radiation scheme. It is only applicable when an ozone double call is active in the model.-->
 		<field id="CMIP7_o3ste" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (mol mol-1) mole_fraction_of_ozone_in_air : Ozone tracer intended to map out strat-trop exchange (STE) of ozone.-->
-		<field id="CMIP7_od443aer" field_ref="?dummy_XY"/>
-		<!--P2 (1) atmosphere_optical_thickness_due_to_ambient_aerosol_particles : This is the aerosol optical depth (AOD) from the ambient aerosls (i.e., includes aerosol water).  Does not include AOD from stratospheric aerosols if these are prescribed but includes other possible background aerosol types. Needs a comment attribute "wavelength: 443 nm"-->
-		<field id="CMIP7_od550aer" field_ref="?dummy_XY"/>
-		<!--P2 (1) atmosphere_optical_thickness_due_to_ambient_aerosol_particles : AOD from ambient aerosols (i.e., includes aerosol water).  Does not include AOD from stratospheric aerosols if these are prescribed but includes other possible background aerosol types. Needs a comment attribute "wavelength: 550 nm"-->
-		<field id="CMIP7_od550aerh2o" field_ref="?dummy_XY"/>
-		<!--P2 (1) atmosphere_optical_thickness_due_to_water_in_ambient_aerosol_particles : proposed name: atmosphere\_optical\_thickness\_due\_to\_water\_ambient\_aerosol-->
-		<field id="CMIP7_od550bb" field_ref="?dummy_XY"/>
-		<!--P2 (1) atmosphere_optical_thickness_due_to_particulate_organic_matter_ambient_aerosol_particles : total organic aerosol AOD due to biomass burning (excluding so4, nitrate BB components)-->
-		<field id="CMIP7_od550bc" field_ref="?dummy_XY"/>
-		<!--P2 (1) atmosphere_optical_thickness_due_to_black_carbon_ambient_aerosol : Total aerosol AOD due to black carbon aerosol at a wavelength of 550 nanometres.-->
-		<field id="CMIP7_od550csaer" field_ref="?dummy_XY"/>
-		<!--P2 (1) atmosphere_optical_thickness_due_to_ambient_aerosol_particles : AOD from the ambient aerosols in clear skies if od550aer is for all-sky (i.e., includes aerosol water).  Does not include AOD from stratospheric aerosols if these are prescribed but includes other possible background aerosol types. Needs a comment attribute "wavelength: 550 nm"-->
-		<field id="CMIP7_od550dust" field_ref="?dummy_XY"/>
-		<!--P2 (1) atmosphere_optical_thickness_due_to_dust_ambient_aerosol_particles : Total aerosol AOD due to dust aerosol at a wavelength of 550 nanometres.-->
-		<field id="CMIP7_od550lt1aer" field_ref="?dummy_XY"/>
-		<!--P2 (1) atmosphere_optical_thickness_due_to_pm1_ambient_aerosol_particles : od550 due to particles with wet diameter less than 1 um  ("ambient" means "wetted"). When models do not include explicit size information, it can be assumed that all anthropogenic aerosols and natural secondary aerosols have diameter less than 1 um.-->
-		<field id="CMIP7_od550no3" field_ref="?dummy_XY"/>
-		<!--P2 (1) atmosphere_optical_thickness_due_to_nitrate_ambient_aerosol_particles : Total aerosol AOD due to nitrate aerosol at a wavelength of 550 nanometres.-->
-		<field id="CMIP7_od550oa" field_ref="?dummy_XY"/>
-		<!--P2 (1) atmosphere_optical_thickness_due_to_particulate_organic_matter_ambient_aerosol_particles : total organic aerosol AOD, comprises all organic aerosols, primary + secondary ; natural + anthropogenic including biomasss burning organic aerosol-->
-		<field id="CMIP7_od550so4" field_ref="?dummy_XY"/>
+		<field id="CMIP7_od" field_ref="?dummy_XY_lambda550nm"/>
 		<!--P2 (1) atmosphere_optical_thickness_due_to_sulfate_ambient_aerosol_particles : Total aerosol AOD due to sulfate aerosol at a wavelength of 550 nanometres.-->
-		<field id="CMIP7_od550soa" field_ref="?dummy_XY"/>
+		<field id="CMIP7_od443aer" field_ref="?dummy_XY_lambda443nm"/>
+		<!--P2 (1) atmosphere_optical_thickness_due_to_ambient_aerosol_particles : This is the aerosol optical depth (AOD) from the ambient aerosls (i.e., includes aerosol water).  Does not include AOD from stratospheric aerosols if these are prescribed but includes other possible background aerosol types. Needs a comment attribute "wavelength: 443 nm"-->
+		<field id="CMIP7_od550aer" field_ref="?dummy_XY_lambda550nm"/>
+		<!--P2 (1) atmosphere_optical_thickness_due_to_ambient_aerosol_particles : AOD from ambient aerosols (i.e., includes aerosol water).  Does not include AOD from stratospheric aerosols if these are prescribed but includes other possible background aerosol types. Needs a comment attribute "wavelength: 550 nm"-->
+		<field id="CMIP7_od550aerh2o" field_ref="?dummy_XY_lambda550nm"/>
+		<!--P2 (1) atmosphere_optical_thickness_due_to_water_in_ambient_aerosol_particles : proposed name: atmosphere\_optical\_thickness\_due\_to\_water\_ambient\_aerosol-->
+		<field id="CMIP7_od550bb" field_ref="?dummy_XY_lambda550nm"/>
+		<!--P2 (1) atmosphere_optical_thickness_due_to_particulate_organic_matter_ambient_aerosol_particles : total organic aerosol AOD due to biomass burning (excluding so4, nitrate BB components)-->
+		<field id="CMIP7_od550bc" field_ref="?dummy_XY_lambda550nm"/>
+		<!--P2 (1) atmosphere_optical_thickness_due_to_black_carbon_ambient_aerosol : Total aerosol AOD due to black carbon aerosol at a wavelength of 550 nanometres.-->
+		<field id="CMIP7_od550csaer" field_ref="?dummy_XY_lambda550nm"/>
+		<!--P2 (1) atmosphere_optical_thickness_due_to_ambient_aerosol_particles : AOD from the ambient aerosols in clear skies if od550aer is for all-sky (i.e., includes aerosol water).  Does not include AOD from stratospheric aerosols if these are prescribed but includes other possible background aerosol types. Needs a comment attribute "wavelength: 550 nm"-->
+		<field id="CMIP7_od550dust" field_ref="?dummy_XY_lambda550nm"/>
+		<!--P2 (1) atmosphere_optical_thickness_due_to_dust_ambient_aerosol_particles : Total aerosol AOD due to dust aerosol at a wavelength of 550 nanometres.-->
+		<field id="CMIP7_od550lt1aer" field_ref="?dummy_XY_lambda550nm"/>
+		<!--P2 (1) atmosphere_optical_thickness_due_to_pm1_ambient_aerosol_particles : od550 due to particles with wet diameter less than 1 um  ("ambient" means "wetted"). When models do not include explicit size information, it can be assumed that all anthropogenic aerosols and natural secondary aerosols have diameter less than 1 um.-->
+		<field id="CMIP7_od550oa" field_ref="?dummy_XY_lambda550nm"/>
+		<!--P2 (1) atmosphere_optical_thickness_due_to_particulate_organic_matter_ambient_aerosol_particles : total organic aerosol AOD, comprises all organic aerosols, primary + secondary ; natural + anthropogenic including biomasss burning organic aerosol-->
+		<field id="CMIP7_od550soa" field_ref="?dummy_XY_lambda550nm"/>
 		<!--P2 (1) atmosphere_optical_thickness_due_to_particulate_organic_matter_ambient_aerosol_particles : total organic aerosol AOD due to secondary aerosol formation-->
-		<field id="CMIP7_od550ss" field_ref="?dummy_XY"/>
+		<field id="CMIP7_od550ss" field_ref="?dummy_XY_lambda550nm"/>
 		<!--P2 (1) atmosphere_optical_thickness_due_to_sea_salt_ambient_aerosol_particles : Total aerosol AOD due to sea salt aerosol at a wavelength of 550 nanometres.-->
-		<field id="CMIP7_od865aer" field_ref="?dummy_XY"/>
+		<field id="CMIP7_od865aer" field_ref="?dummy_XY_lambda865nm"/>
 		<!--P2 (1) atmosphere_optical_thickness_due_to_ambient_aerosol_particles : AOD from the ambient aerosols (i.e., includes aerosol water).  Does not include AOD from stratospheric aerosols if these are prescribed but includes other possible background aerosol types. Needs a comment attribute "wavelength: 865 nm"-->
 		<field id="CMIP7_oh" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (mol mol-1) mole_fraction_of_hydroxyl_radical_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.-->
@@ -946,13 +934,13 @@ where T is 2 m temperature (degrees F), R is relative humidity (%)-->
 		<!--P2 (m) surface_altitude : quantity averaged over ice\_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
 		<field id="CMIP7_pan" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (mol mol-1) mole_fraction_of_peroxyacetyl_nitrate_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.-->
-		<field id="CMIP7_parasolRefl" field_ref="?dummy_XY"/>
+		<field id="CMIP7_parasolRefl" field_ref="?dummy_XY_sza5"/>
 		<!--P2 (1) toa_bidirectional_reflectance : PARASOL Reflectance-->
-		<field id="CMIP7_pastureFrac" field_ref="?dummy_XY"/>
+		<field id="CMIP7_pastureFrac" field_ref="?dummy_XY_typepasture"/>
 		<!--P2 (%) area_fraction : fraction of entire grid cell  that is covered by anthropogenic pasture.-->
-		<field id="CMIP7_pastureFracC3" field_ref="?dummy_XY"/>
+		<field id="CMIP7_pastureFracC3" field_ref="?dummy_XY_typec3pastures"/>
 		<!--P3 (%) area_fraction : Percentage of entire grid cell covered by C3 pasture-->
-		<field id="CMIP7_pastureFracC4" field_ref="?dummy_XY"/>
+		<field id="CMIP7_pastureFracC4" field_ref="?dummy_XY_typec4pastures"/>
 		<!--P3 (%) area_fraction : Percentage of entire grid cell covered by C4 pasture-->
 		<field id="CMIP7_pctisccp" field_ref="?dummy_XY"/>
 		<!--P2 (Pa) air_pressure_at_cloud_top : time-means weighted by the ISCCP Total Cloud Fraction - see <https://www.cfmip.org/tools-and-data/cosp>-->
@@ -1018,7 +1006,7 @@ where T is 2 m temperature (degrees F), R is relative humidity (%)-->
 		<!--P3 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_plant_respiration : Total RA of grass in the grid cell-->
 		<field id="CMIP7_raLeaf" field_ref="?dummy_XY"/>
 		<!--P3 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_plant_respiration_in_leaves : added for completeness with Ra\_root-->
-		<field id="CMIP7_raLut" field_ref="?dummy_XY"/>
+		<field id="CMIP7_raLut" field_ref="?dummy_XY_landUse"/>
 		<!--P3 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_plant_respiration : Carbon mass flux per unit area into atmosphere due to autotrophic respiration on land (respiration by producers) [see rh for heterotrophic production]. Calculated on land-use tiles.-->
 		<field id="CMIP7_raOther" field_ref="?dummy_XY"/>
 		<!--P3 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_plant_respiration_in_miscellaneous_living_matter : added for completeness with Ra\_root-->
@@ -1030,7 +1018,7 @@ where T is 2 m temperature (degrees F), R is relative humidity (%)-->
 		<!--P3 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_plant_respiration_in_stems : added for completeness with Ra\_root-->
 		<field id="CMIP7_raTree" field_ref="?dummy_XY"/>
 		<!--P3 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_plant_respiration : Total RA of trees in the grid cell-->
-		<field id="CMIP7_raVgt" field_ref="?dummy_XY"/>
+		<field id="CMIP7_raVgt" field_ref="?dummy_XY_vegtype"/>
 		<!--P3 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_plant_respiration : Carbon mass flux per unit area into atmosphere due to autotrophic respiration on land (respiration by producers) [see rh for heterotrophic production]. Calculated on vegetation type.-->
 		<field id="CMIP7_rac13" field_ref="?dummy_XY"/>
 		<!--P4 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_13C_due_to_plant_respiration : Flux of carbon-13 into the atmosphere due to plant respiration. Plant respiration is the sum of respiration by parts of plants both above and below the soil. It is assumed that all the respired carbon dioxide is emitted to the atmosphere.-->
@@ -1052,7 +1040,7 @@ where T is 2 m temperature (degrees F), R is relative humidity (%)-->
 		<!--P2 (m) effective_radius_of_cloud_liquid_water_particles_at_liquid_water_cloud_top : Droplets are liquid only.  This is the effective radius "as seen from space" over liquid cloudy portion of grid cell. This is the value from uppermost model layer with liquid cloud or, if available, or for some models it is the sum over all liquid cloud tops, no matter where they occur, as long as they are seen from the top of the atmosphere.TOA) each time sample when computing monthly mean. Reported values are weighted by total liquid cloud top fraction of  (as seen from TOA) each time sample when computing monthly mean.-->
 		<field id="CMIP7_reffsclwtop" field_ref="?dummy_XY"/>
 		<!--P2 (m) effective_radius_of_stratiform_cloud_liquid_water_particles_at_stratiform_liquid_water_cloud_top : Cloud-Top Effective Droplet Radius in Stratiform Cloud-->
-		<field id="CMIP7_residualFrac" field_ref="?dummy_XY"/>
+		<field id="CMIP7_residualFrac" field_ref="?dummy_XY_typeresidual"/>
 		<!--P2 (%) area_fraction : fraction of entire grid cell  that is land and is covered by "non-vegetation" and "non-bare-soil" (e.g., urban, ice, lakes, etc.)-->
 		<field id="CMIP7_rh" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_heterotrophic_respiration : Carbon mass flux per unit area into atmosphere due to heterotrophic respiration on land (respiration by consumers)-->
@@ -1060,7 +1048,7 @@ where T is 2 m temperature (degrees F), R is relative humidity (%)-->
 		<!--P3 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_heterotrophic_respiration : Total RH of grass in the grid cell-->
 		<field id="CMIP7_rhLitter" field_ref="?dummy_XY"/>
 		<!--P3 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_due_to_heterotrophic_respiration_in_litter : Needed to calculate litter bulk turnover time. Includes respiration from CWD as well.-->
-		<field id="CMIP7_rhLut" field_ref="?dummy_XY"/>
+		<field id="CMIP7_rhLut" field_ref="?dummy_XY_landUse"/>
 		<!--P3 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_heterotrophic_respiration : Carbon mass flux per unit area into atmosphere due to heterotrophic respiration on land (respiration by consumers), calculated on land-use tiles.-->
 		<field id="CMIP7_rhShrub" field_ref="?dummy_XY"/>
 		<!--P3 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_heterotrophic_respiration : Total RH of shrubs in the grid cell-->
@@ -1068,7 +1056,7 @@ where T is 2 m temperature (degrees F), R is relative humidity (%)-->
 		<!--P3 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_due_to_heterotrophic_respiration_in_soil : Needed to calculate soil bulk turnover time-->
 		<field id="CMIP7_rhTree" field_ref="?dummy_XY"/>
 		<!--P3 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_heterotrophic_respiration : Total RH of trees in the grid cell-->
-		<field id="CMIP7_rhVgt" field_ref="?dummy_XY"/>
+		<field id="CMIP7_rhVgt" field_ref="?dummy_XY_vegtype"/>
 		<!--P3 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_heterotrophic_respiration : Carbon mass flux per unit area into atmosphere due to heterotrophic respiration on land (respiration by consumers), calculated on vegetation type.-->
 		<field id="CMIP7_rhc13" field_ref="?dummy_XY"/>
 		<!--P4 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_13C_due_to_heterotrophic_respiration : Heterotrophic respiration is respiration by heterotrophs ("consumers"), which are organisms (including animals and decomposers) that consume other organisms or dead organic material, rather than synthesising organic material from inorganic precursors using energy from the environment (especially sunlight) as autotrophs ("producers") do. Heterotrophic respiration goes on within both the soil and litter pools.-->
@@ -1202,7 +1190,7 @@ where T is 2 m temperature (degrees F), R is relative humidity (%)-->
 		<!--P2 (W m-2) toa_outgoing_shortwave_flux_assuming_reference_mole_fraction_of_ozone_in_air : This is top-of-atmosphere outgoing shortwave flux for all-sky conditions from a diagnostic call to the radiation scheme, using a reference ozone field-->
 		<field id="CMIP7_rtmt" field_ref="?dummy_XY_site"/>
 		<!--P2 (W m-2) net_downward_radiative_flux_at_top_of_atmosphere_model : i.e., at the top of that portion of the atmosphere where dynamics are explicitly treated by the model. This is reported only if it differs from the net downward radiative flux at the top of the atmosphere.-->
-		<field id="CMIP7_rv850" field_ref="?dummy_XY"/>
+		<field id="CMIP7_rv" field_ref="?dummy_XY_p850"/>
 		<!--P2 (s-1) atmosphere_relative_vorticity : Relative vorticity is the upward component of the vorticity vector i.e. the component which arises from horizontal velocity.-->
 		<field id="CMIP7_rzwc" field_ref="?dummy_XY"/>
 		<!--P3 (kg m-2) mass_content_of_water_in_soil_layer_defined_by_root_depth : water\_content\_of\_root\_zone-->
@@ -1214,13 +1202,13 @@ where T is 2 m temperature (degrees F), R is relative humidity (%)-->
 		<!--P2 (1) shallow_convection_time_fraction : Fraction of time that shallow convection occurs in the grid cell.-->
 		<field id="CMIP7_scldncl" field_ref="?dummy_XY"/>
 		<!--P2 (m-3) number_concentration_of_stratiform_cloud_liquid_water_particles_at_stratiform_liquid_water_cloud_top : Cloud Droplet Number Concentration of Stratiform Cloud Tops-->
-		<field id="CMIP7_sduo" field_ref="?dummy_XY"/>
+		<field id="CMIP7_sduo" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (m s-1) sea_surface_wave_stokes_drift_eastward_velocity : The eastward component of the net drift velocity of ocean water caused by surface wind-sea waves. The Stokes drift velocity could be defined as the difference between the average Lagrangian flow velocity of a fluid parcel, and the average Eulerian flow velocity of the fluid at a fixed position.-->
-		<field id="CMIP7_sdvo" field_ref="?dummy_XY"/>
+		<field id="CMIP7_sdvo" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (m s-1) sea_surface_wave_stokes_drift_northward_velocity : The northward component of the net drift velocity of ocean water caused by surface wind-sea waves. The Stokes drift velocity could be defined as the difference between the average Lagrangian flow velocity of a fluid parcel, and the average Eulerian flow velocity of the fluid at a fixed position.-->
-		<field id="CMIP7_sfcWind" field_ref="?dummy_XY"/>
+		<field id="CMIP7_sfcWind" field_ref="?dummy_XY_height10m"/>
 		<!--P1 (m s-1) wind_speed : near-surface (usually, 10 meters) wind speed.-->
-		<field id="CMIP7_sfcWindmax" field_ref="?dummy_XY"/>
+		<field id="CMIP7_sfcWindmax" field_ref="?dummy_XY_height10m"/>
 		<!--P2 (m s-1) wind_speed : Daily maximum near-surface (usually, 10 meters) wind speed.-->
 		<field id="CMIP7_sfno2" field_ref="?dummy_XY"/>
 		<!--P2 (mol mol-1) mole_fraction_of_nitrogen_dioxide_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.-->
@@ -1242,9 +1230,9 @@ where T is 2 m temperature (degrees F), R is relative humidity (%)-->
 		<!--P2 (%) grounded_ice_sheet_area_fraction : Percentage of grid cell covered by grounded ice sheet-->
 		<field id="CMIP7_sftlf" field_ref="?dummy_XY"/>
 		<!--P1 (%) land_area_fraction : Percentage of horizontal area occupied by land.-->
-		<field id="CMIP7_sftlkf" field_ref="?dummy_XY"/>
+		<field id="CMIP7_sftlkf" field_ref="?dummy_XY_typelkins"/>
 		<!--P2 (1) area_fraction : Fraction of horizontal land grid cell area occupied by lake.-->
-		<field id="CMIP7_shrubFrac" field_ref="?dummy_XY"/>
+		<field id="CMIP7_shrubFrac" field_ref="?dummy_XY_typeshrub"/>
 		<!--P2 (%) area_fraction : fraction of entire grid cell  that is covered by shrub.-->
 		<field id="CMIP7_slthick" field_ref="?dummy_XYSo_sdepth"/>
 		<!--P1 (m) cell_thickness : Thickness of Soil Layers-->
@@ -1288,39 +1276,35 @@ where T is 2 m temperature (degrees F), R is relative humidity (%)-->
 		<!--P3 (Pa) land_ice_basal_drag : Magnitude of basal drag at land ice base-->
 		<field id="CMIP7_sw" field_ref="?dummy_XY"/>
 		<!--P3 (kg m-2) land_surface_liquid_water_amount : Total liquid water storage, other than soil, snow or interception storage (i.e. lakes, river channel or depression storage).-->
-		<field id="CMIP7_sweLut" field_ref="?dummy_XY"/>
+		<field id="CMIP7_sweLut" field_ref="?dummy_XY_landUse"/>
 		<!--P3 (m) lwe_thickness_of_surface_snow_amount : The surface called "surface" means the lower boundary of the atmosphere. "lwe" means liquid water equivalent. "Amount" means mass per unit area. The construction lwe\_thickness\_of\_X\_amount or \_content means the vertical extent of a layer of liquid water having the same mass per unit area. Surface amount refers to the amount on the ground, excluding that on the plant or vegetation canopy.-->
-		<field id="CMIP7_swh" field_ref="?dummy_XY"/>
+		<field id="CMIP7_swh" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (m) sea_surface_wave_significant_height : Average height of the highest one-third of waves present in the sea state, incorporating both wind-sea and swell waves. This is a key parameter for describing wave energy and is derived from the wave spectrum using spectral moments. Specifically, this parameter is four times the square root of the integral over all directions and all frequencies of the two-dimensional wave spectrum.-->
-		<field id="CMIP7_swhmax" field_ref="?dummy_XY"/>
+		<field id="CMIP7_swhmax" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (m) sea_surface_wave_significant_height : Highest value of the significant wave height simulated within a given time range (e.g., daily or monthly). The significant wave height (swh) is derived from the wave spectrum using spectral moments. Specifically, swh is four times the square root of the integral over all directions and all frequencies of the two-dimensional wave spectrum.-->
-		<field id="CMIP7_swhswell" field_ref="?dummy_XY"/>
+		<field id="CMIP7_swhswell" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (m) sea_surface_swell_wave_significant_height : Average height of the highest one-third of waves present in the sea state, incorporating just swell waves (i.e., waves that have propagated away from their generation area). This parameter is derived from all swell partitions of the wave spectrum using spectral moments. Specifically, this parameter is four times the square root of the integral over all directions and all frequencies of the components of the two-dimensional wave spectrum that are not under the influence of local wind.-->
-		<field id="CMIP7_swhwindsea" field_ref="?dummy_XY"/>
+		<field id="CMIP7_swhwindsea" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (m) sea_surface_wind_wave_significant_height : Average height of the highest one-third of waves present in the sea state, incorporating just wind-sea waves (i.e., local wind waves). It is derived from the wind-sea wave spectrum using spectral moments. Specifically, this parameter is four times the square root of the integral over all directions and all frequencies of the two-dimensional wind-sea wave spectrum.-->
 		<field id="CMIP7_ta" field_ref="?dummy_XY_plev3"/>
 		<!--P1 (K) air_temperature : Air Temperature-->
 		<field id="CMIP7_ta6" field_ref="?dummy_XY_plev6"/>
 		<!--P3 (K) air_temperature : Air temperature on 6 pressure levels in the lower troposphere-->
-		<field id="CMIP7_ta700" field_ref="?dummy_XY"/>
-		<!--P2 (K) air_temperature : Air temperature at 700hPa-->
-		<field id="CMIP7_ta850" field_ref="?dummy_XY"/>
-		<!--P2 (K) air_temperature : Air temperature at 850hPa-->
 		<field id="CMIP7_taUTLS" field_ref="?dummy_XY_plev5u"/>
 		<!--P2 (K) air_temperature : 6 hourly instantaneous temperature at 5 pressure levels in the UTLS region (150, 175, 200, 225, and 250 hPa)-->
-		<field id="CMIP7_tas" field_ref="?dummy_XY"/>
+		<field id="CMIP7_tas" field_ref="?dummy_XY_height2m"/>
 		<!--P1 (K) air_temperature : near-surface (usually, 2 meter) air temperature-->
 		<field id="CMIP7_tasIs" field_ref="?dummy_XY"/>
 		<!--P2 (K) air_temperature : quantity averaged over ice\_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
-		<field id="CMIP7_tasLut" field_ref="?dummy_XY"/>
+		<field id="CMIP7_tasLut" field_ref="?dummy_XY_height2m_landUse"/>
 		<!--P3 (K) air_temperature : Air temperature is the bulk temperature of the air, not the surface (skin) temperature.-->
-		<field id="CMIP7_tasmax" field_ref="?dummy_XY"/>
+		<field id="CMIP7_tasmax" field_ref="?dummy_XY_height2m"/>
 		<!--P1 (K) air_temperature : maximum near-surface (usually, 2 meter) air temperature (add cell\_method attribute "time: max")-->
-		<field id="CMIP7_tasmaxCrop" field_ref="?dummy_XY"/>
+		<field id="CMIP7_tasmaxCrop" field_ref="?dummy_XY_height2m"/>
 		<!--P4 (K) air_temperature : maximum near-surface (usually, 2 meter) air temperature (add cell\_method attribute "time: max")-->
-		<field id="CMIP7_tasmin" field_ref="?dummy_XY"/>
+		<field id="CMIP7_tasmin" field_ref="?dummy_XY_height2m"/>
 		<!--P1 (K) air_temperature : minimum near-surface (usually, 2 meter) air temperature (add cell\_method attribute "time: min")-->
-		<field id="CMIP7_tasminCrop" field_ref="?dummy_XY"/>
+		<field id="CMIP7_tasminCrop" field_ref="?dummy_XY_height2m"/>
 		<!--P4 (K) air_temperature : minimum near-surface (usually, 2 meter) air temperature (add cell\_method attribute "time: min")-->
 		<field id="CMIP7_tatp" field_ref="?dummy_XY"/>
 		<!--P2 (K) tropopause_air_temperature : 2D monthly mean thermal tropopause calculated using WMO tropopause definition on 3d temperature-->
@@ -1404,15 +1388,15 @@ where T is 2 m temperature (degrees F), R is relative humidity (%)-->
 		<!--P2 (m) permafrost_layer_thickness : where land over land: This is the mean thickness of the permafrost layer in the land portion of the grid cell.  Reported as missing in permafrost-free regions.-->
 		<field id="CMIP7_tran" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2 s-1) transpiration_flux : Transpiration (may include dew formation as a negative flux).-->
-		<field id="CMIP7_treeFrac" field_ref="?dummy_XY"/>
+		<field id="CMIP7_treeFrac" field_ref="?dummy_XY_typetree"/>
 		<!--P2 (%) area_fraction : fraction of entire grid cell  that is covered by trees.-->
-		<field id="CMIP7_treeFracBdlDcd" field_ref="?dummy_XY"/>
+		<field id="CMIP7_treeFracBdlDcd" field_ref="?dummy_XY_typetreebd"/>
 		<!--P3 (%) area_fraction : This is the percentage of the entire grid cell that is covered by broadleaf deciduous trees.-->
-		<field id="CMIP7_treeFracBdlEvg" field_ref="?dummy_XY"/>
+		<field id="CMIP7_treeFracBdlEvg" field_ref="?dummy_XY_typetreebe"/>
 		<!--P3 (%) area_fraction : This is the percentage of the entire grid cell that is covered by broadleaf evergreen trees.-->
-		<field id="CMIP7_treeFracNdlDcd" field_ref="?dummy_XY"/>
+		<field id="CMIP7_treeFracNdlDcd" field_ref="?dummy_XY_typetreend"/>
 		<!--P3 (%) area_fraction : This is the percentage of the entire grid cell that is covered by needleleaf deciduous trees.-->
-		<field id="CMIP7_treeFracNdlEvg" field_ref="?dummy_XY"/>
+		<field id="CMIP7_treeFracNdlEvg" field_ref="?dummy_XY_typetreene"/>
 		<!--P3 (%) area_fraction : This is the percentage of the entire grid cell that is covered by needleleaf evergreen trees.-->
 		<field id="CMIP7_tropch4loss" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (mol m-3 s-1) tendency_of_atmosphere_mole_concentration_of_methane_due_to_chemical_destruction : This is the loss rate of tropospheric methane by all chemical destruction. The distinction between stratosphere and troposphere should be consistent with the tropopause used in the calculation of the tropopause pressure (ptp).  It should have zero values in the stratosphere.-->
@@ -1432,7 +1416,7 @@ where T is 2 m temperature (degrees F), R is relative humidity (%)-->
 		<!--P2 (K) soil_temperature : Temperature of each soil layer.  Reported as "missing" for grid cells occupied entirely by "sea".-->
 		<field id="CMIP7_tslsi" field_ref="?dummy_XY"/>
 		<!--P2 (K) surface_temperature : Surface temperature of all surfaces except open ocean.-->
-		<field id="CMIP7_tslsiLut" field_ref="?dummy_XY"/>
+		<field id="CMIP7_tslsiLut" field_ref="?dummy_XY_landUse"/>
 		<!--P3 (K) surface_temperature : Surface temperature (i.e. temperature at which long-wave radiation emitted)-->
 		<field id="CMIP7_tsn" field_ref="?dummy_XY"/>
 		<!--P2 (K) temperature_in_surface_snow : This temperature is averaged over all the snow in the grid cell that rests on land or land ice.  When computing the time-mean here, the time samples, weighted by the mass of snow on the land portion of the grid cell, are accumulated and then divided by the sum of the weights.   Reported as "missing in regions free of snow on land.-->
@@ -1444,17 +1428,13 @@ where T is 2 m temperature (degrees F), R is relative humidity (%)-->
 		<!--P2 (K) air_temperature_at_cloud_top : cloud\_top refers to the top of the highest cloud. Air temperature is the bulk temperature of the air, not the surface (skin) temperature.-->
 		<field id="CMIP7_ua" field_ref="?dummy_XY_plev3"/>
 		<!--P1 (m s-1) eastward_wind : Zonal wind (positive in a eastward direction).-->
-		<field id="CMIP7_ua10" field_ref="?dummy_XY"/>
-		<!--P2 (m s-1) eastward_wind : Zonal wind on the 10 hPa surface-->
-		<field id="CMIP7_ua100m" field_ref="?dummy_XY"/>
+		<field id="CMIP7_ua100m" field_ref="?dummy_XY_height100m"/>
 		<!--P2 (m s-1) eastward_wind : Zonal wind (positive in a eastward direction) at 100m above the surface-->
-		<field id="CMIP7_ua200" field_ref="?dummy_XY"/>
-		<!--P3 (m s-1) eastward_wind : Zonal wind (positive in a eastward direction) at 200 hPa, 6hourly instantaneous-->
 		<field id="CMIP7_ua6" field_ref="?dummy_XY_plev6"/>
 		<!--P3 (m s-1) eastward_wind : Zonal wind (positive in a eastward direction) on 6 pressure levels in the lower troposphere-->
 		<field id="CMIP7_uaUTLS" field_ref="?dummy_XY_plev5u"/>
 		<!--P2 (m s-1) eastward_wind : 6 hourly instantaneous northward wind at 5 pressure levels in the UTLS region (150, 175, 200, 225, and 250 hPa)-->
-		<field id="CMIP7_uas" field_ref="?dummy_XY"/>
+		<field id="CMIP7_uas" field_ref="?dummy_XY_height10m"/>
 		<!--P1 (m s-1) eastward_wind : Eastward component of the near-surface (usually, 10 meters)  wind-->
 		<field id="CMIP7_utendepfd" field_ref="?dummy_XY_plev39"/>
 		<!--P2 (m s-2) tendency_of_eastward_wind_due_to_eliassen_palm_flux_divergence : Tendency of the zonal mean zonal wind due to the divergence of the Eliassen-Palm flux.-->
@@ -1468,17 +1448,15 @@ where T is 2 m temperature (degrees F), R is relative humidity (%)-->
 		<!--P2 (m s-2) tendency_of_eastward_wind_due_to_advection_by_upward_transformed_eulerian_mean_air_velocity : Zonal mean tendency of eastward wind due to TEM upward advection-->
 		<field id="CMIP7_va" field_ref="?dummy_XY_plev3"/>
 		<!--P1 (m s-1) northward_wind : Meridional wind (positive in a northward direction).-->
-		<field id="CMIP7_va100m" field_ref="?dummy_XY"/>
+		<field id="CMIP7_va100m" field_ref="?dummy_XY_height100m"/>
 		<!--P2 (m s-1) northward_wind : Meridional wind (positive in a northward direction) at 100m above the surface.-->
-		<field id="CMIP7_va200" field_ref="?dummy_XY"/>
-		<!--P3 (m s-1) northward_wind : Meridional wind (positive in a northward direction) at 200 hPa, 6 hourly instantaneous-->
 		<field id="CMIP7_va6" field_ref="?dummy_XY_plev6"/>
 		<!--P3 (m s-1) northward_wind : Meridional wind (positive in a northward direction) on 6 pressure levels in the lower troposphere-->
 		<field id="CMIP7_vaUTLS" field_ref="?dummy_XY_plev5u"/>
 		<!--P2 (m s-1) northward_wind : 6 hourly instantaneous eastward wind at 5 pressure levels in the UTLS region (150, 175, 200, 225, and 250 hPa)-->
-		<field id="CMIP7_vas" field_ref="?dummy_XY"/>
+		<field id="CMIP7_vas" field_ref="?dummy_XY_height10m"/>
 		<!--P1 (m s-1) northward_wind : Northward component of the near surface wind-->
-		<field id="CMIP7_vegFrac" field_ref="?dummy_XY"/>
+		<field id="CMIP7_vegFrac" field_ref="?dummy_XY_typeveg"/>
 		<!--P2 (%) area_fraction : Percentage of grid cell that is covered by vegetation.This SHOULD be the sum of tree, grass (natural and pasture), crop and shrub fractions.-->
 		<field id="CMIP7_vegHeight" field_ref="?dummy_XY"/>
 		<!--P2 (m) canopy_height : Vegetation height averaged over all vegetation types and over the vegetated fraction of a grid cell.-->
@@ -1488,7 +1466,7 @@ where T is 2 m temperature (degrees F), R is relative humidity (%)-->
 		<!--P3 (m) canopy_height : Vegetation height averaged over the shrub fraction of a grid cell.-->
 		<field id="CMIP7_vegHeightTree" field_ref="?dummy_XY"/>
 		<!--P2 (m) canopy_height : Vegetation height averaged over the tree fraction of a grid cell.-->
-		<field id="CMIP7_vt100" field_ref="?dummy_lat"/>
+		<field id="CMIP7_vt" field_ref="?dummy_lat_p100"/>
 		<!--P2 (K m s-1) covariance_over_longitude_of_northward_wind_and_air_temperature : Zonally averaged eddy temperature flux at 100hPa as monthly means derived from daily (or higher frequency) fields.-->
 		<field id="CMIP7_vtem" field_ref="?dummy_XY_plev39"/>
 		<!--P2 (m s-1) northward_transformed_eulerian_mean_air_velocity : Transformed Eulerian Mean Diagnostics v\*, meridional component of the residual meridional circulation (v\*, w\*) derived from 6 hr or higher frequency data fields (use instantaneous daily fields or 12 hr fields if the 6 hr data are not available).-->
@@ -1500,25 +1478,23 @@ where T is 2 m temperature (degrees F), R is relative humidity (%)-->
 		<!--P2 (m s-1) upward_air_velocity : A velocity is a vector quantity. "Upward" indicates a vector component which is positive when directed upward (negative downward). Upward air velocity is the vertical component of the 3D air velocity vector. The standard name downward\_air\_velocity may be used for a vector component with the opposite sign convention.-->
 		<field id="CMIP7_wap" field_ref="?dummy_XY_plev19"/>
 		<!--P1 (Pa s-1) lagrangian_tendency_of_air_pressure : commonly referred to as "omega", this represents the vertical component of velocity in pressure coordinates (positive down)-->
-		<field id="CMIP7_wap500" field_ref="?dummy_XY"/>
-		<!--P2 (Pa s-1) lagrangian_tendency_of_air_pressure : at 500 hPa level; commonly referred to as "omega", this represents the vertical component of velocity in pressure coordinates (positive down)-->
 		<field id="CMIP7_wap6" field_ref="?dummy_XY_plev6"/>
 		<!--P3 (Pa s-1) lagrangian_tendency_of_air_pressure : Omega (=dp/dt) on 6 pressure levels in the lower troposphere-->
-		<field id="CMIP7_wbgt2m" field_ref="?dummy_XY"/>
+		<field id="CMIP7_wbgt2m" field_ref="?dummy_XY_height2m"/>
 		<!--P3 (degC) wet_bulb_globe_temperature : mean 2m daily wet bulb globe temperature (WBGT).
 Wet Bulb Globe Temperature (WBGT) is a particularly effective indicator of heat stress for active populations such as outdoor workers and athletes.
 The calculation should be done with:
 WBGT = 0.567 \* T\_C + 0.393 \* e/100 + 3.94, where T\_C is temperature in degrees C, and e = huss \* p \* M\_air / M\_H2O, where "huss=specific humidity in kg/kg", M\_H2O = 18.01528/1000 # kg/mol, M\_air = 28.964/1000 # kg/mol for dry air and "P = surface pressure in Pa"-->
-		<field id="CMIP7_wbgt2mmax" field_ref="?dummy_XY"/>
+		<field id="CMIP7_wbgt2mmax" field_ref="?dummy_XY_height2m"/>
 		<!--P3 (degC) wet_bulb_globe_temperature : max 2m daily wet bulb globe temperature (WGBT):
 Wet Bulb Globe Temperature (WBGT) is a particularly effective indicator of heat stress for active populations such as outdoor workers and athletes.
 The calculation should be done with:
 WBGT = 0.567 \* T\_C + 0.393 \* e/100 + 3.94, where T\_C is temperature in degrees C, and e = huss \* p \* M\_air / M\_H2O, where "huss=specific humidity in kg/kg", M\_H2O = 18.01528/1000 # kg/mol, M\_air = 28.964/1000 # kg/mol for dry air and "P = surface pressure in Pa"-->
-		<field id="CMIP7_wdir" field_ref="?dummy_XY"/>
+		<field id="CMIP7_wdir" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (degree) sea_surface_wave_from_direction : Mean direction of wave propagation (direction from which the wave is coming) derived from the total wave energy spectrum, incorporating both wind-sea and swell waves. This variable is usually expressed in degrees relative to true north.-->
-		<field id="CMIP7_wdirswell" field_ref="?dummy_XY"/>
+		<field id="CMIP7_wdirswell" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (degree) sea_surface_swell_wave_from_direction : Mean direction of wave propagation (direction from which the wave is coming) derived from the swell component of the wave energy spectrum (i.e., waves that have propagated away from their generation area). This variable is usually expressed in degrees relative to true north.-->
-		<field id="CMIP7_wdirwindsea" field_ref="?dummy_XY"/>
+		<field id="CMIP7_wdirwindsea" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (degree) sea_surface_wind_wave_from_direction : Mean direction of wave propagation (direction from which the wave is coming) derived from the wind-sea component of the wave energy spectrum (i.e., local wind waves). This variable is usually expressed in degrees relative to true north.-->
 		<field id="CMIP7_wetbc" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2 s-1) minus_tendency_of_atmosphere_mass_content_of_elemental_carbon_dry_aerosol_particles_due_to_wet_deposition : Surface deposition rate of black carbon (dry mass) due to wet processes-->
@@ -1532,7 +1508,7 @@ WBGT = 0.567 \* T\_C + 0.393 \* e/100 + 3.94, where T\_C is temperature in degre
 		<!--P3 (kg m-2 s-1) surface_downward_mass_flux_of_methane_due_to_wetland_biological_consumption : Biological consumption (methanotrophy) of methane (NH4) by wetlands (areas where water covers the soil, or is present either at or near the surface of the soil all year or for varying periods of time during the year, including during the growing season).-->
 		<field id="CMIP7_wetlandCH4prod" field_ref="?dummy_XY"/>
 		<!--P3 (kg m-2 s-1) surface_upward_mass_flux_of_methane_due_to_emission_from_wetland_biological_production : Biological emissions (methanogenesis) of methane (NH4) from wetlands (areas where water covers the soil, or is present either at or near the surface of the soil all year or for varying periods of time during the year, including during the growing season).-->
-		<field id="CMIP7_wetlandFrac" field_ref="?dummy_XY"/>
+		<field id="CMIP7_wetlandFrac" field_ref="?dummy_XY_typewetla"/>
 		<!--P3 (%) area_fraction : Percentage of grid cell covered by wetland. Report only one year if  fixed percentage is used, or time series if values are determined dynamically.-->
 		<field id="CMIP7_wetnh3" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2 s-1) minus_tendency_of_atmosphere_mass_content_of_ammonia_due_to_wet_deposition : Surface deposition rate of ammonia (NH3) due to wet processes-->
@@ -1550,15 +1526,15 @@ WBGT = 0.567 \* T\_C + 0.393 \* e/100 + 3.94, where T\_C is temperature in degre
 		<!--P2 (kg m-2 s-1) minus_tendency_of_atmosphere_mass_content_of_sulfate_dry_aerosol_particles_due_to_wet_deposition : proposed name: tendency\_of\_atmosphere\_mass\_content\_of\_sulfate\_dry\_aerosol\_due\_to\_wet\_deposition-->
 		<field id="CMIP7_wetss" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2 s-1) minus_tendency_of_atmosphere_mass_content_of_sea_salt_dry_aerosol_particles_due_to_wet_deposition : Deposition rate of sea salt aerosols (measured by the dry mass) due to wet processes-->
-		<field id="CMIP7_wpp" field_ref="?dummy_XY"/>
+		<field id="CMIP7_wpp" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (s) sea_surface_wave_period_at_variance_spectral_density_maximum : Wave period associated with the most energetic waves in total wave spectrum, incorporating both wind-sea and swell waves. In spectral wind wave models, this represents the spectral peak across the entire two-dimensional wave spectrum, incorporating both wind-sea and swell waves.-->
-		<field id="CMIP7_wppswell" field_ref="?dummy_XY"/>
+		<field id="CMIP7_wppswell" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (s) sea_surface_swell_wave_period_at_variance_spectral_density_maximum : Wave period associated with the most energetic swell waves (i.e., waves that have propagated away from their generation area). In spectral wind wave models, this represents the spectral peak across part of the two-dimensional wave spectrum, incorporating just swell waves.-->
-		<field id="CMIP7_wppwindsea" field_ref="?dummy_XY"/>
+		<field id="CMIP7_wppwindsea" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (s) sea_surface_wind_wave_period_at_variance_spectral_density_maximum : Wave period associated with the most energetic wind-sea waves (i.e., local wind waves). In spectral wind wave models, this represents the spectral peak across part of the two-dimensional wave spectrum, incorporating just wind-sea waves.-->
-		<field id="CMIP7_wsgmax100m" field_ref="?dummy_XY"/>
+		<field id="CMIP7_wsgmax100m" field_ref="?dummy_XY_height100m"/>
 		<!--P2 (m s-1) wind_speed_of_gust : Wind speed gust maximum at 100m above surface-->
-		<field id="CMIP7_wsgmax10m" field_ref="?dummy_XY"/>
+		<field id="CMIP7_wsgmax10m" field_ref="?dummy_XY_height10m"/>
 		<!--P2 (m s-1) wind_speed_of_gust : Wind speed gust maximum at 10m above surface-->
 		<field id="CMIP7_wtd" field_ref="?dummy_XY"/>
 		<!--P2 (m) water_table_depth : depth\_of\_soil\_moisture\_saturation-->
@@ -1580,15 +1556,7 @@ WBGT = 0.567 \* T\_C + 0.393 \* e/100 + 3.94, where T\_C is temperature in degre
 		<!--P4 (m) height_above_reference_ellipsoid : Provide only if altitude of full model levels is fixed-->
 		<field id="CMIP7_zg" field_ref="?dummy_XY_plev19"/>
 		<!--P1 (m) geopotential_height : Geopotential is the sum of the specific gravitational potential energy relative to the geoid and the specific centripetal potential energy. Geopotential height is the geopotential divided by the standard acceleration due to gravity. It is numerically similar to the altitude (or geometric height) and not to the quantity with standard name height, which is relative to the surface.-->
-		<field id="CMIP7_zg10" field_ref="?dummy_XY"/>
-		<!--P2 (m) geopotential_height : Geopotential height on the 10 hPa surface-->
-		<field id="CMIP7_zg1000" field_ref="?dummy_XY"/>
-		<!--P2 (m) geopotential_height : Geopotential height on the 1000 hPa surface-->
-		<field id="CMIP7_zg500" field_ref="?dummy_XY"/>
-		<!--P2 (m) geopotential_height : geopotential height on the 500 hPa surface-->
-		<field id="CMIP7_zg700" field_ref="?dummy_XY"/>
-		<!--P3 (m) geopotential_height : 700 hPa geopotential height at 6 hourly instantaneous frequency-->
-		<field id="CMIP7_zg925" field_ref="?dummy_XY"/>
+		<field id="CMIP7_zg925" field_ref="?dummy_XY_p925"/>
 		<!--P3 (m) geopotential_height : Geopotential Height at 925 hPa, 6 hourly instantaneous-->
 		<field id="CMIP7_ztp" field_ref="?dummy_XY"/>
 		<!--P2 (m) tropopause_altitude : 2D monthly mean thermal tropopause calculated using WMO tropopause definition on 3d temperature-->

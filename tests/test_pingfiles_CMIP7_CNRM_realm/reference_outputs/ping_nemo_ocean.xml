@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <context id="nemo">
-	<!--CMIP7 Data Request version Software 1.1.3.dev47+g35c67bc - Content v1.2.1-->
+	<!--CMIP7 Data Request version Software 1.2.1.dev10+g5f3dcc4.d20250515 - Content v1.2.1-->
 	<!--dr2xml version current_version-->
 	<!--Lab_and_model settings
 {'data_request_content_version' = 'v1.2.1',
@@ -92,17 +92,17 @@
 		<!--P2 (kg) sea_water_mass : Total mass of liquid sea water. For Boussinesq models, report this diagnostic as Boussinesq reference density times total volume.-->
 		<field id="CMIP7_mfo" field_ref="?dummy_TR_oline"/>
 		<!--P3 (kg s-1) sea_water_transport_across_line : Transport across\_line means that which crosses a particular line on the Earth's surface (based on appendix J and table J1 of Griffies et al, 2016 (<https://doi.org/10.5194/gmd-9-3231-2016>). Formally this means the integral along the line of the normal component of the transport. The transport should be evaluated for the full depth of the ocean, except for the Pacific Equatorial Undercurrent, which is averaged from the surface to 350m.-->
-		<field id="CMIP7_mlotst" field_ref="?dummy_XY"/>
+		<field id="CMIP7_mlotst" field_ref="?dummy_XY_deltasigt"/>
 		<!--P1 (m) ocean_mixed_layer_thickness_defined_by_sigma_t : Sigma T is potential density referenced to ocean surface. Defined by Sigma T of 0.03 kg m-3 wrt to model level closest to 10 m depth.-->
-		<field id="CMIP7_mlotstmax" field_ref="?dummy_XY"/>
+		<field id="CMIP7_mlotstmax" field_ref="?dummy_XY_deltasigt"/>
 		<!--P2 (m) ocean_mixed_layer_thickness_defined_by_sigma_t : Sigma T is potential density referenced to ocean surface. Defined by Sigma T of 0.03 kg m-3 wrt to model level closest to 10 m depth.-->
-		<field id="CMIP7_mlotstmin" field_ref="?dummy_XY"/>
+		<field id="CMIP7_mlotstmin" field_ref="?dummy_XY_deltasigt"/>
 		<!--P2 (m) ocean_mixed_layer_thickness_defined_by_sigma_t : Sigma T is potential density referenced to ocean surface. Defined by Sigma T of 0.03 kg m-3 wrt to model level closest to 10 m depth.-->
-		<field id="CMIP7_mpw" field_ref="?dummy_XY"/>
+		<field id="CMIP7_mpw" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (s) sea_surface_wave_mean_period : Average wave period (i.e., time in-between two wave crests) across the entire two-dimensional wave spectrum, incorporating both wind-sea and swell waves. In spectral wind wave models, it is calculated using spectral moments, mathematical measures that describe the shape and characteristics of the wave spectrum.-->
-		<field id="CMIP7_mpwswell" field_ref="?dummy_XY"/>
+		<field id="CMIP7_mpwswell" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (s) sea_surface_swell_wave_mean_period : Average wave period (i.e., time in-between two wave crests) of swell waves only (i.e., waves that have propagated away from their generation area). In spectral wind wave models, it is calculated using spectral moments, mathematical measures that describe the shape and characteristics of the wave spectrum.-->
-		<field id="CMIP7_mpwwindsea" field_ref="?dummy_XY"/>
+		<field id="CMIP7_mpwwindsea" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (s) sea_surface_wind_wave_mean_period : Average wave period (i.e., time in-between two wave crests) of wind-sea waves only (i.e., local wind waves). In spectral wind wave models, it is calculated using spectral moments, mathematical measures that describe the shape and characteristics of the wave spectrum.-->
 		<field id="CMIP7_msftbarot" field_ref="?dummy_XY"/>
 		<!--P2 (kg s-1) ocean_barotropic_mass_streamfunction : Streamfunction or its approximation for free surface models. See OMDP document for details.-->
@@ -144,9 +144,9 @@
 		<!--P2 (W m-2) surface_upwelling_shortwave_flux_in_air : Surface Upwelling Shortwave Radiation over the portion of an ocean grid cell covered by sea ice, including snow. Can be used for computation of surface albedo.-->
 		<field id="CMIP7_scint" field_ref="?dummy_XY_oplayer4"/>
 		<!--P2 (kg m-2) integral_wrt_depth_of_sea_water_practical_salinity_expressed_as_salt_mass_content : This is a fundamental aspect of the changes in the hydrological cycle and their impact on the oceans, and due to new numerical schemes and vertical discretizations, it is important to calculate it consistently with the model formulation.-->
-		<field id="CMIP7_sduo" field_ref="?dummy_XY"/>
+		<field id="CMIP7_sduo" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (m s-1) sea_surface_wave_stokes_drift_eastward_velocity : The eastward component of the net drift velocity of ocean water caused by surface wind-sea waves. The Stokes drift velocity could be defined as the difference between the average Lagrangian flow velocity of a fluid parcel, and the average Eulerian flow velocity of the fluid at a fixed position.-->
-		<field id="CMIP7_sdvo" field_ref="?dummy_XY"/>
+		<field id="CMIP7_sdvo" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (m s-1) sea_surface_wave_stokes_drift_northward_velocity : The northward component of the net drift velocity of ocean water caused by surface wind-sea waves. The Stokes drift velocity could be defined as the difference between the average Lagrangian flow velocity of a fluid parcel, and the average Eulerian flow velocity of the fluid at a fixed position.-->
 		<field id="CMIP7_sf6" field_ref="?dummy_XYO"/>
 		<!--P3 (mol m-3) mole_concentration_of_sulfur_hexafluoride_in_sea_water : Mole concentration means number of moles per unit volume, also called "molarity", and is used in the construction "mole\_concentration\_of\_X\_in\_Y", where X is a material constituent of Y. A chemical or biological species denoted by X may be described by a single term such as "nitrogen" or a phrase such as "nox\_expressed\_as\_nitrogen". The chemical formula of sulfur hexafluoride is SF6.-->
@@ -186,13 +186,13 @@
 		<!--P2 (1) isotope_ratio_of_18O_to_16O_in_sea_water_excluding_solutes_and_solids : Ratio of abundance of oxygen-18 (18O) atoms to oxygen-16 (16O) atoms in sea water-->
 		<field id="CMIP7_sw2H" field_ref="?dummy_XYO"/>
 		<!--P2 (1) isotope_ratio_of_2H_to_1H_in_sea_water_excluding_solutes_and_solids : Ratio of abundance of hydrogen-2 (2H) atoms to hydrogen-1 (1H) atoms in sea water-->
-		<field id="CMIP7_swh" field_ref="?dummy_XY"/>
+		<field id="CMIP7_swh" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (m) sea_surface_wave_significant_height : Average height of the highest one-third of waves present in the sea state, incorporating both wind-sea and swell waves. This is a key parameter for describing wave energy and is derived from the wave spectrum using spectral moments. Specifically, this parameter is four times the square root of the integral over all directions and all frequencies of the two-dimensional wave spectrum.-->
-		<field id="CMIP7_swhmax" field_ref="?dummy_XY"/>
+		<field id="CMIP7_swhmax" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (m) sea_surface_wave_significant_height : Highest value of the significant wave height simulated within a given time range (e.g., daily or monthly). The significant wave height (swh) is derived from the wave spectrum using spectral moments. Specifically, swh is four times the square root of the integral over all directions and all frequencies of the two-dimensional wave spectrum.-->
-		<field id="CMIP7_swhswell" field_ref="?dummy_XY"/>
+		<field id="CMIP7_swhswell" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (m) sea_surface_swell_wave_significant_height : Average height of the highest one-third of waves present in the sea state, incorporating just swell waves (i.e., waves that have propagated away from their generation area). This parameter is derived from all swell partitions of the wave spectrum using spectral moments. Specifically, this parameter is four times the square root of the integral over all directions and all frequencies of the components of the two-dimensional wave spectrum that are not under the influence of local wind.-->
-		<field id="CMIP7_swhwindsea" field_ref="?dummy_XY"/>
+		<field id="CMIP7_swhwindsea" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (m) sea_surface_wind_wave_significant_height : Average height of the highest one-third of waves present in the sea state, incorporating just wind-sea waves (i.e., local wind waves). It is derived from the wind-sea wave spectrum using spectral moments. Specifically, this parameter is four times the square root of the integral over all directions and all frequencies of the two-dimensional wind-sea wave spectrum.-->
 		<field id="CMIP7_t17d" field_ref="?dummy_XY"/>
 		<!--P3 (m) depth_of_isosurface_of_sea_water_potential_temperature : Monthly 17C isotherm depth-->
@@ -208,11 +208,11 @@
 		<!--P2 (degC) sea_water_potential_temperature : Diagnostic should be contributed even for models using conservative temperature as prognostic field-->
 		<field id="CMIP7_thetaot" field_ref="?dummy_XY"/>
 		<!--P2 (degC) sea_water_potential_temperature : Vertically averaged ocean temperature-->
-		<field id="CMIP7_thetaot2000" field_ref="?dummy_XY"/>
+		<field id="CMIP7_thetaot2000" field_ref="?dummy_XY_depth2000m"/>
 		<!--P2 (degC) sea_water_potential_temperature : Upper 2000m, 2D field-->
-		<field id="CMIP7_thetaot300" field_ref="?dummy_XY"/>
+		<field id="CMIP7_thetaot300" field_ref="?dummy_XY_depth300m"/>
 		<!--P2 (degC) sea_water_potential_temperature : Upper 300m, 2D field-->
-		<field id="CMIP7_thetaot700" field_ref="?dummy_XY"/>
+		<field id="CMIP7_thetaot700" field_ref="?dummy_XY_depth700m"/>
 		<!--P2 (degC) sea_water_potential_temperature : Upper 700m, 2D field-->
 		<field id="CMIP7_thkcello" field_ref="?dummy_XYO"/>
 		<!--P1 (m) cell_thickness : The time varying thickness of ocean cells. "Thickness" means the vertical extent of a layer. "Cell" refers to a model grid-cell.-->
@@ -230,7 +230,7 @@
 		<!--P1 (kg s-1) ocean_mass_x_transport : X-ward mass transport from residual mean (resolved plus parameterized) advective transport.-->
 		<field id="CMIP7_uo" field_ref="?dummy_XYO"/>
 		<!--P1 (m s-1) sea_water_x_velocity : Prognostic x-ward velocity component resolved by the model.-->
-		<field id="CMIP7_uos" field_ref="?dummy_XY"/>
+		<field id="CMIP7_uos" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (m s-1) surface_sea_water_x_velocity : Daily surface prognostic x-ward velocity component resolved by the model.-->
 		<field id="CMIP7_vmo" field_ref="?dummy_XYO"/>
 		<!--P1 (kg s-1) ocean_mass_y_transport : Y-ward mass transport from residual mean (resolved plus parameterized) advective transport.-->
@@ -240,7 +240,7 @@
 		<!--P2 (m3) ocean_volume : For oceans with more than 1 mesh (e.g. staggered grids), report areas that apply to surface vertical fluxes of energy. If this field is time-dependent then save it instead as one of your Omon and Odec fields-->
 		<field id="CMIP7_volo" field_ref="?dummy_0d"/>
 		<!--P2 (m3) sea_water_volume : Total volume of liquid sea water.-->
-		<field id="CMIP7_vos" field_ref="?dummy_XY"/>
+		<field id="CMIP7_vos" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (m s-1) surface_sea_water_y_velocity : Daily surface prognostic y-ward velocity component resolved by the model.-->
 		<field id="CMIP7_vsf" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2 s-1) virtual_salt_flux_into_sea_water : It is set to zero in models which receive a real water flux.-->
@@ -254,11 +254,11 @@
 		<!--P3 (kg m-2 s-1) virtual_salt_flux_into_sea_water_from_rivers : zero for models using real water fluxes.-->
 		<field id="CMIP7_vsfsit" field_ref="?dummy_XY"/>
 		<!--P3 (kg m-2 s-1) virtual_salt_flux_into_sea_water_due_to_sea_ice_thermodynamics : This variable measures the virtual salt flux into sea water due to the melting of sea ice. It is set to zero in models which receive a real water flux.-->
-		<field id="CMIP7_wdir" field_ref="?dummy_XY"/>
+		<field id="CMIP7_wdir" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (degree) sea_surface_wave_from_direction : Mean direction of wave propagation (direction from which the wave is coming) derived from the total wave energy spectrum, incorporating both wind-sea and swell waves. This variable is usually expressed in degrees relative to true north.-->
-		<field id="CMIP7_wdirswell" field_ref="?dummy_XY"/>
+		<field id="CMIP7_wdirswell" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (degree) sea_surface_swell_wave_from_direction : Mean direction of wave propagation (direction from which the wave is coming) derived from the swell component of the wave energy spectrum (i.e., waves that have propagated away from their generation area). This variable is usually expressed in degrees relative to true north.-->
-		<field id="CMIP7_wdirwindsea" field_ref="?dummy_XY"/>
+		<field id="CMIP7_wdirwindsea" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (degree) sea_surface_wind_wave_from_direction : Mean direction of wave propagation (direction from which the wave is coming) derived from the wind-sea component of the wave energy spectrum (i.e., local wind waves). This variable is usually expressed in degrees relative to true north.-->
 		<field id="CMIP7_wfcorr" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2 s-1) water_flux_correction : Computed as the water flux into the ocean due to flux correction divided by the area of the ocean portion of the grid cell.-->
@@ -268,17 +268,17 @@
 		<!--P1 (kg s-1) upward_ocean_mass_transport : Upward mass transport from residual mean (resolved plus parameterized) advective transport.-->
 		<field id="CMIP7_wo" field_ref="?dummy_XYO"/>
 		<!--P1 (m s-1) upward_sea_water_velocity : Prognostic z-ward velocity component resolved by the model.-->
-		<field id="CMIP7_wpdir" field_ref="?dummy_XY"/>
+		<field id="CMIP7_wpdir" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (degree) sea_surface_wave_from_direction_at_variance_spectral_density_maximum : Direction of wave propagation (direction from which the wave is coming) derived from the total wave energy spectrum, incorporating both wind-sea and swell waves, by identifying the direction associated with the peak (maximum) energy density. This variable is usually expressed in degrees relative to true north.-->
-		<field id="CMIP7_wpdirswell" field_ref="?dummy_XY"/>
+		<field id="CMIP7_wpdirswell" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (degree) sea_surface_swell_wave_from_direction_at_variance_spectral_density_maximum : Direction of wave propagation (direction from which the wave is coming) derived from the swell component of the wave energy spectrum (i.e., waves that have propagated away from their generation area), by identifying the direction associated with the peak (maximum) energy density. This variable is typically expressed in degrees relative to true north.-->
-		<field id="CMIP7_wpdirwindsea" field_ref="?dummy_XY"/>
+		<field id="CMIP7_wpdirwindsea" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (degree) sea_surface_wind_wave_from_direction_at_variance_spectral_density_maximum : Direction of wave propagation (direction from which the wave is coming) derived from the wind-sea component of the wave energy spectrum (i.e., local wind waves), by identifying the direction associated with the peak (maximum) energy density. This variable is typically expressed in degrees relative to true north.-->
-		<field id="CMIP7_wpp" field_ref="?dummy_XY"/>
+		<field id="CMIP7_wpp" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (s) sea_surface_wave_period_at_variance_spectral_density_maximum : Wave period associated with the most energetic waves in total wave spectrum, incorporating both wind-sea and swell waves. In spectral wind wave models, this represents the spectral peak across the entire two-dimensional wave spectrum, incorporating both wind-sea and swell waves.-->
-		<field id="CMIP7_wppswell" field_ref="?dummy_XY"/>
+		<field id="CMIP7_wppswell" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (s) sea_surface_swell_wave_period_at_variance_spectral_density_maximum : Wave period associated with the most energetic swell waves (i.e., waves that have propagated away from their generation area). In spectral wind wave models, this represents the spectral peak across part of the two-dimensional wave spectrum, incorporating just swell waves.-->
-		<field id="CMIP7_wppwindsea" field_ref="?dummy_XY"/>
+		<field id="CMIP7_wppwindsea" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (s) sea_surface_wind_wave_period_at_variance_spectral_density_maximum : Wave period associated with the most energetic wind-sea waves (i.e., local wind waves). In spectral wind wave models, this represents the spectral peak across part of the two-dimensional wave spectrum, incorporating just wind-sea waves.-->
 		<field id="CMIP7_zfullo" field_ref="?dummy_XYO"/>
 		<!--P2 (m) depth_below_geoid : Depth below geoid-->

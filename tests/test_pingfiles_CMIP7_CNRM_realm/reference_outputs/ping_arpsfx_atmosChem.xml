@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <context id="arpsfx">
-	<!--CMIP7 Data Request version Software 1.1.3.dev47+g35c67bc - Content v1.2.1-->
+	<!--CMIP7 Data Request version Software 1.2.1.dev10+g5f3dcc4.d20250515 - Content v1.2.1-->
 	<!--dr2xml version current_version-->
 	<!--Lab_and_model settings
 {'data_request_content_version' = 'v1.2.1',
@@ -22,17 +22,15 @@
 {}-->
 	<!--Year processed None-->
 	<field_definition>
-		<field id="CMIP7_abs550bc" field_ref="?dummy_XY"/>
-		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_black_carbon_ambient_aerosol : This is the black carbon aerosol optical depth at 550nm due to absorption-->
-		<field id="CMIP7_abs550dust" field_ref="?dummy_XY"/>
-		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_dust_ambient_aerosol_particles : This is the dust aerosol optical depth at 550nm due to absorption-->
-		<field id="CMIP7_abs550no3" field_ref="?dummy_XY"/>
-		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_nitrate_ambient_aerosol_particles : This is the nitrate aerosol optical depth at 550nm due to absorption-->
-		<field id="CMIP7_abs550oa" field_ref="?dummy_XY"/>
-		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_particulate_organic_matter_ambient_aerosol_particles : This is the particular organic matter aerosol optical depth at 550nm due to absorption-->
-		<field id="CMIP7_abs550so4" field_ref="?dummy_XY"/>
+		<field id="CMIP7_abs" field_ref="?dummy_XY_lambda550nm"/>
 		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_sulfate_ambient_aerosol_particles : This is the sulphate aerosol optical depth at 550nm due to absorption-->
-		<field id="CMIP7_abs550ss" field_ref="?dummy_XY"/>
+		<field id="CMIP7_abs550bc" field_ref="?dummy_XY_lambda550nm"/>
+		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_black_carbon_ambient_aerosol : This is the black carbon aerosol optical depth at 550nm due to absorption-->
+		<field id="CMIP7_abs550dust" field_ref="?dummy_XY_lambda550nm"/>
+		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_dust_ambient_aerosol_particles : This is the dust aerosol optical depth at 550nm due to absorption-->
+		<field id="CMIP7_abs550oa" field_ref="?dummy_XY_lambda550nm"/>
+		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_particulate_organic_matter_ambient_aerosol_particles : This is the particular organic matter aerosol optical depth at 550nm due to absorption-->
+		<field id="CMIP7_abs550ss" field_ref="?dummy_XY_lambda550nm"/>
 		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_sea_salt_ambient_aerosol_particles : This is the sea salt aerosol optical depth at 550nm due to absorption-->
 		<field id="CMIP7_c2h4" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (mol mol-1) mole_fraction_of_ethene_in_air : Mole fraction of ethene (C2H4) in air-->
@@ -42,9 +40,9 @@
 		<!--P2 (mol mol-1) mole_fraction_of_butane_in_air : Mole fraction of butane (C4H10) in air-->
 		<field id="CMIP7_ccldncl" field_ref="?dummy_XY"/>
 		<!--P2 (m-3) number_concentration_of_convective_cloud_liquid_water_particles_at_convective_liquid_water_cloud_top : Cloud Droplet Number Concentration of Convective Cloud Tops-->
-		<field id="CMIP7_ccn02" field_ref="?dummy_XYA_alevel"/>
+		<field id="CMIP7_ccn02" field_ref="?dummy_XYA_alevel_rh100p2pct"/>
 		<!--P2 (m-3) number_concentration_of_cloud_condensation_nuclei_assuming_reference_relative_humidity : This is the concentration of cloud condensation nuclei (CCN) at 0.2% supersaturation, based on aerosol chemical composition and size-->
-		<field id="CMIP7_ccn1" field_ref="?dummy_XYA_alevel"/>
+		<field id="CMIP7_ccn1" field_ref="?dummy_XYA_alevel_rh101pct"/>
 		<!--P2 (m-3) number_concentration_of_cloud_condensation_nuclei_assuming_reference_relative_humidity : This is the concentration of cloud condensation nuclei (CCN) at 1.0 percent supersaturation, based on aerosol chemical composition and size-->
 		<field id="CMIP7_cfc113global" field_ref="?dummy_0d"/>
 		<!--P2 (1E-12) mole_fraction_of_cfc113_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.  The chemical formula of CFC113 is CCl2FCClF2.  The IUPAC name for CFC113 is 1,1,2-trichloro-1,2,2-trifluoro-ethane.-->

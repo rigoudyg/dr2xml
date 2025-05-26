@@ -1,4 +1,4 @@
-check_api_version: true
+check_api_version: false
 consolidate: false
 export: release
 log_file: default

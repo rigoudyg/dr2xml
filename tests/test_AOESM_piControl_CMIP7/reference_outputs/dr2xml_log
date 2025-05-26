@@ -3,7 +3,7 @@
 *
 *              dr2xml version:  current_version
 *   CMIP6 conventions version:  v6.2.4
-*  CMIP7 Data Request version:  Software 1.1.3.dev47+g35c67bc - Content v1.2.1
+*  CMIP7 Data Request version:  Software 1.2.1.dev10+g5f3dcc4.d20250515 - Content v1.2.1
 
 *
  **************************************************
@@ -122,7 +122,6 @@ Note: assuming that 'time: mean where sea'  for     thetaot2000 in table Emon is
 Note: assuming that 'time: mean where sea'  for      thetaot300 in table Emon is well handled by 'detect_missing'
 Note: assuming that 'time: mean where sea'  for      thetaot700 in table Emon is well handled by 'detect_missing'
 Note: assuming that 'time: mean where sea'  for         thetaot in table Emon is well handled by 'detect_missing'
-Could not find id basin of type coordinates_and_dimensions in the vocabulary server.
 Note: assuming that 'time: mean where sea_ice'  for           siage in table SImon is well handled by 'detect_missing'
 Note: assuming that 'time: mean where sea_ice'  for     siflcondbot in table SImon is well handled by 'detect_missing'
 Note: assuming that 'time: mean where sea_ice'  for     siflcondtop in table SImon is well handled by 'detect_missing'
@@ -150,7 +149,6 @@ Note: assuming that 'time: mean where sea_ice'  for       sitemptop in table SIm
 Note: assuming that 'time: mean where sea_ice'  for         sithick in table SImon is well handled by 'detect_missing'
 Note: assuming that 'time: mean where sea_ice'  for             siu in table SImon is well handled by 'detect_missing'
 Note: assuming that 'time: mean where sea_ice'  for             siv in table SImon is well handled by 'detect_missing'
-Could not find id siline of type coordinates_and_dimensions in the vocabulary server.
 
 file_def written as current_directory/test_AOESM_piControl_CMIP7/test_outputs/dr2xml_nemo.xml
 
@@ -746,7 +744,7 @@ Warnings about cell methods (with var list)
 *
 *              dr2xml version:  current_version
 *   CMIP6 conventions version:  v6.2.4
-*  CMIP7 Data Request version:  Software 1.1.3.dev47+g35c67bc - Content v1.2.1
+*  CMIP7 Data Request version:  Software 1.2.1.dev10+g5f3dcc4.d20250515 - Content v1.2.1
 
 *
  **************************************************
@@ -944,21 +942,19 @@ Duplicate variable snc,snc in table day is skipped, preferred is snc
 Duplicate variable snw,snw in table day is skipped, preferred is snw
 Duplicate variable areacella,areacella in table fx is skipped, preferred is areacella
 Duplicate variable lithk,lithk in table fx is skipped, preferred is lithk
-Could not find id alevel of type coordinates_and_dimensions in the vocabulary server.
-Warning: Cannot complement model levels with psol for table CFday for frequency 1d
-Warning: Cannot complement model levels with psol for table CFday for frequency 1d
-Warning: Cannot complement model levels with psol for table CFday for frequency 1d
-Warning: Cannot complement model levels with psol for table CFday for frequency 1d
-Warning: Cannot complement model levels with psol for table CFday for frequency 1d
-Warning: Cannot complement model levels with psol for table CFday for frequency 1d
-Warning: Cannot complement model levels with psol for table CFday for frequency 1d
-Warning: Cannot complement model levels with psol for table CFday for frequency 1d
-Warning: Cannot complement model levels with psol for table CFday for frequency 1d
-Warning: Cannot complement model levels with psol for table CFday for frequency 1d
-Warning: Cannot complement model levels with psol for table CFday for frequency 1d
 Note: assuming that for        albisccp in table CFday is well handled by 'detect_missing'
 Note: assuming that for        pctisccp in table CFday is well handled by 'detect_missing'
-Could not find id sza5 of type coordinates_and_dimensions in the vocabulary server.
+Warning: Cannot complement model levels with psol for table CFday for frequency 1d
+Warning: Cannot complement model levels with psol for table CFday for frequency 1d
+Warning: Cannot complement model levels with psol for table CFday for frequency 1d
+Warning: Cannot complement model levels with psol for table CFday for frequency 1d
+Warning: Cannot complement model levels with psol for table CFday for frequency 1d
+Warning: Cannot complement model levels with psol for table CFday for frequency 1d
+Warning: Cannot complement model levels with psol for table CFday for frequency 1d
+Warning: Cannot complement model levels with psol for table CFday for frequency 1d
+Warning: Cannot complement model levels with psol for table CFday for frequency 1d
+Warning: Cannot complement model levels with psol for table CFday for frequency 1d
+Warning: Cannot complement model levels with psol for table CFday for frequency 1d
 Warning: Cannot complement model levels with psol for table AERmon for frequency 1mo
 Warning: Cannot complement model levels with psol for table AERmon for frequency 1mo
 Warning: Cannot complement model levels with psol for table AERmon for frequency 1mo
@@ -996,46 +992,46 @@ Warning: Cannot complement model levels with psol for table Amon for frequency 1
 Warning: Cannot complement model levels with psol for table Amon for frequency 1mo
 Warning: Cannot complement model levels with psol for table Amon for frequency 1mo
 Warning: Cannot complement model levels with psol for table Amon for frequency 1mo
+Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
+Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
+Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
+Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
+Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
+Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
+Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
+Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
+Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
+Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
+Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
+Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
+Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
+Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
+Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
+Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
+Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
+Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
+Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
+Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
+Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
+Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
+Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
+Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
+Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
+Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
+Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
+Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
+Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
+Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
+Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
+Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
+Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
+Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
+Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
+Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
+Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
+Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
 Note: assuming that for        albisccp in table CFmon is well handled by 'detect_missing'
 Note: assuming that for        pctisccp in table CFmon is well handled by 'detect_missing'
-Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
-Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
-Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
-Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
-Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
-Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
-Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
-Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
-Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
-Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
-Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
-Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
-Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
-Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
-Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
-Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
-Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
-Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
-Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
-Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
-Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
-Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
-Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
-Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
-Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
-Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
-Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
-Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
-Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
-Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
-Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
-Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
-Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
-Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
-Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
-Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
-Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
-Warning: Cannot complement model levels with psol for table CFmon for frequency 1mo
 Warning: Cannot complement model levels with psol for table Emon for frequency 1mo
 Warning: Cannot complement model levels with psol for table Emon for frequency 1mo
 Warning: Cannot complement model levels with psol for table Emon for frequency 1mo
@@ -1044,8 +1040,6 @@ Warning: Cannot complement model levels with psol for table Emon for frequency 1
 Warning: Cannot complement model levels with psol for table Emon for frequency 1mo
 Warning: Cannot complement model levels with psol for table Emon for frequency 1mo
 Warning: Cannot complement model levels with psol for table Emon for frequency 1mo
-Could not find id dbze of type coordinates_and_dimensions in the vocabulary server.
-Could not find id vegtype of type coordinates_and_dimensions in the vocabulary server.
 Warning: Cannot complement model levels with psol for table CFsubhr for frequency 1ts
 Warning: Cannot complement model levels with psol for table CFsubhr for frequency 1ts
 Warning: Cannot complement model levels with psol for table CFsubhr for frequency 1ts
@@ -1101,21 +1095,21 @@ Skipped variables (i.e. whose alias is not present in the pingfile):
 
 >>> TABLE:          6hrLev 01/08 ----> bs550aer(2)
 
->>> TABLE:       6hrPlevPt 05/22 ----> rv850(2) taUTLS(2) uaUTLS(2) vaUTLS(2) zg500(2)
+>>> TABLE:       6hrPlevPt 03/22 ----> taUTLS(2) uaUTLS(2) vaUTLS(2)
 
->>> TABLE:          AERday 14/38 ----> maxpblz(2) minpblz(2) mmraerh2o(2) mmrnh4(2) mmrno3(2) mmrsoa(2) sfo3max(2) sfpm1(2) sfpm10(2) sfpm25(2) ua10(2) zg10(2) zg1000(2) zg500(2)
+>>> TABLE:          AERday 10/38 ----> maxpblz(2) minpblz(2) mmraerh2o(2) mmrnh4(2) mmrno3(2) mmrsoa(2) sfo3max(2) sfpm1(2) sfpm10(2) sfpm25(2)
 
 >>> TABLE:           AERfx 02/05 ----> ch4ref(2) o3ref(2)
 
 >>> TABLE:           AERhr 03/05 ----> sfno2(2) sfo3(2) sfpm25(2)
 
->>> TABLE:          AERmon 122/254 ----> abs550bc(2) abs550dust(2) abs550no3(2) abs550oa(2) abs550so4(2) abs550ss(2) aoanh(2) bldep(2) c2h4(2) c2h5oh(2) c2h6(2) c3h6(2) c3h8(2) c4h10(2) ccn(2) ccn02(2) ccn1(2) cfc114(2) ch3coch3(2) ch3oh(2) ch4losssoil(2) cheaqpso4(2) chegph2oo1d(2) chegpso4(2) chepasoa(2) chepnh4(2) chepno3(2) chepsoa(2) conccn(2) dms(2) do3chm(2) dryh2(2) dryhno3(2) drynh3(2) drynh4(2) dryno3(2) drynoy(2) dryo3(2) e90inst(2) emiach4(2) emiaco(2) emianox(2) emiaoa(2) emiavnox(2) emibbbc(2) emibbch4(2) emibbco(2) emibbdms(2) emibbnh3(2) emibbnox(2) emibboa(2) emibbso2(2) emibbvoc(2) emibvoc(2) emic2h4(2) emic2h5oh(2) emic2h6(2) emic3h6(2) emic3h8(2) emic4h10(2) emich3oh(2) emich4(2) emico(2) emidms(2) emih2(2) emiisop(2) emilkch4(2) emilnox(2) eminh3(2) eminox(2) emivoc(2) h2(2) h2loss(2) h2prod(2) hcfc22(2) hfc125(2) hfc134a(2) isop(2) jno2(2) lossch4(2) lossco(2) lossn2o(2) mmraerh2o(2) mmrnh4(2) mmrno3(2) mmrpm10(2) mmrpm2p5(2) mmrsoa(2) nh50(2) o3inst(2) o3ste(2) od443aer(2) od550aerh2o(2) od550bb(2) od550csaer(2) od550no3(2) od550soa(2) od865aer(2) pan(2) photo1d(2) pod0(2) reffclwtop(2) rlutch4ref(2) rlutcsch4ref(2) rlutcso3ref(2) rluto3ref(2) rsutch4ref(2) rsutcsch4ref(2) rsutcso3ref(2) rsuto3ref(2) stratch4loss(2) tropch4loss(2) tropch4lossoh(2) tropdo3chm(2) tropo3ste(2) tropoz(2) wethno3(2) wetnh3(2) wetnh4(2) wetno3(2) wetnoy(2) wetso2(2)
+>>> TABLE:          AERmon 123/254 ----> abs550bc(2) abs550dust(2) abs550no3(2) abs550oa(2) abs550so4(2) abs550ss(2) aoanh(2) bldep(2) c2h4(2) c2h5oh(2) c2h6(2) c3h6(2) c3h8(2) c4h10(2) ccn(2) ccn02(2) ccn1(2) cfc114(2) ch3coch3(2) ch3oh(2) ch4losssoil(2) cheaqpso4(2) chegph2oo1d(2) chegpso4(2) chepasoa(2) chepnh4(2) chepno3(2) chepsoa(2) conccn(2) dms(2) do3chm(2) dryh2(2) dryhno3(2) drynh3(2) drynh4(2) dryno3(2) drynoy(2) dryo3(2) e90inst(2) emiach4(2) emiaco(2) emianox(2) emiaoa(2) emiavnox(2) emibbbc(2) emibbch4(2) emibbco(2) emibbdms(2) emibbnh3(2) emibbnox(2) emibboa(2) emibbso2(2) emibbvoc(2) emibvoc(2) emic2h4(2) emic2h5oh(2) emic2h6(2) emic3h6(2) emic3h8(2) emic4h10(2) emich3oh(2) emich4(2) emico(2) emidms(2) emih2(2) emiisop(2) emilkch4(2) emilnox(2) eminh3(2) eminox(2) emivoc(2) h2(2) h2loss(2) h2prod(2) hcfc22(2) hfc125(2) hfc134a(2) isop(2) jno2(2) lossch4(2) lossco(2) lossn2o(2) mmraerh2o(2) mmrnh4(2) mmrno3(2) mmrpm10(2) mmrpm2p5(2) mmrsoa(2) nh50(2) o3inst(2) o3ste(2) od443aer(2) od550aerh2o(2) od550bb(2) od550csaer(2) od550no3(2) od550so4(2) od550soa(2) od865aer(2) pan(2) photo1d(2) pod0(2) reffclwtop(2) rlutch4ref(2) rlutcsch4ref(2) rlutcso3ref(2) rluto3ref(2) rsutch4ref(2) rsutcsch4ref(2) rsutcso3ref(2) rsuto3ref(2) stratch4loss(2) tropch4loss(2) tropch4lossoh(2) tropdo3chm(2) tropo3ste(2) tropoz(2) wethno3(2) wetnh3(2) wetnh4(2) wetno3(2) wetnoy(2) wetso2(2)
 
 >>> TABLE:         AERmonZ 01/17 ----> vt100(2)
 
 >>> TABLE:            Amon 07/76 ----> aod550volso4(2) cfc113global(2) cfc11global(2) cfc12global(2) hcfc22global(2) rtmt(2) sci(2)
 
->>> TABLE:           CFday 03/34 ----> clhcalipso(2) ta700(2) wap500(2)
+>>> TABLE:           CFday 01/34 ----> clhcalipso(2)
 
 >>> TABLE:           CFmon 12/64 ----> clhcalipso(2) clivimodis(2) clmodisice(2) clmodisiceReff(2) clmodisliquid(2) clmodisliquidReff(2) clwvimodis(2) dmc(2) edt(2) evu(2) smc(2) tnhusd(2)
 
@@ -1125,7 +1119,7 @@ Skipped variables (i.e. whose alias is not present in the pingfile):
 
 >>> TABLE:          E3hrPt 04/21 ----> conccn(2) mmraerh2o(2) mmrnh4(2) mmrno3(2)
 
->>> TABLE:            Eday 07/45 ----> cldnvi(2) gppVgt(2) laiVgt(2) loadpoa(2) mrso10(2) prhmax(2) ta850(2)
+>>> TABLE:            Eday 06/45 ----> cldnvi(2) gppVgt(2) laiVgt(2) loadpoa(2) mrso10(2) prhmax(2)
 
 >>> TABLE:           EdayZ 12/20 ----> epfy(2) epfz(2) tauunoegw(2) tauunowgw(2) tauuogw(2) tauvnogw(2) tauvogw(2) utendepfd(2) utendvtem(2) utendwtem(2) vtem(2) wtem(2)
 
@@ -1186,10 +1180,10 @@ Some Statistics on actually written variables per frequency+shape...
                           6hrLev P2   2: ec550aer ps
                          6hrPlev P1   1: hurs
                          6hrPlev P2   9: huss prra prsn ps rlds rsds sfcWind tas ts
-                       6hrPlevPt P2   8: intuaw intvaw pr prw psl ts uas vas
-       6hr    XY-na    -------- ---  20
+                       6hrPlevPt P2  10: intuaw intvaw pr prw psl rv850 ts uas vas zg500
+       6hr    XY-na    -------- ---  22
 
-       6hr --------    -------- ---  30
+       6hr --------    -------- ---  32
 
                            CFday P2  10: cl cli clw hur hus ta ua va wap zg
        day     XY-A    -------- ---  10
@@ -1212,18 +1206,18 @@ Some Statistics on actually written variables per frequency+shape...
                             Eday P2   4: mrsfl mrsll mrsol tsl
        day     XY-S    -------- ---   4
 
-                          AERday P2  10: co cod mmrbc mmrdust mmroa mmrso4 mmrss od550aer so2 toz
+                          AERday P2  14: co cod mmrbc mmrdust mmroa mmrso4 mmrss od550aer so2 toz ua10 zg10 zg1000 zg500
                            CFday P1   1: ps
-                           CFday P2  17: albisccp ccb cct clivi cllcalipso clmcalipso cltcalipso cltisccp clwvi pctisccp rldscs rlutcs rsdscs rsdt rsuscs rsut rsutcs
-                            Eday P2  28: clivic clt clwvic dcw dslw evspsbl evspsblpot evspsblsoi evspsblveg intuadse intuaw intvadse intvaw jpdftaureicemodis jpdftaureliqmodis loadbc loadoa mrro mrrob mrros mrsow mrtws parasolRefl prra prw tauu tauv ts
+                           CFday P2  19: albisccp ccb cct clivi cllcalipso clmcalipso cltcalipso cltisccp clwvi pctisccp rldscs rlutcs rsdscs rsdt rsuscs rsut rsutcs ta700 wap500
+                            Eday P2  29: clivic clt clwvic dcw dslw evspsbl evspsblpot evspsblsoi evspsblveg intuadse intuaw intvadse intvaw jpdftaureicemodis jpdftaureliqmodis loadbc loadoa mrro mrrob mrros mrsow mrtws parasolRefl prra prw ta850 tauu tauv ts
                              day P1  12: clt hurs huss pr psl rsds sfcWind tas tasmax tasmin uas vas
                              day P2  20: hfls hfss hursmax hursmin mrro mrso mrsos prc prsn rlds rlus rluscs rlut rsdt rsus rsut sfcWindmax snc snw tslsi
-       day    XY-na    -------- ---  88
+       day    XY-na    -------- ---  95
 
                            EdayZ P2   8: ta tntmp tntrl tntrs ua utendnogw utendogw zg
        day    Y-P39    -------- ---   8
 
-       day --------    -------- --- 126
+       day --------    -------- --- 133
 
                              Efx P2   1: sftgrf
                               fx P1   6: areacella mrsofc orog rootd sftgif sftlf
@@ -1260,7 +1254,7 @@ Some Statistics on actually written variables per frequency+shape...
                             Lmon P2   1: tsl
        mon     XY-S    -------- ---   4
 
-                          AERmon P2  38: abs550aer cltc cod drybc drydust dryoa dryso2 dryso4 dryss emibc emidust emioa emiso2 emiso4 emiss lwp od550aer od550bc od550dust od550lt1aer od550oa od550so4 od550ss ptp rluscsaf rlutaf rlutcsaf rsutaf rsutcsaf tatp toz ttop wetbc wetdust wetoa wetso4 wetss ztp
+                          AERmon P2  37: abs550aer cltc cod drybc drydust dryoa dryso2 dryso4 dryss emibc emidust emioa emiso2 emiso4 emiss lwp od550aer od550bc od550dust od550lt1aer od550oa od550ss ptp rluscsaf rlutaf rlutcsaf rsutaf rsutcsaf tatp toz ttop wetbc wetdust wetoa wetso4 wetss ztp
                             Amon P1  36: clivi clt clwvi evspsbl hfls hfss hurs huss pr prc prsn prw ps psl rlds rldscs rlus rluscs rlut rlutcs rsds rsdscs rsdt rsus rsuscs rsut rsutcs sfcWind tas tasmax tasmin tauu tauv ts uas vas
                             Amon P2   8: ccb cct ci fco2antt fco2fos fco2nat prra sbl
                            CFmon P2  11: albisccp cllcalipso clmcalipso cltcalipso cltisccp cltmodis pctisccp rlut4co2 rlutcs4co2 rsut4co2 rsutcs4co2
@@ -1269,7 +1263,7 @@ Some Statistics on actually written variables per frequency+shape...
                            LImon P2   8: hfdsn sbl sftgif sftgrf snd snm tpf tsn
                             Lmon P1   8: evspsblsoi evspsblveg lai mrfso mrro mrros mrso mrsos
                             Lmon P2  22: baresoilFrac burntFractionAll cLeaf cLitter cProduct cRoot cVeg cropFrac fFire fLitterSoil fVegLitter gpp grassFrac landCoverFrac nbp npp prveg ra residualFrac rh tran treeFrac
-       mon    XY-na    -------- --- 166
+       mon    XY-na    -------- --- 165
 
                          AERmonZ P2  16: bry ch4 cly h2o hcl hno3 ho2 meanage n2o noy o3 oh ta ua va zg
                            EmonZ P2   5: tntmp tntrl tntrs utendnogw utendogw
@@ -1278,7 +1272,7 @@ Some Statistics on actually written variables per frequency+shape...
                             Amon P2   3: ch4global co2mass n2oglobal
        mon    na-na    -------- ---   3
 
-       mon --------    -------- --- 295
+       mon --------    -------- --- 294
 
                          CFsubhr P2  21: cl cli clw hur hus ta tnhus tnhusa tnhusc tnhusmp tnhusscpbl tnt tnta tntc tntmp tntr tntscpbl ua va wap zg
                           Esubhr P2   8: tnhuspbl tnhusscp tntpbl tntrl tntrlcs tntrs tntrscs tntscp
@@ -1293,7 +1287,7 @@ Some Statistics on actually written variables per frequency+shape...
      subhr --------    -------- ---  78
 
 
----------- --------    -------- --- 587
+---------- --------    -------- --- 595
 
 
 Some Statistics on actually written variables per variable...
@@ -2052,10 +2046,6 @@ Some Statistics on actually written variables per variable...
 --- VARNAME: od550oa: Total Organic Aerosol Optical Depth at 550nm
 ---------------------
               *   mon_AERmon_XY-na_2 od550oa
-----------------------
---- VARNAME: od550so4: Sulfate Aerosol Optical Depth at 550nm
-----------------------
-              *   mon_AERmon_XY-na_2 od550so4
 ---------------------
 --- VARNAME: od550ss: Sea-Salt Aerosol Optical Depth at 550nm
 ---------------------
@@ -2371,6 +2361,10 @@ Some Statistics on actually written variables per variable...
 --- VARNAME: rsutcsaf: TOA Outgoing Clear-Sky, Aerosol-Free Shortwave Radiation
 ----------------------
               *   mon_AERmon_XY-na_2 rsutcsaf
+-------------------
+--- VARNAME: rv850: Relative Vorticity at 850hPa
+-------------------
+              * 6hr_6hrPlevPt_XY-na_2 rv850
 -----------------
 --- VARNAME: sbl: Surface Snow and Ice Sublimation Flux
 -----------------
@@ -2441,6 +2435,14 @@ Some Statistics on actually written variables per variable...
               *  subhr_CFsubhr_S-A_2 ta
               *    6hr_6hrLev_XY-A_2 ta
               * 6hr_6hrPlevPt_XY-P3_1 ta
+-------------------
+--- VARNAME: ta700: Air Temperature
+-------------------
+              *    day_CFday_XY-na_2 ta700
+-------------------
+--- VARNAME: ta850: Air Temperature
+-------------------
+              *     day_Eday_XY-na_2 ta850
 -----------------
 --- VARNAME: tas: Near-Surface Air Temperature
 -----------------
@@ -2636,6 +2638,10 @@ Some Statistics on actually written variables per variable...
               *  subhr_CFsubhr_S-A_2 ua
               *    6hr_6hrLev_XY-A_2 ua
               * 6hr_6hrPlevPt_XY-P7T_2 ua
+------------------
+--- VARNAME: ua10: Eastward Wind at 10hPa
+------------------
+              *   day_AERday_XY-na_2 ua10
 -----------------
 --- VARNAME: uas: Eastward Near-Surface Wind
 -----------------
@@ -2693,6 +2699,10 @@ Some Statistics on actually written variables per variable...
               *     day_day_XY-P19_1 wap
               *    mon_Amon_XY-P19_1 wap
               *  subhr_CFsubhr_S-A_2 wap
+--------------------
+--- VARNAME: wap500: Pressure Tendency
+--------------------
+              *    day_CFday_XY-na_2 wap500
 -------------------
 --- VARNAME: wetbc: Wet Deposition Rate of Black Carbon Aerosol Mass
 -------------------
@@ -2726,6 +2736,19 @@ Some Statistics on actually written variables per variable...
               *  subhr_CFsubhr_S-A_2 zg
               *    6hr_6hrLev_XY-A_2 zg
               * 6hr_6hrPlevPt_XY-P7T_2 zg
+------------------
+--- VARNAME: zg10: Geopotential Height at 10hPa
+------------------
+              *   day_AERday_XY-na_2 zg10
+--------------------
+--- VARNAME: zg1000: Geopotential Height at 1000hPa
+--------------------
+              *   day_AERday_XY-na_2 zg1000
+-------------------
+--- VARNAME: zg500: Geopotential Height at 500hPa
+-------------------
+              *   day_AERday_XY-na_2 zg500
+              * 6hr_6hrPlevPt_XY-na_2 zg500
 -----------------
 --- VARNAME: ztp: Tropopause Altitude Above Geoid
 -----------------
@@ -2743,7 +2766,7 @@ Warnings about cell methods (with var list)
 *
 *              dr2xml version:  current_version
 *   CMIP6 conventions version:  v6.2.4
-*  CMIP7 Data Request version:  Software 1.1.3.dev47+g35c67bc - Content v1.2.1
+*  CMIP7 Data Request version:  Software 1.2.1.dev10+g5f3dcc4.d20250515 - Content v1.2.1
 
 *
  **************************************************

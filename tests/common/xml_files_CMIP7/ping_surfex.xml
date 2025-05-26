@@ -22,18 +22,16 @@
 {}-->
 	<!--Year processed None-->
 	<field_definition>
+		<field id="CMIP7_abs" field_ref="?dummy_XY_lambda550nm"/>
+		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_sulfate_ambient_aerosol_particles : This is the sulphate aerosol optical depth at 550nm due to absorption-->
 		<field id="CMIP7_abs550aer" field_ref="RADTACabs_band3"/>
 		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_ambient_aerosol_particles : Optical thickness of atmospheric aerosols at wavelength 550 nanometers.-->
 		<field id="CMIP7_abs550bc" field_ref="?dummy_XY"/>
 		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_black_carbon_ambient_aerosol : This is the black carbon aerosol optical depth at 550nm due to absorption-->
 		<field id="CMIP7_abs550dust" field_ref="?dummy_XY"/>
 		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_dust_ambient_aerosol_particles : This is the dust aerosol optical depth at 550nm due to absorption-->
-		<field id="CMIP7_abs550no3" field_ref="?dummy_XY"/>
-		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_nitrate_ambient_aerosol_particles : This is the nitrate aerosol optical depth at 550nm due to absorption-->
 		<field id="CMIP7_abs550oa" field_ref="?dummy_XY"/>
 		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_particulate_organic_matter_ambient_aerosol_particles : This is the particular organic matter aerosol optical depth at 550nm due to absorption-->
-		<field id="CMIP7_abs550so4" field_ref="?dummy_XY"/>
-		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_sulfate_ambient_aerosol_particles : This is the sulphate aerosol optical depth at 550nm due to absorption-->
 		<field id="CMIP7_abs550ss" field_ref="?dummy_XY"/>
 		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_sea_salt_ambient_aerosol_particles : This is the sea salt aerosol optical depth at 550nm due to absorption-->
 		<field id="CMIP7_acabf" field_ref="dummy_D-1"/>
@@ -614,14 +612,6 @@
 		<!--P2 (mol mol-1) mole_fraction_of_hydroperoxyl_radical_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.  The chemical formula of hydroperoxyl radical is HO2.-->
 		<field id="CMIP7_hur" field_ref="hur" > this * 100 </field>
 		<!--P1 (%) relative_humidity : This is the relative humidity with respect to liquid water for T> 0 C, and with respect to ice for T<0 C.-->
-		<field id="CMIP7_hur100" field_ref="?dummy_XY"/>
-		<!--P3 (%) relative_humidity : Relative humidity at 100 hPa-->
-		<field id="CMIP7_hur500" field_ref="?dummy_XY"/>
-		<!--P3 (%) relative_humidity : Relative humidity at 500 hPa, 6 hourly instantaneous-->
-		<field id="CMIP7_hur700" field_ref="?dummy_XY"/>
-		<!--P3 (%) relative_humidity : Relative humidity at 700 hPa-->
-		<field id="CMIP7_hur850" field_ref="?dummy_XY"/>
-		<!--P3 (%) relative_humidity : Relative humidity at 850 hPa-->
 		<field id="CMIP7_hurs" field_ref="hurs" > this * 100 </field>
 		<!--P1 (%) relative_humidity : This is the relative humidity with respect to liquid water for T> 0 C, and with respect to ice for T<0 C.-->
 		<field id="CMIP7_hursmax" field_ref="CMIP7_hurs"/>
@@ -904,6 +894,8 @@ where T is 2 m temperature (degrees F), R is relative humidity (%)-->
 		<!--P2 (mol mol-1) reference_mole_fraction_of_ozone_in_air : This is the ozone mole fraction that is used in a diagnostic call to the model's radiation scheme. It is only applicable when an ozone double call is active in the model.-->
 		<field id="CMIP7_o3ste" field_ref="dummy_D0"/>
 		<!--P2 (mol mol-1) mole_fraction_of_ozone_in_air : Ozone tracer intended to map out strat-trop exchange (STE) of ozone.-->
+		<field id="CMIP7_od" field_ref="?dummy_XY_lambda550nm"/>
+		<!--P2 (1) atmosphere_optical_thickness_due_to_sulfate_ambient_aerosol_particles : Total aerosol AOD due to sulfate aerosol at a wavelength of 550 nanometres.-->
 		<field id="CMIP7_od440aer" field_ref="TACod440aer"/>
 		<!--P2 (1) atmosphere_optical_thickness_due_to_ambient_aerosol_particles : This is the aerosol optical depth (AOD) from the ambient aerosls (i.e., includes aerosol water).  Does not include AOD from stratospheric aerosols if these are prescribed but includes other possible background aerosol types. Needs a comment attribute "wavelength: 443 nm"-->
 		<field id="CMIP7_od550aer" field_ref="TACod550aer"/>
@@ -920,12 +912,8 @@ where T is 2 m temperature (degrees F), R is relative humidity (%)-->
 		<!--P2 (1) atmosphere_optical_thickness_due_to_dust_ambient_aerosol_particles : Total aerosol AOD due to dust aerosol at a wavelength of 550 nanometres.-->
 		<field id="CMIP7_od550lt1aer" field_ref="TACod550lt1aer"/>
 		<!--P2 (1) atmosphere_optical_thickness_due_to_pm1_ambient_aerosol_particles : od550 due to particles with wet diameter less than 1 um  ("ambient" means "wetted"). When models do not include explicit size information, it can be assumed that all anthropogenic aerosols and natural secondary aerosols have diameter less than 1 um.-->
-		<field id="CMIP7_od550no3" field_ref="dummy_D-1"/>
-		<!--P2 (1) atmosphere_optical_thickness_due_to_nitrate_ambient_aerosol_particles : Total aerosol AOD due to nitrate aerosol at a wavelength of 550 nanometres.-->
 		<field id="CMIP7_od550oa" field_ref="TACod550oa"/>
 		<!--P2 (1) atmosphere_optical_thickness_due_to_particulate_organic_matter_ambient_aerosol_particles : total organic aerosol AOD, comprises all organic aerosols, primary + secondary ; natural + anthropogenic including biomasss burning organic aerosol-->
-		<field id="CMIP7_od550so4" field_ref="TACod550so4"/>
-		<!--P2 (1) atmosphere_optical_thickness_due_to_sulfate_ambient_aerosol_particles : Total aerosol AOD due to sulfate aerosol at a wavelength of 550 nanometres.-->
 		<field id="CMIP7_od550soa" field_ref="dummy_D-1"/>
 		<!--P2 (1) atmosphere_optical_thickness_due_to_particulate_organic_matter_ambient_aerosol_particles : total organic aerosol AOD due to secondary aerosol formation-->
 		<field id="CMIP7_od550ss" field_ref="TACod550ss"/>
@@ -1190,7 +1178,7 @@ where T is 2 m temperature (degrees F), R is relative humidity (%)-->
 		<!--P2 (W m-2) toa_outgoing_shortwave_flux_assuming_reference_mole_fraction_of_ozone_in_air : This is top-of-atmosphere outgoing shortwave flux for all-sky conditions from a diagnostic call to the radiation scheme, using a reference ozone field-->
 		<field id="CMIP7_rtmt" field_ref="dummy_D-1"/>
 		<!--P2 (W m-2) net_downward_radiative_flux_at_top_of_atmosphere_model : i.e., at the top of that portion of the atmosphere where dynamics are explicitly treated by the model. This is reported only if it differs from the net downward radiative flux at the top of the atmosphere.-->
-		<field id="CMIP7_rv850" field_ref="?dummy_XY"/>
+		<field id="CMIP7_rv" field_ref="vort"/>
 		<!--P2 (s-1) atmosphere_relative_vorticity : Relative vorticity is the upward component of the vorticity vector i.e. the component which arises from horizontal velocity.-->
 		<field id="CMIP7_rzwc" field_ref="rzwc"/>
 		<!--P3 (kg m-2) mass_content_of_water_in_soil_layer_defined_by_root_depth : water\_content\_of\_root\_zone-->
@@ -1290,10 +1278,6 @@ where T is 2 m temperature (degrees F), R is relative humidity (%)-->
 		<!--P1 (K) air_temperature : Air Temperature-->
 		<field id="CMIP7_ta6" field_ref="?dummy_XY_plev6"/>
 		<!--P3 (K) air_temperature : Air temperature on 6 pressure levels in the lower troposphere-->
-		<field id="CMIP7_ta700" field_ref="?dummy_XY"/>
-		<!--P2 (K) air_temperature : Air temperature at 700hPa-->
-		<field id="CMIP7_ta850" field_ref="?dummy_XY"/>
-		<!--P2 (K) air_temperature : Air temperature at 850hPa-->
 		<field id="CMIP7_taUTLS" field_ref="?dummy_XY_plev5u"/>
 		<!--P2 (K) air_temperature : 6 hourly instantaneous temperature at 5 pressure levels in the UTLS region (150, 175, 200, 225, and 250 hPa)-->
 		<field id="CMIP7_tas" field_ref="tas"/>
@@ -1432,12 +1416,8 @@ where T is 2 m temperature (degrees F), R is relative humidity (%)-->
 		<!--P2 (K) air_temperature_at_cloud_top : cloud\_top refers to the top of the highest cloud. Air temperature is the bulk temperature of the air, not the surface (skin) temperature.-->
 		<field id="CMIP7_ua" field_ref="ua"/>
 		<!--P1 (m s-1) eastward_wind : Zonal wind (positive in a eastward direction).-->
-		<field id="CMIP7_ua10" field_ref="?dummy_XY"/>
-		<!--P2 (m s-1) eastward_wind : Zonal wind on the 10 hPa surface-->
 		<field id="CMIP7_ua100m" field_ref="?dummy_XY"/>
 		<!--P2 (m s-1) eastward_wind : Zonal wind (positive in a eastward direction) at 100m above the surface-->
-		<field id="CMIP7_ua200" field_ref="?dummy_XY"/>
-		<!--P3 (m s-1) eastward_wind : Zonal wind (positive in a eastward direction) at 200 hPa, 6hourly instantaneous-->
 		<field id="CMIP7_ua6" field_ref="?dummy_XY_plev6"/>
 		<!--P3 (m s-1) eastward_wind : Zonal wind (positive in a eastward direction) on 6 pressure levels in the lower troposphere-->
 		<field id="CMIP7_uaUTLS" field_ref="?dummy_XY_plev5u"/>
@@ -1458,8 +1438,6 @@ where T is 2 m temperature (degrees F), R is relative humidity (%)-->
 		<!--P1 (m s-1) northward_wind : Meridional wind (positive in a northward direction).-->
 		<field id="CMIP7_va100m" field_ref="?dummy_XY"/>
 		<!--P2 (m s-1) northward_wind : Meridional wind (positive in a northward direction) at 100m above the surface.-->
-		<field id="CMIP7_va200" field_ref="?dummy_XY"/>
-		<!--P3 (m s-1) northward_wind : Meridional wind (positive in a northward direction) at 200 hPa, 6 hourly instantaneous-->
 		<field id="CMIP7_va6" field_ref="?dummy_XY_plev6"/>
 		<!--P3 (m s-1) northward_wind : Meridional wind (positive in a northward direction) on 6 pressure levels in the lower troposphere-->
 		<field id="CMIP7_vaUTLS" field_ref="?dummy_XY_plev3u"/>
@@ -1488,8 +1466,6 @@ where T is 2 m temperature (degrees F), R is relative humidity (%)-->
 		<!--P2 (m s-1) upward_air_velocity : A velocity is a vector quantity. "Upward" indicates a vector component which is positive when directed upward (negative downward). Upward air velocity is the vertical component of the 3D air velocity vector. The standard name downward\_air\_velocity may be used for a vector component with the opposite sign convention.-->
 		<field id="CMIP7_wap" field_ref="wap"/>
 		<!--P1 (Pa s-1) lagrangian_tendency_of_air_pressure : commonly referred to as "omega", this represents the vertical component of velocity in pressure coordinates (positive down)-->
-		<field id="CMIP7_wap500" field_ref="?dummy_XY"/>
-		<!--P2 (Pa s-1) lagrangian_tendency_of_air_pressure : at 500 hPa level; commonly referred to as "omega", this represents the vertical component of velocity in pressure coordinates (positive down)-->
 		<field id="CMIP7_wap6" field_ref="?dummy_XY_plev6"/>
 		<!--P3 (Pa s-1) lagrangian_tendency_of_air_pressure : Omega (=dp/dt) on 6 pressure levels in the lower troposphere-->
 		<field id="CMIP7_wbgt2m" field_ref="?dummy_XY"/>
@@ -1566,14 +1542,6 @@ WBGT = 0.567 \* T\_C + 0.393 \* e/100 + 3.94, where T\_C is temperature in degre
 		<!--P4 (m) height_above_reference_ellipsoid : Provide only if altitude of full model levels is fixed-->
 		<field id="CMIP7_zg" field_ref="zg"/>
 		<!--P1 (m) geopotential_height : Geopotential is the sum of the specific gravitational potential energy relative to the geoid and the specific centripetal potential energy. Geopotential height is the geopotential divided by the standard acceleration due to gravity. It is numerically similar to the altitude (or geometric height) and not to the quantity with standard name height, which is relative to the surface.-->
-		<field id="CMIP7_zg10" field_ref="?dummy_XY"/>
-		<!--P2 (m) geopotential_height : Geopotential height on the 10 hPa surface-->
-		<field id="CMIP7_zg1000" field_ref="?dummy_XY"/>
-		<!--P2 (m) geopotential_height : Geopotential height on the 1000 hPa surface-->
-		<field id="CMIP7_zg500" field_ref="?dummy_XY"/>
-		<!--P2 (m) geopotential_height : geopotential height on the 500 hPa surface-->
-		<field id="CMIP7_zg700" field_ref="?dummy_XY"/>
-		<!--P3 (m) geopotential_height : 700 hPa geopotential height at 6 hourly instantaneous frequency-->
 		<field id="CMIP7_zg925" field_ref="?dummy_XY"/>
 		<!--P3 (m) geopotential_height : Geopotential Height at 925 hPa, 6 hourly instantaneous-->
 		<field id="CMIP7_ztp" field_ref="ztp"/>

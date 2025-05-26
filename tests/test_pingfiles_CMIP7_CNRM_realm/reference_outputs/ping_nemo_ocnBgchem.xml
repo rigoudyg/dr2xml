@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <context id="nemo">
-	<!--CMIP7 Data Request version Software 1.1.3.dev47+g35c67bc - Content v1.2.1-->
+	<!--CMIP7 Data Request version Software 1.2.1.dev10+g5f3dcc4.d20250515 - Content v1.2.1-->
 	<!--dr2xml version current_version-->
 	<!--Lab_and_model settings
 {'data_request_content_version' = 'v1.2.1',
@@ -56,11 +56,11 @@
 		<!--P2 (kg m-3) mass_concentration_of_picophytoplankton_expressed_as_chlorophyll_in_sea_water : chlorophyll concentration from the picophytoplankton (<2 um) component alone-->
 		<field id="CMIP7_chlpicoos" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-3) mass_concentration_of_picophytoplankton_expressed_as_chlorophyll_in_sea_water : chlorophyll concentration from the picophytoplankton (<2 um) component alone-->
-		<field id="CMIP7_co3" field_ref="?dummy_XY"/>
+		<field id="CMIP7_co3" field_ref="?dummy_XY_op20bar"/>
 		<!--P3 (mol m-3) mole_concentration_of_carbonate_expressed_as_carbon_in_sea_water : Mole concentration (number of moles per unit volume: molarity) of the carbonate anion (CO3).-->
 		<field id="CMIP7_co3os" field_ref="?dummy_XY"/>
 		<!--P3 (mol m-3) mole_concentration_of_carbonate_expressed_as_carbon_in_sea_water : Near surface mole concentration (number of moles per unit volume: molarity) of the carbonate anion (CO3).-->
-		<field id="CMIP7_co3satarag" field_ref="?dummy_XY"/>
+		<field id="CMIP7_co3satarag" field_ref="?dummy_XY_op20bar"/>
 		<!--P3 (mol m-3) mole_concentration_of_carbonate_expressed_as_carbon_at_equilibrium_with_pure_aragonite_in_sea_water : Mole concentration (number of moles per unit volume: molarity) of the carbonate anion (CO3) for sea water in equilibrium with pure Aragonite. Aragonite (CaCO3) is a mineral that is a polymorph of calcium carbonate.-->
 		<field id="CMIP7_co3sataragos" field_ref="?dummy_XY"/>
 		<!--P3 (mol m-3) mole_concentration_of_carbonate_expressed_as_carbon_at_equilibrium_with_pure_aragonite_in_sea_water : Near surface mole concentration (number of moles per unit volume: molarity) of the carbonate anion (CO3) for sea water in equilibrium with pure Aragonite. Aragonite (CaCO3) is a mineral that is a polymorph of calcium carbonate.-->
@@ -80,23 +80,23 @@
 		<!--P3 (mol m-3) mole_concentration_of_dimethyl_sulfide_in_sea_water : Mole concentration of dimethyl sulphide in water-->
 		<field id="CMIP7_dmsos" field_ref="?dummy_XY"/>
 		<!--P2 (mol m-3) mole_concentration_of_dimethyl_sulfide_in_sea_water : Mole concentration of dimethyl sulphide in water in the near surface layer-->
-		<field id="CMIP7_dpco2" field_ref="?dummy_XY"/>
+		<field id="CMIP7_dpco2" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (Pa) surface_carbon_dioxide_partial_pressure_difference_between_sea_water_and_air : Difference in partial pressure of carbon dioxide between sea water and air.  The partial pressure of a dissolved gas in sea water is the partial pressure in air with which it would be in equilibrium.-->
 		<field id="CMIP7_dpo2" field_ref="?dummy_XY"/>
 		<!--P2 (Pa) surface_molecular_oxygen_partial_pressure_difference_between_sea_water_and_air : The partial pressure of a dissolved gas in sea water is the partial pressure in air with which it would be in equilibrium.  The partial pressure of a gaseous constituent of air is the pressure which it alone would exert with unchanged temperature and number of moles per unit volume.  The surface called "surface" means the lower boundary of the atmosphere.-->
-		<field id="CMIP7_epc100" field_ref="?dummy_XY"/>
+		<field id="CMIP7_epc100" field_ref="?dummy_XY_depth100m"/>
 		<!--P2 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_matter_expressed_as_carbon_in_sea_water : The phrase 'expressed\_as' is used in the construction A\_expressed\_as\_B, where B is a chemical constituent of A. It means that the quantity indicated by the standard name is calculated solely with respect to the B contained in A, neglecting all other chemical constituents of A. In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.   'Sinking' is the gravitational settling of particulate matter suspended in a liquid. A sinking flux is positive downwards and is calculated relative to the movement of the surrounding fluid.-->
-		<field id="CMIP7_epc1000" field_ref="?dummy_XY"/>
+		<field id="CMIP7_epc1000" field_ref="?dummy_XY_depth1000m"/>
 		<!--P2 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_matter_expressed_as_carbon_in_sea_water : The phrase 'expressed\_as' is used in the construction A\_expressed\_as\_B, where B is a chemical constituent of A. It means that the quantity indicated by the standard name is calculated solely with respect to the B contained in A, neglecting all other chemical constituents of A. In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.   'Sinking' is the gravitational settling of particulate matter suspended in a liquid. A sinking flux is positive downwards and is calculated relative to the movement of the surrounding fluid.-->
-		<field id="CMIP7_epcalc100" field_ref="?dummy_XY"/>
+		<field id="CMIP7_epcalc100" field_ref="?dummy_XY_depth100m"/>
 		<!--P2 (mol m-2 s-1) sinking_mole_flux_of_calcite_expressed_as_carbon_in_sea_water : The phrase 'expressed\_as' is used in the construction A\_expressed\_as\_B, where B is a chemical constituent of A. It means that the quantity indicated by the standard name is calculated solely with respect to the B contained in A, neglecting all other chemical constituents of A. In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.   'Sinking' is the gravitational settling of particulate matter suspended in a liquid. A sinking flux is positive downwards and is calculated relative to the movement of the surrounding fluid. Calcite is a mineral that is a polymorph of calcium carbonate. The chemical formula of calcite is CaCO3. Standard names also exist for aragonite, another polymorph of calcium carbonate.-->
-		<field id="CMIP7_epcalc1000" field_ref="?dummy_XY"/>
+		<field id="CMIP7_epcalc1000" field_ref="?dummy_XY_depth1000m"/>
 		<!--P2 (mol m-2 s-1) sinking_mole_flux_of_calcite_expressed_as_carbon_in_sea_water : The phrase 'expressed\_as' is used in the construction A\_expressed\_as\_B, where B is a chemical constituent of A. It means that the quantity indicated by the standard name is calculated solely with respect to the B contained in A, neglecting all other chemical constituents of A. In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.   'Sinking' is the gravitational settling of particulate matter suspended in a liquid. A sinking flux is positive downwards and is calculated relative to the movement of the surrounding fluid. Calcite is a mineral that is a polymorph of calcium carbonate. The chemical formula of calcite is CaCO3. Standard names also exist for aragonite, another polymorph of calcium carbonate.-->
-		<field id="CMIP7_epn100" field_ref="?dummy_XY"/>
+		<field id="CMIP7_epn100" field_ref="?dummy_XY_depth100m"/>
 		<!--P3 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_nitrogen_in_sea_water : In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.   'Sinking' is the gravitational settling of particulate matter suspended in a liquid. A sinking flux is positive downwards and is calculated relative to the movement of the surrounding fluid.-->
-		<field id="CMIP7_epp100" field_ref="?dummy_XY"/>
+		<field id="CMIP7_epp100" field_ref="?dummy_XY_depth100m"/>
 		<!--P3 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_phosphorus_in_sea_water : In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.   'Sinking' is the gravitational settling of particulate matter suspended in a liquid. A sinking flux is positive downwards and is calculated relative to the movement of the surrounding fluid.-->
-		<field id="CMIP7_epsi100" field_ref="?dummy_XY"/>
+		<field id="CMIP7_epsi100" field_ref="?dummy_XY_depth100m"/>
 		<!--P3 (mol m-2 s-1) sinking_mole_flux_of_particulate_silicon_in_sea_water : In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.   'Sinking' is the gravitational settling of particulate matter suspended in a liquid. A sinking flux is positive downwards and is calculated relative to the movement of the surrounding fluid.-->
 		<field id="CMIP7_exparagob" field_ref="?dummy_XY_depthseafloor"/>
 		<!--P3 (mol m-2 s-1) sinking_mole_flux_of_aragonite_expressed_as_carbon_in_sea_water : Downward sinking flux of aragonite at seafloor-->
@@ -128,13 +128,13 @@
 		<!--P3 (mol m-2 s-1) minus_tendency_of_ocean_mole_content_of_elemental_nitrogen_due_to_denitrification_and_sedimentation : "Content" indicates a quantity per unit area.  The specification of a physical process by the phrase due\_to\_process means that the quantity named is a single term in a sum of terms which together compose the general quantity  named by omitting the phrase. 'Denitrification' is the conversion of nitrate into gaseous compounds such as nitric oxide, nitrous oxide and molecular nitrogen which are then emitted to the atmosphere.  'Sedimentation' is the sinking of particulate matter to the floor of a body of water. "tendency\_of\_X" means derivative of X with respect to time.-->
 		<field id="CMIP7_froc" field_ref="?dummy_XY_depthseafloor"/>
 		<!--P2 (mol m-2 s-1) minus_tendency_of_ocean_mole_content_of_organic_carbon_due_to_sedimentation : Organic Carbon loss to sediments-->
-		<field id="CMIP7_fsfe" field_ref="?dummy_XY"/>
+		<field id="CMIP7_fsfe" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (mol m-2 s-1) tendency_of_ocean_mole_content_of_iron_due_to_deposition_and_runoff_and_sediment_dissolution : Iron supply through deposition flux onto sea surface, runoff, coasts, sediments, etc-->
-		<field id="CMIP7_fsn" field_ref="?dummy_XY"/>
+		<field id="CMIP7_fsn" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (mol m-2 s-1) tendency_of_ocean_mole_content_of_elemental_nitrogen_due_to_deposition_and_fixation_and_runoff : Flux of nitrogen into the ocean due to deposition (sum of dry and wet deposition), fixation (the production of ammonia from nitrogen gas by diazotrophs) and runoff (liquid water which drains from land).-->
 		<field id="CMIP7_graz" field_ref="?dummy_XYO"/>
 		<!--P2 (mol m-3 s-1) tendency_of_mole_concentration_of_particulate_organic_matter_expressed_as_carbon_in_sea_water_due_to_grazing_of_phytoplankton : Total grazing of phytoplankton by zooplankton defined as tendency of moles of carbon per cubic metre.-->
-		<field id="CMIP7_icfriver" field_ref="?dummy_XY"/>
+		<field id="CMIP7_icfriver" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (mol m-2 s-1) tendency_of_ocean_mole_content_of_inorganic_carbon_due_to_runoff_and_sediment_dissolution : Inorganic Carbon supply to ocean through runoff (separate from gas exchange)-->
 		<field id="CMIP7_intdic" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2) ocean_mass_content_of_dissolved_inorganic_carbon : Vertically integrated DIC-->
@@ -216,7 +216,7 @@
 		<!--P3 (mol m-3) mole_concentration_of_dissolved_molecular_oxygen_in_sea_water : 'Mole concentration' means number of moles per unit volume, also called "molarity", and is used in the construction mole\_concentration\_of\_X\_in\_Y, where X is a material constituent of Y.  A chemical or biological species denoted by X may be described by a single term such as 'nitrogen' or a phrase such as 'nox\_expressed\_as\_nitrogen'.-->
 		<field id="CMIP7_o2sat" field_ref="?dummy_XYO"/>
 		<!--P3 (mol m-3) mole_concentration_of_dissolved_molecular_oxygen_in_sea_water_at_saturation : "Mole concentration at saturation" means the mole concentration in a saturated solution. Mole concentration means number of moles per unit volume, also called "molarity", and is used in the construction "mole\_concentration\_of\_X\_in\_Y", where X is a material constituent of Y. A chemical or biological species denoted by X may be described by a single term such as "nitrogen" or a phrase such as "nox\_expressed\_as\_nitrogen".-->
-		<field id="CMIP7_ocfriver" field_ref="?dummy_XY"/>
+		<field id="CMIP7_ocfriver" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (mol m-2 s-1) tendency_of_ocean_mole_content_of_organic_carbon_due_to_runoff_and_sediment_dissolution : Organic Carbon supply to ocean through runoff (separate from gas exchange)-->
 		<field id="CMIP7_ph" field_ref="?dummy_XYO"/>
 		<!--P2 (1) sea_water_ph_reported_on_total_scale : negative log10 of hydrogen ion concentration with the concentration expressed as mol H kg-1.-->
@@ -250,7 +250,7 @@
 		<!--P2 (mol m-3) mole_concentration_of_dissolved_inorganic_phosphorus_in_sea_water : Mole concentration means number of moles per unit volume, also called "molarity", and is used in the construction "mole\_concentration\_of\_X\_in\_Y", where X is a material constituent of Y. A chemical or biological species denoted by X may be described by a single term such as "nitrogen" or a phrase such as "nox\_expressed\_as\_nitrogen". "Dissolved inorganic phosphorus" means the sum of all inorganic phosphorus in solution (including phosphate, hydrogen phosphate, dihydrogen phosphate, and phosphoric acid).-->
 		<field id="CMIP7_pp" field_ref="?dummy_XYO"/>
 		<!--P3 (mol m-3 s-1) tendency_of_mole_concentration_of_particulate_organic_matter_expressed_as_carbon_in_sea_water_due_to_net_primary_production : total primary (organic carbon) production by phytoplankton-->
-		<field id="CMIP7_ppos" field_ref="?dummy_XY"/>
+		<field id="CMIP7_ppos" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (mol m-3 s-1) tendency_of_mole_concentration_of_particulate_organic_matter_expressed_as_carbon_in_sea_water_due_to_net_primary_production : total primary (organic carbon) production by phytoplankton-->
 		<field id="CMIP7_si" field_ref="?dummy_XYO"/>
 		<!--P2 (mol m-3) mole_concentration_of_dissolved_inorganic_silicon_in_sea_water : Mole concentration means number of moles per unit volume, also called "molarity", and is used in the construction "mole\_concentration\_of\_X\_in\_Y", where X is a material constituent of Y. A chemical or biological species denoted by X may be described by a single term such as "nitrogen" or a phrase such as "nox\_expressed\_as\_nitrogen". "Dissolved inorganic silicon" means the sum of all inorganic silicon in solution (including silicic acid and its first dissociated anion SiO(OH)3-).-->
@@ -266,7 +266,7 @@
 		<!--P3 (mol m-3) mole_concentration_of_dissolved_inorganic_silicon_in_sea_water : Mole concentration means number of moles per unit volume, also called "molarity", and is used in the construction "mole\_concentration\_of\_X\_in\_Y", where X is a material constituent of Y. A chemical or biological species denoted by X may be described by a single term such as "nitrogen" or a phrase such as "nox\_expressed\_as\_nitrogen". "Dissolved inorganic silicon" means the sum of all inorganic silicon in solution (including silicic acid and its first dissociated anion SiO(OH)3-).-->
 		<field id="CMIP7_sisi" field_ref="?dummy_XY"/>
 		<!--P3 (mol m-2) sea_ice_mole_content_of_silicon : Vertically-integrated amount of silicate in ice algae, expressed in moles of silicon per square meter of sea ice.-->
-		<field id="CMIP7_spco2" field_ref="?dummy_XY"/>
+		<field id="CMIP7_spco2" field_ref="?dummy_XY_depth0m"/>
 		<!--P2 (Pa) surface_partial_pressure_of_carbon_dioxide_in_sea_water : The surface called "surface" means the lower boundary of the atmosphere. The partial pressure of a dissolved gas in sea water is the partial pressure in air with which it would be in equilibrium. The partial pressure of a gaseous constituent of air is the pressure which it alone would exert with unchanged temperature and number of moles per unit volume. The chemical formula for carbon dioxide is CO2.-->
 		<field id="CMIP7_talk" field_ref="?dummy_XYO"/>
 		<!--P2 (mol m-3) sea_water_alkalinity_expressed_as_mole_equivalent : total alkalinity equivalent concentration (including carbonate, borate, phosphorus, silicon, and nitrogen components)-->
