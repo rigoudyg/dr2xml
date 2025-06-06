@@ -68,7 +68,7 @@ def select_variables_to_be_processed():
     if None in list_svars_per_realms:
         list_svars_per_realms = list_svars_per_realms & {""} - {None}
     list_svars_per_realms = sorted(list(list_svars_per_realms))
-    logger.info("\nRealms for these CMORvars: %s" % " ".join(list_svars_per_realms))
+    logger.info(f"\nRealms for these CMORvars: {' '.join(list_svars_per_realms)}".strip(" "))
     #
     # --------------------------------------------------------------------
     # Select on context realms, grouping by table

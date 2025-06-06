@@ -13,7 +13,7 @@ import sys
 
 
 log_dir = os.getcwd()
-log_filename = "assemble_and_QC_postpro.out.{}".format(os.environ.get("MTOOL_JOB_ID", ""))
+log_filename = "dr2xml.out"
 log_file = os.sep.join([log_dir, log_filename])
 log_level = "info"
 

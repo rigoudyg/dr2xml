@@ -168,6 +168,7 @@ lab_and_model_settings = {
              "LUMIP", "Other", "VolMIP", "HT-MIP/VolMIP", "CORDEX", "CFMIP", "C4MIP", "WhatIfMIP", "VIACSAB", "RAMIP",
              "FireMIP", "IRRMIP", "LongRunMIP", "MISOMIP2", "FishMIP", "ISIMIP"}
     },
+    'included_opportunities': ['dafc7392-8c95-11ef-944e-41a8eb05f654'],
     'non_standard_axes': {
         'siline': 'siline',
         'dbze': 'dbze',

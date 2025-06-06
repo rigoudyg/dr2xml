@@ -27,7 +27,7 @@ simulation_settings = {
     'sub_experiment_id': 'none',
     'forcing_index': 2,
     'initialization_index': 1,
-    'experiment_id': 'esm-piControl',
+    'experiment_id': 'historical',
     'physics_index': 1,
     'branch_year_in_parent': 1950,
     'branch_year_in_child': 1850,
