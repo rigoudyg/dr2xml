@@ -14,9 +14,9 @@ Processing context  nemo
 
 **************************************************
 
-Number of distinct CMOR variables (whatever the grid): 1273
-Number of distinct var labels is: 832
-Number of simplified vars is: 1273
+Number of distinct CMOR variables (whatever the grid): 1078
+Number of distinct var labels is: 774
+Number of simplified vars is: 1078
 Issues with standard names are: []
 Info: No HOMEvars list provided.
 
@@ -755,9 +755,9 @@ Processing context  surfex
 
 **************************************************
 
-Number of distinct CMOR variables (whatever the grid): 1273
-Number of distinct var labels is: 832
-Number of simplified vars is: 1273
+Number of distinct CMOR variables (whatever the grid): 1078
+Number of distinct var labels is: 774
+Number of simplified vars is: 1078
 Issues with standard names are: []
 Info: No HOMEvars list provided.
 
@@ -777,10 +777,6 @@ processing file current_directory/test_AOESM_piControl_CMIP7/input/xml/ping_trip
 OK current_directory/test_AOESM_piControl_CMIP7/input/xml/ping_trip.xml
 processing file current_directory/test_AOESM_piControl_CMIP7/input/xml/ping_nemo.xml:
 OK current_directory/test_AOESM_piControl_CMIP7/input/xml/ping_nemo.xml
-Duplicate variable bldep,bldep in table 3hrPt is skipped, preferred is bldep
-Duplicate variable ta,ta in table 6hrPlevPt is skipped, preferred is ta
-Duplicate variable ua,ua in table 6hrPlevPt is skipped, preferred is ua
-Duplicate variable va,va in table 6hrPlevPt is skipped, preferred is va
 Duplicate variable zg,zg in table 6hrPlevPt is skipped, preferred is zg
 Duplicate variable co,co in table AERday is skipped, preferred is co
 Duplicate variable mmraerh2o,mmraerh2o in table AERday is skipped, preferred is mmraerh2o
@@ -890,10 +886,6 @@ Duplicate variable mmroa,mmroa in table E3hrPt is skipped, preferred is mmroa
 Duplicate variable mmrso4,mmrso4 in table E3hrPt is skipped, preferred is mmrso4
 Duplicate variable mmrss,mmrss in table E3hrPt is skipped, preferred is mmrss
 Duplicate variable so2,so2 in table E3hrPt is skipped, preferred is so2
-Duplicate variable albsn,albsn in table Emon is skipped, preferred is albsn
-Duplicate variable albsrfc,albsrfc in table Emon is skipped, preferred is albsrfc
-Duplicate variable albsrfc,albsrfc in table Emon is skipped, preferred is albsrfc
-Duplicate variable albsrfc,albsrfc in table Emon is skipped, preferred is albsrfc
 Duplicate variable ccldncl,ccldncl in table Emon is skipped, preferred is ccldncl
 Duplicate variable reffcclwtop,reffcclwtop in table Emon is skipped, preferred is reffcclwtop
 Duplicate variable reffccwctop,reffccwctop in table Emon is skipped, preferred is reffccwctop
@@ -935,8 +927,6 @@ Duplicate variable tpf,tpf in table LImon is skipped, preferred is tpf
 Note: assuming that 'time: mean where ice_sheet'  for            tsIs in table LImon is well handled by 'detect_missing'
 Note: assuming that 'time: mean where ice_sheet'  for           tsnIs in table LImon is well handled by 'detect_missing'
 Duplicate variable tsn,tsn in table LImon is skipped, preferred is tsn
-Warning: issue when analyzing cell_time_method area: mean for cGeologicStorage in table Lmon, assuming it is once
-Warning: issue when analyzing cell_time_method area: mean for fHarvestToGeologicStorage in table Lmon, assuming it is once
 Duplicate variable mrfso,mrfso in table Lmon is skipped, preferred is mrfso
 Duplicate variable snc,snc in table day is skipped, preferred is snc
 Duplicate variable snw,snw in table day is skipped, preferred is snw
@@ -944,16 +934,6 @@ Duplicate variable areacella,areacella in table fx is skipped, preferred is area
 Duplicate variable lithk,lithk in table fx is skipped, preferred is lithk
 Note: assuming that for        albisccp in table CFday is well handled by 'detect_missing'
 Note: assuming that for        pctisccp in table CFday is well handled by 'detect_missing'
-Warning: Cannot complement model levels with psol for table CFday for frequency 1d
-Warning: Cannot complement model levels with psol for table CFday for frequency 1d
-Warning: Cannot complement model levels with psol for table CFday for frequency 1d
-Warning: Cannot complement model levels with psol for table CFday for frequency 1d
-Warning: Cannot complement model levels with psol for table CFday for frequency 1d
-Warning: Cannot complement model levels with psol for table CFday for frequency 1d
-Warning: Cannot complement model levels with psol for table CFday for frequency 1d
-Warning: Cannot complement model levels with psol for table CFday for frequency 1d
-Warning: Cannot complement model levels with psol for table CFday for frequency 1d
-Warning: Cannot complement model levels with psol for table CFday for frequency 1d
 Warning: Cannot complement model levels with psol for table CFday for frequency 1d
 Warning: Cannot complement model levels with psol for table AERmon for frequency 1mo
 Warning: Cannot complement model levels with psol for table AERmon for frequency 1mo
@@ -1039,63 +1019,15 @@ Warning: Cannot complement model levels with psol for table Emon for frequency 1
 Warning: Cannot complement model levels with psol for table Emon for frequency 1mo
 Warning: Cannot complement model levels with psol for table Emon for frequency 1mo
 Warning: Cannot complement model levels with psol for table Emon for frequency 1mo
-Warning: Cannot complement model levels with psol for table Emon for frequency 1mo
-Warning: Cannot complement model levels with psol for table CFsubhr for frequency 1ts
-Warning: Cannot complement model levels with psol for table CFsubhr for frequency 1ts
-Warning: Cannot complement model levels with psol for table CFsubhr for frequency 1ts
-Warning: Cannot complement model levels with psol for table CFsubhr for frequency 1ts
-Warning: Cannot complement model levels with psol for table CFsubhr for frequency 1ts
-Warning: Cannot complement model levels with psol for table CFsubhr for frequency 1ts
-Warning: Cannot complement model levels with psol for table CFsubhr for frequency 1ts
-Warning: Cannot complement model levels with psol for table CFsubhr for frequency 1ts
-Warning: Cannot complement model levels with psol for table CFsubhr for frequency 1ts
-Warning: Cannot complement model levels with psol for table CFsubhr for frequency 1ts
-Warning: Cannot complement model levels with psol for table CFsubhr for frequency 1ts
-Warning: Cannot complement model levels with psol for table CFsubhr for frequency 1ts
-Warning: Cannot complement model levels with psol for table CFsubhr for frequency 1ts
-Warning: Cannot complement model levels with psol for table CFsubhr for frequency 1ts
-Warning: Cannot complement model levels with psol for table CFsubhr for frequency 1ts
-Warning: Cannot complement model levels with psol for table CFsubhr for frequency 1ts
-Warning: Cannot complement model levels with psol for table CFsubhr for frequency 1ts
-Warning: Cannot complement model levels with psol for table CFsubhr for frequency 1ts
-Warning: Cannot complement model levels with psol for table CFsubhr for frequency 1ts
-Warning: Cannot complement model levels with psol for table CFsubhr for frequency 1ts
-Warning: Cannot complement model levels with psol for table CFsubhr for frequency 1ts
-Warning: Cannot complement model levels with psol for table CFsubhr for frequency 1ts
-Warning: Cannot complement model levels with psol for table CFsubhr for frequency 1ts
-Warning: Cannot complement model levels with psol for table CFsubhr for frequency 1ts
-Warning: Cannot complement model levels with psol for table CFsubhr for frequency 1ts
-Warning: Cannot complement model levels with psol for table CFsubhr for frequency 1ts
-Warning: Cannot complement model levels with psol for table CFsubhr for frequency 1ts
-Warning: Cannot complement model levels with psol for table CFsubhr for frequency 1ts
-Warning: Cannot complement model levels with psol for table CFsubhr for frequency 1ts
-Warning: Cannot complement model levels with psol for table CFsubhr for frequency 1ts
-Warning: Cannot complement model levels with psol for table Esubhr for frequency 1ts
-Warning: Cannot complement model levels with psol for table Esubhr for frequency 1ts
-Warning: Cannot complement model levels with psol for table Esubhr for frequency 1ts
-Warning: Cannot complement model levels with psol for table Esubhr for frequency 1ts
-Warning: Cannot complement model levels with psol for table Esubhr for frequency 1ts
-Warning: Cannot complement model levels with psol for table Esubhr for frequency 1ts
-Warning: Cannot complement model levels with psol for table Esubhr for frequency 1ts
-Warning: Cannot complement model levels with psol for table Esubhr for frequency 1ts
-Warning: Cannot complement model levels with psol for table 6hrLev for frequency 6h
-Warning: Cannot complement model levels with psol for table 6hrLev for frequency 6h
-Warning: Cannot complement model levels with psol for table 6hrLev for frequency 6h
-Warning: Cannot complement model levels with psol for table 6hrLev for frequency 6h
-Warning: Cannot complement model levels with psol for table 6hrLev for frequency 6h
 
 file_def written as current_directory/test_AOESM_piControl_CMIP7/test_outputs/dr2xml_surfex.xml
 
 Skipped variables (i.e. whose alias is not present in the pingfile):
->>> TABLE:             3hr 04/18 ----> srfrad(2) swh(2) wdir(2) wpp(2)
-
->>> TABLE:           3hrPt 01/04 ----> bldep(2)
+>>> TABLE:             3hr 03/11 ----> swh(2) wdir(2) wpp(2)
 
 >>> TABLE:             6hr 15/15 ----> mpw(2) mpwswell(2) mpwwindsea(2) sduo(2) sdvo(2) swh(2) swhmax(2) swhswell(2) swhwindsea(2) wdir(2) wdirswell(2) wdirwindsea(2) wpp(2) wppswell(2) wppwindsea(2)
 
->>> TABLE:          6hrLev 01/08 ----> bs550aer(2)
-
->>> TABLE:       6hrPlevPt 03/22 ----> taUTLS(2) uaUTLS(2) vaUTLS(2)
+>>> TABLE:          6hrLev 01/02 ----> bs550aer(2)
 
 >>> TABLE:          AERday 10/38 ----> maxpblz(2) minpblz(2) mmraerh2o(2) mmrnh4(2) mmrno3(2) mmrsoa(2) sfo3max(2) sfpm1(2) sfpm10(2) sfpm25(2)
 
@@ -1103,37 +1035,33 @@ Skipped variables (i.e. whose alias is not present in the pingfile):
 
 >>> TABLE:           AERhr 03/05 ----> sfno2(2) sfo3(2) sfpm25(2)
 
->>> TABLE:          AERmon 123/254 ----> abs550bc(2) abs550dust(2) abs550no3(2) abs550oa(2) abs550so4(2) abs550ss(2) aoanh(2) bldep(2) c2h4(2) c2h5oh(2) c2h6(2) c3h6(2) c3h8(2) c4h10(2) ccn(2) ccn02(2) ccn1(2) cfc114(2) ch3coch3(2) ch3oh(2) ch4losssoil(2) cheaqpso4(2) chegph2oo1d(2) chegpso4(2) chepasoa(2) chepnh4(2) chepno3(2) chepsoa(2) conccn(2) dms(2) do3chm(2) dryh2(2) dryhno3(2) drynh3(2) drynh4(2) dryno3(2) drynoy(2) dryo3(2) e90inst(2) emiach4(2) emiaco(2) emianox(2) emiaoa(2) emiavnox(2) emibbbc(2) emibbch4(2) emibbco(2) emibbdms(2) emibbnh3(2) emibbnox(2) emibboa(2) emibbso2(2) emibbvoc(2) emibvoc(2) emic2h4(2) emic2h5oh(2) emic2h6(2) emic3h6(2) emic3h8(2) emic4h10(2) emich3oh(2) emich4(2) emico(2) emidms(2) emih2(2) emiisop(2) emilkch4(2) emilnox(2) eminh3(2) eminox(2) emivoc(2) h2(2) h2loss(2) h2prod(2) hcfc22(2) hfc125(2) hfc134a(2) isop(2) jno2(2) lossch4(2) lossco(2) lossn2o(2) mmraerh2o(2) mmrnh4(2) mmrno3(2) mmrpm10(2) mmrpm2p5(2) mmrsoa(2) nh50(2) o3inst(2) o3ste(2) od443aer(2) od550aerh2o(2) od550bb(2) od550csaer(2) od550no3(2) od550so4(2) od550soa(2) od865aer(2) pan(2) photo1d(2) pod0(2) reffclwtop(2) rlutch4ref(2) rlutcsch4ref(2) rlutcso3ref(2) rluto3ref(2) rsutch4ref(2) rsutcsch4ref(2) rsutcso3ref(2) rsuto3ref(2) stratch4loss(2) tropch4loss(2) tropch4lossoh(2) tropdo3chm(2) tropo3ste(2) tropoz(2) wethno3(2) wetnh3(2) wetnh4(2) wetno3(2) wetnoy(2) wetso2(2)
+>>> TABLE:          AERmon 119/250 ----> abs550bc(2) abs550dust(2) abs550no3(2) abs550oa(2) abs550so4(2) abs550ss(2) aoanh(2) bldep(2) c2h4(2) c2h5oh(2) c2h6(2) c3h6(2) c3h8(2) c4h10(2) ccn(2) ccn02(2) ccn1(2) ch3coch3(2) ch3oh(2) ch4losssoil(2) cheaqpso4(2) chegph2oo1d(2) chegpso4(2) chepasoa(2) chepnh4(2) chepno3(2) chepsoa(2) conccn(2) dms(2) do3chm(2) dryh2(2) dryhno3(2) drynh3(2) drynh4(2) dryno3(2) drynoy(2) dryo3(2) e90inst(2) emiach4(2) emiaco(2) emianox(2) emiaoa(2) emiavnox(2) emibbbc(2) emibbch4(2) emibbco(2) emibbdms(2) emibbnh3(2) emibbnox(2) emibboa(2) emibbso2(2) emibbvoc(2) emibvoc(2) emic2h4(2) emic2h5oh(2) emic2h6(2) emic3h6(2) emic3h8(2) emic4h10(2) emich3oh(2) emich4(2) emico(2) emidms(2) emih2(2) emiisop(2) emilkch4(2) emilnox(2) eminh3(2) eminox(2) emivoc(2) h2(2) h2loss(2) h2prod(2) isop(2) jno2(2) lossch4(2) lossco(2) lossn2o(2) mmraerh2o(2) mmrnh4(2) mmrno3(2) mmrpm10(2) mmrpm2p5(2) mmrsoa(2) nh50(2) o3inst(2) o3ste(2) od443aer(2) od550aerh2o(2) od550bb(2) od550csaer(2) od550no3(2) od550so4(2) od550soa(2) od865aer(2) pan(2) photo1d(2) pod0(2) reffclwtop(2) rlutch4ref(2) rlutcsch4ref(2) rlutcso3ref(2) rluto3ref(2) rsutch4ref(2) rsutcsch4ref(2) rsutcso3ref(2) rsuto3ref(2) stratch4loss(2) tropch4loss(2) tropch4lossoh(2) tropdo3chm(2) tropo3ste(2) tropoz(2) wethno3(2) wetnh3(2) wetnh4(2) wetno3(2) wetnoy(2) wetso2(2)
 
 >>> TABLE:         AERmonZ 01/17 ----> vt100(2)
 
->>> TABLE:            Amon 07/76 ----> aod550volso4(2) cfc113global(2) cfc11global(2) cfc12global(2) hcfc22global(2) rtmt(2) sci(2)
+>>> TABLE:            Amon 07/75 ----> aod550volso4(2) cfc113global(2) cfc11global(2) cfc12global(2) hcfc22global(2) rtmt(2) sci(2)
 
->>> TABLE:           CFday 01/34 ----> clhcalipso(2)
+>>> TABLE:           CFday 01/22 ----> clhcalipso(2)
 
 >>> TABLE:           CFmon 12/64 ----> clhcalipso(2) clivimodis(2) clmodisice(2) clmodisiceReff(2) clmodisliquid(2) clmodisliquidReff(2) clwvimodis(2) dmc(2) edt(2) evu(2) smc(2) tnhusd(2)
 
->>> TABLE:         CFsubhr 05/75 ----> edt(2) evu(2) rtmt(2) sci(2) tnhusd(2)
+>>> TABLE:            E1hr 02/13 ----> ua100m(2) va100m(2)
 
->>> TABLE:            E1hr 04/16 ----> ua100m(2) va100m(2) wsgmax100m(2) wsgmax10m(2)
+>>> TABLE:          E3hrPt 04/20 ----> conccn(2) mmraerh2o(2) mmrnh4(2) mmrno3(2)
 
->>> TABLE:          E3hrPt 04/21 ----> conccn(2) mmraerh2o(2) mmrnh4(2) mmrno3(2)
-
->>> TABLE:            Eday 06/45 ----> cldnvi(2) gppVgt(2) laiVgt(2) loadpoa(2) mrso10(2) prhmax(2)
+>>> TABLE:            Eday 04/40 ----> cldnvi(2) loadpoa(2) mrso10(2) prhmax(2)
 
 >>> TABLE:           EdayZ 12/20 ----> epfy(2) epfz(2) tauunoegw(2) tauunowgw(2) tauuogw(2) tauvnogw(2) tauvogw(2) utendepfd(2) utendvtem(2) utendwtem(2) vtem(2) wtem(2)
 
 >>> TABLE:             Efx 02/03 ----> sftflf(2) slthick(1)
 
->>> TABLE:            Emon 59/121 ----> albc(2) cSoilAbove1m(2) cSoilLevels(2) ccldncl(2) cldnci(2) cldncl(2) cldnvi(2) depdust(2) fBNF(2) fCLandToOcean(2) fHarvestToAtmos(2) fHarvestToProduct(2) fN2O(2) fNAnthDisturb(2) fNLandToOcean(2) fNLitterSoil(2) fNOx(2) fNProduct(2) fNVegLitter(2) fNVegSoil(2) fNdep(2) fNfert(2) fNgas(2) fNgasFire(2) fNleach(2) fNloss(2) fNnetmin(2) fNup(2) nLand(2) nLitter(2) nMineral(2) nProduct(2) nSoil(2) nVeg(2) pr17O(2) pr18O(2) pr2h(2) prhmax(2) prsn18O(2) prsn2h(2) reffcclwtop(2) reffccwctop(2) reffclic(2) reffclis(2) reffclwc(2) reffclws(2) reffsclwtop(2) rsdsis(2) rsdslni(2) rsdss(2) rsusis(2) rsuslni(2) rsuss(2) scldncl(2) tdps(2) tntd(2) vegHeight(2) vegHeightTree(2) wetlandCH4(2)
+>>> TABLE:            Emon 48/87 ----> cSoilAbove1m(2) cSoilLevels(2) ccldncl(2) cldnci(2) cldncl(2) cldnvi(2) depdust(2) fBNF(2) fHarvestToAtmos(2) fNLandToOcean(2) fNLitterSoil(2) fNVegSoil(2) fNgas(2) fNgasFire(2) fNleach(2) fNloss(2) fNup(2) nLand(2) nLitter(2) nMineral(2) nProduct(2) nSoil(2) nVeg(2) pr17O(2) pr18O(2) pr2h(2) prhmax(2) prsn18O(2) prsn2h(2) reffcclwtop(2) reffccwctop(2) reffclic(2) reffclis(2) reffclwc(2) reffclws(2) reffsclwtop(2) rsdsis(2) rsdslni(2) rsdss(2) rsusis(2) rsuslni(2) rsuss(2) scldncl(2) tdps(2) tntd(2) vegHeight(2) vegHeightTree(2) wetlandCH4(2)
 
 >>> TABLE:           EmonZ 05/10 ----> epfy(2) epfz(2) utendepfd(2) vtem(2) wtem(2)
 
->>> TABLE:          Esubhr 05/13 ----> reffclic(2) reffclis(2) reffclwc(2) reffclws(2) tntd(2)
-
 >>> TABLE:           LImon 24/43 ----> acabfIs(2) hflsIs(2) hfssIs(2) icemIs(2) litemptopIs(2) mrroIs(2) orogIs(2) pflw(2) prraIs(2) prsnIs(2) rldsIs(2) rlusIs(2) rsdsIs(2) rsusIs(2) sblIs(2) sftflf(2) sncIs(2) snicefreezIs(2) snicemIs(2) snmIs(2) sootsn(2) tasIs(2) tsIs(2) tsnIs(2)
 
->>> TABLE:            Lmon 05/37 ----> cGeologicStorage(2) fHarvestToGeologicStorage(2) fVegSoil(2) pastureFrac(2) shrubFrac(2)
+>>> TABLE:            Lmon 02/31 ----> pastureFrac(2) shrubFrac(2)
 
 >>> TABLE:            Omon 14/14 ----> mpw(2) mpwswell(2) sduo(2) sdvo(2) swh(2) swhmax(2) swhswell(2) swhwindsea(2) wdir(2) wdirswell(2) wdirwindsea(2) wpp(2) wppswell(2) wppwindsea(2)
 
@@ -1141,7 +1069,7 @@ Skipped variables (i.e. whose alias is not present in the pingfile):
 
 >>> TABLE:           SImon 01/01 ----> siconca(2)
 
->>> TABLE:              fx 06/14 ----> depthl(2) depthsl(2) lat(2) lithk(2) lon(2) sftlkf(2)
+>>> TABLE:              fx 04/12 ----> depthl(2) depthsl(2) lithk(2) sftlkf(2)
 
 
 
@@ -1149,50 +1077,38 @@ Skipped variables (i.e. whose alias is not present in the pingfile):
 Some Statistics on actually written variables per frequency+shape...
                            AERhr P2   2: ps tas
                             E1hr P1   1: pr
-                            E1hr P2  11: clt hurs huss ps psl rlds rsds sfcWind tas uas vas
-                     E1hrClimMon P2   5: rlut rlutcs rsdt rsut rsutcs
-       1hr    XY-na    -------- ---  19
+                            E1hr P2  10: clt hurs ps psl rlds rsds sfcWind tas uas vas
+       1hr    XY-na    -------- ---  13
 
-       1hr --------    -------- ---  19
+       1hr --------    -------- ---  13
 
                           E3hrPt P2   6: mmrbc mmrdust mmroa mmrso4 mmrss so2
        3hr     S-na    -------- ---   6
 
                              3hr P1   3: huss pr tas
-                             3hr P2  11: clt hfls hfss mrsos prsn ps rlds rlus rsds rsus tslsi
+                             3hr P2   5: mrsos prsn ps rlds rsds
                            3hrPt P1   2: uas vas
-                           CF3hr P2   2: hurs ts
-                            E3hr P2   7: clivi clwvi prw rlut rlutcs rsut rsutcs
-                          E3hrPt P2   1: cltcalipso
-       3hr    XY-na    -------- ---  26
+                           CF3hr P2   1: hurs
+       3hr    XY-na    -------- ---  11
 
-       3hr --------    -------- ---  32
+       3hr --------    -------- ---  17
 
-                          6hrLev P2   5: hus ta ua va zg
-       6hr     XY-A    -------- ---   5
+                       6hrPlevPt P1   3: ta ua va
+       6hr    XY-P3    -------- ---   3
 
-                       6hrPlevPt P1   1: ta
-       6hr    XY-P3    -------- ---   1
+                       6hrPlevPt P2   2: hus zg
+       6hr   XY-P7T    -------- ---   2
 
-                       6hrPlevPt P2   4: hus ua va zg
-       6hr   XY-P7T    -------- ---   4
-
-                          6hrLev P2   2: ec550aer ps
+                          6hrLev P2   1: ec550aer
                          6hrPlev P1   1: hurs
                          6hrPlev P2   9: huss prra prsn ps rlds rsds sfcWind tas ts
-                       6hrPlevPt P2  10: intuaw intvaw pr prw psl rv850 ts uas vas zg500
-       6hr    XY-na    -------- ---  22
+                       6hrPlevPt P2   9: intuaw intvaw pr prw psl rv850 uas vas zg500
+       6hr    XY-na    -------- ---  20
 
-       6hr --------    -------- ---  32
+       6hr --------    -------- ---  25
 
-                           CFday P2  10: cl cli clw hur hus ta ua va wap zg
-       day     XY-A    -------- ---  10
-
-                           CFday P2   1: mc
-       day    XY-AH    -------- ---   1
-
-                           CFday P2   1: clcalipso
-       day   XY-H40    -------- ---   1
+                           CFday P2   1: cl
+       day     XY-A    -------- ---   1
 
                             Eday P1   5: hus ta ua va zg
                             Eday P2   1: wap
@@ -1200,24 +1116,21 @@ Some Statistics on actually written variables per frequency+shape...
                              day P2   1: zg
        day   XY-P19    -------- ---  13
 
-                           CFday P2   1: clisccp
-       day    XY-P7    -------- ---   1
-
                             Eday P2   4: mrsfl mrsll mrsol tsl
        day     XY-S    -------- ---   4
 
                           AERday P2  14: co cod mmrbc mmrdust mmroa mmrso4 mmrss od550aer so2 toz ua10 zg10 zg1000 zg500
                            CFday P1   1: ps
                            CFday P2  19: albisccp ccb cct clivi cllcalipso clmcalipso cltcalipso cltisccp clwvi pctisccp rldscs rlutcs rsdscs rsdt rsuscs rsut rsutcs ta700 wap500
-                            Eday P2  29: clivic clt clwvic dcw dslw evspsbl evspsblpot evspsblsoi evspsblveg intuadse intuaw intvadse intvaw jpdftaureicemodis jpdftaureliqmodis loadbc loadoa mrro mrrob mrros mrsow mrtws parasolRefl prra prw ta850 tauu tauv ts
+                            Eday P2  26: clivic clt clwvic dcw dslw evspsbl evspsblpot evspsblsoi evspsblveg intuadse intuaw intvadse intvaw loadbc loadoa mrro mrrob mrros mrsow mrtws prra prw ta850 tauu tauv ts
                              day P1  12: clt hurs huss pr psl rsds sfcWind tas tasmax tasmin uas vas
                              day P2  20: hfls hfss hursmax hursmin mrro mrso mrsos prc prsn rlds rlus rluscs rlut rsdt rsus rsut sfcWindmax snc snw tslsi
-       day    XY-na    -------- ---  95
+       day    XY-na    -------- ---  92
 
                            EdayZ P2   8: ta tntmp tntrl tntrs ua utendnogw utendogw zg
        day    Y-P39    -------- ---   8
 
-       day --------    -------- --- 133
+       day --------    -------- --- 118
 
                              Efx P2   1: sftgrf
                               fx P1   6: areacella mrsofc orog rootd sftgif sftlf
@@ -1228,8 +1141,8 @@ Some Statistics on actually written variables per frequency+shape...
                           AERmon P2  30: airmass cdnc ch4 co co2 h2o hcho hcl hno3 meanage mmrbc mmrdust mmroa mmrpm1 mmrso4 mmrss n2o no no2 o3 o3loss o3prod oh so2 tntrl tntrs ua va wa zg
                             Amon P1   3: cl cli clw
                            CFmon P2  20: clc clic clis cls clwc clws hur hus ta tnhus tnhusa tnhusc tnhusmp tnhusscpbl tnt tnta tntc tntmp tntr tntscpbl
-                            Emon P2   8: co23D ec550aer tnhuspbl tnhusscp tntpbl tntrlcs tntrscs tntscp
-       mon     XY-A    -------- ---  61
+                            Emon P2   7: ec550aer tnhuspbl tnhusscp tntpbl tntrlcs tntrscs tntscp
+       mon     XY-A    -------- ---  60
 
                             Amon P2   1: mc
                            CFmon P2  18: mcd mcu rld rld4co2 rldcs rldcs4co2 rlu rlu4co2 rlucs rlucs4co2 rsd rsd4co2 rsdcs rsdcs4co2 rsu rsu4co2 rsucs rsucs4co2
@@ -1239,8 +1152,7 @@ Some Statistics on actually written variables per frequency+shape...
        mon   XY-H16    -------- ---   1
 
                            CFmon P2   1: clcalipso
-                            Emon P2   4: cfadDbze94 cfadLidarsr532 clcalipsoice clcalipsoliq
-       mon   XY-H40    -------- ---   5
+       mon   XY-H40    -------- ---   1
 
                             Amon P1   7: hur hus ta ua va wap zg
                             Amon P2   4: ch4 co2 n2o o3
@@ -1256,14 +1168,14 @@ Some Statistics on actually written variables per frequency+shape...
 
                           AERmon P2  37: abs550aer cltc cod drybc drydust dryoa dryso2 dryso4 dryss emibc emidust emioa emiso2 emiso4 emiss lwp od550aer od550bc od550dust od550lt1aer od550oa od550ss ptp rluscsaf rlutaf rlutcsaf rsutaf rsutcsaf tatp toz ttop wetbc wetdust wetoa wetso4 wetss ztp
                             Amon P1  36: clivi clt clwvi evspsbl hfls hfss hurs huss pr prc prsn prw ps psl rlds rldscs rlus rluscs rlut rlutcs rsds rsdscs rsdt rsus rsuscs rsut rsutcs sfcWind tas tasmax tasmin tauu tauv ts uas vas
-                            Amon P2   8: ccb cct ci fco2antt fco2fos fco2nat prra sbl
+                            Amon P2   7: ccb cct ci fco2antt fco2nat prra sbl
                            CFmon P2  11: albisccp cllcalipso clmcalipso cltcalipso cltisccp cltmodis pctisccp rlut4co2 rlutcs4co2 rsut4co2 rsutcs4co2
-                            Emon P2  33: albsn albsrfc cLand cSoil cWood climodis cltmodis clwmodis cnc co2s evspsblpot fAnthDisturb fDeforestToAtmos fDeforestToProduct fFireAll fFireNat fLuc fProductDecomp intuadse intuaw intvadse intvaw jpdftaureicemodis jpdftaureliqmodis loadso4 mrtws nep netAtmosLandCO2Flux parasolRefl rls rss sfcWindmax vegFrac
+                            Emon P2  19: cLand cSoil cWood co2s evspsblpot fFireAll fFireNat fLuc intuadse intuaw intvadse intvaw loadso4 nep netAtmosLandCO2Flux rls rss sfcWindmax vegFrac
                            LImon P1   2: snc snw
                            LImon P2   8: hfdsn sbl sftgif sftgrf snd snm tpf tsn
                             Lmon P1   8: evspsblsoi evspsblveg lai mrfso mrro mrros mrso mrsos
-                            Lmon P2  22: baresoilFrac burntFractionAll cLeaf cLitter cProduct cRoot cVeg cropFrac fFire fLitterSoil fVegLitter gpp grassFrac landCoverFrac nbp npp prveg ra residualFrac rh tran treeFrac
-       mon    XY-na    -------- --- 165
+                            Lmon P2  19: baresoilFrac burntFractionAll cLeaf cLitter cProduct cRoot cVeg cropFrac fFire gpp grassFrac nbp npp prveg ra residualFrac rh tran treeFrac
+       mon    XY-na    -------- --- 147
 
                          AERmonZ P2  16: bry ch4 cly h2o hcl hno3 ho2 meanage n2o noy o3 oh ta ua va zg
                            EmonZ P2   5: tntmp tntrl tntrs utendnogw utendogw
@@ -1272,22 +1184,10 @@ Some Statistics on actually written variables per frequency+shape...
                             Amon P2   3: ch4global co2mass n2oglobal
        mon    na-na    -------- ---   3
 
-       mon --------    -------- --- 294
-
-                         CFsubhr P2  21: cl cli clw hur hus ta tnhus tnhusa tnhusc tnhusmp tnhusscpbl tnt tnta tntc tntmp tntr tntscpbl ua va wap zg
-                          Esubhr P2   8: tnhuspbl tnhusscp tntpbl tntrl tntrlcs tntrs tntrscs tntscp
-     subhr      S-A    -------- ---  29
-
-                         CFsubhr P2   9: mc rld rldcs rlu rlucs rsd rsdcs rsu rsucs
-     subhr     S-AH    -------- ---   9
-
-                         CFsubhr P2  40: ccb cct ci clivi clt clwvi evspsbl fco2antt fco2fos fco2nat hfls hfss hurs huss pr prc prsn prw ps psl rlds rldscs rlus rlut rlutcs rsds rsdscs rsdt rsus rsuscs rsut rsutcs sbl sfcWind tas tauu tauv ts uas vas
-     subhr     S-na    -------- ---  40
-
-     subhr --------    -------- ---  78
+       mon --------    -------- --- 271
 
 
----------- --------    -------- --- 595
+---------- --------    -------- --- 451
 
 
 Some Statistics on actually written variables per variable...
@@ -1304,14 +1204,6 @@ Some Statistics on actually written variables per variable...
 ----------------------
               *    day_CFday_XY-na_2 albisccp
               *    mon_CFmon_XY-na_2 albisccp
--------------------
---- VARNAME: albsn: Snow Albedo
--------------------
-              *     mon_Emon_XY-na_2 albsn
----------------------
---- VARNAME: albsrfc: Surface albedo
----------------------
-              *     mon_Emon_XY-na_2 albsrfc
 -----------------------
 --- VARNAME: areacella: Grid-Cell Area for Atmospheric Grid Variables
 -----------------------
@@ -1365,25 +1257,15 @@ Some Statistics on actually written variables per variable...
 -----------------
               *    day_CFday_XY-na_2 ccb
               *     mon_Amon_XY-na_2 ccb
-              * subhr_CFsubhr_S-na_2 ccb
 -----------------
 --- VARNAME: cct: Air Pressure at Convective Cloud Top
 -----------------
               *    day_CFday_XY-na_2 cct
               *     mon_Amon_XY-na_2 cct
-              * subhr_CFsubhr_S-na_2 cct
 ------------------
 --- VARNAME: cdnc: Cloud Liquid Droplet Number Concentration
 ------------------
               *    mon_AERmon_XY-A_2 cdnc
-------------------------
---- VARNAME: cfadDbze94: CloudSat Radar Reflectivity CFAD
-------------------------
-              *    mon_Emon_XY-H40_2 cfadDbze94
-----------------------------
---- VARNAME: cfadLidarsr532: CALIPSO Scattering Ratio CFAD
-----------------------------
-              *    mon_Emon_XY-H40_2 cfadLidarsr532
 -----------------
 --- VARNAME: ch4: Mole Fraction of CH4
 -----------------
@@ -1398,13 +1280,11 @@ Some Statistics on actually written variables per variable...
 --- VARNAME: ci: Fraction of Time Convection Occurs in Cell
 ----------------
               *     mon_Amon_XY-na_2 ci
-              * subhr_CFsubhr_S-na_2 ci
 ----------------
 --- VARNAME: cl: Percentage Cloud Cover
 ----------------
               *     day_CFday_XY-A_2 cl
               *      mon_Amon_XY-A_1 cl
-              *  subhr_CFsubhr_S-A_2 cl
 -----------------
 --- VARNAME: clc: Convective Cloud Area Percentage
 -----------------
@@ -1412,30 +1292,15 @@ Some Statistics on actually written variables per variable...
 -----------------------
 --- VARNAME: clcalipso: CALIPSO Percentage Cloud Cover
 -----------------------
-              *   day_CFday_XY-H40_2 clcalipso
               *   mon_CFmon_XY-H40_2 clcalipso
---------------------------
---- VARNAME: clcalipsoice: CALIPSO Ice Cloud Percentage
---------------------------
-              *    mon_Emon_XY-H40_2 clcalipsoice
---------------------------
---- VARNAME: clcalipsoliq: CALIPSO Liquid Cloud Percentage
---------------------------
-              *    mon_Emon_XY-H40_2 clcalipsoliq
 -----------------
 --- VARNAME: cli: Mass Fraction of Cloud Ice
 -----------------
-              *     day_CFday_XY-A_2 cli
               *      mon_Amon_XY-A_1 cli
-              *  subhr_CFsubhr_S-A_2 cli
 ------------------
 --- VARNAME: clic: Mass Fraction of Convective Cloud Ice
 ------------------
               *     mon_CFmon_XY-A_2 clic
-----------------------
---- VARNAME: climodis: MODIS Ice-Topped Cloud Area Percentage
-----------------------
-              *     mon_Emon_XY-na_2 climodis
 ------------------
 --- VARNAME: clis: Mass Fraction of Stratiform Cloud Ice
 ------------------
@@ -1443,15 +1308,12 @@ Some Statistics on actually written variables per variable...
 ---------------------
 --- VARNAME: clisccp: ISCCP Cloud Area Percentage
 ---------------------
-              *    day_CFday_XY-P7_2 clisccp
               *    mon_CFmon_XY-P7_2 clisccp
 -------------------
 --- VARNAME: clivi: Ice Water Path
 -------------------
               *    day_CFday_XY-na_2 clivi
               *     mon_Amon_XY-na_1 clivi
-              * subhr_CFsubhr_S-na_2 clivi
-              *     3hr_E3hr_XY-na_2 clivi
 --------------------
 --- VARNAME: clivic: Convective Ice Water Path
 --------------------
@@ -1485,8 +1347,6 @@ Some Statistics on actually written variables per variable...
               *      day_day_XY-na_1 clt
               *     1hr_E1hr_XY-na_2 clt
               *     mon_Amon_XY-na_1 clt
-              * subhr_CFsubhr_S-na_2 clt
-              *      3hr_3hr_XY-na_2 clt
 ------------------
 --- VARNAME: cltc: Convective Cloud Cover Percentage
 ------------------
@@ -1496,7 +1356,6 @@ Some Statistics on actually written variables per variable...
 ------------------------
               *    day_CFday_XY-na_2 cltcalipso
               *    mon_CFmon_XY-na_2 cltcalipso
-              *   3hr_E3hrPt_XY-na_2 cltcalipso
 ----------------------
 --- VARNAME: cltisccp: ISCCP Total Cloud Cover Percentage
 ----------------------
@@ -1506,21 +1365,14 @@ Some Statistics on actually written variables per variable...
 --- VARNAME: cltmodis: MODIS Total Cloud Cover Percentage
 ----------------------
               *    mon_CFmon_XY-na_2 cltmodis
-              *     mon_Emon_XY-na_2 cltmodis
 -----------------
 --- VARNAME: clw: Mass Fraction of Cloud Liquid Water
 -----------------
-              *     day_CFday_XY-A_2 clw
               *      mon_Amon_XY-A_1 clw
-              *  subhr_CFsubhr_S-A_2 clw
 ------------------
 --- VARNAME: clwc: Mass Fraction of Convective Cloud Liquid Water
 ------------------
               *     mon_CFmon_XY-A_2 clwc
-----------------------
---- VARNAME: clwmodis: MODIS Liquid Cloud Percentage
-----------------------
-              *     mon_Emon_XY-na_2 clwmodis
 ------------------
 --- VARNAME: clws: Mass Fraction of Stratiform Cloud Liquid Water
 ------------------
@@ -1530,8 +1382,6 @@ Some Statistics on actually written variables per variable...
 -------------------
               *    day_CFday_XY-na_2 clwvi
               *     mon_Amon_XY-na_1 clwvi
-              * subhr_CFsubhr_S-na_2 clwvi
-              *     3hr_E3hr_XY-na_2 clwvi
 --------------------
 --- VARNAME: clwvic: Convective Condensed Water Path
 --------------------
@@ -1540,10 +1390,6 @@ Some Statistics on actually written variables per variable...
 --- VARNAME: cly: Total Inorganic Chlorine Volume Mixing Ratio
 -----------------
               *  mon_AERmonZ_Y-P39_2 cly
------------------
---- VARNAME: cnc: Canopy Covered Area Percentage
------------------
-              *     mon_Emon_XY-na_2 cnc
 ----------------
 --- VARNAME: co: CO Volume Mixing Ratio
 ----------------
@@ -1554,10 +1400,6 @@ Some Statistics on actually written variables per variable...
 -----------------
               *    mon_AERmon_XY-A_2 co2
               *    mon_Amon_XY-P19_2 co2
--------------------
---- VARNAME: co23D: 3D-Field of Transported CO2
--------------------
-              *      mon_Emon_XY-A_2 co23D
 ---------------------
 --- VARNAME: co2mass: Total Atmospheric Mass of CO2
 ---------------------
@@ -1641,7 +1483,6 @@ Some Statistics on actually written variables per variable...
 ---------------------
               *     day_Eday_XY-na_2 evspsbl
               *     mon_Amon_XY-na_1 evspsbl
-              * subhr_CFsubhr_S-na_2 evspsbl
 ------------------------
 --- VARNAME: evspsblpot: Potential Evapotranspiration
 ------------------------
@@ -1657,18 +1498,6 @@ Some Statistics on actually written variables per variable...
 ------------------------
               *     day_Eday_XY-na_2 evspsblveg
               *     mon_Lmon_XY-na_1 evspsblveg
---------------------------
---- VARNAME: fAnthDisturb: Carbon Mass Flux from Vegetation, Litter or Soil Pools into the Atmosphere Due to any Human Activity [kgC m-2 s-1]
---------------------------
-              *     mon_Emon_XY-na_2 fAnthDisturb
-------------------------------
---- VARNAME: fDeforestToAtmos: Deforested Biomass That Goes into Atmosphere as a Result of Anthropogenic Land-Use Change [kgC m-2 s-1]
-------------------------------
-              *     mon_Emon_XY-na_2 fDeforestToAtmos
---------------------------------
---- VARNAME: fDeforestToProduct: Deforested Biomass That Goes into Product Pool as a Result of Anthropogenic Land-Use Change
---------------------------------
-              *     mon_Emon_XY-na_2 fDeforestToProduct
 -------------------
 --- VARNAME: fFire: Carbon Mass Flux into Atmosphere Due to CO2 Emission from Fire Excluding Land-Use Change [kgC m-2 s-1]
 -------------------
@@ -1681,37 +1510,18 @@ Some Statistics on actually written variables per variable...
 --- VARNAME: fFireNat: Carbon Mass Flux into Atmosphere Due to CO2 Emission from Natural Fire [kgC m-2 s-1]
 ----------------------
               *     mon_Emon_XY-na_2 fFireNat
--------------------------
---- VARNAME: fLitterSoil: Total Carbon Mass Flux from Litter to Soil
--------------------------
-              *     mon_Lmon_XY-na_2 fLitterSoil
 ------------------
 --- VARNAME: fLuc: Net Carbon Mass Flux into Atmosphere Due to Land-Use Change [kgC m-2 s-1]
 ------------------
               *     mon_Emon_XY-na_2 fLuc
-----------------------------
---- VARNAME: fProductDecomp: Decomposition out of Product Pools to CO2 in Atmosphere as Carbon Mass Flux [kgC m-2 s-1]
-----------------------------
-              *     mon_Emon_XY-na_2 fProductDecomp
-------------------------
---- VARNAME: fVegLitter: Total Carbon Mass Flux from Vegetation to Litter
-------------------------
-              *     mon_Lmon_XY-na_2 fVegLitter
 ----------------------
 --- VARNAME: fco2antt: Carbon Mass Flux into Atmosphere Due to All Anthropogenic Emissions of CO2 [kgC m-2 s-1]
 ----------------------
               *     mon_Amon_XY-na_2 fco2antt
-              * subhr_CFsubhr_S-na_2 fco2antt
----------------------
---- VARNAME: fco2fos: Carbon Mass Flux into Atmosphere Due to Fossil Fuel Emissions of CO2 [kgC m-2 s-1]
----------------------
-              *     mon_Amon_XY-na_2 fco2fos
-              * subhr_CFsubhr_S-na_2 fco2fos
 ---------------------
 --- VARNAME: fco2nat: Surface Carbon Mass Flux into the Atmosphere Due to Natural Sources [kgC m-2 s-1]
 ---------------------
               *     mon_Amon_XY-na_2 fco2nat
-              * subhr_CFsubhr_S-na_2 fco2nat
 -----------------
 --- VARNAME: gpp: Carbon Mass Flux out of Atmosphere Due to Gross Primary Production on Land [kgC m-2 s-1]
 -----------------
@@ -1743,15 +1553,11 @@ Some Statistics on actually written variables per variable...
 ------------------
               *      day_day_XY-na_2 hfls
               *     mon_Amon_XY-na_1 hfls
-              * subhr_CFsubhr_S-na_2 hfls
-              *      3hr_3hr_XY-na_2 hfls
 ------------------
 --- VARNAME: hfss: Surface Upward Sensible Heat Flux
 ------------------
               *      day_day_XY-na_2 hfss
               *     mon_Amon_XY-na_1 hfss
-              * subhr_CFsubhr_S-na_2 hfss
-              *      3hr_3hr_XY-na_2 hfss
 ------------------
 --- VARNAME: hno3: HNO3 Volume Mixing Ratio
 ------------------
@@ -1764,18 +1570,15 @@ Some Statistics on actually written variables per variable...
 -----------------
 --- VARNAME: hur: Relative Humidity
 -----------------
-              *     day_CFday_XY-A_2 hur
               *     day_day_XY-P19_1 hur
               *    mon_Amon_XY-P19_1 hur
               *     mon_CFmon_XY-A_2 hur
-              *  subhr_CFsubhr_S-A_2 hur
 ------------------
 --- VARNAME: hurs: Near-Surface Relative Humidity
 ------------------
               *      day_day_XY-na_1 hurs
               *     1hr_E1hr_XY-na_2 hurs
               *     mon_Amon_XY-na_1 hurs
-              * subhr_CFsubhr_S-na_2 hurs
               *    3hr_CF3hr_XY-na_2 hurs
               *  6hr_6hrPlev_XY-na_1 hurs
 ---------------------
@@ -1789,21 +1592,16 @@ Some Statistics on actually written variables per variable...
 -----------------
 --- VARNAME: hus: Specific Humidity
 -----------------
-              *     day_CFday_XY-A_2 hus
               *    day_Eday_XY-P19_1 hus
               *     day_day_XY-P19_1 hus
               *    mon_Amon_XY-P19_1 hus
               *     mon_CFmon_XY-A_2 hus
-              *  subhr_CFsubhr_S-A_2 hus
-              *    6hr_6hrLev_XY-A_2 hus
               * 6hr_6hrPlevPt_XY-P7T_2 hus
 ------------------
 --- VARNAME: huss: Near-Surface Specific Humidity
 ------------------
               *      day_day_XY-na_1 huss
-              *     1hr_E1hr_XY-na_2 huss
               *     mon_Amon_XY-na_1 huss
-              * subhr_CFsubhr_S-na_2 huss
               *      3hr_3hr_XY-na_1 huss
               *  6hr_6hrPlev_XY-na_2 huss
 ----------------------
@@ -1828,24 +1626,10 @@ Some Statistics on actually written variables per variable...
               *     day_Eday_XY-na_2 intvaw
               *     mon_Emon_XY-na_2 intvaw
               * 6hr_6hrPlevPt_XY-na_2 intvaw
--------------------------------
---- VARNAME: jpdftaureicemodis: MODIS Joint Distribution of Optical Thickness and Particle Size, Ice-Topped
--------------------------------
-              *     day_Eday_XY-na_2 jpdftaureicemodis
-              *     mon_Emon_XY-na_2 jpdftaureicemodis
--------------------------------
---- VARNAME: jpdftaureliqmodis: MODIS Optical Thickness-Particle Size Joint Distribution, Liquid-Topped
--------------------------------
-              *     day_Eday_XY-na_2 jpdftaureliqmodis
-              *     mon_Emon_XY-na_2 jpdftaureliqmodis
 -----------------
 --- VARNAME: lai: Leaf Area Index
 -----------------
               *     mon_Lmon_XY-na_1 lai
----------------------------
---- VARNAME: landCoverFrac: Percentage of Area by Vegetation or Land-Cover Category
----------------------------
-              *     mon_Lmon_XY-na_2 landCoverFrac
 --------------------
 --- VARNAME: loadbc: Load of Black Carbon Aerosol
 --------------------
@@ -1865,9 +1649,7 @@ Some Statistics on actually written variables per variable...
 ----------------
 --- VARNAME: mc: Convective Mass Flux
 ----------------
-              *    day_CFday_XY-AH_2 mc
               *     mon_Amon_XY-AH_2 mc
-              * subhr_CFsubhr_S-AH_2 mc
 -----------------
 --- VARNAME: mcd: Downdraft Convective Mass Flux
 -----------------
@@ -1972,7 +1754,6 @@ Some Statistics on actually written variables per variable...
 --- VARNAME: mrtws: Terrestrial Water Storage
 -------------------
               *     day_Eday_XY-na_2 mrtws
-              *     mon_Emon_XY-na_2 mrtws
 -----------------
 --- VARNAME: n2o: Mole Fraction of N2O
 -----------------
@@ -2059,11 +1840,6 @@ Some Statistics on actually written variables per variable...
 --- VARNAME: orog: Surface Altitude
 ------------------
               *        fx_fx_XY-na_1 orog
--------------------------
---- VARNAME: parasolRefl: PARASOL Reflectance
--------------------------
-              *     day_Eday_XY-na_2 parasolRefl
-              *     mon_Emon_XY-na_2 parasolRefl
 ----------------------
 --- VARNAME: pctisccp: ISCCP Mean Cloud Top Pressure
 ----------------------
@@ -2075,7 +1851,6 @@ Some Statistics on actually written variables per variable...
               *      day_day_XY-na_1 pr
               *     1hr_E1hr_XY-na_1 pr
               *     mon_Amon_XY-na_1 pr
-              * subhr_CFsubhr_S-na_2 pr
               *      3hr_3hr_XY-na_1 pr
               * 6hr_6hrPlevPt_XY-na_2 pr
 -----------------
@@ -2083,7 +1858,6 @@ Some Statistics on actually written variables per variable...
 -----------------
               *      day_day_XY-na_2 prc
               *     mon_Amon_XY-na_1 prc
-              * subhr_CFsubhr_S-na_2 prc
 ------------------
 --- VARNAME: prra: Rainfall Flux
 ------------------
@@ -2095,7 +1869,6 @@ Some Statistics on actually written variables per variable...
 ------------------
               *      day_day_XY-na_2 prsn
               *     mon_Amon_XY-na_1 prsn
-              * subhr_CFsubhr_S-na_2 prsn
               *      3hr_3hr_XY-na_2 prsn
               *  6hr_6hrPlev_XY-na_2 prsn
 -------------------
@@ -2107,8 +1880,6 @@ Some Statistics on actually written variables per variable...
 -----------------
               *     day_Eday_XY-na_2 prw
               *     mon_Amon_XY-na_1 prw
-              * subhr_CFsubhr_S-na_2 prw
-              *     3hr_E3hr_XY-na_2 prw
               * 6hr_6hrPlevPt_XY-na_2 prw
 ----------------
 --- VARNAME: ps: Surface Air Pressure
@@ -2117,9 +1888,7 @@ Some Statistics on actually written variables per variable...
               *    1hr_AERhr_XY-na_2 ps
               *     1hr_E1hr_XY-na_2 ps
               *     mon_Amon_XY-na_1 ps
-              * subhr_CFsubhr_S-na_2 ps
               *      3hr_3hr_XY-na_2 ps
-              *   6hr_6hrLev_XY-na_2 ps
               *  6hr_6hrPlev_XY-na_2 ps
 -----------------
 --- VARNAME: psl: Sea Level Pressure
@@ -2127,7 +1896,6 @@ Some Statistics on actually written variables per variable...
               *      day_day_XY-na_1 psl
               *     1hr_E1hr_XY-na_2 psl
               *     mon_Amon_XY-na_1 psl
-              * subhr_CFsubhr_S-na_2 psl
               * 6hr_6hrPlevPt_XY-na_2 psl
 -----------------
 --- VARNAME: ptp: Tropopause Air Pressure
@@ -2149,7 +1917,6 @@ Some Statistics on actually written variables per variable...
 --- VARNAME: rld: Downwelling Longwave Radiation
 -----------------
               *    mon_CFmon_XY-AH_2 rld
-              * subhr_CFsubhr_S-AH_2 rld
 ---------------------
 --- VARNAME: rld4co2: Downwelling Longwave Radiation 4XCO2 Atmosphere
 ---------------------
@@ -2158,7 +1925,6 @@ Some Statistics on actually written variables per variable...
 --- VARNAME: rldcs: Downwelling Clear-Sky Longwave Radiation
 -------------------
               *    mon_CFmon_XY-AH_2 rldcs
-              * subhr_CFsubhr_S-AH_2 rldcs
 -----------------------
 --- VARNAME: rldcs4co2: Downwelling Clear-Sky Longwave Radiation 4XCO2 Atmosphere
 -----------------------
@@ -2169,7 +1935,6 @@ Some Statistics on actually written variables per variable...
               *      day_day_XY-na_2 rlds
               *     1hr_E1hr_XY-na_2 rlds
               *     mon_Amon_XY-na_1 rlds
-              * subhr_CFsubhr_S-na_2 rlds
               *      3hr_3hr_XY-na_2 rlds
               *  6hr_6hrPlev_XY-na_2 rlds
 --------------------
@@ -2177,7 +1942,6 @@ Some Statistics on actually written variables per variable...
 --------------------
               *    day_CFday_XY-na_2 rldscs
               *     mon_Amon_XY-na_1 rldscs
-              * subhr_CFsubhr_S-na_2 rldscs
 -----------------
 --- VARNAME: rls: Net Longwave Surface Radiation
 -----------------
@@ -2186,7 +1950,6 @@ Some Statistics on actually written variables per variable...
 --- VARNAME: rlu: Upwelling Longwave Radiation
 -----------------
               *    mon_CFmon_XY-AH_2 rlu
-              * subhr_CFsubhr_S-AH_2 rlu
 ---------------------
 --- VARNAME: rlu4co2: Upwelling Longwave Radiation 4XCO2 Atmosphere
 ---------------------
@@ -2195,7 +1958,6 @@ Some Statistics on actually written variables per variable...
 --- VARNAME: rlucs: Upwelling Clear-Sky Longwave Radiation
 -------------------
               *    mon_CFmon_XY-AH_2 rlucs
-              * subhr_CFsubhr_S-AH_2 rlucs
 -----------------------
 --- VARNAME: rlucs4co2: Upwelling Clear-Sky Longwave Radiation 4XCO2 Atmosphere
 -----------------------
@@ -2205,8 +1967,6 @@ Some Statistics on actually written variables per variable...
 ------------------
               *      day_day_XY-na_2 rlus
               *     mon_Amon_XY-na_1 rlus
-              * subhr_CFsubhr_S-na_2 rlus
-              *      3hr_3hr_XY-na_2 rlus
 --------------------
 --- VARNAME: rluscs: Surface Upwelling Longwave Radiation Clear Sky
 --------------------
@@ -2220,10 +1980,7 @@ Some Statistics on actually written variables per variable...
 --- VARNAME: rlut: TOA Outgoing Longwave Radiation
 ------------------
               *      day_day_XY-na_2 rlut
-              * 1hr_E1hrClimMon_XY-na_2 rlut
               *     mon_Amon_XY-na_1 rlut
-              * subhr_CFsubhr_S-na_2 rlut
-              *     3hr_E3hr_XY-na_2 rlut
 ----------------------
 --- VARNAME: rlut4co2: TOA Outgoing Longwave Radiation 4XCO2 Atmosphere
 ----------------------
@@ -2236,10 +1993,7 @@ Some Statistics on actually written variables per variable...
 --- VARNAME: rlutcs: TOA Outgoing Clear-Sky Longwave Radiation
 --------------------
               *    day_CFday_XY-na_2 rlutcs
-              * 1hr_E1hrClimMon_XY-na_2 rlutcs
               *     mon_Amon_XY-na_1 rlutcs
-              * subhr_CFsubhr_S-na_2 rlutcs
-              *     3hr_E3hr_XY-na_2 rlutcs
 ------------------------
 --- VARNAME: rlutcs4co2: TOA Outgoing Clear-Sky Longwave Radiation 4XCO2 Atmosphere
 ------------------------
@@ -2256,7 +2010,6 @@ Some Statistics on actually written variables per variable...
 --- VARNAME: rsd: Downwelling Shortwave Radiation
 -----------------
               *    mon_CFmon_XY-AH_2 rsd
-              * subhr_CFsubhr_S-AH_2 rsd
 ---------------------
 --- VARNAME: rsd4co2: Downwelling Shortwave Radiation 4XCO2 Atmosphere
 ---------------------
@@ -2265,7 +2018,6 @@ Some Statistics on actually written variables per variable...
 --- VARNAME: rsdcs: Downwelling Clear-Sky Shortwave Radiation
 -------------------
               *    mon_CFmon_XY-AH_2 rsdcs
-              * subhr_CFsubhr_S-AH_2 rsdcs
 -----------------------
 --- VARNAME: rsdcs4co2: Downwelling Clear-Sky Shortwave Radiation 4XCO2 Atmosphere
 -----------------------
@@ -2276,7 +2028,6 @@ Some Statistics on actually written variables per variable...
               *      day_day_XY-na_1 rsds
               *     1hr_E1hr_XY-na_2 rsds
               *     mon_Amon_XY-na_1 rsds
-              * subhr_CFsubhr_S-na_2 rsds
               *      3hr_3hr_XY-na_2 rsds
               *  6hr_6hrPlev_XY-na_2 rsds
 --------------------
@@ -2284,15 +2035,12 @@ Some Statistics on actually written variables per variable...
 --------------------
               *    day_CFday_XY-na_2 rsdscs
               *     mon_Amon_XY-na_1 rsdscs
-              * subhr_CFsubhr_S-na_2 rsdscs
 ------------------
 --- VARNAME: rsdt: TOA Incident Shortwave Radiation
 ------------------
               *    day_CFday_XY-na_2 rsdt
               *      day_day_XY-na_2 rsdt
-              * 1hr_E1hrClimMon_XY-na_2 rsdt
               *     mon_Amon_XY-na_1 rsdt
-              * subhr_CFsubhr_S-na_2 rsdt
 -----------------
 --- VARNAME: rss: Net Shortwave Surface Radiation
 -----------------
@@ -2301,7 +2049,6 @@ Some Statistics on actually written variables per variable...
 --- VARNAME: rsu: Upwelling Shortwave Radiation
 -----------------
               *    mon_CFmon_XY-AH_2 rsu
-              * subhr_CFsubhr_S-AH_2 rsu
 ---------------------
 --- VARNAME: rsu4co2: Upwelling Shortwave Radiation 4XCO2 Atmosphere
 ---------------------
@@ -2310,7 +2057,6 @@ Some Statistics on actually written variables per variable...
 --- VARNAME: rsucs: Upwelling Clear-Sky Shortwave Radiation
 -------------------
               *    mon_CFmon_XY-AH_2 rsucs
-              * subhr_CFsubhr_S-AH_2 rsucs
 -----------------------
 --- VARNAME: rsucs4co2: Upwelling Clear-Sky Shortwave Radiation 4XCO2 Atmosphere
 -----------------------
@@ -2320,23 +2066,17 @@ Some Statistics on actually written variables per variable...
 ------------------
               *      day_day_XY-na_2 rsus
               *     mon_Amon_XY-na_1 rsus
-              * subhr_CFsubhr_S-na_2 rsus
-              *      3hr_3hr_XY-na_2 rsus
 --------------------
 --- VARNAME: rsuscs: Surface Upwelling Clear-Sky Shortwave Radiation
 --------------------
               *    day_CFday_XY-na_2 rsuscs
               *     mon_Amon_XY-na_1 rsuscs
-              * subhr_CFsubhr_S-na_2 rsuscs
 ------------------
 --- VARNAME: rsut: TOA Outgoing Shortwave Radiation
 ------------------
               *    day_CFday_XY-na_2 rsut
               *      day_day_XY-na_2 rsut
-              * 1hr_E1hrClimMon_XY-na_2 rsut
               *     mon_Amon_XY-na_1 rsut
-              * subhr_CFsubhr_S-na_2 rsut
-              *     3hr_E3hr_XY-na_2 rsut
 ----------------------
 --- VARNAME: rsut4co2: TOA Outgoing Shortwave Radiation in 4XCO2 Atmosphere
 ----------------------
@@ -2349,10 +2089,7 @@ Some Statistics on actually written variables per variable...
 --- VARNAME: rsutcs: TOA Outgoing Clear-Sky Shortwave Radiation
 --------------------
               *    day_CFday_XY-na_2 rsutcs
-              * 1hr_E1hrClimMon_XY-na_2 rsutcs
               *     mon_Amon_XY-na_1 rsutcs
-              * subhr_CFsubhr_S-na_2 rsutcs
-              *     3hr_E3hr_XY-na_2 rsutcs
 ------------------------
 --- VARNAME: rsutcs4co2: TOA Outgoing Clear-Sky Shortwave Radiation 4XCO2 Atmosphere
 ------------------------
@@ -2370,14 +2107,12 @@ Some Statistics on actually written variables per variable...
 -----------------
               *     mon_Amon_XY-na_2 sbl
               *    mon_LImon_XY-na_2 sbl
-              * subhr_CFsubhr_S-na_2 sbl
 ---------------------
 --- VARNAME: sfcWind: Near-Surface Wind Speed
 ---------------------
               *      day_day_XY-na_1 sfcWind
               *     1hr_E1hr_XY-na_2 sfcWind
               *     mon_Amon_XY-na_1 sfcWind
-              * subhr_CFsubhr_S-na_2 sfcWind
               *  6hr_6hrPlev_XY-na_2 sfcWind
 ------------------------
 --- VARNAME: sfcWindmax: Daily Maximum Near-Surface Wind Speed
@@ -2425,15 +2160,12 @@ Some Statistics on actually written variables per variable...
 ----------------
 --- VARNAME: ta: Air Temperature
 ----------------
-              *     day_CFday_XY-A_2 ta
               *    day_Eday_XY-P19_1 ta
               *    day_EdayZ_Y-P39_2 ta
               *     day_day_XY-P19_1 ta
               *  mon_AERmonZ_Y-P39_2 ta
               *    mon_Amon_XY-P19_1 ta
               *     mon_CFmon_XY-A_2 ta
-              *  subhr_CFsubhr_S-A_2 ta
-              *    6hr_6hrLev_XY-A_2 ta
               * 6hr_6hrPlevPt_XY-P3_1 ta
 -------------------
 --- VARNAME: ta700: Air Temperature
@@ -2450,7 +2182,6 @@ Some Statistics on actually written variables per variable...
               *    1hr_AERhr_XY-na_2 tas
               *     1hr_E1hr_XY-na_2 tas
               *     mon_Amon_XY-na_1 tas
-              * subhr_CFsubhr_S-na_2 tas
               *      3hr_3hr_XY-na_1 tas
               *  6hr_6hrPlev_XY-na_2 tas
 --------------------
@@ -2472,114 +2203,93 @@ Some Statistics on actually written variables per variable...
 ------------------
               *     day_Eday_XY-na_2 tauu
               *     mon_Amon_XY-na_1 tauu
-              * subhr_CFsubhr_S-na_2 tauu
 ------------------
 --- VARNAME: tauv: Surface Downward Northward Wind Stress
 ------------------
               *     day_Eday_XY-na_2 tauv
               *     mon_Amon_XY-na_1 tauv
-              * subhr_CFsubhr_S-na_2 tauv
 -------------------
 --- VARNAME: tnhus: Tendency of Specific Humidity
 -------------------
               *     mon_CFmon_XY-A_2 tnhus
-              *  subhr_CFsubhr_S-A_2 tnhus
 --------------------
 --- VARNAME: tnhusa: Tendency of Specific Humidity Due to Advection
 --------------------
               *     mon_CFmon_XY-A_2 tnhusa
-              *  subhr_CFsubhr_S-A_2 tnhusa
 --------------------
 --- VARNAME: tnhusc: Tendency of Specific Humidity Due to Convection
 --------------------
               *     mon_CFmon_XY-A_2 tnhusc
-              *  subhr_CFsubhr_S-A_2 tnhusc
 ---------------------
 --- VARNAME: tnhusmp: Tendency of Specific Humidity Due to Model Physics
 ---------------------
               *     mon_CFmon_XY-A_2 tnhusmp
-              *  subhr_CFsubhr_S-A_2 tnhusmp
 ----------------------
 --- VARNAME: tnhuspbl: Tendency of Specific Humidity Due to Boundary Layer Mixing
 ----------------------
               *      mon_Emon_XY-A_2 tnhuspbl
-              *   subhr_Esubhr_S-A_2 tnhuspbl
 ----------------------
 --- VARNAME: tnhusscp: Tendency of Specific Humidity Due to Stratiform Clouds and Precipitation
 ----------------------
               *      mon_Emon_XY-A_2 tnhusscp
-              *   subhr_Esubhr_S-A_2 tnhusscp
 ------------------------
 --- VARNAME: tnhusscpbl: Tendency of Specific Humidity Due to Stratiform Cloud and Precipitation and Boundary Layer Mixing
 ------------------------
               *     mon_CFmon_XY-A_2 tnhusscpbl
-              *  subhr_CFsubhr_S-A_2 tnhusscpbl
 -----------------
 --- VARNAME: tnt: Tendency of Air Temperature
 -----------------
               *     mon_CFmon_XY-A_2 tnt
-              *  subhr_CFsubhr_S-A_2 tnt
 ------------------
 --- VARNAME: tnta: Tendency of Air Temperature Due to Advection
 ------------------
               *     mon_CFmon_XY-A_2 tnta
-              *  subhr_CFsubhr_S-A_2 tnta
 ------------------
 --- VARNAME: tntc: Tendency of Air Temperature Due to Convection
 ------------------
               *     mon_CFmon_XY-A_2 tntc
-              *  subhr_CFsubhr_S-A_2 tntc
 -------------------
 --- VARNAME: tntmp: Tendency of Air Temperature Due to Model Physics
 -------------------
               *    day_EdayZ_Y-P39_2 tntmp
               *     mon_CFmon_XY-A_2 tntmp
               *    mon_EmonZ_Y-P39_2 tntmp
-              *  subhr_CFsubhr_S-A_2 tntmp
 --------------------
 --- VARNAME: tntpbl: Tendency of Air Temperature Due to Boundary Layer Mixing
 --------------------
               *      mon_Emon_XY-A_2 tntpbl
-              *   subhr_Esubhr_S-A_2 tntpbl
 ------------------
 --- VARNAME: tntr: Tendency of Air Temperature Due to Radiative Heating
 ------------------
               *     mon_CFmon_XY-A_2 tntr
-              *  subhr_CFsubhr_S-A_2 tntr
 -------------------
 --- VARNAME: tntrl: Tendency of Air Temperature Due to Longwave Radiative Heating
 -------------------
               *    day_EdayZ_Y-P39_2 tntrl
               *    mon_AERmon_XY-A_2 tntrl
               *    mon_EmonZ_Y-P39_2 tntrl
-              *   subhr_Esubhr_S-A_2 tntrl
 ---------------------
 --- VARNAME: tntrlcs: Tendency of Air Temperature Due to Clear Sky Longwave Radiative Heating
 ---------------------
               *      mon_Emon_XY-A_2 tntrlcs
-              *   subhr_Esubhr_S-A_2 tntrlcs
 -------------------
 --- VARNAME: tntrs: Tendency of Air Temperature Due to Shortwave Radiative Heating
 -------------------
               *    day_EdayZ_Y-P39_2 tntrs
               *    mon_AERmon_XY-A_2 tntrs
               *    mon_EmonZ_Y-P39_2 tntrs
-              *   subhr_Esubhr_S-A_2 tntrs
 ---------------------
 --- VARNAME: tntrscs: Tendency of Air Temperature Due to Clear Sky Shortwave Radiative Heating
 ---------------------
               *      mon_Emon_XY-A_2 tntrscs
-              *   subhr_Esubhr_S-A_2 tntrscs
 --------------------
 --- VARNAME: tntscp: Tendency of Air Temperature Due to Stratiform Clouds and Precipitation
 --------------------
               *      mon_Emon_XY-A_2 tntscp
-              *   subhr_Esubhr_S-A_2 tntscp
 ----------------------
 --- VARNAME: tntscpbl: Tendency of Air Temperature Due to Stratiform Cloud and Precipitation and Boundary Layer Mixing
 ----------------------
               *     mon_CFmon_XY-A_2 tntscpbl
-              *  subhr_CFsubhr_S-A_2 tntscpbl
 -----------------
 --- VARNAME: toz: Total Column Ozone
 -----------------
@@ -2602,10 +2312,7 @@ Some Statistics on actually written variables per variable...
 ----------------
               *     day_Eday_XY-na_2 ts
               *     mon_Amon_XY-na_1 ts
-              * subhr_CFsubhr_S-na_2 ts
-              *    3hr_CF3hr_XY-na_2 ts
               *  6hr_6hrPlev_XY-na_2 ts
-              * 6hr_6hrPlevPt_XY-na_2 ts
 -----------------
 --- VARNAME: tsl: Temperature of Soil
 -----------------
@@ -2615,7 +2322,6 @@ Some Statistics on actually written variables per variable...
 --- VARNAME: tslsi: Surface Temperature Where Land or Sea Ice
 -------------------
               *      day_day_XY-na_2 tslsi
-              *      3hr_3hr_XY-na_2 tslsi
 -----------------
 --- VARNAME: tsn: Snow Internal Temperature
 -----------------
@@ -2627,7 +2333,6 @@ Some Statistics on actually written variables per variable...
 ----------------
 --- VARNAME: ua: Eastward Wind
 ----------------
-              *     day_CFday_XY-A_2 ua
               *    day_Eday_XY-P19_1 ua
               *    day_EdayZ_Y-P39_2 ua
               *     day_day_XY-P19_1 ua
@@ -2635,9 +2340,7 @@ Some Statistics on actually written variables per variable...
               *  mon_AERmonZ_Y-P39_2 ua
               *    mon_Amon_XY-P19_1 ua
               *    mon_Emon_XY-P19_2 ua
-              *  subhr_CFsubhr_S-A_2 ua
-              *    6hr_6hrLev_XY-A_2 ua
-              * 6hr_6hrPlevPt_XY-P7T_2 ua
+              * 6hr_6hrPlevPt_XY-P3_1 ua
 ------------------
 --- VARNAME: ua10: Eastward Wind at 10hPa
 ------------------
@@ -2648,7 +2351,6 @@ Some Statistics on actually written variables per variable...
               *      day_day_XY-na_1 uas
               *     1hr_E1hr_XY-na_2 uas
               *     mon_Amon_XY-na_1 uas
-              * subhr_CFsubhr_S-na_2 uas
               *    3hr_3hrPt_XY-na_1 uas
               * 6hr_6hrPlevPt_XY-na_2 uas
 -----------------------
@@ -2664,23 +2366,19 @@ Some Statistics on actually written variables per variable...
 ----------------
 --- VARNAME: va: Northward Wind
 ----------------
-              *     day_CFday_XY-A_2 va
               *    day_Eday_XY-P19_1 va
               *     day_day_XY-P19_1 va
               *    mon_AERmon_XY-A_2 va
               *  mon_AERmonZ_Y-P39_2 va
               *    mon_Amon_XY-P19_1 va
               *    mon_Emon_XY-P19_2 va
-              *  subhr_CFsubhr_S-A_2 va
-              *    6hr_6hrLev_XY-A_2 va
-              * 6hr_6hrPlevPt_XY-P7T_2 va
+              * 6hr_6hrPlevPt_XY-P3_1 va
 -----------------
 --- VARNAME: vas: Northward Near-Surface Wind
 -----------------
               *      day_day_XY-na_1 vas
               *     1hr_E1hr_XY-na_2 vas
               *     mon_Amon_XY-na_1 vas
-              * subhr_CFsubhr_S-na_2 vas
               *    3hr_3hrPt_XY-na_1 vas
               * 6hr_6hrPlevPt_XY-na_2 vas
 ---------------------
@@ -2694,11 +2392,9 @@ Some Statistics on actually written variables per variable...
 -----------------
 --- VARNAME: wap: Omega (=dp/dt)
 -----------------
-              *     day_CFday_XY-A_2 wap
               *    day_Eday_XY-P19_2 wap
               *     day_day_XY-P19_1 wap
               *    mon_Amon_XY-P19_1 wap
-              *  subhr_CFsubhr_S-A_2 wap
 --------------------
 --- VARNAME: wap500: Pressure Tendency
 --------------------
@@ -2726,15 +2422,12 @@ Some Statistics on actually written variables per variable...
 ----------------
 --- VARNAME: zg: Geopotential Height
 ----------------
-              *     day_CFday_XY-A_2 zg
               *    day_Eday_XY-P19_1 zg
               *    day_EdayZ_Y-P39_2 zg
               *     day_day_XY-P19_2 zg
               *    mon_AERmon_XY-A_2 zg
               *  mon_AERmonZ_Y-P39_2 zg
               *    mon_Amon_XY-P19_1 zg
-              *  subhr_CFsubhr_S-A_2 zg
-              *    6hr_6hrLev_XY-A_2 zg
               * 6hr_6hrPlevPt_XY-P7T_2 zg
 ------------------
 --- VARNAME: zg10: Geopotential Height at 10hPa
@@ -2757,7 +2450,6 @@ Some Statistics on actually written variables per variable...
 Warnings about cell methods (with var list)
 	Cannot yet compute annual climatology - must do it as a postpro for vars: {'ch4', 'co2', 'n2o'}
 	Will not explicitly handle time: mean where cloud for vars: {'albisccp', 'pctisccp'}
-	File structure for diurnal cycle is not yet CF-compliant for vars: {'rlut', 'rlutcs', 'rsdt', 'rsut', 'rsutcs'}
 	time: mean where ice_sheet for vars: {'acabfIs', 'hflsIs', 'hfssIs', 'icemIs', 'litemptopIs', 'mrroIs', 'orogIs', 'prraIs', 'prsnIs', 'rldsIs', 'rlusIs', 'rsdsIs', 'rsdsis', 'rsusIs', 'rsusis', 'sblIs', 'sncIs', 'snicefreezIs', 'snicemIs', 'snmIs', 'tasIs', 'tsIs', 'tsnIs'}
 	time: mean where trees for vars: {'vegHeightTree'}
 	time: mean where vegetation for vars: {'vegHeight'}
@@ -2777,9 +2469,9 @@ Processing context  trip
 
 **************************************************
 
-Number of distinct CMOR variables (whatever the grid): 1273
-Number of distinct var labels is: 832
-Number of simplified vars is: 1273
+Number of distinct CMOR variables (whatever the grid): 1078
+Number of distinct var labels is: 774
+Number of simplified vars is: 1078
 Issues with standard names are: []
 Info: No HOMEvars list provided.
 

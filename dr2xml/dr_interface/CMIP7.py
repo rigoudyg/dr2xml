@@ -143,16 +143,34 @@ class DataRequest(DataRequestBasic):
             rep[new_dims] = spshp.name
         return rep
 
+    def _is_timesubset_applicable(self, year, time_subset):
+        if year is None or time_subset is None:
+            return None
+        else:
+            return time_subset.end >= int(year) >= time_subset.start
+
     def get_cmorvars_list(self, select_mips, select_max_priority, select_included_vars, select_excluded_vars,
                           select_included_tables, select_excluded_tables, select_excluded_pairs,
-                          experiment_filter=False, **kwargs):
+                          select_included_opportunities, select_excluded_opportunities, select_included_vargroups,
+                          select_excluded_vargroups, experiment_filter=False, **kwargs):
         rep = defaultdict(set)
-        var_list = self.data_request.filter_elements_per_request("variables", operation="all", skip_if_missing=False,
-                                                                 requests=dict(max_priority_level=select_max_priority))
+        # Filter var list per priority and experiment
+        request_dict_all_of_any = dict(opportunity=select_included_opportunities,
+                                       variable_groups=select_included_vargroups,
+                                       max_priority_level=select_max_priority)
+        not_request_dict_any = dict(opportunity=select_excluded_opportunities,
+                                    variable_groups=select_excluded_vargroups)
         if len(select_mips) > 0:
-            var_list = self.data_request.filter_elements_per_request(var_list, operation="any",
-                                                                     skip_if_missing=False,
-                                                                     requests=dict(mips=list(select_mips)))
+            request_dict_all_of_any["mip"] = select_mips
+        if experiment_filter:
+            request_dict_all_of_any["experiment"] = experiment_filter["experiment_id"]
+        # Filter var list per filtering dict "any"
+        var_list = self.data_request.filter_elements_per_request("variables", request_operation="all_of_any",
+                                                                 skip_if_missing=False,
+                                                                 requests=request_dict_all_of_any,
+                                                                 not_requests=not_request_dict_any,
+                                                                 not_request_operation="any")
+        # Apply other filters
         for var in var_list:
             dr_var = SimpleCMORVar.get_from_dr(var, **kwargs)
             if is_elt_applicable(dr_var.mipTable, excluded=select_excluded_tables, included=select_included_tables) and\
@@ -160,6 +178,18 @@ class DataRequest(DataRequestBasic):
                     and is_elt_applicable((dr_var.mipVarLabel, dr_var.mipTable), excluded=select_excluded_pairs):
                 rep[dr_var.id] = rep[dr_var.id] | set(dr_var.grids)
         return rep
+
+    def get_endyear_for_cmorvar(self, cmorvar, experiment, year, internal_dict):
+        # Find time_subset linked to the variable and experiment for dedicated year
+        time_subsets = self.data_request.filter_elements_per_request("time_subsets", request_operation="all",
+                                                                     skip_if_missing=False,
+                                                                     requests=dict(variable=cmorvar.cmvar,
+                                                                                   experiment=experiment))
+        time_subsets = [time_subset for time_subset in time_subsets if self._is_timesubset_applicable(year, time_subset)]
+        if len(time_subsets) == 0 or None in time_subsets:
+            return None
+        else:
+            return max(time_subset.end for time_subset in time_subsets)
 
 
 def initialize_data_request():
