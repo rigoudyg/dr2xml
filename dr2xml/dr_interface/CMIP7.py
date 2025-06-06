@@ -143,53 +143,68 @@ class DataRequest(DataRequestBasic):
             rep[new_dims] = spshp.name
         return rep
 
-    def _is_timesubset_applicable(self, year, time_subset):
-        if year is None or time_subset is None:
-            return None
+    def _is_timesubset_applicable(self, year, select_on_year, time_subset):
+        if year is None or select_on_year is None:
+            return None, None
         else:
-            return time_subset.end >= int(year) >= time_subset.start
+            return ((time_subset.start is None or (time_subset.start <= int(year))) and
+                    (time_subset.end is None or (time_subset.end >= int(year))), time_subset.end)
+
+    def _get_filtering_elements(self, experiment=None, variable=None):
+        internal_dict = get_settings_values("internal")
+        request_dict_all_of_any = dict(opportunities=internal_dict["select_included_opportunities"],
+                                       variable_groups=internal_dict["select_included_vargroups"],
+                                       max_priority_level=internal_dict["select_max_priority"])
+        not_request_dict_any = dict(opportunity=internal_dict["select_excluded_opportunities"],
+                                    variable_groups=internal_dict["select_excluded_vargroups"])
+        select_mips = internal_dict["select_mips"]
+        if len(select_mips) > 0:
+            request_dict_all_of_any["mip"] = select_mips
+        if experiment is not None:
+            request_dict_all_of_any["experiment"] = experiment
+        if variable is not None:
+            request_dict_all_of_any["variable"] = variable
+        return dict(requests=request_dict_all_of_any, request_operation="all_of_any", not_requests=not_request_dict_any,
+                    not_request_operation="any")
 
     def get_cmorvars_list(self, select_mips, select_max_priority, select_included_vars, select_excluded_vars,
                           select_included_tables, select_excluded_tables, select_excluded_pairs,
                           select_included_opportunities, select_excluded_opportunities, select_included_vargroups,
-                          select_excluded_vargroups, experiment_filter=False, **kwargs):
+                          select_excluded_vargroups, select_on_year, experiment_filter=False, **kwargs):
         rep = defaultdict(set)
         # Filter var list per priority and experiment
-        request_dict_all_of_any = dict(opportunity=select_included_opportunities,
-                                       variable_groups=select_included_vargroups,
-                                       max_priority_level=select_max_priority)
-        not_request_dict_any = dict(opportunity=select_excluded_opportunities,
-                                    variable_groups=select_excluded_vargroups)
-        if len(select_mips) > 0:
-            request_dict_all_of_any["mip"] = select_mips
         if experiment_filter:
-            request_dict_all_of_any["experiment"] = experiment_filter["experiment_id"]
+            experiment = experiment_filter["experiment_id"]
+        else:
+            experiment=None
+        find_out_requests_dict = self._get_filtering_elements(experiment=experiment)
         # Filter var list per filtering dict "any"
-        var_list = self.data_request.filter_elements_per_request("variables", request_operation="all_of_any",
-                                                                 skip_if_missing=False,
-                                                                 requests=request_dict_all_of_any,
-                                                                 not_requests=not_request_dict_any,
-                                                                 not_request_operation="any")
+        var_list = self.data_request.filter_elements_per_request("variables", skip_if_missing=False,
+                                                                 **find_out_requests_dict)
         # Apply other filters
         for var in var_list:
             dr_var = SimpleCMORVar.get_from_dr(var, **kwargs)
             if is_elt_applicable(dr_var.mipTable, excluded=select_excluded_tables, included=select_included_tables) and\
                     is_elt_applicable(dr_var.mipVarLabel, excluded=select_excluded_vars, included=select_included_vars) \
-                    and is_elt_applicable((dr_var.mipVarLabel, dr_var.mipTable), excluded=select_excluded_pairs):
+                    and is_elt_applicable((dr_var.mipVarLabel, dr_var.mipTable), excluded=select_excluded_pairs) \
+                    and self.get_endyear_for_cmorvar(cmorvar=dr_var, experiment=experiment, year=select_on_year,
+                                                     internal_dict=get_settings_values("internal")) is not False:
                 rep[dr_var.id] = rep[dr_var.id] | set(dr_var.grids)
         return rep
 
     def get_endyear_for_cmorvar(self, cmorvar, experiment, year, internal_dict):
         # Find time_subset linked to the variable and experiment for dedicated year
-        time_subsets = self.data_request.filter_elements_per_request("time_subsets", request_operation="all",
-                                                                     skip_if_missing=False,
-                                                                     requests=dict(variable=cmorvar.cmvar,
-                                                                                   experiment=experiment))
-        time_subsets = [time_subset for time_subset in time_subsets if self._is_timesubset_applicable(year, time_subset)]
-        if len(time_subsets) == 0 or None in time_subsets:
+        find_out_requests_dict = self._get_filtering_elements(experiment=experiment, variable=cmorvar.cmvar)
+        time_subsets = self.data_request.filter_elements_per_request("time_subsets", skip_if_missing=False,
+                                                                     **find_out_requests_dict)
+        time_subsets = [self._is_timesubset_applicable(year, internal_dict["select_on_year"], time_subset) for time_subset in time_subsets]
+        time_subsets = [end for (apply, end) in time_subsets if apply is not False]
+        if len(time_subsets) == 0:
+            return False
+        elif None in time_subsets:
             return None
         else:
-            return max(time_subset.end for time_subset in time_subsets)
+            return max(time_subsets)
 
 
 def initialize_data_request():
