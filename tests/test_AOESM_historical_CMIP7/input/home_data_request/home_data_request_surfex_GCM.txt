@@ -1,1 +1,1 @@
-../../../common/home_data_request/home_data_request_surfex_GCM.txt
+../../../common/home_data_request_CMIP7/home_data_request_surfex_GCM.txt

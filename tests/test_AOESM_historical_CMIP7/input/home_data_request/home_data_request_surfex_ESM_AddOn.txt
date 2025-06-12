@@ -1,1 +1,1 @@
-../../../common/home_data_request/home_data_request_surfex_ESM_AddOn.txt
+../../../common/home_data_request_CMIP7/home_data_request_surfex_ESM_AddOn.txt
