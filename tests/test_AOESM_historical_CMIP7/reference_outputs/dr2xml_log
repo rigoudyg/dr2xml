@@ -3,7 +3,7 @@
 *
 *              dr2xml version:  current_version
 *   CMIP6 conventions version:  v6.2.4
-*  CMIP7 Data Request version:  Software 1.2.1.dev10+g5f3dcc4.d20250515 - Content v1.2.1
+*  CMIP7 Data Request version:  Software 1.2.2.dev18+g09c17e1.d20250729 - Content v1.2.2
 
 *
  **************************************************
@@ -15,9 +15,9 @@ Processing context  nemo
 **************************************************
 
 Output of the current filtering request does not include all the BCV variables.
-Number of distinct CMOR variables (whatever the grid): 60
+Number of distinct CMOR variables (whatever the grid): 59
 Number of distinct var labels is: 35
-Number of simplified vars is: 60
+Number of simplified vars is: 59
 Issues with standard names are: []
 Info: No HOMEvars list provided.
 
@@ -46,7 +46,7 @@ Some Statistics on actually written variables per variable...
 *
 *              dr2xml version:  current_version
 *   CMIP6 conventions version:  v6.2.4
-*  CMIP7 Data Request version:  Software 1.2.1.dev10+g5f3dcc4.d20250515 - Content v1.2.1
+*  CMIP7 Data Request version:  Software 1.2.2.dev18+g09c17e1.d20250729 - Content v1.2.2
 
 *
  **************************************************
@@ -57,9 +57,9 @@ Processing context  surfex
 
 **************************************************
 
-Number of distinct CMOR variables (whatever the grid): 60
+Number of distinct CMOR variables (whatever the grid): 59
 Number of distinct var labels is: 35
-Number of simplified vars is: 60
+Number of simplified vars is: 59
 Issues with standard names are: []
 Info: No HOMEvars list provided.
 
@@ -88,7 +88,7 @@ Note: assuming that for        pctisccp in table CFmon is well handled by 'detec
 file_def written as current_directory/test_AOESM_historical_CMIP7/test_outputs/dr2xml_surfex.xml
 
 Skipped variables (i.e. whose alias is not present in the pingfile):
->>> TABLE:           CFmon 04/11 ----> clivimodis(2) clmodisice(2) clmodisliquid(2) clwvimodis(2)
+>>> TABLE:           CFmon 04/10 ----> clivimodis(2) clmodisice(2) clmodisliquid(2) clwvimodis(2)
 
 >>> TABLE:            Emon 04/05 ----> reffclic(2) reffclis(2) reffclwc(2) reffclws(2)
 
@@ -132,14 +132,14 @@ Some Statistics on actually written variables per frequency+shape...
 
                           AERmon P2   1: cod
                             Amon P1  14: clivi clt clwvi pr prw rlds rldscs rlut rlutcs rsds rsdscs rsut rsutcs tas
-                           CFmon P2   4: cltcalipso cltisccp cltmodis pctisccp
+                           CFmon P2   3: cltcalipso cltisccp pctisccp
                             Emon P2   1: cltmodis
-       mon    XY-na    -------- ---  20
+       mon    XY-na    -------- ---  19
 
-       mon --------    -------- ---  27
+       mon --------    -------- ---  26
 
 
----------- --------    -------- ---  52
+---------- --------    -------- ---  51
 
 
 Some Statistics on actually written variables per variable...
@@ -190,7 +190,6 @@ Some Statistics on actually written variables per variable...
 ----------------------
 --- VARNAME: cltmodis: MODIS Total Cloud Cover Percentage
 ----------------------
-              *    mon_CFmon_XY-na_2 cltmodis
               *     mon_Emon_XY-na_2 cltmodis
 -----------------
 --- VARNAME: clw: Mass Fraction of Cloud Liquid Water
@@ -284,7 +283,7 @@ Warnings about cell methods (with var list)
 *
 *              dr2xml version:  current_version
 *   CMIP6 conventions version:  v6.2.4
-*  CMIP7 Data Request version:  Software 1.2.1.dev10+g5f3dcc4.d20250515 - Content v1.2.1
+*  CMIP7 Data Request version:  Software 1.2.2.dev18+g09c17e1.d20250729 - Content v1.2.2
 
 *
  **************************************************
@@ -295,9 +294,9 @@ Processing context  trip
 
 **************************************************
 
-Number of distinct CMOR variables (whatever the grid): 60
+Number of distinct CMOR variables (whatever the grid): 59
 Number of distinct var labels is: 35
-Number of simplified vars is: 60
+Number of simplified vars is: 59
 Issues with standard names are: []
 Info: No HOMEvars list provided.
 

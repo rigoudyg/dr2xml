@@ -27,7 +27,7 @@
 		<field id="CMIP7_dgw" field_ref="dgw"/>
 		<!--P3 (kg m-2) change_over_time_in_groundwater_amount : change\_over\_time\_in\_groundwater-->
 		<field id="CMIP7_drivw" field_ref="drivw"/>
-		<!--P3 (kg m-2) change_over_time_in_river_water_amount : undef-->
+		<!--P3 (kg m-2) change_over_time_in_river_water_amount : Change in River Storage-->
 		<field id="CMIP7_qgwr" field_ref="qgwr"/>
 		<!--P3 (kg m-2 s-1) downward_liquid_water_mass_flux_into_groundwater : water\_flux\_from\_soil\_layer\_to\_groundwater-->
 		<field id="CMIP7_rivi" field_ref="rivin"/>
