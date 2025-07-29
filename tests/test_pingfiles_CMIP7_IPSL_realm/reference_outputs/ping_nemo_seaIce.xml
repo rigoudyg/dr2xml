@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <context id="nemo">
-	<!--CMIP7 Data Request version Software 1.2.1.dev10+g5f3dcc4.d20250515 - Content v1.2.1-->
-	<!--dr2xml version 3.1-->
+	<!--CMIP7 Data Request version Software 1.2.2.dev18+g09c17e1.d20250729 - Content v1.2.2-->
+	<!--dr2xml version current_version-->
 	<!--Lab_and_model settings
-{'data_request_content_version' = 'v1.2.1',
-'data_request_path' = 'current_data_request',
+{'data_request_content_version' = 'v1.2.2',
 'data_request_used' = 'CMIP7',
 'excluded_vars' = [],
 'excluded_vars_file' = [],
@@ -43,18 +42,18 @@
 		<!--P3 (kg m-2) sea_ice_mass_content_of_ice_algae_expressed_as_chlorophyll : Vertically-integrated content of Chl-a in ice algae, expressed as kg of Chl-a per square meter of sea ice.-->
 		<field id="CMIP7_sicompstren" field_ref="?dummy_XY"/>
 		<!--P3 (N m-1) compressive_strength_of_sea_ice : Computed strength of the ice pack, defined as the energy (J m-2) dissipated per unit area removed from the ice pack under compression, and assumed proportional to the change in potential energy caused by ridging. For Hibler-type models, this is P = P\* h exp(-C(1-A)) where P\* is compressive strength, h is ice thickness, A is compactness and C is strength reduction constant.-->
-		<field id="CMIP7_siconc" field_ref="?dummy_XY_typesi"/>
-		<!--P1 (%) sea_ice_area_fraction : Areal fraction of a given grid cell that is covered by sea ice on the ocean grid, independent of the thickness of that ice.-->
-		<field id="CMIP7_siconca" field_ref="?dummy_XY_typesi"/>
-		<!--P2 (%) sea_ice_area_fraction : Areal fraction of a given grid cell that is covered by sea ice on the atmosphere grid, independent of the thickness of that ice.-->
+		<field id="CMIP7_siconc" field_ref="?dummy_XY"/>
+		<!--P1 (1) sea_ice_area_fraction : Areal fraction of a given grid cell that is covered by sea ice on the ocean grid, independent of the thickness of that ice.-->
+		<field id="CMIP7_siconca" field_ref="?dummy_XY"/>
+		<!--P2 (1) sea_ice_area_fraction : Areal fraction of a given grid cell that is covered by sea ice on the atmosphere grid, independent of the thickness of that ice.-->
 		<field id="CMIP7_sidconcdyn" field_ref="?dummy_XY"/>
-		<!--P2 (s-1) tendency_of_sea_ice_area_fraction_due_to_dynamics : Total change in sea-ice area fraction through dynamics-related processes (advection, divergence, etc.).-->
+		<!--P2 (s-1) tendency_of_sea_ice_area_fraction_due_to_dynamics : Total rate of change in sea-ice area fraction through dynamics-related processes (advection, divergence, etc.).-->
 		<field id="CMIP7_sidconcth" field_ref="?dummy_XY"/>
-		<!--P2 (s-1) tendency_of_sea_ice_area_fraction_due_to_thermodynamics : Total change in sea-ice area fraction through thermodynamic processes.-->
+		<!--P2 (s-1) tendency_of_sea_ice_area_fraction_due_to_thermodynamics : Total rate of change in sea-ice area fraction through thermodynamic processes.-->
 		<field id="CMIP7_sidivvel" field_ref="?dummy_XY"/>
 		<!--P3 (s-1) divergence_of_sea_ice_velocity : Divergence of sea-ice velocity field (first shear strain invariant). Requested as instantaneous value at the center of the month (i.e., first timestep of the 15th day of the month).-->
 		<field id="CMIP7_sidmassdyn" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_sea_ice_dynamics : Total change in sea-ice mass through dynamics-related processes (advection, divergence, etc.) divided by grid-cell area.-->
+		<!--P2 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_sea_ice_dynamics : Total rate of change in sea-ice mass through dynamics-related processes (advection, divergence, etc.) divided by grid-cell area.-->
 		<field id="CMIP7_sidmassevapsubl" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2 s-1) water_evapotranspiration_flux : Rate of change of sea-ice mass change through evaporation and sublimation divided by grid-cell area. If a model does not differentiate between the sublimation of snow and sea ice, we recommend to report sidmassevapsubl as zero as long as the ice is snow covered, and to report any sublimation within the variable sisndmasssubl.-->
 		<field id="CMIP7_sidmassgrowthbot" field_ref="?dummy_XY"/>
@@ -70,7 +69,7 @@
 		<field id="CMIP7_sidmassmelttop" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_surface_melting : Rate of change of sea-ice mass through melting at the ice surface divided by grid-cell area. This number is independent of the actual fate of the meltwater, and will hence include all sea-ice meltwater that drains into the ocean and all sea-ice meltwater that is collected by a melt-pond parameterisation. Always negative or zero.-->
 		<field id="CMIP7_sidmassth" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_sea_ice_thermodynamics : Total change in sea-ice mass from thermodynamic processes divided by grid-cell area.-->
+		<!--P2 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_sea_ice_thermodynamics : Total rate of change in sea-ice mass from thermodynamic processes divided by grid-cell area.-->
 		<field id="CMIP7_sidmasstranx" field_ref="?dummy_XY"/>
 		<!--P3 (kg s-1) sea_ice_x_transport : X-component of the sea-ice drift-induced transport of snow and sea ice mass.-->
 		<field id="CMIP7_sidmasstrany" field_ref="?dummy_XY"/>
@@ -126,11 +125,11 @@
 		<field id="CMIP7_sigpp" field_ref="?dummy_XY"/>
 		<!--P3 (kg m-2 s-1) gross_primary_productivity_of_biomass_expressed_as_carbon_due_to_ice_algae_in_sea_ice : Change in ice algal carbon mass due to photosynthesis per sea ice unit area per unit time.-->
 		<field id="CMIP7_sihc" field_ref="?dummy_XY"/>
-		<!--P2 (J m-2) sea_ice_enthalpy_content : Heat content of all ice in grid cell divided by grid-cell area. This includes both the latent and sensible heat content contributions. Water at 0C is assumed to have a heat content of 0 J. This variable does not include heat content of snow, but does include heat content of brine. Heat content is always negative since both the sensible and the latent heat content of ice are less than that of water. Note that the CF standard name is incorrect since heat content is not only function of temperature but also of salinity, plus the link with temperature is not linear. A new CF standard name is currently being proposed to address this issue (https://github.com/cf-convention/vocabularies/issues/253).-->
+		<!--P2 (J m-2) sea_ice_enthalpy_content : Heat content of all ice in grid cell divided by grid-cell area. This includes both the latent and sensible heat content contributions. Water at 0C is assumed to have a heat content of 0 J. This variable does not include heat content of snow, but does include heat content of brine in the sea ice. Heat content is always negative since both the sensible and the latent heat content of ice are less than that of water.-->
 		<field id="CMIP7_siitdconc" field_ref="?dummy_XY_iceband"/>
-		<!--P2 (%) sea_ice_area_fraction : Area fraction of grid cell covered by each ice thickness category (vector with one entry for each ice thickness category starting from the thinnest category, netcdf file should use thickness bounds of the categories as third coordinate axis).-->
+		<!--P2 (1) sea_ice_area_fraction : Area fraction of grid cell covered by each ice thickness category (vector with one entry for each ice thickness category starting from the thinnest category, netcdf file should use thickness bounds of the categories as third coordinate axis).-->
 		<field id="CMIP7_siitdsnconc" field_ref="?dummy_XY_iceband"/>
-		<!--P2 (%) surface_snow_area_fraction : Area fraction of grid cell covered by snow in each ice thickness category (vector with one entry for each ice thickness category starting from the thinnest category, netcdf file should use thickness bounds of the categories as third coordinate axis).-->
+		<!--P2 (1) surface_snow_area_fraction : Area fraction of grid cell covered by snow in each ice thickness category (vector with one entry for each ice thickness category starting from the thinnest category, netcdf file should use thickness bounds of the categories as third coordinate axis).-->
 		<field id="CMIP7_siitdsnthick" field_ref="?dummy_XY_iceband"/>
 		<!--P2 (m) surface_snow_thickness : Actual thickness of snow in each ice thickness category, NOT snow volume divided by grid area (vector with one entry for each ice thickness category starting from the thinnest category, netcdf file should use thickness bounds of categories as third coordinate axis). It can also be derived by dividing the volume of snow by the area of snow in each thickness category.-->
 		<field id="CMIP7_siitdthick" field_ref="?dummy_XY_iceband"/>
@@ -210,7 +209,7 @@
 		<field id="CMIP7_sitemptop" field_ref="?dummy_XY"/>
 		<!--P1 (K) sea_ice_surface_temperature : Mean surface temperature of the sea-ice covered part of the grid cell. Wherever snow covers the ice, the surface temperature of the snow is used for the averaging, otherwise the surface temperature of the ice is used.-->
 		<field id="CMIP7_sithick" field_ref="?dummy_XY"/>
-		<!--P1 (m) sea_ice_thickness : Actual (floe) thickness of sea ice averaged over the ice-covered part of a given grid cell, NOT volume divided by grid area.-->
+		<!--P2 (m) sea_ice_thickness : Actual (floe) thickness of sea ice averaged over the ice-covered part of a given grid cell, NOT volume divided by grid area.-->
 		<field id="CMIP7_sitimefrac" field_ref="?dummy_XY"/>
 		<!--P1 (1) fraction_of_time_with_sea_ice_area_fraction_above_threshold : Fraction of time steps of the averaging period during which sea ice is present (siconc > 0) in a grid cell.-->
 		<field id="CMIP7_siu" field_ref="?dummy_XY"/>

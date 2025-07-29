@@ -22,6 +22,10 @@
 {}-->
 	<!--Year processed None-->
 	<field_definition>
+		<field id="CMIP7_acabf" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P3 (kg m-2 s-1) land_ice_surface_specific_mass_balance_flux : quantity averaged over ice sheet (grounded ice sheet and floating ice shelf) only. Needed to analyse the impact of downscaling methods, and as forcing for ISM-->
+		<field id="CMIP7_acabfIs" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) land_ice_surface_specific_mass_balance_flux : quantity averaged over ice\_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
 		<field id="CMIP7_agesno" field_ref="?dummy_XY"/>
 		<!--P3 (day) age_of_surface_snow : When computing the time-mean here, the time samples, weighted by the mass of snow on the land portion of the grid cell, are accumulated and then divided by the sum of the weights.  Reported as "missing in regions free of snow on land.-->
 		<field id="CMIP7_albc" field_ref="?dummy_XY"/>
@@ -232,14 +236,28 @@
 		<!--P3 (W m-2) surface_downward_heat_flux_in_air : Ground heat flux at 3hr-->
 		<field id="CMIP7_hfdsn" field_ref="?dummy_XY"/>
 		<!--P2 (W m-2) surface_downward_heat_flux_in_snow : the net downward heat flux from the atmosphere into the snow that lies on land divided by the land area in the grid cell; reported as missing for snow-free land regions or where the land fraction is 0.-->
+		<field id="CMIP7_hfgeoubed" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P2 (W m-2) upward_geothermal_heat_flux_at_ground_level_in_land_ice : Geothermal Heat Flux Beneath Land Ice-->
 		<field id="CMIP7_hfls" field_ref="?dummy_XY_xgre_ygre"/>
 		<!--P2 (W m-2) surface_upward_latent_heat_flux : The surface called "surface" means the lower boundary of the atmosphere. "Upward" indicates a vector component which is positive when directed upward (negative downward). The surface latent heat flux is the exchange of heat between the surface and the air on account of evaporation (including sublimation). In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.-->
+		<field id="CMIP7_hflsIs" field_ref="?dummy_XY"/>
+		<!--P2 (W m-2) surface_upward_latent_heat_flux : quantity averaged over ice\_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
 		<field id="CMIP7_hflsLut" field_ref="?dummy_XY_landuse"/>
 		<!--P3 (W m-2) surface_upward_latent_heat_flux : The surface called "surface" means the lower boundary of the atmosphere. "Upward" indicates a vector component which is positive when directed upward (negative downward). The surface latent heat flux is the exchange of heat between the surface and the air on account of evaporation (including sublimation). In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.-->
 		<field id="CMIP7_hfss" field_ref="?dummy_XY_xgre_ygre"/>
 		<!--P3 (W m-2) surface_upward_sensible_heat_flux : The surface sensible heat flux, also called turbulent heat flux, is the exchange of heat between the surface and the air by motion of air.-->
+		<field id="CMIP7_hfssIs" field_ref="?dummy_XY"/>
+		<!--P2 (W m-2) surface_upward_sensible_heat_flux : quantity averaged over ice\_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
 		<field id="CMIP7_hfssLut" field_ref="?dummy_XY_landuse"/>
 		<!--P3 (W m-2) surface_upward_sensible_heat_flux : Upward sensible heat flux on land use tiles. The surface sensible heat flux, also called turbulent heat flux, is the exchange of heat between the surface and the air by motion of air.-->
+		<field id="CMIP7_iareafl" field_ref="?dummy_0d"/>
+		<!--P3 (m2) floating_ice_shelf_area : Greenland-->
+		<field id="CMIP7_iareagr" field_ref="?dummy_0d"/>
+		<!--P3 (m2) grounded_ice_sheet_area : Greenland-->
+		<field id="CMIP7_icem" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P3 (kg m-2 s-1) land_ice_surface_melt_flux : Loss of ice mass resulting from surface melting. Computed as the total surface melt water on the land ice portion of the grid cell divided by land ice area in the grid cell.-->
+		<field id="CMIP7_icemIs" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) land_ice_surface_melt_flux : quantity averaged over ice\_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
 		<field id="CMIP7_irrDem" field_ref="?dummy_XY"/>
 		<!--P3 (kg m-2 s-1) surface_downward_mass_flux_of_water_due_to_irrigation : the total amount of irrigation water demand-->
 		<field id="CMIP7_irrGw" field_ref="?dummy_XY"/>
@@ -256,14 +274,38 @@
 		<!--P2 (1) leaf_area_index : A ratio obtained by dividing the total upper leaf surface area of vegetation by the (horizontal) surface area of the land on which it grows.-->
 		<field id="CMIP7_landCoverFrac" field_ref="?dummy_XY_vegtype"/>
 		<!--P2 (%) area_fraction : The categories may differ from model to model, depending on their  PFT definitions.   This may include natural PFTs, anthropogenic PFTs, bare soil, lakes, urban areas, etc.   Sum of all should equal the fraction of the grid-cell that is land.-->
+		<field id="CMIP7_libmassbffl" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P3 (kg m-2 s-1) land_ice_basal_specific_mass_balance_flux : quantity averaged over floating ice shelf-->
+		<field id="CMIP7_libmassbfgr" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P3 (kg m-2 s-1) land_ice_basal_specific_mass_balance_flux : quantity averaged over grounded ice sheet-->
+		<field id="CMIP7_licalvf" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P3 (kg m-2 s-1) land_ice_specific_mass_flux_due_to_calving : Loss of ice mass resulting from iceberg calving. Computed as the rate of mass loss by the ice shelf (in kg s-1) divided by the horizontal area of the ice sheet (m2) in the grid box.-->
+		<field id="CMIP7_lifmassbf" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P3 (kg m-2 s-1) land_ice_specific_mass_flux_due_to_calving_and_ice_front_melting : Total mass balance at the ice front (or vertical margin). It includes both iceberg calving and melt on vertical ice front-->
+		<field id="CMIP7_lim" field_ref="?dummy_0d"/>
+		<!--P3 (kg) land_ice_mass : Greenland-->
+		<field id="CMIP7_limnsw" field_ref="?dummy_0d"/>
+		<!--P3 (kg) land_ice_mass_not_displacing_sea_water : Greenland-->
+		<field id="CMIP7_litempbotfl" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P3 (K) land_ice_basal_temperature : quantity averaged over floating ice shelf-->
+		<field id="CMIP7_litempbotgr" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P3 (K) land_ice_basal_temperature : quantity averaged over grounded ice sheet-->
+		<field id="CMIP7_litemptop" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P3 (K) temperature_at_top_of_ice_sheet_model : quantity averaged over ice sheet (grounded ice sheet and floating ice shelf) only. Needed to analyse the impact of downscaling methods-->
+		<field id="CMIP7_litemptopIs" field_ref="?dummy_XY"/>
+		<!--P2 (K) temperature_at_top_of_ice_sheet_model : quantity averaged over ice\_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
 		<field id="CMIP7_lithk" field_ref="?dummy_XY"/>
 		<!--P2 (m) land_ice_thickness : This variable identifies the thickness of a prescribed ice sheet. This information is relevant to better understand how different models treat ice. For models where an ice sheet is just orography + an ice sheet mask, the value should be set to zero. For models that explicitly resolve an ice sheet thickness, the thickness of the ice sheet should be provided.-->
 		<field id="CMIP7_lwsnl" field_ref="?dummy_XY"/>
 		<!--P3 (kg m-2) liquid_water_content_of_surface_snow : where land over land: this is computed as the total mass of liquid water contained interstitially within the snow layer of the land portion of a grid cell divided by the area of the land portion of the cell.-->
+		<field id="CMIP7_modelCellAreai" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P3 (m2) cell_area : When interpolated to a regular grid, it should be interpolated (not summed) with a conservative scheme to preserve total area-->
 		<field id="CMIP7_mrfso" field_ref="?dummy_XY"/>
 		<!--P1 (kg m-2) soil_frozen_water_content : the mass (summed over all all layers) of frozen water.-->
 		<field id="CMIP7_mrro" field_ref="?dummy_XY"/>
 		<!--P1 (kg m-2 s-1) runoff_flux : the total runoff (including "drainage" through the base of the soil model) leaving the land portion of the grid cell.-->
+		<field id="CMIP7_mrroIs" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) runoff_flux : quantity averaged over ice\_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
 		<field id="CMIP7_mrroLi" field_ref="?dummy_XY_xgre_ygre"/>
 		<!--P3 (kg m-2 s-1) land_ice_runoff_flux : Runoff flux over land ice is the difference between any available liquid water in the snowpack less any refreezing. Computed as the sum of rainfall and melt of snow or ice less any refreezing or water retained in the snowpack-->
 		<field id="CMIP7_mrrob" field_ref="?dummy_XY"/>
@@ -350,6 +392,8 @@
 		<!--P3 (kg m-2 s-1) net_primary_productivity_of_biomass_expressed_as_carbon : "Production of carbon" means the production of biomass expressed as the mass of carbon which it contains. Net primary production is the excess of gross primary production (rate of synthesis of biomass from inorganic precursors) by autotrophs ("producers"), for example, photosynthesis in plants or phytoplankton, over the rate at which the autotrophs themselves respire some of this biomass. "Productivity" means production per unit area. The phrase "expressed\_as" is used in the construction A\_expressed\_as\_B, where B is a chemical constituent of A. It means that the quantity indicated by the standard name is calculated solely with respect to the B contained in A, neglecting all other chemical constituents of A.-->
 		<field id="CMIP7_orog" field_ref="?dummy_XY"/>
 		<!--P2 (m) surface_altitude : height above the geoid; as defined here, "the geoid" is a surface of constant geopotential that, if the ocean were at rest, would coincide with mean sea level. Under this definition, the geoid changes as the mean volume of the ocean changes (e.g., due to glacial melt, or global warming of the ocean).  Reported here is the height above the present-day geoid (0.0 over ocean).-->
+		<field id="CMIP7_orogIs" field_ref="?dummy_XY"/>
+		<!--P2 (m) surface_altitude : quantity averaged over ice\_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
 		<field id="CMIP7_pastureFrac" field_ref="?dummy_XY_typepasture"/>
 		<!--P2 (%) area_fraction : fraction of entire grid cell  that is covered by anthropogenic pasture.-->
 		<field id="CMIP7_pastureFracC3" field_ref="?dummy_XY_typec3pastures"/>
@@ -360,8 +404,12 @@
 		<!--P2 (kg m-2) liquid_water_content_of_permafrost_layer : "where land over land", i.e., this is the total mass of liquid water contained within the permafrost layer within the land portion of a grid cell divided by the area of the land portion of the cell.-->
 		<field id="CMIP7_prra" field_ref="?dummy_XY_xgre_ygre"/>
 		<!--P2 (kg m-2 s-1) rainfall_flux : over Land Ice//quantity averaged over ice sheet (grounded ice sheet and floating ice shelf) only. Needed to analyse the impact of downscaling methods-->
+		<field id="CMIP7_prraIs" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) rainfall_flux : quantity averaged over ice\_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
 		<field id="CMIP7_prsn" field_ref="?dummy_XY_xgre_ygre"/>
 		<!--P2 (kg m-2 s-1) snowfall_flux : quantity averaged over ice sheet (grounded ice sheet and floating ice shelf) only. Needed to analyse the impact of downscaling methods-->
+		<field id="CMIP7_prsnIs" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) snowfall_flux : quantity averaged over ice\_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
 		<field id="CMIP7_prveg" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2 s-1) precipitation_flux_onto_canopy : the precipitation flux that is intercepted by the vegetation canopy (if present in model) before reaching the ground.-->
 		<field id="CMIP7_qgwr" field_ref="?dummy_XY"/>
@@ -410,8 +458,12 @@
 		<!--P2 (m3 s-1) outgoing_water_volume_transport_along_river_channel : water\_flux\_from\_upstream-->
 		<field id="CMIP7_rlds" field_ref="?dummy_XY_xgre_ygre"/>
 		<!--P3 (W m-2) surface_downwelling_longwave_flux_in_air : The surface called "surface" means the lower boundary of the atmosphere. "longwave" means longwave radiation. Downwelling radiation is radiation from above. It does not mean "net downward". When thought of as being incident on a surface, a radiative flux is sometimes called "irradiance". In addition, it is identical with the quantity measured by a cosine-collector light-meter and sometimes called "vector irradiance". In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.-->
+		<field id="CMIP7_rldsIs" field_ref="?dummy_XY"/>
+		<!--P2 (W m-2) surface_downwelling_longwave_flux_in_air : quantity averaged over ice\_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
 		<field id="CMIP7_rlus" field_ref="?dummy_XY_xgre_ygre"/>
 		<!--P3 (W m-2) surface_upwelling_longwave_flux_in_air : The surface called "surface" means the lower boundary of the atmosphere. "longwave" means longwave radiation. Upwelling radiation is radiation from below. It does not mean "net upward". When thought of as being incident on a surface, a radiative flux is sometimes called "irradiance". In addition, it is identical with the quantity measured by a cosine-collector light-meter and sometimes called "vector irradiance". In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.-->
+		<field id="CMIP7_rlusIs" field_ref="?dummy_XY"/>
+		<!--P2 (W m-2) surface_upwelling_longwave_flux_in_air : quantity averaged over ice\_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
 		<field id="CMIP7_rootd" field_ref="?dummy_XY"/>
 		<!--P1 (m) root_depth : report the maximum soil depth reachable by plant roots (if defined in model), i.e., the maximum soil depth from which they can extract moisture; report as "missing" where the land fraction is 0.-->
 		<field id="CMIP7_rsds" field_ref="?dummy_XY_xgre_ygre"/>
@@ -432,8 +484,16 @@
 		<!--P2 (W m-2) surface_upwelling_shortwave_flux_in_air : Surface Upwelling Shortwave Radiation over the portion of a land grid cell covered by snow. Can be used for computation of surface albedo.-->
 		<field id="CMIP7_rzwc" field_ref="?dummy_XY"/>
 		<!--P3 (kg m-2) mass_content_of_water_in_soil_layer_defined_by_root_depth : water\_content\_of\_root\_zone-->
+		<field id="CMIP7_sbl" field_ref="?dummy_XY_site"/>
+		<!--P2 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_water_vapor_due_to_sublimation_of_surface_snow_and_ice : The snow and ice sublimation flux is the loss of snow and ice mass from the surface resulting from their conversion to water vapor that enters the atmosphere.-->
+		<field id="CMIP7_sblIs" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_water_vapor_due_to_sublimation_of_surface_snow_and_ice : quantity averaged over ice\_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
+		<field id="CMIP7_sftflf" field_ref="?dummy_XY"/>
+		<!--P2 (%) floating_ice_shelf_area_fraction : Percentage of grid cell covered by floating ice shelf, the component of the ice sheet that is flowing over sea water-->
 		<field id="CMIP7_sftgif" field_ref="?dummy_XY"/>
 		<!--P1 (%) land_ice_area_fraction : fraction of grid cell occupied by "permanent" ice (i.e., glaciers).-->
+		<field id="CMIP7_sftgrf" field_ref="?dummy_XY"/>
+		<!--P2 (%) grounded_ice_sheet_area_fraction : Percentage of grid cell covered by grounded ice sheet-->
 		<field id="CMIP7_sftlaf" field_ref="?dummy_XY_typelkins"/>
 		<!--P2 (%) area_fraction : Fraction of horizontal land grid cell area occupied by lake.-->
 		<field id="CMIP7_shrubFrac" field_ref="?dummy_XY_typeshrub"/>
@@ -442,24 +502,48 @@
 		<!--P1 (m) cell_thickness : Thickness of Soil Layers-->
 		<field id="CMIP7_snc" field_ref="?dummy_XY"/>
 		<!--P1 (%) surface_snow_area_fraction : Fraction of each grid cell that is occupied by snow that rests on land portion of cell.-->
+		<field id="CMIP7_sncIs" field_ref="?dummy_XY"/>
+		<!--P2 (%) surface_snow_area_fraction : quantity averaged over ice\_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
 		<field id="CMIP7_snd" field_ref="?dummy_XY"/>
 		<!--P2 (m) surface_snow_thickness : where land over land, this is computed as the mean thickness of snow in the land portion of the grid cell (averaging over the entire land portion, including the snow-free fraction).  Reported as missing where the land fraction is 0.-->
+		<field id="CMIP7_snicefreez" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P3 (kg m-2 s-1) surface_snow_and_ice_refreezing_flux : Mass flux of surface meltwater which refreezes within the snowpack. Computed as the total refreezing on the land ice portion of the grid cell divided by land ice area in the grid cell.-->
+		<field id="CMIP7_snicefreezIs" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) surface_snow_and_ice_refreezing_flux : quantity averaged over ice\_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
+		<field id="CMIP7_snicem" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P2 (kg m-2 s-1) surface_snow_and_ice_melt_flux : Loss of snow and ice mass resulting from surface melting. Computed as the total surface melt on the land ice portion of the grid cell divided by land ice area in the grid cell.-->
+		<field id="CMIP7_snicemIs" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) surface_snow_and_ice_melt_flux : quantity averaged over ice\_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
 		<field id="CMIP7_snm" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2 s-1) surface_snow_melt_flux : Computed as the total surface melt water on the land portion of the grid cell divided by the land area in the grid cell; report as 0.0 for snow-free land regions; report as missing where the land fraction is 0.-->
+		<field id="CMIP7_snmIs" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) surface_snow_melt_flux : Loss of snow mass resulting from surface melting. Computed as the surface melt water from snow on the ice sheet portion of the grid cell divided by the ice\_sheet area in the grid cell; report as 0.0 for snow-free land\_ice regions; report as missing where the land fraction is 0.-->
 		<field id="CMIP7_snw" field_ref="?dummy_XY"/>
 		<!--P1 (kg m-2) surface_snow_amount : Computed as the mass of surface snow on the land portion of the grid cell divided by the land area in the grid cell; reported as missing where the land fraction is 0; excluded is snow on vegetation canopy or on sea ice.-->
 		<field id="CMIP7_sootsn" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2) soot_content_of_surface_snow : the entire land portion of the grid cell is considered, with snow soot content set to 0.0 in regions free of snow.-->
 		<field id="CMIP7_srfrad" field_ref="?dummy_XY"/>
 		<!--P2 (W m-2) surface_net_downward_radiative_flux : Net radiative flux at surface-->
+		<field id="CMIP7_strbasemag" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P3 (Pa) land_ice_basal_drag : Magnitude of basal drag at land ice base-->
 		<field id="CMIP7_sw" field_ref="?dummy_XY"/>
 		<!--P3 (kg m-2) land_surface_liquid_water_amount : Total liquid water storage, other than soil, snow or interception storage (i.e. lakes, river channel or depression storage).-->
 		<field id="CMIP7_sweLut" field_ref="?dummy_XY_landuse"/>
 		<!--P3 (m) lwe_thickness_of_surface_snow_amount : The surface called "surface" means the lower boundary of the atmosphere. "lwe" means liquid water equivalent. "Amount" means mass per unit area. The construction lwe\_thickness\_of\_X\_amount or \_content means the vertical extent of a layer of liquid water having the same mass per unit area. Surface amount refers to the amount on the ground, excluding that on the plant or vegetation canopy.-->
 		<field id="CMIP7_tas" field_ref="?dummy_XY"/>
 		<!--P2 (K) air_temperature : Hourly Temperature at 2m above the surface-->
+		<field id="CMIP7_tasIs" field_ref="?dummy_XY"/>
+		<!--P2 (K) air_temperature : quantity averaged over ice\_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
 		<field id="CMIP7_tasLut" field_ref="?dummy_XY_height2m_landuse"/>
 		<!--P3 (K) air_temperature : Air temperature is the bulk temperature of the air, not the surface (skin) temperature.-->
+		<field id="CMIP7_tendacabf" field_ref="?dummy_0d"/>
+		<!--P3 (kg s-1) tendency_of_land_ice_mass_due_to_surface_mass_balance : Greenland-->
+		<field id="CMIP7_tendlibmassbf" field_ref="?dummy_0d"/>
+		<!--P3 (kg s-1) tendency_of_land_ice_mass_due_to_basal_mass_balance : Greenland-->
+		<field id="CMIP7_tendlicalvf" field_ref="?dummy_0d"/>
+		<!--P3 (kg s-1) tendency_of_land_ice_mass_due_to_calving : Greenland-->
+		<field id="CMIP7_topg" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P2 (m) bedrock_altitude : The bedrock topography beneath the land ice-->
 		<field id="CMIP7_tpf" field_ref="?dummy_XY"/>
 		<!--P2 (m) permafrost_layer_thickness : where land over land: This is the mean thickness of the permafrost layer in the land portion of the grid cell.  Reported as missing in permafrost-free regions.-->
 		<field id="CMIP7_tran" field_ref="?dummy_XY"/>
@@ -476,6 +560,8 @@
 		<!--P3 (%) area_fraction : This is the percentage of the entire grid cell that is covered by needleleaf evergreen trees.-->
 		<field id="CMIP7_ts" field_ref="?dummy_XY_xgre_ygre"/>
 		<!--P3 (K) surface_temperature : quantity averaged over ice sheet (grounded ice sheet and floating ice shelf) only. Needed to analyse the impact of downscaling methods-->
+		<field id="CMIP7_tsIs" field_ref="?dummy_XY"/>
+		<!--P2 (K) surface_temperature : quantity averaged over ice\_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
 		<field id="CMIP7_tsl" field_ref="?dummy_XYSo_sdepth"/>
 		<!--P2 (K) soil_temperature : Temperature of each soil layer.  Reported as "missing" for grid cells occupied entirely by "sea".-->
 		<field id="CMIP7_tslsi" field_ref="?dummy_XY"/>
@@ -484,6 +570,8 @@
 		<!--P3 (K) surface_temperature : Surface temperature (i.e. temperature at which long-wave radiation emitted)-->
 		<field id="CMIP7_tsn" field_ref="?dummy_XY"/>
 		<!--P2 (K) temperature_in_surface_snow : This temperature is averaged over all the snow in the grid cell that rests on land or land ice.  When computing the time-mean here, the time samples, weighted by the mass of snow on the land portion of the grid cell, are accumulated and then divided by the sum of the weights.   Reported as "missing in regions free of snow on land.-->
+		<field id="CMIP7_tsnIs" field_ref="?dummy_XY"/>
+		<!--P2 (K) temperature_in_surface_snow : quantity averaged over ice\_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
 		<field id="CMIP7_vegFrac" field_ref="?dummy_XY_typeveg"/>
 		<!--P2 (%) area_fraction : Percentage of grid cell that is covered by vegetation.This SHOULD be the sum of tree, grass (natural and pasture), crop and shrub fractions.-->
 		<field id="CMIP7_vegHeight" field_ref="?dummy_XY"/>
@@ -504,5 +592,21 @@
 		<!--P3 (%) area_fraction : Percentage of grid cell covered by wetland. Report only one year if  fixed percentage is used, or time series if values are determined dynamically.-->
 		<field id="CMIP7_wtd" field_ref="?dummy_XY"/>
 		<!--P2 (m) water_table_depth : depth\_of\_soil\_moisture\_saturation-->
+		<field id="CMIP7_xvelbase" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P3 (m s-1) land_ice_basal_x_velocity : A velocity is a vector quantity. "x" indicates a vector component along the grid x-axis, positive with increasing x. "Land ice" means glaciers, ice-caps and ice-sheets resting on bedrock and also includes ice-shelves. "basal" means the lower boundary of the land ice.-->
+		<field id="CMIP7_xvelmean" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P3 (m s-1) land_ice_vertical_mean_x_velocity : The vertical mean land ice velocity is the average from the bedrock to the surface of the ice-->
+		<field id="CMIP7_xvelsurf" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P3 (m s-1) land_ice_surface_x_velocity : A velocity is a vector quantity. "x" indicates a vector component along the grid x-axis, positive with increasing x. "Land ice" means glaciers, ice-caps and ice-sheets resting on bedrock and also includes ice-shelves. The surface called "surface" means the lower boundary of the atmosphere.-->
+		<field id="CMIP7_yvelbase" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P3 (m s-1) land_ice_basal_y_velocity : A velocity is a vector quantity. "y" indicates a vector component along the grid y-axis, positive with increasing y. "Land ice" means glaciers, ice-caps and ice-sheets resting on bedrock and also includes ice-shelves. "basal" means the lower boundary of the land ice.-->
+		<field id="CMIP7_yvelmean" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P3 (m s-1) land_ice_vertical_mean_y_velocity : The vertical mean land ice velocity is the average from the bedrock to the surface of the ice-->
+		<field id="CMIP7_yvelsurf" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P3 (m s-1) land_ice_surface_y_velocity : A velocity is a vector quantity. "y" indicates a vector component along the grid y-axis, positive with increasing y. "Land ice" means glaciers, ice-caps and ice-sheets resting on bedrock and also includes ice-shelves. The surface called "surface" means the lower boundary of the atmosphere.'-->
+		<field id="CMIP7_zvelbase" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P3 (m s-1) land_ice_basal_upward_velocity : A velocity is a vector quantity. "Upward" indicates a vector component which is positive when directed upward (negative downward). "basal" means the lower boundary of the atmosphere-->
+		<field id="CMIP7_zvelsurf" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P3 (m s-1) land_ice_surface_upward_velocity : A velocity is a vector quantity. "Upward" indicates a vector component which is positive when directed upward (negative downward). The surface called "surface" means the lower boundary of the atmosphere-->
 	</field_definition>
 </context>

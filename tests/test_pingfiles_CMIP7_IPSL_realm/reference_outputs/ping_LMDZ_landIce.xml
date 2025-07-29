@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <context id="LMDZ">
-	<!--CMIP7 Data Request version Software 1.2.1.dev10+g5f3dcc4.d20250515 - Content v1.2.1-->
-	<!--dr2xml version 3.1-->
+	<!--CMIP7 Data Request version Software 1.2.2.dev18+g09c17e1.d20250729 - Content v1.2.2-->
+	<!--dr2xml version current_version-->
 	<!--Lab_and_model settings
-{'data_request_content_version' = 'v1.2.1',
-'data_request_path' = 'current_data_request',
+{'data_request_content_version' = 'v1.2.2',
 'data_request_used' = 'CMIP7',
 'excluded_vars' = [],
 'excluded_vars_file' = [],
@@ -34,7 +33,7 @@
 		<field id="CMIP7_hfdsn" field_ref="?dummy_XY"/>
 		<!--P2 (W m-2) surface_downward_heat_flux_in_snow : the net downward heat flux from the atmosphere into the snow that lies on land divided by the land area in the grid cell; reported as missing for snow-free land regions or where the land fraction is 0.-->
 		<field id="CMIP7_hfgeoubed" field_ref="?dummy_XY_xgre_ygre"/>
-		<!--P2 (W m-2) upward_geothermal_heat_flux_at_ground_level_in_land_ice : undef-->
+		<!--P2 (W m-2) upward_geothermal_heat_flux_at_ground_level_in_land_ice : Geothermal Heat Flux Beneath Land Ice-->
 		<field id="CMIP7_hfls" field_ref="?dummy_XY_xgre_ygre"/>
 		<!--P2 (W m-2) surface_upward_latent_heat_flux : The surface called "surface" means the lower boundary of the atmosphere. "Upward" indicates a vector component which is positive when directed upward (negative downward). The surface latent heat flux is the exchange of heat between the surface and the air on account of evaporation (including sublimation). In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.-->
 		<field id="CMIP7_hflsIs" field_ref="?dummy_XY"/>
@@ -103,19 +102,13 @@
 		<!--P3 (W m-2) surface_upwelling_longwave_flux_in_air : The surface called "surface" means the lower boundary of the atmosphere. "longwave" means longwave radiation. Upwelling radiation is radiation from below. It does not mean "net upward". When thought of as being incident on a surface, a radiative flux is sometimes called "irradiance". In addition, it is identical with the quantity measured by a cosine-collector light-meter and sometimes called "vector irradiance". In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.-->
 		<field id="CMIP7_rlusIs" field_ref="?dummy_XY"/>
 		<!--P2 (W m-2) surface_upwelling_longwave_flux_in_air : quantity averaged over ice\_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
-		<field id="CMIP7_rsds" field_ref="?dummy_XY_xgre_ygre"/>
-		<!--P3 (W m-2) surface_downwelling_shortwave_flux_in_air : Surface solar irradiance for UV calculations.-->
 		<field id="CMIP7_rsdsIs" field_ref="?dummy_XY"/>
 		<!--P2 (W m-2) surface_downwelling_shortwave_flux_in_air : quantity averaged over ice\_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
-		<field id="CMIP7_rsdsis" field_ref="?dummy_XY"/>
-		<!--P2 (W m-2) surface_downwelling_shortwave_flux_in_air : Surface Downwelling Shortwave Radiation over the ice-sheet covered portion of a grid cell, including snow. Can be used for computation of surface albedo.-->
 		<field id="CMIP7_rsus" field_ref="?dummy_XY_xgre_ygre"/>
 		<!--P3 (W m-2) surface_upwelling_shortwave_flux_in_air : The surface called "surface" means the lower boundary of the atmosphere. "shortwave" means shortwave radiation. Upwelling radiation is radiation from below. It does not mean "net upward". When thought of as being incident on a surface, a radiative flux is sometimes called "irradiance". In addition, it is identical with the quantity measured by a cosine-collector light-meter and sometimes called "vector irradiance". In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.-->
 		<field id="CMIP7_rsusIs" field_ref="?dummy_XY"/>
 		<!--P2 (W m-2) surface_upwelling_shortwave_flux_in_air : quantity averaged over ice\_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
-		<field id="CMIP7_rsusis" field_ref="?dummy_XY"/>
-		<!--P2 (W m-2) surface_upwelling_shortwave_flux_in_air : Surface Upwelling Shortwave Radiation over the ice-sheet covered portion of a grid cell, including snow. Can be used for computation of surface albedo.-->
-		<field id="CMIP7_sbl" field_ref="?dummy_XY_site"/>
+		<field id="CMIP7_sbl" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_water_vapor_due_to_sublimation_of_surface_snow_and_ice : The snow and ice sublimation flux is the loss of snow and ice mass from the surface resulting from their conversion to water vapor that enters the atmosphere.-->
 		<field id="CMIP7_sblIs" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_water_vapor_due_to_sublimation_of_surface_snow_and_ice : quantity averaged over ice\_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<context id="arpsfx">
+<context id="LMDZ">
 	<!--CMIP7 Data Request version Software 1.2.2.dev18+g09c17e1.d20250729 - Content v1.2.2-->
 	<!--dr2xml version current_version-->
 	<!--Lab_and_model settings
@@ -7,15 +7,16 @@
 'data_request_used' = 'CMIP7',
 'excluded_vars' = [],
 'excluded_vars_file' = [],
-'institution_id' = 'CNRM-CERFACS',
+'institution_id' = 'IPSL',
+'laboratory_used' = 'ipsl',
 'listof_home_vars' = 'None',
-'max_priority' = '4',
+'max_priority' = '3',
 'mips' = {'AerChemMIP2', 'C4MIP', 'CDRMIP', 'CERESMIP', 'CFMIP', 'CMIP', 'CORDEX', 'DAMIP', 'DCPP', 'FAFMIP', 'FireMIP', 'FishMIP', 'GeoMIP', 'HT-MIP/VolMIP', 'HighResMIP', 'IRRMIP', 'ISIMIP', 'ISMIP7', 'LMIP', 'LUMIP', 'LongRunMIP', 'MISOMIP2', 'NAHosMIP', 'OMIP', 'Other', 'PAMIP', 'PMIP', 'RAMIP', 'RFMIP', 'SIMIP', 'SOFIAMIP', 'ScenarioMIP', 'TIPMIP', 'VIACSAB', 'VolMIP', 'WhatIfMIP'},
 'path_extra_tables' = 'None',
-'path_special_defs' = './input/special_defs',
+'path_special_defs' = 'None',
 'ping_variables_prefix' = 'CMIP7_',
 'project' = 'ping',
-'realms_per_context' = {'arpsfx' = ['aerosol', 'atmos', 'atmosChem', 'land', 'landIce'], 'nemo' = ['ocean', 'ocnBgchem', 'seaIce']},
+'realms_per_context' = {'LMDZ' = ['atmos', 'land', 'landIce', 'atmosChem', 'aerosol'], 'nemo' = ['seaIce', 'ocean', 'ocnBgchem'], 'orchidee' = ['land', 'landIce']},
 'tierMax' = '3'}-->
 	<!--Simulation settings
 {}-->
@@ -69,36 +70,16 @@
 		<!--P2 (m-1 sr-1) volume_scattering_function_of_radiative_flux_in_air_due_to_ambient_aerosol_particles : Aerosol  Backscatter at wavelength 550nm and scattering angle 180 degrees, computed from extinction and lidar ratio-->
 		<field id="CMIP7_burntFractionAll" field_ref="?dummy_XY_typeburnt"/>
 		<!--P2 (%) area_fraction : Percentage of grid cell burned due to all fires including natural and anthropogenic fires and those associated with anthropogenic land use change-->
-		<field id="CMIP7_c13Land" field_ref="?dummy_XY"/>
-		<!--P4 (kg m-2) mass_content_of_13C_in_vegetation_and_litter_and_soil_and_forestry_and_agricultural_products : Carbon-13 mass content per unit area in vegetation (any living plants e.g. trees, shrubs, grass), litter (dead plant material in or above the soil), soil, and forestry and agricultural products (e.g. paper, cardboard, furniture, timber for construction, biofuels and food for both humans and livestock).-->
-		<field id="CMIP7_c13Litter" field_ref="?dummy_XY"/>
-		<!--P4 (kg m-2) litter_mass_content_of_13C : Carbon-13 mass content per unit area litter (dead plant material in or above the soil).-->
-		<field id="CMIP7_c13Soil" field_ref="?dummy_XY"/>
-		<!--P4 (kg m-2) soil_mass_content_of_13C : Carbon-13 mass content per unit area in soil.-->
-		<field id="CMIP7_c13Veg" field_ref="?dummy_XY"/>
-		<!--P4 (kg m-2) vegetation_mass_content_of_13C : Carbon-13 mass content per unit area in vegetation (any living plants e.g. trees, shrubs, grass).-->
-		<field id="CMIP7_c14Land" field_ref="?dummy_XY"/>
-		<!--P4 (kg m-2) mass_content_of_14C_in_vegetation_and_litter_and_soil_and_forestry_and_agricultural_products : Carbon-14 mass content per unit area in vegetation (any living plants e.g. trees, shrubs, grass), litter (dead plant material in or above the soil), soil, and forestry and agricultural products (e.g. paper, cardboard, furniture, timber for construction, biofuels and food for both humans and livestock).-->
-		<field id="CMIP7_c14Litter" field_ref="?dummy_XY"/>
-		<!--P4 (kg m-2) litter_mass_content_of_14C : Carbon-14 mass content per unit area litter (dead plant material in or above the soil).-->
-		<field id="CMIP7_c14Soil" field_ref="?dummy_XY"/>
-		<!--P4 (kg m-2) soil_mass_content_of_14C : Carbon-14 mass content per unit area in soil.-->
-		<field id="CMIP7_c14Veg" field_ref="?dummy_XY"/>
-		<!--P4 (kg m-2) vegetation_mass_content_of_14C : only requested for DECK HIST-->
 		<field id="CMIP7_c2h4" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (mol mol-1) mole_fraction_of_ethene_in_air : Mole fraction of ethene (C2H4) in air-->
 		<field id="CMIP7_c2h5oh" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (mol mol-1) mole_fraction_of_ethanol_in_air : Mole fraction of ethanol (C2H5OH) in air-->
 		<field id="CMIP7_c2h6" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (mol mol-1) mole_fraction_of_ethane_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.-->
-		<field id="CMIP7_c3PftFrac" field_ref="?dummy_XY_typec3pft"/>
-		<!--P4 (%) area_fraction : Percentage of entire grid cell  that is covered by C3 PFTs (including grass, crops, and trees).-->
 		<field id="CMIP7_c3h6" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (mol mol-1) mole_fraction_of_propene_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.-->
 		<field id="CMIP7_c3h8" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (mol mol-1) mole_fraction_of_propane_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.-->
-		<field id="CMIP7_c4PftFrac" field_ref="?dummy_XY_typec4pft"/>
-		<!--P4 (%) area_fraction : Percentage of entire grid cell  that is covered by C4 PFTs (including grass and crops).-->
 		<field id="CMIP7_c4h10" field_ref="?dummy_XYA_alevel"/>
 		<!--P2 (mol mol-1) mole_fraction_of_butane_in_air : Mole fraction of butane (C4H10) in air-->
 		<field id="CMIP7_cGeologicStorage" field_ref="?dummy_XY"/>
@@ -561,10 +542,6 @@
 		<!--P3 (kg m-2 s-1) gross_primary_productivity_of_biomass_expressed_as_carbon : Total GPP of trees in the grid cell-->
 		<field id="CMIP7_gppVgt" field_ref="?dummy_XY_vegtype"/>
 		<!--P2 (kg m-2 s-1) gross_primary_productivity_of_biomass_expressed_as_carbon : The rate of synthesis of biomass from inorganic precursors by autotrophs ("producers") expressed as the mass of carbon which it contains. For example, photosynthesis in plants or phytoplankton. The producers also respire some of this biomass and the difference is referred to as the net primary production. Reported on land-use tiles.-->
-		<field id="CMIP7_gppc13" field_ref="?dummy_XY"/>
-		<!--P4 (kg m-2 s-1) gross_primary_productivity_of_biomass_expressed_as_13C : The rate of synthesis of carbon-13 in biomass from inorganic precursors by autotrophs ("producers") expressed as the mass of carbon which it contains. For example, photosynthesis in plants or phytoplankton. The producers also respire some of this biomass and the difference is referred to as the net primary production.-->
-		<field id="CMIP7_gppc14" field_ref="?dummy_XY"/>
-		<!--P4 (kg m-2 s-1) gross_primary_productivity_of_biomass_expressed_as_14C : The rate of synthesis of carbon-14 in biomass from inorganic precursors by autotrophs ("producers") expressed as the mass of carbon which it contains. For example, photosynthesis in plants or phytoplankton. The producers also respire some of this biomass and the difference is referred to as the net primary production.-->
 		<field id="CMIP7_grassFrac" field_ref="?dummy_XY_typenatgr"/>
 		<!--P2 (%) area_fraction : Percentage of entire grid cell that is covered by natural grass.-->
 		<field id="CMIP7_grassFracC3" field_ref="?dummy_XY_typec3natg"/>
@@ -623,8 +600,6 @@
 		<!--P2 (%) relative_humidity : This is the relative humidity with respect to liquid water for T> 0 C, and with respect to ice for T<0 C.-->
 		<field id="CMIP7_hursmin" field_ref="?dummy_XY_height2m"/>
 		<!--P2 (%) relative_humidity : This is the relative humidity with respect to liquid water for T> 0 C, and with respect to ice for T<0 C.-->
-		<field id="CMIP7_hursminCrop" field_ref="?dummy_XY_height2m"/>
-		<!--P4 (%) relative_humidity : The relative humidity with respect to liquid water for T> 0 C, and with respect to ice for T<0 C.-->
 		<field id="CMIP7_hus" field_ref="?dummy_XY_plev19"/>
 		<!--P1 (1) specific_humidity : Specific humidity is the mass fraction of water vapor in (moist) air.-->
 		<field id="CMIP7_hus6" field_ref="?dummy_XY_plev6"/>
@@ -697,22 +672,12 @@
 		<!--P2 (m) land_ice_thickness : This variable identifies the thickness of a prescribed ice sheet. This information is relevant to better understand how different models treat ice. For models where an ice sheet is just orography + an ice sheet mask, the value should be set to zero. For models that explicitly resolve an ice sheet thickness, the thickness of the ice sheet should be provided.-->
 		<field id="CMIP7_loadbc" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2) atmosphere_mass_content_of_elemental_carbon_dry_aerosol_particles : The total dry mass of black carbon aerosol particles per unit area.-->
-		<field id="CMIP7_loaddust" field_ref="?dummy_XY"/>
-		<!--P4 (kg m-2) atmosphere_mass_content_of_dust_dry_aerosol_particles : The total dry mass of dust aerosol particles per unit area.-->
-		<field id="CMIP7_loadnh4" field_ref="?dummy_XY"/>
-		<!--P4 (kg m-2) atmosphere_mass_content_of_ammonium_dry_aerosol_particles : The total dry mass of ammonium aerosol particles per unit area.-->
-		<field id="CMIP7_loadno3" field_ref="?dummy_XY"/>
-		<!--P4 (kg m-2) atmosphere_mass_content_of_nitrate_dry_aerosol_particles : The total dry mass of nitrate aerosol particles per unit area.-->
 		<field id="CMIP7_loadoa" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2) atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_particles : atmosphere dry organic content: This is the vertically integrated sum of atmosphere\_primary\_organic\_content and atmosphere\_secondary\_organic\_content (see next two table entries).-->
 		<field id="CMIP7_loadpoa" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2) atmosphere_mass_content_of_primary_particulate_organic_matter_dry_aerosol_particles : The total dry mass of primary particulate organic aerosol particles per unit area.-->
 		<field id="CMIP7_loadso4" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2) atmosphere_mass_content_of_sulfate_dry_aerosol_particles : The total dry mass of sulfate aerosol particles per unit area.-->
-		<field id="CMIP7_loadsoa" field_ref="?dummy_XY"/>
-		<!--P4 (kg m-2) atmosphere_mass_content_of_secondary_particulate_organic_matter_dry_aerosol_particles : The total dry mass of secondary particulate organic aerosol particles per unit area.-->
-		<field id="CMIP7_loadss" field_ref="?dummy_XY"/>
-		<!--P4 (kg m-2) atmosphere_mass_content_of_sea_salt_dry_aerosol_particles : The total dry mass of sea salt aerosol particles per unit area.-->
 		<field id="CMIP7_lon" field_ref="?dummy_XY_site"/>
 		<!--P2 (degrees_east) longitude : Longitude is positive eastward; its units of degree\_east (or equivalent) indicate this explicitly. In a latitude-longitude system defined with respect to a rotated North Pole, the standard name of grid\_longitude should be used instead of longitude. Grid longitude is positive in the grid-eastward direction, but its units should be plain degree.-->
 		<field id="CMIP7_lossch4" field_ref="?dummy_XYA_alevel"/>
@@ -841,10 +806,6 @@
 		<!--P3 (kg m-2 s-1) surface_net_downward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_all_land_processes : Computed as npp minus heterotrophic respiration minus fire minus C leaching minus harvesting/clearing. Positive rate is into the land, negative rate is from the land.  Do not include fluxes from anthropogenic product pools to atmosphere-->
 		<field id="CMIP7_nep" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2 s-1) surface_net_downward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_all_land_processes_excluding_anthropogenic_land_use_change : Net Ecosystem Exchange-->
-		<field id="CMIP7_netAtmosLandC13Flux" field_ref="?dummy_XY"/>
-		<!--P4 (kg m-2 s-1) surface_net_downward_mass_flux_of_carbon_dioxide_expressed_as_13C_due_to_all_land_processes : Flux of carbon 31as carbon dioxide into the land. This flux should be reproducible by differencing the sum of all carbon pools (cVeg, cLitter, cSoil, and cProducts or equivalently cLand) from one time step to the next, except in the case of lateral transfer of carbon due to harvest, riverine transport of dissolved organic and/or inorganic carbon, or any other process (in which case the lateral\_carbon\_transfer\_over\_land term, see below, will be zero data).--->
-		<field id="CMIP7_netAtmosLandC14Flux" field_ref="?dummy_XY"/>
-		<!--P4 (kg m-2 s-1) surface_net_downward_mass_flux_of_carbon_dioxide_expressed_as_14C_due_to_all_land_processes : Flux of carbon-14 as carbon dioxide into the land. This flux should be reproducible by differencing the sum of all carbon pools (cVeg, cLitter, cSoil, and cProducts or equivalently cLand) from one time step to the next, except in the case of lateral transfer of carbon due to harvest, riverine transport of dissolved organic and/or inorganic carbon, or any other process (in which case the lateral\_carbon\_transfer\_over\_land term, see below, will be zero data).-->
 		<field id="CMIP7_netAtmosLandCO2Flux" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2 s-1) surface_net_downward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_all_land_processes : Flux of carbon as carbon dioxide into the land. This flux should be reproducible by differencing the sum of all carbon pools (cVeg, cLitter, cSoil, and cProducts or equivalently cLand) from one time step to the next, except in the case of lateral transfer of carbon due to harvest, riverine transport of dissolved organic and/or inorganic carbon, or any other process (in which case the lateral\_carbon\_transfer\_over\_land term, see below, will be zero data).-->
 		<field id="CMIP7_nh50" field_ref="?dummy_XYA_alevel"/>
@@ -961,14 +922,12 @@ where T is 2 m temperature (degrees F), R is relative humidity (%)-->
 		<!--P2 (kg m-2 s-1) precipitation_flux_containing_18O : Precipitation mass flux of water molecules that contain the oxygen-18 isotope (H2 18O), including solid and liquid phases.-->
 		<field id="CMIP7_pr2h" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2 s-1) precipitation_flux_containing_single_2H : Precipitation mass flux of water molecules that contain one atom of the hydrogen-2 isotope (1H 2H O), including solid and liquid phases.-->
-		<field id="CMIP7_prCrop" field_ref="?dummy_XY"/>
-		<!--P4 (kg m-2 s-1) precipitation_flux : includes both liquid and solid phases-->
 		<field id="CMIP7_prc" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2 s-1) convective_precipitation_flux : at surface; includes both liquid and solid phases.-->
 		<field id="CMIP7_prhmax" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2 s-1) precipitation_flux : In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.-->
 		<field id="CMIP7_prra" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) rainfall_flux : rainfall\_flux-->
+		<!--P2 (kg m-2 s-1) rainfall_flux : Rainfall rate at surface: Includes precipitation of all forms of water in the liquid phase-->
 		<field id="CMIP7_prraIs" field_ref="?dummy_XY"/>
 		<!--P2 (kg m-2 s-1) rainfall_flux : quantity averaged over ice\_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
 		<field id="CMIP7_prrsn" field_ref="?dummy_XY"/>
@@ -1019,10 +978,6 @@ where T is 2 m temperature (degrees F), R is relative humidity (%)-->
 		<!--P3 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_plant_respiration : Total RA of trees in the grid cell-->
 		<field id="CMIP7_raVgt" field_ref="?dummy_XY_vegtype"/>
 		<!--P3 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_plant_respiration : Carbon mass flux per unit area into atmosphere due to autotrophic respiration on land (respiration by producers) [see rh for heterotrophic production]. Calculated on vegetation type.-->
-		<field id="CMIP7_rac13" field_ref="?dummy_XY"/>
-		<!--P4 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_13C_due_to_plant_respiration : Flux of carbon-13 into the atmosphere due to plant respiration. Plant respiration is the sum of respiration by parts of plants both above and below the soil. It is assumed that all the respired carbon dioxide is emitted to the atmosphere.-->
-		<field id="CMIP7_rac14" field_ref="?dummy_XY"/>
-		<!--P4 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_14C_due_to_plant_respiration : Flux of carbon-14 into the atmosphere due to plant respiration. Plant respiration is the sum of respiration by parts of plants both above and below the soil. It is assumed that all the respired carbon dioxide is emitted to the atmosphere.-->
 		<field id="CMIP7_reffcclwtop" field_ref="?dummy_XY"/>
 		<!--P2 (m) effective_radius_of_convective_cloud_liquid_water_particles_at_convective_liquid_water_cloud_top : Cloud-Top Effective Droplet Radius in Convective Cloud-->
 		<field id="CMIP7_reffccwctop" field_ref="?dummy_XY"/>
@@ -1057,10 +1012,6 @@ where T is 2 m temperature (degrees F), R is relative humidity (%)-->
 		<!--P3 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_heterotrophic_respiration : Total RH of trees in the grid cell-->
 		<field id="CMIP7_rhVgt" field_ref="?dummy_XY_vegtype"/>
 		<!--P3 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_heterotrophic_respiration : Carbon mass flux per unit area into atmosphere due to heterotrophic respiration on land (respiration by consumers), calculated on vegetation type.-->
-		<field id="CMIP7_rhc13" field_ref="?dummy_XY"/>
-		<!--P4 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_13C_due_to_heterotrophic_respiration : Heterotrophic respiration is respiration by heterotrophs ("consumers"), which are organisms (including animals and decomposers) that consume other organisms or dead organic material, rather than synthesising organic material from inorganic precursors using energy from the environment (especially sunlight) as autotrophs ("producers") do. Heterotrophic respiration goes on within both the soil and litter pools.-->
-		<field id="CMIP7_rhc14" field_ref="?dummy_XY"/>
-		<!--P4 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_14C_due_to_heterotrophic_respiration : Heterotrophic respiration is respiration by heterotrophs ("consumers"), which are organisms (including animals and decomposers) that consume other organisms or dead organic material, rather than synthesising organic material from inorganic precursors using energy from the environment (especially sunlight) as autotrophs ("producers") do. Heterotrophic respiration goes on within both the soil and litter pools.-->
 		<field id="CMIP7_rivi" field_ref="?dummy_XY"/>
 		<!--P2 (m3 s-1) incoming_water_volume_transport_along_river_channel : water\_flux\_to\_downstream-->
 		<field id="CMIP7_rivo" field_ref="?dummy_XY"/>
@@ -1133,8 +1084,6 @@ where T is 2 m temperature (degrees F), R is relative humidity (%)-->
 		<!--P2 (W m-2) surface_downwelling_shortwave_flux_in_air : quantity averaged over ice\_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
 		<field id="CMIP7_rsdscs" field_ref="?dummy_XY"/>
 		<!--P2 (W m-2) surface_downwelling_shortwave_flux_in_air_assuming_clear_sky : Surface solar irradiance clear sky for UV calculations-->
-		<field id="CMIP7_rsdscsdiff" field_ref="?dummy_XY"/>
-		<!--P4 (W m-2) surface_diffuse_downwelling_shortwave_flux_in_air_assuming_clear_sky : Surface downwelling solar irradiance from diffuse radiation for UV calculations in clear sky conditions-->
 		<field id="CMIP7_rsdsdiff" field_ref="?dummy_XY"/>
 		<!--P3 (W m-2) surface_diffuse_downwelling_shortwave_flux_in_air : Surface Diffuse Downwelling Shortwave Radiation-->
 		<field id="CMIP7_rsdslni" field_ref="?dummy_XY"/>
@@ -1295,12 +1244,8 @@ where T is 2 m temperature (degrees F), R is relative humidity (%)-->
 		<!--P3 (K) air_temperature : Air temperature is the bulk temperature of the air, not the surface (skin) temperature.-->
 		<field id="CMIP7_tasmax" field_ref="?dummy_XY_height2m"/>
 		<!--P1 (K) air_temperature : maximum near-surface (usually, 2 meter) air temperature (add cell\_method attribute "time: max")-->
-		<field id="CMIP7_tasmaxCrop" field_ref="?dummy_XY_height2m"/>
-		<!--P4 (K) air_temperature : maximum near-surface (usually, 2 meter) air temperature (add cell\_method attribute "time: max")-->
 		<field id="CMIP7_tasmin" field_ref="?dummy_XY_height2m"/>
 		<!--P1 (K) air_temperature : minimum near-surface (usually, 2 meter) air temperature (add cell\_method attribute "time: min")-->
-		<field id="CMIP7_tasminCrop" field_ref="?dummy_XY_height2m"/>
-		<!--P4 (K) air_temperature : minimum near-surface (usually, 2 meter) air temperature (add cell\_method attribute "time: min")-->
 		<field id="CMIP7_tatp" field_ref="?dummy_XY"/>
 		<!--P2 (K) tropopause_air_temperature : 2D monthly mean thermal tropopause calculated using WMO tropopause definition on 3d temperature-->
 		<field id="CMIP7_tauu" field_ref="?dummy_XY"/>
@@ -1547,8 +1492,6 @@ WBGT = 0.567 \* T\_C + 0.393 \* e/100 + 3.94, where T\_C is temperature in degre
 		<!--P3 (m s-1) land_ice_vertical_mean_y_velocity : The vertical mean land ice velocity is the average from the bedrock to the surface of the ice-->
 		<field id="CMIP7_yvelsurf" field_ref="?dummy_XY_xgre_ygre"/>
 		<!--P3 (m s-1) land_ice_surface_y_velocity : A velocity is a vector quantity. "y" indicates a vector component along the grid y-axis, positive with increasing y. "Land ice" means glaciers, ice-caps and ice-sheets resting on bedrock and also includes ice-shelves. The surface called "surface" means the lower boundary of the atmosphere.'-->
-		<field id="CMIP7_zfull" field_ref="?dummy_XYA_alevel"/>
-		<!--P4 (m) height_above_reference_ellipsoid : Provide only if altitude of full model levels is fixed-->
 		<field id="CMIP7_zg" field_ref="?dummy_XY_plev19"/>
 		<!--P1 (m) geopotential_height : Geopotential is the sum of the specific gravitational potential energy relative to the geoid and the specific centripetal potential energy. Geopotential height is the geopotential divided by the standard acceleration due to gravity. It is numerically similar to the altitude (or geometric height) and not to the quantity with standard name height, which is relative to the surface.-->
 		<field id="CMIP7_zg925" field_ref="?dummy_XY_p925"/>
