@@ -11,6 +11,7 @@ Variable considered: AERmon.jno2
 Find elements list of kind priority_level from vocabulary server.
 Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
 Priority_retain 2
+Find elements list of kind time_subsets from vocabulary server.
 Variable considered: AERmon.pod0
 Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
 Priority_retain 2

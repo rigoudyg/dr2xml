@@ -17,19 +17,19 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(
 from tests.tools_for_tests import create_config_elements, TestPing
 
 
-class TestPingFilesAllCNRM(unittest.TestCase, TestPing):
+class TestPingFilesAllrealmIPSL(unittest.TestCase, TestPing):
     """
-    Test ping files generation for CMIP7 at CNRM
+    Test ping files generation for CMIP7 at IPSL
     """
     def setUp(self):
         config = create_config_elements(
-            simulation="pingfiles_CMIP7_CNRM",
-            contexts=["nemo", "arpsfx"],
+            simulation="pingfiles_CMIP7_IPSL_realm",
+            contexts=["nemo", "orchidee", "LMDZ"],
             year=None,
             select="no",
 	        is_ping=True,
-            filename="ping_{content}.xml",
-            by_realm=False,
+            filename="ping_{content}_%s.xml",
+            by_realm=True,
             debug=True
         )
         for elt in config:

@@ -17,7 +17,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(
 from tests.tools_for_tests import create_config_elements, TestPing
 
 
-class TestPingFilesAll(unittest.TestCase, TestPing):
+class TestPingFilesAllRealmCNRM(unittest.TestCase, TestPing):
     """
     Test ping files generation for CMIP7 at CNRM
     """

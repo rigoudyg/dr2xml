@@ -57,7 +57,7 @@ class DataRequest(DataRequestBasic):
         else:
             logger.error(f"Unable to find out collection {collection}")
             raise ValueError(f"Unable to find out collection {collection}")
-        if rep not in ["CMORvar", ]:
+        if collection not in ["CMORvar", ]:
             new_rep, rep = rep, ListWithItems()
             rep.extend(new_rep)
         return rep
@@ -85,7 +85,14 @@ class DataRequest(DataRequestBasic):
         return self.data_request.find_element("experiment", experiment).label
 
     def get_cmor_var_id_by_label(self, label):
-        return self.data_request.find_element("variable", label).id
+        physical_parameter = self.data_request.find_element("physical_parameter", label, default=None)
+        if physical_parameter is None:
+            return list()
+        else:
+            rep = self.data_request.filter_elements_per_request("variable",
+                                                                requests=dict(physical_parameter=physical_parameter),
+                                                                print_warning_bcv=False)
+            return [elt.id for elt in rep]
 
     def get_element_uid(self, id=None, elt_type=None, error_msg=None, raise_on_error=False, check_print_DR_errors=True,
                         check_print_stdnames_error=False, **kwargs):
@@ -128,11 +135,15 @@ class DataRequest(DataRequestBasic):
         return sorted(rep)
 
     def get_grids_dict(self):
-        return OrderedDict()
+        rep = OrderedDict()
+        dims = self.get_list_by_id("coordinates_and_dimensions")
+        for dim in dims.items:
+            rep[dim.name] = dim.id
+        return rep
 
     def get_dimensions_dict(self):
         rep = OrderedDict()
-        for spshp in self.get_list_by_id("spatial_shape"):
+        for spshp in self.get_list_by_id("spatial_shape").items:
             dims = [elt.name for elt in spshp.dimensions]
             new_dims = list()
             for key in ["longitude", "latitude"]:
@@ -140,7 +151,8 @@ class DataRequest(DataRequestBasic):
                     dims.remove(key)
                     new_dims.append(key)
             new_dims.extend(sorted(dims))
-            rep[new_dims] = spshp.name
+            new_dims = "|".join([str(dim) for dim in new_dims])
+            rep[new_dims] = str(spshp.name)
         return rep
 
     def _is_timesubset_applicable(self, year, select_on_year, time_subset):
@@ -214,7 +226,8 @@ def initialize_data_request():
         data_request_content_version = internal_dict["data_request_content_version"]
         content = get_transformed_content(version=data_request_content_version,
                                           force_retrieve=False)
-        data_request = DataRequest(CMIP7DataRequest.from_separated_inputs(**content))
+        data_request = DataRequest(CMIP7DataRequest.from_separated_inputs(**content), print_DR_errors=True,
+                                   print_DR_stdname_errors=False)
     return data_request
 
 
