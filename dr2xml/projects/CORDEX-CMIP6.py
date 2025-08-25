@@ -12,8 +12,8 @@ from dr2xml.projects.projects_interface_definitions import ParameterSettings, Va
 
 
 def build_filename(frequency, prefix, source_id, expid_in_filename, date_range, var_type, list_perso_dev_file, label,
-                   mipVarLabel, domain_id, driving_source_id, driving_variant_label, rcm_version_id, institution_id,
-                   source_configuration_id, use_cmorvar=False):
+                   mipVarLabel, domain_id, driving_source_id, driving_variant_label, institution_id,
+                   version_realization, use_cmorvar=False):
     if "fx" in frequency:
         varname_for_filename = label
     else:
@@ -25,8 +25,8 @@ def build_filename(frequency, prefix, source_id, expid_in_filename, date_range, 
         if label in ["tsland", ]:
             varname_for_filename = "tsland"
     filename = "_".join(([elt for elt in [varname_for_filename, domain_id, driving_source_id, expid_in_filename,
-                                          driving_variant_label, institution_id, source_id, rcm_version_id,
-                                          source_configuration_id, frequency] if
+                                          driving_variant_label, institution_id, source_id,
+                                          version_realization, frequency] if
                           len(str(elt)) > 0]))
     if var_type in ["perso", "dev"]:
         with open(list_perso_dev_file, mode="a", encoding="utf-8") as list_perso_and_dev:
@@ -62,9 +62,9 @@ common_values = dict(
     conventions_version=ParameterSettings(
         key="conventions_version",
         default_values=[
-            ValueSettings(key_type="config", keys="CMIP6_conventions_version")
-        ],
-        help="Version of the conventions used."
+            "CF-1.11",
+            ValueSettings(key_type="laboratory", keys="conventions_version")
+        ]
     ),
     HDL=ParameterSettings(
         key="HDL",
@@ -73,22 +73,6 @@ common_values = dict(
             ValueSettings(key_type="laboratory", keys="HDL"),
             "21.14103"
         ]
-    ),
-    variant_label=ParameterSettings(
-        key="variant_label",
-        default_values=[
-            ValueSettings(
-                key_type="combine",
-                keys=[
-                    ValueSettings(key_type="internal", keys="realization_index"),
-                    ValueSettings(key_type="common", keys="initialization_index"),
-                    ValueSettings(key_type="common", keys="physics_index"),
-                    ValueSettings(key_type="common", keys="forcing_index")
-                ],
-                fmt="r{}i{}p{}f{}"
-            )
-        ],
-        help="Label of the variant done."
     ),
     domain=ParameterSettings(
         key="domain",
@@ -100,8 +84,7 @@ common_values = dict(
                     ValueSettings(key_type="internal", keys="context")
                 ]
             )
-        ],
-        help="Dictionary which contains, for each context, the associated domain."
+        ]
     ),
     domain_id=ParameterSettings(
         key="domain_id",
@@ -113,58 +96,7 @@ common_values = dict(
                     ValueSettings(key_type="internal", keys="context")
                 ]
             )
-        ],
-        help="Dictionary which contains, for each context, the associated domain id."
-    ),
-    version_realisation=ParameterSettings(
-        key="version_realisation",
-        default_values=[
-            ValueSettings(
-                key_type="simulation",
-                keys="version_realisation"
-            )
-        ],
-        help="Version of the realisation done."
-    ),
-    driving_source_id=ParameterSettings(
-        key="driving_source_id",
-        default_values=[
-            ValueSettings(
-                key_type="simulation",
-                keys="driving_source_id"
-            )
-        ],
-        help="Id of the driving model."
-    ),
-    driving_variant_label=ParameterSettings(
-        key="driving_variant_label",
-        default_values=[
-            ValueSettings(
-                key_type="simulation",
-                keys="driving_variant_label"
-            )
-        ],
-        help="Id of the driving variant."
-    ),
-    driving_experiment_id=ParameterSettings(
-        key="driving_experiment_id",
-        default_values=[
-            ValueSettings(
-                key_type="simulation",
-                keys="driving_experiment_id"
-            )
-        ],
-        help="Id of the experiment which drives the current simulation."
-    ),
-    driving_institution_id=ParameterSettings(
-        key="driving_institution_id",
-        default_values=[
-            ValueSettings(
-                key_type="simulation",
-                keys="driving_institution_id"
-            )
-        ],
-        help="Id of the institution of the driving model."
+        ]
     ),
     driving_experiment=ParameterSettings(
         key="driving_experiment",
@@ -173,8 +105,53 @@ common_values = dict(
                 key_type="simulation",
                 keys="driving_experiment"
             )
-        ],
-        help="Id of the experiment which drives the current simulation."
+        ]
+    ),
+    driving_experiment_id=ParameterSettings(
+        key="driving_experiment_id",
+        default_values=[
+            ValueSettings(
+                key_type="simulation",
+                keys="driving_experiment_id"
+            )
+        ]
+    ),
+    driving_institution_id=ParameterSettings(
+        key="driving_institution_id",
+        default_values=[
+            ValueSettings(
+                key_type="simulation",
+                keys="driving_institution_id"
+            )
+        ]
+    ),
+    driving_source_id=ParameterSettings(
+        key="driving_source_id",
+        default_values=[
+            ValueSettings(
+                key_type="simulation",
+                keys="driving_source_id"
+            )
+        ]
+    ),
+    driving_variant_label=ParameterSettings(
+        key="driving_variant_label",
+        default_values=[
+            ValueSettings(
+                key_type="simulation",
+                keys="driving_variant_label"
+            )
+        ]
+    ),
+    version_realization=ParameterSettings(
+        key="version_realization",
+        default_values=[
+            ValueSettings(
+                key_type="simulation",
+                keys="version_realization"
+            ),
+            "v1-r1"
+        ]
     ),
     Lambert_conformal_longitude_of_central_meridian=ParameterSettings(
         key="Lambert_conformal_longitude_of_central_meridian",
@@ -183,8 +160,7 @@ common_values = dict(
                 key_type="simulation",
                 keys="Lambert_conformal_longitude_of_central_meridian"
             )
-        ],
-        help="Longitude of central meridian of the Lambert conformal projection."
+        ]
     ),
     Lambert_conformal_standard_parallel=ParameterSettings(
         key="Lambert_conformal_standard_parallel",
@@ -193,8 +169,7 @@ common_values = dict(
                 key_type="simulation",
                 keys="Lambert_conformal_standard_parallel"
             )
-        ],
-        help="Standard parallel of the Lambert conformal projection."
+        ]
     ),
     Lambert_conformal_latitude_of_projection_origin=ParameterSettings(
         key="Lambert_conformal_latitude_of_projection_origin",
@@ -203,19 +178,8 @@ common_values = dict(
                 key_type="simulation",
                 keys="Lambert_conformal_latitude_of_projection_origin"
             )
-        ],
-        help="Latitude of central meridian of the Lambert conformal projection."
+        ]
     ),
-    rcm_version_id=ParameterSettings(
-        key="rcm_version_id",
-        default_values=[
-            ValueSettings(
-                key_type="simulation",
-                keys="rcm_version_id"
-            )
-        ],
-        help="Version id of the regional model used."
-    )
 )
 
 project_settings = dict(
@@ -225,12 +189,10 @@ project_settings = dict(
         comments_constraints=dict(
             CV_version=ParameterSettings(
                 key="CV_version",
-                help="Controled vocabulary version used.",
                 default_values=["CMIP6-CV version ??", ]
             ),
             conventions_version=ParameterSettings(
                 key="conventions_version",
-                help="Conventions version used.",
                 default_values=[
                     ValueSettings(key_type="common", keys="conventions_version", fmt="CMIP6_conventions_version {}")
                 ]
@@ -258,25 +220,28 @@ project_settings = dict(
                             domain_id=ValueSettings(key_type="common", keys="domain_id"),
                             driving_source_id=ValueSettings(key_type="common", keys="driving_source_id"),
                             driving_variant_label=ValueSettings(key_type="common", keys="driving_variant_label"),
-                            rcm_version_id=ValueSettings(key_type="common", keys="rcm_version_id"),
-                            institution_id=ValueSettings(key_type="common", keys="institution_id"),
-                            source_configuration_id=ValueSettings(key_type="common", keys="source_configuration_id")
+                            institution_id=ValueSettings(key_type="internal", keys="institution_id"),
+                            version_realization=ValueSettings(key_type="common", keys="version_realization")
                         )
                     ))
                 ],
                 fatal=True
             )
         ),
-        vars_list=["activity_id", "contact", "data_specs_version", "dr2xml_version", "expid_in_filename",
-                   "external_variables", "frequency", "grid", "grid_label", "nominal_resolution", "comment", "history",
-                   "institution_id", "domain", "domain_id", "driving_source_id", "driving_variant_label",
-                   "driving_experiment_id", "driving_experiment", "driving_institution_id",
+        vars_list=["activity_id", "comment", "contact", "conventions_version", "dr2xml_version", 
+                    "domain", "domain_id", 
+                   "driving_experiment", "driving_experiment_id", "driving_institution_id",
+                   "driving_source_id", "driving_variant_label",
+                   "expid_in_filename", # EXPID
+                   "external_variables", "frequency", "grid",
+                   "history","institution","institution_id",
                    "Lambert_conformal_longitude_of_central_meridian", "Lambert_conformal_standard_parallel",
-                   "Lambert_conformal_latitude_of_projection_origin", "institution", "parent_experiment_id",
-                   "parent_mip_era", "parent_activity_id", "parent_source_id", "parent_time_units",
-                   "parent_variant_label", "branch_time_in_parent", "branch_time_in_child", "product", "mip_era",
-                   "realization_index", "realm", "references", "source", "source_id", "source_type", "table_id",
-                   "title", "variable_id", "version_realisation"],
+                   "Lambert_conformal_latitude_of_projection_origin",
+                   "license",  "mip_era", "nominal_resolution",
+                   "product", "project_id",
+                   "realm", "references", "source", "source_id", "source_type", 
+                   "title", "variable_id", "version_realization"],
+        # rajoutés par xios : creation_date,   tracking_id
         vars_constraints=dict(
             variable_id=ParameterSettings(
                 key="variable_id",
@@ -286,65 +251,73 @@ project_settings = dict(
             ),
             nominal_resolution=ParameterSettings(
                 key="nominal_resolution",
-                output_key="native_resolution",
-                help="Nominal resolution of the model."
+                output_key="native_resolution"
             ),
-            driving_institution_id=ParameterSettings(
-                key="driving_institution_id",
-                help="Id of the institution of the driving model."
-            ),
-            version_realisation=ParameterSettings(
-                key="version_realisation",
+            version_realization=ParameterSettings(
+                key="version_realization",
                 default_values=[
-                    ValueSettings(key_type="common", keys="version_realisation")
+                    ValueSettings(key_type="common", keys="version_realization")
+                ]
+            ),
+            conventions_version=ParameterSettings(
+                key="conventions_version",
+                default_values=[
+                    ValueSettings(key_type="common", keys="conventions_version")
                 ],
-                help="Version of the realisation done."
+                output_key="Conventions"
             ),
             domain=ParameterSettings(
                 key="domain",
                 default_values=[
                     ValueSettings(key_type="common", keys="domain")
-                ],
-                help="Dictionary which contains, for each context, the associated domain."
+                ]
             ),
             domain_id=ParameterSettings(
                 key="domain_id",
                 default_values=[
                     ValueSettings(key_type="common", keys="domain_id")
-                ],
-                help="Dictionary which contains, for each context, the associated domain id."
+                ]
             ),
             driving_source_id=ParameterSettings(
                 key="driving_source_id",
                 default_values=[
                     ValueSettings(key_type="common", keys="driving_source_id")
                 ],
-                fatal=True,
-                help="Member of the simulation which drives the simulation."
+                fatal=True
             ),
             driving_variant_label=ParameterSettings(
                 key="driving_variant_label",
                 default_values=[
                     ValueSettings(key_type="common", keys="driving_variant_label")
                 ],
-                fatal=True,
-                help="Id of the driving variant."
+                fatal=True
             ),
             driving_experiment_id=ParameterSettings(
                 key="driving_experiment_id",
                 default_values=[
                     ValueSettings(key_type="common", keys="driving_experiment_id")
                 ],
-                fatal=True,
-                help="Id of the experiment which drives the current simulation."
+                fatal=True
             ),
             driving_experiment=ParameterSettings(
                 key="driving_experiment",
                 default_values=[
                     ValueSettings(key_type="common", keys="driving_experiment")
                 ],
-                fatal=True,
-                help="Id of the experiment which drives the current simulation."
+                fatal=True
+            ),
+            driving_institution_id=ParameterSettings(
+                key="driving_institution_id",
+                default_values=[
+                    ValueSettings(key_type="common", keys="driving_institution_id")
+                ],
+                fatal=True
+            ),
+            further_info_url=ParameterSettings(
+                key="further_info_url",
+                default_values=[
+                    ValueSettings(key_type="laboratory", keys="info_url"),
+                ]
             ),
             Lambert_conformal_longitude_of_central_meridian=ParameterSettings(
                 key="Lambert_conformal_longitude_of_central_meridian",
@@ -357,8 +330,7 @@ project_settings = dict(
                         check_value=ValueSettings(key_type="internal", keys="context"),
                         check_to_do="eq", reference_values="surfex"
                     )
-                ],
-                help="Longitude of central meridian of the Lambert conformal projection."
+                ]
             ),
             Lambert_conformal_standard_parallel=ParameterSettings(
                 key="Lambert_conformal_standard_parallel",
@@ -371,8 +343,7 @@ project_settings = dict(
                         check_value=ValueSettings(key_type="internal", keys="context"),
                         check_to_do="eq", reference_values="surfex"
                     )
-                ],
-                help="Standard parallel of the Lambert conformal projection."
+                ]
             ),
             Lambert_conformal_latitude_of_projection_origin=ParameterSettings(
                 key="Lambert_conformal_latitude_of_projection_origin",
@@ -385,21 +356,59 @@ project_settings = dict(
                         check_value=ValueSettings(key_type="internal", keys="context"),
                         check_to_do="eq", reference_values="surfex"
                     )
-                ],
-                help="Latitude of central meridian of the Lambert conformal projection."
+                ]
+            ),
+            license=ParameterSettings(
+                key="license",
+                default_values=[
+                    ValueSettings(key_type="laboratory", keys="license"),
+                ]
+            ),
+            mip_era=ParameterSettings(
+                key="mip_era",
+                default_values=[
+                    ValueSettings(key_type="simulation", keys="mip_era"),
+                    ValueSettings(key_type="laboratory", keys="mip_era"),
+                    "CMIP6"
+                ]
             ),
             product=ParameterSettings(
                 key="product",
-                default_values=["output", ]
+                default_values=["model-output", ]
             ),
-            source=ParameterSettings(
-                key="source",
-                fatal=True,
-                output_key="project_id"
+            project_id=ParameterSettings(
+                key="project_id",
+                default_values=["CORDEX-CMIP6", ]
             ),
             source_id=ParameterSettings(
                 key="source_id",
-                output_key="model_id"
+                default_values=[
+                    ValueSettings(key_type="simulation", keys="source_id"),
+                ]
+            ),
+            source=ParameterSettings(
+                key="source",
+                default_values=[
+			ValueSettings(
+				key_type="laboratory",
+				keys=[
+					"source_description",
+					ValueSettings(key_type="internal", keys="source_id")
+				]
+			)
+                ]
+            ),
+            source_type=ParameterSettings(
+                key="source_type",
+                default_values=[
+			ValueSettings(
+				key_type="laboratory",
+				keys=[
+					"source_types",
+					ValueSettings(key_type="internal", keys="source_id")
+				]
+			)
+                ]
             ),
             title=ParameterSettings(
                 key="title",
@@ -408,22 +417,12 @@ project_settings = dict(
                         key_type="combine",
                         keys=[
                             ValueSettings(key_type="internal", keys="source_id"),
-                            "CMIP6",
-                            ValueSettings(key_type="common", keys="activity_id"),
-                            ValueSettings(key_type="simulation", keys="expid_in_filename")
+                            "CORDEX-CMIP6",
+                            ValueSettings(key_type="common", keys="expid_in_filename"),
+                            ValueSettings(key_type="common", keys="driving_experiment")
                         ],
-                        fmt="{} model output prepared for {} and {} / {} simulation"
+                        fmt="{} model output prepared for {} / {} simulation driven by {}"
                     ),
-                    ValueSettings(
-                        key_type="combine",
-                        keys=[
-                            ValueSettings(key_type="internal", keys="source_id"),
-                            "CMIP6",
-                            ValueSettings(key_type="common", keys="activity_id"),
-                            ValueSettings(key_type="internal", keys="experiment_id")
-                        ],
-                        fmt="{} model output prepared for {} / {} {}"
-                    )
                 ]
             )
         )
@@ -442,8 +441,7 @@ project_settings = dict(
         vars_constraints=dict(
             grid_mapping=ParameterSettings(
                 key="grid_mapping",
-                help="Grid mapping associated with the file.",
-                default_values=["Lambert_Conformal", ],
+                default_values=["crs", ],
                 conditions=[
                     ConditionSettings(check_value=ValueSettings(key_type="internal", keys="context"),
                                       check_to_do="eq", reference_values="surfex")
