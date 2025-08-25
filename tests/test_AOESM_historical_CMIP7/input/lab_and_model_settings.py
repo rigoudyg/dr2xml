@@ -12,8 +12,8 @@ lab_and_model_settings = {
     'references': 'http://www.umr-cnrm.fr/cmip6/references',
     # 'excluded_tables': ['Eyr', 'Oyr', 'Odec', 'IfxAnt', 'ImonAnt'],
     'realms_per_context': {
-        'nemo': ['seaIce', 'ocean', 'ocnBgChem'],
-        'surfex': ['atmos', 'atmosChem', 'aerosol', 'land', 'aerosol','landIce'],
+        'nemo': ['seaIce', 'ocean', 'ocnBgchem'],
+        'surfex': ['atmos', 'atmosChem', 'aerosol', 'land', 'landIce'],
         'trip': []
     },
     'fx_from_file': {
@@ -158,14 +158,8 @@ lab_and_model_settings = {
     'institution_id': 'CNRM-CERFACS',
     'excluded_spshapes': ['XYA-na', 'XYG-na', 'na-A'],
     'mips': {
-        'HR': {"CERESMIP", "PAMIP", "SIMIP", "OMIP", "SOFIAMIP", "LMIP", "RFMIP", "AerChemMIP2", "GeoMIP", "TIPMIP",
-             "DAMIP", "PMIP", "FAFMIP", "DCPP", "CDRMIP", "NAHosMIP", "ISMIP7", "CMIP", "ScenarioMIP", "HighResMIP",
-             "LUMIP", "Other", "VolMIP", "HT-MIP/VolMIP", "CORDEX", "CFMIP", "C4MIP", "WhatIfMIP", "VIACSAB", "RAMIP",
-             "FireMIP", "IRRMIP", "LongRunMIP", "MISOMIP2", "FishMIP", "ISIMIP"},
-        'LR': {"CERESMIP", "PAMIP", "SIMIP", "OMIP", "SOFIAMIP", "LMIP", "RFMIP", "AerChemMIP2", "GeoMIP", "TIPMIP",
-             "DAMIP", "PMIP", "FAFMIP", "DCPP", "CDRMIP", "NAHosMIP", "ISMIP7", "CMIP", "ScenarioMIP", "HighResMIP",
-             "LUMIP", "Other", "VolMIP", "HT-MIP/VolMIP", "CORDEX", "CFMIP", "C4MIP", "WhatIfMIP", "VIACSAB", "RAMIP",
-             "FireMIP", "IRRMIP", "LongRunMIP", "MISOMIP2", "FishMIP", "ISIMIP"}
+        'HR': {},
+        'LR': {}
     },
     'included_opportunities': ['dafc7392-8c95-11ef-944e-41a8eb05f654'],
     'non_standard_axes': {

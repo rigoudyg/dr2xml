@@ -3,7 +3,7 @@
 *
 *              dr2xml version:  current_version
 *   CMIP6 conventions version:  v6.2.4
-*  CMIP7 Data Request version:  Software 1.2.2.dev18+g09c17e1.d20250729 - Content v1.2.2
+*  CMIP7 Data Request version:  Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2
 
 *
  **************************************************
@@ -23,7 +23,7 @@ Info: No HOMEvars list provided.
 
 Realms for these CMORvars: aerosol atmos
 Processing realm 'ocean' of context 'nemo' -- no variable asked (skip)
-Processing realm 'ocnBgChem' of context 'nemo' -- no variable asked (skip)
+Processing realm 'ocnBgchem' of context 'nemo' -- no variable asked (skip)
 Processing realm 'seaIce' of context 'nemo' -- no variable asked (skip)
 processing file current_directory/test_AOESM_historical_CMIP7/input/xml/ping_surfex.xml:
 OK current_directory/test_AOESM_historical_CMIP7/input/xml/ping_surfex.xml
@@ -46,7 +46,7 @@ Some Statistics on actually written variables per variable...
 *
 *              dr2xml version:  current_version
 *   CMIP6 conventions version:  v6.2.4
-*  CMIP7 Data Request version:  Software 1.2.2.dev18+g09c17e1.d20250729 - Content v1.2.2
+*  CMIP7 Data Request version:  Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2
 
 *
  **************************************************
@@ -283,7 +283,7 @@ Warnings about cell methods (with var list)
 *
 *              dr2xml version:  current_version
 *   CMIP6 conventions version:  v6.2.4
-*  CMIP7 Data Request version:  Software 1.2.2.dev18+g09c17e1.d20250729 - Content v1.2.2
+*  CMIP7 Data Request version:  Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2
 
 *
  **************************************************

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <context id="nemo">
-	<!--CMIP7 Data Request version Software 1.2.2.dev18+g09c17e1.d20250729 - Content v1.2.2-->
+	<!--CMIP7 Data Request version Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2-->
 	<!--CMIP6-CV version ??-->
 	<!--CMIP6_conventions_version v6.2.4-->
 	<!--dr2xml version current_version-->
@@ -32,7 +32,7 @@
 'institution_id' = 'CNRM-CERFACS',
 'max_file_size_in_floats' = '4000000000.0',
 'max_priority' = '2',
-'mips' = {'HR' = {'AerChemMIP2', 'C4MIP', 'CDRMIP', 'CERESMIP', 'CFMIP', 'CMIP', 'CORDEX', 'DAMIP', 'DCPP', 'FAFMIP', 'FireMIP', 'FishMIP', 'GeoMIP', 'HT-MIP/VolMIP', 'HighResMIP', 'IRRMIP', 'ISIMIP', 'ISMIP7', 'LMIP', 'LUMIP', 'LongRunMIP', 'MISOMIP2', 'NAHosMIP', 'OMIP', 'Other', 'PAMIP', 'PMIP', 'RAMIP', 'RFMIP', 'SIMIP', 'SOFIAMIP', 'ScenarioMIP', 'TIPMIP', 'VIACSAB', 'VolMIP', 'WhatIfMIP'}, 'LR' = {'AerChemMIP2', 'C4MIP', 'CDRMIP', 'CERESMIP', 'CFMIP', 'CMIP', 'CORDEX', 'DAMIP', 'DCPP', 'FAFMIP', 'FireMIP', 'FishMIP', 'GeoMIP', 'HT-MIP/VolMIP', 'HighResMIP', 'IRRMIP', 'ISIMIP', 'ISMIP7', 'LMIP', 'LUMIP', 'LongRunMIP', 'MISOMIP2', 'NAHosMIP', 'OMIP', 'Other', 'PAMIP', 'PMIP', 'RAMIP', 'RFMIP', 'SIMIP', 'SOFIAMIP', 'ScenarioMIP', 'TIPMIP', 'VIACSAB', 'VolMIP', 'WhatIfMIP'}},
+'mips' = {'HR' = {}, 'LR' = {}},
 'non_standard_attributes' = {'arpege_minor_version' = '6.3.2', 'nemo_gelato_commit' = '49095b3accd5d4c_6524fe19b00467a', 'xios_commit' = '1442-shuffle'},
 'non_standard_axes' = {'basin' = ('basin', 'global_ocean atlantic_arctic_ocean indian_pacific_ocean dummy dummy'), 'dbze' = 'dbze', 'effectRadIc' = 'effectRadIc', 'effectRadL' = 'effectRadL', 'klev' = 'alevel', 'klev_half' = 'alevel', 'oline' = 'oline', 'siline' = 'siline', 'soil_carbon_pools' = ('soilpools', 'fast medium slow'), 'sza5' = 'sza5', 'vegtype' = ('vegtype', 'Bare_soil Rock Permanent_snow Temperate_broad-leaved_decidus Boreal_needleaf_evergreen Tropical_broad-leaved_evergreen C3_crop C4_crop Irrigated_crop C3_grass C4_grass Wetland Tropical_broad-leaved_decidus Temperate_broad-leaved_evergreen Temperate_needleaf_evergreen Boreal_broad-leaved_decidus Boreal_needleaf_decidus Tundra_grass Shrub')},
 'orphan_variables' = {'nemo' = [''], 'surfex' = ['siconca', 'albsn', 'albsrfc'], 'trip' = ['areacellr', 'dgw', 'drivw', 'qgwr', 'rivi', 'rivo', 'waterDpth', 'wtd', 'fwtd', 'fldf', 'carbw', 'carbdis', 'carbin']},
@@ -40,7 +40,7 @@
 'ping_variables_prefix' = 'CMIP7_',
 'print_stats_per_var_label' = 'True',
 'project' = 'CMIP7',
-'realms_per_context' = {'nemo' = ['seaIce', 'ocean', 'ocnBgChem'], 'surfex' = ['atmos', 'atmosChem', 'aerosol', 'land', 'aerosol', 'landIce'], 'trip' = []},
+'realms_per_context' = {'nemo' = ['seaIce', 'ocean', 'ocnBgchem'], 'surfex' = ['atmos', 'atmosChem', 'aerosol', 'land', 'landIce'], 'trip' = []},
 'references' = 'http://www.umr-cnrm.fr/cmip6/references',
 'sampling_timestep' = {'HR' = {'nemo' = '1800.0', 'surfex' = '900.0', 'trip' = '1800.0'}, 'LR' = {'nemo' = '1800.0', 'surfex' = '900.0', 'trip' = '1800.0'}},
 'sizes' = {'HR' = ['1514100', '75', '259200', '91', '30', '14', '128'], 'LR' = ['106428', '75', '32768', '91', '30', '14', '128']},
