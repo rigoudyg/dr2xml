@@ -11,4 +11,5 @@ Parameters available in settings
    CMIP6 project <projects/CMIP6>
    CMIP7 project <projects/CMIP7>
    CORDEX project <projects/CORDEX>
+   CORDEX-CMIP6 project <projects/CORDEX-CMIP6>
    ping project <projects/ping>
