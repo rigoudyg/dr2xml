@@ -9,7 +9,7 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 
 from collections import defaultdict
 
-from utilities.logger import get_logger
+from logger import get_logger
 from dr2xml.settings_interface import get_settings_values
 from dr2xml.utils import print_struct, Dr2xmlError
 from .generic_data_request import select_data_request_CMORvars_for_lab
@@ -38,37 +38,32 @@ def check_exclusion(var, *exclusions):
     return tests, reasons
 
 
-def select_variables_to_be_processed():
+def select_variables_to_be_processed(year, context, select):
     """
     Return the list of variables to be processed.
     """
     internal_dict = get_settings_values("internal")
-    context = internal_dict["context"]
     logger = get_logger()
     #
     # --------------------------------------------------------------------
     # Extract CMOR variables for the experiment and year and lab settings
     # --------------------------------------------------------------------
-    mip_vars_list = gather_AllSimpleVars()
+    mip_vars_list = gather_AllSimpleVars(year, select)
     # Group vars per realm
     svars_per_realm = defaultdict(list)
     for svar in mip_vars_list:
-        for realm in svar.modeling_realm:
-            if svar not in svars_per_realm[realm]:
-                add = not any([test_variables_similar(svar, ovar) for ovar in svars_per_realm[realm]])
-                # Settings may allow for duplicate var in two tables.
-                # In DR01.00.21, this actually applies to very few fields (ps-Aermon, tas-ImonAnt, areacellg)
-                if internal_dict['allow_duplicates'] or add:
-                    svars_per_realm[realm].append(svar)
-                else:
-                    logger.warning("Not adding duplicate %s (from %s) for realm %s" % (svar.label, svar.mipTable, realm))
+        realm = svar.modeling_realm
+        if svar not in svars_per_realm[realm]:
+            add = not any([test_variables_similar(svar, ovar) for ovar in svars_per_realm[realm]])
+            # Settings may allow for duplicate var in two tables.
+            # In DR01.00.21, this actually applies to very few fields (ps-Aermon, tas-ImonAnt, areacellg)
+            if internal_dict['allow_duplicates'] or add:
+                svars_per_realm[realm].append(svar)
             else:
-                logger.warning("Duplicate svar %s %s" % (svar.label, svar.grids))
-    list_svars_per_realms = set(list(svars_per_realm))
-    if None in list_svars_per_realms:
-        list_svars_per_realms = list_svars_per_realms & {""} - {None}
-    list_svars_per_realms = sorted(list(list_svars_per_realms))
-    logger.info(f"\nRealms for these CMORvars: {' '.join(list_svars_per_realms)}".strip(" "))
+                logger.warning("Not adding duplicate %s (from %s) for realm %s" % (svar.label, svar.mipTable, realm))
+        else:
+            logger.warning("Duplicate svar %s %s" % (svar.label, svar.grid))
+    logger.info("\nRealms for these CMORvars: %s" % " ".join(sorted(list(svars_per_realm))))
     #
     # --------------------------------------------------------------------
     # Select on context realms, grouping by table
@@ -129,18 +124,28 @@ def select_variables_to_be_processed():
     return svars_per_table
 
 
-def gather_AllSimpleVars():
+def gather_AllSimpleVars(year=False, select="on_expt_and_year"):
     """
     List of mip variables asked
+    :param year: year when the variables are created
+    :param select: selection criteria
     :return: list of mip variables
     """
     logger = get_logger()
     internal_dict = get_settings_values("internal")
-    mip_vars_list = select_data_request_CMORvars_for_lab()
+    if select in ["on_expt_and_year", ""]:
+        mip_vars_list = select_data_request_CMORvars_for_lab(True, year)
+    elif select in ["on_expt", ]:
+        mip_vars_list = select_data_request_CMORvars_for_lab(True, None)
+    elif select in ["no", ]:
+        mip_vars_list = select_data_request_CMORvars_for_lab(False, None)
+    else:
+        logger.error("Choice %s is not allowed for arg 'select'" % select)
+        raise Dr2xmlError("Choice %s is not allowed for arg 'select'" % select)
     #
     if internal_dict['listof_home_vars']:
         exp = internal_dict['experiment_for_requests']
-        mip_vars_list = process_home_vars(mip_vars_list, internal_dict["select_mips"], expid=exp)
+        mip_vars_list = process_home_vars(mip_vars_list, internal_dict["mips"][get_settings_values("internal_values", "grid_choice")], expid=exp)
     else:
         logger.info("Info: No HOMEvars list provided.")
     return mip_vars_list
