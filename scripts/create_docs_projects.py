@@ -29,6 +29,7 @@ args = parser.parse_args()
 def write_documentation(output_directory, package_directory):
 	projects_list = os.listdir(os.sep.join([package_directory, "dr2xml", "projects"]))
 	projects_list = [elt.replace(".py", "") for elt in projects_list if elt.endswith(".py")]
+	projects_list = sorted(projects_list)
 	projects_list.remove("dr2xml")
 	projects_list.insert(0, "dr2xml")
 	projects_list.remove("basics")

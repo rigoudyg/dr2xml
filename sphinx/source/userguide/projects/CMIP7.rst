@@ -1,5 +1,5 @@
-Parameters available for project CORDEX
-=======================================
+Parameters available for project CMIP7
+======================================
 
 Internal values
 ---------------
@@ -16,6 +16,16 @@ Internal values
          
          - laboratory[CFsubhr_frequency]
          - '1ts'
+      
+      num type: 'string'
+      
+   CV_experiment
+      
+      Controlled vocabulary file containing experiment characteristics.
+      
+      fatal: False
+      
+      default values: read_json_file('{}{}_experiment_id.json'.format(dict[cvspath], internal[project]))[experiment_id][internal[experiment_id]]
       
       num type: 'string'
       
@@ -38,7 +48,7 @@ Internal values
       
       fatal: True
       
-      default values: []
+      default values: internal[CV_experiment][additional_allowed_model_components]
       
       num type: 'string'
       
@@ -976,7 +986,7 @@ Internal values
       
       fatal: True
       
-      default values: []
+      default values: internal[CV_experiment][required_model_components]
       
       num type: 'string'
       
@@ -1978,16 +1988,6 @@ Common values
 .. glossary::
    :sorted:
    
-   CORDEX_domain
-      
-      Dictionary which contains, for each context, the associated CORDEX domain.
-      
-      fatal: False
-      
-      default values: simulation[CORDEX_domain][internal[context]]
-      
-      num type: 'string'
-      
    HDL
       
       HDL associated with the project.
@@ -1998,37 +1998,7 @@ Common values
          
          - simulation[HDL]
          - laboratory[HDL]
-         - '21.14103'
-      
-      num type: 'string'
-      
-   Lambert_conformal_latitude_of_projection_origin
-      
-      Latitude of central meridian of the Lambert conformal projection.
-      
-      fatal: False
-      
-      default values: simulation[Lambert_conformal_latitude_of_projection_origin]
-      
-      num type: 'string'
-      
-   Lambert_conformal_longitude_of_central_meridian
-      
-      Longitude of central meridian of the Lambert conformal projection.
-      
-      fatal: False
-      
-      default values: simulation[Lambert_conformal_longitude_of_central_meridian]
-      
-      num type: 'string'
-      
-   Lambert_conformal_standard_parallel
-      
-      Standard parallel of the Lambert conformal projection.
-      
-      fatal: False
-      
-      default values: simulation[Lambert_conformal_standard_parallel]
+         - '21.14100'
       
       num type: 'string'
       
@@ -2042,6 +2012,7 @@ Common values
          
          - simulation[activity_id]
          - laboratory[activity_id]
+         - internal[CV_experiment][activity_id]
       
       num type: 'string'
       
@@ -2242,46 +2213,6 @@ Common values
       
       num type: 'string'
       
-   driving_experiment
-      
-      Id of the experiment which drives the current simulation.
-      
-      fatal: False
-      
-      default values: simulation[driving_experiment]
-      
-      num type: 'string'
-      
-   driving_experiment_name
-      
-      Name of the experiment which drives the current simulation.
-      
-      fatal: False
-      
-      default values: simulation[driving_experiment_name]
-      
-      num type: 'string'
-      
-   driving_model_ensemble_member
-      
-      Member of the simulation which drives the simulation.
-      
-      fatal: False
-      
-      default values: simulation[driving_model_ensemble_member]
-      
-      num type: 'string'
-      
-   driving_model_id
-      
-      Id of the driving model.
-      
-      fatal: False
-      
-      default values: simulation[driving_model_id]
-      
-      num type: 'string'
-      
    experiment
       
       Name of the experiment.
@@ -2362,7 +2293,20 @@ Common values
       
       fatal: False
       
-      default values: laboratory[institution]
+      default values:
+         
+         - laboratory[institution]
+         - read_json_file('{}{}_institution_id.json'.format(dict[cvspath], internal[project]))[institution_id][internal[institution_id]]
+      
+      num type: 'string'
+      
+   license
+      
+      File where the license associated with the produced output files can be found.
+      
+      fatal: False
+      
+      default values: read_json_file('{}{}_license.json'.format(dict[cvspath], internal[project]))[license][0]
       
       num type: 'string'
       
@@ -2373,6 +2317,21 @@ Common values
       fatal: False
       
       default values: 'dr2xml_list_perso_and_dev_file_names'
+      
+      num type: 'string'
+      
+   member_id
+      
+      Id of the member done.
+      
+      fatal: False
+      
+      default values:
+         
+         - '{}-{}'.format(common[sub_experiment_id], common[variant_label])
+         - common[variant_label]
+      
+      forbidden patterns: 'none-.*'
       
       num type: 'string'
       
@@ -2414,6 +2373,7 @@ Common values
          - simulation[activity_id]
          - laboratory[parent_activity_id]
          - laboratory[activity_id]
+         - internal[CV_experiment][parent_activity_id]
       
       num type: 'string'
       
@@ -2427,6 +2387,7 @@ Common values
          
          - simulation[parent_experiment_id]
          - laboratory[parent_experiment_id]
+         - internal[CV_experiment][parent_experiment_id]
       
       num type: 'string'
       
@@ -2506,16 +2467,6 @@ Common values
       
       num type: 'string'
       
-   rcm_version_id
-      
-      Version id of the regional model used.
-      
-      fatal: False
-      
-      default values: simulation[rcm_version_id]
-      
-      num type: 'string'
-      
    references
       
       References associated with the simulation.
@@ -2532,7 +2483,10 @@ Common values
       
       fatal: False
       
-      default values: laboratory[source]
+      default values:
+         
+         - read_json_file('{}{}_source_id.json'.format(dict[cvspath], internal[project]))[source_id][internal[source_id]]make_source_string('source_id'= internal[source_id])
+         - laboratory[source]
       
       num type: 'string'
       
@@ -3343,10 +3297,6 @@ Project settings
             
             default values: variable.cell_methods
             
-            corrections:
-               
-               - 'area: time: mean': 'time: mean'
-            
             num type: 'string'
             
          cell_methods_mode
@@ -3463,6 +3413,22 @@ Project settings
             
             num type: 'string'
             
+         positive
+            
+            Way the field should be interpreted.
+            
+            fatal: False
+            
+            default values: variable.positive
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            num type: 'string'
+            
          history
             
             History associated with the field.
@@ -3502,10 +3468,6 @@ Project settings
                - ''
                - 'None'
                - None
-            
-            corrections:
-               
-               - 'area: time: mean': 'time: mean'
             
             num type: 'string'
             
@@ -3557,22 +3519,22 @@ Project settings
             
             num type: 'string'
             
-         grid_mapping
+         interval_operation
             
-            Grid mapping associated with the file.
+            Interval associated with the operation done on the field.
             
             fatal: False
             
-            default values: 'Lambert_Conformal'
+            default values: []
             
             conditions:
                Condition:
                
-                  check value: internal[context]
+                  check value: dict[operation]
                   
-                  check to do: 'eq'
+                  check to do: 'neq'
                   
-                  reference values: 'surfex'
+                  reference values: 'once'
                   
             
             num type: 'string'
@@ -3678,7 +3640,7 @@ Project settings
             
             fatal: True
             
-            default values: build_filename('frequency'= variable.frequency, 'prefix'= common[prefix], 'source_id'= internal[source_id], 'expid_in_filename'= common[expid_in_filename], 'date_range'= common[date_range], 'var_type'= variable.type, 'list_perso_dev_file'= common[list_perso_dev_file], 'label'= variable.label, 'mipVarLabel'= variable.mipVarLabel, 'use_cmorvar'= internal[use_cmorvar_label_in_filename], 'CORDEX_domain'= common[CORDEX_domain], 'driving_model_id'= common[driving_model_id], 'driving_model_ensemble_member'= common[driving_model_ensemble_member], 'rcm_version_id'= common[rcm_version_id])
+            default values: build_filename('frequency'= variable.frequency, 'prefix'= common[prefix], 'table'= dict[table_id], 'source_id'= internal[source_id], 'expid_in_filename'= common[expid_in_filename], 'member_id'= common[member_id], 'grid_label'= dict[grid_label], 'date_range'= common[date_range], 'var_type'= variable.type, 'list_perso_dev_file'= common[list_perso_dev_file], 'label'= variable.label, 'mipVarLabel'= variable.mipVarLabel, 'use_cmorvar'= internal[use_cmorvar_label_in_filename])
             
             num type: 'string'
             
@@ -4030,6 +3992,95 @@ Project settings
             
             num type: 'string'
             
+         description
+            
+            Description of the file.
+            
+            fatal: False
+            
+            default values:
+               
+               - common[description]
+               - internal[CV_experiment][description]
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            conditions:
+               Condition:
+               
+                  check value: internal[experiment_id]
+                  
+                  check to do: 'eq'
+                  
+                  reference values: common[expid_in_filename]
+                  
+            
+            num type: 'string'
+            
+         title_desc
+            
+            Title of the file.
+            
+            output key: 'title'
+            
+            fatal: False
+            
+            default values:
+               
+               - common[description]
+               - internal[CV_experiment][description]
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            conditions:
+               Condition:
+               
+                  check value: internal[experiment_id]
+                  
+                  check to do: 'eq'
+                  
+                  reference values: common[expid_in_filename]
+                  
+            
+            num type: 'string'
+            
+         experiment
+            
+            Experiment associated with the simulation.
+            
+            fatal: False
+            
+            default values:
+               
+               - common[experiment]
+               - internal[CV_experiment][experiment]
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            conditions:
+               Condition:
+               
+                  check value: internal[experiment_id]
+                  
+                  check to do: 'eq'
+                  
+                  reference values: common[expid_in_filename]
+                  
+            
+            num type: 'string'
+            
          external_variables
             
             External variables associated with the file.
@@ -4042,6 +4093,16 @@ Project settings
             
             num type: 'string'
             
+         forcing_index
+            
+            Forcing index associated with the simulation.
+            
+            fatal: False
+            
+            default values: common[forcing_index]
+            
+            num type: 'int'
+            
          frequency
             
             Frequency associated with the file.
@@ -4049,6 +4110,36 @@ Project settings
             fatal: False
             
             default values: variable.frequency
+            
+            num type: 'string'
+            
+         further_info_url
+            
+            Url to obtain further information associated with the simulation.
+            
+            fatal: False
+            
+            default values: 'https://furtherinfo.es-doc.org/{}.{}.{}.{}.{}.{}'.format(variable.mip_era, internal[institution_id], internal[source_id], common[expid_in_filename], common[sub_experiment_id], common[variant_label])
+            
+            skip values:
+               
+               - ''
+               - 'None'
+               - None
+            
+            conditions:
+               Condition:
+               
+                  check value: laboratory[mip_era]
+                  
+                  check to do: 'eq'
+                  
+               Condition:
+               
+                  check value: simulation[mip_era]
+                  
+                  check to do: 'eq'
+                  
             
             num type: 'string'
             
@@ -4190,143 +4281,23 @@ Project settings
             
             num type: 'string'
             
+         initialization_index
+            
+            Initialization index associated with the simulation.
+            
+            fatal: False
+            
+            default values: common[initialization_index]
+            
+            num type: 'int'
+            
          institution_id
             
             Institution id associated with the simulation.
             
-            output key: 'institute_id'
-            
             fatal: True
             
             default values: internal[institution_id]
-            
-            num type: 'string'
-            
-         CORDEX_domain
-            
-            Dictionary which contains, for each context, the associated CORDEX domain.
-            
-            fatal: False
-            
-            default values: common[CORDEX_domain]
-            
-            num type: 'string'
-            
-         driving_model_id
-            
-            Id of the driving model.
-            
-            fatal: True
-            
-            default values: common[driving_model_id]
-            
-            num type: 'string'
-            
-         driving_model_ensemble_member
-            
-            Member of the simulation which drives the simulation.
-            
-            fatal: True
-            
-            default values: common[driving_model_ensemble_member]
-            
-            num type: 'string'
-            
-         driving_experiment_name
-            
-            Name of the experiment which drives the current simulation.
-            
-            fatal: True
-            
-            default values: common[driving_experiment_name]
-            
-            num type: 'string'
-            
-         driving_experiment
-            
-            Id of the experiment which drives the current simulation.
-            
-            fatal: True
-            
-            default values: common[driving_experiment]
-            
-            num type: 'string'
-            
-         Lambert_conformal_longitude_of_central_meridian
-            
-            Longitude of central meridian of the Lambert conformal projection.
-            
-            fatal: False
-            
-            default values: common[Lambert_conformal_longitude_of_central_meridian]
-            
-            skip values:
-               
-               - ''
-               - 'None'
-               - None
-            
-            conditions:
-               Condition:
-               
-                  check value: internal[context]
-                  
-                  check to do: 'eq'
-                  
-                  reference values: 'surfex'
-                  
-            
-            num type: 'string'
-            
-         Lambert_conformal_standard_parallel
-            
-            Standard parallel of the Lambert conformal projection.
-            
-            fatal: False
-            
-            default values: common[Lambert_conformal_standard_parallel]
-            
-            skip values:
-               
-               - ''
-               - 'None'
-               - None
-            
-            conditions:
-               Condition:
-               
-                  check value: internal[context]
-                  
-                  check to do: 'eq'
-                  
-                  reference values: 'surfex'
-                  
-            
-            num type: 'string'
-            
-         Lambert_conformal_latitude_of_projection_origin
-            
-            Latitude of central meridian of the Lambert conformal projection.
-            
-            fatal: False
-            
-            default values: common[Lambert_conformal_latitude_of_projection_origin]
-            
-            skip values:
-               
-               - ''
-               - 'None'
-               - None
-            
-            conditions:
-               Condition:
-               
-                  check value: internal[context]
-                  
-                  check to do: 'eq'
-                  
-                  reference values: 'surfex'
-                  
             
             num type: 'string'
             
@@ -4337,6 +4308,29 @@ Project settings
             fatal: True
             
             default values: common[institution]
+            
+            num type: 'string'
+            
+         license
+            
+            License associated with the file.
+            
+            fatal: False
+            
+            default values: common[license]fill_license('institution_id'= internal[institution_id], 'info_url'= common[info_url])
+            
+            num type: 'string'
+            
+         mip_era
+            
+            MIP associated with the simulation.
+            
+            fatal: False
+            
+            default values:
+               
+               - common[mip_era]
+               - variable.mip_era
             
             num type: 'string'
             
@@ -4497,6 +4491,42 @@ Project settings
             
             num type: 'string'
             
+         branch_method
+            
+            Branch method of the simulation.
+            
+            fatal: False
+            
+            default values: []
+            
+            cases:
+               Case:
+               
+                  conditions:
+                        Condition:
+                        
+                           check value: common[parent_experiment_id]
+                           
+                           check to do: 'neq'
+                           
+                           reference values:
+                                 
+                                 - 'no parent'
+                                 - ''
+                                 - 'None'
+                           
+                  
+                  value: common[branch_method]
+                  
+               Case:
+               
+                  conditions: True
+                  
+                  value: 'no parent'
+                  
+            
+            num type: 'string'
+            
          branch_time_in_parent
             
             Branch time of the simulation in the parent's one.
@@ -4563,13 +4593,23 @@ Project settings
             
             num type: 'double'
             
+         physics_index
+            
+            Physics index associated with the simulation.
+            
+            fatal: False
+            
+            default values: common[physics_index]
+            
+            num type: 'int'
+            
          product
             
             Type of content of the file.
             
             fatal: False
             
-            default values: 'output'
+            default values: 'model-output'
             
             num type: 'string'
             
@@ -4591,6 +4631,10 @@ Project settings
             
             default values: variable.modeling_realm<lambda>()
             
+            corrections:
+               
+               - 'ocnBgChem': 'ocnBgchem'
+            
             num type: 'string'
             
          references
@@ -4607,8 +4651,6 @@ Project settings
             
             Model associated with the simulation.
             
-            output key: 'project_id'
-            
             fatal: True
             
             default values: common[source]
@@ -4619,11 +4661,39 @@ Project settings
             
             Model id associated with the simulation.
             
-            output key: 'model_id'
-            
             fatal: False
             
             default values: internal[source_id]
+            
+            num type: 'string'
+            
+         source_type
+            
+            Model type associated with the simulation.
+            
+            fatal: False
+            
+            default values: internal[source_type]
+            
+            num type: 'string'
+            
+         sub_experiment_id
+            
+            Id of the sub experiment associated with the simulation.
+            
+            fatal: False
+            
+            default values: common[sub_experiment_id]
+            
+            num type: 'string'
+            
+         sub_experiment
+            
+            Name of the sub experiment associated with the simulation.
+            
+            fatal: False
+            
+            default values: common[sub_experiment]
             
             num type: 'string'
             
@@ -4645,8 +4715,8 @@ Project settings
             
             default values:
                
-               - '{} model output prepared for {} and {} / {} simulation'.format(internal[source_id], CMIP6, common[activity_id], simulation[expid_in_filename])
-               - '{} model output prepared for {} / {} {}'.format(internal[source_id], CMIP6, common[activity_id], internal[experiment_id])
+               - '{} model output prepared for {} and {} / {} simulation'.format(internal[source_id], internal[project], common[activity_id], simulation[expid_in_filename])
+               - '{} model output prepared for {} / {} {}'.format(internal[source_id], internal[project], common[activity_id], internal[experiment_id])
             
             num type: 'string'
             
@@ -4657,6 +4727,26 @@ Project settings
             fatal: False
             
             default values: variable.mipVarLabel
+            
+            num type: 'string'
+            
+         variant_info
+            
+            Variant information associated with the simulation.
+            
+            fatal: False
+            
+            default values: '. Information provided by this attribute may in some cases be flawed. Users can find more comprehensive and up-to-date documentation via the further_info_url global attribute.'.format(common[variant_info])
+            
+            num type: 'string'
+            
+         variant_label
+            
+            Variant label associated with the simulation.
+            
+            fatal: False
+            
+            default values: common[variant_label]
             
             num type: 'string'
             
