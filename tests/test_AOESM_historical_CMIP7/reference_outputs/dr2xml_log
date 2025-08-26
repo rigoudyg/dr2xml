@@ -3,7 +3,7 @@
 *
 *              dr2xml version:  current_version
 *   CMIP6 conventions version:  v6.2.4
-*  CMIP7 Data Request version:  Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2
+*  CMIP7 Data Request version:  Software current_cmip7_dr_software - Content v1.2.2
 
 *
  **************************************************
@@ -46,7 +46,7 @@ Some Statistics on actually written variables per variable...
 *
 *              dr2xml version:  current_version
 *   CMIP6 conventions version:  v6.2.4
-*  CMIP7 Data Request version:  Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2
+*  CMIP7 Data Request version:  Software current_cmip7_dr_software - Content v1.2.2
 
 *
  **************************************************
@@ -283,7 +283,7 @@ Warnings about cell methods (with var list)
 *
 *              dr2xml version:  current_version
 *   CMIP6 conventions version:  v6.2.4
-*  CMIP7 Data Request version:  Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2
+*  CMIP7 Data Request version:  Software current_cmip7_dr_software - Content v1.2.2
 
 *
  **************************************************

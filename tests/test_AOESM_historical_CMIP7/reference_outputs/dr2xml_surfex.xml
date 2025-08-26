@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <context id="surfex">
-	<!--CMIP7 Data Request version Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2-->
+	<!--CMIP7 Data Request version Software current_cmip7_dr_software - Content v1.2.2-->
 	<!--CMIP6-CV version ??-->
 	<!--CMIP6_conventions_version v6.2.4-->
 	<!--dr2xml version current_version-->
@@ -75,7 +75,7 @@
 		<file id="cod_AERday_gr" name="IOXDIRcod_AERday_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -144,7 +144,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="clivi_CFday_gr" name="IOXDIRclivi_CFday_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -213,7 +213,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="cltcalipso_CFday_gr" name="IOXDIRcltcalipso_CFday_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -282,7 +282,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="cltisccp_CFday_gr" name="IOXDIRcltisccp_CFday_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -351,7 +351,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="clwvi_CFday_gr" name="IOXDIRclwvi_CFday_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -420,7 +420,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="pctisccp_CFday_gr" name="IOXDIRpctisccp_CFday_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -489,7 +489,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="cl_CFday_gr" name="IOXDIRcl_CFday_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="1y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -562,7 +562,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="cli_CFday_gr" name="IOXDIRcli_CFday_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="1y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -635,7 +635,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="clw_CFday_gr" name="IOXDIRclw_CFday_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="1y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -708,7 +708,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="prw_Eday_gr" name="IOXDIRprw_Eday_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -777,7 +777,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="clt_day_gr" name="IOXDIRclt_day_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -846,7 +846,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="pr_day_gr" name="IOXDIRpr_day_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -915,7 +915,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="tas_day_gr" name="IOXDIRtas_day_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -984,7 +984,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="ta_day_gr" name="IOXDIRta_day_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="5y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -1053,7 +1053,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="cod_AERmon_gr" name="IOXDIRcod_AERmon_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -1122,7 +1122,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="hus_Amon_gr" name="IOXDIRhus_Amon_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -1191,7 +1191,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="ta_Amon_gr" name="IOXDIRta_Amon_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -1260,7 +1260,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="cli_Amon_gr" name="IOXDIRcli_Amon_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="25y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -1333,7 +1333,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="clw_Amon_gr" name="IOXDIRclw_Amon_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="25y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -1406,7 +1406,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="clivi_Amon_gr" name="IOXDIRclivi_Amon_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -1475,7 +1475,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="clt_Amon_gr" name="IOXDIRclt_Amon_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -1544,7 +1544,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="clwvi_Amon_gr" name="IOXDIRclwvi_Amon_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -1613,7 +1613,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="pr_Amon_gr" name="IOXDIRpr_Amon_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -1682,7 +1682,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="prw_Amon_gr" name="IOXDIRprw_Amon_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -1751,7 +1751,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="rlds_Amon_gr" name="IOXDIRrlds_Amon_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -1820,7 +1820,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="rldscs_Amon_gr" name="IOXDIRrldscs_Amon_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -1889,7 +1889,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="rlut_Amon_gr" name="IOXDIRrlut_Amon_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -1958,7 +1958,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="rlutcs_Amon_gr" name="IOXDIRrlutcs_Amon_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -2027,7 +2027,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="rsds_Amon_gr" name="IOXDIRrsds_Amon_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -2096,7 +2096,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="rsdscs_Amon_gr" name="IOXDIRrsdscs_Amon_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -2165,7 +2165,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="rsut_Amon_gr" name="IOXDIRrsut_Amon_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -2234,7 +2234,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="rsutcs_Amon_gr" name="IOXDIRrsutcs_Amon_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -2303,7 +2303,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="tas_Amon_gr" name="IOXDIRtas_Amon_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -2372,7 +2372,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="clcalipso_CFmon_gr" name="IOXDIRclcalipso_CFmon_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -2441,7 +2441,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="cltcalipso_CFmon_gr" name="IOXDIRcltcalipso_CFmon_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -2510,7 +2510,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="cltisccp_CFmon_gr" name="IOXDIRcltisccp_CFmon_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -2579,7 +2579,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="pctisccp_CFmon_gr" name="IOXDIRpctisccp_CFmon_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -2648,7 +2648,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="clisccp_CFmon_gr" name="IOXDIRclisccp_CFmon_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="50y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -2717,7 +2717,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="clmodis_CFmon_gr" name="IOXDIRclmodis_CFmon_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="50y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -2786,7 +2786,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="cltmodis_Emon_gr" name="IOXDIRcltmodis_Emon_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -2855,7 +2855,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="tas_3hr_gr" name="IOXDIRtas_3hr_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="3h" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d%h%mi" split_start_offset="3h" split_end_offset="0s" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -2924,7 +2924,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="clt_3hr_gr" name="IOXDIRclt_3hr_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="3h" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d%h%mi" split_start_offset="90mi" split_end_offset="-90mi" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -2993,7 +2993,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="pr_3hr_gr" name="IOXDIRpr_3hr_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="3h" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d%h%mi" split_start_offset="90mi" split_end_offset="-90mi" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -3062,7 +3062,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="clivi_E3hr_gr" name="IOXDIRclivi_E3hr_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="3h" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d%h%mi" split_start_offset="90mi" split_end_offset="-90mi" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -3131,7 +3131,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="clwvi_E3hr_gr" name="IOXDIRclwvi_E3hr_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="3h" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d%h%mi" split_start_offset="90mi" split_end_offset="-90mi" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -3200,7 +3200,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="prw_E3hr_gr" name="IOXDIRprw_E3hr_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="3h" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d%h%mi" split_start_offset="90mi" split_end_offset="-90mi" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -3269,7 +3269,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="rlut_E3hr_gr" name="IOXDIRrlut_E3hr_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="3h" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d%h%mi" split_start_offset="90mi" split_end_offset="-90mi" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -3338,7 +3338,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="rlutcs_E3hr_gr" name="IOXDIRrlutcs_E3hr_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="3h" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d%h%mi" split_start_offset="90mi" split_end_offset="-90mi" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -3407,7 +3407,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="rsut_E3hr_gr" name="IOXDIRrsut_E3hr_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="3h" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d%h%mi" split_start_offset="90mi" split_end_offset="-90mi" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -3476,7 +3476,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="rsutcs_E3hr_gr" name="IOXDIRrsutcs_E3hr_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="3h" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d%h%mi" split_start_offset="90mi" split_end_offset="-90mi" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
@@ -3545,7 +3545,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="cltcalipso_E3hrPt_gr" name="IOXDIRcltcalipso_E3hrPt_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="3h" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo%d%h%mi" split_start_offset="3h" split_end_offset="0s" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2 </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>

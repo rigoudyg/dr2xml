@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <context id="nemo">
-	<!--CMIP6 Data Request version 01.00.21.post1-->
+	<!--CMIP6 Data Request version current_cmip6_dr-->
 	<!--CMIP6-CV version ??-->
 	<!--CMIP6_conventions_version v6.2.4-->
 	<!--dr2xml version current_version-->
@@ -91,7 +91,7 @@
 		<file id="diftrblo2d_HOMOday_gn" name="IOXDIRdiftrblo2d_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -131,7 +131,7 @@
 		<file id="diftrxylo2d_HOMOday_gn" name="IOXDIRdiftrxylo2d_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -171,7 +171,7 @@
 		<file id="mxldepth_HOMOday_gn" name="IOXDIRmxldepth_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -211,7 +211,7 @@
 		<file id="rhop_HOMOday_gn" name="IOXDIRrhop_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -251,7 +251,7 @@
 		<file id="somixhgt_HOMOday_gn" name="IOXDIRsomixhgt_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -291,7 +291,7 @@
 		<file id="tml_HOMOday_gn" name="IOXDIRtml_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -331,7 +331,7 @@
 		<file id="tmlatf_HOMOday_gn" name="IOXDIRtmlatf_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -371,7 +371,7 @@
 		<file id="tmlfor_HOMOday_gn" name="IOXDIRtmlfor_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -411,7 +411,7 @@
 		<file id="tmlldf_HOMOday_gn" name="IOXDIRtmlldf_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -451,7 +451,7 @@
 		<file id="tmlres_HOMOday_gn" name="IOXDIRtmlres_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -491,7 +491,7 @@
 		<file id="tmltot_HOMOday_gn" name="IOXDIRtmltot_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -531,7 +531,7 @@
 		<file id="tmlyad_HOMOday_gn" name="IOXDIRtmlyad_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -571,7 +571,7 @@
 		<file id="tmlzad_HOMOday_gn" name="IOXDIRtmlzad_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -611,7 +611,7 @@
 		<file id="tmlzdf_HOMOday_gn" name="IOXDIRtmlzdf_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -651,7 +651,7 @@
 		<file id="votke_HOMOday_gn" name="IOXDIRvotke_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -691,7 +691,7 @@
 		<file id="votkeavt_HOMOday_gn" name="IOXDIRvotkeavt_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -731,7 +731,7 @@
 		<file id="friver_Noneday_gn" name="IOXDIRfriver_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -771,7 +771,7 @@
 		<file id="hfds_Noneday_gn" name="IOXDIRhfds_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -811,7 +811,7 @@
 		<file id="rsntds_Noneday_gn" name="IOXDIRrsntds_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -851,7 +851,7 @@
 		<file id="sfdsi_Noneday_gn" name="IOXDIRsfdsi_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -891,7 +891,7 @@
 		<file id="so_Noneday_gn" name="IOXDIRso_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello volcello </variable>
@@ -931,7 +931,7 @@
 		<file id="sos_Noneday_gn" name="IOXDIRsos_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -971,7 +971,7 @@
 		<file id="thetao_Noneday_gn" name="IOXDIRthetao_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello volcello </variable>
@@ -1011,7 +1011,7 @@
 		<file id="tos_Noneday_gn" name="IOXDIRtos_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -1051,7 +1051,7 @@
 		<file id="uo_Noneday_gn" name="IOXDIRuo_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -1089,7 +1089,7 @@
 		<file id="vo_Noneday_gn" name="IOXDIRvo_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -1127,7 +1127,7 @@
 		<file id="wfo_Noneday_gn" name="IOXDIRwfo_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -1167,7 +1167,7 @@
 		<file id="wfonocorr_Noneday_gn" name="IOXDIRwfonocorr_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -1207,7 +1207,7 @@
 		<file id="wo_Noneday_gn" name="IOXDIRwo_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -1245,7 +1245,7 @@
 		<file id="zos_Noneday_gn" name="IOXDIRzos_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_day_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -1285,7 +1285,7 @@
 		<file id="tos_None1hr_gn" name="IOXDIRtos_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_1hr_%start_date%-%end_date%" output_freq="1h" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo%d%h%mi" split_start_offset="30mi" split_end_offset="-30mi" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -1325,7 +1325,7 @@
 		<file id="rhop_HOMOmon_gn" name="IOXDIRrhop_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -1365,7 +1365,7 @@
 		<file id="strdatf_HOMOmon_gn" name="IOXDIRstrdatf_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -1404,7 +1404,7 @@
 		<file id="strdcdt_HOMOmon_gn" name="IOXDIRstrdcdt_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -1443,7 +1443,7 @@
 		<file id="strdldf_HOMOmon_gn" name="IOXDIRstrdldf_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -1482,7 +1482,7 @@
 		<file id="strdsad_HOMOmon_gn" name="IOXDIRstrdsad_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -1521,7 +1521,7 @@
 		<file id="strdtot_HOMOmon_gn" name="IOXDIRstrdtot_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -1560,7 +1560,7 @@
 		<file id="strdxad_HOMOmon_gn" name="IOXDIRstrdxad_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -1599,7 +1599,7 @@
 		<file id="strdyad_HOMOmon_gn" name="IOXDIRstrdyad_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -1638,7 +1638,7 @@
 		<file id="strdzad_HOMOmon_gn" name="IOXDIRstrdzad_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -1677,7 +1677,7 @@
 		<file id="strdzdf_HOMOmon_gn" name="IOXDIRstrdzdf_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -1716,7 +1716,7 @@
 		<file id="ttrdatf_HOMOmon_gn" name="IOXDIRttrdatf_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -1755,7 +1755,7 @@
 		<file id="ttrdldf_HOMOmon_gn" name="IOXDIRttrdldf_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -1794,7 +1794,7 @@
 		<file id="ttrdqns_HOMOmon_gn" name="IOXDIRttrdqns_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -1833,7 +1833,7 @@
 		<file id="ttrdqsr_HOMOmon_gn" name="IOXDIRttrdqsr_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -1872,7 +1872,7 @@
 		<file id="ttrdsad_HOMOmon_gn" name="IOXDIRttrdsad_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -1911,7 +1911,7 @@
 		<file id="ttrdtot_HOMOmon_gn" name="IOXDIRttrdtot_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -1950,7 +1950,7 @@
 		<file id="ttrdxad_HOMOmon_gn" name="IOXDIRttrdxad_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -1989,7 +1989,7 @@
 		<file id="ttrdyad_HOMOmon_gn" name="IOXDIRttrdyad_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -2028,7 +2028,7 @@
 		<file id="ttrdzad_HOMOmon_gn" name="IOXDIRttrdzad_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -2067,7 +2067,7 @@
 		<file id="ttrdzdf_HOMOmon_gn" name="IOXDIRttrdzdf_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -2106,7 +2106,7 @@
 		<file id="utrdbfr_HOMOmon_gn" name="IOXDIRutrdbfr_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -2145,7 +2145,7 @@
 		<file id="utrdhpg_HOMOmon_gn" name="IOXDIRutrdhpg_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -2184,7 +2184,7 @@
 		<file id="utrdkeg_HOMOmon_gn" name="IOXDIRutrdkeg_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -2223,7 +2223,7 @@
 		<file id="utrdldf_HOMOmon_gn" name="IOXDIRutrdldf_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -2262,7 +2262,7 @@
 		<file id="utrdpvo_HOMOmon_gn" name="IOXDIRutrdpvo_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -2301,7 +2301,7 @@
 		<file id="utrdrvo_HOMOmon_gn" name="IOXDIRutrdrvo_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -2340,7 +2340,7 @@
 		<file id="utrdspg_HOMOmon_gn" name="IOXDIRutrdspg_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -2379,7 +2379,7 @@
 		<file id="utrdtau_HOMOmon_gn" name="IOXDIRutrdtau_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -2418,7 +2418,7 @@
 		<file id="utrdtot_HOMOmon_gn" name="IOXDIRutrdtot_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -2457,7 +2457,7 @@
 		<file id="utrdzad_HOMOmon_gn" name="IOXDIRutrdzad_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -2496,7 +2496,7 @@
 		<file id="utrdzdf_HOMOmon_gn" name="IOXDIRutrdzdf_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -2535,7 +2535,7 @@
 		<file id="voavtbn2_HOMOmon_gn" name="IOXDIRvoavtbn2_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -2575,7 +2575,7 @@
 		<file id="vtrdbfr_HOMOmon_gn" name="IOXDIRvtrdbfr_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -2614,7 +2614,7 @@
 		<file id="vtrdhpg_HOMOmon_gn" name="IOXDIRvtrdhpg_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -2653,7 +2653,7 @@
 		<file id="vtrdkeg_HOMOmon_gn" name="IOXDIRvtrdkeg_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -2692,7 +2692,7 @@
 		<file id="vtrdldf_HOMOmon_gn" name="IOXDIRvtrdldf_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -2731,7 +2731,7 @@
 		<file id="vtrdpvo_HOMOmon_gn" name="IOXDIRvtrdpvo_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -2770,7 +2770,7 @@
 		<file id="vtrdrvo_HOMOmon_gn" name="IOXDIRvtrdrvo_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -2809,7 +2809,7 @@
 		<file id="vtrdspg_HOMOmon_gn" name="IOXDIRvtrdspg_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -2848,7 +2848,7 @@
 		<file id="vtrdtau_HOMOmon_gn" name="IOXDIRvtrdtau_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -2887,7 +2887,7 @@
 		<file id="vtrdtot_HOMOmon_gn" name="IOXDIRvtrdtot_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -2926,7 +2926,7 @@
 		<file id="vtrdzad_HOMOmon_gn" name="IOXDIRvtrdzad_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -2965,7 +2965,7 @@
 		<file id="vtrdzdf_HOMOmon_gn" name="IOXDIRvtrdzdf_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -3004,7 +3004,7 @@
 		<file id="friver_Nonemon_gn" name="IOXDIRfriver_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -3044,7 +3044,7 @@
 		<file id="hfds_Nonemon_gn" name="IOXDIRhfds_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -3084,7 +3084,7 @@
 		<file id="rsntds_Nonemon_gn" name="IOXDIRrsntds_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -3124,7 +3124,7 @@
 		<file id="sfdsi_Nonemon_gn" name="IOXDIRsfdsi_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -3164,7 +3164,7 @@
 		<file id="so_Nonemon_gn" name="IOXDIRso_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello volcello </variable>
@@ -3204,7 +3204,7 @@
 		<file id="sos_Nonemon_gn" name="IOXDIRsos_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -3244,7 +3244,7 @@
 		<file id="thetao_Nonemon_gn" name="IOXDIRthetao_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello volcello </variable>
@@ -3284,7 +3284,7 @@
 		<file id="tos_Nonemon_gn" name="IOXDIRtos_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -3324,7 +3324,7 @@
 		<file id="uo_Nonemon_gn" name="IOXDIRuo_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -3362,7 +3362,7 @@
 		<file id="vo_Nonemon_gn" name="IOXDIRvo_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -3400,7 +3400,7 @@
 		<file id="wfo_Nonemon_gn" name="IOXDIRwfo_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -3440,7 +3440,7 @@
 		<file id="wfonocorr_Nonemon_gn" name="IOXDIRwfonocorr_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -3480,7 +3480,7 @@
 		<file id="wo_Nonemon_gn" name="IOXDIRwo_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -3518,7 +3518,7 @@
 		<file id="zos_Nonemon_gn" name="IOXDIRzos_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello </variable>
@@ -3558,7 +3558,7 @@
 		<file id="obvfsq_Omon_gn" name="IOXDIRobvfsq_MED-06_CNRM-ESM2-1_historical_r1i1p1f2_CNRM-RCSM6_V1_mon_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="0" split_freq="1mo" split_freq_format="%y%mo" split_last_date="1949-09-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14103/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CORDEX </variable>
 			<variable name="contact" type="string"> contact.aladin-cordex@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
 			<variable name="external_variables" type="string"> areacello volcello </variable>

@@ -17,12 +17,17 @@ import sys
 import os
 import unittest
 from collections import OrderedDict
-
 from importlib.machinery import SourceFileLoader
-
 import six
 
-from utilities.logger import get_logger
+from data_request_api import version as cmip7_dr_software_version
+
+try:
+    import dreq
+except ImportError:
+    from dreqPy import dreq
+cmip6_dr_version = dreq.loadDreq().version
+
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -225,7 +230,9 @@ class TestRun(object):
 		                     check_time_file=self.check_time_file)
 		to_compare = list_comparison_to_do(test=self.config["dirname"], reference=self.reference_directory)
 		anonymize_dict = dict(current_directory=current_directory, current_version=version,
-		                      current_data_request=data_request_directory)
+		                      current_data_request=data_request_directory,
+		                      current_cmip7_dr_software=cmip7_dr_software_version,
+		                      current_cmip6_dr=cmip6_dr_version)
 		for (reference_file, test_file) in to_compare:
 			reference_content = read_file_content(reference_file, anonymize=anonymize_dict)
 			test_content = read_file_content(test_file, anonymize=anonymize_dict)

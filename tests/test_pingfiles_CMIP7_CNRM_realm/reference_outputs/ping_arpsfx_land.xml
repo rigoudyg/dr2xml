@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <context id="arpsfx">
-	<!--CMIP7 Data Request version Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2-->
+	<!--CMIP7 Data Request version Software current_cmip7_dr_software - Content v1.2.2-->
 	<!--dr2xml version current_version-->
 	<!--Lab_and_model settings
 {'data_request_content_version' = 'v1.2.2',

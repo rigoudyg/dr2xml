@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <context id="trip">
-	<!--CMIP6 Data Request version 01.00.21.post1-->
+	<!--CMIP6 Data Request version current_cmip6_dr-->
 	<!--CMIP6-CV version ??-->
 	<!--CMIP6_conventions_version v6.2.4-->
 	<!--dr2xml version current_version-->
@@ -76,7 +76,7 @@
 		<file id="rivo_Eday_gn" name="IOXDIRrivo_Eday_CNRM-CM6-1_amip-hist_r10i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1871-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> GMMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> amip-hist </variable>
 			<variable name="description" type="string"> Extended AMIP run that covers 1870-2014. All natural and anthropogenic historical forcings as used in CMIP6 Historical Simulation will be included. AGCM resolution as CMIP6 Historical Simulation. The HadISST data will be used </variable>
@@ -136,7 +136,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="wtd_Emon_gn" name="IOXDIRwtd_Emon_CNRM-CM6-1_amip-hist_r10i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1871-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> GMMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> amip-hist </variable>
 			<variable name="description" type="string"> Extended AMIP run that covers 1870-2014. All natural and anthropogenic historical forcings as used in CMIP6 Historical Simulation will be included. AGCM resolution as CMIP6 Historical Simulation. The HadISST data will be used </variable>
@@ -196,7 +196,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="fldf_HOMALmon_gn" name="IOXDIRfldf_HOMALmon_CNRM-CM6-1_amip-hist_r10i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1871-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> GMMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> amip-hist </variable>
 			<variable name="description" type="string"> Extended AMIP run that covers 1870-2014. All natural and anthropogenic historical forcings as used in CMIP6 Historical Simulation will be included. AGCM resolution as CMIP6 Historical Simulation. The HadISST data will be used </variable>
@@ -255,7 +255,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="fwtd_HOMALmon_gn" name="IOXDIRfwtd_HOMALmon_CNRM-CM6-1_amip-hist_r10i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1871-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> GMMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> amip-hist </variable>
 			<variable name="description" type="string"> Extended AMIP run that covers 1870-2014. All natural and anthropogenic historical forcings as used in CMIP6 Historical Simulation will be included. AGCM resolution as CMIP6 Historical Simulation. The HadISST data will be used </variable>
