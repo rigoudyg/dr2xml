@@ -14,7 +14,7 @@ import six
 
 from dr2xml.analyzer import cellmethod2area
 from dr2xml.dr_interface import get_dr_object
-from logger import get_logger
+from utilities.logger import get_logger
 from dr2xml.settings_interface import get_settings_values
 from dr2xml.utils import VarsError, Dr2xmlError
 
@@ -112,7 +112,7 @@ def remove_p_suffix(svar, mlev_sfxs, slev_sfxs, realms):
     # suppression des terminaisons en "Clim" le cas echant
     label_out = svar.label.split("Clim")[0]
     #
-    svar_realms = set(svar.modeling_realm.split())
+    svar_realms = svar.set_modeling_realms
     valid_realms = set(realms)
     if svar_realms.intersection(valid_realms):
         mvl = r.match(label_out)
@@ -147,9 +147,9 @@ def get_correspond_cmor_var(homevar):
                      ("SoilPools" in homevar.label and homevar.frequency in ["mon", ] and
                       cmvar.frequency in ["monPt", ])
         match_table = (cmvar.mipTable == homevar.mipTable)
-        match_realm = (homevar.modeling_realm in cmvar.modeling_realm.split(' ')) or \
-                      (homevar.modeling_realm == cmvar.modeling_realm)
-        empty_realm = (cmvar.modeling_realm in ['', ])
+        empty_realm = len(cmvar.modeling_realm) == 0
+        match_realm = (not(empty_realm) and set(homevar.modeling_realm).issubset(cmvar.set_modeling_realms)) or \
+                      homevar.modeling_realm == cmvar.modeling_realm
 
         matching = (match_label and (match_freq or empty_table) and (match_table or empty_table) and
                     (match_realm or empty_realm))
@@ -199,24 +199,25 @@ def complement_svar_using_cmorvar(svar, cmvar, debug=[]):
 
     # Get information form CMORvar
     svar.set_attributes(prec=cmvar.prec, frequency=cmvar.frequency, mipTable=cmvar.mipTable,
-                        Priority=cmvar.Priority, positive=cmvar.positive, modeling_realm=cmvar.modeling_realm,
+                        Priority=cmvar.Priority, positive=cmvar.positive,
                         label=cmvar.label, spatial_shp=cmvar.spatial_shp, temporal_shp=cmvar.temporal_shp, cmvar=cmvar,
                         long_name=cmvar.long_name, description=cmvar.description, ref_var=cmvar.label,
                         mipVarLabel=cmvar.mipVarLabel, units=cmvar.units, stdname=cmvar.stdname,
                         cm=cmvar.cm, cell_methods=cmvar.cell_methods, cell_measures=cmvar.cell_measures,
                         sdims=cmvar.sdims, other_dims_size=cmvar.other_dims_size, mip_era=cmvar.mip_era,
-                        flag_meanings=cmvar.flag_meanings, flag_values=cmvar.flag_values)
+                        flag_meanings=cmvar.flag_meanings, flag_values=cmvar.flag_values,
+                        modeling_realm=cmvar.modeling_realm, set_modeling_realms=cmvar.set_modeling_realms)
     area = cellmethod2area(svar.cell_methods)
     if svar.label in debug:
         logger.debug("complement_svar ... processing %s, area=%s" % (svar.label, str(area)))
     if area:
-        ambiguous = any([svar.label == alabel and svar.modeling_realm == arealm
+        ambiguous = any([svar.label == alabel and arealm in svar.modeling_realm
                          for (alabel, (arealm, lmethod)) in ambiguous_mipvarnames])
         if svar.label in debug:
             logger.debug("complement_svar ... processing %s, ambiguous=%s" % (svar.label, repr(ambiguous)))
         if ambiguous:
             # Special case for a set of land variables
-            if not (svar.modeling_realm == 'land' and svar.label[0] == 'c'):
+            if not ('land' in svar.modeling_realm and svar.label[0] == 'c'):
                 svar.label_non_ambiguous = svar.label + "_" + area
     if svar.label in debug:
         logger.debug("complement_svar ... processing %s, label_non_ambiguous=%s" %
@@ -239,19 +240,8 @@ def analyze_ambiguous_mip_varnames(debug=[]):
     # Compute a dict which keys are MIP varnames and values = list
     # of CMORvars items for the varname
     logger = get_logger()
-    d = OrderedDict()
     data_request = get_dr_object("get_data_request")
-    for v in data_request.get_list_by_id('var').items:
-        if v.label not in d:
-            d[v.label] = []
-            if v.label in debug:
-                logger.debug("Adding %s" % v.label)
-        refs = data_request.get_request_by_id_by_sect(v.uid, 'CMORvar')
-        for r in refs:
-            ref = data_request.get_element_uid(r, elt_type="variable")
-            d[v.label].append(ref)
-            if v.label in debug:
-                logger.debug("Adding CmorVar %s(%s) for %s" % (v.label, ref.mipTable, ref.label))
+    d = data_request.get_variables_per_label(debug=debug)
 
     # Replace dic values by dic of area portion of cell_methods
     for vlabel in d:
@@ -262,17 +252,16 @@ def analyze_ambiguous_mip_varnames(debug=[]):
                 cm = cv.cell_methods
                 if cm is not None:
                     area = cellmethod2area(cm)
-                    realm = cv.modeling_realm
-                    if area == 'sea' and realm == 'ocean':
+                    if area == 'sea' and 'ocean' in cv.modeling_realm:
                         area = None
-                    # realm=""
-                    if vlabel in debug:
-                        logger.debug("for %s 's CMORvar %s(%s), area=%s" % (vlabel, cv.label, cv.mipTable, area))
-                    if realm not in d[vlabel]:
-                        d[vlabel][realm] = OrderedDict()
-                    if area not in d[vlabel][realm]:
-                        d[vlabel][realm][area] = []
-                    d[vlabel][realm][area].append(cv.mipTable)
+                    for realm in cv.modeling_realm:
+                        if vlabel in debug:
+                            logger.debug("for %s 's CMORvar %s(%s), area=%s" % (vlabel, cv.label, cv.mipTable, area))
+                        if realm not in d[vlabel]:
+                            d[vlabel][realm] = OrderedDict()
+                        if area not in d[vlabel][realm]:
+                            d[vlabel][realm][area] = []
+                        d[vlabel][realm][area].append(cv.mipTable)
             if vlabel in debug:
                 print(vlabel, d[vlabel])
         else:

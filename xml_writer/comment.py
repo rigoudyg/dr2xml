@@ -10,7 +10,8 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 import re
 
 from .beacon import Beacon
-from .utils import encode_if_needed, print_if_needed
+from .utils import print_if_needed
+from utilities.encoding_tools import encode_if_needed
 
 
 class Comment(Beacon):

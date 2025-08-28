@@ -1,0 +1,319 @@
+
+ **************************************************
+*
+*              dr2xml version:  current_version
+*   CMIP6 conventions version:  v6.2.4
+*  CMIP7 Data Request version:  Software current_cmip7_dr_software - Content v1.2.2
+
+*
+ **************************************************
+
+**************************************************
+
+Processing context  nemo
+
+**************************************************
+
+Output of the current filtering request does not include all the BCV variables.
+Number of distinct CMOR variables (whatever the grid): 59
+Number of distinct var labels is: 35
+Number of simplified vars is: 59
+Issues with standard names are: []
+Info: No HOMEvars list provided.
+
+Realms for these CMORvars: aerosol atmos
+Processing realm 'ocean' of context 'nemo' -- no variable asked (skip)
+Processing realm 'ocnBgchem' of context 'nemo' -- no variable asked (skip)
+Processing realm 'seaIce' of context 'nemo' -- no variable asked (skip)
+processing file current_directory/test_AOESM_historical_CMIP7/input/xml/ping_surfex.xml:
+OK current_directory/test_AOESM_historical_CMIP7/input/xml/ping_surfex.xml
+processing file current_directory/test_AOESM_historical_CMIP7/input/xml/ping_trip.xml:
+OK current_directory/test_AOESM_historical_CMIP7/input/xml/ping_trip.xml
+processing file current_directory/test_AOESM_historical_CMIP7/input/xml/ping_nemo.xml:
+OK current_directory/test_AOESM_historical_CMIP7/input/xml/ping_nemo.xml
+
+file_def written as current_directory/test_AOESM_historical_CMIP7/test_outputs/dr2xml_nemo.xml
+
+
+Some Statistics on actually written variables per frequency+shape...
+
+---------- --------    -------- ---   0
+
+
+Some Statistics on actually written variables per variable...
+
+ **************************************************
+*
+*              dr2xml version:  current_version
+*   CMIP6 conventions version:  v6.2.4
+*  CMIP7 Data Request version:  Software current_cmip7_dr_software - Content v1.2.2
+
+*
+ **************************************************
+
+**************************************************
+
+Processing context  surfex
+
+**************************************************
+
+Number of distinct CMOR variables (whatever the grid): 59
+Number of distinct var labels is: 35
+Number of simplified vars is: 59
+Issues with standard names are: []
+Info: No HOMEvars list provided.
+
+Realms for these CMORvars: aerosol atmos
+Processing realm 'atmosChem' of context 'surfex' -- no variable asked (skip)
+Processing realm 'land' of context 'surfex' -- no variable asked (skip)
+Processing realm 'landIce' of context 'surfex' -- no variable asked (skip)
+Processing realm 'aerosol' of context 'surfex'
+Processing realm 'atmos' of context 'surfex'
+processing file current_directory/test_AOESM_historical_CMIP7/input/xml/ping_surfex.xml:
+OK current_directory/test_AOESM_historical_CMIP7/input/xml/ping_surfex.xml
+processing file current_directory/test_AOESM_historical_CMIP7/input/xml/ping_trip.xml:
+OK current_directory/test_AOESM_historical_CMIP7/input/xml/ping_trip.xml
+processing file current_directory/test_AOESM_historical_CMIP7/input/xml/ping_nemo.xml:
+OK current_directory/test_AOESM_historical_CMIP7/input/xml/ping_nemo.xml
+Note: assuming that for        pctisccp in table CFday is well handled by 'detect_missing'
+Note: assuming that for        pctisccp in table CFmon is well handled by 'detect_missing'
+Note: assuming that for        pctisccp in table CFday is well handled by 'detect_missing'
+Warning: Cannot complement model levels with psol for table CFday for frequency 1d
+Warning: Cannot complement model levels with psol for table CFday for frequency 1d
+Warning: Cannot complement model levels with psol for table CFday for frequency 1d
+Warning: Cannot complement model levels with psol for table Amon for frequency 1mo
+Warning: Cannot complement model levels with psol for table Amon for frequency 1mo
+Note: assuming that for        pctisccp in table CFmon is well handled by 'detect_missing'
+
+file_def written as current_directory/test_AOESM_historical_CMIP7/test_outputs/dr2xml_surfex.xml
+
+Skipped variables (i.e. whose alias is not present in the pingfile):
+>>> TABLE:           CFmon 04/10 ----> clivimodis(2) clmodisice(2) clmodisliquid(2) clwvimodis(2)
+
+>>> TABLE:            Emon 04/05 ----> reffclic(2) reffclis(2) reffclwc(2) reffclws(2)
+
+
+
+
+Some Statistics on actually written variables per frequency+shape...
+                             3hr P1   2: pr tas
+                             3hr P2   1: clt
+                            E3hr P2   7: clivi clwvi prw rlut rlutcs rsut rsutcs
+                          E3hrPt P2   1: cltcalipso
+       3hr    XY-na    -------- ---  11
+
+       3hr --------    -------- ---  11
+
+                           CFday P2   3: cl cli clw
+       day     XY-A    -------- ---   3
+
+                             day P1   1: ta
+       day   XY-P19    -------- ---   1
+
+                          AERday P2   1: cod
+                           CFday P2   5: clivi cltcalipso cltisccp clwvi pctisccp
+                            Eday P2   1: prw
+                             day P1   3: clt pr tas
+       day    XY-na    -------- ---  10
+
+       day --------    -------- ---  14
+
+                            Amon P1   2: cli clw
+       mon     XY-A    -------- ---   2
+
+                           CFmon P2   1: clcalipso
+       mon   XY-H40    -------- ---   1
+
+                            Amon P1   2: hus ta
+       mon   XY-P19    -------- ---   2
+
+                           CFmon P2   2: clisccp clmodis
+       mon    XY-P7    -------- ---   2
+
+                          AERmon P2   1: cod
+                            Amon P1  14: clivi clt clwvi pr prw rlds rldscs rlut rlutcs rsds rsdscs rsut rsutcs tas
+                           CFmon P2   3: cltcalipso cltisccp pctisccp
+                            Emon P2   1: cltmodis
+       mon    XY-na    -------- ---  19
+
+       mon --------    -------- ---  26
+
+
+---------- --------    -------- ---  51
+
+
+Some Statistics on actually written variables per variable...
+----------------
+--- VARNAME: cl: Percentage Cloud Cover
+----------------
+              *     day_CFday_XY-A_2 cl
+-----------------------
+--- VARNAME: clcalipso: CALIPSO Percentage Cloud Cover
+-----------------------
+              *   mon_CFmon_XY-H40_2 clcalipso
+-----------------
+--- VARNAME: cli: Mass Fraction of Cloud Ice
+-----------------
+              *     day_CFday_XY-A_2 cli
+              *      mon_Amon_XY-A_1 cli
+---------------------
+--- VARNAME: clisccp: ISCCP Cloud Area Percentage
+---------------------
+              *    mon_CFmon_XY-P7_2 clisccp
+-------------------
+--- VARNAME: clivi: Ice Water Path
+-------------------
+              *    day_CFday_XY-na_2 clivi
+              *     mon_Amon_XY-na_1 clivi
+              *     3hr_E3hr_XY-na_2 clivi
+---------------------
+--- VARNAME: clmodis: MODIS Cloud Area Fraction
+---------------------
+              *    mon_CFmon_XY-P7_2 clmodis
+-----------------
+--- VARNAME: clt: Total Cloud Cover Percentage
+-----------------
+              *      day_day_XY-na_1 clt
+              *     mon_Amon_XY-na_1 clt
+              *      3hr_3hr_XY-na_2 clt
+------------------------
+--- VARNAME: cltcalipso: CALIPSO Total Cloud Cover Percentage
+------------------------
+              *    day_CFday_XY-na_2 cltcalipso
+              *    mon_CFmon_XY-na_2 cltcalipso
+              *   3hr_E3hrPt_XY-na_2 cltcalipso
+----------------------
+--- VARNAME: cltisccp: ISCCP Total Cloud Cover Percentage
+----------------------
+              *    day_CFday_XY-na_2 cltisccp
+              *    mon_CFmon_XY-na_2 cltisccp
+----------------------
+--- VARNAME: cltmodis: MODIS Total Cloud Cover Percentage
+----------------------
+              *     mon_Emon_XY-na_2 cltmodis
+-----------------
+--- VARNAME: clw: Mass Fraction of Cloud Liquid Water
+-----------------
+              *     day_CFday_XY-A_2 clw
+              *      mon_Amon_XY-A_1 clw
+-------------------
+--- VARNAME: clwvi: Condensed Water Path
+-------------------
+              *    day_CFday_XY-na_2 clwvi
+              *     mon_Amon_XY-na_1 clwvi
+              *     3hr_E3hr_XY-na_2 clwvi
+-----------------
+--- VARNAME: cod: Cloud Optical Depth
+-----------------
+              *   day_AERday_XY-na_2 cod
+              *   mon_AERmon_XY-na_2 cod
+-----------------
+--- VARNAME: hus: Specific Humidity
+-----------------
+              *    mon_Amon_XY-P19_1 hus
+----------------------
+--- VARNAME: pctisccp: ISCCP Mean Cloud Top Pressure
+----------------------
+              *    day_CFday_XY-na_2 pctisccp
+              *    mon_CFmon_XY-na_2 pctisccp
+----------------
+--- VARNAME: pr: Precipitation
+----------------
+              *      day_day_XY-na_1 pr
+              *     mon_Amon_XY-na_1 pr
+              *      3hr_3hr_XY-na_1 pr
+-----------------
+--- VARNAME: prw: Water Vapor Path
+-----------------
+              *     day_Eday_XY-na_2 prw
+              *     mon_Amon_XY-na_1 prw
+              *     3hr_E3hr_XY-na_2 prw
+------------------
+--- VARNAME: rlds: Surface Downwelling Longwave Radiation
+------------------
+              *     mon_Amon_XY-na_1 rlds
+--------------------
+--- VARNAME: rldscs: Surface Downwelling Clear-Sky Longwave Radiation
+--------------------
+              *     mon_Amon_XY-na_1 rldscs
+------------------
+--- VARNAME: rlut: TOA Outgoing Longwave Radiation
+------------------
+              *     mon_Amon_XY-na_1 rlut
+              *     3hr_E3hr_XY-na_2 rlut
+--------------------
+--- VARNAME: rlutcs: TOA Outgoing Clear-Sky Longwave Radiation
+--------------------
+              *     mon_Amon_XY-na_1 rlutcs
+              *     3hr_E3hr_XY-na_2 rlutcs
+------------------
+--- VARNAME: rsds: Surface Downwelling Shortwave Radiation
+------------------
+              *     mon_Amon_XY-na_1 rsds
+--------------------
+--- VARNAME: rsdscs: Surface Downwelling Clear-Sky Shortwave Radiation
+--------------------
+              *     mon_Amon_XY-na_1 rsdscs
+------------------
+--- VARNAME: rsut: TOA Outgoing Shortwave Radiation
+------------------
+              *     mon_Amon_XY-na_1 rsut
+              *     3hr_E3hr_XY-na_2 rsut
+--------------------
+--- VARNAME: rsutcs: TOA Outgoing Clear-Sky Shortwave Radiation
+--------------------
+              *     mon_Amon_XY-na_1 rsutcs
+              *     3hr_E3hr_XY-na_2 rsutcs
+----------------
+--- VARNAME: ta: Air Temperature
+----------------
+              *     day_day_XY-P19_1 ta
+              *    mon_Amon_XY-P19_1 ta
+-----------------
+--- VARNAME: tas: Near-Surface Air Temperature
+-----------------
+              *      day_day_XY-na_1 tas
+              *     mon_Amon_XY-na_1 tas
+              *      3hr_3hr_XY-na_1 tas
+
+Warnings about cell methods (with var list)
+	Will not explicitly handle time: mean where cloud for vars: {'pctisccp'}
+
+ **************************************************
+*
+*              dr2xml version:  current_version
+*   CMIP6 conventions version:  v6.2.4
+*  CMIP7 Data Request version:  Software current_cmip7_dr_software - Content v1.2.2
+
+*
+ **************************************************
+
+**************************************************
+
+Processing context  trip
+
+**************************************************
+
+Number of distinct CMOR variables (whatever the grid): 59
+Number of distinct var labels is: 35
+Number of simplified vars is: 59
+Issues with standard names are: []
+Info: No HOMEvars list provided.
+
+Realms for these CMORvars: aerosol atmos
+processing file current_directory/test_AOESM_historical_CMIP7/input/xml/ping_surfex.xml:
+OK current_directory/test_AOESM_historical_CMIP7/input/xml/ping_surfex.xml
+processing file current_directory/test_AOESM_historical_CMIP7/input/xml/ping_trip.xml:
+OK current_directory/test_AOESM_historical_CMIP7/input/xml/ping_trip.xml
+processing file current_directory/test_AOESM_historical_CMIP7/input/xml/ping_nemo.xml:
+OK current_directory/test_AOESM_historical_CMIP7/input/xml/ping_nemo.xml
+
+file_def written as current_directory/test_AOESM_historical_CMIP7/test_outputs/dr2xml_trip.xml
+
+
+Some Statistics on actually written variables per frequency+shape...
+
+---------- --------    -------- ---   0
+
+
+Some Statistics on actually written variables per variable...

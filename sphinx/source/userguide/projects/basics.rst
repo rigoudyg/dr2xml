@@ -179,9 +179,35 @@ Internal values
       
       num type: 'string'
       
+   data_request_config
+      
+      Configuration file of the data request content to be used
+      
+      fatal: False
+      
+      default values:
+         
+         - laboratory[data_request_config]
+         - '/home/rigoudyg/dev/DR2XML/dr2xml_source/dr2xml/dr_interface/CMIP7_config'
+      
+      num type: 'string'
+      
+   data_request_content_version
+      
+      Version of the data request content to be used
+      
+      fatal: False
+      
+      default values:
+         
+         - laboratory[data_request_content_version]
+         - 'latest_stable'
+      
+      num type: 'string'
+      
    data_request_path
       
-      Path where the data request used is placed.
+      Path where the data request API used is placed.
       
       fatal: False
       
@@ -194,7 +220,7 @@ Internal values
       
    data_request_used
       
-      Version of the data request used.
+      The Data Request infrastructure type which should be used.
       
       fatal: False
       
@@ -241,6 +267,32 @@ Internal values
          
          - simulation[end_year]
          - False
+      
+      num type: 'string'
+      
+   excluded_opportunities_lset
+      
+      List of the opportunities that will be excluded from outputs from laboratory settings.
+      
+      fatal: False
+      
+      default values:
+         
+         - laboratory[excluded_opportunities]
+         - []
+      
+      num type: 'string'
+      
+   excluded_opportunities_sset
+      
+      List of the opportunities that will be excluded from outputs from simulation settings.
+      
+      fatal: False
+      
+      default values:
+         
+         - simulation[excluded_opportunities]
+         - []
       
       num type: 'string'
       
@@ -318,6 +370,32 @@ Internal values
       default values:
          
          - simulation[excluded_tables]
+         - []
+      
+      num type: 'string'
+      
+   excluded_vargroups_lset
+      
+      List of the variables groups that will be excluded from outputs from laboratory settings.
+      
+      fatal: False
+      
+      default values:
+         
+         - laboratory[excluded_vargroups]
+         - []
+      
+      num type: 'string'
+      
+   excluded_vargroups_sset
+      
+      List of the variables groups that will be excluded from outputs from simulation settings.
+      
+      fatal: False
+      
+      default values:
+         
+         - simulation[excluded_vargroups]
          - []
       
       num type: 'string'
@@ -484,6 +562,32 @@ Internal values
       
       num type: 'string'
       
+   included_opportunities
+      
+      List of opportunities that will be processed (all others will not).
+      
+      fatal: False
+      
+      default values:
+         
+         - simulation[included_opportunities]
+         - internal[included_opportunities_lset]
+      
+      num type: 'string'
+      
+   included_opportunities_lset
+      
+      List of opportunities that will be processed (all others will not) from laboratory settings.
+      
+      fatal: False
+      
+      default values:
+         
+         - laboratory[included_opportunities]
+         - []
+      
+      num type: 'string'
+      
    included_request_links
       
       List of the request links that will be processed (all others will not).
@@ -519,6 +623,32 @@ Internal values
       default values:
          
          - laboratory[included_tables]
+         - []
+      
+      num type: 'string'
+      
+   included_vargroups
+      
+      List of variables groups that will be processed (all others will not).
+      
+      fatal: False
+      
+      default values:
+         
+         - simulation[included_vargroups]
+         - internal[included_vargroups_lset]
+      
+      num type: 'string'
+      
+   included_vargroups_lset
+      
+      List of variables groups that will be processed (all others will not) from laboratory settings.
+      
+      fatal: False
+      
+      default values:
+         
+         - laboratory[included_vargroups]
          - []
       
       num type: 'string'
@@ -889,6 +1019,748 @@ Internal values
       
       num type: 'string'
       
+   select
+      
+      Selection strategy for variables.
+      
+      fatal: True
+      
+      default values: dict[select]
+      
+      authorized values:
+         
+         - 'on_expt_and_year'
+         - 'on_expt'
+         - 'no'
+      
+      num type: 'string'
+      
+   select_excluded_opportunities
+      
+      Excluded opportunities for variable selection.
+      
+      fatal: True
+      
+      default values: []
+      
+      cases:
+         Case:
+         
+            conditions:
+                  Condition:
+                  
+                     check value: internal[select_on_expt]
+                     
+                     check to do: 'eq'
+                     
+                     reference values: True
+                     
+            
+            value: ['internal[excluded_opportunities_lset]', 'internal[excluded_opportunities_sset]']
+            
+         Case:
+         
+            conditions:
+                  Condition:
+                  
+                     check value: internal[select_on_expt]
+                     
+                     check to do: 'eq'
+                     
+                     reference values: False
+                     
+            
+            value: internal[excluded_opportunities_lset]
+            
+      
+      num type: 'string'
+      
+   select_excluded_pairs
+      
+      Excluded pairs for variable selection.
+      
+      fatal: True
+      
+      default values: []
+      
+      cases:
+         Case:
+         
+            conditions:
+                  Condition:
+                  
+                     check value: internal[select_on_expt]
+                     
+                     check to do: 'eq'
+                     
+                     reference values: True
+                     
+            
+            value: ['internal[excluded_pairs_lset]', 'internal[excluded_pairs_sset]']
+            
+         Case:
+         
+            conditions:
+                  Condition:
+                  
+                     check value: internal[select_on_expt]
+                     
+                     check to do: 'eq'
+                     
+                     reference values: False
+                     
+            
+            value: internal[excluded_pairs_lset]
+            
+      
+      num type: 'string'
+      
+   select_excluded_request_links
+      
+      Excluded request links for variable selection.
+      
+      fatal: True
+      
+      default values: []
+      
+      cases:
+         Case:
+         
+            conditions:
+                  Condition:
+                  
+                     check value: internal[select_on_expt]
+                     
+                     check to do: 'eq'
+                     
+                     reference values: True
+                     
+            
+            value: internal[excluded_request_links]
+            
+         Case:
+         
+            conditions:
+                  Condition:
+                  
+                     check value: internal[select_on_expt]
+                     
+                     check to do: 'eq'
+                     
+                     reference values: False
+                     
+            
+            value: None
+            
+      
+      num type: 'string'
+      
+   select_excluded_tables
+      
+      Excluded tables for variable selection.
+      
+      fatal: True
+      
+      default values: []
+      
+      cases:
+         Case:
+         
+            conditions:
+                  Condition:
+                  
+                     check value: internal[select_on_expt]
+                     
+                     check to do: 'eq'
+                     
+                     reference values: True
+                     
+            
+            value: ['internal[excluded_tables_lset]', 'internal[excluded_tables_sset]']
+            
+         Case:
+         
+            conditions:
+                  Condition:
+                  
+                     check value: internal[select_on_expt]
+                     
+                     check to do: 'eq'
+                     
+                     reference values: False
+                     
+            
+            value: internal[excluded_tables_lset]
+            
+      
+      num type: 'string'
+      
+   select_excluded_vargroups
+      
+      Excluded variables groups for variable selection.
+      
+      fatal: True
+      
+      default values: []
+      
+      cases:
+         Case:
+         
+            conditions:
+                  Condition:
+                  
+                     check value: internal[select_on_expt]
+                     
+                     check to do: 'eq'
+                     
+                     reference values: True
+                     
+            
+            value: ['internal[excluded_vargroups_lset]', 'internal[excluded_vargroups_sset]']
+            
+         Case:
+         
+            conditions:
+                  Condition:
+                  
+                     check value: internal[select_on_expt]
+                     
+                     check to do: 'eq'
+                     
+                     reference values: False
+                     
+            
+            value: internal[excluded_vargroups_lset]
+            
+      
+      num type: 'string'
+      
+   select_excluded_vars
+      
+      Excluded variables for variable selection.
+      
+      fatal: True
+      
+      default values: []
+      
+      cases:
+         Case:
+         
+            conditions:
+                  Condition:
+                  
+                     check value: internal[select_on_expt]
+                     
+                     check to do: 'eq'
+                     
+                     reference values: True
+                     
+            
+            value: ['internal[excluded_vars_lset]', 'internal[excluded_vars_sset]', 'internal[excluded_vars_per_config]']
+            
+         Case:
+         
+            conditions:
+                  Condition:
+                  
+                     check value: internal[select_on_expt]
+                     
+                     check to do: 'eq'
+                     
+                     reference values: False
+                     
+            
+            value: internal[excluded_vars_lset]
+            
+      
+      num type: 'string'
+      
+   select_grid_choice
+      
+      Grid choice for variable selection.
+      
+      fatal: True
+      
+      default values: []
+      
+      cases:
+         Case:
+         
+            conditions:
+                  Condition:
+                  
+                     check value: internal[select_on_expt]
+                     
+                     check to do: 'eq'
+                     
+                     reference values: True
+                     
+            
+            value: internal[grid_choice]
+            
+         Case:
+         
+            conditions:
+                  Condition:
+                  
+                     check value: internal[select_on_expt]
+                     
+                     check to do: 'eq'
+                     
+                     reference values: False
+                     
+            
+            value: 'LR'
+            
+      
+      num type: 'string'
+      
+   select_included_opportunities
+      
+      Included opportunities for variable selection.
+      
+      fatal: True
+      
+      default values: []
+      
+      cases:
+         Case:
+         
+            conditions:
+                  Condition:
+                  
+                     check value: internal[select_on_expt]
+                     
+                     check to do: 'eq'
+                     
+                     reference values: True
+                     
+            
+            value: internal[included_opportunities]
+            
+         Case:
+         
+            conditions:
+                  Condition:
+                  
+                     check value: internal[select_on_expt]
+                     
+                     check to do: 'eq'
+                     
+                     reference values: False
+                     
+            
+            value: internal[included_opportunities_lset]
+            
+      
+      num type: 'string'
+      
+   select_included_request_links
+      
+      Included request links for variable selection.
+      
+      fatal: True
+      
+      default values: []
+      
+      cases:
+         Case:
+         
+            conditions:
+                  Condition:
+                  
+                     check value: internal[select_on_expt]
+                     
+                     check to do: 'eq'
+                     
+                     reference values: True
+                     
+            
+            value: internal[included_request_links]
+            
+         Case:
+         
+            conditions:
+                  Condition:
+                  
+                     check value: internal[select_on_expt]
+                     
+                     check to do: 'eq'
+                     
+                     reference values: False
+                     
+            
+            value: None
+            
+      
+      num type: 'string'
+      
+   select_included_tables
+      
+      Included tables for variable selection.
+      
+      fatal: True
+      
+      default values: []
+      
+      cases:
+         Case:
+         
+            conditions:
+                  Condition:
+                  
+                     check value: internal[select_on_expt]
+                     
+                     check to do: 'eq'
+                     
+                     reference values: True
+                     
+            
+            value: internal[included_tables]
+            
+         Case:
+         
+            conditions:
+                  Condition:
+                  
+                     check value: internal[select_on_expt]
+                     
+                     check to do: 'eq'
+                     
+                     reference values: False
+                     
+            
+            value: internal[included_tables_lset]
+            
+      
+      num type: 'string'
+      
+   select_included_vargroups
+      
+      Included variables groups for variable selection.
+      
+      fatal: True
+      
+      default values: []
+      
+      cases:
+         Case:
+         
+            conditions:
+                  Condition:
+                  
+                     check value: internal[select_on_expt]
+                     
+                     check to do: 'eq'
+                     
+                     reference values: True
+                     
+            
+            value: internal[included_vargroups]
+            
+         Case:
+         
+            conditions:
+                  Condition:
+                  
+                     check value: internal[select_on_expt]
+                     
+                     check to do: 'eq'
+                     
+                     reference values: False
+                     
+            
+            value: internal[included_vargroups_lset]
+            
+      
+      num type: 'string'
+      
+   select_included_vars
+      
+      Included variables for variable selection.
+      
+      fatal: True
+      
+      default values: []
+      
+      cases:
+         Case:
+         
+            conditions:
+                  Condition:
+                  
+                     check value: internal[select_on_expt]
+                     
+                     check to do: 'eq'
+                     
+                     reference values: True
+                     
+            
+            value: internal[included_vars]
+            
+         Case:
+         
+            conditions:
+                  Condition:
+                  
+                     check value: internal[select_on_expt]
+                     
+                     check to do: 'eq'
+                     
+                     reference values: False
+                     
+            
+            value: internal[included_vars_lset]
+            
+      
+      num type: 'string'
+      
+   select_max_priority
+      
+      Max priority for variable selection.
+      
+      fatal: True
+      
+      default values: []
+      
+      cases:
+         Case:
+         
+            conditions:
+                  Condition:
+                  
+                     check value: internal[select_on_expt]
+                     
+                     check to do: 'eq'
+                     
+                     reference values: True
+                     
+            
+            value: internal[max_priority]
+            
+         Case:
+         
+            conditions:
+                  Condition:
+                  
+                     check value: internal[select_on_expt]
+                     
+                     check to do: 'eq'
+                     
+                     reference values: False
+                     
+            
+            value: internal[max_priority_lset]
+            
+      
+      num type: 'string'
+      
+   select_mips
+      
+      MIPs for variable selection.
+      
+      fatal: True
+      
+      default values: []
+      
+      cases:
+         Case:
+         
+            conditions:
+                  Condition:
+                  
+                     check value: internal[select_on_expt]
+                     
+                     check to do: 'eq'
+                     
+                     reference values: True
+                     
+            
+            value: internal[mips][internal[select_grid_choice]]sort_mips()
+            
+         Case:
+         
+            conditions:
+                  Condition:
+                  
+                     check value: internal[select_on_expt]
+                     
+                     check to do: 'eq'
+                     
+                     reference values: False
+                     
+            
+            value: internal[mips]sort_mips()
+            
+      
+      num type: 'string'
+      
+   select_on_expt
+      
+      Should data be selected on experiment?
+      
+      fatal: True
+      
+      default values: []
+      
+      cases:
+         Case:
+         
+            conditions:
+                  Condition:
+                  
+                     check value: internal[select]
+                     
+                     check to do: 'eq'
+                     
+                     reference values:
+                           
+                           - 'on_expt_and_year'
+                           - 'on_expt'
+                     
+            
+            value: True
+            
+         Case:
+         
+            conditions:
+                  Condition:
+                  
+                     check value: internal[select]
+                     
+                     check to do: 'eq'
+                     
+                     reference values: 'no'
+                     
+            
+            value: False
+            
+      
+      num type: 'string'
+      
+   select_on_year
+      
+      Should data be selected on year?
+      
+      fatal: True
+      
+      default values: []
+      
+      cases:
+         Case:
+         
+            conditions:
+                  Condition:
+                  
+                     check value: internal[select]
+                     
+                     check to do: 'eq'
+                     
+                     reference values: 'on_expt_and_year'
+                     
+            
+            value: internal[year]
+            
+         Case:
+         
+            conditions:
+                  Condition:
+                  
+                     check value: internal[select]
+                     
+                     check to do: 'eq'
+                     
+                     reference values:
+                           
+                           - 'no'
+                           - 'on_expt'
+                     
+            
+            value: None
+            
+      
+      num type: 'string'
+      
+   select_sizes
+      
+      Sizes for variable selection.
+      
+      fatal: True
+      
+      default values: []
+      
+      cases:
+         Case:
+         
+            conditions:
+                  Condition:
+                  
+                     check value: internal[select_on_expt]
+                     
+                     check to do: 'eq'
+                     
+                     reference values: True
+                     
+            
+            value: internal[sizes]
+            
+         Case:
+         
+            conditions:
+                  Condition:
+                  
+                     check value: internal[select_on_expt]
+                     
+                     check to do: 'eq'
+                     
+                     reference values: False
+                     
+            
+            value: None
+            
+      
+      num type: 'string'
+      
+   select_tierMax
+      
+      tierMax for variable selection.
+      
+      fatal: True
+      
+      default values: []
+      
+      cases:
+         Case:
+         
+            conditions:
+                  Condition:
+                  
+                     check value: internal[select_on_expt]
+                     
+                     check to do: 'eq'
+                     
+                     reference values: True
+                     
+            
+            value: internal[tierMax]
+            
+         Case:
+         
+            conditions:
+                  Condition:
+                  
+                     check value: internal[select_on_expt]
+                     
+                     check to do: 'eq'
+                     
+                     reference values: False
+                     
+            
+            value: internal[tierMax_lset]
+            
+      
+      num type: 'string'
+      
    simple_domain_grid_regexp
       
       If some grid is not defined in xml but by API, and is referenced by a field which is considered by the DR as having a singleton dimension, then: 1) it must be a grid which has only a domain 2) the domain name must be extractable from the grid_id using a regexp and a group number Example: using a pattern that returns full id except for a '_grid' suffix
@@ -905,7 +1777,7 @@ Internal values
       
       fatal: True
       
-      default values: laboratory[sizes][internal[grid_choice]]
+      default values: laboratory[sizes][internal[grid_choice]]format_sizes()
       
       num type: 'string'
       
@@ -1081,6 +1953,16 @@ Internal values
          
          - laboratory[xios_version]
          - 2
+      
+      num type: 'string'
+      
+   year
+      
+      Year associated with the launch of dr2xml.
+      
+      fatal: True
+      
+      default values: dict[year]
       
       num type: 'string'
       
@@ -1597,16 +2479,6 @@ Common values
       
       num type: 'string'
       
-   year
-      
-      Year associated with the launch of dr2xml.
-      
-      fatal: True
-      
-      default values: dict[year]
-      
-      num type: 'string'
-      
 Project settings
 ----------------
 .. glossary::
@@ -1882,7 +2754,7 @@ Project settings
             
             fatal: False
             
-            default values: 'CMIP6 Data Request version {}'.format(common[data_specs_version])
+            default values: '{} Data Request version {}'.format(internal[data_request_used], common[data_specs_version])
             
             num type: 'string'
             
@@ -1922,7 +2794,7 @@ Project settings
             
             fatal: False
             
-            default values: 'Year processed {}'.format(common[year])
+            default values: 'Year processed {}'.format(internal[year])
             
             num type: 'string'
             
@@ -3655,7 +4527,7 @@ Project settings
             
             fatal: False
             
-            default values: variable.modeling_realm
+            default values: variable.modeling_realm<lambda>()
             
             num type: 'string'
             

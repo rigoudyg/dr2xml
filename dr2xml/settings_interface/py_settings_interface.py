@@ -12,9 +12,10 @@ from collections import OrderedDict
 
 import six
 
-from dr2xml.utils import Dr2xmlError, decode_if_needed, print_struct
+from dr2xml.utils import Dr2xmlError, print_struct
 
-from logger import get_logger
+from utilities.logger import get_logger
+from utilities.encoding_tools import decode_if_needed
 
 
 # Initial simulation (sset) and laboratory (lset) dictionaries

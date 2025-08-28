@@ -8,7 +8,7 @@ CMOR variables
 from __future__ import print_function, division, absolute_import, unicode_literals
 
 from dr2xml.dr_interface import get_dr_object
-from logger import get_logger
+from utilities.logger import get_logger
 from dr2xml.settings_interface import get_settings_values
 from dr2xml.utils import Dr2xmlError
 from .generic import read_home_var, fill_homevar, check_homevar, get_correspond_cmor_var, \

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <context id="trip">
-	<!--CMIP6 Data Request version 01.00.21.post1-->
+	<!--CMIP6 Data Request version current_cmip6_dr-->
 	<!--CMIP6-CV version ??-->
 	<!--CMIP6_conventions_version v6.2.4-->
 	<!--dr2xml version current_version-->
@@ -22,7 +22,7 @@
 'excluded_request_links' = ['RFMIP-AeroIrf'],
 'excluded_spshapes' = ['XYA-na', 'XYG-na', 'na-A'],
 'excluded_tables' = ['Eyr', 'Oyr', 'Odec', 'IfxAnt', 'ImonAnt'],
-'excluded_vars' = ['pfull', 'phalf', 'n2oClim', 'ch4globalClim', 'co2massClim', 'n2oglobalClim', 'ch4Clim', 'o3Clim', 'co2Clim', 'ch4', 'co2', 'co', 'concdust', 'ec550aer', 'h2o', 'hcho', 'hcl', 'hno3', 'mmrbc', 'mmrdust', 'mmroa', 'mmrso4', 'mmrss', 'n2o', 'no2', 'no', 'o3Clim', 'o3loss', 'o3prod', 'oh', 'so2', 'mmrpm1', 'fco2antt', 'fco2fos', 'fco2nat', 'loadbc', 'loaddust', 'loadoa', 'loadso4', 'loadss', 'oxloss', 'oxprod', 'vmrox', 'bry', 'cly', 'ho2', 'meanage', 'noy', 'drybc', 'drydust', 'dryoa', 'dryso2', 'dryso4', 'dryss', 'emibc', 'emidust', 'emioa', 'emiso2', 'emiso4', 'emiss', 'od440aer', 'od870aer', 'od550lt1aer', 'wetbc', 'wetdust', 'wetoa', 'wetso4', 'wetss', 'cLand', 'cSoil', 'fAnthDisturb', 'fDeforestToProduct', 'fFireNat', 'fLuc', 'fProductDecomp', 'netAtmosLandCO2Flux', 'od443dust', 'od865dust', 'sconcdust', 'sconcso4', 'sconcss', 'sedustCI', 'burntFractionAll', 'cLitter', 'cProduct', 'cVeg', 'fFire', 'fLitterSoil', 'fVegLitter', 'nbp', 'shrubFrac'],
+'excluded_vars' = ['pfull', 'phalf', 'n2oClim', 'ch4globalClim', 'co2massClim', 'n2oglobalClim', 'ch4Clim', 'o3Clim', 'co2Clim'],
 'excluded_vars_per_config' = {'AESM' = ['co2mass', 'ch4global', 'n2oglobal'], 'AGCM' = ['ch4', 'co2', 'co', 'concdust', 'ec550aer', 'h2o', 'hcho', 'hcl', 'hno3', 'mmrbc', 'mmrdust', 'mmroa', 'mmrso4', 'mmrss', 'n2o', 'no2', 'no', 'o3Clim', 'o3loss', 'o3prod', 'oh', 'so2', 'mmrpm1', 'fco2antt', 'fco2fos', 'fco2nat', 'loadbc', 'loaddust', 'loadoa', 'loadso4', 'loadss', 'oxloss', 'oxprod', 'vmrox', 'bry', 'cly', 'ho2', 'meanage', 'noy', 'drybc', 'drydust', 'dryoa', 'dryso2', 'dryso4', 'dryss', 'emibc', 'emidust', 'emioa', 'emiso2', 'emiso4', 'emiss', 'od440aer', 'od870aer', 'od550lt1aer', 'wetbc', 'wetdust', 'wetoa', 'wetso4', 'wetss', 'cLand', 'cSoil', 'fAnthDisturb', 'fDeforestToProduct', 'fFireNat', 'fLuc', 'fProductDecomp', 'netAtmosLandCO2Flux', 'od443dust', 'od865dust', 'sconcdust', 'sconcso4', 'sconcss', 'sedustCI', 'burntFractionAll', 'cLitter', 'cProduct', 'cVeg', 'fFire', 'fLitterSoil', 'fVegLitter', 'nbp', 'shrubFrac'], 'AOESM' = ['co2mass', 'ch4global', 'n2oglobal'], 'AOGCM' = ['ch4', 'co2', 'co', 'concdust', 'ec550aer', 'h2o', 'hcho', 'hcl', 'hno3', 'mmrbc', 'mmrdust', 'mmroa', 'mmrso4', 'mmrss', 'n2o', 'no2', 'no', 'o3Clim', 'o3loss', 'o3prod', 'oh', 'so2', 'mmrpm1', 'fco2antt', 'fco2fos', 'fco2nat', 'loadbc', 'loaddust', 'loadoa', 'loadso4', 'loadss', 'oxloss', 'oxprod', 'vmrox', 'bry', 'cly', 'ho2', 'meanage', 'noy', 'drybc', 'drydust', 'dryoa', 'dryso2', 'dryso4', 'dryss', 'emibc', 'emidust', 'emioa', 'emiso2', 'emiso4', 'emiss', 'od440aer', 'od870aer', 'od550lt1aer', 'wetbc', 'wetdust', 'wetoa', 'wetso4', 'wetss', 'cLand', 'cSoil', 'fAnthDisturb', 'fDeforestToProduct', 'fFireNat', 'fLuc', 'fProductDecomp', 'netAtmosLandCO2Flux', 'od443dust', 'od865dust', 'sconcdust', 'sconcso4', 'sconcss', 'sedustCI', 'burntFractionAll', 'cLitter', 'cProduct', 'cVeg', 'fFire', 'fLitterSoil', 'fVegLitter', 'nbp', 'shrubFrac'], 'LESM' = ['ch4', 'co2', 'hur', 'hus', 'n2o', 'o3', 'ta', 'ua', 'va', 'wap', 'zg', 'clt', 'ccb', 'cct', 'ci', 'clivi', 'clt', 'clwvi', 'evspsbl', 'fco2antt', 'fco2fos', 'pr', 'prc', 'prsn', 'prw', 'ps', 'psl', 'rldscs', 'rlut', 'rlutcs', 'rsdscs', 'rsdt', 'rsuscs', 'rsut', 'rsutcs', 'ch4global', 'co2mass', 'n2oglobal', 'mc', 'cl', 'cli', 'clw'], 'LGCM' = ['ch4', 'co2', 'hur', 'hus', 'n2o', 'o3', 'ta', 'ua', 'va', 'wap', 'zg', 'clt', 'ccb', 'cct', 'ci', 'clivi', 'clt', 'clwvi', 'evspsbl', 'fco2antt', 'fco2fos', 'pr', 'prc', 'prsn', 'prw', 'ps', 'psl', 'rldscs', 'rlut', 'rlutcs', 'rsdscs', 'rsdt', 'rsuscs', 'rsut', 'rsutcs', 'ch4global', 'co2mass', 'n2oglobal', 'mc', 'cl', 'cli', 'clw']},
 'fx_from_file' = {'areacella' = {'complete' = {'HR' = 'areacella_complete_CMIP6_tl359', 'LR' = 'areacella_complete_CMIP6_tl127'}}},
 'grid_choice' = {'CNRM-CM6-1' = 'LR', 'CNRM-CM6-1-HR' = 'HR', 'CNRM-ESM2-1' = 'LR', 'CNRM-ESM2-1-HR' = 'HR'},
@@ -43,7 +43,7 @@
 'references' = 'http://www.umr-cnrm.fr/cmip6/references',
 'sampling_timestep' = {'HR' = {'nemo' = '1800.0', 'surfex' = '900.0', 'trip' = '1800.0'}, 'LR' = {'nemo' = '1800.0', 'surfex' = '900.0', 'trip' = '1800.0'}},
 'save_project_settings' = 'dr2xml_project_settings.py',
-'sizes' = {'HR' = ['1514100', '75', '259200', '91', '30', '14', '128'], 'LR' = ['106428', '75', '32768', '91', '30', '14', '128']},
+'sizes' = {'HR' = {'nh1' = '128', 'nha' = '259200', 'nho' = '1514100', 'nla' = '91', 'nlas' = '30', 'nlo' = '75', 'nls' = '14'}, 'LR' = {'nh1' = '128', 'nha' = '32768', 'nho' = '106428', 'nla' = '91', 'nlas' = '30', 'nlo' = '75', 'nls' = '14'}},
 'source_types' = {'CNRM-CM6-1' = 'AOGCM', 'CNRM-CM6-1-HR' = 'AOGCM', 'CNRM-ESM2-1' = 'AOGCM BGC AER CHEM', 'CNRM-ESM2-1-HR' = 'AOGCM BGC AER'},
 'special_timestep_vars' = {'60mi' = ['cllcalipso', 'clmcalipso', 'clhcalipso', 'cltcalipso', 'cllcalipsoice', 'clmcalipsoice', 'clhcalipsoice', 'cltcalipsoice', 'cllcalipsoliq', 'clmcalipsoliq', 'clhcalipsoliq', 'cltcalipsoliq', 'cllcalipsoun', 'clmcalipsoun', 'clhcalipsoun', 'cltcalipsoun', 'clcalipso', 'clcalipsoice', 'clcalipsoliq', 'clcalipsoun', 'clcalipsotmp', 'clcalipsotmpice', 'clcalipsotmpliq', 'clcalipsotmpun', 'cfadLidarsr532', 'parasolRefl', 'parasolCRefl', 'cltlidarradar', 'clcalipso2', 'cfadDbze94', 'cltisccp', 'pctisccp', 'tauisccp', 'albisccp', 'meantbisccp', 'meantbclrisccp', 'clisccp', 'cltmodis', 'clwmodis', 'climodis', 'clhmodis', 'clmmodis', 'cllmodis', 'tautmodis', 'tauwmodis', 'tauimodis', 'reffclwmodis', 'reffclimodis', 'pctmodis', 'lwpmodis', 'iwpmodis', 'clmodis', 'jpdftaureliqmodis', 'jpdftaureicemodis', 'clmisr']},
 'tierMax' = '1',
@@ -78,7 +78,7 @@
 		<file id="rivo_Eday_gn" name="IOXDIRrivo_Eday_CNRM-CM6-1_a4SST_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1961-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CFMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> a4SST </variable>
 			<variable name="description" type="string"> As piSST, but with monthly-varying SSTs taken from years 111-140 of each model's own abrupt-4xCO2 experiment instead of from piControl. Sea-ice is unchanged from piSST </variable>
@@ -147,7 +147,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="wtd_Emon_gn" name="IOXDIRwtd_Emon_CNRM-CM6-1_a4SST_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1961-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CFMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> a4SST </variable>
 			<variable name="description" type="string"> As piSST, but with monthly-varying SSTs taken from years 111-140 of each model's own abrupt-4xCO2 experiment instead of from piControl. Sea-ice is unchanged from piSST </variable>
@@ -216,7 +216,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="fldf_HOMALmon_gn" name="IOXDIRfldf_HOMALmon_CNRM-CM6-1_a4SST_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1961-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CFMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> a4SST </variable>
 			<variable name="description" type="string"> As piSST, but with monthly-varying SSTs taken from years 111-140 of each model's own abrupt-4xCO2 experiment instead of from piControl. Sea-ice is unchanged from piSST </variable>
@@ -284,7 +284,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="fwtd_HOMALmon_gn" name="IOXDIRfwtd_HOMALmon_CNRM-CM6-1_a4SST_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1961-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CFMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> a4SST </variable>
 			<variable name="description" type="string"> As piSST, but with monthly-varying SSTs taken from years 111-140 of each model's own abrupt-4xCO2 experiment instead of from piControl. Sea-ice is unchanged from piSST </variable>

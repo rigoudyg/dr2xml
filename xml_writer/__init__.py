@@ -14,7 +14,7 @@ from .element import Element
 from .header import Header
 from .comment import Comment
 from .parser import xml_file_parser, parse_xml_string_rewrite
-from .utils import encode_if_needed, decode_if_needed
+from utilities.encoding_tools import encode_if_needed, decode_if_needed
 
 if __name__ == "__main__":
     dr2xml_tests_dir = os.sep.join([os.sep.join(os.path.abspath(__file__).split(os.sep)[:-1]), "tests"])

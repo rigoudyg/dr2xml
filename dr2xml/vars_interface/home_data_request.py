@@ -11,7 +11,7 @@ import os
 from collections import defaultdict
 
 from dr2xml.config import get_config_variable, set_config_variable
-from logger import get_logger
+from utilities.logger import get_logger
 from dr2xml.settings_interface import get_settings_values
 from dr2xml.utils import VarsError
 from .cmor import read_home_var_cmor, check_cmor_variable
@@ -107,7 +107,8 @@ def process_home_vars(mip_vars_list, mips, expid="False"):
     logger.info("homevars list: %s" % " ".join([sv.label for sv in home_vars_list]))
     #
     for hv in home_vars_list:
-        hv_info = {"varname": hv.label, "realm": hv.modeling_realm, "freq": hv.frequency, "table": hv.mipTable}
+        hv_info = {"varname": hv.label, "realm": ",".join(hv.modeling_realm), "freq": hv.frequency,
+                   "table": hv.mipTable}
         logger.debug(hv_info)
         if hv.type in ["cmor", ]:
             new_hv = check_cmor_variable(hv, mip_vars_list, hv_info)

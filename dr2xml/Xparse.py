@@ -18,7 +18,7 @@ from collections import OrderedDict
 from .xml_interface import get_root_of_xml_file, is_xml_element_to_parse, find_rank_xml_subelement
 
 # Logger
-from logger import get_logger
+from utilities.logger import get_logger
 
 
 # Define for each object kind those attributes useful for grid inheritance
@@ -169,7 +169,7 @@ def attrib_by_ref(elt, attrib, index, level):
             if rep:
                 return rep
         except:
-            if not refid.startswith("dummy_"):
+            if not "dummy" in refid:
                 raise XparseError("Error : reference '%s' is invalid" % refid)
 
 

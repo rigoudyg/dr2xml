@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<context id="nemo">
+	<!--CMIP6 Data Request version current_cmip6_dr-->
+	<!--dr2xml version 3.1-->
+	<!--Lab_and_model settings
+{'excluded_vars' = [],
+'excluded_vars_file' = [],
+'institution_id' = 'CNRM-CERFACS',
+'listof_home_vars' = 'None',
+'max_priority' = '3',
+'mips' = {'AerChemMIP', 'C4MIP', 'CCMI', 'CFMIP', 'CMIP', 'CMIP5', 'CMIP6', 'CORDEX', 'DAMIP', 'DCPP', 'DECK', 'DynVar', 'FAFMIP', 'GMMIP', 'GeoMIP', 'HighResMIP', 'ISMIP6', 'LS3MIP', 'LUMIP', 'OMIP', 'PDRMIP', 'PMIP', 'RFMIP', 'SIMIP', 'SPECS', 'ScenarioMIP', 'SolarMIP', 'VIACSAB', 'VolMIP'},
+'path_extra_tables' = 'None',
+'path_special_defs' = './input/special_defs',
+'ping_variables_prefix' = 'CMIP6_',
+'project' = 'ping',
+'realms_per_context' = {'arpsfx' = ['atmos', 'atmos atmosChem', 'aerosol', 'atmos land', 'land', 'landIce land', 'aerosol land', 'land landIce', 'landIce'], 'nemo' = ['seaIce', 'ocean', 'ocean seaIce', 'ocnBgchem', 'seaIce ocean']},
+'tierMax' = '3'}-->
+	<!--Simulation settings
+{}-->
+	<!--Year processed None-->
+	<field_definition>
+		<field id="CMIP6_fsitherm" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) water_flux_into_sea_water_due_to_sea_ice_thermodynamics : computed as the sea ice thermodynamic water flux into the ocean divided by the area of the ocean portion of the grid cell.-->
+		<field id="CMIP6_hfsifrazil" field_ref="?dummy_XYO"/>
+		<!--P1 (W m-2) heat_flux_into_sea_water_due_to_freezing_of_frazil_ice : Heat Flux into Sea Water due to Frazil Ice Formation-->
+		<field id="CMIP6_hfsifrazil2d" field_ref="?dummy_XY"/>
+		<!--P1 (W m-2) heat_flux_into_sea_water_due_to_freezing_of_frazil_ice : Heat Flux into Sea Water due to Frazil Ice Formation-->
+		<field id="CMIP6_sfdsi" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) downward_sea_ice_basal_salt_flux : This field is physical, and it arises since sea ice has a nonzero salt content, so it exchanges salt with the liquid ocean upon melting and freezing.-->
+		<field id="CMIP6_siage" field_ref="?dummy_XY"/>
+		<!--P1 (s) age_of_sea_ice : Age of sea ice-->
+		<field id="CMIP6_siareaacrossline" field_ref="?dummy_TRS"/>
+		<!--P2 (m2 s-1)  : Flux across 4 straits-->
+		<field id="CMIP6_siarean" field_ref="?dummy_0d"/>
+		<!--P2 (1e6 km2) sea_ice_area : Sea ice area North-->
+		<field id="CMIP6_siareas" field_ref="?dummy_0d"/>
+		<!--P2 (1e6 km2) sea_ice_area : Sea ice area South-->
+		<field id="CMIP6_sicompstren" field_ref="?dummy_XY"/>
+		<!--P2 (N m-1) compressive_strength_of_sea_ice : Compressive sea ice strength-->
+		<field id="CMIP6_siconc" field_ref="?dummy_XY_typesi"/>
+		<!--P1 (%) sea_ice_area_fraction : Sea Ice Area Fraction (Ocean Grid)-->
+		<field id="CMIP6_siconca" field_ref="?dummy_XY_typesi"/>
+		<!--P1 (%) sea_ice_area_fraction : Sea Ice Area Fraction (Atmospheric Grid)-->
+		<field id="CMIP6_sidconcdyn" field_ref="?dummy_XY"/>
+		<!--P2 (s-1) tendency_of_sea_ice_area_fraction_due_to_dynamics : sea-ice area fraction change from dynamics-->
+		<field id="CMIP6_sidconcth" field_ref="?dummy_XY"/>
+		<!--P2 (s-1) tendency_of_sea_ice_area_fraction_due_to_thermodynamics : sea-ice area fraction change from thermodynamics-->
+		<field id="CMIP6_sidivvel" field_ref="?dummy_XY"/>
+		<!--P2 (s-1) divergence_of_sea_ice_velocity : Divergence of the sea-ice velocity field-->
+		<field id="CMIP6_sidmassdyn" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1)  : sea-ice mass change from dynamics-->
+		<field id="CMIP6_sidmassevapsubl" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) water_evaporation_flux : sea-ice mass change through evaporation and sublimation-->
+		<field id="CMIP6_sidmassgrowthbot" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_congelation_ice_accumulation : sea-ice mass change through basal growth-->
+		<field id="CMIP6_sidmassgrowthwat" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1)  : sea-ice mass change through growth in supercooled open water (aka frazil)-->
+		<field id="CMIP6_sidmasslat" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1)  : Lateral sea ice melt rate-->
+		<field id="CMIP6_sidmassmeltbot" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_basal_melting : sea-ice mass change through bottom melting-->
+		<field id="CMIP6_sidmassmelttop" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_surface_melting : sea-ice mass change through surface melting-->
+		<field id="CMIP6_sidmasssi" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) tendency_of_sea_ice_amount_due_to_snow_conversion : sea-ice mass change through snow-to-ice conversion-->
+		<field id="CMIP6_sidmassth" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1)  : sea-ice mass change from thermodynamics-->
+		<field id="CMIP6_sidmasstranx" field_ref="?dummy_XY"/>
+		<!--P2 (kg s-1) sea_ice_x_transport : X-component of sea-ice mass transport-->
+		<field id="CMIP6_sidmasstrany" field_ref="?dummy_XY"/>
+		<!--P2 (kg s-1) sea_ice_y_transport : Y-component of sea-ice mass transport-->
+		<field id="CMIP6_sidragbot" field_ref="?dummy_XY"/>
+		<!--P3 (1)  : Ocean drag coefficient-->
+		<field id="CMIP6_sidragtop" field_ref="?dummy_XY"/>
+		<!--P3 (1) surface_drag_coefficient_for_momentum_in_air : Atmospheric drag coefficient-->
+		<field id="CMIP6_siextentn" field_ref="?dummy_0d"/>
+		<!--P2 (1e6 km2) sea_ice_extent : Sea ice extent North-->
+		<field id="CMIP6_siextents" field_ref="?dummy_0d"/>
+		<!--P2 (1e6 km2) sea_ice_extent : Sea ice extent South-->
+		<field id="CMIP6_sifb" field_ref="?dummy_XY"/>
+		<!--P2 (m) sea_ice_freeboard : Sea-ice freeboard-->
+		<field id="CMIP6_siflcondbot" field_ref="?dummy_XY"/>
+		<!--P2 (W m-2)  : Net conductive heat fluxes in ice at the bottom-->
+		<field id="CMIP6_siflcondtop" field_ref="?dummy_XY"/>
+		<!--P2 (W m-2)  : Net conductive heat flux in ice at the surface-->
+		<field id="CMIP6_siflfwbot" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1)  : Freshwater flux from sea ice-->
+		<field id="CMIP6_siflfwdrain" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1)  : Freshwater flux from sea-ice surface-->
+		<field id="CMIP6_sifllatstop" field_ref="?dummy_XY"/>
+		<!--P1 (W m-2) surface_upward_latent_heat_flux : Net latent heat flux over sea ice-->
+		<field id="CMIP6_sifllwdtop" field_ref="?dummy_XY"/>
+		<!--P1 (W m-2) surface_downwelling_longwave_flux_in_air : Downwelling longwave flux over sea ice-->
+		<field id="CMIP6_sifllwutop" field_ref="?dummy_XY"/>
+		<!--P1 (W m-2) surface_upwelling_longwave_flux_in_air : Upwelling Longwave Flux over Sea Ice-->
+		<field id="CMIP6_siflsenstop" field_ref="?dummy_XY"/>
+		<!--P1 (W m-2) surface_upward_sensible_heat_flux : Net upward sensible heat flux over sea ice-->
+		<field id="CMIP6_siflsensupbot" field_ref="?dummy_XY"/>
+		<!--P2 (W m-2) upward_sea_ice_basal_heat_flux : __unset__-->
+		<field id="CMIP6_siflswdbot" field_ref="?dummy_XY"/>
+		<!--P2 (W m-2)  : Downwelling shortwave flux under sea ice-->
+		<field id="CMIP6_siflswdtop" field_ref="?dummy_XY"/>
+		<!--P1 (W m-2) surface_downwelling_shortwave_flux_in_air : Downwelling shortwave flux over sea ice-->
+		<field id="CMIP6_siflswutop" field_ref="?dummy_XY"/>
+		<!--P1 (W m-2) surface_upwelling_shortwave_flux_in_air : Upwelling Shortwave Flux over Sea Ice-->
+		<field id="CMIP6_siforcecoriolx" field_ref="?dummy_XY"/>
+		<!--P3 (N m-2)  : Coriolis force term in force balance (x-component)-->
+		<field id="CMIP6_siforcecorioly" field_ref="?dummy_XY"/>
+		<!--P3 (N m-2)  : Coriolis force term in force balance (y-component)-->
+		<field id="CMIP6_siforceintstrx" field_ref="?dummy_XY"/>
+		<!--P3 (N m-2)  : Internal stress term in force balance (x-component)-->
+		<field id="CMIP6_siforceintstry" field_ref="?dummy_XY"/>
+		<!--P3 (N m-2)  : Internal stress term in force balance (y-component)-->
+		<field id="CMIP6_siforcetiltx" field_ref="?dummy_XY"/>
+		<!--P3 (N m-2)  : Sea-surface tilt term in force balance (x-component)-->
+		<field id="CMIP6_siforcetilty" field_ref="?dummy_XY"/>
+		<!--P3 (N m-2)  : Sea-surface tilt term in force balance (y-component)-->
+		<field id="CMIP6_sihc" field_ref="?dummy_XY"/>
+		<!--P2 (J m-2) integral_of_sea_ice_temperature_wrt_depth_expressed_as_heat_content : Sea-ice heat content per unit area-->
+		<field id="CMIP6_siitdconc" field_ref="?dummy_XY_iceband"/>
+		<!--P3 (%)  : K=ice depth bands-->
+		<field id="CMIP6_siitdsnconc" field_ref="?dummy_XY_iceband"/>
+		<!--P3 (%)  : K=ice depth bands-->
+		<field id="CMIP6_siitdsnthick" field_ref="?dummy_XY_iceband"/>
+		<!--P3 (m)  : K=ice depth bands-->
+		<field id="CMIP6_siitdthick" field_ref="?dummy_XY_iceband"/>
+		<!--P3 (m)  : K=ice depth bands-->
+		<field id="CMIP6_simass" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) sea_ice_amount : (in OImon, sim included snow and sea ice mass)-->
+		<field id="CMIP6_simassacrossline" field_ref="?dummy_TRS"/>
+		<!--P1 (kg s-1) sea_ice_transport_across_line : Flux across 4 straits-->
+		<field id="CMIP6_simpconc" field_ref="?dummy_XY_typemp"/>
+		<!--P3 (%) area_fraction : Percentage Cover of Sea-Ice by Meltpond-->
+		<field id="CMIP6_simpmass" field_ref="?dummy_XY"/>
+		<!--P3 (kg m-2)  : Meltpond Mass per Unit Area-->
+		<field id="CMIP6_simprefrozen" field_ref="?dummy_XY"/>
+		<!--P3 (m)  : Thickness of Refrozen Ice on Melt Pond-->
+		<field id="CMIP6_sipr" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) rainfall_flux : Rainfall rate over sea ice-->
+		<field id="CMIP6_sirdgconc" field_ref="?dummy_XY"/>
+		<!--P3 (1)  : Percentage Cover of Sea-Ice by Ridging-->
+		<field id="CMIP6_sirdgthick" field_ref="?dummy_XY"/>
+		<!--P3 (m)  : Ridged ice thickness-->
+		<field id="CMIP6_sisali" field_ref="?dummy_XY"/>
+		<!--P1 (0.001) sea_ice_salinity : Sea ice salinity-->
+		<field id="CMIP6_sisaltmass" field_ref="?dummy_XY"/>
+		<!--P3 (kg m-2)  : Mass of salt in sea ice per area-->
+		<field id="CMIP6_sishevel" field_ref="?dummy_XY"/>
+		<!--P2 (s-1)  : Maximum shear of sea-ice velocity field-->
+		<field id="CMIP6_sisnconc" field_ref="?dummy_XY"/>
+		<!--P1 (%) surface_snow_area_fraction : Snow area fraction-->
+		<field id="CMIP6_sisnhc" field_ref="?dummy_XY"/>
+		<!--P2 (J m-2) thermal_energy_content_of_surface_snow : Snow-heat content per unit area-->
+		<field id="CMIP6_sisnmass" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) liquid_water_content_of_surface_snow : (in OImon, sim included snow and sea ice mass)-->
+		<field id="CMIP6_sisnthick" field_ref="?dummy_XY"/>
+		<!--P1 (m) surface_snow_thickness : (in OImon, snd was volume per entire cell area)-->
+		<field id="CMIP6_sispeed" field_ref="?dummy_XY"/>
+		<!--P1 (m s-1) sea_ice_speed : Sea-ice speed-->
+		<field id="CMIP6_sistremax" field_ref="?dummy_XY"/>
+		<!--P3 (N m-1)  : Maximum shear stress in sea ice-->
+		<field id="CMIP6_sistresave" field_ref="?dummy_XY"/>
+		<!--P3 (N m-1)  : Average normal stress in sea ice-->
+		<field id="CMIP6_sistrxdtop" field_ref="?dummy_XY"/>
+		<!--P2 (N m-2) surface_downward_x_stress : X-component of atmospheric stress on sea ice-->
+		<field id="CMIP6_sistrxubot" field_ref="?dummy_XY"/>
+		<!--P2 (N m-2) upward_x_stress_at_sea_ice_base : X-component of ocean stress on sea ice-->
+		<field id="CMIP6_sistrydtop" field_ref="?dummy_XY"/>
+		<!--P2 (N m-2) surface_downward_y_stress : Y-component of atmospheric stress on sea ice-->
+		<field id="CMIP6_sistryubot" field_ref="?dummy_XY"/>
+		<!--P2 (N m-2) upward_y_stress_at_sea_ice_base : Y-component of ocean stress on sea ice-->
+		<field id="CMIP6_sitempbot" field_ref="?dummy_XY"/>
+		<!--P2 (K)  : Temperature at ice-ocean interface-->
+		<field id="CMIP6_sitempsnic" field_ref="?dummy_XY"/>
+		<!--P1 (K) sea_ice_surface_temperature : Temperature at snow-ice interface-->
+		<field id="CMIP6_sitemptop" field_ref="?dummy_XY"/>
+		<!--P1 (K) sea_ice_surface_temperature : Surface temperature of sea ice-->
+		<field id="CMIP6_sithick" field_ref="?dummy_XY"/>
+		<!--P1 (m) sea_ice_thickness : (in OImon, sit was volume per entire cell area)-->
+		<field id="CMIP6_sitimefrac" field_ref="?dummy_XY"/>
+		<!--P1 (1) sea_ice_time_fraction : Fraction of time steps with sea ice-->
+		<field id="CMIP6_siu" field_ref="?dummy_XY"/>
+		<!--P1 (m s-1) sea_ice_x_velocity : X-component of sea ice velocity-->
+		<field id="CMIP6_siv" field_ref="?dummy_XY"/>
+		<!--P1 (m s-1) sea_ice_y_velocity : Y-component of sea ice velocity-->
+		<field id="CMIP6_sivol" field_ref="?dummy_XY"/>
+		<!--P1 (m) sea_ice_thickness : Sea-ice volume per area-->
+		<field id="CMIP6_sivoln" field_ref="?dummy_0d"/>
+		<!--P2 (1e3 km3) sea_ice_volume : Sea ice volume North-->
+		<field id="CMIP6_sivols" field_ref="?dummy_0d"/>
+		<!--P2 (1e3 km3) sea_ice_volume : Sea ice volume South-->
+		<field id="CMIP6_sndmassdyn" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1)  : Snow Mass Rate of Change through Avection by Sea-ice Dynamics-->
+		<field id="CMIP6_sndmassmelt" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_snow_melt_flux : Snow Mass Rate of Change through Melt-->
+		<field id="CMIP6_sndmasssi" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1)  : Snow Mass Rate of Change through Snow-to-Ice Conversion-->
+		<field id="CMIP6_sndmasssnf" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) snowfall_flux : snow mass change through snow fall-->
+		<field id="CMIP6_sndmasssubl" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1)  : Snow Mass Rate of Change through Evaporation or Sublimation-->
+		<field id="CMIP6_sndmasswindrif" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1)  : Snow Mass Rate of Change through Wind Drift of Snow-->
+		<field id="CMIP6_snmassacrossline" field_ref="?dummy_TRS"/>
+		<!--P2 (kg s-1)  : Flux across 4 straits-->
+		<field id="CMIP6_vsfsit" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) virtual_salt_flux_into_sea_water_due_to_sea_ice_thermodynamics : This variable measures the virtual salt flux into sea water due to the melting of sea ice. It is set to zero in models which receive a real water flux.-->
+	</field_definition>
+</context>
