@@ -98,8 +98,6 @@ def create_xios_axis_and_grids_for_plevs_unions(svars, plev_sfxs, dummies):
             #    print "for var %s/%s, dim %s is not related to pressure"%(sv.label,sv.label_without_psuffix,sd.label)
     #
     # Second, create xios axis for union of plevs
-    union_axis_defs = axis_defs
-    union_grid_defs = grid_defs
     for lwps in list(dict_plevs):
         sdim_union = get_dr_object("SimpleDim")
         plevs_union_xios = ""
@@ -132,7 +130,7 @@ def create_xios_axis_and_grids_for_plevs_unions(svars, plev_sfxs, dummies):
                         sdim_union.is_union_for.append(sv.label + "_" + sd.label)
                     else:
                         logger.warning("Warning: No requested nor value found for %s with vertical dimension %s"
-                                       % (svar.label, plev))
+                                       % (sv.label, plev))
                     plevs_union = plevs_union.union(plev_values)
                     logger.debug("    -- on %s : %s" % (plev, plev_values))
                 logger.debug("       * %s (%s)" % (sv.label, sv.mipTable))

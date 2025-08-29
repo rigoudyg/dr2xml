@@ -285,25 +285,6 @@ def id_has_expr_with_at(field_id, index):
         # raise Xparse_error("field %s is not known"%field_id)
 
 
-if False:
-
-    nemo = init_context('nemo', "./", False)
-    # print list(nemo)
-    grid = id2grid("CMIP6_O18sw", nemo, True)
-    print(grid.attrib['id'])
-    print()
-
-    arpsfx = init_context('arpsfx', "./", False)
-    grid = id2grid("CMIP6_cdnc", arpsfx, True)
-    # grid=None
-    if grid is not None:
-        # print "Grid id is :"+grid.attrib['id']
-        print(create_string_from_xml_element(grid))
-        grid_string = create_string_from_xml_element(grid)
-        new_grid_string = re.sub(r'axis_ref= *.([\w_])*.', 'axis_ref="axis_autre"', grid_string)
-        print(new_grid_string)
-
-
 class XparseError(Exception):
     """
     Xparse exceptions class.

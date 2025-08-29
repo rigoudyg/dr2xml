@@ -292,6 +292,7 @@ class DataRequest(DataRequestBasic):
                 endyear = year
         elif tslice.type in ["startRange", ]:  # e.g. _slice_VolMIP3
             # used only for VolMIP : _slice_VolMIP3
+            nyear = tslice.nyears
             start_year = self.find_exp_start_year(exp_label, exp_startyear, branch_year_in_child=branch_year_in_child)
             relevant = (year >= start_year and year < start_year + nyear)
             endyear = start_year + nyear - 1
