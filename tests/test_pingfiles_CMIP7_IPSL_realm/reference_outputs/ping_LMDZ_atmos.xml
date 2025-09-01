@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="utf-8"?>
+<context id="LMDZ">
+	<!--CMIP7 Data Request version Software current_cmip7_dr_software - Content v1.2.2-->
+	<!--dr2xml version current_version-->
+	<!--Lab_and_model settings
+{'data_request_content_version' = 'v1.2.2',
+'data_request_used' = 'CMIP7',
+'excluded_vars' = [],
+'excluded_vars_file' = [],
+'institution_id' = 'IPSL',
+'laboratory_used' = 'ipsl',
+'listof_home_vars' = 'None',
+'max_priority' = '3',
+'mips' = {'AerChemMIP2', 'C4MIP', 'CDRMIP', 'CERESMIP', 'CFMIP', 'CMIP', 'CORDEX', 'DAMIP', 'DCPP', 'FAFMIP', 'FireMIP', 'FishMIP', 'GeoMIP', 'HT-MIP/VolMIP', 'HighResMIP', 'IRRMIP', 'ISIMIP', 'ISMIP7', 'LMIP', 'LUMIP', 'LongRunMIP', 'MISOMIP2', 'NAHosMIP', 'OMIP', 'Other', 'PAMIP', 'PMIP', 'RAMIP', 'RFMIP', 'SIMIP', 'SOFIAMIP', 'ScenarioMIP', 'TIPMIP', 'VIACSAB', 'VolMIP', 'WhatIfMIP'},
+'path_extra_tables' = 'None',
+'path_special_defs' = 'None',
+'ping_variables_prefix' = 'CMIP7_',
+'project' = 'ping',
+'realms_per_context' = {'LMDZ' = ['atmos', 'land', 'landIce', 'atmosChem', 'aerosol'], 'nemo' = ['seaIce', 'ocean', 'ocnBgchem'], 'orchidee' = ['land', 'landIce']},
+'tierMax' = '3'}-->
+	<!--Simulation settings
+{}-->
+	<!--Year processed None-->
+	<field_definition>
+		<field id="CMIP7_albisccp" field_ref="?dummy_XY"/>
+		<!--P2 (1) cloud_albedo : time-means weighted by the ISCCP Total Cloud Fraction - see <https://www.cfmip.org/tools-and-data/cosp>-->
+		<field id="CMIP7_albsrfc" field_ref="?dummy_XY"/>
+		<!--P2 (1) surface_albedo : surface albedo at grid cell level (i.e. the albedo averaged over all potential subgrid-scale structures) over all wave-bands; this shall apply to all realms (land, ocean, sea ice, land ice)-->
+		<field id="CMIP7_aod" field_ref="?dummy_XY_lambda550nm"/>
+		<!--P2 (1E-09) stratosphere_optical_thickness_due_to_volcanic_ambient_aerosol_particles : This is the monthly averaged aerosol optical thickness at 550 nm due to stratospheric volcanic sulphate aerosols-->
+		<field id="CMIP7_areacella" field_ref="?dummy_XY"/>
+		<!--P1 (m2) cell_area : Cell areas for any grid used to report atmospheric variables and any other variable using that grid (e.g., soil moisture content). These cell areas should be defined to enable exact calculation of global integrals (e.g., of vertical fluxes of energy at the surface and top of the atmosphere).-->
+		<field id="CMIP7_bldep" field_ref="?dummy_XY"/>
+		<!--P2 (m) atmosphere_boundary_layer_thickness : Boundary layer depth-->
+		<field id="CMIP7_ccb" field_ref="?dummy_XY"/>
+		<!--P2 (Pa) air_pressure_at_convective_cloud_base : Where convective cloud is present in the grid cell, the instantaneous cloud base altitude should be that of the bottom of the lowest level containing convective cloud. Missing data should be reported in the absence of convective cloud. The time mean should be calculated from these quantities averaging over occasions when convective cloud is present only, and should contain missing data for occasions when no convective cloud is present during the meaning period.-->
+		<field id="CMIP7_ccldncl" field_ref="?dummy_XY"/>
+		<!--P2 (m-3) number_concentration_of_convective_cloud_liquid_water_particles_at_convective_liquid_water_cloud_top : Cloud Droplet Number Concentration of Convective Cloud Tops-->
+		<field id="CMIP7_cct" field_ref="?dummy_XY"/>
+		<!--P2 (Pa) air_pressure_at_convective_cloud_top : Where convective cloud is present in the grid cell, the instantaneous cloud top altitude should be that of the top of the highest level containing convective cloud. Missing data should be reported in the absence of convective cloud. The time mean should be calculated from these quantities averaging over occasions when convective cloud is present only, and should contain missing data for occasions when no convective cloud is present during the meaning period.-->
+		<field id="CMIP7_cfadDbze94" field_ref="?dummy_XY_alt40_dbze"/>
+		<!--P2 (1) histogram_of_equivalent_reflectivity_factor_over_height_above_reference_ellipsoid : CloudSat Radar Reflectivity-->
+		<field id="CMIP7_cfadLidarsr532" field_ref="?dummy_XY_alt40_scatratio"/>
+		<!--P2 (1) histogram_of_backscattering_ratio_in_air_over_height_above_reference_ellipsoid : CALIPSO Scattering Ratio-->
+		<field id="CMIP7_ci" field_ref="?dummy_XY"/>
+		<!--P2 (1) convection_time_fraction : Fraction of time that convection occurs in the grid cell .-->
+		<field id="CMIP7_cl" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (%) cloud_area_fraction_in_atmosphere_layer : Includes both large-scale and convective cloud.-->
+		<field id="CMIP7_clc" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (%) convective_cloud_area_fraction_in_atmosphere_layer : Include only convective cloud.-->
+		<field id="CMIP7_clcalipso" field_ref="?dummy_XY_alt40"/>
+		<!--P2 (%) cloud_area_fraction_in_atmosphere_layer : Percentage cloud cover in CALIPSO standard atmospheric layers.-->
+		<field id="CMIP7_clcalipsoice" field_ref="?dummy_XY_alt40"/>
+		<!--P2 (%) ice_cloud_area_fraction_in_atmosphere_layer : CALIPSO Ice Cloud Fraction-->
+		<field id="CMIP7_clcalipsoliq" field_ref="?dummy_XY_alt40"/>
+		<!--P2 (%) liquid_water_cloud_area_fraction_in_atmosphere_layer : CALIPSO Liquid Cloud Fraction-->
+		<field id="CMIP7_cldnci" field_ref="?dummy_XY"/>
+		<!--P2 (m-3) number_concentration_of_ice_crystals_in_air_at_ice_cloud_top : Concentration 'as seen from space' over ice-cloud portion of grid cell.  This is the value from uppermost model layer with ice cloud or, if available, it is the sum over all ice cloud tops, no matter where they occur, as long as they are seen from the top of the atmosphere. Weight by total ice cloud top fraction (as seen from TOA) of each time sample when computing monthly mean.-->
+		<field id="CMIP7_cldncl" field_ref="?dummy_XY"/>
+		<!--P2 (m-3) number_concentration_of_cloud_liquid_water_particles_in_air_at_liquid_water_cloud_top : Droplets are liquid only.  Report concentration 'as seen from space' over liquid cloudy portion of grid cell.  This is the value from uppermost model layer with liquid cloud or, if available, it is better to sum over all liquid cloud tops, no matter where they occur, as long as they are seen from the top of the atmosphere. Weight by total liquid cloud top fraction of  (as seen from TOA) each time sample when computing monthly mean.-->
+		<field id="CMIP7_cldnvi" field_ref="?dummy_XY"/>
+		<!--P2 (m-2) atmosphere_number_content_of_cloud_droplets : Droplets are liquid only.  Values are weighted by liquid cloud fraction in each layer when vertically integrating, and for monthly means the samples are weighted by total liquid cloud fraction (as seen from TOA).-->
+		<field id="CMIP7_clhcalipso" field_ref="?dummy_XY_p220"/>
+		<!--P2 (%) cloud_area_fraction_in_atmosphere_layer : Percentage cloud cover in layer centred on 220hPa-->
+		<field id="CMIP7_cli" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (kg kg-1) mass_fraction_of_cloud_ice_in_air : Includes both large-scale and convective cloud.  This is calculated as the mass of cloud ice in the grid cell divided by the mass of air (including the water in all phases) in the grid cell. It includes precipitating hydrometeors ONLY if the precipitating hydrometeors affect the calculation of radiative transfer in model.-->
+		<field id="CMIP7_clic" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (1) mass_fraction_of_convective_cloud_ice_in_air : Calculated as the mass of convective cloud ice  in the grid cell divided by the mass of air (including the water in all phases) in the grid cell.  This includes precipitating hydrometeors ONLY if the precipitating hydrometeors affect the calculation of radiative transfer in model.-->
+		<field id="CMIP7_climodis" field_ref="?dummy_XY"/>
+		<!--P2 (%) modis_ice_topped_cloud_area_fraction : MODIS Ice Cloud Fraction-->
+		<field id="CMIP7_clis" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (1) mass_fraction_of_stratiform_cloud_ice_in_air : Calculated as the mass of stratiform cloud ice  in the grid cell divided by the mass of air (including the water in all phases) in the grid cell.  This includes precipitating hydrometeors ONLY if the precipitating hydrometeors affect the calculation of radiative transfer in model.-->
+		<field id="CMIP7_clisccp" field_ref="?dummy_XY_plev7c_tau"/>
+		<!--P2 (%) isccp_cloud_area_fraction : Percentage cloud cover in optical depth categories.-->
+		<field id="CMIP7_clivi" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2) atmosphere_mass_content_of_cloud_ice : mass of ice water in the column divided by the area of the column (not just the area of the cloudy portion of the column). Includes precipitating frozen hydrometeors ONLY if the precipitating hydrometeor affects the calculation of radiative transfer in model.-->
+		<field id="CMIP7_clivic" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2) atmosphere_mass_content_of_convective_cloud_ice : calculate mass of convective ice water in the column divided by the area of the column (not just the area of the cloudy portion of the column). This includes precipitating frozen hydrometeors ONLY if the precipitating hydrometeors affect the calculation of radiative transfer in model.-->
+		<field id="CMIP7_clivimodis" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2) atmosphere_mass_content_of_cloud_ice : Mass of ice water in the column divided by the area of the column (not just the area of the cloudy portion of the column) as seen by the MODIS instrument simulator.-->
+		<field id="CMIP7_cllcalipso" field_ref="?dummy_XY_p840"/>
+		<!--P2 (%) cloud_area_fraction_in_atmosphere_layer : Percentage cloud cover in layer centred on 840hPa-->
+		<field id="CMIP7_clmcalipso" field_ref="?dummy_XY_p560"/>
+		<!--P2 (%) cloud_area_fraction_in_atmosphere_layer : Percentage cloud cover in layer centred on 560hPa-->
+		<field id="CMIP7_clmisr" field_ref="?dummy_XY_alt16_tau"/>
+		<!--P2 (%) cloud_area_fraction_in_atmosphere_layer : MISR cloud area fraction-->
+		<field id="CMIP7_clmodis" field_ref="?dummy_XY_plev7c_tau"/>
+		<!--P2 (1) modis_cloud_area_fraction : Percentage of total cloud cover in optical depth categories, as seen by the MODIS instrument simulator. Dimensions of tau (optical depth) and cloud-top pressure are the same used by the ISCCP instrument simulator. This is the equivalent MODIS version of the ISCCP _clisccp _variable.-->
+		<field id="CMIP7_clmodisice" field_ref="?dummy_XY_plev7c_tau"/>
+		<!--P2 (1) modis_ice_topped_cloud_area_fraction : Percentage ice-cloud cover in optical depth categories, as seen by the MODIS instrument simulator. Dimensions of tau (optical depth) and cloud-top pressure are the same as used by clisccp output from the ISCCP satellite simulator.-->
+		<field id="CMIP7_clmodisiceReff" field_ref="?dummy_XY_effectRadIc_tau"/>
+		<!--P2 (1) modis_ice_topped_cloud_area_fraction : Percentage ice-cloud cover as seen by the MODIS instrument simulator. Dimensions of cloud IWP (cloud ice water path) and r\_eff (effective droplet size). The effective radius bin edges are defined in the COSP simulator (see lines 134-152 of cosp\_config.F90: <https://github.com/CFMIP/COSPv2.0/blob/master/src/cosp_config.F90>)-->
+		<field id="CMIP7_clmodisliquid" field_ref="?dummy_XY_plev7c_tau"/>
+		<!--P2 (1) modis_liquid_topped_cloud_area_fraction : Percentage liquid-cloud cover in optical depth categories, as seen by the MODIS instrument simulator. Dimensions of tau (optical depth) and cloud-top pressure are the same used by clisccp (ISCCP simulator).-->
+		<field id="CMIP7_clmodisliquidReff" field_ref="?dummy_XY_effectRadLi_tau"/>
+		<!--P2 (1) modis_liquid_topped_cloud_area_fraction : Percentage liquid-cloud cover as seen by the MODIS instrument simulator. Dimensions of LWP (cloud liquid water path) and r\_eff (droplet effective radius). The effective radius bin edges are defined in the COSP simulator (see lines 134-152 of cosp\_config.F90: <https://github.com/CFMIP/COSPv2.0/blob/master/src/cosp_config.F90>)-->
+		<field id="CMIP7_cls" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (%) stratiform_cloud_area_fraction_in_atmosphere_layer : Cloud area fraction (reported as a percentage) for the whole atmospheric column due to stratiform clouds, as seen from the surface or the top of the atmosphere. Includes both large-scale and convective cloud.-->
+		<field id="CMIP7_clt" field_ref="?dummy_XY"/>
+		<!--P1 (%) cloud_area_fraction : for the whole atmospheric column, as seen from the surface or the top of the atmosphere. Includes both large-scale and convective cloud.-->
+		<field id="CMIP7_cltc" field_ref="?dummy_XY"/>
+		<!--P2 (%) convective_cloud_area_fraction : Convective cloud fraction-->
+		<field id="CMIP7_cltcalipso" field_ref="?dummy_XY"/>
+		<!--P2 (%) cloud_area_fraction : CALIPSO Total Cloud Fraction-->
+		<field id="CMIP7_cltisccp" field_ref="?dummy_XY"/>
+		<!--P2 (%) cloud_area_fraction : Total cloud area fraction (reported as a percentage) for the whole atmospheric column, as seen by the International Satellite Cloud Climatology Project (ISCCP) analysis. Includes both large-scale and convective cloud.  (MODIS). Includes both large-scale and convective cloud.-->
+		<field id="CMIP7_cltmodis" field_ref="?dummy_XY"/>
+		<!--P2 (%) modis_cloud_area_fraction : Percentage of total cloud cover as seen by the MODIS instrument simulator.-->
+		<field id="CMIP7_clw" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (kg kg-1) mass_fraction_of_cloud_liquid_water_in_air : Includes both large-scale and convective cloud.  Calculate as the mass of cloud liquid water in the grid cell divided by the mass of air (including the water in all phases) in the grid cells. Precipitating hydrometeors are included ONLY if the precipitating hydrometeors affect the calculation of radiative transfer in model.-->
+		<field id="CMIP7_clwc" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (1) mass_fraction_of_convective_cloud_liquid_water_in_air : Calculated as the mass of convective cloud liquid water in the grid cell divided by the mass of air (including the water in all phases) in the grid cell.  This includes precipitating hydrometeors ONLY if the precipitating hydrometeors affect the calculation of radiative transfer in model.-->
+		<field id="CMIP7_clwmodis" field_ref="?dummy_XY"/>
+		<!--P2 (%) modis_liquid_topped_cloud_area_fraction : MODIS Liquid Cloud Fraction-->
+		<field id="CMIP7_clws" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (1) mass_fraction_of_stratiform_cloud_liquid_water_in_air : Calculated as the mass of stratiform cloud liquid water in the grid cell divided by the mass of air (including the water in all phases) in the grid cell.  This includes precipitating hydrometeors ONLY if the precipitating hydrometeors affect the calculation of radiative transfer in model.-->
+		<field id="CMIP7_clwvi" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2) atmosphere_mass_content_of_cloud_condensed_water : mass of condensed (liquid + ice) water in the column divided by the area of the column (not just the area of the cloudy portion of the column). Includes precipitating hydrometeors ONLY if the precipitating hydrometeor affects the calculation of radiative transfer in model.-->
+		<field id="CMIP7_clwvic" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2) atmosphere_mass_content_of_convective_cloud_condensed_water : calculate mass of convective condensed (liquid + ice) water in the column divided by the area of the column (not just the area of the cloudy portion of the column). This includes precipitating hydrometeors ONLY if the precipitating hydrometeors affect the calculation of radiative transfer in model.-->
+		<field id="CMIP7_clwvimodis" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2) atmosphere_mass_content_of_cloud_condensed_water : Mass of condensed (liquid + ice) water in the column divided by the area of the column (not just the area of the cloudy portion of the column) as seen by the MODIS instrument simulator.-->
+		<field id="CMIP7_co2" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (mol mol-1) mole_fraction_of_carbon_dioxide_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.-->
+		<field id="CMIP7_co23D" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (kg kg-1) mass_fraction_of_carbon_dioxide_tracer_in_air : requested for all Emissions-driven runs-->
+		<field id="CMIP7_co2mass" field_ref="?dummy_0d"/>
+		<!--P2 (kg) atmosphere_mass_of_carbon_dioxide : Total atmospheric mass of Carbon Dioxide-->
+		<field id="CMIP7_co2s" field_ref="?dummy_XY_lowerModelLayer"/>
+		<!--P2 (1E-06) mole_fraction_of_carbon_dioxide_in_air : As co2, but only at the surface-->
+		<field id="CMIP7_dmc" field_ref="?dummy_XYAh_alevhalf"/>
+		<!--P2 (kg m-2 s-1) atmosphere_net_upward_deep_convective_mass_flux : The net mass flux  represents the difference between the updraft and downdraft components.   This is calculated as the convective mass flux divided by the area of the whole grid cell (not just the area of the cloud).-->
+		<field id="CMIP7_dtauc" field_ref="?dummy_XYA_alevel"/>
+		<!--P3 (1) atmosphere_optical_thickness_due_to_convective_cloud : This is the in-cloud optical depth obtained by considering only the cloudy portion of the grid cell-->
+		<field id="CMIP7_dtaus" field_ref="?dummy_XYA_alevel"/>
+		<!--P3 (1) atmosphere_optical_thickness_due_to_stratiform_cloud : This is the in-cloud optical depth obtained by considering only the cloudy portion of the grid cell.-->
+		<field id="CMIP7_edt" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (m2 s-1) atmosphere_heat_diffusivity : Vertical diffusion coefficient for temperature due to parametrised eddies-->
+		<field id="CMIP7_epfy" field_ref="?dummy_XY_plev39"/>
+		<!--P2 (m3 s-2) northward_eliassen_palm_flux_in_air : Transformed Eulerian Mean Diagnostics Meridional component Fy of Eliassen-Palm (EP) flux (Fy, Fz) derived from 6hr or higher frequency fields (use daily fields or 12 hr fields if the 6 hr are not available). Please use the definitions given by equation 3.5.3a of Andrews, Holton and Leovy text book, but scaled by density to have units m3 s-2.-->
+		<field id="CMIP7_epfz" field_ref="?dummy_XY_plev39"/>
+		<!--P2 (m3 s-2) upward_eliassen_palm_flux_in_air : zonal mean; hence YZT-->
+		<field id="CMIP7_evspsbl" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) water_evapotranspiration_flux : at surface; flux of water into the atmosphere due to conversion of both liquid and solid phases to vapor (from underlying surface and vegetation)-->
+		<field id="CMIP7_evu" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (m2 s-1) atmosphere_momentum_diffusivity : Vertical diffusion coefficient for momentum due to parametrised eddies-->
+		<field id="CMIP7_fco2antt" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_carbon_dioxide_expressed_as_carbon_due_to_anthropogenic_emission : This is requested only for the emission-driven coupled carbon climate model runs.  Does not include natural fire sources but, includes all anthropogenic sources, including fossil fuel use, cement production, agricultural burning, and sources associated with anthropogenic land use change excluding forest regrowth.-->
+		<field id="CMIP7_fco2fos" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_carbon_dioxide_expressed_as_carbon_due_to_emission_from_fossil_fuel_combustion : This is the prescribed anthropogenic CO2 flux from fossil fuel use, including cement production, and flaring (but not from land-use changes, agricultural burning, forest regrowth, etc.)-->
+		<field id="CMIP7_fco2nat" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_emission_from_natural_sources : This is what the atmosphere sees (on its own grid).  This field should be equivalent to the combined natural fluxes of carbon (requested in the L\_mon and O\_mon tables) that account for natural exchanges between the atmosphere and land or ocean reservoirs (i.e., "net ecosystem biospheric productivity", for land, and "air to sea CO2 flux", for ocean.)-->
+		<field id="CMIP7_hfdsnb" field_ref="?dummy_XY"/>
+		<!--P3 (W m-2) downward_heat_flux_at_ground_level_in_snow : Downward heat flux at snow botton-->
+		<field id="CMIP7_hfls" field_ref="?dummy_XY"/>
+		<!--P2 (W m-2) surface_upward_latent_heat_flux : includes both evaporation and sublimation-->
+		<field id="CMIP7_hfss" field_ref="?dummy_XY"/>
+		<!--P2 (W m-2) surface_upward_sensible_heat_flux : The surface sensible heat flux, also called turbulent heat flux, is the exchange of heat between the surface and the air by motion of air.-->
+		<field id="CMIP7_hur" field_ref="?dummy_XY_plev19"/>
+		<!--P1 (%) relative_humidity : This is the relative humidity with respect to liquid water for T> 0 C, and with respect to ice for T<0 C.-->
+		<field id="CMIP7_hurs" field_ref="?dummy_XY_height2m"/>
+		<!--P1 (%) relative_humidity : This is the relative humidity with respect to liquid water for T> 0 C, and with respect to ice for T<0 C.-->
+		<field id="CMIP7_hursmax" field_ref="?dummy_XY_height2m"/>
+		<!--P2 (%) relative_humidity : This is the relative humidity with respect to liquid water for T> 0 C, and with respect to ice for T<0 C.-->
+		<field id="CMIP7_hursmin" field_ref="?dummy_XY_height2m"/>
+		<!--P2 (%) relative_humidity : This is the relative humidity with respect to liquid water for T> 0 C, and with respect to ice for T<0 C.-->
+		<field id="CMIP7_hus" field_ref="?dummy_XY_plev19"/>
+		<!--P1 (1) specific_humidity : Specific humidity is the mass fraction of water vapor in (moist) air.-->
+		<field id="CMIP7_hus6" field_ref="?dummy_XY_plev6"/>
+		<!--P3 (1) specific_humidity : Specific humidity on 6 pressure levels in the lower troposphere-->
+		<field id="CMIP7_huss" field_ref="?dummy_XY_height2m"/>
+		<!--P1 (1) specific_humidity : Near-surface (usually, 2 meter) specific humidity.-->
+		<field id="CMIP7_intuadse" field_ref="?dummy_XY"/>
+		<!--P2 (MJ m-1 s-1) eastward_atmosphere_dry_static_energy_transport_across_unit_distance : Vertically integrated eastward dry static energy transport (cp.T +zg).v (Mass\_weighted\_vertical integral of the product of eastward wind by dry static\_energy per mass unit)-->
+		<field id="CMIP7_intuaw" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-1 s-1) eastward_atmosphere_water_transport_across_unit_distance : Vertically integrated Eastward moisture transport (Mass weighted vertical integral of the product of eastward wind by total water mass per unit mass)-->
+		<field id="CMIP7_intvadse" field_ref="?dummy_XY"/>
+		<!--P2 (MJ m-1 s-1) northward_atmosphere_dry_static_energy_transport_across_unit_distance : Vertically integrated northward dry static energy transport (cp.T +zg).v (Mass\_weighted\_vertical integral of the product of northward wind by dry static\_energy per mass unit)-->
+		<field id="CMIP7_intvaw" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-1 s-1) northward_atmosphere_water_transport_across_unit_distance : Vertically integrated Northward moisture transport (Mass\_weighted\_vertical integral of the product of northward wind by total water mass per unit mass)-->
+		<field id="CMIP7_jpdftaureicemodis" field_ref="?dummy_XY_effectRadIc_tau"/>
+		<!--P2 (%) modis_cloud_area_fraction : MODIS Optical Thickness-Particle Size joint distribution, ice-->
+		<field id="CMIP7_jpdftaureliqmodis" field_ref="?dummy_XY_effectRadLi_tau"/>
+		<!--P2 (%) modis_cloud_area_fraction : MODIS Optical Thickness-Particle Size joint distribution, liquid-->
+		<field id="CMIP7_lat" field_ref="?dummy_XY_site"/>
+		<!--P2 (degrees_north) latitude : Latitude is positive northward; its units of degree\_north (or equivalent) indicate this explicitly. In a latitude-longitude system defined with respect to a rotated North Pole, the standard name of grid\_latitude should be used instead of latitude. Grid latitude is positive in the grid-northward direction, but its units should be plain degree.-->
+		<field id="CMIP7_loadbc" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2) atmosphere_mass_content_of_elemental_carbon_dry_aerosol_particles : The total dry mass of black carbon aerosol particles per unit area.-->
+		<field id="CMIP7_loadoa" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2) atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_particles : atmosphere dry organic content: This is the vertically integrated sum of atmosphere\_primary\_organic\_content and atmosphere\_secondary\_organic\_content (see next two table entries).-->
+		<field id="CMIP7_loadpoa" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2) atmosphere_mass_content_of_primary_particulate_organic_matter_dry_aerosol_particles : The total dry mass of primary particulate organic aerosol particles per unit area.-->
+		<field id="CMIP7_loadso4" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2) atmosphere_mass_content_of_sulfate_dry_aerosol_particles : The total dry mass of sulfate aerosol particles per unit area.-->
+		<field id="CMIP7_lon" field_ref="?dummy_XY_site"/>
+		<!--P2 (degrees_east) longitude : Longitude is positive eastward; its units of degree\_east (or equivalent) indicate this explicitly. In a latitude-longitude system defined with respect to a rotated North Pole, the standard name of grid\_longitude should be used instead of longitude. Grid longitude is positive in the grid-eastward direction, but its units should be plain degree.-->
+		<field id="CMIP7_maxpblz" field_ref="?dummy_XY"/>
+		<!--P2 (m) atmosphere_boundary_layer_thickness : maximum boundary layer height during the day (add cell\_methods attribute: "time: maximum")-->
+		<field id="CMIP7_mc" field_ref="?dummy_XYAh_alevhalf"/>
+		<!--P2 (kg m-2 s-1) atmosphere_net_upward_convective_mass_flux : The net mass flux should represent the difference between the updraft and downdraft components.  The flux is computed as the mass divided by the area of the grid cell.-->
+		<field id="CMIP7_mcd" field_ref="?dummy_XYAh_alevhalf"/>
+		<!--P2 (kg m-2 s-1) atmosphere_downdraft_convective_mass_flux : Calculated as the convective mass flux divided by the area of the whole grid cell (not just the area of the cloud).-->
+		<field id="CMIP7_mcu" field_ref="?dummy_XYAh_alevhalf"/>
+		<!--P2 (kg m-2 s-1) atmosphere_updraft_convective_mass_flux : Calculated as the convective mass flux divided by the area of the whole grid cell (not just the area of the cloud).-->
+		<field id="CMIP7_minpblz" field_ref="?dummy_XY"/>
+		<!--P2 (m) atmosphere_boundary_layer_thickness : minimum boundary layer height during the day (add cell\_methods attribute: "time: minimum")-->
+		<field id="CMIP7_mpw" field_ref="?dummy_XY"/>
+		<!--P2 (s) sea_surface_wave_mean_period : Average wave period (i.e., time in-between two wave crests) across the entire two-dimensional wave spectrum, incorporating both wind-sea and swell waves. In spectral wind wave models, it is calculated using spectral moments, mathematical measures that describe the shape and characteristics of the wave spectrum.-->
+		<field id="CMIP7_mpwswell" field_ref="?dummy_XY"/>
+		<!--P2 (s) sea_surface_swell_wave_mean_period : Average wave period (i.e., time in-between two wave crests) of swell waves only (i.e., waves that have propagated away from their generation area). In spectral wind wave models, it is calculated using spectral moments, mathematical measures that describe the shape and characteristics of the wave spectrum.-->
+		<field id="CMIP7_mpwwindsea" field_ref="?dummy_XY"/>
+		<!--P2 (s) sea_surface_wind_wave_mean_period : Average wave period (i.e., time in-between two wave crests) of wind-sea waves only (i.e., local wind waves). In spectral wind wave models, it is calculated using spectral moments, mathematical measures that describe the shape and characteristics of the wave spectrum.-->
+		<field id="CMIP7_noaahi2m" field_ref="?dummy_XY_height2m"/>
+		<!--P3 (degC) heat_index_of_air_temperature : mean 2m daily NOAA heat index.
+The perceived air temperature when relative humidity is taken into consideration (which makes it feel hotter than the actual air temperature).
+The heat index is only defined when the ambient air temperature is at or above 299.817 K.
+NOAA heat index = -42.379 + 2.04901523(T) + 10.14333127(R) - 0.22475541(T)(R) - 6.83783e-3 sqr(T) - 5.481717e-2 sqr(R) + 1.22874e-3 sqr(T) (R) + 8.5282e-4 (T) sqr(R) - 1.99e-6 sqr(T) sqr(R)
+where T is 2 m temperature (degrees F), R is relative humidity (%)-->
+		<field id="CMIP7_noaahi2mmax" field_ref="?dummy_XY_height2m"/>
+		<!--P3 (degC) heat_index_of_air_temperature : max 2m daily NOAA heat index
+The perceived air temperature when relative humidity is taken into consideration (which makes it feel hotter than the actual air temperature).
+The heat index is only defined when the ambient air temperature is at or above 299.817 K.
+NOAA heat index = -42.379 + 2.04901523(T) + 10.14333127(R) - 0.22475541(T)(R) - 6.83783e-3 sqr(T) - 5.481717e-2 sqr(R) + 1.22874e-3 sqr(T) (R) + 8.5282e-4 (T) sqr(R) - 1.99e-6 sqr(T) sqr(R)
+where T is 2 m temperature (degrees F), R is relative humidity (%)-->
+		<field id="CMIP7_parasolRefl" field_ref="?dummy_XY_sza5"/>
+		<!--P2 (1) toa_bidirectional_reflectance : PARASOL Reflectance-->
+		<field id="CMIP7_pctisccp" field_ref="?dummy_XY"/>
+		<!--P2 (Pa) air_pressure_at_cloud_top : time-means weighted by the ISCCP Total Cloud Fraction - see <https://www.cfmip.org/tools-and-data/cosp>-->
+		<field id="CMIP7_pfull" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (Pa) air_pressure : The atmospheric pressure at the model layer midpoints for all times and levels in the associated output variables-->
+		<field id="CMIP7_phalf" field_ref="?dummy_XYAh_alevhalf"/>
+		<!--P2 (Pa) air_pressure : The atmospheric pressure at the model layer interfaces for all times and levels in the associated output variables-->
+		<field id="CMIP7_pr" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) precipitation_flux : at surface; includes both liquid and solid phases from all types of clouds (both large-scale and convective)-->
+		<field id="CMIP7_pr17O" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) precipitation_flux_containing_17O : Precipitation mass flux of water molecules that contain the oxygen-17 isotope (H2 17O), including solid and liquid phases.-->
+		<field id="CMIP7_pr18O" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) precipitation_flux_containing_18O : Precipitation mass flux of water molecules that contain the oxygen-18 isotope (H2 18O), including solid and liquid phases.-->
+		<field id="CMIP7_pr2h" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) precipitation_flux_containing_single_2H : Precipitation mass flux of water molecules that contain one atom of the hydrogen-2 isotope (1H 2H O), including solid and liquid phases.-->
+		<field id="CMIP7_prc" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) convective_precipitation_flux : at surface; includes both liquid and solid phases.-->
+		<field id="CMIP7_prhmax" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) precipitation_flux : In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.-->
+		<field id="CMIP7_prra" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) rainfall_flux : Rainfall rate at surface: Includes precipitation of all forms of water in the liquid phase-->
+		<field id="CMIP7_prrsn" field_ref="?dummy_XY"/>
+		<!--P3 (1) mass_fraction_of_rainfall_falling_onto_surface_snow : mass\_fraction\_of\_rainfall\_onto\_snow-->
+		<field id="CMIP7_prsn" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) snowfall_flux : at surface; includes precipitation of all forms of water in the solid phase-->
+		<field id="CMIP7_prsn18O" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) solid_precipitation_flux_containing_18O : Precipitation mass flux of water molecules that contain the oxygen-18 isotope (H2 18O), including solid phase only.-->
+		<field id="CMIP7_prsn2h" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) solid_precipitation_flux_containing_single_2H : Precipitation mass flux of water molecules that contain one atom of the hydrogen-2 isotope (1H 2H O), including solid phase only.-->
+		<field id="CMIP7_prsnc" field_ref="?dummy_XY"/>
+		<!--P3 (kg m-2 s-1) convective_snowfall_flux : convective\_snowfall\_flux-->
+		<field id="CMIP7_prsnsn" field_ref="?dummy_XY"/>
+		<!--P3 (1) mass_fraction_of_solid_precipitation_falling_onto_surface_snow : mass\_fraction\_of\_snowfall\_onto\_snow-->
+		<field id="CMIP7_prw" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2) atmosphere_mass_content_of_water_vapor : vertically integrated through the atmospheric column-->
+		<field id="CMIP7_ps" field_ref="?dummy_XY"/>
+		<!--P1 (Pa) surface_air_pressure : surface pressure (not mean sea-level pressure), 2-D field to calculate the 3-D pressure field from hybrid coordinates-->
+		<field id="CMIP7_psitem" field_ref="?dummy_XY_plev39"/>
+		<!--P3 (kg s-1) atmosphere_transformed_eulerian_mean_meridional_overturning_mass_streamfunction : zonal mean; hence YZT-->
+		<field id="CMIP7_psl" field_ref="?dummy_XY"/>
+		<!--P1 (Pa) air_pressure_at_mean_sea_level : Sea Level Pressure-->
+		<field id="CMIP7_ptp" field_ref="?dummy_XY"/>
+		<!--P2 (Pa) tropopause_air_pressure : 2D monthly mean thermal tropopause calculated using WMO tropopause definition on 3d temperature-->
+		<field id="CMIP7_reffcclwtop" field_ref="?dummy_XY"/>
+		<!--P2 (m) effective_radius_of_convective_cloud_liquid_water_particles_at_convective_liquid_water_cloud_top : Cloud-Top Effective Droplet Radius in Convective Cloud-->
+		<field id="CMIP7_reffclic" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (m) effective_radius_of_convective_cloud_ice_particles : This is defined as the in-cloud ratio of the third moment over the second moment of the particle size distribution (obtained by considering only the cloudy portion of the grid cell).-->
+		<field id="CMIP7_reffclis" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (m) effective_radius_of_stratiform_cloud_ice_particles : This is defined as the in-cloud ratio of the third moment over the second moment of the particle size distribution (obtained by considering only the cloudy portion of the grid cell).-->
+		<field id="CMIP7_reffclwc" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (m) effective_radius_of_convective_cloud_liquid_water_particles : Droplets are liquid.  The effective radius is defined as the ratio of the third moment over the second moment of the particle size distribution and the time-mean should be calculated, weighting the individual samples by the cloudy fraction of the grid cell.-->
+		<field id="CMIP7_reffclws" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (m) effective_radius_of_stratiform_cloud_liquid_water_particles : Droplets are liquid.  The effective radius is defined as the ratio of the third moment over the second moment of the particle size distribution and the time-mean should be calculated, weighting the individual samples by the cloudy fraction of the grid cell.-->
+		<field id="CMIP7_reffsclwtop" field_ref="?dummy_XY"/>
+		<!--P2 (m) effective_radius_of_stratiform_cloud_liquid_water_particles_at_stratiform_liquid_water_cloud_top : Cloud-Top Effective Droplet Radius in Stratiform Cloud-->
+		<field id="CMIP7_rld" field_ref="?dummy_XYAh_alevhalf"/>
+		<!--P2 (W m-2) downwelling_longwave_flux_in_air : Includes also the fluxes at the surface and TOA.-->
+		<field id="CMIP7_rld4co2" field_ref="?dummy_XYAh_alevhalf"/>
+		<!--P2 (W m-2) downwelling_longwave_flux_in_air : Downwelling longwave radiation calculated using carbon dioxide concentrations increased fourfold (includes the fluxes at the surface and TOA)-->
+		<field id="CMIP7_rldcs" field_ref="?dummy_XYAh_alevhalf"/>
+		<!--P2 (W m-2) downwelling_longwave_flux_in_air_assuming_clear_sky : Includes also the fluxes at the surface and TOA.-->
+		<field id="CMIP7_rldcs4co2" field_ref="?dummy_XYAh_alevhalf"/>
+		<!--P2 (W m-2) downwelling_longwave_flux_in_air_assuming_clear_sky : Downwelling clear-sky longwave radiation calculated using carbon dioxide concentrations increased fourfold (includes the fluxes at the surface and TOA)-->
+		<field id="CMIP7_rlds" field_ref="?dummy_XY"/>
+		<!--P2 (W m-2) surface_downwelling_longwave_flux_in_air : Surface Downwelling Longwave Radiation-->
+		<field id="CMIP7_rldscs" field_ref="?dummy_XY"/>
+		<!--P2 (W m-2) surface_downwelling_longwave_flux_in_air_assuming_clear_sky : Surface downwelling clear-sky longwave radiation-->
+		<field id="CMIP7_rls" field_ref="?dummy_XY"/>
+		<!--P2 (W m-2) surface_net_downward_longwave_flux : Net longwave surface radiation-->
+		<field id="CMIP7_rlu" field_ref="?dummy_XYAh_alevhalf"/>
+		<!--P2 (W m-2) upwelling_longwave_flux_in_air : Includes also the fluxes at the surface and TOA.-->
+		<field id="CMIP7_rlu4co2" field_ref="?dummy_XYAh_alevhalf"/>
+		<!--P2 (W m-2) upwelling_longwave_flux_in_air : Upwelling longwave radiation calculated using carbon dioxide concentrations increased fourfold (includes the fluxes at the surface and TOA)-->
+		<field id="CMIP7_rlucs" field_ref="?dummy_XYAh_alevhalf"/>
+		<!--P2 (W m-2) upwelling_longwave_flux_in_air_assuming_clear_sky : Includes also the fluxes at the surface and TOA.-->
+		<field id="CMIP7_rlucs4co2" field_ref="?dummy_XYAh_alevhalf"/>
+		<!--P2 (W m-2) upwelling_longwave_flux_in_air_assuming_clear_sky : Upwelling clear-sky longwave radiation calculated using carbon dioxide concentrations increased fourfold (includes the fluxes at the surface and TOA)-->
+		<field id="CMIP7_rlus" field_ref="?dummy_XY"/>
+		<!--P2 (W m-2) surface_upwelling_longwave_flux_in_air : The surface called "surface" means the lower boundary of the atmosphere. "longwave" means longwave radiation. Upwelling radiation is radiation from below. It does not mean "net upward". When thought of as being incident on a surface, a radiative flux is sometimes called "irradiance". In addition, it is identical with the quantity measured by a cosine-collector light-meter and sometimes called "vector irradiance". In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.-->
+		<field id="CMIP7_rluscs" field_ref="?dummy_XY"/>
+		<!--P1 (W m-2) surface_upwelling_longwave_flux_assuming_clear_sky : Surface Upwelling Clear-sky Longwave Radiation-->
+		<field id="CMIP7_rlut" field_ref="?dummy_XY"/>
+		<!--P2 (W m-2) toa_outgoing_longwave_flux : at the top of the atmosphere (to be compared with satellite measurements)-->
+		<field id="CMIP7_rlut4co2" field_ref="?dummy_XY"/>
+		<!--P2 (W m-2) toa_outgoing_longwave_flux : Top-of-atmosphere outgoing longwave radiation calculated using carbon dioxide concentrations increased fourfold-->
+		<field id="CMIP7_rlutcs" field_ref="?dummy_XY"/>
+		<!--P2 (W m-2) toa_outgoing_longwave_flux_assuming_clear_sky : Upwelling clear-sky longwave radiation at top of atmosphere-->
+		<field id="CMIP7_rlutcs4co2" field_ref="?dummy_XY"/>
+		<!--P2 (W m-2) toa_outgoing_longwave_flux_assuming_clear_sky : Top-of-atmosphere outgoing clear-sky longwave radiation calculated using carbon dioxide concentrations increased fourfold-->
+		<field id="CMIP7_rsd" field_ref="?dummy_XYAh_alevhalf"/>
+		<!--P2 (W m-2) downwelling_shortwave_flux_in_air : Includes also the fluxes at the surface and TOA.-->
+		<field id="CMIP7_rsd4co2" field_ref="?dummy_XYAh_alevhalf"/>
+		<!--P2 (W m-2) downwelling_shortwave_flux_in_air : Downwelling shortwave radiation calculated using carbon dioxide concentrations increased fourfold-->
+		<field id="CMIP7_rsdcs" field_ref="?dummy_XYAh_alevhalf"/>
+		<!--P2 (W m-2) downwelling_shortwave_flux_in_air_assuming_clear_sky : Includes also the fluxes at the surface and TOA.-->
+		<field id="CMIP7_rsdcs4co2" field_ref="?dummy_XYAh_alevhalf"/>
+		<!--P2 (W m-2) downwelling_shortwave_flux_in_air_assuming_clear_sky : Downwelling clear-sky shortwave radiation calculated using carbon dioxide concentrations increased fourfold-->
+		<field id="CMIP7_rsds" field_ref="?dummy_XY"/>
+		<!--P1 (W m-2) surface_downwelling_shortwave_flux_in_air : Surface solar irradiance for UV calculations.-->
+		<field id="CMIP7_rsdscs" field_ref="?dummy_XY"/>
+		<!--P2 (W m-2) surface_downwelling_shortwave_flux_in_air_assuming_clear_sky : Surface solar irradiance clear sky for UV calculations-->
+		<field id="CMIP7_rsdsdiff" field_ref="?dummy_XY"/>
+		<!--P3 (W m-2) surface_diffuse_downwelling_shortwave_flux_in_air : Surface Diffuse Downwelling Shortwave Radiation-->
+		<field id="CMIP7_rsdt" field_ref="?dummy_XY"/>
+		<!--P2 (W m-2) toa_incoming_shortwave_flux : at the top of the atmosphere-->
+		<field id="CMIP7_rss" field_ref="?dummy_XY"/>
+		<!--P2 (W m-2) surface_net_downward_shortwave_flux : Net downward shortwave radiation at the surface-->
+		<field id="CMIP7_rsu" field_ref="?dummy_XYAh_alevhalf"/>
+		<!--P2 (W m-2) upwelling_shortwave_flux_in_air : Includes also the fluxes at the surface and TOA.-->
+		<field id="CMIP7_rsu4co2" field_ref="?dummy_XYAh_alevhalf"/>
+		<!--P2 (W m-2) upwelling_shortwave_flux_in_air : Upwelling Shortwave Radiation calculated using carbon dioxide concentrations increased fourfold-->
+		<field id="CMIP7_rsucs" field_ref="?dummy_XYAh_alevhalf"/>
+		<!--P2 (W m-2) upwelling_shortwave_flux_in_air_assuming_clear_sky : Includes also the fluxes at the surface and TOA.-->
+		<field id="CMIP7_rsucs4co2" field_ref="?dummy_XYAh_alevhalf"/>
+		<!--P2 (W m-2) upwelling_shortwave_flux_in_air_assuming_clear_sky : Upwelling clear-sky shortwave radiation calculated using carbon dioxide concentrations increased fourfold-->
+		<field id="CMIP7_rsus" field_ref="?dummy_XY"/>
+		<!--P2 (W m-2) surface_upwelling_shortwave_flux_in_air : The surface called "surface" means the lower boundary of the atmosphere. "shortwave" means shortwave radiation. Upwelling radiation is radiation from below. It does not mean "net upward". When thought of as being incident on a surface, a radiative flux is sometimes called "irradiance". In addition, it is identical with the quantity measured by a cosine-collector light-meter and sometimes called "vector irradiance". In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.-->
+		<field id="CMIP7_rsuscs" field_ref="?dummy_XY"/>
+		<!--P2 (W m-2) surface_upwelling_shortwave_flux_in_air_assuming_clear_sky : Surface Upwelling Clear-sky Shortwave Radiation-->
+		<field id="CMIP7_rsut" field_ref="?dummy_XY"/>
+		<!--P2 (W m-2) toa_outgoing_shortwave_flux : at the top of the atmosphere-->
+		<field id="CMIP7_rsut4co2" field_ref="?dummy_XY"/>
+		<!--P2 (W m-2) toa_outgoing_shortwave_flux : TOA Outgoing Shortwave Radiation calculated using carbon dioxide concentrations increased fourfold-->
+		<field id="CMIP7_rsutcs" field_ref="?dummy_XY"/>
+		<!--P2 (W m-2) toa_outgoing_shortwave_flux_assuming_clear_sky : Calculated in the absence of clouds.-->
+		<field id="CMIP7_rsutcs4co2" field_ref="?dummy_XY"/>
+		<!--P2 (W m-2) toa_outgoing_shortwave_flux_assuming_clear_sky : TOA Outgoing Clear-Sky Shortwave Radiation calculated using carbon dioxide concentrations increased fourfold-->
+		<field id="CMIP7_rtmt" field_ref="?dummy_XY"/>
+		<!--P2 (W m-2) net_downward_radiative_flux_at_top_of_atmosphere_model : i.e., at the top of that portion of the atmosphere where dynamics are explicitly treated by the model. This is reported only if it differs from the net downward radiative flux at the top of the atmosphere.-->
+		<field id="CMIP7_rv" field_ref="?dummy_XY_p850"/>
+		<!--P2 (s-1) atmosphere_relative_vorticity : Relative vorticity is the upward component of the vorticity vector i.e. the component which arises from horizontal velocity.-->
+		<field id="CMIP7_sci" field_ref="?dummy_XY"/>
+		<!--P2 (1) shallow_convection_time_fraction : Fraction of time that shallow convection occurs in the grid cell.-->
+		<field id="CMIP7_scldncl" field_ref="?dummy_XY"/>
+		<!--P2 (m-3) number_concentration_of_stratiform_cloud_liquid_water_particles_at_stratiform_liquid_water_cloud_top : Cloud Droplet Number Concentration of Stratiform Cloud Tops-->
+		<field id="CMIP7_sduo" field_ref="?dummy_XY"/>
+		<!--P2 (m s-1) sea_surface_wave_stokes_drift_eastward_velocity : The eastward component of the net drift velocity of ocean water caused by surface wind-sea waves. The Stokes drift velocity could be defined as the difference between the average Lagrangian flow velocity of a fluid parcel, and the average Eulerian flow velocity of the fluid at a fixed position.-->
+		<field id="CMIP7_sdvo" field_ref="?dummy_XY"/>
+		<!--P2 (m s-1) sea_surface_wave_stokes_drift_northward_velocity : The northward component of the net drift velocity of ocean water caused by surface wind-sea waves. The Stokes drift velocity could be defined as the difference between the average Lagrangian flow velocity of a fluid parcel, and the average Eulerian flow velocity of the fluid at a fixed position.-->
+		<field id="CMIP7_sfcWind" field_ref="?dummy_XY_height10m"/>
+		<!--P1 (m s-1) wind_speed : near-surface (usually, 10 meters) wind speed.-->
+		<field id="CMIP7_sfcWindmax" field_ref="?dummy_XY_height10m"/>
+		<!--P2 (m s-1) wind_speed : Daily maximum near-surface (usually, 10 meters) wind speed.-->
+		<field id="CMIP7_sftlf" field_ref="?dummy_XY"/>
+		<!--P1 (%) land_area_fraction : Percentage of horizontal area occupied by land.-->
+		<field id="CMIP7_smc" field_ref="?dummy_XYAh_alevhalf"/>
+		<!--P2 (kg m-2 s-1) atmosphere_net_upward_shallow_convective_mass_flux : The net mass flux represents the difference between the updraft and downdraft components.  For models with a distinct shallow convection scheme, this is calculated as convective mass flux divided by the area of the whole grid cell (not just the area of the cloud).-->
+		<field id="CMIP7_snmsl" field_ref="?dummy_XY"/>
+		<!--P3 (kg m-2 s-1) liquid_water_mass_flux_into_soil_due_to_surface_snow_melt : surface\_snow\_melt\_flux\_into\_soil\_layer-->
+		<field id="CMIP7_snrefr" field_ref="?dummy_XY"/>
+		<!--P3 (kg m-2 s-1) surface_snow_and_ice_refreezing_flux : surface\_snow\_and\_ice\_refreezing\_flux-->
+		<field id="CMIP7_snwc" field_ref="?dummy_XY"/>
+		<!--P3 (kg m-2) canopy_snow_amount : canopy\_snow\_amount-->
+		<field id="CMIP7_swh" field_ref="?dummy_XY"/>
+		<!--P2 (m) sea_surface_wave_significant_height : Average height of the highest one-third of waves present in the sea state, incorporating both wind-sea and swell waves. This is a key parameter for describing wave energy and is derived from the wave spectrum using spectral moments. Specifically, this parameter is four times the square root of the integral over all directions and all frequencies of the two-dimensional wave spectrum.-->
+		<field id="CMIP7_swhmax" field_ref="?dummy_XY"/>
+		<!--P2 (m) sea_surface_wave_significant_height : Highest value of the significant wave height simulated within a given time range (e.g., daily or monthly). The significant wave height (swh) is derived from the wave spectrum using spectral moments. Specifically, swh is four times the square root of the integral over all directions and all frequencies of the two-dimensional wave spectrum.-->
+		<field id="CMIP7_swhswell" field_ref="?dummy_XY"/>
+		<!--P2 (m) sea_surface_swell_wave_significant_height : Average height of the highest one-third of waves present in the sea state, incorporating just swell waves (i.e., waves that have propagated away from their generation area). This parameter is derived from all swell partitions of the wave spectrum using spectral moments. Specifically, this parameter is four times the square root of the integral over all directions and all frequencies of the components of the two-dimensional wave spectrum that are not under the influence of local wind.-->
+		<field id="CMIP7_swhwindsea" field_ref="?dummy_XY"/>
+		<!--P2 (m) sea_surface_wind_wave_significant_height : Average height of the highest one-third of waves present in the sea state, incorporating just wind-sea waves (i.e., local wind waves). It is derived from the wind-sea wave spectrum using spectral moments. Specifically, this parameter is four times the square root of the integral over all directions and all frequencies of the two-dimensional wind-sea wave spectrum.-->
+		<field id="CMIP7_ta" field_ref="?dummy_XY_plev19"/>
+		<!--P1 (K) air_temperature : Air Temperature-->
+		<field id="CMIP7_ta6" field_ref="?dummy_XY_plev6"/>
+		<!--P3 (K) air_temperature : Air temperature on 6 pressure levels in the lower troposphere-->
+		<field id="CMIP7_taUTLS" field_ref="?dummy_XY_plev5u"/>
+		<!--P2 (K) air_temperature : 6 hourly instantaneous temperature at 5 pressure levels in the UTLS region (150, 175, 200, 225, and 250 hPa)-->
+		<field id="CMIP7_tas" field_ref="?dummy_XY_height2m"/>
+		<!--P1 (K) air_temperature : near-surface (usually, 2 meter) air temperature-->
+		<field id="CMIP7_tasmax" field_ref="?dummy_XY_height2m"/>
+		<!--P1 (K) air_temperature : maximum near-surface (usually, 2 meter) air temperature (add cell\_method attribute "time: max")-->
+		<field id="CMIP7_tasmin" field_ref="?dummy_XY_height2m"/>
+		<!--P1 (K) air_temperature : minimum near-surface (usually, 2 meter) air temperature (add cell\_method attribute "time: min")-->
+		<field id="CMIP7_tauu" field_ref="?dummy_XY"/>
+		<!--P1 (Pa) surface_downward_eastward_stress : Downward eastward wind stress at the surface-->
+		<field id="CMIP7_tauunoegw" field_ref="?dummy_XY_plev39"/>
+		<!--P2 (Pa) upward_eastward_momentum_flux_in_air_due_to_nonorographic_eastward_gravity_waves : Zonal mean vertical wave flux of zonal momentum within the non-orographic gravity wave parameterization associated with the eastward propagating modes.-->
+		<field id="CMIP7_tauunowgw" field_ref="?dummy_XY_plev39"/>
+		<!--P2 (Pa) upward_eastward_momentum_flux_in_air_due_to_nonorographic_westward_gravity_waves : Zonal mean vertical wave flux of zonal momentum within the non-orographic gravity wave parameterization associated with the westward propagating modes.-->
+		<field id="CMIP7_tauuogw" field_ref="?dummy_XY_plev39"/>
+		<!--P2 (Pa) upward_eastward_momentum_flux_in_air_due_to_orographic_gravity_waves : Zonal mean of the vertical flux of zonal momentum within the orographic gravity wave parameterization-->
+		<field id="CMIP7_tauupbl" field_ref="?dummy_XY"/>
+		<!--P3 (Pa) surface_downward_eastward_stress_due_to_boundary_layer_mixing : surface-->
+		<field id="CMIP7_tauv" field_ref="?dummy_XY"/>
+		<!--P1 (Pa) surface_downward_northward_stress : Downward northward wind stress at the surface-->
+		<field id="CMIP7_tauvnogw" field_ref="?dummy_XY_plev39"/>
+		<!--P2 (Pa) upward_northward_momentum_flux_in_air_due_to_nonorographic_gravity_waves : Zonal mean vertical wave flux of meridional momentum within the non-orographic gravity wave parameterization-->
+		<field id="CMIP7_tauvogw" field_ref="?dummy_XY_plev39"/>
+		<!--P2 (Pa) upward_northward_momentum_flux_in_air_due_to_orographic_gravity_waves : Zonal mean vertical flux of meridional momentum within the orographic gravity wave parameterization-->
+		<field id="CMIP7_tauvpbl" field_ref="?dummy_XY"/>
+		<!--P3 (Pa) surface_downward_northward_stress_due_to_boundary_layer_mixing : surface-->
+		<field id="CMIP7_tdps" field_ref="?dummy_XY_height2m"/>
+		<!--P2 (K) dew_point_temperature : Dew point temperature is the temperature at which a parcel of air reaches saturation upon being cooled at constant pressure and specific humidity.-->
+		<field id="CMIP7_tnhus" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (s-1) tendency_of_specific_humidity : Tendency of Specific Humidity-->
+		<field id="CMIP7_tnhusa" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (s-1) tendency_of_specific_humidity_due_to_advection : Tendency of Specific Humidity due to Advection-->
+		<field id="CMIP7_tnhusc" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (s-1) tendency_of_specific_humidity_due_to_convection : Tendencies from cumulus convection scheme.-->
+		<field id="CMIP7_tnhusd" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (s-1) tendency_of_specific_humidity_due_to_diffusion : This includes any horizontal or vertical numerical moisture diffusion not associated with the parametrized moist physics or the resolved dynamics.  For example, any vertical diffusion which is part of the boundary layer mixing scheme should be excluded, as should any diffusion which is included in the terms from the resolved dynamics.   This term is required to check the closure of the moisture budget.-->
+		<field id="CMIP7_tnhusmp" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (s-1) tendency_of_specific_humidity_due_to_model_physics : This includes sources and sinks from parametrized moist physics (e.g. convection, boundary layer, stratiform condensation/evaporation, etc.) and excludes sources and sinks from resolved dynamics or from horizontal or vertical numerical diffusion not associated with model physicsl.  For example any diffusive mixing by the boundary layer scheme would be included.-->
+		<field id="CMIP7_tnhuspbl" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (s-1) tendency_of_specific_humidity_due_to_boundary_layer_mixing : Includes all boundary layer terms including diffusive terms.-->
+		<field id="CMIP7_tnhusscp" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (s-1) tendency_of_specific_humidity_due_to_stratiform_cloud_and_precipitation : The phrase "tendency\_of\_X" means derivative of X with respect to time. "Specific" means per unit mass. Specific humidity is the mass fraction of water vapor in (moist) air. The specification of a physical process by the phrase "due\_to\_" process means that the quantity named is a single term in a sum of terms which together compose the general quantity named by omitting the phrase. A variable with the standard name of tendency\_of\_specific\_humidity\_due\_to\_stratiform\_cloud\_and\_precipitation should contain the effects of all processes which convert stratiform clouds and precipitation to or from water vapor. In an atmosphere model, stratiform cloud is that produced by large-scale convergence (not the convection schemes).-->
+		<field id="CMIP7_tnhusscpbl" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (s-1) tendency_of_specific_humidity_due_to_stratiform_cloud_and_precipitation_and_boundary_layer_mixing : To be specified only in  models which do not separate budget terms for stratiform cloud, precipitation and boundary layer schemes.  Includes all bounday layer terms including and diffusive terms.-->
+		<field id="CMIP7_tnt" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (K s-1) tendency_of_air_temperature : Tendency of Air Temperature-->
+		<field id="CMIP7_tnta" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (K s-1) tendency_of_air_temperature_due_to_advection : Tendency of Air Temperature due to Advection-->
+		<field id="CMIP7_tntc" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (K s-1) tendency_of_air_temperature_due_to_convection : Tendencies from cumulus convection scheme.-->
+		<field id="CMIP7_tntd" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (K s-1) tendency_of_air_temperature_due_to_diffusion : This includes any horizontal or vertical numerical temperature diffusion not associated with the parametrized moist physics or the resolved dynamics.  For example, any vertical diffusion which is part of the boundary layer mixing scheme should be excluded, as should any diffusion which is included in the terms from the resolved dynamics.   This term is required to check the closure of the temperature budget.-->
+		<field id="CMIP7_tntmp" field_ref="?dummy_XY_plev39"/>
+		<!--P2 (K s-1) tendency_of_air_temperature_due_to_model_physics : Zonal mean tendency of air temperature due to model physics, with the extended number of vertical levels-->
+		<field id="CMIP7_tntnogw" field_ref="?dummy_XY_plev39"/>
+		<!--P3 (K s-1) tendency_of_air_temperature_due_to_dissipation_of_nonorographic_gravity_waves : zonal mean; hence YZT-->
+		<field id="CMIP7_tntogw" field_ref="?dummy_XY_plev39"/>
+		<!--P3 (K s-1) tendency_of_air_temperature_due_to_dissipation_of_orographic_gravity_waves : zonal mean; hence YZT-->
+		<field id="CMIP7_tntpbl" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (K s-1) tendency_of_air_temperature_due_to_boundary_layer_mixing : Includes all boundary layer terms including diffusive terms.-->
+		<field id="CMIP7_tntr" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (K s-1) tendency_of_air_temperature_due_to_radiative_heating : Tendency of Air Temperature due to Radiative Heating-->
+		<field id="CMIP7_tntrl" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (K s-1) tendency_of_air_temperature_due_to_longwave_heating : longwave heating rates-->
+		<field id="CMIP7_tntrlcs" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (K s-1) tendency_of_air_temperature_due_to_longwave_heating_assuming_clear_sky : Tendency of Air Temperature due to Clear Sky Longwave Radiative Heating-->
+		<field id="CMIP7_tntrs" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (K s-1) tendency_of_air_temperature_due_to_shortwave_heating : shortwave heating rates-->
+		<field id="CMIP7_tntrscs" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (K s-1) tendency_of_air_temperature_due_to_shortwave_heating_assuming_clear_sky : Tendency of Air Temperature due to Clear Sky Shortwave Radiative Heating-->
+		<field id="CMIP7_tntscp" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (K s-1) tendency_of_air_temperature_due_to_stratiform_cloud_and_precipitation : The phrase "tendency\_of\_X" means derivative of X with respect to time. Air temperature is the bulk temperature of the air, not the surface (skin) temperature. The specification of a physical process by the phrase "due\_to\_" process means that the quantity named is a single term in a sum of terms which together compose the general quantity named by omitting the phrase. A variable with the standard name tendency\_of\_air\_temperature\_due\_to\_stratiform\_cloud\_and\_precipitation should contain net latent heating effects of all processes which convert stratiform clouds and precipitation between water vapour, liquid or ice phases. In an atmosphere model, stratiform cloud is that produced by large-scale convergence (not the convection schemes).-->
+		<field id="CMIP7_tntscpbl" field_ref="?dummy_XYA_alevel"/>
+		<!--P2 (K s-1) tendency_of_air_temperature_due_to_stratiform_cloud_and_precipitation_and_boundary_layer_mixing : To be specified only in  models which do not separate cloud, precipitation and boundary layer terms.  Includes all boundary layer terms including diffusive ones.-->
+		<field id="CMIP7_ts" field_ref="?dummy_XY"/>
+		<!--P2 (K) surface_temperature : Surface temperature (skin for open ocean)-->
+		<field id="CMIP7_tsns" field_ref="?dummy_XY"/>
+		<!--P3 (K) surface_temperature : Snow Surface Temperature-->
+		<field id="CMIP7_ua" field_ref="?dummy_XY_plev19"/>
+		<!--P1 (m s-1) eastward_wind : Zonal wind (positive in a eastward direction).-->
+		<field id="CMIP7_ua100m" field_ref="?dummy_XY_height100m"/>
+		<!--P2 (m s-1) eastward_wind : Zonal wind (positive in a eastward direction) at 100m above the surface-->
+		<field id="CMIP7_ua6" field_ref="?dummy_XY_plev6"/>
+		<!--P3 (m s-1) eastward_wind : Zonal wind (positive in a eastward direction) on 6 pressure levels in the lower troposphere-->
+		<field id="CMIP7_uaUTLS" field_ref="?dummy_XY_plev5u"/>
+		<!--P2 (m s-1) eastward_wind : 6 hourly instantaneous eastward wind at 5 pressure levels in the UTLS region (150, 175, 200, 225, and 250 hPa)-->
+		<field id="CMIP7_uas" field_ref="?dummy_XY_height10m"/>
+		<!--P1 (m s-1) eastward_wind : This is sampled synoptically.-->
+		<field id="CMIP7_utendepfd" field_ref="?dummy_XY_plev39"/>
+		<!--P2 (m s-2) tendency_of_eastward_wind_due_to_eliassen_palm_flux_divergence : Tendency of the zonal mean zonal wind due to the divergence of the Eliassen-Palm flux.-->
+		<field id="CMIP7_utendnogw" field_ref="?dummy_XY_plev39"/>
+		<!--P2 (m s-2) tendency_of_eastward_wind_due_to_nonorographic_gravity_wave_drag : Zonal mean tendency of eastward wind induced by the parameterized non-orographic gravity wave drag-->
+		<field id="CMIP7_utendogw" field_ref="?dummy_XY_plev39"/>
+		<!--P2 (m s-2) tendency_of_eastward_wind_due_to_orographic_gravity_wave_drag : Zonal mean tendency of eastward wind induced by the parameterized orographic gravity wave drag-->
+		<field id="CMIP7_utendvtem" field_ref="?dummy_XY_plev39"/>
+		<!--P2 (m s-2) tendency_of_eastward_wind_due_to_advection_by_northward_transformed_eulerian_mean_air_velocity : Zonal mean tendency of eastward wind due to TEM northward advection and Coriolis term-->
+		<field id="CMIP7_utendwtem" field_ref="?dummy_XY_plev39"/>
+		<!--P2 (m s-2) tendency_of_eastward_wind_due_to_advection_by_upward_transformed_eulerian_mean_air_velocity : Zonal mean tendency of eastward wind due to TEM upward advection-->
+		<field id="CMIP7_va" field_ref="?dummy_XY_plev19"/>
+		<!--P1 (m s-1) northward_wind : Meridional wind (positive in a northward direction).-->
+		<field id="CMIP7_va100m" field_ref="?dummy_XY_height100m"/>
+		<!--P2 (m s-1) northward_wind : Meridional wind (positive in a northward direction) at 100m above the surface.-->
+		<field id="CMIP7_va6" field_ref="?dummy_XY_plev6"/>
+		<!--P3 (m s-1) northward_wind : Meridional wind (positive in a northward direction) on 6 pressure levels in the lower troposphere-->
+		<field id="CMIP7_vaUTLS" field_ref="?dummy_XY_plev5u"/>
+		<!--P2 (m s-1) northward_wind : 6 hourly instantaneous northward wind at 5 pressure levels in the UTLS region (150, 175, 200, 225, and 250 hPa)-->
+		<field id="CMIP7_vas" field_ref="?dummy_XY_height10m"/>
+		<!--P1 (m s-1) northward_wind : This is sampled synoptically.-->
+		<field id="CMIP7_vtem" field_ref="?dummy_XY_plev39"/>
+		<!--P2 (m s-1) northward_transformed_eulerian_mean_air_velocity : Transformed Eulerian Mean Diagnostics v\*, meridional component of the residual meridional circulation (v\*, w\*) derived from 6 hr or higher frequency data fields (use instantaneous daily fields or 12 hr fields if the 6 hr data are not available).-->
+		<field id="CMIP7_vtendnogw" field_ref="?dummy_XY_plev19"/>
+		<!--P3 (m s-2) tendency_of_northward_wind_due_to_nonorographic_gravity_wave_drag : Tendency of northward wind induced by the parameterized non-orographic gravity wave drag-->
+		<field id="CMIP7_vtendogw" field_ref="?dummy_XY_plev19"/>
+		<!--P3 (m s-2) tendency_of_northward_wind_due_to_orographic_gravity_wave_drag : Tendency of northward wind induced by the parameterized orographic gravity wave drag-->
+		<field id="CMIP7_wap" field_ref="?dummy_XY_plev19"/>
+		<!--P1 (Pa s-1) lagrangian_tendency_of_air_pressure : commonly referred to as "omega", this represents the vertical component of velocity in pressure coordinates (positive down)-->
+		<field id="CMIP7_wap6" field_ref="?dummy_XY_plev6"/>
+		<!--P3 (Pa s-1) lagrangian_tendency_of_air_pressure : Omega (=dp/dt) on 6 pressure levels in the lower troposphere-->
+		<field id="CMIP7_wbgt2m" field_ref="?dummy_XY_height2m"/>
+		<!--P3 (degC) wet_bulb_globe_temperature : mean 2m daily wet bulb globe temperature (WBGT).
+Wet Bulb Globe Temperature (WBGT) is a particularly effective indicator of heat stress for active populations such as outdoor workers and athletes.
+The calculation should be done with:
+WBGT = 0.567 \* T\_C + 0.393 \* e/100 + 3.94, where T\_C is temperature in degrees C, and e = huss \* p \* M\_air / M\_H2O, where "huss=specific humidity in kg/kg", M\_H2O = 18.01528/1000 # kg/mol, M\_air = 28.964/1000 # kg/mol for dry air and "P = surface pressure in Pa"-->
+		<field id="CMIP7_wbgt2mmax" field_ref="?dummy_XY_height2m"/>
+		<!--P3 (degC) wet_bulb_globe_temperature : max 2m daily wet bulb globe temperature (WGBT):
+Wet Bulb Globe Temperature (WBGT) is a particularly effective indicator of heat stress for active populations such as outdoor workers and athletes.
+The calculation should be done with:
+WBGT = 0.567 \* T\_C + 0.393 \* e/100 + 3.94, where T\_C is temperature in degrees C, and e = huss \* p \* M\_air / M\_H2O, where "huss=specific humidity in kg/kg", M\_H2O = 18.01528/1000 # kg/mol, M\_air = 28.964/1000 # kg/mol for dry air and "P = surface pressure in Pa"-->
+		<field id="CMIP7_wdir" field_ref="?dummy_XY"/>
+		<!--P2 (degree) sea_surface_wave_from_direction : Mean direction of wave propagation (direction from which the wave is coming) derived from the total wave energy spectrum, incorporating both wind-sea and swell waves. This variable is usually expressed in degrees relative to true north.-->
+		<field id="CMIP7_wdirswell" field_ref="?dummy_XY"/>
+		<!--P2 (degree) sea_surface_swell_wave_from_direction : Mean direction of wave propagation (direction from which the wave is coming) derived from the swell component of the wave energy spectrum (i.e., waves that have propagated away from their generation area). This variable is usually expressed in degrees relative to true north.-->
+		<field id="CMIP7_wdirwindsea" field_ref="?dummy_XY"/>
+		<!--P2 (degree) sea_surface_wind_wave_from_direction : Mean direction of wave propagation (direction from which the wave is coming) derived from the wind-sea component of the wave energy spectrum (i.e., local wind waves). This variable is usually expressed in degrees relative to true north.-->
+		<field id="CMIP7_wpp" field_ref="?dummy_XY"/>
+		<!--P2 (s) sea_surface_wave_period_at_variance_spectral_density_maximum : Wave period associated with the most energetic waves in total wave spectrum, incorporating both wind-sea and swell waves. In spectral wind wave models, this represents the spectral peak across the entire two-dimensional wave spectrum, incorporating both wind-sea and swell waves.-->
+		<field id="CMIP7_wppswell" field_ref="?dummy_XY"/>
+		<!--P2 (s) sea_surface_swell_wave_period_at_variance_spectral_density_maximum : Wave period associated with the most energetic swell waves (i.e., waves that have propagated away from their generation area). In spectral wind wave models, this represents the spectral peak across part of the two-dimensional wave spectrum, incorporating just swell waves.-->
+		<field id="CMIP7_wppwindsea" field_ref="?dummy_XY"/>
+		<!--P2 (s) sea_surface_wind_wave_period_at_variance_spectral_density_maximum : Wave period associated with the most energetic wind-sea waves (i.e., local wind waves). In spectral wind wave models, this represents the spectral peak across part of the two-dimensional wave spectrum, incorporating just wind-sea waves.-->
+		<field id="CMIP7_wsgmax100m" field_ref="?dummy_XY_height100m"/>
+		<!--P2 (m s-1) wind_speed_of_gust : Wind speed gust maximum at 100m above surface-->
+		<field id="CMIP7_wsgmax10m" field_ref="?dummy_XY_height10m"/>
+		<!--P2 (m s-1) wind_speed_of_gust : Wind speed gust maximum at 10m above surface-->
+		<field id="CMIP7_wtem" field_ref="?dummy_XY_plev39"/>
+		<!--P2 (m s-1) upward_transformed_eulerian_mean_air_velocity : Transformed Eulerian Mean Diagnostics w\*, upward component of the residual meridional circulation (v\*, w\*) derived from 6 hr or higher frequency data fields (use instantaneous daily fields or 12 hr fields if the 6 hr data are not available). Scale height: 6950 m-->
+		<field id="CMIP7_zg" field_ref="?dummy_XY_plev19"/>
+		<!--P1 (m) geopotential_height : Geopotential is the sum of the specific gravitational potential energy relative to the geoid and the specific centripetal potential energy. Geopotential height is the geopotential divided by the standard acceleration due to gravity. It is numerically similar to the altitude (or geometric height) and not to the quantity with standard name height, which is relative to the surface.-->
+		<field id="CMIP7_zg925" field_ref="?dummy_XY_p925"/>
+		<!--P3 (m) geopotential_height : Geopotential Height at 925 hPa, 6 hourly instantaneous-->
+		<field id="CMIP7_ztp" field_ref="?dummy_XY"/>
+		<!--P2 (m) tropopause_altitude : 2D monthly mean thermal tropopause calculated using WMO tropopause definition on 3d temperature-->
+		<field id="CMIP7_ap" field_ref="dummy_hyb"/>
+		<!--One of the hybrid coordinate arrays-->
+		<field id="CMIP7_ap_bnds" field_ref="dummy_hyb"/>
+		<!--One of the hybrid coordinate arrays-->
+		<field id="CMIP7_b" field_ref="dummy_hyb"/>
+		<!--One of the hybrid coordinate arrays-->
+		<field id="CMIP7_b_bnds" field_ref="dummy_hyb"/>
+		<!--One of the hybrid coordinate arrays-->
+	</field_definition>
+</context>

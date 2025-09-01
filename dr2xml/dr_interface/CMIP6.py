@@ -16,14 +16,14 @@ import os
 
 import six
 
-from logger import get_logger
-from .definition import Scope as ScopeBasic
+from utilities.logger import get_logger
 from .definition import DataRequest as DataRequestBasic
 from .definition import SimpleObject
 from .definition import SimpleDim as SimpleDimBasic
 from .definition import SimpleCMORVar as SimpleCMORVarBasic
+from ..projects.dr2xml import format_sizes
 from ..utils import Dr2xmlError, print_struct, is_elt_applicable, convert_string_to_year
-from dr2xml.settings_interface import get_settings_values
+from dr2xml.settings_interface import get_settings_values, get_values_from_internal_settings
 
 data_request_path = get_settings_values("internal", "data_request_path")
 if data_request_path is not None:
@@ -47,41 +47,18 @@ try:
 except ImportError:
     from dreqPy.scope import dreqQuery
 
-
-class Scope(ScopeBasic):
-
-    def __init__(self, scope=None):
-        super(Scope, self).__init__(scope=scope)
-        self.mcfg = self.scope.mcfg
-
-    def get_request_link_by_mip(self, mips_list):
-        return sorted(list(self.scope.getRequestLinkByMip(set(mips_list))), key=lambda x: x.label)
-
-    def get_filtered_request_links_by_mip_included_excluded(self, mips_list, included_request_links=None,
-                                                            excluded_request_links=None):
-        logger = get_logger()
-        rep = self.get_request_link_by_mip(mips_list)
-        logger.info("Number of Request Links which apply to MIPS %s  is: %d" %
-                    (print_struct(mips_list), len(rep)))
-        rep = [rl for rl in rep if is_elt_applicable(rl, attribute="label", excluded=excluded_request_links)]
-        logger.info("Number of Request Links after filtering by excluded_request_links is: %d" % len(rep))
-        if included_request_links is not None and len(included_request_links) > 0:
-            excluded_rls = [rl for rl in rep if not is_elt_applicable(rl, attribute="label",
-                                                                      included=included_request_links)]
-            for rl in excluded_rls:
-                logger.critical("RequestLink %s is not included" % rl.label)
-                rep.remove(rl)
-        logger.info("Number of Request Links after filtering by included_request_links is: %d" % len(rep))
-
-        return rep
-
-    def get_vars_by_request_link(self, request_link, pmax):
-        if not isinstance(request_link, list):
-            request_link = [request_link, ]
-        return self.scope.varsByRql(request_link, pmax)
+rls = None
 
 
 class DataRequest(DataRequestBasic):
+    def set_mcfg(self):
+        self.scope = dreqQuery(dq=self.data_request, tierMax=get_settings_values("internal", "select_tierMax"))
+        self.mcfg = format_sizes(self.scope.mcfg)
+
+    def update_mcfg(self):
+        mcfg = get_settings_values('internal', 'select_sizes')
+        if mcfg is not None:
+            self.mcfg = mcfg
 
     def get_version(self):
         return self.data_request.version
@@ -90,6 +67,22 @@ class DataRequest(DataRequestBasic):
         rep = self.data_request.coll[collection]
         if elt_type in ["variable", ]:
             rep = [SimpleCMORVar.get_from_dr(elt, id=elt.uid) for elt in rep.items]
+        return rep
+
+    def get_variables_per_label(self, debug=list()):
+        logger = get_logger()
+        rep = OrderedDict()
+        for v in self.get_list_by_id("var").items:
+            if v.label not in rep:
+                rep[v.label] = []
+                if v.label in debug:
+                    logger.debug("Adding %s" % v.label)
+            refs = self.get_request_by_id_by_sect(v.uid, 'CMORvar')
+            for r in refs:
+                ref = self.get_element_uid(r, elt_type="variable")
+                rep[v.label].append(ref)
+                if v.label in debug:
+                    logger.debug("Adding CmorVar %s(%s) for %s" % (v.label, ref.mipTable, ref.label))
         return rep
 
     def get_sectors_list(self):
@@ -112,9 +105,9 @@ class DataRequest(DataRequestBasic):
         else:
             return super().get_experiment_label_start_end_years(experiment)
 
-    def filter_request_link_by_experiment_and_year(self, request_links, experiment_id, year,
-                                                   filter_on_realization=False, realization_index=1, branching=dict(),
-                                                   branch_year_in_child=None, endyear=False):
+    def _filter_request_link_by_experiment_and_year(self, request_links, experiment_id, year,
+                                                    filter_on_realization=False, realization_index=1, branching=dict(),
+                                                    branch_year_in_child=None, endyear=False):
         logger = get_logger()
         _, starty, endy = self.get_experiment_label_start_end_years(experiment_id)
         logger.info("Filtering for experiment %s, covering years [ %s , %s ] in DR" %
@@ -124,15 +117,15 @@ class DataRequest(DataRequestBasic):
         for rl in request_links:
             # Access all requesItems ids which refer to this RequestLink
             rl_req_items = self.get_request_by_id_by_sect(rl.uid, 'requestItem')
-            if any([self.check_requestitem_for_exp_and_year(self.get_element_uid(ri_id), experiment_id, year,
-                                                            filter_on_realization, endyear, realization_index,
-                                                            branching, branch_year_in_child)[0]
+            if any([self._check_requestitem_for_exp_and_year(self.get_element_uid(ri_id), experiment_id, year,
+                                                             filter_on_realization, endyear, realization_index,
+                                                             branching, branch_year_in_child)[0]
                     for ri_id in rl_req_items]):
                 rep.append(rl)
         return rep
 
-    def check_requestitem_for_exp_and_year(self, ri, experiment, year, filter_on_realization=False, endyear=False,
-                                           realization_index=1, branching=dict(), branch_year_in_child=None):
+    def _check_requestitem_for_exp_and_year(self, ri, experiment, year, filter_on_realization=False, endyear=False,
+                                            realization_index=1, branching=dict(), branch_year_in_child=None):
         """
         Returns True if requestItem 'ri' in data request is relevant
         for a given 'experiment' and 'year'. Toggle 'debug' allow some printouts
@@ -190,8 +183,8 @@ class DataRequest(DataRequestBasic):
                 logger.debug(" ..applies because arg year is None")
             else:
                 year = int(year)
-                rep, endyear = self.is_year_in_requestitem(ri, experiment, year, branching, branch_year_in_child,
-                                                           endyear)
+                rep, endyear = self._is_year_in_requestitem(ri, experiment, year, branching, branch_year_in_child,
+                                                            endyear)
                 logger.debug(" ..year in ri returns: %s %s" % (rep, endyear))
                 # if (ri.label=="AerchemmipAermonthly3d") :
                 #    print "reqItem=%s,experiment=%s,year=%d,rep=%s,"%(ri.label,experiment,year,rep)
@@ -201,7 +194,7 @@ class DataRequest(DataRequestBasic):
             # print
             return False, None
 
-    def is_year_in_requestitem(self, ri, exp, year, branching=dict(), branch_year_in_child=None, endyear=False):
+    def _is_year_in_requestitem(self, ri, exp, year, branching=dict(), branch_year_in_child=None, endyear=False):
         """
         :param ri: request item
         :param exp: experiment
@@ -216,8 +209,8 @@ class DataRequest(DataRequestBasic):
             return True, 2018
         if 'tslice' in ri.__dict__:
             logger.debug("calling year_in_ri_tslice")
-            rep, endyear = self.is_year_in_requestitem_tslice(ri, exp_label, exp_startyear, year, branching,
-                                                              branch_year_in_child)
+            rep, endyear = self._is_year_in_requestitem_tslice(ri, exp_label, exp_startyear, year, branching,
+                                                               branch_year_in_child)
             return rep, endyear
         try:
             ny = int(ri.nymax)
@@ -258,8 +251,8 @@ class DataRequest(DataRequestBasic):
         logger.debug("year_in_ri: returning %s %s" % (applies, RI_end_year))
         return applies, RI_end_year
 
-    def is_year_in_requestitem_tslice(self, ri, exp_label, exp_startyear, year, branching=dict(),
-                                      branch_year_in_child=None):
+    def _is_year_in_requestitem_tslice(self, ri, exp_label, exp_startyear, year, branching=dict(),
+                                       branch_year_in_child=None):
         """
         Returns a couple : relevant, endyear.
         RELEVANT is True if requestItem RI applies to
@@ -334,7 +327,7 @@ class DataRequest(DataRequestBasic):
                      (year, exp_label, repr(relevant), ri.title, tslice.type, repr(endyear)))
         return relevant, endyear
 
-    def get_requestitems_for_cmorvar(self, cmorvar_id, pmax, global_rls):
+    def _get_requestitems_for_cmorvar(self, cmorvar_id, pmax):
         logger = get_logger()
 
         rVarsUid = self.get_request_by_id_by_sect(cmorvar_id, 'requestVar')
@@ -346,13 +339,9 @@ class DataRequest(DataRequestBasic):
         RequestLinksId = list()
         for vg in VarGroups:
             RequestLinksId.extend(self.get_request_by_id_by_sect(vg.uid, 'requestLink'))
-        FilteredRequestLinks = list()
-        for rlid in RequestLinksId:
-            rl = self.get_element_uid(rlid)
-            if rl in global_rls:
-                FilteredRequestLinks.append(rl)
-        logger.debug("les requestlinks: %s" % " ".join([self.get_element_uid(rlid).label
-                                                        for rlid in RequestLinksId]))
+        RequestLinksId = sorted([self.get_element_uid(rlid) for rlid in RequestLinksId], key=lambda x: x.label)
+        FilteredRequestLinks = sorted(list(set(RequestLinksId) & set(rls)), key=lambda x: x.label)
+        logger.debug("les requestlinks: %s" % " ".join([rl.label for rl in RequestLinksId]))
         logger.debug("les FilteredRequestlinks: %s" % " ".join([rl.label for rl in FilteredRequestLinks]))
         RequestItems = list()
         for rl in FilteredRequestLinks:
@@ -361,22 +350,23 @@ class DataRequest(DataRequestBasic):
             "les requestItems: %s" % " ".join([self.get_element_uid(riid).label for riid in RequestItems]))
         return RequestItems
 
-    def get_endyear_for_cmorvar(self, cmorvar, experiment, year, internal_dict, global_rls):
+    def get_endyear_for_cmorvar(self, cmorvar, experiment, year, internal_dict):
         logger = get_logger()
         logger.debug("In end_year for %s %s" % (cmorvar.label, cmorvar.mipTable))
         # 1- Get the RequestItems which apply to CmorVar
-        request_items = self.get_requestitems_for_cmorvar(cmorvar.id, internal_dict["max_priority"], global_rls)
+        max_priority = get_values_from_internal_settings("max_priority", "max_priority_lset", merge=False)
+        request_items = self._get_requestitems_for_cmorvar(cmorvar.id, max_priority)
 
         # 2- Select those request links which include expt and year
         larger = None
         for riid in request_items:
             ri = self.get_element_uid(riid)
-            applies, endyear = self.check_requestitem_for_exp_and_year(ri, experiment, year,
-                                                                       internal_dict["filter_on_realization"],
-                                                                       internal_dict["end_year"],
-                                                                       internal_dict["realization_index"],
-                                                                       internal_dict["branching"],
-                                                                       internal_dict["branch_year_in_child"])
+            applies, endyear = self._check_requestitem_for_exp_and_year(ri, experiment, year,
+                                                                        internal_dict["filter_on_realization"],
+                                                                        internal_dict["end_year"],
+                                                                        internal_dict["realization_index"],
+                                                                        internal_dict["branching"],
+                                                                        internal_dict["branch_year_in_child"])
             logger.debug("For var and freq selected for debug and year %s, for ri %s, applies=%s, endyear=%s" %
                          (str(year), ri.title, str(applies), str(endyear)))
             if applies:
@@ -391,6 +381,8 @@ class DataRequest(DataRequestBasic):
     def get_element_uid(self, id=None, error_msg=None, raise_on_error=False, check_print_DR_errors=True,
                         check_print_stdnames_error=False, elt_type=None, **kwargs):
         logger = get_logger()
+        if elt_type in ["dim", ] and not id.startswith("dim:"):
+            id = 'dim:{}'.format(id)
         if id is None:
             rep = self.data_request.inx.uid
         elif id in self.data_request.inx.uid:
@@ -443,32 +435,32 @@ class DataRequest(DataRequestBasic):
                     rep.append(c.label)
         return rep
 
-    def get_cmorvars_list(self, tierMax, mips_list, included_request_links, excluded_request_links, max_priority,
-                          included_vars, excluded_vars, included_tables, excluded_tables, excluded_pairs,
-                          experiment_filter=False, sizes=None):
+    def get_cmorvars_list(self, select_tierMax, select_mips, select_included_request_links,
+                          select_excluded_request_links, select_max_priority, select_included_vars,
+                          select_excluded_vars, select_included_tables, select_excluded_tables, select_excluded_pairs,
+                          experiment_filter=False, **kwargs):
+        global rls
         logger = get_logger()
-        sc = get_scope(tierMax)
-        if sizes is not None:
-            sc.update_mcfg(sizes)
+        self.update_mcfg()
         # Get the request links for all experiments filtered by MIPs
-        rls_for_mips = sc.get_filtered_request_links_by_mip_included_excluded(
-            mips_list=mips_list, included_request_links=included_request_links,
-            excluded_request_links=excluded_request_links
+        rls_for_mips = self._get_filtered_request_links_by_mip_included_excluded(
+            mips_list=select_mips, included_request_links=select_included_request_links,
+            excluded_request_links=select_excluded_request_links
         )
         rls_for_mips = sorted(rls_for_mips, key=lambda x: x.label)
         # Filter by experiment if needed
         if experiment_filter:
-            rls = self.filter_request_link_by_experiment_and_year(rls_for_mips, **experiment_filter)
+            rls = self._filter_request_link_by_experiment_and_year(rls_for_mips, **experiment_filter)
             logger.info("Number of Request Links which apply to experiment %s member %s and MIPs %s is: %d" %
                         (experiment_filter["experiment_id"], experiment_filter['realization_index'],
-                         print_struct(mips_list), len(rls)))
+                         print_struct(select_mips), len(rls)))
         else:
             rls = rls_for_mips
         # Get variables and grids by mips
         miprl_vars_grids = set()
         for rl in rls:
             logger.debug("processing RequestLink %s" % rl.title)
-            for v in sc.get_vars_by_request_link(request_link=rl.uid, pmax=max_priority):
+            for v in self._get_vars_by_request_link(request_link=rl.uid, pmax=select_max_priority):
                 # The requested grid is given by the RequestLink except if spatial shape matches S-*
                 gr = rl.grid
                 cmvar = self.get_element_uid(v, elt_type="variable")
@@ -482,9 +474,9 @@ class DataRequest(DataRequestBasic):
         filtered_vars = list()
         for (v, g) in miprl_vars_grids:
             cmvar = self.get_element_uid(v, elt_type="variable")
-            if is_elt_applicable(cmvar.mipVarLabel, excluded=excluded_vars, included=included_vars) and \
-                    is_elt_applicable(cmvar.mipTable, excluded=excluded_tables, included=included_tables) and \
-                    is_elt_applicable((cmvar.mipVarLabel, cmvar.mipTable), excluded=excluded_pairs):
+            if is_elt_applicable(cmvar.mipVarLabel, excluded=select_excluded_vars, included=select_included_vars) and \
+                    is_elt_applicable(cmvar.mipTable, excluded=select_excluded_tables, included=select_included_tables) and \
+                    is_elt_applicable((cmvar.mipVarLabel, cmvar.mipTable), excluded=select_excluded_pairs):
                 filtered_vars.append((v, g))
                 logger.debug("adding var %s, grid=%s, ttable=%s=" % (cmvar.label, g, cmvar.mipTable))
 
@@ -494,10 +486,35 @@ class DataRequest(DataRequestBasic):
         filtered_vars_with_grids = defaultdict(set)
         for (v, g) in filtered_vars:
             filtered_vars_with_grids[v].add(g)
-        return filtered_vars_with_grids, rls
+        return filtered_vars_with_grids
+
+    def _get_request_link_by_mip(self, mips_list):
+        return sorted(list(self.scope.getRequestLinkByMip(set(mips_list))), key=lambda x: x.label)
+
+    def _get_filtered_request_links_by_mip_included_excluded(self, mips_list, included_request_links=None,
+                                                            excluded_request_links=None):
+        logger = get_logger()
+        rep = self._get_request_link_by_mip(mips_list)
+        logger.info("Number of Request Links which apply to MIPS %s  is: %d" %
+                    (print_struct(mips_list), len(rep)))
+        rep = [rl for rl in rep if is_elt_applicable(rl, attribute="label", excluded=excluded_request_links)]
+        logger.info("Number of Request Links after filtering by excluded_request_links is: %d" % len(rep))
+        if included_request_links is not None and len(included_request_links) > 0:
+            excluded_rls = [rl for rl in rep if not is_elt_applicable(rl, attribute="label",
+                                                                      included=included_request_links)]
+            for rl in excluded_rls:
+                logger.critical("RequestLink %s is not included" % rl.label)
+                rep.remove(rl)
+        logger.info("Number of Request Links after filtering by included_request_links is: %d" % len(rep))
+
+        return rep
+
+    def _get_vars_by_request_link(self, request_link, pmax):
+        if not isinstance(request_link, list):
+            request_link = [request_link, ]
+        return self.scope.varsByRql(request_link, pmax)
 
 
-scope = None
 data_request = None
 
 
@@ -517,27 +534,6 @@ def get_data_request():
         return initialize_data_request()
     else:
         return data_request
-
-
-def initialize_scope(tier_max):
-    global scope
-    dq = get_data_request()
-    if scope is None:
-        scope = Scope(dreqQuery(dq=dq.data_request, tierMax=tier_max))
-    return scope
-
-
-def get_scope(tier_max=None):
-    if scope is None:
-        return initialize_scope(tier_max)
-    else:
-        return scope
-
-
-def set_scope(sc):
-    if sc is not None:
-        global scope
-        scope = sc
 
 
 def normalize_grid(grid):
@@ -612,12 +608,14 @@ class SimpleCMORVar(SimpleCMORVarBasic):
                 self.cell_measures = 'area: areacello'
             if self.label in ["jpdftaure", ]:
                 self.spatial_shape = "XY-na"
-        if self.modeling_realm is not None:
+        if len(self.modeling_realm) > 0:
             # Because wrong in DR01.00.20
-            if self.modeling_realm.startswith("zoo"):
-                self.modeling_realm = "ocnBgChem"
+            self.modeling_realm=["ocnBgChem" if elt.startswith("zoo") else elt for elt in self.modeling_realm]
+            self.set_modeling_realms = set()
+            for realm in self.modeling_realm:
+                self.set_modeling_realms = self.set_modeling_realms | set(realm.split(" "))
             # TBD : this cell_measure choice for seaice variables is specific to Nemo
-            if "seaIce" in self.modeling_realm and self.cell_measures is not None and \
+            if "seaIce" in self.set_modeling_realms and self.cell_measures is not None and \
                     "areacella" in self.cell_measures:
                 if self.label in ['siconca', ]:
                     self.cell_measures = 'area: areacella'
@@ -633,7 +631,7 @@ class SimpleCMORVar(SimpleCMORVarBasic):
             self.long_name = "empty in DR %s" % data_request.get_version()
         if self.units is None:
             self.units = "empty in DR %s" % data_request.get_version()
-        if self.modeling_realm in ["seaIce", ] and re.match(".*areacella.*", str(self.cell_measures)) \
+        if self.modeling_realm == ["seaIce", ] and re.match(".*areacella.*", str(self.cell_measures)) \
                 and self.label not in ["siconca", ]:
             self.comments = ". Due an error in DR01.00.21 and to technical constraints, this variable may have " \
                                 "attribute cell_measures set to area: areacella, while it actually is area: areacello"
@@ -746,4 +744,10 @@ class SimpleCMORVar(SimpleCMORVarBasic):
         if struct is not None:
             input_var_dict["flag_meanings"] = struct.flag_meanings
             input_var_dict["flag_values"] = struct.flag_values
+        if "modeling_realm" in input_var_dict:
+            val = input_var_dict["modeling_realm"]
+            if val is None or len(val) == 0:
+                input_var_dict["modeling_realm"] = list()
+            elif not isinstance(val, list):
+                input_var_dict["modeling_realm"] = [val, ]
         return cls(from_dr=True, **input_var_dict)

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<context id="nemo">
+	<!--CMIP6 Data Request version current_cmip6_dr-->
+	<!--dr2xml version 3.1-->
+	<!--Lab_and_model settings
+{'excluded_vars' = [],
+'excluded_vars_file' = [],
+'institution_id' = 'CNRM-CERFACS',
+'listof_home_vars' = 'None',
+'max_priority' = '3',
+'mips' = {'AerChemMIP', 'C4MIP', 'CCMI', 'CFMIP', 'CMIP', 'CMIP5', 'CMIP6', 'CORDEX', 'DAMIP', 'DCPP', 'DECK', 'DynVar', 'FAFMIP', 'GMMIP', 'GeoMIP', 'HighResMIP', 'ISMIP6', 'LS3MIP', 'LUMIP', 'OMIP', 'PDRMIP', 'PMIP', 'RFMIP', 'SIMIP', 'SPECS', 'ScenarioMIP', 'SolarMIP', 'VIACSAB', 'VolMIP'},
+'path_extra_tables' = 'None',
+'path_special_defs' = './input/special_defs',
+'ping_variables_prefix' = 'CMIP6_',
+'project' = 'ping',
+'realms_per_context' = {'arpsfx' = ['atmos', 'atmos atmosChem', 'aerosol', 'atmos land', 'land', 'landIce land', 'aerosol land', 'land landIce', 'landIce'], 'nemo' = ['seaIce', 'ocean', 'ocean seaIce', 'ocnBgchem', 'seaIce ocean']},
+'tierMax' = '3'}-->
+	<!--Simulation settings
+{}-->
+	<!--Year processed None-->
+	<field_definition>
+		<field id="CMIP6_fsitherm" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) water_flux_into_sea_water_due_to_sea_ice_thermodynamics : computed as the sea ice thermodynamic water flux into the ocean divided by the area of the ocean portion of the grid cell.-->
+		<field id="CMIP6_hfsifrazil" field_ref="?dummy_XYO"/>
+		<!--P1 (W m-2) heat_flux_into_sea_water_due_to_freezing_of_frazil_ice : Heat Flux into Sea Water due to Frazil Ice Formation-->
+		<field id="CMIP6_hfsifrazil2d" field_ref="?dummy_XY"/>
+		<!--P1 (W m-2) heat_flux_into_sea_water_due_to_freezing_of_frazil_ice : Heat Flux into Sea Water due to Frazil Ice Formation-->
+		<field id="CMIP6_sfdsi" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) downward_sea_ice_basal_salt_flux : This field is physical, and it arises since sea ice has a nonzero salt content, so it exchanges salt with the liquid ocean upon melting and freezing.-->
+		<field id="CMIP6_vsfsit" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) virtual_salt_flux_into_sea_water_due_to_sea_ice_thermodynamics : This variable measures the virtual salt flux into sea water due to the melting of sea ice. It is set to zero in models which receive a real water flux.-->
+	</field_definition>
+</context>

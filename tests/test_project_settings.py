@@ -12,7 +12,8 @@ from copy import copy
 import sys
 import os
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+project_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(project_dir)
 
 from dr2xml.config import initialize_config_variables
 from dr2xml.settings_interface import initialize_settings, get_settings_values
@@ -57,7 +58,7 @@ class TestProjectSettings(unittest.TestCase):
 		}
 		sset = dict()
 		config = dict(context="arpsfx", dirname=None, prefix="CMIP6_", year=0, root="__init__.py")
-		initialize_settings(lset=lset, sset=sset, **config)
+		initialize_settings(lset=lset, sset=sset, select="no", **config)
 		internal = get_settings_values("internal")
 		ref_internal = {'CFsubhr_frequency': '1ts',
 		                'add_Gibraltar': False,
@@ -72,6 +73,7 @@ class TestProjectSettings(unittest.TestCase):
 		                'bytes_per_float': 2,
 		                'configuration': None,
 		                'context': 'arpsfx',
+		                'data_request_config': f'{project_dir}/dr2xml/dr_interface/CMIP7_config',
 		                'data_request_content_version': 'latest_stable',
 		                'data_request_path': None,
 		                'data_request_used': 'CMIP6',
@@ -119,6 +121,7 @@ class TestProjectSettings(unittest.TestCase):
 		                'orography_field_name': 'orog',
 		                'orphan_variables': [],
 		                'path_extra_tables': None,
+		                'path_special_defs': './input/special_defs',
 		                'path_to_parse': './',
 		                'perso_sdims_description': {},
 		                'ping_variables_prefix': 'CMIP6_',
@@ -133,6 +136,24 @@ class TestProjectSettings(unittest.TestCase):
 		                'required_model_components': [],
 		                'sampling_timestep': None,
 		                'save_project_settings': None,
+		                'select': 'no',
+		                'select_excluded_pairs': [],
+		                'select_excluded_request_links': None,
+		                'select_excluded_tables': [],
+		                'select_excluded_vars': [],
+		                'select_grid_choice': 'LR',
+		                'select_included_request_links': None,
+		                'select_included_tables': [],
+		                'select_included_vars': [],
+		                'select_max_priority': 3,
+		                'select_mips': ['AerChemMIP', 'C4MIP', 'CCMI', 'CFMIP', 'CMIP', 'CMIP5', 'CMIP6', 'CORDEX',
+		                                'DAMIP', 'DCPP', 'DECK', 'DynVar', 'FAFMIP', 'GMMIP', 'GeoMIP', 'HighResMIP',
+		                                'ISMIP6', 'LS3MIP', 'LUMIP', 'OMIP', 'PDRMIP', 'PMIP', 'RFMIP', 'SIMIP',
+		                                'SPECS', 'ScenarioMIP', 'SolarMIP', 'VIACSAB', 'VolMIP'],
+		                'select_on_expt': False,
+		                'select_on_year': None,
+		                'select_sizes': None,
+		                'select_tierMax': 3,
 		                'sizes': None,
 		                'source_id': None,
 		                'source_type': None,
@@ -146,6 +167,7 @@ class TestProjectSettings(unittest.TestCase):
 		                'use_union_zoom': False,
 		                'vertical_interpolation_operation': 'instant',
 		                'xios_version': 2,
+		                'year': 0,
 		                'zg_field_name': 'zg'}
 		self.assertDictEqual(internal, ref_internal)
 		common = get_settings_values("common")
@@ -169,7 +191,6 @@ class TestProjectSettings(unittest.TestCase):
 		              'physics_index': '1',
 		              'prefix': 'CMIP6_',
 		              'sub_experiment': 'none',
-		              'sub_experiment_id': 'none',
-		              'year': 0}
+		              'sub_experiment_id': 'none'}
 		self.assertDictEqual(common, ref_common)
 

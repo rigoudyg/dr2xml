@@ -8,7 +8,7 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 
 from collections import OrderedDict, defaultdict
 
-from logger import get_logger
+from utilities.logger import get_logger
 
 
 # mpmoine_petitplus: nouvelle fonction print_some_stats (plus d'info sur les skipped_vars, nbre de vars / (shape,freq) )
@@ -45,7 +45,8 @@ def print_some_stats(context, svars_per_table, skipped_vars_per_table, actually_
         # --------------------------------------------------------------------
         if skipped_vars_per_table:
             logger.info("\nSkipped variables (i.e. whose alias is not present in the pingfile):")
-            for table, skipvars in skipped_vars_per_table.items():
+            for table in sorted(list(skipped_vars_per_table)):
+                skipvars = sorted(skipped_vars_per_table[table])
                 logger.info(">>> TABLE: %15s %02d/%02d ----> %s" % (table, len(skipvars), len(svars_per_table[table]),
                                                                     " ".join(skipvars)))
                 # TBS# print "\n\t",table ," ",len(skipvars),"--->",
@@ -57,8 +58,8 @@ def print_some_stats(context, svars_per_table, skipped_vars_per_table, actually_
         # (i.e. not excluded and not skipped)
         # --------------------------------------------------------------------
         stats_out = {}
-        for table in svars_per_table:
-            for sv in svars_per_table[table]:
+        for table in sorted(list(svars_per_table)):
+            for sv in sorted(list(svars_per_table[table])):
                 dic_freq = {}
                 dic_shp = {}
                 if table not in skipped_vars_per_table or \
@@ -78,25 +79,17 @@ def print_some_stats(context, svars_per_table, skipped_vars_per_table, actually_
         logger.info("\n\nSome Statistics on actually written variables per frequency+shape...")
 
         #    ((sv.label,sv.table,sv.frequency,sv.Priority,sv.spatial_shp))
-        dic = OrderedDict()
-        for label, long_name, stdname, table, frequency, Priority, spatial_shp in actually_written_vars:
-            if frequency not in dic:
-                dic[frequency] = OrderedDict()
-            if spatial_shp not in dic[frequency]:
-                dic[frequency][spatial_shp] = OrderedDict()
-            if table not in dic[frequency][spatial_shp]:
-                dic[frequency][spatial_shp][table] = OrderedDict()
-            if Priority not in dic[frequency][spatial_shp][table]:
-                dic[frequency][spatial_shp][table][Priority] = []
+        dic = defaultdict(lambda: defaultdict(lambda: defaultdict(lambda: defaultdict(list))))
+        for (label, long_name, stdname, table, frequency, Priority, spatial_shp) in actually_written_vars:
             dic[frequency][spatial_shp][table][Priority].append(label)
         tot_among_freqs = 0
-        for frequency in dic:
+        for frequency in sorted(list(dic)):
             tot_for_freq_among_shapes = 0
-            for spatial_shp in dic[frequency]:
+            for spatial_shp in sorted(list(dic[frequency])):
                 tot_for_freq_and_shape_among_tables = 0
-                for table in dic[frequency][spatial_shp]:
-                    for Priority in dic[frequency][spatial_shp][table]:
-                        list_priority = dic[frequency][spatial_shp][table][Priority]
+                for table in sorted(list(dic[frequency][spatial_shp])):
+                    for Priority in sorted(list(dic[frequency][spatial_shp][table])):
+                        list_priority = sorted(dic[frequency][spatial_shp][table][Priority])
                         tot_for_freq_and_shape_among_tables += len(list_priority)
                         logger.info("%10s %8s %12s P%1d %3d: %s" % (" ", " ", table, Priority, len(list_priority),
                                                                     " ".join(list_priority)))

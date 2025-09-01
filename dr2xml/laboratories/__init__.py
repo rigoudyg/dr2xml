@@ -23,6 +23,9 @@ def initialize_laboratory_settings():
         if institution_id in ["CNRM-CERFACS", "CNRM", "lfpw"]:
             from . import CNRM_CERFACS
             laboratory_source = CNRM_CERFACS
+        elif institution_id in ["IPSL", "ipsl"]:
+            from . import IPSL
+            laboratory_source = IPSL
         else:
             laboratory_used = internal_dict["laboratory_used"]
             if laboratory_used is not None:

@@ -3,7 +3,7 @@
 *
 *              dr2xml version:  current_version
 *   CMIP6 conventions version:  v6.2.4
-*  CMIP6 Data Request version:  01.00.21.post1
+*  CMIP6 Data Request version:  current_cmip6_dr
 
 *
  **************************************************
@@ -151,22 +151,22 @@ file_def written as current_directory/test_RCSM6_HIS/test_outputs/dr2xml_nemo.xm
 
 
 Some Statistics on actually written variables per frequency+shape...
+                         None1hr P3   1: tos
+       1hr    XY-na    -------- ---   1
+
+       1hr --------    -------- ---   1
+
                          HOMOday P1   5: diftrblo2d diftrxylo2d rhop votke votkeavt
                          Noneday P1   5: so thetao uo vo wo
        day     XY-O    -------- ---  10
 
                          HOMOday P1  11: mxldepth somixhgt tml tmlatf tmlfor tmlldf tmlres tmltot tmlyad tmlzad tmlzdf
-                         Noneday P2   2: friver rsntds
                          Noneday P1   5: hfds sfdsi wfo wfonocorr zos
+                         Noneday P2   2: friver rsntds
                          Noneday P3   2: sos tos
        day    XY-na    -------- ---  20
 
        day --------    -------- ---  30
-
-                         None1hr P3   1: tos
-       1hr    XY-na    -------- ---   1
-
-       1hr --------    -------- ---   1
 
                          HOMOmon P1  34: rhop strdldf strdtot strdxad strdyad strdzad strdzdf ttrdldf ttrdtot ttrdxad ttrdyad ttrdzad ttrdzdf utrdbfr utrdhpg utrdkeg utrdldf utrdpvo utrdrvo utrdspg utrdtot utrdzad utrdzdf voavtbn2 vtrdbfr vtrdhpg vtrdkeg vtrdldf vtrdpvo vtrdrvo vtrdspg vtrdtot vtrdzad vtrdzdf
                          Nonemon P1   5: so thetao uo vo wo
@@ -174,8 +174,8 @@ Some Statistics on actually written variables per frequency+shape...
        mon     XY-O    -------- ---  40
 
                          HOMOmon P1   9: strdatf strdcdt strdsad ttrdatf ttrdqns ttrdqsr ttrdsad utrdtau vtrdtau
-                         Nonemon P2   2: friver rsntds
                          Nonemon P1   5: hfds sfdsi wfo wfonocorr zos
+                         Nonemon P2   2: friver rsntds
                          Nonemon P3   2: sos tos
        mon    XY-na    -------- ---  18
 
@@ -499,7 +499,7 @@ Some Statistics on actually written variables per variable...
 *
 *              dr2xml version:  current_version
 *   CMIP6 conventions version:  v6.2.4
-*  CMIP6 Data Request version:  01.00.21.post1
+*  CMIP6 Data Request version:  current_cmip6_dr
 
 *
  **************************************************
@@ -603,17 +603,6 @@ Some Statistics on actually written variables per frequency+shape...
                           AERmon P1   1: cdnc
        mon     XY-A    -------- ---   1
 
-                          AERmon P1  14: cltc lwp od550aer od550bc od550dust od550no3 od550oa od550so4 od550ss rlutaf rlutcsaf rsutaf rsutcsaf toz
-                            Amon P1  34: clivi clt clwvi evspsbl hfls hfss hurs pr prc prsn prw ps psl rlds rldscs rlus rlut rlutcs rsds rsdscs rsdt rsus rsuscs rsut rsutcs sfcWind tas tasmax tasmin tauu tauv ts uas vas
-                            Emon P2   1: mrtws
-                            Emon P1   1: sfcWindmax
-                        HOMALmon P1  31: RADabs550aer RADasy550aer RADod550aer RADssa550aer cdnctop clth cltl cltm husll od550dustbin1 od550dustbin2 od550nh4 od550no3bin1 od550ssbin1 od550ssbin2 reffclitop reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf snct tall tssea uall vall
-                           LImon P1   5: agesno snc snd snm snw
-                            Lmon P1   4: mrfso mrro mrros mrso
-                         Nonemon P1   2: tsland tsns
-                           SImon P1   1: siconca
-       mon    XY-na    -------- ---  93
-
                             Amon P1   7: hur hus ta ua va wap zg
        mon   XY-P19    -------- ---   7
 
@@ -631,6 +620,17 @@ Some Statistics on actually written variables per frequency+shape...
 
                         HOMEPmon P1   7: hur925 hus925 ta925 ua925 va925 wap925 zg925
        mon XY-P925HM    -------- ---   7
+
+                          AERmon P1  14: cltc lwp od550aer od550bc od550dust od550no3 od550oa od550so4 od550ss rlutaf rlutcsaf rsutaf rsutcsaf toz
+                            Amon P1  34: clivi clt clwvi evspsbl hfls hfss hurs pr prc prsn prw ps psl rlds rldscs rlus rlut rlutcs rsds rsdscs rsdt rsus rsuscs rsut rsutcs sfcWind tas tasmax tasmin tauu tauv ts uas vas
+                            Emon P1   1: sfcWindmax
+                            Emon P2   1: mrtws
+                        HOMALmon P1  31: RADabs550aer RADasy550aer RADod550aer RADssa550aer cdnctop clth cltl cltm husll od550dustbin1 od550dustbin2 od550nh4 od550no3bin1 od550ssbin1 od550ssbin2 reffclitop reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf snct tall tssea uall vall
+                           LImon P1   5: agesno snc snd snm snw
+                            Lmon P1   4: mrfso mrro mrros mrso
+                         Nonemon P1   2: tsland tsns
+                           SImon P1   1: siconca
+       mon    XY-na    -------- ---  93
 
        mon --------    -------- --- 136
 
@@ -1215,7 +1215,7 @@ Warnings about cell methods (with var list)
 *
 *              dr2xml version:  current_version
 *   CMIP6 conventions version:  v6.2.4
-*  CMIP6 Data Request version:  01.00.21.post1
+*  CMIP6 Data Request version:  current_cmip6_dr
 
 *
  **************************************************

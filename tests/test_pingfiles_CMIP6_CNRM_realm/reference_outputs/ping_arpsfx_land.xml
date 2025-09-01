@@ -1,0 +1,603 @@
+<?xml version="1.0" encoding="utf-8"?>
+<context id="arpsfx">
+	<!--CMIP6 Data Request version current_cmip6_dr-->
+	<!--dr2xml version 3.1-->
+	<!--Lab_and_model settings
+{'excluded_vars' = [],
+'excluded_vars_file' = [],
+'institution_id' = 'CNRM-CERFACS',
+'listof_home_vars' = 'None',
+'max_priority' = '3',
+'mips' = {'AerChemMIP', 'C4MIP', 'CCMI', 'CFMIP', 'CMIP', 'CMIP5', 'CMIP6', 'CORDEX', 'DAMIP', 'DCPP', 'DECK', 'DynVar', 'FAFMIP', 'GMMIP', 'GeoMIP', 'HighResMIP', 'ISMIP6', 'LS3MIP', 'LUMIP', 'OMIP', 'PDRMIP', 'PMIP', 'RFMIP', 'SIMIP', 'SPECS', 'ScenarioMIP', 'SolarMIP', 'VIACSAB', 'VolMIP'},
+'path_extra_tables' = 'None',
+'path_special_defs' = './input/special_defs',
+'ping_variables_prefix' = 'CMIP6_',
+'project' = 'ping',
+'realms_per_context' = {'arpsfx' = ['atmos', 'atmos atmosChem', 'aerosol', 'atmos land', 'land', 'landIce land', 'aerosol land', 'land landIce', 'landIce'], 'nemo' = ['seaIce', 'ocean', 'ocean seaIce', 'ocnBgchem', 'seaIce ocean']},
+'tierMax' = '3'}-->
+	<!--Simulation settings
+{}-->
+	<!--Year processed None-->
+	<field_definition>
+		<field id="CMIP6_agesno" field_ref="?dummy_XY"/>
+		<!--P1 (day) age_of_surface_snow : age_of_surface_snow-->
+		<field id="CMIP6_albc" field_ref="?dummy_XY"/>
+		<!--P1 (1)  : Canopy Albedo-->
+		<field id="CMIP6_albsn" field_ref="?dummy_XY"/>
+		<!--P1 (1)  : Snow Albedo-->
+		<field id="CMIP6_areacella" field_ref="?dummy_XY"/>
+		<!--P1 (m2) cell_area : Cell areas for any grid used to report atmospheric variables and any other variable using that grid (e.g., soil moisture content). These cell areas should be defined to enable exact calculation of global integrals (e.g., of vertical fluxes of energy at the surface and top of the atmosphere).-->
+		<field id="CMIP6_areacellg" field_ref="?dummy_XY"/>
+		<!--P1 (m2) cell_area : Cell areas any grid used to report ice sheet variables. These cell areas should be defined to enable exact calculation of area integrals (e.g., of vertical fluxes of energy at the surface and top of the atmosphere)-->
+		<field id="CMIP6_areacellr" field_ref="?dummy_XY"/>
+		<!--P1 (m2) cell_area : Cell areas for any grid used to report river model variables (may be the same as for atmospheric variables). These cell areas should be defined to enable exact calculation of area integrals (e.g., of vertical fluxes of energy at the surface and top of the atmosphere).-->
+		<field id="CMIP6_ares" field_ref="?dummy_XY"/>
+		<!--P1 (s m-1) aerodynamic_resistance : aerodynamic_resistance-->
+		<field id="CMIP6_baresoilFrac" field_ref="?dummy_XY_typebare"/>
+		<!--P1 (%) area_fraction : fraction of entire grid cell  that is covered by bare soil.-->
+		<field id="CMIP6_burntFractionAll" field_ref="?dummy_XY_typeburnt"/>
+		<!--P1 (%) area_fraction : Percentage of grid cell burned due to all fires including natural and anthropogenic fires and those associated with anthropogenic land use change-->
+		<field id="CMIP6_c13Land" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2)  : Mass of 13C in all terrestrial carbon pools-->
+		<field id="CMIP6_c13Litter" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2)  : Mass of 13C in Litter Pool-->
+		<field id="CMIP6_c13Soil" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2)  : Mass of 13C in Soil Pool-->
+		<field id="CMIP6_c13Veg" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2)  : Mass of 13C in Vegetation-->
+		<field id="CMIP6_c14Land" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2)  : Mass of 14C in all terrestrial carbon pools-->
+		<field id="CMIP6_c14Litter" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2)  : Mass of 14C in Litter Pool-->
+		<field id="CMIP6_c14Soil" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2)  : Mass of 14C in Soil Pool-->
+		<field id="CMIP6_c14Veg" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2)  : only requested for DECK HIST-->
+		<field id="CMIP6_c3PftFrac" field_ref="?dummy_XY_typec3pft"/>
+		<!--P1 (%) area_fraction : fraction of entire grid cell  that is covered by C3 PFTs (including grass, crops, and trees).-->
+		<field id="CMIP6_c4PftFrac" field_ref="?dummy_XY_typec4pft"/>
+		<!--P1 (%) area_fraction : fraction of entire grid cell  that is covered by C4 PFTs (including grass and crops).-->
+		<field id="CMIP6_cCwd" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) wood_debris_carbon_content : Carbon Mass in Coarse Woody Debris-->
+		<field id="CMIP6_cLand" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2)  : Total Carbon in All Terrestrial Carbon Pools-->
+		<field id="CMIP6_cLeaf" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) leaf_carbon_content : Carbon Mass in Leaves-->
+		<field id="CMIP6_cLitter" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) litter_carbon_content : Carbon Mass in Litter Pool-->
+		<field id="CMIP6_cLitterAbove" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) surface_litter_carbon_content : Carbon Mass in Above-Ground Litter-->
+		<field id="CMIP6_cLitterBelow" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) subsurface_litter_carbon_content : Carbon Mass in Below-Ground Litter-->
+		<field id="CMIP6_cLitterCwd" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2)  : Carbon Mass in Coarse Woody Debris-->
+		<field id="CMIP6_cLitterGrass" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2) litter_carbon_content : Carbon mass in litter on grass tiles-->
+		<field id="CMIP6_cLitterLut" field_ref="?dummy_XY_landUse"/>
+		<!--P1 (kg m-2) litter_carbon_content : carbon  in above and belowground litter pools on land use tiles-->
+		<field id="CMIP6_cLitterShrub" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2) litter_carbon_content : Carbon mass in litter on shrub tiles-->
+		<field id="CMIP6_cLitterSubSurf" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2) subsurface_litter_carbon_content : Carbon Mass in Below-Ground Litter-->
+		<field id="CMIP6_cLitterSurf" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2) surface_litter_carbon_content : Carbon Mass in Above-Ground Litter-->
+		<field id="CMIP6_cLitterTree" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2) litter_carbon_content : Carbon mass in litter on tree tiles-->
+		<field id="CMIP6_cMisc" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2) miscellaneous_living_matter_carbon_content : Carbon Mass in Other Living Compartments on Land-->
+		<field id="CMIP6_cOther" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2)  : Carbon Mass in Vegetation Components other than Leaves, Stems and Roots-->
+		<field id="CMIP6_cProduct" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) carbon_content_of_products_of_anthropogenic_land_use_change : Carbon Mass in Products of Land Use Change-->
+		<field id="CMIP6_cProductLut" field_ref="?dummy_XY_landUse"/>
+		<!--P1 (kg m-2)  : wood and agricultural product pool carbon associated with land use tiles; examples of products include paper, cardboard, timber for construction, and crop harvest for food or fuel.-->
+		<field id="CMIP6_cRoot" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) root_carbon_content : including fine and coarse roots.-->
+		<field id="CMIP6_cSoil" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) soil_carbon_content : Carbon Mass in Soil Pool-->
+		<field id="CMIP6_cSoilAbove1m" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) soil_carbon_content : Carbon mass in soil pool above 1m depth-->
+		<field id="CMIP6_cSoilBelow1m" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) soil_carbon_content : Carbon Mass in Soil Pool below 1m Depth-->
+		<field id="CMIP6_cSoilFast" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) fast_soil_pool_carbon_content : fast is meant as lifetime of less than 10 years for  reference climate conditions (20 C, no water limitations).-->
+		<field id="CMIP6_cSoilGrass" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2) soil_carbon_content : Carbon mass in soil on grass tiles-->
+		<field id="CMIP6_cSoilLevels" field_ref="?dummy_XYSo_sdepth"/>
+		<!--P2 (kg m-2) soil_carbon_content : Carbon mass in each model soil level (summed over all soil carbon pools in that level)-->
+		<field id="CMIP6_cSoilLut" field_ref="?dummy_XY_landUse"/>
+		<!--P1 (kg m-2) soil_carbon_content : carbon  in soil pool on land use tiles-->
+		<field id="CMIP6_cSoilMedium" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) medium_soil_pool_carbon_content : medium is meant as lifetime of more than than 10 years and less than 100 years for  reference climate conditions (20 C, no water limitations)-->
+		<field id="CMIP6_cSoilPools" field_ref="?dummy_XY_soilpools"/>
+		<!--P2 (kg m-2)  : Carbon mass in each model soil pool (summed over vertical levels)-->
+		<field id="CMIP6_cSoilShrub" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2) soil_carbon_content : Carbon mass in soil on shrub tiles-->
+		<field id="CMIP6_cSoilSlow" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) slow_soil_pool_carbon_content : fast is meant as lifetime of more than 100 years for  reference climate conditions (20 C, no water limitations)-->
+		<field id="CMIP6_cSoilTree" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2) soil_carbon_content : Carbon mass in soil on tree tiles-->
+		<field id="CMIP6_cStem" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2)  : Carbon Mass in Stem-->
+		<field id="CMIP6_cTotFireLut" field_ref="?dummy_XY_landUse"/>
+		<!--P1 (kg m-2 s-1)  : Total carbon loss from natural and managed fire on land use tile, including deforestation fires-->
+		<field id="CMIP6_cVeg" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) vegetation_carbon_content : Carbon Mass in Vegetation-->
+		<field id="CMIP6_cVegGrass" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2) vegetation_carbon_content : Carbon mass in vegetation on grass tiles-->
+		<field id="CMIP6_cVegLut" field_ref="?dummy_XY_landUse"/>
+		<!--P1 (kg m-2) vegetation_carbon_content : carbon in vegetation on land use tiles-->
+		<field id="CMIP6_cVegShrub" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2) vegetation_carbon_content : Carbon mass in vegetation on shrub tiles-->
+		<field id="CMIP6_cVegTree" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2) vegetation_carbon_content : Carbon mass in vegetation on tree tiles-->
+		<field id="CMIP6_cWood" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2) wood_carbon_content : Carbon Mass in Wood-->
+		<field id="CMIP6_clayfrac" field_ref="?dummy_XYSo_sdepth"/>
+		<!--P1 (1) volume_fraction_of_clay_in_soil : Clay Fraction-->
+		<field id="CMIP6_cnc" field_ref="?dummy_XY"/>
+		<!--P1 (%) vegetation_area_fraction : Canopy covered fraction-->
+		<field id="CMIP6_cropFrac" field_ref="?dummy_XY_typecrop"/>
+		<!--P1 (%) area_fraction : fraction of entire grid cell  that is covered by crop.-->
+		<field id="CMIP6_cropFracC3" field_ref="?dummy_XY_typec3pft_typecrop"/>
+		<!--P1 (%) area_fraction : Percentage Cover by C3 Crops-->
+		<field id="CMIP6_cropFracC4" field_ref="?dummy_XY_typec4pft_typecrop"/>
+		<!--P1 (%) area_fraction : Percentage Cover by C4 Crops-->
+		<field id="CMIP6_cw" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) canopy_water_amount : canopy_water_amount-->
+		<field id="CMIP6_dcw" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2)  : change_over_time_in_canopy_water_amount-->
+		<field id="CMIP6_dfr" field_ref="?dummy_XY"/>
+		<!--P1 (m)  : depth_of_frozen_soil-->
+		<field id="CMIP6_dgw" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2)  : change_over_time_in_groundwater-->
+		<field id="CMIP6_dmlt" field_ref="?dummy_XY"/>
+		<!--P1 (m)  : depth_of_subsurface_melting-->
+		<field id="CMIP6_drivw" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2)  : change_over_time_in_river_water_amount-->
+		<field id="CMIP6_dslw" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2)  : change_over_time_in_water_content_of_soil_layer-->
+		<field id="CMIP6_dsn" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2)  : change_over_time_in_surface_snow_and_ice_amount-->
+		<field id="CMIP6_dsw" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2)  : change_over_time_in_surface_water_amount-->
+		<field id="CMIP6_dtes" field_ref="?dummy_XY"/>
+		<!--P1 (J m-2)  : Change in surface heat storage-->
+		<field id="CMIP6_dtesn" field_ref="?dummy_XY"/>
+		<!--P1 (J m-2)  : Change in snow/ice cold content-->
+		<field id="CMIP6_ec" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1)  : liquid_water_evaporation_flux_from_canopy-->
+		<field id="CMIP6_eow" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1)  : liquid_water_evaporation_flux_from_open_water-->
+		<field id="CMIP6_es" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1)  : liquid_water_evaporation_flux_from_soil-->
+		<field id="CMIP6_esn" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1)  : liquid_water_evaporation_flux_from_surface_snow-->
+		<field id="CMIP6_et" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1)  : surface_evapotranspiration-->
+		<field id="CMIP6_evspsblpot" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) water_potential_evaporation_flux : Potential Evapotranspiration-->
+		<field id="CMIP6_evspsblsoi" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) water_evaporation_flux_from_soil : includes sublimation.-->
+		<field id="CMIP6_evspsblveg" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) water_evaporation_flux_from_canopy : the canopy evaporation+sublimation (if present in model).-->
+		<field id="CMIP6_fAnthDisturb" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1)  : carbon mass flux into atmosphere due to any human activity-->
+		<field id="CMIP6_fBNF" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1)  : biological nitrogen fixation-->
+		<field id="CMIP6_fCLandToOcean" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1)  : Lateral transfer of carbon out of gridcell that eventually goes into ocean-->
+		<field id="CMIP6_fDeforestToAtmos" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) surface_net_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_emission_from_anthropogenic_land_use_change : Deforested biomass that goes into atmosphere as a result of anthropogenic land use change-->
+		<field id="CMIP6_fDeforestToProduct" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1)  : Deforested biomass that goes into product pool as a result of anthropogenic land use change-->
+		<field id="CMIP6_fFire" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_emission_from_fires_excluding_anthropogenic_land_use_change : CO2 emissions (expressed as a carbon mass flux) from natural fires + human ignition fires as calculated by the fire module of the DGVM, but excluding any CO2 flux from fire included in fLuc, defined below (CO2 Flux to Atmosphere from Land Use Change).-->
+		<field id="CMIP6_fFireAll" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1)  : Carbon Mass Flux into Atmosphere due to CO2 emissions from Fire resulting from all sources including natural, anthropogenic and land use change.-->
+		<field id="CMIP6_fFireNat" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1)  : Carbon Mass Flux into Atmosphere due to CO2 Emission from natural Fire-->
+		<field id="CMIP6_fGrazing" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_emission_from_grazing : Carbon Mass Flux into Atmosphere due to Grazing on Land-->
+		<field id="CMIP6_fHarvest" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_emission_from_crop_harvesting : Carbon Mass Flux into Atmosphere due to Crop Harvesting-->
+		<field id="CMIP6_fHarvestToAtmos" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_emission_from_crop_harvesting : Harvested biomass that goes straight into atmosphere-->
+		<field id="CMIP6_fHarvestToProduct" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1)  : Harvested biomass that goes into product pool-->
+		<field id="CMIP6_fLitterFire" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1)  : Carbon Mass Flux from Litter, CWD or any non-living pool into Atmosphere due to CO2 Emission from all Fire-->
+		<field id="CMIP6_fLitterSoil" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) carbon_mass_flux_into_soil_from_litter : Total Carbon Mass Flux from Litter to Soil-->
+		<field id="CMIP6_fLuc" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_net_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_emission_from_anthropogenic_land_use_change : Net Carbon Mass Flux into Atmosphere due to Land Use Change-->
+		<field id="CMIP6_fLulccAtmLut" field_ref="?dummy_XY_landUse"/>
+		<!--P1 (kg s-1)  : carbon transferred directly to atmosphere due to any land-use or land-cover change activities including deforestation or agricultural fire-->
+		<field id="CMIP6_fLulccProductLut" field_ref="?dummy_XY_landUse"/>
+		<!--P1 (kg m-2 s-1)  : carbon harvested due to land-use or land-cover change process that enters anthropogenic product pools on tile-->
+		<field id="CMIP6_fLulccResidueLut" field_ref="?dummy_XY_landUse"/>
+		<!--P1 (kg m-2 s-1) carbon_mass_flux_into_soil_and_litter_due_to_anthropogenic_land_use_or_land_cover_change : carbon transferred to soil or litter pools due to land-use or land-cover change processes on tile-->
+		<field id="CMIP6_fN2O" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1)  : Total land N2O flux-->
+		<field id="CMIP6_fNAnthDisturb" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1)  : nitrogen mass flux out of land due to any human activity-->
+		<field id="CMIP6_fNLandToOcean" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1)  : Lateral transfer of nitrogen out of gridcell that eventually goes into ocean-->
+		<field id="CMIP6_fNLitterSoil" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1)  : Total Nitrogen Mass Flux from Litter to Soil-->
+		<field id="CMIP6_fNOx" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1)  : Total land NOx flux-->
+		<field id="CMIP6_fNProduct" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1)  : Deforested or harvested biomass as a result of anthropogenic land use or change-->
+		<field id="CMIP6_fNVegLitter" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1)  : Total Nitrogen Mass Flux from Vegetation to Litter-->
+		<field id="CMIP6_fNVegSoil" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1)  : Total Nitrogen Mass Flux from Vegetation Directly to Soil-->
+		<field id="CMIP6_fNdep" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1)  : Dry and Wet Deposition of Reactive Nitrogen onto Land-->
+		<field id="CMIP6_fNfert" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1)  : total N added for cropland fertilisation (artificial and manure)-->
+		<field id="CMIP6_fNgas" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1)  : Total Nitrogen lost to the atmosphere (sum of NHx, NOx, N2O, N2)-->
+		<field id="CMIP6_fNgasFire" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1)  : Total N lost to the atmosphere (including NHx, NOx, N2O, N2) from fire.-->
+		<field id="CMIP6_fNgasNonFire" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1)  : Total N lost to the atmosphere (including NHx, NOx, N2O, N2) from all processes except fire.-->
+		<field id="CMIP6_fNleach" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1)  : Total N loss to leaching or runoff (sum of ammonium, nitrite and nitrate)-->
+		<field id="CMIP6_fNloss" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1)  : Total N lost (including NHx, NOx, N2O, N2 and leaching)-->
+		<field id="CMIP6_fNnetmin" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1)  : Net nitrogen release from soil and litter as the outcome of nitrogen immobilisation and gross mineralisation-->
+		<field id="CMIP6_fNup" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1)  : total plant nitrogen uptake (sum of ammonium and nitrate), irrespective of the source of nitrogen-->
+		<field id="CMIP6_fProductDecomp" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1)  : decomposition out of product pools to CO2 in atmos-->
+		<field id="CMIP6_fProductDecompLut" field_ref="?dummy_XY_landUse"/>
+		<!--P1 (kg s-1)  : flux from wood and agricultural product pools on land use tile into atmosphere-->
+		<field id="CMIP6_fVegFire" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1)  : Carbon Mass Flux from Vegetation into Atmosphere due to CO2 Emission from all Fire-->
+		<field id="CMIP6_fVegLitter" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) litter_carbon_flux : Total Carbon Mass Flux from Vegetation to Litter-->
+		<field id="CMIP6_fVegLitterMortality" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1)  : Total Carbon Mass Flux from Vegetation to Litter as a Result of Mortality-->
+		<field id="CMIP6_fVegLitterSenescence" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1)  : Total Carbon Mass Flux from Vegetation to Litter as a Result of Leaf, Branch, and Root Senescence-->
+		<field id="CMIP6_fVegSoil" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) carbon_mass_flux_into_soil_from_vegetation_excluding_litter : In some models part of carbon (e.g., root exudate) can go directly into the soil pool without entering litter.-->
+		<field id="CMIP6_fVegSoilMortality" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1)  : Total Carbon Mass Flux from Vegetation to Soil as a result of mortality-->
+		<field id="CMIP6_fVegSoilSenescence" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1)  : Total Carbon Mass Flux from Vegetation to Soil as a result of leaf, branch, and root senescence-->
+		<field id="CMIP6_fahLut" field_ref="?dummy_XY_landUse"/>
+		<!--P1 (W m-2) surface_upward_heat_flux_due_to_anthropogenic_energy_consumption : Anthropogenic heat flux generated from non-renewable human primary energy consumption, including energy use by vehicles, commercial and residential buildings, industry, and power plants.  Primary energy refers to energy in natural resources, fossil and nonfossil, before conversion into other forms, such as electricity.-->
+		<field id="CMIP6_fldcapacity" field_ref="?dummy_XYSo_sdepth"/>
+		<!--P1 (%)  : Field Capacity-->
+		<field id="CMIP6_fracInLut" field_ref="?dummy_XY_landUse"/>
+		<!--P1 (%) area_fraction : annual gross fraction that was transferred into this tile from other land use tiles-->
+		<field id="CMIP6_fracLut" field_ref="?dummy_XY_landUse"/>
+		<!--P1 (%) area_fraction : fraction of grid cell for each land use tile-->
+		<field id="CMIP6_fracOutLut" field_ref="?dummy_XY_landUse"/>
+		<!--P1 (%) area_fraction : annual gross fraction of land use tile  that was transferred into other land use tiles-->
+		<field id="CMIP6_gpp" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) gross_primary_productivity_of_biomass_expressed_as_carbon : only requested for DECK HIST, 1980-present-->
+		<field id="CMIP6_gppGrass" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) gross_primary_productivity_of_biomass_expressed_as_carbon : gross primary production on grass tiles-->
+		<field id="CMIP6_gppLut" field_ref="?dummy_XY_landUse"/>
+		<!--P1 (kg m-2 s-1) gross_primary_productivity_of_biomass_expressed_as_carbon : gross primary productivity on land use tile-->
+		<field id="CMIP6_gppShrub" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) gross_primary_productivity_of_biomass_expressed_as_carbon : gross primary production on Shrub tiles-->
+		<field id="CMIP6_gppTree" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) gross_primary_productivity_of_biomass_expressed_as_carbon : gross primary production on tree tiles-->
+		<field id="CMIP6_gppc13" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1)  : Mass Flux of 13C out of Atmosphere due to Gross Primary Production on Land-->
+		<field id="CMIP6_gppc14" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1)  : Mass Flux of 14C out of Atmosphere due to Gross Primary Production on Land-->
+		<field id="CMIP6_grassFrac" field_ref="?dummy_XY_typenatgr"/>
+		<!--P1 (%) area_fraction : fraction of entire grid cell that is covered by natural grass.-->
+		<field id="CMIP6_grassFracC3" field_ref="?dummy_XY_typec3pft_typenatgr"/>
+		<!--P1 (%) area_fraction : C3 grass Area Percentage-->
+		<field id="CMIP6_grassFracC4" field_ref="?dummy_XY_typec4pft_typenatgr"/>
+		<!--P1 (%) area_fraction : C4 grass Area Percentage-->
+		<field id="CMIP6_hfdsn" field_ref="?dummy_XY"/>
+		<!--P1 (W m-2) surface_downward_heat_flux_in_snow : Downward heat flux at snow top-->
+		<field id="CMIP6_hflsLut" field_ref="?dummy_XY_landUse"/>
+		<!--P1 (W m-2) surface_upward_latent_heat_flux : latent heat flux on land use tile-->
+		<field id="CMIP6_hfssLut" field_ref="?dummy_XY_landUse"/>
+		<!--P1 (W m-2) surface_upward_sensible_heat_flux : sensible heat flux on land use tile-->
+		<field id="CMIP6_hussLut" field_ref="?dummy_XY_height2m_landUse"/>
+		<!--P1 (1) specific_humidity : near-surface specific humidity on land use tile-->
+		<field id="CMIP6_irrLut" field_ref="?dummy_XY_landUse"/>
+		<!--P1 (kg s-1)  : Irrigation flux including any irrigation for crops, trees, pasture, or urban lawns-->
+		<field id="CMIP6_ksat" field_ref="?dummy_XYSo_sdepth"/>
+		<!--P1 (1e-6 m s-1)  : Saturated Hydraulic Conductivity-->
+		<field id="CMIP6_lai" field_ref="?dummy_XY"/>
+		<!--P1 (1) leaf_area_index : Leaf Area Index-->
+		<field id="CMIP6_laiLut" field_ref="?dummy_XY_landUse"/>
+		<!--P1 (1)  : Leaf Area Index on Land Use Tile-->
+		<field id="CMIP6_landCoverFrac" field_ref="?dummy_XY_vegtype"/>
+		<!--P1 (%) area_fraction : The categories may differ from model to model, depending on their  PFT definitions.   This may include natural PFTs, anthropogenic PFTs, bare soil, lakes, urban areas, etc.   Sum of all should equal the fraction of the grid-cell that is land.-->
+		<field id="CMIP6_lwsnl" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) liquid_water_content_of_snow_layer : where land over land: this is computed as the total mass of liquid water contained interstitially within the snow layer of the land portion of a grid cell divided by the area of the land portion of the cell.-->
+		<field id="CMIP6_mrfso" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) soil_frozen_water_content : the mass (summed over all all layers) of frozen water.-->
+		<field id="CMIP6_mrfsofr" field_ref="?dummy_XYSo_sdepth"/>
+		<!--P1 (1) mass_fraction_of_frozen_water_in_soil_moisture : mass_fraction_of_frozen_water_in_soil_layer-->
+		<field id="CMIP6_mrlqso" field_ref="?dummy_XYSo_sdepth"/>
+		<!--P1 (1) mass_fraction_of_unfrozen_water_in_soil_moisture : mass_fraction_of_unfrozen_water_in_soil_layer-->
+		<field id="CMIP6_mrlso" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2)  : Soil Liquid Water Content-->
+		<field id="CMIP6_mrro" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) runoff_flux : computed as the total runoff (including "drainage" through the base of the soil model) leaving the land portion of the grid cell divided by the land area in the grid cell.-->
+		<field id="CMIP6_mrroLut" field_ref="?dummy_XY_landUse"/>
+		<!--P1 (kg m-2 s-1) runoff_flux : Total runoff from land use tile-->
+		<field id="CMIP6_mrrob" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) subsurface_runoff_flux : subsurface_runoff_flux-->
+		<field id="CMIP6_mrros" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_runoff_flux : surface_runoff_flux-->
+		<field id="CMIP6_mrsfl" field_ref="?dummy_XYSo_sdepth"/>
+		<!--P1 (kg m-2)  : Frozen water content of soil layer-->
+		<field id="CMIP6_mrsll" field_ref="?dummy_XYSo_sdepth"/>
+		<!--P1 (kg m-2)  : Liquid water content of soil layer-->
+		<field id="CMIP6_mrso" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) soil_moisture_content : the mass per unit area  (summed over all soil layers) of water in all phases.-->
+		<field id="CMIP6_mrsoLut" field_ref="?dummy_XY_landUse"/>
+		<!--P1 (kg m-2) soil_moisture_content : Total soil moisture-->
+		<field id="CMIP6_mrsofc" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) soil_moisture_content_at_field_capacity : reported "where land": divide the total water holding capacity of all the soil in the grid cell by the land area in the grid cell;  reported as "missing" where the land fraction is 0.-->
+		<field id="CMIP6_mrsol" field_ref="?dummy_XYSo_sdepth"/>
+		<!--P1 (kg m-2) moisture_content_of_soil_layer : Total water content of soil layer-->
+		<field id="CMIP6_mrsos" field_ref="?dummy_XY_sdepth1"/>
+		<!--P1 (kg m-2) moisture_content_of_soil_layer : the mass of water in all phases in a thin surface soil layer.-->
+		<field id="CMIP6_mrsosLut" field_ref="?dummy_XY_landUse_sdepth1"/>
+		<!--P1 (kg m-2) moisture_content_of_soil_layer : Moisture in Upper Portion of Soil Column of land use tile-->
+		<field id="CMIP6_mrsow" field_ref="?dummy_XY"/>
+		<!--P1 (1) volume_fraction_of_condensed_water_in_soil_at_field_capacity : relative_soil_moisture_content_above_field_capacity-->
+		<field id="CMIP6_mrtws" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2)  : canopy_and_surface_and_subsurface_water_amount-->
+		<field id="CMIP6_nLand" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2)  : Total nitrogen in all terrestrial nitrogen pools-->
+		<field id="CMIP6_nLeaf" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2)  : Nitrogen Mass in Leaves-->
+		<field id="CMIP6_nLitter" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2)  : Nitrogen Mass in Litter Pool-->
+		<field id="CMIP6_nLitterCwd" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2)  : Nitrogen Mass in Coarse Woody Debris-->
+		<field id="CMIP6_nLitterSubSurf" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2)  : Nitrogen Mass in below ground litter (non CWD)-->
+		<field id="CMIP6_nLitterSurf" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2)  : Nitrogen Mass in above ground litter (non CWD)-->
+		<field id="CMIP6_nMineral" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2)  : Mineral nitrogen in the soil-->
+		<field id="CMIP6_nMineralNH4" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2)  : Mineral ammonium in the soil-->
+		<field id="CMIP6_nMineralNO3" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2)  : Mineral nitrate in the soil-->
+		<field id="CMIP6_nOther" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2)  : Nitrogen mass in vegetation components other than leaves, stem and root-->
+		<field id="CMIP6_nProduct" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2)  : Nitrogen Mass in Products of Land Use Change-->
+		<field id="CMIP6_nRoot" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2)  : Nitrogen Mass in Roots-->
+		<field id="CMIP6_nSoil" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2)  : Nitrogen Mass in Soil Pool-->
+		<field id="CMIP6_nStem" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2)  : Nitrogen Mass in Stem-->
+		<field id="CMIP6_nVeg" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2)  : Nitrogen Mass in Vegetation-->
+		<field id="CMIP6_nbp" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_net_downward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_all_land_processes : This is the net mass flux of carbon between land and atmosphere calculated as photosynthesis MINUS the sum of  plant and soil respiration, carbonfluxes  from fire, harvest, grazing  and land use change. Positive flux  is into the land.-->
+		<field id="CMIP6_necbLut" field_ref="?dummy_XY_landUse"/>
+		<!--P1 (kg m-2 s-1) surface_net_downward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_all_land_processes : net rate of C accumulation (or loss) on land use tile-->
+		<field id="CMIP6_nep" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_net_downward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_all_land_processes_excluding_anthropogenic_land_use_change : Net Ecosystem Exchange-->
+		<field id="CMIP6_netAtmosLandC13Flux" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1)  : Net Mass Flux of 13C between atmosphere and land (positive into land) as a result of all processes.-->
+		<field id="CMIP6_netAtmosLandC14Flux" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1)  : Net Mass Flux of 14C between atmosphere and land (positive into land) as a result of all processes.-->
+		<field id="CMIP6_netAtmosLandCO2Flux" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_net_downward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_all_land_processes : Net flux of CO2 between atmosphere and land (positive into land) as a result of all processes.-->
+		<field id="CMIP6_npp" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) net_primary_productivity_of_biomass_expressed_as_carbon : Carbon Mass Flux out of Atmosphere due to Net Primary Production on Land-->
+		<field id="CMIP6_nppGrass" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) net_primary_productivity_of_biomass_expressed_as_carbon : net primary production on grass tiles-->
+		<field id="CMIP6_nppLeaf" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) net_primary_productivity_of_carbon_accumulated_in_leaves : This is the rate of carbon uptake by leaves due to NPP-->
+		<field id="CMIP6_nppLut" field_ref="?dummy_XY_landUse"/>
+		<!--P1 (kg m-2 s-1) net_primary_productivity_of_biomass_expressed_as_carbon : net primary productivity on land use tile-->
+		<field id="CMIP6_nppOther" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1)  : net primary production allcoated to other pools (not leaves stem or roots)-->
+		<field id="CMIP6_nppRoot" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) net_primary_productivity_of_carbon_accumulated_in_roots : This is the rate of carbon uptake by roots due to NPP-->
+		<field id="CMIP6_nppShrub" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) net_primary_productivity_of_biomass_expressed_as_carbon : net primary production on Shrub tiles-->
+		<field id="CMIP6_nppStem" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1)  : net primary production allcoated to stem-->
+		<field id="CMIP6_nppTree" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) net_primary_productivity_of_biomass_expressed_as_carbon : net primary production on tree tiles-->
+		<field id="CMIP6_nppWood" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) net_primary_productivity_of_carbon_accumulated_in_wood : This is the rate of carbon uptake by wood due to NPP-->
+		<field id="CMIP6_nudgincsm" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2)  : nudging_increment_in_water_content_of_soil_layer-->
+		<field id="CMIP6_nudgincswe" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2)  : nudging_increment_in_surface_snow_and_ice_amount-->
+		<field id="CMIP6_nwdFracLut" field_ref="?dummy_XY_landUse_typenwd"/>
+		<!--P1 (%)  : fraction of land use tile tile that is non-woody vegetation ( e.g. herbaceous crops)-->
+		<field id="CMIP6_orog" field_ref="?dummy_XY"/>
+		<!--P1 (m) surface_altitude : Monthly mean orography (needed if land ice has time varying altitude)-->
+		<field id="CMIP6_orog_ist" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P1 (m) surface_altitude : Surface Altitude-->
+		<field id="CMIP6_pastureFrac" field_ref="?dummy_XY_typepasture"/>
+		<!--P1 (%) area_fraction : fraction of entire grid cell  that is covered by anthropogenic pasture.-->
+		<field id="CMIP6_pastureFracC3" field_ref="?dummy_XY_typec3pft_typepasture"/>
+		<!--P2 (%) area_fraction : C3 Pasture Area Percentage-->
+		<field id="CMIP6_pastureFracC4" field_ref="?dummy_XY_typec4pft_typepasture"/>
+		<!--P2 (%) area_fraction : C4 Pasture Area Percentage-->
+		<field id="CMIP6_pflw" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) liquid_water_content_of_permafrost_layer : "where land over land", i.e., this is the total mass of liquid water contained within the permafrost layer within the land portion of a grid cell divided by the area of the land portion of the cell.-->
+		<field id="CMIP6_prveg" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) precipitation_flux_onto_canopy : the precipitation flux that is intercepted by the vegetation canopy (if present in model) before reaching the ground.-->
+		<field id="CMIP6_qgwr" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1)  : water_flux_from_soil_layer_to_groundwater-->
+		<field id="CMIP6_rGrowth" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_upward_carbon_mass_flux_due_to_plant_respiration_for_biomass_growth : Carbon Mass Flux into Atmosphere due to Growth Autotrophic Respiration on Land-->
+		<field id="CMIP6_rMaint" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_upward_carbon_mass_flux_due_to_plant_respiration_for_biomass_maintenance : Carbon Mass Flux into Atmosphere due to Maintenance Autotrophic Respiration on Land-->
+		<field id="CMIP6_ra" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) plant_respiration_carbon_flux : only requested for DECK HIST, 1980-present-->
+		<field id="CMIP6_raGrass" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) plant_respiration_carbon_flux : autotrophic respiration on grass tiles-->
+		<field id="CMIP6_raLeaf" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1)  : Total respiration from leaves-->
+		<field id="CMIP6_raLut" field_ref="?dummy_XY_landUse"/>
+		<!--P1 (kg m-2 s-1) plant_respiration_carbon_flux : plant respiration on land use tile-->
+		<field id="CMIP6_raOther" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1)  : Total respiration from other pools (not leaves stem or roots)-->
+		<field id="CMIP6_raRoot" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1)  : Total Respiration from Roots-->
+		<field id="CMIP6_raShrub" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) plant_respiration_carbon_flux : autotrophic respiration on Shrub tiles-->
+		<field id="CMIP6_raStem" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1)  : Total Respiration from Stem-->
+		<field id="CMIP6_raTree" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) plant_respiration_carbon_flux : autotrophic respiration on tree tiles-->
+		<field id="CMIP6_rac13" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1)  : Mass Flux of 13C into Atmosphere due to Autotrophic (Plant) Respiration on Land-->
+		<field id="CMIP6_rac14" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1)  : Mass Flux of 14C into Atmosphere due to Autotrophic (Plant) Respiration on Land-->
+		<field id="CMIP6_residualFrac" field_ref="?dummy_XY_typeresidual"/>
+		<!--P1 (%) area_fraction : fraction of entire grid cell  that is land and is covered by "non-vegetation" and "non-bare-soil" (e.g., urban, ice, lakes, etc.)-->
+		<field id="CMIP6_rh" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) heterotrophic_respiration_carbon_flux : only requested for DECK HIST, 1980-present-->
+		<field id="CMIP6_rhGrass" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) heterotrophic_respiration_carbon_flux : heterotrophic respiration on grass tiles-->
+		<field id="CMIP6_rhLitter" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1)  : Carbon Mass Flux into Atmosphere due to Heterotrophic Respiration from Litter on Land-->
+		<field id="CMIP6_rhLut" field_ref="?dummy_XY_landUse"/>
+		<!--P1 (kg m-2 s-1) heterotrophic_respiration_carbon_flux : soil heterotrophic respiration on land use tile-->
+		<field id="CMIP6_rhShrub" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) heterotrophic_respiration_carbon_flux : heterotrophic respiration on Shrub tiles-->
+		<field id="CMIP6_rhSoil" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1)  : Carbon Mass Flux into Atmosphere due to Heterotrophic Respiration from Soil on Land-->
+		<field id="CMIP6_rhTree" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) heterotrophic_respiration_carbon_flux : heterotrophic respiration on tree tiles-->
+		<field id="CMIP6_rhc13" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1)  : Mass Flux of 13C into Atmosphere due to Heterotrophic Respiration on Land-->
+		<field id="CMIP6_rhc14" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1)  : Mass Flux of 14C into Atmosphere due to Heterotrophic Respiration on Land-->
+		<field id="CMIP6_rivi" field_ref="?dummy_XY"/>
+		<!--P1 (m3 s-1)  : water_flux_to_downstream-->
+		<field id="CMIP6_rivo" field_ref="?dummy_XY"/>
+		<!--P1 (m3 s-1)  : water_flux_from_upstream-->
+		<field id="CMIP6_rlusLut" field_ref="?dummy_XY_landUse"/>
+		<!--P1 (W m-2) surface_upwelling_longwave_flux_in_air : Surface Upwelling Longwave on Land Use Tile-->
+		<field id="CMIP6_rootd" field_ref="?dummy_XY"/>
+		<!--P1 (m) root_depth : report the maximum soil depth reachable by plant roots (if defined in model), i.e., the maximum soil depth from which they can extract moisture; report as "missing" where the land fraction is 0.-->
+		<field id="CMIP6_rootdsl" field_ref="?dummy_XYSo_sdepth"/>
+		<!--P1 (kg m-3)  : Root Distribution-->
+		<field id="CMIP6_rsusLut" field_ref="?dummy_XY_landUse"/>
+		<!--P1 (W m-2) surface_upwelling_shortwave_flux_in_air : Surface Upwelling Shortwave  on Land Use Tile-->
+		<field id="CMIP6_rzwc" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2)  : water_content_of_root_zone-->
+		<field id="CMIP6_sandfrac" field_ref="?dummy_XYSo_sdepth"/>
+		<!--P1 (1)  : Sand Fraction-->
+		<field id="CMIP6_sftgif" field_ref="?dummy_XY_typeli"/>
+		<!--P1 (%) land_ice_area_fraction : fraction of grid cell occupied by "permanent" ice (i.e., glaciers).-->
+		<field id="CMIP6_shrubFrac" field_ref="?dummy_XY_typeshrub"/>
+		<!--P1 (%) area_fraction : fraction of entire grid cell  that is covered by shrub.-->
+		<field id="CMIP6_slthick" field_ref="?dummy_XYSo_sdepth"/>
+		<!--P1 (m)  : Thickness of Soil Layers-->
+		<field id="CMIP6_snc" field_ref="?dummy_XY"/>
+		<!--P1 (%) surface_snow_area_fraction : Snow Area Fraction-->
+		<field id="CMIP6_snc_ist" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P1 (%) surface_snow_area_fraction : quantity averaged over ice sheet (grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
+		<field id="CMIP6_snd" field_ref="?dummy_XY"/>
+		<!--P1 (m) surface_snow_thickness : Snow Depth-->
+		<field id="CMIP6_snm_land" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_snow_melt_flux : surface_snow_and_ice_melt_flux-->
+		<field id="CMIP6_snm_land" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_snow_melt_flux : surface_snow_and_ice_melt_flux-->
+		<field id="CMIP6_snm_ist" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P1 (kg m-2 s-1) surface_snow_melt_flux : Surface Snow Melt-->
+		<field id="CMIP6_snw_land" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) surface_snow_amount : the mass of surface snow on the land portion of the grid cell divided by the land area in the grid cell; reported as missing where the land fraction is 0; excludes snow on vegetation canopy or on sea ice.-->
+		<field id="CMIP6_snw_land" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) surface_snow_amount : the mass of surface snow on the land portion of the grid cell divided by the land area in the grid cell; reported as missing where the land fraction is 0; excludes snow on vegetation canopy or on sea ice.-->
+		<field id="CMIP6_sootsn" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) soot_content_of_surface_snow : the entire land portion of the grid cell is considered, with snow soot content set to 0.0 in regions free of snow.-->
+		<field id="CMIP6_sw" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2)  : surface_water_amount_assuming_no_snow-->
+		<field id="CMIP6_sweLut" field_ref="?dummy_XY_landUse"/>
+		<!--P1 (m)  : snow water equivalent on land use tile-->
+		<field id="CMIP6_tSoilPools" field_ref="?dummy_XY_soilpools"/>
+		<!--P2 (s-1)  : turnover rate of each model soil carbon pool-->
+		<field id="CMIP6_tasLut" field_ref="?dummy_XY_height2m_landUse"/>
+		<!--P1 (K) air_temperature : near-surface air temperature (2m above displacement height, i.e. t_ref) on land use tile-->
+		<field id="CMIP6_tcs" field_ref="?dummy_XY"/>
+		<!--P1 (K) canopy_temperature : Vegetation Canopy Temperature-->
+		<field id="CMIP6_tgs" field_ref="?dummy_XY"/>
+		<!--P1 (K) surface_temperature : Temperature of bare soil-->
+		<field id="CMIP6_tpf" field_ref="?dummy_XY"/>
+		<!--P1 (m) permafrost_layer_thickness : where land over land: This is the mean thickness of the permafrost layer in the land portion of the grid cell.  Reported as missing in permafrost-free regions.-->
+		<field id="CMIP6_tran" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) transpiration_flux : Transpiration-->
+		<field id="CMIP6_treeFrac" field_ref="?dummy_XY_typetree"/>
+		<!--P1 (%) area_fraction : fraction of entire grid cell  that is covered by trees.-->
+		<field id="CMIP6_treeFracBdlDcd" field_ref="?dummy_XY_typetreebd"/>
+		<!--P1 (%) area_fraction : Broadleaf deciduous tree fraction-->
+		<field id="CMIP6_treeFracBdlEvg" field_ref="?dummy_XY_typetreebe"/>
+		<!--P1 (%) area_fraction : Broadleaf evergreen tree fraction-->
+		<field id="CMIP6_treeFracNdlDcd" field_ref="?dummy_XY_typetreend"/>
+		<!--P1 (%) area_fraction : Needleleaf deciduous tree fraction-->
+		<field id="CMIP6_treeFracNdlEvg" field_ref="?dummy_XY_typetreene"/>
+		<!--P1 (%) area_fraction : Needleleaf evergreen tree fraction-->
+		<field id="CMIP6_treeFracPrimDec" field_ref="?dummy_XY_typepdec"/>
+		<!--P1 (%) area_fraction : This is the fraction of the entire grid cell  that is covered by "total primary deciduous trees."-->
+		<field id="CMIP6_treeFracPrimEver" field_ref="?dummy_XY_typepever"/>
+		<!--P1 (%) area_fraction : fraction of entire grid cell  that is covered by primary evergreen trees.-->
+		<field id="CMIP6_treeFracSecDec" field_ref="?dummy_XY_typesdec"/>
+		<!--P1 (%) area_fraction : fraction of entire grid cell  that is covered by secondary deciduous trees.-->
+		<field id="CMIP6_treeFracSecEver" field_ref="?dummy_XY_typesever"/>
+		<!--P1 (%) area_fraction : fraction of entire grid cell  that is covered by secondary evergreen trees.-->
+		<field id="CMIP6_tsl" field_ref="?dummy_XY_sdepth1"/>
+		<!--P1 (K) soil_temperature : Temperature of single near-surface soil layer.  Reported as "missing" for grid cells occupied entirely by "sea".-->
+		<field id="CMIP6_tslsi" field_ref="?dummy_XY"/>
+		<!--P1 (K) surface_temperature : Surface temperature of all surfaces except open ocean.-->
+		<field id="CMIP6_tslsiLut" field_ref="?dummy_XY_landUse"/>
+		<!--P1 (K) surface_temperature : Surface Temperature on Landuse Tile-->
+		<field id="CMIP6_tsn_ist" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P1 (K) temperature_in_surface_snow : quantity averaged over ice sheet (grounded ice sheet and floating ice shelf) only. Needed to analyse the impact of downscaling methods-->
+		<field id="CMIP6_tsn_ist" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P1 (K) temperature_in_surface_snow : quantity averaged over ice sheet (grounded ice sheet and floating ice shelf) only. Needed to analyse the impact of downscaling methods-->
+		<field id="CMIP6_tsn_land" field_ref="?dummy_XY"/>
+		<!--P1 (K) temperature_in_surface_snow : This temperature is averaged over all the snow in the grid cell that rests on land or land ice.  When computing the time-mean here, the time samples, weighted by the mass of snow on the land portion of the grid cell, are accumulated and then divided by the sum of the weights.   Reported as "missing in regions free of snow on land.-->
+		<field id="CMIP6_tsnl" field_ref="?dummy_XYSn_snowdepth"/>
+		<!--P1 (K) snow_temperature : Density-weighted averagte temperature of the snow in layers  (for models with 3D snow schemes)-->
+		<field id="CMIP6_vegFrac" field_ref="?dummy_XY_typeveg"/>
+		<!--P1 (%) area_fraction : Total vegetated fraction-->
+		<field id="CMIP6_vegHeight" field_ref="?dummy_XY"/>
+		<!--P1 (m) canopy_height : canopy height-->
+		<field id="CMIP6_vegHeightCrop" field_ref="?dummy_XY"/>
+		<!--P2 (m) canopy_height : Vegetation height averaged over the crop fraction of a grid cell.-->
+		<field id="CMIP6_vegHeightGrass" field_ref="?dummy_XY"/>
+		<!--P2 (m) canopy_height : Vegetation height averaged over the grass fraction of a grid cell.-->
+		<field id="CMIP6_vegHeightPasture" field_ref="?dummy_XY"/>
+		<!--P2 (m) canopy_height : Vegetation height averaged over the pasture fraction of a grid cell.-->
+		<field id="CMIP6_vegHeightShrub" field_ref="?dummy_XY"/>
+		<!--P2 (m) canopy_height : Vegetation height averaged over the shrub fraction of a grid cell.-->
+		<field id="CMIP6_vegHeightTree" field_ref="?dummy_XY"/>
+		<!--P2 (m) canopy_height : Vegetation height averaged over the tree fraction of a grid cell.-->
+		<field id="CMIP6_wetlandCH4" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1)  : Grid averaged methane emissions from wetlands-->
+		<field id="CMIP6_wetlandCH4cons" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1)  : Grid averaged methane consuption (methanotrophy) from wetlands-->
+		<field id="CMIP6_wetlandCH4prod" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1)  : Grid averaged methane production (methanogenesis) from wetlands-->
+		<field id="CMIP6_wetlandFrac" field_ref="?dummy_XY_typewetla"/>
+		<!--P2 (%)  : Fraction of a grid cell covered by wetland.-->
+		<field id="CMIP6_wilt" field_ref="?dummy_XYSo_sdepth"/>
+		<!--P1 (%)  : Wilting Point-->
+		<field id="CMIP6_wtd" field_ref="?dummy_XY"/>
+		<!--P1 (m)  : depth_of_soil_moisture_saturation-->
+	</field_definition>
+</context>

@@ -12,7 +12,6 @@ from collections import OrderedDict, defaultdict
 from importlib.machinery import SourceFileLoader
 
 from .definition import ListWithItems
-from .definition import Scope as ScopeBasic
 from .definition import DataRequest as DataRequestBasic
 from .definition import SimpleObject
 from .definition import SimpleCMORVar as SimpleCMORVarBasic
@@ -31,13 +30,12 @@ else:
     from .C3S_DR import c3s_nc_dims, c3s_nc_coords, c3s_nc_comvars, c3s_nc_vars
 
 
-scope = None
 data_request = None
 
 
 class DataRequest(DataRequestBasic):
     def get_version(self):
-        return "No Data Request"
+        return "undef"
 
     def get_list_by_id(self, collection, **kwargs):
         return ListWithItems()
@@ -83,27 +81,12 @@ class DataRequest(DataRequestBasic):
     def get_dimensions_dict(self):
         return OrderedDict()
 
-    def get_cmorvars_list(self, sizes=None, **kwargs):
-        if sizes is not None:
-            sc = get_scope()
-            sc.update_mcfg(sizes)
+    def get_cmorvars_list(self, **kwargs):
         rep = defaultdict(set)
         for id in self.get_element_uid(elt_type="variable"):
             for grid in self.get_element_uid(id=id, elt_type="variable").grids:
                 rep[id].add(grid)
-        return rep, list()
-
-
-class Scope(ScopeBasic):
-
-    def __init__(self, scope=None):
-        super().__init__(scope=scope)
-
-    def get_request_link_by_mip(self, mips_list):
-        return list()
-
-    def get_vars_by_request_link(self, request_link, pmax):
-        return list()
+        return rep
 
 
 def initialize_data_request():
@@ -118,27 +101,6 @@ def get_data_request():
         return initialize_data_request()
     else:
         return data_request
-
-
-def initialize_scope(tier_max):
-    global scope
-    dq = get_data_request()
-    if scope is None:
-        scope = Scope()
-    return scope
-
-
-def get_scope(tier_max=None):
-    if scope is None:
-        return initialize_scope(tier_max)
-    else:
-        return scope
-
-
-def set_scope(sc):
-    if sc is not None:
-        global scope
-        scope = sc
 
 
 def normalize_grid(grid):

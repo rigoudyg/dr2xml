@@ -3,7 +3,7 @@
 *
 *              dr2xml version:  current_version
 *   CMIP6 conventions version:  v6.2.4
-*  CMIP6 Data Request version:  No Data Request
+*    C3S Data Request version:  undef
 
 *
  **************************************************
@@ -56,15 +56,15 @@ Some Statistics on actually written variables per frequency+shape...
 
       12hr --------    -------- ---   5
 
-                             C3S P1  22: hfls hfss rlds rls rlt rsds rsdt rss rst tasmax tasmin tauu tauv wsgmax lwee lwepr lweprc lweprsn lwesnw mrroab mrroas rhosn
-       day    XY-na    -------- ---  22
-
-       day --------    -------- ---  22
-
                              C3S P1   7: clt psl tas tdps tsl uas vas
        6hr    XY-na    -------- ---   7
 
        6hr --------    -------- ---   7
+
+                             C3S P1  22: hfls hfss lwee lwepr lweprc lweprsn lwesnw mrroab mrroas rhosn rlds rls rlt rsds rsdt rss rst tasmax tasmin tauu tauv wsgmax
+       day    XY-na    -------- ---  22
+
+       day --------    -------- ---  22
 
 
 ---------- --------    -------- ---  34
@@ -212,7 +212,7 @@ Some Statistics on actually written variables per variable...
 *
 *              dr2xml version:  current_version
 *   CMIP6 conventions version:  v6.2.4
-*  CMIP6 Data Request version:  No Data Request
+*    C3S Data Request version:  undef
 
 *
  **************************************************
@@ -270,7 +270,7 @@ Some Statistics on actually written variables per variable...
 *
 *              dr2xml version:  current_version
 *   CMIP6 conventions version:  v6.2.4
-*  CMIP6 Data Request version:  No Data Request
+*    C3S Data Request version:  undef
 
 *
  **************************************************

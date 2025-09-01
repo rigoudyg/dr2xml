@@ -3,7 +3,7 @@
 *
 *              dr2xml version:  current_version
 *   CMIP6 conventions version:  v6.2.4
-*  CMIP6 Data Request version:  01.00.21.post1
+*  CMIP6 Data Request version:  current_cmip6_dr
 
 *
  **************************************************
@@ -82,18 +82,6 @@ file_def written as current_directory/test_amip_hist_AGCM_1870_r10/test_outputs/
 
 
 Some Statistics on actually written variables per frequency+shape...
-                          AERmon P1   7: ptp rlutaf rlutcsaf rsutaf rsutcsaf toz ztp
-                            Amon P1  36: clivi clt clwvi evspsbl hfls hfss hurs huss pr prc prsn prw ps psl rlds rldscs rlus rlut rlutcs rsds rsdscs rsdt rsus rsuscs rsut rsutcs sbl sfcWind tas tasmax tasmin tauu tauv ts uas vas
-                            Emon P1   6: evspsblpot intuadse intuaw intvadse intvaw sfcWindmax
-                            Emon P2   1: mrtws
-                        HOMALmon P1  30: RADabs550aer RADasy550aer RADod550aer RADssa550aer albsrfcLa albsrfc cdnctop clth cltl cltm fsat icedLa icod lcod reffclitop reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf snct sndLa tmxlLa tsLa vegstress
-                           LImon P2   1: lwsnl
-                           LImon P1   3: snc snd snw
-                            Lmon P1   7: gpp mrfso mrro mrros mrso mrsos npp
-                            Lmon P2   1: prveg
-                         Nonemon P1   7: albsn cw dmlt et hfdsl mrsow rzwc
-       mon    XY-na    -------- ---  99
-
                             Amon P1   7: hur hus ta ua va wap zg
        mon   XY-P19    -------- ---   7
 
@@ -102,6 +90,18 @@ Some Statistics on actually written variables per frequency+shape...
 
                             Lmon P2   1: tsl
        mon     XY-S    -------- ---   1
+
+                          AERmon P1   7: ptp rlutaf rlutcsaf rsutaf rsutcsaf toz ztp
+                            Amon P1  36: clivi clt clwvi evspsbl hfls hfss hurs huss pr prc prsn prw ps psl rlds rldscs rlus rlut rlutcs rsds rsdscs rsdt rsus rsuscs rsut rsutcs sbl sfcWind tas tasmax tasmin tauu tauv ts uas vas
+                            Emon P1   6: evspsblpot intuadse intuaw intvadse intvaw sfcWindmax
+                            Emon P2   1: mrtws
+                        HOMALmon P1  30: RADabs550aer RADasy550aer RADod550aer RADssa550aer albsrfc albsrfcLa cdnctop clth cltl cltm fsat icedLa icod lcod reffclitop reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf snct sndLa tmxlLa tsLa vegstress
+                           LImon P1   3: snc snd snw
+                           LImon P2   1: lwsnl
+                            Lmon P1   7: gpp mrfso mrro mrros mrso mrsos npp
+                            Lmon P2   1: prveg
+                         Nonemon P1   7: albsn cw dmlt et hfdsl mrsow rzwc
+       mon    XY-na    -------- ---  99
 
        mon --------    -------- --- 113
 
@@ -549,7 +549,7 @@ Some Statistics on actually written variables per variable...
 *
 *              dr2xml version:  current_version
 *   CMIP6 conventions version:  v6.2.4
-*  CMIP6 Data Request version:  01.00.21.post1
+*  CMIP6 Data Request version:  current_cmip6_dr
 
 *
  **************************************************

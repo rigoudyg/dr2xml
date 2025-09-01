@@ -24,7 +24,7 @@ from .settings_interface import get_settings_values
 from .utils import Dr2xmlError
 
 # Logger
-from logger import get_logger
+from utilities.logger import get_logger
 
 # Global variables and configuration tools
 from .config import add_value_in_list_config_variable
@@ -210,8 +210,12 @@ def analyze_cell_time_method(cm, label, table):
         operation = "average"
         detect_missing = True
     elif "time: mean where sea" in cm:  # [amnesi-tmn]:
-        # Area Mean of Ext. Prop. on Sea Ice : pas utilisee
-        logger.warning("time: mean where sea is not supposed to be used (%s,%s)" % (label, table))
+        add_value_in_list_config_variable("cell_method_warnings",
+                                          ('time: mean where sea', label, table))
+        logger.info("Note: assuming that 'time: mean where sea' "
+                    " for %15s in table %s is well handled by 'detect_missing'" % (label, table))
+        operation = "average"
+        detect_missing = True
     # -------------------------------------------------------------------------------------
     elif "time: mean where floating_ice_shelf" in cm:
         # [amnfi-twmn]: Weighted Time Mean on Floating Ice Shelf (presque que des

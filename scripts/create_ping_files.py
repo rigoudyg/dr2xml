@@ -8,17 +8,24 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 import os.path
 import shutil
 import sys
+import argparse
+import tempfile
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dr2xml import create_ping_files
 
-# Select your laboratory among: 'cnrm', 'cerfacs', 'ipsl'
-lab = 'cnrm'
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--lab", required=True, choices=["cnrm", "cerfacs", "ipsl"], help="Lab to consider")
+parser.add_argument("--out", required=True, help="Output dir")
+args = parser.parse_args()
+
+lab = args.lab
 
 # Lab settings
 
 if lab in ['cnrm', 'cerfacs']:
-    # This dictionnary should be the same as the one used for creating file_defs.
+    # This dictionary should be the same as the one used for creating file_defs.
     # Here , we quoted only those entries useful for creating ping files
     settings = {
         'institution_id': "CNRM-CERFACS",
@@ -114,22 +121,42 @@ settings["excluded_vars"] = []
 # Create various ping files for various sets of realms
 
 # In/Out directory
-my_dir = "output_labs/" + lab + "/"
-if os.path.exists(my_dir):
-    shutil.rmtree(my_dir)
-os.makedirs(my_dir)
+if args.out in ["test", ]:
+    with tempfile.TemporaryDirectory() as output_dir:
+        # Generate one ping file per context:
+        for my_context in settings["realms_per_context"].keys():
+            print("=== CREATING PINGFILE FOR CONTEXT", my_context)
+            create_ping_files(context=my_context, lset=settings, sset=dict(),
+                              comments=True, exact=False, dummy=True,
+                              filename=os.sep.join([output_dir, f"ping_{my_context}.xml"]), dummy_with_shape=True,
+                              year=None, select="no")
 
-# Generate one ping file per context:
-for my_context in settings["realms_per_context"].keys():
-    print("=== CREATING PINGFILE FOR CONTEXT", my_context)
-    create_ping_files(context=my_context, lset=settings, sset=dict(), path_special=settings["path_special_defs"],
-                      comments=True, exact=False, dummy=True,
-                      filename=my_dir + 'ping_' + my_context + '.xml', dummy_with_shape=True)
+        # ! head -n 5 output_sample/ping_nemo.xml
 
-# ! head -n 5 output_sample/ping_nemo.xml
+        # Generate one ping file per realm:
+        for my_context in settings["realms_per_context"].keys():
+            create_ping_files(context=my_context, lset=settings, sset=dict(),
+                              comments=True, exact=False, dummy=True,
+                              filename=os.sep.join([output_dir, f"ping_{my_context}_%s.xml"]), dummy_with_shape=True,
+                              by_realm=True, year=None, select="no")
+else:
+    output_dir = args.out
+    if os.path.exists(output_dir):
+        shutil.rmtree(output_dir)
+    os.makedirs(output_dir)
 
-# Generate one ping file per realm:
-for my_context in settings["realms_per_context"].keys():
-    create_ping_files(context=my_context, lset=settings, sset=dict(), path_special=settings["path_special_defs"],
-                      comments=True, exact=False, dummy=True,
-                      filename=my_dir + 'ping_' + my_context + '_%s.xml', dummy_with_shape=True, by_realm=True)
+    # Generate one ping file per context:
+    for my_context in settings["realms_per_context"].keys():
+        print("=== CREATING PINGFILE FOR CONTEXT", my_context)
+        create_ping_files(context=my_context, lset=settings, sset=dict(),
+                          comments=True, exact=False, dummy=True, year=None, select="no",
+                          filename=os.sep.join([output_dir, f"ping_{my_context}.xml"]), dummy_with_shape=True)
+
+    # ! head -n 5 output_sample/ping_nemo.xml
+
+    # Generate one ping file per realm:
+    for my_context in settings["realms_per_context"].keys():
+        create_ping_files(context=my_context, lset=settings, sset=dict(),
+                          comments=True, exact=False, dummy=True, year=None, select="no",
+                          filename=os.sep.join([output_dir, f"ping_{my_context}_%s.xml"]), dummy_with_shape=True,
+                          by_realm=True)
