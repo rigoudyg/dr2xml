@@ -21,6 +21,7 @@ ISBA_lwb = 'ISBA land water budget = (dslw+dcw+dsn+dsw)/dt - (pr-et-mrro) ; dt i
 lab_and_model_settings = {
     'source': 'CORDEX',
     'path_to_parse': '{path_xml}/',
+    'data_request_content_version': '{path_DR_config}',
     'comment': '',
     'tierMax': 1,
     'references': 'http://www.umr-cnrm.fr/',

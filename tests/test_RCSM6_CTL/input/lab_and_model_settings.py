@@ -21,6 +21,7 @@ ISBA_lwb = 'ISBA land water budget = (dslw+dcw+dsn+dsw)/dt - (pr-et-mrro) ; dt i
 lab_and_model_settings = {
     'bypass_CV_components': True,
     'path_to_parse': '{path_xml}/',
+    'data_request_content_version': '{path_DR_config}',
     'comment': 'CORDEX MED-11 CNRM-ALADIN 6.3 L91. Reference : Daniel M., Lemonsu A., Deque M., Somot S., Alias A., Masson V. (2018) Benefits of explicit urban parametrization in regional climate modelling to study climate and city interactions. Climate Dynamics, 1-20, doi:10.1007/s00382-018-4289-x',
     'tierMax': 1,
     'references': 'http://www.umr-cnrm.fr/',

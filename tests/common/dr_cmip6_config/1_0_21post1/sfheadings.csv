@@ -1,0 +1,8 @@
+Column A	Variable shape: each row aggregates a number of variables which all have the the same dimensions.
+Column B	Number of floating point values per time value. For smaller fields this may be a rough approximation. For larger fields it is based on the nominal model resolution
+Column C	Number of bytes per float: a value of two assumes 4 bytes in precision and 50% compression
+Column D	Total volume for this shape, summing all frequencies
+Column E	Number of variables with this shape and frequency
+Column F	Average number of years per variable (all experiments)
+Column G	Number of experiments for which this shape/frequency is requested
+Column H	Volume associated with this group of variables (Gb)

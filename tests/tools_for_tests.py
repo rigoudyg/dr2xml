@@ -127,7 +127,8 @@ def create_config_elements(simulation="my_simulation", contexts=list(), add_prof
 		path_homedr=os.path.sep.join([inputs_dir, "home_data_request"]),
 		path_tables=os.path.sep.join([inputs_dir, "tables"]),
 		path_xml=os.path.sep.join([inputs_dir, "xml"]),
-		path_CV=os.path.sep.join([inputs_dir, "CV", ""])
+		path_CV=os.path.sep.join([inputs_dir, "CV", ""]),
+		path_DR_config=os.path.sep.join([inputs_dir, "DR_config", ""])
 	)
 	rep = dict(
 		simulation=simulation,

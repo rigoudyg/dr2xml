@@ -18,6 +18,7 @@
 lab_and_model_settings = {
     'path_to_parse': '{path_xml}/',
     'save_project_settings': 'dr2xml_project_settings.json',
+    'data_request_content_version': '{path_DR_config}',
     'institution_id': "CNRM",  # institution full description will be read in CMIP6_CV
     'institution': "CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France)",
 

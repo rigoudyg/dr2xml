@@ -72,6 +72,7 @@ class TestProjectSettings(unittest.TestCase):
 		                'bytes_per_float': 2,
 		                'configuration': None,
 		                'context': 'arpsfx',
+		                'data_request_content_version': 'latest_stable',
 		                'data_request_path': None,
 		                'data_request_used': 'CMIP6',
 		                'debug_parsing': False,
