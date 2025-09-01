@@ -4,6 +4,7 @@
 
 lab_and_model_settings = {
     'institution_id': "CNRM-CERFACS",
+    'data_request_content_version': '{path_DR_config}',
     'project': "ping",
     # 'mips' : {'AerChemMIP','C4MIP','CFMIP','DAMIP', 'FAFMIP' , 'GeoMIP','GMMIP','ISMIP6',\
     #                  'LS3MIP','LUMIP','OMIP','PMIP','RFMIP','ScenarioMIP','CORDEX','SIMIP'},

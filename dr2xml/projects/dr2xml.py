@@ -1350,14 +1350,6 @@ internal_values = dict(
 		],
 		help="Configuration file of the data request content to be used"
 	),
-	data_request_content_version=ParameterSettings(
-		key="data_request_content_version",
-		default_values=[
-			ValueSettings(key_type="laboratory", keys="data_request_content_version"),
-			"latest_stable"
-		],
-		help="Version of the data request content to be used"
-	),
 	laboratory_used=ParameterSettings(
         key="laboratory_used",
 		default_values=[
