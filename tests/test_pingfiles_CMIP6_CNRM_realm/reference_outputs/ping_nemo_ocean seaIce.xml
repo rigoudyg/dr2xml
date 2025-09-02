@@ -3,7 +3,8 @@
 	<!--CMIP6 Data Request version current_cmip6_dr-->
 	<!--dr2xml version 3.1-->
 	<!--Lab_and_model settings
-{'excluded_vars' = [],
+{'data_request_content_version' = 'current_directory/test_pingfiles_CMIP6_CNRM_realm/input/DR_config/',
+'excluded_vars' = [],
 'excluded_vars_file' = [],
 'institution_id' = 'CNRM-CERFACS',
 'listof_home_vars' = 'None',

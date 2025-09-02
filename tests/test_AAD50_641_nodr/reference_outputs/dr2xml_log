@@ -44,6 +44,16 @@ For extra table CNRM_HOMALmon (which has 116 variables):
 		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
 
 	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		            XY-alt40: clcalipsoun
+
+		             XY-p220: clhcalipsoice clhcalipsoliq clhcalipsoun
+
+		             XY-p560: clmcalipsoice clmcalipsoliq clmcalipsoun
+
+		             XY-p840: cllcalipsoice cllcalipsoliq cllcalipsoun
+
+		           XY-plev19: cdnc ext550bc ext550dust ext550nh4 ext550no3 ext550oa ext550so4 ext550ss
+
 		             XY-sza5: parasolCRefl
 
 		       XY-tau|plev7c: clmodis
@@ -110,6 +120,16 @@ For extra table CNRM_HOMALday (which has 116 variables):
 		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
 
 	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		            XY-alt40: clcalipsoun
+
+		             XY-p220: clhcalipsoice clhcalipsoliq clhcalipsoun
+
+		             XY-p560: clmcalipsoice clmcalipsoliq clmcalipsoun
+
+		             XY-p840: cllcalipsoice cllcalipsoliq cllcalipsoun
+
+		           XY-plev19: cdnc ext550bc ext550dust ext550nh4 ext550no3 ext550oa ext550so4 ext550ss
+
 		             XY-sza5: parasolCRefl
 
 		       XY-tau|plev7c: clmodis
@@ -176,6 +196,16 @@ For extra table CNRM_HOMAL6hr (which has 99 variables):
 		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
 
 	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		            XY-alt40: clcalipsoun
+
+		             XY-p220: clhcalipsoice clhcalipsoliq clhcalipsoun
+
+		             XY-p560: clmcalipsoice clmcalipsoliq clmcalipsoun
+
+		             XY-p840: cllcalipsoice cllcalipsoliq cllcalipsoun
+
+		           XY-plev19: ext550bc ext550dust ext550oa ext550so4 ext550ss
+
 		             XY-sza5: parasolCRefl
 
 		       XY-tau|plev7c: clmodis
@@ -242,6 +272,16 @@ For extra table CNRM_HOMAL1hrPt (which has 111 variables):
 		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
 
 	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		            XY-alt40: clcalipsoun
+
+		             XY-p220: clhcalipsoice clhcalipsoliq clhcalipsoun
+
+		             XY-p560: clmcalipsoice clmcalipsoliq clmcalipsoun
+
+		             XY-p840: cllcalipsoice cllcalipsoliq cllcalipsoun
+
+		           XY-plev19: cdnc ext550bc ext550dust ext550nh4 ext550no3 ext550oa ext550so4 ext550ss
+
 		             XY-sza5: parasolCRefl
 
 		       XY-tau|plev7c: clmodis
@@ -707,6 +747,16 @@ For extra table CNRM_HOMALmon (which has 116 variables):
 		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
 
 	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		            XY-alt40: clcalipsoun
+
+		             XY-p220: clhcalipsoice clhcalipsoliq clhcalipsoun
+
+		             XY-p560: clmcalipsoice clmcalipsoliq clmcalipsoun
+
+		             XY-p840: cllcalipsoice cllcalipsoliq cllcalipsoun
+
+		           XY-plev19: cdnc ext550bc ext550dust ext550nh4 ext550no3 ext550oa ext550so4 ext550ss
+
 		             XY-sza5: parasolCRefl
 
 		       XY-tau|plev7c: clmodis
@@ -773,6 +823,16 @@ For extra table CNRM_HOMALday (which has 116 variables):
 		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
 
 	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		            XY-alt40: clcalipsoun
+
+		             XY-p220: clhcalipsoice clhcalipsoliq clhcalipsoun
+
+		             XY-p560: clmcalipsoice clmcalipsoliq clmcalipsoun
+
+		             XY-p840: cllcalipsoice cllcalipsoliq cllcalipsoun
+
+		           XY-plev19: cdnc ext550bc ext550dust ext550nh4 ext550no3 ext550oa ext550so4 ext550ss
+
 		             XY-sza5: parasolCRefl
 
 		       XY-tau|plev7c: clmodis
@@ -839,6 +899,16 @@ For extra table CNRM_HOMAL6hr (which has 99 variables):
 		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
 
 	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		            XY-alt40: clcalipsoun
+
+		             XY-p220: clhcalipsoice clhcalipsoliq clhcalipsoun
+
+		             XY-p560: clmcalipsoice clmcalipsoliq clmcalipsoun
+
+		             XY-p840: cllcalipsoice cllcalipsoliq cllcalipsoun
+
+		           XY-plev19: ext550bc ext550dust ext550oa ext550so4 ext550ss
+
 		             XY-sza5: parasolCRefl
 
 		       XY-tau|plev7c: clmodis
@@ -905,6 +975,16 @@ For extra table CNRM_HOMAL1hrPt (which has 111 variables):
 		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
 
 	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		            XY-alt40: clcalipsoun
+
+		             XY-p220: clhcalipsoice clhcalipsoliq clhcalipsoun
+
+		             XY-p560: clmcalipsoice clmcalipsoliq clmcalipsoun
+
+		             XY-p840: cllcalipsoice cllcalipsoliq cllcalipsoun
+
+		           XY-plev19: cdnc ext550bc ext550dust ext550nh4 ext550no3 ext550oa ext550so4 ext550ss
+
 		             XY-sza5: parasolCRefl
 
 		       XY-tau|plev7c: clmodis

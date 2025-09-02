@@ -12,6 +12,7 @@ import copy
 import re
 import sys
 from collections import OrderedDict, defaultdict
+import os
 
 import six
 
@@ -27,6 +28,14 @@ from dr2xml.settings_interface import get_settings_values, get_values_from_inter
 data_request_path = get_settings_values("internal", "data_request_path")
 if data_request_path is not None:
     sys.path.insert(0, data_request_path)
+
+data_request_content_version = get_settings_values("internal", "data_request_content_version")
+if data_request_content_version not in ["latest_stable", "stable", "latest"]:
+    reset_manifest = True
+    os.environ["DRQ_CONFIG_DIR"] = data_request_content_version
+    os.environ["DRQ_VERSION_DIR"] = data_request_content_version
+else:
+    reset_manifest = False
 
 try:
     import dreq
@@ -285,6 +294,7 @@ class DataRequest(DataRequestBasic):
                 endyear = year
         elif tslice.type in ["startRange", ]:  # e.g. _slice_VolMIP3
             # used only for VolMIP : _slice_VolMIP3
+            nyear = tslice.nyears
             start_year = self.find_exp_start_year(exp_label, exp_startyear, branch_year_in_child=branch_year_in_child)
             relevant = (year >= start_year and year < start_year + nyear)
             endyear = start_year + nyear - 1
@@ -510,8 +520,12 @@ data_request = None
 
 def initialize_data_request():
     global data_request
+    if reset_manifest:
+        dict_load = dict(manifest=None)
+    else:
+        dict_load = dict()
     if data_request is None:
-        data_request = DataRequest(data_request=dreq.loadDreq(), print_DR_errors=True, print_DR_stdname_errors=False)
+        data_request = DataRequest(data_request=dreq.loadDreq(**dict_load), print_DR_errors=True, print_DR_stdname_errors=False)
     return data_request
 
 

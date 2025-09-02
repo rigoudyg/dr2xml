@@ -20,19 +20,8 @@ from collections import OrderedDict
 from importlib.machinery import SourceFileLoader
 import six
 
-from data_request_api import version as cmip7_dr_software_version
-
-try:
-    import dreq
-except ImportError:
-    from dreqPy import dreq
-cmip6_dr_version = dreq.loadDreq().version
-
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-from dr2xml import generate_file_defs, create_ping_files
-from dr2xml.config import version
 
 
 def format_with_values(rep, **kwargs):
@@ -105,11 +94,13 @@ def test_reference_init(func):
 
 @test_reference_init
 def test_reference_ping(context, lset, sset, filename, **kwargs):
+	from dr2xml import create_ping_files
 	return create_ping_files(context=context, lset=lset, sset=dict(), filename=filename.format(content=context), **kwargs)
 
 
 @test_reference_init
 def test_reference_simulation(context, lset, sset, force_reset=False, **config_dict):
+	from dr2xml import generate_file_defs
 	return generate_file_defs(context=context, lset=lset, sset=sset, force_reset=force_reset, **config_dict)
 
 
@@ -153,6 +144,7 @@ def create_config_elements(simulation="my_simulation", contexts=list(), add_prof
 		path_tables=os.path.sep.join([inputs_dir, "tables"]),
 		path_xml=os.path.sep.join([inputs_dir, "xml"]),
 		path_CV=os.path.sep.join([inputs_dir, "CV", ""]),
+		path_DR_config=os.path.sep.join([inputs_dir, "DR_config", ""]),
 		content="{content}"
 	)
 	rep = dict(
@@ -229,10 +221,34 @@ class TestRun(object):
 		                     sset=self.simulation_settings, add_profile=self.add_profile,
 		                     check_time_file=self.check_time_file)
 		to_compare = list_comparison_to_do(test=self.config["dirname"], reference=self.reference_directory)
+
+		from dr2xml.config import version
 		anonymize_dict = dict(current_directory=current_directory, current_version=version,
-		                      current_data_request=data_request_directory,
-		                      current_cmip7_dr_software=cmip7_dr_software_version,
-		                      current_cmip6_dr=cmip6_dr_version)
+		                      current_data_request=data_request_directory)
+
+		data_request_used = self.lab_and_model_settings.get("data_request_used", "CMIP6")
+		if data_request_used in ["CMIP7", ]:
+			from data_request_api import version as cmip7_dr_software_version
+			anonymize_dict["current_cmip7_dr_software"] = cmip7_dr_software_version
+		elif data_request_used in ["CMIP6", ]:
+			data_request_content_version = self.lab_and_model_settings.get("data_request_content_version", "latest_stable")
+			if data_request_content_version not in ["latest_stable", "stable", "latest"]:
+				load_dict = dict(manifest=None)
+				os.environ["DRQ_CONFIG_DIR"] = data_request_content_version
+				os.environ["DRQ_VERSION_DIR"] = data_request_content_version
+			else:
+				load_dict = dict()
+				if "DRQ_CONFIG_DIR" in os.environ:
+					del os.environ["DRQ_CONFIG_DIR"]
+				if "DRQ_VERSION_DIR" in os.environ:
+					del os.environ["DRQ_VERSION_DIR"]
+			try:
+				import dreq
+			except ImportError:
+				from dreqPy import dreq
+			cmip6_dr_version = dreq.loadDreq(**load_dict).version
+			anonymize_dict["current_cmip6_dr"] = cmip6_dr_version
+
 		for (reference_file, test_file) in to_compare:
 			reference_content = read_file_content(reference_file, anonymize=anonymize_dict)
 			test_content = read_file_content(test_file, anonymize=anonymize_dict)

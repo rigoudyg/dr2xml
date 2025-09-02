@@ -77,6 +77,6 @@ def log_msg(level, *args, **kwargs):
 
 
 def change_log_level(level=log_level):
-    global logger, log_level
+    global log_level
     log_level = level
     logger.setLevel(log_level_to_int(level))

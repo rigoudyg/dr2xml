@@ -7,6 +7,7 @@ Generic variables
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+import copy
 import re
 from collections import OrderedDict
 
@@ -134,8 +135,9 @@ def get_correspond_cmor_var(homevar):
     empty_table = (homevar.mipTable in ['NONE', ]) or (homevar.mipTable.startswith("None"))
     allow_pseudo = get_settings_values("internal", 'allow_pseudo_standard_names')
     global sn_issues_home
+    sn_issues_home_local = copy.deepcopy(sn_issues_home)
     for cmvarid in data_request.get_cmor_var_id_by_label(homevar.ref_var):
-        cmvar = data_request.get_element_uid(cmvarid, elt_type="variable", sn_issues=sn_issues_home,
+        cmvar = data_request.get_element_uid(cmvarid, elt_type="variable", sn_issues=sn_issues_home_local,
                                              allow_pseudo=allow_pseudo)
         logger.debug("get_corresp, checking %s vs %s in %s" % (homevar.label, cmvar.label, cmvar.mipTable))
         #
@@ -170,6 +172,7 @@ def get_correspond_cmor_var(homevar):
             logger.debug("doesn't match %s %s %s %s %s %s %s %s" % (match_label, match_freq, cmvar.frequency,
                                                                     homevar.frequency, match_table, match_realm,
                                                                     empty_realm, homevar.mipTable))
+    sn_issues_home = sn_issues_home_local
 
     if count >= 1:
         # empty table means that the frequency is changed (but the variable exists in another frequency cmor table

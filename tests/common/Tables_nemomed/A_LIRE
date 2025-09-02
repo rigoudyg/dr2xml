@@ -1,0 +1,33 @@
+Doc: voir lxmosca5:Documents/CMIP6
+et
+/cnrm/mosca/COMMON/tools/ALADIN/dr2xml
+
+ping_nemo.xml: on part de /home/gmgec/mrgc/roehrig/CEDRE/namelist/iox/v641/ping_nemo.xml
+Au debut: Home variables: celles qui ne sont pas dans CMIP6 (mais on leur donne quand même le nom CMIP6_$var)
+puis 
+il faut y mettre les variables nemomed12 de nemo_fields.xml qui sont dans CMIP6, et donner la correspondance des noms
+voir http://clipc-services.ceda.ac.uk/dreq/index.html
+http://clipc-services.ceda.ac.uk/dreq/mipVars.html pour chercher une variable
+Il faut y mettre toutes les variables, appelées CMIP6_$var, même si elles ne sont pas dans CMIP6.
+
+Tables CMIP6 sur beaufix:
+ ###NON /home/rigoudyg/DR_tables/prepare/cmip6-cmor-tables_01.00.21/Tables
+file:////cnrm/est/COMMON/CMIP6/copies_du_site_web_de_la_DR/clipc-services.ceda.ac.uk/dreq/u/MIPtable::Oday.html 
+file:////cnrm/est/COMMON/CMIP6/copies_du_site_web_de_la_DR/clipc-services.ceda.ac.uk/dreq/u/MIPtable::Omon.html
+etc...
+
+Exemple param de CEDRE qui donne les chemins pour les fichiers utiles:
+/home/gmgec/mrgc/roehrig/SAVE/CEDRE/param/v641/param_AOGCM_dr2xml
+Exemple ping_nemo dans CEDRE:
+/home/gmgec/mrgc/roehrig/SAVE/CEDRE/namelist/iox/v641/ping_nemo.xml
+/home/gmgec/mrgc/roehrig/SAVE/CEDRE/namelist/iox/v641/nemo_fields.xml
+Tables maison:
+~roehrig/CEDRE/namelist/dr2xml/v641/Tables/CNRM_HOMOIday.json : uos et vos
+
+nemo.xml: ajout des constantes utilisées dans les calculs
+
+RCSM_HOMOday.json : table des variables de nemo_fields qu'on va sortir en journalier qui ne sont pas dans CMIP6 ,
+
+
+
+
