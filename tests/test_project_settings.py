@@ -27,7 +27,8 @@ class TestProjectSettings(unittest.TestCase):
 
 	def test_ping_settings(self):
 		lset = {
-	        'institution_id': "CNRM-CERFACS",
+			'data_request_content_version': f"{project_dir}/tests/common/dr_cmip6_config/1_0_21post1",
+			'institution_id': "CNRM-CERFACS",
 	        'project': "ping",
 	        # 'mips' : {'AerChemMIP','C4MIP','CFMIP','DAMIP', 'FAFMIP' , 'GeoMIP','GMMIP','ISMIP6',\
 	        #                  'LS3MIP','LUMIP','OMIP','PMIP','RFMIP','ScenarioMIP','CORDEX','SIMIP'},
@@ -74,7 +75,7 @@ class TestProjectSettings(unittest.TestCase):
 		                'configuration': None,
 		                'context': 'arpsfx',
 		                'data_request_config': f'{project_dir}/dr2xml/dr_interface/CMIP7_config',
-		                'data_request_content_version': 'latest_stable',
+		                'data_request_content_version': f"{project_dir}/tests/common/dr_cmip6_config/1_0_21post1",
 		                'data_request_path': None,
 		                'data_request_used': 'CMIP6',
 		                'debug_parsing': False,
