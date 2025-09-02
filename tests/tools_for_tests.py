@@ -23,9 +23,6 @@ import six
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from dr2xml import generate_file_defs, create_ping_files
-from dr2xml.config import version
-
 
 def format_with_values(rep, **kwargs):
 	if isinstance(rep, six.string_types):
@@ -97,11 +94,13 @@ def test_reference_init(func):
 
 @test_reference_init
 def test_reference_ping(context, lset, sset, filename, **kwargs):
+	from dr2xml import create_ping_files
 	return create_ping_files(context=context, lset=lset, sset=dict(), filename=filename.format(content=context), **kwargs)
 
 
 @test_reference_init
 def test_reference_simulation(context, lset, sset, force_reset=False, **config_dict):
+	from dr2xml import generate_file_defs
 	return generate_file_defs(context=context, lset=lset, sset=sset, force_reset=force_reset, **config_dict)
 
 
@@ -222,6 +221,8 @@ class TestRun(object):
 		                     sset=self.simulation_settings, add_profile=self.add_profile,
 		                     check_time_file=self.check_time_file)
 		to_compare = list_comparison_to_do(test=self.config["dirname"], reference=self.reference_directory)
+
+		from dr2xml.config import version
 		anonymize_dict = dict(current_directory=current_directory, current_version=version,
 		                      current_data_request=data_request_directory)
 
