@@ -3,5 +3,5 @@ consolidate: false
 export: release
 log_file: default
 log_level: info
-offline: true
+offline: false
 variable_name: CMIP7 Compound Name
