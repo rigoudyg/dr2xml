@@ -161,7 +161,6 @@ lab_and_model_settings = {
         'HR': {},
         'LR': {}
     },
-    'included_opportunities': ['dafc7392-8c95-11ef-944e-41a8eb05f654'],
     'non_standard_axes': {
         'siline': 'siline',
         'dbze': 'dbze',

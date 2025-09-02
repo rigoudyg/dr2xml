@@ -188,7 +188,7 @@ class DataRequest(DataRequestBasic):
         if experiment_filter:
             experiment = experiment_filter["experiment_id"]
         else:
-            experiment=None
+            experiment = None
         find_out_requests_dict = self._get_filtering_elements(experiment=experiment)
         # Filter var list per filtering dict "any"
         var_list = self.data_request.filter_elements_per_request("variables", skip_if_missing=False,
@@ -196,7 +196,7 @@ class DataRequest(DataRequestBasic):
         # Apply other filters
         for var in var_list:
             dr_var = SimpleCMORVar.get_from_dr(var, **kwargs)
-            if is_elt_applicable(dr_var.mipTable, excluded=select_excluded_tables, included=select_included_tables) and\
+            if is_elt_applicable(dr_var.mipTable, excluded=select_excluded_tables, included=select_included_tables) and \
                     is_elt_applicable(dr_var.mipVarLabel, excluded=select_excluded_vars, included=select_included_vars) \
                     and is_elt_applicable((dr_var.mipVarLabel, dr_var.mipTable), excluded=select_excluded_pairs) \
                     and self.get_endyear_for_cmorvar(cmorvar=dr_var, experiment=experiment, year=select_on_year,
