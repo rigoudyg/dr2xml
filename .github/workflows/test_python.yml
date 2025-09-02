@@ -36,5 +36,6 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with unittest
       run: |
+        python3 -m data_request_api.content.dump_transformation --version=v1.2.2
         for f in $(ls tests/test_*/__init__.py); do echo $f; python3 -m unittest $f; done
         for f in $(ls tests/test_*.py); do echo $f; python3 -m unittest $f; done
