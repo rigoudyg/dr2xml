@@ -9,6 +9,8 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 
 import os.path
 
+from docutils.nodes import section
+
 from dr2xml.projects.projects_interface_definitions import ValueSettings, ParameterSettings, TagSettings, \
 	FunctionSettings, CaseSettings, ConditionSettings
 from utilities.logger import get_logger
@@ -84,7 +86,7 @@ internal_values = dict(
 	),
 	synchronisation_frequency=ParameterSettings(
 		key="synchronisation_frequency",
-		help="Frequency at which the synchornisation between buffer and filesystem is done.",
+		help="Frequency at which the synchronisation between buffer and filesystem is done.",
 		default_value=[
 			ValueSettings(key_type="simulation", keys="synchronisation_frequency"),
 			ValueSettings(key_type="laboratory", keys="synchronisation_frequency"),
@@ -98,7 +100,8 @@ internal_values = dict(
 			ValueSettings(key_type="laboratory", keys="grouped_vars_per_file"),
 			list()
 		],
-		help="Variables to be grouped in the same output file (provided additional conditions are filled)."
+		help="Variables to be grouped in the same output file (provided additional conditions are filled).",
+		section="File"
 	),
 	debug_parsing=ParameterSettings(
         key="debug_parsing",
@@ -147,7 +150,8 @@ internal_values = dict(
 		],
 		authorized_values=["on_expt_and_year", "on_expt", "no"],
 		fatal=True,
-		help="Selection strategy for variables."
+		help="Selection strategy for variables.",
+		section="Selection"
 	),
 	select_on_expt=ParameterSettings(
 		key="select_on_expt",
@@ -166,7 +170,8 @@ internal_values = dict(
 			)
 		],
 		fatal=True,
-		help="Should data be selected on experiment?"
+		help="Should data be selected on experiment?",
+		section="Selection"
 	),
 	select_on_year=ParameterSettings(
 		key="select_on_year",
@@ -185,7 +190,8 @@ internal_values = dict(
 			)
 		],
 		fatal=True,
-		help="Should data be selected on year?"
+		help="Should data be selected on year?",
+		section="Selection"
 	),
 	select_grid_choice=ParameterSettings(
 		key="select_grid_choice",
@@ -204,7 +210,8 @@ internal_values = dict(
 			)
 		],
 		fatal=True,
-		help="Grid choice for variable selection."
+		help="Grid choice for variable selection.",
+		section="Selection"
 	),
 	select_sizes=ParameterSettings(
 		key="select_sizes",
@@ -223,7 +230,8 @@ internal_values = dict(
 			)
 		],
 		fatal=True,
-		help="Sizes for variable selection."
+		help="Sizes for variable selection.",
+		section="Selection"
 	),
 	select_max_priority=ParameterSettings(
 		key="select_max_priority",
@@ -242,7 +250,8 @@ internal_values = dict(
 			)
 		],
 		fatal=True,
-		help="Max priority for variable selection."
+		help="Max priority for variable selection.",
+		section="Selection"
 	),
 	select_tierMax=ParameterSettings(
 		key="select_tierMax",
@@ -261,7 +270,8 @@ internal_values = dict(
 			)
 		],
 		fatal=True,
-		help="tierMax for variable selection."
+		help="tierMax for variable selection.",
+		section="Selection"
 	),
 	select_included_vars=ParameterSettings(
 		key="select_included_vars",
@@ -280,7 +290,8 @@ internal_values = dict(
 			)
 		],
 		fatal=True,
-		help="Included variables for variable selection."
+		help="Included variables for variable selection.",
+		section="Selection"
 	),
 	select_included_tables=ParameterSettings(
 		key="select_included_tables",
@@ -299,7 +310,8 @@ internal_values = dict(
 			)
 		],
 		fatal=True,
-		help="Included tables for variable selection."
+		help="Included tables for variable selection.",
+		section="Selection"
 	),
 	select_included_opportunities=ParameterSettings(
 		key="select_included_opportunities",
@@ -318,7 +330,8 @@ internal_values = dict(
 			)
 		],
 		fatal=True,
-		help="Included opportunities for variable selection."
+		help="Included opportunities for variable selection.",
+		section="Selection"
 	),
 	select_included_vargroups=ParameterSettings(
 		key="select_included_vargroups",
@@ -337,7 +350,8 @@ internal_values = dict(
 			)
 		],
 		fatal=True,
-		help="Included variables groups for variable selection."
+		help="Included variables groups for variable selection.",
+		section="Selection"
 	),
 	select_included_request_links=ParameterSettings(
 		key="select_included_request_links",
@@ -356,7 +370,8 @@ internal_values = dict(
 			)
 		],
 		fatal=True,
-		help="Included request links for variable selection."
+		help="Included request links for variable selection.",
+		section="Selection"
 	),
 	select_excluded_request_links=ParameterSettings(
 		key="select_excluded_request_links",
@@ -375,7 +390,8 @@ internal_values = dict(
 			)
 		],
 		fatal=True,
-		help="Excluded request links for variable selection."
+		help="Excluded request links for variable selection.",
+		section="Selection"
 	),
 	select_excluded_vars=ParameterSettings(
 		key="select_excluded_vars",
@@ -399,7 +415,8 @@ internal_values = dict(
 			)
 		],
 		fatal=True,
-		help="Excluded variables for variable selection."
+		help="Excluded variables for variable selection.",
+		section="Selection"
 	),
 	select_excluded_tables=ParameterSettings(
 		key="select_excluded_tables",
@@ -422,7 +439,8 @@ internal_values = dict(
 			)
 		],
 		fatal=True,
-		help="Excluded tables for variable selection."
+		help="Excluded tables for variable selection.",
+		section="Selection"
 	),
 	select_excluded_opportunities=ParameterSettings(
 		key="select_excluded_opportunities",
@@ -445,7 +463,8 @@ internal_values = dict(
 			)
 		],
 		fatal=True,
-		help="Excluded opportunities for variable selection."
+		help="Excluded opportunities for variable selection.",
+		section="Selection"
 	),
 	select_excluded_vargroups=ParameterSettings(
 		key="select_excluded_vargroups",
@@ -468,7 +487,8 @@ internal_values = dict(
 			)
 		],
 		fatal=True,
-		help="Excluded variables groups for variable selection."
+		help="Excluded variables groups for variable selection.",
+		section="Selection"
 	),
 	select_excluded_pairs=ParameterSettings(
 		key="select_excluded_pairs",
@@ -491,7 +511,8 @@ internal_values = dict(
 			)
 		],
 		fatal=True,
-		help="Excluded pairs for variable selection."
+		help="Excluded pairs for variable selection.",
+		section="Selection"
 	),
 	select_mips=ParameterSettings(
         key="select_mips",
@@ -515,7 +536,8 @@ internal_values = dict(
 			)
 		],
 		fatal=True,
-		help="MIPs for variable selection."
+		help="MIPs for variable selection.",
+		section="Selection"
 	),
 	path_to_parse=ParameterSettings(
         key="path_to_parse",
@@ -573,7 +595,8 @@ internal_values = dict(
 			ValueSettings(key_type="laboratory", keys="max_file_size_in_floats"),
 			500 * 1.e6
 		],
-		help="The maximum size of generated files in number of floating values."
+		help="The maximum size of generated files in number of floating values.",
+		section="File"
 	),
 	bytes_per_float=ParameterSettings(
         key="bytes_per_float",
@@ -581,7 +604,8 @@ internal_values = dict(
 			ValueSettings(key_type="laboratory", keys="bytes_per_float"),
 			2
 		],
-		help="Estimate of number of bytes per floating value, given the chosen :term:`compression_level`."
+		help="Estimate of number of bytes per floating value, given the chosen :term:`compression_level`.",
+		section="File"
 	),
 	sampling_timestep=ParameterSettings(
         key="sampling_timestep",
@@ -616,7 +640,8 @@ internal_values = dict(
 		],
 		fatal=True,
 		help="Max variable priority level to be output (you may set 3 when creating ping_files while being more "
-		     "restrictive at run time) from lab settings."
+		     "restrictive at run time) from lab settings.",
+		section="Selection"
 	),
 	max_priority=ParameterSettings(
         key="max_priority",
@@ -626,7 +651,8 @@ internal_values = dict(
 		],
 		fatal=True,
 		help="Max variable priority level to be output (you may set 3 when creating ping_files while being more "
-		     "restrictive at run time)."
+		     "restrictive at run time).",
+		section="Selection"
 	),
 	grid_choice=ParameterSettings(
         key="grid_choice",
@@ -700,7 +726,8 @@ internal_values = dict(
 			list()
 		],
 		target_type="list",
-		help="List of links un data request that should not been followed (those request are not taken into account)."
+		help="List of links un data request that should not been followed (those request are not taken into account).",
+		section="Selection"
 	),
 	included_request_links=ParameterSettings(
         key="included_request_links",
@@ -709,7 +736,8 @@ internal_values = dict(
 			list()
 		],
 		target_type="list",
-		help="List of the request links that will be processed (all others will not)."
+		help="List of the request links that will be processed (all others will not).",
+		section="Selection"
 	),
 	excluded_tables_lset=ParameterSettings(
         key="excluded_tables_lset",
@@ -718,7 +746,8 @@ internal_values = dict(
 			list()
 		],
 		target_type="list",
-		help="List of the tables that will be excluded from outputs from laboratory settings."
+		help="List of the tables that will be excluded from outputs from laboratory settings.",
+		section="Selection"
 	),
 	excluded_tables_sset=ParameterSettings(
         key="excluded_tables_sset",
@@ -727,7 +756,8 @@ internal_values = dict(
 			list()
 		],
 		target_type="list",
-		help="List of the tables that will be excluded from outputs from simulation settings."
+		help="List of the tables that will be excluded from outputs from simulation settings.",
+		section="Selection"
 	),
 	excluded_spshapes_lset=ParameterSettings(
         key="excluded_spshapes_lset",
@@ -736,7 +766,8 @@ internal_values = dict(
 			list()
 		],
 		target_type="list",
-		help="The list of shapes that should be excluded (all variables in those shapes will be excluded from outputs)."
+		help="The list of shapes that should be excluded (all variables in those shapes will be excluded from outputs).",
+		section="Selection"
 	),
 	excluded_vars_lset=ParameterSettings(
         key="excluded_vars_lset",
@@ -746,7 +777,8 @@ internal_values = dict(
 		],
 		target_type="list",
 		help="List of CMOR variables to exclude from the result based on previous Data Request extraction from "
-		     "laboratory settings."
+		     "laboratory settings.",
+		section="Selection"
 	),
 	excluded_vars_sset=ParameterSettings(
         key="excluded_vars_sset",
@@ -756,7 +788,8 @@ internal_values = dict(
 		],
 		target_type="list",
 		help="List of CMOR variables to exclude from the result based on previous Data Request extraction from "
-		     "simulation settings."
+		     "simulation settings.",
+		section="Selection"
 	),
 	excluded_pairs_lset=ParameterSettings(
         key="excluded_pairs_lset",
@@ -766,7 +799,8 @@ internal_values = dict(
 		],
 		target_type="list",
 		help="You can exclude some (variable, table) pairs from outputs. "
-		     "A list of tuple (variable, table) to be excluded from laboratory settings."
+		     "A list of tuple (variable, table) to be excluded from laboratory settings.",
+		section="Selection"
 	),
 	excluded_pairs_sset=ParameterSettings(
         key="excluded_pairs_sset",
@@ -776,7 +810,8 @@ internal_values = dict(
 		],
 		target_type="list",
 		help="You can exclude some (variable, table) pairs from outputs. "
-		     "A list of tuple (variable, table) to be excluded from simulation settings."
+		     "A list of tuple (variable, table) to be excluded from simulation settings.",
+		section="Selection"
 	),
 	included_tables_lset=ParameterSettings(
         key="included_tables_lset",
@@ -785,7 +820,8 @@ internal_values = dict(
 			list()
 		],
 		target_type="list",
-		help="List of tables that will be processed (all others will not) from laboratory settings."
+		help="List of tables that will be processed (all others will not) from laboratory settings.",
+		section="Selection"
 	),
 	included_tables=ParameterSettings(
         key="included_tables",
@@ -794,7 +830,8 @@ internal_values = dict(
 			ValueSettings(key_type="internal", keys="included_tables_lset")
 		],
 		target_type="list",
-		help="List of tables that will be processed (all others will not)."
+		help="List of tables that will be processed (all others will not).",
+		section="Selection"
 	),
 	included_vars_lset=ParameterSettings(
         key="included_vars_lset",
@@ -803,7 +840,8 @@ internal_values = dict(
 			list()
 		],
 		target_type="list",
-		help="Variables to be considered from the Data Request (all others will not) from laboratory settings."
+		help="Variables to be considered from the Data Request (all others will not) from laboratory settings.",
+		section="Selection"
 	),
 	included_vars=ParameterSettings(
         key="included_vars",
@@ -812,7 +850,8 @@ internal_values = dict(
 			ValueSettings(key_type="internal", keys="included_vars_lset")
 		],
 		target_type="list",
-		help="Variables to be considered from the Data Request (all others will not)"
+		help="Variables to be considered from the Data Request (all others will not)",
+		section="Selection"
 	),
 	excluded_vars_per_config=ParameterSettings(
         key="excluded_vars_per_config",
@@ -827,7 +866,8 @@ internal_values = dict(
 			list()
 		],
 		help="A dictionary which keys are configurations and values the list of variables that must be excluded for "
-		     "each configuration."
+		     "each configuration.",
+		section="Selection"
 	),
 	included_opportunities_lset=ParameterSettings(
         key="included_opportunities_lset",
@@ -836,7 +876,8 @@ internal_values = dict(
 			list()
 		],
 		target_type="list",
-		help="List of opportunities that will be processed (all others will not) from laboratory settings."
+		help="List of opportunities that will be processed (all others will not) from laboratory settings.",
+		section="Selection"
 	),
 	included_opportunities=ParameterSettings(
         key="included_opportunities",
@@ -845,7 +886,8 @@ internal_values = dict(
 			ValueSettings(key_type="internal", keys="included_opportunities_lset")
 		],
 		target_type="list",
-		help="List of opportunities that will be processed (all others will not)."
+		help="List of opportunities that will be processed (all others will not).",
+		section="Selection"
 	),
 	included_vargroups_lset=ParameterSettings(
         key="included_vargroups_lset",
@@ -854,7 +896,8 @@ internal_values = dict(
 			list()
 		],
 		target_type="list",
-		help="List of variables groups that will be processed (all others will not) from laboratory settings."
+		help="List of variables groups that will be processed (all others will not) from laboratory settings.",
+		section="Selection"
 	),
 	included_vargroups=ParameterSettings(
         key="included_vargroups",
@@ -863,7 +906,8 @@ internal_values = dict(
 			ValueSettings(key_type="internal", keys="included_vargroups_lset")
 		],
 		target_type="list",
-		help="List of variables groups that will be processed (all others will not)."
+		help="List of variables groups that will be processed (all others will not).",
+		section="Selection"
 	),
 	excluded_opportunities_lset=ParameterSettings(
         key="excluded_opportunities_lset",
@@ -872,7 +916,8 @@ internal_values = dict(
 			list()
 		],
 		target_type="list",
-		help="List of the opportunities that will be excluded from outputs from laboratory settings."
+		help="List of the opportunities that will be excluded from outputs from laboratory settings.",
+		section="Selection"
 	),
 	excluded_opportunities_sset=ParameterSettings(
         key="excluded_opportunities_sset",
@@ -881,7 +926,8 @@ internal_values = dict(
 			list()
 		],
 		target_type="list",
-		help="List of the opportunities that will be excluded from outputs from simulation settings."
+		help="List of the opportunities that will be excluded from outputs from simulation settings.",
+		section="Selection"
 	),
 	excluded_vargroups_lset=ParameterSettings(
         key="excluded_vargroups_lset",
@@ -890,7 +936,8 @@ internal_values = dict(
 			list()
 		],
 		target_type="list",
-		help="List of the variables groups that will be excluded from outputs from laboratory settings."
+		help="List of the variables groups that will be excluded from outputs from laboratory settings.",
+		section="Selection"
 	),
 	excluded_vargroups_sset=ParameterSettings(
         key="excluded_vargroups_sset",
@@ -899,7 +946,8 @@ internal_values = dict(
 			list()
 		],
 		target_type="list",
-		help="List of the variables groups that will be excluded from outputs from simulation settings."
+		help="List of the variables groups that will be excluded from outputs from simulation settings.",
+		section="Selection"
 	),
 	experiment_id=ParameterSettings(
         key="experiment_id",
@@ -1326,7 +1374,8 @@ internal_values = dict(
 			ValueSettings(key_type="laboratory", keys="data_request_used"),
 			"CMIP6"
 		],
-		help="The Data Request infrastructure type which should be used."
+		help="The Data Request infrastructure type which should be used.",
+		section="Data Request"
 	),
 	data_request_path=ParameterSettings(
         key="data_request_path",
@@ -1334,7 +1383,8 @@ internal_values = dict(
 			ValueSettings(key_type="laboratory", keys="data_request_path"),
 			None
 		],
-		help="Path where the data request API used is placed."
+		help="Path where the data request API used is placed.",
+		section="Data Request"
 	),
 	data_request_content_version=ParameterSettings(
 		key="data_request_content_version",
@@ -1342,7 +1392,8 @@ internal_values = dict(
 			ValueSettings(key_type="laboratory", keys="data_request_content_version"),
 			"latest_stable"
 		],
-		help="Version of the data request content to be used"
+		help="Version of the data request content to be used",
+		section="Data Request"
 	),
 	data_request_config=ParameterSettings(
 		key="data_request_config",
@@ -1350,7 +1401,8 @@ internal_values = dict(
 			ValueSettings(key_type="laboratory", keys="data_request_config"),
 			os.sep.join([os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "dr_interface", "CMIP7_config"])
 		],
-		help="Configuration file of the data request content to be used"
+		help="Configuration file of the data request content to be used",
+		section="Data Request"
 	),
 	laboratory_used=ParameterSettings(
         key="laboratory_used",
@@ -1376,7 +1428,8 @@ internal_values = dict(
 			dict()
 		],
 		help="A dictionary containing, for each perso or dev variables with a XY-perso shape, and for each vertical "
-		     "coordinate associated, the main attributes of the dimension."
+		     "coordinate associated, the main attributes of the dimension.",
+		section="Home data request"
 	),
 	realms_per_context=ParameterSettings(
         key="realms_per_context",

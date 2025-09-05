@@ -1,3 +1,4 @@
+cache_dir: /home/rigoudyg/dev/data_request/CMIP7_DReq_Software/data_request_api/data_request_api/content/dreq_api/dreq_res
 check_api_version: false
 consolidate: false
 export: release
