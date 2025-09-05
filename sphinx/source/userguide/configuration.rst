@@ -26,7 +26,7 @@ default values can be found.
 
 Currently, three types of Data Request can be used in dr2xml:
    - the CMIP6 Data Request (default one)
-   - a C3S seasonal forecast kind of Data Request (python-like file with defined entries)
+   - a C3S seasonal forecast kind of Data Request (json-like file with defined entries)
    - no Data Request (in this case, the definitions of the variables are given through json-like tables and everything
      must be defined)
 

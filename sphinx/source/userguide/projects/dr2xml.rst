@@ -148,6 +148,19 @@ Unsorted parameters
          
          num type: 'string'
          
+      bytes_per_float
+         
+         Estimate of number of bytes per floating value, given the chosen :term:`compression_level`.
+         
+         fatal: False
+         
+         default values:
+            
+            - laboratory[bytes_per_float]
+            - 2
+         
+         num type: 'string'
+         
       configuration
          
          Configuration used for this experiment. If there is no configuration in lab_settings which matches you case, please rather use next or next two entries: :term:`source_id` and, if needed, :term:`source_type`.
@@ -168,685 +181,6 @@ Unsorted parameters
          
          num type: 'string'
          
-      debug_parsing
-         
-         In order to identify which xml files generates a problem, you can use this flag.
-         
-         fatal: False
-         
-         default values:
-            
-            - laboratory[debug_parsing]
-            - False
-         
-         num type: 'string'
-         
-      dr2xml_manages_enddate
-         
-         A smart workflow will allow you to extend a simulation during it course and to complement the output files accordingly, by managing the 'end date' part in filenames. You can then set next setting to False.
-         
-         fatal: True
-         
-         default values:
-            
-            - laboratory[dr2xml_manages_enddate]
-            - True
-         
-         num type: 'string'
-         
-      end_year
-         
-         If you want to carry on the experiment beyond the duration set in DR, and that all requestItems that apply to DR end year also apply later on, set 'end_year' You can also set it if you don't know if DR has a wrong value
-         
-         fatal: False
-         
-         default values:
-            
-            - simulation[end_year]
-            - False
-         
-         num type: 'string'
-         
-      experiment_for_requests
-         
-         Experiment id to use for driving the use of the Data Request.
-         
-         fatal: True
-         
-         default values:
-            
-            - simulation[experiment_for_requests]
-            - internal[experiment_id]
-         
-         num type: 'string'
-         
-      experiment_id
-         
-         Root experiment identifier.
-         
-         fatal: True
-         
-         default values: simulation[experiment_id]
-         
-         num type: 'string'
-         
-      filter_on_realization
-         
-         If you want to produce the same variables set for all members, set this parameter to False.
-         
-         fatal: False
-         
-         default values:
-            
-            - simulation[filter_on_realization]
-            - laboratory[filter_on_realization]
-            - True
-         
-         num type: 'string'
-         
-      fx_from_file
-         
-         You may provide some variables already horizontally remapped to some grid (i.e. Xios domain) in external files. The varname in file must match the referenced id in pingfile. Tested only for fixed fields. A dictionary with variable id as key and a dictionary as value: the key must be the grid id, the value a dictionary with the file for each resolution.
-         
-         fatal: False
-         
-         default values:
-            
-            - laboratory[fx_from_file]
-            - []
-         
-         num type: 'string'
-         
-      grid_choice
-         
-         A dictionary which keys are models name and values the corresponding resolution.
-         
-         fatal: True
-         
-         default values: laboratory[grid_choice][internal[source_id]]
-         
-         num type: 'string'
-         
-      grid_policy
-         
-         The grid choice policy for output files.
-         
-         fatal: True
-         
-         default values:
-            
-            - laboratory[grid_policy]
-            - False
-         
-         num type: 'string'
-         
-      grid_prefix
-         
-         Prefix of the dr2xml generated grid named to be used.
-         
-         fatal: True
-         
-         default values:
-            
-            - laboratory[grid_prefix]
-            - internal[ping_variables_prefix]
-         
-         num type: 'string'
-         
-      grids
-         
-         Grids : per model resolution and per context :- CMIP6 qualifier (i.e. 'gn' or 'gr') for the main grid chosen (because you  may choose has main production grid a regular one, when the native grid is e.g. unstructured)- Xios id for the production grid (if it is not the native grid),- Xios id for the latitude axis used for zonal means (mist match latitudes for grid above)- resolution of the production grid (using CMIP6 conventions),- grid description
-         
-         fatal: True
-         
-         default values: laboratory[grids]
-         
-         num type: 'string'
-         
-      grids_dev
-         
-         Grids definition for dev variables.
-         
-         fatal: True
-         
-         default values:
-            
-            - laboratory[grids_dev]
-            - {}
-         
-         num type: 'string'
-         
-      institution_id
-         
-         Institution identifier.
-         
-         fatal: True
-         
-         default values: laboratory[institution_id]
-         
-         num type: 'string'
-         
-      laboratory_used
-         
-         File which contains the settings to be used for a specific laboratory which is not present by default in dr2xml. Must contains at least the `lab_grid_policy` function.
-         
-         fatal: False
-         
-         default values:
-            
-            - laboratory[laboratory_used]
-            - None
-         
-         num type: 'string'
-         
-      listof_home_vars
-         
-         Full path to the file which contains the list of home variables to be taken into account, in addition to the Data Request.
-         
-         fatal: False
-         
-         default values:
-            
-            - simulation[listof_home_vars]
-            - laboratory[listof_home_vars]
-            - None
-         
-         num type: 'string'
-         
-      max_split_freq
-         
-         The maximum number of years that should be putted in a single file.
-         
-         fatal: True
-         
-         default values:
-            
-            - simulation[max_split_freq]
-            - laboratory[max_split_freq]
-            - None
-         
-         num type: 'string'
-         
-      mips
-         
-         A dictionary in which keys are grid and values a set of strings corresponding to MIPs names.
-         
-         fatal: True
-         
-         default values: laboratory[mips]
-         
-         num type: 'string'
-         
-      nemo_sources_management_policy_master_of_the_world
-         
-         Set that to True if you use a context named 'nemo' and the corresponding model unduly sets a general freq_op AT THE FIELD_DEFINITION GROUP LEVEL. Due to Xios rules for inheritance, that behavior prevents inheriting specific freq_ops by reference from dr2xml generated field_definitions.
-         
-         fatal: True
-         
-         default values:
-            
-            - laboratory[nemo_sources_management_policy_master_of_the_world]
-            - False
-         
-         num type: 'string'
-         
-      non_standard_attributes
-         
-         You may add a series of NetCDF attributes in all files for this simulation
-         
-         fatal: False
-         
-         default values:
-            
-            - laboratory[non_standard_attributes]
-            - {}
-         
-         num type: 'string'
-         
-      non_standard_axes
-         
-         If your model has some axis which does not have all its attributes as in DR, and you want dr2xml to fix that it, give here the correspondence from model axis id to DR dim/grid id. For label dimensions you should provide the  list of labels, ordered as in your model, as second element of a pair. Label-type axes will be processed even if not quoted. Scalar dimensions are not concerned by this feature. A dictionary with (axis_id, axis_correct_id) or (axis_id, tuple of labels) as key, values.
-         
-         fatal: False
-         
-         default values:
-            
-            - laboratory[non_standard_axes]
-            - {}
-         
-         num type: 'string'
-         
-      orography_field_name
-         
-         Name of the orography field name to be used to compute height over orog fields.
-         
-         fatal: False
-         
-         default values:
-            
-            - laboratory[orography_field_name]
-            - 'orog'
-         
-         num type: 'string'
-         
-      orphan_variables
-         
-         A dictionary with (context name, list of variables) as (key,value) pairs, where the list indicates the variables to be re-affected to the key-context (initially affected to a realm falling in another context)
-         
-         fatal: True
-         
-         default values: laboratory[orphan_variables]
-         
-         num type: 'string'
-         
-      path_extra_tables
-         
-         Full path of the directory which contains extra tables.
-         
-         fatal: False
-         
-         default values:
-            
-            - simulation[path_extra_tables]
-            - laboratory[path_extra_tables]
-            - None
-         
-         num type: 'string'
-         
-      path_to_parse
-         
-         The path of the directory which, at run time, contains the root XML file (iodef.xml).
-         
-         fatal: False
-         
-         default values:
-            
-            - laboratory[path_to_parse]
-            - './'
-         
-         num type: 'string'
-         
-      ping_variables_prefix
-         
-         The tag used to prefix the variables in the ‘field id’ namespaces of the ping file; may be an empty string.
-         
-         fatal: True
-         
-         default values: laboratory[ping_variables_prefix]
-         
-         num type: 'string'
-         
-      prefixed_orography_field_name
-         
-         Name of the orography field name to be used to compute height over orog fields prefixed with :term:`ping_variable_prefix`.
-         
-         fatal: False
-         
-         default values: '{}{}'.format(internal[ping_variables_prefix], internal[orography_field_name])
-         
-         num type: 'string'
-         
-      print_stats_per_var_label
-         
-         For an extended printout of selected CMOR variables, grouped by variable label.
-         
-         fatal: False
-         
-         default values:
-            
-            - laboratory[print_stats_per_var_label]
-            - False
-         
-         num type: 'string'
-         
-      print_variables
-         
-         If the value is a list, only the file/field variables listed here will be put in output files. If boolean, tell if the file/field variables should be put in output files.
-         
-         fatal: False
-         
-         default values:
-            
-            - laboratory[print_variables]
-            - True
-         
-         num type: 'string'
-         
-      project
-         
-         Project associated with the simulation.
-         
-         fatal: False
-         
-         default values:
-            
-            - laboratory[project]
-            - 'CMIP6'
-         
-         num type: 'string'
-         
-      project_settings
-         
-         Project settings definition file to be used.
-         
-         fatal: False
-         
-         default values:
-            
-            - laboratory[project_settings]
-            - internal[project]
-         
-         num type: 'string'
-         
-      realization_index
-         
-         Realization number.
-         
-         fatal: False
-         
-         default values:
-            
-            - simulation[realization_index]
-            - '1'
-         
-         num type: 'string'
-         
-      realms_per_context
-         
-         A dictionary which keys are context names and values the lists of realms associated with each context
-         
-         fatal: True
-         
-         default values: laboratory[realms_per_context][internal[context]]
-         
-         num type: 'string'
-         
-      required_model_components
-         
-         Dictionary which gives, for each model name, the components that must be present.
-         
-         fatal: True
-         
-         default values:
-            
-            - laboratory[required_model_components][internal[source_id]]
-            - []
-         
-         num type: 'string'
-         
-      sampling_timestep
-         
-         Basic sampling timestep set in your field definition (used to feed metadata 'interval_operation'). Should be a dictionary which keys are resolutions and values a context/timestep dictionary.
-         
-         fatal: True
-         
-         default values: laboratory[sampling_timestep]
-         
-         num type: 'string'
-         
-      save_project_settings
-         
-         The path of the file where the complete project settings will be written, if needed.
-         
-         fatal: False
-         
-         default values:
-            
-            - laboratory[save_project_settings]
-            - None
-         
-         num type: 'string'
-         
-      sectors
-         
-         List of the sectors to be considered.
-         
-         fatal: False
-         
-         default values: laboratory[sectors]
-         
-         num type: 'string'
-         
-      simple_domain_grid_regexp
-         
-         If some grid is not defined in xml but by API, and is referenced by a field which is considered by the DR as having a singleton dimension, then: 1) it must be a grid which has only a domain 2) the domain name must be extractable from the grid_id using a regexp and a group number Example: using a pattern that returns full id except for a '_grid' suffix
-         
-         fatal: False
-         
-         default values: laboratory[simple_domain_grid_regexp]
-         
-         num type: 'string'
-         
-      sizes
-         
-         A dictionary which keys are resolution and values the associated grid size for atmosphere and ocean grids. The grid size looks like : ['nho', 'nlo', 'nha', 'nla', 'nlas', 'nls', 'nh1']. Used to compute file split frequency.
-         
-         fatal: True
-         
-         default values: laboratory[sizes][internal[grid_choice]]format_sizes()
-         
-         num type: 'string'
-         
-      source_id
-         
-         Name of the model used.
-         
-         fatal: True
-         
-         default values:
-            
-            - laboratory[configurations][internal[configuration]][0]
-            - simulation[source_id]
-         
-         num type: 'string'
-         
-      source_type
-         
-         If the default source-type value for your source (:term:`source_types` from :term:`lab_and_model_settings`) does not fit, you may change it here. This should describe the model most directly responsible for the output. Sometimes it is appropriate to list two (or more) model types here, among AER, AGCM, AOGCM, BGC, CHEM, ISM, LAND, OGCM, RAD, SLAB e.g. amip , run with CNRM-CM6-1, should quote "AGCM AER". Also see note 14 of https://docs.google.com/document/d/1h0r8RZr_f3-8egBMMh7aqLwy3snpD6_MrDz1q8n5XUk/edit
-         
-         fatal: True
-         
-         default values:
-            
-            - laboratory[configurations][internal[configuration]][1]
-            - simulation[source_type]
-            - laboratory[source_types][internal[source_id]]
-         
-         num type: 'string'
-         
-      special_timestep_vars
-         
-         This variable is used when some variables are computed with a period which is not the basic timestep. A dictionary which keys are non standard timestep and values the list of variables which are computed at this timestep.
-         
-         fatal: False
-         
-         default values:
-            
-            - laboratory[special_timestep_vars]
-            - []
-         
-         num type: 'string'
-         
-      split_frequencies
-         
-         Path to the split frequencies file to be used.
-         
-         fatal: False
-         
-         default values:
-            
-            - simulation[split_frequencies]
-            - laboratory[split_frequencies]
-            - 'splitfreqs.dat'
-         
-         num type: 'string'
-         
-      synchronisation_frequency
-         
-         Frequency at which the synchronisation between buffer and filesystem is done.
-         
-         fatal: False
-         
-         default values: []
-         
-         num type: 'string'
-         
-      tierMax
-         
-         Number indicating the maximum tier to consider for experiments.
-         
-         fatal: True
-         
-         default values:
-            
-            - simulation[tierMax]
-            - internal[tierMax_lset]
-         
-         num type: 'string'
-         
-      tierMax_lset
-         
-         Number indicating the maximum tier to consider for experiments from lab settings.
-         
-         fatal: True
-         
-         default values: laboratory[tierMax]
-         
-         num type: 'string'
-         
-      too_long_periods
-         
-         The CMIP6 frequencies that are unreachable for a single model run. Datafiles will be labelled with dates consistent with content (but not with CMIP6 requirements). Allowed values are only 'dec' and 'yr'.
-         
-         fatal: True
-         
-         default values:
-            
-            - laboratory[too_long_periods]
-            - []
-         
-         num type: 'string'
-         
-      useAtForInstant
-         
-         Should xml output files use the `@` symbol for definitions for instant variables?
-         
-         fatal: False
-         
-         default values:
-            
-            - laboratory[useAtForInstant]
-            - False
-         
-         num type: 'string'
-         
-      use_cmorvar_label_in_filename
-         
-         CMIP6 rule is that filenames includes the variable label, and that this variable label is not the CMORvar label, but 'MIPvar' label. This may lead to conflicts, e.g. for 'ua' and 'ua7h' in table 6hPlevPt; allows to avoid that, if set to True.
-         
-         fatal: True
-         
-         default values:
-            
-            - laboratory[use_cmorvar_label_in_filename]
-            - False
-         
-         num type: 'string'
-         
-      use_union_zoom
-         
-         Say if you want to use XIOS union/zoom axis to optimize vertical interpolation requested by the DR.
-         
-         fatal: False
-         
-         default values:
-            
-            - laboratory[use_union_zoom]
-            - False
-         
-         num type: 'string'
-         
-      vertical_interpolation_operation
-         
-         Operation done for vertical interpolation.
-         
-         fatal: False
-         
-         default values:
-            
-            - laboratory[vertical_interpolation_operation]
-            - 'instant'
-         
-         num type: 'string'
-         
-      vertical_interpolation_sample_freq
-         
-         Time frequency of vertical interpolation.
-         
-         fatal: False
-         
-         default values: laboratory[vertical_interpolation_sample_freq]
-         
-         num type: 'string'
-         
-      xios_version
-         
-         Version of XIOS used.
-         
-         fatal: False
-         
-         default values:
-            
-            - laboratory[xios_version]
-            - 2
-         
-         num type: 'string'
-         
-      year
-         
-         Year associated with the launch of dr2xml.
-         
-         fatal: True
-         
-         default values: dict[year]
-         
-         num type: 'string'
-         
-      zg_field_name
-         
-         Name of the geopotential height field name to be used to compute height over orog fields.
-         
-         fatal: False
-         
-         default values:
-            
-            - laboratory[zg_field_name]
-            - 'zg'
-         
-         num type: 'string'
-         
-   Common values
-   ^^^^^^^^^^^^^
-   .. glossary::
-      :sorted:
-      
-      prefix
-         
-         Prefix to be used for each file definition.
-         
-         fatal: True
-         
-         default values: dict[prefix]
-         
-         num type: 'string'
-         
-Data Request
-------------
-   Internal values
-   ^^^^^^^^^^^^^^^
-   .. glossary::
-      :sorted:
-      
       data_request_config
          
          Configuration file of the data request content to be used
@@ -899,83 +233,45 @@ Data Request
          
          num type: 'string'
          
-
-File
-----
-   Internal values
-   ^^^^^^^^^^^^^^^
-   .. glossary::
-      :sorted:
-      
-      bytes_per_float
+      debug_parsing
          
-         Estimate of number of bytes per floating value, given the chosen :term:`compression_level`.
+         In order to identify which xml files generates a problem, you can use this flag.
          
          fatal: False
          
          default values:
             
-            - laboratory[bytes_per_float]
-            - 2
+            - laboratory[debug_parsing]
+            - False
          
          num type: 'string'
          
-      grouped_vars_per_file
+      dr2xml_manages_enddate
          
-         Variables to be grouped in the same output file (provided additional conditions are filled).
+         A smart workflow will allow you to extend a simulation during it course and to complement the output files accordingly, by managing the 'end date' part in filenames. You can then set next setting to False.
+         
+         fatal: True
+         
+         default values:
+            
+            - laboratory[dr2xml_manages_enddate]
+            - True
+         
+         num type: 'string'
+         
+      end_year
+         
+         If you want to carry on the experiment beyond the duration set in DR, and that all requestItems that apply to DR end year also apply later on, set 'end_year' You can also set it if you don't know if DR has a wrong value
          
          fatal: False
          
          default values:
             
-            - simulation[grouped_vars_per_file]
-            - laboratory[grouped_vars_per_file]
-            - []
+            - simulation[end_year]
+            - False
          
          num type: 'string'
          
-      max_file_size_in_floats
-         
-         The maximum size of generated files in number of floating values.
-         
-         fatal: False
-         
-         default values:
-            
-            - laboratory[max_file_size_in_floats]
-            - 500000000.0
-         
-         num type: 'string'
-         
-
-Home data request
------------------
-   Internal values
-   ^^^^^^^^^^^^^^^
-   .. glossary::
-      :sorted:
-      
-      perso_sdims_description
-         
-         A dictionary containing, for each perso or dev variables with a XY-perso shape, and for each vertical coordinate associated, the main attributes of the dimension.
-         
-         fatal: False
-         
-         default values:
-            
-            - simulation[perso_sdims_description]
-            - {}
-         
-         num type: 'string'
-         
-
-Selection
----------
-   Internal values
-   ^^^^^^^^^^^^^^^
-   .. glossary::
-      :sorted:
-      
       excluded_opportunities_lset
          
          List of the opportunities that will be excluded from outputs from laboratory settings.
@@ -1145,6 +441,129 @@ Selection
          
          num type: 'string'
          
+      experiment_for_requests
+         
+         Experiment id to use for driving the use of the Data Request.
+         
+         fatal: True
+         
+         default values:
+            
+            - simulation[experiment_for_requests]
+            - internal[experiment_id]
+         
+         num type: 'string'
+         
+      experiment_id
+         
+         Root experiment identifier.
+         
+         fatal: True
+         
+         default values: simulation[experiment_id]
+         
+         num type: 'string'
+         
+      filter_on_realization
+         
+         If you want to produce the same variables set for all members, set this parameter to False.
+         
+         fatal: False
+         
+         default values:
+            
+            - simulation[filter_on_realization]
+            - laboratory[filter_on_realization]
+            - True
+         
+         num type: 'string'
+         
+      fx_from_file
+         
+         You may provide some variables already horizontally remapped to some grid (i.e. Xios domain) in external files. The varname in file must match the referenced id in pingfile. Tested only for fixed fields. A dictionary with variable id as key and a dictionary as value: the key must be the grid id, the value a dictionary with the file for each resolution.
+         
+         fatal: False
+         
+         default values:
+            
+            - laboratory[fx_from_file]
+            - []
+         
+         num type: 'string'
+         
+      grid_choice
+         
+         A dictionary which keys are models name and values the corresponding resolution.
+         
+         fatal: True
+         
+         default values: laboratory[grid_choice][internal[source_id]]
+         
+         num type: 'string'
+         
+      grid_policy
+         
+         The grid choice policy for output files.
+         
+         fatal: True
+         
+         default values:
+            
+            - laboratory[grid_policy]
+            - False
+         
+         num type: 'string'
+         
+      grid_prefix
+         
+         Prefix of the dr2xml generated grid named to be used.
+         
+         fatal: True
+         
+         default values:
+            
+            - laboratory[grid_prefix]
+            - internal[ping_variables_prefix]
+         
+         num type: 'string'
+         
+      grids
+         
+         Grids : per model resolution and per context :- CMIP6 qualifier (i.e. 'gn' or 'gr') for the main grid chosen (because you  may choose has main production grid a regular one, when the native grid is e.g. unstructured)- Xios id for the production grid (if it is not the native grid),- Xios id for the latitude axis used for zonal means (mist match latitudes for grid above)- resolution of the production grid (using CMIP6 conventions),- grid description
+         
+         fatal: True
+         
+         default values: laboratory[grids]
+         
+         num type: 'string'
+         
+      grids_dev
+         
+         Grids definition for dev variables.
+         
+         fatal: True
+         
+         default values:
+            
+            - laboratory[grids_dev]
+            - {}
+         
+         num type: 'string'
+         
+      grouped_vars_per_file
+         
+         Variables to be grouped in the same output file (provided additional conditions are filled).
+         
+         fatal: False
+         
+         default values:
+            
+            - simulation[grouped_vars_per_file]
+            - laboratory[grouped_vars_per_file]
+            - []
+         
+         num type: 'string'
+         
       included_opportunities
          
          List of opportunities that will be processed (all others will not).
@@ -1262,6 +681,56 @@ Selection
          
          num type: 'string'
          
+      institution_id
+         
+         Institution identifier.
+         
+         fatal: True
+         
+         default values: laboratory[institution_id]
+         
+         num type: 'string'
+         
+      laboratory_used
+         
+         File which contains the settings to be used for a specific laboratory which is not present by default in dr2xml. Must contains at least the `lab_grid_policy` function.
+         
+         fatal: False
+         
+         default values:
+            
+            - laboratory[laboratory_used]
+            - None
+         
+         num type: 'string'
+         
+      listof_home_vars
+         
+         Full path to the file which contains the list of home variables to be taken into account, in addition to the Data Request.
+         
+         fatal: False
+         
+         default values:
+            
+            - simulation[listof_home_vars]
+            - laboratory[listof_home_vars]
+            - None
+         
+         num type: 'string'
+         
+      max_file_size_in_floats
+         
+         The maximum size of generated files in number of floating values.
+         
+         fatal: False
+         
+         default values:
+            
+            - laboratory[max_file_size_in_floats]
+            - 500000000.0
+         
+         num type: 'string'
+         
       max_priority
          
          Max variable priority level to be output (you may set 3 when creating ping_files while being more restrictive at run time).
@@ -1282,6 +751,273 @@ Selection
          fatal: True
          
          default values: laboratory[max_priority]
+         
+         num type: 'string'
+         
+      max_split_freq
+         
+         The maximum number of years that should be putted in a single file.
+         
+         fatal: True
+         
+         default values:
+            
+            - simulation[max_split_freq]
+            - laboratory[max_split_freq]
+            - None
+         
+         num type: 'string'
+         
+      mips
+         
+         A dictionary in which keys are grid and values a set of strings corresponding to MIPs names.
+         
+         fatal: True
+         
+         default values: laboratory[mips]
+         
+         num type: 'string'
+         
+      nemo_sources_management_policy_master_of_the_world
+         
+         Set that to True if you use a context named 'nemo' and the corresponding model unduly sets a general freq_op AT THE FIELD_DEFINITION GROUP LEVEL. Due to Xios rules for inheritance, that behavior prevents inheriting specific freq_ops by reference from dr2xml generated field_definitions.
+         
+         fatal: True
+         
+         default values:
+            
+            - laboratory[nemo_sources_management_policy_master_of_the_world]
+            - False
+         
+         num type: 'string'
+         
+      non_standard_attributes
+         
+         You may add a series of NetCDF attributes in all files for this simulation
+         
+         fatal: False
+         
+         default values:
+            
+            - laboratory[non_standard_attributes]
+            - {}
+         
+         num type: 'string'
+         
+      non_standard_axes
+         
+         If your model has some axis which does not have all its attributes as in DR, and you want dr2xml to fix that it, give here the correspondence from model axis id to DR dim/grid id. For label dimensions you should provide the  list of labels, ordered as in your model, as second element of a pair. Label-type axes will be processed even if not quoted. Scalar dimensions are not concerned by this feature. A dictionary with (axis_id, axis_correct_id) or (axis_id, tuple of labels) as key, values.
+         
+         fatal: False
+         
+         default values:
+            
+            - laboratory[non_standard_axes]
+            - {}
+         
+         num type: 'string'
+         
+      orography_field_name
+         
+         Name of the orography field name to be used to compute height over orog fields.
+         
+         fatal: False
+         
+         default values:
+            
+            - laboratory[orography_field_name]
+            - 'orog'
+         
+         num type: 'string'
+         
+      orphan_variables
+         
+         A dictionary with (context name, list of variables) as (key,value) pairs, where the list indicates the variables to be re-affected to the key-context (initially affected to a realm falling in another context)
+         
+         fatal: True
+         
+         default values: laboratory[orphan_variables]
+         
+         num type: 'string'
+         
+      path_extra_tables
+         
+         Full path of the directory which contains extra tables.
+         
+         fatal: False
+         
+         default values:
+            
+            - simulation[path_extra_tables]
+            - laboratory[path_extra_tables]
+            - None
+         
+         num type: 'string'
+         
+      path_to_parse
+         
+         The path of the directory which, at run time, contains the root XML file (iodef.xml).
+         
+         fatal: False
+         
+         default values:
+            
+            - laboratory[path_to_parse]
+            - './'
+         
+         num type: 'string'
+         
+      perso_sdims_description
+         
+         A dictionary containing, for each perso or dev variables with a XY-perso shape, and for each vertical coordinate associated, the main attributes of the dimension.
+         
+         fatal: False
+         
+         default values:
+            
+            - simulation[perso_sdims_description]
+            - {}
+         
+         num type: 'string'
+         
+      ping_variables_prefix
+         
+         The tag used to prefix the variables in the ‘field id’ namespaces of the ping file; may be an empty string.
+         
+         fatal: True
+         
+         default values: laboratory[ping_variables_prefix]
+         
+         num type: 'string'
+         
+      prefixed_orography_field_name
+         
+         Name of the orography field name to be used to compute height over orog fields prefixed with :term:`ping_variable_prefix`.
+         
+         fatal: False
+         
+         default values: '{}{}'.format(internal[ping_variables_prefix], internal[orography_field_name])
+         
+         num type: 'string'
+         
+      print_stats_per_var_label
+         
+         For an extended printout of selected CMOR variables, grouped by variable label.
+         
+         fatal: False
+         
+         default values:
+            
+            - laboratory[print_stats_per_var_label]
+            - False
+         
+         num type: 'string'
+         
+      print_variables
+         
+         If the value is a list, only the file/field variables listed here will be put in output files. If boolean, tell if the file/field variables should be put in output files.
+         
+         fatal: False
+         
+         default values:
+            
+            - laboratory[print_variables]
+            - True
+         
+         num type: 'string'
+         
+      project
+         
+         Project associated with the simulation.
+         
+         fatal: False
+         
+         default values:
+            
+            - laboratory[project]
+            - 'CMIP6'
+         
+         num type: 'string'
+         
+      project_settings
+         
+         Project settings definition file to be used.
+         
+         fatal: False
+         
+         default values:
+            
+            - laboratory[project_settings]
+            - internal[project]
+         
+         num type: 'string'
+         
+      realization_index
+         
+         Realization number.
+         
+         fatal: False
+         
+         default values:
+            
+            - simulation[realization_index]
+            - '1'
+         
+         num type: 'string'
+         
+      realms_per_context
+         
+         A dictionary which keys are context names and values the lists of realms associated with each context
+         
+         fatal: True
+         
+         default values: laboratory[realms_per_context][internal[context]]
+         
+         num type: 'string'
+         
+      required_model_components
+         
+         Dictionary which gives, for each model name, the components that must be present.
+         
+         fatal: True
+         
+         default values:
+            
+            - laboratory[required_model_components][internal[source_id]]
+            - []
+         
+         num type: 'string'
+         
+      sampling_timestep
+         
+         Basic sampling timestep set in your field definition (used to feed metadata 'interval_operation'). Should be a dictionary which keys are resolutions and values a context/timestep dictionary.
+         
+         fatal: True
+         
+         default values: laboratory[sampling_timestep]
+         
+         num type: 'string'
+         
+      save_project_settings
+         
+         The path of the file where the complete project settings will be written, if needed.
+         
+         fatal: False
+         
+         default values:
+            
+            - laboratory[save_project_settings]
+            - None
+         
+         num type: 'string'
+         
+      sectors
+         
+         List of the sectors to be considered.
+         
+         fatal: False
+         
+         default values: laboratory[sectors]
          
          num type: 'string'
          
@@ -2027,7 +1763,239 @@ Selection
          
          num type: 'string'
          
-
+      simple_domain_grid_regexp
+         
+         If some grid is not defined in xml but by API, and is referenced by a field which is considered by the DR as having a singleton dimension, then: 1) it must be a grid which has only a domain 2) the domain name must be extractable from the grid_id using a regexp and a group number Example: using a pattern that returns full id except for a '_grid' suffix
+         
+         fatal: False
+         
+         default values: laboratory[simple_domain_grid_regexp]
+         
+         num type: 'string'
+         
+      sizes
+         
+         A dictionary which keys are resolution and values the associated grid size for atmosphere and ocean grids. The grid size looks like : ['nho', 'nlo', 'nha', 'nla', 'nlas', 'nls', 'nh1']. Used to compute file split frequency.
+         
+         fatal: True
+         
+         default values: laboratory[sizes][internal[grid_choice]]format_sizes()
+         
+         num type: 'string'
+         
+      source_id
+         
+         Name of the model used.
+         
+         fatal: True
+         
+         default values:
+            
+            - laboratory[configurations][internal[configuration]][0]
+            - simulation[source_id]
+         
+         num type: 'string'
+         
+      source_type
+         
+         If the default source-type value for your source (:term:`source_types` from :term:`lab_and_model_settings`) does not fit, you may change it here. This should describe the model most directly responsible for the output. Sometimes it is appropriate to list two (or more) model types here, among AER, AGCM, AOGCM, BGC, CHEM, ISM, LAND, OGCM, RAD, SLAB e.g. amip , run with CNRM-CM6-1, should quote "AGCM AER". Also see note 14 of https://docs.google.com/document/d/1h0r8RZr_f3-8egBMMh7aqLwy3snpD6_MrDz1q8n5XUk/edit
+         
+         fatal: True
+         
+         default values:
+            
+            - laboratory[configurations][internal[configuration]][1]
+            - simulation[source_type]
+            - laboratory[source_types][internal[source_id]]
+         
+         num type: 'string'
+         
+      special_timestep_vars
+         
+         This variable is used when some variables are computed with a period which is not the basic timestep. A dictionary which keys are non standard timestep and values the list of variables which are computed at this timestep.
+         
+         fatal: False
+         
+         default values:
+            
+            - laboratory[special_timestep_vars]
+            - []
+         
+         num type: 'string'
+         
+      split_frequencies
+         
+         Path to the split frequencies file to be used.
+         
+         fatal: False
+         
+         default values:
+            
+            - simulation[split_frequencies]
+            - laboratory[split_frequencies]
+            - 'splitfreqs.dat'
+         
+         num type: 'string'
+         
+      synchronisation_frequency
+         
+         Frequency at which the synchronisation between buffer and filesystem is done.
+         
+         fatal: False
+         
+         default values: []
+         
+         num type: 'string'
+         
+      tierMax
+         
+         Number indicating the maximum tier to consider for experiments.
+         
+         fatal: True
+         
+         default values:
+            
+            - simulation[tierMax]
+            - internal[tierMax_lset]
+         
+         num type: 'string'
+         
+      tierMax_lset
+         
+         Number indicating the maximum tier to consider for experiments from lab settings.
+         
+         fatal: True
+         
+         default values: laboratory[tierMax]
+         
+         num type: 'string'
+         
+      too_long_periods
+         
+         The CMIP6 frequencies that are unreachable for a single model run. Datafiles will be labelled with dates consistent with content (but not with CMIP6 requirements). Allowed values are only 'dec' and 'yr'.
+         
+         fatal: True
+         
+         default values:
+            
+            - laboratory[too_long_periods]
+            - []
+         
+         num type: 'string'
+         
+      useAtForInstant
+         
+         Should xml output files use the `@` symbol for definitions for instant variables?
+         
+         fatal: False
+         
+         default values:
+            
+            - laboratory[useAtForInstant]
+            - False
+         
+         num type: 'string'
+         
+      use_cmorvar_label_in_filename
+         
+         CMIP6 rule is that filenames includes the variable label, and that this variable label is not the CMORvar label, but 'MIPvar' label. This may lead to conflicts, e.g. for 'ua' and 'ua7h' in table 6hPlevPt; allows to avoid that, if set to True.
+         
+         fatal: True
+         
+         default values:
+            
+            - laboratory[use_cmorvar_label_in_filename]
+            - False
+         
+         num type: 'string'
+         
+      use_union_zoom
+         
+         Say if you want to use XIOS union/zoom axis to optimize vertical interpolation requested by the DR.
+         
+         fatal: False
+         
+         default values:
+            
+            - laboratory[use_union_zoom]
+            - False
+         
+         num type: 'string'
+         
+      vertical_interpolation_operation
+         
+         Operation done for vertical interpolation.
+         
+         fatal: False
+         
+         default values:
+            
+            - laboratory[vertical_interpolation_operation]
+            - 'instant'
+         
+         num type: 'string'
+         
+      vertical_interpolation_sample_freq
+         
+         Time frequency of vertical interpolation.
+         
+         fatal: False
+         
+         default values: laboratory[vertical_interpolation_sample_freq]
+         
+         num type: 'string'
+         
+      xios_version
+         
+         Version of XIOS used.
+         
+         fatal: False
+         
+         default values:
+            
+            - laboratory[xios_version]
+            - 2
+         
+         num type: 'string'
+         
+      year
+         
+         Year associated with the launch of dr2xml.
+         
+         fatal: True
+         
+         default values: dict[year]
+         
+         num type: 'string'
+         
+      zg_field_name
+         
+         Name of the geopotential height field name to be used to compute height over orog fields.
+         
+         fatal: False
+         
+         default values:
+            
+            - laboratory[zg_field_name]
+            - 'zg'
+         
+         num type: 'string'
+         
+   Common values
+   ^^^^^^^^^^^^^
+   .. glossary::
+      :sorted:
+      
+      prefix
+         
+         Prefix to be used for each file definition.
+         
+         fatal: True
+         
+         default values: dict[prefix]
+         
+         num type: 'string'
+         
 Project settings
 ----------------
 .. glossary::
