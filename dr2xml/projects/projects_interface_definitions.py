@@ -346,7 +346,7 @@ class ParameterSettings(Settings):
         return dict(skip_values=list(), forbidden_patterns=list(), conditions=list(), default_values=list(),
                     cases=list(), authorized_values=list(), authorized_types=list(), corrections=dict(),
                     output_key=None, num_type="string", is_default=False, fatal=False, key=None, help="TODO",
-                    target_type=None)
+                    target_type=None, section=None)
 
     def dump_doc(self, force_void=False):
         rep = list()
