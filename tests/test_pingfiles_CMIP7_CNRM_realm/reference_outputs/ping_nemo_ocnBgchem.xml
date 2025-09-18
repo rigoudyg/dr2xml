@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <context id="nemo">
-	<!--CMIP7 Data Request version Software current_cmip7_dr_software - Content v1.2.2-->
+	<!--CMIP7 Data Request version Software current_cmip7_dr_software - Content test-->
 	<!--dr2xml version current_version-->
 	<!--Lab_and_model settings
-{'data_request_content_version' = 'v1.2.2',
+{'data_request_content_version' = 'tests',
 'data_request_used' = 'CMIP7',
 'excluded_vars' = [],
 'excluded_vars_file' = [],
 'institution_id' = 'CNRM-CERFACS',
 'listof_home_vars' = 'None',
 'max_priority' = '3',
-'mips' = {'AerChemMIP2', 'C4MIP', 'CDRMIP', 'CERESMIP', 'CFMIP', 'CMIP', 'CORDEX', 'DAMIP', 'DCPP', 'FAFMIP', 'FireMIP', 'FishMIP', 'GeoMIP', 'HT-MIP/VolMIP', 'HighResMIP', 'IRRMIP', 'ISIMIP', 'ISMIP7', 'LMIP', 'LUMIP', 'LongRunMIP', 'MISOMIP2', 'NAHosMIP', 'OMIP', 'Other', 'PAMIP', 'PMIP', 'RAMIP', 'RFMIP', 'SIMIP', 'SOFIAMIP', 'ScenarioMIP', 'TIPMIP', 'VIACSAB', 'VolMIP', 'WhatIfMIP'},
+'mips' = {},
 'path_extra_tables' = 'None',
 'path_special_defs' = './input/special_defs',
 'ping_variables_prefix' = 'CMIP7_',
@@ -25,265 +25,19 @@
 		<!--P3 (mol m-3) mole_concentration_of_aragonite_expressed_as_carbon_in_sea_water : sum of particulate aragonite components (e.g. Phytoplankton, Detrital, etc.)-->
 		<field id="CMIP7_aragos" field_ref="?dummy_XY"/>
 		<!--P3 (mol m-3) mole_concentration_of_aragonite_expressed_as_carbon_in_sea_water : sum of particulate aragonite components (e.g. Phytoplankton, Detrital, etc.)-->
-		<field id="CMIP7_baccos" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-3) mole_concentration_of_bacteria_expressed_as_carbon_in_sea_water : sum of bacterial carbon component concentrations-->
 		<field id="CMIP7_calc" field_ref="?dummy_XYO"/>
 		<!--P3 (mol m-3) mole_concentration_of_calcite_expressed_as_carbon_in_sea_water : sum of particulate calcite component concentrations (e.g. Phytoplankton, Detrital, etc.)-->
 		<field id="CMIP7_calcos" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-3) mole_concentration_of_calcite_expressed_as_carbon_in_sea_water : sum of particulate calcite component concentrations (e.g. Phytoplankton, Detrital, etc.)-->
-		<field id="CMIP7_chl" field_ref="?dummy_XYO"/>
-		<!--P2 (kg m-3) mass_concentration_of_phytoplankton_expressed_as_chlorophyll_in_sea_water : sum of chlorophyll from all phytoplankton group concentrations.  In most models this is equal to chldiat+chlmisc, that is the sum of "Diatom Chlorophyll Mass Concentration" plus "Other Phytoplankton Chlorophyll Mass Concentration"-->
-		<field id="CMIP7_chlcalc" field_ref="?dummy_XYO"/>
-		<!--P3 (kg m-3) mass_concentration_of_calcareous_phytoplankton_expressed_as_chlorophyll_in_sea_water : chlorophyll concentration from the calcite-producing phytoplankton component alone-->
-		<field id="CMIP7_chlcalcos" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-3) mass_concentration_of_calcareous_phytoplankton_expressed_as_chlorophyll_in_sea_water : chlorophyll concentration from the calcite-producing phytoplankton component alone-->
-		<field id="CMIP7_chldiat" field_ref="?dummy_XYO"/>
-		<!--P2 (kg m-3) mass_concentration_of_diatoms_expressed_as_chlorophyll_in_sea_water : chlorophyll from diatom phytoplankton component concentration alone-->
-		<field id="CMIP7_chldiatos" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-3) mass_concentration_of_diatoms_expressed_as_chlorophyll_in_sea_water : chlorophyll from diatom phytoplankton component concentration alone-->
-		<field id="CMIP7_chldiaz" field_ref="?dummy_XYO"/>
-		<!--P2 (kg m-3) mass_concentration_of_diazotrophic_phytoplankton_expressed_as_chlorophyll_in_sea_water : chlorophyll concentration from the diazotrophic phytoplankton component alone-->
-		<field id="CMIP7_chldiazos" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-3) mass_concentration_of_diazotrophic_phytoplankton_expressed_as_chlorophyll_in_sea_water : chlorophyll concentration from the diazotrophic phytoplankton component alone-->
-		<field id="CMIP7_chlmisc" field_ref="?dummy_XYO"/>
-		<!--P2 (kg m-3) mass_concentration_of_miscellaneous_phytoplankton_expressed_as_chlorophyll_in_sea_water : chlorophyll from additional phytoplankton component concentrations alone-->
-		<field id="CMIP7_chlmiscos" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-3) mass_concentration_of_miscellaneous_phytoplankton_expressed_as_chlorophyll_in_sea_water : chlorophyll from additional phytoplankton component concentrations alone-->
-		<field id="CMIP7_chlos" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-3) mass_concentration_of_phytoplankton_expressed_as_chlorophyll_in_sea_water : sum of chlorophyll from all phytoplankton group concentrations.  In most models this is equal to chldiat+chlmisc, that is the sum of "Diatom Chlorophyll Mass Concentration" plus "Other Phytoplankton Chlorophyll Mass Concentration"-->
-		<field id="CMIP7_chlpico" field_ref="?dummy_XYO"/>
-		<!--P2 (kg m-3) mass_concentration_of_picophytoplankton_expressed_as_chlorophyll_in_sea_water : chlorophyll concentration from the picophytoplankton (<2 um) component alone-->
-		<field id="CMIP7_chlpicoos" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-3) mass_concentration_of_picophytoplankton_expressed_as_chlorophyll_in_sea_water : chlorophyll concentration from the picophytoplankton (<2 um) component alone-->
-		<field id="CMIP7_co3" field_ref="?dummy_XY_op20bar"/>
-		<!--P3 (mol m-3) mole_concentration_of_carbonate_expressed_as_carbon_in_sea_water : Mole concentration (number of moles per unit volume: molarity) of the carbonate anion (CO3).-->
-		<field id="CMIP7_co3os" field_ref="?dummy_XY"/>
-		<!--P3 (mol m-3) mole_concentration_of_carbonate_expressed_as_carbon_in_sea_water : Near surface mole concentration (number of moles per unit volume: molarity) of the carbonate anion (CO3).-->
-		<field id="CMIP7_co3satarag" field_ref="?dummy_XY_op20bar"/>
-		<!--P3 (mol m-3) mole_concentration_of_carbonate_expressed_as_carbon_at_equilibrium_with_pure_aragonite_in_sea_water : Mole concentration (number of moles per unit volume: molarity) of the carbonate anion (CO3) for sea water in equilibrium with pure Aragonite. Aragonite (CaCO3) is a mineral that is a polymorph of calcium carbonate.-->
-		<field id="CMIP7_co3sataragos" field_ref="?dummy_XY"/>
-		<!--P3 (mol m-3) mole_concentration_of_carbonate_expressed_as_carbon_at_equilibrium_with_pure_aragonite_in_sea_water : Near surface mole concentration (number of moles per unit volume: molarity) of the carbonate anion (CO3) for sea water in equilibrium with pure Aragonite. Aragonite (CaCO3) is a mineral that is a polymorph of calcium carbonate.-->
-		<field id="CMIP7_detoc" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_organic_detritus_expressed_as_carbon_in_sea_water : sum of detrital organic carbon component concentrations-->
-		<field id="CMIP7_dfe" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_dissolved_iron_in_sea_water : dissolved iron in sea water is meant to include both Fe2+ and Fe3+ ions (but not, e.g., particulate detrital iron)-->
-		<field id="CMIP7_dfeos" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-3) mole_concentration_of_dissolved_iron_in_sea_water : dissolved iron in sea water is meant to include both Fe2+ and Fe3+ ions (but not, e.g., particulate detrital iron)-->
+		<!--P3 (mol m-3) mole_concentration_of_calcite_expressed_as_carbon_in_sea_water : sum of particulate calcite component concentrations (e.g. Phytoplankton, Detrital, etc.)-->
+		<field id="CMIP7_chl" field_ref="?dummy_XY_op20bar"/>
+		<!--P3 (kg m-3) mass_concentration_of_phytoplankton_expressed_as_chlorophyll_in_sea_water : Sum of chlorophyll from all phytoplankton group concentrations. In most models this is equal to chldiat+chlmisc, that is the sum of Diatom Chlorophyll Mass Concentration and Other Phytoplankton Chlorophyll Mass Concentration-->
 		<field id="CMIP7_dissic" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_dissolved_inorganic_carbon_in_sea_water : Dissolved inorganic carbon (CO3+HCO3+H2CO3) concentration-->
-		<field id="CMIP7_dissicos" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-3) mole_concentration_of_dissolved_inorganic_carbon_in_sea_water : Dissolved inorganic carbon (CO3+HCO3+H2CO3) concentration-->
-		<field id="CMIP7_dissoc" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_dissolved_organic_carbon_in_sea_water : Sum of dissolved carbon component concentrations explicitly represented (i.e. not ~40 uM refractory unless explicit)-->
-		<field id="CMIP7_dmso" field_ref="?dummy_XYO"/>
-		<!--P3 (mol m-3) mole_concentration_of_dimethyl_sulfide_in_sea_water : Mole concentration of dimethyl sulphide in water-->
-		<field id="CMIP7_dmsos" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-3) mole_concentration_of_dimethyl_sulfide_in_sea_water : Mole concentration of dimethyl sulphide in water in the near surface layer-->
-		<field id="CMIP7_dpco2" field_ref="?dummy_XY_depth0m"/>
-		<!--P2 (Pa) surface_carbon_dioxide_partial_pressure_difference_between_sea_water_and_air : Difference in partial pressure of carbon dioxide between sea water and air.  The partial pressure of a dissolved gas in sea water is the partial pressure in air with which it would be in equilibrium.-->
-		<field id="CMIP7_dpo2" field_ref="?dummy_XY"/>
-		<!--P2 (Pa) surface_molecular_oxygen_partial_pressure_difference_between_sea_water_and_air : The partial pressure of a dissolved gas in sea water is the partial pressure in air with which it would be in equilibrium.  The partial pressure of a gaseous constituent of air is the pressure which it alone would exert with unchanged temperature and number of moles per unit volume.  The surface called "surface" means the lower boundary of the atmosphere.-->
-		<field id="CMIP7_epc100" field_ref="?dummy_XY_depth100m"/>
-		<!--P2 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_matter_expressed_as_carbon_in_sea_water : The phrase 'expressed\_as' is used in the construction A\_expressed\_as\_B, where B is a chemical constituent of A. It means that the quantity indicated by the standard name is calculated solely with respect to the B contained in A, neglecting all other chemical constituents of A. In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.   'Sinking' is the gravitational settling of particulate matter suspended in a liquid. A sinking flux is positive downwards and is calculated relative to the movement of the surrounding fluid.-->
-		<field id="CMIP7_epc1000" field_ref="?dummy_XY_depth1000m"/>
-		<!--P2 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_matter_expressed_as_carbon_in_sea_water : The phrase 'expressed\_as' is used in the construction A\_expressed\_as\_B, where B is a chemical constituent of A. It means that the quantity indicated by the standard name is calculated solely with respect to the B contained in A, neglecting all other chemical constituents of A. In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.   'Sinking' is the gravitational settling of particulate matter suspended in a liquid. A sinking flux is positive downwards and is calculated relative to the movement of the surrounding fluid.-->
-		<field id="CMIP7_epcalc100" field_ref="?dummy_XY_depth100m"/>
-		<!--P2 (mol m-2 s-1) sinking_mole_flux_of_calcite_expressed_as_carbon_in_sea_water : The phrase 'expressed\_as' is used in the construction A\_expressed\_as\_B, where B is a chemical constituent of A. It means that the quantity indicated by the standard name is calculated solely with respect to the B contained in A, neglecting all other chemical constituents of A. In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.   'Sinking' is the gravitational settling of particulate matter suspended in a liquid. A sinking flux is positive downwards and is calculated relative to the movement of the surrounding fluid. Calcite is a mineral that is a polymorph of calcium carbonate. The chemical formula of calcite is CaCO3. Standard names also exist for aragonite, another polymorph of calcium carbonate.-->
-		<field id="CMIP7_epcalc1000" field_ref="?dummy_XY_depth1000m"/>
-		<!--P2 (mol m-2 s-1) sinking_mole_flux_of_calcite_expressed_as_carbon_in_sea_water : The phrase 'expressed\_as' is used in the construction A\_expressed\_as\_B, where B is a chemical constituent of A. It means that the quantity indicated by the standard name is calculated solely with respect to the B contained in A, neglecting all other chemical constituents of A. In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.   'Sinking' is the gravitational settling of particulate matter suspended in a liquid. A sinking flux is positive downwards and is calculated relative to the movement of the surrounding fluid. Calcite is a mineral that is a polymorph of calcium carbonate. The chemical formula of calcite is CaCO3. Standard names also exist for aragonite, another polymorph of calcium carbonate.-->
-		<field id="CMIP7_epn100" field_ref="?dummy_XY_depth100m"/>
-		<!--P3 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_nitrogen_in_sea_water : In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.   'Sinking' is the gravitational settling of particulate matter suspended in a liquid. A sinking flux is positive downwards and is calculated relative to the movement of the surrounding fluid.-->
-		<field id="CMIP7_epp100" field_ref="?dummy_XY_depth100m"/>
-		<!--P3 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_phosphorus_in_sea_water : In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.   'Sinking' is the gravitational settling of particulate matter suspended in a liquid. A sinking flux is positive downwards and is calculated relative to the movement of the surrounding fluid.-->
-		<field id="CMIP7_epsi100" field_ref="?dummy_XY_depth100m"/>
-		<!--P3 (mol m-2 s-1) sinking_mole_flux_of_particulate_silicon_in_sea_water : In accordance with common usage in geophysical disciplines, "flux" implies per unit area, called "flux density" in physics.   'Sinking' is the gravitational settling of particulate matter suspended in a liquid. A sinking flux is positive downwards and is calculated relative to the movement of the surrounding fluid.-->
-		<field id="CMIP7_exparagob" field_ref="?dummy_XY"/>
-		<!--P3 (mol m-2 s-1) sinking_mole_flux_of_aragonite_expressed_as_carbon_in_sea_water : Downward sinking flux of aragonite at seafloor-->
-		<field id="CMIP7_expc" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_matter_expressed_as_carbon_in_sea_water : Downward flux of particulate organic carbon-->
-		<field id="CMIP7_expcalc" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-2 s-1) sinking_mole_flux_of_calcite_expressed_as_carbon_in_sea_water : Downward flux of Calcite-->
-		<field id="CMIP7_expcalcob" field_ref="?dummy_XY_seafloor"/>
-		<!--P3 (mol m-2 s-1) sinking_mole_flux_of_calcite_expressed_as_carbon_in_sea_water : Downward sinking flux of calcite at seafloor-->
-		<field id="CMIP7_expcob" field_ref="?dummy_XY_seafloor"/>
-		<!--P3 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_matter_expressed_as_carbon_in_sea_water : Downward sinking flux of particulate organic carbon at seafloor-->
-		<field id="CMIP7_expfeob" field_ref="?dummy_XY_seafloor"/>
-		<!--P3 (mol m-2 s-1) sinking_mole_flux_of_particulate_iron_in_sea_water : Downward sinking flux of particulate iron at seafloor-->
-		<field id="CMIP7_expnob" field_ref="?dummy_XY_seafloor"/>
-		<!--P3 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_nitrogen_in_sea_water : Downward sinking flux of particulate organic nitrogen at seafloor-->
-		<field id="CMIP7_exppob" field_ref="?dummy_XY_seafloor"/>
-		<!--P3 (mol m-2 s-1) sinking_mole_flux_of_particulate_organic_phosphorus_in_sea_water : Downward sinking flux of particulate organic phosphorus at seafloor-->
-		<field id="CMIP7_expsiob" field_ref="?dummy_XY_seafloor"/>
-		<!--P3 (mol m-2 s-1) sinking_mole_flux_of_particulate_silicon_in_sea_water : Downward sinking flux of particulate silicon at seafloor-->
-		<field id="CMIP7_fgco2" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) surface_downward_mass_flux_of_carbon_dioxide_expressed_as_carbon : Gas exchange flux of CO2 (positive into ocean)-->
-		<field id="CMIP7_fgdms" field_ref="?dummy_XY"/>
-		<!--P3 (mol m-2 s-1) surface_upward_mole_flux_of_dimethyl_sulfide : Gas exchange flux of DMS (positive into atmosphere)-->
-		<field id="CMIP7_frfe" field_ref="?dummy_XY"/>
-		<!--P3 (mol m-2 s-1) minus_tendency_of_ocean_mole_content_of_iron_due_to_sedimentation : "Content" indicates a quantity per unit area.  The specification of a physical process by the phrase due\_to\_process means that the quantity named is a  single term in a sum of terms which together compose the general quantity  named by omitting the phrase.  "tendency\_of\_X" means derivative of X with respect to time.-->
-		<field id="CMIP7_fric" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-2 s-1) minus_tendency_of_ocean_mole_content_of_inorganic_carbon_due_to_sedimentation : Inorganic Carbon loss to sediments-->
-		<field id="CMIP7_frn" field_ref="?dummy_XY"/>
-		<!--P3 (mol m-2 s-1) minus_tendency_of_ocean_mole_content_of_elemental_nitrogen_due_to_denitrification_and_sedimentation : "Content" indicates a quantity per unit area.  The specification of a physical process by the phrase due\_to\_process means that the quantity named is a single term in a sum of terms which together compose the general quantity  named by omitting the phrase. 'Denitrification' is the conversion of nitrate into gaseous compounds such as nitric oxide, nitrous oxide and molecular nitrogen which are then emitted to the atmosphere.  'Sedimentation' is the sinking of particulate matter to the floor of a body of water. "tendency\_of\_X" means derivative of X with respect to time.-->
-		<field id="CMIP7_froc" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-2 s-1) minus_tendency_of_ocean_mole_content_of_organic_carbon_due_to_sedimentation : Organic Carbon loss to sediments-->
-		<field id="CMIP7_fsfe" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-2 s-1) tendency_of_ocean_mole_content_of_iron_due_to_deposition_and_runoff_and_sediment_dissolution : Iron supply through deposition flux onto sea surface, runoff, coasts, sediments, etc-->
-		<field id="CMIP7_fsn" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-2 s-1) tendency_of_ocean_mole_content_of_elemental_nitrogen_due_to_deposition_and_fixation_and_runoff : Flux of nitrogen into the ocean due to deposition (sum of dry and wet deposition), fixation (the production of ammonia from nitrogen gas by diazotrophs) and runoff (liquid water which drains from land).-->
-		<field id="CMIP7_graz" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3 s-1) tendency_of_mole_concentration_of_particulate_organic_matter_expressed_as_carbon_in_sea_water_due_to_grazing_of_phytoplankton : Total grazing of phytoplankton by zooplankton defined as tendency of moles of carbon per cubic metre.-->
-		<field id="CMIP7_icfriver" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-2 s-1) tendency_of_ocean_mole_content_of_inorganic_carbon_due_to_runoff_and_sediment_dissolution : Inorganic Carbon supply to ocean through runoff (separate from gas exchange)-->
-		<field id="CMIP7_intdic" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2) ocean_mass_content_of_dissolved_inorganic_carbon : Vertically integrated DIC-->
-		<field id="CMIP7_intdoc" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2) ocean_mass_content_of_dissolved_organic_carbon : Vertically integrated DOC (explicit pools only)-->
-		<field id="CMIP7_intparag" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-2 s-1) tendency_of_ocean_mole_content_of_aragonite_expressed_as_carbon_due_to_biological_production : Vertically integrated aragonite production-->
-		<field id="CMIP7_intpbfe" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-2 s-1) tendency_of_ocean_mole_content_of_iron_due_to_biological_production : Vertically integrated biogenic iron production-->
-		<field id="CMIP7_intpbn" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-2 s-1) tendency_of_ocean_mole_content_of_nitrogen_due_to_biological_production : Vertically integrated biogenic nitrogen production-->
-		<field id="CMIP7_intpbp" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-2 s-1) tendency_of_ocean_mole_content_of_phosphorus_due_to_biological_production : Vertically integrated biogenic phosphorus production-->
-		<field id="CMIP7_intpbsi" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-2 s-1) tendency_of_ocean_mole_content_of_silicon_due_to_biological_production : Vertically integrated biogenic silica production-->
-		<field id="CMIP7_intpcalcite" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-2 s-1) tendency_of_ocean_mole_content_of_calcite_expressed_as_carbon_due_to_biological_production : Vertically integrated calcite production-->
-		<field id="CMIP7_intpn2" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-2 s-1) tendency_of_ocean_mole_content_of_elemental_nitrogen_due_to_fixation : Vertically integrated nitrogen fixation-->
-		<field id="CMIP7_intpoc" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2) ocean_mass_content_of_particulate_organic_matter_expressed_as_carbon : Vertically integrated POC-->
-		<field id="CMIP7_intpp" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-2 s-1) net_primary_mole_productivity_of_biomass_expressed_as_carbon_by_phytoplankton : Vertically integrated total primary (organic carbon) production by phytoplankton.  This should equal the sum of intpdiat+intpphymisc, but those individual components may be unavailable in some models.-->
-		<field id="CMIP7_intppcalc" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-2 s-1) net_primary_mole_productivity_of_biomass_expressed_as_carbon_by_calcareous_phytoplankton : Vertically integrated primary (organic carbon) production by the calcareous phytoplankton component alone-->
-		<field id="CMIP7_intppdiat" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-2 s-1) net_primary_mole_productivity_of_biomass_expressed_as_carbon_by_diatoms : Vertically integrated primary (organic carbon) production by the diatom phytoplankton component alone-->
-		<field id="CMIP7_intppdiaz" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-2 s-1) net_primary_mole_productivity_of_biomass_expressed_as_carbon_by_diazotrophic_phytoplankton : Vertically integrated primary (organic carbon) production by the diazotrophs alone-->
-		<field id="CMIP7_intppmisc" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-2 s-1) net_primary_mole_productivity_of_biomass_expressed_as_carbon_by_miscellaneous_phytoplankton : Vertically integrated total primary (organic carbon) production by other phytoplankton components alone-->
-		<field id="CMIP7_intppnano" field_ref="?dummy_XY"/>
-		<!--P3 (mol m-2 s-1) net_primary_mole_productivity_of_biomass_expressed_as_carbon_by_nanophytoplankton : Vertically integrated total primary (organic carbon) production by nanophytoplankton.-->
-		<field id="CMIP7_intppnitrate" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-2 s-1) net_primary_mole_productivity_of_biomass_expressed_as_carbon_due_to_nitrate_utilization : Vertically integrated primary (organic carbon) production by phytoplankton based on nitrate uptake alone-->
-		<field id="CMIP7_intpppico" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-2 s-1) net_primary_mole_productivity_of_biomass_expressed_as_carbon_by_picophytoplankton : Vertically integrated primary (organic carbon) production by the picophytoplankton component alone-->
-		<field id="CMIP7_limfecalc" field_ref="?dummy_XY"/>
-		<!--P3 (1) iron_growth_limitation_of_calcareous_phytoplankton : "Calcareous phytoplankton" are phytoplankton that produce calcite. Calcite is a mineral that is a polymorph of calcium carbonate. The chemical formula of calcite is CaCO3. Phytoplankton are algae that grow where there is sufficient light to support photosynthesis. "Iron growth limitation" means the ratio of the growth rate of a species population in the environment (where there is a finite availability of iron) to the theoretical growth rate if there were no such limit on iron availability.-->
-		<field id="CMIP7_limfediat" field_ref="?dummy_XY"/>
-		<!--P3 (1) iron_growth_limitation_of_diatoms : Diatoms are phytoplankton with an external skeleton made of silica. Phytoplankton are algae that grow where there is sufficient light to support photosynthesis. "Iron growth limitation" means the ratio of the growth rate of a species population in the environment (where there is a finite availability of iron) to the theoretical growth rate if there were no such limit on iron availability.-->
-		<field id="CMIP7_limfediaz" field_ref="?dummy_XY"/>
-		<!--P3 (1) iron_growth_limitation_of_diazotrophic_phytoplankton : In ocean modelling, diazotrophs are phytoplankton of the phylum cyanobacteria distinct from other phytoplankton groups in their ability to fix nitrogen gas in addition to nitrate and ammonium. Phytoplankton are algae that grow where there is sufficient light to support photosynthesis. "Iron growth limitation" means the ratio of the growth rate of a species population in the environment (where there is a finite availability of iron) to the theoretical growth rate if there were no such limit on iron availability.-->
-		<field id="CMIP7_limfemisc" field_ref="?dummy_XY"/>
-		<!--P3 (1) iron_growth_limitation_of_miscellaneous_phytoplankton : Phytoplankton are algae that grow where there is sufficient light to support photosynthesis. "Miscellaneous phytoplankton" are all those phytoplankton that are not diatoms, diazotrophs, calcareous phytoplankton, picophytoplankton or other separately named components of the phytoplankton population. "Iron growth limitation" means the ratio of the growth rate of a species population in the environment (where there is a finite availability of iron) to the theoretical growth rate if there were no such limit on iron availability.-->
-		<field id="CMIP7_limfepico" field_ref="?dummy_XY"/>
-		<!--P3 (1) iron_growth_limitation_of_picophytoplankton : Picophytoplankton are phytoplankton of less than 2 micrometers in size. Phytoplankton are algae that grow where there is sufficient light to support photosynthesis. "Iron growth limitation" means the ratio of the growth rate of a species population in the environment (where there is a finite availability of iron) to the theoretical growth rate if there were no such limit on iron availability.-->
-		<field id="CMIP7_limirrcalc" field_ref="?dummy_XY"/>
-		<!--P3 (1) growth_limitation_of_calcareous_phytoplankton_due_to_solar_irradiance : Growth limitation of calcareous phytoplankton due to solar irradiance. "Growth limitation due to solar irradiance" means the ratio of the growth rate of a species population in the environment (where the amount of sunlight reaching a location may be limited) to the theoretical growth rate if there were no such limit on solar irradiance.-->
-		<field id="CMIP7_limirrdiat" field_ref="?dummy_XY"/>
-		<!--P3 (1) growth_limitation_of_diatoms_due_to_solar_irradiance : Growth limitation of diatoms due to solar irradiance. "Growth limitation due to solar irradiance" means the ratio of the growth rate of a species population in the environment (where the amount of sunlight reaching a location may be limited) to the theoretical growth rate if there were no such limit on solar irradiance.-->
-		<field id="CMIP7_limirrdiaz" field_ref="?dummy_XY"/>
-		<!--P3 (1) growth_limitation_of_diazotrophic_phytoplankton_due_to_solar_irradiance : Growth limitation of diazotrophs due to solar irradiance. "Growth limitation due to solar irradiance" means the ratio of the growth rate of a species population in the environment (where the amount of sunlight reaching a location may be limited) to the theoretical growth rate if there were no such limit on solar irradiance.-->
-		<field id="CMIP7_limirrmisc" field_ref="?dummy_XY"/>
-		<!--P3 (1) growth_limitation_of_miscellaneous_phytoplankton_due_to_solar_irradiance : Growth limitation of miscellaneous phytoplankton due to solar irradiance. "Growth limitation due to solar irradiance" means the ratio of the growth rate of a species population in the environment (where the amount of sunlight reaching a location may be limited) to the theoretical growth rate if there were no such limit on solar irradiance.-->
-		<field id="CMIP7_limirrpico" field_ref="?dummy_XY"/>
-		<!--P3 (1) growth_limitation_of_picophytoplankton_due_to_solar_irradiance : Growth limitation of picophytoplankton due to solar irradiance. "Growth limitation due to solar irradiance" means the ratio of the growth rate of a species population in the environment (where the amount of sunlight reaching a location may be limited) to the theoretical growth rate if there were no such limit on solar irradiance.-->
-		<field id="CMIP7_limncalc" field_ref="?dummy_XY"/>
-		<!--P3 (1) nitrogen_growth_limitation_of_calcareous_phytoplankton : "Calcareous phytoplankton" are phytoplankton that produce calcite. Calcite is a mineral that is a polymorph of calcium carbonate. The chemical formula of calcite is CaCO3. Phytoplankton are algae that grow where there is sufficient light to support photosynthesis. "Nitrogen growth limitation" means the ratio of the growth rate of a species population in the environment (where there is a finite availability of nitrogen) to the theoretical growth rate if there were no such limit on nitrogen availability.-->
-		<field id="CMIP7_limndiat" field_ref="?dummy_XY"/>
-		<!--P3 (1) nitrogen_growth_limitation_of_diatoms : Diatoms are phytoplankton with an external skeleton made of silica. Phytoplankton are algae that grow where there is sufficient light to support photosynthesis. "Nitrogen growth limitation" means the ratio of the growth rate of a species population in the environment (where there is a finite availability of nitrogen) to the theoretical growth rate if there were no such limit on nitrogen availability.-->
-		<field id="CMIP7_limndiaz" field_ref="?dummy_XY"/>
-		<!--P3 (1) nitrogen_growth_limitation_of_diazotrophic_phytoplankton : In ocean modelling, diazotrophs are phytoplankton of the phylum cyanobacteria distinct from other phytoplankton groups in their ability to fix nitrogen gas in addition to nitrate and ammonium. Phytoplankton are algae that grow where there is sufficient light to support photosynthesis. "Nitrogen growth limitation" means the ratio of the growth rate of a species population in the environment (where there is a finite availability of nitrogen) to the theoretical growth rate if there were no such limit on nitrogen availability.-->
-		<field id="CMIP7_limnmisc" field_ref="?dummy_XY"/>
-		<!--P3 (1) nitrogen_growth_limitation_of_miscellaneous_phytoplankton : Phytoplankton are algae that grow where there is sufficient light to support photosynthesis. "Miscellaneous phytoplankton" are all those phytoplankton that are not diatoms, diazotrophs, calcareous phytoplankton, picophytoplankton or other separately named components of the phytoplankton population. "Nitrogen growth limitation" means the ratio of the growth rate of a species population in the environment (where there is a finite availability of nitrogen) to the theoretical growth rate if there were no such limit on nitrogen availability.-->
-		<field id="CMIP7_limnpico" field_ref="?dummy_XY"/>
-		<!--P3 (1) nitrogen_growth_limitation_of_picophytoplankton : Picophytoplankton are phytoplankton of less than 2 micrometers in size. Phytoplankton are algae that grow where there is sufficient light to support photosynthesis. "Nitrogen growth limitation" means the ratio of the growth rate of a species population in the environment (where there is a finite availability of nitrogen) to the theoretical growth rate if there were no such limit on nitrogen availability.-->
-		<field id="CMIP7_nh4" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_ammonium_in_sea_water : Mole concentration means moles (amount of substance) per unit volume and is used in the construction mole\_concentration\_of\_X\_in\_Y, where X is a material constituent of Y.-->
-		<field id="CMIP7_nh4os" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-3) mole_concentration_of_ammonium_in_sea_water : Mole concentration means moles (amount of substance) per unit volume and is used in the construction mole\_concentration\_of\_X\_in\_Y, where X is a material constituent of Y.-->
-		<field id="CMIP7_no3" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_nitrate_in_sea_water : Mole concentration means moles (amount of substance) per unit volume and is used in the construction mole\_concentration\_of\_X\_in\_Y, where X is a material constituent of Y.-->
-		<field id="CMIP7_no3os" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-3) mole_concentration_of_nitrate_in_sea_water : Mole concentration means moles (amount of substance) per unit volume and is used in the construction mole\_concentration\_of\_X\_in\_Y, where X is a material constituent of Y.-->
-		<field id="CMIP7_o2" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_dissolved_molecular_oxygen_in_sea_water : 'Mole concentration' means number of moles per unit volume, also called "molarity", and is used in the construction mole\_concentration\_of\_X\_in\_Y, where X is a material constituent of Y.  A chemical or biological species denoted by X may be described by a single term such as 'nitrogen' or a phrase such as 'nox\_expressed\_as\_nitrogen'.-->
-		<field id="CMIP7_o2os" field_ref="?dummy_XY"/>
-		<!--P3 (mol m-3) mole_concentration_of_dissolved_molecular_oxygen_in_sea_water : 'Mole concentration' means number of moles per unit volume, also called "molarity", and is used in the construction mole\_concentration\_of\_X\_in\_Y, where X is a material constituent of Y.  A chemical or biological species denoted by X may be described by a single term such as 'nitrogen' or a phrase such as 'nox\_expressed\_as\_nitrogen'.-->
-		<field id="CMIP7_o2sat" field_ref="?dummy_XYO"/>
-		<!--P3 (mol m-3) mole_concentration_of_dissolved_molecular_oxygen_in_sea_water_at_saturation : "Mole concentration at saturation" means the mole concentration in a saturated solution. Mole concentration means number of moles per unit volume, also called "molarity", and is used in the construction "mole\_concentration\_of\_X\_in\_Y", where X is a material constituent of Y. A chemical or biological species denoted by X may be described by a single term such as "nitrogen" or a phrase such as "nox\_expressed\_as\_nitrogen".-->
-		<field id="CMIP7_ocfriver" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-2 s-1) tendency_of_ocean_mole_content_of_organic_carbon_due_to_runoff_and_sediment_dissolution : Organic Carbon supply to ocean through runoff (separate from gas exchange)-->
-		<field id="CMIP7_ph" field_ref="?dummy_XYO"/>
-		<!--P2 (1) sea_water_ph_reported_on_total_scale : negative log10 of hydrogen ion concentration with the concentration expressed as mol H kg-1.-->
-		<field id="CMIP7_phos" field_ref="?dummy_XY"/>
-		<!--P2 (1) sea_water_ph_reported_on_total_scale : negative log10 of hydrogen ion concentration with the concentration expressed as mol H kg-1.-->
-		<field id="CMIP7_phyc" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_phytoplankton_expressed_as_carbon_in_sea_water : sum of phytoplankton carbon component concentrations.  In most (all?) cases this is the sum of phycdiat and phycmisc (i.e., "Diatom Carbon Concentration" and "Non-Diatom Phytoplankton Carbon Concentration"-->
-		<field id="CMIP7_phycalc" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_calcareous_phytoplankton_expressed_as_carbon_in_sea_water : carbon concentration from calcareous (calcite-producing) phytoplankton component alone-->
-		<field id="CMIP7_phycalcos" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-3) mole_concentration_of_calcareous_phytoplankton_expressed_as_carbon_in_sea_water : carbon concentration from calcareous (calcite-producing) phytoplankton component alone-->
-		<field id="CMIP7_phycos" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-3) mole_concentration_of_phytoplankton_expressed_as_carbon_in_sea_water : sum of phytoplankton carbon component concentrations.  In most (all?) cases this is the sum of phycdiat and phycmisc (i.e., "Diatom Carbon Concentration" and "Non-Diatom Phytoplankton Carbon Concentration"-->
-		<field id="CMIP7_phydiat" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_diatoms_expressed_as_carbon_in_sea_water : carbon from the diatom phytoplankton component concentration alone-->
-		<field id="CMIP7_phydiatos" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-3) mole_concentration_of_diatoms_expressed_as_carbon_in_sea_water : carbon from the diatom phytoplankton component concentration alone-->
-		<field id="CMIP7_phydiaz" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_diazotrophic_phytoplankton_expressed_as_carbon_in_sea_water : carbon concentration from the diazotrophic phytoplankton component alone-->
-		<field id="CMIP7_phydiazos" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-3) mole_concentration_of_diazotrophic_phytoplankton_expressed_as_carbon_in_sea_water : carbon concentration from the diazotrophic phytoplankton component alone-->
-		<field id="CMIP7_phymisc" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_miscellaneous_phytoplankton_expressed_as_carbon_in_sea_water : carbon concentration from additional phytoplankton component alone-->
-		<field id="CMIP7_phymiscos" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-3) mole_concentration_of_miscellaneous_phytoplankton_expressed_as_carbon_in_sea_water : carbon concentration from additional phytoplankton component alone-->
-		<field id="CMIP7_phypico" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_picophytoplankton_expressed_as_carbon_in_sea_water : carbon concentration from the picophytoplankton (<2 um) component alone-->
-		<field id="CMIP7_phypicoos" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-3) mole_concentration_of_picophytoplankton_expressed_as_carbon_in_sea_water : carbon concentration from the picophytoplankton (<2 um) component alone-->
-		<field id="CMIP7_po4" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_dissolved_inorganic_phosphorus_in_sea_water : Mole concentration means number of moles per unit volume, also called "molarity", and is used in the construction "mole\_concentration\_of\_X\_in\_Y", where X is a material constituent of Y. A chemical or biological species denoted by X may be described by a single term such as "nitrogen" or a phrase such as "nox\_expressed\_as\_nitrogen". "Dissolved inorganic phosphorus" means the sum of all inorganic phosphorus in solution (including phosphate, hydrogen phosphate, dihydrogen phosphate, and phosphoric acid).-->
-		<field id="CMIP7_pp" field_ref="?dummy_XYO"/>
-		<!--P3 (mol m-3 s-1) tendency_of_mole_concentration_of_particulate_organic_matter_expressed_as_carbon_in_sea_water_due_to_net_primary_production : total primary (organic carbon) production by phytoplankton-->
-		<field id="CMIP7_ppos" field_ref="?dummy_XY_depth0m"/>
-		<!--P2 (mol m-3 s-1) tendency_of_mole_concentration_of_particulate_organic_matter_expressed_as_carbon_in_sea_water_due_to_net_primary_production : total primary (organic carbon) production by phytoplankton-->
-		<field id="CMIP7_si" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_dissolved_inorganic_silicon_in_sea_water : Mole concentration means number of moles per unit volume, also called "molarity", and is used in the construction "mole\_concentration\_of\_X\_in\_Y", where X is a material constituent of Y. A chemical or biological species denoted by X may be described by a single term such as "nitrogen" or a phrase such as "nox\_expressed\_as\_nitrogen". "Dissolved inorganic silicon" means the sum of all inorganic silicon in solution (including silicic acid and its first dissociated anion SiO(OH)3-).-->
-		<field id="CMIP7_sialgc" field_ref="?dummy_XY"/>
-		<!--P3 (mol m-2) sea_ice_mole_content_of_ice_algae_expressed_as_carbon : Vertically-integrated content of carbon in ice algae, expressed as moles of carbon per square meter of sea ice.-->
-		<field id="CMIP7_sichl" field_ref="?dummy_XY"/>
-		<!--P3 (kg m-2) sea_ice_mass_content_of_ice_algae_expressed_as_chlorophyll : Vertically-integrated content of Chl-a in ice algae, expressed as kg of Chl-a per square meter of sea ice.-->
-		<field id="CMIP7_sigpp" field_ref="?dummy_XY"/>
-		<!--P3 (kg m-2 s-1) gross_primary_productivity_of_biomass_expressed_as_carbon_due_to_ice_algae_in_sea_ice : Change in ice algal carbon mass due to photosynthesis per sea ice unit area per unit time.-->
-		<field id="CMIP7_sino3" field_ref="?dummy_XY"/>
-		<!--P3 (mol m-2) sea_ice_mole_content_of_nitrate : Vertically-integrated amount of nitrate in ice algae, expressed in moles of nitrogen per square meter of sea ice.-->
-		<field id="CMIP7_sios" field_ref="?dummy_XY"/>
-		<!--P3 (mol m-3) mole_concentration_of_dissolved_inorganic_silicon_in_sea_water : Mole concentration means number of moles per unit volume, also called "molarity", and is used in the construction "mole\_concentration\_of\_X\_in\_Y", where X is a material constituent of Y. A chemical or biological species denoted by X may be described by a single term such as "nitrogen" or a phrase such as "nox\_expressed\_as\_nitrogen". "Dissolved inorganic silicon" means the sum of all inorganic silicon in solution (including silicic acid and its first dissociated anion SiO(OH)3-).-->
-		<field id="CMIP7_sisi" field_ref="?dummy_XY"/>
-		<!--P3 (mol m-2) sea_ice_mole_content_of_silicon : Vertically-integrated amount of silicate in ice algae, expressed in moles of silicon per square meter of sea ice.-->
-		<field id="CMIP7_spco2" field_ref="?dummy_XY_depth0m"/>
-		<!--P2 (Pa) surface_partial_pressure_of_carbon_dioxide_in_sea_water : The surface called "surface" means the lower boundary of the atmosphere. The partial pressure of a dissolved gas in sea water is the partial pressure in air with which it would be in equilibrium. The partial pressure of a gaseous constituent of air is the pressure which it alone would exert with unchanged temperature and number of moles per unit volume. The chemical formula for carbon dioxide is CO2.-->
+		<!--P3 (mol m-3) mole_concentration_of_dissolved_inorganic_carbon_in_sea_water : Dissolved inorganic carbon (CO3+HCO3+H2CO3) concentration-->
+		<field id="CMIP7_o2" field_ref="?dummy_XY_op20bar"/>
+		<!--P3 (mol m-3) mole_concentration_of_dissolved_molecular_oxygen_in_sea_water : 'Mole concentration' means number of moles per unit volume, also called "molarity", and is used in the construction mole\_concentration\_of\_X\_in\_Y, where X is a material constituent of Y. A chemical or biological species denoted by X may be described by a single term such as 'nitrogen' or a phrase such as 'nox\_expressed\_as\_nitrogen'.-->
+		<field id="CMIP7_ph" field_ref="?dummy_XY_op20bar"/>
+		<!--P3 (1) sea_water_ph_reported_on_total_scale : negative log10 of hydrogen ion concentration with the concentration expressed as mol H kg-1.-->
 		<field id="CMIP7_talk" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) sea_water_alkalinity_expressed_as_mole_equivalent : total alkalinity equivalent concentration (including carbonate, borate, phosphorus, silicon, and nitrogen components)-->
-		<field id="CMIP7_zmeso" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_mesozooplankton_expressed_as_carbon_in_sea_water : carbon  concentration from mesozooplankton (20-200 um) component alone-->
-		<field id="CMIP7_zmesoos" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-3) mole_concentration_of_mesozooplankton_expressed_as_carbon_in_sea_water : carbon  concentration from mesozooplankton (20-200 um) component alone-->
-		<field id="CMIP7_zmicro" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_microzooplankton_expressed_as_carbon_in_sea_water : carbon  concentration from the microzooplankton (<20 um) component alone-->
-		<field id="CMIP7_zmicroos" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-3) mole_concentration_of_microzooplankton_expressed_as_carbon_in_sea_water : carbon  concentration from the microzooplankton (<20 um) component alone-->
-		<field id="CMIP7_zmisc" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_miscellaneous_zooplankton_expressed_as_carbon_in_sea_water : carbon from additional zooplankton component concentrations alone (e.g. Micro, meso).  Since the models all have different numbers of components, this variable has been included to provide a check for intercomparison between models since some phytoplankton groups are supersets.-->
-		<field id="CMIP7_zmiscos" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-3) mole_concentration_of_miscellaneous_zooplankton_expressed_as_carbon_in_sea_water : carbon from additional zooplankton component concentrations alone (e.g. Micro, meso).  Since the models all have different numbers of components, this variable has been included to provide a check for intercomparison between models since some phytoplankton groups are supersets.-->
-		<field id="CMIP7_zooc" field_ref="?dummy_XYO"/>
-		<!--P2 (mol m-3) mole_concentration_of_zooplankton_expressed_as_carbon_in_sea_water : sum of zooplankton carbon component concentrations-->
-		<field id="CMIP7_zoocos" field_ref="?dummy_XY"/>
-		<!--P2 (mol m-3) mole_concentration_of_zooplankton_expressed_as_carbon_in_sea_water : sum of zooplankton carbon component concentrations-->
+		<!--P3 (mol m-3) sea_water_alkalinity_expressed_as_mole_equivalent : total alkalinity equivalent concentration (including carbonate, borate, phosphorus, silicon, and nitrogen components)-->
 	</field_definition>
 </context>

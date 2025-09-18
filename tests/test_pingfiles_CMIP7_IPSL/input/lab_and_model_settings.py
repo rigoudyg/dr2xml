@@ -4,17 +4,14 @@
 
 lab_and_model_settings = {
     'data_request_used': 'CMIP7',
-    'data_request_content_version': 'v1.2.2',
+    'data_request_content_version': 'tests',
     'institution_id': "IPSL",
     'laboratory_used': "ipsl",
     'project': "ping",
     # 'mips' : {'AerChemMIP','C4MIP','CFMIP','DAMIP', 'FAFMIP' , 'GeoMIP','GMMIP','ISMIP6',\
     #                  'LS3MIP','LUMIP','OMIP','PMIP','RFMIP','ScenarioMIP','CORDEX','SIMIP'},
     # If you want to get comprehensive ping files; use :
-    'mips': {"CERESMIP", "PAMIP", "SIMIP", "OMIP", "SOFIAMIP", "LMIP", "RFMIP", "AerChemMIP2", "GeoMIP", "TIPMIP",
-             "DAMIP", "PMIP", "FAFMIP", "DCPP", "CDRMIP", "NAHosMIP", "ISMIP7", "CMIP", "ScenarioMIP", "HighResMIP",
-             "LUMIP", "Other", "VolMIP", "HT-MIP/VolMIP", "CORDEX", "CFMIP", "C4MIP", "WhatIfMIP", "VIACSAB", "RAMIP",
-             "FireMIP", "IRRMIP", "LongRunMIP", "MISOMIP2", "FishMIP", "ISIMIP"},
+    'mips': {},
     'max_priority': 3,
     'tierMax': 3,
     # Each XIOS  context does adress a number of realms

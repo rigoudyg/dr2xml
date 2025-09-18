@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <context id="LMDZ">
-	<!--CMIP7 Data Request version Software current_cmip7_dr_software - Content v1.2.2-->
+	<!--CMIP7 Data Request version Software current_cmip7_dr_software - Content test-->
 	<!--dr2xml version current_version-->
 	<!--Lab_and_model settings
-{'data_request_content_version' = 'v1.2.2',
+{'data_request_content_version' = 'tests',
 'data_request_used' = 'CMIP7',
 'excluded_vars' = [],
 'excluded_vars_file' = [],
@@ -11,7 +11,7 @@
 'laboratory_used' = 'ipsl',
 'listof_home_vars' = 'None',
 'max_priority' = '3',
-'mips' = {'AerChemMIP2', 'C4MIP', 'CDRMIP', 'CERESMIP', 'CFMIP', 'CMIP', 'CORDEX', 'DAMIP', 'DCPP', 'FAFMIP', 'FireMIP', 'FishMIP', 'GeoMIP', 'HT-MIP/VolMIP', 'HighResMIP', 'IRRMIP', 'ISIMIP', 'ISMIP7', 'LMIP', 'LUMIP', 'LongRunMIP', 'MISOMIP2', 'NAHosMIP', 'OMIP', 'Other', 'PAMIP', 'PMIP', 'RAMIP', 'RFMIP', 'SIMIP', 'SOFIAMIP', 'ScenarioMIP', 'TIPMIP', 'VIACSAB', 'VolMIP', 'WhatIfMIP'},
+'mips' = {},
 'path_extra_tables' = 'None',
 'path_special_defs' = 'None',
 'ping_variables_prefix' = 'CMIP7_',
@@ -22,208 +22,6 @@
 {}-->
 	<!--Year processed None-->
 	<field_definition>
-		<field id="CMIP7_abs" field_ref="?dummy_XY_lambda550nm"/>
-		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_sulfate_ambient_aerosol_particles : This is the sulphate aerosol optical depth at 550nm due to absorption-->
-		<field id="CMIP7_abs550bc" field_ref="?dummy_XY_lambda550nm"/>
-		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_black_carbon_ambient_aerosol : This is the black carbon aerosol optical depth at 550nm due to absorption-->
-		<field id="CMIP7_abs550dust" field_ref="?dummy_XY_lambda550nm"/>
-		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_dust_ambient_aerosol_particles : This is the dust aerosol optical depth at 550nm due to absorption-->
-		<field id="CMIP7_abs550oa" field_ref="?dummy_XY_lambda550nm"/>
-		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_particulate_organic_matter_ambient_aerosol_particles : This is the particular organic matter aerosol optical depth at 550nm due to absorption-->
-		<field id="CMIP7_abs550ss" field_ref="?dummy_XY_lambda550nm"/>
-		<!--P2 (1) atmosphere_absorption_optical_thickness_due_to_sea_salt_ambient_aerosol_particles : This is the sea salt aerosol optical depth at 550nm due to absorption-->
-		<field id="CMIP7_c2h4" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (mol mol-1) mole_fraction_of_ethene_in_air : Mole fraction of ethene (C2H4) in air-->
-		<field id="CMIP7_c2h5oh" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (mol mol-1) mole_fraction_of_ethanol_in_air : Mole fraction of ethanol (C2H5OH) in air-->
-		<field id="CMIP7_c4h10" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (mol mol-1) mole_fraction_of_butane_in_air : Mole fraction of butane (C4H10) in air-->
-		<field id="CMIP7_ccldncl" field_ref="?dummy_XY"/>
-		<!--P2 (m-3) number_concentration_of_convective_cloud_liquid_water_particles_at_convective_liquid_water_cloud_top : Cloud Droplet Number Concentration of Convective Cloud Tops-->
-		<field id="CMIP7_ccn02" field_ref="?dummy_XYA_alevel_hur100p2pct"/>
-		<!--P2 (m-3) number_concentration_of_cloud_condensation_nuclei_assuming_reference_relative_humidity : This is the concentration of cloud condensation nuclei (CCN) at 0.2% supersaturation, based on aerosol chemical composition and size-->
-		<field id="CMIP7_ccn1" field_ref="?dummy_XYA_alevel_hur101pct"/>
-		<!--P2 (m-3) number_concentration_of_cloud_condensation_nuclei_assuming_reference_relative_humidity : This is the concentration of cloud condensation nuclei (CCN) at 1.0 percent supersaturation, based on aerosol chemical composition and size-->
-		<field id="CMIP7_cfc113global" field_ref="?dummy_0d"/>
-		<!--P2 (1E-12) mole_fraction_of_cfc113_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.  The chemical formula of CFC113 is CCl2FCClF2.  The IUPAC name for CFC113 is 1,1,2-trichloro-1,2,2-trifluoro-ethane.-->
-		<field id="CMIP7_cfc11global" field_ref="?dummy_0d"/>
-		<!--P2 (1E-12) mole_fraction_of_cfc11_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.  The chemical formula of CFC11 is CFCl3.  The IUPAC name for CFC11 is trichloro-fluoro-methane.-->
-		<field id="CMIP7_cfc12global" field_ref="?dummy_0d"/>
-		<!--P2 (1E-12) mole_fraction_of_cfc12_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.  The chemical formula of CFC12 is CF2Cl2.  The IUPAC name for CFC12 is dichloro-difluoro-methane.-->
-		<field id="CMIP7_ch3oh" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (mol mol-1) mole_fraction_of_methanol_in_air : Mole fraction of methanol (CH3OH) in air-->
-		<field id="CMIP7_ch4" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (mol mol-1) mole_fraction_of_methane_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.-->
-		<field id="CMIP7_ch4global" field_ref="?dummy_0d"/>
-		<!--P2 (1E-09) mole_fraction_of_methane_in_air : Global Mean Mole Fraction of CH4-->
-		<field id="CMIP7_ch4losssoil" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) surface_downward_mass_flux_of_methane_due_to_soil_biological_consumption : Loss rate of methane from the atmosphere due to soil sink-->
-		<field id="CMIP7_ch4ref" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (mol mol-1) reference_mole_fraction_of_methane_in_air : This is the methane mole fraction that is used in a diagnostic call to the model's radiation scheme. It is only applicable when a methane double call is active in the model.-->
-		<field id="CMIP7_chegph2oo1d" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (mol m-3 s-1) tendency_of_atmosphere_mole_concentration_of_hydroxyl_radical_due_to_chemical_production_from_atomic_singlet_oxygen_and_water_vapor : Primary production rate of the hydroxy (OH) radical via H2O+O1D-->
-		<field id="CMIP7_chepnh4" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_ammonium_dry_aerosol_particles_due_to_net_chemical_production : Net chemical production rate of ammonium aerosol in the atmosphere.-->
-		<field id="CMIP7_chepno3" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_nitrate_dry_aerosol_particles_due_to_net_chemical_production : Net chemical production rate of nitrate aerosol in the atmosphere-->
-		<field id="CMIP7_co" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (mol mol-1) mole_fraction_of_carbon_monoxide_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.-->
-		<field id="CMIP7_conccn" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (m-3) number_concentration_of_ambient_aerosol_particles_in_air : This is the number concentration of air particles in air-->
-		<field id="CMIP7_dms" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (mol mol-1) mole_fraction_of_dimethyl_sulfide_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.-->
-		<field id="CMIP7_do3chm" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (mol m-3 s-1) tendency_of_atmosphere_mole_concentration_of_ozone_due_to_net_chemical_production : Net chemical production of ozone in the atmosphere-->
-		<field id="CMIP7_dryh2" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_molecular_hydrogen_due_to_dry_deposition : This is the total loss rate of molecular hydrogen (H2) from the atmosphere via its soil sink due to bacterial consumption.-->
-		<field id="CMIP7_dryhno3" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_nitric_acid_due_to_dry_deposition : This is the loss of nitric acid (HNO3) from the atmosphere due to dry deposition-->
-		<field id="CMIP7_drynh3" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) minus_tendency_of_atmosphere_mass_content_of_ammonia_due_to_dry_deposition : Monthly Dry Deposition Rate of NH3 at surface-->
-		<field id="CMIP7_drynh4" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) minus_tendency_of_atmosphere_mass_content_of_ammonium_dry_aerosol_particles_due_to_dry_deposition : Dry Deposition Rate of NH4-->
-		<field id="CMIP7_dryno3" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_nitrate_dry_aerosol_due_to_dry_deposition : Loss rate of nitrate (NO3) aerosol from the atmosphere due to dry deposition-->
-		<field id="CMIP7_drynoy" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) minus_tendency_of_atmosphere_mass_content_of_noy_expressed_as_nitrogen_due_to_dry_deposition : Dry Deposition Rate of NOy-->
-		<field id="CMIP7_e90inst" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (mol mol-1) mole_fraction_of_artificial_tracer_with_fixed_lifetime_in_air : Mole fraction of an artificial tracer with a 90-day lifetime (e90)-->
-		<field id="CMIP7_emiach4" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_methane_due_to_emission : Anthropogenic emission rate of methane (CH4) into the atmosphere-->
-		<field id="CMIP7_emiavnox" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (mol m-2 s-1) tendency_of_atmosphere_moles_of_nox_expressed_as_nitrogen : Emission rate of NOx from aircraft-->
-		<field id="CMIP7_emibbbc" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_elemental_carbon_dry_aerosol_particles_due_to_emission_from_fires : Total emission rate of black carbon aerosol into the atmosphere from all biomass burning (natural and anthropogenic)-->
-		<field id="CMIP7_emibbch4" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_methane_due_to_emission_from_fires : Total emission rate of methane (CH4) into the atmosphere from all biomass burning (natural and anthropogenic)-->
-		<field id="CMIP7_emibbco" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_carbon_monoxide_due_to_emission_from_fires : Total emission rate of carbon monoxide (CO) into the atmosphere from all biomass burning (natural and anthropogenic)-->
-		<field id="CMIP7_emibbdms" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_dimethyl_sulfide_due_to_emission_from_fires : Total emission rate of dimethyl sulfide (DMS) into the atmosphere from all biomass burning (natural and anthropogenic)-->
-		<field id="CMIP7_emibbnh3" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_ammonia_due_to_emission_from_fires : Total emission rate of ammonia (NH3) into the atmosphere from all biomass burning (natural and anthropogenic)-->
-		<field id="CMIP7_emibbnox" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_nox_expressed_as_nitrogen_due_to_emission_from_fires : Total emission rate of nitrogen oxides (NOx) from all biomass burning (natural and anthropogenic)-->
-		<field id="CMIP7_emibboa" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_particles_due_to_emission_from_fires : Total emission rate of particulate organic matter (organic aerosol) into the atmosphere from all biomass burning (natural and anthropogenic)-->
-		<field id="CMIP7_emibbso2" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_sulfur_dioxide_due_to_emission_from_fires : Total emission rate of SO2 into the atmosphere from all biomass burning (natural and anthropogenic).-->
-		<field id="CMIP7_emibbvoc" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_nmvoc_due_to_emission_from_fires : Total emission rate of non-methane volatile organic compounds (NMVOCs) from all biomass burning (natural and anthropogenic)-->
-		<field id="CMIP7_emic2h4" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_ethene_due_to_emission : Total emission rate of ethene (C2H4) into the atmosphere-->
-		<field id="CMIP7_emic2h5oh" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_ethanol_due_to_emission : This is the total emission rate of ethanol (C2H5OH) into the atmosphere-->
-		<field id="CMIP7_emic2h6" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_ethane_due_to_emission : This is the total emission rate of ethane (C2H6) into the atmosphere-->
-		<field id="CMIP7_emic3h6" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_propene_due_to_emission : This is the total emission rate of propene (C3H6) into the atmosphere-->
-		<field id="CMIP7_emic3h8" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_propane_due_to_emission : This is the total emission rate of propane (C3H8) into the atmosphere-->
-		<field id="CMIP7_emic4h10" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_butane_due_to_emission : This is the total emission rate of butane (C4H10) into the atmosphere-->
-		<field id="CMIP7_emich3oh" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_methanol_due_to_emission : This is the total emission rate of methanol (CH3OH) into the atmosphere-->
-		<field id="CMIP7_emich4" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_methane_due_to_emission : This is the total emission rate of methane (CH4) into the atmosphere-->
-		<field id="CMIP7_emih2" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_molecular_hydrogen_due_to_emission : This is the total emission rate of molecular hydrogen (H2) into the atmosphere (i.e., integrate 3D emission field vertically to 2d field)-->
-		<field id="CMIP7_emilkch4" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) surface_net_upward_mass_flux_of_methane_due_to_emission_from_freshwater_lakes : This is the emission rate of methane (CH4) into the atmosphere from freshwater lakes-->
-		<field id="CMIP7_flashrate" field_ref="?dummy_XY"/>
-		<!--P3 (km-2 s-1) frequency_of_lightning_flashes_per_unit_area : Lightning Flash Rate-->
-		<field id="CMIP7_h2" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (mol mol-1) mole_fraction_of_molecular_hydrogen_in_air : This is the mole fraction of molecular hydrogen (H2) in air-->
-		<field id="CMIP7_h2loss" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (mol m-3 s-1) tendency_of_atmosphere_mole_concentration_of_molecular_hydrogen_due_to_chemical_destruction : This is the loss rate of molecular hydrogen (H2) from the atmosphere due to chemical destruction-->
-		<field id="CMIP7_h2prod" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (mol m-3 s-1) tendency_of_atmosphere_mole_concentration_of_molecular_hydrogen_due_to_chemical_production : This is the production of molecular hydrogen (H2) in the atmosphere due to chemical production-->
-		<field id="CMIP7_hcfc22global" field_ref="?dummy_0d"/>
-		<!--P2 (1E-12) mole_fraction_of_hcfc22_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.  A chemical species denoted by X may be described by a single term such as 'nitrogen' or a phrase such as 'nox\_expressed\_as\_nitrogen'. The chemical formula for HCFC22 is CHClF2.  The IUPAC name for HCFC22 is chloro-difluoro-methane.-->
-		<field id="CMIP7_meanage" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (yr) age_of_stratospheric_air : The mean age of air is defined as the mean time that a stratospheric air mass has been out of contact with the well-mixed troposphere.-->
-		<field id="CMIP7_mmraerh2o" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (kg kg-1) mass_fraction_of_water_in_ambient_aerosol_particles_in_air : Mass fraction is used in the construction mass\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y. It means the ratio of the mass of X to the mass of Y (including X). "Aerosol" means the system of suspended liquid or solid particles in air (except cloud droplets) and their carrier gas, the air itself. "Ambient\_aerosol" means that the aerosol is measured or modelled at the ambient state of pressure, temperature and relative humidity that exists in its immediate environment. "Ambient aerosol particles" are aerosol particles that have taken up ambient water through hygroscopic growth. The extent of hygroscopic growth depends on the relative humidity and the composition of the particles.-->
-		<field id="CMIP7_mmrbc" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (kg kg-1) mass_fraction_of_elemental_carbon_dry_aerosol_particles_in_air : Dry mass fraction of black carbon aerosol particles in air.-->
-		<field id="CMIP7_mmrdust" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (kg kg-1) mass_fraction_of_dust_dry_aerosol_particles_in_air : Dry mass fraction of dust aerosol particles in air.-->
-		<field id="CMIP7_mmrnh4" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (kg kg-1) mass_fraction_of_ammonium_dry_aerosol_particles_in_air : Dry mass fraction of ammonium aerosol particles in air.-->
-		<field id="CMIP7_mmrno3" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (kg kg-1) mass_fraction_of_nitrate_dry_aerosol_particles_in_air : Dry mass fraction of nitrate aerosol particles in air.-->
-		<field id="CMIP7_mmroa" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (kg kg-1) mass_fraction_of_particulate_organic_matter_dry_aerosol_particles_in_air : We recommend a scale factor of POM=1.4\*OC, unless your model has more detailed info available.-->
-		<field id="CMIP7_mmrso4" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (kg kg-1) mass_fraction_of_sulfate_dry_aerosol_particles_in_air : Dry mass of sulfate (SO4) in aerosol particles as a fraction of air mass.-->
-		<field id="CMIP7_mmrsoa" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (kg kg-1) mass_fraction_of_secondary_particulate_organic_matter_dry_aerosol_particles_in_air : Mass fraction in the atmosphere of secondary organic aerosols (particulate organic matter formed within the atmosphere from gaseous precursors; dry mass).-->
-		<field id="CMIP7_mmrss" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (kg kg-1) mass_fraction_of_sea_salt_dry_aerosol_particles_in_air : Mass fraction in the atmosphere of sea salt aerosol (dry mass).-->
-		<field id="CMIP7_n2o" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (mol mol-1) mole_fraction_of_nitrous_oxide_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.   The chemical formula of  nitrous oxide is N2O.-->
-		<field id="CMIP7_n2oglobal" field_ref="?dummy_0d"/>
-		<!--P2 (1E-09) mole_fraction_of_nitrous_oxide_in_air : Global mean Nitrous Oxide (N2O)-->
-		<field id="CMIP7_o3" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (mol mol-1) mole_fraction_of_ozone_in_air : Mole fraction is used in the construction mole\_fraction\_of\_X\_in\_Y, where X is a material constituent of Y.-->
-		<field id="CMIP7_o3inst" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (mol mol-1) mole_fraction_of_ozone_in_air : This is the mole fraction of ozone in air, sampled on the first day of the month as an instantaneous field.-->
-		<field id="CMIP7_o3ref" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (mol mol-1) reference_mole_fraction_of_ozone_in_air : This is the ozone mole fraction that is used in a diagnostic call to the model's radiation scheme. It is only applicable when an ozone double call is active in the model.-->
-		<field id="CMIP7_o3ste" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (mol mol-1) mole_fraction_of_ozone_in_air : Ozone tracer intended to map out strat-trop exchange (STE) of ozone.-->
-		<field id="CMIP7_reffcclwtop" field_ref="?dummy_XY"/>
-		<!--P2 (m) effective_radius_of_convective_cloud_liquid_water_particles_at_convective_liquid_water_cloud_top : Cloud-Top Effective Droplet Radius in Convective Cloud-->
-		<field id="CMIP7_reffccwctop" field_ref="?dummy_XY"/>
-		<!--P2 (m) effective_radius_of_cloud_condensed_water_particles_at_cloud_top : Cloud-Top Effective Radius of Liquid or Ice Cloud at Liquid or Ice Cloud Top-->
-		<field id="CMIP7_reffsclwtop" field_ref="?dummy_XY"/>
-		<!--P2 (m) effective_radius_of_stratiform_cloud_liquid_water_particles_at_stratiform_liquid_water_cloud_top : Cloud-Top Effective Droplet Radius in Stratiform Cloud-->
-		<field id="CMIP7_rlutch4ref" field_ref="?dummy_XY"/>
-		<!--P2 (W m-2) toa_outgoing_longwave_flux_assuming_reference_mole_fraction_of_methane_in_air : This is the outgoing longwave flux at the top-of-atmosphere for all-sky conditions from a diagnostic call to the radiation scheme using a reference methane field-->
-		<field id="CMIP7_rlutcsch4ref" field_ref="?dummy_XY"/>
-		<!--P2 (W m-2) toa_outgoing_longwave_flux_assuming_clear_sky_and_reference_mole_fraction_of_methane_in_air : This is the outgoing longwave flux at the top-of-atmosphere for clear-sky conditions from a diagnostic call to the radiation scheme with a reference methane field-->
-		<field id="CMIP7_rlutcso3ref" field_ref="?dummy_XY"/>
-		<!--P2 (W m-2) toa_outgoing_longwave_flux_assuming_clear_sky_and_reference_mole_fraction_of_ozone_in_air : This is the outgoing longwave flux at the top-of-atmosphere for clear-sky conditions from a diagnostic call to the radiation scheme using a reference ozone field-->
-		<field id="CMIP7_rluto3ref" field_ref="?dummy_XY"/>
-		<!--P2 (W m-2) toa_outgoing_longwave_flux_assuming_reference_mole_fraction_of_ozone_in_air : This is outgoing longwave flux at the top-of-atmosphere for all-sky conditions from a diagnostic call to the radiation scheme using a reference ozone field-->
-		<field id="CMIP7_rsutch4ref" field_ref="?dummy_XY"/>
-		<!--P2 (W m-2) toa_outgoing_shortwave_flux_assuming_reference_mole_fraction_of_methane_in_air : This is the outgoing shortwave flux at the top-of-atmosphere for all-sky conditions from a diagnostic call to the radiation scheme with a reference methane field-->
-		<field id="CMIP7_rsutcsch4ref" field_ref="?dummy_XY"/>
-		<!--P2 (W m-2) toa_outgoing_shortwave_flux_assuming_clear_sky_and_reference_mole_fraction_of_methane_in_air : This is the outgoing shortwave flux at the top-of-atmosphere for clear-sky conditions from a diagnostic call to the radiation scheme with a reference methane field-->
-		<field id="CMIP7_rsutcso3ref" field_ref="?dummy_XY"/>
-		<!--P2 (W m-2) toa_outgoing_shortwave_flux_assuming_clear_sky_and_reference_mole_fraction_of_ozone_in_air : This represents the top-of-atmosphere outgoing shortwave radiative flux assuming clear-sky conditions when a reference ozone field is used in a diagnostic call to the radiation scheme-->
-		<field id="CMIP7_rsuto3ref" field_ref="?dummy_XY"/>
-		<!--P2 (W m-2) toa_outgoing_shortwave_flux_assuming_reference_mole_fraction_of_ozone_in_air : This is top-of-atmosphere outgoing shortwave flux for all-sky conditions from a diagnostic call to the radiation scheme, using a reference ozone field-->
-		<field id="CMIP7_scldncl" field_ref="?dummy_XY"/>
-		<!--P2 (m-3) number_concentration_of_stratiform_cloud_liquid_water_particles_at_stratiform_liquid_water_cloud_top : Cloud Droplet Number Concentration of Stratiform Cloud Tops-->
-		<field id="CMIP7_sfpm1" field_ref="?dummy_XY_lowerModelLayer"/>
-		<!--P2 (kg kg-1) mass_fraction_of_pm1_ambient_aerosol_particles_in_air : Daily mean PM1.0 mass mixing ratio in lowest model layer-->
-		<field id="CMIP7_sfpm10" field_ref="?dummy_XY_lowerModelLayer"/>
-		<!--P2 (kg kg-1) mass_fraction_of_pm10_ambient_aerosol_particles_in_air : Daily mean PM10 mass mixing ratio in lowest model layer-->
-		<field id="CMIP7_sfpm25" field_ref="?dummy_XY_lowerModelLayer"/>
-		<!--P2 (kg kg-1) mass_fraction_of_pm2p5_ambient_aerosol_particles_in_air : Daily mean PM2.5 mass mixing ratio in lowest model layer-->
-		<field id="CMIP7_so2" field_ref="?dummy_XY_lowerModelLayer"/>
-		<!--P2 (mol mol-1) mole_fraction_of_sulfur_dioxide_in_air : Daily mean SO2 volume mixing ratio in lowest model layer-->
-		<field id="CMIP7_stratch4loss" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (mol m-3 s-1) tendency_of_atmosphere_mole_concentration_of_methane_due_to_chemical_destruction : This is the loss rate of stratospheric methane by all chemical destruction. The distinction between the stratosphere and troposphere should be consistent with the tropopause as used in the calculation of the tropopause pressure (ptp). It should have zero values in the troposphere.-->
-		<field id="CMIP7_tropch4loss" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (mol m-3 s-1) tendency_of_atmosphere_mole_concentration_of_methane_due_to_chemical_destruction : This is the loss rate of tropospheric methane by all chemical destruction. The distinction between stratosphere and troposphere should be consistent with the tropopause used in the calculation of the tropopause pressure (ptp).  It should have zero values in the stratosphere.-->
-		<field id="CMIP7_tropch4lossoh" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (mol m-3 s-1) tendency_of_atmosphere_mole_concentration_of_methane_due_to_chemical_destruction_by_hydroxyl_radical : This is the loss rate of tropospheric methane due to reaction with the hydroxy (OH) radical. The distinction between stratosphere and troposphere should be consistent with the tropopause used to calculate the pressure of the tropopause (ptp).  It should have zero values in the stratosphere.-->
-		<field id="CMIP7_tropdo3chm" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (mol m-3 s-1) tendency_of_atmosphere_mole_concentration_of_ozone_due_to_net_chemical_production : This is the net chemical tendency of ozone in the troposphere. The distinction between the stratosphere and troposphere should be consistent with the definition of the tropopause used in the calculation of the tropopause pressure (ptp). It should have zero values in the stratosphere.-->
-		<field id="CMIP7_tropo3ste" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (mol mol-1) mole_fraction_of_ozone_in_air : Ozone tracer intended to map out strat-trop exchange (STE) of ozone in the troposphere. It represents the ozone volume mixing ratio in the troposphere that is considered to be stratospheric in origin. It should be consistent with the definition of tropopause used to calculate the pressure of the tropopause (ptp). It should have zero values in the stratosphere and non-zero positive values in the troposphere.-->
-		<field id="CMIP7_wethno3" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_nitric_acid_due_to_wet_deposition : This is the loss rate of nitric acid (HNO3) from the atmosphere due to wet deposition-->
-		<field id="CMIP7_wetnh3" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) minus_tendency_of_atmosphere_mass_content_of_ammonia_due_to_wet_deposition : Surface deposition rate of ammonia (NH3) due to wet processes-->
-		<field id="CMIP7_wetnh4" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) minus_tendency_of_atmosphere_mass_content_of_ammonium_dry_aerosol_particles_due_to_wet_deposition : Surface deposition rate of ammonium (NH4) due to wet processes-->
-		<field id="CMIP7_wetno3" field_ref="?dummy_XYA_alevel"/>
-		<!--P2 (kg m-2 s-1) tendency_of_atmosphere_mass_content_of_nitrate_dry_aerosol_particles_due_to_wet_deposition : This is the loss rate of nitrate aerosol from the atmosphere due to wet deposition-->
-		<field id="CMIP7_wetnoy" field_ref="?dummy_XY"/>
-		<!--P2 (kg m-2 s-1) minus_tendency_of_atmosphere_mass_content_of_noy_expressed_as_nitrogen_due_to_wet_deposition : NOy is the sum of all simulated oxidized nitrogen species, out of NO, NO2, HNO3, HNO4, NO3aerosol, NO3(radical), N2O5, PAN, other organic nitrates.-->
 		<field id="CMIP7_ap" field_ref="dummy_hyb"/>
 		<!--One of the hybrid coordinate arrays-->
 		<field id="CMIP7_ap_bnds" field_ref="dummy_hyb"/>

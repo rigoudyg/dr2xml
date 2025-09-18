@@ -118,8 +118,8 @@ def print_some_stats(context, svars_per_table, skipped_vars_per_table, actually_
             list_labels = sorted(list(dic))
 
             for label in list_labels:
-                ln = sorted(list(dic_ln[label]))
-                sn = sorted(list(dic_sn[label]))
+                ln = sorted(list(dic_ln[label]), key=lambda x: str(x))
+                sn = sorted(list(dic_sn[label]), key=lambda x: str(x))
                 logger.info((14 + len(label)) * "-")
                 logger.info("--- VARNAME: {}: {}".format(label, ln[0]).strip())
                 logger.info((14 + len(label)) * "-")

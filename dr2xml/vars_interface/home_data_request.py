@@ -104,7 +104,8 @@ def process_home_vars(mip_vars_list, mips, expid="False"):
     path_extra_tables = internal_dict['path_extra_tables']
     logger.info("homevars file: %s" % homevars)
     home_vars_list = read_home_vars_list(homevars, expid, mips, path_extra_tables)
-    logger.info("homevars list: %s" % " ".join([sv.label for sv in home_vars_list]))
+    msg = "homevars list: %s" % " ".join([sv.label for sv in home_vars_list])
+    logger.info(msg.strip(" "))
     #
     for hv in home_vars_list:
         hv_info = {"varname": hv.label, "realm": ",".join(hv.modeling_realm), "freq": hv.frequency,

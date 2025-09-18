@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<context id="arpsfx">
-	<!--CMIP7 Data Request version Software current_cmip7_dr_software - Content test-->
-	<!--dr2xml version current_version-->
+<context id="trip">
+	<!--CMIP7 Data Request version Software 1.2.3.dev0+g630296cf0.d20250820 - Content test-->
+	<!--dr2xml version 3.1-->
 	<!--Lab_and_model settings
 {'data_request_content_version' = 'tests',
 'data_request_used' = 'CMIP7',
@@ -21,13 +21,7 @@
 {}-->
 	<!--Year processed None-->
 	<field_definition>
-		<field id="CMIP7_ap" field_ref="dummy_hyb"/>
-		<!--One of the hybrid coordinate arrays-->
-		<field id="CMIP7_ap_bnds" field_ref="dummy_hyb"/>
-		<!--One of the hybrid coordinate arrays-->
-		<field id="CMIP7_b" field_ref="dummy_hyb"/>
-		<!--One of the hybrid coordinate arrays-->
-		<field id="CMIP7_b_bnds" field_ref="dummy_hyb"/>
-		<!--One of the hybrid coordinate arrays-->
+		<field id="CMIP7_areacellr" field_ref="areacellr"/>
+		<!--P2 (m2) cell_area : Cell areas for any grid used to report river model variables (may be the same as for atmospheric variables). These cell areas should be defined to enable exact calculation of area integrals (e.g., of vertical fluxes of energy at the surface and top of the atmosphere).-->
 	</field_definition>
 </context>

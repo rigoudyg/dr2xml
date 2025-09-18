@@ -19,7 +19,7 @@ from utilities.logger import get_logger
 from dr2xml.settings_interface import get_settings_values
 from dr2xml.utils import VarsError, Dr2xmlError
 
-tcmName2tcmValue = {"time-mean": "time: mean", "time-point": "time: point", "None": None}
+tcmName2tcmValue = {"time-mean": "time: mean", "time-intv": "time: mean", "time-point": "time: point", "None": None}
 
 # List of multi and single pressure level suffixes for which we want the union/zoom axis mecanism turned on
 # For not using union/zoom, set 'use_union_zoom' to False in lab settings
