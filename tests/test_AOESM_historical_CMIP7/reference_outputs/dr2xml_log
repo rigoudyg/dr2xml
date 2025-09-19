@@ -18,7 +18,7 @@ Number of distinct CMOR variables (whatever the grid): 66
 Number of distinct var labels is: 45
 Number of simplified vars is: 66
 Issues with standard names are: []
-homevars file: /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_historical_CMIP7/input/home_data_request/home_data_request_test.txt
+homevars file: current_directory/test_AOESM_historical_CMIP7/input/home_data_request/home_data_request_test.txt
 Number of 'cmor', 'dev' and 'perso' among home variables: 11
 Number of 'extra' among home variables: 0
 homevars list: tos zos sos tos zos sos tos zos sos albsrfc albsrfc
@@ -230,7 +230,7 @@ Number of distinct CMOR variables (whatever the grid): 66
 Number of distinct var labels is: 45
 Number of simplified vars is: 66
 Issues with standard names are: []
-homevars file: /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_historical_CMIP7/input/home_data_request/home_data_request_test.txt
+homevars file: current_directory/test_AOESM_historical_CMIP7/input/home_data_request/home_data_request_test.txt
 Number of 'cmor', 'dev' and 'perso' among home variables: 11
 Number of 'extra' among home variables: 0
 homevars list: tos zos sos tos zos sos tos zos sos albsrfc albsrfc
@@ -243,12 +243,12 @@ Processing realm 'aerosol' of context 'surfex'
 Processing realm 'atmos' of context 'surfex'
 Processing realm 'land' of context 'surfex'
 Processing realm 'landIce' of context 'surfex'
-processing file /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_historical_CMIP7/input/xml/ping_surfex.xml:
-OK /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_historical_CMIP7/input/xml/ping_surfex.xml
-processing file /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_historical_CMIP7/input/xml/ping_trip.xml:
-OK /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_historical_CMIP7/input/xml/ping_trip.xml
-processing file /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_historical_CMIP7/input/xml/ping_nemo.xml:
-OK /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_historical_CMIP7/input/xml/ping_nemo.xml
+processing file current_directory/test_AOESM_historical_CMIP7/input/xml/ping_surfex.xml:
+OK current_directory/test_AOESM_historical_CMIP7/input/xml/ping_surfex.xml
+processing file current_directory/test_AOESM_historical_CMIP7/input/xml/ping_trip.xml:
+OK current_directory/test_AOESM_historical_CMIP7/input/xml/ping_trip.xml
+processing file current_directory/test_AOESM_historical_CMIP7/input/xml/ping_nemo.xml:
+OK current_directory/test_AOESM_historical_CMIP7/input/xml/ping_nemo.xml
 Duplicate variable bldep,bldep in table 3hrPt is skipped, preferred is bldep
 Duplicate variable bldep,bldep in table 3hrPt is skipped, preferred is bldep
 Duplicate variable snc,snc in table LImon is skipped, preferred is snc
@@ -410,7 +410,7 @@ Number of distinct CMOR variables (whatever the grid): 66
 Number of distinct var labels is: 45
 Number of simplified vars is: 66
 Issues with standard names are: []
-homevars file: /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_historical_CMIP7/input/home_data_request/home_data_request_test.txt
+homevars file: current_directory/test_AOESM_historical_CMIP7/input/home_data_request/home_data_request_test.txt
 Number of 'cmor', 'dev' and 'perso' among home variables: 11
 Number of 'extra' among home variables: 0
 homevars list: tos zos sos tos zos sos tos zos sos albsrfc albsrfc
@@ -418,12 +418,12 @@ Error: {'varname': 'zos', 'realm': 'ocean', 'freq': 'monPt', 'table': 'NONE'} HO
 Error: {'varname': 'sos', 'realm': 'ocean', 'freq': 'monPt', 'table': 'NONE'} HOMEVar announced as cmor but no corresponding CMORVar found => Not taken into account.
 
 Realms for these CMORvars: aerosol atmos land landIce ocean seaIce
-processing file /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_historical_CMIP7/input/xml/ping_surfex.xml:
-OK /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_historical_CMIP7/input/xml/ping_surfex.xml
-processing file /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_historical_CMIP7/input/xml/ping_trip.xml:
-OK /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_historical_CMIP7/input/xml/ping_trip.xml
-processing file /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_historical_CMIP7/input/xml/ping_nemo.xml:
-OK /home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_historical_CMIP7/input/xml/ping_nemo.xml
+processing file current_directory/test_AOESM_historical_CMIP7/input/xml/ping_surfex.xml:
+OK current_directory/test_AOESM_historical_CMIP7/input/xml/ping_surfex.xml
+processing file current_directory/test_AOESM_historical_CMIP7/input/xml/ping_trip.xml:
+OK current_directory/test_AOESM_historical_CMIP7/input/xml/ping_trip.xml
+processing file current_directory/test_AOESM_historical_CMIP7/input/xml/ping_nemo.xml:
+OK current_directory/test_AOESM_historical_CMIP7/input/xml/ping_nemo.xml
 
 file_def written as current_directory/test_AOESM_historical_CMIP7/test_outputs/dr2xml_trip.xml
 
