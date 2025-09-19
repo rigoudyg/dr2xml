@@ -66,7 +66,7 @@
 'forcing_index' = '2',
 'history' = 'none',
 'initialization_index' = '1',
-'listof_home_vars' = '/home/rigoudyg/dev/DR2XML/dr2xml_source/tests/test_AOESM_historical_CMIP7/input/home_data_request/home_data_request_test.txt ',
+'listof_home_vars' = 'current_directory/test_AOESM_historical_CMIP7/input/home_data_request/home_data_request_test.txt ',
 'parent_time_ref_year' = '1850',
 'path_extra_tables' = 'current_directory/test_AOESM_historical_CMIP7/input/tables',
 'physics_index' = '1',
