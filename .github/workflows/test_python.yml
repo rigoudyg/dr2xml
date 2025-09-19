@@ -37,5 +37,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with unittest
       run: |
+        export CMIP7_DR_API_CONFIGFILE=$PWD/dr2xml/dr_interface/CMIP7_config
+        python3 -m data_request_api.command_line.config offline true
         for f in $(ls tests/test_*/__init__.py); do echo $f; python3 -m unittest $f; done
         for f in $(ls tests/test_*.py); do echo $f; python3 -m unittest $f; done
