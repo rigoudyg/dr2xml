@@ -4,7 +4,7 @@
 
 lab_and_model_settings = {
     'data_request_used': 'CMIP7',
-    'data_request_content_version': 'tests',
+    'data_request_content_version': 'test',
     'institution_id': "IPSL",
     'laboratory_used': "ipsl",
     'project': "ping",
