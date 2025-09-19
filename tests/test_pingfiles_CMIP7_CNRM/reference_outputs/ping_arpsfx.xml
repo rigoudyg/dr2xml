@@ -3,7 +3,7 @@
 	<!--CMIP7 Data Request version Software current_cmip7_dr_software - Content test-->
 	<!--dr2xml version current_version-->
 	<!--Lab_and_model settings
-{'data_request_content_version' = 'tests',
+{'data_request_content_version' = 'test',
 'data_request_used' = 'CMIP7',
 'excluded_vars' = [],
 'excluded_vars_file' = [],
