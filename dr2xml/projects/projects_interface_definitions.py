@@ -138,6 +138,10 @@ def determine_value(key_type=None, keys=list(), func=None, fmt=None, src=None, c
                 from dr2xml.dr_interface import get_dr_object
                 value = get_dr_object("get_data_request")
                 found = True
+            elif key_type in ["vocabulary", ] and allow_additional_keytypes:
+                from dr2xml.vocabulary import get_vocabulary
+                value = get_vocabulary()
+                found = True
             elif key_type in ["variable", ] and "variable" in additional_dict:
                 value = additional_dict["variable"]
                 if isinstance(value, list):
@@ -313,7 +317,7 @@ class ValueSettings(Settings):
             tmp_rep = ", ".join(self.dump_doc_inner(self.keys, format_struct=False))
         elif key_type in ["merge", ]:
             tmp_rep = str(self.dump_doc_inner(self.keys, format_struct=False))
-        elif key_type in ["data_request", ]:
+        elif key_type in ["data_request", "vocabulary"]:
             tmp_rep = "%s" % key_type
             keys_values = self.dump_doc_inner(self.keys, format_struct=False)
             for key_value in keys_values:
