@@ -179,6 +179,8 @@ class TestProjectSettings(unittest.TestCase):
 		                'use_cmorvar_label_in_filename': False,
 		                'use_union_zoom': False,
 		                'vertical_interpolation_operation': 'instant',
+		                'vocabulary_config': f'{project_dir}/dr2xml/dr2xml/vocabulary/vocabulary.json',
+		                'vocabulary_used': None,
 		                'xios_version': 2,
 		                'year': 0,
 		                'zg_field_name': 'zg'}

@@ -1352,6 +1352,22 @@ internal_values = dict(
 		],
 		help="Configuration file of the data request content to be used"
 	),
+	vocabulary_used=ParameterSettings(
+        key="vocabulary_used",
+		default_values=[
+			ValueSettings(key_type="laboratory", keys="vocabulary_used"),
+			None
+		],
+		help="The Vocabulary infrastructure type which should be used."
+	),
+	vocabulary_config=ParameterSettings(
+		key="vocabulary_config",
+		default_values=[
+			ValueSettings(key_type="laboratory", keys="vocabulary_config"),
+			os.sep.join([os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "vocabulary", "vocabulary.json"])
+		],
+		help="Configuration file of the vocabulary to be used"
+	),
 	laboratory_used=ParameterSettings(
         key="laboratory_used",
 		default_values=[

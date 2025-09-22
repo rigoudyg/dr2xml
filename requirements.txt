@@ -9,3 +9,4 @@ coverage
 xlsxwriter
 six
 importlib
+esgvoc
