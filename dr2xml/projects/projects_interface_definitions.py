@@ -317,7 +317,7 @@ class ValueSettings(Settings):
             tmp_rep = ", ".join(self.dump_doc_inner(self.keys, format_struct=False))
         elif key_type in ["merge", ]:
             tmp_rep = str(self.dump_doc_inner(self.keys, format_struct=False))
-        elif key_type in ["data_request", ]:
+        elif key_type in ["data_request", "vocabulary"]:
             tmp_rep = "%s" % key_type
             keys_values = self.dump_doc_inner(self.keys, format_struct=False)
             for key_value in keys_values:
