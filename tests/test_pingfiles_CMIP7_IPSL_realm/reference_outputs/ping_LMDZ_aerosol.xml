@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<context id="LMDZ">
+	<!--CMIP7 Data Request version Software current_cmip7_dr_software - Content test-->
+	<!--dr2xml version current_version-->
+	<!--Lab_and_model settings
+{'data_request_content_version' = 'test',
+'data_request_used' = 'CMIP7',
+'excluded_vars' = [],
+'excluded_vars_file' = [],
+'institution_id' = 'IPSL',
+'laboratory_used' = 'ipsl',
+'listof_home_vars' = 'None',
+'max_priority' = '3',
+'mips' = {},
+'path_extra_tables' = 'None',
+'path_special_defs' = 'None',
+'ping_variables_prefix' = 'CMIP7_',
+'project' = 'ping',
+'realms_per_context' = {'LMDZ' = ['atmos', 'land', 'landIce', 'atmosChem', 'aerosol'], 'nemo' = ['seaIce', 'ocean', 'ocnBgchem'], 'orchidee' = ['land', 'landIce']},
+'tierMax' = '3'}-->
+	<!--Simulation settings
+{}-->
+	<!--Year processed None-->
+	<field_definition>
+		<field id="CMIP7_bldep" field_ref="?dummy_XY"/>
+		<!--P2 (m) atmosphere_boundary_layer_thickness : Boundary Layer Depth every 3 hours-->
+		<field id="CMIP7_ap" field_ref="dummy_hyb"/>
+		<!--One of the hybrid coordinate arrays-->
+		<field id="CMIP7_ap_bnds" field_ref="dummy_hyb"/>
+		<!--One of the hybrid coordinate arrays-->
+		<field id="CMIP7_b" field_ref="dummy_hyb"/>
+		<!--One of the hybrid coordinate arrays-->
+		<field id="CMIP7_b_bnds" field_ref="dummy_hyb"/>
+		<!--One of the hybrid coordinate arrays-->
+	</field_definition>
+</context>

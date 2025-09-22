@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<context id="trip">
+	<!--CMIP7 Data Request version Software 1.2.3.dev0+g630296cf0.d20250820 - Content test-->
+	<!--dr2xml version 3.1-->
+	<!--Lab_and_model settings
+{'data_request_content_version' = 'tests',
+'data_request_used' = 'CMIP7',
+'excluded_vars' = [],
+'excluded_vars_file' = [],
+'institution_id' = 'CNRM-CERFACS',
+'listof_home_vars' = 'None',
+'max_priority' = '3',
+'mips' = {},
+'path_extra_tables' = 'None',
+'path_special_defs' = './input/special_defs',
+'ping_variables_prefix' = 'CMIP7_',
+'project' = 'ping',
+'realms_per_context' = {'arpsfx' = ['aerosol', 'atmos', 'atmosChem', 'land', 'landIce'], 'nemo' = ['ocean', 'ocnBgchem', 'seaIce']},
+'tierMax' = '3'}-->
+	<!--Simulation settings
+{}-->
+	<!--Year processed None-->
+	<field_definition>
+		<field id="CMIP7_areacellr" field_ref="areacellr"/>
+		<!--P2 (m2) cell_area : Cell areas for any grid used to report river model variables (may be the same as for atmospheric variables). These cell areas should be defined to enable exact calculation of area integrals (e.g., of vertical fluxes of energy at the surface and top of the atmosphere).-->
+	</field_definition>
+</context>

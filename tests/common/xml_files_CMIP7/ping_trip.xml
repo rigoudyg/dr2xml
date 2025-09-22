@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<context id="trip">
+	<!--CMIP7 Data Request version Software 1.2.3.dev0+g630296cf0.d20250820 - Content v1.2.2-->
+	<!--dr2xml version 3.1-->
+	<!--Lab_and_model settings
+{'data_request_content_version' = 'v1.2.2',
+'data_request_used' = 'CMIP7',
+'excluded_vars' = [],
+'excluded_vars_file' = [],
+'institution_id' = 'CNRM-CERFACS',
+'listof_home_vars' = 'None',
+'max_priority' = '4',
+'mips' = {'AerChemMIP2', 'C4MIP', 'CDRMIP', 'CERESMIP', 'CFMIP', 'CMIP', 'CORDEX', 'DAMIP', 'DCPP', 'FAFMIP', 'FireMIP', 'FishMIP', 'GeoMIP', 'HT-MIP/VolMIP', 'HighResMIP', 'IRRMIP', 'ISIMIP', 'ISMIP7', 'LMIP', 'LUMIP', 'LongRunMIP', 'MISOMIP2', 'NAHosMIP', 'OMIP', 'Other', 'PAMIP', 'PMIP', 'RAMIP', 'RFMIP', 'SIMIP', 'SOFIAMIP', 'ScenarioMIP', 'TIPMIP', 'VIACSAB', 'VolMIP', 'WhatIfMIP'},
+'path_extra_tables' = 'None',
+'path_special_defs' = './input/special_defs',
+'ping_variables_prefix' = 'CMIP7_',
+'project' = 'ping',
+'realms_per_context' = {'arpsfx' = ['aerosol', 'atmos', 'atmosChem', 'land', 'landIce'], 'nemo' = ['ocean', 'ocnBgchem', 'seaIce']},
+'tierMax' = '3'}-->
+	<!--Simulation settings
+{}-->
+	<!--Year processed None-->
+	<field_definition>
+		<field id="CMIP7_areacellr" field_ref="areacellr"/>
+		<!--P2 (m2) cell_area : Cell areas for any grid used to report river model variables (may be the same as for atmospheric variables). These cell areas should be defined to enable exact calculation of area integrals (e.g., of vertical fluxes of energy at the surface and top of the atmosphere).-->
+		<field id="CMIP7_dgw" field_ref="dgw"/>
+		<!--P3 (kg m-2) change_over_time_in_groundwater_amount : change\_over\_time\_in\_groundwater-->
+		<field id="CMIP7_drivw" field_ref="drivw"/>
+		<!--P3 (kg m-2) change_over_time_in_river_water_amount : Change in River Storage-->
+		<field id="CMIP7_qgwr" field_ref="qgwr"/>
+		<!--P3 (kg m-2 s-1) downward_liquid_water_mass_flux_into_groundwater : water\_flux\_from\_soil\_layer\_to\_groundwater-->
+		<field id="CMIP7_rivi" field_ref="rivin"/>
+		<!--P2 (m3 s-1) incoming_water_volume_transport_along_river_channel : water\_flux\_to\_downstream-->
+		<field id="CMIP7_rivo" field_ref="rivdis"/>
+		<!--P2 (m3 s-1) outgoing_water_volume_transport_along_river_channel : water\_flux\_from\_upstream-->
+		<field id="CMIP7_wtd" field_ref="wtd"/>
+		<!--P2 (m) water_table_depth : depth\_of\_soil\_moisture\_saturation-->
+	</field_definition>
+</context>

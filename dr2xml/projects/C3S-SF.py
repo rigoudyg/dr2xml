@@ -37,10 +37,16 @@ def convert_frequency(freq):
 
 
 def convert_realm(realm):
-    if realm in ["ocean", "seaIce"]:
+    if not isinstance(realm, (list, set, tuple)):
+        realm = [realm, ]
+    if "ocean" in realm or "seaIce" in realm:
         realm = "nemo",
-    if realm in ["land", ]:
+    elif "land" in realm:
         realm = "atmo"
+    elif len(realm) == 1:
+        realm = list(realm)[0]
+    else:
+        raise ValueError("Unable to figure out the realm to be used.")
     return realm
 
 

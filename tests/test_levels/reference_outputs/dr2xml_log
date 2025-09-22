@@ -3,7 +3,7 @@
 *
 *              dr2xml version:  current_version
 *   CMIP6 conventions version:  v6.2.4
-*  CMIP6 Data Request version:  01.00.21.post1
+*  CMIP6 Data Request version:  current_cmip6_dr
 
 *
  **************************************************
@@ -70,7 +70,7 @@ Some Statistics on actually written variables per variable...
 ----------------
               *    mon_Amon_XY-P19_1 zg
 ------------------
---- VARNAME: zg50: empty in DR 01.00.21.post1
+--- VARNAME: zg50: empty in DR current_cmip6_dr
 ------------------
               *      day_day_XY-HG_1 zg50
 
@@ -78,7 +78,7 @@ Some Statistics on actually written variables per variable...
 *
 *              dr2xml version:  current_version
 *   CMIP6 conventions version:  v6.2.4
-*  CMIP6 Data Request version:  01.00.21.post1
+*  CMIP6 Data Request version:  current_cmip6_dr
 
 *
  **************************************************

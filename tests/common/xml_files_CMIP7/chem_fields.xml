@@ -1,0 +1,226 @@
+<!-- Declaration of ARPEGE chemical fields
+
+>> plusieurs sous-groupes thématiques avec distinction des grilles
+   pour une utilisation souple dans le arpsfx_file (exemple ci-dessous)
+
+	3D_instant_variables
+        <field_group group_ref="chem_3D_instant_mlev_standard"			enabled="false" />
+        <field_group group_ref="chem_3D_instant_plev_standard"			enabled="false" />
+        <field_group group_ref="chem_3D_instant_mlev_misc"			enabled="false" />
+        <field_group group_ref="chem_3D_instant_plev_misc"			enabled="false" />
+
+-->
+<field_definition>
+  <field_group prec="4" detect_missing_value="true" default_value="1.e+20" >
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- 3D ARPEGE fields : instantaneous sampling                                                                          -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~--> 
+    <field_group operation="instant" freq_op="1ts" >
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+        <field_group id="chem_3D_instant_mlev_standard" 	grid_ref="FULL_klev" >
+          <field id="Br_y"     name="bry_m"                      long_name="mole_fraction_of_inorganic_bromine_in_air"                                      unit="mol mol-1"    />   
+          <field id="CH_4"     name="ch4_m"                      long_name="mole_fraction_of_methane_in_air"                                                unit="mol mol-1"    />   
+          <field id="Cl_y"     name="cly_m"                      long_name="mole_fraction_of_inorganic_chlorine_in_air"                                     unit="mol mol-1"    />   
+          <field id="CO"       name="co_m"                       long_name="mole_fraction_of_carbon_monoxide_in_air"                                        unit="mol mol-1"    />   
+          <field id="CO_2"     name="co2_m"                      long_name="mole_fraction_of_carbon_dioxide_in_air"                                         unit="mol mol-1"    />   
+          <field id="HCHO"     name="hcho_m"                     long_name="mole_fraction_of_formaldehyde_in_air"                                           unit="mol mol-1"    />   
+          <field id="HCl"      name="hcl_m"                      long_name="mole_fraction_of_hydrogen_chloride_in_air"                                      unit="mol mol-1"    />   
+          <field id="HNO_3"    name="hno3_m"                     long_name="mole_fraction_of_nitric_acid_in_air"                                            unit="mol mol-1"    />   
+          <field id="HO_2"     name="ho2_m"                      long_name="mole_fraction_of_hydroperoxyl_radical_in_air"                                   unit="mol mol-1"    />   
+          <field id="LIN_AOA"  name="linaoa_m"                   long_name="mole_fraction_of_mean_age_in_air"                                               unit="mol mol-1"    />   
+          <field id="N_2O"     name="n2o_m"                      long_name="mole_fraction_of_nitrous_oxide_in_air"                                          unit="mol mol-1"    />   
+          <field id="NO"       name="no_m"                       long_name="mole_fraction_of_nitrogen_monoxide_in_air"                                      unit="mol mol-1"    />   
+          <field id="NO_2"     name="no2_m"                      long_name="mole_fraction_of_nitrogen_dioxide_in_air"                                       unit="mol mol-1"    />   
+          <field id="NO_y"     name="noy_m"                      long_name="mole_fraction_of_noy_expressed_as_nitrogen_in_air"                              unit="mol mol-1"    />   
+          <field id="O_3"      name="o3_m"                       long_name="mole_fraction_of_ozone_in_air"                                                  unit="mol mol-1"    />   
+          <field id="OH"       name="oh_m"                       long_name="mole_fraction_of_hydroxyl_radical_in_air"                                       unit="mol mol-1"    />   
+          <field id="H_2O"     name="h2o_m"                      long_name="mole_fraction_of_water_vapor_in_air"                                            unit="mol mol-1"    />   
+          <field id="o3loss"   name="o3loss_m"                   long_name="tendency_of_atmosphere_mole_concentration_of_ozone_due_to_chemical_destruction" unit="mol m-3 s-1"  />   
+          <field id="o3prod"   name="o3prod_m"                   long_name="tendency_of_atmosphere_mole_concentration_of_ozone_due_to_chemical_production"  unit="mol m-3 s-1"  />   
+          <field id="oxloss"   name="oxloss_m"                   long_name="tendency_of_mole_concentration_of_ozone_and_atomic_oxygen_and_1D_oxygen_atom_due_to_chemical_destruction" unit="mol m-3 s-1"  />
+          <field id="oxprod"   name="oxprod_m"                   long_name="tendency_of_mole_concentration_of_ozone_and_atomic_oxygen_and_1D_oxygen_atom_due_to_chemical_production"  unit="mol m-3 s-1"  />
+          <field id="NO_x"     name="nox_m"                      long_name="mole_fraction_of_nox_in_air"                                                    unit="mol mol-1"    />   
+          <field id="BrO"      name="bro_m"                      long_name="mole_fraction_of_bro_in_air"                                                    unit="mol mol-1"    />   
+          <field id="ClO"      name="clo_m"                      long_name="mole_fraction_of_clo_in_air"                                                    unit="mol mol-1"    />   
+          <field id="N_2O_5"   name="n2o5_m"                     long_name="mole_fraction_of_n2o5_in_air"                                                   unit="mol mol-1"    />   
+          <field id="ClONO_2"  name="clono2_m"                   long_name="mole_fraction_of_clono2_in_air"                                                 unit="mol mol-1"    />   
+        </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~--> 
+        <field_group id="chem_3D_instant_plev_standard" 	grid_ref="FULL_pstd" >
+          <field id="bry_p"       field_ref="Br_y"           name="bry"                    /> 
+          <field id="ch4_p"       field_ref="CH_4"           name="ch4"                    /> 
+          <field id="cly_p"       field_ref="Cl_y"           name="cly"                    /> 
+          <field id="co_p"        field_ref="CO"             name="co"                     /> 
+          <field id="co2_p"       field_ref="CO_2"           name="co2"                    /> 
+          <field id="hcho_p"      field_ref="HCHO"           name="hcho"                   /> 
+          <field id="hcl_p"       field_ref="HCl"            name="hcl"                    /> 
+          <field id="hno3_p"      field_ref="HNO_3"          name="hno3"                   /> 
+          <field id="ho2_p"       field_ref="HO_2"           name="ho2"                    /> 
+          <field id="linaoa_p"    field_ref="LIN_AOA"        name="linaoa"                 /> 
+          <field id="n2o_p"       field_ref="N_2O"           name="n2o"                    /> 
+          <field id="no_p"        field_ref="NO"             name="no"                     /> 
+          <field id="no2_p"       field_ref="NO_2"           name="no2"                    /> 
+          <field id="noy_p"       field_ref="NO_y"           name="noy"                    /> 
+          <field id="o3_p"        field_ref="O_3"            name="o3"                     /> 
+          <field id="oh_p"        field_ref="OH"             name="oh"                     /> 
+          <field id="h2o_p"       field_ref="H_2O"           name="h2o"                    /> 
+          <field id="o3loss_p"    field_ref="o3loss"         name="o3loss"                 /> 
+          <field id="o3prod_p"    field_ref="o3prod"         name="o3prod"                 /> 
+          <field id="oxloss_p"    field_ref="oxloss"         name="oxloss"                 /> 
+          <field id="oxprod_p"    field_ref="oxprod"         name="oxprod"                 />  
+          <field id="nox_p"       field_ref="NO_x"           name="nox"                    /> 
+          <field id="bro_p"       field_ref="BrO"            name="bro"                    /> 
+          <field id="clo_p"       field_ref="ClO"            name="clo"                    /> 
+          <field id="n2o5_p"      field_ref="N_2O_5"         name="n2o5"                   /> 
+          <field id="clono2_p"    field_ref="ClONO_2"        name="clono2"                 /> 
+        </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+        <field_group id="chem_3D_instant_mlev_misc"		grid_ref="FULL_klev" >
+          <field id="OClO"          name="oclo_m"                 long_name="mole_fraction_of_oclo_in_air"                                                  unit="mol mol-1"    />   
+          <field id="HOCl"          name="hocl_m"                 long_name="mole_fraction_of_hocl_in_air"                                                  unit="mol mol-1"    />   
+          <field id="Cl_2"          name="cl2_m"                  long_name="mole_fraction_of_cl2_in_air"                                                   unit="mol mol-1"    />   
+          <field id="H_2O_2"        name="h2o2_m"                 long_name="mole_fraction_of_h2o2_in_air"                                                  unit="mol mol-1"    />   
+          <field id="ClNO_2"        name="clno2_m"                long_name="mole_fraction_of_clno2_in_air"                                                 unit="mol mol-1"    />   
+          <field id="HBr"           name="hbr_m"                  long_name="mole_fraction_of_hbr_in_air"                                                   unit="mol mol-1"    />   
+          <field id="BrONO_2"       name="brono2_m"               long_name="mole_fraction_of_brono2_in_air"                                                unit="mol mol-1"    />   
+          <field id="HNO_4"         name="hno4_m"                 long_name="mole_fraction_of_hno4_in_air"                                                  unit="mol mol-1"    />   
+          <field id="Cl_2O_2"       name="cl2o2_m"                long_name="mole_fraction_of_cl2o2_in_air"                                                 unit="mol mol-1"    />   
+          <field id="HOBr"          name="hobr_m"                 long_name="mole_fraction_of_hobr_in_air"                                                  unit="mol mol-1"    />   
+          <field id="BrCl"          name="brcl_m"                 long_name="mole_fraction_of_brcl_in_air"                                                  unit="mol mol-1"    />   
+          <field id="MO2"           name="mo2_m"                  long_name="mole_fraction_of_mo2_in_air"                                                   unit="mol mol-1"    />   
+          <field id="OP1"           name="op1_m"                  long_name="mole_fraction_of_op1_in_air"                                                   unit="mol mol-1"    />   
+          <field id="CFC11"         name="cfc11_m"                long_name="mole_fraction_of_cfc11_in_air"                                                 unit="mol mol-1"    />   
+          <field id="CFC12"         name="cfc12_m"                long_name="mole_fraction_of_cfc12_in_air"                                                 unit="mol mol-1"    />   
+          <field id="CFC113"        name="cfc113_m"               long_name="mole_fraction_of_cfc113_in_air"                                                unit="mol mol-1"    />   
+          <field id="CCl_4"         name="ccl4_m"                 long_name="mole_fraction_of_ccl4_in_air"                                                  unit="mol mol-1"    />   
+          <field id="CH_3CCl_3"     name="ch3ccl3_m"              long_name="mole_fraction_of_ch3ccl3_in_air"                                               unit="mol mol-1"    />   
+          <field id="CH_3Cl"        name="ch3cl_m"                long_name="mole_fraction_of_ch3cl_in_air"                                                 unit="mol mol-1"    />   
+          <field id="HCFC22"        name="hcfc22_m"               long_name="mole_fraction_of_hcfc22_in_air"                                                unit="mol mol-1"    />   
+          <field id="CH_3Br"        name="ch3br_m"                long_name="mole_fraction_of_ch3br_in_air"                                                 unit="mol mol-1"    />   
+          <field id="H1211"         name="h1211_m"                long_name="mole_fraction_of_h1211_in_air"                                                 unit="mol mol-1"    />   
+          <field id="H1301"         name="h1301_m"                long_name="mole_fraction_of_h1301_in_air"                                                 unit="mol mol-1"    />   
+          <field id="H_2SO_4"       name="h2so4_m"                long_name="mole_fraction_of_h2so4_in_air"                                                 unit="molec cm-3"   />   
+          <field id="PSC"           name="psc_m"                  long_name="mole_fraction_of_psc_in_air"                                                   unit="mol mol-1"    />   
+          <field id="HONO"          name="hono_m"                 long_name="mole_fraction_of_hono_in_air"                                                  unit="mol mol-1"    />   
+          <field id="SO_2"          name="so2_m"                  long_name="mole_fraction_of_so2_in_air"                                                   unit="mol mol-1"    />   
+          <field id="ETH"           name="eth_m"                  long_name="mole_fraction_of_eth_in_air"                                                   unit="mol mol-1"    />   
+          <field id="ALKANEbis"     name="alkanebis_m"            long_name="mole_fraction_of_alkanebis_in_air"                                             unit="mol mol-1"    />   
+          <field id="ALKENEbis"     name="alkenebis_m"            long_name="mole_fraction_of_alkenebis_in_air"                                             unit="mol mol-1"    />   
+          <field id="ISOTOT"        name="isotot_m"               long_name="mole_fraction_of_isotot_in_air"                                                unit="mol mol-1"    />   
+          <field id="AROMATIC"      name="aromatic_m"             long_name="mole_fraction_of_aromatic_in_air"                                              unit="mol mol-1"    />   
+          <field id="ALD"           name="ald_m"                  long_name="mole_fraction_of_ald_in_air"                                                   unit="mol mol-1"    />   
+          <field id="KET"           name="ket_m"                  long_name="mole_fraction_of_ket_in_air"                                                   unit="mol mol-1"    />   
+          <field id="MACR"          name="macr_m"                 long_name="mole_fraction_of_macr_in_air"                                                  unit="mol mol-1"    />   
+          <field id="ONIT"          name="onit_m"                 long_name="mole_fraction_of_onit_in_air"                                                  unit="mol mol-1"    />   
+          <field id="PAN"           name="pan_m"                  long_name="mole_fraction_of_pan_in_air"                                                   unit="mol mol-1"    />   
+          <field id="OP2"           name="op2_m"                  long_name="mole_fraction_of_op2_in_air"                                                   unit="mol mol-1"    />   
+          <field id="LINO_3"        name="lino3_m"                long_name="mole_fraction_of_lino3_in_air"                                                 unit="mol mol-1"    />   
+          <field id="HC8P"          name="hc8p_m"                 long_name="mole_fraction_of_hc8p_in_air"                                                  unit="mol mol-1"    />   
+          <field id="OLIP"          name="olip_m"                 long_name="mole_fraction_of_olip_in_air"                                                  unit="mol mol-1"    />   
+          <field id="ISOP"          name="isop_m"                 long_name="mole_fraction_of_isop_in_air"                                                  unit="mol mol-1"    />   
+          <field id="PHO"           name="pho_m"                  long_name="mole_fraction_of_pho_in_air"                                                   unit="mol mol-1"    />   
+          <field id="TOLP"          name="tolp_m"                 long_name="mole_fraction_of_tolp_in_air"                                                  unit="mol mol-1"    />   
+          <field id="ACO3"          name="aco3_m"                 long_name="mole_fraction_of_aco3_in_air"                                                  unit="mol mol-1"    />   
+          <field id="OLNN"          name="olnn_m"                 long_name="mole_fraction_of_olnn_in_air"                                                  unit="mol mol-1"    />   
+          <field id="XO2"           name="xo2_m"                  long_name="mole_fraction_of_xo2_in_air"                                                   unit="mol mol-1"    />   
+          <field id="SULF"          name="sulf_m"                 long_name="mole_fraction_of_sulf_in_air"                                                  unit="mol mol-1"    />   
+          <field id="O_x"           name="ox_m"                   long_name="mole_fraction_of_ox_in_air"                                                    unit="mol mol-1"    />   
+          <field id="ClO_x"         name="clox_m"                 long_name="mole_fraction_of_clox_in_air"                                                  unit="mol mol-1"    />   
+          <field id="BrO_x"         name="brox_m"                 long_name="mole_fraction_of_brox_in_air"                                                  unit="mol mol-1"    />   
+          <field id="TRACEUR.FROID" name="traceur.froid_m"        long_name="mole_fraction_of_traceur.froid_in_air"                                         unit="mol mol-1"    />   
+          <field id="O3P"           name="o3p_m"                  long_name="mole_fraction_of_o3p_in_air"                                                   unit="mol mol-1"    />   
+          <field id="O1D"           name="o1d_m"                  long_name="mole_fraction_of_o1d_in_air"                                                   unit="mol mol-1"    />   
+          <field id="N"             name="n_m"                    long_name="mole_fraction_of_n_in_air"                                                     unit="mol mol-1"    />   
+          <field id="NO_3"          name="no3_m"                  long_name="mole_fraction_of_no3_in_air"                                                   unit="mol mol-1"    />   
+          <field id="Cl"            name="cl_m"                   long_name="mole_fraction_of_cl_in_air"                                                    unit="mol mol-1"    />   
+          <field id="Br"            name="br_m"                   long_name="mole_fraction_of_br_in_air"                                                    unit="mol mol-1"    />   
+          <field id="H"             name="h_m"                    long_name="mole_fraction_of_h_in_air"                                                     unit="mol mol-1"    />   
+          <field id="CH_3"          name="ch3_m"                  long_name="mole_fraction_of_ch3_in_air"                                                   unit="mol mol-1"    />   
+          <field id="CH_3O"         name="ch3o_m"                 long_name="mole_fraction_of_ch3o_in_air"                                                  unit="mol mol-1"    />   
+          <field id="ADDT"          name="addt_m"                 long_name="mole_fraction_of_addt_in_air"                                                  unit="mol mol-1"    />   
+          <field id="NDROP"         name="ndrop_m"                long_name="mole_fraction_of_ndrop_in_air"                                                 unit="mol mol-1"    />   
+          <field id="CO_2g"         name="co2g_m"                 long_name="mole_fraction_of_co2g_in_air"                                                  unit="mol mol-1"    />   
+          <field id="nightNO"       name="nightNO_m"              long_name="mole_fraction_of_nightNO_in_air"                                               unit="mol mol-1"    />    
+        </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~--> 
+        <field_group id="chem_3D_instant_plev_misc" 		grid_ref="FULL_pstd" >
+          <field id="oclo_p"          field_ref="OClO"          name="oclo"                /> 
+          <field id="hocl_p"          field_ref="HOCl"          name="hocl"                /> 
+          <field id="cl2_p"           field_ref="Cl_2"          name="cl2"                 /> 
+          <field id="h2o2_p"          field_ref="H_2O_2"        name="h2o2"                /> 
+          <field id="clno2_p"         field_ref="ClNO_2"        name="clno2"               /> 
+          <field id="hbr_p"           field_ref="HBr"           name="hbr"                 /> 
+          <field id="brono2_p"        field_ref="BrONO_2"       name="brono2"              /> 
+          <field id="hno4_p"          field_ref="HNO_4"         name="hno4"                /> 
+          <field id="cl2o2_p"         field_ref="Cl_2O_2"       name="cl2o2"               /> 
+          <field id="hobr_p"          field_ref="HOBr"          name="hobr"                /> 
+          <field id="brcl_p"          field_ref="BrCl"          name="brcl"                /> 
+          <field id="mo2_p"           field_ref="MO2"           name="mo2"                 /> 
+          <field id="op1_p"           field_ref="OP1"           name="op1"                 /> 
+          <field id="cfc11_p"         field_ref="CFC11"         name="cfc11"               /> 
+          <field id="cfc12_p"         field_ref="CFC12"         name="cfc12"               /> 
+          <field id="cfc113_p"        field_ref="CFC113"        name="cfc113"              /> 
+          <field id="ccl4_p"          field_ref="CCl_4"         name="ccl4"                /> 
+          <field id="ch3ccl3_p"       field_ref="CH_3CCl_3"     name="ch3ccl3"             /> 
+          <field id="ch3cl_p"         field_ref="CH_3Cl"        name="ch3cl"               /> 
+          <field id="hcfc22_p"        field_ref="HCFC22"        name="hcfc22"              /> 
+          <field id="ch3br_p"         field_ref="CH_3Br"        name="ch3br"               /> 
+          <field id="h1211_p"         field_ref="H1211"         name="h1211"               /> 
+          <field id="h1301_p"         field_ref="H1301"         name="h1301"               /> 
+          <field id="h2so4_p"         field_ref="H_2SO_4"       name="h2so4"               /> 
+          <field id="psc_p"           field_ref="PSC"           name="psc"                 /> 
+          <field id="hono_p"          field_ref="HONO"          name="hono"                /> 
+          <field id="so2_p"           field_ref="SO_2"          name="so2"                 /> 
+          <field id="eth_p"           field_ref="ETH"           name="eth"                 /> 
+          <field id="alkanebis_p"     field_ref="ALKANEbis"     name="alkanebis"           /> 
+          <field id="alkenebis_p"     field_ref="ALKENEbis"     name="alkenebis"           /> 
+          <field id="isotot_p"        field_ref="ISOTOT"        name="isotot"              /> 
+          <field id="aromatic_p"      field_ref="AROMATIC"      name="aromatic"            /> 
+          <field id="ald_p"           field_ref="ALD"           name="ald"                 /> 
+          <field id="ket_p"           field_ref="KET"           name="ket"                 /> 
+          <field id="macr_p"          field_ref="MACR"          name="macr"                /> 
+          <field id="onit_p"          field_ref="ONIT"          name="onit"                /> 
+          <field id="pan_p"           field_ref="PAN"           name="pan"                 /> 
+          <field id="op2_p"           field_ref="OP2"           name="op2"                 /> 
+          <field id="lino3_p"         field_ref="LINO_3"        name="lino3"               /> 
+          <field id="hc8p_p"          field_ref="HC8P"          name="hc8p"                /> 
+          <field id="olip_p"          field_ref="OLIP"          name="olip"                /> 
+          <field id="isop_p"          field_ref="ISOP"          name="isop"                /> 
+          <field id="pho_p"           field_ref="PHO"           name="pho"                 /> 
+          <field id="tolp_p"          field_ref="TOLP"          name="tolp"                /> 
+          <field id="aco3_p"          field_ref="ACO3"          name="aco3"                /> 
+          <field id="olnn_p"          field_ref="OLNN"          name="olnn"                /> 
+          <field id="xo2_p"           field_ref="XO2"           name="xo2"                 /> 
+          <field id="sulf_p"          field_ref="SULF"          name="sulf"                /> 
+          <field id="ox_p"            field_ref="O_x"           name="ox"                  /> 
+          <field id="clox_p"          field_ref="ClO_x"         name="clox"                /> 
+          <field id="brox_p"          field_ref="BrO_x"         name="brox"                /> 
+          <field id="traceur.froid_p" field_ref="TRACEUR.FROID" name="traceur.froid"       /> 
+          <field id="o3p_p"           field_ref="O3P"           name="o3p"                 /> 
+          <field id="o1d_p"           field_ref="O1D"           name="o1d"                 /> 
+          <field id="n_p"             field_ref="N"             name="n"                   /> 
+          <field id="no3_p"           field_ref="NO_3"          name="no3"                 /> 
+          <field id="cl_p"            field_ref="Cl"            name="cl"                  /> 
+          <field id="br_p"            field_ref="Br"            name="br"                  /> 
+          <field id="h_p"             field_ref="H"             name="h"                   /> 
+          <field id="ch3_p"           field_ref="CH_3"          name="ch3"                 /> 
+          <field id="ch3o_p"          field_ref="CH_3O"         name="ch3o"                /> 
+          <field id="addt_p"          field_ref="ADDT"          name="addt"                /> 
+          <field id="ndrop_p"         field_ref="NDROP"         name="ndrop"               /> 
+          <field id="co2g_p"          field_ref="CO_2g"         name="co2g"                /> 
+          <field id="nightNO_p"       field_ref="nightNO"       name="nightNO"             /> 
+        </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+        <field_group id="chem_3D_instant_ll" grid_ref="FULL_klev_ll" >
+          <field id="CO_2_ll" field_ref="CO_2" />
+        </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+        <field_group id="chem_3D_instant_ll_2D" grid_ref="FULL_grid" >
+          <field id="CO_2_ll_2D" > CO_2_ll </field>
+        </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+  </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+</field_definition>

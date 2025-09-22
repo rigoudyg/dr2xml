@@ -1,0 +1,15 @@
+[run]
+parallel = True
+branch = True
+command_line = -m unittest
+source =
+    cfsites
+    dr2xml
+    scripts
+    xml_writer
+    logger.py
+    utilities
+
+[report]
+exclude_lines =
+    if __name__ == "__main__":

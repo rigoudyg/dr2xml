@@ -4,7 +4,8 @@
 
 lab_and_model_settings = {
     'path_to_parse': '{path_xml}/',
-    'save_project_settings': 'dr2xml_project_settings.json',
+    'save_project_settings': 'dr2xml_project_settings.py',
+    'data_request_content_version': '{path_DR_config}',
     'comment': '',
     'tierMax': 1,
     'references': 'http://www.umr-cnrm.fr/cmip6/references',

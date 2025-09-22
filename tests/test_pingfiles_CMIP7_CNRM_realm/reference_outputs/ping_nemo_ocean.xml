@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<context id="nemo">
+	<!--CMIP7 Data Request version Software current_cmip7_dr_software - Content test-->
+	<!--dr2xml version current_version-->
+	<!--Lab_and_model settings
+{'data_request_content_version' = 'test',
+'data_request_used' = 'CMIP7',
+'excluded_vars' = [],
+'excluded_vars_file' = [],
+'institution_id' = 'CNRM-CERFACS',
+'listof_home_vars' = 'None',
+'max_priority' = '3',
+'mips' = {},
+'path_extra_tables' = 'None',
+'path_special_defs' = './input/special_defs',
+'ping_variables_prefix' = 'CMIP7_',
+'project' = 'ping',
+'realms_per_context' = {'arpsfx' = ['aerosol', 'atmos', 'atmosChem', 'land', 'landIce'], 'nemo' = ['ocean', 'ocnBgchem', 'seaIce']},
+'tierMax' = '3'}-->
+	<!--Simulation settings
+{}-->
+	<!--Year processed None-->
+	<field_definition>
+		<field id="CMIP7_areacello" field_ref="?dummy_XY"/>
+		<!--P1 (m2) cell_area : Cell areas for any grid used to report ocean variables and variables which are requested as used on the model ocean grid (e.g. hfsso, which is a downward heat flux from the atmosphere interpolated onto the ocean grid). These cell areas should be defined to enable exact calculation of global integrals (e.g., of vertical fluxes of energy at the surface and top of the atmosphere).-->
+		<field id="CMIP7_bigthetao" field_ref="?dummy_XYO"/>
+		<!--P1 (degC) sea_water_conservative_temperature : Diagnostic should be contributed only for models using conservative temperature as prognostic field.-->
+		<field id="CMIP7_deptho" field_ref="?dummy_XY"/>
+		<!--P1 (m) sea_floor_depth_below_geoid : Ocean bathymetry. Reported here is the sea floor depth for present day relative to z=0 geoid. Reported as missing for land grid cells.-->
+		<field id="CMIP7_masscello" field_ref="?dummy_XYO"/>
+		<!--P1 (kg m-2) sea_water_mass_per_unit_area : Tracer grid-cell mass per unit area used for computing tracer budgets. For Boussinesq models with static ocean grid cell thickness, masscello = rhozero\*thickcello, where thickcello is static cell thickness and rhozero is constant Boussinesq reference density. More generally, masscello is time dependent and reported as part of Omon.-->
+		<field id="CMIP7_mlotst" field_ref="?dummy_XY_deltasigt"/>
+		<!--P2 (m) ocean_mixed_layer_thickness_defined_by_sigma_t : Sigma T is potential density referenced to ocean surface. Defined by Sigma T of 0.03 kg m-3 wrt to model level closest to 10 m depth.-->
+		<field id="CMIP7_mlotstmax" field_ref="?dummy_XY_deltasigt"/>
+		<!--P2 (m) ocean_mixed_layer_thickness_defined_by_sigma_t : Sigma T is potential density referenced to ocean surface. Defined by Sigma T of 0.03 kg m-3 wrt to model level closest to 10 m depth.-->
+		<field id="CMIP7_mlotstmin" field_ref="?dummy_XY_deltasigt"/>
+		<!--P2 (m) ocean_mixed_layer_thickness_defined_by_sigma_t : Sigma T is potential density referenced to ocean surface. Defined by Sigma T of 0.03 kg m-3 wrt to model level closest to 10 m depth.-->
+		<field id="CMIP7_mpw" field_ref="?dummy_XY"/>
+		<!--P2 (s) sea_surface_wave_mean_period : Average wave period (i.e., time in-between two wave crests) across the entire two-dimensional wave spectrum, incorporating both wind-sea and swell waves. In spectral wind wave models, it is calculated using spectral moments, mathematical measures that describe the shape and characteristics of the wave spectrum.-->
+		<field id="CMIP7_sithick" field_ref="?dummy_XY"/>
+		<!--P1 (m) sea_ice_thickness : Actual (floe) thickness of sea ice averaged over the ice-covered part of a given grid cell, NOT volume divided by grid area.-->
+		<field id="CMIP7_so" field_ref="?dummy_XYO"/>
+		<!--P1 (1E-03) sea_water_salinity : Sea water salinity is the salt content of sea water, often on the Practical Salinity Scale of 1978. However, the unqualified term 'salinity' is generic and does not necessarily imply any particular method of calculation. The units of salinity are dimensionless and the units attribute should normally be given as 1e-3 or 0.001 i.e. parts per thousand.-->
+		<field id="CMIP7_sos" field_ref="?dummy_XY"/>
+		<!--P1 (1E-03) sea_surface_salinity : Sea water salinity is the salt content of sea water, often on the Practical Salinity Scale of 1978. However, the unqualified term 'salinity' is generic and does not necessarily imply any particular method of calculation. The units of salinity are dimensionless and the units attribute should normally be given as 1e-3 or 0.001 i.e. parts per thousand.-->
+		<field id="CMIP7_swh" field_ref="?dummy_XY"/>
+		<!--P2 (m) sea_surface_wave_significant_height : Average height of the highest one-third of waves present in the sea state, incorporating both wind-sea and swell waves. This is a key parameter for describing wave energy and is derived from the wave spectrum using spectral moments. Specifically, this parameter is four times the square root of the integral over all directions and all frequencies of the two-dimensional wave spectrum.-->
+		<field id="CMIP7_swhmax" field_ref="?dummy_XY"/>
+		<!--P2 (m) sea_surface_wave_significant_height : Highest value of the significant wave height simulated within a given time range (e.g., daily or monthly). The significant wave height (swh) is derived from the wave spectrum using spectral moments. Specifically, swh is four times the square root of the integral over all directions and all frequencies of the two-dimensional wave spectrum.-->
+		<field id="CMIP7_thetao" field_ref="?dummy_XYO"/>
+		<!--P1 (degC) sea_water_potential_temperature : Diagnostic should be contributed even for models using conservative temperature as prognostic field.-->
+		<field id="CMIP7_tnkebto" field_ref="?dummy_XY"/>
+		<!--P3 (W m-2) tendency_of_ocean_eddy_kinetic_energy_content_due_to_parameterized_eddy_advection : Depth integrated impacts on kinetic energy arising from parameterized eddy-induced advection. For CMIP5, this diagnostic was 3d, whereas the CMIP6 depth integrated diagnostic is sufficient for many purposes and reduces archive requirements.-->
+		<field id="CMIP7_tos" field_ref="?dummy_XY"/>
+		<!--P1 (degC) sea_surface_temperature : This may differ from "surface temperature" in regions of sea ice or floating ice shelves. For models using conservative temperature as the prognostic field, they should report the top ocean layer as surface potential temperature, which is the same as surface in situ temperature.-->
+		<field id="CMIP7_tossq" field_ref="?dummy_XY"/>
+		<!--P2 (degC2) square_of_sea_surface_temperature : Square of temperature of liquid ocean, averaged over the day.-->
+		<field id="CMIP7_uos" field_ref="?dummy_XY_depth0m"/>
+		<!--P3 (m s-1) surface_sea_water_x_velocity : Daily surface prognostic x-ward velocity component resolved by the model.-->
+		<field id="CMIP7_vos" field_ref="?dummy_XY_depth0m"/>
+		<!--P3 (m s-1) surface_sea_water_y_velocity : Daily surface prognostic y-ward velocity component resolved by the model.-->
+		<field id="CMIP7_wo" field_ref="?dummy_XYO"/>
+		<!--P1 (m s-1) upward_sea_water_velocity : Prognostic z-ward velocity component resolved by the model.-->
+		<field id="CMIP7_wpp" field_ref="?dummy_XY"/>
+		<!--P2 (s) sea_surface_wave_period_at_variance_spectral_density_maximum : Wave period associated with the most energetic waves in total wave spectrum, incorporating both wind-sea and swell waves. In spectral wind wave models, this represents the spectral peak across the entire two-dimensional wave spectrum, incorporating both wind-sea and swell waves.-->
+		<field id="CMIP7_zos" field_ref="?dummy_XY"/>
+		<!--P1 (m) sea_surface_height_above_geoid : This is the dynamic sea level, so should have zero global area mean. It should not include inverse barometer depressions from sea ice.-->
+		<field id="CMIP7_zossq" field_ref="?dummy_XY"/>
+		<!--P2 (m2) square_of_sea_surface_height_above_geoid : Surface ocean geoid defines z=0.-->
+		<field id="CMIP7_zostoga" field_ref="?dummy_0d"/>
+		<!--P1 (m) global_average_thermosteric_sea_level_change : There is no CMIP6 request for zosga nor zossga.-->
+	</field_definition>
+</context>

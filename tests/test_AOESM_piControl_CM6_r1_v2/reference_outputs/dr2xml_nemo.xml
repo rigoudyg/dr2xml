@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <context id="nemo">
-	<!--CMIP6 Data Request version 01.00.21.post1-->
+	<!--CMIP6 Data Request version current_cmip6_dr-->
 	<!--CMIP6-CV version ??-->
 	<!--CMIP6_conventions_version v6.2.4-->
 	<!--dr2xml version current_version-->
@@ -15,13 +15,14 @@
 'compression_level' = '4',
 'configurations' = {'AESM' = ('CNRM-ESM2-1', 'AGCM BGC AER CHEM', ['nemo']), 'AESMHR' = ('CNRM-ESM2-1', 'AGCM BGC AER', []), 'AGCM' = ('CNRM-CM6-1', 'AGCM', ['nemo']), 'AGCMHR' = ('CNRM-CM6-1-HR', 'AGCM', ['nemo']), 'AOESM' = ('CNRM-ESM2-1', 'AOGCM BGC AER CHEM', []), 'AOESMHR' = ('CNRM-ESM2-1-HR', 'AOGCM BGC AER', []), 'AOGCM' = ('CNRM-CM6-1', 'AOGCM', []), 'AOGCMHR' = ('CNRM-CM6-1-HR', 'AOGCM', []), 'LESM' = ('CNRM-ESM2-1', 'LAND BGC', ['nemo']), 'LGCM' = ('CNRM-CM6-1', 'LAND', ['nemo']), 'OESM' = ('CNRM-ESM2-1', 'OGCM BGC', ['surfex', 'trip']), 'OESMHR' = ('CNRM-ESM2-1-HR', 'OGCM BGC', ['surfex', 'trip']), 'OGCM' = ('CNRM-CM6-1', 'OGCM', ['surfex', 'trip']), 'OGCMHR' = ('CNRM-CM6-1-HR', 'OGCM', ['surfex', 'trip'])},
 'contact' = 'contact.cmip@meteo.fr',
+'data_request_content_version' = 'current_directory/test_AOESM_piControl_CM6_r1_v2/input/DR_config/',
 'debug_parsing' = 'False',
 'dr2xml_manages_enddate' = 'True',
 'excluded_pairs' = [('sfdsi', 'SImon')],
 'excluded_request_links' = ['RFMIP-AeroIrf'],
 'excluded_spshapes' = ['XYA-na', 'XYG-na', 'na-A'],
-'excluded_tables' = ['Eyr', 'Oyr', 'Odec', 'IfxAnt', 'ImonAnt', 'E1hr', '3hr', 'CF3hr', 'CFday', '6hrPlevPt', '6hrPlev', 'CFsubhr', '6hrLev'],
-'excluded_vars' = ['pfull', 'phalf', 'n2oClim', 'ch4globalClim', 'co2massClim', 'n2oglobalClim', 'ch4Clim', 'o3Clim', 'co2Clim', 'rlut4co2', 'rlutcs4co2', 'rsut4co2', 'rsutcs4co2', 'rld4co2', 'rldcs4co2', 'rlu4co2', 'rlucs4co2', 'rsd4co2', 'rsdcs4co2', 'rsu4co2', 'rsucs4co2', 'rlutaf', 'rlutcsaf', 'rsutaf', 'rsutcsaf', 'rldsaf', 'rldscsaf', 'rlusaf', 'rluscsaf', 'rsdsaf', 'rsdscsaf', 'rsusaf', 'rsuscsaf', 'clcalipso', 'albisccp', 'clhcalipso', 'cllcalipso', 'clmcalipso', 'cltcalipso', 'cltisccp', 'pctisccp', 'clisccp', 'parasolRefl', 'co2mass', 'ch4global', 'n2oglobal'],
+'excluded_tables' = ['Eyr', 'Oyr', 'Odec', 'IfxAnt', 'ImonAnt'],
+'excluded_vars' = ['pfull', 'phalf', 'n2oClim', 'ch4globalClim', 'co2massClim', 'n2oglobalClim', 'ch4Clim', 'o3Clim', 'co2Clim'],
 'excluded_vars_per_config' = {'AESM' = ['co2mass', 'ch4global', 'n2oglobal'], 'AGCM' = ['ch4', 'co2', 'co', 'concdust', 'ec550aer', 'h2o', 'hcho', 'hcl', 'hno3', 'mmrbc', 'mmrdust', 'mmroa', 'mmrso4', 'mmrss', 'n2o', 'no2', 'no', 'o3Clim', 'o3loss', 'o3prod', 'oh', 'so2', 'mmrpm1', 'fco2antt', 'fco2fos', 'fco2nat', 'loadbc', 'loaddust', 'loadoa', 'loadso4', 'loadss', 'oxloss', 'oxprod', 'vmrox', 'bry', 'cly', 'ho2', 'meanage', 'noy', 'drybc', 'drydust', 'dryoa', 'dryso2', 'dryso4', 'dryss', 'emibc', 'emidust', 'emioa', 'emiso2', 'emiso4', 'emiss', 'od440aer', 'od870aer', 'od550lt1aer', 'wetbc', 'wetdust', 'wetoa', 'wetso4', 'wetss', 'cLand', 'cSoil', 'fAnthDisturb', 'fDeforestToProduct', 'fFireNat', 'fLuc', 'fProductDecomp', 'netAtmosLandCO2Flux', 'od443dust', 'od865dust', 'sconcdust', 'sconcso4', 'sconcss', 'sedustCI', 'burntFractionAll', 'cLitter', 'cProduct', 'cVeg', 'fFire', 'fLitterSoil', 'fVegLitter', 'nbp', 'shrubFrac'], 'AOESM' = ['co2mass', 'ch4global', 'n2oglobal'], 'AOGCM' = ['ch4', 'co2', 'co', 'concdust', 'ec550aer', 'h2o', 'hcho', 'hcl', 'hno3', 'mmrbc', 'mmrdust', 'mmroa', 'mmrso4', 'mmrss', 'n2o', 'no2', 'no', 'o3Clim', 'o3loss', 'o3prod', 'oh', 'so2', 'mmrpm1', 'fco2antt', 'fco2fos', 'fco2nat', 'loadbc', 'loaddust', 'loadoa', 'loadso4', 'loadss', 'oxloss', 'oxprod', 'vmrox', 'bry', 'cly', 'ho2', 'meanage', 'noy', 'drybc', 'drydust', 'dryoa', 'dryso2', 'dryso4', 'dryss', 'emibc', 'emidust', 'emioa', 'emiso2', 'emiso4', 'emiss', 'od440aer', 'od870aer', 'od550lt1aer', 'wetbc', 'wetdust', 'wetoa', 'wetso4', 'wetss', 'cLand', 'cSoil', 'fAnthDisturb', 'fDeforestToProduct', 'fFireNat', 'fLuc', 'fProductDecomp', 'netAtmosLandCO2Flux', 'od443dust', 'od865dust', 'sconcdust', 'sconcso4', 'sconcss', 'sedustCI', 'burntFractionAll', 'cLitter', 'cProduct', 'cVeg', 'fFire', 'fLitterSoil', 'fVegLitter', 'nbp', 'shrubFrac'], 'LESM' = ['ch4', 'co2', 'hur', 'hus', 'n2o', 'o3', 'ta', 'ua', 'va', 'wap', 'zg', 'clt', 'ccb', 'cct', 'ci', 'clivi', 'clt', 'clwvi', 'evspsbl', 'fco2antt', 'fco2fos', 'pr', 'prc', 'prsn', 'prw', 'ps', 'psl', 'rldscs', 'rlut', 'rlutcs', 'rsdscs', 'rsdt', 'rsuscs', 'rsut', 'rsutcs', 'ch4global', 'co2mass', 'n2oglobal', 'mc', 'cl', 'cli', 'clw'], 'LGCM' = ['ch4', 'co2', 'hur', 'hus', 'n2o', 'o3', 'ta', 'ua', 'va', 'wap', 'zg', 'clt', 'ccb', 'cct', 'ci', 'clivi', 'clt', 'clwvi', 'evspsbl', 'fco2antt', 'fco2fos', 'pr', 'prc', 'prsn', 'prw', 'ps', 'psl', 'rldscs', 'rlut', 'rlutcs', 'rsdscs', 'rsdt', 'rsuscs', 'rsut', 'rsutcs', 'ch4global', 'co2mass', 'n2oglobal', 'mc', 'cl', 'cli', 'clw']},
 'fx_from_file' = {'areacella' = {'complete' = {'HR' = 'areacella_complete_CMIP6_tl359', 'LR' = 'areacella_complete_CMIP6_tl127'}}},
 'grid_choice' = {'CNRM-CM6-1' = 'LR', 'CNRM-CM6-1-HR' = 'HR', 'CNRM-ESM2-1' = 'LR', 'CNRM-ESM2-1-HR' = 'HR'},
@@ -76,7 +77,7 @@
 		<file id="omldamax_Oday_gn" name="IOXDIRomldamax_Oday_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="25y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -145,7 +146,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="tos_Oday_gn" name="IOXDIRtos_Oday_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="25y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -214,7 +215,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="tossq_Oday_gn" name="IOXDIRtossq_Oday_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="25y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -283,7 +284,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="tos_Oday_gr1" name="IOXDIRtos_Oday_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gr1_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="25y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -352,7 +353,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="areacello_Ofx_gn" name="IOXDIRareacello_Ofx_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn" output_freq="1d" append="true" output_level="10" compression_level="4" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -418,7 +419,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="basin_Ofx_gn" name="IOXDIRbasin_Ofx_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn" output_freq="1d" append="true" output_level="10" compression_level="4" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -488,7 +489,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="deptho_Ofx_gn" name="IOXDIRdeptho_Ofx_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn" output_freq="1d" append="true" output_level="10" compression_level="4" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -556,7 +557,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="hfgeou_Ofx_gn" name="IOXDIRhfgeou_Ofx_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn" output_freq="1d" append="true" output_level="10" compression_level="4" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -625,7 +626,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="masscello_Ofx_gn" name="IOXDIRmasscello_Ofx_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn" output_freq="1d" append="true" output_level="10" compression_level="4" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -693,7 +694,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="siconc_SIday_gn" name="IOXDIRsiconc_SIday_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="25y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -762,7 +763,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sisnthick_SIday_gn" name="IOXDIRsisnthick_SIday_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="25y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -831,7 +832,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sispeed_SIday_gn" name="IOXDIRsispeed_SIday_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="25y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -900,7 +901,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sitemptop_SIday_gn" name="IOXDIRsitemptop_SIday_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="25y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -969,7 +970,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sithick_SIday_gn" name="IOXDIRsithick_SIday_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="25y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -1038,7 +1039,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sitimefrac_SIday_gn" name="IOXDIRsitimefrac_SIday_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="25y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -1107,7 +1108,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="siu_SIday_gn" name="IOXDIRsiu_SIday_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="25y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -1174,7 +1175,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="siv_SIday_gn" name="IOXDIRsiv_SIday_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="25y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -1241,7 +1242,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="hcont300_Emon_gn" name="IOXDIRhcont300_Emon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -1310,7 +1311,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="somint_Emon_gn" name="IOXDIRsomint_Emon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -1379,7 +1380,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="t20d_Emon_gn" name="IOXDIRt20d_Emon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -1448,7 +1449,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="thetaot_Emon_gn" name="IOXDIRthetaot_Emon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -1517,7 +1518,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sltbasin_EmonZ_gnz" name="IOXDIRsltbasin_EmonZ_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gnz_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -1585,7 +1586,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sltnortha_EmonZ_gnz" name="IOXDIRsltnortha_EmonZ_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gnz_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -1653,7 +1654,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="Biron_HOMOImon_gn" name="IOXDIRBiron_HOMOImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -1721,7 +1722,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="FeP_HOMOImon_gn" name="IOXDIRFeP_HOMOImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -1789,7 +1790,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="GRAZ1_HOMOImon_gn" name="IOXDIRGRAZ1_HOMOImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -1857,7 +1858,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="GRAZ2_HOMOImon_gn" name="IOXDIRGRAZ2_HOMOImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -1925,7 +1926,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="LBDMS_HOMOImon_gn" name="IOXDIRLBDMS_HOMOImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -1993,7 +1994,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="MuD_HOMOImon_gn" name="IOXDIRMuD_HOMOImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -2061,7 +2062,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="MuN_HOMOImon_gn" name="IOXDIRMuN_HOMOImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -2129,7 +2130,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="N2O_HOMOImon_gn" name="IOXDIRN2O_HOMOImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -2197,7 +2198,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="Nfix_HOMOImon_gn" name="IOXDIRNfix_HOMOImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -2265,7 +2266,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="SCquotad_HOMOImon_gn" name="IOXDIRSCquotad_HOMOImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -2333,7 +2334,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="SCquotan_HOMOImon_gn" name="IOXDIRSCquotan_HOMOImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -2401,7 +2402,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="Totlig_HOMOImon_gn" name="IOXDIRTotlig_HOMOImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -2469,7 +2470,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="Yield_HOMOImon_gn" name="IOXDIRYield_HOMOImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -2537,7 +2538,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="pdust_HOMOImon_gn" name="IOXDIRpdust_HOMOImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -2605,7 +2606,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="rhop_HOMOImon_gn" name="IOXDIRrhop_HOMOImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -2674,7 +2675,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="xfracal_HOMOImon_gn" name="IOXDIRxfracal_HOMOImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -2742,7 +2743,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="Dpn2o_HOMOImon_gn" name="IOXDIRDpn2o_HOMOImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -2810,7 +2811,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="Heup_HOMOImon_gn" name="IOXDIRHeup_HOMOImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -2878,7 +2879,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="N2Oflx_HOMOImon_gn" name="IOXDIRN2Oflx_HOMOImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -2946,7 +2947,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="hc2000_HOMOImon_gn" name="IOXDIRhc2000_HOMOImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -3015,7 +3016,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="hc700_HOMOImon_gn" name="IOXDIRhc700_HOMOImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -3084,7 +3085,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="heatc_HOMOImon_gn" name="IOXDIRheatc_HOMOImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -3153,7 +3154,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sialb_HOMOImon_gn" name="IOXDIRsialb_HOMOImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -3221,7 +3222,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sisnvol_HOMOImon_gn" name="IOXDIRsisnvol_HOMOImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -3289,7 +3290,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sitimefrac15_HOMOImon_gn" name="IOXDIRsitimefrac15_HOMOImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -3357,7 +3358,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sits_HOMOImon_gn" name="IOXDIRsits_HOMOImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -3426,7 +3427,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="snovoln_HOMOImon_gn" name="IOXDIRsnovoln_HOMOImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -3495,7 +3496,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="snovols_HOMOImon_gn" name="IOXDIRsnovols_HOMOImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -3564,7 +3565,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="somematr_HOMOImon_gn" name="IOXDIRsomematr_HOMOImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -3632,7 +3633,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sozomatr_HOMOImon_gn" name="IOXDIRsozomatr_HOMOImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -3701,7 +3702,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="ssh_HOMOImon_gn" name="IOXDIRssh_HOMOImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -3770,7 +3771,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="agessc_Omon_gn" name="IOXDIRagessc_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -3839,7 +3840,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="bigthetao_Omon_gn" name="IOXDIRbigthetao_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -3908,7 +3909,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="masscello_Omon_gn" name="IOXDIRmasscello_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -3977,7 +3978,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="obvfsq_Omon_gn" name="IOXDIRobvfsq_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -4046,7 +4047,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="so_Omon_gn" name="IOXDIRso_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -4115,7 +4116,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="thetao_Omon_gn" name="IOXDIRthetao_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -4184,7 +4185,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="thkcello_Omon_gn" name="IOXDIRthkcello_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -4253,7 +4254,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="umo_Omon_gn" name="IOXDIRumo_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -4320,7 +4321,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="uo_Omon_gn" name="IOXDIRuo_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -4387,7 +4388,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="vmo_Omon_gn" name="IOXDIRvmo_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -4454,7 +4455,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="vo_Omon_gn" name="IOXDIRvo_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -4521,7 +4522,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="wmo_Omon_gn" name="IOXDIRwmo_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -4590,7 +4591,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="wo_Omon_gn" name="IOXDIRwo_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="10y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -4657,7 +4658,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="bigthetaoga_Omon_gn" name="IOXDIRbigthetaoga_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -4724,7 +4725,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="ficeberg2d_Omon_gn" name="IOXDIRficeberg_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -4793,7 +4794,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="friver_Omon_gn" name="IOXDIRfriver_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -4862,7 +4863,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="hfbasin_Omon_gn" name="IOXDIRhfbasin_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -4930,7 +4931,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="hfbasinpmadv_Omon_gn" name="IOXDIRhfbasinpmadv_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -4997,7 +4998,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="hfds_Omon_gn" name="IOXDIRhfds_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -5067,7 +5068,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="hfx_Omon_gn" name="IOXDIRhfx_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -5136,7 +5137,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="hfy_Omon_gn" name="IOXDIRhfy_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -5205,7 +5206,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="htovgyre_Omon_gn" name="IOXDIRhtovgyre_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -5272,7 +5273,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="htovovrt_Omon_gn" name="IOXDIRhtovovrt_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -5340,7 +5341,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="masso_Omon_gn" name="IOXDIRmasso_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -5407,7 +5408,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="mfo_Omon_gn" name="IOXDIRmfo_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -5474,7 +5475,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="mlotst_Omon_gn" name="IOXDIRmlotst_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -5543,7 +5544,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="mlotstmax_Omon_gn" name="IOXDIRmlotstmax_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -5612,7 +5613,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="mlotstmin_Omon_gn" name="IOXDIRmlotstmin_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -5681,7 +5682,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="msftyz_Omon_gn" name="IOXDIRmsftyz_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -5748,7 +5749,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="pbo_Omon_gn" name="IOXDIRpbo_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -5817,7 +5818,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="rsntds_Omon_gn" name="IOXDIRrsntds_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -5887,7 +5888,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sfdsi_Omon_gn" name="IOXDIRsfdsi_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -5957,7 +5958,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sob_Omon_gn" name="IOXDIRsob_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -6026,7 +6027,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="soga_Omon_gn" name="IOXDIRsoga_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -6093,7 +6094,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sos_Omon_gn" name="IOXDIRsos_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -6162,7 +6163,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sosga_Omon_gn" name="IOXDIRsosga_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -6229,7 +6230,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="tauuo_Omon_gn" name="IOXDIRtauuo_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -6299,7 +6300,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="tauvo_Omon_gn" name="IOXDIRtauvo_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -6369,7 +6370,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="thetaoga_Omon_gn" name="IOXDIRthetaoga_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -6436,7 +6437,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="tob_Omon_gn" name="IOXDIRtob_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -6505,7 +6506,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="tos_Omon_gn" name="IOXDIRtos_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -6574,7 +6575,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="tosga_Omon_gn" name="IOXDIRtosga_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -6641,7 +6642,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="volo_Omon_gn" name="IOXDIRvolo_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -6708,7 +6709,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="wfo_Omon_gn" name="IOXDIRwfo_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -6777,7 +6778,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="wfonocorr_Omon_gn" name="IOXDIRwfonocorr_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -6846,7 +6847,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="zos_Omon_gn" name="IOXDIRzos_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -6915,7 +6916,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="zostoga_Omon_gn" name="IOXDIRzostoga_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -6982,7 +6983,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sos_Omon_gr1" name="IOXDIRsos_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gr1_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -7051,7 +7052,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="tos_Omon_gr1" name="IOXDIRtos_Omon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gr1_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -7120,7 +7121,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="siage_SImon_gn" name="IOXDIRsiage_SImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -7189,7 +7190,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="siconc_SImon_gn" name="IOXDIRsiconc_SImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -7258,7 +7259,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sidmassdyn_SImon_gn" name="IOXDIRsidmassdyn_SImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -7327,7 +7328,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sidmassevapsubl_SImon_gn" name="IOXDIRsidmassevapsubl_SImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -7397,7 +7398,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sidmassmeltbot_SImon_gn" name="IOXDIRsidmassmeltbot_SImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -7466,7 +7467,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sidmassmelttop_SImon_gn" name="IOXDIRsidmassmelttop_SImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -7535,7 +7536,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sidmassth_SImon_gn" name="IOXDIRsidmassth_SImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -7604,7 +7605,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="siextentn_SImon_gn" name="IOXDIRsiextentn_SImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -7672,7 +7673,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="siextents_SImon_gn" name="IOXDIRsiextents_SImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -7740,7 +7741,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sifllatstop_SImon_gn" name="IOXDIRsifllatstop_SImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -7810,7 +7811,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sifllwutop_SImon_gn" name="IOXDIRsifllwutop_SImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -7880,7 +7881,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="siflswdtop_SImon_gn" name="IOXDIRsiflswdtop_SImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -7950,7 +7951,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="siflswutop_SImon_gn" name="IOXDIRsiflswutop_SImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -8020,7 +8021,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sihc_SImon_gn" name="IOXDIRsihc_SImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -8089,7 +8090,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="simass_SImon_gn" name="IOXDIRsimass_SImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -8158,7 +8159,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="simassacrossline_SImon_gn" name="IOXDIRsimassacrossline_SImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -8225,7 +8226,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sipr_SImon_gn" name="IOXDIRsipr_SImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -8294,7 +8295,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sisali_SImon_gn" name="IOXDIRsisali_SImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -8363,7 +8364,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sisaltmass_SImon_gn" name="IOXDIRsisaltmass_SImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -8432,7 +8433,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sisnconc_SImon_gn" name="IOXDIRsisnconc_SImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -8501,7 +8502,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sisnhc_SImon_gn" name="IOXDIRsisnhc_SImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -8570,7 +8571,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sisnmass_SImon_gn" name="IOXDIRsisnmass_SImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -8639,7 +8640,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sisnthick_SImon_gn" name="IOXDIRsisnthick_SImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -8708,7 +8709,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sispeed_SImon_gn" name="IOXDIRsispeed_SImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -8777,7 +8778,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sitempsnic_SImon_gn" name="IOXDIRsitempsnic_SImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -8846,7 +8847,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sitemptop_SImon_gn" name="IOXDIRsitemptop_SImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -8915,7 +8916,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sithick_SImon_gn" name="IOXDIRsithick_SImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -8984,7 +8985,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sitimefrac_SImon_gn" name="IOXDIRsitimefrac_SImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -9053,7 +9054,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="siu_SImon_gn" name="IOXDIRsiu_SImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -9120,7 +9121,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="siv_SImon_gn" name="IOXDIRsiv_SImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -9187,7 +9188,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sivol_SImon_gn" name="IOXDIRsivol_SImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -9256,7 +9257,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sivoln_SImon_gn" name="IOXDIRsivoln_SImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -9324,7 +9325,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sivols_SImon_gn" name="IOXDIRsivols_SImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -9392,7 +9393,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sndmassmelt_SImon_gn" name="IOXDIRsndmassmelt_SImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>
@@ -9461,7 +9462,7 @@ seaIce: Gelato 6.1 </variable>
 		<file id="sndmasssnf_SImon_gn" name="IOXDIRsndmasssnf_SImon_CNRM-ESM2-1_esm-piControl_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> 01.00.21.post1 </variable>
+			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> esm-piControl </variable>
 			<variable name="description" type="string"> DECK: control (emission-driven) </variable>

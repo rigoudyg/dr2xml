@@ -1,0 +1,2923 @@
+Function 'get_transformed_content': Passing **kwargs from config file.
+Could not find id longitude of type coordinates_and_dimensions in the vocabulary server.
+Could not find id latitude of type coordinates_and_dimensions in the vocabulary server.
+Variable considered: atmos.areacell.ti-u-hxy-u.fx.GLB
+Find elements list of kind priority_level from vocabulary server.
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Find elements list of kind time_subsets from vocabulary server.
+Variable considered: atmos.bldep.tpt-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.hfls.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.hfss.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Could not find id height2m of type coordinates_and_dimensions in the vocabulary server.
+Variable considered: atmos.hurs.tavg-h2m-hxy-u.6hr.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.huss.tpt-h2m-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: atmos.pr.tavg-u-hxy-u.1hr.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.pr.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: atmos.pr.tavg-u-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.pr.tavg-u-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.prc.tavg-u-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ps.tavg-u-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ps.tpt-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.psl.tavg-u-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.psl.tpt-u-hxy-u.1hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.rlds.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: atmos.rlus.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Could not find id height10m of type coordinates_and_dimensions in the vocabulary server.
+Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.sftlf.ti-u-hxy-u.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Could not find id plev19 of type coordinates_and_dimensions in the vocabulary server.
+Variable considered: atmos.ta.tavg-p19-hxy-air.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ta.tavg-p19-hxy-air.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Could not find id plev3 of type coordinates_and_dimensions in the vocabulary server.
+Variable considered: atmos.ta.tpt-p3-hxy-air.6hr.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Could not find id plev6 of type coordinates_and_dimensions in the vocabulary server.
+Variable considered: atmos.ta.tpt-p6-hxy-air.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: atmos.tas.tavg-h2m-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tavg-h2m-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tmax-h2m-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tmax-h2m-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tmin-h2m-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tmin-h2m-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tpt-h2m-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: atmos.ts.tavg-u-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.uas.tpt-h10m-hxy-u.1hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.vas.tpt-h10m-hxy-u.1hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.zg.tavg-p19-hxy-air.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.zg.tavg-p19-hxy-air.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.hfdsl.tavg-u-hxy-lnd.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: land.lai.tavg-u-hxy-lnd.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.mrso.tavg-u-hxy-lnd.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Could not find id sdepth100cm of type coordinates_and_dimensions in the vocabulary server.
+Variable considered: land.mrsol.tavg-d100cm-hxy-lnd.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Could not find id sdepth10cm of type coordinates_and_dimensions in the vocabulary server.
+Variable considered: land.mrsol.tavg-d10cm-hxy-lnd.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.mrsol.tpt-d10cm-hxy-lnd.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: land.orog.ti-u-hxy-u.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.rootd.ti-u-hxy-lnd.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Could not find id sdepth of type coordinates_and_dimensions in the vocabulary server.
+Variable considered: land.slthick.ti-sl-hxy-lnd.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.srfrad.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: land.tran.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: land.tslsi.tpt-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: landIce.snc.tavg-u-hxy-lnd.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.areacell.ti-u-hxy-u.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Could not find id olevel of type coordinates_and_dimensions in the vocabulary server.
+Variable considered: ocean.bigthetao.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Could not find id op20bar of type coordinates_and_dimensions in the vocabulary server.
+Variable considered: ocean.bigthetao.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.deptho.ti-u-hxy-sea.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.masscello.ti-ol-hxy-sea.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Could not find id deltasigt of type coordinates_and_dimensions in the vocabulary server.
+Variable considered: ocean.mlotst.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mlotstmax.tmax-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mlotstmin.tmin-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mpw.tavg-u-hxy-sea.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mpw.tavg-u-hxy-sea.6hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mpw.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.so.tavg-ol-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocean.so.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.sos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([3, 1])
+Priority_retain 1
+Variable considered: ocean.sos.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.swh.tavg-u-hxy-sea.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.swh.tavg-u-hxy-sea.6hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.swh.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.swh.tmax-u-hxy-sea.6hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.swh.tmax-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.thetao.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.thetao.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([2, 3])
+Priority_retain 2
+Variable considered: ocean.tnkebto.tavg-u-hxy-sea.yr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocean.tos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([3, 1])
+Priority_retain 1
+Variable considered: ocean.tos.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.tos.tpt-u-hxy-sea.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.tossq.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Could not find id depth0m of type coordinates_and_dimensions in the vocabulary server.
+Variable considered: ocean.uos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocean.vos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocean.wo.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.wpp.tavg-u-hxy-sea.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.wpp.tavg-u-hxy-sea.6hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.wpp.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.zos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.zos.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.zossq.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.zostoga.tavg-u-hm-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.zostoga.tavg-u-hm-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocnBgchem.arag.tavg-d0m-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.arag.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.calc.tavg-d0m-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.calc.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.chl.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.dissic.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.o2.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.ph.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.talk.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: seaIce.siconc.tavg-u-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.siconc.tavg-u-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.simass.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.sithick.tavg-u-hxy-si.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: seaIce.sithick.tavg-u-hxy-si.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.siu.tavg-u-hxy-si.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: seaIce.siu.tavg-u-hxy-si.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.siv.tavg-u-hxy-si.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: seaIce.siv.tavg-u-hxy-si.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Number of distinct CMOR variables (whatever the grid): 105
+Variable considered: atmos.areacell.ti-u-hxy-u.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.bldep.tpt-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.hfls.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.hfss.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.hurs.tavg-h2m-hxy-u.6hr.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.huss.tpt-h2m-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: atmos.pr.tavg-u-hxy-u.1hr.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.pr.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: atmos.pr.tavg-u-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.pr.tavg-u-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.prc.tavg-u-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ps.tavg-u-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ps.tpt-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.psl.tavg-u-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.psl.tpt-u-hxy-u.1hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.rlds.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: atmos.rlus.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.sftlf.ti-u-hxy-u.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ta.tavg-p19-hxy-air.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ta.tavg-p19-hxy-air.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ta.tpt-p3-hxy-air.6hr.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ta.tpt-p6-hxy-air.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: atmos.tas.tavg-h2m-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tavg-h2m-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tmax-h2m-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tmax-h2m-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tmin-h2m-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tmin-h2m-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tpt-h2m-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: atmos.ts.tavg-u-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.uas.tpt-h10m-hxy-u.1hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.vas.tpt-h10m-hxy-u.1hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.zg.tavg-p19-hxy-air.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.zg.tavg-p19-hxy-air.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.hfdsl.tavg-u-hxy-lnd.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: land.lai.tavg-u-hxy-lnd.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.mrso.tavg-u-hxy-lnd.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.mrsol.tavg-d100cm-hxy-lnd.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: land.mrsol.tavg-d10cm-hxy-lnd.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.mrsol.tpt-d10cm-hxy-lnd.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: land.orog.ti-u-hxy-u.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.rootd.ti-u-hxy-lnd.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.slthick.ti-sl-hxy-lnd.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.srfrad.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: land.tran.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: land.tslsi.tpt-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: landIce.snc.tavg-u-hxy-lnd.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.areacell.ti-u-hxy-u.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.bigthetao.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.bigthetao.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.deptho.ti-u-hxy-sea.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.masscello.ti-ol-hxy-sea.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.mlotst.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mlotstmax.tmax-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mlotstmin.tmin-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mpw.tavg-u-hxy-sea.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mpw.tavg-u-hxy-sea.6hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mpw.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.so.tavg-ol-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocean.so.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.sos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([3, 1])
+Priority_retain 1
+Variable considered: ocean.sos.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.swh.tavg-u-hxy-sea.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.swh.tavg-u-hxy-sea.6hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.swh.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.swh.tmax-u-hxy-sea.6hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.swh.tmax-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.thetao.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.thetao.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([2, 3])
+Priority_retain 2
+Variable considered: ocean.tnkebto.tavg-u-hxy-sea.yr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocean.tos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([3, 1])
+Priority_retain 1
+Variable considered: ocean.tos.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.tos.tpt-u-hxy-sea.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.tossq.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.uos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocean.vos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocean.wo.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.wpp.tavg-u-hxy-sea.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.wpp.tavg-u-hxy-sea.6hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.wpp.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.zos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.zos.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.zossq.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.zostoga.tavg-u-hm-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.zostoga.tavg-u-hm-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocnBgchem.arag.tavg-d0m-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.arag.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.calc.tavg-d0m-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.calc.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.chl.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.dissic.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.o2.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.ph.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.talk.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: seaIce.siconc.tavg-u-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.siconc.tavg-u-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.simass.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.sithick.tavg-u-hxy-si.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: seaIce.sithick.tavg-u-hxy-si.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.siu.tavg-u-hxy-si.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: seaIce.siu.tavg-u-hxy-si.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.siv.tavg-u-hxy-si.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: seaIce.siv.tavg-u-hxy-si.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Number of distinct var labels is: 72
+Variable considered: atmos.areacell.ti-u-hxy-u.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.areacell.ti-u-hxy-u.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.areacell.ti-u-hxy-u.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.bldep.tpt-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.bldep.tpt-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.hfls.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.hfls.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.hfss.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.hfss.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.hurs.tavg-h2m-hxy-u.6hr.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.hurs.tavg-h2m-hxy-u.6hr.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.huss.tpt-h2m-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: atmos.huss.tpt-h2m-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: atmos.pr.tavg-u-hxy-u.1hr.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.pr.tavg-u-hxy-u.1hr.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.pr.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: atmos.pr.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: atmos.pr.tavg-u-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.pr.tavg-u-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.pr.tavg-u-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.pr.tavg-u-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.prc.tavg-u-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.prc.tavg-u-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ps.tavg-u-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ps.tavg-u-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ps.tpt-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.ps.tpt-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.psl.tavg-u-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.psl.tavg-u-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.psl.tpt-u-hxy-u.1hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.psl.tpt-u-hxy-u.1hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.rlds.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: atmos.rlds.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: atmos.rlus.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: atmos.rlus.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.sftlf.ti-u-hxy-u.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.sftlf.ti-u-hxy-u.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ta.tavg-p19-hxy-air.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ta.tavg-p19-hxy-air.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ta.tavg-p19-hxy-air.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ta.tavg-p19-hxy-air.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ta.tpt-p3-hxy-air.6hr.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ta.tpt-p3-hxy-air.6hr.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ta.tpt-p6-hxy-air.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: atmos.ta.tpt-p6-hxy-air.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: atmos.tas.tavg-h2m-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tavg-h2m-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tavg-h2m-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tavg-h2m-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tmax-h2m-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tmax-h2m-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tmax-h2m-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tmax-h2m-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tmin-h2m-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tmin-h2m-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tmin-h2m-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tmin-h2m-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tpt-h2m-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: atmos.tas.tpt-h2m-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: atmos.ts.tavg-u-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ts.tavg-u-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.uas.tpt-h10m-hxy-u.1hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.uas.tpt-h10m-hxy-u.1hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.vas.tpt-h10m-hxy-u.1hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.vas.tpt-h10m-hxy-u.1hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.zg.tavg-p19-hxy-air.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.zg.tavg-p19-hxy-air.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.zg.tavg-p19-hxy-air.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.zg.tavg-p19-hxy-air.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.hfdsl.tavg-u-hxy-lnd.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: land.hfdsl.tavg-u-hxy-lnd.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: land.lai.tavg-u-hxy-lnd.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.lai.tavg-u-hxy-lnd.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.mrso.tavg-u-hxy-lnd.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.mrso.tavg-u-hxy-lnd.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.mrsol.tavg-d100cm-hxy-lnd.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: land.mrsol.tavg-d100cm-hxy-lnd.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: land.mrsol.tavg-d10cm-hxy-lnd.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.mrsol.tavg-d10cm-hxy-lnd.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.mrsol.tpt-d10cm-hxy-lnd.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: land.mrsol.tpt-d10cm-hxy-lnd.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: land.orog.ti-u-hxy-u.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.orog.ti-u-hxy-u.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.rootd.ti-u-hxy-lnd.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.rootd.ti-u-hxy-lnd.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.slthick.ti-sl-hxy-lnd.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.slthick.ti-sl-hxy-lnd.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.srfrad.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: land.srfrad.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: land.tran.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: land.tran.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: land.tslsi.tpt-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: land.tslsi.tpt-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: landIce.snc.tavg-u-hxy-lnd.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: landIce.snc.tavg-u-hxy-lnd.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.areacell.ti-u-hxy-u.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.areacell.ti-u-hxy-u.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.bigthetao.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.bigthetao.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.bigthetao.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.bigthetao.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.deptho.ti-u-hxy-sea.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.deptho.ti-u-hxy-sea.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.masscello.ti-ol-hxy-sea.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.masscello.ti-ol-hxy-sea.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.mlotst.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mlotst.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mlotstmax.tmax-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mlotstmax.tmax-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mlotstmin.tmin-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mlotstmin.tmin-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mpw.tavg-u-hxy-sea.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mpw.tavg-u-hxy-sea.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mpw.tavg-u-hxy-sea.6hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mpw.tavg-u-hxy-sea.6hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mpw.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mpw.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.so.tavg-ol-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocean.so.tavg-ol-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocean.so.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.so.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.sos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([3, 1])
+Priority_retain 1
+Variable considered: ocean.sos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([3, 1])
+Priority_retain 1
+Variable considered: ocean.sos.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.sos.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.swh.tavg-u-hxy-sea.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.swh.tavg-u-hxy-sea.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.swh.tavg-u-hxy-sea.6hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.swh.tavg-u-hxy-sea.6hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.swh.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.swh.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.swh.tmax-u-hxy-sea.6hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.swh.tmax-u-hxy-sea.6hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.swh.tmax-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.swh.tmax-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.thetao.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.thetao.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.thetao.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([2, 3])
+Priority_retain 2
+Variable considered: ocean.thetao.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([2, 3])
+Priority_retain 2
+Variable considered: ocean.tnkebto.tavg-u-hxy-sea.yr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocean.tnkebto.tavg-u-hxy-sea.yr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocean.tos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([3, 1])
+Priority_retain 1
+Variable considered: ocean.tos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([3, 1])
+Priority_retain 1
+Variable considered: ocean.tos.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.tos.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.tos.tpt-u-hxy-sea.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.tos.tpt-u-hxy-sea.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.tossq.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.tossq.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.uos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocean.uos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocean.vos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocean.vos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocean.wo.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.wo.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.wpp.tavg-u-hxy-sea.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.wpp.tavg-u-hxy-sea.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.wpp.tavg-u-hxy-sea.6hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.wpp.tavg-u-hxy-sea.6hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.wpp.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.wpp.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.zos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.zos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.zos.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.zos.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.zossq.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.zossq.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.zostoga.tavg-u-hm-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.zostoga.tavg-u-hm-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.zostoga.tavg-u-hm-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.zostoga.tavg-u-hm-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocnBgchem.arag.tavg-d0m-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.arag.tavg-d0m-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.arag.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.arag.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.calc.tavg-d0m-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.calc.tavg-d0m-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.calc.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.calc.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.chl.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.chl.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.dissic.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.dissic.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.o2.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.o2.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.ph.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.ph.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.talk.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.talk.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: seaIce.siconc.tavg-u-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.siconc.tavg-u-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.siconc.tavg-u-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.siconc.tavg-u-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.simass.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.simass.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.sithick.tavg-u-hxy-si.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: seaIce.sithick.tavg-u-hxy-si.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: seaIce.sithick.tavg-u-hxy-si.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.sithick.tavg-u-hxy-si.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.siu.tavg-u-hxy-si.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: seaIce.siu.tavg-u-hxy-si.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: seaIce.siu.tavg-u-hxy-si.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.siu.tavg-u-hxy-si.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.siv.tavg-u-hxy-si.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: seaIce.siv.tavg-u-hxy-si.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: seaIce.siv.tavg-u-hxy-si.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.siv.tavg-u-hxy-si.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.bldep.tpt-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.hfls.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.hfss.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.hurs.tavg-h2m-hxy-u.6hr.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.huss.tpt-h2m-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: atmos.pr.tavg-u-hxy-u.1hr.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.pr.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: atmos.pr.tavg-u-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.pr.tavg-u-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.prc.tavg-u-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ps.tavg-u-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ps.tpt-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.psl.tavg-u-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.psl.tpt-u-hxy-u.1hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.rlds.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: atmos.rlus.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.sftlf.ti-u-hxy-u.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ta.tavg-p19-hxy-air.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ta.tavg-p19-hxy-air.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ta.tpt-p3-hxy-air.6hr.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ta.tpt-p6-hxy-air.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: atmos.tas.tavg-h2m-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tavg-h2m-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tmax-h2m-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tmax-h2m-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tmin-h2m-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tmin-h2m-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tpt-h2m-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: atmos.ts.tavg-u-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.uas.tpt-h10m-hxy-u.1hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.vas.tpt-h10m-hxy-u.1hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.zg.tavg-p19-hxy-air.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.zg.tavg-p19-hxy-air.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.hfdsl.tavg-u-hxy-lnd.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: land.lai.tavg-u-hxy-lnd.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.mrso.tavg-u-hxy-lnd.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.mrsol.tavg-d100cm-hxy-lnd.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: land.mrsol.tavg-d10cm-hxy-lnd.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.mrsol.tpt-d10cm-hxy-lnd.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: land.orog.ti-u-hxy-u.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.rootd.ti-u-hxy-lnd.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.slthick.ti-sl-hxy-lnd.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.srfrad.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: land.tran.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: land.tslsi.tpt-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: landIce.snc.tavg-u-hxy-lnd.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.areacell.ti-u-hxy-u.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.bigthetao.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.bigthetao.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.deptho.ti-u-hxy-sea.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.masscello.ti-ol-hxy-sea.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.mlotst.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mlotstmax.tmax-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mlotstmin.tmin-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mpw.tavg-u-hxy-sea.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mpw.tavg-u-hxy-sea.6hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mpw.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.so.tavg-ol-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocean.so.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.sos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([3, 1])
+Priority_retain 1
+Variable considered: ocean.sos.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.swh.tavg-u-hxy-sea.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.swh.tavg-u-hxy-sea.6hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.swh.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.swh.tmax-u-hxy-sea.6hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.swh.tmax-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.thetao.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.thetao.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([2, 3])
+Priority_retain 2
+Variable considered: ocean.tnkebto.tavg-u-hxy-sea.yr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocean.tos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([3, 1])
+Priority_retain 1
+Variable considered: ocean.tos.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.tos.tpt-u-hxy-sea.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.tossq.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.uos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocean.vos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocean.wo.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.wpp.tavg-u-hxy-sea.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.wpp.tavg-u-hxy-sea.6hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.wpp.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.zos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.zos.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.zossq.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.zostoga.tavg-u-hm-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.zostoga.tavg-u-hm-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocnBgchem.arag.tavg-d0m-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.arag.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.calc.tavg-d0m-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.calc.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.chl.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.dissic.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.o2.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.ph.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.talk.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: seaIce.siconc.tavg-u-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.siconc.tavg-u-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.simass.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.sithick.tavg-u-hxy-si.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: seaIce.sithick.tavg-u-hxy-si.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.siu.tavg-u-hxy-si.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: seaIce.siu.tavg-u-hxy-si.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.siv.tavg-u-hxy-si.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: seaIce.siv.tavg-u-hxy-si.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Number of simplified vars is: 105
+Issues with standard names are: []
+Info: No HOMEvars list provided.
+
+Realms for these CMORvars: aerosol atmos land landIce ocean ocnBgchem seaIce
+Processing realm 'ocean' of context 'nemo'
+Processing realm 'ocnBgchem' of context 'nemo'
+Processing realm 'seaIce' of context 'nemo'
+For table 3hr: mpw swh tos wpp
+For table 6hr: mpw swh swhmax wpp
+For table Eday: mlotst
+For table Oday: bigthetao so sos thetao tos tossq uos vos zos zostoga chl o2 ph
+For table Ofx: areacello deptho masscello
+For table Omon: bigthetao mlotstmax mlotstmin mpw so sos swh swhmax thetao tos wo wpp zos zossq zostoga aragos arag calcos calc dissic talk
+For table Oyr: tnkebto
+For table SIday: sithick siconc sithick siu siv
+For table SImon: sithick siconc simass sithick siu siv
+  5 variables written for current_directory/test_pingfiles_CMIP7_IPSL_realm/test_outputs//ping_nemo_seaIce.xml
+ 24 variables written for current_directory/test_pingfiles_CMIP7_IPSL_realm/test_outputs//ping_nemo_ocean.xml
+  9 variables written for current_directory/test_pingfiles_CMIP7_IPSL_realm/test_outputs//ping_nemo_ocnBgchem.xml
+Number of distinct CMOR variables (whatever the grid): 105
+Variable considered: atmos.areacell.ti-u-hxy-u.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.bldep.tpt-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.hfls.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.hfss.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.hurs.tavg-h2m-hxy-u.6hr.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.huss.tpt-h2m-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: atmos.pr.tavg-u-hxy-u.1hr.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.pr.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: atmos.pr.tavg-u-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.pr.tavg-u-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.prc.tavg-u-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ps.tavg-u-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ps.tpt-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.psl.tavg-u-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.psl.tpt-u-hxy-u.1hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.rlds.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: atmos.rlus.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.sftlf.ti-u-hxy-u.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ta.tavg-p19-hxy-air.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ta.tavg-p19-hxy-air.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ta.tpt-p3-hxy-air.6hr.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ta.tpt-p6-hxy-air.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: atmos.tas.tavg-h2m-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tavg-h2m-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tmax-h2m-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tmax-h2m-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tmin-h2m-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tmin-h2m-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tpt-h2m-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: atmos.ts.tavg-u-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.uas.tpt-h10m-hxy-u.1hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.vas.tpt-h10m-hxy-u.1hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.zg.tavg-p19-hxy-air.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.zg.tavg-p19-hxy-air.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.hfdsl.tavg-u-hxy-lnd.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: land.lai.tavg-u-hxy-lnd.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.mrso.tavg-u-hxy-lnd.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.mrsol.tavg-d100cm-hxy-lnd.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: land.mrsol.tavg-d10cm-hxy-lnd.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.mrsol.tpt-d10cm-hxy-lnd.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: land.orog.ti-u-hxy-u.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.rootd.ti-u-hxy-lnd.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.slthick.ti-sl-hxy-lnd.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.srfrad.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: land.tran.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: land.tslsi.tpt-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: landIce.snc.tavg-u-hxy-lnd.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.areacell.ti-u-hxy-u.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.bigthetao.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.bigthetao.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.deptho.ti-u-hxy-sea.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.masscello.ti-ol-hxy-sea.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.mlotst.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mlotstmax.tmax-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mlotstmin.tmin-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mpw.tavg-u-hxy-sea.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mpw.tavg-u-hxy-sea.6hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mpw.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.so.tavg-ol-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocean.so.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.sos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([3, 1])
+Priority_retain 1
+Variable considered: ocean.sos.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.swh.tavg-u-hxy-sea.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.swh.tavg-u-hxy-sea.6hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.swh.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.swh.tmax-u-hxy-sea.6hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.swh.tmax-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.thetao.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.thetao.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([2, 3])
+Priority_retain 2
+Variable considered: ocean.tnkebto.tavg-u-hxy-sea.yr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocean.tos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([3, 1])
+Priority_retain 1
+Variable considered: ocean.tos.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.tos.tpt-u-hxy-sea.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.tossq.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.uos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocean.vos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocean.wo.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.wpp.tavg-u-hxy-sea.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.wpp.tavg-u-hxy-sea.6hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.wpp.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.zos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.zos.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.zossq.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.zostoga.tavg-u-hm-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.zostoga.tavg-u-hm-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocnBgchem.arag.tavg-d0m-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.arag.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.calc.tavg-d0m-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.calc.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.chl.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.dissic.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.o2.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.ph.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.talk.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: seaIce.siconc.tavg-u-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.siconc.tavg-u-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.simass.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.sithick.tavg-u-hxy-si.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: seaIce.sithick.tavg-u-hxy-si.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.siu.tavg-u-hxy-si.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: seaIce.siu.tavg-u-hxy-si.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.siv.tavg-u-hxy-si.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: seaIce.siv.tavg-u-hxy-si.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Number of distinct var labels is: 72
+Variable considered: atmos.areacell.ti-u-hxy-u.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.bldep.tpt-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.hfls.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.hfss.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.hurs.tavg-h2m-hxy-u.6hr.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.huss.tpt-h2m-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: atmos.pr.tavg-u-hxy-u.1hr.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.pr.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: atmos.pr.tavg-u-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.pr.tavg-u-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.prc.tavg-u-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ps.tavg-u-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ps.tpt-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.psl.tavg-u-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.psl.tpt-u-hxy-u.1hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.rlds.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: atmos.rlus.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.sftlf.ti-u-hxy-u.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ta.tavg-p19-hxy-air.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ta.tavg-p19-hxy-air.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ta.tpt-p3-hxy-air.6hr.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ta.tpt-p6-hxy-air.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: atmos.tas.tavg-h2m-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tavg-h2m-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tmax-h2m-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tmax-h2m-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tmin-h2m-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tmin-h2m-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tpt-h2m-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: atmos.ts.tavg-u-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.uas.tpt-h10m-hxy-u.1hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.vas.tpt-h10m-hxy-u.1hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.zg.tavg-p19-hxy-air.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.zg.tavg-p19-hxy-air.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.hfdsl.tavg-u-hxy-lnd.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: land.lai.tavg-u-hxy-lnd.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.mrso.tavg-u-hxy-lnd.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.mrsol.tavg-d100cm-hxy-lnd.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: land.mrsol.tavg-d10cm-hxy-lnd.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.mrsol.tpt-d10cm-hxy-lnd.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: land.orog.ti-u-hxy-u.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.rootd.ti-u-hxy-lnd.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.slthick.ti-sl-hxy-lnd.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.srfrad.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: land.tran.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: land.tslsi.tpt-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: landIce.snc.tavg-u-hxy-lnd.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.areacell.ti-u-hxy-u.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.bigthetao.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.bigthetao.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.deptho.ti-u-hxy-sea.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.masscello.ti-ol-hxy-sea.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.mlotst.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mlotstmax.tmax-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mlotstmin.tmin-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mpw.tavg-u-hxy-sea.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mpw.tavg-u-hxy-sea.6hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mpw.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.so.tavg-ol-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocean.so.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.sos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([3, 1])
+Priority_retain 1
+Variable considered: ocean.sos.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.swh.tavg-u-hxy-sea.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.swh.tavg-u-hxy-sea.6hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.swh.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.swh.tmax-u-hxy-sea.6hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.swh.tmax-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.thetao.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.thetao.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([2, 3])
+Priority_retain 2
+Variable considered: ocean.tnkebto.tavg-u-hxy-sea.yr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocean.tos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([3, 1])
+Priority_retain 1
+Variable considered: ocean.tos.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.tos.tpt-u-hxy-sea.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.tossq.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.uos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocean.vos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocean.wo.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.wpp.tavg-u-hxy-sea.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.wpp.tavg-u-hxy-sea.6hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.wpp.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.zos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.zos.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.zossq.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.zostoga.tavg-u-hm-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.zostoga.tavg-u-hm-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocnBgchem.arag.tavg-d0m-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.arag.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.calc.tavg-d0m-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.calc.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.chl.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.dissic.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.o2.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.ph.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.talk.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: seaIce.siconc.tavg-u-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.siconc.tavg-u-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.simass.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.sithick.tavg-u-hxy-si.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: seaIce.sithick.tavg-u-hxy-si.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.siu.tavg-u-hxy-si.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: seaIce.siu.tavg-u-hxy-si.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.siv.tavg-u-hxy-si.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: seaIce.siv.tavg-u-hxy-si.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Number of simplified vars is: 105
+Issues with standard names are: []
+Info: No HOMEvars list provided.
+
+Realms for these CMORvars: aerosol atmos land landIce ocean ocnBgchem seaIce
+Processing realm 'land' of context 'orchidee'
+Processing realm 'landIce' of context 'orchidee'
+For table 3hr: hfdsl mrso100 mrsos srfrad tran tslsi
+For table 3hrPt: bldep
+For table Efx: slthick
+For table LImon: snc snc
+For table Lmon: lai mrso mrsos
+For table fx: areacella orog rootd
+ 14 variables written for current_directory/test_pingfiles_CMIP7_IPSL_realm/test_outputs//ping_orchidee_land.xml
+  1 variables written for current_directory/test_pingfiles_CMIP7_IPSL_realm/test_outputs//ping_orchidee_landIce.xml
+Number of distinct CMOR variables (whatever the grid): 105
+Variable considered: atmos.areacell.ti-u-hxy-u.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.bldep.tpt-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.hfls.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.hfss.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.hurs.tavg-h2m-hxy-u.6hr.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.huss.tpt-h2m-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: atmos.pr.tavg-u-hxy-u.1hr.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.pr.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: atmos.pr.tavg-u-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.pr.tavg-u-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.prc.tavg-u-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ps.tavg-u-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ps.tpt-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.psl.tavg-u-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.psl.tpt-u-hxy-u.1hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.rlds.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: atmos.rlus.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.sftlf.ti-u-hxy-u.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ta.tavg-p19-hxy-air.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ta.tavg-p19-hxy-air.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ta.tpt-p3-hxy-air.6hr.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ta.tpt-p6-hxy-air.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: atmos.tas.tavg-h2m-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tavg-h2m-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tmax-h2m-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tmax-h2m-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tmin-h2m-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tmin-h2m-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tpt-h2m-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: atmos.ts.tavg-u-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.uas.tpt-h10m-hxy-u.1hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.vas.tpt-h10m-hxy-u.1hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.zg.tavg-p19-hxy-air.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.zg.tavg-p19-hxy-air.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.hfdsl.tavg-u-hxy-lnd.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: land.lai.tavg-u-hxy-lnd.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.mrso.tavg-u-hxy-lnd.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.mrsol.tavg-d100cm-hxy-lnd.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: land.mrsol.tavg-d10cm-hxy-lnd.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.mrsol.tpt-d10cm-hxy-lnd.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: land.orog.ti-u-hxy-u.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.rootd.ti-u-hxy-lnd.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.slthick.ti-sl-hxy-lnd.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.srfrad.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: land.tran.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: land.tslsi.tpt-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: landIce.snc.tavg-u-hxy-lnd.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.areacell.ti-u-hxy-u.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.bigthetao.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.bigthetao.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.deptho.ti-u-hxy-sea.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.masscello.ti-ol-hxy-sea.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.mlotst.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mlotstmax.tmax-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mlotstmin.tmin-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mpw.tavg-u-hxy-sea.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mpw.tavg-u-hxy-sea.6hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mpw.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.so.tavg-ol-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocean.so.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.sos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([3, 1])
+Priority_retain 1
+Variable considered: ocean.sos.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.swh.tavg-u-hxy-sea.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.swh.tavg-u-hxy-sea.6hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.swh.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.swh.tmax-u-hxy-sea.6hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.swh.tmax-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.thetao.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.thetao.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([2, 3])
+Priority_retain 2
+Variable considered: ocean.tnkebto.tavg-u-hxy-sea.yr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocean.tos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([3, 1])
+Priority_retain 1
+Variable considered: ocean.tos.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.tos.tpt-u-hxy-sea.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.tossq.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.uos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocean.vos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocean.wo.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.wpp.tavg-u-hxy-sea.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.wpp.tavg-u-hxy-sea.6hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.wpp.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.zos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.zos.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.zossq.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.zostoga.tavg-u-hm-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.zostoga.tavg-u-hm-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocnBgchem.arag.tavg-d0m-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.arag.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.calc.tavg-d0m-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.calc.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.chl.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.dissic.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.o2.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.ph.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.talk.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: seaIce.siconc.tavg-u-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.siconc.tavg-u-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.simass.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.sithick.tavg-u-hxy-si.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: seaIce.sithick.tavg-u-hxy-si.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.siu.tavg-u-hxy-si.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: seaIce.siu.tavg-u-hxy-si.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.siv.tavg-u-hxy-si.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: seaIce.siv.tavg-u-hxy-si.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Number of distinct var labels is: 72
+Variable considered: atmos.areacell.ti-u-hxy-u.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.bldep.tpt-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.hfls.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.hfss.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.hurs.tavg-h2m-hxy-u.6hr.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.huss.tpt-h2m-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: atmos.pr.tavg-u-hxy-u.1hr.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.pr.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: atmos.pr.tavg-u-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.pr.tavg-u-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.prc.tavg-u-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ps.tavg-u-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ps.tpt-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.psl.tavg-u-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.psl.tpt-u-hxy-u.1hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.rlds.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: atmos.rlus.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.sftlf.ti-u-hxy-u.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ta.tavg-p19-hxy-air.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ta.tavg-p19-hxy-air.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ta.tpt-p3-hxy-air.6hr.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.ta.tpt-p6-hxy-air.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: atmos.tas.tavg-h2m-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tavg-h2m-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tmax-h2m-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tmax-h2m-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tmin-h2m-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tmin-h2m-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.tas.tpt-h2m-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: atmos.ts.tavg-u-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.uas.tpt-h10m-hxy-u.1hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.vas.tpt-h10m-hxy-u.1hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: atmos.zg.tavg-p19-hxy-air.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: atmos.zg.tavg-p19-hxy-air.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.hfdsl.tavg-u-hxy-lnd.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: land.lai.tavg-u-hxy-lnd.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.mrso.tavg-u-hxy-lnd.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.mrsol.tavg-d100cm-hxy-lnd.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: land.mrsol.tavg-d10cm-hxy-lnd.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.mrsol.tpt-d10cm-hxy-lnd.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: land.orog.ti-u-hxy-u.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.rootd.ti-u-hxy-lnd.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.slthick.ti-sl-hxy-lnd.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: land.srfrad.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: land.tran.tavg-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: land.tslsi.tpt-u-hxy-u.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: landIce.snc.tavg-u-hxy-lnd.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.areacell.ti-u-hxy-u.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.bigthetao.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.bigthetao.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.deptho.ti-u-hxy-sea.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.masscello.ti-ol-hxy-sea.fx.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.mlotst.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mlotstmax.tmax-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mlotstmin.tmin-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mpw.tavg-u-hxy-sea.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mpw.tavg-u-hxy-sea.6hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.mpw.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.so.tavg-ol-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocean.so.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.sos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([3, 1])
+Priority_retain 1
+Variable considered: ocean.sos.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.swh.tavg-u-hxy-sea.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.swh.tavg-u-hxy-sea.6hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.swh.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.swh.tmax-u-hxy-sea.6hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.swh.tmax-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.thetao.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.thetao.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([2, 3])
+Priority_retain 2
+Variable considered: ocean.tnkebto.tavg-u-hxy-sea.yr.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocean.tos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([3, 1])
+Priority_retain 1
+Variable considered: ocean.tos.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.tos.tpt-u-hxy-sea.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.tossq.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.uos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocean.vos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocean.wo.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.wpp.tavg-u-hxy-sea.3hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.wpp.tavg-u-hxy-sea.6hr.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.wpp.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.zos.tavg-u-hxy-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654), priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([2, 1])
+Priority_retain 1
+Variable considered: ocean.zos.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocean.zossq.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.zostoga.tavg-u-hm-sea.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: ocean.zostoga.tavg-u-hm-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: ocnBgchem.arag.tavg-d0m-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.arag.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.calc.tavg-d0m-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.calc.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.chl.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.dissic.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.o2.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.ph.tavg-op20bar-hxy-sea.day.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: ocnBgchem.talk.tavg-ol-hxy-sea.mon.GLB
+Priorities found: [priority_level: Medium (id: 527f5c95-8c97-11ef-944e-41a8eb05f654)] ([3])
+Priority_retain 3
+Variable considered: seaIce.siconc.tavg-u-hxy-u.day.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.siconc.tavg-u-hxy-u.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.simass.tavg-u-hxy-sea.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.sithick.tavg-u-hxy-si.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: seaIce.sithick.tavg-u-hxy-si.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.siu.tavg-u-hxy-si.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: seaIce.siu.tavg-u-hxy-si.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Variable considered: seaIce.siv.tavg-u-hxy-si.day.GLB
+Priorities found: [priority_level: High (id: 527f5c94-8c97-11ef-944e-41a8eb05f654)] ([2])
+Priority_retain 2
+Variable considered: seaIce.siv.tavg-u-hxy-si.mon.GLB
+Priorities found: [priority_level: Core (id: 527f5c97-8c97-11ef-944e-41a8eb05f654)] ([1])
+Priority_retain 1
+Number of simplified vars is: 105
+Issues with standard names are: []
+Info: No HOMEvars list provided.
+
+Realms for these CMORvars: aerosol atmos land landIce ocean ocnBgchem seaIce
+Processing realm 'atmosChem' of context 'LMDZ' -- no variable asked (skip)
+Processing realm 'aerosol' of context 'LMDZ'
+Processing realm 'atmos' of context 'LMDZ'
+Processing realm 'land' of context 'LMDZ'
+Processing realm 'landIce' of context 'LMDZ'
+For table 3hr: hfls hfss huss pr ps rlds rlus tas mpw swh wpp hfdsl mrso100 mrsos srfrad tran tslsi
+For table 3hrPt: bldep bldep bldep
+For table 6hr: mpw swh swhmax wpp
+For table 6hrPlev: hurs
+For table 6hrPlevPt: ta
+For table Amon: pr prc sfcWind ta tas tasmax tasmin ts zg
+For table CFday: ps
+For table E1hr: pr psl uas vas
+For table E3hrPt: ta6
+For table Efx: slthick
+For table LImon: snc snc
+For table Lmon: lai mrso mrsos
+For table Omon: mpw swh swhmax wpp
+For table day: pr psl sfcWind ta tas tasmax tasmin zg
+For table fx: areacella sftlf areacella orog rootd
+ 27 variables written for current_directory/test_pingfiles_CMIP7_IPSL_realm/test_outputs//ping_LMDZ_atmos.xml
+ 14 variables written for current_directory/test_pingfiles_CMIP7_IPSL_realm/test_outputs//ping_LMDZ_land.xml
+  1 variables written for current_directory/test_pingfiles_CMIP7_IPSL_realm/test_outputs//ping_LMDZ_landIce.xml
+  0 variables written for current_directory/test_pingfiles_CMIP7_IPSL_realm/test_outputs//ping_LMDZ_atmosChem.xml
+  1 variables written for current_directory/test_pingfiles_CMIP7_IPSL_realm/test_outputs//ping_LMDZ_aerosol.xml

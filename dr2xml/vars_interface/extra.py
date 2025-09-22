@@ -12,9 +12,10 @@ from collections import OrderedDict, defaultdict
 
 from dr2xml.analyzer import guess_freq_from_table_name
 from dr2xml.dr_interface import get_dr_object
-from logger import get_logger
-from dr2xml.settings_interface import get_settings_values
-from dr2xml.utils import VarsError, read_json_content
+from utilities.logger import get_logger
+from dr2xml.settings_interface import get_values_from_internal_settings
+from dr2xml.utils import VarsError
+from utilities.json_tools import read_json_content
 from .generic import read_home_var, multi_plev_suffixes, single_plev_suffixes, remove_p_suffix
 
 home_attrs = ['type', 'label', 'modeling_realm', 'frequency', 'mipTable', 'temporal_shp', 'spatial_shp',
@@ -182,7 +183,7 @@ def read_extra_table(path, table):
 
 def check_extra_variable(home_var, hv_info):
     logger = get_logger()
-    if home_var.Priority <= get_settings_values("internal", "max_priority"):
+    if home_var.Priority <= get_values_from_internal_settings("max_priority", "max_priority_lset", merge=False):
         logger.debug("Info: %s HOMEVar is read in an extra Table with priority %s => Taken into account." %
                      (hv_info, home_var.Priority))
         return home_var

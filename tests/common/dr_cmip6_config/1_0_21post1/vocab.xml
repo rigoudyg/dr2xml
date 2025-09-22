@@ -1,0 +1,274 @@
+<?xml version="1.0" ?>
+<main>
+<institute class="vocab" id="cmip.drv.001" title="Institute">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item description="Met Office Hadley Centre, Fitzroy Road, Exeter, Devon, EX1 3PB, UK." id="tmpid.0001" isni="0000 0001 2299 303X  [UKMO]" label="MOHC" title="MOHC" url="http://www.metoffice.gov.uk; http://www.metoffice.gov.uk/climate-guide/science/science-behind-climate-change/hadley" uuid="675210ac-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="Institut Pierre Simon Laplace, Paris, France" id="tmpid.0002" isni="0000 0000 9000 8794" label="IPSL" title="IPSL" url="https://www.ipsl.fr/en/" uuid="675214f8-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="Centre National de Recherches Meteorologiques, Meteo-France, Toulouse, France) and CERFACS (Centre Europeen de Recherches et de Formation Avancee en Calcul Scientifique, Toulouse, France" id="tmpid.0003" isni="0000 0004 0640 7549 " label="CNRM-CERFACS" title="CNRM-CERFACS" url="http://www.cerfacs.fr/" uuid="6752196c-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="Norwegian Climate Centre" id="tmpid.0004" isni="" label="NCC" title="NCC" url="http://folk.uib.no/ngfhd/EarthClim/index.htm" uuid="67521da4-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="Australian Commonwealth Scientific and Industrial Research Organization (CSIRO) Marine and Atmospheric Research (Melbourne, Australia) in collaboration with the Queensland Climate Change Centre of Excellence (QCCCE) (Brisbane, Australia)" id="tmpid.0005" isni="0000 0001 2173 2719 ;  0000 0004 0380 0628 [Queensland Government]" label="CSIRO-QCCCE" title="CSIRO-QCCCE" url="www.csiro.au ; http://www.ehp.qld.gov.au/climatechange/index.html " uuid="675221e6-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="Canadian Centre for Climate Modelling and Analysis, Victoria, BC, Canada" id="tmpid.0006" isni="" label="CCCma" title="CCCma" url="" uuid="675229e8-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="Institute for Numerical Mathematics, Moscow, Russia" id="tmpid.0007" isni="" label="INM" title="INM" url="" uuid="67522e20-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="Meteorological Research Institute, Tsukuba, Japan" id="tmpid.0008" isni="" label="MRI" title="MRI" url="" uuid="67523258-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="AORI (Atmosphere and Ocean Research Institute, The University of Tokyo, Chiba, Japan), NIES (National Institute for Environmental Studies, Ibaraki, Japan), JAMSTEC (Japan Agency for Marine-Earth Science and Technology, Kanagawa, Japan)" id="tmpid.0009" isni="" label="MIROC" title="MIROC" url="" uuid="67523672-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="JAMSTEC (Japan Agency for Marine-Earth Science and Technology, Kanagawa, Japan), AORI (Atmosphere and Ocean Research Institute, The University of Tokyo, Chiba, Japan), and NIES (National Institute for Environmental Studies, Ibaraki, Japan)" id="tmpid.0010" isni="" label="MIROC" title="MIROC" url="" uuid="67523aaa-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="Goddard Institute for Space Studies, New York, NY" id="tmpid.0011" isni="" label="NASA-GISS" title="NASA-GISS" url="" uuid="67523ece-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="National Center for Atmospheric Research, Boulder, CO, USA" id="tmpid.0012" isni="0000 0004 0637 9680 " label="NCAR" title="NCAR" url="" uuid="675242de-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="NOAA GFDL, 201 Forrestal Rd, Princeton, NJ, 08540" id="tmpid.0013" isni="0000 0000 9269 5516 " label="NOAA-GFDL" title="NOAA-GFDL" url="" uuid="675246f8-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="Beijing Climate Center,China Meteorological Administration,China" id="tmpid.0014" isni="0000 0001 2234 550X [CMA]" label="BCC" title="BCC" url="" uuid="67524b26-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="Max Planck Institute for Meteorology" id="tmpid.0015" isni="" label="MPI-M" title="MPI-M" url="" uuid="67524f5e-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="Institute of Atmospheric Physics, Chinese Academy of Sciences, Beijing, China and Tsinghua University" id="tmpid.0016" isni="" label="LASG-CESS" title="LASG-CESS" url="" uuid="67525382-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="Global Modeling and Assimilation Office, NASA Goddard Space Flight Center, Greenbelt, MD 20771" id="tmpid.0017" isni="" label="NASA-GMAO" title="NASA-GMAO" url="" uuid="67525788-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="GCESS,BNU,Beijing,China" id="tmpid.0018" isni="" label="BNU" title="BNU" url="" uuid="67525ba2-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="National Center for Atmospheric Research, Boulder, CO, USA" id="tmpid.0019" isni="" label="NSF-DOE-NCAR" title="NSF-DOE-NCAR" url="" uuid="67525f80-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="PNNL (Pacific Northwest National Laboratory) Richland, WA, USA/NCAR (National Center for Atmospheric Research) Boulder, CO, USA" id="tmpid.0020" isni="" label="NSF-DOE-NCAR" title="NSF-DOE-NCAR" url="" uuid="67526372-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="NSF/DOE NCAR (National Center for Atmospheric Research) Boulder, CO, USA" id="tmpid.0021" isni="" label="NSF-DOE-NCAR" title="NSF-DOE-NCAR" url="" uuid="67526ae8-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="Commonwealth Scientific and Industrial Research Organisation, Australia, and Bureau of Meteorology, Australia" id="tmpid.0022" isni="" label="CSIRO-BOM" title="CSIRO-BOM" url="" uuid="67526ef8-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="Nonhydrostatic Icosahedral Atmospheric Model (NICAM) Group (RIGC-JAMSTEC/AORI-U.Tokyo/AICS-RIKEN,Japan)" id="tmpid.0023" isni="" label="NICAM" title="NICAM" url="" uuid="67527312-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="Centro Euro-Mediterraneo per i Cambiamenti Climatici, Bologna, Italy" id="tmpid.0024" isni="" label="CMCC" title="CMCC" url="" uuid="67527704-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="The First Institution of Oceanography,SOA,Qingdao,China" id="tmpid.0025" isni="" label="FIO" title="FIO" url="" uuid="67527b32-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="Institute of Atmospheric Physics, Chinese Academy of Sciences,Beijing,China" id="tmpid.0026" isni="" label="LASG-IAP" title="LASG-IAP" url="" uuid="67527f2e-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="National Institute of Meteorological Research, Seoul, South Korea" id="tmpid.0027" isni="" label="NIMR-KMA" title="NIMR-KMA" url="" uuid="6752832a-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="European Earth System Model" id="tmpid.0028" isni="" label="ICHEC" title="ICHEC" url="" uuid="67528712-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="Center for Ocean-Land-Atmosphere Studies, Calverton, MD" id="tmpid.0029" isni="" label="COLA-CFS" title="COLA-CFS" url="" uuid="67528c80-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="National Centers for Environmental Prediction, Camp Springs, MD" id="tmpid.0030" isni="" label="NOAA-NCEP" title="NOAA-NCEP" url="" uuid="67529090-3a81-11e5-9ed5-ac72891c3257"/>
+</institute>
+<model class="vocab" id="cmip.drv.002" title="Model">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item description="" id="tmpid.0001" label="ACCESS" title="" uuid="67548a94-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="" id="tmpid.0002" label="AWI-CM" title="" uuid="67548e36-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="" id="tmpid.0003" label="BCC" title="" uuid="6754921e-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="" id="tmpid.0004" label="BESM" title="" uuid="6754964c-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="" id="tmpid.0005" label="BNU" title="" uuid="67549a3e-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="" id="tmpid.0006" label="CAMS-CSM" title="" uuid="67549de0-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="" id="tmpid.0007" label="CanESM" title="" uuid="6754a1e6-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="" id="tmpid.0008" label="CAS-ESM" title="" uuid="6754a56a-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="" id="tmpid.0009" label="CESM" title="" uuid="6754a8c6-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="" id="tmpid.0010" label="CESS-THU" title="" uuid="6754ac2c-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="" id="tmpid.0011" label="CMCC" title="" uuid="6754b21c-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="" id="tmpid.0012" label="CNRM" title="" uuid="6754b582-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="" id="tmpid.0013" label="EC-Earth" title="" uuid="6754b8e8-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="" id="tmpid.0014" label="FGOALS" title="" uuid="6754bc62-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="" id="tmpid.0015" label="FIO" title="" uuid="6754bfd2-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="" id="tmpid.0016" label="GFDL" title="" uuid="6754c338-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="" id="tmpid.0017" label="GISS" title="" uuid="6754c694-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="" id="tmpid.0018" label="IITM" title="" uuid="6754ca22-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="" id="tmpid.0019" label="INM" title="" uuid="6754cd9c-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="" id="tmpid.0020" label="IPSL" title="" uuid="6754d134-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="" id="tmpid.0021" label="MIROC6-CGCM" title="" uuid="6754d49a-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="" id="tmpid.0022" label="MIROC-ESM" title="" uuid="6754d7f6-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="" id="tmpid.0023" label="NICAM" title="" uuid="6754db70-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="" id="tmpid.0024" label="MPI-ESM" title="" uuid="6754decc-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="" id="tmpid.0025" label="MRI-ESM1-x" title="" uuid="6754e246-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="" id="tmpid.0026" label="MRI-AGCM3-xS" title="" uuid="6754e5b6-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="" id="tmpid.0027" label="NorESM" title="" uuid="6754e9b2-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="" id="tmpid.0028" label="NUIST-CSM" title="" uuid="6754ed5e-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="" id="tmpid.0029" label="UKESM" title="" uuid="6754f150-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="" id="tmpid.0030" label="HadGEM3" title="" uuid="6754f4b6-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="" id="tmpid.0031" label="KMA-ACE" title="" uuid="6754fab0-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="" id="tmpid.0032" label="UKESM--KMA" title="" uuid="6754fe34-3a81-11e5-9ed5-ac72891c3257"/>
+</model>
+<physicsvers class="vocab" id="cmip.drv.003" title="Physics Version">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item description="dummyAt" id="001.003.001" label="example-01" title="dummy title string" uuid="215e7e6e-3a81-11e5-882e-ac72891c3257"/>
+</physicsvers>
+<initialisationmethod class="vocab" id="cmip.drv.004" title="Initialisation Method">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item description="dummyAt" id="001.004.001" label="example-01" title="dummy title string" uuid="215eb3c0-3a81-11e5-882e-ac72891c3257"/>
+</initialisationmethod>
+<modelComp class="vocab" id="cmip.drv.005" title="Model Components">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item componentType="dummyAt" id="001.005.001" label="example-01" sizeH="dummyAt" sizeV="dummyAt" title="dummy title string" uuid="215eec50-3a81-11e5-882e-ac72891c3257"/>
+</modelComp>
+<activity class="vocab" id="cmip.drv.006" title="Coordinating activity">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="tmpid.0001" label="CMIP6" status="" title="Coupled Model Intercomparison Project, Phase 6" url="http://www.wcrp-climate.org/wgcm-cmip/wgcm-cmip6" uuid="67535df4-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0002" label="AerChemMIP" status="" title="Aerosols and Chemistry Model Intercomparison Project" url="" uuid="67536484-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0003" label="C4MIP" status="" title="Coupled Climate Carbon Cycle Model Intercomparison Project" url="" uuid="67536a88-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0004" label="CFMIP" status="" title="Cloud Feedback Model Intercomparison Project" url="" uuid="6753710e-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0005" label="DAMIP" status="" title="Detection and Attribution Model Intercomparison Project" url="" uuid="6753778a-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0006" label="DCPP" status="" title="Decadal Climate Prediction Project" url="" uuid="67537e74-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0007" label="FAFMIP" status="" title="Flux-Anomaly-Forced Model Intercomparison Project" url="" uuid="6753850e-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0008" label="GeoMIP" status="" title="Geoengineering Model Intercomparison Project" url="" uuid="67538fa4-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0009" label="GMMIP" status="" title="Global Monsoons Model Intercomparison Project" url="" uuid="675395e4-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0010" label="HighResMIP" status="" title="High Resolution Model Intercomparison Project" url="https://dev.knmi.nl/projects/highresmip/wiki" uuid="67539bc0-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0011" label="ISMIP6" status="" title="Ice Sheet Model Intercomparison Project for CMIP6" url="" uuid="6753a1d8-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0012" label="LS3MIP" status="" title="Land Surface, Snow and Soil Moisture MIP" url="" uuid="6753a8a4-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0013" label="LUMIP" status="" title="Land-Use Model Intercomparison Project" url="" uuid="6753ad90-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0014" label="OMIP" status="" title="Ocean Model Intercomparison Project" url="" uuid="6753b678-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0015" label="PDRMIP" status="withdrawn" title="Precipitation Driver and Response Model Intercomparison Project" url="" uuid="6753bed4-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0016" label="PMIP" status="" title="Palaeoclimate Modelling Intercomparison Project" url="" uuid="6753c65e-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0017" label="RFMIP" status="" title="Radiative Forcing Model Intercomparison Project" url="" uuid="6753cb86-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0018" label="ScenarioMIP" status="" title="Scenario Model Intercomparison Project" url="" uuid="6753cfdc-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0019" label="SolarMIP" status="merged with DAMIP" title="Solar Model Intercomparison Project" url="" uuid="6753d432-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0020" label="VolMIP" status="" title="Volcanic Forcings Model Intercomparison Project" url="" uuid="6753da9a-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0021" label="CORDEX" status="Diagnostic" title="" url="" uuid="6753df90-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0022" label="DynVar" status="Diagnostic" title="" url="" uuid="6753e3aa-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0023" label="SIMIP" status="Diagnostic" title="" url="" uuid="6753e7ba-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0024" label="VIACSAB" status="Diagnostic" title="" url="" uuid="6753ebc0-3a81-11e5-9ed5-ac72891c3257"/>
+</activity>
+<product class="vocab" id="cmip.drv.007" title="Data product">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.007.001" label="example-01" title="dummy title string" uuid="215ef9ac-3a81-11e5-882e-ac72891c3257"/>
+</product>
+<experiment class="vocab" id="cmip.drv.008" title="Numerical Experiment">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item altLabel="dummyAt" description="dummyAt" id="001.008.001" label="example-01" sponsor="dummyAt" title="dummy title string" url="dummyAt" uuid="215efe70-3a81-11e5-882e-ac72891c3257"/>
+</experiment>
+<frequency class="vocab" id="cmip.drv.009" title="Temporal frequency of data values">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="tmpid.0001" iso="P1Y" label="yr" title="Annual" uuid="67529d2e-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0002" iso="P1M" label="monClim" title="Monthly climatology" uuid="6752a0bc-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0003" iso="P1M" label="mon" title="Monthly" uuid="6752a40e-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0004" iso="P1D" label="day" title="Daily" uuid="6752a760-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0005" iso="PT6H" label="6hr" title="6-hourly" uuid="6752aa9e-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0006" iso="PT3H" label="3hr" title="3-hourly" uuid="6752ae90-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0007" iso="PT1H" label="hr" title="Hourly" uuid="6752b890-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0008" iso="" label="subhr" title="Sub-hourly" uuid="6752bd9a-3a81-11e5-9ed5-ac72891c3257"/>
+</frequency>
+<realm class="vocab" id="cmip.drv.010" title="Modeling realm">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="tmpid.0001" label="atmos" title="Atmospheric" uuid="67509b28-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0002" label="ocean" title="Oceanic" uuid="6750da48-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0003" label="land" title="Land" uuid="67512232-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0004" label="landIce" title="Terrestrial cryosphere" uuid="6751662a-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0005" label="seaIce" title="Marine cryosphere" uuid="67516f44-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0006" label="aerosol" title="Aerosols" uuid="675172e6-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0007" label="atmosChem" title="Atmospheric chemistry" uuid="6751762e-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0008" label="ocnBgchem" title="Ocean bio-geochemistry" uuid="6751796c-3a81-11e5-9ed5-ac72891c3257"/>
+</realm>
+<grid class="vocab" id="cmip.drv.011" title="Native grid">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="tmpid.0001" label="atmosphere" title="Atmosphere grid" uuid="6752c768-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0002" label="ocean" title="Ocean grid" uuid="6752ca7e-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0003" label="ice" title="Grid used for ice sheets" uuid="6752cd94-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0004" label="land" title="Grid used for land surface modelling" uuid="6752d0a0-3a81-11e5-9ed5-ac72891c3257"/>
+</grid>
+<dimensions class="vocab" id="cmip.drv.012" title="MIP table variable dimensions">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item altLabel="dummyAt" id="001.012.001" label="example01" size="25" sn="dummyAt" title="dummy title string" uuid="215f0bea-3a81-11e5-882e-ac72891c3257"/>
+</dimensions>
+<forcings class="vocab" id="cmip.drv.013" title="Forcing">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.013.001" label="example-01" title="dummy title string" uuid="215f0ed8-3a81-11e5-882e-ac72891c3257"/>
+</forcings>
+<table class="vocab" id="cmip.drv.014" title="Data specification table">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item comment="" description="Definitions of all the coordinate variables used in the CMIP6 data request" frequency="fx" id="tmpid.0001" label="grids" title="Fixed coordinate variables" uuid="67540d4e-3a81-11e5-9ed5-ac72891c3257"/>
+<item comment="" description="Variables with no time dependency" frequency="fx" id="tmpid.0002" label="fx" title="Fixed variables" uuid="67541208-3a81-11e5-9ed5-ac72891c3257"/>
+<item comment="&quot;ocean&quot; as in &quot;ocean grid&quot;" description="Annual mean variables on the ocean grid." frequency="yr" id="tmpid.0003" label="Oyr" title="Annual ocean variables" uuid="67541654-3a81-11e5-9ed5-ac72891c3257"/>
+<item comment="For CMIP5 there was &quot;Oclim&quot; for ocean climatologies, and atmospheric climatologies were in Amon. Moving Atmospheric climatologies to Clim gives us a strict hierarchy with a single &quot;frequency&quot; in each table." description="Monthly Mean Climatology" frequency="monClim" id="tmpid.0004" label="Clim" title="Monthly climatologies" uuid="67541b2c-3a81-11e5-9ed5-ac72891c3257"/>
+<item comment="" description="Monthly Mean Ocean Fields, Including Biogechemical Field" frequency="mon" id="tmpid.0005" label="Omon" title="Monthly ocean variables" uuid="67541f6e-3a81-11e5-9ed5-ac72891c3257"/>
+<item comment="See comment on ts: http://dreq01.vanillaforums.com/discussion/29/surface-temperature?new=1" description="Monthly Mean Atmospheric Fields and Some Surface Field" frequency="mon" id="tmpid.0006" label="Amon" title="Montly atmospheric variables (excluding composition and radiation)" uuid="675423c4-3a81-11e5-9ed5-ac72891c3257"/>
+<item comment="" description="Monthly Mean Land Cryosphere Fields" frequency="mon" id="tmpid.0007" label="LImon" title="Monthly land ice" uuid="6754282e-3a81-11e5-9ed5-ac72891c3257"/>
+<item comment="&quot;land&quot; as in &quot;land grid&quot; -- not including variables on atmospheric grid requested for analysis of land processes" description="Monthly Mean Land Fields, Including Physical, Vegetation, Soil, and Biogeochemical Variables" frequency="mon" id="tmpid.0008" label="Lmon" title="Monthly land variables" uuid="67542c8e-3a81-11e5-9ed5-ac72891c3257"/>
+<item comment="" description="Monthly Mean Ocean Cryosphere Fields" frequency="mon" id="tmpid.0009" label="OImon" title="Sea-ice" uuid="675430f8-3a81-11e5-9ed5-ac72891c3257"/>
+<item comment="Used in CMIP5; not requested by CfMIP in CMIP6, but, provisionally, by HighResMIP" description="Monthly Offline Cloud Diagnostic Fields" frequency="mon" id="tmpid.0010" label="cfOff" title="Offline diagnostics for cloud forcing analysis" uuid="67543526-3a81-11e5-9ed5-ac72891c3257"/>
+<item comment="Contains radiative fields from cfMon; some duplication with Amon " description="" frequency="mon" id="tmpid.0011" label="Rmon" title="Monthly atmospheric radiation data" uuid="67543986-3a81-11e5-9ed5-ac72891c3257"/>
+<item comment="" description="Monthly atmospheric composition, including aerosols and properties of aerosols (but see Rmon for radiation quantities)" frequency="mon" id="tmpid.0012" label="Cmon" title="Monthly Atmospheric Composition Data" uuid="67543df0-3a81-11e5-9ed5-ac72891c3257"/>
+<item comment="" description="Daily Mean Atmosphere, Ocean and Surface Fields" frequency="day" id="tmpid.0013" label="Oday" title="Daily  ocean data" uuid="6754423c-3a81-11e5-9ed5-ac72891c3257"/>
+<item comment="" description="" frequency="" id="tmpid.0014" label="Aday" title="Daily atmospheric data, excluding composition and cloud forcing" uuid="6754466a-3a81-11e5-9ed5-ac72891c3257"/>
+<item comment="Formerly &quot;aero&quot;" description="" frequency="day" id="tmpid.0015" label="Cday" title="Daily atmospheric composition data" uuid="67544ae8-3a81-11e5-9ed5-ac72891c3257"/>
+<item comment="" description="" frequency="" id="tmpid.0016" label="cfDay" title="Daily data associated with cloud forcing" uuid="67545196-3a81-11e5-9ed5-ac72891c3257"/>
+<item comment="" description="Fields (Sampled Every 6 Hours) for Driving Regional Models " frequency="6hr" id="tmpid.0017" label="6hrLev" title="6-hourly atmospheric data on model levels" uuid="675455f6-3a81-11e5-9ed5-ac72891c3257"/>
+<item comment="Only 3 levels in CMIP5, more levels requested in CMIP6 by HighResMIP (low priority)" description="Fields (Sampled Every 6 Hours) for Storm-Track Analysis and other Advanced Diagnostic Applications" frequency="6hr" id="tmpid.0018" label="6hrPlev" title="6-hourly atmospheric data on pressure levels" uuid="67545a7e-3a81-11e5-9ed5-ac72891c3257"/>
+<item comment="CMIP5 had two MIP tables at 3hr frequency, &quot;3hr&quot; and &quot;cf3hr&quot;. In some cases variables were requested as instantaneous in one and accumulated in the other. Making two tables with clear definitions should make it easier to see what is going on." description="" frequency="3hr" id="tmpid.0019" label="3hrPoint" title="3-hourly data, instantaenous fields" uuid="67545f74-3a81-11e5-9ed5-ac72891c3257"/>
+<item comment="" description="Atmospheric and Surface Fields Sampled Every 3 Hours" frequency="3hr" id="tmpid.0020" label="3hrAcc" title="3-hourly data, accumulated fields" uuid="6754642e-3a81-11e5-9ed5-ac72891c3257"/>
+<item comment="New -- part of HighResMIP request." description="" frequency="1hr" id="tmpid.0021" label="1hr" title="" uuid="6754685c-3a81-11e5-9ed5-ac72891c3257"/>
+<item comment="Includes cfsites and data for highresmip" description="" frequency="subhr" id="tmpid.0022" label="subhr" title="" uuid="67546c58-3a81-11e5-9ed5-ac72891c3257"/>
+</table>
+<cref class="vocab" id="cmip.drv.015" title="Coordinate Reference">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.015.001" label="example-01" title="dummy title string" uuid="215f170c-3a81-11e5-882e-ac72891c3257"/>
+</cref>
+<areaType class="vocab" id="cmip.drv.016" title="CMIP Area Type">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.016.001" inCF="dummyAt" label="example-01" title="dummy title string" uuid="215f1a54-3a81-11e5-882e-ac72891c3257"/>
+</areaType>
+<timeSlice class="vocab" id="cmip.drv.017" title="Time slices used in data request">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.017.001" label="example-01" specification="dummyAt" title="dummy title string" type="dummyAt" uuid="215f1de2-3a81-11e5-882e-ac72891c3257"/>
+</timeSlice>
+<modelFamily class="vocab" id="cmip.drv.018" title="Family of model">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.018.001" label="example-01" title="dummy title string" uuid="215f20b2-3a81-11e5-882e-ac72891c3257"/>
+</modelFamily>
+<priority class="vocab" id="cmip.drv.019" title="Variable priority">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item description="Modelling centres must commit to supplying all priority 1 variables associated with at least one science question for Tier 1 experiments of any MIP which they participate in;" id="tmpid.0001" label="1" title="High" uuid="6751ecb2-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="Expected to be used in multi-model diagnostics; models not supplying these variables may be omitted from some parts of the inter-comparison;" id="tmpid.0002" label="3" title="Medium" uuid="6751f05e-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="Experimental -- used for exploring new capabilities and/or unlikely to be used in multi-model diagnostic." id="tmpid.0003" label="3" title="Low" uuid="6751f3a6-3a81-11e5-9ed5-ac72891c3257"/>
+</priority>
+<qcLevel class="vocab" id="cmip.drv.020" title="Quality control level">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.020.001" label="1" title="dummy title string" uuid="215f26a2-3a81-11e5-882e-ac72891c3257"/>
+</qcLevel>
+<complianceCode class="vocab" id="cmip.drv.021" title="Data specification compliance codes">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.021.001" label="example-01" title="dummy title string" uuid="215f295e-3a81-11e5-882e-ac72891c3257"/>
+</complianceCode>
+<glossary class="vocab" id="cmip.drv.022" title="Glossary">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item description="" fullName="Coupled Model Intercomparison Project" id="tmpid.0001" label="cmip" title="CMIP" url="" uuid="675186f0-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="World Climate Research Programme (WCRP) Working Group on Coupled Modeling" fullName="Working Group on Coupled Models" id="tmpid.0002" label="wgcm" title="WGCM" url="http://www.wcrp-climate.org/wgcm/" uuid="67518b5a-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="" fullName="" id="tmpid.0003" label="wcrp" title="WCRP" url="" uuid="67518fce-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="Full specifications of vocabularies used for formatting, archiving and dsitribution of CMIP data" fullName="Data Reference Vocabularies" id="tmpid.0004" label="drvocabs" title="DRVoc" url="https://drive.google.com/drive/folders/0B6AWgiTrQ0xFQ0t2RjYtWW1jaFk" uuid="675193fc-3a81-11e5-9ed5-ac72891c3257"/>
+</glossary>
+<modelCompType class="vocab" id="cmip.drv.023" title="Model Component Types/Categories [redundant with *Native Grid*]">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.023.001" label="example-01" title="dummy title string" uuid="215f3002-3a81-11e5-882e-ac72891c3257"/>
+</modelCompType>
+<modelType class="vocab" id="cmip.drv.024" title="Class of model">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="tmpid.0001" label="AGCM" title="Atmosphere only GCM" uuid="6751d09c-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0002" label="AOGCM" title="Coupled atmosphere-ocean model" uuid="6751d3bc-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0003" label="ESM" title="Earth System Model" uuid="6751d718-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0004" label="RCM" title="Regional Climate Model" uuid="6751da24-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0005" label="OGCM" title="Ocean General Circulation Model" uuid="6751dd26-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0006" label="ICESH" title="Ice sheet model" uuid="6751e03c-3a81-11e5-9ed5-ac72891c3257"/>
+<item id="tmpid.0007" label="LU" title="Land use model" uuid="6751e32a-3a81-11e5-9ed5-ac72891c3257"/>
+</modelType>
+<index class="vocab" id="cmip.drv.025" title="Index of vocabularies">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item description="This table defines the quantities used to specify CMOR dimensions. Further information is in the CMOR documentation." id="tmpid.0001" label="cmorDimAttr" title="Attributes of CMOR dimensions" uuid="67504f6a-3a81-11e5-9ed5-ac72891c3257"/>
+</index>
+<cmorDimAttr class="vocab" id="cmip.drv.026" title="CMOR Dimension Attributes">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item CMORattr="" description="A list of CMOR tables in which this dimension is used." id="tmpid.0001" label="tables" title="Tables using this dimension" uuid="6752e810-3a81-11e5-9ed5-ac72891c3257"/>
+<item CMORattr="" description="Name used by CMOR -- unique within one set of tables" id="tmpid.0002" label="CmorName" title="CMOR name" uuid="6752ec0c-3a81-11e5-9ed5-ac72891c3257"/>
+<item CMORattr="" description="Name used for variable and dimension in netcdf files" id="tmpid.0003" label="name" title="Name in file" uuid="6752efc2-3a81-11e5-9ed5-ac72891c3257"/>
+<item CMORattr="" description="Value copied into NetCDF attribute 'long_name' of dimension variable" id="tmpid.0004" label="longname" title="Long name" uuid="6752f382-3a81-11e5-9ed5-ac72891c3257"/>
+<item CMORattr="" description="For spatial or temporal dimensions -- should take the value X, Y, Z or T. Otherwise blank. Value copied into NetCDF attribute of dimension variable" id="tmpid.0005" label="axis" title="NetCDF axis attribute" uuid="6752f742-3a81-11e5-9ed5-ac72891c3257"/>
+<item CMORattr="" description="Value copied into NetCDF attribute of dimension variable" id="tmpid.0006" label="units" title="Units" uuid="6752fb34-3a81-11e5-9ed5-ac72891c3257"/>
+<item CMORattr="" description="Set &quot;ok&quot; if the axis is an index (no netcdf variable will be created)." id="tmpid.0007" label="index" title="Is this an index dimension?" uuid="6752feea-3a81-11e5-9ed5-ac72891c3257"/>
+<item CMORattr="coords_attrib" description="Used as variable name for coordinate values when these cannot be held in the axis variable (e.g. when the coordinate values are words)." id="tmpid.0008" label="coords" title="NetCDF coords attribute" uuid="675302dc-3a81-11e5-9ed5-ac72891c3257"/>
+<item CMORattr="must_have_bounds" description="'Yes' or 'No', to indicate whether a bounds variable is needed." id="tmpid.0009" label="bounds" title="Are bounds required?" uuid="67530674-3a81-11e5-9ed5-ac72891c3257"/>
+<item CMORattr="stored_direction" description="Set to 'increasing' or 'decreasing'. " id="tmpid.0010" label="direction" title="Order of values in axis variable" uuid="67530a2a-3a81-11e5-9ed5-ac72891c3257"/>
+<item CMORattr="" description="" id="tmpid.0011" label="validMin" title="" uuid="67530df4-3a81-11e5-9ed5-ac72891c3257"/>
+<item CMORattr="" description="" id="tmpid.0012" label="validMax" title="" uuid="675311c8-3a81-11e5-9ed5-ac72891c3257"/>
+<item CMORattr="" description="Type (e.g. 'double', 'character', 'integer')" id="tmpid.0013" label="type" title="Type of axis values" uuid="67531574-3a81-11e5-9ed5-ac72891c3257"/>
+<item CMORattr="" description="This attribute is used for vertical coordinates, indicates whether the dimension increases upwards or downwards (valid values are 'up', 'down', or blank)" id="tmpid.0014" label="positive" title="NetCDF positive attribute" uuid="67531b82-3a81-11e5-9ed5-ac72891c3257"/>
+<item CMORattr="" description="For array dimensions see 'requested'" id="tmpid.0015" label="value" title="Value of singleton dimension" uuid="67531f38-3a81-11e5-9ed5-ac72891c3257"/>
+<item CMORattr="" description="For array dimensions see 'boundsreq'" id="tmpid.0016" label="bounds_values" title="Bounds of a singleton dimension" uuid="675322e4-3a81-11e5-9ed5-ac72891c3257"/>
+<item CMORattr="" description="For singleton dimensions see 'value'" id="tmpid.0017" label="requested" title="Values of array dimensions" uuid="675326ea-3a81-11e5-9ed5-ac72891c3257"/>
+<item CMORattr="" description="For singleton dimensions see 'bounds_value'" id="tmpid.0018" label="boundsreq" title="Bounds Requested" uuid="67532aaa-3a81-11e5-9ed5-ac72891c3257"/>
+<item CMORattr="" description="Variance from requested values that is tolerated" id="tmpid.0019" label="tolerance" title="Tolerance on requested values" uuid="67532e6a-3a81-11e5-9ed5-ac72891c3257"/>
+<item CMORattr="must_call_cmor_grid" description="" id="tmpid.0020" label="grid" title="Is this a grid" uuid="6753322a-3a81-11e5-9ed5-ac72891c3257"/>
+<item CMORattr="" description="Value copied into NetCDF attribute of dimension variable" id="tmpid.0021" label="formula" title="NetCDF formula_terms attribute" uuid="675335fe-3a81-11e5-9ed5-ac72891c3257"/>
+<item CMORattr="" description="Value copied into NetCDF attribute of dimension variable" id="tmpid.0022" label="z_factors" title="NetCDF z_factors attribute" uuid="675339b4-3a81-11e5-9ed5-ac72891c3257"/>
+<item CMORattr="" description="Value copied into NetCDF attribute of dimension variable" id="tmpid.0023" label="z_bounds_factors" title="NetCDF z_bounds_factors" uuid="67533d88-3a81-11e5-9ed5-ac72891c3257"/>
+</cmorDimAttr>
+<processingOptions class="vocab" id="cmip.drv.027" title="Processing steps required">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item description="" id="tmpid.0001" label="TM" title="time mean" uuid="6751a22a-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="The weighted time mean is important when a time varying mask is used (e.g. sea ice)" id="tmpid.0002" label="WM" title="weighted time mean" uuid="6751a5c2-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="" id="tmpid.0003" label="VCI" title="vertical coordinate interpolation" uuid="6751a91e-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="" id="tmpid.0004" label="MSK" title="masking" uuid="6751aca2-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="" id="tmpid.0005" label="NS" title="near surface (atmosphere)" uuid="6751afea-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="" id="tmpid.0006" label="SPI" title="spatial interpolation" uuid="6751b35a-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="" id="tmpid.0007" label="SM" title="spectral mean" uuid="6751bbb6-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="" id="tmpid.0008" label="CL" title="climatology " uuid="6751bf62-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="" id="tmpid.0009" label="STAT" title="temporal statistics" uuid="6751c2c8-3a81-11e5-9ed5-ac72891c3257"/>
+<item description="specialised definition of variable which is more tightly constrained than the CF standard name; variables marked with this will need special attention." id="tmpid.0010" label="SD" title="specialised definition" uuid="6751c62e-3a81-11e5-9ed5-ac72891c3257"/>
+</processingOptions>
+</main>

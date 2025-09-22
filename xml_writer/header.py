@@ -12,7 +12,8 @@ from collections import OrderedDict
 from copy import deepcopy
 
 from .beacon import Beacon
-from .utils import encode_if_needed, _generic_dict_regexp, _build_dict_attrib
+from .utils import _generic_dict_regexp, _build_dict_attrib
+from utilities.encoding_tools import encode_if_needed
 
 
 class Header(Beacon):

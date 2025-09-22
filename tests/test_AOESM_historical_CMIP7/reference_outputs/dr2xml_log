@@ -1,0 +1,436 @@
+
+ **************************************************
+*
+*              dr2xml version:  current_version
+*   CMIP6 conventions version:  v6.2.4
+*  CMIP7 Data Request version:  Software current_cmip7_dr_software - Content test
+
+*
+ **************************************************
+
+**************************************************
+
+Processing context  nemo
+
+**************************************************
+
+Number of distinct CMOR variables (whatever the grid): 66
+Number of distinct var labels is: 45
+Number of simplified vars is: 66
+Issues with standard names are: []
+homevars file: current_directory/test_AOESM_historical_CMIP7/input/home_data_request/home_data_request_test.txt
+Number of 'cmor', 'dev' and 'perso' among home variables: 11
+Number of 'extra' among home variables: 0
+homevars list: tos zos sos tos zos sos tos zos sos albsrfc albsrfc
+Error: {'varname': 'zos', 'realm': 'ocean', 'freq': 'monPt', 'table': 'NONE'} HOMEVar announced as cmor but no corresponding CMORVar found => Not taken into account.
+Error: {'varname': 'sos', 'realm': 'ocean', 'freq': 'monPt', 'table': 'NONE'} HOMEVar announced as cmor but no corresponding CMORVar found => Not taken into account.
+
+Realms for these CMORvars: aerosol atmos land landIce ocean seaIce
+Processing realm 'ocnBgchem' of context 'nemo' -- no variable asked (skip)
+Processing realm 'ocean' of context 'nemo'
+Processing realm 'seaIce' of context 'nemo'
+processing file current_directory/test_AOESM_historical_CMIP7/input/xml/ping_surfex.xml:
+OK current_directory/test_AOESM_historical_CMIP7/input/xml/ping_surfex.xml
+processing file current_directory/test_AOESM_historical_CMIP7/input/xml/ping_trip.xml:
+OK current_directory/test_AOESM_historical_CMIP7/input/xml/ping_trip.xml
+processing file current_directory/test_AOESM_historical_CMIP7/input/xml/ping_nemo.xml:
+OK current_directory/test_AOESM_historical_CMIP7/input/xml/ping_nemo.xml
+Note: assuming that 'time: mean where sea_ice'  for         sithick in table SIday is well handled by 'detect_missing'
+Duplicate variable sithick,sithick in table SIday is skipped, preferred is sithick
+Note: assuming that 'time: mean where sea_ice'  for             siu in table SIday is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for             siv in table SIday is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for         sithick in table SImon is well handled by 'detect_missing'
+Duplicate variable sithick,sithick in table SImon is skipped, preferred is sithick
+Note: assuming that 'time: mean where sea_ice'  for             siu in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for             siv in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for         sithick in table SIday is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for             siu in table SIday is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for             siv in table SIday is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for         sithick in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for             siu in table SImon is well handled by 'detect_missing'
+Note: assuming that 'time: mean where sea_ice'  for             siv in table SImon is well handled by 'detect_missing'
+
+file_def written as current_directory/test_AOESM_historical_CMIP7/test_outputs/dr2xml_nemo.xml
+
+Skipped variables (i.e. whose alias is not present in the pingfile):
+>>> TABLE:             6hr 04/04 ----> mpw(2) swh(2) swhmax(2) wpp(2)
+
+>>> TABLE:            Omon 04/15 ----> mpw(2) swh(2) swhmax(2) wpp(2)
+
+
+
+
+Some Statistics on actually written variables per frequency+shape...
+                         None6hr P1   3: sos tos zos
+       6hr    XY-na    -------- ---   3
+
+       6hr --------    -------- ---   3
+
+                            Eday P2   1: mlotst
+                            Oday P1   3: sos tos zos
+                            Oday P2   3: bigthetao thetao tossq
+                           SIday P1   1: siconc
+                           SIday P2   3: sithick siu siv
+       day    XY-na    -------- ---  11
+
+                            Oday P2   1: zostoga
+       day    na-na    -------- ---   1
+
+       day --------    -------- ---  12
+
+                             Ofx P1   1: masscello
+        fx     XY-O    -------- ---   1
+
+                             Ofx P1   2: areacello deptho
+        fx    XY-na    -------- ---   2
+
+        fx --------    -------- ---   3
+
+                            Omon P1   4: bigthetao so thetao wo
+       mon     XY-O    -------- ---   4
+
+                            Omon P1   3: sos tos zos
+                            Omon P2   3: mlotstmax mlotstmin zossq
+                           SImon P1   5: siconc simass sithick siu siv
+       mon    XY-na    -------- ---  11
+
+                            Omon P1   1: zostoga
+       mon    na-na    -------- ---   1
+
+       mon --------    -------- ---  16
+
+                       NonemonPt P2   1: tos
+     monPt    XY-na    -------- ---   1
+
+     monPt --------    -------- ---   1
+
+
+---------- --------    -------- ---  35
+
+
+Some Statistics on actually written variables per variable...
+-----------------------
+--- VARNAME: areacello: Grid-Cell Area for Ocean Variables
+-----------------------
+              *       fx_Ofx_XY-na_1 areacello
+-----------------------
+--- VARNAME: bigthetao: Sea Water Conservative Temperature
+-----------------------
+              *     day_Oday_XY-na_2 bigthetao
+              *      mon_Omon_XY-O_1 bigthetao
+--------------------
+--- VARNAME: deptho: Sea Floor Depth Below Geoid
+--------------------
+              *       fx_Ofx_XY-na_1 deptho
+-----------------------
+--- VARNAME: masscello: Ocean Grid-Cell Mass per Area
+-----------------------
+              *        fx_Ofx_XY-O_1 masscello
+--------------------
+--- VARNAME: mlotst: Ocean Mixed Layer Thickness Defined by Sigma T of 0.03 kg m-3
+--------------------
+              *     day_Eday_XY-na_2 mlotst
+-----------------------
+--- VARNAME: mlotstmax: Maximum Ocean Mixed Layer Thickness Defined by Sigma T
+-----------------------
+              *     mon_Omon_XY-na_2 mlotstmax
+-----------------------
+--- VARNAME: mlotstmin: Minimum Ocean Mixed Layer Thickness Defined by Sigma T
+-----------------------
+              *     mon_Omon_XY-na_2 mlotstmin
+--------------------
+--- VARNAME: siconc: Sea-Ice Area Fraction (Ocean Grid)
+--------------------
+              *    day_SIday_XY-na_1 siconc
+              *    mon_SImon_XY-na_1 siconc
+--------------------
+--- VARNAME: simass: Sea-Ice Mass
+--------------------
+              *    mon_SImon_XY-na_1 simass
+---------------------
+--- VARNAME: sithick: Sea-Ice Thickness
+---------------------
+              *    day_SIday_XY-na_2 sithick
+              *    mon_SImon_XY-na_1 sithick
+-----------------
+--- VARNAME: siu: X-Component of Sea-Ice Velocity
+-----------------
+              *    day_SIday_XY-na_2 siu
+              *    mon_SImon_XY-na_1 siu
+-----------------
+--- VARNAME: siv: Y-Component of Sea-Ice Velocity
+-----------------
+              *    day_SIday_XY-na_2 siv
+              *    mon_SImon_XY-na_1 siv
+----------------
+--- VARNAME: so: Sea Water Salinity
+----------------
+              *      mon_Omon_XY-O_1 so
+-----------------
+--- VARNAME: sos: Sea Surface Salinity
+-----------------
+              *     day_Oday_XY-na_1 sos
+              *     mon_Omon_XY-na_1 sos
+              *  6hr_None6hr_XY-na_1 sos
+--------------------
+--- VARNAME: thetao: Sea Water Potential Temperature
+--------------------
+              *     day_Oday_XY-na_2 thetao
+              *      mon_Omon_XY-O_1 thetao
+-----------------
+--- VARNAME: tos: Sea Surface Temperature
+-----------------
+              *     day_Oday_XY-na_1 tos
+              * monPt_NonemonPt_XY-na_2 tos
+              *     mon_Omon_XY-na_1 tos
+              *  6hr_None6hr_XY-na_1 tos
+-------------------
+--- VARNAME: tossq: Square of Sea Surface Temperature
+-------------------
+              *     day_Oday_XY-na_2 tossq
+----------------
+--- VARNAME: wo: Sea Water Vertical Velocity
+----------------
+              *      mon_Omon_XY-O_1 wo
+-----------------
+--- VARNAME: zos: Sea Surface Height Above Geoid
+-----------------
+              *     day_Oday_XY-na_1 zos
+              *     mon_Omon_XY-na_1 zos
+              *  6hr_None6hr_XY-na_1 zos
+-------------------
+--- VARNAME: zossq: Square of Sea Surface Height Above Geoid
+-------------------
+              *     mon_Omon_XY-na_2 zossq
+---------------------
+--- VARNAME: zostoga: Global Average Thermosteric Sea Level Change
+---------------------
+              *     day_Oday_na-na_2 zostoga
+              *     mon_Omon_na-na_1 zostoga
+
+Warnings about cell methods (with var list)
+	time: mean where sea_ice for vars: {'sithick', 'siu', 'siv'}
+
+ **************************************************
+*
+*              dr2xml version:  current_version
+*   CMIP6 conventions version:  v6.2.4
+*  CMIP7 Data Request version:  Software current_cmip7_dr_software - Content test
+
+*
+ **************************************************
+
+**************************************************
+
+Processing context  surfex
+
+**************************************************
+
+Number of distinct CMOR variables (whatever the grid): 66
+Number of distinct var labels is: 45
+Number of simplified vars is: 66
+Issues with standard names are: []
+homevars file: current_directory/test_AOESM_historical_CMIP7/input/home_data_request/home_data_request_test.txt
+Number of 'cmor', 'dev' and 'perso' among home variables: 11
+Number of 'extra' among home variables: 0
+homevars list: tos zos sos tos zos sos tos zos sos albsrfc albsrfc
+Error: {'varname': 'zos', 'realm': 'ocean', 'freq': 'monPt', 'table': 'NONE'} HOMEVar announced as cmor but no corresponding CMORVar found => Not taken into account.
+Error: {'varname': 'sos', 'realm': 'ocean', 'freq': 'monPt', 'table': 'NONE'} HOMEVar announced as cmor but no corresponding CMORVar found => Not taken into account.
+
+Realms for these CMORvars: aerosol atmos land landIce ocean seaIce
+Processing realm 'atmosChem' of context 'surfex' -- no variable asked (skip)
+Processing realm 'aerosol' of context 'surfex'
+Processing realm 'atmos' of context 'surfex'
+Processing realm 'land' of context 'surfex'
+Processing realm 'landIce' of context 'surfex'
+processing file current_directory/test_AOESM_historical_CMIP7/input/xml/ping_surfex.xml:
+OK current_directory/test_AOESM_historical_CMIP7/input/xml/ping_surfex.xml
+processing file current_directory/test_AOESM_historical_CMIP7/input/xml/ping_trip.xml:
+OK current_directory/test_AOESM_historical_CMIP7/input/xml/ping_trip.xml
+processing file current_directory/test_AOESM_historical_CMIP7/input/xml/ping_nemo.xml:
+OK current_directory/test_AOESM_historical_CMIP7/input/xml/ping_nemo.xml
+Duplicate variable bldep,bldep in table 3hrPt is skipped, preferred is bldep
+Duplicate variable bldep,bldep in table 3hrPt is skipped, preferred is bldep
+Duplicate variable snc,snc in table LImon is skipped, preferred is snc
+Duplicate variable albsrfc,albsrfc in table day is skipped, preferred is albsrfc
+Duplicate variable areacella,areacella in table fx is skipped, preferred is areacella
+Duplicate variable albsrfc,albsrfc in table mon is skipped, preferred is albsrfc
+
+file_def written as current_directory/test_AOESM_historical_CMIP7/test_outputs/dr2xml_surfex.xml
+
+Skipped variables (i.e. whose alias is not present in the pingfile):
+>>> TABLE:           3hrPt 01/03 ----> bldep(2)
+
+>>> TABLE:             6hr 04/04 ----> mpw(2) swh(2) swhmax(2) wpp(2)
+
+>>> TABLE:             Efx 01/01 ----> slthick(1)
+
+>>> TABLE:            Omon 04/04 ----> mpw(2) swh(2) swhmax(2) wpp(2)
+
+
+
+
+Some Statistics on actually written variables per frequency+shape...
+                             day P1   2: ta zg
+       day   XY-P19    -------- ---   2
+
+                             day P1   7: albsrfc pr psl sfcWind tas tasmax tasmin
+       day    XY-na    -------- ---   7
+
+       day --------    -------- ---   9
+
+                              fx P1   4: areacella orog rootd sftlf
+        fx    XY-na    -------- ---   4
+
+        fx --------    -------- ---   4
+
+                            Amon P1   2: ta zg
+       mon   XY-P19    -------- ---   2
+
+                            Amon P1   7: pr prc sfcWind tas tasmax tasmin ts
+                           LImon P1   1: snc
+                            Lmon P1   3: lai mrso mrsos
+                             mon P1   1: albsrfc
+       mon    XY-na    -------- ---  12
+
+       mon --------    -------- ---  14
+
+
+---------- --------    -------- ---  27
+
+
+Some Statistics on actually written variables per variable...
+---------------------
+--- VARNAME: albsrfc: None
+---------------------
+              *      day_day_XY-na_1 albsrfc
+              *      mon_mon_XY-na_1 albsrfc
+              Warning: several long names are available:
+                  - None
+                  - surface albedo
+              Warning: several standard names are available:
+                  - None
+                  - albsrfc
+-----------------------
+--- VARNAME: areacella: Grid-Cell Area for Atmospheric Grid Variables
+-----------------------
+              *        fx_fx_XY-na_1 areacella
+-----------------
+--- VARNAME: lai: Leaf Area Index
+-----------------
+              *     mon_Lmon_XY-na_1 lai
+------------------
+--- VARNAME: mrso: Total Soil Moisture Content
+------------------
+              *     mon_Lmon_XY-na_1 mrso
+-------------------
+--- VARNAME: mrsos: Moisture in Upper Portion of Soil Column
+-------------------
+              *     mon_Lmon_XY-na_1 mrsos
+------------------
+--- VARNAME: orog: Surface Altitude
+------------------
+              *        fx_fx_XY-na_1 orog
+----------------
+--- VARNAME: pr: Precipitation
+----------------
+              *      day_day_XY-na_1 pr
+              *     mon_Amon_XY-na_1 pr
+-----------------
+--- VARNAME: prc: Convective Precipitation
+-----------------
+              *     mon_Amon_XY-na_1 prc
+-----------------
+--- VARNAME: psl: Sea Level Pressure
+-----------------
+              *      day_day_XY-na_1 psl
+-------------------
+--- VARNAME: rootd: Maximum Root Depth
+-------------------
+              *        fx_fx_XY-na_1 rootd
+---------------------
+--- VARNAME: sfcWind: Near-Surface Wind Speed
+---------------------
+              *      day_day_XY-na_1 sfcWind
+              *     mon_Amon_XY-na_1 sfcWind
+-------------------
+--- VARNAME: sftlf: Percentage of the Grid Cell Occupied by Land (Including Lakes)
+-------------------
+              *        fx_fx_XY-na_1 sftlf
+-----------------
+--- VARNAME: snc: Snow Area Percentage
+-----------------
+              *    mon_LImon_XY-na_1 snc
+----------------
+--- VARNAME: ta: Air Temperature
+----------------
+              *     day_day_XY-P19_1 ta
+              *    mon_Amon_XY-P19_1 ta
+-----------------
+--- VARNAME: tas: Near-Surface Air Temperature
+-----------------
+              *      day_day_XY-na_1 tas
+              *     mon_Amon_XY-na_1 tas
+--------------------
+--- VARNAME: tasmax: Daily Maximum Near-Surface Air Temperature
+--------------------
+              *      day_day_XY-na_1 tasmax
+              *     mon_Amon_XY-na_1 tasmax
+--------------------
+--- VARNAME: tasmin: Daily Minimum Near-Surface Air Temperature
+--------------------
+              *      day_day_XY-na_1 tasmin
+              *     mon_Amon_XY-na_1 tasmin
+----------------
+--- VARNAME: ts: Surface Temperature
+----------------
+              *     mon_Amon_XY-na_1 ts
+----------------
+--- VARNAME: zg: Geopotential Height
+----------------
+              *     day_day_XY-P19_1 zg
+              *    mon_Amon_XY-P19_1 zg
+
+ **************************************************
+*
+*              dr2xml version:  current_version
+*   CMIP6 conventions version:  v6.2.4
+*  CMIP7 Data Request version:  Software current_cmip7_dr_software - Content test
+
+*
+ **************************************************
+
+**************************************************
+
+Processing context  trip
+
+**************************************************
+
+Number of distinct CMOR variables (whatever the grid): 66
+Number of distinct var labels is: 45
+Number of simplified vars is: 66
+Issues with standard names are: []
+homevars file: current_directory/test_AOESM_historical_CMIP7/input/home_data_request/home_data_request_test.txt
+Number of 'cmor', 'dev' and 'perso' among home variables: 11
+Number of 'extra' among home variables: 0
+homevars list: tos zos sos tos zos sos tos zos sos albsrfc albsrfc
+Error: {'varname': 'zos', 'realm': 'ocean', 'freq': 'monPt', 'table': 'NONE'} HOMEVar announced as cmor but no corresponding CMORVar found => Not taken into account.
+Error: {'varname': 'sos', 'realm': 'ocean', 'freq': 'monPt', 'table': 'NONE'} HOMEVar announced as cmor but no corresponding CMORVar found => Not taken into account.
+
+Realms for these CMORvars: aerosol atmos land landIce ocean seaIce
+processing file current_directory/test_AOESM_historical_CMIP7/input/xml/ping_surfex.xml:
+OK current_directory/test_AOESM_historical_CMIP7/input/xml/ping_surfex.xml
+processing file current_directory/test_AOESM_historical_CMIP7/input/xml/ping_trip.xml:
+OK current_directory/test_AOESM_historical_CMIP7/input/xml/ping_trip.xml
+processing file current_directory/test_AOESM_historical_CMIP7/input/xml/ping_nemo.xml:
+OK current_directory/test_AOESM_historical_CMIP7/input/xml/ping_nemo.xml
+
+file_def written as current_directory/test_AOESM_historical_CMIP7/test_outputs/dr2xml_trip.xml
+
+
+Some Statistics on actually written variables per frequency+shape...
+
+---------- --------    -------- ---   0
+
+
+Some Statistics on actually written variables per variable...
