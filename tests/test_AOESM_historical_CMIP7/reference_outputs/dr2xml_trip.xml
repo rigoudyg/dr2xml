@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <context id="trip">
-	<!--CMIP7 Data Request version Software current_cmip7_dr_software - Content v1.2.2-->
+	<!--CMIP7 Data Request version Software current_cmip7_dr_software - Content test-->
 	<!--CMIP6-CV version ??-->
 	<!--CMIP6_conventions_version v6.2.4-->
 	<!--dr2xml version current_version-->
@@ -15,14 +15,16 @@
 'compression_level' = '4',
 'configurations' = {'AESM' = ('CNRM-ESM2-1', 'AGCM BGC AER CHEM', ['nemo']), 'AESMHR' = ('CNRM-ESM2-1', 'AGCM BGC AER', []), 'AGCM' = ('CNRM-CM6-1', 'AGCM', ['nemo']), 'AGCMHR' = ('CNRM-CM6-1-HR', 'AGCM', ['nemo']), 'AOESM' = ('CNRM-ESM2-1', 'AOGCM BGC AER CHEM', []), 'AOESMHR' = ('CNRM-ESM2-1-HR', 'AOGCM BGC AER', []), 'AOGCM' = ('CNRM-CM6-1', 'AOGCM', []), 'AOGCMHR' = ('CNRM-CM6-1-HR', 'AOGCM', []), 'LESM' = ('CNRM-ESM2-1', 'LAND BGC', ['nemo']), 'LGCM' = ('CNRM-CM6-1', 'LAND', ['nemo']), 'OESM' = ('CNRM-ESM2-1', 'OGCM BGC', ['surfex', 'trip']), 'OESMHR' = ('CNRM-ESM2-1-HR', 'OGCM BGC', ['surfex', 'trip']), 'OGCM' = ('CNRM-CM6-1', 'OGCM', ['surfex', 'trip']), 'OGCMHR' = ('CNRM-CM6-1-HR', 'OGCM', ['surfex', 'trip'])},
 'contact' = 'contact.cmip@meteo.fr',
-'data_request_content_version' = 'v1.2.2',
+'data_request_content_version' = 'test',
 'data_request_used' = 'CMIP7',
 'debug_parsing' = 'False',
 'dr2xml_manages_enddate' = 'True',
 'excluded_pairs' = [('sfdsi', 'SImon')],
 'excluded_request_links' = ['RFMIP-AeroIrf'],
 'excluded_spshapes' = ['XYA-na', 'XYG-na', 'na-A'],
+'excluded_tables' = ['Eyr', 'Oyr', 'Odec', 'IfxAnt', 'ImonAnt'],
 'excluded_vars' = ['pfull', 'phalf', 'n2oClim', 'ch4globalClim', 'co2massClim', 'n2oglobalClim', 'ch4Clim', 'o3Clim', 'co2Clim'],
+'excluded_vars_per_config' = {'AESM' = ['co2mass', 'ch4global', 'n2oglobal'], 'AGCM' = ['ch4', 'co2', 'co', 'concdust', 'ec550aer', 'h2o', 'hcho', 'hcl', 'hno3', 'mmrbc', 'mmrdust', 'mmroa', 'mmrso4', 'mmrss', 'n2o', 'no2', 'no', 'o3Clim', 'o3loss', 'o3prod', 'oh', 'so2', 'mmrpm1', 'fco2antt', 'fco2fos', 'fco2nat', 'loadbc', 'loaddust', 'loadoa', 'loadso4', 'loadss', 'oxloss', 'oxprod', 'vmrox', 'bry', 'cly', 'ho2', 'meanage', 'noy', 'drybc', 'drydust', 'dryoa', 'dryso2', 'dryso4', 'dryss', 'emibc', 'emidust', 'emioa', 'emiso2', 'emiso4', 'emiss', 'od440aer', 'od870aer', 'od550lt1aer', 'wetbc', 'wetdust', 'wetoa', 'wetso4', 'wetss', 'cLand', 'cSoil', 'fAnthDisturb', 'fDeforestToProduct', 'fFireNat', 'fLuc', 'fProductDecomp', 'netAtmosLandCO2Flux', 'od443dust', 'od865dust', 'sconcdust', 'sconcso4', 'sconcss', 'sedustCI', 'burntFractionAll', 'cLitter', 'cProduct', 'cVeg', 'fFire', 'fLitterSoil', 'fVegLitter', 'nbp', 'shrubFrac'], 'AOESM' = ['co2mass', 'ch4global', 'n2oglobal'], 'AOGCM' = ['ch4', 'co2', 'co', 'concdust', 'ec550aer', 'h2o', 'hcho', 'hcl', 'hno3', 'mmrbc', 'mmrdust', 'mmroa', 'mmrso4', 'mmrss', 'n2o', 'no2', 'no', 'o3Clim', 'o3loss', 'o3prod', 'oh', 'so2', 'mmrpm1', 'fco2antt', 'fco2fos', 'fco2nat', 'loadbc', 'loaddust', 'loadoa', 'loadso4', 'loadss', 'oxloss', 'oxprod', 'vmrox', 'bry', 'cly', 'ho2', 'meanage', 'noy', 'drybc', 'drydust', 'dryoa', 'dryso2', 'dryso4', 'dryss', 'emibc', 'emidust', 'emioa', 'emiso2', 'emiso4', 'emiss', 'od440aer', 'od870aer', 'od550lt1aer', 'wetbc', 'wetdust', 'wetoa', 'wetso4', 'wetss', 'cLand', 'cSoil', 'fAnthDisturb', 'fDeforestToProduct', 'fFireNat', 'fLuc', 'fProductDecomp', 'netAtmosLandCO2Flux', 'od443dust', 'od865dust', 'sconcdust', 'sconcso4', 'sconcss', 'sedustCI', 'burntFractionAll', 'cLitter', 'cProduct', 'cVeg', 'fFire', 'fLitterSoil', 'fVegLitter', 'nbp', 'shrubFrac'], 'LESM' = ['ch4', 'co2', 'hur', 'hus', 'n2o', 'o3', 'ta', 'ua', 'va', 'wap', 'zg', 'clt', 'ccb', 'cct', 'ci', 'clivi', 'clt', 'clwvi', 'evspsbl', 'fco2antt', 'fco2fos', 'pr', 'prc', 'prsn', 'prw', 'ps', 'psl', 'rldscs', 'rlut', 'rlutcs', 'rsdscs', 'rsdt', 'rsuscs', 'rsut', 'rsutcs', 'ch4global', 'co2mass', 'n2oglobal', 'mc', 'cl', 'cli', 'clw'], 'LGCM' = ['ch4', 'co2', 'hur', 'hus', 'n2o', 'o3', 'ta', 'ua', 'va', 'wap', 'zg', 'clt', 'ccb', 'cct', 'ci', 'clivi', 'clt', 'clwvi', 'evspsbl', 'fco2antt', 'fco2fos', 'pr', 'prc', 'prsn', 'prw', 'ps', 'psl', 'rldscs', 'rlut', 'rlutcs', 'rsdscs', 'rsdt', 'rsuscs', 'rsut', 'rsutcs', 'ch4global', 'co2mass', 'n2oglobal', 'mc', 'cl', 'cli', 'clw']},
 'fx_from_file' = {'areacella' = {'complete' = {'HR' = 'areacella_complete_CMIP6_tl359', 'LR' = 'areacella_complete_CMIP6_tl127'}}},
 'grid_choice' = {'CNRM-CM6-1' = 'LR', 'CNRM-CM6-1-HR' = 'HR', 'CNRM-ESM2-1' = 'LR', 'CNRM-ESM2-1-HR' = 'HR'},
 'grid_policy' = 'adhoc',
@@ -58,10 +60,13 @@
 'comment' = '',
 'comments' = {},
 'configuration' = 'AOESM',
+'excluded_tables' = ['E1hr', '3hr', 'CF3hr', 'CFday', '6hrPlevPt', '6hrPlev', 'CFsubhr', '6hrLev'],
+'excluded_vars' = ['rlut4co2', 'rlutcs4co2', 'rsut4co2', 'rsutcs4co2', 'rld4co2', 'rldcs4co2', 'rlu4co2', 'rlucs4co2', 'rsd4co2', 'rsdcs4co2', 'rsu4co2', 'rsucs4co2', 'rlutaf', 'rlutcsaf', 'rsutaf', 'rsutcsaf', 'rldsaf', 'rldscsaf', 'rlusaf', 'rluscsaf', 'rsdsaf', 'rsdscsaf', 'rsusaf', 'rsuscsaf', 'clcalipso', 'albisccp', 'clhcalipso', 'cllcalipso', 'clmcalipso', 'cltcalipso', 'cltisccp', 'pctisccp', 'clisccp', 'parasolRefl'],
 'experiment_id' = 'historical',
 'forcing_index' = '2',
 'history' = 'none',
 'initialization_index' = '1',
+'listof_home_vars' = 'current_directory/test_AOESM_historical_CMIP7/input/home_data_request/home_data_request_test.txt ',
 'parent_time_ref_year' = '1850',
 'path_extra_tables' = 'current_directory/test_AOESM_historical_CMIP7/input/tables',
 'physics_index' = '1',
@@ -70,289 +75,8 @@
 'sub_experiment_id' = 'none',
 'variant_info' = ''}-->
 	<!--Year processed 1850-->
-	<file_definition type="one_file" enabled="true">
-		<file id="rivi_Eday_gn" name="IOXDIRrivi_Eday_CNRM-ESM2-1_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CMIP </variable>
-			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
-			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
-			<variable name="external_variables" type="string"> areacellr </variable>
-			<variable name="forcing_index" type="int"> 2 </variable>
-			<variable name="frequency" type="string"> day </variable>
-			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/False.CNRM-CERFACS.CNRM-ESM2-1.historical.none.r1i1p1f2 </variable>
-			<variable name="grid" type="string"> regular 1/2 deg lat-lon grid </variable>
-			<variable name="grid_label" type="string"> gn </variable>
-			<variable name="nominal_resolution" type="string"> 50 km </variable>
-			<variable name="history" type="string"> none </variable>
-			<variable name="initialization_index" type="int"> 1 </variable>
-			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
-			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
-			<variable name="license" type="string"> CMIP6 model data produced by CNRM-CERFACS is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (https://creativecommons.org/licenses). Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment. Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file) and at http://www.umr-cnrm.fr/cmip6/. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law. </variable>
-			<variable name="mip_era" type="string"> False </variable>
-			<variable name="parent_experiment_id" type="string"> piControl </variable>
-			<variable name="parent_mip_era" type="string"> False </variable>
-			<variable name="parent_activity_id" type="string"> CMIP </variable>
-			<variable name="parent_source_id" type="string"> CNRM-ESM2-1 </variable>
-			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
-			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="branch_method" type="string"> standard </variable>
-			<variable name="branch_time_in_parent" type="double"> 36524.0D </variable>
-			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
-			<variable name="physics_index" type="int"> 1 </variable>
-			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> 1 </variable>
-			<variable name="realm" type="string"> land </variable>
-			<variable name="references" type="string"> http://www.umr-cnrm.fr/cmip6/references </variable>
-			<variable name="source" type="string"> CNRM-ESM2-1 (2017):
-aerosol: TACTIC_v2
-atmos: Arpege 6.3 (T127; Gaussian Reduced with 24572 grid points in total distributed over 128 latitude circles (with 256 grid points per latitude circle between 30degN and 30degS reducing to 20 grid points per latitude circle at 88.9degN and 88.9degS); 91 levels; top level 78.4 km)
-atmosChem: REPROBUS-C_v2
-land: Surfex 8.0c
-ocean: Nemo 3.6 (eORCA1, tripolar primarily 1deg; 362 x 294 longitude/latitude; 75 levels; top grid cell 0-1 m)
-ocnBgchem: Pisces 2.s
-seaIce: Gelato 6.1 </variable>
-			<variable name="source_id" type="string"> CNRM-ESM2-1 </variable>
-			<variable name="source_type" type="string"> AOGCM BGC AER CHEM </variable>
-			<variable name="sub_experiment_id" type="string"> none </variable>
-			<variable name="sub_experiment" type="string"> none </variable>
-			<variable name="table_id" type="string"> Eday </variable>
-			<variable name="title" type="string"> CNRM-ESM2-1 model output prepared for CMIP7 / CMIP historical </variable>
-			<variable name="variable_id" type="string"> rivi </variable>
-			<variable name="variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="CMIP6_CV_version" type="string"> cv=6.2.3.0-7-g2019642 </variable>
-			<variable name="EXPID" type="string"> CNRM-ESM2-1_historical_r1i1p1f2_v2 </variable>
-			<variable name="dr2xml_md5sum" type="string"> 7040f60f6bf3118dc6c58b9fb8727d87 </variable>
-			<variable name="arpege_minor_version" type="string"> 6.3.2 </variable>
-			<variable name="nemo_gelato_commit" type="string"> 49095b3accd5d4c_6524fe19b00467a </variable>
-			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="CMIP7_rivi_average" name="rivi" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where land time: mean" cell_methods_mode="overwrite" operation="average">
-				<variable name="comment" type="string"> CTRIP river grid-cell inflow considering upstream grdi-cell water fluxes and total runoff input (mrro) from ISBA </variable>
-				<variable name="standard_name" type="string"> incoming_water_volume_transport_along_river_channel </variable>
-				<variable name="description" type="string"> water\_flux\_to\_downstream </variable>
-				<variable name="long_name" type="string"> River Inflow </variable>
-				<variable name="history" type="string"> none </variable>
-				<variable name="units" type="string"> m3 s-1 </variable>
-				<variable name="cell_methods" type="string"> area: mean where land time: mean </variable>
-				<variable name="cell_measures" type="string"> area: areacellr </variable>
-				<variable name="interval_operation" type="string"> 1800 s </variable>
-			</field>
-		</file>
-		<file id="rivo_Eday_gn" name="IOXDIRrivo_Eday_CNRM-ESM2-1_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CMIP </variable>
-			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
-			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
-			<variable name="external_variables" type="string"> areacellr </variable>
-			<variable name="forcing_index" type="int"> 2 </variable>
-			<variable name="frequency" type="string"> day </variable>
-			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/False.CNRM-CERFACS.CNRM-ESM2-1.historical.none.r1i1p1f2 </variable>
-			<variable name="grid" type="string"> regular 1/2 deg lat-lon grid </variable>
-			<variable name="grid_label" type="string"> gn </variable>
-			<variable name="nominal_resolution" type="string"> 50 km </variable>
-			<variable name="history" type="string"> none </variable>
-			<variable name="initialization_index" type="int"> 1 </variable>
-			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
-			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
-			<variable name="license" type="string"> CMIP6 model data produced by CNRM-CERFACS is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (https://creativecommons.org/licenses). Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment. Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file) and at http://www.umr-cnrm.fr/cmip6/. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law. </variable>
-			<variable name="mip_era" type="string"> False </variable>
-			<variable name="parent_experiment_id" type="string"> piControl </variable>
-			<variable name="parent_mip_era" type="string"> False </variable>
-			<variable name="parent_activity_id" type="string"> CMIP </variable>
-			<variable name="parent_source_id" type="string"> CNRM-ESM2-1 </variable>
-			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
-			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="branch_method" type="string"> standard </variable>
-			<variable name="branch_time_in_parent" type="double"> 36524.0D </variable>
-			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
-			<variable name="physics_index" type="int"> 1 </variable>
-			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> 1 </variable>
-			<variable name="realm" type="string"> land </variable>
-			<variable name="references" type="string"> http://www.umr-cnrm.fr/cmip6/references </variable>
-			<variable name="source" type="string"> CNRM-ESM2-1 (2017):
-aerosol: TACTIC_v2
-atmos: Arpege 6.3 (T127; Gaussian Reduced with 24572 grid points in total distributed over 128 latitude circles (with 256 grid points per latitude circle between 30degN and 30degS reducing to 20 grid points per latitude circle at 88.9degN and 88.9degS); 91 levels; top level 78.4 km)
-atmosChem: REPROBUS-C_v2
-land: Surfex 8.0c
-ocean: Nemo 3.6 (eORCA1, tripolar primarily 1deg; 362 x 294 longitude/latitude; 75 levels; top grid cell 0-1 m)
-ocnBgchem: Pisces 2.s
-seaIce: Gelato 6.1 </variable>
-			<variable name="source_id" type="string"> CNRM-ESM2-1 </variable>
-			<variable name="source_type" type="string"> AOGCM BGC AER CHEM </variable>
-			<variable name="sub_experiment_id" type="string"> none </variable>
-			<variable name="sub_experiment" type="string"> none </variable>
-			<variable name="table_id" type="string"> Eday </variable>
-			<variable name="title" type="string"> CNRM-ESM2-1 model output prepared for CMIP7 / CMIP historical </variable>
-			<variable name="variable_id" type="string"> rivo </variable>
-			<variable name="variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="CMIP6_CV_version" type="string"> cv=6.2.3.0-7-g2019642 </variable>
-			<variable name="EXPID" type="string"> CNRM-ESM2-1_historical_r1i1p1f2_v2 </variable>
-			<variable name="dr2xml_md5sum" type="string"> 7040f60f6bf3118dc6c58b9fb8727d87 </variable>
-			<variable name="arpege_minor_version" type="string"> 6.3.2 </variable>
-			<variable name="nemo_gelato_commit" type="string"> 49095b3accd5d4c_6524fe19b00467a </variable>
-			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="CMIP7_rivo_average" name="rivo" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where land time: mean" cell_methods_mode="overwrite" operation="average">
-				<variable name="standard_name" type="string"> outgoing_water_volume_transport_along_river_channel </variable>
-				<variable name="description" type="string"> water\_flux\_from\_upstream </variable>
-				<variable name="long_name" type="string"> River Discharge </variable>
-				<variable name="history" type="string"> none </variable>
-				<variable name="units" type="string"> m3 s-1 </variable>
-				<variable name="cell_methods" type="string"> area: mean where land time: mean </variable>
-				<variable name="cell_measures" type="string"> area: areacellr </variable>
-				<variable name="interval_operation" type="string"> 1800 s </variable>
-			</field>
-		</file>
-		<file id="wtd_Eday_gn" name="IOXDIRwtd_Eday_CNRM-ESM2-1_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CMIP </variable>
-			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
-			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
-			<variable name="external_variables" type="string"> areacellr </variable>
-			<variable name="forcing_index" type="int"> 2 </variable>
-			<variable name="frequency" type="string"> day </variable>
-			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/False.CNRM-CERFACS.CNRM-ESM2-1.historical.none.r1i1p1f2 </variable>
-			<variable name="grid" type="string"> regular 1/2 deg lat-lon grid </variable>
-			<variable name="grid_label" type="string"> gn </variable>
-			<variable name="nominal_resolution" type="string"> 50 km </variable>
-			<variable name="history" type="string"> none </variable>
-			<variable name="initialization_index" type="int"> 1 </variable>
-			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
-			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
-			<variable name="license" type="string"> CMIP6 model data produced by CNRM-CERFACS is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (https://creativecommons.org/licenses). Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment. Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file) and at http://www.umr-cnrm.fr/cmip6/. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law. </variable>
-			<variable name="mip_era" type="string"> False </variable>
-			<variable name="parent_experiment_id" type="string"> piControl </variable>
-			<variable name="parent_mip_era" type="string"> False </variable>
-			<variable name="parent_activity_id" type="string"> CMIP </variable>
-			<variable name="parent_source_id" type="string"> CNRM-ESM2-1 </variable>
-			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
-			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="branch_method" type="string"> standard </variable>
-			<variable name="branch_time_in_parent" type="double"> 36524.0D </variable>
-			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
-			<variable name="physics_index" type="int"> 1 </variable>
-			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> 1 </variable>
-			<variable name="realm" type="string"> land </variable>
-			<variable name="references" type="string"> http://www.umr-cnrm.fr/cmip6/references </variable>
-			<variable name="source" type="string"> CNRM-ESM2-1 (2017):
-aerosol: TACTIC_v2
-atmos: Arpege 6.3 (T127; Gaussian Reduced with 24572 grid points in total distributed over 128 latitude circles (with 256 grid points per latitude circle between 30degN and 30degS reducing to 20 grid points per latitude circle at 88.9degN and 88.9degS); 91 levels; top level 78.4 km)
-atmosChem: REPROBUS-C_v2
-land: Surfex 8.0c
-ocean: Nemo 3.6 (eORCA1, tripolar primarily 1deg; 362 x 294 longitude/latitude; 75 levels; top grid cell 0-1 m)
-ocnBgchem: Pisces 2.s
-seaIce: Gelato 6.1 </variable>
-			<variable name="source_id" type="string"> CNRM-ESM2-1 </variable>
-			<variable name="source_type" type="string"> AOGCM BGC AER CHEM </variable>
-			<variable name="sub_experiment_id" type="string"> none </variable>
-			<variable name="sub_experiment" type="string"> none </variable>
-			<variable name="table_id" type="string"> Eday </variable>
-			<variable name="title" type="string"> CNRM-ESM2-1 model output prepared for CMIP7 / CMIP historical </variable>
-			<variable name="variable_id" type="string"> wtd </variable>
-			<variable name="variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="CMIP6_CV_version" type="string"> cv=6.2.3.0-7-g2019642 </variable>
-			<variable name="EXPID" type="string"> CNRM-ESM2-1_historical_r1i1p1f2_v2 </variable>
-			<variable name="dr2xml_md5sum" type="string"> 7040f60f6bf3118dc6c58b9fb8727d87 </variable>
-			<variable name="arpege_minor_version" type="string"> 6.3.2 </variable>
-			<variable name="nemo_gelato_commit" type="string"> 49095b3accd5d4c_6524fe19b00467a </variable>
-			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="CMIP7_wtd_average" name="wtd" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: mean where land time: mean" cell_methods_mode="overwrite" operation="average">
-				<variable name="standard_name" type="string"> water_table_depth </variable>
-				<variable name="description" type="string"> depth\_of\_soil\_moisture\_saturation </variable>
-				<variable name="long_name" type="string"> Water Table Depth </variable>
-				<variable name="history" type="string"> none </variable>
-				<variable name="units" type="string"> m </variable>
-				<variable name="cell_methods" type="string"> area: mean where land time: mean </variable>
-				<variable name="cell_measures" type="string"> area: areacellr </variable>
-				<variable name="interval_operation" type="string"> 1800 s </variable>
-			</field>
-		</file>
-		<file id="areacellr_fx_gn" name="IOXDIRareacellr_fx_CNRM-ESM2-1_historical_r1i1p1f2_gn" output_freq="1d" append="true" output_level="10" compression_level="4" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CMIP </variable>
-			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content v1.2.2 </variable>
-			<variable name="dr2xml_version" type="string"> 3.1 </variable>
-			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
-			<variable name="forcing_index" type="int"> 2 </variable>
-			<variable name="frequency" type="string"> fx </variable>
-			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/False.CNRM-CERFACS.CNRM-ESM2-1.historical.none.r1i1p1f2 </variable>
-			<variable name="grid" type="string"> regular 1/2 deg lat-lon grid </variable>
-			<variable name="grid_label" type="string"> gn </variable>
-			<variable name="nominal_resolution" type="string"> 50 km </variable>
-			<variable name="history" type="string"> none </variable>
-			<variable name="initialization_index" type="int"> 1 </variable>
-			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
-			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
-			<variable name="license" type="string"> CMIP6 model data produced by CNRM-CERFACS is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (https://creativecommons.org/licenses). Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment. Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file) and at http://www.umr-cnrm.fr/cmip6/. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law. </variable>
-			<variable name="mip_era" type="string"> False </variable>
-			<variable name="parent_experiment_id" type="string"> piControl </variable>
-			<variable name="parent_mip_era" type="string"> False </variable>
-			<variable name="parent_activity_id" type="string"> CMIP </variable>
-			<variable name="parent_source_id" type="string"> CNRM-ESM2-1 </variable>
-			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
-			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="branch_method" type="string"> standard </variable>
-			<variable name="branch_time_in_parent" type="double"> 36524.0D </variable>
-			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
-			<variable name="physics_index" type="int"> 1 </variable>
-			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> 1 </variable>
-			<variable name="realm" type="string"> land </variable>
-			<variable name="references" type="string"> http://www.umr-cnrm.fr/cmip6/references </variable>
-			<variable name="source" type="string"> CNRM-ESM2-1 (2017):
-aerosol: TACTIC_v2
-atmos: Arpege 6.3 (T127; Gaussian Reduced with 24572 grid points in total distributed over 128 latitude circles (with 256 grid points per latitude circle between 30degN and 30degS reducing to 20 grid points per latitude circle at 88.9degN and 88.9degS); 91 levels; top level 78.4 km)
-atmosChem: REPROBUS-C_v2
-land: Surfex 8.0c
-ocean: Nemo 3.6 (eORCA1, tripolar primarily 1deg; 362 x 294 longitude/latitude; 75 levels; top grid cell 0-1 m)
-ocnBgchem: Pisces 2.s
-seaIce: Gelato 6.1 </variable>
-			<variable name="source_id" type="string"> CNRM-ESM2-1 </variable>
-			<variable name="source_type" type="string"> AOGCM BGC AER CHEM </variable>
-			<variable name="sub_experiment_id" type="string"> none </variable>
-			<variable name="sub_experiment" type="string"> none </variable>
-			<variable name="table_id" type="string"> fx </variable>
-			<variable name="title" type="string"> CNRM-ESM2-1 model output prepared for CMIP7 / CMIP historical </variable>
-			<variable name="variable_id" type="string"> areacellr </variable>
-			<variable name="variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="CMIP6_CV_version" type="string"> cv=6.2.3.0-7-g2019642 </variable>
-			<variable name="EXPID" type="string"> CNRM-ESM2-1_historical_r1i1p1f2_v2 </variable>
-			<variable name="dr2xml_md5sum" type="string"> 7040f60f6bf3118dc6c58b9fb8727d87 </variable>
-			<variable name="arpege_minor_version" type="string"> 6.3.2 </variable>
-			<variable name="nemo_gelato_commit" type="string"> 49095b3accd5d4c_6524fe19b00467a </variable>
-			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="CMIP7_areacellr_once" name="areacellr" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="area: sum" cell_methods_mode="overwrite" operation="once">
-				<variable name="standard_name" type="string"> cell_area </variable>
-				<variable name="description" type="string"> Cell areas for any grid used to report river model variables (may be the same as for atmospheric variables). These cell areas should be defined to enable exact calculation of area integrals (e.g., of vertical fluxes of energy at the surface and top of the atmosphere). </variable>
-				<variable name="long_name" type="string"> Grid-Cell Area for River Model Variables </variable>
-				<variable name="history" type="string"> none </variable>
-				<variable name="units" type="string"> m2 </variable>
-				<variable name="cell_methods" type="string"> area: sum </variable>
-				<variable name="cell_measures" type="string"> undef </variable>
-			</field>
-		</file>
-	</file_definition>
-	<field_definition>
-		<field id="CMIP7_rivi_average" field_ref="CMIP7_rivi" operation="average"/>
-		<field id="CMIP7_rivo_average" field_ref="CMIP7_rivo" operation="average"/>
-		<field id="CMIP7_wtd_average" field_ref="CMIP7_wtd" operation="average"/>
-		<field id="CMIP7_areacellr_once" field_ref="CMIP7_areacellr" operation="once"/>
-	</field_definition>
+	<file_definition type="one_file" enabled="true"/>
+	<field_definition/>
 	<axis_definition>
 		<axis_group prec="8"/>
 	</axis_definition>
