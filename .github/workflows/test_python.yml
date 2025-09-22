@@ -29,6 +29,7 @@ jobs:
         python -m pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         python -m pip install git+https://github.com/CMIP-Data-Request/CMIP7_DReq_Software.git@refs/pull/182/head
+        python -m pip install git+https://github.com/ESGF/esgf-vocab.git -b integration
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
