@@ -258,6 +258,9 @@ def ping_file_for_realms_list(context, svars, lrealms, path_special, dummy="fiel
             label = v.label_non_ambiguous
         else:
             label = v.label_without_psuffix
+        logger.info("Found the following descriptions for label %s:" % label)
+        for elt in sorted(best_prio[label], key=lambda x: x.Priority):
+            logger.info("   Priority %s, Frequency %s, Description %s" % (elt.Priority, elt.frequency, elt.description))
         if v.label in debug:
             logger.debug("pingFile ... processing %s in table %s, label=%s" % (v.label, v.mipTable, label))
 

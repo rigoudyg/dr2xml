@@ -1611,12 +1611,112 @@ For table SIday: sithick siconc sithick siu siv
 For table SImon: sithick siconc simass sithick siu siv
 processing file ./input/special_defs/DX_field_defs_ocean.xml:
 No file
+Found the following descriptions for label areacello:
+   Priority 1, Frequency fx, Description Cell areas for any grid used to report ocean variables and variables which are requested as used on the model ocean grid (e.g. hfsso, which is a downward heat flux from the atmosphere interpolated onto the ocean grid). These cell areas should be defined to enable exact calculation of global integrals (e.g., of vertical fluxes of energy at the surface and top of the atmosphere).
+Found the following descriptions for label bigthetao:
+   Priority 1, Frequency mon, Description Diagnostic should be contributed only for models using conservative temperature as prognostic field.
+   Priority 2, Frequency day, Description Diagnostic should be contributed even for models using conservative temperature as prognostic field.
+Found the following descriptions for label deptho:
+   Priority 1, Frequency fx, Description Ocean bathymetry. Reported here is the sea floor depth for present day relative to z=0 geoid. Reported as missing for land grid cells.
+Found the following descriptions for label masscello:
+   Priority 1, Frequency fx, Description Tracer grid-cell mass per unit area used for computing tracer budgets. For Boussinesq models with static ocean grid cell thickness, masscello = rhozero\*thickcello, where thickcello is static cell thickness and rhozero is constant Boussinesq reference density. More generally, masscello is time dependent and reported as part of Omon.
+Found the following descriptions for label mlotst:
+   Priority 2, Frequency day, Description Sigma T is potential density referenced to ocean surface. Defined by Sigma T of 0.03 kg m-3 wrt to model level closest to 10 m depth.
+Found the following descriptions for label mlotstmax:
+   Priority 2, Frequency mon, Description Sigma T is potential density referenced to ocean surface. Defined by Sigma T of 0.03 kg m-3 wrt to model level closest to 10 m depth.
+Found the following descriptions for label mlotstmin:
+   Priority 2, Frequency mon, Description Sigma T is potential density referenced to ocean surface. Defined by Sigma T of 0.03 kg m-3 wrt to model level closest to 10 m depth.
+Found the following descriptions for label mpw:
+   Priority 2, Frequency mon, Description Average wave period (i.e., time in-between two wave crests) across the entire two-dimensional wave spectrum, incorporating both wind-sea and swell waves. In spectral wind wave models, it is calculated using spectral moments, mathematical measures that describe the shape and characteristics of the wave spectrum.
+   Priority 2, Frequency 3hr, Description Average wave period (i.e., time in-between two wave crests) across the entire two-dimensional wave spectrum, incorporating both wind-sea and swell waves. In spectral wind wave models, it is calculated using spectral moments, mathematical measures that describe the shape and characteristics of the wave spectrum.
+   Priority 2, Frequency 6hr, Description Average wave period (i.e., time in-between two wave crests) across the entire two-dimensional wave spectrum, incorporating both wind-sea and swell waves. In spectral wind wave models, it is calculated using spectral moments, mathematical measures that describe the shape and characteristics of the wave spectrum.
+Found the following descriptions for label sithick:
+   Priority 1, Frequency mon, Description Actual (floe) thickness of sea ice averaged over the ice-covered part of a given grid cell, NOT volume divided by grid area.
+   Priority 1, Frequency mon, Description Actual (floe) thickness of sea ice averaged over the ice-covered part of a given grid cell, NOT volume divided by grid area.
+   Priority 2, Frequency day, Description Actual (floe) thickness of sea ice averaged over the ice-covered part of a given grid cell, NOT volume divided by grid area.
+   Priority 2, Frequency day, Description Actual (floe) thickness of sea ice averaged over the ice-covered part of a given grid cell, NOT volume divided by grid area.
+Found the following descriptions for label so:
+   Priority 1, Frequency mon, Description Sea water salinity is the salt content of sea water, often on the Practical Salinity Scale of 1978. However, the unqualified term 'salinity' is generic and does not necessarily imply any particular method of calculation. The units of salinity are dimensionless and the units attribute should normally be given as 1e-3 or 0.001 i.e. parts per thousand.
+   Priority 3, Frequency day, Description Sea water salinity is the salt content of sea water, often on the Practical Salinity Scale of 1978. However, the unqualified term 'salinity' is generic and does not necessarily imply any particular method of calculation.
+Found the following descriptions for label sos:
+   Priority 1, Frequency mon, Description Sea water salinity is the salt content of sea water, often on the Practical Salinity Scale of 1978. However, the unqualified term 'salinity' is generic and does not necessarily imply any particular method of calculation. The units of salinity are dimensionless and the units attribute should normally be given as 1e-3 or 0.001 i.e. parts per thousand.
+   Priority 1, Frequency day, Description Sea water salinity is the salt content of sea water, often on the Practical Salinity Scale of 1978. However, the unqualified term 'salinity' is generic and does not necessarily imply any particular method of calculation. The units of salinity are dimensionless and the units attribute should normally be given as 1e-3 or 0.001 i.e. parts per thousand.
+Found the following descriptions for label swh:
+   Priority 2, Frequency mon, Description Average height of the highest one-third of waves present in the sea state, incorporating both wind-sea and swell waves. This is a key parameter for describing wave energy and is derived from the wave spectrum using spectral moments. Specifically, this parameter is four times the square root of the integral over all directions and all frequencies of the two-dimensional wave spectrum.
+   Priority 2, Frequency 3hr, Description Average height of the highest one-third of waves present in the sea state, incorporating both wind-sea and swell waves. This is a key parameter for describing wave energy and is derived from the wave spectrum using spectral moments. Specifically, this parameter is four times the square root of the integral over all directions and all frequencies of the two-dimensional wave spectrum.
+   Priority 2, Frequency 6hr, Description Average height of the highest one-third of waves present in the sea state, incorporating both wind-sea and swell waves. This is a key parameter for describing wave energy and is derived from the wave spectrum using spectral moments. Specifically, this parameter is four times the square root of the integral over all directions and all frequencies of the two-dimensional wave spectrum.
+Found the following descriptions for label swhmax:
+   Priority 2, Frequency mon, Description Highest value of the significant wave height simulated within a given time range (e.g., daily or monthly). The significant wave height (swh) is derived from the wave spectrum using spectral moments. Specifically, swh is four times the square root of the integral over all directions and all frequencies of the two-dimensional wave spectrum.
+   Priority 2, Frequency 6hr, Description Highest value of the significant wave height simulated within a given time range (e.g., daily or monthly). The significant wave height (swh) is derived from the wave spectrum using spectral moments. Specifically, swh is four times the square root of the integral over all directions and all frequencies of the two-dimensional wave spectrum.
+Found the following descriptions for label thetao:
+   Priority 1, Frequency mon, Description Diagnostic should be contributed even for models using conservative temperature as prognostic field.
+   Priority 2, Frequency day, Description Diagnostic should be contributed even for models using conservative temperature as prognostic field.
+Found the following descriptions for label tnkebto:
+   Priority 3, Frequency yr, Description Depth integrated impacts on kinetic energy arising from parameterized eddy-induced advection. For CMIP5, this diagnostic was 3d, whereas the CMIP6 depth integrated diagnostic is sufficient for many purposes and reduces archive requirements.
+Found the following descriptions for label tos:
+   Priority 1, Frequency mon, Description This may differ from "surface temperature" in regions of sea ice or floating ice shelves. For models using conservative temperature as the prognostic field, they should report the top ocean layer as surface potential temperature, which is the same as surface in situ temperature.
+   Priority 1, Frequency day, Description This may differ from "surface temperature" in regions of sea ice or floating ice shelves. For models using conservative temperature as the prognostic field, they should report the top ocean layer as surface potential temperature, which is the same as surface in situ temperature.
+   Priority 2, Frequency 3hr, Description temperature of surface of open ocean, sampled synoptically.
+Found the following descriptions for label tossq:
+   Priority 2, Frequency day, Description Square of temperature of liquid ocean, averaged over the day.
+Found the following descriptions for label uos:
+   Priority 3, Frequency day, Description Daily surface prognostic x-ward velocity component resolved by the model.
+Found the following descriptions for label vos:
+   Priority 3, Frequency day, Description Daily surface prognostic y-ward velocity component resolved by the model.
+Found the following descriptions for label wo:
+   Priority 1, Frequency mon, Description Prognostic z-ward velocity component resolved by the model.
+Found the following descriptions for label wpp:
+   Priority 2, Frequency mon, Description Wave period associated with the most energetic waves in total wave spectrum, incorporating both wind-sea and swell waves. In spectral wind wave models, this represents the spectral peak across the entire two-dimensional wave spectrum, incorporating both wind-sea and swell waves.
+   Priority 2, Frequency 3hr, Description Wave period associated with the most energetic waves in total wave spectrum, incorporating both wind-sea and swell waves. In spectral wind wave models, this represents the spectral peak across the entire two-dimensional wave spectrum, incorporating both wind-sea and swell waves.
+   Priority 2, Frequency 6hr, Description Wave period associated with the most energetic waves in total wave spectrum, incorporating both wind-sea and swell waves. In spectral wind wave models, this represents the spectral peak across the entire two-dimensional wave spectrum, incorporating both wind-sea and swell waves.
+Found the following descriptions for label zos:
+   Priority 1, Frequency mon, Description This is the dynamic sea level, so should have zero global area mean. It should not include inverse barometer depressions from sea ice.
+   Priority 1, Frequency day, Description This is the dynamic sea level, so should have zero global area mean. zos is the effective sea level as if sea ice (and snow) at a grid cell were converted to liquid seawater (Campin et al., 2008). For OMIP, do _not _record inverse barometer responses from sea-ice (and snow) loading in zos. See (Griffies et al, 2016, https://doi.org/10.5194/gmd-9-3231-2016).
+Found the following descriptions for label zossq:
+   Priority 2, Frequency mon, Description Surface ocean geoid defines z=0.
+Found the following descriptions for label zostoga:
+   Priority 1, Frequency mon, Description There is no CMIP6 request for zosga nor zossga.
+   Priority 2, Frequency day, Description Global Average Thermosteric Sea Level Change
  24 variables written for current_directory/test_pingfiles_CMIP7_CNRM_realm/test_outputs//ping_nemo_ocean.xml
 processing file ./input/special_defs/DX_field_defs_ocnBgchem.xml:
 No file
+Found the following descriptions for label arag:
+   Priority 3, Frequency mon, Description sum of particulate aragonite components (e.g. Phytoplankton, Detrital, etc.)
+Found the following descriptions for label aragos:
+   Priority 3, Frequency mon, Description sum of particulate aragonite components (e.g. Phytoplankton, Detrital, etc.)
+Found the following descriptions for label calc:
+   Priority 3, Frequency mon, Description sum of particulate calcite component concentrations (e.g. Phytoplankton, Detrital, etc.)
+Found the following descriptions for label calcos:
+   Priority 3, Frequency mon, Description sum of particulate calcite component concentrations (e.g. Phytoplankton, Detrital, etc.)
+Found the following descriptions for label chl:
+   Priority 3, Frequency day, Description Sum of chlorophyll from all phytoplankton group concentrations. In most models this is equal to chldiat+chlmisc, that is the sum of Diatom Chlorophyll Mass Concentration and Other Phytoplankton Chlorophyll Mass Concentration
+Found the following descriptions for label dissic:
+   Priority 3, Frequency mon, Description Dissolved inorganic carbon (CO3+HCO3+H2CO3) concentration
+Found the following descriptions for label o2:
+   Priority 3, Frequency day, Description 'Mole concentration' means number of moles per unit volume, also called "molarity", and is used in the construction mole\_concentration\_of\_X\_in\_Y, where X is a material constituent of Y. A chemical or biological species denoted by X may be described by a single term such as 'nitrogen' or a phrase such as 'nox\_expressed\_as\_nitrogen'.
+Found the following descriptions for label ph:
+   Priority 3, Frequency day, Description negative log10 of hydrogen ion concentration with the concentration expressed as mol H kg-1.
+Found the following descriptions for label talk:
+   Priority 3, Frequency mon, Description total alkalinity equivalent concentration (including carbonate, borate, phosphorus, silicon, and nitrogen components)
   9 variables written for current_directory/test_pingfiles_CMIP7_CNRM_realm/test_outputs//ping_nemo_ocnBgchem.xml
 processing file ./input/special_defs/DX_field_defs_seaIce.xml:
 No file
+Found the following descriptions for label siconc:
+   Priority 1, Frequency day, Description Areal fraction of a given grid cell that is covered by sea ice on the ocean grid, independent of the thickness of that ice.
+   Priority 1, Frequency mon, Description Areal fraction of a given grid cell that is covered by sea ice on the ocean grid, independent of the thickness of that ice.
+Found the following descriptions for label simass:
+   Priority 1, Frequency mon, Description Total mass of sea ice divided by grid-cell area.
+Found the following descriptions for label sithick:
+   Priority 1, Frequency mon, Description Actual (floe) thickness of sea ice averaged over the ice-covered part of a given grid cell, NOT volume divided by grid area.
+   Priority 1, Frequency mon, Description Actual (floe) thickness of sea ice averaged over the ice-covered part of a given grid cell, NOT volume divided by grid area.
+   Priority 2, Frequency day, Description Actual (floe) thickness of sea ice averaged over the ice-covered part of a given grid cell, NOT volume divided by grid area.
+   Priority 2, Frequency day, Description Actual (floe) thickness of sea ice averaged over the ice-covered part of a given grid cell, NOT volume divided by grid area.
+Found the following descriptions for label siu:
+   Priority 1, Frequency mon, Description X-component of sea-ice velocity on native model grid.
+   Priority 2, Frequency day, Description X-component of sea-ice velocity on native model grid.
+Found the following descriptions for label siv:
+   Priority 1, Frequency mon, Description Y-component of sea-ice velocity on native model grid.
+   Priority 2, Frequency day, Description Y-component of sea-ice velocity on native model grid.
   5 variables written for current_directory/test_pingfiles_CMIP7_CNRM_realm/test_outputs//ping_nemo_seaIce.xml
 Number of distinct CMOR variables (whatever the grid): 105
 Variable considered: atmos.areacell.ti-u-hxy-u.fx.GLB
@@ -2277,16 +2377,133 @@ For table day: pr psl sfcWind ta tas tasmax tasmin zg
 For table fx: areacella sftlf areacella orog rootd
 processing file ./input/special_defs/DX_field_defs_aerosol.xml:
 No file
+Found the following descriptions for label bldep:
+   Priority 2, Frequency 3hr, Description Boundary Layer Depth every 3 hours
+   Priority 2, Frequency 3hr, Description Boundary Layer Depth every 3 hours
+   Priority 2, Frequency 3hr, Description Boundary Layer Depth every 3 hours
   1 variables written for current_directory/test_pingfiles_CMIP7_CNRM_realm/test_outputs//ping_arpsfx_aerosol.xml
 processing file ./input/special_defs/DX_field_defs_atmos.xml:
 No file
+Found the following descriptions for label areacella:
+   Priority 1, Frequency fx, Description Cell areas for any grid used to report atmospheric variables and any other variable using that grid (e.g., soil moisture content). These cell areas should be defined to enable exact calculation of global integrals (e.g., of vertical fluxes of energy at the surface and top of the atmosphere).
+   Priority 1, Frequency fx, Description Cell areas for any grid used to report atmospheric variables and any other variable using that grid (e.g., soil moisture content). These cell areas should be defined to enable exact calculation of global integrals (e.g., of vertical fluxes of energy at the surface and top of the atmosphere).
+Found the following descriptions for label bldep:
+   Priority 2, Frequency 3hr, Description Boundary Layer Depth every 3 hours
+   Priority 2, Frequency 3hr, Description Boundary Layer Depth every 3 hours
+   Priority 2, Frequency 3hr, Description Boundary Layer Depth every 3 hours
+Found the following descriptions for label hfls:
+   Priority 2, Frequency 3hr, Description This is the 3-hour mean flux.
+Found the following descriptions for label hfss:
+   Priority 2, Frequency 3hr, Description This is the 3-hour mean flux.
+Found the following descriptions for label hurs:
+   Priority 1, Frequency 6hr, Description The relative humidity with respect to liquid water for T> 0 C, and with respect to ice for T<0 C.
+Found the following descriptions for label huss:
+   Priority 1, Frequency 3hr, Description This is sampled synoptically.
+Found the following descriptions for label mpw:
+   Priority 2, Frequency 3hr, Description Average wave period (i.e., time in-between two wave crests) across the entire two-dimensional wave spectrum, incorporating both wind-sea and swell waves. In spectral wind wave models, it is calculated using spectral moments, mathematical measures that describe the shape and characteristics of the wave spectrum.
+   Priority 2, Frequency 6hr, Description Average wave period (i.e., time in-between two wave crests) across the entire two-dimensional wave spectrum, incorporating both wind-sea and swell waves. In spectral wind wave models, it is calculated using spectral moments, mathematical measures that describe the shape and characteristics of the wave spectrum.
+   Priority 2, Frequency mon, Description Average wave period (i.e., time in-between two wave crests) across the entire two-dimensional wave spectrum, incorporating both wind-sea and swell waves. In spectral wind wave models, it is calculated using spectral moments, mathematical measures that describe the shape and characteristics of the wave spectrum.
+Found the following descriptions for label pr:
+   Priority 1, Frequency 3hr, Description at surface; includes both liquid and solid phases.  This is the 3-hour mean precipitation flux.
+   Priority 1, Frequency 1hr, Description Total precipitation flux
+   Priority 1, Frequency day, Description at surface; includes both liquid and solid phases from all types of clouds (both large-scale and convective)
+   Priority 1, Frequency mon, Description at surface; includes both liquid and solid phases from all types of clouds (both large-scale and convective)
+Found the following descriptions for label prc:
+   Priority 1, Frequency mon, Description at surface; includes both liquid and solid phases.
+Found the following descriptions for label ps:
+   Priority 1, Frequency day, Description surface pressure (not mean sea-level pressure), 2-D field to calculate the 3-D pressure field from hybrid coordinates
+   Priority 2, Frequency 3hr, Description sampled synoptically to diagnose atmospheric tides, this is better than mean sea level pressure.
+Found the following descriptions for label psl:
+   Priority 1, Frequency day, Description Sea Level Pressure
+   Priority 2, Frequency 1hr, Description Sea level pressure
+Found the following descriptions for label rlds:
+   Priority 3, Frequency 3hr, Description This is the 3-hour mean flux.
+Found the following descriptions for label rlus:
+   Priority 3, Frequency 3hr, Description This is the 3-hour mean flux.
+Found the following descriptions for label sfcWind:
+   Priority 1, Frequency day, Description near-surface (usually, 10 meters) wind speed.
+   Priority 1, Frequency mon, Description This is the mean of the speed, not the speed computed from the mean u and v components of wind
+Found the following descriptions for label sftlf:
+   Priority 1, Frequency fx, Description Percentage of horizontal area occupied by land.
+Found the following descriptions for label swh:
+   Priority 2, Frequency 3hr, Description Average height of the highest one-third of waves present in the sea state, incorporating both wind-sea and swell waves. This is a key parameter for describing wave energy and is derived from the wave spectrum using spectral moments. Specifically, this parameter is four times the square root of the integral over all directions and all frequencies of the two-dimensional wave spectrum.
+   Priority 2, Frequency 6hr, Description Average height of the highest one-third of waves present in the sea state, incorporating both wind-sea and swell waves. This is a key parameter for describing wave energy and is derived from the wave spectrum using spectral moments. Specifically, this parameter is four times the square root of the integral over all directions and all frequencies of the two-dimensional wave spectrum.
+   Priority 2, Frequency mon, Description Average height of the highest one-third of waves present in the sea state, incorporating both wind-sea and swell waves. This is a key parameter for describing wave energy and is derived from the wave spectrum using spectral moments. Specifically, this parameter is four times the square root of the integral over all directions and all frequencies of the two-dimensional wave spectrum.
+Found the following descriptions for label swhmax:
+   Priority 2, Frequency 6hr, Description Highest value of the significant wave height simulated within a given time range (e.g., daily or monthly). The significant wave height (swh) is derived from the wave spectrum using spectral moments. Specifically, swh is four times the square root of the integral over all directions and all frequencies of the two-dimensional wave spectrum.
+   Priority 2, Frequency mon, Description Highest value of the significant wave height simulated within a given time range (e.g., daily or monthly). The significant wave height (swh) is derived from the wave spectrum using spectral moments. Specifically, swh is four times the square root of the integral over all directions and all frequencies of the two-dimensional wave spectrum.
+Found the following descriptions for label ta:
+   Priority 1, Frequency day, Description Air Temperature
+   Priority 1, Frequency mon, Description Air Temperature
+   Priority 1, Frequency 6hr, Description Air Temperature
+Found the following descriptions for label ta6:
+   Priority 3, Frequency 3hr, Description Air temperature on 6 pressure levels in the lower troposphere
+Found the following descriptions for label tas:
+   Priority 1, Frequency 3hr, Description This is sampled synoptically.
+   Priority 1, Frequency day, Description near-surface (usually, 2 meter) air temperature
+   Priority 1, Frequency mon, Description near-surface (usually, 2 meter) air temperature
+Found the following descriptions for label tasmax:
+   Priority 1, Frequency day, Description maximum near-surface (usually, 2 meter) air temperature (add cell\_method attribute "time: max")
+   Priority 1, Frequency mon, Description monthly mean of the daily-maximum near-surface air temperature.
+Found the following descriptions for label tasmin:
+   Priority 1, Frequency day, Description minimum near-surface (usually, 2 meter) air temperature (add cell\_method attribute "time: min")
+   Priority 1, Frequency mon, Description monthly mean of the daily-minimum near-surface air temperature.
+Found the following descriptions for label ts:
+   Priority 1, Frequency mon, Description Surface temperature (skin for open ocean)
+Found the following descriptions for label uas:
+   Priority 2, Frequency 1hr, Description Zonal wind (positive in a eastward direction) at 10 meters above the surface.
+Found the following descriptions for label vas:
+   Priority 2, Frequency 1hr, Description Meridional wind (positive in a northward direction) at 10 meters above the surface.
+Found the following descriptions for label wpp:
+   Priority 2, Frequency 3hr, Description Wave period associated with the most energetic waves in total wave spectrum, incorporating both wind-sea and swell waves. In spectral wind wave models, this represents the spectral peak across the entire two-dimensional wave spectrum, incorporating both wind-sea and swell waves.
+   Priority 2, Frequency 6hr, Description Wave period associated with the most energetic waves in total wave spectrum, incorporating both wind-sea and swell waves. In spectral wind wave models, this represents the spectral peak across the entire two-dimensional wave spectrum, incorporating both wind-sea and swell waves.
+   Priority 2, Frequency mon, Description Wave period associated with the most energetic waves in total wave spectrum, incorporating both wind-sea and swell waves. In spectral wind wave models, this represents the spectral peak across the entire two-dimensional wave spectrum, incorporating both wind-sea and swell waves.
+Found the following descriptions for label zg:
+   Priority 1, Frequency day, Description Geopotential is the sum of the specific gravitational potential energy relative to the geoid and the specific centripetal potential energy. Geopotential height is the geopotential divided by the standard acceleration due to gravity. It is numerically similar to the altitude (or geometric height) and not to the quantity with standard name height, which is relative to the surface.
+   Priority 1, Frequency mon, Description Geopotential is the sum of the specific gravitational potential energy relative to the geoid and the specific centripetal potential energy. Geopotential height is the geopotential divided by the standard acceleration due to gravity. It is numerically similar to the altitude (or geometric height) and not to the quantity with standard name height, which is relative to the surface.
  27 variables written for current_directory/test_pingfiles_CMIP7_CNRM_realm/test_outputs//ping_arpsfx_atmos.xml
 processing file ./input/special_defs/DX_field_defs_atmosChem.xml:
 No file
   0 variables written for current_directory/test_pingfiles_CMIP7_CNRM_realm/test_outputs//ping_arpsfx_atmosChem.xml
 processing file ./input/special_defs/DX_field_defs_land.xml:
 No file
+Found the following descriptions for label areacella:
+   Priority 1, Frequency fx, Description Cell areas for any grid used to report atmospheric variables and any other variable using that grid (e.g., soil moisture content). These cell areas should be defined to enable exact calculation of global integrals (e.g., of vertical fluxes of energy at the surface and top of the atmosphere).
+   Priority 1, Frequency fx, Description Cell areas for any grid used to report atmospheric variables and any other variable using that grid (e.g., soil moisture content). These cell areas should be defined to enable exact calculation of global integrals (e.g., of vertical fluxes of energy at the surface and top of the atmosphere).
+Found the following descriptions for label bldep:
+   Priority 2, Frequency 3hr, Description Boundary Layer Depth every 3 hours
+   Priority 2, Frequency 3hr, Description Boundary Layer Depth every 3 hours
+   Priority 2, Frequency 3hr, Description Boundary Layer Depth every 3 hours
+Found the following descriptions for label hfdsl:
+   Priority 3, Frequency 3hr, Description Ground heat flux at 3hr
+Found the following descriptions for label lai:
+   Priority 1, Frequency mon, Description A ratio obtained by dividing the total upper leaf surface area of vegetation by the (horizontal) surface area of the land on which it grows.
+Found the following descriptions for label mrso:
+   Priority 1, Frequency mon, Description the mass per unit area  (summed over all soil layers) of water in all phases.
+Found the following descriptions for label mrso100:
+   Priority 3, Frequency 3hr, Description Soil moisture at 3hr but for 0-1m
+Found the following descriptions for label mrsos:
+   Priority 1, Frequency mon, Description the mass of water in all phases in a thin surface soil layer.
+   Priority 2, Frequency 3hr, Description the mass of water in all phases in a thin surface soil layer.
+Found the following descriptions for label orog:
+   Priority 1, Frequency fx, Description height above the geoid; as defined here, "the geoid" is a surface of constant geopotential that, if the ocean were at rest, would coincide with mean sea level. Under this definition, the geoid changes as the mean volume of the ocean changes (e.g., due to glacial melt, or global warming of the ocean).  Reported here is the height above the present-day geoid (0.0 over ocean).
+Found the following descriptions for label rootd:
+   Priority 1, Frequency fx, Description report the maximum soil depth reachable by plant roots (if defined in model), i.e., the maximum soil depth from which they can extract moisture; report as "missing" where the land fraction is 0.
+Found the following descriptions for label slthick:
+   Priority 1, Frequency fx, Description Thickness of Soil Layers
+Found the following descriptions for label snc:
+   Priority 1, Frequency mon, Description Fraction of each grid cell that is occupied by snow that rests on land portion of cell.
+   Priority 1, Frequency mon, Description Fraction of each grid cell that is occupied by snow that rests on land portion of cell.
+Found the following descriptions for label srfrad:
+   Priority 2, Frequency 3hr, Description Net radiative flux at surface
+Found the following descriptions for label tran:
+   Priority 3, Frequency 3hr, Description Transpiration
+Found the following descriptions for label tslsi:
+   Priority 2, Frequency 3hr, Description Surface temperature of all surfaces except open ocean, sampled synoptically.
  14 variables written for current_directory/test_pingfiles_CMIP7_CNRM_realm/test_outputs//ping_arpsfx_land.xml
 processing file ./input/special_defs/DX_field_defs_landIce.xml:
 No file
+Found the following descriptions for label snc:
+   Priority 1, Frequency mon, Description Fraction of each grid cell that is occupied by snow that rests on land portion of cell.
+   Priority 1, Frequency mon, Description Fraction of each grid cell that is occupied by snow that rests on land portion of cell.
   1 variables written for current_directory/test_pingfiles_CMIP7_CNRM_realm/test_outputs//ping_arpsfx_landIce.xml
