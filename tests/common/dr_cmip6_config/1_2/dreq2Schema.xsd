@@ -1,0 +1,1046 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:pav="http://purl.org/pav/2.3" xmlns:aa="urn:w3id.org:cmip6.dreq.dreq:a" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:a="urn:w3id.org:cmip6.dreq.framework:a" xmlns:xd="http://www.pnp-software.com/XSLTdoc" targetNamespace="urn:w3id.org:cmip6.dreq.dreq:a" elementFormDefault="qualified">
+<xs:import namespace="http://purl.org/dc/elements/1.1/" schemaLocation="dc1.xsd"/>
+<xs:import namespace="http://purl.org/pav/2.3" schemaLocation="pav.xsd"/>
+<xs:annotation><xs:appinfo>W3Schools Note</xs:appinfo><xs:documentation xml:lang="en">
+       Some specialised string types
+    </xs:documentation></xs:annotation>
+
+<xs:simpleType name="st__fortranType">
+<xs:restriction base="xs:token"><xs:enumeration value="integer"/><xs:enumeration value="real"/><xs:enumeration value="double"/><xs:enumeration value="character"/></xs:restriction></xs:simpleType>
+
+<xs:simpleType name="st__sliceType">
+<xs:restriction base="xs:token"><xs:enumeration value="relativeRange"/><xs:enumeration value="simpleRange"/><xs:enumeration value="dayList"/><xs:enumeration value="yearList"/><xs:enumeration value="sliceList"/><xs:enumeration value="branchedYears"/><xs:enumeration value="monthlyClimatology"/><xs:enumeration value="siblingBranchClimatology"/><xs:enumeration value="monthlyClimatologyFinal"/></xs:restriction></xs:simpleType>
+
+<xs:simpleType name="st__configurationType">
+<xs:restriction base="xs:token"><xs:enumeration value="size"/><xs:enumeration value="category"/><xs:enumeration value="ioOption"/><xs:enumeration value="capability"/></xs:restriction></xs:simpleType>
+<xs:simpleType name="st__uid"><xs:restriction base="xs:string"><xs:pattern value="([a-zA-Z0-9:_.+-])+"/></xs:restriction></xs:simpleType>
+<xs:simpleType name="st__attLabel_def"><xs:restriction base="xs:string"><xs:pattern value="([a-zA-Z0-9-])+"/></xs:restriction></xs:simpleType>
+<xs:simpleType name="st__attLabel_und"><xs:restriction base="xs:string"><xs:pattern value="([a-zA-Z0-9_])+"/></xs:restriction></xs:simpleType>
+<xs:simpleType name="st__attLabel_int"><xs:restriction base="xs:integer"/></xs:simpleType>
+<xs:simpleType name="st__attLabel_an"><xs:restriction base="xs:string"><xs:pattern value="([a-zA-Z0-9])+"/></xs:restriction></xs:simpleType>
+<xs:simpleType name="st__stringList"><xs:restriction base="aa:base__stringList"><xs:minLength value="0"/></xs:restriction></xs:simpleType><xs:simpleType name="base__stringList"><xs:list itemType="xs:string"/></xs:simpleType>
+<xs:simpleType name="st__integerList"><xs:restriction base="aa:base__integerList"><xs:minLength value="0"/></xs:restriction></xs:simpleType><xs:simpleType name="base__integerList"><xs:list itemType="xs:integer"/></xs:simpleType>
+<xs:simpleType name="st__integerListMonInc"><xs:restriction base="aa:st__integerList"/></xs:simpleType>
+<xs:simpleType name="st__floatList"><xs:restriction base="aa:base__floatList"><xs:minLength value="0"/></xs:restriction></xs:simpleType><xs:simpleType name="base__floatList"><xs:list itemType="xs:float"/></xs:simpleType>
+<xs:complexType name="ct__info" mixed="true"><xs:attribute name="srcType" type="xs:string"/><xs:attribute name="srcRef" type="xs:string"/></xs:complexType><!--Auto-generated vocabulary complexType declarations/>-->
+<xs:annotation><xs:appinfo>W3Schools Note</xs:appinfo><xs:documentation xml:lang="en">requestVarGroup: Complex Type declaration
+       </xs:documentation></xs:annotation>
+<xs:complexType name="ct__requestVarGroup">
+<xs:sequence><xs:element name="item" maxOccurs="12000" type="aa:ct__requestVarGroup_vocabItem"/></xs:sequence>
+<xs:attribute name="label" type="xs:string" fixed="requestVarGroup"/>
+<xs:attribute name="title" type="xs:string" fixed="3.1 Request variable group: a collection of request variables"/>
+<xs:attribute name="id" type="xs:string" fixed="rqvg"/>
+<xs:attribute name="useClass" fixed="vocab"/>
+<xs:attribute name="uid" type="xs:string"/>
+</xs:complexType>
+<xs:annotation><xs:appinfo>Attribute annotation</xs:appinfo><xs:documentation xml:lang="en">label;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titlelabel;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titleuid;
+   aa:st__uidRecord Identifiermip;
+   xs:stringEndorsed MIP defining the variable groupref;
+   xs:stringReferencerefNote;
+   xs:stringReference Note</xs:documentation></xs:annotation>
+<xs:complexType name="ct__requestVarGroup_vocabItem">
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="label" type="aa:st__attLabel_def"/>
+<xs:attribute name="title" type="xs:string"/><xs:attribute name="uid" type="aa:st__uid" use="required"/>
+<xs:attribute name="mip" type="xs:string" use="required"/>
+<xs:attribute name="ref" type="xs:string" use="required"/>
+<xs:attribute name="refNote" type="xs:string" use="required"/>
+
+</xs:complexType><!--Auto-generated vocabulary complexType declarations/>-->
+<xs:annotation><xs:appinfo>W3Schools Note</xs:appinfo><xs:documentation xml:lang="en">requestItem: Complex Type declaration
+       </xs:documentation></xs:annotation>
+<xs:complexType name="ct__requestItem">
+<xs:sequence><xs:element name="item" maxOccurs="12000" type="aa:ct__requestItem_vocabItem"/></xs:sequence>
+<xs:attribute name="label" type="xs:string" fixed="requestItem"/>
+<xs:attribute name="title" type="xs:string" fixed="3.2 Request Item: specifying the number of years for an experiment"/>
+<xs:attribute name="id" type="xs:string" fixed="rqi"/>
+<xs:attribute name="useClass" fixed="vocab"/>
+<xs:attribute name="uid" type="xs:string"/>
+</xs:complexType>
+<xs:annotation><xs:appinfo>Attribute annotation</xs:appinfo><xs:documentation xml:lang="en">label;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titlelabel;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titleuid;
+   aa:st__uidRecord Identifiermip;
+   xs:stringThe MIP making the request. tab;
+   xs:stringRedundant?expt;
+   xs:stringName of experiment or group of experimentsrlid;
+   xs:stringIdentifier of Corresponding Request Linkesid;
+   xs:stringA link to an experiment, an experiment group or a MIPesidComment;
+   xs:stringComment on experiment(s) linked to.preset;
+   xs:integerOption to override priority set in each variable grouptreset;
+   xs:integerOption to override tier set for experiment(s)ny;
+   xs:integerDefault number of years.nexmax;
+   xs:integerMaximum number of experiments requested.nenmax;
+   xs:integerNumber of ensemble members requested. nymax;
+   xs:floatNumber of years requested.tslice;
+   xs:stringSelection of years from experiment</xs:documentation></xs:annotation>
+<xs:complexType name="ct__requestItem_vocabItem">
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="label" type="aa:st__attLabel_def"/>
+<xs:attribute name="title" type="xs:string"/><xs:attribute name="uid" type="aa:st__uid" use="required"/>
+<xs:attribute name="mip" type="xs:string" use="required"/>
+<xs:attribute name="tab" type="xs:string"/>
+<xs:attribute name="expt" type="xs:string" use="required"/>
+<xs:attribute name="rlid" type="xs:string" use="required"/>
+<xs:attribute name="esid" type="xs:string" use="required"/>
+<xs:attribute name="esidComment" type="xs:string"/>
+<xs:attribute name="preset" type="xs:integer" use="required"/>
+<xs:attribute name="treset" type="xs:integer"/>
+<xs:attribute name="ny" type="xs:integer" use="required"/>
+<xs:attribute name="nexmax" type="xs:integer"/>
+<xs:attribute name="nenmax" type="xs:integer" use="required"/>
+<xs:attribute name="nymax" type="xs:float" use="required"/>
+<xs:attribute name="tslice" type="xs:string"/>
+
+</xs:complexType><!--Auto-generated vocabulary complexType declarations/>-->
+<xs:annotation><xs:appinfo>W3Schools Note</xs:appinfo><xs:documentation xml:lang="en">exptgroup: Complex Type declaration
+       </xs:documentation></xs:annotation>
+<xs:complexType name="ct__exptgroup">
+<xs:sequence><xs:element name="item" maxOccurs="12000" type="aa:ct__exptgroup_vocabItem"/></xs:sequence>
+<xs:attribute name="label" type="xs:string" fixed="exptgroup"/>
+<xs:attribute name="title" type="xs:string" fixed="1.9 Experiment Group"/>
+<xs:attribute name="id" type="xs:string" fixed="exg"/>
+<xs:attribute name="useClass" fixed="vocab"/>
+<xs:attribute name="uid" type="xs:string"/>
+</xs:complexType>
+<xs:annotation><xs:appinfo>Attribute annotation</xs:appinfo><xs:documentation xml:lang="en">label;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titlelabel;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titleuid;
+   aa:st__uidRecord identifiertierMin;
+   xs:integerMinimum tier of experiments in groupntot;
+   xs:integerTotal number of years</xs:documentation></xs:annotation>
+<xs:complexType name="ct__exptgroup_vocabItem">
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="label" type="aa:st__attLabel_def"/>
+<xs:attribute name="title" type="xs:string"/><xs:attribute name="uid" type="aa:st__uid" use="required"/>
+<xs:attribute name="tierMin" type="xs:integer" use="required"/>
+<xs:attribute name="ntot" type="xs:integer" use="required"/>
+
+</xs:complexType><!--Auto-generated vocabulary complexType declarations/>-->
+<xs:annotation><xs:appinfo>W3Schools Note</xs:appinfo><xs:documentation xml:lang="en">miptable: Complex Type declaration
+       </xs:documentation></xs:annotation>
+<xs:complexType name="ct__miptable">
+<xs:sequence><xs:element name="item" maxOccurs="12000" type="aa:ct__miptable_vocabItem"/></xs:sequence>
+<xs:attribute name="label" type="xs:string" fixed="miptable"/>
+<xs:attribute name="title" type="xs:string" fixed="2.4 MIP tables"/>
+<xs:attribute name="id" type="xs:string" fixed="mtb"/>
+<xs:attribute name="useClass" fixed="vocab"/>
+<xs:attribute name="uid" type="xs:string"/>
+</xs:complexType>
+<xs:annotation><xs:appinfo>Attribute annotation</xs:appinfo><xs:documentation xml:lang="en">label;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titlelabel;
+   xs:stringLabeluid;
+   aa:st__uidRecord identifiertitle;
+   xs:stringTitledescription;
+   xs:stringDescriptionfrequency;
+   xs:stringFrequencyaltLabel;
+   xs:stringAlternative Labelcomment;
+   xs:stringComment</xs:documentation></xs:annotation>
+<xs:complexType name="ct__miptable_vocabItem">
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="label" type="aa:st__attLabel_def"/>
+<xs:attribute name="title" type="xs:string"/><xs:attribute name="uid" type="aa:st__uid" use="required"/>
+<xs:attribute name="description" type="xs:string" use="required"/>
+<xs:attribute name="frequency" type="xs:string" use="required"/>
+<xs:attribute name="altLabel" type="xs:string" use="required"/>
+<xs:attribute name="comment" type="xs:string" use="required"/>
+
+</xs:complexType><!--Auto-generated vocabulary complexType declarations/>-->
+<xs:annotation><xs:appinfo>W3Schools Note</xs:appinfo><xs:documentation xml:lang="en">CMORvar: Complex Type declaration
+       </xs:documentation></xs:annotation>
+<xs:complexType name="ct__CMORvar">
+<xs:sequence><xs:element name="item" maxOccurs="12000" type="aa:ct__CMORvar_vocabItem"/></xs:sequence>
+<xs:attribute name="label" type="xs:string" fixed="CMORvar"/>
+<xs:attribute name="title" type="xs:string" fixed="1.3 CMOR Variable"/>
+<xs:attribute name="id" type="xs:string" fixed="cmv"/>
+<xs:attribute name="useClass" fixed="vocab"/>
+<xs:attribute name="uid" type="xs:string"/>
+</xs:complexType>
+<xs:annotation><xs:appinfo>Attribute annotation</xs:appinfo><xs:documentation xml:lang="en">label;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titlelabel;
+   xs:stringCMOR Variable Nametitle;
+   xs:stringRecord Titleuid;
+   aa:st__uidRecord Identifiertitle;
+   xs:stringLong namestid;
+   xs:stringLink to a record specifying the structure of the variablevid;
+   xs:stringMIP Variabledeflate;
+   xs:stringDeflate: NetCDF compression parameterdeflate_level;
+   xs:stringDeflate Level: NetCDF compression parametershuffle;
+   xs:stringShuffle: NetCDF compression parameterdefaultPriority;
+   xs:integerIndicative priority for this parameter, which is over-ruled by the requestVar priority setting, but provides a reference for organisation of the CMORvariablestype;
+   aa:st__fortranTypeData value type, e.g. float or doublemodeling_realm;
+   xs:stringModeling Realmpositive;
+   xs:stringCMOR Directive PositivemipTableSection;
+   xs:stringSection of a tablemtid;
+   xs:stringLink to MIP table recordmipTable;
+   xs:stringThe MIP tableprov;
+   xs:stringProvenanceprocessing;
+   xs:stringProcessing NotesprovNote;
+   xs:stringProvenance Notefrequency;
+   xs:stringFrequency of Time Steps to be ArchivedrowIndex;
+   xs:integerRow index of entry in source sheetdescription;
+   xs:stringDescriptionsubGroup;
+   xs:stringSub-group of variables in a table</xs:documentation></xs:annotation>
+<xs:complexType name="ct__CMORvar_vocabItem">
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="label" type="aa:st__attLabel_def"/>
+<xs:attribute name="title" type="xs:string"/><xs:attribute name="uid" type="aa:st__uid" use="required"/>
+<xs:attribute name="stid" type="xs:string" use="required"/>
+<xs:attribute name="vid" type="xs:string" use="required"/>
+<xs:attribute name="deflate" type="xs:string" use="required"/>
+<xs:attribute name="deflate_level" type="xs:string" use="required"/>
+<xs:attribute name="shuffle" type="xs:string" use="required"/>
+<xs:attribute name="defaultPriority" type="xs:integer" use="required"/>
+<xs:attribute name="type" type="aa:st__fortranType" use="required"/>
+<xs:attribute name="modeling_realm" type="xs:string" use="required"/>
+<xs:attribute name="positive" type="xs:string" use="required"/>
+<xs:attribute name="mipTableSection" type="xs:string"/>
+<xs:attribute name="mtid" type="xs:string" use="required"/>
+<xs:attribute name="mipTable" type="xs:string" use="required"/>
+<xs:attribute name="prov" type="xs:string" use="required"/>
+<xs:attribute name="processing" type="xs:string"/>
+<xs:attribute name="provNote" type="xs:string" use="required"/>
+<xs:attribute name="frequency" type="xs:string" use="required"/>
+<xs:attribute name="rowIndex" type="xs:integer" use="required"/>
+<xs:attribute name="description" type="xs:string" use="required"/>
+<xs:attribute name="subGroup" type="xs:string"/>
+
+</xs:complexType><!--Auto-generated vocabulary complexType declarations/>-->
+<xs:annotation><xs:appinfo>W3Schools Note</xs:appinfo><xs:documentation xml:lang="en">objective: Complex Type declaration
+       </xs:documentation></xs:annotation>
+<xs:complexType name="ct__objective">
+<xs:sequence><xs:element name="item" maxOccurs="12000" type="aa:ct__objective_vocabItem"/></xs:sequence>
+<xs:attribute name="label" type="xs:string" fixed="objective"/>
+<xs:attribute name="title" type="xs:string" fixed="1.6 Scientific objectives"/>
+<xs:attribute name="id" type="xs:string" fixed="obj"/>
+<xs:attribute name="useClass" fixed="vocab"/>
+<xs:attribute name="uid" type="xs:string"/>
+</xs:complexType>
+<xs:annotation><xs:appinfo>Attribute annotation</xs:appinfo><xs:documentation xml:lang="en">label;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titlelabel;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titleuid;
+   aa:st__uidRecord identifierdescription;
+   xs:stringDescriptionmip;
+   xs:stringEndorsed MIP</xs:documentation></xs:annotation>
+<xs:complexType name="ct__objective_vocabItem">
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="label" type="aa:st__attLabel_def"/>
+<xs:attribute name="title" type="xs:string"/><xs:attribute name="uid" type="aa:st__uid" use="required"/>
+<xs:attribute name="description" type="xs:string" use="required"/>
+<xs:attribute name="mip" type="xs:string" use="required"/>
+
+</xs:complexType><!--Auto-generated vocabulary complexType declarations/>-->
+<xs:annotation><xs:appinfo>W3Schools Note</xs:appinfo><xs:documentation xml:lang="en">spatialShape: Complex Type declaration
+       </xs:documentation></xs:annotation>
+<xs:complexType name="ct__spatialShape">
+<xs:sequence><xs:element name="item" maxOccurs="12000" type="aa:ct__spatialShape_vocabItem"/></xs:sequence>
+<xs:attribute name="label" type="xs:string" fixed="spatialShape"/>
+<xs:attribute name="title" type="xs:string" fixed="2.1 Spatial dimensions"/>
+<xs:attribute name="id" type="xs:string" fixed="ss"/>
+<xs:attribute name="useClass" fixed="vocab"/>
+<xs:attribute name="uid" type="xs:string"/>
+</xs:complexType>
+<xs:annotation><xs:appinfo>Attribute annotation</xs:appinfo><xs:documentation xml:lang="en">label;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titlelabel;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titleuid;
+   aa:st__uidRecord Identifierdimensions;
+   xs:stringList of spatial dimensionsdimids;
+   aa:st__stringListIdentifiers for records in grids sectionlevels;
+   xs:integerNumber of vertical levels (ignored if levelFlag=false)levelFlag;
+   xs:booleanFlag set to *false* if number of levels is optional (e.g. determined by the model)</xs:documentation></xs:annotation>
+<xs:complexType name="ct__spatialShape_vocabItem">
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="label" type="aa:st__attLabel_def"/>
+<xs:attribute name="title" type="xs:string"/><xs:attribute name="uid" type="aa:st__uid" use="required"/>
+<xs:attribute name="dimensions" type="xs:string" use="required"/>
+<xs:attribute name="dimids" type="aa:st__stringList"/>
+<xs:attribute name="levels" type="xs:integer" use="required"/>
+<xs:attribute name="levelFlag" type="xs:boolean" use="required"/>
+
+</xs:complexType><!--Auto-generated vocabulary complexType declarations/>-->
+<xs:annotation><xs:appinfo>W3Schools Note</xs:appinfo><xs:documentation xml:lang="en">requestLink: Complex Type declaration
+       </xs:documentation></xs:annotation>
+<xs:complexType name="ct__requestLink">
+<xs:sequence><xs:element name="item" maxOccurs="12000" type="aa:ct__requestLink_vocabItem"/></xs:sequence>
+<xs:attribute name="label" type="xs:string" fixed="requestLink"/>
+<xs:attribute name="title" type="xs:string" fixed="3.3 Request link: linking a set of variables and a set of experiments"/>
+<xs:attribute name="id" type="xs:string" fixed="rql"/>
+<xs:attribute name="useClass" fixed="vocab"/>
+<xs:attribute name="uid" type="xs:string"/>
+</xs:complexType>
+<xs:annotation><xs:appinfo>Attribute annotation</xs:appinfo><xs:documentation xml:lang="en">label;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titlelabel;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titleuid;
+   aa:st__uidRecord Identifiermip;
+   xs:stringEndorsed MIP requesting the datatab;
+   xs:stringRedundantobjective;
+   xs:stringScience objectives associated with this requestgrid;
+   xs:stringGrid optionsgridreq;
+   xs:stringGrid option constraintscomment;
+   xs:stringCommentref;
+   xs:stringReferencerefNote;
+   xs:stringNote on referencerefid;
+   xs:stringReference to a request Variable Groupopt;
+   xs:stringOption for selecting a subset of variablesopar;
+   xs:stringparameter associated with *opt*</xs:documentation></xs:annotation>
+<xs:complexType name="ct__requestLink_vocabItem">
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="label" type="aa:st__attLabel_def"/>
+<xs:attribute name="title" type="xs:string"/><xs:attribute name="uid" type="aa:st__uid" use="required"/>
+<xs:attribute name="mip" type="xs:string" use="required"/>
+<xs:attribute name="tab" type="xs:string"/>
+<xs:attribute name="objective" type="xs:string" use="required"/>
+<xs:attribute name="grid" type="xs:string" use="required"/>
+<xs:attribute name="gridreq" type="xs:string" use="required"/>
+<xs:attribute name="comment" type="xs:string" use="required"/>
+<xs:attribute name="ref" type="xs:string"/>
+<xs:attribute name="refNote" type="xs:string"/>
+<xs:attribute name="refid" type="xs:string" use="required"/>
+<xs:attribute name="opt" type="xs:string" use="required"/>
+<xs:attribute name="opar" type="xs:string" use="required"/>
+
+</xs:complexType><!--Auto-generated vocabulary complexType declarations/>-->
+<xs:annotation><xs:appinfo>W3Schools Note</xs:appinfo><xs:documentation xml:lang="en">tableSection: Complex Type declaration
+       </xs:documentation></xs:annotation>
+<xs:complexType name="ct__tableSection">
+<xs:sequence><xs:element name="item" maxOccurs="12000" type="aa:ct__tableSection_vocabItem"/></xs:sequence>
+<xs:attribute name="label" type="xs:string" fixed="tableSection"/>
+<xs:attribute name="title" type="xs:string" fixed="3.4 CMOR Table Sections"/>
+<xs:attribute name="id" type="xs:string" fixed="tbs"/>
+<xs:attribute name="useClass" fixed="vocab"/>
+<xs:attribute name="uid" type="xs:string"/>
+</xs:complexType>
+<xs:annotation><xs:appinfo>Attribute annotation</xs:appinfo><xs:documentation xml:lang="en">label;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titlelabel;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titleuid;
+   aa:st__uidRecord Identifiergpid;
+   xs:stringIdentifier for CMOR Tablesmip;
+   xs:stringProjectref;
+   xs:stringReferencerefNote;
+   xs:stringNote on reference</xs:documentation></xs:annotation>
+<xs:complexType name="ct__tableSection_vocabItem">
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="label" type="aa:st__attLabel_def"/>
+<xs:attribute name="title" type="xs:string"/><xs:attribute name="uid" type="aa:st__uid" use="required"/>
+<xs:attribute name="gpid" type="xs:string" use="required"/>
+<xs:attribute name="mip" type="xs:string" use="required"/>
+<xs:attribute name="ref" type="xs:string"/>
+<xs:attribute name="refNote" type="xs:string"/>
+
+</xs:complexType><!--Auto-generated vocabulary complexType declarations/>-->
+<xs:annotation><xs:appinfo>W3Schools Note</xs:appinfo><xs:documentation xml:lang="en">modelConfig: Complex Type declaration
+       </xs:documentation></xs:annotation>
+<xs:complexType name="ct__modelConfig">
+<xs:sequence><xs:element name="item" maxOccurs="12000" type="aa:ct__modelConfig_vocabItem"/></xs:sequence>
+<xs:attribute name="label" type="xs:string" fixed="modelConfig"/>
+<xs:attribute name="title" type="xs:string" fixed="3.5 Model configuration options"/>
+<xs:attribute name="id" type="xs:string" fixed="mcfg"/>
+<xs:attribute name="useClass" fixed="vocab"/>
+<xs:attribute name="uid" type="xs:string"/>
+</xs:complexType>
+<xs:annotation><xs:appinfo>Attribute annotation</xs:appinfo><xs:documentation xml:lang="en">label;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titlelabel;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titleuid;
+   aa:st__uidRecord identifierMIPs;
+   xs:stringMIPs which make use of this featureusage;
+   xs:stringHow the feature is relevant to the data requesttype;
+   aa:st__configurationTypeType of modelrange;
+   xs:stringRange of valid values, e.g. xs:boolean</xs:documentation></xs:annotation>
+<xs:complexType name="ct__modelConfig_vocabItem">
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="label" type="aa:st__attLabel_an"/>
+<xs:attribute name="title" type="xs:string"/><xs:attribute name="uid" type="aa:st__uid" use="required"/>
+<xs:attribute name="MIPs" type="xs:string" use="required"/>
+<xs:attribute name="usage" type="xs:string" use="required"/>
+<xs:attribute name="type" type="aa:st__configurationType" use="required"/>
+<xs:attribute name="range" type="xs:string" use="required"/>
+
+</xs:complexType><!--Auto-generated vocabulary complexType declarations/>-->
+<xs:annotation><xs:appinfo>W3Schools Note</xs:appinfo><xs:documentation xml:lang="en">varChoiceLinkC: Complex Type declaration
+       </xs:documentation></xs:annotation>
+<xs:complexType name="ct__varChoiceLinkC">
+<xs:sequence><xs:element name="item" maxOccurs="12000" type="aa:ct__varChoiceLinkC_vocabItem"/></xs:sequence>
+<xs:attribute name="label" type="xs:string" fixed="varChoiceLinkC"/>
+<xs:attribute name="title" type="xs:string" fixed="3.6 Links a variable to a choice element"/>
+<xs:attribute name="id" type="xs:string" fixed="vclc"/>
+<xs:attribute name="useClass" fixed="vocab"/>
+<xs:attribute name="uid" type="xs:string"/>
+</xs:complexType>
+<xs:annotation><xs:appinfo>Attribute annotation</xs:appinfo><xs:documentation xml:lang="en">label;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titlelabel;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titleuid;
+   aa:st__uidRecord identifiervid;
+   xs:stringVariablecfgid;
+   xs:stringConfiguration Optioncfg;
+   xs:booleanConfiguration Valuecid;
+   xs:stringChoice -- can provide a link to related variables</xs:documentation></xs:annotation>
+<xs:complexType name="ct__varChoiceLinkC_vocabItem">
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="label" type="aa:st__attLabel_def"/>
+<xs:attribute name="title" type="xs:string"/><xs:attribute name="uid" type="aa:st__uid" use="required"/>
+<xs:attribute name="vid" type="xs:string" use="required"/>
+<xs:attribute name="cfgid" type="xs:string" use="required"/>
+<xs:attribute name="cfg" type="xs:boolean" use="required"/>
+<xs:attribute name="cid" type="xs:string" use="required"/>
+
+</xs:complexType><!--Auto-generated vocabulary complexType declarations/>-->
+<xs:annotation><xs:appinfo>W3Schools Note</xs:appinfo><xs:documentation xml:lang="en">objectiveLink: Complex Type declaration
+       </xs:documentation></xs:annotation>
+<xs:complexType name="ct__objectiveLink">
+<xs:sequence><xs:element name="item" maxOccurs="12000" type="aa:ct__objectiveLink_vocabItem"/></xs:sequence>
+<xs:attribute name="label" type="xs:string" fixed="objectiveLink"/>
+<xs:attribute name="title" type="xs:string" fixed="3.7 Link between scientific objectives and requests"/>
+<xs:attribute name="id" type="xs:string" fixed="objl"/>
+<xs:attribute name="useClass" fixed="vocab"/>
+<xs:attribute name="uid" type="xs:string"/>
+</xs:complexType>
+<xs:annotation><xs:appinfo>Attribute annotation</xs:appinfo><xs:documentation xml:lang="en">label;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titlelabel;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titleuid;
+   aa:st__uidRecord identifieroid;
+   xs:stringIdentifier for a scientific objectiverid;
+   xs:stringIdentifier for a request link</xs:documentation></xs:annotation>
+<xs:complexType name="ct__objectiveLink_vocabItem">
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="label" type="aa:st__attLabel_def"/>
+<xs:attribute name="title" type="xs:string"/><xs:attribute name="uid" type="aa:st__uid" use="required"/>
+<xs:attribute name="oid" type="xs:string" use="required"/>
+<xs:attribute name="rid" type="xs:string" use="required"/>
+
+</xs:complexType><!--Auto-generated vocabulary complexType declarations/>-->
+<xs:annotation><xs:appinfo>W3Schools Note</xs:appinfo><xs:documentation xml:lang="en">remarks: Complex Type declaration
+       </xs:documentation></xs:annotation>
+<xs:complexType name="ct__remarks">
+<xs:sequence><xs:element name="item" maxOccurs="12000" type="aa:ct__remarks_vocabItem"/></xs:sequence>
+<xs:attribute name="label" type="xs:string" fixed="remarks"/>
+<xs:attribute name="title" type="xs:string" fixed="3.8 Remarks about other items"/>
+<xs:attribute name="id" type="xs:string" fixed="rmk"/>
+<xs:attribute name="useClass" fixed="vocab"/>
+<xs:attribute name="uid" type="xs:string"/>
+</xs:complexType>
+<xs:annotation><xs:appinfo>Attribute annotation</xs:appinfo><xs:documentation xml:lang="en">label;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titlelabel;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titleuid;
+   aa:st__uidRecord identifiertid;
+   xs:stringTarget identifier: the record ID of the item this refers to.tattr;
+   xs:stringTarget attribute: an attribute of the target item, or 'ALL'description;
+   xs:stringFree text remarks -- unless there are specific restrictions associated with the class attribute of this remarkclass;
+   xs:stringClass categorisation of remarksqid;
+   xs:stringIdentifier linking to a related record.techNote;
+   xs:stringOptional additional machine readable content (though not restricted by the schema)prov;
+   xs:stringProvenance</xs:documentation></xs:annotation>
+<xs:complexType name="ct__remarks_vocabItem">
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="label" type="aa:st__attLabel_def"/>
+<xs:attribute name="title" type="xs:string"/><xs:attribute name="uid" type="aa:st__uid" use="required"/>
+<xs:attribute name="tid" type="xs:string"/>
+<xs:attribute name="tattr" type="xs:string" use="required"/>
+<xs:attribute name="description" type="xs:string" use="required"/>
+<xs:attribute name="class" type="xs:string" use="required"/>
+<xs:attribute name="qid" type="xs:string"/>
+<xs:attribute name="techNote" type="xs:string"/>
+<xs:attribute name="prov" type="xs:string" use="required"/>
+
+</xs:complexType><!--Auto-generated vocabulary complexType declarations/>-->
+<xs:annotation><xs:appinfo>W3Schools Note</xs:appinfo><xs:documentation xml:lang="en">experiment: Complex Type declaration
+       </xs:documentation></xs:annotation>
+<xs:complexType name="ct__experiment">
+<xs:sequence><xs:element name="item" maxOccurs="12000" type="aa:ct__experiment_vocabItem"/></xs:sequence>
+<xs:attribute name="label" type="xs:string" fixed="experiment"/>
+<xs:attribute name="title" type="xs:string" fixed="1.5 Experiments"/>
+<xs:attribute name="id" type="xs:string" fixed="exp"/>
+<xs:attribute name="useClass" fixed="vocab"/>
+<xs:attribute name="uid" type="xs:string"/>
+</xs:complexType>
+<xs:annotation><xs:appinfo>Attribute annotation</xs:appinfo><xs:documentation xml:lang="en">label;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titlelabel;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titleuid;
+   aa:st__uidRecord identifierdescription;
+   xs:stringDescriptionegid;
+   xs:stringIdentifier for experiment groupmip;
+   xs:stringMIP defining experimentmcfg;
+   xs:stringModel Source Typestier;
+   aa:st__integerListMonIncTier of Experimentnstart;
+   xs:integerNumber of Start Datesstarty;
+   xs:stringStart yearendy;
+   xs:stringEnd yearyps;
+   xs:integerYears per Simulation Including all Start Yearsensz;
+   aa:st__integerListMonIncEnsemble sizentot;
+   xs:integerTotal number of yearscomment;
+   xs:stringComment</xs:documentation></xs:annotation>
+<xs:complexType name="ct__experiment_vocabItem">
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="label" type="aa:st__attLabel_def"/>
+<xs:attribute name="title" type="xs:string"/><xs:attribute name="uid" type="aa:st__uid" use="required"/>
+<xs:attribute name="description" type="xs:string" use="required"/>
+<xs:attribute name="egid" type="xs:string" use="required"/>
+<xs:attribute name="mip" type="xs:string" use="required"/>
+<xs:attribute name="mcfg" type="xs:string" use="required"/>
+<xs:attribute name="tier" type="aa:st__integerListMonInc" use="required"/>
+<xs:attribute name="nstart" type="xs:integer" use="required"/>
+<xs:attribute name="starty" type="xs:string" use="required"/>
+<xs:attribute name="endy" type="xs:string" use="required"/>
+<xs:attribute name="yps" type="xs:integer" use="required"/>
+<xs:attribute name="ensz" type="aa:st__integerListMonInc" use="required"/>
+<xs:attribute name="ntot" type="xs:integer" use="required"/>
+<xs:attribute name="comment" type="xs:string" use="required"/>
+
+</xs:complexType><!--Auto-generated vocabulary complexType declarations/>-->
+<xs:annotation><xs:appinfo>W3Schools Note</xs:appinfo><xs:documentation xml:lang="en">requestVar: Complex Type declaration
+       </xs:documentation></xs:annotation>
+<xs:complexType name="ct__requestVar">
+<xs:sequence><xs:element name="item" maxOccurs="12000" type="aa:ct__requestVar_vocabItem"/></xs:sequence>
+<xs:attribute name="label" type="xs:string" fixed="requestVar"/>
+<xs:attribute name="title" type="xs:string" fixed="1.4 Request variable (carrying priority and link to group)"/>
+<xs:attribute name="id" type="xs:string" fixed="rqv"/>
+<xs:attribute name="useClass" fixed="vocab"/>
+<xs:attribute name="uid" type="xs:string"/>
+</xs:complexType>
+<xs:annotation><xs:appinfo>Attribute annotation</xs:appinfo><xs:documentation xml:lang="en">label;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titlelabel;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titleuid;
+   aa:st__uidRecord identifierpriority;
+   xs:integerVariable priorityvid;
+   xs:stringIdentifier for MIP Output Variablevgid;
+   xs:stringIdentifier for Variable Groupmip;
+   xs:stringEndorsed MIP</xs:documentation></xs:annotation>
+<xs:complexType name="ct__requestVar_vocabItem">
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="label" type="aa:st__attLabel_def"/>
+<xs:attribute name="title" type="xs:string"/><xs:attribute name="uid" type="aa:st__uid" use="required"/>
+<xs:attribute name="priority" type="xs:integer" use="required"/>
+<xs:attribute name="vid" type="xs:string" use="required"/>
+<xs:attribute name="vgid" type="xs:string" use="required"/>
+<xs:attribute name="mip" type="xs:string" use="required"/>
+
+</xs:complexType><!--Auto-generated vocabulary complexType declarations/>-->
+<xs:annotation><xs:appinfo>W3Schools Note</xs:appinfo><xs:documentation xml:lang="en">standardname: Complex Type declaration
+       </xs:documentation></xs:annotation>
+<xs:complexType name="ct__standardname">
+<xs:sequence><xs:element name="item" maxOccurs="12000" type="aa:ct__standardname_vocabItem"/></xs:sequence>
+<xs:attribute name="label" type="xs:string" fixed="standardname"/>
+<xs:attribute name="title" type="xs:string" fixed="1.8 CF Standard Names"/>
+<xs:attribute name="id" type="xs:string" fixed="sn"/>
+<xs:attribute name="useClass" fixed="vocab"/>
+<xs:attribute name="uid" type="xs:string"/>
+</xs:complexType>
+<xs:annotation><xs:appinfo>Attribute annotation</xs:appinfo><xs:documentation xml:lang="en">label;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titlelabel;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titleuid;
+   aa:st__uidCF Standard Namedescription;
+   xs:stringRecord Descriptionunits;
+   xs:stringCanonical Units</xs:documentation></xs:annotation>
+<xs:complexType name="ct__standardname_vocabItem">
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="label" type="aa:st__attLabel_an"/>
+<xs:attribute name="title" type="xs:string"/><xs:attribute name="uid" type="aa:st__uid" use="required"/>
+<xs:attribute name="description" type="xs:string" use="required"/>
+<xs:attribute name="units" type="xs:string" use="required"/>
+
+</xs:complexType><!--Auto-generated vocabulary complexType declarations/>-->
+<xs:annotation><xs:appinfo>W3Schools Note</xs:appinfo><xs:documentation xml:lang="en">varChoiceLinkR: Complex Type declaration
+       </xs:documentation></xs:annotation>
+<xs:complexType name="ct__varChoiceLinkR">
+<xs:sequence><xs:element name="item" maxOccurs="12000" type="aa:ct__varChoiceLinkR_vocabItem"/></xs:sequence>
+<xs:attribute name="label" type="xs:string" fixed="varChoiceLinkR"/>
+<xs:attribute name="title" type="xs:string" fixed="3.9 Links a variable to a choice element"/>
+<xs:attribute name="id" type="xs:string" fixed="vclr"/>
+<xs:attribute name="useClass" fixed="vocab"/>
+<xs:attribute name="uid" type="xs:string"/>
+</xs:complexType>
+<xs:annotation><xs:appinfo>Attribute annotation</xs:appinfo><xs:documentation xml:lang="en">label;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titlelabel;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titleuid;
+   aa:st__uidRecord identifiervid;
+   xs:stringVariablecid;
+   xs:stringChoicerank;
+   xs:integerFor ranked choices, the rank of this variable (higher rank makes lower ranks redundant)</xs:documentation></xs:annotation>
+<xs:complexType name="ct__varChoiceLinkR_vocabItem">
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="label" type="aa:st__attLabel_def"/>
+<xs:attribute name="title" type="xs:string"/><xs:attribute name="uid" type="aa:st__uid" use="required"/>
+<xs:attribute name="vid" type="xs:string" use="required"/>
+<xs:attribute name="cid" type="xs:string" use="required"/>
+<xs:attribute name="rank" type="xs:integer" use="required"/>
+
+</xs:complexType><!--Auto-generated vocabulary complexType declarations/>-->
+<xs:annotation><xs:appinfo>W3Schools Note</xs:appinfo><xs:documentation xml:lang="en">var: Complex Type declaration
+       </xs:documentation></xs:annotation>
+<xs:complexType name="ct__var">
+<xs:sequence><xs:element name="item" maxOccurs="12000" type="aa:ct__var_vocabItem"/></xs:sequence>
+<xs:attribute name="label" type="xs:string" fixed="var"/>
+<xs:attribute name="title" type="xs:string" fixed="1.2 MIP Variable"/>
+<xs:attribute name="id" type="xs:string" fixed="var"/>
+<xs:attribute name="useClass" fixed="vocab"/>
+<xs:attribute name="uid" type="xs:string"/>
+</xs:complexType>
+<xs:annotation><xs:appinfo>Attribute annotation</xs:appinfo><xs:documentation xml:lang="en">label;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titlelabel;
+   xs:stringVariable Namesn;
+   xs:stringCF Standard Nameunits;
+   xs:stringUnits of Measuredescription;
+   xs:stringRecord Descriptiontitle;
+   xs:stringLong nameprocnote;
+   aa:st__stringListProcessing NotesprocComment;
+   xs:stringProcessing Commentsprov;
+   xs:stringNotes on Provenance of Variable Specificationsuid;
+   aa:st__uidRecord Identifierprovmip;
+   xs:stringMIP Defining this Variableunid;
+   xs:stringLink to Units section</xs:documentation></xs:annotation>
+<xs:complexType name="ct__var_vocabItem">
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="label" type="aa:st__attLabel_def"/>
+<xs:attribute name="title" type="xs:string"/><xs:attribute name="sn" type="xs:string" use="required"/>
+<xs:attribute name="units" type="xs:string" use="required"/>
+<xs:attribute name="description" type="xs:string" use="required"/>
+<xs:attribute name="procnote" type="aa:st__stringList" use="required"/>
+<xs:attribute name="procComment" type="xs:string" use="required"/>
+<xs:attribute name="prov" type="xs:string" use="required"/>
+<xs:attribute name="uid" type="aa:st__uid" use="required"/>
+<xs:attribute name="provmip" type="xs:string" use="required"/>
+<xs:attribute name="unid" type="xs:string" use="required"/>
+
+</xs:complexType><!--Auto-generated vocabulary complexType declarations/>-->
+<xs:annotation><xs:appinfo>W3Schools Note</xs:appinfo><xs:documentation xml:lang="en">mip: Complex Type declaration
+       </xs:documentation></xs:annotation>
+<xs:complexType name="ct__mip">
+<xs:sequence><xs:element name="item" maxOccurs="12000" type="aa:ct__mip_vocabItem"/></xs:sequence>
+<xs:attribute name="label" type="xs:string" fixed="mip"/>
+<xs:attribute name="title" type="xs:string" fixed="1.1 Model Intercomparison Project"/>
+<xs:attribute name="id" type="xs:string" fixed="mip"/>
+<xs:attribute name="useClass" fixed="vocab"/>
+<xs:attribute name="uid" type="xs:string"/>
+</xs:complexType>
+<xs:annotation><xs:appinfo>Attribute annotation</xs:appinfo><xs:documentation xml:lang="en">label;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titlelabel;
+   xs:stringMIP short nametitle;
+   xs:stringMIP titleuid;
+   aa:st__uidRecord identifierdescription;
+   xs:stringDescription of the Model Intercomparison Projecturl;
+   xs:stringProject Home Page</xs:documentation></xs:annotation>
+<xs:complexType name="ct__mip_vocabItem">
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="label" type="aa:st__attLabel_def"/>
+<xs:attribute name="title" type="xs:string"/><xs:attribute name="uid" type="aa:st__uid" use="required"/>
+<xs:attribute name="description" type="xs:string"/>
+<xs:attribute name="url" type="xs:string" use="required"/>
+
+</xs:complexType><!--Auto-generated vocabulary complexType declarations/>-->
+<xs:annotation><xs:appinfo>W3Schools Note</xs:appinfo><xs:documentation xml:lang="en">varChoice: Complex Type declaration
+       </xs:documentation></xs:annotation>
+<xs:complexType name="ct__varChoice">
+<xs:sequence><xs:element name="item" maxOccurs="12000" type="aa:ct__varChoice_vocabItem"/></xs:sequence>
+<xs:attribute name="label" type="xs:string" fixed="varChoice"/>
+<xs:attribute name="title" type="xs:string" fixed="3.10 Indicates variables for which a there is a range of potential CMOR Variables"/>
+<xs:attribute name="id" type="xs:string" fixed="vc"/>
+<xs:attribute name="useClass" fixed="vocab"/>
+<xs:attribute name="uid" type="xs:string"/>
+</xs:complexType>
+<xs:annotation><xs:appinfo>Attribute annotation</xs:appinfo><xs:documentation xml:lang="en">label;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titlelabel;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titleuid;
+   aa:st__uidRecord identifierchoiceClass;
+   xs:stringClass of choice: heirarchy|cfgdescription;
+   xs:stringRecord descriptionvarList;
+   xs:stringA colon separated list of variable namesoptionList;
+   xs:stringA list of options, one for each variable</xs:documentation></xs:annotation>
+<xs:complexType name="ct__varChoice_vocabItem">
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="label" type="aa:st__attLabel_def"/>
+<xs:attribute name="title" type="xs:string"/><xs:attribute name="uid" type="aa:st__uid" use="required"/>
+<xs:attribute name="choiceClass" type="xs:string" use="required"/>
+<xs:attribute name="description" type="xs:string" use="required"/>
+<xs:attribute name="varList" type="xs:string" use="required"/>
+<xs:attribute name="optionList" type="xs:string" use="required"/>
+
+</xs:complexType><!--Auto-generated vocabulary complexType declarations/>-->
+<xs:annotation><xs:appinfo>W3Schools Note</xs:appinfo><xs:documentation xml:lang="en">temporalShape: Complex Type declaration
+       </xs:documentation></xs:annotation>
+<xs:complexType name="ct__temporalShape">
+<xs:sequence><xs:element name="item" maxOccurs="12000" type="aa:ct__temporalShape_vocabItem"/></xs:sequence>
+<xs:attribute name="label" type="xs:string" fixed="temporalShape"/>
+<xs:attribute name="title" type="xs:string" fixed="2.2 Temporal dimension"/>
+<xs:attribute name="id" type="xs:string" fixed="ts"/>
+<xs:attribute name="useClass" fixed="vocab"/>
+<xs:attribute name="uid" type="xs:string"/>
+</xs:complexType>
+<xs:annotation><xs:appinfo>Attribute annotation</xs:appinfo><xs:documentation xml:lang="en">label;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titlelabel;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titleuid;
+   aa:st__uidRecord Identifierdimid;
+   xs:stringIdentifiers for record in grids sectiondimensions;
+   xs:stringDimensionsdescription;
+   xs:stringDescription</xs:documentation></xs:annotation>
+<xs:complexType name="ct__temporalShape_vocabItem">
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="label" type="aa:st__attLabel_def"/>
+<xs:attribute name="title" type="xs:string"/><xs:attribute name="uid" type="aa:st__uid" use="required"/>
+<xs:attribute name="dimid" type="xs:string"/>
+<xs:attribute name="dimensions" type="xs:string" use="required"/>
+<xs:attribute name="description" type="xs:string"/>
+
+</xs:complexType><!--Auto-generated vocabulary complexType declarations/>-->
+<xs:annotation><xs:appinfo>W3Schools Note</xs:appinfo><xs:documentation xml:lang="en">structure: Complex Type declaration
+       </xs:documentation></xs:annotation>
+<xs:complexType name="ct__structure">
+<xs:sequence><xs:element name="item" maxOccurs="12000" type="aa:ct__structure_vocabItem"/></xs:sequence>
+<xs:attribute name="label" type="xs:string" fixed="structure"/>
+<xs:attribute name="title" type="xs:string" fixed="2.3 Dimensions and related information"/>
+<xs:attribute name="id" type="xs:string" fixed="str"/>
+<xs:attribute name="useClass" fixed="vocab"/>
+<xs:attribute name="uid" type="xs:string"/>
+</xs:complexType>
+<xs:annotation><xs:appinfo>Attribute annotation</xs:appinfo><xs:documentation xml:lang="en">label;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titlelabel;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titleuid;
+   aa:st__uidRecord Identifierspid;
+   xs:stringSpatial Shapetmid;
+   xs:stringTemporal Shapeodims;
+   xs:stringOther Dimensionsdids;
+   aa:st__stringListIdentifiers for records in grids section for dimensionscoords;
+   xs:stringCoordinatescids;
+   aa:st__stringListIdentifiers for records in grids section for coordinatescell_methods;
+   xs:stringCell Methodscell_measures;
+   xs:stringCell Measuresflag_values;
+   xs:stringFlag Valuesflag_meanings;
+   xs:stringFLag Meaningsdescription;
+   xs:stringDescriptionprocNote;
+   xs:stringProcessing Noteprov;
+   xs:stringProvenancecmid;
+   xs:stringLink to Cell Methods Record</xs:documentation></xs:annotation>
+<xs:complexType name="ct__structure_vocabItem">
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="label" type="aa:st__attLabel_def"/>
+<xs:attribute name="title" type="xs:string"/><xs:attribute name="uid" type="aa:st__uid" use="required"/>
+<xs:attribute name="spid" type="xs:string" use="required"/>
+<xs:attribute name="tmid" type="xs:string" use="required"/>
+<xs:attribute name="odims" type="xs:string"/>
+<xs:attribute name="dids" type="aa:st__stringList"/>
+<xs:attribute name="coords" type="xs:string"/>
+<xs:attribute name="cids" type="aa:st__stringList"/>
+<xs:attribute name="cell_methods" type="xs:string" use="required"/>
+<xs:attribute name="cell_measures" type="xs:string" use="required"/>
+<xs:attribute name="flag_values" type="xs:string" use="required"/>
+<xs:attribute name="flag_meanings" type="xs:string" use="required"/>
+<xs:attribute name="description" type="xs:string" use="required"/>
+<xs:attribute name="procNote" type="xs:string" use="required"/>
+<xs:attribute name="prov" type="xs:string" use="required"/>
+<xs:attribute name="cmid" type="xs:string" use="required"/>
+
+</xs:complexType><!--Auto-generated vocabulary complexType declarations/>-->
+<xs:annotation><xs:appinfo>W3Schools Note</xs:appinfo><xs:documentation xml:lang="en">grids: Complex Type declaration
+       </xs:documentation></xs:annotation>
+<xs:complexType name="ct__grids">
+<xs:sequence><xs:element name="item" maxOccurs="12000" type="aa:ct__grids_vocabItem"/></xs:sequence>
+<xs:attribute name="label" type="xs:string" fixed="grids"/>
+<xs:attribute name="title" type="xs:string" fixed="1.7 Specification of dimensions"/>
+<xs:attribute name="id" type="xs:string" fixed="grd"/>
+<xs:attribute name="useClass" fixed="vocab"/>
+<xs:attribute name="uid" type="xs:string"/>
+</xs:complexType>
+<xs:annotation><xs:appinfo>Attribute annotation</xs:appinfo><xs:documentation xml:lang="en">label;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titletables;
+   xs:stringCMOR table(s)uid;
+   aa:st__uidIdentifierlabel;
+   xs:stringCMOR dimensionaltLabel;
+   xs:stringoutput dimension namedescription;
+   xs:stringdescriptionstandardName;
+   xs:stringstandard nametitle;
+   xs:stringlong nameaxis;
+   xs:stringaxisunits;
+   xs:stringunitsisIndex;
+   xs:stringindex axis?coords;
+   xs:stringcoords_attribbounds;
+   xs:stringbounds?direction;
+   xs:stringstored directionvalid_min;
+   xs:floatvalid_minvalid_max;
+   xs:floatvalid_maxtype;
+   aa:st__fortranTypetypepositive;
+   xs:stringpositivevalue;
+   xs:stringvalue of a scalar coordinateboundsValues;
+   xs:stringbounds _valuesrequested;
+   xs:stringrequestedboundsRequested;
+   aa:st__floatListbounds_ requestedtolRequested;
+   xs:stringtol_on_requests: variance from requested values that is toleratedisGrid;
+   xs:stringgrid?</xs:documentation></xs:annotation>
+<xs:complexType name="ct__grids_vocabItem">
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="label" type="aa:st__attLabel_def"/>
+<xs:attribute name="title" type="xs:string"/><xs:attribute name="tables" type="xs:string" use="required"/>
+<xs:attribute name="uid" type="aa:st__uid" use="required"/>
+<xs:attribute name="altLabel" type="xs:string" use="required"/>
+<xs:attribute name="description" type="xs:string" use="required"/>
+<xs:attribute name="standardName" type="xs:string"/>
+<xs:attribute name="axis" type="xs:string" use="required"/>
+<xs:attribute name="units" type="xs:string" use="required"/>
+<xs:attribute name="isIndex" type="xs:string" use="required"/>
+<xs:attribute name="coords" type="xs:string" use="required"/>
+<xs:attribute name="bounds" type="xs:string" use="required"/>
+<xs:attribute name="direction" type="xs:string" use="required"/>
+<xs:attribute name="valid_min" type="xs:float"/>
+<xs:attribute name="valid_max" type="xs:float"/>
+<xs:attribute name="type" type="aa:st__fortranType" use="required"/>
+<xs:attribute name="positive" type="xs:string" use="required"/>
+<xs:attribute name="value" type="xs:string" use="required"/>
+<xs:attribute name="boundsValues" type="xs:string" use="required"/>
+<xs:attribute name="requested" type="xs:string" use="required"/>
+<xs:attribute name="boundsRequested" type="aa:st__floatList"/>
+<xs:attribute name="tolRequested" type="xs:string" use="required"/>
+<xs:attribute name="isGrid" type="xs:string" use="required"/>
+
+</xs:complexType><!--Auto-generated vocabulary complexType declarations/>-->
+<xs:annotation><xs:appinfo>W3Schools Note</xs:appinfo><xs:documentation xml:lang="en">timeSlice: Complex Type declaration
+       </xs:documentation></xs:annotation>
+<xs:complexType name="ct__timeSlice">
+<xs:sequence><xs:element name="item" maxOccurs="12000" type="aa:ct__timeSlice_vocabItem"/></xs:sequence>
+<xs:attribute name="label" type="xs:string" fixed="timeSlice"/>
+<xs:attribute name="title" type="xs:string" fixed="3.11 Time Slices for Output Requests"/>
+<xs:attribute name="id" type="xs:string" fixed="tsl"/>
+<xs:attribute name="useClass" fixed="vocab"/>
+<xs:attribute name="uid" type="xs:string"/>
+</xs:complexType>
+<xs:annotation><xs:appinfo>Attribute annotation</xs:appinfo><xs:documentation xml:lang="en">label;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titletype;
+   aa:st__sliceTypeType of time slicestart;
+   xs:integerStart yearend;
+   xs:integerEnd yearstep;
+   xs:floatStep (years)sliceLen;
+   xs:integerLength of slicenyears;
+   xs:floatTotal number of yearsuid;
+   aa:st__uidUnique identifierstartList;
+   aa:st__integerListOptional list of start times.sliceLenUnit;
+   xs:stringUnits of slice lengthdescription;
+   xs:stringDescriptionchild;
+   xs:stringChild experiment</xs:documentation></xs:annotation>
+<xs:complexType name="ct__timeSlice_vocabItem">
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="label" type="aa:st__attLabel_def"/>
+<xs:attribute name="title" type="xs:string"/><xs:attribute name="type" type="aa:st__sliceType" use="required"/>
+<xs:attribute name="start" type="xs:integer"/>
+<xs:attribute name="end" type="xs:integer"/>
+<xs:attribute name="step" type="xs:float"/>
+<xs:attribute name="sliceLen" type="xs:integer"/>
+<xs:attribute name="nyears" type="xs:float"/>
+<xs:attribute name="uid" type="aa:st__uid" use="required"/>
+<xs:attribute name="startList" type="aa:st__integerList"/>
+<xs:attribute name="sliceLenUnit" type="xs:string"/>
+<xs:attribute name="description" type="xs:string"/>
+<xs:attribute name="child" type="xs:string"/>
+
+</xs:complexType><!--Auto-generated vocabulary complexType declarations/>-->
+<xs:annotation><xs:appinfo>W3Schools Note</xs:appinfo><xs:documentation xml:lang="en">cellMethods: Complex Type declaration
+       </xs:documentation></xs:annotation>
+<xs:complexType name="ct__cellMethods">
+<xs:sequence><xs:element name="item" maxOccurs="12000" type="aa:ct__cellMethods_vocabItem"/></xs:sequence>
+<xs:attribute name="label" type="xs:string" fixed="cellMethods"/>
+<xs:attribute name="title" type="xs:string" fixed="7.1 Cell Methods"/>
+<xs:attribute name="id" type="xs:string" fixed="cmth"/>
+<xs:attribute name="useClass" fixed="vocab"/>
+<xs:attribute name="uid" type="xs:string"/>
+</xs:complexType>
+<xs:annotation><xs:appinfo>Attribute annotation</xs:appinfo><xs:documentation xml:lang="en">label;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titlelabel;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titleuid;
+   aa:st__uidRecord Identifiercell_methods;
+   xs:stringCell Methods Stringdescription;
+   xs:stringRecord Description</xs:documentation></xs:annotation>
+<xs:complexType name="ct__cellMethods_vocabItem">
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="label" type="aa:st__attLabel_def"/>
+<xs:attribute name="title" type="xs:string"/><xs:attribute name="uid" type="aa:st__uid" use="required"/>
+<xs:attribute name="cell_methods" type="xs:string" use="required"/>
+<xs:attribute name="description" type="xs:string"/>
+
+</xs:complexType><!--Auto-generated vocabulary complexType declarations/>-->
+<xs:annotation><xs:appinfo>W3Schools Note</xs:appinfo><xs:documentation xml:lang="en">tags: Complex Type declaration
+       </xs:documentation></xs:annotation>
+<xs:complexType name="ct__tags">
+<xs:sequence><xs:element name="item" maxOccurs="12000" type="aa:ct__tags_vocabItem"/></xs:sequence>
+<xs:attribute name="label" type="xs:string" fixed="tags"/>
+<xs:attribute name="title" type="xs:string" fixed="6.1 Tags"/>
+<xs:attribute name="id" type="xs:string" fixed="tag"/>
+<xs:attribute name="useClass" fixed="vocab"/>
+<xs:attribute name="uid" type="xs:string"/>
+</xs:complexType>
+<xs:annotation><xs:appinfo>Attribute annotation</xs:appinfo><xs:documentation xml:lang="en">label;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titlelabel;
+   xs:stringLabeltitle;
+   xs:stringTitledescription;
+   xs:stringDescriptionuid;
+   aa:st__uidIdentifier</xs:documentation></xs:annotation>
+<xs:complexType name="ct__tags_vocabItem">
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="label" type="aa:st__attLabel_def"/>
+<xs:attribute name="title" type="xs:string"/><xs:attribute name="description" type="xs:string" use="required"/>
+<xs:attribute name="uid" type="aa:st__uid" use="required"/>
+
+</xs:complexType><!--Auto-generated vocabulary complexType declarations/>-->
+<xs:annotation><xs:appinfo>W3Schools Note</xs:appinfo><xs:documentation xml:lang="en">varRelations: Complex Type declaration
+       </xs:documentation></xs:annotation>
+<xs:complexType name="ct__varRelations">
+<xs:sequence><xs:element name="item" maxOccurs="12000" type="aa:ct__varRelations_vocabItem"/></xs:sequence>
+<xs:attribute name="label" type="xs:string" fixed="varRelations"/>
+<xs:attribute name="title" type="xs:string" fixed="6.2 Relationships between CMOR variables"/>
+<xs:attribute name="id" type="xs:string" fixed="vrln"/>
+<xs:attribute name="useClass" fixed="vocab"/>
+<xs:attribute name="uid" type="xs:string"/>
+</xs:complexType>
+<xs:annotation><xs:appinfo>Attribute annotation</xs:appinfo><xs:documentation xml:lang="en">label;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titlelabel;
+   xs:stringLabeltitle;
+   xs:stringTitledescription;
+   xs:stringDescriptionuid;
+   aa:st__uidIdentifierrelation;
+   xs:stringRelationship</xs:documentation></xs:annotation>
+<xs:complexType name="ct__varRelations_vocabItem">
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="label" type="aa:st__attLabel_und"/>
+<xs:attribute name="title" type="xs:string"/><xs:attribute name="description" type="xs:string" use="required"/>
+<xs:attribute name="uid" type="aa:st__uid" use="required"/>
+<xs:attribute name="relation" type="xs:string" use="required"/>
+
+</xs:complexType><!--Auto-generated vocabulary complexType declarations/>-->
+<xs:annotation><xs:appinfo>W3Schools Note</xs:appinfo><xs:documentation xml:lang="en">varRelLnk: Complex Type declaration
+       </xs:documentation></xs:annotation>
+<xs:complexType name="ct__varRelLnk">
+<xs:sequence><xs:element name="item" maxOccurs="12000" type="aa:ct__varRelLnk_vocabItem"/></xs:sequence>
+<xs:attribute name="label" type="xs:string" fixed="varRelLnk"/>
+<xs:attribute name="title" type="xs:string" fixed="6.3 CMOR Variable Relation Links"/>
+<xs:attribute name="id" type="xs:string" fixed="vrln"/>
+<xs:attribute name="useClass" fixed="vocab"/>
+<xs:attribute name="uid" type="xs:string"/>
+</xs:complexType>
+<xs:annotation><xs:appinfo>Attribute annotation</xs:appinfo><xs:documentation xml:lang="en">label;
+   xs:stringRecord Labeltitle;
+   xs:stringRecord Titlelabel;
+   xs:stringLabeltitle;
+   xs:stringTitleuid;
+   aa:st__uidIdentifierrlid;
+   xs:stringRelationshiprid;
+   xs:stringRecord</xs:documentation></xs:annotation>
+<xs:complexType name="ct__varRelLnk_vocabItem">
+<xs:attribute name="id" type="xs:string"/>
+<xs:attribute name="label" type="aa:st__attLabel_und"/>
+<xs:attribute name="title" type="xs:string"/><xs:attribute name="uid" type="aa:st__uid" use="required"/>
+<xs:attribute name="rlid" type="xs:string" use="required"/>
+<xs:attribute name="rid" type="xs:string" use="required"/>
+
+</xs:complexType><xs:annotation><xs:appinfo>W3Schools Note</xs:appinfo><xs:documentation xml:lang="en">
+       This schema is automatically generated by xsltproc.
+    </xs:documentation></xs:annotation>
+<xs:element name="document"><xs:complexType><xs:all><xs:element name="prologue"><xs:complexType><xs:sequence><xs:group ref="dc:elementsGroup" maxOccurs="20"/><xs:group ref="pav:elementsGroup" maxOccurs="20"/></xs:sequence></xs:complexType></xs:element><xs:element name="main"><xs:complexType><xs:all>
+<!--[applying elem main] requestVarGroup-->
+<xs:element name="requestVarGroup" type="aa:ct__requestVarGroup"/>
+<!--[applying elem main] requestItem-->
+<xs:element name="requestItem" type="aa:ct__requestItem"/>
+<!--[applying elem main] exptgroup-->
+<xs:element name="exptgroup" type="aa:ct__exptgroup"/>
+<!--[applying elem main] miptable-->
+<xs:element name="miptable" type="aa:ct__miptable"/>
+<!--[applying elem main] CMORvar-->
+<xs:element name="CMORvar" type="aa:ct__CMORvar"/>
+<!--[applying elem main] objective-->
+<xs:element name="objective" type="aa:ct__objective"/>
+<!--[applying elem main] spatialShape-->
+<xs:element name="spatialShape" type="aa:ct__spatialShape"/>
+<!--[applying elem main] requestLink-->
+<xs:element name="requestLink" type="aa:ct__requestLink"/>
+<!--[applying elem main] tableSection-->
+<xs:element name="tableSection" type="aa:ct__tableSection"/>
+<!--[applying elem main] modelConfig-->
+<xs:element name="modelConfig" type="aa:ct__modelConfig"/>
+<!--[applying elem main] varChoiceLinkC-->
+<xs:element name="varChoiceLinkC" type="aa:ct__varChoiceLinkC"/>
+<!--[applying elem main] objectiveLink-->
+<xs:element name="objectiveLink" type="aa:ct__objectiveLink"/>
+<!--[applying elem main] remarks-->
+<xs:element name="remarks" type="aa:ct__remarks"/>
+<!--[applying elem main] experiment-->
+<xs:element name="experiment" type="aa:ct__experiment"/>
+<!--[applying elem main] requestVar-->
+<xs:element name="requestVar" type="aa:ct__requestVar"/>
+<!--[applying elem main] standardname-->
+<xs:element name="standardname" type="aa:ct__standardname"/>
+<!--[applying elem main] varChoiceLinkR-->
+<xs:element name="varChoiceLinkR" type="aa:ct__varChoiceLinkR"/>
+<!--[applying elem main] var-->
+<xs:element name="var" type="aa:ct__var"/>
+<!--[applying elem main] mip-->
+<xs:element name="mip" type="aa:ct__mip"/>
+<!--[applying elem main] varChoice-->
+<xs:element name="varChoice" type="aa:ct__varChoice"/>
+<!--[applying elem main] temporalShape-->
+<xs:element name="temporalShape" type="aa:ct__temporalShape"/>
+<!--[applying elem main] structure-->
+<xs:element name="structure" type="aa:ct__structure"/>
+<!--[applying elem main] grids-->
+<xs:element name="grids" type="aa:ct__grids"/>
+<!--[applying elem main] timeSlice-->
+<xs:element name="timeSlice" type="aa:ct__timeSlice"/>
+<!--[applying elem main] cellMethods-->
+<xs:element name="cellMethods" type="aa:ct__cellMethods"/>
+</xs:all></xs:complexType>
+</xs:element>
+<xs:element name="annex"><xs:complexType><xs:all>
+<!--[applying elem main] tags-->
+<xs:element name="tags" type="aa:ct__tags"/>
+<!--[applying elem main] varRelations-->
+<xs:element name="varRelations" type="aa:ct__varRelations"/>
+<!--[applying elem main] varRelLnk-->
+<xs:element name="varRelLnk" type="aa:ct__varRelLnk"/>
+</xs:all></xs:complexType>
+</xs:element>
+</xs:all></xs:complexType><xs:unique name="uniqueIdentifierConstraint"><xs:annotation><xs:appinfo>W3Schools Note</xs:appinfo><xs:documentation xml:lang="en">
+       The uniqueIdentifierConstraint imposes the condition that the uid attribute on "item" elements should have a unique value.
+        </xs:documentation></xs:annotation>
+<xs:selector xpath=".//aa:item"/><xs:field xpath="@uid"/></xs:unique>
+</xs:element></xs:schema>

@@ -62,11 +62,14 @@ def build_filename(frequency, prefix, table, source_id, expid_in_filename, membe
     return filename
 
 
-def fill_license(value, institution_id, info_url):
+def fill_license(value, institution_id, info_url, license_id, license_url, commercial_license):
     value = value.replace("<Your Centre Name>", institution_id)
+    value = value.replace("<Your Institution; see CMIP6_institution_id.json>", institution_id)
     # TODO: Adapt next line
-    value = value.replace("[NonCommercial-]", "NonCommercial-")
+    value = value.replace("[NonCommercial-]", commercial_license)
+    value = value.replace("<Creative Commons; select and insert a license_id; see below>", license_id)
     value = value.replace("[ and at <some URL maintained by modeling group>]", " and at " + info_url)
+    value = value.replace("<insert the matching license_url; see below>", license_url)
     return value
 
 
@@ -113,6 +116,46 @@ internal_values = dict(
 )
 
 common_values = dict(
+    commercial_license=ParameterSettings(
+        key="commercial_license",
+        default_values=[
+            ValueSettings(key_type="laboratory", keys="commercial_license"),
+            "NonCommercial-"
+        ],
+        choices=["", "NonCommercial-"],
+        help="Either commercial or not commercial license",
+        fatal=True
+    ),
+    license_id=ParameterSettings(
+        key="license_id",
+        default_values=[
+            ValueSettings(key_type="common", keys=[
+                "license_file",
+                "license",
+                ValueSettings(key_type="laboratory", keys="license_id"),
+                "license_id"
+            ]),
+            ValueSettings(key_type="common", keys=["license_file", "license_options", "CC BY-NC-SA 4.0", "license_id"]),
+            ""
+        ],
+        help="License id",
+        fatal=True
+    ),
+    license_url=ParameterSettings(
+        key="license_url",
+        default_values=[
+            ValueSettings(key_type="common", keys=[
+                "license_file",
+                "license",
+                ValueSettings(key_type="laboratory", keys="license_id"),
+                "license_url"
+            ]),
+            ValueSettings(key_type="common", keys=["license_file", "license_options", "CC BY-NC-SA 4.0", "license_url"]),
+            "https://creativecommons.org/licenses"
+        ],
+        help="License url",
+        fatal=True
+    ),
     conventions_version=ParameterSettings(
         key="conventions_version",
         default_values=[
@@ -192,12 +235,12 @@ common_values = dict(
             )
         ]
     ),
-    license=ParameterSettings(
-        key="license",
+    license_file=ParameterSettings(
+        key="license_file",
         default_values=[
             ValueSettings(
                 key_type="json",
-                keys=["license", 0],
+                keys=["license"],
                 src=ValueSettings(
                     key_type="combine",
                     keys=[
@@ -208,7 +251,17 @@ common_values = dict(
                 )
             )
         ],
+        fatal=True,
         help="File where the license associated with the produced output files can be found."
+    ),
+    license=ParameterSettings(
+        key="license",
+        default_values=[
+            ValueSettings(key_type="common", keys=["license_file", 0]),
+            ValueSettings(key_type="common", keys=["license_file", "license"]),
+        ],
+        fatal=True,
+        help="Text of the license which applies"
     ),
     parent_experiment_id=ParameterSettings(
         key="parent_experiment_id",
@@ -381,7 +434,10 @@ project_settings = dict(
                             func=fill_license,
                             options=dict(
                                 institution_id=ValueSettings(key_type="internal", keys="institution_id"),
-                                info_url=ValueSettings(key_type="common", keys="info_url")
+                                info_url=ValueSettings(key_type="common", keys="info_url"),
+                                commercial_license=ValueSettings(key_type="common", keys="commercial_license"),
+                                license_id=ValueSettings(key_type="common", keys="license_id"),
+                                license_url=ValueSettings(key_type="common", keys="license_url")
                             )
                         )
                     )

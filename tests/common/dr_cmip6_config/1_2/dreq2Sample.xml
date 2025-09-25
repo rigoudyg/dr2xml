@@ -1,0 +1,131 @@
+<?xml version="1.0" ?>
+<document
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation="out/dreqSchema.xsd"
+xmlns:dc="http://purl.org/dc/elements/1.1/"
+xmlns:pav="http://purl.org/pav/2.3"
+xmlns="urn:w3id.org:cmip6.dreq.dreq:a">
+<prologue>
+<dc:title>Draft CMIP6 Data Request [01.00.33]</dc:title>
+<dc:description>The CMIP6 Data Request will specify the variables requested for the CMIP6 archive, and the detail the experiments and time slices for which they are required.</dc:description>
+<dc:creator>Martin Juckes</dc:creator>
+<dc:date>2020-11-02</dc:date>
+<dc:source>CF Standard Name table; CMIP6 Controlled Vocabularies; ESDOC CMIP6 Experiment Documentation</dc:source>
+<pav:version>01.00.33</pav:version>
+</prologue>
+<main>
+<requestVarGroup label="requestVarGroup" uid="SECTION:requestVarGroup" useClass="vocab" title="3.1 Request variable group: a collection of request variables" id="rqvg">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.008.001" label="example-01" title="dummy title string" uid="c79e7f18-1d34-11eb-a9cd-1c4d70487308" mip="dummyAt" ref="dummyAt" refNote="dummyAt"/>
+</requestVarGroup>
+<requestItem label="requestItem" uid="SECTION:requestItem" useClass="vocab" title="3.2 Request Item: specifying the number of years for an experiment" id="rqi">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.010.001" label="example-01" title="dummy title string" uid="c79e7f19-1d34-11eb-a9cd-1c4d70487308" mip="dummyAt" tab="dummyAt" expt="dummyAt" rlid="dummyAt" esid="dummyAt" esidComment="dummyAt" preset="25" treset="25" ny="25" nexmax="25" nenmax="25" nymax="5." tslice="dummyAt"/>
+</requestItem>
+<exptgroup label="exptgroup" uid="SECTION:exptgroup" useClass="vocab" title="1.9 Experiment Group" id="exg">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.013.001" label="example-01" title="dummy title string" uid="c79e7f1a-1d34-11eb-a9cd-1c4d70487308" tierMin="25" ntot="25"/>
+</exptgroup>
+<miptable label="miptable" uid="SECTION:miptable" useClass="vocab" title="2.4 MIP tables" id="mtb">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.029.001" label="example-01" title="dummy title string" uid="c79e7f1b-1d34-11eb-a9cd-1c4d70487308" description="dummyAt" frequency="dummyAt" altLabel="dummyAt" comment="dummyAt"/>
+</miptable>
+<CMORvar label="CMORvar" uid="SECTION:CMORvar" useClass="vocab" title="1.3 CMOR Variable" id="cmv">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.002.001" label="example-01" title="dummy title string" uid="c79e7f1c-1d34-11eb-a9cd-1c4d70487308" stid="dummyAt" vid="dummyAt" deflate="dummyAt" deflate_level="dummyAt" shuffle="dummyAt" defaultPriority="25" type="integer" modeling_realm="dummyAt" positive="dummyAt" mipTableSection="dummyAt" mtid="dummyAt" mipTable="dummyAt" prov="dummyAt" processing="dummyAt" provNote="dummyAt" frequency="dummyAt" rowIndex="25" description="dummyAt" subGroup="dummyAt"/>
+</CMORvar>
+<objective label="objective" uid="SECTION:objective" useClass="vocab" title="1.6 Scientific objectives" id="obj">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.014.001" label="example-01" title="dummy title string" uid="c79e7f1d-1d34-11eb-a9cd-1c4d70487308" description="dummyAt" mip="dummyAt"/>
+</objective>
+<spatialShape label="spatialShape" uid="SECTION:spatialShape" useClass="vocab" title="2.1 Spatial dimensions" id="ss">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.004.001" label="example-01" title="dummy title string" uid="c79e7f1e-1d34-11eb-a9cd-1c4d70487308" dimensions="dummyAt" dimids="alpha beta" levels="25" levelFlag="false"/>
+</spatialShape>
+<requestLink label="requestLink" uid="SECTION:requestLink" useClass="vocab" title="3.3 Request link: linking a set of variables and a set of experiments" id="rql">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.009.001" label="example-01" title="dummy title string" uid="c79e7f1f-1d34-11eb-a9cd-1c4d70487308" mip="dummyAt" tab="dummyAt" objective="dummyAt" grid="dummyAt" gridreq="dummyAt" comment="dummyAt" ref="dummyAt" refNote="dummyAt" refid="dummyAt" opt="dummyAt" opar="dummyAt"/>
+</requestLink>
+<tableSection label="tableSection" uid="SECTION:tableSection" useClass="vocab" title="3.4 CMOR Table Sections" id="tbs">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.007.001" label="example-01" title="dummy title string" uid="c79e7f20-1d34-11eb-a9cd-1c4d70487308" gpid="dummyAt" mip="dummyAt" ref="dummyAt" refNote="dummyAt"/>
+</tableSection>
+<modelConfig label="modelConfig" uid="SECTION:modelConfig" useClass="vocab" title="3.5 Model configuration options" id="mcfg">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.020.001" label="example01" title="dummy title string" uid="c79e7f21-1d34-11eb-a9cd-1c4d70487308" MIPs="dummyAt" usage="dummyAt" type="size" range="dummyAt"/>
+</modelConfig>
+<varChoiceLinkC label="varChoiceLinkC" uid="SECTION:varChoiceLinkC" useClass="vocab" title="3.6 Links a variable to a choice element" id="vclc">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.017.001" label="example-01" title="dummy title string" uid="c79e7f22-1d34-11eb-a9cd-1c4d70487308" vid="dummyAt" cfgid="dummyAt" cfg="false" cid="dummyAt"/>
+</varChoiceLinkC>
+<objectiveLink label="objectiveLink" uid="SECTION:objectiveLink" useClass="vocab" title="3.7 Link between scientific objectives and requests" id="objl">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.015.001" label="example-01" title="dummy title string" uid="c79e7f23-1d34-11eb-a9cd-1c4d70487308" oid="dummyAt" rid="dummyAt"/>
+</objectiveLink>
+<remarks label="remarks" uid="SECTION:remarks" useClass="vocab" title="3.8 Remarks about other items" id="rmk">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.011.001" label="example-01" title="dummy title string" uid="c79e7f24-1d34-11eb-a9cd-1c4d70487308" tid="dummyAt" tattr="dummyAt" description="dummyAt" class="dummyAt" qid="dummyAt" techNote="dummyAt" prov="dummyAt"/>
+</remarks>
+<experiment label="experiment" uid="SECTION:experiment" useClass="vocab" title="1.5 Experiments" id="exp">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.012.001" label="example-01" title="dummy title string" uid="c79e7f25-1d34-11eb-a9cd-1c4d70487308" description="dummyAt" egid="dummyAt" mip="dummyAt" mcfg="dummyAt" tier="25 30" nstart="25" starty="dummyAt" endy="dummyAt" yps="25" ensz="25 30" ntot="25" comment="dummyAt"/>
+</experiment>
+<requestVar label="requestVar" uid="SECTION:requestVar" useClass="vocab" title="1.4 Request variable (carrying priority and link to group)" id="rqv">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.006.001" label="example-01" title="dummy title string" uid="c79e7f26-1d34-11eb-a9cd-1c4d70487308" priority="25" vid="dummyAt" vgid="dummyAt" mip="dummyAt"/>
+</requestVar>
+<standardname label="standardname" uid="SECTION:standardname" useClass="vocab" title="1.8 CF Standard Names" id="sn">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.021.001" label="example01" title="dummy title string" uid="c79e7f27-1d34-11eb-a9cd-1c4d70487308" description="dummyAt" units="dummyAt"/>
+</standardname>
+<varChoiceLinkR label="varChoiceLinkR" uid="SECTION:varChoiceLinkR" useClass="vocab" title="3.9 Links a variable to a choice element" id="vclr">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.016.001" label="example-01" title="dummy title string" uid="c79e7f28-1d34-11eb-a9cd-1c4d70487308" vid="dummyAt" cid="dummyAt" rank="25"/>
+</varChoiceLinkR>
+<var label="var" uid="SECTION:var" useClass="vocab" title="1.2 MIP Variable" id="var">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.001.001" label="example-01" title="dummy title string" sn="dummyAt" units="dummyAt" description="dummyAt" procnote="alpha beta" procComment="dummyAt" prov="dummyAt" uid="c79e7f29-1d34-11eb-a9cd-1c4d70487308" provmip="dummyAt" unid="dummyAt"/>
+</var>
+<mip label="mip" uid="SECTION:mip" useClass="vocab" title="1.1 Model Intercomparison Project" id="mip">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.019.001" label="example-01" title="dummy title string" uid="c79e7f2a-1d34-11eb-a9cd-1c4d70487308" description="dummyAt" url="dummyAt"/>
+</mip>
+<varChoice label="varChoice" uid="SECTION:varChoice" useClass="vocab" title="3.10 Indicates variables for which a there is a range of potential CMOR Variables" id="vc">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.018.001" label="example-01" title="dummy title string" uid="c79e7f2b-1d34-11eb-a9cd-1c4d70487308" choiceClass="dummyAt" description="dummyAt" varList="dummyAt" optionList="dummyAt"/>
+</varChoice>
+<temporalShape label="temporalShape" uid="SECTION:temporalShape" useClass="vocab" title="2.2 Temporal dimension" id="ts">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.005.001" label="example-01" title="dummy title string" uid="c79e7f2c-1d34-11eb-a9cd-1c4d70487308" dimid="dummyAt" dimensions="dummyAt" description="dummyAt"/>
+</temporalShape>
+<structure label="structure" uid="SECTION:structure" useClass="vocab" title="2.3 Dimensions and related information" id="str">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.003.001" label="example-01" title="dummy title string" uid="c79e7f2d-1d34-11eb-a9cd-1c4d70487308" spid="dummyAt" tmid="dummyAt" odims="dummyAt" dids="alpha beta" coords="dummyAt" cids="alpha beta" cell_methods="dummyAt" cell_measures="dummyAt" flag_values="dummyAt" flag_meanings="dummyAt" description="dummyAt" procNote="dummyAt" prov="dummyAt" cmid="dummyAt"/>
+</structure>
+<grids label="grids" uid="SECTION:grids" useClass="vocab" title="1.7 Specification of dimensions" id="grd">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.022.001" label="example-01" title="dummy title string" tables="dummyAt" uid="c79e7f2e-1d34-11eb-a9cd-1c4d70487308" altLabel="dummyAt" description="dummyAt" standardName="dummyAt" axis="dummyAt" units="dummyAt" isIndex="dummyAt" coords="dummyAt" bounds="dummyAt" direction="dummyAt" valid_min="5." valid_max="5." type="integer" positive="dummyAt" value="dummyAt" boundsValues="dummyAt" requested="dummyAt" boundsRequested="5. 10." tolRequested="dummyAt" isGrid="dummyAt"/>
+</grids>
+<timeSlice label="timeSlice" uid="SECTION:timeSlice" useClass="vocab" title="3.11 Time Slices for Output Requests" id="tsl">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.025.001" label="example-01" title="dummy title string" type="yearList" start="25" end="25" step="5." sliceLen="25" nyears="5." uid="c79e7f2f-1d34-11eb-a9cd-1c4d70487308" startList="25 30" sliceLenUnit="dummyAt" description="dummyAt" child="dummyAt"/>
+</timeSlice>
+<cellMethods label="cellMethods" uid="SECTION:cellMethods" useClass="vocab" title="7.1 Cell Methods" id="cmth">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.029.001" label="example-01" title="dummy title string" uid="c79e7f30-1d34-11eb-a9cd-1c4d70487308" cell_methods="dummyAt" description="dummyAt"/>
+</cellMethods>
+</main><annex>
+<tags label="tags" uid="SECTION:tags" useClass="vocab" title="6.1 Tags" id="tag">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.026.001" label="example-01" title="dummy title string" description="dummyAt" uid="c79e7f31-1d34-11eb-a9cd-1c4d70487308"/>
+</tags>
+<varRelations label="varRelations" uid="SECTION:varRelations" useClass="vocab" title="6.2 Relationships between CMOR variables" id="vrln">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.027.001" label="example_03" title="dummy title string" description="dummyAt" uid="c79e7f32-1d34-11eb-a9cd-1c4d70487308" relation="dummyAt"/>
+</varRelations>
+<varRelLnk label="varRelLnk" uid="SECTION:varRelLnk" useClass="vocab" title="6.3 CMOR Variable Relation Links" id="vrln">
+<!-- <info srcType="dummy" srcRef="ptxt.py">Dummy entries</info> -->
+<item id="001.028.001" label="example_03" title="dummy title string" uid="c79e7f33-1d34-11eb-a9cd-1c4d70487308" rlid="dummyAt" rid="dummyAt"/>
+</varRelLnk>
+</annex>
+</document>

@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+<defDoc 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="urn:w3id.org:cmip6.dreq.framework:a"
+xsi:schemaLocation="http://w3id.org/cmip6dr/ns vocabFrameworkSchema_v01beta.xsd">
+<table label="qcranges" uid="SECTION:qcranges" title="Quality Control Ranges" id="" itemLabelMode="def" level="9" maxOccurs="1" labUnique="Yes" description="Data ranges for use in quality control">
+  <rowAttribute label="label" type="xs:string" title="Record Label" description="Mnemonic label for record" uid="ATTRIBUTE::qcranges.label" required="True"/>
+  <rowAttribute label="title" type="xs:string" title="Record Title" description="Title of record" uid="ATTRIBUTE::qcranges.title" required="True"/>
+  <rowAttribute label="uid" type="aa:st__uid" title="Record identifier" useClass="recordId" techNote="" description="" uid="ATTRIBUTE::qcranges.uid" superclass="" required="true"/>
+  <rowAttribute label="label" type="xs:string" title="Record Label" useClass="" techNote="" description="" uid="ATTRIBUTE::qcranges.label" superclass="" required="true"/>
+  <rowAttribute label="title" type="xs:string" title="Record Title" useClass="" techNote="" description="" uid="ATTRIBUTE::qcranges.title" superclass="" required="true"/>
+  <rowAttribute label="url" type="xs:string" title="Link to review page" useClass="" techNote="" description="Link to a web page providing background information." uid="ATTRIBUTE::qcranges.url" superclass="" required="false"/>
+  <rowAttribute label="comment" type="xs:string" title="Comment" useClass="" techNote="" description="" uid="ATTRIBUTE::qcranges.comment" superclass="" required="false"/>
+  <rowAttribute label="prov" type="xs:string" title="Provenance" useClass="" techNote="" description="" uid="ATTRIBUTE::qcranges.prov" superclass="" required="true"/>
+  <rowAttribute label="vid" type="xs:string" title="Variable" useClass="internalLink" techNote="" description="Link to variable record" uid="ATTRIBUTE::qcranges.vid" superclass="" required="true"/>
+  <rowAttribute label="valid_min" type="xs:float" title="Minimum expected value for this variable." useClass="" techNote="" description="The minimum expected value will be used, if set, in quality control tests, and files containing data values below this value will be marked as containing errors." uid="ATTRIBUTE::qcranges.valid_min" superclass="" required="false"/>
+  <rowAttribute label="valid_max" type="xs:float" title="Maximum expected value for this variable." useClass="" techNote="" description="The maximum expected value will be used, if set, in quality control tests, and files containing data values above this value will be marked as containing errors." uid="ATTRIBUTE::qcranges.valid_max" superclass="" required="false"/>
+  <rowAttribute label="ok_min_mean_abs" type="xs:float" title="Minimum expected value of the global mean absolute value at each point in time" useClass="" techNote="" description="This value, if set, will be used  in quality control tests, and files containing data values above this value will be marked as containing errors." uid="ATTRIBUTE::qcranges.ok_min_mean_abs" superclass="" required="false"/>
+  <rowAttribute label="ok_max_mean_abs" type="xs:float" title="Maximum expected value of the global mean absolute value at each point in time" useClass="" techNote="" description="This value, if set, will be used  in quality control tests, and files containing data values above this value will be marked as containing errors." uid="ATTRIBUTE::qcranges.ok_max_mean_abs" superclass="" required="false"/>
+  <rowAttribute label="valid_min_status" type="xs:string" title="Status of valid_min" useClass="" techNote="" description="Indicates the degree of confidence in the valid_min value provided. Valid values are robust, suggested or tentative. Robust values are based on previous results from a broad range of models with consistent output or on clear physical constraints." uid="ATTRIBUTE::qcranges.valid_min_status" superclass="" required="true"/>
+  <rowAttribute label="valid_max_status" type="xs:string" title="Status of valid_max" useClass="" techNote="" description="Indicates the degree of confidence in the valid_max value provided. Valid values are robust, suggested or tentative. Robust values are based on previous results from a broad range of models with consistent output or on clear physical constraints." uid="ATTRIBUTE::qcranges.valid_max_status" superclass="" required="true"/>
+  <rowAttribute label="ok_min_mean_abs_status" type="xs:string" title="Status of ok_min_mean_abs" useClass="" techNote="" description="Indicates the degree of confidence in the value ok_min_mean_abs provided. Valid values are robust, suggested or tentative. Robust values are based on previous results from a broad range of models with consistent output or on clear physical constraints." uid="ATTRIBUTE::qcranges.ok_min_mean_abs_status" superclass="" required="true"/>
+  <rowAttribute label="ok_max_mean_abs_status" type="xs:string" title="Status of ok_mx_mean_abs" useClass="" techNote="" description="Indicates the degree of confidence in the value ok_max_mean_abs provided. Valid values are robust, suggested or tentative. Robust values are based on previous results from a broad range of models with consistent output or on clear physical constraints." uid="ATTRIBUTE::qcranges.ok_max_mean_abs_status" superclass="" required="true"/>
+</table>
+<table label="places" uid="SECTION:places" title="Places, States or Reservoirs" id="" itemLabelMode="def" level="10" maxOccurs="1" labUnique="Yes" description="An abstract entity defining an extensive quantity of something, e.g. liquid water, suspended carbon.">
+  <rowAttribute label="label" type="xs:string" title="Record Label" description="Mnemonic label for record" uid="ATTRIBUTE::places.label" required="True"/>
+  <rowAttribute label="title" type="xs:string" title="Record Title" description="Title of record" uid="ATTRIBUTE::places.title" required="True"/>
+  <rowAttribute label="uid" type="aa:st__uid" title="Identifier" useClass="" techNote="" description="" uid="ATTRIBUTE::places.uid" superclass="" required="true"/>
+  <rowAttribute label="label" type="xs:string" title="Label" useClass="" techNote="" description="" uid="ATTRIBUTE::places.label" superclass="" required="true"/>
+  <rowAttribute label="title" type="xs:string" title="Title" useClass="" techNote="" description="" uid="ATTRIBUTE::places.title" superclass="" required="true"/>
+  <rowAttribute label="matter" type="xs:string" title="Substance " useClass="internalLink" techNote="" description="" uid="ATTRIBUTE::places.matter" superclass="" required="true"/>
+  <rowAttribute label="mip" type="xs:string" title="Model Intercomparison Project (MIP)" useClass="internalLink" techNote="" description="" uid="ATTRIBUTE::places.mip" superclass="" required="true"/>
+  <rowAttribute label="vid" type="xs:string" title="Variable Identifier" useClass="internalLink" techNote="" description="" uid="ATTRIBUTE::places.vid" superclass="" required="false"/>
+  <rowAttribute label="pid" type="xs:string" title="Parent Entity" useClass="internalLink" techNote="" description="A place, state or reservoir containing this one." uid="ATTRIBUTE::places.pid" superclass="" required="false"/>
+</table>
+<table label="transfers" uid="SECTION:transfers" title="Transfers of Material" id="" itemLabelMode="def" level="11" maxOccurs="1" labUnique="Yes" description="Quantities expressing the transfer of material from one 'place' to another.">
+  <rowAttribute label="label" type="xs:string" title="Record Label" description="Mnemonic label for record" uid="ATTRIBUTE::transfers.label" required="True"/>
+  <rowAttribute label="title" type="xs:string" title="Record Title" description="Title of record" uid="ATTRIBUTE::transfers.title" required="True"/>
+  <rowAttribute label="uid" type="aa:st__uid" title="Identifier" useClass="" techNote="" description="" uid="ATTRIBUTE::transfers.uid" superclass="" required="true"/>
+  <rowAttribute label="label" type="xs:string" title="Label" useClass="" techNote="" description="" uid="ATTRIBUTE::transfers.label" superclass="" required="true"/>
+  <rowAttribute label="title" type="xs:string" title="Title" useClass="" techNote="" description="" uid="ATTRIBUTE::transfers.title" superclass="" required="true"/>
+  <rowAttribute label="frid" type="xs:string" title="Source Identifier" useClass="internalLink" techNote="" description="Identifier of the 'place' that the flux is from." uid="ATTRIBUTE::transfers.frid" superclass="" required="true"/>
+  <rowAttribute label="toid" type="xs:string" title="Target Identifier" useClass="internalLink" techNote="" description="Identifier of the 'place' that the flux is to." uid="ATTRIBUTE::transfers.toid" superclass="" required="true"/>
+  <rowAttribute label="isOneWay" type="xs:boolean" title="Unidirectional Flag" useClass="" techNote="" description="Set true if the flux is associated with a physical process which only transfers mass in one direction. E.g. " uid="ATTRIBUTE::transfers.isOneWay" superclass="" required="true"/>
+  <rowAttribute label="signInverted" type="xs:boolean" title="Sign Inversion" useClass="" techNote="" description="Sign Inverted should be set True for one way fluxes if the variable is defined to be negative definite. The competing constraints of CF Standard Name protocols and domain usage can cuase problems with the sign convention." uid="ATTRIBUTE::transfers.signInverted" superclass="" required="true"/>
+  <rowAttribute label="mip" type="xs:string" title="Model Intercomparison Project (MIP)" useClass="internalLink" techNote="" description="" uid="ATTRIBUTE::transfers.mip" superclass="" required="true"/>
+  <rowAttribute label="vid" type="xs:string" title="Variable Identifier" useClass="internalLink" techNote="" description="Identifier of the 'CMORvar' associated with the flux." uid="ATTRIBUTE::transfers.vid" superclass="" required="true"/>
+</table>
+<table label="units" uid="SECTION:units" title="Units" id="" itemLabelMode="def" level="12" maxOccurs="1" labUnique="Yes" description="The units of the parameters defined in the {var} section. The 'text' attribute carries a plain text representation of the units of measure (e.g. m s-1) or, for dimensionaless variables, a scaling factor (e.g. 1.e-9) to be used for  the variable. ">
+  <rowAttribute label="label" type="xs:string" title="Record Label" description="Mnemonic label for record" uid="ATTRIBUTE::units.label" required="True"/>
+  <rowAttribute label="title" type="xs:string" title="Record Title" description="Title of record" uid="ATTRIBUTE::units.title" required="True"/>
+  <rowAttribute label="uid" type="aa:st__uid" title="Identifier" useClass="" techNote="" description="" uid="ATTRIBUTE::units.uid" superclass="" required="true"/>
+  <rowAttribute label="label" type="xs:string" title="Label" useClass="" techNote="" description="" uid="ATTRIBUTE::units.label" superclass="" required="true"/>
+  <rowAttribute label="title" type="xs:string" title="Title" useClass="" techNote="" description="" uid="ATTRIBUTE::units.title" superclass="" required="true"/>
+  <rowAttribute label="group" type="xs:string" title="Group" useClass="" techNote="" description="A group, designated by a string value, expresses a relationship between units." uid="ATTRIBUTE::units.group" superclass="" required="false"/>
+  <rowAttribute label="text" type="xs:string" title="Text representation of units" useClass="" techNote="" description="Plain text representation with no special characters" uid="ATTRIBUTE::units.text" superclass="" required="true"/>
+</table>
+</defDoc>

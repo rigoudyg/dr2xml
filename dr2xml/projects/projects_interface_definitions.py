@@ -480,6 +480,7 @@ class ParameterSettings(Settings):
 
     def find_value(self, is_value=False, value=None, internal_dict=dict(), common_dict=dict(), additional_dict=dict(),
                    allow_additional_keytypes=True, raise_on_error=True):
+        logger = get_logger()
         test = False
         if is_value:
             test, value = self.correct_value(value, internal_values=internal_dict, common_values=common_dict,
@@ -522,8 +523,12 @@ class ParameterSettings(Settings):
                 i += 1
         if test:
             value = self.correct_target_type(value)
+            logger.debug("For parameter %s, found value %s" % (self.key, value))
         elif not test and self.fatal and raise_on_error:
+            logger.debug("Could not find a proper value for %s" % self.key)
             raise ValueError("Could not find a proper value for %s" % self.key)
+        # else:
+            logger.debug("Could not find a proper value for %s" % self.key)
         return test, value
 
     def correct_target_type(self, value):
