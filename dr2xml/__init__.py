@@ -61,7 +61,7 @@ from .settings_interface import initialize_settings
 from .utils import print_struct
 
 # Logger
-from logger import initialize_logger, get_logger, change_log_level
+from utilities.logger import initialize_logger, get_logger, change_log_level
 
 # Global variables and configuration tools
 from .config import get_config_variable, set_config_variable, initialize_config_variables
@@ -575,7 +575,7 @@ def configuration_init(func):
     :return: The initial function with initialized environment to use dr2xml.
     """
     def make_configuration(lset, sset, cvs_path=None, printout=False, prefix="", debug=False, force_reset=False,
-                           **kwargs):
+                           select="on_expt_and_year", **kwargs):
         year = kwargs.get("year", 0)
         context = kwargs.get("context")
         dirname = kwargs.get("dirname")
@@ -588,14 +588,13 @@ def configuration_init(func):
         initialize_logger(default=True, level=default_level)
         initialize_config_variables()
         initialize_settings(lset=lset, sset=sset, cvspath=cvs_path, context=context, prefix=prefix,
-                            year=year, dirname=dirname, force_reset=force_reset)
+                            year=year, dirname=dirname, force_reset=force_reset, select=select)
         return func(**kwargs)
     return make_configuration
 
 
 @configuration_init
-def generate_file_defs(year, enddate, context, pingfiles=None, dummies='include', dirname="./", attributes=list(),
-                       select="on_expt_and_year"):
+def generate_file_defs(year, enddate, context, pingfiles=None, dummies='include', dirname="./", attributes=list()):
     """
     Using the DR module, a dict of lab settings ``lset``, and a dict
     of simulation settings ``sset``, generate an XIOS file_defs 'file' for a
@@ -664,7 +663,7 @@ on
     # TBS# from os import path as os_path
     # TBS# prog_path=os_path.abspath(os_path.split(__file__)[0])
 
-    print("* %29s" % "CMIP6 Data Request version: ", get_dr_object("get_data_request").get_version())
+    print("* %29s" % "{} Data Request version: ".format(internal_settings["data_request_used"]), get_dr_object("get_data_request").get_version())
     print("\n*\n {}".format(50 * "*"))
 
     logger = get_logger()
@@ -699,7 +698,7 @@ on
     # --------------------------------------------------------------------
     skipped_vars_per_table = OrderedDict()
     actually_written_vars = list()
-    svars_per_table = select_variables_to_be_processed(year, context, select)
+    svars_per_table = select_variables_to_be_processed()
     #
     # --------------------------------------------------------------------
     # Read ping_file defined variables
@@ -753,14 +752,15 @@ on
 
 
 @configuration_init
-def create_ping_files(context, path_special, dummy="field_atm", dummy_with_shape=False, exact=False, comments=False,
-                      filename=None, debug=list(), by_realm=False):
+def create_ping_files(context, dummy="field_atm", dummy_with_shape=False, exact=False, comments=False,
+                      filename=None, debug=list(), by_realm=False, **kwargs):
     from .settings_interface import get_settings_values
     from .vars_interface.selection import select_variables_to_be_processed
     from .pingfiles_interface import ping_file_for_realms_list
 
     considered_realms = get_settings_values("internal", "realms_per_context")
-    svars = select_variables_to_be_processed(None, context, "no")
+    path_special = get_settings_values("internal", "path_special_defs")
+    svars = select_variables_to_be_processed()
     if by_realm:
         for realm in considered_realms:
             ping_file_for_realms_list(context=context, svars=svars, lrealms=[realm, ], path_special=path_special,

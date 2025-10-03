@@ -7,35 +7,13 @@ Definitions of objects for DR interface
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
-from collections import namedtuple, OrderedDict
+from collections import OrderedDict
 
 import six
 
+from dr2xml.settings_interface import get_settings_values
 from dr2xml.settings_interface.py_settings_interface import is_sset_not_None
 from dr2xml.utils import convert_string_to_year, Dr2xmlError
-
-
-class Scope(object):
-    def __init__(self, scope=None):
-        self.scope = scope
-        self.mcfg = self.build_mcfg([None, None, None, None, None, None, None])
-
-    def build_mcfg(self, value):
-        mcfg = namedtuple('mcfg', ['nho', 'nlo', 'nha', 'nla', 'nlas', 'nls', 'nh1'])
-        return mcfg._make(value)._asdict()
-
-    def update_mcfg(self, value):
-        self.mcfg = self.build_mcfg(value)
-
-    def get_request_link_by_mip(self, mips_list):
-        return list()
-
-    def get_filtered_request_links_by_mip_included_excluded(self, mips_list, included_request_links=None,
-                                                            excluded_request_links=None):
-        return list()
-
-    def get_vars_by_request_link(self, request_link, pmax):
-        return list()
 
 
 class DataRequest(object):
@@ -44,12 +22,23 @@ class DataRequest(object):
         self.data_request = data_request
         self.print_DR_errors = print_DR_errors
         self.print_DR_stdname_errors = print_DR_stdname_errors
+        self.mcfg = None
+        self.set_mcfg()
+
+    def set_mcfg(self):
+        self.mcfg = get_settings_values('internal', 'select_sizes')
+
+    def update_mcfg(self):
+        raise NotImplementedError()
 
     def get_version(self):
         """
         Get the version of the DR
         """
         raise NotImplementedError()
+
+    def get_variables_per_label(self, debug=list()):
+        return OrderedDict()
 
     def get_list_by_id(self, collection, **kwargs):
         """
@@ -71,12 +60,6 @@ class DataRequest(object):
         Get the experiment start and end years
         """
         return None, "??", "??"
-
-    def filter_request_link_by_experiment_and_year(self, request_links, experiment_id, year, **kwargs):
-        return list()
-
-    def check_requestitem_for_exp_and_year(self, ri, experiment, year, **kwargs):
-        return False, None
 
     def get_cmor_var_id_by_label(self, label):
         """
@@ -111,18 +94,6 @@ class DataRequest(object):
     def get_single_levels_list(self):
         """
         Get single levels defined in Data Request
-        """
-        raise NotImplementedError()
-
-    def convert_DR_variable_to_dr2xml_variable(self, input_variable):
-        """
-        Convert a variable from the DR used to the dr2xml template variable.
-        """
-        raise NotImplementedError()
-
-    def convert_DR_dimension_to_dr2xml_dimension(self, input_dimension):
-        """
-        Convert a dimension from the DR used to the dr2xml template dimension.
         """
         raise NotImplementedError()
 
@@ -163,7 +134,7 @@ class DataRequest(object):
             return convert_string_to_year(exp_endyear)
 
     def get_cmorvars_list(self, **kwargs):
-        return dict(), list()
+        return dict()
 
 
 class ListWithItems(list):
@@ -221,7 +192,7 @@ class SimpleCMORVar(SimpleObject):
     """
     A class for unifying CMOR vars and home variables
     """
-    def __init__(self, type=False, modeling_realm=None, grids=[""], label=None, mipVarLabel=None,
+    def __init__(self, type=False, modeling_realm=list(), grids=[""], label=None, mipVarLabel=None,
                  label_without_psuffix=None, label_non_ambiguous=None, frequency=None, mipTable=None, positive=None,
                  description=None, stdname=None, units=None, long_name=None, other_dims_size=1,
                  cell_methods=None, cell_measures=None, spatial_shp=None, temporal_shp=None, experiment=None,
@@ -230,6 +201,9 @@ class SimpleCMORVar(SimpleObject):
                  **kwargs):
         self.type = type
         self.modeling_realm = modeling_realm
+        self.set_modeling_realms = set()
+        for realm in self.modeling_realm:
+            self.set_modeling_realms = self.set_modeling_realms | set(realm.split(" "))
         self.grids = grids
         self.label = label  # taken equal to the CMORvar label
         self.mipVarLabel = mipVarLabel  # taken equal to MIPvar label
@@ -264,11 +238,38 @@ class SimpleCMORVar(SimpleObject):
         self.flag_meanings = flag_meanings
         self.flag_values = flag_values
         super(SimpleCMORVar, self).__init__(**kwargs)
+    
+    def set_attributes(self, **kwargs):
+        if "modeling_realm" in kwargs:
+            modeling_realms = kwargs["modeling_realm"]
+            if modeling_realms in ["", None]:
+                modeling_realms = list()
+            elif not isinstance(modeling_realms, list):
+                modeling_realms = [modeling_realms, ]
+            kwargs["modeling_realm"] = modeling_realms
+            set_modeling_realms = set()
+            for realm in modeling_realms:
+                set_modeling_realms = set_modeling_realms | set(realm.split(" "))
+            kwargs["set_modeling_realms"] = set_modeling_realms
+        super().set_attributes(**kwargs)
 
     def __eq__(self, other):
         return self.label == other.label and self.modeling_realm == other.modeling_realm and \
                self.frequency == other.frequency and self.mipTable == other.mipTable and \
                self.temporal_shp == other.temporal_shp and self.spatial_shp == other.spatial_shp
+
+    def __lt__(self, other):
+        return self.label < other.label
+
+    def __gt__(self, other):
+        return self.label > other.label
+
+    def __str__(self):
+        return (f"SimpleCMORVar {self.label} of priority {self.Priority} "
+                f"(with standard name {self.stdname} and units {self.units})")
+
+    def __repr__(self):
+        return str(self)
 
     def correct_data_request(self):
         pass
@@ -282,7 +283,7 @@ class SimpleCMORVar(SimpleObject):
         input_var_dict = dict(type="extra", mip_era=mip_era, label=input_var["out_name"],
                               mipVarLabel=input_var["out_name"], stdname=input_var.get("standard_name", ""),
                               long_name=input_var["long_name"], units=input_var["units"],
-                              modeling_realm=input_var["modeling_realm"], frequency=freq, mipTable=table,
+                              modeling_realm=[input_var["modeling_realm"], ], frequency=freq, mipTable=table,
                               cell_methods=input_var["cell_methods"], cell_measures=input_var["cell_measures"],
                               positive=input_var["positive"], Priority=float(input_var[mip_era.lower() + "_priority"]),
                               label_without_psuffix=input_var["out_name"],

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<xs:schema
+xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<!-- Declarations -->
+
+<xs:simpleType name="st__itemLabelMode_enum">
+<xs:restriction base="xs:string">
+<xs:enumeration value="an"/>
+<xs:enumeration value="int"/>
+<xs:enumeration value="def"/>
+</xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="st__labUnique_enum">
+<xs:restriction base="xs:string">
+<xs:enumeration value="Yes"/>
+<xs:enumeration value="No"/>
+</xs:restriction>
+</xs:simpleType>
+
+<xs:complexType name="ct__itemAttribute">
+  <xs:attribute name="label" type="xs:string" use="required"/>
+  <xs:attribute name="title" type="xs:string"/>
+  <xs:attribute name="type" type="xs:string"/>
+  <xs:attribute name="class" type="xs:string"/>
+  <xs:attribute name="techNote" type="xs:string"/>
+</xs:complexType>
+
+<xs:complexType name="ct__vocab">
+  <xs:sequence>
+     <xs:element name="rowAttribute" type="ct__itemAttribute" maxOccurs="50"/>
+  </xs:sequence>
+  <xs:attribute name="label" type="xs:string" use="required"/>
+  <xs:attribute name="title" type="xs:string"/>
+  <xs:attribute name="level" type="xs:integer"/>
+  <xs:attribute name="id" type="xs:string"/>
+  <xs:attribute name="maxOccurs" type="xs:integer"/>
+  <xs:attribute name="labUnique" type="st__labUnique_enum"/>
+  <xs:attribute name="itemLabelMode" type="st__itemLabelMode_enum"/>
+</xs:complexType>
+
+<!-- Body -->
+<xs:element name="defDoc">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="table" type="ct__vocab" minOccurs="1" maxOccurs="200"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+</xs:schema>

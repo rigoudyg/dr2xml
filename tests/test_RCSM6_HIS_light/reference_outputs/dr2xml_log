@@ -3,7 +3,7 @@
 *
 *              dr2xml version:  current_version
 *   CMIP6 conventions version:  v6.2.4
-*  CMIP6 Data Request version:  01.00.21.post1
+*  CMIP6 Data Request version:  current_cmip6_dr
 
 *
  **************************************************
@@ -456,7 +456,7 @@ Some Statistics on actually written variables per variable...
 *
 *              dr2xml version:  current_version
 *   CMIP6 conventions version:  v6.2.4
-*  CMIP6 Data Request version:  01.00.21.post1
+*  CMIP6 Data Request version:  current_cmip6_dr
 
 *
  **************************************************
@@ -902,107 +902,6 @@ file_def written as current_directory/test_RCSM6_HIS_light/test_outputs/dr2xml_s
 
 
 Some Statistics on actually written variables per frequency+shape...
-                          AERday P1   2: od550aer toz
-                           CFday P1   1: ps
-                            Eday P1  10: evspsblpot mrros prhmax prw rsdsdiff snm ts tsland tsns zmla
-                            Eday P3   1: snd
-                       HOMAERday P1  65: abs1000aer abs1000bc abs1000dust abs1000nh4 abs1000no3 abs1000oa abs1000so4 abs1000ss abs350aer abs350bc abs350dust abs350nh4 abs350no3 abs350oa abs350so4 abs350ss abs550bc abs550dust abs550nh4 abs550no3 abs550oa abs550so4 abs550ss asy1000aer asy350aer asy550aer dryno3 od1000aer od1000bc od1000dust od1000nh4 od1000no3 od1000oa od1000so4 od1000ss od350aer od350bc od350dust od350nh4 od350no3 od350oa od350so4 od350ss od550dustbin1 od550dustbin2 od550nh4 od550no3bin1 od550ssbin1 od550ssbin2 sconcbc sconcdustbin1 sconcdustbin2 sconcnh4 sconcno3 sconcno3bin1 sconcoa sconcssbin1 sconcssbin2 seddust sedno3 sedss ssa1000aer ssa350aer ssa550aer wetno3
-                        HOMALday P1  22: cdnctop clh cll clm icod lcod mrfsol reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsdsdir rsusaf rsuscsaf snct tssea wsgmax wsgsmax
-                         HOMZday P1   6: hus50m ta50m ua100m ua50m va100m va50m
-                         Noneday P1  41: abs550aer clivi cltc clwvi drybc drydust drynh4 dryoa dryso4 dryss emidust emiss evspsbl lwp mrfso od550bc od550dust od550no3 od550oa od550so4 od550ss rldscs rlutaf rlutcsaf rsdscs rsdt rsuscs rsut rsutaf rsutcs rsutcsaf sconcdust sconcso4 sconcss tauv wetbc wetdust wetnh4 wetoa wetso4 wetss
-                         Noneday P2   1: rlutcs
-                         Noneday P3   1: tauu
-                           SIday P1   1: siconca
-                             day P1  26: clt hfls hfss hurs huss mrro mrso mrsos pr prc prsn psl rlds rlus rlut rsds rsus sfcWind sfcWindmax snc snw tas tasmax tasmin uas vas
-       day    XY-na    -------- --- 177
-
-                            Eday P1   1: mrsol
-                            Eday P2   1: tsl
-       day     XY-S    -------- ---   2
-
-                    HOMP19AERday P1  35: cdnc cheaqpso4 chegpso4 concbc concdust concdustbin1 concdustbin2 conchno3 concnh3 concnh4 concno3 concno3bin1 concoa concso2 concso4 concss concssbin1 concssbin2 ext550aer ext550bc ext550dust ext550nh4 ext550no3 ext550oa ext550so4 ext550ss reffclw scat550aer scat550bc scat550dust scat550nh4 scat550no3 scat550oa scat550so4 scat550ss
-       day XY-P19AER    -------- ---  35
-
-                       HOMP1Aday P1   8: hur1000 hus1000 ta1000 ua1000 va1000 wa1000 wap1000 zg1000
-       day XY-P1000HM    -------- ---   8
-
-                       HOMP1Aday P1   8: hur200 hus200 ta200 ua200 va200 wa200 wap200 zg200
-       day XY-P200HM    -------- ---   8
-
-                       HOMP1Aday P1   8: hur250 hus250 ta250 ua250 va250 wa250 wap250 zg250
-       day XY-P250HM    -------- ---   8
-
-                       HOMP1Aday P1   8: hur300 hus300 ta300 ua300 va300 wa300 wap300 zg300
-       day XY-P300HM    -------- ---   8
-
-                       HOMP1Aday P1   8: hur400 hus400 ta400 ua400 va400 wa400 wap400 zg400
-       day XY-P400HM    -------- ---   8
-
-                       HOMP1Aday P1   8: hur500 hus500 ta500 ua500 va500 wa500 wap500 zg500
-       day XY-P500HM    -------- ---   8
-
-                       HOMP1Aday P1   8: hur600 hus600 ta600 ua600 va600 wa600 wap600 zg600
-       day XY-P600HM    -------- ---   8
-
-                       HOMP1Aday P1   8: hur700 hus700 ta700 ua700 va700 wa700 wap700 zg700
-       day XY-P700HM    -------- ---   8
-
-                       HOMP1Aday P1   8: hur850 hus850 ta850 ua850 va850 wa850 wap850 zg850
-       day XY-P850HM    -------- ---   8
-
-                       HOMP1Aday P1   8: hur925 hus925 ta925 ua925 va925 wa925 wap925 zg925
-       day XY-P925HM    -------- ---   8
-
-                       HOMP1Aday P1   6: hus100 ta100 ua100 va100 wa100 zg100
-       day XY-P100HM    -------- ---   6
-
-                       HOMP1Aday P1   6: hus10 ta10 ua10 va10 wa10 zg10
-       day   XY-P10    -------- ---   6
-
-                       HOMP1Aday P1   6: hus150 ta150 ua150 va150 wa150 zg150
-       day XY-P150HM    -------- ---   6
-
-                       HOMP1Aday P1   6: hus20 ta20 ua20 va20 wa20 zg20
-       day XY-P20HM    -------- ---   6
-
-                       HOMP1Aday P1   6: hus30 ta30 ua30 va30 wa30 zg30
-       day XY-P30HM    -------- ---   6
-
-                       HOMP1Aday P1   6: hus50 ta50 ua50 va50 wa50 zg50
-       day XY-P50HM    -------- ---   6
-
-                       HOMP1Aday P1   6: hus70 ta70 ua70 va70 wa70 zg70
-       day XY-P70HM    -------- ---   6
-
-                       HOMP1Aday P1   6: hus750 ta750 ua750 va750 wa750 zg750
-       day XY-P750HM    -------- ---   6
-
-                         HOMZday P1   8: ua150m ua200m ua250m ua300m va150m va200m va250m va300m
-       day    XY-HG    -------- ---   8
-
-       day --------    -------- --- 350
-
-                              fx P1   6: areacella mrsofc orog rootd sftgif sftlf
-        fx    XY-na    -------- ---   6
-
-        fx --------    -------- ---   6
-
-                            E1hr P3   1: psl
-                     HOMAER1hrPt P1  28: abs550aer asy550aer od550aer od550bc od550dust od550dustbin1 od550dustbin2 od550nh4 od550no3 od550no3bin1 od550oa od550so4 od550ss od550ssbin1 od550ssbin2 sconcbc sconcdust sconcdustbin1 sconcdustbin2 sconcnh4 sconcno3 sconcno3bin1 sconcoa sconcso4 sconcss sconcssbin1 sconcssbin2 ssa550aer
-                      HOMAL1hrPt P1   1: zmla
-                       HOMZ1hrPt P1   6: hus50m ta50m ua100m ua50m va100m va50m
-                       None1hrPt P1  10: clivi clwvi hurs huss prw ps sfcWind ts uas vas
-                       None1hrPt P3   1: tas
-     1hrPt    XY-na    -------- ---  47
-
-                      HOMAL1hrPt P1   1: mrsos
-     1hrPt     XY-S    -------- ---   1
-
-                       HOMZ1hrPt P1   8: ua150m ua200m ua250m ua300m va150m va200m va250m va300m
-     1hrPt    XY-HG    -------- ---   8
-
-     1hrPt --------    -------- ---  56
-
                             E1hr P1   1: pr
                        HOMAER1hr P1  17: drydustbin1 drydustbin2 dryno3 dryno3bin1 dryssbin1 dryssbin2 seddust seddustbin2 sedno3 sedss sedssbin2 wetdustbin1 wetdustbin2 wetno3 wetno3bin1 wetssbin1 wetssbin2
                         HOMAL1hr P1   1: rsdsdir
@@ -1013,90 +912,27 @@ Some Statistics on actually written variables per frequency+shape...
 
        1hr --------    -------- ---  48
 
-                          AERmon P1  37: abs550aer cltc drybc drydust drynh3 drynh4 dryoa dryso2 dryso4 dryss emibc emidust eminh3 emioa emiso2 emiso4 emiss lwp od550aer od550bc od550dust od550lt1aer od550no3 od550oa od550so4 od550ss rlutaf rlutcsaf rsutaf rsutcsaf toz wetbc wetdust wetnh4 wetoa wetso4 wetss
-                            Amon P1  35: clivi clt clwvi evspsbl hfls hfss hurs huss pr prc prsn prw ps psl rlds rldscs rlus rlut rlutcs rsds rsdscs rsdt rsus rsuscs rsut rsutcs sfcWind tas tasmax tasmin tauu tauv ts uas vas
-                            Emon P1   7: evspsblpot prhmax rsdsdiff sconcdust sconcso4 sconcss sfcWindmax
-                       HOMAERmon P1  82: abs1000aer abs1000bc abs1000dust abs1000nh4 abs1000no3 abs1000oa abs1000so4 abs1000ss abs350aer abs350bc abs350dust abs350nh4 abs350no3 abs350oa abs350so4 abs350ss abs550bc abs550dust abs550nh4 abs550no3 abs550oa abs550so4 abs550ss asy1000aer asy350aer asy550aer drydustbin1 drydustbin2 dryno3 dryno3bin1 dryssbin1 dryssbin2 emidustbin1 emidustbin2 emino3bin1 emissbin1 emissbin2 od1000aer od1000bc od1000dust od1000nh4 od1000no3 od1000oa od1000so4 od1000ss od350aer od350bc od350dust od350nh4 od350no3 od350oa od350so4 od350ss od550dustbin1 od550dustbin2 od550nh4 od550no3bin1 od550ssbin1 od550ssbin2 sconcbc sconcdustbin1 sconcdustbin2 sconcnh4 sconcno3 sconcno3bin1 sconcoa sconcssbin1 sconcssbin2 seddust seddustbin2 sedno3 sedss sedssbin2 ssa1000aer ssa350aer ssa550aer wetdustbin1 wetdustbin2 wetno3 wetno3bin1 wetssbin1 wetssbin2
-                        HOMALmon P1  22: cdnctop clh cll clm icod lcod mrfsol reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsdsdir rsusaf rsuscsaf snct tssea wsgmax wsgsmax
-                         HOMZmon P1   6: hus50m ta50m ua100m ua50m va100m va50m
-                           HOMfx P1   1: sftlaf
-                           LImon P1   4: snc snd snm snw
-                            Lmon P1   5: mrfso mrro mrros mrso mrsos
-                         Nonemon P1   3: tsland tsns zmla
-                           SImon P1   1: siconca
-       mon    XY-na    -------- --- 203
+                       HOMZ1hrPt P1   8: ua150m ua200m ua250m ua300m va150m va200m va250m va300m
+     1hrPt    XY-HG    -------- ---   8
 
-                            Emon P1   1: mrsol
-                            Lmon P2   1: tsl
-       mon     XY-S    -------- ---   2
+                      HOMAL1hrPt P1   1: mrsos
+     1hrPt     XY-S    -------- ---   1
 
-                    HOMP19AERmon P1  35: cdnc cheaqpso4 chegpso4 concbc concdust concdustbin1 concdustbin2 conchno3 concnh3 concnh4 concno3 concno3bin1 concoa concso2 concso4 concss concssbin1 concssbin2 ext550aer ext550bc ext550dust ext550nh4 ext550no3 ext550oa ext550so4 ext550ss reffclw scat550aer scat550bc scat550dust scat550nh4 scat550no3 scat550oa scat550so4 scat550ss
-       mon XY-P19AER    -------- ---  35
+                            E1hr P3   1: psl
+                     HOMAER1hrPt P1  28: abs550aer asy550aer od550aer od550bc od550dust od550dustbin1 od550dustbin2 od550nh4 od550no3 od550no3bin1 od550oa od550so4 od550ss od550ssbin1 od550ssbin2 sconcbc sconcdust sconcdustbin1 sconcdustbin2 sconcnh4 sconcno3 sconcno3bin1 sconcoa sconcso4 sconcss sconcssbin1 sconcssbin2 ssa550aer
+                      HOMAL1hrPt P1   1: zmla
+                       HOMZ1hrPt P1   6: hus50m ta50m ua100m ua50m va100m va50m
+                       None1hrPt P1  10: clivi clwvi hurs huss prw ps sfcWind ts uas vas
+                       None1hrPt P3   1: tas
+     1hrPt    XY-na    -------- ---  47
 
-                       HOMP1Amon P1   8: hur1000 hus1000 ta1000 ua1000 va1000 wa1000 wap1000 zg1000
-       mon XY-P1000HM    -------- ---   8
-
-                       HOMP1Amon P1   8: hur200 hus200 ta200 ua200 va200 wa200 wap200 zg200
-       mon XY-P200HM    -------- ---   8
-
-                       HOMP1Amon P1   8: hur250 hus250 ta250 ua250 va250 wa250 wap250 zg250
-       mon XY-P250HM    -------- ---   8
-
-                       HOMP1Amon P1   8: hur300 hus300 ta300 ua300 va300 wa300 wap300 zg300
-       mon XY-P300HM    -------- ---   8
-
-                       HOMP1Amon P1   8: hur400 hus400 ta400 ua400 va400 wa400 wap400 zg400
-       mon XY-P400HM    -------- ---   8
-
-                       HOMP1Amon P1   8: hur500 hus500 ta500 ua500 va500 wa500 wap500 zg500
-       mon XY-P500HM    -------- ---   8
-
-                       HOMP1Amon P1   8: hur600 hus600 ta600 ua600 va600 wa600 wap600 zg600
-       mon XY-P600HM    -------- ---   8
-
-                       HOMP1Amon P1   8: hur700 hus700 ta700 ua700 va700 wa700 wap700 zg700
-       mon XY-P700HM    -------- ---   8
-
-                       HOMP1Amon P1   8: hur850 hus850 ta850 ua850 va850 wa850 wap850 zg850
-       mon XY-P850HM    -------- ---   8
-
-                       HOMP1Amon P1   8: hur925 hus925 ta925 ua925 va925 wa925 wap925 zg925
-       mon XY-P925HM    -------- ---   8
-
-                       HOMP1Amon P1   6: hus100 ta100 ua100 va100 wa100 zg100
-       mon XY-P100HM    -------- ---   6
-
-                       HOMP1Amon P1   6: hus10 ta10 ua10 va10 wa10 zg10
-       mon   XY-P10    -------- ---   6
-
-                       HOMP1Amon P1   6: hus150 ta150 ua150 va150 wa150 zg150
-       mon XY-P150HM    -------- ---   6
-
-                       HOMP1Amon P1   6: hus20 ta20 ua20 va20 wa20 zg20
-       mon XY-P20HM    -------- ---   6
-
-                       HOMP1Amon P1   6: hus30 ta30 ua30 va30 wa30 zg30
-       mon XY-P30HM    -------- ---   6
-
-                       HOMP1Amon P1   6: hus50 ta50 ua50 va50 wa50 zg50
-       mon XY-P50HM    -------- ---   6
-
-                       HOMP1Amon P1   6: hus70 ta70 ua70 va70 wa70 zg70
-       mon XY-P70HM    -------- ---   6
-
-                       HOMP1Amon P1   6: hus750 ta750 ua750 va750 wa750 zg750
-       mon XY-P750HM    -------- ---   6
-
-                         HOMZmon P1   8: ua150m ua200m ua250m ua300m va150m va200m va250m va300m
-       mon    XY-HG    -------- ---   8
-
-       mon --------    -------- --- 376
-
-                     HOMAER3hrPt P1   8: abs1000aer abs350aer asy1000aer asy350aer od1000aer od350aer ssa1000aer ssa350aer
-     3hrPt    XY-na    -------- ---   8
+     1hrPt --------    -------- ---  56
 
                     HOMP19AER3hrPt P1   3: cdnc ext550aer scat550aer
      3hrPt XY-P19AER    -------- ---   3
+
+                     HOMAER3hrPt P1   8: abs1000aer abs350aer asy1000aer asy350aer od1000aer od350aer ssa1000aer ssa350aer
+     3hrPt    XY-na    -------- ---   8
 
      3hrPt --------    -------- ---  11
 
@@ -1107,20 +943,14 @@ Some Statistics on actually written variables per frequency+shape...
 
        6hr --------    -------- ---  27
 
-                      HOMAL6hrPt P1   4: mrfso mrfsol wsgmax wsgsmax
-     6hrPt    XY-na    -------- ---   4
-
-                      HOMAL6hrPt P1   3: mrso mrsol tsl
-     6hrPt     XY-S    -------- ---   3
+                     HOMP1A6hrPt P1   6: hus10 ta10 ua10 va10 wa10 zg10
+     6hrPt   XY-P10    -------- ---   6
 
                      HOMP1A6hrPt P1   6: hus1000 ta1000 ua1000 va1000 wa1000 zg1000
      6hrPt XY-P1000HM    -------- ---   6
 
                      HOMP1A6hrPt P1   6: hus100 ta100 ua100 va100 wa100 zg100
      6hrPt XY-P100HM    -------- ---   6
-
-                     HOMP1A6hrPt P1   6: hus10 ta10 ua10 va10 wa10 zg10
-     6hrPt   XY-P10    -------- ---   6
 
                      HOMP1A6hrPt P1   6: hus150 ta150 ua150 va150 wa150 zg150
      6hrPt XY-P150HM    -------- ---   6
@@ -1167,7 +997,177 @@ Some Statistics on actually written variables per frequency+shape...
                      HOMP1A6hrPt P1   6: hus925 ta925 ua925 va925 wa925 zg925
      6hrPt XY-P925HM    -------- ---   6
 
+                      HOMAL6hrPt P1   3: mrso mrsol tsl
+     6hrPt     XY-S    -------- ---   3
+
+                      HOMAL6hrPt P1   4: mrfso mrfsol wsgmax wsgsmax
+     6hrPt    XY-na    -------- ---   4
+
      6hrPt --------    -------- --- 115
+
+                         HOMZday P1   8: ua150m ua200m ua250m ua300m va150m va200m va250m va300m
+       day    XY-HG    -------- ---   8
+
+                       HOMP1Aday P1   6: hus10 ta10 ua10 va10 wa10 zg10
+       day   XY-P10    -------- ---   6
+
+                       HOMP1Aday P1   8: hur1000 hus1000 ta1000 ua1000 va1000 wa1000 wap1000 zg1000
+       day XY-P1000HM    -------- ---   8
+
+                       HOMP1Aday P1   6: hus100 ta100 ua100 va100 wa100 zg100
+       day XY-P100HM    -------- ---   6
+
+                       HOMP1Aday P1   6: hus150 ta150 ua150 va150 wa150 zg150
+       day XY-P150HM    -------- ---   6
+
+                    HOMP19AERday P1  35: cdnc cheaqpso4 chegpso4 concbc concdust concdustbin1 concdustbin2 conchno3 concnh3 concnh4 concno3 concno3bin1 concoa concso2 concso4 concss concssbin1 concssbin2 ext550aer ext550bc ext550dust ext550nh4 ext550no3 ext550oa ext550so4 ext550ss reffclw scat550aer scat550bc scat550dust scat550nh4 scat550no3 scat550oa scat550so4 scat550ss
+       day XY-P19AER    -------- ---  35
+
+                       HOMP1Aday P1   8: hur200 hus200 ta200 ua200 va200 wa200 wap200 zg200
+       day XY-P200HM    -------- ---   8
+
+                       HOMP1Aday P1   6: hus20 ta20 ua20 va20 wa20 zg20
+       day XY-P20HM    -------- ---   6
+
+                       HOMP1Aday P1   8: hur250 hus250 ta250 ua250 va250 wa250 wap250 zg250
+       day XY-P250HM    -------- ---   8
+
+                       HOMP1Aday P1   8: hur300 hus300 ta300 ua300 va300 wa300 wap300 zg300
+       day XY-P300HM    -------- ---   8
+
+                       HOMP1Aday P1   6: hus30 ta30 ua30 va30 wa30 zg30
+       day XY-P30HM    -------- ---   6
+
+                       HOMP1Aday P1   8: hur400 hus400 ta400 ua400 va400 wa400 wap400 zg400
+       day XY-P400HM    -------- ---   8
+
+                       HOMP1Aday P1   8: hur500 hus500 ta500 ua500 va500 wa500 wap500 zg500
+       day XY-P500HM    -------- ---   8
+
+                       HOMP1Aday P1   6: hus50 ta50 ua50 va50 wa50 zg50
+       day XY-P50HM    -------- ---   6
+
+                       HOMP1Aday P1   8: hur600 hus600 ta600 ua600 va600 wa600 wap600 zg600
+       day XY-P600HM    -------- ---   8
+
+                       HOMP1Aday P1   8: hur700 hus700 ta700 ua700 va700 wa700 wap700 zg700
+       day XY-P700HM    -------- ---   8
+
+                       HOMP1Aday P1   6: hus70 ta70 ua70 va70 wa70 zg70
+       day XY-P70HM    -------- ---   6
+
+                       HOMP1Aday P1   6: hus750 ta750 ua750 va750 wa750 zg750
+       day XY-P750HM    -------- ---   6
+
+                       HOMP1Aday P1   8: hur850 hus850 ta850 ua850 va850 wa850 wap850 zg850
+       day XY-P850HM    -------- ---   8
+
+                       HOMP1Aday P1   8: hur925 hus925 ta925 ua925 va925 wa925 wap925 zg925
+       day XY-P925HM    -------- ---   8
+
+                            Eday P1   1: mrsol
+                            Eday P2   1: tsl
+       day     XY-S    -------- ---   2
+
+                          AERday P1   2: od550aer toz
+                           CFday P1   1: ps
+                            Eday P1  10: evspsblpot mrros prhmax prw rsdsdiff snm ts tsland tsns zmla
+                            Eday P3   1: snd
+                       HOMAERday P1  65: abs1000aer abs1000bc abs1000dust abs1000nh4 abs1000no3 abs1000oa abs1000so4 abs1000ss abs350aer abs350bc abs350dust abs350nh4 abs350no3 abs350oa abs350so4 abs350ss abs550bc abs550dust abs550nh4 abs550no3 abs550oa abs550so4 abs550ss asy1000aer asy350aer asy550aer dryno3 od1000aer od1000bc od1000dust od1000nh4 od1000no3 od1000oa od1000so4 od1000ss od350aer od350bc od350dust od350nh4 od350no3 od350oa od350so4 od350ss od550dustbin1 od550dustbin2 od550nh4 od550no3bin1 od550ssbin1 od550ssbin2 sconcbc sconcdustbin1 sconcdustbin2 sconcnh4 sconcno3 sconcno3bin1 sconcoa sconcssbin1 sconcssbin2 seddust sedno3 sedss ssa1000aer ssa350aer ssa550aer wetno3
+                        HOMALday P1  22: cdnctop clh cll clm icod lcod mrfsol reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsdsdir rsusaf rsuscsaf snct tssea wsgmax wsgsmax
+                         HOMZday P1   6: hus50m ta50m ua100m ua50m va100m va50m
+                         Noneday P1  41: abs550aer clivi cltc clwvi drybc drydust drynh4 dryoa dryso4 dryss emidust emiss evspsbl lwp mrfso od550bc od550dust od550no3 od550oa od550so4 od550ss rldscs rlutaf rlutcsaf rsdscs rsdt rsuscs rsut rsutaf rsutcs rsutcsaf sconcdust sconcso4 sconcss tauv wetbc wetdust wetnh4 wetoa wetso4 wetss
+                         Noneday P2   1: rlutcs
+                         Noneday P3   1: tauu
+                           SIday P1   1: siconca
+                             day P1  26: clt hfls hfss hurs huss mrro mrso mrsos pr prc prsn psl rlds rlus rlut rsds rsus sfcWind sfcWindmax snc snw tas tasmax tasmin uas vas
+       day    XY-na    -------- --- 177
+
+       day --------    -------- --- 350
+
+                              fx P1   6: areacella mrsofc orog rootd sftgif sftlf
+        fx    XY-na    -------- ---   6
+
+        fx --------    -------- ---   6
+
+                         HOMZmon P1   8: ua150m ua200m ua250m ua300m va150m va200m va250m va300m
+       mon    XY-HG    -------- ---   8
+
+                       HOMP1Amon P1   6: hus10 ta10 ua10 va10 wa10 zg10
+       mon   XY-P10    -------- ---   6
+
+                       HOMP1Amon P1   8: hur1000 hus1000 ta1000 ua1000 va1000 wa1000 wap1000 zg1000
+       mon XY-P1000HM    -------- ---   8
+
+                       HOMP1Amon P1   6: hus100 ta100 ua100 va100 wa100 zg100
+       mon XY-P100HM    -------- ---   6
+
+                       HOMP1Amon P1   6: hus150 ta150 ua150 va150 wa150 zg150
+       mon XY-P150HM    -------- ---   6
+
+                    HOMP19AERmon P1  35: cdnc cheaqpso4 chegpso4 concbc concdust concdustbin1 concdustbin2 conchno3 concnh3 concnh4 concno3 concno3bin1 concoa concso2 concso4 concss concssbin1 concssbin2 ext550aer ext550bc ext550dust ext550nh4 ext550no3 ext550oa ext550so4 ext550ss reffclw scat550aer scat550bc scat550dust scat550nh4 scat550no3 scat550oa scat550so4 scat550ss
+       mon XY-P19AER    -------- ---  35
+
+                       HOMP1Amon P1   8: hur200 hus200 ta200 ua200 va200 wa200 wap200 zg200
+       mon XY-P200HM    -------- ---   8
+
+                       HOMP1Amon P1   6: hus20 ta20 ua20 va20 wa20 zg20
+       mon XY-P20HM    -------- ---   6
+
+                       HOMP1Amon P1   8: hur250 hus250 ta250 ua250 va250 wa250 wap250 zg250
+       mon XY-P250HM    -------- ---   8
+
+                       HOMP1Amon P1   8: hur300 hus300 ta300 ua300 va300 wa300 wap300 zg300
+       mon XY-P300HM    -------- ---   8
+
+                       HOMP1Amon P1   6: hus30 ta30 ua30 va30 wa30 zg30
+       mon XY-P30HM    -------- ---   6
+
+                       HOMP1Amon P1   8: hur400 hus400 ta400 ua400 va400 wa400 wap400 zg400
+       mon XY-P400HM    -------- ---   8
+
+                       HOMP1Amon P1   8: hur500 hus500 ta500 ua500 va500 wa500 wap500 zg500
+       mon XY-P500HM    -------- ---   8
+
+                       HOMP1Amon P1   6: hus50 ta50 ua50 va50 wa50 zg50
+       mon XY-P50HM    -------- ---   6
+
+                       HOMP1Amon P1   8: hur600 hus600 ta600 ua600 va600 wa600 wap600 zg600
+       mon XY-P600HM    -------- ---   8
+
+                       HOMP1Amon P1   8: hur700 hus700 ta700 ua700 va700 wa700 wap700 zg700
+       mon XY-P700HM    -------- ---   8
+
+                       HOMP1Amon P1   6: hus70 ta70 ua70 va70 wa70 zg70
+       mon XY-P70HM    -------- ---   6
+
+                       HOMP1Amon P1   6: hus750 ta750 ua750 va750 wa750 zg750
+       mon XY-P750HM    -------- ---   6
+
+                       HOMP1Amon P1   8: hur850 hus850 ta850 ua850 va850 wa850 wap850 zg850
+       mon XY-P850HM    -------- ---   8
+
+                       HOMP1Amon P1   8: hur925 hus925 ta925 ua925 va925 wa925 wap925 zg925
+       mon XY-P925HM    -------- ---   8
+
+                            Emon P1   1: mrsol
+                            Lmon P2   1: tsl
+       mon     XY-S    -------- ---   2
+
+                          AERmon P1  37: abs550aer cltc drybc drydust drynh3 drynh4 dryoa dryso2 dryso4 dryss emibc emidust eminh3 emioa emiso2 emiso4 emiss lwp od550aer od550bc od550dust od550lt1aer od550no3 od550oa od550so4 od550ss rlutaf rlutcsaf rsutaf rsutcsaf toz wetbc wetdust wetnh4 wetoa wetso4 wetss
+                            Amon P1  35: clivi clt clwvi evspsbl hfls hfss hurs huss pr prc prsn prw ps psl rlds rldscs rlus rlut rlutcs rsds rsdscs rsdt rsus rsuscs rsut rsutcs sfcWind tas tasmax tasmin tauu tauv ts uas vas
+                            Emon P1   7: evspsblpot prhmax rsdsdiff sconcdust sconcso4 sconcss sfcWindmax
+                       HOMAERmon P1  82: abs1000aer abs1000bc abs1000dust abs1000nh4 abs1000no3 abs1000oa abs1000so4 abs1000ss abs350aer abs350bc abs350dust abs350nh4 abs350no3 abs350oa abs350so4 abs350ss abs550bc abs550dust abs550nh4 abs550no3 abs550oa abs550so4 abs550ss asy1000aer asy350aer asy550aer drydustbin1 drydustbin2 dryno3 dryno3bin1 dryssbin1 dryssbin2 emidustbin1 emidustbin2 emino3bin1 emissbin1 emissbin2 od1000aer od1000bc od1000dust od1000nh4 od1000no3 od1000oa od1000so4 od1000ss od350aer od350bc od350dust od350nh4 od350no3 od350oa od350so4 od350ss od550dustbin1 od550dustbin2 od550nh4 od550no3bin1 od550ssbin1 od550ssbin2 sconcbc sconcdustbin1 sconcdustbin2 sconcnh4 sconcno3 sconcno3bin1 sconcoa sconcssbin1 sconcssbin2 seddust seddustbin2 sedno3 sedss sedssbin2 ssa1000aer ssa350aer ssa550aer wetdustbin1 wetdustbin2 wetno3 wetno3bin1 wetssbin1 wetssbin2
+                        HOMALmon P1  22: cdnctop clh cll clm icod lcod mrfsol reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsdsdir rsusaf rsuscsaf snct tssea wsgmax wsgsmax
+                         HOMZmon P1   6: hus50m ta50m ua100m ua50m va100m va50m
+                           HOMfx P1   1: sftlaf
+                           LImon P1   4: snc snd snm snw
+                            Lmon P1   5: mrfso mrro mrros mrso mrsos
+                         Nonemon P1   3: tsland tsns zmla
+                           SImon P1   1: siconca
+       mon    XY-na    -------- --- 203
+
+       mon --------    -------- --- 376
 
 
 ---------- --------    -------- --- 989
@@ -3404,7 +3404,7 @@ Warnings about cell methods (with var list)
 *
 *              dr2xml version:  current_version
 *   CMIP6 conventions version:  v6.2.4
-*  CMIP6 Data Request version:  01.00.21.post1
+*  CMIP6 Data Request version:  current_cmip6_dr
 
 *
  **************************************************

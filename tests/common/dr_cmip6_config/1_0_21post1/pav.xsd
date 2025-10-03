@@ -1,0 +1,44 @@
+<xs:schema	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        xmlns:xml="http://www.w3.org/XML/1998/namespace"
+	xmlns="http://purl.org/pav/2.3"
+	targetNamespace="http://purl.org/pav/2.3"
+	elementFormDefault="qualified"
+	attributeFormDefault="qualified">
+
+    <xs:annotation> 
+      <xs:documentation xml:lang="en"> 
+           XML Schema 2001-12-18 by Martin Juckes .... incomplete ....Pete Johnston
+      </xs:documentation> 
+    </xs:annotation> 
+
+<xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd">
+  </xs:import>
+
+
+  <xs:complexType name="elementType">
+   <xs:simpleContent>
+    <xs:extension base="xs:string">
+	<xs:attribute  ref="xml:lang"/>
+     </xs:extension>
+   </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="versionType">
+    <xs:simpleContent>
+    <xs:extension base="elementType">
+     </xs:extension>
+   </xs:simpleContent>
+  </xs:complexType>
+
+
+  <xs:element name="version" type="versionType"/>
+
+
+  <xs:group name="elementsGroup">
+      <xs:choice>
+	<xs:element ref="version" />
+      </xs:choice>
+  </xs:group>	
+
+</xs:schema>

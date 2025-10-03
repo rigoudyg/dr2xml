@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<context id="nemo">
+	<!--CMIP7 Data Request version Software current_cmip7_dr_software - Content test-->
+	<!--dr2xml version current_version-->
+	<!--Lab_and_model settings
+{'data_request_content_version' = 'test',
+'data_request_used' = 'CMIP7',
+'excluded_vars' = [],
+'excluded_vars_file' = [],
+'institution_id' = 'IPSL',
+'laboratory_used' = 'ipsl',
+'listof_home_vars' = 'None',
+'max_priority' = '3',
+'mips' = {},
+'path_extra_tables' = 'None',
+'path_special_defs' = 'None',
+'ping_variables_prefix' = 'CMIP7_',
+'project' = 'ping',
+'realms_per_context' = {'LMDZ' = ['atmos', 'land', 'landIce', 'atmosChem', 'aerosol'], 'nemo' = ['seaIce', 'ocean', 'ocnBgchem'], 'orchidee' = ['land', 'landIce']},
+'tierMax' = '3'}-->
+	<!--Simulation settings
+{}-->
+	<!--Year processed None-->
+	<field_definition>
+		<field id="CMIP7_arag" field_ref="?dummy_XYO"/>
+		<!--P3 (mol m-3) mole_concentration_of_aragonite_expressed_as_carbon_in_sea_water : sum of particulate aragonite components (e.g. Phytoplankton, Detrital, etc.)-->
+		<field id="CMIP7_aragos" field_ref="?dummy_XY"/>
+		<!--P3 (mol m-3) mole_concentration_of_aragonite_expressed_as_carbon_in_sea_water : sum of particulate aragonite components (e.g. Phytoplankton, Detrital, etc.)-->
+		<field id="CMIP7_calc" field_ref="?dummy_XYO"/>
+		<!--P3 (mol m-3) mole_concentration_of_calcite_expressed_as_carbon_in_sea_water : sum of particulate calcite component concentrations (e.g. Phytoplankton, Detrital, etc.)-->
+		<field id="CMIP7_calcos" field_ref="?dummy_XY"/>
+		<!--P3 (mol m-3) mole_concentration_of_calcite_expressed_as_carbon_in_sea_water : sum of particulate calcite component concentrations (e.g. Phytoplankton, Detrital, etc.)-->
+		<field id="CMIP7_chl" field_ref="?dummy_XY_op20bar"/>
+		<!--P3 (kg m-3) mass_concentration_of_phytoplankton_expressed_as_chlorophyll_in_sea_water : Sum of chlorophyll from all phytoplankton group concentrations. In most models this is equal to chldiat+chlmisc, that is the sum of Diatom Chlorophyll Mass Concentration and Other Phytoplankton Chlorophyll Mass Concentration-->
+		<field id="CMIP7_dissic" field_ref="?dummy_XYO"/>
+		<!--P3 (mol m-3) mole_concentration_of_dissolved_inorganic_carbon_in_sea_water : Dissolved inorganic carbon (CO3+HCO3+H2CO3) concentration-->
+		<field id="CMIP7_o2" field_ref="?dummy_XY_op20bar"/>
+		<!--P3 (mol m-3) mole_concentration_of_dissolved_molecular_oxygen_in_sea_water : 'Mole concentration' means number of moles per unit volume, also called "molarity", and is used in the construction mole\_concentration\_of\_X\_in\_Y, where X is a material constituent of Y. A chemical or biological species denoted by X may be described by a single term such as 'nitrogen' or a phrase such as 'nox\_expressed\_as\_nitrogen'.-->
+		<field id="CMIP7_ph" field_ref="?dummy_XY_op20bar"/>
+		<!--P3 (1) sea_water_ph_reported_on_total_scale : negative log10 of hydrogen ion concentration with the concentration expressed as mol H kg-1.-->
+		<field id="CMIP7_talk" field_ref="?dummy_XYO"/>
+		<!--P3 (mol m-3) sea_water_alkalinity_expressed_as_mole_equivalent : total alkalinity equivalent concentration (including carbonate, borate, phosphorus, silicon, and nitrogen components)-->
+	</field_definition>
+</context>

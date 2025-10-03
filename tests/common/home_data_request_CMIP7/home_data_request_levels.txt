@@ -1,0 +1,2 @@
+cmor;    zg;              atmos;     mon;           CMIP_Amon;                 time-mean;           XY-P19;             ANY;                ANY
+perso;   zg50!zg;         atmos;     day;           CNRM_day;                  time-mean;           XY-HG;              ANY;                ANY

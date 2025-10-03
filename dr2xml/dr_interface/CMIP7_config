@@ -1,0 +1,7 @@
+check_api_version: false
+consolidate: false
+export: release
+log_file: default
+log_level: info
+offline: true
+variable_name: CMIP7 Compound Name

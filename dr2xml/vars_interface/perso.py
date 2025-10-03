@@ -8,7 +8,7 @@ Perso variables
 from __future__ import print_function, division, absolute_import, unicode_literals
 
 from dr2xml.dr_interface import get_dr_object
-from logger import get_logger
+from utilities.logger import get_logger
 from dr2xml.utils import VarsError
 from .generic import read_home_var, fill_homevar, check_homevar, tcmName2tcmValue, get_correspond_cmor_var
 

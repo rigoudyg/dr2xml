@@ -13,7 +13,8 @@ import six
 
 import xml_writer
 from .settings_interface import get_settings_values
-from .utils import reduce_and_strip, decode_if_needed
+from .utils import reduce_and_strip
+from utilities.encoding_tools import decode_if_needed
 
 
 class DR2XMLComment(xml_writer.Comment):

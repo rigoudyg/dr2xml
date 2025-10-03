@@ -389,7 +389,9 @@ project_settings = dict(
                 key="DR_version",
                 help="Version of the Data Request used",
                 default_values=[
-                    ValueSettings(key_type="common", keys="data_specs_version", fmt="CMIP6 Data Request version {}")
+                    ValueSettings(key_type="combine", fmt="{} Data Request version {}",
+                                  keys=[ValueSettings(key_type="internal", keys="data_request_used"),
+                                        ValueSettings(key_type="common", keys="data_specs_version")])
                 ]
             ),
             dr2xml_version=ParameterSettings(
@@ -417,7 +419,7 @@ project_settings = dict(
                 key="year",
                 help="Year used for the dr2xml's launch",
                 default_values=[
-                    ValueSettings(key_type="common", keys="year", fmt="Year processed {}")
+                    ValueSettings(key_type="internal", keys="year", fmt="Year processed {}")
                 ]
             )
         )
@@ -956,7 +958,8 @@ project_settings = dict(
                 key="realm",
                 help="Realm associated with the file.",
                 default_values=[
-                    ValueSettings(key_type="variable", keys="modeling_realm")
+                    ValueSettings(key_type="variable", keys="modeling_realm",
+                                  func=lambda x: ",".join(x) if isinstance(x, list) else x)
                 ]
             ),
             frequency=ParameterSettings(

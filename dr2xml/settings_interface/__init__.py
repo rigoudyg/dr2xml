@@ -10,7 +10,8 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 import copy
 from collections import OrderedDict
 
-from logger import get_logger
+from dr2xml.utils import Dr2xmlError
+from utilities.logger import get_logger
 
 # Internal settings for dr2xml
 internal_settings = None
@@ -55,13 +56,10 @@ def initialize_internal_values(force_reset=False):
         set_internal_value(key="initial_selection_configuration", value=dict())
     if force_reset or get_settings_values("internal_values", "axis_count", default=None, is_default=True) is None:
         set_internal_value(key="axis_count", value=0)
-    if force_reset or get_settings_values("internal_values", "global_rls", default=None, is_default=True) is None:
-        set_internal_value(key="global_rls", value=list())
     if force_reset or get_settings_values("internal_values", "cmor_vars", default=None, is_default=True) is None:
         set_internal_value(key="cmor_vars", value=list())
     set_internal_value(key="sn_issues", value=OrderedDict())
     set_internal_value(key="print_multiple_grids", value=False)
-    set_internal_value(key="grid_choice", value=None)
 
 
 def set_internal_value(key, value, action=False):
@@ -120,3 +118,39 @@ def get_settings_values(*args, **kwargs):
         raise ValueError("Could not find a proper value: %s not in %s" % (args[i], settings))
     else:
         return default
+
+
+def get_values_from_internal_settings(*args, **kwargs):
+    internal_settings = get_settings_values("internal")
+    merge = kwargs.get("merge", False)
+    default = kwargs.get("default", list())
+    if merge:
+        rep = list()
+        for arg in args:
+            if isinstance(arg, tuple):
+                is_relevant, key = arg
+            else:
+                is_relevant = True
+                key = arg
+            if is_relevant and key is not None:
+                rep.extend(internal_settings.get(key, list()))
+            elif key is None:
+                raise Dr2xmlError("Unable to get values from settings with None key")
+    else:
+        rep = default
+        i = 0
+        test = False
+        while not test and i < len(args):
+            if isinstance(args[i], tuple):
+                is_relevant, key = args[i]
+            else:
+                is_relevant = True
+                key = args[i]
+            if is_relevant and key is not None and key in internal_settings:
+                rep = internal_settings[key]
+                test = True
+            elif key is None:
+                raise Dr2xmlError("Unable to get values from settings with None key")
+            else:
+                i += 1
+    return rep

@@ -15,8 +15,9 @@ import six
 from dr2xml.config import get_config_variable
 from dr2xml.settings_interface.py_settings_interface import format_dict_for_printing, is_key_in_lset, \
     get_variable_from_lset_without_default, is_key_in_sset, get_variable_from_sset_without_default
-from dr2xml.utils import Dr2xmlError, read_json_content
-from logger import get_logger
+from dr2xml.utils import Dr2xmlError
+from utilities.json_tools import read_json_content
+from utilities.logger import get_logger
 
 
 def return_value(value, common_dict=dict(), internal_dict=dict(), additional_dict=dict(),
@@ -33,7 +34,7 @@ def return_value(value, common_dict=dict(), internal_dict=dict(), additional_dic
 def determine_value(key_type=None, keys=list(), func=None, fmt=None, src=None, common_dict=dict(), internal_dict=dict(),
                     additional_dict=dict(), allow_additional_keytypes=True):
     logger = get_logger()
-    if key_type in ["combine", ] or (key_type is None and func is not None):
+    if key_type in ["combine", "merge"] or (key_type is None and func is not None):
         keys = [return_value(key, common_dict=common_dict, internal_dict=internal_dict,
                              additional_dict=additional_dict, allow_additional_keytypes=allow_additional_keytypes)
                 for key in keys]
@@ -51,6 +52,10 @@ def determine_value(key_type=None, keys=list(), func=None, fmt=None, src=None, c
             if key_type in ["combine", ]:
                 keys = [",".join(key) if isinstance(key, (list, tuple)) else key for key in keys]
                 value = fmt.format(*keys)
+            elif key_type in ["merge", ]:
+                value = list()
+                for key in keys:
+                    value.extend(key)
             else:
                 if isinstance(func, FunctionSettings):
                     found, value = func(*keys, additional_dict=additional_dict, internal_dict=internal_dict,
@@ -59,8 +64,9 @@ def determine_value(key_type=None, keys=list(), func=None, fmt=None, src=None, c
                     try:
                         value = func(*keys)
                         found = True
-                    except:
+                    except BaseException as e:
                         logger.debug("Issue calling func %s with arguments %s" % (str(func), str(keys)))
+                        logger.debug(str(e))
                         value = None
                         found = False
                 if found and fmt is not None:
@@ -128,11 +134,7 @@ def determine_value(key_type=None, keys=list(), func=None, fmt=None, src=None, c
             else:
                 value = None
         elif allow_additional_keytypes:
-            if key_type in ["scope", ] and allow_additional_keytypes:
-                from dr2xml.dr_interface import get_dr_object
-                value = get_dr_object("get_scope")
-                found = True
-            elif key_type in ["data_request", ] and allow_additional_keytypes:
+            if key_type in ["data_request", ] and allow_additional_keytypes:
                 from dr2xml.dr_interface import get_dr_object
                 value = get_dr_object("get_data_request")
                 found = True
@@ -184,7 +186,8 @@ def determine_value(key_type=None, keys=list(), func=None, fmt=None, src=None, c
                 try:
                     value = func(*value)
                     found = True
-                except:
+                except Exception as e:
+                    logger.debug(str(e))
                     value = None
                     found = False
         if found and fmt is not None:
@@ -308,6 +311,8 @@ class ValueSettings(Settings):
                 tmp_rep += "[%s]" % key_value
         elif key_type in ["combine", ]:
             tmp_rep = ", ".join(self.dump_doc_inner(self.keys, format_struct=False))
+        elif key_type in ["merge", ]:
+            tmp_rep = str(self.dump_doc_inner(self.keys, format_struct=False))
         elif key_type in ["data_request", ]:
             tmp_rep = "%s" % key_type
             keys_values = self.dump_doc_inner(self.keys, format_struct=False)
@@ -340,7 +345,8 @@ class ParameterSettings(Settings):
     def init_dict_default(self):
         return dict(skip_values=list(), forbidden_patterns=list(), conditions=list(), default_values=list(),
                     cases=list(), authorized_values=list(), authorized_types=list(), corrections=dict(),
-                    output_key=None, num_type="string", is_default=False, fatal=False, key=None, help="TODO")
+                    output_key=None, num_type="string", is_default=False, fatal=False, key=None, help="TODO",
+                    target_type=None)
 
     def dump_doc(self, force_void=False):
         rep = list()
@@ -387,6 +393,8 @@ class ParameterSettings(Settings):
             self.updated.add("is_default")
         if isinstance(self.authorized_types, list) and len(self.authorized_types) == 1:
             self.authorized_types = self.authorized_types[0]
+        if not self.target_type in ["list", "set", "str", None]:
+            raise ValueError("Target type must have a value among 'str', 'set', 'list', None.")
 
     def update(self, other):
         super(ParameterSettings, self).update(other)
@@ -483,7 +491,8 @@ class ParameterSettings(Settings):
                                               allow_additional_keytypes=allow_additional_keytypes)
             if test:
                 test, value = self.correct_value(value, internal_values=internal_dict, common_values=common_dict,
-                                                 additional_dict=dict(), allow_additional_keytypes=True)
+                                                 additional_dict=dict(),
+                                                 allow_additional_keytypes=allow_additional_keytypes)
             if test:
                 relevant, test = self.check_value(value, internal_dict=internal_dict, common_dict=common_dict,
                                                   additional_dict=additional_dict,
@@ -507,9 +516,34 @@ class ParameterSettings(Settings):
                 test = test and relevant
             if not test:
                 i += 1
-        if not test and self.fatal and raise_on_error:
+        if test:
+            value = self.correct_target_type(value)
+        elif not test and self.fatal and raise_on_error:
             raise ValueError("Could not find a proper value for %s" % self.key)
         return test, value
+
+    def correct_target_type(self, value):
+        target_type = self.target_type
+        if target_type in ["list", ]:
+            if isinstance(value, set):
+                value = list(value)
+            elif isinstance(value, six.string_types):
+                value = [value, ]
+            elif not isinstance(value, list):
+                raise ValueError(f"Unable to transform {type(value)} into {target_type}.")
+        elif target_type in ["set", ]:
+            if isinstance(value, list):
+                value = set(value)
+            elif isinstance(value, six.string_types):
+                value = set([value, ])
+            elif not isinstance(value, set):
+                raise ValueError(f"Unable to transform {type(value)} into {target_type}.")
+        elif target_type in ["str", ]:
+            if isinstance(value, (list, set)) and len(value) == 1:
+                value = self.correct_target_type(value[0])
+            elif not isinstance(value, six.string_types):
+                value = str(value)
+        return value
 
 
 class TagSettings(Settings):
@@ -602,6 +636,7 @@ class FunctionSettings(Settings):
             value = self.func(*args, **self.options)
         except BaseException as e:
             logger.debug("Issue calling %s with arguments %s and options %s" % (str(self.func), str(args), str(self.options)))
+            logger.debug(str(e))
             value = None
             test = False
         return test, value

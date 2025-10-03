@@ -14,7 +14,7 @@ from collections import OrderedDict
 from .config import get_config_variable
 
 # Logger
-from logger import get_logger
+from utilities.logger import get_logger
 
 # Interface to settings dictionaries
 from .settings_interface import get_settings_values
@@ -54,7 +54,7 @@ def create_xios_axis_and_grids_for_plevs_unions(svars, plev_sfxs, dummies):
     # First, search plev unions for each label_without_psuffix and build dict_plevs
     dict_plevs = OrderedDict()
     for sv in svars:
-        if not sv.modeling_realm:
+        if len(sv.modeling_realm) == 0:
             logger.warning("Warning: no modeling_realm associated to: %s %s %s" % (sv.label, sv.mipTable, sv.mip_era))
         for sd in sv.sdims.values():
             # couvre les dimensions verticales de type 'plev7h' ou 'p850'
@@ -98,8 +98,6 @@ def create_xios_axis_and_grids_for_plevs_unions(svars, plev_sfxs, dummies):
             #    print "for var %s/%s, dim %s is not related to pressure"%(sv.label,sv.label_without_psuffix,sd.label)
     #
     # Second, create xios axis for union of plevs
-    union_axis_defs = axis_defs
-    union_grid_defs = grid_defs
     for lwps in list(dict_plevs):
         sdim_union = get_dr_object("SimpleDim")
         plevs_union_xios = ""
@@ -132,7 +130,7 @@ def create_xios_axis_and_grids_for_plevs_unions(svars, plev_sfxs, dummies):
                         sdim_union.is_union_for.append(sv.label + "_" + sd.label)
                     else:
                         logger.warning("Warning: No requested nor value found for %s with vertical dimension %s"
-                                       % (svar.label, plev))
+                                       % (sv.label, plev))
                     plevs_union = plevs_union.union(plev_values)
                     logger.debug("    -- on %s : %s" % (plev, plev_values))
                 logger.debug("       * %s (%s)" % (sv.label, sv.mipTable))

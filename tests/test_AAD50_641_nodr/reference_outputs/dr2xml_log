@@ -3,7 +3,7 @@
 *
 *              dr2xml version:  current_version
 *   CMIP6 conventions version:  v6.2.4
-*  CMIP6 Data Request version:  No Data Request
+*   None Data Request version:  No Data Request
 
 *
  **************************************************
@@ -44,6 +44,16 @@ For extra table CNRM_HOMALmon (which has 116 variables):
 		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
 
 	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		            XY-alt40: clcalipsoun
+
+		             XY-p220: clhcalipsoice clhcalipsoliq clhcalipsoun
+
+		             XY-p560: clmcalipsoice clmcalipsoliq clmcalipsoun
+
+		             XY-p840: cllcalipsoice cllcalipsoliq cllcalipsoun
+
+		           XY-plev19: cdnc ext550bc ext550dust ext550nh4 ext550no3 ext550oa ext550so4 ext550ss
+
 		             XY-sza5: parasolCRefl
 
 		       XY-tau|plev7c: clmodis
@@ -110,6 +120,16 @@ For extra table CNRM_HOMALday (which has 116 variables):
 		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
 
 	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		            XY-alt40: clcalipsoun
+
+		             XY-p220: clhcalipsoice clhcalipsoliq clhcalipsoun
+
+		             XY-p560: clmcalipsoice clmcalipsoliq clmcalipsoun
+
+		             XY-p840: cllcalipsoice cllcalipsoliq cllcalipsoun
+
+		           XY-plev19: cdnc ext550bc ext550dust ext550nh4 ext550no3 ext550oa ext550so4 ext550ss
+
 		             XY-sza5: parasolCRefl
 
 		       XY-tau|plev7c: clmodis
@@ -176,6 +196,16 @@ For extra table CNRM_HOMAL6hr (which has 99 variables):
 		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
 
 	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		            XY-alt40: clcalipsoun
+
+		             XY-p220: clhcalipsoice clhcalipsoliq clhcalipsoun
+
+		             XY-p560: clmcalipsoice clmcalipsoliq clmcalipsoun
+
+		             XY-p840: cllcalipsoice cllcalipsoliq cllcalipsoun
+
+		           XY-plev19: ext550bc ext550dust ext550oa ext550so4 ext550ss
+
 		             XY-sza5: parasolCRefl
 
 		       XY-tau|plev7c: clmodis
@@ -242,6 +272,16 @@ For extra table CNRM_HOMAL1hrPt (which has 111 variables):
 		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
 
 	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		            XY-alt40: clcalipsoun
+
+		             XY-p220: clhcalipsoice clhcalipsoliq clhcalipsoun
+
+		             XY-p560: clmcalipsoice clmcalipsoliq clmcalipsoun
+
+		             XY-p840: cllcalipsoice cllcalipsoliq cllcalipsoun
+
+		           XY-plev19: cdnc ext550bc ext550dust ext550nh4 ext550no3 ext550oa ext550so4 ext550ss
+
 		             XY-sza5: parasolCRefl
 
 		       XY-tau|plev7c: clmodis
@@ -271,53 +311,10 @@ file_def written as current_directory/test_AAD50_641_nodr/test_outputs/dr2xml_su
 
 
 Some Statistics on actually written variables per frequency+shape...
-                        HOMALday P1  17: clth cltl cltm husll rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf tall tssea uall vall
-       day    XY-na    -------- ---  17
-
-                        HOMEPday P1   5: hus200 ta200 ua200 va200 zg200
-       day XY-P200HM    -------- ---   5
-
-                        HOMEPday P1   5: hus500 ta500 ua500 va500 zg500
-       day XY-P500HM    -------- ---   5
-
-                        HOMEPday P1   5: hus700 ta700 ua700 va700 zg700
-       day XY-P700HM    -------- ---   5
-
-                        HOMEPday P1   5: hus850 ta850 ua850 va850 zg850
-       day XY-P850HM    -------- ---   5
-
-                        HOMEPday P1   5: hus925 ta925 ua925 va925 zg925
-       day XY-P925HM    -------- ---   5
-
-       day --------    -------- ---  42
-
                       HOMAL1hrPt P1   1: tssea
        1hr    XY-na    -------- ---   1
 
        1hr --------    -------- ---   1
-
-                        HOMALmon P1  24: RADabs550aer RADasy550aer RADod550aer RADssa550aer cdnctop clth cltl cltm husll reffclitop reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf tall tssea uall vall
-       mon    XY-na    -------- ---  24
-
-                        HOMEPmon P1   7: hur200 hus200 ta200 ua200 va200 wap200 zg200
-       mon XY-P200HM    -------- ---   7
-
-                        HOMEPmon P1   7: hur500 hus500 ta500 ua500 va500 wap500 zg500
-       mon XY-P500HM    -------- ---   7
-
-                        HOMEPmon P1   7: hur700 hus700 ta700 ua700 va700 wap700 zg700
-       mon XY-P700HM    -------- ---   7
-
-                        HOMEPmon P1   7: hur850 hus850 ta850 ua850 va850 wap850 zg850
-       mon XY-P850HM    -------- ---   7
-
-                        HOMEPmon P1   7: hur925 hus925 ta925 ua925 va925 wap925 zg925
-       mon XY-P925HM    -------- ---   7
-
-       mon --------    -------- ---  59
-
-                        HOMAL6hr P1   3: clth cltl cltm
-       6hr    XY-na    -------- ---   3
 
                     HOME6hrPlevPt P1   5: hus200 ta200 ua200 va200 zg200
        6hr XY-P200HM    -------- ---   5
@@ -334,12 +331,55 @@ Some Statistics on actually written variables per frequency+shape...
                     HOME6hrPlevPt P1   5: hus925 ta925 ua925 va925 zg925
        6hr XY-P925HM    -------- ---   5
 
+                        HOMAL6hr P1   3: clth cltl cltm
+       6hr    XY-na    -------- ---   3
+
        6hr --------    -------- ---  28
 
                         HOMAL6hr P1   2: mrfso mrso
      6hrPt    XY-na    -------- ---   2
 
      6hrPt --------    -------- ---   2
+
+                        HOMEPday P1   5: hus200 ta200 ua200 va200 zg200
+       day XY-P200HM    -------- ---   5
+
+                        HOMEPday P1   5: hus500 ta500 ua500 va500 zg500
+       day XY-P500HM    -------- ---   5
+
+                        HOMEPday P1   5: hus700 ta700 ua700 va700 zg700
+       day XY-P700HM    -------- ---   5
+
+                        HOMEPday P1   5: hus850 ta850 ua850 va850 zg850
+       day XY-P850HM    -------- ---   5
+
+                        HOMEPday P1   5: hus925 ta925 ua925 va925 zg925
+       day XY-P925HM    -------- ---   5
+
+                        HOMALday P1  17: clth cltl cltm husll rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf tall tssea uall vall
+       day    XY-na    -------- ---  17
+
+       day --------    -------- ---  42
+
+                        HOMEPmon P1   7: hur200 hus200 ta200 ua200 va200 wap200 zg200
+       mon XY-P200HM    -------- ---   7
+
+                        HOMEPmon P1   7: hur500 hus500 ta500 ua500 va500 wap500 zg500
+       mon XY-P500HM    -------- ---   7
+
+                        HOMEPmon P1   7: hur700 hus700 ta700 ua700 va700 wap700 zg700
+       mon XY-P700HM    -------- ---   7
+
+                        HOMEPmon P1   7: hur850 hus850 ta850 ua850 va850 wap850 zg850
+       mon XY-P850HM    -------- ---   7
+
+                        HOMEPmon P1   7: hur925 hus925 ta925 ua925 va925 wap925 zg925
+       mon XY-P925HM    -------- ---   7
+
+                        HOMALmon P1  24: RADabs550aer RADasy550aer RADod550aer RADssa550aer cdnctop clth cltl cltm husll reffclitop reffclwtopcnrm rldsaf rldscsaf rlusaf rluscs rluscsaf rsdsaf rsdscsaf rsusaf rsuscsaf tall tssea uall vall
+       mon    XY-na    -------- ---  24
+
+       mon --------    -------- ---  59
 
 
 ---------- --------    -------- --- 132
@@ -666,7 +706,7 @@ Some Statistics on actually written variables per variable...
 *
 *              dr2xml version:  current_version
 *   CMIP6 conventions version:  v6.2.4
-*  CMIP6 Data Request version:  No Data Request
+*   None Data Request version:  No Data Request
 
 *
  **************************************************
@@ -707,6 +747,16 @@ For extra table CNRM_HOMALmon (which has 116 variables):
 		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
 
 	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		            XY-alt40: clcalipsoun
+
+		             XY-p220: clhcalipsoice clhcalipsoliq clhcalipsoun
+
+		             XY-p560: clmcalipsoice clmcalipsoliq clmcalipsoun
+
+		             XY-p840: cllcalipsoice cllcalipsoliq cllcalipsoun
+
+		           XY-plev19: cdnc ext550bc ext550dust ext550nh4 ext550no3 ext550oa ext550so4 ext550ss
+
 		             XY-sza5: parasolCRefl
 
 		       XY-tau|plev7c: clmodis
@@ -773,6 +823,16 @@ For extra table CNRM_HOMALday (which has 116 variables):
 		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
 
 	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		            XY-alt40: clcalipsoun
+
+		             XY-p220: clhcalipsoice clhcalipsoliq clhcalipsoun
+
+		             XY-p560: clmcalipsoice clmcalipsoliq clmcalipsoun
+
+		             XY-p840: cllcalipsoice cllcalipsoliq cllcalipsoun
+
+		           XY-plev19: cdnc ext550bc ext550dust ext550nh4 ext550no3 ext550oa ext550so4 ext550ss
+
 		             XY-sza5: parasolCRefl
 
 		       XY-tau|plev7c: clmodis
@@ -839,6 +899,16 @@ For extra table CNRM_HOMAL6hr (which has 99 variables):
 		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
 
 	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		            XY-alt40: clcalipsoun
+
+		             XY-p220: clhcalipsoice clhcalipsoliq clhcalipsoun
+
+		             XY-p560: clmcalipsoice clmcalipsoliq clmcalipsoun
+
+		             XY-p840: cllcalipsoice cllcalipsoliq cllcalipsoun
+
+		           XY-plev19: ext550bc ext550dust ext550oa ext550so4 ext550ss
+
 		             XY-sza5: parasolCRefl
 
 		       XY-tau|plev7c: clmodis
@@ -905,6 +975,16 @@ For extra table CNRM_HOMAL1hrPt (which has 111 variables):
 		                temp: clcalipsotmp clcalipsotmpice clcalipsotmpliq clcalipsotmpun
 
 	Dynamical XY-xxx spatial shapes (shapes not found in DR):
+		            XY-alt40: clcalipsoun
+
+		             XY-p220: clhcalipsoice clhcalipsoliq clhcalipsoun
+
+		             XY-p560: clmcalipsoice clmcalipsoliq clmcalipsoun
+
+		             XY-p840: cllcalipsoice cllcalipsoliq cllcalipsoun
+
+		           XY-plev19: cdnc ext550bc ext550dust ext550nh4 ext550no3 ext550oa ext550so4 ext550ss
+
 		             XY-sza5: parasolCRefl
 
 		       XY-tau|plev7c: clmodis

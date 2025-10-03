@@ -11,7 +11,7 @@ from collections import OrderedDict
 from copy import deepcopy, copy
 
 from .beacon import Beacon
-from .utils import encode_if_needed, decode_if_needed
+from utilities.encoding_tools import encode_if_needed, decode_if_needed
 
 
 class Element(Beacon):

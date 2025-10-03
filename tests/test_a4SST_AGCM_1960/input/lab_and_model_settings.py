@@ -5,6 +5,7 @@
 lab_and_model_settings = {
     'path_to_parse': '{path_xml}/',
     'save_project_settings': 'dr2xml_project_settings.py',
+    'data_request_content_version': '{path_DR_config}',
     'comment': '',
     'tierMax': 1,
     'references': 'http://www.umr-cnrm.fr/cmip6/references',
@@ -68,8 +69,8 @@ lab_and_model_settings = {
         },
     'sizes':
         {
-            'HR': [1514100, 75, 259200, 91, 30, 14, 128],
-            'LR': [106428, 75, 32768, 91, 30, 14, 128]
+            'HR': {'nho': 1514100, 'nlo': 75, 'nha': 259200, 'nla': 91, 'nlas': 30, 'nls': 14, 'nh1': 128},
+            'LR': {'nho': 106428, 'nlo': 75, 'nha': 32768, 'nla': 91, 'nlas': 30, 'nls': 14, 'nh1': 128}
         },
     'source_types':
         {

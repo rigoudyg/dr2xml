@@ -16,7 +16,7 @@ from .settings_interface import get_settings_values, set_internal_value
 from .utils import Dr2xmlError
 
 # Logger
-from logger import get_logger
+from utilities.logger import get_logger
 
 # Global variables and configuration tools
 from .config import get_config_variable, add_value_in_dict_config_variable
@@ -118,7 +118,7 @@ def create_axis_def(sdim):
     internal_dict = get_settings_values("internal")
     prefix = internal_dict["ping_variables_prefix"]
     # nbre de valeurs de l'axe determine aussi si on est en dim singleton
-    if sdim.requested:
+    if sdim.requested not in [False, None, "undef", ""]:
         glo_list = sdim.requested.strip(" ").split()
     else:
         glo_list = sdim.value.strip(" ").split()
@@ -286,14 +286,13 @@ def change_axes_in_grid(grid_id):
                     alt_labels = None
                 dr_axis_id = dr_axis_id.replace('axis_', '')  # For toy_cnrmcm, atmosphere part
                 #
-                dim_id = 'dim:{}'.format(dr_axis_id)
                 # print "in change_axis for %s %s"%(grid_id,dim_id)
                 # dim_id should be a dimension !
-                dim = data_request.get_element_uid(dim_id, elt_type="dim",
+                dim = data_request.get_element_uid(dr_axis_id, elt_type="dim", raise_on_error=True,
                                                    error_msg="Value %s in 'non_standard_axes' is not a DR dimension id"
                                                              % dr_axis_id)
                 # We don't process scalars here
-                if dim.value in ['', ] or dim.label in ["scatratio", ]:
+                if dim.value in ["", "undef", False] or dim.label in ["scatratio", ]:
                     axis_id, axis_name = create_axis_from_dim(dim, alt_labels, axis_ref)
                     # cannot use ET library which does not guarantee the ordering of axes
                     changed_done = True

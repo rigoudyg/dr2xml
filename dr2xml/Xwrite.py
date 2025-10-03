@@ -18,7 +18,7 @@ from .settings_interface import get_settings_values
 from .utils import Dr2xmlError
 
 # Logger
-from logger import get_logger
+from utilities.logger import get_logger, change_log_level
 
 # Global variables and configuration tools
 from .config import get_config_variable, set_config_variable, add_value_in_dict_config_variable
@@ -156,7 +156,7 @@ def create_xios_aux_elmts_defs(sv, alias, table, context, target_hgrid_id, zgrid
     # Build a construct for computing a climatology (if applicable)
     # --------------------------------------------------------------------
     if clim:
-        if sv.frequency in ["1hrCM", ]:
+        if sv.frequency in ["1hrCM", "1hr"]:
             last_field_id, last_grid_id = process_diurnal_cycle(last_field_id)
         else:
             raise Dr2xmlError("Cannot handle climatology cell_method for frequency %s and variable %s"
@@ -462,7 +462,7 @@ def write_xios_file_def(filename, svars_per_table, year, dummies, skipped_vars_p
     set_config_variable("domain_defs", OrderedDict())
     # Add xml_file_definition
     xml_file_definition = DR2XMLElement(tag="file_definition")
-    _, hgrid, _, _, _ = internal_dict['grids'][get_settings_values("internal_values", "grid_choice")][context]
+    _, hgrid, _, _, _ = internal_dict['grids'][internal_dict["select_grid_choice"]][context]
     files_list = determine_files_list(svars_per_table, enddate, year, debug)
     for file_dict in files_list:
         write_xios_file_def_for_svars_list(hgrid=hgrid, xml_file_definition=xml_file_definition, dummies=dummies,
@@ -767,8 +767,7 @@ def get_split_info(sv, table, enddate, year, debug):
             endmonth = "01"
             endday = "01"
             split_last_date = "{}-{}-{} 00:00:00".format(endyear, endmonth, endday)
-        sc = get_dr_object("get_scope")
-        split_freq = determine_split_freq(sv, grid_choice, sc.mcfg, context)
+        split_freq = determine_split_freq(sv, grid_choice, context)
     return split_freq_format, split_last_date, split_start_offset, split_end_offset, split_freq
 
 

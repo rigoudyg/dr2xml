@@ -18,7 +18,7 @@ from .settings_interface import get_settings_values
 from .utils import Dr2xmlError
 
 # Logger
-from logger import get_logger
+from utilities.logger import get_logger
 
 # Global variables and configuration tools
 from .config import get_config_variable, add_value_in_dict_config_variable, set_config_variable, \
@@ -98,7 +98,7 @@ def read_xml_elmt_or_attrib(filename, tag='field', attrib=None):
             logger.debug("")
             return rep
     else:
-        logger.info("No file ")
+        logger.info("No file")
         return None
 
 
@@ -149,7 +149,7 @@ def check_for_file_input(sv, hgrid):
         logger.debug(remap_grid_def)
 
         # Create xml for reading the variable
-        filename = externs[sv.label][hgrid][get_settings_values("internal_values", "grid_choice")]
+        filename = externs[sv.label][hgrid][internal_dict["select_grid_choice"]]
         file_id = "remapped_{}_file".format(sv.label)
         field_in_file_id = "_".join([sv.label, hgrid])
         # field_in_file_id=sv.label
@@ -218,16 +218,10 @@ def ping_file_for_realms_list(context, svars, lrealms, path_special, dummy="fiel
     for table in svars:
         for v in svars[table]:
             added = False
-            if exact:
-                if any([v.modeling_realm == r for r in lrealms]):
-                    lvars.append(v)
-                    added = True
-            else:
-                var_realms = v.modeling_realm.split(" ")
-                if any([v.modeling_realm == r or r in var_realms
-                        for r in lrealms]):
-                    lvars.append(v)
-                    added = True
+            if len(set(v.modeling_realm) & set(lrealms)) > 0 or \
+                    (not(exact) and len(set(lrealms) & v.set_modeling_realms) > 0):
+                lvars.append(v)
+                added = True
             if not added and context in internal_values['orphan_variables'] and \
                     v.label in internal_values['orphan_variables'][context]:
                 lvars.append(v)
@@ -242,8 +236,7 @@ def ping_file_for_realms_list(context, svars, lrealms, path_special, dummy="fiel
             best_prio[v.label_non_ambiguous].append(v)
         if v.label_without_psuffix is not None:
             best_prio[v.label_without_psuffix].append(v)
-    lvars = [sorted(list(best_prio[elt]), key=lambda x: x.Priority, reverse=True)[0] for elt in best_prio]
-
+    lvars = [sorted(best_prio[elt], key=lambda x: x.Priority)[0] for elt in best_prio]
     # lvars=uniques
     lvars.sort(key=lambda x: x.label_without_psuffix)
     #
@@ -288,7 +281,7 @@ def ping_file_for_realms_list(context, svars, lrealms, path_special, dummy="fiel
             if isinstance(comments, six.string_types):
                 xml_fields.append(DR2XMLComment(text=comments))
             xml_fields.append(DR2XMLComment(text="P%d (%s) %s : %s" %
-                                                 (v.Priority, v.units, v.stdname, v.description)))
+                                                 (v.Priority, v.units, v.stdname, v.description.replace(" \n", os.linesep))))
     if 'atmos' in lrealms or 'atmosChem' in lrealms or 'aerosol' in lrealms:
         for tab in ["ap", "ap_bnds", "b", "b_bnds"]:
             xml_fields.append(DR2XMLElement(tag="field", id="%s%s" % (prefix, tab), field_ref="dummy_hyb"))

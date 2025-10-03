@@ -57,9 +57,13 @@ internal_values = dict(
 	source_type=ParameterSettings(
 		key="source_type",
 		default_values=[None, ]
+	),
+	path_special_defs=ParameterSettings(
+		key="path_special_defs",
+		default_values=[ValueSettings(key_type="laboratory", keys="path_special_defs")]
 	)
 )
 
-common_values = list()
+common_values = dict()
 
 project_settings = dict()

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<context id="arpsfx">
+	<!--CMIP6 Data Request version current_cmip6_dr-->
+	<!--dr2xml version 3.1-->
+	<!--Lab_and_model settings
+{'data_request_content_version' = 'current_directory/test_pingfiles_CMIP6_CNRM_realm/input/DR_config/',
+'excluded_vars' = [],
+'excluded_vars_file' = [],
+'institution_id' = 'CNRM-CERFACS',
+'listof_home_vars' = 'None',
+'max_priority' = '3',
+'mips' = {'AerChemMIP', 'C4MIP', 'CCMI', 'CFMIP', 'CMIP', 'CMIP5', 'CMIP6', 'CORDEX', 'DAMIP', 'DCPP', 'DECK', 'DynVar', 'FAFMIP', 'GMMIP', 'GeoMIP', 'HighResMIP', 'ISMIP6', 'LS3MIP', 'LUMIP', 'OMIP', 'PDRMIP', 'PMIP', 'RFMIP', 'SIMIP', 'SPECS', 'ScenarioMIP', 'SolarMIP', 'VIACSAB', 'VolMIP'},
+'path_extra_tables' = 'None',
+'path_special_defs' = './input/special_defs',
+'ping_variables_prefix' = 'CMIP6_',
+'project' = 'ping',
+'realms_per_context' = {'arpsfx' = ['atmos', 'atmos atmosChem', 'aerosol', 'atmos land', 'land', 'landIce land', 'aerosol land', 'land landIce', 'landIce'], 'nemo' = ['seaIce', 'ocean', 'ocean seaIce', 'ocnBgchem', 'seaIce ocean']},
+'tierMax' = '3'}-->
+	<!--Simulation settings
+{}-->
+	<!--Year processed None-->
+	<field_definition>
+		<field id="CMIP6_acabf" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P2 (kg m-2 s-1) land_ice_surface_specific_mass_balance_flux : quantity averaged over ice sheet (grounded ice sheet and floating ice shelf) only. Needed to analyse the impact of downscaling methods, and as forcing for ISM-->
+		<field id="CMIP6_acabfIs" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) land_ice_surface_specific_mass_balance_flux : quantity averaged over ice_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
+		<field id="CMIP6_agesno" field_ref="?dummy_XY"/>
+		<!--P1 (day) age_of_surface_snow : age_of_surface_snow-->
+		<field id="CMIP6_hfdsn" field_ref="?dummy_XY"/>
+		<!--P1 (W m-2) surface_downward_heat_flux_in_snow : Downward heat flux at snow top-->
+		<field id="CMIP6_hfgeoubed_ist" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P3 (W m-2) upward_geothermal_heat_flux_at_ground_level_in_land_ice : Geothermal Heat flux beneath land ice-->
+		<field id="CMIP6_hfgeoubed_ist" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P3 (W m-2) upward_geothermal_heat_flux_at_ground_level_in_land_ice : Geothermal Heat flux beneath land ice-->
+		<field id="CMIP6_hflsIs" field_ref="?dummy_XY"/>
+		<!--P1 (W m-2) surface_upward_latent_heat_flux : quantity averaged over ice_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
+		<field id="CMIP6_hfssIs" field_ref="?dummy_XY"/>
+		<!--P1 (W m-2) surface_upward_sensible_heat_flux : quantity averaged over ice_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
+		<field id="CMIP6_icem" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P3 (kg m-2 s-1) land_ice_surface_melt_flux : Surface ice melt flux-->
+		<field id="CMIP6_icemIs" field_ref="?dummy_XY"/>
+		<!--P3 (kg m-2 s-1) land_ice_surface_melt_flux : quantity averaged over ice_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
+		<field id="CMIP6_libmassbffl" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P2 (kg m-2 s-1) land_ice_basal_specific_mass_balance_flux : quantity averaged over floating ice shelf-->
+		<field id="CMIP6_libmassbfgr" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P2 (kg m-2 s-1) land_ice_basal_specific_mass_balance_flux : quantity averaged over grounded ice sheet-->
+		<field id="CMIP6_licalvf" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P3 (kg m-2 s-1) land_ice_specific_mass_flux_due_to_calving : Land ice calving flux-->
+		<field id="CMIP6_lifmassbf" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P3 (kg m-2 s-1) land_ice_specific_mass_flux_due_to_calving_and_ice_front_melting : Land ice vertical front mass balance flux-->
+		<field id="CMIP6_litempbotfl" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P2 (K)  : quantity averaged over floating ice shelf-->
+		<field id="CMIP6_litempbotgr" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P2 (K)  : quantity averaged over grounded ice sheet-->
+		<field id="CMIP6_litemptop" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P2 (K) temperature_at_top_of_ice_sheet_model : quantity averaged over ice sheet (grounded ice sheet and floating ice shelf) only. Needed to analyse the impact of downscaling methods-->
+		<field id="CMIP6_litemptopIs" field_ref="?dummy_XY"/>
+		<!--P2 (K) temperature_at_top_of_ice_sheet_model : quantity averaged over ice_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
+		<field id="CMIP6_lithk_ist" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P2 (m) land_ice_thickness : This is needed in case ice sheet thickness changes in time-->
+		<field id="CMIP6_lithk_ist" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P2 (m) land_ice_thickness : This is needed in case ice sheet thickness changes in time-->
+		<field id="CMIP6_lwsnl" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) liquid_water_content_of_snow_layer : where land over land: this is computed as the total mass of liquid water contained interstitially within the snow layer of the land portion of a grid cell divided by the area of the land portion of the cell.-->
+		<field id="CMIP6_modelCellAreai" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P1 (m2) cell_area : When interpolated to a regular grid, it should be interpolated (not summed) with a conservative scheme to preserve total area-->
+		<field id="CMIP6_mrfso" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) soil_frozen_water_content : the mass (summed over all all layers) of frozen water.-->
+		<field id="CMIP6_mrroIs" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) runoff_flux : quantity averaged over ice_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
+		<field id="CMIP6_orogIs" field_ref="?dummy_XY"/>
+		<!--P1 (m) surface_altitude : quantity averaged over ice_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
+		<field id="CMIP6_pflw" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) liquid_water_content_of_permafrost_layer : "where land over land", i.e., this is the total mass of liquid water contained within the permafrost layer within the land portion of a grid cell divided by the area of the land portion of the cell.-->
+		<field id="CMIP6_prraIs" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) rainfall_flux : quantity averaged over ice_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
+		<field id="CMIP6_prsnIs" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) snowfall_flux : quantity averaged over ice_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
+		<field id="CMIP6_rldsIs" field_ref="?dummy_XY"/>
+		<!--P1 (W m-2) surface_downwelling_longwave_flux_in_air : quantity averaged over ice_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
+		<field id="CMIP6_rlusIs" field_ref="?dummy_XY"/>
+		<!--P1 (W m-2) surface_upwelling_longwave_flux_in_air : quantity averaged over ice_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
+		<field id="CMIP6_rsdsIs" field_ref="?dummy_XY"/>
+		<!--P1 (W m-2) surface_downwelling_shortwave_flux_in_air : quantity averaged over ice_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
+		<field id="CMIP6_rsusIs" field_ref="?dummy_XY"/>
+		<!--P1 (W m-2) surface_upwelling_shortwave_flux_in_air : quantity averaged over ice_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
+		<field id="CMIP6_sbl_land" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_snow_and_ice_sublimation_flux : surface_snow_and_ice_sublimation_flux-->
+		<field id="CMIP6_sbl_land" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_snow_and_ice_sublimation_flux : surface_snow_and_ice_sublimation_flux-->
+		<field id="CMIP6_sbl_ist" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P1 (kg m-2 s-1) surface_snow_and_ice_sublimation_flux : Surface Snow and Ice Sublimation Flux-->
+		<field id="CMIP6_sblIs" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_snow_and_ice_sublimation_flux : quantity averaged over ice_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
+		<field id="CMIP6_sftflf" field_ref="?dummy_XY_typefis"/>
+		<!--P2 (%) floating_ice_shelf_area_fraction : This is needed to distinguish between grounded glaciated ice (grounded = ice sheet and glacier) and ice shelves (floating over sea water), since land_ice is by definition ice sheet, glacier and ice shelves-->
+		<field id="CMIP6_sftgrf" field_ref="?dummy_XY_typegis"/>
+		<!--P1 (%) grounded_ice_sheet_area_fraction : This is needed to distinguish between grounded glaciated ice (grounded = ice sheet and glacier) and ice shelves (floating over sea water), since land_ice is by definition ice sheet, glacier and ice shelves-->
+		<field id="CMIP6_snc" field_ref="?dummy_XY"/>
+		<!--P1 (%) surface_snow_area_fraction : Snow Area Fraction-->
+		<field id="CMIP6_snc_ist" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P1 (%) surface_snow_area_fraction : quantity averaged over ice sheet (grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
+		<field id="CMIP6_sncIs" field_ref="?dummy_XY"/>
+		<!--P1 (%) surface_snow_area_fraction : quantity averaged over ice_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
+		<field id="CMIP6_snd" field_ref="?dummy_XY"/>
+		<!--P1 (m) surface_snow_thickness : Snow Depth-->
+		<field id="CMIP6_snicefreez" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P2 (kg m-2 s-1) surface_snow_and_ice_refreezing_flux : Surface snow and ice refreeze flux-->
+		<field id="CMIP6_snicefreezIs" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) surface_snow_and_ice_refreezing_flux : quantity averaged over ice_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
+		<field id="CMIP6_snicem" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P2 (kg m-2 s-1) surface_snow_and_ice_melt_flux : Surface snow and ice melt flux-->
+		<field id="CMIP6_snicemIs" field_ref="?dummy_XY"/>
+		<!--P2 (kg m-2 s-1) surface_snow_and_ice_melt_flux : quantity averaged over ice_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
+		<field id="CMIP6_snm_land" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_snow_melt_flux : surface_snow_and_ice_melt_flux-->
+		<field id="CMIP6_snm_land" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_snow_melt_flux : surface_snow_and_ice_melt_flux-->
+		<field id="CMIP6_snm_ist" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P1 (kg m-2 s-1) surface_snow_melt_flux : Surface Snow Melt-->
+		<field id="CMIP6_snmIs" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) surface_snow_melt_flux : Loss of snow mass resulting from surface melting. Computed as the surface melt water from snow on the ice sheet portion of the grid cell divided by the ice_sheet area in the grid cell; report as 0.0 for snow-free land_ice regions; report as missing where the land fraction is 0.-->
+		<field id="CMIP6_snw_land" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) surface_snow_amount : the mass of surface snow on the land portion of the grid cell divided by the land area in the grid cell; reported as missing where the land fraction is 0; excludes snow on vegetation canopy or on sea ice.-->
+		<field id="CMIP6_snw_land" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) surface_snow_amount : the mass of surface snow on the land portion of the grid cell divided by the land area in the grid cell; reported as missing where the land fraction is 0; excludes snow on vegetation canopy or on sea ice.-->
+		<field id="CMIP6_sootsn" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) soot_content_of_surface_snow : the entire land portion of the grid cell is considered, with snow soot content set to 0.0 in regions free of snow.-->
+		<field id="CMIP6_strbasemag" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P3 (Pa)  : Land Ice Basal Drag-->
+		<field id="CMIP6_tasIs" field_ref="?dummy_XY"/>
+		<!--P1 (K) air_temperature : quantity averaged over ice_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
+		<field id="CMIP6_topg_ist" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P2 (m) bedrock_altitude : This is needed in case bed rock elevation changes in time-->
+		<field id="CMIP6_topg_ist" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P2 (m) bedrock_altitude : This is needed in case bed rock elevation changes in time-->
+		<field id="CMIP6_tpf" field_ref="?dummy_XY"/>
+		<!--P1 (m) permafrost_layer_thickness : where land over land: This is the mean thickness of the permafrost layer in the land portion of the grid cell.  Reported as missing in permafrost-free regions.-->
+		<field id="CMIP6_tsIs" field_ref="?dummy_XY"/>
+		<!--P1 (K) surface_temperature : quantity averaged over ice_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
+		<field id="CMIP6_tsn_ist" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P1 (K) temperature_in_surface_snow : quantity averaged over ice sheet (grounded ice sheet and floating ice shelf) only. Needed to analyse the impact of downscaling methods-->
+		<field id="CMIP6_tsn_ist" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P1 (K) temperature_in_surface_snow : quantity averaged over ice sheet (grounded ice sheet and floating ice shelf) only. Needed to analyse the impact of downscaling methods-->
+		<field id="CMIP6_tsn_land" field_ref="?dummy_XY"/>
+		<!--P1 (K) temperature_in_surface_snow : This temperature is averaged over all the snow in the grid cell that rests on land or land ice.  When computing the time-mean here, the time samples, weighted by the mass of snow on the land portion of the grid cell, are accumulated and then divided by the sum of the weights.   Reported as "missing in regions free of snow on land.-->
+		<field id="CMIP6_tsnIs" field_ref="?dummy_XY"/>
+		<!--P1 (K) temperature_in_surface_snow : quantity averaged over ice_sheet (meaning grounded ice sheet and floating ice shelf) only, to avoid contamination from other surfaces (eg: permafrost)-->
+		<field id="CMIP6_xvelbase" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P2 (m s-1) land_ice_basal_x_velocity : X-component of land ice basal velocity-->
+		<field id="CMIP6_xvelmean" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P3 (m s-1) land_ice_vertical_mean_x_velocity : X-component of land ice vertical mean velocity-->
+		<field id="CMIP6_xvelsurf" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P2 (m s-1) land_ice_surface_x_velocity : X-component of land ice surface velocity-->
+		<field id="CMIP6_yvelbase" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P2 (m s-1) land_ice_basal_y_velocity : Y-component of land ice basal velocity-->
+		<field id="CMIP6_yvelmean" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P3 (m s-1) land_ice_vertical_mean_y_velocity : Y-component of land ice vertical mean velocity-->
+		<field id="CMIP6_yvelsurf" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P2 (m s-1) land_ice_surface_y_velocity : Y-component of land ice surface velocity-->
+		<field id="CMIP6_zvelbase" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P3 (m s-1) land_ice_basal_upward_velocity : Upward-component of land ice basal velocity-->
+		<field id="CMIP6_zvelsurf" field_ref="?dummy_XY_xgre_ygre"/>
+		<!--P3 (m s-1) land_ice_surface_upward_velocity : Upward component of land ice surface velocity-->
+	</field_definition>
+</context>

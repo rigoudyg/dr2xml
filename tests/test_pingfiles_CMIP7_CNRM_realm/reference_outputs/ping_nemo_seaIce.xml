@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<context id="nemo">
+	<!--CMIP7 Data Request version Software current_cmip7_dr_software - Content test-->
+	<!--dr2xml version current_version-->
+	<!--Lab_and_model settings
+{'data_request_content_version' = 'test',
+'data_request_used' = 'CMIP7',
+'excluded_vars' = [],
+'excluded_vars_file' = [],
+'institution_id' = 'CNRM-CERFACS',
+'listof_home_vars' = 'None',
+'max_priority' = '3',
+'mips' = {},
+'path_extra_tables' = 'None',
+'path_special_defs' = './input/special_defs',
+'ping_variables_prefix' = 'CMIP7_',
+'project' = 'ping',
+'realms_per_context' = {'arpsfx' = ['aerosol', 'atmos', 'atmosChem', 'land', 'landIce'], 'nemo' = ['ocean', 'ocnBgchem', 'seaIce']},
+'tierMax' = '3'}-->
+	<!--Simulation settings
+{}-->
+	<!--Year processed None-->
+	<field_definition>
+		<field id="CMIP7_siconc" field_ref="?dummy_XY"/>
+		<!--P1 (1) sea_ice_area_fraction : Areal fraction of a given grid cell that is covered by sea ice on the ocean grid, independent of the thickness of that ice.-->
+		<field id="CMIP7_simass" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) sea_ice_amount : Total mass of sea ice divided by grid-cell area.-->
+		<field id="CMIP7_sithick" field_ref="?dummy_XY"/>
+		<!--P1 (m) sea_ice_thickness : Actual (floe) thickness of sea ice averaged over the ice-covered part of a given grid cell, NOT volume divided by grid area.-->
+		<field id="CMIP7_siu" field_ref="?dummy_XY"/>
+		<!--P1 (m s-1) sea_ice_x_velocity : X-component of sea-ice velocity on native model grid.-->
+		<field id="CMIP7_siv" field_ref="?dummy_XY"/>
+		<!--P1 (m s-1) sea_ice_y_velocity : Y-component of sea-ice velocity on native model grid.-->
+	</field_definition>
+</context>

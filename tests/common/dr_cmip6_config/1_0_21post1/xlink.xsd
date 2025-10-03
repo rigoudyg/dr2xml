@@ -1,0 +1,25 @@
+<xs:schema	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns="http://www.w3.org/1999/xlink"
+	targetNamespace="http://www.w3.org/1999/xlink"
+	elementFormDefault="qualified"
+	attributeFormDefault="qualified">
+
+    <xs:annotation> 
+      <xs:documentation xml:lang="en"> 
+           XML Schema 2001-12-18 by Pete Johnston
+           Based on Andy Powell, Guidelines for Implementing Dublin Core in XML, 9th draft. 
+           This XML Schema is for information only
+      </xs:documentation> 
+    </xs:annotation> 
+
+<!-- No W3C XML Schema for XLink namespace to include here ? -->
+
+  <xs:attributeGroup name="metadataLink">
+	  <xs:attribute name="href" type="xs:string"/>
+	  <xs:attribute name="type" type="xs:string"/>
+	  <xs:attribute name="role" type="xs:string" fixed="http://purl.org/dc/xml/metadata"/>
+  </xs:attributeGroup>
+	
+
+</xs:schema>
