@@ -13,11 +13,11 @@ from collections import OrderedDict
 from dr2xml.utils import Dr2xmlError
 from utilities.logger import get_logger
 
-# Internal settings for dr2xml
+# Internal settings for dr2xml (values required to use the software)
 internal_settings = None
-# Common settings
+# Common settings (values required for projects)
 common_settings = None
-# Project settings
+# Project settings (definition of project requirement)
 project_settings = None
 # Internal values used everywhere in dr2xml
 internal_values = None
@@ -39,12 +39,17 @@ def initialize_settings(lset=None, sset=None, force_reset=False, **kwargs):
     internal_settings, common_settings, project_settings = initialize_project_settings(kwargs["dirname"])
     # Solve internal settings
     internal_settings = solve_values("internal", internal_dict=internal_settings, additional_dict=kwargs,
-                                     allow_additional_keytypes=False)
+                                     allow_additional_keytypes=False, only_init=True)
     from dr2xml.dr_interface import load_correct_dr
     load_correct_dr()
     # Initialize laboratory sources
     from dr2xml.laboratories import initialize_laboratory_settings
     initialize_laboratory_settings()
+    # Initialize vocabulary
+    from dr2xml.vocabulary import load_vocabulary
+    load_vocabulary()
+    # Solve not initial internal settings
+    internal_settings = solve_values("internal", internal_dict=internal_settings, additional_dict=kwargs)
     # Solve common settings
     common_settings = solve_values("common", common_dict=common_settings, internal_dict=internal_settings,
                                    additional_dict=kwargs)

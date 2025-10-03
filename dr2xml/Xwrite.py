@@ -430,10 +430,13 @@ def write_xios_file_def(filename, svars_per_table, year, dummies, skipped_vars_p
     required_components = internal_dict["required_model_components"]
     if not isinstance(required_components, list):
         required_components = [required_components, ]
+    required_components = [elt.lower() for elt in required_components]
     allowed_components = internal_dict["additional_allowed_model_components"]
     if not isinstance(allowed_components, list):
         allowed_components = [allowed_components, ]
+    allowed_components = [elt.lower() for elt in allowed_components]
     actual_components = source_type.split(" ")
+    actual_components = [elt.lower() for elt in actual_components]
     ok = True
     for c in required_components:
         if c not in actual_components:

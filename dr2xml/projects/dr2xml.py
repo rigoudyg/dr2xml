@@ -122,7 +122,8 @@ internal_values = dict(
 			ValueSettings(key_type="laboratory", keys="project_settings"),
 			ValueSettings(key_type="internal", keys="project")
 		],
-		help="Project settings definition file to be used."
+		help="Project settings definition file to be used.",
+		init=True
 	),
     institution_id=ParameterSettings(
         key="institution_id",
@@ -130,7 +131,8 @@ internal_values = dict(
             ValueSettings(key_type="laboratory", keys="institution_id")
         ],
 	    fatal=True,
-	    help="Institution identifier."
+	    help="Institution identifier.",
+	    init=True
     ),
 	context=ParameterSettings(
         key="context",
@@ -1326,7 +1328,8 @@ internal_values = dict(
 			ValueSettings(key_type="laboratory", keys="data_request_used"),
 			"CMIP6"
 		],
-		help="The Data Request infrastructure type which should be used."
+		help="The Data Request infrastructure type which should be used.",
+		init=True
 	),
 	data_request_path=ParameterSettings(
         key="data_request_path",
@@ -1334,7 +1337,8 @@ internal_values = dict(
 			ValueSettings(key_type="laboratory", keys="data_request_path"),
 			None
 		],
-		help="Path where the data request API used is placed."
+		help="Path where the data request API used is placed.",
+		init=True
 	),
 	data_request_content_version=ParameterSettings(
 		key="data_request_content_version",
@@ -1342,7 +1346,8 @@ internal_values = dict(
 			ValueSettings(key_type="laboratory", keys="data_request_content_version"),
 			"latest_stable"
 		],
-		help="Version of the data request content to be used"
+		help="Version of the data request content to be used",
+		init=True
 	),
 	data_request_config=ParameterSettings(
 		key="data_request_config",
@@ -1350,7 +1355,8 @@ internal_values = dict(
 			ValueSettings(key_type="laboratory", keys="data_request_config"),
 			os.sep.join([os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "dr_interface", "CMIP7_config"])
 		],
-		help="Configuration file of the data request content to be used"
+		help="Configuration file of the data request content to be used",
+		init=True
 	),
 	vocabulary_used=ParameterSettings(
         key="vocabulary_used",
@@ -1358,7 +1364,8 @@ internal_values = dict(
 			ValueSettings(key_type="laboratory", keys="vocabulary_used"),
 			None
 		],
-		help="The Vocabulary infrastructure type which should be used."
+		help="The Vocabulary infrastructure type which should be used.",
+		init=True
 	),
 	vocabulary_config=ParameterSettings(
 		key="vocabulary_config",
@@ -1366,7 +1373,8 @@ internal_values = dict(
 			ValueSettings(key_type="laboratory", keys="vocabulary_config"),
 			os.sep.join([os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "vocabulary", "vocabulary.json"])
 		],
-		help="Configuration file of the vocabulary to be used"
+		help="Configuration file of the vocabulary to be used",
+		init=True
 	),
 	laboratory_used=ParameterSettings(
         key="laboratory_used",
@@ -1375,7 +1383,8 @@ internal_values = dict(
 			None
 		],
 		help="File which contains the settings to be used for a specific laboratory which is not present by default in "
-		     "dr2xml. Must contains at least the `lab_grid_policy` function."
+		     "dr2xml. Must contains at least the `lab_grid_policy` function.",
+		init=True
 	),
 	save_project_settings=ParameterSettings(
         key="save_project_settings",
@@ -1383,7 +1392,8 @@ internal_values = dict(
 			ValueSettings(key_type="laboratory", keys="save_project_settings"),
 			None
 		],
-		help="The path of the file where the complete project settings will be written, if needed."
+		help="The path of the file where the complete project settings will be written, if needed.",
+		init=True
 	),
 	perso_sdims_description=ParameterSettings(
         key="perso_sdims_description",

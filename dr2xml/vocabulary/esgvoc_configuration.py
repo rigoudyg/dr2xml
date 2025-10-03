@@ -5,6 +5,7 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 import copy
 import json
 from esgvoc.core import service
+from utilities.logger import get_logger
 
 def get_config_data(config_name, config_file="vocabulary.json"):
     with open(config_file) as config_fic:
@@ -16,6 +17,7 @@ def get_config_data(config_name, config_file="vocabulary.json"):
 
 
 def setup_esgvoc_config(config_name, config_file="vocabulary.json"):
+    logger = get_logger()
     if config_name is not None:
         config_manager = service.get_config_manager()
 
@@ -24,7 +26,7 @@ def setup_esgvoc_config(config_name, config_file="vocabulary.json"):
 
         # Check if config already exists
         if config_name in config_manager.list_configs():
-            print("✅ ESGVoc already configured")
+            logger.debug("✅ ESGVoc already configured")
         else:
             config_manager.add_config(config_name, config_data)
 
@@ -34,6 +36,6 @@ def setup_esgvoc_config(config_name, config_file="vocabulary.json"):
         service.current_state = service.get_state()
         service.current_state.synchronize_all()
 
-        print(f"✅ ESGVoc configured with '{config_name}'")
+        logger.debug(f"✅ ESGVoc configured with '{config_name}'")
     else:
-        print("No vocabulary configured.")
+        logger.debug("No vocabulary configured.")

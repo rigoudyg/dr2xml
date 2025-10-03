@@ -123,7 +123,9 @@ def read_project_settings(filename):
 
 
 def solve_values(values, internal_dict=dict(), common_dict=dict(), additional_dict=dict(),
-                 allow_additional_keytypes=True):
+                 allow_additional_keytypes=True, only_init=False):
+    if only_init and values not in ["internal", ]:
+        raise ValueError("Only_init can be True only for internal dict resolution")
     if values in ["internal", ]:
         args_dict = dict(common_dict=common_dict, additional_dict=additional_dict, raise_on_error=False,
                          allow_additional_keytypes=allow_additional_keytypes)
@@ -137,9 +139,19 @@ def solve_values(values, internal_dict=dict(), common_dict=dict(), additional_di
     else:
         raise ValueError("Could not solve values for setting %s" % values)
     rep = dict()
+    if only_init is False and values in ["internal", ]:
+        items_to_treat = [elt for (elt, val) in current_dict.items() if not isinstance(val, ParameterSettings)]
+        for item in items_to_treat:
+            rep[item] = current_dict.pop(item)
+    else:
+        rep = dict()
+
     items_to_treat = sorted(list(current_dict))
+    if only_init:
+        items_to_treat = [elt for elt in items_to_treat if (isinstance(current_dict[elt], ParameterSettings) and current_dict[elt].init is True)]
     test = True
     while len(items_to_treat) > 0 and test:
+        resolved_items = list()
         for item in items_to_treat:
             val = current_dict[item]
             if isinstance(val, ParameterSettings):
@@ -147,16 +159,25 @@ def solve_values(values, internal_dict=dict(), common_dict=dict(), additional_di
                 if found:
                     rep[item] = value
                     del current_dict[item]
+                    resolved_items.append(item)
             else:
                 raise TypeError("Can only treat ParameterSettings type objects, not %s." % type(val))
-        test = len(current_dict) < len(items_to_treat)
-        items_to_treat = sorted(list(current_dict))
+        test = len(resolved_items) > 0
+        items_to_treat = sorted(list(set(items_to_treat) - set(resolved_items)))
     if not test:
+        not_to_solve_items = list()
         for item in items_to_treat:
             if not current_dict[item].fatal:
                 del current_dict[item]
-        items_to_treat = sorted(list(current_dict))
+                not_to_solve_items.append(item)
+        items_to_treat = sorted(list(set(items_to_treat) - set(not_to_solve_items)))
         test = len(items_to_treat) == 0
+    if only_init:
+        for item in sorted(list(current_dict)):
+            if item in rep:
+                raise ValueError("Case should not happened")
+            else:
+                rep[item] = current_dict.pop(item)
     if not test:
         raise ValueError("Could not evaluate all %s values: the following are missing %s" % (values, items_to_treat))
     return rep

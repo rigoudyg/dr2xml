@@ -40,6 +40,7 @@
 'path_to_parse' = 'current_directory/test_amip_ESM_DR12/input/xml/',
 'ping_variables_prefix' = 'CMIP6_',
 'print_stats_per_var_label' = 'True',
+'project_settings' = 'CMIP6_esgvoc',
 'realms_per_context' = {'nemo' = ['seaIce', 'ocean', 'ocean seaIce', 'ocnBgChem', 'seaIce ocean'], 'surfex' = ['atmos', 'atmos atmosChem', 'atmosChem', 'aerosol', 'atmos land', 'land', 'landIce land', 'aerosol', 'land landIce', 'landIce'], 'trip' = []},
 'references' = 'http://www.umr-cnrm.fr/cmip6/references',
 'sampling_timestep' = {'HR' = {'nemo' = '1800.0', 'surfex' = '900.0', 'trip' = '1800.0'}, 'LR' = {'nemo' = '1800.0', 'surfex' = '900.0', 'trip' = '1800.0'}},
@@ -105,13 +106,13 @@
 			<variable name="realm" type="string"> land </variable>
 			<variable name="references" type="string"> http://www.umr-cnrm.fr/cmip6/references </variable>
 			<variable name="source" type="string"> CNRM-ESM2-1 (2017):
-aerosol: TACTIC_v2
-atmos: Arpege 6.3 (T127; Gaussian Reduced with 24572 grid points in total distributed over 128 latitude circles (with 256 grid points per latitude circle between 30degN and 30degS reducing to 20 grid points per latitude circle at 88.9degN and 88.9degS); 91 levels; top level 78.4 km)
-atmosChem: REPROBUS-C_v2
-land: Surfex 8.0c
-ocean: Nemo 3.6 (eORCA1, tripolar primarily 1deg; 362 x 294 longitude/latitude; 75 levels; top grid cell 0-1 m)
-ocnBgchem: Pisces 2.s
-seaIce: Gelato 6.1 </variable>
+aerosol: tactic_v2
+atmos: arpege
+atmosChem: reprobus-c_v2
+land: surfex
+ocean: nemo
+ocnBgchem: pisces
+seaIce: gelato </variable>
 			<variable name="source_id" type="string"> CNRM-ESM2-1 </variable>
 			<variable name="source_type" type="string"> AGCM BGC AER CHEM </variable>
 			<variable name="sub_experiment_id" type="string"> none </variable>
@@ -165,13 +166,13 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="realm" type="string"> land </variable>
 			<variable name="references" type="string"> http://www.umr-cnrm.fr/cmip6/references </variable>
 			<variable name="source" type="string"> CNRM-ESM2-1 (2017):
-aerosol: TACTIC_v2
-atmos: Arpege 6.3 (T127; Gaussian Reduced with 24572 grid points in total distributed over 128 latitude circles (with 256 grid points per latitude circle between 30degN and 30degS reducing to 20 grid points per latitude circle at 88.9degN and 88.9degS); 91 levels; top level 78.4 km)
-atmosChem: REPROBUS-C_v2
-land: Surfex 8.0c
-ocean: Nemo 3.6 (eORCA1, tripolar primarily 1deg; 362 x 294 longitude/latitude; 75 levels; top grid cell 0-1 m)
-ocnBgchem: Pisces 2.s
-seaIce: Gelato 6.1 </variable>
+aerosol: tactic_v2
+atmos: arpege
+atmosChem: reprobus-c_v2
+land: surfex
+ocean: nemo
+ocnBgchem: pisces
+seaIce: gelato </variable>
 			<variable name="source_id" type="string"> CNRM-ESM2-1 </variable>
 			<variable name="source_type" type="string"> AGCM BGC AER CHEM </variable>
 			<variable name="sub_experiment_id" type="string"> none </variable>
@@ -224,13 +225,13 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="realm" type="string"> land </variable>
 			<variable name="references" type="string"> http://www.umr-cnrm.fr/cmip6/references </variable>
 			<variable name="source" type="string"> CNRM-ESM2-1 (2017):
-aerosol: TACTIC_v2
-atmos: Arpege 6.3 (T127; Gaussian Reduced with 24572 grid points in total distributed over 128 latitude circles (with 256 grid points per latitude circle between 30degN and 30degS reducing to 20 grid points per latitude circle at 88.9degN and 88.9degS); 91 levels; top level 78.4 km)
-atmosChem: REPROBUS-C_v2
-land: Surfex 8.0c
-ocean: Nemo 3.6 (eORCA1, tripolar primarily 1deg; 362 x 294 longitude/latitude; 75 levels; top grid cell 0-1 m)
-ocnBgchem: Pisces 2.s
-seaIce: Gelato 6.1 </variable>
+aerosol: tactic_v2
+atmos: arpege
+atmosChem: reprobus-c_v2
+land: surfex
+ocean: nemo
+ocnBgchem: pisces
+seaIce: gelato </variable>
 			<variable name="source_id" type="string"> CNRM-ESM2-1 </variable>
 			<variable name="source_type" type="string"> AGCM BGC AER CHEM </variable>
 			<variable name="sub_experiment_id" type="string"> none </variable>
@@ -285,13 +286,13 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="realm" type="string"> land </variable>
 			<variable name="references" type="string"> http://www.umr-cnrm.fr/cmip6/references </variable>
 			<variable name="source" type="string"> CNRM-ESM2-1 (2017):
-aerosol: TACTIC_v2
-atmos: Arpege 6.3 (T127; Gaussian Reduced with 24572 grid points in total distributed over 128 latitude circles (with 256 grid points per latitude circle between 30degN and 30degS reducing to 20 grid points per latitude circle at 88.9degN and 88.9degS); 91 levels; top level 78.4 km)
-atmosChem: REPROBUS-C_v2
-land: Surfex 8.0c
-ocean: Nemo 3.6 (eORCA1, tripolar primarily 1deg; 362 x 294 longitude/latitude; 75 levels; top grid cell 0-1 m)
-ocnBgchem: Pisces 2.s
-seaIce: Gelato 6.1 </variable>
+aerosol: tactic_v2
+atmos: arpege
+atmosChem: reprobus-c_v2
+land: surfex
+ocean: nemo
+ocnBgchem: pisces
+seaIce: gelato </variable>
 			<variable name="source_id" type="string"> CNRM-ESM2-1 </variable>
 			<variable name="source_type" type="string"> AGCM BGC AER CHEM </variable>
 			<variable name="sub_experiment_id" type="string"> none </variable>
@@ -345,13 +346,13 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="realm" type="string"> land </variable>
 			<variable name="references" type="string"> http://www.umr-cnrm.fr/cmip6/references </variable>
 			<variable name="source" type="string"> CNRM-ESM2-1 (2017):
-aerosol: TACTIC_v2
-atmos: Arpege 6.3 (T127; Gaussian Reduced with 24572 grid points in total distributed over 128 latitude circles (with 256 grid points per latitude circle between 30degN and 30degS reducing to 20 grid points per latitude circle at 88.9degN and 88.9degS); 91 levels; top level 78.4 km)
-atmosChem: REPROBUS-C_v2
-land: Surfex 8.0c
-ocean: Nemo 3.6 (eORCA1, tripolar primarily 1deg; 362 x 294 longitude/latitude; 75 levels; top grid cell 0-1 m)
-ocnBgchem: Pisces 2.s
-seaIce: Gelato 6.1 </variable>
+aerosol: tactic_v2
+atmos: arpege
+atmosChem: reprobus-c_v2
+land: surfex
+ocean: nemo
+ocnBgchem: pisces
+seaIce: gelato </variable>
 			<variable name="source_id" type="string"> CNRM-ESM2-1 </variable>
 			<variable name="source_type" type="string"> AGCM BGC AER CHEM </variable>
 			<variable name="sub_experiment_id" type="string"> none </variable>
@@ -405,13 +406,13 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="realm" type="string"> land </variable>
 			<variable name="references" type="string"> http://www.umr-cnrm.fr/cmip6/references </variable>
 			<variable name="source" type="string"> CNRM-ESM2-1 (2017):
-aerosol: TACTIC_v2
-atmos: Arpege 6.3 (T127; Gaussian Reduced with 24572 grid points in total distributed over 128 latitude circles (with 256 grid points per latitude circle between 30degN and 30degS reducing to 20 grid points per latitude circle at 88.9degN and 88.9degS); 91 levels; top level 78.4 km)
-atmosChem: REPROBUS-C_v2
-land: Surfex 8.0c
-ocean: Nemo 3.6 (eORCA1, tripolar primarily 1deg; 362 x 294 longitude/latitude; 75 levels; top grid cell 0-1 m)
-ocnBgchem: Pisces 2.s
-seaIce: Gelato 6.1 </variable>
+aerosol: tactic_v2
+atmos: arpege
+atmosChem: reprobus-c_v2
+land: surfex
+ocean: nemo
+ocnBgchem: pisces
+seaIce: gelato </variable>
 			<variable name="source_id" type="string"> CNRM-ESM2-1 </variable>
 			<variable name="source_type" type="string"> AGCM BGC AER CHEM </variable>
 			<variable name="sub_experiment_id" type="string"> none </variable>
@@ -465,13 +466,13 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="realm" type="string"> land </variable>
 			<variable name="references" type="string"> http://www.umr-cnrm.fr/cmip6/references </variable>
 			<variable name="source" type="string"> CNRM-ESM2-1 (2017):
-aerosol: TACTIC_v2
-atmos: Arpege 6.3 (T127; Gaussian Reduced with 24572 grid points in total distributed over 128 latitude circles (with 256 grid points per latitude circle between 30degN and 30degS reducing to 20 grid points per latitude circle at 88.9degN and 88.9degS); 91 levels; top level 78.4 km)
-atmosChem: REPROBUS-C_v2
-land: Surfex 8.0c
-ocean: Nemo 3.6 (eORCA1, tripolar primarily 1deg; 362 x 294 longitude/latitude; 75 levels; top grid cell 0-1 m)
-ocnBgchem: Pisces 2.s
-seaIce: Gelato 6.1 </variable>
+aerosol: tactic_v2
+atmos: arpege
+atmosChem: reprobus-c_v2
+land: surfex
+ocean: nemo
+ocnBgchem: pisces
+seaIce: gelato </variable>
 			<variable name="source_id" type="string"> CNRM-ESM2-1 </variable>
 			<variable name="source_type" type="string"> AGCM BGC AER CHEM </variable>
 			<variable name="sub_experiment_id" type="string"> none </variable>
@@ -525,13 +526,13 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="realm" type="string"> land </variable>
 			<variable name="references" type="string"> http://www.umr-cnrm.fr/cmip6/references </variable>
 			<variable name="source" type="string"> CNRM-ESM2-1 (2017):
-aerosol: TACTIC_v2
-atmos: Arpege 6.3 (T127; Gaussian Reduced with 24572 grid points in total distributed over 128 latitude circles (with 256 grid points per latitude circle between 30degN and 30degS reducing to 20 grid points per latitude circle at 88.9degN and 88.9degS); 91 levels; top level 78.4 km)
-atmosChem: REPROBUS-C_v2
-land: Surfex 8.0c
-ocean: Nemo 3.6 (eORCA1, tripolar primarily 1deg; 362 x 294 longitude/latitude; 75 levels; top grid cell 0-1 m)
-ocnBgchem: Pisces 2.s
-seaIce: Gelato 6.1 </variable>
+aerosol: tactic_v2
+atmos: arpege
+atmosChem: reprobus-c_v2
+land: surfex
+ocean: nemo
+ocnBgchem: pisces
+seaIce: gelato </variable>
 			<variable name="source_id" type="string"> CNRM-ESM2-1 </variable>
 			<variable name="source_type" type="string"> AGCM BGC AER CHEM </variable>
 			<variable name="sub_experiment_id" type="string"> none </variable>

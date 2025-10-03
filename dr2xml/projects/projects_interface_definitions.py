@@ -6,6 +6,7 @@ Interface to project settings
 """
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+import copy
 import os
 import re
 from collections import OrderedDict
@@ -61,6 +62,14 @@ def determine_value(key_type=None, keys=list(), func=None, fmt=None, src=None, c
                     found, value = func(*keys, additional_dict=additional_dict, internal_dict=internal_dict,
                                         common_dict=common_dict, allow_additional_keytypes=allow_additional_keytypes)
                 else:
+                    if isinstance(func, ValueSettings):
+                        func_test, func_value = return_value(func, common_dict=common_dict, internal_dict=internal_dict,
+                                                             additional_dict=additional_dict,
+                                                             allow_additional_keytypes=allow_additional_keytypes)
+                        if not func_test:
+                            logger.warning("Unable to determine function %s" % func)
+                        else:
+                            func = func_value
                     try:
                         value = func(*keys)
                         found = True
@@ -166,7 +175,7 @@ def determine_value(key_type=None, keys=list(), func=None, fmt=None, src=None, c
                             i_keys += 1
                         else:
                             found = False
-                    elif isinstance(value, (tuple, list, six.string_types)):
+                    elif isinstance(value, (tuple, list, six.string_types)) and isinstance(key, int):
                         if isinstance(key, int) and key < len(value):
                             value = value[key]
                             i_keys += 1
@@ -177,6 +186,9 @@ def determine_value(key_type=None, keys=list(), func=None, fmt=None, src=None, c
                         i_keys += 1
                     elif value is not None and key in value.__dir__():
                         value = value.__getattribute__(key)
+                        i_keys += 1
+                    elif value is not None and "__dict__" in value.__dir__():
+                        value = value.__getattr__(key)
                         i_keys += 1
                     else:
                         found = False
@@ -350,7 +362,7 @@ class ParameterSettings(Settings):
         return dict(skip_values=list(), forbidden_patterns=list(), conditions=list(), default_values=list(),
                     cases=list(), authorized_values=list(), authorized_types=list(), corrections=dict(),
                     output_key=None, num_type="string", is_default=False, fatal=False, key=None, help="TODO",
-                    target_type=None)
+                    target_type=None, init=False)
 
     def dump_doc(self, force_void=False):
         rep = list()
@@ -527,7 +539,7 @@ class ParameterSettings(Settings):
         elif not test and self.fatal and raise_on_error:
             logger.debug("Could not find a proper value for %s" % self.key)
             raise ValueError("Could not find a proper value for %s" % self.key)
-        # else:
+        else:
             logger.debug("Could not find a proper value for %s" % self.key)
         return test, value
 
@@ -633,16 +645,26 @@ class FunctionSettings(Settings):
                  allow_additional_keytypes=True):
         logger = get_logger()
         test = True
+        options = copy.deepcopy(self.options)
         for key in sorted(list(self.options)):
-            key_test, val = return_value(self.options[key], common_dict=common_dict, internal_dict=internal_dict,
+            key_test, val = return_value(options[key], common_dict=common_dict, internal_dict=internal_dict,
                                          additional_dict=additional_dict,
                                          allow_additional_keytypes=allow_additional_keytypes)
             if key_test:
-                self.options[key] = val
+                options[key] = val
             else:
-                del self.options[key]
+                del options[key]
+        if isinstance(self.func, ValueSettings):
+            func_test, func_val = return_value(self.func, common_dict=common_dict, internal_dict=internal_dict,
+                                               additional_dict=additional_dict,
+                                               allow_additional_keytypes=allow_additional_keytypes)
+            if func_test:
+                self.func = func_val
+            else:
+                logger.error("Unable to determine function to be used %s" % self.func)
+                # raise ValueError("Unable to determine function to be used %s" % self.func)
         try:
-            value = self.func(*args, **self.options)
+            value = self.func(*args, **options)
         except BaseException as e:
             logger.debug("Issue calling %s with arguments %s and options %s" % (str(self.func), str(args), str(self.options)))
             logger.debug(str(e))

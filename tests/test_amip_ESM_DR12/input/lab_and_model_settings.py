@@ -3,6 +3,7 @@
 
 
 lab_and_model_settings = {
+	'project_settings': "CMIP6_esgvoc",
 	'path_to_parse': '{path_xml}/',
 	'data_request_content_version': '{path_DR_config}',
 	'comment': '',
