@@ -7,8 +7,6 @@ CMIP6 python tools
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
-import string
-
 from dr2xml.projects.projects_interface_definitions import ParameterSettings, ValueSettings, FunctionSettings, \
     TagSettings, ConditionSettings
 
@@ -75,6 +73,15 @@ def fill_license(value, institution_id, info_url, license_id, license_url, comme
 
 
 internal_values = dict(
+	vocabulary_used=ParameterSettings(
+        key="vocabulary_used",
+		default_values=[
+			ValueSettings(key_type="laboratory", keys="vocabulary_used"),
+			"CMIP6"
+		],
+		help="The Vocabulary infrastructure type which should be used.",
+		init=True
+	),
     required_model_components=ParameterSettings(
         key="required_model_components",
         default_values=[

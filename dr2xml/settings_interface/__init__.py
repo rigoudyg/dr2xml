@@ -40,14 +40,14 @@ def initialize_settings(lset=None, sset=None, force_reset=False, **kwargs):
     # Solve internal settings
     internal_settings = solve_values("internal", internal_dict=internal_settings, additional_dict=kwargs,
                                      allow_additional_keytypes=False, only_init=True)
+    # Initialize vocabulary
+    from dr2xml.vocabulary import load_vocabulary
+    load_vocabulary()
     from dr2xml.dr_interface import load_correct_dr
     load_correct_dr()
     # Initialize laboratory sources
     from dr2xml.laboratories import initialize_laboratory_settings
     initialize_laboratory_settings()
-    # Initialize vocabulary
-    from dr2xml.vocabulary import load_vocabulary
-    load_vocabulary()
     # Solve not initial internal settings
     internal_settings = solve_values("internal", internal_dict=internal_settings, additional_dict=kwargs)
     # Solve common settings
