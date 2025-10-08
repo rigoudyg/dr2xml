@@ -1,27 +1,21 @@
 {
-  "default": {
+  "dr2xml_default": {
     "universe": {
       "github_repo": "https://github.com/WCRP-CMIP/WCRP-universe",
       "branch": "esgvoc",
       "local_path": "repos/WCRP-universe",
       "db_path": "dbs/universe.sqlite"
-    }
-  },
-  "CMIP6": {
+    },
     "projects": [
       {
-        "project_name": "CMIP6",
+        "project_name": "cmip6",
         "github_repo": "https://github.com/WCRP-CMIP/CMIP6_CVs",
         "branch": "esgvoc",
         "local_path": "repos/CMIP6_CVs",
         "db_path": "dbs/CMIP6_CVs.sqlite"
-      }
-    ]
-  },
-  "CMIP7": {
-    "projects": [
+      },
       {
-        "project_name": "CMIP7",
+        "project_name": "cmip7",
         "github_repo": "https://github.com/WCRP-CMIP/CMIP7_CVs",
         "branch": "esgvoc",
         "local_path": "repos/CMIP7_CVs",
@@ -38,7 +32,7 @@
     },
     "projects": [
       {
-        "project_name": "CMIP7_test",
+        "project_name": "cmip7_test",
         "github_repo": "https://github.com/WCRP-CMIP/CMIP7_CVs",
         "branch": "esgvoc_dr_1.2.2",
         "local_path": "repos/CMIP7_test_CVs",

@@ -5,12 +5,11 @@ set -e
 
 coverage erase
 
-# coverage run
-for f in $(ls tests/test_*.py); do
-    coverage run --parallel-mode -m unittest $f
+for f in $(cd tests; ls *.py); do
+  coverage run --parallel-mode tests/$f;
 done
-for f in $(ls tests/test_*/__init__.py); do
-    coverage run --parallel-mode -m unittest $f
+for f in $(cd tests; ls */__init__.py); do
+  coverage run --parallel-mode tests/$f;
 done
 coverage run --parallel-mode scripts/create_docs_projects.py --target_directory=test
 coverage run --parallel-mode scripts/check_outputs_produced.py --out=test tests/xml_outputs/dr2xml_trip.xml --ioxdir=tests/xml_outputs/outputs --fatal=0

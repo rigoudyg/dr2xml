@@ -114,7 +114,8 @@ internal_values = dict(
 			ValueSettings(key_type="laboratory", keys="project"),
 			"CMIP6"
 		],
-		help="Project associated with the simulation."
+		help="Project associated with the simulation.",
+		init=True
 	),
 	project_settings=ParameterSettings(
         key="project_settings",
@@ -1364,7 +1365,16 @@ internal_values = dict(
 			ValueSettings(key_type="laboratory", keys="vocabulary_used"),
 			None
 		],
-		help="The Vocabulary infrastructure type which should be used.",
+		help="The vocabulary infrastructure type which should be used.",
+		init=True
+	),
+	vocabulary_project=ParameterSettings(
+        key="vocabulary_project",
+		default_values=[
+			ValueSettings(key_type="laboratory", keys=["vocabulary_project", "lower", "__call__"]),
+			ValueSettings(key_type="internal", keys=["project", "lower", "__call__"])
+		],
+		help="The vocabulary project which should be used.",
 		init=True
 	),
 	vocabulary_config=ParameterSettings(

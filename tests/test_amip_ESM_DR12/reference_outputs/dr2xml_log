@@ -1,3 +1,24 @@
+sync universe
+Cache db is uptodate from local repository
+sync projects
+Cache db is uptodate from local repository
+Cache db is uptodate from local repository
+┌───────────────┬───────────────────┬──────────────────┬───────────────────┐
+│               │ Remote github     │ Local repository │ Cache Database    │
+│               │ repo              │                  │                   │
+├───────────────┼───────────────────┼──────────────────┼───────────────────┤
+│ Universe path │ https://github.c… │ home_directory/… │ home_directory/.… │
+├───────────────┼───────────────────┼──────────────────┼───────────────────┤
+│ Version       │ f15a0b0054ce5f24… │ f15a0b0054ce5f2… │ f15a0b0054ce5f24… │
+├───────────────┼───────────────────┼──────────────────┼───────────────────┤
+│ cmip6 path    │ https://github.c… │ home_directory/… │ home_directory/.… │
+├───────────────┼───────────────────┼──────────────────┼───────────────────┤
+│ Version       │ 45f9f6981faf0ce0… │ 45f9f6981faf0ce… │ 45f9f6981faf0ce0… │
+├───────────────┼───────────────────┼──────────────────┼───────────────────┤
+│ cmip7 path    │ https://github.c… │ home_directory/… │ home_directory/.… │
+├───────────────┼───────────────────┼──────────────────┼───────────────────┤
+│ Version       │ f787775531e11213… │ f787775531e1121… │ f787775531e11213… │
+└───────────────┴───────────────────┴──────────────────┴───────────────────┘
 
  **************************************************
 *
@@ -2279,6 +2300,27 @@ Warnings about cell methods (with var list)
 	time: mean where vegetation for vars: {'vegHeight'}
 	time: mean where ice_sheet for vars: {'hflsIs', 'hfssIs', 'mrroIs', 'orogIs', 'prraIs', 'prsnIs', 'rldsIs', 'rlusIs', 'rsdsIs', 'rsusIs', 'sblIs', 'sncIs', 'snmIs', 'tas', 'tasIs', 'tsIs', 'tsnIs'}
 	Cannot yet handle time: mean (with samples weighted by snow mass) for vars: {'agesno', 'tsn'}
+sync universe
+Cache db is uptodate from local repository
+sync projects
+Cache db is uptodate from local repository
+Cache db is uptodate from local repository
+┌───────────────┬───────────────────┬──────────────────┬───────────────────┐
+│               │ Remote github     │ Local repository │ Cache Database    │
+│               │ repo              │                  │                   │
+├───────────────┼───────────────────┼──────────────────┼───────────────────┤
+│ Universe path │ https://github.c… │ home_directory/… │ home_directory/.… │
+├───────────────┼───────────────────┼──────────────────┼───────────────────┤
+│ Version       │ f15a0b0054ce5f24… │ f15a0b0054ce5f2… │ f15a0b0054ce5f24… │
+├───────────────┼───────────────────┼──────────────────┼───────────────────┤
+│ cmip6 path    │ https://github.c… │ home_directory/… │ home_directory/.… │
+├───────────────┼───────────────────┼──────────────────┼───────────────────┤
+│ Version       │ 45f9f6981faf0ce0… │ 45f9f6981faf0ce… │ 45f9f6981faf0ce0… │
+├───────────────┼───────────────────┼──────────────────┼───────────────────┤
+│ cmip7 path    │ https://github.c… │ home_directory/… │ home_directory/.… │
+├───────────────┼───────────────────┼──────────────────┼───────────────────┤
+│ Version       │ f787775531e11213… │ f787775531e1121… │ f787775531e11213… │
+└───────────────┴───────────────────┴──────────────────┴───────────────────┘
 
  **************************************************
 *

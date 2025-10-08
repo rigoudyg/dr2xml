@@ -1,3 +1,24 @@
+sync universe
+Cache db is uptodate from local repository
+sync projects
+Cache db is uptodate from local repository
+Cache db is uptodate from local repository
+┌───────────────┬───────────────────┬──────────────────┬───────────────────┐
+│               │ Remote github     │ Local repository │ Cache Database    │
+│               │ repo              │                  │                   │
+├───────────────┼───────────────────┼──────────────────┼───────────────────┤
+│ Universe path │ https://github.c… │ home_directory/… │ home_directory/.… │
+├───────────────┼───────────────────┼──────────────────┼───────────────────┤
+│ Version       │ f15a0b0054ce5f24… │ f15a0b0054ce5f2… │ f15a0b0054ce5f24… │
+├───────────────┼───────────────────┼──────────────────┼───────────────────┤
+│ cmip6 path    │ https://github.c… │ home_directory/… │ home_directory/.… │
+├───────────────┼───────────────────┼──────────────────┼───────────────────┤
+│ Version       │ 45f9f6981faf0ce0… │ 45f9f6981faf0ce… │ 45f9f6981faf0ce0… │
+├───────────────┼───────────────────┼──────────────────┼───────────────────┤
+│ cmip7 path    │ https://github.c… │ home_directory/… │ home_directory/.… │
+├───────────────┼───────────────────┼──────────────────┼───────────────────┤
+│ Version       │ f787775531e11213… │ f787775531e1121… │ f787775531e11213… │
+└───────────────┴───────────────────┴──────────────────┴───────────────────┘
 
  **************************************************
 *
@@ -210,6 +231,27 @@ Some Statistics on actually written variables per variable...
 
 Warnings about cell methods (with var list)
 	time: mean where sea_ice for vars: {'sithick', 'siu', 'siv'}
+sync universe
+Cache db is uptodate from local repository
+sync projects
+Cache db is uptodate from local repository
+Cache db is uptodate from local repository
+┌───────────────┬───────────────────┬──────────────────┬───────────────────┐
+│               │ Remote github     │ Local repository │ Cache Database    │
+│               │ repo              │                  │                   │
+├───────────────┼───────────────────┼──────────────────┼───────────────────┤
+│ Universe path │ https://github.c… │ home_directory/… │ home_directory/.… │
+├───────────────┼───────────────────┼──────────────────┼───────────────────┤
+│ Version       │ f15a0b0054ce5f24… │ f15a0b0054ce5f2… │ f15a0b0054ce5f24… │
+├───────────────┼───────────────────┼──────────────────┼───────────────────┤
+│ cmip6 path    │ https://github.c… │ home_directory/… │ home_directory/.… │
+├───────────────┼───────────────────┼──────────────────┼───────────────────┤
+│ Version       │ 45f9f6981faf0ce0… │ 45f9f6981faf0ce… │ 45f9f6981faf0ce0… │
+├───────────────┼───────────────────┼──────────────────┼───────────────────┤
+│ cmip7 path    │ https://github.c… │ home_directory/… │ home_directory/.… │
+├───────────────┼───────────────────┼──────────────────┼───────────────────┤
+│ Version       │ f787775531e11213… │ f787775531e1121… │ f787775531e11213… │
+└───────────────┴───────────────────┴──────────────────┴───────────────────┘
 
  **************************************************
 *
@@ -390,6 +432,27 @@ Some Statistics on actually written variables per variable...
 ----------------
               *     day_day_XY-P19_1 zg
               *    mon_Amon_XY-P19_1 zg
+sync universe
+Cache db is uptodate from local repository
+sync projects
+Cache db is uptodate from local repository
+Cache db is uptodate from local repository
+┌───────────────┬───────────────────┬──────────────────┬───────────────────┐
+│               │ Remote github     │ Local repository │ Cache Database    │
+│               │ repo              │                  │                   │
+├───────────────┼───────────────────┼──────────────────┼───────────────────┤
+│ Universe path │ https://github.c… │ home_directory/… │ home_directory/.… │
+├───────────────┼───────────────────┼──────────────────┼───────────────────┤
+│ Version       │ f15a0b0054ce5f24… │ f15a0b0054ce5f2… │ f15a0b0054ce5f24… │
+├───────────────┼───────────────────┼──────────────────┼───────────────────┤
+│ cmip6 path    │ https://github.c… │ home_directory/… │ home_directory/.… │
+├───────────────┼───────────────────┼──────────────────┼───────────────────┤
+│ Version       │ 45f9f6981faf0ce0… │ 45f9f6981faf0ce… │ 45f9f6981faf0ce0… │
+├───────────────┼───────────────────┼──────────────────┼───────────────────┤
+│ cmip7 path    │ https://github.c… │ home_directory/… │ home_directory/.… │
+├───────────────┼───────────────────┼──────────────────┼───────────────────┤
+│ Version       │ f787775531e11213… │ f787775531e1121… │ f787775531e11213… │
+└───────────────┴───────────────────┴──────────────────┴───────────────────┘
 
  **************************************************
 *

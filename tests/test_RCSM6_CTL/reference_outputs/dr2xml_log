@@ -203,7 +203,7 @@ processing file current_directory/test_RCSM6_CTL/input/xml/ping_surfex.xml:
 OK current_directory/test_RCSM6_CTL/input/xml/ping_surfex.xml
 processing file current_directory/test_RCSM6_CTL/input/xml/ping_trip.xml:
 OK current_directory/test_RCSM6_CTL/input/xml/ping_trip.xml
-Model component AOGCM is required by CMIP6 CV for experiment historical and not present (present=['AORCM', 'AER'])
+Model component aogcm is required by CMIP6 CV for experiment historical and not present (present=['aorcm', 'aer'])
 Reading split_freqs from file current_directory/test_RCSM6_CTL/input/home_data_request/split_freqs.dat
 TBD: Cannot yet compute maximum hourly rate for          prhmax in table Eday -> averaging
 TBD: Cannot yet compute maximum hourly rate for          prhmax in table Eday -> averaging
@@ -1535,7 +1535,7 @@ processing file current_directory/test_RCSM6_CTL/input/xml/ping_surfex.xml:
 OK current_directory/test_RCSM6_CTL/input/xml/ping_surfex.xml
 processing file current_directory/test_RCSM6_CTL/input/xml/ping_trip.xml:
 OK current_directory/test_RCSM6_CTL/input/xml/ping_trip.xml
-Model component AOGCM is required by CMIP6 CV for experiment historical and not present (present=['AORCM', 'AER'])
+Model component aogcm is required by CMIP6 CV for experiment historical and not present (present=['aorcm', 'aer'])
 Reading split_freqs from file current_directory/test_RCSM6_CTL/input/home_data_request/split_freqs.dat
 
 file_def written as current_directory/test_RCSM6_CTL/test_outputs/dr2xml_trip.xml

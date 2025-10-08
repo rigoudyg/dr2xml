@@ -27,12 +27,11 @@ def make_source_string(source, source_id):
     """
     # mpmoine_correction:make_source_string: pour lire correctement le fichier 'CMIP6_source_id.json'
     components = source['model_component']
-    rep = source_id + " (" + source['release_year'] + "):"
+    rep = "%s (%d):" % (source_id, source['release_year'])
     for realm in ["aerosol", "atmos", "atmosChem", "land", "ocean", "ocnBgchem", "seaIce"]:
         component = components[realm]
-        description = component['description']
-        if description != "none":
-            rep = rep + "\n" + realm + ": " + description
+        if component != "none":
+            rep = rep + "\n" + realm + ": " + component
     return rep
 
 
@@ -62,15 +61,35 @@ def build_filename(frequency, prefix, table, source_id, expid_in_filename, membe
     return filename
 
 
-def fill_license(value, institution_id, info_url):
+def fill_license(value, institution_id, info_url, license_id, license_url, commercial_license):
     value = value.replace("<Your Centre Name>", institution_id)
+    value = value.replace("<Your Institution; see CMIP6_institution_id.json>", institution_id)
     # TODO: Adapt next line
-    value = value.replace("[NonCommercial-]", "NonCommercial-")
+    value = value.replace("[NonCommercial-]", commercial_license)
+    value = value.replace("<Creative Commons; select and insert a license_id; see below>", license_id)
     value = value.replace("[ and at <some URL maintained by modeling group>]", " and at " + info_url)
+    value = value.replace("<insert the matching license_url; see below>", license_url)
     return value
 
 
 internal_values = dict(
+	project=ParameterSettings(
+        key="project",
+		default_values=[
+			ValueSettings(key_type="laboratory", keys="project"),
+			"CMIP7"
+		],
+		help="Project associated with the simulation."
+	),
+	vocabulary_used=ParameterSettings(
+        key="vocabulary_used",
+		default_values=[
+			ValueSettings(key_type="laboratory", keys="vocabulary_used"),
+			"dr2xml_default"
+		],
+		help="The Vocabulary infrastructure type which should be used.",
+		init=True
+	),
     required_model_components=ParameterSettings(
         key="required_model_components",
         default_values=[
@@ -93,19 +112,61 @@ internal_values = dict(
         key="CV_experiment",
         default_values=[
             ValueSettings(
-                func=ValueSettings(key_type="vocabulary", keys="get_term_in_collection"),
                 keys=[
-                    ValueSettings(key_type="internal", keys="vocabulary_used"),
+                    ValueSettings(key_type="internal", keys="vocabulary_project"),
                     "experiment",
                     ValueSettings(key_type="internal", keys="experiment_id")
-                ]
+                ],
+                func=ValueSettings(key_type="vocabulary", keys="get_term_in_collection")
             )
         ],
+        skip_values=[None, ""],
+        fatal=True,
         help="Controlled vocabulary file containing experiment characteristics."
     )
 )
 
 common_values = dict(
+    commercial_license=ParameterSettings(
+        key="commercial_license",
+        default_values=[
+            ValueSettings(key_type="laboratory", keys="commercial_license"),
+            "NonCommercial-"
+        ],
+        choices=["", "NonCommercial-"],
+        help="Either commercial or not commercial license",
+        fatal=True
+    ),
+    license_id=ParameterSettings(
+        key="license_id",
+        default_values=[
+            ValueSettings(key_type="common", keys=[
+                "license_file",
+                "license",
+                ValueSettings(key_type="laboratory", keys="license_id"),
+                "license_id"
+            ]),
+            ValueSettings(key_type="common", keys=["license_file", "license_options", "CC BY-NC-SA 4.0", "license_id"]),
+            ""
+        ],
+        help="License id",
+        fatal=True
+    ),
+    license_url=ParameterSettings(
+        key="license_url",
+        default_values=[
+            ValueSettings(key_type="common", keys=[
+                "license_file",
+                "license",
+                ValueSettings(key_type="laboratory", keys="license_id"),
+                "license_url"
+            ]),
+            ValueSettings(key_type="common", keys=["license_file", "license_options", "CC BY-NC-SA 4.0", "license_url"]),
+            "https://creativecommons.org/licenses"
+        ],
+        help="License url",
+        fatal=True
+    ),
     conventions_version=ParameterSettings(
         key="conventions_version",
         default_values=[
@@ -118,7 +179,7 @@ common_values = dict(
         default_values=[
             ValueSettings(key_type="simulation", keys="activity_id"),
             ValueSettings(key_type="laboratory", keys="activity_id"),
-            ValueSettings(key_type="internal", keys=["CV_experiment", "activity_id"])
+            ValueSettings(key_type="internal", keys=["CV_experiment", "activity_id", 0, "upper", "__call__"])
         ]
     ),
     parent_activity_id=ParameterSettings(
@@ -139,58 +200,62 @@ common_values = dict(
             "21.14100"
         ]
     ),
+    source_input=ParameterSettings(
+        key="source_input",
+        default_values=[
+            ValueSettings(
+                keys=[
+                    ValueSettings(key_type="internal", keys="vocabulary_project"),
+                    "source",
+                    ValueSettings(key_type="internal", keys=["source_id", "lower", "__call__"])
+                ],
+                func=ValueSettings(key_type="vocabulary", keys="get_term_in_collection")
+            )
+        ],
+        help="Source information from input",
+        skip_values=[None, ""]
+    ),
     source=ParameterSettings(
         key="source",
         default_values=[
             ValueSettings(
-                key_type="json",
-                keys=[
-                    "source_id",
-                    ValueSettings(key_type="internal", keys="source_id")
-                ],
-                src=ValueSettings(
-                    key_type="combine",
-                    keys=[
-                        ValueSettings(key_type="dict", keys="cvspath"),
-                        ValueSettings(key_type="internal", keys="project")
-                    ],
-                    fmt="{}{}_source_id.json"
-                ),
+                key_type="common",
+                keys=["source_input", "__dict__"],
                 func=FunctionSettings(
                     func=make_source_string,
                     options=dict(source_id=ValueSettings(key_type="internal", keys="source_id"))
                 )
             ),
             ValueSettings(key_type="laboratory", keys="source")
+        ],
+        fatal=True
+    ),
+    institution_input=ParameterSettings(
+        key="institution_input",
+        default_values=[
+            ValueSettings(
+                keys=[
+                    ValueSettings(key_type="internal", keys="vocabulary_project"),
+                    "institution",
+                    ValueSettings(key_type="internal", keys=["institution_id", "lower", "__call__"])
+                ],
+                func=ValueSettings(key_type="vocabulary", keys="get_term_in_collection")
+            )
         ]
     ),
     institution=ParameterSettings(
         key="institution",
         default_values=[
             ValueSettings(key_type="laboratory", keys="institution"),
-            ValueSettings(
-                key_type="json",
-                keys=[
-                    "institution_id",
-                    ValueSettings(key_type="internal", keys="institution_id")
-                ],
-                src=ValueSettings(
-                    key_type="combine",
-                    keys=[
-                        ValueSettings(key_type="dict", keys="cvspath"),
-                        ValueSettings(key_type="internal", keys="project")
-                    ],
-                    fmt="{}{}_institution_id.json"
-                )
-            )
+            ValueSettings(key_type="common", keys=["institution_input", "description"])
         ]
     ),
-    license=ParameterSettings(
-        key="license",
+    license_file=ParameterSettings(
+        key="license_file",
         default_values=[
             ValueSettings(
                 key_type="json",
-                keys=["license", 0],
+                keys=["license"],
                 src=ValueSettings(
                     key_type="combine",
                     keys=[
@@ -201,7 +266,17 @@ common_values = dict(
                 )
             )
         ],
+        fatal=True,
         help="File where the license associated with the produced output files can be found."
+    ),
+    license=ParameterSettings(
+        key="license",
+        default_values=[
+            ValueSettings(key_type="common", keys=["license_file", 0]),
+            ValueSettings(key_type="common", keys=["license_file", "license"]),
+        ],
+        fatal=True,
+        help="Text of the license which applies"
     ),
     parent_experiment_id=ParameterSettings(
         key="parent_experiment_id",
@@ -374,7 +449,10 @@ project_settings = dict(
                             func=fill_license,
                             options=dict(
                                 institution_id=ValueSettings(key_type="internal", keys="institution_id"),
-                                info_url=ValueSettings(key_type="common", keys="info_url")
+                                info_url=ValueSettings(key_type="common", keys="info_url"),
+                                commercial_license=ValueSettings(key_type="common", keys="commercial_license"),
+                                license_id=ValueSettings(key_type="common", keys="license_id"),
+                                license_url=ValueSettings(key_type="common", keys="license_url")
                             )
                         )
                     )

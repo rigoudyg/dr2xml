@@ -45,6 +45,14 @@
 'references' = 'http://www.umr-cnrm.fr/cmip6/references',
 'sampling_timestep' = {'HR' = {'nemo' = '1800.0', 'surfex' = '900.0', 'trip' = '1800.0'}, 'LR' = {'nemo' = '1800.0', 'surfex' = '900.0', 'trip' = '1800.0'}},
 'sizes' = {'HR' = ['1514100', '75', '259200', '91', '30', '14', '128'], 'LR' = ['106428', '75', '32768', '91', '30', '14', '128']},
+'source' = 'CNRM-ESM2-1 (2017):
+aerosol: TACTIC_v2
+atmos: Arpege 6.3 (T127; Gaussian Reduced with 24572 grid points in total distributed over 128 latitude circles (with 256 grid points per latitude circle between 30degN and 30degS reducing to 20 grid points per latitude circle at 88.9degN and 88.9degS); 91 levels; top level 78.4 km)
+atmosChem: REPROBUS-C_v2
+land: Surfex 8.0c
+ocean: Nemo 3.6 (eORCA1, tripolar primarily 1deg; 362 x 294 longitude/latitude; 75 levels; top grid cell 0-1 m)
+ocnBgchem: Pisces 2.s
+seaIce: Gelato 6.1',
 'source_types' = {'CNRM-CM6-1' = 'AOGCM', 'CNRM-CM6-1-HR' = 'AOGCM', 'CNRM-ESM2-1' = 'AOGCM BGC AER CHEM', 'CNRM-ESM2-1-HR' = 'AOGCM BGC AER'},
 'special_timestep_vars' = {'60mi' = ['cllcalipso', 'clmcalipso', 'clhcalipso', 'cltcalipso', 'cllcalipsoice', 'clmcalipsoice', 'clhcalipsoice', 'cltcalipsoice', 'cllcalipsoliq', 'clmcalipsoliq', 'clhcalipsoliq', 'cltcalipsoliq', 'cllcalipsoun', 'clmcalipsoun', 'clhcalipsoun', 'cltcalipsoun', 'clcalipso', 'clcalipsoice', 'clcalipsoliq', 'clcalipsoun', 'clcalipsotmp', 'clcalipsotmpice', 'clcalipsotmpliq', 'clcalipsotmpun', 'cfadLidarsr532', 'parasolRefl', 'parasolCRefl', 'cltlidarradar', 'clcalipso2', 'cfadDbze94', 'cltisccp', 'pctisccp', 'tauisccp', 'albisccp', 'meantbisccp', 'meantbclrisccp', 'clisccp', 'cltmodis', 'clwmodis', 'climodis', 'clhmodis', 'clmmodis', 'cllmodis', 'tautmodis', 'tauwmodis', 'tauimodis', 'reffclwmodis', 'reffclimodis', 'pctmodis', 'lwpmodis', 'iwpmodis', 'clmodis', 'jpdftaureliqmodis', 'jpdftaureicemodis', 'clmisr']},
 'tierMax' = '1',

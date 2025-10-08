@@ -45,6 +45,14 @@
 'references' = 'http://www.umr-cnrm.fr/cmip6/references',
 'sampling_timestep' = {'HR' = {'nemo' = '1800.0', 'surfex' = '900.0', 'trip' = '1800.0'}, 'LR' = {'nemo' = '1800.0', 'surfex' = '900.0', 'trip' = '1800.0'}},
 'sizes' = {'HR' = ['1514100', '75', '259200', '91', '30', '14', '128'], 'LR' = ['106428', '75', '32768', '91', '30', '14', '128']},
+'source' = 'CNRM-ESM2-1 (2017):
+aerosol: TACTIC_v2
+atmos: Arpege 6.3 (T127; Gaussian Reduced with 24572 grid points in total distributed over 128 latitude circles (with 256 grid points per latitude circle between 30degN and 30degS reducing to 20 grid points per latitude circle at 88.9degN and 88.9degS); 91 levels; top level 78.4 km)
+atmosChem: REPROBUS-C_v2
+land: Surfex 8.0c
+ocean: Nemo 3.6 (eORCA1, tripolar primarily 1deg; 362 x 294 longitude/latitude; 75 levels; top grid cell 0-1 m)
+ocnBgchem: Pisces 2.s
+seaIce: Gelato 6.1',
 'source_types' = {'CNRM-CM6-1' = 'AOGCM', 'CNRM-CM6-1-HR' = 'AOGCM', 'CNRM-ESM2-1' = 'AOGCM BGC AER CHEM', 'CNRM-ESM2-1-HR' = 'AOGCM BGC AER'},
 'special_timestep_vars' = {'60mi' = ['cllcalipso', 'clmcalipso', 'clhcalipso', 'cltcalipso', 'cllcalipsoice', 'clmcalipsoice', 'clhcalipsoice', 'cltcalipsoice', 'cllcalipsoliq', 'clmcalipsoliq', 'clhcalipsoliq', 'cltcalipsoliq', 'cllcalipsoun', 'clmcalipsoun', 'clhcalipsoun', 'cltcalipsoun', 'clcalipso', 'clcalipsoice', 'clcalipsoliq', 'clcalipsoun', 'clcalipsotmp', 'clcalipsotmpice', 'clcalipsotmpliq', 'clcalipsotmpun', 'cfadLidarsr532', 'parasolRefl', 'parasolCRefl', 'cltlidarradar', 'clcalipso2', 'cfadDbze94', 'cltisccp', 'pctisccp', 'tauisccp', 'albisccp', 'meantbisccp', 'meantbclrisccp', 'clisccp', 'cltmodis', 'clwmodis', 'climodis', 'clhmodis', 'clmmodis', 'cllmodis', 'tautmodis', 'tauwmodis', 'tauimodis', 'reffclwmodis', 'reffclimodis', 'pctmodis', 'lwpmodis', 'iwpmodis', 'clmodis', 'jpdftaureliqmodis', 'jpdftaureicemodis', 'clmisr']},
 'tierMax' = '1',
@@ -82,9 +90,11 @@
 			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="description" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="title" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="experiment" type="string"> Simulation of the recent past (concentration driven) </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> day </variable>
 			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/DEV.CNRM-CERFACS.CNRM-ESM2-1.historical.none.r1i1p1f2 </variable>
@@ -97,9 +107,9 @@
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="license" type="string"> CMIP6 model data produced by CNRM-CERFACS is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (https://creativecommons.org/licenses). Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment. Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file) and at http://www.umr-cnrm.fr/cmip6/. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law. </variable>
 			<variable name="mip_era" type="string"> DEV </variable>
-			<variable name="parent_experiment_id" type="string"> piControl </variable>
+			<variable name="parent_experiment_id" type="string"> picontrol </variable>
 			<variable name="parent_mip_era" type="string"> DEV </variable>
-			<variable name="parent_activity_id" type="string"> CMIP </variable>
+			<variable name="parent_activity_id" type="string"> cmip </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1 </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
@@ -149,9 +159,11 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="description" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="title" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="experiment" type="string"> Simulation of the recent past (concentration driven) </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -165,9 +177,9 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="license" type="string"> CMIP6 model data produced by CNRM-CERFACS is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (https://creativecommons.org/licenses). Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment. Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file) and at http://www.umr-cnrm.fr/cmip6/. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law. </variable>
 			<variable name="mip_era" type="string"> False </variable>
-			<variable name="parent_experiment_id" type="string"> piControl </variable>
+			<variable name="parent_experiment_id" type="string"> picontrol </variable>
 			<variable name="parent_mip_era" type="string"> False </variable>
-			<variable name="parent_activity_id" type="string"> CMIP </variable>
+			<variable name="parent_activity_id" type="string"> cmip </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1 </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
@@ -218,9 +230,11 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="description" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="title" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="experiment" type="string"> Simulation of the recent past (concentration driven) </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -234,9 +248,9 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="license" type="string"> CMIP6 model data produced by CNRM-CERFACS is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (https://creativecommons.org/licenses). Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment. Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file) and at http://www.umr-cnrm.fr/cmip6/. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law. </variable>
 			<variable name="mip_era" type="string"> False </variable>
-			<variable name="parent_experiment_id" type="string"> piControl </variable>
+			<variable name="parent_experiment_id" type="string"> picontrol </variable>
 			<variable name="parent_mip_era" type="string"> False </variable>
-			<variable name="parent_activity_id" type="string"> CMIP </variable>
+			<variable name="parent_activity_id" type="string"> cmip </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1 </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
@@ -287,9 +301,11 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="description" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="title" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="experiment" type="string"> Simulation of the recent past (concentration driven) </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -303,9 +319,9 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="license" type="string"> CMIP6 model data produced by CNRM-CERFACS is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (https://creativecommons.org/licenses). Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment. Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file) and at http://www.umr-cnrm.fr/cmip6/. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law. </variable>
 			<variable name="mip_era" type="string"> False </variable>
-			<variable name="parent_experiment_id" type="string"> piControl </variable>
+			<variable name="parent_experiment_id" type="string"> picontrol </variable>
 			<variable name="parent_mip_era" type="string"> False </variable>
-			<variable name="parent_activity_id" type="string"> CMIP </variable>
+			<variable name="parent_activity_id" type="string"> cmip </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1 </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
@@ -356,9 +372,11 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="description" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="title" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="experiment" type="string"> Simulation of the recent past (concentration driven) </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -372,9 +390,9 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="license" type="string"> CMIP6 model data produced by CNRM-CERFACS is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (https://creativecommons.org/licenses). Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment. Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file) and at http://www.umr-cnrm.fr/cmip6/. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law. </variable>
 			<variable name="mip_era" type="string"> False </variable>
-			<variable name="parent_experiment_id" type="string"> piControl </variable>
+			<variable name="parent_experiment_id" type="string"> picontrol </variable>
 			<variable name="parent_mip_era" type="string"> False </variable>
-			<variable name="parent_activity_id" type="string"> CMIP </variable>
+			<variable name="parent_activity_id" type="string"> cmip </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1 </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
@@ -425,9 +443,11 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="description" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="title" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="experiment" type="string"> Simulation of the recent past (concentration driven) </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -441,9 +461,9 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="license" type="string"> CMIP6 model data produced by CNRM-CERFACS is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (https://creativecommons.org/licenses). Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment. Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file) and at http://www.umr-cnrm.fr/cmip6/. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law. </variable>
 			<variable name="mip_era" type="string"> False </variable>
-			<variable name="parent_experiment_id" type="string"> piControl </variable>
+			<variable name="parent_experiment_id" type="string"> picontrol </variable>
 			<variable name="parent_mip_era" type="string"> False </variable>
-			<variable name="parent_activity_id" type="string"> CMIP </variable>
+			<variable name="parent_activity_id" type="string"> cmip </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1 </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
@@ -494,9 +514,11 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="description" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="title" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="experiment" type="string"> Simulation of the recent past (concentration driven) </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -510,9 +532,9 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="license" type="string"> CMIP6 model data produced by CNRM-CERFACS is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (https://creativecommons.org/licenses). Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment. Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file) and at http://www.umr-cnrm.fr/cmip6/. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law. </variable>
 			<variable name="mip_era" type="string"> False </variable>
-			<variable name="parent_experiment_id" type="string"> piControl </variable>
+			<variable name="parent_experiment_id" type="string"> picontrol </variable>
 			<variable name="parent_mip_era" type="string"> False </variable>
-			<variable name="parent_activity_id" type="string"> CMIP </variable>
+			<variable name="parent_activity_id" type="string"> cmip </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1 </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
@@ -563,9 +585,11 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="description" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="title" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="experiment" type="string"> Simulation of the recent past (concentration driven) </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -579,9 +603,9 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="license" type="string"> CMIP6 model data produced by CNRM-CERFACS is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (https://creativecommons.org/licenses). Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment. Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file) and at http://www.umr-cnrm.fr/cmip6/. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law. </variable>
 			<variable name="mip_era" type="string"> False </variable>
-			<variable name="parent_experiment_id" type="string"> piControl </variable>
+			<variable name="parent_experiment_id" type="string"> picontrol </variable>
 			<variable name="parent_mip_era" type="string"> False </variable>
-			<variable name="parent_activity_id" type="string"> CMIP </variable>
+			<variable name="parent_activity_id" type="string"> cmip </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1 </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
@@ -632,9 +656,11 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="description" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="title" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="experiment" type="string"> Simulation of the recent past (concentration driven) </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> day </variable>
@@ -648,9 +674,9 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="license" type="string"> CMIP6 model data produced by CNRM-CERFACS is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (https://creativecommons.org/licenses). Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment. Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file) and at http://www.umr-cnrm.fr/cmip6/. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law. </variable>
 			<variable name="mip_era" type="string"> False </variable>
-			<variable name="parent_experiment_id" type="string"> piControl </variable>
+			<variable name="parent_experiment_id" type="string"> picontrol </variable>
 			<variable name="parent_mip_era" type="string"> False </variable>
-			<variable name="parent_activity_id" type="string"> CMIP </variable>
+			<variable name="parent_activity_id" type="string"> cmip </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1 </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
@@ -701,9 +727,11 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="description" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="title" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="experiment" type="string"> Simulation of the recent past (concentration driven) </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> fx </variable>
 			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/False.CNRM-CERFACS.CNRM-ESM2-1.historical.none.r1i1p1f2 </variable>
@@ -716,9 +744,9 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="license" type="string"> CMIP6 model data produced by CNRM-CERFACS is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (https://creativecommons.org/licenses). Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment. Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file) and at http://www.umr-cnrm.fr/cmip6/. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law. </variable>
 			<variable name="mip_era" type="string"> False </variable>
-			<variable name="parent_experiment_id" type="string"> piControl </variable>
+			<variable name="parent_experiment_id" type="string"> picontrol </variable>
 			<variable name="parent_mip_era" type="string"> False </variable>
-			<variable name="parent_activity_id" type="string"> CMIP </variable>
+			<variable name="parent_activity_id" type="string"> cmip </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1 </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
@@ -767,9 +795,11 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="description" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="title" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="experiment" type="string"> Simulation of the recent past (concentration driven) </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> fx </variable>
@@ -783,9 +813,9 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="license" type="string"> CMIP6 model data produced by CNRM-CERFACS is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (https://creativecommons.org/licenses). Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment. Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file) and at http://www.umr-cnrm.fr/cmip6/. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law. </variable>
 			<variable name="mip_era" type="string"> False </variable>
-			<variable name="parent_experiment_id" type="string"> piControl </variable>
+			<variable name="parent_experiment_id" type="string"> picontrol </variable>
 			<variable name="parent_mip_era" type="string"> False </variable>
-			<variable name="parent_activity_id" type="string"> CMIP </variable>
+			<variable name="parent_activity_id" type="string"> cmip </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1 </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
@@ -835,9 +865,11 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="description" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="title" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="experiment" type="string"> Simulation of the recent past (concentration driven) </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> fx </variable>
@@ -851,9 +883,9 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="license" type="string"> CMIP6 model data produced by CNRM-CERFACS is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (https://creativecommons.org/licenses). Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment. Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file) and at http://www.umr-cnrm.fr/cmip6/. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law. </variable>
 			<variable name="mip_era" type="string"> False </variable>
-			<variable name="parent_experiment_id" type="string"> piControl </variable>
+			<variable name="parent_experiment_id" type="string"> picontrol </variable>
 			<variable name="parent_mip_era" type="string"> False </variable>
-			<variable name="parent_activity_id" type="string"> CMIP </variable>
+			<variable name="parent_activity_id" type="string"> cmip </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1 </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
@@ -903,9 +935,11 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="description" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="title" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="experiment" type="string"> Simulation of the recent past (concentration driven) </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> fx </variable>
@@ -919,9 +953,9 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="license" type="string"> CMIP6 model data produced by CNRM-CERFACS is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (https://creativecommons.org/licenses). Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment. Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file) and at http://www.umr-cnrm.fr/cmip6/. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law. </variable>
 			<variable name="mip_era" type="string"> False </variable>
-			<variable name="parent_experiment_id" type="string"> piControl </variable>
+			<variable name="parent_experiment_id" type="string"> picontrol </variable>
 			<variable name="parent_mip_era" type="string"> False </variable>
-			<variable name="parent_activity_id" type="string"> CMIP </variable>
+			<variable name="parent_activity_id" type="string"> cmip </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1 </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
@@ -971,9 +1005,11 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="description" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="title" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="experiment" type="string"> Simulation of the recent past (concentration driven) </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -987,9 +1023,9 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="license" type="string"> CMIP6 model data produced by CNRM-CERFACS is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (https://creativecommons.org/licenses). Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment. Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file) and at http://www.umr-cnrm.fr/cmip6/. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law. </variable>
 			<variable name="mip_era" type="string"> False </variable>
-			<variable name="parent_experiment_id" type="string"> piControl </variable>
+			<variable name="parent_experiment_id" type="string"> picontrol </variable>
 			<variable name="parent_mip_era" type="string"> False </variable>
-			<variable name="parent_activity_id" type="string"> CMIP </variable>
+			<variable name="parent_activity_id" type="string"> cmip </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1 </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
@@ -1040,9 +1076,11 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="description" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="title" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="experiment" type="string"> Simulation of the recent past (concentration driven) </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -1056,9 +1094,9 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="license" type="string"> CMIP6 model data produced by CNRM-CERFACS is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (https://creativecommons.org/licenses). Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment. Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file) and at http://www.umr-cnrm.fr/cmip6/. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law. </variable>
 			<variable name="mip_era" type="string"> False </variable>
-			<variable name="parent_experiment_id" type="string"> piControl </variable>
+			<variable name="parent_experiment_id" type="string"> picontrol </variable>
 			<variable name="parent_mip_era" type="string"> False </variable>
-			<variable name="parent_activity_id" type="string"> CMIP </variable>
+			<variable name="parent_activity_id" type="string"> cmip </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1 </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
@@ -1109,9 +1147,11 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="description" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="title" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="experiment" type="string"> Simulation of the recent past (concentration driven) </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -1125,9 +1165,9 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="license" type="string"> CMIP6 model data produced by CNRM-CERFACS is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (https://creativecommons.org/licenses). Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment. Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file) and at http://www.umr-cnrm.fr/cmip6/. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law. </variable>
 			<variable name="mip_era" type="string"> False </variable>
-			<variable name="parent_experiment_id" type="string"> piControl </variable>
+			<variable name="parent_experiment_id" type="string"> picontrol </variable>
 			<variable name="parent_mip_era" type="string"> False </variable>
-			<variable name="parent_activity_id" type="string"> CMIP </variable>
+			<variable name="parent_activity_id" type="string"> cmip </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1 </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
@@ -1178,9 +1218,11 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="description" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="title" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="experiment" type="string"> Simulation of the recent past (concentration driven) </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -1194,9 +1236,9 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="license" type="string"> CMIP6 model data produced by CNRM-CERFACS is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (https://creativecommons.org/licenses). Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment. Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file) and at http://www.umr-cnrm.fr/cmip6/. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law. </variable>
 			<variable name="mip_era" type="string"> False </variable>
-			<variable name="parent_experiment_id" type="string"> piControl </variable>
+			<variable name="parent_experiment_id" type="string"> picontrol </variable>
 			<variable name="parent_mip_era" type="string"> False </variable>
-			<variable name="parent_activity_id" type="string"> CMIP </variable>
+			<variable name="parent_activity_id" type="string"> cmip </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1 </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
@@ -1247,9 +1289,11 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="description" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="title" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="experiment" type="string"> Simulation of the recent past (concentration driven) </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -1263,9 +1307,9 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="license" type="string"> CMIP6 model data produced by CNRM-CERFACS is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (https://creativecommons.org/licenses). Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment. Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file) and at http://www.umr-cnrm.fr/cmip6/. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law. </variable>
 			<variable name="mip_era" type="string"> False </variable>
-			<variable name="parent_experiment_id" type="string"> piControl </variable>
+			<variable name="parent_experiment_id" type="string"> picontrol </variable>
 			<variable name="parent_mip_era" type="string"> False </variable>
-			<variable name="parent_activity_id" type="string"> CMIP </variable>
+			<variable name="parent_activity_id" type="string"> cmip </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1 </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
@@ -1316,9 +1360,11 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="description" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="title" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="experiment" type="string"> Simulation of the recent past (concentration driven) </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -1332,9 +1378,9 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="license" type="string"> CMIP6 model data produced by CNRM-CERFACS is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (https://creativecommons.org/licenses). Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment. Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file) and at http://www.umr-cnrm.fr/cmip6/. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law. </variable>
 			<variable name="mip_era" type="string"> False </variable>
-			<variable name="parent_experiment_id" type="string"> piControl </variable>
+			<variable name="parent_experiment_id" type="string"> picontrol </variable>
 			<variable name="parent_mip_era" type="string"> False </variable>
-			<variable name="parent_activity_id" type="string"> CMIP </variable>
+			<variable name="parent_activity_id" type="string"> cmip </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1 </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
@@ -1385,9 +1431,11 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="description" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="title" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="experiment" type="string"> Simulation of the recent past (concentration driven) </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -1401,9 +1449,9 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="license" type="string"> CMIP6 model data produced by CNRM-CERFACS is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (https://creativecommons.org/licenses). Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment. Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file) and at http://www.umr-cnrm.fr/cmip6/. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law. </variable>
 			<variable name="mip_era" type="string"> False </variable>
-			<variable name="parent_experiment_id" type="string"> piControl </variable>
+			<variable name="parent_experiment_id" type="string"> picontrol </variable>
 			<variable name="parent_mip_era" type="string"> False </variable>
-			<variable name="parent_activity_id" type="string"> CMIP </variable>
+			<variable name="parent_activity_id" type="string"> cmip </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1 </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
@@ -1454,9 +1502,11 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="description" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="title" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="experiment" type="string"> Simulation of the recent past (concentration driven) </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -1470,9 +1520,9 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="license" type="string"> CMIP6 model data produced by CNRM-CERFACS is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (https://creativecommons.org/licenses). Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment. Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file) and at http://www.umr-cnrm.fr/cmip6/. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law. </variable>
 			<variable name="mip_era" type="string"> False </variable>
-			<variable name="parent_experiment_id" type="string"> piControl </variable>
+			<variable name="parent_experiment_id" type="string"> picontrol </variable>
 			<variable name="parent_mip_era" type="string"> False </variable>
-			<variable name="parent_activity_id" type="string"> CMIP </variable>
+			<variable name="parent_activity_id" type="string"> cmip </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1 </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
@@ -1523,9 +1573,11 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="description" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="title" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="experiment" type="string"> Simulation of the recent past (concentration driven) </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -1539,9 +1591,9 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="license" type="string"> CMIP6 model data produced by CNRM-CERFACS is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (https://creativecommons.org/licenses). Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment. Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file) and at http://www.umr-cnrm.fr/cmip6/. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law. </variable>
 			<variable name="mip_era" type="string"> False </variable>
-			<variable name="parent_experiment_id" type="string"> piControl </variable>
+			<variable name="parent_experiment_id" type="string"> picontrol </variable>
 			<variable name="parent_mip_era" type="string"> False </variable>
-			<variable name="parent_activity_id" type="string"> CMIP </variable>
+			<variable name="parent_activity_id" type="string"> cmip </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1 </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
@@ -1592,9 +1644,11 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="description" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="title" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="experiment" type="string"> Simulation of the recent past (concentration driven) </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -1608,9 +1662,9 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="license" type="string"> CMIP6 model data produced by CNRM-CERFACS is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (https://creativecommons.org/licenses). Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment. Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file) and at http://www.umr-cnrm.fr/cmip6/. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law. </variable>
 			<variable name="mip_era" type="string"> False </variable>
-			<variable name="parent_experiment_id" type="string"> piControl </variable>
+			<variable name="parent_experiment_id" type="string"> picontrol </variable>
 			<variable name="parent_mip_era" type="string"> False </variable>
-			<variable name="parent_activity_id" type="string"> CMIP </variable>
+			<variable name="parent_activity_id" type="string"> cmip </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1 </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
@@ -1661,9 +1715,11 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="description" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="title" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="experiment" type="string"> Simulation of the recent past (concentration driven) </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -1677,9 +1733,9 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="license" type="string"> CMIP6 model data produced by CNRM-CERFACS is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (https://creativecommons.org/licenses). Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment. Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file) and at http://www.umr-cnrm.fr/cmip6/. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law. </variable>
 			<variable name="mip_era" type="string"> False </variable>
-			<variable name="parent_experiment_id" type="string"> piControl </variable>
+			<variable name="parent_experiment_id" type="string"> picontrol </variable>
 			<variable name="parent_mip_era" type="string"> False </variable>
-			<variable name="parent_activity_id" type="string"> CMIP </variable>
+			<variable name="parent_activity_id" type="string"> cmip </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1 </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
@@ -1730,9 +1786,11 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="description" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="title" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="experiment" type="string"> Simulation of the recent past (concentration driven) </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -1746,9 +1804,9 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="license" type="string"> CMIP6 model data produced by CNRM-CERFACS is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (https://creativecommons.org/licenses). Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment. Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file) and at http://www.umr-cnrm.fr/cmip6/. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law. </variable>
 			<variable name="mip_era" type="string"> False </variable>
-			<variable name="parent_experiment_id" type="string"> piControl </variable>
+			<variable name="parent_experiment_id" type="string"> picontrol </variable>
 			<variable name="parent_mip_era" type="string"> False </variable>
-			<variable name="parent_activity_id" type="string"> CMIP </variable>
+			<variable name="parent_activity_id" type="string"> cmip </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1 </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
@@ -1799,9 +1857,11 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="description" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="title" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="experiment" type="string"> Simulation of the recent past (concentration driven) </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
@@ -1815,9 +1875,9 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="license" type="string"> CMIP6 model data produced by CNRM-CERFACS is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (https://creativecommons.org/licenses). Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment. Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file) and at http://www.umr-cnrm.fr/cmip6/. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law. </variable>
 			<variable name="mip_era" type="string"> False </variable>
-			<variable name="parent_experiment_id" type="string"> piControl </variable>
+			<variable name="parent_experiment_id" type="string"> picontrol </variable>
 			<variable name="parent_mip_era" type="string"> False </variable>
-			<variable name="parent_activity_id" type="string"> CMIP </variable>
+			<variable name="parent_activity_id" type="string"> cmip </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1 </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
@@ -1868,9 +1928,11 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
 			<variable name="dr2xml_version" type="string"> 3.1 </variable>
 			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="description" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="title" type="string"> DECK: historical 
+ Simulation of the recent past </variable>
+			<variable name="experiment" type="string"> Simulation of the recent past (concentration driven) </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
 			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/PERSO.CNRM-CERFACS.CNRM-ESM2-1.historical.none.r1i1p1f2 </variable>
@@ -1883,9 +1945,9 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="license" type="string"> CMIP6 model data produced by CNRM-CERFACS is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (https://creativecommons.org/licenses). Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment. Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file) and at http://www.umr-cnrm.fr/cmip6/. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law. </variable>
 			<variable name="mip_era" type="string"> PERSO </variable>
-			<variable name="parent_experiment_id" type="string"> piControl </variable>
+			<variable name="parent_experiment_id" type="string"> picontrol </variable>
 			<variable name="parent_mip_era" type="string"> PERSO </variable>
-			<variable name="parent_activity_id" type="string"> CMIP </variable>
+			<variable name="parent_activity_id" type="string"> cmip </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1 </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
 			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>

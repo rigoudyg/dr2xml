@@ -60,6 +60,14 @@ lab_and_model_settings = {
         'HR': [1514100, 75, 259200, 91, 30, 14, 128],
         'LR': [106428, 75, 32768, 91, 30, 14, 128]
     },
+    'source': """CNRM-ESM2-1 (2017):
+aerosol: TACTIC_v2
+atmos: Arpege 6.3 (T127; Gaussian Reduced with 24572 grid points in total distributed over 128 latitude circles (with 256 grid points per latitude circle between 30degN and 30degS reducing to 20 grid points per latitude circle at 88.9degN and 88.9degS); 91 levels; top level 78.4 km)
+atmosChem: REPROBUS-C_v2
+land: Surfex 8.0c
+ocean: Nemo 3.6 (eORCA1, tripolar primarily 1deg; 362 x 294 longitude/latitude; 75 levels; top grid cell 0-1 m)
+ocnBgchem: Pisces 2.s
+seaIce: Gelato 6.1""",
     'source_types': {
         'CNRM-ESM2-1': 'AOGCM BGC AER CHEM',
         'CNRM-ESM2-1-HR': 'AOGCM BGC AER',

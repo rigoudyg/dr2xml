@@ -77,10 +77,9 @@ internal_values = dict(
         key="vocabulary_used",
 		default_values=[
 			ValueSettings(key_type="laboratory", keys="vocabulary_used"),
-			"CMIP6"
+			"dr2xml_default"
 		],
-		help="The Vocabulary infrastructure type which should be used.",
-		init=True
+		help="The vocabulary infrastructure type which should be used."
 	),
     required_model_components=ParameterSettings(
         key="required_model_components",
@@ -105,7 +104,7 @@ internal_values = dict(
         default_values=[
             ValueSettings(
                 keys=[
-                    ValueSettings(key_type="internal", keys="project"),
+                    ValueSettings(key_type="internal", keys="vocabulary_project"),
                     "experiment_id",
                     ValueSettings(key_type="internal", keys="experiment_id")
                 ],
@@ -197,7 +196,7 @@ common_values = dict(
         default_values=[
             ValueSettings(
                 keys=[
-                    ValueSettings(key_type="internal", keys="project"),
+                    ValueSettings(key_type="internal", keys="vocabulary_project"),
                     "source_id",
                     ValueSettings(key_type="internal", keys=["source_id", "lower", "__call__"])
                 ],
@@ -227,7 +226,7 @@ common_values = dict(
         default_values=[
             ValueSettings(
                 keys=[
-                    ValueSettings(key_type="internal", keys="project"),
+                    ValueSettings(key_type="internal", keys="vocabulary_project"),
                     "institution_id",
                     ValueSettings(key_type="internal", keys=["institution_id", "lower", "__call__"])
                 ],
