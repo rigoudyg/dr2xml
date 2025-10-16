@@ -1,4 +1,4 @@
-Function 'get_transformed_content': Passing **kwargs from config file.
+Function 'get_transformed_content': Passing merged **kwargs (potential function call overrides applied to config defaults: {'version': 'test', 'force_retrieve': False, 'cache_dir': 'current_data_request/data_request_api/content/dreq_api/dreq_res', 'check_api_version': False, 'consolidate': False, 'export': 'release', 'log_file': 'default', 'log_level': 'info', 'offline': True, 'variable_name': 'CMIP7 Compound Name'}).
 Could not find id longitude of type coordinates_and_dimensions in the vocabulary server.
 Could not find id latitude of type coordinates_and_dimensions in the vocabulary server.
 Variable considered: atmos.areacell.ti-u-hxy-u.fx.GLB
