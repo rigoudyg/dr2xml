@@ -4,11 +4,12 @@ For parameter data_request_path, found value None
 For parameter data_request_used, found value CMIP7
 For parameter institution_id, found value CNRM-CERFACS
 For parameter laboratory_used, found value None
-Could not find a proper value for project_settings
+For parameter project, found value ping
+For parameter project_settings, found value ping
 For parameter save_project_settings, found value None
 For parameter vocabulary_config, found value current_dr2xml/dr2xml/vocabulary/vocabulary.json
+For parameter vocabulary_project, found value ping
 For parameter vocabulary_used, found value None
-Could not find a proper value for project_settings
 No vocabulary configured.
 For parameter CFsubhr_frequency, found value 1ts
 For parameter add_Gibraltar, found value False
@@ -78,7 +79,6 @@ For parameter ping_variables_prefix, found value CMIP7_
 For parameter prefixed_orography_field_name, found value CMIP7_orog
 For parameter print_stats_per_var_label, found value False
 For parameter print_variables, found value True
-For parameter project, found value ping
 For parameter realization_index, found value 1
 For parameter realms_per_context, found value ['ocean', 'ocnBgchem', 'seaIce']
 For parameter required_model_components, found value []
@@ -158,8 +158,8 @@ Could not find a proper value for activity_id
 For parameter branch_method, found value standard
 For parameter branch_month_in_parent, found value 1
 Could not find a proper value for branch_year_in_parent
-For parameter comment_lab, found value ''
-For parameter comment_sim, found value ''
+For parameter comment_lset, found value ''
+For parameter comment_sset, found value ''
 For parameter compression_level, found value 0
 For parameter contact, found value None
 For parameter convention_str, found value CF-1.7 CMIP-6.2
@@ -2392,11 +2392,12 @@ For parameter data_request_path, found value None
 For parameter data_request_used, found value CMIP7
 For parameter institution_id, found value CNRM-CERFACS
 For parameter laboratory_used, found value None
-Could not find a proper value for project_settings
+For parameter project, found value ping
+For parameter project_settings, found value ping
 For parameter save_project_settings, found value None
 For parameter vocabulary_config, found value current_dr2xml/dr2xml/vocabulary/vocabulary.json
+For parameter vocabulary_project, found value ping
 For parameter vocabulary_used, found value None
-Could not find a proper value for project_settings
 No vocabulary configured.
 For parameter CFsubhr_frequency, found value 1ts
 For parameter add_Gibraltar, found value False
@@ -2466,7 +2467,6 @@ For parameter ping_variables_prefix, found value CMIP7_
 For parameter prefixed_orography_field_name, found value CMIP7_orog
 For parameter print_stats_per_var_label, found value False
 For parameter print_variables, found value True
-For parameter project, found value ping
 For parameter realization_index, found value 1
 For parameter realms_per_context, found value ['aerosol', 'atmos', 'atmosChem', 'land', 'landIce']
 For parameter required_model_components, found value []
@@ -2546,8 +2546,8 @@ Could not find a proper value for activity_id
 For parameter branch_method, found value standard
 For parameter branch_month_in_parent, found value 1
 Could not find a proper value for branch_year_in_parent
-For parameter comment_lab, found value ''
-For parameter comment_sim, found value ''
+For parameter comment_lset, found value ''
+For parameter comment_sset, found value ''
 For parameter compression_level, found value 0
 For parameter contact, found value None
 For parameter convention_str, found value CF-1.7 CMIP-6.2

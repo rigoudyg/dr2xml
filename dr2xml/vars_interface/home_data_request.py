@@ -35,6 +35,7 @@ def read_home_vars_list(hmv_file, expid, mips, path_extra_tables=None):
     Returns:
       A list of 'simplified CMOR variables'
     """
+    # TODO Check that variables are read if lower/upper cases used
     logger = get_logger()
     #
     homevars_list = get_config_variable("homevars_list")

@@ -1052,9 +1052,9 @@ internal_values = dict(
 			ValueSettings(key_type="laboratory", keys="simple_domain_grid_regexp")
 		],
 		help="If some grid is not defined in xml but by API, and is referenced by a "
-		     "field which is considered by the DR as having a singleton dimension, then: "
-		     "1) it must be a grid which has only a domain "
-		     "2) the domain name must be extractable from the grid_id using a regexp and a group number "
+		     "field which is considered by the DR as having a singleton dimension, then: \n"
+		     "1) it must be a grid which has only a domain \n"
+		     "2) the domain name must be extractable from the grid_id using a regexp and a group number \n"
 		     "Example: using a pattern that returns full id except for a '_grid' suffix"
 	),
 	vertical_interpolation_operation=ParameterSettings(
@@ -1193,12 +1193,12 @@ internal_values = dict(
 			ValueSettings(key_type="laboratory", keys="grids")
 		],
 		fatal=True,
-		help="Grids : per model resolution and per context :"
+		help="Grids : per model resolution and per context :\n"
 		     "- CMIP6 qualifier (i.e. 'gn' or 'gr') for the main grid chosen (because you"
-		     "  may choose has main production grid a regular one, when the native grid is e.g. unstructured)"
-		     "- Xios id for the production grid (if it is not the native grid),"
-		     "- Xios id for the latitude axis used for zonal means (mist match latitudes for grid above)"
-		     "- resolution of the production grid (using CMIP6 conventions),"
+		     "  may choose has main production grid a regular one, when the native grid is e.g. unstructured)\n"
+		     "- Xios id for the production grid (if it is not the native grid)\n"
+		     "- Xios id for the latitude axis used for zonal means (mist match latitudes for grid above)\n"
+		     "- resolution of the production grid (using CMIP6 conventions)\n"
 		     "- grid description"
 	),
 	required_model_components=ParameterSettings(

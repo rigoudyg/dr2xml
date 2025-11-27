@@ -241,8 +241,8 @@ common_values = dict(
              "'Information provided by this attribute may in some cases be flawed. Users can find more comprehensive "
              "and up-to-date documentation via the further_info_url global attribute.'"
     ),
-    comment_sim=ParameterSettings(
-        key="comment_sim",
+    comment_sset=ParameterSettings(
+        key="comment_sset",
         default_values=[
             ValueSettings(key_type="simulation", keys="comment"),
             ""
@@ -250,8 +250,8 @@ common_values = dict(
         help="A character string containing additional information about the models from simulation settings. "
              "Will be complemented with the experiment's specific comment string."
     ),
-    comment_lab=ParameterSettings(
-        key="comment_lab",
+    comment_lset=ParameterSettings(
+        key="comment_lset",
         default_values=[
             ValueSettings(key_type="laboratory", keys="comment"),
             ""
@@ -982,8 +982,8 @@ project_settings = dict(
                         value=ValueSettings(
                             key_type="combine",
                             keys=[
-                                ValueSettings(key_type="common", keys="comment_lab"),
-                                ValueSettings(key_type="common", keys="comment_sim"),
+                                ValueSettings(key_type="common", keys="comment_lset"),
+                                ValueSettings(key_type="common", keys="comment_sset"),
                                 ValueSettings(key_type="variable", keys="comments")
                             ],
                             fmt="{}{}{}"
@@ -991,33 +991,33 @@ project_settings = dict(
                     ),
                     CaseSettings(
                         conditions=[
-                            ConditionSettings(check_value=ValueSettings(key_type="common", keys="comment_sim"),
+                            ConditionSettings(check_value=ValueSettings(key_type="common", keys="comment_sset"),
                                               check_to_do="neq", reference_values=["", "None", None]),
-                            ConditionSettings(check_value=ValueSettings(key_type="common", keys="comment_lab"),
+                            ConditionSettings(check_value=ValueSettings(key_type="common", keys="comment_lset"),
                                               check_to_do="neq", reference_values=["", "None", None])
                         ],
                         value=ValueSettings(
                             key_type="combine",
                             keys=[
-                                ValueSettings(key_type="common", keys="comment_lab"),
-                                ValueSettings(key_type="common", keys="comment_sim")
+                                ValueSettings(key_type="common", keys="comment_lset"),
+                                ValueSettings(key_type="common", keys="comment_sset")
                             ],
                             fmt="{}{}"
                         )
                     ),
                     CaseSettings(
                         conditions=[
-                            ConditionSettings(check_value=ValueSettings(key_type="common", keys="comment_sim"),
+                            ConditionSettings(check_value=ValueSettings(key_type="common", keys="comment_sset"),
                                               check_to_do="neq", reference_values=["", "None", None])
                         ],
-                        value=ValueSettings(key_type="common", keys="comment_sim")
+                        value=ValueSettings(key_type="common", keys="comment_sset")
                     ),
                     CaseSettings(
                         conditions=[
-                            ConditionSettings(check_value=ValueSettings(key_type="common", keys="comment_lab"),
+                            ConditionSettings(check_value=ValueSettings(key_type="common", keys="comment_lset"),
                                               check_to_do="neq", reference_values=["", "None", None])
                         ],
-                        value=ValueSettings(key_type="common", keys="comment_lab")
+                        value=ValueSettings(key_type="common", keys="comment_lset")
                     )
                 ]
             ),
