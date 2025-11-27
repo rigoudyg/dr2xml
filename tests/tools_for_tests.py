@@ -224,7 +224,8 @@ class TestRun(object):
 
 		from dr2xml.config import version
 		anonymize_dict = dict(current_directory=current_directory, current_version=version,
-		                      current_data_request=data_request_directory)
+		                      current_data_request=data_request_directory, current_dr2xml=os.path.dirname(current_directory),
+		                      home_directory=os.environ["HOME"])
 
 		data_request_used = self.lab_and_model_settings.get("data_request_used", "CMIP6")
 		if data_request_used in ["CMIP7", ]:

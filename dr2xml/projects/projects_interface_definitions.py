@@ -535,7 +535,7 @@ class ParameterSettings(Settings):
                 i += 1
         if test:
             value = self.correct_target_type(value)
-            logger.debug("For parameter %s, found value %s" % (self.key, value))
+            logger.debug("For parameter %s, found value %s" % (self.key, "''" if isinstance(value, str) and len(value) == 0 else value))
         elif not test and self.fatal and raise_on_error:
             logger.debug("Could not find a proper value for %s" % self.key)
             raise ValueError("Could not find a proper value for %s" % self.key)
