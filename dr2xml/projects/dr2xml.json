@@ -1,0 +1,2222 @@
+{
+  "functions_file": "dr2xml_func.py",
+  "init": {
+    "data_request_config": {
+      "help": "Configuration file of the data request content to be used.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": "data_request_config"
+        },
+        "__package-root__/dr_interface/CMIP7_config"
+      ]
+    },
+    "data_request_content_version": {
+      "help": "Version of the data request content to be used.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["data_request_content_version"]
+        },
+        "latest_stable"
+      ]
+    },
+    "data_request_path": {
+      "help": "Path where the data request API used is placed.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["data_request_path"]
+        },
+        null
+      ]
+    },
+    "data_request_used": {
+      "help": "The Data Request infrastructure type which should be used.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["data_request_used"]
+        },
+        "CMIP6"
+      ]
+    },
+    "institution_id": {
+      "help": "Institution identifier.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["institution_id"]
+        }
+      ]
+    },
+    "laboratory_used": {
+      "help": "File which contains the settings to be used for a specific laboratory which is not present by default in dr2xml. Must contains at least the `lab_grid_policy` function.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["laboratory_used"]
+        },
+        null
+      ]
+    },
+    "project": {
+      "help": "Project associated with the simulation.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["project"]
+        },
+        "CMIP6"
+      ]
+    },
+    "project_settings": {
+      "help": "Project settings definition file to be used.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["project_settings"]
+        },
+        {
+          "type": "value",
+          "origin": "init",
+          "keys": ["project"]
+        }
+      ]
+    },
+    "save_project_settings": {
+      "help": "The path of the file where the complete project settings will be written, if needed.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["save_project_settings"]
+        },
+        null
+      ]
+    },
+    "vocabulary_config": {
+      "help": "Configuration file of the vocabulary to be used.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["vocabulary_config"]
+        },
+        "__package-root__/vocabulary/vocabulary.json"
+      ]
+    },
+    "vocabulary_project": {
+      "help": "The vocabulary project which should be used.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["vocabulary_project"],
+          "format": {
+            "type": "func",
+            "origin": "self",
+            "keys": ["lower"]
+          }
+        },
+        {
+          "type": "value",
+          "origin": "init",
+          "keys": ["project"],
+          "format": {
+            "type": "func",
+            "origin": "self",
+            "keys": ["lower"]
+          }
+        }
+      ]
+    },
+    "vocabulary_used": {
+      "help": "The vocabulary infrastructure type which should be used.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["vocabulary_used"]
+        },
+        null
+      ]
+    }
+  },
+  "internal": {
+    "add_Gibraltar": {
+      "help": "DR01.00.21 does not include Gibraltar strait, which is requested by OMIP. Can include it, if model provides it as last value of array.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["add_Gibraltar"]
+        },
+        false
+      ]
+    },
+    "additional_allowed_model_components": {
+      "help": "Dictionary which contains, for each model, the list of components whih can be used in addition to the declared ones.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": [
+            "additional_allowed_components",
+            {
+              "type": "value",
+              "origin": "internal",
+              "keys": ["source_id"]
+            }
+          ]
+        },
+        []
+      ]
+    },
+    "adhoc_policy_do_add_1deg_grid_for_tos": {
+      "help": "Some scenario experiment in DR 01.00.21 do not request tos on 1 degree grid, while other do. If you use grid_policy=adhoc and had not changed the mapping of function. grids.lab_adhoc_grid_policy to grids.CNRM_grid_policy, next setting can force any tos request to also produce tos on a 1 degree grid.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["adhoc_policy_do_add_1deg_grid_for_tos"]
+        },
+        false
+      ]
+    },
+    "allow_duplicates": {
+      "help": "Should we allow for duplicate vars: two vars with same frequency, shape and realm, which differ only by the table. In DR01.00.21, this actually applies to very few fields (ps-Aermon, tas-ImonAnt, areacellg-IfxAnt).",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["allow_duplicates"]
+        }
+      ]
+    },
+    "allow_duplicates_in_same_table": {
+      "help": "Should we allow for another type of duplicate vars : two vars with same name in same table (usually with different shapes). This applies to e.g. CMOR vars 'ua' and 'ua7h' in 6hPlevPt. Default to False, because CMIP6 rules does not allow to name output files differently in that case. If set to True, you should also set 'use_cmorvar_label_in_filename' to True to overcome the said rule.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["allow_duplicates_in_same_table"]
+        },
+        false
+      ]
+    },
+    "allow_pseudo_standard_names": {
+      "help": "DR has sn attributes for MIP variables. They can be real,CF-compliant, standard_names or pseudo_standard_names, i.e. not yet approved labels. Default is to use only CF ones.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["allow_pseudo_standard_names"]
+        },
+        false
+      ]
+    },
+    "allow_tos_3hr_1deg": {
+      "help": "When using select='no', Xios may enter an endless loop, which is solved if next setting is False.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["allow_tos_3hr_1deg"]
+        },
+        true
+      ]
+    },
+    "branching": {
+      "help": "Describe the branching scheme for experiments involved in some 'branchedYears type' tslice (for details, see: http://clipc-services.ceda.ac.uk/dreq/index/Slice.html ). Just put the as key the common start year in child and as value the list of start years in parent for all members.A dictionary with models name as key and dictionary containing experiment,(branch year in child, list of branch year in parent) key values.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": [
+            "branching",
+            {
+              "type": "value",
+              "origin": "internal",
+              "keys": ["source_id"]
+            }
+          ]
+        },
+        {}
+      ]
+    },
+    "branch_year_in_child": {
+      "help": "In some instances, the experiment start year is not explicit or is doubtful in DR. See file doc/some_experiments_starty_in_DR01.00.21. You should then specify it, using next setting in order that requestItems analysis work in all cases. In some other cases, DR requestItems which apply to the experiment form its start does not cover its whole duration and have a wrong duration (computed based on a wrong start year); They necessitate to fix the start year.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": "branch_year_in_child"
+        }
+      ]
+    },
+    "bypass_CV_components": {
+      "help": "If the CMIP6 Controlled Vocabulary doesn't allow all the components you activate, you can set next toggle to True",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["bypass_CV_components"]
+        }
+      ]
+    },
+    "bytes_per_float": {
+      "help": "Estimate of number of bytes per floating value, given the chosen :term:`compression_level`.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["bytes_per_float"]
+        },
+        2
+      ]
+    },
+    "CFsubhr_frequency": {
+      "help": "CFMIP has an elaborated requirement for defining subhr frequency; by default, dr2xml uses 1 time step.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": "CFsubhr_frequency"
+        },
+        "1ts"
+      ]
+    },
+    "configuration": {
+      "help": "Configuration used for this experiment. If there is no configuration in lab_settings which matches you case, please rather use next or next two entries: :term:`source_id` and, if needed, :term:`source_type`.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["configuration"]
+        }
+      ]
+    },
+    "context": {
+      "help": "Context associated with the xml file produced.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "value",
+          "origin": "dict",
+          "keys": ["context"]
+        }
+      ]
+    },
+    "debug_parsing": {
+      "help": "In order to identify which xml files generates a problem, you can use this flag.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["debug_parsing"]
+        },
+        false
+      ]
+    },
+    "dr2xml_manages_enddate": {
+      "help": "A smart workflow will allow you to extend a simulation during it course and to complement the output files accordingly, by managing the 'end date' part in filenames. You can then set next setting to False.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["dr2xml_manages_enddate"]
+        },
+        true
+      ]
+    },
+    "end_year": {
+      "help": "If you want to carry on the experiment beyond the duration set in DR, and that all requestItems that apply to DR end year also apply later on, set 'end_year' You can also set it if you don't know if DR has a wrong value",
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["end_year"]
+        },
+        false
+      ]
+    },
+    "excluded_opportunities_lset": {
+      "help": "List of the opportunities that will be excluded from outputs from laboratory settings.",
+      "target_type": "list",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["excluded_opportunities"]
+        },
+        []
+      ]
+    },
+    "excluded_opportunities_sset": {
+      "help": "List of the opportunities that will be excluded from outputs from simulation settings.",
+      "target_type": "list",
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["excluded_opportunities"]
+        },
+        []
+      ]
+    },
+    "excluded_pairs_lset": {
+      "help": "You can exclude some (variable, table) pairs from outputs. A list of tuple (variable, table) to be excluded from laboratory settings.",
+      "target_type": "list",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["excluded_pairs"]
+        },
+        []
+      ]
+    },
+    "excluded_pairs_sset": {
+      "help": "You can exclude some (variable, table) pairs from outputs. A list of tuple (variable, table) to be excluded from simulation settings.",
+      "target_type": "list",
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["excluded_pairs"]
+        },
+        []
+      ]
+    },
+    "excluded_request_links": {
+      "help": "List of links un data request that should not been followed (those request are not taken into account).",
+      "target_type": "list",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["excluded_request_links"]
+        },
+        []
+      ]
+    },
+    "excluded_spshapes_lset": {
+      "help": "The list of shapes that should be excluded (all variables in those shapes will be excluded from outputs).",
+      "target_type": "list",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["excluded_spshapes"]
+        },
+        []
+      ]
+    },
+    "excluded_tables_lset": {
+      "help": "List of the tables that will be excluded from outputs from laboratory settings.",
+      "target_type": "list",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["excluded_tables"]
+        },
+        []
+      ]
+    },
+    "excluded_tables_sset": {
+      "help": "List of the tables that will be excluded from outputs from simulation settings.",
+      "target_type": "list",
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["excluded_tables"]
+        },
+        []
+      ]
+    },
+    "excluded_vargroups_lset": {
+      "help": "List of the variables groups that will be excluded from outputs from laboratory settings.",
+      "target_type": "list",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["excluded_vargroups"]
+        },
+        []
+      ]
+    },
+    "excluded_vargroups_sset": {
+      "help": "List of the variables groups that will be excluded from outputs from simulation settings.",
+      "target_type": "list",
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["excluded_vargroups"]
+        },
+        []
+      ]
+    },
+    "excluded_vars_lset": {
+      "help": "List of CMOR variables to exclude from the result based on previous Data Request extraction from laboratory settings.",
+      "target_type": "list",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["excluded_vars"]
+        },
+        []
+      ]
+    },
+    "excluded_vars_per_config": {
+      "help": "A dictionary which keys are configurations and values the list of variables that must be excluded for each configuration.",
+      "target_type": "list",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": [
+            "excluded_vars_per_config",
+            {
+              "type": "value",
+              "origin": "internal",
+              "keys": ["configuration"]
+            }
+          ]
+        },
+        []
+      ]
+    },
+    "excluded_vars_sset": {
+      "help": "List of CMOR variables to exclude from the result based on previous Data Request extraction from simulation settings.",
+      "target_type": "list",
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["excluded_vars"]
+        },
+        []
+      ]
+    },
+    "experiment_for_requests": {
+      "help": "Experiment id to use for driving the use of the Data Request.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": "experiment_for_requests"
+        },
+        {
+          "type": "value",
+          "origin": "internal",
+          "keys": "experiment_id"
+        }
+      ]
+    },
+    "experiment_id": {
+      "help": "Root experiment identifier",
+      "fatal": true,
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": "experiment_id"
+        }
+      ]
+    },
+    "filter_on_realization": {
+      "help": "If you want to produce the same variables set for all members, set this parameter to False.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["filter_on_realization"]
+        },
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["filter_on_realization"]
+        },
+        true
+      ]
+    },
+    "fx_from_file": {
+      "help": "You may provide some variables already horizontally remapped to some grid (i.e. Xios domain) in external files. The varname in file must match the referenced id in pingfile. Tested only for fixed fields. A dictionary with variable id as key and a dictionary as value: the key must be the grid id, the value a dictionary with the file for each resolution.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["fx_from_file"]
+        },
+        []
+      ]
+    },
+    "grid_choice": {
+      "help": "A dictionary which keys are models name and values the corresponding resolution.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": [
+            "grid_choice",
+            {
+              "type": "value",
+              "origin": "internal",
+              "keys": ["source_id"]
+            }
+          ]
+        }
+      ]
+    },
+    "grid_policy": {
+      "help": "The grid choice policy for output files.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["grid_policy"]
+        },
+        false
+      ]
+    },
+    "grid_prefix": {
+      "help": "Prefix of the dr2xml generated grid named to be used.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["grid_prefix"]
+        },
+        {
+          "type": "value",
+          "origin": "internal",
+          "keys": ["ping_variables_prefix"]
+        }
+      ]
+    },
+    "grids": {
+      "help": "Grids : per model resolution and per context :\\n- CMIP6 qualifier (i.e. 'gn' or 'gr') for the main grid chosen (because you  may choose has main production grid a regular one, when the native grid is e.g. unstructured)\\n- Xios id for the production grid (if it is not the native grid)\\n- Xios id for the latitude axis used for zonal means (mist match latitudes for grid above)\\n- resolution of the production grid (using CMIP6 conventions)\\n- grid description",
+      "fatal": true,
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["grids"]
+        }
+      ]
+    },
+    "grids_dev": {
+      "help": "Grids definition for dev variables.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["grids_dev"]
+        },
+        {}
+      ]
+    },
+    "grouped_vars_per_file": {
+      "help": "Variables to be grouped in the same output file (provided additional conditions are filled).",
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["grouped_vars_per_file"]
+        },
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["grouped_vars_per_file"]
+        },
+        []
+      ]
+    },
+    "included_opportunities": {
+      "help": "List of opportunities that will be processed (all others will not).",
+      "target_type": "list",
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["included_opportunities"]
+        },
+        {
+          "type": "value",
+          "origin": "internal",
+          "keys": ["included_opportunities_lset"]
+        }
+      ]
+    },
+    "included_opportunities_lset": {
+      "help": "List of opportunities that will be processed (all others will not) from laboratory settings.",
+      "target_type": "list",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["included_opportunities"]
+        },
+        []
+      ]
+    },
+    "included_request_links": {
+      "help": "List of the request links that will be processed (all others will not).",
+      "target_type": "list",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["included_request_links"]
+        },
+        []
+      ]
+    },
+    "included_tables": {
+      "help": "List of tables that will be processed (all others will not).",
+      "target_type": "list",
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["included_tables"]
+        },
+        {
+          "type": "value",
+          "origin": "internal",
+          "keys": ["included_tables_lset"]
+        }
+      ]
+    },
+    "included_tables_lset": {
+      "help": "List of tables that will be processed (all others will not) from laboratory settings.",
+      "target_type": "list",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["included_tables"]
+        },
+        []
+      ]
+    },
+    "included_vargroups": {
+      "help": "List of variables groups that will be processed (all others will not).",
+      "target_type": "list",
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["included_vargroups"]
+        },
+        {
+          "type": "value",
+          "origin": "internal",
+          "keys": ["included_vargroups_lset"]
+        }
+      ]
+    },
+    "included_vargroups_lset": {
+      "help": "List of variables groups that will be processed (all others will not) from laboratory settings.",
+      "target_type": "list",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["included_vargroups"]
+        },
+        []
+      ]
+    },
+    "included_vars": {
+      "help": "Variables to be considered from the Data Request (all others will not)",
+      "target_type": "list",
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["included_vars"]
+        },
+        {
+          "type": "value",
+          "origin": "internal",
+          "keys": ["included_vars_lset"]
+        }
+      ]
+    },
+    "included_vars_lset": {
+      "help": "Variables to be considered from the Data Request (all others will not) from laboratory settings.",
+      "target_type": "list",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["included_vars"]
+        },
+        []
+      ]
+    },
+    "listof_home_vars": {
+      "help": "Full path to the file which contains the list of home variables to be taken into account, in addition to the Data Request.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["listof_home_vars"]
+        },
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["listof_home_vars"]
+        },
+        null
+      ]
+    },
+    "max_file_size_in_floats": {
+      "help": "The maximum size of generated files in number of floating values.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["max_file_size_in_floats"]
+        },
+        500000000
+      ]
+    },
+    "max_priority": {
+      "help": "Max variable priority level to be output (you may set 3 when creating ping_files while being more restrictive at run time).",
+      "fatal": true,
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["max_priority"]
+        },
+        {
+          "type": "value",
+          "origin": "internal",
+          "keys": ["max_priority_lset"]
+        }
+      ]
+    },
+    "max_priority_lset": {
+      "help": "Max variable priority level to be output (you may set 3 when creating ping_files while being more restrictive at run time) from lab settings.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["max_priority"]
+        }
+      ]
+    },
+    "max_split_freq": {
+      "help": "The maximum number of years that should be putted in a single file.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["max_split_freq"]
+        },
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["max_split_freq"]
+        },
+        null
+      ]
+    },
+    "mips": {
+      "help": "A dictionary in which keys are grid and values a set of strings corresponding to MIPs names.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["mips"]
+        }
+      ]
+    },
+    "nemo_sources_management_policy_master_of_the_world": {
+      "help": "Set that to True if you use a context named 'nemo' and the corresponding model unduly sets a general freq_op AT THE FIELD_DEFINITION GROUP LEVEL. Due to Xios rules for inheritance, that behavior prevents inheriting specific freq_ops by reference from dr2xml generated field_definitions.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["nemo_sources_management_policy_master_of_the_world"]
+        },
+        false
+      ]
+    },
+    "non_standard_attributes": {
+      "help": "You may add a series of NetCDF attributes in all files for this simulation.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["non_standard_attributes"]
+        },
+        {}
+      ]
+    },
+    "non_standard_axes": {
+      "help": "If your model has some axis which does not have all its attributes as in DR, and you want dr2xml to fix that it, give here the correspondence from model axis id to DR dim/grid id. For label dimensions you should provide the  list of labels, ordered as in your model, as second element of a pair. Label-type axes will be processed even if not quoted. Scalar dimensions are not concerned by this feature. A dictionary with (axis_id, axis_correct_id) or (axis_id, tuple of labels) as key, values.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["non_standard_axes"]
+        },
+        {}
+      ]
+    },
+    "orography_field_name": {
+      "help": "Name of the orography field name to be used to compute height over orog fields.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["orography_field_name"]
+        },
+        "orog"
+      ]
+    },
+    "orphan_variables": {
+      "help": "A dictionary with (context name, list of variables) as (key,value) pairs, where the list indicates the variables to be re-affected to the key-context (initially affected to a realm falling in another context).",
+      "fatal": true,
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["orphan_variables"]
+        }
+      ]
+    },
+    "path_extra_tables": {
+      "help": "Full path of the directory which contains extra tables.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["path_extra_tables"]
+        },
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["path_extra_tables"]
+        },
+        null
+      ]
+    },
+    "path_to_parse": {
+      "help": "The path of the directory which, at run time, contains the root XML file (iodef.xml).",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["path_to_parse"]
+        },
+        "./"
+      ]
+    },
+    "perso_sdims_description": {
+      "help": "A dictionary containing, for each perso or dev variables with a XY-perso shape, and for each vertical coordinate associated, the main attributes of the dimension.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["perso_sdims_description"]
+        },
+        {}
+      ]
+    },
+    "ping_variables_prefix": {
+      "help": "The tag used to prefix the variables in the ‘field id’ namespaces of the ping file; may be an empty string.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["ping_variables_prefix"]
+        }
+      ]
+    },
+    "prefixed_orography_field_name": {
+      "help": "Name of the orography field name to be used to compute height over orog fields prefixed with :term:`ping_variable_prefix`.",
+      "values": [
+        {
+          "type": "func",
+          "origin": "self",
+          "keys": ["format"],
+          "template": "{prefix}{variable}",
+          "options": {
+            "prefix": {
+              "type": "value",
+              "origin": "internal",
+              "keys": ["ping_variables_prefix"]
+            },
+            "variable": {
+              "type": "value",
+              "origin": "internal",
+              "keys": ["orography_field_name"]
+            }
+          }
+        }
+      ]
+    },
+    "print_stats_per_var_label": {
+      "help": "For an extended printout of selected CMOR variables, grouped by variable label.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["print_stats_per_var_label"]
+        },
+        false
+      ]
+    },
+    "print_variables": {
+      "help": "If the value is a list, only the file/field variables listed here will be put in output files. If boolean, tell if the file/field variables should be put in output files.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["print_variables"]
+        },
+        true
+      ]
+    },
+    "realization_index": {
+      "help": "Realization number.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["realization_index"]
+        },
+        "1"
+      ]
+    },
+    "realms_per_context": {
+      "help": "A dictionary which keys are context names and values the lists of realms associated with each context.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": [
+            "realms_per_context",
+            {
+              "type": "value",
+              "origin": "internal",
+              "keys": ["context"]
+            }
+          ]
+        }
+      ]
+    },
+    "required_model_components": {
+      "help": "Dictionary which gives, for each model name, the components that must be present.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": [
+            "required_model_components",
+            {
+              "type": "value",
+              "origin": "internal",
+              "keys": ["source_id"]
+            }
+          ]
+        },
+        []
+      ]
+    },
+    "sampling_timestep": {
+      "help": "Basic sampling timestep set in your field definition (used to feed metadata 'interval_operation'). Should be a dictionary which keys are resolutions and values a context/timestep dictionary.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["sampling_timestep"]
+        },
+        2
+      ]
+    },
+    "sectors": {
+      "help": "List of the sectors to be considered.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["sectors"]
+        }
+      ]
+    },
+    "select": {
+      "help": "Selection strategy for variables.",
+      "fatal": true,
+      "authorized_values": ["on_expt_and_year", "on_expt", "no"],
+      "values": [
+        {
+          "type": "value",
+          "origin": "dict",
+          "keys": ["select"]
+        }
+      ]
+    },
+    "select_on_expt": {
+      "help": "Should data be selected on experiment?",
+      "fatal": true,
+      "values": [
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": ["on_expt_and_year", "on_expt"],
+          "values": [true]
+        },
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": ["no"],
+          "values": [false]
+        }
+      ]
+    },
+    "select_on_year": {
+      "help": "Should data be selected on year?",
+      "fatal": true,
+      "values": [
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": ["on_expt_and_year"],
+          "values": [true]
+        },
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": ["on_expt", "no"],
+          "values": [false]
+        }
+      ]
+    },
+    "select_grid_choice": {
+      "help": "Grid choice for variable selection.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_expt"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [true],
+          "values": [
+            {
+              "type": "value",
+              "origin": "internal",
+              "values": ["grid_choice"]
+            }
+          ]
+        },
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_expt"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [false],
+          "values": ["LR"]
+        }
+      ]
+    },
+    "select_excluded_opportunities": {
+      "help": "Excluded opportunities for variable selection.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_expt"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [true],
+          "values": [
+            {
+              "type": "merge",
+              "values": [
+                {
+                  "type": "value",
+                  "origin": "internal",
+                  "keys": ["excluded_opportunities_lset"]
+                },
+                {
+                  "type": "value",
+                  "origin": "internal",
+                  "keys": ["excluded_opportunities_sset"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_expt"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [false],
+          "values": [
+            {
+              "type": "value",
+              "origin": "internal",
+              "values": ["excluded_opportunities_lset"]
+            }
+          ]
+        }
+      ]
+    },
+    "select_excluded_pairs": {
+      "help": "Excluded pairs for variable selection.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_expt"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [true],
+          "values": [
+            {
+              "type": "merge",
+              "values": [
+                {
+                  "type": "value",
+                  "origin": "internal",
+                  "keys": ["excluded_pairs_lset"]
+                },
+                {
+                  "type": "value",
+                  "origin": "internal",
+                  "keys": ["excluded_pairs_sset"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_expt"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [false],
+          "values": [
+            {
+              "type": "value",
+              "origin": "internal",
+              "values": ["excluded_pairs_lset"]
+            }
+          ]
+        }
+      ]
+    },
+    "select_excluded_request_links": {
+      "help": "Excluded request links for variable selection.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_expt"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [true],
+          "values": [
+            {
+              "type": "value",
+              "origin": "internal",
+              "values": ["excluded_request_links"]
+            }
+          ]
+        },
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_expt"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [false],
+          "values": [null]
+        }
+      ]
+    },
+    "select_excluded_tables": {
+      "help": "Excluded tables for variable selection.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_expt"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [true],
+          "values": [
+            {
+              "type": "merge",
+              "values": [
+                {
+                  "type": "value",
+                  "origin": "internal",
+                  "keys": ["excluded_tables_lset"]
+                },
+                {
+                  "type": "value",
+                  "origin": "internal",
+                  "keys": ["excluded_tables_sset"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_expt"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [false],
+          "values": [
+            {
+              "type": "value",
+              "origin": "internal",
+              "values": ["excluded_tables_lset"]
+            }
+          ]
+        }
+      ]
+    },
+    "select_excluded_vargroups": {
+      "help": "Excluded variables groups for variable selection.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_expt"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [true],
+          "values": [
+            {
+              "type": "merge",
+              "values": [
+                {
+                  "type": "value",
+                  "origin": "internal",
+                  "keys": ["excluded_vargroups_lset"]
+                },
+                {
+                  "type": "value",
+                  "origin": "internal",
+                  "keys": ["excluded_vargroups_sset"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_expt"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [false],
+          "values": [
+            {
+              "type": "value",
+              "origin": "internal",
+              "values": ["excluded_vargroups_lset"]
+            }
+          ]
+        }
+      ]
+    },
+    "select_excluded_vars": {
+      "help": "Excluded variables for variable selection.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_expt"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [true],
+          "values": [
+            {
+              "type": "merge",
+              "values": [
+                {
+                  "type": "value",
+                  "origin": "internal",
+                  "keys": ["excluded_vars_lset"]
+                },
+                {
+                  "type": "value",
+                  "origin": "internal",
+                  "keys": ["excluded_vars_sset"]
+                },
+                {
+                  "type": "value",
+                  "origin": "internal",
+                  "keys": ["excluded_vars_per_config"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_expt"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [false],
+          "values": [
+            {
+              "type": "value",
+              "origin": "internal",
+              "values": ["excluded_vars_lset"]
+            }
+          ]
+        }
+      ]
+    },
+    "select_included_opportunities": {
+      "help": "Included opportunities for variable selection.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_expt"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [true],
+          "values": [
+            {
+              "type": "value",
+              "origin": "internal",
+              "values": ["included_opportunities"]
+            }
+          ]
+        },
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_expt"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [false],
+          "values": [
+            {
+              "type": "value",
+              "origin": "internal",
+              "values": ["included_opportunities_lset"]
+            }
+          ]
+        }
+      ]
+    },
+    "select_included_request_links": {
+      "help": "Included request links for variable selection.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_expt"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [true],
+          "values": [
+            {
+              "type": "value",
+              "origin": "internal",
+              "values": ["included_request_links"]
+            }
+          ]
+        },
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_expt"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [false],
+          "values": [null]
+        }
+      ]
+    },
+    "select_included_tables": {
+      "help": "Included tables for variable selection.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_expt"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [true],
+          "values": [
+            {
+              "type": "value",
+              "origin": "internal",
+              "values": ["included_tables"]
+            }
+          ]
+        },
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_expt"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [false],
+          "values": [
+            {
+              "type": "value",
+              "origin": "internal",
+              "values": ["included_tables_lset"]
+            }
+          ]
+        }
+      ]
+    },
+    "select_included_vargroups": {
+      "help": "Included variable groups for variable selection.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_expt"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [true],
+          "values": [
+            {
+              "type": "value",
+              "origin": "internal",
+              "values": ["included_vargroups"]
+            }
+          ]
+        },
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_expt"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [false],
+          "values": [
+            {
+              "type": "value",
+              "origin": "internal",
+              "values": ["included_vargroups_lset"]
+            }
+          ]
+        }
+      ]
+    },
+    "select_included_vars": {
+      "help": "Included variables for variable selection.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_expt"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [true],
+          "values": [
+            {
+              "type": "value",
+              "origin": "internal",
+              "values": ["included_vars"]
+            }
+          ]
+        },
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_expt"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [false],
+          "values": [
+            {
+              "type": "value",
+              "origin": "internal",
+              "values": ["included_vars_lset"]
+            }
+          ]
+        }
+      ]
+    },
+    "select_max_priority": {
+      "help": "Max priority for variable selection.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_expt"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [true],
+          "values": [
+            {
+              "type": "value",
+              "origin": "internal",
+              "values": ["max_priority"]
+            }
+          ]
+        },
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_expt"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [false],
+          "values": [
+            {
+              "type": "value",
+              "origin": "internal",
+              "values": ["max_priority_lset"]
+            }
+          ]
+        }
+      ]
+    },
+    "select_mips": {
+      "help": "MIPs for variable selection.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_expt"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [true],
+          "values": [
+            {
+              "type": "func",
+              "origin": "functions_file",
+              "keys": ["sort_mips"],
+              "options": {
+                "mips": {
+                  "type": "value",
+                  "origin": "internal",
+                  "values": [
+                    "mips",
+                    {
+                      "type": "value",
+                      "origin": "internal",
+                      "values": ["select_grid_choice"]
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_expt"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [false],
+          "values": [
+            {
+              "type": "func",
+              "origin": "functions_file",
+              "keys": ["sort_mips"],
+              "options": {
+                "mips": {
+                  "type": "value",
+                  "origin": "internal",
+                  "values": ["mips"]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "select_sizes": {
+      "help": "Sizes for variable selection.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_expt"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [true],
+          "values": [
+            {
+              "type": "value",
+              "origin": "internal",
+              "values": ["sizes"]
+            }
+          ]
+        },
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_expt"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [false],
+          "values": [null]
+        }
+      ]
+    },
+    "select_tierMax": {
+      "help": "tierMax for variable selection.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_expt"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [true],
+          "values": [
+            {
+              "type": "value",
+              "origin": "internal",
+              "values": ["tierMax"]
+            }
+          ]
+        },
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_expt"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [false],
+          "values": [
+            {
+              "type": "value",
+              "origin": "internal",
+              "values": ["tierMax_lset"]
+            }
+          ]
+        }
+      ]
+    },
+    "simple_domain_grid_regexp": {
+      "help": "If some grid is not defined in xml but by API, and is referenced by a field which is considered by the DR as having a singleton dimension, then: \\n1) it must be a grid which has only a domain \\n2) the domain name must be extractable from the grid_id using a regexp and a group number \\nExample: using a pattern that returns full id except for a '_grid' suffix",
+      "values": [
+        {
+          "type": "value",
+          "source": "laboratory",
+          "keys": ["simple_domain_grid_regexp"]
+        }
+      ]
+    },
+    "sizes": {
+      "help": "A dictionary which keys are resolution and values the associated grid size for atmosphere and ocean grids. The grid size looks like : ['nho', 'nlo', 'nha', 'nla', 'nlas', 'nls', 'nh1']. Used to compute file split frequency.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "func",
+          "origin": "functions_file",
+          "keys": ["format_sizes"],
+          "options": {
+            "sizes": {
+              "type": "value",
+              "origin": "laboratory",
+              "keys": [
+                "sizes",
+                {
+                  "type": "value",
+                  "origin": "internal",
+                  "keys": ["grid_choice"]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "source_id": {
+      "help": "Name of the model used.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": [
+            "configurations",
+            {
+              "type": "value",
+              "origin": "internal",
+              "keys": ["configuration"]
+            },
+            0
+          ]
+        },
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["source_id"]
+        }
+      ]
+    },
+    "special_timestep_vars": {
+      "help": "This variable is used when some variables are computed with a period which is not the basic timestep. A dictionary which keys are non standard timestep and values the list of variables which are computed at this timestep.",
+      "values": [
+        {
+          "type": "value",
+          "source": "laboratory",
+          "keys": ["special_timestep_vars"]
+        },
+        []
+      ]
+    },
+    "source_type": {
+      "help": "If the default source-type value for your source (:term:`source_types` from :term:`lab_and_model_settings`) does not fit, you may change it here. This should describe the model most directly responsible for the output. Sometimes it is appropriate to list two (or more) model types here, among AER, AGCM, AOGCM, BGC, CHEM, ISM, LAND, OGCM, RAD, SLAB e.g. amip , run with CNRM-CM6-1, should quote \\\"AGCM AER\\\". Also see note 14 of https://docs.google.com/document/d/1h0r8RZr_f3-8egBMMh7aqLwy3snpD6_MrDz1q8n5XUk/edit",
+      "fatal": true,
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": [
+            "configurations",
+            {
+              "type": "value",
+              "origin": "internal",
+              "keys": ["configuration"]
+            },
+            1
+          ]
+        },
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["source_type"]
+        },
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": [
+            "source_types",
+            {
+              "type": "value",
+              "origin": "internal",
+              "keys": ["source_id"]
+            }
+          ]
+        }
+      ]
+    },
+    "split_frequencies": {
+      "help": "Path to the split frequencies file to be used.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["split_frequencies"]
+        },
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["split_frequencies"]
+        },
+        "splitfreqs.dat"
+      ]
+    },
+    "synchronisation_frequency": {
+      "help": "Frequency at which the synchronisation between buffer and filesystem is done.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["synchronisation_frequency"]
+        },
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["synchronisation_frequency"]
+        },
+        null
+      ]
+    },
+    "tierMax": {
+      "help": "Number indicating the maximum tier to consider for experiments.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["tierMax"]
+        },
+        {
+          "type": "value",
+          "origin": "internal",
+          "keys": ["tierMax_lset"]
+        }
+      ]
+    },
+    "tierMax_lset": {
+      "help": "Number indicating the maximum tier to consider for experiments from lab settings.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["tierMax"]
+        }
+      ]
+    },
+    "too_long_periods": {
+      "help": "The CMIP6 frequencies that are unreachable for a single model run. Datafiles will be labelled with dates consistent with content (but not with CMIP6 requirements). Allowed values are only 'dec' and 'yr'.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "value",
+          "source": "laboratory",
+          "keys": ["too_long_periods"]
+        },
+        []
+      ]
+    },
+    "use_cmorvar_label_in_filename": {
+      "help": "CMIP6 rule is that filenames includes the variable label, and that this variable label is not the CMORvar label, but 'MIPvar' label. This may lead to conflicts, e.g. for 'ua' and 'ua7h' in table 6hPlevPt; allows to avoid that, if set to True.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "value",
+          "source": "laboratory",
+          "keys": ["use_cmorvar_label_in_filename"]
+        },
+        false
+      ]
+    },
+    "use_union_zoom": {
+      "help": "Say if you want to use XIOS union/zoom axis to optimize vertical interpolation requested by the DR.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["use_union_zoom"]
+        },
+        false
+      ]
+    },
+    "useAtForInstant": {
+      "help": "Should xml output files use the `@` symbol for definitions for instant variables?",
+      "values": [
+        {
+          "type": "value",
+          "source": "laboratory",
+          "keys": ["useAtForInstant"]
+        },
+        false
+      ]
+    },
+    "vertical_interpolation_operation": {
+      "help": "Operation done for vertical interpolation.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["vertical_interpolation_operation"]
+        },
+        "instant"
+      ]
+    },
+    "vertical_interpolation_sample_freq": {
+      "help": "Time frequency of vertical interpolation.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["vertical_interpolation_sample_freq"]
+        }
+      ]
+    },
+    "xios_version": {
+      "help": "Version of XIOS used.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["xios_version"]
+        },
+        2
+      ]
+    },
+    "year": {
+      "help": "Year associated with the launch of dr2xml.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "value",
+          "origin": "dict",
+          "keys": ["year"]
+        }
+      ]
+    },
+    "zg_field_name": {
+      "help": "Name of the geopotential height field name to be used to compute height over orog fields.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["zg_field_name"]
+        },
+        "zg"
+      ]
+    }
+  },
+  "common": {
+    "prefix": {
+      "help": "Prefix to be used for each file definition.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "value",
+          "origin": "dict",
+          "keys": ["prefix"]
+        }
+      ]
+    }
+  },
+  "project_settings": {
+    "axis": {
+      "help": "XIOS axis beacon"
+    },
+    "axis_definition": {
+      "help": "XIOS axis_definition beacon"
+    },
+    "axis_group": {
+      "help": "XIOS axis_group beacon"
+    },
+    "context": {
+      "help": "XIOS context beacon"
+    },
+    "domain": {
+      "help": "XIOS domain beacon"
+    },
+    "domain_definition": {
+      "help": "XIOS domain_definition beacon"
+    },
+    "domain_group": {
+      "help": "XIOS domain_group beacon"
+    },
+    "duplicate_scalar": {
+      "help": "XIOS duplicate_scalar beacon"
+    },
+    "field": {
+      "help": "XIOS field beacon (except for output fields)"
+    },
+    "field_definition": {
+      "help": "XIOS field_definition beacon"
+    },
+    "field_group": {
+      "help": "XIOS field_group beacon"
+    },
+    "field_output": {
+      "help": "XIOS field beacon (only for output fields)"
+    },
+    "file": {
+      "help": "XIOS file beacon (except for output files)"
+    },
+    "file_definition": {
+      "help": "XIOS file_definition beacon"
+    },
+    "file_output": {
+      "help": "XIOS file beacon (only for output files)"
+    },
+    "generate_rectilinear_domain": {
+      "help": "XIOS generate_rectilinear_domain beacon"
+    },
+    "grid": {
+      "help": "XIOS grid beacon"
+    },
+    "grid_definition": {
+      "help": "XIOS grid_definition beacon"
+    },
+    "interpolate_domain": {
+      "help": "XIOS interpolate_domain beacon"
+    },
+    "interplate_axis": {
+      "helps": "XIOS interpolate_axis beacon"
+    },
+    "scalar": {
+      "help": "XIOS scalar beacon"
+    },
+    "scalar_definition": {
+      "help": "XIOS scalar_definition beacon"
+    },
+    "temporal_splitting": {
+      "help": "XIOS temporal_splitting beacon"
+    },
+    "variable": {
+      "help": "XIOS variable beacon",
+      "attrs_list": ["name", "type"],
+      "attrs_constraints": {
+        "name": {
+          "help": "Content of the variable",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["name"]
+            }
+          ]
+        },
+        "type": {
+          "help": "Encoding type of the variable's content.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["type"]
+            }
+          ]
+        }
+      }
+    },
+    "zoom_axis": {
+      "help": "XIOS zoom_axis beacon"
+    }
+  }
+}
