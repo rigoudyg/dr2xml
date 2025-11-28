@@ -14,12 +14,14 @@
       "help": "TODO",
       "fatal": false,
       "corrections": false,
-      "authorized_values": false,
-      "forbidden_patterns": false,
-      "skipped_values": false,
+      "authorized_values": true,
+      "authorized_types": true,
+      "authorized_patterns": true,
+      "forbidden_patterns": true,
+      "forbidden_values": true,
+      "forbidden_types": true,
       "target_type": false,
-      "values": [],
-      "choices": false
+      "values": []
     }
   },
   "internal": {
@@ -29,12 +31,14 @@
       "help": "TODO",
       "fatal": false,
       "corrections": false,
-      "authorized_values": false,
-      "forbidden_patterns": false,
-      "skipped_values": false,
+      "authorized_values": true,
+      "authorized_types": true,
+      "authorized_patterns": true,
+      "forbidden_patterns": true,
+      "forbidden_values": true,
+      "forbidden_types": true,
       "target_type": false,
-      "values": [],
-      "choices": false
+      "values": []
     }
   },
   "common": {
@@ -44,12 +48,14 @@
       "help": "TODO",
       "fatal": false,
       "corrections": false,
-      "authorized_values": false,
-      "forbidden_patterns": false,
-      "skipped_values": false,
+      "authorized_values": true,
+      "authorized_types": true,
+      "authorized_patterns": true,
+      "forbidden_patterns": true,
+      "forbidden_values": true,
+      "forbidden_types": true,
       "target_type": false,
-      "values": [],
-      "choices": false
+      "values": []
     }
   },
   "project_settings": {
@@ -66,15 +72,18 @@
     "default_constraint": {
       "help": "TODO",
       "fatal": false,
-      "output_key": false,
       "corrections": false,
-      "authorized_values": false,
-      "forbidden_patterns": false,
-      "num_type": false,
-      "skipped_values": false,
+      "authorized_values": true,
+      "authorized_types": true,
+      "authorized_patterns": true,
+      "forbidden_values": true,
+      "forbidden_types": true,
+      "forbidden_patterns": true,
       "target_type": false,
       "values": [],
-      "choices": false
+      "output_key": false,
+      "num_type": "string",
+      "conditions": true
     }
   }
 }

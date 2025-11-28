@@ -1,0 +1,47 @@
+{
+  "parent_project_settings": "basics",
+  "internal": {
+    "configuration": {
+      "values": [null]
+    },
+    "source_id": {
+      "values": [null]
+    },
+    "experiment_id": {
+      "values": [null]
+    },
+    "experiment_for_requests": {
+      "values": [null]
+    },
+    "grid_choice": {
+      "values": [null]
+    },
+    "grid_policy": {
+      "values": [null]
+    },
+    "grids": {
+      "values": [null]
+    },
+    "orphan_variables": {
+      "values": [[]]
+    },
+    "sampling_timestep": {
+      "values": [null]
+    },
+    "sizes": {
+      "values": [null]
+    },
+    "source_type": {
+      "values": [null]
+    },
+    "path_special_defs": {
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": "path_special_defs"
+        }
+      ]
+    }
+  }
+}

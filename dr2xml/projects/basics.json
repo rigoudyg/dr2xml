@@ -484,14 +484,6 @@
       "attrs_constraints": {
         "id": {
           "help": "Id of the context",
-          "fatal": false,
-          "corrections": false,
-          "output_key": false,
-          "authorized_values": false,
-          "forbidden_patterns": false,
-          "skipped_values": false,
-          "target_type": false,
-          "num_type": false,
           "values": [
             {
               "type": "value",
@@ -556,7 +548,7 @@
                 "laboratory": {
                   "type": "value",
                   "origin": "laboratory",
-                  "keys": false
+                  "keys": []
                 }
               }
             }
@@ -574,7 +566,7 @@
                 "laboratory": {
                   "type": "value",
                   "origin": "simulation",
-                  "keys": false
+                  "keys": []
                 }
               }
             }
@@ -1722,7 +1714,7 @@
                 "options": {
                   "cell_measures": {
                     "type": "value",
-                    "origin": "variables",
+                    "origin": "variable",
                     "keys": ["cell_measures"]
                   }
                 }

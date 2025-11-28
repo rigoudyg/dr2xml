@@ -40,7 +40,7 @@
       "values": [
         {
           "type": "func",
-          "origin": "vocabulary",
+          "origin": "vocabulary_server",
           "keys": ["get_term_in_collection"],
           "options": {
             "project_id": {
@@ -152,7 +152,7 @@
       "values": [
         {
           "type": "func",
-          "origin": "vocabulary",
+          "origin": "vocabulary_server",
           "keys": ["get_term_in_collection"],
           "options": {
             "project_id": {
@@ -196,7 +196,8 @@
       "fatal": true,
       "values": [
         {
-          "type": "json",
+          "type": "file",
+          "origin": "json",
           "src": {
             "type": "func",
             "origin": "self",
@@ -381,7 +382,7 @@
       "values": [
         {
           "type": "func",
-          "origin": "vocabulary",
+          "origin": "vocabulary_server",
           "keys": ["get_term_in_collection"],
           "options": {
             "project_id": {
@@ -542,7 +543,8 @@
           "help": "Last tag of CMIP6 CVs.",
           "values": [
             {
-              "type": "json",
+              "type": "file",
+              "origin": "json",
               "src": {
                 "type": "func",
                 "origin": "self",

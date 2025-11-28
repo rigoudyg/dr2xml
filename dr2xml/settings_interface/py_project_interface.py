@@ -7,6 +7,7 @@ Interface to project settings from dr2xml
 from __future__ import print_function, division, absolute_import, unicode_literals
 
 import os
+import six
 from importlib.machinery import SourceFileLoader
 
 from .py_settings_interface import get_variable_from_lset_with_default_in_lset, get_variable_from_lset_with_default, \
@@ -136,9 +137,7 @@ def read_project_settings(filename):
 
 
 def solve_values(values, init_dict=dict(), internal_dict=dict(), common_dict=dict(), additional_dict=dict(),
-                 allow_additional_keytypes=True, only_init=False, project_funcs=""):
-    if only_init and values not in ["internal", ]:
-        raise ValueError("Only_init can be True only for internal dict resolution")
+                 allow_additional_keytypes=True, project_funcs=""):
     if values in ["init", ]:
         args_dict = dict(additional_dict=additional_dict, raise_on_error=False,
                          allow_additional_keytypes=allow_additional_keytypes, project_funcs=project_funcs)
@@ -150,23 +149,17 @@ def solve_values(values, init_dict=dict(), internal_dict=dict(), common_dict=dic
         dict_name = "internal_dict"
         current_dict = internal_dict
     elif values in ["common", ]:
-        args_dict = dict(init_dict=init_dict, internal_dict=internal_dict, additional_dict=additional_dict, raise_on_error=False,
-                         allow_additional_keytypes=allow_additional_keytypes, project_funcs=project_funcs)
+        args_dict = dict(init_dict=init_dict, internal_dict=internal_dict, additional_dict=additional_dict,
+                         raise_on_error=False, allow_additional_keytypes=allow_additional_keytypes,
+                         project_funcs=project_funcs)
         dict_name = "common_dict"
         current_dict = common_dict
     else:
         raise ValueError("Could not solve values for setting %s" % values)
     rep = dict()
-    if only_init is False and values in ["internal", ]:
-        items_to_treat = [elt for (elt, val) in current_dict.items() if not isinstance(val, ParameterSettings)]
-        for item in items_to_treat:
-            rep[item] = current_dict.pop(item)
-    else:
-        rep = dict()
 
     items_to_treat = sorted(list(current_dict))
-    if only_init:
-        items_to_treat = [elt for elt in items_to_treat if (isinstance(current_dict[elt], ParameterSettings) and current_dict[elt].init is True)]
+
     test = True
     while len(items_to_treat) > 0 and test:
         resolved_items = list()
@@ -175,6 +168,8 @@ def solve_values(values, init_dict=dict(), internal_dict=dict(), common_dict=dic
             if isinstance(val, ParameterSettings):
                 found, value = val.find_value(**{dict_name: rep}, **args_dict)
                 if found:
+                    if isinstance(value, six.string_types) and "__package-root__" in value:
+                        value = value.replace("__package-root__", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
                     rep[item] = value
                     del current_dict[item]
                     resolved_items.append(item)
@@ -190,12 +185,7 @@ def solve_values(values, init_dict=dict(), internal_dict=dict(), common_dict=dic
                 not_to_solve_items.append(item)
         items_to_treat = sorted(list(set(items_to_treat) - set(not_to_solve_items)))
         test = len(items_to_treat) == 0
-    if only_init:
-        for item in sorted(list(current_dict)):
-            if item in rep:
-                raise ValueError("Case should not happened")
-            else:
-                rep[item] = current_dict.pop(item)
+
     if not test:
         raise ValueError("Could not evaluate all %s values: the following are missing %s" % (values, items_to_treat))
     return rep

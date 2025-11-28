@@ -201,7 +201,8 @@
           "type": "value",
           "origin": "laboratory",
           "keys": ["allow_duplicates"]
-        }
+        },
+        true
       ]
     },
     "allow_duplicates_in_same_table": {
@@ -273,7 +274,8 @@
           "type": "value",
           "origin": "laboratory",
           "keys": ["bypass_CV_components"]
-        }
+        },
+        false
       ]
     },
     "bytes_per_float": {
@@ -803,7 +805,7 @@
           "origin": "laboratory",
           "keys": ["max_file_size_in_floats"]
         },
-        500000000
+        500000000.0
       ]
     },
     "max_priority": {
@@ -1165,7 +1167,7 @@
             {
               "type": "value",
               "origin": "internal",
-              "values": ["grid_choice"]
+              "keys": ["grid_choice"]
             }
           ]
         },
@@ -1226,7 +1228,7 @@
             {
               "type": "value",
               "origin": "internal",
-              "values": ["excluded_opportunities_lset"]
+              "keys": ["excluded_opportunities_lset"]
             }
           ]
         }
@@ -1276,7 +1278,7 @@
             {
               "type": "value",
               "origin": "internal",
-              "values": ["excluded_pairs_lset"]
+              "keys": ["excluded_pairs_lset"]
             }
           ]
         }
@@ -1299,7 +1301,7 @@
             {
               "type": "value",
               "origin": "internal",
-              "values": ["excluded_request_links"]
+              "keys": ["excluded_request_links"]
             }
           ]
         },
@@ -1360,7 +1362,7 @@
             {
               "type": "value",
               "origin": "internal",
-              "values": ["excluded_tables_lset"]
+              "keys": ["excluded_tables_lset"]
             }
           ]
         }
@@ -1410,7 +1412,7 @@
             {
               "type": "value",
               "origin": "internal",
-              "values": ["excluded_vargroups_lset"]
+              "keys": ["excluded_vargroups_lset"]
             }
           ]
         }
@@ -1465,7 +1467,7 @@
             {
               "type": "value",
               "origin": "internal",
-              "values": ["excluded_vars_lset"]
+              "keys": ["excluded_vars_lset"]
             }
           ]
         }
@@ -1488,7 +1490,7 @@
             {
               "type": "value",
               "origin": "internal",
-              "values": ["included_opportunities"]
+              "keys": ["included_opportunities"]
             }
           ]
         },
@@ -1505,7 +1507,7 @@
             {
               "type": "value",
               "origin": "internal",
-              "values": ["included_opportunities_lset"]
+              "keys": ["included_opportunities_lset"]
             }
           ]
         }
@@ -1528,7 +1530,7 @@
             {
               "type": "value",
               "origin": "internal",
-              "values": ["included_request_links"]
+              "keys": ["included_request_links"]
             }
           ]
         },
@@ -1562,7 +1564,7 @@
             {
               "type": "value",
               "origin": "internal",
-              "values": ["included_tables"]
+              "keys": ["included_tables"]
             }
           ]
         },
@@ -1579,7 +1581,7 @@
             {
               "type": "value",
               "origin": "internal",
-              "values": ["included_tables_lset"]
+              "keys": ["included_tables_lset"]
             }
           ]
         }
@@ -1602,7 +1604,7 @@
             {
               "type": "value",
               "origin": "internal",
-              "values": ["included_vargroups"]
+              "keys": ["included_vargroups"]
             }
           ]
         },
@@ -1619,7 +1621,7 @@
             {
               "type": "value",
               "origin": "internal",
-              "values": ["included_vargroups_lset"]
+              "keys": ["included_vargroups_lset"]
             }
           ]
         }
@@ -1642,7 +1644,7 @@
             {
               "type": "value",
               "origin": "internal",
-              "values": ["included_vars"]
+              "keys": ["included_vars"]
             }
           ]
         },
@@ -1659,7 +1661,7 @@
             {
               "type": "value",
               "origin": "internal",
-              "values": ["included_vars_lset"]
+              "keys": ["included_vars_lset"]
             }
           ]
         }
@@ -1682,7 +1684,7 @@
             {
               "type": "value",
               "origin": "internal",
-              "values": ["max_priority"]
+              "keys": ["max_priority"]
             }
           ]
         },
@@ -1699,7 +1701,7 @@
             {
               "type": "value",
               "origin": "internal",
-              "values": ["max_priority_lset"]
+              "keys": ["max_priority_lset"]
             }
           ]
         }
@@ -1727,12 +1729,12 @@
                 "mips": {
                   "type": "value",
                   "origin": "internal",
-                  "values": [
+                  "keys": [
                     "mips",
                     {
                       "type": "value",
                       "origin": "internal",
-                      "values": ["select_grid_choice"]
+                      "keys": ["select_grid_choice"]
                     }
                   ]
                 }
@@ -1758,7 +1760,7 @@
                 "mips": {
                   "type": "value",
                   "origin": "internal",
-                  "values": ["mips"]
+                  "keys": ["mips"]
                 }
               }
             }
@@ -1783,7 +1785,7 @@
             {
               "type": "value",
               "origin": "internal",
-              "values": ["sizes"]
+              "keys": ["sizes"]
             }
           ]
         },
@@ -1817,7 +1819,7 @@
             {
               "type": "value",
               "origin": "internal",
-              "values": ["tierMax"]
+              "keys": ["tierMax"]
             }
           ]
         },
@@ -1834,7 +1836,7 @@
             {
               "type": "value",
               "origin": "internal",
-              "values": ["tierMax_lset"]
+              "keys": ["tierMax_lset"]
             }
           ]
         }
@@ -1845,7 +1847,7 @@
       "values": [
         {
           "type": "value",
-          "source": "laboratory",
+          "origin": "laboratory",
           "keys": ["simple_domain_grid_regexp"]
         }
       ]
@@ -1904,7 +1906,7 @@
       "values": [
         {
           "type": "value",
-          "source": "laboratory",
+          "origin": "laboratory",
           "keys": ["special_timestep_vars"]
         },
         []
@@ -2011,7 +2013,7 @@
       "values": [
         {
           "type": "value",
-          "source": "laboratory",
+          "origin": "laboratory",
           "keys": ["too_long_periods"]
         },
         []
@@ -2023,7 +2025,7 @@
       "values": [
         {
           "type": "value",
-          "source": "laboratory",
+          "origin": "laboratory",
           "keys": ["use_cmorvar_label_in_filename"]
         },
         false
@@ -2045,7 +2047,7 @@
       "values": [
         {
           "type": "value",
-          "source": "laboratory",
+          "origin": "laboratory",
           "keys": ["useAtForInstant"]
         },
         false

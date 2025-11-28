@@ -15,7 +15,8 @@
       "help": "Controlled vocabulary file containing experiment characteristics.",
       "values": [
         {
-          "type": "json",
+          "type": "file",
+          "origin": "json",
           "src": {
             "type": "func",
             "origin": "self",
@@ -121,7 +122,8 @@
           "keys": ["institution"]
         },
         {
-          "type": "json",
+          "type": "file",
+          "origin": "json",
           "src": {
             "type": "func",
             "origin": "self",
@@ -172,7 +174,8 @@
       "fatal": true,
       "values": [
         {
-          "type": "json",
+          "type": "file",
+          "origin": "json",
           "src": {
             "type": "func",
             "origin": "self",
@@ -332,7 +335,8 @@
           "keys": ["make_source_string"],
           "options": {
             "source": {
-              "type": "json",
+              "type": "file",
+              "origin": "json",
               "src": {
                 "type": "func",
                 "origin": "self",
@@ -512,7 +516,8 @@
           "help": "Last tag of CMIP6 CVs.",
           "values": [
             {
-              "type": "json",
+              "type": "file",
+              "origin": "json",
               "src": {
                 "type": "func",
                 "origin": "self",
