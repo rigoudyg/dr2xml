@@ -18,7 +18,7 @@ from .definition import SimpleCMORVar as SimpleCMORVarBasic
 from .definition import SimpleDim as SimpleDimBasic
 from dr2xml.settings_interface import get_settings_values
 
-data_request_path = get_settings_values("internal", "data_request_path")
+data_request_path = get_settings_values("init", "data_request_path")
 if data_request_path is not None:
     data_request_filename = os.path.basename(data_request_path)
     data_request_module = SourceFileLoader(data_request_filename, data_request_path).load_module(data_request_filename)

@@ -105,7 +105,7 @@ internal_values = dict(
                     key_type="combine",
                     keys=[
                         ValueSettings(key_type="dict", keys="cvspath"),
-                        ValueSettings(key_type="internal", keys="project")
+                        ValueSettings(key_type="init", keys="project")
                     ],
                     fmt="{}{}_experiment_id.json"
                 )
@@ -202,7 +202,7 @@ common_values = dict(
                     key_type="combine",
                     keys=[
                         ValueSettings(key_type="dict", keys="cvspath"),
-                        ValueSettings(key_type="internal", keys="project")
+                        ValueSettings(key_type="init", keys="project")
                     ],
                     fmt="{}{}_source_id.json"
                 ),
@@ -222,13 +222,13 @@ common_values = dict(
                 key_type="json",
                 keys=[
                     "institution_id",
-                    ValueSettings(key_type="internal", keys="institution_id")
+                    ValueSettings(key_type="init", keys="institution_id")
                 ],
                 src=ValueSettings(
                     key_type="combine",
                     keys=[
                         ValueSettings(key_type="dict", keys="cvspath"),
-                        ValueSettings(key_type="internal", keys="project")
+                        ValueSettings(key_type="init", keys="project")
                     ],
                     fmt="{}{}_institution_id.json"
                 )
@@ -245,7 +245,7 @@ common_values = dict(
                     key_type="combine",
                     keys=[
                         ValueSettings(key_type="dict", keys="cvspath"),
-                        ValueSettings(key_type="internal", keys="project")
+                        ValueSettings(key_type="init", keys="project")
                     ],
                     fmt="{}{}_license.json"
                 )
@@ -389,7 +389,7 @@ project_settings = dict(
                             key_type="combine",
                             keys=[
                                 ValueSettings(key_type="dict", keys="cvspath"),
-                                ValueSettings(key_type="internal", keys="project")
+                                ValueSettings(key_type="init", keys="project")
                             ],
                             fmt="{}{}_experiment_id.json"
                         )
@@ -408,7 +408,7 @@ project_settings = dict(
                         key_type="combine",
                         keys=[
                             ValueSettings(key_type="variable", keys="mip_era"),
-                            ValueSettings(key_type="internal", keys="institution_id"),
+                            ValueSettings(key_type="init", keys="institution_id"),
                             ValueSettings(key_type="internal", keys="source_id"),
                             ValueSettings(key_type="common", keys="expid_in_filename"),
                             ValueSettings(key_type="common", keys="sub_experiment_id"),
@@ -433,7 +433,7 @@ project_settings = dict(
                         func=FunctionSettings(
                             func=fill_license,
                             options=dict(
-                                institution_id=ValueSettings(key_type="internal", keys="institution_id"),
+                                institution_id=ValueSettings(key_type="init", keys="institution_id"),
                                 info_url=ValueSettings(key_type="common", keys="info_url"),
                                 commercial_license=ValueSettings(key_type="common", keys="commercial_license"),
                                 license_id=ValueSettings(key_type="common", keys="license_id"),

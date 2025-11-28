@@ -72,16 +72,19 @@ def fill_license(value, institution_id, info_url, license_id, license_url, comme
     return value
 
 
-internal_values = dict(
-	project=ParameterSettings(
+init_values = dict(
+    project=ParameterSettings(
         key="project",
-		default_values=[
-			ValueSettings(key_type="laboratory", keys="project"),
-			"CMIP7"
-		],
-		help="Project associated with the simulation."
-	),
-	vocabulary_used=ParameterSettings(
+        default_values=[
+            ValueSettings(key_type="laboratory", keys="project"),
+            "CMIP7"
+        ],
+        help="Project associated with the simulation."
+    )
+)
+
+
+internal_values = dict(vocabulary_used=ParameterSettings(
         key="vocabulary_used",
 		default_values=[
 			ValueSettings(key_type="laboratory", keys="vocabulary_used"),
@@ -113,7 +116,7 @@ internal_values = dict(
         default_values=[
             ValueSettings(
                 keys=[
-                    ValueSettings(key_type="internal", keys="vocabulary_project"),
+                    ValueSettings(key_type="init", keys="vocabulary_project"),
                     "experiment",
                     ValueSettings(key_type="internal", keys="experiment_id")
                 ],
@@ -205,7 +208,7 @@ common_values = dict(
         default_values=[
             ValueSettings(
                 keys=[
-                    ValueSettings(key_type="internal", keys="vocabulary_project"),
+                    ValueSettings(key_type="init", keys="vocabulary_project"),
                     "source",
                     ValueSettings(key_type="internal", keys=["source_id", "lower", "__call__"])
                 ],
@@ -235,9 +238,9 @@ common_values = dict(
         default_values=[
             ValueSettings(
                 keys=[
-                    ValueSettings(key_type="internal", keys="vocabulary_project"),
+                    ValueSettings(key_type="init", keys="vocabulary_project"),
                     "institution",
-                    ValueSettings(key_type="internal", keys=["institution_id", "lower", "__call__"])
+                    ValueSettings(key_type="init", keys=["institution_id", "lower", "__call__"])
                 ],
                 func=ValueSettings(key_type="vocabulary", keys="get_term_in_collection")
             )
@@ -260,7 +263,7 @@ common_values = dict(
                     key_type="combine",
                     keys=[
                         ValueSettings(key_type="dict", keys="cvspath"),
-                        ValueSettings(key_type="internal", keys="project")
+                        ValueSettings(key_type="init", keys="project")
                     ],
                     fmt="{}{}_license.json"
                 )
@@ -404,7 +407,7 @@ project_settings = dict(
                             key_type="combine",
                             keys=[
                                 ValueSettings(key_type="dict", keys="cvspath"),
-                                ValueSettings(key_type="internal", keys="project")
+                                ValueSettings(key_type="init", keys="project")
                             ],
                             fmt="{}{}_experiment_id.json"
                         )
@@ -423,7 +426,7 @@ project_settings = dict(
                         key_type="combine",
                         keys=[
                             ValueSettings(key_type="variable", keys="mip_era"),
-                            ValueSettings(key_type="internal", keys="institution_id"),
+                            ValueSettings(key_type="init", keys="institution_id"),
                             ValueSettings(key_type="internal", keys="source_id"),
                             ValueSettings(key_type="common", keys="expid_in_filename"),
                             ValueSettings(key_type="common", keys="sub_experiment_id"),
@@ -448,7 +451,7 @@ project_settings = dict(
                         func=FunctionSettings(
                             func=fill_license,
                             options=dict(
-                                institution_id=ValueSettings(key_type="internal", keys="institution_id"),
+                                institution_id=ValueSettings(key_type="init", keys="institution_id"),
                                 info_url=ValueSettings(key_type="common", keys="info_url"),
                                 commercial_license=ValueSettings(key_type="common", keys="commercial_license"),
                                 license_id=ValueSettings(key_type="common", keys="license_id"),

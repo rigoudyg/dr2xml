@@ -8,8 +8,8 @@ CMIP6 python tools
 from __future__ import print_function, division, absolute_import, unicode_literals
 
 
-from .dr2xml_func import sort_mips, format_sizes
-from .basics_func import build_external_variables, compute_nb_days
+from dr2xml.projects.dr2xml_func import sort_mips, format_sizes
+from dr2xml.projects.basics_func import build_external_variables, compute_nb_days
 
 
 def make_source_string(source, source_id):

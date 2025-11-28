@@ -20,9 +20,9 @@ from .definition import SimpleDim as SimpleDimBasic
 from dr2xml.settings_interface import get_settings_values
 from ..utils import Dr2xmlError, is_elt_applicable
 
-data_request_path = get_settings_values("internal", "data_request_path")
+data_request_path = get_settings_values("init", "data_request_path")
 sys.path.append(data_request_path)
-os.environ["CMIP7_DR_API_CONFIGFILE"] = get_settings_values("internal", "data_request_config")
+os.environ["CMIP7_DR_API_CONFIGFILE"] = get_settings_values("init", "data_request_config")
 from data_request_api.query.vocabulary_server import ConstantValueObj
 from data_request_api.query.data_request import DataRequest as CMIP7DataRequest
 from data_request_api.content.dump_transformation import get_transformed_content
@@ -222,8 +222,8 @@ class DataRequest(DataRequestBasic):
 def initialize_data_request():
     global data_request
     if data_request is None:
-        internal_dict = get_settings_values("internal")
-        data_request_content_version = internal_dict["data_request_content_version"]
+        init_dict = get_settings_values("init")
+        data_request_content_version = init_dict["data_request_content_version"]
         content = get_transformed_content(version=data_request_content_version,
                                           force_retrieve=False)
         data_request = DataRequest(CMIP7DataRequest.from_separated_inputs(**content), print_DR_errors=True,

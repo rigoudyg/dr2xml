@@ -19,25 +19,32 @@ def initialize_project_settings(dirname, doc_writer=False):
     project_filename = get_variable_from_lset_with_default_in_lset(key="project_settings", key_default="project",
                                                                    default="CMIP6")
     # Merge with parent if needed
-    project_filename, internal_values, common_values, project_settings = merge_project_settings(project_filename)
+    project_filename, init_values, internal_values, common_values, project_settings = merge_project_settings(project_filename)
     # Complete and clean project settings
     project_settings = solve_settings(project_settings)
     # If asked, save the settings into a dedicated file
     save_project_settings = get_variable_from_lset_with_default("save_project_settings", None)
     if save_project_settings is not None:
-        write_project_content(save_project_settings, internal_values, common_values, project_settings, dirname)
+        write_project_content(save_project_settings, init_values, internal_values, common_values, project_settings, dirname)
     if doc_writer:
-        write_project_documentation(internal_values, common_values, project_settings, dirname,
+        write_project_documentation(init_values, internal_values, common_values, project_settings, dirname,
                                     get_variable_from_lset_without_default("project"))
-    return internal_values, common_values, project_settings
+    return init_values, internal_values, common_values, project_settings, ""
 
 
-def write_project_documentation(internal_values, common_values, project_settings, dirname, project):
+def write_project_documentation(init_values, internal_values, common_values, project_settings, dirname, project):
     target_filename = os.sep.join([dirname, project + ".rst"])
     content = list()
     content.append("Parameters available for project %s" % project)
     content.append("=" * len(content[0]))
     content.append("")
+    content.append("Init values")
+    content.append("---------------")
+    content.append(".. glossary::")
+    content.append("   :sorted:")
+    content.append("   ")
+    for value in sorted(list(init_values)):
+        content.extend(init_values[value].dump_doc())
     content.append("Internal values")
     content.append("---------------")
     content.append(".. glossary::")
@@ -63,10 +70,11 @@ def write_project_documentation(internal_values, common_values, project_settings
         fic.write(os.linesep.join(content))
 
 
-def write_project_content(target, internal_values, common_values, project_settings, dirname):
+def write_project_content(target, init_values, internal_values, common_values, project_settings, dirname):
     with open(os.sep.join([dirname, target]), "w") as target_fic:
         target_fic.write(os.linesep.join([
             "from dr2xml.projects.projects_interface_definitions import *",
+            "init_values = %s" % init_values,
             "internal_values = %s" % internal_values,
             "common_values = %s" % common_values,
             "project_settings = %s" % project_settings]))
@@ -74,19 +82,20 @@ def write_project_content(target, internal_values, common_values, project_settin
 
 def merge_project_settings(project_filename):
     # Initialize settings from current filename
-    project_filename, parent_project_filename, internal_values, common_values, project_settings = \
+    project_filename, parent_project_filename, init_values, internal_values, common_values, project_settings = \
         read_project_settings(filename=project_filename)
     if parent_project_filename is not None:
         # Merge parent settings
-        parent_project_filename, parent_internal_values, parent_common_values, parent_project_settings = \
+        parent_project_filename, parent_init_values, parent_internal_values, parent_common_values, parent_project_settings = \
             merge_project_settings(project_filename=parent_project_filename)
         if project_filename != parent_project_filename:
+            init_values = update_settings(init_values, parent_init_values)
             internal_values = update_settings(internal_values, parent_internal_values)
             common_values = update_settings(common_values, parent_common_values)
             project_settings = update_settings(project_settings, parent_project_settings)
         else:
             raise ValueError("The settings %s reference itself as parent settings. Stop" % project_filename)
-    return project_filename, internal_values, common_values, project_settings
+    return project_filename, init_values, internal_values, common_values, project_settings
 
 
 def update_settings(current_settings, parent_settings):
@@ -107,6 +116,10 @@ def read_project_settings(filename):
         parent_project_filename = file_module.__getattribute__("parent_project_settings")
     else:
         parent_project_filename = None
+    if "init_values" in file_module.__dict__:
+        init_values = file_module.__getattribute__("init_values")
+    else:
+        init_values = dict()
     if "internal_values" in file_module.__dict__:
         internal_values = file_module.__getattribute__("internal_values")
     else:
@@ -119,21 +132,26 @@ def read_project_settings(filename):
         project_settings = file_module.__getattribute__("project_settings")
     else:
         project_settings = dict()
-    return filename, parent_project_filename, internal_values, common_values, project_settings
+    return filename, parent_project_filename, init_values, internal_values, common_values, project_settings
 
 
-def solve_values(values, internal_dict=dict(), common_dict=dict(), additional_dict=dict(),
-                 allow_additional_keytypes=True, only_init=False):
+def solve_values(values, init_dict=dict(), internal_dict=dict(), common_dict=dict(), additional_dict=dict(),
+                 allow_additional_keytypes=True, only_init=False, project_funcs=""):
     if only_init and values not in ["internal", ]:
         raise ValueError("Only_init can be True only for internal dict resolution")
-    if values in ["internal", ]:
-        args_dict = dict(common_dict=common_dict, additional_dict=additional_dict, raise_on_error=False,
-                         allow_additional_keytypes=allow_additional_keytypes)
+    if values in ["init", ]:
+        args_dict = dict(additional_dict=additional_dict, raise_on_error=False,
+                         allow_additional_keytypes=allow_additional_keytypes, project_funcs=project_funcs)
+        dict_name = "init_dict"
+        current_dict = init_dict
+    elif values in ["internal", ]:
+        args_dict = dict(init_dict=init_dict, additional_dict=additional_dict, raise_on_error=False,
+                         allow_additional_keytypes=allow_additional_keytypes, project_funcs=project_funcs)
         dict_name = "internal_dict"
         current_dict = internal_dict
     elif values in ["common", ]:
-        args_dict = dict(internal_dict=internal_dict, additional_dict=additional_dict, raise_on_error=False,
-                         allow_additional_keytypes=allow_additional_keytypes)
+        args_dict = dict(init_dict=init_dict, internal_dict=internal_dict, additional_dict=additional_dict, raise_on_error=False,
+                         allow_additional_keytypes=allow_additional_keytypes, project_funcs=project_funcs)
         dict_name = "common_dict"
         current_dict = common_dict
     else:

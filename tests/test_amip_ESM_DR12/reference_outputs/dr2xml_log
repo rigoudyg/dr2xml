@@ -1,8 +1,3 @@
-sync universe
-Cache db is uptodate from local repository
-sync projects
-Cache db is uptodate from local repository
-Cache db is uptodate from local repository
 
  **************************************************
 *
@@ -2284,11 +2279,6 @@ Warnings about cell methods (with var list)
 	time: mean where vegetation for vars: {'vegHeight'}
 	time: mean where ice_sheet for vars: {'hflsIs', 'hfssIs', 'mrroIs', 'orogIs', 'prraIs', 'prsnIs', 'rldsIs', 'rlusIs', 'rsdsIs', 'rsusIs', 'sblIs', 'sncIs', 'snmIs', 'tas', 'tasIs', 'tsIs', 'tsnIs'}
 	Cannot yet handle time: mean (with samples weighted by snow mass) for vars: {'agesno', 'tsn'}
-sync universe
-Cache db is uptodate from local repository
-sync projects
-Cache db is uptodate from local repository
-Cache db is uptodate from local repository
 
  **************************************************
 *

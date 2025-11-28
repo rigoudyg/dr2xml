@@ -9,9 +9,9 @@ vocab = None
 
 
 def load_vocabulary():
-	vocabulary_used = get_settings_values("internal", "vocabulary_used")
-	vocabulary_project = get_settings_values("internal", "vocabulary_project")
-	vocabulary_config = get_settings_values("internal", "vocabulary_config")
+	vocabulary_used = get_settings_values("init", "vocabulary_used")
+	vocabulary_project = get_settings_values("init", "vocabulary_project")
+	vocabulary_config = get_settings_values("init", "vocabulary_config")
 
 	if vocabulary_project is not None:
 		from .esgvoc_configuration import setup_esgvoc_config

@@ -102,6 +102,15 @@ for element in config:
                         content_value[key][subkey] = new_subval
                 else:
                     content_value[key] = dict()
+
+            for key in ["attrs", "comments", "vars"]:
+                list_expected_keywords = copy.deepcopy(content_value[key + "_list"])
+                list_current_keywords = copy.deepcopy(list(content_value[key + "_constraints"]))
+                for keyword in sorted(list(set(list_current_keywords) - set(list_expected_keywords))):
+                    del content_value[key + "_constraints"][keyword]
+                for keyword in sorted(list(set(list_expected_keywords) - set(list_current_keywords))):
+                    content_value[key + "_constraints"][keyword] = default_constraints
+
             content[element][content_elt] = content_value
 
 write_json_content(args.output, content)

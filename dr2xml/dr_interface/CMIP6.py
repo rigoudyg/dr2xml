@@ -25,11 +25,11 @@ from ..projects.dr2xml import format_sizes
 from ..utils import Dr2xmlError, print_struct, is_elt_applicable, convert_string_to_year
 from dr2xml.settings_interface import get_settings_values, get_values_from_internal_settings
 
-data_request_path = get_settings_values("internal", "data_request_path")
+data_request_path = get_settings_values("init", "data_request_path")
 if data_request_path is not None:
     sys.path.insert(0, data_request_path)
 
-data_request_content_version = get_settings_values("internal", "data_request_content_version")
+data_request_content_version = get_settings_values("init", "data_request_content_version")
 if data_request_content_version not in ["latest_stable", "stable", "latest"]:
     reset_manifest = True
     os.environ["DRQ_CONFIG_DIR"] = data_request_content_version

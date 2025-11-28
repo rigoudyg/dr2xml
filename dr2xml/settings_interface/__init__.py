@@ -13,33 +13,39 @@ from collections import OrderedDict
 from dr2xml.utils import Dr2xmlError
 from utilities.logger import get_logger
 
+# Init settings for dr2xml (values required to start configuring the software)
+init_settings = None
 # Internal settings for dr2xml (values required to use the software)
 internal_settings = None
 # Common settings (values required for projects)
 common_settings = None
 # Project settings (definition of project requirement)
 project_settings = None
+# Project functions
+project_funcs = None
 # Internal values used everywhere in dr2xml
 internal_values = None
 
 
 def initialize_settings(lset=None, sset=None, force_reset=False, **kwargs):
-    global internal_settings, common_settings, project_settings
+    global init_settings, internal_settings, common_settings, project_settings, project_funcs
     # Initialize settings and internal values
     initialize_internal_values(force_reset=force_reset)
     if force_reset:
+        init_settings = None
         internal_settings = None
         common_settings = None
         project_settings = None
+        project_funcs = None
     # Initialize python settings dictionaries
     from .py_settings_interface import initialize_dict
     initialize_dict(new_lset=lset, new_sset=sset)
     # Read, merge and format complete settings linked to project
-    from .py_project_interface import initialize_project_settings, solve_values, solve_settings
-    internal_settings, common_settings, project_settings = initialize_project_settings(kwargs["dirname"])
+    from .py_project_interface import initialize_project_settings, solve_values
+    init_settings, internal_settings, common_settings, project_settings, project_funcs = initialize_project_settings(kwargs["dirname"])
     # Solve internal settings
-    internal_settings = solve_values("internal", internal_dict=internal_settings, additional_dict=kwargs,
-                                     allow_additional_keytypes=False, only_init=True)
+    init_settings = solve_values("init", init_dict=init_settings, additional_dict=kwargs,
+                                 allow_additional_keytypes=False)
     # Initialize vocabulary
     from dr2xml.vocabulary import load_vocabulary
     load_vocabulary()
@@ -49,10 +55,11 @@ def initialize_settings(lset=None, sset=None, force_reset=False, **kwargs):
     from dr2xml.laboratories import initialize_laboratory_settings
     initialize_laboratory_settings()
     # Solve not initial internal settings
-    internal_settings = solve_values("internal", internal_dict=internal_settings, additional_dict=kwargs)
+    internal_settings = solve_values("internal", init_dict=init_settings, internal_dict=internal_settings,
+                                     additional_dict=kwargs, project_funcs=project_funcs)
     # Solve common settings
-    common_settings = solve_values("common", common_dict=common_settings, internal_dict=internal_settings,
-                                   additional_dict=kwargs)
+    common_settings = solve_values("common", init_dict=init_settings, common_dict=common_settings,
+                                   internal_dict=internal_settings, additional_dict=kwargs, project_funcs=project_funcs)
 
 
 def initialize_internal_values(force_reset=False):
@@ -95,7 +102,9 @@ def get_settings_values(*args, **kwargs):
     else:
         args = list()
     logger = get_logger()
-    if setting in ["internal", ]:
+    if setting in ["init", ]:
+        settings = init_settings
+    elif setting in ["internal", ]:
         settings = internal_settings
     elif setting in ["common", ]:
         settings = common_settings

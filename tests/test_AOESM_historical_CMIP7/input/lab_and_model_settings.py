@@ -3,6 +3,7 @@
 
 
 lab_and_model_settings = {
+    "vocabulary_used": "dr2xml_default",
     'data_request_used': 'CMIP7',
     'data_request_content_version': 'test',
     'project': 'CMIP7',

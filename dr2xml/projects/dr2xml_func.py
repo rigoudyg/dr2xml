@@ -53,7 +53,7 @@ def format_sizes(*sizes):
 	return rep
 
 
-def sort_mips(*mips):
+def sort_mips(mips):
 	if isinstance(mips, (list, tuple)) and len(mips) == 1 and isinstance(mips[0], (dict, set, list)):
 		mips = mips[0]
 	elif len(mips) == 0:

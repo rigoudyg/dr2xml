@@ -73,6 +73,107 @@ def sort_mips(*mips):
 	return sorted(list(rep))
 
 
+init_values = dict(
+	project=ParameterSettings(
+        key="project",
+		default_values=[
+			ValueSettings(key_type="laboratory", keys="project"),
+			"CMIP6"
+		],
+		help="Project associated with the simulation."
+	),
+	project_settings=ParameterSettings(
+        key="project_settings",
+		default_values=[
+			ValueSettings(key_type="laboratory", keys="project_settings"),
+			ValueSettings(key_type="init", keys="project")
+		],
+		help="Project settings definition file to be used."
+	),
+    institution_id=ParameterSettings(
+        key="institution_id",
+        default_values=[
+            ValueSettings(key_type="laboratory", keys="institution_id")
+        ],
+	    fatal=True,
+	    help="Institution identifier."
+    ),
+	data_request_used=ParameterSettings(
+        key="data_request_used",
+		default_values=[
+			ValueSettings(key_type="laboratory", keys="data_request_used"),
+			"CMIP6"
+		],
+		help="The Data Request infrastructure type which should be used."
+	),
+	data_request_path=ParameterSettings(
+        key="data_request_path",
+		default_values=[
+			ValueSettings(key_type="laboratory", keys="data_request_path"),
+			None
+		],
+		help="Path where the data request API used is placed."
+	),
+	data_request_content_version=ParameterSettings(
+		key="data_request_content_version",
+		default_values=[
+			ValueSettings(key_type="laboratory", keys="data_request_content_version"),
+			"latest_stable"
+		],
+		help="Version of the data request content to be used"
+	),
+	data_request_config=ParameterSettings(
+		key="data_request_config",
+		default_values=[
+			ValueSettings(key_type="laboratory", keys="data_request_config"),
+			os.sep.join([os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "dr_interface", "CMIP7_config"])
+		],
+		help="Configuration file of the data request content to be used"
+	),
+	vocabulary_used=ParameterSettings(
+        key="vocabulary_used",
+		default_values=[
+			ValueSettings(key_type="laboratory", keys="vocabulary_used"),
+			None
+		],
+		help="The vocabulary infrastructure type which should be used."
+	),
+	vocabulary_project=ParameterSettings(
+        key="vocabulary_project",
+		default_values=[
+			ValueSettings(key_type="laboratory", keys=["vocabulary_project", "lower", "__call__"]),
+			ValueSettings(key_type="init", keys=["project", "lower", "__call__"])
+		],
+		help="The vocabulary project which should be used."
+	),
+	vocabulary_config=ParameterSettings(
+		key="vocabulary_config",
+		default_values=[
+			ValueSettings(key_type="laboratory", keys="vocabulary_config"),
+			os.sep.join([os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "vocabulary", "vocabulary.json"])
+		],
+		help="Configuration file of the vocabulary to be used"
+	),
+	laboratory_used=ParameterSettings(
+        key="laboratory_used",
+		default_values=[
+			ValueSettings(key_type="laboratory", keys="laboratory_used"),
+			None
+		],
+		help="File which contains the settings to be used for a specific laboratory which is not present by default in "
+		     "dr2xml. Must contains at least the `lab_grid_policy` function."
+	),
+	save_project_settings=ParameterSettings(
+        key="save_project_settings",
+		default_values=[
+			ValueSettings(key_type="laboratory", keys="save_project_settings"),
+			None
+		],
+		help="The path of the file where the complete project settings will be written, if needed."
+	)
+)
+
+
 internal_values = dict(
 	xios_version=ParameterSettings(
 		key="xios_version",
@@ -108,33 +209,6 @@ internal_values = dict(
 		],
 		help="In order to identify which xml files generates a problem, you can use this flag."
 	),
-	project=ParameterSettings(
-        key="project",
-		default_values=[
-			ValueSettings(key_type="laboratory", keys="project"),
-			"CMIP6"
-		],
-		help="Project associated with the simulation.",
-		init=True
-	),
-	project_settings=ParameterSettings(
-        key="project_settings",
-		default_values=[
-			ValueSettings(key_type="laboratory", keys="project_settings"),
-			ValueSettings(key_type="internal", keys="project")
-		],
-		help="Project settings definition file to be used.",
-		init=True
-	),
-    institution_id=ParameterSettings(
-        key="institution_id",
-        default_values=[
-            ValueSettings(key_type="laboratory", keys="institution_id")
-        ],
-	    fatal=True,
-	    help="Institution identifier.",
-	    init=True
-    ),
 	context=ParameterSettings(
         key="context",
 		default_values=[
@@ -1322,88 +1396,6 @@ internal_values = dict(
 		],
 		help="If the CMIP6 Controlled Vocabulary doesn't allow all the components you activate, you can set "
 		     "next toggle to True"
-	),
-	data_request_used=ParameterSettings(
-        key="data_request_used",
-		default_values=[
-			ValueSettings(key_type="laboratory", keys="data_request_used"),
-			"CMIP6"
-		],
-		help="The Data Request infrastructure type which should be used.",
-		init=True
-	),
-	data_request_path=ParameterSettings(
-        key="data_request_path",
-		default_values=[
-			ValueSettings(key_type="laboratory", keys="data_request_path"),
-			None
-		],
-		help="Path where the data request API used is placed.",
-		init=True
-	),
-	data_request_content_version=ParameterSettings(
-		key="data_request_content_version",
-		default_values=[
-			ValueSettings(key_type="laboratory", keys="data_request_content_version"),
-			"latest_stable"
-		],
-		help="Version of the data request content to be used",
-		init=True
-	),
-	data_request_config=ParameterSettings(
-		key="data_request_config",
-		default_values=[
-			ValueSettings(key_type="laboratory", keys="data_request_config"),
-			os.sep.join([os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "dr_interface", "CMIP7_config"])
-		],
-		help="Configuration file of the data request content to be used",
-		init=True
-	),
-	vocabulary_used=ParameterSettings(
-        key="vocabulary_used",
-		default_values=[
-			ValueSettings(key_type="laboratory", keys="vocabulary_used"),
-			None
-		],
-		help="The vocabulary infrastructure type which should be used.",
-		init=True
-	),
-	vocabulary_project=ParameterSettings(
-        key="vocabulary_project",
-		default_values=[
-			ValueSettings(key_type="laboratory", keys=["vocabulary_project", "lower", "__call__"]),
-			ValueSettings(key_type="internal", keys=["project", "lower", "__call__"])
-		],
-		help="The vocabulary project which should be used.",
-		init=True
-	),
-	vocabulary_config=ParameterSettings(
-		key="vocabulary_config",
-		default_values=[
-			ValueSettings(key_type="laboratory", keys="vocabulary_config"),
-			os.sep.join([os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "vocabulary", "vocabulary.json"])
-		],
-		help="Configuration file of the vocabulary to be used",
-		init=True
-	),
-	laboratory_used=ParameterSettings(
-        key="laboratory_used",
-		default_values=[
-			ValueSettings(key_type="laboratory", keys="laboratory_used"),
-			None
-		],
-		help="File which contains the settings to be used for a specific laboratory which is not present by default in "
-		     "dr2xml. Must contains at least the `lab_grid_policy` function.",
-		init=True
-	),
-	save_project_settings=ParameterSettings(
-        key="save_project_settings",
-		default_values=[
-			ValueSettings(key_type="laboratory", keys="save_project_settings"),
-			None
-		],
-		help="The path of the file where the complete project settings will be written, if needed.",
-		init=True
 	),
 	perso_sdims_description=ParameterSettings(
         key="perso_sdims_description",

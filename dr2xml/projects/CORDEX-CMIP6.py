@@ -220,7 +220,7 @@ project_settings = dict(
                             domain_id=ValueSettings(key_type="common", keys="domain_id"),
                             driving_source_id=ValueSettings(key_type="common", keys="driving_source_id"),
                             driving_variant_label=ValueSettings(key_type="common", keys="driving_variant_label"),
-                            institution_id=ValueSettings(key_type="internal", keys="institution_id"),
+                            institution_id=ValueSettings(key_type="init", keys="institution_id"),
                             version_realization=ValueSettings(key_type="common", keys="version_realization")
                         )
                     ))

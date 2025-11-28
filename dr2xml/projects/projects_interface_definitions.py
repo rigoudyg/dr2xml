@@ -22,22 +22,24 @@ from utilities.logger import get_logger
 
 
 def return_value(value, common_dict=dict(), internal_dict=dict(), additional_dict=dict(),
-                 allow_additional_keytypes=True):
+                 allow_additional_keytypes=True, init_dict=dict(), project_funcs=""):
     if isinstance(value, ValueSettings):
         return determine_value(key_type=value.key_type, keys=value.keys, func=value.func, fmt=value.fmt, src=value.src,
                                common_dict=common_dict, internal_dict=internal_dict,
                                additional_dict=additional_dict,
-                               allow_additional_keytypes=allow_additional_keytypes)
+                               allow_additional_keytypes=allow_additional_keytypes,
+                               init_dict=init_dict, project_funcs=project_funcs)
     else:
         return True, value
 
 
 def determine_value(key_type=None, keys=list(), func=None, fmt=None, src=None, common_dict=dict(), internal_dict=dict(),
-                    additional_dict=dict(), allow_additional_keytypes=True):
+                    additional_dict=dict(), allow_additional_keytypes=True, init_dict=dict(), project_funcs=""):
     logger = get_logger()
     if key_type in ["combine", "merge"] or (key_type is None and func is not None):
         keys = [return_value(key, common_dict=common_dict, internal_dict=internal_dict,
-                             additional_dict=additional_dict, allow_additional_keytypes=allow_additional_keytypes)
+                             additional_dict=additional_dict, allow_additional_keytypes=allow_additional_keytypes,
+                             init_dict=init_dict)
                 for key in keys]
         key_found = all([elt[0] for elt in keys])
         if key_found:
@@ -60,12 +62,14 @@ def determine_value(key_type=None, keys=list(), func=None, fmt=None, src=None, c
             else:
                 if isinstance(func, FunctionSettings):
                     found, value = func(*keys, additional_dict=additional_dict, internal_dict=internal_dict,
-                                        common_dict=common_dict, allow_additional_keytypes=allow_additional_keytypes)
+                                        common_dict=common_dict, allow_additional_keytypes=allow_additional_keytypes,
+                                        init_dict=init_dict)
                 else:
                     if isinstance(func, ValueSettings):
                         func_test, func_value = return_value(func, common_dict=common_dict, internal_dict=internal_dict,
                                                              additional_dict=additional_dict,
-                                                             allow_additional_keytypes=allow_additional_keytypes)
+                                                             allow_additional_keytypes=allow_additional_keytypes,
+                                                             init_dict=init_dict)
                         if not func_test:
                             logger.warning("Unable to determine function %s" % func)
                         else:
@@ -88,6 +92,9 @@ def determine_value(key_type=None, keys=list(), func=None, fmt=None, src=None, c
         elif key_type in ["internal", ]:
             value = internal_dict
             found = True
+        elif key_type in ["init", ]:
+            value = init_dict
+            found = True
         elif key_type in ["dict", ]:
             value = additional_dict
             found = True
@@ -98,7 +105,8 @@ def determine_value(key_type=None, keys=list(), func=None, fmt=None, src=None, c
                 try:
                     found, value = return_value(value=keys[i_keys], common_dict=common_dict,
                                                 internal_dict=internal_dict, additional_dict=additional_dict,
-                                                allow_additional_keytypes=allow_additional_keytypes)
+                                                allow_additional_keytypes=allow_additional_keytypes,
+                                                init_dict=init_dict)
                     if found:
                         value = get_config_variable(value)
                         i_keys += 1
@@ -112,7 +120,7 @@ def determine_value(key_type=None, keys=list(), func=None, fmt=None, src=None, c
             else:
                 found, value = return_value(value=keys[i_keys], common_dict=common_dict,
                                             internal_dict=internal_dict, additional_dict=additional_dict,
-                                            allow_additional_keytypes=allow_additional_keytypes)
+                                            allow_additional_keytypes=allow_additional_keytypes, init_dict=init_dict)
                 if found:
                     found = is_key_in_lset(value)
                 if found:
@@ -125,7 +133,7 @@ def determine_value(key_type=None, keys=list(), func=None, fmt=None, src=None, c
             else:
                 found, value = return_value(value=keys[i_keys], common_dict=common_dict,
                                             internal_dict=internal_dict, additional_dict=additional_dict,
-                                            allow_additional_keytypes=allow_additional_keytypes)
+                                            allow_additional_keytypes=allow_additional_keytypes, init_dict=init_dict)
                 if found:
                     found = is_key_in_sset(value)
                 if found:
@@ -134,7 +142,7 @@ def determine_value(key_type=None, keys=list(), func=None, fmt=None, src=None, c
         elif key_type in ["json", ]:
             found, src = return_value(value=src, common_dict=common_dict, internal_dict=internal_dict,
                                       additional_dict=additional_dict,
-                                      allow_additional_keytypes=allow_additional_keytypes)
+                                      allow_additional_keytypes=allow_additional_keytypes, init_dict=init_dict)
             if found:
                 if not isinstance(src, six.string_types):
                     raise TypeError("src must be a string or a ValueSettings")
@@ -166,7 +174,7 @@ def determine_value(key_type=None, keys=list(), func=None, fmt=None, src=None, c
         if found:
             while found and i_keys < len(keys):
                 found, key = return_value(keys[i_keys], common_dict=common_dict, internal_dict=internal_dict,
-                                          additional_dict=additional_dict,
+                                          additional_dict=additional_dict, init_dict=init_dict,
                                           allow_additional_keytypes=allow_additional_keytypes)
                 if found:
                     if isinstance(value, (dict, OrderedDict)):
@@ -197,7 +205,7 @@ def determine_value(key_type=None, keys=list(), func=None, fmt=None, src=None, c
                 value = [value, ]
             if isinstance(func, FunctionSettings):
                 found, value = func(*value, additional_dict=additional_dict, internal_dict=internal_dict,
-                                    common_dict=common_dict, allow_additional_keytypes=allow_additional_keytypes)
+                                    common_dict=common_dict, allow_additional_keytypes=allow_additional_keytypes, init_dict=init_dict)
             else:
                 try:
                     value = func(*value)
@@ -316,7 +324,7 @@ class ValueSettings(Settings):
         rep = list()
         tmp_rep = ""
         key_type = self.key_type
-        if key_type in ["laboratory", "simulation", "dict", "internal", "common", "json"]:
+        if key_type in ["laboratory", "simulation", "dict", "init", "internal", "common", "json"]:
             if key_type in ["json", ]:
                 tmp_rep = "read_json_file(%s)"
                 tmp_rep = tmp_rep % self.dump_doc_inner(self.src, format_struct=False)[0]
@@ -422,7 +430,7 @@ class ParameterSettings(Settings):
             self.updated.add(elt)
 
     def check_value(self, value, internal_dict=dict(), common_dict=dict(), additional_dict=dict(),
-                    allow_additional_keytypes=True):
+                    allow_additional_keytypes=True, init_dict=dict()):
         test = True
         relevant = True
         i = 0
@@ -433,13 +441,13 @@ class ParameterSettings(Settings):
             else:
                 relevant, cond = cond.check(internal_dict=internal_dict, common_dict=common_dict,
                                             additional_dict=additional_dict,
-                                            allow_additional_keytypes=allow_additional_keytypes)
+                                            allow_additional_keytypes=allow_additional_keytypes, init_dict=init_dict)
                 test = relevant and cond
             if test:
                 i += 1
         if test:
             skip_values = [return_value(val, internal_dict=internal_dict, common_dict=common_dict,
-                                        additional_dict=additional_dict,
+                                        additional_dict=additional_dict, init_dict=init_dict,
                                         allow_additional_keytypes=allow_additional_keytypes)
                            for val in self.skip_values]
             relevant = all([elt[0] for elt in skip_values])
@@ -452,10 +460,10 @@ class ParameterSettings(Settings):
             if isinstance(self.authorized_values, ValueSettings):
                 relevant, authorized_values = return_value(self.authorized_values, internal_dict=internal_dict,
                                                            common_dict=common_dict, additional_dict=additional_dict,
-                                                           allow_additional_keytypes=allow_additional_keytypes)
+                                                           allow_additional_keytypes=allow_additional_keytypes, init_dict=init_dict)
             elif isinstance(self.authorized_values, list) and len(self.authorized_values) > 0:
                 authorized_values = [return_value(val, internal_dict=internal_dict, common_dict=common_dict,
-                                                  additional_dict=additional_dict,
+                                                  additional_dict=additional_dict, init_dict=init_dict,
                                                   allow_additional_keytypes=allow_additional_keytypes)
                                      for val in self.authorized_values]
                 relevant = all([elt[0] for elt in authorized_values])
@@ -469,7 +477,7 @@ class ParameterSettings(Settings):
         return relevant, test
 
     def correct_value(self, value, internal_values=dict(), common_values=dict(), additional_dict=dict(),
-                      allow_additional_keytypes=True):
+                      allow_additional_keytypes=True, init_dict=dict()):
         test = True
         if isinstance(value, six.string_types):
             value = value.strip()
@@ -478,7 +486,7 @@ class ParameterSettings(Settings):
             if isinstance(correction, list):
                 conditions, correction = correction
                 conditions = [condition.check(internal_dict=internal_values, common_dict=common_values,
-                                              additional_dict=additional_dict,
+                                              additional_dict=additional_dict, init_dict=init_dict,
                                               allow_additional_keytypes=allow_additional_keytypes)
                               for condition in conditions]
                 test = all(elt[0] for elt in conditions)
@@ -486,33 +494,33 @@ class ParameterSettings(Settings):
                 test = test and conditions
             if test:
                 test, value = return_value(correction, internal_dict=internal_values, common_dict=common_values,
-                                           additional_dict=additional_dict,
+                                           additional_dict=additional_dict, init_dict=init_dict,
                                            allow_additional_keytypes=allow_additional_keytypes)
         return test, value
 
     def find_value(self, is_value=False, value=None, internal_dict=dict(), common_dict=dict(), additional_dict=dict(),
-                   allow_additional_keytypes=True, raise_on_error=True):
+                   allow_additional_keytypes=True, raise_on_error=True, init_dict=dict(), project_funcs=""):
         logger = get_logger()
         test = False
         if is_value:
             test, value = self.correct_value(value, internal_values=internal_dict, common_values=common_dict,
-                                             additional_dict=dict(), allow_additional_keytypes=True)
+                                             additional_dict=dict(), allow_additional_keytypes=True, init_dict=init_dict)
             relevant, test = self.check_value(value, internal_dict=internal_dict, common_dict=common_dict,
-                                              additional_dict=additional_dict,
+                                              additional_dict=additional_dict, init_dict=init_dict,
                                               allow_additional_keytypes=allow_additional_keytypes)
             test = test and relevant
         i = 0
         while not test and i < len(self.cases):
             test, value = self.cases[i].check(internal_dict=internal_dict, common_dict=common_dict,
-                                              additional_dict=additional_dict,
+                                              additional_dict=additional_dict, init_dict=init_dict,
                                               allow_additional_keytypes=allow_additional_keytypes)
             if test:
                 test, value = self.correct_value(value, internal_values=internal_dict, common_values=common_dict,
-                                                 additional_dict=dict(),
+                                                 additional_dict=dict(), init_dict=init_dict,
                                                  allow_additional_keytypes=allow_additional_keytypes)
             if test:
                 relevant, test = self.check_value(value, internal_dict=internal_dict, common_dict=common_dict,
-                                                  additional_dict=additional_dict,
+                                                  additional_dict=additional_dict, init_dict=init_dict,
                                                   allow_additional_keytypes=allow_additional_keytypes)
                 test = test and relevant
             if not test:
@@ -521,14 +529,14 @@ class ParameterSettings(Settings):
         while not test and i < len(self.default_values):
             default = self.default_values[i]
             test, value = return_value(default, internal_dict=internal_dict, common_dict=common_dict,
-                                       additional_dict=additional_dict,
+                                       additional_dict=additional_dict, init_dict=init_dict,
                                        allow_additional_keytypes=allow_additional_keytypes)
             if test:
                 test, value = self.correct_value(value, internal_values=internal_dict, common_values=common_dict,
-                                                 additional_dict=dict(), allow_additional_keytypes=True)
+                                                 additional_dict=dict(), allow_additional_keytypes=True, init_dict=init_dict)
             if test:
                 relevant, test = self.check_value(value, internal_dict=internal_dict, common_dict=common_dict,
-                                                  additional_dict=additional_dict,
+                                                  additional_dict=additional_dict, init_dict=init_dict,
                                                   allow_additional_keytypes=allow_additional_keytypes)
                 test = test and relevant
             if not test:
@@ -642,13 +650,13 @@ class FunctionSettings(Settings):
         return rep
 
     def __call__(self, *args, additional_dict=dict(), internal_dict=dict(), common_dict=dict(),
-                 allow_additional_keytypes=True):
+                 allow_additional_keytypes=True, init_dict=dict()):
         logger = get_logger()
         test = True
         options = copy.deepcopy(self.options)
         for key in sorted(list(self.options)):
             key_test, val = return_value(options[key], common_dict=common_dict, internal_dict=internal_dict,
-                                         additional_dict=additional_dict,
+                                         additional_dict=additional_dict, init_dict=init_dict,
                                          allow_additional_keytypes=allow_additional_keytypes)
             if key_test:
                 options[key] = val
@@ -656,7 +664,7 @@ class FunctionSettings(Settings):
                 del options[key]
         if isinstance(self.func, ValueSettings):
             func_test, func_val = return_value(self.func, common_dict=common_dict, internal_dict=internal_dict,
-                                               additional_dict=additional_dict,
+                                               additional_dict=additional_dict, init_dict=init_dict,
                                                allow_additional_keytypes=allow_additional_keytypes)
             if func_test:
                 self.func = func_val
@@ -707,16 +715,16 @@ class ConditionSettings(Settings):
                 rep.append(fmt % "")
         return rep
 
-    def check(self, common_dict=dict(), internal_dict=dict(), additional_dict=dict(), allow_additional_keytypes=True):
+    def check(self, common_dict=dict(), init_dict=dict(), internal_dict=dict(), additional_dict=dict(), allow_additional_keytypes=True):
         test = False
         relevant, check_value = return_value(self.check_value, common_dict=common_dict, internal_dict=internal_dict,
-                                             additional_dict=additional_dict,
+                                             additional_dict=additional_dict, init_dict=init_dict,
                                              allow_additional_keytypes=allow_additional_keytypes)
         if relevant:
             if isinstance(check_value, list) and len(check_value) == 1:
                 check_value = check_value[0]
             reference_values = [return_value(reference_value, common_dict=common_dict, internal_dict=internal_dict,
-                                             additional_dict=additional_dict,
+                                             additional_dict=additional_dict, init_dict=init_dict,
                                              allow_additional_keytypes=allow_additional_keytypes)
                                 for reference_value in self.reference_values]
             relevant = all([elt[0] for elt in reference_values])
@@ -771,12 +779,12 @@ class CaseSettings(Settings):
                 rep.append(fmt % "")
         return rep
 
-    def check(self, common_dict=dict(), internal_dict=dict(), additional_dict=dict(), allow_additional_keytypes=True):
-        test, value = return_value(self.value, common_dict=common_dict, additional_dict=additional_dict,
+    def check(self, common_dict=dict(), internal_dict=dict(), additional_dict=dict(), allow_additional_keytypes=True, init_dict=dict()):
+        test, value = return_value(self.value, common_dict=common_dict, additional_dict=additional_dict, init_dict=init_dict,
                                    internal_dict=internal_dict, allow_additional_keytypes=allow_additional_keytypes)
         if test:
             check_conditions = [elt.check(common_dict=common_dict, additional_dict=additional_dict,
-                                          internal_dict=internal_dict,
+                                          internal_dict=internal_dict, init_dict=init_dict,
                                           allow_additional_keytypes=allow_additional_keytypes)
                                 if isinstance(elt, ConditionSettings) else (True, elt)
                                 for elt in self.conditions]

@@ -390,7 +390,7 @@ project_settings = dict(
                 help="Version of the Data Request used",
                 default_values=[
                     ValueSettings(key_type="combine", fmt="{} Data Request version {}",
-                                  keys=[ValueSettings(key_type="internal", keys="data_request_used"),
+                                  keys=[ValueSettings(key_type="init", keys="data_request_used"),
                                         ValueSettings(key_type="common", keys="data_specs_version")])
                 ]
             ),
@@ -766,7 +766,7 @@ project_settings = dict(
                 key="institution_id",
                 help="Institution id associated with the simulation.",
                 default_values=[
-                    ValueSettings(key_type="internal", keys="institution_id")
+                    ValueSettings(key_type="init", keys="institution_id")
                 ],
                 fatal=True
             ),
@@ -1064,7 +1064,7 @@ project_settings = dict(
                         key_type="combine",
                         keys=[
                             ValueSettings(key_type="internal", keys="source_id"),
-                            ValueSettings(key_type="internal", keys="project"),
+                            ValueSettings(key_type="init", keys="project"),
                             ValueSettings(key_type="common", keys="activity_id"),
                             ValueSettings(key_type="simulation", keys="expid_in_filename")
                         ],
@@ -1074,7 +1074,7 @@ project_settings = dict(
                         key_type="combine",
                         keys=[
                             ValueSettings(key_type="internal", keys="source_id"),
-                            ValueSettings(key_type="internal", keys="project"),
+                            ValueSettings(key_type="init", keys="project"),
                             ValueSettings(key_type="common", keys="activity_id"),
                             ValueSettings(key_type="internal", keys="experiment_id")
                         ],
