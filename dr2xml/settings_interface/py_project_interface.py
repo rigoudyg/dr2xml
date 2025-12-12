@@ -6,31 +6,47 @@ Interface to project settings from dr2xml
 """
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+import copy
 import os
 import six
-from importlib.machinery import SourceFileLoader
 
+from utilities.json_tools import write_json_content, read_json_content
+from utilities.logger import get_logger
 from .py_settings_interface import get_variable_from_lset_with_default_in_lset, get_variable_from_lset_with_default, \
     get_variable_from_lset_without_default
-from dr2xml.projects.projects_interface_definitions import ParameterSettings
+from dr2xml.projects.new_projects_interface_definitions import ParameterSettings, TagSettings
 
 
 def initialize_project_settings(dirname, doc_writer=False):
     # Read content from json file
     project_filename = get_variable_from_lset_with_default_in_lset(key="project_settings", key_default="project",
                                                                    default="CMIP6")
+    config = read_json_content(os.sep.join([os.path.dirname(os.path.abspath(__file__)), "..", "projects",
+                                            "projects_default_settings.json"]))
     # Merge with parent if needed
-    project_filename, init_values, internal_values, common_values, project_settings = merge_project_settings(project_filename)
+    _, project_content = merge_project_settings(project_filename, config=config)
     # Complete and clean project settings
-    project_settings = solve_settings(project_settings)
+    project_content = solve_settings(project_content, config=config)
     # If asked, save the settings into a dedicated file
     save_project_settings = get_variable_from_lset_with_default("save_project_settings", None)
     if save_project_settings is not None:
-        write_project_content(save_project_settings, init_values, internal_values, common_values, project_settings, dirname)
+        if not save_project_settings.endswith(".json"):
+            save_project_settings += ".json"
+        write_json_content(save_project_settings, project_content)
+    # Transform json dictionary into settings objects
+    init_values = turn_dict_to_settings("init", project_content["init"],
+                                        project_funcs=project_content["functions_file"])
+    internal_values = turn_dict_to_settings("internal", project_content["internal"],
+                                            project_funcs=project_content["functions_file"])
+    common_values = turn_dict_to_settings("common", project_content["common"],
+                                          project_funcs=project_content["functions_file"])
+    project_settings = turn_dict_to_settings("project", project_content["project_settings"],
+                                             project_funcs=project_content["functions_file"])
+    # Write documentations
     if doc_writer:
         write_project_documentation(init_values, internal_values, common_values, project_settings, dirname,
                                     get_variable_from_lset_without_default("project"))
-    return init_values, internal_values, common_values, project_settings, ""
+    return init_values, internal_values, common_values, project_settings, project_content["functions_file"]
 
 
 def write_project_documentation(init_values, internal_values, common_values, project_settings, dirname, project):
@@ -71,81 +87,109 @@ def write_project_documentation(init_values, internal_values, common_values, pro
         fic.write(os.linesep.join(content))
 
 
-def write_project_content(target, init_values, internal_values, common_values, project_settings, dirname):
-    with open(os.sep.join([dirname, target]), "w") as target_fic:
-        target_fic.write(os.linesep.join([
-            "from dr2xml.projects.projects_interface_definitions import *",
-            "init_values = %s" % init_values,
-            "internal_values = %s" % internal_values,
-            "common_values = %s" % common_values,
-            "project_settings = %s" % project_settings]))
-
-
-def merge_project_settings(project_filename):
+def merge_project_settings(project_filename, config):
     # Initialize settings from current filename
-    project_filename, parent_project_filename, init_values, internal_values, common_values, project_settings = \
-        read_project_settings(filename=project_filename)
+    project_filename, project_content = read_project_settings(filename=project_filename)
+    parent_project_filename = project_content.get("parent_project_settings")
     if parent_project_filename is not None:
         # Merge parent settings
-        parent_project_filename, parent_init_values, parent_internal_values, parent_common_values, parent_project_settings = \
-            merge_project_settings(project_filename=parent_project_filename)
+        parent_project_filename, parent_content = merge_project_settings(project_filename=parent_project_filename,
+                                                                         config=config)
         if project_filename != parent_project_filename:
-            init_values = update_settings(init_values, parent_init_values)
-            internal_values = update_settings(internal_values, parent_internal_values)
-            common_values = update_settings(common_values, parent_common_values)
-            project_settings = update_settings(project_settings, parent_project_settings)
+            new_content = copy.deepcopy(parent_content)
+            for (element, value) in project_content.items():
+                if element in ["parent_project_settings", ]:
+                    pass
+                elif element in ["functions_file", ]:
+                    new_content[element] = value
+                elif element in ["init", "internal", "common"]:
+                    for (subelt, subval) in value.items():
+                        if subelt not in new_content[element]:
+                            new_content[element][subelt] = dict()
+                        new_content[element][subelt].update(subval)
+                else:
+                    for (subelt, subval) in value.items():
+                        if subelt not in new_content[element]:
+                            new_content[element][subelt] = dict()
+                        for (subsubelt, subsubval) in subval.items():
+                            if subsubelt in ["help", ] or subsubelt.endswith("list"):
+                                new_content[element][subelt][subsubelt] = subsubval
+                            else:
+                                if subsubelt not in new_content[element][subelt]:
+                                    new_content[element][subelt][subsubelt] = dict()
+                                for (subsubsubelt, subsubsubval) in subsubval.items():
+                                    if subsubsubelt not in new_content[element][subelt][subsubelt]:
+                                        new_content[element][subelt][subsubelt][subsubsubelt] = dict()
+                                    new_content[element][subelt][subsubelt][subsubsubelt].update(subsubsubval)
+            project_content = new_content
         else:
             raise ValueError("The settings %s reference itself as parent settings. Stop" % project_filename)
-    return project_filename, init_values, internal_values, common_values, project_settings
-
-
-def update_settings(current_settings, parent_settings):
-    for value in current_settings:
-        if value in parent_settings:
-            parent_settings[value].update(current_settings[value])
-        else:
-            parent_settings[value] = current_settings[value]
-    return parent_settings
+    for element in config:
+        default = copy.deepcopy(config[element]["default"])
+        if element not in project_content:
+            project_content[element] = copy.deepcopy(default)
+    if project_content["functions_file"] is not None:
+        if not os.path.isfile(project_content["functions_file"]):
+            project_content["functions_file"] = os.sep.join([os.path.dirname(os.path.abspath(__file__)), "..", "projects", project_content["functions_file"]])
+    return project_filename, project_content
 
 
 def read_project_settings(filename):
     if not os.path.isfile(filename):
-        filename = os.sep.join([os.path.dirname(os.path.abspath(__file__)), "..", "projects",
-                                "{}.py".format(filename)])
-    file_module = SourceFileLoader(os.path.basename(filename), filename).load_module(os.path.basename(filename))
-    if "parent_project_settings" in file_module.__dict__:
-        parent_project_filename = file_module.__getattribute__("parent_project_settings")
-    else:
-        parent_project_filename = None
-    if "init_values" in file_module.__dict__:
-        init_values = file_module.__getattribute__("init_values")
-    else:
-        init_values = dict()
-    if "internal_values" in file_module.__dict__:
-        internal_values = file_module.__getattribute__("internal_values")
-    else:
-        internal_values = dict()
-    if "common_values" in file_module.__dict__:
-        common_values = file_module.__getattribute__("common_values")
-    else:
-        common_values = dict()
-    if "project_settings" in file_module.__dict__:
-        project_settings = file_module.__getattribute__("project_settings")
-    else:
-        project_settings = dict()
-    return filename, parent_project_filename, init_values, internal_values, common_values, project_settings
+        filename = os.sep.join([os.path.dirname(os.path.abspath(__file__)), "..", "projects", filename])
+        if not filename.endswith(".json"):
+            filename += ".json"
+
+    content = read_json_content(filename)
+    return filename, content
+
+
+def solve_settings(content, config):
+    for element in config:
+        default_config = copy.deepcopy(config[element].get("default_config", dict()))
+        default_constraints = copy.deepcopy(config[element].get("default_constraint", dict()))
+
+        if element in ["init", "internal", "common", "project_settings"]:
+            for (content_elt, content_value) in content[element].items():
+                new_content_value = copy.deepcopy(default_config)
+                new_content_value.update(content_value)
+                content[element][content_elt] = new_content_value
+
+        if element in ["project_settings", ]:
+            for (content_elt, content_value) in content[element].items():
+                for key in ["attrs_constraints", "comments_constraints", "vars_constraints"]:
+                    if key in content_value:
+                        for (subkey, subval) in content_value[key].items():
+                            new_subval = copy.deepcopy(default_constraints)
+                            new_subval.update(subval)
+                            content_value[key][subkey] = new_subval
+                    else:
+                        content_value[key] = dict()
+
+                for key in ["attrs", "comments", "vars"]:
+                    list_expected_keywords = copy.deepcopy(content_value[key + "_list"])
+                    list_current_keywords = copy.deepcopy(list(content_value[key + "_constraints"]))
+                    for keyword in sorted(list(set(list_current_keywords) - set(list_expected_keywords))):
+                        del content_value[key + "_constraints"][keyword]
+                    for keyword in sorted(list(set(list_expected_keywords) - set(list_current_keywords))):
+                        content_value[key + "_constraints"][keyword] = default_constraints
+
+                content[element][content_elt] = content_value
+
+    return content
 
 
 def solve_values(values, init_dict=dict(), internal_dict=dict(), common_dict=dict(), additional_dict=dict(),
-                 allow_additional_keytypes=True, project_funcs=""):
+                 allow_additional_keytypes=True, project_funcs=None):
     if values in ["init", ]:
-        args_dict = dict(additional_dict=additional_dict, raise_on_error=False,
-                         allow_additional_keytypes=allow_additional_keytypes, project_funcs=project_funcs)
+        args_dict = dict(internal_dict=internal_dict, common_dict=common_dict, additional_dict=additional_dict,
+                         raise_on_error=False, allow_additional_keytypes=allow_additional_keytypes)
         dict_name = "init_dict"
         current_dict = init_dict
     elif values in ["internal", ]:
-        args_dict = dict(init_dict=init_dict, additional_dict=additional_dict, raise_on_error=False,
-                         allow_additional_keytypes=allow_additional_keytypes, project_funcs=project_funcs)
+        args_dict = dict(init_dict=init_dict, common_dict=common_dict, additional_dict=additional_dict,
+                         raise_on_error=False, allow_additional_keytypes=allow_additional_keytypes,
+                         project_funcs=project_funcs)
         dict_name = "internal_dict"
         current_dict = internal_dict
     elif values in ["common", ]:
@@ -191,7 +235,16 @@ def solve_values(values, init_dict=dict(), internal_dict=dict(), common_dict=dic
     return rep
 
 
-def solve_settings(settings):
-    for tag in settings:
-        settings[tag].complete_and_clean()
-    return settings
+def turn_dict_to_settings(settings_type, settings, project_funcs=None):
+    logger = get_logger()
+    rep = dict()
+    if settings_type in ["init", "internal", "common"]:
+        for (key, val) in settings.items():
+            rep[key] = ParameterSettings.from_dict(key, val, additional_keys=False, project_funcs=project_funcs)
+    elif settings_type in ["project", ]:
+        for (key, val) in settings.items():
+            rep[key] = TagSettings.from_dict(key, val, project_funcs=project_funcs)
+    else:
+        logger.error("Unknown settings type %s" % settings_type)
+        raise ValueError("Unknown settings type %s" % settings_type)
+    return rep

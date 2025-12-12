@@ -104,6 +104,10 @@ def is_elt_applicable(elt, attribute=None, included=None, excluded=None):
     else:
         attr = elt
     test = True
+    if included is not None and not isinstance(included, list):
+        included = [included, ]
+    if excluded is not None and not isinstance(excluded, list):
+        excluded = [excluded, ]
     if test and excluded is not None and len(excluded) > 0 and attr in excluded:
         test = False
     if test and included is not None and len(included) > 0 and attr not in included:

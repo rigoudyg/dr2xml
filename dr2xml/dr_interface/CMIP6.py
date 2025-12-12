@@ -177,7 +177,7 @@ class DataRequest(DataRequestBasic):
 
         if ri_applies_to_experiment:
             logger.debug("Year considered: %s %s" % (year, type(year)))
-            if year is None:
+            if year is False:
                 rep = True
                 endyear = None
                 logger.debug(" ..applies because arg year is None")

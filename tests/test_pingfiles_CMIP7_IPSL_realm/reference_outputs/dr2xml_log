@@ -1,4 +1,4 @@
-For parameter data_request_config, found value current_dr2xml/dr2xml/dr_interface/CMIP7_config
+For parameter data_request_config, found value __package-root__/dr_interface/CMIP7_config
 For parameter data_request_content_version, found value test
 For parameter data_request_path, found value None
 For parameter data_request_used, found value CMIP7
@@ -7,7 +7,7 @@ For parameter laboratory_used, found value ipsl
 For parameter project, found value ping
 For parameter project_settings, found value ping
 For parameter save_project_settings, found value None
-For parameter vocabulary_config, found value current_dr2xml/dr2xml/vocabulary/vocabulary.json
+For parameter vocabulary_config, found value __package-root__/vocabulary/vocabulary.json
 For parameter vocabulary_project, found value ping
 For parameter vocabulary_used, found value None
 No vocabulary configured.
@@ -45,10 +45,10 @@ For parameter experiment_for_requests, found value None
 For parameter experiment_id, found value None
 For parameter filter_on_realization, found value True
 For parameter fx_from_file, found value []
-For parameter grid_choice, found value [None]
+For parameter grid_choice, found value None
 For parameter grid_policy, found value None
 Could not find a proper value for grid_prefix
-For parameter grids, found value [None]
+For parameter grids, found value None
 For parameter grids_dev, found value {}
 For parameter grouped_vars_per_file, found value []
 Could not find a proper value for included_opportunities
@@ -100,7 +100,7 @@ Could not find a proper value for select_included_vars
 Could not find a proper value for select_max_priority
 Could not find a proper value for select_mips
 For parameter select_on_expt, found value False
-For parameter select_on_year, found value None
+For parameter select_on_year, found value False
 For parameter select_sizes, found value None
 Could not find a proper value for select_tierMax
 Could not find a proper value for simple_domain_grid_regexp
@@ -109,7 +109,7 @@ For parameter source_id, found value None
 For parameter source_type, found value None
 For parameter special_timestep_vars, found value []
 For parameter split_frequencies, found value splitfreqs.dat
-Could not find a proper value for synchronisation_frequency
+For parameter synchronisation_frequency, found value None
 Could not find a proper value for tierMax
 For parameter tierMax_lset, found value 3
 For parameter too_long_periods, found value []
@@ -145,13 +145,11 @@ For parameter select_max_priority, found value 3
 For parameter select_mips, found value []
 For parameter select_tierMax, found value 3
 Could not find a proper value for simple_domain_grid_regexp
-Could not find a proper value for synchronisation_frequency
 For parameter tierMax, found value 3
 Could not find a proper value for vertical_interpolation_sample_freq
 Could not find a proper value for branch_year_in_child
 Could not find a proper value for sectors
 Could not find a proper value for simple_domain_grid_regexp
-Could not find a proper value for synchronisation_frequency
 Could not find a proper value for vertical_interpolation_sample_freq
 Could not find a proper value for HDL
 Could not find a proper value for activity_id
@@ -177,6 +175,8 @@ For parameter initialization_index, found value 1
 Could not find a proper value for institution
 For parameter list_perso_dev_file, found value dr2xml_list_perso_and_dev_file_names
 Could not find a proper value for mip_era
+For parameter mip_era_lset, found value None
+For parameter mip_era_sset, found value None
 For parameter output_level, found value 10
 Could not find a proper value for parent_activity_id
 Could not find a proper value for parent_experiment_id
@@ -2444,7 +2444,7 @@ Could not find a proper value for operation
 Could not find a proper value for detect_missing_value
 Could not find a proper value for prec
   9 variables written for current_directory/test_pingfiles_CMIP7_IPSL_realm/test_outputs//ping_nemo_ocnBgchem.xml
-For parameter data_request_config, found value current_dr2xml/dr2xml/dr_interface/CMIP7_config
+For parameter data_request_config, found value __package-root__/dr_interface/CMIP7_config
 For parameter data_request_content_version, found value test
 For parameter data_request_path, found value None
 For parameter data_request_used, found value CMIP7
@@ -2453,7 +2453,7 @@ For parameter laboratory_used, found value ipsl
 For parameter project, found value ping
 For parameter project_settings, found value ping
 For parameter save_project_settings, found value None
-For parameter vocabulary_config, found value current_dr2xml/dr2xml/vocabulary/vocabulary.json
+For parameter vocabulary_config, found value __package-root__/vocabulary/vocabulary.json
 For parameter vocabulary_project, found value ping
 For parameter vocabulary_used, found value None
 No vocabulary configured.
@@ -2491,10 +2491,10 @@ For parameter experiment_for_requests, found value None
 For parameter experiment_id, found value None
 For parameter filter_on_realization, found value True
 For parameter fx_from_file, found value []
-For parameter grid_choice, found value [None]
+For parameter grid_choice, found value None
 For parameter grid_policy, found value None
 Could not find a proper value for grid_prefix
-For parameter grids, found value [None]
+For parameter grids, found value None
 For parameter grids_dev, found value {}
 For parameter grouped_vars_per_file, found value []
 Could not find a proper value for included_opportunities
@@ -2546,7 +2546,7 @@ Could not find a proper value for select_included_vars
 Could not find a proper value for select_max_priority
 Could not find a proper value for select_mips
 For parameter select_on_expt, found value False
-For parameter select_on_year, found value None
+For parameter select_on_year, found value False
 For parameter select_sizes, found value None
 Could not find a proper value for select_tierMax
 Could not find a proper value for simple_domain_grid_regexp
@@ -2555,7 +2555,7 @@ For parameter source_id, found value None
 For parameter source_type, found value None
 For parameter special_timestep_vars, found value []
 For parameter split_frequencies, found value splitfreqs.dat
-Could not find a proper value for synchronisation_frequency
+For parameter synchronisation_frequency, found value None
 Could not find a proper value for tierMax
 For parameter tierMax_lset, found value 3
 For parameter too_long_periods, found value []
@@ -2591,13 +2591,11 @@ For parameter select_max_priority, found value 3
 For parameter select_mips, found value []
 For parameter select_tierMax, found value 3
 Could not find a proper value for simple_domain_grid_regexp
-Could not find a proper value for synchronisation_frequency
 For parameter tierMax, found value 3
 Could not find a proper value for vertical_interpolation_sample_freq
 Could not find a proper value for branch_year_in_child
 Could not find a proper value for sectors
 Could not find a proper value for simple_domain_grid_regexp
-Could not find a proper value for synchronisation_frequency
 Could not find a proper value for vertical_interpolation_sample_freq
 Could not find a proper value for HDL
 Could not find a proper value for activity_id
@@ -2622,6 +2620,8 @@ For parameter initialization_index, found value 1
 Could not find a proper value for institution
 For parameter list_perso_dev_file, found value dr2xml_list_perso_and_dev_file_names
 Could not find a proper value for mip_era
+For parameter mip_era_lset, found value None
+For parameter mip_era_sset, found value None
 For parameter output_level, found value 10
 Could not find a proper value for parent_activity_id
 Could not find a proper value for parent_experiment_id
@@ -3558,7 +3558,7 @@ Could not find a proper value for operation
 Could not find a proper value for detect_missing_value
 Could not find a proper value for prec
   1 variables written for current_directory/test_pingfiles_CMIP7_IPSL_realm/test_outputs//ping_orchidee_landIce.xml
-For parameter data_request_config, found value current_dr2xml/dr2xml/dr_interface/CMIP7_config
+For parameter data_request_config, found value __package-root__/dr_interface/CMIP7_config
 For parameter data_request_content_version, found value test
 For parameter data_request_path, found value None
 For parameter data_request_used, found value CMIP7
@@ -3567,7 +3567,7 @@ For parameter laboratory_used, found value ipsl
 For parameter project, found value ping
 For parameter project_settings, found value ping
 For parameter save_project_settings, found value None
-For parameter vocabulary_config, found value current_dr2xml/dr2xml/vocabulary/vocabulary.json
+For parameter vocabulary_config, found value __package-root__/vocabulary/vocabulary.json
 For parameter vocabulary_project, found value ping
 For parameter vocabulary_used, found value None
 No vocabulary configured.
@@ -3605,10 +3605,10 @@ For parameter experiment_for_requests, found value None
 For parameter experiment_id, found value None
 For parameter filter_on_realization, found value True
 For parameter fx_from_file, found value []
-For parameter grid_choice, found value [None]
+For parameter grid_choice, found value None
 For parameter grid_policy, found value None
 Could not find a proper value for grid_prefix
-For parameter grids, found value [None]
+For parameter grids, found value None
 For parameter grids_dev, found value {}
 For parameter grouped_vars_per_file, found value []
 Could not find a proper value for included_opportunities
@@ -3660,7 +3660,7 @@ Could not find a proper value for select_included_vars
 Could not find a proper value for select_max_priority
 Could not find a proper value for select_mips
 For parameter select_on_expt, found value False
-For parameter select_on_year, found value None
+For parameter select_on_year, found value False
 For parameter select_sizes, found value None
 Could not find a proper value for select_tierMax
 Could not find a proper value for simple_domain_grid_regexp
@@ -3669,7 +3669,7 @@ For parameter source_id, found value None
 For parameter source_type, found value None
 For parameter special_timestep_vars, found value []
 For parameter split_frequencies, found value splitfreqs.dat
-Could not find a proper value for synchronisation_frequency
+For parameter synchronisation_frequency, found value None
 Could not find a proper value for tierMax
 For parameter tierMax_lset, found value 3
 For parameter too_long_periods, found value []
@@ -3705,13 +3705,11 @@ For parameter select_max_priority, found value 3
 For parameter select_mips, found value []
 For parameter select_tierMax, found value 3
 Could not find a proper value for simple_domain_grid_regexp
-Could not find a proper value for synchronisation_frequency
 For parameter tierMax, found value 3
 Could not find a proper value for vertical_interpolation_sample_freq
 Could not find a proper value for branch_year_in_child
 Could not find a proper value for sectors
 Could not find a proper value for simple_domain_grid_regexp
-Could not find a proper value for synchronisation_frequency
 Could not find a proper value for vertical_interpolation_sample_freq
 Could not find a proper value for HDL
 Could not find a proper value for activity_id
@@ -3736,6 +3734,8 @@ For parameter initialization_index, found value 1
 Could not find a proper value for institution
 For parameter list_perso_dev_file, found value dr2xml_list_perso_and_dev_file_names
 Could not find a proper value for mip_era
+For parameter mip_era_lset, found value None
+For parameter mip_era_sset, found value None
 For parameter output_level, found value 10
 Could not find a proper value for parent_activity_id
 Could not find a proper value for parent_experiment_id

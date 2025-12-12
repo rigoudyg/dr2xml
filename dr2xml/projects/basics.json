@@ -41,7 +41,7 @@
     },
     "branch_year_in_parent": {
       "help": "Branch year in parent simulation with respect to its time axis.",
-      "skipped_values": [null, "None", "", "N/A"],
+      "forbidden_values": [null, "None", "", "N/A"],
       "values": [
         {
           "type": "condition",
@@ -296,20 +296,43 @@
       "help": "Name of the file which will contain the list of the patterns of perso and dev output file definition.",
       "values": ["dr2xml_list_perso_and_dev_file_names"]
     },
-    "mip_era": {
-      "help": "MIP associated with the simulation.",
+    "mip_era_sset": {
+      "help": "MIP associated with the simulation from simulation settings.",
       "values": [
         {
           "type": "value",
           "origin": "simulation",
           "keys": ["mip_era"]
         },
+        null
+      ]
+    },
+    "mip_era_lset": {
+      "help": "MIP associated with the simulation from laboratory settings.",
+      "values": [
         {
           "type": "value",
           "origin": "laboratory",
           "keys": ["mip_era"]
-        }
+        },
+        null
       ]
+    },
+    "mip_era": {
+      "help": "MIP associated with the simulation.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "common",
+          "keys": ["mip_era_sset"]
+        },
+        {
+          "type": "value",
+          "origin": "common",
+          "keys": ["mip_era_lset"]
+        }
+      ],
+      "forbidden_values": [null]
     },
     "output_level": {
       "help": "We can control the max output level set for all output files.",
@@ -468,7 +491,7 @@
     },
     "variant_info": {
       "help": "It is recommended that some description be included to help identify major differences among variants, but care should be taken to record correct information.  dr2xml will add in all cases: 'Information provided by this attribute may in some cases be flawed. Users can find more comprehensive and up-to-date documentation via the further_info_url global attribute.'",
-      "skipped_values": [""],
+      "forbidden_values": [""],
       "values": [
         {
           "type": "value",
@@ -816,7 +839,7 @@
         },
         "expr": {
           "help": "Expression used to compute the field.",
-          "skipped_values": ["", "None", null],
+          "forbidden_values": ["", "None", null],
           "values": [
             {
               "type": "value",
@@ -837,7 +860,7 @@
         },
         "freq_offset": {
           "help": "Offset to be applied on operations on the field.",
-          "skipped_values": ["", "None", null],
+          "forbidden_values": ["", "None", null],
           "values": [
             {
               "type": "value",
@@ -848,7 +871,7 @@
         },
         "freq_op": {
           "help": "Frequency of the operation done on the field.",
-          "skipped_values": ["", "None", null],
+          "forbidden_values": ["", "None", null],
           "values": [
             {
               "type": "value",
@@ -859,7 +882,7 @@
         },
         "grid_ref": {
           "help": "Reference grid of the field.",
-          "skipped_values": ["", "None", null],
+          "forbidden_values": ["", "None", null],
           "values": [
             {
               "type": "value",
@@ -915,6 +938,237 @@
               "type": "value",
               "origin": "variable",
               "keys": ["prec"]
+            }
+          ]
+        }
+      },
+      "vars_list": ["comment", "standard_name", "description", "long_name", "positive", "history", "units",
+                   "cell_methods", "cell_measures", "flag_meanings", "flag_values", "interval_operation"],
+      "vars_constraints": {
+        "standard_name": {
+          "help": "Standard name of the field.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["standard_name"]
+            },
+            {
+              "type": "value",
+              "origin": "variable",
+              "keys": ["stdname"]
+            }
+          ],
+          "forbidden_values": ["", "None", null]
+        },
+        "description": {
+          "help": "Description associated with the field.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["description"]
+            },
+            {
+              "type": "value",
+              "origin": "variable",
+              "keys": ["description"]
+            },
+            "None"
+          ],
+          "forbidden_values": [""]
+        },
+        "long_name": {
+          "help": "Long name of the field.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["long_name"]
+            },
+            {
+              "type": "value",
+              "origin": "variable",
+              "keys": ["long_name"]
+            }
+          ]
+        },
+        "history": {
+          "help": "History associated with the field.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["history"]
+            },
+            {
+              "type": "value",
+              "origin": "common",
+              "keys": ["history"]
+            }
+          ]
+        },
+        "comment": {
+          "help": "Comment associated with the field.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["comment"]
+            },
+            {
+              "type": "value",
+              "origin": "simulation",
+              "keys": [
+                "comments",
+                {
+                  "type": "value",
+                  "origin": "variable",
+                  "keys": ["label"]
+                }
+              ]
+            },
+            {
+              "type": "value",
+              "origin": "laboratory",
+              "keys": [
+                "comments",
+                {
+                  "type": "value",
+                  "origin": "variable",
+                  "keys": ["label"]
+                }
+              ]
+            }
+          ],
+          "forbidden_values": ["", "None", null]
+        },
+        "positive": {
+          "help": "Way the field should be interpreted.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["positive"]
+            },
+            {
+              "type": "value",
+              "origin": "variable",
+              "keys": ["positive"]
+            }
+          ],
+          "forbidden_values": ["", "None", null]
+        },
+        "detect_missing_value": {
+          "help": "Should missing values of the field be detected by XIOS.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["detect_missing_value"]
+            },
+            "none"
+          ]
+        },
+        "units": {
+          "help": "Units associated with the field.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["units"]
+            },
+            {
+              "type": "value",
+              "origin": "variable",
+              "keys": ["units"]
+            }
+          ],
+          "forbidden_values": ["", "None", null]
+        },
+        "cell_methods": {
+          "help": "Cell methods associated with the field.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["cell_methods"]
+            },
+            {
+              "type": "value",
+              "origin": "variable",
+              "keys": ["cell_methods"]
+            }
+          ],
+          "forbidden_values": ["", "None", null]
+        },
+        "cell_measures": {
+          "help": "Cell measures associated with the field.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["cell_measures"]
+            },
+            {
+              "type": "value",
+              "origin": "variable",
+              "keys": ["cell_measures"]
+            }
+          ],
+          "forbidden_values": ["", "None", null]
+        },
+        "flag_meanings": {
+          "help": "Flag meanings associated with the field.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["flag_meanings"]
+            },
+            {
+              "type": "value",
+              "origin": "variable",
+              "keys": ["flag_meanings"]
+            }
+          ],
+          "forbidden_values": ["", "None", null]
+        },
+        "flag_values": {
+          "help": "Flag values associated with the field.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["flag_values"]
+            },
+            {
+              "type": "value",
+              "origin": "variable",
+              "keys": ["flag_values"]
+            }
+          ],
+          "forbidden_values": ["", "None", null]
+        },
+        "interval_operation": {
+          "help": "Interval associated with the operation done on the field.",
+          "values": [
+            {
+              "type": "condition",
+              "value_to_check": {
+                "type": "value",
+                "origin": "attrs",
+                "keys": ["operation"]
+              },
+              "check_to_perform": "neq",
+              "reference_values": ["once"],
+              "values": [
+                {
+                  "type": "value",
+                  "origin": "attrs",
+                  "keys": ["interval_operation"]
+                }
+              ]
             }
           ]
         }
@@ -1021,7 +1275,7 @@
           },
         "compression_level": {
             "help": "Compression level of the file.",
-            "skipped_values": ["None", "", null],
+            "forbidden_values": ["None", "", null],
             "values": [
               {
                 "type": "value",
@@ -1052,6 +1306,7 @@
           },
         "id": {
             "help": "Id of the output file",
+          "fatal": true,
             "values": [
               {
                 "type": "value",
@@ -1085,6 +1340,7 @@
           },
         "name": {
             "help": "File name.",
+          "fatal": true,
             "values": [
               {
                 "type": "value",
@@ -1105,7 +1361,7 @@
           },
         "output_level": {
             "help": "Output level of the file.",
-            "skipped_values": ["None", "", null],
+            "forbidden_values": ["None", "", null],
             "values": [
               {
                 "type": "value",
@@ -1121,7 +1377,7 @@
           },
         "split_end_offset": {
             "help": "Splitting end offset of the file",
-            "skipped_values": ["", "None", null, "False", false],
+            "forbidden_values": ["", "None", null, "False", false],
             "values": [
               {
                 "type": "condition",
@@ -1144,7 +1400,7 @@
           },
         "split_freq": {
             "help": "Splitting frequency of the file.",
-            "skipped_values": ["", "None", null],
+            "forbidden_values": ["", "None", null],
             "values": [
               {
                 "type": "condition",
@@ -1167,7 +1423,7 @@
           },
         "split_freq_format": {
             "help": "Splitting frequency format of the file.",
-            "skipped_values": ["", "None", null],
+            "forbidden_values": ["", "None", null],
             "values": [
               {
                 "type": "condition",
@@ -1190,7 +1446,7 @@
           },
         "split_last_date": {
             "help": "Splitting last date of the file",
-            "skipped_values": ["", "None", null],
+            "forbidden_values": ["", "None", null],
             "values": [
               {
                 "type": "condition",
@@ -1213,7 +1469,7 @@
           },
         "split_start_offset": {
             "help": "Splitting start offset of the file",
-            "skipped_values": ["", "None", null, "False", false],
+            "forbidden_values": ["", "None", null, "False", false],
             "values": [
               {
                 "type": "condition",
@@ -1236,7 +1492,7 @@
           },
         "synchronisation_frequency": {
             "help": "Frequency at which the synchronisation between buffer and filesystem is done.",
-            "skipped_values": ["None", "", null],
+            "forbidden_values": ["None", "", null],
             "values": [
               {
                 "type": "value",
@@ -1307,7 +1563,7 @@
           },
         "uuid_format": {
             "help": "Unique identifier of the file format.",
-            "skipped_values": ["None", "", null],
+            "forbidden_values": ["None", "", null],
             "values": [
               {
                 "type": "value",
@@ -1401,7 +1657,7 @@
           },
         "branch_time_in_child": {
             "help": "Branch time of the simulation in the child's one.",
-            "skipped_values": ["", "None", null],
+            "forbidden_values": ["", "None", null],
           "num_type": "double",
             "values": [
               {
@@ -1447,7 +1703,7 @@
           },
         "branch_time_in_parent": {
             "help": "Branch time of the simulation in the parent's one.",
-            "skipped_values": ["", "None", null],
+            "forbidden_values": ["", "None", null],
           "num_type": "double",
             "values": [
               {
@@ -1498,7 +1754,7 @@
           },
         "comment": {
             "help": "Comment associated with the file.",
-            "skipped_values": [""],
+            "forbidden_values": [""],
             "values": [
               {
                 "type": "value",
@@ -1571,7 +1827,7 @@
           },
         "contact": {
             "help": "Contact email.",
-            "skipped_values": ["None", "", null],
+            "forbidden_values": ["None", "", null],
             "values": [
               {
                 "type": "value",
@@ -1602,7 +1858,7 @@
           },
         "description": {
             "help": "Description of the file.",
-            "skipped_values": ["", "None", null],
+            "forbidden_values": ["", "None", null],
             "values": [
               {
                 "type": "condition",
@@ -1651,7 +1907,7 @@
           },
         "experiment": {
             "help": "Experiment associated with the simulation.",
-            "skipped_values": ["", "None", null],
+            "forbidden_values": ["", "None", null],
             "values": [
               {
                 "type": "condition",
@@ -1685,6 +1941,7 @@
           },
         "expid_in_filename": {
             "help": "Experiment id to be used in file name.",
+          "output_key": "experiment_id",
             "values": [
               {
                 "type": "value",
@@ -1700,7 +1957,7 @@
           },
         "external_variables": {
             "help": "External variables associated with the file.",
-            "skipped_values": [""],
+            "forbidden_values": [""],
             "values": [
               {
                 "type": "value",
@@ -1754,7 +2011,7 @@
           },
         "further_info_url": {
             "help": "Url to obtain further information associated with the simulation.",
-            "skipped_values": ["", "None", null],
+            "forbidden_values": ["", "None", null],
             "values": [
               {
                 "type": "value",
@@ -2035,7 +2292,8 @@
                   {
                     "type": "value",
                     "origin": "common",
-                    "keys": ["parent_time_ref_year"]
+                    "keys": ["parent_time_ref_year"],
+                    "format": "days since {}-01-01 00:00:00"
                   }
                 ]
               }
@@ -2111,7 +2369,7 @@
               },
               {
                 "type": "value",
-                "origin": "common",
+                "origin": "internal",
                 "keys": ["realization_index"]
               }
             ]
@@ -2120,16 +2378,14 @@
             "help": "Realm associated with the file.",
             "values": [
               {
-                "type": "func",
-                "origin": "self",
-                "keys": ["join"],
-                "template": ",",
-                "options": {
-                  "input": {
-                    "type": "value",
-                    "origin": "variable",
-                    "keys": ["modeling_realm"]
-                  },
+                "type": "value",
+                "origin": "variable",
+                "keys": ["modeling_realm"],
+                "format": {
+                  "type": "func",
+                  "origin": "self",
+                  "keys": ["join"],
+                  "template": ",",
                   "type_condition": "list"
                 }
               }
@@ -2252,7 +2508,13 @@
                   "activity_id": {
                     "type": "value",
                     "origin": "common",
-                    "keys": ["activity_id"]
+                    "keys": ["activity_id"],
+                    "format": {
+                      "type": "func",
+                      "origin": "self",
+                      "keys": "join",
+                      "template": ", "
+                    }
                   },
                   "expid_in_filename": {
                     "type": "value",
@@ -2280,7 +2542,13 @@
                   "activity_id": {
                     "type": "value",
                     "origin": "common",
-                    "keys": ["activity_id"]
+                    "keys": ["activity_id"],
+                    "format": {
+                      "type": "func",
+                      "origin": "self",
+                      "keys": ["join"],
+                      "template": ","
+                    }
                   },
                   "experiment_id": {
                     "type": "value",
@@ -2304,7 +2572,7 @@
         "title_desc": {
             "help": "Title of the file.",
             "output_key": "title",
-            "skipped_values": ["", "None", null],
+            "forbidden_values": ["", "None", null],
             "values": [
               {
                 "type": "condition",
@@ -2384,6 +2652,599 @@
               }
             ]
           }
+      }
+    },
+    "zoom_axis": {
+      "attrs_list": ["index"],
+      "attrs_constraints": {
+        "index": {
+          "help": "Index of the zoomed axis.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["index"]
+            }
+          ]
+        }
+      }
+    },
+    "interpolate_axis": {
+      "attrs_list": ["type", "order", "coordinate"],
+      "attrs_constraints": {
+        "type": {
+          "help": "Type of the interpolated axis.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["type"]
+            }
+          ]
+        },
+        "order": {
+          "help": "Order of the interpolated axis.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["order"]
+            }
+          ]
+        },
+        "coordinate": {
+          "help": "Coordinate of the interpolated axis.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["coordinate"]
+            }
+          ]
+        }
+      }
+    },
+    "axis_group": {
+      "attrs_list": ["prec"],
+      "attrs_constraints": {
+        "prec": {
+          "help": "Precision associated with the axis group.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["prec"]
+            },
+            "8"
+          ],
+          "authorized_values": ["2", "4", "8"],
+          "corrections": {
+            "": "4",
+            "float": "4",
+            "real": "4",
+            "double": "8",
+            "integer": "2",
+            "int": "2"
+          }
+        }
+      }
+    },
+    "domain": {
+      "attrs_list": ["id", "ni_glo", "nj_glo", "type", "prec", "lat_name", "lon_name", "dim_i_name", "domain_ref"],
+      "attrs_constraints": {
+        "id": {
+          "help": "Id of the domain.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["id"]
+            }
+          ]
+        },
+        "ni_glo": {
+          "help": "Number of point in i dimension.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["ni_glo"]
+            }
+          ]
+        },
+        "nj_glo": {
+          "help": "Number of points in j dimension.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["nj_glo"]
+            }
+          ]
+        },
+        "type": {
+          "help": "Type of the domain.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["type"]
+            }
+          ]
+        },
+        "prec": {
+          "help": "Precision of the domain.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["prec"]
+            }
+          ]
+        },
+        "lat_name": {
+          "help": "Latitude axis name.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["lat_name"]
+            }
+          ]
+        },
+        "lon_name": {
+          "help": "Longitude axis name.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["lon_name"]
+            }
+          ]
+        },
+        "dim_i_name": {
+          "help": "Name of the i dimension.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["dim_i_name"]
+            }
+          ]
+        },
+        "domain_ref": {
+          "help": "Reference domain.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["domain_ref"]
+            }
+          ]
+        }
+      }
+    },
+    "interpolate_domain": {
+      "attrs_list": ["type", "order", "renormalize", "mode", "write_weight", "coordinate"],
+      "attrs_constraints": {
+        "type": {
+          "help": "Type of the interpolated domain.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["type"]
+            }
+          ]
+        },
+        "order": {
+          "help": "Order of the interpolation.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["order"]
+            }
+          ]
+        },
+        "renormalize": {
+          "help": "Should the interpolated domain be renormalized?",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["renormalize"]
+            }
+          ]
+        },
+        "mode": {
+          "help": "Mode used for the interpolation.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["mode"]
+            }
+          ]
+        },
+        "write_weight": {
+          "help": "Should interpolation weights be written?",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["write_weight"]
+            }
+          ]
+        },
+        "coordinate": {
+          "help": "Coordinate of the interpolated domain.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["coordinate"]
+            }
+          ]
+        }
+      }
+    },
+    "domain_group": {
+      "attrs_list": ["prec"],
+      "attrs_constraints": {
+        "prec": {
+          "help": "Precision associated with the domain group.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["prec"]
+            },
+            "8"
+          ],
+          "authorized_values": ["2", "4", "8"],
+          "corrections": {
+            "": "4",
+            "float": "4",
+            "real": "4",
+            "double": "8",
+            "integer": "2",
+            "int": "2"
+          }
+        }
+      }
+    },
+    "scalar": {
+      "attrs_list": ["id", "scalar_ref", "name", "standard_name", "long_name", "label", "prec", "value", "bounds",
+                    "bounds_name", "axis_type", "positive", "unit"],
+      "attrs_constraints": {
+        "id": {
+          "help": "Id of the scalar.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["id"]
+            }
+          ]
+        },
+        "scalar_ref": {
+          "help": "Reference scalar.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["scalar_ref"]
+            }
+          ]
+        },
+        "name": {
+          "help": "Name of the scalar.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["name"]
+            }
+          ]
+        },
+        "long_name": {
+          "help": "Long name of the scalar.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["long_name"]
+            }
+          ]
+        },
+        "standard_name": {
+          "help": "Standard name of the scalar.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["standard_name"]
+            }
+          ],
+          "forbidden_values": ["", "None", null]
+        },
+        "axis_type": {
+          "help": "Axis type of the scalar.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["axis_type"]
+            }
+          ],
+          "forbidden_values": ["", "None", null]
+        },
+        "unit": {
+          "help": "Unit of the scalar.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["unit"]
+            }
+          ],
+          "forbidden_values": ["", "None", null]
+        },
+        "label": {
+          "help": "Label of the scalar.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["label"]
+            }
+          ],
+          "forbidden_values": ["", "None", null]
+        },
+        "bounds": {
+          "help": "Bounds of the scalar.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["bounds"]
+            }
+          ],
+          "forbidden_values": ["", "None", null]
+        },
+        "bounds_name": {
+          "help": "Bounds name of the scalar.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["bounds_name"]
+            }
+          ],
+          "forbidden_values": ["", "None", null]
+        },
+        "prec": {
+          "help": "Precision of the scalar.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["prec"]
+            }
+          ],
+          "forbidden_values": ["", "None", null],
+          "authorized_values": ["2", "4", "8"],
+          "corrections": {
+            "": "4",
+            "float": "4",
+            "real": "4",
+            "double": "8",
+            "integer": "2",
+            "int": "2"
+          }
+        },
+        "value": {
+          "help": "Value of the scalar.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["value"]
+            }
+          ],
+          "forbidden_values": ["", "None", null]
+        },
+        "positive": {
+          "help": "Orientation of the scalar.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["positive"]
+            }
+          ],
+          "forbidden_values": ["", "None", null]
+        }
+      }
+    },
+    "axis": {
+      "attrs_list": ["id", "positive", "n_glo", "value", "axis_ref", "name", "standard_name", "long_name", "prec",
+                    "unit", "value", "bounds", "dim_name", "label", "axis_type"],
+      "attrs_constraints": {
+        "id": {
+          "help": "Id of the axis.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["id"]
+            }
+          ]
+        },
+        "positive": {
+          "help": "Hox is the axis oriented?",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["positive"]
+            }
+          ]
+        },
+        "n_glo": {
+          "help": "Number of values of this axis.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["n_glo"]
+            }
+          ]
+        },
+        "axis_ref": {
+          "help": "Reference axis.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["axis_ref"]
+            }
+          ]
+        },
+        "name": {
+          "help": "Name of this axis.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["name"]
+            }
+          ]
+        },
+        "long_name": {
+          "help": "Long name of this axis.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["long_name"]
+            }
+          ]
+        },
+        "axis_type": {
+          "help": "Axis type.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["axis_type"]
+            }
+          ],
+          "forbidden_values": ["", "None", null]
+        },
+        "standard_name": {
+          "help": "Standard name of the axis.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["standard_name"]
+            }
+          ],
+          "forbidden_values": ["", "None", null],
+          "authorized_type": ["str"]
+        },
+        "prec": {
+          "help": "Precision of the axis.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["prec"]
+            }
+          ],
+          "forbidden_values": ["", "None", null],
+          "authorized_values": ["2", "4", "8"],
+          "corrections": {
+            "": "4",
+            "float": "4",
+            "real": "4",
+            "double": "8",
+            "integer": "2",
+            "int": "2"
+          }
+        },
+        "unit": {
+          "help": "Unit of the axis.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["unit"]
+            }
+          ],
+          "forbidden_values": ["", "None", null]
+        },
+        "bounds": {
+          "help": "Bounds of the axis.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["bounds"]
+            }
+          ],
+          "forbidden_values": ["", "None", null]
+        },
+        "dim_name": {
+          "help": "Name dimension of the axis.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["dim_name"]
+            }
+          ],
+          "forbidden_values": ["", "None", null]
+        },
+        "label": {
+          "help": "Label of the axis.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["label"]
+            }
+          ],
+          "forbidden_values": ["", "None", null]
+        },
+        "value": {
+          "help": "Value of the axis.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["value"]
+            }
+          ],
+          "forbidden_values": ["", "None", null]
+        }
+      }
+    },
+    "grid": {
+      "attrs_list": ["id"],
+      "attrs_constraints": {
+        "id": {
+          "help": "Id of the grid.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["id"]
+            }
+          ]
+        }
       }
     }
   }

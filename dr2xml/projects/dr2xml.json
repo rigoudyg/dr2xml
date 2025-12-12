@@ -2179,7 +2179,7 @@
     "interpolate_domain": {
       "help": "XIOS interpolate_domain beacon"
     },
-    "interplate_axis": {
+    "interpolate_axis": {
       "helps": "XIOS interpolate_axis beacon"
     },
     "scalar": {
@@ -2197,6 +2197,7 @@
       "attrs_constraints": {
         "name": {
           "help": "Content of the variable",
+          "fatal": true,
           "values": [
             {
               "type": "value",
@@ -2207,6 +2208,7 @@
         },
         "type": {
           "help": "Encoding type of the variable's content.",
+          "fatal": true,
           "values": [
             {
               "type": "value",

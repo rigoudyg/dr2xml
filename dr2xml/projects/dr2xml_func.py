@@ -10,7 +10,7 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 from utilities.logger import get_logger
 
 
-def format_sizes(*sizes):
+def format_sizes(sizes):
 	"""
 	Transform into a dict the sizes values provided as ['nho', 'nlo', 'nha', 'nla', 'nlas', 'nls', 'nh1'], with:
 	- nho: oce grid size

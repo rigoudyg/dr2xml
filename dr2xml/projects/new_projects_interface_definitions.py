@@ -38,11 +38,11 @@ def val_or_func(key, element, project_funcs=None):
 
 
 def return_value(value, init_dict=dict(), common_dict=dict(), internal_dict=dict(), additional_dict=dict(),
-                 allow_additional_keytypes=True, project_funcs=None):
+                 allow_additional_keytypes=True, project_funcs=None, **attrs):
     if isinstance(value, (ValueSettings, FunctionSettings, ConditionSettings)):
         return value.__call__(common_dict=common_dict, internal_dict=internal_dict, additional_dict=additional_dict,
                               allow_additional_keytypes=allow_additional_keytypes, init_dict=init_dict,
-                              project_funcs=project_funcs)
+                              project_funcs=project_funcs, **attrs)
     else:
         return True, value
 
@@ -106,6 +106,9 @@ def determine_value(key_type=None, keys=list(), func=None, fmt=None, src=None, c
             found = True
         elif key_type in ["internal", ]:
             value = internal_dict
+            found = True
+        elif key_type in ["init", ]:
+            value = init_dict
             found = True
         elif key_type in ["dict", ]:
             value = additional_dict
@@ -271,7 +274,7 @@ class Settings(object):
         return self.__str__()
 
     def __call__(self, init_dict=dict(), internal_dict=dict(), common_dict=dict(), additional_dict=dict(),
-                 allow_additional_keytypes=False, project_funcs=None):
+                 allow_additional_keytypes=False, project_funcs=None, **attrs):
         raise NotImplementedError()
 
     def dump_doc(self, force_void=False):
@@ -361,10 +364,10 @@ class ValueSettings(Settings):
             if self.origin not in ["attrs", "common", "config", "dict", "init", "internal", "laboratory", "simulation",
                                    "variable"]:
                 logger.error("'Origin' must be specified among 'attrs', 'common', 'config', 'dict', 'init', 'internal',"
-                             " 'laboratory', 'simulation' and 'variable' for %s, not %s" % (self.key, self.type))
+                             " 'laboratory', 'simulation' and 'variable' for %s, not %s" % (self.key, self.origin))
                 raise ValueError("'Origin' must be specified among 'attrs', 'common', 'config', 'dict', 'init',"
                                  " 'internal', 'laboratory', 'simulation' and 'variable' for %s, not %s" %
-                                 (self.key, self.type))
+                                 (self.key, self.origin))
         else:
             logger.error("'Type' must be specified among 'file', 'merge' and 'value' for %s, not %s" % (self.key, self.type))
             raise ValueError("'Type' must be specified among 'file', 'merge' and 'value' for %s, not %s" % (self.key, self.type))
@@ -392,13 +395,13 @@ class ValueSettings(Settings):
         found = False
         keys = copy.deepcopy(self.keys)
         if self.type in ["file", ]:
-            if self.type in ["json", ]:
+            if self.origin in ["json", ]:
                 found, src = return_value(self.src, init_dict=init_dict, internal_dict=internal_dict,
                                           common_dict=common_dict, additional_dict=additional_dict,
                                           allow_additional_keytypes=allow_additional_keytypes,
-                                          project_funcs=project_funcs)
+                                          project_funcs=project_funcs, **attrs)
                 if found:
-                    if isinstance(src, six.string_types):
+                    if not isinstance(src, six.string_types):
                         logger.error("src found should be a string for %s, not %s" % (self.key, src))
                         raise TypeError("src found should be a string for %s, not %s" % (self.key, src))
                     else:
@@ -411,7 +414,7 @@ class ValueSettings(Settings):
             values = [return_value(val, init_dict=init_dict, internal_dict=internal_dict,
                                    common_dict=common_dict, additional_dict=additional_dict,
                                    allow_additional_keytypes=allow_additional_keytypes,
-                                   project_funcs=project_funcs)
+                                   project_funcs=project_funcs, **attrs)
                       for val in self.values]
             if all(val[0] for val in values):
                 value = list()
@@ -425,7 +428,7 @@ class ValueSettings(Settings):
                                  (str([i for (i, val) in enumerate(values) if not val[0]]), self.key))
         elif self.type in ["value", ]:
             if self.origin in ["attrs", ]:
-                value = attrs
+                value = additional_dict
                 found = True
             elif self.origin in ["dict", ]:
                 value = additional_dict
@@ -466,7 +469,7 @@ class ValueSettings(Settings):
                     found, value = return_value(key, init_dict=init_dict, internal_dict=internal_dict,
                                                 common_dict=common_dict, additional_dict=additional_dict,
                                                 allow_additional_keytypes=allow_additional_keytypes,
-                                                project_funcs=project_funcs)
+                                                project_funcs=project_funcs, **attrs)
                     if found:
                         if self.origin in ["config", ]:
                             value = get_config_variable(key)
@@ -501,7 +504,7 @@ class ValueSettings(Settings):
             found, key = return_value(key, init_dict=init_dict, internal_dict=internal_dict,
                                       common_dict=common_dict, additional_dict=additional_dict,
                                       allow_additional_keytypes=allow_additional_keytypes,
-                                      project_funcs=project_funcs)
+                                      project_funcs=project_funcs, **attrs)
             if found:
                 if isinstance(value, (dict, OrderedDict)):
                     if key in value:
@@ -534,41 +537,31 @@ class ValueSettings(Settings):
     def dump_doc(self, force_void=False):
         rep = list()
         tmp_rep = ""
-        key_type = self.key_type
-        if key_type in ["laboratory", "simulation", "dict", "internal", "common", "json"]:
-            if key_type in ["json", ]:
-                tmp_rep = "read_json_file(%s)"
-                tmp_rep = tmp_rep % self.dump_doc_inner(self.src, format_struct=False)[0]
-            else:
-                tmp_rep = "%s" % key_type
+        value_origin = self.origin
+        value_type = self.type
+        if value_type in ["value", ]:
+            if value_origin in ["laboratory", "simulation", "dict", "init", "internal", "common", "attrs"]:
+                tmp_rep = "%s" % value_origin
+                keys_values = self.dump_doc_inner(self.keys, format_struct=False)
+                for key_value in keys_values:
+                    tmp_rep += "[%s]" % key_value
+            elif value_origin in ["data_request", "vocabulary", "config", "variable"]:
+                tmp_rep = "%s" % value_origin
+                keys_values = self.dump_doc_inner(self.keys, format_struct=False)
+                for key_value in keys_values:
+                    tmp_rep += ".%s" % key_value
+        elif value_type in ["file", ]:
+            tmp_rep = "read_%s_file(%s)" % (value_origin, self.dump_doc_inner(self.src, format_struct=False)[0])
             keys_values = self.dump_doc_inner(self.keys, format_struct=False)
             for key_value in keys_values:
                 tmp_rep += "[%s]" % key_value
-        elif key_type in ["combine", ]:
-            tmp_rep = ", ".join(self.dump_doc_inner(self.keys, format_struct=False))
-        elif key_type in ["merge", ]:
-            tmp_rep = str(self.dump_doc_inner(self.keys, format_struct=False))
-        elif key_type in ["data_request", "vocabulary"]:
-            tmp_rep = "%s" % key_type
-            keys_values = self.dump_doc_inner(self.keys, format_struct=False)
-            for key_value in keys_values:
-                if key_value in ["__call__", ]:
-                    tmp_rep += "()"
-                else:
-                    tmp_rep += ".%s" % key_value
-        elif key_type in ["config", "variable"]:
-            tmp_rep = "%s" % key_type
-            if key_type in ["config", ]:
-                tmp_rep = "dr2xml." + tmp_rep
-            keys_values = self.dump_doc_inner(self.keys, format_struct=False)
-            for key_value in keys_values:
-                tmp_rep += ".%s" % key_value
-        if self.func is not None:
-            tmp_rep += self.dump_doc_inner(self.func, format_struct=False)[0]
-        if self.fmt is not None:
-            tmp_rep = self.dump_doc_inner(self.fmt, force_void=force_void, remove_new_lines=True)[0] + \
+        elif value_type in ["merge", ]:
+            tmp_rep = "merge_lists(%s)" % ", ".join(self.dump_doc_inner(self.keys, format_struct=False))
+        if self.format is not False:
+            tmp_rep = self.dump_doc_inner(self.format, force_void=force_void, remove_new_lines=True)[0] + \
                       ".format(%s)" % tmp_rep
         if len(tmp_rep) == 0:
+            print(self)
             rep.extend(super().dump_doc(force_void=force_void))
         else:
             rep.append(tmp_rep)
@@ -614,19 +607,19 @@ class ParameterSettings(Settings):
                 raise ValueError("Attribute '%s' of ParameterSettings %s must be a list of str or False" % (keyword, key))
             elif keyword in ["conditions", ] and val is not True:
                 if isinstance(val, list):
-                    attrs[keyword] = [ConditionSettings.from_dict(keyword, elt, project_funcs=project_funcs) for elt in val]
+                    attrs[keyword] = copy.deepcopy([ConditionSettings.from_dict(keyword, elt, project_funcs=project_funcs) for elt in val])
                 else:
                     logger.error("Attribute '%s' of ParameterSettings %s must be a list or True" % (keyword, key))
                     raise ValueError("Attribute '%s' of ParameterSettings %s must be a list or True" % (keyword, key))
             elif keyword in ["authorized_values", "forbidden_values"] and val is not True:
                 if isinstance(val, list):
-                    attrs[keyword] = [val_or_func(keyword, elt, project_funcs=project_funcs) for elt in val]
+                    attrs[keyword] = copy.deepcopy([val_or_func(keyword, elt, project_funcs=project_funcs) for elt in val])
                 else:
                     logger.error("Attribute '%s' of ParameterSettings %s must be a list or True" % (keyword, key))
                     raise ValueError("Attribute '%s' of ParameterSettings %s must be a list or True" % (keyword, key))
             elif keyword in ["values", ]:
                 if isinstance(val, list):
-                    attrs[keyword] = [val_or_func(keyword, elt, project_funcs=project_funcs) for elt in val]
+                    attrs[keyword] = copy.deepcopy([val_or_func(keyword, elt, project_funcs=project_funcs) for elt in val])
                 else:
                     logger.error("Attribute '%s' of ParameterSettings %s must be a list" % (keyword, key))
                     raise ValueError("Attribute '%s' of ParameterSettings %s must be a list" % (keyword, key))
@@ -669,7 +662,6 @@ class ParameterSettings(Settings):
 
     def __init__(self, *args, project_funcs=None, **kwargs):
         super(ParameterSettings, self).__init__(*args, **kwargs)
-        print("Deal with parameter %s" % self.key)
         if self.key is None:
             raise ValueError("Attribute 'key' must not be None")
         if self.output_key is None:
@@ -876,8 +868,9 @@ class TagSettings(Settings):
             elif keyword.endswith("constraints"):
                 if isinstance(val, dict):
                     for (subkey, subval) in val.items():
-                        attrs[keyword][subkey] = ParameterSettings.from_dict(subkey, subval, additional_keys=True,
-                                                                             project_funcs=project_funcs)
+                        attrs[keyword][subkey] = copy.deepcopy(ParameterSettings.from_dict(subkey, subval,
+                                                                                           additional_keys=True,
+                                                                                           project_funcs=project_funcs))
                 else:
                     logger.error("Attribute '%s' of TagSettings %s must be a dict" % (keyword, key))
                     raise ValueError("Attribute '%s' of TagSettings %s must be a dict" % (keyword, key))
@@ -942,7 +935,7 @@ class FunctionSettings(Settings):
 
     def init_dict_default(self):
         return dict(type=False, origin=False, keys=[], options=dict(), template=False, format=False,
-                    functions_file=None, func=None)
+                    functions_file=None, func=None, key=None)
 
     def __init__(self, *args, project_funcs=None, **kwargs):
         logger = get_logger()
@@ -950,8 +943,8 @@ class FunctionSettings(Settings):
         if "keys" in self.updated and not isinstance(self.keys, list):
             self.keys = [self.keys, ]
         if not isinstance(self.keys, list) or len(self.keys) == 0:
-            logger.error("Keys must be specified for %s" % "undefined")
-            raise ValueError("Keys must be specified for %s" % "undefined")
+            logger.error("Keys must be specified for %s" % self.key)
+            raise ValueError("Keys must be specified for %s" % self.key)
         elif self.origin in ["self"]:
             if self.keys == ["format", ] and self.template is False:
                 logger.error("To use 'format' function in %s, 'template' must be a specified." % self.key)
@@ -986,6 +979,26 @@ class FunctionSettings(Settings):
             raise ValueError(self.origin)
             # TODO
 
+    def __deepcopy__(self, memo):
+        dict_call = dict(
+            type=self.type,
+            origin=self.origin,
+            keys=copy.deepcopy(self.keys),
+            options=copy.deepcopy(self.options),
+            template=self.template,
+            format=self.format,
+            key=self.key
+        )
+        if self.functions_file is None:
+            dict_call["project_funcs"] = None
+        elif isinstance(self.functions_file, six.string_types):
+            dict_call["project_funcs"] = self.functions_file
+        elif "__file__" in self.functions_file.__dir__():
+            dict_call["project_funcs"] = self.functions_file.__file__
+        else:
+            dict_call["project_funcs"] = copy.deepcopy(self.functions_file)
+        return FunctionSettings(**dict_call)
+
     @classmethod
     def from_dict(cls, key, kwargs, additional_keys=False, project_funcs=None):
         logger = get_logger()
@@ -1013,14 +1026,14 @@ class FunctionSettings(Settings):
 
     def dump_doc(self, force_void=False):
         rep = list()
-        tmp_rep = self.func.__name__ + "(%s)"
+        tmp_rep = "function from %s named %s" % (self.origin, self.keys[0]) + "(%s)"
         options = self.dump_doc_inner(self.options, force_void=force_void, format_struct=False)
         tmp_rep = tmp_rep % ", ".join(options)
         rep.append(tmp_rep)
         return rep
 
     def __call__(self, *args, init_dict=dict(), internal_dict=dict(), common_dict=dict(), additional_dict=dict(),
-                 allow_additional_keytypes=False, project_funcs=None):
+                 allow_additional_keytypes=False, project_funcs=None, **attrs):
         logger = get_logger()
         test = True
         options = copy.deepcopy(self.options)
@@ -1029,7 +1042,7 @@ class FunctionSettings(Settings):
             key_test, val = return_value(val, common_dict=common_dict, internal_dict=internal_dict,
                                          additional_dict=additional_dict, init_dict=init_dict,
                                          allow_additional_keytypes=allow_additional_keytypes,
-                                         project_funcs=project_funcs)
+                                         project_funcs=project_funcs, **attrs)
             if key_test:
                 options[key] = val
             else:
@@ -1038,7 +1051,7 @@ class FunctionSettings(Settings):
             func_test, func_val = return_value(self.func, common_dict=common_dict, internal_dict=internal_dict,
                                                additional_dict=additional_dict, init_dict=init_dict,
                                                allow_additional_keytypes=allow_additional_keytypes,
-                                               project_funcs=project_funcs)
+                                               project_funcs=project_funcs, **attrs)
             if func_test:
                 self.func = func_val
             else:
@@ -1065,9 +1078,25 @@ class FunctionSettings(Settings):
             elif self.func in ["upper", ]:
                 value = args[0].upper()
             elif self.func in ["format", ]:
-                value = self.template.format(*args, **options)
+                try:
+                    value = self.template.format(*args, **options)
+                except BaseException as e:
+                    logger.debug("Issue formating string %s with %s and %s" % (self.template, args, options))
+                    logger.debug(str(e))
+                    value = None
+                    test = False
             elif self.func in ["join", ]:
-                value = self.template.join(args)
+                try:
+                    if not isinstance(args, tuple):
+                        args = tuple([args, ])
+                    if not isinstance(args[0], list):
+                        args = tuple([[args[0], ], ])
+                    value = self.template.join(*args)
+                except BaseException as e:
+                    logger.debug("Issue joining string %s with %s" % (self.template, args))
+                    logger.debug(str(e))
+                    value = None
+                    test = False
             else:
                 logger.error("Unknown func %s" % self.func)
                 raise ValueError("Unknown func %s" % self.func)
@@ -1075,7 +1104,7 @@ class FunctionSettings(Settings):
             try:
                 value = self.func(*args, **options)
             except BaseException as e:
-                logger.debug("Issue calling %s with args %s and options %s" % (str(self.func), str(args), str(self.options)))
+                logger.debug("Issue calling %s with args %s and options %s" % (str(self.func), str(args), str(options)))
                 logger.debug(str(e))
                 value = None
                 test = False
@@ -1085,25 +1114,29 @@ class FunctionSettings(Settings):
 class ConditionSettings(Settings):
 
     def init_dict_default(self):
-        return dict(value_to_check=False, check_to_perform=False, reference_values=False, values=list())
+        return dict(value_to_check=False, check_to_perform=False, reference_values=False, values=list(), key=None,
+                    not_values=list())
 
     def __init__(self, *args, project_funcs=None, **kwargs):
         logger = get_logger()
         super(ConditionSettings, self).__init__(*args, **kwargs)
         if not isinstance(self.reference_values, list):
             self.reference_values = [self.reference_values, ]
-        self.reference_values = [val_or_func("unknown", elt, project_funcs=project_funcs) for elt in self.reference_values]
+        self.reference_values = [val_or_func(self.key, elt, project_funcs=project_funcs) for elt in self.reference_values]
         if not isinstance(self.values, list):
             self.values = [self.values, ]
-        self.values = [val_or_func("unknown", elt, project_funcs=project_funcs) for elt in self.values]
+        self.values = [val_or_func(self.key, elt, project_funcs=project_funcs) for elt in self.values]
+        if not isinstance(self.not_values, list):
+            self.not_values = [self.not_values, ]
+        self.not_values = [val_or_func(self.key, elt, project_funcs=project_funcs) for elt in self.not_values]
         if self.value_to_check is False or self.check_to_perform is False or len(self.reference_values) == 0:
             logger.error("For condition %s, 'value_to_check', 'check_to_perform' and 'reference_values' must be "
-                         "specified" % "unknown")
+                         "specified" % self.key)
             raise ValueError("For condition %s, 'value_to_check', 'check_to_perform' and 'reference_values' must be "
-                             "specified" % "unknown")
+                             "specified" % self.key)
         elif self.check_to_perform not in ["eq", "neq", "match", "nmatch"]:
-            logger.error("For condition unknown, 'check_to_perform' values must be among 'eq', 'neq', 'match', 'nmatch'")
-            raise ValueError("For condition unknown, 'check_to_perform' values must be among 'eq', 'neq', 'match', 'nmatch'")
+            logger.error("For condition %s, 'check_to_perform' values must be among 'eq', 'neq', 'match', 'nmatch'" % self.key)
+            raise ValueError("For condition %s, 'check_to_perform' values must be among 'eq', 'neq', 'match', 'nmatch'" % self.key)
 
     @classmethod
     def from_dict(cls, key, kwargs, additional_keys=False, project_funcs=None):
@@ -1150,41 +1183,53 @@ class ConditionSettings(Settings):
         return rep
 
     def __call__(self, init_dict=dict(), internal_dict=dict(), common_dict=dict(), additional_dict=dict(),
-                 allow_additional_keytypes=False, project_funcs=None):
+                 allow_additional_keytypes=False, project_funcs=None, **attrs):
         relevant, test = self.check(common_dict=common_dict, internal_dict=internal_dict, init_dict=init_dict,
                                     additional_dict=additional_dict, allow_additional_keytypes=True,
-                                    project_funcs=project_funcs)
+                                    project_funcs=project_funcs, **attrs)
         if not relevant:
             return relevant, None
-        elif not test:
-            return relevant and test, test
-        elif len(self.values) == 0:
-            return relevant and test, None
+        elif test:
+            if len(self.values) == 0:
+                return relevant and test, None
+            else:
+                test = False
+                i = 0
+                while i < len(self.values) and not test:
+                    test, val = return_value(self.values[i], common_dict=common_dict, internal_dict=internal_dict,
+                                             additional_dict=additional_dict, init_dict=init_dict,
+                                             allow_additional_keytypes=allow_additional_keytypes,
+                                             project_funcs=project_funcs, **attrs)
+                    i += 1
+                return relevant and test, val
         else:
-            test = False
-            i = 0
-            while i < len(self.values) and not test:
-                test, val = return_value(self.values[i], common_dict=common_dict, internal_dict=internal_dict,
-                                         additional_dict=additional_dict, init_dict=init_dict,
-                                         allow_additional_keytypes=allow_additional_keytypes,
-                                         project_funcs=project_funcs)
-                i += 1
-            return relevant and test, val
+            if len(self.not_values) == 0:
+                return relevant and test, None
+            else:
+                test = False
+                i = 0
+                while i < len(self.not_values) and not test:
+                    test, val = return_value(self.not_values[i], common_dict=common_dict, internal_dict=internal_dict,
+                                             additional_dict=additional_dict, init_dict=init_dict,
+                                             allow_additional_keytypes=allow_additional_keytypes,
+                                             project_funcs=project_funcs, **attrs)
+                    i += 1
+                return relevant and test, val
 
     def check(self, common_dict=dict(), internal_dict=dict(), additional_dict=dict(), allow_additional_keytypes=True,
-              init_dict=dict(), project_funcs=None):
+              init_dict=dict(), project_funcs=None, **attrs):
         test = False
         relevant, check_value = return_value(self.value_to_check, common_dict=common_dict, internal_dict=internal_dict,
                                              additional_dict=additional_dict, init_dict=init_dict,
                                              allow_additional_keytypes=allow_additional_keytypes,
-                                             project_funcs=project_funcs)
+                                             project_funcs=project_funcs, **attrs)
         if relevant:
             if isinstance(check_value, list) and len(check_value) == 1:
                 check_value = check_value[0]
             reference_values = [return_value(reference_value, common_dict=common_dict, internal_dict=internal_dict,
                                              additional_dict=additional_dict, init_dict=init_dict,
                                              allow_additional_keytypes=allow_additional_keytypes,
-                                             project_funcs=project_funcs)
+                                             project_funcs=project_funcs, **attrs)
                                 for reference_value in self.reference_values]
             relevant = all([elt[0] for elt in reference_values])
             if relevant:
@@ -1198,7 +1243,7 @@ class ConditionSettings(Settings):
                 elif self.check_to_perform in ["nmatch", ]:
                     test = not(any([re.compile(val).match(str(check_value)) is not None for val in reference_values]))
                 else:
-                    ValueError("Conditions can have 'eq' or 'neq' as operator, found: %s" % self.check_to_perform)
+                    ValueError("Conditions can have 'eq', 'neq', 'match' or 'nmatch' as operator, found: %s" % self.check_to_perform)
         elif len(self.reference_values) == 0 and self.check_to_perform in ["eq", ]:
             test = True
             relevant = True

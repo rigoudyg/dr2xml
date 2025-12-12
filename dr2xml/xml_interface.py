@@ -39,8 +39,7 @@ class DR2XMLElement(xml_writer.Element):
         common_dict = get_settings_values("common")
         internal_dict = get_settings_values("internal")
         for key in attrs_list:
-            test, value = attrs_constraints[key].find_value(is_value=key in kwargs, value=kwargs.get(key),
-                                                            common_dict=common_dict, internal_dict=internal_dict,
+            test, value = attrs_constraints[key].find_value(common_dict=common_dict, internal_dict=internal_dict,
                                                             additional_dict=kwargs, init_dict=init_dict)
             output_key = attrs_constraints[key].output_key
             if output_key is False:
@@ -51,21 +50,18 @@ class DR2XMLElement(xml_writer.Element):
         comments_list = tag_settings.comments_list
         comments_constraints = tag_settings.comments_constraints
         for comment in comments_list:
-            test, value = comments_constraints[comment].find_value(is_value=comment in kwargs,
-                                                                   value=kwargs.get(comment),
-                                                                   common_dict=common_dict, internal_dict=internal_dict,
+            test, value = comments_constraints[comment].find_value(common_dict=common_dict, internal_dict=internal_dict,
                                                                    additional_dict=kwargs, init_dict=init_dict)
             if test:
                 self.append(DR2XMLComment(text=value))
         vars_list = tag_settings.vars_list
         vars_constraints = tag_settings.vars_constraints
         for var in vars_list:
-            test, value = vars_constraints[var].find_value(is_value=var in kwargs, value=kwargs.get(var),
-                                                           common_dict=common_dict, internal_dict=internal_dict,
+            test, value = vars_constraints[var].find_value(common_dict=common_dict, internal_dict=internal_dict,
                                                            additional_dict=kwargs, init_dict=init_dict)
             output_key = vars_constraints[var].output_key
             if output_key is False:
-                output_key = key
+                output_key = var
             num_type = vars_constraints[var].num_type
             if test:
                 self.append(wrv(output_key, value, num_type))

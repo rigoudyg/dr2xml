@@ -156,7 +156,7 @@ class DataRequest(DataRequestBasic):
         return rep
 
     def _is_timesubset_applicable(self, year, select_on_year, time_subset):
-        if year is None or select_on_year is None:
+        if year is False or select_on_year is False:
             return None, None
         else:
             return ((time_subset.start is None or (time_subset.start <= int(year))) and

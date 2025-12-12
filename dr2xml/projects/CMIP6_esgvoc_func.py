@@ -26,10 +26,9 @@ def make_source_string(source, source_id):
     """
     # mpmoine_correction:make_source_string: pour lire correctement le fichier 'CMIP6_source_id.json'
     components = source['model_component']
-    rep = source_id + " (" + source['release_year'] + "):"
+    rep = source_id + " (" + str(source['release_year']) + "):"
     for realm in ["aerosol", "atmos", "atmosChem", "land", "ocean", "ocnBgchem", "seaIce"]:
-        component = components[realm]
-        description = component['description']
+        description = components[realm]
         if description != "none":
             rep = rep + "\n" + realm + ": " + description
     return rep

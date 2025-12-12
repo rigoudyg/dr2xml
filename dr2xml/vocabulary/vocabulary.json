@@ -4,7 +4,8 @@
       "github_repo": "https://github.com/WCRP-CMIP/WCRP-universe",
       "branch": "esgvoc",
       "local_path": "repos/WCRP-universe",
-      "db_path": "dbs/universe.sqlite"
+      "db_path": "dbs/universe.sqlite",
+      "offline": true
     },
     "projects": [
       {
@@ -12,14 +13,16 @@
         "github_repo": "https://github.com/WCRP-CMIP/CMIP6_CVs",
         "branch": "esgvoc",
         "local_path": "repos/CMIP6_CVs",
-        "db_path": "dbs/CMIP6_CVs.sqlite"
+        "db_path": "dbs/CMIP6_CVs.sqlite",
+        "offline": true
       },
       {
         "project_name": "cmip7",
         "github_repo": "https://github.com/WCRP-CMIP/CMIP7_CVs",
         "branch": "esgvoc",
         "local_path": "repos/CMIP7_CVs",
-        "db_path": "dbs/CMIP7_CVs.sqlite"
+        "db_path": "dbs/CMIP7_CVs.sqlite",
+        "offline": true
       }
     ]
   },
@@ -28,7 +31,8 @@
       "github_repo": "https://github.com/WCRP-CMIP/WCRP-universe",
       "branch": "esgvoc_dr_1.2.2",
       "local_path": "repos/CMIP7_test_WCRP-universe",
-      "db_path": "dbs/CMIP7_test_universe.sqlite"
+      "db_path": "dbs/CMIP7_test_universe.sqlite",
+      "offline": true
     },
     "projects": [
       {
@@ -36,7 +40,8 @@
         "github_repo": "https://github.com/WCRP-CMIP/CMIP7_CVs",
         "branch": "esgvoc_dr_1.2.2",
         "local_path": "repos/CMIP7_test_CVs",
-        "db_path": "dbs/CMIP7_test_CVs.sqlite"
+        "db_path": "dbs/CMIP7_test_CVs.sqlite",
+        "offline": true
       }
     ]
   }

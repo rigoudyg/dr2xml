@@ -21,7 +21,7 @@
             "type": "func",
             "origin": "self",
             "keys": "format",
-            "template": "{csvpath}{project}_experiment_id.json",
+            "template": "{cvspath}{project}_experiment_id.json",
             "options": {
               "cvspath": {
                 "type": "value",
@@ -133,7 +133,7 @@
               "cvspath": {
                 "type": "value",
                 "origin": "dict",
-                "keys": ["csvpath"]
+                "keys": ["cvspath"]
               },
               "project": {
                 "type": "value",
@@ -146,7 +146,7 @@
             "institution_id",
             {
               "type": "value",
-              "origin": "internal",
+              "origin": "init",
               "keys": ["institution_id"]
             }
           ]
@@ -185,7 +185,7 @@
               "cvspath": {
                 "type": "value",
                 "origin": "dict",
-                "keys": ["csvpath"]
+                "keys": ["cvspath"]
               },
               "project": {
                 "type": "value",
@@ -346,7 +346,7 @@
                   "cvspath": {
                     "type": "value",
                     "origin": "dict",
-                    "keys": ["csvpath"]
+                    "keys": ["cvspath"]
                   },
                   "project": {
                     "type": "value",
@@ -380,7 +380,7 @@
     },
     "variant_label": {
       "help": "Label of the variant done.",
-      "value": [
+      "values": [
         {
           "type": "func",
           "origin": "self",
@@ -420,13 +420,14 @@
           "help": "Controled vocabulary version used.",
           "values": ["CMIP6-CV version ??"]
         },
-        "convention_version": {
+        "conventions_version": {
           "help": "Conventions version used.",
           "values": [
             {
               "type": "value",
               "origin": "common",
-              "keys": ["conventions_version"]
+              "keys": ["conventions_version"],
+              "format": "CMIP6_conventions_version {}"
             }
           ]
         }
@@ -435,11 +436,11 @@
     "file_output": {
       "attrs_constraints": {
         "name": {
-          "fatal": true,
           "values": [
             {
               "type": "func",
               "origin": "functions_file",
+              "keys": ["build_filename"],
               "options": {
                 "frequency": {
                   "type": "value",
@@ -522,7 +523,7 @@
                 "type": "func",
                 "origin": "self",
                 "keys": "format",
-                "template": "{csvpath}{project}_experiment_id.json",
+                "template": "{cvspath}{project}_experiment_id.json",
                 "options": {
                   "cvspath": {
                     "type": "value",
@@ -621,21 +622,21 @@
               "type": "condition",
               "value_to_check": {
                 "type": "value",
-                "origin": "laboratory",
-                "keys": ["mip_era"]
+                "origin": "common",
+                "keys": ["mip_era_lset"]
               },
               "check_to_perform": "eq",
-              "reference_values": [],
+              "reference_values": [null],
               "values": [
                 {
                   "type": "condition",
                   "value_to_check": {
                     "type": "value",
-                    "origin": "simulation",
-                    "keys": ["mip_era"]
+                    "origin": "common",
+                    "keys": ["mip_era_sset"]
                   },
                   "check_to_perform": "eq",
-                  "reference_values": [],
+                  "reference_values": [null],
                   "values": [
                     {
                       "type": "func",
@@ -693,6 +694,11 @@
                 "origin": "functions_file",
                 "keys": ["fill_license"],
                 "options": {
+                  "value": {
+                    "type": "value",
+                    "origin": "common",
+                    "keys": ["license"]
+                  },
                   "institution_id": {
                     "type": "value",
                     "origin": "init",

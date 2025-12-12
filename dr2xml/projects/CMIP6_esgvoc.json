@@ -25,12 +25,12 @@
     },
     "CV_experiment": {
       "help": "Controlled vocabulary file containing experiment characteristics.",
-      "skip_values": [null, ""],
+      "forbidden_values": [null, ""],
       "fatal": true,
       "values": [
         {
           "type": "func",
-          "origin": "vocabulary",
+          "origin": "vocabulary_server",
           "keys": ["get_term_in_collection"],
           "options": {
             "project_id": {
@@ -138,11 +138,11 @@
     "institution_input": {
       "help": "Institution information from input",
       "fatal": true,
-      "skipped_values": [null, ""],
+      "forbidden_values": [null, ""],
       "values": [
         {
           "type": "func",
-          "origin": "vocabulary",
+          "origin": "vocabulary_server",
           "keys": ["get_term_in_collection"],
           "options": {
             "project_id": {
@@ -186,7 +186,8 @@
       "fatal": true,
       "values": [
         {
-          "type": "json",
+          "type": "file",
+          "origin": "json",
           "src": {
             "type": "func",
             "origin": "self",
@@ -196,7 +197,7 @@
               "cvspath": {
                 "type": "value",
                 "origin": "dict",
-                "keys": ["csvpath"]
+                "keys": ["cvspath"]
               },
               "project": {
                 "type": "value",
@@ -367,11 +368,11 @@
     "source_input": {
       "help": "Source information from input",
       "fatal": true,
-      "skipped_values": [null, ""],
+      "forbidden_values": [null, ""],
       "values": [
         {
           "type": "func",
-          "origin": "vocabulary",
+          "origin": "vocabulary_server",
           "keys": ["get_term_in_collection"],
           "options": {
             "project_id": {
@@ -396,7 +397,7 @@
     },
     "variant_label": {
       "help": "Label of the variant done.",
-      "value": [
+      "values": [
         {
           "type": "func",
           "origin": "self",
@@ -436,13 +437,14 @@
           "help": "Controled vocabulary version used.",
           "values": ["CMIP6-CV version ??"]
         },
-        "convention_version": {
+        "conventions_version": {
           "help": "Conventions version used.",
           "values": [
             {
               "type": "value",
               "origin": "common",
-              "keys": ["conventions_version"]
+              "keys": ["conventions_version"],
+              "format": "CMIP6_conventions_version {}"
             }
           ]
         }
@@ -451,11 +453,11 @@
     "file_output": {
       "attrs_constraints": {
         "name": {
-          "fatal": true,
           "values": [
             {
               "type": "func",
               "origin": "functions_file",
+              "keys": ["build_filename"],
               "options": {
                 "frequency": {
                   "type": "value",
@@ -532,12 +534,13 @@
           "help": "Last tag of CMIP6 CVs.",
           "values": [
             {
-              "type": "json",
+              "type": "file",
+              "origin": "json",
               "src": {
                 "type": "func",
                 "origin": "self",
                 "keys": "format",
-                "template": "{csvpath}{project}_experiment_id.json",
+                "template": "{cvspath}{project}_experiment_id.json",
                 "options": {
                   "cvspath": {
                     "type": "value",
@@ -636,21 +639,21 @@
               "type": "condition",
               "value_to_check": {
                 "type": "value",
-                "origin": "laboratory",
-                "keys": ["mip_era"]
+                "origin": "common",
+                "keys": ["mip_era_lset"]
               },
               "check_to_perform": "eq",
-              "reference_values": [],
+              "reference_values": [null],
               "values": [
                 {
                   "type": "condition",
                   "value_to_check": {
                     "type": "value",
-                    "origin": "simulation",
-                    "keys": ["mip_era"]
+                    "origin": "common",
+                    "keys": ["mip_era_sset"]
                   },
                   "check_to_perform": "eq",
-                  "reference_values": [],
+                  "reference_values": [null],
                   "values": [
                     {
                       "type": "func",
@@ -708,6 +711,11 @@
                 "origin": "functions_file",
                 "keys": ["fill_license"],
                 "options": {
+                  "value": {
+                    "type": "value",
+                    "origin": "common",
+                    "keys": ["license"]
+                  },
                   "institution_id": {
                     "type": "value",
                     "origin": "init",

@@ -1,0 +1,585 @@
+{
+  "parent_project_settings": "basics",
+  "functions_file": "CORDEX_func.py",
+  "internal": {
+    "required_model_components": {
+      "values": [[]]
+    },
+    "additional_allowed_model_components": {
+      "values": [[]]
+    }
+  },
+  "common": {
+    "conventions_version": {
+      "help": "Version of the conventions used.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "config",
+          "keys": ["CMIP6_conventions_version"]
+        }
+      ]
+    },
+    "HDL": {
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["HDL"]
+        },
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["HDL"]
+        },
+        "21.14103"
+      ]
+    },
+    "variant_label": {
+      "help": "Label of the variant done.",
+      "values": [
+        {
+          "type": "func",
+          "origin": "self",
+          "keys": ["format"],
+          "template": "r{realization}i{initialization}p{physics}f{forcing}",
+          "options": {
+            "realization": {
+              "type": "value",
+              "origin": "internal",
+              "keys": ["realization_index"]
+            },
+            "initialization": {
+              "type": "value",
+              "origin": "common",
+              "keys": ["initialization_index"]
+            },
+            "physics": {
+              "type": "value",
+              "origin": "common",
+              "keys": ["physics_index"]
+            },
+            "forcing": {
+              "type": "value",
+              "origin": "common",
+              "keys": ["forcing_index"]
+            }
+          }
+        }
+      ]
+    },
+    "CORDEX_domain": {
+      "help": "Dictionary which contains, for each context, the associated CORDEX domain.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": [
+            "CORDEX_domain",
+            {
+              "type": "value",
+              "origin": "internal",
+              "keys": ["context"]
+            }
+          ]
+        }
+      ]
+    },
+    "driving_model_id": {
+      "help": "Id of the driving model.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["driving_model_id"]
+        }
+      ]
+    },
+    "driving_model_ensemble_member": {
+      "help": "Member of the simulation which drives the simulation.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["driving_model_ensemble_member"]
+        }
+      ]
+    },
+    "driving_experiment_name": {
+      "help": "Name of the experiment which drives the current simulation.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["driving_experiment_name"]
+        }
+      ]
+    },
+    "driving_experiment": {
+      "help": "Id of the experiment which drives the current simulation.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["driving_experiment"]
+        }
+      ]
+    },
+    "Lambert_conformal_longitude_of_central_meridian": {
+      "help": "Longitude of central meridian of the Lambert conformal projection.",
+      "fatal": true,
+      "forbidden_values": ["", "None", null],
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["Lambert_conformal_longitude_of_central_meridian"]
+        }
+      ]
+    },
+    "Lambert_conformal_standard_parallel": {
+      "help": "Standard parallel of the Lambert conformal projection.",
+      "fatal": true,
+      "forbidden_values": ["", "None", null],
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["Lambert_conformal_standard_parallel"]
+        }
+      ]
+    },
+    "Lambert_conformal_latitude_of_projection_origin": {
+      "help": "Latitude of central meridian of the Lambert conformal projection.",
+      "fatal": true,
+      "forbidden_values": ["", "None", null],
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["Lambert_conformal_latitude_of_projection_origin"]
+        }
+      ]
+    },
+    "rcm_version_id": {
+      "help": "Version id of the regional model used.",
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["rcm_version_id"]
+        }
+      ]
+    }
+  },
+  "project_settings": {
+    "context": {
+      "comments_list": ["DR_version", "CV_version", "conventions_version", "dr2xml_version", "lab_settings", "simulation_settings", "year"],
+      "comments_constraints": {
+        "CV_version": {
+          "help": "Controled vocabulary version used.",
+          "values": ["CMIP6-CV version ??"]
+        },
+        "conventions_version": {
+          "help": "Conventions version used.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "common",
+              "keys": ["conventions_version"],
+              "format": "CMIP6_conventions_version {}"
+            }
+          ]
+        }
+      }
+    },
+    "file_output": {
+      "attrs_constraints": {
+        "name": {
+          "values": [
+            {
+              "type": "func",
+              "origin": "functions_file",
+              "keys": ["build_filename"],
+              "options": {
+                "frequency": {
+                  "type": "value",
+                  "origin": "variable",
+                  "keys": ["frequency"]
+                },
+                "prefix": {
+                  "type": "value",
+                  "origin": "common",
+                  "keys": ["prefix"]
+                },
+                "source_id": {
+                  "type": "value",
+                  "origin": "internal",
+                  "keys": ["source_id"]
+                },
+                "expid_in_filename": {
+                  "type": "value",
+                  "origin": "common",
+                  "keys": ["expid_in_filename"]
+                },
+                "date_range": {
+                  "type": "value",
+                  "origin": "common",
+                  "keys": ["date_range"]
+                },
+                "var_type": {
+                  "type": "value",
+                  "origin": "variable",
+                  "keys": ["type"]
+                },
+                "list_perso_dev_file": {
+                  "type": "value",
+                  "origin": "common",
+                  "keys": ["list_perso_dev_file"]
+                },
+                "label": {
+                  "type": "value",
+                  "origin": "variable",
+                  "keys": ["label"]
+                },
+                "mipVarLabel": {
+                  "type": "value",
+                  "origin": "variable",
+                  "keys": ["mipVarLabel"]
+                },
+                "use_cmorvar": {
+                  "type": "value",
+                  "origin": "internal",
+                  "keys": ["use_cmorvar_label_in_filename"]
+                },
+                "CORDEX_domain": {
+                  "type": "value",
+                  "origin": "common",
+                  "keys": ["CORDEX_domain"]
+                },
+                "driving_model_id": {
+                  "type": "value",
+                  "origin": "common",
+                  "keys": ["driving_model_id"]
+                },
+                "driving_model_ensemble_member": {
+                  "type": "value",
+                  "origin": "common",
+                  "keys": ["driving_model_ensemble_member"]
+                },
+                "rcm_version_id": {
+                  "type": "value",
+                  "origin": "common",
+                  "keys": ["rcm_version_id"]
+                }
+              }
+            }
+          ]
+        }
+      },
+      "vars_list": ["activity_id", "contact", "data_specs_version", "dr2xml_version", "expid_in_filename",
+                   "external_variables", "frequency", "grid", "grid_label", "nominal_resolution", "comment", "history",
+                   "institution_id", "CORDEX_domain", "driving_model_id", "driving_model_ensemble_member",
+                   "driving_experiment_name", "driving_experiment", "Lambert_conformal_longitude_of_central_meridian",
+                   "Lambert_conformal_standard_parallel", "Lambert_conformal_latitude_of_projection_origin",
+                   "institution", "parent_experiment_id", "parent_mip_era", "parent_activity_id", "parent_source_id",
+                   "parent_time_units", "parent_variant_label", "branch_time_in_parent", "branch_time_in_child",
+                   "product", "realization_index", "realm", "references", "source", "source_id", "table_id", "title",
+                   "variable_id"],
+      "vars_constraints": {
+        "variable_id": {
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["variable_id"]
+            },
+            {
+              "type": "value",
+              "origin": "variable",
+              "keys": ["mipVarLabel"]
+            }
+          ]
+        },
+        "institution_id": {
+          "output_key": "institute_id"
+        },
+        "CORDEX_domain": {
+          "help": "Dictionary which contains, for each context, the associated CORDEX domain.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["CORDEX_domain"]
+            },
+            {
+              "type": "value",
+              "origin": "common",
+              "keys": ["CORDEX_domain"]
+            }
+          ]
+        },
+        "driving_model_id": {
+          "help": "Id of the driving model.",
+          "fatal": true,
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["driving_model_id"]
+            },
+            {
+              "type": "value",
+              "origin": "common",
+              "keys": ["driving_model_id"]
+            }
+          ]
+        },
+        "driving_model_ensemble_member": {
+          "help": "Member of the simulation which drives the simulation.",
+          "fatal": true,
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["driving_model_ensemble_member"]
+            },
+            {
+              "type": "value",
+              "origin": "common",
+              "keys": ["driving_model_ensemble_member"]
+            }
+          ]
+        },
+        "driving_experiment_name": {
+          "help": "Name of the experiment which drives the current simulation.",
+          "fatal": true,
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["driving_experiment_name"]
+            },
+            {
+              "type": "value",
+              "origin": "common",
+              "keys": ["driving_experiment_name"]
+            }
+          ]
+        },
+        "driving_experiment": {
+          "help": "Id of the experiment which drives the current simulation.",
+          "fatal": true,
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["driving_experiment"]
+            },
+            {
+              "type": "value",
+              "origin": "common",
+              "keys": ["driving_experiment"]
+            }
+          ]
+        },
+        "Lambert_conformal_longitude_of_central_meridian": {
+          "help": "Longitude of central meridian of the Lambert conformal projection.",
+          "forbidden_values": ["", "None", null],
+          "values": [
+            {
+              "type": "condition",
+              "value_to_check": {
+                "type": "value",
+                "origin": "internal",
+                "keys": ["context"]
+              },
+              "check_to_perform": "eq",
+              "reference_values": ["surfex"],
+              "values": [
+                {
+                  "type": "value",
+                  "origin": "attrs",
+                  "keys": ["Lambert_conformal_longitude_of_central_meridian"]
+                },
+                {
+                  "type": "value",
+                  "origin": "common",
+                  "keys": ["Lambert_conformal_longitude_of_central_meridian"]
+                }
+              ]
+            }
+          ]
+        },
+        "Lambert_conformal_standard_parallel": {
+          "help": "Standard parallel of the Lambert conformal projection.",
+          "forbidden_values": ["", "None", null],
+          "values": [
+            {
+              "type": "condition",
+              "value_to_check": {
+                "type": "value",
+                "origin": "internal",
+                "keys": ["context"]
+              },
+              "check_to_perform": "eq",
+              "reference_values": ["surfex"],
+              "values": [
+                {
+                  "type": "value",
+                  "origin": "attrs",
+                  "keys": ["Lambert_conformal_standard_parallel"]
+                },
+                {
+                  "type": "value",
+                  "origin": "common",
+                  "keys": ["Lambert_conformal_standard_parallel"]
+                }
+              ]
+            }
+          ]
+        },
+        "Lambert_conformal_latitude_of_projection_origin": {
+          "help": "Latitude of central meridian of the Lambert conformal projection.",
+          "forbidden_values": ["", "None", null],
+          "values": [
+            {
+              "type": "condition",
+              "value_to_check": {
+                "type": "value",
+                "origin": "internal",
+                "keys": ["context"]
+              },
+              "check_to_perform": "eq",
+              "reference_values": ["surfex"],
+              "values": [
+                {
+                  "type": "value",
+                  "origin": "attrs",
+                  "keys": ["Lambert_conformal_latitude_of_projection_origin"]
+                },
+                {
+                  "type": "value",
+                  "origin": "common",
+                  "keys": ["Lambert_conformal_latitude_of_projection_origin"]
+                }
+              ]
+            }
+          ]
+        },
+        "product": {
+          "help": "Id of the driving model.",
+          "fatal": true,
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["product"]
+            },
+            "output"
+          ]
+        },
+        "source": {
+          "fatal": true,
+          "output_key": "project_id"
+        },
+        "source_id": {
+          "output_key": "model_id"
+        },
+        "title": {
+          "values": [
+            {
+              "type": "func",
+              "origin": "self",
+              "keys": ["format"],
+              "template": "{source} model output prepared for {project} and {activity} / {expid} simulation",
+              "options": {
+                "source": {
+                  "type": "value",
+                  "origin": "internal",
+                  "keys": ["source_id"]
+                },
+                "project": "CMIP6",
+                "activity": {
+                  "type": "value",
+                  "origin": "common",
+                  "keys": ["activity_id"]
+                },
+                "expid": {
+                  "type": "value",
+                  "origin": "simulation",
+                  "keys": ["expid_in_filename"]
+                }
+              }
+            },
+            {
+              "type": "func",
+              "origin": "self",
+              "keys": ["format"],
+              "template": "{source} model output prepared for {project} / {activity} {expid}",
+              "options": {
+                "source": {
+                  "type": "value",
+                  "origin": "internal",
+                  "keys": ["source_id"]
+                },
+                "project": "CMIP6",
+                "activity": {
+                  "type": "value",
+                  "origin": "common",
+                  "keys": ["activity_id"]
+                },
+                "expid": {
+                  "type": "value",
+                  "origin": "internal",
+                  "keys": ["experiment_id"]
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "field_output": {
+      "attrs_constraints": {
+        "cell_methods": {
+          "corrections": {
+            "area: time: mean": "time: mean"
+          }
+        }
+      },
+      "vars_list": ["comment", "standard_name", "description", "long_name", "history", "units",
+                   "cell_methods", "cell_measures", "flag_meanings", "flag_values", "grid_mapping"],
+      "vars_constraints": {
+        "grid_mapping": {
+          "help": "Grid mapping associated with the file.",
+          "values": [
+            {
+              "type": "condition",
+              "value_to_check": {
+                "type": "value",
+                "origin": "internal",
+                "keys": ["context"]
+              },
+              "check_to_perform": "eq",
+              "reference_values": ["surfex"],
+              "values": [
+                {
+                  "type": "value",
+                  "origin": "attrs",
+                  "keys": ["grid_mapping"]
+                },
+                "Lambert_Conformal"
+              ]
+            }
+          ]
+        },
+        "cell_methods": {
+          "corrections": {
+            "area: time: mean": "time: mean"
+          }
+        }
+      }
+    }
+  }
+}
