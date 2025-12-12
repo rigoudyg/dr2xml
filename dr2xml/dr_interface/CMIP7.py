@@ -166,9 +166,11 @@ class DataRequest(DataRequestBasic):
         internal_dict = get_settings_values("internal")
         request_dict_all_of_any = dict(opportunities=internal_dict["select_included_opportunities"],
                                        variable_groups=internal_dict["select_included_vargroups"],
+                                       experiment_groups=internal_dict["select_included_expgroups"],
                                        max_priority_level=internal_dict["select_max_priority"])
         not_request_dict_any = dict(opportunity=internal_dict["select_excluded_opportunities"],
-                                    variable_groups=internal_dict["select_excluded_vargroups"])
+                                    variable_groups=internal_dict["select_excluded_vargroups"],
+                                    experiment_groups=internal_dict["select_excluded_expgroups"])
         select_mips = internal_dict["select_mips"]
         if len(select_mips) > 0:
             request_dict_all_of_any["mip"] = select_mips

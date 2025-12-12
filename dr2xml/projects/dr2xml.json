@@ -355,6 +355,30 @@
         false
       ]
     },
+    "excluded_expgroups_lset": {
+      "help": "List of the experiments groups that will be excluded from outputs from laboratory settings.",
+      "target_type": "list",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["excluded_expgroups"]
+        },
+        []
+      ]
+    },
+    "excluded_expgroups_sset": {
+      "help": "List of the experiments groups that will be excluded from outputs from simulation settings.",
+      "target_type": "list",
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["excluded_expgroups"]
+        },
+        []
+      ]
+    },
     "excluded_opportunities_lset": {
       "help": "List of the opportunities that will be excluded from outputs from laboratory settings.",
       "target_type": "list",
@@ -653,6 +677,34 @@
           "type": "value",
           "origin": "laboratory",
           "keys": ["grouped_vars_per_file"]
+        },
+        []
+      ]
+    },
+    "included_expgroups": {
+      "help": "List of experiments groups that will be processed (all others will not).",
+      "target_type": "list",
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["included_expgroups"]
+        },
+        {
+          "type": "value",
+          "origin": "internal",
+          "keys": ["included_expgroups_lset"]
+        }
+      ]
+    },
+    "included_expgroups_lset": {
+      "help": "List of experiments groups that will be processed (all others will not) from laboratory settings.",
+      "target_type": "list",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["included_expgroups"]
         },
         []
       ]
@@ -1184,6 +1236,56 @@
         }
       ]
     },
+    "select_excluded_expgroups": {
+      "help": "Excluded experiments groups for variable selection.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_expt"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [true],
+          "values": [
+            {
+              "type": "merge",
+              "values": [
+                {
+                  "type": "value",
+                  "origin": "internal",
+                  "keys": ["excluded_expgroups_lset"]
+                },
+                {
+                  "type": "value",
+                  "origin": "internal",
+                  "keys": ["excluded_expgroups_sset"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_expt"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [false],
+          "values": [
+            {
+              "type": "value",
+              "origin": "internal",
+              "keys": ["excluded_expgroups_lset"]
+            }
+          ]
+        }
+      ]
+    },
     "select_excluded_opportunities": {
       "help": "Excluded opportunities for variable selection.",
       "fatal": true,
@@ -1468,6 +1570,46 @@
               "type": "value",
               "origin": "internal",
               "keys": ["excluded_vars_lset"]
+            }
+          ]
+        }
+      ]
+    },
+    "select_included_expgroups": {
+      "help": "Included experiments groups for variable selection.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_expt"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [true],
+          "values": [
+            {
+              "type": "value",
+              "origin": "internal",
+              "keys": ["included_expgroups"]
+            }
+          ]
+        },
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_expt"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [false],
+          "values": [
+            {
+              "type": "value",
+              "origin": "internal",
+              "keys": ["included_expgroups_lset"]
             }
           ]
         }
