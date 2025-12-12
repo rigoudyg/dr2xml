@@ -40,4 +40,4 @@ jobs:
       run: |
         export CMIP7_DR_API_CONFIGFILE=$PWD/dr2xml/dr_interface/CMIP7_config
         python3 -m data_request_api.command_line.config offline true
-        ./launch_test.sh
+        bash launch_tests.sh
