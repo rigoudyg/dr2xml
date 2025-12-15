@@ -18,7 +18,7 @@ from .definition import SimpleObject
 from .definition import SimpleCMORVar as SimpleCMORVarBasic
 from .definition import SimpleDim as SimpleDimBasic
 from dr2xml.settings_interface import get_settings_values
-from ..utils import Dr2xmlError, is_elt_applicable
+from dr2xml.utils import Dr2xmlError, is_elt_applicable
 
 data_request_path = get_settings_values("init", "data_request_path")
 sys.path.append(data_request_path)

@@ -1,6 +1,6 @@
 {
   "parent_project_settings": "basics",
-  "functions_file": "CMIP6_esgvoc_func.py",
+  "functions_file": "CMIP7_esgvoc_func.py",
   "init": {
     "project": {
       "values": [

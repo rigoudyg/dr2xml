@@ -28,6 +28,8 @@ For parameter context, found value nemo
 For parameter debug_parsing, found value False
 For parameter dr2xml_manages_enddate, found value True
 For parameter end_year, found value False
+For parameter excluded_expgroups_lset, found value []
+For parameter excluded_expgroups_sset, found value []
 For parameter excluded_opportunities_lset, found value []
 For parameter excluded_opportunities_sset, found value []
 For parameter excluded_pairs_lset, found value []
@@ -51,6 +53,8 @@ Could not find a proper value for grid_prefix
 For parameter grids, found value None
 For parameter grids_dev, found value {}
 For parameter grouped_vars_per_file, found value []
+Could not find a proper value for included_expgroups
+For parameter included_expgroups_lset, found value []
 Could not find a proper value for included_opportunities
 For parameter included_opportunities_lset, found value []
 For parameter included_request_links, found value []
@@ -85,6 +89,7 @@ For parameter required_model_components, found value []
 For parameter sampling_timestep, found value None
 Could not find a proper value for sectors
 For parameter select, found value no
+Could not find a proper value for select_excluded_expgroups
 Could not find a proper value for select_excluded_opportunities
 Could not find a proper value for select_excluded_pairs
 Could not find a proper value for select_excluded_request_links
@@ -92,6 +97,7 @@ Could not find a proper value for select_excluded_tables
 Could not find a proper value for select_excluded_vargroups
 Could not find a proper value for select_excluded_vars
 Could not find a proper value for select_grid_choice
+Could not find a proper value for select_included_expgroups
 Could not find a proper value for select_included_opportunities
 Could not find a proper value for select_included_request_links
 Could not find a proper value for select_included_tables
@@ -123,12 +129,14 @@ For parameter year, found value None
 For parameter zg_field_name, found value zg
 Could not find a proper value for branch_year_in_child
 For parameter grid_prefix, found value CMIP7_
+For parameter included_expgroups, found value []
 For parameter included_opportunities, found value []
 For parameter included_tables, found value []
 For parameter included_vargroups, found value []
 For parameter included_vars, found value []
 For parameter max_priority, found value 3
 Could not find a proper value for sectors
+For parameter select_excluded_expgroups, found value []
 For parameter select_excluded_opportunities, found value []
 For parameter select_excluded_pairs, found value []
 For parameter select_excluded_request_links, found value None
@@ -136,6 +144,7 @@ For parameter select_excluded_tables, found value []
 For parameter select_excluded_vargroups, found value []
 For parameter select_excluded_vars, found value []
 For parameter select_grid_choice, found value LR
+For parameter select_included_expgroups, found value []
 For parameter select_included_opportunities, found value []
 For parameter select_included_request_links, found value None
 For parameter select_included_tables, found value []
@@ -2411,6 +2420,8 @@ For parameter context, found value orchidee
 For parameter debug_parsing, found value False
 For parameter dr2xml_manages_enddate, found value True
 For parameter end_year, found value False
+For parameter excluded_expgroups_lset, found value []
+For parameter excluded_expgroups_sset, found value []
 For parameter excluded_opportunities_lset, found value []
 For parameter excluded_opportunities_sset, found value []
 For parameter excluded_pairs_lset, found value []
@@ -2434,6 +2445,8 @@ Could not find a proper value for grid_prefix
 For parameter grids, found value None
 For parameter grids_dev, found value {}
 For parameter grouped_vars_per_file, found value []
+Could not find a proper value for included_expgroups
+For parameter included_expgroups_lset, found value []
 Could not find a proper value for included_opportunities
 For parameter included_opportunities_lset, found value []
 For parameter included_request_links, found value []
@@ -2468,6 +2481,7 @@ For parameter required_model_components, found value []
 For parameter sampling_timestep, found value None
 Could not find a proper value for sectors
 For parameter select, found value no
+Could not find a proper value for select_excluded_expgroups
 Could not find a proper value for select_excluded_opportunities
 Could not find a proper value for select_excluded_pairs
 Could not find a proper value for select_excluded_request_links
@@ -2475,6 +2489,7 @@ Could not find a proper value for select_excluded_tables
 Could not find a proper value for select_excluded_vargroups
 Could not find a proper value for select_excluded_vars
 Could not find a proper value for select_grid_choice
+Could not find a proper value for select_included_expgroups
 Could not find a proper value for select_included_opportunities
 Could not find a proper value for select_included_request_links
 Could not find a proper value for select_included_tables
@@ -2506,12 +2521,14 @@ For parameter year, found value None
 For parameter zg_field_name, found value zg
 Could not find a proper value for branch_year_in_child
 For parameter grid_prefix, found value CMIP7_
+For parameter included_expgroups, found value []
 For parameter included_opportunities, found value []
 For parameter included_tables, found value []
 For parameter included_vargroups, found value []
 For parameter included_vars, found value []
 For parameter max_priority, found value 3
 Could not find a proper value for sectors
+For parameter select_excluded_expgroups, found value []
 For parameter select_excluded_opportunities, found value []
 For parameter select_excluded_pairs, found value []
 For parameter select_excluded_request_links, found value None
@@ -2519,6 +2536,7 @@ For parameter select_excluded_tables, found value []
 For parameter select_excluded_vargroups, found value []
 For parameter select_excluded_vars, found value []
 For parameter select_grid_choice, found value LR
+For parameter select_included_expgroups, found value []
 For parameter select_included_opportunities, found value []
 For parameter select_included_request_links, found value None
 For parameter select_included_tables, found value []
@@ -3487,6 +3505,8 @@ For parameter context, found value LMDZ
 For parameter debug_parsing, found value False
 For parameter dr2xml_manages_enddate, found value True
 For parameter end_year, found value False
+For parameter excluded_expgroups_lset, found value []
+For parameter excluded_expgroups_sset, found value []
 For parameter excluded_opportunities_lset, found value []
 For parameter excluded_opportunities_sset, found value []
 For parameter excluded_pairs_lset, found value []
@@ -3510,6 +3530,8 @@ Could not find a proper value for grid_prefix
 For parameter grids, found value None
 For parameter grids_dev, found value {}
 For parameter grouped_vars_per_file, found value []
+Could not find a proper value for included_expgroups
+For parameter included_expgroups_lset, found value []
 Could not find a proper value for included_opportunities
 For parameter included_opportunities_lset, found value []
 For parameter included_request_links, found value []
@@ -3544,6 +3566,7 @@ For parameter required_model_components, found value []
 For parameter sampling_timestep, found value None
 Could not find a proper value for sectors
 For parameter select, found value no
+Could not find a proper value for select_excluded_expgroups
 Could not find a proper value for select_excluded_opportunities
 Could not find a proper value for select_excluded_pairs
 Could not find a proper value for select_excluded_request_links
@@ -3551,6 +3574,7 @@ Could not find a proper value for select_excluded_tables
 Could not find a proper value for select_excluded_vargroups
 Could not find a proper value for select_excluded_vars
 Could not find a proper value for select_grid_choice
+Could not find a proper value for select_included_expgroups
 Could not find a proper value for select_included_opportunities
 Could not find a proper value for select_included_request_links
 Could not find a proper value for select_included_tables
@@ -3582,12 +3606,14 @@ For parameter year, found value None
 For parameter zg_field_name, found value zg
 Could not find a proper value for branch_year_in_child
 For parameter grid_prefix, found value CMIP7_
+For parameter included_expgroups, found value []
 For parameter included_opportunities, found value []
 For parameter included_tables, found value []
 For parameter included_vargroups, found value []
 For parameter included_vars, found value []
 For parameter max_priority, found value 3
 Could not find a proper value for sectors
+For parameter select_excluded_expgroups, found value []
 For parameter select_excluded_opportunities, found value []
 For parameter select_excluded_pairs, found value []
 For parameter select_excluded_request_links, found value None
@@ -3595,6 +3621,7 @@ For parameter select_excluded_tables, found value []
 For parameter select_excluded_vargroups, found value []
 For parameter select_excluded_vars, found value []
 For parameter select_grid_choice, found value LR
+For parameter select_included_expgroups, found value []
 For parameter select_included_opportunities, found value []
 For parameter select_included_request_links, found value None
 For parameter select_included_tables, found value []

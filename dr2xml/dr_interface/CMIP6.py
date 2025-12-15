@@ -21,8 +21,8 @@ from .definition import DataRequest as DataRequestBasic
 from .definition import SimpleObject
 from .definition import SimpleDim as SimpleDimBasic
 from .definition import SimpleCMORVar as SimpleCMORVarBasic
-from ..projects.dr2xml import format_sizes
-from ..utils import Dr2xmlError, print_struct, is_elt_applicable, convert_string_to_year
+from dr2xml.projects.dr2xml_func import format_sizes
+from dr2xml.utils import Dr2xmlError, print_struct, is_elt_applicable, convert_string_to_year
 from dr2xml.settings_interface import get_settings_values, get_values_from_internal_settings
 
 data_request_path = get_settings_values("init", "data_request_path")
