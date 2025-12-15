@@ -1102,7 +1102,7 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 1800 s </variable>
 			</field>
 		</file>
-		<file id="tos_NonemonPt_gn" name="IOXDIRtos_NonemonPt_CNRM-ESM2-1_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_start_offset="1mo" split_end_offset="0s" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="tos_Nonemon_gn" name="IOXDIRtos_Nonemon_CNRM-ESM2-1_historical_r1i1p1f2_gn_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_start_offset="1mo" split_end_offset="0s" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
@@ -1112,7 +1112,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
 			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
-			<variable name="frequency" type="string"> monPt </variable>
+			<variable name="frequency" type="string"> mon </variable>
 			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/False.CNRM-CERFACS.CNRM-ESM2-1.historical.none.r1i1p1f2 </variable>
 			<variable name="grid" type="string"> native ocean tri-polar grid with 105 k ocean cells </variable>
 			<variable name="grid_label" type="string"> gn </variable>
@@ -1149,7 +1149,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="source_type" type="string"> AOGCM BGC AER CHEM </variable>
 			<variable name="sub_experiment_id" type="string"> none </variable>
 			<variable name="sub_experiment" type="string"> none </variable>
-			<variable name="table_id" type="string"> NonemonPt </variable>
+			<variable name="table_id" type="string"> Nonemon </variable>
 			<variable name="title" type="string"> CNRM-ESM2-1 model output prepared for CMIP6 / CMIP historical </variable>
 			<variable name="variable_id" type="string"> tos </variable>
 			<variable name="variant_label" type="string"> r1i1p1f2 </variable>

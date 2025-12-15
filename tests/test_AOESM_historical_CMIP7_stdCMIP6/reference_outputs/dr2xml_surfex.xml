@@ -85,73 +85,6 @@ seaIce: Gelato 6.1',
 'variant_info' = ''}-->
 	<!--Year processed 1850-->
 	<file_definition type="one_file" enabled="true">
-		<file id="albsrfc_day_gr" name="IOXDIRalbsrfc_day_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
-			<variable name="activity_id" type="string"> CMIP </variable>
-			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
-			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
-			<variable name="dr2xml_version" type="string"> current_version </variable>
-			<variable name="experiment_id" type="string"> historical </variable>
-			<variable name="description" type="string"> CMIP6 historical </variable>
-			<variable name="title" type="string"> CMIP6 historical </variable>
-			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
-			<variable name="forcing_index" type="int"> 2 </variable>
-			<variable name="frequency" type="string"> day </variable>
-			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/DEV.CNRM-CERFACS.CNRM-ESM2-1.historical.none.r1i1p1f2 </variable>
-			<variable name="grid" type="string"> data regridded to a T127 gaussian grid (128x256 latlon) from a native atmosphere T127l reduced gaussian grid </variable>
-			<variable name="grid_label" type="string"> gr </variable>
-			<variable name="nominal_resolution" type="string"> 250 km </variable>
-			<variable name="history" type="string"> none </variable>
-			<variable name="initialization_index" type="int"> 1 </variable>
-			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
-			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
-			<variable name="license" type="string"> CMIP6 model data produced by CNRM-CERFACS is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (https://creativecommons.org/licenses). Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment. Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file) and at http://www.umr-cnrm.fr/cmip6/. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law. </variable>
-			<variable name="mip_era" type="string"> DEV </variable>
-			<variable name="parent_experiment_id" type="string"> piControl </variable>
-			<variable name="parent_mip_era" type="string"> DEV </variable>
-			<variable name="parent_activity_id" type="string"> CMIP </variable>
-			<variable name="parent_source_id" type="string"> CNRM-ESM2-1 </variable>
-			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
-			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="branch_method" type="string"> standard </variable>
-			<variable name="branch_time_in_parent" type="double"> 36524.0D </variable>
-			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
-			<variable name="physics_index" type="int"> 1 </variable>
-			<variable name="product" type="string"> model-output </variable>
-			<variable name="realization_index" type="int"> 1 </variable>
-			<variable name="realm" type="string"> land </variable>
-			<variable name="references" type="string"> http://www.umr-cnrm.fr/cmip6/references </variable>
-			<variable name="source" type="string"> CNRM-ESM2-1 (2017):
-aerosol: TACTIC_v2
-atmos: Arpege 6.3 (T127; Gaussian Reduced with 24572 grid points in total distributed over 128 latitude circles (with 256 grid points per latitude circle between 30degN and 30degS reducing to 20 grid points per latitude circle at 88.9degN and 88.9degS); 91 levels; top level 78.4 km)
-atmosChem: REPROBUS-C_v2
-land: Surfex 8.0c
-ocean: Nemo 3.6 (eORCA1, tripolar primarily 1deg; 362 x 294 longitude/latitude; 75 levels; top grid cell 0-1 m)
-ocnBgchem: Pisces 2.s
-seaIce: Gelato 6.1 </variable>
-			<variable name="source_id" type="string"> CNRM-ESM2-1 </variable>
-			<variable name="source_type" type="string"> AOGCM BGC AER CHEM </variable>
-			<variable name="sub_experiment_id" type="string"> none </variable>
-			<variable name="sub_experiment" type="string"> none </variable>
-			<variable name="table_id" type="string"> day </variable>
-			<variable name="title" type="string"> CNRM-ESM2-1 model output prepared for CMIP6 / CMIP historical </variable>
-			<variable name="variable_id" type="string"> albsrfc </variable>
-			<variable name="variant_label" type="string"> r1i1p1f2 </variable>
-			<variable name="CMIP6_CV_version" type="string"> cv=6.2.3.0-7-g2019642 </variable>
-			<variable name="EXPID" type="string"> CNRM-ESM2-1_historical_r1i1p1f2_v2 </variable>
-			<variable name="dr2xml_md5sum" type="string"> 7040f60f6bf3118dc6c58b9fb8727d87 </variable>
-			<variable name="arpege_minor_version" type="string"> 6.3.2 </variable>
-			<variable name="nemo_gelato_commit" type="string"> 49095b3accd5d4c_6524fe19b00467a </variable>
-			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="albsrfc_average" name="albsrfc" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average">
-				<variable name="standard_name" type="string"> albsrfc </variable>
-				<variable name="description" type="string"> None </variable>
-				<variable name="long_name" type="string"> surface albedo </variable>
-				<variable name="history" type="string"> none </variable>
-				<variable name="units" type="string"> fraction </variable>
-				<variable name="cell_methods" type="string"> time: mean </variable>
-				<variable name="interval_operation" type="string"> 900 s </variable>
-			</field>
-		</file>
 		<file id="pr_day_gr" name="IOXDIRpr_day_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1d" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo%d" split_start_offset="12h" split_end_offset="-12h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
@@ -962,6 +895,72 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="units" type="string"> % </variable>
 				<variable name="cell_methods" type="string"> area: mean </variable>
 				<variable name="cell_measures" type="string"> area: areacella </variable>
+			</field>
+		</file>
+		<file id="wilt_hr_gr" name="IOXDIRwilt_hr_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1h" append="true" output_level="10" compression_level="4" split_freq="5y" split_freq_format="%y%mo%d%h%mi" split_start_offset="30mi" split_end_offset="-30mi" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+			<variable name="activity_id" type="string"> CMIP </variable>
+			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
+			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
+			<variable name="dr2xml_version" type="string"> current_version </variable>
+			<variable name="experiment_id" type="string"> historical </variable>
+			<variable name="description" type="string"> CMIP6 historical </variable>
+			<variable name="title" type="string"> CMIP6 historical </variable>
+			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="forcing_index" type="int"> 2 </variable>
+			<variable name="frequency" type="string"> 1hr </variable>
+			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/PERSO.CNRM-CERFACS.CNRM-ESM2-1.historical.none.r1i1p1f2 </variable>
+			<variable name="grid" type="string"> data regridded to a T127 gaussian grid (128x256 latlon) from a native atmosphere T127l reduced gaussian grid </variable>
+			<variable name="grid_label" type="string"> gr </variable>
+			<variable name="nominal_resolution" type="string"> 250 km </variable>
+			<variable name="history" type="string"> none </variable>
+			<variable name="initialization_index" type="int"> 1 </variable>
+			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
+			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
+			<variable name="license" type="string"> CMIP6 model data produced by CNRM-CERFACS is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (https://creativecommons.org/licenses). Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment. Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file) and at http://www.umr-cnrm.fr/cmip6/. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law. </variable>
+			<variable name="mip_era" type="string"> PERSO </variable>
+			<variable name="parent_experiment_id" type="string"> piControl </variable>
+			<variable name="parent_mip_era" type="string"> PERSO </variable>
+			<variable name="parent_activity_id" type="string"> CMIP </variable>
+			<variable name="parent_source_id" type="string"> CNRM-ESM2-1 </variable>
+			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
+			<variable name="parent_variant_label" type="string"> r1i1p1f2 </variable>
+			<variable name="branch_method" type="string"> standard </variable>
+			<variable name="branch_time_in_parent" type="double"> 36524.0D </variable>
+			<variable name="branch_time_in_child" type="double"> 0.0D </variable>
+			<variable name="physics_index" type="int"> 1 </variable>
+			<variable name="product" type="string"> model-output </variable>
+			<variable name="realization_index" type="int"> 1 </variable>
+			<variable name="realm" type="string"> land </variable>
+			<variable name="references" type="string"> http://www.umr-cnrm.fr/cmip6/references </variable>
+			<variable name="source" type="string"> CNRM-ESM2-1 (2017):
+aerosol: TACTIC_v2
+atmos: Arpege 6.3 (T127; Gaussian Reduced with 24572 grid points in total distributed over 128 latitude circles (with 256 grid points per latitude circle between 30degN and 30degS reducing to 20 grid points per latitude circle at 88.9degN and 88.9degS); 91 levels; top level 78.4 km)
+atmosChem: REPROBUS-C_v2
+land: Surfex 8.0c
+ocean: Nemo 3.6 (eORCA1, tripolar primarily 1deg; 362 x 294 longitude/latitude; 75 levels; top grid cell 0-1 m)
+ocnBgchem: Pisces 2.s
+seaIce: Gelato 6.1 </variable>
+			<variable name="source_id" type="string"> CNRM-ESM2-1 </variable>
+			<variable name="source_type" type="string"> AOGCM BGC AER CHEM </variable>
+			<variable name="sub_experiment_id" type="string"> none </variable>
+			<variable name="sub_experiment" type="string"> none </variable>
+			<variable name="table_id" type="string"> hr </variable>
+			<variable name="title" type="string"> CNRM-ESM2-1 model output prepared for CMIP6 / CMIP historical </variable>
+			<variable name="variable_id" type="string"> wilt </variable>
+			<variable name="variant_label" type="string"> r1i1p1f2 </variable>
+			<variable name="CMIP6_CV_version" type="string"> cv=6.2.3.0-7-g2019642 </variable>
+			<variable name="EXPID" type="string"> CNRM-ESM2-1_historical_r1i1p1f2_v2 </variable>
+			<variable name="dr2xml_md5sum" type="string"> 7040f60f6bf3118dc6c58b9fb8727d87 </variable>
+			<variable name="arpege_minor_version" type="string"> 6.3.2 </variable>
+			<variable name="nemo_gelato_commit" type="string"> 49095b3accd5d4c_6524fe19b00467a </variable>
+			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
+			<field field_ref="wilt_average" name="wilt" grid_ref="NATURE_glayers_complete" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1h">				@wilt_average
+				<variable name="comment" type="string"> 100 * ISBA Wilting Point in m3/m3 </variable>
+				<variable name="description" type="string"> None </variable>
+				<variable name="long_name" type="string"> None </variable>
+				<variable name="history" type="string"> none </variable>
+				<variable name="cell_methods" type="string"> time: mean </variable>
+				<variable name="interval_operation" type="string"> 900 s </variable>
 			</field>
 		</file>
 		<file id="ta_Amon_gr" name="IOXDIRta_Amon_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="100y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
@@ -1849,7 +1848,7 @@ seaIce: Gelato 6.1 </variable>
 				<variable name="interval_operation" type="string"> 900 s </variable>
 			</field>
 		</file>
-		<file id="albsrfc_mon_gr" name="IOXDIRalbsrfc_mon_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="1mo" append="true" output_level="10" compression_level="4" split_freq="500y" split_freq_format="%y%mo" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
+		<file id="wilt_6hr_gr" name="IOXDIRwilt_6hr_CNRM-ESM2-1_historical_r1i1p1f2_gr_%start_date%-%end_date%" output_freq="6h" append="true" output_level="10" compression_level="4" split_freq="25y" split_freq_format="%y%mo%d%h%mi" split_start_offset="3h" split_end_offset="-3h" split_last_date="1851-01-01 00:00:00" time_units="days" time_counter_name="time" time_counter="exclusive" time_stamp_name="creation_date" time_stamp_format="%Y-%m-%dT%H:%M:%SZ" uuid_name="tracking_id" uuid_format="hdl:21.14100/%uuid%" convention_str="CF-1.7 CMIP-6.2">
 			<variable name="activity_id" type="string"> CMIP </variable>
 			<variable name="contact" type="string"> contact.cmip@meteo.fr </variable>
 			<variable name="data_specs_version" type="string"> Software current_cmip7_dr_software - Content test </variable>
@@ -1859,8 +1858,8 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
 			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
-			<variable name="frequency" type="string"> mon </variable>
-			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/PERSO.CNRM-CERFACS.CNRM-ESM2-1.historical.none.r1i1p1f2 </variable>
+			<variable name="frequency" type="string"> 6hr </variable>
+			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/DEV.CNRM-CERFACS.CNRM-ESM2-1.historical.none.r1i1p1f2 </variable>
 			<variable name="grid" type="string"> data regridded to a T127 gaussian grid (128x256 latlon) from a native atmosphere T127l reduced gaussian grid </variable>
 			<variable name="grid_label" type="string"> gr </variable>
 			<variable name="nominal_resolution" type="string"> 250 km </variable>
@@ -1869,9 +1868,9 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="institution_id" type="string"> CNRM-CERFACS </variable>
 			<variable name="institution" type="string"> CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France) </variable>
 			<variable name="license" type="string"> CMIP6 model data produced by CNRM-CERFACS is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (https://creativecommons.org/licenses). Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing CMIP6 output, including citation requirements and proper acknowledgment. Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file) and at http://www.umr-cnrm.fr/cmip6/. The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law. </variable>
-			<variable name="mip_era" type="string"> PERSO </variable>
+			<variable name="mip_era" type="string"> DEV </variable>
 			<variable name="parent_experiment_id" type="string"> piControl </variable>
-			<variable name="parent_mip_era" type="string"> PERSO </variable>
+			<variable name="parent_mip_era" type="string"> DEV </variable>
 			<variable name="parent_activity_id" type="string"> CMIP </variable>
 			<variable name="parent_source_id" type="string"> CNRM-ESM2-1 </variable>
 			<variable name="parent_time_units" type="string"> days since 1850-01-01 00:00:00 </variable>
@@ -1896,9 +1895,9 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="source_type" type="string"> AOGCM BGC AER CHEM </variable>
 			<variable name="sub_experiment_id" type="string"> none </variable>
 			<variable name="sub_experiment" type="string"> none </variable>
-			<variable name="table_id" type="string"> mon </variable>
+			<variable name="table_id" type="string"> 6hr </variable>
 			<variable name="title" type="string"> CNRM-ESM2-1 model output prepared for CMIP6 / CMIP historical </variable>
-			<variable name="variable_id" type="string"> albsrfc </variable>
+			<variable name="variable_id" type="string"> wilt </variable>
 			<variable name="variant_label" type="string"> r1i1p1f2 </variable>
 			<variable name="CMIP6_CV_version" type="string"> cv=6.2.3.0-7-g2019642 </variable>
 			<variable name="EXPID" type="string"> CNRM-ESM2-1_historical_r1i1p1f2_v2 </variable>
@@ -1906,10 +1905,13 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="arpege_minor_version" type="string"> 6.3.2 </variable>
 			<variable name="nemo_gelato_commit" type="string"> 49095b3accd5d4c_6524fe19b00467a </variable>
 			<variable name="xios_commit" type="string"> 1442-shuffle </variable>
-			<field field_ref="albsrfc_average" name="albsrfc" grid_ref="FULL_grid_complete" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="1mo">				@albsrfc_average
+			<field field_ref="wilt_average" name="wilt" grid_ref="NATURE_glayers_FULL" detect_missing_value="True" default_value="1.e+20" prec="4" cell_methods="time: mean" cell_methods_mode="overwrite" operation="average" freq_op="6h">				@wilt_average
+				<variable name="comment" type="string"> 100 * ISBA Wilting Point in m3/m3 </variable>
+				<variable name="standard_name" type="string"> wilt </variable>
 				<variable name="description" type="string"> None </variable>
-				<variable name="long_name" type="string"> None </variable>
+				<variable name="long_name" type="string"> Wilting Point over land </variable>
 				<variable name="history" type="string"> none </variable>
+				<variable name="units" type="string"> fraction </variable>
 				<variable name="cell_methods" type="string"> time: mean </variable>
 				<variable name="interval_operation" type="string"> 900 s </variable>
 			</field>
@@ -1919,7 +1921,6 @@ seaIce: Gelato 6.1 </variable>
 		</file>
 	</file_definition>
 	<field_definition>
-		<field id="albsrfc_average" field_ref="albsrfc" operation="average"/>
 		<field id="CMIP7_pr_average" field_ref="CMIP7_pr" operation="average"/>
 		<field id="CMIP7_psl_average" field_ref="CMIP7_psl" operation="average"/>
 		<field id="CMIP7_sfcWind_average" field_ref="CMIP7_sfcWind" operation="average"/>
@@ -1941,6 +1942,7 @@ seaIce: Gelato 6.1 </variable>
 		<field id="CMIP7_orog_once" field_ref="CMIP7_orog" operation="once"/>
 		<field id="CMIP7_rootd_once" field_ref="CMIP7_rootd" operation="once"/>
 		<field id="CMIP7_sftlf_once" field_ref="CMIP7_sftlf" operation="once"/>
+		<field id="wilt_average" field_ref="wilt" operation="average"/>
 		<field id="CMIP7_prc_average" field_ref="CMIP7_prc" operation="average"/>
 		<field id="CMIP7_tasmax_average" field_ref="CMIP7_tasmax" operation="average"/>
 		<field id="CMIP7_tasmin_average" field_ref="CMIP7_tasmin" operation="average"/>
@@ -2005,6 +2007,14 @@ seaIce: Gelato 6.1 </variable>
 		</grid>
 		<grid id="NATURE_grid_complete">
 			<domain domain_ref="complete"/>
+		</grid>
+		<grid id="NATURE_glayers_complete">
+			<domain domain_ref="complete"/>
+			<axis axis_ref="ground_layer" name="sdepth"/>
+		</grid>
+		<grid id="NATURE_glayers_FULL">
+			<domain domain_ref="FULL"/>
+			<axis axis_ref="ground_layer" name="sdepth"/>
 		</grid>
 	</grid_definition>
 	<scalar_definition/>
