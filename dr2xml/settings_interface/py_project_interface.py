@@ -14,7 +14,7 @@ from utilities.json_tools import write_json_content, read_json_content
 from utilities.logger import get_logger
 from .py_settings_interface import get_variable_from_lset_with_default_in_lset, get_variable_from_lset_with_default, \
     get_variable_from_lset_without_default
-from dr2xml.projects.new_projects_interface_definitions import ParameterSettings, TagSettings
+from dr2xml.projects.projects_interface_definitions import ParameterSettings, TagSettings
 
 
 def initialize_project_settings(dirname, doc_writer=False):
