@@ -31,16 +31,26 @@ class DR2XMLElement(xml_writer.Element):
             text = kwargs.pop("text")
         else:
             text = None
-        tag_settings = get_settings_values("project", default_tag, must_copy=True)
-        attrs_list = tag_settings.attrs_list
-        attrs_constraints = tag_settings.attrs_constraints
-        attrib = OrderedDict()
         init_dict = get_settings_values("init")
         common_dict = get_settings_values("common")
         internal_dict = get_settings_values("internal")
+        tag_settings = get_settings_values("project", default_tag, must_copy=True)
+        common_list = tag_settings.common_list
+        common_constraints = tag_settings.common_constraints
+        for key in common_list:
+            test, value = common_constraints[key].find_value(common_dict=common_dict, internal_dict=internal_dict,
+                                                             additional_dict=kwargs, init_dict=init_dict)
+            if test:
+                common_constraints[key] = value
+            else:
+                del common_constraints[key]
+        attrs_list = tag_settings.attrs_list
+        attrs_constraints = tag_settings.attrs_constraints
+        attrib = OrderedDict()
         for key in attrs_list:
             test, value = attrs_constraints[key].find_value(common_dict=common_dict, internal_dict=internal_dict,
-                                                            additional_dict=kwargs, init_dict=init_dict)
+                                                            additional_dict=kwargs, init_dict=init_dict,
+                                                            common_tag=common_constraints)
             output_key = attrs_constraints[key].output_key
             if output_key is False:
                 output_key = key
@@ -51,14 +61,16 @@ class DR2XMLElement(xml_writer.Element):
         comments_constraints = tag_settings.comments_constraints
         for comment in comments_list:
             test, value = comments_constraints[comment].find_value(common_dict=common_dict, internal_dict=internal_dict,
-                                                                   additional_dict=kwargs, init_dict=init_dict)
+                                                                   additional_dict=kwargs, init_dict=init_dict,
+                                                                   common_tag=common_constraints)
             if test:
                 self.append(DR2XMLComment(text=value))
         vars_list = tag_settings.vars_list
         vars_constraints = tag_settings.vars_constraints
         for var in vars_list:
             test, value = vars_constraints[var].find_value(common_dict=common_dict, internal_dict=internal_dict,
-                                                           additional_dict=kwargs, init_dict=init_dict)
+                                                           additional_dict=kwargs, init_dict=init_dict,
+                                                           common_tag=common_constraints)
             output_key = vars_constraints[var].output_key
             if output_key is False:
                 output_key = var

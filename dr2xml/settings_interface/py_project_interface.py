@@ -32,6 +32,8 @@ def initialize_project_settings(dirname, doc_writer=False):
     if save_project_settings is not None:
         if not save_project_settings.endswith(".json"):
             save_project_settings += ".json"
+        if len(os.path.dirname(save_project_settings)) == 0:
+            save_project_settings = os.path.sep.join([dirname, save_project_settings])
         write_json_content(save_project_settings, project_content)
     # Transform json dictionary into settings objects
     init_values = turn_dict_to_settings("init", project_content["init"],
@@ -157,7 +159,7 @@ def solve_settings(content, config):
 
         if element in ["project_settings", ]:
             for (content_elt, content_value) in content[element].items():
-                for key in ["attrs_constraints", "comments_constraints", "vars_constraints"]:
+                for key in ["attrs_constraints", "comments_constraints", "vars_constraints", "common_constraints"]:
                     if key in content_value:
                         for (subkey, subval) in content_value[key].items():
                             new_subval = copy.deepcopy(default_constraints)
@@ -166,7 +168,7 @@ def solve_settings(content, config):
                     else:
                         content_value[key] = dict()
 
-                for key in ["attrs", "comments", "vars"]:
+                for key in ["attrs", "comments", "vars", "common"]:
                     list_expected_keywords = copy.deepcopy(content_value[key + "_list"])
                     list_current_keywords = copy.deepcopy(list(content_value[key + "_constraints"]))
                     for keyword in sorted(list(set(list_current_keywords) - set(list_expected_keywords))):

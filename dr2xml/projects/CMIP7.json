@@ -66,6 +66,14 @@
           "keys": ["CV_experiment", "required_model_components"]
         }
       ]
+    },
+    "realization_index": {
+      "format": {
+        "type": "func",
+        "origin": "self",
+        "keys": ["format"],
+        "template": "r{}"
+      }
     }
   },
   "common": {
@@ -110,11 +118,77 @@
       "help": "Version of the conventions used.",
       "values": [
         {
-          "type": "value",
-          "origin": "config",
-          "keys": ["CMIP6_conventions_version"]
+          "type": "func",
+          "origin": "vocabulary_server",
+          "keys": ["get_all_terms_in_collection"],
+          "options": {
+            "project_id": {
+              "type": "value",
+              "origin": "init",
+              "keys": ["vocabulary_project"]
+            },
+            "collection_id": "dataConventions"
+          }
         }
       ]
+    },
+    "data_specs_version": {
+      "help": "version label for the set of requirements and CVs followed in creating a file",
+      "values": [
+        {
+          "type": "func",
+          "origin": "vocabulary_server",
+          "keys": ["get_all_terms_in_collection"],
+          "options": {
+            "project_id": {
+              "type": "value",
+              "origin": "init",
+              "keys": ["vocabulary_project"]
+            },
+            "collection_id": "datasetSpecs"
+          }
+        }
+      ]
+    },
+    "drs_specs": {
+      "help": "label identifying the data reference syntax used to name files, define directory trees, and uniquely identify datasets.",
+      "values": [
+        {
+          "type": "func",
+          "origin": "vocabulary_server",
+          "keys": ["get_all_terms_in_collection"],
+          "options": {
+            "project_id": {
+              "type": "value",
+              "origin": "init",
+              "keys": ["vocabulary_project"]
+            },
+            "collection_id": "drsSpecs"
+          }
+        }
+      ]
+    },
+    "experiment": {
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": ["experiment"]
+        },
+        {
+          "type": "value",
+          "origin": "internal",
+          "keys": ["CV_experiment", "description"]
+        }
+      ]
+    },
+    "forcing_index": {
+      "format": {
+        "type": "func",
+        "origin": "self",
+        "keys": ["format"],
+        "template": "f{}"
+      }
     },
     "HDL": {
       "values": [
@@ -130,6 +204,14 @@
         },
         "21.14100"
       ]
+    },
+    "initialization_index": {
+      "format": {
+        "type": "func",
+        "origin": "self",
+        "keys": ["format"],
+        "template": "i{}"
+      }
     },
     "institution": {
       "values": [
@@ -301,6 +383,24 @@
         }
       ]
     },
+    "mip_era": {
+      "help": "label to indicate the CMIP phase when an experiment was designed",
+      "values": [
+        {
+          "type": "func",
+          "origin": "vocabulary_server",
+          "keys": ["get_all_terms_in_collection"],
+          "options": {
+            "project_id": {
+              "type": "value",
+              "origin": "init",
+              "keys": ["vocabulary_project"]
+            },
+            "collection_id": "mipEra"
+          }
+        }
+      ]
+    },
     "parent_activity_id": {
       "values": [
         {
@@ -345,9 +445,22 @@
         {
           "type": "value",
           "origin": "internal",
-          "keys": ["CV_experiment", "parent_experiment_id"]
+          "keys": ["CV_experiment", "parent_experiment_id", 0],
+          "format": {
+            "type": "func",
+            "origin": "self",
+            "keys": ["upper"]
+          }
         }
       ]
+    },
+    "physics_index": {
+      "format": {
+        "type": "func",
+        "origin": "self",
+        "keys": ["format"],
+        "template": "p{}"
+      }
     },
     "source": {
       "values": [
@@ -405,6 +518,44 @@
         }
       ]
     },
+    "title": {
+      "help": "Title to be put on output files",
+      "values": [
+        {
+          "type": "value",
+          "origin": "simulation",
+          "keys": "title"
+        },
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": "title"
+        },
+        {
+          "type": "func",
+          "origin": "self",
+          "keys": ["format"],
+          "template": "{mip_era} {experiment_id} results from the {source_id} model.",
+          "options": {
+            "mip_era": {
+              "type": "value",
+              "origin": "common",
+              "keys": ["mip_era", 0]
+            },
+            "experiment_id": {
+              "type": "value",
+              "origin": "internal",
+              "keys": ["experiment_id"]
+            },
+            "source_id":{
+              "type": "value",
+              "origin": "internal",
+              "keys": ["source_id"]
+            }
+          }
+        }
+      ]
+    },
     "variant_label": {
       "help": "Label of the variant done.",
       "values": [
@@ -445,7 +596,7 @@
       "comments_constraints": {
         "CV_version": {
           "help": "Controled vocabulary version used.",
-          "values": ["CMIP6-CV version ??"]
+          "values": ["CMIP7-CV version ??"]
         },
         "conventions_version": {
           "help": "Conventions version used.",
@@ -461,6 +612,33 @@
       }
     },
     "file_output": {
+      "common_list": ["variable"],
+      "common_constraints": {
+        "variable_esgvoc": {
+          "help": "Variable information from esgvoc",
+          "fatal": true,
+          "values": [
+            {
+              "type": "func",
+              "origin": "vocabulary_server",
+              "keys": "get_term_in_collection",
+              "options": {
+                "project_type": {
+                  "type": "value",
+                  "origin": "init",
+                  "keys": ["vocabulary_project"]
+                },
+                "collection_id": "brandedVariable",
+                "term_id": {
+                  "type": "value",
+                  "origin": "variable",
+                  "keys": ["label_non_ambiguous"]
+                }
+              }
+            }
+          ]
+        }
+      },
       "attrs_constraints": {
         "name": {
           "values": [
@@ -471,8 +649,8 @@
               "options": {
                 "frequency": {
                   "type": "value",
-                  "origin": "variable",
-                  "keys": ["frequency"]
+                  "origin": "common_tag",
+                  "keys": ["variable","frequency"]
                 },
                 "prefix": {
                   "type": "value",
@@ -511,8 +689,8 @@
                 },
                 "var_type": {
                   "type": "value",
-                  "origin": "variable",
-                  "keys": ["type"]
+                  "origin": "common_tag",
+                  "keys": ["variable","type"]
                 },
                 "list_perso_dev_file": {
                   "type": "value",
@@ -521,13 +699,13 @@
                 },
                 "label": {
                   "type": "value",
-                  "origin": "variable",
-                  "keys": ["label"]
+                  "origin": "common_tag",
+                  "keys": ["variable","label"]
                 },
                 "mipVarLabel": {
                   "type": "value",
-                  "origin": "variable",
-                  "keys": ["mipVarLabel"]
+                  "origin": "common_tag",
+                  "keys": ["variable","mipVarLabel"]
                 },
                 "use_cmorvar": {
                   "type": "value",
@@ -539,281 +717,368 @@
           ]
         }
       },
+      "vars_list": ["activity_id", "area_label", "branch_time_in_child", "branch_time_in_parent", "branded_variable",
+        "branding_suffix", "Conventions", "data_specs_version", "drs_specs", "experiment", "experiment_id",
+        "external_variables", "forcing_index", "frequency", "grid_label", "history", "horizontal_label",
+        "initialization_index", "institution", "institution_id", "license_id", "mip_era", "nominal_resolution",
+        "parent_activity_id", "parent_experiment_id", "parent_mip_era", "parent_source_id", "parent_time_units",
+        "parent_variant_label","physics_index", "product", "realization_index", "realm", "region", "source_id",
+        "temporal_label", "variable_id", "variant_label", "vertical_label"
+      ],
       "vars_constraints": {
-        "CMIP6_CV_latest_tag": {
-          "help": "Last tag of CMIP6 CVs.",
-          "values": [
-            {
-              "type": "file",
-              "origin": "json",
-              "src": {
-                "type": "func",
-                "origin": "self",
-                "keys": "format",
-                "template": "{cvspath}{project}_experiment_id.json",
-                "options": {
-                  "cvspath": {
-                    "type": "value",
-                    "origin": "dict",
-                    "keys": ["cvspath"]
-                  },
-                  "project": {
-                    "type": "value",
-                    "origin": "init",
-                    "keys": ["project"]
-                  }
-                }
-              },
-              "keys": ["version_metadata", "latest_tag_metadata"]
-            },
-            "no more value in CMIP6_CV"
-          ]
+        "activity_id": {
+          "fatal": true
         },
-        "description": {
-            "values": [
-              {
-                "type": "condition",
-                "value_to_check": {
-                  "type": "value",
-                  "origin": "internal",
-                  "keys": ["experiment_id"]
-                },
-                "check_to_perform": "eq",
-                "reference_values": [
-                  {
-                    "type": "value",
-                    "origin": "common",
-                    "keys": ["expid_in_filename"]
-                  }
-                ],
-                "values": [
-                  {
-                    "type": "value",
-                    "origin": "attrs",
-                    "keys": ["description"]
-                  },
-                  {
-                    "type": "value",
-                    "origin": "common",
-                    "keys": ["description"]
-                  },
-                  {
-                    "type": "value",
-                    "origin": "internal",
-                    "keys": ["CV_experiment", "description"]
-                  }
-                ]
-              }
-            ]
-          },
-        "experiment": {
-            "values": [
-              {
-                "type": "condition",
-                "value_to_check": {
-                  "type": "value",
-                  "origin": "internal",
-                  "keys": ["experiment_id"]
-                },
-                "check_to_perform": "eq",
-                "reference_values": [
-                  {
-                    "type": "value",
-                    "origin": "common",
-                    "keys": ["expid_in_filename"]
-                  }
-                ],
-                "values": [
-                  {
-                    "type": "value",
-                    "origin": "attrs",
-                    "keys": ["experiment"]
-                  },
-                  {
-                    "type": "value",
-                    "origin": "common",
-                    "keys": ["experiment"]
-                  },
-                  {
-                    "type": "value",
-                    "origin": "internal",
-                    "keys": ["CV_experiment", "experiment"]
-                  }
-                ]
-              }
-            ]
-          },
-        "further_info_url": {
+        "area_label": {
+          "help": "Identifier of unmasked area type",
+          "fatal": true,
           "values": [
             {
-              "type": "condition",
-              "value_to_check": {
-                "type": "value",
-                "origin": "common",
-                "keys": ["mip_era_lset"]
-              },
-              "check_to_perform": "eq",
-              "reference_values": [null],
-              "values": [
-                {
-                  "type": "condition",
-                  "value_to_check": {
-                    "type": "value",
-                    "origin": "common",
-                    "keys": ["mip_era_sset"]
-                  },
-                  "check_to_perform": "eq",
-                  "reference_values": [null],
-                  "values": [
-                    {
-                      "type": "func",
-                      "origin": "self",
-                      "keys": ["format"],
-                      "template": "https://furtherinfo.es-doc.org/{mip_era}.{institution_id}.{source_id}.{expid}.{sub_exp}.{variant}",
-                      "options": {
-                        "mip_era": {
-                          "type": "value",
-                          "origin": "variable",
-                          "keys": ["mip_era"]
-                        },
-                        "institution_id": {
-                          "type": "value",
-                          "origin": "init",
-                          "keys": ["institution_id"]
-                        },
-                        "source_id": {
-                          "type": "value",
-                          "origin": "internal",
-                          "keys": ["source_id"]
-                        },
-                        "expid": {
-                          "type": "value",
-                          "origin": "common",
-                          "keys": ["expid_in_filename"]
-                        },
-                        "sub_exp": {
-                          "type": "value",
-                          "origin": "common",
-                          "keys": ["sub_experiment_id"]
-                        },
-                        "variant": {
-                          "type": "value",
-                          "origin": "common",
-                          "keys": ["variant_label"]
-                        }
-                      }
-                    }
-                  ]
-                }
-              ]
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["area_label"]
+            },
+            {
+              "type": "value",
+              "origin": "common_tag",
+              "keys": ["variable", "cmvar", "area_label"]
+            },
+            {
+              "type": "value",
+              "origin": "common_tag",
+              "keys": ["variable_esgvoc", "area_label"]
             }
           ]
         },
-        "license": {
-            "values": [
-              {
-                "type": "value",
-                "origin": "attrs",
-                "keys": ["license"]
-              },
-              {
-                "type": "func",
-                "origin": "functions_file",
-                "keys": ["fill_license"],
-                "options": {
-                  "value": {
-                    "type": "value",
-                    "origin": "common",
-                    "keys": ["license"]
-                  },
-                  "institution_id": {
-                    "type": "value",
-                    "origin": "init",
-                    "keys": ["institution_id"]
-                  },
-                  "info_url": {
-                    "type": "value",
-                    "origin": "common",
-                    "keys": ["info_url"]
-                  },
-                  "commercial_license": {
-                    "type": "value",
-                    "origin": "common",
-                    "keys": ["commercial_license"]
-                  },
-                  "license_id": {
-                    "type": "value",
-                    "origin": "common",
-                    "keys": ["license_id"]
-                  },
-                  "license_url": {
-                    "type": "value",
-                    "origin": "common",
-                    "keys": ["license_url"]
-                  }
-                }
-              }
-            ]
-          },
-        "realm": {
-          "corrections": {
-            "ocnBgChem": "ocnBgchem"
-          }
+        "branded_variable": {
+          "help": "Full branded variable name",
+          "fatal": true,
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["branded_variable"]
+            },
+            {
+              "type": "value",
+              "origin": "common_tag",
+              "keys": ["variable","label_non_ambiguous"]
+            }
+          ]
         },
-        "source": {
+        "branding_suffix": {
+          "help": "Suffix in the branded variable name",
+          "fatal": true,
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["branding_suffix"]
+            },
+            {
+              "type": "value",
+              "origin": "common_tag",
+              "keys": ["variable", "cmvar", "branding_suffix"]
+            },
+            {
+              "type": "value",
+              "origin": "common_tag",
+              "keys": ["variable_esgvoc", "branding_suffix"]
+            }
+          ]
+        },
+        "Conventions": {
+          "help": "CF version governing data (along with any other conventions applied)",
+          "fatal": true,
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["Conventions"]
+            },
+            {
+              "type": "value",
+              "origin": "common",
+              "keys": ["conventions_version", 0, "label"]
+            }
+          ]
+        },
+        "cmip6_compound_name": {
+          "help": "Legacy table/variable name consistent with CMIP6",
+          "fatal": true,
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["cmip6_compound_name"]
+            },
+            {
+              "type": "value",
+              "origin": "common_tag",
+              "keys": ["variable", "cmip6_compound_name"]
+            },
+            {
+              "type": "value",
+              "origin": "common_tag",
+              "keys": ["variable_esgvoc", "cmip6_compound_name"]
+            }
+          ]
+        },
+        "data_specs_version": {
+          "help": "version label for the set of requirements and CVs followed in creating a file",
+          "fatal": true,
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["data_specs_version"]
+            },
+            {
+              "type": "value",
+              "origin": "common",
+              "keys": ["data_specs_version", 0, "__call__"]
+            }
+          ]
+        },
+        "drs_specs": {
+          "help": "version label for the set of requirements and CVs followed in creating a file",
+          "fatal": true,
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["drs_specs"]
+            },
+            {
+              "type": "value",
+              "origin": "common",
+              "keys": ["drs_specs", 0, "drs_name"]
+            }
+          ]
+        },
+        "experiment_id": {
           "fatal": true
         },
-        "title_desc": {
-            "values": [
-              {
-                "type": "condition",
-                "value_to_check": {
-                  "type": "value",
-                  "origin": "internal",
-                  "keys": ["experiment_id"]
-                },
-                "check_to_perform": "eq",
-                "reference_values": [
-                  {
-                    "type": "value",
-                    "origin": "common",
-                    "keys": ["expid_in_filename"]
-                  }
-                ],
-                "values": [
-                  {
-                    "type": "value",
-                    "origin": "attrs",
-                    "keys": ["description"]
-                  },
-                  {
-                    "type": "value",
-                    "origin": "common",
-                    "keys": ["description"]
-                  },
-                  {
-                    "type": "value",
-                    "origin": "internal",
-                    "keys": ["CV_experiment", "description"]
-                  }
-                ]
-              }
-            ]
-          },
+        "forcing_index": {
+          "fatal": true
+        },
+        "frequency": {
+          "fatal": true,
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["frequency"]
+            },
+            {
+              "type": "value",
+              "origin": "common_tag",
+              "keys": ["variable", "frequency"]
+            },
+            {
+              "type": "value",
+              "origin": "common_tag",
+              "keys": ["variable_esgvoc", "frequency"]
+            }
+          ]
+        },
+        "grid_label": {
+          "fatal": true
+        },
+        "horizontal_label": {
+          "help": "identifier of horizontal structure/sampling",
+          "fatal": true,
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["horizontal_label"]
+            },
+            {
+              "type": "value",
+              "origin": "common_tag",
+              "keys": ["variable", "cmvar", "horizontal_label"]
+            },
+            {
+              "type": "value",
+              "origin": "common_tag",
+              "keys": ["variable_esgvoc", "horizontal_label"]
+            }
+          ]
+        },
+        "initialization_index": {
+          "fatal": true
+        },
+        "institution_id": {
+          "fatal": true
+        },
+        "license": {
+          "fatal": true,
+          "output_key": "license_id",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["license"]
+            },
+            {
+              "type": "value",
+              "origin": "common",
+              "keys": ["license_id"]
+            }
+          ]
+        },
+        "mip_era": {
+          "help": "label to indicate the CMIP phase when an experiment was designed",
+          "fatal": true,
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["mip_era"]
+            },
+            {
+              "type": "value",
+              "origin": "common",
+              "keys": ["mip_era", 0]
+            }
+          ]
+        },
+        "nominal_resolution": {
+          "fatal": true
+        },
+        "physics_index": {
+          "fatal": true
+        },
+        "product": {
+          "fatal": true
+        },
+        "realization_index": {
+          "fatal": true
+        },
+        "realm": {
+          "fatal": true
+        },
+        "region": {
+          "help": "the domain over which data are reported",
+          "fatal": true,
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["region"]
+            },
+            {
+              "type": "value",
+              "origin": "common_tag",
+              "keys": ["variable", "cmvar","region"]
+            }
+          ]
+        },
+        "source_id": {
+          "fatal": true
+        },
+        "temporal_label": {
+          "help": "Identifier of type of temporal sampling applied",
+          "fatal": true,
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["temporal_label"]
+            },
+            {
+              "type": "value",
+              "origin": "common_tag",
+              "keys": ["variable", "cmvar", "temporal_label"]
+            },
+            {
+              "type": "value",
+              "origin": "common_tag",
+              "keys": ["variable_esgvoc", "temporal_label"]
+            }
+          ]
+        },
+        "title": {
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["title"]
+            },
+            {
+              "type": "value",
+              "origin": "common",
+              "keys": ["title"]
+            }
+          ]
+        },
         "variable_id": {
-            "values": [
+          "fatal": true,
+          "values": [
               {
                 "type": "value",
                 "origin": "attrs",
                 "keys": ["variable_id"]
               },
-              {
-                "type": "value",
-                "origin": "variable",
-                "keys": ["mipVarLabel"]
+            {
+              "type": "value",
+              "origin": "common_tag",
+              "keys": ["variable", "name"]
+            },
+            {
+              "type": "value",
+              "origin": "common_tag",
+              "keys": ["variable_esgvoc", "variable_id"]
+            }
+          ]
+        },
+        "variant_info": {
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["variant_info"]
+            },
+            {
+              "type": "func",
+              "origin": "self",
+              "keys": ["format"],
+              "template": "{variant_info}. Information provided by this attribute may be flawed. Users can find more comprehensive and up-to-date documentation elsewhere.",
+              "options": {
+                "variant_info": {
+                  "type": "value",
+                  "origin": "common",
+                  "keys": ["variant_info"]
+                }
               }
-            ]
+            }
+          ]
+        },
+        "variant_label": {
+          "fatal": true
+        },
+        "vertical_label": {
+        "help": "Identifier of vertical sampling applied",
+        "fatal": true,
+        "values": [
+          {
+            "type": "value",
+            "origin": "attrs",
+            "keys": ["vertical_label"]
+          },
+          {
+            "type": "value",
+            "origin": "common_tag",
+            "keys": ["variable", "cmvar", "vertical_label"]
+          },
+          {
+            "type": "value",
+            "origin": "common_tag",
+            "keys": ["variable_esgvoc", "vertical_label"]
           }
+        ]
+      }
       }
     }
   }

@@ -250,6 +250,49 @@
         "https://creativecommons.org/licenses"
       ]
     },
+    "license_terms": {
+      "help": "Terms of the license",
+      "fatal": true,
+      "values": [
+        {
+          "type": "func",
+          "origin": "functions_file",
+          "keys": ["fill_license"],
+          "options": {
+            "value": {
+              "type": "value",
+              "origin": "common",
+              "keys": ["license"]
+            },
+            "institution_id": {
+              "type": "value",
+              "origin": "init",
+              "keys": ["institution_id"]
+            },
+            "info_url": {
+              "type": "value",
+              "origin": "common",
+              "keys": ["info_url"]
+            },
+            "commercial_license": {
+              "type": "value",
+              "origin": "common",
+              "keys": ["commercial_license"]
+            },
+            "license_id": {
+              "type": "value",
+              "origin": "common",
+              "keys": ["license_id"]
+            },
+            "license_url": {
+              "type": "value",
+              "origin": "common",
+              "keys": ["license_url"]
+            }
+          }
+        }
+      ]
+    },
     "member_id": {
       "help": "Id of the member done.",
       "forbidden_patterns": ["none-.*"],
@@ -444,8 +487,8 @@
               "options": {
                 "frequency": {
                   "type": "value",
-                  "origin": "variable",
-                  "keys": ["frequency"]
+                  "origin": "common_tag",
+                  "keys": ["variable", "frequency"]
                 },
                 "prefix": {
                   "type": "value",
@@ -484,8 +527,8 @@
                 },
                 "var_type": {
                   "type": "value",
-                  "origin": "variable",
-                  "keys": ["type"]
+                  "origin": "common_tag",
+                  "keys": ["variable", "type"]
                 },
                 "list_perso_dev_file": {
                   "type": "value",
@@ -494,13 +537,13 @@
                 },
                 "label": {
                   "type": "value",
-                  "origin": "variable",
-                  "keys": ["label"]
+                  "origin": "common_tag",
+                  "keys": ["variable", "label"]
                 },
                 "mipVarLabel": {
                   "type": "value",
-                  "origin": "variable",
-                  "keys": ["mipVarLabel"]
+                  "origin": "common_tag",
+                  "keys": ["variable", "mipVarLabel"]
                 },
                 "use_cmorvar": {
                   "type": "value",
@@ -646,8 +689,8 @@
                       "options": {
                         "mip_era": {
                           "type": "value",
-                          "origin": "variable",
-                          "keys": ["mip_era"]
+                          "origin": "common_tag",
+                          "keys": ["variable", "mip_era"]
                         },
                         "institution_id": {
                           "type": "value",
@@ -690,46 +733,13 @@
                 "keys": ["license"]
               },
               {
-                "type": "func",
-                "origin": "functions_file",
-                "keys": ["fill_license"],
-                "options": {
-                  "value": {
-                    "type": "value",
-                    "origin": "common",
-                    "keys": ["license"]
-                  },
-                  "institution_id": {
-                    "type": "value",
-                    "origin": "init",
-                    "keys": ["institution_id"]
-                  },
-                  "info_url": {
-                    "type": "value",
-                    "origin": "common",
-                    "keys": ["info_url"]
-                  },
-                  "commercial_license": {
-                    "type": "value",
-                    "origin": "common",
-                    "keys": ["commercial_license"]
-                  },
-                  "license_id": {
-                    "type": "value",
-                    "origin": "common",
-                    "keys": ["license_id"]
-                  },
-                  "license_url": {
-                    "type": "value",
-                    "origin": "common",
-                    "keys": ["license_url"]
-                  }
-                }
+                "type": "value",
+                "origin": "common",
+                "keys": ["license_terms"]
               }
             ]
           },
-        "realm": {
-          "corrections": {
+        "realm": {          "corrections": {
             "ocnBgChem": "ocnBgchem"
           }
         },
@@ -782,8 +792,8 @@
               },
               {
                 "type": "value",
-                "origin": "variable",
-                "keys": ["mipVarLabel"]
+                "origin": "common_tag",
+                "keys": ["variable", "mipVarLabel"]
               }
             ]
           }

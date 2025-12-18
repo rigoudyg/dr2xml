@@ -62,6 +62,8 @@
     "help": "All elements used to configure xml beacons created by dr2xml.",
     "default": {},
     "default_config": {
+      "common_list": [],
+      "common_constraints": {},
       "attrs_list": [],
       "attrs_constraints": {},
       "comments_list": [],

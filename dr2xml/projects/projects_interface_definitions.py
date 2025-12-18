@@ -38,22 +38,23 @@ def val_or_func(key, element, project_funcs=None):
 
 
 def return_value(value, init_dict=dict(), common_dict=dict(), internal_dict=dict(), additional_dict=dict(),
-                 allow_additional_keytypes=True, project_funcs=None, **attrs):
+                 allow_additional_keytypes=True, project_funcs=None, common_tag=dict(), **attrs):
     if isinstance(value, (ValueSettings, FunctionSettings, ConditionSettings)):
         return value.__call__(common_dict=common_dict, internal_dict=internal_dict, additional_dict=additional_dict,
                               allow_additional_keytypes=allow_additional_keytypes, init_dict=init_dict,
-                              project_funcs=project_funcs, **attrs)
+                              project_funcs=project_funcs, common_tag=common_tag, **attrs)
     else:
         return True, value
 
 
 def determine_value(key_type=None, keys=list(), func=None, fmt=None, src=None, common_dict=dict(), internal_dict=dict(),
-                    additional_dict=dict(), allow_additional_keytypes=True, init_dict=dict(), project_funcs=None):
+                    additional_dict=dict(), allow_additional_keytypes=True, init_dict=dict(), project_funcs=None,
+                    common_tag=dict()):
     logger = get_logger()
     if key_type in ["combine", "merge"] or (key_type is None and func is not None):
         keys = [return_value(key, common_dict=common_dict, internal_dict=internal_dict, init_dict=init_dict,
                              additional_dict=additional_dict, allow_additional_keytypes=allow_additional_keytypes,
-                             project_funcs=project_funcs)
+                             project_funcs=project_funcs, common_tag=common_tag)
                 for key in keys]
         key_found = all([elt[0] for elt in keys])
         if key_found:
@@ -78,13 +79,13 @@ def determine_value(key_type=None, keys=list(), func=None, fmt=None, src=None, c
                     found, value = func(*keys, additional_dict=additional_dict, internal_dict=internal_dict,
                                         init_dict=init_dict, common_dict=common_dict,
                                         allow_additional_keytypes=allow_additional_keytypes,
-                                        project_funcs=project_funcs)
+                                        project_funcs=project_funcs, common_tag=common_tag)
                 else:
                     if isinstance(func, ValueSettings):
                         func_test, func_value = return_value(func, common_dict=common_dict, internal_dict=internal_dict,
                                                              additional_dict=additional_dict, init_dict=init_dict,
                                                              allow_additional_keytypes=allow_additional_keytypes,
-                                                             prohect_funcs=project_funcs)
+                                                             prohect_funcs=project_funcs, common_tag=common_tag)
                         if not func_test:
                             logger.warning("Unable to determine function %s" % func)
                         else:
@@ -169,11 +170,11 @@ def determine_value(key_type=None, keys=list(), func=None, fmt=None, src=None, c
             else:
                 value = None
         elif allow_additional_keytypes:
-            if key_type in ["data_request", ] and allow_additional_keytypes:
+            if key_type in ["data_request", ]:
                 from dr2xml.dr_interface import get_dr_object
                 value = get_dr_object("get_data_request")
                 found = True
-            elif key_type in ["vocabulary", ] and allow_additional_keytypes:
+            elif key_type in ["vocabulary", ]:
                 from dr2xml.vocabulary import get_vocabulary
                 value = get_vocabulary()
                 found = True
@@ -182,6 +183,9 @@ def determine_value(key_type=None, keys=list(), func=None, fmt=None, src=None, c
                 if isinstance(value, list):
                     value = value[0]
                 value = value.__dict__
+                found = True
+            elif key_type in ["common_tag", ]:
+                value = common_tag
                 found = True
             else:
                 value = None
@@ -194,7 +198,7 @@ def determine_value(key_type=None, keys=list(), func=None, fmt=None, src=None, c
                 found, key = return_value(keys[i_keys], common_dict=common_dict, internal_dict=internal_dict,
                                           additional_dict=additional_dict, init_dict=init_dict,
                                           allow_additional_keytypes=allow_additional_keytypes,
-                                          project_funcs=project_funcs)
+                                          project_funcs=project_funcs, common_tag=common_tag)
                 if found:
                     if isinstance(value, (dict, OrderedDict)):
                         if key in value:
@@ -226,7 +230,7 @@ def determine_value(key_type=None, keys=list(), func=None, fmt=None, src=None, c
                 found, value = func(*value, additional_dict=additional_dict, internal_dict=internal_dict,
                                     init_dict=init_dict, common_dict=common_dict,
                                     allow_additional_keytypes=allow_additional_keytypes,
-                                    project_funcs=project_funcs)
+                                    project_funcs=project_funcs, common_tag=common_tag)
             else:
                 try:
                     value = func(*value)
@@ -362,11 +366,12 @@ class ValueSettings(Settings):
                 raise ValueError("Values must be specified for %s" % self.key)
         elif self.type in ["value", ]:
             if self.origin not in ["attrs", "common", "config", "dict", "init", "internal", "laboratory", "simulation",
-                                   "variable"]:
+                                   "variable", "common_tag"]:
                 logger.error("'Origin' must be specified among 'attrs', 'common', 'config', 'dict', 'init', 'internal',"
-                             " 'laboratory', 'simulation' and 'variable' for %s, not %s" % (self.key, self.origin))
+                             " 'common_tag', 'laboratory', 'simulation' and 'variable' for %s, not %s" %
+                             (self.key, self.origin))
                 raise ValueError("'Origin' must be specified among 'attrs', 'common', 'config', 'dict', 'init',"
-                                 " 'internal', 'laboratory', 'simulation' and 'variable' for %s, not %s" %
+                                 " 'internal', 'common_tag', 'laboratory', 'simulation' and 'variable' for %s, not %s" %
                                  (self.key, self.origin))
         else:
             logger.error("'Type' must be specified among 'file', 'merge' and 'value' for %s, not %s" % (self.key, self.type))
@@ -390,7 +395,7 @@ class ValueSettings(Settings):
         return cls(project_funcs=project_funcs, **attrs)
 
     def __call__(self, init_dict=dict(), internal_dict=dict(), common_dict=dict(), additional_dict=dict(),
-                 allow_additional_keytypes=False, project_funcs=None, **attrs):
+                 allow_additional_keytypes=False, project_funcs=None, common_tag=dict(), **attrs):
         logger = get_logger()
         found = False
         keys = copy.deepcopy(self.keys)
@@ -399,7 +404,7 @@ class ValueSettings(Settings):
                 found, src = return_value(self.src, init_dict=init_dict, internal_dict=internal_dict,
                                           common_dict=common_dict, additional_dict=additional_dict,
                                           allow_additional_keytypes=allow_additional_keytypes,
-                                          project_funcs=project_funcs, **attrs)
+                                          project_funcs=project_funcs, common_tag=common_tag, **attrs)
                 if found:
                     if not isinstance(src, six.string_types):
                         logger.error("src found should be a string for %s, not %s" % (self.key, src))
@@ -414,7 +419,7 @@ class ValueSettings(Settings):
             values = [return_value(val, init_dict=init_dict, internal_dict=internal_dict,
                                    common_dict=common_dict, additional_dict=additional_dict,
                                    allow_additional_keytypes=allow_additional_keytypes,
-                                   project_funcs=project_funcs, **attrs)
+                                   project_funcs=project_funcs, common_tag=common_tag, **attrs)
                       for val in self.values]
             if all(val[0] for val in values):
                 value = list()
@@ -441,6 +446,9 @@ class ValueSettings(Settings):
                 found = True
             elif self.origin in ["common", ]:
                 value = common_dict
+                found = True
+            elif self.origin in ["common_tag", ]:
+                value = common_tag
                 found = True
             elif self.origin in ["variable", ] and allow_additional_keytypes:
                 value = additional_dict["variable"]
@@ -469,7 +477,7 @@ class ValueSettings(Settings):
                     found, value = return_value(key, init_dict=init_dict, internal_dict=internal_dict,
                                                 common_dict=common_dict, additional_dict=additional_dict,
                                                 allow_additional_keytypes=allow_additional_keytypes,
-                                                project_funcs=project_funcs, **attrs)
+                                                project_funcs=project_funcs, common_tag=common_tag, **attrs)
                     if found:
                         if self.origin in ["config", ]:
                             value = get_config_variable(key)
@@ -504,7 +512,7 @@ class ValueSettings(Settings):
             found, key = return_value(key, init_dict=init_dict, internal_dict=internal_dict,
                                       common_dict=common_dict, additional_dict=additional_dict,
                                       allow_additional_keytypes=allow_additional_keytypes,
-                                      project_funcs=project_funcs, **attrs)
+                                      project_funcs=project_funcs, common_tag=common_tag, **attrs)
             if found:
                 if isinstance(value, (dict, OrderedDict)):
                     if key in value:
@@ -683,7 +691,7 @@ class ParameterSettings(Settings):
             self.updated.add(elt)
 
     def check_value(self, value, init_dict=dict(), internal_dict=dict(), common_dict=dict(), additional_dict=dict(),
-                    allow_additional_keytypes=True, project_funcs=None):
+                    allow_additional_keytypes=True, project_funcs=None, common_tag=dict()):
         test = True
         relevant = True
         if isinstance(self.conditions, bool):
@@ -697,7 +705,8 @@ class ParameterSettings(Settings):
                 else:
                     relevant, cond = cond.check(init_dict=init_dict, internal_dict=internal_dict, common_dict=common_dict,
                                                 additional_dict=additional_dict, project_funcs=project_funcs,
-                                                allow_additional_keytypes=allow_additional_keytypes)
+                                                allow_additional_keytypes=allow_additional_keytypes,
+                                                common_tag=common_tag)
                     test = relevant and cond
                 if test:
                     i += 1
@@ -708,7 +717,7 @@ class ParameterSettings(Settings):
                 forbidden_values = [return_value(val, init_dict=init_dict, internal_dict=internal_dict,
                                                  common_dict=common_dict, additional_dict=additional_dict,
                                                  allow_additional_keytypes=allow_additional_keytypes,
-                                                 project_funcs=project_funcs)
+                                                 project_funcs=project_funcs, common_tag=common_tag)
                                for val in self.forbidden_values]
                 relevant = all([elt[0] for elt in forbidden_values])
                 forbidden_values = [elt[1] for elt in forbidden_values]
@@ -731,12 +740,12 @@ class ParameterSettings(Settings):
                                                            internal_dict=internal_dict, common_dict=common_dict,
                                                            additional_dict=additional_dict,
                                                            allow_additional_keytypes=allow_additional_keytypes,
-                                                           project_funcs=project_funcs)
+                                                           project_funcs=project_funcs, common_tag=common_tag)
             elif isinstance(self.authorized_values, list) and len(self.authorized_values) > 0:
                 authorized_values = [return_value(val, init_dict=init_dict, internal_dict=internal_dict,
                                                   common_dict=common_dict, additional_dict=additional_dict,
                                                   allow_additional_keytypes=allow_additional_keytypes,
-                                                  project_funcs=project_funcs)
+                                                  project_funcs=project_funcs, common_tag=common_tag)
                                      for val in self.authorized_values]
                 relevant = all([elt[0] for elt in authorized_values])
                 authorized_values = [elt[1] for elt in authorized_values]
@@ -757,7 +766,7 @@ class ParameterSettings(Settings):
         return relevant, test
 
     def correct_value(self, value, init_dict=dict(), internal_values=dict(), common_values=dict(),
-                      additional_dict=dict(), allow_additional_keytypes=True, project_funcs=None):
+                      additional_dict=dict(), allow_additional_keytypes=True, project_funcs=None, common_tag=dict()):
         test = True
         if isinstance(value, six.string_types):
             value = value.strip()
@@ -768,7 +777,7 @@ class ParameterSettings(Settings):
                 conditions = [condition.check(init_dict=init_dict, internal_dict=internal_values,
                                               common_dict=common_values, additional_dict=additional_dict,
                                               allow_additional_keytypes=allow_additional_keytypes,
-                                              project_funcs=project_funcs)
+                                              project_funcs=project_funcs, common_tag=common_tag)
                               for condition in conditions]
                 test = all(elt[0] for elt in conditions)
                 conditions = all(elt[1] for elt in conditions)
@@ -777,22 +786,23 @@ class ParameterSettings(Settings):
                 test, value = return_value(correction, init_dict=init_dict, internal_dict=internal_values,
                                            common_dict=common_values, additional_dict=additional_dict,
                                            allow_additional_keytypes=allow_additional_keytypes,
-                                           project_funcs=project_funcs)
+                                           project_funcs=project_funcs, common_tag=common_tag)
         return test, value
 
     def find_value(self, is_value=False, value=None, init_dict=dict(), internal_dict=dict(), common_dict=dict(),
-                   additional_dict=dict(), allow_additional_keytypes=True, raise_on_error=True, project_funcs=None):
+                   additional_dict=dict(), allow_additional_keytypes=True, raise_on_error=True, project_funcs=None,
+                   common_tag=dict()):
         logger = get_logger()
         test = False
         if is_value:
             test, value = self.correct_value(value, init_dict=init_dict, internal_values=internal_dict,
                                              common_values=common_dict, additional_dict=additional_dict,
                                              allow_additional_keytypes=allow_additional_keytypes,
-                                             project_funcs=project_funcs)
+                                             project_funcs=project_funcs, common_tag=common_tag)
             relevant, test = self.check_value(value, init_dict=init_dict, internal_dict=internal_dict,
                                               common_dict=common_dict, additional_dict=additional_dict,
                                               allow_additional_keytypes=allow_additional_keytypes,
-                                              project_funcs=project_funcs)
+                                              project_funcs=project_funcs, common_tag=common_tag)
             test = test and relevant
         i = 0
         while not test and i < len(self.values):
@@ -800,16 +810,17 @@ class ParameterSettings(Settings):
             test, value = return_value(default, init_dict=init_dict, internal_dict=internal_dict,
                                        common_dict=common_dict, additional_dict=additional_dict,
                                        allow_additional_keytypes=allow_additional_keytypes,
-                                       project_funcs=project_funcs)
+                                       project_funcs=project_funcs, common_tag=common_tag)
             if test:
                 test, value = self.correct_value(value, init_dict=init_dict, internal_values=internal_dict,
                                                  common_values=common_dict, additional_dict=dict(),
-                                                 allow_additional_keytypes=True, project_funcs=project_funcs)
+                                                 allow_additional_keytypes=True, project_funcs=project_funcs,
+                                                 common_tag=common_tag)
             if test:
                 relevant, test = self.check_value(value, init_dict=init_dict, internal_dict=internal_dict,
                                                   common_dict=common_dict, additional_dict=additional_dict,
                                                   allow_additional_keytypes=allow_additional_keytypes,
-                                                  project_funcs=project_funcs)
+                                                  project_funcs=project_funcs, common_tag=common_tag)
                 test = test and relevant
             if not test:
                 i += 1
@@ -851,7 +862,8 @@ class TagSettings(Settings):
 
     def init_dict_default(self):
         return dict(attrs_list=list(), attrs_constraints=dict(), vars_list=list(), vars_constraints=dict(),
-                    comments_list=list(), comments_constraints=dict(), help="TODO", key=None)
+                    comments_list=list(), comments_constraints=dict(), help="TODO", key=None,
+                    common_list=list(), common_constraints=dict())
 
     @classmethod
     def from_dict(cls, key, kwargs, additional_keys=False, project_funcs=None):
@@ -883,6 +895,11 @@ class TagSettings(Settings):
         fmt = "      %s"
         rep.append(fmt % "")
         rep.append(fmt % self.help)
+        if len(self.common_list) > 0:
+            rep.append(fmt % "")
+            rep.append(fmt % "Common:")
+            for common in self.common_list:
+                rep.extend([fmt % elt for elt in self.common_constraints[common].dump_doc(force_void=force_void)])
         if len(self.comments_list) > 0:
             rep.append(fmt % "")
             rep.append(fmt % "Comments:")
@@ -903,7 +920,7 @@ class TagSettings(Settings):
     def update(self, other):
         super(TagSettings, self).update(other)
         for elt in other.updated:
-            if elt in ["attrs_constraints", "vars_constraints", "comments_constraints"]:
+            if elt in ["attrs_constraints", "vars_constraints", "comments_constraints", "common_constraints"]:
                 current_val = self.__getattribute__(elt)
                 new_val = other.__getattribute__(elt)
                 for key in new_val:
@@ -917,6 +934,10 @@ class TagSettings(Settings):
             self.updated.add(elt)
 
     def complete_and_clean(self):
+        for common in [common for common in self.common_list if common not in self.common_constraints]:
+            self.common_constraints[common] = ParameterSettings(key=common)
+        for common in [common for common in self.common_constraints if common not in self.common_list]:
+            del self.common_constraints[common]
         for attr in [attr for attr in self.attrs_list if attr not in self.attrs_constraints]:
             self.attrs_constraints[attr] = ParameterSettings(key=attr)
         for attr in [attr for attr in self.attrs_constraints if attr not in self.attrs_list]:
@@ -1033,7 +1054,7 @@ class FunctionSettings(Settings):
         return rep
 
     def __call__(self, *args, init_dict=dict(), internal_dict=dict(), common_dict=dict(), additional_dict=dict(),
-                 allow_additional_keytypes=False, project_funcs=None, **attrs):
+                 allow_additional_keytypes=False, project_funcs=None, common_tag=dict(), **attrs):
         logger = get_logger()
         test = True
         options = copy.deepcopy(self.options)
@@ -1042,7 +1063,7 @@ class FunctionSettings(Settings):
             key_test, val = return_value(val, common_dict=common_dict, internal_dict=internal_dict,
                                          additional_dict=additional_dict, init_dict=init_dict,
                                          allow_additional_keytypes=allow_additional_keytypes,
-                                         project_funcs=project_funcs, **attrs)
+                                         project_funcs=project_funcs, common_tag=common_tag, **attrs)
             if key_test:
                 options[key] = val
             else:
@@ -1051,7 +1072,7 @@ class FunctionSettings(Settings):
             func_test, func_val = return_value(self.func, common_dict=common_dict, internal_dict=internal_dict,
                                                additional_dict=additional_dict, init_dict=init_dict,
                                                allow_additional_keytypes=allow_additional_keytypes,
-                                               project_funcs=project_funcs, **attrs)
+                                               project_funcs=project_funcs, common_tag=common_tag, **attrs)
             if func_test:
                 self.func = func_val
             else:
@@ -1183,10 +1204,10 @@ class ConditionSettings(Settings):
         return rep
 
     def __call__(self, init_dict=dict(), internal_dict=dict(), common_dict=dict(), additional_dict=dict(),
-                 allow_additional_keytypes=False, project_funcs=None, **attrs):
+                 allow_additional_keytypes=False, project_funcs=None, common_tag=dict(), **attrs):
         relevant, test = self.check(common_dict=common_dict, internal_dict=internal_dict, init_dict=init_dict,
                                     additional_dict=additional_dict, allow_additional_keytypes=True,
-                                    project_funcs=project_funcs, **attrs)
+                                    project_funcs=project_funcs, common_tag=common_tag, **attrs)
         if not relevant:
             return relevant, None
         elif test:
@@ -1199,7 +1220,7 @@ class ConditionSettings(Settings):
                     test, val = return_value(self.values[i], common_dict=common_dict, internal_dict=internal_dict,
                                              additional_dict=additional_dict, init_dict=init_dict,
                                              allow_additional_keytypes=allow_additional_keytypes,
-                                             project_funcs=project_funcs, **attrs)
+                                             project_funcs=project_funcs, common_tag=common_tag, **attrs)
                     i += 1
                 return relevant and test, val
         else:
@@ -1212,24 +1233,24 @@ class ConditionSettings(Settings):
                     test, val = return_value(self.not_values[i], common_dict=common_dict, internal_dict=internal_dict,
                                              additional_dict=additional_dict, init_dict=init_dict,
                                              allow_additional_keytypes=allow_additional_keytypes,
-                                             project_funcs=project_funcs, **attrs)
+                                             project_funcs=project_funcs, common_tag=common_tag, **attrs)
                     i += 1
                 return relevant and test, val
 
     def check(self, common_dict=dict(), internal_dict=dict(), additional_dict=dict(), allow_additional_keytypes=True,
-              init_dict=dict(), project_funcs=None, **attrs):
+              init_dict=dict(), project_funcs=None, common_tag=dict(), **attrs):
         test = False
         relevant, check_value = return_value(self.value_to_check, common_dict=common_dict, internal_dict=internal_dict,
                                              additional_dict=additional_dict, init_dict=init_dict,
                                              allow_additional_keytypes=allow_additional_keytypes,
-                                             project_funcs=project_funcs, **attrs)
+                                             project_funcs=project_funcs, common_tag=common_tag, **attrs)
         if relevant:
             if isinstance(check_value, list) and len(check_value) == 1:
                 check_value = check_value[0]
             reference_values = [return_value(reference_value, common_dict=common_dict, internal_dict=internal_dict,
                                              additional_dict=additional_dict, init_dict=init_dict,
                                              allow_additional_keytypes=allow_additional_keytypes,
-                                             project_funcs=project_funcs, **attrs)
+                                             project_funcs=project_funcs, common_tag=common_tag, **attrs)
                                 for reference_value in self.reference_values]
             relevant = all([elt[0] for elt in reference_values])
             if relevant:

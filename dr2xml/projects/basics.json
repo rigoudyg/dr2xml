@@ -767,6 +767,20 @@
       }
     },
     "field_output": {
+      "common_list": ["variable"],
+      "common_constraints": {
+        "variable": {
+          "help": "Variable information",
+          "fatal": true,
+          "values": [
+            {
+              "type": "value",
+              "origin": "variable",
+              "keys": []
+            }
+          ]
+        }
+      },
       "attrs_list": ["field_ref", "name", "grid_ref", "freq_offset", "detect_missing_value", "default_value", "prec",
                     "cell_methods", "cell_methods_mode", "operation", "freq_op", "expr"],
       "attrs_constraints": {
@@ -780,8 +794,8 @@
             },
             {
               "type": "value",
-              "origin": "variable",
-              "keys": ["cell_methods"]
+              "origin": "common_tag",
+              "keys": ["variable", "cell_methods"]
             }
           ]
         },
@@ -821,8 +835,8 @@
             },
             {
               "type": "value",
-              "origin": "variable",
-              "keys": ["prec"]
+              "origin": "common_tag",
+              "keys": ["variable", "prec"]
             }
           ]
         },
@@ -901,8 +915,8 @@
             },
             {
               "type": "value",
-              "origin": "variable",
-              "keys": ["mipVarLabel"]
+              "origin": "common_tag",
+              "keys": ["variable", "mipVarLabel"]
             }
           ]
         },
@@ -936,8 +950,8 @@
             },
             {
               "type": "value",
-              "origin": "variable",
-              "keys": ["prec"]
+              "origin": "common_tag",
+              "keys": ["variable", "prec"]
             }
           ]
         }
@@ -955,8 +969,8 @@
             },
             {
               "type": "value",
-              "origin": "variable",
-              "keys": ["stdname"]
+              "origin": "common_tag",
+              "keys": ["variable", "stdname"]
             }
           ],
           "forbidden_values": ["", "None", null]
@@ -971,8 +985,8 @@
             },
             {
               "type": "value",
-              "origin": "variable",
-              "keys": ["description"]
+              "origin": "common_tag",
+              "keys": ["variable", "description"]
             },
             "None"
           ],
@@ -988,8 +1002,8 @@
             },
             {
               "type": "value",
-              "origin": "variable",
-              "keys": ["long_name"]
+              "origin": "common_tag",
+              "keys": ["variable", "long_name"]
             }
           ]
         },
@@ -1023,8 +1037,8 @@
                 "comments",
                 {
                   "type": "value",
-                  "origin": "variable",
-                  "keys": ["label"]
+                  "origin": "common_tag",
+                  "keys": ["variable", "label"]
                 }
               ]
             },
@@ -1035,8 +1049,8 @@
                 "comments",
                 {
                   "type": "value",
-                  "origin": "variable",
-                  "keys": ["label"]
+                  "origin": "common_tag",
+                  "keys": ["variable", "label"]
                 }
               ]
             }
@@ -1053,8 +1067,8 @@
             },
             {
               "type": "value",
-              "origin": "variable",
-              "keys": ["positive"]
+              "origin": "common_tag",
+              "keys": ["variable", "positive"]
             }
           ],
           "forbidden_values": ["", "None", null]
@@ -1080,8 +1094,8 @@
             },
             {
               "type": "value",
-              "origin": "variable",
-              "keys": ["units"]
+              "origin": "common_tag",
+              "keys": ["variable", "units"]
             }
           ],
           "forbidden_values": ["", "None", null]
@@ -1096,8 +1110,8 @@
             },
             {
               "type": "value",
-              "origin": "variable",
-              "keys": ["cell_methods"]
+              "origin": "common_tag",
+              "keys": ["variable", "cell_methods"]
             }
           ],
           "forbidden_values": ["", "None", null]
@@ -1112,8 +1126,8 @@
             },
             {
               "type": "value",
-              "origin": "variable",
-              "keys": ["cell_measures"]
+              "origin": "common_tag",
+              "keys": ["variable", "cell_measures"]
             }
           ],
           "forbidden_values": ["", "None", null]
@@ -1128,8 +1142,8 @@
             },
             {
               "type": "value",
-              "origin": "variable",
-              "keys": ["flag_meanings"]
+              "origin": "common_tag",
+              "keys": ["variable", "flag_meanings"]
             }
           ],
           "forbidden_values": ["", "None", null]
@@ -1144,8 +1158,8 @@
             },
             {
               "type": "value",
-              "origin": "variable",
-              "keys": ["flag_values"]
+              "origin": "common_tag",
+              "keys": ["variable", "flag_values"]
             }
           ],
           "forbidden_values": ["", "None", null]
@@ -1257,6 +1271,20 @@
       }
     },
     "file_output": {
+      "common_list": ["variable"],
+      "common_constraints": {
+        "variable": {
+          "help": "Variable information",
+          "fatal": true,
+          "values": [
+            {
+              "type": "value",
+              "origin": "variable",
+              "keys": []
+            }
+          ]
+        }
+      },
       "attrs_list": ["id", "name", "output_freq", "append", "output_level", "compression_level", "split_freq",
         "split_freq_format", "split_start_offset", "split_end_offset", "split_last_date", "time_units",
         "time_counter_name", "time_counter", "time_stamp_name", "time_stamp_format", "uuid_name",
@@ -1331,8 +1359,8 @@
                   },
                   "variable": {
                     "type": "value",
-                    "origin": "variable",
-                    "keys": ["label"]
+                    "origin": "common_tag",
+                    "keys": ["variable", "label"]
                   }
                 }
               }
@@ -1383,8 +1411,8 @@
                 "type": "condition",
                 "value_to_check": {
                   "type": "value",
-                  "origin": "variable",
-                  "keys": "frequency"
+                  "origin": "common_tag",
+                  "keys": ["variable", "frequency"]
                 },
                 "check_to_perform": "nmatch",
                 "reference_values": [".*fx.*"],
@@ -1406,8 +1434,8 @@
                 "type": "condition",
                 "value_to_check": {
                   "type": "value",
-                  "origin": "variable",
-                  "keys": "frequency"
+                  "origin": "common_tag",
+                  "keys": ["variable", "frequency"]
                 },
                 "check_to_perform": "nmatch",
                 "reference_values": [".*fx.*"],
@@ -1429,8 +1457,8 @@
                 "type": "condition",
                 "value_to_check": {
                   "type": "value",
-                  "origin": "variable",
-                  "keys": "frequency"
+                  "origin": "common_tag",
+                  "keys": ["variable", "frequency"]
                 },
                 "check_to_perform": "nmatch",
                 "reference_values": [".*fx.*"],
@@ -1452,8 +1480,8 @@
                 "type": "condition",
                 "value_to_check": {
                   "type": "value",
-                  "origin": "variable",
-                  "keys": "frequency"
+                  "origin": "common_tag",
+                  "keys": ["variable", "frequency"]
                 },
                 "check_to_perform": "nmatch",
                 "reference_values": [".*fx.*"],
@@ -1475,8 +1503,8 @@
                 "type": "condition",
                 "value_to_check": {
                   "type": "value",
-                  "origin": "variable",
-                  "keys": "frequency"
+                  "origin": "common_tag",
+                  "keys": ["variable", "frequency"]
                 },
                 "check_to_perform": "nmatch",
                 "reference_values": [".*fx.*"],
@@ -1656,8 +1684,8 @@
             ]
           },
         "branch_time_in_child": {
-            "help": "Branch time of the simulation in the child's one.",
-            "forbidden_values": ["", "None", null],
+          "help": "Branch time of the simulation in the child's one.",
+          "forbidden_values": ["", "None", null],
           "num_type": "double",
             "values": [
               {
@@ -1771,16 +1799,16 @@
                     "type": "condition",
                     "value_to_check": {
                       "type": "value",
-                      "origin": "variable",
-                      "keys": ["comments"]
+                      "origin": "common_tag",
+                      "keys": ["variable","comments"]
                     },
                     "check_to_perform": "neq",
                     "reference_values": ["None", null],
                     "values": [
                       {
                         "type": "value",
-                        "origin": "variable",
-                        "keys": ["comments"]
+                        "origin": "common_tag",
+                        "keys": ["variable","comments"]
                       }
                     ],
                     "not_values": ""
@@ -1971,8 +1999,8 @@
                 "options": {
                   "cell_measures": {
                     "type": "value",
-                    "origin": "variable",
-                    "keys": ["cell_measures"]
+                    "origin": "common_tag",
+                    "keys": ["variable","cell_measures"]
                   }
                 }
               }
@@ -2004,8 +2032,8 @@
               },
               {
                 "type": "value",
-                "origin": "variable",
-                "keys": ["frequency"]
+                "origin": "common_tag",
+                "keys": ["variable","frequency"]
               }
             ]
           },
@@ -2128,8 +2156,8 @@
               },
               {
                 "type": "value",
-                "origin": "variable",
-                "keys": ["mip_era"]
+                "origin": "common_tag",
+                "keys": ["variable","mip_era"]
               }
             ]
           },
@@ -2227,8 +2255,8 @@
                   },
                   {
                     "type": "value",
-                    "origin": "variable",
-                    "keys": ["mip_era"]
+                    "origin": "common_tag",
+                    "keys": ["variable","mip_era"]
                   }
                 ]
               }
@@ -2379,8 +2407,8 @@
             "values": [
               {
                 "type": "value",
-                "origin": "variable",
-                "keys": ["modeling_realm"],
+                "origin": "common_tag",
+                "keys": ["variable","modeling_realm"],
                 "format": {
                   "type": "func",
                   "origin": "self",
