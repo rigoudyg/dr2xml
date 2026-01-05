@@ -171,7 +171,7 @@ For parameter compression_level, found value 0
 For parameter contact, found value None
 For parameter convention_str, found value CF-1.7 CMIP-6.2
 Function 'get_transformed_content': Passing merged **kwargs (potential function call overrides applied to config defaults: {'version': 'test', 'force_retrieve': False, 'cache_dir': 'data_request_directory', 'check_api_version': False, 'consolidate': False, 'export': 'release', 'log_file': 'default', 'log_level': 'info', 'offline': True, 'variable_name': 'CMIP7 Compound Name'}).
-For parameter data_specs_version, found value Software 1.2.3.dev31+g02a88ec44 - Content test
+For parameter data_specs_version, found value Software current_cmip7_dr_software - Content test
 For parameter date_range, found value %start_date%-%end_date%
 Could not find a proper value for description
 For parameter dr2xml_version, found value 3.1
@@ -1829,7 +1829,7 @@ For table Oyr: tnkebto
 For table SIday: sithick siconc sithick siu siv
 For table SImon: sithick siconc simass sithick siu siv
 For parameter id, found value nemo
-For parameter DR_version, found value CMIP7 Data Request version Software 1.2.3.dev31+g02a88ec44 - Content test
+For parameter DR_version, found value CMIP7 Data Request version Software current_cmip7_dr_software - Content test
 For parameter dr2xml_version, found value dr2xml version 3.1
 For parameter lab_settings, found value Lab_and_model settings
 {'data_request_content_version' = 'test',
@@ -1928,7 +1928,7 @@ Could not find a proper value for detect_missing_value
 Could not find a proper value for prec
   5 variables written for current_directory/test_pingfiles_CMIP7_IPSL_realm/test_outputs//ping_nemo_seaIce.xml
 For parameter id, found value nemo
-For parameter DR_version, found value CMIP7 Data Request version Software 1.2.3.dev31+g02a88ec44 - Content test
+For parameter DR_version, found value CMIP7 Data Request version Software current_cmip7_dr_software - Content test
 For parameter dr2xml_version, found value dr2xml version 3.1
 For parameter lab_settings, found value Lab_and_model settings
 {'data_request_content_version' = 'test',
@@ -2305,7 +2305,7 @@ Could not find a proper value for detect_missing_value
 Could not find a proper value for prec
  24 variables written for current_directory/test_pingfiles_CMIP7_IPSL_realm/test_outputs//ping_nemo_ocean.xml
 For parameter id, found value nemo
-For parameter DR_version, found value CMIP7 Data Request version Software 1.2.3.dev31+g02a88ec44 - Content test
+For parameter DR_version, found value CMIP7 Data Request version Software current_cmip7_dr_software - Content test
 For parameter dr2xml_version, found value dr2xml version 3.1
 For parameter lab_settings, found value Lab_and_model settings
 {'data_request_content_version' = 'test',
@@ -2625,7 +2625,7 @@ For parameter comment_sset, found value ''
 For parameter compression_level, found value 0
 For parameter contact, found value None
 For parameter convention_str, found value CF-1.7 CMIP-6.2
-For parameter data_specs_version, found value Software 1.2.3.dev31+g02a88ec44 - Content test
+For parameter data_specs_version, found value Software current_cmip7_dr_software - Content test
 For parameter date_range, found value %start_date%-%end_date%
 Could not find a proper value for description
 For parameter dr2xml_version, found value 3.1
@@ -3318,7 +3318,7 @@ For table LImon: snc snc
 For table Lmon: lai mrso mrsos
 For table fx: areacella orog rootd
 For parameter id, found value orchidee
-For parameter DR_version, found value CMIP7 Data Request version Software 1.2.3.dev31+g02a88ec44 - Content test
+For parameter DR_version, found value CMIP7 Data Request version Software current_cmip7_dr_software - Content test
 For parameter dr2xml_version, found value dr2xml version 3.1
 For parameter lab_settings, found value Lab_and_model settings
 {'data_request_content_version' = 'test',
@@ -3539,7 +3539,7 @@ Could not find a proper value for detect_missing_value
 Could not find a proper value for prec
  14 variables written for current_directory/test_pingfiles_CMIP7_IPSL_realm/test_outputs//ping_orchidee_land.xml
 For parameter id, found value orchidee
-For parameter DR_version, found value CMIP7 Data Request version Software 1.2.3.dev31+g02a88ec44 - Content test
+For parameter DR_version, found value CMIP7 Data Request version Software current_cmip7_dr_software - Content test
 For parameter dr2xml_version, found value dr2xml version 3.1
 For parameter lab_settings, found value Lab_and_model settings
 {'data_request_content_version' = 'test',
@@ -3748,7 +3748,7 @@ For parameter comment_sset, found value ''
 For parameter compression_level, found value 0
 For parameter contact, found value None
 For parameter convention_str, found value CF-1.7 CMIP-6.2
-For parameter data_specs_version, found value Software 1.2.3.dev31+g02a88ec44 - Content test
+For parameter data_specs_version, found value Software current_cmip7_dr_software - Content test
 For parameter date_range, found value %start_date%-%end_date%
 Could not find a proper value for description
 For parameter dr2xml_version, found value 3.1
@@ -4453,7 +4453,7 @@ For table Omon: mpw swh swhmax wpp
 For table day: pr psl sfcWind ta tas tasmax tasmin zg
 For table fx: areacella sftlf areacella orog rootd
 For parameter id, found value LMDZ
-For parameter DR_version, found value CMIP7 Data Request version Software 1.2.3.dev31+g02a88ec44 - Content test
+For parameter DR_version, found value CMIP7 Data Request version Software current_cmip7_dr_software - Content test
 For parameter dr2xml_version, found value dr2xml version 3.1
 For parameter lab_settings, found value Lab_and_model settings
 {'data_request_content_version' = 'test',
@@ -4925,7 +4925,7 @@ Could not find a proper value for detect_missing_value
 Could not find a proper value for prec
  27 variables written for current_directory/test_pingfiles_CMIP7_IPSL_realm/test_outputs//ping_LMDZ_atmos.xml
 For parameter id, found value LMDZ
-For parameter DR_version, found value CMIP7 Data Request version Software 1.2.3.dev31+g02a88ec44 - Content test
+For parameter DR_version, found value CMIP7 Data Request version Software current_cmip7_dr_software - Content test
 For parameter dr2xml_version, found value dr2xml version 3.1
 For parameter lab_settings, found value Lab_and_model settings
 {'data_request_content_version' = 'test',
@@ -5149,7 +5149,7 @@ Could not find a proper value for detect_missing_value
 Could not find a proper value for prec
  14 variables written for current_directory/test_pingfiles_CMIP7_IPSL_realm/test_outputs//ping_LMDZ_land.xml
 For parameter id, found value LMDZ
-For parameter DR_version, found value CMIP7 Data Request version Software 1.2.3.dev31+g02a88ec44 - Content test
+For parameter DR_version, found value CMIP7 Data Request version Software current_cmip7_dr_software - Content test
 For parameter dr2xml_version, found value dr2xml version 3.1
 For parameter lab_settings, found value Lab_and_model settings
 {'data_request_content_version' = 'test',
@@ -5187,7 +5187,7 @@ Could not find a proper value for detect_missing_value
 Could not find a proper value for prec
   1 variables written for current_directory/test_pingfiles_CMIP7_IPSL_realm/test_outputs//ping_LMDZ_landIce.xml
 For parameter id, found value LMDZ
-For parameter DR_version, found value CMIP7 Data Request version Software 1.2.3.dev31+g02a88ec44 - Content test
+For parameter DR_version, found value CMIP7 Data Request version Software current_cmip7_dr_software - Content test
 For parameter dr2xml_version, found value dr2xml version 3.1
 For parameter lab_settings, found value Lab_and_model settings
 {'data_request_content_version' = 'test',
@@ -5258,7 +5258,7 @@ Could not find a proper value for detect_missing_value
 Could not find a proper value for prec
   0 variables written for current_directory/test_pingfiles_CMIP7_IPSL_realm/test_outputs//ping_LMDZ_atmosChem.xml
 For parameter id, found value LMDZ
-For parameter DR_version, found value CMIP7 Data Request version Software 1.2.3.dev31+g02a88ec44 - Content test
+For parameter DR_version, found value CMIP7 Data Request version Software current_cmip7_dr_software - Content test
 For parameter dr2xml_version, found value dr2xml version 3.1
 For parameter lab_settings, found value Lab_and_model settings
 {'data_request_content_version' = 'test',
