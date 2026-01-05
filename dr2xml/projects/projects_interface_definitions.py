@@ -284,14 +284,15 @@ class Settings(object):
     def dump_doc(self, force_void=False):
         raise NotImplementedError("Dump documentation is not implemented for class %s" % type(self))
 
-    def dump_doc_inner(self, value, force_void=False, format_struct=True, remove_new_lines=False):
+    def dump_doc_inner(self, value, force_void=False, format_struct=True, remove_new_lines=False,
+                       force_format_struct=False):
         if isinstance(value, Settings):
             rep = value.dump_doc(force_void=force_void)
         elif isinstance(value, (list, set)):
             rep = list()
             if len(value) == 0 and force_void:
                 rep.append(list())
-            elif len(value) == 1:
+            elif len(value) == 1 and not force_format_struct:
                 rep.extend(self.dump_doc_inner(value[0], force_void=force_void, format_struct=format_struct))
             elif format_struct:
                 rep.append("   ")
@@ -304,7 +305,7 @@ class Settings(object):
         elif isinstance(value, (dict, OrderedDict)):
             rep = list()
             if len(value) == 0 and force_void:
-                rep.append(type(value).__call__())
+                rep.append("%s" % type(value).__call__())
             else:
                 if format_struct:
                     rep.append("   ")
@@ -548,7 +549,7 @@ class ValueSettings(Settings):
         value_origin = self.origin
         value_type = self.type
         if value_type in ["value", ]:
-            if value_origin in ["laboratory", "simulation", "dict", "init", "internal", "common", "attrs"]:
+            if value_origin in ["laboratory", "simulation", "dict", "init", "internal", "common", "attrs", "common_tag"]:
                 tmp_rep = "%s" % value_origin
                 keys_values = self.dump_doc_inner(self.keys, format_struct=False)
                 for key_value in keys_values:
@@ -566,8 +567,11 @@ class ValueSettings(Settings):
         elif value_type in ["merge", ]:
             tmp_rep = "merge_lists(%s)" % ", ".join(self.dump_doc_inner(self.keys, format_struct=False))
         if self.format is not False:
-            tmp_rep = self.dump_doc_inner(self.format, force_void=force_void, remove_new_lines=True)[0] + \
-                      ".format(%s)" % tmp_rep
+            if isinstance(self.format, FunctionSettings):
+                tmp_rep += " formatted with %s" % self.dump_doc_inner(self.format, force_void=force_void, remove_new_lines=True)[0]
+            else:
+                tmp_rep = self.dump_doc_inner(self.format, force_void=force_void, remove_new_lines=True)[0] + \
+                          ".format(%s)" % tmp_rep
         if len(tmp_rep) == 0:
             print(self)
             rep.extend(super().dump_doc(force_void=force_void))
@@ -580,9 +584,9 @@ class ParameterSettings(Settings):
 
     def init_dict_default(self):
         return dict(key=None, help="TODO", fatal=False, corrections=False, values=list(), target_type=False,
-                    authorized_values=False, authorized_types=False, authorized_patterns=False,
-                    forbidden_types=False, forbidden_patterns=False, forbidden_values=False,
-                    output_key=False, num_type=False, conditions=True)
+                    authorized_values=True, authorized_types=True, authorized_patterns=True,
+                    forbidden_types=True, forbidden_patterns=True, forbidden_values=True,
+                    output_key=False, num_type="string", conditions=True)
 
     @classmethod
     def from_dict(cls, key, kwargs, additional_keys=False, project_funcs=None):
@@ -649,21 +653,22 @@ class ParameterSettings(Settings):
             output_keys.insert(0, "output_key")
         for key in output_keys:
             value = self.__getattribute__(key)
-            if value != default_dict[key]:
-                value = self.dump_doc_inner(value, force_void=force_void or key in ["default_values", ],
-                                            format_struct=key not in ["conditions", ])
+            if value not in [default_dict[key], ] or key in ["num_type", ]:
+                value = self.dump_doc_inner(value, force_void=force_void or key in ["values", ],
+                                            format_struct=key not in ["conditions", ],
+                                            force_format_struct=key in ["values", ])
                 add = False
                 key = key.replace("_", " ")
-                if len(value) == 1:
+                if len(value) > 1 or key in ["values", ]:
+                    rep.append(fmt % ("%s:" % key))
+                    rep.extend(fmt % elt for elt in value)
+                    add = True
+                elif len(value) == 1:
                     value = "%s" % value[0]
                     value = value.strip()
                     if len(value) > 0:
                         rep.append(fmt % ("%s: %s" % (key, value)))
                         add = True
-                elif len(value) > 1:
-                    rep.append(fmt % ("%s:" % key))
-                    rep.extend(fmt % elt for elt in value)
-                    add = True
                 if add:
                     rep.append(fmt % "")
         return rep

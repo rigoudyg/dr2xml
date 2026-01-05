@@ -1,5 +1,5 @@
-Parameters available for project ping
-=====================================
+Parameters available for project CMIP6_esgvoc
+=============================================
 
 Init values
 ---------------
@@ -135,7 +135,7 @@ Init values
       values:
          
          - laboratory[vocabulary_used]
-         - None
+         - 'dr2xml_default'
       
       num type: 'string'
       
@@ -152,6 +152,23 @@ Internal values
          
          - laboratory[CFsubhr_frequency]
          - '1ts'
+      
+      num type: 'string'
+      
+   CV_experiment
+      
+      Controlled vocabulary file containing experiment characteristics.
+      
+      fatal: True
+      
+      values:
+         
+         - function from vocabulary_server named get_term_in_collection('project_id'= init[vocabulary_project], 'collection_id'= 'experiment_id', 'term_id'= internal[experiment_id])
+      
+      forbidden values:
+         
+         - None
+         - ''
       
       num type: 'string'
       
@@ -174,8 +191,7 @@ Internal values
       
       values:
          
-         - laboratory[additional_allowed_components][internal[source_id]]
-         - []
+         - internal[CV_experiment][additional_allowed_model_components]
       
       num type: 'string'
       
@@ -287,7 +303,7 @@ Internal values
       
       values:
          
-         - None
+         - simulation[configuration]
       
       num type: 'string'
       
@@ -539,7 +555,8 @@ Internal values
       
       values:
          
-         - None
+         - simulation[experiment_for_requests]
+         - internal[experiment_id]
       
       num type: 'string'
       
@@ -551,7 +568,7 @@ Internal values
       
       values:
          
-         - None
+         - simulation[experiment_id]
       
       num type: 'string'
       
@@ -586,7 +603,7 @@ Internal values
       
       values:
          
-         - None
+         - laboratory[grid_choice][internal[source_id]]
       
       num type: 'string'
       
@@ -598,7 +615,8 @@ Internal values
       
       values:
          
-         - None
+         - laboratory[grid_policy]
+         - False
       
       num type: 'string'
       
@@ -623,7 +641,7 @@ Internal values
       
       values:
          
-         - None
+         - laboratory[grids]
       
       num type: 'string'
       
@@ -921,7 +939,7 @@ Internal values
       
       values:
          
-         - []
+         - laboratory[orphan_variables]
       
       num type: 'string'
       
@@ -934,16 +952,6 @@ Internal values
          - simulation[path_extra_tables]
          - laboratory[path_extra_tables]
          - None
-      
-      num type: 'string'
-      
-   path_special_defs
-      
-      TODO
-      
-      values:
-         
-         - laboratory[path_special_defs]
       
       num type: 'string'
       
@@ -1044,8 +1052,7 @@ Internal values
       
       values:
          
-         - laboratory[required_model_components][internal[source_id]]
-         - []
+         - internal[CV_experiment][required_model_components]
       
       num type: 'string'
       
@@ -1057,7 +1064,8 @@ Internal values
       
       values:
          
-         - None
+         - laboratory[sampling_timestep]
+         - 2
       
       num type: 'string'
       
@@ -1733,7 +1741,7 @@ Internal values
       
       values:
          
-         - None
+         - function from functions_file named format_sizes('sizes'= laboratory[sizes][internal[grid_choice]])
       
       num type: 'string'
       
@@ -1745,7 +1753,8 @@ Internal values
       
       values:
          
-         - None
+         - laboratory[configurations][internal[configuration]][0]
+         - simulation[source_id]
       
       num type: 'string'
       
@@ -1757,7 +1766,9 @@ Internal values
       
       values:
          
-         - None
+         - laboratory[configurations][internal[configuration]][1]
+         - simulation[source_type]
+         - laboratory[source_types][internal[source_id]]
       
       num type: 'string'
       
@@ -1937,6 +1948,7 @@ Common values
          
          - simulation[HDL]
          - laboratory[HDL]
+         - '21.14100'
       
       num type: 'string'
       
@@ -1948,6 +1960,7 @@ Common values
          
          - simulation[activity_id]
          - laboratory[activity_id]
+         - internal[CV_experiment][activity_id][0] formatted with function from self named upper({})
       
       num type: 'string'
       
@@ -2031,6 +2044,19 @@ Common values
       
       num type: 'string'
       
+   commercial_license
+      
+      Either commercial or not commercial license
+      
+      fatal: True
+      
+      values:
+         
+         - laboratory[commercial_license]
+         - 'NonCommercial-'
+      
+      num type: 'string'
+      
    compression_level
       
       The compression level to be applied to NetCDF output files."
@@ -2061,6 +2087,16 @@ Common values
       values:
          
          - config.conventions
+      
+      num type: 'string'
+      
+   conventions_version
+      
+      Version of the conventions used.
+      
+      values:
+         
+         - config.CMIP6_conventions_version
       
       num type: 'string'
       
@@ -2180,6 +2216,77 @@ Common values
       values:
          
          - laboratory[institution]
+         - common[institution_input][description]
+      
+      num type: 'string'
+      
+   institution_input
+      
+      Institution information from input
+      
+      fatal: True
+      
+      values:
+         
+         - function from vocabulary_server named get_term_in_collection('project_id'= init[vocabulary_project], 'collection_id'= 'institution_id', 'term_id'= init[institution_id] formatted with function from self named lower({}))
+      
+      forbidden values:
+         
+         - None
+         - ''
+      
+      num type: 'string'
+      
+   license
+      
+      Text of the license which applies
+      
+      fatal: True
+      
+      values:
+         
+         - common[license_file][0]
+         - common[license_file][license]
+      
+      num type: 'string'
+      
+   license_file
+      
+      File where the license associated with the produced output files can be found.
+      
+      fatal: True
+      
+      values:
+         
+         - read_json_file(function from self named format('cvspath'= dict[cvspath], 'project'= init[project]))[license]
+      
+      num type: 'string'
+      
+   license_id
+      
+      License id
+      
+      fatal: True
+      
+      values:
+         
+         - common[license_file][license][laboratory[license_id]][license_id]
+         - common[license_file][license_options][CC BY-NC-SA 4.0][license_id]
+         - ''
+      
+      num type: 'string'
+      
+   license_url
+      
+      License url
+      
+      fatal: True
+      
+      values:
+         
+         - common[license_file][license][laboratory[license_id]][license_url]
+         - common[license_file][license_options][CC BY-NC-SA 4.0][license_url]
+         - 'https://creativecommons.org/licenses'
       
       num type: 'string'
       
@@ -2190,6 +2297,19 @@ Common values
       values:
          
          - 'dr2xml_list_perso_and_dev_file_names'
+      
+      num type: 'string'
+      
+   member_id
+      
+      Id of the member done.
+      
+      values:
+         
+         - function from self named format('sub_exp'= common[sub_experiment_id], 'variant'= common[variant_label])
+         - common[variant_label]
+      
+      forbidden patterns: 'none-.*'
       
       num type: 'string'
       
@@ -2249,6 +2369,7 @@ Common values
          - simulation[activity_id]
          - laboratory[parent_activity_id]
          - laboratory[activity_id]
+         - internal[CV_experiment][parent_activity_id]
       
       num type: 'string'
       
@@ -2260,6 +2381,7 @@ Common values
          
          - simulation[parent_experiment_id]
          - laboratory[parent_experiment_id]
+         - internal[CV_experiment][parent_experiment_id]
       
       num type: 'string'
       
@@ -2353,7 +2475,25 @@ Common values
       
       values:
          
+         - function from functions_file named make_source_string('source'= common[source_input][__dict__], 'source_id'= internal[source_id])
          - laboratory[source]
+      
+      num type: 'string'
+      
+   source_input
+      
+      Source information from input
+      
+      fatal: True
+      
+      values:
+         
+         - function from vocabulary_server named get_term_in_collection('project_id'= init[vocabulary_project], 'collection_id'= 'source_id', 'term_id'= internal[source_id] formatted with function from self named lower({}))
+      
+      forbidden values:
+         
+         - None
+         - ''
       
       num type: 'string'
       
@@ -2388,6 +2528,16 @@ Common values
          - simulation[variant_info]
       
       forbidden values: ''
+      
+      num type: 'string'
+      
+   variant_label
+      
+      Label of the variant done.
+      
+      values:
+         
+         - function from self named format('realization'= internal[realization_index], 'initialization'= common[initialization_index], 'physics'= common[physics_index], 'forcing'= common[forcing_index])
       
       num type: 'string'
       
@@ -2666,6 +2816,26 @@ Project settings
             values:
                
                - function from self named format('data_request_used'= init[data_request_used], 'data_specs_version'= common[data_specs_version])
+            
+            num type: 'string'
+            
+         CV_version
+            
+            Controled vocabulary version used.
+            
+            values:
+               
+               - 'CMIP6-CV version ??'
+            
+            num type: 'string'
+            
+         conventions_version
+            
+            Conventions version used.
+            
+            values:
+               
+               - 'CMIP6_conventions_version {}'.format(common[conventions_version])
             
             num type: 'string'
             
@@ -3525,7 +3695,7 @@ Project settings
             
             values:
                
-               - attrs[name]
+               - function from functions_file named build_filename('frequency'= variable.frequency, 'prefix'= common[prefix], 'table'= dict[table_id], 'source_id'= internal[source_id], 'expid_in_filename'= common[expid_in_filename], 'member_id'= common[member_id], 'grid_label'= dict[grid_label], 'date_range'= common[date_range], 'var_type'= variable.type, 'list_perso_dev_file'= common[list_perso_dev_file], 'label'= variable.label, 'mipVarLabel'= variable.mipVarLabel, 'use_cmorvar'= internal[use_cmorvar_label_in_filename])
             
             num type: 'string'
             
@@ -3908,6 +4078,7 @@ Project settings
                -             
                -             - attrs[description]
                -             - common[description]
+               -             - internal[CV_experiment][description]
                -       
             
             forbidden values:
@@ -3938,6 +4109,7 @@ Project settings
                -             
                -             - attrs[description]
                -             - common[description]
+               -             - internal[CV_experiment][description]
                -       
             
             forbidden values:
@@ -3966,6 +4138,7 @@ Project settings
                -             
                -             - attrs[experiment]
                -             - common[experiment]
+               -             - internal[CV_experiment][experiment]
                -       
             
             forbidden values:
@@ -4017,7 +4190,26 @@ Project settings
             
             values:
                
-               - attrs[further_info_url]
+               -    Condition:
+               -    
+               -       value to check: common[mip_era_lset]
+               -       
+               -       check to perform: 'eq'
+               -       
+               -       reference values: None
+               -       
+               -       values:
+               -             Condition:
+               -             
+               -                value to check: common[mip_era_sset]
+               -                
+               -                check to perform: 'eq'
+               -                
+               -                reference values: None
+               -                
+               -                values: function from self named format('mip_era'= variable.mip_era, 'institution_id'= init[institution_id], 'source_id'= internal[source_id], 'expid'= common[expid_in_filename], 'sub_exp'= common[sub_experiment_id], 'variant'= common[variant_label])
+               -                
+               -       
             
             forbidden values:
                
@@ -4125,6 +4317,7 @@ Project settings
             values:
                
                - attrs[license]
+               - function from functions_file named fill_license('value'= common[license], 'institution_id'= init[institution_id], 'info_url'= common[info_url], 'commercial_license'= common[commercial_license], 'license_id'= common[license_id], 'license_url'= common[license_url])
             
             num type: 'string'
             
@@ -4435,6 +4628,10 @@ Project settings
                
                - common_tag[variable][modeling_realm] formatted with function from self named join({})
             
+            corrections:
+               
+               - 'ocnBgChem': 'ocnBgchem'
+            
             num type: 'string'
             
          references
@@ -4451,6 +4648,8 @@ Project settings
          source
             
             Model associated with the simulation.
+            
+            fatal: True
             
             values:
                
@@ -4532,6 +4731,7 @@ Project settings
             values:
                
                - attrs[variable_id]
+               - variable.mipVarLabel
             
             num type: 'string'
             

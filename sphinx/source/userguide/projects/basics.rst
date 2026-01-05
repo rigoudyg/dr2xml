@@ -1,6 +1,144 @@
 Parameters available for project basics
 =======================================
 
+Init values
+---------------
+.. glossary::
+   :sorted:
+   
+   data_request_config
+      
+      Configuration file of the data request content to be used.
+      
+      values:
+         
+         - laboratory[data_request_config]
+         - '__package-root__/dr_interface/CMIP7_config'
+      
+      num type: 'string'
+      
+   data_request_content_version
+      
+      Version of the data request content to be used.
+      
+      values:
+         
+         - laboratory[data_request_content_version]
+         - 'latest_stable'
+      
+      num type: 'string'
+      
+   data_request_path
+      
+      Path where the data request API used is placed.
+      
+      values:
+         
+         - laboratory[data_request_path]
+         - None
+      
+      num type: 'string'
+      
+   data_request_used
+      
+      The Data Request infrastructure type which should be used.
+      
+      values:
+         
+         - laboratory[data_request_used]
+         - 'CMIP6'
+      
+      num type: 'string'
+      
+   institution_id
+      
+      Institution identifier.
+      
+      fatal: True
+      
+      values:
+         
+         - laboratory[institution_id]
+      
+      num type: 'string'
+      
+   laboratory_used
+      
+      File which contains the settings to be used for a specific laboratory which is not present by default in dr2xml. Must contains at least the `lab_grid_policy` function.
+      
+      values:
+         
+         - laboratory[laboratory_used]
+         - None
+      
+      num type: 'string'
+      
+   project
+      
+      Project associated with the simulation.
+      
+      values:
+         
+         - laboratory[project]
+         - 'CMIP6'
+      
+      num type: 'string'
+      
+   project_settings
+      
+      Project settings definition file to be used.
+      
+      values:
+         
+         - laboratory[project_settings]
+         - init[project]
+      
+      num type: 'string'
+      
+   save_project_settings
+      
+      The path of the file where the complete project settings will be written, if needed.
+      
+      values:
+         
+         - laboratory[save_project_settings]
+         - None
+      
+      num type: 'string'
+      
+   vocabulary_config
+      
+      Configuration file of the vocabulary to be used.
+      
+      values:
+         
+         - laboratory[vocabulary_config]
+         - '__package-root__/vocabulary/vocabulary.json'
+      
+      num type: 'string'
+      
+   vocabulary_project
+      
+      The vocabulary project which should be used.
+      
+      values:
+         
+         - laboratory[vocabulary_project] formatted with function from self named lower({})
+         - init[project] formatted with function from self named lower({})
+      
+      num type: 'string'
+      
+   vocabulary_used
+      
+      The vocabulary infrastructure type which should be used.
+      
+      values:
+         
+         - laboratory[vocabulary_used]
+         - None
+      
+      num type: 'string'
+      
 Internal values
 ---------------
 .. glossary::
@@ -10,9 +148,7 @@ Internal values
       
       CFMIP has an elaborated requirement for defining subhr frequency; by default, dr2xml uses 1 time step.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[CFsubhr_frequency]
          - '1ts'
@@ -23,9 +159,7 @@ Internal values
       
       DR01.00.21 does not include Gibraltar strait, which is requested by OMIP. Can include it, if model provides it as last value of array.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[add_Gibraltar]
          - False
@@ -38,9 +172,9 @@ Internal values
       
       fatal: True
       
-      default values:
+      values:
          
-         - laboratory[additional_allowed_model_components][internal[source_id]]
+         - laboratory[additional_allowed_components][internal[source_id]]
          - []
       
       num type: 'string'
@@ -49,9 +183,7 @@ Internal values
       
       Some scenario experiment in DR 01.00.21 do not request tos on 1 degree grid, while other do. If you use grid_policy=adhoc and had not changed the mapping of function. grids.lab_adhoc_grid_policy to grids.CNRM_grid_policy, next setting can force any tos request to also produce tos on a 1 degree grid.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[adhoc_policy_do_add_1deg_grid_for_tos]
          - False
@@ -62,9 +194,7 @@ Internal values
       
       Should we allow for duplicate vars: two vars with same frequency, shape and realm, which differ only by the table. In DR01.00.21, this actually applies to very few fields (ps-Aermon, tas-ImonAnt, areacellg-IfxAnt).
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[allow_duplicates]
          - True
@@ -77,7 +207,7 @@ Internal values
       
       fatal: True
       
-      default values:
+      values:
          
          - laboratory[allow_duplicates_in_same_table]
          - False
@@ -88,9 +218,7 @@ Internal values
       
       DR has sn attributes for MIP variables. They can be real,CF-compliant, standard_names or pseudo_standard_names, i.e. not yet approved labels. Default is to use only CF ones.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[allow_pseudo_standard_names]
          - False
@@ -101,9 +229,7 @@ Internal values
       
       When using select='no', Xios may enter an endless loop, which is solved if next setting is False.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[allow_tos_3hr_1deg]
          - True
@@ -114,19 +240,17 @@ Internal values
       
       In some instances, the experiment start year is not explicit or is doubtful in DR. See file doc/some_experiments_starty_in_DR01.00.21. You should then specify it, using next setting in order that requestItems analysis work in all cases. In some other cases, DR requestItems which apply to the experiment form its start does not cover its whole duration and have a wrong duration (computed based on a wrong start year); They necessitate to fix the start year.
       
-      fatal: False
-      
-      default values: simulation[branch_year_in_child]
+      values:
+         
+         - simulation[branch_year_in_child]
       
       num type: 'string'
       
    branching
       
-       Describe the branching scheme for experiments involved in some 'branchedYears type' tslice (for details, see: http://clipc-services.ceda.ac.uk/dreq/index/Slice.html ). Just put the as key the common start year in child and as value the list of start years in parent for all members.A dictionary with models name as key and dictionary containing experiment,(branch year in child, list of branch year in parent) key values.
+      Describe the branching scheme for experiments involved in some 'branchedYears type' tslice (for details, see: http://clipc-services.ceda.ac.uk/dreq/index/Slice.html ). Just put the as key the common start year in child and as value the list of start years in parent for all members.A dictionary with models name as key and dictionary containing experiment,(branch year in child, list of branch year in parent) key values.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[branching][internal[source_id]]
          - {}
@@ -137,9 +261,7 @@ Internal values
       
       If the CMIP6 Controlled Vocabulary doesn't allow all the components you activate, you can set next toggle to True
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[bypass_CV_components]
          - False
@@ -150,9 +272,7 @@ Internal values
       
       Estimate of number of bytes per floating value, given the chosen :term:`compression_level`.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[bytes_per_float]
          - 2
@@ -165,7 +285,9 @@ Internal values
       
       fatal: True
       
-      default values: simulation[configuration]
+      values:
+         
+         - simulation[configuration]
       
       num type: 'string'
       
@@ -175,59 +297,9 @@ Internal values
       
       fatal: True
       
-      default values: dict[context]
-      
-      num type: 'string'
-      
-   data_request_config
-      
-      Configuration file of the data request content to be used
-      
-      fatal: False
-      
-      default values:
+      values:
          
-         - laboratory[data_request_config]
-         - '/home/rigoudyg/dev/DR2XML/dr2xml_source/dr2xml/dr_interface/CMIP7_config'
-      
-      num type: 'string'
-      
-   data_request_content_version
-      
-      Version of the data request content to be used
-      
-      fatal: False
-      
-      default values:
-         
-         - laboratory[data_request_content_version]
-         - 'latest_stable'
-      
-      num type: 'string'
-      
-   data_request_path
-      
-      Path where the data request API used is placed.
-      
-      fatal: False
-      
-      default values:
-         
-         - laboratory[data_request_path]
-         - None
-      
-      num type: 'string'
-      
-   data_request_used
-      
-      The Data Request infrastructure type which should be used.
-      
-      fatal: False
-      
-      default values:
-         
-         - laboratory[data_request_used]
-         - 'CMIP6'
+         - dict[context]
       
       num type: 'string'
       
@@ -235,9 +307,7 @@ Internal values
       
       In order to identify which xml files generates a problem, you can use this flag.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[debug_parsing]
          - False
@@ -248,9 +318,7 @@ Internal values
       
       A smart workflow will allow you to extend a simulation during it course and to complement the output files accordingly, by managing the 'end date' part in filenames. You can then set next setting to False.
       
-      fatal: True
-      
-      default values:
+      values:
          
          - laboratory[dr2xml_manages_enddate]
          - True
@@ -261,12 +329,36 @@ Internal values
       
       If you want to carry on the experiment beyond the duration set in DR, and that all requestItems that apply to DR end year also apply later on, set 'end_year' You can also set it if you don't know if DR has a wrong value
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[end_year]
          - False
+      
+      num type: 'string'
+      
+   excluded_expgroups_lset
+      
+      List of the experiments groups that will be excluded from outputs from laboratory settings.
+      
+      values:
+         
+         - laboratory[excluded_expgroups]
+         - []
+      
+      target type: 'list'
+      
+      num type: 'string'
+      
+   excluded_expgroups_sset
+      
+      List of the experiments groups that will be excluded from outputs from simulation settings.
+      
+      values:
+         
+         - simulation[excluded_expgroups]
+         - []
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -274,12 +366,12 @@ Internal values
       
       List of the opportunities that will be excluded from outputs from laboratory settings.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[excluded_opportunities]
          - []
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -287,12 +379,12 @@ Internal values
       
       List of the opportunities that will be excluded from outputs from simulation settings.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[excluded_opportunities]
          - []
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -300,12 +392,12 @@ Internal values
       
       You can exclude some (variable, table) pairs from outputs. A list of tuple (variable, table) to be excluded from laboratory settings.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[excluded_pairs]
          - []
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -313,12 +405,12 @@ Internal values
       
       You can exclude some (variable, table) pairs from outputs. A list of tuple (variable, table) to be excluded from simulation settings.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[excluded_pairs]
          - []
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -326,12 +418,12 @@ Internal values
       
       List of links un data request that should not been followed (those request are not taken into account).
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[excluded_request_links]
          - []
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -339,12 +431,12 @@ Internal values
       
       The list of shapes that should be excluded (all variables in those shapes will be excluded from outputs).
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[excluded_spshapes]
          - []
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -352,12 +444,12 @@ Internal values
       
       List of the tables that will be excluded from outputs from laboratory settings.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[excluded_tables]
          - []
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -365,12 +457,12 @@ Internal values
       
       List of the tables that will be excluded from outputs from simulation settings.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[excluded_tables]
          - []
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -378,12 +470,12 @@ Internal values
       
       List of the variables groups that will be excluded from outputs from laboratory settings.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[excluded_vargroups]
          - []
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -391,12 +483,12 @@ Internal values
       
       List of the variables groups that will be excluded from outputs from simulation settings.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[excluded_vargroups]
          - []
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -404,12 +496,12 @@ Internal values
       
       List of CMOR variables to exclude from the result based on previous Data Request extraction from laboratory settings.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[excluded_vars]
          - []
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -417,12 +509,12 @@ Internal values
       
       A dictionary which keys are configurations and values the list of variables that must be excluded for each configuration.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[excluded_vars_per_config][internal[configuration]]
          - []
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -430,12 +522,12 @@ Internal values
       
       List of CMOR variables to exclude from the result based on previous Data Request extraction from simulation settings.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[excluded_vars]
          - []
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -445,7 +537,7 @@ Internal values
       
       fatal: True
       
-      default values:
+      values:
          
          - simulation[experiment_for_requests]
          - internal[experiment_id]
@@ -454,11 +546,13 @@ Internal values
       
    experiment_id
       
-      Root experiment identifier.
+      Root experiment identifier
       
       fatal: True
       
-      default values: simulation[experiment_id]
+      values:
+         
+         - simulation[experiment_id]
       
       num type: 'string'
       
@@ -466,9 +560,7 @@ Internal values
       
       If you want to produce the same variables set for all members, set this parameter to False.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[filter_on_realization]
          - laboratory[filter_on_realization]
@@ -480,9 +572,7 @@ Internal values
       
       You may provide some variables already horizontally remapped to some grid (i.e. Xios domain) in external files. The varname in file must match the referenced id in pingfile. Tested only for fixed fields. A dictionary with variable id as key and a dictionary as value: the key must be the grid id, the value a dictionary with the file for each resolution.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[fx_from_file]
          - []
@@ -495,7 +585,9 @@ Internal values
       
       fatal: True
       
-      default values: laboratory[grid_choice][internal[source_id]]
+      values:
+         
+         - laboratory[grid_choice][internal[source_id]]
       
       num type: 'string'
       
@@ -505,7 +597,7 @@ Internal values
       
       fatal: True
       
-      default values:
+      values:
          
          - laboratory[grid_policy]
          - False
@@ -518,7 +610,7 @@ Internal values
       
       fatal: True
       
-      default values:
+      values:
          
          - laboratory[grid_prefix]
          - internal[ping_variables_prefix]
@@ -527,11 +619,13 @@ Internal values
       
    grids
       
-      Grids : per model resolution and per context :- CMIP6 qualifier (i.e. 'gn' or 'gr') for the main grid chosen (because you  may choose has main production grid a regular one, when the native grid is e.g. unstructured)- Xios id for the production grid (if it is not the native grid),- Xios id for the latitude axis used for zonal means (mist match latitudes for grid above)- resolution of the production grid (using CMIP6 conventions),- grid description
+      Grids : per model resolution and per context :\n- CMIP6 qualifier (i.e. 'gn' or 'gr') for the main grid chosen (because you  may choose has main production grid a regular one, when the native grid is e.g. unstructured)\n- Xios id for the production grid (if it is not the native grid)\n- Xios id for the latitude axis used for zonal means (mist match latitudes for grid above)\n- resolution of the production grid (using CMIP6 conventions)\n- grid description
       
       fatal: True
       
-      default values: laboratory[grids]
+      values:
+         
+         - laboratory[grids]
       
       num type: 'string'
       
@@ -541,7 +635,7 @@ Internal values
       
       fatal: True
       
-      default values:
+      values:
          
          - laboratory[grids_dev]
          - {}
@@ -552,9 +646,7 @@ Internal values
       
       Variables to be grouped in the same output file (provided additional conditions are filled).
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[grouped_vars_per_file]
          - laboratory[grouped_vars_per_file]
@@ -562,16 +654,42 @@ Internal values
       
       num type: 'string'
       
+   included_expgroups
+      
+      List of experiments groups that will be processed (all others will not).
+      
+      values:
+         
+         - simulation[included_expgroups]
+         - internal[included_expgroups_lset]
+      
+      target type: 'list'
+      
+      num type: 'string'
+      
+   included_expgroups_lset
+      
+      List of experiments groups that will be processed (all others will not) from laboratory settings.
+      
+      values:
+         
+         - laboratory[included_expgroups]
+         - []
+      
+      target type: 'list'
+      
+      num type: 'string'
+      
    included_opportunities
       
       List of opportunities that will be processed (all others will not).
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[included_opportunities]
          - internal[included_opportunities_lset]
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -579,12 +697,12 @@ Internal values
       
       List of opportunities that will be processed (all others will not) from laboratory settings.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[included_opportunities]
          - []
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -592,12 +710,12 @@ Internal values
       
       List of the request links that will be processed (all others will not).
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[included_request_links]
          - []
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -605,12 +723,12 @@ Internal values
       
       List of tables that will be processed (all others will not).
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[included_tables]
          - internal[included_tables_lset]
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -618,12 +736,12 @@ Internal values
       
       List of tables that will be processed (all others will not) from laboratory settings.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[included_tables]
          - []
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -631,12 +749,12 @@ Internal values
       
       List of variables groups that will be processed (all others will not).
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[included_vargroups]
          - internal[included_vargroups_lset]
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -644,12 +762,12 @@ Internal values
       
       List of variables groups that will be processed (all others will not) from laboratory settings.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[included_vargroups]
          - []
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -657,12 +775,12 @@ Internal values
       
       Variables to be considered from the Data Request (all others will not)
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[included_vars]
          - internal[included_vars_lset]
+      
+      target type: 'list'
       
       num type: 'string'
       
@@ -670,35 +788,12 @@ Internal values
       
       Variables to be considered from the Data Request (all others will not) from laboratory settings.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[included_vars]
          - []
       
-      num type: 'string'
-      
-   institution_id
-      
-      Institution identifier.
-      
-      fatal: True
-      
-      default values: laboratory[institution_id]
-      
-      num type: 'string'
-      
-   laboratory_used
-      
-      File which contains the settings to be used for a specific laboratory which is not present by default in dr2xml. Must contains at least the `lab_grid_policy` function.
-      
-      fatal: False
-      
-      default values:
-         
-         - laboratory[laboratory_used]
-         - None
+      target type: 'list'
       
       num type: 'string'
       
@@ -706,9 +801,7 @@ Internal values
       
       Full path to the file which contains the list of home variables to be taken into account, in addition to the Data Request.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[listof_home_vars]
          - laboratory[listof_home_vars]
@@ -720,9 +813,7 @@ Internal values
       
       The maximum size of generated files in number of floating values.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[max_file_size_in_floats]
          - 500000000.0
@@ -735,7 +826,7 @@ Internal values
       
       fatal: True
       
-      default values:
+      values:
          
          - simulation[max_priority]
          - internal[max_priority_lset]
@@ -748,7 +839,9 @@ Internal values
       
       fatal: True
       
-      default values: laboratory[max_priority]
+      values:
+         
+         - laboratory[max_priority]
       
       num type: 'string'
       
@@ -756,9 +849,7 @@ Internal values
       
       The maximum number of years that should be putted in a single file.
       
-      fatal: True
-      
-      default values:
+      values:
          
          - simulation[max_split_freq]
          - laboratory[max_split_freq]
@@ -772,7 +863,9 @@ Internal values
       
       fatal: True
       
-      default values: laboratory[mips]
+      values:
+         
+         - laboratory[mips]
       
       num type: 'string'
       
@@ -782,7 +875,7 @@ Internal values
       
       fatal: True
       
-      default values:
+      values:
          
          - laboratory[nemo_sources_management_policy_master_of_the_world]
          - False
@@ -791,11 +884,9 @@ Internal values
       
    non_standard_attributes
       
-      You may add a series of NetCDF attributes in all files for this simulation
+      You may add a series of NetCDF attributes in all files for this simulation.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[non_standard_attributes]
          - {}
@@ -806,9 +897,7 @@ Internal values
       
       If your model has some axis which does not have all its attributes as in DR, and you want dr2xml to fix that it, give here the correspondence from model axis id to DR dim/grid id. For label dimensions you should provide the  list of labels, ordered as in your model, as second element of a pair. Label-type axes will be processed even if not quoted. Scalar dimensions are not concerned by this feature. A dictionary with (axis_id, axis_correct_id) or (axis_id, tuple of labels) as key, values.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[non_standard_axes]
          - {}
@@ -819,9 +908,7 @@ Internal values
       
       Name of the orography field name to be used to compute height over orog fields.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[orography_field_name]
          - 'orog'
@@ -830,11 +917,13 @@ Internal values
       
    orphan_variables
       
-      A dictionary with (context name, list of variables) as (key,value) pairs, where the list indicates the variables to be re-affected to the key-context (initially affected to a realm falling in another context)
+      A dictionary with (context name, list of variables) as (key,value) pairs, where the list indicates the variables to be re-affected to the key-context (initially affected to a realm falling in another context).
       
       fatal: True
       
-      default values: laboratory[orphan_variables]
+      values:
+         
+         - laboratory[orphan_variables]
       
       num type: 'string'
       
@@ -842,9 +931,7 @@ Internal values
       
       Full path of the directory which contains extra tables.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[path_extra_tables]
          - laboratory[path_extra_tables]
@@ -856,9 +943,7 @@ Internal values
       
       The path of the directory which, at run time, contains the root XML file (iodef.xml).
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[path_to_parse]
          - './'
@@ -869,9 +954,7 @@ Internal values
       
       A dictionary containing, for each perso or dev variables with a XY-perso shape, and for each vertical coordinate associated, the main attributes of the dimension.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[perso_sdims_description]
          - {}
@@ -884,7 +967,9 @@ Internal values
       
       fatal: True
       
-      default values: laboratory[ping_variables_prefix]
+      values:
+         
+         - laboratory[ping_variables_prefix]
       
       num type: 'string'
       
@@ -892,9 +977,9 @@ Internal values
       
       Name of the orography field name to be used to compute height over orog fields prefixed with :term:`ping_variable_prefix`.
       
-      fatal: False
-      
-      default values: '{}{}'.format(internal[ping_variables_prefix], internal[orography_field_name])
+      values:
+         
+         - function from self named format('prefix'= internal[ping_variables_prefix], 'variable'= internal[orography_field_name])
       
       num type: 'string'
       
@@ -902,9 +987,7 @@ Internal values
       
       For an extended printout of selected CMOR variables, grouped by variable label.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[print_stats_per_var_label]
          - False
@@ -915,38 +998,10 @@ Internal values
       
       If the value is a list, only the file/field variables listed here will be put in output files. If boolean, tell if the file/field variables should be put in output files.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[print_variables]
          - True
-      
-      num type: 'string'
-      
-   project
-      
-      Project associated with the simulation.
-      
-      fatal: False
-      
-      default values:
-         
-         - laboratory[project]
-         - 'CMIP6'
-      
-      num type: 'string'
-      
-   project_settings
-      
-      Project settings definition file to be used.
-      
-      fatal: False
-      
-      default values:
-         
-         - laboratory[project_settings]
-         - internal[project]
       
       num type: 'string'
       
@@ -954,9 +1009,7 @@ Internal values
       
       Realization number.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[realization_index]
          - '1'
@@ -965,11 +1018,13 @@ Internal values
       
    realms_per_context
       
-      A dictionary which keys are context names and values the lists of realms associated with each context
+      A dictionary which keys are context names and values the lists of realms associated with each context.
       
       fatal: True
       
-      default values: laboratory[realms_per_context][internal[context]]
+      values:
+         
+         - laboratory[realms_per_context][internal[context]]
       
       num type: 'string'
       
@@ -979,7 +1034,7 @@ Internal values
       
       fatal: True
       
-      default values:
+      values:
          
          - laboratory[required_model_components][internal[source_id]]
          - []
@@ -992,20 +1047,10 @@ Internal values
       
       fatal: True
       
-      default values: laboratory[sampling_timestep]
-      
-      num type: 'string'
-      
-   save_project_settings
-      
-      The path of the file where the complete project settings will be written, if needed.
-      
-      fatal: False
-      
-      default values:
+      values:
          
-         - laboratory[save_project_settings]
-         - None
+         - laboratory[sampling_timestep]
+         - 2
       
       num type: 'string'
       
@@ -1013,9 +1058,9 @@ Internal values
       
       List of the sectors to be considered.
       
-      fatal: False
-      
-      default values: laboratory[sectors]
+      values:
+         
+         - laboratory[sectors]
       
       num type: 'string'
       
@@ -1025,7 +1070,9 @@ Internal values
       
       fatal: True
       
-      default values: dict[select]
+      values:
+         
+         - dict[select]
       
       authorized values:
          
@@ -1035,43 +1082,65 @@ Internal values
       
       num type: 'string'
       
+   select_excluded_expgroups
+      
+      Excluded experiments groups for variable selection.
+      
+      fatal: True
+      
+      values:
+         
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: merge_lists()
+         -       
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: False
+         -       
+         -       values: internal[excluded_expgroups_lset]
+         -       
+      
+      num type: 'string'
+      
    select_excluded_opportunities
       
       Excluded opportunities for variable selection.
       
       fatal: True
       
-      default values: []
-      
-      cases:
-         Case:
+      values:
          
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: True
-                     
-            
-            value: ['internal[excluded_opportunities_lset]', 'internal[excluded_opportunities_sset]']
-            
-         Case:
-         
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: False
-                     
-            
-            value: internal[excluded_opportunities_lset]
-            
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: merge_lists()
+         -       
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: False
+         -       
+         -       values: internal[excluded_opportunities_lset]
+         -       
       
       num type: 'string'
       
@@ -1081,37 +1150,28 @@ Internal values
       
       fatal: True
       
-      default values: []
-      
-      cases:
-         Case:
+      values:
          
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: True
-                     
-            
-            value: ['internal[excluded_pairs_lset]', 'internal[excluded_pairs_sset]']
-            
-         Case:
-         
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: False
-                     
-            
-            value: internal[excluded_pairs_lset]
-            
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: merge_lists()
+         -       
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: False
+         -       
+         -       values: internal[excluded_pairs_lset]
+         -       
       
       num type: 'string'
       
@@ -1121,37 +1181,28 @@ Internal values
       
       fatal: True
       
-      default values: []
-      
-      cases:
-         Case:
+      values:
          
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: True
-                     
-            
-            value: internal[excluded_request_links]
-            
-         Case:
-         
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: False
-                     
-            
-            value: None
-            
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: internal[excluded_request_links]
+         -       
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: False
+         -       
+         -       values: None
+         -       
       
       num type: 'string'
       
@@ -1161,37 +1212,28 @@ Internal values
       
       fatal: True
       
-      default values: []
-      
-      cases:
-         Case:
+      values:
          
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: True
-                     
-            
-            value: ['internal[excluded_tables_lset]', 'internal[excluded_tables_sset]']
-            
-         Case:
-         
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: False
-                     
-            
-            value: internal[excluded_tables_lset]
-            
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: merge_lists()
+         -       
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: False
+         -       
+         -       values: internal[excluded_tables_lset]
+         -       
       
       num type: 'string'
       
@@ -1201,37 +1243,28 @@ Internal values
       
       fatal: True
       
-      default values: []
-      
-      cases:
-         Case:
+      values:
          
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: True
-                     
-            
-            value: ['internal[excluded_vargroups_lset]', 'internal[excluded_vargroups_sset]']
-            
-         Case:
-         
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: False
-                     
-            
-            value: internal[excluded_vargroups_lset]
-            
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: merge_lists()
+         -       
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: False
+         -       
+         -       values: internal[excluded_vargroups_lset]
+         -       
       
       num type: 'string'
       
@@ -1241,37 +1274,28 @@ Internal values
       
       fatal: True
       
-      default values: []
-      
-      cases:
-         Case:
+      values:
          
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: True
-                     
-            
-            value: ['internal[excluded_vars_lset]', 'internal[excluded_vars_sset]', 'internal[excluded_vars_per_config]']
-            
-         Case:
-         
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: False
-                     
-            
-            value: internal[excluded_vars_lset]
-            
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: merge_lists()
+         -       
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: False
+         -       
+         -       values: internal[excluded_vars_lset]
+         -       
       
       num type: 'string'
       
@@ -1281,37 +1305,59 @@ Internal values
       
       fatal: True
       
-      default values: []
+      values:
+         
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: internal[grid_choice]
+         -       
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: False
+         -       
+         -       values: 'LR'
+         -       
       
-      cases:
-         Case:
+      num type: 'string'
+      
+   select_included_expgroups
+      
+      Included experiments groups for variable selection.
+      
+      fatal: True
+      
+      values:
          
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: True
-                     
-            
-            value: internal[grid_choice]
-            
-         Case:
-         
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: False
-                     
-            
-            value: 'LR'
-            
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: internal[included_expgroups]
+         -       
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: False
+         -       
+         -       values: internal[included_expgroups_lset]
+         -       
       
       num type: 'string'
       
@@ -1321,37 +1367,28 @@ Internal values
       
       fatal: True
       
-      default values: []
-      
-      cases:
-         Case:
+      values:
          
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: True
-                     
-            
-            value: internal[included_opportunities]
-            
-         Case:
-         
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: False
-                     
-            
-            value: internal[included_opportunities_lset]
-            
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: internal[included_opportunities]
+         -       
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: False
+         -       
+         -       values: internal[included_opportunities_lset]
+         -       
       
       num type: 'string'
       
@@ -1361,37 +1398,28 @@ Internal values
       
       fatal: True
       
-      default values: []
-      
-      cases:
-         Case:
+      values:
          
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: True
-                     
-            
-            value: internal[included_request_links]
-            
-         Case:
-         
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: False
-                     
-            
-            value: None
-            
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: internal[included_request_links]
+         -       
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: False
+         -       
+         -       values: None
+         -       
       
       num type: 'string'
       
@@ -1401,77 +1429,59 @@ Internal values
       
       fatal: True
       
-      default values: []
-      
-      cases:
-         Case:
+      values:
          
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: True
-                     
-            
-            value: internal[included_tables]
-            
-         Case:
-         
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: False
-                     
-            
-            value: internal[included_tables_lset]
-            
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: internal[included_tables]
+         -       
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: False
+         -       
+         -       values: internal[included_tables_lset]
+         -       
       
       num type: 'string'
       
    select_included_vargroups
       
-      Included variables groups for variable selection.
+      Included variable groups for variable selection.
       
       fatal: True
       
-      default values: []
-      
-      cases:
-         Case:
+      values:
          
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: True
-                     
-            
-            value: internal[included_vargroups]
-            
-         Case:
-         
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: False
-                     
-            
-            value: internal[included_vargroups_lset]
-            
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: internal[included_vargroups]
+         -       
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: False
+         -       
+         -       values: internal[included_vargroups_lset]
+         -       
       
       num type: 'string'
       
@@ -1481,37 +1491,28 @@ Internal values
       
       fatal: True
       
-      default values: []
-      
-      cases:
-         Case:
+      values:
          
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: True
-                     
-            
-            value: internal[included_vars]
-            
-         Case:
-         
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: False
-                     
-            
-            value: internal[included_vars_lset]
-            
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: internal[included_vars]
+         -       
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: False
+         -       
+         -       values: internal[included_vars_lset]
+         -       
       
       num type: 'string'
       
@@ -1521,37 +1522,28 @@ Internal values
       
       fatal: True
       
-      default values: []
-      
-      cases:
-         Case:
+      values:
          
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: True
-                     
-            
-            value: internal[max_priority]
-            
-         Case:
-         
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: False
-                     
-            
-            value: internal[max_priority_lset]
-            
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: internal[max_priority]
+         -       
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: False
+         -       
+         -       values: internal[max_priority_lset]
+         -       
       
       num type: 'string'
       
@@ -1561,37 +1553,28 @@ Internal values
       
       fatal: True
       
-      default values: []
-      
-      cases:
-         Case:
+      values:
          
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: True
-                     
-            
-            value: internal[mips][internal[select_grid_choice]]sort_mips()
-            
-         Case:
-         
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: False
-                     
-            
-            value: internal[mips]sort_mips()
-            
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: function from functions_file named sort_mips('mips'= internal[mips][internal[select_grid_choice]])
+         -       
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: False
+         -       
+         -       values: function from functions_file named sort_mips('mips'= internal[mips])
+         -       
       
       num type: 'string'
       
@@ -1601,40 +1584,31 @@ Internal values
       
       fatal: True
       
-      default values: []
-      
-      cases:
-         Case:
+      values:
          
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select]
-                     
-                     check to do: 'eq'
-                     
-                     reference values:
-                           
-                           - 'on_expt_and_year'
-                           - 'on_expt'
-                     
-            
-            value: True
-            
-         Case:
-         
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: 'no'
-                     
-            
-            value: False
-            
+         -    Condition:
+         -    
+         -       value to check: internal[select]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values:
+         -             
+         -             - 'on_expt_and_year'
+         -             - 'on_expt'
+         -       
+         -       values: True
+         -       
+         -    Condition:
+         -    
+         -       value to check: internal[select]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: 'no'
+         -       
+         -       values: False
+         -       
       
       num type: 'string'
       
@@ -1644,40 +1618,31 @@ Internal values
       
       fatal: True
       
-      default values: []
-      
-      cases:
-         Case:
+      values:
          
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: 'on_expt_and_year'
-                     
-            
-            value: internal[year]
-            
-         Case:
-         
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select]
-                     
-                     check to do: 'eq'
-                     
-                     reference values:
-                           
-                           - 'no'
-                           - 'on_expt'
-                     
-            
-            value: None
-            
+         -    Condition:
+         -    
+         -       value to check: internal[select]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: 'on_expt_and_year'
+         -       
+         -       values: True
+         -       
+         -    Condition:
+         -    
+         -       value to check: internal[select]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values:
+         -             
+         -             - 'on_expt'
+         -             - 'no'
+         -       
+         -       values: False
+         -       
       
       num type: 'string'
       
@@ -1687,37 +1652,28 @@ Internal values
       
       fatal: True
       
-      default values: []
-      
-      cases:
-         Case:
+      values:
          
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: True
-                     
-            
-            value: internal[sizes]
-            
-         Case:
-         
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: False
-                     
-            
-            value: None
-            
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: internal[sizes]
+         -       
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: False
+         -       
+         -       values: None
+         -       
       
       num type: 'string'
       
@@ -1727,47 +1683,38 @@ Internal values
       
       fatal: True
       
-      default values: []
-      
-      cases:
-         Case:
+      values:
          
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: True
-                     
-            
-            value: internal[tierMax]
-            
-         Case:
-         
-            conditions:
-                  Condition:
-                  
-                     check value: internal[select_on_expt]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: False
-                     
-            
-            value: internal[tierMax_lset]
-            
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: True
+         -       
+         -       values: internal[tierMax]
+         -       
+         -    Condition:
+         -    
+         -       value to check: internal[select_on_expt]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: False
+         -       
+         -       values: internal[tierMax_lset]
+         -       
       
       num type: 'string'
       
    simple_domain_grid_regexp
       
-      If some grid is not defined in xml but by API, and is referenced by a field which is considered by the DR as having a singleton dimension, then: 1) it must be a grid which has only a domain 2) the domain name must be extractable from the grid_id using a regexp and a group number Example: using a pattern that returns full id except for a '_grid' suffix
+      If some grid is not defined in xml but by API, and is referenced by a field which is considered by the DR as having a singleton dimension, then: \n1) it must be a grid which has only a domain \n2) the domain name must be extractable from the grid_id using a regexp and a group number \nExample: using a pattern that returns full id except for a '_grid' suffix
       
-      fatal: False
-      
-      default values: laboratory[simple_domain_grid_regexp]
+      values:
+         
+         - laboratory[simple_domain_grid_regexp]
       
       num type: 'string'
       
@@ -1777,7 +1724,9 @@ Internal values
       
       fatal: True
       
-      default values: laboratory[sizes][internal[grid_choice]]format_sizes()
+      values:
+         
+         - function from functions_file named format_sizes('sizes'= laboratory[sizes][internal[grid_choice]])
       
       num type: 'string'
       
@@ -1787,7 +1736,7 @@ Internal values
       
       fatal: True
       
-      default values:
+      values:
          
          - laboratory[configurations][internal[configuration]][0]
          - simulation[source_id]
@@ -1796,11 +1745,11 @@ Internal values
       
    source_type
       
-      If the default source-type value for your source (:term:`source_types` from :term:`lab_and_model_settings`) does not fit, you may change it here. This should describe the model most directly responsible for the output. Sometimes it is appropriate to list two (or more) model types here, among AER, AGCM, AOGCM, BGC, CHEM, ISM, LAND, OGCM, RAD, SLAB e.g. amip , run with CNRM-CM6-1, should quote "AGCM AER". Also see note 14 of https://docs.google.com/document/d/1h0r8RZr_f3-8egBMMh7aqLwy3snpD6_MrDz1q8n5XUk/edit
+      If the default source-type value for your source (:term:`source_types` from :term:`lab_and_model_settings`) does not fit, you may change it here. This should describe the model most directly responsible for the output. Sometimes it is appropriate to list two (or more) model types here, among AER, AGCM, AOGCM, BGC, CHEM, ISM, LAND, OGCM, RAD, SLAB e.g. amip , run with CNRM-CM6-1, should quote \"AGCM AER\". Also see note 14 of https://docs.google.com/document/d/1h0r8RZr_f3-8egBMMh7aqLwy3snpD6_MrDz1q8n5XUk/edit
       
       fatal: True
       
-      default values:
+      values:
          
          - laboratory[configurations][internal[configuration]][1]
          - simulation[source_type]
@@ -1812,9 +1761,7 @@ Internal values
       
       This variable is used when some variables are computed with a period which is not the basic timestep. A dictionary which keys are non standard timestep and values the list of variables which are computed at this timestep.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[special_timestep_vars]
          - []
@@ -1825,9 +1772,7 @@ Internal values
       
       Path to the split frequencies file to be used.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[split_frequencies]
          - laboratory[split_frequencies]
@@ -1837,11 +1782,13 @@ Internal values
       
    synchronisation_frequency
       
-      Frequency at which the synchornisation between buffer and filesystem is done.
+      Frequency at which the synchronisation between buffer and filesystem is done.
       
-      fatal: False
-      
-      default values: []
+      values:
+         
+         - simulation[synchronisation_frequency]
+         - laboratory[synchronisation_frequency]
+         - None
       
       num type: 'string'
       
@@ -1851,7 +1798,7 @@ Internal values
       
       fatal: True
       
-      default values:
+      values:
          
          - simulation[tierMax]
          - internal[tierMax_lset]
@@ -1864,7 +1811,9 @@ Internal values
       
       fatal: True
       
-      default values: laboratory[tierMax]
+      values:
+         
+         - laboratory[tierMax]
       
       num type: 'string'
       
@@ -1874,7 +1823,7 @@ Internal values
       
       fatal: True
       
-      default values:
+      values:
          
          - laboratory[too_long_periods]
          - []
@@ -1885,9 +1834,7 @@ Internal values
       
       Should xml output files use the `@` symbol for definitions for instant variables?
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[useAtForInstant]
          - False
@@ -1900,7 +1847,7 @@ Internal values
       
       fatal: True
       
-      default values:
+      values:
          
          - laboratory[use_cmorvar_label_in_filename]
          - False
@@ -1911,9 +1858,7 @@ Internal values
       
       Say if you want to use XIOS union/zoom axis to optimize vertical interpolation requested by the DR.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[use_union_zoom]
          - False
@@ -1924,9 +1869,7 @@ Internal values
       
       Operation done for vertical interpolation.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[vertical_interpolation_operation]
          - 'instant'
@@ -1937,9 +1880,9 @@ Internal values
       
       Time frequency of vertical interpolation.
       
-      fatal: False
-      
-      default values: laboratory[vertical_interpolation_sample_freq]
+      values:
+         
+         - laboratory[vertical_interpolation_sample_freq]
       
       num type: 'string'
       
@@ -1947,9 +1890,7 @@ Internal values
       
       Version of XIOS used.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[xios_version]
          - 2
@@ -1962,7 +1903,9 @@ Internal values
       
       fatal: True
       
-      default values: dict[year]
+      values:
+         
+         - dict[year]
       
       num type: 'string'
       
@@ -1970,9 +1913,7 @@ Internal values
       
       Name of the geopotential height field name to be used to compute height over orog fields.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[zg_field_name]
          - 'zg'
@@ -1988,9 +1929,7 @@ Common values
       
       HDL associated with the project.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[HDL]
          - laboratory[HDL]
@@ -2001,9 +1940,7 @@ Common values
       
       MIP(s) name(s).
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[activity_id]
          - laboratory[activity_id]
@@ -2014,9 +1951,7 @@ Common values
       
       Branching procedure.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[branch_method]
          - 'standard'
@@ -2027,9 +1962,7 @@ Common values
       
       Branch month in parent simulation with respect to its time axis.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[branch_month_in_parent]
          - '1'
@@ -2040,77 +1973,54 @@ Common values
       
       Branch year in parent simulation with respect to its time axis.
       
-      fatal: False
+      values:
+         
+         -    Condition:
+         -    
+         -       value to check: simulation[branch_year_in_parent]
+         -       
+         -       check to perform: 'eq'
+         -       
+         -       reference values: internal[branching][internal[experiment_id]][1]
+         -       
+         -       values: simulation[branch_year_in_parent]
+         -       
+         -    Condition:
+         -    
+         -       value to check: internal[experiment_id]
+         -       
+         -       check to perform: 'neq'
+         -       
+         -       reference values: internal[branching]
+         -       
+         -       values: simulation[branch_year_in_parent]
+         -       
       
-      default values: []
-      
-      skip values:
+      forbidden values:
          
          - None
          - 'None'
          - ''
          - 'N/A'
       
-      cases:
-         Case:
-         
-            conditions:
-                  Condition:
-                  
-                     check value: internal[experiment_id]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: internal[branching]
-                     
-                  Condition:
-                  
-                     check value: simulation[branch_year_in_parent]
-                     
-                     check to do: 'eq'
-                     
-                     reference values: internal[branching][internal[experiment_id]][1]
-                     
-            
-            value: simulation[branch_year_in_parent]
-            
-         Case:
-         
-            conditions:
-                  Condition:
-                  
-                     check value: internal[experiment_id]
-                     
-                     check to do: 'neq'
-                     
-                     reference values: internal[branching]
-                     
-            
-            value: simulation[branch_year_in_parent]
-            
-      
       num type: 'string'
       
-   comment_lab
+   comment_lset
       
       A character string containing additional information about the models from laboratory settings. Will be complemented with the experiment's specific comment string.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[comment]
          - ''
       
       num type: 'string'
       
-   comment_sim
+   comment_sset
       
       A character string containing additional information about the models from simulation settings. Will be complemented with the experiment's specific comment string.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[comment]
          - ''
@@ -2119,11 +2029,9 @@ Common values
       
    compression_level
       
-      The compression level to be applied to NetCDF output files.
+      The compression level to be applied to NetCDF output files."
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[compression_level]
          - '0'
@@ -2134,9 +2042,7 @@ Common values
       
       Email address of the data producer.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[contact]
          - laboratory[contact]
@@ -2148,9 +2054,9 @@ Common values
       
       Version of the conventions used.
       
-      fatal: False
-      
-      default values: dr2xml.config.conventions
+      values:
+         
+         - config.conventions
       
       num type: 'string'
       
@@ -2160,7 +2066,9 @@ Common values
       
       fatal: True
       
-      default values: data_request.get_version()
+      values:
+         
+         - function from data_request named get_version({})
       
       num type: 'string'
       
@@ -2168,9 +2076,9 @@ Common values
       
       Date range format to be used in file definition names.
       
-      fatal: False
-      
-      default values: '%start_date%-%end_date%'
+      values:
+         
+         - '%start_date%-%end_date%'
       
       num type: 'string'
       
@@ -2178,12 +2086,10 @@ Common values
       
       Description of the simulation.
       
-      fatal: False
-      
-      default values:
+      values:
          
-         - simulation[description]
          - laboratory[description]
+         - simulation[description]
       
       num type: 'string'
       
@@ -2191,9 +2097,9 @@ Common values
       
       Version of dr2xml used.
       
-      fatal: False
-      
-      default values: dr2xml.config.version
+      values:
+         
+         - config.version
       
       num type: 'string'
       
@@ -2201,9 +2107,9 @@ Common values
       
       Name of the experiment.
       
-      fatal: False
-      
-      default values: simulation[experiment]
+      values:
+         
+         - simulation[experiment]
       
       num type: 'string'
       
@@ -2211,9 +2117,7 @@ Common values
       
       Experiment label to use in file names and attribute.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[expid_in_filename]
          - internal[experiment_id]
@@ -2226,9 +2130,7 @@ Common values
       
       Index for variant of forcing.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[forcing_index]
          - '1'
@@ -2239,9 +2141,7 @@ Common values
       
       In case of replacement of previously produced data, description of any changes in the production chain.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[history]
          - 'none'
@@ -2252,9 +2152,9 @@ Common values
       
       Location of documentation.
       
-      fatal: False
-      
-      default values: laboratory[info_url]
+      values:
+         
+         - laboratory[info_url]
       
       num type: 'string'
       
@@ -2262,9 +2162,7 @@ Common values
       
       Index for variant of initialization method.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[initialization_index]
          - '1'
@@ -2275,9 +2173,9 @@ Common values
       
       Full name of the institution of the data producer.
       
-      fatal: False
-      
-      default values: laboratory[institution]
+      values:
+         
+         - laboratory[institution]
       
       num type: 'string'
       
@@ -2285,9 +2183,9 @@ Common values
       
       Name of the file which will contain the list of the patterns of perso and dev output file definition.
       
-      fatal: False
-      
-      default values: 'dr2xml_list_perso_and_dev_file_names'
+      values:
+         
+         - 'dr2xml_list_perso_and_dev_file_names'
       
       num type: 'string'
       
@@ -2295,12 +2193,34 @@ Common values
       
       MIP associated with the simulation.
       
-      fatal: False
+      values:
+         
+         - common[mip_era_sset]
+         - common[mip_era_lset]
       
-      default values:
+      forbidden values: None
+      
+      num type: 'string'
+      
+   mip_era_lset
+      
+      MIP associated with the simulation from laboratory settings.
+      
+      values:
+         
+         - laboratory[mip_era]
+         - None
+      
+      num type: 'string'
+      
+   mip_era_sset
+      
+      MIP associated with the simulation from simulation settings.
+      
+      values:
          
          - simulation[mip_era]
-         - laboratory[mip_era]
+         - None
       
       num type: 'string'
       
@@ -2308,9 +2228,7 @@ Common values
       
       We can control the max output level set for all output files.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - laboratory[output_level]
          - '10'
@@ -2321,9 +2239,7 @@ Common values
       
       Description of sub-experiment.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[parent_activity_id]
          - simulation[activity_id]
@@ -2336,9 +2252,7 @@ Common values
       
       Parent experiment identifier.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[parent_experiment_id]
          - laboratory[parent_experiment_id]
@@ -2349,9 +2263,9 @@ Common values
       
       Parent’s associated MIP cycle.
       
-      fatal: False
-      
-      default values: simulation[parent_mip_era]
+      values:
+         
+         - simulation[parent_mip_era]
       
       num type: 'string'
       
@@ -2359,9 +2273,9 @@ Common values
       
       Parent model identifier.
       
-      fatal: False
-      
-      default values: simulation[parent_source_id]
+      values:
+         
+         - simulation[parent_source_id]
       
       num type: 'string'
       
@@ -2369,9 +2283,7 @@ Common values
       
       Reference year in parent simulation.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[parent_time_ref_year]
          - '1850'
@@ -2382,9 +2294,9 @@ Common values
       
       Time units used in parent.
       
-      fatal: False
-      
-      default values: simulation[parent_time_units]
+      values:
+         
+         - simulation[parent_time_units]
       
       num type: 'string'
       
@@ -2392,9 +2304,9 @@ Common values
       
       Parent variant label.
       
-      fatal: False
-      
-      default values: simulation[parent_variant_label]
+      values:
+         
+         - simulation[parent_variant_label]
       
       num type: 'string'
       
@@ -2402,9 +2314,7 @@ Common values
       
       Index for model physics variant.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[physics_index]
          - '1'
@@ -2417,7 +2327,9 @@ Common values
       
       fatal: True
       
-      default values: dict[prefix]
+      values:
+         
+         - dict[prefix]
       
       num type: 'string'
       
@@ -2425,9 +2337,9 @@ Common values
       
       References associated with the simulation.
       
-      fatal: False
-      
-      default values: laboratory[references]
+      values:
+         
+         - laboratory[references]
       
       num type: 'string'
       
@@ -2435,9 +2347,9 @@ Common values
       
       Name of the model.
       
-      fatal: False
-      
-      default values: laboratory[source]
+      values:
+         
+         - laboratory[source]
       
       num type: 'string'
       
@@ -2445,9 +2357,7 @@ Common values
       
       Sub-experiment name.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[sub_experiment]
          - 'none'
@@ -2458,9 +2368,7 @@ Common values
       
       Sub-experiment identifier.
       
-      fatal: False
-      
-      default values:
+      values:
          
          - simulation[sub_experiment_id]
          - 'none'
@@ -2471,11 +2379,11 @@ Common values
       
       It is recommended that some description be included to help identify major differences among variants, but care should be taken to record correct information.  dr2xml will add in all cases: 'Information provided by this attribute may in some cases be flawed. Users can find more comprehensive and up-to-date documentation via the further_info_url global attribute.'
       
-      fatal: False
+      values:
+         
+         - simulation[variant_info]
       
-      default values: simulation[variant_info]
-      
-      skip values: ''
+      forbidden values: ''
       
       num type: 'string'
       
@@ -2493,19 +2401,19 @@ Project settings
             
             Id of the axis.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[id]
             
             num type: 'string'
             
          positive
             
-            How is the axis oriented?
+            Hox is the axis oriented?
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[positive]
             
             num type: 'string'
             
@@ -2513,9 +2421,9 @@ Project settings
             
             Number of values of this axis.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[n_glo]
             
             num type: 'string'
             
@@ -2523,11 +2431,11 @@ Project settings
             
             Value of the axis.
             
-            fatal: False
+            values:
+               
+               - attrs[value]
             
-            default values: []
-            
-            skip values:
+            forbidden values:
                
                - ''
                - 'None'
@@ -2539,9 +2447,9 @@ Project settings
             
             Reference axis.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[axis_ref]
             
             num type: 'string'
             
@@ -2549,9 +2457,9 @@ Project settings
             
             Name of this axis.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[name]
             
             num type: 'string'
             
@@ -2559,17 +2467,15 @@ Project settings
             
             Standard name of the axis.
             
-            fatal: False
+            values:
+               
+               - attrs[standard_name]
             
-            default values: []
-            
-            skip values:
+            forbidden values:
                
                - ''
                - 'None'
                - None
-            
-            authorized types: <class 'str'>
             
             num type: 'string'
             
@@ -2577,9 +2483,9 @@ Project settings
             
             Long name of this axis.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[long_name]
             
             num type: 'string'
             
@@ -2587,21 +2493,9 @@ Project settings
             
             Precision of the axis.
             
-            fatal: False
-            
-            default values: []
-            
-            skip values:
+            values:
                
-               - ''
-               - 'None'
-               - None
-            
-            authorized values:
-               
-               - '2'
-               - '4'
-               - '8'
+               - attrs[prec]
             
             corrections:
                
@@ -2612,17 +2506,29 @@ Project settings
                - 'integer': '2'
                - 'int': '2'
             
+            authorized values:
+               
+               - '2'
+               - '4'
+               - '8'
+            
+            forbidden values:
+               
+               - ''
+               - 'None'
+               - None
+            
             num type: 'string'
             
          unit
             
             Unit of the axis.
             
-            fatal: False
+            values:
+               
+               - attrs[unit]
             
-            default values: []
-            
-            skip values:
+            forbidden values:
                
                - ''
                - 'None'
@@ -2634,11 +2540,11 @@ Project settings
             
             Value of the axis.
             
-            fatal: False
+            values:
+               
+               - attrs[value]
             
-            default values: []
-            
-            skip values:
+            forbidden values:
                
                - ''
                - 'None'
@@ -2650,11 +2556,11 @@ Project settings
             
             Bounds of the axis.
             
-            fatal: False
+            values:
+               
+               - attrs[bounds]
             
-            default values: []
-            
-            skip values:
+            forbidden values:
                
                - ''
                - 'None'
@@ -2666,11 +2572,11 @@ Project settings
             
             Name dimension of the axis.
             
-            fatal: False
+            values:
+               
+               - attrs[dim_name]
             
-            default values: []
-            
-            skip values:
+            forbidden values:
                
                - ''
                - 'None'
@@ -2682,11 +2588,11 @@ Project settings
             
             Label of the axis.
             
-            fatal: False
+            values:
+               
+               - attrs[label]
             
-            default values: []
-            
-            skip values:
+            forbidden values:
                
                - ''
                - 'None'
@@ -2698,11 +2604,11 @@ Project settings
             
             Axis type.
             
-            fatal: False
+            values:
+               
+               - attrs[axis_type]
             
-            default values: []
-            
-            skip values:
+            forbidden values:
                
                - ''
                - 'None'
@@ -2722,14 +2628,9 @@ Project settings
             
             Precision associated with the axis group.
             
-            fatal: False
-            
-            default values: '8'
-            
-            authorized values:
+            values:
                
-               - '2'
-               - '4'
+               - attrs[prec]
                - '8'
             
             corrections:
@@ -2740,6 +2641,12 @@ Project settings
                - 'double': '8'
                - 'integer': '2'
                - 'int': '2'
+            
+            authorized values:
+               
+               - '2'
+               - '4'
+               - '8'
             
             num type: 'string'
             
@@ -2752,9 +2659,9 @@ Project settings
             
             Version of the Data Request used
             
-            fatal: False
-            
-            default values: '{} Data Request version {}'.format(internal[data_request_used], common[data_specs_version])
+            values:
+               
+               - function from self named format('data_request_used'= init[data_request_used], 'data_specs_version'= common[data_specs_version])
             
             num type: 'string'
             
@@ -2762,9 +2669,9 @@ Project settings
             
             Version of dr2xml used
             
-            fatal: False
-            
-            default values: 'dr2xml version {}'.format(common[dr2xml_version])
+            values:
+               
+               - function from self named format('dr2xml_version'= common[dr2xml_version])
             
             num type: 'string'
             
@@ -2772,9 +2679,9 @@ Project settings
             
             Laboratory settings used
             
-            fatal: False
-            
-            default values: 'Lab_and_model settings***newline***{}'.format(laboratory)
+            values:
+               
+               - function from self named format('laboratory'= laboratory)
             
             num type: 'string'
             
@@ -2782,9 +2689,9 @@ Project settings
             
             Simulation_settings used
             
-            fatal: False
-            
-            default values: 'Simulation settings***newline***{}'.format(simulation)
+            values:
+               
+               - function from self named format('laboratory'= simulation)
             
             num type: 'string'
             
@@ -2792,9 +2699,9 @@ Project settings
             
             Year used for the dr2xml's launch
             
-            fatal: False
-            
-            default values: 'Year processed {}'.format(internal[year])
+            values:
+               
+               - function from self named format('year'= internal[year])
             
             num type: 'string'
             
@@ -2804,9 +2711,9 @@ Project settings
             
             Id of the context
             
-            fatal: False
-            
-            default values: internal[context]
+            values:
+               
+               - internal[context]
             
             num type: 'string'
             
@@ -2819,29 +2726,29 @@ Project settings
             
             Id of the domain.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[id]
             
             num type: 'string'
             
          ni_glo
             
-            Number of points on i dimension.
+            Number of point in i dimension.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[ni_glo]
             
             num type: 'string'
             
          nj_glo
             
-            Number of points on j dimension.
+            Number of points in j dimension.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[nj_glo]
             
             num type: 'string'
             
@@ -2849,9 +2756,9 @@ Project settings
             
             Type of the domain.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[type]
             
             num type: 'string'
             
@@ -2859,9 +2766,9 @@ Project settings
             
             Precision of the domain.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[prec]
             
             num type: 'string'
             
@@ -2869,9 +2776,9 @@ Project settings
             
             Latitude axis name.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[lat_name]
             
             num type: 'string'
             
@@ -2879,9 +2786,9 @@ Project settings
             
             Longitude axis name.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[lon_name]
             
             num type: 'string'
             
@@ -2889,9 +2796,9 @@ Project settings
             
             Name of the i dimension.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[dim_i_name]
             
             num type: 'string'
             
@@ -2899,9 +2806,9 @@ Project settings
             
             Reference domain.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[domain_ref]
             
             num type: 'string'
             
@@ -2917,14 +2824,9 @@ Project settings
             
             Precision associated with the domain group.
             
-            fatal: False
-            
-            default values: '8'
-            
-            authorized values:
+            values:
                
-               - '2'
-               - '4'
+               - attrs[prec]
                - '8'
             
             corrections:
@@ -2935,6 +2837,12 @@ Project settings
                - 'double': '8'
                - 'integer': '2'
                - 'int': '2'
+            
+            authorized values:
+               
+               - '2'
+               - '4'
+               - '8'
             
             num type: 'string'
             
@@ -2950,9 +2858,9 @@ Project settings
             
             Id of the field.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[id]
             
             num type: 'string'
             
@@ -2960,9 +2868,9 @@ Project settings
             
             Id of the reference field.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[field_ref]
             
             num type: 'string'
             
@@ -2970,9 +2878,9 @@ Project settings
             
             Name of the field.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[name]
             
             num type: 'string'
             
@@ -2980,9 +2888,9 @@ Project settings
             
             Frequency of the operation done on the field.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[freq_op]
             
             num type: 'string'
             
@@ -2990,9 +2898,9 @@ Project settings
             
             Offset to be applied on operations on the field.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[freq_offset]
             
             num type: 'string'
             
@@ -3000,9 +2908,9 @@ Project settings
             
             Reference grid of the field.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[grid_ref]
             
             num type: 'string'
             
@@ -3010,9 +2918,9 @@ Project settings
             
             Long name of the field.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[long_name]
             
             num type: 'string'
             
@@ -3020,9 +2928,9 @@ Project settings
             
             Standard name of the field.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[standard_name]
             
             num type: 'string'
             
@@ -3030,9 +2938,9 @@ Project settings
             
             Unit of the field.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[unit]
             
             num type: 'string'
             
@@ -3040,9 +2948,9 @@ Project settings
             
             Operation done on the field.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[operation]
             
             num type: 'string'
             
@@ -3050,9 +2958,9 @@ Project settings
             
             Should missing values of the field be detected by XIOS.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[detect_missing_value]
             
             num type: 'string'
             
@@ -3060,9 +2968,9 @@ Project settings
             
             Precision of the field.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[prec]
             
             num type: 'string'
             
@@ -3078,9 +2986,9 @@ Project settings
             
             Frequency of the operation done on the field.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[freq_op]
             
             num type: 'string'
             
@@ -3088,9 +2996,9 @@ Project settings
             
             Offset to be applied on operations on the field.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[freq_offset]
             
             num type: 'string'
             
@@ -3098,14 +3006,28 @@ Project settings
       
       XIOS field beacon (only for output fields)
       
+      Common:
+         variable
+            
+            Variable information
+            
+            fatal: True
+            
+            values:
+               
+               - variable
+            
+            num type: 'string'
+            
+      
       Attributes:
          field_ref
             
             Reference field.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[field_ref]
             
             num type: 'string'
             
@@ -3113,9 +3035,10 @@ Project settings
             
             Name of the field.
             
-            fatal: False
-            
-            default values: variable.mipVarLabel
+            values:
+               
+               - attrs[name]
+               - common_tag[variable][mipVarLabel]
             
             num type: 'string'
             
@@ -3123,11 +3046,11 @@ Project settings
             
             Reference grid of the field.
             
-            fatal: False
+            values:
+               
+               - attrs[grid_ref]
             
-            default values: []
-            
-            skip values:
+            forbidden values:
                
                - ''
                - 'None'
@@ -3139,11 +3062,11 @@ Project settings
             
             Offset to be applied on operations on the field.
             
-            fatal: False
+            values:
+               
+               - attrs[freq_offset]
             
-            default values: []
-            
-            skip values:
+            forbidden values:
                
                - ''
                - 'None'
@@ -3155,9 +3078,10 @@ Project settings
             
             Should missing values of the field be detected by XIOS.
             
-            fatal: False
-            
-            default values: 'True'
+            values:
+               
+               - attrs[detect_missing_value]
+               - 'True'
             
             num type: 'string'
             
@@ -3167,12 +3091,11 @@ Project settings
             
             fatal: True
             
-            default values: variable.prec
-            
-            authorized values:
+            values:
                
-               - '0'
-               - '1.e+20'
+               - attrs[default_value]
+               - attrs[prec]
+               - common_tag[variable][prec]
             
             corrections:
                
@@ -3183,6 +3106,11 @@ Project settings
                - 'integer': '0'
                - 'int': '0'
             
+            authorized values:
+               
+               - '0'
+               - '1.e+20'
+            
             num type: 'string'
             
          prec
@@ -3191,13 +3119,10 @@ Project settings
             
             fatal: True
             
-            default values: variable.prec
-            
-            authorized values:
+            values:
                
-               - '2'
-               - '4'
-               - '8'
+               - attrs[prec]
+               - common_tag[variable][prec]
             
             corrections:
                
@@ -3208,15 +3133,22 @@ Project settings
                - 'integer': '2'
                - 'int': '2'
             
+            authorized values:
+               
+               - '2'
+               - '4'
+               - '8'
+            
             num type: 'string'
             
          cell_methods
             
             Cell method associated with the field.
             
-            fatal: False
-            
-            default values: variable.cell_methods
+            values:
+               
+               - attrs[cell_methods]
+               - common_tag[variable][cell_methods]
             
             num type: 'string'
             
@@ -3224,9 +3156,10 @@ Project settings
             
             Mode associated with the cell method of the field.
             
-            fatal: False
-            
-            default values: 'overwrite'
+            values:
+               
+               - attrs[cell_methods_mode]
+               - 'overwrite'
             
             num type: 'string'
             
@@ -3234,9 +3167,9 @@ Project settings
             
             Operation performed on the field.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[operation]
             
             num type: 'string'
             
@@ -3244,11 +3177,11 @@ Project settings
             
             Frequency of the operation done on the field.
             
-            fatal: False
+            values:
+               
+               - attrs[freq_op]
             
-            default values: []
-            
-            skip values:
+            forbidden values:
                
                - ''
                - 'None'
@@ -3260,11 +3193,11 @@ Project settings
             
             Expression used to compute the field.
             
-            fatal: False
+            values:
+               
+               - attrs[expr]
             
-            default values: []
-            
-            skip values:
+            forbidden values:
                
                - ''
                - 'None'
@@ -3278,14 +3211,13 @@ Project settings
             
             Comment associated with the field.
             
-            fatal: False
-            
-            default values:
+            values:
                
-               - simulation[comments][variable.label]
-               - laboratory[comments][variable.label]
+               - attrs[comment]
+               - simulation[comments][common_tag[variable][label]]
+               - laboratory[comments][common_tag[variable][label]]
             
-            skip values:
+            forbidden values:
                
                - ''
                - 'None'
@@ -3297,11 +3229,12 @@ Project settings
             
             Standard name of the field.
             
-            fatal: False
+            values:
+               
+               - attrs[standard_name]
+               - common_tag[variable][stdname]
             
-            default values: variable.stdname
-            
-            skip values:
+            forbidden values:
                
                - ''
                - 'None'
@@ -3313,14 +3246,13 @@ Project settings
             
             Description associated with the field.
             
-            fatal: False
-            
-            default values:
+            values:
                
-               - variable.description
+               - attrs[description]
+               - common_tag[variable][description]
                - 'None'
             
-            skip values: ''
+            forbidden values: ''
             
             num type: 'string'
             
@@ -3328,9 +3260,10 @@ Project settings
             
             Long name of the field.
             
-            fatal: False
-            
-            default values: variable.long_name
+            values:
+               
+               - attrs[long_name]
+               - common_tag[variable][long_name]
             
             num type: 'string'
             
@@ -3338,11 +3271,12 @@ Project settings
             
             Way the field should be interpreted.
             
-            fatal: False
+            values:
+               
+               - attrs[positive]
+               - common_tag[variable][positive]
             
-            default values: variable.positive
-            
-            skip values:
+            forbidden values:
                
                - ''
                - 'None'
@@ -3354,9 +3288,10 @@ Project settings
             
             History associated with the field.
             
-            fatal: False
-            
-            default values: common[history]
+            values:
+               
+               - attrs[history]
+               - common[history]
             
             num type: 'string'
             
@@ -3364,11 +3299,12 @@ Project settings
             
             Units associated with the field.
             
-            fatal: False
+            values:
+               
+               - attrs[units]
+               - common_tag[variable][units]
             
-            default values: variable.units
-            
-            skip values:
+            forbidden values:
                
                - ''
                - 'None'
@@ -3378,13 +3314,14 @@ Project settings
             
          cell_methods
             
-            Cell method associated with the field.
+            Cell methods associated with the field.
             
-            fatal: False
+            values:
+               
+               - attrs[cell_methods]
+               - common_tag[variable][cell_methods]
             
-            default values: variable.cell_methods
-            
-            skip values:
+            forbidden values:
                
                - ''
                - 'None'
@@ -3396,11 +3333,12 @@ Project settings
             
             Cell measures associated with the field.
             
-            fatal: False
+            values:
+               
+               - attrs[cell_measures]
+               - common_tag[variable][cell_measures]
             
-            default values: variable.cell_measures
-            
-            skip values:
+            forbidden values:
                
                - ''
                - 'None'
@@ -3412,11 +3350,12 @@ Project settings
             
             Flag meanings associated with the field.
             
-            fatal: False
+            values:
+               
+               - attrs[flag_meanings]
+               - common_tag[variable][flag_meanings]
             
-            default values: variable.flag_meanings
-            
-            skip values:
+            forbidden values:
                
                - ''
                - 'None'
@@ -3428,11 +3367,12 @@ Project settings
             
             Flag values associated with the field.
             
-            fatal: False
+            values:
+               
+               - attrs[flag_values]
+               - common_tag[variable][flag_values]
             
-            default values: variable.flag_values
-            
-            skip values:
+            forbidden values:
                
                - ''
                - 'None'
@@ -3444,19 +3384,18 @@ Project settings
             
             Interval associated with the operation done on the field.
             
-            fatal: False
-            
-            default values: []
-            
-            conditions:
-               Condition:
+            values:
                
-                  check value: dict[operation]
-                  
-                  check to do: 'neq'
-                  
-                  reference values: 'once'
-                  
+               -    Condition:
+               -    
+               -       value to check: attrs[operation]
+               -       
+               -       check to perform: 'neq'
+               -       
+               -       reference values: 'once'
+               -       
+               -       values: attrs[interval_operation]
+               -       
             
             num type: 'string'
             
@@ -3469,9 +3408,9 @@ Project settings
             
             Id of the file.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[id]
             
             num type: 'string'
             
@@ -3479,9 +3418,9 @@ Project settings
             
             File name.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[name]
             
             num type: 'string'
             
@@ -3489,9 +3428,9 @@ Project settings
             
             Mode in which the file will be open.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[mode]
             
             num type: 'string'
             
@@ -3499,9 +3438,9 @@ Project settings
             
             Frequency of the outputs contained in the file.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[output_freq]
             
             num type: 'string'
             
@@ -3509,9 +3448,9 @@ Project settings
             
             Should the file be considered by XIOS.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[enabled]
             
             num type: 'string'
             
@@ -3524,9 +3463,10 @@ Project settings
             
             Type of file to be produced
             
-            fatal: False
-            
-            default values: 'one_file'
+            values:
+               
+               - attrs[type]
+               - 'one_file'
             
             num type: 'string'
             
@@ -3534,9 +3474,10 @@ Project settings
             
             Should the file_definition be considered by XIOS
             
-            fatal: False
-            
-            default values: 'true'
+            values:
+               
+               - attrs[enabled]
+               - 'true'
             
             num type: 'string'
             
@@ -3544,14 +3485,31 @@ Project settings
       
       XIOS file beacon (only for output files)
       
+      Common:
+         variable
+            
+            Variable information
+            
+            fatal: True
+            
+            values:
+               
+               - variable
+            
+            num type: 'string'
+            
+      
       Attributes:
          id
             
             Id of the output file
             
-            fatal: False
+            fatal: True
             
-            default values: '{}_{}_{}'.format(variable.label, dict[table_id], dict[grid_label])
+            values:
+               
+               - attrs[id]
+               - function from self named format('grid'= attrs[grid_label], 'table'= attrs[table_id], 'variable'= common_tag[variable][label])
             
             num type: 'string'
             
@@ -3559,9 +3517,11 @@ Project settings
             
             File name.
             
-            fatal: False
+            fatal: True
             
-            default values: []
+            values:
+               
+               - attrs[name]
             
             num type: 'string'
             
@@ -3569,9 +3529,9 @@ Project settings
             
             Frequency of the outputs contained in the file.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[output_freq]
             
             num type: 'string'
             
@@ -3579,9 +3539,10 @@ Project settings
             
             Should the data be append to the file?
             
-            fatal: False
-            
-            default values: 'true'
+            values:
+               
+               - attrs[append]
+               - 'true'
             
             num type: 'string'
             
@@ -3589,11 +3550,12 @@ Project settings
             
             Output level of the file.
             
-            fatal: False
+            values:
+               
+               - attrs[output_level]
+               - common[output_level]
             
-            default values: common[output_level]
-            
-            skip values:
+            forbidden values:
                
                - 'None'
                - ''
@@ -3605,11 +3567,12 @@ Project settings
             
             Compression level of the file.
             
-            fatal: False
+            values:
+               
+               - attrs[compression_level]
+               - common[compression_level]
             
-            default values: common[compression_level]
-            
-            skip values:
+            forbidden values:
                
                - 'None'
                - ''
@@ -3621,25 +3584,24 @@ Project settings
             
             Splitting frequency of the file.
             
-            fatal: False
+            values:
+               
+               -    Condition:
+               -    
+               -       value to check: common_tag[variable][frequency]
+               -       
+               -       check to perform: 'nmatch'
+               -       
+               -       reference values: '.*fx.*'
+               -       
+               -       values: attrs[split_freq]
+               -       
             
-            default values: []
-            
-            skip values:
+            forbidden values:
                
                - ''
                - 'None'
                - None
-            
-            conditions:
-               Condition:
-               
-                  check value: variable.frequency
-                  
-                  check to do: 'nmatch'
-                  
-                  reference values: '.*fx.*'
-                  
             
             num type: 'string'
             
@@ -3647,25 +3609,24 @@ Project settings
             
             Splitting frequency format of the file.
             
-            fatal: False
+            values:
+               
+               -    Condition:
+               -    
+               -       value to check: common_tag[variable][frequency]
+               -       
+               -       check to perform: 'nmatch'
+               -       
+               -       reference values: '.*fx.*'
+               -       
+               -       values: attrs[split_freq_format]
+               -       
             
-            default values: []
-            
-            skip values:
+            forbidden values:
                
                - ''
                - 'None'
                - None
-            
-            conditions:
-               Condition:
-               
-                  check value: variable.frequency
-                  
-                  check to do: 'nmatch'
-                  
-                  reference values: '.*fx.*'
-                  
             
             num type: 'string'
             
@@ -3673,27 +3634,26 @@ Project settings
             
             Splitting start offset of the file
             
-            fatal: False
+            values:
+               
+               -    Condition:
+               -    
+               -       value to check: common_tag[variable][frequency]
+               -       
+               -       check to perform: 'nmatch'
+               -       
+               -       reference values: '.*fx.*'
+               -       
+               -       values: attrs[split_start_offset]
+               -       
             
-            default values: []
-            
-            skip values:
+            forbidden values:
                
                - ''
                - 'None'
-               - 'False'
                - None
+               - 'False'
                - False
-            
-            conditions:
-               Condition:
-               
-                  check value: variable.frequency
-                  
-                  check to do: 'nmatch'
-                  
-                  reference values: '.*fx.*'
-                  
             
             num type: 'string'
             
@@ -3701,27 +3661,26 @@ Project settings
             
             Splitting end offset of the file
             
-            fatal: False
+            values:
+               
+               -    Condition:
+               -    
+               -       value to check: common_tag[variable][frequency]
+               -       
+               -       check to perform: 'nmatch'
+               -       
+               -       reference values: '.*fx.*'
+               -       
+               -       values: attrs[split_end_offset]
+               -       
             
-            default values: []
-            
-            skip values:
+            forbidden values:
                
                - ''
                - 'None'
-               - 'False'
                - None
+               - 'False'
                - False
-            
-            conditions:
-               Condition:
-               
-                  check value: variable.frequency
-                  
-                  check to do: 'nmatch'
-                  
-                  reference values: '.*fx.*'
-                  
             
             num type: 'string'
             
@@ -3729,25 +3688,24 @@ Project settings
             
             Splitting last date of the file
             
-            fatal: False
+            values:
+               
+               -    Condition:
+               -    
+               -       value to check: common_tag[variable][frequency]
+               -       
+               -       check to perform: 'nmatch'
+               -       
+               -       reference values: '.*fx.*'
+               -       
+               -       values: attrs[split_last_date]
+               -       
             
-            default values: []
-            
-            skip values:
+            forbidden values:
                
                - ''
                - 'None'
                - None
-            
-            conditions:
-               Condition:
-               
-                  check value: variable.frequency
-                  
-                  check to do: 'nmatch'
-                  
-                  reference values: '.*fx.*'
-                  
             
             num type: 'string'
             
@@ -3755,9 +3713,10 @@ Project settings
             
             Time units of the file.
             
-            fatal: False
-            
-            default values: 'days'
+            values:
+               
+               - attrs[ time_units]
+               - 'days'
             
             num type: 'string'
             
@@ -3765,9 +3724,10 @@ Project settings
             
             Time counter name.
             
-            fatal: False
-            
-            default values: 'time'
+            values:
+               
+               - attrs[time_counter_name]
+               - 'time'
             
             num type: 'string'
             
@@ -3775,9 +3735,10 @@ Project settings
             
             Time counter type.
             
-            fatal: False
-            
-            default values: 'exclusive'
+            values:
+               
+               - attrs[time_counter]
+               - 'exclusive'
             
             num type: 'string'
             
@@ -3785,9 +3746,10 @@ Project settings
             
             Time stamp name.
             
-            fatal: False
-            
-            default values: 'creation_date'
+            values:
+               
+               - attrs[time_stamp_name]
+               - 'creation_date'
             
             num type: 'string'
             
@@ -3795,9 +3757,10 @@ Project settings
             
             Time stamp format.
             
-            fatal: False
-            
-            default values: '%Y-%m-%dT%H:%M:%SZ'
+            values:
+               
+               - attrs[time_stamp_format]
+               - '%Y-%m-%dT%H:%M:%SZ'
             
             num type: 'string'
             
@@ -3805,9 +3768,10 @@ Project settings
             
             Unique identifier of the file name.
             
-            fatal: False
-            
-            default values: 'tracking_id'
+            values:
+               
+               - attrs[uuid_name]
+               - 'tracking_id'
             
             num type: 'string'
             
@@ -3815,11 +3779,13 @@ Project settings
             
             Unique identifier of the file format.
             
-            fatal: False
+            values:
+               
+               - attrs[uuid_format]
+               - attrs[uuid_format]
+               - function from self named format('hdl'= common[HDL])
             
-            default values: 'hdl:{}/%uuid%'.format(common[HDL])
-            
-            skip values:
+            forbidden values:
                
                - 'None'
                - ''
@@ -3831,21 +3797,23 @@ Project settings
             
             Convention used for the file.
             
-            fatal: False
-            
-            default values: common[convention_str]
+            values:
+               
+               - attrs[convention_str]
+               - common[convention_str]
             
             num type: 'string'
             
          synchronisation_frequency
             
-            Frequency at which the synchornisation between buffer and filesystem is done.
+            Frequency at which the synchronisation between buffer and filesystem is done.
             
-            fatal: False
+            values:
+               
+               - attrs[synchronisation_frequency]
+               - internal[synchronisation_frequency]
             
-            default values: internal[synchronisation_frequency]
-            
-            skip values:
+            forbidden values:
                
                - 'None'
                - ''
@@ -3859,9 +3827,10 @@ Project settings
             
             Activity id associated with the simulation.
             
-            fatal: False
-            
-            default values: common[activity_id]
+            values:
+               
+               - attrs[activity_id]
+               - common[activity_id]
             
             num type: 'string'
             
@@ -3869,11 +3838,12 @@ Project settings
             
             Contact email.
             
-            fatal: False
+            values:
+               
+               - attrs[contact]
+               - common[contact]
             
-            default values: common[contact]
-            
-            skip values:
+            forbidden values:
                
                - 'None'
                - ''
@@ -3885,9 +3855,10 @@ Project settings
             
             Version of the Data Request used.
             
-            fatal: False
-            
-            default values: common[data_specs_version]
+            values:
+               
+               - attrs[data_specs_version]
+               - common[data_specs_version]
             
             num type: 'string'
             
@@ -3895,9 +3866,10 @@ Project settings
             
             Version of dr2xml used.
             
-            fatal: False
-            
-            default values: common[dr2xml_version]
+            values:
+               
+               - attrs[dr2xml_version]
+               - common[dr2xml_version]
             
             num type: 'string'
             
@@ -3907,9 +3879,10 @@ Project settings
             
             output key: 'experiment_id'
             
-            fatal: False
-            
-            default values: common[expid_in_filename]
+            values:
+               
+               - attrs[expid_in_filename]
+               - common[expid_in_filename]
             
             num type: 'string'
             
@@ -3917,25 +3890,27 @@ Project settings
             
             Description of the file.
             
-            fatal: False
+            values:
+               
+               -    Condition:
+               -    
+               -       value to check: internal[experiment_id]
+               -       
+               -       check to perform: 'eq'
+               -       
+               -       reference values: common[expid_in_filename]
+               -       
+               -       values:
+               -             
+               -             - attrs[description]
+               -             - common[description]
+               -       
             
-            default values: common[description]
-            
-            skip values:
+            forbidden values:
                
                - ''
                - 'None'
                - None
-            
-            conditions:
-               Condition:
-               
-                  check value: internal[experiment_id]
-                  
-                  check to do: 'eq'
-                  
-                  reference values: common[expid_in_filename]
-                  
             
             num type: 'string'
             
@@ -3945,25 +3920,27 @@ Project settings
             
             output key: 'title'
             
-            fatal: False
+            values:
+               
+               -    Condition:
+               -    
+               -       value to check: internal[experiment_id]
+               -       
+               -       check to perform: 'eq'
+               -       
+               -       reference values: common[expid_in_filename]
+               -       
+               -       values:
+               -             
+               -             - attrs[description]
+               -             - common[description]
+               -       
             
-            default values: common[description]
-            
-            skip values:
+            forbidden values:
                
                - ''
                - 'None'
                - None
-            
-            conditions:
-               Condition:
-               
-                  check value: internal[experiment_id]
-                  
-                  check to do: 'eq'
-                  
-                  reference values: common[expid_in_filename]
-                  
             
             num type: 'string'
             
@@ -3971,25 +3948,27 @@ Project settings
             
             Experiment associated with the simulation.
             
-            fatal: False
+            values:
+               
+               -    Condition:
+               -    
+               -       value to check: internal[experiment_id]
+               -       
+               -       check to perform: 'eq'
+               -       
+               -       reference values: common[expid_in_filename]
+               -       
+               -       values:
+               -             
+               -             - attrs[experiment]
+               -             - common[experiment]
+               -       
             
-            default values: common[experiment]
-            
-            skip values:
+            forbidden values:
                
                - ''
                - 'None'
                - None
-            
-            conditions:
-               Condition:
-               
-                  check value: internal[experiment_id]
-                  
-                  check to do: 'eq'
-                  
-                  reference values: common[expid_in_filename]
-                  
             
             num type: 'string'
             
@@ -3997,11 +3976,12 @@ Project settings
             
             External variables associated with the file.
             
-            fatal: False
+            values:
+               
+               - attrs[external_variables]
+               - function from functions_file named build_external_variables('cell_measures'= common_tag[variable][cell_measures])
             
-            default values: variable.cell_measuresbuild_external_variables()
-            
-            skip values: ''
+            forbidden values: ''
             
             num type: 'string'
             
@@ -4009,9 +3989,10 @@ Project settings
             
             Forcing index associated with the simulation.
             
-            fatal: False
-            
-            default values: common[forcing_index]
+            values:
+               
+               - attrs[forcing_index]
+               - common[forcing_index]
             
             num type: 'int'
             
@@ -4019,9 +4000,10 @@ Project settings
             
             Frequency associated with the file.
             
-            fatal: False
-            
-            default values: variable.frequency
+            values:
+               
+               - attrs[frequency]
+               - common_tag[variable][frequency]
             
             num type: 'string'
             
@@ -4029,11 +4011,11 @@ Project settings
             
             Url to obtain further information associated with the simulation.
             
-            fatal: False
+            values:
+               
+               - attrs[further_info_url]
             
-            default values: []
-            
-            skip values:
+            forbidden values:
                
                - ''
                - 'None'
@@ -4045,9 +4027,9 @@ Project settings
             
             Id of the grid used in the file.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[grid]
             
             num type: 'string'
             
@@ -4055,9 +4037,9 @@ Project settings
             
             Label of the grid used in the file.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[grid_label]
             
             num type: 'string'
             
@@ -4065,9 +4047,9 @@ Project settings
             
             Nominal resolution of the grid used in the file.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[nominal_resolution]
             
             num type: 'string'
             
@@ -4075,97 +4057,12 @@ Project settings
             
             Comment associated with the file.
             
-            fatal: False
+            values:
+               
+               - attrs[comment]
+               - function from self named format('var'= ,    ,          Condition:,          ,             value to check: common_tag[variable][comments],             ,             check to perform: 'neq',             ,             reference values:,                   ,                   - 'None',                   - None,             ,             values: common_tag[variable][comments],             , 'lset'= ,    ,          Condition:,          ,             value to check: common[comment_lset],             ,             check to perform: 'neq',             ,             reference values:,                   ,                   - 'None',                   - None,             ,             values: common[comment_lset],             , 'sset'= ,    ,          Condition:,          ,             value to check: common[comment_sset],             ,             check to perform: 'neq',             ,             reference values:,                   ,                   - 'None',                   - None,             ,             values: common[comment_sset],             )
             
-            default values: []
-            
-            skip values: ''
-            
-            cases:
-               Case:
-               
-                  conditions:
-                        Condition:
-                        
-                           check value: variable.comments
-                           
-                           check to do: 'neq'
-                           
-                           reference values:
-                                 
-                                 - ''
-                                 - 'None'
-                                 - None
-                           
-                  
-                  value: '{}{}{}'.format(common[comment_lab], common[comment_sim], variable.comments)
-                  
-               Case:
-               
-                  conditions:
-                        Condition:
-                        
-                           check value: common[comment_sim]
-                           
-                           check to do: 'neq'
-                           
-                           reference values:
-                                 
-                                 - ''
-                                 - 'None'
-                                 - None
-                           
-                        Condition:
-                        
-                           check value: common[comment_lab]
-                           
-                           check to do: 'neq'
-                           
-                           reference values:
-                                 
-                                 - ''
-                                 - 'None'
-                                 - None
-                           
-                  
-                  value: '{}{}'.format(common[comment_lab], common[comment_sim])
-                  
-               Case:
-               
-                  conditions:
-                        Condition:
-                        
-                           check value: common[comment_sim]
-                           
-                           check to do: 'neq'
-                           
-                           reference values:
-                                 
-                                 - ''
-                                 - 'None'
-                                 - None
-                           
-                  
-                  value: common[comment_sim]
-                  
-               Case:
-               
-                  conditions:
-                        Condition:
-                        
-                           check value: common[comment_lab]
-                           
-                           check to do: 'neq'
-                           
-                           reference values:
-                                 
-                                 - ''
-                                 - 'None'
-                                 - None
-                           
-                  
-                  value: common[comment_lab]
-                  
+            forbidden values: ''
             
             num type: 'string'
             
@@ -4173,9 +4070,10 @@ Project settings
             
             History associated with the file.
             
-            fatal: False
-            
-            default values: common[history]
+            values:
+               
+               - attrs[history]
+               - common[history]
             
             num type: 'string'
             
@@ -4183,9 +4081,10 @@ Project settings
             
             Initialization index associated with the simulation.
             
-            fatal: False
-            
-            default values: common[initialization_index]
+            values:
+               
+               - attrs[initialization_index]
+               - common[initialization_index]
             
             num type: 'int'
             
@@ -4195,7 +4094,10 @@ Project settings
             
             fatal: True
             
-            default values: internal[institution_id]
+            values:
+               
+               - attrs[institution_id]
+               - init[institution_id]
             
             num type: 'string'
             
@@ -4205,7 +4107,10 @@ Project settings
             
             fatal: True
             
-            default values: common[institution]
+            values:
+               
+               - attrs[institution]
+               - common[institution]
             
             num type: 'string'
             
@@ -4213,9 +4118,9 @@ Project settings
             
             License associated with the file.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[license]
             
             num type: 'string'
             
@@ -4223,12 +4128,11 @@ Project settings
             
             MIP associated with the simulation.
             
-            fatal: False
-            
-            default values:
+            values:
                
+               - attrs[mip_era]
                - common[mip_era]
-               - variable.mip_era
+               - common_tag[variable][mip_era]
             
             num type: 'string'
             
@@ -4236,23 +4140,25 @@ Project settings
             
             Parent experiment id associated with the simulation.
             
-            fatal: False
-            
-            default values: common[parent_experiment_id]
-            
-            conditions:
-               Condition:
+            values:
                
-                  check value: common[parent_experiment_id]
-                  
-                  check to do: 'neq'
-                  
-                  reference values:
-                        
-                        - 'no parent'
-                        - ''
-                        - 'None'
-                  
+               -    Condition:
+               -    
+               -       value to check: common[parent_experiment_id]
+               -       
+               -       check to perform: 'neq'
+               -       
+               -       reference values:
+               -             
+               -             - 'no parent'
+               -             - ''
+               -             - 'None'
+               -       
+               -       values:
+               -             
+               -             - attrs[parent_experiment_id]
+               -             - common[parent_experiment_id]
+               -       
             
             num type: 'string'
             
@@ -4260,27 +4166,27 @@ Project settings
             
             MIP associated with the parent experiment.
             
-            fatal: False
-            
-            default values:
+            values:
                
-               - common[parent_mip_era]
-               - common[mip_era]
-               - variable.mip_era
-            
-            conditions:
-               Condition:
-               
-                  check value: common[parent_experiment_id]
-                  
-                  check to do: 'neq'
-                  
-                  reference values:
-                        
-                        - 'no parent'
-                        - ''
-                        - 'None'
-                  
+               -    Condition:
+               -    
+               -       value to check: common[parent_experiment_id]
+               -       
+               -       check to perform: 'neq'
+               -       
+               -       reference values:
+               -             
+               -             - 'no parent'
+               -             - ''
+               -             - 'None'
+               -       
+               -       values:
+               -             
+               -             - attrs[parent_mip_era]
+               -             - common[parent_mip_era]
+               -             - common[mip_era]
+               -             - common_tag[variable][mip_era]
+               -       
             
             num type: 'string'
             
@@ -4288,23 +4194,25 @@ Project settings
             
             Activity id associated with the parent experiment.
             
-            fatal: False
-            
-            default values: common[parent_activity_id]
-            
-            conditions:
-               Condition:
+            values:
                
-                  check value: common[parent_experiment_id]
-                  
-                  check to do: 'neq'
-                  
-                  reference values:
-                        
-                        - 'no parent'
-                        - ''
-                        - 'None'
-                  
+               -    Condition:
+               -    
+               -       value to check: common[parent_experiment_id]
+               -       
+               -       check to perform: 'neq'
+               -       
+               -       reference values:
+               -             
+               -             - 'no parent'
+               -             - ''
+               -             - 'None'
+               -       
+               -       values:
+               -             
+               -             - attrs[parent_activity_id]
+               -             - common[parent_activity_id]
+               -       
             
             num type: 'string'
             
@@ -4312,26 +4220,26 @@ Project settings
             
             Model id of the parent experiment.
             
-            fatal: False
-            
-            default values:
+            values:
                
-               - common[parent_source_id]
-               - internal[source_id]
-            
-            conditions:
-               Condition:
-               
-                  check value: common[parent_experiment_id]
-                  
-                  check to do: 'neq'
-                  
-                  reference values:
-                        
-                        - 'no parent'
-                        - ''
-                        - 'None'
-                  
+               -    Condition:
+               -    
+               -       value to check: common[parent_experiment_id]
+               -       
+               -       check to perform: 'neq'
+               -       
+               -       reference values:
+               -             
+               -             - 'no parent'
+               -             - ''
+               -             - 'None'
+               -       
+               -       values:
+               -             
+               -             - attrs[parent_source_id]
+               -             - common[parent_source_id]
+               -             - internal[source_id]
+               -       
             
             num type: 'string'
             
@@ -4339,26 +4247,26 @@ Project settings
             
             Time units of the parent experiment.
             
-            fatal: False
-            
-            default values:
+            values:
                
-               - common[parent_time_units]
-               - 'days since {}-01-01 00:00:00'.format(common[parent_time_ref_year])
-            
-            conditions:
-               Condition:
-               
-                  check value: common[parent_experiment_id]
-                  
-                  check to do: 'neq'
-                  
-                  reference values:
-                        
-                        - 'no parent'
-                        - ''
-                        - 'None'
-                  
+               -    Condition:
+               -    
+               -       value to check: common[parent_experiment_id]
+               -       
+               -       check to perform: 'neq'
+               -       
+               -       reference values:
+               -             
+               -             - 'no parent'
+               -             - ''
+               -             - 'None'
+               -       
+               -       values:
+               -             
+               -             - attrs[parent_time_units]
+               -             - common[parent_time_units]
+               -             - 'days since {}-01-01 00:00:00'.format(common[parent_time_ref_year])
+               -       
             
             num type: 'string'
             
@@ -4366,26 +4274,26 @@ Project settings
             
             Variant label of the parent experiment.
             
-            fatal: False
-            
-            default values:
+            values:
                
-               - common[parent_variant_label]
-               - common[variant_label]
-            
-            conditions:
-               Condition:
-               
-                  check value: common[parent_experiment_id]
-                  
-                  check to do: 'neq'
-                  
-                  reference values:
-                        
-                        - 'no parent'
-                        - ''
-                        - 'None'
-                  
+               -    Condition:
+               -    
+               -       value to check: common[parent_experiment_id]
+               -       
+               -       check to perform: 'neq'
+               -       
+               -       reference values:
+               -             
+               -             - 'no parent'
+               -             - ''
+               -             - 'None'
+               -       
+               -       values:
+               -             
+               -             - attrs[parent_variant_label]
+               -             - common[parent_variant_label]
+               -             - common[variant_label]
+               -       
             
             num type: 'string'
             
@@ -4393,35 +4301,26 @@ Project settings
             
             Branch method of the simulation.
             
-            fatal: False
-            
-            default values: []
-            
-            cases:
-               Case:
+            values:
                
-                  conditions:
-                        Condition:
-                        
-                           check value: common[parent_experiment_id]
-                           
-                           check to do: 'neq'
-                           
-                           reference values:
-                                 
-                                 - 'no parent'
-                                 - ''
-                                 - 'None'
-                           
-                  
-                  value: common[branch_method]
-                  
-               Case:
-               
-                  conditions: True
-                  
-                  value: 'no parent'
-                  
+               -    Condition:
+               -    
+               -       value to check: common[parent_experiment_id]
+               -       
+               -       check to perform: 'neq'
+               -       
+               -       reference values:
+               -             
+               -             - 'no parent'
+               -             - ''
+               -             - 'None'
+               -       
+               -       values:
+               -             
+               -             - attrs[branch_method]
+               -             - common[branch_method]
+               -       
+               - 'no parent'
             
             num type: 'string'
             
@@ -4429,32 +4328,32 @@ Project settings
             
             Branch time of the simulation in the parent's one.
             
-            fatal: False
-            
-            default values:
+            values:
                
-               - compute_nb_days('year_ref'= common[parent_time_ref_year], 'year_branch'= common[branch_year_in_parent], 'month_branch'= common[branch_month_in_parent])
-               - simulation[branch_time_in_parent]
+               -    Condition:
+               -    
+               -       value to check: common[parent_experiment_id]
+               -       
+               -       check to perform: 'neq'
+               -       
+               -       reference values:
+               -             
+               -             - 'no parent'
+               -             - ''
+               -             - 'None'
+               -       
+               -       values:
+               -             
+               -             - attrs[branch_time_in_parent]
+               -             - function from functions_file named compute_nb_days('year_ref'= common[parent_time_ref_year], 'year_branch'= common[branch_year_in_parent], 'month_branch'= common[branch_month_in_parent])
+               -             - simulation[branch_time_in_parent]
+               -       
             
-            skip values:
+            forbidden values:
                
                - ''
                - 'None'
                - None
-            
-            conditions:
-               Condition:
-               
-                  check value: common[parent_experiment_id]
-                  
-                  check to do: 'neq'
-                  
-                  reference values:
-                        
-                        - 'no parent'
-                        - ''
-                        - 'None'
-                  
             
             num type: 'double'
             
@@ -4462,32 +4361,32 @@ Project settings
             
             Branch time of the simulation in the child's one.
             
-            fatal: False
-            
-            default values:
+            values:
                
-               - compute_nb_days('year_ref'= simulation[child_time_ref_year], 'year_branch'= simulation[branch_year_in_child])
-               - simulation[branch_time_in_child]
+               -    Condition:
+               -    
+               -       value to check: common[parent_experiment_id]
+               -       
+               -       check to perform: 'neq'
+               -       
+               -       reference values:
+               -             
+               -             - 'no parent'
+               -             - ''
+               -             - 'None'
+               -       
+               -       values:
+               -             
+               -             - attrs[branch_time_in_child]
+               -             - function from functions_file named compute_nb_days('year_ref'= simulation[child_time_ref_year], 'year_branch'= simulation[branch_year_in_child])
+               -             - simulation[branch_time_in_child]
+               -       
             
-            skip values:
+            forbidden values:
                
                - ''
                - 'None'
                - None
-            
-            conditions:
-               Condition:
-               
-                  check value: common[parent_experiment_id]
-                  
-                  check to do: 'neq'
-                  
-                  reference values:
-                        
-                        - 'no parent'
-                        - ''
-                        - 'None'
-                  
             
             num type: 'double'
             
@@ -4495,9 +4394,10 @@ Project settings
             
             Physics index associated with the simulation.
             
-            fatal: False
-            
-            default values: common[physics_index]
+            values:
+               
+               - attrs[physics_index]
+               - common[physics_index]
             
             num type: 'int'
             
@@ -4505,9 +4405,10 @@ Project settings
             
             Type of content of the file.
             
-            fatal: False
-            
-            default values: 'model-output'
+            values:
+               
+               - attrs[product]
+               - 'model-output'
             
             num type: 'string'
             
@@ -4515,9 +4416,10 @@ Project settings
             
             Realization index associated with the simulation.
             
-            fatal: False
-            
-            default values: internal[realization_index]
+            values:
+               
+               - attrs[realization_index]
+               - internal[realization_index]
             
             num type: 'int'
             
@@ -4525,9 +4427,9 @@ Project settings
             
             Realm associated with the file.
             
-            fatal: False
-            
-            default values: variable.modeling_realm<lambda>()
+            values:
+               
+               - common_tag[variable][modeling_realm] formatted with function from self named join({})
             
             num type: 'string'
             
@@ -4535,9 +4437,10 @@ Project settings
             
             References associated with the simulation.
             
-            fatal: False
-            
-            default values: common[references]
+            values:
+               
+               - attrs[references]
+               - common[references]
             
             num type: 'string'
             
@@ -4545,9 +4448,10 @@ Project settings
             
             Model associated with the simulation.
             
-            fatal: False
-            
-            default values: common[source]
+            values:
+               
+               - attrs[source]
+               - common[source]
             
             num type: 'string'
             
@@ -4555,9 +4459,10 @@ Project settings
             
             Model id associated with the simulation.
             
-            fatal: False
-            
-            default values: internal[source_id]
+            values:
+               
+               - attrs[source_id]
+               - internal[source_id]
             
             num type: 'string'
             
@@ -4565,9 +4470,10 @@ Project settings
             
             Model type associated with the simulation.
             
-            fatal: False
-            
-            default values: internal[source_type]
+            values:
+               
+               - attrs[source_type]
+               - internal[source_type]
             
             num type: 'string'
             
@@ -4575,9 +4481,10 @@ Project settings
             
             Id of the sub experiment associated with the simulation.
             
-            fatal: False
-            
-            default values: common[sub_experiment_id]
+            values:
+               
+               - attrs[sub_experiment_id]
+               - common[sub_experiment_id]
             
             num type: 'string'
             
@@ -4585,9 +4492,10 @@ Project settings
             
             Name of the sub experiment associated with the simulation.
             
-            fatal: False
-            
-            default values: common[sub_experiment]
+            values:
+               
+               - attrs[sub_experiment]
+               - common[sub_experiment]
             
             num type: 'string'
             
@@ -4595,9 +4503,9 @@ Project settings
             
             Id of the table associated with the file.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[table_id]
             
             num type: 'string'
             
@@ -4605,12 +4513,11 @@ Project settings
             
             Title of the file.
             
-            fatal: False
-            
-            default values:
+            values:
                
-               - '{} model output prepared for {} and {} / {} simulation'.format(internal[source_id], internal[project], common[activity_id], simulation[expid_in_filename])
-               - '{} model output prepared for {} / {} {}'.format(internal[source_id], internal[project], common[activity_id], internal[experiment_id])
+               - attrs[title]
+               - function from self named format('activity_id'= common[activity_id] formatted with function from self named join({}), 'expid_in_filename'= simulation[expid_in_filename], 'project'= init[project], 'source_id'= internal[source_id])
+               - function from self named format('activity_id'= common[activity_id] formatted with function from self named join({}), 'experiment_id'= simulation[experiment_id], 'project'= init[project], 'source_id'= internal[source_id])
             
             num type: 'string'
             
@@ -4618,9 +4525,9 @@ Project settings
             
             Id of the variable contained in the file.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[variable_id]
             
             num type: 'string'
             
@@ -4628,9 +4535,10 @@ Project settings
             
             Variant information associated with the simulation.
             
-            fatal: False
-            
-            default values: '. Information provided by this attribute may in some cases be flawed. Users can find more comprehensive and up-to-date documentation via the further_info_url global attribute.'.format(common[variant_info])
+            values:
+               
+               - attrs[variant_info]
+               - function from self named format('variant_info'= common[variant_info])
             
             num type: 'string'
             
@@ -4638,9 +4546,10 @@ Project settings
             
             Variant label associated with the simulation.
             
-            fatal: False
-            
-            default values: common[variant_label]
+            values:
+               
+               - common[variant_label]
+               - attrs[variant_label]
             
             num type: 'string'
             
@@ -4656,9 +4565,9 @@ Project settings
             
             Id of the grid.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[id]
             
             num type: 'string'
             
@@ -4667,16 +4576,16 @@ Project settings
       XIOS grid_definition beacon
    interpolate_axis
       
-      XIOS interpolate_axis beacon
+      TODO
       
       Attributes:
          type
             
             Type of the interpolated axis.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[type]
             
             num type: 'string'
             
@@ -4684,9 +4593,9 @@ Project settings
             
             Order of the interpolated axis.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[order]
             
             num type: 'string'
             
@@ -4694,9 +4603,9 @@ Project settings
             
             Coordinate of the interpolated axis.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[coordinate]
             
             num type: 'string'
             
@@ -4709,9 +4618,9 @@ Project settings
             
             Type of the interpolated domain.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[type]
             
             num type: 'string'
             
@@ -4719,9 +4628,9 @@ Project settings
             
             Order of the interpolation.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[order]
             
             num type: 'string'
             
@@ -4729,9 +4638,9 @@ Project settings
             
             Should the interpolated domain be renormalized?
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[renormalize]
             
             num type: 'string'
             
@@ -4739,9 +4648,9 @@ Project settings
             
             Mode used for the interpolation.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[mode]
             
             num type: 'string'
             
@@ -4749,9 +4658,9 @@ Project settings
             
             Should interpolation weights be written?
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[write_weight]
             
             num type: 'string'
             
@@ -4759,9 +4668,9 @@ Project settings
             
             Coordinate of the interpolated domain.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[coordinate]
             
             num type: 'string'
             
@@ -4774,9 +4683,9 @@ Project settings
             
             Id of the scalar.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[id]
             
             num type: 'string'
             
@@ -4784,9 +4693,9 @@ Project settings
             
             Reference scalar.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[scalar_ref]
             
             num type: 'string'
             
@@ -4794,9 +4703,9 @@ Project settings
             
             Name of the scalar.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[name]
             
             num type: 'string'
             
@@ -4804,11 +4713,11 @@ Project settings
             
             Standard name of the scalar.
             
-            fatal: False
+            values:
+               
+               - attrs[standard_name]
             
-            default values: []
-            
-            skip values:
+            forbidden values:
                
                - ''
                - 'None'
@@ -4820,9 +4729,9 @@ Project settings
             
             Long name of the scalar.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[long_name]
             
             num type: 'string'
             
@@ -4830,11 +4739,11 @@ Project settings
             
             Label of the scalar.
             
-            fatal: False
+            values:
+               
+               - attrs[label]
             
-            default values: []
-            
-            skip values:
+            forbidden values:
                
                - ''
                - 'None'
@@ -4846,21 +4755,9 @@ Project settings
             
             Precision of the scalar.
             
-            fatal: False
-            
-            default values: []
-            
-            skip values:
+            values:
                
-               - ''
-               - 'None'
-               - None
-            
-            authorized values:
-               
-               - '2'
-               - '4'
-               - '8'
+               - attrs[prec]
             
             corrections:
                
@@ -4871,17 +4768,29 @@ Project settings
                - 'integer': '2'
                - 'int': '2'
             
+            authorized values:
+               
+               - '2'
+               - '4'
+               - '8'
+            
+            forbidden values:
+               
+               - ''
+               - 'None'
+               - None
+            
             num type: 'string'
             
          value
             
             Value of the scalar.
             
-            fatal: False
+            values:
+               
+               - attrs[value]
             
-            default values: []
-            
-            skip values:
+            forbidden values:
                
                - ''
                - 'None'
@@ -4893,11 +4802,11 @@ Project settings
             
             Bounds of the scalar.
             
-            fatal: False
+            values:
+               
+               - attrs[bounds]
             
-            default values: []
-            
-            skip values:
+            forbidden values:
                
                - ''
                - 'None'
@@ -4909,11 +4818,11 @@ Project settings
             
             Bounds name of the scalar.
             
-            fatal: False
+            values:
+               
+               - attrs[bounds_name]
             
-            default values: []
-            
-            skip values:
+            forbidden values:
                
                - ''
                - 'None'
@@ -4925,11 +4834,11 @@ Project settings
             
             Axis type of the scalar.
             
-            fatal: False
+            values:
+               
+               - attrs[axis_type]
             
-            default values: []
-            
-            skip values:
+            forbidden values:
                
                - ''
                - 'None'
@@ -4941,11 +4850,11 @@ Project settings
             
             Orientation of the scalar.
             
-            fatal: False
+            values:
+               
+               - attrs[positive]
             
-            default values: []
-            
-            skip values:
+            forbidden values:
                
                - ''
                - 'None'
@@ -4957,11 +4866,11 @@ Project settings
             
             Unit of the scalar.
             
-            fatal: False
+            values:
+               
+               - attrs[unit]
             
-            default values: []
-            
-            skip values:
+            forbidden values:
                
                - ''
                - 'None'
@@ -4984,9 +4893,11 @@ Project settings
             
             Content of the variable
             
-            fatal: False
+            fatal: True
             
-            default values: []
+            values:
+               
+               - attrs[name]
             
             num type: 'string'
             
@@ -4994,9 +4905,11 @@ Project settings
             
             Encoding type of the variable's content.
             
-            fatal: False
+            fatal: True
             
-            default values: []
+            values:
+               
+               - attrs[type]
             
             num type: 'string'
             
@@ -5009,9 +4922,9 @@ Project settings
             
             Index of the zoomed axis.
             
-            fatal: False
-            
-            default values: []
+            values:
+               
+               - attrs[index]
             
             num type: 'string'
             
