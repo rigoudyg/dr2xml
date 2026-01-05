@@ -21,13 +21,14 @@ sys.path.insert(0, "/home/rigoudyg/dev/dr2xml/")
 # -- Project information -----------------------------------------------------
 
 project = u'dr2xml'
-copyright = u'2019, Stéphane Sénési, Marie-Pierre Moine, Gaëlle Rigoudy'
+copyright = u'CNRM (Météo-France, CNRS), Cerfacs/CECI (CNRS) (2016)'
 author = u'Stéphane Sénési, Marie-Pierre Moine, Gaëlle Rigoudy'
+license = u"Apache-2.0"
 
 # The short X.Y version
 version = u''
 # The full version, including alpha/beta/rc tags
-release = u'V2.0'
+release = u'V3.2'
 
 
 # -- General configuration ---------------------------------------------------
