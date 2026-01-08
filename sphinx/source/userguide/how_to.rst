@@ -50,6 +50,24 @@ Then, for each model id, you must provide:
    - for child simulations, the start year in parent simulation must be provided in `branching`
    - the `configuration` should also be updated
 
+Deal with a new project
+-----------------------
+
+If you need to configure your output for an other project, it's the most tricky part of dr2xml.
+
+The different projects usable with dr2xml can be found in `dr2xml.projects`.
+
+The base one is `dr2xml.projects.dr2xml.json` which come with some functions in `dr2xml.projects.dr2xml_funcs.py`.
+All others must inherit from it as it defines all elements that are needed to run dr2xml.
+
+The second base is `dr2xml.projects.basics.json` which come with some functions in `dr2xml.projects.basics_funcs.py`.
+All others (except dr2xml ones) should inherit from it too, as it give default values to all elements needed to run
+dr2xml (where the dr2xml files defines them). This class can be used as it but do not have all attributes you may need.
+
+For your new project, if possible, start from an existing one, as close as possible as what is needed for you.
+Then, copy the settings (json and py) and rename them with the id of your project. You need then to modify it to fit
+with the requirements of your project. See the configuration section to have more elements.
+
 And then?
 ---------
 

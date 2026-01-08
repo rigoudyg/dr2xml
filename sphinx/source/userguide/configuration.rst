@@ -45,10 +45,11 @@ Beside those projects, the ones available currently for "real" usage are:
    - :module:`dr2xml.projects.CORDEX-CMIP6` for CORDEX-CMIP6 kind' usages
    - :module:`dr2xml.projects.C3S-SF` for C3S seasonal forecast kind' usages
 
-The settings defined in the projects are splitted in three categories (determined in this order):
-   - the internal settings which are required to run dr2xml
-   - the common settings which are used after having be read once at the launch of dr2xml
-   - for each XIOS-related object, the settings associated with this object (attributes and meta-data)
+The settings defined in the projects are splitted in four categories (determined in this order):
+   - the init settings which are required to initialize dr2xml
+   - the internal settings which are required to run dr2xml (need init settings to get the right values)
+   - the common settings which are only used in the XIOS-related objects settings (not properly in dr2xml source code), can use init and internal settings values
+   - for each XIOS-related object, the settings associated with this object (attributes and meta-data), some common values are regrouped at this level too
 That means that a setting in the common list can be defined from an other one in the internal list but not the reverse.
 
 The lab and model settings
