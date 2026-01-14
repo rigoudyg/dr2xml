@@ -1666,7 +1666,7 @@
                   "keys": ["parent_experiment_id"]
                 },
                 "check_to_perform": "neq",
-                "reference_values": ["no parent", "", "None"],
+                "reference_values": ["no parent", "", "None", null],
                 "values": [
                   {
                     "type": "value",
@@ -1696,7 +1696,7 @@
                   "keys": ["parent_experiment_id"]
                 },
                 "check_to_perform": "neq",
-                "reference_values": ["no parent", "", "None"],
+                "reference_values": ["no parent", "", "None", null],
                 "values": [
                   {
                     "type": "value",
@@ -1742,7 +1742,7 @@
                   "keys": ["parent_experiment_id"]
                 },
                 "check_to_perform": "neq",
-                "reference_values": ["no parent", "", "None"],
+                "reference_values": ["no parent", "", "None", null],
                 "values": [
                   {
                     "type": "value",
@@ -2182,7 +2182,7 @@
                   "keys": ["parent_experiment_id"]
                 },
                 "check_to_perform": "neq",
-                "reference_values": ["no parent", "", "None"],
+                "reference_values": ["no parent", "", "None", null],
                 "values": [
                   {
                     "type": "value",
@@ -2209,7 +2209,7 @@
                   "keys": ["parent_experiment_id"]
                 },
                 "check_to_perform": "neq",
-                "reference_values": ["no parent", "", "None"],
+                "reference_values": ["no parent", "", "None", null],
                 "values": [
                   {
                     "type": "value",
@@ -2236,7 +2236,7 @@
                   "keys": ["parent_experiment_id"]
                 },
                 "check_to_perform": "neq",
-                "reference_values": ["no parent", "", "None"],
+                "reference_values": ["no parent", "", "None", null],
                 "values": [
                   {
                     "type": "value",
@@ -2273,7 +2273,7 @@
                   "keys": ["parent_experiment_id"]
                 },
                 "check_to_perform": "neq",
-                "reference_values": ["no parent", "", "None"],
+                "reference_values": ["no parent", "", "None", null],
                 "values": [
                   {
                     "type": "value",
@@ -2305,7 +2305,7 @@
                   "keys": ["parent_experiment_id"]
                 },
                 "check_to_perform": "neq",
-                "reference_values": ["no parent", "", "None"],
+                "reference_values": ["no parent", "", "None", null],
                 "values": [
                   {
                     "type": "value",
@@ -2338,7 +2338,7 @@
                   "keys": ["parent_experiment_id"]
                 },
                 "check_to_perform": "neq",
-                "reference_values": ["no parent", "", "None"],
+                "reference_values": ["no parent", "", "None", null],
                 "values": [
                   {
                     "type": "value",

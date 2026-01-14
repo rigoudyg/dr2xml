@@ -1,6 +1,6 @@
 {
   "parent_project_settings": "basics",
-  "functions_file": "CMIP7_esgvoc_func.py",
+  "functions_file": "CMIP7_func.py",
   "init": {
     "project": {
       "values": [
@@ -29,7 +29,12 @@
         {
           "type": "value",
           "origin": "internal",
-          "keys": ["CV_experiment", "additional_allowed_model_components"]
+          "keys": ["CV_experiment", "additional_allowed_model_components"],
+          "format": {
+            "type": "func",
+            "origin": "functions_file",
+            "keys": ["get_ids_from_list"]
+          }
         }
       ]
     },
@@ -63,7 +68,12 @@
         {
           "type": "value",
           "origin": "internal",
-          "keys": ["CV_experiment", "required_model_components"]
+          "keys": ["CV_experiment", "required_model_components"],
+          "format": {
+            "type": "func",
+            "origin": "functions_file",
+            "keys": ["get_ids_from_list"]
+          }
         }
       ]
     },
@@ -92,7 +102,7 @@
         {
           "type": "value",
           "origin": "internal",
-          "keys": ["CV_experiment", "activity_id", 0],
+          "keys": ["CV_experiment", "activity"],
           "format": {
             "type": "func",
             "origin": "self",
@@ -242,7 +252,7 @@
               "origin": "init",
               "keys": ["vocabulary_project"]
             },
-            "collection_id": "institution_id",
+            "collection_id": "institution",
             "term_id": {
               "type": "value",
               "origin": "init",
@@ -426,7 +436,7 @@
         {
           "type": "value",
           "origin": "internal",
-          "keys": ["CV_experiment", "parent_activity_id"]
+          "keys": ["CV_experiment", "parent_activity"]
         }
       ]
     },
@@ -445,7 +455,7 @@
         {
           "type": "value",
           "origin": "internal",
-          "keys": ["CV_experiment", "parent_experiment_id", 0],
+          "keys": ["CV_experiment", "parent_experiment", "id"],
           "format": {
             "type": "func",
             "origin": "self",

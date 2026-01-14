@@ -83,8 +83,8 @@
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> amip </variable>
-			<variable name="description" type="string"> DECK: AMIP </variable>
-			<variable name="title" type="string"> DECK: AMIP </variable>
+			<variable name="description" type="string"> Simulation of the climate of the recent past with prescribed sea surface temperatures and sea ice concentrations. </variable>
+			<variable name="title" type="string"> Simulation of the climate of the recent past with prescribed sea surface temperatures and sea ice concentrations. </variable>
 			<variable name="experiment" type="string"> AMIP </variable>
 			<variable name="external_variables" type="string"> areacellr </variable>
 			<variable name="forcing_index" type="int"> 3 </variable>
@@ -144,8 +144,8 @@ seaIce: gelato </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> amip </variable>
-			<variable name="description" type="string"> DECK: AMIP </variable>
-			<variable name="title" type="string"> DECK: AMIP </variable>
+			<variable name="description" type="string"> Simulation of the climate of the recent past with prescribed sea surface temperatures and sea ice concentrations. </variable>
+			<variable name="title" type="string"> Simulation of the climate of the recent past with prescribed sea surface temperatures and sea ice concentrations. </variable>
 			<variable name="experiment" type="string"> AMIP </variable>
 			<variable name="forcing_index" type="int"> 3 </variable>
 			<variable name="frequency" type="string"> fx </variable>
@@ -202,8 +202,8 @@ seaIce: gelato </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> amip </variable>
-			<variable name="description" type="string"> DECK: AMIP </variable>
-			<variable name="title" type="string"> DECK: AMIP </variable>
+			<variable name="description" type="string"> Simulation of the climate of the recent past with prescribed sea surface temperatures and sea ice concentrations. </variable>
+			<variable name="title" type="string"> Simulation of the climate of the recent past with prescribed sea surface temperatures and sea ice concentrations. </variable>
 			<variable name="experiment" type="string"> AMIP </variable>
 			<variable name="external_variables" type="string"> areacellr </variable>
 			<variable name="forcing_index" type="int"> 3 </variable>
@@ -263,8 +263,8 @@ seaIce: gelato </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> amip </variable>
-			<variable name="description" type="string"> DECK: AMIP </variable>
-			<variable name="title" type="string"> DECK: AMIP </variable>
+			<variable name="description" type="string"> Simulation of the climate of the recent past with prescribed sea surface temperatures and sea ice concentrations. </variable>
+			<variable name="title" type="string"> Simulation of the climate of the recent past with prescribed sea surface temperatures and sea ice concentrations. </variable>
 			<variable name="experiment" type="string"> AMIP </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 3 </variable>
@@ -323,8 +323,8 @@ seaIce: gelato </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> amip </variable>
-			<variable name="description" type="string"> DECK: AMIP </variable>
-			<variable name="title" type="string"> DECK: AMIP </variable>
+			<variable name="description" type="string"> Simulation of the climate of the recent past with prescribed sea surface temperatures and sea ice concentrations. </variable>
+			<variable name="title" type="string"> Simulation of the climate of the recent past with prescribed sea surface temperatures and sea ice concentrations. </variable>
 			<variable name="experiment" type="string"> AMIP </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 3 </variable>
@@ -383,8 +383,8 @@ seaIce: gelato </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> amip </variable>
-			<variable name="description" type="string"> DECK: AMIP </variable>
-			<variable name="title" type="string"> DECK: AMIP </variable>
+			<variable name="description" type="string"> Simulation of the climate of the recent past with prescribed sea surface temperatures and sea ice concentrations. </variable>
+			<variable name="title" type="string"> Simulation of the climate of the recent past with prescribed sea surface temperatures and sea ice concentrations. </variable>
 			<variable name="experiment" type="string"> AMIP </variable>
 			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 3 </variable>
@@ -443,8 +443,8 @@ seaIce: gelato </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> amip </variable>
-			<variable name="description" type="string"> DECK: AMIP </variable>
-			<variable name="title" type="string"> DECK: AMIP </variable>
+			<variable name="description" type="string"> Simulation of the climate of the recent past with prescribed sea surface temperatures and sea ice concentrations. </variable>
+			<variable name="title" type="string"> Simulation of the climate of the recent past with prescribed sea surface temperatures and sea ice concentrations. </variable>
 			<variable name="experiment" type="string"> AMIP </variable>
 			<variable name="external_variables" type="string"> areacellr </variable>
 			<variable name="forcing_index" type="int"> 3 </variable>
@@ -503,8 +503,8 @@ seaIce: gelato </variable>
 			<variable name="data_specs_version" type="string"> current_cmip6_dr </variable>
 			<variable name="dr2xml_version" type="string"> current_version </variable>
 			<variable name="experiment_id" type="string"> amip </variable>
-			<variable name="description" type="string"> DECK: AMIP </variable>
-			<variable name="title" type="string"> DECK: AMIP </variable>
+			<variable name="description" type="string"> Simulation of the climate of the recent past with prescribed sea surface temperatures and sea ice concentrations. </variable>
+			<variable name="title" type="string"> Simulation of the climate of the recent past with prescribed sea surface temperatures and sea ice concentrations. </variable>
 			<variable name="experiment" type="string"> AMIP </variable>
 			<variable name="external_variables" type="string"> areacellr </variable>
 			<variable name="forcing_index" type="int"> 3 </variable>

@@ -19,7 +19,12 @@
         {
           "type": "value",
           "origin": "internal",
-          "keys": ["CV_experiment", "additional_allowed_model_components"]
+          "keys": ["CV_experiment", "additional_allowed_model_components"],
+          "format": {
+            "type": "func",
+            "origin": "functions_file",
+            "keys": ["get_ids_from_list"]
+          }
         }
       ]
     },
@@ -53,7 +58,12 @@
         {
           "type": "value",
           "origin": "internal",
-          "keys": ["CV_experiment", "required_model_components"]
+          "keys": ["CV_experiment", "required_model_components"],
+          "format": {
+            "type": "func",
+            "origin": "functions_file",
+            "keys": ["get_ids_from_list"]
+          }
         }
       ]
     }
@@ -74,7 +84,7 @@
         {
           "type": "value",
           "origin": "internal",
-          "keys": ["CV_experiment", "activity_id", 0],
+          "keys": ["CV_experiment", "activity"],
           "format": {
             "type": "func",
             "origin": "self",
@@ -316,7 +326,7 @@
         {
           "type": "value",
           "origin": "internal",
-          "keys": ["CV_experiment", "parent_activity_id"]
+          "keys": ["CV_experiment", "parent_activity"]
         }
       ]
     },
@@ -335,7 +345,7 @@
         {
           "type": "value",
           "origin": "internal",
-          "keys": ["CV_experiment", "parent_experiment_id"]
+          "keys": ["CV_experiment", "parent_experiment"]
         }
       ]
     },
@@ -627,7 +637,12 @@
                   {
                     "type": "value",
                     "origin": "internal",
-                    "keys": ["CV_experiment", "experiment"]
+                    "keys": ["CV_experiment", "id"],
+                    "format": {
+                      "type": "func",
+                      "origin": "self",
+                      "keys": ["upper"]
+                    }
                   }
                 ]
               }

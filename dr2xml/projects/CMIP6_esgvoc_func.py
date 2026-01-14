@@ -69,3 +69,10 @@ def fill_license(value, institution_id, info_url, license_id, license_url, comme
     value = value.replace("[ and at <some URL maintained by modeling group>]", " and at " + info_url)
     value = value.replace("<insert the matching license_url; see below>", license_url)
     return value
+
+
+def get_ids_from_list(value):
+    if isinstance(value, list):
+        return [elt.id for elt in value]
+    else:
+        raise ValueError("Input must be a list, not %s" % type(value))
