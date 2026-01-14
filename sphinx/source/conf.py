@@ -21,7 +21,7 @@ sys.path.insert(0, "/home/rigoudyg/dev/dr2xml/")
 # -- Project information -----------------------------------------------------
 
 project = u'dr2xml'
-copyright = u'CNRM (Météo-France, CNRS), Cerfacs/CECI (CNRS) (2016)'
+copyright = u'CNRM (Météo-France, CNRS), Cerfacs/CECI (CNRS) (2026)'
 author = u'Stéphane Sénési, Marie-Pierre Moine, Gaëlle Rigoudy'
 license = u"Apache-2.0"
 
