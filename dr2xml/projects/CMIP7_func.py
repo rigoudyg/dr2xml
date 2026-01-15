@@ -39,7 +39,7 @@ def make_source_string(source, source_id):
             logger.error("Either no component or several components found for realm %s: %s" % (realm, description))
             raise ValueError("Either no component or several components found for realm %s: %s" % (realm, description))
         else:
-            description = description[0]
+            description = description[0]["name"]
         if description not in ["none", "None", None]:
             rep = rep + "\n" + realm + ": " + description
     return rep
