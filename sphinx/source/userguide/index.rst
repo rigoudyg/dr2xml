@@ -14,4 +14,5 @@ DR2XML User Guide
    Ping file <ping>
    Home data request <home_dr>
    Supplementary <supplementary>
+   How to start with a new model/laboratory? <how_to>
    Acknowledgments <acknowledgement>

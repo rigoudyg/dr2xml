@@ -7,6 +7,7 @@ Interface to project settings from dr2xml
 from __future__ import print_function, division, absolute_import, unicode_literals
 
 import os
+from collections import defaultdict
 from importlib.machinery import SourceFileLoader
 
 from .py_settings_interface import get_variable_from_lset_with_default_in_lset, get_variable_from_lset_with_default, \
@@ -32,26 +33,52 @@ def initialize_project_settings(dirname, doc_writer=False):
     return internal_values, common_values, project_settings
 
 
+def write_project_dict_content(list_values, title, title_level, level=0):
+    content = list()
+    content.append(title)
+    content.append(title_level * len(title))
+    content.append(".. glossary::")
+    content.append("   :sorted:")
+    content.append("   ")
+    content.extend(list_values)
+    content = ["   " * level + elt for elt in content]
+    return content
+
+
 def write_project_documentation(internal_values, common_values, project_settings, dirname, project):
+    param_content = defaultdict(lambda: defaultdict(list))
+    for value in sorted(list(internal_values)):
+        param_content[internal_values[value].section]["internal"].extend(internal_values[value].dump_doc())
+    for value in sorted(list(common_values)):
+        param_content[common_values[value].section]["common"].extend(common_values[value].dump_doc())
+    list_sections = list(param_content)
+    if None in list_sections:
+        list_sections.remove(None)
+        list_sections = sorted(list_sections)
+        list_sections.insert(0, None)
+    else:
+        list_sections = sorted(list_sections)
     target_filename = os.sep.join([dirname, project + ".rst"])
     content = list()
     content.append("Parameters available for project %s" % project)
     content.append("=" * len(content[0]))
     content.append("")
-    content.append("Internal values")
-    content.append("---------------")
-    content.append(".. glossary::")
-    content.append("   :sorted:")
-    content.append("   ")
-    for value in sorted(list(internal_values)):
-        content.extend(internal_values[value].dump_doc())
-    content.append("Common values")
-    content.append("-------------")
-    content.append(".. glossary::")
-    content.append("   :sorted:")
-    content.append("   ")
-    for value in sorted(list(common_values)):
-        content.extend(common_values[value].dump_doc())
+
+    for section in list_sections:
+        if section is None:
+            section_title = "Unsorted parameters"
+        else:
+            section_title = section
+        level = 1
+        title_level = "^"
+        content.append(section_title)
+        content.append("-" * len(section_title))
+        if "internal" in param_content[section]:
+            content.extend(write_project_dict_content(param_content[section]["internal"], "Internal values", title_level, level=level))
+        if "common" in param_content[section]:
+            content.extend(write_project_dict_content(param_content[section]["common"], "Common values", title_level, level=level))
+        if section is not None:
+            content.append("")
     content.append("Project settings")
     content.append("----------------")
     content.append(".. glossary::")

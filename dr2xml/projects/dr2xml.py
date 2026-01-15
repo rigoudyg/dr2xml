@@ -84,7 +84,7 @@ internal_values = dict(
 	),
 	synchronisation_frequency=ParameterSettings(
 		key="synchronisation_frequency",
-		help="Frequency at which the synchornisation between buffer and filesystem is done.",
+		help="Frequency at which the synchronisation between buffer and filesystem is done.",
 		default_value=[
 			ValueSettings(key_type="simulation", keys="synchronisation_frequency"),
 			ValueSettings(key_type="laboratory", keys="synchronisation_frequency"),
