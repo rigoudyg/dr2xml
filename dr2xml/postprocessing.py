@@ -12,7 +12,7 @@ from .settings_interface import get_settings_values
 from .utils import Dr2xmlError
 
 # Logger
-from logger import get_logger
+from utilities.logger import get_logger
 
 # Global variables and configuration tools
 from .config import get_config_variable, add_value_in_dict_config_variable
@@ -340,7 +340,7 @@ def process_levels_over_orog(sv, alias, src_grid_id):
         height_over_orog_field_name = "height_over_orog"
         if height_over_orog_field_name not in context_index:
             # Find out what is the name of the orography field and check that it is defined
-            orography_field_name = internal_dict["orography_field_name"]
+            orography_field_name = internal_dict["prefixed_orography_field_name"]
             if orography_field_name not in context_index:
                 raise KeyError("%s must have been defined in field_def" % orography_field_name)
             orography_defs = context_index[orography_field_name]

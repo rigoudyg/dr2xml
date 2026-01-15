@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<context id="LMDZ">
+	<!--CMIP7 Data Request version Software current_cmip7_dr_software - Content test-->
+	<!--dr2xml version current_version-->
+	<!--Lab_and_model settings
+{'data_request_content_version' = 'test',
+'data_request_used' = 'CMIP7',
+'excluded_vars' = [],
+'excluded_vars_file' = [],
+'institution_id' = 'IPSL',
+'laboratory_used' = 'ipsl',
+'listof_home_vars' = 'None',
+'max_priority' = '3',
+'mips' = {},
+'path_extra_tables' = 'None',
+'path_special_defs' = 'None',
+'ping_variables_prefix' = 'CMIP7_',
+'project' = 'ping',
+'realms_per_context' = {'LMDZ' = ['atmos', 'land', 'landIce', 'atmosChem', 'aerosol'], 'nemo' = ['seaIce', 'ocean', 'ocnBgchem'], 'orchidee' = ['land', 'landIce']},
+'tierMax' = '3'}-->
+	<!--Simulation settings
+{}-->
+	<!--Year processed None-->
+	<field_definition>
+		<field id="CMIP7_areacella" field_ref="?dummy_XY"/>
+		<!--P1 (m2) cell_area : Cell areas for any grid used to report atmospheric variables and any other variable using that grid (e.g., soil moisture content). These cell areas should be defined to enable exact calculation of global integrals (e.g., of vertical fluxes of energy at the surface and top of the atmosphere).-->
+		<field id="CMIP7_bldep" field_ref="?dummy_XY"/>
+		<!--P2 (m) atmosphere_boundary_layer_thickness : Boundary Layer Depth every 3 hours-->
+		<field id="CMIP7_hfdsl" field_ref="?dummy_XY"/>
+		<!--P3 (W m-2) surface_downward_heat_flux_in_air : Ground heat flux at 3hr-->
+		<field id="CMIP7_lai" field_ref="?dummy_XY"/>
+		<!--P1 (1) leaf_area_index : A ratio obtained by dividing the total upper leaf surface area of vegetation by the (horizontal) surface area of the land on which it grows.-->
+		<field id="CMIP7_mrso" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) mass_content_of_water_in_soil : the mass per unit area  (summed over all soil layers) of water in all phases.-->
+		<field id="CMIP7_mrso100" field_ref="?dummy_XY_sdepth100cm"/>
+		<!--P3 (kg m-2) mass_content_of_water_in_soil_layer : Soil moisture at 3hr but for 0-1m-->
+		<field id="CMIP7_mrsos" field_ref="?dummy_XY_sdepth10cm"/>
+		<!--P1 (kg m-2) mass_content_of_water_in_soil_layer : the mass of water in all phases in a thin surface soil layer.-->
+		<field id="CMIP7_orog" field_ref="?dummy_XY"/>
+		<!--P1 (m) surface_altitude : height above the geoid; as defined here, "the geoid" is a surface of constant geopotential that, if the ocean were at rest, would coincide with mean sea level. Under this definition, the geoid changes as the mean volume of the ocean changes (e.g., due to glacial melt, or global warming of the ocean).  Reported here is the height above the present-day geoid (0.0 over ocean).-->
+		<field id="CMIP7_rootd" field_ref="?dummy_XY"/>
+		<!--P1 (m) root_depth : report the maximum soil depth reachable by plant roots (if defined in model), i.e., the maximum soil depth from which they can extract moisture; report as "missing" where the land fraction is 0.-->
+		<field id="CMIP7_slthick" field_ref="?dummy_XYSo_sdepth"/>
+		<!--P1 (m) cell_thickness : Thickness of Soil Layers-->
+		<field id="CMIP7_snc" field_ref="?dummy_XY"/>
+		<!--P1 (%) surface_snow_area_fraction : Fraction of each grid cell that is occupied by snow that rests on land portion of cell.-->
+		<field id="CMIP7_srfrad" field_ref="?dummy_XY"/>
+		<!--P2 (W m-2) surface_net_downward_radiative_flux : Net radiative flux at surface-->
+		<field id="CMIP7_tran" field_ref="?dummy_XY"/>
+		<!--P3 (kg m-2 s-1) transpiration_flux : Transpiration-->
+		<field id="CMIP7_tslsi" field_ref="?dummy_XY"/>
+		<!--P2 (K) surface_temperature : Surface temperature of all surfaces except open ocean, sampled synoptically.-->
+	</field_definition>
+</context>

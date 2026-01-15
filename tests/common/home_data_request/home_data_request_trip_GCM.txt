@@ -1,0 +1,7 @@
+#------------------------------------------------------------------------------------------------------------------------------------------------------
+#TYPE;    VARNAME;         REALM;     FREQUENCY;     TABLE;                     TEMPORAL_SHP;         SPATIAL_SHP;       EXPNAME;            MIP
+#------------------------------------------------------------------------------------------------------------------------------------------------------
+cmor;    wtd;              land;     mon;           CMIP_Emon;                 time-mean;            XY-na;             ANY;                ANY
+cmor;    rivo;             land;     day;           CMIP_Eday;                 time-mean;            XY-na;             ANY;                ANY
+extra;   fldf;             land;     mon;       CNRM_HOMALmon;                       ANY;              ANY;             ANY;                ANY
+extra;   fwtd;          land;        mon;       CNRM_HOMALmon;                       ANY;              ANY;             ANY;                ANY

@@ -9,11 +9,13 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 
 import copy
 from collections import OrderedDict
-from six import string_types
 
-from dr2xml.utils import Dr2xmlError, decode_if_needed, print_struct
+import six
 
-from logger import get_logger
+from dr2xml.utils import Dr2xmlError, print_struct
+
+from utilities.logger import get_logger
+from utilities.encoding_tools import decode_if_needed
 
 
 # Initial simulation (sset) and laboratory (lset) dictionaries
@@ -42,9 +44,11 @@ def decode_strings(struct):
     :return:
     """
     logger = get_logger()
-    if isinstance(struct, (int, float)):
+    if struct is None:
         return struct
-    elif isinstance(struct, (string_types, type(None))):
+    elif isinstance(struct, (int, float)):
+        return struct
+    elif isinstance(struct, six.string_types):
         struct = str(struct)
         struct = decode_if_needed(struct)
         return struct
@@ -186,7 +190,7 @@ def is_key_in_lset(key):
     :param key:
     :return:
     """
-    return lset and (key in lset)
+    return lset is not None and (key in lset)
 
 
 def is_key_in_sset(key):
@@ -195,7 +199,7 @@ def is_key_in_sset(key):
     :param key:
     :return:
     """
-    return sset and (key in sset)
+    return sset is not None and (key in sset)
 
 
 def is_sset_not_None():

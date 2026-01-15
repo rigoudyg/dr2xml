@@ -1,0 +1,9 @@
+#------------------------------------------------------------------------------------------------------------------------------------------------------
+#TYPE;    VARNAME;         REALM;     FREQUENCY;     TABLE;                     TEMPORAL_SHP;         SPATIAL_SHP;       EXPNAME;            MIP
+#------------------------------------------------------------------------------------------------------------------------------------------------------
+# dev; CMIP6_albsrfc; land; day; CNRM_day; time-mean; XY-na; ANY; ANY; fraction; surface albedo; albsrfc; sfx_global; FULL_grid
+# perso; CMIP6_albsrfc; land; month; CNRM_month; time-mean; XY-na; ANY; ANY; fraction; surface albedo; albsrfc; sfx_global; FULL_grid
+dev; CMIP6_albsrfc; land; day; CNRM_day; time-mean; XY-na; ANY; ANY; fraction; albedo; albsrfc; sfx_global; FULL_grid
+#dev;    snct;          land;     day;           CNRM_day;                 time-mean;            XY-na;             ANY;                ANY
+dev;     sftlakef;        atmos;      fx;             CNRM_fx;                      None;            XY-na;             ANY;                ANY; %; % of the grid cell occupied by lake; sftlaf; sfx_global; FULL_grid
+cmor; cltcalipso; atmos; 3hrPt; CMIP_E3hrPt; time-point; XY-na; ANY; ANY

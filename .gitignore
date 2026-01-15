@@ -34,3 +34,4 @@ tests/test*/output_*
 dr2xml_output/dr2xml_*.xml
 dr2xml_output/exercices/*/dr2xml_*.xml
 *.pyc
+/scripts/output_labs/

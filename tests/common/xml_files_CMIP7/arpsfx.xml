@@ -1,0 +1,259 @@
+<!-- 
+Example of XIOS-2.0 xml sub-file for Surfex + Arpege
+First version - 08/2016 - Stephane Senesi 
+
+This file must be sourced by main XIOS xml file (iodef.xml) , using a
+tag 'context id=surfex' 
+
+It references a series of other files, one per topic
+
+Ref: 
+  - for XIOS : https://forge.ipsl.jussieu.fr/ioserver/wiki 
+  - for XIAS (implementation in Surfex and Arpege) : http://www.cnrm-game-meteo.fr/cm/spip.php?article60
+-->
+
+<context id="surfex">
+  
+  <variable_definition>
+    <!-- Year of time origin for NetCDF files; defaults to 1850 -->
+    <variable id="ref_year" type="int"> 1850 </variable>
+   
+    <!-- Next default value applies when field have no freq_op -->
+    <variable id="timesteps_between_samples" type="int"> 1 </variable>
+
+    <!-- Option for inverting atmospheric levels -->
+    <variable id="invert_levels" type="bool"> true </variable>
+    
+    <!-- A few variables used for unit conversion -->
+    <!-- overwritten in mse_xios_setup_aro.F90 -->
+    <!-- gravit -->
+    <!-- timestep -->
+    <!-- ndlon -->
+    <variable id="gravit"   type="float"> 1.0E+20 </variable>
+    <variable id="timestep" type="float"> 1.0E+20 </variable>
+    <variable id="ndlon"    type="float"> 1.0E+20 </variable>
+  </variable_definition> 
+
+  <!-- 
+       Note on references to other configuration files 
+       With Eclis you can either : 
+	 - quote a full pathname
+         - or use pattern "./file.xml" and quote the corresponding file
+	 full pathname in OTHER_FILES (with same basename); ECLIS 
+	 will then bring the files in the rundir   --> 
+
+  <!-- On purpose, we define and source a cascade of secondary files 
+       for the sake of modularity (but at the expense of scattering
+       the material -->
+
+  <!-- First, we insert a 'stable' file which complements 
+       declarations of fields done by Surfex code 
+       This allow to reference all fields in all cases, avoiding crashes -->
+  <field_definition  src="./surfex_fields.xml"/>
+
+  <!-- For allowing to also request any Arpege basic or derived field,
+       insert relevant declarations -->
+  <field_definition  src="./atmo_fields.xml"/>
+  <field_definition  src="./aero_fields.xml"/>
+  <field_definition  src="./chem_fields.xml"/>
+
+
+
+  <domain_definition>
+    <domain id="FULL"   prec="8" />
+    <domain id="NATURE" prec="8" />
+    <domain id="SEA"    prec="8" />
+    <domain id="WATER"  prec="8" />
+    <domain id="TOWN"   prec="8" />
+    <!-- Define an output grid, here a regular lat-lon grid matching the T127 resolution -->
+      <domain id="complete" prec="8"><interpolate_domain order="1" renormalize="true" mode="read_or_compute" write_weight="true" />
+    </domain>
+  </domain_definition>
+
+  <scalar_definition>
+    <scalar id="SCALAR" name="sector" standard_name="region" label="global" /> 
+  </scalar_definition>
+
+  <grid_definition>
+    <grid id="SCALAR_grid">       <scalar scalar_ref="SCALAR" name="sector" standard_name="region" label="global" /> </grid>
+    <grid id="FULL_grid"> 	  <domain domain_ref="FULL"/>   </grid>
+    <grid id="FULL_klev"> 	  <domain domain_ref="FULL"/> 	<axis axis_ref="klev" name="lev"/>                         </grid>
+    <grid id="FULL_klev_ll"> 	  <domain domain_ref="FULL"/> 	<axis axis_ref="klev_ll"/>                      </grid>
+    <grid id="FULL_klev_half">	  <domain domain_ref="FULL"/> 	<axis axis_ref="klev_half" name="lev"/>                    </grid>
+    <grid id="FULL_pstd"> 	  <domain domain_ref="FULL"/> 	<axis axis_ref="pstd"/>                         </grid>
+    <grid id="FULL_zstd"> 	  <domain domain_ref="FULL"/> 	<axis axis_ref="zstd"/>                         </grid>
+    <grid id="FULL_swband"> 	  <domain domain_ref="FULL"/> 	<axis axis_ref="swband" name="spectband"/>      </grid>
+    <grid id="FULL_klev_half_sw"> <domain domain_ref="FULL"/>   <axis axis_ref="klev_half" name="lev"/>                    <axis axis_ref="swband"   name="spectband"/> </grid>
+    <grid id="NATURE_grid">	  <domain domain_ref="NATURE"/> </grid>
+    <grid id="NATURE_patch">	  <domain domain_ref="NATURE"/> <axis axis_ref="patch"/>                        </grid>
+    <grid id="NATURE_patches">	  <domain domain_ref="NATURE"/> <axis axis_ref="patches"/>                      </grid>
+    <grid id="NATURE_vegtype">	  <domain domain_ref="NATURE"/> <axis axis_ref="vegtype"/>                      </grid>
+    <grid id="NATURE_snlayers">	  <domain domain_ref="NATURE"/> <axis axis_ref="snow_layer" name="snowdepth"/>      </grid>
+    <grid id="NATURE_tlayers">    <domain domain_ref="NATURE"/> <axis axis_ref="ground_layer_for_temperature" name="sdepth"/> </grid>
+    <grid id="NATURE_glayers"> 	  <domain domain_ref="NATURE"/> <axis axis_ref="ground_layer" name="sdepth"/> </grid>
+    <grid id="NATURE_soilcpools"> <domain domain_ref="NATURE"/> <axis axis_ref="soil_carbon_pools"/>            </grid>
+    <grid id="NATURE_landuse"> 	  <domain domain_ref="NATURE"/> <axis axis_ref="landusetype4"  name="landUse" /> </grid>
+    <grid id="NATURE_swband"> 	  <domain domain_ref="NATURE"/> <axis axis_ref="swband" name="spectband"/>      </grid>
+    <grid id="SEA_seaicelayers">  <domain domain_ref="NATURE"/>	<axis axis_ref="seaice_layer"/>                 </grid>
+    <grid id="SEA_grid">	  <domain domain_ref="SEA"/>    </grid>
+    <grid id="WATER_grid">	  <domain domain_ref="WATER"/>  </grid>
+    <grid id="TOWN_grid">	  <domain domain_ref="TOWN"/>   </grid>
+
+    <grid id="grid_complete"> 		   <domain domain_ref="complete"/> </grid>
+    <grid id="grid_complete_klev"> 	   <domain domain_ref="complete"/> <axis axis_ref="klev" name="lev"/>                         </grid>
+    <grid id="grid_complete_klev_ll"> 	   <domain domain_ref="complete"/> <axis axis_ref="klev_ll"/>                      </grid>
+    <grid id="grid_complete_klev_half">    <domain domain_ref="complete"/> <axis axis_ref="klev_half" name="lev"/>                    </grid>
+    <grid id="grid_complete_klev_half_sw"> <domain domain_ref="complete"/> <axis axis_ref="klev_half" name="lev"/>                    <axis axis_ref="swband"  name="spectband"/> </grid>
+    <grid id="grid_complete_tlayers"> 	   <domain domain_ref="complete"/> <axis axis_ref="ground_layer_for_temperature" name="sdepth"/> </grid>
+    <grid id="grid_complete_snlayers"> 	   <domain domain_ref="complete"/> <axis axis_ref="snow_layer" name="snowdepth"/>      </grid>
+    <grid id="grid_complete_glayers"> 	   <domain domain_ref="complete"/> <axis axis_ref="ground_layer" name="sdepth"/>                 </grid>
+    <grid id="grid_complete_vegtype"> 	   <domain domain_ref="complete"/> <axis axis_ref="vegtype"/>                      </grid>
+    <grid id="grid_complete_soilcpools">   <domain domain_ref="complete"/> <axis axis_ref="soil_carbon_pools"/>                   </grid>
+    <grid id="grid_complete_landuse">      <domain domain_ref="complete"/> <axis axis_ref="landusetype4"  name="landUse" /> </grid>
+    <grid id="grid_complete_patch">        <domain domain_ref="complete"/> <axis 	      axis_ref="patch"/>                        </grid>
+    <grid id="grid_complete_patches">      <domain domain_ref="complete"/> <axis axis_ref="patches"/>                      </grid>
+    <grid id="grid_complete_pstd"> 	   <domain domain_ref="complete"/> <axis axis_ref="pstd"/>                         </grid>
+    <grid id="grid_complete_zstd"> 	   <domain domain_ref="complete"/> <axis axis_ref="zstd"/>                         </grid>
+    <grid id="grid_complete_swband"> 	   <domain domain_ref="complete"/> <axis axis_ref="swband"  name="spectband"/>     </grid>
+
+    <grid id="klev_bnds">      <axis axis_ref="klev" name="lev" />      <axis axis_ref="bnds" /> </grid>
+    <grid id="klev_half_bnds"> <axis axis_ref="klev_half" name="lev" /> <axis axis_ref="bnds" /> </grid>
+
+    <grid id="C_grid">          <domain domain_ref="C"/>                                                                                 </grid>
+    <grid id="C_klev"> 	        <domain domain_ref="C"/> 	<axis axis_ref="klev" name="lev"/>                         </grid>
+    <grid id="C_klev_ll">       <domain domain_ref="C"/> 	<axis axis_ref="klev_ll"/>                      </grid>
+    <grid id="C_klev_half">     <domain domain_ref="C"/> 	<axis axis_ref="klev_half" name="lev"/>                    </grid>
+    <grid id="C_klev_half_sw">  <domain domain_ref="C"/>        <axis axis_ref="klev_half" name="lev"/>   <axis axis_ref="swband"  name="spectband"/> </grid>
+    <grid id="C_tlayers"> 	<domain domain_ref="C"/>        <axis axis_ref="ground_layer_for_temperature" name="sdepth"/> </grid>
+    <grid id="C_snlayers"> 	<domain domain_ref="C"/>        <axis axis_ref="snow_layer" name="snowdepth"/>      </grid>
+    <grid id="C_glayers"> 	<domain domain_ref="C"/>        <axis axis_ref="ground_layer" name="sdepth"/>    </grid>
+    <grid id="C_vegtype"> 	<domain domain_ref="C"/>        <axis axis_ref="vegtype"/>                      </grid>
+    <grid id="C_soilcpools">    <domain domain_ref="C"/>        <axis axis_ref="soil_carbon_pools"/>            </grid>
+    <grid id="C_landuse">       <domain domain_ref="C"/>        <axis axis_ref="landusetype4"  name="landUse" /> </grid>
+    <grid id="C_patch">         <domain domain_ref="C"/>        <axis axis_ref="patch"/>                        </grid>
+    <grid id="C_patches">       <domain domain_ref="C"/>        <axis axis_ref="patches"/>                      </grid>
+    <grid id="C_pstd"> 	        <domain domain_ref="C"/> 	<axis axis_ref="pstd"/>                         </grid>
+    <grid id="C_zstd"> 	        <domain domain_ref="C"/> 	<axis axis_ref="zstd"/>                         </grid>
+    <grid id="C_swband">        <domain domain_ref="C"/> 	<axis axis_ref="swband"  name="spectband"/>     </grid>
+
+    <grid id="CI_grid">         <domain domain_ref="CI"/>                                                                                </grid>
+    <grid id="CI_klev">         <domain domain_ref="CI"/> 	<axis axis_ref="klev" name="lev"/>                         </grid>
+    <grid id="CI_klev_ll">      <domain domain_ref="CI"/> 	<axis axis_ref="klev_ll"/>                      </grid>
+    <grid id="CI_klev_half">    <domain domain_ref="CI"/> 	<axis axis_ref="klev_half" name="lev"/>                    </grid>
+    <grid id="CI_klev_half_sw"> <domain domain_ref="CI"/>       <axis axis_ref="klev_half" name="lev"/>   <axis axis_ref="swband"  name="spectband"/> </grid>
+    <grid id="CI_tlayers"> 	<domain domain_ref="CI"/>       <axis axis_ref="ground_layer_for_temperature" name="sdepth"/> </grid>
+    <grid id="CI_snlayers"> 	<domain domain_ref="CI"/>       <axis axis_ref="snow_layer" name="depth"/>      </grid>
+    <grid id="CI_glayers"> 	<domain domain_ref="CI"/>       <axis axis_ref="ground_layer" name="sdepth"/>    </grid>
+    <grid id="CI_vegtype"> 	<domain domain_ref="CI"/>       <axis axis_ref="vegtype"/>                      </grid>
+    <grid id="CI_soilcpools">   <domain domain_ref="CI"/>       <axis axis_ref="soil_carbon_pools"/>            </grid>
+    <grid id="CI_landuse">      <domain domain_ref="CI"/>       <axis axis_ref="landusetype4"  name="landUse" /> </grid>
+    <grid id="CI_patch">        <domain domain_ref="CI"/>       <axis axis_ref="patch"/>                        </grid>
+    <grid id="CI_patches">      <domain domain_ref="CI"/>       <axis axis_ref="patches"/>                      </grid>
+    <grid id="CI_pstd">         <domain domain_ref="CI"/> 	<axis axis_ref="pstd"/>                         </grid>
+    <grid id="CI_zstd">         <domain domain_ref="CI"/> 	<axis axis_ref="zstd"/>                         </grid>
+    <grid id="CI_swband">       <domain domain_ref="CI"/> 	<axis axis_ref="swband"  name="spectband"/>     </grid>
+
+    <grid id="zonal1D">      <axis axis_ref="glat"/>                           </grid>
+    <grid id="zonal2D_klev"> <axis axis_ref="glat"/> <axis axis_ref="klev" name="lev"/>   </grid>
+    <grid id="zonal2D_pstd"> <axis axis_ref="glat"/> <axis axis_ref="pstd"/>   </grid>
+
+  </grid_definition>
+  
+  <axis_definition>
+    <axis_group prec="8" >
+      <!-- Arpege -->
+      <axis id="klev"   long_name = "hybrid sigma pressure coordinate" name="lev"
+    	    standard_name ="atmosphere_hybrid_sigma_pressure_coordinate" unit="1"
+            formula="p = ap + b*ps" formula_term="ap: ap b: b ps: ps"
+            formula_bounds="p = ap + b*ps" formula_term_bounds="ap: ap b: b ps: ps" >
+      </axis>
+      <axis id="klev_half"  long_name = "hybrid sigma pressure coordinate" name="lev"
+    	    standard_name ="atmosphere_hybrid_sigma_pressure_coordinate" unit="1"
+            formula="p = ap + b*ps" formula_term="ap: ap b: b ps: ps"
+            formula_bounds="p = ap + b*ps" formula_term_bounds="ap: ap b: b ps: ps" >
+      </axis>
+      <axis id="klev_ll" />
+      <axis id="bnds" n_glo="2"/>
+      
+      <!-- Generic pressure axis -->
+      <axis id="paxis" unit="Pa" name="p" standard_name="pressure" positive="down"   >
+	<interpolate_axis type="polynomial" order="1" coordinate="pa"/>
+      </axis>
+
+      <!-- Generic z axis -->
+      <axis id="zaxis" unit="m" name="z" standard_name="altitude" positive="up"   >
+	<interpolate_axis type="polynomial" order="1" coordinate="zg"/>
+      </axis>
+      
+      <!-- Surfex -->
+      <axis id="patch"        			/>
+      <axis id="soil_patches" 			/>
+      <axis id="patches" 			/>
+      <axis id="snow_layer" 	    name="snowdepth" />
+      <axis id="swband"             name="spectband" />
+      <axis id="ground_layer" 	    name="sdepth"    />
+      <axis id="ground_layer_for_temperature" name="sdepth"	/>
+      <axis id="soil_carbon_pools"  name="soilpools" />
+      <axis id="landusetype4"       name="landUse"   />
+      <axis id="vegtype" 			/>
+      <axis id="snow_patch" 			/>
+      <axis id="seaice_layer" 			/>
+    
+      <!-- COSP -->
+      <axis id="alt40"  	/>
+      <axis id="column"  	/>
+      <axis id="scatratio" 	/>
+      <axis id="temp"  		/>
+      <axis id="sza5"  		/>
+      <axis id="dbze"  		/>
+      <axis id="plev7" name="plev" />
+      <axis id="tau"  		/>
+      <axis id="cth16" name="alt16" />
+      <axis id="reffIce" name="effectRadIc"	/>
+      <axis id="reffLiq" name="effectRadLi"	/>
+
+      <axis id="glat" name="lat" >
+        <reduce_domain direction="idir" operation="average" />
+      </axis>
+
+    </axis_group>  
+  </axis_definition>
+  
+  <grid_definition>
+    <grid id="FULL_alt40">                    <domain domain_ref="FULL"/>     <axis axis_ref="alt40"/>   </grid>
+    <grid id="FULL_column">                   <domain domain_ref="FULL"/>     <axis axis_ref="column"/>  </grid>
+    <grid id="FULL_klev_column">              <domain domain_ref="FULL"/>     <axis axis_ref="klev" name="lev"/>    <axis axis_ref="column"/>    </grid>
+    <grid id="FULL_alt40_scatratio">          <domain domain_ref="FULL"/>     <axis axis_ref="alt40"/>   <axis axis_ref="scatratio"/> </grid>
+    <grid id="FULL_temp">                     <domain domain_ref="FULL"/>     <axis axis_ref="temp"/>    </grid>
+    <grid id="FULL_sza5">                     <domain domain_ref="FULL"/>     <axis axis_ref="sza5"/>    </grid>
+    <grid id="FULL_alt40_dbze">               <domain domain_ref="FULL"/>     <axis axis_ref="alt40"/>   <axis axis_ref="dbze"/>      </grid>
+    <grid id="FULL_plev7_tau">                <domain domain_ref="FULL"/>     <axis axis_ref="plev7"/>   <axis axis_ref="tau"/>       </grid>
+    <grid id="FULL_cth16_tau">                <domain domain_ref="FULL"/>     <axis axis_ref="cth16" name="alt16" />   <axis axis_ref="tau"/>       </grid>
+    <grid id="FULL_reffIce_tau">              <domain domain_ref="FULL"/>     <axis axis_ref="reffIce" name="effectRadIc"/> <axis axis_ref="tau"/>       </grid>
+    <grid id="FULL_reffLiq_tau">              <domain domain_ref="FULL"/>     <axis axis_ref="reffLiq"  name="effectRadLi"/> <axis axis_ref="tau"/>       </grid>
+    <grid id="grid_complete_alt40">           <domain domain_ref="complete"/> <axis axis_ref="alt40"/>   </grid>
+    <grid id="grid_complete_column">          <domain domain_ref="complete"/> <axis axis_ref="column"/>  </grid>
+    <grid id="grid_complete_klev_column">     <domain domain_ref="complete"/> <axis axis_ref="klev" name="lev"/>    <axis axis_ref="column"/>    </grid>
+    <grid id="grid_complete_alt40_scatratio"> <domain domain_ref="complete"/> <axis axis_ref="alt40"/>   <axis axis_ref="scatratio"/> </grid>
+    <grid id="grid_complete_temp">            <domain domain_ref="complete"/> <axis axis_ref="temp"/>    </grid> 
+    <grid id="grid_complete_sza5">            <domain domain_ref="complete"/> <axis axis_ref="sza5"/>    </grid>
+    <grid id="grid_complete_alt40_dbze">      <domain domain_ref="complete"/> <axis axis_ref="alt40"/>   <axis axis_ref="dbze"/>      </grid>
+    <grid id="grid_complete_plev7_tau">       <domain domain_ref="complete"/> <axis axis_ref="plev7"/>   <axis axis_ref="tau"/>       </grid>
+    <grid id="grid_complete_cth16_tau">       <domain domain_ref="complete"/> <axis axis_ref="cth16" name="alt16" />   <axis axis_ref="tau"/>       </grid>
+    <grid id="grid_complete_reffIce_tau">     <domain domain_ref="complete"/> <axis axis_ref="reffIce" name="effectRadIc"/> <axis axis_ref="tau"/>       </grid>
+    <grid id="grid_complete_reffLiq_tau">     <domain domain_ref="complete"/> <axis axis_ref="reffLiq"  name="effectRadLi"/> <axis axis_ref="tau"/>       </grid>
+  </grid_definition>
+
+  <field_definition>
+    <field id="ap"       prec="8" long_name="vertical coordinate formula term: ap(k)"     axis_ref="klev"           operation="once" />
+    <field id="ap_bnds"  prec="8" long_name="vertical coordinate formula term: ap(k+1/2)" grid_ref="klev_bnds"      operation="once"/>
+    <field id="b"        prec="8" long_name="vertical coordinate formula term: b(k)"      axis_ref="klev"           operation="once" />
+    <field id="b_bnds"   prec="8" long_name="vertical coordinate formula term: b(k+1/2)"  grid_ref="klev_bnds" 	    operation="once"/>
+    <field id="ahp"      prec="8" long_name="vertical coordinate formula term: ap(k+1/2)" axis_ref="klev_half"      operation="once" />
+    <field id="ahp_bnds" prec="8" long_name="vertical coordinate formula term: ap(k+1/2)" grid_ref="klev_half_bnds" operation="once"/>
+    <field id="bh"       prec="8" long_name="vertical coordinate formula term: b(k+1/2)"  axis_ref="klev_half"      operation="once" />
+    <field id="bh_bnds"  prec="8" long_name="vertical coordinate formula term: b(k+1/2)"  grid_ref="klev_half_bnds" operation="once"/>
+  </field_definition>
+
+
+</context>

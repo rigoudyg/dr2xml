@@ -1,0 +1,1624 @@
+<!-- Declaration of ARPEGE aerosol fields
+
+>> plusieurs sous-groupes thématiques avec distinction des grilles
+   pour une utilisation souple dans le arpsfx_file (exemple ci-dessous)
+
+	2D_instant_variables
+        <field_group group_ref="aero_2D_instant_prog"			enabled="false" />
+        <field_group group_ref="aero_2D_instant_radiation"		enabled="false" />
+
+        2D_avg_variables
+        <field_group group_ref="aero_2D_avg_prog_fluxes"		enabled="false" />
+
+        3D_instant_variables
+        <field_group group_ref="aero_3D_instant_mlev_prog"		enabled="false" />
+        <field_group group_ref="aero_3D_instant_mlev_radiation"		enabled="false" />
+        <field_group group_ref="aero_3D_instant_plev_prog"		enabled="false" />
+        <field_group group_ref="aero_3D_instant_ll_prog"		enabled="false" />
+
+-->
+<field_definition>
+  <field_group prec="4" detect_missing_value="true" default_value="1.e+20" >
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- 2D ARPEGE fields : instantaneous sampling                                                                          -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <field_group grid_ref="FULL_grid" operation="instant" freq_op="1ts" >
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="aero_2D_instant_prog">
+        <field id="TACod440ss_bin1" 	long_name="atmosphere_optical_thickness_at_440nm_due_to_seasalt_bin1_ambient_aerosol" unit="1" />
+      	<field id="TACod440ss_bin2" 	long_name="atmosphere_optical_thickness_at_440nm_due_to_seasalt_bin2_ambient_aerosol" unit="1" />
+        <field id="TACod440ss_bin3" 	long_name="atmosphere_optical_thickness_at_440nm_due_to_seasalt_bin3_ambient_aerosol" unit="1" />
+        <field id="TACod440ss" 		long_name="atmosphere_optical_thickness_at_440nm_due_to_seasalt_ambient_aerosol" unit="1" 
+             > TACod440ss_bin1 + TACod440ss_bin2 + TACod440ss_bin3 </field>
+        <field id="TACod440dust_bin1" 	long_name="atmosphere_optical_thickness_at_440nm_due_to_dust_bin1_ambient_aerosol" unit="1" />
+        <field id="TACod440dust_bin2" 	long_name="atmosphere_optical_thickness_at_440nm_due_to_dust_bin2_ambient_aerosol" unit="1" />
+        <field id="TACod440dust_bin3" 	long_name="atmosphere_optical_thickness_at_440nm_due_to_dust_bin3_ambient_aerosol" unit="1" />
+        <field id="TACod440dust_bin4" 	long_name="atmosphere_optical_thickness_at_440nm_due_to_dust_bin4_ambient_aerosol" unit="1" />
+        <field id="TACod440dust_bin5" 	long_name="atmosphere_optical_thickness_at_440nm_due_to_dust_bin5_ambient_aerosol" unit="1" />
+        <field id="TACod440dust_bin6" 	long_name="atmosphere_optical_thickness_at_440nm_due_to_dust_bin6_ambient_aerosol" unit="1" />
+        <field id="TACod440dust" 	long_name="atmosphere_optical_thickness_at_440nm_due_to_dust_ambient_aerosol" unit="1" />
+        <field id="TACod440oa_phil" 	long_name="atmosphere_optical_thickness_at_440nm_due_to_hydrophilic_particulate_organic_matter_ambient_aerosol" unit="1" />
+        <field id="TACod440oa_phob" 	long_name="atmosphere_optical_thickness_at_440nm_due_to_hydrophobic_particulate_organic_matter_ambient_aerosol" unit="1" />
+        <field id="TACod440oa" 	        long_name="atmosphere_optical_thickness_at_440nm_due_to_particulate_organic_matter_ambient_aerosol" unit="1" 
+             > TACod440oa_phil + TACod440oa_phob </field>
+        <field id="TACod440bc_phil" 	long_name="atmosphere_optical_thickness_at_440nm_due_to_hydrophilic_black_carbon_ambient_aerosol" unit="1" />
+        <field id="TACod440bc_phob" 	long_name="atmosphere_optical_thickness_at_440nm_due_to_hydrophobic_black_carbon_ambient_aerosol" unit="1" />
+        <field id="TACod440bc" 		long_name="atmosphere_optical_thickness_at_440nm_due_to_black_carbon_ambient_aerosol" unit="1" 
+             > TACod440bc_phil + TACod440bc_phob </field>
+        <field id="TACod440so4" 	long_name="atmosphere_optical_thickness_at_440nm_due_to_sulfate_ambient_aerosol" unit="1" />
+        <field id="TACod440no3_bin1" 	long_name="atmosphere_optical_thickness_at_440nm_due_to_nitrate_bin1_ambient_aerosol" unit="1" />
+        <field id="TACod440no3_bin2" 	long_name="atmosphere_optical_thickness_at_440nm_due_to_nitrate_bin2_ambient_aerosol" unit="1" />    
+        <field id="TACod440no3" 	long_name="atmosphere_optical_thickness_at_440nm_due_to_nitrate_ambient_aerosol" unit="1" 
+            > TACod440no3_bin1 + TACod440no3_bin2 </field>
+        <field id="TACod440nh4"         long_name="atmosphere_optical_thickness_at_440nm_due_to_ammoniac_ambient_aerosol" unit="1" />
+        <field id="TACod440smka" 	long_name="atmosphere_optical_thickness_at_440nm_due_to_aged_smoke_ambient_aerosol" unit="1" />
+        <field id="TACod440smkf" 	long_name="atmosphere_optical_thickness_at_440nm_due_to_fresh_smoke_ambient_aerosol" unit="1" />    
+        <field id="TACod440smk" 	long_name="atmosphere_optical_thickness_at_440nm_due_to_smoke_ambient_aerosol" unit="1"     
+            > TACod440smka + TACod440smkf </field>
+        <field id="TACod440aer"         long_name="atmosphere_optical_thickness_at_440nm_due_to_ambient_aerosol" unit="1" /> 
+        <field id="TACod440lt1aer"      long_name="atmosphere_optical_thickness_at_440nm_due_to_pm1_ambient_aerosol" unit="1" />
+      
+        <field id="TACod550ss_bin1" 	long_name="atmosphere_optical_thickness_at_550nm_due_to_seasalt_bin1_ambient_aerosol" unit="1" />
+        <field id="TACod550ss_bin2" 	long_name="atmosphere_optical_thickness_at_550nm_due_to_seasalt_bin2_ambient_aerosol" unit="1" />
+        <field id="TACod550ss_bin3" 	long_name="atmosphere_optical_thickness_at_550nm_due_to_seasalt_bin3_ambient_aerosol" unit="1" />
+        <field id="TACod550ss" 		long_name="atmosphere_optical_thickness_at_550nm_due_to_seasalt_ambient_aerosol" unit="1" 
+             > TACod550ss_bin1 + TACod550ss_bin2 + TACod550ss_bin3 </field>
+        <field id="TACod550dust_bin1" 	long_name="atmosphere_optical_thickness_at_550nm_due_to_dust_bin1_ambient_aerosol" unit="1" />
+        <field id="TACod550dust_bin2" 	long_name="atmosphere_optical_thickness_at_550nm_due_to_dust_bin2_ambient_aerosol" unit="1" />
+        <field id="TACod550dust_bin3" 	long_name="atmosphere_optical_thickness_at_550nm_due_to_dust_bin3_ambient_aerosol" unit="1" />
+        <field id="TACod550dust_bin4" 	long_name="atmosphere_optical_thickness_at_550nm_due_to_dust_bin4_ambient_aerosol" unit="1" />
+        <field id="TACod550dust_bin5" 	long_name="atmosphere_optical_thickness_at_550nm_due_to_dust_bin5_ambient_aerosol" unit="1" />
+        <field id="TACod550dust_bin6" 	long_name="atmosphere_optical_thickness_at_550nm_due_to_dust_bin6_ambient_aerosol" unit="1" />
+        <field id="TACod550dust" 	long_name="atmosphere_optical_thicknedust_at_550nm_due_to_dust_ambient_aerosol" unit="1" /> 
+        <field id="TACod550oa_phil" 	long_name="atmosphere_optical_thickness_at_550nm_due_to_hydrophilic_particulate_organic_matter_ambient_aerosol" unit="1" />
+        <field id="TACod550oa_phob" 	long_name="atmosphere_optical_thickness_at_550nm_due_to_hydrophobic_particulate_organic_matter_ambient_aerosol" unit="1" />
+        <field id="TACod550oa" 		long_name="atmosphere_optical_thickness_at_550nm_due_to_particulate_organic_matter_ambient_aerosol" unit="1" 
+             > TACod550oa_phil + TACod550oa_phob </field>
+        <field id="TACod550bc_phil" 	long_name="atmosphere_optical_thickness_at_550nm_due_to_hydrophilic_black_carbon_ambient_aerosol" unit="1" />
+        <field id="TACod550bc_phob" 	long_name="atmosphere_optical_thickness_at_550nm_due_to_hydrophobic_black_carbon_ambient_aerosol" unit="1" />
+        <field id="TACod550bc" 		long_name="atmosphere_optical_thickness_at_550nm_due_to_black_carbon_ambient_aerosol" unit="1" 
+             > TACod550bc_phil + TACod550bc_phob </field>
+        <field id="TACod550so4" 	long_name="atmosphere_optical_thickness_at_550nm_due_to_sulfate_ambient_aerosol" unit="1" />
+        <field id="TACod550no3_bin1" 	long_name="atmosphere_optical_thickness_at_550nm_due_to_nitrate_bin1_ambient_aerosol" unit="1" />
+        <field id="TACod550no3_bin2" 	long_name="atmosphere_optical_thickness_at_550nm_due_to_nitrate_bin2_ambient_aerosol" unit="1" />
+        <field id="TACod550no3" 	long_name="atmosphere_optical_thicknedust_at_550nm_due_to_nitrate_ambient_aerosol" unit="1" 
+            > TACod550no3_bin1 + TACod550no3_bin2 </field>
+        <field id="TACod550nh4"         long_name="atmosphere_optical_thickness_at_550nm_due_to_ammonium_ambient_aerosol" unit="1" />
+        <field id="TACod550smka" 	long_name="atmosphere_optical_thickness_at_550nm_due_to_aged_smoke_ambient_aerosol" unit="1" />
+        <field id="TACod550smkf" 	long_name="atmosphere_optical_thickness_at_550nm_due_to_fresh_smoke_ambient_aerosol" unit="1" />    
+        <field id="TACod550smk" 	long_name="atmosphere_optical_thickness_at_550nm_due_to_smoke_ambient_aerosol" unit="1"     
+            > TACod550smka + TACod550smkf </field>
+        <field id="TACod550aer"         long_name="atmosphere_optical_thickness_at_550nm_due_to_ambient_aerosol" unit="1" /> 
+        <field id="TACod550lt1aer"      long_name="atmosphere_optical_thickness_at_550nm_due_to_pm1_ambient_aerosol" unit="1" />
+ 
+        <field id="TACod550acldss_bin1" long_name="above_cloud_atmosphere_optical_thickness_at_550nm_due_to_seasalt_bin1_ambient_aerosol" unit="1" />
+        <field id="TACod550acldss_bin2" long_name="above_cloud_atmosphere_optical_thickness_at_550nm_due_to_seasalt_bin2_ambient_aerosol" unit="1" />
+        <field id="TACod550acldss_bin3" long_name="above_cloud_atmosphere_optical_thickness_at_550nm_due_to_seasalt_bin3_ambient_aerosol" unit="1" />
+        <field id="TACod550acldss"      long_name="above_cloud_atmosphere_optical_thickness_at_550nm_due_to_seasalt_ambient_aerosol" unit="1" 
+            > TACod550acldss_bin1 + TACod550acldss_bin2 + TACod550acldss_bin3 </field>
+        <field id="TACod550aclddust_bin1" long_name="above_cloud_atmosphere_optical_thickness_at_550nm_due_to_dust_bin1_ambient_aerosol" unit="1" />
+        <field id="TACod550aclddust_bin2" long_name="above_cloud_atmosphere_optical_thickness_at_550nm_due_to_dust_bin2_ambient_aerosol" unit="1" />
+        <field id="TACod550aclddust_bin3" long_name="above_cloud_atmosphere_optical_thickness_at_550nm_due_to_dust_bin3_ambient_aerosol" unit="1" />
+        <field id="TACod550aclddust_bin4" long_name="above_cloud_atmosphere_optical_thickness_at_550nm_due_to_dust_bin4_ambient_aerosol" unit="1" />
+        <field id="TACod550aclddust_bin5" long_name="above_cloud_atmosphere_optical_thickness_at_550nm_due_to_dust_bin5_ambient_aerosol" unit="1" />
+        <field id="TACod550aclddust_bin6" long_name="above_cloud_atmosphere_optical_thickness_at_550nm_due_to_dust_bin6_ambient_aerosol" unit="1" />
+        <field id="TACod550aclddust" 	  long_name="above_cloud_atmosphere_optical_thickness_at_550nm_due_to_dust_ambient_aerosol" unit="1" /> 
+        <field id="TACod550acldoa_phil"   long_name="above_cloud_atmosphere_optical_thickness_at_550nm_due_to_hydrophilic_particulate_organic_matter_ambient_aerosol" unit="1" />
+        <field id="TACod550acldoa_phob"   long_name="above_cloud_atmosphere_optical_thickness_at_550nm_due_to_hydrophobic_particulate_organic_matter_ambient_aerosol" unit="1" />
+        <field id="TACod550acldoa" 	  long_name="above_cloud_atmosphere_optical_thickness_at_550nm_due_to_particulate_organic_matter_ambient_aerosol" unit="1" 
+            > TACod550acldoa_phil + TACod550acldoa_phob </field>
+        <field id="TACod550acldbc_phil"   long_name="above_cloud_atmosphere_optical_thickness_at_550nm_due_to_hydrophilic_black_carbon_ambient_aerosol" unit="1" />
+        <field id="TACod550acldbc_phob"   long_name="above_cloud_atmosphere_optical_thickness_at_550nm_due_to_hydrophobic_black_carbon_ambient_aerosol" unit="1" />
+        <field id="TACod550acldbc" 	  long_name="above_cloud_atmosphere_optical_thickness_at_550nm_due_to_black_carbon_ambient_aerosol" unit="1" 
+            > TACod550acldbc_phil + TACod550acldbc_phob </field>
+        <field id="TACod550acldso4" 	  long_name="above_cloud_atmosphere_optical_thickness_at_550nm_due_to_sulfate_ambient_aerosol" unit="1" />
+        <field id="TACod550acldno3_bin1"  long_name="above_cloud_atmosphere_optical_thickness_at_550nm_due_to_nitrate_bin1_ambient_aerosol" unit="1" />
+        <field id="TACod550acldno3_bin2"  long_name="above_cloud_atmosphere_optical_thickness_at_550nm_due_to_nitrate_bin2_ambient_aerosol" unit="1" />
+        <field id="TACod550acldno3" 	  long_name="above_cloud_atmosphere_optical_thickness_at_550nm_due_to_nitrate_ambient_aerosol" unit="1" 
+            > TACod550acldno3_bin1 + TACod550acldno3_bin2 </field>
+        <field id="TACod550acldnh4" 	long_name="above_cloud_atmosphere_optical_thickness_at_550nm_due_to_ammonium_ambient_aerosol" unit="1" />
+        <field id="TACod550acldsmka" 	long_name="above_cloud_atmosphere_optical_thickness_at_550nm_due_to_aged_smoke_ambient_aerosol" unit="1" />
+        <field id="TACod550acldsmkf" 	long_name="above_cloud_atmosphere_optical_thickness_at_550nm_due_to_fresh_smoke_ambient_aerosol" unit="1" />    
+        <field id="TACod550acldsmk" 	long_name="above_cloud_atmosphere_optical_thickness_at_550nm_due_to_smoke_ambient_aerosol" unit="1"     
+            > TACod550acldsmka + TACod550acldsmkf </field>
+        <field id="TACod550acldaer" 	long_name="above_cloud_atmosphere_optical_thickness_at_550nm_due_to_ambient_aerosol" unit="1" /> 
+ 
+        <field id="TACod865ss_bin1" 	long_name="atmosphere_optical_thickness_at_865nm_due_to_seasalt_bin1_ambient_aerosol" unit="1" />
+        <field id="TACod865ss_bin2" 	long_name="atmosphere_optical_thickness_at_865nm_due_to_seasalt_bin2_ambient_aerosol" unit="1" />
+        <field id="TACod865ss_bin3" 	long_name="atmosphere_optical_thickness_at_865nm_due_to_seasalt_bin3_ambient_aerosol" unit="1" />
+        <field id="TACod865ss" 		long_name="atmosphere_optical_thickness_at_865nm_due_to_seasalt_ambient_aerosol" unit="1" 
+             > TACod865ss_bin1 + TACod865ss_bin2 + TACod865ss_bin3 </field>
+        <field id="TACod865dust_bin1" 	long_name="atmosphere_optical_thickness_at_865nm_due_to_dust_bin1_ambient_aerosol" unit="1" />
+        <field id="TACod865dust_bin2" 	long_name="atmosphere_optical_thickness_at_865nm_due_to_dust_bin2_ambient_aerosol" unit="1" />
+        <field id="TACod865dust_bin3"	long_name="atmosphere_optical_thickness_at_865nm_due_to_dust_bin3_ambient_aerosol" unit="1" />
+        <field id="TACod865dust_bin4" 	long_name="atmosphere_optical_thickness_at_865nm_due_to_dust_bin4_ambient_aerosol" unit="1" />
+        <field id="TACod865dust_bin5" 	long_name="atmosphere_optical_thickness_at_865nm_due_to_dust_bin5_ambient_aerosol" unit="1" />
+        <field id="TACod865dust_bin6" 	long_name="atmosphere_optical_thickness_at_865nm_due_to_dust_bin6_ambient_aerosol" unit="1" />
+        <field id="TACod865dust" 	long_name="atmosphere_optical_thicknedust_at_865nm_due_to_dust_ambient_aerosol" unit="1" /> 
+        <field id="TACod865oa_phil" 	long_name="atmosphere_optical_thickness_at_865nm_due_to_hydrophilic_particulate_organic_matter_ambient_aerosol" unit="1" />
+        <field id="TACod865oa_phob" 	long_name="atmosphere_optical_thickness_at_865nm_due_to_hydrophobic_particulate_organic_matter_ambient_aerosol" unit="1" />
+        <field id="TACod865oa" 		long_name="atmosphere_optical_thickness_at_865nm_due_to_particulate_organic_matter_ambient_aerosol" unit="1" 
+             > TACod865oa_phil + TACod865oa_phob </field>
+        <field id="TACod865bc_phil" 	long_name="atmosphere_optical_thickness_at_865nm_due_to_hydrophilic_black_carbon_ambient_aerosol" unit="1" />
+        <field id="TACod865bc_phob" 	long_name="atmosphere_optical_thickness_at_865nm_due_to_hydrophobic_black_carbon_ambient_aerosol" unit="1" />
+        <field id="TACod865bc" 		long_name="atmosphere_optical_thickness_at_865nm_due_to_black_carbon_ambient_aerosol" unit="1" 
+             > TACod865bc_phil + TACod865bc_phob </field>
+        <field id="TACod865so4" 	long_name="atmosphere_optical_thickness_at_865nm_due_to_sulfate_ambient_aerosol" unit="1" />
+        <field id="TACod865no3_bin1" 	long_name="atmosphere_optical_thickness_at_865nm_due_to_nitrate_bin1_ambient_aerosol" unit="1" />
+        <field id="TACod865no3_bin2" 	long_name="atmosphere_optical_thickness_at_865nm_due_to_nitrate_bin2_ambient_aerosol" unit="1" />
+        <field id="TACod865no3" 	long_name="atmosphere_optical_thicknedust_at_865nm_due_to_nitrate_ambient_aerosol" unit="1" 
+            > TACod865no3_bin1 + TACod865no3_bin2 </field>
+        <field id="TACod865nh4"         long_name="atmosphere_optical_thickness_at_865nm_due_to_ammonium_ambient_aerosol" unit="1" />
+        <field id="TACod865smka" 	long_name="atmosphere_optical_thickness_at_865nm_due_to_aged_smoke_ambient_aerosol" unit="1" />
+        <field id="TACod865smkf" 	long_name="atmosphere_optical_thickness_at_865nm_due_to_fresh_smoke_ambient_aerosol" unit="1" />    
+        <field id="TACod865smk" 	long_name="atmosphere_optical_thickness_at_865nm_due_to_smoke_ambient_aerosol" unit="1"     
+            > TACod865smka + TACod865smkf </field>
+        <field id="TACod865aer"         long_name="atmosphere_optical_thickness_at_865nm_due_to_ambient_aerosol" unit="1" />
+        <field id="TACod865lt1aer"      long_name="atmosphere_optical_thickness_at_865nm_due_to_pm1_ambient_aerosol" unit="1" />
+      
+        <field id="TACod1064ss_bin1" 	long_name="atmosphere_optical_thickness_at_1064nm_due_to_seasalt_bin1_ambient_aerosol" unit="1" />
+        <field id="TACod1064ss_bin2" 	long_name="atmosphere_optical_thickness_at_1064nm_due_to_seasalt_bin2_ambient_aerosol" unit="1" />
+        <field id="TACod1064ss_bin3" 	long_name="atmosphere_optical_thickness_at_1064nm_due_to_seasalt_bin3_ambient_aerosol" unit="1" />
+        <field id="TACod1064ss" 	long_name="atmosphere_optical_thickness_at_1064nm_due_to_seasalt_ambient_aerosol" unit="1" 
+             > TACod1064ss_bin1 + TACod1064ss_bin2 + TACod1064ss_bin3 </field>
+        <field id="TACod1064dust_bin1" 	long_name="atmosphere_optical_thickness_at_1064nm_due_to_dust_bin1_ambient_aerosol" unit="1" />
+        <field id="TACod1064dust_bin2" 	long_name="atmosphere_optical_thickness_at_1064nm_due_to_dust_bin2_ambient_aerosol" unit="1" />
+        <field id="TACod1064dust_bin3" 	long_name="atmosphere_optical_thickness_at_1064nm_due_to_dust_bin3_ambient_aerosol" unit="1" />
+        <field id="TACod1064dust_bin4" 	long_name="atmosphere_optical_thickness_at_1064nm_due_to_dust_bin4_ambient_aerosol" unit="1" />
+        <field id="TACod1064dust_bin5" 	long_name="atmosphere_optical_thickness_at_1064nm_due_to_dust_bin5_ambient_aerosol" unit="1" />
+        <field id="TACod1064dust_bin6" 	long_name="atmosphere_optical_thickness_at_1064nm_due_to_dust_bin6_ambient_aerosol" unit="1" />
+        <field id="TACod1064dust" 	long_name="atmosphere_optical_thicknedust_at_1064nm_due_to_dust_ambient_aerosol" unit="1" /> 
+        <field id="TACod1064oa_phil" 	long_name="atmosphere_optical_thickness_at_1064nm_due_to_hydrophilic_particulate_organic_matter_ambient_aerosol" unit="1" />
+        <field id="TACod1064oa_phob" 	long_name="atmosphere_optical_thickness_at_1064nm_due_to_hydrophobic_particulate_organic_matter_ambient_aerosol" unit="1" />
+        <field id="TACod1064oa" 	long_name="atmosphere_optical_thickness_at_1064nm_due_to_particulate_organic_matter_ambient_aerosol" unit="1" 
+             > TACod1064oa_phil + TACod1064oa_phob </field>
+        <field id="TACod1064bc_phil" 	long_name="atmosphere_optical_thickness_at_1064nm_due_to_hydrophilic_black_carbon_ambient_aerosol" unit="1" />
+        <field id="TACod1064bc_phob" 	long_name="atmosphere_optical_thickness_at_1064nm_due_to_hydrophobic_black_carbon_ambient_aerosol" unit="1" />
+        <field id="TACod1064bc" 	long_name="atmosphere_optical_thickness_at_1064nm_due_to_black_carbon_ambient_aerosol" unit="1" 
+             > TACod1064bc_phil + TACod1064bc_phob </field>
+        <field id="TACod1064so4" 	long_name="atmosphere_optical_thickness_at_1064nm_due_to_sulfate_ambient_aerosol" unit="1" />
+        <field id="TACod1064no3_bin1" 	long_name="atmosphere_optical_thickness_at_1064nm_due_to_nitrate_bin1_ambient_aerosol" unit="1" />
+        <field id="TACod1064no3_bin2" 	long_name="atmosphere_optical_thickness_at_1064nm_due_to_nitrate_bin2_ambient_aerosol" unit="1" />
+        <field id="TACod1064no3" 	long_name="atmosphere_optical_thicknedust_at_1064nm_due_to_nitrate_ambient_aerosol" unit="1" 
+            > TACod1064no3_bin1 + TACod1064no3_bin2 </field>
+        <field id="TACod1064nh4"        long_name="atmosphere_optical_thickness_at_1064nm_due_to_ammonium_ambient_aerosol" unit="1" />
+        <field id="TACod1064smka" 	long_name="atmosphere_optical_thickness_at_1064nm_due_to_aged_smoke_ambient_aerosol" unit="1" />
+        <field id="TACod1064smkf" 	long_name="atmosphere_optical_thickness_at_1064nm_due_to_fresh_smoke_ambient_aerosol" unit="1" />    
+        <field id="TACod1064smk" 	long_name="atmosphere_optical_thickness_at_1064nm_due_to_smoke_ambient_aerosol" unit="1"     
+            > TACod1064smka + TACod1064smkf </field>
+        <field id="TACod1064aer"        long_name="atmosphere_optical_thickness_at_1064nm_due_to_ambient_aerosol" unit="1" />
+        <field id="TACod1064lt1aer"     long_name="atmosphere_optical_thickness_at_1064nm_due_to_pm1_ambient_aerosol" unit="1" />
+      
+        <field id="TACabs440ss_bin1" 	long_name="atmosphere_absorption_optical_thickness_at_440nm_due_to_seasalt_bin1_ambient_aerosol" unit="1" />
+        <field id="TACabs440ss_bin2" 	long_name="atmosphere_absorption_optical_thickness_at_440nm_due_to_seasalt_bin2_ambient_aerosol" unit="1" />
+        <field id="TACabs440ss_bin3" 	long_name="atmosphere_absorption_optical_thickness_at_440nm_due_to_seasalt_bin3_ambient_aerosol" unit="1" />
+        <field id="TACabs440ss"         long_name="atmosphere_absorption_optical_thickness_at_440nm_due_to_seasalt_ambient_aerosol" unit="1" 
+             > TACabs440ss_bin1 + TACabs440ss_bin2 + TACabs440ss_bin3 </field>
+        <field id="TACabs440dust_bin1" 	long_name="atmosphere_absorption_optical_thickness_at_440nm_due_to_dust_bin1_ambient_aerosol" unit="1" />
+        <field id="TACabs440dust_bin2" 	long_name="atmosphere_absorption_optical_thickness_at_440nm_due_to_dust_bin2_ambient_aerosol" unit="1" />
+        <field id="TACabs440dust_bin3" 	long_name="atmosphere_absorption_optical_thickness_at_440nm_due_to_dust_bin3_ambient_aerosol" unit="1" />
+        <field id="TACabs440dust_bin4" 	long_name="atmosphere_absorption_optical_thickness_at_440nm_due_to_dust_bin4_ambient_aerosol" unit="1" />
+        <field id="TACabs440dust_bin5" 	long_name="atmosphere_absorption_optical_thickness_at_440nm_due_to_dust_bin5_ambient_aerosol" unit="1" />
+        <field id="TACabs440dust_bin6" 	long_name="atmosphere_absorption_optical_thickness_at_440nm_due_to_dust_bin6_ambient_aerosol" unit="1" />
+        <field id="TACabs440dust" 	long_name="atmosphere_absorption_optical_thicknedust_at_440nm_due_to_dust_ambient_aerosol" unit="1" /> 
+        <field id="TACabs440oa_phil" 	long_name="atmosphere_absorption_optical_thickness_at_440nm_due_to_hydrophilic_particulate_organic_matter_ambient_aerosol" unit="1" />
+        <field id="TACabs440oa_phob" 	long_name="atmosphere_absorption_optical_thickness_at_440nm_due_to_hydrophobic_particulate_organic_matter_ambient_aerosol" unit="1" />
+        <field id="TACabs440oa" 	long_name="atmosphere_absorption_optical_thickness_at_440nm_due_to_particulate_organic_matter_ambient_aerosol" unit="1" 
+             > TACabs440oa_phil + TACabs440oa_phob </field>
+        <field id="TACabs440bc_phil" 	long_name="atmosphere_absorption_optical_thickness_at_440nm_due_to_hydrophilic_black_carbon_ambient_aerosol" unit="1" />
+        <field id="TACabs440bc_phob" 	long_name="atmosphere_absorption_optical_thickness_at_440nm_due_to_hydrophobic_black_carbon_ambient_aerosol" unit="1" />
+        <field id="TACabs440bc" 	long_name="atmosphere_absorption_optical_thickness_at_440nm_due_to_black_carbon_ambient_aerosol" unit="1" 
+             > TACabs440bc_phil + TACabs440bc_phob </field>
+        <field id="TACabs440so4" 	long_name="atmosphere_absorption_optical_thickness_at_440nm_due_to_sulfate_ambient_aerosol" unit="1" />
+        <field id="TACabs440no3_bin1" 	long_name="atmosphere_absorption_optical_thickness_at_440nm_due_to_nitrate_bin1_ambient_aerosol" unit="1" />
+        <field id="TACabs440no3_bin2" 	long_name="atmosphere_absorption_optical_thickness_at_440nm_due_to_nitrate_bin2_ambient_aerosol" unit="1" />
+        <field id="TACabs440no3" 	long_name="atmosphere_absorption_optical_thicknedust_at_440nm_due_to_nitrate_ambient_aerosol" unit="1" 
+            > TACabs440no3_bin1 + TACabs440no3_bin2 </field>
+        <field id="TACabs440nh4" 	long_name="atmosphere_absorption_optical_thickness_at_440nm_due_to_ammonium_ambient_aerosol" unit="1" />
+        <field id="TACabs440smka" 	long_name="atmosphere_absorption_optical_thickness_at_440nm_due_to_aged_smoke_ambient_aerosol" unit="1" />
+        <field id="TACabs440smkf" 	long_name="atmosphere_absorption_optical_thickness_at_440nm_due_to_fresh_smoke_ambient_aerosol" unit="1" />    
+        <field id="TACabs440smk" 	long_name="atmosphere_absorption_optical_thickness_at_440nm_due_to_smoke_ambient_aerosol" unit="1"     
+            > TACabs440smka + TACabs440smkf </field>
+        <field id="TACabs440aer" 	long_name="atmosphere_absorption_optical_thickness_at_440nm_due_to_ambient_aerosol" unit="1" /> 
+      
+        <field id="TACabs550ss_bin1" 	long_name="atmosphere_absorption_optical_thickness_at_550nm_due_to_seasalt_bin1_ambient_aerosol" unit="1" />
+        <field id="TACabs550ss_bin2" 	long_name="atmosphere_absorption_optical_thickness_at_550nm_due_to_seasalt_bin2_ambient_aerosol" unit="1" />
+        <field id="TACabs550ss_bin3" 	long_name="atmosphere_absorption_optical_thickness_at_550nm_due_to_seasalt_bin3_ambient_aerosol" unit="1" />
+        <field id="TACabs550ss" 	long_name="atmosphere_absorption_optical_thickness_at_550nm_due_to_seasalt_ambient_aerosol" unit="1" 
+             > TACabs550ss_bin1 + TACabs550ss_bin2 + TACabs550ss_bin3 </field>
+        <field id="TACabs550dust_bin1" 	long_name="atmosphere_absorption_optical_thickness_at_550nm_due_to_dust_bin1_ambient_aerosol" unit="1" />
+        <field id="TACabs550dust_bin2" 	long_name="atmosphere_absorption_optical_thickness_at_550nm_due_to_dust_bin2_ambient_aerosol" unit="1" />
+        <field id="TACabs550dust_bin3" 	long_name="atmosphere_absorption_optical_thickness_at_550nm_due_to_dust_bin3_ambient_aerosol" unit="1" />
+        <field id="TACabs550dust_bin4" 	long_name="atmosphere_absorption_optical_thickness_at_550nm_due_to_dust_bin4_ambient_aerosol" unit="1" />
+        <field id="TACabs550dust_bin5" 	long_name="atmosphere_absorption_optical_thickness_at_550nm_due_to_dust_bin5_ambient_aerosol" unit="1" />
+        <field id="TACabs550dust_bin6" 	long_name="atmosphere_absorption_optical_thickness_at_550nm_due_to_dust_bin6_ambient_aerosol" unit="1" />
+        <field id="TACabs550dust" 	long_name="atmosphere_absorption_optical_thicknedust_at_550nm_due_to_dust_ambient_aerosol" unit="1" />
+        <field id="TACabs550oa_phil" 	long_name="atmosphere_absorption_optical_thickness_at_550nm_due_to_hydrophilic_particulate_organic_matter_ambient_aerosol" unit="1" />
+        <field id="TACabs550oa_phob" 	long_name="atmosphere_absorption_optical_thickness_at_550nm_due_to_hydrophobic_particulate_organic_matter_ambient_aerosol" unit="1" />
+        <field id="TACabs550oa" 	long_name="atmosphere_absorption_optical_thickness_at_550nm_due_to_particulate_organic_matter_ambient_aerosol" unit="1" 
+             > TACabs550oa_phil + TACabs550oa_phob </field>
+        <field id="TACabs550bc_phil" 	long_name="atmosphere_absorption_optical_thickness_at_550nm_due_to_hydrophilic_black_carbon_ambient_aerosol" unit="1" />
+        <field id="TACabs550bc_phob" 	long_name="atmosphere_absorption_optical_thickness_at_550nm_due_to_hydrophobic_black_carbon_ambient_aerosol" unit="1" />
+        <field id="TACabs550bc" 	long_name="atmosphere_absorption_optical_thickness_at_550nm_due_to_black_carbon_ambient_aerosol" unit="1" 
+             > TACabs550bc_phil + TACabs550bc_phob </field>
+        <field id="TACabs550so4" 	long_name="atmosphere_absorption_optical_thickness_at_550nm_due_to_sulfate_ambient_aerosol" unit="1" />
+        <field id="TACabs550no3_bin1" 	long_name="atmosphere_absorption_optical_thickness_at_550nm_due_to_nitrate_bin1_ambient_aerosol" unit="1" />
+        <field id="TACabs550no3_bin2" 	long_name="atmosphere_absorption_optical_thickness_at_550nm_due_to_nitrate_bin2_ambient_aerosol" unit="1" />
+        <field id="TACabs550no3" 	long_name="atmosphere_absorption_optical_thicknedust_at_550nm_due_to_nitrate_ambient_aerosol" unit="1" 
+            > TACabs550no3_bin1 + TACabs550no3_bin2 </field>
+        <field id="TACabs550nh4"        long_name="atmosphere_absorption_optical_thickness_at_550nm_due_to_ammonium_ambient_aerosol" unit="1" />
+        <field id="TACabs550smka" 	long_name="atmosphere_absorption_optical_thickness_at_550nm_due_to_aged_smoke_ambient_aerosol" unit="1" />
+        <field id="TACabs550smkf" 	long_name="atmosphere_absorption_optical_thickness_at_550nm_due_to_fresh_smoke_ambient_aerosol" unit="1" />    
+        <field id="TACabs550smk" 	long_name="atmosphere_absorption_optical_thickness_at_550nm_due_to_smoke_ambient_aerosol" unit="1"     
+            > TACabs550smka + TACabs550smkf </field>
+        <field id="TACabs550aer"        long_name="atmosphere_absorption_optical_thickness_at_550nm_due_to_ambient_aerosol" unit="1" /> 
+      
+        <field id="TACabs865ss_bin1"    long_name="atmosphere_absorption_optical_thickness_at_865nm_due_to_seasalt_bin1_ambient_aerosol" unit="1" />
+        <field id="TACabs865ss_bin2"    long_name="atmosphere_absorption_optical_thickness_at_865nm_due_to_seasalt_bin2_ambient_aerosol" unit="1" />
+        <field id="TACabs865ss_bin3"    long_name="atmosphere_absorption_optical_thickness_at_865nm_due_to_seasalt_bin3_ambient_aerosol" unit="1" />
+        <field id="TACabs865ss"         long_name="atmosphere_absorption_optical_thickness_at_865nm_due_to_seasalt_ambient_aerosol" unit="1" 
+             > TACabs865ss_bin1 + TACabs865ss_bin2 + TACabs865ss_bin3 </field>
+        <field id="TACabs865dust_bin1" 	long_name="atmosphere_absorption_optical_thickness_at_865nm_due_to_dust_bin1_ambient_aerosol" unit="1" />
+        <field id="TACabs865dust_bin2" 	long_name="atmosphere_absorption_optical_thickness_at_865nm_due_to_dust_bin2_ambient_aerosol" unit="1" />
+        <field id="TACabs865dust_bin3" 	long_name="atmosphere_absorption_optical_thickness_at_865nm_due_to_dust_bin3_ambient_aerosol" unit="1" />
+        <field id="TACabs865dust_bin4" 	long_name="atmosphere_absorption_optical_thickness_at_865nm_due_to_dust_bin4_ambient_aerosol" unit="1" />
+        <field id="TACabs865dust_bin5" 	long_name="atmosphere_absorption_optical_thickness_at_865nm_due_to_dust_bin5_ambient_aerosol" unit="1" />
+        <field id="TACabs865dust_bin6" 	long_name="atmosphere_absorption_optical_thickness_at_865nm_due_to_dust_bin6_ambient_aerosol" unit="1" />
+        <field id="TACabs865dust" 	long_name="atmosphere_absorption_optical_thicknedust_at_865nm_due_to_dust_ambient_aerosol" unit="1" />
+        <field id="TACabs865oa_phil" 	long_name="atmosphere_absorption_optical_thickness_at_865nm_due_to_hydrophilic_particulate_organic_matter_ambient_aerosol" unit="1" />
+        <field id="TACabs865oa_phob" 	long_name="atmosphere_absorption_optical_thickness_at_865nm_due_to_hydrophobic_particulate_organic_matter_ambient_aerosol" unit="1" />
+        <field id="TACabs865oa" 	long_name="atmosphere_absorption_optical_thickness_at_865nm_due_to_particulate_organic_matter_ambient_aerosol" unit="1" 
+             > TACabs865oa_phil + TACabs865oa_phob </field>
+        <field id="TACabs865bc_phil" 	long_name="atmosphere_absorption_optical_thickness_at_865nm_due_to_hydrophilic_black_carbon_ambient_aerosol" unit="1" />
+        <field id="TACabs865bc_phob" 	long_name="atmosphere_absorption_optical_thickness_at_865nm_due_to_hydrophobic_black_carbon_ambient_aerosol" unit="1" />
+        <field id="TACabs865bc" 	long_name="atmosphere_absorption_optical_thickness_at_865nm_due_to_black_carbon_ambient_aerosol" unit="1" 
+             > TACabs865bc_phil + TACabs865bc_phob </field>
+        <field id="TACabs865so4" 	long_name="atmosphere_absorption_optical_thickness_at_865nm_due_to_sulfate_ambient_aerosol" unit="1" />
+        <field id="TACabs865no3_bin1" 	long_name="atmosphere_absorption_optical_thickness_at_865nm_due_to_nitrate_bin1_ambient_aerosol" unit="1" />
+        <field id="TACabs865no3_bin2" 	long_name="atmosphere_absorption_optical_thickness_at_865nm_due_to_nitrate_bin2_ambient_aerosol" unit="1" />
+        <field id="TACabs865no3" 	long_name="atmosphere_absorption_optical_thicknedust_at_865nm_due_to_nitrate_ambient_aerosol" unit="1" 
+            > TACabs865no3_bin1 + TACabs865no3_bin2 </field>
+        <field id="TACabs865nh4" 	long_name="atmosphere_absorption_optical_thickness_at_865nm_due_to_ammonium_ambient_aerosol" unit="1" />
+        <field id="TACabs865smka" 	long_name="atmosphere_absorption_optical_thickness_at_865nm_due_to_aged_smoke_ambient_aerosol" unit="1" />
+        <field id="TACabs865smkf" 	long_name="atmosphere_absorption_optical_thickness_at_865nm_due_to_fresh_smoke_ambient_aerosol" unit="1" />    
+        <field id="TACabs865smk" 	long_name="atmosphere_absorption_optical_thickness_at_865nm_due_to_smoke_ambient_aerosol" unit="1"     
+            > TACabs865smka + TACabs865smkf </field>
+        <field id="TACabs865aer" 	long_name="atmosphere_absorption_optical_thickness_at_865nm_due_to_ambient_aerosol" unit="1" />
+
+        <field id="TACabs1064ss_bin1" 	long_name="atmosphere_absorption_optical_thickness_at_1064nm_due_to_seasalt_bin1_ambient_aerosol" unit="1" />
+        <field id="TACabs1064ss_bin2" 	long_name="atmosphere_absorption_optical_thickness_at_1064nm_due_to_seasalt_bin2_ambient_aerosol" unit="1" />
+        <field id="TACabs1064ss_bin3" 	long_name="atmosphere_absorption_optical_thickness_at_1064nm_due_to_seasalt_bin3_ambient_aerosol" unit="1" />
+        <field id="TACabs1064ss" 	long_name="atmosphere_absorption_optical_thickness_at_1064nm_due_to_seasalt_ambient_aerosol" unit="1" 
+             > TACabs1064ss_bin1 + TACabs1064ss_bin2 + TACabs1064ss_bin3 </field>
+        <field id="TACabs1064dust_bin1" long_name="atmosphere_absorption_optical_thickness_at_1064nm_due_to_dust_bin1_ambient_aerosol" unit="1" />
+        <field id="TACabs1064dust_bin2" long_name="atmosphere_absorption_optical_thickness_at_1064nm_due_to_dust_bin2_ambient_aerosol" unit="1" />
+        <field id="TACabs1064dust_bin3" long_name="atmosphere_absorption_optical_thickness_at_1064nm_due_to_dust_bin3_ambient_aerosol" unit="1" />
+        <field id="TACabs1064dust_bin4" long_name="atmosphere_absorption_optical_thickness_at_1064nm_due_to_dust_bin4_ambient_aerosol" unit="1" />
+        <field id="TACabs1064dust_bin5" long_name="atmosphere_absorption_optical_thickness_at_1064nm_due_to_dust_bin5_ambient_aerosol" unit="1" />
+        <field id="TACabs1064dust_bin6" long_name="atmosphere_absorption_optical_thickness_at_1064nm_due_to_dust_bin6_ambient_aerosol" unit="1" />
+        <field id="TACabs1064dust" 	long_name="atmosphere_absorption_optical_thicknedust_at_1064nm_due_to_dust_ambient_aerosol" unit="1" /> 
+        <field id="TACabs1064oa_phil" 	long_name="atmosphere_absorption_optical_thickness_at_1064nm_due_to_hydrophilic_particulate_organic_matter_ambient_aerosol" unit="1" />
+        <field id="TACabs1064oa_phob"	long_name="atmosphere_absorption_optical_thickness_at_1064nm_due_to_hydrophobic_particulate_organic_matter_ambient_aerosol" unit="1" />
+        <field id="TACabs1064oa" 	long_name="atmosphere_absorption_optical_thickness_at_1064nm_due_to_particulate_organic_matter_ambient_aerosol" unit="1" 
+             > TACabs1064oa_phil + TACabs1064oa_phob </field>
+        <field id="TACabs1064bc_phil" 	long_name="atmosphere_absorption_optical_thickness_at_1064nm_due_to_hydrophilic_black_carbon_ambient_aerosol" unit="1" />
+        <field id="TACabs1064bc_phob" 	long_name="atmosphere_absorption_optical_thickness_at_1064nm_due_to_hydrophobic_black_carbon_ambient_aerosol" unit="1" />
+        <field id="TACabs1064bc" 	long_name="atmosphere_absorption_optical_thickness_at_1064nm_due_to_black_carbon_ambient_aerosol" unit="1" 
+             > TACabs1064bc_phil + TACabs1064bc_phob </field>
+        <field id="TACabs1064so4" 	long_name="atmosphere_absorption_optical_thickness_at_1064nm_due_to_sulfate_ambient_aerosol" unit="1" />
+        <field id="TACabs1064no3_bin1" 	long_name="atmosphere_absorption_optical_thickness_at_1064nm_due_to_nitrate_bin1_ambient_aerosol" unit="1" />
+        <field id="TACabs1064no3_bin2" 	long_name="atmosphere_absorption_optical_thickness_at_1064nm_due_to_nitrate_bin2_ambient_aerosol" unit="1" />
+        <field id="TACabs1064no3" 	long_name="atmosphere_absorption_optical_thicknedust_at_1064nm_due_to_nitrate_ambient_aerosol" unit="1" 
+            > TACabs1064no3_bin1 + TACabs1064no3_bin2 </field>
+        <field id="TACabs1064nh4" 	long_name="atmosphere_absorption_optical_thickness_at_1064nm_due_to_ammonium_ambient_aerosol" unit="1" />
+        <field id="TACabs1064smka" 	long_name="atmosphere_absorption_optical_thickness_at_1064nm_due_to_aged_smoke_ambient_aerosol" unit="1" />
+        <field id="TACabs1064smkf" 	long_name="atmosphere_absorption_optical_thickness_at_1064nm_due_to_fresh_smoke_ambient_aerosol" unit="1" />    
+        <field id="TACabs1064smk" 	long_name="atmosphere_absorption_optical_thickness_at_1064nm_due_to_smoke_ambient_aerosol" unit="1"     
+            > TACabs1064smka + TACabs1064smkf </field>
+        <field id="TACabs1064aer" 	long_name="atmosphere_absorption_optical_thickness_at_1064nm_due_to_ambient_aerosol" unit="1" />
+
+        <field id="TACloadss_bin1" 	long_name="atmosphere_mass_content_of_seasalt_bin1_dry_aerosol" unit="kg m-2" />
+        <field id="TACloadss_bin2" 	long_name="atmosphere_mass_content_of_seasalt_bin2_dry_aerosol" unit="kg m-2" />
+        <field id="TACloadss_bin3" 	long_name="atmosphere_mass_content_of_seasalt_bin3_dry_aerosol" unit="kg m-2" />
+        <field id="TACloadss" 		long_name="atmosphere_mass_content_of_seasalt_dry_aerosol" unit="kg m-2"
+             > TACloadss_bin1 + TACloadss_bin2 + TACloadss_bin3 </field>
+        <field id="TACloaddust_bin1" 	long_name="atmosphere_mass_content_of_dust_bin1_dry_aerosol" unit="kg m-2" />
+        <field id="TACloaddust_bin2" 	long_name="atmosphere_mass_content_of_dust_bin2_dry_aerosol" unit="kg m-2" />
+        <field id="TACloaddust_bin3" 	long_name="atmosphere_mass_content_of_dust_bin3_dry_aerosol" unit="kg m-2" />
+        <field id="TACloaddust_bin4" 	long_name="atmosphere_mass_content_of_dust_bin4_dry_aerosol" unit="kg m-2" />
+        <field id="TACloaddust_bin5" 	long_name="atmosphere_mass_content_of_dust_bin5_dry_aerosol" unit="kg m-2" />
+        <field id="TACloaddust_bin6" 	long_name="atmosphere_mass_content_of_dust_bin6_dry_aerosol" unit="kg m-2" />
+        <field id="TACloaddust" 	long_name="atmosphere_mass_content_of_dust_dry_aerosol" unit="kg m-2" />
+        <field id="TACloadoa_phil" 	long_name="atmosphere_mass_content_of_hydrophilic_particulate_organic_matter_dry_aerosol" unit="kg m-2" />
+        <field id="TACloadoa_phob" 	long_name="atmosphere_mass_content_of_hydrophobic_particulate_organic_matter_dry_aerosol" unit="kg m-2" />
+        <field id="TACloadoa" 		long_name="atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol" unit="kg m-2"
+             > TACloadoa_phil + TACloadoa_phob </field>
+        <field id="TACloadbc_phil" 	long_name="atmosphere_mass_content_of_hydrophilic_black_carbon_dry_aerosol" unit="kg m-2" />
+        <field id="TACloadbc_phob" 	long_name="atmosphere_mass_content_of_hydrophobic_black_carbon_dry_aerosol" unit="kg m-2" />
+        <field id="TACloadbc" 		long_name="atmosphere_mass_content_of_black_carbon_dry_aerosol" unit="kg m-2"
+             > TACloadbc_phil + TACloadbc_phob </field>
+        <field id="TACloadso4" 		long_name="atmosphere_mass_content_of_sulfate_dry_aerosol" unit="kg m-2" />
+        <field id="TACloadso2" 		long_name="atmosphere_mass_content_of_sulfur_dioxide_dry_aerosol" unit="kg m-2" />
+        <field id="TACloadno3_bin1" 	long_name="atmosphere_mass_content_of_nitrate_bin1_dry_aerosol" unit="kg m-2" />
+        <field id="TACloadno3_bin2" 	long_name="atmosphere_mass_content_of_nitrate_bin2_dry_aerosol" unit="kg m-2" />
+        <field id="TACloadno3" 		long_name="atmosphere_mass_content_of_nitrate_dry_aerosol" unit="kg m-2"
+            > TACloadno3_bin1 + TACloadno3_bin2 </field>
+        <field id="TACloadnh4" 		long_name="atmosphere_mass_content_of_ammonium_dry_aerosol" unit="kg m-2" />
+        <field id="TACloadnh3" 		long_name="atmosphere_mass_content_of_ammoniac_dry_aerosol" unit="kg m-2" />
+        <field id="TACloadsmka" 	long_name="atmosphere_mass_content_of_aged_smoke_dry_aerosol" unit="kg m-2" />
+        <field id="TACloadsmkf" 	long_name="atmosphere_mass_content_of_fresh_smoke_dry_aerosol" unit="kg m-2" />
+        <field id="TACloadsmk" 		long_name="atmosphere_mass_content_of_smoke_dry_aerosol" unit="kg m-2"
+            > TACloadsmka + TACloadsmkf </field>
+
+        <field id="TACssa440aer" 	long_name="440nm_aerosol_single_scattering_albedo" unit="1" />
+        <field id="TACssa550aer" 	long_name="550nm_aerosol_single_scattering_albedo" unit="1" />
+        <field id="TACssa865aer" 	long_name="865nm_aerosol_single_scattering_albedo" unit="1" />
+        <field id="TACssa1064aer" 	long_name="1064nm_aerosol_single_scattering_albedo" unit="1" />
+
+        <field id="TACasy440aer" 	long_name="440nm_aerosol_asymmetry_parameter" unit="1" />
+        <field id="TACasy550aer" 	long_name="550nm_aerosol_asymmetry_parameter" unit="1" />
+        <field id="TACasy865aer" 	long_name="865nm_aerosol_asymmetry_parameter" unit="1" />
+        <field id="TACasy1064aer" 	long_name="1064nm_aerosol_asymmetry_parameter" unit="1" />
+
+        <field id="TACsconcss_bin1"      long_name="mass_surface_concentration_of_seasalt_bin1_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACsconcss_bin2"      long_name="mass_surface_concentration_of_seasalt_bin2_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACsconcss_bin3"      long_name="mass_surface_concentration_of_seasalt_bin3_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACsconcss"           long_name="mass_surface_concentration_of_seasalt_dry_aerosol_in_air" unit="kg m-3" 
+               > TACsconcss_bin1 + TACsconcss_bin2 + TACsconcss_bin3 </field>
+        <field id="TACsconcdust_bin1"    long_name="mass_surface_concentration_of_dust_bin1_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACsconcdust_bin2"    long_name="mass_surface_concentration_of_dust_bin2_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACsconcdust_bin3"    long_name="mass_surface_concentration_of_dust_bin3_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACsconcdust_bin4"    long_name="mass_surface_concentration_of_dust_bin4_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACsconcdust_bin5"    long_name="mass_surface_concentration_of_dust_bin5_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACsconcdust_bin6"    long_name="mass_surface_concentration_of_dust_bin6_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACsconcdust"         long_name="mass_surface_concentration_of_dust_dry_aerosol_in_air" unit="kg m-3" /> 
+        <field id="TACsconcoa_phil"      long_name="mass_surface_concentration_of_hydrophilic_particulate_organic_matter_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACsconcoa_phob"      long_name="mass_surface_concentration_of_hydrophobic_particulate_organic_matter_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACsconcoa"           long_name="mass_surface_concentration_of_particulate_organic_matter_dry_aerosol_in_air" unit="kg m-3" 
+               > TACsconcoa_phil + TACsconcoa_phob </field>
+        <field id="TACsconcbc_phil"      long_name="mass_surface_concentration_of_hydrophilic_black_carbon_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACsconcbc_phob"      long_name="mass_surface_concentration_of_hydrophobic_black_carbon_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACsconcbc"           long_name="mass_surface_concentration_of_black_carbon_dry_aerosol_in_air" unit="kg m-3" 
+               > TACsconcbc_phil + TACsconcbc_phob </field>
+        <field id="TACsconcso4"          long_name="mass_surface_concentration_of_sulfate_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACsconcso2"          long_name="mass_surface_concentration_of_sulfur_dioxide_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACsconcno3_bin1"     long_name="mass_surface_concentration_of_no3_bin1_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACsconcno3_bin2"     long_name="mass_surface_concentration_of_no3_bin2_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACsconcno3"          long_name="mass_surface_concentration_of_no3_dry_aerosol_in_air" unit="kg m-3" 
+            > TACsconcno3_bin1 + TACsconcno3_bin2 </field>
+        <field id="TACsconcsmka"         long_name="mass_surface_concentration_of_aged_smoke_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACsconcsmkf"         long_name="mass_surface_concentration_of_fresh_smoke_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACsconcsmk"          long_name="mass_surface_concentration_of_smoke_dry_aerosol_in_air" unit="kg m-3" 
+            > TACsconcsmka + TACsconcsmkf </field>
+        <field id="TACsconcnh4"          long_name="mass_surface_concentration_of_ammonium_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACsconcnh3"          long_name="mass_surface_concentration_of_ammoniac_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACsconchno3"         long_name="mass_surface_concentration_of_nitric_acid_in_air" unit="kg kg-1" />
+
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="aero_2D_instant_radiation">
+        <field id="RADod1_band1" long_name="atmosphere_optical_thickness_0.18-0.25_due_to_sulfate_and_organic_aerosols" unit="1" />
+        <field id="RADod2_band1" long_name="atmosphere_optical_thickness_0.18-0.25_due_to_seasalt_aerosols" unit="1" />
+        <field id="RADod3_band1" long_name="atmosphere_optical_thickness_0.18-0.25_due_to_dust_aerosols" unit="1" />
+        <field id="RADod4_band1" long_name="atmosphere_optical_thickness_0.18-0.25_due_to_black_carbon_aerosols" unit="1" />
+        <field id="RADod5_band1" long_name="atmosphere_optical_thickness_0.18-0.25_due_to_background_volcanic_aerosols" unit="1" />
+        <field id="RADod6_band1" long_name="atmosphere_optical_thickness_0.18-0.25_due_to_background_stratospheric_aerosols" unit="1" />
+        <field id="RADod_band1"  long_name="atmosphere_optical_thickness_0.18-0.25_due_to_all_aerosols" unit="1" 
+             > RADod1_band1 + RADod2_band1 + RADod3_band1 + RADod4_band1 + RADod5_band1 + RADod6_band1 </field>
+
+        <field id="RADod1_band2" long_name="atmosphere_optical_thickness_0.25-0.44_due_to_sulfate_and_organic_aerosols" unit="1" />
+        <field id="RADod2_band2" long_name="atmosphere_optical_thickness_0.25-0.44_due_to_seasalt_aerosols" unit="1" />
+        <field id="RADod3_band2" long_name="atmosphere_optical_thickness_0.25-0.44_due_to_dust_aerosols" unit="1" />
+        <field id="RADod4_band2" long_name="atmosphere_optical_thickness_0.25-0.44_due_to_black_carbon_aerosols" unit="1" />
+        <field id="RADod5_band2" long_name="atmosphere_optical_thickness_0.25-0.44_due_to_background_volcanic_aerosols" unit="1" />
+        <field id="RADod6_band2" long_name="atmosphere_optical_thickness_0.25-0.44_due_to_background_stratospheric_aerosols" unit="1" />
+        <field id="RADod_band2"  long_name="atmosphere_optical_thickness_0.25-0.44_due_to_all_aerosols" unit="1"
+             > RADod1_band2 + RADod2_band2 + RADod3_band2 + RADod4_band2 + RADod5_band2 + RADod6_band2 </field>
+
+        <field id="RADod1_band3" long_name="atmosphere_optical_thickness_0.44-0.69_due_to_sulfate_and_organic_aerosols" unit="1" />
+        <field id="RADod2_band3" long_name="atmosphere_optical_thickness_0.44-0.69_due_to_seasalt_aerosols" unit="1" />
+        <field id="RADod3_band3" long_name="atmosphere_optical_thickness_0.44-0.69_due_to_dust_aerosols" unit="1" />
+        <field id="RADod4_band3" long_name="atmosphere_optical_thickness_0.44-0.69_due_to_black_carbon_aerosols" unit="1" />
+        <field id="RADod5_band3" long_name="atmosphere_optical_thickness_0.44-0.69_due_to_background_volcanic_aerosols" unit="1" />
+        <field id="RADod6_band3" long_name="atmosphere_optical_thickness_0.44-0.69_due_to_background_stratospheric_aerosols" unit="1" />
+        <field id="RADod_band3"  long_name="atmosphere_optical_thickness_0.44-0.69_due_to_all_aerosols" unit="1"
+             > RADod1_band3 + RADod2_band3 + RADod3_band3 + RADod4_band3 + RADod5_band3 + RADod6_band3 </field>
+
+        <field id="RADod1_band4" long_name="atmosphere_optical_thickness_0.69-1.19_due_to_sulfate_and_organic_aerosols" unit="1" />
+        <field id="RADod2_band4" long_name="atmosphere_optical_thickness_0.69-1.19_due_to_seasalt_aerosols" unit="1" />
+        <field id="RADod3_band4" long_name="atmosphere_optical_thickness_0.69-1.19_due_to_dust_aerosols" unit="1" />
+        <field id="RADod4_band4" long_name="atmosphere_optical_thickness_0.69-1.19_due_to_black_carbon_aerosols" unit="1" />
+        <field id="RADod5_band4" long_name="atmosphere_optical_thickness_0.69-1.19_due_to_background_volcanic_aerosols" unit="1" />
+        <field id="RADod6_band4" long_name="atmosphere_optical_thickness_0.69-1.19_due_to_background_stratospheric_aerosols" unit="1" />
+        <field id="RADod_band4"  long_name="atmosphere_optical_thickness_0.69-1.19_due_to_all_aerosols" unit="1"
+             > RADod1_band4 + RADod2_band4 + RADod3_band4 + RADod4_band4 + RADod5_band4 + RADod6_band4 </field>
+
+        <field id="RADod1_band5" long_name="atmosphere_optical_thickness_1.19-2.38_due_to_sulfate_and_organic_aerosols" unit="1" />
+        <field id="RADod2_band5" long_name="atmosphere_optical_thickness_1.19-2.38_due_to_seasalt_aerosols" unit="1" />
+        <field id="RADod3_band5" long_name="atmosphere_optical_thickness_1.19-2.38_due_to_dust_aerosols" unit="1" />
+        <field id="RADod4_band5" long_name="atmosphere_optical_thickness_1.19-2.38_due_to_black_carbon_aerosols" unit="1" />
+        <field id="RADod5_band5" long_name="atmosphere_optical_thickness_1.19-2.38_due_to_background_volcanic_aerosols" unit="1" />
+        <field id="RADod6_band5" long_name="atmosphere_optical_thickness_1.19-2.38_due_to_background_stratospheric_aerosols" unit="1" />
+        <field id="RADod_band5"  long_name="atmosphere_optical_thickness_1.19-2.38_due_to_all_aerosols" unit="1"
+             > RADod1_band5 + RADod2_band5 + RADod3_band5 + RADod4_band5 + RADod5_band5 + RADod6_band5 </field>
+
+        <field id="RADod1_band6" long_name="atmosphere_optical_thickness_2.38-4.0_due_to_sulfate_and_organic_aerosols" unit="1" />
+        <field id="RADod2_band6" long_name="atmosphere_optical_thickness_2.38-4.0_due_to_seasalt_aerosols" unit="1" />
+        <field id="RADod3_band6" long_name="atmosphere_optical_thickness_2.38-4.0_due_to_dust_aerosols" unit="1" />
+        <field id="RADod4_band6" long_name="atmosphere_optical_thickness_2.38-4.0_due_to_black_carbon_aerosols" unit="1" />
+        <field id="RADod5_band6" long_name="atmosphere_optical_thickness_2.38-4.0_due_to_background_volcanic_aerosols" unit="1" />
+        <field id="RADod6_band6" long_name="atmosphere_optical_thickness_2.38-4.0_due_to_background_stratospheric_aerosols" unit="1" />
+        <field id="RADod_band6"  long_name="atmosphere_optical_thickness_2.38-4.0_due_to_all_aerosols" unit="1"
+             > RADod1_band6 + RADod2_band6 + RADod3_band6 + RADod4_band6 + RADod5_band6 + RADod6_band6 </field>
+
+        <field id="RADabs1_band1" long_name="atmosphere_absorption_optical_thickness_0.18-0.25_due_to_sulfate_and_organic_aerosols" unit="1" />
+        <field id="RADabs2_band1" long_name="atmosphere_absorption_optical_thickness_0.18-0.25_due_to_seasalt_aerosols" unit="1" />
+        <field id="RADabs3_band1" long_name="atmosphere_absorption_optical_thickness_0.18-0.25_due_to_dust_aerosols" unit="1" />
+        <field id="RADabs4_band1" long_name="atmosphere_absorption_optical_thickness_0.18-0.25_due_to_black_carbon_aerosols" unit="1" />
+        <field id="RADabs5_band1" long_name="atmosphere_absorption_optical_thickness_0.18-0.25_due_to_background_volcanic_aerosols" unit="1" />
+        <field id="RADabs6_band1" long_name="atmosphere_absorption_optical_thickness_0.18-0.25_due_to_background_stratospheric_aerosols" unit="1" />
+        <field id="RADabs_band1"  long_name="atmosphere_absorption_optical_thickness_0.18-0.25_due_to_all_aerosols" unit="1" 
+             > RADabs1_band1 + RADabs2_band1 + RADabs3_band1 + RADabs4_band1 + RADabs5_band1 + RADabs6_band1 </field>
+
+        <field id="RADabs1_band2" long_name="atmosphere_absorption_optical_thickness_0.25-0.44_due_to_sulfate_and_organic_aerosols" unit="1" />
+        <field id="RADabs2_band2" long_name="atmosphere_absorption_optical_thickness_0.25-0.44_due_to_seasalt_aerosols" unit="1" />
+        <field id="RADabs3_band2" long_name="atmosphere_absorption_optical_thickness_0.25-0.44_due_to_dust_aerosols" unit="1" />
+        <field id="RADabs4_band2" long_name="atmosphere_absorption_optical_thickness_0.25-0.44_due_to_black_carbon_aerosols" unit="1" />
+        <field id="RADabs5_band2" long_name="atmosphere_absorption_optical_thickness_0.25-0.44_due_to_background_volcanic_aerosols" unit="1" />
+        <field id="RADabs6_band2" long_name="atmosphere_absorption_optical_thickness_0.25-0.44_due_to_background_stratospheric_aerosols" unit="1" />
+        <field id="RADabs_band2"  long_name="atmosphere_absorption_optical_thickness_0.25-0.44_due_to_all_aerosols" unit="1" 
+             > RADabs1_band2 + RADabs2_band2 + RADabs3_band2 + RADabs4_band2 + RADabs5_band2 + RADabs6_band2 </field>
+
+        <field id="RADabs1_band3" long_name="atmosphere_absorption_optical_thickness_0.44-0.69_due_to_sulfate_and_organic_aerosols" unit="1" />
+        <field id="RADabs2_band3" long_name="atmosphere_absorption_optical_thickness_0.44-0.69_due_to_seasalt_aerosols" unit="1" />
+        <field id="RADabs3_band3" long_name="atmosphere_absorption_optical_thickness_0.44-0.69_due_to_dust_aerosols" unit="1" />
+        <field id="RADabs4_band3" long_name="atmosphere_absorption_optical_thickness_0.44-0.69_due_to_black_carbon_aerosols" unit="1" />
+        <field id="RADabs5_band3" long_name="atmosphere_absorption_optical_thickness_0.44-0.69_due_to_background_volcanic_aerosols" unit="1" />
+        <field id="RADabs6_band3" long_name="atmosphere_absorption_optical_thickness_0.44-0.69_due_to_background_stratospheric_aerosols" unit="1" />
+        <field id="RADabs_band3"  long_name="atmosphere_absorption_optical_thickness_0.44-0.69_due_to_all_aerosols" unit="1" 
+             > RADabs1_band3 + RADabs2_band3 + RADabs3_band3 + RADabs4_band3 + RADabs5_band3 + RADabs6_band3 </field>
+
+        <field id="RADabs1_band4" long_name="atmosphere_absorption_optical_thickness_0.69-1.19_due_to_sulfate_and_organic_aerosols" unit="1" />
+        <field id="RADabs2_band4" long_name="atmosphere_absorption_optical_thickness_0.69-1.19_due_to_seasalt_aerosols" unit="1" />
+        <field id="RADabs3_band4" long_name="atmosphere_absorption_optical_thickness_0.69-1.19_due_to_dust_aerosols" unit="1" />
+        <field id="RADabs4_band4" long_name="atmosphere_absorption_optical_thickness_0.69-1.19_due_to_black_carbon_aerosols" unit="1" />
+        <field id="RADabs5_band4" long_name="atmosphere_absorption_optical_thickness_0.69-1.19_due_to_background_volcanic_aerosols" unit="1" />
+        <field id="RADabs6_band4" long_name="atmosphere_absorption_optical_thickness_0.69-1.19_due_to_background_stratospheric_aerosols" unit="1" />
+        <field id="RADabs_band4"  long_name="atmosphere_absorption_optical_thickness_0.69-1.19_due_to_all_aerosols" unit="1" 
+             > RADabs1_band4 + RADabs2_band4 + RADabs3_band4 + RADabs4_band4 + RADabs5_band4 + RADabs6_band4 </field>
+
+        <field id="RADabs1_band5" long_name="atmosphere_absorption_optical_thickness_1.19-2.38_due_to_sulfate_and_organic_aerosols" unit="1" />
+        <field id="RADabs2_band5" long_name="atmosphere_absorption_optical_thickness_1.19-2.38_due_to_seasalt_aerosols" unit="1" />
+        <field id="RADabs3_band5" long_name="atmosphere_absorption_optical_thickness_1.19-2.38_due_to_dust_aerosols" unit="1" />
+        <field id="RADabs4_band5" long_name="atmosphere_absorption_optical_thickness_1.19-2.38_due_to_black_carbon_aerosols" unit="1" />
+        <field id="RADabs5_band5" long_name="atmosphere_absorption_optical_thickness_1.19-2.38_due_to_background_volcanic_aerosols" unit="1" />
+        <field id="RADabs6_band5" long_name="atmosphere_absorption_optical_thickness_1.19-2.38_due_to_background_stratospheric_aerosols" unit="1" />
+        <field id="RADabs_band5"  long_name="atmosphere_absorption_optical_thickness_1.19-2.38_due_to_all_aerosols" unit="1" 
+             > RADabs1_band5 + RADabs2_band5 + RADabs3_band5 + RADabs4_band5 + RADabs5_band5 + RADabs6_band5 </field>
+
+        <field id="RADabs1_band6" long_name="atmosphere_absorption_optical_thickness_2.38-4.0_due_to_sulfate_and_organic_aerosols" unit="1" />
+        <field id="RADabs2_band6" long_name="atmosphere_absorption_optical_thickness_2.38-4.0_due_to_seasalt_aerosols" unit="1" />
+        <field id="RADabs3_band6" long_name="atmosphere_absorption_optical_thickness_2.38-4.0_due_to_dust_aerosols" unit="1" />
+        <field id="RADabs4_band6" long_name="atmosphere_absorption_optical_thickness_2.38-4.0_due_to_black_carbon_aerosols" unit="1" />
+        <field id="RADabs5_band6" long_name="atmosphere_absorption_optical_thickness_2.38-4.0_due_to_background_volcanic_aerosols" unit="1" />
+        <field id="RADabs6_band6" long_name="atmosphere_absorption_optical_thickness_2.38-4.0_due_to_background_stratospheric_aerosols" unit="1" />
+        <field id="RADabs_band6"  long_name="atmosphere_absorption_optical_thickness_2.38-4.0_due_to_all_aerosols" unit="1" 
+             > RADabs1_band6 + RADabs2_band6 + RADabs3_band6 + RADabs4_band6 + RADabs5_band6 + RADabs6_band6 </field>
+
+        <field id="RADTACabs1_band3" long_name="atmosphere_absorption_optical_thickness_0.44-0.69_due_to_sulfate_and_organic_aerosols" unit="1" />
+        <field id="RADTACabs2_band3" long_name="atmosphere_absorption_optical_thickness_0.44-0.69_due_to_seasalt_aerosols" unit="1" />
+        <field id="RADTACabs3_band3" long_name="atmosphere_absorption_optical_thickness_0.44-0.69_due_to_dust_aerosols" unit="1" />
+        <field id="RADTACabs4_band3" long_name="atmosphere_absorption_optical_thickness_0.44-0.69_due_to_black_carbon_aerosols" unit="1" />
+        <field id="RADTACabs5_band3" long_name="atmosphere_absorption_optical_thickness_0.44-0.69_due_to_background_volcanic_aerosols" unit="1" />
+        <field id="RADTACabs6_band3" long_name="atmosphere_absorption_optical_thickness_0.44-0.69_due_to_background_stratospheric_aerosols" unit="1" />
+        <field id="RADTACabs_band3"  long_name="atmosphere_absorption_optical_thickness_0.44-0.69_due_to_all_aerosols" unit="1" 
+             > RADTACabs1_band3 + RADTACabs2_band3 + RADTACabs3_band3 + RADTACabs4_band3 + RADTACabs5_band3 + RADTACabs6_band3 </field>
+
+        <field id="RADsc1_band1" long_name="atmosphere_scattering_0.18-0.25_due_to_sulfate_and_organic_aerosols" unit="1" />
+        <field id="RADsc2_band1" long_name="atmosphere_scattering_0.18-0.25_due_to_seasalt_aerosols" unit="1" />
+        <field id="RADsc3_band1" long_name="atmosphere_scattering_0.18-0.25_due_to_dust_aerosols" unit="1" />
+        <field id="RADsc4_band1" long_name="atmosphere_scattering_0.18-0.25_due_to_black_carbon_aerosols" unit="1" />
+        <field id="RADsc5_band1" long_name="atmosphere_scattering_0.18-0.25_due_to_background_volcanic_aerosols" unit="1" />
+        <field id="RADsc6_band1" long_name="atmosphere_scattering_0.18-0.25_due_to_background_stratospheric_aerosols" unit="1" />
+        <field id="RADsc_band1"  long_name="atmosphere_scattering_0.18-0.25_due_to_all_aerosols" unit="1" 
+             > RADsc1_band1 + RADsc2_band1 + RADsc3_band1 + RADsc4_band1 + RADsc5_band1 + RADsc6_band1 </field>
+
+        <field id="RADsc1_band2" long_name="atmosphere_scattering_0.25-0.44_due_to_sulfate_and_organic_aerosols" unit="1" />
+        <field id="RADsc2_band2" long_name="atmosphere_scattering_0.25-0.44_due_to_seasalt_aerosols" unit="1" />
+        <field id="RADsc3_band2" long_name="atmosphere_scattering_0.25-0.44_due_to_dust_aerosols" unit="1" />
+        <field id="RADsc4_band2" long_name="atmosphere_scattering_0.25-0.44_due_to_black_carbon_aerosols" unit="1" />
+        <field id="RADsc5_band2" long_name="atmosphere_scattering_0.25-0.44_due_to_background_volcanic_aerosols" unit="1" />
+        <field id="RADsc6_band2" long_name="atmosphere_scattering_0.25-0.44_due_to_background_stratospheric_aerosols" unit="1" />
+        <field id="RADsc_band2"  long_name="atmosphere_scattering_0.25-0.44_due_to_all_aerosols" unit="1"
+             > RADsc1_band2 + RADsc2_band2 + RADsc3_band2 + RADsc4_band2 + RADsc5_band2 + RADsc6_band2 </field>
+
+        <field id="RADsc1_band3" long_name="atmosphere_scattering_0.44-0.69_due_to_sulfate_and_organic_aerosols" unit="1" />
+        <field id="RADsc2_band3" long_name="atmosphere_scattering_0.44-0.69_due_to_seasalt_aerosols" unit="1" />
+        <field id="RADsc3_band3" long_name="atmosphere_scattering_0.44-0.69_due_to_dust_aerosols" unit="1" />
+        <field id="RADsc4_band3" long_name="atmosphere_scattering_0.44-0.69_due_to_black_carbon_aerosols" unit="1" />
+        <field id="RADsc5_band3" long_name="atmosphere_scattering_0.44-0.69_due_to_background_volcanic_aerosols" unit="1" />
+        <field id="RADsc6_band3" long_name="atmosphere_scattering_0.44-0.69_due_to_background_stratospheric_aerosols" unit="1" />
+        <field id="RADsc_band3"  long_name="atmosphere_scattering_0.44-0.69_due_to_all_aerosols" unit="1"
+             > RADsc1_band3 + RADsc2_band3 + RADsc3_band3 + RADsc4_band3 + RADsc5_band3 + RADsc6_band3 </field>
+
+        <field id="RADsc1_band4" long_name="atmosphere_scattering_0.69-1.19_due_to_sulfate_and_organic_aerosols" unit="1" />
+        <field id="RADsc2_band4" long_name="atmosphere_scattering_0.69-1.19_due_to_seasalt_aerosols" unit="1" />
+        <field id="RADsc3_band4" long_name="atmosphere_scattering_0.69-1.19_due_to_dust_aerosols" unit="1" />
+        <field id="RADsc4_band4" long_name="atmosphere_scattering_0.69-1.19_due_to_black_carbon_aerosols" unit="1" />
+        <field id="RADsc5_band4" long_name="atmosphere_scattering_0.69-1.19_due_to_background_volcanic_aerosols" unit="1" />
+        <field id="RADsc6_band4" long_name="atmosphere_scattering_0.69-1.19_due_to_background_stratospheric_aerosols" unit="1" />
+        <field id="RADsc_band4"  long_name="atmosphere_scattering_0.69-1.19_due_to_all_aerosols" unit="1"
+             > RADsc1_band4 + RADsc2_band4 + RADsc3_band4 + RADsc4_band4 + RADsc5_band4 + RADsc6_band4 </field>
+
+        <field id="RADsc1_band5" long_name="atmosphere_scattering_1.19-2.38_due_to_sulfate_and_organic_aerosols" unit="1" />
+        <field id="RADsc2_band5" long_name="atmosphere_scattering_1.19-2.38_due_to_seasalt_aerosols" unit="1" />
+        <field id="RADsc3_band5" long_name="atmosphere_scattering_1.19-2.38_due_to_dust_aerosols" unit="1" />
+        <field id="RADsc4_band5" long_name="atmosphere_scattering_1.19-2.38_due_to_black_carbon_aerosols" unit="1" />
+        <field id="RADsc5_band5" long_name="atmosphere_scattering_1.19-2.38_due_to_background_volcanic_aerosols" unit="1" />
+        <field id="RADsc6_band5" long_name="atmosphere_scattering_1.19-2.38_due_to_background_stratospheric_aerosols" unit="1" />
+        <field id="RADsc_band5"  long_name="atmosphere_scattering_1.19-2.38_due_to_all_aerosols" unit="1"
+             > RADsc1_band5 + RADsc2_band5 + RADsc3_band5 + RADsc4_band5 + RADsc5_band5 + RADsc6_band5 </field>
+
+        <field id="RADsc1_band6" long_name="atmosphere_scattering_2.38-4.0_due_to_sulfate_and_organic_aerosols" unit="1" />
+        <field id="RADsc2_band6" long_name="atmosphere_scattering_2.38-4.0_due_to_seasalt_aerosols" unit="1" />
+        <field id="RADsc3_band6" long_name="atmosphere_scattering_2.38-4.0_due_to_dust_aerosols" unit="1" />
+        <field id="RADsc4_band6" long_name="atmosphere_scattering_2.38-4.0_due_to_black_carbon_aerosols" unit="1" />
+        <field id="RADsc5_band6" long_name="atmosphere_scattering_2.38-4.0_due_to_background_volcanic_aerosols" unit="1" />
+        <field id="RADsc6_band6" long_name="atmosphere_scattering_2.38-4.0_due_to_background_stratospheric_aerosols" unit="1" />
+        <field id="RADsc_band6"  long_name="atmosphere_scattering_2.38-4.0_due_to_all_aerosols" unit="1" 
+             > RADsc1_band6 + RADsc2_band6 + RADsc3_band6 + RADsc4_band6 + RADsc5_band6 + RADsc6_band6 </field>
+
+        <field id="RADas1_band1" long_name="atmosphere_asymmetry_scattering_0.18-0.25_due_to_sulfate_and_organic_aerosols" unit="1" />
+        <field id="RADas2_band1" long_name="atmosphere_asymmetry_scattering_0.18-0.25_due_to_seasalt_aerosols" unit="1" />
+        <field id="RADas3_band1" long_name="atmosphere_asymmetry_scattering_0.18-0.25_due_to_dust_aerosols" unit="1" />
+        <field id="RADas4_band1" long_name="atmosphere_asymmetry_scattering_0.18-0.25_due_to_black_carbon_aerosols" unit="1" />
+        <field id="RADas5_band1" long_name="atmosphere_asymmetry_scattering_0.18-0.25_due_to_background_volcanic_aerosols" unit="1" />
+        <field id="RADas6_band1" long_name="atmosphere_asymmetry_scattering_0.18-0.25_due_to_background_stratospheric_aerosols" unit="1" />
+        <field id="RADas_band1"  long_name="atmosphere_asymmetry_scattering_0.18-0.25_due_to_all_aerosols" unit="1" 
+             > RADas1_band1 + RADas2_band1 + RADas3_band1 + RADas4_band1 + RADas5_band1 + RADas6_band1 </field>
+
+        <field id="RADas1_band2" long_name="atmosphere_asymmetry_scattering_0.25-0.44_due_to_sulfate_and_organic_aerosols" unit="1" />
+        <field id="RADas2_band2" long_name="atmosphere_asymmetry_scattering_0.25-0.44_due_to_seasalt_aerosols" unit="1" />
+        <field id="RADas3_band2" long_name="atmosphere_asymmetry_scattering_0.25-0.44_due_to_dust_aerosols" unit="1" />
+        <field id="RADas4_band2" long_name="atmosphere_asymmetry_scattering_0.25-0.44_due_to_black_carbon_aerosols" unit="1" />
+        <field id="RADas5_band2" long_name="atmosphere_asymmetry_scattering_0.25-0.44_due_to_background_volcanic_aerosols" unit="1" />
+        <field id="RADas6_band2" long_name="atmosphere_asymmetry_scattering_0.25-0.44_due_to_background_stratospheric_aerosols" unit="1" />
+        <field id="RADas_band2"  long_name="atmosphere_asymmetry_scattering_0.25-0.44_due_to_all_aerosols" unit="1" 
+             > RADas1_band2 + RADas2_band2 + RADas3_band2 + RADas4_band2 + RADas5_band2 + RADas6_band2 </field>
+
+        <field id="RADas1_band3" long_name="atmosphere_asymmetry_scattering_0.44-0.69_due_to_sulfate_and_organic_aerosols" unit="1" />
+        <field id="RADas2_band3" long_name="atmosphere_asymmetry_scattering_0.44-0.69_due_to_seasalt_aerosols" unit="1" />
+        <field id="RADas3_band3" long_name="atmosphere_asymmetry_scattering_0.44-0.69_due_to_dust_aerosols" unit="1" />
+        <field id="RADas4_band3" long_name="atmosphere_asymmetry_scattering_0.44-0.69_due_to_black_carbon_aerosols" unit="1" />
+        <field id="RADas5_band3" long_name="atmosphere_asymmetry_scattering_0.44-0.69_due_to_background_volcanic_aerosols" unit="1" />
+        <field id="RADas6_band3" long_name="atmosphere_asymmetry_scattering_0.44-0.69_due_to_background_stratospheric_aerosols" unit="1" />
+        <field id="RADas_band3"  long_name="atmosphere_asymmetry_scattering_0.44-0.69_due_to_all_aerosols" unit="1" 
+             > RADas1_band3 + RADas2_band3 + RADas3_band3 + RADas4_band3 + RADas5_band3 + RADas6_band3 </field>
+
+        <field id="RADas1_band4" long_name="atmosphere_asymmetry_scattering_0.69-1.19_due_to_sulfate_and_organic_aerosols" unit="1" />
+        <field id="RADas2_band4" long_name="atmosphere_asymmetry_scattering_0.69-1.19_due_to_seasalt_aerosols" unit="1" />
+        <field id="RADas3_band4" long_name="atmosphere_asymmetry_scattering_0.69-1.19_due_to_dust_aerosols" unit="1" />
+        <field id="RADas4_band4" long_name="atmosphere_asymmetry_scattering_0.69-1.19_due_to_black_carbon_aerosols" unit="1" />
+        <field id="RADas5_band4" long_name="atmosphere_asymmetry_scattering_0.69-1.19_due_to_background_volcanic_aerosols" unit="1" />
+        <field id="RADas6_band4" long_name="atmosphere_asymmetry_scattering_0.69-1.19_due_to_background_stratospheric_aerosols" unit="1" />
+        <field id="RADas_band4"  long_name="atmosphere_asymmetry_scattering_0.69-1.19_due_to_all_aerosols" unit="1"
+             > RADas1_band4 + RADas2_band4 + RADas3_band4 + RADas4_band4 + RADas5_band4 + RADas6_band4 </field>
+
+        <field id="RADas1_band5" long_name="atmosphere_asymmetry_scattering_1.19-2.38_due_to_sulfate_and_organic_aerosols" unit="1" />
+        <field id="RADas2_band5" long_name="atmosphere_asymmetry_scattering_1.19-2.38_due_to_seasalt_aerosols" unit="1" />
+        <field id="RADas3_band5" long_name="atmosphere_asymmetry_scattering_1.19-2.38_due_to_dust_aerosols" unit="1" />
+        <field id="RADas4_band5" long_name="atmosphere_asymmetry_scattering_1.19-2.38_due_to_black_carbon_aerosols" unit="1" />
+        <field id="RADas5_band5" long_name="atmosphere_asymmetry_scattering_1.19-2.38_due_to_background_volcanic_aerosols" unit="1" />
+        <field id="RADas6_band5" long_name="atmosphere_asymmetry_scattering_1.19-2.38_due_to_background_stratospheric_aerosols" unit="1" />
+        <field id="RADas_band5"  long_name="atmosphere_asymmetry_scattering_1.19-2.38_due_to_all_aerosols" unit="1"
+             > RADas1_band5 + RADas2_band5 + RADas3_band5 + RADas4_band5 + RADas5_band5 + RADas6_band5 </field>
+
+        <field id="RADas1_band6" long_name="atmosphere_asymmetry_scattering_2.38-4.0_due_to_sulfate_and_organic_aerosols" unit="1" />
+        <field id="RADas2_band6" long_name="atmosphere_asymmetry_scattering_2.38-4.0_due_to_seasalt_aerosols" unit="1" />
+        <field id="RADas3_band6" long_name="atmosphere_asymmetry_scattering_2.38-4.0_due_to_dust_aerosols" unit="1" />
+        <field id="RADas4_band6" long_name="atmosphere_asymmetry_scattering_2.38-4.0_due_to_black_carbon_aerosols" unit="1" />
+        <field id="RADas5_band6" long_name="atmosphere_asymmetry_scattering_2.38-4.0_due_to_background_volcanic_aerosols" unit="1" />
+        <field id="RADas6_band6" long_name="atmosphere_asymmetry_scattering_2.38-4.0_due_to_background_stratospheric_aerosols" unit="1" />
+        <field id="RADas_band6"  long_name="atmosphere_asymmetry_scattering_2.38-4.0_due_to_all_aerosols" unit="1"
+             > RADas1_band6 + RADas2_band6 + RADas3_band6 + RADas4_band6 + RADas5_band6 + RADas6_band6 </field>
+
+        <field id="RADssa_band1" long_name="single_scattering_albedo_0.18-0.25_due_to_all_aerosols" unit="1" 
+             > RADsc_band1 / RADod_band1 </field>
+        <field id="RADssa_band2" long_name="single_scattering_albedo_0.25-0.44_due_to_all_aerosols" unit="1" 
+             > RADsc_band2 / RADod_band2 </field>
+        <field id="RADssa_band3" long_name="single_scattering_albedo_0.44-0.69_due_to_all_aerosols" unit="1" 
+             > RADsc_band3 / RADod_band3 </field>
+        <field id="RADssa_band4" long_name="single_scattering_albedo_0.69-1.19_due_to_all_aerosols" unit="1" 
+             > RADsc_band4 / RADod_band4 </field>
+        <field id="RADssa_band5" long_name="single_scattering_albedo_1.19-2.38_due_to_all_aerosols" unit="1" 
+             > RADsc_band5 / RADod_band5 </field>
+        <field id="RADssa_band6" long_name="single_scattering_albedo_2.38-4.0_due_to_all_aerosols" unit="1" 
+             > RADsc_band6 / RADod_band6 </field>
+
+        <field id="RADg_band1" long_name="asymmetry_parameter_0.18-0.25_due_to_all_aerosols" unit="1" 
+             > RADas_band1 / RADsc_band1 </field>
+        <field id="RADg_band2" long_name="asymmetry_parameter_0.25-0.44_due_to_all_aerosols" unit="1" 
+             > RADas_band2 / RADsc_band2 </field>
+        <field id="RADg_band3" long_name="asymmetry_parameter_0.44-0.69_due_to_all_aerosols" unit="1" 
+             > RADas_band3 / RADsc_band3 </field>
+        <field id="RADg_band4" long_name="asymmetry_parameter_0.69-1.19_due_to_all_aerosols" unit="1" 
+             > RADas_band4 / RADsc_band4 </field>
+        <field id="RADg_band5" long_name="asymmetry_parameter_1.19-2.38_due_to_all_aerosols" unit="1" 
+             > RADas_band5 / RADsc_band5 </field>
+        <field id="RADg_band6" long_name="asymmetry_parameter_2.38-4.0_due_to_all_aerosols" unit="1" 
+	      > RADas_band6 / RADsc_band6 </field>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- 2D ARPEGE fields : averaged sampling                                                                               -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <field_group grid_ref="FULL_grid" operation="average" freq_op="1ts" >
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="aero_2D_avg_prog_fluxes" >
+        <field id="TACemiss_bin1" 	long_name="tendency_of_atmosphere_mass_content_of_seasalt_bin1_dry_aerosol_due_to_emission" unit="kg m-2 s-1" />
+        <field id="TACemiss_bin2" 	long_name="tendency_of_atmosphere_mass_content_of_seasalt_bin2_dry_aerosol_due_to_emission" unit="kg m-2 s-1" />
+        <field id="TACemiss_bin3" 	long_name="tendency_of_atmosphere_mass_content_of_seasalt_bin3_dry_aerosol_due_to_emission" unit="kg m-2 s-1" />
+        <field id="TACemiss" 		long_name="tendency_of_atmosphere_mass_content_of_seasalt_dry_aerosol_due_to_emission" unit="kg m-2 s-1" 
+               > TACemiss_bin1 + TACemiss_bin2 + TACemiss_bin3 </field>
+        <field id="TACemidust_bin1" 	long_name="tendency_of_atmosphere_mass_content_of_dust_bin1_dry_aerosol_due_to_emission" unit="kg m-2 s-1" />
+        <field id="TACemidust_bin2" 	long_name="tendency_of_atmosphere_mass_content_of_dust_bin2_dry_aerosol_due_to_emission" unit="kg m-2 s-1" />
+        <field id="TACemidust_bin3" 	long_name="tendency_of_atmosphere_mass_content_of_dust_bin3_dry_aerosol_due_to_emission" unit="kg m-2 s-1" />
+        <field id="TACemidust_bin4" 	long_name="tendency_of_atmosphere_mass_content_of_dust_bin4_dry_aerosol_due_to_emission" unit="kg m-2 s-1" />
+        <field id="TACemidust_bin5" 	long_name="tendency_of_atmosphere_mass_content_of_dust_bin5_dry_aerosol_due_to_emission" unit="kg m-2 s-1" />
+        <field id="TACemidust_bin6" 	long_name="tendency_of_atmosphere_mass_content_of_dust_bin6_dry_aerosol_due_to_emission" unit="kg m-2 s-1" />
+        <field id="TACemidust" 		long_name="tendency_of_atmosphere_mass_content_of_dust_dry_aerosol_due_to_emission" unit="kg m-2 s-1" /> 
+        <field id="TACemioa_phil" 	long_name="tendency_of_atmosphere_mass_content_of_hydrophilic_particulate_organic_matter_dry_aerosol_due_to_emission" unit="kg m-2 s-1" />
+        <field id="TACemioa_phob" 	long_name="tendency_of_atmosphere_mass_content_of_hydrophobic_particulate_organic_matter_dry_aerosol_due_to_emission" unit="kg m-2 s-1" />
+        <field id="TACemioa" 		long_name="tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_due_to_emission" unit="kg m-2 s-1" 
+               > TACemioa_phil + TACemioa_phob </field>
+        <field id="TACemibc_phil" 	long_name="tendency_of_atmosphere_mass_content_of_hydrophilic_black_carbon_dry_aerosol_due_to_emission" unit="kg m-2 s-1" />
+        <field id="TACemibc_phob" 	long_name="tendency_of_atmosphere_mass_content_of_hydrophobic_black_carbon_dry_aerosol_due_to_emission" unit="kg m-2 s-1" />
+        <field id="TACemibc" 		long_name="tendency_of_atmosphere_mass_content_of_black_carbon_dry_aerosol_due_to_emission" unit="kg m-2 s-1" 
+               > TACemibc_phil + TACemibc_phob </field>
+        <field id="TACemiso4" 		long_name="tendency_of_atmosphere_mass_content_of_sulfate_dry_aerosol_due_to_emission" unit="kg m-2 s-1" />
+        <field id="TACemiso2" 		long_name="tendency_of_atmosphere_mass_content_of_sulfur_dioxide_dry_aerosol_due_to_emission" unit="kg m-2 s-1" />
+        <field id="TACemino3_bin1"	long_name="tendency_of_atmosphere_mass_content_of_nitrate_bin1_dry_aerosol_due_to_emission" unit="kg m-2 s-1" />
+        <field id="TACemino3_bin2" 	long_name="tendency_of_atmosphere_mass_content_of_nitrate_bin2_dry_aerosol_due_to_emission" unit="kg m-2 s-1" />
+        <field id="TACemino3" 		long_name="tendency_of_atmosphere_mass_content_of_nitrate_dry_aerosol_due_to_emission" unit="kg m-2 s-1" 
+            > TACemino3_bin1 + TACemino3_bin2 </field>
+        <field id="TACemismka"          long_name="tendency_of_atmosphere_mass_content_of_aged_smoke_dry_aerosol_due_to_emission" unit="kg m-2 s-1" />
+        <field id="TACemismkf"          long_name="tendency_of_atmosphere_mass_content_of_fresh_smoke_dry_aerosol_due_to_emission" unit="kg m-2 s-1" />
+        <field id="TACemismk"           long_name="tendency_of_atmosphere_mass_content_of_smoke_dry_aerosol_due_to_emission" unit="kg m-2 s-1" 
+            > TACemismka + TACemismkf </field>
+        <field id="TACeminh4"           long_name="tendency_of_atmosphere_mass_content_of_ammonium_dry_aerosol_due_to_emission" unit="kg m-2 s-1" />
+        <field id="TACeminh3"           long_name="tendency_of_atmosphere_mass_content_of_ammoniac_dry_aerosol_due_to_emission" unit="kg m-2 s-1" />
+
+        <field id="TACdryss_bin1"       long_name="tendency_of_atmosphere_mass_content_of_seasalt_bin1_dry_aerosol_due_to_dry_deposition" unit="kg m-2 s-1" />
+        <field id="TACdryss_bin2"       long_name="tendency_of_atmosphere_mass_content_of_seasalt_bin2_dry_aerosol_due_to_dry_deposition" unit="kg m-2 s-1" />
+        <field id="TACdryss_bin3"       long_name="tendency_of_atmosphere_mass_content_of_seasalt_bin3_dry_aerosol_due_to_dry_deposition" unit="kg m-2 s-1" />
+        <field id="TACdryss"            long_name="tendency_of_atmosphere_mass_content_of_seasalt_dry_aerosol_due_to_dry_deposition" unit="kg m-2 s-1" 
+               > TACdryss_bin1 + TACdryss_bin2 + TACdryss_bin3 </field>
+        <field id="TACdrydust_bin1" 	long_name="tendency_of_atmosphere_mass_content_of_dust_bin1_dry_aerosol_due_to_dry_deposition" unit="kg m-2 s-1" />
+        <field id="TACdrydust_bin2" 	long_name="tendency_of_atmosphere_mass_content_of_dust_bin2_dry_aerosol_due_to_dry_deposition" unit="kg m-2 s-1" />
+        <field id="TACdrydust_bin3" 	long_name="tendency_of_atmosphere_mass_content_of_dust_bin3_dry_aerosol_due_to_dry_deposition" unit="kg m-2 s-1" />
+        <field id="TACdrydust_bin4" 	long_name="tendency_of_atmosphere_mass_content_of_dust_bin4_dry_aerosol_due_to_dry_deposition" unit="kg m-2 s-1" />
+        <field id="TACdrydust_bin5" 	long_name="tendency_of_atmosphere_mass_content_of_dust_bin5_dry_aerosol_due_to_dry_deposition" unit="kg m-2 s-1" />
+        <field id="TACdrydust_bin6" 	long_name="tendency_of_atmosphere_mass_content_of_dust_bin6_dry_aerosol_due_to_dry_deposition" unit="kg m-2 s-1" />
+        <field id="TACdrydust" 		long_name="tendency_of_atmosphere_mass_content_of_dust_dry_aerosol_due_to_dry_deposition" unit="kg m-2 s-1" /> 
+        <field id="TACdryoa_phil" 	long_name="tendency_of_atmosphere_mass_content_of_hydrophilic_particulate_organic_matter_dry_aerosol_due_to_dry_deposition" unit="kg m-2 s-1" />
+        <field id="TACdryoa_phob" 	long_name="tendency_of_atmosphere_mass_content_of_hydrophobic_particulate_organic_matter_dry_aerosol_due_to_dry_deposition" unit="kg m-2 s-1" />
+        <field id="TACdryoa" 		long_name="tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_due_to_dry_deposition" unit="kg m-2 s-1" 
+               > TACdryoa_phil + TACdryoa_phob </field>
+        <field id="TACdrybc_phil" 	long_name="tendency_of_atmosphere_mass_content_of_hydrophilic_black_carbon_dry_aerosol_due_to_dry_deposition" unit="kg m-2 s-1" />
+        <field id="TACdrybc_phob" 	long_name="tendency_of_atmosphere_mass_content_of_hydrophobic_black_carbon_dry_aerosol_due_to_dry_deposition" unit="kg m-2 s-1" />
+        <field id="TACdrybc" 		long_name="tendency_of_atmosphere_mass_content_of_black_carbon_dry_aerosol_due_to_dry_deposition" unit="kg m-2 s-1" 
+               > TACdrybc_phil + TACdrybc_phob </field>
+        <field id="TACdryso4" 		long_name="tendency_of_atmosphere_mass_content_of_sulfate_dry_aerosol_due_to_dry_deposition" unit="kg m-2 s-1" />
+        <field id="TACdryso2" 		long_name="tendency_of_atmosphere_mass_content_of_sulfur_dioxide_dry_aerosol_due_to_dry_deposition" unit="kg m-2 s-1" />
+        <field id="TACdryno3_bin1" 	long_name="tendency_of_atmosphere_mass_content_of_nitrate_bin1_dry_aerosol_due_to_dry_deposition" unit="kg m-2 s-1" />
+        <field id="TACdryno3_bin2" 	long_name="tendency_of_atmosphere_mass_content_of_nitrate_bin2_dry_aerosol_due_to_dry_deposition" unit="kg m-2 s-1" />
+        <field id="TACdryno3"		long_name="tendency_of_atmosphere_mass_content_of_nitrate_dry_aerosol_due_to_dry_deposition" unit="kg m-2 s-1" 
+            > TACdryno3_bin1 + TACdryno3_bin2 </field>
+        <field id="TACdrysmka"          long_name="tendency_of_atmosphere_mass_content_of_aged_smoke_dry_aerosol_due_to_dry_deposition" unit="kg m-2 s-1" />
+        <field id="TACdrysmkf"          long_name="tendency_of_atmosphere_mass_content_of_fresh_smoke_dry_aerosol_due_to_dry_deposition" unit="kg m-2 s-1" />
+        <field id="TACdrysmk"           long_name="tendency_of_atmosphere_mass_content_of_smoke_dry_aerosol_due_to_dry_deposition" unit="kg m-2 s-1" 
+            > TACdrysmka + TACdrysmkf </field>
+        <field id="TACdrynh4"           long_name="tendency_of_atmosphere_mass_content_of_ammonium_dry_aerosol_due_to_dry_deposition" unit="kg m-2 s-1" />
+        <field id="TACdrynh3"           long_name="tendency_of_atmosphere_mass_content_of_ammoniac_dry_aerosol_due_to_dry_deposition" unit="kg m-2 s-1" />
+
+        <field id="TACsedss_bin1"       long_name="tendency_of_atmosphere_mass_content_of_seasalt_bin1_dry_aerosol_due_to_sedimentation" unit="kg m-2 s-1" />
+        <field id="TACsedss_bin2"       long_name="tendency_of_atmosphere_mass_content_of_seasalt_bin2_dry_aerosol_due_to_sedimentation" unit="kg m-2 s-1" />
+        <field id="TACsedss_bin3"       long_name="tendency_of_atmosphere_mass_content_of_seasalt_bin3_dry_aerosol_due_to_sedimentation" unit="kg m-2 s-1" />
+        <field id="TACsedss"            long_name="tendency_of_atmosphere_mass_content_of_seasalt_dry_aerosol_due_to_sedimentation" unit="kg m-2 s-1" 
+               > TACsedss_bin1 + TACsedss_bin2 + TACsedss_bin3 </field>
+        <field id="TACseddust_bin1" 	long_name="tendency_of_atmosphere_mass_content_of_dust_bin1_dry_aerosol_due_to_sedimentation" unit="kg m-2 s-1" />
+        <field id="TACseddust_bin2" 	long_name="tendency_of_atmosphere_mass_content_of_dust_bin2_dry_aerosol_due_to_sedimentation" unit="kg m-2 s-1" />
+        <field id="TACseddust_bin3"	long_name="tendency_of_atmosphere_mass_content_of_dust_bin3_dry_aerosol_due_to_sedimentation" unit="kg m-2 s-1" />
+        <field id="TACseddust_bin4" 	long_name="tendency_of_atmosphere_mass_content_of_dust_bin4_dry_aerosol_due_to_sedimentation" unit="kg m-2 s-1" />
+        <field id="TACseddust_bin5" 	long_name="tendency_of_atmosphere_mass_content_of_dust_bin5_dry_aerosol_due_to_sedimentation" unit="kg m-2 s-1" />
+        <field id="TACseddust_bin6" 	long_name="tendency_of_atmosphere_mass_content_of_dust_bin6_dry_aerosol_due_to_sedimentation" unit="kg m-2 s-1" />
+        <field id="TACseddust" 		long_name="tendency_of_atmosphere_mass_content_of_dust_dry_aerosol_due_to_sedimentation" unit="kg m-2 s-1" /> 
+        <field id="TACsedoa_phil" 	long_name="tendency_of_atmosphere_mass_content_of_hydrophilic_particulate_organic_matter_dry_aerosol_due_to_sedimentation" unit="kg m-2 s-1" />
+        <field id="TACsedoa_phob" 	long_name="tendency_of_atmosphere_mass_content_of_hydrophobic_particulate_organic_matter_dry_aerosol_due_to_sedimentation" unit="kg m-2 s-1" />
+        <field id="TACsedoa" 		long_name="tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_due_to_sedimentation" unit="kg m-2 s-1" 
+               > TACsedoa_phil + TACsedoa_phob </field>
+        <field id="TACsedbc_phil" 	long_name="tendency_of_atmosphere_mass_content_of_hydrophilic_black_carbon_dry_aerosol_due_to_sedimentation" unit="kg m-2 s-1" />
+        <field id="TACsedbc_phob"	long_name="tendency_of_atmosphere_mass_content_of_hydrophobic_black_carbon_dry_aerosol_due_to_sedimentation" unit="kg m-2 s-1" />
+        <field id="TACsedbc" 		long_name="tendency_of_atmosphere_mass_content_of_black_carbon_dry_aerosol_due_to_sedimentation" unit="kg m-2 s-1" 
+               > TACsedbc_phil + TACsedbc_phob </field>
+        <field id="TACsedso4" 		long_name="tendency_of_atmosphere_mass_content_of_sulfate_dry_aerosol_due_to_sedimentation" unit="kg m-2 s-1" />
+        <field id="TACsedso2" 		long_name="tendency_of_atmosphere_mass_content_of_sulfur_dioxide_dry_aerosol_due_to_sedimentation" unit="kg m-2 s-1" />
+        <field id="TACsedno3_bin1" 	long_name="tendency_of_atmosphere_mass_content_of_nitrate_bin1_dry_aerosol_due_to_sedimentation" unit="kg m-2 s-1" />
+        <field id="TACsedno3_bin2" 	long_name="tendency_of_atmosphere_mass_content_of_nitrate_bin2_dry_aerosol_due_to_sedimentation" unit="kg m-2 s-1" />
+        <field id="TACsedno3" 		long_name="tendency_of_atmosphere_mass_content_of_nitrate_dry_aerosol_due_to_sedimentation" unit="kg m-2 s-1" 
+            > TACsedno3_bin1 + TACsedno3_bin2 </field>
+        <field id="TACsedsmka"          long_name="tendency_of_atmosphere_mass_content_of_aged_smoke_dry_aerosol_due_to_sedimentation" unit="kg m-2 s-1" />
+        <field id="TACsedsmkf"          long_name="tendency_of_atmosphere_mass_content_of_fresh_smoke_dry_aerosol_due_to_sedimentation" unit="kg m-2 s-1" />
+        <field id="TACsedsmk"           long_name="tendency_of_atmosphere_mass_content_of_smoke_dry_aerosol_due_to_sedimentation" unit="kg m-2 s-1" 
+            > TACsedsmka + TACsedsmkf </field>
+        <field id="TACsednh4"           long_name="tendency_of_atmosphere_mass_content_of_ammonium_dry_aerosol_due_to_sedimentation" unit="kg m-2 s-1" />
+        <field id="TACsednh3"           long_name="tendency_of_atmosphere_mass_content_of_ammoniac_dry_aerosol_due_to_sedimentation" unit="kg m-2 s-1" />
+
+        <field id="TACwetcin_ss_bin1"   long_name="tendency_of_atmosphere_mass_content_of_seasalt_bin1_dry_aerosol_due_to_wet_deposition_in_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcin_ss_bin2"   long_name="tendency_of_atmosphere_mass_content_of_seasalt_bin2_dry_aerosol_due_to_wet_deposition_in_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcin_ss_bin3"   long_name="tendency_of_atmosphere_mass_content_of_seasalt_bin3_dry_aerosol_due_to_wet_deposition_in_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcin_ss"        long_name="tendency_of_atmosphere_mass_content_of_seasalt_dry_aerosol_due_to_wet_deposition_in_cloud_in_convective_precipitation" unit="kg m-2 s-1" 
+               > TACwetcin_ss_bin1 + TACwetcin_ss_bin2 + TACwetcin_ss_bin3 </field>
+        <field id="TACwetcin_dust_bin1" long_name="tendency_of_atmosphere_mass_content_of_dust_bin1_dry_aerosol_due_to_wet_deposition_in_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcin_dust_bin2" long_name="tendency_of_atmosphere_mass_content_of_dust_bin2_dry_aerosol_due_to_wet_deposition_in_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcin_dust_bin3" long_name="tendency_of_atmosphere_mass_content_of_dust_bin3_dry_aerosol_due_to_wet_deposition_in_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcin_dust_bin4" long_name="tendency_of_atmosphere_mass_content_of_dust_bin4_dry_aerosol_due_to_wet_deposition_in_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcin_dust_bin5" long_name="tendency_of_atmosphere_mass_content_of_dust_bin5_dry_aerosol_due_to_wet_deposition_in_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcin_dust_bin6" long_name="tendency_of_atmosphere_mass_content_of_dust_bin6_dry_aerosol_due_to_wet_deposition_in_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcin_dust" 	long_name="tendency_of_atmosphere_mass_content_of_dust_dry_aerosol_due_to_wet_deposition_in_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcin_oa_phil" 	long_name="tendency_of_atmosphere_mass_content_of_hydrophilic_particulate_organic_matter_dry_aerosol_due_to_wet_deposition_in_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcin_oa_phob" 	long_name="tendency_of_atmosphere_mass_content_of_hydrophobic_particulate_organic_matter_dry_aerosol_due_to_wet_deposition_in_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcin_oa" 	long_name="tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_due_to_wet_deposition_in_cloud_in_convective_precipitation" unit="kg m-2 s-1" 
+               > TACwetcin_oa_phil + TACwetcin_oa_phob </field>
+        <field id="TACwetcin_bc_phil" 	long_name="tendency_of_atmosphere_mass_content_of_hydrophilic_black_carbon_dry_aerosol_due_to_wet_deposition_in_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcin_bc_phob" 	long_name="tendency_of_atmosphere_mass_content_of_hydrophobic_black_carbon_dry_aerosol_due_to_wet_deposition_in_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcin_bc" 	long_name="tendency_of_atmosphere_mass_content_of_black_carbon_dry_aerosol_due_to_wet_deposition_in_cloud_in_convective_precipitation" unit="kg m-2 s-1" 
+               > TACwetcin_bc_phil + TACwetcin_bc_phob </field>
+        <field id="TACwetcin_so4" 	long_name="tendency_of_atmosphere_mass_content_of_sulfate_dry_aerosol_due_to_wet_deposition_in_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcin_so2" 	long_name="tendency_of_atmosphere_mass_content_of_sulfur_dioxide_dry_aerosol_due_to_wet_deposition_in_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcin_no3_bin1" 	long_name="tendency_of_atmosphere_mass_content_of_nitrate_bin1_dry_aerosol_due_to_wet_deposition_in_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcin_no3_bin2" 	long_name="tendency_of_atmosphere_mass_content_of_nitrate_bin2_dry_aerosol_due_to_wet_deposition_in_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcin_no3" 	long_name="tendency_of_atmosphere_mass_content_of_nitrate_dry_aerosol_due_to_wet_deposition_in_cloud_in_convective_precipitation" unit="kg m-2 s-1" 
+            > TACwetcin_no3_bin1 + TACwetcin_no3_bin2 </field>
+        <field id="TACwetcin_smka"      long_name="tendency_of_atmosphere_mass_content_of_aged_smoke_dry_aerosol_due_to_wet_deposition_in_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcin_smkf"      long_name="tendency_of_atmosphere_mass_content_of_fresh_smoke_dry_aerosol_due_to_wet_deposition_in_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcin_smk"       long_name="tendency_of_atmosphere_mass_content_of_smoke_dry_aerosol_due_to_wet_deposition_in_cloud_in_convective_precipitation" unit="kg m-2 s-1" 
+            > TACwetcin_smka + TACwetcin_smkf </field>
+        <field id="TACwetcin_nh4"       long_name="tendency_of_atmosphere_mass_content_of_ammonium_dry_aerosol_due_to_wet_deposition_in_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcin_nh3"       long_name="tendency_of_atmosphere_mass_content_of_ammoniac_dry_aerosol_due_to_wet_deposition_in_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+    
+        <field id="TACwetcbc_ss_bin1" 	long_name="tendency_of_atmosphere_mass_content_of_seasalt_bin1_dry_aerosol_due_to_wet_deposition_below_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcbc_ss_bin2" 	long_name="tendency_of_atmosphere_mass_content_of_seasalt_bin2_dry_aerosol_due_to_wet_deposition_below_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcbc_ss_bin3" 	long_name="tendency_of_atmosphere_mass_content_of_seasalt_bin3_dry_aerosol_due_to_wet_deposition_below_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcbc_ss" 	long_name="tendency_of_atmosphere_mass_content_of_seasalt_dry_aerosol_due_to_wet_deposition_below_cloud_in_convective_precipitation" unit="kg m-2 s-1" 
+               > TACwetcbc_ss_bin1 + TACwetcbc_ss_bin2 + TACwetcbc_ss_bin3 </field>
+        <field id="TACwetcbc_dust_bin1" long_name="tendency_of_atmosphere_mass_content_of_dust_bin1_dry_aerosol_due_to_wet_deposition_below_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcbc_dust_bin2" long_name="tendency_of_atmosphere_mass_content_of_dust_bin2_dry_aerosol_due_to_wet_deposition_below_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcbc_dust_bin3" long_name="tendency_of_atmosphere_mass_content_of_dust_bin3_dry_aerosol_due_to_wet_deposition_below_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcbc_dust_bin4" long_name="tendency_of_atmosphere_mass_content_of_dust_bin4_dry_aerosol_due_to_wet_deposition_below_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcbc_dust_bin5" long_name="tendency_of_atmosphere_mass_content_of_dust_bin5_dry_aerosol_due_to_wet_deposition_below_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcbc_dust_bin6" long_name="tendency_of_atmosphere_mass_content_of_dust_bin6_dry_aerosol_due_to_wet_deposition_below_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcbc_dust" 	long_name="tendency_of_atmosphere_mass_content_of_dust_dry_aerosol_due_to_wet_deposition_below_cloud_in_convective_precipitation" unit="kg m-2 s-1" /> 
+        <field id="TACwetcbc_oa_phil" 	long_name="tendency_of_atmosphere_mass_content_of_hydrophilic_particulate_organic_matter_dry_aerosol_due_to_wet_deposition_below_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcbc_oa_phob" 	long_name="tendency_of_atmosphere_mass_content_of_hydrophobic_particulate_organic_matter_dry_aerosol_due_to_wet_deposition_below_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcbc_oa" 	long_name="tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_due_to_wet_deposition_below_cloud_in_convective_precipitation" unit="kg m-2 s-1" 
+               > TACwetcbc_oa_phil + TACwetcbc_oa_phob </field>
+        <field id="TACwetcbc_bc_phil" 	long_name="tendency_of_atmosphere_mass_content_of_hydrophilic_black_carbon_dry_aerosol_due_to_wet_deposition_below_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcbc_bc_phob" 	long_name="tendency_of_atmosphere_mass_content_of_hydrophobic_black_carbon_dry_aerosol_due_to_wet_deposition_below_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcbc_bc" 	long_name="tendency_of_atmosphere_mass_content_of_black_carbon_dry_aerosol_due_to_wet_deposition_below_cloud_in_convective_precipitation" unit="kg m-2 s-1" 
+               > TACwetcbc_bc_phil + TACwetcbc_bc_phob </field>
+        <field id="TACwetcbc_so4"	long_name="tendency_of_atmosphere_mass_content_of_sulfate_dry_aerosol_due_to_wet_deposition_below_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcbc_so2" 	long_name="tendency_of_atmosphere_mass_content_of_sulfur_dioxide_dry_aerosol_due_to_wet_deposition_below_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcbc_no3_bin1" 	long_name="tendency_of_atmosphere_mass_content_of_nitrate_bin1_dry_aerosol_due_to_wet_deposition_below_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcbc_no3_bin2" 	long_name="tendency_of_atmosphere_mass_content_of_nitrate_bin2_dry_aerosol_due_to_wet_deposition_below_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcbc_no3" 	long_name="tendency_of_atmosphere_mass_content_of_nitrate_dry_aerosol_due_to_wet_deposition_below_cloud_in_convective_precipitation" unit="kg m-2 s-1" 
+            > TACwetcbc_no3_bin1 + TACwetcbc_no3_bin2 </field>
+        <field id="TACwetcbc_smka"      long_name="tendency_of_atmosphere_mass_content_of_aged_smoke_dry_aerosol_due_to_wet_deposition_below_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcbc_smkf"      long_name="tendency_of_atmosphere_mass_content_of_fresh_smoke_dry_aerosol_due_to_wet_deposition_below_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcbc_smk"       long_name="tendency_of_atmosphere_mass_content_of_smoke_dry_aerosol_due_to_wet_deposition_below_cloud_in_convective_precipitation" unit="kg m-2 s-1" 
+            > TACwetcbc_smka + TACwetcbc_smkf </field>
+        <field id="TACwetcbc_nh4"       long_name="tendency_of_atmosphere_mass_content_of_ammonium_dry_aerosol_due_to_wet_deposition_below_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetcbc_nh3"       long_name="tendency_of_atmosphere_mass_content_of_ammoniac_dry_aerosol_due_to_wet_deposition_below_cloud_in_convective_precipitation" unit="kg m-2 s-1" />
+
+        <field id="TACwetlsin_ss_bin1"   long_name="tendency_of_atmosphere_mass_content_of_seasalt_bin1_dry_aerosol_due_to_wet_deposition_in_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsin_ss_bin2"   long_name="tendency_of_atmosphere_mass_content_of_seasalt_bin2_dry_aerosol_due_to_wet_deposition_in_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsin_ss_bin3"   long_name="tendency_of_atmosphere_mass_content_of_seasalt_bin3_dry_aerosol_due_to_wet_deposition_in_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsin_ss"        long_name="tendency_of_atmosphere_mass_content_of_seasalt_dry_aerosol_due_to_wet_deposition_in_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" 
+               > TACwetlsin_ss_bin1 + TACwetlsin_ss_bin2 + TACwetlsin_ss_bin3 </field>
+        <field id="TACwetlsin_dust_bin1" long_name="tendency_of_atmosphere_mass_content_of_dust_bin1_dry_aerosol_due_to_wet_deposition_in_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsin_dust_bin2" long_name="tendency_of_atmosphere_mass_content_of_dust_bin2_dry_aerosol_due_to_wet_deposition_in_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsin_dust_bin3" long_name="tendency_of_atmosphere_mass_content_of_dust_bin3_dry_aerosol_due_to_wet_deposition_in_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsin_dust_bin4" long_name="tendency_of_atmosphere_mass_content_of_dust_bin4_dry_aerosol_due_to_wet_deposition_in_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsin_dust_bin5" long_name="tendency_of_atmosphere_mass_content_of_dust_bin5_dry_aerosol_due_to_wet_deposition_in_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsin_dust_bin6" long_name="tendency_of_atmosphere_mass_content_of_dust_bin6_dry_aerosol_due_to_wet_deposition_in_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsin_dust" 	long_name="tendency_of_atmosphere_mass_content_of_dust_dry_aerosol_due_to_wet_deposition_in_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" /> 
+        <field id="TACwetlsin_oa_phil" 	long_name="tendency_of_atmosphere_mass_content_of_hydrophilic_particulate_organic_matter_dry_aerosol_due_to_wet_deposition_in_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsin_oa_phob" 	long_name="tendency_of_atmosphere_mass_content_of_hydrophobic_particulate_organic_matter_dry_aerosol_due_to_wet_deposition_in_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsin_oa" 	long_name="tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_due_to_wet_deposition_in_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" 
+               > TACwetlsin_oa_phil + TACwetlsin_oa_phob </field>
+        <field id="TACwetlsin_bc_phil" 	long_name="tendency_of_atmosphere_mass_content_of_hydrophilic_black_carbon_dry_aerosol_due_to_wet_deposition_in_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsin_bc_phob" 	long_name="tendency_of_atmosphere_mass_content_of_hydrophobic_black_carbon_dry_aerosol_due_to_wet_deposition_in_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsin_bc" 	long_name="tendency_of_atmosphere_mass_content_of_black_carbon_dry_aerosol_due_to_wet_deposition_in_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" 
+               > TACwetlsin_bc_phil + TACwetlsin_bc_phob </field>
+        <field id="TACwetlsin_so4" 	long_name="tendency_of_atmosphere_mass_content_of_sulfate_dry_aerosol_due_to_wet_deposition_in_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsin_so2" 	long_name="tendency_of_atmosphere_mass_content_of_sulfur_dioxide_dry_aerosol_due_to_wet_deposition_in_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsin_no3_bin1" long_name="tendency_of_atmosphere_mass_content_of_nitrate_bin1_dry_aerosol_due_to_wet_deposition_in_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsin_no3_bin2" long_name="tendency_of_atmosphere_mass_content_of_nitrate_bin2_dry_aerosol_due_to_wet_deposition_in_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsin_no3" 	long_name="tendency_of_atmosphere_mass_content_of_nitrate_dry_aerosol_due_to_wet_deposition_in_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" 
+            > TACwetlsin_no3_bin1 + TACwetlsin_no3_bin2 </field>
+        <field id="TACwetlsin_smka"     long_name="tendency_of_atmosphere_mass_content_of_aged_smoke_dry_aerosol_due_to_wet_deposition_in_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsin_smkf"     long_name="tendency_of_atmosphere_mass_content_of_fresh_smoke_dry_aerosol_due_to_wet_deposition_in_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsin_smk"      long_name="tendency_of_atmosphere_mass_content_of_smoke_dry_aerosol_due_to_wet_deposition_in_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" 
+            > TACwetlsin_smka + TACwetlsin_smkf </field>
+        <field id="TACwetlsin_nh4"      long_name="tendency_of_atmosphere_mass_content_of_ammonium_dry_aerosol_due_to_wet_deposition_in_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsin_nh3"      long_name="tendency_of_atmosphere_mass_content_of_ammoniac_dry_aerosol_due_to_wet_deposition_in_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+
+        <field id="TACwetlsbc_ss_bin1"   long_name="tendency_of_atmosphere_mass_content_of_seasalt_bin1_dry_aerosol_due_to_wet_deposition_below_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsbc_ss_bin2"   long_name="tendency_of_atmosphere_mass_content_of_seasalt_bin2_dry_aerosol_due_to_wet_deposition_below_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsbc_ss_bin3"   long_name="tendency_of_atmosphere_mass_content_of_seasalt_bin3_dry_aerosol_due_to_wet_deposition_below_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsbc_ss"        long_name="tendency_of_atmosphere_mass_content_of_seasalt_dry_aerosol_due_to_wet_deposition_below_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" 
+               > TACwetlsbc_ss_bin1 + TACwetlsbc_ss_bin2 + TACwetlsbc_ss_bin3 </field>
+        <field id="TACwetlsbc_dust_bin1" long_name="tendency_of_atmosphere_mass_content_of_dust_bin1_dry_aerosol_due_to_wet_deposition_below_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsbc_dust_bin2" long_name="tendency_of_atmosphere_mass_content_of_dust_bin2_dry_aerosol_due_to_wet_deposition_below_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsbc_dust_bin3" long_name="tendency_of_atmosphere_mass_content_of_dust_bin3_dry_aerosol_due_to_wet_deposition_below_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsbc_dust_bin4" long_name="tendency_of_atmosphere_mass_content_of_dust_bin4_dry_aerosol_due_to_wet_deposition_below_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsbc_dust_bin5" long_name="tendency_of_atmosphere_mass_content_of_dust_bin5_dry_aerosol_due_to_wet_deposition_below_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsbc_dust_bin6" long_name="tendency_of_atmosphere_mass_content_of_dust_bin6_dry_aerosol_due_to_wet_deposition_below_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsbc_dust" 	long_name="tendency_of_atmosphere_mass_content_of_dust_dry_aerosol_due_to_wet_deposition_below_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsbc_oa_phil" 	long_name="tendency_of_atmosphere_mass_content_of_hydrophilic_particulate_organic_matter_dry_aerosol_due_to_wet_deposition_below_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsbc_oa_phob" 	long_name="tendency_of_atmosphere_mass_content_of_hydrophobic_particulate_organic_matter_dry_aerosol_due_to_wet_deposition_below_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsbc_oa" 	long_name="tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_due_to_wet_deposition_below_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" 
+               > TACwetlsbc_oa_phil + TACwetlsbc_oa_phob </field>
+        <field id="TACwetlsbc_bc_phil" 	long_name="tendency_of_atmosphere_mass_content_of_hydrophilic_black_carbon_dry_aerosol_due_to_wet_deposition_below_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsbc_bc_phob" 	long_name="tendency_of_atmosphere_mass_content_of_hydrophobic_black_carbon_dry_aerosol_due_to_wet_deposition_below_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsbc_bc" 	long_name="tendency_of_atmosphere_mass_content_of_black_carbon_dry_aerosol_due_to_wet_deposition_below_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" 
+               > TACwetlsbc_bc_phil + TACwetlsbc_bc_phob </field>
+        <field id="TACwetlsbc_so4" 	long_name="tendency_of_atmosphere_mass_content_of_sulfate_dry_aerosol_due_to_wet_deposition_below_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsbc_so2" 	long_name="tendency_of_atmosphere_mass_content_of_sulfur_dioxide_dry_aerosol_due_to_wet_deposition_below_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsbc_no3_bin1" long_name="tendency_of_atmosphere_mass_content_of_nitrate_bin1_dry_aerosol_due_to_wet_deposition_below_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsbc_no3_bin2" long_name="tendency_of_atmosphere_mass_content_of_nitrate_bin2_dry_aerosol_due_to_wet_deposition_below_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsbc_no3" 	long_name="tendency_of_atmosphere_mass_content_of_nitrate_dry_aerosol_due_to_wet_deposition_below_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" 
+            > TACwetlsbc_no3_bin1 + TACwetlsbc_no3_bin2 </field>
+        <field id="TACwetlsbc_smka"     long_name="tendency_of_atmosphere_mass_content_of_aged_smoke_dry_aerosol_due_to_wet_deposition_below_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsbc_smkf"     long_name="tendency_of_atmosphere_mass_content_of_fresh_smoke_dry_aerosol_due_to_wet_deposition_below_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsbc_smk"      long_name="tendency_of_atmosphere_mass_content_of_smoke_dry_aerosol_due_to_wet_deposition_below_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" 
+            > TACwetlsbc_smka + TACwetlsbc_smkf </field>
+        <field id="TACwetlsbc_nh4"      long_name="tendency_of_atmosphere_mass_content_of_ammonium_dry_aerosol_due_to_wet_deposition_below_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+        <field id="TACwetlsbc_nh3"      long_name="tendency_of_atmosphere_mass_content_of_ammoniac_dry_aerosol_due_to_wet_deposition_below_cloud_in_large-scale_precipitation" unit="kg m-2 s-1" />
+
+        <field id="TACwetss" 		long_name="tendency_of_atmosphere_mass_content_of_seasalt_dry_aerosol_due_to_wet_deposition" unit="kg m-2 s-1"
+               > TACwetcin_ss + TACwetcbc_ss + TACwetlsin_ss + TACwetlsbc_ss </field> 
+        <field id="TACwetdust" 		long_name="tendency_of_atmosphere_mass_content_of_dust_dry_aerosol_due_to_wet_deposition" unit="kg m-2 s-1" />
+        <field id="TACwetoa" 		long_name="tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_due_to_wet_deposition" unit="kg m-2 s-1"
+               > TACwetcin_oa + TACwetcbc_oa + TACwetlsin_oa + TACwetlsbc_oa </field> 
+        <field id="TACwetbc" 		long_name="tendency_of_atmosphere_mass_content_of_black_carbon_dry_aerosol_due_to_wet_deposition" unit="kg m-2 s-1"
+               > TACwetcin_bc + TACwetcbc_bc + TACwetlsin_bc + TACwetlsbc_bc </field> 
+        <field id="TACwetso4" 		long_name="tendency_of_atmosphere_mass_content_of_sulfate_dry_aerosol_due_to_wet_deposition" unit="kg m-2 s-1"
+               > TACwetcin_so4 + TACwetcbc_so4 + TACwetlsin_so4 + TACwetlsbc_so4 </field> 
+        <field id="TACwetso2" 		long_name="tendency_of_atmosphere_mass_content_of_sulfur_dioxide_dry_aerosol_due_to_wet_deposition" unit="kg m-2 s-1"
+             > TACwetcin_so2 + TACwetcbc_so2 + TACwetlsin_so2 + TACwetlsbc_so2 </field>
+        <field id="TACwetno3" 		long_name="tendency_of_atmosphere_mass_content_of_nitrate_dry_aerosol_due_to_wet_deposition" unit="kg m-2 s-1"
+            > TACwetcin_no3 + TACwetcbc_no3 + TACwetlsin_no3 + TACwetlsbc_no3 </field> 
+        <field id="TACwetnh4" 		long_name="tendency_of_atmosphere_mass_content_of_ammonium_dry_aerosol_due_to_wet_deposition" unit="kg m-2 s-1"
+            > TACwetcin_nh4 + TACwetcbc_nh4 + TACwetlsin_nh4 + TACwetlsbc_nh4 </field> 
+        <field id="TACwetnh3" 		long_name="tendency_of_atmosphere_mass_content_of_ammoniac_dry_aerosol_due_to_wet_deposition" unit="kg m-2 s-1"
+            > TACwetcin_nh3 + TACwetcbc_nh3 + TACwetlsin_nh3 + TACwetlsbc_nh3 </field>
+        <field id="TACwetsmk"           long_name="tendency_of_atmosphere_mass_content_of_smoke_dry_aerosol_due_to_wet_deposition" unit="kg m-2 s-1"
+            > TACwetcin_smk + TACwetcbc_smk + TACwetlsin_smk + TACwetlsbc_smk </field> 
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- 3D ARPEGE fields : instantaneous sampling                                                                          -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~--> 
+    <field_group operation="instant" freq_op="1ts" >
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="aero_3D_instant_mlev_prog" grid_ref="FULL_klev" >
+	<field id="TACscat550ss_bin1"  long_name="scattering_coefficient_at_550nm_due_to_seasalt_bin1_ambient_aerosol" unit="m-1" />
+        <field id="TACscat550ss_bin2"  long_name="scattering_coefficient_at_550nm_due_to_seasalt_bin2_ambient_aerosol" unit="m-1" />
+        <field id="TACscat550ss_bin3"  long_name="scattering_coefficient_at_550nm_due_to_seasalt_bin3_ambient_aerosol" unit="m-1" />
+        <field id="TACscat550ss"       long_name="scattering_coefficient_at_550nm_due_to_seasalt_ambient_aerosol" unit="m-1" 
+               > TACscat550ss_bin1 + TACscat550ss_bin2 + TACscat550ss_bin3 </field>
+        <field id="TACscat550dust_bin1"  long_name="scattering_coefficient_at_550nm_due_to_dust_bin1_ambient_aerosol" unit="m-1" />
+        <field id="TACscat550dust_bin2"  long_name="scattering_coefficient_at_550nm_due_to_dust_bin2_ambient_aerosol" unit="m-1" />
+        <field id="TACscat550dust_bin3"  long_name="scattering_coefficient_at_550nm_due_to_dust_bin3_ambient_aerosol" unit="m-1" />
+        <field id="TACscat550dust_bin4"  long_name="scattering_coefficient_at_550nm_due_to_dust_bin4_ambient_aerosol" unit="m-1" />
+        <field id="TACscat550dust_bin5"  long_name="scattering_coefficient_at_550nm_due_to_dust_bin5_ambient_aerosol" unit="m-1" />
+        <field id="TACscat550dust_bin6"  long_name="scattering_coefficient_at_550nm_due_to_dust_bin6_ambient_aerosol" unit="m-1" />
+        <field id="TACscat550dust"       long_name="scattering_coefficient_at_550nm_due_to_dust_ambient_aerosol" unit="m-1" /> 
+        <field id="TACscat550oa_phil"    long_name="scattering_coefficient_at_550nm_due_to_hydrophilic_particulate_organic_matter_ambient_aerosol" unit="m-1" />
+        <field id="TACscat550oa_phob"    long_name="scattering_coefficient_at_550nm_due_to_hydrophobic_particulate_organic_matter_ambient_aerosol" unit="m-1" />
+        <field id="TACscat550oa"         long_name="scattering_coefficient_at_550nm_due_to_particulate_organic_matter_ambient_aerosol" unit="m-1" 
+               > TACscat550oa_phil + TACscat550oa_phob </field>
+        <field id="TACscat550bc_phil"    long_name="scattering_coefficient_at_550nm_due_to_hydrophilic_black_carbon_ambient_aerosol" unit="m-1" />
+        <field id="TACscat550bc_phob"    long_name="scattering_coefficient_at_550nm_due_to_hydrophobic_black_carbon_ambient_aerosol" unit="m-1" />
+        <field id="TACscat550bc"         long_name="scattering_coefficient_at_550nm_due_to_black_carbon_ambient_aerosol" unit="m-1" 
+               > TACscat550bc_phil + TACscat550bc_phob </field>
+        <field id="TACscat550so4"       long_name="scattering_coefficient_at_550nm_due_to_sulfate_ambient_aerosol" unit="m-1" />
+        <field id="TACscat550no3_bin1"  long_name="scattering_coefficient_at_550nm_due_to_nitrate_bin1_ambient_aerosol" unit="m-1" />
+        <field id="TACscat550no3_bin2"  long_name="scattering_coefficient_at_550nm_due_to_nitrate_bin2_ambient_aerosol" unit="m-1" />
+        <field id="TACscat550no3"       long_name="scattering_coefficient_at_550nm_due_to_nitrate_ambient_aerosol" unit="m-1" 
+            > TACscat550no3_bin1 + TACscat550no3_bin2 </field>
+        <field id="TACscat550smka"      long_name="scattering_coefficient_at_550nm_due_to_aged_smoke_ambient_aerosol" unit="m-1" />
+        <field id="TACscat550smkf"      long_name="scattering_coefficient_at_550nm_due_to_fresh_smoke_ambient_aerosol" unit="m-1" />
+        <field id="TACscat550smk"       long_name="scattering_coefficient_at_550nm_due_to_smoke_ambient_aerosol" unit="m-1" 
+            > TACscat550smka + TACscat550smkf </field>
+        <field id="TACscat550nh4"       long_name="scattering_coefficient_at_550nm_due_to_ammonium_ambient_aerosol" unit="m-1" />
+        <field id="TACscat550aer"       long_name="scattering_coefficient_at_550nm_due_to_ambient_aerosol" unit="m-1" /> 
+        
+        <field id="TACext550ss_bin1"    long_name="extinction_coefficient_at_550nm_due_to_seasalt_bin1_ambient_aerosol" unit="m-1" />
+        <field id="TACext550ss_bin2"    long_name="extinction_coefficient_at_550nm_due_to_seasalt_bin2_ambient_aerosol" unit="m-1" />
+        <field id="TACext550ss_bin3"    long_name="extinction_coefficient_at_550nm_due_to_seasalt_bin3_ambient_aerosol" unit="m-1" />
+        <field id="TACext550ss"         long_name="extinction_coefficient_at_550nm_due_to_seasalt_ambient_aerosol" unit="m-1" 
+               > TACext550ss_bin1 + TACext550ss_bin2 + TACext550ss_bin3 </field>
+        <field id="TACext550dust_bin1"  long_name="extinction_coefficient_at_550nm_due_to_dust_bin1_ambient_aerosol" unit="m-1" />
+        <field id="TACext550dust_bin2"  long_name="extinction_coefficient_at_550nm_due_to_dust_bin2_ambient_aerosol" unit="m-1" />
+        <field id="TACext550dust_bin3"  long_name="extinction_coefficient_at_550nm_due_to_dust_bin3_ambient_aerosol" unit="m-1" />
+        <field id="TACext550dust_bin4"  long_name="extinction_coefficient_at_550nm_due_to_dust_bin4_ambient_aerosol" unit="m-1" />
+        <field id="TACext550dust_bin5"  long_name="extinction_coefficient_at_550nm_due_to_dust_bin5_ambient_aerosol" unit="m-1" />
+        <field id="TACext550dust_bin6"  long_name="extinction_coefficient_at_550nm_due_to_dust_bin6_ambient_aerosol" unit="m-1" />
+        <field id="TACext550dust"       long_name="extinction_coefficient_at_550nm_due_to_dust_ambient_aerosol" unit="m-1" />
+        <field id="TACext550oa_phil"    long_name="extinction_coefficient_at_550nm_due_to_hydrophilic_particulate_organic_matter_ambient_aerosol" unit="m-1" />
+        <field id="TACext550oa_phob"    long_name="extinction_coefficient_at_550nm_due_to_hydrophobic_particulate_organic_matter_ambient_aerosol" unit="m-1" />
+        <field id="TACext550oa"         long_name="extinction_coefficient_at_550nm_due_to_particulate_organic_matter_ambient_aerosol" unit="m-1" 
+               > TACext550oa_phil + TACext550oa_phob </field>
+        <field id="TACext550bc_phil"    long_name="extinction_coefficient_at_550nm_due_to_hydrophilic_black_carbon_ambient_aerosol" unit="m-1" />
+        <field id="TACext550bc_phob"    long_name="extinction_coefficient_at_550nm_due_to_hydrophobic_black_carbon_ambient_aerosol" unit="m-1" />
+        <field id="TACext550bc"         long_name="extinction_coefficient_at_550nm_due_to_black_carbon_ambient_aerosol" unit="m-1" 
+               > TACext550bc_phil + TACext550bc_phob </field>
+        <field id="TACext550so4"        long_name="extinction_coefficient_at_550nm_due_to_sulfate_ambient_aerosol" unit="m-1" />
+        <field id="TACext550no3_bin1"   long_name="extinction_coefficient_at_550nm_due_to_nitrate_bin1_ambient_aerosol" unit="m-1" />
+        <field id="TACext550no3_bin2"   long_name="extinction_coefficient_at_550nm_due_to_nitrate_bin2_ambient_aerosol" unit="m-1" />
+        <field id="TACext550no3"        long_name="extinction_coefficient_at_550nm_due_to_nitrate_ambient_aerosol" unit="m-1" 
+            > TACext550no3_bin1 + TACext550no3_bin2 </field>
+        <field id="TACext550smka"       long_name="extinction_coefficient_at_550nm_due_to_aged_smoke_ambient_aerosol" unit="m-1" />
+        <field id="TACext550smkf"       long_name="extinction_coefficient_at_550nm_due_to_fresh_smoke_ambient_aerosol" unit="m-1" />
+        <field id="TACext550smk"        long_name="extinction_coefficient_at_550nm_due_to_smoke_ambient_aerosol" unit="m-1" 
+            > TACext550smka + TACext550smkf </field>
+        <field id="TACext550nh4"        long_name="extinction_coefficient_at_550nm_due_to_ammonium_ambient_aerosol" unit="m-1" />
+        <field id="TACext550aer"        long_name="extinction_coefficient_at_550nm_due_to_ambient_aerosol" unit="m-1" /> 
+        
+        <field id="TACmmrss_bin1"       long_name="mass_fraction_of_seasalt_bin1_dry_aerosol_in_air" unit="kg kg-1" />
+        <field id="TACmmrss_bin2"       long_name="mass_fraction_of_seasalt_bin2_dry_aerosol_in_air" unit="kg kg-1" />
+        <field id="TACmmrss_bin3"       long_name="mass_fraction_of_seasalt_bin3_dry_aerosol_in_air" unit="kg kg-1" />
+        <field id="TACmmrss"            long_name="mass_fraction_of_seasalt_dry_aerosol_in_air" unit="kg kg-1" 
+               > TACmmrss_bin1 + TACmmrss_bin2 + TACmmrss_bin3 </field>
+        <field id="TACmmrdust_bin1"     long_name="mass_fraction_of_dust_bin1_dry_aerosol_in_air" unit="kg kg-1" />
+        <field id="TACmmrdust_bin2"     long_name="mass_fraction_of_dust_bin2_dry_aerosol_in_air" unit="kg kg-1" />
+        <field id="TACmmrdust_bin3"     long_name="mass_fraction_of_dust_bin3_dry_aerosol_in_air" unit="kg kg-1" />
+        <field id="TACmmrdust_bin4"     long_name="mass_fraction_of_dust_bin4_dry_aerosol_in_air" unit="kg kg-1" />
+        <field id="TACmmrdust_bin5"     long_name="mass_fraction_of_dust_bin5_dry_aerosol_in_air" unit="kg kg-1" />
+        <field id="TACmmrdust_bin6"     long_name="mass_fraction_of_dust_bin6_dry_aerosol_in_air" unit="kg kg-1" />
+        <field id="TACmmrdust"          long_name="mass_fraction_of_dust_dry_aerosol_in_air" unit="kg kg-1" /> 
+        <field id="TACmmroa_phil"       long_name="mass_fraction_of_hydrophilic_particulate_organic_matter_dry_aerosol_in_air" unit="kg kg-1" />
+        <field id="TACmmroa_phob"       long_name="mass_fraction_of_hydrophobic_particulate_organic_matter_dry_aerosol_in_air" unit="kg kg-1" />
+        <field id="TACmmroa"            long_name="mass_fraction_of_particulate_organic_matter_dry_aerosol_in_air" unit="kg kg-1" 
+               > TACmmroa_phil + TACmmroa_phob </field>
+        <field id="TACmmrbc_phil"       long_name="mass_fraction_of_hydrophilic_black_carbon_dry_aerosol_in_air" unit="kg kg-1" />
+        <field id="TACmmrbc_phob"       long_name="mass_fraction_of_hydrophobic_black_carbon_dry_aerosol_in_air" unit="kg kg-1" />
+        <field id="TACmmrbc"            long_name="mass_fraction_of_black_carbon_dry_aerosol_in_air" unit="kg kg-1" 
+               > TACmmrbc_phil + TACmmrbc_phob </field>
+        <field id="TACmmrso4"           long_name="mass_fraction_of_sulfate_dry_aerosol_in_air" unit="kg kg-1" />
+        <field id="TACmmrso2"           long_name="mass_fraction_of_sulfur_dioxide_dry_aerosol_in_air" unit="kg kg-1" />
+        <field id="TACmmrso2mol"        long_name="mole_fraction_of_sulfur_dioxide_dry_aerosol_in_air" unit="mol mol-1" />
+        <field id="TACmmrpm1"           long_name="mass_fraction_of_pm1_dry_aerosol_particles_in_air" unit="kg kg-1" />
+        <field id="TACmmrno3_bin1"      long_name="mass_fraction_of_nitrate_bin1_dry_aerosol_in_air" unit="kg kg-1" />
+        <field id="TACmmrno3_bin2"      long_name="mass_fraction_of_nitrate_bin2_dry_aerosol_in_air" unit="kg kg-1" />
+        <field id="TACmmrno3"           long_name="mass_fraction_of_nitrate_dry_aerosol_in_air" unit="kg kg-1" 
+            > TACmmrno3_bin1 + TACmmrno3_bin2 </field>
+        <field id="TACmmrsmka"          long_name="mass_fraction_of_aged_smoke_dry_aerosol_in_air" unit="kg kg-1" />
+        <field id="TACmmrsmkf"          long_name="mass_fraction_of_fresh_smoke_dry_aerosol_in_air" unit="kg kg-1" />
+        <field id="TACmmrsmk"           long_name="mass_fraction_of_smoke_dry_aerosol_in_air" unit="kg kg-1" 
+            > TACmmrsmka + TACmmrsmkf </field>
+        <field id="TACmmrnh4"           long_name="mass_fraction_of_ammonium_dry_aerosol_in_air" unit="kg kg-1" />
+        <field id="TACmmrnh3"           long_name="mass_fraction_of_ammoniac_dry_aerosol_in_air" unit="kg kg-1" />
+        <field id="TACmmrhno3"          long_name="mass_fraction_of_nitric_acid_in_air" unit="kg kg-1" />
+        
+        <field id="TACconcss_bin1"      long_name="mass_concentration_of_seasalt_bin1_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACconcss_bin2"      long_name="mass_concentration_of_seasalt_bin2_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACconcss_bin3"      long_name="mass_concentration_of_seasalt_bin3_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACconcss"           long_name="mass_concentration_of_seasalt_dry_aerosol_in_air" unit="kg m-3" 
+               > TACconcss_bin1 + TACconcss_bin2 + TACconcss_bin3 </field>
+        <field id="TACconcdust_bin1"    long_name="mass_concentration_of_dust_bin1_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACconcdust_bin2"    long_name="mass_concentration_of_dust_bin2_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACconcdust_bin3"    long_name="mass_concentration_of_dust_bin3_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACconcdust_bin4"    long_name="mass_concentration_of_dust_bin4_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACconcdust_bin5"    long_name="mass_concentration_of_dust_bin5_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACconcdust_bin6"    long_name="mass_concentration_of_dust_bin6_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACconcdust"         long_name="mass_concentration_of_dust_dry_aerosol_in_air" unit="kg m-3" /> 
+        <field id="TACconcoa_phil"      long_name="mass_concentration_of_hydrophilic_particulate_organic_matter_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACconcoa_phob"      long_name="mass_concentration_of_hydrophobic_particulate_organic_matter_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACconcoa"           long_name="mass_concentration_of_particulate_organic_matter_dry_aerosol_in_air" unit="kg m-3" 
+               > TACconcoa_phil + TACconcoa_phob </field>
+        <field id="TACconcbc_phil"      long_name="mass_concentration_of_hydrophilic_black_carbon_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACconcbc_phob"      long_name="mass_concentration_of_hydrophobic_black_carbon_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACconcbc"           long_name="mass_concentration_of_black_carbon_dry_aerosol_in_air" unit="kg m-3" 
+               > TACconcbc_phil + TACconcbc_phob </field>
+        <field id="TACconcso4"          long_name="mass_concentration_of_sulfate_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACconcso2"          long_name="mass_concentration_of_sulfur_dioxide_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACconcno3_bin1"     long_name="mass_concentration_of_no3_bin1_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACconcno3_bin2"     long_name="mass_concentration_of_no3_bin2_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACconcno3"          long_name="mass_concentration_of_no3_dry_aerosol_in_air" unit="kg m-3" 
+            > TACconcno3_bin1 + TACconcno3_bin2 </field>
+        <field id="TACconcsmka"         long_name="mass_concentration_of_aged_smoke_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACconcsmkf"         long_name="mass_concentration_of_fresh_smoke_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACconcsmk"          long_name="mass_concentration_of_smoke_dry_aerosol_in_air" unit="kg m-3" 
+            > TACconcsmka + TACconcsmkf </field>
+        <field id="TACconcnh4"          long_name="mass_concentration_of_ammonium_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACconcnh3"          long_name="mass_concentration_of_ammoniac_dry_aerosol_in_air" unit="kg m-3" />
+        <field id="TACconchno3"         long_name="mass_concentration_of_nitric_acid_in_air" unit="kg kg-1" />
+
+         <field id="TACfrac_ox_H2O2"      long_name="fraction_of_total_sulfur_iv_oxidation_attributable_to_H2O2_in_aqueous_phase" unit="1" />
+         <field id="TACfrac_ox_O3"        long_name="fraction_of_total_sulfur_iv_oxidation_attributable_to_O3_in_aqueous_phase" unit="1" />
+         <field id="TACfrac_ox_OH"        long_name="fraction_of_total_sulfur_iv_oxidation_attributable_to_OH_in_gas_phase" unit="1" />
+         <field id="TACtot_ox_S_iv"       long_name="total_sulfur_iv_oxidation_tendency" unit="mol(S) m-3(air) s-1" />
+         <field id="TACoxidation_path_S"  long_name="oxidation_path_0_for_gas_only_1_for_gas_and_aqueous" unit="1" />
+         <field id="TACcloudy_fract"      long_name="cloudy_fration_within_the_grid_for_sulfur_scheme" unit="1" />
+         <field id="TAC_lwc_in_cld"       long_name="volume_fraction_of_water_within_the_cloudy_part_for_sulfur_scheme" unit="m3(water) m-3(air)" />
+         <field id="TACliq_frac_OH"       long_name="aqueous_fraction_of_OH_within_the_cloudy_part_for_sulfur_scheme" unit="1" />
+         <field id="TACliq_frac_SO2"      long_name="aqueous_fraction_of_SO2_within_the_cloudy_part_for_sulfur_scheme" unit="1" />
+         <field id="TACliq_frac_H2O2"     long_name="aqueous_fraction_of_H2O2_within_the_cloudy_part_for_sulfur_scheme" unit="1" />
+         <field id="TACliq_frac_O3"       long_name="aqueous_fraction_of_O3_within_the_cloudy_part_for_sulfur_scheme" unit="1" />
+         <field id="TACpqli"              long_name="specific_liquid_water_for_sulfur_scheme" unit="kg kg-1" />
+         <field id="TACptso2"             long_name="Tendency_of_sulfur_dioxyd_in_air" unit="kg kg-1 s-1" />
+         <field id="TACptso4"             long_name="tendency_of_sulfate_aerosol_in_air" unit="kg kg-1 s-1" />
+         <field id="TACleft_h2o2"         long_name="percentage_of_H2O2_left_after_oxidation" unit="1" />
+         <field id="TACleft_o3"           long_name="percentage_of_O3_left_after_oxidation" unit="1" />
+         <field id="TACleft_oh"           long_name="percentage_of_OH_left_after_oxidation" unit="1" />
+         <field id="TACpthno3"            long_name="tendency_of_nitric_acid_in_air" unit="kg kg-1 s-1" />
+         <field id="TACptnh3"             long_name="tendency_of_ammoniac_in_air" unit="kg kg-1 s-1" />
+         <field id="TACptno3_bin1"        long_name="tendency_of_nitrate_bin1_aerosol_in_air" unit="kg kg-1 s-1" />
+         <field id="TACptno3_bin2"        long_name="tendency_of_nitrate_bin2_aerosol_in_air" unit="kg kg-1 s-1" />
+         <field id="TACptnh4"             long_name="tendency_of_ammonium_aerosol_in_air" unit="kg kg-1 s-1" />
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="aero_3D_instant_mlev_radiation" grid_ref="FULL_klev" >
+        <field id="RADext1_band1"  long_name="extinction_0.18-0.25_due_to_sulfate_and_organic_aerosols" unit="m-1" />
+        <field id="RADext2_band1"  long_name="extinction_0.18-0.25_due_to_seasalt_aerosols" unit="m-1" />
+        <field id="RADext3_band1"  long_name="extinction_0.18-0.25_due_to_dust_aerosols" unit="m-1" />
+        <field id="RADext4_band1"  long_name="extinction_0.18-0.25_due_to_black_carbon_aerosols" unit="m-1" />
+        <field id="RADext5_band1"  long_name="extinction_0.18-0.25_due_to_background_volcanic_aerosols" unit="m-1" />
+        <field id="RADext6_band1"  long_name="extinction_0.18-0.25_due_to_background_stratospheric_aerosols" unit="m-1" />
+        <field id="RADext_band1"   long_name="extinction_0.18-0.25_due_to_all_aerosols" unit="m-1"
+               > RADext1_band1 + RADext2_band1 + RADext3_band1 + RADext4_band1 + RADext5_band1 + RADext6_band1 </field>
+
+        <field id="RADext1_band2"  long_name="extinction_0.25-0.44_due_to_sulfate_and_organic_aerosols" unit="m-1" />
+        <field id="RADext2_band2"  long_name="extinction_0.25-0.44_due_to_seasalt_aerosols" unit="m-1" />
+        <field id="RADext3_band2"  long_name="extinction_0.25-0.44_due_to_dust_aerosols" unit="m-1" />
+        <field id="RADext4_band2"  long_name="extinction_0.25-0.44_due_to_black_carbon_aerosols" unit="m-1" />
+        <field id="RADext5_band2"  long_name="extinction_0.25-0.44_due_to_background_volcanic_aerosols" unit="m-1" />
+        <field id="RADext6_band2"  long_name="extinction_0.25-0.44_due_to_background_stratospheric_aerosols" unit="m-1" />
+        <field id="RADext_band2"   long_name="extinction_0.25-0.44_due_to_all_aerosols" unit="m-1"
+               > RADext1_band2 + RADext2_band2 + RADext3_band2 + RADext4_band2 + RADext5_band2 + RADext6_band2 </field>
+
+        <field id="RADext1_band3"  long_name="extinction_0.44-0.69_due_to_sulfate_and_organic_aerosols" unit="m-1" />
+        <field id="RADext2_band3"  long_name="extinction_0.44-0.69_due_to_seasalt_aerosols" unit="m-1" />
+        <field id="RADext3_band3"  long_name="extinction_0.44-0.69_due_to_dust_aerosols" unit="m-1" />
+        <field id="RADext4_band3"  long_name="extinction_0.44-0.69_due_to_black_carbon_aerosols" unit="m-1" />
+        <field id="RADext5_band3"  long_name="extinction_0.44-0.69_due_to_background_volcanic_aerosols" unit="m-1" />
+        <field id="RADext6_band3"  long_name="extinction_0.44-0.69_due_to_background_stratospheric_aerosols" unit="m-1" />
+        <field id="RADext_band3"   long_name="extinction_0.44-0.69_due_to_all_aerosols" unit="m-1"
+               > RADext1_band3 + RADext2_band3 + RADext3_band3 + RADext4_band3 + RADext5_band3 + RADext6_band3 </field>
+
+        <field id="RADext1_band4"  long_name="extinction_0.69-1.19_due_to_sulfate_and_organic_aerosols" unit="m-1" />
+        <field id="RADext2_band4"  long_name="extinction_0.69-1.19_due_to_seasalt_aerosols" unit="m-1" />
+        <field id="RADext3_band4"  long_name="extinction_0.69-1.19_due_to_dust_aerosols" unit="m-1" />
+        <field id="RADext4_band4"  long_name="extinction_0.69-1.19_due_to_black_carbon_aerosols" unit="m-1" />
+        <field id="RADext5_band4"  long_name="extinction_0.69-1.19_due_to_background_volcanic_aerosols" unit="m-1" />
+        <field id="RADext6_band4"  long_name="extinction_0.69-1.19_due_to_background_stratospheric_aerosols" unit="m-1" />
+        <field id="RADext_band4"   long_name="extinction_0.69-1.19_due_to_all_aerosols" unit="m-1"
+               > RADext1_band4 + RADext2_band4 + RADext3_band4 + RADext4_band4 + RADext5_band4 + RADext6_band4 </field>
+
+        <field id="RADext1_band5"  long_name="extinction_1.19-2.38_due_to_sulfate_and_organic_aerosols" unit="m-1" />
+        <field id="RADext2_band5"  long_name="extinction_1.19-2.38_due_to_seasalt_aerosols" unit="m-1" />
+        <field id="RADext3_band5"  long_name="extinction_1.19-2.38_due_to_dust_aerosols" unit="m-1" />
+        <field id="RADext4_band5"  long_name="extinction_1.19-2.38_due_to_black_carbon_aerosols" unit="m-1" />
+        <field id="RADext5_band5"  long_name="extinction_1.19-2.38_due_to_background_volcanic_aerosols" unit="m-1" />
+        <field id="RADext6_band5"  long_name="extinction_1.19-2.38_due_to_background_stratospheric_aerosols" unit="m-1" />
+        <field id="RADext_band5"   long_name="extinction_1.19-2.38_due_to_all_aerosols" unit="m-1"
+               > RADext1_band5 + RADext2_band5 + RADext3_band5 + RADext4_band5 + RADext5_band5 + RADext6_band5 </field>
+
+        <field id="RADext1_band6"  long_name="extinction_2.38-4.0_due_to_sulfate_and_organic_aerosols" unit="m-1" />
+        <field id="RADext2_band6"  long_name="extinction_2.38-4.0_due_to_seasalt_aerosols" unit="m-1" />
+        <field id="RADext3_band6"  long_name="extinction_2.38-4.0_due_to_dust_aerosols" unit="m-1" />
+        <field id="RADext4_band6"  long_name="extinction_2.38-4.0_due_to_black_carbon_aerosols" unit="m-1" />
+        <field id="RADext5_band6"  long_name="extinction_2.38-4.0_due_to_background_volcanic_aerosols" unit="m-1" />
+        <field id="RADext6_band6"  long_name="extinction_2.38-4.0_due_to_background_stratospheric_aerosols" unit="m-1" />
+        <field id="RADext_band6"   long_name="extinction_2.38-4.0_due_to_all_aerosols" unit="m-1"
+               > RADext1_band6 + RADext2_band6 + RADext3_band6 + RADext4_band6 + RADext5_band6 + RADext6_band6 </field>
+
+        <field id="RADscat1_band1"  long_name="scattering_0.18-0.25_due_to_sulfate_and_organic_aerosols" unit="m-1" />
+        <field id="RADscat2_band1"  long_name="scattering_0.18-0.25_due_to_seasalt_aerosols" unit="m-1" />
+        <field id="RADscat3_band1"  long_name="scattering_0.18-0.25_due_to_dust_aerosols" unit="m-1" />
+        <field id="RADscat4_band1"  long_name="scattering_0.18-0.25_due_to_black_carbon_aerosols" unit="m-1" />
+        <field id="RADscat5_band1"  long_name="scattering_0.18-0.25_due_to_background_volcanic_aerosols" unit="m-1" />
+        <field id="RADscat6_band1"  long_name="scattering_0.18-0.25_due_to_background_stratospheric_aerosols" unit="m-1" />
+        <field id="RADscat_band1"   long_name="scattering_0.18-0.25_due_to_all_aerosols" unit="m-1"
+               > RADscat1_band1 + RADscat2_band1 + RADscat3_band1 + RADscat4_band1 + RADscat5_band1 + RADscat6_band1 </field>
+
+        <field id="RADscat1_band2"  long_name="scattering_0.25-0.44_due_to_sulfate_and_organic_aerosols" unit="m-1" />
+        <field id="RADscat2_band2"  long_name="scattering_0.25-0.44_due_to_seasalt_aerosols" unit="m-1" />
+        <field id="RADscat3_band2"  long_name="scattering_0.25-0.44_due_to_dust_aerosols" unit="m-1" />
+        <field id="RADscat4_band2"  long_name="scattering_0.25-0.44_due_to_black_carbon_aerosols" unit="m-1" />
+        <field id="RADscat5_band2"  long_name="scattering_0.25-0.44_due_to_background_volcanic_aerosols" unit="m-1" />
+        <field id="RADscat6_band2"  long_name="scattering_0.25-0.44_due_to_background_stratospheric_aerosols" unit="m-1" />
+        <field id="RADscat_band2"   long_name="scattering_0.25-0.44_due_to_all_aerosols" unit="m-1"
+               > RADscat1_band2 + RADscat2_band2 + RADscat3_band2 + RADscat4_band2 + RADscat5_band2 + RADscat6_band2 </field>
+
+        <field id="RADscat1_band3"  long_name="scattering_0.44-0.69_due_to_sulfate_and_organic_aerosols" unit="m-1" />
+        <field id="RADscat2_band3"  long_name="scattering_0.44-0.69_due_to_seasalt_aerosols" unit="m-1" />
+        <field id="RADscat3_band3"  long_name="scattering_0.44-0.69_due_to_dust_aerosols" unit="m-1" />
+        <field id="RADscat4_band3"  long_name="scattering_0.44-0.69_due_to_black_carbon_aerosols" unit="m-1" />
+        <field id="RADscat5_band3"  long_name="scattering_0.44-0.69_due_to_background_volcanic_aerosols" unit="m-1" />
+        <field id="RADscat6_band3"  long_name="scattering_0.44-0.69_due_to_background_stratospheric_aerosols" unit="m-1" />
+        <field id="RADscat_band3"   long_name="scattering_0.44-0.69_due_to_all_aerosols" unit="m-1"
+               > RADscat1_band3 + RADscat2_band3 + RADscat3_band3 + RADscat4_band3 + RADscat5_band3 + RADscat6_band3 </field>
+
+        <field id="RADscat1_band4"  long_name="scattering_0.69-1.19_due_to_sulfate_and_organic_aerosols" unit="m-1" />
+        <field id="RADscat2_band4"  long_name="scattering_0.69-1.19_due_to_seasalt_aerosols" unit="m-1" />
+        <field id="RADscat3_band4"  long_name="scattering_0.69-1.19_due_to_dust_aerosols" unit="m-1" />
+        <field id="RADscat4_band4"  long_name="scattering_0.69-1.19_due_to_black_carbon_aerosols" unit="m-1" />
+        <field id="RADscat5_band4"  long_name="scattering_0.69-1.19_due_to_background_volcanic_aerosols" unit="m-1" />
+        <field id="RADscat6_band4"  long_name="scattering_0.69-1.19_due_to_background_stratospheric_aerosols" unit="m-1" />
+        <field id="RADscat_band4"   long_name="scattering_0.69-1.19_due_to_all_aerosols" unit="m-1"
+               > RADscat1_band4 + RADscat2_band4 + RADscat3_band4 + RADscat4_band4 + RADscat5_band4 + RADscat6_band4 </field>
+
+        <field id="RADscat1_band5"  long_name="scattering_1.19-2.38_due_to_sulfate_and_organic_aerosols" unit="m-1" />
+        <field id="RADscat2_band5"  long_name="scattering_1.19-2.38_due_to_seasalt_aerosols" unit="m-1" />
+        <field id="RADscat3_band5"  long_name="scattering_1.19-2.38_due_to_dust_aerosols" unit="m-1" />
+        <field id="RADscat4_band5"  long_name="scattering_1.19-2.38_due_to_black_carbon_aerosols" unit="m-1" />
+        <field id="RADscat5_band5"  long_name="scattering_1.19-2.38_due_to_background_volcanic_aerosols" unit="m-1" />
+        <field id="RADscat6_band5"  long_name="scattering_1.19-2.38_due_to_background_stratospheric_aerosols" unit="m-1" />
+        <field id="RADscat_band5"   long_name="scattering_1.19-2.38_due_to_all_aerosols" unit="m-1"
+               > RADscat1_band5 + RADscat2_band5 + RADscat3_band5 + RADscat4_band5 + RADscat5_band5 + RADscat6_band5 </field>
+
+        <field id="RADscat1_band6"  long_name="scattering_2.38-4.0_due_to_sulfate_and_organic_aerosols" unit="m-1" />
+        <field id="RADscat2_band6"  long_name="scattering_2.38-4.0_due_to_seasalt_aerosols" unit="m-1" />
+        <field id="RADscat3_band6"  long_name="scattering_2.38-4.0_due_to_dust_aerosols" unit="m-1" />
+        <field id="RADscat4_band6"  long_name="scattering_2.38-4.0_due_to_black_carbon_aerosols" unit="m-1" />
+        <field id="RADscat5_band6"  long_name="scattering_2.38-4.0_due_to_background_volcanic_aerosols" unit="m-1" />
+        <field id="RADscat6_band6"  long_name="scattering_2.38-4.0_due_to_background_stratospheric_aerosols" unit="m-1" />
+        <field id="RADscat_band6"   long_name="scattering_2.38-4.0_due_to_all_aerosols" unit="m-1"
+               > RADscat1_band6 + RADscat2_band6 + RADscat3_band6 + RADscat4_band6 + RADscat5_band6 + RADscat6_band6 </field>
+
+        <field id="RADasy1_band1"  long_name="asymmetry_scattering_0.18-0.25_due_to_sulfate_and_organic_aerosols" unit="m-1" />
+        <field id="RADasy2_band1"  long_name="asymmetry_scattering_0.18-0.25_due_to_seasalt_aerosols" unit="m-1" />
+        <field id="RADasy3_band1"  long_name="asymmetry_scattering_0.18-0.25_due_to_dust_aerosols" unit="m-1" />
+        <field id="RADasy4_band1"  long_name="asymmetry_scattering_0.18-0.25_due_to_black_carbon_aerosols" unit="m-1" />
+        <field id="RADasy5_band1"  long_name="asymmetry_scattering_0.18-0.25_due_to_background_volcanic_aerosols" unit="m-1" />
+        <field id="RADasy6_band1"  long_name="asymmetry_scattering_0.18-0.25_due_to_background_stratospheric_aerosols" unit="m-1" />
+        <field id="RADasy_band1"   long_name="asymmetry_scattering_0.18-0.25_due_to_all_aerosols" unit="m-1"
+               > RADasy1_band1 + RADasy2_band1 + RADasy3_band1 + RADasy4_band1 + RADasy5_band1 + RADasy6_band1 </field>
+
+        <field id="RADasy1_band2"  long_name="asymmetry_scattering_0.25-0.44_due_to_sulfate_and_organic_aerosols" unit="m-1" />
+        <field id="RADasy2_band2"  long_name="asymmetry_scattering_0.25-0.44_due_to_seasalt_aerosols" unit="m-1" />
+        <field id="RADasy3_band2"  long_name="asymmetry_scattering_0.25-0.44_due_to_dust_aerosols" unit="m-1" />
+        <field id="RADasy4_band2"  long_name="asymmetry_scattering_0.25-0.44_due_to_black_carbon_aerosols" unit="m-1" />
+        <field id="RADasy5_band2"  long_name="asymmetry_scattering_0.25-0.44_due_to_background_volcanic_aerosols" unit="m-1" />
+        <field id="RADasy6_band2"  long_name="asymmetry_scattering_0.25-0.44_due_to_background_stratospheric_aerosols" unit="m-1" />
+        <field id="RADasy_band2"   long_name="asymmetry_scattering_0.25-0.44_due_to_all_aerosols" unit="m-1"
+               > RADasy1_band2 + RADasy2_band2 + RADasy3_band2 + RADasy4_band2 + RADasy5_band2 + RADasy6_band2 </field>
+
+        <field id="RADasy1_band3"  long_name="asymmetry_scattering_0.44-0.69_due_to_sulfate_and_organic_aerosols" unit="m-1" />
+        <field id="RADasy2_band3"  long_name="asymmetry_scattering_0.44-0.69_due_to_seasalt_aerosols" unit="m-1" />
+        <field id="RADasy3_band3"  long_name="asymmetry_scattering_0.44-0.69_due_to_dust_aerosols" unit="m-1" />
+        <field id="RADasy4_band3"  long_name="asymmetry_scattering_0.44-0.69_due_to_black_carbon_aerosols" unit="m-1" />
+        <field id="RADasy5_band3"  long_name="asymmetry_scattering_0.44-0.69_due_to_background_volcanic_aerosols" unit="m-1" />
+        <field id="RADasy6_band3"  long_name="asymmetry_scattering_0.44-0.69_due_to_background_stratospheric_aerosols" unit="m-1" />
+        <field id="RADasy_band3"   long_name="asymmetry_scattering_0.44-0.69_due_to_all_aerosols" unit="m-1"
+               > RADasy1_band3 + RADasy2_band3 + RADasy3_band3 + RADasy4_band3 + RADasy5_band3 + RADasy6_band3 </field>
+
+        <field id="RADasy1_band4"  long_name="asymmetry_scattering_0.69-1.19_due_to_sulfate_and_organic_aerosols" unit="m-1" />
+        <field id="RADasy2_band4"  long_name="asymmetry_scattering_0.69-1.19_due_to_seasalt_aerosols" unit="m-1" />
+        <field id="RADasy3_band4"  long_name="asymmetry_scattering_0.69-1.19_due_to_dust_aerosols" unit="m-1" />
+        <field id="RADasy4_band4"  long_name="asymmetry_scattering_0.69-1.19_due_to_black_carbon_aerosols" unit="m-1" />
+        <field id="RADasy5_band4"  long_name="asymmetry_scattering_0.69-1.19_due_to_background_volcanic_aerosols" unit="m-1" />
+        <field id="RADasy6_band4"  long_name="asymmetry_scattering_0.69-1.19_due_to_background_stratospheric_aerosols" unit="m-1" />
+        <field id="RADasy_band4"   long_name="asymmetry_scattering_0.69-1.19_due_to_all_aerosols" unit="m-1"
+               > RADasy1_band4 + RADasy2_band4 + RADasy3_band4 + RADasy4_band4 + RADasy5_band4 + RADasy6_band4 </field>
+
+        <field id="RADasy1_band5"  long_name="asymmetry_scattering_1.19-2.38_due_to_sulfate_and_organic_aerosols" unit="m-1" />
+        <field id="RADasy2_band5"  long_name="asymmetry_scattering_1.19-2.38_due_to_seasalt_aerosols" unit="m-1" />
+        <field id="RADasy3_band5"  long_name="asymmetry_scattering_1.19-2.38_due_to_dust_aerosols" unit="m-1" />
+        <field id="RADasy4_band5"  long_name="asymmetry_scattering_1.19-2.38_due_to_black_carbon_aerosols" unit="m-1" />
+        <field id="RADasy5_band5"  long_name="asymmetry_scattering_1.19-2.38_due_to_background_volcanic_aerosols" unit="m-1" />
+        <field id="RADasy6_band5"  long_name="asymmetry_scattering_1.19-2.38_due_to_background_stratospheric_aerosols" unit="m-1" />
+        <field id="RADasy_band5"   long_name="asymmetry_scattering_1.19-2.38_due_to_all_aerosols" unit="m-1"
+               > RADasy1_band5 + RADasy2_band5 + RADasy3_band5 + RADasy4_band5 + RADasy5_band5 + RADasy6_band5 </field>
+
+        <field id="RADasy1_band6"  long_name="asymmetry_scattering_2.38-4.0_due_to_sulfate_and_organic_aerosols" unit="m-1" />
+        <field id="RADasy2_band6"  long_name="asymmetry_scattering_2.38-4.0_due_to_seasalt_aerosols" unit="m-1" />
+        <field id="RADasy3_band6"  long_name="asymmetry_scattering_2.38-4.0_due_to_dust_aerosols" unit="m-1" />
+        <field id="RADasy4_band6"  long_name="asymmetry_scattering_2.38-4.0_due_to_black_carbon_aerosols" unit="m-1" />
+        <field id="RADasy5_band6"  long_name="asymmetry_scattering_2.38-4.0_due_to_background_volcanic_aerosols" unit="m-1" />
+        <field id="RADasy6_band6"  long_name="asymmetry_scattering_2.38-4.0_due_to_background_stratospheric_aerosols" unit="m-1" />
+        <field id="RADasy_band6"   long_name="asymmetry_scattering_2.38-4.0_due_to_all_aerosols" unit="m-1"
+               > RADasy1_band6 + RADasy2_band6 + RADasy3_band6 + RADasy4_band6 + RADasy5_band6 + RADasy6_band6 </field>
+        
+        <field id="RADssa3D_band1"  long_name="single_scattering_albedo_0.18-0.25_due_to_sulfate_and_organic_aerosols" unit="1" 
+               > RADscat_band1 / RADext_band1  </field>
+        <field id="RADssa3D_band2"  long_name="single_scattering_albedo_0.25-0.44_due_to_seasalt_aerosols" unit="1" 
+               > RADscat_band2 / RADext_band2  </field>
+        <field id="RADssa3D_band3"  long_name="single_scattering_albedo_0.44-0.69_due_to_dust_aerosols" unit="1" 
+               > RADscat_band3 / RADext_band3  </field>
+        <field id="RADssa3D_band4"  long_name="single_scattering_albedo_0.69-1.19_due_to_black_carbon_aerosols" unit="1" 
+               > RADscat_band4 / RADext_band4  </field>
+        <field id="RADssa3D_band5"  long_name="single_scattering_albedo_1.19-2.38_due_to_background_volcanic_aerosols" unit="1" 
+               > RADscat_band5 / RADext_band5  </field>
+        <field id="RADssa3D_band6"  long_name="single_scattering_albedo_2.38-4.0_due_to_background_stratospheric_aerosols" unit="1" 
+               > RADscat_band6 / RADext_band6  </field>
+        
+        <field id="RADg3D_band1"  long_name="asymmetry_parameter_0.18-0.25_due_to_sulfate_and_organic_aerosols" unit="1" 
+               > RADasy_band1 / RADscat_band1  </field>
+        <field id="RADg3D_band2"  long_name="asymmetry_parameter_0.25-0.44_due_to_seasalt_aerosols" unit="1" 
+               > RADasy_band2 / RADscat_band2  </field>
+        <field id="RADg3D_band3"  long_name="asymmetry_parameter_0.44-0.69_due_to_dust_aerosols" unit="1" 
+               > RADasy_band3 / RADscat_band3  </field>
+        <field id="RADg3D_band4"  long_name="asymmetry_parameter_0.69-1.19_due_to_black_carbon_aerosols" unit="1" 
+               > RADasy_band4 / RADscat_band4  </field>
+        <field id="RADg3D_band5"  long_name="asymmetry_parameter_1.19-2.38_due_to_background_volcanic_aerosols" unit="1" 
+               > RADasy_band5 / RADscat_band5  </field>
+        <field id="RADg3D_band6"  long_name="asymmetry_parameter_2.38-4.0_due_to_background_stratospheric_aerosols" unit="1" 
+             > RADasy_band6 / RADscat_band6  </field>    
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="aero_3D_instant_plev_prog" grid_ref="FULL_pstd" >
+	<field id="TACscat550ss_bin1_p"   field_ref="TACscat550ss_bin1" />
+        <field id="TACscat550ss_bin2_p"   field_ref="TACscat550ss_bin2" />
+        <field id="TACscat550ss_bin3_p"   field_ref="TACscat550ss_bin3" />
+        <field id="TACscat550ss_p"        field_ref="TACscat550ss"     />
+        <field id="TACscat550dust_bin1_p" field_ref="TACscat550dust_bin1"/>
+        <field id="TACscat550dust_bin2_p" field_ref="TACscat550dust_bin2"/>
+        <field id="TACscat550dust_bin3_p" field_ref="TACscat550dust_bin3"/>
+        <field id="TACscat550dust_bin4_p" field_ref="TACscat550dust_bin4"/>
+        <field id="TACscat550dust_bin5_p" field_ref="TACscat550dust_bin5"/>
+        <field id="TACscat550dust_bin6_p" field_ref="TACscat550dust_bin6"/>
+        <field id="TACscat550dust_p"      field_ref="TACscat550dust" /> 
+        <field id="TACscat550oa_phil_p"   field_ref="TACscat550oa_phil"/>  
+        <field id="TACscat550oa_phob_p"   field_ref="TACscat550oa_phob"/> 
+        <field id="TACscat550oa_p"        field_ref="TACscat550oa"/>
+        <field id="TACscat550bc_phil_p"   field_ref="TACscat550bc_phil"/> 
+        <field id="TACscat550bc_phob_p"   field_ref="TACscat550bc_phob"/> 
+        <field id="TACscat550bc_p"        field_ref="TACscat550bc"/>
+        <field id="TACscat550so4_p"       field_ref="TACscat550so4"/>
+        <field id="TACscat550no3_bin1_p"  field_ref="TACscat550no3_bin1"/>
+        <field id="TACscat550no3_bin2_p"  field_ref="TACscat550no3_bin2"/>
+        <field id="TACscat550no3_p"       field_ref="TACscat550no3" /> 
+        <field id="TACscat550nh4_p"       field_ref="TACscat550nh4"/>
+        <field id="TACscat550smka_p"      field_ref="TACscat550smka"/>
+        <field id="TACscat550smkf_p"      field_ref="TACscat550smkf"/>
+        <field id="TACscat550smk_p"       field_ref="TACscat550smk" /> 
+        <field id="TACscat550aer_p"       field_ref="TACscat550aer"/>
+        
+        <field id="TACext550ss_bin1_p"    field_ref="TACext550ss_bin1" />
+        <field id="TACext550ss_bin2_p"    field_ref="TACext550ss_bin2" />
+        <field id="TACext550ss_bin3_p"    field_ref="TACext550ss_bin3" />
+        <field id="TACext550ss_p"         field_ref="TACext550ss"     />
+        <field id="TACext550dust_bin1_p"  field_ref="TACext550dust_bin1"/>
+        <field id="TACext550dust_bin2_p"  field_ref="TACext550dust_bin2"/>
+        <field id="TACext550dust_bin3_p"  field_ref="TACext550dust_bin3"/>
+        <field id="TACext550dust_bin4_p"  field_ref="TACext550dust_bin4"/>
+        <field id="TACext550dust_bin5_p"  field_ref="TACext550dust_bin5"/>
+        <field id="TACext550dust_bin6_p"  field_ref="TACext550dust_bin6"/>
+        <field id="TACext550dust_p"       field_ref="TACext550dust" /> 
+        <field id="TACext550oa_phil_p"    field_ref="TACext550oa_phil"/>  
+        <field id="TACext550oa_phob_p"    field_ref="TACext550oa_phob"/> 
+        <field id="TACext550oa_p"         field_ref="TACext550oa"/>
+        <field id="TACext550bc_phil_p"    field_ref="TACext550bc_phil"/> 
+        <field id="TACext550bc_phob_p"    field_ref="TACext550bc_phob"/> 
+        <field id="TACext550bc_p"         field_ref="TACext550bc"/>
+        <field id="TACext550so4_p"        field_ref="TACext550so4"/>
+        <field id="TACext550no3_bin1_p"   field_ref="TACext550no3_bin1"/>
+        <field id="TACext550no3_bin2_p"   field_ref="TACext550no3_bin2"/>
+        <field id="TACext550no3_p"        field_ref="TACext550no3" /> 
+        <field id="TACext550nh4_p"        field_ref="TACext550nh4"/>
+        <field id="TACext550smka_p"       field_ref="TACext550smka"/>
+        <field id="TACext550smkf_p"       field_ref="TACext550smkf"/>
+        <field id="TACext550smk_p"        field_ref="TACext550smk" /> 
+        <field id="TACext550aer_p"        field_ref="TACext550aer"/>
+        
+        <field id="TACmmrss_bin1_p"       field_ref="TACmmrss_bin1" />
+        <field id="TACmmrss_bin2_p"       field_ref="TACmmrss_bin2" />
+        <field id="TACmmrss_bin3_p"       field_ref="TACmmrss_bin3" />
+        <field id="TACmmrss_p"            field_ref="TACmmrss"     />
+        <field id="TACmmrdust_bin1_p"     field_ref="TACmmrdust_bin1"/>
+        <field id="TACmmrdust_bin2_p"     field_ref="TACmmrdust_bin2"/>
+        <field id="TACmmrdust_bin3_p"     field_ref="TACmmrdust_bin3"/>
+        <field id="TACmmrdust_bin4_p"     field_ref="TACmmrdust_bin4"/>
+        <field id="TACmmrdust_bin5_p"     field_ref="TACmmrdust_bin5"/>
+        <field id="TACmmrdust_bin6_p"     field_ref="TACmmrdust_bin6"/>
+        <field id="TACmmrdust_p"          field_ref="TACmmrdust" /> 
+        <field id="TACmmroa_phil_p"       field_ref="TACmmroa_phil"/>  
+        <field id="TACmmroa_phob_p"       field_ref="TACmmroa_phob"/> 
+        <field id="TACmmroa_p"            field_ref="TACmmroa"/>
+        <field id="TACmmrbc_phil_p"       field_ref="TACmmrbc_phil"/> 
+        <field id="TACmmrbc_phob_p"       field_ref="TACmmrbc_phob"/> 
+        <field id="TACmmrbc_p"            field_ref="TACmmrbc"/>
+        <field id="TACmmrso4_p"           field_ref="TACmmrso4"/>
+        <field id="TACmmrso2_p"           field_ref="TACmmrso2"/>
+        <field id="TACmmrso2mol_p"        field_ref="TACmmrso2mol"/>
+        <field id="TACmmrpm1_p"           field_ref="TACmmrpm1"   />
+        <field id="TACmmrno3_bin1_p"      field_ref="TACmmrno3_bin1"/>
+        <field id="TACmmrno3_bin2_p"      field_ref="TACmmrno3_bin2"/>
+        <field id="TACmmrno3_p"           field_ref="TACmmrno3" /> 
+        <field id="TACmmrnh4_p"           field_ref="TACmmrnh4"/>
+        <field id="TACmmrnh3_p"           field_ref="TACmmrnh3"/>
+        <field id="TACmmrhno3_p"          field_ref="TACmmrhno3"/>
+        <field id="TACmmrsmka_p"          field_ref="TACmmrsmka"/>
+        <field id="TACmmrsmkf_p"          field_ref="TACmmrsmkf"/>
+        <field id="TACmmrsmk_p"           field_ref="TACmmrsmk" /> 
+        
+        <field id="TACconcss_bin1_p"      field_ref="TACconcss_bin1" />
+        <field id="TACconcss_bin2_p"      field_ref="TACconcss_bin2" />
+        <field id="TACconcss_bin3_p"      field_ref="TACconcss_bin3" />
+        <field id="TACconcss_p"           field_ref="TACconcss"     />
+        <field id="TACconcdust_bin1_p"    field_ref="TACconcdust_bin1"/>
+        <field id="TACconcdust_bin2_p"    field_ref="TACconcdust_bin2"/>
+        <field id="TACconcdust_bin3_p"    field_ref="TACconcdust_bin3"/>
+        <field id="TACconcdust_bin4_p"    field_ref="TACconcdust_bin4"/>
+        <field id="TACconcdust_bin5_p"    field_ref="TACconcdust_bin5"/>
+        <field id="TACconcdust_bin6_p"    field_ref="TACconcdust_bin6"/>
+        <field id="TACconcdust_p"         field_ref="TACconcdust" /> 
+        <field id="TACconcoa_phil_p"      field_ref="TACconcoa_phil"/>  
+        <field id="TACconcoa_phob_p"      field_ref="TACconcoa_phob"/> 
+        <field id="TACconcoa_p"           field_ref="TACconcoa"/>
+        <field id="TACconcbc_phil_p"      field_ref="TACconcbc_phil"/> 
+        <field id="TACconcbc_phob_p"      field_ref="TACconcbc_phob"/> 
+        <field id="TACconcbc_p"           field_ref="TACconcbc"/>
+        <field id="TACconcso4_p"          field_ref="TACconcso4"/>
+        <field id="TACconcso2_p"          field_ref="TACconcso2"/>
+        <field id="TACconcno3_bin1_p"     field_ref="TACconcno3_bin1"/>
+        <field id="TACconcno3_bin2_p"     field_ref="TACconcno3_bin2"/>
+        <field id="TACconcno3_p"          field_ref="TACconcno3" /> 
+        <field id="TACconcnh4_p"          field_ref="TACconcnh4"/> 
+        <field id="TACconcnh3_p"          field_ref="TACconcnh3"/>
+        <field id="TACconchno3_p"         field_ref="TACconchno3"/> 
+        <field id="TACconcsmka_p"         field_ref="TACconcsmka"/>
+        <field id="TACconcsmkf_p"         field_ref="TACconcsmkf"/>
+        <field id="TACconcsmk_p"          field_ref="TACconcsmk" /> 
+        <field id="TACpthno3_p"           field_ref="TACpthno3"/>
+        <field id="TACptnh3_p"            field_ref="TACptnh3"/>
+        <field id="TACptno3_bin1_p"       field_ref="TACptno3_bin1"/>
+        <field id="TACptno3_bin2_p"       field_ref="TACptno3_bin2"/>
+        <field id="TACptnh4_p"            field_ref="TACptnh4"/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="aero_3D_instant_plev_rad" grid_ref="FULL_pstd" >
+        <field id="RADext1_band1_p"  field_ref="RADext1_band1" />   
+        <field id="RADext2_band1_p"  field_ref="RADext2_band1" />
+        <field id="RADext3_band1_p"  field_ref="RADext3_band1" />
+        <field id="RADext4_band1_p"  field_ref="RADext4_band1" />
+        <field id="RADext5_band1_p"  field_ref="RADext5_band1" />
+        <field id="RADext6_band1_p"  field_ref="RADext6_band1" />
+        <field id="RADext_band1_p"   field_ref="RADext_band1"  />
+                                   
+        <field id="RADext1_band2_p"  field_ref="RADext1_band2" />
+        <field id="RADext2_band2_p"  field_ref="RADext2_band2" />
+        <field id="RADext3_band2_p"  field_ref="RADext3_band2" />
+        <field id="RADext4_band2_p"  field_ref="RADext4_band2" />
+        <field id="RADext5_band2_p"  field_ref="RADext5_band2" />
+        <field id="RADext6_band2_p"  field_ref="RADext6_band2" />
+        <field id="RADext_band2_p"   field_ref="RADext_band2"  />
+                                   
+        <field id="RADext1_band3_p"  field_ref="RADext1_band3" />
+        <field id="RADext2_band3_p"  field_ref="RADext2_band3" />
+        <field id="RADext3_band3_p"  field_ref="RADext3_band3" />
+        <field id="RADext4_band3_p"  field_ref="RADext4_band3" />
+        <field id="RADext5_band3_p"  field_ref="RADext5_band3" />
+        <field id="RADext6_band3_p"  field_ref="RADext6_band3" />
+        <field id="RADext_band3_p"   field_ref="RADext_band3"  />
+                                   
+        <field id="RADext1_band4_p"  field_ref="RADext1_band4" />
+        <field id="RADext2_band4_p"  field_ref="RADext2_band4" />
+        <field id="RADext3_band4_p"  field_ref="RADext3_band4" />
+        <field id="RADext4_band4_p"  field_ref="RADext4_band4" />
+        <field id="RADext5_band4_p"  field_ref="RADext5_band4" />
+        <field id="RADext6_band4_p"  field_ref="RADext6_band4" />
+        <field id="RADext_band4_p"   field_ref="RADext_band4"  />
+                                   
+        <field id="RADext1_band5_p"  field_ref="RADext1_band5" />
+        <field id="RADext2_band5_p"  field_ref="RADext2_band5" />
+        <field id="RADext3_band5_p"  field_ref="RADext3_band5" />
+        <field id="RADext4_band5_p"  field_ref="RADext4_band5" />
+        <field id="RADext5_band5_p"  field_ref="RADext5_band5" />
+        <field id="RADext6_band5_p"  field_ref="RADext6_band5" />
+        <field id="RADext_band5_p"   field_ref="RADext_band5"  />
+                                   
+        <field id="RADext1_band6_p"  field_ref="RADext1_band6" />
+        <field id="RADext2_band6_p"  field_ref="RADext2_band6" />
+        <field id="RADext3_band6_p"  field_ref="RADext3_band6" />
+        <field id="RADext4_band6_p"  field_ref="RADext4_band6" />
+        <field id="RADext5_band6_p"  field_ref="RADext5_band6" />
+        <field id="RADext6_band6_p"  field_ref="RADext6_band6" />
+        <field id="RADext_band6_p"   field_ref="RADext_band6"  />
+                                   
+        <field id="RADscat1_band1_p" field_ref="RADscat1_band1"/>
+        <field id="RADscat2_band1_p" field_ref="RADscat2_band1"/>
+        <field id="RADscat3_band1_p" field_ref="RADscat3_band1"/>
+        <field id="RADscat4_band1_p" field_ref="RADscat4_band1"/>
+        <field id="RADscat5_band1_p" field_ref="RADscat5_band1"/>
+        <field id="RADscat6_band1_p" field_ref="RADscat6_band1"/>
+        <field id="RADscat_band1_p"  field_ref="RADscat_band1" />
+                                   
+        <field id="RADscat1_band2_p" field_ref="RADscat1_band2"/>
+        <field id="RADscat2_band2_p" field_ref="RADscat2_band2"/>
+        <field id="RADscat3_band2_p" field_ref="RADscat3_band2"/>
+        <field id="RADscat4_band2_p" field_ref="RADscat4_band2"/>
+        <field id="RADscat5_band2_p" field_ref="RADscat5_band2"/>
+        <field id="RADscat6_band2_p" field_ref="RADscat6_band2"/>
+        <field id="RADscat_band2_p"  field_ref="RADscat_band2" />
+                                   
+        <field id="RADscat1_band3_p" field_ref="RADscat1_band3"/>
+        <field id="RADscat2_band3_p" field_ref="RADscat2_band3"/>
+        <field id="RADscat3_band3_p" field_ref="RADscat3_band3"/>
+        <field id="RADscat4_band3_p" field_ref="RADscat4_band3"/>
+        <field id="RADscat5_band3_p" field_ref="RADscat5_band3"/>
+        <field id="RADscat6_band3_p" field_ref="RADscat6_band3"/>
+        <field id="RADscat_band3_p"  field_ref="RADscat_band3" />
+                                   
+        <field id="RADscat1_band4_p" field_ref="RADscat1_band4"/>
+        <field id="RADscat2_band4_p" field_ref="RADscat2_band4"/>
+        <field id="RADscat3_band4_p" field_ref="RADscat3_band4"/>
+        <field id="RADscat4_band4_p" field_ref="RADscat4_band4"/>
+        <field id="RADscat5_band4_p" field_ref="RADscat5_band4"/>
+        <field id="RADscat6_band4_p" field_ref="RADscat6_band4"/>
+        <field id="RADscat_band4_p"  field_ref="RADscat_band4" />
+                                   
+        <field id="RADscat1_band5_p" field_ref="RADscat1_band5"/>
+        <field id="RADscat2_band5_p" field_ref="RADscat2_band5"/>
+        <field id="RADscat3_band5_p" field_ref="RADscat3_band5"/>
+        <field id="RADscat4_band5_p" field_ref="RADscat4_band5"/>
+        <field id="RADscat5_band5_p" field_ref="RADscat5_band5"/>
+        <field id="RADscat6_band5_p" field_ref="RADscat6_band5"/>
+        <field id="RADscat_band5_p"  field_ref="RADscat_band5" />
+                                   
+        <field id="RADscat1_band6_p" field_ref="RADscat1_band6"/>
+        <field id="RADscat2_band6_p" field_ref="RADscat2_band6"/>
+        <field id="RADscat3_band6_p" field_ref="RADscat3_band6"/>
+        <field id="RADscat4_band6_p" field_ref="RADscat4_band6"/>
+        <field id="RADscat5_band6_p" field_ref="RADscat5_band6"/>
+        <field id="RADscat6_band6_p" field_ref="RADscat6_band6"/>
+        <field id="RADscat_band6_p"  field_ref="RADscat_band6" />
+                                   
+        <field id="RADasy1_band1_p"  field_ref="RADasy1_band1" />
+        <field id="RADasy2_band1_p"  field_ref="RADasy2_band1" />
+        <field id="RADasy3_band1_p"  field_ref="RADasy3_band1" />
+        <field id="RADasy4_band1_p"  field_ref="RADasy4_band1" />
+        <field id="RADasy5_band1_p"  field_ref="RADasy5_band1" />
+        <field id="RADasy6_band1_p"  field_ref="RADasy6_band1" />
+        <field id="RADasy_band1_p"   field_ref="RADasy_band1"  />
+                                   
+        <field id="RADasy1_band2_p"  field_ref="RADasy1_band2" />
+        <field id="RADasy2_band2_p"  field_ref="RADasy2_band2" />
+        <field id="RADasy3_band2_p"  field_ref="RADasy3_band2" />
+        <field id="RADasy4_band2_p"  field_ref="RADasy4_band2" />
+        <field id="RADasy5_band2_p"  field_ref="RADasy5_band2" />
+        <field id="RADasy6_band2_p"  field_ref="RADasy6_band2" />
+        <field id="RADasy_band2_p"   field_ref="RADasy_band2"  />
+                                   
+        <field id="RADasy1_band3_p"  field_ref="RADasy1_band3" />
+        <field id="RADasy2_band3_p"  field_ref="RADasy2_band3" />
+        <field id="RADasy3_band3_p"  field_ref="RADasy3_band3" />
+        <field id="RADasy4_band3_p"  field_ref="RADasy4_band3" />
+        <field id="RADasy5_band3_p"  field_ref="RADasy5_band3" />
+        <field id="RADasy6_band3_p"  field_ref="RADasy6_band3" />
+        <field id="RADasy_band3_p"   field_ref="RADasy_band3"  />
+                                   
+        <field id="RADasy1_band4_p"  field_ref="RADasy1_band4" />
+        <field id="RADasy2_band4_p"  field_ref="RADasy2_band4" />
+        <field id="RADasy3_band4_p"  field_ref="RADasy3_band4" />
+        <field id="RADasy4_band4_p"  field_ref="RADasy4_band4" />
+        <field id="RADasy5_band4_p"  field_ref="RADasy5_band4" />
+        <field id="RADasy6_band4_p"  field_ref="RADasy6_band4" />
+        <field id="RADasy_band4_p"   field_ref="RADasy_band4"  />
+                                   
+        <field id="RADasy1_band5_p"  field_ref="RADasy1_band5" />
+        <field id="RADasy2_band5_p"  field_ref="RADasy2_band5" />
+        <field id="RADasy3_band5_p"  field_ref="RADasy3_band5" />
+        <field id="RADasy4_band5_p"  field_ref="RADasy4_band5" />
+        <field id="RADasy5_band5_p"  field_ref="RADasy5_band5" />
+        <field id="RADasy6_band5_p"  field_ref="RADasy6_band5" />
+        <field id="RADasy_band5_p"   field_ref="RADasy_band5"  />
+                                   
+        <field id="RADasy1_band6_p"  field_ref="RADasy1_band6" />
+        <field id="RADasy2_band6_p"  field_ref="RADasy2_band6" />
+        <field id="RADasy3_band6_p"  field_ref="RADasy3_band6" />
+        <field id="RADasy4_band6_p"  field_ref="RADasy4_band6" />
+        <field id="RADasy5_band6_p"  field_ref="RADasy5_band6" />
+        <field id="RADasy6_band6_p"  field_ref="RADasy6_band6" />
+        <field id="RADasy_band6_p"   field_ref="RADasy_band6"  />
+                                   
+        <field id="RADssa3D_band1_p" field_ref="RADssa3D_band1"/>
+        <field id="RADssa3D_band2_p" field_ref="RADssa3D_band2"/>
+        <field id="RADssa3D_band3_p" field_ref="RADssa3D_band3"/>
+        <field id="RADssa3D_band4_p" field_ref="RADssa3D_band4"/>
+        <field id="RADssa3D_band5_p" field_ref="RADssa3D_band5"/>
+        <field id="RADssa3D_band6_p" field_ref="RADssa3D_band6"/>
+                                   
+        <field id="RADg3D_band1_p"   field_ref="RADg3D_band1"  />
+        <field id="RADg3D_band2_p"   field_ref="RADg3D_band2"  />
+        <field id="RADg3D_band3_p"   field_ref="RADg3D_band3"  />
+        <field id="RADg3D_band4_p"   field_ref="RADg3D_band4"  />
+        <field id="RADg3D_band5_p"   field_ref="RADg3D_band5"  />
+        <field id="RADg3D_band6_p"   field_ref="RADg3D_band6"  />
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="aero_3D_instant_ll_prog" grid_ref="FULL_klev_ll" >
+        <field id="TACmmrss_bin1_ll"   field_ref="TACmmrss_bin1" />
+        <field id="TACmmrss_bin2_ll"   field_ref="TACmmrss_bin2" />
+        <field id="TACmmrss_bin3_ll"   field_ref="TACmmrss_bin3" />
+        <field id="TACmmrss_ll"        field_ref="TACmmrss"     />
+        <field id="TACmmrdust_bin1_ll" field_ref="TACmmrdust_bin1"/>
+        <field id="TACmmrdust_bin2_ll" field_ref="TACmmrdust_bin2"/>
+        <field id="TACmmrdust_bin3_ll" field_ref="TACmmrdust_bin3"/>
+        <field id="TACmmrdust_bin4_ll" field_ref="TACmmrdust_bin4"/>
+        <field id="TACmmrdust_bin5_ll" field_ref="TACmmrdust_bin5"/>
+        <field id="TACmmrdust_bin6_ll" field_ref="TACmmrdust_bin6"/>
+        <field id="TACmmrdust_ll"      field_ref="TACmmrdust" /> 
+        <field id="TACmmroa_phil_ll"   field_ref="TACmmroa_phil"/>  
+        <field id="TACmmroa_phob_ll"   field_ref="TACmmroa_phob"/> 
+        <field id="TACmmroa_ll"        field_ref="TACmmroa"/>
+        <field id="TACmmrbc_phil_ll"   field_ref="TACmmrbc_phil"/> 
+        <field id="TACmmrbc_phob_ll"   field_ref="TACmmrbc_phob"/> 
+        <field id="TACmmrbc_ll"        field_ref="TACmmrbc"/>
+        <field id="TACmmrso4_ll"       field_ref="TACmmrso4"/>
+        <field id="TACmmrso2_ll"       field_ref="TACmmrso2"/>
+        <field id="TACmmrno3_bin1_ll"  field_ref="TACmmrno3_bin1"/>
+        <field id="TACmmrno3_bin2_ll"  field_ref="TACmmrno3_bin2"/>
+        <field id="TACmmrno3_ll"       field_ref="TACmmrno3" /> 
+        <field id="TACmmrnh4_ll"       field_ref="TACmmrnh4"/>
+        <field id="TACmmrnh3_ll"       field_ref="TACmmrnh3"/>
+        <field id="TACmmrhno3_ll"      field_ref="TACmmrhno3"/>
+        <field id="TACmmrsmka_ll"      field_ref="TACmmrsmka"/>
+        <field id="TACmmrsmkf_ll"      field_ref="TACmmrsmkf"/>
+        <field id="TACmmrsmk_ll"       field_ref="TACmmrsmk" /> 
+        
+        <field id="TACconcss_bin1_ll"   field_ref="TACconcss_bin1" />
+        <field id="TACconcss_bin2_ll"   field_ref="TACconcss_bin2" />
+        <field id="TACconcss_bin3_ll"   field_ref="TACconcss_bin3" />
+        <field id="TACconcss_ll"        field_ref="TACconcss"     />
+        <field id="TACconcdust_bin1_ll" field_ref="TACconcdust_bin1"/>
+        <field id="TACconcdust_bin2_ll" field_ref="TACconcdust_bin2"/>
+        <field id="TACconcdust_bin3_ll" field_ref="TACconcdust_bin3"/>
+        <field id="TACconcdust_bin4_ll" field_ref="TACconcdust_bin4"/>
+        <field id="TACconcdust_bin5_ll" field_ref="TACconcdust_bin5"/>
+        <field id="TACconcdust_bin6_ll" field_ref="TACconcdust_bin6"/>
+        <field id="TACconcdust_ll"      field_ref="TACconcdust" /> 
+        <field id="TACconcoa_phil_ll"   field_ref="TACconcoa_phil"/>  
+        <field id="TACconcoa_phob_ll"   field_ref="TACconcoa_phob"/> 
+        <field id="TACconcoa_ll"        field_ref="TACconcoa"/>
+        <field id="TACconcbc_phil_ll"   field_ref="TACconcbc_phil"/> 
+        <field id="TACconcbc_phob_ll"   field_ref="TACconcbc_phob"/> 
+        <field id="TACconcbc_ll"        field_ref="TACconcbc"/>
+        <field id="TACconcso4_ll"       field_ref="TACconcso4"/>
+        <field id="TACconcso2_ll"       field_ref="TACconcso2"/>
+        <field id="TACconcno3_bin1_ll"  field_ref="TACconcno3_bin1"/>
+        <field id="TACconcno3_bin2_ll"  field_ref="TACconcno3_bin2"/>
+        <field id="TACconcno3_ll"       field_ref="TACconcno3" /> 
+        <field id="TACconcnh4_ll"       field_ref="TACconcnh4"/> 
+        <field id="TACconcnh3_ll"       field_ref="TACconcnh3"/>
+        <field id="TACconchno3_ll"      field_ref="TACconchno3"/> 
+        <field id="TACconcsmka_ll"      field_ref="TACconcsmka"/>
+        <field id="TACconcsmkf_ll"      field_ref="TACconcsmkf"/>
+        <field id="TACconcsmk_ll"       field_ref="TACconcsmk" /> 
+        <field id="TACpthno3_ll"        field_ref="TACpthno3"/>
+        <field id="TACptnh3_ll"         field_ref="TACptnh3"/>
+        <field id="TACptno3_bin1_ll"    field_ref="TACptno3_bin1"/>
+        <field id="TACptno3_bin2_ll"    field_ref="TACptno3_bin2"/>
+        <field id="TACptnh4_ll"         field_ref="TACptnh4"/>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <field_group id="aero_3D_instant_ll_2D" grid_ref="FULL_grid" >
+        <field id="TACconcbc_ll_2D" > TACconcbc_ll </field>
+        <field id="TACconcoa_ll_2D" > TACconcoa_ll </field>
+        <field id="TACconcdust_ll_2D" > TACconcdust_ll </field>
+        <field id="TACconcso4_ll_2D" > TACconcso4_ll </field>
+        <field id="TACconcss_ll_2D" > TACconcss_ll </field>
+      </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+  </field_group>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+</field_definition>

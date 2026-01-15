@@ -1,7 +1,9 @@
 Introduction
 ============
 
-One of the big challenges in CMIP6 is to produce the ensemble of diagnostics requested by the
+At the beginning, CMIP6 data request management and XIOS I/O server
+-------------------------------------------------------------------
+One of the big challenges in CMIP6 was to produce the ensemble of diagnostics requested by the
 CMIP6 Data Request (DR). Configuring the model outputs so that they comply with the Data Request
 is nearly unachievable by hand, given thousands of variables, hundreds of experiments to handle for
 groups participating to numbers of MIPs. Those models that use XIOS to handle their I/O can benefit
@@ -19,7 +21,7 @@ To meet the CMIP6/CMOR data requirements, dr2xml relies on essential XIOS functi
   "cell_methods" and "spatial_shapes"
 
 Dr2xml fully exploits the Data Request content and scoping tools offered by the Data Request Python
-API (https://earthsystemcog.org/projects/wip/CMIP6DataRequest) . Given some settings provided by
+API (https://earthsystemcog.org/projects/wip/CMIP6DataRequest). Given some settings provided by
 the user, e.g. defining the MIP(s) the lab is involved in, the current experiment/simulation to be run,
 maximum priority for the outputs (see section 2 for the complete list of settings) dr2xml
 automatically:
@@ -29,3 +31,11 @@ automatically:
   experiment_id, variable_id, standard_name, long_name);
 - gets temporal shape (e.g.: ‘time mean over sea ice’) and spatial shape (e.g.: ‘global field 7
   pressure levels’; ‘ocean basin meridional section’) of each required CMOR variable.
+
+Now, dealing with new needs
+---------------------------
+This tool has been adopted by several users to make simulations outside of the CMIP6 scope.
+The current steps aim at generalizing the tool to other projects (e.g. CORDEX) and
+other data request (e.g. None or C3S one).
+
+Several bugs are also corrected when they appear and new features are added to target users' needs.

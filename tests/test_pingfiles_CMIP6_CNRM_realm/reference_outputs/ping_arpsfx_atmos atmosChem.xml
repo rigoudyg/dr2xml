@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<context id="arpsfx">
+	<!--CMIP6 Data Request version current_cmip6_dr-->
+	<!--dr2xml version 3.1-->
+	<!--Lab_and_model settings
+{'data_request_content_version' = 'current_directory/test_pingfiles_CMIP6_CNRM_realm/input/DR_config/',
+'excluded_vars' = [],
+'excluded_vars_file' = [],
+'institution_id' = 'CNRM-CERFACS',
+'listof_home_vars' = 'None',
+'max_priority' = '3',
+'mips' = {'AerChemMIP', 'C4MIP', 'CCMI', 'CFMIP', 'CMIP', 'CMIP5', 'CMIP6', 'CORDEX', 'DAMIP', 'DCPP', 'DECK', 'DynVar', 'FAFMIP', 'GMMIP', 'GeoMIP', 'HighResMIP', 'ISMIP6', 'LS3MIP', 'LUMIP', 'OMIP', 'PDRMIP', 'PMIP', 'RFMIP', 'SIMIP', 'SPECS', 'ScenarioMIP', 'SolarMIP', 'VIACSAB', 'VolMIP'},
+'path_extra_tables' = 'None',
+'path_special_defs' = './input/special_defs',
+'ping_variables_prefix' = 'CMIP6_',
+'project' = 'ping',
+'realms_per_context' = {'arpsfx' = ['atmos', 'atmos atmosChem', 'aerosol', 'atmos land', 'land', 'landIce land', 'aerosol land', 'land landIce', 'landIce'], 'nemo' = ['seaIce', 'ocean', 'ocean seaIce', 'ocnBgchem', 'seaIce ocean']},
+'tierMax' = '3'}-->
+	<!--Simulation settings
+{}-->
+	<!--Year processed None-->
+	<field_definition>
+		<field id="CMIP6_cfc113global" field_ref="?dummy_0d"/>
+		<!--P1 (1e-12) mole_fraction_of_cfc113_in_air : Global Mean Mole Fraction of CFC113-->
+		<field id="CMIP6_cfc11global" field_ref="?dummy_0d"/>
+		<!--P1 (1e-12) mole_fraction_of_cfc11_in_air : Global Mean Mole Fraction of CFC11-->
+		<field id="CMIP6_cfc12global" field_ref="?dummy_0d"/>
+		<!--P1 (1e-12) mole_fraction_of_cfc12_in_air : Global Mean Mole Fraction of CFC12-->
+		<field id="CMIP6_ch4" field_ref="?dummy_XY_plev19"/>
+		<!--P1 (mol mol-1) mole_fraction_of_methane_in_air : Mole Fraction of CH4-->
+		<field id="CMIP6_ch4global" field_ref="?dummy_0d"/>
+		<!--P1 (1e-09) mole_fraction_of_methane_in_air : Global Mean Mole Fraction of CH4-->
+		<field id="CMIP6_hcfc22global" field_ref="?dummy_0d"/>
+		<!--P1 (1e-12) mole_fraction_of_hcfc22_in_air : Global Mean Mole Fraction of HCFC22-->
+		<field id="CMIP6_n2o" field_ref="?dummy_XY_plev19"/>
+		<!--P1 (mol mol-1) mole_fraction_of_nitrous_oxide_in_air : Mole Fraction of N2O-->
+		<field id="CMIP6_n2oglobal" field_ref="?dummy_0d"/>
+		<!--P1 (1e-09) mole_fraction_of_nitrous_oxide_in_air : Global Mean Mole Fraction of N2O-->
+		<field id="CMIP6_o3" field_ref="?dummy_XY_plev19"/>
+		<!--P1 (mol mol-1) mole_fraction_of_ozone_in_air : Mole Fraction of O3-->
+	</field_definition>
+</context>

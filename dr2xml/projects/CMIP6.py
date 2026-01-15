@@ -107,7 +107,8 @@ internal_values = dict(
                     fmt="{}{}_experiment_id.json"
                 )
             )
-        ]
+        ],
+        help="Controlled vocabulary file containing experiment characteristics."
     )
 )
 
@@ -116,7 +117,8 @@ common_values = dict(
         key="conventions_version",
         default_values=[
             ValueSettings(key_type="config", keys="CMIP6_conventions_version")
-        ]
+        ],
+        help="Version of the conventions used."
     ),
     activity_id=ParameterSettings(
         key="activity_id",
@@ -205,7 +207,8 @@ common_values = dict(
                     fmt="{}{}_license.json"
                 )
             )
-        ]
+        ],
+        help="File where the license associated with the produced output files can be found."
     ),
     parent_experiment_id=ParameterSettings(
         key="parent_experiment_id",
@@ -228,7 +231,8 @@ common_values = dict(
                 ],
                 fmt="r{}i{}p{}f{}"
             )
-        ]
+        ],
+        help="Label of the variant done."
     ),
     member_id=ParameterSettings(
         key="member_id",
@@ -243,7 +247,8 @@ common_values = dict(
             ),
             ValueSettings(key_type="common", keys="variant_label")
         ],
-        forbidden_patterns=["none-.*", ]
+        forbidden_patterns=["none-.*", ],
+        help="Id of the member done."
     )
 )
 
@@ -254,10 +259,12 @@ project_settings = dict(
         comments_constraints=dict(
             CV_version=ParameterSettings(
                 key="CV_version",
+                help="Controled vocabulary version used.",
                 default_values=["CMIP6-CV version ??", ]
             ),
             conventions_version=ParameterSettings(
                 key="conventions_version",
+                help="Conventions version used.",
                 default_values=[
                     ValueSettings(key_type="common", keys="conventions_version", fmt="CMIP6_conventions_version {}")
                 ]

@@ -4,7 +4,7 @@ Installing dr2xml
 Prerequisites
 -------------
 
-You need Python 2.7. For some examples provided as iPython notebooks, you need either iPython or
+You need Python 3. For some examples provided as iPython notebooks, you need either iPython or
 the pure-python version of the notebooks (they are provided).
 
 You need to have the CMIP6 Data Request package (available at

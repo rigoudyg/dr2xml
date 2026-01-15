@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<context id="arpsfx">
+	<!--CMIP7 Data Request version Software current_cmip7_dr_software - Content test-->
+	<!--dr2xml version current_version-->
+	<!--Lab_and_model settings
+{'data_request_content_version' = 'test',
+'data_request_used' = 'CMIP7',
+'excluded_vars' = [],
+'excluded_vars_file' = [],
+'institution_id' = 'CNRM-CERFACS',
+'listof_home_vars' = 'None',
+'max_priority' = '3',
+'mips' = {},
+'path_extra_tables' = 'None',
+'path_special_defs' = './input/special_defs',
+'ping_variables_prefix' = 'CMIP7_',
+'project' = 'ping',
+'realms_per_context' = {'arpsfx' = ['aerosol', 'atmos', 'atmosChem', 'land', 'landIce'], 'nemo' = ['ocean', 'ocnBgchem', 'seaIce']},
+'tierMax' = '3'}-->
+	<!--Simulation settings
+{}-->
+	<!--Year processed None-->
+	<field_definition>
+		<field id="CMIP7_areacella" field_ref="?dummy_XY"/>
+		<!--P1 (m2) cell_area : Cell areas for any grid used to report atmospheric variables and any other variable using that grid (e.g., soil moisture content). These cell areas should be defined to enable exact calculation of global integrals (e.g., of vertical fluxes of energy at the surface and top of the atmosphere).-->
+		<field id="CMIP7_bldep" field_ref="?dummy_XY"/>
+		<!--P2 (m) atmosphere_boundary_layer_thickness : Boundary Layer Depth every 3 hours-->
+		<field id="CMIP7_hfdsl" field_ref="?dummy_XY"/>
+		<!--P3 (W m-2) surface_downward_heat_flux_in_air : Ground heat flux at 3hr-->
+		<field id="CMIP7_hfls" field_ref="?dummy_XY"/>
+		<!--P2 (W m-2) surface_upward_latent_heat_flux : This is the 3-hour mean flux.-->
+		<field id="CMIP7_hfss" field_ref="?dummy_XY"/>
+		<!--P2 (W m-2) surface_upward_sensible_heat_flux : This is the 3-hour mean flux.-->
+		<field id="CMIP7_hurs" field_ref="?dummy_XY_height2m"/>
+		<!--P1 (%) relative_humidity : The relative humidity with respect to liquid water for T> 0 C, and with respect to ice for T<0 C.-->
+		<field id="CMIP7_huss" field_ref="?dummy_XY_height2m"/>
+		<!--P1 (1) specific_humidity : This is sampled synoptically.-->
+		<field id="CMIP7_lai" field_ref="?dummy_XY"/>
+		<!--P1 (1) leaf_area_index : A ratio obtained by dividing the total upper leaf surface area of vegetation by the (horizontal) surface area of the land on which it grows.-->
+		<field id="CMIP7_mpw" field_ref="?dummy_XY"/>
+		<!--P2 (s) sea_surface_wave_mean_period : Average wave period (i.e., time in-between two wave crests) across the entire two-dimensional wave spectrum, incorporating both wind-sea and swell waves. In spectral wind wave models, it is calculated using spectral moments, mathematical measures that describe the shape and characteristics of the wave spectrum.-->
+		<field id="CMIP7_mrso" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2) mass_content_of_water_in_soil : the mass per unit area  (summed over all soil layers) of water in all phases.-->
+		<field id="CMIP7_mrso100" field_ref="?dummy_XY_sdepth100cm"/>
+		<!--P3 (kg m-2) mass_content_of_water_in_soil_layer : Soil moisture at 3hr but for 0-1m-->
+		<field id="CMIP7_mrsos" field_ref="?dummy_XY_sdepth10cm"/>
+		<!--P1 (kg m-2) mass_content_of_water_in_soil_layer : the mass of water in all phases in a thin surface soil layer.-->
+		<field id="CMIP7_orog" field_ref="?dummy_XY"/>
+		<!--P1 (m) surface_altitude : height above the geoid; as defined here, "the geoid" is a surface of constant geopotential that, if the ocean were at rest, would coincide with mean sea level. Under this definition, the geoid changes as the mean volume of the ocean changes (e.g., due to glacial melt, or global warming of the ocean).  Reported here is the height above the present-day geoid (0.0 over ocean).-->
+		<field id="CMIP7_pr" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) precipitation_flux : at surface; includes both liquid and solid phases.  This is the 3-hour mean precipitation flux.-->
+		<field id="CMIP7_prc" field_ref="?dummy_XY"/>
+		<!--P1 (kg m-2 s-1) convective_precipitation_flux : at surface; includes both liquid and solid phases.-->
+		<field id="CMIP7_ps" field_ref="?dummy_XY"/>
+		<!--P1 (Pa) surface_air_pressure : surface pressure (not mean sea-level pressure), 2-D field to calculate the 3-D pressure field from hybrid coordinates-->
+		<field id="CMIP7_psl" field_ref="?dummy_XY"/>
+		<!--P1 (Pa) air_pressure_at_mean_sea_level : Sea Level Pressure-->
+		<field id="CMIP7_rlds" field_ref="?dummy_XY"/>
+		<!--P3 (W m-2) surface_downwelling_longwave_flux_in_air : This is the 3-hour mean flux.-->
+		<field id="CMIP7_rlus" field_ref="?dummy_XY"/>
+		<!--P3 (W m-2) surface_upwelling_longwave_flux_in_air : This is the 3-hour mean flux.-->
+		<field id="CMIP7_rootd" field_ref="?dummy_XY"/>
+		<!--P1 (m) root_depth : report the maximum soil depth reachable by plant roots (if defined in model), i.e., the maximum soil depth from which they can extract moisture; report as "missing" where the land fraction is 0.-->
+		<field id="CMIP7_sfcWind" field_ref="?dummy_XY_height10m"/>
+		<!--P1 (m s-1) wind_speed : near-surface (usually, 10 meters) wind speed.-->
+		<field id="CMIP7_sftlf" field_ref="?dummy_XY"/>
+		<!--P1 (%) land_area_fraction : Percentage of horizontal area occupied by land.-->
+		<field id="CMIP7_slthick" field_ref="?dummy_XYSo_sdepth"/>
+		<!--P1 (m) cell_thickness : Thickness of Soil Layers-->
+		<field id="CMIP7_snc" field_ref="?dummy_XY"/>
+		<!--P1 (%) surface_snow_area_fraction : Fraction of each grid cell that is occupied by snow that rests on land portion of cell.-->
+		<field id="CMIP7_srfrad" field_ref="?dummy_XY"/>
+		<!--P2 (W m-2) surface_net_downward_radiative_flux : Net radiative flux at surface-->
+		<field id="CMIP7_swh" field_ref="?dummy_XY"/>
+		<!--P2 (m) sea_surface_wave_significant_height : Average height of the highest one-third of waves present in the sea state, incorporating both wind-sea and swell waves. This is a key parameter for describing wave energy and is derived from the wave spectrum using spectral moments. Specifically, this parameter is four times the square root of the integral over all directions and all frequencies of the two-dimensional wave spectrum.-->
+		<field id="CMIP7_swhmax" field_ref="?dummy_XY"/>
+		<!--P2 (m) sea_surface_wave_significant_height : Highest value of the significant wave height simulated within a given time range (e.g., daily or monthly). The significant wave height (swh) is derived from the wave spectrum using spectral moments. Specifically, swh is four times the square root of the integral over all directions and all frequencies of the two-dimensional wave spectrum.-->
+		<field id="CMIP7_ta" field_ref="?dummy_XY_plev19"/>
+		<!--P1 (K) air_temperature : Air Temperature-->
+		<field id="CMIP7_ta6" field_ref="?dummy_XY_plev6"/>
+		<!--P3 (K) air_temperature : Air temperature on 6 pressure levels in the lower troposphere-->
+		<field id="CMIP7_tas" field_ref="?dummy_XY_height2m"/>
+		<!--P1 (K) air_temperature : This is sampled synoptically.-->
+		<field id="CMIP7_tasmax" field_ref="?dummy_XY_height2m"/>
+		<!--P1 (K) air_temperature : maximum near-surface (usually, 2 meter) air temperature (add cell\_method attribute "time: max")-->
+		<field id="CMIP7_tasmin" field_ref="?dummy_XY_height2m"/>
+		<!--P1 (K) air_temperature : minimum near-surface (usually, 2 meter) air temperature (add cell\_method attribute "time: min")-->
+		<field id="CMIP7_tran" field_ref="?dummy_XY"/>
+		<!--P3 (kg m-2 s-1) transpiration_flux : Transpiration-->
+		<field id="CMIP7_ts" field_ref="?dummy_XY"/>
+		<!--P1 (K) surface_temperature : Surface temperature (skin for open ocean)-->
+		<field id="CMIP7_tslsi" field_ref="?dummy_XY"/>
+		<!--P2 (K) surface_temperature : Surface temperature of all surfaces except open ocean, sampled synoptically.-->
+		<field id="CMIP7_uas" field_ref="?dummy_XY_height10m"/>
+		<!--P2 (m s-1) eastward_wind : Zonal wind (positive in a eastward direction) at 10 meters above the surface.-->
+		<field id="CMIP7_vas" field_ref="?dummy_XY_height10m"/>
+		<!--P2 (m s-1) northward_wind : Meridional wind (positive in a northward direction) at 10 meters above the surface.-->
+		<field id="CMIP7_wpp" field_ref="?dummy_XY"/>
+		<!--P2 (s) sea_surface_wave_period_at_variance_spectral_density_maximum : Wave period associated with the most energetic waves in total wave spectrum, incorporating both wind-sea and swell waves. In spectral wind wave models, this represents the spectral peak across the entire two-dimensional wave spectrum, incorporating both wind-sea and swell waves.-->
+		<field id="CMIP7_zg" field_ref="?dummy_XY_plev19"/>
+		<!--P1 (m) geopotential_height : Geopotential is the sum of the specific gravitational potential energy relative to the geoid and the specific centripetal potential energy. Geopotential height is the geopotential divided by the standard acceleration due to gravity. It is numerically similar to the altitude (or geometric height) and not to the quantity with standard name height, which is relative to the surface.-->
+		<field id="CMIP7_ap" field_ref="dummy_hyb"/>
+		<!--One of the hybrid coordinate arrays-->
+		<field id="CMIP7_ap_bnds" field_ref="dummy_hyb"/>
+		<!--One of the hybrid coordinate arrays-->
+		<field id="CMIP7_b" field_ref="dummy_hyb"/>
+		<!--One of the hybrid coordinate arrays-->
+		<field id="CMIP7_b_bnds" field_ref="dummy_hyb"/>
+		<!--One of the hybrid coordinate arrays-->
+	</field_definition>
+</context>

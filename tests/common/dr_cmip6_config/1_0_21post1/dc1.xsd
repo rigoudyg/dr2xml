@@ -1,0 +1,178 @@
+<xs:schema	
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        xmlns:xml="http://www.w3.org/XML/1998/namespace"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns="http://purl.org/dc/elements/1.1/"
+	targetNamespace="http://purl.org/dc/elements/1.1/"
+	elementFormDefault="qualified"
+	attributeFormDefault="qualified">
+
+    <xs:annotation> 
+      <xs:documentation xml:lang="en"> 
+           XML Schema 2001-12-18 by Pete Johnston
+           Based on Andy Powell, Guidelines for Implementing Dublin Core in XML, 9th draft. 
+           This XML Schema is for information only
+      </xs:documentation> 
+    </xs:annotation> 
+
+<xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd">
+  </xs:import>
+
+  <xs:import namespace="http://www.w3.org/1999/xlink" 
+           schemaLocation="xlink.xsd">
+  </xs:import>
+
+  <xs:complexType name="elementType">
+   <xs:simpleContent>
+    <xs:extension base="xs:string">
+	<xs:attribute  ref="xml:lang"/>
+     </xs:extension>
+   </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="titleType">
+    <xs:simpleContent>
+    <xs:extension base="elementType">
+     </xs:extension>
+   </xs:simpleContent>
+  </xs:complexType>
+
+
+  <xs:element name="title" type="titleType"/>
+
+  <xs:complexType name="agentType">
+    <xs:simpleContent>
+    <xs:extension base="elementType">
+        <xs:attributeGroup ref="xlink:metadataLink"/>
+     </xs:extension>
+   </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:element name="creator" type="agentType"/>
+
+  <xs:complexType name="subjectType">
+    <xs:simpleContent>
+    <xs:extension base="elementType">
+     </xs:extension>
+   </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:element name="subject" type="subjectType"/>
+
+  <xs:complexType name="descriptionType">
+    <xs:simpleContent>
+    <xs:extension base="elementType">
+     </xs:extension>
+   </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:element name="description" type="descriptionType"/>
+
+  <xs:element name="publisher" type="agentType"/>
+
+  <xs:element name="contributor" type="agentType"/>
+
+  <xs:complexType name="dateType">
+    <xs:simpleContent>
+    <xs:extension base="elementType">
+     </xs:extension>
+   </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:element name="date" type="dateType"/>
+
+  <xs:complexType name="typeType">
+    <xs:simpleContent>
+    <xs:extension base="elementType">
+     </xs:extension>
+   </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:element name="type" type="typeType"/>
+
+  <xs:complexType name="formatType">
+    <xs:simpleContent>
+    <xs:extension base="elementType">
+     </xs:extension>
+   </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:element name="format" type="formatType"/>
+
+  <xs:complexType name="identifierType">
+    <xs:simpleContent>
+    <xs:extension base="elementType">
+     </xs:extension>
+   </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:element name="identifier" type="identifierType"/>
+
+  <xs:complexType name="sourceType">
+    <xs:simpleContent>
+    <xs:extension base="elementType">
+     </xs:extension>
+   </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:element name="source" type="sourceType"/>
+
+  <xs:complexType name="languageType">
+    <xs:simpleContent>
+    <xs:extension base="elementType">
+     </xs:extension>
+   </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:element name="language" type="languageType"/>
+
+  <xs:complexType name="relationType">
+    <xs:simpleContent>
+    <xs:extension base="elementType">
+        <xs:attributeGroup ref="xlink:metadataLink"/>
+     </xs:extension>
+   </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:element name="relation" type="relationType"/>
+
+  <xs:complexType name="coverageType">
+    <xs:simpleContent>
+    <xs:extension base="elementType">
+     </xs:extension>
+   </xs:simpleContent>
+  </xs:complexType>
+
+
+  <xs:element name="coverage" type="coverageType"/>
+
+  <xs:complexType name="rightsType">
+    <xs:simpleContent>
+    <xs:extension base="elementType">
+     </xs:extension>
+   </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:element name="rights" type="rightsType"/>
+
+  <xs:group name="elementsGroup">
+      <xs:choice>
+	<xs:element ref="title" />
+	<xs:element ref="creator" />
+	<xs:element ref="subject" />
+	<xs:element ref="description" />
+	<xs:element ref="publisher" />
+	<xs:element ref="contributor" />
+	<xs:element ref="date" />
+	<xs:element ref="type" />
+	<xs:element ref="format" />
+	<xs:element ref="identifier" />
+	<xs:element ref="source" />
+	<xs:element ref="language" />
+	<xs:element ref="relation" />
+	<xs:element ref="coverage" />
+	<xs:element ref="rights" />
+      </xs:choice>
+  </xs:group>	
+
+</xs:schema>

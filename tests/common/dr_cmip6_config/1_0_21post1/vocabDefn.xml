@@ -1,0 +1,206 @@
+<?xml version="1.0" ?>
+<defDoc 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="urn:w3id.org:cmip6.dreq.framework:a"
+xsi:schemaLocation="http://w3id.org/cmip6dr/ns vocabFrameworkSchema_v01beta.xsd">
+<table label="institute" uid="SECTION:institute" title="Institute" id="cmip.drv.001" itemLabelMode="def" level="0" maxOccurs="1" labUnique="Yes" description="Institute [institute]">
+  <rowAttribute label="label" type="xs:string" title="Record Label" description="Mnemonic label for record" uid="ATTRIBUTE::institute.label" required="True"/>
+  <rowAttribute label="title" type="xs:string" title="Record Title" description="Title of record" uid="ATTRIBUTE::institute.title" required="True"/>
+  <rowAttribute label="url" type="xs:string" title="Home page" uid="ATTRIBUTE::institute.url" required="True"/>
+  <rowAttribute label="isni" type="xs:string" title="International Standard Name Identifier (ISO 27729)" uid="ATTRIBUTE::institute.isni" required="True"/>
+  <rowAttribute label="description" type="xs:string" uid="ATTRIBUTE::institute.description" required="True"/>
+  <rowAttribute label="uid" type="aa:st__uid" uid="ATTRIBUTE::institute.uid" required="True"/>
+</table>
+<table label="model" uid="SECTION:model" title="Model" id="cmip.drv.002" itemLabelMode="def" level="0" maxOccurs="1" labUnique="Yes" description="Model [model]">
+  <rowAttribute label="label" type="xs:string" title="Record Label" description="Mnemonic label for record" uid="ATTRIBUTE::model.label" required="True"/>
+  <rowAttribute label="title" type="xs:string" title="Record Title" description="Title of record" uid="ATTRIBUTE::model.title" required="True"/>
+  <rowAttribute label="description" type="xs:string" uid="ATTRIBUTE::model.description" required="True"/>
+  <rowAttribute label="url" type="xs:string" uid="ATTRIBUTE::model.url" required="True"/>
+  <rowAttribute label="altUrl" type="xs:string" uid="ATTRIBUTE::model.altUrl" required="True"/>
+  <rowAttribute label="source" type="xs:string" title="List of major model components" uid="ATTRIBUTE::model.source" required="True"/>
+  <rowAttribute label="uid" type="aa:st__uid" uid="ATTRIBUTE::model.uid" required="True"/>
+</table>
+<table label="physicsvers" uid="SECTION:physicsvers" title="Physics Version" id="cmip.drv.003" itemLabelMode="def" level="0" maxOccurs="1" labUnique="Yes" description="Physics Version [physicsvers]">
+  <rowAttribute label="label" type="xs:string" title="Record Label" description="Mnemonic label for record" uid="ATTRIBUTE::physicsvers.label" required="True"/>
+  <rowAttribute label="title" type="xs:string" title="Record Title" description="Title of record" uid="ATTRIBUTE::physicsvers.title" required="True"/>
+  <rowAttribute label="description" type="xs:string" uid="ATTRIBUTE::physicsvers.description" required="True"/>
+  <rowAttribute label="uid" type="aa:st__uid" uid="ATTRIBUTE::physicsvers.uid" required="True"/>
+</table>
+<table label="initialisationmethod" uid="SECTION:initialisationmethod" title="Initialisation Method" id="cmip.drv.004" itemLabelMode="def" level="0" maxOccurs="1" labUnique="Yes" description="Initialisation Method [initialisationmethod]">
+  <rowAttribute label="label" type="xs:string" title="Record Label" description="Mnemonic label for record" uid="ATTRIBUTE::initialisationmethod.label" required="True"/>
+  <rowAttribute label="title" type="xs:string" title="Record Title" description="Title of record" uid="ATTRIBUTE::initialisationmethod.title" required="True"/>
+  <rowAttribute label="description" type="xs:string" uid="ATTRIBUTE::initialisationmethod.description" required="True"/>
+  <rowAttribute label="uid" type="aa:st__uid" uid="ATTRIBUTE::initialisationmethod.uid" required="True"/>
+</table>
+<table label="modelComp" uid="SECTION:modelComp" title="Model Components" id="cmip.drv.005" itemLabelMode="def" level="0" maxOccurs="1" labUnique="Yes" description="Model Components [modelComp]">
+  <rowAttribute label="label" type="xs:string" title="Record Label" description="Mnemonic label for record" uid="ATTRIBUTE::modelComp.label" required="True"/>
+  <rowAttribute label="title" type="xs:string" title="Record Title" description="Title of record" uid="ATTRIBUTE::modelComp.title" required="True"/>
+  <rowAttribute label="componentType" type="xs:string" uid="ATTRIBUTE::modelComp.componentType" required="True"/>
+  <rowAttribute label="sizeH" type="xs:string" uid="ATTRIBUTE::modelComp.sizeH" required="True"/>
+  <rowAttribute label="sizeV" type="xs:string" uid="ATTRIBUTE::modelComp.sizeV" required="True"/>
+  <rowAttribute label="uid" type="aa:st__uid" uid="ATTRIBUTE::modelComp.uid" required="True"/>
+</table>
+<table label="activity" uid="SECTION:activity" title="Coordinating activity" id="cmip.drv.006" itemLabelMode="def" level="0" maxOccurs="1" labUnique="Yes" description="Coordinating activity [activity]">
+  <rowAttribute label="label" type="xs:string" title="Record Label" description="Mnemonic label for record" uid="ATTRIBUTE::activity.label" required="True"/>
+  <rowAttribute label="title" type="xs:string" title="Record Title" description="Title of record" uid="ATTRIBUTE::activity.title" required="True"/>
+  <rowAttribute label="url" type="xs:string" uid="ATTRIBUTE::activity.url" required="True"/>
+  <rowAttribute label="status" type="xs:string" title="Status and role within the CMIP6 process" uid="ATTRIBUTE::activity.status" required="True"/>
+  <rowAttribute label="uid" type="aa:st__uid" uid="ATTRIBUTE::activity.uid" required="True"/>
+  <rowAttribute label="project" type="xs:string" title="Project which is sponsoring the CMIP6 contribution, if applicable" uid="ATTRIBUTE::activity.project" required="True"/>
+</table>
+<table label="product" uid="SECTION:product" title="Data product" id="cmip.drv.007" itemLabelMode="def" level="0" maxOccurs="1" labUnique="Yes" description="Data product [product]">
+  <rowAttribute label="label" type="xs:string" title="Record Label" description="Mnemonic label for record" uid="ATTRIBUTE::product.label" required="True"/>
+  <rowAttribute label="title" type="xs:string" title="Record Title" description="Title of record" uid="ATTRIBUTE::product.title" required="True"/>
+  <rowAttribute label="uid" type="aa:st__uid" uid="ATTRIBUTE::product.uid" required="True"/>
+</table>
+<table label="experiment" uid="SECTION:experiment" title="Numerical Experiment" id="cmip.drv.008" itemLabelMode="def" level="0" maxOccurs="1" labUnique="Yes" description="Numerical Experiment [experiment]">
+  <rowAttribute label="label" type="xs:string" title="Record Label" description="Mnemonic label for record" uid="ATTRIBUTE::experiment.label" required="True"/>
+  <rowAttribute label="title" type="xs:string" title="Record Title" description="Title of record" uid="ATTRIBUTE::experiment.title" required="True"/>
+  <rowAttribute label="altLabel" type="xs:string" uid="ATTRIBUTE::experiment.altLabel" required="True"/>
+  <rowAttribute label="description" type="xs:string" uid="ATTRIBUTE::experiment.description" required="True"/>
+  <rowAttribute label="url" type="xs:string" uid="ATTRIBUTE::experiment.url" required="True"/>
+  <rowAttribute label="sponsor" type="xs:string" uid="ATTRIBUTE::experiment.sponsor" required="True"/>
+  <rowAttribute label="uid" type="aa:st__uid" uid="ATTRIBUTE::experiment.uid" required="True"/>
+</table>
+<table label="frequency" uid="SECTION:frequency" title="Temporal frequency of data values" id="cmip.drv.009" itemLabelMode="def" level="0" maxOccurs="1" labUnique="Yes" description="Temporal frequency of data values [frequency]">
+  <rowAttribute label="label" type="xs:string" title="Record Label" description="Mnemonic label for record" uid="ATTRIBUTE::frequency.label" required="True"/>
+  <rowAttribute label="title" type="xs:string" title="Record Title" description="Title of record" uid="ATTRIBUTE::frequency.title" required="True"/>
+  <rowAttribute label="iso" type="xs:string" uid="ATTRIBUTE::frequency.iso" required="True"/>
+  <rowAttribute label="uid" type="aa:st__uid" uid="ATTRIBUTE::frequency.uid" required="True"/>
+  <rowAttribute label="isClimatology" type="xs:boolean" title="True if term is a climatology label" uid="ATTRIBUTE::frequency.isClimatology" required="True"/>
+</table>
+<table label="realm" uid="SECTION:realm" title="Modeling realm" id="cmip.drv.010" itemLabelMode="def" level="0" maxOccurs="1" labUnique="Yes" description="Modeling realm [realm]">
+  <rowAttribute label="label" type="xs:string" title="Record Label" description="Mnemonic label for record" uid="ATTRIBUTE::realm.label" required="True"/>
+  <rowAttribute label="title" type="xs:string" title="Record Title" description="Title of record" uid="ATTRIBUTE::realm.title" required="True"/>
+  <rowAttribute label="uid" type="aa:st__uid" uid="ATTRIBUTE::realm.uid" required="True"/>
+</table>
+<table label="grid" uid="SECTION:grid" title="Native grid" id="cmip.drv.011" itemLabelMode="def" level="0" maxOccurs="1" labUnique="Yes" description="Native grid [grid]">
+  <rowAttribute label="label" type="xs:string" title="Record Label" description="Mnemonic label for record" uid="ATTRIBUTE::grid.label" required="True"/>
+  <rowAttribute label="title" type="xs:string" title="Record Title" description="Title of record" uid="ATTRIBUTE::grid.title" required="True"/>
+  <rowAttribute label="uid" type="aa:st__uid" uid="ATTRIBUTE::grid.uid" required="True"/>
+</table>
+<table label="dimensions" uid="SECTION:dimensions" title="MIP table variable dimensions" id="cmip.drv.012" itemLabelMode="an" level="0" maxOccurs="1" labUnique="Yes" description="MIP table variable dimensions [dimensions]">
+  <rowAttribute label="label" type="xs:string" title="Record Label" description="Mnemonic label for record" uid="ATTRIBUTE::dimensions.label" required="True"/>
+  <rowAttribute label="title" type="xs:string" title="Record Title" description="Title of record" uid="ATTRIBUTE::dimensions.title" required="True"/>
+  <rowAttribute label="altLabel" type="xs:string" uid="ATTRIBUTE::dimensions.altLabel" required="True"/>
+  <rowAttribute label="sn" type="xs:string" uid="ATTRIBUTE::dimensions.sn" required="True"/>
+  <rowAttribute label="size" type="xs:integer" uid="ATTRIBUTE::dimensions.size" required="True"/>
+  <rowAttribute label="uid" type="aa:st__uid" uid="ATTRIBUTE::dimensions.uid" required="True"/>
+</table>
+<table label="forcings" uid="SECTION:forcings" title="Forcing" id="cmip.drv.013" itemLabelMode="def" level="0" maxOccurs="1" labUnique="Yes" description="Forcing [forcings]">
+  <rowAttribute label="label" type="xs:string" title="Record Label" description="Mnemonic label for record" uid="ATTRIBUTE::forcings.label" required="True"/>
+  <rowAttribute label="title" type="xs:string" title="Record Title" description="Title of record" uid="ATTRIBUTE::forcings.title" required="True"/>
+  <rowAttribute label="uid" type="aa:st__uid" uid="ATTRIBUTE::forcings.uid" required="True"/>
+</table>
+<table label="table" uid="SECTION:table" title="Data specification table" id="cmip.drv.014" itemLabelMode="def" level="0" maxOccurs="1" labUnique="Yes" description="Data specification table [table]">
+  <rowAttribute label="label" type="xs:string" title="Record Label" description="Mnemonic label for record" uid="ATTRIBUTE::table.label" required="True"/>
+  <rowAttribute label="title" type="xs:string" title="Record Title" description="Title of record" uid="ATTRIBUTE::table.title" required="True"/>
+  <rowAttribute label="description" type="xs:string" uid="ATTRIBUTE::table.description" required="True"/>
+  <rowAttribute label="comment" type="xs:string" uid="ATTRIBUTE::table.comment" required="True"/>
+  <rowAttribute label="frequency" type="xs:string" uid="ATTRIBUTE::table.frequency" required="True"/>
+  <rowAttribute label="uid" type="aa:st__uid" uid="ATTRIBUTE::table.uid" required="True"/>
+</table>
+<table label="cref" uid="SECTION:cref" title="Coordinate Reference" id="cmip.drv.015" itemLabelMode="def" level="0" maxOccurs="1" labUnique="Yes" description="Coordinate Reference [cref]">
+  <rowAttribute label="label" type="xs:string" title="Record Label" description="Mnemonic label for record" uid="ATTRIBUTE::cref.label" required="True"/>
+  <rowAttribute label="title" type="xs:string" title="Record Title" description="Title of record" uid="ATTRIBUTE::cref.title" required="True"/>
+  <rowAttribute label="label" type="xs:string" uid="ATTRIBUTE::cref.label" required="True"/>
+  <rowAttribute label="uid" type="aa:st__uid" uid="ATTRIBUTE::cref.uid" required="True"/>
+</table>
+<table label="areaType" uid="SECTION:areaType" title="CMIP Area Type" id="cmip.drv.016" itemLabelMode="def" level="0" maxOccurs="1" labUnique="Yes" description="CMIP Area Type [areaType]">
+  <rowAttribute label="label" type="xs:string" title="Record Label" description="Mnemonic label for record" uid="ATTRIBUTE::areaType.label" required="True"/>
+  <rowAttribute label="title" type="xs:string" title="Record Title" description="Title of record" uid="ATTRIBUTE::areaType.title" required="True"/>
+  <rowAttribute label="inCF" type="xs:string" uid="ATTRIBUTE::areaType.inCF" required="True"/>
+  <rowAttribute label="uid" type="aa:st__uid" uid="ATTRIBUTE::areaType.uid" required="True"/>
+</table>
+<table label="timeSlice" uid="SECTION:timeSlice" title="Time slices used in data request" id="cmip.drv.017" itemLabelMode="def" level="0" maxOccurs="1" labUnique="Yes" description="Time slices used in data request [timeSlice]">
+  <rowAttribute label="label" type="xs:string" title="Record Label" description="Mnemonic label for record" uid="ATTRIBUTE::timeSlice.label" required="True"/>
+  <rowAttribute label="title" type="xs:string" title="Record Title" description="Title of record" uid="ATTRIBUTE::timeSlice.title" required="True"/>
+  <rowAttribute label="uid" type="aa:st__uid" uid="ATTRIBUTE::timeSlice.uid" required="True"/>
+  <rowAttribute label="type" type="xs:string" uid="ATTRIBUTE::timeSlice.type" required="True"/>
+  <rowAttribute label="start" type="xs:string" uid="ATTRIBUTE::timeSlice.start" required="True"/>
+  <rowAttribute label="end" type="xs:string" uid="ATTRIBUTE::timeSlice.end" required="True"/>
+  <rowAttribute label="step" type="xs:string" uid="ATTRIBUTE::timeSlice.step" required="True"/>
+  <rowAttribute label="sliceLen" type="xs:string" uid="ATTRIBUTE::timeSlice.sliceLen" required="True"/>
+  <rowAttribute label="nyears" type="xs:string" uid="ATTRIBUTE::timeSlice.nyears" required="True"/>
+  <rowAttribute label="description" type="xs:string" uid="ATTRIBUTE::timeSlice.description" required="True"/>
+  <rowAttribute label="child" type="xs:string" uid="ATTRIBUTE::timeSlice.child" required="True"/>
+  <rowAttribute label="items" type="xs:string" uid="ATTRIBUTE::timeSlice.items" required="True"/>
+</table>
+<table label="modelFamily" uid="SECTION:modelFamily" title="Family of model" id="cmip.drv.018" itemLabelMode="def" level="0" maxOccurs="1" labUnique="Yes" description="Family of model [modelFamily]">
+  <rowAttribute label="label" type="xs:string" title="Record Label" description="Mnemonic label for record" uid="ATTRIBUTE::modelFamily.label" required="True"/>
+  <rowAttribute label="title" type="xs:string" title="Record Title" description="Title of record" uid="ATTRIBUTE::modelFamily.title" required="True"/>
+  <rowAttribute label="uid" type="aa:st__uid" uid="ATTRIBUTE::modelFamily.uid" required="True"/>
+</table>
+<table label="priority" uid="SECTION:priority" title="Variable priority" id="cmip.drv.019" itemLabelMode="int" level="0" maxOccurs="1" labUnique="Yes" description="Variable priority [priority]">
+  <rowAttribute label="label" type="xs:string" title="Record Label" description="Mnemonic label for record" uid="ATTRIBUTE::priority.label" required="True"/>
+  <rowAttribute label="title" type="xs:string" title="Record Title" description="Title of record" uid="ATTRIBUTE::priority.title" required="True"/>
+  <rowAttribute label="description" type="xs:string" uid="ATTRIBUTE::priority.description" required="True"/>
+  <rowAttribute label="uid" type="aa:st__uid" uid="ATTRIBUTE::priority.uid" required="True"/>
+</table>
+<table label="qcLevel" uid="SECTION:qcLevel" title="Quality control level" id="cmip.drv.020" itemLabelMode="int" level="0" maxOccurs="1" labUnique="Yes" description="Quality control level [qcLevel]">
+  <rowAttribute label="label" type="xs:string" title="Record Label" description="Mnemonic label for record" uid="ATTRIBUTE::qcLevel.label" required="True"/>
+  <rowAttribute label="title" type="xs:string" title="Record Title" description="Title of record" uid="ATTRIBUTE::qcLevel.title" required="True"/>
+  <rowAttribute label="uid" type="aa:st__uid" uid="ATTRIBUTE::qcLevel.uid" required="True"/>
+</table>
+<table label="complianceCode" uid="SECTION:complianceCode" title="Data specification compliance codes" id="cmip.drv.021" itemLabelMode="def" level="0" maxOccurs="1" labUnique="Yes" description="Data specification compliance codes [complianceCode]">
+  <rowAttribute label="label" type="xs:string" title="Record Label" description="Mnemonic label for record" uid="ATTRIBUTE::complianceCode.label" required="True"/>
+  <rowAttribute label="title" type="xs:string" title="Record Title" description="Title of record" uid="ATTRIBUTE::complianceCode.title" required="True"/>
+  <rowAttribute label="uid" type="aa:st__uid" uid="ATTRIBUTE::complianceCode.uid" required="True"/>
+</table>
+<table label="glossary" uid="SECTION:glossary" title="Glossary" id="cmip.drv.022" itemLabelMode="def" level="0" maxOccurs="1" labUnique="No" description="Glossary [glossary]">
+  <rowAttribute label="label" type="xs:string" title="Record Label" description="Mnemonic label for record" uid="ATTRIBUTE::glossary.label" required="True"/>
+  <rowAttribute label="title" type="xs:string" title="Record Title" description="Title of record" uid="ATTRIBUTE::glossary.title" required="True"/>
+  <rowAttribute label="fullName" type="xs:string" uid="ATTRIBUTE::glossary.fullName" required="True"/>
+  <rowAttribute label="description" type="xs:string" uid="ATTRIBUTE::glossary.description" required="True"/>
+  <rowAttribute label="url" type="xs:string" uid="ATTRIBUTE::glossary.url" required="True"/>
+  <rowAttribute label="uid" type="aa:st__uid" uid="ATTRIBUTE::glossary.uid" required="True"/>
+</table>
+<table label="modelCompType" uid="SECTION:modelCompType" title="Model Component Types/Categories [redundant with *Native Grid*]" id="cmip.drv.023" itemLabelMode="def" level="0" maxOccurs="1" labUnique="Yes" description="Model Component Types/Categories [redundant with *Native Grid*] [modelCompType]">
+  <rowAttribute label="label" type="xs:string" title="Record Label" description="Mnemonic label for record" uid="ATTRIBUTE::modelCompType.label" required="True"/>
+  <rowAttribute label="title" type="xs:string" title="Record Title" description="Title of record" uid="ATTRIBUTE::modelCompType.title" required="True"/>
+  <rowAttribute label="uid" type="aa:st__uid" uid="ATTRIBUTE::modelCompType.uid" required="True"/>
+</table>
+<table label="modelType" uid="SECTION:modelType" title="Class of model" id="cmip.drv.024" itemLabelMode="def" level="0" maxOccurs="1" labUnique="Yes" description="Class of model [modelType]">
+  <rowAttribute label="label" type="xs:string" title="Record Label" description="Mnemonic label for record" uid="ATTRIBUTE::modelType.label" required="True"/>
+  <rowAttribute label="title" type="xs:string" title="Record Title" description="Title of record" uid="ATTRIBUTE::modelType.title" required="True"/>
+  <rowAttribute label="uid" type="aa:st__uid" uid="ATTRIBUTE::modelType.uid" required="True"/>
+</table>
+<table label="index" uid="SECTION:index" title="Index of vocabularies" id="cmip.drv.025" itemLabelMode="def" level="0" maxOccurs="1" labUnique="Yes" description="Index of vocabularies [index]">
+  <rowAttribute label="label" type="xs:string" title="Record Label" description="Mnemonic label for record" uid="ATTRIBUTE::index.label" required="True"/>
+  <rowAttribute label="title" type="xs:string" title="Record Title" description="Title of record" uid="ATTRIBUTE::index.title" required="True"/>
+  <rowAttribute label="table" type="xs:string" uid="ATTRIBUTE::index.table" required="True"/>
+  <rowAttribute label="title" type="xs:string" uid="ATTRIBUTE::index.title" required="True"/>
+  <rowAttribute label="description" type="xs:string" uid="ATTRIBUTE::index.description" required="True"/>
+  <rowAttribute label="uid" type="aa:st__uid" uid="ATTRIBUTE::index.uid" required="True"/>
+</table>
+<table label="cmorDimAttr" uid="SECTION:cmorDimAttr" title="CMOR Dimension Attributes" id="cmip.drv.026" itemLabelMode="und" level="0" maxOccurs="1" labUnique="Yes" description="CMOR Dimension Attributes [cmorDimAttr]">
+  <rowAttribute label="label" type="xs:string" title="Record Label" description="Mnemonic label for record" uid="ATTRIBUTE::cmorDimAttr.label" required="True"/>
+  <rowAttribute label="title" type="xs:string" title="Record Title" description="Title of record" uid="ATTRIBUTE::cmorDimAttr.title" required="True"/>
+  <rowAttribute label="description" type="xs:string" uid="ATTRIBUTE::cmorDimAttr.description" required="True"/>
+  <rowAttribute label="uid" type="aa:st__uid" uid="ATTRIBUTE::cmorDimAttr.uid" required="True"/>
+  <rowAttribute label="CMORattr" type="xs:string" title="Corresponding label in the CMOR MIP tables, if different" uid="ATTRIBUTE::cmorDimAttr.CMORattr" required="True"/>
+</table>
+<table label="processingOptions" uid="SECTION:processingOptions" title="Processing steps required" id="cmip.drv.027" itemLabelMode="an" level="0" maxOccurs="1" labUnique="Yes" description="Processing steps required [processingOptions]">
+  <rowAttribute label="label" type="xs:string" title="Record Label" description="Mnemonic label for record" uid="ATTRIBUTE::processingOptions.label" required="True"/>
+  <rowAttribute label="title" type="xs:string" title="Record Title" description="Title of record" uid="ATTRIBUTE::processingOptions.title" required="True"/>
+  <rowAttribute label="description" type="xs:string" uid="ATTRIBUTE::processingOptions.description" required="True"/>
+  <rowAttribute label="uid" type="aa:st__uid" uid="ATTRIBUTE::processingOptions.uid" required="True"/>
+</table>
+<table label="coordinateReference" uid="SECTION:coordinateReference" title="Processing steps required" id="cmip.drv.028" itemLabelMode="an" level="0" maxOccurs="1" labUnique="Yes" description="Processing steps required [coordinateReference]">
+  <rowAttribute label="label" type="xs:string" title="Record Label" description="Mnemonic label for record" uid="ATTRIBUTE::coordinateReference.label" required="True"/>
+  <rowAttribute label="title" type="xs:string" title="Record Title" description="Title of record" uid="ATTRIBUTE::coordinateReference.title" required="True"/>
+  <rowAttribute label="title" type="xs:string" uid="ATTRIBUTE::coordinateReference.title" required="True"/>
+  <rowAttribute label="ogc_wkt" type="xs:string" uid="ATTRIBUTE::coordinateReference.ogc_wkt" required="True"/>
+  <rowAttribute label="url" type="xs:string" uid="ATTRIBUTE::coordinateReference.url" required="True"/>
+  <rowAttribute label="uid" type="aa:st__uid" uid="ATTRIBUTE::coordinateReference.uid" required="True"/>
+</table>
+<table label="modelConfig" uid="SECTION:modelConfig" title="Model configuration options" id="cmip.drv.029" itemLabelMode="an" level="0" maxOccurs="1" labUnique="Yes" description="Model configuration options [modelConfig]">
+  <rowAttribute label="label" type="xs:string" title="Record Label" description="Mnemonic label for record" uid="ATTRIBUTE::modelConfig.label" required="True"/>
+  <rowAttribute label="title" type="xs:string" title="Record Title" description="Title of record" uid="ATTRIBUTE::modelConfig.title" required="True"/>
+  <rowAttribute label="title" type="xs:string" uid="ATTRIBUTE::modelConfig.title" required="True"/>
+  <rowAttribute label="MIPs" type="xs:string" uid="ATTRIBUTE::modelConfig.MIPs" required="True"/>
+  <rowAttribute label="usage" type="xs:string" uid="ATTRIBUTE::modelConfig.usage" required="True"/>
+  <rowAttribute label="type" type="xs:string" uid="ATTRIBUTE::modelConfig.type" required="True"/>
+  <rowAttribute label="range" type="xs:string" title="Range of valid values, e.g. xs:boolean" uid="ATTRIBUTE::modelConfig.range" required="True"/>
+</table>
+</defDoc>

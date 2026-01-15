@@ -26,11 +26,9 @@ def build_filename(expid_in_filename, realm, frequency, label, date_range, var_t
 
 def convert_frequency(freq):
     if freq.endswith("hr"):
-        freq.rstrip("hr")
-        freq += "hourly"
+        freq = freq.replace("hr", "hourly")
     elif freq.endswith("h"):
-        freq.rstrip("h")
-        freq += "hourly"
+        freq = freq.replace("h", "hourly")
     elif freq in ["day", ]:
         freq = "daily"
     elif freq in ["mon", ]:
@@ -39,10 +37,16 @@ def convert_frequency(freq):
 
 
 def convert_realm(realm):
-    if realm in ["ocean", "seaIce"]:
+    if not isinstance(realm, (list, set, tuple)):
+        realm = [realm, ]
+    if "ocean" in realm or "seaIce" in realm:
         realm = "nemo",
-    if realm in ["land", ]:
+    elif "land" in realm:
         realm = "atmo"
+    elif len(realm) == 1:
+        realm = list(realm)[0]
+    else:
+        raise ValueError("Unable to figure out the realm to be used.")
     return realm
 
 
@@ -57,19 +61,22 @@ common_values = dict(
         key="grid_mapping",
         default_values=[
             ValueSettings(key_type="simulation", keys="grid_mapping")
-        ]
+        ],
+        help="Grid mapping name."
     ),
     forecast_reference_time=ParameterSettings(
         key="forecast_reference_time",
         default_values=[
             ValueSettings(key_type="simulation", keys="forecast_reference_time")
-        ]
+        ],
+        help="Reference time for the forecast done in the simulation."
     ),
     forecast_type=ParameterSettings(
         key="forecast_type",
         default_values=[
             ValueSettings(key_type="simulation", keys="forecast_type")
-        ]
+        ],
+        help="Type of forecast done."
     ),
     convention_str=ParameterSettings(
         key="convention_str",
@@ -82,14 +89,16 @@ common_values = dict(
         default_values=[
             ValueSettings(key_type="simulation", keys="commit"),
             ValueSettings(key_type="laboratory", keys="commit")
-        ]
+        ],
+        help="Id of the commits associated with the model."
     ),
     summary=ParameterSettings(
         key="summary",
         default_values=[
             ValueSettings(key_type="simulation", keys="summary"),
             ValueSettings(key_type="laboratory", keys="summary")
-        ]
+        ],
+        help="Short explanation about the simulation."
     ),
     keywords=ParameterSettings(
         key="keywords",
@@ -98,7 +107,8 @@ common_values = dict(
                           func=FunctionSettings(func=build_string_from_list)),
             ValueSettings(key_type="laboratory", keys="summary",
                           func=FunctionSettings(func=build_string_from_list))
-        ]
+        ],
+        help="Keywords associated with the simulation."
     )
 )
 
@@ -142,8 +152,17 @@ project_settings = dict(
                 key="institution_id",
                 output_key="institute_id"
             ),
+            project=ParameterSettings(
+                key="project",
+                help="Project associated with the file."
+            ),
+            keywords=ParameterSettings(
+                key="keywords",
+                help="Keywords associated with the file."
+            ),
             forecast_type=ParameterSettings(
                 key="forecast_type",
+                help="Forecast type associated with the file.",
                 default_values=[
                     ValueSettings(key_type="common", keys="forecast_type")
                 ]
@@ -157,24 +176,28 @@ project_settings = dict(
             ),
             level_type=ParameterSettings(
                 key="level_type",
+                help="Level type associated with the file.",
                 default_values=[
-                    ValueSettings(key_tyoe="variable", keys="level_type")
+                    ValueSettings(key_type="variable", keys="level_type")
                 ]
             ),
             commit=ParameterSettings(
                 key="commit",
+                help="Commit associated with the file.",
                 default_values=[
                     ValueSettings(key_type="common", keys="commit")
                 ]
             ),
             summary=ParameterSettings(
                 key="summary",
+                help="Summary associated with the file.",
                 default_values=[
                     ValueSettings(key_type="common", keys="summary")
                 ]
             ),
             forecast_reference_time=ParameterSettings(
                 key="forecast_reference_time",
+                help="Forecast reference time associated with the file.",
                 default_values=[
                     ValueSettings(key_type="common", keys="forecast_reference_time")
                 ]
@@ -186,12 +209,14 @@ project_settings = dict(
         vars_constraints=dict(
             grid_mapping=ParameterSettings(
                 key="grid_mapping",
+                help="Grid mapping associated with the field.",
                 default_values=[
                     ValueSettings(key_type="common", keys="grid_mapping")
                 ]
             ),
             coordinates=ParameterSettings(
                 key="coordinates",
+                help="Coordinates of the output field.",
                 default_values=[
                     ValueSettings(key_type="variable", keys="coordinates")
                 ]

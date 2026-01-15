@@ -7,24 +7,35 @@ Interface between the C3S data request (C3S_DR.py) and dr2xml.
 from __future__ import print_function, division, absolute_import, unicode_literals
 
 import copy
+import os
 from collections import OrderedDict, defaultdict
+from importlib.machinery import SourceFileLoader
 
-from .C3S_DR import c3s_nc_dims, c3s_nc_coords, c3s_nc_comvars, c3s_nc_vars
 from .definition import ListWithItems
-from .definition import Scope as ScopeBasic
 from .definition import DataRequest as DataRequestBasic
 from .definition import SimpleObject
 from .definition import SimpleCMORVar as SimpleCMORVarBasic
 from .definition import SimpleDim as SimpleDimBasic
+from dr2xml.settings_interface import get_settings_values
+
+data_request_path = get_settings_values("internal", "data_request_path")
+if data_request_path is not None:
+    data_request_filename = os.path.basename(data_request_path)
+    data_request_module = SourceFileLoader(data_request_filename, data_request_path).load_module(data_request_filename)
+    c3s_nc_dims = data_request_module.__getattribute__("c3s_nc_dims")
+    c3s_nc_coords = data_request_module.__getattribute__("c3s_nc_coords")
+    c3s_nc_comvars = data_request_module.__getattribute__("c3s_nc_comvars")
+    c3s_nc_vars = data_request_module.__getattribute__("c3s_nc_vars")
+else:
+    from .C3S_DR import c3s_nc_dims, c3s_nc_coords, c3s_nc_comvars, c3s_nc_vars
 
 
-scope = None
 data_request = None
 
 
 class DataRequest(DataRequestBasic):
     def get_version(self):
-        return "No Data Request"
+        return "undef"
 
     def get_list_by_id(self, collection, **kwargs):
         return ListWithItems()
@@ -70,26 +81,12 @@ class DataRequest(DataRequestBasic):
     def get_dimensions_dict(self):
         return OrderedDict()
 
-    def get_cmorvars_list(self, sizes=None, **kwargs):
-        if sizes is not None:
-            sc = get_scope()
-            sc.update_mcfg(sizes)
+    def get_cmorvars_list(self, **kwargs):
         rep = defaultdict(set)
         for id in self.get_element_uid(elt_type="variable"):
-            rep[id].add(self.get_element_uid(id=id, elt_type="variable").spatial_shp)
-        return rep, list()
-
-
-class Scope(ScopeBasic):
-
-    def __init__(self, scope=None):
-        super().__init__(scope=scope)
-
-    def get_request_link_by_mip(self, mips_list):
-        return list()
-
-    def get_vars_by_request_link(self, request_link, pmax):
-        return list()
+            for grid in self.get_element_uid(id=id, elt_type="variable").grids:
+                rep[id].add(grid)
+        return rep
 
 
 def initialize_data_request():
@@ -104,27 +101,6 @@ def get_data_request():
         return initialize_data_request()
     else:
         return data_request
-
-
-def initialize_scope(tier_max):
-    global scope
-    dq = get_data_request()
-    if scope is None:
-        scope = Scope()
-    return scope
-
-
-def get_scope(tier_max=None):
-    if scope is None:
-        return initialize_scope(tier_max)
-    else:
-        return scope
-
-
-def set_scope(sc):
-    if sc is not None:
-        global scope
-        scope = sc
 
 
 def normalize_grid(grid):

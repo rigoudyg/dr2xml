@@ -77,7 +77,7 @@ from .settings_interface import initialize_settings
 from .utils import print_struct
 
 # Logger
-from logger import initialize_logger, get_logger, change_log_level
+from utilities.logger import initialize_logger, get_logger, change_log_level
 
 # Global variables and configuration tools
 from .config import get_config_variable, set_config_variable, initialize_config_variables
@@ -573,42 +573,44 @@ example_simulation_settings = {
 }
 
 
-def generate_file_defs(lset, sset, year, enddate, context, cvs_path, pingfiles=None,
-                       dummies='include', printout=False, dirname="./", prefix="", attributes=list(),
-                       select="on_expt_and_year", debug=False, force_reset=False):
+def configuration_init(func):
     """
-    A wrapper for profiling top-level function : generate_file_defs_inner
+    This function is a configurator for others entry points into dr2xml.
+    :param func: Function to be decorated
+    :param dict lset: dictionary containing lab and model related settings
+    :param dict sset: dictionary containing simulation related settings
+    :param six.string_types cvs_path: path where controled vocabulary can be found
+    :param bool printout: print infos
+    :param six.string_types prefix: prefix used for each file definition
+    :param bool debug: Turn on debug mode to have more information during the run.
+    :param bool force_reset: Should the internal values be emptied during to related runs on the same python sequence?
+                             If False (default), save time by not reading once again Data Request but can cause filter
+                             issues if some things should be different (not the case for most usages).
+                             Else, the run is a little longer but all changes are taken into account.
+
+    :return: The initial function with initialized environment to use dr2xml.
     """
-    if debug:
-        default_level = "debug"
-    elif printout:
-        default_level = "info"
-    else:
-        default_level = "warning"
-    initialize_logger(default=True, level=default_level)
-    # pr = cProfile.Profile()
-    # pr.enable()
-    # Initialize lset and sset variables for all functions
-    initialize_config_variables()
-    initialize_settings(lset=lset, sset=sset, cvspath=cvs_path, context=context, prefix=prefix,
-                        root=os.path.basename(os.path.abspath(__file__)), year=year, dirname=dirname,
-                        force_reset=force_reset)
-    generate_file_defs_inner(year, enddate, context, pingfiles=pingfiles, dummies=dummies, dirname=dirname,
-                             attributes=attributes, select=select)
-    # pr.disable()
-    # if python_version == "python2":
-    #     s = io.BytesIO()
-    # else:
-    #     s = io.StringIO()
-    # sortby = 'cumulative'
-    # ps = pstats.Stats(pr, stream=s).sort_stats(sortby)
-    # ps.print_stats()
-    # Just un-comment next line to get the profile on stdout
-    # print(s.getvalue())
+    def make_configuration(lset, sset, cvs_path=None, printout=False, prefix="", debug=False, force_reset=False,
+                           select="on_expt_and_year", **kwargs):
+        year = kwargs.get("year", 0)
+        context = kwargs.get("context")
+        dirname = kwargs.get("dirname")
+        if debug:
+            default_level = "debug"
+        elif printout:
+            default_level = "info"
+        else:
+            default_level = "warning"
+        initialize_logger(default=True, level=default_level)
+        initialize_config_variables()
+        initialize_settings(lset=lset, sset=sset, cvspath=cvs_path, context=context, prefix=prefix,
+                            year=year, dirname=dirname, force_reset=force_reset, select=select)
+        return func(**kwargs)
+    return make_configuration
 
 
-def generate_file_defs_inner(year, enddate, context, pingfiles=None, dummies='include', dirname="./", attributes=list(),
-                             select="on_expt_and_year"):
+@configuration_init
+def generate_file_defs(year, enddate, context, pingfiles=None, dummies='include', dirname="./", attributes=list()):
     """
     Using the DR module, a dict of lab settings ``lset``, and a dict
     of simulation settings ``sset``, generate an XIOS file_defs 'file' for a
@@ -619,18 +621,19 @@ def generate_file_defs_inner(year, enddate, context, pingfiles=None, dummies='in
     correspondance between a context and a few realms
 
 on
-    :param six.string_types context: XIOS context considered for the launch
-es with a different name between model
+    :param six.string_types year: year associated with the launch of dr2xml
+    :param six.string_types enddate: enddate of the current launch of dr2xml
+    :param six.string_types context: XIOS context considered for the launches with a different name between model
                                        and Data Request
+    :param None or list of six.string_types pingfiles: Ping files which define for a given Data Request variable
+                                                       the associated model variable.
     :param six.string_types dummies: specify how to treat dummy variables among:
 
         - "include": include dummy refs in file_def (useful for demonstration run)
         - "skip": don't write field with a ref to a dummy (useful until ping_file is fully completed)
         - "forbid": stop if any dummy (useful for production run)
 
-    :param bool printout: print infos
     :param six.string_types dirname: directory in which outputs will be created
-    :param six.string_types prefix: prefix used for each file definition
     :param list attributes: list of (name,value) pairs which are to be inserted as
                             additional file-level attributes. They are complemented with entry
                             "non_standard__attributes" of dict sset
@@ -676,7 +679,7 @@ es with a different name between model
     # TBS# from os import path as os_path
     # TBS# prog_path=os_path.abspath(os_path.split(__file__)[0])
 
-    print("* %29s" % "CMIP6 Data Request version: ", get_dr_object("get_data_request").get_version())
+    print("* %29s" % "{} Data Request version: ".format(internal_settings["data_request_used"]), get_dr_object("get_data_request").get_version())
     print("\n*\n {}".format(50 * "*"))
 
     logger = get_logger()
@@ -711,7 +714,7 @@ es with a different name between model
     # --------------------------------------------------------------------
     skipped_vars_per_table = OrderedDict()
     actually_written_vars = list()
-    svars_per_table = select_variables_to_be_processed(year, context, select)
+    svars_per_table = select_variables_to_be_processed()
     #
     # --------------------------------------------------------------------
     # Read ping_file defined variables
@@ -762,3 +765,25 @@ es with a different name between model
         for w in warnings_for_optimisation:
             logger.warning(w.replace(internal_settings['ping_variables_prefix'], ""))
         print()
+
+
+@configuration_init
+def create_ping_files(context, dummy="field_atm", dummy_with_shape=False, exact=False, comments=False,
+                      filename=None, debug=list(), by_realm=False, **kwargs):
+    from .settings_interface import get_settings_values
+    from .vars_interface.selection import select_variables_to_be_processed
+    from .pingfiles_interface import ping_file_for_realms_list
+
+    considered_realms = get_settings_values("internal", "realms_per_context")
+    path_special = get_settings_values("internal", "path_special_defs")
+    svars = select_variables_to_be_processed()
+    if by_realm:
+        for realm in considered_realms:
+            ping_file_for_realms_list(context=context, svars=svars, lrealms=[realm, ], path_special=path_special,
+                                      dummy=dummy, dummy_with_shape=dummy_with_shape, exact=exact, comments=comments,
+                                      debug=debug, filename=filename % realm)
+    else:
+        ping_file_for_realms_list(context=context, svars=svars, lrealms=considered_realms, path_special=path_special,
+                                  dummy=dummy, dummy_with_shape=dummy_with_shape, exact=exact, comments=comments,
+                                  filename=filename, debug=debug)
+

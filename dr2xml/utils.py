@@ -7,17 +7,12 @@ Several tools used in dr2xml.
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
-import copy
-import json
-import os
-from deepdiff import DeepDiff
-import sys
 from collections import OrderedDict
 from functools import reduce
 
 import six
 
-from logger import get_logger
+from utilities.logger import get_logger
 
 
 class Dr2xmlError(Exception):
@@ -29,7 +24,7 @@ class Dr2xmlError(Exception):
 
     def __str__(self):
         logger = get_logger()
-        logger.error(repr(self.valeur))
+        logger.error(repr(self.valeur), )
         return "\n\n" + repr(self.valeur) + "\n\n"
     # """ just for test"""
 
@@ -46,40 +41,6 @@ class VarsError(Dr2xmlError):
     Vars specific exceptions.
     """
     pass
-
-
-def encode_if_needed(a_string, encoding="utf-8"):
-    """
-
-    :param a_string:
-    :param encoding:
-    :return:
-    """
-    logger = get_logger()
-    if sys.version.startswith("2."):
-        return a_string.encode(encoding)
-    elif sys.version.startswith("3."):
-        return a_string
-    else:
-        logger.error("Unknown Python version %s" % sys.version.split()[0])
-        raise OSError("Unknown Python version %s" % sys.version.split()[0])
-
-
-def decode_if_needed(a_string, encoding="utf-8"):
-    """
-
-    :param a_string:
-    :param encoding:
-    :return:
-    """
-    logger = get_logger()
-    if sys.version.startswith("2."):
-        return a_string.decode(encoding)
-    elif sys.version.startswith("3."):
-        return a_string
-    else:
-        logger.error("Unknown Python version %s" % sys.version.split()[0])
-        raise OSError("Unknown Python version %s", sys.version.split()[0])
 
 
 def print_struct(struct, skip_sep=False, sort=False, back_line=False):
@@ -134,34 +95,6 @@ def reduce_and_strip(elt):
     return elt
 
 
-def read_json_content(filename):
-    logger = get_logger()
-    if os.path.isfile(filename):
-        with open(filename) as fp:
-            content = json.load(fp)
-            return content
-    else:
-        logger.error("Could not find the json file at %s" % filename)
-        raise OSError("Could not find the json file at %s" % filename)
-
-
-def format_json_before_writing(settings):
-    if isinstance(settings, (dict, OrderedDict)):
-        for key in list(settings):
-            settings[key] = format_json_before_writing(settings[key])
-    elif isinstance(settings, (list, tuple)):
-        for i in range(len(settings)):
-            settings[i] = format_json_before_writing(settings[i])
-    elif isinstance(settings, type):
-        settings = str(settings)
-    return settings
-
-
-def write_json_content(filename, settings):
-    with open(filename, "w") as fp:
-        json.dump(format_json_before_writing(copy.deepcopy(settings)), fp)
-
-
 def is_elt_applicable(elt, attribute=None, included=None, excluded=None):
     if attribute is not None:
         if isinstance(elt, tuple):
@@ -188,8 +121,12 @@ def convert_string_to_year(data):
 
 
 def check_objects_equals(obj1, obj2):
-    rep = DeepDiff(obj1, obj2, ignore_order=True)
-    if not rep:
-        return True
-    else:
-        return False
+    rep = isinstance(obj1, type(obj2))
+    if rep:
+        if isinstance(obj1, (list, tuple, set)):
+            rep = sorted(list(obj1)) == sorted(list(obj2))
+        elif isinstance(obj1, (dict, OrderedDict)):
+            rep = check_objects_equals(list(obj1), list(obj2)) and all(obj1[elt] == obj2[elt] for elt in list(obj1))
+        else:
+            rep = obj1 == obj2
+    return rep

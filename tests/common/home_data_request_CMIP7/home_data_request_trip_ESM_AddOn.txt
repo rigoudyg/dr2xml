@@ -1,0 +1,6 @@
+#------------------------------------------------------------------------------------------------------------------------------------------------------
+#TYPE;    VARNAME;         REALM;     FREQUENCY;     TABLE;                     TEMPORAL_SHP;         SPATIAL_SHP;       EXPNAME;            MIP
+#------------------------------------------------------------------------------------------------------------------------------------------------------
+extra;   carbw;            ANY;     mon;        CNRM_HOMALmon;                       ANY;              ANY;               ANY;                ANY
+extra;   carbdis;          ANY;     mon;        CNRM_HOMALmon;                       ANY;              ANY;               ANY;                ANY
+extra;   carbin;           ANY;     mon;        CNRM_HOMALmon;                       ANY;              ANY;               ANY;                ANY
