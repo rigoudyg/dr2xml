@@ -8,9 +8,13 @@ CMIP7 python tools
 from __future__ import print_function, division, absolute_import, unicode_literals
 
 
-from dr2xml.projects.dr2xml_func import sort_mips, format_sizes
+from dr2xml.projects.dr2xml_func import sort_mips, format_sizes, get_logger
 from dr2xml.projects.basics_func import build_external_variables, compute_nb_days
 from dr2xml.projects.CMIP6_esgvoc_func import get_ids_from_list
+
+
+def format_id(input_id):
+    return input_id.replace("-", "_").lower()
 
 
 def make_source_string(source, source_id):
@@ -26,11 +30,17 @@ def make_source_string(source, source_id):
 
     """
     # mpmoine_correction:make_source_string: pour lire correctement le fichier 'CMIP6_source_id.json'
-    components = source['model_component']
+    logger = get_logger()
+    components = source['model_components']
     rep = source_id + " (" + str(source['release_year']) + "):"
     for realm in ["aerosol", "atmos", "atmosChem", "land", "ocean", "ocnBgchem", "seaIce"]:
-        description = components[realm]
-        if description != "none":
+        description = [component for component in components if component["component"] in [realm, ]]
+        if len(description) != 1:
+            logger.error("Either no component or several components found for realm %s: %s" % (realm, description))
+            raise ValueError("Either no component or several components found for realm %s: %s" % (realm, description))
+        else:
+            description = description[0]
+        if description not in ["none", "None", None]:
             rep = rep + "\n" + realm + ": " + description
     return rep
 

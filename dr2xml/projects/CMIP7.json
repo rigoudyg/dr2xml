@@ -259,8 +259,8 @@
               "keys": ["institution_id"],
               "format": {
                 "type": "func",
-                "origin": "self",
-                "keys": ["lower"]
+                "origin": "functions_file",
+                "keys": ["format_id"]
               }
             }
           }
@@ -520,8 +520,8 @@
               "keys": ["source_id"],
               "format": {
                 "type": "func",
-                "origin": "self",
-                "keys": ["lower"]
+                "origin": "functions_file",
+                "keys": ["format_id"]
               }
             }
           }
