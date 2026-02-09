@@ -270,6 +270,9 @@ class SimpleCMORVar(SimpleCMORVarBasic):
             cell_measures = [cell_measures.name, ]
         cell_measures = " ".join([str(elt) for elt in cell_measures])
         cell_methods = input_var.cell_methods.cell_methods
+        official_label = str(input_var.branded_variable_name)
+        if official_label.startswith("areacell"):
+            official_label = "areacell" + official_label.replace("areacell", "")[1:]
         logger = get_logger()
         logger.debug(f"Variable considered: {input_var.name}")
         return cls(from_dr=True,
@@ -277,7 +280,7 @@ class SimpleCMORVar(SimpleCMORVarBasic):
                    modeling_realm=[realm.id for realm in input_var.modelling_realm],
                    label=input_var.physical_parameter.name,
                    mipVarLabel=input_var.physical_parameter.name,
-                   official_label=input_var.branded_variable_name,
+                   official_label=official_label,
                    label_without_psuffix=input_var.physical_parameter.name,
                    label_non_ambiguous=input_var.name,
                    frequency=input_var.cmip7_frequency.name,

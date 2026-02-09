@@ -7,6 +7,7 @@ CMIP6 python tools
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+import six
 
 from dr2xml.projects.dr2xml_func import sort_mips, format_sizes
 from dr2xml.projects.basics_func import build_external_variables, compute_nb_days
@@ -73,6 +74,6 @@ def fill_license(value, institution_id, info_url, license_id, license_url, comme
 
 def get_ids_from_list(value):
     if isinstance(value, list):
-        return [elt.id for elt in value]
+        return [elt if isinstance(elt, six.string_types) else elt.id for elt in value]
     else:
         raise ValueError("Input must be a list, not %s" % type(value))

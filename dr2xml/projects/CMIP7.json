@@ -57,7 +57,12 @@
             "term_id": {
               "type": "value",
               "origin": "internal",
-              "keys": ["experiment_id"]
+              "keys": ["experiment_id"],
+              "format": {
+                "type": "func",
+                "origin": "self",
+                "keys": "lower"
+              }
             }
           }
         }
