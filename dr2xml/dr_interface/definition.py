@@ -198,7 +198,7 @@ class SimpleCMORVar(SimpleObject):
                  cell_methods=None, cell_measures=None, spatial_shp=None, temporal_shp=None, experiment=None,
                  Priority=1, mip_era=False, prec="float", missing=1.e+20, cmvar=None, ref_var=None, mip=None,
                  sdims=dict(), comments=None, coordinates=None, cm=False, id=None, flag_meanings=None, flag_values=None,
-                 **kwargs):
+                 region="undef", official_label=None, **kwargs):
         self.type = type
         self.modeling_realm = modeling_realm
         self.set_modeling_realms = set()
@@ -237,6 +237,11 @@ class SimpleCMORVar(SimpleObject):
         self.id = id
         self.flag_meanings = flag_meanings
         self.flag_values = flag_values
+        self.region = region
+        if official_label is None:
+            self.official_label = self.label
+        else:
+            self.official_label = official_label
         super(SimpleCMORVar, self).__init__(**kwargs)
     
     def set_attributes(self, **kwargs):
@@ -265,7 +270,7 @@ class SimpleCMORVar(SimpleObject):
         return self.label > other.label
 
     def __str__(self):
-        return (f"SimpleCMORVar {self.label} of priority {self.Priority} "
+        return (f"SimpleCMORVar {self.label} of type {self.type} and priority {self.Priority} "
                 f"(with standard name {self.stdname} and units {self.units})")
 
     def __repr__(self):

@@ -45,29 +45,16 @@ def make_source_string(source, source_id):
     return rep
 
 
-def build_filename(frequency, prefix, table, source_id, expid_in_filename, member_id, grid_label, date_range,
-                   var_type, list_perso_dev_file, label, mipVarLabel, use_cmorvar=False):
-    if "fx" in frequency:
-        varname_for_filename = label
-    else:
-        if use_cmorvar:
-            varname_for_filename = label
-        else:
-            varname_for_filename = mipVarLabel
-        # DR21 has a bug with tsland : the MIP variable is named "ts"
-        if label in ["tsland", ]:
-            varname_for_filename = "tsland"
-    filename = "_".join(([varname_for_filename, table, source_id, expid_in_filename, member_id, grid_label]))
+def build_filename(variable_id, branding_suffix, frequency, region, grid_label, source_id, expid_in_filename,
+                   variant_label, date_range, var_type, list_perso_dev_file, prefix):
+    filename = "_".join(([variable_id, branding_suffix, frequency, region, grid_label, source_id, expid_in_filename,
+                          variant_label]))
     if var_type in ["perso", "dev"]:
         with open(list_perso_dev_file, mode="a", encoding="utf-8") as list_perso_and_dev:
             list_perso_and_dev.write(".*{}.*\n".format(filename))
     filename = prefix + filename
-    if "fx" not in frequency:
-        if frequency in ["1hrCM", "monC"]:
-            suffix = "-clim"
-        else:
-            suffix = ""
-        filename = "_".join([filename, date_range + suffix])
+    if frequency not in ["fx", ]:
+        filename = "_".join([filename, date_range])
     return filename
 
 

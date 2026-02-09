@@ -13,6 +13,7 @@ import six
 
 import xml_writer
 from .settings_interface import get_settings_values
+from .settings_interface.py_project_interface import solve_values
 from .utils import reduce_and_strip
 from utilities.encoding_tools import decode_if_needed
 
@@ -37,13 +38,10 @@ class DR2XMLElement(xml_writer.Element):
         tag_settings = get_settings_values("project", default_tag, must_copy=True)
         common_list = tag_settings.common_list
         common_constraints = tag_settings.common_constraints
-        for key in common_list:
-            test, value = common_constraints[key].find_value(common_dict=common_dict, internal_dict=internal_dict,
-                                                             additional_dict=kwargs, init_dict=init_dict)
-            if test:
-                common_constraints[key] = value
-            else:
-                del common_constraints[key]
+        common_constraints = solve_values("common_tag", init_dict=init_dict, internal_dict=internal_dict,
+                                          common_dict=common_dict, additional_dict=kwargs,
+                                          common_tag_dict=common_constraints,
+                                          project_funcs=get_settings_values("project_funcs"))
         attrs_list = tag_settings.attrs_list
         attrs_constraints = tag_settings.attrs_constraints
         attrib = OrderedDict()

@@ -528,7 +528,7 @@ class ValueSettings(Settings):
                 elif value is not None and key in value.__dir__():
                     value = value.__getattribute__(key)
                 elif value is not None and "__dict__" in value.__dir__():
-                    value = value.__getattr__(key)
+                    value = value.__dict__.get(key)
                 else:
                     found = False
         if found and self.format is not False:
@@ -819,8 +819,8 @@ class ParameterSettings(Settings):
             if test:
                 test, value = self.correct_value(value, init_dict=init_dict, internal_values=internal_dict,
                                                  common_values=common_dict, additional_dict=dict(),
-                                                 allow_additional_keytypes=True, project_funcs=project_funcs,
-                                                 common_tag=common_tag)
+                                                 allow_additional_keytypes=allow_additional_keytypes,
+                                                 project_funcs=project_funcs, common_tag=common_tag)
             if test:
                 relevant, test = self.check_value(value, init_dict=init_dict, internal_dict=internal_dict,
                                                   common_dict=common_dict, additional_dict=additional_dict,
@@ -1100,9 +1100,21 @@ class FunctionSettings(Settings):
                     self.func = value.__getattribute__(self.keys[0])
         if self.origin in ["self", ] and isinstance(self.func, six.string_types):
             if self.func in ["lower", ]:
-                value = args[0].lower()
+                try:
+                    value = args[0].lower()
+                except BaseException as e:
+                    logger.debug("Issue formating string %s with method %s" % (args[0], self.func))
+                    logger.debug(str(e))
+                    value = None
+                    test = False
             elif self.func in ["upper", ]:
-                value = args[0].upper()
+                try:
+                    value = args[0].upper()
+                except BaseException as e:
+                    logger.debug("Issue formating string %s with method %s" % (args[0], self.func))
+                    logger.debug(str(e))
+                    value = None
+                    test = False
             elif self.func in ["format", ]:
                 try:
                     value = self.template.format(*args, **options)

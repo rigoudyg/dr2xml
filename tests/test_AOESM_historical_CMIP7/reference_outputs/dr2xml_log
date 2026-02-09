@@ -1,7 +1,13 @@
 sync universe
+Universe is in offline mode
+Running in offline mode - only using local repositories and databases
 Cache db is uptodate from local repository
 sync projects
+Project cmip6 is in offline mode
+Running in offline mode - only using local repositories and databases
 Cache db is uptodate from local repository
+Project cmip7 is in offline mode
+Running in offline mode - only using local repositories and databases
 Cache db is uptodate from local repository
 
  **************************************************
@@ -26,9 +32,9 @@ Issues with standard names are: []
 homevars file: current_directory/test_AOESM_historical_CMIP7/input/home_data_request/home_data_request_test.txt
 Number of 'cmor', 'dev' and 'perso' among home variables: 11
 Number of 'extra' among home variables: 0
-homevars list: tos zos sos tos zos sos tos zos sos albsrfc albsrfc
-Error: {'varname': 'zos', 'realm': 'ocean', 'freq': 'monPt', 'table': 'NONE'} HOMEVar announced as cmor but no corresponding CMORVar found => Not taken into account.
-Error: {'varname': 'sos', 'realm': 'ocean', 'freq': 'monPt', 'table': 'NONE'} HOMEVar announced as cmor but no corresponding CMORVar found => Not taken into account.
+homevars list: tos zos sos tos zos sos tos zos sos wilt wilt
+Error: {'varname': 'zos', 'realm': 'ocean', 'freq': 'mon', 'table': 'NONE'} HOMEVar announced as cmor but no corresponding CMORVar found => Not taken into account.
+Error: {'varname': 'sos', 'realm': 'ocean', 'freq': 'mon', 'table': 'NONE'} HOMEVar announced as cmor but no corresponding CMORVar found => Not taken into account.
 
 Realms for these CMORvars: aerosol atmos land landIce ocean seaIce
 Processing realm 'ocnBgchem' of context 'nemo' -- no variable asked (skip)
@@ -94,20 +100,16 @@ Some Statistics on actually written variables per frequency+shape...
                             Omon P1   4: bigthetao so thetao wo
        mon     XY-O    -------- ---   4
 
+                         Nonemon P2   1: tos
                             Omon P1   3: sos tos zos
                             Omon P2   3: mlotstmax mlotstmin zossq
                            SImon P1   5: siconc simass sithick siu siv
-       mon    XY-na    -------- ---  11
+       mon    XY-na    -------- ---  12
 
                             Omon P1   1: zostoga
        mon    na-na    -------- ---   1
 
-       mon --------    -------- ---  16
-
-                       NonemonPt P2   1: tos
-     monPt    XY-na    -------- ---   1
-
-     monPt --------    -------- ---   1
+       mon --------    -------- ---  17
 
 
 ---------- --------    -------- ---  35
@@ -186,7 +188,7 @@ Some Statistics on actually written variables per variable...
 --- VARNAME: tos: Sea Surface Temperature
 -----------------
               *     day_Oday_XY-na_1 tos
-              * monPt_NonemonPt_XY-na_2 tos
+              *  mon_Nonemon_XY-na_2 tos
               *     mon_Omon_XY-na_1 tos
               *  6hr_None6hr_XY-na_1 tos
 -------------------
@@ -216,9 +218,15 @@ Some Statistics on actually written variables per variable...
 Warnings about cell methods (with var list)
 	time: mean where sea_ice for vars: {'sithick', 'siu', 'siv'}
 sync universe
+Universe is in offline mode
+Running in offline mode - only using local repositories and databases
 Cache db is uptodate from local repository
 sync projects
+Project cmip6 is in offline mode
+Running in offline mode - only using local repositories and databases
 Cache db is uptodate from local repository
+Project cmip7 is in offline mode
+Running in offline mode - only using local repositories and databases
 Cache db is uptodate from local repository
 
  **************************************************
@@ -243,9 +251,9 @@ Issues with standard names are: []
 homevars file: current_directory/test_AOESM_historical_CMIP7/input/home_data_request/home_data_request_test.txt
 Number of 'cmor', 'dev' and 'perso' among home variables: 11
 Number of 'extra' among home variables: 0
-homevars list: tos zos sos tos zos sos tos zos sos albsrfc albsrfc
-Error: {'varname': 'zos', 'realm': 'ocean', 'freq': 'monPt', 'table': 'NONE'} HOMEVar announced as cmor but no corresponding CMORVar found => Not taken into account.
-Error: {'varname': 'sos', 'realm': 'ocean', 'freq': 'monPt', 'table': 'NONE'} HOMEVar announced as cmor but no corresponding CMORVar found => Not taken into account.
+homevars list: tos zos sos tos zos sos tos zos sos wilt wilt
+Error: {'varname': 'zos', 'realm': 'ocean', 'freq': 'mon', 'table': 'NONE'} HOMEVar announced as cmor but no corresponding CMORVar found => Not taken into account.
+Error: {'varname': 'sos', 'realm': 'ocean', 'freq': 'mon', 'table': 'NONE'} HOMEVar announced as cmor but no corresponding CMORVar found => Not taken into account.
 
 Realms for these CMORvars: aerosol atmos land landIce ocean seaIce
 Processing realm 'atmosChem' of context 'surfex' -- no variable asked (skip)
@@ -262,16 +270,14 @@ OK current_directory/test_AOESM_historical_CMIP7/input/xml/ping_nemo.xml
 Duplicate variable bldep,bldep in table 3hrPt is skipped, preferred is bldep
 Duplicate variable bldep,bldep in table 3hrPt is skipped, preferred is bldep
 Duplicate variable snc,snc in table LImon is skipped, preferred is snc
-Duplicate variable albsrfc,albsrfc in table day is skipped, preferred is albsrfc
 Duplicate variable areacella,areacella in table fx is skipped, preferred is areacella
-Duplicate variable albsrfc,albsrfc in table mon is skipped, preferred is albsrfc
 
 file_def written as current_directory/test_AOESM_historical_CMIP7/test_outputs/dr2xml_surfex.xml
 
 Skipped variables (i.e. whose alias is not present in the pingfile):
 >>> TABLE:           3hrPt 01/03 ----> bldep(2)
 
->>> TABLE:             6hr 04/04 ----> mpw(2) swh(2) swhmax(2) wpp(2)
+>>> TABLE:             6hr 04/05 ----> mpw(2) swh(2) swhmax(2) wpp(2)
 
 >>> TABLE:             Efx 01/01 ----> slthick(1)
 
@@ -281,13 +287,23 @@ Skipped variables (i.e. whose alias is not present in the pingfile):
 
 
 Some Statistics on actually written variables per frequency+shape...
+                              hr P1   1: wilt
+       1hr    XY-na    -------- ---   1
+
+       1hr --------    -------- ---   1
+
+                             6hr P1   1: wilt
+       6hr    XY-na    -------- ---   1
+
+       6hr --------    -------- ---   1
+
                              day P1   2: ta zg
        day   XY-P19    -------- ---   2
 
-                             day P1   7: albsrfc pr psl sfcWind tas tasmax tasmin
-       day    XY-na    -------- ---   7
+                             day P1   6: pr psl sfcWind tas tasmax tasmin
+       day    XY-na    -------- ---   6
 
-       day --------    -------- ---   9
+       day --------    -------- ---   8
 
                               fx P1   4: areacella orog rootd sftlf
         fx    XY-na    -------- ---   4
@@ -300,27 +316,15 @@ Some Statistics on actually written variables per frequency+shape...
                             Amon P1   7: pr prc sfcWind tas tasmax tasmin ts
                            LImon P1   1: snc
                             Lmon P1   3: lai mrso mrsos
-                             mon P1   1: albsrfc
-       mon    XY-na    -------- ---  12
+       mon    XY-na    -------- ---  11
 
-       mon --------    -------- ---  14
+       mon --------    -------- ---  13
 
 
 ---------- --------    -------- ---  27
 
 
 Some Statistics on actually written variables per variable...
----------------------
---- VARNAME: albsrfc: None
----------------------
-              *      day_day_XY-na_1 albsrfc
-              *      mon_mon_XY-na_1 albsrfc
-              Warning: several long names are available:
-                  - None
-                  - surface albedo
-              Warning: several standard names are available:
-                  - None
-                  - albsrfc
 -----------------------
 --- VARNAME: areacella: Grid-Cell Area for Atmospheric Grid Variables
 -----------------------
@@ -395,15 +399,32 @@ Some Statistics on actually written variables per variable...
 --- VARNAME: ts: Surface Temperature
 ----------------
               *     mon_Amon_XY-na_1 ts
+------------------
+--- VARNAME: wilt: None
+------------------
+              *       1hr_hr_XY-na_1 wilt
+              *      6hr_6hr_XY-na_1 wilt
+              Warning: several long names are available:
+                  - None
+                  - Wilting Point over land
+              Warning: several standard names are available:
+                  - None
+                  - wilt
 ----------------
 --- VARNAME: zg: Geopotential Height
 ----------------
               *     day_day_XY-P19_1 zg
               *    mon_Amon_XY-P19_1 zg
 sync universe
+Universe is in offline mode
+Running in offline mode - only using local repositories and databases
 Cache db is uptodate from local repository
 sync projects
+Project cmip6 is in offline mode
+Running in offline mode - only using local repositories and databases
 Cache db is uptodate from local repository
+Project cmip7 is in offline mode
+Running in offline mode - only using local repositories and databases
 Cache db is uptodate from local repository
 
  **************************************************
@@ -428,9 +449,9 @@ Issues with standard names are: []
 homevars file: current_directory/test_AOESM_historical_CMIP7/input/home_data_request/home_data_request_test.txt
 Number of 'cmor', 'dev' and 'perso' among home variables: 11
 Number of 'extra' among home variables: 0
-homevars list: tos zos sos tos zos sos tos zos sos albsrfc albsrfc
-Error: {'varname': 'zos', 'realm': 'ocean', 'freq': 'monPt', 'table': 'NONE'} HOMEVar announced as cmor but no corresponding CMORVar found => Not taken into account.
-Error: {'varname': 'sos', 'realm': 'ocean', 'freq': 'monPt', 'table': 'NONE'} HOMEVar announced as cmor but no corresponding CMORVar found => Not taken into account.
+homevars list: tos zos sos tos zos sos tos zos sos wilt wilt
+Error: {'varname': 'zos', 'realm': 'ocean', 'freq': 'mon', 'table': 'NONE'} HOMEVar announced as cmor but no corresponding CMORVar found => Not taken into account.
+Error: {'varname': 'sos', 'realm': 'ocean', 'freq': 'mon', 'table': 'NONE'} HOMEVar announced as cmor but no corresponding CMORVar found => Not taken into account.
 
 Realms for these CMORvars: aerosol atmos land landIce ocean seaIce
 processing file current_directory/test_AOESM_historical_CMIP7/input/xml/ping_surfex.xml:

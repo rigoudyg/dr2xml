@@ -30,8 +30,8 @@ def setup_esgvoc_config(config_name, project, config_file="vocabulary.json"):
         # Check if config already exists
         if config_name in config_manager.list_configs():
             logger.debug("✅ ESGVoc already configured")
-        else:
-            config_manager.add_config(config_name, config_data)
+            config_manager.remove_config(config_name)
+        config_manager.add_config(config_name, config_data)
 
         config_manager.switch_config(config_name)
 

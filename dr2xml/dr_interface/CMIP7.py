@@ -268,14 +268,16 @@ class SimpleCMORVar(SimpleCMORVarBasic):
             cell_measures = [cell_measures, ]
         else:
             cell_measures = [cell_measures.name, ]
+        cell_measures = " ".join([str(elt) for elt in cell_measures])
         cell_methods = input_var.cell_methods.cell_methods
         logger = get_logger()
         logger.debug(f"Variable considered: {input_var.name}")
         return cls(from_dr=True,
-                   type=input_var.type,
+                   type="cmor",
                    modeling_realm=[realm.id for realm in input_var.modelling_realm],
                    label=input_var.physical_parameter.name,
                    mipVarLabel=input_var.physical_parameter.name,
+                   official_label=input_var.branded_variable_name,
                    label_without_psuffix=input_var.physical_parameter.name,
                    label_non_ambiguous=input_var.name,
                    frequency=input_var.cmip7_frequency.name,
@@ -293,7 +295,8 @@ class SimpleCMORVar(SimpleCMORVarBasic):
                    temporal_shp=input_var.temporal_shape.name,
                    id=input_var.id,
                    cmvar=input_var,
-                   Priority=data_request.data_request.find_priority_per_variable(input_var)
+                   Priority=data_request.data_request.find_priority_per_variable(input_var),
+                   region=input_var.region
                    )
 
 

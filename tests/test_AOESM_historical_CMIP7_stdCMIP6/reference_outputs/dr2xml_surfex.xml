@@ -94,6 +94,7 @@ seaIce: Gelato 6.1',
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
 			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> day </variable>
 			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/False.CNRM-CERFACS.CNRM-ESM2-1.historical.none.r1i1p1f2 </variable>
@@ -162,6 +163,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
 			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> day </variable>
 			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/False.CNRM-CERFACS.CNRM-ESM2-1.historical.none.r1i1p1f2 </variable>
@@ -230,6 +232,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
 			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> day </variable>
 			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/False.CNRM-CERFACS.CNRM-ESM2-1.historical.none.r1i1p1f2 </variable>
@@ -298,6 +301,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
 			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> day </variable>
 			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/False.CNRM-CERFACS.CNRM-ESM2-1.historical.none.r1i1p1f2 </variable>
@@ -366,6 +370,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
 			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> day </variable>
 			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/False.CNRM-CERFACS.CNRM-ESM2-1.historical.none.r1i1p1f2 </variable>
@@ -434,6 +439,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
 			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> day </variable>
 			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/False.CNRM-CERFACS.CNRM-ESM2-1.historical.none.r1i1p1f2 </variable>
@@ -502,6 +508,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
 			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> day </variable>
 			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/False.CNRM-CERFACS.CNRM-ESM2-1.historical.none.r1i1p1f2 </variable>
@@ -570,6 +577,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
 			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> day </variable>
 			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/False.CNRM-CERFACS.CNRM-ESM2-1.historical.none.r1i1p1f2 </variable>
@@ -705,6 +713,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
 			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> fx </variable>
 			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/False.CNRM-CERFACS.CNRM-ESM2-1.historical.none.r1i1p1f2 </variable>
@@ -772,6 +781,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
 			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> fx </variable>
 			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/False.CNRM-CERFACS.CNRM-ESM2-1.historical.none.r1i1p1f2 </variable>
@@ -839,6 +849,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
 			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> fx </variable>
 			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/False.CNRM-CERFACS.CNRM-ESM2-1.historical.none.r1i1p1f2 </variable>
@@ -972,6 +983,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
 			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
 			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/False.CNRM-CERFACS.CNRM-ESM2-1.historical.none.r1i1p1f2 </variable>
@@ -1040,6 +1052,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
 			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
 			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/False.CNRM-CERFACS.CNRM-ESM2-1.historical.none.r1i1p1f2 </variable>
@@ -1108,6 +1121,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
 			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
 			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/False.CNRM-CERFACS.CNRM-ESM2-1.historical.none.r1i1p1f2 </variable>
@@ -1176,6 +1190,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
 			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
 			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/False.CNRM-CERFACS.CNRM-ESM2-1.historical.none.r1i1p1f2 </variable>
@@ -1244,6 +1259,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
 			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
 			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/False.CNRM-CERFACS.CNRM-ESM2-1.historical.none.r1i1p1f2 </variable>
@@ -1312,6 +1328,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
 			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
 			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/False.CNRM-CERFACS.CNRM-ESM2-1.historical.none.r1i1p1f2 </variable>
@@ -1380,6 +1397,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
 			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
 			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/False.CNRM-CERFACS.CNRM-ESM2-1.historical.none.r1i1p1f2 </variable>
@@ -1448,6 +1466,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
 			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
 			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/False.CNRM-CERFACS.CNRM-ESM2-1.historical.none.r1i1p1f2 </variable>
@@ -1516,6 +1535,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
 			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
 			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/False.CNRM-CERFACS.CNRM-ESM2-1.historical.none.r1i1p1f2 </variable>
@@ -1584,6 +1604,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
 			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
 			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/False.CNRM-CERFACS.CNRM-ESM2-1.historical.none.r1i1p1f2 </variable>
@@ -1653,6 +1674,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
 			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
 			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/False.CNRM-CERFACS.CNRM-ESM2-1.historical.none.r1i1p1f2 </variable>
@@ -1721,6 +1743,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
 			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
 			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/False.CNRM-CERFACS.CNRM-ESM2-1.historical.none.r1i1p1f2 </variable>
@@ -1789,6 +1812,7 @@ seaIce: Gelato 6.1 </variable>
 			<variable name="description" type="string"> CMIP6 historical </variable>
 			<variable name="title" type="string"> CMIP6 historical </variable>
 			<variable name="experiment" type="string"> all-forcing simulation of the recent past </variable>
+			<variable name="external_variables" type="string"> areacella </variable>
 			<variable name="forcing_index" type="int"> 2 </variable>
 			<variable name="frequency" type="string"> mon </variable>
 			<variable name="further_info_url" type="string"> https://furtherinfo.es-doc.org/False.CNRM-CERFACS.CNRM-ESM2-1.historical.none.r1i1p1f2 </variable>

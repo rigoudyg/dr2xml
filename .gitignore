@@ -26,7 +26,7 @@ pycallgraph_tree/
 dr2xml_*.xml
 pycallgraph_use.py
 .coverage
-create_file_defs.sh
+create_file_defs*.sh
 tests/htmlcov
 tests/test*/output_*
 /sphinx/build/

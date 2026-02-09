@@ -1,7 +1,13 @@
 sync universe
+Universe is in offline mode
+Running in offline mode - only using local repositories and databases
 Cache db is uptodate from local repository
 sync projects
+Project cmip6 is in offline mode
+Running in offline mode - only using local repositories and databases
 Cache db is uptodate from local repository
+Project cmip7 is in offline mode
+Running in offline mode - only using local repositories and databases
 Cache db is uptodate from local repository
 
  **************************************************
@@ -2285,9 +2291,15 @@ Warnings about cell methods (with var list)
 	time: mean where ice_sheet for vars: {'hflsIs', 'hfssIs', 'mrroIs', 'orogIs', 'prraIs', 'prsnIs', 'rldsIs', 'rlusIs', 'rsdsIs', 'rsusIs', 'sblIs', 'sncIs', 'snmIs', 'tas', 'tasIs', 'tsIs', 'tsnIs'}
 	Cannot yet handle time: mean (with samples weighted by snow mass) for vars: {'agesno', 'tsn'}
 sync universe
+Universe is in offline mode
+Running in offline mode - only using local repositories and databases
 Cache db is uptodate from local repository
 sync projects
+Project cmip6 is in offline mode
+Running in offline mode - only using local repositories and databases
 Cache db is uptodate from local repository
+Project cmip7 is in offline mode
+Running in offline mode - only using local repositories and databases
 Cache db is uptodate from local repository
 
  **************************************************

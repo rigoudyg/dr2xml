@@ -205,6 +205,7 @@ class TestProjectSettings(unittest.TestCase):
 		              'compression_level': '0',
 		              'contact': 'None',
 		              'convention_str': 'CF-1.7 CMIP-6.2',
+		              'data_request_version_string': '01.00.21.post1',
 		              'data_specs_version': '01.00.21.post1',
 		              'date_range': '%start_date%-%end_date%',
 		              'dr2xml_version': '3.1',

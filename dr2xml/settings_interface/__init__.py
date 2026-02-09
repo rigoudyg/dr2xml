@@ -102,36 +102,39 @@ def get_settings_values(*args, **kwargs):
     else:
         args = list()
     logger = get_logger()
-    if setting in ["init", ]:
-        settings = init_settings
-    elif setting in ["internal", ]:
-        settings = internal_settings
-    elif setting in ["common", ]:
-        settings = common_settings
-    elif setting in ["project", ]:
-        settings = project_settings
-    elif setting in ["internal_values", ]:
-        settings = internal_values
+    if setting in ["project_funcs", ]:
+        return project_funcs
     else:
-        logger.error("Unknown settings %s" % setting)
-        raise ValueError("Unknown settings %s" % setting)
-    test = True
-    i = 0
-    while test and i < len(args):
-        if args[i] in settings:
-            settings = settings[args[i]]
-            i += 1
+        if setting in ["init", ]:
+            settings = init_settings
+        elif setting in ["internal", ]:
+            settings = internal_settings
+        elif setting in ["common", ]:
+            settings = common_settings
+        elif setting in ["project", ]:
+            settings = project_settings
+        elif setting in ["internal_values", ]:
+            settings = internal_values
         else:
-            test = False
-    if test and must_copy:
-        return copy.deepcopy(settings)
-    elif test:
-        return settings
-    elif not is_default:
-        logger.error("Could not find a proper value: %s not in %s" % (args[i], settings))
-        raise ValueError("Could not find a proper value: %s not in %s" % (args[i], settings))
-    else:
-        return default
+            logger.error("Unknown settings %s" % setting)
+            raise ValueError("Unknown settings %s" % setting)
+        test = True
+        i = 0
+        while test and i < len(args):
+            if args[i] in settings:
+                settings = settings[args[i]]
+                i += 1
+            else:
+                test = False
+        if test and must_copy:
+            return copy.deepcopy(settings)
+        elif test:
+            return settings
+        elif not is_default:
+            logger.error("Could not find a proper value: %s not in %s" % (args[i], settings))
+            raise ValueError("Could not find a proper value: %s not in %s" % (args[i], settings))
+        else:
+            return default
 
 
 def get_values_from_internal_settings(*args, **kwargs):

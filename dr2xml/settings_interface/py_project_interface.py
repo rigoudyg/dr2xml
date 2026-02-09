@@ -182,7 +182,7 @@ def solve_settings(content, config):
 
 
 def solve_values(values, init_dict=dict(), internal_dict=dict(), common_dict=dict(), additional_dict=dict(),
-                 allow_additional_keytypes=True, project_funcs=None):
+                 allow_additional_keytypes=True, project_funcs=None, common_tag_dict=dict()):
     if values in ["init", ]:
         args_dict = dict(internal_dict=internal_dict, common_dict=common_dict, additional_dict=additional_dict,
                          raise_on_error=False, allow_additional_keytypes=allow_additional_keytypes)
@@ -200,6 +200,12 @@ def solve_values(values, init_dict=dict(), internal_dict=dict(), common_dict=dic
                          project_funcs=project_funcs)
         dict_name = "common_dict"
         current_dict = common_dict
+    elif values in ["common_tag", ]:
+        args_dict = dict(init_dict=init_dict, internal_dict=internal_dict, additional_dict=additional_dict,
+                         raise_on_error=False, allow_additional_keytypes=allow_additional_keytypes,
+                         project_funcs=project_funcs, common_dict=common_dict)
+        dict_name = "common_tag"
+        current_dict = common_tag_dict
     else:
         raise ValueError("Could not solve values for setting %s" % values)
     rep = dict()

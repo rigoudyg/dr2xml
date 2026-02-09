@@ -19,6 +19,7 @@
     },
     "branch_method": {
       "help": "Branching procedure.",
+      "forbidden_values": [null, "None", ""],
       "values": [
         {
           "type": "value",
@@ -158,7 +159,7 @@
         }
       ]
     },
-    "data_specs_version": {
+    "data_request_version_string": {
       "help": "Version of the data request used.",
       "fatal": true,
       "values": [
@@ -166,6 +167,17 @@
           "type": "func",
           "origin": "data_request",
           "keys": ["get_version"]
+        }
+      ]
+    },
+    "data_specs_version": {
+      "help": "Version of the data request used.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "value",
+          "origin": "common",
+          "keys": ["data_request_version_string"]
         }
       ]
     },
@@ -525,17 +537,17 @@
               "type": "func",
               "origin": "self",
               "keys": ["format"],
-              "template": "{data_request_used} Data Request version {data_specs_version}",
+              "template": "{data_request_used} Data Request version {data_request_version_string}",
               "options": {
                 "data_request_used": {
                   "type": "value",
                   "origin": "init",
                   "keys": ["data_request_used"]
                 },
-                "data_specs_version": {
+                "data_request_version_string": {
                   "type": "value",
                   "origin": "common",
-                  "keys": ["data_specs_version"]
+                  "keys": ["data_request_version_string"]
                 }
               }
             }
@@ -1279,8 +1291,8 @@
           "values": [
             {
               "type": "value",
-              "origin": "variable",
-              "keys": []
+              "origin": "attrs",
+              "keys": ["variable", 0]
             }
           ]
         }

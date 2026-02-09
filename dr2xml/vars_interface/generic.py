@@ -209,7 +209,8 @@ def complement_svar_using_cmorvar(svar, cmvar, debug=[]):
                         cm=cmvar.cm, cell_methods=cmvar.cell_methods, cell_measures=cmvar.cell_measures,
                         sdims=cmvar.sdims, other_dims_size=cmvar.other_dims_size, mip_era=cmvar.mip_era,
                         flag_meanings=cmvar.flag_meanings, flag_values=cmvar.flag_values,
-                        modeling_realm=cmvar.modeling_realm, set_modeling_realms=cmvar.set_modeling_realms)
+                        modeling_realm=cmvar.modeling_realm, set_modeling_realms=cmvar.set_modeling_realms,
+                        region=cmvar.region, official_label=cmvar.official_label)
     area = cellmethod2area(svar.cell_methods)
     if svar.label in debug:
         logger.debug("complement_svar ... processing %s, area=%s" % (svar.label, str(area)))

@@ -165,6 +165,7 @@ seaIce: Gelato 6.1""",
                  'jpdftaureicemodis', 'clmisr']
     },
     'institution_id': 'CNRM-CERFACS',
+    'institution': 'CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31057, France)',
     'excluded_spshapes': ['XYA-na', 'XYG-na', 'na-A'],
     'mips': {
         'HR': {},
@@ -226,5 +227,6 @@ seaIce: Gelato 6.1""",
     'contact': 'contact.cmip@meteo.fr',
     'compression_level': 4,
     'grid_policy': 'adhoc',
-    'bytes_per_float': 2.4
+    'bytes_per_float': 2.4,
+    'parent_activity_id':"CMIP"
 }
