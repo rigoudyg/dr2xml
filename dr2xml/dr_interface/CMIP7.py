@@ -271,10 +271,13 @@ class SimpleCMORVar(SimpleCMORVarBasic):
         cell_measures = " ".join([str(elt) for elt in cell_measures])
         cell_methods = input_var.cell_methods.cell_methods
         official_label = str(input_var.branded_variable_name)
-        if official_label.startswith("areacell"):
-            official_label = "areacell" + official_label.replace("areacell", "")[1:]
+        official_label = official_label.split("_")
+        param = official_label.pop(0)
+        if param.startswith("areacell") and len(param) > 8:
+            param = param[0:8]
+        official_label = "_".join([param, *official_label])
         logger = get_logger()
-        logger.debug(f"Variable considered: {input_var.name}")
+        logger.debug(f"Variable considered: {input_var.name} (branded name {input_var.branded_variable_name}, official label {official_label})")
         return cls(from_dr=True,
                    type="cmor",
                    modeling_realm=[realm.id for realm in input_var.modelling_realm],

@@ -550,30 +550,33 @@ def write_xios_file_def_for_svars_list(vars_list, hgrid, xml_file_definition, fr
     internal_dict = get_settings_values("internal")
     context = internal_dict["context"]
     prefix = internal_dict["ping_variables_prefix"]
-    # Initialize xml file
-    xml_file = DR2XMLElement(tag="file", default_tag="file_output",
-                             output_freq=freq, split_freq=split_freq,
-                             split_freq_format=split_freq_format, split_start_offset=split_start_offset,
-                             split_end_offset=split_end_offset, split_last_date=split_last_date, grid=grid_description,
-                             grid_label=grid_label, nominal_resolution=grid_resolution, variable=vars_list,
-                             context=context, table_id=table)
-    # Add several attributes
-    for name, value in sorted(list(attributes)):
-        xml_file.append(wrv(name, value))
-    non_stand_att = internal_dict["non_standard_attributes"]
-    for name in sorted(list(non_stand_att)):
-        xml_file.append(wrv(name, non_stand_att[name]))
-    # For each variable, add the elements about the variable
-    found = False
-    found_A = False
-    found_AH = False
-    found_begin_A = False
-    freq_ps = vars_list[0].frequency
+    # Check if this file should be written
+    real_vars_list = list()
     for svar in sorted(vars_list):
         rep = find_alias(svar, skipped_vars_per_table, debug)
         if rep is not None:
+            real_vars_list.append((svar, rep))
+    if len(real_vars_list) > 0:
+        # Initialize xml file
+        xml_file = DR2XMLElement(tag="file", default_tag="file_output",
+                                 output_freq=freq, split_freq=split_freq,
+                                 split_freq_format=split_freq_format, split_start_offset=split_start_offset,
+                                 split_end_offset=split_end_offset, split_last_date=split_last_date, grid=grid_description,
+                                 grid_label=grid_label, nominal_resolution=grid_resolution, variable=[real_vars_list[0][0], ],
+                                 context=context, table_id=table)
+        # Add several attributes
+        for name, value in sorted(list(attributes)):
+            xml_file.append(wrv(name, value))
+        non_stand_att = internal_dict["non_standard_attributes"]
+        for name in sorted(list(non_stand_att)):
+            xml_file.append(wrv(name, non_stand_att[name]))
+        # For each variable, add the elements about the variable
+        found_A = False
+        found_AH = False
+        found_begin_A = False
+        freq_ps = real_vars_list[0][0].frequency
+        for (svar, rep) in sorted(real_vars_list):
             alias, alias_ping = rep
-            found = True
             if svar.spatial_shp.startswith("XY-A") or svar.spatial_shp.startswith("S-A"):
                 found_begin_A = True
                 if svar.spatial_shp in ["XY-A", "S-A"]:
@@ -587,8 +590,7 @@ def write_xios_file_def_for_svars_list(vars_list, hgrid, xml_file_definition, fr
             xml_file.append(end_field)
             actually_written_vars.append((svar.label, svar.long_name, svar.stdname, svar.mipTable, svar.frequency,
                                           svar.Priority, svar.spatial_shp))
-    # Add content to xml_file to out
-    if found:
+        # Add content to xml_file to out
         if found_begin_A:
             # create a field_def entry for surface pressure
             # print "Searching for ps for var %s, freq %s="%(alias,freq)

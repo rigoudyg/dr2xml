@@ -643,6 +643,7 @@
       "common_constraints": {
         "variable_esgvoc": {
           "help": "Variable information from esgvoc",
+          "forbidden_values": ["", "None", null],
           "values": [
             {
               "type": "func",
