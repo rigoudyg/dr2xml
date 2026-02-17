@@ -256,6 +256,15 @@ def analyze_cell_time_method(cm, label, table):
                     " for %15s in table %s is well handled by 'detect_missing'" % (label, table))
         operation = "average"
         detect_missing = True
+        # ----------------------------------------------------------------------------------------------------------------
+    elif "time: mean where land" in cm:
+        # Weighted Time Mean on Land Tiles
+        add_value_in_list_config_variable("cell_method_warnings",
+                                          ('time: mean where land', label, table))
+        logger.info("Note: assuming that 'time: mean where land' "
+                    " for %15s in table %s is well handled by 'detect_missing'" % (label, table))
+        operation = "average"
+        detect_missing = True
     # ----------------------------------------------------------------------------------------------------------------
     elif "time: mean where crops" in cm:
         # [amc-twm]: Weighted Time Mean on Crops (uniquement des
