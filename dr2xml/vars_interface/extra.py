@@ -7,6 +7,7 @@ Extra variables
 
 from __future__ import print_function, division, absolute_import, unicode_literals
 
+import copy
 import os
 from collections import OrderedDict, defaultdict
 
@@ -99,13 +100,14 @@ def read_extra_table(path, table):
     else:
         tdata = read_json_content(json_table)
         for k, v in tdata["variable_entry"].items():
+            v = copy.deepcopy(v)
             new_plev_suffix = None
             if "frequency" in v:
                 freq = v["frequency"]
             else:
                 freq = guess_freq_from_table_name(tbl)
-            extra_var = get_dr_object("SimpleCMORVar").get_from_extra(input_var=v, mip_era=mip_era, freq=freq,
-                                                                      table=tbl)
+            extra_var = get_dr_object("SimpleCMORVar").get_from_extra(input_var=v, mip_era=mip_era,
+                                                                      freq=freq, table=tbl)
             dims = v["dimensions"].split(" ")
             # get the index of time dimension to supress, if any
             dr_dims = list()

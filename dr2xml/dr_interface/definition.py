@@ -198,7 +198,7 @@ class SimpleCMORVar(SimpleObject):
                  cell_methods=None, cell_measures=None, spatial_shp=None, temporal_shp=None, experiment=None,
                  Priority=1, mip_era=False, prec="float", missing=1.e+20, cmvar=None, ref_var=None, mip=None,
                  sdims=dict(), comments=None, coordinates=None, cm=False, id=None, flag_meanings=None, flag_values=None,
-                 region="undef", official_label=None, **kwargs):
+                 region="undef", official_label=None, extravar=None, **kwargs):
         self.type = type
         self.modeling_realm = modeling_realm
         self.set_modeling_realms = set()
@@ -231,6 +231,7 @@ class SimpleCMORVar(SimpleObject):
         self.prec = prec
         self.missing = missing
         self.cmvar = cmvar  # corresponding CMORvar, if any
+        self.extravar = extravar  # corresponding CMORvar, if any
         self.ref_var = ref_var
         self.comments = comments
         self.coordinates = coordinates
@@ -292,7 +293,8 @@ class SimpleCMORVar(SimpleObject):
                               cell_methods=input_var["cell_methods"], cell_measures=input_var["cell_measures"],
                               positive=input_var["positive"], Priority=float(input_var[mip_era.lower() + "_priority"]),
                               label_without_psuffix=input_var["out_name"],
-                              coordinates=input_var.get("dimensions", None))
+                              coordinates=input_var.get("dimensions", None),
+                              extravar=input_var)
         return cls(**input_var_dict)
 
 

@@ -109,10 +109,10 @@ def select_variables_to_be_processed():
     if context in orphan_variables:
         orphans = orphan_variables[context]
         for svar in [svar for svar in mip_vars_list if svar.label in orphans]:
-            test, reason = check_exclusion(svar, ("label", internal_dict["excluded_vars_lset"], ""),
-                                           ("spatial_shp", [None, False], ""),
+            test, reason = check_exclusion(svar, ("label", internal_dict["excluded_vars_lset"], "They are in exclusion list"),
+                                           ("spatial_shp", [None, False], "They have no spatial shape"),
                                            ("spatial_shp", internal_dict["excluded_spshapes_lset"],
-                                            ""))
+                                            "They have excluded spatial shape : %s" % svar.spatial_shp))
             if not test:
                 svars_per_table[svar.mipTable].append(svar)
     #
