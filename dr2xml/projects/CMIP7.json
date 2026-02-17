@@ -975,7 +975,8 @@
           "fatal": true
         },
         "forcing_index": {
-          "fatal": true
+          "fatal": true,
+          "type": "string"
         },
         "frequency": {
           "fatal": true,
@@ -1034,7 +1035,8 @@
           ]
         },
         "initialization_index": {
-          "fatal": true
+          "fatal": true,
+          "type": "string"
         },
         "institution_id": {
           "fatal": true
@@ -1075,13 +1077,15 @@
           "fatal": true
         },
         "physics_index": {
-          "fatal": true
+          "fatal": true,
+          "type": "string"
         },
         "product": {
           "fatal": true
         },
         "realization_index": {
-          "fatal": true
+          "fatal": true,
+          "type": "string"
         },
         "realm": {
           "fatal": true
