@@ -735,17 +735,27 @@
               "type": "func",
               "origin": "self",
               "keys": ["format"],
-              "template": "{variable}_{branding_suffix}_{grid}",
+              "template": "{variable}_{branding_suffix}_{frequency}_{region}_{grid}",
               "options": {
                 "branding_suffix": {
                   "type": "value",
                   "origin": "common_tag",
                   "keys": ["branding_suffix"]
                 },
+                "frequency": {
+                  "type": "value",
+                  "origin": "common_tag",
+                  "keys": ["variable", "frequency"]
+                },
                 "grid": {
                   "type": "value",
                   "origin": "attrs",
                   "keys": ["grid_label"]
+                },
+                "region": {
+                  "type": "value",
+                  "origin": "common_tag",
+                  "keys": ["variable", "region"]
                 },
                 "variable": {
                   "type": "value",
