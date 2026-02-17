@@ -137,22 +137,25 @@ class DataRequest(DataRequestBasic):
     def get_grids_dict(self):
         rep = OrderedDict()
         dims = self.get_list_by_id("coordinates_and_dimensions")
-        for dim in dims.items:
+        for dim in dims:
             rep[dim.name] = dim.id
         return rep
 
     def get_dimensions_dict(self):
         rep = OrderedDict()
-        for spshp in self.get_list_by_id("spatial_shape").items:
-            dims = [elt.name for elt in spshp.dimensions]
-            new_dims = list()
-            for key in ["longitude", "latitude"]:
-                if key in dims:
-                    dims.remove(key)
-                    new_dims.append(key)
-            new_dims.extend(sorted(dims))
-            new_dims = "|".join([str(dim) for dim in new_dims])
-            rep[new_dims] = str(spshp.name)
+        excluded_spshapes = get_settings_values("internal", "excluded_spshapes_lset")
+        for spshp in self.get_list_by_id("spatial_shape"):
+            shape_name = str(spshp.name)
+            if shape_name not in excluded_spshapes:
+                dims = [elt.name for elt in spshp.dimensions]
+                new_dims = list()
+                for key in ["longitude", "latitude"]:
+                    if key in dims:
+                        dims.remove(key)
+                        new_dims.append(key)
+                new_dims.extend(sorted(dims))
+                new_dims = "|".join([str(dim) for dim in new_dims])
+                rep[new_dims] = str(shape_name)
         return rep
 
     def _is_timesubset_applicable(self, year, select_on_year, time_subset):
