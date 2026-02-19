@@ -3123,7 +3123,7 @@
           ]
         },
         "positive": {
-          "help": "Hox is the axis oriented?",
+          "help": "How is the axis oriented?",
           "values": [
             {
               "type": "value",
@@ -3181,7 +3181,7 @@
               "keys": ["axis_type"]
             }
           ],
-          "forbidden_values": ["", "None", null]
+          "forbidden_values": ["", "None", null, "undef"]
         },
         "standard_name": {
           "help": "Standard name of the axis.",
@@ -3192,7 +3192,7 @@
               "keys": ["standard_name"]
             }
           ],
-          "forbidden_values": ["", "None", null],
+          "forbidden_values": ["", "None", null, "undef"],
           "authorized_type": ["str"]
         },
         "prec": {
@@ -3204,7 +3204,7 @@
               "keys": ["prec"]
             }
           ],
-          "forbidden_values": ["", "None", null],
+          "forbidden_values": ["", "None", null, "undef"],
           "authorized_values": ["2", "4", "8"],
           "corrections": {
             "": "4",
@@ -3224,7 +3224,7 @@
               "keys": ["unit"]
             }
           ],
-          "forbidden_values": ["", "None", null]
+          "forbidden_values": ["", "None", null, "undef"]
         },
         "bounds": {
           "help": "Bounds of the axis.",
@@ -3235,7 +3235,7 @@
               "keys": ["bounds"]
             }
           ],
-          "forbidden_values": ["", "None", null]
+          "forbidden_values": ["", "None", null, "undef"]
         },
         "dim_name": {
           "help": "Name dimension of the axis.",
@@ -3246,7 +3246,7 @@
               "keys": ["dim_name"]
             }
           ],
-          "forbidden_values": ["", "None", null]
+          "forbidden_values": ["", "None", null, "undef"]
         },
         "label": {
           "help": "Label of the axis.",
@@ -3257,7 +3257,7 @@
               "keys": ["label"]
             }
           ],
-          "forbidden_values": ["", "None", null]
+          "forbidden_values": ["", "None", null, "undef"]
         },
         "value": {
           "help": "Value of the axis.",
@@ -3268,7 +3268,7 @@
               "keys": ["value"]
             }
           ],
-          "forbidden_values": ["", "None", null]
+          "forbidden_values": ["", "None", null, "undef"]
         }
       }
     },
