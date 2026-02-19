@@ -221,1595 +221,1595 @@ Could not find a proper value for source
 Could not find a proper value for variant_info
 Could not find id longitude of type coordinates_and_dimensions in the vocabulary server.
 Could not find id latitude of type coordinates_and_dimensions in the vocabulary server.
-Variable considered: atmos.areacell.ti-u-hxy-u.fx.GLB
+Variable considered: atmos.areacell.ti-u-hxy-u.fx.GLB (branded name areacell_ti-u-hxy-u, official label areacell_ti-u-hxy-u)
 Find elements list of kind priority_level from vocabulary server.
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
 Find elements list of kind time_subsets from vocabulary server.
-Variable considered: atmos.bldep.tpt-u-hxy-u.3hr.GLB
+Variable considered: atmos.bldep.tpt-u-hxy-u.3hr.GLB (branded name bldep_tpt-u-hxy-u, official label bldep_tpt-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.hfls.tavg-u-hxy-u.3hr.GLB
+Variable considered: atmos.hfls.tavg-u-hxy-u.3hr.GLB (branded name hfls_tavg-u-hxy-u, official label hfls_tavg-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.hfss.tavg-u-hxy-u.3hr.GLB
+Variable considered: atmos.hfss.tavg-u-hxy-u.3hr.GLB (branded name hfss_tavg-u-hxy-u, official label hfss_tavg-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
 Could not find id height2m of type coordinates_and_dimensions in the vocabulary server.
-Variable considered: atmos.hurs.tavg-h2m-hxy-u.6hr.GLB
+Variable considered: atmos.hurs.tavg-h2m-hxy-u.6hr.GLB (branded name hurs_tavg-h2m-hxy-u, official label hurs_tavg-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.huss.tpt-h2m-hxy-u.3hr.GLB
+Variable considered: atmos.huss.tpt-h2m-hxy-u.3hr.GLB (branded name huss_tpt-h2m-hxy-u, official label huss_tpt-h2m-hxy-u)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: atmos.pr.tavg-u-hxy-u.1hr.GLB
+Variable considered: atmos.pr.tavg-u-hxy-u.1hr.GLB (branded name pr_tavg-u-hxy-u, official label pr_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.pr.tavg-u-hxy-u.3hr.GLB
+Variable considered: atmos.pr.tavg-u-hxy-u.3hr.GLB (branded name pr_tavg-u-hxy-u, official label pr_tavg-u-hxy-u)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: atmos.pr.tavg-u-hxy-u.day.GLB
+Variable considered: atmos.pr.tavg-u-hxy-u.day.GLB (branded name pr_tavg-u-hxy-u, official label pr_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.pr.tavg-u-hxy-u.mon.GLB
+Variable considered: atmos.pr.tavg-u-hxy-u.mon.GLB (branded name pr_tavg-u-hxy-u, official label pr_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.prc.tavg-u-hxy-u.mon.GLB
+Variable considered: atmos.prc.tavg-u-hxy-u.mon.GLB (branded name prc_tavg-u-hxy-u, official label prc_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.ps.tavg-u-hxy-u.day.GLB
+Variable considered: atmos.ps.tavg-u-hxy-u.day.GLB (branded name ps_tavg-u-hxy-u, official label ps_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.ps.tpt-u-hxy-u.3hr.GLB
+Variable considered: atmos.ps.tpt-u-hxy-u.3hr.GLB (branded name ps_tpt-u-hxy-u, official label ps_tpt-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.psl.tavg-u-hxy-u.day.GLB
+Variable considered: atmos.psl.tavg-u-hxy-u.day.GLB (branded name psl_tavg-u-hxy-u, official label psl_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.psl.tpt-u-hxy-u.1hr.GLB
+Variable considered: atmos.psl.tpt-u-hxy-u.1hr.GLB (branded name psl_tpt-u-hxy-u, official label psl_tpt-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.rlds.tavg-u-hxy-u.3hr.GLB
+Variable considered: atmos.rlds.tavg-u-hxy-u.3hr.GLB (branded name rlds_tavg-u-hxy-u, official label rlds_tavg-u-hxy-u)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: atmos.rlus.tavg-u-hxy-u.3hr.GLB
+Variable considered: atmos.rlus.tavg-u-hxy-u.3hr.GLB (branded name rlus_tavg-u-hxy-u, official label rlus_tavg-u-hxy-u)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
 Could not find id height10m of type coordinates_and_dimensions in the vocabulary server.
-Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.day.GLB
+Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.day.GLB (branded name sfcWind_tavg-h10m-hxy-u, official label sfcWind_tavg-h10m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.mon.GLB
+Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.mon.GLB (branded name sfcWind_tavg-h10m-hxy-u, official label sfcWind_tavg-h10m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.sftlf.ti-u-hxy-u.fx.GLB
+Variable considered: atmos.sftlf.ti-u-hxy-u.fx.GLB (branded name sftlf_ti-u-hxy-u, official label sftlf_ti-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
 Could not find id plev19 of type coordinates_and_dimensions in the vocabulary server.
-Variable considered: atmos.ta.tavg-p19-hxy-air.day.GLB
+Variable considered: atmos.ta.tavg-p19-hxy-air.day.GLB (branded name ta_tavg-p19-hxy-air, official label ta_tavg-p19-hxy-air)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.ta.tavg-p19-hxy-air.mon.GLB
+Variable considered: atmos.ta.tavg-p19-hxy-air.mon.GLB (branded name ta_tavg-p19-hxy-air, official label ta_tavg-p19-hxy-air)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
 Could not find id plev3 of type coordinates_and_dimensions in the vocabulary server.
-Variable considered: atmos.ta.tpt-p3-hxy-air.6hr.GLB
+Variable considered: atmos.ta.tpt-p3-hxy-air.6hr.GLB (branded name ta_tpt-p3-hxy-air, official label ta_tpt-p3-hxy-air)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
 Could not find id plev6 of type coordinates_and_dimensions in the vocabulary server.
-Variable considered: atmos.ta.tpt-p6-hxy-air.3hr.GLB
+Variable considered: atmos.ta.tpt-p6-hxy-air.3hr.GLB (branded name ta_tpt-p6-hxy-air, official label ta_tpt-p6-hxy-air)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: atmos.tas.tavg-h2m-hxy-u.day.GLB
+Variable considered: atmos.tas.tavg-h2m-hxy-u.day.GLB (branded name tas_tavg-h2m-hxy-u, official label tas_tavg-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tavg-h2m-hxy-u.mon.GLB
+Variable considered: atmos.tas.tavg-h2m-hxy-u.mon.GLB (branded name tas_tavg-h2m-hxy-u, official label tas_tavg-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tmax-h2m-hxy-u.day.GLB
+Variable considered: atmos.tas.tmax-h2m-hxy-u.day.GLB (branded name tas_tmax-h2m-hxy-u, official label tas_tmax-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tmax-h2m-hxy-u.mon.GLB
+Variable considered: atmos.tas.tmax-h2m-hxy-u.mon.GLB (branded name tas_tmax-h2m-hxy-u, official label tas_tmax-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tmin-h2m-hxy-u.day.GLB
+Variable considered: atmos.tas.tmin-h2m-hxy-u.day.GLB (branded name tas_tmin-h2m-hxy-u, official label tas_tmin-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tmin-h2m-hxy-u.mon.GLB
+Variable considered: atmos.tas.tmin-h2m-hxy-u.mon.GLB (branded name tas_tmin-h2m-hxy-u, official label tas_tmin-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tpt-h2m-hxy-u.3hr.GLB
+Variable considered: atmos.tas.tpt-h2m-hxy-u.3hr.GLB (branded name tas_tpt-h2m-hxy-u, official label tas_tpt-h2m-hxy-u)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: atmos.ts.tavg-u-hxy-u.mon.GLB
+Variable considered: atmos.ts.tavg-u-hxy-u.mon.GLB (branded name ts_tavg-u-hxy-u, official label ts_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.uas.tpt-h10m-hxy-u.1hr.GLB
+Variable considered: atmos.uas.tpt-h10m-hxy-u.1hr.GLB (branded name uas_tpt-h10m-hxy-u, official label uas_tpt-h10m-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.vas.tpt-h10m-hxy-u.1hr.GLB
+Variable considered: atmos.vas.tpt-h10m-hxy-u.1hr.GLB (branded name vas_tpt-h10m-hxy-u, official label vas_tpt-h10m-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.zg.tavg-p19-hxy-air.day.GLB
+Variable considered: atmos.zg.tavg-p19-hxy-air.day.GLB (branded name zg_tavg-p19-hxy-air, official label zg_tavg-p19-hxy-air)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.zg.tavg-p19-hxy-air.mon.GLB
+Variable considered: atmos.zg.tavg-p19-hxy-air.mon.GLB (branded name zg_tavg-p19-hxy-air, official label zg_tavg-p19-hxy-air)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.hfdsl.tavg-u-hxy-lnd.3hr.GLB
+Variable considered: land.hfdsl.tavg-u-hxy-lnd.3hr.GLB (branded name hfdsl_tavg-u-hxy-lnd, official label hfdsl_tavg-u-hxy-lnd)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: land.lai.tavg-u-hxy-lnd.mon.GLB
+Variable considered: land.lai.tavg-u-hxy-lnd.mon.GLB (branded name lai_tavg-u-hxy-lnd, official label lai_tavg-u-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.mrso.tavg-u-hxy-lnd.mon.GLB
+Variable considered: land.mrso.tavg-u-hxy-lnd.mon.GLB (branded name mrso_tavg-u-hxy-lnd, official label mrso_tavg-u-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
 Could not find id sdepth100cm of type coordinates_and_dimensions in the vocabulary server.
-Variable considered: land.mrsol.tavg-d100cm-hxy-lnd.3hr.GLB
+Variable considered: land.mrsol.tavg-d100cm-hxy-lnd.3hr.GLB (branded name mrsol_tavg-d100cm-hxy-lnd, official label mrsol_tavg-d100cm-hxy-lnd)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
 Could not find id sdepth10cm of type coordinates_and_dimensions in the vocabulary server.
-Variable considered: land.mrsol.tavg-d10cm-hxy-lnd.mon.GLB
+Variable considered: land.mrsol.tavg-d10cm-hxy-lnd.mon.GLB (branded name mrsol_tavg-d10cm-hxy-lnd, official label mrsol_tavg-d10cm-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.mrsol.tpt-d10cm-hxy-lnd.3hr.GLB
+Variable considered: land.mrsol.tpt-d10cm-hxy-lnd.3hr.GLB (branded name mrsol_tpt-d10cm-hxy-lnd, official label mrsol_tpt-d10cm-hxy-lnd)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: land.orog.ti-u-hxy-u.fx.GLB
+Variable considered: land.orog.ti-u-hxy-u.fx.GLB (branded name orog_ti-u-hxy-u, official label orog_ti-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.rootd.ti-u-hxy-lnd.fx.GLB
+Variable considered: land.rootd.ti-u-hxy-lnd.fx.GLB (branded name rootd_ti-u-hxy-lnd, official label rootd_ti-u-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
 Could not find id sdepth of type coordinates_and_dimensions in the vocabulary server.
-Variable considered: land.slthick.ti-sl-hxy-lnd.fx.GLB
+Variable considered: land.slthick.ti-sl-hxy-lnd.fx.GLB (branded name slthick_ti-sl-hxy-lnd, official label slthick_ti-sl-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.srfrad.tavg-u-hxy-u.3hr.GLB
+Variable considered: land.srfrad.tavg-u-hxy-u.3hr.GLB (branded name srfrad_tavg-u-hxy-u, official label srfrad_tavg-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: land.tran.tavg-u-hxy-u.3hr.GLB
+Variable considered: land.tran.tavg-u-hxy-u.3hr.GLB (branded name tran_tavg-u-hxy-u, official label tran_tavg-u-hxy-u)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: land.tslsi.tpt-u-hxy-u.3hr.GLB
+Variable considered: land.tslsi.tpt-u-hxy-u.3hr.GLB (branded name tslsi_tpt-u-hxy-u, official label tslsi_tpt-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: landIce.snc.tavg-u-hxy-lnd.mon.GLB
+Variable considered: landIce.snc.tavg-u-hxy-lnd.mon.GLB (branded name snc_tavg-u-hxy-lnd, official label snc_tavg-u-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.areacell.ti-u-hxy-u.fx.GLB
+Variable considered: ocean.areacell.ti-u-hxy-u.fx.GLB (branded name areacell_ti-u-hxy-u, official label areacell_ti-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
 Could not find id olevel of type coordinates_and_dimensions in the vocabulary server.
-Variable considered: ocean.bigthetao.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocean.bigthetao.tavg-ol-hxy-sea.mon.GLB (branded name bigthetao_tavg-ol-hxy-sea, official label bigthetao_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
 Could not find id op20bar of type coordinates_and_dimensions in the vocabulary server.
-Variable considered: ocean.bigthetao.tavg-op20bar-hxy-sea.day.GLB
+Variable considered: ocean.bigthetao.tavg-op20bar-hxy-sea.day.GLB (branded name bigthetao_tavg-op20bar-hxy-sea, official label bigthetao_tavg-op20bar-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.deptho.ti-u-hxy-sea.fx.GLB
+Variable considered: ocean.deptho.ti-u-hxy-sea.fx.GLB (branded name deptho_ti-u-hxy-sea, official label deptho_ti-u-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.masscello.ti-ol-hxy-sea.fx.GLB
+Variable considered: ocean.masscello.ti-ol-hxy-sea.fx.GLB (branded name masscello_ti-ol-hxy-sea, official label masscello_ti-ol-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
 Could not find id deltasigt of type coordinates_and_dimensions in the vocabulary server.
-Variable considered: ocean.mlotst.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.mlotst.tavg-u-hxy-sea.day.GLB (branded name mlotst_tavg-u-hxy-sea, official label mlotst_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.mlotstmax.tmax-u-hxy-sea.mon.GLB
+Variable considered: ocean.mlotstmax.tmax-u-hxy-sea.mon.GLB (branded name mlotstmax_tmax-u-hxy-sea, official label mlotstmax_tmax-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.mlotstmin.tmin-u-hxy-sea.mon.GLB
+Variable considered: ocean.mlotstmin.tmin-u-hxy-sea.mon.GLB (branded name mlotstmin_tmin-u-hxy-sea, official label mlotstmin_tmin-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.mpw.tavg-u-hxy-sea.3hr.GLB
+Variable considered: ocean.mpw.tavg-u-hxy-sea.3hr.GLB (branded name mpw_tavg-u-hxy-sea, official label mpw_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.mpw.tavg-u-hxy-sea.6hr.GLB
+Variable considered: ocean.mpw.tavg-u-hxy-sea.6hr.GLB (branded name mpw_tavg-u-hxy-sea, official label mpw_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.mpw.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.mpw.tavg-u-hxy-sea.mon.GLB (branded name mpw_tavg-u-hxy-sea, official label mpw_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.so.tavg-ol-hxy-sea.day.GLB
+Variable considered: ocean.so.tavg-ol-hxy-sea.day.GLB (branded name so_tavg-ol-hxy-sea, official label so_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocean.so.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocean.so.tavg-ol-hxy-sea.mon.GLB (branded name so_tavg-ol-hxy-sea, official label so_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: ocean.sos.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.sos.tavg-u-hxy-sea.day.GLB (branded name sos_tavg-u-hxy-sea, official label sos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: Medium] ([1, 3])
 Priority_retain 1
-Variable considered: ocean.sos.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.sos.tavg-u-hxy-sea.mon.GLB (branded name sos_tavg-u-hxy-sea, official label sos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: ocean.swh.tavg-u-hxy-sea.3hr.GLB
+Variable considered: ocean.swh.tavg-u-hxy-sea.3hr.GLB (branded name swh_tavg-u-hxy-sea, official label swh_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.swh.tavg-u-hxy-sea.6hr.GLB
+Variable considered: ocean.swh.tavg-u-hxy-sea.6hr.GLB (branded name swh_tavg-u-hxy-sea, official label swh_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.swh.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.swh.tavg-u-hxy-sea.mon.GLB (branded name swh_tavg-u-hxy-sea, official label swh_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.swh.tmax-u-hxy-sea.6hr.GLB
+Variable considered: ocean.swh.tmax-u-hxy-sea.6hr.GLB (branded name swh_tmax-u-hxy-sea, official label swh_tmax-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.swh.tmax-u-hxy-sea.mon.GLB
+Variable considered: ocean.swh.tmax-u-hxy-sea.mon.GLB (branded name swh_tmax-u-hxy-sea, official label swh_tmax-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.thetao.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocean.thetao.tavg-ol-hxy-sea.mon.GLB (branded name thetao_tavg-ol-hxy-sea, official label thetao_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: ocean.thetao.tavg-op20bar-hxy-sea.day.GLB
+Variable considered: ocean.thetao.tavg-op20bar-hxy-sea.day.GLB (branded name thetao_tavg-op20bar-hxy-sea, official label thetao_tavg-op20bar-hxy-sea)
 Priorities found: [priority_level: High, priority_level: Medium] ([2, 3])
 Priority_retain 2
-Variable considered: ocean.tnkebto.tavg-u-hxy-sea.yr.GLB
+Variable considered: ocean.tnkebto.tavg-u-hxy-sea.yr.GLB (branded name tnkebto_tavg-u-hxy-sea, official label tnkebto_tavg-u-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocean.tos.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.tos.tavg-u-hxy-sea.day.GLB (branded name tos_tavg-u-hxy-sea, official label tos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: Medium] ([1, 3])
 Priority_retain 1
-Variable considered: ocean.tos.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.tos.tavg-u-hxy-sea.mon.GLB (branded name tos_tavg-u-hxy-sea, official label tos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: ocean.tos.tpt-u-hxy-sea.3hr.GLB
+Variable considered: ocean.tos.tpt-u-hxy-sea.3hr.GLB (branded name tos_tpt-u-hxy-sea, official label tos_tpt-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.tossq.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.tossq.tavg-u-hxy-sea.day.GLB (branded name tossq_tavg-u-hxy-sea, official label tossq_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
 Could not find id depth0m of type coordinates_and_dimensions in the vocabulary server.
-Variable considered: ocean.uos.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.uos.tavg-u-hxy-sea.day.GLB (branded name uos_tavg-u-hxy-sea, official label uos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocean.vos.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.vos.tavg-u-hxy-sea.day.GLB (branded name vos_tavg-u-hxy-sea, official label vos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocean.wo.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocean.wo.tavg-ol-hxy-sea.mon.GLB (branded name wo_tavg-ol-hxy-sea, official label wo_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.wpp.tavg-u-hxy-sea.3hr.GLB
+Variable considered: ocean.wpp.tavg-u-hxy-sea.3hr.GLB (branded name wpp_tavg-u-hxy-sea, official label wpp_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.wpp.tavg-u-hxy-sea.6hr.GLB
+Variable considered: ocean.wpp.tavg-u-hxy-sea.6hr.GLB (branded name wpp_tavg-u-hxy-sea, official label wpp_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.wpp.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.wpp.tavg-u-hxy-sea.mon.GLB (branded name wpp_tavg-u-hxy-sea, official label wpp_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.zos.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.zos.tavg-u-hxy-sea.day.GLB (branded name zos_tavg-u-hxy-sea, official label zos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: ocean.zos.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.zos.tavg-u-hxy-sea.mon.GLB (branded name zos_tavg-u-hxy-sea, official label zos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.zossq.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.zossq.tavg-u-hxy-sea.mon.GLB (branded name zossq_tavg-u-hxy-sea, official label zossq_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.zostoga.tavg-u-hm-sea.day.GLB
+Variable considered: ocean.zostoga.tavg-u-hm-sea.day.GLB (branded name zostoga_tavg-u-hm-sea, official label zostoga_tavg-u-hm-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.zostoga.tavg-u-hm-sea.mon.GLB
+Variable considered: ocean.zostoga.tavg-u-hm-sea.mon.GLB (branded name zostoga_tavg-u-hm-sea, official label zostoga_tavg-u-hm-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocnBgchem.arag.tavg-d0m-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.arag.tavg-d0m-hxy-sea.mon.GLB (branded name arag_tavg-d0m-hxy-sea, official label arag_tavg-d0m-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.arag.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.arag.tavg-ol-hxy-sea.mon.GLB (branded name arag_tavg-ol-hxy-sea, official label arag_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.calc.tavg-d0m-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.calc.tavg-d0m-hxy-sea.mon.GLB (branded name calc_tavg-d0m-hxy-sea, official label calc_tavg-d0m-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.calc.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.calc.tavg-ol-hxy-sea.mon.GLB (branded name calc_tavg-ol-hxy-sea, official label calc_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.chl.tavg-op20bar-hxy-sea.day.GLB
+Variable considered: ocnBgchem.chl.tavg-op20bar-hxy-sea.day.GLB (branded name chl_tavg-op20bar-hxy-sea, official label chl_tavg-op20bar-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.dissic.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.dissic.tavg-ol-hxy-sea.mon.GLB (branded name dissic_tavg-ol-hxy-sea, official label dissic_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.o2.tavg-op20bar-hxy-sea.day.GLB
+Variable considered: ocnBgchem.o2.tavg-op20bar-hxy-sea.day.GLB (branded name o2_tavg-op20bar-hxy-sea, official label o2_tavg-op20bar-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.ph.tavg-op20bar-hxy-sea.day.GLB
+Variable considered: ocnBgchem.ph.tavg-op20bar-hxy-sea.day.GLB (branded name ph_tavg-op20bar-hxy-sea, official label ph_tavg-op20bar-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.talk.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.talk.tavg-ol-hxy-sea.mon.GLB (branded name talk_tavg-ol-hxy-sea, official label talk_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: seaIce.siconc.tavg-u-hxy-u.day.GLB
+Variable considered: seaIce.siconc.tavg-u-hxy-u.day.GLB (branded name siconc_tavg-u-hxy-u, official label siconc_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: seaIce.siconc.tavg-u-hxy-u.mon.GLB
+Variable considered: seaIce.siconc.tavg-u-hxy-u.mon.GLB (branded name siconc_tavg-u-hxy-u, official label siconc_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: seaIce.simass.tavg-u-hxy-sea.mon.GLB
+Variable considered: seaIce.simass.tavg-u-hxy-sea.mon.GLB (branded name simass_tavg-u-hxy-sea, official label simass_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: seaIce.sithick.tavg-u-hxy-si.day.GLB
+Variable considered: seaIce.sithick.tavg-u-hxy-si.day.GLB (branded name sithick_tavg-u-hxy-si, official label sithick_tavg-u-hxy-si)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: seaIce.sithick.tavg-u-hxy-si.mon.GLB
+Variable considered: seaIce.sithick.tavg-u-hxy-si.mon.GLB (branded name sithick_tavg-u-hxy-si, official label sithick_tavg-u-hxy-si)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: seaIce.siu.tavg-u-hxy-si.day.GLB
+Variable considered: seaIce.siu.tavg-u-hxy-si.day.GLB (branded name siu_tavg-u-hxy-si, official label siu_tavg-u-hxy-si)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: seaIce.siu.tavg-u-hxy-si.mon.GLB
+Variable considered: seaIce.siu.tavg-u-hxy-si.mon.GLB (branded name siu_tavg-u-hxy-si, official label siu_tavg-u-hxy-si)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: seaIce.siv.tavg-u-hxy-si.day.GLB
+Variable considered: seaIce.siv.tavg-u-hxy-si.day.GLB (branded name siv_tavg-u-hxy-si, official label siv_tavg-u-hxy-si)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: seaIce.siv.tavg-u-hxy-si.mon.GLB
+Variable considered: seaIce.siv.tavg-u-hxy-si.mon.GLB (branded name siv_tavg-u-hxy-si, official label siv_tavg-u-hxy-si)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
 Number of distinct CMOR variables (whatever the grid): 105
-Variable considered: atmos.areacell.ti-u-hxy-u.fx.GLB
+Variable considered: atmos.areacell.ti-u-hxy-u.fx.GLB (branded name areacell_ti-u-hxy-u, official label areacell_ti-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.bldep.tpt-u-hxy-u.3hr.GLB
+Variable considered: atmos.bldep.tpt-u-hxy-u.3hr.GLB (branded name bldep_tpt-u-hxy-u, official label bldep_tpt-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.hfls.tavg-u-hxy-u.3hr.GLB
+Variable considered: atmos.hfls.tavg-u-hxy-u.3hr.GLB (branded name hfls_tavg-u-hxy-u, official label hfls_tavg-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.hfss.tavg-u-hxy-u.3hr.GLB
+Variable considered: atmos.hfss.tavg-u-hxy-u.3hr.GLB (branded name hfss_tavg-u-hxy-u, official label hfss_tavg-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.hurs.tavg-h2m-hxy-u.6hr.GLB
+Variable considered: atmos.hurs.tavg-h2m-hxy-u.6hr.GLB (branded name hurs_tavg-h2m-hxy-u, official label hurs_tavg-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.huss.tpt-h2m-hxy-u.3hr.GLB
+Variable considered: atmos.huss.tpt-h2m-hxy-u.3hr.GLB (branded name huss_tpt-h2m-hxy-u, official label huss_tpt-h2m-hxy-u)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: atmos.pr.tavg-u-hxy-u.1hr.GLB
+Variable considered: atmos.pr.tavg-u-hxy-u.1hr.GLB (branded name pr_tavg-u-hxy-u, official label pr_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.pr.tavg-u-hxy-u.3hr.GLB
+Variable considered: atmos.pr.tavg-u-hxy-u.3hr.GLB (branded name pr_tavg-u-hxy-u, official label pr_tavg-u-hxy-u)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: atmos.pr.tavg-u-hxy-u.day.GLB
+Variable considered: atmos.pr.tavg-u-hxy-u.day.GLB (branded name pr_tavg-u-hxy-u, official label pr_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.pr.tavg-u-hxy-u.mon.GLB
+Variable considered: atmos.pr.tavg-u-hxy-u.mon.GLB (branded name pr_tavg-u-hxy-u, official label pr_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.prc.tavg-u-hxy-u.mon.GLB
+Variable considered: atmos.prc.tavg-u-hxy-u.mon.GLB (branded name prc_tavg-u-hxy-u, official label prc_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.ps.tavg-u-hxy-u.day.GLB
+Variable considered: atmos.ps.tavg-u-hxy-u.day.GLB (branded name ps_tavg-u-hxy-u, official label ps_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.ps.tpt-u-hxy-u.3hr.GLB
+Variable considered: atmos.ps.tpt-u-hxy-u.3hr.GLB (branded name ps_tpt-u-hxy-u, official label ps_tpt-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.psl.tavg-u-hxy-u.day.GLB
+Variable considered: atmos.psl.tavg-u-hxy-u.day.GLB (branded name psl_tavg-u-hxy-u, official label psl_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.psl.tpt-u-hxy-u.1hr.GLB
+Variable considered: atmos.psl.tpt-u-hxy-u.1hr.GLB (branded name psl_tpt-u-hxy-u, official label psl_tpt-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.rlds.tavg-u-hxy-u.3hr.GLB
+Variable considered: atmos.rlds.tavg-u-hxy-u.3hr.GLB (branded name rlds_tavg-u-hxy-u, official label rlds_tavg-u-hxy-u)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: atmos.rlus.tavg-u-hxy-u.3hr.GLB
+Variable considered: atmos.rlus.tavg-u-hxy-u.3hr.GLB (branded name rlus_tavg-u-hxy-u, official label rlus_tavg-u-hxy-u)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.day.GLB
+Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.day.GLB (branded name sfcWind_tavg-h10m-hxy-u, official label sfcWind_tavg-h10m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.mon.GLB
+Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.mon.GLB (branded name sfcWind_tavg-h10m-hxy-u, official label sfcWind_tavg-h10m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.sftlf.ti-u-hxy-u.fx.GLB
+Variable considered: atmos.sftlf.ti-u-hxy-u.fx.GLB (branded name sftlf_ti-u-hxy-u, official label sftlf_ti-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.ta.tavg-p19-hxy-air.day.GLB
+Variable considered: atmos.ta.tavg-p19-hxy-air.day.GLB (branded name ta_tavg-p19-hxy-air, official label ta_tavg-p19-hxy-air)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.ta.tavg-p19-hxy-air.mon.GLB
+Variable considered: atmos.ta.tavg-p19-hxy-air.mon.GLB (branded name ta_tavg-p19-hxy-air, official label ta_tavg-p19-hxy-air)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.ta.tpt-p3-hxy-air.6hr.GLB
+Variable considered: atmos.ta.tpt-p3-hxy-air.6hr.GLB (branded name ta_tpt-p3-hxy-air, official label ta_tpt-p3-hxy-air)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.ta.tpt-p6-hxy-air.3hr.GLB
+Variable considered: atmos.ta.tpt-p6-hxy-air.3hr.GLB (branded name ta_tpt-p6-hxy-air, official label ta_tpt-p6-hxy-air)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: atmos.tas.tavg-h2m-hxy-u.day.GLB
+Variable considered: atmos.tas.tavg-h2m-hxy-u.day.GLB (branded name tas_tavg-h2m-hxy-u, official label tas_tavg-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tavg-h2m-hxy-u.mon.GLB
+Variable considered: atmos.tas.tavg-h2m-hxy-u.mon.GLB (branded name tas_tavg-h2m-hxy-u, official label tas_tavg-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tmax-h2m-hxy-u.day.GLB
+Variable considered: atmos.tas.tmax-h2m-hxy-u.day.GLB (branded name tas_tmax-h2m-hxy-u, official label tas_tmax-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tmax-h2m-hxy-u.mon.GLB
+Variable considered: atmos.tas.tmax-h2m-hxy-u.mon.GLB (branded name tas_tmax-h2m-hxy-u, official label tas_tmax-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tmin-h2m-hxy-u.day.GLB
+Variable considered: atmos.tas.tmin-h2m-hxy-u.day.GLB (branded name tas_tmin-h2m-hxy-u, official label tas_tmin-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tmin-h2m-hxy-u.mon.GLB
+Variable considered: atmos.tas.tmin-h2m-hxy-u.mon.GLB (branded name tas_tmin-h2m-hxy-u, official label tas_tmin-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tpt-h2m-hxy-u.3hr.GLB
+Variable considered: atmos.tas.tpt-h2m-hxy-u.3hr.GLB (branded name tas_tpt-h2m-hxy-u, official label tas_tpt-h2m-hxy-u)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: atmos.ts.tavg-u-hxy-u.mon.GLB
+Variable considered: atmos.ts.tavg-u-hxy-u.mon.GLB (branded name ts_tavg-u-hxy-u, official label ts_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.uas.tpt-h10m-hxy-u.1hr.GLB
+Variable considered: atmos.uas.tpt-h10m-hxy-u.1hr.GLB (branded name uas_tpt-h10m-hxy-u, official label uas_tpt-h10m-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.vas.tpt-h10m-hxy-u.1hr.GLB
+Variable considered: atmos.vas.tpt-h10m-hxy-u.1hr.GLB (branded name vas_tpt-h10m-hxy-u, official label vas_tpt-h10m-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.zg.tavg-p19-hxy-air.day.GLB
+Variable considered: atmos.zg.tavg-p19-hxy-air.day.GLB (branded name zg_tavg-p19-hxy-air, official label zg_tavg-p19-hxy-air)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.zg.tavg-p19-hxy-air.mon.GLB
+Variable considered: atmos.zg.tavg-p19-hxy-air.mon.GLB (branded name zg_tavg-p19-hxy-air, official label zg_tavg-p19-hxy-air)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.hfdsl.tavg-u-hxy-lnd.3hr.GLB
+Variable considered: land.hfdsl.tavg-u-hxy-lnd.3hr.GLB (branded name hfdsl_tavg-u-hxy-lnd, official label hfdsl_tavg-u-hxy-lnd)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: land.lai.tavg-u-hxy-lnd.mon.GLB
+Variable considered: land.lai.tavg-u-hxy-lnd.mon.GLB (branded name lai_tavg-u-hxy-lnd, official label lai_tavg-u-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.mrso.tavg-u-hxy-lnd.mon.GLB
+Variable considered: land.mrso.tavg-u-hxy-lnd.mon.GLB (branded name mrso_tavg-u-hxy-lnd, official label mrso_tavg-u-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.mrsol.tavg-d100cm-hxy-lnd.3hr.GLB
+Variable considered: land.mrsol.tavg-d100cm-hxy-lnd.3hr.GLB (branded name mrsol_tavg-d100cm-hxy-lnd, official label mrsol_tavg-d100cm-hxy-lnd)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: land.mrsol.tavg-d10cm-hxy-lnd.mon.GLB
+Variable considered: land.mrsol.tavg-d10cm-hxy-lnd.mon.GLB (branded name mrsol_tavg-d10cm-hxy-lnd, official label mrsol_tavg-d10cm-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.mrsol.tpt-d10cm-hxy-lnd.3hr.GLB
+Variable considered: land.mrsol.tpt-d10cm-hxy-lnd.3hr.GLB (branded name mrsol_tpt-d10cm-hxy-lnd, official label mrsol_tpt-d10cm-hxy-lnd)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: land.orog.ti-u-hxy-u.fx.GLB
+Variable considered: land.orog.ti-u-hxy-u.fx.GLB (branded name orog_ti-u-hxy-u, official label orog_ti-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.rootd.ti-u-hxy-lnd.fx.GLB
+Variable considered: land.rootd.ti-u-hxy-lnd.fx.GLB (branded name rootd_ti-u-hxy-lnd, official label rootd_ti-u-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.slthick.ti-sl-hxy-lnd.fx.GLB
+Variable considered: land.slthick.ti-sl-hxy-lnd.fx.GLB (branded name slthick_ti-sl-hxy-lnd, official label slthick_ti-sl-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.srfrad.tavg-u-hxy-u.3hr.GLB
+Variable considered: land.srfrad.tavg-u-hxy-u.3hr.GLB (branded name srfrad_tavg-u-hxy-u, official label srfrad_tavg-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: land.tran.tavg-u-hxy-u.3hr.GLB
+Variable considered: land.tran.tavg-u-hxy-u.3hr.GLB (branded name tran_tavg-u-hxy-u, official label tran_tavg-u-hxy-u)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: land.tslsi.tpt-u-hxy-u.3hr.GLB
+Variable considered: land.tslsi.tpt-u-hxy-u.3hr.GLB (branded name tslsi_tpt-u-hxy-u, official label tslsi_tpt-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: landIce.snc.tavg-u-hxy-lnd.mon.GLB
+Variable considered: landIce.snc.tavg-u-hxy-lnd.mon.GLB (branded name snc_tavg-u-hxy-lnd, official label snc_tavg-u-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.areacell.ti-u-hxy-u.fx.GLB
+Variable considered: ocean.areacell.ti-u-hxy-u.fx.GLB (branded name areacell_ti-u-hxy-u, official label areacell_ti-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.bigthetao.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocean.bigthetao.tavg-ol-hxy-sea.mon.GLB (branded name bigthetao_tavg-ol-hxy-sea, official label bigthetao_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.bigthetao.tavg-op20bar-hxy-sea.day.GLB
+Variable considered: ocean.bigthetao.tavg-op20bar-hxy-sea.day.GLB (branded name bigthetao_tavg-op20bar-hxy-sea, official label bigthetao_tavg-op20bar-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.deptho.ti-u-hxy-sea.fx.GLB
+Variable considered: ocean.deptho.ti-u-hxy-sea.fx.GLB (branded name deptho_ti-u-hxy-sea, official label deptho_ti-u-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.masscello.ti-ol-hxy-sea.fx.GLB
+Variable considered: ocean.masscello.ti-ol-hxy-sea.fx.GLB (branded name masscello_ti-ol-hxy-sea, official label masscello_ti-ol-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.mlotst.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.mlotst.tavg-u-hxy-sea.day.GLB (branded name mlotst_tavg-u-hxy-sea, official label mlotst_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.mlotstmax.tmax-u-hxy-sea.mon.GLB
+Variable considered: ocean.mlotstmax.tmax-u-hxy-sea.mon.GLB (branded name mlotstmax_tmax-u-hxy-sea, official label mlotstmax_tmax-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.mlotstmin.tmin-u-hxy-sea.mon.GLB
+Variable considered: ocean.mlotstmin.tmin-u-hxy-sea.mon.GLB (branded name mlotstmin_tmin-u-hxy-sea, official label mlotstmin_tmin-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.mpw.tavg-u-hxy-sea.3hr.GLB
+Variable considered: ocean.mpw.tavg-u-hxy-sea.3hr.GLB (branded name mpw_tavg-u-hxy-sea, official label mpw_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.mpw.tavg-u-hxy-sea.6hr.GLB
+Variable considered: ocean.mpw.tavg-u-hxy-sea.6hr.GLB (branded name mpw_tavg-u-hxy-sea, official label mpw_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.mpw.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.mpw.tavg-u-hxy-sea.mon.GLB (branded name mpw_tavg-u-hxy-sea, official label mpw_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.so.tavg-ol-hxy-sea.day.GLB
+Variable considered: ocean.so.tavg-ol-hxy-sea.day.GLB (branded name so_tavg-ol-hxy-sea, official label so_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocean.so.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocean.so.tavg-ol-hxy-sea.mon.GLB (branded name so_tavg-ol-hxy-sea, official label so_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: ocean.sos.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.sos.tavg-u-hxy-sea.day.GLB (branded name sos_tavg-u-hxy-sea, official label sos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: Medium] ([1, 3])
 Priority_retain 1
-Variable considered: ocean.sos.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.sos.tavg-u-hxy-sea.mon.GLB (branded name sos_tavg-u-hxy-sea, official label sos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: ocean.swh.tavg-u-hxy-sea.3hr.GLB
+Variable considered: ocean.swh.tavg-u-hxy-sea.3hr.GLB (branded name swh_tavg-u-hxy-sea, official label swh_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.swh.tavg-u-hxy-sea.6hr.GLB
+Variable considered: ocean.swh.tavg-u-hxy-sea.6hr.GLB (branded name swh_tavg-u-hxy-sea, official label swh_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.swh.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.swh.tavg-u-hxy-sea.mon.GLB (branded name swh_tavg-u-hxy-sea, official label swh_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.swh.tmax-u-hxy-sea.6hr.GLB
+Variable considered: ocean.swh.tmax-u-hxy-sea.6hr.GLB (branded name swh_tmax-u-hxy-sea, official label swh_tmax-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.swh.tmax-u-hxy-sea.mon.GLB
+Variable considered: ocean.swh.tmax-u-hxy-sea.mon.GLB (branded name swh_tmax-u-hxy-sea, official label swh_tmax-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.thetao.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocean.thetao.tavg-ol-hxy-sea.mon.GLB (branded name thetao_tavg-ol-hxy-sea, official label thetao_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: ocean.thetao.tavg-op20bar-hxy-sea.day.GLB
+Variable considered: ocean.thetao.tavg-op20bar-hxy-sea.day.GLB (branded name thetao_tavg-op20bar-hxy-sea, official label thetao_tavg-op20bar-hxy-sea)
 Priorities found: [priority_level: High, priority_level: Medium] ([2, 3])
 Priority_retain 2
-Variable considered: ocean.tnkebto.tavg-u-hxy-sea.yr.GLB
+Variable considered: ocean.tnkebto.tavg-u-hxy-sea.yr.GLB (branded name tnkebto_tavg-u-hxy-sea, official label tnkebto_tavg-u-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocean.tos.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.tos.tavg-u-hxy-sea.day.GLB (branded name tos_tavg-u-hxy-sea, official label tos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: Medium] ([1, 3])
 Priority_retain 1
-Variable considered: ocean.tos.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.tos.tavg-u-hxy-sea.mon.GLB (branded name tos_tavg-u-hxy-sea, official label tos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: ocean.tos.tpt-u-hxy-sea.3hr.GLB
+Variable considered: ocean.tos.tpt-u-hxy-sea.3hr.GLB (branded name tos_tpt-u-hxy-sea, official label tos_tpt-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.tossq.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.tossq.tavg-u-hxy-sea.day.GLB (branded name tossq_tavg-u-hxy-sea, official label tossq_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.uos.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.uos.tavg-u-hxy-sea.day.GLB (branded name uos_tavg-u-hxy-sea, official label uos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocean.vos.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.vos.tavg-u-hxy-sea.day.GLB (branded name vos_tavg-u-hxy-sea, official label vos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocean.wo.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocean.wo.tavg-ol-hxy-sea.mon.GLB (branded name wo_tavg-ol-hxy-sea, official label wo_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.wpp.tavg-u-hxy-sea.3hr.GLB
+Variable considered: ocean.wpp.tavg-u-hxy-sea.3hr.GLB (branded name wpp_tavg-u-hxy-sea, official label wpp_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.wpp.tavg-u-hxy-sea.6hr.GLB
+Variable considered: ocean.wpp.tavg-u-hxy-sea.6hr.GLB (branded name wpp_tavg-u-hxy-sea, official label wpp_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.wpp.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.wpp.tavg-u-hxy-sea.mon.GLB (branded name wpp_tavg-u-hxy-sea, official label wpp_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.zos.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.zos.tavg-u-hxy-sea.day.GLB (branded name zos_tavg-u-hxy-sea, official label zos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: ocean.zos.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.zos.tavg-u-hxy-sea.mon.GLB (branded name zos_tavg-u-hxy-sea, official label zos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.zossq.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.zossq.tavg-u-hxy-sea.mon.GLB (branded name zossq_tavg-u-hxy-sea, official label zossq_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.zostoga.tavg-u-hm-sea.day.GLB
+Variable considered: ocean.zostoga.tavg-u-hm-sea.day.GLB (branded name zostoga_tavg-u-hm-sea, official label zostoga_tavg-u-hm-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.zostoga.tavg-u-hm-sea.mon.GLB
+Variable considered: ocean.zostoga.tavg-u-hm-sea.mon.GLB (branded name zostoga_tavg-u-hm-sea, official label zostoga_tavg-u-hm-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocnBgchem.arag.tavg-d0m-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.arag.tavg-d0m-hxy-sea.mon.GLB (branded name arag_tavg-d0m-hxy-sea, official label arag_tavg-d0m-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.arag.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.arag.tavg-ol-hxy-sea.mon.GLB (branded name arag_tavg-ol-hxy-sea, official label arag_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.calc.tavg-d0m-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.calc.tavg-d0m-hxy-sea.mon.GLB (branded name calc_tavg-d0m-hxy-sea, official label calc_tavg-d0m-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.calc.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.calc.tavg-ol-hxy-sea.mon.GLB (branded name calc_tavg-ol-hxy-sea, official label calc_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.chl.tavg-op20bar-hxy-sea.day.GLB
+Variable considered: ocnBgchem.chl.tavg-op20bar-hxy-sea.day.GLB (branded name chl_tavg-op20bar-hxy-sea, official label chl_tavg-op20bar-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.dissic.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.dissic.tavg-ol-hxy-sea.mon.GLB (branded name dissic_tavg-ol-hxy-sea, official label dissic_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.o2.tavg-op20bar-hxy-sea.day.GLB
+Variable considered: ocnBgchem.o2.tavg-op20bar-hxy-sea.day.GLB (branded name o2_tavg-op20bar-hxy-sea, official label o2_tavg-op20bar-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.ph.tavg-op20bar-hxy-sea.day.GLB
+Variable considered: ocnBgchem.ph.tavg-op20bar-hxy-sea.day.GLB (branded name ph_tavg-op20bar-hxy-sea, official label ph_tavg-op20bar-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.talk.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.talk.tavg-ol-hxy-sea.mon.GLB (branded name talk_tavg-ol-hxy-sea, official label talk_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: seaIce.siconc.tavg-u-hxy-u.day.GLB
+Variable considered: seaIce.siconc.tavg-u-hxy-u.day.GLB (branded name siconc_tavg-u-hxy-u, official label siconc_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: seaIce.siconc.tavg-u-hxy-u.mon.GLB
+Variable considered: seaIce.siconc.tavg-u-hxy-u.mon.GLB (branded name siconc_tavg-u-hxy-u, official label siconc_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: seaIce.simass.tavg-u-hxy-sea.mon.GLB
+Variable considered: seaIce.simass.tavg-u-hxy-sea.mon.GLB (branded name simass_tavg-u-hxy-sea, official label simass_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: seaIce.sithick.tavg-u-hxy-si.day.GLB
+Variable considered: seaIce.sithick.tavg-u-hxy-si.day.GLB (branded name sithick_tavg-u-hxy-si, official label sithick_tavg-u-hxy-si)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: seaIce.sithick.tavg-u-hxy-si.mon.GLB
+Variable considered: seaIce.sithick.tavg-u-hxy-si.mon.GLB (branded name sithick_tavg-u-hxy-si, official label sithick_tavg-u-hxy-si)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: seaIce.siu.tavg-u-hxy-si.day.GLB
+Variable considered: seaIce.siu.tavg-u-hxy-si.day.GLB (branded name siu_tavg-u-hxy-si, official label siu_tavg-u-hxy-si)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: seaIce.siu.tavg-u-hxy-si.mon.GLB
+Variable considered: seaIce.siu.tavg-u-hxy-si.mon.GLB (branded name siu_tavg-u-hxy-si, official label siu_tavg-u-hxy-si)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: seaIce.siv.tavg-u-hxy-si.day.GLB
+Variable considered: seaIce.siv.tavg-u-hxy-si.day.GLB (branded name siv_tavg-u-hxy-si, official label siv_tavg-u-hxy-si)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: seaIce.siv.tavg-u-hxy-si.mon.GLB
+Variable considered: seaIce.siv.tavg-u-hxy-si.mon.GLB (branded name siv_tavg-u-hxy-si, official label siv_tavg-u-hxy-si)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
 Number of distinct var labels is: 72
-Variable considered: atmos.areacell.ti-u-hxy-u.fx.GLB
+Variable considered: atmos.areacell.ti-u-hxy-u.fx.GLB (branded name areacell_ti-u-hxy-u, official label areacell_ti-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.areacell.ti-u-hxy-u.fx.GLB
+Variable considered: atmos.areacell.ti-u-hxy-u.fx.GLB (branded name areacell_ti-u-hxy-u, official label areacell_ti-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.areacell.ti-u-hxy-u.fx.GLB
+Variable considered: atmos.areacell.ti-u-hxy-u.fx.GLB (branded name areacell_ti-u-hxy-u, official label areacell_ti-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.bldep.tpt-u-hxy-u.3hr.GLB
+Variable considered: atmos.bldep.tpt-u-hxy-u.3hr.GLB (branded name bldep_tpt-u-hxy-u, official label bldep_tpt-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.bldep.tpt-u-hxy-u.3hr.GLB
+Variable considered: atmos.bldep.tpt-u-hxy-u.3hr.GLB (branded name bldep_tpt-u-hxy-u, official label bldep_tpt-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.hfls.tavg-u-hxy-u.3hr.GLB
+Variable considered: atmos.hfls.tavg-u-hxy-u.3hr.GLB (branded name hfls_tavg-u-hxy-u, official label hfls_tavg-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.hfls.tavg-u-hxy-u.3hr.GLB
+Variable considered: atmos.hfls.tavg-u-hxy-u.3hr.GLB (branded name hfls_tavg-u-hxy-u, official label hfls_tavg-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.hfss.tavg-u-hxy-u.3hr.GLB
+Variable considered: atmos.hfss.tavg-u-hxy-u.3hr.GLB (branded name hfss_tavg-u-hxy-u, official label hfss_tavg-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.hfss.tavg-u-hxy-u.3hr.GLB
+Variable considered: atmos.hfss.tavg-u-hxy-u.3hr.GLB (branded name hfss_tavg-u-hxy-u, official label hfss_tavg-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.hurs.tavg-h2m-hxy-u.6hr.GLB
+Variable considered: atmos.hurs.tavg-h2m-hxy-u.6hr.GLB (branded name hurs_tavg-h2m-hxy-u, official label hurs_tavg-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.hurs.tavg-h2m-hxy-u.6hr.GLB
+Variable considered: atmos.hurs.tavg-h2m-hxy-u.6hr.GLB (branded name hurs_tavg-h2m-hxy-u, official label hurs_tavg-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.huss.tpt-h2m-hxy-u.3hr.GLB
+Variable considered: atmos.huss.tpt-h2m-hxy-u.3hr.GLB (branded name huss_tpt-h2m-hxy-u, official label huss_tpt-h2m-hxy-u)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: atmos.huss.tpt-h2m-hxy-u.3hr.GLB
+Variable considered: atmos.huss.tpt-h2m-hxy-u.3hr.GLB (branded name huss_tpt-h2m-hxy-u, official label huss_tpt-h2m-hxy-u)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: atmos.pr.tavg-u-hxy-u.1hr.GLB
+Variable considered: atmos.pr.tavg-u-hxy-u.1hr.GLB (branded name pr_tavg-u-hxy-u, official label pr_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.pr.tavg-u-hxy-u.1hr.GLB
+Variable considered: atmos.pr.tavg-u-hxy-u.1hr.GLB (branded name pr_tavg-u-hxy-u, official label pr_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.pr.tavg-u-hxy-u.3hr.GLB
+Variable considered: atmos.pr.tavg-u-hxy-u.3hr.GLB (branded name pr_tavg-u-hxy-u, official label pr_tavg-u-hxy-u)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: atmos.pr.tavg-u-hxy-u.3hr.GLB
+Variable considered: atmos.pr.tavg-u-hxy-u.3hr.GLB (branded name pr_tavg-u-hxy-u, official label pr_tavg-u-hxy-u)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: atmos.pr.tavg-u-hxy-u.day.GLB
+Variable considered: atmos.pr.tavg-u-hxy-u.day.GLB (branded name pr_tavg-u-hxy-u, official label pr_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.pr.tavg-u-hxy-u.day.GLB
+Variable considered: atmos.pr.tavg-u-hxy-u.day.GLB (branded name pr_tavg-u-hxy-u, official label pr_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.pr.tavg-u-hxy-u.mon.GLB
+Variable considered: atmos.pr.tavg-u-hxy-u.mon.GLB (branded name pr_tavg-u-hxy-u, official label pr_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.pr.tavg-u-hxy-u.mon.GLB
+Variable considered: atmos.pr.tavg-u-hxy-u.mon.GLB (branded name pr_tavg-u-hxy-u, official label pr_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.prc.tavg-u-hxy-u.mon.GLB
+Variable considered: atmos.prc.tavg-u-hxy-u.mon.GLB (branded name prc_tavg-u-hxy-u, official label prc_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.prc.tavg-u-hxy-u.mon.GLB
+Variable considered: atmos.prc.tavg-u-hxy-u.mon.GLB (branded name prc_tavg-u-hxy-u, official label prc_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.ps.tavg-u-hxy-u.day.GLB
+Variable considered: atmos.ps.tavg-u-hxy-u.day.GLB (branded name ps_tavg-u-hxy-u, official label ps_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.ps.tavg-u-hxy-u.day.GLB
+Variable considered: atmos.ps.tavg-u-hxy-u.day.GLB (branded name ps_tavg-u-hxy-u, official label ps_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.ps.tpt-u-hxy-u.3hr.GLB
+Variable considered: atmos.ps.tpt-u-hxy-u.3hr.GLB (branded name ps_tpt-u-hxy-u, official label ps_tpt-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.ps.tpt-u-hxy-u.3hr.GLB
+Variable considered: atmos.ps.tpt-u-hxy-u.3hr.GLB (branded name ps_tpt-u-hxy-u, official label ps_tpt-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.psl.tavg-u-hxy-u.day.GLB
+Variable considered: atmos.psl.tavg-u-hxy-u.day.GLB (branded name psl_tavg-u-hxy-u, official label psl_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.psl.tavg-u-hxy-u.day.GLB
+Variable considered: atmos.psl.tavg-u-hxy-u.day.GLB (branded name psl_tavg-u-hxy-u, official label psl_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.psl.tpt-u-hxy-u.1hr.GLB
+Variable considered: atmos.psl.tpt-u-hxy-u.1hr.GLB (branded name psl_tpt-u-hxy-u, official label psl_tpt-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.psl.tpt-u-hxy-u.1hr.GLB
+Variable considered: atmos.psl.tpt-u-hxy-u.1hr.GLB (branded name psl_tpt-u-hxy-u, official label psl_tpt-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.rlds.tavg-u-hxy-u.3hr.GLB
+Variable considered: atmos.rlds.tavg-u-hxy-u.3hr.GLB (branded name rlds_tavg-u-hxy-u, official label rlds_tavg-u-hxy-u)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: atmos.rlds.tavg-u-hxy-u.3hr.GLB
+Variable considered: atmos.rlds.tavg-u-hxy-u.3hr.GLB (branded name rlds_tavg-u-hxy-u, official label rlds_tavg-u-hxy-u)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: atmos.rlus.tavg-u-hxy-u.3hr.GLB
+Variable considered: atmos.rlus.tavg-u-hxy-u.3hr.GLB (branded name rlus_tavg-u-hxy-u, official label rlus_tavg-u-hxy-u)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: atmos.rlus.tavg-u-hxy-u.3hr.GLB
+Variable considered: atmos.rlus.tavg-u-hxy-u.3hr.GLB (branded name rlus_tavg-u-hxy-u, official label rlus_tavg-u-hxy-u)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.day.GLB
+Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.day.GLB (branded name sfcWind_tavg-h10m-hxy-u, official label sfcWind_tavg-h10m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.day.GLB
+Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.day.GLB (branded name sfcWind_tavg-h10m-hxy-u, official label sfcWind_tavg-h10m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.mon.GLB
+Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.mon.GLB (branded name sfcWind_tavg-h10m-hxy-u, official label sfcWind_tavg-h10m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.mon.GLB
+Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.mon.GLB (branded name sfcWind_tavg-h10m-hxy-u, official label sfcWind_tavg-h10m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.sftlf.ti-u-hxy-u.fx.GLB
+Variable considered: atmos.sftlf.ti-u-hxy-u.fx.GLB (branded name sftlf_ti-u-hxy-u, official label sftlf_ti-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.sftlf.ti-u-hxy-u.fx.GLB
+Variable considered: atmos.sftlf.ti-u-hxy-u.fx.GLB (branded name sftlf_ti-u-hxy-u, official label sftlf_ti-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.ta.tavg-p19-hxy-air.day.GLB
+Variable considered: atmos.ta.tavg-p19-hxy-air.day.GLB (branded name ta_tavg-p19-hxy-air, official label ta_tavg-p19-hxy-air)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.ta.tavg-p19-hxy-air.day.GLB
+Variable considered: atmos.ta.tavg-p19-hxy-air.day.GLB (branded name ta_tavg-p19-hxy-air, official label ta_tavg-p19-hxy-air)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.ta.tavg-p19-hxy-air.mon.GLB
+Variable considered: atmos.ta.tavg-p19-hxy-air.mon.GLB (branded name ta_tavg-p19-hxy-air, official label ta_tavg-p19-hxy-air)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.ta.tavg-p19-hxy-air.mon.GLB
+Variable considered: atmos.ta.tavg-p19-hxy-air.mon.GLB (branded name ta_tavg-p19-hxy-air, official label ta_tavg-p19-hxy-air)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.ta.tpt-p3-hxy-air.6hr.GLB
+Variable considered: atmos.ta.tpt-p3-hxy-air.6hr.GLB (branded name ta_tpt-p3-hxy-air, official label ta_tpt-p3-hxy-air)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.ta.tpt-p3-hxy-air.6hr.GLB
+Variable considered: atmos.ta.tpt-p3-hxy-air.6hr.GLB (branded name ta_tpt-p3-hxy-air, official label ta_tpt-p3-hxy-air)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.ta.tpt-p6-hxy-air.3hr.GLB
+Variable considered: atmos.ta.tpt-p6-hxy-air.3hr.GLB (branded name ta_tpt-p6-hxy-air, official label ta_tpt-p6-hxy-air)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: atmos.ta.tpt-p6-hxy-air.3hr.GLB
+Variable considered: atmos.ta.tpt-p6-hxy-air.3hr.GLB (branded name ta_tpt-p6-hxy-air, official label ta_tpt-p6-hxy-air)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: atmos.tas.tavg-h2m-hxy-u.day.GLB
+Variable considered: atmos.tas.tavg-h2m-hxy-u.day.GLB (branded name tas_tavg-h2m-hxy-u, official label tas_tavg-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tavg-h2m-hxy-u.day.GLB
+Variable considered: atmos.tas.tavg-h2m-hxy-u.day.GLB (branded name tas_tavg-h2m-hxy-u, official label tas_tavg-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tavg-h2m-hxy-u.mon.GLB
+Variable considered: atmos.tas.tavg-h2m-hxy-u.mon.GLB (branded name tas_tavg-h2m-hxy-u, official label tas_tavg-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tavg-h2m-hxy-u.mon.GLB
+Variable considered: atmos.tas.tavg-h2m-hxy-u.mon.GLB (branded name tas_tavg-h2m-hxy-u, official label tas_tavg-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tmax-h2m-hxy-u.day.GLB
+Variable considered: atmos.tas.tmax-h2m-hxy-u.day.GLB (branded name tas_tmax-h2m-hxy-u, official label tas_tmax-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tmax-h2m-hxy-u.day.GLB
+Variable considered: atmos.tas.tmax-h2m-hxy-u.day.GLB (branded name tas_tmax-h2m-hxy-u, official label tas_tmax-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tmax-h2m-hxy-u.mon.GLB
+Variable considered: atmos.tas.tmax-h2m-hxy-u.mon.GLB (branded name tas_tmax-h2m-hxy-u, official label tas_tmax-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tmax-h2m-hxy-u.mon.GLB
+Variable considered: atmos.tas.tmax-h2m-hxy-u.mon.GLB (branded name tas_tmax-h2m-hxy-u, official label tas_tmax-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tmin-h2m-hxy-u.day.GLB
+Variable considered: atmos.tas.tmin-h2m-hxy-u.day.GLB (branded name tas_tmin-h2m-hxy-u, official label tas_tmin-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tmin-h2m-hxy-u.day.GLB
+Variable considered: atmos.tas.tmin-h2m-hxy-u.day.GLB (branded name tas_tmin-h2m-hxy-u, official label tas_tmin-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tmin-h2m-hxy-u.mon.GLB
+Variable considered: atmos.tas.tmin-h2m-hxy-u.mon.GLB (branded name tas_tmin-h2m-hxy-u, official label tas_tmin-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tmin-h2m-hxy-u.mon.GLB
+Variable considered: atmos.tas.tmin-h2m-hxy-u.mon.GLB (branded name tas_tmin-h2m-hxy-u, official label tas_tmin-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tpt-h2m-hxy-u.3hr.GLB
+Variable considered: atmos.tas.tpt-h2m-hxy-u.3hr.GLB (branded name tas_tpt-h2m-hxy-u, official label tas_tpt-h2m-hxy-u)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: atmos.tas.tpt-h2m-hxy-u.3hr.GLB
+Variable considered: atmos.tas.tpt-h2m-hxy-u.3hr.GLB (branded name tas_tpt-h2m-hxy-u, official label tas_tpt-h2m-hxy-u)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: atmos.ts.tavg-u-hxy-u.mon.GLB
+Variable considered: atmos.ts.tavg-u-hxy-u.mon.GLB (branded name ts_tavg-u-hxy-u, official label ts_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.ts.tavg-u-hxy-u.mon.GLB
+Variable considered: atmos.ts.tavg-u-hxy-u.mon.GLB (branded name ts_tavg-u-hxy-u, official label ts_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.uas.tpt-h10m-hxy-u.1hr.GLB
+Variable considered: atmos.uas.tpt-h10m-hxy-u.1hr.GLB (branded name uas_tpt-h10m-hxy-u, official label uas_tpt-h10m-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.uas.tpt-h10m-hxy-u.1hr.GLB
+Variable considered: atmos.uas.tpt-h10m-hxy-u.1hr.GLB (branded name uas_tpt-h10m-hxy-u, official label uas_tpt-h10m-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.vas.tpt-h10m-hxy-u.1hr.GLB
+Variable considered: atmos.vas.tpt-h10m-hxy-u.1hr.GLB (branded name vas_tpt-h10m-hxy-u, official label vas_tpt-h10m-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.vas.tpt-h10m-hxy-u.1hr.GLB
+Variable considered: atmos.vas.tpt-h10m-hxy-u.1hr.GLB (branded name vas_tpt-h10m-hxy-u, official label vas_tpt-h10m-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.zg.tavg-p19-hxy-air.day.GLB
+Variable considered: atmos.zg.tavg-p19-hxy-air.day.GLB (branded name zg_tavg-p19-hxy-air, official label zg_tavg-p19-hxy-air)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.zg.tavg-p19-hxy-air.day.GLB
+Variable considered: atmos.zg.tavg-p19-hxy-air.day.GLB (branded name zg_tavg-p19-hxy-air, official label zg_tavg-p19-hxy-air)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.zg.tavg-p19-hxy-air.mon.GLB
+Variable considered: atmos.zg.tavg-p19-hxy-air.mon.GLB (branded name zg_tavg-p19-hxy-air, official label zg_tavg-p19-hxy-air)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.zg.tavg-p19-hxy-air.mon.GLB
+Variable considered: atmos.zg.tavg-p19-hxy-air.mon.GLB (branded name zg_tavg-p19-hxy-air, official label zg_tavg-p19-hxy-air)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.hfdsl.tavg-u-hxy-lnd.3hr.GLB
+Variable considered: land.hfdsl.tavg-u-hxy-lnd.3hr.GLB (branded name hfdsl_tavg-u-hxy-lnd, official label hfdsl_tavg-u-hxy-lnd)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: land.hfdsl.tavg-u-hxy-lnd.3hr.GLB
+Variable considered: land.hfdsl.tavg-u-hxy-lnd.3hr.GLB (branded name hfdsl_tavg-u-hxy-lnd, official label hfdsl_tavg-u-hxy-lnd)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: land.lai.tavg-u-hxy-lnd.mon.GLB
+Variable considered: land.lai.tavg-u-hxy-lnd.mon.GLB (branded name lai_tavg-u-hxy-lnd, official label lai_tavg-u-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.lai.tavg-u-hxy-lnd.mon.GLB
+Variable considered: land.lai.tavg-u-hxy-lnd.mon.GLB (branded name lai_tavg-u-hxy-lnd, official label lai_tavg-u-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.mrso.tavg-u-hxy-lnd.mon.GLB
+Variable considered: land.mrso.tavg-u-hxy-lnd.mon.GLB (branded name mrso_tavg-u-hxy-lnd, official label mrso_tavg-u-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.mrso.tavg-u-hxy-lnd.mon.GLB
+Variable considered: land.mrso.tavg-u-hxy-lnd.mon.GLB (branded name mrso_tavg-u-hxy-lnd, official label mrso_tavg-u-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.mrsol.tavg-d100cm-hxy-lnd.3hr.GLB
+Variable considered: land.mrsol.tavg-d100cm-hxy-lnd.3hr.GLB (branded name mrsol_tavg-d100cm-hxy-lnd, official label mrsol_tavg-d100cm-hxy-lnd)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: land.mrsol.tavg-d100cm-hxy-lnd.3hr.GLB
+Variable considered: land.mrsol.tavg-d100cm-hxy-lnd.3hr.GLB (branded name mrsol_tavg-d100cm-hxy-lnd, official label mrsol_tavg-d100cm-hxy-lnd)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: land.mrsol.tavg-d10cm-hxy-lnd.mon.GLB
+Variable considered: land.mrsol.tavg-d10cm-hxy-lnd.mon.GLB (branded name mrsol_tavg-d10cm-hxy-lnd, official label mrsol_tavg-d10cm-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.mrsol.tavg-d10cm-hxy-lnd.mon.GLB
+Variable considered: land.mrsol.tavg-d10cm-hxy-lnd.mon.GLB (branded name mrsol_tavg-d10cm-hxy-lnd, official label mrsol_tavg-d10cm-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.mrsol.tpt-d10cm-hxy-lnd.3hr.GLB
+Variable considered: land.mrsol.tpt-d10cm-hxy-lnd.3hr.GLB (branded name mrsol_tpt-d10cm-hxy-lnd, official label mrsol_tpt-d10cm-hxy-lnd)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: land.mrsol.tpt-d10cm-hxy-lnd.3hr.GLB
+Variable considered: land.mrsol.tpt-d10cm-hxy-lnd.3hr.GLB (branded name mrsol_tpt-d10cm-hxy-lnd, official label mrsol_tpt-d10cm-hxy-lnd)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: land.orog.ti-u-hxy-u.fx.GLB
+Variable considered: land.orog.ti-u-hxy-u.fx.GLB (branded name orog_ti-u-hxy-u, official label orog_ti-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.orog.ti-u-hxy-u.fx.GLB
+Variable considered: land.orog.ti-u-hxy-u.fx.GLB (branded name orog_ti-u-hxy-u, official label orog_ti-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.rootd.ti-u-hxy-lnd.fx.GLB
+Variable considered: land.rootd.ti-u-hxy-lnd.fx.GLB (branded name rootd_ti-u-hxy-lnd, official label rootd_ti-u-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.rootd.ti-u-hxy-lnd.fx.GLB
+Variable considered: land.rootd.ti-u-hxy-lnd.fx.GLB (branded name rootd_ti-u-hxy-lnd, official label rootd_ti-u-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.slthick.ti-sl-hxy-lnd.fx.GLB
+Variable considered: land.slthick.ti-sl-hxy-lnd.fx.GLB (branded name slthick_ti-sl-hxy-lnd, official label slthick_ti-sl-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.slthick.ti-sl-hxy-lnd.fx.GLB
+Variable considered: land.slthick.ti-sl-hxy-lnd.fx.GLB (branded name slthick_ti-sl-hxy-lnd, official label slthick_ti-sl-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.srfrad.tavg-u-hxy-u.3hr.GLB
+Variable considered: land.srfrad.tavg-u-hxy-u.3hr.GLB (branded name srfrad_tavg-u-hxy-u, official label srfrad_tavg-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: land.srfrad.tavg-u-hxy-u.3hr.GLB
+Variable considered: land.srfrad.tavg-u-hxy-u.3hr.GLB (branded name srfrad_tavg-u-hxy-u, official label srfrad_tavg-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: land.tran.tavg-u-hxy-u.3hr.GLB
+Variable considered: land.tran.tavg-u-hxy-u.3hr.GLB (branded name tran_tavg-u-hxy-u, official label tran_tavg-u-hxy-u)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: land.tran.tavg-u-hxy-u.3hr.GLB
+Variable considered: land.tran.tavg-u-hxy-u.3hr.GLB (branded name tran_tavg-u-hxy-u, official label tran_tavg-u-hxy-u)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: land.tslsi.tpt-u-hxy-u.3hr.GLB
+Variable considered: land.tslsi.tpt-u-hxy-u.3hr.GLB (branded name tslsi_tpt-u-hxy-u, official label tslsi_tpt-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: land.tslsi.tpt-u-hxy-u.3hr.GLB
+Variable considered: land.tslsi.tpt-u-hxy-u.3hr.GLB (branded name tslsi_tpt-u-hxy-u, official label tslsi_tpt-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: landIce.snc.tavg-u-hxy-lnd.mon.GLB
+Variable considered: landIce.snc.tavg-u-hxy-lnd.mon.GLB (branded name snc_tavg-u-hxy-lnd, official label snc_tavg-u-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: landIce.snc.tavg-u-hxy-lnd.mon.GLB
+Variable considered: landIce.snc.tavg-u-hxy-lnd.mon.GLB (branded name snc_tavg-u-hxy-lnd, official label snc_tavg-u-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.areacell.ti-u-hxy-u.fx.GLB
+Variable considered: ocean.areacell.ti-u-hxy-u.fx.GLB (branded name areacell_ti-u-hxy-u, official label areacell_ti-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.areacell.ti-u-hxy-u.fx.GLB
+Variable considered: ocean.areacell.ti-u-hxy-u.fx.GLB (branded name areacell_ti-u-hxy-u, official label areacell_ti-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.bigthetao.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocean.bigthetao.tavg-ol-hxy-sea.mon.GLB (branded name bigthetao_tavg-ol-hxy-sea, official label bigthetao_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.bigthetao.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocean.bigthetao.tavg-ol-hxy-sea.mon.GLB (branded name bigthetao_tavg-ol-hxy-sea, official label bigthetao_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.bigthetao.tavg-op20bar-hxy-sea.day.GLB
+Variable considered: ocean.bigthetao.tavg-op20bar-hxy-sea.day.GLB (branded name bigthetao_tavg-op20bar-hxy-sea, official label bigthetao_tavg-op20bar-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.bigthetao.tavg-op20bar-hxy-sea.day.GLB
+Variable considered: ocean.bigthetao.tavg-op20bar-hxy-sea.day.GLB (branded name bigthetao_tavg-op20bar-hxy-sea, official label bigthetao_tavg-op20bar-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.deptho.ti-u-hxy-sea.fx.GLB
+Variable considered: ocean.deptho.ti-u-hxy-sea.fx.GLB (branded name deptho_ti-u-hxy-sea, official label deptho_ti-u-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.deptho.ti-u-hxy-sea.fx.GLB
+Variable considered: ocean.deptho.ti-u-hxy-sea.fx.GLB (branded name deptho_ti-u-hxy-sea, official label deptho_ti-u-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.masscello.ti-ol-hxy-sea.fx.GLB
+Variable considered: ocean.masscello.ti-ol-hxy-sea.fx.GLB (branded name masscello_ti-ol-hxy-sea, official label masscello_ti-ol-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.masscello.ti-ol-hxy-sea.fx.GLB
+Variable considered: ocean.masscello.ti-ol-hxy-sea.fx.GLB (branded name masscello_ti-ol-hxy-sea, official label masscello_ti-ol-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.mlotst.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.mlotst.tavg-u-hxy-sea.day.GLB (branded name mlotst_tavg-u-hxy-sea, official label mlotst_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.mlotst.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.mlotst.tavg-u-hxy-sea.day.GLB (branded name mlotst_tavg-u-hxy-sea, official label mlotst_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.mlotstmax.tmax-u-hxy-sea.mon.GLB
+Variable considered: ocean.mlotstmax.tmax-u-hxy-sea.mon.GLB (branded name mlotstmax_tmax-u-hxy-sea, official label mlotstmax_tmax-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.mlotstmax.tmax-u-hxy-sea.mon.GLB
+Variable considered: ocean.mlotstmax.tmax-u-hxy-sea.mon.GLB (branded name mlotstmax_tmax-u-hxy-sea, official label mlotstmax_tmax-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.mlotstmin.tmin-u-hxy-sea.mon.GLB
+Variable considered: ocean.mlotstmin.tmin-u-hxy-sea.mon.GLB (branded name mlotstmin_tmin-u-hxy-sea, official label mlotstmin_tmin-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.mlotstmin.tmin-u-hxy-sea.mon.GLB
+Variable considered: ocean.mlotstmin.tmin-u-hxy-sea.mon.GLB (branded name mlotstmin_tmin-u-hxy-sea, official label mlotstmin_tmin-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.mpw.tavg-u-hxy-sea.3hr.GLB
+Variable considered: ocean.mpw.tavg-u-hxy-sea.3hr.GLB (branded name mpw_tavg-u-hxy-sea, official label mpw_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.mpw.tavg-u-hxy-sea.3hr.GLB
+Variable considered: ocean.mpw.tavg-u-hxy-sea.3hr.GLB (branded name mpw_tavg-u-hxy-sea, official label mpw_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.mpw.tavg-u-hxy-sea.6hr.GLB
+Variable considered: ocean.mpw.tavg-u-hxy-sea.6hr.GLB (branded name mpw_tavg-u-hxy-sea, official label mpw_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.mpw.tavg-u-hxy-sea.6hr.GLB
+Variable considered: ocean.mpw.tavg-u-hxy-sea.6hr.GLB (branded name mpw_tavg-u-hxy-sea, official label mpw_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.mpw.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.mpw.tavg-u-hxy-sea.mon.GLB (branded name mpw_tavg-u-hxy-sea, official label mpw_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.mpw.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.mpw.tavg-u-hxy-sea.mon.GLB (branded name mpw_tavg-u-hxy-sea, official label mpw_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.so.tavg-ol-hxy-sea.day.GLB
+Variable considered: ocean.so.tavg-ol-hxy-sea.day.GLB (branded name so_tavg-ol-hxy-sea, official label so_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocean.so.tavg-ol-hxy-sea.day.GLB
+Variable considered: ocean.so.tavg-ol-hxy-sea.day.GLB (branded name so_tavg-ol-hxy-sea, official label so_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocean.so.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocean.so.tavg-ol-hxy-sea.mon.GLB (branded name so_tavg-ol-hxy-sea, official label so_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: ocean.so.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocean.so.tavg-ol-hxy-sea.mon.GLB (branded name so_tavg-ol-hxy-sea, official label so_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: ocean.sos.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.sos.tavg-u-hxy-sea.day.GLB (branded name sos_tavg-u-hxy-sea, official label sos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: Medium] ([1, 3])
 Priority_retain 1
-Variable considered: ocean.sos.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.sos.tavg-u-hxy-sea.day.GLB (branded name sos_tavg-u-hxy-sea, official label sos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: Medium] ([1, 3])
 Priority_retain 1
-Variable considered: ocean.sos.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.sos.tavg-u-hxy-sea.mon.GLB (branded name sos_tavg-u-hxy-sea, official label sos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: ocean.sos.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.sos.tavg-u-hxy-sea.mon.GLB (branded name sos_tavg-u-hxy-sea, official label sos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: ocean.swh.tavg-u-hxy-sea.3hr.GLB
+Variable considered: ocean.swh.tavg-u-hxy-sea.3hr.GLB (branded name swh_tavg-u-hxy-sea, official label swh_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.swh.tavg-u-hxy-sea.3hr.GLB
+Variable considered: ocean.swh.tavg-u-hxy-sea.3hr.GLB (branded name swh_tavg-u-hxy-sea, official label swh_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.swh.tavg-u-hxy-sea.6hr.GLB
+Variable considered: ocean.swh.tavg-u-hxy-sea.6hr.GLB (branded name swh_tavg-u-hxy-sea, official label swh_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.swh.tavg-u-hxy-sea.6hr.GLB
+Variable considered: ocean.swh.tavg-u-hxy-sea.6hr.GLB (branded name swh_tavg-u-hxy-sea, official label swh_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.swh.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.swh.tavg-u-hxy-sea.mon.GLB (branded name swh_tavg-u-hxy-sea, official label swh_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.swh.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.swh.tavg-u-hxy-sea.mon.GLB (branded name swh_tavg-u-hxy-sea, official label swh_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.swh.tmax-u-hxy-sea.6hr.GLB
+Variable considered: ocean.swh.tmax-u-hxy-sea.6hr.GLB (branded name swh_tmax-u-hxy-sea, official label swh_tmax-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.swh.tmax-u-hxy-sea.6hr.GLB
+Variable considered: ocean.swh.tmax-u-hxy-sea.6hr.GLB (branded name swh_tmax-u-hxy-sea, official label swh_tmax-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.swh.tmax-u-hxy-sea.mon.GLB
+Variable considered: ocean.swh.tmax-u-hxy-sea.mon.GLB (branded name swh_tmax-u-hxy-sea, official label swh_tmax-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.swh.tmax-u-hxy-sea.mon.GLB
+Variable considered: ocean.swh.tmax-u-hxy-sea.mon.GLB (branded name swh_tmax-u-hxy-sea, official label swh_tmax-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.thetao.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocean.thetao.tavg-ol-hxy-sea.mon.GLB (branded name thetao_tavg-ol-hxy-sea, official label thetao_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: ocean.thetao.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocean.thetao.tavg-ol-hxy-sea.mon.GLB (branded name thetao_tavg-ol-hxy-sea, official label thetao_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: ocean.thetao.tavg-op20bar-hxy-sea.day.GLB
+Variable considered: ocean.thetao.tavg-op20bar-hxy-sea.day.GLB (branded name thetao_tavg-op20bar-hxy-sea, official label thetao_tavg-op20bar-hxy-sea)
 Priorities found: [priority_level: High, priority_level: Medium] ([2, 3])
 Priority_retain 2
-Variable considered: ocean.thetao.tavg-op20bar-hxy-sea.day.GLB
+Variable considered: ocean.thetao.tavg-op20bar-hxy-sea.day.GLB (branded name thetao_tavg-op20bar-hxy-sea, official label thetao_tavg-op20bar-hxy-sea)
 Priorities found: [priority_level: High, priority_level: Medium] ([2, 3])
 Priority_retain 2
-Variable considered: ocean.tnkebto.tavg-u-hxy-sea.yr.GLB
+Variable considered: ocean.tnkebto.tavg-u-hxy-sea.yr.GLB (branded name tnkebto_tavg-u-hxy-sea, official label tnkebto_tavg-u-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocean.tnkebto.tavg-u-hxy-sea.yr.GLB
+Variable considered: ocean.tnkebto.tavg-u-hxy-sea.yr.GLB (branded name tnkebto_tavg-u-hxy-sea, official label tnkebto_tavg-u-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocean.tos.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.tos.tavg-u-hxy-sea.day.GLB (branded name tos_tavg-u-hxy-sea, official label tos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: Medium] ([1, 3])
 Priority_retain 1
-Variable considered: ocean.tos.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.tos.tavg-u-hxy-sea.day.GLB (branded name tos_tavg-u-hxy-sea, official label tos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: Medium] ([1, 3])
 Priority_retain 1
-Variable considered: ocean.tos.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.tos.tavg-u-hxy-sea.mon.GLB (branded name tos_tavg-u-hxy-sea, official label tos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: ocean.tos.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.tos.tavg-u-hxy-sea.mon.GLB (branded name tos_tavg-u-hxy-sea, official label tos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: ocean.tos.tpt-u-hxy-sea.3hr.GLB
+Variable considered: ocean.tos.tpt-u-hxy-sea.3hr.GLB (branded name tos_tpt-u-hxy-sea, official label tos_tpt-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.tos.tpt-u-hxy-sea.3hr.GLB
+Variable considered: ocean.tos.tpt-u-hxy-sea.3hr.GLB (branded name tos_tpt-u-hxy-sea, official label tos_tpt-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.tossq.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.tossq.tavg-u-hxy-sea.day.GLB (branded name tossq_tavg-u-hxy-sea, official label tossq_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.tossq.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.tossq.tavg-u-hxy-sea.day.GLB (branded name tossq_tavg-u-hxy-sea, official label tossq_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.uos.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.uos.tavg-u-hxy-sea.day.GLB (branded name uos_tavg-u-hxy-sea, official label uos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocean.uos.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.uos.tavg-u-hxy-sea.day.GLB (branded name uos_tavg-u-hxy-sea, official label uos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocean.vos.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.vos.tavg-u-hxy-sea.day.GLB (branded name vos_tavg-u-hxy-sea, official label vos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocean.vos.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.vos.tavg-u-hxy-sea.day.GLB (branded name vos_tavg-u-hxy-sea, official label vos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocean.wo.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocean.wo.tavg-ol-hxy-sea.mon.GLB (branded name wo_tavg-ol-hxy-sea, official label wo_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.wo.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocean.wo.tavg-ol-hxy-sea.mon.GLB (branded name wo_tavg-ol-hxy-sea, official label wo_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.wpp.tavg-u-hxy-sea.3hr.GLB
+Variable considered: ocean.wpp.tavg-u-hxy-sea.3hr.GLB (branded name wpp_tavg-u-hxy-sea, official label wpp_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.wpp.tavg-u-hxy-sea.3hr.GLB
+Variable considered: ocean.wpp.tavg-u-hxy-sea.3hr.GLB (branded name wpp_tavg-u-hxy-sea, official label wpp_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.wpp.tavg-u-hxy-sea.6hr.GLB
+Variable considered: ocean.wpp.tavg-u-hxy-sea.6hr.GLB (branded name wpp_tavg-u-hxy-sea, official label wpp_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.wpp.tavg-u-hxy-sea.6hr.GLB
+Variable considered: ocean.wpp.tavg-u-hxy-sea.6hr.GLB (branded name wpp_tavg-u-hxy-sea, official label wpp_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.wpp.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.wpp.tavg-u-hxy-sea.mon.GLB (branded name wpp_tavg-u-hxy-sea, official label wpp_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.wpp.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.wpp.tavg-u-hxy-sea.mon.GLB (branded name wpp_tavg-u-hxy-sea, official label wpp_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.zos.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.zos.tavg-u-hxy-sea.day.GLB (branded name zos_tavg-u-hxy-sea, official label zos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: ocean.zos.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.zos.tavg-u-hxy-sea.day.GLB (branded name zos_tavg-u-hxy-sea, official label zos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: ocean.zos.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.zos.tavg-u-hxy-sea.mon.GLB (branded name zos_tavg-u-hxy-sea, official label zos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.zos.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.zos.tavg-u-hxy-sea.mon.GLB (branded name zos_tavg-u-hxy-sea, official label zos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.zossq.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.zossq.tavg-u-hxy-sea.mon.GLB (branded name zossq_tavg-u-hxy-sea, official label zossq_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.zossq.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.zossq.tavg-u-hxy-sea.mon.GLB (branded name zossq_tavg-u-hxy-sea, official label zossq_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.zostoga.tavg-u-hm-sea.day.GLB
+Variable considered: ocean.zostoga.tavg-u-hm-sea.day.GLB (branded name zostoga_tavg-u-hm-sea, official label zostoga_tavg-u-hm-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.zostoga.tavg-u-hm-sea.day.GLB
+Variable considered: ocean.zostoga.tavg-u-hm-sea.day.GLB (branded name zostoga_tavg-u-hm-sea, official label zostoga_tavg-u-hm-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.zostoga.tavg-u-hm-sea.mon.GLB
+Variable considered: ocean.zostoga.tavg-u-hm-sea.mon.GLB (branded name zostoga_tavg-u-hm-sea, official label zostoga_tavg-u-hm-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.zostoga.tavg-u-hm-sea.mon.GLB
+Variable considered: ocean.zostoga.tavg-u-hm-sea.mon.GLB (branded name zostoga_tavg-u-hm-sea, official label zostoga_tavg-u-hm-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocnBgchem.arag.tavg-d0m-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.arag.tavg-d0m-hxy-sea.mon.GLB (branded name arag_tavg-d0m-hxy-sea, official label arag_tavg-d0m-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.arag.tavg-d0m-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.arag.tavg-d0m-hxy-sea.mon.GLB (branded name arag_tavg-d0m-hxy-sea, official label arag_tavg-d0m-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.arag.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.arag.tavg-ol-hxy-sea.mon.GLB (branded name arag_tavg-ol-hxy-sea, official label arag_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.arag.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.arag.tavg-ol-hxy-sea.mon.GLB (branded name arag_tavg-ol-hxy-sea, official label arag_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.calc.tavg-d0m-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.calc.tavg-d0m-hxy-sea.mon.GLB (branded name calc_tavg-d0m-hxy-sea, official label calc_tavg-d0m-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.calc.tavg-d0m-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.calc.tavg-d0m-hxy-sea.mon.GLB (branded name calc_tavg-d0m-hxy-sea, official label calc_tavg-d0m-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.calc.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.calc.tavg-ol-hxy-sea.mon.GLB (branded name calc_tavg-ol-hxy-sea, official label calc_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.calc.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.calc.tavg-ol-hxy-sea.mon.GLB (branded name calc_tavg-ol-hxy-sea, official label calc_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.chl.tavg-op20bar-hxy-sea.day.GLB
+Variable considered: ocnBgchem.chl.tavg-op20bar-hxy-sea.day.GLB (branded name chl_tavg-op20bar-hxy-sea, official label chl_tavg-op20bar-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.chl.tavg-op20bar-hxy-sea.day.GLB
+Variable considered: ocnBgchem.chl.tavg-op20bar-hxy-sea.day.GLB (branded name chl_tavg-op20bar-hxy-sea, official label chl_tavg-op20bar-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.dissic.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.dissic.tavg-ol-hxy-sea.mon.GLB (branded name dissic_tavg-ol-hxy-sea, official label dissic_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.dissic.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.dissic.tavg-ol-hxy-sea.mon.GLB (branded name dissic_tavg-ol-hxy-sea, official label dissic_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.o2.tavg-op20bar-hxy-sea.day.GLB
+Variable considered: ocnBgchem.o2.tavg-op20bar-hxy-sea.day.GLB (branded name o2_tavg-op20bar-hxy-sea, official label o2_tavg-op20bar-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.o2.tavg-op20bar-hxy-sea.day.GLB
+Variable considered: ocnBgchem.o2.tavg-op20bar-hxy-sea.day.GLB (branded name o2_tavg-op20bar-hxy-sea, official label o2_tavg-op20bar-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.ph.tavg-op20bar-hxy-sea.day.GLB
+Variable considered: ocnBgchem.ph.tavg-op20bar-hxy-sea.day.GLB (branded name ph_tavg-op20bar-hxy-sea, official label ph_tavg-op20bar-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.ph.tavg-op20bar-hxy-sea.day.GLB
+Variable considered: ocnBgchem.ph.tavg-op20bar-hxy-sea.day.GLB (branded name ph_tavg-op20bar-hxy-sea, official label ph_tavg-op20bar-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.talk.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.talk.tavg-ol-hxy-sea.mon.GLB (branded name talk_tavg-ol-hxy-sea, official label talk_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.talk.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.talk.tavg-ol-hxy-sea.mon.GLB (branded name talk_tavg-ol-hxy-sea, official label talk_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: seaIce.siconc.tavg-u-hxy-u.day.GLB
+Variable considered: seaIce.siconc.tavg-u-hxy-u.day.GLB (branded name siconc_tavg-u-hxy-u, official label siconc_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: seaIce.siconc.tavg-u-hxy-u.day.GLB
+Variable considered: seaIce.siconc.tavg-u-hxy-u.day.GLB (branded name siconc_tavg-u-hxy-u, official label siconc_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: seaIce.siconc.tavg-u-hxy-u.mon.GLB
+Variable considered: seaIce.siconc.tavg-u-hxy-u.mon.GLB (branded name siconc_tavg-u-hxy-u, official label siconc_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: seaIce.siconc.tavg-u-hxy-u.mon.GLB
+Variable considered: seaIce.siconc.tavg-u-hxy-u.mon.GLB (branded name siconc_tavg-u-hxy-u, official label siconc_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: seaIce.simass.tavg-u-hxy-sea.mon.GLB
+Variable considered: seaIce.simass.tavg-u-hxy-sea.mon.GLB (branded name simass_tavg-u-hxy-sea, official label simass_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: seaIce.simass.tavg-u-hxy-sea.mon.GLB
+Variable considered: seaIce.simass.tavg-u-hxy-sea.mon.GLB (branded name simass_tavg-u-hxy-sea, official label simass_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: seaIce.sithick.tavg-u-hxy-si.day.GLB
+Variable considered: seaIce.sithick.tavg-u-hxy-si.day.GLB (branded name sithick_tavg-u-hxy-si, official label sithick_tavg-u-hxy-si)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: seaIce.sithick.tavg-u-hxy-si.day.GLB
+Variable considered: seaIce.sithick.tavg-u-hxy-si.day.GLB (branded name sithick_tavg-u-hxy-si, official label sithick_tavg-u-hxy-si)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: seaIce.sithick.tavg-u-hxy-si.mon.GLB
+Variable considered: seaIce.sithick.tavg-u-hxy-si.mon.GLB (branded name sithick_tavg-u-hxy-si, official label sithick_tavg-u-hxy-si)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: seaIce.sithick.tavg-u-hxy-si.mon.GLB
+Variable considered: seaIce.sithick.tavg-u-hxy-si.mon.GLB (branded name sithick_tavg-u-hxy-si, official label sithick_tavg-u-hxy-si)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: seaIce.siu.tavg-u-hxy-si.day.GLB
+Variable considered: seaIce.siu.tavg-u-hxy-si.day.GLB (branded name siu_tavg-u-hxy-si, official label siu_tavg-u-hxy-si)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: seaIce.siu.tavg-u-hxy-si.day.GLB
+Variable considered: seaIce.siu.tavg-u-hxy-si.day.GLB (branded name siu_tavg-u-hxy-si, official label siu_tavg-u-hxy-si)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: seaIce.siu.tavg-u-hxy-si.mon.GLB
+Variable considered: seaIce.siu.tavg-u-hxy-si.mon.GLB (branded name siu_tavg-u-hxy-si, official label siu_tavg-u-hxy-si)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: seaIce.siu.tavg-u-hxy-si.mon.GLB
+Variable considered: seaIce.siu.tavg-u-hxy-si.mon.GLB (branded name siu_tavg-u-hxy-si, official label siu_tavg-u-hxy-si)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: seaIce.siv.tavg-u-hxy-si.day.GLB
+Variable considered: seaIce.siv.tavg-u-hxy-si.day.GLB (branded name siv_tavg-u-hxy-si, official label siv_tavg-u-hxy-si)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: seaIce.siv.tavg-u-hxy-si.day.GLB
+Variable considered: seaIce.siv.tavg-u-hxy-si.day.GLB (branded name siv_tavg-u-hxy-si, official label siv_tavg-u-hxy-si)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: seaIce.siv.tavg-u-hxy-si.mon.GLB
+Variable considered: seaIce.siv.tavg-u-hxy-si.mon.GLB (branded name siv_tavg-u-hxy-si, official label siv_tavg-u-hxy-si)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: seaIce.siv.tavg-u-hxy-si.mon.GLB
+Variable considered: seaIce.siv.tavg-u-hxy-si.mon.GLB (branded name siv_tavg-u-hxy-si, official label siv_tavg-u-hxy-si)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.bldep.tpt-u-hxy-u.3hr.GLB
+Variable considered: atmos.bldep.tpt-u-hxy-u.3hr.GLB (branded name bldep_tpt-u-hxy-u, official label bldep_tpt-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.hfls.tavg-u-hxy-u.3hr.GLB
+Variable considered: atmos.hfls.tavg-u-hxy-u.3hr.GLB (branded name hfls_tavg-u-hxy-u, official label hfls_tavg-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.hfss.tavg-u-hxy-u.3hr.GLB
+Variable considered: atmos.hfss.tavg-u-hxy-u.3hr.GLB (branded name hfss_tavg-u-hxy-u, official label hfss_tavg-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.hurs.tavg-h2m-hxy-u.6hr.GLB
+Variable considered: atmos.hurs.tavg-h2m-hxy-u.6hr.GLB (branded name hurs_tavg-h2m-hxy-u, official label hurs_tavg-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.huss.tpt-h2m-hxy-u.3hr.GLB
+Variable considered: atmos.huss.tpt-h2m-hxy-u.3hr.GLB (branded name huss_tpt-h2m-hxy-u, official label huss_tpt-h2m-hxy-u)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: atmos.pr.tavg-u-hxy-u.1hr.GLB
+Variable considered: atmos.pr.tavg-u-hxy-u.1hr.GLB (branded name pr_tavg-u-hxy-u, official label pr_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.pr.tavg-u-hxy-u.3hr.GLB
+Variable considered: atmos.pr.tavg-u-hxy-u.3hr.GLB (branded name pr_tavg-u-hxy-u, official label pr_tavg-u-hxy-u)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: atmos.pr.tavg-u-hxy-u.day.GLB
+Variable considered: atmos.pr.tavg-u-hxy-u.day.GLB (branded name pr_tavg-u-hxy-u, official label pr_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.pr.tavg-u-hxy-u.mon.GLB
+Variable considered: atmos.pr.tavg-u-hxy-u.mon.GLB (branded name pr_tavg-u-hxy-u, official label pr_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.prc.tavg-u-hxy-u.mon.GLB
+Variable considered: atmos.prc.tavg-u-hxy-u.mon.GLB (branded name prc_tavg-u-hxy-u, official label prc_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.ps.tavg-u-hxy-u.day.GLB
+Variable considered: atmos.ps.tavg-u-hxy-u.day.GLB (branded name ps_tavg-u-hxy-u, official label ps_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.ps.tpt-u-hxy-u.3hr.GLB
+Variable considered: atmos.ps.tpt-u-hxy-u.3hr.GLB (branded name ps_tpt-u-hxy-u, official label ps_tpt-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.psl.tavg-u-hxy-u.day.GLB
+Variable considered: atmos.psl.tavg-u-hxy-u.day.GLB (branded name psl_tavg-u-hxy-u, official label psl_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.psl.tpt-u-hxy-u.1hr.GLB
+Variable considered: atmos.psl.tpt-u-hxy-u.1hr.GLB (branded name psl_tpt-u-hxy-u, official label psl_tpt-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.rlds.tavg-u-hxy-u.3hr.GLB
+Variable considered: atmos.rlds.tavg-u-hxy-u.3hr.GLB (branded name rlds_tavg-u-hxy-u, official label rlds_tavg-u-hxy-u)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: atmos.rlus.tavg-u-hxy-u.3hr.GLB
+Variable considered: atmos.rlus.tavg-u-hxy-u.3hr.GLB (branded name rlus_tavg-u-hxy-u, official label rlus_tavg-u-hxy-u)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.day.GLB
+Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.day.GLB (branded name sfcWind_tavg-h10m-hxy-u, official label sfcWind_tavg-h10m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.mon.GLB
+Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.mon.GLB (branded name sfcWind_tavg-h10m-hxy-u, official label sfcWind_tavg-h10m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.sftlf.ti-u-hxy-u.fx.GLB
+Variable considered: atmos.sftlf.ti-u-hxy-u.fx.GLB (branded name sftlf_ti-u-hxy-u, official label sftlf_ti-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.ta.tavg-p19-hxy-air.day.GLB
+Variable considered: atmos.ta.tavg-p19-hxy-air.day.GLB (branded name ta_tavg-p19-hxy-air, official label ta_tavg-p19-hxy-air)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.ta.tavg-p19-hxy-air.mon.GLB
+Variable considered: atmos.ta.tavg-p19-hxy-air.mon.GLB (branded name ta_tavg-p19-hxy-air, official label ta_tavg-p19-hxy-air)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.ta.tpt-p3-hxy-air.6hr.GLB
+Variable considered: atmos.ta.tpt-p3-hxy-air.6hr.GLB (branded name ta_tpt-p3-hxy-air, official label ta_tpt-p3-hxy-air)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.ta.tpt-p6-hxy-air.3hr.GLB
+Variable considered: atmos.ta.tpt-p6-hxy-air.3hr.GLB (branded name ta_tpt-p6-hxy-air, official label ta_tpt-p6-hxy-air)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: atmos.tas.tavg-h2m-hxy-u.day.GLB
+Variable considered: atmos.tas.tavg-h2m-hxy-u.day.GLB (branded name tas_tavg-h2m-hxy-u, official label tas_tavg-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tavg-h2m-hxy-u.mon.GLB
+Variable considered: atmos.tas.tavg-h2m-hxy-u.mon.GLB (branded name tas_tavg-h2m-hxy-u, official label tas_tavg-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tmax-h2m-hxy-u.day.GLB
+Variable considered: atmos.tas.tmax-h2m-hxy-u.day.GLB (branded name tas_tmax-h2m-hxy-u, official label tas_tmax-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tmax-h2m-hxy-u.mon.GLB
+Variable considered: atmos.tas.tmax-h2m-hxy-u.mon.GLB (branded name tas_tmax-h2m-hxy-u, official label tas_tmax-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tmin-h2m-hxy-u.day.GLB
+Variable considered: atmos.tas.tmin-h2m-hxy-u.day.GLB (branded name tas_tmin-h2m-hxy-u, official label tas_tmin-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tmin-h2m-hxy-u.mon.GLB
+Variable considered: atmos.tas.tmin-h2m-hxy-u.mon.GLB (branded name tas_tmin-h2m-hxy-u, official label tas_tmin-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tpt-h2m-hxy-u.3hr.GLB
+Variable considered: atmos.tas.tpt-h2m-hxy-u.3hr.GLB (branded name tas_tpt-h2m-hxy-u, official label tas_tpt-h2m-hxy-u)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: atmos.ts.tavg-u-hxy-u.mon.GLB
+Variable considered: atmos.ts.tavg-u-hxy-u.mon.GLB (branded name ts_tavg-u-hxy-u, official label ts_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.uas.tpt-h10m-hxy-u.1hr.GLB
+Variable considered: atmos.uas.tpt-h10m-hxy-u.1hr.GLB (branded name uas_tpt-h10m-hxy-u, official label uas_tpt-h10m-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.vas.tpt-h10m-hxy-u.1hr.GLB
+Variable considered: atmos.vas.tpt-h10m-hxy-u.1hr.GLB (branded name vas_tpt-h10m-hxy-u, official label vas_tpt-h10m-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.zg.tavg-p19-hxy-air.day.GLB
+Variable considered: atmos.zg.tavg-p19-hxy-air.day.GLB (branded name zg_tavg-p19-hxy-air, official label zg_tavg-p19-hxy-air)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.zg.tavg-p19-hxy-air.mon.GLB
+Variable considered: atmos.zg.tavg-p19-hxy-air.mon.GLB (branded name zg_tavg-p19-hxy-air, official label zg_tavg-p19-hxy-air)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.hfdsl.tavg-u-hxy-lnd.3hr.GLB
+Variable considered: land.hfdsl.tavg-u-hxy-lnd.3hr.GLB (branded name hfdsl_tavg-u-hxy-lnd, official label hfdsl_tavg-u-hxy-lnd)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: land.lai.tavg-u-hxy-lnd.mon.GLB
+Variable considered: land.lai.tavg-u-hxy-lnd.mon.GLB (branded name lai_tavg-u-hxy-lnd, official label lai_tavg-u-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.mrso.tavg-u-hxy-lnd.mon.GLB
+Variable considered: land.mrso.tavg-u-hxy-lnd.mon.GLB (branded name mrso_tavg-u-hxy-lnd, official label mrso_tavg-u-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.mrsol.tavg-d100cm-hxy-lnd.3hr.GLB
+Variable considered: land.mrsol.tavg-d100cm-hxy-lnd.3hr.GLB (branded name mrsol_tavg-d100cm-hxy-lnd, official label mrsol_tavg-d100cm-hxy-lnd)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: land.mrsol.tavg-d10cm-hxy-lnd.mon.GLB
+Variable considered: land.mrsol.tavg-d10cm-hxy-lnd.mon.GLB (branded name mrsol_tavg-d10cm-hxy-lnd, official label mrsol_tavg-d10cm-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.mrsol.tpt-d10cm-hxy-lnd.3hr.GLB
+Variable considered: land.mrsol.tpt-d10cm-hxy-lnd.3hr.GLB (branded name mrsol_tpt-d10cm-hxy-lnd, official label mrsol_tpt-d10cm-hxy-lnd)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: land.orog.ti-u-hxy-u.fx.GLB
+Variable considered: land.orog.ti-u-hxy-u.fx.GLB (branded name orog_ti-u-hxy-u, official label orog_ti-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.rootd.ti-u-hxy-lnd.fx.GLB
+Variable considered: land.rootd.ti-u-hxy-lnd.fx.GLB (branded name rootd_ti-u-hxy-lnd, official label rootd_ti-u-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.slthick.ti-sl-hxy-lnd.fx.GLB
+Variable considered: land.slthick.ti-sl-hxy-lnd.fx.GLB (branded name slthick_ti-sl-hxy-lnd, official label slthick_ti-sl-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.srfrad.tavg-u-hxy-u.3hr.GLB
+Variable considered: land.srfrad.tavg-u-hxy-u.3hr.GLB (branded name srfrad_tavg-u-hxy-u, official label srfrad_tavg-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: land.tran.tavg-u-hxy-u.3hr.GLB
+Variable considered: land.tran.tavg-u-hxy-u.3hr.GLB (branded name tran_tavg-u-hxy-u, official label tran_tavg-u-hxy-u)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: land.tslsi.tpt-u-hxy-u.3hr.GLB
+Variable considered: land.tslsi.tpt-u-hxy-u.3hr.GLB (branded name tslsi_tpt-u-hxy-u, official label tslsi_tpt-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: landIce.snc.tavg-u-hxy-lnd.mon.GLB
+Variable considered: landIce.snc.tavg-u-hxy-lnd.mon.GLB (branded name snc_tavg-u-hxy-lnd, official label snc_tavg-u-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.areacell.ti-u-hxy-u.fx.GLB
+Variable considered: ocean.areacell.ti-u-hxy-u.fx.GLB (branded name areacell_ti-u-hxy-u, official label areacell_ti-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.bigthetao.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocean.bigthetao.tavg-ol-hxy-sea.mon.GLB (branded name bigthetao_tavg-ol-hxy-sea, official label bigthetao_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.bigthetao.tavg-op20bar-hxy-sea.day.GLB
+Variable considered: ocean.bigthetao.tavg-op20bar-hxy-sea.day.GLB (branded name bigthetao_tavg-op20bar-hxy-sea, official label bigthetao_tavg-op20bar-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.deptho.ti-u-hxy-sea.fx.GLB
+Variable considered: ocean.deptho.ti-u-hxy-sea.fx.GLB (branded name deptho_ti-u-hxy-sea, official label deptho_ti-u-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.masscello.ti-ol-hxy-sea.fx.GLB
+Variable considered: ocean.masscello.ti-ol-hxy-sea.fx.GLB (branded name masscello_ti-ol-hxy-sea, official label masscello_ti-ol-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.mlotst.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.mlotst.tavg-u-hxy-sea.day.GLB (branded name mlotst_tavg-u-hxy-sea, official label mlotst_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.mlotstmax.tmax-u-hxy-sea.mon.GLB
+Variable considered: ocean.mlotstmax.tmax-u-hxy-sea.mon.GLB (branded name mlotstmax_tmax-u-hxy-sea, official label mlotstmax_tmax-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.mlotstmin.tmin-u-hxy-sea.mon.GLB
+Variable considered: ocean.mlotstmin.tmin-u-hxy-sea.mon.GLB (branded name mlotstmin_tmin-u-hxy-sea, official label mlotstmin_tmin-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.mpw.tavg-u-hxy-sea.3hr.GLB
+Variable considered: ocean.mpw.tavg-u-hxy-sea.3hr.GLB (branded name mpw_tavg-u-hxy-sea, official label mpw_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.mpw.tavg-u-hxy-sea.6hr.GLB
+Variable considered: ocean.mpw.tavg-u-hxy-sea.6hr.GLB (branded name mpw_tavg-u-hxy-sea, official label mpw_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.mpw.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.mpw.tavg-u-hxy-sea.mon.GLB (branded name mpw_tavg-u-hxy-sea, official label mpw_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.so.tavg-ol-hxy-sea.day.GLB
+Variable considered: ocean.so.tavg-ol-hxy-sea.day.GLB (branded name so_tavg-ol-hxy-sea, official label so_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocean.so.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocean.so.tavg-ol-hxy-sea.mon.GLB (branded name so_tavg-ol-hxy-sea, official label so_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: ocean.sos.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.sos.tavg-u-hxy-sea.day.GLB (branded name sos_tavg-u-hxy-sea, official label sos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: Medium] ([1, 3])
 Priority_retain 1
-Variable considered: ocean.sos.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.sos.tavg-u-hxy-sea.mon.GLB (branded name sos_tavg-u-hxy-sea, official label sos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: ocean.swh.tavg-u-hxy-sea.3hr.GLB
+Variable considered: ocean.swh.tavg-u-hxy-sea.3hr.GLB (branded name swh_tavg-u-hxy-sea, official label swh_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.swh.tavg-u-hxy-sea.6hr.GLB
+Variable considered: ocean.swh.tavg-u-hxy-sea.6hr.GLB (branded name swh_tavg-u-hxy-sea, official label swh_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.swh.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.swh.tavg-u-hxy-sea.mon.GLB (branded name swh_tavg-u-hxy-sea, official label swh_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.swh.tmax-u-hxy-sea.6hr.GLB
+Variable considered: ocean.swh.tmax-u-hxy-sea.6hr.GLB (branded name swh_tmax-u-hxy-sea, official label swh_tmax-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.swh.tmax-u-hxy-sea.mon.GLB
+Variable considered: ocean.swh.tmax-u-hxy-sea.mon.GLB (branded name swh_tmax-u-hxy-sea, official label swh_tmax-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.thetao.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocean.thetao.tavg-ol-hxy-sea.mon.GLB (branded name thetao_tavg-ol-hxy-sea, official label thetao_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: ocean.thetao.tavg-op20bar-hxy-sea.day.GLB
+Variable considered: ocean.thetao.tavg-op20bar-hxy-sea.day.GLB (branded name thetao_tavg-op20bar-hxy-sea, official label thetao_tavg-op20bar-hxy-sea)
 Priorities found: [priority_level: High, priority_level: Medium] ([2, 3])
 Priority_retain 2
-Variable considered: ocean.tnkebto.tavg-u-hxy-sea.yr.GLB
+Variable considered: ocean.tnkebto.tavg-u-hxy-sea.yr.GLB (branded name tnkebto_tavg-u-hxy-sea, official label tnkebto_tavg-u-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocean.tos.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.tos.tavg-u-hxy-sea.day.GLB (branded name tos_tavg-u-hxy-sea, official label tos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: Medium] ([1, 3])
 Priority_retain 1
-Variable considered: ocean.tos.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.tos.tavg-u-hxy-sea.mon.GLB (branded name tos_tavg-u-hxy-sea, official label tos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: ocean.tos.tpt-u-hxy-sea.3hr.GLB
+Variable considered: ocean.tos.tpt-u-hxy-sea.3hr.GLB (branded name tos_tpt-u-hxy-sea, official label tos_tpt-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.tossq.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.tossq.tavg-u-hxy-sea.day.GLB (branded name tossq_tavg-u-hxy-sea, official label tossq_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.uos.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.uos.tavg-u-hxy-sea.day.GLB (branded name uos_tavg-u-hxy-sea, official label uos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocean.vos.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.vos.tavg-u-hxy-sea.day.GLB (branded name vos_tavg-u-hxy-sea, official label vos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocean.wo.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocean.wo.tavg-ol-hxy-sea.mon.GLB (branded name wo_tavg-ol-hxy-sea, official label wo_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.wpp.tavg-u-hxy-sea.3hr.GLB
+Variable considered: ocean.wpp.tavg-u-hxy-sea.3hr.GLB (branded name wpp_tavg-u-hxy-sea, official label wpp_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.wpp.tavg-u-hxy-sea.6hr.GLB
+Variable considered: ocean.wpp.tavg-u-hxy-sea.6hr.GLB (branded name wpp_tavg-u-hxy-sea, official label wpp_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.wpp.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.wpp.tavg-u-hxy-sea.mon.GLB (branded name wpp_tavg-u-hxy-sea, official label wpp_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.zos.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.zos.tavg-u-hxy-sea.day.GLB (branded name zos_tavg-u-hxy-sea, official label zos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: ocean.zos.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.zos.tavg-u-hxy-sea.mon.GLB (branded name zos_tavg-u-hxy-sea, official label zos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.zossq.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.zossq.tavg-u-hxy-sea.mon.GLB (branded name zossq_tavg-u-hxy-sea, official label zossq_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.zostoga.tavg-u-hm-sea.day.GLB
+Variable considered: ocean.zostoga.tavg-u-hm-sea.day.GLB (branded name zostoga_tavg-u-hm-sea, official label zostoga_tavg-u-hm-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.zostoga.tavg-u-hm-sea.mon.GLB
+Variable considered: ocean.zostoga.tavg-u-hm-sea.mon.GLB (branded name zostoga_tavg-u-hm-sea, official label zostoga_tavg-u-hm-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocnBgchem.arag.tavg-d0m-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.arag.tavg-d0m-hxy-sea.mon.GLB (branded name arag_tavg-d0m-hxy-sea, official label arag_tavg-d0m-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.arag.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.arag.tavg-ol-hxy-sea.mon.GLB (branded name arag_tavg-ol-hxy-sea, official label arag_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.calc.tavg-d0m-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.calc.tavg-d0m-hxy-sea.mon.GLB (branded name calc_tavg-d0m-hxy-sea, official label calc_tavg-d0m-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.calc.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.calc.tavg-ol-hxy-sea.mon.GLB (branded name calc_tavg-ol-hxy-sea, official label calc_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.chl.tavg-op20bar-hxy-sea.day.GLB
+Variable considered: ocnBgchem.chl.tavg-op20bar-hxy-sea.day.GLB (branded name chl_tavg-op20bar-hxy-sea, official label chl_tavg-op20bar-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.dissic.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.dissic.tavg-ol-hxy-sea.mon.GLB (branded name dissic_tavg-ol-hxy-sea, official label dissic_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.o2.tavg-op20bar-hxy-sea.day.GLB
+Variable considered: ocnBgchem.o2.tavg-op20bar-hxy-sea.day.GLB (branded name o2_tavg-op20bar-hxy-sea, official label o2_tavg-op20bar-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.ph.tavg-op20bar-hxy-sea.day.GLB
+Variable considered: ocnBgchem.ph.tavg-op20bar-hxy-sea.day.GLB (branded name ph_tavg-op20bar-hxy-sea, official label ph_tavg-op20bar-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.talk.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.talk.tavg-ol-hxy-sea.mon.GLB (branded name talk_tavg-ol-hxy-sea, official label talk_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: seaIce.siconc.tavg-u-hxy-u.day.GLB
+Variable considered: seaIce.siconc.tavg-u-hxy-u.day.GLB (branded name siconc_tavg-u-hxy-u, official label siconc_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: seaIce.siconc.tavg-u-hxy-u.mon.GLB
+Variable considered: seaIce.siconc.tavg-u-hxy-u.mon.GLB (branded name siconc_tavg-u-hxy-u, official label siconc_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: seaIce.simass.tavg-u-hxy-sea.mon.GLB
+Variable considered: seaIce.simass.tavg-u-hxy-sea.mon.GLB (branded name simass_tavg-u-hxy-sea, official label simass_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: seaIce.sithick.tavg-u-hxy-si.day.GLB
+Variable considered: seaIce.sithick.tavg-u-hxy-si.day.GLB (branded name sithick_tavg-u-hxy-si, official label sithick_tavg-u-hxy-si)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: seaIce.sithick.tavg-u-hxy-si.mon.GLB
+Variable considered: seaIce.sithick.tavg-u-hxy-si.mon.GLB (branded name sithick_tavg-u-hxy-si, official label sithick_tavg-u-hxy-si)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: seaIce.siu.tavg-u-hxy-si.day.GLB
+Variable considered: seaIce.siu.tavg-u-hxy-si.day.GLB (branded name siu_tavg-u-hxy-si, official label siu_tavg-u-hxy-si)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: seaIce.siu.tavg-u-hxy-si.mon.GLB
+Variable considered: seaIce.siu.tavg-u-hxy-si.mon.GLB (branded name siu_tavg-u-hxy-si, official label siu_tavg-u-hxy-si)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: seaIce.siv.tavg-u-hxy-si.day.GLB
+Variable considered: seaIce.siv.tavg-u-hxy-si.day.GLB (branded name siv_tavg-u-hxy-si, official label siv_tavg-u-hxy-si)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: seaIce.siv.tavg-u-hxy-si.mon.GLB
+Variable considered: seaIce.siv.tavg-u-hxy-si.mon.GLB (branded name siv_tavg-u-hxy-si, official label siv_tavg-u-hxy-si)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
 Number of simplified vars is: 105
@@ -2617,635 +2617,635 @@ Could not find a proper value for references
 Could not find a proper value for source
 Could not find a proper value for variant_info
 Number of distinct CMOR variables (whatever the grid): 105
-Variable considered: atmos.areacell.ti-u-hxy-u.fx.GLB
+Variable considered: atmos.areacell.ti-u-hxy-u.fx.GLB (branded name areacell_ti-u-hxy-u, official label areacell_ti-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.bldep.tpt-u-hxy-u.3hr.GLB
+Variable considered: atmos.bldep.tpt-u-hxy-u.3hr.GLB (branded name bldep_tpt-u-hxy-u, official label bldep_tpt-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.hfls.tavg-u-hxy-u.3hr.GLB
+Variable considered: atmos.hfls.tavg-u-hxy-u.3hr.GLB (branded name hfls_tavg-u-hxy-u, official label hfls_tavg-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.hfss.tavg-u-hxy-u.3hr.GLB
+Variable considered: atmos.hfss.tavg-u-hxy-u.3hr.GLB (branded name hfss_tavg-u-hxy-u, official label hfss_tavg-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.hurs.tavg-h2m-hxy-u.6hr.GLB
+Variable considered: atmos.hurs.tavg-h2m-hxy-u.6hr.GLB (branded name hurs_tavg-h2m-hxy-u, official label hurs_tavg-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.huss.tpt-h2m-hxy-u.3hr.GLB
+Variable considered: atmos.huss.tpt-h2m-hxy-u.3hr.GLB (branded name huss_tpt-h2m-hxy-u, official label huss_tpt-h2m-hxy-u)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: atmos.pr.tavg-u-hxy-u.1hr.GLB
+Variable considered: atmos.pr.tavg-u-hxy-u.1hr.GLB (branded name pr_tavg-u-hxy-u, official label pr_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.pr.tavg-u-hxy-u.3hr.GLB
+Variable considered: atmos.pr.tavg-u-hxy-u.3hr.GLB (branded name pr_tavg-u-hxy-u, official label pr_tavg-u-hxy-u)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: atmos.pr.tavg-u-hxy-u.day.GLB
+Variable considered: atmos.pr.tavg-u-hxy-u.day.GLB (branded name pr_tavg-u-hxy-u, official label pr_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.pr.tavg-u-hxy-u.mon.GLB
+Variable considered: atmos.pr.tavg-u-hxy-u.mon.GLB (branded name pr_tavg-u-hxy-u, official label pr_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.prc.tavg-u-hxy-u.mon.GLB
+Variable considered: atmos.prc.tavg-u-hxy-u.mon.GLB (branded name prc_tavg-u-hxy-u, official label prc_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.ps.tavg-u-hxy-u.day.GLB
+Variable considered: atmos.ps.tavg-u-hxy-u.day.GLB (branded name ps_tavg-u-hxy-u, official label ps_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.ps.tpt-u-hxy-u.3hr.GLB
+Variable considered: atmos.ps.tpt-u-hxy-u.3hr.GLB (branded name ps_tpt-u-hxy-u, official label ps_tpt-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.psl.tavg-u-hxy-u.day.GLB
+Variable considered: atmos.psl.tavg-u-hxy-u.day.GLB (branded name psl_tavg-u-hxy-u, official label psl_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.psl.tpt-u-hxy-u.1hr.GLB
+Variable considered: atmos.psl.tpt-u-hxy-u.1hr.GLB (branded name psl_tpt-u-hxy-u, official label psl_tpt-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.rlds.tavg-u-hxy-u.3hr.GLB
+Variable considered: atmos.rlds.tavg-u-hxy-u.3hr.GLB (branded name rlds_tavg-u-hxy-u, official label rlds_tavg-u-hxy-u)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: atmos.rlus.tavg-u-hxy-u.3hr.GLB
+Variable considered: atmos.rlus.tavg-u-hxy-u.3hr.GLB (branded name rlus_tavg-u-hxy-u, official label rlus_tavg-u-hxy-u)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.day.GLB
+Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.day.GLB (branded name sfcWind_tavg-h10m-hxy-u, official label sfcWind_tavg-h10m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.mon.GLB
+Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.mon.GLB (branded name sfcWind_tavg-h10m-hxy-u, official label sfcWind_tavg-h10m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.sftlf.ti-u-hxy-u.fx.GLB
+Variable considered: atmos.sftlf.ti-u-hxy-u.fx.GLB (branded name sftlf_ti-u-hxy-u, official label sftlf_ti-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.ta.tavg-p19-hxy-air.day.GLB
+Variable considered: atmos.ta.tavg-p19-hxy-air.day.GLB (branded name ta_tavg-p19-hxy-air, official label ta_tavg-p19-hxy-air)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.ta.tavg-p19-hxy-air.mon.GLB
+Variable considered: atmos.ta.tavg-p19-hxy-air.mon.GLB (branded name ta_tavg-p19-hxy-air, official label ta_tavg-p19-hxy-air)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.ta.tpt-p3-hxy-air.6hr.GLB
+Variable considered: atmos.ta.tpt-p3-hxy-air.6hr.GLB (branded name ta_tpt-p3-hxy-air, official label ta_tpt-p3-hxy-air)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.ta.tpt-p6-hxy-air.3hr.GLB
+Variable considered: atmos.ta.tpt-p6-hxy-air.3hr.GLB (branded name ta_tpt-p6-hxy-air, official label ta_tpt-p6-hxy-air)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: atmos.tas.tavg-h2m-hxy-u.day.GLB
+Variable considered: atmos.tas.tavg-h2m-hxy-u.day.GLB (branded name tas_tavg-h2m-hxy-u, official label tas_tavg-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tavg-h2m-hxy-u.mon.GLB
+Variable considered: atmos.tas.tavg-h2m-hxy-u.mon.GLB (branded name tas_tavg-h2m-hxy-u, official label tas_tavg-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tmax-h2m-hxy-u.day.GLB
+Variable considered: atmos.tas.tmax-h2m-hxy-u.day.GLB (branded name tas_tmax-h2m-hxy-u, official label tas_tmax-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tmax-h2m-hxy-u.mon.GLB
+Variable considered: atmos.tas.tmax-h2m-hxy-u.mon.GLB (branded name tas_tmax-h2m-hxy-u, official label tas_tmax-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tmin-h2m-hxy-u.day.GLB
+Variable considered: atmos.tas.tmin-h2m-hxy-u.day.GLB (branded name tas_tmin-h2m-hxy-u, official label tas_tmin-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tmin-h2m-hxy-u.mon.GLB
+Variable considered: atmos.tas.tmin-h2m-hxy-u.mon.GLB (branded name tas_tmin-h2m-hxy-u, official label tas_tmin-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tpt-h2m-hxy-u.3hr.GLB
+Variable considered: atmos.tas.tpt-h2m-hxy-u.3hr.GLB (branded name tas_tpt-h2m-hxy-u, official label tas_tpt-h2m-hxy-u)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: atmos.ts.tavg-u-hxy-u.mon.GLB
+Variable considered: atmos.ts.tavg-u-hxy-u.mon.GLB (branded name ts_tavg-u-hxy-u, official label ts_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.uas.tpt-h10m-hxy-u.1hr.GLB
+Variable considered: atmos.uas.tpt-h10m-hxy-u.1hr.GLB (branded name uas_tpt-h10m-hxy-u, official label uas_tpt-h10m-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.vas.tpt-h10m-hxy-u.1hr.GLB
+Variable considered: atmos.vas.tpt-h10m-hxy-u.1hr.GLB (branded name vas_tpt-h10m-hxy-u, official label vas_tpt-h10m-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.zg.tavg-p19-hxy-air.day.GLB
+Variable considered: atmos.zg.tavg-p19-hxy-air.day.GLB (branded name zg_tavg-p19-hxy-air, official label zg_tavg-p19-hxy-air)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.zg.tavg-p19-hxy-air.mon.GLB
+Variable considered: atmos.zg.tavg-p19-hxy-air.mon.GLB (branded name zg_tavg-p19-hxy-air, official label zg_tavg-p19-hxy-air)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.hfdsl.tavg-u-hxy-lnd.3hr.GLB
+Variable considered: land.hfdsl.tavg-u-hxy-lnd.3hr.GLB (branded name hfdsl_tavg-u-hxy-lnd, official label hfdsl_tavg-u-hxy-lnd)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: land.lai.tavg-u-hxy-lnd.mon.GLB
+Variable considered: land.lai.tavg-u-hxy-lnd.mon.GLB (branded name lai_tavg-u-hxy-lnd, official label lai_tavg-u-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.mrso.tavg-u-hxy-lnd.mon.GLB
+Variable considered: land.mrso.tavg-u-hxy-lnd.mon.GLB (branded name mrso_tavg-u-hxy-lnd, official label mrso_tavg-u-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.mrsol.tavg-d100cm-hxy-lnd.3hr.GLB
+Variable considered: land.mrsol.tavg-d100cm-hxy-lnd.3hr.GLB (branded name mrsol_tavg-d100cm-hxy-lnd, official label mrsol_tavg-d100cm-hxy-lnd)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: land.mrsol.tavg-d10cm-hxy-lnd.mon.GLB
+Variable considered: land.mrsol.tavg-d10cm-hxy-lnd.mon.GLB (branded name mrsol_tavg-d10cm-hxy-lnd, official label mrsol_tavg-d10cm-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.mrsol.tpt-d10cm-hxy-lnd.3hr.GLB
+Variable considered: land.mrsol.tpt-d10cm-hxy-lnd.3hr.GLB (branded name mrsol_tpt-d10cm-hxy-lnd, official label mrsol_tpt-d10cm-hxy-lnd)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: land.orog.ti-u-hxy-u.fx.GLB
+Variable considered: land.orog.ti-u-hxy-u.fx.GLB (branded name orog_ti-u-hxy-u, official label orog_ti-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.rootd.ti-u-hxy-lnd.fx.GLB
+Variable considered: land.rootd.ti-u-hxy-lnd.fx.GLB (branded name rootd_ti-u-hxy-lnd, official label rootd_ti-u-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.slthick.ti-sl-hxy-lnd.fx.GLB
+Variable considered: land.slthick.ti-sl-hxy-lnd.fx.GLB (branded name slthick_ti-sl-hxy-lnd, official label slthick_ti-sl-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.srfrad.tavg-u-hxy-u.3hr.GLB
+Variable considered: land.srfrad.tavg-u-hxy-u.3hr.GLB (branded name srfrad_tavg-u-hxy-u, official label srfrad_tavg-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: land.tran.tavg-u-hxy-u.3hr.GLB
+Variable considered: land.tran.tavg-u-hxy-u.3hr.GLB (branded name tran_tavg-u-hxy-u, official label tran_tavg-u-hxy-u)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: land.tslsi.tpt-u-hxy-u.3hr.GLB
+Variable considered: land.tslsi.tpt-u-hxy-u.3hr.GLB (branded name tslsi_tpt-u-hxy-u, official label tslsi_tpt-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: landIce.snc.tavg-u-hxy-lnd.mon.GLB
+Variable considered: landIce.snc.tavg-u-hxy-lnd.mon.GLB (branded name snc_tavg-u-hxy-lnd, official label snc_tavg-u-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.areacell.ti-u-hxy-u.fx.GLB
+Variable considered: ocean.areacell.ti-u-hxy-u.fx.GLB (branded name areacell_ti-u-hxy-u, official label areacell_ti-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.bigthetao.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocean.bigthetao.tavg-ol-hxy-sea.mon.GLB (branded name bigthetao_tavg-ol-hxy-sea, official label bigthetao_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.bigthetao.tavg-op20bar-hxy-sea.day.GLB
+Variable considered: ocean.bigthetao.tavg-op20bar-hxy-sea.day.GLB (branded name bigthetao_tavg-op20bar-hxy-sea, official label bigthetao_tavg-op20bar-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.deptho.ti-u-hxy-sea.fx.GLB
+Variable considered: ocean.deptho.ti-u-hxy-sea.fx.GLB (branded name deptho_ti-u-hxy-sea, official label deptho_ti-u-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.masscello.ti-ol-hxy-sea.fx.GLB
+Variable considered: ocean.masscello.ti-ol-hxy-sea.fx.GLB (branded name masscello_ti-ol-hxy-sea, official label masscello_ti-ol-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.mlotst.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.mlotst.tavg-u-hxy-sea.day.GLB (branded name mlotst_tavg-u-hxy-sea, official label mlotst_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.mlotstmax.tmax-u-hxy-sea.mon.GLB
+Variable considered: ocean.mlotstmax.tmax-u-hxy-sea.mon.GLB (branded name mlotstmax_tmax-u-hxy-sea, official label mlotstmax_tmax-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.mlotstmin.tmin-u-hxy-sea.mon.GLB
+Variable considered: ocean.mlotstmin.tmin-u-hxy-sea.mon.GLB (branded name mlotstmin_tmin-u-hxy-sea, official label mlotstmin_tmin-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.mpw.tavg-u-hxy-sea.3hr.GLB
+Variable considered: ocean.mpw.tavg-u-hxy-sea.3hr.GLB (branded name mpw_tavg-u-hxy-sea, official label mpw_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.mpw.tavg-u-hxy-sea.6hr.GLB
+Variable considered: ocean.mpw.tavg-u-hxy-sea.6hr.GLB (branded name mpw_tavg-u-hxy-sea, official label mpw_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.mpw.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.mpw.tavg-u-hxy-sea.mon.GLB (branded name mpw_tavg-u-hxy-sea, official label mpw_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.so.tavg-ol-hxy-sea.day.GLB
+Variable considered: ocean.so.tavg-ol-hxy-sea.day.GLB (branded name so_tavg-ol-hxy-sea, official label so_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocean.so.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocean.so.tavg-ol-hxy-sea.mon.GLB (branded name so_tavg-ol-hxy-sea, official label so_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: ocean.sos.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.sos.tavg-u-hxy-sea.day.GLB (branded name sos_tavg-u-hxy-sea, official label sos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: Medium] ([1, 3])
 Priority_retain 1
-Variable considered: ocean.sos.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.sos.tavg-u-hxy-sea.mon.GLB (branded name sos_tavg-u-hxy-sea, official label sos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: ocean.swh.tavg-u-hxy-sea.3hr.GLB
+Variable considered: ocean.swh.tavg-u-hxy-sea.3hr.GLB (branded name swh_tavg-u-hxy-sea, official label swh_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.swh.tavg-u-hxy-sea.6hr.GLB
+Variable considered: ocean.swh.tavg-u-hxy-sea.6hr.GLB (branded name swh_tavg-u-hxy-sea, official label swh_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.swh.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.swh.tavg-u-hxy-sea.mon.GLB (branded name swh_tavg-u-hxy-sea, official label swh_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.swh.tmax-u-hxy-sea.6hr.GLB
+Variable considered: ocean.swh.tmax-u-hxy-sea.6hr.GLB (branded name swh_tmax-u-hxy-sea, official label swh_tmax-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.swh.tmax-u-hxy-sea.mon.GLB
+Variable considered: ocean.swh.tmax-u-hxy-sea.mon.GLB (branded name swh_tmax-u-hxy-sea, official label swh_tmax-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.thetao.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocean.thetao.tavg-ol-hxy-sea.mon.GLB (branded name thetao_tavg-ol-hxy-sea, official label thetao_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: ocean.thetao.tavg-op20bar-hxy-sea.day.GLB
+Variable considered: ocean.thetao.tavg-op20bar-hxy-sea.day.GLB (branded name thetao_tavg-op20bar-hxy-sea, official label thetao_tavg-op20bar-hxy-sea)
 Priorities found: [priority_level: High, priority_level: Medium] ([2, 3])
 Priority_retain 2
-Variable considered: ocean.tnkebto.tavg-u-hxy-sea.yr.GLB
+Variable considered: ocean.tnkebto.tavg-u-hxy-sea.yr.GLB (branded name tnkebto_tavg-u-hxy-sea, official label tnkebto_tavg-u-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocean.tos.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.tos.tavg-u-hxy-sea.day.GLB (branded name tos_tavg-u-hxy-sea, official label tos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: Medium] ([1, 3])
 Priority_retain 1
-Variable considered: ocean.tos.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.tos.tavg-u-hxy-sea.mon.GLB (branded name tos_tavg-u-hxy-sea, official label tos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: ocean.tos.tpt-u-hxy-sea.3hr.GLB
+Variable considered: ocean.tos.tpt-u-hxy-sea.3hr.GLB (branded name tos_tpt-u-hxy-sea, official label tos_tpt-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.tossq.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.tossq.tavg-u-hxy-sea.day.GLB (branded name tossq_tavg-u-hxy-sea, official label tossq_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.uos.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.uos.tavg-u-hxy-sea.day.GLB (branded name uos_tavg-u-hxy-sea, official label uos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocean.vos.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.vos.tavg-u-hxy-sea.day.GLB (branded name vos_tavg-u-hxy-sea, official label vos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocean.wo.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocean.wo.tavg-ol-hxy-sea.mon.GLB (branded name wo_tavg-ol-hxy-sea, official label wo_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.wpp.tavg-u-hxy-sea.3hr.GLB
+Variable considered: ocean.wpp.tavg-u-hxy-sea.3hr.GLB (branded name wpp_tavg-u-hxy-sea, official label wpp_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.wpp.tavg-u-hxy-sea.6hr.GLB
+Variable considered: ocean.wpp.tavg-u-hxy-sea.6hr.GLB (branded name wpp_tavg-u-hxy-sea, official label wpp_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.wpp.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.wpp.tavg-u-hxy-sea.mon.GLB (branded name wpp_tavg-u-hxy-sea, official label wpp_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.zos.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.zos.tavg-u-hxy-sea.day.GLB (branded name zos_tavg-u-hxy-sea, official label zos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: ocean.zos.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.zos.tavg-u-hxy-sea.mon.GLB (branded name zos_tavg-u-hxy-sea, official label zos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.zossq.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.zossq.tavg-u-hxy-sea.mon.GLB (branded name zossq_tavg-u-hxy-sea, official label zossq_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.zostoga.tavg-u-hm-sea.day.GLB
+Variable considered: ocean.zostoga.tavg-u-hm-sea.day.GLB (branded name zostoga_tavg-u-hm-sea, official label zostoga_tavg-u-hm-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.zostoga.tavg-u-hm-sea.mon.GLB
+Variable considered: ocean.zostoga.tavg-u-hm-sea.mon.GLB (branded name zostoga_tavg-u-hm-sea, official label zostoga_tavg-u-hm-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocnBgchem.arag.tavg-d0m-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.arag.tavg-d0m-hxy-sea.mon.GLB (branded name arag_tavg-d0m-hxy-sea, official label arag_tavg-d0m-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.arag.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.arag.tavg-ol-hxy-sea.mon.GLB (branded name arag_tavg-ol-hxy-sea, official label arag_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.calc.tavg-d0m-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.calc.tavg-d0m-hxy-sea.mon.GLB (branded name calc_tavg-d0m-hxy-sea, official label calc_tavg-d0m-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.calc.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.calc.tavg-ol-hxy-sea.mon.GLB (branded name calc_tavg-ol-hxy-sea, official label calc_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.chl.tavg-op20bar-hxy-sea.day.GLB
+Variable considered: ocnBgchem.chl.tavg-op20bar-hxy-sea.day.GLB (branded name chl_tavg-op20bar-hxy-sea, official label chl_tavg-op20bar-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.dissic.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.dissic.tavg-ol-hxy-sea.mon.GLB (branded name dissic_tavg-ol-hxy-sea, official label dissic_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.o2.tavg-op20bar-hxy-sea.day.GLB
+Variable considered: ocnBgchem.o2.tavg-op20bar-hxy-sea.day.GLB (branded name o2_tavg-op20bar-hxy-sea, official label o2_tavg-op20bar-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.ph.tavg-op20bar-hxy-sea.day.GLB
+Variable considered: ocnBgchem.ph.tavg-op20bar-hxy-sea.day.GLB (branded name ph_tavg-op20bar-hxy-sea, official label ph_tavg-op20bar-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.talk.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.talk.tavg-ol-hxy-sea.mon.GLB (branded name talk_tavg-ol-hxy-sea, official label talk_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: seaIce.siconc.tavg-u-hxy-u.day.GLB
+Variable considered: seaIce.siconc.tavg-u-hxy-u.day.GLB (branded name siconc_tavg-u-hxy-u, official label siconc_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: seaIce.siconc.tavg-u-hxy-u.mon.GLB
+Variable considered: seaIce.siconc.tavg-u-hxy-u.mon.GLB (branded name siconc_tavg-u-hxy-u, official label siconc_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: seaIce.simass.tavg-u-hxy-sea.mon.GLB
+Variable considered: seaIce.simass.tavg-u-hxy-sea.mon.GLB (branded name simass_tavg-u-hxy-sea, official label simass_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: seaIce.sithick.tavg-u-hxy-si.day.GLB
+Variable considered: seaIce.sithick.tavg-u-hxy-si.day.GLB (branded name sithick_tavg-u-hxy-si, official label sithick_tavg-u-hxy-si)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: seaIce.sithick.tavg-u-hxy-si.mon.GLB
+Variable considered: seaIce.sithick.tavg-u-hxy-si.mon.GLB (branded name sithick_tavg-u-hxy-si, official label sithick_tavg-u-hxy-si)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: seaIce.siu.tavg-u-hxy-si.day.GLB
+Variable considered: seaIce.siu.tavg-u-hxy-si.day.GLB (branded name siu_tavg-u-hxy-si, official label siu_tavg-u-hxy-si)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: seaIce.siu.tavg-u-hxy-si.mon.GLB
+Variable considered: seaIce.siu.tavg-u-hxy-si.mon.GLB (branded name siu_tavg-u-hxy-si, official label siu_tavg-u-hxy-si)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: seaIce.siv.tavg-u-hxy-si.day.GLB
+Variable considered: seaIce.siv.tavg-u-hxy-si.day.GLB (branded name siv_tavg-u-hxy-si, official label siv_tavg-u-hxy-si)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: seaIce.siv.tavg-u-hxy-si.mon.GLB
+Variable considered: seaIce.siv.tavg-u-hxy-si.mon.GLB (branded name siv_tavg-u-hxy-si, official label siv_tavg-u-hxy-si)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
 Number of distinct var labels is: 72
-Variable considered: atmos.areacell.ti-u-hxy-u.fx.GLB
+Variable considered: atmos.areacell.ti-u-hxy-u.fx.GLB (branded name areacell_ti-u-hxy-u, official label areacell_ti-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.bldep.tpt-u-hxy-u.3hr.GLB
+Variable considered: atmos.bldep.tpt-u-hxy-u.3hr.GLB (branded name bldep_tpt-u-hxy-u, official label bldep_tpt-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.hfls.tavg-u-hxy-u.3hr.GLB
+Variable considered: atmos.hfls.tavg-u-hxy-u.3hr.GLB (branded name hfls_tavg-u-hxy-u, official label hfls_tavg-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.hfss.tavg-u-hxy-u.3hr.GLB
+Variable considered: atmos.hfss.tavg-u-hxy-u.3hr.GLB (branded name hfss_tavg-u-hxy-u, official label hfss_tavg-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.hurs.tavg-h2m-hxy-u.6hr.GLB
+Variable considered: atmos.hurs.tavg-h2m-hxy-u.6hr.GLB (branded name hurs_tavg-h2m-hxy-u, official label hurs_tavg-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.huss.tpt-h2m-hxy-u.3hr.GLB
+Variable considered: atmos.huss.tpt-h2m-hxy-u.3hr.GLB (branded name huss_tpt-h2m-hxy-u, official label huss_tpt-h2m-hxy-u)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: atmos.pr.tavg-u-hxy-u.1hr.GLB
+Variable considered: atmos.pr.tavg-u-hxy-u.1hr.GLB (branded name pr_tavg-u-hxy-u, official label pr_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.pr.tavg-u-hxy-u.3hr.GLB
+Variable considered: atmos.pr.tavg-u-hxy-u.3hr.GLB (branded name pr_tavg-u-hxy-u, official label pr_tavg-u-hxy-u)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: atmos.pr.tavg-u-hxy-u.day.GLB
+Variable considered: atmos.pr.tavg-u-hxy-u.day.GLB (branded name pr_tavg-u-hxy-u, official label pr_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.pr.tavg-u-hxy-u.mon.GLB
+Variable considered: atmos.pr.tavg-u-hxy-u.mon.GLB (branded name pr_tavg-u-hxy-u, official label pr_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.prc.tavg-u-hxy-u.mon.GLB
+Variable considered: atmos.prc.tavg-u-hxy-u.mon.GLB (branded name prc_tavg-u-hxy-u, official label prc_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.ps.tavg-u-hxy-u.day.GLB
+Variable considered: atmos.ps.tavg-u-hxy-u.day.GLB (branded name ps_tavg-u-hxy-u, official label ps_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.ps.tpt-u-hxy-u.3hr.GLB
+Variable considered: atmos.ps.tpt-u-hxy-u.3hr.GLB (branded name ps_tpt-u-hxy-u, official label ps_tpt-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.psl.tavg-u-hxy-u.day.GLB
+Variable considered: atmos.psl.tavg-u-hxy-u.day.GLB (branded name psl_tavg-u-hxy-u, official label psl_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.psl.tpt-u-hxy-u.1hr.GLB
+Variable considered: atmos.psl.tpt-u-hxy-u.1hr.GLB (branded name psl_tpt-u-hxy-u, official label psl_tpt-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.rlds.tavg-u-hxy-u.3hr.GLB
+Variable considered: atmos.rlds.tavg-u-hxy-u.3hr.GLB (branded name rlds_tavg-u-hxy-u, official label rlds_tavg-u-hxy-u)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: atmos.rlus.tavg-u-hxy-u.3hr.GLB
+Variable considered: atmos.rlus.tavg-u-hxy-u.3hr.GLB (branded name rlus_tavg-u-hxy-u, official label rlus_tavg-u-hxy-u)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.day.GLB
+Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.day.GLB (branded name sfcWind_tavg-h10m-hxy-u, official label sfcWind_tavg-h10m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.mon.GLB
+Variable considered: atmos.sfcWind.tavg-h10m-hxy-u.mon.GLB (branded name sfcWind_tavg-h10m-hxy-u, official label sfcWind_tavg-h10m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.sftlf.ti-u-hxy-u.fx.GLB
+Variable considered: atmos.sftlf.ti-u-hxy-u.fx.GLB (branded name sftlf_ti-u-hxy-u, official label sftlf_ti-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.ta.tavg-p19-hxy-air.day.GLB
+Variable considered: atmos.ta.tavg-p19-hxy-air.day.GLB (branded name ta_tavg-p19-hxy-air, official label ta_tavg-p19-hxy-air)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.ta.tavg-p19-hxy-air.mon.GLB
+Variable considered: atmos.ta.tavg-p19-hxy-air.mon.GLB (branded name ta_tavg-p19-hxy-air, official label ta_tavg-p19-hxy-air)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.ta.tpt-p3-hxy-air.6hr.GLB
+Variable considered: atmos.ta.tpt-p3-hxy-air.6hr.GLB (branded name ta_tpt-p3-hxy-air, official label ta_tpt-p3-hxy-air)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.ta.tpt-p6-hxy-air.3hr.GLB
+Variable considered: atmos.ta.tpt-p6-hxy-air.3hr.GLB (branded name ta_tpt-p6-hxy-air, official label ta_tpt-p6-hxy-air)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: atmos.tas.tavg-h2m-hxy-u.day.GLB
+Variable considered: atmos.tas.tavg-h2m-hxy-u.day.GLB (branded name tas_tavg-h2m-hxy-u, official label tas_tavg-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tavg-h2m-hxy-u.mon.GLB
+Variable considered: atmos.tas.tavg-h2m-hxy-u.mon.GLB (branded name tas_tavg-h2m-hxy-u, official label tas_tavg-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tmax-h2m-hxy-u.day.GLB
+Variable considered: atmos.tas.tmax-h2m-hxy-u.day.GLB (branded name tas_tmax-h2m-hxy-u, official label tas_tmax-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tmax-h2m-hxy-u.mon.GLB
+Variable considered: atmos.tas.tmax-h2m-hxy-u.mon.GLB (branded name tas_tmax-h2m-hxy-u, official label tas_tmax-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tmin-h2m-hxy-u.day.GLB
+Variable considered: atmos.tas.tmin-h2m-hxy-u.day.GLB (branded name tas_tmin-h2m-hxy-u, official label tas_tmin-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tmin-h2m-hxy-u.mon.GLB
+Variable considered: atmos.tas.tmin-h2m-hxy-u.mon.GLB (branded name tas_tmin-h2m-hxy-u, official label tas_tmin-h2m-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.tas.tpt-h2m-hxy-u.3hr.GLB
+Variable considered: atmos.tas.tpt-h2m-hxy-u.3hr.GLB (branded name tas_tpt-h2m-hxy-u, official label tas_tpt-h2m-hxy-u)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: atmos.ts.tavg-u-hxy-u.mon.GLB
+Variable considered: atmos.ts.tavg-u-hxy-u.mon.GLB (branded name ts_tavg-u-hxy-u, official label ts_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.uas.tpt-h10m-hxy-u.1hr.GLB
+Variable considered: atmos.uas.tpt-h10m-hxy-u.1hr.GLB (branded name uas_tpt-h10m-hxy-u, official label uas_tpt-h10m-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.vas.tpt-h10m-hxy-u.1hr.GLB
+Variable considered: atmos.vas.tpt-h10m-hxy-u.1hr.GLB (branded name vas_tpt-h10m-hxy-u, official label vas_tpt-h10m-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: atmos.zg.tavg-p19-hxy-air.day.GLB
+Variable considered: atmos.zg.tavg-p19-hxy-air.day.GLB (branded name zg_tavg-p19-hxy-air, official label zg_tavg-p19-hxy-air)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: atmos.zg.tavg-p19-hxy-air.mon.GLB
+Variable considered: atmos.zg.tavg-p19-hxy-air.mon.GLB (branded name zg_tavg-p19-hxy-air, official label zg_tavg-p19-hxy-air)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.hfdsl.tavg-u-hxy-lnd.3hr.GLB
+Variable considered: land.hfdsl.tavg-u-hxy-lnd.3hr.GLB (branded name hfdsl_tavg-u-hxy-lnd, official label hfdsl_tavg-u-hxy-lnd)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: land.lai.tavg-u-hxy-lnd.mon.GLB
+Variable considered: land.lai.tavg-u-hxy-lnd.mon.GLB (branded name lai_tavg-u-hxy-lnd, official label lai_tavg-u-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.mrso.tavg-u-hxy-lnd.mon.GLB
+Variable considered: land.mrso.tavg-u-hxy-lnd.mon.GLB (branded name mrso_tavg-u-hxy-lnd, official label mrso_tavg-u-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.mrsol.tavg-d100cm-hxy-lnd.3hr.GLB
+Variable considered: land.mrsol.tavg-d100cm-hxy-lnd.3hr.GLB (branded name mrsol_tavg-d100cm-hxy-lnd, official label mrsol_tavg-d100cm-hxy-lnd)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: land.mrsol.tavg-d10cm-hxy-lnd.mon.GLB
+Variable considered: land.mrsol.tavg-d10cm-hxy-lnd.mon.GLB (branded name mrsol_tavg-d10cm-hxy-lnd, official label mrsol_tavg-d10cm-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.mrsol.tpt-d10cm-hxy-lnd.3hr.GLB
+Variable considered: land.mrsol.tpt-d10cm-hxy-lnd.3hr.GLB (branded name mrsol_tpt-d10cm-hxy-lnd, official label mrsol_tpt-d10cm-hxy-lnd)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: land.orog.ti-u-hxy-u.fx.GLB
+Variable considered: land.orog.ti-u-hxy-u.fx.GLB (branded name orog_ti-u-hxy-u, official label orog_ti-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.rootd.ti-u-hxy-lnd.fx.GLB
+Variable considered: land.rootd.ti-u-hxy-lnd.fx.GLB (branded name rootd_ti-u-hxy-lnd, official label rootd_ti-u-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.slthick.ti-sl-hxy-lnd.fx.GLB
+Variable considered: land.slthick.ti-sl-hxy-lnd.fx.GLB (branded name slthick_ti-sl-hxy-lnd, official label slthick_ti-sl-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: land.srfrad.tavg-u-hxy-u.3hr.GLB
+Variable considered: land.srfrad.tavg-u-hxy-u.3hr.GLB (branded name srfrad_tavg-u-hxy-u, official label srfrad_tavg-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: land.tran.tavg-u-hxy-u.3hr.GLB
+Variable considered: land.tran.tavg-u-hxy-u.3hr.GLB (branded name tran_tavg-u-hxy-u, official label tran_tavg-u-hxy-u)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: land.tslsi.tpt-u-hxy-u.3hr.GLB
+Variable considered: land.tslsi.tpt-u-hxy-u.3hr.GLB (branded name tslsi_tpt-u-hxy-u, official label tslsi_tpt-u-hxy-u)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: landIce.snc.tavg-u-hxy-lnd.mon.GLB
+Variable considered: landIce.snc.tavg-u-hxy-lnd.mon.GLB (branded name snc_tavg-u-hxy-lnd, official label snc_tavg-u-hxy-lnd)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.areacell.ti-u-hxy-u.fx.GLB
+Variable considered: ocean.areacell.ti-u-hxy-u.fx.GLB (branded name areacell_ti-u-hxy-u, official label areacell_ti-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.bigthetao.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocean.bigthetao.tavg-ol-hxy-sea.mon.GLB (branded name bigthetao_tavg-ol-hxy-sea, official label bigthetao_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.bigthetao.tavg-op20bar-hxy-sea.day.GLB
+Variable considered: ocean.bigthetao.tavg-op20bar-hxy-sea.day.GLB (branded name bigthetao_tavg-op20bar-hxy-sea, official label bigthetao_tavg-op20bar-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.deptho.ti-u-hxy-sea.fx.GLB
+Variable considered: ocean.deptho.ti-u-hxy-sea.fx.GLB (branded name deptho_ti-u-hxy-sea, official label deptho_ti-u-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.masscello.ti-ol-hxy-sea.fx.GLB
+Variable considered: ocean.masscello.ti-ol-hxy-sea.fx.GLB (branded name masscello_ti-ol-hxy-sea, official label masscello_ti-ol-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.mlotst.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.mlotst.tavg-u-hxy-sea.day.GLB (branded name mlotst_tavg-u-hxy-sea, official label mlotst_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.mlotstmax.tmax-u-hxy-sea.mon.GLB
+Variable considered: ocean.mlotstmax.tmax-u-hxy-sea.mon.GLB (branded name mlotstmax_tmax-u-hxy-sea, official label mlotstmax_tmax-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.mlotstmin.tmin-u-hxy-sea.mon.GLB
+Variable considered: ocean.mlotstmin.tmin-u-hxy-sea.mon.GLB (branded name mlotstmin_tmin-u-hxy-sea, official label mlotstmin_tmin-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.mpw.tavg-u-hxy-sea.3hr.GLB
+Variable considered: ocean.mpw.tavg-u-hxy-sea.3hr.GLB (branded name mpw_tavg-u-hxy-sea, official label mpw_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.mpw.tavg-u-hxy-sea.6hr.GLB
+Variable considered: ocean.mpw.tavg-u-hxy-sea.6hr.GLB (branded name mpw_tavg-u-hxy-sea, official label mpw_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.mpw.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.mpw.tavg-u-hxy-sea.mon.GLB (branded name mpw_tavg-u-hxy-sea, official label mpw_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.so.tavg-ol-hxy-sea.day.GLB
+Variable considered: ocean.so.tavg-ol-hxy-sea.day.GLB (branded name so_tavg-ol-hxy-sea, official label so_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocean.so.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocean.so.tavg-ol-hxy-sea.mon.GLB (branded name so_tavg-ol-hxy-sea, official label so_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: ocean.sos.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.sos.tavg-u-hxy-sea.day.GLB (branded name sos_tavg-u-hxy-sea, official label sos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: Medium] ([1, 3])
 Priority_retain 1
-Variable considered: ocean.sos.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.sos.tavg-u-hxy-sea.mon.GLB (branded name sos_tavg-u-hxy-sea, official label sos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: ocean.swh.tavg-u-hxy-sea.3hr.GLB
+Variable considered: ocean.swh.tavg-u-hxy-sea.3hr.GLB (branded name swh_tavg-u-hxy-sea, official label swh_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.swh.tavg-u-hxy-sea.6hr.GLB
+Variable considered: ocean.swh.tavg-u-hxy-sea.6hr.GLB (branded name swh_tavg-u-hxy-sea, official label swh_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.swh.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.swh.tavg-u-hxy-sea.mon.GLB (branded name swh_tavg-u-hxy-sea, official label swh_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.swh.tmax-u-hxy-sea.6hr.GLB
+Variable considered: ocean.swh.tmax-u-hxy-sea.6hr.GLB (branded name swh_tmax-u-hxy-sea, official label swh_tmax-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.swh.tmax-u-hxy-sea.mon.GLB
+Variable considered: ocean.swh.tmax-u-hxy-sea.mon.GLB (branded name swh_tmax-u-hxy-sea, official label swh_tmax-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.thetao.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocean.thetao.tavg-ol-hxy-sea.mon.GLB (branded name thetao_tavg-ol-hxy-sea, official label thetao_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: ocean.thetao.tavg-op20bar-hxy-sea.day.GLB
+Variable considered: ocean.thetao.tavg-op20bar-hxy-sea.day.GLB (branded name thetao_tavg-op20bar-hxy-sea, official label thetao_tavg-op20bar-hxy-sea)
 Priorities found: [priority_level: High, priority_level: Medium] ([2, 3])
 Priority_retain 2
-Variable considered: ocean.tnkebto.tavg-u-hxy-sea.yr.GLB
+Variable considered: ocean.tnkebto.tavg-u-hxy-sea.yr.GLB (branded name tnkebto_tavg-u-hxy-sea, official label tnkebto_tavg-u-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocean.tos.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.tos.tavg-u-hxy-sea.day.GLB (branded name tos_tavg-u-hxy-sea, official label tos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: Medium] ([1, 3])
 Priority_retain 1
-Variable considered: ocean.tos.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.tos.tavg-u-hxy-sea.mon.GLB (branded name tos_tavg-u-hxy-sea, official label tos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: ocean.tos.tpt-u-hxy-sea.3hr.GLB
+Variable considered: ocean.tos.tpt-u-hxy-sea.3hr.GLB (branded name tos_tpt-u-hxy-sea, official label tos_tpt-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.tossq.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.tossq.tavg-u-hxy-sea.day.GLB (branded name tossq_tavg-u-hxy-sea, official label tossq_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.uos.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.uos.tavg-u-hxy-sea.day.GLB (branded name uos_tavg-u-hxy-sea, official label uos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocean.vos.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.vos.tavg-u-hxy-sea.day.GLB (branded name vos_tavg-u-hxy-sea, official label vos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocean.wo.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocean.wo.tavg-ol-hxy-sea.mon.GLB (branded name wo_tavg-ol-hxy-sea, official label wo_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.wpp.tavg-u-hxy-sea.3hr.GLB
+Variable considered: ocean.wpp.tavg-u-hxy-sea.3hr.GLB (branded name wpp_tavg-u-hxy-sea, official label wpp_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.wpp.tavg-u-hxy-sea.6hr.GLB
+Variable considered: ocean.wpp.tavg-u-hxy-sea.6hr.GLB (branded name wpp_tavg-u-hxy-sea, official label wpp_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.wpp.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.wpp.tavg-u-hxy-sea.mon.GLB (branded name wpp_tavg-u-hxy-sea, official label wpp_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.zos.tavg-u-hxy-sea.day.GLB
+Variable considered: ocean.zos.tavg-u-hxy-sea.day.GLB (branded name zos_tavg-u-hxy-sea, official label zos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core, priority_level: High] ([1, 2])
 Priority_retain 1
-Variable considered: ocean.zos.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.zos.tavg-u-hxy-sea.mon.GLB (branded name zos_tavg-u-hxy-sea, official label zos_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocean.zossq.tavg-u-hxy-sea.mon.GLB
+Variable considered: ocean.zossq.tavg-u-hxy-sea.mon.GLB (branded name zossq_tavg-u-hxy-sea, official label zossq_tavg-u-hxy-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.zostoga.tavg-u-hm-sea.day.GLB
+Variable considered: ocean.zostoga.tavg-u-hm-sea.day.GLB (branded name zostoga_tavg-u-hm-sea, official label zostoga_tavg-u-hm-sea)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: ocean.zostoga.tavg-u-hm-sea.mon.GLB
+Variable considered: ocean.zostoga.tavg-u-hm-sea.mon.GLB (branded name zostoga_tavg-u-hm-sea, official label zostoga_tavg-u-hm-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: ocnBgchem.arag.tavg-d0m-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.arag.tavg-d0m-hxy-sea.mon.GLB (branded name arag_tavg-d0m-hxy-sea, official label arag_tavg-d0m-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.arag.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.arag.tavg-ol-hxy-sea.mon.GLB (branded name arag_tavg-ol-hxy-sea, official label arag_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.calc.tavg-d0m-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.calc.tavg-d0m-hxy-sea.mon.GLB (branded name calc_tavg-d0m-hxy-sea, official label calc_tavg-d0m-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.calc.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.calc.tavg-ol-hxy-sea.mon.GLB (branded name calc_tavg-ol-hxy-sea, official label calc_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.chl.tavg-op20bar-hxy-sea.day.GLB
+Variable considered: ocnBgchem.chl.tavg-op20bar-hxy-sea.day.GLB (branded name chl_tavg-op20bar-hxy-sea, official label chl_tavg-op20bar-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.dissic.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.dissic.tavg-ol-hxy-sea.mon.GLB (branded name dissic_tavg-ol-hxy-sea, official label dissic_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.o2.tavg-op20bar-hxy-sea.day.GLB
+Variable considered: ocnBgchem.o2.tavg-op20bar-hxy-sea.day.GLB (branded name o2_tavg-op20bar-hxy-sea, official label o2_tavg-op20bar-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.ph.tavg-op20bar-hxy-sea.day.GLB
+Variable considered: ocnBgchem.ph.tavg-op20bar-hxy-sea.day.GLB (branded name ph_tavg-op20bar-hxy-sea, official label ph_tavg-op20bar-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: ocnBgchem.talk.tavg-ol-hxy-sea.mon.GLB
+Variable considered: ocnBgchem.talk.tavg-ol-hxy-sea.mon.GLB (branded name talk_tavg-ol-hxy-sea, official label talk_tavg-ol-hxy-sea)
 Priorities found: [priority_level: Medium] ([3])
 Priority_retain 3
-Variable considered: seaIce.siconc.tavg-u-hxy-u.day.GLB
+Variable considered: seaIce.siconc.tavg-u-hxy-u.day.GLB (branded name siconc_tavg-u-hxy-u, official label siconc_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: seaIce.siconc.tavg-u-hxy-u.mon.GLB
+Variable considered: seaIce.siconc.tavg-u-hxy-u.mon.GLB (branded name siconc_tavg-u-hxy-u, official label siconc_tavg-u-hxy-u)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: seaIce.simass.tavg-u-hxy-sea.mon.GLB
+Variable considered: seaIce.simass.tavg-u-hxy-sea.mon.GLB (branded name simass_tavg-u-hxy-sea, official label simass_tavg-u-hxy-sea)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: seaIce.sithick.tavg-u-hxy-si.day.GLB
+Variable considered: seaIce.sithick.tavg-u-hxy-si.day.GLB (branded name sithick_tavg-u-hxy-si, official label sithick_tavg-u-hxy-si)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: seaIce.sithick.tavg-u-hxy-si.mon.GLB
+Variable considered: seaIce.sithick.tavg-u-hxy-si.mon.GLB (branded name sithick_tavg-u-hxy-si, official label sithick_tavg-u-hxy-si)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: seaIce.siu.tavg-u-hxy-si.day.GLB
+Variable considered: seaIce.siu.tavg-u-hxy-si.day.GLB (branded name siu_tavg-u-hxy-si, official label siu_tavg-u-hxy-si)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: seaIce.siu.tavg-u-hxy-si.mon.GLB
+Variable considered: seaIce.siu.tavg-u-hxy-si.mon.GLB (branded name siu_tavg-u-hxy-si, official label siu_tavg-u-hxy-si)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
-Variable considered: seaIce.siv.tavg-u-hxy-si.day.GLB
+Variable considered: seaIce.siv.tavg-u-hxy-si.day.GLB (branded name siv_tavg-u-hxy-si, official label siv_tavg-u-hxy-si)
 Priorities found: [priority_level: High] ([2])
 Priority_retain 2
-Variable considered: seaIce.siv.tavg-u-hxy-si.mon.GLB
+Variable considered: seaIce.siv.tavg-u-hxy-si.mon.GLB (branded name siv_tavg-u-hxy-si, official label siv_tavg-u-hxy-si)
 Priorities found: [priority_level: Core] ([1])
 Priority_retain 1
 Number of simplified vars is: 105
