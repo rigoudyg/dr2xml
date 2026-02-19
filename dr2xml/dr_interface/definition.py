@@ -136,6 +136,9 @@ class DataRequest(object):
     def get_cmorvars_list(self, **kwargs):
         return dict()
 
+    def get_ps_data(self, reference_var):
+        raise NotImplementedError()
+
 
 class ListWithItems(list):
 

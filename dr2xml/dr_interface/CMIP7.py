@@ -223,6 +223,11 @@ class DataRequest(DataRequestBasic):
         else:
             return max(time_subsets)
 
+    def get_ps_data(self, reference_var):
+        rep = dict(label="ps", frequency=reference_var.frequency, spatial_shp=reference_var.spatial_shp,
+                   temporal_shp=reference_var.temporal_shp)
+        return rep
+
 
 def initialize_data_request():
     global data_request

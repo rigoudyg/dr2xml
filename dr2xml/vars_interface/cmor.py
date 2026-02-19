@@ -47,14 +47,14 @@ def check_cmor_variable(home_var, mip_vars_list, hv_info):
         return None
 
 
-def get_cmor_var(label, table):
+def get_cmor_var(**kwargs):
     """
     Returns CMOR variable for a given label in a given table
     (could be optimized using inverse index)
     """
     data_request = get_dr_object("get_data_request")
     cmvar = [cmvar for cmvar in data_request.get_list_by_id("CMORvar", elt_type="variable")
-             if cmvar.mipTable == table and cmvar.label == label]
+             if all([cmvar.__getattribute__(key) == val for key, val in kwargs.items()])]
     if len(cmvar) > 0:
         return cmvar[0]
     else:
@@ -92,29 +92,20 @@ def ping_alias(svar, error_on_fail=False):
     return alias_ping
 
 
-def get_simplevar(label, table, freq=None):
+def get_simplevar(label, reference_var):
     """
     Returns 'simplified variable' for a given CMORvar label and table
     """
     svar = get_dr_object("SimpleCMORVar")
-    psvar = get_cmor_var(label, table)
+    psvar = get_cmor_var(label=label, mipTable=reference_var.mipTable)
     #
     # Try to get a var for 'ps' when table is only in Home DR
-    if psvar is None and label in ["ps", ] and freq is not None:
+    if psvar is None and label in ["ps", ] and reference_var.frequency is not None:
         # print "\tSearching for alternate ps "
-        if freq in ["3h", "3hr", "3hrPt"]:
-            psvar = get_cmor_var('ps', 'E3hrPt')
-        elif freq in ["6h", "6hr"]:
-            psvar = get_cmor_var('ps', '6hrLev')
-        elif freq in ["day", ]:
-            psvar = get_cmor_var('ps', 'CFday')
-        elif freq in ["mon", "1mo"]:
-            psvar = get_cmor_var('ps', 'Emon')
-        elif freq in ["subhr", ]:
-            if table in ["CFsubhr", ]:
-                psvar = get_cmor_var('ps', 'CFsubhr')
-            else:
-                psvar = get_cmor_var('ps', 'Esubhr')
+        dr = get_dr_object("data_request")
+        psvar_dict = dr.get_ps_data(reference_var)
+        if psvar_dict is not None:
+            psvar = get_cmor_var(**psvar_dict)
     if psvar:
         complement_svar_using_cmorvar(svar, psvar, [])
         return svar

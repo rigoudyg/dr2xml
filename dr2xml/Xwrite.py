@@ -594,7 +594,7 @@ def write_xios_file_def_for_svars_list(vars_list, hgrid, xml_file_definition, fr
         if found_begin_A:
             # create a field_def entry for surface pressure
             # print "Searching for ps for var %s, freq %s="%(alias,freq)
-            sv_psol = get_simplevar("ps", table, freq_ps)
+            sv_psol = get_simplevar("ps", real_vars_list[0][0])
 
             if sv_psol:
                 # if not sv_psol.cell_measures : sv_psol.cell_measures = "cell measure is not specified in DR "+

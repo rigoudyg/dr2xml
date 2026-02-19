@@ -514,6 +514,25 @@ class DataRequest(DataRequestBasic):
             request_link = [request_link, ]
         return self.scope.varsByRql(request_link, pmax)
 
+    def get_ps_data(self, reference_var):
+        rep = None
+        table = reference_var.mipTable
+        freq = reference_var.frequency
+        if freq in ["3h", "3hr", "3hrPt"]:
+            rep = dict(label='ps', mipTable='E3hrPt')
+        elif freq in ["6h", "6hr"]:
+             rep = dict(label='ps', mipTable='6hrLev')
+        elif freq in ["day", ]:
+            rep = dict(label='ps', mipTable='CFday')
+        elif freq in ["mon", "1mo"]:
+            rep = dict(label='ps', mipTable='Emon')
+        elif freq in ["subhr", ]:
+            if table in ["CFsubhr", ]:
+                rep = dict(label='ps', mipTable='CFsubhr')
+            else:
+                rep = dict(label='ps', mipTable='Esubhr')
+        return rep
+
 
 data_request = None
 
