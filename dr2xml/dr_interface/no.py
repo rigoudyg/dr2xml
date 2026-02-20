@@ -53,6 +53,9 @@ class DataRequest(DataRequestBasic):
     def get_dimensions_dict(self):
         return OrderedDict()
 
+    def get_ps_data(self, reference_var):
+        return None
+
 
 def initialize_data_request():
     global data_request

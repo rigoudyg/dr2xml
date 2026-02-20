@@ -100,7 +100,12 @@ class DataRequest(DataRequestBasic):
         if elt_type is None:
             raise ValueError("Unable to find out uid with elt_type None")
         if id is None:
-            return self.data_request.get_elements_per_kind(elt_type)
+            rep = self.data_request.get_elements_per_kind(elt_type)
+            if elt_type in ["variable", ]:
+                rep = [SimpleCMORVar.get_from_dr(elt, id=elt.id, **kwargs) for elt in rep]
+            elif elt_type in ["dimension", ]:
+                rep = [SimpleDim.get_from_dr(elt, id=elt.id) for elt in rep]
+            return rep
         else:
             if elt_type in ["dim", ]:
                 elt_type = "dimension"

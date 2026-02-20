@@ -102,7 +102,7 @@ def get_simplevar(label, reference_var):
     # Try to get a var for 'ps' when table is only in Home DR
     if psvar is None and label in ["ps", ] and reference_var.frequency is not None:
         # print "\tSearching for alternate ps "
-        dr = get_dr_object("data_request")
+        dr = get_dr_object("get_data_request")
         psvar_dict = dr.get_ps_data(reference_var)
         if psvar_dict is not None:
             psvar = get_cmor_var(**psvar_dict)

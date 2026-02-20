@@ -88,6 +88,9 @@ class DataRequest(DataRequestBasic):
                 rep[id].add(grid)
         return rep
 
+    def get_ps_data(self, reference_var):
+        return None
+
 
 def initialize_data_request():
     global data_request
