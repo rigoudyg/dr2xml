@@ -530,6 +530,20 @@
         []
       ]
     },
+    "excluded_vars_per_shape": {
+      "help": "A dictionary which keys are shapes and values the list of variables that must be excluded for each shape.",
+      "target_type": "dict",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": [
+            "excluded_vars_per_shape"
+          ]
+        },
+        {}
+      ]
+    },
     "excluded_vars_sset": {
       "help": "List of CMOR variables to exclude from the result based on previous Data Request extraction from simulation settings.",
       "target_type": "list",
