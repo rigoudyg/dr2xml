@@ -683,8 +683,8 @@ class ParameterSettings(Settings):
             self.authorized_types = self.authorized_types[0]
         if isinstance(self.forbidden_types, list) and len(self.forbidden_types) == 1:
             self.forbidden_types = self.forbidden_types[0]
-        if self.target_type and not self.target_type in ["list", "set", "str", None]:
-            raise ValueError("Target type must have a value among 'str', 'set', 'list', None.")
+        if self.target_type and not self.target_type in ["list", "set", "str", "dict", None]:
+            raise ValueError("Target type must have a value among 'str', 'set', 'list', 'dict', None.")
 
     def update(self, other):
         super(ParameterSettings, self).update(other)
@@ -860,6 +860,13 @@ class ParameterSettings(Settings):
                 value = self.correct_target_type(value[0])
             elif not isinstance(value, six.string_types):
                 value = str(value)
+        elif target_type in ["dict", ]:
+            if isinstance(value, dict):
+                pass
+            elif len(value) == 0:
+                value = dict()
+            else:
+                raise ValueError(f"Unable to transform {type(value)} into {target_type}.")
         return value
 
 
@@ -983,6 +990,12 @@ class FunctionSettings(Settings):
                     raise ValueError("To use 'join' function in %s, 'template' must be a specified to the joining string." % self.key)
                 else:
                     self.func = "join"
+            elif self.keys == ["replace", ]:
+                if not isinstance(self.template, list) and not len(self.template) == 2:
+                    logger.error("To use 'replace' function in %s, 'template' must be a specified to list of two strings." % self.key)
+                    raise ValueError("To use 'replace' function in %s, 'template' must be a specified to list of two strings" % self.key)
+                else:
+                    self.func = "replace"
             else:
                 logger.error("Unknown self functions %s" % self.key)
                 raise ValueError("Unknown self functions %s" % self.key)
@@ -1130,6 +1143,14 @@ class FunctionSettings(Settings):
                     if not isinstance(args[0], list):
                         args = tuple([[args[0], ], ])
                     value = self.template.join(*args)
+                except BaseException as e:
+                    logger.debug("Issue joining string %s with %s" % (self.template, args))
+                    logger.debug(str(e))
+                    value = None
+                    test = False
+            elif self.func in ["replace", ]:
+                try:
+                    value = args.replace(*self.template)
                 except BaseException as e:
                     logger.debug("Issue joining string %s with %s" % (self.template, args))
                     logger.debug(str(e))

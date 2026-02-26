@@ -721,6 +721,10 @@
           ]
         }
       },
+      "attrs_list": ["id", "name", "output_freq", "append", "output_level", "compression_level", "split_freq",
+        "split_freq_format", "split_start_offset", "split_end_offset", "split_last_date", "time_units",
+        "time_counter_name", "time_counter", "time_stamp_name", "time_stamp_format", "uuid_name",
+        "uuid_format", "convention_str", "synchronisation_frequency", "format"],
       "attrs_constraints": {
       "id": {
         "help": "Id of the output file",
@@ -765,6 +769,9 @@
               }
             }
           ]
+        },
+        "format": {
+          "values": ["netcdf4_classic"]
         },
         "name": {
           "values": [
@@ -1084,7 +1091,20 @@
           ]
         },
         "nominal_resolution": {
-          "fatal": true
+          "fatal": true,
+          "values": [
+              {
+                "type": "value",
+                "origin": "attrs",
+                "keys": ["nominal_resolution"],
+                "format": {
+                  "type": "func",
+                  "origin": "self",
+                  "keys": "replace",
+                  "template": [" ", "-"]
+                }
+              }
+            ]
         },
         "physics_index": {
           "fatal": true,
