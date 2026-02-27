@@ -1150,7 +1150,7 @@ class FunctionSettings(Settings):
                     test = False
             elif self.func in ["replace", ]:
                 try:
-                    value = args.replace(*self.template)
+                    value = args[0].replace(*self.template)
                 except BaseException as e:
                     logger.debug("Issue joining string %s with %s" % (self.template, args))
                     logger.debug(str(e))
