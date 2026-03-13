@@ -427,6 +427,18 @@
         []
       ]
     },
+    "excluded_regions": {
+      "help": "List of regions to be excluded.",
+      "target_type": "list",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["excluded_regions"]
+        },
+        []
+      ]
+    },
     "excluded_request_links": {
       "help": "List of links un data request that should not been followed (those request are not taken into account).",
       "target_type": "list",
@@ -582,6 +594,20 @@
           "keys": "experiment_id"
         }
       ]
+    },
+    "extravar_regions": {
+      "help": "Dictionnary containing the default values for region for each variables",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": ["extravar_regions"]
+        },
+        {
+          "default": "undef"
+        }
+      ],
+      "target_type": "dict"
     },
     "filter_on_realization": {
       "help": "If you want to produce the same variables set for all members, set this parameter to False.",
@@ -1400,6 +1426,40 @@
               "keys": ["excluded_pairs_lset"]
             }
           ]
+        }
+      ]
+    },
+    "select_excluded_regions": {
+      "help": "Excluded regions for variable selection.",
+      "fatal": true,
+      "values": [
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_expt"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [true],
+          "values": [
+            {
+              "type": "value",
+              "origin": "internal",
+              "keys": ["excluded_regions"]
+            }
+          ]
+        },
+        {
+          "type": "condition",
+          "value_to_check": {
+            "type": "value",
+            "origin": "internal",
+            "keys": ["select_on_expt"]
+          },
+          "check_to_perform": "eq",
+          "reference_values": [false],
+          "values": [null]
         }
       ]
     },

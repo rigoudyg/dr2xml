@@ -166,9 +166,13 @@ class DataRequest(DataRequestBasic):
     def _is_timesubset_applicable(self, year, select_on_year, time_subset):
         if year is False or select_on_year is False:
             return None, None
-        else:
+        elif time_subset.type in ["simpleRange", "void"]:
             return ((time_subset.start is None or (time_subset.start <= int(year))) and
                     (time_subset.end is None or (time_subset.end >= int(year))), time_subset.end)
+        else:
+            logger = get_logger()
+            logger.error("Could not yet deal with time subset of type %s" % time_subset.type)
+            raise ValueError("Could not yet deal with time subset of type %s" % time_subset.type)
 
     def _get_filtering_elements(self, experiment=None, variable=None):
         internal_dict = get_settings_values("internal")
@@ -192,7 +196,8 @@ class DataRequest(DataRequestBasic):
     def get_cmorvars_list(self, select_mips, select_max_priority, select_included_vars, select_excluded_vars,
                           select_included_tables, select_excluded_tables, select_excluded_pairs,
                           select_included_opportunities, select_excluded_opportunities, select_included_vargroups,
-                          select_excluded_vargroups, select_on_year, experiment_filter=False, **kwargs):
+                          select_excluded_vargroups, select_excluded_regions, select_on_year, experiment_filter=False,
+                          **kwargs):
         rep = defaultdict(set)
         # Filter var list per priority and experiment
         if experiment_filter:
@@ -209,6 +214,7 @@ class DataRequest(DataRequestBasic):
             if is_elt_applicable(dr_var.mipTable, excluded=select_excluded_tables, included=select_included_tables) and \
                     is_elt_applicable(dr_var.mipVarLabel, excluded=select_excluded_vars, included=select_included_vars) \
                     and is_elt_applicable((dr_var.mipVarLabel, dr_var.mipTable), excluded=select_excluded_pairs) \
+                    and is_elt_applicable(dr_var.region, excluded=select_excluded_regions) \
                     and self.get_endyear_for_cmorvar(cmorvar=dr_var, experiment=experiment, year=select_on_year,
                                                      internal_dict=get_settings_values("internal")) is not False:
                 rep[dr_var.id] = rep[dr_var.id] | set(dr_var.grids)
@@ -292,7 +298,7 @@ class SimpleCMORVar(SimpleCMORVarBasic):
                    label=input_var.physical_parameter.name,
                    mipVarLabel=input_var.physical_parameter.name,
                    official_label=official_label,
-                   label_without_psuffix=input_var.physical_parameter.name,
+                   label_without_psuffix=input_var.physical_parameter.variablerootdd,
                    label_non_ambiguous=input_var.name,
                    frequency=input_var.cmip7_frequency.name,
                    mipTable=input_var.cmip6_tables_identifier.name,

@@ -538,7 +538,7 @@
                 "label": {
                   "type": "value",
                   "origin": "common_tag",
-                  "keys": ["variable", "label"]
+                  "keys": ["variable_label"]
                 },
                 "mipVarLabel": {
                   "type": "value",

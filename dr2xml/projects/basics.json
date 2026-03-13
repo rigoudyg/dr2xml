@@ -779,7 +779,7 @@
       }
     },
     "field_output": {
-      "common_list": ["variable"],
+      "common_list": ["variable", "variable_label"],
       "common_constraints": {
         "variable": {
           "help": "Variable information",
@@ -789,6 +789,18 @@
               "type": "value",
               "origin": "variable",
               "keys": []
+            }
+          ]
+        },
+        "variable_label": {
+          "help": "Variable label",
+          "fatal": true,
+          "forbidden_values": ["", "None", null, "undef"],
+          "values": [
+            {
+              "type": "value",
+              "origin": "common_tag",
+              "keys": ["variable", "label"]
             }
           ]
         }
@@ -865,7 +877,7 @@
         },
         "expr": {
           "help": "Expression used to compute the field.",
-          "forbidden_values": ["", "None", null],
+          "forbidden_values": ["", "None", null, "undef"],
           "values": [
             {
               "type": "value",
@@ -886,7 +898,7 @@
         },
         "freq_offset": {
           "help": "Offset to be applied on operations on the field.",
-          "forbidden_values": ["", "None", null],
+          "forbidden_values": ["", "None", null, "undef"],
           "values": [
             {
               "type": "value",
@@ -897,7 +909,7 @@
         },
         "freq_op": {
           "help": "Frequency of the operation done on the field.",
-          "forbidden_values": ["", "None", null],
+          "forbidden_values": ["", "None", null, "undef"],
           "values": [
             {
               "type": "value",
@@ -908,7 +920,7 @@
         },
         "grid_ref": {
           "help": "Reference grid of the field.",
-          "forbidden_values": ["", "None", null],
+          "forbidden_values": ["", "None", null, "undef"],
           "values": [
             {
               "type": "value",
@@ -985,7 +997,7 @@
               "keys": ["variable", "stdname"]
             }
           ],
-          "forbidden_values": ["", "None", null]
+          "forbidden_values": ["", "None", null, "undef"]
         },
         "description": {
           "help": "Description associated with the field.",
@@ -1050,7 +1062,7 @@
                 {
                   "type": "value",
                   "origin": "common_tag",
-                  "keys": ["variable", "label"]
+                  "keys": ["variable_label"]
                 }
               ]
             },
@@ -1067,7 +1079,7 @@
               ]
             }
           ],
-          "forbidden_values": ["", "None", null]
+          "forbidden_values": ["", "None", null, "undef"]
         },
         "positive": {
           "help": "Way the field should be interpreted.",
@@ -1083,7 +1095,7 @@
               "keys": ["variable", "positive"]
             }
           ],
-          "forbidden_values": ["", "None", null]
+          "forbidden_values": ["", "None", null, "undef"]
         },
         "detect_missing_value": {
           "help": "Should missing values of the field be detected by XIOS.",
@@ -1110,7 +1122,7 @@
               "keys": ["variable", "units"]
             }
           ],
-          "forbidden_values": ["", "None", null]
+          "forbidden_values": ["", "None", null, "undef"]
         },
         "cell_methods": {
           "help": "Cell methods associated with the field.",
@@ -1126,7 +1138,7 @@
               "keys": ["variable", "cell_methods"]
             }
           ],
-          "forbidden_values": ["", "None", null]
+          "forbidden_values": ["", "None", null, "undef"]
         },
         "cell_measures": {
           "help": "Cell measures associated with the field.",
@@ -1142,7 +1154,7 @@
               "keys": ["variable", "cell_measures"]
             }
           ],
-          "forbidden_values": ["", "None", null]
+          "forbidden_values": ["", "None", null, "undef"]
         },
         "flag_meanings": {
           "help": "Flag meanings associated with the field.",
@@ -1158,7 +1170,7 @@
               "keys": ["variable", "flag_meanings"]
             }
           ],
-          "forbidden_values": ["", "None", null]
+          "forbidden_values": ["", "None", null, "undef"]
         },
         "flag_values": {
           "help": "Flag values associated with the field.",
@@ -1174,7 +1186,7 @@
               "keys": ["variable", "flag_values"]
             }
           ],
-          "forbidden_values": ["", "None", null]
+          "forbidden_values": ["", "None", null, "undef"]
         },
         "interval_operation": {
           "help": "Interval associated with the operation done on the field.",
@@ -1315,7 +1327,7 @@
           },
         "compression_level": {
             "help": "Compression level of the file.",
-            "forbidden_values": ["None", "", null],
+            "forbidden_values": ["None", "", null, "undef"],
             "values": [
               {
                 "type": "value",
@@ -1372,7 +1384,7 @@
                   "variable": {
                     "type": "value",
                     "origin": "common_tag",
-                    "keys": ["variable", "label"]
+                    "keys": ["variable_label"]
                   }
                 }
               }
@@ -1401,7 +1413,7 @@
           },
         "output_level": {
             "help": "Output level of the file.",
-            "forbidden_values": ["None", "", null],
+            "forbidden_values": ["None", "", null, "undef"],
             "values": [
               {
                 "type": "value",
@@ -1417,7 +1429,7 @@
           },
         "split_end_offset": {
             "help": "Splitting end offset of the file",
-            "forbidden_values": ["", "None", null, "False", false],
+            "forbidden_values": ["", "None", null, "False", false, "undef"],
             "values": [
               {
                 "type": "condition",
@@ -1440,7 +1452,7 @@
           },
         "split_freq": {
             "help": "Splitting frequency of the file.",
-            "forbidden_values": ["", "None", null],
+            "forbidden_values": ["", "None", null, "undef"],
             "values": [
               {
                 "type": "condition",
@@ -1463,7 +1475,7 @@
           },
         "split_freq_format": {
             "help": "Splitting frequency format of the file.",
-            "forbidden_values": ["", "None", null],
+            "forbidden_values": ["", "None", null, "undef"],
             "values": [
               {
                 "type": "condition",
@@ -1486,7 +1498,7 @@
           },
         "split_last_date": {
             "help": "Splitting last date of the file",
-            "forbidden_values": ["", "None", null],
+            "forbidden_values": ["", "None", null, "undef"],
             "values": [
               {
                 "type": "condition",
@@ -1509,7 +1521,7 @@
           },
         "split_start_offset": {
             "help": "Splitting start offset of the file",
-            "forbidden_values": ["", "None", null, "False", false],
+            "forbidden_values": ["", "None", null, "False", false, "undef"],
             "values": [
               {
                 "type": "condition",
@@ -1532,7 +1544,7 @@
           },
         "synchronisation_frequency": {
             "help": "Frequency at which the synchronisation between buffer and filesystem is done.",
-            "forbidden_values": ["None", "", null],
+            "forbidden_values": ["None", "", null, "undef"],
             "values": [
               {
                 "type": "value",
@@ -1603,7 +1615,7 @@
           },
         "uuid_format": {
             "help": "Unique identifier of the file format.",
-            "forbidden_values": ["None", "", null],
+            "forbidden_values": ["None", "", null, "undef"],
             "values": [
               {
                 "type": "value",

@@ -229,7 +229,8 @@ def complement_svar_using_cmorvar(svar, cmvar, debug=[]):
     # removing pressure suffix must occur after resolving ambiguities (add of area suffix)
     # because this 2 processes cannot be cumulate at this stage.
     # this is acceptable since none of the variables requested on pressure levels have ambiguous names.
-    svar.set_attributes(ref_var=svar.label, label_without_psuffix=remove_p_suffix(svar, multi_plev_suffixes,
+    if svar.label_without_psuffix is None:
+        svar.set_attributes(label_without_psuffix=remove_p_suffix(svar, multi_plev_suffixes,
                                                                                   single_plev_suffixes,
                                                                                   realms=["atmos", "aerosol",
                                                                                           "atmosChem"]))

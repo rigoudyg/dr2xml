@@ -638,8 +638,31 @@
         }
       }
     },
+    "field_output": {
+      "common_constraints": {
+        "variable_label": {
+          "values": [
+            {
+              "type": "value",
+              "origin": "common_tag",
+              "keys": ["variable", "cmvar", "variablerootdd"]
+            },
+            {
+              "type": "value",
+              "origin": "common_tag",
+              "keys": ["variable", "cmvar", "cmvar", "variablerootdd"]
+            },
+            {
+              "type": "value",
+              "origin": "common_tag",
+              "keys": ["variable", "label"]
+            }
+          ]
+        }
+      }
+    },
     "file_output": {
-      "common_list": ["variable", "variable_esgvoc", "branding_suffix"],
+      "common_list": ["variable", "variable_esgvoc", "branding_suffix", "variable_label"],
       "common_constraints": {
         "variable_esgvoc": {
           "help": "Variable information from esgvoc",
@@ -673,7 +696,7 @@
         "branding_suffix": {
           "help": "Suffix in the branded variable name",
           "fatal": true,
-          "forbidden_values": ["", "None", null],
+          "forbidden_values": ["", "None", null, "undef"],
           "values": [
             {
               "type": "value",
@@ -689,6 +712,23 @@
               "type": "value",
               "origin": "common_tag",
               "keys": ["variable_esgvoc", "branding_suffix_name"]
+            },
+            {
+              "type": "condition",
+              "value_to_check": {
+                  "type": "value",
+                  "origin": "common_tag",
+                  "keys": ["variable", "type"]
+                },
+              "check_to_perform": "eq",
+              "reference_values": ["extra"],
+              "values": [
+                {
+                  "type": "value",
+                  "origin": "common_tag",
+                  "keys": ["variable", "extravar", "branding_suffix"]
+                }
+              ]
             },
             {
               "type": "condition",
@@ -719,12 +759,35 @@
               "values": ["undef"]
             }
           ]
+        },
+        "variable_label": {
+          "help": "Variable label",
+          "fatal": true,
+          "forbidden_values": ["", "None", null, "undef"],
+          "values": [
+            {
+              "type": "value",
+              "origin": "common_tag",
+              "keys": ["variable", "cmvar", "attributes", "physical_parameter", "attributes", "variablerootdd"]
+            },
+            {
+              "type": "value",
+              "origin": "common_tag",
+              "keys": ["variable", "cmvar", "cmvar", "attributes", "physical_parameter", "attributes", "variablerootdd"]
+            },
+            {
+              "type": "value",
+              "origin": "common_tag",
+              "keys": ["variable", "label"]
+            }
+          ],
+          "target_type": "str"
         }
       },
       "attrs_list": ["id", "name", "output_freq", "append", "output_level", "compression_level", "split_freq",
         "split_freq_format", "split_start_offset", "split_end_offset", "split_last_date", "time_units",
         "time_counter_name", "time_counter", "time_stamp_name", "time_stamp_format", "uuid_name",
-        "uuid_format", "convention_str", "synchronisation_frequency", "format"],
+        "uuid_format", "convention_str", "synchronisation_frequency"],
       "attrs_constraints": {
       "id": {
         "help": "Id of the output file",
@@ -764,14 +827,11 @@
                 "variable": {
                   "type": "value",
                   "origin": "common_tag",
-                  "keys": ["variable", "label"]
+                  "keys": ["variable_label"]
                 }
               }
             }
           ]
-        },
-        "format": {
-          "values": ["netcdf4_classic"]
         },
         "name": {
           "values": [
@@ -783,7 +843,7 @@
                 "variable_id": {
                   "type": "value",
                   "origin": "common_tag",
-                  "keys": ["variable","label"]
+                  "keys": ["variable_label"]
                 },
                 "branding_suffix": {
                   "type": "value",
@@ -876,6 +936,23 @@
               "type": "value",
               "origin": "common_tag",
               "keys": ["variable_esgvoc", "area_label"]
+            },
+            {
+              "type": "condition",
+              "value_to_check": {
+                  "type": "value",
+                  "origin": "common_tag",
+                  "keys": ["variable", "type"]
+                },
+              "check_to_perform": "eq",
+              "reference_values": ["extra"],
+              "values": [
+                {
+                  "type": "value",
+                  "origin": "common_tag",
+                  "keys": ["variable", "extravar", "area_label"]
+                }
+              ]
             },
             {
               "type": "condition",
@@ -1045,6 +1122,23 @@
                   "origin": "common_tag",
                   "keys": ["variable", "type"]
                 },
+              "check_to_perform": "eq",
+              "reference_values": ["extra"],
+              "values": [
+                {
+                  "type": "value",
+                  "origin": "common_tag",
+                  "keys": ["variable", "extravar", "horizontal_label"]
+                }
+              ]
+            },
+            {
+              "type": "condition",
+              "value_to_check": {
+                  "type": "value",
+                  "origin": "common_tag",
+                  "keys": ["variable", "type"]
+                },
               "check_to_perform": "neq",
               "reference_values": ["cmor"],
               "values": ["undef"]
@@ -1096,13 +1190,7 @@
               {
                 "type": "value",
                 "origin": "attrs",
-                "keys": ["nominal_resolution"],
-                "format": {
-                  "type": "func",
-                  "origin": "self",
-                  "keys": "replace",
-                  "template": [" ", "-"]
-                }
+                "keys": ["nominal_resolution"]
               }
             ]
         },
@@ -1166,6 +1254,23 @@
                   "origin": "common_tag",
                   "keys": ["variable", "type"]
                 },
+              "check_to_perform": "eq",
+              "reference_values": ["extra"],
+              "values": [
+                {
+                  "type": "value",
+                  "origin": "common_tag",
+                  "keys": ["variable", "extravar", "temporal_label"]
+                }
+              ]
+            },
+            {
+              "type": "condition",
+              "value_to_check": {
+                  "type": "value",
+                  "origin": "common_tag",
+                  "keys": ["variable", "type"]
+                },
               "check_to_perform": "neq",
               "reference_values": ["cmor"],
               "values": ["undef"]
@@ -1198,7 +1303,7 @@
             {
               "type": "value",
               "origin": "common_tag",
-              "keys": ["variable", "label"]
+              "keys": ["variable_label"]
             },
             {
               "type": "value",
@@ -1251,6 +1356,23 @@
               "type": "value",
               "origin": "common_tag",
               "keys": ["variable_esgvoc", "vertical_label"]
+            },
+            {
+              "type": "condition",
+              "value_to_check": {
+                  "type": "value",
+                  "origin": "common_tag",
+                  "keys": ["variable", "type"]
+                },
+              "check_to_perform": "eq",
+              "reference_values": ["extra"],
+              "values": [
+                {
+                  "type": "value",
+                  "origin": "common_tag",
+                  "keys": ["variable", "extravar", "vertical_label"]
+                }
+              ]
             },
             {
               "type": "condition",

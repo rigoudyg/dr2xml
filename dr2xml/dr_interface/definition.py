@@ -289,6 +289,8 @@ class SimpleCMORVar(SimpleObject):
 
     @classmethod
     def get_from_extra(cls, input_var, mip_era=None, freq=None, table=None, **kwargs):
+        default_regions = get_settings_values("internal", "extravar_regions")
+        default_regions = default_regions.get(input_var["out_name"], default_regions.get("default", "undef"))
         input_var_dict = dict(type="extra", mip_era=mip_era, label=input_var["out_name"],
                               mipVarLabel=input_var["out_name"], stdname=input_var.get("standard_name", ""),
                               long_name=input_var["long_name"], units=input_var["units"],
@@ -297,7 +299,7 @@ class SimpleCMORVar(SimpleObject):
                               positive=input_var["positive"], Priority=float(input_var[mip_era.lower() + "_priority"]),
                               label_without_psuffix=input_var["out_name"],
                               coordinates=input_var.get("dimensions", None),
-                              extravar=input_var)
+                              extravar=input_var, region=default_regions)
         return cls(**input_var_dict)
 
 
