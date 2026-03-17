@@ -802,7 +802,8 @@
               "origin": "common_tag",
               "keys": ["variable", "label"]
             }
-          ]
+          ],
+          "target_type": "str"
         }
       },
       "attrs_list": ["field_ref", "name", "grid_ref", "freq_offset", "detect_missing_value", "default_value", "prec",
@@ -1295,7 +1296,7 @@
       }
     },
     "file_output": {
-      "common_list": ["variable"],
+      "common_list": ["variable", "variable_label"],
       "common_constraints": {
         "variable": {
           "help": "Variable information",
@@ -1307,6 +1308,19 @@
               "keys": ["variable", 0]
             }
           ]
+        },
+        "variable_label": {
+          "help": "Variable label",
+          "fatal": true,
+          "forbidden_values": ["", "None", null, "undef"],
+          "values": [
+            {
+              "type": "value",
+              "origin": "common_tag",
+              "keys": ["variable", "label"]
+            }
+          ],
+          "target_type": "str"
         }
       },
       "attrs_list": ["id", "name", "output_freq", "append", "output_level", "compression_level", "split_freq",
@@ -1357,39 +1371,39 @@
             ]
           },
         "id": {
-            "help": "Id of the output file",
+          "help": "Id of the output file",
           "fatal": true,
-            "values": [
-              {
-                "type": "value",
-                "origin": "attrs",
-                "keys": ["id"]
-              },
-              {
-                "type": "func",
-                "origin": "self",
-                "keys": ["format"],
-                "template": "{variable}_{table}_{grid}",
-                "options": {
-                  "grid": {
-                    "type": "value",
-                    "origin": "attrs",
-                    "keys": ["grid_label"]
-                  },
-                  "table": {
-                    "type": "value",
-                    "origin": "attrs",
-                    "keys": ["table_id"]
-                  },
-                  "variable": {
-                    "type": "value",
-                    "origin": "common_tag",
-                    "keys": ["variable_label"]
-                  }
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["id"]
+            },
+            {
+              "type": "func",
+              "origin": "self",
+              "keys": ["format"],
+              "template": "{variable}_{table}_{grid}",
+              "options": {
+                "grid": {
+                  "type": "value",
+                  "origin": "attrs",
+                  "keys": ["grid_label"]
+                },
+                "table": {
+                  "type": "value",
+                  "origin": "attrs",
+                  "keys": ["table_id"]
+                },
+                "variable": {
+                  "type": "value",
+                  "origin": "common_tag",
+                  "keys": ["variable_label"]
                 }
               }
-            ]
-          },
+            }
+          ]
+        },
         "name": {
             "help": "File name.",
           "fatal": true,

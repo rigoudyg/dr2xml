@@ -780,15 +780,22 @@
               "origin": "common_tag",
               "keys": ["variable", "label"]
             }
-          ],
-          "target_type": "str"
+          ]
         }
       },
       "attrs_list": ["id", "name", "output_freq", "append", "output_level", "compression_level", "split_freq",
         "split_freq_format", "split_start_offset", "split_end_offset", "split_last_date", "time_units",
         "time_counter_name", "time_counter", "time_stamp_name", "time_stamp_format", "uuid_name",
-        "uuid_format", "convention_str", "synchronisation_frequency"],
+        "uuid_format", "convention_str", "synchronisation_frequency", "bounds_lon_name", "bounds_lat_name"],
       "attrs_constraints": {
+        "bounds_lon_name": {
+          "help": "Longitude bounds name",
+          "values": ["lon_bnds"]
+        },
+        "bounds_lat_name": {
+          "help": "Latitude bounds name",
+          "values": ["lat_bnds"]
+        },
       "id": {
         "help": "Id of the output file",
         "fatal": true,
