@@ -659,6 +659,23 @@
             }
           ]
         }
+      },
+      "attrs_constraints": {
+        "name": {
+          "help": "Name of the field.",
+          "values": [
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": ["name"]
+            },
+            {
+              "type": "value",
+              "origin": "common_tag",
+              "keys": ["variable_label"]
+            }
+          ]
+        }
       }
     },
     "file_output": {
@@ -786,16 +803,9 @@
       "attrs_list": ["id", "name", "output_freq", "append", "output_level", "compression_level", "split_freq",
         "split_freq_format", "split_start_offset", "split_end_offset", "split_last_date", "time_units",
         "time_counter_name", "time_counter", "time_stamp_name", "time_stamp_format", "uuid_name",
-        "uuid_format", "convention_str", "synchronisation_frequency", "bounds_lon_name", "bounds_lat_name"],
+        "uuid_format", "convention_str", "synchronisation_frequency", "bounds_lon_name", "bounds_lat_name",
+        "bounds_time_name"],
       "attrs_constraints": {
-        "bounds_lon_name": {
-          "help": "Longitude bounds name",
-          "values": ["lon_bnds"]
-        },
-        "bounds_lat_name": {
-          "help": "Latitude bounds name",
-          "values": ["lat_bnds"]
-        },
       "id": {
         "help": "Id of the output file",
         "fatal": true,
@@ -918,7 +928,7 @@
         "initialization_index", "institution", "institution_id", "license", "mip_era", "nominal_resolution",
         "parent_activity_id", "parent_experiment_id", "parent_mip_era", "parent_source_id", "parent_time_units",
         "parent_variant_label","physics_index", "product", "realization_index", "realm", "region", "source_id",
-        "temporal_label", "variable_id", "variant_label", "vertical_label", "dr2xml_version"
+        "temporal_label", "variable_id", "variant_label", "vertical_label", "dr2xml_version", "physical_parameter"
       ],
       "vars_constraints": {
         "activity_id": {
@@ -927,50 +937,79 @@
         "area_label": {
           "help": "Identifier of unmasked area type",
           "fatal": true,
-          "forbidden_values": ["", "None", null],
+          "forbidden_values": [
+            "",
+            "None",
+            null
+          ],
           "values": [
             {
               "type": "value",
               "origin": "attrs",
-              "keys": ["area_label"]
+              "keys": [
+                "area_label"
+              ]
             },
             {
               "type": "value",
               "origin": "common_tag",
-              "keys": ["variable", "cmvar", "area_label"]
+              "keys": [
+                "variable",
+                "cmvar",
+                "area_label"
+              ]
             },
             {
               "type": "value",
               "origin": "common_tag",
-              "keys": ["variable_esgvoc", "area_label"]
+              "keys": [
+                "variable_esgvoc",
+                "area_label"
+              ]
             },
             {
               "type": "condition",
               "value_to_check": {
-                  "type": "value",
-                  "origin": "common_tag",
-                  "keys": ["variable", "type"]
-                },
+                "type": "value",
+                "origin": "common_tag",
+                "keys": [
+                  "variable",
+                  "type"
+                ]
+              },
               "check_to_perform": "eq",
-              "reference_values": ["extra"],
+              "reference_values": [
+                "extra"
+              ],
               "values": [
                 {
                   "type": "value",
                   "origin": "common_tag",
-                  "keys": ["variable", "extravar", "area_label"]
+                  "keys": [
+                    "variable",
+                    "extravar",
+                    "area_label"
+                  ]
                 }
               ]
             },
             {
               "type": "condition",
               "value_to_check": {
-                  "type": "value",
-                  "origin": "common_tag",
-                  "keys": ["variable", "type"]
-                },
+                "type": "value",
+                "origin": "common_tag",
+                "keys": [
+                  "variable",
+                  "type"
+                ]
+              },
               "check_to_perform": "neq",
-              "reference_values": ["cmor"],
-              "values": ["undef"]
+              "reference_values": [
+                "cmor"
+              ],
+              "values": [
+                "undef"
+              ]
             }
           ]
         },
@@ -981,41 +1020,62 @@
             {
               "type": "value",
               "origin": "attrs",
-              "keys": ["branded_variable"]
+              "keys": [
+                "branded_variable"
+              ]
             },
             {
               "type": "value",
               "origin": "common_tag",
-              "keys": ["variable","official_label"]
+              "keys": [
+                "variable",
+                "official_label"
+              ]
             }
           ]
         },
         "branding_suffix": {
           "help": "Suffix in the branded variable name",
           "fatal": true,
-          "forbidden_values": ["", "None", null],
+          "forbidden_values": [
+            "",
+            "None",
+            null
+          ],
           "values": [
             {
               "type": "value",
               "origin": "common_tag",
-              "keys": ["branding_suffix"]
+              "keys": [
+                "branding_suffix"
+              ]
             }
           ]
         },
         "Conventions": {
           "help": "CF version governing data (along with any other conventions applied)",
           "fatal": true,
-          "forbidden_values": ["", "None", null],
+          "forbidden_values": [
+            "",
+            "None",
+            null
+          ],
           "values": [
             {
               "type": "value",
               "origin": "attrs",
-              "keys": ["Conventions"]
+              "keys": [
+                "Conventions"
+              ]
             },
             {
               "type": "value",
               "origin": "common",
-              "keys": ["conventions_version", 0, "drs_name"]
+              "keys": [
+                "conventions_version",
+                0,
+                "drs_name"
+              ]
             }
           ]
         },
@@ -1026,17 +1086,25 @@
             {
               "type": "value",
               "origin": "attrs",
-              "keys": ["cmip6_compound_name"]
+              "keys": [
+                "cmip6_compound_name"
+              ]
             },
             {
               "type": "value",
               "origin": "common_tag",
-              "keys": ["variable", "cmip6_compound_name"]
+              "keys": [
+                "variable",
+                "cmip6_compound_name"
+              ]
             },
             {
               "type": "value",
               "origin": "common_tag",
-              "keys": ["variable_esgvoc", "cmip6_compound_name"]
+              "keys": [
+                "variable_esgvoc",
+                "cmip6_compound_name"
+              ]
             }
           ]
         },
@@ -1047,12 +1115,18 @@
             {
               "type": "value",
               "origin": "attrs",
-              "keys": ["data_specs_version"]
+              "keys": [
+                "data_specs_version"
+              ]
             },
             {
               "type": "value",
               "origin": "common",
-              "keys": ["data_specs_version", 0, "drs_name"]
+              "keys": [
+                "data_specs_version",
+                0,
+                "drs_name"
+              ]
             }
           ]
         },
@@ -1063,12 +1137,18 @@
             {
               "type": "value",
               "origin": "attrs",
-              "keys": ["drs_specs"]
+              "keys": [
+                "drs_specs"
+              ]
             },
             {
               "type": "value",
               "origin": "common",
-              "keys": ["drs_specs", 0, "drs_name"]
+              "keys": [
+                "drs_specs",
+                0,
+                "drs_name"
+              ]
             }
           ]
         },
@@ -1085,17 +1165,25 @@
             {
               "type": "value",
               "origin": "attrs",
-              "keys": ["frequency"]
+              "keys": [
+                "frequency"
+              ]
             },
             {
               "type": "value",
               "origin": "common_tag",
-              "keys": ["variable", "frequency"]
+              "keys": [
+                "variable",
+                "frequency"
+              ]
             },
             {
               "type": "value",
               "origin": "common_tag",
-              "keys": ["variable_esgvoc", "frequency"]
+              "keys": [
+                "variable_esgvoc",
+                "frequency"
+              ]
             }
           ]
         },
@@ -1105,50 +1193,79 @@
         "horizontal_label": {
           "help": "identifier of horizontal structure/sampling",
           "fatal": true,
-          "forbidden_values": ["", "None", null],
+          "forbidden_values": [
+            "",
+            "None",
+            null
+          ],
           "values": [
             {
               "type": "value",
               "origin": "attrs",
-              "keys": ["horizontal_label"]
+              "keys": [
+                "horizontal_label"
+              ]
             },
             {
               "type": "value",
               "origin": "common_tag",
-              "keys": ["variable", "cmvar", "horizontal_label"]
+              "keys": [
+                "variable",
+                "cmvar",
+                "horizontal_label"
+              ]
             },
             {
               "type": "value",
               "origin": "common_tag",
-              "keys": ["variable_esgvoc", "horizontal_label"]
+              "keys": [
+                "variable_esgvoc",
+                "horizontal_label"
+              ]
             },
             {
               "type": "condition",
               "value_to_check": {
-                  "type": "value",
-                  "origin": "common_tag",
-                  "keys": ["variable", "type"]
-                },
+                "type": "value",
+                "origin": "common_tag",
+                "keys": [
+                  "variable",
+                  "type"
+                ]
+              },
               "check_to_perform": "eq",
-              "reference_values": ["extra"],
+              "reference_values": [
+                "extra"
+              ],
               "values": [
                 {
                   "type": "value",
                   "origin": "common_tag",
-                  "keys": ["variable", "extravar", "horizontal_label"]
+                  "keys": [
+                    "variable",
+                    "extravar",
+                    "horizontal_label"
+                  ]
                 }
               ]
             },
             {
               "type": "condition",
               "value_to_check": {
-                  "type": "value",
-                  "origin": "common_tag",
-                  "keys": ["variable", "type"]
-                },
+                "type": "value",
+                "origin": "common_tag",
+                "keys": [
+                  "variable",
+                  "type"
+                ]
+              },
               "check_to_perform": "neq",
-              "reference_values": ["cmor"],
-              "values": ["undef"]
+              "reference_values": [
+                "cmor"
+              ],
+              "values": [
+                "undef"
+              ]
             }
           ]
         },
@@ -1166,12 +1283,17 @@
             {
               "type": "value",
               "origin": "attrs",
-              "keys": ["license"]
+              "keys": [
+                "license"
+              ]
             },
             {
               "type": "value",
               "origin": "common",
-              "keys": ["license", "drs_name"]
+              "keys": [
+                "license",
+                "drs_name"
+              ]
             }
           ]
         },
@@ -1182,24 +1304,45 @@
             {
               "type": "value",
               "origin": "attrs",
-              "keys": ["mip_era"]
+              "keys": [
+                "mip_era"
+              ]
             },
             {
               "type": "value",
               "origin": "common",
-              "keys": ["mip_era"]
+              "keys": [
+                "mip_era"
+              ]
             }
           ]
         },
         "nominal_resolution": {
           "fatal": true,
           "values": [
-              {
-                "type": "value",
-                "origin": "attrs",
-                "keys": ["nominal_resolution"]
-              }
-            ]
+            {
+              "type": "value",
+              "origin": "attrs",
+              "keys": [
+                "nominal_resolution"
+              ]
+            }
+          ]
+        },
+        "physical_parameter": {
+          "help": "Physical parameter used to derive the variable",
+          "fatal": true,
+          "num_type": "string",
+          "values": [
+            {
+              "type": "value",
+              "origin": "common_tag",
+              "keys": [
+                "variable",
+                "mipVarLabel"
+              ]
+            }
+          ]
         },
         "physics_index": {
           "fatal": true,
@@ -1222,12 +1365,17 @@
             {
               "type": "value",
               "origin": "attrs",
-              "keys": ["region"]
+              "keys": [
+                "region"
+              ]
             },
             {
               "type": "value",
               "origin": "common_tag",
-              "keys": ["variable", "region"]
+              "keys": [
+                "variable",
+                "region"
+              ]
             }
           ]
         },
@@ -1237,50 +1385,79 @@
         "temporal_label": {
           "help": "Identifier of type of temporal sampling applied",
           "fatal": true,
-          "forbidden_values": ["", "None", null],
+          "forbidden_values": [
+            "",
+            "None",
+            null
+          ],
           "values": [
             {
               "type": "value",
               "origin": "attrs",
-              "keys": ["temporal_label"]
+              "keys": [
+                "temporal_label"
+              ]
             },
             {
               "type": "value",
               "origin": "common_tag",
-              "keys": ["variable", "cmvar", "temporal_label"]
+              "keys": [
+                "variable",
+                "cmvar",
+                "temporal_label"
+              ]
             },
             {
               "type": "value",
               "origin": "common_tag",
-              "keys": ["variable_esgvoc", "temporal_label"]
+              "keys": [
+                "variable_esgvoc",
+                "temporal_label"
+              ]
             },
             {
               "type": "condition",
               "value_to_check": {
-                  "type": "value",
-                  "origin": "common_tag",
-                  "keys": ["variable", "type"]
-                },
+                "type": "value",
+                "origin": "common_tag",
+                "keys": [
+                  "variable",
+                  "type"
+                ]
+              },
               "check_to_perform": "eq",
-              "reference_values": ["extra"],
+              "reference_values": [
+                "extra"
+              ],
               "values": [
                 {
                   "type": "value",
                   "origin": "common_tag",
-                  "keys": ["variable", "extravar", "temporal_label"]
+                  "keys": [
+                    "variable",
+                    "extravar",
+                    "temporal_label"
+                  ]
                 }
               ]
             },
             {
               "type": "condition",
               "value_to_check": {
-                  "type": "value",
-                  "origin": "common_tag",
-                  "keys": ["variable", "type"]
-                },
+                "type": "value",
+                "origin": "common_tag",
+                "keys": [
+                  "variable",
+                  "type"
+                ]
+              },
               "check_to_perform": "neq",
-              "reference_values": ["cmor"],
-              "values": ["undef"]
+              "reference_values": [
+                "cmor"
+              ],
+              "values": [
+                "undef"
+              ]
             }
           ]
         },
@@ -1289,33 +1466,48 @@
             {
               "type": "value",
               "origin": "attrs",
-              "keys": ["title"]
+              "keys": [
+                "title"
+              ]
             },
             {
               "type": "value",
               "origin": "common",
-              "keys": ["title"]
+              "keys": [
+                "title"
+              ]
             }
           ]
         },
         "variable_id": {
           "fatal": true,
-          "forbidden_values": ["", "None", null],
+          "forbidden_values": [
+            "",
+            "None",
+            null
+          ],
           "values": [
-              {
-                "type": "value",
-                "origin": "attrs",
-                "keys": ["variable_id"]
-              },
             {
               "type": "value",
-              "origin": "common_tag",
-              "keys": ["variable_label"]
+              "origin": "attrs",
+              "keys": [
+                "variable_id"
+              ]
             },
             {
               "type": "value",
               "origin": "common_tag",
-              "keys": ["variable_esgvoc", "variable_root_name"]
+              "keys": [
+                "variable_label"
+              ]
+            },
+            {
+              "type": "value",
+              "origin": "common_tag",
+              "keys": [
+                "variable_esgvoc",
+                "variable_root_name"
+              ]
             }
           ]
         },
@@ -1324,18 +1516,24 @@
             {
               "type": "value",
               "origin": "attrs",
-              "keys": ["variant_info"]
+              "keys": [
+                "variant_info"
+              ]
             },
             {
               "type": "func",
               "origin": "self",
-              "keys": ["format"],
+              "keys": [
+                "format"
+              ],
               "template": "{variant_info}. Information provided by this attribute may be flawed. Users can find more comprehensive and up-to-date documentation elsewhere.",
               "options": {
                 "variant_info": {
                   "type": "value",
                   "origin": "common",
-                  "keys": ["variant_info"]
+                  "keys": [
+                    "variant_info"
+                  ]
                 }
               }
             }
@@ -1347,50 +1545,79 @@
         "vertical_label": {
           "help": "Identifier of vertical sampling applied",
           "fatal": true,
-          "forbidden_values": ["", "None", null],
+          "forbidden_values": [
+            "",
+            "None",
+            null
+          ],
           "values": [
             {
               "type": "value",
               "origin": "attrs",
-              "keys": ["vertical_label"]
+              "keys": [
+                "vertical_label"
+              ]
             },
             {
               "type": "value",
               "origin": "common_tag",
-              "keys": ["variable", "cmvar", "vertical_label"]
+              "keys": [
+                "variable",
+                "cmvar",
+                "vertical_label"
+              ]
             },
             {
               "type": "value",
               "origin": "common_tag",
-              "keys": ["variable_esgvoc", "vertical_label"]
+              "keys": [
+                "variable_esgvoc",
+                "vertical_label"
+              ]
             },
             {
               "type": "condition",
               "value_to_check": {
-                  "type": "value",
-                  "origin": "common_tag",
-                  "keys": ["variable", "type"]
-                },
+                "type": "value",
+                "origin": "common_tag",
+                "keys": [
+                  "variable",
+                  "type"
+                ]
+              },
               "check_to_perform": "eq",
-              "reference_values": ["extra"],
+              "reference_values": [
+                "extra"
+              ],
               "values": [
                 {
                   "type": "value",
                   "origin": "common_tag",
-                  "keys": ["variable", "extravar", "vertical_label"]
+                  "keys": [
+                    "variable",
+                    "extravar",
+                    "vertical_label"
+                  ]
                 }
               ]
             },
             {
               "type": "condition",
               "value_to_check": {
-                  "type": "value",
-                  "origin": "common_tag",
-                  "keys": ["variable", "type"]
-                },
+                "type": "value",
+                "origin": "common_tag",
+                "keys": [
+                  "variable",
+                  "type"
+                ]
+              },
               "check_to_perform": "neq",
-              "reference_values": ["cmor"],
-              "values": ["undef"]
+              "reference_values": [
+                "cmor"
+              ],
+              "values": [
+                "undef"
+              ]
             }
           ]
         }
