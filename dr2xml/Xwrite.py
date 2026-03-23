@@ -177,7 +177,7 @@ def create_xios_aux_elmts_defs(sv, alias, table, context, target_hgrid_id, zgrid
     # --------------------------------------------------------------------
     #
     # This does not apply for a series of shapes
-    if target_hgrid_id and ssh not in ["na-na", "TR-na", "TRS-na", "na-A"] and not ssh.startswith("Y-") \
+    if target_hgrid_id and ssh not in ["na-na", "TR-na", "TRS-na", "na-A", "TR2-na"] and not ssh.startswith("Y-") \
             and not ssh.startswith("YB-"):
         if target_hgrid_id == cfsites_domain_id:
             add_cfsites_in_defs()

@@ -679,8 +679,67 @@
       }
     },
     "file_output": {
-      "common_list": ["variable", "variable_esgvoc", "branding_suffix", "variable_label"],
+      "common_list": ["variable", "variable_esgvoc", "branding_suffix", "region", "variable_label"],
       "common_constraints": {
+        "region": {
+          "help": "Region contained by the file",
+          "fatal": true,
+          "forbidden_values": ["", "None", null],
+          "values": [
+            {
+              "type": "value",
+              "origin": "common_tag",
+              "keys": ["variable", "region"]
+            },
+            {
+              "type": "condition",
+              "value_to_check": {
+                  "type": "value",
+                  "origin": "common_tag",
+                  "keys": ["variable", "type"]
+                },
+              "check_to_perform": "eq",
+              "reference_values": ["extra"],
+              "values": [
+                {
+                  "type": "value",
+                  "origin": "internal",
+                  "keys": [
+                    "extravar_regions",
+                    {
+                      "type": "value",
+                      "origin": "common_tag",
+                      "keys": "variable_label"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "condition",
+              "value_to_check": {
+                  "type": "value",
+                  "origin": "common_tag",
+                  "keys": ["variable", "type"]
+                },
+              "check_to_perform": "eq",
+              "reference_values": ["extra"],
+              "values": [
+                {
+                  "type": "value",
+                  "origin": "internal",
+                  "keys": [
+                    {
+                      "type": "value",
+                      "origin": "internal",
+                      "keys": ["extravar_regions", "default"]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
         "variable_esgvoc": {
           "help": "Variable information from esgvoc",
           "forbidden_values": ["", "None", null],
@@ -839,7 +898,7 @@
                 "region": {
                   "type": "value",
                   "origin": "common_tag",
-                  "keys": ["variable", "region"]
+                  "keys": ["region"]
                 },
                 "variable": {
                   "type": "value",
@@ -875,7 +934,7 @@
                 "region": {
                   "type": "value",
                   "origin": "common_tag",
-                  "keys": ["variable","region"]
+                  "keys": ["region"]
                 },
                 "grid_label": {
                   "type": "value",
@@ -948,6 +1007,23 @@
               "type": "value",
               "origin": "common_tag",
               "keys": ["variable", "cmvar", "area_label"]
+            },
+            {
+              "type": "condition",
+              "value_to_check": {
+                  "type": "value",
+                  "origin": "common_tag",
+                  "keys": ["variable", "type"]
+                },
+              "check_to_perform": "eq",
+              "reference_values": ["extra"],
+              "values": [
+                {
+                  "type": "value",
+                  "origin": "common_tag",
+                  "keys": ["variable", "extravar", "area_label"]
+                }
+              ]
             },
             {
               "type": "value",
@@ -1128,6 +1204,23 @@
               "keys": ["variable", "cmvar", "horizontal_label"]
             },
             {
+              "type": "condition",
+              "value_to_check": {
+                  "type": "value",
+                  "origin": "common_tag",
+                  "keys": ["variable", "type"]
+                },
+              "check_to_perform": "eq",
+              "reference_values": ["extra"],
+              "values": [
+                {
+                  "type": "value",
+                  "origin": "common_tag",
+                  "keys": ["variable", "extravar", "horizontal_label"]
+                }
+              ]
+            },
+            {
               "type": "value",
               "origin": "common_tag",
               "keys": ["variable_esgvoc", "horizontal_label"]
@@ -1249,7 +1342,7 @@
             {
               "type": "value",
               "origin": "common_tag",
-              "keys": ["variable", "region"]
+              "keys": ["region"]
             }
           ]
         },
@@ -1270,6 +1363,23 @@
               "type": "value",
               "origin": "common_tag",
               "keys": ["variable", "cmvar", "temporal_label"]
+            },
+            {
+              "type": "condition",
+              "value_to_check": {
+                  "type": "value",
+                  "origin": "common_tag",
+                  "keys": ["variable", "type"]
+                },
+              "check_to_perform": "eq",
+              "reference_values": ["extra"],
+              "values": [
+                {
+                  "type": "value",
+                  "origin": "common_tag",
+                  "keys": ["variable", "extravar", "temporal_label"]
+                }
+              ]
             },
             {
               "type": "value",
@@ -1380,6 +1490,23 @@
               "type": "value",
               "origin": "common_tag",
               "keys": ["variable", "cmvar", "vertical_label"]
+            },
+            {
+              "type": "condition",
+              "value_to_check": {
+                  "type": "value",
+                  "origin": "common_tag",
+                  "keys": ["variable", "type"]
+                },
+              "check_to_perform": "eq",
+              "reference_values": ["extra"],
+              "values": [
+                {
+                  "type": "value",
+                  "origin": "common_tag",
+                  "keys": ["variable", "extravar", "vertical_label"]
+                }
+              ]
             },
             {
               "type": "value",

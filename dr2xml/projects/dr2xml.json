@@ -609,6 +609,21 @@
       ],
       "target_type": "dict"
     },
+    "extravar_regions": {
+      "help": "Regions for extra variables",
+      "fatal": true,
+      "target_type": "dict",
+      "values": [
+        {
+          "type": "value",
+          "origin": "laboratory",
+          "keys": "extravar_regions"
+        },
+        {
+          "default": "undef"
+        }
+      ]
+    },
     "filter_on_realization": {
       "help": "If you want to produce the same variables set for all members, set this parameter to False.",
       "values": [

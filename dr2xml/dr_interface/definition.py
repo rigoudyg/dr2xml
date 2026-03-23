@@ -336,6 +336,13 @@ class SimpleDim(SimpleObject):
         self.name = name
         super(SimpleDim, self).__init__(**kwargs)
 
+    def __str__(self):
+        return (f"SimpleCMORDim {self.label} of type {self.type}, axis {self.axis}, name {self.name}, value {self.value}, requested {self.requested}")
+
+    def __repr__(self):
+        return str(self)
+
+
     def correct_data_request(self):
         if self.requested and len(self.requested) > 0:
             self.dimsize = max(len(self.requested.split(" ")), 1)

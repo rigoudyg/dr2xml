@@ -255,7 +255,7 @@ def field_size(svar):
                 siz = oce_grid_size
             else:
                 siz = atm_grid_size
-        elif s_hdim in ["na", "TR", "TRS"]:
+        elif s_hdim in ["na", "TR", "TRS", "TR2"]:
             siz = 1
         elif s_hdim in ["S", ]:
             siz = nb_cosp_sites
