@@ -17,6 +17,10 @@ def format_id(input_id):
     return input_id.replace("-", "_").lower()
 
 
+def get_attr_and_join(list_values, attribute="drs_name", separator=" "):
+    return separator.join(sorted([elt.__getattribute__(attribute) for elt in list_values]))
+
+
 def make_source_string(source, source_id):
     """
     From the dic of sources in CMIP6-CV, Creates the string representation of a

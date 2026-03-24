@@ -138,7 +138,7 @@
       ]
     },
     "conventions_version": {
-      "help": "Version of the conventions used.",
+      "help": "Versions of the conventions used.",
       "values": [
         {
           "type": "func",
@@ -150,7 +150,26 @@
               "origin": "init",
               "keys": ["vocabulary_project"]
             },
-            "collection_id": "conventions"
+            "collection_id": "Conventions"
+          }
+        }
+      ]
+    },
+    "Conventions": {
+      "help": "Version of the conventions used.",
+      "values": [
+        {
+          "type": "func",
+          "origin": "functions_file",
+          "keys": ["get_attr_and_join"],
+          "options": {
+            "list_values": {
+              "type": "value",
+              "origin": "common",
+              "keys": "conventions_version"
+            },
+            "attribute": "drs_name",
+            "separator": " "
           }
         }
       ]
@@ -631,7 +650,7 @@
             {
               "type": "value",
               "origin": "common",
-              "keys": ["conventions_version", 0, "drs_name"],
+              "keys": ["Conventions"],
               "format": "CMIP7_conventions_version {}"
             }
           ]
@@ -1101,7 +1120,7 @@
             {
               "type": "value",
               "origin": "common",
-              "keys": ["conventions_version", 0, "drs_name"]
+              "keys": ["Conventions"]
             }
           ]
         },
