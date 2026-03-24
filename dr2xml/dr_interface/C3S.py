@@ -9,7 +9,7 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 import copy
 import os
 from collections import OrderedDict, defaultdict
-from importlib.machinery import SourceFileLoader
+from importlib.util import spec_from_file_location, module_from_spec
 
 from .definition import ListWithItems
 from .definition import DataRequest as DataRequestBasic
@@ -21,7 +21,9 @@ from dr2xml.settings_interface import get_settings_values
 data_request_path = get_settings_values("init", "data_request_path")
 if data_request_path is not None:
     data_request_filename = os.path.basename(data_request_path)
-    data_request_module = SourceFileLoader(data_request_filename, data_request_path).load_module(data_request_filename)
+    spec = spec_from_file_location(data_request_filename, data_request_path)
+    data_request_module = module_from_spec(spec)
+    spec.loader.exec_module(data_request_module)
     c3s_nc_dims = data_request_module.__getattribute__("c3s_nc_dims")
     c3s_nc_coords = data_request_module.__getattribute__("c3s_nc_coords")
     c3s_nc_comvars = data_request_module.__getattribute__("c3s_nc_comvars")

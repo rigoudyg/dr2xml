@@ -10,7 +10,7 @@ import copy
 import os
 import re
 from collections import OrderedDict
-from importlib.machinery import SourceFileLoader
+from importlib.util import spec_from_file_location, module_from_spec
 
 import six
 
@@ -1004,9 +1004,13 @@ class FunctionSettings(Settings):
             raise ValueError("Format must be either False or a function for %s" % self.key)
         elif self.origin in ["functions_file", ]:
             if self.functions_file is None and project_funcs is not None:
-                self.functions_file = SourceFileLoader("functions_file", project_funcs).load_module()
+                spec = spec_from_file_location("functions_file", project_funcs)
+                self.functions_file = module_from_spec(spec)
+                spec.loader.exec_module(self.functions_file)
             elif isinstance(self.functions_file, six.string_types):
-                self.functions_file = SourceFileLoader("functions_file", self.functions_file).load_module()
+                spec = spec_from_file_location("functions_file", self.functions_file)
+                self.functions_file = module_from_spec(spec)
+                spec.loader.exec_module(self.functions_file)
             if self.functions_file is None or self.keys[0] not in self.functions_file.__dir__():
                 logger.error("Could not find function %s from file %s" % (self.keys[0], self.functions_file))
                 raise ValueError("Could not find function %s from file %s" % (self.keys[0], self.functions_file))
