@@ -2032,7 +2032,24 @@
           },
           "check_to_perform": "eq",
           "reference_values": [false],
-          "values": [null]
+          "values": [
+            {
+              "nb_cosp_sites": 129,
+              "nb_lidar_temp": 40,
+              "nb_parasol_refl": 5,
+              "nb_isccp_tau": 7,
+              "nb_isccp_pc": 7,
+              "nb_curtain_sites": 1000,
+              "nho": 106428,
+              "nlo": 75,
+              "nha": 32768,
+              "nla": 91,
+              "nlas": 30,
+              "nls": 14,
+              "nh1": 128
+            }
+          ],
+          "target_type": "dict"
         }
       ]
     },

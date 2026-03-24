@@ -307,8 +307,8 @@
               "keys": ["institution_id"],
               "format": {
                 "type": "func",
-                "origin": "functions_file",
-                "keys": ["format_id"]
+                "origin": "self",
+                "keys": ["lower"]
               }
             }
           }
@@ -1136,7 +1136,7 @@
             {
               "type": "value",
               "origin": "common_tag",
-              "keys": ["variable", "cmip6_compound_name"]
+              "keys": ["variable", "cmvar", "cmip6_compound_name"]
             },
             {
               "type": "value",

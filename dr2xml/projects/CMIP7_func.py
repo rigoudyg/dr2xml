@@ -37,8 +37,8 @@ def make_source_string(source, source_id):
     logger = get_logger()
     components = source['model_components']
     rep = source_id + " (" + str(source['release_year']) + "):"
-    for realm in ["aerosol", "atmos", "atmosChem", "land", "ocean", "ocnBgchem", "seaIce"]:
-        description = [component for component in components if component["component"] in [realm, ]]
+    for realm in ["aerosol", "atmosphere", "atmospheric_chemistry", "land_surface", "ocean", "ocean_biogeochemistry", "sea_ice"]:
+        description = [component.__dict__ for component in components if component.__dict__["component"] in [realm, ]]
         if len(description) != 1:
             logger.error("Either no component or several components found for realm %s: %s" % (realm, description))
             raise ValueError("Either no component or several components found for realm %s: %s" % (realm, description))
