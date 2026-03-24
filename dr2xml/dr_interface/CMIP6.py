@@ -753,6 +753,7 @@ class SimpleCMORVar(SimpleCMORVarBasic):
         input_var_dict["struct"] = struct
         input_var_dict["cell_measures"] = measures
         input_var_dict["id"] = id
+        input_var_dict["official_label"] = "_".join([input_var.label, table.label])
         if input_var.description:
             input_var_dict["description"] = input_var.description.rstrip(' ')
         else:

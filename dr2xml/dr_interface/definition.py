@@ -299,7 +299,7 @@ class SimpleCMORVar(SimpleObject):
                               positive=input_var["positive"], Priority=float(input_var[mip_era.lower() + "_priority"]),
                               label_without_psuffix=input_var["out_name"],
                               coordinates=input_var.get("dimensions", None),
-                              extravar=input_var, region=default_regions)
+                              extravar=input_var, region=default_regions, official_label=input_var.get("branded_name"))
         return cls(**input_var_dict)
 
 

@@ -646,7 +646,7 @@ def determine_files_list(svars_per_table, enddate, year, debug):
     # Loop on values to fill the xml element
     for table in sorted(list(svars_per_table)):
         count = OrderedDict()
-        for svar in sorted(svars_per_table[table], key=lambda x: (x.label + "_" + table)):
+        for svar in sorted(svars_per_table[table], key=lambda x: "_".join([x.official_label, x.frequency, x.region])):
             if allow_duplicates_in_same_table or svar.mipVarLabel not in count:
                 if not use_cmorvar_label_in_filename and svar.mipVarLabel in count:
                     form = "If you really want to actually produce both %s and %s in table %s, " + \
