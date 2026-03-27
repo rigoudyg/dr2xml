@@ -41,7 +41,7 @@ sn_issues_home = OrderedDict()
 def read_home_var(line_split, list_attrs):
     logger = get_logger()
     # Initialize the home variable
-    home_var = get_dr_object("SimpleCMORVar")
+    home_var = get_dr_object("SimpleCMORVar")()
     # Set values to the different attributes
     home_var.set_attributes(**{key: value for (key, value) in zip(list_attrs, line_split)})
     # Update table
@@ -60,6 +60,7 @@ def read_home_var(line_split, list_attrs):
         home_var.set_attributes(label=label, ref_var=label_ref)
     else:
         home_var.set_attributes(ref_var=home_var.label)
+    home_var.set_attributes(official_label="_".join([home_var.label, table]))
     return home_var
 
 
@@ -70,7 +71,7 @@ def fill_homevar(home_var):
         if home_var.label in home_var_sdims_info:
             home_var_sdims = OrderedDict()
             for home_var_dim in home_var_sdims_info[home_var.label]:
-                home_var_sdim = get_dr_object("SimpleDim")
+                home_var_sdim = get_dr_object("SimpleDim")()
                 home_var_sdim.label = home_var_dim
                 for sdim_key in ["zoom_label", "stdname", "long_name", "positive", "requested", "value",
                                  "out_name", "units", "is_zoom_of", "bounds", "boundsValue", "axis", "type",

@@ -326,7 +326,7 @@
         {
           "type": "value",
           "origin": "internal",
-          "keys": ["CV_experiment", "parent_activity"]
+          "keys": ["CV_experiment", "parent_activity", "drs_name"]
         }
       ]
     },

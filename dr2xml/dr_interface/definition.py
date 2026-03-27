@@ -242,10 +242,7 @@ class SimpleCMORVar(SimpleObject):
         self.flag_meanings = flag_meanings
         self.flag_values = flag_values
         self.region = region
-        if official_label is None:
-            self.official_label = self.label
-        else:
-            self.official_label = official_label
+        self.official_label = official_label
         super(SimpleCMORVar, self).__init__(**kwargs)
     
     def set_attributes(self, **kwargs):

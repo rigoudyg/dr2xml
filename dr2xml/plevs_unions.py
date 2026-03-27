@@ -99,7 +99,7 @@ def create_xios_axis_and_grids_for_plevs_unions(svars, plev_sfxs, dummies):
     #
     # Second, create xios axis for union of plevs
     for lwps in list(dict_plevs):
-        sdim_union = get_dr_object("SimpleDim")
+        sdim_union = get_dr_object("SimpleDim")()
         plevs_union_xios = ""
         plevs_union = set()
         for plev in list(dict_plevs[lwps]):

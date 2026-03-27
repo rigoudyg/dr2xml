@@ -96,7 +96,7 @@ def get_simplevar(label, reference_var):
     """
     Returns 'simplified variable' for a given CMORvar label and table
     """
-    svar = get_dr_object("SimpleCMORVar")
+    svar = get_dr_object("SimpleCMORVar")()
     psvar = get_cmor_var(label=label, mipTable=reference_var.mipTable)
     #
     # Try to get a var for 'ps' when table is only in Home DR

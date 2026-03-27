@@ -49,6 +49,8 @@ def read_home_var_extra(line_split, expid, mips, path_extra_tables=None, extra_v
             var_found = var_found[0]
             if home_var.ref_var is not None:
                 var_found.ref_var = home_var.ref_var
+            if var_found.official_label is None:
+                var_found.set_attributes(official_label="_".join([var_found.label, var_found.mipTable]))
             var_found = [var_found, ]
     if home_var.mip in ["ANY", ] or home_var.mip in mips:
         if home_var.experiment not in ["ANY", ]:

@@ -120,6 +120,7 @@ class SimpleCMORVar(SimpleCMORVarBasic):
         input_var_dict["modeling_realm"] = input_var["globattrs"]["modeling_realm"]
         input_var_dict["mipVarLabel"] = id
         input_var_dict["label"] = id
+        input_var_dict["official_label"] = id
         input_var_dict["label_without_psuffix"] = id
         input_var_dict["label_non_ambiguous"] = id
         input_var_dict["frequency"] = input_var["globattrs"]["frequency"]

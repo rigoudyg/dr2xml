@@ -35,9 +35,9 @@ def get_dr_object(key):
     elif key in ["normalize_grid", ]:
         return normalize_grid
     elif key in ["SimpleCMORVar", ]:
-        return SimpleCMORVar()
+        return SimpleCMORVar
     elif key in ["SimpleDim", ]:
-        return SimpleDim()
+        return SimpleDim
     else:
         raise ValueError("Unknown data request object %s from interface" % key)
 
