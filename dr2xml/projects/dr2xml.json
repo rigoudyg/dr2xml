@@ -1192,7 +1192,7 @@
     "select": {
       "help": "Selection strategy for variables.",
       "fatal": true,
-      "authorized_values": ["on_expt_and_year", "on_expt", "no"],
+      "authorized_values": ["on_expt_and_year", "on_expt", "on_inc_and_exc", "no"],
       "corrections": {
         "": "on_expt_and_year"
       },
@@ -1217,18 +1217,8 @@
           },
           "check_to_perform": "eq",
           "reference_values": ["on_expt_and_year", "on_expt"],
-          "values": [true]
-        },
-        {
-          "type": "condition",
-          "value_to_check": {
-            "type": "value",
-            "origin": "internal",
-            "keys": ["select"]
-          },
-          "check_to_perform": "eq",
-          "reference_values": ["no"],
-          "values": [false]
+          "values": [true],
+          "not_values": [false]
         }
       ]
     },
@@ -1245,8 +1235,15 @@
           },
           "check_to_perform": "eq",
           "reference_values": ["on_expt_and_year"],
-          "values": [true]
-        },
+          "values": [true],
+          "not_values": [false]
+        }
+      ]
+    },
+    "select_on_inc_and_exc": {
+      "help": "Should data be selected on inclusions and exclusions?",
+      "fatal": true,
+      "values": [
         {
           "type": "condition",
           "value_to_check": {
@@ -1255,8 +1252,9 @@
             "keys": ["select"]
           },
           "check_to_perform": "eq",
-          "reference_values": ["on_expt", "no"],
-          "values": [false]
+          "reference_values": ["on_expt_and_year", "on_expt", "on_inc_and_exc"],
+          "values": [true],
+          "not_values": [false]
         }
       ]
     },
@@ -1279,18 +1277,8 @@
               "origin": "internal",
               "keys": ["grid_choice"]
             }
-          ]
-        },
-        {
-          "type": "condition",
-          "value_to_check": {
-            "type": "value",
-            "origin": "internal",
-            "keys": ["select_on_expt"]
-          },
-          "check_to_perform": "eq",
-          "reference_values": [false],
-          "values": ["LR"]
+          ],
+          "not_values": ["LR"]
         }
       ]
     },
@@ -1303,7 +1291,7 @@
           "value_to_check": {
             "type": "value",
             "origin": "internal",
-            "keys": ["select_on_expt"]
+            "keys": ["select_on_inc_and_exc"]
           },
           "check_to_perform": "eq",
           "reference_values": [true],
@@ -1323,18 +1311,8 @@
                 }
               ]
             }
-          ]
-        },
-        {
-          "type": "condition",
-          "value_to_check": {
-            "type": "value",
-            "origin": "internal",
-            "keys": ["select_on_expt"]
-          },
-          "check_to_perform": "eq",
-          "reference_values": [false],
-          "values": [
+          ],
+          "not_values": [
             {
               "type": "value",
               "origin": "internal",
@@ -1353,7 +1331,7 @@
           "value_to_check": {
             "type": "value",
             "origin": "internal",
-            "keys": ["select_on_expt"]
+            "keys": ["select_on_inc_and_exc"]
           },
           "check_to_perform": "eq",
           "reference_values": [true],
@@ -1373,18 +1351,8 @@
                 }
               ]
             }
-          ]
-        },
-        {
-          "type": "condition",
-          "value_to_check": {
-            "type": "value",
-            "origin": "internal",
-            "keys": ["select_on_expt"]
-          },
-          "check_to_perform": "eq",
-          "reference_values": [false],
-          "values": [
+          ],
+          "not_values": [
             {
               "type": "value",
               "origin": "internal",
@@ -1403,7 +1371,7 @@
           "value_to_check": {
             "type": "value",
             "origin": "internal",
-            "keys": ["select_on_expt"]
+            "keys": ["select_on_inc_and_exc"]
           },
           "check_to_perform": "eq",
           "reference_values": [true],
@@ -1423,18 +1391,8 @@
                 }
               ]
             }
-          ]
-        },
-        {
-          "type": "condition",
-          "value_to_check": {
-            "type": "value",
-            "origin": "internal",
-            "keys": ["select_on_expt"]
-          },
-          "check_to_perform": "eq",
-          "reference_values": [false],
-          "values": [
+          ],
+          "not_values": [
             {
               "type": "value",
               "origin": "internal",
@@ -1453,7 +1411,7 @@
           "value_to_check": {
             "type": "value",
             "origin": "internal",
-            "keys": ["select_on_expt"]
+            "keys": ["select_on_inc_and_exc"]
           },
           "check_to_perform": "eq",
           "reference_values": [true],
@@ -1463,18 +1421,8 @@
               "origin": "internal",
               "keys": ["excluded_regions"]
             }
-          ]
-        },
-        {
-          "type": "condition",
-          "value_to_check": {
-            "type": "value",
-            "origin": "internal",
-            "keys": ["select_on_expt"]
-          },
-          "check_to_perform": "eq",
-          "reference_values": [false],
-          "values": [null]
+          ],
+          "not_values": [null]
         }
       ]
     },
@@ -1487,7 +1435,7 @@
           "value_to_check": {
             "type": "value",
             "origin": "internal",
-            "keys": ["select_on_expt"]
+            "keys": ["select_on_inc_and_exc"]
           },
           "check_to_perform": "eq",
           "reference_values": [true],
@@ -1497,18 +1445,8 @@
               "origin": "internal",
               "keys": ["excluded_request_links"]
             }
-          ]
-        },
-        {
-          "type": "condition",
-          "value_to_check": {
-            "type": "value",
-            "origin": "internal",
-            "keys": ["select_on_expt"]
-          },
-          "check_to_perform": "eq",
-          "reference_values": [false],
-          "values": [null]
+          ],
+          "not_values": [null]
         }
       ]
     },
@@ -1521,7 +1459,7 @@
           "value_to_check": {
             "type": "value",
             "origin": "internal",
-            "keys": ["select_on_expt"]
+            "keys": ["select_on_inc_and_exc"]
           },
           "check_to_perform": "eq",
           "reference_values": [true],
@@ -1541,18 +1479,8 @@
                 }
               ]
             }
-          ]
-        },
-        {
-          "type": "condition",
-          "value_to_check": {
-            "type": "value",
-            "origin": "internal",
-            "keys": ["select_on_expt"]
-          },
-          "check_to_perform": "eq",
-          "reference_values": [false],
-          "values": [
+          ],
+          "not_values": [
             {
               "type": "value",
               "origin": "internal",
@@ -1571,7 +1499,7 @@
           "value_to_check": {
             "type": "value",
             "origin": "internal",
-            "keys": ["select_on_expt"]
+            "keys": ["select_on_inc_and_exc"]
           },
           "check_to_perform": "eq",
           "reference_values": [true],
@@ -1591,18 +1519,8 @@
                 }
               ]
             }
-          ]
-        },
-        {
-          "type": "condition",
-          "value_to_check": {
-            "type": "value",
-            "origin": "internal",
-            "keys": ["select_on_expt"]
-          },
-          "check_to_perform": "eq",
-          "reference_values": [false],
-          "values": [
+          ],
+          "not_values": [
             {
               "type": "value",
               "origin": "internal",
@@ -1621,7 +1539,7 @@
           "value_to_check": {
             "type": "value",
             "origin": "internal",
-            "keys": ["select_on_expt"]
+            "keys": ["select_on_inc_and_exc"]
           },
           "check_to_perform": "eq",
           "reference_values": [true],
@@ -1646,18 +1564,8 @@
                 }
               ]
             }
-          ]
-        },
-        {
-          "type": "condition",
-          "value_to_check": {
-            "type": "value",
-            "origin": "internal",
-            "keys": ["select_on_expt"]
-          },
-          "check_to_perform": "eq",
-          "reference_values": [false],
-          "values": [
+          ],
+          "not_values": [
             {
               "type": "value",
               "origin": "internal",
@@ -1676,7 +1584,7 @@
           "value_to_check": {
             "type": "value",
             "origin": "internal",
-            "keys": ["select_on_expt"]
+            "keys": ["select_on_inc_and_exc"]
           },
           "check_to_perform": "eq",
           "reference_values": [true],
@@ -1686,18 +1594,8 @@
               "origin": "internal",
               "keys": ["included_expgroups"]
             }
-          ]
-        },
-        {
-          "type": "condition",
-          "value_to_check": {
-            "type": "value",
-            "origin": "internal",
-            "keys": ["select_on_expt"]
-          },
-          "check_to_perform": "eq",
-          "reference_values": [false],
-          "values": [
+          ],
+          "not_values": [
             {
               "type": "value",
               "origin": "internal",
@@ -1716,7 +1614,7 @@
           "value_to_check": {
             "type": "value",
             "origin": "internal",
-            "keys": ["select_on_expt"]
+            "keys": ["select_on_inc_and_exc"]
           },
           "check_to_perform": "eq",
           "reference_values": [true],
@@ -1726,18 +1624,8 @@
               "origin": "internal",
               "keys": ["included_opportunities"]
             }
-          ]
-        },
-        {
-          "type": "condition",
-          "value_to_check": {
-            "type": "value",
-            "origin": "internal",
-            "keys": ["select_on_expt"]
-          },
-          "check_to_perform": "eq",
-          "reference_values": [false],
-          "values": [
+          ],
+          "not_values": [
             {
               "type": "value",
               "origin": "internal",
@@ -1756,7 +1644,7 @@
           "value_to_check": {
             "type": "value",
             "origin": "internal",
-            "keys": ["select_on_expt"]
+            "keys": ["select_on_inc_and_exc"]
           },
           "check_to_perform": "eq",
           "reference_values": [true],
@@ -1766,18 +1654,8 @@
               "origin": "internal",
               "keys": ["included_request_links"]
             }
-          ]
-        },
-        {
-          "type": "condition",
-          "value_to_check": {
-            "type": "value",
-            "origin": "internal",
-            "keys": ["select_on_expt"]
-          },
-          "check_to_perform": "eq",
-          "reference_values": [false],
-          "values": [null]
+          ],
+          "not_values": [null]
         }
       ]
     },
@@ -1790,7 +1668,7 @@
           "value_to_check": {
             "type": "value",
             "origin": "internal",
-            "keys": ["select_on_expt"]
+            "keys": ["select_on_inc_and_exc"]
           },
           "check_to_perform": "eq",
           "reference_values": [true],
@@ -1800,18 +1678,8 @@
               "origin": "internal",
               "keys": ["included_tables"]
             }
-          ]
-        },
-        {
-          "type": "condition",
-          "value_to_check": {
-            "type": "value",
-            "origin": "internal",
-            "keys": ["select_on_expt"]
-          },
-          "check_to_perform": "eq",
-          "reference_values": [false],
-          "values": [
+          ],
+          "not_values": [
             {
               "type": "value",
               "origin": "internal",
@@ -1830,7 +1698,7 @@
           "value_to_check": {
             "type": "value",
             "origin": "internal",
-            "keys": ["select_on_expt"]
+            "keys": ["select_on_inc_and_exc"]
           },
           "check_to_perform": "eq",
           "reference_values": [true],
@@ -1840,18 +1708,8 @@
               "origin": "internal",
               "keys": ["included_vargroups"]
             }
-          ]
-        },
-        {
-          "type": "condition",
-          "value_to_check": {
-            "type": "value",
-            "origin": "internal",
-            "keys": ["select_on_expt"]
-          },
-          "check_to_perform": "eq",
-          "reference_values": [false],
-          "values": [
+          ],
+          "not_values": [
             {
               "type": "value",
               "origin": "internal",
@@ -1870,7 +1728,7 @@
           "value_to_check": {
             "type": "value",
             "origin": "internal",
-            "keys": ["select_on_expt"]
+            "keys": ["select_on_inc_and_exc"]
           },
           "check_to_perform": "eq",
           "reference_values": [true],
@@ -1880,18 +1738,8 @@
               "origin": "internal",
               "keys": ["included_vars"]
             }
-          ]
-        },
-        {
-          "type": "condition",
-          "value_to_check": {
-            "type": "value",
-            "origin": "internal",
-            "keys": ["select_on_expt"]
-          },
-          "check_to_perform": "eq",
-          "reference_values": [false],
-          "values": [
+          ],
+          "not_values": [
             {
               "type": "value",
               "origin": "internal",
@@ -1920,18 +1768,8 @@
               "origin": "internal",
               "keys": ["max_priority"]
             }
-          ]
-        },
-        {
-          "type": "condition",
-          "value_to_check": {
-            "type": "value",
-            "origin": "internal",
-            "keys": ["select_on_expt"]
-          },
-          "check_to_perform": "eq",
-          "reference_values": [false],
-          "values": [
+          ],
+          "not_values": [
             {
               "type": "value",
               "origin": "internal",
@@ -1950,7 +1788,7 @@
           "value_to_check": {
             "type": "value",
             "origin": "internal",
-            "keys": ["select_on_expt"]
+            "keys": ["select_on_inc_and_exc"]
           },
           "check_to_perform": "eq",
           "reference_values": [true],
@@ -1974,18 +1812,8 @@
                 }
               }
             }
-          ]
-        },
-        {
-          "type": "condition",
-          "value_to_check": {
-            "type": "value",
-            "origin": "internal",
-            "keys": ["select_on_expt"]
-          },
-          "check_to_perform": "eq",
-          "reference_values": [false],
-          "values": [
+          ],
+          "not_values": [
             {
               "type": "func",
               "origin": "functions_file",
@@ -2021,18 +1849,8 @@
               "origin": "internal",
               "keys": ["sizes"]
             }
-          ]
-        },
-        {
-          "type": "condition",
-          "value_to_check": {
-            "type": "value",
-            "origin": "internal",
-            "keys": ["select_on_expt"]
-          },
-          "check_to_perform": "eq",
-          "reference_values": [false],
-          "values": [
+          ],
+          "not_values": [
             {
               "nb_cosp_sites": 129,
               "nb_lidar_temp": 40,
@@ -2048,10 +1866,10 @@
               "nls": 14,
               "nh1": 128
             }
-          ],
-          "target_type": "dict"
+          ]
         }
-      ]
+      ],
+      "target_type": "dict"
     },
     "select_tierMax": {
       "help": "tierMax for variable selection.",
@@ -2072,18 +1890,8 @@
               "origin": "internal",
               "keys": ["tierMax"]
             }
-          ]
-        },
-        {
-          "type": "condition",
-          "value_to_check": {
-            "type": "value",
-            "origin": "internal",
-            "keys": ["select_on_expt"]
-          },
-          "check_to_perform": "eq",
-          "reference_values": [false],
-          "values": [
+          ],
+          "not_values": [
             {
               "type": "value",
               "origin": "internal",
